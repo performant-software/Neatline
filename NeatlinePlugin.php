@@ -93,6 +93,9 @@ class NeatlinePlugin
                 `name` tinytext collate utf8_unicode_ci,
                 `map_id` int(10) unsigned NULL,
                 `timeline_id` int(10) unsigned NULL,
+                `top_element` ENUM('map', 'timeline'),
+                `undated_items_position` ENUM('left', 'right'),
+                `undated_items_height` ENUM('partial', 'full'),
                 PRIMARY KEY (`id`)
                 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
             ");
