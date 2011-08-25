@@ -86,7 +86,6 @@ class NeatlinePlugin
     {
 
         $db = $this->_db;
-
         $db->query("
             CREATE TABLE IF NOT EXISTS `$db->Neatline` (
                 `id` int(10) unsigned NOT NULL auto_increment,
@@ -111,7 +110,6 @@ class NeatlinePlugin
     {
 
         $db = $this->_db;
-
         $db->query("DROP TABLE IF EXISTS `$db->Neatline`");
 
     }

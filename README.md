@@ -1,2 +1,3 @@
-Neatline is the core plugin that assembles Neatline Time, Neatline Maps,
-and Neatline Features into a interconnected whole.
+The Neatline plugin connects Neatline Maps, Neatline Time, and Neatline
+Features to provide a unified interface for creating geospatial and
+temporal exhibits.
