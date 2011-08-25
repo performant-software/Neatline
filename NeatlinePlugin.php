@@ -110,7 +110,9 @@ class NeatlinePlugin
     public function uninstall()
     {
 
+        $db = $this->_db;
 
+        $db->query("DROP TABLE IF EXISTS `$db->Neatline`");
 
     }
 
