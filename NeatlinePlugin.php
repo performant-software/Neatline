@@ -33,7 +33,8 @@ class NeatlinePlugin
     private static $_hooks = array(
         'install',
         'uninstall',
-        'define_routes'
+        'define_routes',
+        'admin_append_to_plugin_uninstall_message'
     );
 
     private static $_filters = array(
@@ -78,7 +79,7 @@ class NeatlinePlugin
      */
 
     /**
-     * Install. Create _neatline_maps table, add new item type.
+     * Install. Create _neatlines table.
      *
      * @return void.
      */
@@ -126,6 +127,19 @@ class NeatlinePlugin
 
         $router->addConfig(new Zend_Config_Ini(NEATLINE_MAPS_PLUGIN_DIR .
             DIRECTORY_SEPARATOR . 'routes.ini', 'routes'));
+
+    }
+
+    /**
+     * Flash warning about table drops before uninstall.
+     *
+     * @return void
+     */
+    public function adminAppendToPluginUninstallMessage()
+    {
+
+        echo '<p><strong>Warning</strong>: Uninstalling the Neatline plugin
+              will permanently delete all Neatline exhibits.';
 
     }
 
