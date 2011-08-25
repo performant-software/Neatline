@@ -73,6 +73,97 @@ class NeatlinePlugin
 
     }
 
+    /**
+     * Hook callbacks:
+     */
 
+    /**
+     * Install. Create _neatline_maps table, add new item type.
+     *
+     * @return void.
+     */
+    public function install()
+    {
+
+        // $db = $this->_db;
+
+        // $db->query("
+        //     CREATE TABLE IF NOT EXISTS `$db->NeatlineMapsMap` (
+        //         `id` int(10) unsigned NOT NULL auto_increment,
+        //         `item_id` int(10) unsigned,
+        //         `server_id` int(10) unsigned,
+        //         `name` tinytext collate utf8_unicode_ci,
+        //         `namespace` tinytext collate utf8_unicode_ci,
+        //         PRIMARY KEY (`id`)
+        //     ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
+        //     ");
+
+        // $db->query("
+        //     CREATE TABLE IF NOT EXISTS `$db->NeatlineMapsMapFile` (
+        //         `id` int(10) unsigned NOT NULL auto_increment,
+        //         `file_id` int(10) unsigned,
+        //         `map_id` int(10) unsigned,
+        //         PRIMARY KEY (`id`)
+        //     ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
+        //     ");
+
+        // $db->query("
+        //     CREATE TABLE IF NOT EXISTS `$db->NeatlineMapsServer` (
+        //         `id` int(10) unsigned NOT NULL auto_increment,
+        //         `name` tinytext collate utf8_unicode_ci,
+        //         `url` tinytext collate utf8_unicode_ci,
+        //         `username` tinytext collate utf8_unicode_ci,
+        //         `password` tinytext collate utf8_unicode_ci,
+        //         PRIMARY KEY (`id`)
+        //     ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
+        //     ");
+
+    }
+
+    /**
+     * Uninstall.
+     *
+     * @return void.
+     */
+    public function uninstall()
+    {
+
+
+
+    }
+
+    /**
+     * Register routes in routes.ini.
+     *
+     * @param object $router Router passed in by the front controller.
+     *
+     * @return void
+     */
+    public function defineRoutes($router)
+    {
+
+        $router->addConfig(new Zend_Config_Ini(NEATLINE_MAPS_PLUGIN_DIR .
+            DIRECTORY_SEPARATOR . 'routes.ini', 'routes'));
+
+    }
+
+    /**
+     * Filter callbacks:
+     *
+
+    /**
+     * Add link to main admin menu bar.
+     *
+     * @param array $tabs This is an array of label => URI pairs.
+     *
+     * @return array The tabs array with the Neatline Maps tab.
+     */
+    public function adminNavigationMain($tabs)
+    {
+
+        $tabs['Neatline'] = uri('');
+        return $tabs;
+
+    }
 
 }
