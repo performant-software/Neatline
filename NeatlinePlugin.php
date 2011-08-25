@@ -34,6 +34,7 @@ class NeatlinePlugin
         'install',
         'uninstall',
         'define_routes',
+        'define_acl',
         'admin_append_to_plugin_uninstall_message'
     );
 
@@ -89,16 +90,16 @@ class NeatlinePlugin
         $db = $this->_db;
         $db->query("
             CREATE TABLE IF NOT EXISTS `$db->Neatline` (
-                `id` int(10) unsigned NOT NULL auto_increment,
-                `name` tinytext collate utf8_unicode_ci,
-                `map_id` int(10) unsigned NULL,
-                `timeline_id` int(10) unsigned NULL,
-                `top_element` ENUM('map', 'timeline'),
-                `undated_items_position` ENUM('left', 'right'),
-                `undated_items_height` ENUM('partial', 'full'),
-                PRIMARY KEY (`id`)
-                ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
-            ");
+              `id` int(10) unsigned NOT NULL auto_increment,
+              `name` tinytext collate utf8_unicode_ci,
+              `map_id` int(10) unsigned NULL,
+              `timeline_id` int(10) unsigned NULL,
+              `top_element` ENUM('map', 'timeline'),
+              `undated_items_position` ENUM('left', 'right'),
+              `undated_items_height` ENUM('partial', 'full'),
+              PRIMARY KEY (`id`)
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
+        ");
 
     }
 
@@ -112,6 +113,18 @@ class NeatlinePlugin
 
         $db = $this->_db;
         $db->query("DROP TABLE IF EXISTS `$db->Neatline`");
+
+    }
+
+    /**
+     * Establish access privileges.
+     *
+     * @return void.
+     */
+    public function defineAcl($acl)
+    {
+
+
 
     }
 
