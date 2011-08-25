@@ -85,38 +85,17 @@ class NeatlinePlugin
     public function install()
     {
 
-        // $db = $this->_db;
+        $db = $this->_db;
 
-        // $db->query("
-        //     CREATE TABLE IF NOT EXISTS `$db->NeatlineMapsMap` (
-        //         `id` int(10) unsigned NOT NULL auto_increment,
-        //         `item_id` int(10) unsigned,
-        //         `server_id` int(10) unsigned,
-        //         `name` tinytext collate utf8_unicode_ci,
-        //         `namespace` tinytext collate utf8_unicode_ci,
-        //         PRIMARY KEY (`id`)
-        //     ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
-        //     ");
-
-        // $db->query("
-        //     CREATE TABLE IF NOT EXISTS `$db->NeatlineMapsMapFile` (
-        //         `id` int(10) unsigned NOT NULL auto_increment,
-        //         `file_id` int(10) unsigned,
-        //         `map_id` int(10) unsigned,
-        //         PRIMARY KEY (`id`)
-        //     ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
-        //     ");
-
-        // $db->query("
-        //     CREATE TABLE IF NOT EXISTS `$db->NeatlineMapsServer` (
-        //         `id` int(10) unsigned NOT NULL auto_increment,
-        //         `name` tinytext collate utf8_unicode_ci,
-        //         `url` tinytext collate utf8_unicode_ci,
-        //         `username` tinytext collate utf8_unicode_ci,
-        //         `password` tinytext collate utf8_unicode_ci,
-        //         PRIMARY KEY (`id`)
-        //     ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
-        //     ");
+        $db->query("
+            CREATE TABLE IF NOT EXISTS `$db->Neatline` (
+                `id` int(10) unsigned NOT NULL auto_increment,
+                `name` tinytext collate utf8_unicode_ci,
+                `map_id` int(10) unsigned NULL,
+                `timeline_id` int(10) unsigned NULL,
+                PRIMARY KEY (`id`)
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
+            ");
 
     }
 

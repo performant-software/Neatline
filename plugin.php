@@ -28,7 +28,7 @@
 <?php
 
 
-// Constants.
+// constants {{{
 
 if (!defined('NEATLINE_PLUGIN_VERSION')) {
     define('NEATLINE_PLUGIN_VERSION', get_plugin_ini('Neatline', 'version'));
@@ -38,12 +38,14 @@ if (!defined('NEATLINE_PLUGIN_DIR')) {
     define('NEATLINE_PLUGIN_DIR', dirname(__FILE__));
 }
 
+// }}}
 
-// Requires
+
+// requires {{{
 
 require_once 'NeatlineMapsPlugin.php';
 
+// }}}
 
 //Instantiate the manager class.
-
 new NeatlinePlugin;
