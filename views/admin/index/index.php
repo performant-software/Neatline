@@ -29,6 +29,8 @@
 head();
 ?>
 
+    <img src="<?php echo img('neatline-logo-rgb.png'); ?>" />
+
 <?php
 foot();
 ?>
