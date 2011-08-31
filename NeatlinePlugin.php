@@ -111,6 +111,7 @@ class NeatlinePlugin
     {
 
         $sql = "DROP TABLE IF EXISTS `{$this->_db->prefix}neatlines`";
+
         $this->_db->query($sql);
 
     }
@@ -137,6 +138,27 @@ class NeatlinePlugin
     public function defineRoutes($router)
     {
 
+        $router->addRoute(
+            'neatlineDefaultRoute',
+            new Zend_Controller_Router_Route(
+                'neatline-exhibits',
+                array(
+                    'module'      => 'neatline',
+                    'controller'  => 'index'
+                    )
+                )
+            );
+
+        $router->addRoute(
+            'neatlineActionRoute',
+            new Zend_Controller_Router_Route(
+                'neatline-exhibits/:action',
+                array(
+                    'module'      => 'neatline',
+                    'controller'  => 'index'
+                    )
+                )
+            );
 
     }
 
@@ -167,7 +189,7 @@ class NeatlinePlugin
     public function adminNavigationMain($tabs)
     {
 
-        $tabs['Neatline'] = uri('');
+        $tabs['Neatline'] = uri('neatline-exhibits');
         return $tabs;
 
     }
