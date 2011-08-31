@@ -30,6 +30,11 @@
 class Neatline_IndexController extends Omeka_Controller_action
 {
 
+    /**
+     * Show list of existing Neatlines.
+     *
+     * @return void
+     */
     public function indexAction()
     {
 
