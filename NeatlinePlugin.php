@@ -35,6 +35,7 @@ class NeatlinePlugin
         'uninstall',
         'define_routes',
         'define_acl',
+        'admin_theme_header',
         'admin_append_to_plugin_uninstall_message'
     );
 
@@ -125,6 +126,23 @@ class NeatlinePlugin
     {
 
 
+
+    }
+
+    /**
+     * Include the the neatline CSS changes in the admin header.
+     *
+     * @return void
+     */
+    public function adminThemeHeader()
+    {
+
+        $request = Zend_Controller_Front::getInstance()->getRequest();
+
+        // Queue CSS.
+        if ($request->getModuleName() == 'neatline') {
+            queue_css('neatline-admin');
+        }
 
     }
 

@@ -1,7 +1,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
 
 /**
- * Miscellaneous CSS overrides for the Neatline administrative interfaces.
+ * CSS overrides for the Neatline administrative interfaces.
  *
  * PHP version 5
  *
@@ -23,151 +23,10 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache 2 License
  */
 
-.zend_form dd {
-    margin-bottom: 20px;
+body {
+    background: #F9F9F9 url(../images/bg_wrapper.jpg) !important;
 }
 
-.neatline-maps-getfiles #server_id-element,
-.neatline-maps-getfiles #map_name-element,
-.neatline-maps-getfiles #map_name-label,
-.neatline-maps-getfiles #server_id-label,
-#submitted-label,
-#submitted-element,
-#create_map-label {
-    display: none;
-}
-
-#edit_submit-element, #delete_submit-element {
-    display: inline;
-}
-
-#edit_submit-element input, #delete_submit-element input {
-    clear: none;
-    margin-left: 10px;
-}
-
-#delete_submit-element input {
-    background-color: #800;
-    border: 1px solid #800;
-}
-
-#delete_submit-label, #edit_submit-label, #item_id-label, #pid_submit-label {
-    display: none;
-}
-
-.add-button {
-    margin-top: 1em;
-}
-
-.neatline-inline-button {
-    font-size: 0.8em;
-    margin: 0 !important;
-    border: none !important;
-}
-
-form.neatline-inline-form {
-    padding: 0;
-    float: left;
-}
-
-form.neatline-inline-form-servers {
-    margin: 0 0.6em 0 0;
-    padding: 0;
-    float: left;
-}
-
-.neatline-delete {
-    background-color: #800 !important;
-    border-color: #800 !important;
-}
-
-.neatline-reset-link {
-    float: right;
-}
-
-h2.neatline-select-item {
-    margin-left: 8px; 
-    float: left;
-}
-
-dd#datastreams-element label {
-    clear: both;
-}
-
-p.neatline-connector-search-reset {
-    clear: both;
-    float: right;
-    margin: -12px 3px 0 0;
-    font-size: 1em;
-    position: relative;
-}
-
-h1.neatline-nowrap {
-    white-space: nowrap;
-}
-
-.neatline-td-small {
-    font-size: 0.9em;
-}
-
-table.neatline td {
-    vertical-align: middle;
-}
-
-span.small-link {
-    font-size: 0.8em;
-}
-
-input.create-new-item {
-    margin: 0 !important;
-    background-color: #C50 !important;
-    border-color: #C50 !important;
-}
-
-.neatline-maps-admin-preview {
-    height: 400px;
-}
-
-#map-inputs a {
-    float: left;
-    display: block;
-    font-size: 1.2em;
-    margin-left: 161px;
-    margin-top: 12px;
-}
-
-.neatline-maps-getfiles #map-inputs a {
-    float: left;
-    display: block;
-    font-size: 1.2em;
-    margin-left: 189px;
-    margin-top: 12px;
-}
-
-dt label {
-    font-family: 'Lucida Grande', Verdana, Arial, Helvetica, sans-serif;
-    font-size: 12px;
-    font-weight: bold;
-}
-
-div.field {
-    border-bottom: none !important;
-}
-
-.neatline-maps-getfiles div.maps {
-    float: left;
-}
-
-.add-map {
-    background-image: url("../../../../../application/views/scripts/images/silk-icons/disk_multiple.png");
-    background-position: 12px 50%;
-    background-repeat: no-repeat;
-    padding-left: 32px;
-    text-decoration: none;
-}
-
-form.neatline-inline-form-servers {
-    margin: 0 0.6em 0 0;
-    padding: 0;
-    float: left;
+.primary-nav li.current, .primary-nav li.current a {
+    background: #F9F9F9 url(../images/bg_wrapper.jpg) !important;
 }

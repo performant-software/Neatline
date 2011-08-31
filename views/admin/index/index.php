@@ -26,6 +26,9 @@
 ?>
 
 <?php
-// Do header.
-echo $this->partial('index/_header.php');
+head();
+?>
+
+<?php
+foot();
 ?>
