@@ -87,19 +87,18 @@ class NeatlinePlugin
     public function install()
     {
 
-        $db = $this->_db;
-        $db->query("
-            CREATE TABLE IF NOT EXISTS `$db->Neatline` (
-              `id` int(10) unsigned NOT NULL auto_increment,
-              `name` tinytext collate utf8_unicode_ci,
-              `map_id` int(10) unsigned NULL,
-              `timeline_id` int(10) unsigned NULL,
-              `top_element` ENUM('map', 'timeline'),
-              `undated_items_position` ENUM('left', 'right'),
-              `undated_items_height` ENUM('partial', 'full'),
-              PRIMARY KEY (`id`)
-            ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
-        ");
+        $sql = "CREATE TABLE IF NOT EXISTS `{$this->_db->prefix}neatlines` (
+                `id` int(10) unsigned NOT NULL auto_increment,
+                `name` tinytext collate utf8_unicode_ci,
+                `map_id` int(10) unsigned NULL,
+                `timeline_id` int(10) unsigned NULL,
+                `top_element` ENUM('map', 'timeline'),
+                `undated_items_position` ENUM('left', 'right'),
+                `undated_items_height` ENUM('partial', 'full'),
+                 PRIMARY KEY (`id`)
+               ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
+
+        $this->_db->query($sql);
 
     }
 
@@ -111,8 +110,8 @@ class NeatlinePlugin
     public function uninstall()
     {
 
-        $db = $this->_db;
-        $db->query("DROP TABLE IF EXISTS `$db->Neatline`");
+        $sql = "DROP TABLE IF EXISTS `{$this->_db->prefix}neatlines`";
+        $this->_db->query($sql);
 
     }
 
@@ -129,7 +128,7 @@ class NeatlinePlugin
     }
 
     /**
-     * Register routes in routes.ini.
+     * Register routes.
      *
      * @param object $router Router passed in by the front controller.
      *
@@ -138,8 +137,6 @@ class NeatlinePlugin
     public function defineRoutes($router)
     {
 
-        $router->addConfig(new Zend_Config_Ini(NEATLINE_MAPS_PLUGIN_DIR .
-            DIRECTORY_SEPARATOR . 'routes.ini', 'routes'));
 
     }
 
