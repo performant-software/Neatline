@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
 
 /**
- * Main portal view for Neatline.
+ * Header for the Neatline administrative interfaces.
  *
  * PHP version 5
  *
@@ -26,6 +26,6 @@
 ?>
 
 <?php
-// Do header.
-echo $this->partial('index/_header.php');
+$header = array('title' => html_escape('Neatline'));
+head($header);
 ?>
