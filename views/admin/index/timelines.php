@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
 
 /**
- * Main portal view for Neatline.
+ * Facade for Neatline Time browse.
  *
  * PHP version 5
  *
