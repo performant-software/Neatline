@@ -4,7 +4,7 @@
 
     <ul id="section-nav" class="navigation">
         <?php echo nav(array(
-            'Neatlines' => uri('neatline-exhibits'),
+            'Neatlines' => uri('neatline-exhibits/browse'),
             'Maps' => uri('neatline-exhibits/maps'),
             'Timelines' => uri('neatline-exhibits/timelines')
         ))?>

@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
 
 /**
- * Index controller.
+ * Main portal view for Neatline.
  *
  * PHP version 5
  *
@@ -26,56 +26,18 @@
 ?>
 
 <?php
+head(array('content_class' => 'neatline'));
+?>
 
-class Neatline_IndexController extends Omeka_Controller_action
-{
+<?php echo $this->partial('index/_header.php', array(
+    'add_button_uri' => 'neatline-maps/maps/create',
+    'add_button_text' => 'Create a Map'
+)); ?>
 
-    /**
-     * Redirect index route to browse.
-     *
-     * @return void
-     */
-    public function indexAction()
-    {
+<div id="primary">
 
-        $this->_redirect('neatline-exhibits/browse');
+</div>
 
-    }
-
-    /**
-     * Show list of existing Neatlines.
-     *
-     * @return void
-     */
-    public function browseAction()
-    {
-
-
-
-    }
-
-    /**
-     * Facade for Neatline Maps browse.
-     *
-     * @return void
-     */
-    public function mapsAction()
-    {
-
-
-
-    }
-
-    /**
-     * Facade for Neatline Time browse.
-     *
-     * @return void
-     */
-    public function timelinesAction()
-    {
-
-
-
-    }
-
-}
+<?php
+foot();
+?>
