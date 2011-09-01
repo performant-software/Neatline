@@ -107,7 +107,7 @@ function neatline_isCurrent($tab, $value)
 function neatline_mapSelect()
 {
 
-
+    $_db = get_db();
 
 }
 
@@ -120,5 +120,31 @@ function neatline_timelineSelect()
 {
 
 
+
+}
+
+/**
+ * Query for maps, adding data about the parent items
+ * to use while constructing the order in the drop-down.
+ *
+ * @return array of Omeka_records $maps The maps.
+ */
+function neatline_getMapsForSelect()
+{
+
+    $_db = get_db();
+    $mapsTable = $_db->getTable('NeatlineMapsMaps');
+    $parentItemSql = "(SELECT text from `$_db->ElementText` WHERE record_id = m.item_id AND element_id = 50 LIMIT 1)";
+
+    $select = $_mapsTable->select()
+        ->from(array('m' => $_db->prefix . 'neatline_maps_maps'))
+        ->joinLeft(array('i' => $_db->prefix . 'items'), 'm.item_id = i.id')
+        ->columns(array(
+            'map_id' => 'm.id',
+            'parent_item' => $parentItemSql
+        )
+    );
+
+    return $_mapsTable->fetchObjects($select);
 
 }
