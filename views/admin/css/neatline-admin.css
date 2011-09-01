@@ -46,6 +46,18 @@ body {
     font-size: 1.6em;
 }
 
+h2.neatline-label {
+    font-weight: bold;
+    margin: 0;
+}
+
+.neatline hr {
+    height: 1px;
+    border: 0;
+    background-color: #eeeaf0;
+    margin: 20px 0 20px 0;
+}
+
 /* Navigation */
 
 #neatline-header {

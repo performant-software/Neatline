@@ -39,6 +39,14 @@ head(array('content_class' => 'neatline'));
 <h1 id="neatline-add-header">Create a Neatline Exhibit</h1>
 <h3 id="neatline-add-subheader">Step 1: Select a map and a timeline, customize the layout</h3>
 
+<hr>
+
+<h2 class="neatline-label">Select a Map:</h2>
+
+<hr>
+
+<h2 class="neatline-label">Select a Timeline:</h2>
+
 </div>
 
 <?php
