@@ -37,6 +37,15 @@ body {
     background: #F9F9F9 url(../images/bg_wrapper.jpg) !important;
 }
 
+.neatline h1, .neatline h2, .neatline h3 {
+    font-family: 'Crimson Text', Georgia, "Times New Roman", Times, serif;
+    color: #7A7A69;
+}
+
+.neatline h3 {
+    font-size: 1.6em;
+}
+
 /* Navigation */
 
 #neatline-header {
@@ -85,4 +94,15 @@ p.add-button a {
 
 p.add-button a:hover {
     color: #5b396c;
+}
+
+/* Add Neatline workflow */
+
+h1#neatline-add-header {
+    padding: 0;
+    margin: 0;
+}
+
+h3#neatline-add-subheader {
+    font-style: italic;
 }
