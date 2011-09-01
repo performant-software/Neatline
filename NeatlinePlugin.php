@@ -141,8 +141,7 @@ class NeatlinePlugin
 
         // Queue CSS.
         if ($request->getModuleName() == 'neatline') {
-            _headerCss();
-            // queue_css('neatline-admin');
+            neatline_queueAdminCss();
         }
 
     }

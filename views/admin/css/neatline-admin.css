@@ -37,4 +37,20 @@ body {
 
 #section-nav {
     font-family: 'Crimson Text', Georgia, "Times New Roman", Times, serif;
+    font-size: 2em;
+    font-weight: bold;
+    display: inline;
+    padding: 0 0 0 2em;
+    position: relative;
+    top: 1em;
+}
+
+#section-nav li {
+    display: inline;
+    margin: 0 1.4em 0 0;
+}
+
+#section-nav a {
+    text-decoration: none;
+    color: #7A7A69
 }

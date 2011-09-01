@@ -43,9 +43,10 @@ if (!defined('NEATLINE_PLUGIN_DIR')) {
 
 // requires {{{
 
-require_once 'NeatlinePlugin.php';
+require_once NEATLINE_PLUGIN_DIR . '/NeatlinePlugin.php';
+require_once NEATLINE_PLUGIN_DIR . '/helpers/NeatlineFunctions.php';
 
 // }}}
 
-//Instantiate the manager class.
+// Instantiate the manager class.
 new NeatlinePlugin;

@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
 
 /**
- * Ignition file.
+ * Helper functions.
  *
  * PHP version 5
  *
@@ -26,3 +26,19 @@
 ?>
 
 <?php
+
+/**
+ * Include the neatline-admin.css stylesheet and the Google Fonts include.
+ *
+ * @return void.
+ */
+function neatline_queueAdminCss()
+{
+
+    queue_css('neatline-admin');
+
+    ?>
+    <link href='http://fonts.googleapis.com/css?family=Crimson+Text:400,400italic,600,600italic,700,700italic' rel='stylesheet' type='text/css'>
+    <?php
+
+}
