@@ -35,6 +35,10 @@ body {
 
 /* Navigation */
 
+#neatline-header {
+    margin: 0 0 1.5em 0;
+}
+
 #section-nav {
     font-family: 'Crimson Text', Georgia, "Times New Roman", Times, serif;
     font-size: 2em;
@@ -42,15 +46,27 @@ body {
     display: inline;
     padding: 0 0 0 2em;
     position: relative;
-    top: 1em;
+    top: 1.2em;
 }
 
 #section-nav li {
     display: inline;
-    margin: 0 1.4em 0 0;
+    margin: 0 1em 0 0;
 }
 
 #section-nav a {
     text-decoration: none;
-    color: #7A7A69
+    color: #7A7A69;
+    padding: 5px 8px 1px 8px;
+    border-radius: 8px;
+}
+
+#section-nav li.current a {
+    background-color: #5b396c;
+    color: #fff;
+}
+
+#section-nav a:hover {
+    background-color: #a186af;
+    color: #fff;
 }
