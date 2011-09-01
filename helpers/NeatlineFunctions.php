@@ -112,29 +112,8 @@ function neatline_mapSelect()
     $bucketedMaps = neatline_getMapsForSelect();
 
     // ** do element construction here.
-
-}
-
-/**
- * Utility comparer function used by neatline_mapSelect().
- *
- * @param object $a The first object.
- * @param object $b The second object.
- * @param string $parameter The parameter to compare on.
- *
- * @return void.
- */
-function neatline_compareObjects($a, $b)
-{
-
-    $aText = strtolower($a->name);
-    $bText = strtolower($b->name);
-
-    if ($aText == $bText) {
-        return 0;
-    }
-
-    return ($aText > $bText) ? +1 : -1;
+    // return 'test';
+    print_r($bucketedMaps);
 
 }
 
@@ -160,16 +139,15 @@ function neatline_getMapsForSelect()
 {
 
     $_db = get_db();
-    $mapsTable = $_db->getTable('NeatlineMapsMaps');
+    $mapsTable = $_db->getTable('NeatlineMapsMap');
     $parentItemSql = "(SELECT text from `$_db->ElementText` WHERE record_id = m.item_id AND element_id = 50 LIMIT 1)";
 
-    $select = $_mapsTable->select()
+    $select = $mapsTable->select()
         ->from(array('m' => $_db->prefix . 'neatline_maps_maps'))
         ->joinLeft(array('i' => $_db->prefix . 'items'), 'm.item_id = i.id')
-        ->columns(array('map_id' => 'm.id', 'parent_item' => $parentItemSql)
-    );
+        ->columns(array('map_id' => 'm.id', 'parent_item' => $parentItemSql));
 
-    $maps = $_mapsTable->fetchObjects($select);
+    $maps = $mapsTable->fetchObjects($select);
     $itemBuckets = array();
 
     // Put the maps into an associative array of structure
@@ -178,20 +156,39 @@ function neatline_getMapsForSelect()
         if (!array_key_exists($map->parent_item, $itemBuckets)) {
             $itemBuckets[$map->parent_item] = array($map);
         } else {
-            $itemBuckets[$map->parent_item] = $map;
+            $itemBuckets[$map->parent_item][] = $map;
         }
     }
 
     // Sort the contents of the buckets.
     foreach ($itemBuckets as $bucket) {
-        usort($bucket, create_function('$a,$b',
-            '$aText = strtolower($a->name);
-             $bText = strtolower($b->name);
-             if ($aText == $bText) { return 0; }
-             return ($aText > $bText) ? +1 : -1;'));
+        usort($bucket, 'neatline_compareObjects');
     }
 
     // Then sort the buckets by the name of the parent item.
-    return asort($itemBuckets);
+    asort($itemBuckets);
+    return $itemBuckets;
+
+}
+
+/**
+ * Utility comparer function used by neatline_getMapsForSelect().
+ *
+ * @param object $a The first object.
+ * @param object $b The second object.
+ *
+ * @return void.
+ */
+function neatline_compareObjects($a, $b)
+{
+
+    $aText = strtolower($a->name);
+    $bText = strtolower($b->name);
+
+    if ($aText == $bText) {
+        return 0;
+    }
+
+    return ($aText > $bText) ? +1 : -1;
 
 }
