@@ -29,7 +29,11 @@
 head();
 ?>
 
-    <img src="<?php echo img('neatline-logo-rgb.png'); ?>" />
+<?php echo $this->partial('index/_header.php'); ?>
+
+<div id="primary">
+
+</div>
 
 <?php
 foot();
