@@ -42,3 +42,35 @@ function neatline_queueAdminCss()
     <?php
 
 }
+
+/**
+ * Create a form containing a single button.
+ *
+ * @param string $action Form action URI.
+ * @param string $name Name/id attribute for button.
+ * @param string $value Button value.
+ * @param array $attribs Other HTML attributes for button.
+ * @param string $formName Name/id attribute for button.
+ * @param array $formAttribs Other HTML attributes for button.
+ *
+ * @return string HTML form.
+ */
+function neatline_button_to($action, $name = null, $value = 'Submit', $attribs = array(), $formName = null, $formAttribs = array())
+{
+
+    $view = __v();
+    if (!array_key_exists('action', $formAttribs)) {
+        $formAttribs['action'] = $action;
+    }
+    if (!array_key_exists('method', $formAttribs)) {
+        $formAttribs['method'] = 'post';
+    }
+    if (!array_key_exists('class', $formAttribs)) {
+        $formAttribs['class'] = 'button-form';
+    }
+
+    // Fieldset tags fix validation errors.
+    return $view->form($formName, $formAttribs,
+        '<fieldset>' . $view->formSubmit($name, $value, $attribs) . '</fieldset>');
+
+}

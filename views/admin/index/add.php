@@ -41,11 +41,17 @@ head(array('content_class' => 'neatline'));
 
 <hr>
 
-<h2 class="neatline-label">Select a Map:</h2>
+<h2 class="neatline-label">Choose a Map:</h2>
 
 <hr>
 
-<h2 class="neatline-label">Select a Timeline:</h2>
+<h2 class="neatline-label">Choose a Timeline:</h2>
+
+<hr>
+
+<h2 class="neatline-label">Configure Layout:</h2>
+
+<?php echo neatline_button_to('', 'save_neatline', 'Save and Continue to Interactive Mode', array('class' => 'neatline'), 'save_neatline'); ?>
 
 </div>
 

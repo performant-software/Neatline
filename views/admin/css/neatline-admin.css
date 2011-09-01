@@ -118,3 +118,10 @@ h1#neatline-add-header {
 h3#neatline-add-subheader {
     font-style: italic;
 }
+
+form#save_neatline {
+}
+
+form#save_neatline input {
+    float: left;
+}
