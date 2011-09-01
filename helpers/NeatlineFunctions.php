@@ -56,7 +56,7 @@ function neatline_queueAdminCss()
  *
  * @return string HTML form.
  */
-function neatline_button_to($action, $name = null, $value = 'Submit', $attribs = array(), $formName = null, $formAttribs = array())
+function neatline_buttonTo($action, $name = null, $value = 'Submit', $attribs = array(), $formName = null, $formAttribs = array())
 {
 
     $view = __v();
@@ -73,5 +73,52 @@ function neatline_button_to($action, $name = null, $value = 'Submit', $attribs =
     // Fieldset tags fix validation errors.
     return $view->form($formName, $formAttribs,
         '<fieldset>' . $view->formSubmit($name, $value, $attribs) . '</fieldset>');
+
+}
+
+/**
+ * Checks the supplied $tab parameter to see if it matches the
+ * baseline $value; if so, return the 'current' CSS class.
+ *
+ * @param string $tab The value passed in from the view/controller.
+ * @param string $value The base value to compare against.
+ *
+ * @return string $class The class; empty string if the element
+ * should not get the 'current' class.
+ */
+function neatline_isCurrent($tab, $value)
+{
+
+    $class = '';
+
+    if ($tab == $value) {
+        $class = ' current';
+    }
+
+    return $class;
+
+}
+
+/**
+ * Construct the maps dropdown select.
+ *
+ * @return void.
+ */
+function neatline_mapSelect()
+{
+
+
+
+}
+
+/**
+ * Construct the timelines dropdown select.
+ *
+ * @return void.
+ */
+function neatline_timelineSelect()
+{
+
+
 
 }

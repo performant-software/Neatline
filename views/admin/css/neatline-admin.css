@@ -81,17 +81,16 @@ h2.neatline-label {
 #section-nav a {
     text-decoration: none;
     color: #7A7A69;
-    padding: 5px 8px 1px 8px;
-    border-radius: 10px;
+    padding: 0 0 -4px 0;
+    /* border-radius: 10px;*/
 }
 
 #section-nav li.current a {
-    background-color: #5b396c;
-    color: #fff;
+    border-bottom: 2px solid #865e9a;
+    color: #5b396c;
 }
 
 #section-nav a:hover {
-    color: #5b396c;
 }
 
 p.add-button {

@@ -2,7 +2,11 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
 
 /**
- * Header partial template for logo, nav, and add button.
+ * Header partial template for logo, nav, and add button. For the navigation, the
+ * template uses raw markup instead of the nav() helper because of an inflexibility
+ * in the is_current_uri() function, which in this situation interprets the
+ * 'neatline-exhibits' route as being active in all three cases, which causes the
+ * 'Neatlines' tab to have the current class in all cases, which is not appropriate.
  *
  * PHP version 5
  *
@@ -30,11 +34,15 @@
     <img id="neatline-logo" src="<?php echo img('neatline-logo-rgb-small.png'); ?>" />
 
     <ul id="section-nav" class="navigation">
-        <?php echo nav(array(
-            'Neatlines' => uri('neatline-exhibits/browse'),
-            'Maps' => uri('neatline-exhibits/maps'),
-            'Timelines' => uri('neatline-exhibits/timelines')
-        ))?>
+        <li class="nav-neatlines <?php echo neatline_isCurrent($tab, 'neatlines'); ?>">
+            <a href="<?php echo uri('neatline-exhibits'); ?>">Neatlines</a>
+        </li>
+        <li class="nav-maps <?php echo neatline_isCurrent($tab, 'maps'); ?>">
+            <a href="<?php echo uri('neatline-exhibits/maps'); ?>">Maps</a>
+        </li>
+        <li class="nav-timelines <?php echo neatline_isCurrent($tab, 'timelines'); ?>">
+            <a href="<?php echo uri('neatline-exhibits/timelines'); ?>">Timelines</a>
+        </li>
     </ul>
 
     <p class="add-button">

@@ -30,6 +30,7 @@ head(array('content_class' => 'neatline'));
 ?>
 
 <?php echo $this->partial('index/_header.php', array(
+    'tab' => 'maps',
     'add_button_uri' => 'neatline-maps/maps/create',
     'add_button_text' => 'Create a Map'
 )); ?>

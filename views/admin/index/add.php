@@ -30,6 +30,7 @@ head(array('content_class' => 'neatline'));
 ?>
 
 <?php echo $this->partial('index/_header.php', array(
+    'tab' => 'neatlines',
     'add_button_uri' => 'neatline-exhibits/add',
     'add_button_text' => 'Create a Neatline'
 )); ?>
@@ -42,16 +43,18 @@ head(array('content_class' => 'neatline'));
 <hr>
 
 <h2 class="neatline-label">Choose a Map:</h2>
+<?php echo neatline_mapSelect(); ?>
 
 <hr>
 
 <h2 class="neatline-label">Choose a Timeline:</h2>
+<?php echo neatline_timelineSelect(); ?>
 
 <hr>
 
 <h2 class="neatline-label">Configure Layout:</h2>
 
-<?php echo neatline_button_to('', 'save_neatline', 'Save and Continue to Interactive Mode', array('class' => 'neatline btn primary'), 'save_neatline'); ?>
+<?php echo neatline_buttonTo('', 'save_neatline', 'Save and Continue to Interactive Mode', array('class' => 'neatline btn primary'), 'save_neatline'); ?>
 
 </div>
 
