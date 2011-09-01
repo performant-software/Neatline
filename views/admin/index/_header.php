@@ -1,3 +1,9 @@
 <img src="<?php echo img('neatline-logo-rgb-small.png'); ?>" />
 
-<!-- do menu -->
+<ul id="section-nav" class="navigation">
+<?php echo nav(array(
+    'Neatlines' => uri(''),
+    'Maps' => uri(''),
+    'Timelines' => uri('')
+))?>
+</ul>

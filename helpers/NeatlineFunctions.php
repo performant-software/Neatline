@@ -1,7 +1,8 @@
+<?php
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
 
 /**
- * CSS overrides for the Neatline administrative interfaces.
+ * Ignition file.
  *
  * PHP version 5
  *
@@ -22,19 +23,6 @@
  * @copyright   2010 The Board and Visitors of the University of Virginia
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache 2 License
  */
+?>
 
-/* Background image and color changes to match Neatline site */
-
-body {
-    background: #F9F9F9 url(../images/bg_wrapper.jpg) !important;
-}
-
-.primary-nav li.current, .primary-nav li.current a {
-    background: #F9F9F9 url(../images/bg_wrapper.jpg) !important;
-}
-
-/* Navigation */
-
-#section-nav {
-    font-family: 'Crimson Text', Georgia, "Times New Roman", Times, serif;
-}
+<?php
