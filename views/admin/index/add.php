@@ -42,6 +42,11 @@ head(array('content_class' => 'neatline'));
 
 <hr>
 
+<h2 class="neatline-label">Enter a Title:</h2>
+<?php echo neatline_mapSelect(); ?>
+
+<hr>
+
 <h2 class="neatline-label">Choose a Map:</h2>
 <?php echo neatline_mapSelect(); ?>
 
