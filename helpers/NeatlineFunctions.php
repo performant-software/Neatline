@@ -112,8 +112,6 @@ function neatline_mapSelect()
     $bucketedMaps = neatline_getMapsForSelect();
 
     // ** do element construction here.
-    // return 'test';
-    print_r($bucketedMaps);
 
 }
 
