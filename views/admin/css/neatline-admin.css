@@ -41,12 +41,12 @@ body {
 
 #section-nav {
     font-family: 'Crimson Text', Georgia, "Times New Roman", Times, serif;
-    font-size: 2em;
+    font-size: 1.8em;
     font-weight: bold;
     display: inline;
     padding: 0 0 0 2em;
     position: relative;
-    top: 1.2em;
+    top: 1.4em;
 }
 
 #section-nav li {
@@ -58,7 +58,7 @@ body {
     text-decoration: none;
     color: #7A7A69;
     padding: 5px 8px 1px 8px;
-    border-radius: 8px;
+    border-radius: 10px;
 }
 
 #section-nav li.current a {
@@ -67,6 +67,6 @@ body {
 }
 
 #section-nav a:hover {
-    background-color: #a186af;
+    background-color: #97889e;
     color: #fff;
 }
