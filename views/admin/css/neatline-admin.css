@@ -29,6 +29,10 @@ body {
     background: #F9F9F9 url(../images/bg_wrapper.jpg) !important;
 }
 
+#content.neatline {
+    font-family: 'Crimson Text', Georgia, "Times New Roman", Times, serif;
+}
+
 .primary-nav li.current, .primary-nav li.current a {
     background: #F9F9F9 url(../images/bg_wrapper.jpg) !important;
 }
@@ -40,7 +44,6 @@ body {
 }
 
 #section-nav {
-    font-family: 'Crimson Text', Georgia, "Times New Roman", Times, serif;
     font-size: 1.8em;
     font-weight: bold;
     display: inline;
@@ -69,4 +72,18 @@ body {
 #section-nav a:hover {
     background-color: #97889e;
     color: #fff;
+}
+
+p.add-button {
+    margin: 2em 0 0 0;
+}
+
+p.add-button a {
+    font-size: 1.6em;
+    background-color: transparent !important;
+    color: #7A7A69;
+}
+
+p.add-button a:hover {
+    color: #5b396c;
 }

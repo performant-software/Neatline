@@ -10,4 +10,8 @@
         ))?>
     </ul>
 
+    <p class="add-button">
+        <a class="add" href="<?php echo html_escape(uri($add_button_uri)); ?>"><?php echo $add_button_text; ?></a>
+    </p>
+
 </div>
