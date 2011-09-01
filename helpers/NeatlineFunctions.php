@@ -107,7 +107,34 @@ function neatline_isCurrent($tab, $value)
 function neatline_mapSelect()
 {
 
-    $_db = get_db();
+    // Get the maps, split up into alphabetized buckets
+    // according to the parent item.
+    $bucketedMaps = neatline_getMapsForSelect();
+
+    // ** do element construction here.
+
+}
+
+/**
+ * Utility comparer function used by neatline_mapSelect().
+ *
+ * @param object $a The first object.
+ * @param object $b The second object.
+ * @param string $parameter The parameter to compare on.
+ *
+ * @return void.
+ */
+function neatline_compareObjects($a, $b)
+{
+
+    $aText = strtolower($a->name);
+    $bText = strtolower($b->name);
+
+    if ($aText == $bText) {
+        return 0;
+    }
+
+    return ($aText > $bText) ? +1 : -1;
 
 }
 
@@ -139,12 +166,32 @@ function neatline_getMapsForSelect()
     $select = $_mapsTable->select()
         ->from(array('m' => $_db->prefix . 'neatline_maps_maps'))
         ->joinLeft(array('i' => $_db->prefix . 'items'), 'm.item_id = i.id')
-        ->columns(array(
-            'map_id' => 'm.id',
-            'parent_item' => $parentItemSql
-        )
+        ->columns(array('map_id' => 'm.id', 'parent_item' => $parentItemSql)
     );
 
-    return $_mapsTable->fetchObjects($select);
+    $maps = $_mapsTable->fetchObjects($select);
+    $itemBuckets = array();
+
+    // Put the maps into an associative array of structure
+    // array('parent_item_name' => array($map1, $map2, ...)).
+    foreach ($maps as $map) {
+        if (!array_key_exists($map->parent_item, $itemBuckets)) {
+            $itemBuckets[$map->parent_item] = array($map);
+        } else {
+            $itemBuckets[$map->parent_item] = $map;
+        }
+    }
+
+    // Sort the contents of the buckets.
+    foreach ($itemBuckets as $bucket) {
+        usort($bucket, create_function('$a,$b',
+            '$aText = strtolower($a->name);
+             $bText = strtolower($b->name);
+             if ($aText == $bText) { return 0; }
+             return ($aText > $bText) ? +1 : -1;'));
+    }
+
+    // Then sort the buckets by the name of the parent item.
+    return asort($itemBuckets);
 
 }
