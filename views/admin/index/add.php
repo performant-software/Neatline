@@ -51,7 +51,7 @@ head(array('content_class' => 'neatline'));
 
 <h2 class="neatline-label">Configure Layout:</h2>
 
-<?php echo neatline_button_to('', 'save_neatline', 'Save and Continue to Interactive Mode', array('class' => 'neatline'), 'save_neatline'); ?>
+<?php echo neatline_button_to('', 'save_neatline', 'Save and Continue to Interactive Mode', array('class' => 'neatline btn primary'), 'save_neatline'); ?>
 
 </div>
 
