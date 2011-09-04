@@ -45,6 +45,18 @@ function neatline_queueAdminCss()
 }
 
 /**
+ * Include the layout builder widget.
+ *
+ * @return void.
+ */
+function neatline_queueLayoutBuilderJs()
+{
+
+    queue_js('layout_builder', 'javascripts');
+
+}
+
+/**
  * Create a form containing a single button.
  *
  * @param string $action Form action URI.

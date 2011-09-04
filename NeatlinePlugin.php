@@ -144,6 +144,11 @@ class NeatlinePlugin
             neatline_queueAdminCss();
         }
 
+        // Queue custom JavaScript.
+        if ($request->getModuleName() == 'neatline' && $request->getActionName() == 'add') {
+            neatline_queueLayoutBuilderJs();
+        }
+
     }
 
     /**
