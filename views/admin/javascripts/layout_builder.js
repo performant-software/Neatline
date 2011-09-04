@@ -1,8 +1,7 @@
-<?php
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
 
-/**
- * Markup base for the layout builder block.
+/*
+ * JavaScript for the layout builder application in the add view.
  *
  * PHP version 5
  *
@@ -23,16 +22,5 @@
  * @copyright   2011 The Board and Visitors of the University of Virginia
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache 2 License
  */
-?>
 
-<div id="layout-builder">
 
-    <div id="drag-box"></div>
-
-    <div id="options">
-        <input type="checkbox" id="toggle_map" /><label for="toggle_map">Map</label>
-        <input type="checkbox" id="toggle_timeline" /><label for="toggle_map">Timeline</label>
-        <input type="checkbox" id="toggle_undated_items" /><label for="toggle_undated_items">Undated Items</label>
-    </div
-
-</div>

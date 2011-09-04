@@ -147,7 +147,7 @@ select[name="map"], select[name="timeline"] {
 }
 
 #drag-box {
-    width: 650px;
-    height: 350px;
+    width: 600px;
+    height: 300px;
     border: 1px solid #b5b5b5;
 }
