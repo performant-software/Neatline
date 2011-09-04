@@ -124,6 +124,7 @@ form#create-neatline {
 
 form#create-neatline input#save_neatline {
     float: left;
+    width: 150px;
 }
 
 form#create-neatline fieldset {
@@ -137,4 +138,16 @@ input[name="title"] {
 
 select[name="map"], select[name="timeline"] {
     width: 310px !important;
+}
+
+/* Layout builder */
+
+#layout-builder {
+    margin: 1em 0 0 0;
+}
+
+#drag-box {
+    width: 650px;
+    height: 350px;
+    border: 1px solid #b5b5b5;
 }

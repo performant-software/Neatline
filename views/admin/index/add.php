@@ -60,11 +60,12 @@ head(array('content_class' => 'neatline'));
     <hr>
 
     <h2 class="neatline-label">Configure Layout:</h2>
+    <?php echo $this->partial('index/_layout_builder.php'); ?>
 
     <hr>
 
     <?php echo neatline_buttonTo('', 'save_neatline',
-        'Save and Continue to Interactive Mode', array('class' => 'neatline btn primary'), 'save-neatline'); ?>
+        'Create Neatline', array('class' => 'neatline btn large primary'), 'save-neatline'); ?>
 
 </form>
 
