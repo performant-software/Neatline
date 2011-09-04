@@ -36,6 +36,21 @@
 
             this._createButtons();
 
+            // Set tracker variables for element presence.
+            this._is_map = false;
+            this._is_timeline = false;
+            this._is_undated_items = false;
+
+            // Set tracker variables for element position.
+            this._top_element = 'map'; // 'map' or 'timeline'
+            this._undated_items_position = 'right'; // 'right' or 'left'
+            this._undated_items_height = 'partial'; // 'partial' or 'full'
+
+            // By default, add all elements.
+            this._toggle_map();
+            this._toggle_timeline();
+            this._toggle_undated_items();
+
         },
 
         _destroy: function() {
@@ -49,6 +64,60 @@
             $('#toggle_timeline').button();
             $('#toggle_undated_items').button();
             $('#' + this.options.options_id).buttonset();
+
+        },
+
+        _toggle_map: function() {
+
+            switch(this._is_map) {
+
+                case true:
+                    // remove.
+                    this._is_map = false;
+                break;
+
+                case false:
+                    // add.
+                    this._is_map = true;
+                break;
+
+            }
+
+        },
+
+        _toggle_timeline: function() {
+
+            switch(this._is_timeline) {
+
+                case true:
+                    // remove.
+                    this._is_timeline = false;
+                break;
+
+                case false:
+                    // add.
+                    this._is_timeline = true;
+                break;
+
+            }
+
+        },
+
+        _toggle_undated_items: function() {
+
+            switch(this._is_undated_items) {
+
+                case true:
+                    // remove.
+                    this._is_undated_items = false;
+                break;
+
+                case false:
+                    // add.
+                    this._is_undated_items = true;
+                break;
+
+            }
 
         }
 
