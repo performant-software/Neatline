@@ -23,4 +23,25 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache 2 License
  */
 
+(function($, undefined) {
 
+    $.widget('neatline.layoutbuilder') {
+
+        options: {
+        },
+
+        _create: function() {
+
+
+
+        },
+
+        _destroy: function() {
+
+
+
+        }
+
+    }
+
+}
