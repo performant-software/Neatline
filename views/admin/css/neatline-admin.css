@@ -122,11 +122,19 @@ form#create-neatline {
     margin-bottom: 0;
 }
 
-form#create-neatline input {
+form#create-neatline input#save_neatline {
     float: left;
 }
 
 form#create-neatline fieldset {
     margin: 0;
     padding: 0;
+}
+
+input[name="title"] {
+    width: 300px !important;
+}
+
+select[name="map"], select[name="timeline"] {
+    width: 310px !important;
 }

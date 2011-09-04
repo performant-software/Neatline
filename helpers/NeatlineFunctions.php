@@ -134,7 +134,27 @@ function neatline_mapSelect()
 function neatline_timelineSelect()
 {
 
+    $timelines = neatline_getTimelinesForSelect();
+    $timelineSelect = new Zend_Form_Element_Select('timeline');
 
+    foreach ($timelines as $timeline) {
+        $timelineSelect->addMultiOption($timeline->id, $timeline->title);
+    }
+
+    return $timelineSelect;
+
+}
+
+/**
+ * Construct the timelines dropdown select.
+ *
+ * @return void.
+ */
+function neatline_titleInput()
+{
+
+    $neatlineTitle = new Zend_Form_Element_Text('title');
+    return $neatlineTitle;
 
 }
 
@@ -177,6 +197,21 @@ function neatline_getMapsForSelect()
     // Then sort the buckets by the name of the parent item.
     asort($itemBuckets);
     return $itemBuckets;
+
+}
+
+/**
+ * Query for timelines.
+ *
+ * @return array of Omeka_records $maps The maps.
+ */
+function neatline_getTimelinesForSelect()
+{
+
+    $_db = get_db();
+    $timelinesTable = $_db->getTable('NeatlineTimeTimeline');
+
+    return $timelinesTable->findAll();
 
 }
 
