@@ -39,10 +39,10 @@ head(array('content_class' => 'neatline'));
 
 <form method="post" id="create-neatline">
 
-    <h1 id="neatline-add-header">Create a Neatline Exhibit</h1>
-    <h3 id="neatline-add-subheader">Step 1: Select a map and a timeline, customize the layout</h3>
-
-    <hr>
+    <div id="title-text">
+        <h1 id="neatline-add-header">Create a Neatline Exhibit</h1>
+        <h3 id="neatline-add-subheader">Step 1: Select a map and a timeline, customize the layout</h3>
+    </div>
 
     <h2 class="neatline-label">Enter a Title:</h2>
     <?php echo neatline_titleInput(); ?>
@@ -61,8 +61,6 @@ head(array('content_class' => 'neatline'));
 
     <h2 class="neatline-label">Configure Layout:</h2>
     <?php echo $this->partial('index/_layout_builder.php'); ?>
-
-    <hr>
 
     <?php echo neatline_buttonTo('', 'save_neatline',
         'Create Neatline', array('class' => 'neatline btn large primary'), 'save-neatline'); ?>

@@ -34,17 +34,21 @@
 
         _create: function() {
 
-            // Button-ify the map, timeline, and undated items checkboxes.
-            $('#toggle_map').button();
-            $('#toggle_timeline').button();
-            $('#toggle_undated_items').button();
-            $('#' + this.options.options_id).buttonset();
+            this._createButtons();
 
         },
 
         _destroy: function() {
 
+        },
 
+        _createButtons: function() {
+
+            // Button-ify the map, timeline, and undated items checkboxes.
+            $('#toggle_map').button();
+            $('#toggle_timeline').button();
+            $('#toggle_undated_items').button();
+            $('#' + this.options.options_id).buttonset();
 
         }
 
