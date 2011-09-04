@@ -111,7 +111,18 @@ function neatline_mapSelect()
     // according to the parent item.
     $bucketedMaps = neatline_getMapsForSelect();
 
-    // ** do element construction here.
+    // Construct element.
+    $mapSelect = new Zend_Form_Element_Select('map');
+
+    foreach ($bucketedMaps as $itemName => $maps) {
+        $optionsArray = array();
+        foreach ($maps as $map) {
+            $optionsArray[$map->id] = $map->name;
+        }
+        $mapSelect->setMultiOptions(array($itemName => $optionsArray));
+    }
+
+    return $mapSelect;
 
 }
 
