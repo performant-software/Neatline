@@ -49,10 +49,11 @@ function neatline_queueAdminCss()
  *
  * @return void.
  */
-function neatline_queueLayoutBuilderJs()
+function neatline_queueLayoutBuilderCssAndJs()
 {
 
     queue_js('layout_builder', 'javascripts');
+    queue_css('custom_ui_theme/ui.custom');
 
 }
 
