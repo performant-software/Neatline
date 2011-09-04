@@ -25,14 +25,20 @@
 
 (function($, undefined) {
 
-    $.widget('neatline.layoutbuilder') {
+    $.widget('neatline.layoutbuilder', {
 
         options: {
+            draggable_id: 'drag-box',
+            options_id: 'options'
         },
 
         _create: function() {
 
-
+            // Button-ify the map, timeline, and undated items checkboxes.
+            $('#toggle_map').button();
+            $('#toggle_timeline').button();
+            $('#toggle_undated_items').button();
+            $('#' + this.options.options_id).buttonset();
 
         },
 
@@ -42,6 +48,14 @@
 
         }
 
-    }
+    });
 
-}
+})( jQuery );
+
+
+// Usage.
+jQuery(document).ready(function($) {
+
+    $('#layout-builder').layoutbuilder();
+
+});

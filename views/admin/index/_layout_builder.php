@@ -27,12 +27,12 @@
 
 <div id="layout-builder">
 
-    <div id="drag-box"></div>
-
     <div id="options">
         <input type="checkbox" id="toggle_map" /><label for="toggle_map">Map</label>
-        <input type="checkbox" id="toggle_timeline" /><label for="toggle_map">Timeline</label>
+        <input type="checkbox" id="toggle_timeline" /><label for="toggle_timeline">Timeline</label>
         <input type="checkbox" id="toggle_undated_items" /><label for="toggle_undated_items">Undated Items</label>
-    </div
+    </div>
+
+    <div id="drag-box"></div>
 
 </div>
