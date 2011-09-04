@@ -37,28 +37,35 @@ head(array('content_class' => 'neatline'));
 
 <div id="primary">
 
-<h1 id="neatline-add-header">Create a Neatline Exhibit</h1>
-<h3 id="neatline-add-subheader">Step 1: Select a map and a timeline, customize the layout</h3>
+<form method="post" id="create-neatline">
 
-<hr>
+    <h1 id="neatline-add-header">Create a Neatline Exhibit</h1>
+    <h3 id="neatline-add-subheader">Step 1: Select a map and a timeline, customize the layout</h3>
 
-<h2 class="neatline-label">Enter a Title:</h2>
+    <hr>
 
-<hr>
+    <h2 class="neatline-label">Enter a Title:</h2>
 
-<h2 class="neatline-label">Choose a Map:</h2>
-<?php echo neatline_mapSelect(); ?>
+    <hr>
 
-<hr>
+    <h2 class="neatline-label">Choose a Map:</h2>
+    <?php echo neatline_mapSelect(); ?>
 
-<h2 class="neatline-label">Choose a Timeline:</h2>
-<?php echo neatline_timelineSelect(); ?>
+    <hr>
 
-<hr>
+    <h2 class="neatline-label">Choose a Timeline:</h2>
+    <?php echo neatline_timelineSelect(); ?>
 
-<h2 class="neatline-label">Configure Layout:</h2>
+    <hr>
 
-<?php echo neatline_buttonTo('', 'save_neatline', 'Save and Continue to Interactive Mode', array('class' => 'neatline btn primary'), 'save_neatline'); ?>
+    <h2 class="neatline-label">Configure Layout:</h2>
+
+    <hr>
+
+    <?php echo neatline_buttonTo('', 'save_neatline',
+        'Save and Continue to Interactive Mode', array('class' => 'neatline btn primary'), 'save-neatline'); ?>
+
+</form>
 
 </div>
 

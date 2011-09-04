@@ -118,14 +118,15 @@ h3#neatline-add-subheader {
     font-style: italic;
 }
 
-form#save_neatline {
+form#create-neatline {
     margin-bottom: 0;
 }
 
-form#save_neatline input {
+form#create-neatline input {
     float: left;
 }
 
-form#save_neatline fieldset {
+form#create-neatline fieldset {
     margin: 0;
+    padding: 0;
 }
