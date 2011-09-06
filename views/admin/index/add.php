@@ -63,7 +63,7 @@ head(array('content_class' => 'neatline'));
     <?php echo $this->partial('index/_layout_builder.php'); ?>
 
     <?php echo neatline_buttonTo('', 'save_neatline',
-        'Create Neatline', array('class' => 'neatline btn large primary'), 'save-neatline'); ?>
+        'Create Neatline', array('class' => 'neatline btn primary'), 'save-neatline'); ?>
 
 </form>
 

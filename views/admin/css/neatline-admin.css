@@ -125,7 +125,7 @@ form#create-neatline {
 
 form#create-neatline input#save_neatline {
     float: left;
-    width: 150px;
+    width: 120px;
 }
 
 form#create-neatline fieldset {
