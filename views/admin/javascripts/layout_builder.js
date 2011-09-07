@@ -67,6 +67,9 @@
             this._toggleTimeline();
             this._toggleUndatedItems();
 
+            // Gloss.
+            this._addDragEvents();
+
         },
 
         _getPxConstants: function() {
@@ -120,6 +123,12 @@
                 press: function() { },
                 unpress: function() { }
             });
+
+        },
+
+        _addDragEvents: function() {
+
+
 
         },
 
