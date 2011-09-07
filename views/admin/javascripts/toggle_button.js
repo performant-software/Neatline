@@ -76,11 +76,11 @@
             // do unpress.
             this.pressed = false;
 
-        }
+        },
 
         _destroy: function() {
             // do teardown.
-        },
+        }
 
     });
 
