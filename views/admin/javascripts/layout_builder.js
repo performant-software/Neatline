@@ -92,7 +92,9 @@
 
                 case false:
 
-                    var map = $('<div id="drag-map" class="draggable"><span class="drag-tag">Map</span></div>');
+                    var map = $('<div id="drag-map" class="draggable">\
+                                    <span class="drag-tag">Map</span>\
+                                </div>');
 
                     // if the timeline is on the map...
                     if (this._is_timeline) {
@@ -125,7 +127,9 @@
 
                 case false:
 
-                    var timeline = $('<div id="drag-timeline" class="draggable"><span class="drag-tag">Timeline</span></div>');
+                    var timeline = $('<div id="drag-timeline" class="draggable">\
+                                         <span class="drag-tag">Timeline</span>\
+                                     </div>');
 
                     // if the map is on the map...
                     if (this._is_map) {
