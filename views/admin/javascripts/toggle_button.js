@@ -50,19 +50,8 @@
         _addEvents: function() {
 
             this.element.bind({
-
-                'mouseenter': function() {
-                    // do.
-                },
-
-                'mouseleave': function() {
-                    // do.
-                },
-
-                'mousedown': function() {
-                    // do.
-                }
-
+                'mouseenter mouseleave': $.proxy(this._highlight, this),
+                'mousedown': $.proxy(this.press, this)
             });
 
         },
@@ -70,14 +59,21 @@
         press: function() {
 
             // do press.
+            this.element.toggleClass('neatline-pressed');
             this.pressed = true;
 
         },
 
         unpress: function() {
 
-            // do unpress.
+            this.element.toggleClass('neatline-pressed');
             this.pressed = false;
+
+        },
+
+        _highlight: function() {
+
+            this.element.toggleClass('neatline-highlighted');
 
         },
 

@@ -169,10 +169,9 @@ select[name="map"], select[name="timeline"] {
 
 span.neatline-toggle-button {
     cursor: pointer;
-    color: #acacac;
     font-size: 13px;
     font-family: Helvetica, Arial, sans-serif;
-    border: 1px solid #d9d9d9;
+    border: 1px solid;
     padding: 0.4em 0.6em 0.4em 0.6em;
     margin: 0 1em 0 0;
     -moz-border-radius: 5px;
@@ -180,23 +179,21 @@ span.neatline-toggle-button {
     -khtml-border-radius: 5px;
     border-radius: 5px;
     font-weight: bold;
-/* IE10 */ 
-background-image: -ms-linear-gradient(top, #FFFFFF 0%, #F7F7F7 100%);
+    background-image: -ms-linear-gradient(top, #FFFFFF 0%, #F7F7F7 100%);
+    background-image: -moz-linear-gradient(top, #FFFFFF 0%, #F7F7F7 100%);
+    background-image: -o-linear-gradient(top, #FFFFFF 0%, #F7F7F7 100%);
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #FFFFFF), color-stop(1, #F7F7F7));
+    background-image: -webkit-linear-gradient(top, #FFFFFF 0%, #F7F7F7 100%);
+    background-image: linear-gradient(top, #FFFFFF 0%, #F7F7F7 100%);
+    color: #acacac;
+    border-color: #d9d9d9;
+}
 
-/* Mozilla Firefox */ 
-background-image: -moz-linear-gradient(top, #FFFFFF 0%, #F7F7F7 100%);
+span.neatline-pressed {
+    color: #3b9cef;
+    border-color: #adcfeb;
+}
 
-/* Opera */ 
-background-image: -o-linear-gradient(top, #FFFFFF 0%, #F7F7F7 100%);
-
-/* Webkit (Safari/Chrome 10) */ 
-background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #FFFFFF), color-stop(1, #F7F7F7));
-
-/* Webkit (Chrome 11+) */ 
-background-image: -webkit-linear-gradient(top, #FFFFFF 0%, #F7F7F7 100%);
-
-/* Proposed W3C Markup */ 
-background-image: linear-gradient(top, #FFFFFF 0%, #F7F7F7 100%);
-
-
+span.neatline-highlighted {
+    /* border-color: #efcb3c;*/
 }
