@@ -39,7 +39,7 @@
             // Add the new class, set status variable, add events.
             this.element.addClass('neatline-toggle-button');
             this.pressed = false;
-            this._add_events();
+            this._addEvents();
 
             if (this.options.pressed_by_default) {
                 this.press();
@@ -47,7 +47,7 @@
 
         },
 
-        _add_events: function() {
+        _addEvents: function() {
 
             this.element.bind({
                 'mouseenter mouseleave': $.proxy(this._highlight, this),

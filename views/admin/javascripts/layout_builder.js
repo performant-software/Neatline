@@ -30,7 +30,8 @@
         options: {
             dragbox_id: 'drag-box',
             options_id: 'options',
-            top_block_percentage: 60
+            top_block_percentage: 60,
+            undated_items_width: 150
         },
 
         _create: function() {
@@ -38,6 +39,9 @@
             // Getters for options and dragbox divs.
             this.buttons = $('#' + this.options.options_id);
             this.dragbox = $('#' + this.options.dragbox_id);
+
+            // Get fixed pixel values for heights.
+            this._getPxHeights();
 
             // Squash text selection and gloss the buttons.
             this._disableSelect();
@@ -102,7 +106,7 @@
 
         },
 
-        _toggle_map: function() {
+        _toggleMap: function() {
 
             switch(this._is_map) {
 
@@ -113,6 +117,7 @@
 
                 case false:
 
+                    // create the div
                     this.map_drag = $('<div id="drag-map" class="draggable">\
                                           <span class="drag-tag">Map</span>\
                                        </div>');
@@ -139,7 +144,7 @@
 
         },
 
-        _toggle_timeline: function() {
+        _toggleTimeline: function() {
 
             switch(this._is_timeline) {
 
@@ -150,6 +155,7 @@
 
                 case false:
 
+                    // create the div
                     this.timeline_drag = $('<div id="drag-timeline" class="draggable">\
                                                <span class="drag-tag">Timeline</span>\
                                             </div>');
@@ -188,7 +194,7 @@
 
         },
 
-        _toggle_undated_items: function() {
+        _toggleUndatedItems: function() {
 
             switch(this._is_undated_items) {
 
@@ -198,8 +204,25 @@
                 break;
 
                 case false:
-                    // add.
+
+                    // create the div
+                    this.undated_items_drag = $('<div id="drag-timeline" class="draggable">\
+                                                    <span class="drag-tag">Timeline</span>\
+                                                 </div>');
+
+                    // set height
+                    if (this._undated_items_height == 'full') {
+                        this.undated_items_drag.css('height', '100%');
+                    } else {
+                        this.undated_items_drag.css('height', 100-this.options.top_block_percentage + '%');
+                    }
+
+                    // set width
+
+                    // set position
+
                     this._is_undated_items = true;
+
                 break;
 
             }

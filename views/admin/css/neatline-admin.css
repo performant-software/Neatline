@@ -208,6 +208,7 @@ div.draggable {
     -webkit-border-radius: 2px;
     -khtml-border-radius: 2px;
     border-radius: 2px;
+    position: relative;
 }
 
 span.drag-tag {
@@ -225,4 +226,5 @@ span.drag-tag {
 
 #drag-undated-items {
     background-color: #e7e7e7;
+    font-size: 2em;
 }
