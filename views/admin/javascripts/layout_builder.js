@@ -28,7 +28,7 @@
     $.widget('neatline.layoutbuilder', {
 
         options: {
-            draggable_id: 'drag-box',
+            dragbox_id: 'drag-box',
             options_id: 'options'
         },
 
@@ -41,6 +41,10 @@
             this._is_map = false;
             this._is_timeline = false;
             this._is_undated_items = false;
+
+            // Getters for options and dragbox divs.
+            this.buttons = $('#' + this.options.options_id);
+            this.dragbox = $('#' + this.options.dragbox_id);
 
             // Set tracker variables for element position.
             this._top_element = 'map'; // 'map' or 'timeline'
@@ -66,9 +70,9 @@
         _createButtons: function() {
 
             // Button-ify the map, timeline, and undated items checkboxes.
-            $('#toggle-map').togglebutton();
-            $('#toggle-timeline').togglebutton();
-            $('#toggle-undated-items').togglebutton();
+            $('#toggle-map').togglebutton({ pressed_by_default: true });
+            $('#toggle-timeline').togglebutton({ pressed_by_default: true });
+            $('#toggle-undated-items').togglebutton({ pressed_by_default: true });
 
         },
 
@@ -82,8 +86,21 @@
                 break;
 
                 case false:
-                    // add.
+
+                    var map = $('<div id="drag-map" class="draggable">map</div>');
+
+                    // if the timeline is on the map...
+                    if (this._is_timeline) {
+
+                    }
+
+                    // if no timeline...
+                    else {
+                        this.dragbox.append(map);
+                    }
+
                     this._is_map = true;
+
                 break;
 
             }

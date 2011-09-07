@@ -197,3 +197,12 @@ span.neatline-pressed {
 span.neatline-highlighted {
     /* border-color: #efcb3c;*/
 }
+
+div.draggable {
+    text-align: center;
+    font-size: 3em;
+    font-family: Helvetica, Arial, sans-serif;
+    font-weight: bold;
+    color: #c4c4c4;
+    vertical-align: middle;
+}
