@@ -102,6 +102,7 @@
                     // if no timeline...
                     else {
                         this.dragbox.append(map);
+                        this._position_tag(map);
                         map.css('height', '100%');
                     }
 
@@ -146,6 +147,12 @@
                 break;
 
             }
+
+        },
+
+        _position_tag: function(draggable) {
+
+
 
         },
 
