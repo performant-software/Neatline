@@ -60,10 +60,9 @@
         _createButtons: function() {
 
             // Button-ify the map, timeline, and undated items checkboxes.
-            $('#toggle_map').button();
-            $('#toggle_timeline').button();
-            $('#toggle_undated_items').button();
-            $('#' + this.options.options_id).buttonset();
+            $('#toggle-map').togglebutton();
+            $('#toggle-timeline').togglebutton();
+            $('#toggle-undated-items').togglebutton();
 
         },
 

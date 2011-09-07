@@ -166,3 +166,9 @@ select[name="map"], select[name="timeline"] {
     height: 20px;
     display: block;
 }
+
+span.neatline-toggle-button {
+    cursor: pointer;
+    font-size: 16px;
+    display: block;
+}

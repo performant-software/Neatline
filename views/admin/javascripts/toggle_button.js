@@ -33,11 +33,54 @@
 
         _create: function() {
 
+            // Add the new class, set status variable, add events.
+            this.element.addClass('neatline-toggle-button');
+            this.pressed = false;
+            this._addEvents();
+
+            if (this.options.pressed_by_default) {
+                this.press();
+            }
+
         },
 
-        _destroy: function() {
+        _addEvents: function() {
+
+            this.element.bind({
+
+                'mouseenter': function() {
+                    // do.
+                },
+
+                'mouseleave': function() {
+                    // do.
+                },
+
+                'mousedown': function() {
+                    // do.
+                }
+
+            });
+
+        },
+
+        press: function() {
+
+            // do press.
+            this.pressed = true;
+
+        },
+
+        unpress: function() {
+
+            // do unpress.
+            this.pressed = false;
 
         }
+
+        _destroy: function() {
+            // do teardown.
+        },
 
     });
 

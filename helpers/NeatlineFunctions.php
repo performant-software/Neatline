@@ -53,7 +53,7 @@ function neatline_queueLayoutBuilderCssAndJs()
 {
 
     queue_js('layout_builder', 'javascripts');
-    queue_js('button', 'javascripts');
+    queue_js('toggle_button', 'javascripts');
     queue_css('custom_ui_theme/ui.custom');
 
 }
