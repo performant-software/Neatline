@@ -201,8 +201,13 @@ span.neatline-highlighted {
 div.draggable {
     text-align: center;
     font-size: 3em;
+    margin-top: -0.5em;
     font-family: Helvetica, Arial, sans-serif;
     font-weight: bold;
     color: #c4c4c4;
-    vertical-align: middle;
+}
+
+span.drag-tag {
+    position: relative;
+    top: 50%;
 }

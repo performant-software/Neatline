@@ -34,6 +34,11 @@
 
         _create: function() {
 
+            // Getters for options and dragbox divs.
+            this.buttons = $('#' + this.options.options_id);
+            this.dragbox = $('#' + this.options.dragbox_id);
+
+            // Squash text selection and gloss the buttons.
             this._disableSelect();
             this._createButtons();
 
@@ -41,10 +46,6 @@
             this._is_map = false;
             this._is_timeline = false;
             this._is_undated_items = false;
-
-            // Getters for options and dragbox divs.
-            this.buttons = $('#' + this.options.options_id);
-            this.dragbox = $('#' + this.options.dragbox_id);
 
             // Set tracker variables for element position.
             this._top_element = 'map'; // 'map' or 'timeline'
@@ -60,10 +61,14 @@
 
         _disableSelect: function() {
 
+            // Turn off text selection on the whole container div.
             this.element.css('MozUserSelect', 'none');
             this.element.bind('selectstart mousedown', function() {
                 return false;
             });
+
+            // Fix the pointer style in the drag box.
+            this.dragbox.css('cursor', 'default');
 
         },
 
@@ -87,7 +92,7 @@
 
                 case false:
 
-                    var map = $('<div id="drag-map" class="draggable">map</div>');
+                    var map = $('<div id="drag-map" class="draggable"><span class="drag-tag">Map</span></div>');
 
                     // if the timeline is on the map...
                     if (this._is_timeline) {
@@ -97,6 +102,7 @@
                     // if no timeline...
                     else {
                         this.dragbox.append(map);
+                        map.css('height', '100%');
                     }
 
                     this._is_map = true;
