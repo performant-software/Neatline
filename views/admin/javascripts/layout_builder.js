@@ -80,10 +80,25 @@
 
         _createButtons: function() {
 
-            // Button-ify the map, timeline, and undated items checkboxes.
-            $('#toggle-map').togglebutton({ pressed_by_default: true });
-            $('#toggle-timeline').togglebutton({ pressed_by_default: true });
-            $('#toggle-undated-items').togglebutton({ pressed_by_default: true });
+            // Instantiate buttons, define callbacks.
+
+            $('#toggle-map').togglebutton({
+                pressed_by_default: true,
+                press: function() { },
+                unpress: function() { }
+            });
+
+            $('#toggle-timeline').togglebutton({
+                pressed_by_default: true,
+                press: function() { },
+                unpress: function() { }
+            });
+
+            $('#toggle-undated-items').togglebutton({
+                pressed_by_default: true,
+                press: function() { },
+                unpress: function() { }
+            });
 
         },
 

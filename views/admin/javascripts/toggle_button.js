@@ -58,16 +58,15 @@
 
         press: function() {
 
-            // do press.
             this.element.toggleClass('neatline-pressed');
-            this.pressed = true;
 
-        },
-
-        unpress: function() {
-
-            this.element.toggleClass('neatline-pressed');
-            this.pressed = false;
+            if (this.pressed) {
+                this._trigger('unpress');
+                this.pressed = false;
+            } else {
+                this._trigger('press');
+                this.pressed = true;
+            }
 
         },
 
