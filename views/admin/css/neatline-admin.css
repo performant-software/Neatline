@@ -161,6 +161,7 @@ select[name="map"], select[name="timeline"] {
     -webkit-border-radius: 2px;
     -khtml-border-radius: 2px;
     border-radius: 2px;
+    position: relative;
 }
 
 #options {
@@ -208,7 +209,9 @@ div.draggable {
     -webkit-border-radius: 2px;
     -khtml-border-radius: 2px;
     border-radius: 2px;
-    position: relative;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
 span.drag-tag {
@@ -218,6 +221,7 @@ span.drag-tag {
 
 #drag-map {
     background-color: #f6f6f6;
+    width: 100%;
 }
 
 #drag-timeline {
@@ -226,5 +230,5 @@ span.drag-tag {
 
 #drag-undated-items {
     background-color: #e7e7e7;
-    font-size: 2em;
+    font-size: 1.8em;
 }

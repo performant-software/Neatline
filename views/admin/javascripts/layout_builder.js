@@ -77,6 +77,8 @@
             this._top_block_height = this._dragbox_height * (this.options.top_block_percentage/100);
             this._bottom_block_height = this._dragbox_height - this._top_block_height;
 
+            this._undated_items_left_offset = this._dragbox_width - this.options.undated_items_width;
+
         },
 
         _disableSelect: function() {
@@ -140,8 +142,9 @@
                     // if no timeline
                     else {
 
+                        this.map_drag.css('height', this._dragbox_height);
+                        this.map_drag.css('width', this._dragbox_width);
                         this.dragbox.append(this.map_drag);
-                        this.map_drag.css('height', '100%');
                         this._position_tag(this.map_drag);
 
                     }
@@ -179,9 +182,18 @@
                             this.map_drag.css('height', this._top_block_height + 'px');
                             this._position_tag(this.map_drag);
 
-                            this.dragbox.append(this.timeline_drag);
                             this.timeline_drag.css('height', this._bottom_block_height + 'px');
+                            this.timeline_drag.css('width', this._dragbox_width + 'px');
+                            this.timeline_drag.css('top', this._top_block_height + 'px');
+                            this.dragbox.append(this.timeline_drag);
                             this._position_tag(this.timeline_drag);
+
+                        }
+
+                        // if timeline on top
+                        else {
+
+
 
                         }
 
@@ -216,20 +228,61 @@
                 case false:
 
                     // create the div
-                    this.undated_items_drag = $('<div id="drag-timeline" class="draggable">\
-                                                    <span class="drag-tag">Timeline</span>\
+                    this.undated_items_drag = $('<div id="drag-undated-items" class="draggable">\
+                                                    <span class="drag-tag">Undated Items</span>\
                                                  </div>');
 
-                    // set height
+                    // set height based on current loadout
+
+                    var height = null;
+
                     if (this._undated_items_height == 'full') {
-                        this.undated_items_drag.css('height', '100%');
-                    } else {
-                        this.undated_items_drag.css('height', 100-this.options.top_block_percentage + '%');
+                        height = this._dragbox_height;
                     }
+                    else {
+                        if (this._top_element == 'map') {
+                            height = this._bottom_block_height;
+                        }
+                        else {
+                            height = this._top_block_height;
+                        }
+                    }
+
+                    this.undated_items_drag.css('height', height + 'px');
 
                     // set width
 
-                    // set position
+                    this.undated_items_drag.css('width', this.options.undated_items_width + 'px');
+
+                    // set left offset
+
+                    var left_offset = null;
+
+                    if (this.undated_items_position == 'left') {
+                        left_offset = 0;
+                    }
+                    else {
+                        left_offset = this._undated_items_left_offset;
+                    }
+
+                    this.undated_items_drag.css('left', left_offset + 'px');
+
+                    // set top offset
+
+                    var top_offset = null;
+
+                    if (this._top_element == 'map') {
+                        top_offset = this._top_block_height;
+                    }
+                    else {
+                        top_offset = 0;
+                    }
+
+                    this.undated_items_drag.css('top', top_offset + 'px');
+
+                    // append and reposition label
+                    this.dragbox.append(this.undated_items_drag);
+                    this._position_tag(this.undated_items_drag);
 
                     this._is_undated_items = true;
 
