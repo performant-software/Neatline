@@ -55,7 +55,7 @@
             // Set tracker variables for element position.
             this._top_element = 'map'; // 'map' or 'timeline'
             this._undated_items_position = 'right'; // 'right' or 'left'
-            this._undated_items_height = 'partial'; // 'partial' or 'full'
+            this._undated_items_height = 'full'; // 'partial' or 'full'
 
             // Create class-globals for the drag divs.
             this.map_drag = null;
@@ -373,11 +373,20 @@
 
             var top_offset = null;
 
-            if (this._top_element == 'map') {
-                top_offset = this._top_block_height;
-            }
-            else {
+            if (this._undated_items_height == 'full') {
                 top_offset = 0;
+            }
+
+            else {
+
+                if (this._top_element == 'map') {
+                    top_offset = this._top_block_height;
+                }
+
+                else {
+                    top_offset = 0;
+                }
+
             }
 
             return top_offset;
@@ -400,8 +409,12 @@
 
             var offset = 0;
 
-            if (this._undated_items_height == 'full' && this._is_undated_items && this._undated_items_position == 'left') {
-                offset = this.options.undated_items_width;
+            if (this._undated_items_height == 'full'
+                && this._is_undated_items
+                && this._undated_items_position == 'left') {
+
+                    offset = this.options.undated_items_width;
+
             }
 
             return offset;
