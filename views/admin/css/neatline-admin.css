@@ -220,15 +220,15 @@ span.drag-tag {
 }
 
 #drag-map {
-    background-color: #f6f6f6;
+    background-color: #eef7ff;
     width: 100%;
 }
 
 #drag-timeline {
-    background-color: #ededed;
+    background-color: #fffded;
 }
 
 #drag-undated-items {
-    background-color: #e7e7e7;
+    background-color: #ffedef;
     font-size: 1.8em;
 }
