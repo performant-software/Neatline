@@ -34,6 +34,7 @@
 
         _create: function() {
 
+            this._disableSelect();
             this._createButtons();
 
             // Set tracker variables for element presence.
@@ -53,7 +54,12 @@
 
         },
 
-        _destroy: function() {
+        _disableSelect: function() {
+
+            this.element.css('MozUserSelect', 'none');
+            this.element.bind('selectstart mousedown', function() {
+                return false;
+            });
 
         },
 
@@ -117,6 +123,10 @@
                 break;
 
             }
+
+        },
+
+        _destroy: function() {
 
         }
 
