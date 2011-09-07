@@ -29,7 +29,8 @@
 
         options: {
             dragbox_id: 'drag-box',
-            options_id: 'options'
+            options_id: 'options',
+            top_block_percentage: 60
         },
 
         _create: function() {
@@ -52,10 +53,15 @@
             this._undated_items_position = 'right'; // 'right' or 'left'
             this._undated_items_height = 'partial'; // 'partial' or 'full'
 
+            // Create class-globals for the drag divs.
+            this.map_drag = null;
+            this.timeline_drag = null;
+            this.undated_items_drag = null;
+
             // By default, add all elements.
-            // this._toggle_map();
+            this._toggle_map();
             this._toggle_timeline();
-            // this._toggle_undated_items();
+            this._toggle_undated_items();
 
         },
 
@@ -92,20 +98,22 @@
 
                 case false:
 
-                    var map = $('<div id="drag-map" class="draggable">\
-                                    <span class="drag-tag">Map</span>\
-                                </div>');
+                    this.map_drag = $('<div id="drag-map" class="draggable">\
+                                          <span class="drag-tag">Map</span>\
+                                       </div>');
 
-                    // if the timeline is on the map...
+                    // if timeline
                     if (this._is_timeline) {
 
                     }
 
-                    // if no timeline...
+                    // if no timeline
                     else {
-                        this.dragbox.append(map);
-                        map.css('height', '100%');
-                        this._position_tag(map);
+
+                        this.dragbox.append(this.map_drag);
+                        this.map_drag.css('height', '100%');
+                        this._position_tag(this.map_drag);
+
                     }
 
                     this._is_map = true;
@@ -127,20 +135,34 @@
 
                 case false:
 
-                    var timeline = $('<div id="drag-timeline" class="draggable">\
-                                         <span class="drag-tag">Timeline</span>\
-                                     </div>');
+                    this.timeline_drag = $('<div id="drag-timeline" class="draggable">\
+                                               <span class="drag-tag">Timeline</span>\
+                                            </div>');
 
-                    // if the map is on the map...
+                    // if map
                     if (this._is_map) {
+
+                        // if map on top
+                        if (this._top_element == 'map') {
+
+                            this.map_drag.css('height', this.options.top_block_percentage + '%');
+                            this._position_tag(this.map_drag);
+
+                            this.dragbox.append(this.timeline_drag);
+                            this.timeline_drag.css('height', 100-this.options.top_block_percentage + '%');
+                            this._position_tag(this.timeline_drag);
+
+                        }
 
                     }
 
-                    // if no map...
+                    // if no map
                     else {
-                        this.dragbox.append(timeline);
-                        timeline.css('height', '100%');
-                        this._position_tag(timeline);
+
+                        this.dragbox.append(this.timeline_drag);
+                        this.timeline_drag.css('height', '100%');
+                        this._position_tag(this.timeline_drag);
+
                     }
 
                     this._is_timeline = true;
@@ -174,7 +196,6 @@
             var tag = draggable.find('.drag-tag');
             var draggable_height = draggable.height();
             var tag_height = tag.height();
-            console.log(draggable_height);
 
             tag.css('top', (draggable_height/2)-(tag_height/2) + 'px');
 
