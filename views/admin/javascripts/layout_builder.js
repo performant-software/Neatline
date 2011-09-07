@@ -41,7 +41,7 @@
             this.dragbox = $('#' + this.options.dragbox_id);
 
             // Get fixed pixel values for heights.
-            this._getPxHeights();
+            this._getPxConstants();
 
             // Squash text selection and gloss the buttons.
             this._disableSelect();
@@ -69,15 +69,20 @@
 
         },
 
-        _getPxHeights: function() {
+        _getPxConstants: function() {
 
             this._dragbox_height = this.dragbox.height();
+
             this._dragbox_width = this.dragbox.width();
 
-            this._top_block_height = this._dragbox_height * (this.options.top_block_percentage/100);
-            this._bottom_block_height = this._dragbox_height - this._top_block_height;
+            this._top_block_height = this._dragbox_height *
+                (this.options.top_block_percentage/100);
 
-            this._undated_items_left_offset = this._dragbox_width - this.options.undated_items_width;
+            this._bottom_block_height = this._dragbox_height -
+                this._top_block_height;
+
+            this._undated_items_left_offset = this._dragbox_width -
+                this.options.undated_items_width;
 
         },
 
@@ -129,21 +134,24 @@
 
                 case false:
 
-                    // create the div
-                    this.map_drag = $('<div id="drag-map" class="draggable">\
-                                          <span class="drag-tag">Map</span>\
-                                       </div>');
+                    // Create the div.
+                    this.map_drag = this.__createMapDiv();
 
-                    // if timeline
+                    // If the timeline is present..
                     if (this._is_timeline) {
 
                     }
 
-                    // if no timeline
+                    // If no timeline..
                     else {
 
-                        this.map_drag.css('height', this._dragbox_height);
-                        this.map_drag.css('width', this._dragbox_width);
+                        // Set dimensions.
+                        this.map_drag.css({
+                            'height': this._dragbox_height,
+                            'width': this._dragbox_width
+                        });
+
+                        // Append and reposition tag.
                         this.dragbox.append(this.map_drag);
                         this._position_tag(this.map_drag);
 
@@ -168,32 +176,34 @@
 
                 case false:
 
-                    // create the div
-                    this.timeline_drag = $('<div id="drag-timeline" class="draggable">\
-                                               <span class="drag-tag">Timeline</span>\
-                                            </div>');
+                    // Create the div.
+                    this.timeline_drag = this.__createTimelineDiv();
 
-                    // if map
+                    // If the map is present..
                     if (this._is_map) {
 
-                        // if map on top
+                        // If the map is on top..
                         if (this._top_element == 'map') {
 
+                            // Shrink the height of the map and reposition tag.
                             this.map_drag.css('height', this._top_block_height + 'px');
                             this._position_tag(this.map_drag);
 
-                            this.timeline_drag.css('height', this._bottom_block_height + 'px');
-                            this.timeline_drag.css('width', this._dragbox_width + 'px');
-                            this.timeline_drag.css('top', this._top_block_height + 'px');
+                            // Set css.
+                            this.timeline_drag.css({
+                                'height': this._bottom_block_height + 'px',
+                                'width': this._dragbox_width + 'px',
+                                'top': this._top_block_height + 'px'
+                            });
+
+                            // Append and position tag.
                             this.dragbox.append(this.timeline_drag);
                             this._position_tag(this.timeline_drag);
 
                         }
 
-                        // if timeline on top
+                        // If the timeline is on top..
                         else {
-
-
 
                         }
 
@@ -202,8 +212,9 @@
                     // if no map
                     else {
 
-                        this.dragbox.append(this.timeline_drag);
                         this.timeline_drag.css('height', '100%');
+
+                        this.dragbox.append(this.timeline_drag);
                         this._position_tag(this.timeline_drag);
 
                     }
@@ -227,60 +238,25 @@
 
                 case false:
 
-                    // create the div
-                    this.undated_items_drag = $('<div id="drag-undated-items" class="draggable">\
-                                                    <span class="drag-tag">Undated Items</span>\
-                                                 </div>');
+                    // Create the div.
+                    this.undated_items_drag = this.__createUndatedItemsDiv();
 
-                    // set height based on current loadout
-
-                    var height = null;
-
-                    if (this._undated_items_height == 'full') {
-                        height = this._dragbox_height;
-                    }
-                    else {
-                        if (this._top_element == 'map') {
-                            height = this._bottom_block_height;
-                        }
-                        else {
-                            height = this._top_block_height;
-                        }
-                    }
-
+                    // Calculate and set height.
+                    var height = this.__getUndatedItemsHeight();
                     this.undated_items_drag.css('height', height + 'px');
 
-                    // set width
-
+                    // Set width property.
                     this.undated_items_drag.css('width', this.options.undated_items_width + 'px');
 
-                    // set left offset
-
-                    var left_offset = null;
-
-                    if (this.undated_items_position == 'left') {
-                        left_offset = 0;
-                    }
-                    else {
-                        left_offset = this._undated_items_left_offset;
-                    }
-
+                    // Calculate and set left offset.
+                    var left_offset = this.__getUndatedItemsLeftOffset();
                     this.undated_items_drag.css('left', left_offset + 'px');
 
-                    // set top offset
-
-                    var top_offset = null;
-
-                    if (this._top_element == 'map') {
-                        top_offset = this._top_block_height;
-                    }
-                    else {
-                        top_offset = 0;
-                    }
-
+                    // Calculate and set top offset.
+                    var top_offset = this.__getUndatedItemsTopOffset();
                     this.undated_items_drag.css('top', top_offset + 'px');
 
-                    // append and reposition label
+                    // Append and reposition label.
                     this.dragbox.append(this.undated_items_drag);
                     this._position_tag(this.undated_items_drag);
 
@@ -303,6 +279,90 @@
         },
 
         _destroy: function() {
+
+        },
+
+
+        /*
+         * Helpers.
+         */
+
+        __createMapDiv: function() {
+
+            return $('<div id="drag-map" class="draggable">\
+                        <span class="drag-tag">Map</span>\
+                      </div>');
+
+        },
+
+        __createTimelineDiv: function() {
+
+            return $('<div id="drag-timeline" class="draggable">\
+                        <span class="drag-tag">Timeline</span>\
+                      </div>');
+
+        },
+
+        __createUndatedItemsDiv: function() {
+
+            return $('<div id="drag-undated-items" class="draggable">\
+                        <span class="drag-tag">Undated Items</span>\
+                      </div>');
+
+        },
+
+        __getUndatedItemsHeight: function() {
+
+            var height = null;
+
+            if (this._undated_items_height == 'full') {
+                height = this._dragbox_height;
+            }
+
+            else {
+
+                if (this._top_element == 'map') {
+                    height = this._bottom_block_height;
+                }
+
+                else {
+                    height = this._top_block_height;
+                }
+
+            }
+
+            return height;
+
+        },
+
+        __getUndatedItemsLeftOffset: function() {
+
+            var left_offset = null;
+
+            if (this.undated_items_position == 'left') {
+                left_offset = 0;
+            }
+
+            else {
+                left_offset = this._undated_items_left_offset;
+            }
+
+            return left_offset;
+
+        },
+
+        __getUndatedItemsTopOffset: function() {
+
+            var top_offset = null;
+
+            if (this._top_element == 'map') {
+                top_offset = this._top_block_height;
+            }
+            else {
+                top_offset = 0;
+            }
+
+            return top_offset;
 
         }
 
