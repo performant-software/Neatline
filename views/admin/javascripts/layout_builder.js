@@ -108,8 +108,8 @@
 
             $('#toggle-map').togglebutton({
                 pressed_by_default: true,
-                press: function() { },
-                unpress: function() { }
+                press: $.proxy(this._toggleMap, this),
+                unpress: $.proxy(this._toggleMap, this)
             });
 
             $('#toggle-timeline').togglebutton({
@@ -137,8 +137,14 @@
             switch(this._is_map) {
 
                 case true:
-                    // remove.
+
                     this._is_map = false;
+
+                    // Remove the element from the dom.
+                    this.map_drag.remove();
+
+                    // ** ADJUST OTHER DIVS.
+
                 break;
 
                 case false:
@@ -151,6 +157,17 @@
                     // If the timeline is present..
                     if (this._is_timeline) {
 
+                        // Set dimensions.
+                        this.map_drag.css({
+                            'height': this.__getMapHeight(),
+                            'width': this.__getMapWidth(),
+                            'top': this.__getMapTopOffset()
+                        });
+
+                        // Append and reposition tag.
+                        this.dragbox.append(this.map_drag);
+                        this._position_tag(this.map_drag);
+
                     }
 
                     // If no timeline..
@@ -158,8 +175,8 @@
 
                         // Set dimensions.
                         this.map_drag.css({
-                            'height': this._dragbox_height,
-                            'width': this._dragbox_width
+                            'height': this.__getMapHeight(),
+                            'width': this.__getMapWidth()
                         });
 
                         // Append and reposition tag.
@@ -431,6 +448,18 @@
             }
 
             return width;
+
+        },
+
+        __getMapHeight: function() {
+
+            var height = this._top_block_height;
+
+            if (this._top_element == 'timeline') {
+                height = this._bottom_block_height;
+            }
+
+            return height;
 
         },
 
