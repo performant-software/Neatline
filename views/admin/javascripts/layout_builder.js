@@ -134,6 +134,8 @@
 
                 case false:
 
+                    this._is_map = true;
+
                     // Create the div.
                     this.map_drag = this.__createMapDiv();
 
@@ -157,8 +159,6 @@
 
                     }
 
-                    this._is_map = true;
-
                 break;
 
             }
@@ -175,6 +175,8 @@
                 break;
 
                 case false:
+
+                    this._is_timeline = true;
 
                     // Create the div.
                     this.timeline_drag = this.__createTimelineDiv();
@@ -219,8 +221,6 @@
 
                     }
 
-                    this._is_timeline = true;
-
                 break;
 
             }
@@ -237,6 +237,8 @@
                 break;
 
                 case false:
+
+                    this._is_undated_items = true;
 
                     // Create the div.
                     this.undated_items_drag = this.__createUndatedItemsDiv();
@@ -260,7 +262,23 @@
                     this.dragbox.append(this.undated_items_drag);
                     this._position_tag(this.undated_items_drag);
 
-                    this._is_undated_items = true;
+                    // Squeeze the map and timeline divs as necessary.
+                    var new_map_width = this.__getMapWidth();
+                    var new_timeline_width = this.__getTimelineWidth();
+
+                    this.map_drag.css('width', new_map_width + 'px');
+                    this.timeline_drag.css('width', new_timeline_width + 'px');
+
+                    // Adjust left offsets for map and timeline divs as necessary.
+                    var new_map_offset = this.__getMapLeftOffset();
+                    var new_timeline_offset = this.__getTimelineLeftOffset();
+
+                    this.map_drag.css('left', new_map_offset + 'px');
+                    this.timeline_drag.css('left', new_timeline_offset + 'px');
+
+                    // Reposition tags.
+                    this._position_tag(this.map_drag);
+                    this._position_tag(this.timeline_drag);
 
                 break;
 
@@ -339,7 +357,7 @@
 
             var left_offset = null;
 
-            if (this.undated_items_position == 'left') {
+            if (this._undated_items_position == 'left') {
                 left_offset = 0;
             }
 
@@ -363,6 +381,54 @@
             }
 
             return top_offset;
+
+        },
+
+        __getMapWidth: function() {
+
+            var width = this._dragbox_width;
+
+            if (this._undated_items_height == 'full' && this._is_undated_items) {
+                width -= this.options.undated_items_width;
+            }
+
+            return width;
+
+        },
+
+        __getMapLeftOffset: function() {
+
+            var offset = 0;
+
+            if (this._undated_items_height == 'full' && this._is_undated_items && this._undated_items_position == 'left') {
+                offset = this.options.undated_items_width;
+            }
+
+            return offset;
+
+        },
+
+        __getTimelineWidth: function() {
+
+            var width = this._dragbox_width;
+
+            if (this._is_undated_items) {
+                width -= this.options.undated_items_width;
+            }
+
+            return width;
+
+        },
+
+        __getTimelineLeftOffset: function() {
+
+            var offset = 0;
+
+            if (this._is_undated_items && this._undated_items_position == 'left') {
+                offset = this.options.undated_items_width;
+            }
+
+            return offset;
 
         }
 
