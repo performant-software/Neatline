@@ -53,9 +53,9 @@
             this._undated_items_height = 'partial'; // 'partial' or 'full'
 
             // By default, add all elements.
-            this._toggle_map();
+            // this._toggle_map();
             this._toggle_timeline();
-            this._toggle_undated_items();
+            // this._toggle_undated_items();
 
         },
 
@@ -124,8 +124,23 @@
                 break;
 
                 case false:
-                    // add.
+
+                    var timeline = $('<div id="drag-timeline" class="draggable"><span class="drag-tag">Timeline</span></div>');
+
+                    // if the map is on the map...
+                    if (this._is_map) {
+
+                    }
+
+                    // if no map...
+                    else {
+                        this.dragbox.append(timeline);
+                        timeline.css('height', '100%');
+                        this._position_tag(timeline);
+                    }
+
                     this._is_timeline = true;
+
                 break;
 
             }

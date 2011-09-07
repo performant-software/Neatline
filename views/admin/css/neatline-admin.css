@@ -216,5 +216,13 @@ span.drag-tag {
 }
 
 #drag-map {
-    background-color: #e4f1ff;
+    background-color: #f6f6f6;
+}
+
+#drag-timeline {
+    background-color: #ededed;
+}
+
+#drag-undated-items {
+    background-color: #e7e7e7;
 }
