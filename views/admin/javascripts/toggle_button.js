@@ -28,7 +28,10 @@
     $.widget('neatline.togglebutton', {
 
         options: {
-            pressed_by_default: false
+            pressed_by_default: false,
+            highlight_border_color: '#6393ff',
+            pressed_border_color: '#6393ff',
+            pressed_text_color: '#517fe6'
         },
 
         _create: function() {

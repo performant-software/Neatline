@@ -163,16 +163,16 @@ select[name="map"], select[name="timeline"] {
 }
 
 #options {
-    margin: 1.5em 0 0 0;
+    margin: 1.7em 0 0 0;
     display: block;
 }
 
 span.neatline-toggle-button {
     cursor: pointer;
-    color: #4e4e4e;
+    color: #acacac;
     font-size: 13px;
     font-family: Helvetica, Arial, sans-serif;
-    border: 1px solid #c5c5c5;
+    border: 1px solid #d9d9d9;
     padding: 0.4em 0.6em 0.4em 0.6em;
     margin: 0 1em 0 0;
     -moz-border-radius: 5px;
@@ -180,4 +180,23 @@ span.neatline-toggle-button {
     -khtml-border-radius: 5px;
     border-radius: 5px;
     font-weight: bold;
+/* IE10 */ 
+background-image: -ms-linear-gradient(top, #FFFFFF 0%, #F7F7F7 100%);
+
+/* Mozilla Firefox */ 
+background-image: -moz-linear-gradient(top, #FFFFFF 0%, #F7F7F7 100%);
+
+/* Opera */ 
+background-image: -o-linear-gradient(top, #FFFFFF 0%, #F7F7F7 100%);
+
+/* Webkit (Safari/Chrome 10) */ 
+background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #FFFFFF), color-stop(1, #F7F7F7));
+
+/* Webkit (Chrome 11+) */ 
+background-image: -webkit-linear-gradient(top, #FFFFFF 0%, #F7F7F7 100%);
+
+/* Proposed W3C Markup */ 
+background-image: linear-gradient(top, #FFFFFF 0%, #F7F7F7 100%);
+
+
 }
