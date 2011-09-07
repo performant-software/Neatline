@@ -63,9 +63,19 @@
             this.undated_items_drag = null;
 
             // By default, add all elements.
-            this._toggle_map();
-            this._toggle_timeline();
-            this._toggle_undated_items();
+            this._toggleMap();
+            this._toggleTimeline();
+            this._toggleUndatedItems();
+
+        },
+
+        _getPxHeights: function() {
+
+            this._dragbox_height = this.dragbox.height();
+            this._dragbox_width = this.dragbox.width();
+
+            this._top_block_height = this._dragbox_height * (this.options.top_block_percentage/100);
+            this._bottom_block_height = this._dragbox_height - this._top_block_height;
 
         },
 
@@ -166,11 +176,11 @@
                         // if map on top
                         if (this._top_element == 'map') {
 
-                            this.map_drag.css('height', this.options.top_block_percentage + '%');
+                            this.map_drag.css('height', this._top_block_height + 'px');
                             this._position_tag(this.map_drag);
 
                             this.dragbox.append(this.timeline_drag);
-                            this.timeline_drag.css('height', 100-this.options.top_block_percentage + '%');
+                            this.timeline_drag.css('height', this._bottom_block_height + 'px');
                             this._position_tag(this.timeline_drag);
 
                         }
