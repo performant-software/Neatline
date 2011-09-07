@@ -102,8 +102,8 @@
                     // if no timeline...
                     else {
                         this.dragbox.append(map);
-                        this._position_tag(map);
                         map.css('height', '100%');
+                        this._position_tag(map);
                     }
 
                     this._is_map = true;
@@ -152,7 +152,12 @@
 
         _position_tag: function(draggable) {
 
+            var tag = draggable.find('.drag-tag');
+            var draggable_height = draggable.height();
+            var tag_height = tag.height();
+            console.log(draggable_height);
 
+            tag.css('top', (draggable_height/2)-(tag_height/2) + 'px');
 
         },
 

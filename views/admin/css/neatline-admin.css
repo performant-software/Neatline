@@ -212,9 +212,9 @@ div.draggable {
 
 span.drag-tag {
     position: relative;
-    color: #fff;
+    color: #636363;
 }
 
 #drag-map {
-    background-color: #bddcff;
+    background-color: #e4f1ff;
 }
