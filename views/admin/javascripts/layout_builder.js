@@ -57,10 +57,8 @@
             this._undated_items_position = 'right'; // 'right' or 'left'
             this._undated_items_height = 'partial'; // 'partial' or 'full'
 
-            // Create class-globals for the drag divs.
-            this.map_drag = null;
-            this.timeline_drag = null;
-            this.undated_items_drag = null;
+            // Create draggers.
+            this._createDraggers();
 
             // By default, add all elements.
             this._toggleMap();
@@ -126,6 +124,25 @@
 
         },
 
+        _createDraggers: function() {
+
+            // Create the map.
+            this.map_drag = this.__createMapDiv();
+
+            // Create the timeline.
+            this.timeline_drag = this.__createTimelineDiv();
+
+            // Create the undated items.
+            this.undated_items_drag = this.__createUndatedItemsDiv();
+
+            // Inject.
+            this.dragbox.append(
+                this.map_drag,
+                this.timeline_drag,
+                this.undated_items_drag);
+
+        },
+
         _addDragEvents: function() {
 
 
@@ -151,9 +168,6 @@
 
                     this._is_map = true;
 
-                    // Create the div.
-                    this.map_drag = this.__createMapDiv();
-
                     // If the timeline is present..
                     if (this._is_timeline) {
 
@@ -163,10 +177,6 @@
                             'width': this.__getMapWidth(),
                             'top': this.__getMapTopOffset()
                         });
-
-                        // Append and reposition tag.
-                        this.dragbox.append(this.map_drag);
-                        this._position_tag(this.map_drag);
 
                     }
 
@@ -179,11 +189,12 @@
                             'width': this.__getMapWidth()
                         });
 
-                        // Append and reposition tag.
-                        this.dragbox.append(this.map_drag);
-                        this._position_tag(this.map_drag);
-
                     }
+
+                    // Show the div and reposition tag.
+                    this.map_drag.css('display', 'block');
+                    this._position_tag(this.map_drag);
+
 
                 break;
 
@@ -203,9 +214,6 @@
                 case false:
 
                     this._is_timeline = true;
-
-                    // Create the div.
-                    this.timeline_drag = this.__createTimelineDiv();
 
                     // If the map is present..
                     if (this._is_map) {
@@ -251,8 +259,8 @@
 
                         }
 
-                        // Append and position tag.
-                        this.dragbox.append(this.timeline_drag);
+                        // Show div and position tag.
+                        this.timeline_drag.css('display', 'block');
                         this._position_tag(this.timeline_drag);
 
                     }
@@ -262,7 +270,8 @@
 
                         this.timeline_drag.css('height', '100%');
 
-                        this.dragbox.append(this.timeline_drag);
+                        // Show div and position tag.
+                        this.timeline_drag.css('display', 'block');
                         this._position_tag(this.timeline_drag);
 
                     }
@@ -285,9 +294,6 @@
                 case false:
 
                     this._is_undated_items = true;
-
-                    // Create the div.
-                    this.undated_items_drag = this.__createUndatedItemsDiv();
 
                     // Calculate and set height.
                     var height = this.__getUndatedItemsHeight();
@@ -322,9 +328,13 @@
                     this.map_drag.css('left', new_map_offset + 'px');
                     this.timeline_drag.css('left', new_timeline_offset + 'px');
 
+                    // Show the div.
+                    this.undated_items_drag.css('display', 'block');
+
                     // Reposition tags.
                     this._position_tag(this.map_drag);
                     this._position_tag(this.timeline_drag);
+                    this._position_tag(this.undated_items_drag);
 
                 break;
 
