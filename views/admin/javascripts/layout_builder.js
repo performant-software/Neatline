@@ -31,7 +31,14 @@
             dragbox_id: 'drag-box',
             options_id: 'options',
             top_block_percentage: 60,
-            undated_items_width: 150
+            undated_items_width: 150,
+            gloss_fade_duration: 300,
+            colors: {
+                map: {
+                    default: '#eef7ff',
+                    target: '#dcefff'
+                }
+            }
         },
 
         _create: function() {
@@ -144,7 +151,20 @@
 
         _addDragEvents: function() {
 
+            var self = this;
 
+            // Gloss map.
+            this.map_drag.bind({
+
+                'mouseenter': function() {
+                    self.__mapHighlight('enter');
+                },
+
+                'mouseleave': function() {
+                    self.__mapHighlight('leave');
+                },
+
+            });
 
         },
 
@@ -292,9 +312,34 @@
 
         },
 
+        /*
+         * Glossing and dragging methods.
+         */
+
+        __mapHighlight: function(enter_or_leave) {
+
+            // Figure out which color to tween to.
+            switch (enter_or_leave) {
+ 
+                case 'enter':
+                    var target = this.options.colors.map.target
+                break;
+
+                case 'leave':
+                    var target = this.options.colors.map.default
+                break;
+
+            }
+
+            this.map_drag.animate({
+                'background-color': target
+            }, this.options.gloss_fade_duration);
+
+        },
+
 
         /*
-         * Helpers.
+         * Positioning calculators and toggling helpers.
          */
 
         __createMapDiv: function() {
