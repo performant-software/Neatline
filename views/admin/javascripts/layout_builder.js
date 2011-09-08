@@ -172,8 +172,8 @@
                     self.__mapHighlight('leave');
                 },
 
-                'mousedown': function() {
-                    self.__doMapDrag();
+                'mousedown': function(e) {
+                    self.__doMapDrag(e);
                 }
 
             });
@@ -429,19 +429,71 @@
 
         },
 
-        _doMapDrag: function() {
+        __doMapDrag: function(trigger_event_object) {
+
+            // Get starting coordinates.
+            var startingX = trigger_event_object.pageX;
+            var startingY = trigger_event_object.pageY;
+
+            // Bind self.
+            var self = this;
+
+            // Make the drag div see-through and always on top.
+            this.map_drag.css({
+                'opacity': 0.5,
+                'z-index': 99
+            });
+
+            // If the timeline is present, get its coordinates.
+            if (self._is_timeline) {
+                var timelineCoordinates = this.timeline_drag.offset();
+            }
+
+            this.map_drag.bind({
+
+                'mousemove': function(e) {
+
+                    // Calculate new offsets.
+                    var offsetX = e.pageX - startingX;
+                    var offsetY = e.pageY - startingY;
+
+                    // Apply new position.
+                    self.map_drag.css({
+                        'left': offsetX,
+                        'top': offsetY
+                    });
+
+                    // now, just for Wayne, 3 nested ifs.
+
+                    // If there is a timeline.
+                    if (self._is_timeline) {
+
+                        // If the timeline is on the bottom.
+                        if (self._top_element == 'map') {
+
+                            // If the cursor dips below the top border
+                            // of the timeline div, slide the timeline up.
+                            if (e.pageY > timelineCoordinates.top) {
+                                self.__slideTimelineUp();
+                            }
+
+                        }
+
+                    }
+
+                }
+
+            });
+
+        },
+
+        __doTimelineDrag: function() {
 
 
 
         },
 
-        _doTimelineDrag: function() {
-
-
-
-        },
-
-        _doUndatedItemsDrag: function() {
+        __doUndatedItemsDrag: function() {
 
 
 
