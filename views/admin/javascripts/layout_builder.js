@@ -63,7 +63,6 @@
             // By default, add all elements.
             this._toggleMap();
             this._toggleTimeline();
-            this._toggleUndatedItems();
 
             // Gloss.
             this._addDragEvents();
@@ -228,6 +227,7 @@
                     // Display none the timeline.
                     this.timeline_drag.css('display', 'none');
 
+
                 break;
 
                 case false:
@@ -243,6 +243,9 @@
 
             // Recalculate all positions for all divs.
             this._repositionDraggers();
+
+            // Toggle undated items in parallel with the timeline.
+            this._toggleUndatedItems();
 
         },
 
