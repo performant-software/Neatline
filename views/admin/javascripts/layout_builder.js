@@ -397,18 +397,18 @@
 
             // Figure out which color to tween to.
             switch (enter_or_leave) {
- 
+
                 case 'enter':
-                    var target = this.options.colors.map.target
+                    var target = this.options.colors.map.target;
                 break;
 
                 case 'leave':
-                    var target = this.options.colors.map.default
+                    var target = this.options.colors.map.default;
                 break;
 
             }
 
-            this.map_drag.stop().animate({
+            this.map_drag.animate({
                 'background-color': target
             }, this.options.gloss_fade_duration);
 
@@ -418,7 +418,7 @@
 
             // Figure out which color to tween to.
             switch (enter_or_leave) {
- 
+
                 case 'enter':
                     var target = this.options.colors.timeline.target
                 break;
@@ -429,7 +429,7 @@
 
             }
 
-            this.timeline_drag.stop().animate({
+            this.timeline_drag.animate({
                 'background-color': target
             }, this.options.gloss_fade_duration);
 
@@ -642,28 +642,55 @@
             var newTimelineHeight = this.__getTimelineHeight();
             var newUndatedItemsHeight = this.__getUndatedItemsHeight();
 
-            // Slide the timeline and undated items.
-            this.timeline_drag.stop().animate({
-                'height': newTimelineHeight,
-                'width': this.__getTimelineWidth(),
-                'top': this.__getTimelineTopOffset(),
-                'left': this.__getTimelineLeftOffset()
-            });
+            if (ending_slide) {
 
-            this.undated_items_drag.stop().animate({
-                'height': newUndatedItemsHeight,
-                'width': this.__getUndatedItemsWidth(),
-                'top': this.__getUndatedItemsTopOffset(),
-                'left': this.__getUndatedItemsLeftOffset()
-            }, function() {
+                // Slide the timeline and undated items.
+                this.timeline_drag.stop().animate({
+                    'height': newTimelineHeight,
+                    'width': this.__getTimelineWidth(),
+                    'top': this.__getTimelineTopOffset(),
+                    'left': this.__getTimelineLeftOffset(),
+                    'opacity': 1,
+                    'z-index': 0
+                });
 
-                // On complete, if the slide is an ending
-                // slide, unset the dragging tracker.
-                if (ending_slide) {
-                    self._is_dragging = false;
-                }
+                this.undated_items_drag.stop().animate({
+                    'height': newUndatedItemsHeight,
+                    'width': this.__getUndatedItemsWidth(),
+                    'top': this.__getUndatedItemsTopOffset(),
+                    'left': this.__getUndatedItemsLeftOffset(),
+                    'opacity': 1,
+                    'z-index': 0
+                }, function() {
 
-            });
+                    // On complete, if the slide is an ending
+                    // slide, unset the dragging tracker.
+                    if (ending_slide) {
+                        self._is_dragging = false;
+                    }
+
+                });
+
+            }
+
+            else {
+
+                // Slide the timeline and undated items.
+                this.timeline_drag.stop().animate({
+                    'height': newTimelineHeight,
+                    'width': this.__getTimelineWidth(),
+                    'top': this.__getTimelineTopOffset(),
+                    'left': this.__getTimelineLeftOffset()
+                });
+
+                this.undated_items_drag.stop().animate({
+                    'height': newUndatedItemsHeight,
+                    'width': this.__getUndatedItemsWidth(),
+                    'top': this.__getUndatedItemsTopOffset(),
+                    'left': this.__getUndatedItemsLeftOffset()
+                });
+
+            }
 
             this._animate_position_tag(this.timeline_drag, newTimelineHeight);
             this._animate_position_tag(this.undated_items_drag, newUndatedItemsHeight);
