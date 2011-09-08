@@ -87,8 +87,8 @@
         _getPxConstants: function() {
 
             this._dragbox_height = this.dragbox.height();
-
             this._dragbox_width = this.dragbox.width();
+            this._dragbox_position = this.dragbox.offset();
 
             this._top_block_height = this._dragbox_height *
                 (this.options.top_block_percentage/100);
@@ -497,14 +497,14 @@
                     if (self._is_timeline) {
 
                         // Get current timeline top offset.
-                        var timelineTopOffset = this.__getTimelineTopOffset();
+                        var timelineTopOffset = self.__getTimelineTopOffset();
 
                         // If the timeline is on the bottom.
                         if (self._top_element == 'map') {
 
                             // If the cursor dips below the top border
                             // of the timeline div, slide the timeline up.
-                            if (e.pageY > self.timelineCoordinates.top) {
+                            if (e.pageY > (timelineTopOffset + self._dragbox_position.top)) {
                                 self._top_element = 'timeline';
                                 self.__slideTimeline(false);
                             }
@@ -516,7 +516,7 @@
 
                             // If the cursor moves above the bottom border
                             // of the timeline div, slide the timeline down.
-                            if (e.pageY < (self.timelineCoordinates.top + self._bottom_block_height)) {
+                            if (e.pageY < (self._dragbox_position.top + self._top_block_height)) {
                                 self._top_element = 'map';
                                 self.__slideTimeline(false);
                             }
@@ -530,10 +530,7 @@
                 'mouseup': function() {
 
                     self.__slideMap(true);
-                    self.map_drag.unbind('mousemove').animate({
-                        'opacity': 1,
-                        'z-index': 0
-                    });
+                    self.map_drag.unbind('mousemove');
 
                 }
 
@@ -543,7 +540,86 @@
 
         __doTimelineDrag: function() {
 
+            this._is_dragging = true;
 
+            // Get starting pointer coordinates.
+            var startingX = trigger_event_object.pageX;
+            var startingY = trigger_event_object.pageY;
+
+            // Get starting div offsets.
+            var startingOffsetX = this.__getMapLeftOffset();
+            var startingOffsetY = this.__getMapTopOffset();
+
+            // Bind self.
+            var self = this;
+
+            // Make the drag divs see-through and always on top.
+            this.timeline_drag.css({
+                'opacity': 0.5,
+                'z-index': 99
+            });
+
+            this.undated_item_drag.css({
+                'opacity': 0.5,
+                'z-index': 99
+            });
+
+            this.timeline_drag.bind({
+
+                'mousemove': function(e) {
+
+                    // Calculate new offsets.
+                    var offsetX = e.pageX - startingX;
+                    var offsetY = e.pageY - startingY;
+
+                    // Apply new position.
+                    self.timeline_drag.css({
+                        'left': startingOffsetX + offsetX,
+                        'top': startingOffsetY + offsetY
+                    });
+
+                    // If there is a map.
+                    if (self._is_map) {
+
+                        // Get current timeline top offset.
+                        var timelineTopOffset = self.__getTimelineTopOffset();
+
+                        // If the timeline is on the bottom.
+                        if (self._top_element == 'map') {
+
+                            // If the cursor dips below the top border
+                            // of the timeline div, slide the timeline up.
+                            if (e.pageY > (timelineTopOffset + self._dragbox_position.top)) {
+                                self._top_element = 'timeline';
+                                self.__slideTimeline(false);
+                            }
+
+                        }
+
+                        // If the timeline is on the top.
+                        else {
+
+                            // If the cursor moves above the bottom border
+                            // of the timeline div, slide the timeline down.
+                            if (e.pageY < (self._dragbox_position.top + self._top_block_height)) {
+                                self._top_element = 'map';
+                                self.__slideTimeline(false);
+                            }
+
+                        }
+
+                    }
+
+                },
+
+                'mouseup': function() {
+
+                    self.__slideMap(true);
+                    self.map_drag.unbind('mousemove');
+
+                }
+
+            });
 
         },
 
@@ -592,21 +668,35 @@
             var self = this;
             var newMapHeight = this.__getMapHeight();
 
-            // Slide the timeline and undated items.
-            this.map_drag.stop().animate({
-                'height': newMapHeight,
-                'width': this.__getMapWidth(),
-                'top': this.__getMapTopOffset(),
-                'left': this.__getMapLeftOffset()
-            }, function() {
+            if (ending_slide) {
 
-                // On complete, if the slide is an ending
-                // slide, unset the dragging tracker.
-                if (ending_slide) {
-                    self._is_dragging = false;
-                }
+                // Slide the timeline and undated items.
+                this.map_drag.stop().animate({
+                    'height': newMapHeight,
+                    'width': this.__getMapWidth(),
+                    'top': this.__getMapTopOffset(),
+                    'left': this.__getMapLeftOffset(),
+                    'opacity': 1,
+                    'z-index': 0
+                }, function() {
+                    // On complete, if the slide is an ending
+                    // slide, unset the dragging tracker.
+                        self._is_dragging = false;
+                });
 
-            });
+            }
+
+            else {
+
+                // Slide the timeline and undated items.
+                this.map_drag.stop().animate({
+                    'height': newMapHeight,
+                    'width': this.__getMapWidth(),
+                    'top': this.__getMapTopOffset(),
+                    'left': this.__getMapLeftOffset()
+                });
+
+            }
 
             this._animate_position_tag(this.map_drag, newMapHeight);
 
