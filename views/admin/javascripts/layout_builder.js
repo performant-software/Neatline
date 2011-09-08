@@ -684,37 +684,22 @@
 
                     }
 
-                    // // If there is a map.
-                    // if (self._is_map) {
+                    // If udi is on the left.
+                    else {
 
-                    //     // Get current map top offset.
-                    //     var mapTopOffset = self.__getMapTopOffset();
+                        // If the cursor crosses over the centerline going left.
+                        if (e.pageX > (self._dragbox_width / 2)) {
 
-                    //     // If the map is on the bottom.
-                    //     if (self._top_element == 'timeline') {
+                            self._undated_items_position = 'right';
+                            self.__slideTimeline(false);
 
-                    //         // If the cursor dips below the top border
-                    //         // of the timeline div, slide the timeline up.
-                    //         if (e.pageY > (mapTopOffset + self._dragbox_position.top)) {
-                    //             self._top_element = 'map';
-                    //             self.__slideMap(false);
-                    //         }
+                            if (self._undated_items_height == 'full') {
+                                self.__slideMap(false);
+                            }
 
-                    //     }
+                        }
 
-                    //     // If the timeline is on the top.
-                    //     else {
-
-                    //         // If the cursor moves above the bottom border
-                    //         // of the timeline div, slide the timeline down.
-                    //         if (e.pageY < (self._dragbox_position.top + self._top_block_height)) {
-                    //             self._top_element = 'timeline';
-                    //             self.__slideMap(false);
-                    //         }
-
-                    //     }
-
-                    // }
+                    }
 
                 },
 
