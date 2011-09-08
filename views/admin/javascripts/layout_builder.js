@@ -73,7 +73,7 @@
             // Set tracker variables for element position.
             this._top_element = 'map'; // 'map' or 'timeline'
             this._undated_items_position = 'right'; // 'right' or 'left'
-            this._undated_items_height = 'partial'; // 'partial' or 'full'
+            this._undated_items_height = 'full'; // 'partial' or 'full'
 
             // By default, add all elements.
             this._toggleMap();
@@ -224,9 +224,9 @@
                     }
                 },
 
-                'mousedown': function() {
+                'mousedown': function(e) {
                     if (!this._is_dragging) {
-                        self.__doUndatedItemsDrag();
+                        self.__doUndatedItemsDrag(e);
                     }
                 }
 
@@ -506,7 +506,7 @@
                             // of the timeline div, slide the timeline up.
                             if (e.pageY > (timelineTopOffset + self._dragbox_position.top)) {
                                 self._top_element = 'timeline';
-                                self.__slideTimeline(false);
+                                self.__slideTimelineAndUndatedItems(false);
                             }
 
                         }
@@ -518,7 +518,7 @@
                             // of the timeline div, slide the timeline down.
                             if (e.pageY < (self._dragbox_position.top + self._top_block_height)) {
                                 self._top_element = 'map';
-                                self.__slideTimeline(false);
+                                self.__slideTimelineAndUndatedItems(false);
                             }
 
                         }
@@ -580,10 +580,12 @@
                         'top': timelineStartingOffsetY + offsetY
                     });
 
-                    self.undated_items_drag.css({
-                        'left': undatedItemsStartingOffsetX + offsetX,
-                        'top': undatedItemsStartingOffsetY + offsetY
-                    });
+                    if (self._undated_items_height == 'partial') {
+                        self.undated_items_drag.css({
+                            'left': undatedItemsStartingOffsetX + offsetX,
+                            'top': undatedItemsStartingOffsetY + offsetY
+                        });
+                    }
 
                     // If there is a map.
                     if (self._is_map) {
@@ -621,7 +623,7 @@
 
                 'mouseup': function() {
 
-                    self.__slideTimeline(true);
+                    self.__slideTimelineAndUndatedItems(true);
                     self.timeline_drag.unbind('mousemove');
 
                 }
@@ -630,13 +632,147 @@
 
         },
 
-        __doUndatedItemsDrag: function() {
+        __doUndatedItemsDrag: function(trigger_event_object) {
 
+            this._is_dragging = true;
 
+            // Get starting pointer coordinates.
+            var startingX = trigger_event_object.pageX;
+            var startingY = trigger_event_object.pageY;
+
+            // Get starting div offsets.
+            var StartingOffsetX = this.__getUndatedItemsLeftOffset();
+            var StartingOffsetY = this.__getUndatedItemsTopOffset();
+
+            // Bind self.
+            var self = this;
+
+            // Make the drag div see-through and always on top.
+            this.undated_items_drag.css({
+                'opacity': 0.5,
+                'z-index': 99
+            });
+
+            this.undated_items_drag.bind({
+
+                'mousemove': function(e) {
+
+                    // Calculate new offsets.
+                    var offsetX = e.pageX - startingX;
+                    var offsetY = e.pageY - startingY;
+
+                    // Apply new position.
+                    self.undated_items_drag.css({
+                        'left': StartingOffsetX + offsetX,
+                        'top': StartingOffsetY + offsetY
+                    });
+
+                    // If udi is on the right.
+                    if (self._undated_items_position == 'right') {
+
+                        // If the cursor crosses over the centerline going left.
+                        if (e.pageX < (self._dragbox_width / 2)) {
+
+                            self._undated_items_position = 'left';
+                            self.__slideTimeline(false);
+
+                            if (self._undated_items_height == 'full') {
+                                self.__slideMap(false);
+                            }
+
+                        }
+
+                    }
+
+                    // // If there is a map.
+                    // if (self._is_map) {
+
+                    //     // Get current map top offset.
+                    //     var mapTopOffset = self.__getMapTopOffset();
+
+                    //     // If the map is on the bottom.
+                    //     if (self._top_element == 'timeline') {
+
+                    //         // If the cursor dips below the top border
+                    //         // of the timeline div, slide the timeline up.
+                    //         if (e.pageY > (mapTopOffset + self._dragbox_position.top)) {
+                    //             self._top_element = 'map';
+                    //             self.__slideMap(false);
+                    //         }
+
+                    //     }
+
+                    //     // If the timeline is on the top.
+                    //     else {
+
+                    //         // If the cursor moves above the bottom border
+                    //         // of the timeline div, slide the timeline down.
+                    //         if (e.pageY < (self._dragbox_position.top + self._top_block_height)) {
+                    //             self._top_element = 'timeline';
+                    //             self.__slideMap(false);
+                    //         }
+
+                    //     }
+
+                    // }
+
+                },
+
+                'mouseup': function() {
+
+                    self.__slideUndatedItems(true);
+                    self.undated_items_drag.unbind('mousemove');
+
+                }
+
+            });
 
         },
 
         __slideTimeline: function(ending_slide) {
+
+            var self = this;
+            var newTimelineHeight = this.__getTimelineHeight();
+
+            if (ending_slide) {
+
+                // Slide the timeline and undated items.
+                this.timeline_drag.stop().animate({
+                    'height': newTimelineHeight,
+                    'width': this.__getTimelineWidth(),
+                    'top': this.__getTimelineTopOffset(),
+                    'left': this.__getTimelineLeftOffset(),
+                    'opacity': 1,
+                    'z-index': 0
+                }, function() {
+
+                    // On complete, if the slide is an ending
+                    // slide, unset the dragging tracker.
+                    if (ending_slide) {
+                        self._is_dragging = false;
+                    }
+
+                });
+
+            }
+
+            else {
+
+                // Slide the timeline and undated items.
+                this.timeline_drag.stop().animate({
+                    'height': newTimelineHeight,
+                    'width': this.__getTimelineWidth(),
+                    'top': this.__getTimelineTopOffset(),
+                    'left': this.__getTimelineLeftOffset()
+                });
+
+            }
+
+            this._animate_position_tag(this.timeline_drag, newTimelineHeight);
+
+        },
+
+        __slideTimelineAndUndatedItems: function(ending_slide) {
 
             var self = this;
             var newTimelineHeight = this.__getTimelineHeight();
@@ -733,6 +869,45 @@
             }
 
             this._animate_position_tag(this.map_drag, newMapHeight);
+
+        },
+
+        __slideUndatedItems: function(ending_slide) {
+
+            var self = this;
+            var newUndatedItemsHeight = this.__getUndatedItemsHeight();
+
+            if (ending_slide) {
+
+                // Slide the timeline and undated items.
+                this.undated_items_drag.stop().animate({
+                    'height': newUndatedItemsHeight,
+                    'width': this.__getUndatedItemsWidth(),
+                    'top': this.__getUndatedItemsTopOffset(),
+                    'left': this.__getUndatedItemsLeftOffset(),
+                    'opacity': 1,
+                    'z-index': 0
+                }, function() {
+                    // On complete, if the slide is an ending
+                    // slide, unset the dragging tracker.
+                        self._is_dragging = false;
+                });
+
+            }
+
+            else {
+
+                // Slide the timeline and undated items.
+                this.undated_items_drag.stop().animate({
+                    'height': newUndatedItemsHeight,
+                    'width': this.__getUndatedItemsWidth(),
+                    'top': this.__getUndatedItemsTopOffset(),
+                    'left': this.__getUndatedItemsLeftOffset()
+                });
+
+            }
+
+            this._animate_position_tag(this.undated_items_drag, newUndatedItemsHeight);
 
         },
 
