@@ -328,12 +328,20 @@
 
             else {
 
-                if (this._top_element == 'map') {
-                    height = this._bottom_block_height;
+                if (this._is_map) {
+
+                    if (this._top_element == 'map') {
+                        height = this._bottom_block_height;
+                    }
+
+                    else {
+                        height = this._top_block_height;
+                    }
+
                 }
 
                 else {
-                    height = this._top_block_height;
+                    height = this._dragbox_height;
                 }
 
             }
@@ -374,8 +382,16 @@
 
             else {
 
-                if (this._top_element == 'map') {
-                    top_offset = this._top_block_height;
+                if (this._is_map) {
+
+                    if (this._top_element == 'map') {
+                        top_offset = this._top_block_height;
+                    }
+
+                    else {
+                        top_offset = 0;
+                    }
+
                 }
 
                 else {
