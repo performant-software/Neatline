@@ -201,9 +201,9 @@
                     }
                 },
 
-                'mousedown': function() {
+                'mousedown': function(e) {
                     if (!this._is_dragging) {
-                        self.__doTimelineDrag();
+                        self.__doTimelineDrag(e);
                     }
                 }
 
@@ -538,7 +538,7 @@
 
         },
 
-        __doTimelineDrag: function() {
+        __doTimelineDrag: function(trigger_event_object) {
 
             this._is_dragging = true;
 
@@ -547,8 +547,10 @@
             var startingY = trigger_event_object.pageY;
 
             // Get starting div offsets.
-            var startingOffsetX = this.__getMapLeftOffset();
-            var startingOffsetY = this.__getMapTopOffset();
+            var timelineStartingOffsetX = this.__getTimelineLeftOffset();
+            var timelineStartingOffsetY = this.__getTimelineTopOffset();
+            var undatedItemsStartingOffsetX = this.__getUndatedItemsLeftOffset();
+            var undatedItemsStartingOffsetY = this.__getUndatedItemsTopOffset();
 
             // Bind self.
             var self = this;
@@ -559,7 +561,7 @@
                 'z-index': 99
             });
 
-            this.undated_item_drag.css({
+            this.undated_items_drag.css({
                 'opacity': 0.5,
                 'z-index': 99
             });
@@ -574,24 +576,29 @@
 
                     // Apply new position.
                     self.timeline_drag.css({
-                        'left': startingOffsetX + offsetX,
-                        'top': startingOffsetY + offsetY
+                        'left': timelineStartingOffsetX + offsetX,
+                        'top': timelineStartingOffsetY + offsetY
+                    });
+
+                    self.undated_items_drag.css({
+                        'left': undatedItemsStartingOffsetX + offsetX,
+                        'top': undatedItemsStartingOffsetY + offsetY
                     });
 
                     // If there is a map.
                     if (self._is_map) {
 
-                        // Get current timeline top offset.
-                        var timelineTopOffset = self.__getTimelineTopOffset();
+                        // Get current map top offset.
+                        var mapTopOffset = self.__getMapTopOffset();
 
-                        // If the timeline is on the bottom.
-                        if (self._top_element == 'map') {
+                        // If the map is on the bottom.
+                        if (self._top_element == 'timeline') {
 
                             // If the cursor dips below the top border
                             // of the timeline div, slide the timeline up.
-                            if (e.pageY > (timelineTopOffset + self._dragbox_position.top)) {
-                                self._top_element = 'timeline';
-                                self.__slideTimeline(false);
+                            if (e.pageY > (mapTopOffset + self._dragbox_position.top)) {
+                                self._top_element = 'map';
+                                self.__slideMap(false);
                             }
 
                         }
@@ -602,8 +609,8 @@
                             // If the cursor moves above the bottom border
                             // of the timeline div, slide the timeline down.
                             if (e.pageY < (self._dragbox_position.top + self._top_block_height)) {
-                                self._top_element = 'map';
-                                self.__slideTimeline(false);
+                                self._top_element = 'timeline';
+                                self.__slideMap(false);
                             }
 
                         }
@@ -614,8 +621,8 @@
 
                 'mouseup': function() {
 
-                    self.__slideMap(true);
-                    self.map_drag.unbind('mousemove');
+                    self.__slideTimeline(true);
+                    self.timeline_drag.unbind('mousemove');
 
                 }
 
