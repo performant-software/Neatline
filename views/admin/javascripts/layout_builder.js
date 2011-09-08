@@ -37,6 +37,14 @@
                 map: {
                     default: '#eef7ff',
                     target: '#dcefff'
+                },
+                timeline: {
+                    default: '#fffded',
+                    target: '#fffad2'
+                },
+                undated_items: {
+                    default: '#ffedef',
+                    target: '#ffdbdf'
                 }
             }
         },
@@ -162,6 +170,32 @@
 
                 'mouseleave': function() {
                     self.__mapHighlight('leave');
+                },
+
+            });
+
+            // Gloss timeline.
+            this.timeline_drag.bind({
+
+                'mouseenter': function() {
+                    self.__timelineHighlight('enter');
+                },
+
+                'mouseleave': function() {
+                    self.__timelineHighlight('leave');
+                },
+
+            });
+
+            // Gloss undated items.
+            this.undated_items_drag.bind({
+
+                'mouseenter': function() {
+                    self.__undatedItemsHighlight('enter');
+                },
+
+                'mouseleave': function() {
+                    self.__undatedItemsHighlight('leave');
                 },
 
             });
@@ -332,6 +366,48 @@
             }
 
             this.map_drag.animate({
+                'background-color': target
+            }, this.options.gloss_fade_duration);
+
+        },
+
+        __timelineHighlight: function(enter_or_leave) {
+
+            // Figure out which color to tween to.
+            switch (enter_or_leave) {
+ 
+                case 'enter':
+                    var target = this.options.colors.timeline.target
+                break;
+
+                case 'leave':
+                    var target = this.options.colors.timeline.default
+                break;
+
+            }
+
+            this.timeline_drag.animate({
+                'background-color': target
+            }, this.options.gloss_fade_duration);
+
+        },
+
+        __undatedItemsHighlight: function(enter_or_leave) {
+
+            // Figure out which color to tween to.
+            switch (enter_or_leave) {
+ 
+                case 'enter':
+                    var target = this.options.colors.undated_items.target
+                break;
+
+                case 'leave':
+                    var target = this.options.colors.undated_items.default
+                break;
+
+            }
+
+            this.undated_items_drag.animate({
                 'background-color': target
             }, this.options.gloss_fade_duration);
 
