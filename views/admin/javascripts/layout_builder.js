@@ -179,10 +179,12 @@
 
                 'mouseenter': function() {
                     self.__timelineHighlight('enter');
+                    self.__undatedItemsHighlight('enter');
                 },
 
                 'mouseleave': function() {
                     self.__timelineHighlight('leave');
+                    self.__undatedItemsHighlight('leave');
                 },
 
             });
@@ -367,7 +369,7 @@
 
             }
 
-            this.map_drag.animate({
+            this.map_drag.stop().animate({
                 'background-color': target
             }, this.options.gloss_fade_duration);
 
@@ -388,7 +390,7 @@
 
             }
 
-            this.timeline_drag.animate({
+            this.timeline_drag.stop().animate({
                 'background-color': target
             }, this.options.gloss_fade_duration);
 
@@ -409,7 +411,7 @@
 
             }
 
-            this.undated_items_drag.animate({
+            this.undated_items_drag.stop().animate({
                 'background-color': target
             }, this.options.gloss_fade_duration);
 
