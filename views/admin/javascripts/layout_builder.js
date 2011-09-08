@@ -172,6 +172,10 @@
                     self.__mapHighlight('leave');
                 },
 
+                'mousedown': function() {
+                    self.__doMapDrag();
+                }
+
             });
 
             // Gloss timeline.
@@ -187,6 +191,10 @@
                     self.__undatedItemsHighlight('leave');
                 },
 
+                'mousedown': function() {
+                    self.__doTimelineDrag();
+                }
+
             });
 
             // Gloss undated items.
@@ -199,6 +207,10 @@
                 'mouseleave': function() {
                     self.__undatedItemsHighlight('leave');
                 },
+
+                'mousedown': function() {
+                    self.__doUndatedItemsDrag();
+                }
 
             });
 
@@ -414,6 +426,24 @@
             this.undated_items_drag.stop().animate({
                 'background-color': target
             }, this.options.gloss_fade_duration);
+
+        },
+
+        _doMapDrag: function() {
+
+
+
+        },
+
+        _doTimelineDrag: function() {
+
+
+
+        },
+
+        _doUndatedItemsDrag: function() {
+
+
 
         },
 
