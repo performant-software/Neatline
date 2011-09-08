@@ -281,7 +281,6 @@
                     // Display none the timeline.
                     this.timeline_drag.css('display', 'none');
 
-
                 break;
 
                 case false:
@@ -300,6 +299,9 @@
 
             // Toggle undated items in parallel with the timeline.
             this._toggleUndatedItems();
+
+            // Toggle the undated items toggle button.
+            this.__toggleUndatedItemsButton();
 
         },
 
@@ -396,7 +398,7 @@
 
             // Figure out which color to tween to.
             switch (enter_or_leave) {
- 
+
                 case 'enter':
                     var target = this.options.colors.undated_items.target
                 break;
@@ -417,6 +419,18 @@
         /*
          * Positioning calculators and toggling helpers.
          */
+
+        __toggleUndatedItemsButton: function() {
+
+            if (this._is_timeline) {
+                $('#toggle-undated-items').css('display', 'inline');
+            }
+
+            else {
+                $('#toggle-undated-items').css('display', 'none');
+            }
+
+        },
 
         __createMapDiv: function() {
 
