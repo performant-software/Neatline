@@ -450,7 +450,7 @@
 
             }
 
-            this.undated_items_drag.stop().animate({
+            this.undated_items_drag.clearQueue().animate({
                 'background-color': target
             }, this.options.gloss_fade_duration);
 
