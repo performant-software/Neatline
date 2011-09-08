@@ -358,6 +358,15 @@
 
         },
 
+        _animate_position_tag: function(draggable, height) {
+
+            var tag = draggable.find('.drag-tag');
+            var tag_height = tag.height();
+
+            tag.animate({ 'top': (height/2)-(tag_height/2) + 'px' });
+
+        },
+
         _destroy: function() {
 
         },
@@ -463,7 +472,7 @@
                         'top': offsetY
                     });
 
-                    // now, just for Wayne, 3 nested ifs.
+                    // now, just for Wayne, 3 nested ifs inside of a mousemove callback.
 
                     // If there is a timeline.
                     if (self._is_timeline) {
@@ -496,6 +505,24 @@
         __doUndatedItemsDrag: function() {
 
 
+
+        },
+
+        __slideTimelineUp: function() {
+
+            this._top_element = 'timeline';
+
+            var newHeight = this.__getTimelineHeight();
+
+            // Do the slides.
+            this.timeline_drag.animate({
+                'height': newHeight,
+                'width': this.__getTimelineWidth(),
+                'top': this.__getTimelineTopOffset(),
+                'left': this.__getTimelineLeftOffset()
+            });
+
+            this._animate_position_tag(this.timeline_drag, newHeight);
 
         },
 
