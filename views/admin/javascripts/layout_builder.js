@@ -112,14 +112,14 @@
 
             $('#toggle-timeline').togglebutton({
                 pressed_by_default: true,
-                press: function() { },
-                unpress: function() { }
+                press: $.proxy(this._toggleTimeline, this),
+                unpress: $.proxy(this._toggleTimeline, this)
             });
 
             $('#toggle-undated-items').togglebutton({
                 pressed_by_default: true,
-                press: function() { },
-                unpress: function() { }
+                press: $.proxy(this._toggleUndatedItems, this),
+                unpress: $.proxy(this._toggleUndatedItems, this)
             });
 
         },
@@ -205,7 +205,7 @@
 
                     this._is_map = true;
 
-                    // Show the div and reposition tag.
+                    // Show the div.
                     this.map_drag.css('display', 'block');
 
                 break;
@@ -222,78 +222,27 @@
             switch(this._is_timeline) {
 
                 case true:
-                    // remove.
+
                     this._is_timeline = false;
+
+                    // Display none the timeline.
+                    this.timeline_drag.css('display', 'none');
+
                 break;
 
                 case false:
 
                     this._is_timeline = true;
 
-                    // If the map is present..
-                    if (this._is_map) {
-
-                        // If the map is on top..
-                        if (this._top_element == 'map') {
-
-                            // Shrink the height of the map and reposition tag.
-                            this.map_drag.css('height', this._top_block_height + 'px');
-                            this._position_tag(this.map_drag);
-
-                            // Set css.
-                            this.timeline_drag.css({
-                                'height': this._bottom_block_height + 'px',
-                                'width': this._dragbox_width + 'px',
-                                'top': this._top_block_height + 'px'
-                            });
-
-                        }
-
-                        // If the timeline is on top..
-                        else {
-
-                            // Shrink the height of the map, adjust top offset.
-                            var new_map_top_offset = this.__getMapTopOffset();
-                            var new_timeline_top_offset = this.__getTimelineTopOffset();
-
-                            // Set css.
-                            this.map_drag.css({
-                                'height': this._bottom_block_height + 'px',
-                                'top': new_map_top_offset + 'px'
-                            });
-
-                            this.timeline_drag.css({
-                                'height': this._top_block_height + 'px',
-                                'width': this._dragbox_width + 'px',
-                                'top': '0px'
-                            });
-
-                            // Reposition tags.
-                            this._position_tag(this.map_drag);
-                            this._position_tag(this.timeline_drag);
-
-                        }
-
-                        // Show div and position tag.
-                        this.timeline_drag.css('display', 'block');
-                        this._position_tag(this.timeline_drag);
-
-                    }
-
-                    // if no map
-                    else {
-
-                        this.timeline_drag.css('height', '100%');
-
-                        // Show div and position tag.
-                        this.timeline_drag.css('display', 'block');
-                        this._position_tag(this.timeline_drag);
-
-                    }
+                    // Show the div.
+                    this.timeline_drag.css('display', 'block');
 
                 break;
 
             }
+
+            // Recalculate all positions for all divs.
+            this._repositionDraggers();
 
         },
 
@@ -302,58 +251,27 @@
             switch(this._is_undated_items) {
 
                 case true:
-                    // remove.
+
                     this._is_undated_items = false;
+
+                    // Display none the timeline.
+                    this.undated_items_drag.css('display', 'none');
+
                 break;
 
                 case false:
 
                     this._is_undated_items = true;
 
-                    // Calculate and set height.
-                    var height = this.__getUndatedItemsHeight();
-                    this.undated_items_drag.css('height', height + 'px');
-
-                    // Set width property.
-                    this.undated_items_drag.css('width', this.options.undated_items_width + 'px');
-
-                    // Calculate and set left offset.
-                    var left_offset = this.__getUndatedItemsLeftOffset();
-                    this.undated_items_drag.css('left', left_offset + 'px');
-
-                    // Calculate and set top offset.
-                    var top_offset = this.__getUndatedItemsTopOffset();
-                    this.undated_items_drag.css('top', top_offset + 'px');
-
-                    // Append and reposition label.
-                    this.dragbox.append(this.undated_items_drag);
-                    this._position_tag(this.undated_items_drag);
-
-                    // Squeeze the map and timeline divs as necessary.
-                    var new_map_width = this.__getMapWidth();
-                    var new_timeline_width = this.__getTimelineWidth();
-
-                    this.map_drag.css('width', new_map_width + 'px');
-                    this.timeline_drag.css('width', new_timeline_width + 'px');
-
-                    // Adjust left offsets for map and timeline divs as necessary.
-                    var new_map_offset = this.__getMapLeftOffset();
-                    var new_timeline_offset = this.__getTimelineLeftOffset();
-
-                    this.map_drag.css('left', new_map_offset + 'px');
-                    this.timeline_drag.css('left', new_timeline_offset + 'px');
-
                     // Show the div.
                     this.undated_items_drag.css('display', 'block');
-
-                    // Reposition tags.
-                    this._position_tag(this.map_drag);
-                    this._position_tag(this.timeline_drag);
-                    this._position_tag(this.undated_items_drag);
 
                 break;
 
             }
+
+            // Recalculate all positions for all divs.
+            this._repositionDraggers();
 
         },
 
@@ -486,8 +404,14 @@
 
             var height = this._top_block_height;
 
-            if (this._top_element == 'timeline') {
-                height = this._bottom_block_height;
+            if (this._is_timeline) {
+                if (this._top_element == 'map') {
+                    height = this._top_block_height;
+                }
+            }
+
+            else {
+                height = this._dragbox_height;
             }
 
             return height;
