@@ -43,6 +43,9 @@
             // Get fixed pixel values for heights.
             this._getPxConstants();
 
+            // Create draggers.
+            this._createDraggers();
+
             // Squash text selection and gloss the buttons.
             this._disableSelect();
             this._createButtons();
@@ -56,9 +59,6 @@
             this._top_element = 'map'; // 'map' or 'timeline'
             this._undated_items_position = 'right'; // 'right' or 'left'
             this._undated_items_height = 'partial'; // 'partial' or 'full'
-
-            // Create draggers.
-            this._createDraggers();
 
             // By default, add all elements.
             this._toggleMap();
@@ -149,6 +149,45 @@
 
         },
 
+        _repositionDraggers: function() {
+
+            // Map.
+            this.map_drag.css({
+                'height': this.__getMapHeight(),
+                'width': this.__getMapWidth(),
+                'top': this.__getMapTopOffset(),
+                'left': this.__getMapLeftOffset()
+            });
+
+            // Timeline.
+            this.timeline_drag.css({
+                'height': this.__getTimelineHeight(),
+                'width': this.__getTimelineWidth(),
+                'top': this.__getTimelineTopOffset(),
+                'left': this.__getTimelineLeftOffset()
+            });
+
+            // Undated items.
+            this.undated_items_drag.css({
+                'height': this.__getUndatedItemsHeight(),
+                'width': this.__getUndatedItemsWidth(),
+                'top': this.__getUndatedItemsTopOffset(),
+                'left': this.__getUndatedItemsLeftOffset()
+            });
+
+            // Center tags.
+            this._centerAllTags();
+
+        },
+
+        _centerAllTags: function() {
+
+            this._position_tag(this.map_drag);
+            this._position_tag(this.timeline_drag);
+            this._position_tag(this.undated_items_drag);
+
+        },
+
         _toggleMap: function() {
 
             switch(this._is_map) {
@@ -157,10 +196,8 @@
 
                     this._is_map = false;
 
-                    // Remove the element from the dom.
-                    this.map_drag.remove();
-
-                    // ** ADJUST OTHER DIVS.
+                    // Display none the map.
+                    this.map_drag.css('display', 'none');
 
                 break;
 
@@ -168,37 +205,15 @@
 
                     this._is_map = true;
 
-                    // If the timeline is present..
-                    if (this._is_timeline) {
-
-                        // Set dimensions.
-                        this.map_drag.css({
-                            'height': this.__getMapHeight(),
-                            'width': this.__getMapWidth(),
-                            'top': this.__getMapTopOffset()
-                        });
-
-                    }
-
-                    // If no timeline..
-                    else {
-
-                        // Set dimensions.
-                        this.map_drag.css({
-                            'height': this.__getMapHeight(),
-                            'width': this.__getMapWidth()
-                        });
-
-                    }
-
                     // Show the div and reposition tag.
                     this.map_drag.css('display', 'block');
-                    this._position_tag(this.map_drag);
-
 
                 break;
 
             }
+
+            // Recalculate all positions for all divs.
+            this._repositionDraggers();
 
         },
 
@@ -409,6 +424,12 @@
 
         },
 
+        __getUndatedItemsWidth: function() {
+
+            return this.options.undated_items_width;
+
+        },
+
         __getUndatedItemsLeftOffset: function() {
 
             var left_offset = null;
@@ -513,6 +534,24 @@
 
         },
 
+        __getTimelineHeight: function() {
+
+            var height = this._bottom_block_height;
+
+            if (this._is_map) {
+                if (this._top_element == 'timeline') {
+                    height = this._top_block_height;
+                }
+            }
+
+            else {
+                height = this._dragbox_height;
+            }
+
+            return height;
+
+        },
+
         __getTimelineLeftOffset: function() {
 
             var offset = 0;
@@ -529,7 +568,7 @@
 
             var offset = 0;
 
-            if (this._top_element == 'map') {
+            if (this._top_element == 'map' && this._is_map) {
                 offset = this._top_block_height;
             }
 
