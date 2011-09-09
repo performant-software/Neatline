@@ -667,6 +667,43 @@
                         'top': StartingOffsetY + offsetY
                     });
 
+                    // If udi is full height.
+                    if (self._undated_items_height == 'full') {
+
+                        if (offsetY < -100) {
+
+                            self._undated_items_height = 'partial';
+
+                            if (self._top_element == 'map') {
+                                self._top_element = 'timeline';
+                                self.__slideTimeline(false);
+                                self.__slideMap(false);
+                            }
+
+                            else {
+                                self.__slideMap(false);
+                            }
+
+                        }
+
+                        else if (offsetY > 100) {
+
+                            self._undated_items_height = 'partial';
+
+                            if (self._top_element == 'map') {
+                                self.__slideTimeline(false);
+                                self.__slideMap(false);
+                            }
+
+                            else {
+                                self.__slideMap(false);
+                            }
+
+                        }
+
+
+                    }
+
                     // If udi is on the right.
                     if (self._undated_items_position == 'right') {
 
