@@ -51,6 +51,9 @@
 
         _create: function() {
 
+            // Get window for mousemove binding.
+            this._window = $(window);
+
             // Getters for options and dragbox divs.
             this.buttons = $('#' + this.options.options_id);
             this.dragbox = $('#' + this.options.dragbox_id);
@@ -477,7 +480,7 @@
                 'z-index': 99
             });
 
-            this.map_drag.bind({
+            this._window.bind({
 
                 'mousemove': function(e) {
 
@@ -527,7 +530,7 @@
                 'mouseup': function() {
 
                     self.__slideMap(true);
-                    self.map_drag.unbind('mousemove');
+                    self._window.unbind('mousemove');
 
                 }
 
@@ -563,7 +566,7 @@
                 'z-index': 99
             });
 
-            this.timeline_drag.bind({
+            this._window.bind({
 
                 'mousemove': function(e) {
 
@@ -621,7 +624,7 @@
                 'mouseup': function() {
 
                     self.__slideTimelineAndUndatedItems(true);
-                    self.timeline_drag.unbind('mousemove');
+                    self._window.unbind('mousemove');
 
                 }
 
@@ -650,7 +653,7 @@
                 'z-index': 99
             });
 
-            this.undated_items_drag.bind({
+            this._window.bind({
 
                 'mousemove': function(e) {
 
@@ -703,7 +706,7 @@
                 'mouseup': function() {
 
                     self.__slideUndatedItems(true);
-                    self.undated_items_drag.unbind('mousemove');
+                    self._window.unbind('mousemove');
 
                 }
 
