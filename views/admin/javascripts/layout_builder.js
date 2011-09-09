@@ -644,6 +644,9 @@
             var StartingOffsetX = this.__getUndatedItemsLeftOffset();
             var StartingOffsetY = this.__getUndatedItemsTopOffset();
 
+            // Set starting height status.
+            this._udi_height_at_start_of_drag = this._undated_items_height;
+
             // Bind self.
             var self = this;
 
@@ -670,9 +673,52 @@
                     // If udi is full height.
                     if (self._undated_items_height == 'full') {
 
-                        if (offsetY < -100) {
+                        // If the mouse is dragging up.
+                        if (offsetY < -100 && self._udi_height_at_start_of_drag == 'full') {
 
                             self._undated_items_height = 'partial';
+
+                            // If the map is on top.
+                            if (self._top_element == 'map') {
+                                self._top_element = 'timeline';
+                                self.__slideTimeline(false);
+                                self.__slideMap(false);
+                            }
+
+                            // If the timeline is on top.
+                            else {
+                                self.__slideTimeline(false);
+                                self.__slideMap(false);
+                            }
+
+                        }
+
+                        // If the mouse is dragging down.
+                        else if (offsetY > 100 && self._udi_height_at_start_of_drag == 'full') {
+
+                            self._undated_items_height = 'partial';
+
+                            if (self._top_element == 'map') {
+                                self.__slideTimeline(false);
+                                self.__slideMap(false);
+                            }
+
+                            else {
+                                self._top_element == 'map';
+                                self.__slideTimeline(false);
+                                self.__slideMap(false);
+                            }
+
+                        }
+
+                    }
+
+                    // If udi is partial height.
+                    else {
+
+                        if (offsetY < -100 && self._udi_height_at_start_of_drag == 'partial') {
+
+                            self._undated_items_height = 'full';
 
                             if (self._top_element == 'map') {
                                 self._top_element = 'timeline';
@@ -680,15 +726,11 @@
                                 self.__slideMap(false);
                             }
 
-                            else {
-                                self.__slideMap(false);
-                            }
-
                         }
 
-                        else if (offsetY > 100) {
+                        else if (offsetY > 100 && self._udi_height_at_start_of_drag == 'partial') {
 
-                            self._undated_items_height = 'partial';
+                            self._undated_items_height = 'full';
 
                             if (self._top_element == 'map') {
                                 self.__slideTimeline(false);
@@ -700,7 +742,6 @@
                             }
 
                         }
-
 
                     }
 
