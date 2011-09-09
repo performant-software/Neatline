@@ -165,19 +165,19 @@
             this.map_drag.bind({
 
                 'mouseenter': function() {
-                    if (!this._is_dragging) {
+                    if (!self._is_dragging) {
                         self.__mapHighlight('enter');
                     }
                 },
 
                 'mouseleave': function() {
-                    if (!this._is_dragging) {
+                    if (!self._is_dragging) {
                         self.__mapHighlight('leave');
                     }
                 },
 
                 'mousedown': function(e) {
-                    if (!this._is_dragging) {
+                    if (!self._is_dragging) {
                         self.__doMapDrag(e);
                     }
                 }
@@ -188,21 +188,21 @@
             this.timeline_drag.bind({
 
                 'mouseenter': function() {
-                    if (!this._is_dragging) {
+                    if (!self._is_dragging) {
                         self.__timelineHighlight('enter');
                         self.__undatedItemsHighlight('enter');
                     }
                 },
 
                 'mouseleave': function() {
-                    if (!this._is_dragging) {
+                    if (!self._is_dragging) {
                         self.__timelineHighlight('leave');
                         self.__undatedItemsHighlight('leave');
                     }
                 },
 
                 'mousedown': function(e) {
-                    if (!this._is_dragging) {
+                    if (!self._is_dragging) {
                         self.__doTimelineDrag(e);
                     }
                 }
@@ -213,19 +213,19 @@
             this.undated_items_drag.bind({
 
                 'mouseenter': function() {
-                    if (!this._is_dragging) {
+                    if (!self._is_dragging) {
                         self.__undatedItemsHighlight('enter');
                     }
                 },
 
                 'mouseleave': function() {
-                    if (!this._is_dragging) {
+                    if (!self._is_dragging) {
                         self.__undatedItemsHighlight('leave');
                     }
                 },
 
                 'mousedown': function(e) {
-                    if (!this._is_dragging) {
+                    if (!self._is_dragging) {
                         self.__doUndatedItemsDrag(e);
                     }
                 }
@@ -496,15 +496,12 @@
                     // If there is a timeline.
                     if (self._is_timeline) {
 
-                        // Get current timeline top offset.
-                        var timelineTopOffset = self.__getTimelineTopOffset();
-
                         // If the timeline is on the bottom.
                         if (self._top_element == 'map') {
 
                             // If the cursor dips below the top border
                             // of the timeline div, slide the timeline up.
-                            if (e.pageY > (timelineTopOffset + self._dragbox_position.top)) {
+                            if (e.pageY > (self._top_block_height + self._dragbox_position.top)) {
                                 self._top_element = 'timeline';
                                 self.__slideTimelineAndUndatedItems(false);
                             }
