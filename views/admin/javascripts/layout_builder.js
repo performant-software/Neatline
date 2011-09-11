@@ -1,7 +1,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
 
 /*
- * JavaScript for the layout builder application in the add view.
+ * Dynamic layout builder application in the add view.
  *
  * PHP version 5
  *
@@ -24,6 +24,7 @@
  */
 
 (function($, undefined) {
+
 
     $.widget('neatline.layoutbuilder', {
 
@@ -1301,6 +1302,43 @@
         }
 
     });
+
+
+    /*
+     * Somewhat shockingly, browser implementations of JavaScript do
+     * not support array comparison. This function takes two arrays, walks
+     * each and compares the elements, and returns true if the arrays
+     * contain the same set. This is used in the code that checks to see
+     * whether or not a div animation needs to occur, based on the
+     * parameter loadout of the last slide.
+     */
+
+    jQuery.extend({
+
+        compare: function(array1, array2) {
+
+            if (array1.length != array2.length) {
+                return false;
+            }
+
+            var a = jQuery.extend(true, [], array1);
+            var b = jQuery.extend(true, [], array2);
+
+            a.sort();
+            b.sort();
+
+            for (var i = 0, len = a.length; i < len; i++) {
+                if (a[i] !== b[i]) {
+                    return false;
+                }
+            }
+
+            return true
+
+        }
+
+    });
+
 
 })( jQuery );
 
