@@ -89,13 +89,30 @@ function neatline_buttonTo($action, $name = null, $value = 'Submit', $attribs = 
     $fieldset = '<fieldset>' . $view->formSubmit($name, $value, $attribs) . '</fieldset>';
 
     if ($formWrap) {
-        // Fieldset tags fix validation errors.
         return $view->form($formName, $formAttribs,
             '<fieldset>' . $view->formSubmit($name, $value, $attribs) . '</fieldset>');
-    }
-    else {
+    } else {
         return $fieldset;
     }
+
+}
+
+/**
+ * Create a hidden element.
+ *
+ * @param string $name The name attribute.
+ * @param string $value The value attribute.
+ *
+ * @return string HTML form.
+ */
+function neatline_hiddenElement($name, $value)
+{
+
+    $element = new Zend_Form_Element_Hidden($name);
+    $element->setValue($value)
+        ->setDecorators(array('ViewHelper'));
+
+    return $element;
 
 }
 

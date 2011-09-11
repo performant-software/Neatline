@@ -62,6 +62,10 @@ head(array('content_class' => 'neatline'));
     <h2 class="neatline-label">Configure Layout:</h2>
     <?php echo $this->partial('index/_layout_builder.php'); ?>
 
+    <?php echo neatline_hiddenElement('top_element', 'map'); ?>
+    <?php echo neatline_hiddenElement('undated_items_position', 'right'); ?>
+    <?php echo neatline_hiddenElement('undated_items_height', 'partial'); ?>
+
     <?php echo neatline_buttonTo('', 'save_neatline',
         'Create Neatline', array('class' => 'neatline btn primary'), 'save-neatline', false); ?>
 
