@@ -33,6 +33,9 @@
             top_block_percentage: 60,
             undated_items_width: 150,
             gloss_fade_duration: 300,
+            def_top_element: 'map',
+            def_udi_position: 'right',
+            def_udi_height: 'partial',
             colors: {
                 map: {
                     default: '#eef7ff',
@@ -74,9 +77,9 @@
             this._is_undated_items = false;
 
             // Set tracker variables for element position.
-            this._top_element = 'map'; // 'map' or 'timeline'
-            this._undated_items_position = 'right'; // 'right' or 'left'
-            this._undated_items_height = 'full'; // 'partial' or 'full'
+            this._top_element = this.options.def_top_element;
+            this._undated_items_position = this.options.def_udi_position;
+            this._undated_items_height = this.options.def_udi_height;
 
             // By default, add all elements.
             this._toggleMap();
