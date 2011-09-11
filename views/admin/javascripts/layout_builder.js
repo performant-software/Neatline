@@ -36,6 +36,8 @@
             def_top_element: 'map',
             def_udi_position: 'right',
             def_udi_height: 'partial',
+            vertical_offset_tier1: 100,
+            vertical_offset_tier2: 150,
             colors: {
                 map: {
                     default: '#eef7ff',
@@ -673,88 +675,20 @@
                         'top': StartingOffsetY + offsetY
                     });
 
-                    // If udi is full height.
-                    if (self._undated_items_height == 'full') {
+                    // Control flow to determine where/when the udi
+                    // should be animated as the mouse position changes.
 
-                        // If the mouse is dragging up.
-                        if (offsetY < -100 && self._udi_height_at_start_of_drag == 'full') {
+                    // If udi was partial-height at drag start.
+                    if (self._udi_height_at_start_of_drag == 'partial') {
 
-                            self._undated_items_height = 'partial';
-
-                            // If the map is on top.
-                            if (self._top_element == 'map') {
-                                self._top_element = 'timeline';
-                                self.__slideTimeline(false);
-                                self.__slideMap(false);
-                            }
-
-                            // If the timeline is on top.
-                            else {
-                                self.__slideTimeline(false);
-                                self.__slideMap(false);
-                            }
-
-                        }
-
-                        // If the mouse is dragging down.
-                        else if (offsetY > 100 && self._udi_height_at_start_of_drag == 'full') {
-
-                            self._undated_items_height = 'partial';
-
-                            if (self._top_element == 'map') {
-                                self.__slideTimeline(false);
-                                self.__slideMap(false);
-                            }
-
-                            else {
-                                self._top_element = 'map';
-                                self.__slideTimeline(false);
-                                self.__slideMap(false);
-                            }
-
-                        }
-
-                        else if (offsetY > 150 && self._udi_height_at_start_of_drag == 'partial') {
-
-                            self._undated_items_height = 'partial';
-
-                            self._top_element = 'map';
-                            self.__slideTimeline(false);
-                            self.__slideMap(false);
-
-                        }
+                        // if the mouse has moved upwards and the vertical
+                        // offset is between the two vertical offset tiers.
 
                     }
 
-                    // If udi is partial height.
-                    else {
+                    else if (self._udi_height_at_start_of_drag == 'full') {
 
-                        if (offsetY < -100 && self._udi_height_at_start_of_drag == 'partial') {
 
-                            self._undated_items_height = 'full';
-
-                            if (self._top_element == 'map') {
-                                self._top_element = 'timeline';
-                                self.__slideTimeline(false);
-                                self.__slideMap(false);
-                            }
-
-                        }
-
-                        else if ((offsetY > 100 && offsetY < 150) && self._udi_height_at_start_of_drag == 'partial') {
-
-                            self._undated_items_height = 'full';
-
-                            if (self._top_element == 'map') {
-                                self.__slideTimeline(false);
-                                self.__slideMap(false);
-                            }
-
-                            else {
-                                self.__slideMap(false);
-                            }
-
-                        }
 
                     }
 
