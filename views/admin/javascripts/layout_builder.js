@@ -39,17 +39,20 @@
             timeline_select_id: 'timeline',
             map_select_id: 'map',
 
-            // Css dimension defaults.
+            // Css dimension defaults, animation constants.
             top_block_percentage: 60,
             undated_items_width: 150,
             vertical_offset_tier1: 75,
             vertical_offset_tier2: 150,
             gloss_fade_duration: 300,
 
-            // Configuration params.
+            // Starting configuration params.
             def_top_element: 'map',
             def_udi_position: 'right',
             def_udi_height: 'partial',
+
+            // Miscellaneous
+            no_selection_string: '-',
 
             // Hex defaults.
             colors: {
@@ -112,10 +115,11 @@
             this._last_map_slide_params = null;
             this._last_timeline_slide_params = null;
 
-            // By default, add all elements.
-            // this._toggleMap();
-            // this._toggleTimeline();
-            // this._toggleUndatedItems();
+            // Set dropdown select tracker default, wire the
+            // layout builder up with the selects.
+            this._last_map_dropdown_selection = this.options.no_selection_string;
+            this._last_timeline_dropdown_selection = this.options.no_selection_string;
+            this._addToggleEvents();
 
             // Gloss.
             this._addDragEvents();
@@ -156,19 +160,25 @@
 
             // Instantiate buttons, define callbacks.
 
-            $('#toggle-map').togglebutton({
+            this.map_toggle = $('#toggle-map');
+            this.timeline_toggle = $('#toggle-timeline');
+            this.undated_items_toggle = $('#toggle-undated-items');
+
+            this.map_toggle.togglebutton({
                 pressed_by_default: false,
+                enabled_by_default: false,
                 press: $.proxy(this._toggleMap, this),
                 unpress: $.proxy(this._toggleMap, this)
             });
 
-            $('#toggle-timeline').togglebutton({
+            this.timeline_toggle.togglebutton({
                 pressed_by_default: false,
+                enabled_by_default: false,
                 press: $.proxy(this._toggleTimeline, this),
                 unpress: $.proxy(this._toggleTimeline, this)
             });
 
-            $('#toggle-undated-items').togglebutton({
+            this.undated_items_toggle.togglebutton({
                 pressed_by_default: false,
                 visible_by_default: false,
                 press: $.proxy(this._toggleUndatedItems, this),
@@ -193,6 +203,54 @@
                 this.map_drag,
                 this.timeline_drag,
                 this.undated_items_drag);
+
+        },
+
+        _addToggleEvents: function() {
+
+            var self = this;
+
+            // Bind callback on map selection change.
+            this.map_select.bind('change', function() {
+
+                var value = self.map_select.find('option:selected').html();
+
+                if (value != self._last_map_dropdown_selection) {
+
+                    if (value == self.options.no_selection_string && self._is_map) {
+                        self.map_toggle.togglebutton('press');
+                    }
+
+                    else if (value != self.options.no_selection_string && !self._is_map) {
+                        self.map_toggle.togglebutton('press');
+                    }
+
+                }
+
+                self._last_map_dropdown_selection = value;
+
+            });
+
+            // Bind callback on map selection change.
+            this.timeline_select.bind('change', function() {
+
+                var value = self.timeline_select.find('option:selected').html();
+
+                if (value != self._last_timeline_dropdown_selection) {
+
+                    if (value == self.options.no_selection_string && self._is_timeline) {
+                        self.timeline_toggle.togglebutton('press');
+                    }
+
+                    else if (value != self.options.no_selection_string && !self._is_timeline) {
+                        self.timeline_toggle.togglebutton('press');
+                    }
+
+                }
+
+                self._last_timeline_dropdown_selection = value;
+
+            });
 
         },
 

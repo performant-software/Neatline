@@ -28,6 +28,7 @@
     $.widget('neatline.togglebutton', {
 
         options: {
+            enabled_by_default: true,
             pressed_by_default: false,
             visible_by_default: true,
             highlight_border_color: '#6393ff',
@@ -48,6 +49,10 @@
 
             if (!this.options.visible_by_default) {
                 this.element.css('display', 'none');
+            }
+
+            if (!this.options.enabled_by_default) {
+                this.disable();
             }
 
         },
@@ -72,6 +77,10 @@
                 this._trigger('press');
                 this.pressed = true;
             }
+
+        },
+
+        disable: function() {
 
         },
 
