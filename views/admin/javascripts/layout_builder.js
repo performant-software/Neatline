@@ -31,6 +31,9 @@
         options: {
             dragbox_id: 'drag-box',
             options_id: 'options',
+            top_element_input_id: 'top_element',
+            udi_position_input_id: 'undated_items_position',
+            udi_height_input_id: 'undated_items_height',
             top_block_percentage: 60,
             undated_items_width: 150,
             gloss_fade_duration: 300,
@@ -63,6 +66,11 @@
             // Getters for options and dragbox divs.
             this.buttons = $('#' + this.options.options_id);
             this.dragbox = $('#' + this.options.dragbox_id);
+
+            // Getters for the hidden form attributes.
+            this.top_element_input = $('#' + this.options.top_element_input_id);
+            this.udi_position_input = $('#' + this.options.udi_position_input_id);
+            this.udi_height_input = $('#' + this.options.udi_height_input_id);
 
             // Get fixed pixel values for heights.
             this._getPxConstants();
@@ -904,6 +912,8 @@
                     this._undated_items_height
                 ];
 
+                this.__updateHiddenInputs();
+
             }
 
         },
@@ -967,6 +977,8 @@
             this._animate_position_tag(this.timeline_drag, newTimelineHeight);
             this._animate_position_tag(this.undated_items_drag, newUndatedItemsHeight);
 
+            this.__updateHiddenInputs();
+
         },
 
         __slideMap: function(ending_slide) {
@@ -1020,6 +1032,8 @@
                     this._undated_items_height
                 ];
 
+                this.__updateHiddenInputs();
+
             }
 
         },
@@ -1060,6 +1074,15 @@
             }
 
             this._animate_position_tag(this.undated_items_drag, newUndatedItemsHeight);
+            this.__updateHiddenInputs();
+
+        },
+
+        __updateHiddenInputs: function() {
+
+            this.top_element_input.attr('value', this._top_element);
+            this.udi_position_input.attr('value', this._undated_items_position);
+            this.udi_height_input.attr('value', this._undated_items_height);
 
         },
 
