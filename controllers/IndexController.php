@@ -87,9 +87,8 @@ class Neatline_IndexController extends Omeka_Controller_action
             if ($this->_mapsTable->count() == 0 &&
                 $this->_timelinesTable->count() == 0) {
 
-                // $this->flashError('A Neatline exhibit requires at least one\
-                //     map or one timelines.');
-                // $this->_redirect('neatline-exhibits');
+                $this->flashError(neatline_noMapsOrTimelinesErrorMessage());
+                $this->_redirect('neatline-exhibits');
 
             }
 

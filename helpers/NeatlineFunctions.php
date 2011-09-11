@@ -156,6 +156,7 @@ function neatline_mapSelect()
 
     foreach ($bucketedMaps as $itemName => $maps) {
         $optionsArray = array();
+        $optionsArray['none'] = '-';
         foreach ($maps as $map) {
             $optionsArray[$map->id] = $map->name;
         }
@@ -177,6 +178,7 @@ function neatline_timelineSelect()
     $timelines = neatline_getTimelinesForSelect();
     $timelineSelect = new Zend_Form_Element_Select('timeline');
 
+    $timelineSelect->addMultiOption('none', '-');
     foreach ($timelines as $timeline) {
         $timelineSelect->addMultiOption($timeline->id, $timeline->title);
     }
@@ -287,6 +289,20 @@ function neatline_uninstallWarningMessage()
 
     return '<p><strong>Warning</strong>: Uninstalling the Neatline plugin '
          . 'will permanently delete all Neatline exhibits.';
+
+
+}
+
+/**
+ * Message that displays before uninstall confirm.
+ *
+ * @return string The message.
+ */
+function neatline_noMapsOrTimelinesErrorMessage()
+{
+
+    return 'Before you can start a Neatline exhibit, create at least one map '
+         . 'or one timeline.';
 
 
 }
