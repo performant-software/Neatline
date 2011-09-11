@@ -41,6 +41,7 @@
             // Add the new class, set status variable, add events.
             this.element.addClass('neatline-toggle-button');
             this.pressed = false;
+            this.enabled = true;
             this._addEvents();
 
             if (this.options.pressed_by_default) {
@@ -68,19 +69,39 @@
 
         press: function() {
 
-            this.element.toggleClass('neatline-pressed');
+            if (this.enabled) {
 
-            if (this.pressed) {
-                this._trigger('unpress');
-                this.pressed = false;
-            } else {
-                this._trigger('press');
-                this.pressed = true;
+                this.element.toggleClass('neatline-pressed');
+
+                if (this.pressed) {
+                    this._trigger('unpress');
+                    this.pressed = false;
+                } else {
+                    this._trigger('press');
+                    this.pressed = true;
+                }
+
             }
 
         },
 
         disable: function() {
+
+            this.enabled = false;
+            this.element.css({
+                'opacity': 0.5,
+                'cursor': 'default'
+            });
+
+        },
+
+        enable: function() {
+
+            this.enabled = true;
+            this.element.css({
+                'opacity': 1,
+                'cursor': 'pointer'
+            });
 
         },
 

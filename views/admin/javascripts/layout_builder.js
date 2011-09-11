@@ -219,9 +219,15 @@
 
                     if (value == self.options.no_selection_string && self._is_map) {
                         self.map_toggle.togglebutton('press');
+                        self.map_toggle.togglebutton('disable');
+                    }
+
+                    else if (value == self.options.no_selection_string && !self._is_map) {
+                        self.map_toggle.togglebutton('disable');
                     }
 
                     else if (value != self.options.no_selection_string && !self._is_map) {
+                        self.map_toggle.togglebutton('enable');
                         self.map_toggle.togglebutton('press');
                     }
 
@@ -239,11 +245,26 @@
                 if (value != self._last_timeline_dropdown_selection) {
 
                     if (value == self.options.no_selection_string && self._is_timeline) {
+
+                        if (self._is_undated_items) {
+                            self.undated_items_toggle.togglebutton('press');
+                            self.undated_items_toggle.togglebutton('disable');
+                        }
+
                         self.timeline_toggle.togglebutton('press');
+                        self.timeline_toggle.togglebutton('disable');
+
+                    }
+
+                    else if (value == self.options.no_selection_string && !self._is_timeline) {
+                        self.timeline_toggle.togglebutton('disable');
                     }
 
                     else if (value != self.options.no_selection_string && !self._is_timeline) {
+                        self.timeline_toggle.togglebutton('enable');
                         self.timeline_toggle.togglebutton('press');
+                        self.undated_items_toggle.togglebutton('enable');
+                        self.undated_items_toggle.togglebutton('press');
                     }
 
                 }
