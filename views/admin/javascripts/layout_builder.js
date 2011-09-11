@@ -852,7 +852,7 @@
                 this._undated_items_height
             ];
 
-            if (_current_params != this._last_timeline_slide_params) {
+            if (!jQuery.compare(_current_params, this._last_timeline_slide_params)) {
 
                 if (ending_slide) {
 
@@ -972,10 +972,7 @@
                 this._undated_items_height
             ];
 
-            if (_current_params != this._last_map_slide_params) {
-
-                console.log('mapslide');
-                console.log(_current_params, this._last_map_slide_params);
+            if (!jQuery.compare(_current_params, this._last_map_slide_params)) {
 
                 if (ending_slide) {
 
@@ -1316,6 +1313,10 @@
     jQuery.extend({
 
         compare: function(array1, array2) {
+
+            if (array1 == null || array2 == null) {
+                return false;
+            }
 
             if (array1.length != array2.length) {
                 return false;
