@@ -29,19 +29,29 @@
     $.widget('neatline.layoutbuilder', {
 
         options: {
+
+            // Ids.
             dragbox_id: 'drag-box',
             options_id: 'options',
             top_element_input_id: 'top_element',
             udi_position_input_id: 'undated_items_position',
             udi_height_input_id: 'undated_items_height',
+            timeline_select_id: 'timeline',
+            map_select_id: 'map',
+
+            // Css dimension defaults.
             top_block_percentage: 60,
             undated_items_width: 150,
+            vertical_offset_tier1: 75,
+            vertical_offset_tier2: 150,
             gloss_fade_duration: 300,
+
+            // Configuration params.
             def_top_element: 'map',
             def_udi_position: 'right',
             def_udi_height: 'partial',
-            vertical_offset_tier1: 75,
-            vertical_offset_tier2: 150,
+
+            // Hex defaults.
             colors: {
                 map: {
                     default: '#eef7ff',
@@ -56,6 +66,7 @@
                     target: '#ffdbdf'
                 }
             }
+
         },
 
         _create: function() {
@@ -71,6 +82,10 @@
             this.top_element_input = $('#' + this.options.top_element_input_id);
             this.udi_position_input = $('#' + this.options.udi_position_input_id);
             this.udi_height_input = $('#' + this.options.udi_height_input_id);
+
+            // Getters for map and timeline select dropdowns.
+            this.map_select = $('#' + this.options.map_select_id);
+            this.timeline_select = $('#' + this.options.timeline_select_id);
 
             // Get fixed pixel values for heights.
             this._getPxConstants();
