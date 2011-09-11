@@ -193,8 +193,7 @@ class NeatlinePlugin
     public function adminAppendToPluginUninstallMessage()
     {
 
-        echo '<p><strong>Warning</strong>: Uninstalling the Neatline plugin
-              will permanently delete all Neatline exhibits.';
+        echo neatline_uninstallWarningMessage();
 
     }
 

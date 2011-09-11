@@ -33,7 +33,11 @@ head(array('content_class' => 'neatline'));
     'tab' => 'neatlines',
     'add_button_uri' => 'neatline-exhibits/add',
     'add_button_text' => 'Create a Neatline'
-)); ?><div id="primary">
+)); ?>
+
+<div id="primary">
+
+<?php echo flash(); ?>
 
 </div>
 

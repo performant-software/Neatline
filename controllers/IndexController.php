@@ -31,6 +31,19 @@ class Neatline_IndexController extends Omeka_Controller_action
 {
 
     /**
+     * Get table objects.
+     *
+     * @return void
+     */
+    public function init()
+    {
+
+        $this->_mapsTable = $this->getTable('NeatlineMapsMap');
+        $this->_timelinesTable = $this->getTable('NeatlineTimeTimeline');
+
+    }
+
+    /**
      * Redirect index route to browse.
      *
      * @return void
@@ -55,14 +68,32 @@ class Neatline_IndexController extends Omeka_Controller_action
     }
 
     /**
-     * Show list of existing Neatlines.
+     * Create a new Neatline.
      *
      * @return void
      */
     public function addAction()
     {
 
+        // Try to create the Neatline if the form has been submitted.
+        if ($this->_request->isPost()) {
 
+        }
+
+        // If no submission, show the form.
+        else {
+
+            // Bounce back if there are no maps or no timelines.
+            if ($this->_mapsTable->count() == 0 &&
+                $this->_timelinesTable->count() == 0) {
+
+                // $this->flashError('A Neatline exhibit requires at least one\
+                //     map or one timelines.');
+                // $this->_redirect('neatline-exhibits');
+
+            }
+
+        }
 
     }
 

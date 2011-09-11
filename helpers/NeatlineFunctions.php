@@ -276,3 +276,17 @@ function neatline_compareObjects($a, $b)
     return ($aText > $bText) ? +1 : -1;
 
 }
+
+/**
+ * Message that displays before uninstall confirm.
+ *
+ * @return string The message.
+ */
+function neatline_uninstallWarningMessage()
+{
+
+    return '<p><strong>Warning</strong>: Uninstalling the Neatline plugin '
+         . 'will permanently delete all Neatline exhibits.';
+
+
+}
