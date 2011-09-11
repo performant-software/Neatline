@@ -37,7 +37,7 @@
             def_top_element: 'map',
             def_udi_position: 'right',
             def_udi_height: 'partial',
-            vertical_offset_tier1: 100,
+            vertical_offset_tier1: 75,
             vertical_offset_tier2: 150,
             colors: {
                 map: {
@@ -92,6 +92,7 @@
             // By default, add all elements.
             this._toggleMap();
             this._toggleTimeline();
+            this._toggleUndatedItems();
 
             // Gloss.
             this._addDragEvents();
@@ -344,7 +345,9 @@
             this._repositionDraggers();
 
             // Toggle undated items in parallel with the timeline.
-            this._toggleUndatedItems();
+            if (!this._is_timeline && this._is_undated_items) {
+                this._toggleUndatedItems();
+            }
 
             // Toggle the undated items toggle button.
             this.__toggleUndatedItemsButton();
