@@ -67,10 +67,12 @@ function neatline_queueLayoutBuilderCssAndJs()
  * @param array $attribs Other HTML attributes for button.
  * @param string $formName Name/id attribute for button.
  * @param array $formAttribs Other HTML attributes for button.
+ * @param boolean $formWrap True if the button should be wrapped inside
+ * its individual form tag.
  *
  * @return string HTML form.
  */
-function neatline_buttonTo($action, $name = null, $value = 'Submit', $attribs = array(), $formName = null, $formAttribs = array())
+function neatline_buttonTo($action, $name = null, $value = 'Submit', $attribs = array(), $formName = null, $formAttribs = array(), $formWrap = true)
 {
 
     $view = __v();
@@ -84,9 +86,16 @@ function neatline_buttonTo($action, $name = null, $value = 'Submit', $attribs = 
         $formAttribs['class'] = 'button-form';
     }
 
-    // Fieldset tags fix validation errors.
-    return $view->form($formName, $formAttribs,
-        '<fieldset>' . $view->formSubmit($name, $value, $attribs) . '</fieldset>');
+    $fieldset = '<fieldset>' . $view->formSubmit($name, $value, $attribs) . '</fieldset>';
+
+    if ($formWrap) {
+        // Fieldset tags fix validation errors.
+        return $view->form($formName, $formAttribs,
+            '<fieldset>' . $view->formSubmit($name, $value, $attribs) . '</fieldset>');
+    }
+    else {
+        return $fieldset;
+    }
 
 }
 
