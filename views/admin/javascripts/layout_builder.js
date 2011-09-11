@@ -649,11 +649,16 @@
             var StartingOffsetX = this.__getUndatedItemsLeftOffset();
             var StartingOffsetY = this.__getUndatedItemsTopOffset();
 
-            // Set starting height status.
+            // Set starting height and position status.
             this._udi_height_at_start_of_drag = this._undated_items_height;
+            this._udi_position_at_start_of_drag = (this._top_element == 'map') ? 'bottom' : 'top';
 
             // Bind self.
             var self = this;
+
+            // Create typable facades for vertical tier parameters.
+            var vt1 = this.options.vertical_offset_tier1;
+            var vt2 = this.options.vertical_offset_tier2;
 
             // Make the drag div see-through and always on top.
             this.undated_items_drag.css({
@@ -681,14 +686,80 @@
                     // If udi was partial-height at drag start.
                     if (self._udi_height_at_start_of_drag == 'partial') {
 
-                        // if the mouse has moved upwards and the vertical
-                        // offset is between the two vertical offset tiers.
+                        // If udi was on the bottom when the drag started.
+                        if (self._udi_position_at_start_of_drag == 'bottom') {
+
+                            // If the mouse has moved upwards but has not crossed
+                            // through the first offset tier.
+                            if (offsetY < 0 && offsetY > -vt1) {
+
+                            }
+
+                            // If the mouse has moved upwards and the vertical
+                            // offset is between the two vertical offset tiers.
+                            else if (offsetY < -vt1 && offsetY > -vt2) {
+
+                            }
+
+                            // If the mouse has moved upwards and is over the
+                            // second tier threshold.
+                            else if (offsetY < -vt2) {
+
+                            }
+
+                        }
+
+                        // If udi was on the top when the drag started.
+                        else if (self._udi_position_at_start_of_drag == 'top') {
+
+                            // If the mouse has moved downwards but has not crossed
+                            // through the first offset tier.
+                            if (offsetY > 0 && offsetY < vt1) {
+
+                            }
+
+                            // If the mouse has moved downwards and the vertical
+                            // offset is between the two vertical offset tiers.
+                            else if (offsetY > vt1 && offsetY < vt2) {
+
+                            }
+
+                            // If the mouse has moved downwards and is over the
+                            // second tier threshold.
+                            else if (offsetY > vt2) {
+
+                            }
+
+                        }
 
                     }
 
+                    // If udi was full-height at the start of the drag.
                     else if (self._udi_height_at_start_of_drag == 'full') {
 
+                        // If the mouse has moved upwards but has not crossed
+                        // through the first vertical tier.
+                        if (offsetY < 0 && offsetY > -vt1) {
 
+                        }
+
+                        // If the mouse has moved upwards and has crossed through
+                        // the first vertical tier.
+                        else if (offsetY < -vt1) {
+
+                        }
+
+                        // If the mouse has moved downwards but has not crossed
+                        // through the first vertical tier.
+                        else if (offsetY > 0 && offsetY < vt1) {
+
+                        }
+
+                        // If the mouse has moved downwards and has crossed through
+                        // the first vertical tier.
+                        else if (offsetY > vt1) {
+
+                        }
 
                     }
 
