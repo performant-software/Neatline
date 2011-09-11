@@ -707,10 +707,20 @@
                             }
 
                             else {
-                                self._top_element == 'map';
+                                self._top_element = 'map';
                                 self.__slideTimeline(false);
                                 self.__slideMap(false);
                             }
+
+                        }
+
+                        else if (offsetY > 150 && self._udi_height_at_start_of_drag == 'partial') {
+
+                            self._undated_items_height = 'partial';
+
+                            self._top_element = 'map';
+                            self.__slideTimeline(false);
+                            self.__slideMap(false);
 
                         }
 
@@ -731,7 +741,7 @@
 
                         }
 
-                        else if (offsetY > 100 && self._udi_height_at_start_of_drag == 'partial') {
+                        else if ((offsetY > 100 && offsetY < 150) && self._udi_height_at_start_of_drag == 'partial') {
 
                             self._undated_items_height = 'full';
 
