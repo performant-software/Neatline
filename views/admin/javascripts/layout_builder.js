@@ -113,9 +113,9 @@
             this._last_timeline_slide_params = null;
 
             // By default, add all elements.
-            this._toggleMap();
-            this._toggleTimeline();
-            this._toggleUndatedItems();
+            // this._toggleMap();
+            // this._toggleTimeline();
+            // this._toggleUndatedItems();
 
             // Gloss.
             this._addDragEvents();
@@ -157,19 +157,20 @@
             // Instantiate buttons, define callbacks.
 
             $('#toggle-map').togglebutton({
-                pressed_by_default: true,
+                pressed_by_default: false,
                 press: $.proxy(this._toggleMap, this),
                 unpress: $.proxy(this._toggleMap, this)
             });
 
             $('#toggle-timeline').togglebutton({
-                pressed_by_default: true,
+                pressed_by_default: false,
                 press: $.proxy(this._toggleTimeline, this),
                 unpress: $.proxy(this._toggleTimeline, this)
             });
 
             $('#toggle-undated-items').togglebutton({
-                pressed_by_default: true,
+                pressed_by_default: false,
+                visible_by_default: false,
                 press: $.proxy(this._toggleUndatedItems, this),
                 unpress: $.proxy(this._toggleUndatedItems, this)
             });

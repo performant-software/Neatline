@@ -29,6 +29,7 @@
 
         options: {
             pressed_by_default: false,
+            visible_by_default: true,
             highlight_border_color: '#6393ff',
             pressed_border_color: '#6393ff',
             pressed_text_color: '#517fe6'
@@ -43,6 +44,10 @@
 
             if (this.options.pressed_by_default) {
                 this.press();
+            }
+
+            if (!this.options.visible_by_default) {
+                this.element.css('display', 'none');
             }
 
         },
