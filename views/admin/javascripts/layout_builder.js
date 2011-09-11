@@ -83,6 +83,11 @@
             this._undated_items_position = this.options.def_udi_position;
             this._undated_items_height = this.options.def_udi_height;
 
+            // Set tracker arrays that record the last parameter
+            // loadouts that triggered a div slide.
+            this._last_map_slide_params = null;
+            this._last_timeline_slide_params = null;
+
             // By default, add all elements.
             this._toggleMap();
             this._toggleTimeline();
@@ -840,42 +845,58 @@
 
             var self = this;
             var newTimelineHeight = this.__getTimelineHeight();
+            var _current_params = [
+                this._top_element,
+                this._undated_items_position,
+                this._undated_items_height
+            ];
 
-            if (ending_slide) {
+            if (_current_params != this._last_timeline_slide_params) {
 
-                // Slide the timeline and undated items.
-                this.timeline_drag.stop().animate({
-                    'height': newTimelineHeight,
-                    'width': this.__getTimelineWidth(),
-                    'top': this.__getTimelineTopOffset(),
-                    'left': this.__getTimelineLeftOffset(),
-                    'opacity': 1,
-                    'z-index': 0
-                }, function() {
+                if (ending_slide) {
 
-                    // On complete, if the slide is an ending
-                    // slide, unset the dragging tracker.
-                    if (ending_slide) {
-                        self._is_dragging = false;
-                    }
+                    // Slide the timeline and undated items.
+                    this.timeline_drag.stop().animate({
+                        'height': newTimelineHeight,
+                        'width': this.__getTimelineWidth(),
+                        'top': this.__getTimelineTopOffset(),
+                        'left': this.__getTimelineLeftOffset(),
+                        'opacity': 1,
+                        'z-index': 0
+                    }, function() {
 
-                });
+                        // On complete, if the slide is an ending
+                        // slide, unset the dragging tracker.
+                        if (ending_slide) {
+                            self._is_dragging = false;
+                        }
+
+                    });
+
+                }
+
+                else {
+
+                    // Slide the timeline and undated items.
+                    this.timeline_drag.stop().animate({
+                        'height': newTimelineHeight,
+                        'width': this.__getTimelineWidth(),
+                        'top': this.__getTimelineTopOffset(),
+                        'left': this.__getTimelineLeftOffset()
+                    });
+
+                }
+
+                this._animate_position_tag(this.timeline_drag, newTimelineHeight);
+
+                // Record params loadout for the last slide.
+                this._last_timeline_slide_params = [
+                    this._top_element,
+                    this._undated_items_position,
+                    this._undated_items_height
+                ];
 
             }
-
-            else {
-
-                // Slide the timeline and undated items.
-                this.timeline_drag.stop().animate({
-                    'height': newTimelineHeight,
-                    'width': this.__getTimelineWidth(),
-                    'top': this.__getTimelineTopOffset(),
-                    'left': this.__getTimelineLeftOffset()
-                });
-
-            }
-
-            this._animate_position_tag(this.timeline_drag, newTimelineHeight);
 
         },
 
@@ -944,38 +965,57 @@
 
             var self = this;
             var newMapHeight = this.__getMapHeight();
+            var _current_params = [
+                this._top_element,
+                this._undated_items_position,
+                this._undated_items_height
+            ];
 
-            if (ending_slide) {
+            if (_current_params != this._last_map_slide_params) {
 
-                // Slide the timeline and undated items.
-                this.map_drag.stop().animate({
-                    'height': newMapHeight,
-                    'width': this.__getMapWidth(),
-                    'top': this.__getMapTopOffset(),
-                    'left': this.__getMapLeftOffset(),
-                    'opacity': 1,
-                    'z-index': 0
-                }, function() {
-                    // On complete, if the slide is an ending
-                    // slide, unset the dragging tracker.
-                        self._is_dragging = false;
-                });
+                console.log('mapslide');
+                console.log(_current_params, this._last_map_slide_params);
+
+                if (ending_slide) {
+
+                    // Slide the timeline and undated items.
+                    this.map_drag.stop().animate({
+                        'height': newMapHeight,
+                        'width': this.__getMapWidth(),
+                        'top': this.__getMapTopOffset(),
+                        'left': this.__getMapLeftOffset(),
+                        'opacity': 1,
+                        'z-index': 0
+                    }, function() {
+                        // On complete, if the slide is an ending
+                        // slide, unset the dragging tracker.
+                            self._is_dragging = false;
+                    });
+
+                }
+
+                else {
+
+                    // Slide the timeline and undated items.
+                    this.map_drag.stop().animate({
+                        'height': newMapHeight,
+                        'width': this.__getMapWidth(),
+                        'top': this.__getMapTopOffset(),
+                        'left': this.__getMapLeftOffset()
+                    });
+
+                }
+
+                this._animate_position_tag(this.map_drag, newMapHeight);
+
+                // Record params loadout for the last slide.
+                this._last_map_slide_params = [
+                    this._top_element,
+                    this._undated_items_position,
+                    this._undated_items_height
+                ];
 
             }
-
-            else {
-
-                // Slide the timeline and undated items.
-                this.map_drag.stop().animate({
-                    'height': newMapHeight,
-                    'width': this.__getMapWidth(),
-                    'top': this.__getMapTopOffset(),
-                    'left': this.__getMapLeftOffset()
-                });
-
-            }
-
-            this._animate_position_tag(this.map_drag, newMapHeight);
 
         },
 
