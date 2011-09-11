@@ -328,7 +328,11 @@
                     // Display none the timeline.
                     this.timeline_drag.css('display', 'none');
 
+                    this._recuperate_udi_on_timeline_toggle = false;
+
                     if (this._is_undated_items) {
+                        this._toggleUndatedItems();
+                        this._recuperate_udi_on_timeline_toggle = true;
                     }
 
                 break;
@@ -340,7 +344,8 @@
                     // Show the div.
                     this.timeline_drag.css('display', 'block');
 
-                    if (this._is_undated_items) {
+                    if (this._recuperate_udi_on_timeline_toggle) {
+                        this._toggleUndatedItems();
                     }
 
                 break;
