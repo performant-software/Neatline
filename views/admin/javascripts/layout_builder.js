@@ -328,6 +328,9 @@
                     // Display none the timeline.
                     this.timeline_drag.css('display', 'none');
 
+                    if (this._is_undated_items) {
+                    }
+
                 break;
 
                 case false:
@@ -337,17 +340,15 @@
                     // Show the div.
                     this.timeline_drag.css('display', 'block');
 
+                    if (this._is_undated_items) {
+                    }
+
                 break;
 
             }
 
             // Recalculate all positions for all divs.
             this._repositionDraggers();
-
-            // Toggle undated items in parallel with the timeline.
-            if (!this._is_timeline && this._is_undated_items) {
-                this._toggleUndatedItems();
-            }
 
             // Toggle the undated items toggle button.
             this.__toggleUndatedItemsButton();
@@ -508,8 +509,6 @@
                         'top': startingOffsetY + offsetY
                     });
 
-                    // now, just for Wayne, 3 nested ifs inside of a mousemove callback.
-
                     // If there is a timeline.
                     if (self._is_timeline) {
 
@@ -544,7 +543,7 @@
                 'mouseup': function() {
 
                     self.__slideMap(true);
-                    self._window.unbind('mousemove');
+                    self._window.unbind('mousemove mouseup');
 
                 }
 
@@ -638,7 +637,7 @@
                 'mouseup': function() {
 
                     self.__slideTimelineAndUndatedItems(true);
-                    self._window.unbind('mousemove');
+                    self._window.unbind('mousemove mouseup');
 
                 }
 
@@ -837,7 +836,7 @@
                 'mouseup': function() {
 
                     self.__slideUndatedItems(true);
-                    self._window.unbind('mousemove');
+                    self._window.unbind('mousemove mouseup');
 
                 }
 
