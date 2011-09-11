@@ -692,19 +692,27 @@
                             // If the mouse has moved upwards but has not crossed
                             // through the first offset tier.
                             if (offsetY < 0 && offsetY > -vt1) {
-
+                                self._undated_items_height = 'partial';
+                                self._top_element = 'map';
+                                self.__slideTimeline(false);
+                                self.__slideMap(false);
                             }
 
                             // If the mouse has moved upwards and the vertical
                             // offset is between the two vertical offset tiers.
                             else if (offsetY < -vt1 && offsetY > -vt2) {
-
+                                self._undated_items_height = 'full';
+                                self.__slideTimeline(false);
+                                self.__slideMap(false);
                             }
 
                             // If the mouse has moved upwards and is over the
                             // second tier threshold.
                             else if (offsetY < -vt2) {
-
+                                self._undated_items_height = 'partial';
+                                self._top_element = 'timeline';
+                                self.__slideTimeline(false);
+                                self.__slideMap(false);
                             }
 
                         }
@@ -715,19 +723,27 @@
                             // If the mouse has moved downwards but has not crossed
                             // through the first offset tier.
                             if (offsetY > 0 && offsetY < vt1) {
-
+                                self._undated_items_height = 'partial';
+                                self._top_element = 'timeline';
+                                self.__slideTimeline(false);
+                                self.__slideMap(false);
                             }
 
                             // If the mouse has moved downwards and the vertical
                             // offset is between the two vertical offset tiers.
                             else if (offsetY > vt1 && offsetY < vt2) {
-
+                                self._undated_items_height = 'full';
+                                self.__slideTimeline(false);
+                                self.__slideMap(false);
                             }
 
                             // If the mouse has moved downwards and is over the
                             // second tier threshold.
                             else if (offsetY > vt2) {
-
+                                self._undated_items_height = 'partial';
+                                self._top_element = 'map';
+                                self.__slideTimeline(false);
+                                self.__slideMap(false);
                             }
 
                         }
@@ -740,25 +756,35 @@
                         // If the mouse has moved upwards but has not crossed
                         // through the first vertical tier.
                         if (offsetY < 0 && offsetY > -vt1) {
-
+                            self._undated_items_height = 'full';
+                            self.__slideTimeline(false);
+                            self.__slideMap(false);
                         }
 
                         // If the mouse has moved upwards and has crossed through
                         // the first vertical tier.
                         else if (offsetY < -vt1) {
-
+                            self._undated_items_height = 'partial';
+                            self._top_element = 'timeline';
+                            self.__slideTimeline(false);
+                            self.__slideMap(false);
                         }
 
                         // If the mouse has moved downwards but has not crossed
                         // through the first vertical tier.
                         else if (offsetY > 0 && offsetY < vt1) {
-
+                            self._undated_items_height = 'full';
+                            self.__slideTimeline(false);
+                            self.__slideMap(false);
                         }
 
                         // If the mouse has moved downwards and has crossed through
                         // the first vertical tier.
                         else if (offsetY > vt1) {
-
+                            self._undated_items_height = 'partial';
+                            self._top_element = 'map';
+                            self.__slideTimeline(false);
+                            self.__slideMap(false);
                         }
 
                     }
