@@ -70,7 +70,7 @@ head(array('content_class' => 'neatline'));
 
 </table>
 
-<div class="pagination">
+<div class="neatline-pagination">
     <?php echo pagination_links(array('scrolling_style' => 'All',
     'page_range' => '5',
     'partial_file' => 'index/_pagination.php',
