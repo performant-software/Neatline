@@ -40,7 +40,31 @@
 
         _create: function() {
 
+            // Get rows.
+            this.rows = this.element.find('tr');
 
+            // Gloss.
+            this._glossRows();
+
+        },
+
+        _glossRows: function() {
+
+            this.rows.each(function(row) {
+
+                row.bind({
+
+                    'mouseenter': function() {
+                        row.animate('background-color', this.options.gloss);
+                    },
+
+                    'mouseleave': function() {
+                        row.animate('background-color', this.options.default);
+                    }
+
+                });
+
+            });
 
         }
 
