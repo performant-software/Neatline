@@ -70,6 +70,15 @@ head(array('content_class' => 'neatline'));
 
 </table>
 
+<div class="pagination">
+    <?php echo pagination_links(array('scrolling_style' => 'All',
+    'page_range' => '5',
+    'partial_file' => 'index/_pagination.php',
+    'page' => $pagination['current_page'],
+    'per_page' => $pagination['per_page'],
+    'total_results' => $pagination['total_results'])); ?>
+</div>
+
 <?php else: ?>
 
     <p class="neatline-alert">There are no Neatline exhibits yet.

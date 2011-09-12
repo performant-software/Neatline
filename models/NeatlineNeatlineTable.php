@@ -62,4 +62,22 @@ class NeatlineNeatlineTable extends Omeka_Db_Table
 
     }
 
+    /**
+     * Build array with current_page, per_page, and total_results.
+     *
+     * @param array $request The request passed in from the controller.
+     *
+     * @return array $pagination The settings.
+     */
+    public function getPaginationSettings($request)
+    {
+
+        return array(
+            'current_page' => $request->page,
+            'per_page' => get_option('per_page_admin'),
+            'total_results' => $this->count()
+        );
+
+    }
+
 }

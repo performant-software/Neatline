@@ -64,7 +64,13 @@ class Neatline_IndexController extends Omeka_Controller_action
     public function browseAction()
     {
 
-        $this->view->neatlines = $this->_neatlinesTable->getNeatlinesForBrowse($this->_request);
+        // Push pagination variables.
+        $this->view->pagination = $this->_neatlinesTable
+            ->getPaginationSettings($this->_request);
+
+        // Push Neatlines.
+        $this->view->neatlines = $this->_neatlinesTable
+            ->getNeatlinesForBrowse($this->_request);
 
     }
 
