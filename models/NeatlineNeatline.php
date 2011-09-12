@@ -42,12 +42,18 @@ class NeatlineNeatline extends Omeka_record
      *
      * @param $_post The post data.
      *
-     * @return Omeka_record The server object.
+     * @return array $errors A list of errors to display.
      */
     public function saveForm($_post)
     {
 
+        $errors = array();
 
+        if (!isset($_post['title'])) {
+            $errors['title'] = 'Enter a title';
+        }
+
+        return $errors;
 
     }
 

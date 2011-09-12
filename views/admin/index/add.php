@@ -46,6 +46,7 @@ head(array('content_class' => 'neatline'));
 
     <h2 class="neatline-label">Enter a Title:</h2>
     <?php echo neatline_titleInput($neatline->name); ?>
+    <?php echo neatline_error($error['title']); ?>
 
     <hr>
 

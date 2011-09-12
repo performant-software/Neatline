@@ -88,6 +88,10 @@ class Neatline_IndexController extends Omeka_Controller_action
 
             }
 
+            else {
+                $this->view->errors = $errors;
+            }
+
         }
 
         // Bounce back if there are no maps or no timelines.
