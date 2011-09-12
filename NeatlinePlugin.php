@@ -196,7 +196,8 @@ class NeatlinePlugin
                 'neatline-exhibits/:action/:page',
                 array(
                     'module'      => 'neatline',
-                    'controller'  => 'index'
+                    'controller'  => 'index',
+                    'page'        => 1
                     ),
                 array('page'      => '/d+')
                 )

@@ -70,14 +70,7 @@ head(array('content_class' => 'neatline'));
 
 </table>
 
-<div class="neatline-pagination">
-    <?php echo pagination_links(array('scrolling_style' => 'All',
-    'page_range' => '5',
-    'partial_file' => 'index/_pagination.php',
-    'page' => $pagination['current_page'],
-    'per_page' => $pagination['per_page'],
-    'total_results' => $pagination['total_results'])); ?>
-</div>
+<?php echo neatline_pagination($pagination); ?>
 
 <?php else: ?>
 

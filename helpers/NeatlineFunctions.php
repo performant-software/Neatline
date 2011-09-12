@@ -219,6 +219,31 @@ function neatline_linkToTimeline($neatline)
 }
 
 /**
+ * Do pagination markup.
+ *
+ * @param array $pagination Array with parameters.
+ *
+ * @return void.
+ */
+function neatline_pagination($pagination)
+{
+
+?>
+
+    <div class="neatline-pagination">
+        <?php echo pagination_links(array('scrolling_style' => 'All',
+        'page_range' => '5',
+        'partial_file' => 'index/_pagination.php',
+        'page' => $pagination['current_page'],
+        'per_page' => $pagination['per_page'],
+        'total_results' => $pagination['total_results'])); ?>
+    </div>
+
+<?php
+
+}
+
+/**
  * Checks the supplied $tab parameter to see if it matches the
  * baseline $value; if so, return the 'current' CSS class.
  *
