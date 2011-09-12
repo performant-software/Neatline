@@ -183,6 +183,18 @@ class NeatlinePlugin
                 )
             );
 
+        $router->addRoute(
+            'neatlinePaginationRoute',
+            new Zend_Controller_Router_Route(
+                'neatline-exhibits/:action/:page',
+                array(
+                    'module'      => 'neatline',
+                    'controller'  => 'index'
+                    ),
+                array('page'      => '/d+')
+                )
+            );
+
     }
 
     /**
