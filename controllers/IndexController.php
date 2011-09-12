@@ -81,23 +81,26 @@ class Neatline_IndexController extends Omeka_Controller_action
         if ($this->_request->isPost()) {
 
             $_post = $this->_request->getPost();
-            $neatline->saveForm($_post);
+            $errors = $neatline->validateForm($_post);
 
-        }
-
-        // If no submission, show the form.
-        else {
-
-            // Bounce back if there are no maps or no timelines.
-            if ($this->_mapsTable->count() == 0 &&
-                $this->_timelinesTable->count() == 0) {
-
-                $this->flashError(neatline_noMapsOrTimelinesErrorMessage());
-                $this->_redirect('neatline-exhibits');
+            // If no errors, save form and redirect.
+            if (count($errors) == 0) {
 
             }
 
         }
+
+        // Bounce back if there are no maps or no timelines.
+        if ($this->_mapsTable->count() == 0 &&
+            $this->_timelinesTable->count() == 0) {
+
+            $this->flashError(neatline_noMapsOrTimelinesErrorMessage());
+            $this->_redirect('neatline-exhibits');
+
+        }
+
+        // Push Neatline object into view.
+        $this->view->neatline = $neatline;
 
     }
 

@@ -142,10 +142,17 @@ function neatline_isCurrent($tab, $value)
 /**
  * Construct the maps dropdown select.
  *
+ * @param integer $id The id of the selected map.
+ *
  * @return void.
  */
-function neatline_mapSelect()
+function neatline_mapSelect($id)
 {
+
+    // If no default is set, make choice 'none'.
+    if ($id == null) {
+        $id = 'none';
+    }
 
     // Get the maps, split up into alphabetized buckets
     // according to the parent item.
@@ -163,6 +170,9 @@ function neatline_mapSelect()
         $mapSelect->setMultiOptions(array($itemName => $optionsArray));
     }
 
+    // Set the default.
+    $mapSelect->setValue($id);
+
     return $mapSelect;
 
 }
@@ -170,9 +180,11 @@ function neatline_mapSelect()
 /**
  * Construct the timelines dropdown select.
  *
+ * @param integer $id The id of the selected map.
+ *
  * @return void.
  */
-function neatline_timelineSelect()
+function neatline_timelineSelect($id)
 {
 
     $timelines = neatline_getTimelinesForSelect();
@@ -190,12 +202,15 @@ function neatline_timelineSelect()
 /**
  * Construct the timelines dropdown select.
  *
+ * @param string $text The value of the input.
+ *
  * @return void.
  */
-function neatline_titleInput()
+function neatline_titleInput($text)
 {
 
     $neatlineTitle = new Zend_Form_Element_Text('title');
+    $neatlineTitle->setValue();
     return $neatlineTitle;
 
 }

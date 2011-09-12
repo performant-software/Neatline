@@ -45,26 +45,26 @@ head(array('content_class' => 'neatline'));
     </div>
 
     <h2 class="neatline-label">Enter a Title:</h2>
-    <?php echo neatline_titleInput(); ?>
+    <?php echo neatline_titleInput($neatline->name); ?>
 
     <hr>
 
     <h2 class="neatline-label">Choose a Map:</h2>
-    <?php echo neatline_mapSelect(); ?>
+    <?php echo neatline_mapSelect($neatline->map_id); ?>
 
     <hr>
 
     <h2 class="neatline-label">Choose a Timeline:</h2>
-    <?php echo neatline_timelineSelect(); ?>
+    <?php echo neatline_timelineSelect($neatline->timeline_id); ?>
 
     <hr>
 
     <h2 class="neatline-label">Configure Layout:</h2>
     <?php echo $this->partial('index/_layout_builder.php'); ?>
 
-    <?php echo neatline_hiddenElement('top_element', 'map'); ?>
-    <?php echo neatline_hiddenElement('undated_items_position', 'right'); ?>
-    <?php echo neatline_hiddenElement('undated_items_height', 'partial'); ?>
+    <?php echo neatline_hiddenElement('top_element', $neatline->top_element); ?>
+    <?php echo neatline_hiddenElement('undated_items_position', $neatline->undated_items_position); ?>
+    <?php echo neatline_hiddenElement('undated_items_height', $neatline->undated_items_height); ?>
 
     <?php echo neatline_buttonTo('', 'save_neatline',
         'Create Neatline', array('class' => 'neatline btn primary'), 'save-neatline', false); ?>
