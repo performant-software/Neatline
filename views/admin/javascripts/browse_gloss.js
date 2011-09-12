@@ -1,8 +1,7 @@
-<?php
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
 
-/**
- * Partial for "Actions" buttons in Neatline browse.
+/*
+ * Row glossing effects for browse views.
  *
  * PHP version 5
  *
@@ -23,26 +22,38 @@
  * @copyright   2011 The Board and Visitors of the University of Virginia
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache 2 License
  */
-?>
 
-<?php
+(function($, undefined) {
 
-echo neatline_buttonTo(
-    'edit/' . $neatline->id,
-    'edit-neatline',
-    'Edit',
-    array('class' => 'neatline btn primary'),
-    'edit-neatline',
-    array('class' => 'inline'),
-    true, 'neatline-inline');
 
-echo neatline_buttonTo(
-    'delete/' . $neatline->id,
-    'edit-neatline',
-    'Delete',
-    array('class' => 'neatline btn danger'),
-    'edit-neatline',
-    array('class' => 'inline'),
-    true, 'neatline-inline');
+    $.widget('neatline.rowglosser', {
 
-?>
+        options: {
+
+            // Hex defaults.
+            colors: {
+                default: '#fff',
+                gloss: '#cfddec'
+            }
+
+        },
+
+        _create: function() {
+
+
+
+        }
+
+    });
+
+
+})( jQuery );
+
+
+// Usage.
+jQuery(document).ready(function($) {
+
+    $('table.neatline').rowglosser();
+
+});
+
