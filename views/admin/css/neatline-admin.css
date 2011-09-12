@@ -23,7 +23,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache 2 License
  */
 
-/* Background image and color changes to match Neatline site */
+/* Background image and color changes to match Neatline site. */
 
 body {
     background: #F9F9F9 url(../images/bg_wrapper.jpg) !important;
@@ -56,6 +56,11 @@ h2.neatline-label {
     border: 0;
     background-color: #eeeaf0;
     margin: 20px 0 20px 0;
+}
+
+.error {
+    font-size: 1.7em;
+    padding: 1.2em 1.5em 1.2em 2em;
 }
 
 /* Navigation */
