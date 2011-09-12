@@ -59,6 +59,18 @@ function neatline_queueLayoutBuilderCssAndJs()
 }
 
 /**
+ * Include the row glosser widget.
+ *
+ * @return void.
+ */
+function neatline_queueRowGlosserJs()
+{
+
+    queue_js('browse_gloss', 'javascripts');
+
+}
+
+/**
  * Create a form containing a single button.
  *
  * @param string $action Form action URI.

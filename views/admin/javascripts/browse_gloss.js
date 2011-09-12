@@ -50,16 +50,18 @@
 
         _glossRows: function() {
 
-            this.rows.each(function(row) {
+            var self = this;
+
+            $.each(this.rows, function(i, row) {
 
                 row.bind({
 
                     'mouseenter': function() {
-                        row.animate('background-color', this.options.gloss);
+                        row.animate('background-color', self.options.gloss);
                     },
 
                     'mouseleave': function() {
-                        row.animate('background-color', this.options.default);
+                        row.animate('background-color', self.options.default);
                     }
 
                 });

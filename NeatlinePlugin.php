@@ -145,10 +145,16 @@ class NeatlinePlugin
             neatline_queueAdminCss();
         }
 
-        // Queue custom JavaScript.
+        // Queue layout builder JavaScript.
         if ($request->getModuleName() == 'neatline' && $request->getActionName() == 'add') {
             neatline_queueLayoutBuilderCssAndJs();
         }
+
+        // Queue row glosser for browse actions.
+        if ($request->getModuleName() == 'neatline' && $request->getActionName() == 'browse') {
+            neatline_queueRowGlosserJs();
+        }
+
 
     }
 
