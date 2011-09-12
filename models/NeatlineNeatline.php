@@ -63,6 +63,22 @@ class NeatlineNeatline extends Omeka_record
     }
 
     /**
+     * Save the add Neatline form.
+     *
+     * @param $_post The post data.
+     *
+     * @return boolean True if save is successful.
+     */
+    public function saveForm($_post)
+    {
+
+        $this->populateData($_post);
+
+        return $this->save() ? true : false;
+
+    }
+
+    /**
      * Populate parameters.
      *
      * @param $_post The post data.

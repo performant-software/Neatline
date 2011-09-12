@@ -331,6 +331,20 @@ function neatline_noMapsOrTimelinesErrorMessage()
 }
 
 /**
+ * Message that displays if Neatline save fails.
+ *
+ * @param string $title The title of the neatline.
+ *
+ * @return string The message.
+ */
+function neatline_saveFail($title)
+{
+
+    return 'There was an error - "' . $title . '" was not saved.';
+
+}
+
+/**
  * Construct an error message in a form.
  *
  * @param string $text The error text.

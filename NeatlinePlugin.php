@@ -88,14 +88,14 @@ class NeatlinePlugin
     public function install()
     {
 
-        $sql = "CREATE TABLE IF NOT EXISTS `{$this->_db->prefix}neatlines` (
+        $sql = "CREATE TABLE IF NOT EXISTS `{$this->_db->prefix}neatline_neatlines` (
                 `id` int(10) unsigned not null auto_increment,
                 `name` tinytext collate utf8_unicode_ci,
                 `map_id` int(10) unsigned NULL,
                 `timeline_id` int(10) unsigned NULL,
-                `top_element` ENUM('map', 'timeline') NOT NULL,
-                `undated_items_position` ENUM('right', 'left') NOT NULL,
-                `undated_items_height` ENUM('partial', 'full') NOT NULL,
+                `top_element` ENUM('map', 'timeline') NOT NULL DEFAULT 'map',
+                `undated_items_position` ENUM('right', 'left') NOT NULL DEFAULT 'right',
+                `undated_items_height` ENUM('partial', 'full') NOT NULL DEFAULT 'partial',
                  PRIMARY KEY (`id`)
                ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
 

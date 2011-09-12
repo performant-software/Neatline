@@ -38,6 +38,7 @@ class Neatline_IndexController extends Omeka_Controller_action
     public function init()
     {
 
+        $this->_neatlinesTable = $this->getTable('NeatlineNeatline');
         $this->_mapsTable = $this->getTable('NeatlineMapsMap');
         $this->_timelinesTable = $this->getTable('NeatlineTimeTimeline');
 
@@ -63,7 +64,7 @@ class Neatline_IndexController extends Omeka_Controller_action
     public function browseAction()
     {
 
-
+        $neatlines = $this->_neatlinesTable->getNeatlinesForBrowse($this->_request);
 
     }
 
@@ -85,6 +86,14 @@ class Neatline_IndexController extends Omeka_Controller_action
 
             // If no errors, save form and redirect.
             if (count($errors) == 0) {
+
+                if ($neatline->saveForm($_post)) {
+                    // redirect to the Neatline.
+                }
+
+                else {
+                    $this->flashError(neatline_saveFail($neatline->name));
+                }
 
             }
 

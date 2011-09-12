@@ -139,6 +139,10 @@
             this._undated_items_height = (undated_items_height_starter) ? undated_items_height_starter :
                 this.options.def_udi_height;
 
+            this.top_element_input.attr('value', this._top_element);
+            this.udi_position_input.attr('value', this._undated_items_position);
+            this.udi_height_input.attr('value', this._undated_items_height);
+
             this.map_select.trigger('change');
             this.timeline_select.trigger('change');
 
