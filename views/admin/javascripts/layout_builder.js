@@ -106,9 +106,10 @@
             this._is_undated_items = false;
 
             // Set tracker variables for element position.
-            this._top_element = this.options.def_top_element;
-            this._undated_items_position = this.options.def_udi_position;
-            this._undated_items_height = this.options.def_udi_height;
+            this._setTrackerVariables();
+            // this._top_element = this.options.def_top_element;
+            // this._undated_items_position = this.options.def_udi_position;
+            // this._undated_items_height = this.options.def_udi_height;
 
             // Set tracker arrays that record the last parameter
             // loadouts that triggered a div slide.
@@ -123,6 +124,14 @@
 
             // Gloss.
             this._addDragEvents();
+
+        },
+
+        _setTrackerVariables: function() {
+
+            var top_element_starter = this.top_element_input.attr('value');
+            var undated_items_position_starter = this.udi_position_input.attr('value');
+            var undated_items_height_starter = this.udi_height_input.attr('value');
 
         },
 

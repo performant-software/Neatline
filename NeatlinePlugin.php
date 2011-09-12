@@ -91,11 +91,11 @@ class NeatlinePlugin
         $sql = "CREATE TABLE IF NOT EXISTS `{$this->_db->prefix}neatlines` (
                 `id` int(10) unsigned not null auto_increment,
                 `name` tinytext collate utf8_unicode_ci,
-                `map_id` int(10) unsigned null,
-                `timeline_id` int(10) unsigned null,
-                `top_element` ENUM('map', 'timeline') not null default 'map',
-                `undated_items_position` ENUM('left', 'right') not null default 'right',
-                `undated_items_height` ENUM('partial', 'full') not null default 'partial',
+                `map_id` int(10) unsigned NULL,
+                `timeline_id` int(10) unsigned NULL,
+                `top_element` ENUM('map', 'timeline') NOT NULL,
+                `undated_items_position` ENUM('right', 'left') NOT NULL,
+                `undated_items_height` ENUM('partial', 'full') NOT NULL,
                  PRIMARY KEY (`id`)
                ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
 
