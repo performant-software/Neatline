@@ -64,7 +64,7 @@ class Neatline_IndexController extends Omeka_Controller_action
     public function browseAction()
     {
 
-        // $neatlines = $this->_neatlinesTable->getNeatlinesForBrowse($this->_request);
+        $neatlines = $this->_neatlinesTable->getNeatlinesForBrowse($this->_request);
 
     }
 

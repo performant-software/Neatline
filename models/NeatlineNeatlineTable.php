@@ -40,7 +40,25 @@ class NeatlineNeatlineTable extends Omeka_Db_Table
     public function getNeatlinesForBrowse($request)
     {
 
-        return;
+        $_db = get_db();
+
+        $sortField = $request->getParam('sort_field');
+        $sortDir = $request->getParam('sort_dir');
+        $page = $request->page;
+        $orderSql = neatline_buildOrderClause($sortField, $sortDir);
+
+        $select = $this->select()
+            ->from(array('n' => $_db->prefix . 'neatline_neatlines'));
+
+        if (isset($page)) {
+            $select->limitPage($page, get_option('per_page_admin'));
+        }
+
+        if (isset($order)) {
+            $select->order($order);
+        }
+
+        return $this->fetchObjects($select);
 
     }
 

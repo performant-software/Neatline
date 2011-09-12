@@ -244,3 +244,10 @@ span.drag-tag {
     background-color: #ffedef;
     font-size: 1.8em;
 }
+
+/* Browse */
+
+p.neatline-alert {
+    margin: 0;
+    font-size: 1.7em;
+}

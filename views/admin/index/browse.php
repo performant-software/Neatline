@@ -39,6 +39,13 @@ head(array('content_class' => 'neatline'));
 
 <?php echo flash(); ?>
 
+<?php if(count($neatlines) > 0): ?>
+
+<?php else: ?>
+<p class="neatline-alert">There are no Neatline exhibits yet.
+<a href="<?php echo uri('neatline-exhibits/add'); ?>">Create one!</a></p>
+<?php endif; ?>
+
 </div>
 
 <?php

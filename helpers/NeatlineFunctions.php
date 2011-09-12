@@ -303,6 +303,26 @@ function neatline_compareObjects($a, $b)
 }
 
 /**
+ * Build order clause for SQL queries.
+ *
+ * @param string $sort_field The column to sort on.
+ * @param string $sort_dir The direction to sort.
+ *
+ * @return string $order The sort parameter for the query.
+ */
+function neatline_buildOrderClause($sort_field, $sort_dir)
+{
+
+    if (isset($sort_dir)) {
+        $sort_dir = ($sort_dir == 'a') ? 'ASC' : 'DESC';
+    }
+
+    return ($sort_field != '') ?
+        trim(implode(' ', array($sort_field, $sort_dir))) : '';
+
+}
+
+/**
  * Message that displays before uninstall confirm.
  *
  * @return string The message.
