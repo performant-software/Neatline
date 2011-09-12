@@ -157,6 +157,24 @@ function neatline_linkToMap($neatline)
 }
 
 /**
+ * Format datetime.
+ *
+ * @param string $date The date in datetime.
+ *
+ * @return string $date The formatted date.
+ */
+function neatline_formatDate($date)
+{
+
+    $date = new DateTime($date);
+
+    return '<span class="neatline-date">'
+        . $date->format('F j, Y')
+        . '</span>';
+
+}
+
+/**
  * Build link to Neatline exhibit.
  *
  * @param Omeka_record $neatline The Neatline.

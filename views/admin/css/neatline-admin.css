@@ -280,3 +280,7 @@ span.neatline-null {
     font-size: 1em;
     color: #b5b5b5;
 }
+
+span.neatline-date {
+    font-size: 0.9em;
+}
