@@ -187,6 +187,11 @@ function neatline_mapSelect($id)
 function neatline_timelineSelect($id)
 {
 
+    // If no default is set, make choice 'none'.
+    if ($id == null) {
+        $id = 'none';
+    }
+
     $timelines = neatline_getTimelinesForSelect();
     $timelineSelect = new Zend_Form_Element_Select('timeline');
 
@@ -194,6 +199,9 @@ function neatline_timelineSelect($id)
     foreach ($timelines as $timeline) {
         $timelineSelect->addMultiOption($timeline->id, $timeline->title);
     }
+
+    // Set the default value.
+    $timelineSelect->setValue($id);
 
     return $timelineSelect;
 
