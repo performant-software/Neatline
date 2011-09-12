@@ -63,6 +63,12 @@ h2.neatline-label {
     padding: 1.2em 1.5em 1.2em 2em;
 }
 
+.neatline-error {
+    font-size: 1.7em;
+    margin: 0.5em 0 0 0;
+    color: red;
+}
+
 /* Navigation */
 
 #neatline-header {

@@ -218,7 +218,7 @@ function neatline_titleInput($text)
 {
 
     $neatlineTitle = new Zend_Form_Element_Text('title');
-    $neatlineTitle->setValue();
+    $neatlineTitle->setValue($text);
     return $neatlineTitle;
 
 }
@@ -326,6 +326,23 @@ function neatline_noMapsOrTimelinesErrorMessage()
 
     return 'Before you can start a Neatline exhibit, create at least one map '
          . 'or one timeline.';
+
+
+}
+
+/**
+ * Construct an error message in a form.
+ *
+ * @param string $text The error text.
+ *
+ * @return string The error markup.
+ */
+function neatline_error($text)
+{
+
+    return '<div class="neatline-error">'
+         . $text
+         . '</div>';
 
 
 }

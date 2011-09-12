@@ -89,6 +89,7 @@ class Neatline_IndexController extends Omeka_Controller_action
             }
 
             else {
+                $neatline->populateData($_post);
                 $this->view->errors = $errors;
             }
 
@@ -105,8 +106,6 @@ class Neatline_IndexController extends Omeka_Controller_action
 
         // Push Neatline object into view.
         $this->view->neatline = $neatline;
-
-        print_r($neatline);
 
     }
 
