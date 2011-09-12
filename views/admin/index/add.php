@@ -50,7 +50,7 @@ head(array('content_class' => 'neatline'));
     <hr>
 
     <h2 class="neatline-label">Choose a Map:</h2>
-    <?php echo neatline_mapSelect(24); ?>
+    <?php echo neatline_mapSelect($neatline->map_id); ?>
 
     <hr>
 

@@ -140,6 +140,7 @@
                 this.options.def_udi_height;
 
             this.map_select.trigger('change');
+            this.timeline_select.trigger('change');
 
         },
 
