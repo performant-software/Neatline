@@ -69,6 +69,14 @@ h2.neatline-label {
     color: red;
 }
 
+.neatline a {
+    color: #5B396C;
+}
+
+.neatline a:hover {
+    color: #745783;
+}
+
 /* Navigation */
 
 #neatline-header {
@@ -338,7 +346,7 @@ form.inline {
 }
 
 .neatline-pagination ul li a:hover, .neatline-pagination ul li.active a {
-  background-color: #c7eefe;
+  background-color: #f7f3f9;
 }
 
 .neatline-pagination ul li.disabled a, .neatline-pagination ul li.disabled a:hover {

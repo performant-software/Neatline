@@ -32,7 +32,7 @@
 
             colors: {
                 default: '#fff',
-                gloss: '#f3f6fa'
+                gloss: '#f7f3f9'
             },
 
             fade_duration: 10
