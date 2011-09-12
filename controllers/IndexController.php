@@ -75,8 +75,13 @@ class Neatline_IndexController extends Omeka_Controller_action
     public function addAction()
     {
 
+        $neatline = new NeatlineNeatline;
+
         // Try to create the Neatline if the form has been submitted.
         if ($this->_request->isPost()) {
+
+            $_post = $this->_request->getPost();
+            $neatline->saveForm($_post);
 
         }
 
