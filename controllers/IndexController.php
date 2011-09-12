@@ -102,6 +102,8 @@ class Neatline_IndexController extends Omeka_Controller_action
         // Push Neatline object into view.
         $this->view->neatline = $neatline;
 
+        print_r($neatline);
+
     }
 
     /**

@@ -90,6 +90,12 @@
             this.map_select = $('#' + this.options.map_select_id);
             this.timeline_select = $('#' + this.options.timeline_select_id);
 
+            // Set dropdown select tracker default, wire the
+            // layout builder up with the selects.
+            this._last_map_dropdown_selection = this.options.no_selection_string;
+            this._last_timeline_dropdown_selection = this.options.no_selection_string;
+            this._addToggleEvents();
+
             // Get fixed pixel values for heights.
             this._getPxConstants();
 
@@ -106,32 +112,34 @@
             this._is_undated_items = false;
 
             // Set tracker variables for element position.
-            this._setTrackerVariables();
-            // this._top_element = this.options.def_top_element;
-            // this._undated_items_position = this.options.def_udi_position;
-            // this._undated_items_height = this.options.def_udi_height;
+            this._setStartingParameters();
 
             // Set tracker arrays that record the last parameter
             // loadouts that triggered a div slide.
             this._last_map_slide_params = null;
             this._last_timeline_slide_params = null;
 
-            // Set dropdown select tracker default, wire the
-            // layout builder up with the selects.
-            this._last_map_dropdown_selection = this.options.no_selection_string;
-            this._last_timeline_dropdown_selection = this.options.no_selection_string;
-            this._addToggleEvents();
-
             // Gloss.
             this._addDragEvents();
 
         },
 
-        _setTrackerVariables: function() {
+        _setStartingParameters: function() {
 
             var top_element_starter = this.top_element_input.attr('value');
             var undated_items_position_starter = this.udi_position_input.attr('value');
             var undated_items_height_starter = this.udi_height_input.attr('value');
+
+            this._top_element = (top_element_starter) ? top_element_starter :
+                this.options.def_top_element;
+
+            this._undated_items_position = (undated_items_position_starter) ? undated_items_position_starter :
+                this.options.def_udi_position;
+
+            this._undated_items_height = (undated_items_height_starter) ? undated_items_height_starter :
+                this.options.def_udi_height;
+
+            this.map_select.trigger('change');
 
         },
 
