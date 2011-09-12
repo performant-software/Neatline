@@ -75,6 +75,7 @@ h2.neatline-label {
 
 .neatline a:hover {
     color: #745783;
+    text-decoration: underline;
 }
 
 /* Navigation */
