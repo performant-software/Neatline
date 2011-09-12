@@ -251,3 +251,7 @@ p.neatline-alert {
     margin: 0;
     font-size: 1.7em;
 }
+
+.neatline th {
+    font-size: 1.3em;
+}

@@ -323,6 +323,18 @@ function neatline_buildOrderClause($sort_field, $sort_dir)
 }
 
 /**
+ * Get a MySql kosher timestamp.
+ *
+ * @return string $timestemp The timestamp.
+ */
+function neatline_getMysqlDatetime()
+{
+
+    return date('Y-m-d H:i:s');
+
+}
+
+/**
  * Message that displays before uninstall confirm.
  *
  * @return string The message.

@@ -90,6 +90,7 @@ class NeatlinePlugin
 
         $sql = "CREATE TABLE IF NOT EXISTS `{$this->_db->prefix}neatline_neatlines` (
                 `id` int(10) unsigned not null auto_increment,
+                `added` timestamp NOT NULL default NOW(),
                 `name` tinytext collate utf8_unicode_ci,
                 `map_id` int(10) unsigned NULL,
                 `timeline_id` int(10) unsigned NULL,
@@ -111,7 +112,7 @@ class NeatlinePlugin
     public function uninstall()
     {
 
-        $sql = "DROP TABLE IF EXISTS `{$this->_db->prefix}neatlines`";
+        $sql = "DROP TABLE IF EXISTS `{$this->_db->prefix}neatline_neatlines`";
 
         $this->_db->query($sql);
 

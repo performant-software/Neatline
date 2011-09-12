@@ -30,6 +30,7 @@
 class NeatlineNeatline extends Omeka_record
 {
 
+    public $added;
     public $name;
     public $map_id;
     public $timeline_id;
@@ -88,6 +89,7 @@ class NeatlineNeatline extends Omeka_record
     public function populateData($_post)
     {
 
+        $this->added = neatline_getMysqlDatetime();
         $this->name = $_post['title'];
         $this->map_id = $_post['map'];
         $this->timeline_id = $_post['timeline'];

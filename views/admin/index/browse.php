@@ -41,9 +41,39 @@ head(array('content_class' => 'neatline'));
 
 <?php if(count($neatlines) > 0): ?>
 
+<table class="neatline">
+
+    <thead>
+        <tr>
+        <?php browse_headings(array(
+            'Title' => 'name',
+            'Map' => null,
+            'Timeline' => null,
+            'Created' => null,
+            'Actions' => null
+        )); ?>
+        </tr>
+    </thead>
+
+    <tbody>
+        <?php foreach ($neatlines as $neatline): ?>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <?php endforeach; ?>
+    </tbody>
+
+</table>
+
 <?php else: ?>
-<p class="neatline-alert">There are no Neatline exhibits yet.
-<a href="<?php echo uri('neatline-exhibits/add'); ?>">Create one!</a></p>
+
+    <p class="neatline-alert">There are no Neatline exhibits yet.
+    <a href="<?php echo uri('neatline-exhibits/add'); ?>">Create one!</a></p>
+
 <?php endif; ?>
 
 </div>
