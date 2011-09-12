@@ -247,11 +247,36 @@ span.drag-tag {
 
 /* Browse */
 
+.neatline #primary {
+    border-top: 2px solid #cecece;
+    border-bottom: 2px solid #cecece;
+}
+
 p.neatline-alert {
     margin: 0;
     font-size: 1.7em;
 }
 
-.neatline th {
+table.neatline th, table.neatline td {
     font-size: 1.3em;
+}
+
+table.neatline td {
+    height: 30px;
+}
+
+a.neatline-title {
+    font-weight: bold;
+    text-decoration: none;
+    position: relative;
+    top: 3px;
+}
+
+a.neatline {
+    text-decoration: none;
+}
+
+span.neatline-null {
+    font-size: 1em;
+    color: #b5b5b5;
 }

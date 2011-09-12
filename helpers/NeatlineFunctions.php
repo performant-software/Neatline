@@ -117,6 +117,70 @@ function neatline_hiddenElement($name, $value)
 }
 
 /**
+ * Build link to Neatline exhibit.
+ *
+ * @param Omeka_record $neatline The Neatline.
+ *
+ * @return string The link.
+ */
+function neatline_linkToNeatline($neatline)
+{
+
+    return '<a class="neatline-title" href="' . uri('neatline-exhibits/' . $neatline->id) . '">'
+         . $neatline->name
+         . '</a>';
+
+}
+
+/**
+ * Build link to Neatline exhibit.
+ *
+ * @param Omeka_record $neatline The Neatline.
+ *
+ * @return string The link.
+ */
+function neatline_linkToMap($neatline)
+{
+
+    $map = $neatline->getMap();
+
+    if (!$map) {
+        return '<span class="neatline-null">'
+             . '( no map )'
+             . '</span>';
+    }
+
+    return '<a class="neatline"  href="' . uri('neatline-maps/maps/' . $map->id . '/files') . '">'
+         . $map->name
+         . '</a>';
+
+}
+
+/**
+ * Build link to Neatline exhibit.
+ *
+ * @param Omeka_record $neatline The Neatline.
+ *
+ * @return string The link.
+ */
+function neatline_linkToTimeline($neatline)
+{
+
+    $timeline = $neatline->getTimeline();
+
+    if (!$timeline) {
+        return '<span class="neatline-null">'
+             . '( no timeline )'
+             . '</span>';
+    }
+
+    return '<a class="neatline"  href="' . uri('neatline-time/timelines/show' . $timeline->id) . '">'
+         . $timeline->title
+         . '</a>';
+
+}
+
+/**
  * Checks the supplied $tab parameter to see if it matches the
  * baseline $value; if so, return the 'current' CSS class.
  *
@@ -165,7 +229,7 @@ function neatline_mapSelect($id)
         $optionsArray = array();
         $optionsArray['none'] = '-';
         foreach ($maps as $map) {
-            $optionsArray[$map->id] = $map->name;
+            $optionsArray[$map->map_id] = $map->name;
         }
         $mapSelect->setMultiOptions(array($itemName => $optionsArray));
     }

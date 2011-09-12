@@ -49,7 +49,7 @@ head(array('content_class' => 'neatline'));
             'Title' => 'name',
             'Map' => null,
             'Timeline' => null,
-            'Created' => null,
+            'Created' => 'added',
             'Actions' => null
         )); ?>
         </tr>
@@ -58,9 +58,9 @@ head(array('content_class' => 'neatline'));
     <tbody>
         <?php foreach ($neatlines as $neatline): ?>
         <tr>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td><?php echo neatline_linkToNeatline($neatline); ?></td>
+            <td><?php echo neatline_linkToMap($neatline); ?></td>
+            <td><?php echo neatline_linkToTimeline($neatline); ?></td>
             <td></td>
             <td></td>
         </tr>

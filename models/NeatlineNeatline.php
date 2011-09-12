@@ -99,4 +99,28 @@ class NeatlineNeatline extends Omeka_record
 
     }
 
+    /**
+     * Fetch the parent map.
+     *
+     * @return Omeka_record The map.
+     */
+    public function getMap()
+    {
+
+        return $this->getTable('NeatlineMapsMap')->find($this->map_id);
+
+    }
+
+    /**
+     * Fetch the parent timeline.
+     *
+     * @return Omeka_record The map.
+     */
+    public function getTimeline()
+    {
+
+        return $this->getTable('NeatlineTimeTimeline')->find($this->timeline_id);
+
+    }
+
 }
