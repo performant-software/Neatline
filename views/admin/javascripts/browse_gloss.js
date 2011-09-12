@@ -30,18 +30,19 @@
 
         options: {
 
-            // Hex defaults.
             colors: {
                 default: '#fff',
-                gloss: '#cfddec'
-            }
+                gloss: '#f3f6fa'
+            },
+
+            fade_duration: 10
 
         },
 
         _create: function() {
 
             // Get rows.
-            this.rows = this.element.find('tr');
+            this.rows = this.element.find('tbody tr');
 
             // Gloss.
             this._glossRows();
@@ -54,14 +55,18 @@
 
             $.each(this.rows, function(i, row) {
 
-                row.bind({
+                $(row).bind({
 
                     'mouseenter': function() {
-                        row.animate('background-color', self.options.gloss);
+                        $(row).animate({
+                            'background-color': self.options.colors.gloss
+                        }, self.options.fade_duration);
                     },
 
                     'mouseleave': function() {
-                        row.animate('background-color', self.options.default);
+                        $(row).animate({
+                            'background-color': self.options.colors.default
+                        }, self.options.fade_duration);
                     }
 
                 });
