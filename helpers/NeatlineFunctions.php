@@ -72,7 +72,15 @@ function neatline_queueLayoutBuilderCssAndJs()
  *
  * @return string HTML form.
  */
-function neatline_buttonTo($action, $name = null, $value = 'Submit', $attribs = array(), $formName = null, $formAttribs = array(), $formWrap = true)
+function neatline_buttonTo(
+    $action,
+    $name = null,
+    $value = 'Submit',
+    $attribs = array(),
+    $formName = null,
+    $formAttribs = array(),
+    $formWrap = true,
+    $fieldsetClass)
 {
 
     $view = __v();
@@ -86,11 +94,11 @@ function neatline_buttonTo($action, $name = null, $value = 'Submit', $attribs = 
         $formAttribs['class'] = 'button-form';
     }
 
-    $fieldset = '<fieldset>' . $view->formSubmit($name, $value, $attribs) . '</fieldset>';
+    $fieldset = '<fieldset class="' . $fieldsetClass . '">'
+        . $view->formSubmit($name, $value, $attribs) . '</fieldset>';
 
     if ($formWrap) {
-        return $view->form($formName, $formAttribs,
-            '<fieldset>' . $view->formSubmit($name, $value, $attribs) . '</fieldset>');
+        return $view->form($formName, $formAttribs, $fieldset);
     } else {
         return $fieldset;
     }

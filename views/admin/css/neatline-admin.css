@@ -262,7 +262,7 @@ table.neatline th, table.neatline td {
 }
 
 table.neatline td {
-    height: 30px;
+    height: 40px;
 }
 
 a.neatline-title {
@@ -283,4 +283,18 @@ span.neatline-null {
 
 span.neatline-date {
     font-size: 0.9em;
+}
+
+fieldset.neatline-inline {
+    margin: 0;
+    padding: 0;
+}
+
+form.inline, form.inline fieldset, form.inline input {
+    margin: 0;
+    display: inline;
+}
+
+form.inline {
+    margin-right: 0.4em;
 }
