@@ -31,7 +31,9 @@
 
 <div id="neatline-header">
 
-    <img id="neatline-logo" src="<?php echo img('neatline-logo-rgb-small.png'); ?>" />
+    <a href="<?php echo uri('neatline-exhibits'); ?>">
+        <img id="neatline-logo" src="<?php echo img('neatline-logo-rgb-small.png'); ?>" />
+    </a>
 
     <ul id="section-nav" class="navigation">
         <li class="nav-neatlines <?php echo neatline_isCurrent($tab, 'neatlines'); ?>">
