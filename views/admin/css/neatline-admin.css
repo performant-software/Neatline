@@ -143,12 +143,12 @@ form#create-neatline {
     margin-bottom: 0;
 }
 
-form#create-neatline input#save_neatline {
+form#create-neatline input#save_neatline, form.neatline {
     float: left;
     width: 120px;
 }
 
-form#create-neatline fieldset {
+form#create-neatline fieldset, form.neatline fieldset {
     margin: 0;
     padding: 0;
 }

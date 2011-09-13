@@ -146,7 +146,8 @@ class NeatlinePlugin
         }
 
         // Queue layout builder JavaScript.
-        if ($request->getModuleName() == 'neatline' && $request->getActionName() == 'add') {
+        if ($request->getModuleName() == 'neatline' &&
+            in_array($request->getActionName(), array('add', 'edit'))) {
             neatline_queueLayoutBuilderCssAndJs();
         }
 
@@ -170,41 +171,6 @@ class NeatlinePlugin
 
         $router->addConfig(new Zend_Config_Ini(NEATLINE_PLUGIN_DIR
             .'/routes.ini', 'routes'));
-
-        // $router->addRoute(
-        //     'neatlineDefaultRoute',
-        //     new Zend_Controller_Router_Route(
-        //         'neatline-exhibits',
-        //         array(
-        //             'module'      => 'neatline',
-        //             'controller'  => 'index'
-        //             )
-        //         )
-        //     );
-
-        // $router->addRoute(
-        //     'neatlineActionRoute',
-        //     new Zend_Controller_Router_Route(
-        //         'neatline-exhibits/:action',
-        //         array(
-        //             'module'      => 'neatline',
-        //             'controller'  => 'index'
-        //             )
-        //         )
-        //     );
-
-        // $router->addRoute(
-        //     'neatlinePaginationRoute',
-        //     new Zend_Controller_Router_Route(
-        //         'neatline-exhibits/:action/:page',
-        //         array(
-        //             'module'      => 'neatline',
-        //             'controller'  => 'index',
-        //             'page'        => 1
-        //             ),
-        //         array('page'      => '/d+')
-        //         )
-        //     );
 
     }
 
