@@ -168,40 +168,43 @@ class NeatlinePlugin
     public function defineRoutes($router)
     {
 
-        $router->addRoute(
-            'neatlineDefaultRoute',
-            new Zend_Controller_Router_Route(
-                'neatline-exhibits',
-                array(
-                    'module'      => 'neatline',
-                    'controller'  => 'index'
-                    )
-                )
-            );
+        $router->addConfig(new Zend_Config_Ini(NEATLINE_PLUGIN_DIR
+            .'/routes.ini', 'routes'));
 
-        $router->addRoute(
-            'neatlineActionRoute',
-            new Zend_Controller_Router_Route(
-                'neatline-exhibits/:action',
-                array(
-                    'module'      => 'neatline',
-                    'controller'  => 'index'
-                    )
-                )
-            );
+        // $router->addRoute(
+        //     'neatlineDefaultRoute',
+        //     new Zend_Controller_Router_Route(
+        //         'neatline-exhibits',
+        //         array(
+        //             'module'      => 'neatline',
+        //             'controller'  => 'index'
+        //             )
+        //         )
+        //     );
 
-        $router->addRoute(
-            'neatlinePaginationRoute',
-            new Zend_Controller_Router_Route(
-                'neatline-exhibits/:action/:page',
-                array(
-                    'module'      => 'neatline',
-                    'controller'  => 'index',
-                    'page'        => 1
-                    ),
-                array('page'      => '/d+')
-                )
-            );
+        // $router->addRoute(
+        //     'neatlineActionRoute',
+        //     new Zend_Controller_Router_Route(
+        //         'neatline-exhibits/:action',
+        //         array(
+        //             'module'      => 'neatline',
+        //             'controller'  => 'index'
+        //             )
+        //         )
+        //     );
+
+        // $router->addRoute(
+        //     'neatlinePaginationRoute',
+        //     new Zend_Controller_Router_Route(
+        //         'neatline-exhibits/:action/:page',
+        //         array(
+        //             'module'      => 'neatline',
+        //             'controller'  => 'index',
+        //             'page'        => 1
+        //             ),
+        //         array('page'      => '/d+')
+        //         )
+        //     );
 
     }
 

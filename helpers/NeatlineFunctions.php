@@ -212,7 +212,7 @@ function neatline_linkToTimeline($neatline)
              . '</span>';
     }
 
-    return '<a class="neatline"  href="' . uri('neatline-time/timelines/show' . $timeline->id) . '">'
+    return '<a class="neatline"  href="' . uri('neatline-time/timelines/show/' . $timeline->id) . '">'
          . $timeline->title
          . '</a>';
 
