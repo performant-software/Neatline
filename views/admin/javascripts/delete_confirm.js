@@ -35,27 +35,21 @@
                 title: 'title'
             },
 
-            fade_duration: 200
+            // Misc.
+            fade_duration: 150
 
         },
 
         _create: function() {
 
-            // Get rows.
+            // Get rows and confirm markup.
             this.rows = this.element.find('tbody tr');
-
-            // Create the cover div.
-            this._createCover();
+            this.coverDiv = $('#neatline-cover');
+            this.transparencyDiv = this.coverDiv.find('.transparency');
+            this.confirmDiv = $('#neatline-delete-confirm');
 
             // Gloss.
             this._glossRows();
-
-        },
-
-        _createCover: function() {
-
-            this.coverDiv = $('<div class="neatline-cover"></div>');
-            $('body').prepend(this.coverDiv);
 
         },
 
@@ -74,7 +68,7 @@
 
                     'mousedown': function(event) {
                         event.preventDefault();
-                        self._showConfirm();
+                        self._doConfirm();
                     },
 
                     // Just to override the default..
@@ -88,15 +82,32 @@
 
         },
 
-        _showConfirm: function() {
+        _doConfirm: function() {
 
-            // Show the cover div.
+            var self = this;
+
+            // Show and position the cover div.
             this.coverDiv.css('display', 'block');
-            this.coverDiv.animate({
+            this._positionCover();
+
+            // Tween the opacity up.
+            this.transparencyDiv.animate({
                 'opacity': 0.4
             }, this.options.fade_duration);
 
-            this._positionCover();
+            // Show the box.
+            this._showConfirmBox();
+
+            // Add the resize event to the window.
+            $(window).bind('resize', function() {
+                self._positionCover();
+            });
+
+        },
+
+        _showConfirmBox: function() {
+
+
 
         },
 
@@ -104,11 +115,17 @@
 
             var docX = $(document).width();
             var docY = $(document).height();
+            var winY = $(window).height();
+
+            var confirmY = this.confirmDiv.height();
+            var confirmTopOffset = (winY - confirmY) / 2;
 
             this.coverDiv.css({
                 'height': docY,
                 'width': docX
             });
+
+            this.confirmDiv.css('top', confirmTopOffset);
 
         }
 

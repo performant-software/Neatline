@@ -72,6 +72,7 @@ head(array('content_class' => 'neatline'));
 </table>
 
 <?php echo neatline_pagination($pagination); ?>
+<?php echo neatline_deleteConfirmMarkup(); ?>
 
 <?php else: ?>
 

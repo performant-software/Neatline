@@ -314,14 +314,40 @@ form.inline {
 
 /* Delete confirm */
 
-div.neatline-cover {
+#neatline-cover {
     display: none;
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
+    z-index: 1001;
+}
+
+#neatline-cover .transparency {
     background-color: #000;
     opacity: 0;
-    z-index: 1001;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+}
+
+#neatline-delete-confirm {
+    display: block;
+    width: 600px;
+    margin: auto;
+    z-index: 1002;
+    position: relative;
+    background-color: #fff;
+    padding: 1.5em;
+}
+
+#neatline-delete-confirm p {
+}
+
+#neatline-delete-confirm h1 {
+    font-weight: bold;
+    color: #745783;
+    margin: 0 !important;
+    padding: 0 !important;
 }
 
 /* Pagination */
