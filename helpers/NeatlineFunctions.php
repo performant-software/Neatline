@@ -504,6 +504,20 @@ function neatline_saveFail($title)
 }
 
 /**
+ * Message that displays if Neatline save fails.
+ *
+ * @param string $title The title of the neatline.
+ *
+ * @return string The message.
+ */
+function neatline_saveSucceed($title)
+{
+
+    return '"' . $title . '" was saved successfull.';
+
+}
+
+/**
  * Construct an error message in a form.
  *
  * @param string $text The error text.
