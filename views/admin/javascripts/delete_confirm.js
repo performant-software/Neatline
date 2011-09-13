@@ -33,7 +33,9 @@
             // Classes for getters.
             classes: {
                 title: 'title'
-            }
+            },
+
+            fade_duration: 200
 
         },
 
@@ -90,6 +92,10 @@
 
             // Show the cover div.
             this.coverDiv.css('display', 'block');
+            this.coverDiv.animate({
+                'opacity': 0.4
+            }, this.options.fade_duration);
+
             this._positionCover();
 
         },
