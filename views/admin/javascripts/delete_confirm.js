@@ -1,8 +1,7 @@
-<?php
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
 
-/**
- * Partial for "Actions" buttons in Neatline browse views.
+/*
+ * Delete confirm widget for browse views.
  *
  * PHP version 5
  *
@@ -23,26 +22,37 @@
  * @copyright   2011 The Board and Visitors of the University of Virginia
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache 2 License
  */
-?>
 
-<?php
+(function($, undefined) {
 
-echo neatline_buttonTo(
-    uri($uriSlug . '/' . $neatline->id),
-    'edit-neatline',
-    'Edit',
-    array('class' => 'neatline btn primary'),
-    'edit-neatline',
-    array('class' => 'inline'),
-    true, 'neatline-inline');
 
-echo neatline_buttonTo(
-    uri($uriSlug . '/delete/' . $neatline->id),
-    'delete-neatline',
-    'Delete',
-    array('class' => 'neatline btn danger'),
-    'delete-neatline',
-    array('class' => 'inline'),
-    true, 'neatline-inline');
+    $.widget('neatline.deleteconfirm', {
 
-?>
+        options: {
+
+        },
+
+        _create: function() {
+
+
+
+        },
+
+        _glossButton: function() {
+
+
+
+        }
+
+    });
+
+
+})( jQuery );
+
+
+// Usage.
+// jQuery(document).ready(function($) {
+
+//     $('table.neatline').rowglosser();
+
+// });
