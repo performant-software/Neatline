@@ -45,7 +45,7 @@ class NeatlineNeatlineTable extends Omeka_Db_Table
         $sortField = $request->getParam('sort_field');
         $sortDir = $request->getParam('sort_dir');
         $page = $request->page;
-        $orderSql = neatline_buildOrderClause($sortField, $sortDir);
+        $orderClause = neatline_buildOrderClause($sortField, $sortDir);
 
         $select = $this->select()
             ->from(array('n' => $_db->prefix . 'neatline_neatlines'));
@@ -54,9 +54,12 @@ class NeatlineNeatlineTable extends Omeka_Db_Table
             $select->limitPage($page, get_option('per_page_admin'));
         }
 
-        if (isset($order)) {
-            $select->order($order);
+        if (isset($orderClause)) {
+            $select->order($orderClause);
         }
+
+        echo $page;
+        echo $orderSql;
 
         return $this->fetchObjects($select);
 
