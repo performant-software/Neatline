@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
 
 /**
- * Partial for "Actions" buttons in Neatline browse.
+ * Partial for "Actions" buttons in Neatline browse views.
  *
  * PHP version 5
  *
@@ -28,7 +28,7 @@
 <?php
 
 echo neatline_buttonTo(
-    'edit/' . $neatline->id,
+    uri($uriSlug . '/edit/' . $neatline->id),
     'edit-neatline',
     'Edit',
     array('class' => 'neatline btn primary'),
@@ -37,7 +37,7 @@ echo neatline_buttonTo(
     true, 'neatline-inline');
 
 echo neatline_buttonTo(
-    'delete/' . $neatline->id,
+    uri($uriSlug . '/delete/' . $neatline->id),
     'edit-neatline',
     'Delete',
     array('class' => 'neatline btn danger'),

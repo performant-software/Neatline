@@ -62,8 +62,9 @@ head(array('content_class' => 'neatline'));
             <td><?php echo neatline_linkToMap($neatline); ?></td>
             <td><?php echo neatline_linkToTimeline($neatline); ?></td>
             <td><?php echo neatline_formatDate($neatline->added); ?></td>
-            <td><?php echo $this->partial('index/_action_buttons.php',
-                array('neatline' => $neatline)); ?></td>
+            <td><?php echo $this->partial('index/_action_buttons.php', array(
+                'uriSlug' => 'neatline-exhibits',
+                'neatline' => $neatline)); ?></td>
         </tr>
         <?php endforeach; ?>
     </tbody>

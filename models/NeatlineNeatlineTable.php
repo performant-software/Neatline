@@ -58,9 +58,6 @@ class NeatlineNeatlineTable extends Omeka_Db_Table
             $select->order($orderClause);
         }
 
-        echo $page;
-        echo $orderSql;
-
         return $this->fetchObjects($select);
 
     }

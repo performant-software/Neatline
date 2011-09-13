@@ -125,6 +125,21 @@ class Neatline_IndexController extends Omeka_Controller_action
     }
 
     /**
+     * Create a new Neatline.
+     *
+     * @return void
+     */
+    public function editAction()
+    {
+
+        // get NL
+
+        // Push Neatline object into view.
+        $this->view->neatline = $neatline;
+
+    }
+
+    /**
      * Facade for Neatline Maps browse.
      *
      * @return void
