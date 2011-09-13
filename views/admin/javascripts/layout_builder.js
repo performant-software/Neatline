@@ -143,8 +143,21 @@
             this.udi_position_input.attr('value', this._undated_items_position);
             this.udi_height_input.attr('value', this._undated_items_height);
 
-            this.map_select.trigger('change');
-            this.timeline_select.trigger('change');
+            // If there are dropdown selects (on add page), fire change on them.
+            if (this.map_select.length > 0 && this.timeline_select.length > 0) {
+                this.map_select.trigger('change');
+                this.timeline_select.trigger('change');
+            }
+
+            // If not (on edit page), enable the toggle buttons directly.
+            else {
+                this.map_toggle.togglebutton('enable');
+                this.map_toggle.togglebutton('press');
+                this.timeline_toggle.togglebutton('enable');
+                this.timeline_toggle.togglebutton('press');
+                this.undated_items_toggle.togglebutton('enable');
+                this.undated_items_toggle.togglebutton('press');
+            }
 
         },
 
