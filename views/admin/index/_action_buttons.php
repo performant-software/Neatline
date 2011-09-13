@@ -28,7 +28,7 @@
 <?php
 
 echo neatline_buttonTo(
-    uri($uriSlug . '/edit/' . $neatline->id),
+    uri($uriSlug . '/' . $neatline->id),
     'edit-neatline',
     'Edit',
     array('class' => 'neatline btn primary'),

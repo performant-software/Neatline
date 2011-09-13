@@ -35,6 +35,7 @@
         <img id="neatline-logo" src="<?php echo img('neatline-logo-rgb-small.png'); ?>" />
     </a>
 
+    <!--
     <ul id="section-nav" class="navigation">
         <li class="nav-neatlines <?php echo neatline_isCurrent($tab, 'neatlines'); ?>">
             <a href="<?php echo uri('neatline-exhibits'); ?>">Neatlines</a>
@@ -46,6 +47,7 @@
             <a href="<?php echo uri('neatline-exhibits/timelines'); ?>">Timelines</a>
         </li>
     </ul>
+    -->
 
     <p class="add-button">
         <a class="add" href="<?php echo html_escape(uri($add_button_uri)); ?>"><?php echo $add_button_text; ?></a>
