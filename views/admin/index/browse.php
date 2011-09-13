@@ -58,10 +58,10 @@ head(array('content_class' => 'neatline'));
     <tbody>
         <?php foreach ($neatlines as $neatline): ?>
         <tr>
-            <td><?php echo neatline_linkToNeatline($neatline); ?></td>
-            <td><?php echo neatline_linkToMap($neatline); ?></td>
-            <td><?php echo neatline_linkToTimeline($neatline); ?></td>
-            <td><?php echo neatline_formatDate($neatline->added); ?></td>
+            <td class="title"><?php echo neatline_linkToNeatline($neatline); ?></td>
+            <td class="map"><?php echo neatline_linkToMap($neatline); ?></td>
+            <td class="timeline"><?php echo neatline_linkToTimeline($neatline); ?></td>
+            <td class="added"><?php echo neatline_formatDate($neatline->added); ?></td>
             <td><?php echo $this->partial('index/_action_buttons.php', array(
                 'uriSlug' => 'neatline-exhibits',
                 'neatline' => $neatline)); ?></td>

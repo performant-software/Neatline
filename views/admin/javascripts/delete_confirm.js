@@ -1,7 +1,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
 
 /*
- * Delete confirm widget for browse views.
+ * Delete confirm widget for browse views. Gets called on the entire table.
  *
  * PHP version 5
  *
@@ -30,17 +30,79 @@
 
         options: {
 
+            // Classes for getters.
+            classes: {
+                title: 'title'
+            }
+
         },
 
         _create: function() {
 
+            // Get rows.
+            this.rows = this.element.find('tbody tr');
 
+            // Create the cover div.
+            this._createCover();
+
+            // Gloss.
+            this._glossRows();
 
         },
 
-        _glossButton: function() {
+        _createCover: function() {
 
+            this.coverDiv = $('<div class="neatline-cover"></div>');
+            $('body').prepend(this.coverDiv);
 
+        },
+
+        _glossRows: function() {
+
+            var self = this;
+
+            $.each(this.rows, function(index, row) {
+
+                // Get DOM for row and delete button, title text.
+                var row = $(row);
+                var deleteButton = row.find('input[name="delete-neatline"]');
+                var title = row.find('td.title a').html();
+
+                deleteButton.bind({
+
+                    'mousedown': function(event) {
+                        event.preventDefault();
+                        self._showConfirm();
+                    },
+
+                    // Just to override the default..
+                    'click': function(event) {
+                        event.preventDefault();
+                    }
+
+                });
+
+            });
+
+        },
+
+        _showConfirm: function() {
+
+            // Show the cover div.
+            this.coverDiv.css('display', 'block');
+            this._positionCover();
+
+        },
+
+        _positionCover: function() {
+
+            var docX = $(document).width();
+            var docY = $(document).height();
+
+            this.coverDiv.css({
+                'height': docY,
+                'width': docX
+            });
 
         }
 
@@ -51,8 +113,8 @@
 
 
 // Usage.
-// jQuery(document).ready(function($) {
+jQuery(document).ready(function($) {
 
-//     $('table.neatline').rowglosser();
+    $('table.neatline').deleteconfirm();
 
-// });
+});

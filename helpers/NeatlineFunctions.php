@@ -63,10 +63,11 @@ function neatline_queueLayoutBuilderCssAndJs()
  *
  * @return void.
  */
-function neatline_queueRowGlosserJs()
+function neatline_queueBrowseJs()
 {
 
     queue_js('browse_gloss', 'javascripts');
+    queue_js('delete_confirm', 'javascripts');
 
 }
 

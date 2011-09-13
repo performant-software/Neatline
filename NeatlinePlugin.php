@@ -153,7 +153,7 @@ class NeatlinePlugin
 
         // Queue row glosser for browse actions.
         if ($request->getModuleName() == 'neatline' && $request->getActionName() == 'browse') {
-            neatline_queueRowGlosserJs();
+            neatline_queueBrowseJs();
         }
 
 

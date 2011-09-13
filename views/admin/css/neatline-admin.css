@@ -299,17 +299,32 @@ fieldset.neatline-inline {
     padding: 0;
 }
 
-form.inline, form.inline fieldset, form.inline input {
+form.inline,
+form.inline fieldset,
+form.inline input,
+form.inline fieldset input{
     margin: 0;
-    display: inline;
+    display: inline !important;
+    clear: none;
 }
 
 form.inline {
     margin-right: 0.4em;
 }
 
-/* Pagination */
+/* Delete confirm */
 
+div.neatline-cover {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #000;
+    opacity: 0.4;
+    z-index: 1001;
+}
+
+/* Pagination */
 
 .neatline-pagination {
   height: 36px;
