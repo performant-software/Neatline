@@ -26,4 +26,10 @@
  */
 ?>
 
+<?php echo $this->partial('index/_editor_header.php', array(
+    'title' => $neatline->name
+)); ?>
 
+<div id="topbar">
+
+</div>

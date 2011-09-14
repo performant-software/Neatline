@@ -144,21 +144,37 @@ class NeatlinePlugin
         $request = Zend_Controller_Front::getInstance()->getRequest();
 
         // Queue CSS.
-        if ($request->getModuleName() == 'neatline') {
-            neatline_queueAdminCss();
+        if ($request->getModuleName() == 'neatline' &&
+            $request->getActionName() != 'edit') {
+
+              neatline_queueAdminCss();
+
         }
 
         // Queue layout builder JavaScript.
         if ($request->getModuleName() == 'neatline' &&
-            in_array($request->getActionName(), array('add', 'edit'))) {
-            neatline_queueLayoutBuilderCssAndJs();
+            in_array($request->getActionName(), array('add'))) {
+
+              neatline_queueLayoutBuilderCssAndJs();
+
         }
 
         // Queue row glosser for browse actions.
-        if ($request->getModuleName() == 'neatline' && $request->getActionName() == 'browse') {
-            neatline_queueBrowseJs();
+        if ($request->getModuleName() == 'neatline' &&
+            $request->getActionName() == 'browse') {
+
+              neatline_queueBrowseJs();
+
         }
 
+        // Queue static assets for the Neatline editor.
+        if ($request->getModuleName() == 'neatline' &&
+            $request->getActionName() == 'edit') {
+
+
+              neatline_queueEditorAssets();
+
+        }
 
     }
 

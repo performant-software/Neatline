@@ -72,6 +72,18 @@ function neatline_queueBrowseJs()
 }
 
 /**
+ * Include the static files for the editor.
+ *
+ * @return void.
+ */
+function neatline_queueEditorAssets()
+{
+
+    queue_css('bootstrap-1.2.0');
+
+}
+
+/**
  * Create a form containing a single button.
  *
  * @param string $action Form action URI.
@@ -294,27 +306,27 @@ function neatline_deleteConfirmMarkup()
 
         <div class="transparency"></div>
 
-        <div id="neatline-delete-confirm" class="alert-message block-message error">
+        <div id="neatline-delete-confirm" class="modal">
 
-            <h1>Are you sure?</h1>
-            <p>This will permanently delete the "<span class="neatline-delete-exhibit-name"></span>"
-                exhibit. Spatial and temporal metadata added by way of the Neatline interface
-                is stored at the level of the items themselves, and will be unaffected.</p>
+            <div class="modal-header"><h1>Are you sure?</h1></div>
 
-            <div class="alert-actions">
+            <div class="modal-body">
+                <p>This will permanently delete the "<span class="neatline-delete-exhibit-name"></span>"
+                    exhibit. Spatial and temporal metadata added by way of the Neatline interface
+                    is stored at the level of the items themselves, and will be unaffected.</p>
+            </div>
 
-                <?php echo neatline_deleteConfirmForm(); ?>
-
-                <?php echo neatline_buttonTo(
-                    '',
-                    'cancel-neatline',
-                    'Cancel',
-                    array('class' => 'neatline btn gray large'),
-                    'edit-neatline',
-                    array('class' => 'inline'),
-                    true, 'neatline-inline');
-                ?>
-
+            <div class="modal-footer">
+                    <?php echo neatline_deleteConfirmForm(); ?>
+                    <?php echo neatline_buttonTo(
+                        '',
+                        'cancel-neatline',
+                        'Cancel',
+                        array('class' => 'neatline btn gray large'),
+                        'edit-neatline',
+                        array('class' => 'inline'),
+                        true, 'neatline-inline');
+                    ?>
             </div>
 
         </div>

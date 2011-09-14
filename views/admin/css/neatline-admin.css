@@ -345,15 +345,23 @@ form.inline {
     z-index: 1002;
     position: relative;
     background-color: #fff;
-    padding: 1.5em;
+    left: 0 !important;
+}
+
+#neatline-delete-confirm .modal-footer .btn {
+    margin: 0 10px 0 0;
+
 }
 
 #neatline-delete-confirm h1 {
-    font-size: 1.5em;
     font-weight: bold;
     color: #745783;
-    margin: 0 !important;
-    padding: 0 !important;
+    margin: -0.3em 0 0 0;
+}
+
+#neatline-delete-confirm p {
+    font-size: 1.7em;
+    margin: 0;
 }
 
 #neatline-delete-confirm .btn,
