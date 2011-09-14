@@ -1,7 +1,8 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
 
 /**
- * CSS for the editor-only parts of the editing interface.
+ * CSS for the editor-only parts of the editing interface. In large
+ * part, selective overrides of bootstrap.
  *
  * PHP version 5
  *
@@ -54,7 +55,7 @@
     line-height: 1;
     padding: 6px 9px;
     margin: 11px 0 0 20px;
-    color: #333;
+    color: #222;
     border: 1px solid #111;
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
@@ -85,6 +86,14 @@
     -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, 0.15);
     -moz-box-shadow: 0 0 3px rgba(0, 0, 0, 0.15);
     box-shadow: 0 0 3px rgba(0, 0, 0, 0.15);
+}
+
+.topbar input:-moz-placeholder {
+  color: #222;
+}
+
+.topbar input::-webkit-input-placeholder {
+  color: #222;
 }
 
 #neatline-logo {
