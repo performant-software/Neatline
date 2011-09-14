@@ -340,9 +340,6 @@ form.inline {
     padding: 1.5em;
 }
 
-#neatline-delete-confirm p {
-}
-
 #neatline-delete-confirm h1 {
     font-size: 1.5em;
     font-weight: bold;
@@ -351,11 +348,13 @@ form.inline {
     padding: 0 !important;
 }
 
-#neatline-delete-confirm .btn {
+#neatline-delete-confirm .btn,
+.neatline-delete-confirm-static .btn{
     width: 100px;
 }
 
-#neatline-delete-confirm .alert-actions {
+#neatline-delete-confirm .alert-actions,
+.neatline-delete-confirm-static .alert-actions {
     margin-top: 1em;
 }
 
@@ -365,6 +364,19 @@ form.inline {
 
 .alert-message .close {
     text-decoration: none;
+}
+
+.neatline-delete-confirm-static p {
+    font-size: 1.8em;
+    margin-bottom: 1em;
+}
+
+.neatline-delete-confirm-static h1 {
+    font-size: 2.4em;
+    font-weight: bold;
+    color: #745783;
+    margin: 0 !important;
+    padding: 0 !important;
 }
 
 

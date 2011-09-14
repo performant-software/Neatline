@@ -119,6 +119,38 @@ function neatline_buttonTo(
 }
 
 /**
+ * Build the delete confirm button.
+ *
+ * @return string HTML form.
+ */
+function neatline_deleteConfirmForm()
+{
+
+    $action = '';
+    $name = 'delete-neatline';
+    $value = 'Delete';
+    $attribs = array('class' => 'neatline btn danger large');
+    $formName = 'delete-neatline';
+    $formAttribs = array('class' => 'inline');
+    $fieldsetClass = 'neatline-inline';
+
+    $view = __v();
+    if (!array_key_exists('method', $formAttribs)) {
+        $formAttribs['method'] = 'post';
+    }
+
+    $fieldset = '<fieldset class="' . $fieldsetClass . '">'
+                . $view->formSubmit($name, $value, $attribs)
+                . '</fieldset>'
+                . $view->formHidden('confirmed', 'confirmed');
+
+    $form = $view->form($formName, $formAttribs, $fieldset);
+
+    return $form;
+
+}
+
+/**
  * Create a hidden element.
  *
  * @param string $name The name attribute.
@@ -265,21 +297,13 @@ function neatline_deleteConfirmMarkup()
         <div id="neatline-delete-confirm" class="alert-message block-message error">
 
             <h1>Are you sure?</h1>
-            <p>This will permanently delete the <span class="neatline-delete-exbitit-name">
+            <p>This will permanently delete the "<span class="neatline-delete-exhibit-name"></span>"
                 exhibit. Spatial and temporal metadata added by way of the Neatline interface
                 is stored at the level of the items themselves, and will be unaffected.</p>
 
             <div class="alert-actions">
 
-                <?php echo neatline_buttonTo(
-                    '',
-                    'delete-neatline',
-                    'Delete',
-                    array('class' => 'neatline btn danger large'),
-                    'edit-neatline',
-                    array('class' => 'inline'),
-                    true, 'neatline-inline');
-                ?>
+                <?php echo neatline_deleteConfirmForm(); ?>
 
                 <?php echo neatline_buttonTo(
                     '',

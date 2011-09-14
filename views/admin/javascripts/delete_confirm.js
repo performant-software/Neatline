@@ -50,7 +50,7 @@
             this.confirmDiv = $('#neatline-delete-confirm');
             this.deleteButton = this.confirmDiv.find('input[name="delete-neatline"]');
             this.cancelButton = this.confirmDiv.find('input[name="cancel-neatline"]');
-            this.exhibitName = this.confirmDiv.find('.neatline-delete-exhibit-namej');
+            this.exhibitName = this.confirmDiv.find('span.neatline-delete-exhibit-name');
 
             // Gloss.
             this._glossRows();
@@ -135,9 +135,11 @@
 
             var exhibitName = row.find('td.title a').html();
             var exhibitId = row.attr('exhibitid');
-            var deleteUrl = this.options.delete_url_slug + '/' + exhibitId;
+            var deleteUrl = this.options.delete_url_slug + exhibitId;
 
-            this.exhibitName.html(exhibitName);
+            console.log(this.exhibitName, exhibitName);
+
+            this.exhibitName.text(exhibitName);
             this.deleteButton.closest('form').attr('action', deleteUrl);
 
         },

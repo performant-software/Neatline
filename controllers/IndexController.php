@@ -125,6 +125,18 @@ class Neatline_IndexController extends Omeka_Controller_action
     }
 
     /**
+     * Delete exhibits.
+     *
+     * @return void
+     */
+    public function deleteAction()
+    {
+
+
+
+    }
+
+    /**
      * Facade for Neatline Maps browse.
      *
      * @return void
