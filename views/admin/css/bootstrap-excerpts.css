@@ -171,7 +171,7 @@ table {
   border-color: #339bb9 #339bb9 #22697d;
   border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
 }
-.btn {
+.btn, input[type="submit"] {
   display: inline-block;
   background-color: #e6e6e6;
   background-repeat: no-repeat;

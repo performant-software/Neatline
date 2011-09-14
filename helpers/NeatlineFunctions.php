@@ -260,8 +260,6 @@ function neatline_deleteConfirmMarkup()
 
         <div id="neatline-delete-confirm" class="alert-message block-message error">
 
-            <a class="close" href="#">×</a>
-
             <h1>Are you sure?</h1>
             <p>This will permanently delete the <span class="neatline-delete-exbitit-name">
                 exhibit. Spatial and temporal metadata added by way of the Neatline interface
@@ -278,6 +276,17 @@ function neatline_deleteConfirmMarkup()
                     array('class' => 'inline'),
                     true, 'neatline-inline');
                 ?>
+
+                <?php echo neatline_buttonTo(
+                    '',
+                    'delete-neatline',
+                    'Cancel',
+                    array('class' => 'neatline btn gray large'),
+                    'edit-neatline',
+                    array('class' => 'inline'),
+                    true, 'neatline-inline');
+                ?>
+
             </div>
 
         </div>

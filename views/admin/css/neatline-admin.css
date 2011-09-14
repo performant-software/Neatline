@@ -344,11 +344,29 @@ form.inline {
 }
 
 #neatline-delete-confirm h1 {
+    font-size: 1.5em;
     font-weight: bold;
     color: #745783;
     margin: 0 !important;
     padding: 0 !important;
 }
+
+#neatline-delete-confirm .btn {
+    width: 100px;
+}
+
+#neatline-delete-confirm .alert-actions {
+    margin-top: 1em;
+}
+
+.neatline.btn.gray {
+    color: #333 !important;
+}
+
+.alert-message .close {
+    text-decoration: none;
+}
+
 
 /* Pagination */
 
