@@ -33,7 +33,7 @@
 <div id="topbar" class="topbar-inner topbar">
 
     <div id="search-wrapper">
-        <input type="text" placeholder="Search items" />
+        <input type="text" placeholder="Search items" id="search-box" />
     </div>
 
     <img id="neatline-logo" src="<?php echo img('neatline-logo-white-small.png'); ?>" />

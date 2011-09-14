@@ -29,15 +29,19 @@
         options: {
 
             // Markup hooks.
-            topbar_id: 'topbar'
+            topbar_id: 'topbar',
+            search_wrapper_id: 'search-wrapper',
+            search_box_id: 'search-box'
 
         },
 
         _create: function() {
 
-            // Get.
+            // Getters.
             this._window = $(window);
             this.topBar = $('#' + this.options.topbar_id);
+            this.searchWrapper = $('#' + this.options.search_wrapper_id);
+            this.searchBox = $('#' + this.options.search_box_id);
 
             // Position the container, add window resize listener.
             this._positionContainer();
