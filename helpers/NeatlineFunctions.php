@@ -279,7 +279,7 @@ function neatline_deleteConfirmMarkup()
 
                 <?php echo neatline_buttonTo(
                     '',
-                    'delete-neatline',
+                    'cancel-neatline',
                     'Cancel',
                     array('class' => 'neatline btn gray large'),
                     'edit-neatline',

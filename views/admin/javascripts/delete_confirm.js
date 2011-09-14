@@ -47,6 +47,8 @@
             this.coverDiv = $('#neatline-cover');
             this.transparencyDiv = this.coverDiv.find('.transparency');
             this.confirmDiv = $('#neatline-delete-confirm');
+            this.deleteButton = this.confirmDiv.find('input[name="delete-neatline"]');
+            this.cancelButton = this.confirmDiv.find('input[name="cancel-neatline"]');
 
             // Gloss.
             this._glossRows();
@@ -86,17 +88,31 @@
 
             var self = this;
 
+            // Insert the name of the exhibit and the form
+            // actions into the markup.
+            this._customizeAlert();
+
             // Show and position the cover div.
             this.coverDiv.css('display', 'block');
             this._positionCover();
+
+            // Add events to the buttons.
+            this.cancelButton.bind({
+
+                'mousedown': function() {
+                    self._removeConfirm();
+                },
+
+                'click': function(event) {
+                    event.preventDefault();
+                }
+
+            });
 
             // Tween the opacity up.
             this.transparencyDiv.animate({
                 'opacity': 0.4
             }, this.options.fade_duration);
-
-            // Show the box.
-            this._showConfirmBox();
 
             // Add the resize event to the window.
             $(window).bind('resize', function() {
@@ -105,7 +121,14 @@
 
         },
 
-        _showConfirmBox: function() {
+        _removeConfirm: function() {
+
+            this.coverDiv.css('display', 'none');
+            this.transparencyDiv.css('opacity', 0);
+
+        },
+
+        _customizeAlert: function() {
 
 
 
