@@ -383,10 +383,10 @@ function neatline_mapSelect($id)
 
     // Construct element.
     $mapSelect = new Zend_Form_Element_Select('map');
+    $mapSelect->setMultiOptions(array('-'));
 
     foreach ($bucketedMaps as $itemName => $maps) {
         $optionsArray = array();
-        $optionsArray['none'] = '-';
         foreach ($maps as $map) {
             $optionsArray[$map->map_id] = $map->name;
         }
