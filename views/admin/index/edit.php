@@ -30,6 +30,6 @@
     'title' => $neatline->name
 )); ?>
 
-<div id="topbar">
+<div id="topbar" class="topbar-inner">
 
 </div>

@@ -1,0 +1,44 @@
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
+
+/**
+ * CSS for the editor-only parts of the editing interface.
+ *
+ * PHP version 5
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at http://www.apache.org/licenses/LICENSE-2.0 Unless required by
+ * applicable law or agreed to in writing, software distributed under the
+ * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS
+ * OF ANY KIND, either express or implied. See the License for the specific
+ * language governing permissions and limitations under the License.
+ *
+ * @package     omeka
+ * @subpackage  neatline
+ * @author      Scholars' Lab <>
+ * @author      Bethany Nowviskie <bethany@virginia.edu>
+ * @author      Adam Soroka <ajs6f@virginia.edu>
+ * @author      David McClure <david.mcclure@virginia.edu>
+ * @copyright   2011 The Board and Visitors of the University of Virginia
+ * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache 2 License
+ */
+
+/* Top bar */
+
+#topbar {
+    height: 40px;
+    background-color: #745783;
+    background-color: #745783;
+    background-repeat: repeat-x;
+    background-image: -khtml-gradient(linear, left top, left bottom, from(#68437b), to(#745783));
+    background-image: -moz-linear-gradient(top, #68437b, #745783);
+    background-image: -ms-linear-gradient(top, #68437b, #745783);
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #68437b), color-stop(100%, #745783));
+    background-image: -webkit-linear-gradient(top, #68437b, #745783);
+    background-image: -o-linear-gradient(top, #68437b, #745783);
+    background-image: linear-gradient(top, #68437b, #745783);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#68437b', endColorstr='#745783', GradientType=0);
+    -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+}

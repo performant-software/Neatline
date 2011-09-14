@@ -80,6 +80,7 @@ function neatline_queueEditorAssets()
 {
 
     queue_css('bootstrap-1.2.0');
+    queue_css('neatline-editor');
 
 }
 
