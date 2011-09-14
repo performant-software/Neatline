@@ -78,6 +78,11 @@ h2.neatline-label {
     text-decoration: underline;
 }
 
+div.success {
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 1.5em;
+}
+
 /* Navigation */
 
 #neatline-header {
@@ -155,6 +160,9 @@ form#create-neatline fieldset, form.neatline fieldset {
 
 input[name="title"] {
     width: 300px !important;
+    font-size: 2em !important;
+    height: 1.5em !important;
+    color: #333 !important;
 }
 
 select[name="map"], select[name="timeline"] {

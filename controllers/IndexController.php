@@ -140,10 +140,9 @@ class Neatline_IndexController extends Omeka_Controller_Action
         if (isset($_post['confirmed'])) {
 
             // Delete and redirect.
-            if ($neatline->delete()) {
-                $this->flashSuccess(neatline_deleteSucceed($neatline->name));
-                $this->_redirect('neatline-exhibits');
-            }
+            $neatline->delete();
+            $this->flashSuccess(neatline_deleteSucceed($neatline->name));
+            $this->_redirect('neatline-exhibits');
 
         }
 

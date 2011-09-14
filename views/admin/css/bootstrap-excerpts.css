@@ -1119,7 +1119,7 @@ button.btn::-moz-focus-inner, input[type=submit].btn::-moz-focus-inner {
   padding: 0;
   border: 0;
 }
-.alert-message {
+.alert-message, .success {
   background-color: #eedc94;
   background-repeat: repeat-x;
   background-image: -khtml-gradient(linear, left top, left bottom, from(#fceec1), to(#eedc94));
@@ -1145,18 +1145,18 @@ button.btn::-moz-focus-inner, input[type=submit].btn::-moz-focus-inner {
   -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25);
 }
-.alert-message h5 {
+.alert-message h5, .success h5 {
   line-height: 18px;
 }
-.alert-message p {
+.alert-message p, .success p {
   margin-bottom: 0;
 }
-.alert-message div {
+.alert-message div, .success div {
   margin-top: 5px;
   margin-bottom: 2px;
   line-height: 28px;
 }
-.alert-message .btn {
+.alert-message .btn, .success .btn {
   -webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.25);
   -moz-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.25);
   box-shadow: 0 1px 0 rgba(255, 255, 255, 0.25);
