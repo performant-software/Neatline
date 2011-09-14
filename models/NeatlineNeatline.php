@@ -94,12 +94,15 @@ class NeatlineNeatline extends Omeka_record
 
         $this->added = neatline_getMysqlDatetime();
         $this->name = $_post['title'];
+
         $this->map_id = $_post['map'];
         $this->timeline_id = $_post['timeline'];
+
         $this->top_element = $_post['top_element'];
         $this->undated_items_position = $_post['undated_items_position'];
         $this->undated_items_height = $_post['undated_items_height'];
         $this->undated_items_height = $_post['undated_items_height'];
+
         $this->is_map = ($_post['is_map'] == 'false') ? 0 : 1;
         $this->is_timeline = ($_post['is_timeline'] == 'false') ? 0 : 1;
         $this->is_undated_items = ($_post['is_undated_items'] == 'false') ? 0 : 1;

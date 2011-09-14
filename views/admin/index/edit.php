@@ -2,7 +2,8 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
 
 /**
- * Partial for "Actions" buttons in Neatline browse views.
+ * The core Neatline editor. Wraps the markup for the editing interface and then
+ * calls the map/timeline/udi markup as a partial.
  *
  * PHP version 5
  *
@@ -25,24 +26,4 @@
  */
 ?>
 
-<?php
 
-echo neatline_buttonTo(
-    uri($uriSlug . '/edit/' . $neatline->id),
-    'edit-neatline',
-    'Edit',
-    array('class' => 'neatline btn primary'),
-    'edit-neatline',
-    array('class' => 'inline'),
-    true, 'neatline-inline');
-
-echo neatline_buttonTo(
-    uri($uriSlug . '/delete/' . $neatline->id),
-    'delete-neatline',
-    'Delete',
-    array('class' => 'neatline btn danger'),
-    'delete-neatline',
-    array('class' => 'inline'),
-    true, 'neatline-inline');
-
-?>

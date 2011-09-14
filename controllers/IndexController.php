@@ -125,6 +125,19 @@ class Neatline_IndexController extends Omeka_Controller_Action
     }
 
     /**
+     * The core Neatline editor.
+     *
+     * @return void
+     */
+    public function editAction()
+    {
+
+        $id = $this->_request->getParam('id');
+        $this->neatline = $this->_neatlinesTable->find($id);
+
+    }
+
+    /**
      * Delete exhibits.
      *
      * @return void
