@@ -226,21 +226,25 @@ function neatline_linkToTimeline($neatline)
  *
  * @return void.
  */
-function neatline_pagination($pagination)
+function neatline_pagination($pagination, $numberOfNeatlines)
 {
 
-?>
+    if ($numberOfNeatlines > $pagination['per_page']) {
 
-    <div class="neatline-pagination">
-        <?php echo pagination_links(array('scrolling_style' => 'All',
-        'page_range' => '5',
-        'partial_file' => 'index/_pagination.php',
-        'page' => $pagination['current_page'],
-        'per_page' => $pagination['per_page'],
-        'total_results' => $pagination['total_results'])); ?>
-    </div>
+        ?>
 
-<?php
+            <div class="neatline-pagination">
+                <?php echo pagination_links(array('scrolling_style' => 'All',
+                'page_range' => '5',
+                'partial_file' => 'index/_pagination.php',
+                'page' => $pagination['current_page'],
+                'per_page' => $pagination['per_page'],
+                'total_results' => $pagination['total_results'])); ?>
+            </div>
+
+        <?php
+
+    }
 
 }
 
