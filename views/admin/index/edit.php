@@ -30,6 +30,10 @@
     'title' => $neatline->name
 )); ?>
 
-<div id="topbar" class="topbar-inner">
+<div id="topbar" class="topbar-inner topbar">
+    <input type="text" placeholder="Search items" />
+    <img id="neatline-logo" src="<?php echo img('neatline-logo-white-small.png'); ?>" />
+</div>
 
+<div id="item-browser">
 </div>
