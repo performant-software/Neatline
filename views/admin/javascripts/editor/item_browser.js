@@ -39,8 +39,9 @@
             this._window = $(window);
             this.topBar = $('#' + this.options.topbar_id);
 
-            // Position the container.
+            // Position the container, add window resize listener.
             this._positionContainer();
+            this._addWindowResizeListener();
 
         },
 
@@ -49,6 +50,16 @@
             // Update dimensions and set new height.
             this._getDimensions();
             this.element.css('height', this.windowHeight - 1);
+
+        },
+
+        _addWindowResizeListener: function() {
+
+            var self = this;
+
+            this._window.bind('resize', function() {
+                self._positionContainer();
+            });
 
         },
 
