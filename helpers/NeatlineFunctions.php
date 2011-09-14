@@ -595,7 +595,21 @@ function neatline_saveFail($title)
 function neatline_saveSucceed($title)
 {
 
-    return '"' . $title . '" was saved successfull.';
+    return '"' . $title . '" was saved successfully.';
+
+}
+
+/**
+ * Message that displays if Neatline save fails.
+ *
+ * @param string $title The title of the neatline.
+ *
+ * @return string The message.
+ */
+function neatline_deleteSucceed($title)
+{
+
+    return '"' . $title . '" was deleted successfully.';
 
 }
 

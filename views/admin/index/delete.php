@@ -44,15 +44,7 @@ head(array('content_class' => 'neatline'));
 
     <div class="alert-actions">
 
-        <?php echo neatline_buttonTo(
-            '',
-            'delete-neatline',
-            'Delete',
-            array('class' => 'neatline btn danger large'),
-            'edit-neatline',
-            array('class' => 'inline'),
-            true, 'neatline-inline');
-        ?>
+        <?php echo neatline_deleteConfirmForm(); ?>
 
     </div>
 

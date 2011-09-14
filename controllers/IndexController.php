@@ -27,7 +27,7 @@
 
 <?php
 
-class Neatline_IndexController extends Omeka_Controller_action
+class Neatline_IndexController extends Omeka_Controller_Action
 {
 
     /**
@@ -132,7 +132,20 @@ class Neatline_IndexController extends Omeka_Controller_action
     public function deleteAction()
     {
 
+        $_post = $this->_request->getPost();
+        $id = $this->_request->getParam('id');
+        $neatline = $this->_neatlinesTable->find($id);
 
+        // If the delete is confirmed.
+        if (isset($_post['confirmed'])) {
+
+            // Delete and redirect.
+            if ($neatline->delete()) {
+                $this->flashSuccess(neatline_deleteSucceed($neatline->name));
+                $this->_redirect('neatline-exhibits');
+            }
+
+        }
 
     }
 
