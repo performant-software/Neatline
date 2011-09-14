@@ -54,7 +54,7 @@
     font-size: 1.1em;
     line-height: 1;
     padding: 6px 9px;
-    margin: 11px 0 0 20px;
+    margin: 10px 0 0 0;
     color: #222;
     border: 1px solid #111;
     -webkit-border-radius: 4px;
@@ -71,7 +71,7 @@
 .topbar input:hover {
     background-color: #bfbfbf;
     background-color: rgba(255, 255, 255, 0.5);
-    margin: 11px 0 0 20px;
+    margin: 10px 0 0 0;
     color: #fff;
 }
 
@@ -82,7 +82,7 @@
     text-shadow: 0 1px 0 #fff;
     border: 0;
     padding: 6px 9px;
-    margin: 12px 0 0 21px;
+    margin: 11px 0 0 0;
     -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, 0.15);
     -moz-box-shadow: 0 0 3px rgba(0, 0, 0, 0.15);
     box-shadow: 0 0 3px rgba(0, 0, 0, 0.15);
@@ -99,14 +99,26 @@
 #neatline-logo {
     float: right;
     margin: 11px 20px 0 20px;
-    height: 31px;
+}
+
+#search-wrapper {
+    float: left;
+    width: 266px;
+    height: 53px;
+    text-align: center;
+    border-right: 1px solid rgba(240, 240, 240, .2);
+    border-top: 1px solid rgba(240, 240, 240, .2);
+    -webkit-box-shadow: 0 1px 2px rgba(240, 240, 240,.1);
+    -moz-box-shadow: 0 1px 2px rgba(240, 240, 240,.1);
+    box-shadow: 0 1px 2px rgba(240, 240, 240,.1);
+    display: block;
 }
 
 
 /* Item browser */
 
 #item-browser {
-    width: 267px;
+    width: 266px;
     background: #FEFBF3;
     border-right: 1px solid rgba(0, 0, 0, .2);
     border-top: 1px solid rgba(0, 0, 0, .2);

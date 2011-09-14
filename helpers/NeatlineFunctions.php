@@ -52,9 +52,8 @@ function neatline_queueAdminCss()
 function neatline_queueLayoutBuilderCssAndJs()
 {
 
-    queue_js('layout_builder', 'javascripts');
-    queue_js('toggle_button', 'javascripts');
-    queue_css('custom_ui_theme/ui.custom');
+    queue_js('admin/layout_builder', 'javascripts');
+    queue_js('admin/toggle_button', 'javascripts');
 
 }
 
@@ -66,8 +65,8 @@ function neatline_queueLayoutBuilderCssAndJs()
 function neatline_queueBrowseJs()
 {
 
-    queue_js('browse_gloss', 'javascripts');
-    queue_js('delete_confirm', 'javascripts');
+    queue_js('admin/browse_gloss', 'javascripts');
+    queue_js('admin/delete_confirm', 'javascripts');
 
 }
 
@@ -81,6 +80,8 @@ function neatline_queueEditorAssets()
 
     queue_css('bootstrap-1.2.0');
     queue_css('neatline-editor');
+
+    queue_js('editor/item_browser', 'javascripts');
 
 }
 

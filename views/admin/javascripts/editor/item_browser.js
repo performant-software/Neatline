@@ -1,9 +1,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
 
 /*
- * Row glossing effects for browse views.
- *
- * PHP version 5
+ * Item browser widget in the Neatline editor.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -26,52 +24,41 @@
 (function($, undefined) {
 
 
-    $.widget('neatline.rowglosser', {
+    $.widget('neatline.itembrowser', {
 
         options: {
 
-            colors: {
-                default: '#fff',
-                gloss: '#f7f3f9'
-            },
-
-            fade_duration: 10
+            // Markup hooks.
+            topbar_id: 'topbar'
 
         },
 
         _create: function() {
 
-            // Get rows.
-            this.rows = this.element.find('tbody tr');
+            // Get.
+            this._window = $(window);
+            this.topBar = $('#' + this.options.topbar_id);
 
-            // Gloss.
-            this._glossRows();
+            // Position the container.
+            this._positionContainer();
 
         },
 
-        _glossRows: function() {
+        _positionContainer: function() {
 
-            var self = this;
+            // Update dimensions and set new height.
+            this._getDimensions();
+            this.element.css('height', this.windowHeight - 1);
 
-            $.each(this.rows, function(i, row) {
+        },
 
-                $(row).bind({
+        _getDimensions: function() {
 
-                    'mouseenter': function() {
-                        $(row).animate({
-                            'background-color': self.options.colors.gloss
-                        }, self.options.fade_duration);
-                    },
+            this.containerWidth = this.element.width();
+            this.containerHeight = this.element.height();
 
-                    'mouseleave': function() {
-                        $(row).animate({
-                            'background-color': self.options.colors.default
-                        }, self.options.fade_duration);
-                    }
-
-                });
-
-            });
+            this.windowWidth = this._window.width();
+            this.windowHeight = this._window.height();
 
         }
 
@@ -84,7 +71,6 @@
 // Usage.
 jQuery(document).ready(function($) {
 
-    $('table.neatline').rowglosser();
+    $('#item-browser').itembrowser();
 
 });
-
