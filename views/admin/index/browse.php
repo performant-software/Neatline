@@ -57,7 +57,7 @@ head(array('content_class' => 'neatline'));
 
     <tbody>
         <?php foreach ($neatlines as $neatline): ?>
-        <tr>
+        <tr exhibitid="<?php echo $neatline->id; ?>">
             <td class="title"><?php echo neatline_linkToNeatline($neatline); ?></td>
             <td class="map"><?php echo neatline_linkToMap($neatline); ?></td>
             <td class="timeline"><?php echo neatline_linkToTimeline($neatline); ?></td>

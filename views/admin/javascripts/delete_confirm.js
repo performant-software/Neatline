@@ -36,7 +36,8 @@
             },
 
             // Misc.
-            fade_duration: 150
+            fade_duration: 150,
+            delete_url_slug: 'neatline-exhibits/delete/'
 
         },
 
@@ -49,6 +50,7 @@
             this.confirmDiv = $('#neatline-delete-confirm');
             this.deleteButton = this.confirmDiv.find('input[name="delete-neatline"]');
             this.cancelButton = this.confirmDiv.find('input[name="cancel-neatline"]');
+            this.exhibitName = this.confirmDiv.find('.neatline-delete-exhibit-namej');
 
             // Gloss.
             this._glossRows();
@@ -70,7 +72,8 @@
 
                     'mousedown': function(event) {
                         event.preventDefault();
-                        self._doConfirm();
+                        self._doConfirm(row);
+
                     },
 
                     // Just to override the default..
@@ -84,13 +87,13 @@
 
         },
 
-        _doConfirm: function() {
+        _doConfirm: function(row) {
 
             var self = this;
 
             // Insert the name of the exhibit and the form
             // actions into the markup.
-            this._customizeAlert();
+            this._customizeAlert(row);
 
             // Show and position the cover div.
             this.coverDiv.css('display', 'block');
@@ -128,9 +131,14 @@
 
         },
 
-        _customizeAlert: function() {
+        _customizeAlert: function(row) {
 
+            var exhibitName = row.find('td.title a').html();
+            var exhibitId = row.attr('exhibitid');
+            var deleteUrl = this.options.delete_url_slug + '/' + exhibitId;
 
+            this.exhibitName.html(exhibitName);
+            this.deleteButton.closest('form').attr('action', deleteUrl);
 
         },
 
