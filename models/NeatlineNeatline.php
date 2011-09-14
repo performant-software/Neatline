@@ -37,6 +37,9 @@ class NeatlineNeatline extends Omeka_record
     public $top_element;
     public $undated_items_position;
     public $undated_items_height;
+    public $is_map;
+    public $is_timeline;
+    public $is_undated_items;
 
     /**
      * Validate the add Neatline form.
@@ -96,6 +99,10 @@ class NeatlineNeatline extends Omeka_record
         $this->top_element = $_post['top_element'];
         $this->undated_items_position = $_post['undated_items_position'];
         $this->undated_items_height = $_post['undated_items_height'];
+        $this->undated_items_height = $_post['undated_items_height'];
+        $this->is_map = ($_post['is_map'] == 'false') ? 0 : 1;
+        $this->is_timeline = ($_post['is_timeline'] == 'false') ? 0 : 1;
+        $this->is_undated_items = ($_post['is_undated_items'] == 'false') ? 0 : 1;
 
     }
 
