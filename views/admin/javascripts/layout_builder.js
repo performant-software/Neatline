@@ -36,6 +36,9 @@
             top_element_input_id: 'top_element',
             udi_position_input_id: 'undated_items_position',
             udi_height_input_id: 'undated_items_height',
+            is_map_input_id: 'is_map',
+            is_timeline_input_id: 'is_timeline',
+            is_undated_items_input_id: 'is_undated_items',
             timeline_select_id: 'timeline',
             map_select_id: 'map',
 
@@ -50,6 +53,9 @@
             def_top_element: 'map',
             def_udi_position: 'right',
             def_udi_height: 'partial',
+            def_is_map: false,
+            def_is_timeline: false,
+            def_is_undated_items: false,
 
             // Miscellaneous
             no_selection_string: '-',
@@ -85,6 +91,9 @@
             this.top_element_input = $('#' + this.options.top_element_input_id);
             this.udi_position_input = $('#' + this.options.udi_position_input_id);
             this.udi_height_input = $('#' + this.options.udi_height_input_id);
+            this.is_map_input = $('#' + this.options.is_map_input_id);
+            this.is_timeline_input = $('#' + this.options.is_timeline_input_id);
+            this.is_undated_items_input = $('#' + this.options.is_undated_items_input_id);
 
             // Getters for map and timeline select dropdowns.
             this.map_select = $('#' + this.options.map_select_id);
@@ -107,9 +116,9 @@
             this._createButtons();
 
             // Set tracker variables for element presence.
-            this._is_map = false;
-            this._is_timeline = false;
-            this._is_undated_items = false;
+            // this._is_map = false;
+            // this._is_timeline = false;
+            // this._is_undated_items = false;
 
             // Set tracker variables for element position.
             this._setStartingParameters();
@@ -129,6 +138,9 @@
             var top_element_starter = this.top_element_input.attr('value');
             var undated_items_position_starter = this.udi_position_input.attr('value');
             var undated_items_height_starter = this.udi_height_input.attr('value');
+            var is_map_starter = this.is_map_input.attr('value');
+            var is_timeline_starter = this.is_timeline_input.attr('value');
+            var is_undated_items_starter = this.is_undated_items_input.attr('value');
 
             this._top_element = (top_element_starter) ? top_element_starter :
                 this.options.def_top_element;
@@ -139,9 +151,21 @@
             this._undated_items_height = (undated_items_height_starter) ? undated_items_height_starter :
                 this.options.def_udi_height;
 
+            this._is_map = (is_map_starter) ? is_map_starter :
+                this.options.def_is_map;
+
+            this._is_timeline = (is_timeline_starter) ? is_timeline_starter :
+                this.options.def_is_timeline;
+
+            this._is_undated_items = (is_undated_items_starter) ? is_undated_items_starter :
+                this.options.def_is_undated_items;
+
             this.top_element_input.attr('value', this._top_element);
             this.udi_position_input.attr('value', this._undated_items_position);
             this.udi_height_input.attr('value', this._undated_items_height);
+            this.is_map_input.attr('value', this._is_map);
+            this.is_timeline_input.attr('value', this._is_timeline);
+            this.is_undated_items_input.attr('value', this._is_undated_items);
 
             // If there are dropdown selects (on add page), fire change on them.
             if (this.map_select.length > 0 && this.timeline_select.length > 0) {
@@ -433,6 +457,7 @@
                 case true:
 
                     this._is_map = false;
+                    this.is_map_input.attr('value', this._is_map);
 
                     // Display none the map.
                     this.map_drag.css('display', 'none');
@@ -442,6 +467,7 @@
                 case false:
 
                     this._is_map = true;
+                    this.is_map_input.attr('value', this._is_map);
 
                     // Show the div.
                     this.map_drag.css('display', 'block');
@@ -462,6 +488,7 @@
                 case true:
 
                     this._is_timeline = false;
+                    this.is_timeline_input.attr('value', this._is_timeline);
 
                     // Display none the timeline.
                     this.timeline_drag.css('display', 'none');
@@ -478,6 +505,7 @@
                 case false:
 
                     this._is_timeline = true;
+                    this.is_timeline_input.attr('value', this._is_timeline);
 
                     // Show the div.
                     this.timeline_drag.css('display', 'block');
@@ -505,6 +533,7 @@
                 case true:
 
                     this._is_undated_items = false;
+                    this.is_undated_items_input.attr('value', this._is_undated_items);
 
                     // Display none the timeline.
                     this.undated_items_drag.css('display', 'none');
@@ -514,6 +543,7 @@
                 case false:
 
                     this._is_undated_items = true;
+                    this.is_undated_items_input.attr('value', this._is_undated_items);
 
                     // Show the div.
                     this.undated_items_drag.css('display', 'block');
