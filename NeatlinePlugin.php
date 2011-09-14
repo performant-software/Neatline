@@ -97,6 +97,9 @@ class NeatlinePlugin
                 `top_element` ENUM('map', 'timeline') NOT NULL DEFAULT 'map',
                 `undated_items_position` ENUM('right', 'left') NOT NULL DEFAULT 'right',
                 `undated_items_height` ENUM('partial', 'full') NOT NULL DEFAULT 'partial',
+                `is_map` tinyint(1) NOT NULL,
+                `is_timeline` tinyint(1) NOT NULL,
+                `is_undated_items` tinyint(1) NOT NULL,
                  PRIMARY KEY (`id`)
                ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
 
