@@ -145,6 +145,7 @@ class NeatlinePlugin
 
         // Queue CSS.
         if ($request->getModuleName() == 'neatline' &&
+            $request->getControllerName() == 'index' &&
             $request->getActionName() != 'edit') {
 
               neatline_queueAdminCss();
@@ -153,6 +154,7 @@ class NeatlinePlugin
 
         // Queue layout builder JavaScript.
         if ($request->getModuleName() == 'neatline' &&
+            $request->getControllerName() == 'index' &&
             in_array($request->getActionName(), array('add'))) {
 
               neatline_queueLayoutBuilderCssAndJs();
@@ -161,6 +163,7 @@ class NeatlinePlugin
 
         // Queue row glosser for browse actions.
         if ($request->getModuleName() == 'neatline' &&
+            $request->getControllerName() == 'index' &&
             $request->getActionName() == 'browse') {
 
               neatline_queueBrowseJs();

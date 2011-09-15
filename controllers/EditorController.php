@@ -52,8 +52,28 @@ class Neatline_EditorController extends Omeka_Controller_Action
     public function indexAction()
     {
 
+        // Push the neatline into the view.
         $id = $this->_request->getParam('id');
         $this->neatline = $this->_neatlinesTable->find($id);
+
+    }
+
+    /**
+     * ~ AJAX ~
+     * Fetch items for the browser.
+     *
+     * @return void
+     */
+    public function itemsAction()
+    {
+
+        // Disable the default look-for-template behavior.
+        $this->_helper->viewRenderer->setNoRender();
+
+        // Get items.
+        $items = neatline_getItemsForBrowser();
+        $json = Zend_Json::encode($items);
+        $this->response->appendBody($json);
 
     }
 
