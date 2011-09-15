@@ -34,6 +34,9 @@
             search_box_id: 'search-box',
             items_list_container_id: 'items-list-container',
 
+            // Durations.
+            item_list_highlight_duration: 10,
+
             colors: {
                 item_list_highlight: '#f2f3fa'
             }
@@ -152,7 +155,8 @@
                 item.bind({
 
                     'mouseenter': function() {
-                        item.css('background-color', self.options.colors.item_list_highlight);
+                        item.css('background-color',
+                            self.options.colors.item_list_highlight);
                     },
 
                     'mouseleave': function() {
