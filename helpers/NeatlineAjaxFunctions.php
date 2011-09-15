@@ -33,38 +33,21 @@
  *
  * @return array of Omeka_records $items The items.
  */
-function neatline_getItemsForBrowser()
+function neatline_getItemsForBrowser($search = null, $tag = null, $collection = null)
 {
 
-    // $_db = get_db();
-    // $mapsTable = $_db->getTable('NeatlineMapsMap');
-    // $parentItemSql = "(SELECT text from `$_db->ElementText` WHERE record_id = m.item_id AND element_id = 50 LIMIT 1)";
+    $_db = get_db();
+    $itemsTable = $_db->getTable('Item');
 
-    // $select = $mapsTable->select()
-    //     ->from(array('m' => $_db->prefix . 'neatline_maps_maps'))
-    //     ->joinLeft(array('i' => $_db->prefix . 'items'), 'm.item_id = i.id')
-    //     ->columns(array('map_id' => 'm.id', 'parent_item' => $parentItemSql));
+    $select = $itemsTable->getSelect();
+    $params = array();
 
-    // $maps = $mapsTable->fetchObjects($select);
-    // $itemBuckets = array();
+    if ($search) {
+        $params['search'] = $search;
+    }
 
-    // // Put the maps into an associative array of structure
-    // // array('parent_item_name' => array($map1, $map2, ...)).
-    // foreach ($maps as $map) {
-    //     if (!array_key_exists($map->parent_item, $itemBuckets)) {
-    //         $itemBuckets[$map->parent_item] = array($map);
-    //     } else {
-    //         $itemBuckets[$map->parent_item][] = $map;
-    //     }
-    // }
+    $itemsTable->applySearchFilters($select, $params);
 
-    // // Sort the contents of the buckets.
-    // foreach ($itemBuckets as $bucket) {
-    //     usort($bucket, 'neatline_compareObjects');
-    // }
-
-    // // Then sort the buckets by the name of the parent item.
-    // asort($itemBuckets);
-    // return $itemBuckets;
+    return $itemsTable->fetchObjects($select);
 
 }

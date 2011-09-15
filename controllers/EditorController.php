@@ -67,13 +67,11 @@ class Neatline_EditorController extends Omeka_Controller_Action
     public function itemsAction()
     {
 
-        // Disable the default look-for-template behavior.
-        $this->_helper->viewRenderer->setNoRender();
+        // Set the layout.
+        $this->_helper->viewRenderer('items-ajax');
 
         // Get items.
         $items = neatline_getItemsForBrowser();
-        $json = Zend_Json::encode($items);
-        $this->response->appendBody($json);
 
     }
 
