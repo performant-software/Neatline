@@ -75,6 +75,15 @@
             this.windowWidth = this._window.width();
             this.windowHeight = this._window.height();
 
+        },
+
+        getItems: function(search, collection, tag) {
+
+            // Core ajax call to get items.
+            $.ajax({
+
+            });
+
         }
 
     });
