@@ -32,7 +32,11 @@
             topbar_id: 'topbar',
             search_wrapper_id: 'search-wrapper',
             search_box_id: 'search-box',
-            items_list_container_id: 'items-list-container'
+            items_list_container_id: 'items-list-container',
+
+            colors: {
+                item_list_highlight: '#f2f3fa'
+            }
 
         },
 
@@ -58,7 +62,7 @@
             this._glossSearchBox();
 
             // Fire starting ajax request.
-            this.getItems();
+            this._getItems();
 
         },
 
@@ -103,17 +107,16 @@
 
                 'keyup': function() {
                     self._searchString = self.searchBox.val();
-                    self.getItems();
+                    self._getItems();
                 }
 
             });
 
         },
 
-        getItems: function() {
+        _getItems: function() {
 
             var self = this;
-            console.log(this._searchString);
 
             // Core ajax call to get items.
             $.ajax({
@@ -128,7 +131,35 @@
                 success: function(data) {
                     self.itemsList.html(data);
                     self._positionContainer();
+                    self._glossItems();
                 }
+
+            });
+
+        },
+
+        _glossItems: function() {
+
+            var self = this;
+
+            // Get the new items.
+            this.items = $('#' + this.options.items_list_container_id + ' .item');
+
+            // Gloss each of them.
+            $.each(this.items, function(i, item) {
+
+                var item = $(item);
+                item.bind({
+
+                    'mouseenter': function() {
+                        item.css('background-color', self.options.colors.item_list_highlight);
+                    },
+
+                    'mouseleave': function() {
+                        item.css('background-color', 'transparent');
+                    }
+
+                });
 
             });
 

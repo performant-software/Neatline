@@ -26,7 +26,12 @@
 ?>
 
 <ul id="items">
+
     <?php foreach ($items as $item): ?>
-        <li class="item"><?php echo item('Dublin Core', 'Title', null, $item); ?></li>
+
+        <li class="item">
+            <?php echo item('Dublin Core', 'Title', null, $item); ?>
+        </li>
+
     <?php endforeach; ?>
 </ul>
