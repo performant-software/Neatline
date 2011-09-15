@@ -155,12 +155,11 @@
                 item.bind({
 
                     'mouseenter': function() {
-                        item.css('background-color',
-                            self.options.colors.item_list_highlight);
+                        item.addClass('highlight');
                     },
 
                     'mouseleave': function() {
-                        item.css('background-color', 'transparent');
+                        item.removeClass('highlight');
                     }
 
                 });

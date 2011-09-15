@@ -32,12 +32,15 @@
 
 <div id="topbar" class="topbar-inner topbar">
 
+    <!--
     <input type="text" placeholder="Search items" id="search-box" />
+    -->
 
     <img id="neatline-logo" src="<?php echo img('neatline-logo-white-small.png'); ?>" />
 
 </div>
 
 <div id="item-browser">
+    <div id="items-list-header"></div>
     <div id="items-list-container"></div>
 </div>
