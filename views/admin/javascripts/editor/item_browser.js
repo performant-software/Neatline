@@ -47,6 +47,17 @@
             this._positionContainer();
             this._addWindowResizeListener();
 
+            // Set starting filtering parameters.
+            this._searchString = '';
+            this._tagFilter = null;
+            this._collectionFilter = null;
+
+            // Add listener to the search box.
+            this._glossSearchBox();
+
+            // Fire starting ajax request.
+            this.getItems();
+
         },
 
         _positionContainer: function() {
@@ -77,11 +88,26 @@
 
         },
 
-        getItems: function(search, collection, tag) {
+        _glossSearchBox: function() {
+
+            var self = this;
+
+            this.searchBox.bind({
+
+                'keydown': function() {
+                    self._searchString = self.searchBox.attr('value');
+                    self.getItems();
+                }
+
+            });
+
+        },
+
+        getItems: function() {
 
             // Core ajax call to get items.
             $.ajax({
-
+                url: ''
             });
 
         }
