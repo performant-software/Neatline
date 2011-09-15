@@ -31,7 +31,8 @@
             // Markup hooks.
             topbar_id: 'topbar',
             search_wrapper_id: 'search-wrapper',
-            search_box_id: 'search-box'
+            search_box_id: 'search-box',
+            items_list_container_id: 'items-list-container'
 
         },
 
@@ -42,6 +43,7 @@
             this.topBar = $('#' + this.options.topbar_id);
             this.searchWrapper = $('#' + this.options.search_wrapper_id);
             this.searchBox = $('#' + this.options.search_box_id);
+            this.itemsList = $('#' + this.options.items_list_container_id);
 
             // Position the container, add window resize listener.
             this._positionContainer();
@@ -64,7 +66,10 @@
 
             // Update dimensions and set new height.
             this._getDimensions();
-            this.element.css('height', this.windowHeight - 1);
+            this.element.css({
+                'height': this.windowHeight - this.topBarHeight - 1,
+                'top': this.topBarHeight
+            });
 
         },
 
@@ -86,6 +91,8 @@
             this.windowWidth = this._window.width();
             this.windowHeight = this._window.height();
 
+            this.topBarHeight = this.topBar.height();
+
         },
 
         _glossSearchBox: function() {
@@ -94,8 +101,8 @@
 
             this.searchBox.bind({
 
-                'keydown': function() {
-                    self._searchString = self.searchBox.attr('value');
+                'keyup': function() {
+                    self._searchString = self.searchBox.val();
                     self.getItems();
                 }
 
@@ -105,9 +112,24 @@
 
         getItems: function() {
 
+            var self = this;
+            console.log(this._searchString);
+
             // Core ajax call to get items.
             $.ajax({
-                url: 'items'
+
+                url: 'items',
+                dataType: 'html',
+
+                data: {
+                    search: this._searchString
+                },
+
+                success: function(data) {
+                    self.itemsList.html(data);
+                    self._positionContainer();
+                }
+
             });
 
         }

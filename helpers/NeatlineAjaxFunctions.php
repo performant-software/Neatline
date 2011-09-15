@@ -33,7 +33,7 @@
  *
  * @return array of Omeka_records $items The items.
  */
-function neatline_getItemsForBrowser($search = null, $tag = null, $collection = null)
+function neatline_getItemsForBrowser($search = null)
 {
 
     $_db = get_db();

@@ -41,4 +41,5 @@
 </div>
 
 <div id="item-browser">
+    <div id="items-list-container"></div>
 </div>

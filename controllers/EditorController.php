@@ -70,8 +70,11 @@ class Neatline_EditorController extends Omeka_Controller_Action
         // Set the layout.
         $this->_helper->viewRenderer('items-ajax');
 
+        // Get parameters from the ajax request.
+        $searchString = $this->_request->getParam('search');
+
         // Get items.
-        $this->view->items = neatline_getItemsForBrowser();
+        $this->view->items = neatline_getItemsForBrowser($searchString);
 
     }
 
