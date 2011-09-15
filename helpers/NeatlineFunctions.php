@@ -82,6 +82,7 @@ function neatline_queueEditorAssets()
     queue_css('neatline-editor');
 
     queue_js('editor/item_browser', 'javascripts');
+    queue_js('editor/jquery-tmpl/jquery.tmpl.min', 'javascripts');
 
 }
 
