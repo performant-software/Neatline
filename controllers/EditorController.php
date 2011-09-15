@@ -71,7 +71,7 @@ class Neatline_EditorController extends Omeka_Controller_Action
         $this->_helper->viewRenderer('items-ajax');
 
         // Get items.
-        $items = neatline_getItemsForBrowser();
+        $this->view->items = neatline_getItemsForBrowser();
 
     }
 

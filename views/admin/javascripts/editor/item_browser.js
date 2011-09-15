@@ -107,7 +107,7 @@
 
             // Core ajax call to get items.
             $.ajax({
-                url: 'test'
+                url: 'items'
             });
 
         }
