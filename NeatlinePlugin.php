@@ -169,7 +169,8 @@ class NeatlinePlugin
 
         // Queue static assets for the Neatline editor.
         if ($request->getModuleName() == 'neatline' &&
-            $request->getActionName() == 'edit') {
+            $request->getControllerName() == 'editor' &&
+            $request->getActionName() == 'index') {
 
 
               neatline_queueEditorAssets();
