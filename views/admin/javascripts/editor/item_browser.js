@@ -33,6 +33,7 @@
             search_wrapper_id: 'search-wrapper',
             search_box_id: 'search-box',
             items_list_container_id: 'items-list-container',
+            items_list_header_id: 'items-list-header',
 
             // Durations.
             item_list_highlight_duration: 10,
@@ -51,9 +52,10 @@
             this.searchWrapper = $('#' + this.options.search_wrapper_id);
             this.searchBox = $('#' + this.options.search_box_id);
             this.itemsList = $('#' + this.options.items_list_container_id);
+            this.itemsListHeader = $('#' + this.options.items_list_header_id);
 
             // Position the container, add window resize listener.
-            this._positionContainer();
+            this._positionDivs();
             this._addWindowResizeListener();
 
             // Set starting filtering parameters.
@@ -69,13 +71,21 @@
 
         },
 
-        _positionContainer: function() {
+        _positionDivs: function() {
 
             // Update dimensions and set new height.
             this._getDimensions();
+
+            // Set the height of the main container.
             this.element.css({
                 'height': this.windowHeight - this.topBarHeight - 1,
                 'top': this.topBarHeight
+            });
+
+            // Set the height of the header.
+            this.itemsListHeader.css({
+                'top': this.topBarHeight,
+                'width': this.containerWidth
             });
 
         },
@@ -146,7 +156,7 @@
             var self = this;
 
             // Get the new items.
-            this.items = $('#' + this.options.items_list_container_id + ' .item');
+            this.items = $('#' + this.options.items_list_container_id + ' .item-row');
 
             // Gloss each of them.
             $.each(this.items, function(i, item) {

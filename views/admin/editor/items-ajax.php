@@ -29,8 +29,10 @@
 
     <?php foreach ($items as $item): ?>
 
-        <li class="item">
-            <?php echo item('Dublin Core', 'Title', null, $item); ?>
+        <li class="item-row">
+            <ul class="item-row">
+                <li class="item-title inline-col"><?php echo item('Dublin Core', 'Title', null, $item); ?></li>
+            </ul>
         </li>
 
     <?php endforeach; ?>
