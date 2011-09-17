@@ -1,5 +1,3 @@
-
-
 /*
  * Item browser widget in the Neatline editor.
  *
@@ -41,9 +39,13 @@
             // Durations and CSS constants.
             item_list_highlight_duration: 10,
             drag_handle_width: 4,
+            drag_tooltip_Y_offset: 16,
+            drag_tooltip_X_offset: 15,
 
+            // Hexes.
             colors: {
-                item_list_highlight: '#f2f3fa'
+                item_list_highlight: '#f2f3fa',
+                drag_border: '#e5d7f4'
             }
 
         },
@@ -90,7 +92,7 @@
 
             // Turn off text selection on the whole container div.
             this._window.css('MozUserSelect', 'none');
-            this._window.bind('selectstart mousedown', function() {
+            this._window.bind('selectstart', function() {
                 return false;
             });
 
@@ -154,33 +156,52 @@
             this.dragHandle.bind({
 
                 'mouseenter': function() {
-                    self.dragHandle.trigger('mousemove');
+
+                    if (!self._just_dragged) {
+
+                        self.dragHandle.trigger('mousemove');
+                        self.dragHandle.css('border-right', '1px dotted ' +
+                            self.options.colors.drag_border);
+
+                    }
+
                 },
 
                 'mousemove': function(e) {
 
-                    // Get pointer coordinates.
-                    var offsetX = e.pageX;
-                    var offsetY = e.pageY;
+                    if (!self._is_dragging_width && !self._just_dragged) {
 
-                    // Position and show tip.
-                    self.tip.css({
-                        'display': 'block',
-                        'top': offsetY - 16,
-                        'left': offsetX + 15
-                    });
+                        // Get pointer coordinates.
+                        var offsetX = e.pageX;
+                        var offsetY = e.pageY;
 
-                    // Append.
-                    self._body.append(self.tip);
+                        // Position and show tip.
+                        self.tip.css({
+                            'display': 'block',
+                            'top': offsetY - self.options.drag_tooltip_Y_offset,
+                            'left': offsetX + self.options.drag_tooltip_X_offset
+                        });
+
+                        // Append.
+                        self._body.append(self.tip);
+
+                    }
 
                 },
 
                 'mouseleave': function() {
 
+                    // Hide the tip.
+                    self.tip.css('display', 'none');
+                    self.dragHandle.css('border-right', 'none');
+                    self._just_dragged = false;
+
                 },
 
                 'mousedown': function(event) {
+
                     self._doWidthDrag(event);
+
                 }
 
             });
@@ -190,9 +211,13 @@
         _doWidthDrag: function(trigger_event_object) {
 
             var self = this;
+            this._is_dragging_width = true;
 
             // Get the starting pointer coordinates.
             var startingX = trigger_event_object.pageX;
+
+            // Update the dimensions trackers.
+            this._getDimensions();
 
             // Get the starting width of the container.
             var startingContainerWidth = this.containerWidth;
@@ -218,6 +243,9 @@
                 },
 
                 'mouseup': function() {
+
+                    self._is_dragging_width = false;
+                    self._just_dragged = true;
 
                     // Unbind the events added for the drag.
                     self._window.unbind('mousemove mouseup');
