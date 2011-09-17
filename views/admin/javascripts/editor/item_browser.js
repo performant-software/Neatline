@@ -30,6 +30,7 @@
             topbar_id: 'topbar',
             search_wrapper_id: 'search-wrapper',
             search_box_id: 'search-box',
+            search_cancel_id: 'search-cancel',
             items_list_container_id: 'items-list-container',
             items_list_header_id: 'items-list-header',
 
@@ -57,6 +58,7 @@
             this.searchBox = $('#' + this.options.search_box_id);
             this.itemsList = $('#' + this.options.items_list_container_id);
             this.itemsListHeader = $('#' + this.options.items_list_header_id);
+            this.searchCancel = $('#' + this.options.search_cancel_id);
 
             // Disable text selection on the document. This is aggressive
             // and controversial, but it solves lots of annoyances.
@@ -281,6 +283,16 @@
                 'keyup': function() {
                     self._searchString = self.searchBox.val();
                     self._getItems();
+                }
+
+            });
+
+            // Gloss the cancel button.
+            this.searchCancel.bind({
+
+                'mousedown': function() {
+                    self.searchBox.val('');
+                    self.searchBox.trigger('keyup');
                 }
 
             });
