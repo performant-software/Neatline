@@ -354,7 +354,7 @@
 
             this.scrollbarWidth = 0;
 
-			if ($.browser.msie) {
+            if ($.browser.msie) {
 
 				var $textarea1 = $('<textarea cols="10" rows="2"></textarea>')
 						.css({ position: 'absolute', top: -1000, left: -1000 }).appendTo('body'),

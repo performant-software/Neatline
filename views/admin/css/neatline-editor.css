@@ -205,7 +205,7 @@ span#search-cancel {
 }
 
 span#search-cancel:hover {
-    color: #f1c250;
+    color: #f0b925;
 }
 
 
@@ -244,10 +244,26 @@ div#columns {
     height: 100%;
 }
 
+div#columns div.col-cell {
+    display: inline-block;
+    height: 100%;
+    position: absolute;
+}
+
+div.col-1 {
+    right: 70px;
+}
+
+div.col-2 {
+    right: 40px;
+}
+
+div.col-3 {
+    right: 10px;
+}
+
 div#columns span.header {
     display: inline-block;
-    vertical-align: middle;
-    margin: 12px 10px 0 0;
     padding: 0 5px 0 5px;
     background-color: #724e85;
     font-weight: bold;
@@ -258,4 +274,10 @@ div#columns span.header {
     width: 10px;
     text-align: center;
     cursor: pointer;
+    top: 12px;
+    position: relative;
+}
+
+div#columns span.header:hover {
+    background-color: #f0b925;
 }
