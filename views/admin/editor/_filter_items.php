@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
 
 /**
- * Page header markup for the editor.
+ * Filter items dropdown interface.
  *
  * PHP version 5
  *
@@ -25,24 +25,38 @@
  */
 ?>
 
-<!DOCTYPE html>
-<html lang="en-us">
-<head>
-    <meta charset="utf-8">
-    <title>Neatline Editor: <?php echo $title; ?></title>
+<div id="filter-items" class="popover">
 
-<?php
-    queue_css('jquery-ui', 'screen');
-?>
+    <div class="filter-items-column">
 
-<!-- Plugin Stuff -->
-<?php admin_plugin_header(); ?>
+        <h5 class="title">Tags</h3>
+        <?php foreach ($tags as $tag): ?>
+            <div class="filter-option">
+                <label class="filter-checkbox">
+                    <input type="checkbox" />
+                </label>
+                <span><?php echo $tag->name; ?></span>
+            </div>
+        <?php endforeach; ?>
 
-<!-- Stylesheets -->
-<?php display_css(); ?>
+    </div>
 
-<!-- JavaScripts -->
-<?php display_js(); ?>
+    <div class="filter-items-column">
 
-</head>
-<?php echo body_tag(array('id' => @$bodyid, 'class' => @$bodyclass)); ?>
+        <h5 class="title">Collections</h3>
+        <?php foreach ($collections as $collection): ?>
+            <div><?php echo $collection->name; ?></div>
+        <?php endforeach; ?>
+
+    </div>
+
+    <div class="filter-items-column">
+
+        <h5 class="title">Types</h3>
+        <?php foreach ($types as $type): ?>
+            <div><?php echo $type->name; ?></div>
+        <?php endforeach; ?>
+
+    </div>
+
+</div>

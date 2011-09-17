@@ -56,6 +56,14 @@ class Neatline_EditorController extends Omeka_Controller_Action
         $id = $this->_request->getParam('id');
         $this->view->neatline = $this->_neatlinesTable->find($id);
 
+        $collections = $this->getTable('Collection')->findAll();
+        $tags = $this->getTable('Tag')->findAll();
+        $types = $this->getTable('ItemType')->findAll();
+
+        $this->view->collections = $collections;
+        $this->view->tags = $tags;
+        $this->view->types = $types;
+
     }
 
     /**

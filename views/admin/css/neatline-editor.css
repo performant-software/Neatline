@@ -231,6 +231,22 @@ ul.filter-items {
     height: 35px;
 }
 
+div#filter-items {
+    display: block;
+    position: absolute;
+    left: 500px;
+    top: 100px;
+}
+
+div#filter-items .filter-items-column {
+    vertical-align: top;
+    display: inline-block;
+}
+
+div.filter-option {
+    display: block;
+}
+
 
 /* Item columns */
 

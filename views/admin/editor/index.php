@@ -60,3 +60,9 @@
     <div id="items-list-container"></div>
 
 </div>
+
+<?php echo $this->partial('editor/_filter_items.php', array(
+    'tags' => $tags,
+    'collections' => $collections,
+    'types' => $types
+)); ?>
