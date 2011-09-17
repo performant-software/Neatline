@@ -117,12 +117,23 @@
 
         },
 
+        _positionDragHandle: function() {
+
+            // Set the height of the drag handle.
+            this.dragHandle.css({
+                'height': this.windowHeight - this.topBarHeight - 1,
+                'top': this.topBarHeight
+            });
+
+        },
+
         _addWindowResizeListener: function() {
 
             var self = this;
 
             this._window.bind('resize', function() {
                 self._positionDivs();
+                self._positionDragHandle();
             });
 
         },
