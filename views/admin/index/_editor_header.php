@@ -2,7 +2,7 @@
 <html lang="en-us">
 <head>
     <meta charset="utf-8">
-    <title>Neatline Editor: <?php echo strip_formatting($title); ?></title>
+    <title>Neatline Editor: <?php echo $title; ?></title>
 
 <?php
     queue_css('jquery-ui', 'screen');

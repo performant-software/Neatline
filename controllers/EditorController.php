@@ -54,7 +54,7 @@ class Neatline_EditorController extends Omeka_Controller_Action
 
         // Push the neatline into the view.
         $id = $this->_request->getParam('id');
-        $this->neatline = $this->_neatlinesTable->find($id);
+        $this->view->neatline = $this->_neatlinesTable->find($id);
 
     }
 
