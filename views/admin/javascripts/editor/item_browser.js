@@ -45,7 +45,7 @@
             // Hexes.
             colors: {
                 item_list_highlight: '#f2f3fa',
-                drag_border: '#e5d7f4'
+                drag_border: '#a79aae'
             }
 
         },
@@ -160,7 +160,7 @@
                     if (!self._just_dragged) {
 
                         self.dragHandle.trigger('mousemove');
-                        self.dragHandle.css('border-right', '1px dotted ' +
+                        self.dragHandle.css('border-right', '1px dashed ' +
                             self.options.colors.drag_border);
 
                     }

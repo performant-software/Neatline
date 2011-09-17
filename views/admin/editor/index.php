@@ -33,13 +33,20 @@
 <div id="topbar" class="topbar-inner topbar">
 
     <img id="neatline-logo" src="<?php echo img('neatline-logo-white-small.png'); ?>" />
-    <input type="text" placeholder="Search items" id="search-box" />
 
 </div>
 
 <div id="item-browser">
 
     <div id="items-list-header">
+
+        <input type="text" placeholder="Search items" id="search-box" />
+
+        <ul class="tabs filter-items">
+            <li class="drop-down">
+                <a href="#" class="dropdown-toggle">Filter Items</a>
+            </li>
+        </ul>
 
     </div>
 

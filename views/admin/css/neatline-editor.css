@@ -28,6 +28,7 @@
 
 #topbar {
     height: 53px;
+    display: inline;
     background-color: #724e85;
     background-color: #724e85;
     background-repeat: repeat-x;
@@ -45,19 +46,15 @@
     vertical-align: middle;
 }
 
-.topbar input {
+#search-box {
     float: left;
-    background-color: #eee8f1 !important;
-    background-color: rgba(255, 255, 255, 0.3);
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 11px;
+    font-size: 10px;
     font-weight: 13px;
     font-size: 1.1em;
     line-height: 1;
-    padding: 6px 9px;
-    margin: 11px 0 0 16px;
-    color: #222;
-    border: 1px solid #111;
+    padding: 3px 5px;
+    margin: 8px 10px 0 18px;
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
     border-radius: 4px;
@@ -67,32 +64,7 @@
     -webkit-transition: none;
     -moz-transition: none;
     transition: none;
-}
-
-.topbar input:hover {
-    background-color: #bfbfbf;
-    background-color: rgba(255, 255, 255, 0.5);
-    color: #222;
-}
-
-.topbar input:focus, .topbar input.focused {
-    outline: none;
-    background-color: #fff;
-    color: #000;
-    text-shadow: 0 1px 0 #fff;
-    padding: 6px 9px;
-    margin: 12px 0 0 17px;
-    -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, 0.15);
-    -moz-box-shadow: 0 0 3px rgba(0, 0, 0, 0.15);
-    box-shadow: 0 0 3px rgba(0, 0, 0, 0.15);
-}
-
-.topbar input:-moz-placeholder {
-  color: #222;
-}
-
-.topbar input::-webkit-input-placeholder {
-  color: #222;
+    width: 150px;
 }
 
 #neatline-logo {
@@ -218,4 +190,33 @@ li.item-title {
 div#drag-handle {
     position: absolute;
     cursor: col-resize;
+}
+
+
+/* Filter Items */
+
+ul.filter-items {
+    display: inline;
+    border: none;
+    margin: 0 0 0 5px;
+}
+
+.tabs > li > a {
+    padding: 2px 15px;
+    color: #724e85;
+}
+
+.tabs > li > a:hover {
+    background-color: #eee;
+    border-bottom: none;
+    text-decoration: none;
+    height: 35px;
+}
+
+
+/* Item columns */
+
+span.header {
+    font-weight: bold;
+    font-size: 0.8em;
 }
