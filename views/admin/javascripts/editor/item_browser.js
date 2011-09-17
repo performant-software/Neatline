@@ -193,8 +193,11 @@
 
                     // Hide the tip.
                     self.tip.css('display', 'none');
-                    self.dragHandle.css('border-right', 'none');
-                    self._just_dragged = false;
+
+                    if (!self._is_dragging_width) {
+                        self.dragHandle.css('border-right', 'none');
+                        self._just_dragged = false;
+                    }
 
                 },
 
@@ -213,6 +216,9 @@
             var self = this;
             this._is_dragging_width = true;
 
+            // Fix the cursor as resize during the drag.
+            self._body.css('cursor', 'col-resize');
+
             // Get the starting pointer coordinates.
             var startingX = trigger_event_object.pageX;
 
@@ -225,9 +231,6 @@
             this._window.bind({
 
                 'mousemove': function(e) {
-
-                    // Fix the cursor as resize during the drag.
-                    self._window.css('cursor', 'col-resize');
 
                     // Get the relative offset and new width.
                     var offsetX = e.pageX - startingX;
