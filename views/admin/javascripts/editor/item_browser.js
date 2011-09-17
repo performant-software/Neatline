@@ -141,10 +141,37 @@
             // Append.
             this._body.append(this.dragHandle);
 
+            // Construct the drag tooltip.
+            this.tip = $('<div class="twipsy fade right in">\
+                            <div class="twipsy-arrow"></div>\
+                            <div class="twipsy-inner">Click to drag.</div>\
+                        </div>');
+
+            // Hide the tip by default.
+            this.tip.css('display', 'none');
+
             // Add events.
             this.dragHandle.bind({
 
                 'mouseenter': function() {
+                    self.dragHandle.trigger('mousemove');
+                },
+
+                'mousemove': function(e) {
+
+                    // Get pointer coordinates.
+                    var offsetX = e.pageX;
+                    var offsetY = e.pageY;
+
+                    // Position and show tip.
+                    self.tip.css({
+                        'display': 'block',
+                        'top': offsetY - 16,
+                        'left': offsetX + 15
+                    });
+
+                    // Append.
+                    self._body.append(self.tip);
 
                 },
 
