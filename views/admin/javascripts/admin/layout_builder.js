@@ -113,11 +113,6 @@
             this._disableSelect();
             this._createButtons();
 
-            // Set tracker variables for element presence.
-            // this._is_map = false;
-            // this._is_timeline = false;
-            // this._is_undated_items = false;
-
             // Set tracker variables for element position.
             this._setStartingParameters();
 

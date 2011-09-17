@@ -1,7 +1,10 @@
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
+
 
 /*
  * Item browser widget in the Neatline editor.
+ *
+ * _functionName methods are "protected," __functionName methods are
+ * "private."
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -35,8 +38,9 @@
             items_list_container_id: 'items-list-container',
             items_list_header_id: 'items-list-header',
 
-            // Durations.
+            // Durations and CSS constants.
             item_list_highlight_duration: 10,
+            drag_handle_width: 4,
 
             colors: {
                 item_list_highlight: '#f2f3fa'
@@ -48,15 +52,26 @@
 
             // Getters.
             this._window = $(window);
+            this._body = $('body');
             this.topBar = $('#' + this.options.topbar_id);
             this.searchWrapper = $('#' + this.options.search_wrapper_id);
             this.searchBox = $('#' + this.options.search_box_id);
             this.itemsList = $('#' + this.options.items_list_container_id);
             this.itemsListHeader = $('#' + this.options.items_list_header_id);
 
+            // Disable text selection on the document. This is aggressive
+            // and controversial, but it solves lots of annoyances.
+            this._disableSelect();
+
+            // Get the os scrollbar width.
+            this.__getScrollBarWidth();
+
             // Position the container, add window resize listener.
             this._positionDivs();
             this._addWindowResizeListener();
+
+            // Construct the drag handle on the items stack.
+            this._buildDragHandle();
 
             // Set starting filtering parameters.
             this._searchString = '';
@@ -68,6 +83,16 @@
 
             // Fire starting ajax request.
             this._getItems();
+
+        },
+
+        _disableSelect: function() {
+
+            // Turn off text selection on the whole container div.
+            this._window.css('MozUserSelect', 'none');
+            this._window.bind('selectstart mousedown', function() {
+                return false;
+            });
 
         },
 
@@ -85,7 +110,7 @@
             // Set the height of the header.
             this.itemsListHeader.css({
                 'top': this.topBarHeight,
-                'width': this.containerWidth
+                'width': this.containerWidth - this.scrollbarWidth
             });
 
         },
@@ -95,7 +120,86 @@
             var self = this;
 
             this._window.bind('resize', function() {
-                self._positionContainer();
+                self._positionDivs();
+            });
+
+        },
+
+        _buildDragHandle: function() {
+
+            var self = this;
+
+            // Construct, size, and position the handle div.
+            this.dragHandle = $('<div id="drag-handle"></div>');
+            this.dragHandle.css({
+                'width': this.options.drag_handle_width,
+                'height': this.windowHeight - this.topBarHeight - 1,
+                'top': this.topBarHeight,
+                'left': this.containerWidth
+            });
+
+            // Append.
+            this._body.append(this.dragHandle);
+
+            // Add events.
+            this.dragHandle.bind({
+
+                'mouseenter': function() {
+
+                },
+
+                'mouseleave': function() {
+
+                },
+
+                'mousedown': function(event) {
+                    self._doWidthDrag(event);
+                }
+
+            });
+
+        },
+
+        _doWidthDrag: function(trigger_event_object) {
+
+            var self = this;
+
+            // Get the starting pointer coordinates.
+            var startingX = trigger_event_object.pageX;
+
+            // Get the starting width of the container.
+            var startingContainerWidth = this.containerWidth;
+
+            this._window.bind({
+
+                'mousemove': function(e) {
+
+                    // Fix the cursor as resize during the drag.
+                    self._window.css('cursor', 'col-resize');
+
+                    // Get the relative offset and new width.
+                    var offsetX = e.pageX - startingX;
+                    var newWidth = startingContainerWidth + offsetX;
+
+                    // Resize the container and header.
+                    self.element.css('width', newWidth);
+                    self.itemsListHeader.css('width', newWidth - self.scrollbarWidth);
+
+                    // Reposition the dragger.
+                    self.dragHandle.css('left', newWidth);
+
+                },
+
+                'mouseup': function() {
+
+                    // Unbind the events added for the drag.
+                    self._window.unbind('mousemove mouseup');
+
+                    // Set the cursor back to auto.
+                    self._body.css('cursor', 'auto');
+
+                }
+
             });
 
         },
@@ -143,7 +247,7 @@
 
                 success: function(data) {
                     self.itemsList.html(data);
-                    self._positionContainer();
+                    self._positionDivs();
                     self._glossItems();
                 }
 
@@ -175,6 +279,36 @@
                 });
 
             });
+
+        },
+
+        __getScrollBarWidth: function() {
+
+            this.scrollbarWidth = 0;
+
+			if ($.browser.msie) {
+
+				var $textarea1 = $('<textarea cols="10" rows="2"></textarea>')
+						.css({ position: 'absolute', top: -1000, left: -1000 }).appendTo('body'),
+					$textarea2 = $('<textarea cols="10" rows="2" style="overflow: hidden;"></textarea>')
+						.css({ position: 'absolute', top: -1000, left: -1000 }).appendTo('body');
+
+				this.scrollbarWidth = $textarea1.width() - $textarea2.width();
+				$textarea1.add($textarea2).remove();
+
+			}
+
+            else {
+
+				var $div = $('<div />')
+					.css({ width: 100, height: 100, overflow: 'auto', position: 'absolute', top: -1000, left: -1000 })
+					.prependTo('body').append('<div />').find('div')
+						.css({ width: '100%', height: 200 });
+
+				this.scrollbarWidth = 100 - $div.width();
+				$div.parent().remove();
+
+			}
 
         }
 

@@ -214,3 +214,8 @@ li.inline-col {
 
 li.item-title {
 }
+
+div#drag-handle {
+    position: absolute;
+    cursor: col-resize;
+}
