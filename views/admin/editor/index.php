@@ -26,7 +26,7 @@
  */
 ?>
 
-<?php echo $this->partial('index/_editor_header.php', array(
+<?php echo $this->partial('editor/_editor_header.php', array(
     'title' => $neatline->name
 )); ?>
 
@@ -35,21 +35,14 @@
     <img id="neatline-logo" src="<?php echo img('neatline-logo-white-small.png'); ?>" />
     <input type="text" placeholder="Search items" id="search-box" />
 
-    <ul class="nav">
-        <li class="dropdown">
-            <a href="#" class="dropdown-toggle">Filter by Tags</a>
-        </li>
-        <li class="dropdown">
-            <a href="#" class="dropdown-toggle">Filter by Collection</a>
-        </li>
-        <li class="dropdown">
-            <a href="#" class="dropdown-toggle">Filter by Type</a>
-        </li>
-    </ul>
-
 </div>
 
 <div id="item-browser">
-    <div id="items-list-header"></div>
+
+    <div id="items-list-header">
+
+    </div>
+
     <div id="items-list-container"></div>
+
 </div>
