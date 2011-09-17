@@ -53,7 +53,7 @@
     font-weight: 13px;
     font-size: 1.1em;
     line-height: 1;
-    padding: 3px 5px;
+    padding: 3px 20px 3px 5px;
     margin: 8px 10px 0 18px;
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
@@ -64,7 +64,7 @@
     -webkit-transition: none;
     -moz-transition: none;
     transition: none;
-    width: 140px;
+    width: 130px;
 }
 
 #neatline-logo {
@@ -193,6 +193,22 @@ div#drag-handle {
 }
 
 
+/* Search Cancel */
+
+span#search-cancel {
+    position: absolute;
+    cursor: pointer;
+    font-size: 0.8em;
+    padding: 5px;
+    left: 157px;
+    top: 5px;
+}
+
+span#search-cancel:hover {
+    color: #f1c250;
+}
+
+
 /* Filter Items */
 
 ul.filter-items {
@@ -241,4 +257,5 @@ div#columns span.header {
     border-radius: 3px;
     width: 10px;
     text-align: center;
+    cursor: pointer;
 }

@@ -41,6 +41,7 @@
     <div id="items-list-header">
 
         <input type="text" placeholder="Search items" id="search-box" />
+        <span id="search-cancel">x</span>
 
         <ul class="tabs filter-items">
             <li class="drop-down">

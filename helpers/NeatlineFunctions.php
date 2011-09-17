@@ -82,6 +82,7 @@ function neatline_queueEditorAssets()
     queue_css('neatline-editor');
 
     queue_js('editor/item_browser', 'javascripts');
+    queue_js('editor/search_cancel', 'javascripts');
 
     ?>
     <link href='http://fonts.googleapis.com/css?family=Crimson+Text:400,400italic,600,600italic,700,700italic' rel='stylesheet' type='text/css'>

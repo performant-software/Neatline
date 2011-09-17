@@ -1,9 +1,6 @@
 /*
  * Item browser widget in the Neatline editor.
  *
- * _functionName methods are "protected," __functionName methods are
- * "private."
- *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at http://www.apache.org/licenses/LICENSE-2.0 Unless required by
@@ -80,7 +77,8 @@
             this._tagFilter = null;
             this._collectionFilter = null;
 
-            // Add listener to the search box.
+            // Add listener to the search box and instantiate the input
+            // canceller.
             this._glossSearchBox();
 
             // Fire starting ajax request.
