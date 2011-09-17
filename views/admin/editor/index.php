@@ -48,6 +48,12 @@
             </li>
         </ul>
 
+    <div id="columns">
+        <span class="header">M</span>
+        <span class="header">T</span>
+        <span class="header">U</span>
+    </div>
+
     </div>
 
     <div id="items-list-container"></div>

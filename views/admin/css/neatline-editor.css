@@ -64,7 +64,7 @@
     -webkit-transition: none;
     -moz-transition: none;
     transition: none;
-    width: 150px;
+    width: 140px;
 }
 
 #neatline-logo {
@@ -198,12 +198,13 @@ div#drag-handle {
 ul.filter-items {
     display: inline;
     border: none;
-    margin: 0 0 0 5px;
+    margin: 0 10px 0 0;
 }
 
 .tabs > li > a {
-    padding: 2px 15px;
+    padding: 3px 10px;
     color: #724e85;
+    font-size: 0.9em;
 }
 
 .tabs > li > a:hover {
@@ -219,4 +220,24 @@ ul.filter-items {
 span.header {
     font-weight: bold;
     font-size: 0.8em;
+}
+
+div#columns {
+    float: right;
+    height: 100%;
+}
+
+div#columns span.header {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 12px 10px 0 0;
+    padding: 0 5px 0 5px;
+    background-color: #724e85;
+    font-weight: bold;
+    color: white;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    width: 10px;
+    text-align: center;
 }
