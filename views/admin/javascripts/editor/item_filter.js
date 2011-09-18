@@ -37,6 +37,9 @@
 
             // Hexes.
             colors: {
+                purple: '#724E85',
+                hover_gray: '#EEEEEE',
+                default_gray: '#F5F5F5'
             }
 
         },
@@ -49,6 +52,7 @@
             this.container = $('#' + this.options.container_id);
             this.dropdown = $('#' + this.options.dropdown_id);
             this.tab = $('#' + this.options.tab_li_id);
+            this.tabLink = this.tab.find('a');
 
             // Status tracker starters.
             this._isOnDropdown = false;
@@ -82,12 +86,17 @@
                 'mousedown': function() {
 
                     if (!self._isExpanded) {
+
                         self.show();
+                        self.tabLink.css('background', self.options.colors.hover_gray);
+
                     }
 
                     else {
                         self.hide();
+                        self.tabLink.css('background', self.options.colors.default_gray);
                     }
+
                 },
 
                 'mouseenter': function() {
@@ -115,13 +124,13 @@
             this._window.bind({
 
                 'mousedown': function() {
+
                     if (!self._isOnDropdown &&
                         !self._isOnTab &&
                         self._isExpanded) {
-
-                            self.hide();
-
+                          self.hide();
                     }
+
                 }
 
             });
@@ -132,6 +141,7 @@
 
             var self = this;
 
+            // Register the show.
             this._isExpanded = true;
 
             // Get the current window height.
@@ -165,6 +175,7 @@
 
             var self = this;
 
+            // Register the hide.
             this._isExpanded = false;
 
             // Hide.
