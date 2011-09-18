@@ -28,7 +28,7 @@
 
             // Markup hooks.
             container_id: 'item-browser',
-            tab_li_id: 'filter-items-tab',
+            tab_ul_class: 'filter-items',
 
             // Durations and CSS constants.
             bottom_padding: 30,
@@ -46,7 +46,7 @@
             this._window = $(window);
             this._body = $('body');
             this.container = $('#' + this.options.container_id);
-            this.tab = $('#' + this.options.tab_li_id);
+            this.tab = $('ul.' + this.options.tab_ul_class);
 
             // Measure.
             this._getDimensions();
@@ -62,7 +62,7 @@
             this.totalHeight = this.element.height();
 
             // Get static css.
-            this.topOffset = this.element.css('top');
+            this.topOffset = this.element.css('top').replace('px', '');
 
         },
 
@@ -77,7 +77,7 @@
                 },
 
                 'mouseleave': function() {
-                    self.hide();
+                        self.hide();
                 }
 
             });
@@ -85,6 +85,10 @@
         },
 
         show: function() {
+
+            var self = this;
+
+            this._isExpanded = true;
 
             // Get the current window height.
             var windowHeight = this._window.height();
@@ -94,19 +98,32 @@
             var maxHeight = windowHeight - this.topOffset -
                 this.options.bottom_padding;
 
+            console.log(windowHeight, this.topOffset, this.options.bottom_padding);
+
             // Set the height based on the amount of space available.
-            var height = (maxHeight < this.totalHeight) ? maxHeight :
+            var height = (this.totalHeight > maxHeight) ? maxHeight :
                 this.totalHeight;
 
             // Show and animate.
             this.element.css({
                 'display': 'block',
                 'height': 0
-            }).animate({
+            }).stop().animate({
                 'height': height
             }, this.options.fade_duration);
 
-            // this._addScrollbar();
+            // Add the mouseleave event to the dropdown.
+            this.element.bind({
+
+                'mouseleave': function() {
+                    self.hide();
+                }
+
+            });
+
+            if (this.totalHeight > maxHeight) {
+                this._addScrollbar();
+            }
 
         },
 
@@ -115,17 +132,21 @@
             var self = this;
 
             // Hide.
-            this.element.animate({
+            this.element.stop().animate({
                 'height': 0
             }, this.options.fade_duration, function() {
                 self.element.css('display', 'none');
             });
 
+
+            // Remove events.
+            this.element.unbind('mouseleave');
+
         },
 
         _addScrollbar: function() {
 
-            console.log('scrollbar');
+
 
         }
 

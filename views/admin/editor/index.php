@@ -47,6 +47,13 @@
             <li id="filter-items-tab" class="drop-down">
                 <a href="#" class="dropdown-toggle">Filter Items</a>
             </li>
+
+            <?php echo $this->partial('editor/_filter_items.php', array(
+                'tags' => $tags,
+                'collections' => $collections,
+                'types' => $types
+            )); ?>
+
         </ul>
 
     <div id="columns">
@@ -60,9 +67,3 @@
     <div id="items-list-container"></div>
 
 </div>
-
-<?php echo $this->partial('editor/_filter_items.php', array(
-    'tags' => $tags,
-    'collections' => $collections,
-    'types' => $types
-)); ?>

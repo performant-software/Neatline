@@ -239,7 +239,7 @@ div#filter-items {
     display: block;
     position: absolute;
     left: 185px;
-    top: 93px;
+    top: 40px;
     z-index: 999;
     overflow: hidden;
     display: none;
