@@ -33,6 +33,7 @@
             search_cancel_id: 'search-cancel',
             items_list_container_id: 'items-list-container',
             items_list_header_id: 'items-list-header',
+            item_filter_container_id: 'filter-items',
 
             // Durations and CSS constants.
             item_list_highlight_duration: 10,
@@ -59,6 +60,7 @@
             this.itemsList = $('#' + this.options.items_list_container_id);
             this.itemsListHeader = $('#' + this.options.items_list_header_id);
             this.searchCancel = $('#' + this.options.search_cancel_id);
+            this.itemFilterContainer = $('#' + this.options.item_filter_container_id);
 
             // Disable text selection on the document. This is aggressive
             // and controversial, but it solves lots of annoyances.
@@ -82,6 +84,9 @@
             // Add listener to the search box and instantiate the input
             // canceller.
             this._glossSearchBox();
+
+            // Instantiate the item filter widget.
+            this._glossItemFilter();
 
             // Fire starting ajax request.
             this._getItems();
@@ -307,6 +312,12 @@
                 }
 
             });
+
+        },
+
+        _glossItemFilter: function() {
+
+            this.itemFilterContainer.itemfilter();
 
         },
 

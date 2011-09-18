@@ -44,7 +44,7 @@
         <span id="search-cancel">x</span>
 
         <ul class="tabs filter-items">
-            <li class="drop-down">
+            <li id="filter-items-tab" class="drop-down">
                 <a href="#" class="dropdown-toggle">Filter Items</a>
             </li>
         </ul>

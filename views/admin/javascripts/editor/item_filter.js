@@ -28,8 +28,11 @@
 
             // Markup hooks.
             container_id: 'item-browser',
+            tab_li_id: 'filter-items-tab',
 
             // Durations and CSS constants.
+            bottom_padding: 30,
+            fade_duration: 300,
 
             // Hexes.
             colors: {
@@ -43,6 +46,86 @@
             this._window = $(window);
             this._body = $('body');
             this.container = $('#' + this.options.container_id);
+            this.tab = $('#' + this.options.tab_li_id);
+
+            // Measure.
+            this._getDimensions();
+
+            // Bind events to the tab.
+            this._glossTab();
+
+        },
+
+        _getDimensions: function() {
+
+            // Get total height of stack.
+            this.totalHeight = this.element.height();
+
+            // Get static css.
+            this.topOffset = this.element.css('top');
+
+        },
+
+        _glossTab: function() {
+
+            var self = this;
+
+            this.tab.bind({
+
+                'mouseenter': function() {
+                    self.show();
+                },
+
+                'mouseleave': function() {
+                    self.hide();
+                }
+
+            });
+
+        },
+
+        show: function() {
+
+            // Get the current window height.
+            var windowHeight = this._window.height();
+
+            // Calculate the maximum height given the current size
+            // of the window.
+            var maxHeight = windowHeight - this.topOffset -
+                this.options.bottom_padding;
+
+            // Set the height based on the amount of space available.
+            var height = (maxHeight < this.totalHeight) ? maxHeight :
+                this.totalHeight;
+
+            // Show and animate.
+            this.element.css({
+                'display': 'block',
+                'height': 0
+            }).animate({
+                'height': height
+            }, this.options.fade_duration);
+
+            // this._addScrollbar();
+
+        },
+
+        hide: function() {
+
+            var self = this;
+
+            // Hide.
+            this.element.animate({
+                'height': 0
+            }, this.options.fade_duration, function() {
+                self.element.css('display', 'none');
+            });
+
+        },
+
+        _addScrollbar: function() {
+
+            console.log('scrollbar');
 
         }
 

@@ -222,7 +222,9 @@ ul.filter-items {
     margin: 4px 0 0 0;
     color: #724e85;
     font-size: 0.9em;
-    border: 1px solid #e6e6e6;
+    border-top: 1px solid #e6e6e6;
+    border-left: 1px solid #e6e6e6;
+    border-right: 1px solid #e6e6e6;
 }
 
 .tabs > li > a:hover {
@@ -239,6 +241,8 @@ div#filter-items {
     left: 185px;
     top: 93px;
     z-index: 999;
+    overflow: hidden;
+    display: none;
     /* border: 1px solid #d2d2d2;*/
     /* -webkit-border-radius: 3px;*/
     /* -moz-border-radius: 3px;*/
@@ -297,7 +301,6 @@ div.filter-header h5 {
     display: inline;
     margin: 0 0 0 2px;
     position: relative;
-    top: 1px;
     cursor: pointer;
     font-size: 1em;
 }
