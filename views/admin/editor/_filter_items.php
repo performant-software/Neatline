@@ -25,22 +25,57 @@
  */
 ?>
 
-<div id="filter-items" class="popover">
+<div id="filter-items">
 
     <div class="filter-items-column">
 
-        <h5 class="title">Tags</h3>
+        <div class="filter-header">
+            <input type="checkbox" />
+            <h3 class="title">Tags</h3>
+        </div>
+
         <?php foreach ($tags as $tag): ?>
             <div class="filter-option">
-                <label class="filter-checkbox">
-                    <input type="checkbox" />
-                </label>
+                <input type="checkbox" />
                 <span><?php echo $tag->name; ?></span>
             </div>
         <?php endforeach; ?>
 
     </div>
 
+    <div class="filter-items-column">
+
+        <div class="filter-header">
+            <input type="checkbox" />
+            <h3 class="title">Types</h3>
+        </div>
+
+        <?php foreach ($types as $type): ?>
+            <div class="filter-option">
+                <input type="checkbox" />
+                <span><?php echo $type->name; ?></span>
+            </div>
+        <?php endforeach; ?>
+
+    </div>
+
+    <div class="filter-items-column">
+
+        <div class="filter-header">
+            <input type="checkbox" />
+            <h3 class="title">Collections</h3>
+        </div>
+
+        <?php foreach ($collections as $collection): ?>
+            <div class="filter-option">
+                <input type="checkbox" />
+                <span><?php echo $collection->name; ?></span>
+            </div>
+        <?php endforeach; ?>
+
+    </div>
+
+    <!--
     <div class="filter-items-column">
 
         <h5 class="title">Collections</h3>
@@ -58,5 +93,6 @@
         <?php endforeach; ?>
 
     </div>
+    -->
 
 </div>

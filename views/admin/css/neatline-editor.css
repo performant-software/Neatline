@@ -247,6 +247,31 @@ div.filter-option {
     display: block;
 }
 
+div.filter-option {
+    cursor: pointer;
+    margin: 5px 0 0 0;
+}
+
+div.filter-items-column {
+    margin: 0 1em 0 0;
+}
+
+div.filter-header h3 {
+    display: inline;
+    margin: 0 0 0 2px;
+    position: relative;
+    top: 1px;
+}
+
+div.filter-option span {
+    top: -1px;
+    position: relative;
+}
+
+div.filter-option:hover {
+    color: #724e85;
+}
+
 
 /* Item columns */
 
