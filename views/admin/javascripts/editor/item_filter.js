@@ -26,25 +26,14 @@
 
         options: {
 
-            // // Markup hooks.
-            // topbar_id: 'topbar',
-            // search_wrapper_id: 'search-wrapper',
-            // search_box_id: 'search-box',
-            // search_cancel_id: 'search-cancel',
-            // items_list_container_id: 'items-list-container',
-            // items_list_header_id: 'items-list-header',
+            // Markup hooks.
+            container_id: 'item-browser',
 
-            // // Durations and CSS constants.
-            // item_list_highlight_duration: 10,
-            // drag_handle_width: 4,
-            // drag_tooltip_Y_offset: 16,
-            // drag_tooltip_X_offset: 15,
+            // Durations and CSS constants.
 
-            // // Hexes.
-            // colors: {
-            //     item_list_highlight: '#f2f3fa',
-            //     drag_border: '#a79aae'
-            // }
+            // Hexes.
+            colors: {
+            }
 
         },
 
@@ -53,38 +42,7 @@
             // Getters.
             this._window = $(window);
             this._body = $('body');
-            // this.topBar = $('#' + this.options.topbar_id);
-            // this.searchWrapper = $('#' + this.options.search_wrapper_id);
-            // this.searchBox = $('#' + this.options.search_box_id);
-            // this.itemsList = $('#' + this.options.items_list_container_id);
-            // this.itemsListHeader = $('#' + this.options.items_list_header_id);
-            // this.searchCancel = $('#' + this.options.search_cancel_id);
-
-            // // Disable text selection on the document. This is aggressive
-            // // and controversial, but it solves lots of annoyances.
-            // this._disableSelect();
-
-            // // Get the os scrollbar width.
-            // this.__getScrollBarWidth();
-
-            // // Position the container, add window resize listener.
-            // this._positionDivs();
-            // this._addWindowResizeListener();
-
-            // // Construct the drag handle on the items stack.
-            // this._buildDragHandle();
-
-            // // Set starting filtering parameters.
-            // this._searchString = '';
-            // this._tagFilter = null;
-            // this._collectionFilter = null;
-
-            // // Add listener to the search box and instantiate the input
-            // // canceller.
-            // this._glossSearchBox();
-
-            // // Fire starting ajax request.
-            // this._getItems();
+            this.container = $('#' + this.options.container_id);
 
         }
 
