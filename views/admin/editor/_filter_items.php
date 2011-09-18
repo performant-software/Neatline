@@ -75,24 +75,9 @@
 
     </div>
 
-    <!--
-    <div class="filter-items-column">
-
-        <h5 class="title">Collections</h3>
-        <?php foreach ($collections as $collection): ?>
-            <div><?php echo $collection->name; ?></div>
-        <?php endforeach; ?>
-
+    <div class="filter-items-column buttons">
+        <button class="btn small">All</button>
+        <button class="btn small">None</button>
     </div>
-
-    <div class="filter-items-column">
-
-        <h5 class="title">Types</h3>
-        <?php foreach ($types as $type): ?>
-            <div><?php echo $type->name; ?></div>
-        <?php endforeach; ?>
-
-    </div>
-    -->
 
 </div>

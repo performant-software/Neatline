@@ -222,6 +222,7 @@ ul.filter-items {
     margin: 4px 0 0 0;
     color: #724e85;
     font-size: 0.9em;
+    border: 1px solid #e6e6e6;
 }
 
 .tabs > li > a:hover {
@@ -229,13 +230,27 @@ ul.filter-items {
     border-bottom: none;
     text-decoration: none;
     height: 35px;
+    border: 1px solid #d2d2d2;
 }
 
 div#filter-items {
     display: block;
     position: absolute;
-    left: 500px;
-    top: 100px;
+    left: 185px;
+    top: 93px;
+    /* border: 1px solid #d2d2d2;*/
+    /* -webkit-border-radius: 3px;*/
+    /* -moz-border-radius: 3px;*/
+    /* border-radius: 3px;*/
+}
+
+div#filter-items div.buttons {
+    border: none;
+    margin: 5px 0 0 0;
+}
+
+div#filter-items div.buttons button {
+    font-size: 0.8em;
 }
 
 div#filter-items .filter-items-column {
@@ -250,10 +265,23 @@ div.filter-option {
 div.filter-option {
     cursor: pointer;
     margin: 5px 0 0 0;
+    padding: 0 1em 0 1em;
 }
 
 div.filter-items-column {
-    margin: 0 1em 0 0;
+    padding: 0;
+    margin: 0;
+    border: 1px solid #d2d2d2;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    background-color: #fff;
+}
+
+div.filter-header {
+    background-color: #eee;
+    border-bottom: 1px solid #d6d6d6;
+    padding: 0 1em 0 1em;
 }
 
 div.filter-header h3 {
@@ -261,6 +289,11 @@ div.filter-header h3 {
     margin: 0 0 0 2px;
     position: relative;
     top: 1px;
+    cursor: pointer;
+}
+
+div.filter-header h3:hover {
+    color: #724e85;
 }
 
 div.filter-option span {
