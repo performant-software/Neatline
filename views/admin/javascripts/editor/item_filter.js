@@ -86,10 +86,8 @@
                 'mousedown': function() {
 
                     if (!self._isExpanded) {
-
                         self.show();
-                        self.tabLink.css('background', self.options.colors.hover_gray);
-
+                        self.tabLink.css('background',self.options.colors.hover_gray);
                     }
 
                     else {
@@ -184,9 +182,6 @@
             }, this.options.fade_duration, function() {
                 self.element.css('display', 'none');
             });
-
-            // Remove events.
-            this.element.unbind('mouseleave');
 
         },
 
