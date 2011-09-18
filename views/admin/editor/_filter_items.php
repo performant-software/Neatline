@@ -27,11 +27,17 @@
 
 <div id="filter-items">
 
+    <!--
+    <div class="filter-items-column buttons">
+        <button class="btn small">All / None</button>
+    </div>
+    -->
+
     <div class="filter-items-column">
 
         <div class="filter-header">
             <input type="checkbox" />
-            <h3 class="title">Tags</h3>
+            <h5 class="title">Tags</h5>
         </div>
 
         <?php foreach ($tags as $tag): ?>
@@ -47,7 +53,7 @@
 
         <div class="filter-header">
             <input type="checkbox" />
-            <h3 class="title">Types</h3>
+            <h5 class="title">Types</h5>
         </div>
 
         <?php foreach ($types as $type): ?>
@@ -63,7 +69,7 @@
 
         <div class="filter-header">
             <input type="checkbox" />
-            <h3 class="title">Collections</h3>
+            <h5 class="title">Collections</h5>
         </div>
 
         <?php foreach ($collections as $collection): ?>
@@ -73,11 +79,6 @@
             </div>
         <?php endforeach; ?>
 
-    </div>
-
-    <div class="filter-items-column buttons">
-        <button class="btn small">All</button>
-        <button class="btn small">None</button>
     </div>
 
 </div>

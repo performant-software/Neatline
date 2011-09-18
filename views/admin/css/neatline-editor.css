@@ -238,6 +238,7 @@ div#filter-items {
     position: absolute;
     left: 185px;
     top: 93px;
+    z-index: 999;
     /* border: 1px solid #d2d2d2;*/
     /* -webkit-border-radius: 3px;*/
     /* -moz-border-radius: 3px;*/
@@ -255,54 +256,59 @@ div#filter-items div.buttons button {
 
 div#filter-items .filter-items-column {
     vertical-align: top;
-    display: inline-block;
 }
 
 div.filter-option {
     display: block;
+    cursor: pointer;
+    padding: 5px 1em 0 1em;
 }
 
-div.filter-option {
-    cursor: pointer;
-    margin: 5px 0 0 0;
-    padding: 0 1em 0 1em;
+div.filter-option:hover {
+    background-color: #724e85;
+    color: #fff;
 }
 
 div.filter-items-column {
     padding: 0;
     margin: 0;
-    border: 1px solid #d2d2d2;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    border-radius: 3px;
+    border-bottom: 1px solid #d2d2d2;
+    border-left: 1px solid #d2d2d2;
+    border-right: 1px solid #d2d2d2;
     background-color: #fff;
+}
+
+div.filter-items-column:first-child {
+    border-top: 1px solid #d2d2d2;
 }
 
 div.filter-header {
     background-color: #eee;
     border-bottom: 1px solid #d6d6d6;
     padding: 0 1em 0 1em;
+    cursor: pointer;
 }
 
-div.filter-header h3 {
+div.filter-header:hover h5 {
+    color: #724e85;
+}
+
+div.filter-header h5 {
     display: inline;
     margin: 0 0 0 2px;
     position: relative;
     top: 1px;
     cursor: pointer;
+    font-size: 1em;
 }
 
-div.filter-header h3:hover {
+div.filter-header h5:hover {
     color: #724e85;
 }
 
 div.filter-option span {
     top: -1px;
     position: relative;
-}
-
-div.filter-option:hover {
-    color: #724e85;
 }
 
 
