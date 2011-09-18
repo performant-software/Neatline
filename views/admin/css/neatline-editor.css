@@ -219,7 +219,7 @@ ul.filter-items {
 
 .tabs > li > a {
     padding: 0px 10px;
-    margin: 4px 0 0 0;
+    margin: 3px 0 0 0;
     color: #724e85;
     font-size: 0.9em;
     border-top: 1px solid #e6e6e6;
@@ -232,7 +232,9 @@ ul.filter-items {
     border-bottom: none;
     text-decoration: none;
     height: 35px;
-    border: 1px solid #d2d2d2;
+    border-top: 1px solid #d2d2d2;
+    border-left: 1px solid #d2d2d2;
+    border-right: 1px solid #d2d2d2;
 }
 
 div#filter-items {
@@ -243,10 +245,7 @@ div#filter-items {
     z-index: 999;
     overflow: hidden;
     display: none;
-    /* border: 1px solid #d2d2d2;*/
-    /* -webkit-border-radius: 3px;*/
-    /* -moz-border-radius: 3px;*/
-    /* border-radius: 3px;*/
+    border-bottom: 1px solid #d2d2d2;
 }
 
 div#filter-items div.buttons {
@@ -265,12 +264,13 @@ div#filter-items .filter-items-column {
 div.filter-option {
     display: block;
     cursor: pointer;
-    padding: 5px 1em 0 1em;
+    padding: 4px 2.5em 2px 1em;
 }
 
 div.filter-option:hover {
     background-color: #724e85;
     color: #fff;
+    cursor: pointer;
 }
 
 div.filter-items-column {
@@ -312,6 +312,13 @@ div.filter-header h5:hover {
 div.filter-option span {
     top: -1px;
     position: relative;
+}
+
+.filter-items-scrollbar {
+    display: block;
+    width: 3px;
+    background-color: #000;
+    opacity: 0.5;
 }
 
 

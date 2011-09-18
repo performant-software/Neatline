@@ -28,10 +28,11 @@
 
             // Markup hooks.
             container_id: 'item-browser',
-            tab_ul_class: 'filter-items',
+            tab_li_id: 'filter-items-tab',
+            dropdown_id: 'filter-items',
 
             // Durations and CSS constants.
-            bottom_padding: 30,
+            bottom_padding: 90,
             fade_duration: 300,
 
             // Hexes.
@@ -46,7 +47,13 @@
             this._window = $(window);
             this._body = $('body');
             this.container = $('#' + this.options.container_id);
-            this.tab = $('ul.' + this.options.tab_ul_class);
+            this.dropdown = $('#' + this.options.dropdown_id);
+            this.tab = $('#' + this.options.tab_li_id);
+
+            // Status tracker starters.
+            this._isOnDropdown = false;
+            this._isOnTab = false;
+            this._isExpanded = false;
 
             // Measure.
             this._getDimensions();
@@ -72,12 +79,49 @@
 
             this.tab.bind({
 
+                'mousedown': function() {
+
+                    if (!self._isExpanded) {
+                        self.show();
+                    }
+
+                    else {
+                        self.hide();
+                    }
+                },
+
                 'mouseenter': function() {
-                    self.show();
+                    self._isOnTab = true;
                 },
 
                 'mouseleave': function() {
-                        self.hide();
+                    self._isOnTab = false;
+                }
+
+            });
+
+            this.dropdown.bind({
+
+                'mouseenter': function() {
+                    self._isOnDropdown = true;
+                },
+
+                'mouseleave': function() {
+                    self._isOnDropdown = false;
+                }
+
+            });
+
+            this._window.bind({
+
+                'mousedown': function() {
+                    if (!self._isOnDropdown &&
+                        !self._isOnTab &&
+                        self._isExpanded) {
+
+                            self.hide();
+
+                    }
                 }
 
             });
@@ -98,8 +142,6 @@
             var maxHeight = windowHeight - this.topOffset -
                 this.options.bottom_padding;
 
-            console.log(windowHeight, this.topOffset, this.options.bottom_padding);
-
             // Set the height based on the amount of space available.
             var height = (this.totalHeight > maxHeight) ? maxHeight :
                 this.totalHeight;
@@ -112,15 +154,7 @@
                 'height': height
             }, this.options.fade_duration);
 
-            // Add the mouseleave event to the dropdown.
-            this.element.bind({
-
-                'mouseleave': function() {
-                    self.hide();
-                }
-
-            });
-
+            // Add the scrollbar.
             if (this.totalHeight > maxHeight) {
                 this._addScrollbar();
             }
@@ -131,13 +165,14 @@
 
             var self = this;
 
+            this._isExpanded = false;
+
             // Hide.
             this.element.stop().animate({
                 'height': 0
             }, this.options.fade_duration, function() {
                 self.element.css('display', 'none');
             });
-
 
             // Remove events.
             this.element.unbind('mouseleave');
