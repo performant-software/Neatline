@@ -29,11 +29,12 @@
 
     <div class="filter-items-content small-scroll-content">
 
-        <!--
-        <div class="filter-items-column buttons">
-            <button class="btn small">All / None</button>
+        <div class="filter-items-column">
+            <div class="filter-option all-none">
+                <input type="checkbox" />
+                <span class="filter-items-all-none">All / None</span>
+            </div>
         </div>
-        -->
 
         <div class="filter-items-column">
 

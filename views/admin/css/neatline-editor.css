@@ -339,6 +339,14 @@ div.filter-option span {
     position: relative;
 }
 
+.filter-items-all-none {
+    color: #bebebe;
+}
+
+div.all-none:hover span {
+    color: #fff;
+}
+
 
 /* Item columns */
 
