@@ -202,6 +202,7 @@
             var startingX = trigger_event.pageX;
             var startingY = trigger_event.pageY;
             var startingSlideOffset = this.slideOffset;
+            var lastOffsetY = startingSlideOffset;
 
             var startingOffsetY = self.bar.css('top').replace('px', '');
 
@@ -214,36 +215,22 @@
                     var offsetY = positionY - startingY;
                     var newOffsetY = parseInt(startingOffsetY) + parseInt(offsetY);
 
-                    var normalSlide = self.slideOffset > 0 && self.slideOffset < self.slideHeight;
-                    var atTop = self._at_top && (offsetY < 0);
-                    var atBottom = self._at_bottom && (offsetY > 0);
-
                     // If the bar can slide up or down on the track, do the change.
-                    if (normalSlide || atTop || atBottom) {
+                    if (self.slideOffset >= 0 && self.slideOffset <= self.slideHeight) {
 
-                        self.bar.css({
-                            'top': newOffsetY
-                        });
+                        if (!(self.slideOffset == 0 && (newOffsetY < lastOffsetY)) &&
+                            !(self.slideOffset == self.slideHeight && (newOffsetY > lastOffsetY))) {
 
-                        self.slideOffset = startingSlideOffset + newOffsetY;
+                            self.bar.css({
+                                'top': newOffsetY
+                            });
 
-                        // Update trackers.
+                            self.slideOffset = startingSlideOffset + newOffsetY;
 
-                        if (self._at_top == true && self.slideOffset != 0) {
-                            self._at_top = false;
                         }
 
-                        else if (self._at_bottom == true && self.slideOffset != self.slideHeight) {
-                            self._at_top = false;
-                        }
-
-                        if (self.slideOffset == 0) {
-                            self._at_top = true;
-                        }
-
-                        else if (self.slideOffset == self.slideHeight) {
-                            self._at_bottom = true;
-                        }
+                        // Record the most recent slide offset.
+                        lastOffsetY = newOffsetY;
 
                     }
 
