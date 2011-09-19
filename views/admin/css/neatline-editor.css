@@ -314,7 +314,7 @@ div.filter-option span {
     position: relative;
 }
 
-.filter-items-scrollbar {
+.small-scrollbar {
     display: block;
     width: 3px;
     background-color: #000;

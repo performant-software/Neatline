@@ -26,10 +26,6 @@
 
         options: {
 
-            // Markup hooks.
-
-            // Durations and CSS constants.
-
             // Hexes.
             colors: {
             }
@@ -42,9 +38,20 @@
             this._window = $(window);
             this._body = $('body');
 
+            // Add the scroller.
+            this._addBar();
+
         },
 
         _destroy: function() {
+
+
+
+        },
+
+        _addBar: function() {
+
+            this.bar = $('<div class="small-scrollbar"');
 
         }
 
