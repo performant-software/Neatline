@@ -124,6 +124,7 @@
 
 #items-list-container {
     margin: 40px 0 0 0;
+    overflow-x: hidden;
 }
 
 #items-list-container ul {
