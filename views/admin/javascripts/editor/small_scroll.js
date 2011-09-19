@@ -26,16 +26,18 @@
 
         options: {
 
-            // CSS constants.
+            // CSS and tween constants.
             slide_region_padding: 20,
             bar_right_offset: 8,
             default_opacity: 0.2,
-            highlight_opacity: 0.5,
+            highlight_opacity: 0.7,
             highlight_width_percentage: 20,
+            fade_duration: 300,
 
             // Hexes.
             colors: {
-                purple: '#724E85'
+                purple: '#724E85',
+                gray: '#c3c3c3'
             }
 
         },
@@ -59,18 +61,20 @@
 
         _addBar: function() {
 
+            var self = this;
+
             // Construct the slider bar and the highlight region div.
-            this.bar = $('<div class="small-scrollbar"></div>');
             this.highlightRegion = $('<div class="highlight-region"></div>');
+            this.bar = $('<div class="small-scrollbar"></div>');
 
             // Inject.
-            this.element.append(this.bar);
             this.element.append(this.highlightRegion);
+            this.highlightRegion.append(this.bar);
 
             // Fade in the bar.
             this.bar.animate({
                 'opacity': this.options.default_opacity
-            });
+            }, this.options.fade_duration);
 
             // Position.
             this._positionBar();
@@ -81,9 +85,17 @@
 
                 'mouseenter': function() {
 
+                    self.bar.animate({
+                        'opacity': self.options.highlight_opacity
+                    }, self.options.fade_duration);
+
                 },
 
                 'mouseleave': function() {
+
+                    self.bar.animate({
+                        'opacity': self.options.default_opacity
+                    }, self.options.fade_duration);
 
                 }
 
@@ -93,9 +105,21 @@
 
                 'mouseenter': function() {
 
+                    self.bar.css({
+                        'background-color': self.options.colors.purple
+                    });
+
                 },
 
                 'mouseleave': function() {
+
+                    self.bar.css({
+                        'background-color': self.options.colors.gray
+                    });
+
+                },
+
+                'mousedown': function() {
 
                 }
 
