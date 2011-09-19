@@ -50,7 +50,7 @@
             // Getters.
             this._window = $(window);
             this._body = $('body');
-            this.content = $('.' + this.options.fade_duration);
+            this.content = $('.' + this.options.content_class);
 
             // Initialize trackers.
             this._is_scrolling = false;
@@ -214,11 +214,16 @@
                         if (!(self.slideOffset == 0 && (newOffsetY < lastOffsetY)) &&
                             !(self.slideOffset == self.slideHeight && (newOffsetY > lastOffsetY))) {
 
+                            // Reposition the bar.
                             self.bar.css({
                                 'top': newOffsetY
                             });
 
                             self.slideOffset = startingSlideOffset + offsetY;
+
+                            // Scroll the content.
+                            var factor = self.slideOffset / self.slideHeight;
+                            self._scrollContent(factor);
 
                             // Record the most recent slide offset.
                             lastOffsetY = newOffsetY;
@@ -230,11 +235,16 @@
                     // If the mouse his gone above the top threshold.
                     else if ((startingSlideOffset + offsetY) < 0) {
 
+                        // Reposition the bar.
                         self.bar.css({
                             'top': self.options.slide_region_padding
                         });
 
                         self.slideOffset = 0;
+
+                        // Scroll the content.
+                        var factor = self.slideOffset / self.slideHeight;
+                        self._scrollContent(factor);
 
                         // Record the most recent slide offset.
                         lastOffsetY = self.options.slide_region_padding;
@@ -244,11 +254,16 @@
                     // If the mouse his dipped under the bottom threshold.
                     else if ((startingSlideOffset + offsetY) > self.slideHeight) {
 
+                        // Reposition the bar.
                         self.bar.css({
                             'top': self.options.slide_region_padding + self.slideHeight
                         });
 
                         self.slideOffset = self.slideHeight;
+
+                        // Scroll the content.
+                        var factor = self.slideOffset / self.slideHeight;
+                        self._scrollContent(factor);
 
                         // Record the most recent slide offset.
                         lastOffsetY = self.options.slide_region_padding + self.scrollbarHeight;
@@ -271,8 +286,11 @@
 
         _scrollContent: function(factor) {
 
+            // Calculate the pixel offset for the scroll.
             var offset = this.occludedHeight * factor;
-            console.log(offset);
+
+            // Apply the change.
+            this.content.css('top', -offset);
 
         }
 
