@@ -197,7 +197,7 @@
                     var newOffsetY = parseInt(startingOffsetY) + parseInt(offsetY);
 
                     // If the bar can slide up or down on the track, do the change.
-                    if (self.slideOffset >= 0 && self.slideOffset <= self.slideHeight) {
+                    if (startingSlideOffset + offsetY >= 0 && startingSlideOffset + offsetY <= self.slideHeight) {
 
                         if (!(self.slideOffset == 0 && (newOffsetY < lastOffsetY)) &&
                             !(self.slideOffset == self.slideHeight && (newOffsetY > lastOffsetY))) {
@@ -206,12 +206,12 @@
                                 'top': newOffsetY
                             });
 
-                            self.slideOffset = startingSlideOffset + newOffsetY;
+                            self.slideOffset = startingSlideOffset + offsetY;
+
+                            // Record the most recent slide offset.
+                            lastOffsetY = newOffsetY;
 
                         }
-
-                        // Record the most recent slide offset.
-                        lastOffsetY = newOffsetY;
 
                     }
 
