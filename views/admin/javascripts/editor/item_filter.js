@@ -32,7 +32,7 @@
             dropdown_id: 'filter-items',
 
             // Durations and CSS constants.
-            bottom_padding: 90,
+            bottom_padding: 75,
             fade_duration: 300,
 
             // Hexes.
@@ -126,7 +126,10 @@
                     if (!self._isOnDropdown &&
                         !self._isOnTab &&
                         self._isExpanded) {
+
                           self.hide();
+                          self.tabLink.css('background', self.options.colors.default_gray);
+
                     }
 
                 }
