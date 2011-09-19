@@ -218,6 +218,38 @@
 
                     }
 
+                    // If the mouse his gone above the top threshold.
+                    else if ((startingSlideOffset + offsetY) < 0) {
+
+                        console.log('above');
+
+                        self.bar.css({
+                            'top': self.options.slide_region_padding
+                        });
+
+                        self.slideOffset = startingSlideOffset + offsetY;
+
+                        // Record the most recent slide offset.
+                        lastOffsetY = self.options.slide_region_padding;
+
+                    }
+
+                    // If the mouse his dipped under the bottom threshold.
+                    else if ((startingSlideOffset + offsetY) > self.slideHeight) {
+
+                        console.log('below');
+
+                        self.bar.css({
+                            'top': self.options.slide_region_padding + self.slideHeight
+                        });
+
+                        self.slideOffset = startingSlideOffset + offsetY;
+
+                        // Record the most recent slide offset.
+                        lastOffsetY = self.options.slide_region_padding + self.scrollbarHeight;
+
+                    }
+
                 },
 
                 'mouseup': function() {
@@ -225,12 +257,6 @@
                     // Remove the move listener.
                     self._window.unbind('mousemove');
                     self._is_scrolling = false;
-
-                    // Fade down the bar if the click ends when the
-                    // mouse is outside of the highlight region.
-                    self.bar.animate({
-                        'opacity': self.options.default_opacity
-                    }, self.options.fade_duration);
 
                 }
 
