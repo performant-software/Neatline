@@ -199,7 +199,8 @@
                     var newOffsetY = parseInt(startingOffsetY) + parseInt(offsetY);
 
                     // If the bar can slide up or down on the track, do the change.
-                    if (startingSlideOffset + offsetY >= 0 && startingSlideOffset + offsetY <= self.slideHeight) {
+                    if ((startingSlideOffset + offsetY) >= 0
+                        && (startingSlideOffset + offsetY) <= self.slideHeight) {
 
                         if (!(self.slideOffset == 0 && (newOffsetY < lastOffsetY)) &&
                             !(self.slideOffset == self.slideHeight && (newOffsetY > lastOffsetY))) {
@@ -223,7 +224,13 @@
 
                     // Remove the move listener.
                     self._window.unbind('mousemove');
-                    self._is_strolling = false;
+                    self._is_scrolling = false;
+
+                    // Fade down the bar if the click ends when the
+                    // mouse is outside of the highlight region.
+                    self.bar.animate({
+                        'opacity': self.options.default_opacity
+                    }, self.options.fade_duration);
 
                 }
 
