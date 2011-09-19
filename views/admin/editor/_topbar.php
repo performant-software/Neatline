@@ -2,8 +2,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
 
 /**
- * The core Neatline editor. Wraps the markup for the editing interface and then
- * calls the central _neatline.php partial, which is shared with public views.
+ * Partial template for the editor top bar.
  *
  * PHP version 5
  *
@@ -26,16 +25,6 @@
  */
 ?>
 
-<?php echo $this->partial('editor/_editor_header.php', array(
-    'title' => $neatline->name
-)); ?>
-
-<?php echo $this->partial('editor/_topbar.php'); ?>
-
-<?php echo $this->partial('editor/_item_browser.php', array(
-    'tags' => $tags,
-    'collections' => $collections,
-    'types' => $types
-)); ?>
-
-<?php echo $this->partial('index/_neatline.php'); ?>
+<div id="topbar" class="topbar-inner topbar">
+    <img id="neatline-logo" src="<?php echo img('neatline-logo-white-small.png'); ?>" />
+</div>

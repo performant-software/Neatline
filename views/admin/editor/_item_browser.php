@@ -2,8 +2,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
 
 /**
- * The core Neatline editor. Wraps the markup for the editing interface and then
- * calls the central _neatline.php partial, which is shared with public views.
+ * Static markup for the item browser application.
  *
  * PHP version 5
  *
@@ -26,16 +25,33 @@
  */
 ?>
 
-<?php echo $this->partial('editor/_editor_header.php', array(
-    'title' => $neatline->name
-)); ?>
+<div id="item-browser">
 
-<?php echo $this->partial('editor/_topbar.php'); ?>
+    <div id="items-list-header">
 
-<?php echo $this->partial('editor/_item_browser.php', array(
-    'tags' => $tags,
-    'collections' => $collections,
-    'types' => $types
-)); ?>
+        <input type="text" placeholder="Search items" id="search-box" />
+        <span id="search-cancel">x</span>
 
-<?php echo $this->partial('index/_neatline.php'); ?>
+        <ul class="tabs filter-items">
+            <li id="filter-items-tab" class="drop-down">
+                <a href="#" class="dropdown-toggle">Filter Items</a>
+            </li>
+
+            <?php echo $this->partial('editor/_filter_items.php', array(
+                'tags' => $tags,
+                'collections' => $collections,
+                'types' => $types
+            )); ?>
+
+        </ul>
+
+    <div id="columns">
+        <div class="col-1 col-cell"><span class="header">S</span></div>
+        <div class="col-2 col-cell"><span class="header">T</span></div>
+    </div>
+
+    </div>
+
+    <div id="items-list-container"></div>
+
+</div>
