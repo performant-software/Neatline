@@ -29,9 +29,13 @@
             // CSS constants.
             slide_region_padding: 20,
             bar_right_offset: 8,
+            default_opacity: 0.2,
+            highlight_opacity: 0.5,
+            highlight_width_percentage: 20,
 
             // Hexes.
             colors: {
+                purple: '#724E85'
             }
 
         },
@@ -55,28 +59,65 @@
 
         _addBar: function() {
 
-            // Construct and inject.
+            // Construct the slider bar and the highlight region div.
             this.bar = $('<div class="small-scrollbar"></div>');
+            this.highlightRegion = $('<div class="highlight-region"></div>');
+
+            // Inject.
             this.element.append(this.bar);
+            this.element.append(this.highlightRegion);
+
+            // Fade in the bar.
+            this.bar.animate({
+                'opacity': this.options.default_opacity
+            });
 
             // Position.
             this._positionBar();
 
-            // Add events.
+            // ** Glossers.
 
+            this.highlightRegion.bind({
+
+                'mouseenter': function() {
+
+                },
+
+                'mouseleave': function() {
+
+                }
+
+            });
+
+            this.bar.bind({
+
+                'mouseenter': function() {
+
+                },
+
+                'mouseleave': function() {
+
+                }
+
+            });
 
         },
 
         _positionBar: function() {
 
-            // Recalculate the
+            // Recalculate the heights and offsets.
             this._getSizes();
 
-            // Position
+            // Position the slider.
             this.bar.css({
                 'top': this.options.slide_region_padding,
                 'right': this.options.bar_right_offset,
                 'height': this.scrollbarHeight
+            });
+
+            this.highlightRegion.css({
+                'width': this.containerWidth *
+                    (this.options.highlight_width_percentage / 100)
             });
 
         },
@@ -107,7 +148,7 @@
                 .appendTo(this._body);
 
             // Measure and remove.
-            this.scrollbarHeight = cloneContainer.height();
+            this.scrollbarHeight = (this.containerHeight / cloneContainer.height()) * this.slideRegionHeight;
             cloneContainer.remove();
 
         }

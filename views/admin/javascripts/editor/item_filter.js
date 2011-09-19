@@ -167,12 +167,15 @@
 
                 'height': height
 
-            }, this.options.fade_duration);
+            }, this.options.fade_duration, function() {
 
-            // Add the scrollbar.
-            if (this.totalHeight > maxHeight) {
-                this._addScrollbar();
-            }
+                // Add the scrollbar.
+                if (self.totalHeight > maxHeight) {
+                    self._addScrollbar();
+                }
+
+            });
+
 
         },
 
