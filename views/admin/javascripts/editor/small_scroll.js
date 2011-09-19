@@ -48,6 +48,11 @@
             this._window = $(window);
             this._body = $('body');
 
+            // Initialize trackers.
+            this._is_scrolling = false;
+            this._at_top = true;
+            this._at_bottom = true;
+
             // Add the scroller.
             this._addBar();
 
@@ -113,9 +118,12 @@
 
                 'mouseleave': function() {
 
-                    self.bar.css({
-                        'background-color': self.options.colors.gray
-                    });
+                    if (!self._is_scrolling) {
+                        self.bar.css({
+                            'background-color': self.options.colors.gray
+                        });
+                        console.log('test');
+                    }
 
                 },
 
@@ -187,6 +195,7 @@
         _scroll: function(trigger_event) {
 
             var self = this;
+            this._is_scrolling = true;
 
             // Record coordinates of starting mousedown and
             // the value of the starting slide offset.
@@ -200,15 +209,43 @@
 
                 'mousemove': function(e) {
 
+                    // Calculate the new offsets.
                     var positionY = e.pageY
                     var offsetY = positionY - startingY;
                     var newOffsetY = parseInt(startingOffsetY) + parseInt(offsetY);
 
-                    self.bar.css({
-                        'top': newOffsetY
-                    });
+                    var normalSlide = self.slideOffset > 0 && self.slideOffset < self.slideHeight;
+                    var atTop = self._at_top && (offsetY < 0);
+                    var atBottom = self._at_bottom && (offsetY > 0);
 
-                    self.slideOffset = startingSlideOffset + newOffsetY;
+                    // If the bar can slide up or down on the track, do the change.
+                    if (normalSlide || atTop || atBottom) {
+
+                        self.bar.css({
+                            'top': newOffsetY
+                        });
+
+                        self.slideOffset = startingSlideOffset + newOffsetY;
+
+                        // Update trackers.
+
+                        if (self._at_top == true && self.slideOffset != 0) {
+                            self._at_top = false;
+                        }
+
+                        else if (self._at_bottom == true && self.slideOffset != self.slideHeight) {
+                            self._at_top = false;
+                        }
+
+                        if (self.slideOffset == 0) {
+                            self._at_top = true;
+                        }
+
+                        else if (self.slideOffset == self.slideHeight) {
+                            self._at_bottom = true;
+                        }
+
+                    }
 
                 },
 
@@ -216,6 +253,7 @@
 
                     // Remove the move listener.
                     self._window.unbind('mousemove');
+                    self._is_strolling = false;
 
                 }
 
