@@ -30,7 +30,7 @@
             slide_region_padding: 20,
             bar_right_offset: 8,
             default_opacity: 0.2,
-            highlight_opacity: 0.7,
+            highlight_opacity: 0.9,
             highlight_width_percentage: 20,
             fade_duration: 300,
 
@@ -107,25 +107,6 @@
             });
 
             this.bar.bind({
-
-                'mouseenter': function() {
-
-                    self.bar.css({
-                        'background-color': self.options.colors.purple
-                    });
-
-                },
-
-                'mouseleave': function() {
-
-                    if (!self._is_scrolling) {
-                        self.bar.css({
-                            'background-color': self.options.colors.gray
-                        });
-                        console.log('test');
-                    }
-
-                },
 
                 'mousedown': function(event) {
 
