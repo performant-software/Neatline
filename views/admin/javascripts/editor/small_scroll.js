@@ -26,6 +26,10 @@
 
         options: {
 
+            // CSS constants.
+            slide_region_padding: 20,
+            bar_right_offset: 8,
+
             // Hexes.
             colors: {
             }
@@ -51,7 +55,60 @@
 
         _addBar: function() {
 
-            this.bar = $('<div class="small-scrollbar"');
+            // Construct and inject.
+            this.bar = $('<div class="small-scrollbar"></div>');
+            this.element.append(this.bar);
+
+            // Position.
+            this._positionBar();
+
+            // Add events.
+
+
+        },
+
+        _positionBar: function() {
+
+            // Recalculate the
+            this._getSizes();
+
+            // Position
+            this.bar.css({
+                'top': this.options.slide_region_padding,
+                'right': this.options.bar_right_offset,
+                'height': this.scrollbarHeight
+            });
+
+        },
+
+        _getSizes: function() {
+
+            // Measure the container.
+            this.containerHeight = this.element.height();
+            this.containerWidth = this.element.width();
+
+            // Calculate the height of the slide region and
+            // the top offset.
+            this.slideRegionHeight = this.containerHeight -
+                (2 * this.options.slide_region_padding);
+
+            // Calculate the height of the scrollbar. Since
+            // the container div is being truncated (hence the
+            // need for the scrollbar), clone the div, position
+            // it offscreen, auto-height the clone, measure,
+            // and destroy.
+            var cloneContainer = this.element
+                .clone()
+                .css({
+                    'top': -1000,
+                    'left': -1000,
+                    'height': 'auto'
+                })
+                .appendTo(this._body);
+
+            // Measure and remove.
+            this.scrollbarHeight = cloneContainer.height();
+            cloneContainer.remove();
 
         }
 

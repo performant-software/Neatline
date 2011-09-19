@@ -198,7 +198,7 @@
 
         _addScrollbar: function() {
 
-
+            this.element.smallscroll();
 
         }
 
