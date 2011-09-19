@@ -119,7 +119,9 @@
 
                 },
 
-                'mousedown': function() {
+                'mousedown': function(event) {
+
+                    self._scroll(event);
 
                 }
 
@@ -174,6 +176,50 @@
             // Measure and remove.
             this.scrollbarHeight = (this.containerHeight / cloneContainer.height()) * this.slideRegionHeight;
             cloneContainer.remove();
+
+            // Get the total number of pixels that the bar can
+            // slide along, and set the current top offset.
+            this.slideHeight = this.slideRegionHeight - this.scrollbarHeight;
+            this.slideOffset = 0;
+
+        },
+
+        _scroll: function(trigger_event) {
+
+            var self = this;
+
+            // Record coordinates of starting mousedown and
+            // the value of the starting slide offset.
+            var startingX = trigger_event.pageX;
+            var startingY = trigger_event.pageY;
+            var startingSlideOffset = this.slideOffset;
+
+            var startingOffsetY = self.bar.css('top').replace('px', '');
+
+            this._window.bind({
+
+                'mousemove': function(e) {
+
+                    var positionY = e.pageY
+                    var offsetY = positionY - startingY;
+                    var newOffsetY = parseInt(startingOffsetY) + parseInt(offsetY);
+
+                    self.bar.css({
+                        'top': newOffsetY
+                    });
+
+                    self.slideOffset = startingSlideOffset + newOffsetY;
+
+                },
+
+                'mouseup': function() {
+
+                    // Remove the move listener.
+                    self._window.unbind('mousemove');
+
+                }
+
+            });
 
         }
 
