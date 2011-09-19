@@ -98,9 +98,11 @@
 
                 'mouseleave': function() {
 
-                    self.bar.animate({
-                        'opacity': self.options.default_opacity
-                    }, self.options.fade_duration);
+                    if (!self._is_scrolling) {
+                        self.bar.animate({
+                            'opacity': self.options.default_opacity
+                        }, self.options.fade_duration);
+                    }
 
                 }
 
