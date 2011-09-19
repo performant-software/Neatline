@@ -59,7 +59,6 @@
     <div id="columns">
         <div class="col-1 col-cell"><span class="header">S</span></div>
         <div class="col-2 col-cell"><span class="header">T</span></div>
-        <div class="col-3 col-cell"><span class="header">U</span></div>
     </div>
 
     </div>

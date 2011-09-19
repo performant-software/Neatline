@@ -367,18 +367,15 @@ div#columns div.col-cell {
 }
 
 div.col-1 {
-    right: 70px;
-}
-
-div.col-2 {
     right: 40px;
 }
 
-div.col-3 {
+div.col-2 {
     right: 10px;
 }
 
 div#columns span.header {
+    text-transform: uppercase;
     display: inline-block;
     padding: 0 5px 0 5px;
     background-color: #724e85;
