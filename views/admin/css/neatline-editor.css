@@ -335,6 +335,10 @@ div.filter-option span {
     height: 100%;
 }
 
+.small-scroll-content {
+    position: relative;
+}
+
 
 /* Item columns */
 

@@ -27,57 +27,61 @@
 
 <div id="filter-items">
 
-    <!--
-    <div class="filter-items-column buttons">
-        <button class="btn small">All / None</button>
-    </div>
-    -->
+    <div class="filter-items-content small-scroll-content">
 
-    <div class="filter-items-column">
+        <!--
+        <div class="filter-items-column buttons">
+            <button class="btn small">All / None</button>
+        </div>
+        -->
 
-        <div class="filter-header">
-            <input type="checkbox" />
-            <h5 class="title">Tags</h5>
+        <div class="filter-items-column">
+
+            <div class="filter-header">
+                <input type="checkbox" />
+                <h5 class="title">Tags</h5>
+            </div>
+
+            <?php foreach ($tags as $tag): ?>
+                <div class="filter-option">
+                    <input type="checkbox" />
+                    <span><?php echo $tag->name; ?></span>
+                </div>
+            <?php endforeach; ?>
+
         </div>
 
-        <?php foreach ($tags as $tag): ?>
-            <div class="filter-option">
+        <div class="filter-items-column">
+
+            <div class="filter-header">
                 <input type="checkbox" />
-                <span><?php echo $tag->name; ?></span>
+                <h5 class="title">Types</h5>
             </div>
-        <?php endforeach; ?>
 
-    </div>
+            <?php foreach ($types as $type): ?>
+                <div class="filter-option">
+                    <input type="checkbox" />
+                    <span><?php echo $type->name; ?></span>
+                </div>
+            <?php endforeach; ?>
 
-    <div class="filter-items-column">
-
-        <div class="filter-header">
-            <input type="checkbox" />
-            <h5 class="title">Types</h5>
         </div>
 
-        <?php foreach ($types as $type): ?>
-            <div class="filter-option">
+        <div class="filter-items-column">
+
+            <div class="filter-header">
                 <input type="checkbox" />
-                <span><?php echo $type->name; ?></span>
+                <h5 class="title">Collections</h5>
             </div>
-        <?php endforeach; ?>
 
-    </div>
+            <?php foreach ($collections as $collection): ?>
+                <div class="filter-option">
+                    <input type="checkbox" />
+                    <span><?php echo $collection->name; ?></span>
+                </div>
+            <?php endforeach; ?>
 
-    <div class="filter-items-column">
-
-        <div class="filter-header">
-            <input type="checkbox" />
-            <h5 class="title">Collections</h5>
         </div>
-
-        <?php foreach ($collections as $collection): ?>
-            <div class="filter-option">
-                <input type="checkbox" />
-                <span><?php echo $collection->name; ?></span>
-            </div>
-        <?php endforeach; ?>
 
     </div>
 

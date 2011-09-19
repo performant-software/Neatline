@@ -26,6 +26,9 @@
 
         options: {
 
+            // Markup hooks.
+            content_class: 'small-scroll-content',
+
             // CSS and tween constants.
             slide_region_padding: 20,
             bar_right_offset: 8,
@@ -47,6 +50,7 @@
             // Getters.
             this._window = $(window);
             this._body = $('body');
+            this.content = $('.' + this.options.fade_duration);
 
             // Initialize trackers.
             this._is_scrolling = false;
@@ -164,8 +168,13 @@
                 })
                 .appendTo(this._body);
 
+            // Register the total height of the div and the height
+            // of the occluded content.
+            this.totalHeight = cloneContainer.height()
+            this.occludedHeight = this.totalHeight - this.containerHeight;
+
             // Measure and remove.
-            this.scrollbarHeight = (this.containerHeight / cloneContainer.height()) * this.slideRegionHeight;
+            this.scrollbarHeight = (this.containerHeight / this.totalHeight) * this.slideRegionHeight;
             cloneContainer.remove();
 
             // Get the total number of pixels that the bar can
@@ -221,13 +230,11 @@
                     // If the mouse his gone above the top threshold.
                     else if ((startingSlideOffset + offsetY) < 0) {
 
-                        console.log('above');
-
                         self.bar.css({
                             'top': self.options.slide_region_padding
                         });
 
-                        self.slideOffset = startingSlideOffset + offsetY;
+                        self.slideOffset = 0;
 
                         // Record the most recent slide offset.
                         lastOffsetY = self.options.slide_region_padding;
@@ -237,13 +244,11 @@
                     // If the mouse his dipped under the bottom threshold.
                     else if ((startingSlideOffset + offsetY) > self.slideHeight) {
 
-                        console.log('below');
-
                         self.bar.css({
                             'top': self.options.slide_region_padding + self.slideHeight
                         });
 
-                        self.slideOffset = startingSlideOffset + offsetY;
+                        self.slideOffset = self.slideHeight;
 
                         // Record the most recent slide offset.
                         lastOffsetY = self.options.slide_region_padding + self.scrollbarHeight;
@@ -261,6 +266,13 @@
                 }
 
             });
+
+        },
+
+        _scrollContent: function(factor) {
+
+            var offset = this.occludedHeight * factor;
+            console.log(offset);
 
         }
 
