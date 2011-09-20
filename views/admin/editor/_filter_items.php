@@ -36,7 +36,7 @@
             </div>
         </div>
 
-        <div class="filter-items-column">
+        <div class="filter-items-column tags">
 
             <div class="filter-header">
                 <input type="checkbox" />
@@ -52,7 +52,7 @@
 
         </div>
 
-        <div class="filter-items-column">
+        <div class="filter-items-column types">
 
             <div class="filter-header">
                 <input type="checkbox" />
@@ -68,7 +68,7 @@
 
         </div>
 
-        <div class="filter-items-column">
+        <div class="filter-items-column collections">
 
             <div class="filter-header">
                 <input type="checkbox" />

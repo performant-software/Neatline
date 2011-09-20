@@ -30,6 +30,13 @@
             container_id: 'item-browser',
             tab_li_id: 'filter-items-tab',
             dropdown_id: 'filter-items',
+            tags_container_class: 'tags',
+            types_container_class: 'types',
+            collections_container_class: 'collections',
+            column_class: 'filter-items-column',
+            all_none_class: 'all-none',
+            filter_option_class: 'filter-option',
+            filter_header_class: 'filter-header',
 
             // Durations and CSS constants.
             bottom_padding: 75,
@@ -53,6 +60,41 @@
             this.dropdown = $('#' + this.options.dropdown_id);
             this.tab = $('#' + this.options.tab_li_id);
             this.tabLink = this.tab.find('a');
+
+            // Get the containers for the checkbox columns.
+            this.tagsContainer =
+                $('div.' + this.options.column_class +
+                  '.' + this.options.tags_container_class);
+
+            this.typesContainer =
+                $('div.' + this.options.column_class +
+                  '.' + this.options.types_container_class);
+
+            this.collectionsContainer =
+                $('div.' + this.options.column_class +
+                  '.' + this.options.collections_container_class);
+
+            // Get the container divs for the taxonomy headers.
+            this.allNoneContainer =
+                $('div.' + this.options.filter_option_class +
+                  '.' + this.options.all_none_class);
+
+            this.allTagsContainer =
+                this.tagsContainer.find('.' + this.options.filter_header_class);
+
+            this.allTypesContainer =
+                this.typesContainer.find('.' + this.options.filter_header_class);
+
+            this.allCollectionsContainer =
+                this.collectionsContainer.find('.' + this.options.filter_header_class);
+
+            // Get the container divs for the individual checkboxes.
+            this.tags = this.tagsContainer
+                .find('.' + this.options.filter_option_class);
+            this.types = this.typesContainer
+                .find('.' + this.options.filter_option_class);
+            this.collections = this.collectionsContainer
+                .find('.' + this.options.filter_option_class);
 
             // Status tracker starters.
             this._isOnDropdown = false;
