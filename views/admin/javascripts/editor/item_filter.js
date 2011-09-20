@@ -115,6 +115,14 @@
             this.collectionsInputs = this.collectionsContainer
                 .find('.' + this.options.filter_option_class + ' input');
 
+            this.allInputs = this.allNoneInput
+                .add(this.allTagsInput)
+                .add(this.tagsInputs)
+                .add(this.allTypesInput)
+                .add(this.typesInputs)
+                .add(this.allCollectionsInput)
+                .add(this.collectionsInputs);
+
             // Status tracker starters.
             this._isOnDropdown = false;
             this._isOnTab = false;
@@ -271,12 +279,16 @@
 
         _addCheckBoxEvents: function() {
 
+            var self = this;
+
             // Toggle all / none.
             $(this.allNoneContainer, this.allNoneInput).bind({
 
                 'click': function(event) {
+
                     event.preventDefault();
-                    // select all / none.
+                    self.allInputs.prop('checked', true);
+
                 }
 
             });
