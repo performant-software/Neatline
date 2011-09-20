@@ -389,14 +389,14 @@ function neatline_mapSelect($id)
 
     // Construct element.
     $mapSelect = new Zend_Form_Element_Select('map');
-    $mapSelect->setMultiOptions(array('-'));
+    $mapSelect->addMultiOption('none', '-');
 
     foreach ($bucketedMaps as $itemName => $maps) {
         $optionsArray = array();
         foreach ($maps as $map) {
             $optionsArray[$map->map_id] = $map->name;
         }
-        $mapSelect->setMultiOptions(array($itemName => $optionsArray));
+        $mapSelect->addMultiOptions(array($itemName => $optionsArray));
     }
 
     // Set the default.
