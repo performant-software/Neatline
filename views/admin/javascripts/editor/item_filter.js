@@ -30,13 +30,6 @@
             container_id: 'item-browser',
             tab_li_id: 'filter-items-tab',
             dropdown_id: 'filter-items',
-            tags_container_class: 'tags',
-            types_container_class: 'types',
-            collections_container_class: 'collections',
-            column_class: 'filter-items-column',
-            all_none_class: 'all-none',
-            filter_option_class: 'filter-option',
-            filter_header_class: 'filter-header',
 
             // Durations and CSS constants.
             bottom_padding: 75,
