@@ -335,6 +335,10 @@ div.filter-option span {
     color: #bebebe;
 }
 
+div.all-none {
+    padding: 8px 2.5em 5px 1em;
+}
+
 div.all-none:hover span {
     color: #fff;
 }
