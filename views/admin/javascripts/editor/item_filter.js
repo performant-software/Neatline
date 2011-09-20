@@ -82,19 +82,38 @@
             this.allTagsContainer =
                 this.tagsContainer.find('.' + this.options.filter_header_class);
 
+            this.allTagsInput = this.allTagsContainer.find('input');
+
             this.allTypesContainer =
                 this.typesContainer.find('.' + this.options.filter_header_class);
+
+            this.allTypesInput = this.allTypesContainer.find('input');
 
             this.allCollectionsContainer =
                 this.collectionsContainer.find('.' + this.options.filter_header_class);
 
+            this.allCollectionsInput = this.allCollectionsContainer.find('input');
+
             // Get the container divs for the individual checkboxes.
+            this.allNoneInput = this.allNoneContainer.find('input');
+
             this.tags = this.tagsContainer
                 .find('.' + this.options.filter_option_class);
+
+            this.tagsInputs = this.tagsContainer
+                .find('.' + this.options.filter_option_class + ' input');
+
             this.types = this.typesContainer
                 .find('.' + this.options.filter_option_class);
+
+            this.typesInputs = this.typesContainer
+                .find('.' + this.options.filter_option_class + ' input');
+
             this.collections = this.collectionsContainer
                 .find('.' + this.options.filter_option_class);
+
+            this.collectionsInputs = this.collectionsContainer
+                .find('.' + this.options.filter_option_class + ' input');
 
             // Status tracker starters.
             this._isOnDropdown = false;
@@ -106,6 +125,9 @@
 
             // Bind events to the tab.
             this._glossTab();
+
+            // Gloss the checkboxes.
+            this._addCheckBoxEvents();
 
         },
 
@@ -244,6 +266,50 @@
         _addScrollbar: function() {
 
             this.element.smallscroll();
+
+        },
+
+        _addCheckBoxEvents: function() {
+
+            // Toggle all / none.
+            $(this.allNoneContainer, this.allNoneInput).bind({
+
+                'click': function(event) {
+                    event.preventDefault();
+                    // select all / none.
+                }
+
+            });
+
+            // Toggle tags.
+            $(this.allTagsContainer, this.allTagsInput).bind({
+
+                'click': function(event) {
+                    event.preventDefault();
+                    // select all / none.
+                }
+
+            });
+
+            // Toggle types.
+            $(this.allTypesContainer, this.allTypesInput).bind({
+
+                'click': function(event) {
+                    event.preventDefault();
+                    // select all / none.
+                }
+
+            });
+
+            // Toggle collections.
+            $(this.allCollectionsContainer, this.allCollectionsInput).bind({
+
+                'click': function(event) {
+                    event.preventDefault();
+                    // select all / none.
+                }
+
+            });
 
         }
 
