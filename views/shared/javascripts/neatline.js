@@ -47,11 +47,15 @@
 
             // Hexes.
             colors: {
+
             }
 
         },
 
-        _create: function() {
+        _create: function(neatline) {
+
+            // Setters.
+            this.neatline = neatline;
 
             // Getters.
             this._window = $(window);
