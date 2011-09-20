@@ -27,4 +27,8 @@
 
 <div class="neatline">
 
+    <script type="text/javascript">
+        var Neatline = <?php echo json_encode($neatline); ?>;
+    </script>
+
 </div>

@@ -38,4 +38,6 @@
     'types' => $types
 )); ?>
 
-<?php echo $this->partial('index/_neatline.php'); ?>
+<?php echo $this->partial('index/_neatline.php', array(
+    'neatline' => $neatline
+)); ?>
