@@ -1,8 +1,9 @@
 /*
- * The core orchestrator class for a Neatline exhibit. This widget reads in the
+ * The core orchestrator class for a Neatline exhibit. This widget (a) reads in the
  * object literal pushed onto the page by the template with basic information
- * about the Neatline and then constructs the component divs accordingly and
- * initializes the widgets that control the map, timeline, and undated items.
+ * about the Neatline, (b) constructs the component divs, (c) initializes the widgets
+ * that control the map, timeline, and undated items, and (d) defines callbacks
+ * among the component classes.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -30,8 +31,19 @@
         options: {
 
             // Markup hooks.
+            markup: {
 
-            // Durations and CSS constants.
+            },
+
+            // Animation constants.
+            animation: {
+
+            },
+
+            // CSS constants.
+            css: {
+
+            },
 
             // Hexes.
             colors: {
