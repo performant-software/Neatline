@@ -52,10 +52,10 @@
 
         },
 
-        _create: function(neatline) {
+        _create: function() {
 
             // Setters.
-            this.neatline = neatline;
+            this.neatline = Neatline;
 
             // Getters.
             this._window = $(window);

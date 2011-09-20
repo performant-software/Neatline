@@ -25,10 +25,11 @@
  */
 ?>
 
-<div class="neatline">
-
-    <script type="text/javascript">
-        var Neatline = <?php echo json_encode($neatline); ?>;
-    </script>
+<div id="neatline-editor" class="neatline">
 
 </div>
+
+<script type="text/javascript">
+    var Neatline = <?php echo json_encode($neatline); ?>;
+    jQuery('#neatline-editor').neatline();
+</script>
