@@ -62,58 +62,31 @@
             this.tabLink = this.tab.find('a');
 
             // Get the containers for the checkbox columns.
-            this.tagsContainer =
-                $('div.' + this.options.column_class +
-                  '.' + this.options.tags_container_class);
-
-            this.typesContainer =
-                $('div.' + this.options.column_class +
-                  '.' + this.options.types_container_class);
-
-            this.collectionsContainer =
-                $('div.' + this.options.column_class +
-                  '.' + this.options.collections_container_class);
+            this.tagsContainer = $('div.filter-items-column.tags');
+            this.typesContainer = $('div.filter-items-column.types');
+            this.collectionsContainer = $('div.filter-items-column.collections');
 
             // Get the container divs for the taxonomy headers.
-            this.allNoneContainer =
-                $('div.' + this.options.filter_option_class +
-                  '.' + this.options.all_none_class);
+            this.allNoneContainer = $('div.filter-option.all-none');
+            this.allTagsContainer = this.tagsContainer.find('.filter-header');
+            this.allTypesContainer = this.typesContainer.find('.filter-header');
+            this.allCollectionsContainer = this.collectionsContainer.find('.filter-header');
 
-            this.allTagsContainer =
-                this.tagsContainer.find('.' + this.options.filter_header_class);
-
+            // Get the inputs divs for the taxonomy headers.
+            this.allNoneInput = this.allNoneContainer.find('input');
             this.allTagsInput = this.allTagsContainer.find('input');
-
-            this.allTypesContainer =
-                this.typesContainer.find('.' + this.options.filter_header_class);
-
             this.allTypesInput = this.allTypesContainer.find('input');
-
-            this.allCollectionsContainer =
-                this.collectionsContainer.find('.' + this.options.filter_header_class);
-
             this.allCollectionsInput = this.allCollectionsContainer.find('input');
 
-            // Get the container divs for the individual checkboxes.
-            this.allNoneInput = this.allNoneContainer.find('input');
+            // Get the container divs for the individual options.
+            this.tags = this.tagsContainer.find('.filter-option');
+            this.types = this.typesContainer.find('.filter-option');
+            this.collections = this.collectionsContainer.find('.filter-option');
 
-            this.tags = this.tagsContainer
-                .find('.' + this.options.filter_option_class);
-
-            this.tagsInputs = this.tagsContainer
-                .find('.' + this.options.filter_option_class + ' input');
-
-            this.types = this.typesContainer
-                .find('.' + this.options.filter_option_class);
-
-            this.typesInputs = this.typesContainer
-                .find('.' + this.options.filter_option_class + ' input');
-
-            this.collections = this.collectionsContainer
-                .find('.' + this.options.filter_option_class);
-
-            this.collectionsInputs = this.collectionsContainer
-                .find('.' + this.options.filter_option_class + ' input');
+            // Get the individual checkbox inputs.
+            this.tagsInputs = this.tagsContainer.find('.filter-option input');
+            this.typesInputs = this.typesContainer.find('.filter-option input');
+            this.collectionsInputs = this.collectionsContainer.find('.filter-option input');
 
             this.allInputs = this.allNoneInput
                 .add(this.allTagsInput)
