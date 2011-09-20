@@ -292,10 +292,19 @@
             // Toggle individual boxes.
             $.each(this.allIndividualInputs, function(i, input) {
 
-                $(input).bind({
+                input = $(input);
+                var checkbox = input.find('input');
 
-                    'click': function() {
-                        console.log('down');
+                // Add the mousedown event to the whole element.
+                input.bind({
+
+                    'mousedown': function() {
+                        var val = checkbox.prop('checked');
+                        checkbox.prop('checked', !val);
+                    },
+
+                    'click': function(event) {
+                        event.preventDefault();
                     }
 
                 });
