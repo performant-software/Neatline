@@ -145,6 +145,9 @@
             // Gloss the checkboxes.
             this._addCheckBoxEvents();
 
+            // By default, check all the boxes.
+            this.allNoneInput.trigger('mousedown');
+
         },
 
         _getDimensions: function() {
@@ -319,6 +322,11 @@
                     // Check or uncheck all, and switch the tracker.
                     self.allInputs.prop('checked', !self.allChecked);
                     self.allChecked = !self.allChecked;
+
+                    // Update the component trackers.
+                    self.allTagsChecked = self.allChecked;
+                    self.allTypesChecked = self.allChecked;
+                    self.allCollectionsChecked = self.allChecked;
 
                 },
 
