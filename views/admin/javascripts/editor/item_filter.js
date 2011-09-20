@@ -242,21 +242,15 @@
 
             // Show and animate.
             this.element.css({
-
                 'display': 'block',
                 'height': 0
-
             }).stop().animate({
-
                 'height': height
-
             }, this.options.fade_duration, function() {
-
                 // Add the scrollbar.
                 if (self.totalHeight > maxHeight) {
                     self._addScrollbar();
                 }
-
             });
 
 
@@ -271,13 +265,9 @@
 
             // Hide.
             this.element.stop().animate({
-
                 'height': 0
-
             }, this.options.fade_duration, function() {
-
                 self.element.css('display', 'none');
-
             });
 
         },

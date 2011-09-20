@@ -343,6 +343,10 @@ div.all-none:hover span {
     color: #fff;
 }
 
+recordid {
+    display: none;
+}
+
 
 /* Item columns */
 
