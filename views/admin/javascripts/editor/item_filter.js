@@ -123,10 +123,18 @@
                 .add(this.allCollectionsInput)
                 .add(this.collectionsInputs);
 
+            this.allIndividualInputs = this.tags
+                .add(this.types)
+                .add(this.collections);
+
             // Status tracker starters.
             this._isOnDropdown = false;
             this._isOnTab = false;
             this._isExpanded = false;
+            this._allChecked = false;
+            this._allTagsChecked = false;
+            this._allTypesChecked = false;
+            this._allCollectionsChecked = false;
 
             // Measure.
             this._getDimensions();
@@ -281,14 +289,32 @@
 
             var self = this;
 
+            // Toggle individual boxes.
+            $.each(this.allIndividualInputs, function(i, input) {
+
+                $(input).bind({
+
+                    'click': function() {
+                        console.log('down');
+                    }
+
+                });
+
+            });
+
             // Toggle all / none.
             $(this.allNoneContainer, this.allNoneInput).bind({
 
+                'mousedown': function() {
+
+                    // Check or uncheck all, and switch the tracker.
+                    self.allInputs.prop('checked', !self.allChecked);
+                    self.allChecked = !self.allChecked;
+
+                },
+
                 'click': function(event) {
-
                     event.preventDefault();
-                    self.allInputs.prop('checked', true);
-
                 }
 
             });
@@ -296,9 +322,19 @@
             // Toggle tags.
             $(this.allTagsContainer, this.allTagsInput).bind({
 
+                'mousedown': function() {
+
+                    // Get the combined checkboxes bucket.
+                    var checkboxes = self.allTagsInput.add(self.tagsInputs);
+
+                    // Check or uncheck all, and switch the tracker.
+                    checkboxes.prop('checked', !self.allTagsChecked);
+                    self.allTagsChecked = !self.allTagsChecked;
+
+                },
+
                 'click': function(event) {
                     event.preventDefault();
-                    // select all / none.
                 }
 
             });
@@ -306,9 +342,20 @@
             // Toggle types.
             $(this.allTypesContainer, this.allTypesInput).bind({
 
+                'mousedown': function() {
+
+                    // Get the combined checkboxes bucket.
+                    var checkboxes = self.allTypesInput.add(self.typesInputs);
+
+                    // Check or uncheck all, and switch the tracker.
+                    checkboxes.prop('checked', !self.allTypesChecked);
+                    self.allTypesChecked = !self.allTypesChecked;
+
+
+                },
+
                 'click': function(event) {
                     event.preventDefault();
-                    // select all / none.
                 }
 
             });
@@ -316,9 +363,20 @@
             // Toggle collections.
             $(this.allCollectionsContainer, this.allCollectionsInput).bind({
 
+                'mousedown': function() {
+
+                    // Get the combined checkboxes bucket.
+                    var checkboxes = self.allCollectionsInput.add(self.collectionsInputs);
+
+                    // Check or uncheck all, and switch the tracker.
+                    checkboxes.prop('checked', !self.allCollectionsChecked);
+                    self.allCollectionsChecked = !self.allCollectionsChecked;
+
+
+                },
+
                 'click': function(event) {
                     event.preventDefault();
-                    // select all / none.
                 }
 
             });
