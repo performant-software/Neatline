@@ -62,6 +62,13 @@
             this.searchCancel = $('#' + this.options.search_cancel_id);
             this.itemFilterContainer = $('#' + this.options.item_filter_container_id);
 
+            // A facade for the real tracker object in item_filter.
+            this.selected = {
+                tags: [],
+                types: [],
+                collections: []
+            };
+
             // Disable text selection on the document. This is aggressive
             // and controversial, but it solves lots of annoyances.
             this._disableSelect();
@@ -316,10 +323,12 @@
 
         _glossItemFilter: function() {
 
+            var self = this;
+
             this.itemFilterContainer.itemfilter({
 
-                'selectionchange': function(eventObject, selection) {
-                    console.log(selection.types);
+                'selectionchange': function(eventObject, selected) {
+                    self.selected = selected;
                 }
 
             });
@@ -337,7 +346,10 @@
                 dataType: 'html',
 
                 data: {
-                    search: this._searchString
+                    search: this._searchString,
+                    tags: this.selected.tags,
+                    types: this.selected.types,
+                    collections: this.selected.collections
                 },
 
                 success: function(data) {
