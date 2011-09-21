@@ -297,7 +297,7 @@
 
                     // Update the tracker array for each of the inputs.
                     $.each(self.allInputs, function(input) {
-                        self._toggleArrayMembership((input));
+                        self._toggleArrayMembership($(input));
                     });
 
                 },
@@ -439,12 +439,8 @@
 // Emulates Python's set.remove().
 Array.prototype.remove = function(el) {
 
-    for (var i = 0; i < this.length; i++) {
-        if (this[i] == el) {
-            this.splice(i,1);
-            this.remove(el);
-            break;
-        }
+    while (this.indexOf(el) != -1) {
+        this.splice(this.indexOf(el),1);
     }
 
 };
