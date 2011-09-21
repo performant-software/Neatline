@@ -147,20 +147,12 @@
                         self.show();
                         self.tabLink.css('background',self.options.colors.hover_gray);
 
-                        // Handle window resizing.
-                        self._window.bind('resize', function() {
-                            self.resize();
-                        });
-
                     }
 
                     else {
 
                         self.hide();
                         self.tabLink.css('background', self.options.colors.default_gray);
-
-                        // Handle window resizing.
-                        // self._window.unbind('resize');
 
                     }
 
@@ -200,6 +192,12 @@
                           self.tabLink.css('background',self.options.colors.default_gray);
 
                     }
+
+                },
+
+                'resize': function() {
+
+                    self.resize();
 
                 }
 
@@ -463,8 +461,6 @@
             switch(type) {
 
                 case 'tag':
-
-                    console.log(id, this.selected.tags,$.inArray(id, this.selected.tags));
 
                     // If it's not there already, push the id onto
                     // the tracker array.
