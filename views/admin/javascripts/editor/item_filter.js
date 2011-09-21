@@ -160,7 +160,7 @@
                         self.tabLink.css('background', self.options.colors.default_gray);
 
                         // Handle window resizing.
-                        self._window.unbind('resize');
+                        // self._window.unbind('resize');
 
                     }
 
