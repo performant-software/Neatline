@@ -255,7 +255,11 @@
             var height = (this.totalHeight > maxHeight) ? maxHeight :
                 this.totalHeight;
 
+            // Reset the height.
             this.element.css('height', height);
+
+            // Reposition the bar.
+            this.element.smallscroll('positionBar');
 
         },
 

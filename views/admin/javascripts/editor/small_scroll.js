@@ -86,7 +86,7 @@
             }, this.options.fade_duration);
 
             // Position.
-            this._positionBar();
+            this.positionBar();
 
             // ** Glossers.
 
@@ -115,16 +115,14 @@
             this.bar.bind({
 
                 'mousedown': function(event) {
-
                     self._scroll(event);
-
                 }
 
             });
 
         },
 
-        _positionBar: function() {
+        positionBar: function() {
 
             // Recalculate the heights and offsets.
             this._getSizes();
@@ -140,6 +138,8 @@
                 'width': this.containerWidth *
                     (this.options.highlight_width_percentage / 100)
             });
+
+            console.log('test');
 
         },
 
