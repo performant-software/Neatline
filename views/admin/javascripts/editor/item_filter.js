@@ -266,10 +266,12 @@
                     'mousedown': function() {
 
                         // Check the box, call method push on or off
-                        // the record id in the tracker object.
+                        // the record id in the tracker object, trigger
+                        // the selection change event.
                         var val = checkbox.prop('checked');
                         checkbox.prop('checked', !val);
                         self._toggleArrayMembership(input);
+                        self._trigger('selectionchange', null, self.selected);
 
                     },
 
@@ -300,6 +302,9 @@
                         self._toggleArrayMembership($(input));
                     });
 
+                    // Trigger the event in item_browser.
+                    self._trigger('selectionchange', null, self.selected);
+
                 },
 
                 'click': function(event) {
@@ -324,6 +329,9 @@
                     $.each(self.tagsInputs, function(i, input) {
                         self._toggleArrayMembership($(input));
                     });
+
+                    // Trigger the event in item_browser.
+                    self._trigger('selectionchange', null, self.selected);
 
                 },
 
@@ -350,6 +358,9 @@
                         self._toggleArrayMembership($(input));
                     });
 
+                    // Trigger the event in item_browser.
+                    self._trigger('selectionchange', null, self.selected);
+
                 },
 
                 'click': function(event) {
@@ -374,6 +385,9 @@
                     $.each(self.collectionsInputs, function(i, input) {
                         self._toggleArrayMembership($(input));
                     });
+
+                    // Trigger the event in item_browser.
+                    self._trigger('selectionchange', null, self.selected);
 
                 },
 
@@ -412,7 +426,7 @@
 
                     // If it's not there already, push the id onto
                     // the tracker array.
-                    if ($.inArray(id, this.selected.types == -1)) {
+                    if ($.inArray(id, this.selected.types) == -1) {
                         this.selected.types.push(id);
                     }
 

@@ -316,7 +316,13 @@
 
         _glossItemFilter: function() {
 
-            this.itemFilterContainer.itemfilter();
+            this.itemFilterContainer.itemfilter({
+
+                'selectionchange': function(eventObject, selection) {
+                    console.log(selection.types);
+                }
+
+            });
 
         },
 
