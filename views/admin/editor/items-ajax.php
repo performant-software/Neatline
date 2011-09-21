@@ -33,8 +33,8 @@
             <td class="item-title">
                 <?php echo item('Dublin Core', 'Title', null, $item); ?>
             </td>
-            <td class="col-1 col-row">*</td>
-            <td class="col-2 col-row">*</td>
+            <td class="col-1 col-row"></td>
+            <td class="col-2 col-row"></td>
         </tr>
 
     <?php endforeach; ?>

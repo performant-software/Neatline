@@ -422,14 +422,14 @@ table#items td.col-1 {
 
 table#items td.col-1:hover, table#items td.col-2:hover {
     background-repeat: repeat-x;
-    background-image: -khtml-gradient(linear, left top, left bottom, from(#724e85), to(#543664));
-    background-image: -moz-linear-gradient(top, #724e85, #543664);
-    background-image: -ms-linear-gradient(top, #724e85, #543664);
-    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #724e85), color-stop(100%, #543664));
-    background-image: -webkit-linear-gradient(top, #724e85, #543664);
-    background-image: -o-linear-gradient(top, #724e85, #543664);
-    background-image: linear-gradient(top, #724e85, #543664);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#724e85', endColorstr='#543664', GradientType=0); 
+    background-image: -khtml-gradient(linear, left top, left bottom, from(#e6d7ee), to(#d5c3df));
+    background-image: -moz-linear-gradient(top, #e6d7ee, #d5c3df);
+    background-image: -ms-linear-gradient(top, #e6d7ee, #d5c3df);
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #e6d7ee), color-stop(100%, #d5c3df));
+    background-image: -webkit-linear-gradient(top, #e6d7ee, #d5c3df);
+    background-image: -o-linear-gradient(top, #e6d7ee, #d5c3df);
+    background-image: linear-gradient(top, #e6d7ee, #d5c3df);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#e6d7ee', endColorstr='#d5c3df', GradientType=0); 
 }
 
 table#items td.col-2 {
