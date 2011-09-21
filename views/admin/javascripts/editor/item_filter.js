@@ -264,8 +264,13 @@
                 input.bind({
 
                     'mousedown': function() {
+
+                        // Check the box, call method push on or off
+                        // the record id in the tracker object.
                         var val = checkbox.prop('checked');
                         checkbox.prop('checked', !val);
+                        self._toggleArrayMembership(input);
+
                     },
 
                     'click': function(event) {
@@ -358,9 +363,50 @@
 
             });
 
+        },
+
+        _toggleArrayMembership: function(input) {
+
+            var recordDiv = input.closest('.filter-option').find('recordid');
+            var id = recordDiv.text();
+            var type = recordDiv.attr('type');
+
+            switch(type) {
+
+                case 'tag':
+
+                    // If it's not there already, push the id onto
+                    // the tracker array.
+                    if (!$.inArray(id, this.selected.tags)) {
+                        this.selected.tags.push(id);
+                    }
+
+                    // Otherwise, pop it.
+                    else {
+                        
+                    }
+
+                break;
+
+            }
+
         }
 
     });
 
 
 })( jQuery );
+
+
+// jQuery doesn't extend natives - except when JR just does it unilaterally.
+// http://mootools.net/
+
+// Remove() - Completely removes item(s) from Array
+// By John Resig (MIT Licensed)
+Array.prototype.remove = function(from, to) {
+
+    var rest = this.slice((to || from) + 1 || this.length);
+    this.length = from < 0 ? this.length + from : from;
+    return this.push.apply(this, rest);
+
+};

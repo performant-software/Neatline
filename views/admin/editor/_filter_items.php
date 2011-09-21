@@ -47,7 +47,7 @@
                 <div class="filter-option">
                     <input type="checkbox" />
                     <span><?php echo $tag->name; ?></span>
-                    <recordid><?php echo $tag->id; ?></recordid>
+                    <recordid type="tag"><?php echo $tag->id; ?></recordid>
                 </div>
             <?php endforeach; ?>
 
@@ -64,7 +64,7 @@
                 <div class="filter-option">
                     <input type="checkbox" />
                     <span><?php echo $type->name; ?></span>
-                    <recordid><?php echo $type->id; ?></recordid>
+                    <recordid type="type"><?php echo $type->id; ?></recordid>
                 </div>
             <?php endforeach; ?>
 
@@ -81,7 +81,7 @@
                 <div class="filter-option">
                     <input type="checkbox" />
                     <span><?php echo $collection->name; ?></span>
-                    <recordid><?php echo $collection->id; ?></recordid>
+                    <recordid type="collection"><?php echo $collection->id; ?></recordid>
                 </div>
             <?php endforeach; ?>
 
