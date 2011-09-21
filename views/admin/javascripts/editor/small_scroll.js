@@ -56,6 +56,7 @@
             this._is_scrolling = false;
             this._at_top = true;
             this._at_bottom = true;
+            this.factor = 0;
 
             // Add the scroller.
             this._addBar();
@@ -129,7 +130,6 @@
 
             // Position the slider.
             this.bar.css({
-                'top': this.options.slide_region_padding,
                 'right': this.options.bar_right_offset,
                 'height': this.scrollbarHeight
             });
@@ -139,7 +139,9 @@
                     (this.options.highlight_width_percentage / 100)
             });
 
-            console.log('test');
+            // Scroll the bar down to the right starting position,
+            // per the factor tracker.
+            this._scrollBar();
 
         },
 
@@ -222,8 +224,8 @@
                             self.slideOffset = startingSlideOffset + offsetY;
 
                             // Scroll the content.
-                            var factor = self.slideOffset / self.slideHeight;
-                            self._scrollContent(factor);
+                            self.factor = self.slideOffset / self.slideHeight;
+                            self._scrollContent();
 
                             // Record the most recent slide offset.
                             lastOffsetY = newOffsetY;
@@ -243,8 +245,8 @@
                         self.slideOffset = 0;
 
                         // Scroll the content.
-                        var factor = self.slideOffset / self.slideHeight;
-                        self._scrollContent(factor);
+                        self.factor = self.slideOffset / self.slideHeight;
+                        self._scrollContent();
 
                         // Record the most recent slide offset.
                         lastOffsetY = self.options.slide_region_padding;
@@ -262,8 +264,8 @@
                         self.slideOffset = self.slideHeight;
 
                         // Scroll the content.
-                        var factor = self.slideOffset / self.slideHeight;
-                        self._scrollContent(factor);
+                        self.factor = self.slideOffset / self.slideHeight;
+                        self._scrollContent();
 
                         // Record the most recent slide offset.
                         lastOffsetY = self.options.slide_region_padding + self.scrollbarHeight;
@@ -284,13 +286,23 @@
 
         },
 
-        _scrollContent: function(factor) {
+        _scrollContent: function() {
 
             // Calculate the pixel offset for the scroll.
-            var offset = this.occludedHeight * factor;
+            var offset = this.occludedHeight * this.factor;
 
             // Apply the change.
             this.content.css('top', -offset);
+
+        },
+
+        _scrollBar: function() {
+
+            // Calculate the pixel offset for the bar.
+            var offset = this.options.slide_region_padding +
+                (this.slideRegionHeight - this.scrollbarHeight) * this.factor;
+
+            this.bar.css('top', offset);
 
         }
 
