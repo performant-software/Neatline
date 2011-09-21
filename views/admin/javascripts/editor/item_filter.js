@@ -383,7 +383,7 @@
 
                     // Otherwise, pop it.
                     else {
-                        
+                        this.selected.tags.remove(id);
                     }
 
                 break;
@@ -398,15 +398,16 @@
 })( jQuery );
 
 
-// jQuery doesn't extend natives - except when JR just does it unilaterally.
-// http://mootools.net/
+// Remove() - Removes all instances of element el from an array.
+// Emulates Python's set.remove().
+Array.prototype.remove = function(el) {
 
-// Remove() - Completely removes item(s) from Array
-// By John Resig (MIT Licensed)
-Array.prototype.remove = function(from, to) {
-
-    var rest = this.slice((to || from) + 1 || this.length);
-    this.length = from < 0 ? this.length + from : from;
-    return this.push.apply(this, rest);
+    for (var i = 0; i < this.length; i++) {
+        if (this[i] == el) {
+            this.splice(i,1);
+            this.remove(el);
+            break;
+        }
+    }
 
 };
