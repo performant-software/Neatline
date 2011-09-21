@@ -25,23 +25,16 @@
  */
 ?>
 
-<div id="items">
+<table id="items">
 
     <?php foreach ($items as $item): ?>
 
-        <div class="item-row">
-
-            <div class="item-title"><?php echo item('Dublin Core', 'Title', null, $item); ?></div>
-
-            <!--
-            <div class="columns">
-                <div class="col-1 col-row"><span class="row-marker">*</span></div>
-                <div class="col-2 col-row"><span class="row-marker">*</span></div>
-            </div>
-            -->
-
-        </div>
+        <tr class="item-row">
+            <td class="item-title"><?php echo item('Dublin Core', 'Title', null, $item); ?></td>
+            <td class="col-1 col-row">*</td>
+            <td class="col-2 col-row">*</td>
+        </tr>
 
     <?php endforeach; ?>
 
-</div>
+</table>

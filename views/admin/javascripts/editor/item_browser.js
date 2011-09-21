@@ -37,7 +37,7 @@
 
             // Durations and CSS constants.
             item_list_highlight_duration: 10,
-            drag_handle_width: 3,
+            drag_handle_width: 4,
             drag_tooltip_Y_offset: 16,
             drag_tooltip_X_offset: 15,
 
@@ -184,7 +184,7 @@
                     if (!self._just_dragged) {
 
                         self.dragHandle.trigger('mousemove');
-                        self.dragHandle.css('border-right', '1px solid #cac8c2');
+                        self.dragHandle.css('border-right', '1px dashed #cac8c2');
 
                     }
 
