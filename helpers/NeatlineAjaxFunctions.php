@@ -77,6 +77,13 @@ function neatline_getItemsForBrowser(
             $whereClause[] = 'collection_id IN (' . $collectionsString . ')';
         }
 
+        // Build tags clause.
+        if ($tags != null) {
+            foreach ($tags as $id) {
+                $whereClause[] = 'EXISTS (SELECT * FROM omeka_taggings WHERE i.id = relation_id AND tag_id = ' . $id . ')';
+            }
+        }
+
         // Collapse into single string.
         $whereClause = implode(' OR ', $whereClause);
 
