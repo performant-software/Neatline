@@ -339,6 +339,8 @@
 
         _getItems: function() {
 
+            console.log(this.selected);
+
             var self = this;
 
             // Core ajax call to get items.
@@ -351,7 +353,8 @@
                     search: this._searchString,
                     tags: this.selected.tags,
                     types: this.selected.types,
-                    collections: this.selected.collections
+                    collections: this.selected.collections,
+                    all: this.selected.all
                 },
 
                 success: function(data) {

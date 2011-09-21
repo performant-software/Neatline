@@ -83,13 +83,15 @@ class Neatline_EditorController extends Omeka_Controller_Action
         $tags = $this->_request->getParam('tags');
         $types = $this->_request->getParam('types');
         $collections = $this->_request->getParam('collections');
+        $all = json_decode($this->_request->getParam('all'));
 
         // Get items.
         $this->view->items = neatline_getItemsForBrowser(
             $searchString,
             $tags,
             $types,
-            $collections
+            $collections,
+            $all
         );
 
     }

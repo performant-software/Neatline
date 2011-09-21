@@ -37,9 +37,15 @@ function neatline_getItemsForBrowser(
     $search = null,
     $tags = null,
     $types = null,
-    $collections = null
+    $collections = null,
+    $all = null
 )
 {
+
+    // If nothing is selected, return an empty array.
+    if (!$all && $tags == null && $types == null && $collections == null) {
+        return array();
+    }
 
     $_db = get_db();
     $itemsTable = $_db->getTable('Item');
@@ -54,21 +60,29 @@ function neatline_getItemsForBrowser(
     // Apply the search string to the table class.
     $itemsTable->applySearchFilters($select, $params);
 
-    // Construct the where clauses for types and collections.
-    $typeString = implode(',', $types);
-    $collectionsString = implode(',', $collections);
-
     // Construct the final where clause.
-    if ($typesString || $collectionsString) {
+    if (!$all) {
 
-        $whereClause = 'collection_id IN (' . $typeString . ')';
+        $whereClause = array();
 
-        if ($collectionsString != '') {
-            $whereClause .= ' OR collection_id IN (' . $collectionsString . ')';
+        // Build types clause.
+        if ($types != null) {
+            $typesString = implode(',', $types);
+            $whereClause[] = 'item_type_id IN (' . $typesString . ')';
         }
 
-        // Apply the condition.
-        $select->where($whereClause);
+        // Build collections clause.
+        if ($collections != null) {
+            $collectionsString = implode(',', $collections);
+            $whereClause[] = 'collection_id IN (' . $collectionsString . ')';
+        }
+
+        // Collapse into single string.
+        $whereClause = implode(' OR ', $whereClause);
+
+        if ($whereClause != '') {
+            $select->where($whereClause);
+        }
 
     }
 
