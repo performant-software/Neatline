@@ -95,7 +95,7 @@
 
                 'mouseenter': function() {
 
-                    self.bar.animate({
+                    self.bar.stop().animate({
                         'opacity': self.options.highlight_opacity
                     }, self.options.fade_duration);
 
@@ -104,7 +104,7 @@
                 'mouseleave': function() {
 
                     if (!self._is_scrolling) {
-                        self.bar.animate({
+                        self.bar.stop().animate({
                             'opacity': self.options.default_opacity
                         }, self.options.fade_duration);
                     }
