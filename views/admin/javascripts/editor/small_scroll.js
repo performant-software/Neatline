@@ -195,10 +195,10 @@
             // the value of the starting slide offset.
             var startingX = trigger_event.pageX;
             var startingY = trigger_event.pageY;
-            var startingSlideOffset = this.slideOffset;
-            var lastOffsetY = startingSlideOffset;
+            var startingSlideOffset = (this.slideRegionHeight - this.scrollbarHeight) * this.factor;
+            var lastOffsetFactor = this.factor;
 
-            var startingOffsetY = self.bar.css('top').replace('px', '');
+            var startingOffsetY = this._getCurrentBarOffset();
 
             this._window.bind({
 
@@ -208,6 +208,7 @@
                     var positionY = e.pageY
                     var offsetY = positionY - startingY;
                     var newOffsetY = parseInt(startingOffsetY) + parseInt(offsetY);
+                    var lastOffsetY = (this.slideRegionHeight - this.scrollbarHeight) * lastOffsetFactor;
 
                     // If the bar can slide up or down on the track, do the change.
                     if ((startingSlideOffset + offsetY) >= 0
@@ -299,10 +300,16 @@
         _scrollBar: function() {
 
             // Calculate the pixel offset for the bar.
-            var offset = this.options.slide_region_padding +
-                (this.slideRegionHeight - this.scrollbarHeight) * this.factor;
+            var offset = this._getCurrentBarOffset();
 
             this.bar.css('top', offset);
+
+        },
+
+        _getCurrentBarOffset: function() {
+
+            return this.options.slide_region_padding +
+                (this.slideRegionHeight - this.scrollbarHeight) * this.factor;
 
         }
 
