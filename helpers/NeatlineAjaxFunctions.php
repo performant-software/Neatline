@@ -33,8 +33,19 @@
  *
  * @return array of Omeka_records $items The items.
  */
-function neatline_getItemsForBrowser($search = null)
+function neatline_getItemsForBrowser(
+    $search = null,
+    $tags = null,
+    $types = null,
+    $collections = null,
+    $all = null
+)
 {
+
+    // If nothing is selected, return an empty array.
+    if (!$all && $tags == null && $types == null && $collections == null) {
+        return array();
+    }
 
     $_db = get_db();
     $itemsTable = $_db->getTable('Item');
@@ -46,7 +57,41 @@ function neatline_getItemsForBrowser($search = null)
         $params['search'] = $search;
     }
 
+    // Apply the search string to the table class.
     $itemsTable->applySearchFilters($select, $params);
+
+    // Construct the final where clause.
+    if (!$all) {
+
+        $whereClause = array();
+
+        // Build types clause.
+        if ($types != null) {
+            $typesString = implode(',', $types);
+            $whereClause[] = 'item_type_id IN (' . $typesString . ')';
+        }
+
+        // Build collections clause.
+        if ($collections != null) {
+            $collectionsString = implode(',', $collections);
+            $whereClause[] = 'collection_id IN (' . $collectionsString . ')';
+        }
+
+        // Build tags clause.
+        if ($tags != null) {
+            foreach ($tags as $id) {
+                $whereClause[] = 'EXISTS (SELECT * FROM omeka_taggings WHERE i.id = relation_id AND tag_id = ' . $id . ')';
+            }
+        }
+
+        // Collapse into single string.
+        $whereClause = implode(' OR ', $whereClause);
+
+        if ($whereClause != '') {
+            $select->where($whereClause);
+        }
+
+    }
 
     return $itemsTable->fetchObjects($select);
 

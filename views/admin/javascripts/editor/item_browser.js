@@ -62,6 +62,14 @@
             this.searchCancel = $('#' + this.options.search_cancel_id);
             this.itemFilterContainer = $('#' + this.options.item_filter_container_id);
 
+            // A facade for the real tracker object in item_filter.
+            this.selected = {
+                tags: [],
+                types: [],
+                collections: [],
+                all: false
+            };
+
             // Disable text selection on the document. This is aggressive
             // and controversial, but it solves lots of annoyances.
             this._disableSelect();
@@ -176,8 +184,7 @@
                     if (!self._just_dragged) {
 
                         self.dragHandle.trigger('mousemove');
-                        self.dragHandle.css('border-right', '1px dashed ' +
-                            self.options.colors.drag_border);
+                        self.dragHandle.css('border-right', '1px dashed #cac8c2');
 
                     }
 
@@ -317,7 +324,16 @@
 
         _glossItemFilter: function() {
 
-            this.itemFilterContainer.itemfilter();
+            var self = this;
+
+            this.itemFilterContainer.itemfilter({
+
+                'selectionchange': function(eventObject, selected) {
+                    self.selected = selected;
+                    self._getItems();
+                }
+
+            });
 
         },
 
@@ -332,7 +348,11 @@
                 dataType: 'html',
 
                 data: {
-                    search: this._searchString
+                    search: this._searchString,
+                    tags: this.selected.tags,
+                    types: this.selected.types,
+                    collections: this.selected.collections,
+                    all: this.selected.all
                 },
 
                 success: function(data) {

@@ -58,7 +58,8 @@
             this.selected = {
                 tags: [],
                 types: [],
-                collections: []
+                collections: [],
+                all: false
             };
 
             // Get the containers for the checkbox columns.
@@ -142,13 +143,25 @@
                 'mousedown': function() {
 
                     if (!self._isExpanded) {
+
                         self.show();
                         self.tabLink.css('background',self.options.colors.hover_gray);
+
+                        // Handle window resizing.
+                        self._window.bind('resize', function() {
+                            self.resize();
+                        });
+
                     }
 
                     else {
+
                         self.hide();
                         self.tabLink.css('background', self.options.colors.default_gray);
+
+                        // Handle window resizing.
+                        // self._window.unbind('resize');
+
                     }
 
                 },
@@ -223,8 +236,32 @@
                 // Add the scrollbar.
                 if (self.totalHeight > maxHeight) {
                     self._addScrollbar();
+                    self.element.smallscroll('positionBar');
                 }
             });
+
+        },
+
+        resize: function() {
+
+            // Get the current window height.
+            var windowHeight = this._window.height();
+
+            // Calculate the maximum height given the current size
+            // of the window.
+            var maxHeight = windowHeight - this.topOffset -
+                this.options.bottom_padding;
+
+            // Set the height based on the amount of space available.
+            var height = (this.totalHeight > maxHeight) ? maxHeight :
+                this.totalHeight;
+
+            // Reset the height.
+            this.element.css('height', height);
+
+            // Reposition the bar.
+            this.element.smallscroll('positionBar');
+            this.element.smallscroll('scrollContent');
 
         },
 
@@ -266,10 +303,14 @@
                     'mousedown': function() {
 
                         // Check the box, call method push on or off
-                        // the record id in the tracker object.
+                        // the record id in the tracker object, trigger
+                        // the selection change event.
                         var val = checkbox.prop('checked');
                         checkbox.prop('checked', !val);
-                        self._toggleArrayMembership(input);
+                        self._toggleArrayMembership(input, !val);
+
+                        self.selected.all = false;
+                        self._trigger('selectionchange', null, self.selected);
 
                     },
 
@@ -287,8 +328,9 @@
                 'mousedown': function() {
 
                     // Check or uncheck all, and switch the tracker.
-                    self.allInputs.prop('checked', !self.allChecked);
-                    self.allChecked = !self.allChecked;
+                    var newValue = !self.allChecked;
+                    self.allInputs.prop('checked', newValue);
+                    self.allChecked = newValue;
 
                     // Update the component trackers.
                     self.allTagsChecked = self.allChecked;
@@ -296,9 +338,15 @@
                     self.allCollectionsChecked = self.allChecked;
 
                     // Update the tracker array for each of the inputs.
-                    $.each(self.allInputs, function(input) {
-                        self._toggleArrayMembership($(input));
+                    $.each(self.allInputs, function(i, input) {
+                        self._toggleArrayMembership($(input), newValue);
                     });
+
+                    // Update the all-selected tracker.
+                    self.selected.all = self.allChecked;
+
+                    // Trigger the event in item_browser.
+                    self._trigger('selectionchange', null, self.selected);
 
                 },
 
@@ -317,8 +365,20 @@
                     var checkboxes = self.allTagsInput.add(self.tagsInputs);
 
                     // Check or uncheck all, and switch the tracker.
-                    checkboxes.prop('checked', !self.allTagsChecked);
-                    self.allTagsChecked = !self.allTagsChecked;
+                    var newValue = !self.allTagsChecked;
+                    checkboxes.prop('checked', newValue);
+                    self.allTagsChecked = newValue;
+
+                    // Update the tracker array for each of the inputs.
+                    $.each(self.tagsInputs, function(i, input) {
+                        self._toggleArrayMembership($(input), newValue);
+                    });
+
+                    // Push all selected to false
+                    self.selected.all = false;
+
+                    // Trigger the event in item_browser.
+                    self._trigger('selectionchange', null, self.selected);
 
                 },
 
@@ -337,8 +397,20 @@
                     var checkboxes = self.allTypesInput.add(self.typesInputs);
 
                     // Check or uncheck all, and switch the tracker.
-                    checkboxes.prop('checked', !self.allTypesChecked);
-                    self.allTypesChecked = !self.allTypesChecked;
+                    var newValue = !self.allTypesChecked;
+                    checkboxes.prop('checked', newValue);
+                    self.allTypesChecked = newValue;
+
+                    // Update the tracker array for each of the inputs.
+                    $.each(self.typesInputs, function(i, input) {
+                        self._toggleArrayMembership($(input), newValue);
+                    });
+
+                    // Push all selected to false
+                    self.selected.all = false;
+
+                    // Trigger the event in item_browser.
+                    self._trigger('selectionchange', null, self.selected);
 
                 },
 
@@ -357,8 +429,20 @@
                     var checkboxes = self.allCollectionsInput.add(self.collectionsInputs);
 
                     // Check or uncheck all, and switch the tracker.
-                    checkboxes.prop('checked', !self.allCollectionsChecked);
-                    self.allCollectionsChecked = !self.allCollectionsChecked;
+                    var newValue = !self.allCollectionsChecked;
+                    checkboxes.prop('checked', newValue);
+                    self.allCollectionsChecked = newValue;
+
+                    // Update the tracker array for each of the inputs.
+                    $.each(self.collectionsInputs, function(i, input) {
+                        self._toggleArrayMembership($(input), newValue);
+                    });
+
+                    // Push all selected to false
+                    self.selected.all = false;
+
+                    // Trigger the event in item_browser.
+                    self._trigger('selectionchange', null, self.selected);
 
                 },
 
@@ -370,7 +454,7 @@
 
         },
 
-        _toggleArrayMembership: function(input) {
+        _toggleArrayMembership: function(input, value) {
 
             var recordDiv = input.closest('.filter-option').find('recordid');
             var id = parseInt(recordDiv.text());
@@ -384,7 +468,7 @@
 
                     // If it's not there already, push the id onto
                     // the tracker array.
-                    if ($.inArray(id, this.selected.tags) == -1) {
+                    if (value) {
                         this.selected.tags.push(id);
                     }
 
@@ -399,7 +483,7 @@
 
                     // If it's not there already, push the id onto
                     // the tracker array.
-                    if ($.inArray(id, this.selected.types == -1)) {
+                    if (value) {
                         this.selected.types.push(id);
                     }
 
@@ -414,7 +498,7 @@
 
                     // If it's not there already, push the id onto
                     // the tracker array.
-                    if ($.inArray(id, this.selected.collections) == -1) {
+                    if (value) {
                         this.selected.collections.push(id);
                     }
 
