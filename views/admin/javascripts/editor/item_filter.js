@@ -143,13 +143,25 @@
                 'mousedown': function() {
 
                     if (!self._isExpanded) {
+
                         self.show();
                         self.tabLink.css('background',self.options.colors.hover_gray);
+
+                        // Handle window resizing.
+                        self._window.bind('resize', function() {
+                            self.resize();
+                        });
+
                     }
 
                     else {
+
                         self.hide();
                         self.tabLink.css('background', self.options.colors.default_gray);
+
+                        // Handle window resizing.
+                        self._window.unbind('resize');
+
                     }
 
                 },
@@ -226,6 +238,24 @@
                     self._addScrollbar();
                 }
             });
+
+        },
+
+        resize: function() {
+
+            // Get the current window height.
+            var windowHeight = this._window.height();
+
+            // Calculate the maximum height given the current size
+            // of the window.
+            var maxHeight = windowHeight - this.topOffset -
+                this.options.bottom_padding;
+
+            // Set the height based on the amount of space available.
+            var height = (this.totalHeight > maxHeight) ? maxHeight :
+                this.totalHeight;
+
+            this.element.css('height', height);
 
         },
 

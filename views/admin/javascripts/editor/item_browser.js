@@ -339,8 +339,6 @@
 
         _getItems: function() {
 
-            console.log(this.selected);
-
             var self = this;
 
             // Core ajax call to get items.
