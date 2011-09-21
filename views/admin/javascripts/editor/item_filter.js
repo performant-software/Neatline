@@ -54,6 +54,13 @@
             this.tab = $('#' + this.options.tab_li_id);
             this.tabLink = this.tab.find('a');
 
+            // Initialize tracker object for the selections.
+            this.selected = {
+                tags: [],
+                types: [],
+                collections: []
+            };
+
             // Get the containers for the checkbox columns.
             this.tagsContainer = $('div.filter-items-column.tags');
             this.typesContainer = $('div.filter-items-column.types');
@@ -219,7 +226,6 @@
                 }
             });
 
-
         },
 
         hide: function() {
@@ -324,7 +330,6 @@
                     checkboxes.prop('checked', !self.allTypesChecked);
                     self.allTypesChecked = !self.allTypesChecked;
 
-
                 },
 
                 'click': function(event) {
@@ -344,7 +349,6 @@
                     // Check or uncheck all, and switch the tracker.
                     checkboxes.prop('checked', !self.allCollectionsChecked);
                     self.allCollectionsChecked = !self.allCollectionsChecked;
-
 
                 },
 
