@@ -226,7 +226,7 @@
 
                             // Scroll the content.
                             self.factor = self.slideOffset / self.slideHeight;
-                            self._scrollContent();
+                            self.scrollContent();
 
                             // Record the most recent slide offset.
                             lastOffsetY = newOffsetY;
@@ -247,7 +247,7 @@
 
                         // Scroll the content.
                         self.factor = self.slideOffset / self.slideHeight;
-                        self._scrollContent();
+                        self.scrollContent();
 
                         // Record the most recent slide offset.
                         lastOffsetY = self.options.slide_region_padding;
@@ -266,7 +266,7 @@
 
                         // Scroll the content.
                         self.factor = self.slideOffset / self.slideHeight;
-                        self._scrollContent();
+                        self.scrollContent();
 
                         // Record the most recent slide offset.
                         lastOffsetY = self.options.slide_region_padding + self.scrollbarHeight;
@@ -287,7 +287,7 @@
 
         },
 
-        _scrollContent: function() {
+        scrollContent: function() {
 
             // Calculate the pixel offset for the scroll.
             var offset = this.occludedHeight * this.factor;

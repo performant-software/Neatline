@@ -113,6 +113,8 @@
 
         _positionDivs: function() {
 
+            console.log('test');
+
             // Update dimensions and set new height.
             this._getDimensions();
 

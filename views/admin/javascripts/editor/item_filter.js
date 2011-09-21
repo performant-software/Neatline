@@ -236,6 +236,7 @@
                 // Add the scrollbar.
                 if (self.totalHeight > maxHeight) {
                     self._addScrollbar();
+                    self.element.smallscroll('positionBar');
                 }
             });
 
@@ -260,6 +261,7 @@
 
             // Reposition the bar.
             this.element.smallscroll('positionBar');
+            this.element.smallscroll('scrollContent');
 
         },
 
