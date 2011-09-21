@@ -184,7 +184,7 @@
                         self._isExpanded) {
 
                           self.hide();
-                          self.tabLink.css('background', self.options.colors.default_gray);
+                          self.tabLink.css('background',self.options.colors.default_gray);
 
                     }
 
@@ -295,6 +295,11 @@
                     self.allTypesChecked = self.allChecked;
                     self.allCollectionsChecked = self.allChecked;
 
+                    // Update the tracker array for each of the inputs.
+                    $.each(self.allInputs, function(input) {
+                        self._toggleArrayMembership((input));
+                    });
+
                 },
 
                 'click': function(event) {
@@ -368,22 +373,54 @@
         _toggleArrayMembership: function(input) {
 
             var recordDiv = input.closest('.filter-option').find('recordid');
-            var id = recordDiv.text();
+            var id = parseInt(recordDiv.text());
             var type = recordDiv.attr('type');
 
             switch(type) {
 
                 case 'tag':
 
+                    console.log(id, this.selected.tags,$.inArray(id, this.selected.tags));
+
                     // If it's not there already, push the id onto
                     // the tracker array.
-                    if (!$.inArray(id, this.selected.tags)) {
+                    if ($.inArray(id, this.selected.tags) == -1) {
                         this.selected.tags.push(id);
                     }
 
                     // Otherwise, pop it.
                     else {
                         this.selected.tags.remove(id);
+                    }
+
+                break;
+
+                case 'type':
+
+                    // If it's not there already, push the id onto
+                    // the tracker array.
+                    if ($.inArray(id, this.selected.types == -1)) {
+                        this.selected.types.push(id);
+                    }
+
+                    // Otherwise, pop it.
+                    else {
+                        this.selected.types.remove(id);
+                    }
+
+                break;
+
+                case 'collection':
+
+                    // If it's not there already, push the id onto
+                    // the tracker array.
+                    if ($.inArray(id, this.selected.collections) == -1) {
+                        this.selected.collections.push(id);
+                    }
+
+                    // Otherwise, pop it.
+                    else {
+                        this.selected.collections.remove(id);
                     }
 
                 break;
