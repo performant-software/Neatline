@@ -33,7 +33,12 @@
  *
  * @return array of Omeka_records $items The items.
  */
-function neatline_getItemsForBrowser($search = null)
+function neatline_getItemsForBrowser(
+    $search = null,
+    $tags = null,
+    $types = null,
+    $collections = null
+)
 {
 
     $_db = get_db();
@@ -46,7 +51,26 @@ function neatline_getItemsForBrowser($search = null)
         $params['search'] = $search;
     }
 
+    // Apply the search string to the table class.
     $itemsTable->applySearchFilters($select, $params);
+
+    // Construct the where clauses for types and collections.
+    $typeString = implode(',', $types);
+    $collectionsString = implode(',', $collections);
+
+    // Construct the final where clause.
+    if ($typesString != '' || $collectionsString != '') {
+
+        $whereClause = $typeString;
+
+        if ($collectionsString != '') {
+            $whereClause .= 'AND ' . $collectionsString;
+        }
+
+        // Apply the condition.
+        $select->where($whereClause);
+
+    }
 
     return $itemsTable->fetchObjects($select);
 

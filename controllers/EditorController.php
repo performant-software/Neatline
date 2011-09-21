@@ -80,9 +80,17 @@ class Neatline_EditorController extends Omeka_Controller_Action
 
         // Get parameters from the ajax request.
         $searchString = $this->_request->getParam('search');
+        $tags = $this->_request->getParam('tags');
+        $types = $this->_request->getParam('types');
+        $collections = $this->_request->getParam('collections');
 
         // Get items.
-        $this->view->items = neatline_getItemsForBrowser($searchString);
+        $this->view->items = neatline_getItemsForBrowser(
+            $searchString,
+            $tags,
+            $types,
+            $collections
+        );
 
     }
 

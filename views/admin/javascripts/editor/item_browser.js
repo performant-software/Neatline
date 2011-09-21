@@ -329,6 +329,7 @@
 
                 'selectionchange': function(eventObject, selected) {
                     self.selected = selected;
+                    self._getItems();
                 }
 
             });
