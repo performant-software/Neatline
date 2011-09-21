@@ -58,7 +58,8 @@
             this.selected = {
                 tags: [],
                 types: [],
-                collections: []
+                collections: [],
+                all: false
             };
 
             // Get the containers for the checkbox columns.
@@ -271,6 +272,8 @@
                         var val = checkbox.prop('checked');
                         checkbox.prop('checked', !val);
                         self._toggleArrayMembership(input);
+
+                        self.selected.all = !val;
                         self._trigger('selectionchange', null, self.selected);
 
                     },

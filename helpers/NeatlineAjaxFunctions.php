@@ -59,12 +59,12 @@ function neatline_getItemsForBrowser(
     $collectionsString = implode(',', $collections);
 
     // Construct the final where clause.
-    if ($typesString != '' || $collectionsString != '') {
+    if ($typesString || $collectionsString) {
 
-        $whereClause = $typeString;
+        $whereClause = 'collection_id IN (' . $typeString . ')';
 
         if ($collectionsString != '') {
-            $whereClause .= 'AND ' . $collectionsString;
+            $whereClause .= ' OR collection_id IN (' . $collectionsString . ')';
         }
 
         // Apply the condition.

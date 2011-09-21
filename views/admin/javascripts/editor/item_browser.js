@@ -66,7 +66,8 @@
             this.selected = {
                 tags: [],
                 types: [],
-                collections: []
+                collections: [],
+                all: false
             };
 
             // Disable text selection on the document. This is aggressive
