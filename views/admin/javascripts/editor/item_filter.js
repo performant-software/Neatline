@@ -296,7 +296,7 @@
                     self.allCollectionsChecked = self.allChecked;
 
                     // Update the tracker array for each of the inputs.
-                    $.each(self.allInputs, function(i, input) {
+                    $.each(self.allInputs, function(input) {
                         self._toggleArrayMembership($(input));
                     });
 
@@ -320,11 +320,6 @@
                     checkboxes.prop('checked', !self.allTagsChecked);
                     self.allTagsChecked = !self.allTagsChecked;
 
-                    // Update the tracker array for each of the inputs.
-                    $.each(self.tagsInputs, function(i, input) {
-                        self._toggleArrayMembership($(input));
-                    });
-
                 },
 
                 'click': function(event) {
@@ -344,11 +339,6 @@
                     // Check or uncheck all, and switch the tracker.
                     checkboxes.prop('checked', !self.allTypesChecked);
                     self.allTypesChecked = !self.allTypesChecked;
-
-                    // Update the tracker array for each of the inputs.
-                    $.each(self.typesInputs, function(i, input) {
-                        self._toggleArrayMembership($(input));
-                    });
 
                 },
 
@@ -370,11 +360,6 @@
                     checkboxes.prop('checked', !self.allCollectionsChecked);
                     self.allCollectionsChecked = !self.allCollectionsChecked;
 
-                    // Update the tracker array for each of the inputs.
-                    $.each(self.collectionsInputs, function(i, input) {
-                        self._toggleArrayMembership($(input));
-                    });
-
                 },
 
                 'click': function(event) {
@@ -394,6 +379,8 @@
             switch(type) {
 
                 case 'tag':
+
+                    console.log(id, this.selected.tags,$.inArray(id, this.selected.tags));
 
                     // If it's not there already, push the id onto
                     // the tracker array.
