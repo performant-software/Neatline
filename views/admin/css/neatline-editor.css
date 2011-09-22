@@ -406,13 +406,13 @@ table#items {
 
 table#items td {
     border-bottom: none;
-    border-top: 1px solid rgba(180, 180, 180, .1);
+    border-top: 1px solid #f0f0f0;
 }
 
 table#items td.col-row {
     margin: 0;
     padding: 0;
-    border-left: 1px solid rgba(160, 160, 160, .1);
+    border-left: 1px solid #f0f0f0;
     text-align: center;
 }
 

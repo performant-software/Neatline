@@ -434,10 +434,10 @@
                         height: 200
                     });
 
-				this.scrollbarWidth = 100 - div.width();
-				div.parent().remove();
+                this.scrollbarWidth = 100 - div.width();
+                div.parent().remove();
 
-			}
+            }
 
         }
 
