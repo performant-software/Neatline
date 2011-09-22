@@ -38,8 +38,8 @@
             // Durations and CSS constants.
             item_list_highlight_duration: 10,
             drag_handle_width: 4,
-            drag_tooltip_Y_offset: 16,
-            drag_tooltip_X_offset: 15,
+            drag_tooldragTip_Y_offset: 16,
+            drag_tooldragTip_X_offset: 15,
 
             // Hexes.
             colors: {
@@ -80,6 +80,9 @@
             // Position the container, add window resize listener.
             this._positionDivs();
             this._addWindowResizeListener();
+
+            // Create tooldragTip markup.
+            this._createToolTips();
 
             // Construct the drag handle on the items stack.
             this._buildDragHandle();
@@ -151,6 +154,34 @@
 
         },
 
+        _createToolTips: function() {
+
+            // Construct the drag tip.
+            this.dragTip = $('<div id="drag-tip" class="twipsy fade right in">\
+                                <div class="twipsy-arrow"></div>\
+                                <div class="twipsy-inner">Click to drag.</div>\
+                             </div>');
+
+            // Construct the space tip.
+            this.spaceTip = $('<div id="space-tip" class="twipsy fade top in">\
+                                 <div class="twipsy-arrow"></div>\
+                                 <div class="twipsy-inner">Space</div>\
+                              </div>');
+
+            // Construct the time tip.
+            this.timeTip = $('<div id="time-tip" class="twipsy fade top in">\
+                                 <div class="twipsy-arrow"></div>\
+                                 <div class="twipsy-inner">Time</div>\
+                             </div>');
+
+            this._body.append(
+                this.dragTip,
+                this.spaceTip,
+                this.timeTip
+            );
+
+        },
+
         _buildDragHandle: function() {
 
             var self = this;
@@ -167,14 +198,8 @@
             // Append.
             this._body.append(this.dragHandle);
 
-            // Construct the drag tooltip.
-            this.tip = $('<div class="twipsy fade right in">\
-                            <div class="twipsy-arrow"></div>\
-                            <div class="twipsy-inner">Click to drag.</div>\
-                        </div>');
-
-            // Hide the tip by default.
-            this.tip.css('display', 'none');
+            // Hide the dragTip by default.
+            this.dragTip.css('display', 'none');
 
             // Add events.
             this.dragHandle.bind({
@@ -198,15 +223,12 @@
                         var offsetX = e.pageX;
                         var offsetY = e.pageY;
 
-                        // Position and show tip.
-                        self.tip.css({
+                        // Position and show dragTip.
+                        self.dragTip.css({
                             'display': 'block',
-                            'top': offsetY - self.options.drag_tooltip_Y_offset,
-                            'left': offsetX + self.options.drag_tooltip_X_offset
+                            'top': offsetY - self.options.drag_tooldragTip_Y_offset,
+                            'left': offsetX + self.options.drag_tooldragTip_X_offset
                         });
-
-                        // Append.
-                        self._body.append(self.tip);
 
                     }
 
@@ -214,8 +236,8 @@
 
                 'mouseleave': function() {
 
-                    // Hide the tip.
-                    self.tip.css('display', 'none');
+                    // Hide the dragTip.
+                    self.dragTip.css('display', 'none');
 
                     if (!self._is_dragging_width) {
                         self.dragHandle.css('border-right', 'none');
@@ -372,7 +394,11 @@
             // Get the new items.
             this.items = $('#' + this.options.items_list_container_id + ' .item-row');
 
-            // Gloss each of them.
+            // Gloss the columns.
+            var spaceHeader = $('div.col-1.col-header span.header');
+            var timeHeader = $('div.col-2.col-header span.header');
+
+            // Gloss each item.
             $.each(this.items, function(i, item) {
 
                 var item = $(item);

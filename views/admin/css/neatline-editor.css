@@ -359,7 +359,7 @@ div.columns div.col-row {
 }
 
 div.col-1 {
-    right: 40px;
+    right: 39px;
 }
 
 div.col-2 {
@@ -394,7 +394,7 @@ div.columns span.row-marker {
 }
 
 div.columns span.header:hover {
-    background-color: #f0b925;
+    background-color: #f0b925 !important;
 }
 
 table#items {
@@ -419,10 +419,6 @@ table#items td.col-row {
     /* background-position: center;*/
 }
 
-table#items td.col-1 {
-    width: 34px;
-}
-
 table#items td.col-1:hover, table#items td.col-2:hover {
     background-repeat: repeat-x;
     background-image: -khtml-gradient(linear, left top, left bottom, from(#e6d7ee), to(#d5c3df));
@@ -435,6 +431,16 @@ table#items td.col-1:hover, table#items td.col-2:hover {
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#e6d7ee', endColorstr='#d5c3df', GradientType=0); 
 }
 
+table#items td.col-1 {
+    width: 33px;
+}
+
 table#items td.col-2 {
     width: 33px;
+}
+
+/* Tooltips */
+
+#drag-tip, #space-tip, #time-tip {
+    display: none;
 }
