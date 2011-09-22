@@ -1,8 +1,7 @@
-<?php
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
 
 /**
- * Base markup for a Neatline.
+ * CSS for Neatline. Shared by editor and public instantiations.
  *
  * PHP version 5
  *
@@ -23,16 +22,25 @@
  * @copyright   2011 The Board and Visitors of the University of Virginia
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache 2 License
  */
-?>
 
-<div id="neatline-editor" class="neatline">
 
-    <div id="map" class="neatline-block"></div>
-    <div id="timeline" class="neatline-block"></div>
-    <div id="undated" class="neatline-block"></div>
+/* Layout */
 
-</div>
+.neatline-block {
+    display: none;
+    position: relative;
+}
 
-<script type="text/javascript">
-    var Neatline = <?php echo json_encode($neatline); ?>;
-</script>
+/* TESTING COLORS */
+
+#map {
+    background: #bea0db;
+}
+
+#timeline {
+    background: #909fdf;
+}
+
+#timeline {
+    background: #d9df90;
+}

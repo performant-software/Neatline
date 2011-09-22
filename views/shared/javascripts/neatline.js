@@ -32,7 +32,9 @@
 
             // Markup hooks.
             markup: {
-
+                map_id: 'map',
+                timeline_id: 'timeline',
+                undated_id: 'undated'
             },
 
             // Animation constants.
@@ -42,7 +44,7 @@
 
             // CSS constants.
             css: {
-
+                top_block_percent: 60
             },
 
             // Hexes.
@@ -60,6 +62,55 @@
             // Getters.
             this._window = $(window);
             this._body = $('body');
+            this.map = $('#' + this.options.markup.map_id);
+            this.timeline = $('#' + this.options.markup.timeline_id);
+            this.undated = $('#' + this.options.markup.undated_id);
+
+            // Position the divs.
+            this._positionDivs();
+
+        },
+
+        _positionDivs: function() {
+
+            // Update the container dimension trackers.
+            this._getContainerDimensions();
+
+            // ** Position the map. **
+
+            // If there is a map.
+            if (this.neatline.is_map == 1) {
+
+                // If the map is on top.
+                if (this.neatline.top_element == 'map') {
+
+
+                    var topBlockHeight = this.containerHeight *
+                        (this.options.top_block_percent / 100);
+
+                    this.map.css({
+                        'top': 0,
+                        'left': 0,
+                        'height': topBlockHeight,
+                        'display': 'block'
+                    });
+                    console.log(this.containerHeight);
+
+                }
+
+                // If the map is on the bottom.
+                else {
+
+                }
+
+            }
+
+        },
+
+        _getContainerDimensions: function() {
+
+            this.containerWidth = this.element.width();
+            this.containerHeight = this.element.height();
 
         }
 

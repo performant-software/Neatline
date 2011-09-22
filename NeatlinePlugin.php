@@ -177,6 +177,7 @@ class NeatlinePlugin
 
 
               neatline_queueEditorAssets();
+              neatline_queueNeatlineAssets();
 
         }
 

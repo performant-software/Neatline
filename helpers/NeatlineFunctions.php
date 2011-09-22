@@ -84,11 +84,24 @@ function neatline_queueEditorAssets()
     queue_js('editor/item_browser', 'javascripts');
     queue_js('editor/item_filter', 'javascripts');
     queue_js('editor/small_scroll', 'javascripts');
-    queue_js('neatline', 'javascripts');
 
     ?>
     <link href='http://fonts.googleapis.com/css?family=Crimson+Text:400,400italic,600,600italic,700,700italic' rel='stylesheet' type='text/css'>
     <?php
+
+}
+
+/**
+ * Include the static files for the Neatline.
+ *
+ * @return void.
+ */
+function neatline_queueNeatlineAssets()
+{
+
+    queue_css('neatline');
+    queue_js('neatline', 'javascripts');
+
 
 }
 

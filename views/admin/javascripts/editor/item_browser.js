@@ -95,10 +95,8 @@
             // Construct the drag handle on the items stack.
             this._buildDragHandle();
 
-            // Set starting filtering parameters.
+            // Set search string tracker.
             this._searchString = '';
-            this._tagFilter = null;
-            this._collectionFilter = null;
 
             // Add listener to the search box.
             this._glossSearchBox();
@@ -115,7 +113,7 @@
                 'float': 'right',
                 'top': this.topBarHeight,
                 'position': 'relative',
-                'background': 'red'
+                'background': '#f1f1f1'
             });
 
             // Fire starting ajax request.
@@ -130,6 +128,18 @@
             this._window.bind('selectstart', function() {
                 return false;
             });
+
+        },
+
+        _getDimensions: function() {
+
+            this.containerWidth = this.element.width();
+            this.containerHeight = this.element.height();
+
+            this.windowWidth = this._window.width();
+            this.windowHeight = this._window.height();
+
+            this.topBarHeight = this.topBar.height();
 
         },
 
@@ -348,18 +358,6 @@
                 }
 
             });
-
-        },
-
-        _getDimensions: function() {
-
-            this.containerWidth = this.element.width();
-            this.containerHeight = this.element.height();
-
-            this.windowWidth = this._window.width();
-            this.windowHeight = this._window.height();
-
-            this.topBarHeight = this.topBar.height();
 
         },
 
