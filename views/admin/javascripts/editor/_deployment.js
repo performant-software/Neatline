@@ -21,6 +21,18 @@
 
 jQuery(document).ready(function($) {
 
-    $('#item-browser').itembrowser();
+    var neatlineContainer = $('#neatline-editor');
+
+    $('#item-browser').itembrowser({
+
+        'neatlineready': function() {
+            neatlineContainer.neatline();
+        },
+
+        'reposition': function() {
+            neatlineContainer.neatline('positionDivs');
+        }
+
+    });
 
 });

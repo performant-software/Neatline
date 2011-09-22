@@ -44,8 +44,8 @@
 
             // CSS constants.
             css: {
-                top_block_height_percent: 60,
-                undated_items_width_percent: 20
+                top_block_height_percent: 55,
+                undated_items_width_percent: 30
             },
 
             // Hexes.
@@ -68,11 +68,11 @@
             this.undated = $('#' + this.options.markup.undated_id);
 
             // Position the divs.
-            this._positionDivs();
+            this.positionDivs();
 
         },
 
-        _positionDivs: function() {
+        positionDivs: function() {
 
             // Update the container dimension trackers.
             this._getContainerDimensions();
@@ -81,9 +81,10 @@
             var topBlockHeightPercentage = this.options.css.top_block_height_percent / 100;
             var undatedItemsWidthPercentage = this.options.css.undated_items_width_percent / 100;
 
-            var topBlockHeight = parseInt(this.containerHeight * topBlockHeightPercentage);
+            // Get pixel constants.
+            var topBlockHeight = Math.round(this.containerHeight * topBlockHeightPercentage);
             var bottomBlockHeight = this.containerHeight - topBlockHeight;
-            var undatedItemsWidth = parseInt(this.containerWidth * undatedItemsWidthPercentage);
+            var undatedItemsWidth = Math.round(this.containerWidth * undatedItemsWidthPercentage);
             var withUndatedItemsWidth = this.containerWidth - undatedItemsWidth;
 
             // ** Position the map. **
@@ -93,7 +94,8 @@
 
                 this.map.css({
                     'left': 0,
-                    'display': 'block'
+                    'display': 'block',
+                    'width': this.containerWidth
                 });
 
                 // If the map is on top.
@@ -133,7 +135,7 @@
 
                     this.timeline.css({
                         'top': topBlockHeight,
-                        'height': bottomBlockHeight,
+                        'height': bottomBlockHeight
                     });
 
                 }
@@ -143,7 +145,7 @@
 
                     this.timeline.css({
                         'top': 0,
-                        'height': topBlockHeight,
+                        'height': topBlockHeight
                     });
 
                 }
@@ -176,6 +178,10 @@
                     this.timeline.css({
                         'width': withUndatedItemsWidth,
                         'left': 0
+                    });
+
+                    this.undated.css({
+                        'left': withUndatedItemsWidth
                     });
 
                 }
@@ -216,7 +222,8 @@
                     if (this.params.top_element == 'map') {
 
                         this.undated.css({
-                            'height': bottomBlockHeight
+                            'height': bottomBlockHeight,
+                            'top': topBlockHeight
                         });
 
                     }

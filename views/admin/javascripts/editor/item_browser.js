@@ -112,9 +112,6 @@
             // Instantiate the item filter widget.
             this._glossItemFilter();
 
-            // Position the Neatline container.
-            this._positionNeatline();
-
             // Set static CSS parameters for the Neatline.
             this.neatlineContainer.css({
                 'display': 'block',
@@ -123,9 +120,6 @@
                 'position': 'relative',
                 'background': '#f1f1f1'
             });
-
-            // Instantiate the Neatline widget.
-            this.neatlineContainer.neatline();
 
             // Fire starting ajax request.
             this._getItems();
@@ -185,6 +179,8 @@
                 'height': this.windowHeight - this.topBarHeight,
                 'width': this.windowWidth - this.containerWidth - 1,
             });
+
+            this._trigger('reposition');
 
         },
 
@@ -458,9 +454,14 @@
                 },
 
                 success: function(data) {
+
                     self.itemsList.html(data);
                     self._positionDivs();
                     self._glossItems();
+
+                    // Trigger neatlineready event.
+                    self._trigger('neatlineready');
+
                 }
 
             });

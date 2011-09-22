@@ -28,18 +28,19 @@
 
 .neatline-block {
     display: none;
+    position: absolute;
 }
 
 /* TESTING COLORS */
 
 #map {
-    background: #bea0db;
+    background: #dedede;
 }
 
 #timeline {
-    background: #909fdf;
+    background: #d2d2d2;
 }
 
-#timeline {
-    background: #d9df90;
+#undated {
+    background: #c6c6c6;
 }
