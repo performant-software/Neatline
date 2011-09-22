@@ -91,14 +91,17 @@
             // If there is a map.
             if (this.params.is_map == 1) {
 
+                this.map.css({
+                    'left': 0,
+                    'display': 'block'
+                });
+
                 // If the map is on top.
                 if (this.params.top_element == 'map') {
 
                     this.map.css({
                         'top': 0,
-                        'left': 0,
                         'height': topBlockHeight,
-                        'display': 'block'
                     });
 
                 }
@@ -107,10 +110,8 @@
                 else {
 
                     this.map.css({
-                        'top': 0,
-                        'left': 0,
+                        'top': topBlockHeight,
                         'height': bottomBlockHeight,
-                        'display': 'block'
                     });
 
                 }
@@ -122,14 +123,17 @@
             // If there is a timeline.
             if (this.params.is_timeline == 1) {
 
+                this.timeline.css({
+                    'left': 0,
+                    'display': 'block'
+                });
+
                 // If the map is on top.
                 if (this.params.top_element == 'map') {
 
                     this.timeline.css({
                         'top': topBlockHeight,
-                        'left': 0,
                         'height': bottomBlockHeight,
-                        'display': 'block'
                     });
 
                 }
@@ -139,9 +143,7 @@
 
                     this.timeline.css({
                         'top': 0,
-                        'left': 0,
                         'height': topBlockHeight,
-                        'display': 'block'
                     });
 
                 }
