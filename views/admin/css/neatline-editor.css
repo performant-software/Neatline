@@ -414,6 +414,9 @@ table#items td.col-row {
     padding: 0;
     border-left: 1px solid #f0f0f0;
     text-align: center;
+    /* background-image: url('../images/bullet_purple.png');*/
+    /* background-repeat: no-repeat;*/
+    /* background-position: center;*/
 }
 
 table#items td.col-1 {
