@@ -101,7 +101,8 @@
 /* Item browser */
 
 #item-browser {
-    width: 400px;
+    width: 0;
+    float: left;
     background: #FEFBF3;
     border-right: 1px solid rgba(0, 0, 0, .2);
     border-top: 1px solid rgba(0, 0, 0, .2);

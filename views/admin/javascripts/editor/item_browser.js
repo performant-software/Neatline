@@ -34,9 +34,12 @@
             items_list_container_id: 'items-list-container',
             items_list_header_id: 'items-list-header',
             item_filter_container_id: 'filter-items',
+            neatline_id: 'neatline-editor',
 
             // Durations and CSS constants.
             item_list_highlight_duration: 10,
+            starting_item_list_width: 400,
+            item_list_min_width: 370,
             drag_handle_width: 4,
             drag_tooltip_Y_offset: 16,
             drag_tooltip_X_offset: 15,
@@ -65,6 +68,7 @@
             this.itemsListHeader = $('#' + this.options.items_list_header_id);
             this.searchCancel = $('#' + this.options.search_cancel_id);
             this.itemFilterContainer = $('#' + this.options.item_filter_container_id);
+            this.neatline = $('#' + this.options.neatline_id);
 
             // A facade for the real tracker object in item_filter.
             this.selected = {
@@ -96,8 +100,7 @@
             this._tagFilter = null;
             this._collectionFilter = null;
 
-            // Add listener to the search box and instantiate the input
-            // canceller.
+            // Add listener to the search box.
             this._glossSearchBox();
 
             // Add tooltips to column headers.
@@ -105,6 +108,15 @@
 
             // Instantiate the item filter widget.
             this._glossItemFilter();
+
+            // Set static CSS parameters for the Neatline.
+            this.neatline.css({
+                'display': 'block',
+                'float': 'right',
+                'top': this.topBarHeight,
+                'position': 'relative',
+                'background': 'red'
+            });
 
             // Fire starting ajax request.
             this._getItems();
@@ -128,6 +140,7 @@
 
             // Set the height of the main container.
             this.element.css({
+                'width': this.options.starting_item_list_width,
                 'height': this.windowHeight - this.topBarHeight - 1,
                 'top': this.topBarHeight
             });
@@ -136,6 +149,20 @@
             this.itemsListHeader.css({
                 'top': this.topBarHeight,
                 'width': this.containerWidth - this.scrollbarWidth
+            });
+
+            // Position the Neatline div.
+            this._positionNeatline();
+
+        },
+
+        _positionNeatline: function() {
+
+            // Position the Neatline container to the right
+            // of the item browser.
+            this.neatline.css({
+                'height': this.windowHeight - this.topBarHeight,
+                'width': this.windowWidth - this.containerWidth - 1,
             });
 
         },
@@ -199,7 +226,7 @@
                 'width': this.options.drag_handle_width,
                 'height': this.windowHeight - this.topBarHeight - 1,
                 'top': this.topBarHeight,
-                'left': this.containerWidth
+                'left': this.options.starting_item_list_width
             });
 
             // Append.
@@ -288,12 +315,22 @@
                     var offsetX = e.pageX - startingX;
                     var newWidth = startingContainerWidth + offsetX;
 
-                    // Resize the container and header.
-                    self.element.css('width', newWidth);
-                    self.itemsListHeader.css('width', newWidth - self.scrollbarWidth);
+                    if (newWidth >= self.options.item_list_min_width) {
 
-                    // Reposition the dragger.
-                    self.dragHandle.css('left', newWidth);
+                        // Resize the container and header.
+                        self.element.css('width', newWidth);
+                        self.itemsListHeader.css('width', newWidth - self.scrollbarWidth);
+
+                        // Reposition the dragger.
+                        self.dragHandle.css('left', newWidth);
+
+                        // Update the container width tracker.
+                        self.containerWidth = newWidth;
+
+                        // Reposition the Neatline container.
+                        self._positionNeatline();
+
+                    }
 
                 },
 
