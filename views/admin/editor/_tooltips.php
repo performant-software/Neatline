@@ -2,8 +2,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
 
 /**
- * The core Neatline editor. Wraps the markup for the editing interface and then
- * calls the central _neatline.php partial, which is shared with public views.
+ * Markup for the tooltips.
  *
  * PHP version 5
  *
@@ -26,20 +25,17 @@
  */
 ?>
 
-<?php echo $this->partial('editor/_editor_header.php', array(
-    'title' => $neatline->name
-)); ?>
+<div id="drag-tip" class="twipsy fade right in">
+    <div class="twipsy-arrow"></div>
+    <div class="twipsy-inner">Click to drag.</div>
+</div>
 
-<?php echo $this->partial('editor/_topbar.php'); ?>
+<div id="space-tip" class="twipsy fade above in">
+    <div class="twipsy-arrow"></div>
+    <div class="twipsy-inner">Space</div>
+</div>
 
-<?php echo $this->partial('editor/_item_browser.php', array(
-    'tags' => $tags,
-    'collections' => $collections,
-    'types' => $types
-)); ?>
-
-<?php echo $this->partial('index/_neatline.php', array(
-    'neatline' => $neatline
-)); ?>
-
-<?php echo $this->partial('editor/_tooltips.php'); ?>
+<div id="time-tip" class="twipsy fade above in">
+    <div class="twipsy-arrow"></div>
+    <div class="twipsy-inner">Time</div>
+</div>

@@ -35,6 +35,9 @@
             items_list_header_id: 'items-list-header',
             item_filter_container_id: 'filter-items',
             neatline_id: 'neatline-editor',
+            drag_tooltip_id: 'drag-tip',
+            space_tooltip_id: 'space-tip',
+            time_tooltip_id: 'time-tip',
 
             // Durations and CSS constants.
             item_list_highlight_duration: 10,
@@ -70,6 +73,11 @@
             this.itemFilterContainer = $('#' + this.options.item_filter_container_id);
             this.neatline = $('#' + this.options.neatline_id);
 
+            // Tooltips.
+            this.dragTip = $('#' + this.options.drag_tooltip_id);
+            this.spaceTip = $('#' + this.options.space_tooltip_id);
+            this.timeTip = $('#' + this.options.time_tooltip_id);
+
             // A facade for the real tracker object in item_filter.
             this.selected = {
                 tags: [],
@@ -88,9 +96,6 @@
             // Position the container, add window resize listener.
             this._positionDivs();
             this._addWindowResizeListener();
-
-            // Create tooldragTip markup.
-            this._createToolTips();
 
             // Construct the drag handle on the items stack.
             this._buildDragHandle();
@@ -198,34 +203,6 @@
 
         },
 
-        _createToolTips: function() {
-
-            // Construct the drag tip.
-            this.dragTip = $('<div id="drag-tip" class="twipsy fade right in">\
-                                <div class="twipsy-arrow"></div>\
-                                <div class="twipsy-inner">Click to drag.</div>\
-                             </div>');
-
-            // Construct the space tip.
-            this.spaceTip = $('<div id="space-tip" class="twipsy fade above in">\
-                                 <div class="twipsy-arrow"></div>\
-                                 <div class="twipsy-inner">Space</div>\
-                              </div>');
-
-            // Construct the time tip.
-            this.timeTip = $('<div id="time-tip" class="twipsy fade above in">\
-                                 <div class="twipsy-arrow"></div>\
-                                 <div class="twipsy-inner">Time</div>\
-                             </div>');
-
-            this._body.append(
-                this.dragTip,
-                this.spaceTip,
-                this.timeTip
-            );
-
-        },
-
         _buildDragHandle: function() {
 
             var self = this;
@@ -241,9 +218,6 @@
 
             // Append.
             this._body.append(this.dragHandle);
-
-            // Hide the dragTip by default.
-            this.dragTip.css('display', 'none');
 
             // Add events.
             this.dragHandle.bind({
