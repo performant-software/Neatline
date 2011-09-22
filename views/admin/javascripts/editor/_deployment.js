@@ -1,9 +1,5 @@
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
-
-/**
- * CSS for Neatline. Shared by editor and public instantiations.
- *
- * PHP version 5
+/*
+ * Widget instantiations for the Neatline editor.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -23,23 +19,8 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache 2 License
  */
 
+jQuery(document).ready(function($) {
 
-/* Layout */
+    $('#item-browser').itembrowser();
 
-.neatline-block {
-    display: none;
-}
-
-/* TESTING COLORS */
-
-#map {
-    background: #bea0db;
-}
-
-#timeline {
-    background: #909fdf;
-}
-
-#timeline {
-    background: #d9df90;
-}
+});

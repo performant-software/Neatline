@@ -175,9 +175,8 @@ class NeatlinePlugin
             $request->getControllerName() == 'editor' &&
             $request->getActionName() == 'index') {
 
-
-              neatline_queueEditorAssets();
               neatline_queueNeatlineAssets();
+              neatline_queueEditorAssets();
 
         }
 

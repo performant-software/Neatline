@@ -44,7 +44,8 @@
 
             // CSS constants.
             css: {
-                top_block_percent: 60
+                top_block_height_percent: 60,
+                undated_items_width_percent: 20
             },
 
             // Hexes.
@@ -57,7 +58,7 @@
         _create: function() {
 
             // Setters.
-            this.neatline = Neatline;
+            this.params = Neatline;
 
             // Getters.
             this._window = $(window);
@@ -76,17 +77,22 @@
             // Update the container dimension trackers.
             this._getContainerDimensions();
 
+            // Get percentages.
+            var topBlockHeightPercentage = this.options.css.top_block_height_percent / 100;
+            var undatedItemsWidthPercentage = this.options.css.undated_items_width_percent / 100;
+
+            var topBlockHeight = parseInt(this.containerHeight * topBlockHeightPercentage);
+            var bottomBlockHeight = this.containerHeight - topBlockHeight;
+            var undatedItemsWidth = parseInt(this.containerWidth * undatedItemsWidthPercentage);
+            var withUndatedItemsWidth = this.containerWidth - undatedItemsWidth;
+
             // ** Position the map. **
 
             // If there is a map.
-            if (this.neatline.is_map == 1) {
+            if (this.params.is_map == 1) {
 
                 // If the map is on top.
-                if (this.neatline.top_element == 'map') {
-
-
-                    var topBlockHeight = this.containerHeight *
-                        (this.options.top_block_percent / 100);
+                if (this.params.top_element == 'map') {
 
                     this.map.css({
                         'top': 0,
@@ -94,12 +100,133 @@
                         'height': topBlockHeight,
                         'display': 'block'
                     });
-                    console.log(this.containerHeight);
 
                 }
 
                 // If the map is on the bottom.
                 else {
+
+                    this.map.css({
+                        'top': 0,
+                        'left': 0,
+                        'height': bottomBlockHeight,
+                        'display': 'block'
+                    });
+
+                }
+
+            }
+
+            // ** Position the timeline. **
+
+            // If there is a timeline.
+            if (this.params.is_timeline == 1) {
+
+                // If the map is on top.
+                if (this.params.top_element == 'map') {
+
+                    this.timeline.css({
+                        'top': topBlockHeight,
+                        'left': 0,
+                        'height': bottomBlockHeight,
+                        'display': 'block'
+                    });
+
+                }
+
+                // If the map is on the bottom.
+                else {
+
+                    this.timeline.css({
+                        'top': 0,
+                        'left': 0,
+                        'height': topBlockHeight,
+                        'display': 'block'
+                    });
+
+                }
+
+            }
+
+            // ** Position the undated items. **
+
+            // If there is an undated items block.
+            if (this.params.is_undated_items == 1) {
+
+                this.undated.css({
+                    'display': 'block',
+                    'width': undatedItemsWidth
+                });
+
+                // If the udi is on the left.
+                if (this.params.undated_items_position == 'left') {
+
+                    this.timeline.css({
+                        'width': withUndatedItemsWidth,
+                        'left': undatedItemsWidth
+                    });
+
+                }
+
+                // If the udi is on the right.
+                else {
+
+                    this.timeline.css({
+                        'width': withUndatedItemsWidth,
+                        'left': 0
+                    });
+
+                }
+
+                // If the udi is full height.
+                if (this.params.undated_items_height == 'full') {
+
+                    this.undated.css({
+                        'height': this.containerHeight
+                    });
+
+                    // If the udi is on the left.
+                    if (this.params.undated_items_position == 'left') {
+
+                        this.map.css({
+                            'width': withUndatedItemsWidth,
+                            'left': undatedItemsWidth
+                        });
+
+                    }
+
+                    // If the udi is on the right.
+                    else {
+
+                        this.map.css({
+                            'width': withUndatedItemsWidth,
+                            'left': 0
+                        });
+
+                    }
+
+                }
+
+                // If the udi is partial height.
+                else {
+
+                    // If the map is on top.
+                    if (this.params.top_element == 'map') {
+
+                        this.undated.css({
+                            'height': bottomBlockHeight
+                        });
+
+                    }
+
+                    // If the map is on the bottom.
+                    else {
+
+                        this.undated.css({
+                            'height': topBlockHeight
+                        });
+
+                    }
 
                 }
 

@@ -71,7 +71,7 @@
             this.itemsListHeader = $('#' + this.options.items_list_header_id);
             this.searchCancel = $('#' + this.options.search_cancel_id);
             this.itemFilterContainer = $('#' + this.options.item_filter_container_id);
-            this.neatline = $('#' + this.options.neatline_id);
+            this.neatlineContainer = $('#' + this.options.neatline_id);
 
             // Tooltips.
             this.dragTip = $('#' + this.options.drag_tooltip_id);
@@ -112,14 +112,20 @@
             // Instantiate the item filter widget.
             this._glossItemFilter();
 
+            // Position the Neatline container.
+            this._positionNeatline();
+
             // Set static CSS parameters for the Neatline.
-            this.neatline.css({
+            this.neatlineContainer.css({
                 'display': 'block',
                 'float': 'right',
                 'top': this.topBarHeight,
                 'position': 'relative',
                 'background': '#f1f1f1'
             });
+
+            // Instantiate the Neatline widget.
+            this.neatlineContainer.neatline();
 
             // Fire starting ajax request.
             this._getItems();
@@ -175,7 +181,7 @@
 
             // Position the Neatline container to the right
             // of the item browser.
-            this.neatline.css({
+            this.neatlineContainer.css({
                 'height': this.windowHeight - this.topBarHeight,
                 'width': this.windowWidth - this.containerWidth - 1,
             });
@@ -541,11 +547,3 @@
 
 
 })( jQuery );
-
-
-// Usage.
-jQuery(document).ready(function($) {
-
-    $('#item-browser').itembrowser();
-
-});
