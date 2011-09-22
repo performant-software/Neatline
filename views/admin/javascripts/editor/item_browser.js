@@ -417,7 +417,7 @@
                 textarea1.remove();
                 textarea2.remove();
 
-			}
+            }
 
             else {
 
