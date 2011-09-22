@@ -131,13 +131,20 @@
             // Position the slider.
             this.bar.css({
                 'right': this.options.bar_right_offset,
-                'height': this.scrollbarHeight
+                'height': this.scrollbarHeight,
+                'display': 'block'
             });
 
             this.highlightRegion.css({
                 'width': this.containerWidth *
                     (this.options.highlight_width_percentage / 100)
             });
+
+            // If the scrollbar is not needed because all of the div
+            // is visible, display:none the bar.
+            if (this.scrollbarHeight == this.slideRegionHeight) {
+                this.bar.css('display', 'none');
+            }
 
             // Scroll the bar down to the right starting position,
             // per the factor tracker.
