@@ -38,8 +38,12 @@
             // Durations and CSS constants.
             item_list_highlight_duration: 10,
             drag_handle_width: 4,
-            drag_tooldragTip_Y_offset: 16,
-            drag_tooldragTip_X_offset: 15,
+            drag_tooltip_Y_offset: 16,
+            drag_tooltip_X_offset: 15,
+            space_tooltip_Y_offset: -38,
+            space_tooltip_X_offset: -19,
+            time_tooltip_Y_offset: -38,
+            time_tooltip_X_offset: -15,
 
             // Hexes.
             colors: {
@@ -95,6 +99,9 @@
             // Add listener to the search box and instantiate the input
             // canceller.
             this._glossSearchBox();
+
+            // Add tooltips to column headers.
+            this._glossColumnHeaders();
 
             // Instantiate the item filter widget.
             this._glossItemFilter();
@@ -163,13 +170,13 @@
                              </div>');
 
             // Construct the space tip.
-            this.spaceTip = $('<div id="space-tip" class="twipsy fade top in">\
+            this.spaceTip = $('<div id="space-tip" class="twipsy fade above in">\
                                  <div class="twipsy-arrow"></div>\
                                  <div class="twipsy-inner">Space</div>\
                               </div>');
 
             // Construct the time tip.
-            this.timeTip = $('<div id="time-tip" class="twipsy fade top in">\
+            this.timeTip = $('<div id="time-tip" class="twipsy fade above in">\
                                  <div class="twipsy-arrow"></div>\
                                  <div class="twipsy-inner">Time</div>\
                              </div>');
@@ -226,8 +233,8 @@
                         // Position and show dragTip.
                         self.dragTip.css({
                             'display': 'block',
-                            'top': offsetY - self.options.drag_tooldragTip_Y_offset,
-                            'left': offsetX + self.options.drag_tooldragTip_X_offset
+                            'top': offsetY - self.options.drag_tooltip_Y_offset,
+                            'left': offsetX + self.options.drag_tooltip_X_offset
                         });
 
                     }
@@ -359,6 +366,64 @@
 
         },
 
+        _glossColumnHeaders: function() {
+
+            var self = this;
+
+            // Gloss the columns.
+            this.spaceHeader = $('div.col-1.col-header span.header');
+            this.timeHeader = $('div.col-2.col-header span.header');
+
+            this.spaceHeader.bind({
+
+                'mouseenter': function(e) {
+
+                    // Get coordinates of the header.
+                    var offset = self.spaceHeader.offset();
+
+                    // Position and show dragTip.
+                    self.spaceTip.css({
+                        'display': 'block',
+                        'top': offset.top + self.options.space_tooltip_Y_offset,
+                        'left': offset.left + self.options.space_tooltip_X_offset
+                    });
+
+                },
+
+                'mouseleave': function() {
+
+                    self.spaceTip.css('display', 'none');
+
+                }
+
+            });
+
+            this.timeHeader.bind({
+
+                'mouseenter': function(e) {
+
+                    // Get coordinates of the header.
+                    var offset = self.timeHeader.offset();
+
+                    // Position and show dragTip.
+                    self.timeTip.css({
+                        'display': 'block',
+                        'top': offset.top + self.options.time_tooltip_Y_offset,
+                        'left': offset.left + self.options.time_tooltip_X_offset
+                    });
+
+                },
+
+                'mouseleave': function() {
+
+                    self.timeTip.css('display', 'none');
+
+                }
+
+            });
+
+        },
+
         _getItems: function() {
 
             var self = this;
@@ -393,10 +458,6 @@
 
             // Get the new items.
             this.items = $('#' + this.options.items_list_container_id + ' .item-row');
-
-            // Gloss the columns.
-            var spaceHeader = $('div.col-1.col-header span.header');
-            var timeHeader = $('div.col-2.col-header span.header');
 
             // Gloss each item.
             $.each(this.items, function(i, item) {

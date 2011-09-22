@@ -443,4 +443,5 @@ table#items td.col-2 {
 
 #drag-tip, #space-tip, #time-tip {
     display: none;
+    z-index: 100001;
 }
