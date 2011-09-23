@@ -84,6 +84,7 @@
                 parseFloat(boundsArray[2]),
                 parseFloat(boundsArray[3])
             );
+
             var options = {
                 controls: [
                   new OpenLayers.Control.PanZoomBar(),

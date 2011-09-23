@@ -59,6 +59,7 @@
 
             // Setters.
             this.params = Neatline;
+            this.params.is_undated_items = 0;
 
             // Getters.
             this._window = $(window);
@@ -151,7 +152,8 @@
 
                 this.timeline.css({
                     'left': 0,
-                    'display': 'block'
+                    'display': 'block',
+                    'width': this.containerWidth
                 });
 
                 // If the map is on top.

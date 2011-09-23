@@ -1,6 +1,10 @@
-/*
- * Component widget that controls the timeline. Instantiated by the parent
- * Neatline widget.
+<?php
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
+
+/**
+ * Undated items markup.
+ *
+ * PHP version 5
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -19,57 +23,12 @@
  * @copyright   2011 The Board and Visitors of the University of Virginia
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache 2 License
  */
+?>
 
-(function($, undefined) {
+<div id="neatline-editor" class="neatline">
 
+    <div id="undated-items-header">
+        <h2>Undated Items</h2>
+    </div>
 
-    $.widget('neatline.neatlinetimeline', {
-
-        options: {
-
-            // Markup hooks.
-            markup: {
-
-            },
-
-            // Animation constants.
-            animation: {
-
-            },
-
-            // CSS constants.
-            css: {
-
-            },
-
-            // Hexes.
-            colors: {
-
-            }
-
-        },
-
-        _create: function() {
-
-            // Getters.
-            this.params = Neatline;
-
-            // Ignition.
-            this._instantiateTimeglider();
-
-        },
-
-        _instantiateTimeglider: function() {
-
-            this.element.timeline({
-                'min_zoom': 5,
-                'max_zoom': 60
-            });
-
-        }
-
-    });
-
-
-})( jQuery );
-
+</div>

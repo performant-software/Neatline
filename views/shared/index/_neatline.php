@@ -28,8 +28,12 @@
 <div id="neatline-editor" class="neatline">
 
     <div id="map" class="neatline-block"></div>
+
     <div id="timeline" class="neatline-block"></div>
-    <div id="undated" class="neatline-block"></div>
+
+    <div id="undated" class="neatline-block">
+        <?php echo $this->partial('index/_undated_items.php'); ?>
+    </div>
 
 </div>
 

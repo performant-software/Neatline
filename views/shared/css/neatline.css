@@ -31,12 +31,17 @@
     position: absolute;
 }
 
-/* TESTING COLORS */
 
-#timeline {
-    background: #d2d2d2;
+/* Undated Items */
+
+#undated-items-header {
+    background-color: whiteSmoke;
+    border-bottom: 1px solid #ddd;
+    white-space: nowrap;
 }
 
-#undated {
-    background: #c6c6c6;
+#undated-items-header h2 {
+    font-family: 'Crimson Text';
+    color: #4f4954;
+    margin: 9px 0 0 12px;
 }
