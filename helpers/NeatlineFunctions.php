@@ -88,6 +88,7 @@ function neatline_queueEditorAssets()
 
     ?>
     <link href='http://fonts.googleapis.com/css?family=Crimson+Text:400,400italic,600,600italic,700,700italic' rel='stylesheet' type='text/css'>
+    <script type="text/javascript" src="http://openlayers.org/api/OpenLayers.js"></script>
     <?php
 
 }
@@ -101,7 +102,11 @@ function neatline_queueNeatlineAssets()
 {
 
     queue_css('neatline');
+
     queue_js('neatline', 'javascripts');
+    queue_js('neatline_map', 'javascripts');
+    queue_js('neatline_timeline', 'javascripts');
+    queue_js('neatline_undateditems', 'javascripts');
 
 
 }

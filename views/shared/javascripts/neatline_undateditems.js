@@ -23,7 +23,7 @@
 (function($, undefined) {
 
 
-    $.widget('neatline.neatlineudnateditems', {
+    $.widget('neatline.neatlineundateditems', {
 
         options: {
 

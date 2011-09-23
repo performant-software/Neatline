@@ -54,7 +54,12 @@ class Neatline_EditorController extends Omeka_Controller_Action
 
         // Push the neatline into the view.
         $id = $this->_request->getParam('id');
-        $this->view->neatline = $this->_neatlinesTable->find($id);
+        $neatline = $this->_neatlinesTable->find($id);
+        $this->view->neatline = $neatline;
+
+        // Push the map and timeline records into the view.
+        $this->view->map = new GeoserverMap_Map($neatline->getMap());
+        $this->view->timeline = $neatline->getTimeline();
 
         $collections = $this->getTable('Collection')->findAll();
         $tags = $this->getTable('Tag')->findAll();

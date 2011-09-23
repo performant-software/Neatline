@@ -52,8 +52,73 @@
         _create: function() {
 
             // Getters.
-            this._window = $(window);
-            this._body = $('body');
+            this.params = Neatline;
+
+            // Ignition.
+            this._instantiateOpenLayers();
+
+        },
+
+        _instantiateOpenLayers: function() {
+
+            OpenLayers.IMAGE_RELOAD_ATTEMTPS = 3;
+            OpenLayers.Util.onImageLoadErrorColor = "transparent";
+            OpenLayers.ImgPath = 'http://js.mapbox.com/theme/dark/';
+
+            var tiled;
+            var pureCoverage = true;
+            // pink tile avoidance
+            OpenLayers.IMAGE_RELOAD_ATTEMPTS = 5;
+            // make OL compute scale according to WMS spec
+            OpenLayers.DOTS_PER_INCH = 25.4 / 0.28;
+
+            format = 'image/png';
+            if(pureCoverage) {
+                format = "image/png8";
+            }
+
+            var boundsArray = this.params.map.boundingBox.split(',');
+            var bounds = new OpenLayers.Bounds(
+                parseFloat(boundsArray[0]),
+                parseFloat(boundsArray[1]),
+                parseFloat(boundsArray[2]),
+                parseFloat(boundsArray[3])
+            );
+            var options = {
+                controls: [
+                  new OpenLayers.Control.PanZoomBar(),
+                  new OpenLayers.Control.Permalink('permalink'),
+                  new OpenLayers.Control.MousePosition(),
+                  new OpenLayers.Control.LayerSwitcher({'ascending': false}),
+                  new OpenLayers.Control.Navigation(),
+                  new OpenLayers.Control.ScaleLine(),
+                ],
+                maxExtent: bounds,
+                maxResolution: 64.70332499999859,
+                projection: this.params.map.epsg[0],
+                units: 'm'
+            };
+
+            this.map = new OpenLayers.Map('map', options);
+
+            tiled = new OpenLayers.Layer.WMS(
+                this.params.name, this.params.map.wmsAddress,
+                {
+                    LAYERS: this.params.map.layers,
+                    STYLES: '',
+                    format: 'image/jpeg',
+                    tiled: !pureCoverage,
+                    tilesOrigin : this.map.maxExtent.left + ',' + this.map.maxExtent.bottom
+                },
+                {
+                    buffer: 0,
+                    displayOutsideMaxExtent: true,
+                    isBaseLayer: true
+                }
+            );
+
+            this.map.addLayers([tiled]);
+            this.map.zoomToExtent(bounds);
 
         }
 

@@ -39,7 +39,9 @@
 )); ?>
 
 <?php echo $this->partial('index/_neatline.php', array(
-    'neatline' => $neatline
+    'neatline' => $neatline,
+    'map' => $map,
+    'timeline' => $timeline
 )); ?>
 
 <?php echo $this->partial('editor/_tooltips.php'); ?>
