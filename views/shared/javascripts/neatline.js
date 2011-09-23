@@ -124,7 +124,8 @@
                 if (this.params.is_timeline == 0) {
 
                     this.map.css({
-                        'height': this.containerHeight
+                        'height': this.containerHeight,
+                        'top': 0
                     });
 
                 }
@@ -161,12 +162,23 @@
 
                 }
 
+                // If the map is absent, and the timeline
+                // should be full-height.
+                if (this.params.is_map == 0) {
+
+                    this.timeline.css({
+                        'height': this.containerHeight,
+                        'top': 0
+                    });
+
+                }
+
             }
 
             // ** Position the undated items. **
 
             // If there is an undated items block.
-            if (this.params.is_undated_items == 1) {
+            if (this.params.is_undated_items == 1 && this.params.is_timeline == 1) {
 
                 this.undated.css({
                     'display': 'block',
@@ -244,6 +256,18 @@
 
                         this.undated.css({
                             'height': topBlockHeight
+                        });
+
+                    }
+
+                    // If the udi is set to partial height,
+                    // but there is no map element, set to full
+                    // height.
+                    if (this.params.is_map == 0) {
+
+                        this.undated.css({
+                            'height': this.containerHeight,
+                            'top': 0
                         });
 
                     }
