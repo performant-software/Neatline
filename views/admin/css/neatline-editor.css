@@ -129,6 +129,16 @@
     font-size: 12px;
     color: #515151;
     cursor: pointer;
+    background-color: #fffef5;
+    /* background-repeat: repeat-x;*/
+    /* background-image: -khtml-gradient(linear, left top, left bottom, from(#fffcf5), to(#fdf9f0));*/
+    /* background-image: -moz-linear-gradient(top, #fffcf5, #fdf9f0);*/
+    /* background-image: -ms-linear-gradient(top, #fffcf5, #fdf9f0);*/
+    /* background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fffcf5), color-stop(100%, #fdf9f0));*/
+    /* background-image: -webkit-linear-gradient(top, #fffcf5, #fdf9f0);*/
+    /* background-image: -o-linear-gradient(top, #fffcf5, #fdf9f0);*/
+    /* background-image: linear-gradient(top, #fffcf5, #fdf9f0);*/
+    /* filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fffcf5', endColorstr='#fdf9f0', GradientType=0);*/
 }
 
 #items-list-container td.item-title {
@@ -138,15 +148,16 @@
 }
 
 #items-list-container tr.highlight {
-    background-repeat: repeat-x;
-    background-image: -khtml-gradient(linear, left top, left bottom, from(#f6f7ff), to(#f2f4ff));
-    background-image: -moz-linear-gradient(top, #f6f7ff, #f2f4ff);
-    background-image: -ms-linear-gradient(top, #f6f7ff, #f2f4ff);
-    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #f6f7ff), color-stop(100%, #f2f4ff));
-    background-image: -webkit-linear-gradient(top, #f6f7ff, #f2f4ff);
-    background-image: -o-linear-gradient(top, #f6f7ff, #f2f4ff);
-    background-image: linear-gradient(top, #f6f7ff, #f2f4ff);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f6f7ff', endColorstr='#f2f4ff', GradientType=0);
+    background-color: #f3f6ff;
+    /* background-repeat: repeat-x;*/
+    /* background-image: -khtml-gradient(linear, left top, left bottom, from(#f6f7ff), to(#f2f4ff));*/
+    /* background-image: -moz-linear-gradient(top, #f6f7ff, #f2f4ff);*/
+    /* background-image: -ms-linear-gradient(top, #f6f7ff, #f2f4ff);*/
+    /* background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #f6f7ff), color-stop(100%, #f2f4ff));*/
+    /* background-image: -webkit-linear-gradient(top, #f6f7ff, #f2f4ff);*/
+    /* background-image: -o-linear-gradient(top, #f6f7ff, #f2f4ff);*/
+    /* background-image: linear-gradient(top, #f6f7ff, #f2f4ff);*/
+    /* filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f6f7ff', endColorstr='#f2f4ff', GradientType=0);*/
 }
 
 #items-list-header {
@@ -409,15 +420,16 @@ table#items td.col-row {
 }
 
 table#items td.col-1:hover, table#items td.col-2:hover {
-    background-repeat: repeat-x;
-    background-image: -khtml-gradient(linear, left top, left bottom, from(#e6d7ee), to(#d5c3df));
-    background-image: -moz-linear-gradient(top, #e6d7ee, #d5c3df);
-    background-image: -ms-linear-gradient(top, #e6d7ee, #d5c3df);
-    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #e6d7ee), color-stop(100%, #d5c3df));
-    background-image: -webkit-linear-gradient(top, #e6d7ee, #d5c3df);
-    background-image: -o-linear-gradient(top, #e6d7ee, #d5c3df);
-    background-image: linear-gradient(top, #e6d7ee, #d5c3df);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#e6d7ee', endColorstr='#d5c3df', GradientType=0); 
+    background-color: #e6d7ee;
+    /* background-repeat: repeat-x;*/
+    /* background-image: -khtml-gradient(linear, left top, left bottom, from(#e6d7ee), to(#d5c3df));*/
+    /* background-image: -moz-linear-gradient(top, #e6d7ee, #d5c3df);*/
+    /* background-image: -ms-linear-gradient(top, #e6d7ee, #d5c3df);*/
+    /* background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #e6d7ee), color-stop(100%, #d5c3df));*/
+    /* background-image: -webkit-linear-gradient(top, #e6d7ee, #d5c3df);*/
+    /* background-image: -o-linear-gradient(top, #e6d7ee, #d5c3df);*/
+    /* background-image: linear-gradient(top, #e6d7ee, #d5c3df);*/
+    /* filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#e6d7ee', endColorstr='#d5c3df', GradientType=0); */
 }
 
 table#items td.col-1 {
