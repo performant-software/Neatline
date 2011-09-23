@@ -235,18 +235,23 @@
             var height = (this.totalHeight > maxHeight) ? maxHeight :
                 this.totalHeight;
 
-            // Show and animate.
+            // Show.
             this.element.css({
                 'display': 'block',
                 'height': 0
-            }).stop().animate({
+            });
+
+            // Animate.
+            this.element.stop().animate({
                 'height': height
             }, this.options.fade_duration, function() {
+
                 // Add the scrollbar.
                 if (self.totalHeight > maxHeight) {
                     self._addScrollbar();
                     self.element.smallscroll('positionBar');
                 }
+
             });
 
         },

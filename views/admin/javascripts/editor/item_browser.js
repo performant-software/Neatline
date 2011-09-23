@@ -126,7 +126,6 @@
 
             // Fire starting ajax request.
             this._firstRequest = true;
-            this._getItems();
 
         },
 
