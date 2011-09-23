@@ -142,7 +142,7 @@
 
             // If the scrollbar is not needed because all of the div
             // is visible, display:none the bar.
-            if (this.scrollbarHeight == this.slideRegionHeight) {
+            if (this.scrollbarHeight >= this.slideRegionHeight) {
                 this.bar.css('display', 'none');
             }
 
@@ -214,7 +214,7 @@
                     // Calculate the new offsets.
                     var positionY = e.pageY
                     var offsetY = positionY - startingY;
-                    var newOffsetY = parseInt(startingOffsetY) + parseInt(offsetY);
+                    var newOffsetY = Math.round(startingOffsetY + offsetY);
                     var lastOffsetY = (this.slideRegionHeight - this.scrollbarHeight) * lastOffsetFactor;
 
                     // If the bar can slide up or down on the track, do the change.

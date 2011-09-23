@@ -59,6 +59,7 @@
 
             // Setters.
             this.params = Neatline;
+            this.params.is_map = 0;
 
             // Getters.
             this._window = $(window);
@@ -114,6 +115,16 @@
                     this.map.css({
                         'top': topBlockHeight,
                         'height': bottomBlockHeight,
+                    });
+
+                }
+
+                // If the timeline is absent, and the map
+                // should be full-height.
+                if (this.params.is_timeline == 0) {
+
+                    this.map.css({
+                        'height': this.containerHeight
                     });
 
                 }
