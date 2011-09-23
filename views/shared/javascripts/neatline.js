@@ -300,6 +300,19 @@
         _instantiateBlocks: function() {
 
             // Map.
+            if (this.params.is_map) {
+                this.map.neatlinemap();
+            }
+
+            // Timeline.
+            if (this.params.is_timeline) {
+                this.map.neatlinetimeline();
+            }
+
+            // Undated items.
+            if (this.params.is_undated_items) {
+                this.map.neatlineundateditems();
+            }
 
         }
 
