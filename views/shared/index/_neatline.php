@@ -36,9 +36,7 @@
 <script type="text/javascript">
 
     var Neatline = <?php echo json_encode($neatline); ?>;
-    Neatline.timeline = <?php echo json_encode($timeline); ?>;
-    Neatline.map = <?php echo json_encode($map); ?>;
-
-    console.log(Neatline);
+        Neatline.timeline = <?php echo json_encode($timeline); ?>;
+        Neatline.map = <?php echo json_encode($map); ?>;
 
 </script>

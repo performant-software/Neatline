@@ -306,12 +306,12 @@
 
             // Timeline.
             if (this.params.is_timeline) {
-                this.map.neatlinetimeline();
+                this.timeline.neatlinetimeline();
             }
 
             // Undated items.
             if (this.params.is_undated_items) {
-                this.map.neatlineundateditems();
+                this.undated.neatlineundateditems();
             }
 
         }

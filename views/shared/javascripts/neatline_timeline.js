@@ -52,8 +52,16 @@
         _create: function() {
 
             // Getters.
-            this._window = $(window);
-            this._body = $('body');
+            this.params = Neatline;
+
+            // Ignition.
+            this._instantiateTimeglider();
+
+        },
+
+        _instantiateTimeglider: function() {
+
+            this.element.timeline();
 
         }
 

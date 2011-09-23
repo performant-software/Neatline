@@ -86,11 +86,6 @@ function neatline_queueEditorAssets()
     queue_js('editor/small_scroll', 'javascripts');
     queue_js('editor/_deployment', 'javascripts');
 
-    ?>
-    <link href='http://fonts.googleapis.com/css?family=Crimson+Text:400,400italic,600,600italic,700,700italic' rel='stylesheet' type='text/css'>
-    <script type="text/javascript" src="http://openlayers.org/api/OpenLayers.js"></script>
-    <?php
-
 }
 
 /**
@@ -101,13 +96,43 @@ function neatline_queueEditorAssets()
 function neatline_queueNeatlineAssets()
 {
 
+    // Core Neatline stylesheet.
     queue_css('neatline');
 
+    // The Neatline JavaScript application.
     queue_js('neatline', 'javascripts');
     queue_js('neatline_map', 'javascripts');
     queue_js('neatline_timeline', 'javascripts');
     queue_js('neatline_undateditems', 'javascripts');
 
+    // Timeglider JavaScript assets.
+    queue_js('timeglider/js/jquery-ui-1.8.9.custom.min');
+    queue_js('timeglider/js/jquery.tmpl');
+    queue_js('timeglider/js/underscore-min');
+    queue_js('timeglider/js/backbone-min');
+    queue_js('timeglider/js/ba-debug.min');
+    queue_js('timeglider/js/jquery.mousewheel.min');
+    queue_js('timeglider/js/raphael-min');
+    queue_js('timeglider/js/jquery.global');
+    queue_js('timeglider/js/ba-tinyPubSub');
+    queue_js('timeglider/js/timeglider/TG_Date');
+    queue_js('timeglider/js/timeglider/TG_Org');
+    queue_js('timeglider/js/timeglider/TG_Timeline');
+    queue_js('timeglider/js/timeglider/TG_TimelineView');
+    queue_js('timeglider/js/timeglider/TG_Mediator');
+    queue_js('timeglider/js/timeglider/timeglider.timeline.widget');
+
+    // Timeglider CSS.
+    queue_css('timeglider');
+    queue_css('timeglider_overrides');
+    queue_css('timeglider_neatline_changes');
+    queue_css('jquery-ui');
+
+    // Crimson Text and OpenLayers.
+    ?>
+    <link href='http://fonts.googleapis.com/css?family=Crimson+Text:400,400italic,600,600italic,700,700italic' rel='stylesheet' type='text/css'>
+    <script type="text/javascript" src="http://openlayers.org/api/OpenLayers.js"></script>
+    <?php
 
 }
 
