@@ -220,6 +220,17 @@
             var maxHeight = windowHeight - this.topOffset -
                 this.options.bottom_padding;
 
+            // Calculate height and bottom border.
+            if (this.totalHeight > maxHeight) {
+                var height = maxHeight;
+                this.element.css('border-bottom', '1px solid #D2D2D2');
+            }
+
+            else {
+                var height = this.totalHeight;
+                this.element.css('border-bottom', 'none');
+            }
+
             // Set the height based on the amount of space available.
             var height = (this.totalHeight > maxHeight) ? maxHeight :
                 this.totalHeight;

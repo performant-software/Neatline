@@ -59,7 +59,6 @@
 
             // Setters.
             this.params = Neatline;
-            this.params.is_map = 0;
 
             // Getters.
             this._window = $(window);
@@ -71,6 +70,9 @@
             // Position the divs.
             this.positionDivs();
 
+            // Startup for the component widgets.
+            this._instantiateBlocks();
+
         },
 
         positionDivs: function() {
@@ -79,14 +81,24 @@
             this._getContainerDimensions();
 
             // Get percentages.
-            var topBlockHeightPercentage = this.options.css.top_block_height_percent / 100;
-            var undatedItemsWidthPercentage = this.options.css.undated_items_width_percent / 100;
+            var topBlockHeightPercentage =
+                this.options.css.top_block_height_percent / 100;
+
+            var undatedItemsWidthPercentage =
+                this.options.css.undated_items_width_percent / 100;
 
             // Get pixel constants.
-            var topBlockHeight = Math.round(this.containerHeight * topBlockHeightPercentage);
-            var bottomBlockHeight = this.containerHeight - topBlockHeight;
-            var undatedItemsWidth = Math.round(this.containerWidth * undatedItemsWidthPercentage);
-            var withUndatedItemsWidth = this.containerWidth - undatedItemsWidth;
+            var topBlockHeight =
+                Math.round(this.containerHeight * topBlockHeightPercentage);
+
+            var bottomBlockHeight =
+                this.containerHeight - topBlockHeight;
+
+            var undatedItemsWidth =
+                Math.round(this.containerWidth * undatedItemsWidthPercentage);
+
+            var withUndatedItemsWidth =
+                this.containerWidth - undatedItemsWidth;
 
             // ** Position the map. **
 
@@ -282,6 +294,12 @@
 
             this.containerWidth = this.element.width();
             this.containerHeight = this.element.height();
+
+        },
+
+        _instantiateBlocks: function() {
+
+            // Map.
 
         }
 

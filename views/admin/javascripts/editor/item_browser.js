@@ -93,6 +93,9 @@
             // Get the os scrollbar width.
             this.__getScrollBarWidth();
 
+            // Set the starting width of the container.
+            this.element.css('width', this.options.starting_item_list_width);
+
             // Position the container, add window resize listener.
             this._positionDivs();
             this._addWindowResizeListener();
@@ -122,6 +125,7 @@
             });
 
             // Fire starting ajax request.
+            this._firstRequest = true;
             this._getItems();
 
         },
@@ -155,7 +159,7 @@
 
             // Set the height of the main container.
             this.element.css({
-                'width': this.options.starting_item_list_width,
+                'width': this.containerWidth,
                 'height': this.windowHeight - this.topBarHeight - 1,
                 'top': this.topBarHeight
             });
@@ -460,7 +464,10 @@
                     self._glossItems();
 
                     // Trigger neatlineready event.
-                    self._trigger('neatlineready');
+                    if (self._firstRequest) {
+                        self._trigger('neatlineready');
+                        self._firstRequest = false;
+                    }
 
                 }
 

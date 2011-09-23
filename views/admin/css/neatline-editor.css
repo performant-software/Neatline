@@ -51,7 +51,7 @@
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 10px;
     font-weight: 13px;
-    font-size: 1.1em;
+    font-size: 1em;
     line-height: 1;
     padding: 3px 20px 3px 5px;
     margin: 8px 10px 0 18px;
@@ -228,7 +228,6 @@ div#filter-items {
     z-index: 999;
     overflow: hidden;
     display: none;
-    border-bottom: 1px solid #d2d2d2;
 }
 
 div#filter-items div.buttons {
@@ -343,6 +342,11 @@ recordid {
 span.header {
     font-weight: bold;
     font-size: 0.8em;
+}
+
+div.columns {
+    float: right;
+    display: inline-block;
 }
 
 div.columns div.col-cell {
