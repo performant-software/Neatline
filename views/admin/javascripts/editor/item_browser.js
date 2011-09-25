@@ -41,6 +41,7 @@
             item_title_text_class: 'item-title-text',
             item_title_fader_class: 'item-title-fader',
             item_title_cell_class: 'item-title',
+            edit_form_class: 'neatline-edit-record-form',
 
             // Durations and CSS constants.
             item_list_highlight_duration: 10,
@@ -497,33 +498,54 @@
 
                 // DOM fetch the item and the edit form td.
                 var item = $(item);
-                var editForm = item.next().find('td');
+                var editFormTd = item.next().find('td');
+                var editForm = editFormTd.find('form');
 
                 // Get the spans for the text and fader.
                 var textSpan = item.find('.' + self.options.item_title_text_class);
                 var faderSpan = item.find('.' + self.options.item_title_fader_class);
 
-                console.log(editForm);
-
                 item.bind({
 
                     'mousedown': function() {
 
+                        // Calculate the native height of the form.
+                        var cloneFormTd = editFormTd
+                            .clone()
+                            .css({
+                                'top': -1000,
+                                'left': -1000,
+                                'display': 'table-cell'
+                            })
+                            .appendTo(self._body);
+
+                        var cloneForm = cloneFormTd.find('form');
+                        var actionsDiv = cloneFormTd.find('div.actions');
+                        cloneForm.css({
+                            'height': 'auto',
+                            'width': self.containerWidth
+                        });
+
+                        // Register the height of the cloned form,
+                        // delete it.
+                        var formHeight = cloneForm.height();
+                        cloneFormTd.remove();
+
                         // Highlight the item title.
                         textSpan.animate({
                             'color': self.options.item_name_highlight_color,
-                            'font-size': 16,
+                            'font-size': 14,
                             'font-weight': 'bold'
                         }, 100);
 
                         // Display the form.
-                        editForm.css({
+                        editFormTd.css({
                             'display': 'table-cell'
                         });
 
                         // Animate up the height.
                         editForm.animate({
-                            'height': 700
+                            'height': formHeight
                         }, 300);
 
                     }

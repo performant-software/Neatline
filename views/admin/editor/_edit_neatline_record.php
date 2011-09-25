@@ -27,7 +27,7 @@
 
 <div class="neatline-record-edit-form">
 
-    <form>
+    <form class="form-stacked">
 
         <fieldset>
 
@@ -48,17 +48,29 @@
             </div>
 
             <div class="clearfix">
-                <label>Date range</label>
+                <label>Start Date</label>
                 <div class="input">
                     <div class="inline-inputs">
-                        <input class="small" type="text" value="April 26, 1564">
+                        <input class="medium" type="text" value="October 9, 1547">
                         <input class="mini" type="text" value="12:00am">
-                        to
-                        <input class="small" type="text" value="April 23, 1616">
-                        <input class="mini" type="text" value="11:59pm">
-                        <span class="help-inline">Enter the dates for the item on the timeline. If the item represents a span of time, specifiy the start and end date; if it represents a single point on the timeline, just enter a start date and leave the end date blank.</span>
+                        <span class="help-inline">Enter the date of the item, or its starting date if it occupies a time interval.</span>
                     </div>
                 </div>
+            </div>
+
+            <div class="clearfix">
+                <label>End Date</label>
+                <div class="input">
+                    <div class="inline-inputs">
+                        <input class="medium" type="text" value="April 23, 1616">
+                        <input class="mini" type="text" value="12:00am">
+                        <span class="help-inline">Enter the ending date. Leave blank if the item does not occupy a time interval.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="actions">
+                <input type="submit" class="btn primary" value="Submit">&nbsp;<button type="reset" class="btn">Cancel</button>
             </div>
 
         </fieldset>
