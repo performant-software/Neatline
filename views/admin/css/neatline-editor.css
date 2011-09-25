@@ -154,7 +154,7 @@
     overflow: hidden;
 }
 
-#items-list-container tr:hover {
+#items-list-container tr.item-row:hover {
     background-color: #f3f6ff;
     /* background-repeat: repeat-x;*/
     /* background-image: -khtml-gradient(linear, left top, left bottom, from(#f6f7ff), to(#f2f4ff));*/
@@ -225,6 +225,10 @@ span.item-title-text {
 
 
 /* Edit form */
+
+tr.edit-form {
+    background-color: #faf8fc;
+}
 
 tr.edit-form td {
     padding: 0;

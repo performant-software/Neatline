@@ -57,6 +57,7 @@
             item_title_fader_width: 40,
             item_name_default_color: '#515151',
             item_name_highlight_color: '#382642',
+            item_name_default_size: 12,
 
             // Hexes.
             colors: {
@@ -498,61 +499,111 @@
 
                 // DOM fetch the item and the edit form td.
                 var item = $(item);
-                var editFormTd = item.next().find('td');
-                var editForm = editFormTd.find('form');
 
-                // Get the spans for the text and fader.
-                var textSpan = item.find('.' + self.options.item_title_text_class);
-                var faderSpan = item.find('.' + self.options.item_title_fader_class);
+                // Set the starting expanded tracker.
+                $.data(item, 'expanded', false);
 
                 item.bind({
 
                     'mousedown': function() {
 
-                        // Calculate the native height of the form.
-                        var cloneFormTd = editFormTd
-                            .clone()
-                            .css({
-                                'top': -1000,
-                                'left': -1000,
-                                'display': 'table-cell'
-                            })
-                            .appendTo(self._body);
+                        // If the form is not expanded, do expand.
+                        if (!$.data(item, 'expanded')) {
+                            self._showForm(item);
+                        }
 
-                        var cloneForm = cloneFormTd.find('form');
-                        var actionsDiv = cloneFormTd.find('div.actions');
-                        cloneForm.css({
-                            'height': 'auto',
-                            'width': self.containerWidth
-                        });
-
-                        // Register the height of the cloned form,
-                        // delete it.
-                        var formHeight = cloneForm.height();
-                        cloneFormTd.remove();
-
-                        // Highlight the item title.
-                        textSpan.animate({
-                            'color': self.options.item_name_highlight_color,
-                            'font-size': 14,
-                            'font-weight': 'bold'
-                        }, 100);
-
-                        // Display the form.
-                        editFormTd.css({
-                            'display': 'table-cell'
-                        });
-
-                        // Animate up the height.
-                        editForm.animate({
-                            'height': formHeight
-                        }, 300);
+                        // If the form is expanded, hide.
+                        else {
+                            self._hideForm(item);
+                        }
 
                     }
 
                 });
 
             });
+
+        },
+
+        _showForm: function(item) {
+
+            // Get child markup.
+            var editFormTd = item.next().find('td');
+            var editForm = editFormTd.find('form');
+            var textSpan = item.find('.' + this.options.item_title_text_class);
+            var faderSpan = item.find('.' + this.options.item_title_fader_class);
+
+            // Calculate the native height of the form.
+            var cloneFormTd = editFormTd
+                .clone()
+                .css({
+                    'top': -1000,
+                    'left': -1000,
+                    'display': 'table-cell'
+                })
+                .appendTo(this._body);
+
+            var cloneForm = cloneFormTd.find('form');
+            var actionsDiv = cloneFormTd.find('div.actions');
+            cloneForm.css({
+                'height': 'auto',
+                'width': this.containerWidth
+            });
+
+            // Register the height of the cloned form,
+            // delete it.
+            var formHeight = cloneForm.height();
+            cloneFormTd.remove();
+
+            // Highlight the item title.
+            textSpan.animate({
+                'color': this.options.item_name_highlight_color,
+                'font-size': 14,
+                'font-weight': 'bold'
+            }, 100);
+
+            // Display the form.
+            editFormTd.css({
+                'display': 'table-cell'
+            });
+
+            // Animate up the height.
+            editForm.animate({
+                'height': formHeight
+            }, 300);
+
+            // Change the data record.
+            $.data(item, 'expanded', true);
+
+        },
+
+        _hideForm: function(item) {
+
+            // Get child markup.
+            var editFormTd = item.next().find('td');
+            var editForm = editFormTd.find('form');
+            var textSpan = item.find('.' + this.options.item_title_text_class);
+            var faderSpan = item.find('.' + this.options.item_title_fader_class);
+
+            // Highlight the item title.
+            textSpan.animate({
+                'color': this.options.item_name_default_color,
+                'font-size': this.options.item_name_default_size + 'px',
+                'font-weight': 'normal'
+            }, 100);
+
+            // Animate up the height.
+            editForm.animate({
+                'height': 0
+            }, 300, function() {
+                // Hide the form.
+                editFormTd.css({
+                    'display': 'none'
+                });
+            });
+
+            // Change the data record.
+            $.data(item, 'expanded', false);
 
         },
 
