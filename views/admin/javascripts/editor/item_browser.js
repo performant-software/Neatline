@@ -56,7 +56,8 @@
             time_tooltip_X_offset: -15,
             item_title_fader_width: 40,
             item_name_default_color: '#515151',
-            item_name_highlight_color: '#382642',
+            item_name_highlight_color: '#303030',
+            item_row_highlight_background_color: '#f3f3f3',
             item_name_default_size: 12,
 
             // Hexes.
@@ -504,14 +505,14 @@
                 var item = $(item);
 
                 // Set the starting expanded tracker.
-                $.data(item, 'expanded', false);
+                item.data('expanded', false);
 
                 item.bind({
 
                     'mousedown': function() {
 
                         // If the form is not expanded, do expand.
-                        if (!$.data(item, 'expanded')) {
+                        if (!item.data('expanded')) {
                             self._showForm(item);
                         }
 
@@ -529,6 +530,8 @@
         },
 
         _showForm: function(item) {
+
+            var self = this;
 
             // Get child markup.
             var editFormTd = item.next().find('td');
@@ -576,7 +579,7 @@
             }, 300);
 
             // Change the data record.
-            $.data(item, 'expanded', true);
+            item.data('expanded', true);
 
         },
 
@@ -606,7 +609,7 @@
             });
 
             // Change the data record.
-            $.data(item, 'expanded', false);
+            item.data('expanded', false);
 
         },
 
@@ -618,7 +621,7 @@
 
                 var item = $(item);
 
-                if ($.data(item, 'expanded')) {
+                if (item.data('expanded')) {
 
                     // Get child markup.
                     var editFormTd = item.next().find('td');
