@@ -38,6 +38,10 @@
             <td class="col-2 col-row"><img src="<?php echo img('bullet_purple.png'); ?>" /></td>
         </tr>
 
+        <tr class="edit-form">
+            <td colspan="3"></td>
+        </tr>
+
     <?php endforeach; ?>
 
 </table>

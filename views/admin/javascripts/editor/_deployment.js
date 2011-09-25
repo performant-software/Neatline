@@ -23,7 +23,7 @@ jQuery(document).ready(function($) {
 
     var neatlineContainer = $('#neatline-editor');
 
-    $('#item-browser').itembrowser({
+    $('#item-browser').itemeditor({
 
         'neatlineready': function() {
             neatlineContainer.neatline();

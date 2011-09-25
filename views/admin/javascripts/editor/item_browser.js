@@ -1,5 +1,5 @@
 /*
- * Item browser widget in the Neatline editor.
+ * Item browser and editor widget in the Neatline editor.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -22,7 +22,7 @@
 (function($, undefined) {
 
 
-    $.widget('neatline.itembrowser', {
+    $.widget('neatline.itemeditor', {
 
         options: {
 
@@ -308,33 +308,21 @@
                     var offsetX = e.pageX - startingX;
                     var newWidth = startingContainerWidth + offsetX;
 
-                    if (newWidth >= self.options.item_list_min_width) {
-
-                        // Resize the container and header.
-                        self.element.css('width', newWidth);
-                        self.itemsListHeader.css('width', newWidth - self.scrollbarWidth);
-
-                        // Reposition the dragger.
-                        self.dragHandle.css('left', newWidth);
-
-                        // Update the container width tracker.
-                        self.containerWidth = newWidth;
-
+                    // If the cursor position position squeezes the width beyond
+                    // the min-width.
+                    if (newWidth <= self.options.item_list_min_width) {
+                        newWidth = self.options.item_list_min_width;
                     }
 
-                    else {
+                    // Resize the container and header.
+                    self.element.css('width', newWidth);
+                    self.itemsListHeader.css('width', newWidth - self.scrollbarWidth);
 
-                        // Resize the container and header.
-                        self.element.css('width', self.options.item_list_min_width);
-                        self.itemsListHeader.css('width', self.options.item_list_min_width - self.scrollbarWidth);
+                    // Reposition the dragger.
+                    self.dragHandle.css('left', newWidth);
 
-                        // Reposition the dragger.
-                        self.dragHandle.css('left', self.options.item_list_min_width);
-
-                        // Update the container width tracker.
-                        self.containerWidth = self.options.item_list_min_width;
-
-                    }
+                    // Update the container width tracker.
+                    self.containerWidth = newWidth;
 
                     // Reposition the Neatline container.
                     self._positionNeatline();
