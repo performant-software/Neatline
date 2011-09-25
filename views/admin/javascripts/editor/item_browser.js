@@ -38,6 +38,9 @@
             drag_tooltip_id: 'drag-tip',
             space_tooltip_id: 'space-tip',
             time_tooltip_id: 'time-tip',
+            item_title_text_class: 'item-title-text',
+            item_title_fader_class: 'item-title-fader',
+            item_title_cell_class: 'item-title',
 
             // Durations and CSS constants.
             item_list_highlight_duration: 10,
@@ -50,6 +53,7 @@
             space_tooltip_X_offset: -19,
             time_tooltip_Y_offset: -38,
             time_tooltip_X_offset: -15,
+            item_title_fader_width: 40,
 
             // Hexes.
             colors: {
@@ -481,20 +485,30 @@
             // Get the new items.
             this.items = $('#' + this.options.items_list_container_id + ' .item-row');
 
-            // Gloss each item.
+            // Position the faders.
+            this._positionTitleFaders();
+
+        },
+
+        _positionTitleFaders: function() {
+
+            var self = this;
+
             $.each(this.items, function(i, item) {
 
                 var item = $(item);
-                item.bind({
 
-                    'mouseenter': function() {
-                        item.addClass('highlight');
-                    },
+                // Get the spans for the text and fader.
+                var textSpan = item.find('.' + self.options.item_title_text_class);
+                var faderSpan = item.find('.' + self.options.item_title_fader_class);
 
-                    'mouseleave': function() {
-                        item.removeClass('highlight');
-                    }
+                // Measure the height of the block produced by the text
+                // and the width of the entire row.
+                var titleHeight = textSpan.height();
 
+                // Position the fader.
+                faderSpan.css({
+                    'height': titleHeight
                 });
 
             });

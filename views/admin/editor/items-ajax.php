@@ -31,7 +31,8 @@
 
         <tr class="item-row">
             <td class="item-title">
-                <?php echo item('Dublin Core', 'Title', null, $item); ?>
+                <span class="item-title-text"><?php echo item('Dublin Core', 'Title', null, $item); ?></span>
+                <span class="item-title-fader"></span>
             </td>
             <td class="col-1 col-row"><img src="<?php echo img('bullet_purple.png'); ?>" /></td>
             <td class="col-2 col-row"><img src="<?php echo img('bullet_purple.png'); ?>" /></td>

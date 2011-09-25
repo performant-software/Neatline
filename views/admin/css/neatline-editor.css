@@ -149,11 +149,12 @@
 
 #items-list-container td.item-title {
     padding-left: 20px;
+    padding-right: 0;
     white-space: nowrap;
     overflow: hidden;
 }
 
-#items-list-container tr.highlight {
+#items-list-container tr:hover {
     background-color: #f3f6ff;
     /* background-repeat: repeat-x;*/
     /* background-image: -khtml-gradient(linear, left top, left bottom, from(#f6f7ff), to(#f2f4ff));*/
@@ -179,6 +180,47 @@
 div#drag-handle {
     position: absolute;
     cursor: col-resize;
+}
+
+span.item-title-fader {
+
+    float: right;
+    display: block;
+    background-repeat: repeat-x;
+    width: 20%;
+
+    background-image: -webkit-gradient(
+      linear, left top, right top, from(rgba(255, 254, 245, 0)),
+      to(rgba(255, 254, 245, 1.0))
+    );
+
+    /* mozilla example - FF3.6+ */
+    background-image: -moz-linear-gradient(
+      right center,
+      rgba(255, 254, 245, 1.0) 20%, rgba(255, 254, 245, 0) 95%
+    );
+
+}
+
+#items-list-container tr:hover span.item-title-fader {
+
+    background-image: -webkit-gradient(
+      linear, left top, right top, from(rgba(243, 246, 255, 0)),
+      to(rgba(243, 246, 255, 1.0))
+    );
+
+    /* mozilla example - FF3.6+ */
+    background-image: -moz-linear-gradient(
+      right center,
+      rgba(243, 246, 255, 1.0) 20%, rgba(243, 246, 255, 0) 95%
+    );
+
+}
+
+span.item-title-text {
+    float: left;
+    display: block;
+    width: 80%;
 }
 
 
