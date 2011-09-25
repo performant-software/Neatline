@@ -55,7 +55,7 @@
             time_tooltip_X_offset: -15,
             item_title_fader_width: 40,
             item_name_default_color: '#515151',
-            item_name_highlight_color: '#724E85',
+            item_name_highlight_color: '#382642',
 
             // Hexes.
             colors: {
@@ -523,7 +523,7 @@
 
                         // Animate up the height.
                         editForm.animate({
-                            'height': 400
+                            'height': 700
                         }, 300);
 
                     }

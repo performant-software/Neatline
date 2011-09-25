@@ -39,7 +39,11 @@
         </tr>
 
         <tr class="edit-form">
-            <td colspan="3"></td>
+            <td colspan="3">
+                <?php echo $this->partial('editor/_edit_neatline_record.php', array(
+                    'item' => $item
+                )); ?>
+            </td>
         </tr>
 
     <?php endforeach; ?>

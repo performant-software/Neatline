@@ -229,8 +229,30 @@ span.item-title-text {
 tr.edit-form td {
     padding: 0;
     display: none;
+    height: 0;
 }
 
+.neatline-record-edit-form .help-inline {
+    display: block;
+}
+
+.neatline-record-edit-form label {
+    padding: 0;
+    float: none;
+    font-weight: bold;
+    font-size: 1.1em;
+    color: #4e4950;
+}
+
+.neatline-record-edit-form div.input {
+    margin: 0;
+}
+
+.neatline-record-edit-form fieldset {
+    margin: 0 40px 0 20px;
+    width: 90%;
+    white-space: normal;
+}
 
 /* Search Cancel */
 
