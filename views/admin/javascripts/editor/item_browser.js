@@ -314,16 +314,24 @@
                         self.element.css('width', newWidth);
                         self.itemsListHeader.css('width', newWidth - self.scrollbarWidth);
 
-                        // Reposition the dragger.
-                        self.dragHandle.css('left', newWidth);
+                    }
 
-                        // Update the container width tracker.
-                        self.containerWidth = newWidth;
+                    else {
 
-                        // Reposition the Neatline container.
-                        self._positionNeatline();
+                        // Resize the container and header.
+                        self.element.css('width', this.options.item_list_min_width);
+                        self.itemsListHeader.css('width', this.options.item_list_min_width - self.scrollbarWidth);
 
                     }
+
+                    // Reposition the dragger.
+                    self.dragHandle.css('left', newWidth);
+
+                    // Update the container width tracker.
+                    self.containerWidth = newWidth;
+
+                    // Reposition the Neatline container.
+                    self._positionNeatline();
 
                 },
 
