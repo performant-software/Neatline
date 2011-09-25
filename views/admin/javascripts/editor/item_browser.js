@@ -54,6 +54,8 @@
             time_tooltip_Y_offset: -38,
             time_tooltip_X_offset: -15,
             item_title_fader_width: 40,
+            item_name_default_color: '#515151',
+            item_name_highlight_color: '#724E85',
 
             // Hexes.
             colors: {
@@ -489,6 +491,46 @@
 
             // Position the faders.
             this._positionTitleFaders();
+
+            // Add the edit form functionality.
+            $.each(this.items, function(i, item) {
+
+                // DOM fetch the item and the edit form td.
+                var item = $(item);
+                var editForm = item.next().find('td');
+
+                // Get the spans for the text and fader.
+                var textSpan = item.find('.' + self.options.item_title_text_class);
+                var faderSpan = item.find('.' + self.options.item_title_fader_class);
+
+                console.log(editForm);
+
+                item.bind({
+
+                    'mousedown': function() {
+
+                        // Highlight the item title.
+                        textSpan.animate({
+                            'color': self.options.item_name_highlight_color,
+                            'font-size': 16,
+                            'font-weight': 'bold'
+                        }, 100);
+
+                        // Display the form.
+                        editForm.css({
+                            'display': 'table-cell'
+                        });
+
+                        // Animate up the height.
+                        editForm.animate({
+                            'height': 400
+                        }, 300);
+
+                    }
+
+                });
+
+            });
 
         },
 
