@@ -51,8 +51,8 @@
                 <label>Start Date</label>
                 <div class="input">
                     <div class="inline-inputs">
-                        <input class="medium" type="text" value="October 9, 1547">
-                        <input class="mini" type="text" value="12:00am">
+                        <input class="medium" type="text">
+                        <input class="mini" type="text">
                         <span class="help-inline">Enter the date of the item, or its starting date if it occupies a time interval.</span>
                     </div>
                 </div>
@@ -62,8 +62,8 @@
                 <label>End Date</label>
                 <div class="input">
                     <div class="inline-inputs">
-                        <input class="medium" type="text" value="April 23, 1616">
-                        <input class="mini" type="text" value="12:00am">
+                        <input class="medium" type="text">
+                        <input class="mini" type="text">
                         <span class="help-inline">Enter the ending date. Leave blank if the item does not occupy a time interval.</span>
                     </div>
                 </div>

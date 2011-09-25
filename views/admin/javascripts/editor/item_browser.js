@@ -46,7 +46,7 @@
             // Durations and CSS constants.
             item_list_highlight_duration: 10,
             starting_item_list_width: 400,
-            item_list_min_width: 370,
+            item_list_min_width: 400,
             drag_handle_width: 4,
             drag_tooltip_Y_offset: 16,
             drag_tooltip_X_offset: 15,
@@ -344,6 +344,9 @@
                     // Set the cursor back to auto.
                     self._body.css('cursor', 'auto');
 
+                    // Resize the expanded edit forms.
+                    self._resizeForms();
+
                 }
 
             });
@@ -604,6 +607,55 @@
 
             // Change the data record.
             $.data(item, 'expanded', false);
+
+        },
+
+        _resizeForms: function() {
+
+            var self = this;
+
+            $.each(this.items, function(i, item) {
+
+                var item = $(item);
+
+                if ($.data(item, 'expanded')) {
+
+                    // Get child markup.
+                    var editFormTd = item.next().find('td');
+                    var editForm = editFormTd.find('form');
+                    var textSpan = item.find('.' + self.options.item_title_text_class);
+                    var faderSpan = item.find('.' + self.options.item_title_fader_class);
+
+                    // Calculate the native height of the form.
+                    var cloneFormTd = editFormTd
+                        .clone()
+                        .css({
+                            'top': -1000,
+                            'left': -1000,
+                            'display': 'table-cell'
+                        })
+                        .appendTo(self._body);
+
+                    var cloneForm = cloneFormTd.find('form');
+                    var actionsDiv = cloneFormTd.find('div.actions');
+                    cloneForm.css({
+                        'height': 'auto',
+                        'width': self.containerWidth
+                    });
+
+                    // Register the height of the cloned form,
+                    // delete it.
+                    var formHeight = cloneForm.height();
+                    cloneFormTd.remove();
+
+                    // Animate up the height.
+                    editForm.animate({
+                        'height': formHeight
+                    }, 300);
+
+                }
+
+            });
 
         },
 
