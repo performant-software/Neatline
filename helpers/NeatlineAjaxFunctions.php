@@ -80,7 +80,8 @@ function neatline_getItemsForBrowser(
         // Build tags clause.
         if ($tags != null) {
             foreach ($tags as $id) {
-                $whereClause[] = 'EXISTS (SELECT * FROM omeka_taggings WHERE i.id = relation_id AND tag_id = ' . $id . ')';
+                $whereClause[] = 'EXISTS (SELECT * FROM omeka_taggings '
+                    . 'WHERE i.id = relation_id AND tag_id = ' . $id . ')';
             }
         }
 
@@ -94,5 +95,43 @@ function neatline_getItemsForBrowser(
     }
 
     return $itemsTable->fetchObjects($select);
+
+}
+
+/**
+ * Starting with the month/day and year values from the forms in
+ * the Neatline editor, convert to timestamps for database store.
+ *
+ * @param array $date The json_decoded date array.
+ *
+ * @return array of Omeka_records $items The items.
+ */
+function neatline_parseSemanticDates($date)
+{
+
+    // Pluck out the pieces.
+    $startDate = $date->start->date;
+    $startTime = $date->start->year;
+    $endDate = $date->end->monthDay;
+    $endTime = $date->end->year;
+
+    // Trim and axe double-spaces.
+    foreach (array(
+        $startDate,
+        $startTime,
+        $endDate,
+        $endTime
+    ) as $dateElement) {
+
+        // Trim.
+        $dateElement = trim($dateElement);
+
+        // Replace commas with spaces.
+        str_replace(',', ' ', $dateElement);
+
+        // 
+
+    }
+
 
 }

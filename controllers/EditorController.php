@@ -110,6 +110,10 @@ class Neatline_EditorController extends Omeka_Controller_Action
     public function saveAction()
     {
 
+        // Supress the default Zend layout-sniffer functionality.
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
         // Get parameters from the ajax request.
         $neatlineId = $this->_request->getParam('id');
         $title = $this->_request->getParam('title');

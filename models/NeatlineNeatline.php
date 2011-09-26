@@ -150,7 +150,9 @@ class NeatlineNeatline extends Omeka_record
     {
 
         // Format the date.
-        $formattedDate = neatline_formatDate($date);
+        $formattedDates = neatline_parseSemanticDates($date);
+
+        return true;
 
     }
 

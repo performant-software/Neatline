@@ -43,6 +43,12 @@
             item_title_fader_class: 'item-title-fader',
             item_title_cell_class: 'item-title',
             edit_form_class: 'neatline-edit-record-form',
+            title_input_name: 'title',
+            description_input_name: 'description',
+            start_date_date_input_name: 'start-date-date',
+            start_date_time_input_name: 'start-date-time',
+            end_date_date_input_name: 'end-date-date',
+            end_date_time_input_name: 'end-date-time',
 
             // Durations and CSS constants.
             item_list_highlight_duration: 10,
@@ -639,12 +645,25 @@
             // Get child markup.
             var editFormTd = this._currentFormItem.next().find('td');
             var editForm = editFormTd.find('form');
-            var titleInput = editForm.find('input[name="title"]');
-            var descriptionInput = editForm.find('textarea[name="description"]');
-            var startDateDayMonthInput = editForm.find('input[name="start-date-day-month"]');
-            var startDateYearInput = editForm.find('input[name="start-date-year"]');
-            var endDateDayMonthInput = editForm.find('input[name="end-date-day-month"]');
-            var endDateYearInput = editForm.find('input[name="end-date-year"]');
+
+            // Get the form inputs.
+            var titleInput = editForm
+                .find('input[name="' +this.options.title_input_name + '"]');
+
+            var descriptionInput = editForm
+                .find('textarea[name="' + this.options.description_input_name + '"]');
+
+            var startDateDateInput = editForm
+                .find('input[name="' + this.options.start_date_date_input_name + '"]');
+
+            var startDateTimeInput = editForm
+                .find('input[name="' + this.options.start_date_time_input_name + '"]');
+
+            var endDateDateInput = editForm
+                .find('input[name="' + this.options.end_date_date_input_name + '"]');
+
+            var endDateTimeInput = editForm.
+                find('input[name="' + this.options.end_date_time_input_name + '"]');
 
             editForm.animate({
                 'opacity': 0.3
@@ -657,7 +676,15 @@
 
                 // Show the loader div.
                 var loader = editFormTd.find('.form-save-loader');
-                loader.css('visibility', 'visible');
+
+                // Animate up the loader height.
+                loader.animate({
+                    'height': 20
+                }, 200, function() {
+
+                    loader.css('visibility', 'visible');
+
+                });
 
             });
 
@@ -673,12 +700,12 @@
                     description: descriptionInput.val(),
                     date: {
                         start: {
-                            monthDay: startDateDayMonthInput.val(),
-                            year: startDateYearInput.val()
+                            date: startDateDateInput.val(),
+                            time: startDateTimeInput.val()
                         },
                         end: {
-                            monthDay: endDateDayMonthInput.val(),
-                            year: endDateYearInput.val()
+                            date: endDateDateInput.val(),
+                            time: endDateTimeInput.val()
                         }
                     }
                 },

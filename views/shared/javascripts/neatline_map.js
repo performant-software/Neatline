@@ -140,8 +140,6 @@
 
         endEditWithoutSave: function() {
 
-            console.log(this.editVectorLayer);
-
             this.map.removeControl(this.editingToolbar);
             this.map.removeLayer(this.editVectorLayer, this.baseLayer);
 
