@@ -309,6 +309,19 @@ span#search-cancel:hover {
     color: #f0b925;
 }
 
+.neatline-record-edit-form input, .neatline-record-edit-form textarea {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 10px;
+    font-weight: 13px;
+    font-size: 1em;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+}
+
+.neatline-record-edit-form input:focus, .neatline-record-edit-form textarea:focus {
+    border-color: #9f7cb1;
+}
+
 
 /* Filter Items */
 
