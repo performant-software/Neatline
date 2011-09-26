@@ -586,6 +586,14 @@
                 'height': formHeight
             }, 300);
 
+            // Bind the close event to the cancel button.
+            var cancelButton = editForm.find('button[type="reset"]');
+            cancelButton.bind({
+                'mousedown': function() {
+                    self._hideForm(item);
+                }
+            });
+
             // Change the data record.
             item.data('expanded', true);
 
