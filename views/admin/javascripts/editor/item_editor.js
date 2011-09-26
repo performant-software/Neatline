@@ -696,6 +696,7 @@
                 type: 'POST',
 
                 data: {
+                    neatline_id: this.neatlineData.id,
                     title: titleInput.val(),
                     description: descriptionInput.val(),
                     date: {

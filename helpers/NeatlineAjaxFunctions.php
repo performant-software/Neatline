@@ -104,16 +104,17 @@ function neatline_getItemsForBrowser(
  *
  * @param array $date The json_decoded date array.
  *
- * @return array of Omeka_records $items The items.
+ * @return array $dates A two-element associative array with 'start'
+ * and 'end', each containing a 2011-09-26 16:37:00 stamp.
  */
 function neatline_parseSemanticDates($date)
 {
 
     // Pluck out the pieces.
-    $startDate = $date->start->date;
-    $startTime = $date->start->year;
-    $endDate = $date->end->monthDay;
-    $endTime = $date->end->year;
+    $startDate = $date['start']['date'];
+    $startTime = $date['start']['year'];
+    $endDate = $date['end']['date'];
+    $endTime = $date['end']['year'];
 
     // Trim and axe double-spaces.
     foreach (array(
@@ -123,15 +124,40 @@ function neatline_parseSemanticDates($date)
         $endTime
     ) as $dateElement) {
 
-        // Trim.
-        $dateElement = trim($dateElement);
+        // Trim and lowercase.
+        $dateElement = strtolower(trim($dateElement));
 
         // Replace commas with spaces.
-        str_replace(',', ' ', $dateElement);
+        $dateElement = str_replace(',', ' ', $dateElement);
 
-        // 
+        // Split on spaces.
+        $dateElement = explode(' ', $dateElement);
 
     }
+
+    // Get the timestamps.
+    $start = neatline_dateAndTimeToTimestamp($startDate, $startTime);
+    $end = neatline_dateAndTimeToTimestamp($endDate, $endTime);
+
+    return array(
+        'start' => $start,
+        'end' => $end
+    );
+
+}
+
+/**
+ * Generate a timestamp from two arrays, one containing string parts of
+ * a date (potentially a month, day, and year) and another containing a time.
+ *
+ * @param array $date The date pieces array.
+ * @param array $time The time pieces array.
+ *
+ * @return string $stamp The generated timestamp, in format 2011-09-26 16:37:00.
+ */
+function neatline_dateAndTimeToTimestamp($date, $time)
+{
+
 
 
 }

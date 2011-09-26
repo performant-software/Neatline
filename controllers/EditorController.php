@@ -111,30 +111,29 @@ class Neatline_EditorController extends Omeka_Controller_Action
     {
 
         // Supress the default Zend layout-sniffer functionality.
-        $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
         // Get parameters from the ajax request.
-        $neatlineId = $this->_request->getParam('id');
+        $neatlineId = $this->_request->getParam('neatline_id');
         $title = $this->_request->getParam('title');
         $description = $this->_request->getParam('description');
-        $date = json_decode($this->_request->getParam('date'));
+        $date = $this->_request->getParam('date');
 
         // Fetch the Neatline exhibit record.
-        $neatline = $this->_neatlinesTable->find($id);
+        $neatline = $this->_neatlinesTable->find($neatlineId);
 
         // Save the data and return success status.
-        if ($neatline->saveData(
-            $title,
-            $description,
-            $date
-        )) {
+        // if ($neatline->saveData(
+        //     $title,
+        //     $description,
+        //     $date
+        // )) {
 
-            return json_encode(
-                array('success' => true)
-            );
+        //     return json_encode(
+        //         array('success' => true)
+        //     );
 
-        }
+        // }
 
     }
 
