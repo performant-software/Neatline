@@ -31,6 +31,14 @@ jQuery(document).ready(function($) {
 
         'reposition': function() {
             neatlineContainer.neatline('positionDivs');
+        },
+
+        'mapedit': function(event, obj) {
+            neatlineContainer.neatline('editMap', obj.item);
+        },
+
+        'endmapedit': function() {
+            neatlineContainer.neatline('endMapEditWithoutSave');
         }
 
     });

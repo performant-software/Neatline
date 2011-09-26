@@ -592,6 +592,11 @@
             // Record the expanded form.
             this._currentFormItem = item;
 
+            // Fire off the event to show the map editor controls.
+            this._trigger('mapedit', event, {
+                'item': item
+            });
+
         },
 
         _hideForm: function(item) {
@@ -624,6 +629,9 @@
 
             // Set the tracker to null.
             this._currentFormItem = null;
+
+            // Fire the end edit without save callback.
+            this._trigger('endmapedit');
 
         },
 

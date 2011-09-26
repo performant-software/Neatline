@@ -316,6 +316,18 @@
                 this.undated.neatlineundateditems();
             }
 
+        },
+
+        editMap: function(item) {
+
+            this.map.neatlinemap('edit', item);
+
+        },
+
+        endMapEditWithoutSave: function() {
+
+            this.map.neatlinemap('endEditWithoutSave');
+
         }
 
     });

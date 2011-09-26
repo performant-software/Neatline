@@ -102,7 +102,7 @@
 
             this.map = new OpenLayers.Map('map', options);
 
-            tiled = new OpenLayers.Layer.WMS(
+            this.baseLayer = new OpenLayers.Layer.WMS(
                 this.params.name, this.params.map.wmsAddress,
                 {
                     LAYERS: this.params.map.layers,
@@ -118,8 +118,32 @@
                 }
             );
 
-            this.map.addLayers([tiled]);
+            this.map.addLayers([this.baseLayer]);
             this.map.zoomToExtent(bounds);
+
+        },
+
+        edit: function(item) {
+
+            // Get the name of the item for the layer listing.
+            var itemName = item.find('span.item-title-text').text();
+
+            // Create the new vector layer and the toolbar contro.
+            this.editVectorLayer = new OpenLayers.Layer.Vector(itemName);
+            this.editingToolbar = new OpenLayers.Control.EditingToolbar(this.editVectorLayer);
+
+            // Add the layer and show the toolbar.
+            this.map.addLayer(this.editVectorLayer);
+            this.map.addControl(this.editingToolbar);
+
+        },
+
+        endEditWithoutSave: function() {
+
+            console.log(this.editVectorLayer);
+
+            this.map.removeControl(this.editingToolbar);
+            this.map.removeLayer(this.editVectorLayer, this.baseLayer);
 
         }
 
