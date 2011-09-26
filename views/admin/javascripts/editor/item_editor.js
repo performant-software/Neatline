@@ -28,6 +28,7 @@
 
             // Markup hooks.
             topbar_id: 'topbar',
+            items_table_class: 'items',
             search_wrapper_id: 'search-wrapper',
             search_box_id: 'search-box',
             search_cancel_id: 'search-cancel',
@@ -81,6 +82,8 @@
             this.searchCancel = $('#' + this.options.search_cancel_id);
             this.itemFilterContainer = $('#' + this.options.item_filter_container_id);
             this.neatlineContainer = $('#' + this.options.neatline_id);
+            this.itemsTable = $('table.' + this.options.items_table_class);
+
             this.neatlineData = Neatline;
 
             // Tooltips.
@@ -631,6 +634,8 @@
 
         _saveItemForm: function() {
 
+            var self = this;
+
             // Get child markup.
             var editFormTd = this._currentFormItem.next().find('td');
             var editForm = editFormTd.find('form');
@@ -645,8 +650,13 @@
                 'opacity': 0.3
             }, 200, function() {
 
+                // Disable the form elements.
+                $.each(editForm.find('input, textarea'), function(i, input) {
+                    $(input).prop('disabled', true);
+                });
+
                 // Show the loader div.
-                var loader = editFormTd.find('.form-save-cover');
+                var loader = editFormTd.find('.form-save-loader');
                 loader.css('visibility', 'visible');
 
             });

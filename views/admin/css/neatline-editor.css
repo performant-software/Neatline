@@ -274,7 +274,7 @@ tr.edit-form td {
     white-space: normal;
 }
 
-.form-save-cover {
+.form-save-loader {
     visibility: hidden;
     display: block;
     height: 20px;
@@ -284,6 +284,15 @@ tr.edit-form td {
     background-position: left center;
     margin: -20px 0 10px 30px;
 }
+
+.form-save-blocker {
+    display: none;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+}
+
 
 /* Search Cancel */
 

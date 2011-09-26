@@ -77,6 +77,6 @@
 
     </form>
 
-    <div class="form-save-cover"></div>
+    <div class="form-save-loader"></div>
 
 </div>

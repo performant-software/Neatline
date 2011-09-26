@@ -133,4 +133,16 @@ class NeatlineNeatline extends Omeka_record
 
     }
 
+    /**
+     * Commit changes ajaxed back from the editor.
+     *
+     * @return 
+     */
+    public function saveData()
+    {
+
+        return $this->getTable('NeatlineTimeTimeline')->find($this->timeline_id);
+
+    }
+
 }
