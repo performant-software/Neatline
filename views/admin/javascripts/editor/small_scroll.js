@@ -39,7 +39,7 @@
 
             // Hexes.
             colors: {
-                purple: '#724E85',
+                purple: '#9a7baa',
                 gray: '#c3c3c3'
             }
 
@@ -114,6 +114,16 @@
             });
 
             this.bar.bind({
+
+                'mouseenter': function() {
+                    self.bar.css('background-color', self.options.colors.purple);
+                },
+
+                'mouseleave': function() {
+                    if (!self._is_scrolling) {
+                        self.bar.css('background-color', self.options.colors.gray);
+                    }
+                },
 
                 'mousedown': function(event) {
                     self._scroll(event);
@@ -287,6 +297,10 @@
                     // Remove the move listener.
                     self._window.unbind('mousemove');
                     self._is_scrolling = false;
+
+                    // Fade down the scrollbar, if the cursor drifted off of it
+                    // during the scroll.
+                    self.bar.trigger('mouseleave');
 
                 }
 
