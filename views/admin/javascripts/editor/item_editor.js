@@ -124,6 +124,9 @@
             // Instantiate the item filter widget.
             this._glossItemFilter();
 
+            // Tracker for the current expanded form.
+            this._currentFormItem = null;
+
             // Set static CSS parameters for the Neatline.
             this.neatlineContainer.css({
                 'display': 'block',
@@ -533,6 +536,11 @@
 
             var self = this;
 
+            // If another form is currently expanded, hide it.
+            if (this._currentFormItem != null) {
+                this._hideForm(this._currentFormItem);
+            }
+
             // Get child markup.
             var editFormTd = item.next().find('td');
             var editForm = editFormTd.find('form');
@@ -581,6 +589,9 @@
             // Change the data record.
             item.data('expanded', true);
 
+            // Record the expanded form.
+            this._currentFormItem = item;
+
         },
 
         _hideForm: function(item) {
@@ -610,6 +621,9 @@
 
             // Change the data record.
             item.data('expanded', false);
+
+            // Set the tracker to null.
+            this._currentFormItem = null;
 
         },
 
