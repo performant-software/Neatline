@@ -274,6 +274,17 @@ tr.edit-form td {
     white-space: normal;
 }
 
+.form-save-cover {
+    visibility: hidden;
+    display: block;
+    height: 20px;
+    width: 100%;
+    background-image: url('../images/horizontal_loader.gif');
+    background-repeat: no-repeat;
+    background-position: left center;
+    margin: -20px 0 10px 30px;
+}
+
 /* Search Cancel */
 
 span#search-cancel {

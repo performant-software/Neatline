@@ -81,6 +81,7 @@
             this.searchCancel = $('#' + this.options.search_cancel_id);
             this.itemFilterContainer = $('#' + this.options.item_filter_container_id);
             this.neatlineContainer = $('#' + this.options.neatline_id);
+            this.neatlineData = Neatline;
 
             // Tooltips.
             this.dragTip = $('#' + this.options.drag_tooltip_id);
@@ -153,12 +154,15 @@
 
         _getDimensions: function() {
 
+            // Container dimensions.
             this.containerWidth = this.element.width();
             this.containerHeight = this.element.height();
 
+            // Window dimensions.
             this.windowWidth = this._window.width();
             this.windowHeight = this._window.height();
 
+            // Top bar height.
             this.topBarHeight = this.topBar.height();
 
         },
@@ -586,12 +590,30 @@
                 'height': formHeight
             }, 300);
 
-            // Bind the close event to the cancel button.
+            // Bind the button actions.
             var cancelButton = editForm.find('button[type="reset"]');
+            var saveButton = editForm.find('input[type="submit"]');
+
+            // Cancel form.
             cancelButton.bind({
                 'mousedown': function() {
                     self._hideForm(item);
                 }
+            });
+
+            // Save form.
+            saveButton.bind({
+
+                'mousedown': function() {
+                    self._saveItemForm();
+                    saveButton.unbind('mousedown');
+                    cancelButton.unbind('mousedown');
+                },
+
+                'click': function(event) {
+                    event.preventDefault();
+                }
+
             });
 
             // Change the data record.
@@ -603,6 +625,58 @@
             // Fire off the event to show the map editor controls.
             this._trigger('mapedit', event, {
                 'item': item
+            });
+
+        },
+
+        _saveItemForm: function() {
+
+            // Get child markup.
+            var editFormTd = this._currentFormItem.next().find('td');
+            var editForm = editFormTd.find('form');
+            var titleInput = editForm.find('input[name="title"]');
+            var descriptionInput = editForm.find('textarea[name="description"]');
+            var startDateDayMonthInput = editForm.find('input[name="start-date-day-month"]');
+            var startDateYearInput = editForm.find('input[name="start-date-year"]');
+            var endDateDayMonthInput = editForm.find('input[name="end-date-day-month"]');
+            var endDateYearInput = editForm.find('input[name="end-date-year"]');
+
+            editForm.animate({
+                'opacity': 0.3
+            }, 200, function() {
+
+                // Show the loader div.
+                var loader = editFormTd.find('.form-save-cover');
+                loader.css('visibility', 'visible');
+
+            });
+
+            // Core ajax call to get items.
+            $.ajax({
+
+                url: 'save',
+                dataType: 'json',
+                type: 'POST',
+
+                data: {
+                    title: titleInput.val(),
+                    description: descriptionInput.val(),
+                    date: {
+                        start: {
+                            monthDay: startDateDayMonthInput.val(),
+                            year: startDateYearInput.val()
+                        },
+                        end: {
+                            monthDay: endDateDayMonthInput.val(),
+                            year: endDateYearInput.val()
+                        }
+                    }
+                },
+
+                success: function(data) {
+                    // Do success - reload items, etc.
+                }
+
             });
 
         },

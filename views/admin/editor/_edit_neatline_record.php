@@ -32,17 +32,17 @@
         <fieldset>
 
             <div class="clearfix">
-                <label for="title-<?php echo $item->id; ?>">Title</label>
+                <label for="title">Title</label>
                 <div class="input">
-                    <input class="xlarge" name="title-<?php echo $item->id; ?>" size="30" type="text" />
+                    <input class="xlarge" name="title" size="30" type="text" />
                     <span class="help-block">By default, the item's title in Neatline is the same as its Dublin Core title. Enter a new title here to override the default.</span>
                 </div>
             </div>
 
             <div class="clearfix">
-                <label for="map-description-<?php echo $item->id; ?>">Description</label>
+                <label for="map-description">Description</label>
                 <div class="input">
-                    <textarea class="xlarge" name="description-<?php echo $item->id; ?>" rows="3"></textarea>
+                    <textarea class="xlarge" name="description" rows="3"></textarea>
                     <span class="help-block">This text will be displayed when the user selects on item's timeline entry.</span>
                 </div>
             </div>
@@ -51,8 +51,8 @@
                 <label>Start Date</label>
                 <div class="input">
                     <div class="inline-inputs">
-                        <input class="medium" type="text">
-                        <input class="mini" type="text">
+                        <input class="medium" name="start-date-day-month" type="text">
+                        <input class="mini" name="start-date-year" type="text">
                         <span class="help-inline">Enter the date of the item, or its starting date if it occupies a time interval.</span>
                     </div>
                 </div>
@@ -62,8 +62,8 @@
                 <label>End Date</label>
                 <div class="input">
                     <div class="inline-inputs">
-                        <input class="medium" type="text">
-                        <input class="mini" type="text">
+                        <input class="medium" name="end-date-day-month" type="text">
+                        <input class="mini" name="end-date-year" type="text">
                         <span class="help-inline">Enter the ending date. Leave blank if the item does not occupy a time interval.</span>
                     </div>
                 </div>
@@ -76,5 +76,7 @@
         </fieldset>
 
     </form>
+
+    <div class="form-save-cover"></div>
 
 </div>

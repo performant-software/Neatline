@@ -101,4 +101,31 @@ class Neatline_EditorController extends Omeka_Controller_Action
 
     }
 
+    /**
+     * ~ AJAX ~
+     * Fetch items for the browser.
+     *
+     * @return void
+     */
+    public function saveAction()
+    {
+
+        // Get parameters from the ajax request.
+        $neatlineId = $this->_request->getParam('id');
+        $title = $this->_request->getParam('title');
+        $description = $this->_request->getParam('description');
+        $date = json_decode($this->_request->getParam('date'));
+
+        // Fetch the Neatline exhibit record.
+        $neatline = $this->_neatlinesTable->find($id);
+
+        // Save the data.
+        $neatline->saveData(
+            $title,
+            $description,
+            $date
+        );
+
+    }
+
 }
