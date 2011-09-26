@@ -136,12 +136,21 @@ class NeatlineNeatline extends Omeka_record
     /**
      * Commit changes ajaxed back from the editor.
      *
-     * @return 
+     * @param string $title The title.
+     * @param string $description The description.
+     * @param array $date The date, split up by start/end, month-day/year
+     *
+     * @return boolean True if the save succeeds.
      */
-    public function saveData()
+    public function saveData(
+        $title,
+        $description,
+        $date
+    )
     {
 
-        return $this->getTable('NeatlineTimeTimeline')->find($this->timeline_id);
+        // Format the date.
+        $formattedDate = neatline_formatDate($date);
 
     }
 

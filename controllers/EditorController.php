@@ -119,12 +119,18 @@ class Neatline_EditorController extends Omeka_Controller_Action
         // Fetch the Neatline exhibit record.
         $neatline = $this->_neatlinesTable->find($id);
 
-        // Save the data.
-        $neatline->saveData(
+        // Save the data and return success status.
+        if ($neatline->saveData(
             $title,
             $description,
             $date
-        );
+        )) {
+
+            return json_encode(
+                array('success' => true)
+            );
+
+        }
 
     }
 
