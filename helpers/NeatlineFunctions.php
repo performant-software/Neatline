@@ -81,7 +81,7 @@ function neatline_queueEditorAssets()
     queue_css('bootstrap-1.2.0');
     queue_css('neatline-editor');
 
-    queue_js('editor/item_browser', 'javascripts');
+    queue_js('editor/item_editor', 'javascripts');
     queue_js('editor/item_filter', 'javascripts');
     queue_js('editor/small_scroll', 'javascripts');
     queue_js('editor/_deployment', 'javascripts');

@@ -1,5 +1,5 @@
 /*
- * Item browser and editor widget in the Neatline editor.
+ * Item browser and editor column in the Neatline editor.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
