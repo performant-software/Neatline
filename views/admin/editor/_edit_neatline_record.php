@@ -75,6 +75,8 @@
 
         </fieldset>
 
+        <recordid><?php echo $item->id; ?></recordid>
+
     </form>
 
     <div class="form-save-loader"></div>

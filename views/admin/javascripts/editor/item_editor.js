@@ -673,6 +673,9 @@
             var endDateTimeInput = editForm.
                 find('input[name="' + this.options.end_date_time_input_name + '"]');
 
+            var itemId = editForm.
+                find('recordid');
+
             editForm.animate({
                 'opacity': 0.3
             }, 200, function() {
@@ -704,6 +707,7 @@
                 type: 'POST',
 
                 data: {
+                    item_id: itemId.text(),
                     neatline_id: this.neatlineData.id,
                     title: titleInput.val(),
                     description: descriptionInput.val(),

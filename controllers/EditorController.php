@@ -41,6 +41,7 @@ class Neatline_EditorController extends Omeka_Controller_Action
         $this->_neatlinesTable = $this->getTable('NeatlineNeatline');
         $this->_mapsTable = $this->getTable('NeatlineMapsMap');
         $this->_timelinesTable = $this->getTable('NeatlineTimeTimeline');
+        $this->_itemsTable = $this->getTable('Item');
 
     }
 
@@ -114,6 +115,7 @@ class Neatline_EditorController extends Omeka_Controller_Action
         $this->_helper->viewRenderer->setNoRender(true);
 
         // Get parameters from the ajax request.
+        $itemId = $this->_request->getParam('item_id');
         $neatlineId = $this->_request->getParam('neatline_id');
         $title = $this->_request->getParam('title');
         $description = $this->_request->getParam('description');
@@ -122,11 +124,13 @@ class Neatline_EditorController extends Omeka_Controller_Action
         $endDate = $this->_request->getParam('end_date');
         $endTime = $this->_request->getParam('end_time');
 
-        // Fetch the Neatline exhibit record.
+        // Fetch the Neatline exhibit record and item record.
         $neatline = $this->_neatlinesTable->find($neatlineId);
+        $item = $this->_itemTable->find($itemId);
 
         // Save the data and return success status.
         if ($neatline->saveData(
+            $item,
             $title,
             $description,
             $startDate,

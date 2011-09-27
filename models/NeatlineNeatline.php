@@ -136,13 +136,18 @@ class NeatlineNeatline extends Omeka_record
     /**
      * Commit changes ajaxed back from the editor.
      *
+     * @param Omeka_record $item The item.
      * @param string $title The title.
      * @param string $description The description.
-     * @param array $date The date, split up by start/end, month-day/year
+     * @param string $startDate The month/day/year of the start.
+     * @param string $startTime The time of the start.
+     * @param string $endDate The month/day/year of the end.
+     * @param string $endTime The time of the end.
      *
      * @return boolean True if the save succeeds.
      */
     public function saveData(
+        $item,
         $title,
         $description,
         $startDate,
@@ -152,7 +157,42 @@ class NeatlineNeatline extends Omeka_record
     )
     {
 
+        // Get the tables.
+        $dataTable = $this->getTable('NeatlineRecord');
+        $elementTable = $this->getTable('Element');
 
+        // Get the element record for each of the DC fields
+        // that will be used to house the data.
+        $titleElement = $elementTable
+            ->findByElementSetNameAndElementName('Dublin Core', 'Title');
+
+        $descriptionElement = $elementTable
+            ->findByElementSetNameAndElementName('Dublin Core', 'Description');
+
+        // Try to find existing data records given the item and
+        // element object.
+        $titleRecord = $dataTable->findByItemAndElement($item, $titleElement);
+        $descriptionRecord = $dataTable->findByItemAndElement($item, $descriptionElement);
+
+        // If a title record already exists, update it.
+        if ($titleRecord) {
+
+        }
+
+        // Otherwise, create one.
+        else {
+
+        }
+
+        // If a description record already exists, update it.
+        if ($descriptionRecord) {
+
+        }
+
+        // Otherwise, create one.
+        else {
+
+        }
 
     }
 
