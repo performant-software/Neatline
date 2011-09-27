@@ -195,7 +195,7 @@ class NeatlineNeatline extends Omeka_record
         // Otherwise, create one.
         else {
 
-            $elementText = new NeatlineRecord(
+            new NeatlineRecord(
                 $this->id,
                 $item->id,
                 $titleElement->id,
@@ -216,7 +216,7 @@ class NeatlineNeatline extends Omeka_record
         // Otherwise, create one.
         else {
 
-            $elementText = new NeatlineRecord(
+            new NeatlineRecord(
                 $this->id,
                 $item->id,
                 $descriptionElement->id,
@@ -225,7 +225,28 @@ class NeatlineNeatline extends Omeka_record
 
         }
 
-        // Update or create the time record.
+        // If a date record already exists, update it.
+        if ($dateRecord) {
+
+            // Try to find element texts for each of the parts.
+
+            // Update each of the element texts.
+
+        }
+
+        // Otherwise, create one.
+        else {
+
+            new NeatlineTimeRecord(
+                $this->id,
+                $item->id,
+                $startDate,
+                $startTime,
+                $endDate,
+                $endTime
+            );
+
+        }
 
     }
 
