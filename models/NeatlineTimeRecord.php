@@ -37,4 +37,40 @@ class NeatlineTimeRecord extends Omeka_record
     public $end_date_element_text_id;
     public $end_time_element_text_id;
 
+    /**
+     * Extend the constructor so that the class fires off the creator
+     * methods automatically on instantiation.
+     *
+     * @param integer $neatline_id The id of the exhibit.
+     * @param integer $item_id The id of the parent item.
+     * @param string $startDate The start date.
+     * @param string $startTime The start time.
+     * @param string $endDate The end date.
+     * @param string $endTime The end time.
+     *
+     * @return void.
+     */
+    public function __construct(
+        $neatline_id,
+        $item_id,
+        $startDate,
+        $startTime,
+        $endDate,
+        $endTime
+    )
+    {
+
+        // Call parent.
+        parent::__construct();
+
+        // Setters.
+        $this->neatline_id = $neatline_id;
+        $this->item_id = $item_id;
+        $this->save();
+
+        // Create the new element text.
+        $this->_createElementTexts($startDate, $startTime, $endDate, $endTime);
+
+    }
+
 }
