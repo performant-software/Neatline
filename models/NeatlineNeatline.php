@@ -158,6 +158,7 @@ class NeatlineNeatline extends Omeka_record
 
         // Get the tables.
         $dataTable = $this->getTable('NeatlineRecord');
+        $timeDataTable = $this->getTable('NeatlineTimeRecord');
         $elementTable = $this->getTable('Element');
 
         // Get the element record for each of the DC fields
@@ -172,6 +173,7 @@ class NeatlineNeatline extends Omeka_record
         // element object.
         $titleRecord = $dataTable->findByItemAndElement($item, $titleElement);
         $descriptionRecord = $dataTable->findByItemAndElement($item, $descriptionElement);
+        $dateRecord = $timeDataTable->findByItemAndElement($item, $descriptionElement);
 
         // If a title record already exists, update it.
         if ($titleRecord) {
@@ -215,7 +217,7 @@ class NeatlineNeatline extends Omeka_record
 
         }
 
-        // do time record update/create/save.
+        // Update or create the time record.
 
     }
 
