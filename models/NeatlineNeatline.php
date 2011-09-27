@@ -228,9 +228,12 @@ class NeatlineNeatline extends Omeka_record
         // If a date record already exists, update it.
         if ($dateRecord) {
 
-            // Try to find element texts for each of the parts.
-
-            // Update each of the element texts.
+            $dateRecord->updateElementTexts(
+                $startDate,
+                $startTime,
+                $endDate,
+                $endTime
+            );
 
         }
 
