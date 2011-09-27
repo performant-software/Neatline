@@ -39,6 +39,7 @@ class NeatlineRecord extends Omeka_record
      * Extend the constructor so that the class fires off the creator
      * methods automatically on instantiation.
      *
+     * @param integer $neatline_id The id of the exhibit.
      * @param integer $item_id The id of the parent item.
      * @param integer $element_id The id of the element that the new
      * text should be keyed to.
@@ -46,12 +47,20 @@ class NeatlineRecord extends Omeka_record
      *
      * @return void.
      */
-    public function __construct($item_id, $element_id, $text)
+    public function __construct($neatline_id, $item_id, $element_id, $text)
     {
 
+        // Call parent.
         parent::__construct();
 
-        // call creators here.
+        // Setters.
+        $this->neatline_id = $neatline_id;
+        $this->item_id = $item_id;
+        $this->element_id = $element_id;
+        $this->save();
+
+        // Create the new element text.
+        $this->_createElementText($item_id, $element_id, $text);
 
     }
 
@@ -65,6 +74,36 @@ class NeatlineRecord extends Omeka_record
 
         $elementTextTable = $this->getTable('ElementText');
         return $elementTextTable->find($this->element_text_id);
+
+    }
+
+    /**
+     * Create the child element text.
+     *
+     * @param integer $item_id The id of the parent item.
+     * @param integer $element_id The id of the parent element.
+     * @param string $text The content text.
+     *
+     * @return Omeka_record The text.
+     */
+    protected function _createElementText($item_id, $element_id, $text)
+    {
+
+        // Get the Item record type object.
+        $recordTypeTable = $this->getTable('RecordType');
+        $itemRecordType = $recordTypeTable->findBySql('name = ?', array('Item'));
+
+        // Populate.
+        $text = new ElementText;
+        $text->record_id = $item_id;
+        $text->record_type_id = $itemRecordType->id;
+        $text->element_id = $element_id;
+        $text->text = $text;
+        $text->save();
+
+        // Update self with new id, save.
+        $this->element_text_id = $text->id;
+        $this->save();
 
     }
 

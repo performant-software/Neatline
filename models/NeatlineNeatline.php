@@ -186,6 +186,7 @@ class NeatlineNeatline extends Omeka_record
         else {
 
             $elementText = new NeatlineRecord(
+                $this->id,
                 $item->id,
                 $titleElement->id,
                 $title
@@ -206,6 +207,7 @@ class NeatlineNeatline extends Omeka_record
         else {
 
             $elementText = new NeatlineRecord(
+                $this->id,
                 $item->id,
                 $descriptionElement->id,
                 $description
