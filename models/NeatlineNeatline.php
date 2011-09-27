@@ -145,7 +145,10 @@ class NeatlineNeatline extends Omeka_record
     public function saveData(
         $title,
         $description,
-        $date
+        $startDate,
+        $startTime,
+        $endDate,
+        $endTime
     )
     {
 

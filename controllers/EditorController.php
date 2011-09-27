@@ -117,23 +117,27 @@ class Neatline_EditorController extends Omeka_Controller_Action
         $neatlineId = $this->_request->getParam('neatline_id');
         $title = $this->_request->getParam('title');
         $description = $this->_request->getParam('description');
-        $date = $this->_request->getParam('date');
+        $startDate = $this->_request->getParam('start_date');
+        $startTime = $this->_request->getParam('start_time');
+        $endDate = $this->_request->getParam('end_date');
+        $endTime = $this->_request->getParam('end_time');
 
         // Fetch the Neatline exhibit record.
         $neatline = $this->_neatlinesTable->find($neatlineId);
 
         // Save the data and return success status.
-        // if ($neatline->saveData(
-        //     $title,
-        //     $description,
-        //     $date
-        // )) {
+        if ($neatline->saveData(
+            $title,
+            $description,
+            $startDate,
+            $startTime,
+            $endDate,
+            $endTime
+        )) {
 
-        //     return json_encode(
-        //         array('success' => true)
-        //     );
+            // do success.
 
-        // }
+        }
 
     }
 

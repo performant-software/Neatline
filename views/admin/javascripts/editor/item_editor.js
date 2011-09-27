@@ -707,16 +707,10 @@
                     neatline_id: this.neatlineData.id,
                     title: titleInput.val(),
                     description: descriptionInput.val(),
-                    date: {
-                        start: {
-                            date: startDateDateInput.val(),
-                            time: startDateTimeInput.val()
-                        },
-                        end: {
-                            date: endDateDateInput.val(),
-                            time: endDateTimeInput.val()
-                        }
-                    }
+                    start_date: startDateDateInput.val(),
+                    start_time: startDateTimeInput.val(),
+                    end_date: endDateDateInput.val(),
+                    end_time: endDateTimeInput.val(),
                 },
 
                 success: function(data) {
