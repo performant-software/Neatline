@@ -169,11 +169,19 @@ class NeatlineNeatline extends Omeka_record
         $descriptionElement = $elementTable
             ->findByElementSetNameAndElementName('Dublin Core', 'Description');
 
+        $dateElement = $elementTable
+            ->findByElementSetNameAndElementName('Dublin Core', 'Date');
+
         // Try to find existing data records given the item and
         // element object.
-        $titleRecord = $dataTable->findByItemAndElement($item, $titleElement);
-        $descriptionRecord = $dataTable->findByItemAndElement($item, $descriptionElement);
-        $dateRecord = $timeDataTable->findByItemAndElement($item, $descriptionElement);
+        $titleRecord = $dataTable
+            ->findByElement($this->id, $item->id, $titleElement->id);
+
+        $descriptionRecord = $dataTable
+            ->findByElement($this->id, $item->id, $descriptionElement->id);
+
+        $dateRecord = $timeDataTable
+            ->findByElement($this->id, $item->id);
 
         // If a title record already exists, update it.
         if ($titleRecord) {

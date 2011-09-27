@@ -31,12 +31,20 @@ class NeatlineTimeRecordTable extends Omeka_Db_Table
 {
 
     /**
+     * Return the data record for a given exhibit and item.
      *
+     * @param integer $neatline_id The id of the exhibit.
+     * @param integer $item_id The id of the item.
+     *
+     * @return Omeka_record The data record.
      */
-    public function _()
+    public function findByElement($neatline_id, $item_id)
     {
 
-
+        return $this->findBySql(
+            'neatline_id = ? AND item_id = ?',
+            array($neatline_id, $item_id)
+        );
 
     }
 

@@ -105,7 +105,7 @@ class NeatlinePlugin
 
         $this->_db->query($sql);
 
-        $sql = "CREATE TABLE IF NOT EXISTS `{$this->_db->prefix}neatline_record` (
+        $sql = "CREATE TABLE IF NOT EXISTS `{$this->_db->prefix}neatline_records` (
                 `id` int(10) unsigned not null auto_increment,
                 `neatline_id` int(10) unsigned NULL,
                 `item_id` int(10) unsigned NULL,
@@ -116,7 +116,7 @@ class NeatlinePlugin
 
         $this->_db->query($sql);
 
-        $sql = "CREATE TABLE IF NOT EXISTS `{$this->_db->prefix}neatline_time_record` (
+        $sql = "CREATE TABLE IF NOT EXISTS `{$this->_db->prefix}neatline_time_records` (
                 `id` int(10) unsigned not null auto_increment,
                 `neatline_id` int(10) unsigned NULL,
                 `item_id` int(10) unsigned NULL,
