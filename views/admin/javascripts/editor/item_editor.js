@@ -66,6 +66,7 @@
             item_name_highlight_color: '#303030',
             item_row_highlight_background_color: '#f3f3f3',
             item_name_default_size: 12,
+            container_top_margin: 40,
 
             // Hexes.
             colors: {
@@ -520,8 +521,11 @@
                 // DOM fetch the item and the edit form td.
                 var item = $(item);
 
-                // Set the starting expanded tracker.
+                // Set the starting expanded tracker, record the item's
+                // native vertical offset for the auto-positioning on
+                // form open.
                 item.data('expanded', false);
+                item.data('topOffset', item.position().top);
 
                 item.bind({
 
@@ -577,8 +581,7 @@
                 'width': this.containerWidth
             });
 
-            // Register the height of the cloned form,
-            // delete it.
+            // Register the height of the cloned form, delete it.
             var formHeight = cloneForm.height();
             cloneFormTd.remove();
 
@@ -597,6 +600,11 @@
             // Animate up the height.
             editForm.animate({
                 'height': formHeight
+            }, 300);
+
+            // Position at the top of the frame.
+            this.element.animate({
+                'scrollTop': item.data('topOffset') - this.options.container_top_margin
             }, 300);
 
             // Bind the button actions.
