@@ -73,4 +73,95 @@ class NeatlineTimeRecord extends Omeka_record
 
     }
 
+    /**
+     * Create the child element texts for each of the extant pieces.
+     *
+     * @param string $startDate The start date.
+     * @param string $startTime The start time.
+     * @param string $endDate The end date.
+     * @param string $endTime The end time.
+     *
+     * @return void.
+     */
+    protected function _createElementText($startDate, $startTime, $endDate, $endTime)
+    {
+
+        // Get the Item record type object.
+        $recordTypeTable = $this->getTable('RecordType');
+        $dateRecordType = $recordTypeTable->findBySql('name = ?', array('Item'));
+
+        // Get the date element object.
+        $elementTable = $this->getTable('Element');
+        $dateElement->findByElementSetNameAndElementName('Dublin Core', 'Date');
+
+        // If start date.
+        if ($startDate != '') {
+
+            // Populate.
+            $text = new ElementText;
+            $text->record_id = $this->item_id;
+            $text->record_type_id = $dateRecordType->id;
+            $text->element_id = $dateElement->id;
+            $text->text = $startDate;
+            $text->save();
+
+            // Update self with new id, save.
+            $this->start_date_element_text_id = $text->id;
+            $this->save();
+
+        }
+
+        // If start time.
+        if ($startTime != '') {
+
+            // Populate.
+            $text = new ElementText;
+            $text->record_id = $this->item_id;
+            $text->record_type_id = $dateRecordType->id;
+            $text->element_id = $dateElement->id;
+            $text->text = $startTime;
+            $text->save();
+
+            // Update self with new id, save.
+            $this->start_time_element_text_id = $text->id;
+            $this->save();
+
+        }
+
+        // If end date.
+        if ($endDate != '') {
+
+            // Populate.
+            $text = new ElementText;
+            $text->record_id = $this->item_id;
+            $text->record_type_id = $dateRecordType->id;
+            $text->element_id = $dateElement->id;
+            $text->text = $endDate;
+            $text->save();
+
+            // Update self with new id, save.
+            $this->end_date_element_text_id = $text->id;
+            $this->save();
+
+        }
+
+        // If end time.
+        if ($endTime != '') {
+
+            // Populate.
+            $text = new ElementText;
+            $text->record_id = $this->item_id;
+            $text->record_type_id = $dateRecordType->id;
+            $text->element_id = $dateElement->id;
+            $text->text = $endTime;
+            $text->save();
+
+            // Update self with new id, save.
+            $this->end_time_element_text_id = $text->id;
+            $this->save();
+
+        }
+
+    }
+
 }

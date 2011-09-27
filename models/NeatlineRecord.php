@@ -60,7 +60,7 @@ class NeatlineRecord extends Omeka_record
         $this->save();
 
         // Create the new element text.
-        $this->_createElementText($item_id, $element_id, $text);
+        $this->_createElementText($text);
 
     }
 
@@ -80,13 +80,12 @@ class NeatlineRecord extends Omeka_record
     /**
      * Create the child element text.
      *
-     * @param integer $item_id The id of the parent item.
      * @param integer $element_id The id of the parent element.
      * @param string $text The content text.
      *
-     * @return Omeka_record The text.
+     * @return void.
      */
-    protected function _createElementText($item_id, $element_id, $text)
+    protected function _createElementText($text)
     {
 
         // Get the Item record type object.
@@ -95,9 +94,9 @@ class NeatlineRecord extends Omeka_record
 
         // Populate.
         $text = new ElementText;
-        $text->record_id = $item_id;
+        $text->record_id = $this->item_id;
         $text->record_type_id = $itemRecordType->id;
-        $text->element_id = $element_id;
+        $text->element_id = $this->element_id;
         $text->text = $text;
         $text->save();
 
