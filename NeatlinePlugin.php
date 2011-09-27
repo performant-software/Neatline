@@ -116,6 +116,19 @@ class NeatlinePlugin
 
         $this->_db->query($sql);
 
+        $sql = "CREATE TABLE IF NOT EXISTS `{$this->_db->prefix}neatline_time_record` (
+                `id` int(10) unsigned not null auto_increment,
+                `neatline_id` int(10) unsigned NULL,
+                `item_id` int(10) unsigned NULL,
+                `start_date_element_text_id` int(10) unsigned NULL,
+                `start_time_element_text_id` int(10) unsigned NULL,
+                `end_date_element_text_id` int(10) unsigned NULL,
+                `end_time_element_text_id` int(10) unsigned NULL,
+                 PRIMARY KEY (`id`)
+               ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
+
+        $this->_db->query($sql);
+
     }
 
     /**
