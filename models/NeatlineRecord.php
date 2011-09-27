@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
 
 /**
- * Table class for Neatline record.
+ * Row class for Neatline record.
  *
  * PHP version 5
  *
@@ -27,9 +27,45 @@
 
 <?php
 
-class NeatlineRecordTable extends Omeka_Db_Table
+class NeatlineRecord extends Omeka_record
 {
 
+    public $neatline_id;
+    public $item_id;
+    public $element_id;
+    public $element_text_id;
 
+    /**
+     * Extend the constructor so that the class fires off the creator
+     * methods automatically on instantiation.
+     *
+     * @param integer $item_id The id of the parent item.
+     * @param integer $element_id The id of the element that the new
+     * text should be keyed to.
+     * @param string $text The data.
+     *
+     * @return void.
+     */
+    public function __construct($item_id, $element_id, $text)
+    {
+
+        parent::__construct();
+
+        // call creators here.
+
+    }
+
+    /**
+     * Fetch the associated element text.
+     *
+     * @return Omeka_record The text.
+     */
+    public function getElementText()
+    {
+
+        $elementTextTable = $this->getTable('ElementText');
+        return $elementTextTable->find($this->element_text_id);
+
+    }
 
 }

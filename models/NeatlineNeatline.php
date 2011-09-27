@@ -101,7 +101,6 @@ class NeatlineNeatline extends Omeka_record
         $this->top_element = $_post['top_element'];
         $this->undated_items_position = $_post['undated_items_position'];
         $this->undated_items_height = $_post['undated_items_height'];
-        $this->undated_items_height = $_post['undated_items_height'];
 
         $this->is_map = ($_post['is_map'] == 'false') ? 0 : 1;
         $this->is_timeline = ($_post['is_timeline'] == 'false') ? 0 : 1;
@@ -177,22 +176,44 @@ class NeatlineNeatline extends Omeka_record
         // If a title record already exists, update it.
         if ($titleRecord) {
 
+            $elementText = $titleRecord->getElementText();
+            $elementText->text = $title;
+            $elementText->save();
+
         }
 
         // Otherwise, create one.
         else {
+
+            $elementText = new NeatlineRecord(
+                $item->id,
+                $titleElement->id,
+                $title
+            );
 
         }
 
         // If a description record already exists, update it.
         if ($descriptionRecord) {
 
+            $elementText = $descriptionRecord->getElementText();
+            $elementText->text = $description;
+            $elementText->save();
+
         }
 
         // Otherwise, create one.
         else {
 
+            $elementText = new NeatlineRecord(
+                $item->id,
+                $descriptionElement->id,
+                $description
+            );
+
         }
+
+        // do time record update/create/save.
 
     }
 
