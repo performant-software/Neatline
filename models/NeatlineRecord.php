@@ -36,35 +36,6 @@ class NeatlineRecord extends Omeka_record
     public $element_text_id;
 
     /**
-     * Extend the constructor so that the class fires off the creator
-     * methods automatically on instantiation.
-     *
-     * @param integer $neatline_id The id of the exhibit.
-     * @param integer $item_id The id of the parent item.
-     * @param integer $element_id The id of the element that the new
-     * text should be keyed to.
-     * @param string $text The data.
-     *
-     * @return void.
-     */
-    public function __construct($neatline_id, $item_id, $element_id, $text)
-    {
-
-        // Call parent.
-        parent::__construct();
-
-        // Setters.
-        $this->neatline_id = $neatline_id;
-        $this->item_id = $item_id;
-        $this->element_id = $element_id;
-        $this->save();
-
-        // Create the new element text.
-        $this->_createElementText($text);
-
-    }
-
-    /**
      * Fetch the associated element text.
      *
      * @return Omeka_record The text.
@@ -80,12 +51,11 @@ class NeatlineRecord extends Omeka_record
     /**
      * Create the child element text.
      *
-     * @param integer $element_id The id of the parent element.
      * @param string $text The content text.
      *
-     * @return void.
+     * @return Omeka_record $elementText The new text.
      */
-    protected function _createElementText($text)
+    public function createElementText($text)
     {
 
         // Get the Item record type object.
@@ -100,9 +70,25 @@ class NeatlineRecord extends Omeka_record
         $elementText->text = $text;
         $elementText->save();
 
-        // Update self with new id, save.
-        $this->element_text_id = $elementText->id;
-        $this->save();
+        return $elementText;
+
+    }
+
+    /**
+     * Update the value of the associated element text.
+     *
+     * @param string $text The content text.
+     *
+     * @return Omeka_record $elementText The updated text.
+     */
+    public function updateElementText($text)
+    {
+
+        $elementText = $this->getElementText();
+        $elementText->text = $text;
+        $elementText->save();
+
+        return $elementText;
 
     }
 

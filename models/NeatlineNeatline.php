@@ -183,26 +183,33 @@ class NeatlineNeatline extends Omeka_record
         $dateRecord = $timeDataTable
             ->findByElement($this->id, $item->id);
 
-        // If a title record already exists, update it.
-        if ($titleRecord) {
+        // ** Title **
 
-            $elementText = $titleRecord->getElementText();
-            $elementText->text = $title;
-            $elementText->save();
+        // If a title record already exists, update it.
+        if ($titleRecord != null) {
+
+            // Update the text.
+            $titleRecord->updateElementText($title);
 
         }
 
         // Otherwise, create one.
-        else {
+        else if ($title != '') {
 
-            new NeatlineRecord(
-                $this->id,
-                $item->id,
-                $titleElement->id,
-                $title
-            );
+            // Creat the new record.
+            $record = new NeatlineRecord();
+            $record->neatline_id = $this->id;
+            $record->item_id = $item->id;
+            $record->element_id = $titleElement->id;
+
+            // Create the new text.
+            $elementText = $record->createElementText($title);
+            $record->element_text_id = $elementText->id;
+            $record->save();
 
         }
+
+        // ** Description **
 
         // // If a description record already exists, update it.
         // if ($descriptionRecord != null) {

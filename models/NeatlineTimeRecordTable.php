@@ -41,24 +41,14 @@ class NeatlineTimeRecordTable extends Omeka_Db_Table
     public function findByElement($neatline_id, $item_id)
     {
 
-        // Try to get an existing record.
-        try {
+        return $this->fetchObject(
+            $this->getSelect()->where('neatline_id = ' . $neatline_id . ' AND item_id = ' . $item_id)
+        );
 
-            $select = $this->getSelect()
-                ->where('neatline_id = ' . $neatline_id . ' AND item_id = ' . $item_id);
-
-            $record = $this->fetchObject($select);
-
-        }
-
-        // If no record exists, return null.
-        catch (Exception $e) {
-
-            $record = null;
-
-        }
-
-        return $record;
+        // return $this->findBySql(
+        //     'neatline_id = ? AND item_id = ?',
+        //     array($neatline_id, $item_id), true
+        // );
 
     }
 
