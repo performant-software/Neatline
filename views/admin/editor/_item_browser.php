@@ -45,10 +45,10 @@
 
         </ul>
 
-    <div class="columns">
-        <div class="col-1 col-cell col-header"><span class="header">S</span></div>
-        <div class="col-2 col-cell col-header"><span class="header">T</span></div>
-    </div>
+        <div class="columns">
+            <div class="col-1 col-cell col-header"><span class="header">S</span></div>
+            <div class="col-2 col-cell col-header"><span class="header">T</span></div>
+        </div>
 
     </div>
 

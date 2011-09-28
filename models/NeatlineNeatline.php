@@ -204,52 +204,52 @@ class NeatlineNeatline extends Omeka_record
 
         }
 
-        // If a description record already exists, update it.
-        if ($descriptionRecord) {
+        // // If a description record already exists, update it.
+        // if ($descriptionRecord != null) {
 
-            $elementText = $descriptionRecord->getElementText();
-            $elementText->text = $description;
-            $elementText->save();
+        //     $elementText = $descriptionRecord->getElementText();
+        //     $elementText->text = $description;
+        //     $elementText->save();
 
-        }
+        // }
 
-        // Otherwise, create one.
-        else {
+        // // Otherwise, create one.
+        // else {
 
-            new NeatlineRecord(
-                $this->id,
-                $item->id,
-                $descriptionElement->id,
-                $description
-            );
+        //     new NeatlineRecord(
+        //         $this->id,
+        //         $item->id,
+        //         $descriptionElement->id,
+        //         $description
+        //     );
 
-        }
+        // }
 
-        // If a date record already exists, update it.
-        if ($dateRecord) {
+        // // If a date record already exists, update it.
+        // if ($dateRecord != null) {
 
-            $dateRecord->updateElementTexts(
-                $startDate,
-                $startTime,
-                $endDate,
-                $endTime
-            );
+        //     $dateRecord->updateElementTexts(
+        //         $startDate,
+        //         $startTime,
+        //         $endDate,
+        //         $endTime
+        //     );
 
-        }
+        // }
 
-        // Otherwise, create one.
-        else {
+        // // Otherwise, create one.
+        // else {
 
-            new NeatlineTimeRecord(
-                $this->id,
-                $item->id,
-                $startDate,
-                $startTime,
-                $endDate,
-                $endTime
-            );
+        //     new NeatlineTimeRecord(
+        //         $this->id,
+        //         $item->id,
+        //         $startDate,
+        //         $startTime,
+        //         $endDate,
+        //         $endTime
+        //     );
 
-        }
+        // }
 
     }
 

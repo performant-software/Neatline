@@ -88,7 +88,7 @@ class NeatlineTimeRecord extends Omeka_record
 
         // Get the Item record type object.
         $recordTypeTable = $this->getTable('RecordType');
-        $dateRecordType = $recordTypeTable->findBySql('name = ?', array('Item'));
+        $dateRecordType = $recordTypeTable->findBySql('name = ?', array('Item'), true);
 
         // Get the date element object.
         $elementTable = $this->getTable('Element');
@@ -98,15 +98,15 @@ class NeatlineTimeRecord extends Omeka_record
         if ($startDate != '') {
 
             // Populate.
-            $text = new ElementText;
-            $text->record_id = $this->item_id;
-            $text->record_type_id = $dateRecordType->id;
-            $text->element_id = $dateElement->id;
-            $text->text = $startDate;
-            $text->save();
+            $elemenText = new ElementText;
+            $elemenText->record_id = $this->item_id;
+            $elemenText->record_type_id = $dateRecordType->id;
+            $elemenText->element_id = $dateElement->id;
+            $elemenText->text = $startDate;
+            $elemenText->save();
 
             // Update self with new id, save.
-            $this->start_date_element_text_id = $text->id;
+            $this->start_date_element_text_id = $elemenText->id;
             $this->save();
 
         }

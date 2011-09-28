@@ -90,18 +90,18 @@ class NeatlineRecord extends Omeka_record
 
         // Get the Item record type object.
         $recordTypeTable = $this->getTable('RecordType');
-        $itemRecordType = $recordTypeTable->findBySql('name = ?', array('Item'));
+        $itemRecordType = $recordTypeTable->findBySql('name = ?', array('Item'), true);
 
         // Populate.
-        $text = new ElementText;
-        $text->record_id = $this->item_id;
-        $text->record_type_id = $itemRecordType->id;
-        $text->element_id = $this->element_id;
-        $text->text = $text;
-        $text->save();
+        $elementText = new ElementText;
+        $elementText->record_id = $this->item_id;
+        $elementText->record_type_id = $itemRecordType->id;
+        $elementText->element_id = $this->element_id;
+        $elementText->text = $text;
+        $elementText->save();
 
         // Update self with new id, save.
-        $this->element_text_id = $text->id;
+        $this->element_text_id = $elementText->id;
         $this->save();
 
     }

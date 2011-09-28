@@ -101,7 +101,7 @@ class NeatlinePlugin
                 `is_timeline` tinyint(1) NOT NULL,
                 `is_undated_items` tinyint(1) NOT NULL,
                  PRIMARY KEY (`id`)
-               ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
+               ) ENGINE=innodb DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
 
         $this->_db->query($sql);
 
@@ -112,7 +112,7 @@ class NeatlinePlugin
                 `element_id` int(10) unsigned NULL,
                 `element_text_id` int(10) unsigned NULL,
                  PRIMARY KEY (`id`)
-               ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
+               ) ENGINE=innodb DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
 
         $this->_db->query($sql);
 
@@ -125,7 +125,7 @@ class NeatlinePlugin
                 `end_date_element_text_id` int(10) unsigned NULL,
                 `end_time_element_text_id` int(10) unsigned NULL,
                  PRIMARY KEY (`id`)
-               ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
+               ) ENGINE=innodb DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
 
         $this->_db->query($sql);
 

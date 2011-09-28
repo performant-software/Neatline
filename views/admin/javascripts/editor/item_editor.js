@@ -640,7 +640,7 @@
             this._currentFormItem = item;
 
             // Fire off the event to show the map editor controls.
-            this._trigger('mapedit', event, {
+            this._trigger('mapedit', {}, {
                 'item': item
             });
 
@@ -714,7 +714,7 @@
                     start_date: startDateDateInput.val(),
                     start_time: startDateTimeInput.val(),
                     end_date: endDateDateInput.val(),
-                    end_time: endDateTimeInput.val(),
+                    end_time: endDateTimeInput.val()
                 },
 
                 success: function(data) {

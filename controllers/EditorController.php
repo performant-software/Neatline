@@ -126,10 +126,10 @@ class Neatline_EditorController extends Omeka_Controller_Action
 
         // Fetch the Neatline exhibit record and item record.
         $neatline = $this->_neatlinesTable->find($neatlineId);
-        $item = $this->_itemTable->find($itemId);
+        $item = $this->_itemsTable->find($itemId);
 
-        // Save the data and return success status.
-        if ($neatline->saveData(
+        // Save the data.
+        $neatline->saveData(
             $item,
             $title,
             $description,
@@ -137,11 +137,7 @@ class Neatline_EditorController extends Omeka_Controller_Action
             $startTime,
             $endDate,
             $endTime
-        )) {
-
-            // do success.
-
-        }
+        );
 
     }
 
