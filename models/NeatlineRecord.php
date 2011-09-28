@@ -79,16 +79,23 @@ class NeatlineRecord extends Omeka_record
      *
      * @param string $text The content text.
      *
-     * @return Omeka_record $elementText The updated text.
+     * @return void.
      */
     public function updateElementText($text)
     {
 
         $elementText = $this->getElementText();
-        $elementText->text = $text;
-        $elementText->save();
 
-        return $elementText;
+        // If the new text is not blank, update.
+        if ($text != '') {
+            $elementText->text = $text;
+            $elementText->save();
+        }
+
+        // Otherwise, delete.
+        else {
+            $elementText->delete();
+        }
 
     }
 

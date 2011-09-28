@@ -38,42 +38,6 @@ class NeatlineTimeRecord extends Omeka_record
     public $end_time_element_text_id;
 
     /**
-     * Extend the constructor so that the class fires off the creator
-     * methods automatically on instantiation.
-     *
-     * @param integer $neatline_id The id of the exhibit.
-     * @param integer $item_id The id of the parent item.
-     * @param string $startDate The start date.
-     * @param string $startTime The start time.
-     * @param string $endDate The end date.
-     * @param string $endTime The end time.
-     *
-     * @return void.
-     */
-    public function __construct(
-        $neatline_id,
-        $item_id,
-        $startDate,
-        $startTime,
-        $endDate,
-        $endTime
-    )
-    {
-
-        // Call parent.
-        parent::__construct();
-
-        // Setters.
-        $this->neatline_id = $neatline_id;
-        $this->item_id = $item_id;
-        $this->save();
-
-        // Create the new element text.
-        $this->_createElementTexts($startDate, $startTime, $endDate, $endTime);
-
-    }
-
-    /**
      * Create the child element texts for each of the extant pieces.
      *
      * @param string $startDate The start date.
@@ -83,31 +47,30 @@ class NeatlineTimeRecord extends Omeka_record
      *
      * @return void.
      */
-    protected function _createElementTexts($startDate, $startTime, $endDate, $endTime)
+    public function createElementTexts($startDate, $startTime, $endDate, $endTime)
     {
 
         // Get the Item record type object.
         $recordTypeTable = $this->getTable('RecordType');
-        $dateRecordType = $recordTypeTable->findBySql('name = ?', array('Item'), true);
+        $dateRecordTypeId = $recordTypeTable->findIdFromName('Item');
 
         // Get the date element object.
         $elementTable = $this->getTable('Element');
-        $dateElement->findByElementSetNameAndElementName('Dublin Core', 'Date');
+        $dateElement = $elementTable->findByElementSetNameAndElementName('Dublin Core', 'Date');
 
         // If start date.
         if ($startDate != '') {
 
             // Populate.
-            $elemenText = new ElementText;
-            $elemenText->record_id = $this->item_id;
-            $elemenText->record_type_id = $dateRecordType->id;
-            $elemenText->element_id = $dateElement->id;
-            $elemenText->text = $startDate;
-            $elemenText->save();
+            $text = new ElementText;
+            $text->record_id = $this->item_id;
+            $text->record_type_id = $dateRecordTypeId;
+            $text->element_id = $dateElement->id;
+            $text->text = $startDate;
+            $text->save();
 
             // Update self with new id, save.
-            $this->start_date_element_text_id = $elemenText->id;
-            $this->save();
+            $this->start_date_element_text_id = $text->id;
 
         }
 
@@ -117,14 +80,13 @@ class NeatlineTimeRecord extends Omeka_record
             // Populate.
             $text = new ElementText;
             $text->record_id = $this->item_id;
-            $text->record_type_id = $dateRecordType->id;
+            $text->record_type_id = $dateRecordTypeId;
             $text->element_id = $dateElement->id;
             $text->text = $startTime;
             $text->save();
 
             // Update self with new id, save.
             $this->start_time_element_text_id = $text->id;
-            $this->save();
 
         }
 
@@ -134,14 +96,13 @@ class NeatlineTimeRecord extends Omeka_record
             // Populate.
             $text = new ElementText;
             $text->record_id = $this->item_id;
-            $text->record_type_id = $dateRecordType->id;
+            $text->record_type_id = $dateRecordTypeId;
             $text->element_id = $dateElement->id;
             $text->text = $endDate;
             $text->save();
 
             // Update self with new id, save.
             $this->end_date_element_text_id = $text->id;
-            $this->save();
 
         }
 
@@ -151,16 +112,18 @@ class NeatlineTimeRecord extends Omeka_record
             // Populate.
             $text = new ElementText;
             $text->record_id = $this->item_id;
-            $text->record_type_id = $dateRecordType->id;
+            $text->record_type_id = $dateRecordTypeId;
             $text->element_id = $dateElement->id;
             $text->text = $endTime;
             $text->save();
 
             // Update self with new id, save.
             $this->end_time_element_text_id = $text->id;
-            $this->save();
 
         }
+
+        // Commit.
+        $this->save();
 
     }
 
@@ -182,11 +145,11 @@ class NeatlineTimeRecord extends Omeka_record
 
         // Get the Item record type object.
         $recordTypeTable = $this->getTable('RecordType');
-        $dateRecordType = $recordTypeTable->findBySql('name = ?', array('Item'));
+        $dateRecordTypeId = $recordTypeTable->findIdFromName('Item');
 
         // Get the date element object.
         $elementTable = $this->getTable('Element');
-        $dateElement->findByElementSetNameAndElementName('Dublin Core', 'Date');
+        $dateElement = $elementTable->findByElementSetNameAndElementName('Dublin Core', 'Date');
 
         // ** Start date. **
 
@@ -206,6 +169,7 @@ class NeatlineTimeRecord extends Omeka_record
             else {
                 $text->delete();
                 $this->start_date_element_text_id = null;
+                $this->save();
             }
 
         }
@@ -219,7 +183,7 @@ class NeatlineTimeRecord extends Omeka_record
                 // Populate.
                 $text = new ElementText;
                 $text->record_id = $this->item_id;
-                $text->record_type_id = $dateRecordType->id;
+                $text->record_type_id = $dateRecordTypeId;
                 $text->element_id = $dateElement->id;
                 $text->text = $startDate;
                 $text->save();
@@ -250,6 +214,7 @@ class NeatlineTimeRecord extends Omeka_record
             else {
                 $text->delete();
                 $this->start_time_element_text_id = null;
+                $this->save();
             }
 
         }
@@ -263,7 +228,7 @@ class NeatlineTimeRecord extends Omeka_record
                 // Populate.
                 $text = new ElementText;
                 $text->record_id = $this->item_id;
-                $text->record_type_id = $dateRecordType->id;
+                $text->record_type_id = $dateRecordTypeId;
                 $text->element_id = $dateElement->id;
                 $text->text = $startTime;
                 $text->save();
@@ -294,6 +259,7 @@ class NeatlineTimeRecord extends Omeka_record
             else {
                 $text->delete();
                 $this->end_date_element_text_id = null;
+                $this->save();
             }
 
         }
@@ -307,7 +273,7 @@ class NeatlineTimeRecord extends Omeka_record
                 // Populate.
                 $text = new ElementText;
                 $text->record_id = $this->item_id;
-                $text->record_type_id = $dateRecordType->id;
+                $text->record_type_id = $dateRecordTypeId;
                 $text->element_id = $dateElement->id;
                 $text->text = $endDate;
                 $text->save();
@@ -326,7 +292,7 @@ class NeatlineTimeRecord extends Omeka_record
         if ($this->end_time_element_text_id != null) {
 
             // Get the element text.
-            $text = $elementTextTable->find($this->$this->end_time_element_text_id);
+            $text = $elementTextTable->find($this->end_time_element_text_id);
 
             // If the new element text is not blank.
             if ($endTime != '') {
@@ -338,6 +304,7 @@ class NeatlineTimeRecord extends Omeka_record
             else {
                 $text->delete();
                 $this->end_time_element_text_id = null;
+                $this->save();
             }
 
         }
@@ -351,7 +318,7 @@ class NeatlineTimeRecord extends Omeka_record
                 // Populate.
                 $text = new ElementText;
                 $text->record_id = $this->item_id;
-                $text->record_type_id = $dateRecordType->id;
+                $text->record_type_id = $dateRecordTypeId;
                 $text->element_id = $dateElement->id;
                 $text->text = $endTime;
                 $text->save();
@@ -361,6 +328,17 @@ class NeatlineTimeRecord extends Omeka_record
                 $this->save();
 
             }
+
+        }
+
+        // If all of the pieces are empty, delete the record.
+        if ($this->start_date_element_text_id == null
+            && $this->start_time_element_text_id == null
+            && $this->end_date_element_text_id == null
+            && $this->end_time_element_text_id == null
+        ) {
+
+            $this->delete();
 
         }
 

@@ -43,13 +43,10 @@ class NeatlineRecordTable extends Omeka_Db_Table
     {
 
         return $this->fetchObject(
-            $this->getSelect()->where('neatline_id = ' . $neatline_id . ' AND item_id = ' . $item_id . ' AND element_id = ' . $element_id)
+            $this->getSelect()->where('neatline_id = '. $neatline_id
+                . ' AND item_id = ' . $item_id
+                . ' AND element_id = ' . $element_id)
         );
-
-        // return $this->findBySql(
-        //     'neatline_id = ? AND item_id = ? AND element_id = ?',
-        //     array($neatline_id, $item_id, $element_id), true
-        // );
 
     }
 

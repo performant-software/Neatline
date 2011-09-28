@@ -183,6 +183,7 @@ class NeatlineNeatline extends Omeka_record
         $dateRecord = $timeDataTable
             ->findByElement($this->id, $item->id);
 
+
         // ** Title **
 
         // If a title record already exists, update it.
@@ -209,54 +210,66 @@ class NeatlineNeatline extends Omeka_record
 
         }
 
+
         // ** Description **
 
-        // // If a description record already exists, update it.
-        // if ($descriptionRecord != null) {
+        // If a description record already exists, update it.
+        if ($descriptionRecord != null) {
 
-        //     $elementText = $descriptionRecord->getElementText();
-        //     $elementText->text = $description;
-        //     $elementText->save();
+            // Update the text.
+            $descriptionRecord->updateElementText($description);
 
-        // }
+        }
 
-        // // Otherwise, create one.
-        // else {
+        // Otherwise, create one.
+        else if ($description != '') {
 
-        //     new NeatlineRecord(
-        //         $this->id,
-        //         $item->id,
-        //         $descriptionElement->id,
-        //         $description
-        //     );
+            // Creat the new record.
+            $record = new NeatlineRecord();
+            $record->neatline_id = $this->id;
+            $record->item_id = $item->id;
+            $record->element_id = $descriptionElement->id;
 
-        // }
+            // Create the new text.
+            $elementText = $record->createElementText($description);
+            $record->element_text_id = $elementText->id;
+            $record->save();
 
-        // // If a date record already exists, update it.
-        // if ($dateRecord != null) {
+        }
 
-        //     $dateRecord->updateElementTexts(
-        //         $startDate,
-        //         $startTime,
-        //         $endDate,
-        //         $endTime
-        //     );
 
-        // }
+        // ** Date **
 
-        // // Otherwise, create one.
-        // else {
+        // If a date record already exists, update it.
+        if ($dateRecord != null) {
 
-        //     new NeatlineTimeRecord(
-        //         $this->id,
-        //         $item->id,
-        //         $startDate,
-        //         $startTime,
-        //         $endDate,
-        //         $endTime
-        //     );
+            // Update the texts.
+            $dateRecord->updateElementTexts(
+                $startDate,
+                $startTime,
+                $endDate,
+                $endTime
+            );
 
-        // }
+        }
+
+        // Otherwise, create one.
+        else {
+
+            // Create the new record.
+            $record = new NeatlineTimeRecord();
+            $record->neatline_id = $this->id;
+            $record->item_id = $item->id;
+
+            // Create the texts.
+            $record->createElementTexts(
+                $startDate,
+                $startTime,
+                $endDate,
+                $endTime
+            );
+
+        }
 
     }
 
