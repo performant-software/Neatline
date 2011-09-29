@@ -42,7 +42,7 @@
             <div class="clearfix">
                 <label for="map-description">Description</label>
                 <div class="input">
-                    <textarea class="xlarge" name="description" rows="3"><?php echo $neatline->getTextByItemAndField($item, 'Description'); ?></textarea>
+                    <textarea class="xlarge" name="description" rows="4"><?php echo $neatline->getTextByItemAndField($item, 'Description'); ?></textarea>
                     <span class="help-block">Descriptive text associated with the item's timeline entry.</span>
                 </div>
             </div>
@@ -51,8 +51,8 @@
                 <label>Start Date</label>
                 <div class="input">
                     <div class="inline-inputs">
-                        <input class="medium" name="start-date-date" type="text">
-                        <input class="mini" name="start-date-time" type="text">
+                        <input class="medium" name="start-date-date" type="text" value="<?php echo $neatline->getTimeTextByItemAndField($item, 'start_date'); ?>">
+                        <input class="mini" name="start-date-time" type="text" value="<?php echo $neatline->getTimeTextByItemAndField($item, 'start_time'); ?>">
                         <span class="help-inline">Enter the date (or start date) of the item.</span>
                     </div>
                 </div>
@@ -62,8 +62,8 @@
                 <label>End Date</label>
                 <div class="input">
                     <div class="inline-inputs">
-                        <input class="medium" name="end-date-date" type="text">
-                        <input class="mini" name="end-date-time" type="text">
+                        <input class="medium" name="end-date-date" type="text" value="<?php echo $neatline->getTimeTextByItemAndField($item, 'end_date'); ?>">
+                        <input class="mini" name="end-date-time" type="text" value="<?php echo $neatline->getTimeTextByItemAndField($item, 'end_time'); ?>">
                         <span class="help-inline">Enter an ending date, if applicable.</span>
                     </div>
                 </div>

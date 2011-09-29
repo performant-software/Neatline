@@ -38,6 +38,73 @@ class NeatlineTimeRecord extends Omeka_record
     public $end_time_element_text_id;
 
     /**
+     * Get the element text record for one of the date pieces.
+     *
+     * @param string $piece The piece to get - can be 'start_date',
+     * 'start_time', 'end_date', or 'end_time'.
+     *
+     * @return Omeka_record The text.
+     */
+    public function getElementText($piece)
+    {
+
+        $elementTextTable = $this->getTable('ElementText');
+
+        switch ($piece) {
+
+            case 'start_date':
+
+                if ($this->start_date_element_text_id != null) {
+                    return $elementTextTable->find($this->start_date_element_text_id);
+                }
+
+                else {
+                    return null;
+                }
+
+            break;
+
+            case 'start_time':
+
+                if ($this->start_time_element_text_id != null) {
+                    return $elementTextTable->find($this->start_time_element_text_id);
+                }
+
+                else {
+                    return null;
+                }
+
+            break;
+
+            case 'end_date':
+
+                if ($this->end_date_element_text_id != null) {
+                    return $elementTextTable->find($this->end_date_element_text_id);
+                }
+
+                else {
+                    return null;
+                }
+
+            break;
+
+            case 'end_time':
+
+                if ($this->end_time_element_text_id != null) {
+                    return $elementTextTable->find($this->end_time_element_text_id);
+                }
+
+                else {
+                    return null;
+                }
+
+            break;
+
+        }
+
+    }
+
+    /**
      * Create the child element texts for each of the extant pieces.
      *
      * @param string $startDate The start date.

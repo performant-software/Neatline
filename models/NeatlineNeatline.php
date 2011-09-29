@@ -345,6 +345,48 @@ class NeatlineNeatline extends Omeka_record
         // Otherwise, look for an existing field to use.
         else {
 
+            $text = item('Dublin Core', $field, null, $item);
+
+        }
+
+        return $text;
+
+    }
+
+    /**
+     * Get the value of a temporal Neatline data store.
+     *
+     * @param Omeka_record $item The item.
+     * @param string $piece The piece to get - can be 'start_date',
+     * 'start_time', 'end_date', or 'end_time'.
+     *
+     * @return Omeka_record The map.
+     */
+    public function getTimeTextByItemAndField($item, $piece)
+    {
+
+        $text = '';
+
+        // Get the tables.
+        $dataTable = $this->getTable('NeatlineTimeRecord');
+        $elementTable = $this->getTable('Element');
+
+        // Fetch the element record for the date field.
+        $element = $elementTable
+            ->findByElementSetNameAndElementName('Dublin Core', 'Date');
+
+        $record = $dataTable
+            ->findByElement($this->id, $item->id);
+
+        // Try to get a value.
+        if ($record != null) {
+
+            $elementText = $record->getElementText($piece);
+
+            if ($text != null) {
+                $text = $elementText->text;
+            }
+
         }
 
         return $text;
