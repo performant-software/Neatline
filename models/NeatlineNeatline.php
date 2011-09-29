@@ -309,4 +309,19 @@ class NeatlineNeatline extends Omeka_record
 
     }
 
+    /**
+     * Get the value of a non-temporal Neatline data store.
+     *
+     * @param Omeka_record $item The item.
+     * @param string $field The name of the DC field.
+     *
+     * @return Omeka_record The map.
+     */
+    public function getTextByItemAndField($item, $field)
+    {
+
+
+
+    }
+
 }

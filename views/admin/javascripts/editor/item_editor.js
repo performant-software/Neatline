@@ -490,7 +490,8 @@
                     tags: this.selected.tags,
                     types: this.selected.types,
                     collections: this.selected.collections,
-                    all: this.selected.all
+                    all: this.selected.all,
+                    neatline_id: this.neatlineData.id
                 },
 
                 success: function(data) {
@@ -708,7 +709,7 @@
 
             });
 
-            // Core ajax call to get items.
+            // Save data.
             $.ajax({
 
                 url: 'save',

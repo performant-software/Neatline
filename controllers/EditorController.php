@@ -90,6 +90,10 @@ class Neatline_EditorController extends Omeka_Controller_Action
         $types = $this->_request->getParam('types');
         $collections = $this->_request->getParam('collections');
         $all = json_decode($this->_request->getParam('all'));
+        $neatlineId = $this->_request->getParam('neatline_id');
+
+        // Push in the Neatline exhibit record.
+        $this->view->neatline = $this->_neatlinesTable->find($neatlineId);
 
         // Get items.
         $this->view->items = neatline_getItemsForBrowser(

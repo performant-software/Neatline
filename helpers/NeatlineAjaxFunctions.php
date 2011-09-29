@@ -97,20 +97,3 @@ function neatline_getItemsForBrowser(
     return $itemsTable->fetchObjects($select);
 
 }
-
-/**
- * Return the current Neatline value for a given item and
- * Dublin core field. If there is no Neatline-specific value set,
- * default to the first existing element text.
- *
- * @param Omeka_record $item The item.
- * @param string $dcName The DC field to get.
- *
- * @return string The text.
- */
-function neatline_getTextByItemAndField($item, $dcName)
-{
-
-
-
-}

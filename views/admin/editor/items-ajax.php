@@ -41,7 +41,8 @@
         <tr class="edit-form">
             <td colspan="3">
                 <?php echo $this->partial('editor/_edit_neatline_record.php', array(
-                    'item' => $item
+                    'item' => $item,
+                    'neatline' => $neatline
                 )); ?>
             </td>
         </tr>
