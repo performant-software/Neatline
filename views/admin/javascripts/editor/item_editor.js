@@ -630,8 +630,6 @@
 
                 'mousedown': function() {
                     self._saveItemForm();
-                    saveButton.unbind('mousedown');
-                    cancelButton.unbind('mousedown');
                 },
 
                 'click': function(event) {
@@ -688,23 +686,11 @@
 
             editForm.animate({
                 'opacity': 0.3
-            }, 200, function() {
+            }, 50, function() {
 
                 // Disable the form elements.
                 $.each(editForm.find('input, textarea'), function(i, input) {
                     $(input).prop('disabled', true);
-                });
-
-                // Show the loader div.
-                var loader = editFormTd.find('.form-save-loader');
-
-                // Animate up the loader height.
-                loader.animate({
-                    'height': 20
-                }, 200, function() {
-
-                    loader.css('visibility', 'visible');
-
                 });
 
             });
@@ -713,7 +699,6 @@
             $.ajax({
 
                 url: 'save',
-                dataType: 'json',
                 type: 'POST',
 
                 data: {
@@ -728,8 +713,19 @@
                     geocoverage: this.coverageData
                 },
 
-                success: function(data) {
-                    // Do success - reload items, etc.
+                success: function() {
+
+                    editForm.animate({
+                        'opacity': 1
+                    }, 50, function() {
+
+                        // Enable the form elements.
+                        $.each(editForm.find('input, textarea'), function(i, input) {
+                            $(input).prop('disabled', false);
+                        });
+
+                    });
+
                 }
 
             });

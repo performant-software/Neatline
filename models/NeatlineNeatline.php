@@ -302,7 +302,10 @@ class NeatlineNeatline extends Omeka_record
         }
 
         // Otherwise, create one.
-        else if ($geoCoverage != '') {
+        else if ($geoCoverage != 'null') {
+
+            echo 'test';
+            echo $geoCoverage;
 
             // Creat the new record.
             $record = new NeatlineRecord();
@@ -312,8 +315,12 @@ class NeatlineNeatline extends Omeka_record
 
             // Create the new text.
             $elementText = $record->createElementText($geoCoverage, 'Coverage');
-            $record->element_text_id = $elementText->id;
-            $record->save();
+
+            // If a text with the supplied data does not already exist.
+            if ($elementText != null) {
+                $record->element_text_id = $elementText->id;
+                $record->save();
+            }
 
         }
 

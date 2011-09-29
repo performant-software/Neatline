@@ -132,6 +132,8 @@ class Neatline_EditorController extends Omeka_Controller_Action
         $endTime = $_post['end_time'];
         $geoCoverage = json_encode($_post['geocoverage']);
 
+        echo $geoCoverage;
+
         // Fetch the Neatline exhibit record and item record.
         $neatline = $this->_neatlinesTable->find($neatlineId);
         $item = $this->_itemsTable->find($itemId);
