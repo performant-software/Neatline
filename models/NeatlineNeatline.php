@@ -142,6 +142,8 @@ class NeatlineNeatline extends Omeka_record
      * @param string $startTime The time of the start.
      * @param string $endDate The month/day/year of the end.
      * @param string $endTime The time of the end.
+     * @param array $geoCoverage The array of geocoverage data from
+     * the map annotations.
      *
      * @return boolean True if the save succeeds.
      */
@@ -152,7 +154,8 @@ class NeatlineNeatline extends Omeka_record
         $startDate,
         $startTime,
         $endDate,
-        $endTime
+        $endTime,
+        $geoCoverage
     )
     {
 
@@ -172,6 +175,9 @@ class NeatlineNeatline extends Omeka_record
         $dateElement = $elementTable
             ->findByElementSetNameAndElementName('Dublin Core', 'Date');
 
+        $coverageElement = $elementTable
+            ->findByElementSetNameAndElementName('Dublin Core', 'Coverage');
+
         // Try to find existing data records given the item and
         // element object.
         $titleRecord = $dataTable
@@ -179,6 +185,9 @@ class NeatlineNeatline extends Omeka_record
 
         $descriptionRecord = $dataTable
             ->findByElement($this->id, $item->id, $descriptionElement->id);
+
+        $geoCoverageRecord = $dataTable
+            ->findByElement($this->id, $item->id, $coverageElement->id);
 
         $dateRecord = $timeDataTable
             ->findByElement($this->id, $item->id);
@@ -268,6 +277,33 @@ class NeatlineNeatline extends Omeka_record
                 $endDate,
                 $endTime
             );
+
+        }
+
+
+        // ** Geocoverage **
+
+        // If a coverage record already exists, update it.
+        if ($geoCoverageRecord != null) {
+
+            // Update the texts.
+            $geoCoverageRecord->updateElementText($geoCoverage);
+
+        }
+
+        // Otherwise, create one.
+        else if ($geoCoverage != '') {
+
+            // Creat the new record.
+            $record = new NeatlineRecord();
+            $record->neatline_id = $this->id;
+            $record->item_id = $item->id;
+            $record->element_id = $coverageElement->id;
+
+            // Create the new text.
+            $elementText = $record->createElementText($geoCoverage);
+            $record->element_text_id = $elementText->id;
+            $record->save();
 
         }
 

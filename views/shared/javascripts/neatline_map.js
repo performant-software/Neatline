@@ -147,12 +147,12 @@
 
         getWktForSave: function() {
 
-            var wkts = [];
+            var wkts = {};
 
             // Push each of the wkt representations of the geometry
             // onto the array.
             $.each(this.editVectorLayer.features, function(i, feature) {
-                wkts.push(feature.geometry.toString());
+                wkts[i] = feature.geometry.toString();
             });
 
             return wkts;

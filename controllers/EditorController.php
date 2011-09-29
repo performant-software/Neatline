@@ -126,6 +126,7 @@ class Neatline_EditorController extends Omeka_Controller_Action
         $startTime = $_post['start_time'];
         $endDate = $_post['end_date'];
         $endTime = $_post['end_time'];
+        $geoCoverage = json_encode($_post['geocoverage']);
 
         // Fetch the Neatline exhibit record and item record.
         $neatline = $this->_neatlinesTable->find($neatlineId);
@@ -139,7 +140,8 @@ class Neatline_EditorController extends Omeka_Controller_Action
             $startDate,
             $startTime,
             $endDate,
-            $endTime
+            $endTime,
+            $geoCoverage
         );
 
     }

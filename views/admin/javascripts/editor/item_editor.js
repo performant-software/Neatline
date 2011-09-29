@@ -682,9 +682,8 @@
             var itemId = editForm.
                 find('recordid');
 
-            // Fire the end edit without save callback.
-            var wkts = this._trigger('savemapedit');
-            console.log(this.coverageData);
+            // Fetch the geocoverage data from OpenLayers.
+            this._trigger('savemapedit');
 
             editForm.animate({
                 'opacity': 0.3
@@ -724,7 +723,8 @@
                     start_date: startDateDateInput.val(),
                     start_time: startDateTimeInput.val(),
                     end_date: endDateDateInput.val(),
-                    end_time: endDateTimeInput.val()
+                    end_time: endDateTimeInput.val(),
+                    geocoverage: this.coverageData
                 },
 
                 success: function(data) {
