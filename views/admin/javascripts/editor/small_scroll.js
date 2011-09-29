@@ -56,6 +56,7 @@
             this._is_scrolling = false;
             this._at_top = true;
             this._at_bottom = true;
+            this._in_highlight_region = false;;
             this.factor = 0;
 
             // Add the scroller.
@@ -95,6 +96,8 @@
 
                 'mouseenter': function() {
 
+                    self._in_highlight_region = true;
+
                     self.bar.stop().animate({
                         'opacity': self.options.highlight_opacity
                     }, self.options.fade_duration);
@@ -102,6 +105,8 @@
                 },
 
                 'mouseleave': function() {
+
+                    self._in_highlight_region = false;
 
                     if (!self._is_scrolling) {
                         self.bar.stop().animate({
@@ -300,7 +305,12 @@
 
                     // Fade down the scrollbar, if the cursor drifted off of it
                     // during the scroll.
-                    self.bar.trigger('mouseleave');
+                    if (!self._in_highlight_region) {
+                        self.bar.stop().animate({
+                            'opacity': self.options.default_opacity,
+                            'background-color': self.options.colors.gray
+                        }, self.options.fade_duration);
+                    }
 
                 }
 

@@ -143,17 +143,13 @@
                 'mousedown': function() {
 
                     if (!self._isExpanded) {
-
                         self.show();
-                        self.tabLink.css('background',self.options.colors.hover_gray);
-
+                        self.tabLink.css('background', self.options.colors.hover_gray);
                     }
 
                     else {
-
                         self.hide();
                         self.tabLink.css('background', self.options.colors.default_gray);
-
                     }
 
                 },
@@ -190,10 +186,6 @@
 
                           self.hide();
                           self.tabLink.css('background',self.options.colors.default_gray);
-
-                          console.log(self._isOnDropdown);
-                          console.log(self._isOnTab);
-                          console.log(self._isExpanded);
 
                     }
 
