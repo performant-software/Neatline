@@ -95,6 +95,7 @@ class NeatlineRecord extends Omeka_record
         // Otherwise, delete.
         else {
             $elementText->delete();
+            $this->delete();
         }
 
     }
