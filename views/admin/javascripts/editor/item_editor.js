@@ -527,8 +527,11 @@
             // Add the edit form functionality.
             $.each(this.items, function(i, item) {
 
-                // DOM fetch the item and the edit form td.
+                // DOM fetch.
                 var item = $(item);
+                var itemTitleTd = item.find('.item-title');
+                var spaceBlock = item.find('.space');
+                var timeBlock = item.find('.time');
 
                 // Set the starting expanded tracker, record the item's
                 // native vertical offset for the auto-positioning on
@@ -536,7 +539,7 @@
                 item.data('expanded', false);
                 item.data('topOffset', item.position().top);
 
-                item.bind({
+                itemTitleTd.bind({
 
                     'mousedown': function() {
 
@@ -553,6 +556,8 @@
                     }
 
                 });
+
+                // Bind status data stores on the blocks.
 
             });
 

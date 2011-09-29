@@ -191,6 +191,10 @@
                           self.hide();
                           self.tabLink.css('background',self.options.colors.default_gray);
 
+                          console.log(self._isOnDropdown);
+                          console.log(self._isOnTab);
+                          console.log(self._isExpanded);
+
                     }
 
                 },
