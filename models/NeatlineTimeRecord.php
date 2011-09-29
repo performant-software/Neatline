@@ -189,8 +189,16 @@ class NeatlineTimeRecord extends Omeka_record
 
         }
 
-        // Commit.
-        $this->save();
+        // If all of the pieces are empty, do not save.
+        if ($this->start_date_element_text_id != null
+            || $this->start_time_element_text_id != null
+            || $this->end_date_element_text_id != null
+            || $this->end_time_element_text_id != null
+        ) {
+
+            $this->save();
+
+        }
 
     }
 
