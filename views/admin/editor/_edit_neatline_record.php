@@ -34,7 +34,7 @@
             <div class="clearfix">
                 <label for="title">Title</label>
                 <div class="input">
-                    <input class="xlarge" name="title" size="30" type="text" />
+                    <input class="xlarge" name="title" size="30" type="text" value="<?php echo neatline_getTextByItemAndField($item, 'Title'); ?>" />
                     <span class="help-block">The text displayed as the item's icon on the timeline.</span>
                 </div>
             </div>
@@ -42,7 +42,7 @@
             <div class="clearfix">
                 <label for="map-description">Description</label>
                 <div class="input">
-                    <textarea class="xlarge" name="description" rows="3"></textarea>
+                    <textarea class="xlarge" name="description" rows="3"><?php echo neatline_getTextByItemAndField($item, 'Description'); ?></textarea>
                     <span class="help-block">Descriptive text associated with the item's timeline entry.</span>
                 </div>
             </div>
