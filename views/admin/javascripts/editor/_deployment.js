@@ -22,8 +22,9 @@
 jQuery(document).ready(function($) {
 
     var neatlineContainer = $('#neatline-editor');
+    var editorContainer = $('#item-browser');
 
-    $('#item-browser').itemeditor({
+    editorContainer.itemeditor({
 
         'neatlineready': function() {
             neatlineContainer.neatline();
@@ -39,6 +40,11 @@ jQuery(document).ready(function($) {
 
         'endmapedit': function() {
             neatlineContainer.neatline('endMapEditWithoutSave');
+        },
+
+        'savemapedit': function() {
+            var wkts = neatlineContainer.neatline('getWktForSave');
+            editorContainer.itemeditor('setCoverageData', wkts);
         }
 
     });

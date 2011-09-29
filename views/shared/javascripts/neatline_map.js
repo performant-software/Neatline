@@ -143,6 +143,20 @@
             this.map.removeControl(this.editingToolbar);
             this.map.removeLayer(this.editVectorLayer, this.baseLayer);
 
+        },
+
+        getWktForSave: function() {
+
+            var wkts = [];
+
+            // Push each of the wkt representations of the geometry
+            // onto the array.
+            $.each(this.editVectorLayer.features, function(i, feature) {
+                wkts.push(feature.geometry.toString());
+            });
+
+            return wkts;
+
         }
 
     });

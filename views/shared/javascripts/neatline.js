@@ -328,6 +328,12 @@
 
             this.map.neatlinemap('endEditWithoutSave');
 
+        },
+
+        getWktForSave: function() {
+
+            return this.map.neatlinemap('getWktForSave');;
+
         }
 
     });

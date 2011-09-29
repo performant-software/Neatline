@@ -223,6 +223,12 @@
 
         },
 
+        setCoverageData: function(data) {
+
+            this.coverageData = data;
+
+        },
+
         _addWindowResizeListener: function() {
 
             var self = this;
@@ -675,6 +681,10 @@
 
             var itemId = editForm.
                 find('recordid');
+
+            // Fire the end edit without save callback.
+            var wkts = this._trigger('savemapedit');
+            console.log(this.coverageData);
 
             editForm.animate({
                 'opacity': 0.3
