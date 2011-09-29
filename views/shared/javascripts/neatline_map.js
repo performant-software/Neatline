@@ -141,7 +141,7 @@
         endEditWithoutSave: function() {
 
             this.map.removeControl(this.editingToolbar);
-            this.map.removeLayer(this.editVectorLayer, this.baseLayer);
+            this.map.removeLayer(this.editVectorLayer);
 
         },
 

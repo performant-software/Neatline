@@ -531,6 +531,7 @@
                 // DOM fetch.
                 var item = $(item);
                 var itemTitleTd = item.find('.item-title');
+                var itemTitleText = item.find('.' + self.options.item_title_text_class);
                 var spaceBlock = item.find('.space');
                 var timeBlock = item.find('.time');
 
@@ -539,6 +540,9 @@
                 // form open.
                 item.data('expanded', false);
                 item.data('topOffset', item.position().top);
+
+                // Set the starting 'changed' data parameter.
+                itemTitleText.data('changed', false);
 
                 itemTitleTd.bind({
 
@@ -557,8 +561,6 @@
                     }
 
                 });
-
-                // Bind status data stores on the blocks.
 
             });
 
@@ -632,6 +634,12 @@
                 'scrollTop': item.data('topOffset') - this.options.container_top_margin
             }, 300);
 
+            // Change the data record.
+            item.data('expanded', true);
+
+            // Record the expanded form.
+            this._currentFormItem = item;
+
             // Bind the button actions.
             var cancelButton = editForm.find('button[type="reset"]');
             var saveButton = editForm.find('input[type="submit"]');
@@ -668,25 +676,83 @@
                 $(input).bind({
 
                     'keydown': function() {
+
                         // Tween the title color and register the change.
                         itemTitleText.animate({ 'color': self.options.colors.unchanged_red }, 200);
                         itemTitleText.data('changed', true);
+
                     }
 
                 });
 
             });
 
-            // Change the data record.
-            item.data('expanded', true);
-
-            // Record the expanded form.
-            this._currentFormItem = item;
-
             // Fire off the event to show the map editor controls.
             this._trigger('mapedit', {}, {
                 'item': item
             });
+
+        },
+
+        _hideForm: function(item) {
+
+            // Get child markup.
+            var editFormTd = item.next().find('td');
+            var editForm = editFormTd.find('form');
+            var textSpan = item.find('.' + this.options.item_title_text_class);
+            var faderSpan = item.find('.' + this.options.item_title_fader_class);
+            var allInputs = editForm.find('input[type="text"], textarea')
+
+            // By default, fade to the default text color and weight.
+            var textColor = this.options.colors.text_default;
+            var textWeight = 'normal';
+
+            // Keep the title bold red if the form was not saved.
+            if (textSpan.data('changed')) {
+                textColor = this.options.colors.unchanged_red;
+                textWeight = 'bold';
+            }
+
+            // Highlight the item title.
+            textSpan.stop().animate({
+                'color': textColor,
+                'font-size': this.options.item_name_default_size,
+                'font-weight': textWeight
+            }, 100);
+
+            // Animate up the height.
+            editForm.animate({
+                'height': 0
+            }, 300, function() {
+                // Hide the form.
+                editFormTd.css({
+                    'display': 'none'
+                });
+            });
+
+            // Change the data record.
+            item.data('expanded', false);
+
+            // Set the tracker to null.
+            this._currentFormItem = null;
+
+            // Bind the button actions.
+            var cancelButton = editForm.find('button[type="reset"]');
+            var saveButton = editForm.find('input[type="submit"]');
+
+            // Pull events off cancel form.
+            cancelButton.unbind('mousedown click');
+
+            // Pull events off save form.
+            saveButton.unbind('mousedown click');
+
+            // Pull events off of inputs.
+            $.each(allInputs, function(i, input) {
+                $(input).unbind('keydown');
+            });
+
+            // Fire the end edit without save callback.
+            this._trigger('endmapedit');
 
         },
 
@@ -756,62 +822,13 @@
                         'opacity': 1
                     });
 
-                    // Roll back up the color of the elements.
-                    $.each(allInputs, function(i, input) {
-                        // Tween the title color and register the change.
-                        itemTitleText.animate({ 'color': self.options.colors.text_default }, 200);
-                        itemTitleText.data('changed', false);
-                    });
+                    // Tween the title color and register the change.
+                    itemTitleText.animate({ 'color': self.options.colors.text_default }, 200);
+                    itemTitleText.data('changed', false);
 
                 }
 
             });
-
-        },
-
-        _hideForm: function(item) {
-
-            // Get child markup.
-            var editFormTd = item.next().find('td');
-            var editForm = editFormTd.find('form');
-            var textSpan = item.find('.' + this.options.item_title_text_class);
-            var faderSpan = item.find('.' + this.options.item_title_fader_class);
-
-            // By default, fade to the default text color and weight.
-            var textColor = this.options.colors.text_default;
-            var textWeight = 'normal';
-
-            // Keep the title bold red if the form was not saved.
-            if (textSpan.data('changed')) {
-                textColor = this.options.colors.unchanged_red;
-                textWeight = 'bold';
-            }
-
-            // Highlight the item title.
-            textSpan.stop().animate({
-                'color': textColor,
-                'font-size': this.options.item_name_default_size + 'px',
-                'font-weight': textWeight
-            }, 100);
-
-            // Animate up the height.
-            editForm.animate({
-                'height': 0
-            }, 300, function() {
-                // Hide the form.
-                editFormTd.css({
-                    'display': 'none'
-                });
-            });
-
-            // Change the data record.
-            item.data('expanded', false);
-
-            // Set the tracker to null.
-            this._currentFormItem = null;
-
-            // Fire the end edit without save callback.
-            this._trigger('endmapedit');
 
         },
 
