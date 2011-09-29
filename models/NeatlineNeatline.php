@@ -320,7 +320,34 @@ class NeatlineNeatline extends Omeka_record
     public function getTextByItemAndField($item, $field)
     {
 
+        $text = '';
 
+        // Get the tables.
+        $dataTable = $this->getTable('NeatlineRecord');
+        $elementTable = $this->getTable('Element');
+
+        // Fetch the element record for the field.
+        $element = $elementTable
+            ->findByElementSetNameAndElementName('Dublin Core', $field);
+
+        // Attempt to find an existing Neatline record.
+        $record = $dataTable
+            ->findByElement($this->id, $item->id, $element->id);
+
+        // If a record exists, return it.
+        if ($record != null) {
+
+            // Update the text.
+            $text = $record->getElementText()->text;
+
+        }
+
+        // Otherwise, look for an existing field to use.
+        else {
+
+        }
+
+        return $text;
 
     }
 
