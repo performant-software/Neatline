@@ -49,6 +49,19 @@ class NeatlineRecord extends Omeka_record
     }
 
     /**
+     * Fetch the parent item.
+     *
+     * @return Omeka_record The item.
+     */
+    public function getItem()
+    {
+
+        $itemTable = $this->getTable('Item');
+        return $itemTable->find($this->item_id);
+
+    }
+
+    /**
      * Create the child element text.
      *
      * @param string $text The content text.
@@ -60,15 +73,41 @@ class NeatlineRecord extends Omeka_record
 
         // Get the Item record type object.
         $recordTypeTable = $this->getTable('RecordType');
-        $itemRecordType = $recordTypeTable->findBySql('name = ?', array('Item'), true);
+        $itemRecordTypeId = $recordTypeTable->findIdFromName('Item');
 
-        // Populate.
-        $elementText = new ElementText;
-        $elementText->record_id = $this->item_id;
-        $elementText->record_type_id = $itemRecordType->id;
-        $elementText->element_id = $this->element_id;
-        $elementText->text = $text;
-        $elementText->save();
+        // Find all existing element texts for the item/field and check 
+        // to see if any of them match the posted data.
+        $elementTextTable = $this->getTable('ElementText');
+        $existingTexts = $elementTextTable->fetchObjects(
+            $elementTextTable->getSelect()
+                ->where('record_id = ' . $this->item_id
+                    . ' AND record_type_id = ' . $itemRecordTypeId
+                    . ' AND element_id = ' . $this->element_id)
+        );
+
+        // Shells for match boolean and the potential new text.
+        $match = false;
+        $elementText = null;
+
+        // Walk existing texts and check for match.
+        foreach ($existingTexts as $existingText) {
+
+            // If match, bounce out.
+            if ($existingText->text == $text) {
+                $match = true;
+            }
+
+        }
+
+        if (!$match) {
+            // Otherwise, create a new text.
+            $elementText = new ElementText;
+            $elementText->record_id = $this->item_id;
+            $elementText->record_type_id = $itemRecordTypeId;
+            $elementText->element_id = $this->element_id;
+            $elementText->text = $text;
+            $elementText->save();
+        }
 
         return $elementText;
 

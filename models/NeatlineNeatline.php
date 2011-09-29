@@ -213,9 +213,15 @@ class NeatlineNeatline extends Omeka_record
             $record->element_id = $titleElement->id;
 
             // Create the new text.
-            $elementText = $record->createElementText($title);
-            $record->element_text_id = $elementText->id;
-            $record->save();
+            $elementText = $record->createElementText($title, 'Title');
+
+            print_r($elementText);
+
+            // If a text with the supplied data does not already exist.
+            if ($elementText != null) {
+                $record->element_text_id = $elementText->id;
+                $record->save();
+            }
 
         }
 
@@ -240,9 +246,13 @@ class NeatlineNeatline extends Omeka_record
             $record->element_id = $descriptionElement->id;
 
             // Create the new text.
-            $elementText = $record->createElementText($description);
-            $record->element_text_id = $elementText->id;
-            $record->save();
+            $elementText = $record->createElementText($description, 'Description');
+
+            // If a text with the supplied data does not already exist.
+            if ($elementText != null) {
+                $record->element_text_id = $elementText->id;
+                $record->save();
+            }
 
         }
 
@@ -301,7 +311,7 @@ class NeatlineNeatline extends Omeka_record
             $record->element_id = $coverageElement->id;
 
             // Create the new text.
-            $elementText = $record->createElementText($geoCoverage);
+            $elementText = $record->createElementText($geoCoverage, 'Coverage');
             $record->element_text_id = $elementText->id;
             $record->save();
 
