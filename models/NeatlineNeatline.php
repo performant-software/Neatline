@@ -381,10 +381,6 @@ class NeatlineNeatline extends Omeka_record
         $dataTable = $this->getTable('NeatlineTimeRecord');
         $elementTable = $this->getTable('Element');
 
-        // Fetch the element record for the date field.
-        $element = $elementTable
-            ->findByElementSetNameAndElementName('Dublin Core', 'Date');
-
         $record = $dataTable
             ->findByElement($this->id, $item->id);
 
@@ -393,7 +389,7 @@ class NeatlineNeatline extends Omeka_record
 
             $elementText = $record->getElementText($piece);
 
-            if ($text != null) {
+            if ($elementText != null) {
                 $text = $elementText->text;
             }
 

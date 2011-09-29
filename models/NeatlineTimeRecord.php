@@ -189,7 +189,7 @@ class NeatlineTimeRecord extends Omeka_record
 
         }
 
-        // If all of the pieces are empty, do not save.
+        // Only save if at least one of the pieces has data.
         if ($this->start_date_element_text_id != null
             || $this->start_time_element_text_id != null
             || $this->end_date_element_text_id != null
