@@ -73,7 +73,8 @@
                 item_list_highlight: '#f2f3fa',
                 drag_border: '#a79aae',
                 text_default: '#383838',
-                text_gray: '#8d8d8d'
+                text_gray: '#8d8d8d',
+                unchanged_red: '#ca3c3c'
             }
 
         },
@@ -577,6 +578,8 @@
             var editForm = editFormTd.find('form');
             var textSpan = item.find('.' + this.options.item_title_text_class);
             var faderSpan = item.find('.' + this.options.item_title_fader_class);
+            var itemTitleText = item.find('.' + this.options.item_title_text_class);
+            var allInputs = editForm.find('input[type="text"], textarea')
 
             // Calculate the native height of the form.
             var cloneFormTd = editFormTd
@@ -599,9 +602,17 @@
             var formHeight = cloneForm.height();
             cloneFormTd.remove();
 
+            // By default, fade to the default text color and weight.
+            var textColor = this.options.colors.text_default;
+
+            // Keep the title bold red if the form was not saved.
+            if (textSpan.data('changed')) {
+                textColor = this.options.colors.unchanged_red;
+            }
+
             // Highlight the item title.
             textSpan.animate({
-                'color': this.options.item_name_highlight_color,
+                'color': textColor,
                 'font-size': 14,
                 'font-weight': 'bold'
             }, 100);
@@ -646,21 +657,14 @@
             });
 
             // Set the change tracker on each of the inputs and bind the change event.
-            $.each(editForm.find('input, textarea'), function(i, input) {
+            $.each(allInputs, function(i, input) {
 
-                var input = $(input);
-                input.data('changed', false);
-
-                input.bind({
+                $(input).bind({
 
                     'keydown': function() {
-
-                        // Tween down the color and register the change.
-                        if (!input.data('changed')) {
-                            input.animate({ 'color': self.options.colors.text_gray }, 200);
-                            input.data('changed', true);
-                        }
-
+                        // Tween the title color and register the change.
+                        itemTitleText.animate({ 'color': self.options.colors.unchanged_red }, 200);
+                        itemTitleText.data('changed', true);
                     }
 
                 });
@@ -687,6 +691,7 @@
             // Get child markup.
             var editFormTd = this._currentFormItem.next().find('td');
             var editForm = editFormTd.find('form');
+            var itemTitleText = this._currentFormItem.find('.' + this.options.item_title_text_class);
 
             // Get the form inputs.
             var titleInput = editForm
@@ -747,9 +752,9 @@
 
                     // Roll back up the color of the elements.
                     $.each(allInputs, function(i, input) {
-                        var input = $(input);
-                        input.animate({ 'color': self.options.colors.text_default }, 200);
-                        input.data('changed', false);
+                        // Tween the title color and register the change.
+                        itemTitleText.animate({ 'color': self.options.colors.text_default }, 200);
+                        itemTitleText.data('changed', false);
                     });
 
                 }
@@ -766,11 +771,21 @@
             var textSpan = item.find('.' + this.options.item_title_text_class);
             var faderSpan = item.find('.' + this.options.item_title_fader_class);
 
+            // By default, fade to the default text color and weight.
+            var textColor = this.options.colors.text_default;
+            var textWeight = 'normal';
+
+            // Keep the title bold red if the form was not saved.
+            if (textSpan.data('changed')) {
+                textColor = this.options.colors.unchanged_red;
+                textWeight = 'bold';
+            }
+
             // Highlight the item title.
             textSpan.animate({
-                'color': this.options.item_name_default_color,
+                'color': textColor,
                 'font-size': this.options.item_name_default_size + 'px',
-                'font-weight': 'normal'
+                'font-weight': textWeight
             }, 100);
 
             // Animate up the height.
