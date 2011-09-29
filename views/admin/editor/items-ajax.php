@@ -34,8 +34,14 @@
                 <span class="item-title-text"><?php echo item('Dublin Core', 'Title', null, $item); ?></span>
                 <span class="item-title-fader"></span>
             </td>
-            <td class="col-1 col-row"><img src="<?php echo img('bullet_purple.png'); ?>" /></td>
-            <td class="col-2 col-row"><img src="<?php echo img('bullet_purple.png'); ?>" /></td>
+            <td class="col-1 col-row">
+                <img class="bullet-active" src="<?php echo img('bullet_purple.png'); ?>" />
+                <img class="bullet-highlight" src="<?php echo img('bullet_gray.png'); ?>" />
+            </td>
+            <td class="col-2 col-row">
+                <img class="bullet-active" src="<?php echo img('bullet_purple.png'); ?>" />
+                <img class="bullet-highlight" src="<?php echo img('bullet_gray.png'); ?>" />
+            </td>
         </tr>
 
         <tr class="edit-form">
