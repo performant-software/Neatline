@@ -611,7 +611,7 @@
             }
 
             // Highlight the item title.
-            textSpan.animate({
+            textSpan.stop().animate({
                 'color': textColor,
                 'font-size': 14,
                 'font-weight': 'bold'
@@ -638,9 +638,15 @@
 
             // Cancel form.
             cancelButton.bind({
+
                 'mousedown': function() {
                     self._hideForm(item);
+                },
+
+                'click': function(event) {
+                    event.preventDefault();
                 }
+
             });
 
             // Save form.
@@ -782,7 +788,7 @@
             }
 
             // Highlight the item title.
-            textSpan.animate({
+            textSpan.stop().animate({
                 'color': textColor,
                 'font-size': this.options.item_name_default_size + 'px',
                 'font-weight': textWeight
@@ -933,6 +939,5 @@
         }
 
     });
-
 
 })( jQuery );
