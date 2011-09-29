@@ -71,7 +71,9 @@
             // Hexes.
             colors: {
                 item_list_highlight: '#f2f3fa',
-                drag_border: '#a79aae'
+                drag_border: '#a79aae',
+                text_default: '#383838',
+                text_gray: '#8d8d8d'
             }
 
         },
@@ -638,6 +640,28 @@
 
             });
 
+            // Set the change tracker on each of the inputs and bind the change event.
+            $.each(editForm.find('input, textarea'), function(i, input) {
+
+                var input = $(input);
+                input.data('changed', false);
+
+                input.bind({
+
+                    'keydown': function() {
+
+                        // Tween down the color and register the change.
+                        if (!input.data('changed')) {
+                            input.animate({ 'color': self.options.colors.text_gray }, 200);
+                            input.data('changed', true);
+                        }
+
+                    }
+
+                });
+
+            });
+
             // Change the data record.
             item.data('expanded', true);
 
@@ -681,19 +705,16 @@
             var itemId = editForm.
                 find('recordid');
 
+            // Get all of the inputs.
+            var allInputs = editForm.find('input[type="text"], textarea')
+
             // Fetch the geocoverage data from OpenLayers.
             this._trigger('savemapedit');
 
+            // Blur out the form to visually register the submission.
             editForm.animate({
                 'opacity': 0.3
-            }, 50, function() {
-
-                // Disable the form elements.
-                $.each(editForm.find('input, textarea'), function(i, input) {
-                    $(input).prop('disabled', true);
-                });
-
-            });
+            }, 200);
 
             // Save data.
             $.ajax({
@@ -717,13 +738,13 @@
 
                     editForm.animate({
                         'opacity': 1
-                    }, 50, function() {
+                    });
 
-                        // Enable the form elements.
-                        $.each(editForm.find('input, textarea'), function(i, input) {
-                            $(input).prop('disabled', false);
-                        });
-
+                    // Roll back up the color of the elements.
+                    $.each(allInputs, function(i, input) {
+                        var input = $(input);
+                        input.animate({ 'color': self.options.colors.text_default }, 200);
+                        input.data('changed', false);
                     });
 
                 }

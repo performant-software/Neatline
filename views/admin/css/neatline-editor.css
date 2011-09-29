@@ -309,13 +309,14 @@ span#search-cancel:hover {
     color: #f0b925;
 }
 
-.neatline-record-edit-form input, .neatline-record-edit-form textarea {
+.neatline-record-edit-form input[type="text"], .neatline-record-edit-form textarea {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 10px;
     font-weight: 13px;
     font-size: 1em;
     box-shadow: none;
     -webkit-box-shadow: none;
+    color: #383838;
 }
 
 .neatline-record-edit-form input:focus, .neatline-record-edit-form textarea:focus {
