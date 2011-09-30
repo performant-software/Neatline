@@ -97,3 +97,24 @@ function neatline_getItemsForBrowser(
     return $itemsTable->fetchObjects($select);
 
 }
+
+/**
+ * Check to see whether an item has an active space or time record for a
+ * given Neatline exhibit. If it does, return the 'checked' property for
+ * the template checkbox; if not, return an empty string.
+ *
+ * @param Omeka_record $neatline The Neatline exhibit.
+ * @param Omeka_record $item The item.
+ * @param string $spaceOrTime 'space' or 'time'.
+ *
+ * @return array of Omeka_records $items The items.
+ */
+function neatline_getRecordStatusForCheckBox($neatline, $item, $spaceOrTime)
+{
+
+    $_db = get_db();
+    $statusesTable = $_db->getTable('NeatlineRecordStatus');
+
+    return $statusesTable->checkStatus($item, $neatline, $spaceOrTime) ? 'checked' : '';
+
+}
