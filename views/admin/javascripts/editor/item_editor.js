@@ -484,9 +484,12 @@
 
                         // Hide everything without an active space record.
                         $.each(self.items, function(i, item) {
+
                             var item = $(item);
+
                             if (!item.data('space')) {
                                 item.css('display', 'none');
+                                item.next('tr.edit-form').css('display', 'none');
                             }
                         })
 
@@ -498,12 +501,17 @@
                     // Else, unsort.
                     else {
 
-                        // Hide everything without an active space record.
                         $.each(self.items, function(i, item) {
+
                             var item = $(item);
+
                             if (!item.data('space')) {
-                                item.css('display', 'table-row');
+                                if (!(self._timeSorted && !item.data('time'))) {
+                                    item.css('display', '');
+                                    item.next('tr.edit-form').css('display', '');
+                                }
                             }
+
                         })
 
                         self.spaceHeader.removeClass('active');
@@ -550,6 +558,52 @@
                         $.each(self._timeBoxes, function(i, box) {
                             $(box).css('background', self.options.item_row_default_background_color);
                         });
+
+                    }
+
+                },
+
+                'mousedown': function() {
+
+                    // If not sorted, sort.
+                    if (!self._timeSorted) {
+
+                        // Hide everything without an active space record.
+                        $.each(self.items, function(i, item) {
+
+                            var item = $(item);
+
+                            if (!item.data('time')) {
+                                item.css('display', 'none');
+                                item.next('tr.edit-form').css('display', 'none');
+                            }
+
+                        })
+
+                        self.timeHeader.addClass('active');
+                        self._timeSorted = true;
+
+                    }
+
+                    // Else, unsort.
+                    else {
+
+                        // Hide everything without an active space record.
+                        $.each(self.items, function(i, item) {
+
+                            var item = $(item);
+
+                            if (!item.data('time')) {
+                                if (!(self._spaceSorted && !item.data('space'))) {
+                                    item.css('display', '');
+                                    item.next('tr.edit-form').css('display', '');
+                                }
+                            }
+
+                        })
+
+                        self.timeHeader.removeClass('active');
+                        self._timeSorted = false;
 
                     }
 
@@ -689,7 +743,7 @@
                     },
 
                     'mouseleave': function() {
-                        spaceBlock.css('background-color', '');
+                        spaceBlock.css('background-color', itemTitleTd.css('background'));
                     }
 
                 });
@@ -718,7 +772,7 @@
                     },
 
                     'mouseleave': function() {
-                        timeBlock.css('background-color', '');
+                        timeBlock.css('background-color', itemTitleTd.css('background'));
                     }
 
                 });
