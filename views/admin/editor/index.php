@@ -30,7 +30,9 @@
     'title' => $neatline->name
 )); ?>
 
-<?php echo $this->partial('editor/_topbar.php'); ?>
+<?php echo $this->partial('editor/_topbar.php', array(
+    'title' => $neatline->name
+)); ?>
 
 <?php echo $this->partial('editor/_item_browser.php', array(
     'tags' => $tags,

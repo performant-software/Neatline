@@ -27,4 +27,5 @@
 
 <div id="topbar" class="topbar-inner topbar">
     <img id="neatline-logo" src="<?php echo img('neatline-logo-white-small.png'); ?>" />
+    <div class="top-bar-title"><?php echo $title; ?></div>
 </div>

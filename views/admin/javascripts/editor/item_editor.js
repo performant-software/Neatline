@@ -64,7 +64,8 @@
             item_title_fader_width: 40,
             item_name_default_color: '#515151',
             item_name_highlight_color: '#303030',
-            item_row_highlight_background_color: '#f3f3f3',
+            item_row_default_background_color: '#FFFEF5',
+            item_row_highlight_background_color: '#f3f6ff',
             spacetime_background_color: '#ffda82',
             item_name_default_size: 12,
             container_top_margin: 40,
@@ -139,8 +140,15 @@
             // Instantiate the item filter widget.
             this._glossItemFilter();
 
-            // Tracker for the current expanded form.
+            // Tracker for the current expanded form, space boxes,
+            // and time boxes.
             this._currentFormItem = null;
+            this._spaceBoxes = null;
+            this._timeBoxes = null;
+
+            // Boolean trackers for space and time results cropping.
+            this._spaceSorted = false;
+            this._timeSorted = false;
 
             // Set static CSS parameters for the Neatline.
             this.neatlineContainer.css({
@@ -443,11 +451,65 @@
                         'left': offset.left + self.options.space_tooltip_X_offset
                     });
 
+                    // Only do the gloss if the markup is loaded and registered.
+                    if (self._spaceBoxes != null) {
+
+                        $.each(self._spaceBoxes, function(i, box) {
+                            $(box).css('background', self.options.spacetime_background_color);
+                        });
+
+                    }
+
                 },
 
                 'mouseleave': function() {
 
                     self.spaceTip.css('display', 'none');
+
+                    // Only do the gloss if the markup is loaded and registered.
+                    if (self._spaceBoxes != null) {
+
+                        $.each(self._spaceBoxes, function(i, box) {
+                            $(box).css('background', self.options.item_row_default_background_color);
+                        });
+
+                    }
+
+                },
+
+                'mousedown': function() {
+
+                    // If not sorted, sort.
+                    if (!self._spaceSorted) {
+
+                        // Hide everything without an active space record.
+                        $.each(self.items, function(i, item) {
+                            var item = $(item);
+                            if (!item.data('space')) {
+                                item.css('display', 'none');
+                            }
+                        })
+
+                        self.spaceHeader.addClass('active');
+                        self._spaceSorted = true;
+
+                    }
+
+                    // Else, unsort.
+                    else {
+
+                        // Hide everything without an active space record.
+                        $.each(self.items, function(i, item) {
+                            var item = $(item);
+                            if (!item.data('space')) {
+                                item.css('display', 'table-row');
+                            }
+                        })
+
+                        self.spaceHeader.removeClass('active');
+                        self._spaceSorted = false;
+
+                    }
 
                 }
 
@@ -467,11 +529,29 @@
                         'left': offset.left + self.options.time_tooltip_X_offset
                     });
 
+                    // Only do the gloss if the markup is loaded and registered.
+                    if (self._timeBoxes != null) {
+
+                        $.each(self._timeBoxes, function(i, box) {
+                            $(box).css('background', self.options.spacetime_background_color);
+                        });
+
+                    }
+
                 },
 
                 'mouseleave': function() {
 
                     self.timeTip.css('display', 'none');
+
+                    // Only do the gloss if the markup is loaded and registered.
+                    if (self._timeBoxes != null) {
+
+                        $.each(self._timeBoxes, function(i, box) {
+                            $(box).css('background', self.options.item_row_default_background_color);
+                        });
+
+                    }
 
                 }
 
@@ -538,6 +618,19 @@
                 var timeBlock = item.find('.time');
                 var timeCheckbox = timeBlock.find('input[type="checkbox"]');
 
+                // Store the space/time status on the rom DOM.
+                if (spaceCheckbox.prop('checked')) {
+                    item.data('space', true);
+                } else {
+                    item.data('space', false);
+                }
+
+                if (timeCheckbox.prop('checked')) {
+                    item.data('time', true);
+                } else {
+                    item.data('time', false);
+                }
+
                 // Set the starting expanded tracker and record the item's
                 // native vertical offset.
                 item.data('expanded', false);
@@ -545,6 +638,19 @@
 
                 // Set the starting 'changed' data parameter.
                 itemTitleText.data('changed', false);
+
+                // Add mouseenter glossing to row.
+                item.bind({
+
+                    'mouseenter': function() {
+                        item.find('td').css('background-color', self.options.item_row_highlight_background_color);
+                    },
+
+                    'mouseleave': function() {
+                        item.find('td').css('background-color', self.options.item_row_default_background_color);
+                    }
+
+                });
 
                 // Turn off the default checkbox behevior for the S/T boxes.
                 spaceCheckbox.bind({
@@ -567,8 +673,23 @@
                         var newVal = !spaceCheckbox.prop('checked');
                         spaceCheckbox.prop('checked', newVal);
 
+                        // Register the new status.
+                        if (newVal) {
+                            item.data('space', true);
+                        } else {
+                            item.data('space', false);
+                        }
+
                         // Do status change ajax.
 
+                    },
+
+                    'mouseenter': function() {
+                        spaceBlock.css('background-color', self.options.spacetime_background_color + ' !important');
+                    },
+
+                    'mouseleave': function() {
+                        spaceBlock.css('background-color', '');
                     }
 
                 });
@@ -581,8 +702,23 @@
                         var newVal = !timeCheckbox.prop('checked');
                         timeCheckbox.prop('checked', !timeCheckbox.prop('checked'));
 
+                        // Register the new status.
+                        if (newVal) {
+                            item.data('time', true);
+                        } else {
+                            item.data('time', false);
+                        }
+
                         // Do status change ajax.
 
+                    },
+
+                    'mouseenter': function() {
+                        timeBlock.css('background-color', self.options.spacetime_background_color + ' !important');
+                    },
+
+                    'mouseleave': function() {
+                        timeBlock.css('background-color', '');
                     }
 
                 });
@@ -607,6 +743,10 @@
                 });
 
             });
+
+            // Fetch the space and time boxes and set the class global buckets.
+            this._spaceBoxes = this.items.find('.space');
+            this._timeBoxes = this.items.find('.time');
 
         },
 

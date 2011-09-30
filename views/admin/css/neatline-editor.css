@@ -66,7 +66,14 @@
 
 #neatline-logo {
     float: left;
-    margin: 10px 30px 0 20px;
+    margin: 9px 30px 0 20px;
+}
+
+div.top-bar-title {
+    font-family: 'Crimson Text', Georgia, serif;
+    color: #fff;
+    font-size: 2.1em;
+    margin: 17px 0 0 0;
 }
 
 
@@ -146,7 +153,8 @@
 }
 
 #items-list-container tr.item-row:hover {
-    background-color: #f3f6ff;}
+    /* background-color: #f3f6ff;*/
+}
 
 #items-list-header {
     position: fixed;
@@ -514,7 +522,7 @@ div.columns span.row-marker {
     position: relative;
 }
 
-div.columns span.header:hover {
+div.columns span.header:hover, div.columns span.header.active {
     background-color: #f0b925 !important;
 }
 
@@ -523,6 +531,10 @@ table#items {
     overflow: hidden;
     white-space: nowrap;
     margin-bottom: 0;
+}
+
+table#items tr {
+    display: table-row;
 }
 
 table#items td {
@@ -546,11 +558,11 @@ table#items td.col-1:hover, table#items td.col-2:hover {
 }
 
 table#items td.col-1 {
-    width: 33px;
+    width: 33px !important;
 }
 
 table#items td.col-2 {
-    width: 33px;
+    width: 33px !important;
 }
 
 
@@ -559,4 +571,8 @@ table#items td.col-2 {
 #drag-tip, #space-tip, #time-tip {
     display: none;
     z-index: 100001;
+}
+
+.twipsy-inner {
+    font-weight: bold;
 }
