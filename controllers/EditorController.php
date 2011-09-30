@@ -38,10 +38,12 @@ class Neatline_EditorController extends Omeka_Controller_Action
     public function init()
     {
 
+        // Get tables.
         $this->_neatlinesTable = $this->getTable('NeatlineNeatline');
         $this->_mapsTable = $this->getTable('NeatlineMapsMap');
         $this->_timelinesTable = $this->getTable('NeatlineTimeTimeline');
         $this->_itemsTable = $this->getTable('Item');
+        $this->_statusesTable = $this->getTable('NeatlineRecordStatus');
 
     }
 
@@ -147,6 +149,35 @@ class Neatline_EditorController extends Omeka_Controller_Action
             $endTime,
             $geoCoverage
         );
+
+    }
+
+    /**
+     * ~ AJAX ~
+     * Save changes made to record statuses.
+     *
+     * @return void
+     */
+    public function statusAction()
+    {
+
+        // Supress the default Zend layout-sniffer functionality.
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        // Get the post.
+        $_post = $this->_request->getPost();
+
+        // Get parameters from the ajax request.
+        $itemId = $_post['item_id'];
+        $neatlineId = $_post['neatline_id'];
+        $spaceOrTime = $_post['space_or_time'];
+        $value = $_post['value'];
+
+        // Fetch the Neatline exhibit record and item record.
+        $neatline = $this->_neatlinesTable->find($neatlineId);
+        $item = $this->_itemsTable->find($itemId);
+
+        // Save the data.
 
     }
 

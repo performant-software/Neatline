@@ -735,6 +735,7 @@
                         }
 
                         // Do status change ajax.
+                        self._saveStatus(item, 'space', newVal);
 
                     },
 
@@ -764,6 +765,7 @@
                         }
 
                         // Do status change ajax.
+                        self._saveStatus(item, 'time', newVal);
 
                     },
 
@@ -1071,6 +1073,45 @@
 
                     // Register the change.
                     itemTitleText.data('changed', false);
+
+                }
+
+            });
+
+        },
+
+        _saveStatus: function(item, spaceOrTime, value) {
+
+            var self = this;
+
+            // Get the Omeka item id and the title div.
+            var itemId = item.next().find('recordid');
+            var itemTitleText = item.find('.' + this.options.item_title_text_class);
+
+            // Tween the title color.
+            itemTitleText.animate({
+                'color': this.options.colors.unchanged_red
+            }, 200);
+
+            // Save the new status.
+            $.ajax({
+
+                url: 'status',
+                type: 'POST',
+
+                data: {
+                    item_id: itemId.text(),
+                    neatline_id: this.neatlineData.id,
+                    space_or_time: spaceOrTime,
+                    value: value
+                },
+
+                success: function() {
+
+                    // Tween the title color.
+                    itemTitleText.animate({
+                        'color': self.options.colors.text_default
+                    }, 200);
 
                 }
 
