@@ -63,7 +63,17 @@ class NeatlineRecordStatusTable extends Omeka_Db_Table
 
             }
 
-            $record->save();
+            // If both fields are null or false, drop the record.
+            if (($record->space == 0 || $record->space == null)
+                && ($record->time == 0 || $record->time == null)) {
+
+                $record->delete();
+
+            } else {
+
+                $record->save();
+
+            }
 
         }
 
