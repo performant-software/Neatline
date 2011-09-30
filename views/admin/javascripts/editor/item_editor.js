@@ -65,6 +65,7 @@
             item_name_default_color: '#515151',
             item_name_highlight_color: '#303030',
             item_row_highlight_background_color: '#f3f3f3',
+            spacetime_background_color: '#ffda82',
             item_name_default_size: 12,
             container_top_margin: 40,
 
@@ -533,17 +534,60 @@
                 var itemTitleTd = item.find('.item-title');
                 var itemTitleText = item.find('.' + self.options.item_title_text_class);
                 var spaceBlock = item.find('.space');
+                var spaceCheckbox = spaceBlock.find('input[type="checkbox"]');
                 var timeBlock = item.find('.time');
+                var timeCheckbox = timeBlock.find('input[type="checkbox"]');
 
-                // Set the starting expanded tracker, record the item's
-                // native vertical offset for the auto-positioning on
-                // form open.
+                // Set the starting expanded tracker and record the item's
+                // native vertical offset.
                 item.data('expanded', false);
                 item.data('topOffset', item.position().top);
 
                 // Set the starting 'changed' data parameter.
                 itemTitleText.data('changed', false);
 
+                // Turn off the default checkbox behevior for the S/T boxes.
+                spaceCheckbox.bind({
+                    'click': function(event) {
+                        event.preventDefault();
+                    }
+                });
+
+                timeCheckbox.bind({
+                    'click': function(event) {
+                        event.preventDefault();
+                    }
+                });
+
+                // Bind the checkbox click functionality to the boxes.
+                spaceBlock.bind({
+
+                    'mousedown': function() {
+
+                        var newVal = !spaceCheckbox.prop('checked');
+                        spaceCheckbox.prop('checked', newVal);
+
+                        // Do status change ajax.
+
+                    }
+
+                });
+
+                // Bind the checkbox click functionality to the boxes.
+                timeBlock.bind({
+
+                    'mousedown': function() {
+
+                        var newVal = !timeCheckbox.prop('checked');
+                        timeCheckbox.prop('checked', !timeCheckbox.prop('checked'));
+
+                        // Do status change ajax.
+
+                    }
+
+                });
+
+                // Bind the form open and close events.
                 itemTitleTd.bind({
 
                     'mousedown': function() {
@@ -677,8 +721,12 @@
 
                     'keydown': function() {
 
-                        // Tween the title color and register the change.
-                        itemTitleText.animate({ 'color': self.options.colors.unchanged_red }, 200);
+                        // Tween the title color.
+                        itemTitleText.animate({
+                            'color': self.options.colors.unchanged_red
+                        }, 200);
+
+                        // Store the new status.
                         itemTitleText.data('changed', true);
 
                     }
@@ -822,8 +870,12 @@
                         'opacity': 1
                     });
 
-                    // Tween the title color and register the change.
-                    itemTitleText.animate({ 'color': self.options.colors.text_default }, 200);
+                    // Tween the title color.
+                    itemTitleText.animate({
+                        'color': self.options.colors.text_default
+                    }, 200);
+
+                    // Register the change.
                     itemTitleText.data('changed', false);
 
                 }
