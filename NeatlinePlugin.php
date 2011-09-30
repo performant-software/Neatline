@@ -133,8 +133,8 @@ class NeatlinePlugin
                 `id` int(10) unsigned not null auto_increment,
                 `neatline_id` int(10) unsigned NOT NULL,
                 `item_id` int(10) unsigned NOT NULL,
-                `space` tinyint(1) NOT NULL,
-                `time` tinyint(1) NOT NULL,
+                `space` tinyint(1) NULL,
+                `time` tinyint(1) NULL,
                  PRIMARY KEY (`id`)
                ) ENGINE=innodb DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
 

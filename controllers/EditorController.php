@@ -178,6 +178,12 @@ class Neatline_EditorController extends Omeka_Controller_Action
         $item = $this->_itemsTable->find($itemId);
 
         // Save the data.
+        $this->_statusesTable->saveStatus(
+            $item,
+            $neatline,
+            $spaceOrTime,
+            $value
+        );
 
     }
 

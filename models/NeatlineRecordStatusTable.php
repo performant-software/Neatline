@@ -30,6 +30,66 @@
 class NeatlineRecordStatusTable extends Omeka_Db_Table
 {
 
+    /**
+     * Save changes made to record statuses.
+     *
+     * @param Omeka_record $item The item.
+     * @param Omeka_record $neatline The Neatline exhibit.
+     * @param string $spaceOrTime 'space' or 'time'.
+     * @param string $value 'true' or 'false'.
+     *
+     * @return void
+     */
+    public function saveStatus($item, $neatline, $spaceOrTime, $value)
+    {
 
+        // Try to find a record for the item.
+        $record = $this->fetchObject(
+            $this->getSelect()->where('item_id = ' . $item->id . ' AND neatline_id = ' . $neatline->id)
+        );
+
+        // If record exists, update.
+        if ($record != null) {
+
+            switch ($spaceOrTime) {
+
+                case 'space':
+                    $record->space = ($value == 'true') ? 1 : 0;
+                break;
+
+                case 'time':
+                    $record->time = ($value == 'true') ? 1 : 0;
+                break;
+
+            }
+
+            $record->save();
+
+        }
+
+        // Otherwise, create a record.
+        else {
+
+            $record = new NeatlineRecordStatus();
+            $record->neatline_id = $neatline->id;
+            $record->item_id = $item->id;
+
+            switch ($spaceOrTime) {
+
+                case 'space':
+                    $record->space = ($value == 'true') ? 1 : 0;
+                break;
+
+                case 'time':
+                    $record->time = ($value == 'true') ? 1 : 0;
+                break;
+
+            }
+
+            $record->save();
+
+        }
+
+    }
 
 }
