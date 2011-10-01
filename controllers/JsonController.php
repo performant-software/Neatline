@@ -30,6 +30,25 @@
 class Neatline_JsonController extends Omeka_Controller_Action
 {
 
+    /**
+     * ~ AJAX ~
+     * Get events JSON for the timeline.
+     *
+     * @return void
+     */
+    public function timegliderAction()
+    {
 
+        // Supress the default Zend layout-sniffer functionality.
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        // Get the exhibits table and fetch the record.
+        $_neatlinesTable = $this->getTable('NeatlineNeatline');
+        $neatline = $_neatlinesTable->find($this->_request->getParam('id'));
+
+        // Output the JSON string.
+        echo $neatline->timelineEventsJson();
+
+    }
 
 }

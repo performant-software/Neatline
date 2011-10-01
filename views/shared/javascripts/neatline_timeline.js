@@ -61,9 +61,12 @@
 
         _instantiateTimeglider: function() {
 
+            console.log(this.params);
+
             this.element.timeline({
-                'min_zoom': 5,
-                'max_zoom': 60
+                title: this.params.name,
+                min_zoom: 5,
+                max_zoom: 60
             });
 
         }

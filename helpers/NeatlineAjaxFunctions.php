@@ -119,3 +119,26 @@ function neatline_getRecordStatusForCheckBox($neatline, $item, $spaceOrTime)
         ->checkStatus($item, $neatline, $spaceOrTime) ? 'checked' : '';
 
 }
+
+/**
+ * Parse plain text date pieces and generate a start and end timestamp
+ * for timeglider.
+ *
+ * @param Omeka_record $neatline The Neatline exhibit.
+ * @param Omeka_record $item The item.
+ * @param string $spaceOrTime 'space' or 'time'.
+ *
+ * @return array of Omeka_records $items The items.
+ */
+function neatline_generateTimegliderTimestamps(
+    $startDate,
+    $startTime,
+    $endDate,
+    $endTime
+)
+{
+
+    // Trim and get rid of commas.
+    echo 'test';
+
+}

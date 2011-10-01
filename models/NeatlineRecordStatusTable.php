@@ -45,7 +45,8 @@ class NeatlineRecordStatusTable extends Omeka_Db_Table
 
         // Try to find a record for the item.
         $record = $this->fetchObject(
-            $this->getSelect()->where('item_id = ' . $item->id . ' AND neatline_id = ' . $neatline->id)
+            $this->getSelect()->where('item_id = ' . $item->id .
+                ' AND neatline_id = ' . $neatline->id)
         );
 
         // If record exists, update.
@@ -116,7 +117,8 @@ class NeatlineRecordStatusTable extends Omeka_Db_Table
 
         // Try to find a record for the item.
         $record = $this->fetchObject(
-            $this->getSelect()->where('item_id = ' . $item->id . ' AND neatline_id = ' . $neatline->id)
+            $this->getSelect()->where('item_id = ' . $item->id .
+                ' AND neatline_id = ' . $neatline->id)
         );
 
         // If record exists, update.
@@ -142,6 +144,32 @@ class NeatlineRecordStatusTable extends Omeka_Db_Table
             return false;
 
         }
+
+    }
+
+    /**
+     * Get all items with active time records for a given Neatline exhibit.
+     *
+     * @param integer $neatline_id The id of the exhibit.
+     *
+     * @return array of Omeka_record $items The array of item objects.
+     */
+    public function getItemsWithActiveTimeRecords($neatline_id)
+    {
+
+        // Get the items table.
+        $_itemsTable = $this->getTable('Item');
+
+        // Get the matching status records.
+        $statuses = $this->findBySql('neatline_id = ? AND time = 1', array($neatline_id));
+
+        // Walk the results, fetch the items, pack them up.
+        $items = array();
+        foreach ($statuses as $status) {
+            $items[] = $_itemsTable->find($status->item_id);
+        }
+
+        return $items;
 
     }
 

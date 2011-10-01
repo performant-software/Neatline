@@ -406,4 +406,49 @@ class NeatlineNeatline extends Omeka_record
 
     }
 
+    /**
+     * Construct the events JSON for timeglider.
+     *
+     * @return JSON string The events JSON.
+     */
+    public function timelineEventsJson()
+    {
+
+        // Table getters.
+        $_statusesTable = $this->getTable('NeatlineRecordStatus');
+        $_timeRecordsTable = $this->getTable('NeatlineTimeRecord');
+
+        // Shell array for the events data.
+        $events = array();
+
+        // Hit the record statuses table to get a list of all
+        // items that have active time records.
+        $activeItems = $_statusesTable->getItemsWithActiveTimeRecords($this->id);
+
+        // Walk the items with active records, fetch the time records,
+        // pack them up.
+        foreach ($activeItems as $item) {
+
+            // Title and description fields.
+            $title = $this->getTextByItemAndField($item, 'Title');
+            $description = $this->getTextByItemAndField($item, 'Description');
+
+            // Date/time raw strings.
+            $startDate = $this->getTimeTextByItemAndField($item, 'start_date');
+            $startTime = $this->getTimeTextByItemAndField($item, 'start_time');
+            $endDate = $this->getTimeTextByItemAndField($item, 'end_date');
+            $endTime = $this->getTimeTextByItemAndField($item, 'end_time');
+
+            // Pass the pieces through the timestamp algorithm.
+            $timestamps = neatline_generateTimegliderTimestamps(
+                $startDate,
+                $startTime,
+                $endDate,
+                $endTime
+            );
+
+        }
+
+    }
+
 }
