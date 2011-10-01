@@ -161,28 +161,4 @@ class Neatline_IndexController extends Omeka_Controller_Action
 
     }
 
-    /**
-     * Facade for Neatline Maps browse.
-     *
-     * @return void
-     */
-    public function mapsAction()
-    {
-
-
-
-    }
-
-    /**
-     * Facade for Neatline Time browse.
-     *
-     * @return void
-     */
-    public function timelinesAction()
-    {
-
-
-
-    }
-
 }

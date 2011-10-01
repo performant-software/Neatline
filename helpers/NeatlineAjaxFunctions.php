@@ -115,6 +115,7 @@ function neatline_getRecordStatusForCheckBox($neatline, $item, $spaceOrTime)
     $_db = get_db();
     $statusesTable = $_db->getTable('NeatlineRecordStatus');
 
-    return $statusesTable->checkStatus($item, $neatline, $spaceOrTime) ? 'checked' : '';
+    return $statusesTable
+        ->checkStatus($item, $neatline, $spaceOrTime) ? 'checked' : '';
 
 }

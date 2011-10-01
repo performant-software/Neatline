@@ -30,6 +30,11 @@
 class Neatline_EditorController extends Omeka_Controller_Action
 {
 
+    // Register the data source context for the timeline.
+    public $contexts = array(
+        'show' => 'timeglider-json'
+    );
+
     /**
      * Get table objects.
      *
