@@ -68,8 +68,7 @@
 
         _instantiateTimeglider: function() {
 
-            console.log(this.params);
-
+            // Instantiate Timeglider.
             this.element.timeline({
                 'id': this.params.id,
                 'title': this.params.name,

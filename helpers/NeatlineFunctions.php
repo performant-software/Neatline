@@ -106,21 +106,22 @@ function neatline_queueNeatlineAssets()
     queue_js('neatline_undateditems', 'javascripts');
 
     // Timeglider JavaScript assets.
-    queue_js('timeglider/js/jquery-ui-1.8.9.custom.min');
-    queue_js('timeglider/js/jquery.tmpl');
-    queue_js('timeglider/js/underscore-min');
-    queue_js('timeglider/js/backbone-min');
-    queue_js('timeglider/js/ba-debug.min');
-    queue_js('timeglider/js/jquery.mousewheel.min');
-    queue_js('timeglider/js/raphael-min');
-    queue_js('timeglider/js/jquery.global');
-    queue_js('timeglider/js/ba-tinyPubSub');
-    queue_js('timeglider/js/timeglider/TG_Date');
-    queue_js('timeglider/js/timeglider/TG_Org');
-    queue_js('timeglider/js/timeglider/TG_Timeline');
-    queue_js('timeglider/js/timeglider/TG_TimelineView');
-    queue_js('timeglider/js/timeglider/TG_Mediator');
-    queue_js('timeglider/js/timeglider/timeglider.timeline.widget');
+    // queue_js('timeglider/js/jquery-ui-1.8.9.custom.min');
+    // queue_js('timeglider/js/jquery.tmpl');
+    // queue_js('timeglider/js/underscore-min');
+    // queue_js('timeglider/js/backbone-min');
+    // queue_js('timeglider/js/ba-debug.min');
+    // queue_js('timeglider/js/jquery.mousewheel.min');
+    // queue_js('timeglider/js/raphael-min');
+    // queue_js('timeglider/js/jquery.global');
+    // queue_js('timeglider/js/ba-tinyPubSub');
+    // queue_js('timeglider/js/timeglider/TG_Date');
+    // queue_js('timeglider/js/timeglider/TG_Org');
+    // queue_js('timeglider/js/timeglider/TG_Timeline');
+    // queue_js('timeglider/js/timeglider/TG_TimelineView');
+    // queue_js('timeglider/js/timeglider/TG_Mediator');
+    // queue_js('timeglider/js/timeglider/timeglider.timeline.widget');
+    queue_js('timeglider/js/timeglider-0.1.0.min');
 
     // Timeglider CSS.
     queue_css('timeglider');
