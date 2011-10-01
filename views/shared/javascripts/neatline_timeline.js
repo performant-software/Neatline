@@ -27,6 +27,13 @@
 
         options: {
 
+            // Timeline constants.
+            timeglider: {
+                min_zoom: 5,
+                max_zoom: 60,
+                initial_zoom: 40
+            },
+
             // Markup hooks.
             markup: {
 
@@ -64,9 +71,12 @@
             console.log(this.params);
 
             this.element.timeline({
-                title: this.params.name,
-                min_zoom: 5,
-                max_zoom: 60
+                'id': this.params.id,
+                'title': this.params.name,
+                'min_zoom': this.options.timeglider.min_zoom,
+                'max_zoom': this.options.timeglider.max_zoom,
+                'initial_zoom': this.options.timeglider.initial_zoom,
+                'data_source': 'http://localhost:8888/omeka-1.4.1/admin/neatline-exhibits/1/json/timeglider'
             });
 
         }

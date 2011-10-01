@@ -124,11 +124,12 @@ function neatline_getRecordStatusForCheckBox($neatline, $item, $spaceOrTime)
  * Parse plain text date pieces and generate a start and end timestamp
  * for timeglider.
  *
- * @param Omeka_record $neatline The Neatline exhibit.
- * @param Omeka_record $item The item.
- * @param string $spaceOrTime 'space' or 'time'.
+ * @param string $startDate The starting date.
+ * @param string $startTime The starting time.
+ * @param string $endDate The ending date.
+ * @param string $endTime The ending time.
  *
- * @return array of Omeka_records $items The items.
+ * @return array An array of the start and end timestamps.
  */
 function neatline_generateTimegliderTimestamps(
     $startDate,
@@ -138,7 +139,163 @@ function neatline_generateTimegliderTimestamps(
 )
 {
 
-    // Trim and get rid of commas.
-    echo 'test';
+    // Trim, lowercase, and get rid of commas.
+    $startDate = trim(strtolower(str_replace(',', '', $startDate)));
+    $startTime = trim(strtolower(str_replace(',', '', $startTime)));
+    $endDate = trim(strtolower(str_replace(',', '', $endDate)));
+    $endTime = trim(strtolower(str_replace(',', '', $endTime)));
+
+    // Initiaize component arrays.
+    $start = array(
+        'year' => '00',
+        'month' => '00',
+        'day' => '00',
+        'hour' => '00',
+        'minute' => '00',
+        'second' => '00'
+    );
+    $end = array(
+        'year' => '00',
+        'month' => '00',
+        'day' => '00',
+        'hour' => '00',
+        'minute' => '00',
+        'second' => '00'
+    );
+
+    // Number-to-month hash.
+    $months = array(
+        'january',
+        'february',
+        'march',
+        'april',
+        'may',
+        'june',
+        'july',
+        'august',
+        'september',
+        'october',
+        'november',
+        'december'
+    );
+
+    // ~ Start Date ~
+
+    // Try to match a single year.
+    if (preg_match('/^[0-9]{4}$/', $startDate, $matches)) {
+        $sYear = $matches[0];
+    }
+
+    // Try to match a month and a year.
+    else if (preg_match('/^(?P<month>[A-Za-z]+)\s+(?P<year>[0-9]{4})$/', $startDate, $matches)) {
+        $start['year'] = $matches['year'];
+        $start['month'] = (string) (array_search($matches['month'], $months) + 1);
+        if (strlen($start['month']) == 1) {
+            $start['month'] = '0' . $start['month'];
+        }
+    }
+
+    // Try to match a month, day, and year.
+    else if (preg_match('/^(?P<month>[A-Za-z]+)\s+(?P<day>[0-9]{1,2})\s+(?P<year>[0-9]{4})$/', $startDate, $matches)) {
+        $start['year'] = $matches['year'];
+        $start['month'] = (string) (array_search($matches['month'], $months) + 1);
+        $start['day'] = $matches['day'];
+        if (strlen($start['month']) == 1) {
+            $start['month'] = '0' . $start['month'];
+        }
+        if (strlen( $start['day']) == 1) {
+             $start['day'] = '0' .  $start['day'];
+        }
+    }
+
+    // ~ Start Time ~
+
+    // Try to match a 12-hour time.
+    if (preg_match('/^(?P<hour>[0-9]{1,2}):(?P<minute>[0-9]{2})\s*(?P<ampm>(am|pm))$/', $startTime, $matches)) {
+        $start['minute'] = $matches['minute'];
+        if ($matches['ampm'] == 'am') {
+            $start['hour'] = $matches['hour'];
+        } else {
+            $start['hour'] = (string)((int)$matches['hour'] + 12);
+        }
+        if (strlen($start['hour']) == 1) {
+            $start['hour'] = '0' . $start['hour'];
+        }
+    }
+
+    // Try to match a 24-hour time.
+    else if (preg_match('/^(?P<hour>[0-9]{1,2}):(?P<minute>[0-9]{2})$/', $startTime, $matches)) {
+        $start['minute'] = $matches['minute'];
+        $start['hour'] = $matches['hour'];
+        if (strlen($start['hour']) == 1) {
+            $start['hour'] = '0' . $start['hour'];
+        }
+    }
+
+
+    // ~ End Date ~
+
+    // Try to match a single year.
+    if (preg_match('/^[0-9]{4}$/', $endDate, $matches)) {
+        $end['year'] = $matches[0];
+    }
+
+    // Try to match a month and a year.
+    else if (preg_match('/^(?P<month>[A-Za-z]+)\s+(?P<year>[0-9]{4})$/', $endDate, $matches)) {
+        $end['year'] = $matches['year'];
+        $end['month'] = (string) (array_search($matches['month'], $months) + 1);
+        if (strlen($end['month']) == 1) {
+            $end['month'] = '0' . $end['month'];
+        }
+    }
+
+    // Try to match a month, day, and year.
+    else if (preg_match('/^(?P<month>[A-Za-z]+)\s+(?P<day>[0-9]{1,2})\s+(?P<year>[0-9]{4})$/', $endDate, $matches)) {
+        $end['year'] = $matches['year'];
+        $end['month'] = (string) (array_search($matches['month'], $months) + 1);
+        $end['day'] = $matches['day'];
+        if (strlen($end['month']) == 1) {
+            $end['month'] = '0' . $end['month'];
+        }
+        if (strlen($end['day']) == 1) {
+            $end['day'] = '0' . $end['day'];
+        }
+    }
+
+    // ~ End Time ~
+
+    // Try to match a 12-hour time.
+    if (preg_match('/^(?P<hour>[0-9]{1,2}):(?P<minute>[0-9]{2})\s*(?P<ampm>(am|pm))$/', $endTime, $matches)) {
+        $end['minute'] = $matches['minute'];
+        if ($matches['ampm'] == 'am') {
+            $end['hour'] = $matches['hour'];
+        } else {
+            $end['hour'] = (string)((int)$matches['hour'] + 12);
+        }
+        if (strlen($end['hour']) == 1) {
+            $end['hour'] = '0' . $end['hour'];
+        }
+    }
+
+    // Try to match a 24-hour time.
+    else if (preg_match('/^(?P<hour>[0-9]{1,2}):(?P<minute>[0-9]{2})$/', $endTime, $matches)) {
+        $end['minute'] = $matches['minute'];
+        $end['hour'] = $matches['hour'];
+        if (strlen($end['hour']) == 1) {
+            $end['hour'] = '0' . $end['hour'];
+        }
+    }
+
+    // Merge into timestamps.
+    $start = implode('-', array($start['year'], $start['month'], $start['day']))
+        . ' ' . implode(':', array($start['hour'], $start['minute'], $start['second']));
+    $end = implode('-', array($end['year'], $end['month'], $end['day']))
+        . ' ' . implode(':', array($end['hour'], $end['minute'], $end['second']));
+
+    if ($end == '00-00-00 00:00:00') {
+        $end = $start;
+    }
+
+    return array($start, $end);
 
 }

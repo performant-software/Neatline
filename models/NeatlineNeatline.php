@@ -342,10 +342,15 @@ class NeatlineNeatline extends Omeka_record
         // Get the tables.
         $dataTable = $this->getTable('NeatlineRecord');
         $elementTable = $this->getTable('Element');
+        $elementTextTable = $this->getTable('ElementText');
+        $recordTypeTable = $this->getTable('RecordType');
 
         // Fetch the element record for the field.
         $element = $elementTable
             ->findByElementSetNameAndElementName('Dublin Core', $field);
+
+        // Get the record type for Item.
+        $itemTypeId = $recordTypeTable->findIdFromName('Item');
 
         // Attempt to find an existing Neatline record.
         $record = $dataTable
@@ -362,7 +367,17 @@ class NeatlineNeatline extends Omeka_record
         // Otherwise, look for an existing field to use.
         else {
 
-            $text = item('Dublin Core', $field, null, $item);
+            // Because item() is broken, this has to be done manually.
+            $existingTexts = $elementTextTable->fetchObjects(
+                $elementTextTable->getSelect()
+                    ->where('record_id = ' . $item->id
+                        . ' AND record_type_id = ' . $itemTypeId
+                        . ' AND element_id = ' . $element->id)
+            );
+
+            if ($existingTexts != null) {
+                $text = $existingTexts[0]->text;
+            }
 
         }
 
@@ -447,7 +462,18 @@ class NeatlineNeatline extends Omeka_record
                 $endTime
             );
 
+            // Assemble the array for the event.
+            $events[] = array(
+                'id' => (string) $item->id,
+                'title' => $title,
+                'description' => $description,
+                'startdate' => $timestamps[0],
+                'enddate' => $timestamps[1]
+            );
+
         }
+
+        return json_encode($events);
 
     }
 

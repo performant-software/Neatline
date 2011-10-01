@@ -75,7 +75,7 @@ class NeatlineRecord extends Omeka_record
         $recordTypeTable = $this->getTable('RecordType');
         $itemRecordTypeId = $recordTypeTable->findIdFromName('Item');
 
-        // Find all existing element texts for the item/field and check 
+        // Find all existing element texts for the item/field and check
         // to see if any of them match the posted data.
         $elementTextTable = $this->getTable('ElementText');
         $existingTexts = $elementTextTable->fetchObjects(
