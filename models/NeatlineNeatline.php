@@ -520,10 +520,16 @@ class NeatlineNeatline extends Omeka_record
 
             if (!is_null($record)) {
 
-                $text = $record->getElementText();
+                // Weird hack to get rid of the opening and closing brackets that OpenLayers
+                // tacks onto the geometry descriptions by default. They cause errors when the
+                // JavaScript tries to ingest them.
+                $text = json_decode(str_replace(array('[', ']'), '', $record->getElementText()->text));
+                $title = $this->getTextByItemAndField($item, 'Title');
+
                 $json[] = array(
                     'id' => $item->id,
-                    'wkt' => $text->text
+                    'title' => $title,
+                    'wkt' => $text
                 );
 
             }

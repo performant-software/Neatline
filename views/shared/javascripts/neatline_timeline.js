@@ -124,14 +124,14 @@
 
                 Timeline.createBandInfo({
                     eventSource:    this.eventSource,
-                    width:          "70%",
+                    width:          "60%",
                     intervalUnit:   Timeline.DateTime.MONTH,
                     intervalPixels: 100
                 }),
 
                 Timeline.createBandInfo({
                     eventSource:    this.eventSource,
-                    width:          "30%",
+                    width:          "40%",
                     intervalUnit:   Timeline.DateTime.YEAR,
                     intervalPixels: 200
                 })
