@@ -1042,6 +1042,13 @@
                 'opacity': 0.3
             }, 200);
 
+            // If there is date information entered, add an active record by default.
+            var timeBlock = this._currentFormItem.find('.time');
+            var timeCheckbox = timeBlock.find('input[type="checkbox"]');
+            if (startDateDateInput.val() != '' && !timeCheckbox.prop('checked')) {
+                timeBlock.trigger('mousedown');
+            }
+
             // Save data.
             $.ajax({
 
