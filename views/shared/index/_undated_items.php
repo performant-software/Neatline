@@ -25,10 +25,6 @@
  */
 ?>
 
-<div id="neatline-editor" class="neatline">
-
-    <div id="undated-items-header">
-        <h2>Undated Items</h2>
-    </div>
-
+<div id="undated-items-header">
+    <h2>Undated Items</h2>
 </div>

@@ -815,7 +815,10 @@
 
         showFormByItemId: function(id) {
 
-            this._showForm(this.idToItem[id]);
+            var item = this.idToItem[id];
+            if (item != this._currentFormItem) {
+                this._showForm(this.idToItem[id]);
+            }
 
         },
 
@@ -1134,6 +1137,8 @@
                     itemTitleText.animate({
                         'color': self.options.colors.text_default
                     }, 200);
+
+                    self._trigger('savecomplete');
 
                 }
 

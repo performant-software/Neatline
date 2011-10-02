@@ -32,6 +32,32 @@
 }
 
 
+/* Timeline */
+
+.popover {
+    opacity: 0;
+}
+
+.popover .content {
+    white-space: pre-wrap;
+}
+
+.popover h3.title-text {
+    line-height: 22px;
+}
+
+.popover a.close {
+    float: right;
+    display: block;
+    margin: 4px 0 0 10px;
+    font-weight: bold;
+}
+
+.popover a.close:hover {
+    color: #F0B925;
+    text-decoration: none;
+}
+
 /* Undated Items */
 
 #undated-items-header {

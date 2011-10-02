@@ -50,7 +50,7 @@
             // Getters.
             this._window = $(window);
             this._body = $('body');
-            this.content = $('.' + this.options.content_class);
+            this.content = this.element.find('.' + this.options.content_class);
 
             // Initialize trackers.
             this._is_scrolling = false;

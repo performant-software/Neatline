@@ -37,11 +37,22 @@
 
 </div>
 
-<script type="text/javascript">
+<!-- Generic markup for the timeline popups. -->
+<div id="timeline-popup" class="popover above">
+    <div class="arrow"></div>
+    <div class="inner">
+        <div class="title">
+            <a href="#" class="close">×</a>
+            <h3 class="title-text"></h3>
+        </div>
+        <div class="content"></div>
+    </div>
+</div>
 
+<!-- JSON globals. -->
+<script type="text/javascript">
     var Neatline = <?php echo json_encode($neatline); ?>;
         Neatline.timeline = <?php echo json_encode($timeline); ?>;
         Neatline.map = <?php echo json_encode($map); ?>;
         Neatline.dataSources = <?php echo json_encode($dataSources); ?>;
-
 </script>
