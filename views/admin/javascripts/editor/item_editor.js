@@ -679,7 +679,7 @@
                 // Register the item in the associations object.
                 self.idToItem[itemId] = item;
 
-                // Store the space/time status on the rom DOM.
+                // Store the space/time status on the DOM.
                 if (spaceCheckbox.prop('checked')) {
                     item.data('space', true);
                 } else {

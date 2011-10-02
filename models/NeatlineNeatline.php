@@ -487,4 +487,53 @@ class NeatlineNeatline extends Omeka_record
 
     }
 
+    /**
+     * Build the vector JSON for the map.
+     *
+     * @return JSON string The events JSON.
+     */
+    public function openlayersVectorJson()
+    {
+
+        // Table getters.
+        $_statusesTable = $this->getTable('NeatlineRecordStatus');
+        $_recordsTable = $this->getTable('NeatlineRecord');
+        $_elementTable = $this->getTable('Element');
+
+        // Get the coverage element.
+        $coverageElement = $_elementTable
+            ->findByElementSetNameAndElementName('Dublin Core', 'Coverage');
+
+        // Shell array for the vector data.
+        $json = array();
+
+        // Hit the record statuses table to get a list of all
+        // items that have active space records.
+        $activeItems = $_statusesTable->getItemsWithActiveSpaceRecords($this->id);
+
+        // Walk the items with active records, fetch the time records,
+        // pack them up.
+        foreach ($activeItems as $item) {
+
+            // Try to find a record.
+            $record = $_recordsTable->findByElement($this->id, $item->id, $coverageElement->id);
+
+            if (!is_null($record)) {
+
+                $text = $record->getElementText();
+                $json[] = array(
+                    'id' => $item->id,
+                    'wkt' => $text->text
+                );
+
+            }
+
+        }
+
+        echo 'test';
+
+        return json_encode($json);
+
+    }
+
 }

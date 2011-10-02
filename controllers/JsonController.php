@@ -51,4 +51,25 @@ class Neatline_JsonController extends Omeka_Controller_Action
 
     }
 
+    /**
+     * ~ AJAX ~
+     * Get item-wkt JSON for the map.
+     *
+     * @return void
+     */
+    public function openlayersAction()
+    {
+
+        // Supress the default Zend layout-sniffer functionality.
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        // Get the exhibits table and fetch the record.
+        $_neatlinesTable = $this->getTable('NeatlineNeatline');
+        $neatline = $_neatlinesTable->find($this->_request->getParam('id'));
+
+        // Output the JSON string.
+        echo $neatline->openlayersVectorJson();
+
+    }
+
 }

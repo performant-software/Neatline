@@ -173,4 +173,30 @@ class NeatlineRecordStatusTable extends Omeka_Db_Table
 
     }
 
+    /**
+     * Get all items with active time records for a given Neatline exhibit.
+     *
+     * @param integer $neatline_id The id of the exhibit.
+     *
+     * @return array of Omeka_record $items The array of item objects.
+     */
+    public function getItemsWithActiveSpaceRecords($neatline_id)
+    {
+
+        // Get the items table.
+        $_itemsTable = $this->getTable('Item');
+
+        // Get the matching status records.
+        $statuses = $this->findBySql('neatline_id = ? AND space = 1', array($neatline_id));
+
+        // Walk the results, fetch the items, pack them up.
+        $items = array();
+        foreach ($statuses as $status) {
+            $items[] = $_itemsTable->find($status->item_id);
+        }
+
+        return $items;
+
+    }
+
 }
