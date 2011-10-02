@@ -42,8 +42,13 @@
 
 <?php echo $this->partial('index/_neatline.php', array(
     'neatline' => $neatline,
-    'map' => $map,
-    'timeline' => $timeline
+    'timeline' => $timeline,
+    'map' => array(
+        'boundingBox' => $map->boundingBox,
+        'epsg' => $map->epsg,
+        'wmsAddress' => $map->wmsAddress,
+        'layers' => $map->layers
+    )
 )); ?>
 
 <?php echo $this->partial('editor/_tooltips.php'); ?>

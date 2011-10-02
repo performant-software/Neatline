@@ -60,31 +60,64 @@
 
             // Getters.
             this.params = Neatline;
+            this._window = $(window);
+
+            // Initialize resize timer.
+            this.resizeTimerId = null;
 
             // Ignition.
-            this._instantiateTimeglider();
+            this._instantiateSimile();
 
         },
 
-        _instantiateTimeglider: function() {
+        _instantiateSimile: function() {
 
+            var self = this;
+
+            var eventSource = new Timeline.DefaultEventSource();
+
+            // Define band data.
             var bandInfos = [
 
                 Timeline.createBandInfo({
-                    width:          "70%", 
-                    intervalUnit:   Timeline.DateTime.MONTH, 
+                    eventSource:    eventSource,
+                    width:          "70%",
+                    intervalUnit:   Timeline.DateTime.MONTH,
                     intervalPixels: 100
                 }),
 
                 Timeline.createBandInfo({
-                    width:          "30%", 
-                    intervalUnit:   Timeline.DateTime.YEAR, 
+                    eventSource:    eventSource,
+                    width:          "30%",
+                    intervalUnit:   Timeline.DateTime.YEAR,
                     intervalPixels: 200
                 })
 
             ];
 
+            // Sync bands.
+            bandInfos[1].syncWith = 0;
+            bandInfos[1].highlight = true;
+
+            // Instantiate and load JSON.
             this.timeline = Timeline.create(document.getElementById("timeline"), bandInfos);
+            this.timeline.loadJSON('http://localhost:8888/omeka-1.4.1/admin/neatline-exhibits/1/json/timeglider', function(json, url) {
+                eventSource.loadJSON(json, url);
+            });
+
+            // Handle resize.
+            this._window.bind({
+
+                'resize': function() {
+                    if (self.resizeTimerId == null) {
+                        self.resizeTimerId = self._window.setTimeout(function() {
+                            self.resizeTimerId = null;
+                            self.timeline.layout();
+                        }, 500);
+                    }
+                }
+
+            });
 
         }
 

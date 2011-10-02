@@ -434,7 +434,10 @@ class NeatlineNeatline extends Omeka_record
         $_timeRecordsTable = $this->getTable('NeatlineTimeRecord');
 
         // Shell array for the events data.
-        $events = array();
+        $json = array(
+            'dateTimeFormat' => 'Gregorian',
+            'events' => array()
+        );
 
         // Hit the record statuses table to get a list of all
         // items that have active time records.
@@ -462,18 +465,18 @@ class NeatlineNeatline extends Omeka_record
                 $endTime
             );
 
-            // Assemble the array for the event.
-            $events[] = array(
-                'id' => (string) $item->id,
+            $eventArray = array(
                 'title' => $title,
                 'description' => $description,
-                'startdate' => $timestamps[0],
-                'enddate' => $timestamps[1]
+                'start' => $timestamps[0],
+                'end' => $timestamps[1]
             );
+
+            $json['events'][] = $eventArray;
 
         }
 
-        return json_encode($events);
+        return json_encode($json);
 
     }
 
