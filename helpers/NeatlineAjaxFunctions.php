@@ -147,17 +147,17 @@ function neatline_generateTimegliderTimestamps(
 
     // Initiaize component arrays.
     $start = array(
-        'year' => '00',
-        'month' => '00',
-        'day' => '00',
+        'year' => '0000',
+        'month' => '01',
+        'day' => '01',
         'hour' => '00',
         'minute' => '00',
         'second' => '00'
     );
     $end = array(
-        'year' => '00',
-        'month' => '00',
-        'day' => '00',
+        'year' => '0000',
+        'month' => '01',
+        'day' => '01',
         'hour' => '00',
         'minute' => '00',
         'second' => '00'
@@ -292,8 +292,12 @@ function neatline_generateTimegliderTimestamps(
     $end = implode('-', array($end['year'], $end['month'], $end['day']))
         . ' ' . implode(':', array($end['hour'], $end['minute'], $end['second']));
 
-    if ($end == '00-00-00 00:00:00') {
+    if ($end == '0000-01-01 00:00:00') {
         $end = $start;
+    }
+
+    if ($start == '0000-01-01 00:00:00') {
+        $start = $end;
     }
 
     return array($start, $end);
