@@ -160,10 +160,18 @@
                 var vectorLayer = new OpenLayers.Layer.Vector(item.title);
                 self.map.addLayer(vectorLayer);
 
-                // Add the features.
-                var geometry = new OpenLayers.Geometry.fromWKT(item.wkt);
-                var feature = new OpenLayers.Feature.Vector(geometry);
-                vectorLayer.addFeatures(feature);
+                // Empty array to hold features objects.
+                var features = [];
+
+                // Build the features.
+                $.each(item.wkt, function(i, wkt) {
+                    var geometry = new OpenLayers.Geometry.fromWKT(wkt);
+                    var feature = new OpenLayers.Feature.Vector(geometry);
+                    features.push(feature);
+                });
+
+                // Add the vectors to the layer.
+                vectorLayer.addFeatures(features);
 
                 // Add to associations.
                 self.idToLayer[itemId] = vectorLayer;
@@ -177,12 +185,14 @@
             // Get the id of the item and try to fetch the layer.
             var itemId = item.attr('recordid');
             this.currentEditLayer = this.idToLayer[itemId];
+            this._newVectors = false;
 
             // If the item does not have an existing vector layer, create a new one.
             if (!this.currentEditLayer) {
                 var itemName = item.find('span.item-title-text').text();
                 this.currentEditLayer = new OpenLayers.Layer.Vector(itemName);
                 this.map.addLayer(this.currentEditLayer);
+                this._newVectors = true;
             }
 
             // Create the toolbar control.
@@ -195,8 +205,13 @@
 
         endEditWithoutSave: function() {
 
+            // Remove controls.
             this.map.removeControl(this.editingToolbar);
-            this.map.removeLayer(this.editVectorLayer);
+            this.map.removeControl(this.modifyFeature);
+
+            if (this._newVectors) {
+                this.map.removeLayer(this.currentEditLayer);
+            }
 
         },
 
