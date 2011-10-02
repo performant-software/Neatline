@@ -301,6 +301,8 @@
 
         _instantiateBlocks: function() {
 
+            var self = this;
+
             // Map.
             if (this.params.is_map) {
                 this.map.neatlinemap();
@@ -308,7 +310,17 @@
 
             // Timeline.
             if (this.params.is_timeline) {
-                this.timeline.neatlinetimeline();
+
+                this.timeline.neatlinetimeline({
+
+                    'eventclick': function(event, obj) {
+                        self._trigger('timelineeventclick', {}, {
+                            'itemId': obj.itemId
+                        });
+                    }
+
+                });
+
             }
 
             // Undated items.

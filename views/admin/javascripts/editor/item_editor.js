@@ -660,17 +660,24 @@
             // Position the faders.
             this._positionTitleFaders();
 
+            // Instantiate id-itemDOM association object.
+            this.idToItem = {};
+
             // Add the edit form functionality.
             $.each(this.items, function(i, item) {
 
                 // DOM fetch.
                 var item = $(item);
+                var itemId = item.attr('recordid');
                 var itemTitleTd = item.find('.item-title');
                 var itemTitleText = item.find('.' + self.options.item_title_text_class);
                 var spaceBlock = item.find('.space');
                 var spaceCheckbox = spaceBlock.find('input[type="checkbox"]');
                 var timeBlock = item.find('.time');
                 var timeCheckbox = timeBlock.find('input[type="checkbox"]');
+
+                // Register the item in the associations object.
+                self.idToItem[itemId] = item;
 
                 // Store the space/time status on the rom DOM.
                 if (spaceCheckbox.prop('checked')) {
@@ -803,6 +810,12 @@
             // Fetch the space and time boxes and set the class global buckets.
             this._spaceBoxes = this.items.find('.space');
             this._timeBoxes = this.items.find('.time');
+
+        },
+
+        showFormByItemId: function(id) {
+
+            this._showForm(this.idToItem[id]);
 
         },
 

@@ -466,6 +466,7 @@ class NeatlineNeatline extends Omeka_record
             );
 
             $eventArray = array(
+                'eventID' => $item->id,
                 'title' => $title,
                 'description' => $description
             );

@@ -29,7 +29,7 @@
 
     <?php foreach ($items as $item): ?>
 
-        <tr class="item-row">
+        <tr class="item-row" recordid="<?php echo $item->id; ?>">
             <td class="item-title">
                 <span class="item-title-text"><?php echo item('Dublin Core', 'Title', null, $item); ?></span>
                 <span class="item-title-fader"></span>

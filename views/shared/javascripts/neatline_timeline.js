@@ -118,6 +118,13 @@
 
             });
 
+            // Override the default click event callbacks.
+            Timeline.OriginalEventPainter.prototype._showBubble = function(x, y, evt) {
+                self._trigger('eventclick', {}, {
+                    'itemId': evt._eventID
+                });
+            }
+
         },
 
         loadData: function() {

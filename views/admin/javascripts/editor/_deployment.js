@@ -27,7 +27,13 @@ jQuery(document).ready(function($) {
     editorContainer.itemeditor({
 
         'neatlineready': function() {
-            neatlineContainer.neatline();
+
+            neatlineContainer.neatline({
+                'timelineeventclick': function(event, obj) {
+                    editorContainer.itemeditor('showFormByItemId', obj.itemId);
+                }
+            });
+
         },
 
         'reposition': function() {
