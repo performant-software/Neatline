@@ -352,6 +352,12 @@
 
             this.timeline.neatlinetimeline('loadData');
 
+        },
+
+        zoomMapToItemVectors: function(id) {
+
+            this.map.neatlinemap('zoomToItemVectors', id);
+
         }
 
     });

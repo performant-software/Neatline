@@ -29,9 +29,17 @@ jQuery(document).ready(function($) {
         'neatlineready': function() {
 
             neatlineContainer.neatline({
+
                 'timelineeventclick': function(event, obj) {
+
+                    // Show the edit form.
                     editorContainer.itemeditor('showFormByItemId', obj.itemId);
+
+                    // Focus the map.
+                    neatlineContainer.neatline('zoomMapToItemVectors', obj.itemId);
+
                 }
+
             });
 
         },

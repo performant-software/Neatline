@@ -207,7 +207,6 @@
 
             // Remove controls.
             this.map.removeControl(this.editingToolbar);
-            this.map.removeControl(this.modifyFeature);
 
             if (this._newVectors) {
                 this.map.removeLayer(this.currentEditLayer);
@@ -226,6 +225,15 @@
             });
 
             return wkts;
+
+        },
+
+        zoomToItemVectors: function(id) {
+
+            var layer = this.idToLayer[id];
+            console.log(layer);
+            console.log(this.idToLayer);
+            this.map.zoomToExtent(layer.getDataExtent());
 
         }
 
