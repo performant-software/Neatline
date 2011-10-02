@@ -838,6 +838,7 @@
             var faderSpan = item.find('.' + this.options.item_title_fader_class);
             var itemTitleText = item.find('.' + this.options.item_title_text_class);
             var allInputs = editForm.find('input[type="text"], textarea')
+            var descriptionTextarea = editForm.find('textarea[name="description"]');
 
             // Calculate the native height of the form.
             var cloneFormTd = editFormTd
@@ -899,6 +900,11 @@
             // Bind the button actions.
             var cancelButton = editForm.find('button[type="reset"]');
             var saveButton = editForm.find('input[type="submit"]');
+
+            // On textarea resize, resize the form.
+            descriptionTextarea.unbind('mouseup').bind('mouseup', function() {
+                self._resizeForms();
+            });
 
             // Cancel form.
             cancelButton.bind({
@@ -1148,50 +1154,40 @@
 
         _resizeForms: function() {
 
-            var self = this;
+            var item = this._currentFormItem;
 
-            $.each(this.items, function(i, item) {
+            // Get child markup.
+            var editFormTd = item.next().find('td');
+            var editForm = editFormTd.find('form');
+            var textSpan = item.find('.' + this.options.item_title_text_class);
+            var faderSpan = item.find('.' + this.options.item_title_fader_class);
 
-                var item = $(item);
+            // Calculate the native height of the form.
+            var cloneFormTd = editFormTd
+                .clone()
+                .css({
+                    'top': -1000,
+                    'left': -1000,
+                    'display': 'table-cell'
+                })
+                .appendTo(this._body);
 
-                if (item.data('expanded')) {
-
-                    // Get child markup.
-                    var editFormTd = item.next().find('td');
-                    var editForm = editFormTd.find('form');
-                    var textSpan = item.find('.' + self.options.item_title_text_class);
-                    var faderSpan = item.find('.' + self.options.item_title_fader_class);
-
-                    // Calculate the native height of the form.
-                    var cloneFormTd = editFormTd
-                        .clone()
-                        .css({
-                            'top': -1000,
-                            'left': -1000,
-                            'display': 'table-cell'
-                        })
-                        .appendTo(self._body);
-
-                    var cloneForm = cloneFormTd.find('form');
-                    var actionsDiv = cloneFormTd.find('div.actions');
-                    cloneForm.css({
-                        'height': 'auto',
-                        'width': self.containerWidth
-                    });
-
-                    // Register the height of the cloned form,
-                    // delete it.
-                    var formHeight = cloneForm.height();
-                    cloneFormTd.remove();
-
-                    // Animate up the height.
-                    editForm.animate({
-                        'height': formHeight
-                    }, 300);
-
-                }
-
+            var cloneForm = cloneFormTd.find('form');
+            var actionsDiv = cloneFormTd.find('div.actions');
+            cloneForm.css({
+                'height': 'auto',
+                'width': this.containerWidth
             });
+
+            // Register the height of the cloned form,
+            // delete it.
+            var formHeight = cloneForm.height();
+            cloneFormTd.remove();
+
+            // Animate up the height.
+            editForm.animate({
+                'height': formHeight
+            }, 300);
 
         },
 
