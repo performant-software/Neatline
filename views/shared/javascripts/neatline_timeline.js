@@ -68,15 +68,23 @@
 
         _instantiateTimeglider: function() {
 
-            // Instantiate Timeglider.
-            this.element.timeline({
-                'id': this.params.id,
-                'title': this.params.name,
-                'min_zoom': this.options.timeglider.min_zoom,
-                'max_zoom': this.options.timeglider.max_zoom,
-                'initial_zoom': this.options.timeglider.initial_zoom,
-                'data_source': 'http://localhost:8888/omeka-1.4.1/admin/neatline-exhibits/1/json/timeglider'
-            });
+            var bandInfos = [
+
+                Timeline.createBandInfo({
+                    width:          "70%", 
+                    intervalUnit:   Timeline.DateTime.MONTH, 
+                    intervalPixels: 100
+                }),
+
+                Timeline.createBandInfo({
+                    width:          "30%", 
+                    intervalUnit:   Timeline.DateTime.YEAR, 
+                    intervalPixels: 200
+                })
+
+            ];
+
+            this.timeline = Timeline.create(document.getElementById("timeline"), bandInfos);
 
         }
 

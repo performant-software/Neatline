@@ -121,19 +121,13 @@ function neatline_queueNeatlineAssets()
     // queue_js('timeglider/js/timeglider/TG_TimelineView');
     // queue_js('timeglider/js/timeglider/TG_Mediator');
     // queue_js('timeglider/js/timeglider/timeglider.timeline.widget');
-    queue_js('timeglider/js/timeglider-0.1.0.min');
+    // queue_js('timeglider/js/timeglider-0.1.0.min');
 
     // Timeglider CSS.
-    queue_css('timeglider');
-    queue_css('timeglider_overrides');
-    queue_css('timeglider_neatline_changes');
-    queue_css('jquery-ui');
-
-    // Crimson Text and OpenLayers.
-    ?>
-    <link href='http://fonts.googleapis.com/css?family=Crimson+Text:400,400italic,600,600italic,700,700italic' rel='stylesheet' type='text/css'>
-    <script type="text/javascript" src="http://openlayers.org/api/OpenLayers.js"></script>
-    <?php
+    // queue_css('timeglider');
+    // queue_css('timeglider_overrides');
+    // queue_css('timeglider_neatline_changes');
+    // queue_css('jquery-ui');
 
 }
 
