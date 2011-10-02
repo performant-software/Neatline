@@ -700,6 +700,20 @@ function neatline_error($text)
 function neatline_getTimelineDataUrl($neatline_id)
 {
 
-    return 'http://localhost:8888/omeka-1.4.1/admin/neatline-exhibits/' . $neatline_id . '/json/simile';
+    return WEB_ROOT . '/admin/neatline-exhibits/' . $neatline_id . '/json/simile';
+
+}
+
+/**
+ * Construct the JSON data source url for OpenLayers.
+ *
+ * @param integer $neatline_id The id of the exhibit.
+ *
+ * @return string The url.
+ */
+function neatline_getMapDataUrl($neatline_id)
+{
+
+    return WEB_ROOT . '/admin/neatline-exhibits/' . $neatline_id . '/json/openlayers';
 
 }

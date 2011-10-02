@@ -50,7 +50,8 @@
         'layers' => $map->layers
     ),
     'dataSources' => array(
-        'timeline' => neatline_getTimelineDataUrl($neatline->id)
+        'timeline' => neatline_getTimelineDataUrl($neatline->id),
+        'map' => neatline_getMapDataUrl($neatline->id)
     )
 )); ?>
 

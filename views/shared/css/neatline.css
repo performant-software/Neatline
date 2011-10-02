@@ -49,8 +49,9 @@
 .popover a.close {
     float: right;
     display: block;
-    margin: 4px 0 0 10px;
+    margin: 2px 0 0 10px;
     font-weight: bold;
+    font-size: 1.3em;
 }
 
 .popover a.close:hover {

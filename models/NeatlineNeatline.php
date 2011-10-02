@@ -530,8 +530,6 @@ class NeatlineNeatline extends Omeka_record
 
         }
 
-        echo 'test';
-
         return json_encode($json);
 
     }
