@@ -45,6 +45,10 @@ jQuery(document).ready(function($) {
         'savemapedit': function() {
             var wkts = neatlineContainer.neatline('getWktForSave');
             editorContainer.itemeditor('setCoverageData', wkts);
+        },
+
+        'savecomplete': function() {
+            neatlineContainer.neatline('reloadTimeline');
         }
 
     });

@@ -689,3 +689,17 @@ function neatline_error($text)
 
 
 }
+
+/**
+ * Construct the JSON data source url for Simile.
+ *
+ * @param integer $neatline_id The id of the exhibit.
+ *
+ * @return string The url.
+ */
+function neatline_getTimelineDataUrl($neatline_id)
+{
+
+    return 'http://localhost:8888/omeka-1.4.1/admin/neatline-exhibits/' . $neatline_id . '/json/simile';
+
+}

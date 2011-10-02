@@ -48,6 +48,9 @@
         'epsg' => $map->epsg,
         'wmsAddress' => $map->wmsAddress,
         'layers' => $map->layers
+    ),
+    'dataSources' => array(
+        'timeline' => neatline_getTimelineDataUrl($neatline->id)
     )
 )); ?>
 

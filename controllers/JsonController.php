@@ -36,7 +36,7 @@ class Neatline_JsonController extends Omeka_Controller_Action
      *
      * @return void
      */
-    public function timegliderAction()
+    public function simileAction()
     {
 
         // Supress the default Zend layout-sniffer functionality.

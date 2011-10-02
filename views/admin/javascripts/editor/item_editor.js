@@ -1074,6 +1074,8 @@
                     // Register the change.
                     itemTitleText.data('changed', false);
 
+                    self._trigger('savecomplete');
+
                 }
 
             });

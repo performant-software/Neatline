@@ -467,10 +467,16 @@ class NeatlineNeatline extends Omeka_record
 
             $eventArray = array(
                 'title' => $title,
-                'description' => $description,
-                'start' => $timestamps[0],
-                'end' => $timestamps[1]
+                'description' => $description
             );
+
+            if (!is_null($timestamps[0])) {
+                $eventArray['start'] = $timestamps[0];
+            }
+
+            if (!is_null($timestamps[1])) {
+                $eventArray['end'] = $timestamps[1];
+            }
 
             $json['events'][] = $eventArray;
 

@@ -334,6 +334,12 @@
 
             return this.map.neatlinemap('getWktForSave');;
 
+        },
+
+        reloadTimeline: function() {
+
+            this.timeline.neatlinetimeline('loadData');
+
         }
 
     });

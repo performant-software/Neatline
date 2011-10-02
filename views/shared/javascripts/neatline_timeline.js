@@ -74,20 +74,21 @@
 
             var self = this;
 
-            var eventSource = new Timeline.DefaultEventSource();
+            // Instantiate the event source object.
+            this.eventSource = new Timeline.DefaultEventSource();
 
             // Define band data.
-            var bandInfos = [
+            this.bandInfos = [
 
                 Timeline.createBandInfo({
-                    eventSource:    eventSource,
+                    eventSource:    this.eventSource,
                     width:          "70%",
                     intervalUnit:   Timeline.DateTime.MONTH,
                     intervalPixels: 100
                 }),
 
                 Timeline.createBandInfo({
-                    eventSource:    eventSource,
+                    eventSource:    this.eventSource,
                     width:          "30%",
                     intervalUnit:   Timeline.DateTime.YEAR,
                     intervalPixels: 200
@@ -96,14 +97,12 @@
             ];
 
             // Sync bands.
-            bandInfos[1].syncWith = 0;
-            bandInfos[1].highlight = true;
+            this.bandInfos[1].syncWith = 0;
+            this.bandInfos[1].highlight = true;
 
             // Instantiate and load JSON.
-            this.timeline = Timeline.create(document.getElementById("timeline"), bandInfos);
-            this.timeline.loadJSON('http://localhost:8888/omeka-1.4.1/admin/neatline-exhibits/1/json/timeglider', function(json, url) {
-                eventSource.loadJSON(json, url);
-            });
+            this.timeline = Timeline.create(document.getElementById("timeline"), this.bandInfos);
+            this.loadData();
 
             // Handle resize.
             this._window.bind({
@@ -117,6 +116,18 @@
                     }
                 }
 
+            });
+
+        },
+
+        loadData: function() {
+
+            var self = this;
+
+            // Ping the json server and get the events data.
+            this.timeline.loadJSON(this.params.dataSources.timeline, function(json, url) {
+                self.eventSource.clear();
+                self.eventSource.loadJSON(json, url);
             });
 
         }

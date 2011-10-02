@@ -293,11 +293,11 @@ function neatline_generateTimegliderTimestamps(
         . ' ' . implode(':', array($end['hour'], $end['minute'], $end['second']));
 
     if ($end == '0000-01-01 00:00:00') {
-        $end = $start;
+        $end = null;
     }
 
     if ($start == '0000-01-01 00:00:00') {
-        $start = $end;
+        $start = null;
     }
 
     return array($start, $end);
