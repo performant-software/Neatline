@@ -98,7 +98,7 @@
                   new OpenLayers.Control.ScaleLine(),
                 ],
                 maxExtent: bounds,
-                maxResolution: 64.70332499999859,
+                maxResolution: 'auto',
                 projection: this.params.map.epsg[0],
                 units: 'm'
             };
