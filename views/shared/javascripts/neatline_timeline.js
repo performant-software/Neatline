@@ -146,20 +146,6 @@
             this.timeline = Timeline.create(document.getElementById("timeline"), this.bandInfos);
             this.loadData();
 
-            // Handle resize.
-            this._window.bind({
-
-                'resize': function() {
-                    if (self.resizeTimerId == null) {
-                        self.resizeTimerId = self._window.setTimeout(function() {
-                            self.resizeTimerId = null;
-                            self.timeline.layout();
-                        }, 500);
-                    }
-                }
-
-            });
-
             // Override the default click event callbacks.
             this._overrideClickCallbacks();
 
