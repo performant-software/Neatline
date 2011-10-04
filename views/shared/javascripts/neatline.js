@@ -354,6 +354,13 @@
 
         },
 
+        reloadMap: function() {
+
+            this.map.neatlinemap('loadData');
+            console.log('test');
+
+        },
+
         zoomMapToItemVectors: function(id) {
 
             this.map.neatlinemap('zoomToItemVectors', id);

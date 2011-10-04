@@ -57,6 +57,10 @@
             // Ignition.
             this._instantiateOpenLayers();
 
+            // Trackers and buckets.
+            this._isData = false;
+            this._currentVectorLayers = [];
+
             // Load data.
             this.loadData();
 
@@ -130,6 +134,13 @@
 
             var self = this;
 
+            // Clear existing vectors.
+            if (this._isData) {
+                $.each(this._currentVectorLayers, function(i, layer) {
+                    self.map.removeLayer(layer);
+                });
+            }
+
             // Hit the json server.
             $.ajax({
 
@@ -138,6 +149,7 @@
 
                 success: function(data) {
                     self._buildVectorLayers(data);
+                    self._isData = true;
                 }
 
             });
@@ -175,6 +187,9 @@
 
                 // Add to associations.
                 self.idToLayer[itemId] = vectorLayer;
+
+                // Add to the layers array.
+                self._currentVectorLayers.push(vectorLayer);
 
             });
 
@@ -231,8 +246,6 @@
         zoomToItemVectors: function(id) {
 
             var layer = this.idToLayer[id];
-            console.log(layer);
-            console.log(this.idToLayer);
             this.map.zoomToExtent(layer.getDataExtent());
 
         }

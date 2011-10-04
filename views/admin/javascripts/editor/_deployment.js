@@ -57,12 +57,20 @@ jQuery(document).ready(function($) {
         },
 
         'savemapedit': function() {
+
+            // Fetch the coverage data from the map, push back into
+            // the item editor.
             var wkts = neatlineContainer.neatline('getWktForSave');
             editorContainer.itemeditor('setCoverageData', wkts);
+
         },
 
         'savecomplete': function() {
+
+            // Reload data for all blocks.
             neatlineContainer.neatline('reloadTimeline');
+            neatlineContainer.neatline('reloadMap');
+
         }
 
     });
