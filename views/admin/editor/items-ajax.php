@@ -34,10 +34,10 @@
                 <span class="item-title-text"><?php echo item('Dublin Core', 'Title', null, $item); ?></span>
                 <span class="item-title-fader"></span>
             </td>
-            <td class="col-1 col-row space">
+            <td class="col-1 col-row space <?php echo neatline_getExistingDataStatusForCheckBox($neatline, $item, 'space'); ?>">
                 <input type="checkbox" <?php echo neatline_getRecordStatusForCheckBox($neatline, $item, 'space'); ?> />
             </td>
-            <td class="col-2 col-row time">
+            <td class="col-2 col-row time <?php echo neatline_getExistingDataStatusForCheckBox($neatline, $item, 'time'); ?>">
                 <input type="checkbox" <?php echo neatline_getRecordStatusForCheckBox($neatline, $item, 'time'); ?> />
             </td>
         </tr>

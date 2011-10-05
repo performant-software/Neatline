@@ -76,7 +76,8 @@
                 drag_border: '#a79aae',
                 text_default: '#383838',
                 text_gray: '#8d8d8d',
-                unchanged_red: '#ca3c3c'
+                unchanged_red: '#ca3c3c',
+                data_exists: '#fff2d3'
             }
 
         },
@@ -682,7 +683,7 @@
                 // Store the space/time status on the DOM.
                 if (spaceCheckbox.prop('checked')) {
                     item.data('space', true);
-                } else {
+                }else {
                     item.data('space', false);
                 }
 
@@ -690,6 +691,21 @@
                     item.data('time', true);
                 } else {
                     item.data('time', false);
+                }
+
+                // Store the existing-data status on the DOM.
+                if (spaceBlock.hasClass('data-exists')) {
+                    item.data('spaceDataExists', true);
+                    spaceBlock.css('background-color', self.options.colors.data_exists + ' !important');
+                } else {
+                    item.data('spaceDataExists', false);
+                }
+
+                if (timeBlock.hasClass('data-exists')) {
+                    item.data('timeDataExists', true);
+                    timeBlock.css('background-color', self.options.colors.data_exists + ' !important');
+                } else {
+                    item.data('timeDataExists', false);
                 }
 
                 // Set the starting expanded tracker and record the item's
@@ -751,7 +767,13 @@
                     },
 
                     'mouseleave': function() {
-                        spaceBlock.css('background-color', itemTitleTd.css('background'));
+
+                        if (item.data('spaceDataExists')) {
+                            spaceBlock.css('background-color', self.options.colors.data_exists + ' !important');
+                        } else {
+                            spaceBlock.css('background-color', itemTitleTd.css('background') + ' !important');
+                        }
+
                     }
 
                 });
@@ -781,7 +803,13 @@
                     },
 
                     'mouseleave': function() {
-                        timeBlock.css('background-color', itemTitleTd.css('background'));
+
+                        if (item.data('timeDataExists')) {
+                            timeBlock.css('background-color', self.options.colors.data_exists + ' !important');
+                        } else {
+                            timeBlock.css('background-color', itemTitleTd.css('background') + ' !important');
+                        }
+
                     }
 
                 });

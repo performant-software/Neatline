@@ -121,6 +121,52 @@ function neatline_getRecordStatusForCheckBox($neatline, $item, $spaceOrTime)
 }
 
 /**
+ * Check to see whether an item has extant data in it's DC record that
+ * could be used for map or timeline data. If so, return the 'data-exists'
+ * class for the template checkbox; if not, return an empty string.
+ *
+ * @param Omeka_record $neatline The Neatline exhibit.
+ * @param Omeka_record $item The item.
+ * @param string $spaceOrTime 'space' or 'time'.
+ *
+ * @return array of Omeka_records $items The items.
+ */
+function neatline_getExistingDataStatusForCheckBox($neatline, $item, $spaceOrTime)
+{
+
+    $_db = get_db();
+    $isData = false;
+
+    switch ($spaceOrTime) {
+
+        case 'space':
+
+            if ($neatline->getTextByItemAndField($item, 'Coverage')) {
+                $isData = true;
+            }
+
+        break;
+
+        case 'time':
+
+            $startDate = $neatline->getTimeTextByItemAndField($item, 'start_date');
+            $startTime = $neatline->getTimeTextByItemAndField($item, 'start_time');
+            $endDate = $neatline->getTimeTextByItemAndField($item, 'end_date');
+            $endTime = $neatline->getTimeTextByItemAndField($item, 'end_time');
+
+            if($startDate != '' || $startTime != '' || $endDate != '' || $endTime != '') {
+                $isData = true;
+            }
+
+        break;
+
+    }
+
+    return $isData ? 'data-exists' : '';
+
+}
+
+/**
  * Parse plain text date pieces and generate a start and end timestamp
  * for timeglider.
  *
