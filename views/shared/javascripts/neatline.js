@@ -305,7 +305,15 @@
 
             // Map.
             if (this.params.is_map) {
-                this.map.neatlinemap();
+
+                this.map.neatlinemap({
+
+                    'featureadded': function() {
+                        self._trigger('mapfeatureadded');
+                    }
+
+                });
+
             }
 
             // Timeline.

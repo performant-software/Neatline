@@ -939,13 +939,7 @@
 
                     'keydown': function() {
 
-                        // Tween the title color.
-                        itemTitleText.animate({
-                            'color': self.options.colors.unchanged_red
-                        }, 200);
-
-                        // Store the new status.
-                        itemTitleText.data('changed', true);
+                        self.markItemTitleAsUnsaved();
 
                     }
 
@@ -957,6 +951,20 @@
             this._trigger('mapedit', {}, {
                 'item': item
             });
+
+        },
+
+        markItemTitleAsUnsaved: function() {
+
+            var itemTitleText = this._currentFormItem.find('.' + this.options.item_title_text_class);
+
+            // Tween the title color.
+            itemTitleText.animate({
+                'color': this.options.colors.unchanged_red
+            }, 200);
+
+            // Store the new status.
+            itemTitleText.data('changed', true);
 
         },
 

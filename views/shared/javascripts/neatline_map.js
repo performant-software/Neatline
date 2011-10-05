@@ -202,6 +202,8 @@
 
         edit: function(item) {
 
+            var self = this;
+
             // Get the id of the item and try to fetch the layer.
             var itemId = item.attr('recordid');
             this.currentEditLayer = this.idToLayer[itemId];
@@ -223,18 +225,27 @@
 
                 // Draw lines.
                 new OpenLayers.Control.DrawFeature(this.currentEditLayer, OpenLayers.Handler.Path, {
-                    'displayClass': 'olControlDrawFeaturePath'
+                    displayClass: 'olControlDrawFeaturePath',
+                    featureAdded: function() {
+                        self._trigger('featureadded');
+                    }
                 }),
 
                 // Draw points.
                 new OpenLayers.Control.DrawFeature(this.currentEditLayer, OpenLayers.Handler.Point, {
-                    'displayClass': 'olControlDrawFeaturePoint'
+                    displayClass: 'olControlDrawFeaturePoint',
+                    featureAdded: function() {
+                        self._trigger('featureadded');
+                    }
                 }),
 
                 // Draw polygons.
                 new OpenLayers.Control.DrawFeature(this.currentEditLayer, OpenLayers.Handler.Polygon, {
-                    'displayClass': 'olControlDrawFeaturePolygon'
-                })
+                    displayClass: 'olControlDrawFeaturePolygon',
+                    featureAdded: function() {
+                        self._trigger('featureadded');
+                    }
+                }),
 
             ];
 

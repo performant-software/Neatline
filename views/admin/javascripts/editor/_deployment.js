@@ -38,6 +38,12 @@ jQuery(document).ready(function($) {
                     // Focus the map.
                     neatlineContainer.neatline('zoomMapToItemVectors', obj.itemId);
 
+                },
+
+                'mapfeatureadded': function() {
+
+                    editorContainer.itemeditor('markItemTitleAsUnsaved');
+
                 }
 
             });
