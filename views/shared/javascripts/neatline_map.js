@@ -215,6 +215,7 @@
                 this.currentEditLayer = new OpenLayers.Layer.Vector(itemName);
                 this.map.addLayer(this.currentEditLayer);
                 this._newVectors = true;
+                this.idToLayer[itemId] = this.currentEditLayer;
             }
 
             // Create the controls and toolbar.
@@ -271,7 +272,7 @@
             // Remove controls.
             this.map.removeControl(this.editingToolbar);
 
-            if (this._newVectors) {
+            if (this.currentEditLayer.features.length == 0) {
                 this.map.removeLayer(this.currentEditLayer);
             }
 
