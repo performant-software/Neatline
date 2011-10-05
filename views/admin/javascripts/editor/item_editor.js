@@ -456,7 +456,7 @@
                     if (self._spaceBoxes != null) {
 
                         $.each(self._spaceBoxes, function(i, box) {
-                            $(box).css('background', self.options.spacetime_background_color);
+                            $(box).css('background', self.options.spacetime_background_color + ' !important');
                         });
 
                     }
@@ -471,7 +471,14 @@
                     if (self._spaceBoxes != null) {
 
                         $.each(self._spaceBoxes, function(i, box) {
-                            $(box).css('background', self.options.item_row_default_background_color);
+
+                            var box = $(box);
+                            if (box.data('spaceDataExists')) {
+                                box.css('background', self.options.colors.data_exists + ' !important');
+                            } else {
+                                box.css('background', self.options.item_row_default_background_color + ' !important');
+                            }
+
                         });
 
                     }
@@ -542,7 +549,7 @@
                     if (self._timeBoxes != null) {
 
                         $.each(self._timeBoxes, function(i, box) {
-                            $(box).css('background', self.options.spacetime_background_color);
+                            $(box).css('background', self.options.spacetime_background_color + ' !important');
                         });
 
                     }
@@ -557,7 +564,14 @@
                     if (self._timeBoxes != null) {
 
                         $.each(self._timeBoxes, function(i, box) {
-                            $(box).css('background', self.options.item_row_default_background_color);
+
+                            var box = $(box);
+                            if (box.data('timeDataExists')) {
+                                box.css('background', self.options.colors.data_exists + ' !important');
+                            } else {
+                                box.css('background', self.options.item_row_default_background_color + ' !important');
+                            }
+
                         });
 
                     }
@@ -681,32 +695,22 @@
                 self.idToItem[itemId] = item;
 
                 // Store the space/time status on the DOM.
-                if (spaceCheckbox.prop('checked')) {
-                    item.data('space', true);
-                }else {
-                    item.data('space', false);
-                }
+                if (spaceCheckbox.prop('checked')) { item.data('space', true); }
+                else { item.data('space', false); }
 
-                if (timeCheckbox.prop('checked')) {
-                    item.data('time', true);
-                } else {
-                    item.data('time', false);
-                }
+                if (timeCheckbox.prop('checked')) { item.data('time', true); }
+                else { item.data('time', false); }
 
                 // Store the existing-data status on the DOM.
                 if (spaceBlock.hasClass('data-exists')) {
-                    item.data('spaceDataExists', true);
+                    spaceBlock.data('spaceDataExists', true);
                     spaceBlock.css('background-color', self.options.colors.data_exists + ' !important');
-                } else {
-                    item.data('spaceDataExists', false);
-                }
+                } else { spaceBlock.data('spaceDataExists', false); }
 
                 if (timeBlock.hasClass('data-exists')) {
-                    item.data('timeDataExists', true);
+                    timeBlock.data('timeDataExists', true);
                     timeBlock.css('background-color', self.options.colors.data_exists + ' !important');
-                } else {
-                    item.data('timeDataExists', false);
-                }
+                } else { timeBlock.data('timeDataExists', false); }
 
                 // Set the starting expanded tracker and record the item's
                 // native vertical offset.
@@ -720,11 +724,11 @@
                 item.bind({
 
                     'mouseenter': function() {
-                        item.find('td').css('background-color', self.options.item_row_highlight_background_color);
+                        item.find('td').not('.data-exists').css('background-color', self.options.item_row_highlight_background_color + ' !important');
                     },
 
                     'mouseleave': function() {
-                        item.find('td').css('background-color', self.options.item_row_default_background_color);
+                        item.find('td').not('.data-exists').css('background-color', self.options.item_row_default_background_color + ' !important');
                     }
 
                 });
@@ -768,7 +772,7 @@
 
                     'mouseleave': function() {
 
-                        if (item.data('spaceDataExists')) {
+                        if (spaceBlock.data('spaceDataExists')) {
                             spaceBlock.css('background-color', self.options.colors.data_exists + ' !important');
                         } else {
                             spaceBlock.css('background-color', itemTitleTd.css('background') + ' !important');
@@ -804,7 +808,7 @@
 
                     'mouseleave': function() {
 
-                        if (item.data('timeDataExists')) {
+                        if (timeBlock.data('timeDataExists')) {
                             timeBlock.css('background-color', self.options.colors.data_exists + ' !important');
                         } else {
                             timeBlock.css('background-color', itemTitleTd.css('background') + ' !important');
