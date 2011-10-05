@@ -357,7 +357,6 @@
         reloadMap: function() {
 
             this.map.neatlinemap('loadData');
-            console.log('test');
 
         },
 

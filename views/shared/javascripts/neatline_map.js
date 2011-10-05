@@ -136,9 +136,14 @@
 
             // Clear existing vectors.
             if (this._isData) {
+
                 $.each(this._currentVectorLayers, function(i, layer) {
                     self.map.removeLayer(layer);
                 });
+
+                // Empty out the container.
+                this._currentVectorLayers = [];
+
             }
 
             // Hit the json server.
@@ -210,11 +215,43 @@
                 this._newVectors = true;
             }
 
-            // Create the toolbar control.
-            this.editingToolbar = new OpenLayers.Control.EditingToolbar(this.currentEditLayer);
+            // Create the controls and toolbar.
+            var panelControls = [
+
+                // Panning.
+                new OpenLayers.Control.Navigation(),
+
+                // Draw lines.
+                new OpenLayers.Control.DrawFeature(this.currentEditLayer, OpenLayers.Handler.Path, {
+                    'displayClass': 'olControlDrawFeaturePath'
+                }),
+
+                // Draw points.
+                new OpenLayers.Control.DrawFeature(this.currentEditLayer, OpenLayers.Handler.Point, {
+                    'displayClass': 'olControlDrawFeaturePoint'
+                }),
+
+                // Draw polygons.
+                new OpenLayers.Control.DrawFeature(this.currentEditLayer, OpenLayers.Handler.Polygon, {
+                    'displayClass': 'olControlDrawFeaturePolygon'
+                })
+
+            ];
+
+            this.editToolbar = new OpenLayers.Control.Panel({
+                defaultControl: panelControls[0],
+                displayClass: 'olControlEditingToolbar'
+            });
+
+            this.editToolbar.addControls(panelControls);
+
+            // this.editingToolbar = new OpenLayers.Control.EditingToolbar(this.currentEditLayer);
+
+            // Push the edit layer onto the non-base layers stack.
+            this._currentVectorLayers.push(this.currentEditLayer);
 
             // Add the layer and show the toolbar.
-            this.map.addControl(this.editingToolbar);
+            this.map.addControl(this.editToolbar);
 
         },
 
@@ -246,7 +283,10 @@
         zoomToItemVectors: function(id) {
 
             var layer = this.idToLayer[id];
-            this.map.zoomToExtent(layer.getDataExtent());
+
+            if (layer != null) {
+                this.map.zoomToExtent(layer.getDataExtent());
+            }
 
         }
 
