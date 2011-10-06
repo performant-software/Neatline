@@ -542,4 +542,33 @@ class NeatlineNeatline extends Omeka_record
 
     }
 
+    /**
+     * Delete status and element text association records
+     * on exhibit delete.
+     *
+     * @return JSON string The events JSON.
+     */
+    public function delete()
+    {
+
+        // Table getters.
+        $_statusesTable = $this->getTable('NeatlineRecordStatus');
+        $_recordsTable = $this->getTable('NeatlineRecord');
+        $_timeRecordsTable = $this->getTable('NeatlineTimeRecord');
+
+        // Get records.
+        $statusRecords = $_statusesTable->findBySql('neatline_id = ?', array($this->id));
+        $records = $_recordsTable->findBySql('neatline_id = ?', array($this->id));
+        $timeRecords = $_timeRecordsTable->findBySql('neatline_id = ?', array($this->id));
+
+        // Delete.
+        foreach ($statusRecords as $record) { $record->delete(); }
+        foreach ($records as $record) { $record->delete(); }
+        foreach ($timeRecords as $record) { $record->delete(); }
+
+        // Call parent.
+        parent::delete();
+
+    }
+
 }

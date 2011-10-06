@@ -94,7 +94,7 @@ class Neatline_IndexController extends Omeka_Controller_Action
             if (count($errors) == 0) {
 
                 if ($neatline->saveForm($_post)) {
-                    // redirect to the Neatline.
+                    $this->_redirect('neatline-exhibits');
                 }
 
                 else {
