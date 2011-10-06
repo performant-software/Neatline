@@ -134,6 +134,8 @@
 
             var self = this;
 
+            console.log('load');
+
             // Clear existing vectors.
             if (this._isData) {
 

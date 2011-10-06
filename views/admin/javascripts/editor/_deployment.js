@@ -30,6 +30,7 @@ jQuery(document).ready(function($) {
 
             neatlineContainer.neatline({
 
+                // When the user clicks on an item on the timeline.
                 'timelineeventclick': function(event, obj) {
 
                     // Show the edit form.
@@ -40,6 +41,7 @@ jQuery(document).ready(function($) {
 
                 },
 
+                // When a geometry vector is added to the map.
                 'mapfeatureadded': function() {
 
                     editorContainer.itemeditor('markItemTitleAsUnsaved');
@@ -50,18 +52,26 @@ jQuery(document).ready(function($) {
 
         },
 
+        // When the window has been reisized and the Neatline blocks
+        // need to be repositioned.
         'reposition': function() {
             neatlineContainer.neatline('positionDivs');
         },
 
+        // When an item form is opened and the item's vector becomes
+        // available for editing.
         'mapedit': function(event, obj) {
             neatlineContainer.neatline('editMap', obj.item);
         },
 
+        // When vector data is added to the map, and then the item
+        // form is closed without saving.
         'endmapedit': function() {
             neatlineContainer.neatline('endMapEditWithoutSave');
         },
 
+        // When an item form is saved, and new vector data needs to
+        // be fethed and posted back to the server.
         'savemapedit': function() {
 
             // Fetch the coverage data from the map, push back into
@@ -71,6 +81,8 @@ jQuery(document).ready(function($) {
 
         },
 
+        // After an edit form save, when the JSON for the map and
+        // timeline needs to be reloaded.
         'savecomplete': function() {
 
             // Reload data for all blocks.
