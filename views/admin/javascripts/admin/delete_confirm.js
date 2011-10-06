@@ -133,12 +133,12 @@
 
             var exhibitName = row.find('td.title a').html();
             var exhibitId = row.attr('exhibitid');
-            var deleteUrl = this.options.delete_url_slug + exhibitId;
-
-            console.log(this.exhibitName, exhibitName);
+            var form = this.deleteButton.closest('form');
+            var startingAction = form.attr('action');
+            var deleteUrl = startingAction + exhibitId;
 
             this.exhibitName.text(exhibitName);
-            this.deleteButton.closest('form').attr('action', deleteUrl);
+            form.attr('action', deleteUrl);
 
         },
 

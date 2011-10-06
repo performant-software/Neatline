@@ -186,12 +186,12 @@ function neatline_buttonTo(
 function neatline_deleteConfirmForm()
 {
 
-    $action = '';
+    $action = neatline_getDeleteExhibitUrl();
     $name = 'delete-neatline';
     $value = 'Delete';
     $attribs = array('class' => 'neatline btn danger large');
     $formName = 'delete-neatline';
-    $formAttribs = array('class' => 'inline');
+    $formAttribs = array('class' => 'inline', 'action' => $action);
     $fieldsetClass = 'neatline-inline';
 
     $view = __v();
@@ -687,6 +687,20 @@ function neatline_error($text)
          . $text
          . '</div>';
 
+
+}
+
+/**
+ * Construct the delete exhibit action route.
+ *
+ * @param integer $neatline_id The id of the exhibit.
+ *
+ * @return string The url.
+ */
+function neatline_getDeleteExhibitUrl($neatline_id)
+{
+
+    return WEB_ROOT . '/admin/neatline-exhibits/delete/';
 
 }
 
