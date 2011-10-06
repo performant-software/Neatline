@@ -1104,10 +1104,22 @@
                 'opacity': 0.3
             }, 200);
 
+            // Get the values out of the form.
+            var itemId_Value = itemId.text();
+            var neatlineId_Value = this.neatlineData.id;
+            var title_Value = titleInput.val();
+            var description_Value = descriptionInput.val();
+            var startDate_Value = startDateDateInput.val();
+            var startTime_Value = startDateTimeInput.val();
+            var endDate_Value = endDateDateInput.val();
+            var endTime_Value = endDateTimeInput.val();
+            var geocoverage_Value = this.coverageData;
+
             // If there is date information entered, add an active record by default.
             var timeBlock = this._currentFormItem.find('.time');
             var timeCheckbox = timeBlock.find('input[type="checkbox"]');
-            if (startDateDateInput.val() != '' && !timeCheckbox.prop('checked')) {
+
+            if (startDate_Value != '' && !timeCheckbox.prop('checked')) {
                 timeBlock.trigger('mousedown');
             }
 
@@ -1118,15 +1130,15 @@
                 type: 'POST',
 
                 data: {
-                    item_id: itemId.text(),
-                    neatline_id: this.neatlineData.id,
-                    title: titleInput.val(),
-                    description: descriptionInput.val(),
-                    start_date: startDateDateInput.val(),
-                    start_time: startDateTimeInput.val(),
-                    end_date: endDateDateInput.val(),
-                    end_time: endDateTimeInput.val(),
-                    geocoverage: this.coverageData
+                    item_id: itemId_Value,
+                    neatline_id: neatlineId_Value,
+                    title: title_Value,
+                    description: description_Value,
+                    start_date: startDate_Value,
+                    start_time: startTime_Value,
+                    end_date: endDate_Value,
+                    end_time: endTime_Value,
+                    geocoverage: geocoverage_Value
                 },
 
                 success: function() {
