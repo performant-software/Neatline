@@ -45,10 +45,10 @@
             edit_form_class: 'neatline-edit-record-form',
             title_input_name: 'title',
             description_input_name: 'description',
-            start_date_date_input_name: 'start-date-date',
-            start_date_time_input_name: 'start-date-time',
-            end_date_date_input_name: 'end-date-date',
-            end_date_time_input_name: 'end-date-time',
+            start_date_input_name: 'start-date-date',
+            start_time_input_name: 'start-date-time',
+            end_date_input_name: 'end-date-date',
+            end_time_input_name: 'end-date-time',
 
             // Durations and CSS constants.
             item_list_highlight_duration: 10,
@@ -456,7 +456,7 @@
                     if (self._spaceBoxes != null) {
 
                         $.each(self._spaceBoxes, function(i, box) {
-                            $(box).css('background', self.options.spacetime_background_color + ' !important');
+                            $(box).css('background', self.options.spacetime_background_color);
                         });
 
                     }
@@ -472,12 +472,13 @@
 
                         $.each(self._spaceBoxes, function(i, box) {
 
+                            // Get the new color.
                             var box = $(box);
-                            if (box.data('spaceDataExists')) {
-                                box.css('background', self.options.colors.data_exists + ' !important');
-                            } else {
-                                box.css('background', self.options.item_row_default_background_color + ' !important');
-                            }
+                            var newColor = box.data('spaceDataExists') ?
+                                self.options.colors.data_exists : self.options.item_row_default_background_color;
+
+                            // Push the change.
+                            box.css('background', newColor);
 
                         });
 
@@ -549,7 +550,7 @@
                     if (self._timeBoxes != null) {
 
                         $.each(self._timeBoxes, function(i, box) {
-                            $(box).css('background', self.options.spacetime_background_color + ' !important');
+                            $(box).css('background', self.options.spacetime_background_color);
                         });
 
                     }
@@ -565,12 +566,13 @@
 
                         $.each(self._timeBoxes, function(i, box) {
 
+                            // Get the new color.
                             var box = $(box);
-                            if (box.data('timeDataExists')) {
-                                box.css('background', self.options.colors.data_exists + ' !important');
-                            } else {
-                                box.css('background', self.options.item_row_default_background_color + ' !important');
-                            }
+                            var newColor = box.data('timeDataExists') ?
+                                self.options.colors.data_exists : self.options.item_row_default_background_color;
+
+                            // Push the change.
+                            box.css('background', newColor);
 
                         });
 
@@ -704,12 +706,12 @@
                 // Store the existing-data status on the DOM.
                 if (spaceBlock.hasClass('data-exists')) {
                     spaceBlock.data('spaceDataExists', true);
-                    spaceBlock.css('background-color', self.options.colors.data_exists + ' !important');
+                    spaceBlock.css('background-color', self.options.colors.data_exists);
                 } else { spaceBlock.data('spaceDataExists', false); }
 
                 if (timeBlock.hasClass('data-exists')) {
                     timeBlock.data('timeDataExists', true);
-                    timeBlock.css('background-color', self.options.colors.data_exists + ' !important');
+                    timeBlock.css('background-color', self.options.colors.data_exists);
                 } else { timeBlock.data('timeDataExists', false); }
 
                 // Set the starting expanded tracker and record the item's
@@ -721,14 +723,18 @@
                 itemTitleText.data('changed', false);
 
                 // Add mouseenter glossing to row.
-                item.bind({
+                itemTitleTd.bind({
 
                     'mouseenter': function() {
-                        item.find('td').not('.data-exists').css('background-color', self.options.item_row_highlight_background_color + ' !important');
+                        item.find('td')
+                            .not('.data-exists')
+                            .css('background-color', self.options.item_row_highlight_background_color + ' !important');
                     },
 
                     'mouseleave': function() {
-                        item.find('td').not('.data-exists').css('background-color', self.options.item_row_default_background_color + ' !important');
+                        item.find('td')
+                            .not('.data-exists')
+                            .css('background-color', self.options.item_row_default_background_color + ' !important');
                     }
 
                 });
@@ -767,16 +773,26 @@
                     },
 
                     'mouseenter': function() {
+
+                        // Make the color change on the box.
                         spaceBlock.css('background-color', self.options.spacetime_background_color + ' !important');
+
+                        // Make the color change on the item title.
+                        itemTitleTd.css('background-color', self.options.item_row_highlight_background_color + ' !important');
+
                     },
 
                     'mouseleave': function() {
 
-                        if (spaceBlock.data('spaceDataExists')) {
-                            spaceBlock.css('background-color', self.options.colors.data_exists + ' !important');
-                        } else {
-                            spaceBlock.css('background-color', itemTitleTd.css('background') + ' !important');
-                        }
+                        // Get the new color.
+                        var newColor = spaceBlock.data('spaceDataExists') ?
+                            self.options.colors.data_exists : self.options.item_row_default_background_color;
+
+                        // Push the change.
+                        spaceBlock.css('background-color', newColor + ' !important');
+
+                        // Make the color change on the item title.
+                        itemTitleTd.css('background-color', self.options.item_row_default_background_color + ' !important');
 
                     }
 
@@ -803,16 +819,26 @@
                     },
 
                     'mouseenter': function() {
+
+                        // Make the color change on the box.
                         timeBlock.css('background-color', self.options.spacetime_background_color + ' !important');
+
+                        // Make the color change on the item title.
+                        itemTitleTd.css('background-color', self.options.item_row_highlight_background_color + ' !important');
+
                     },
 
                     'mouseleave': function() {
 
-                        if (timeBlock.data('timeDataExists')) {
-                            timeBlock.css('background-color', self.options.colors.data_exists + ' !important');
-                        } else {
-                            timeBlock.css('background-color', itemTitleTd.css('background') + ' !important');
-                        }
+                        // Get the new color.
+                        var newColor = timeBlock.data('timeDataExists') ?
+                            self.options.colors.data_exists : self.options.item_row_default_background_color;
+
+                        // Push the change.
+                        timeBlock.css('background-color', newColor + ' !important');
+
+                        // Make the color change on the item title.
+                        itemTitleTd.css('background-color', self.options.item_row_default_background_color + ' !important');
 
                     }
 
@@ -1072,26 +1098,13 @@
             var itemTitleText = this._currentFormItem.find('.' + this.options.item_title_text_class);
 
             // Get the form inputs.
-            var titleInput = editForm
-                .find('input[name="' +this.options.title_input_name + '"]');
-
-            var descriptionInput = editForm
-                .find('textarea[name="' + this.options.description_input_name + '"]');
-
-            var startDateDateInput = editForm
-                .find('input[name="' + this.options.start_date_date_input_name + '"]');
-
-            var startDateTimeInput = editForm
-                .find('input[name="' + this.options.start_date_time_input_name + '"]');
-
-            var endDateDateInput = editForm
-                .find('input[name="' + this.options.end_date_date_input_name + '"]');
-
-            var endDateTimeInput = editForm.
-                find('input[name="' + this.options.end_date_time_input_name + '"]');
-
-            var itemId = editForm.
-                find('recordid');
+            var titleInput = editForm.find('input[name="' + this.options.title_input_name + '"]');
+            var descriptionInput = editForm.find('textarea[name="' + this.options.description_input_name + '"]');
+            var startDateInput = editForm.find('input[name="' + this.options.start_date_input_name + '"]');
+            var startTimeInput = editForm.find('input[name="' + this.options.start_time_input_name + '"]');
+            var endDateInput = editForm.find('input[name="' + this.options.end_date_input_name + '"]');
+            var endTimeInput = editForm.find('input[name="' + this.options.end_time_input_name + '"]');
+            var itemId = editForm.find('recordid');
 
             // Get all of the inputs.
             var allInputs = editForm.find('input[type="text"], textarea')
@@ -1109,10 +1122,10 @@
             var neatlineId_Value = this.neatlineData.id;
             var title_Value = titleInput.val();
             var description_Value = descriptionInput.val();
-            var startDate_Value = startDateDateInput.val();
-            var startTime_Value = startDateTimeInput.val();
-            var endDate_Value = endDateDateInput.val();
-            var endTime_Value = endDateTimeInput.val();
+            var startDate_Value = startDateInput.val();
+            var startTime_Value = startTimeInput.val();
+            var endDate_Value = endDateInput.val();
+            var endTime_Value = endTimeInput.val();
             var geocoverage_Value = this.coverageData;
 
             // If there is date information entered, add an active record by default.
