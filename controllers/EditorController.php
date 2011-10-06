@@ -133,12 +133,14 @@ class Neatline_EditorController extends Omeka_Controller_Action
         $endDate = $_post['end_date'];
         $endTime = $_post['end_time'];
         $geoCoverage = json_encode($_post['geocoverage']);
+        $spaceStatus = json_decode($_post['space_status']);
+        $timeStatus = json_decode($_post['time_status']);
 
         // Fetch the Neatline exhibit record and item record.
         $neatline = $this->_neatlinesTable->find($neatlineId);
         $item = $this->_itemsTable->find($itemId);
 
-        // Save the data.
+        // Save the record data.
         $neatline->saveData(
             $item,
             $title,
@@ -148,6 +150,21 @@ class Neatline_EditorController extends Omeka_Controller_Action
             $endDate,
             $endTime,
             $geoCoverage
+        );
+
+        // Save the status data.
+        $this->_statusesTable->saveStatus(
+            $item,
+            $neatline,
+            'space',
+            $spaceStatus
+        );
+
+        $this->_statusesTable->saveStatus(
+            $item,
+            $neatline,
+            'time',
+            $timeStatus
         );
 
     }
@@ -171,7 +188,7 @@ class Neatline_EditorController extends Omeka_Controller_Action
         $itemId = $_post['item_id'];
         $neatlineId = $_post['neatline_id'];
         $spaceOrTime = $_post['space_or_time'];
-        $value = $_post['value'];
+        $value = json_decode($_post['value']);
 
         // Fetch the Neatline exhibit record and item record.
         $neatline = $this->_neatlinesTable->find($neatlineId);

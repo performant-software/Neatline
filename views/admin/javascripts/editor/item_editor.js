@@ -456,7 +456,7 @@
                     if (self._spaceBoxes != null) {
 
                         $.each(self._spaceBoxes, function(i, box) {
-                            $(box).css('background', self.options.spacetime_background_color);
+                            $(box).css('background', self.options.spacetime_background_color + ' !important');
                         });
 
                     }
@@ -475,7 +475,8 @@
                             // Get the new color.
                             var box = $(box);
                             var newColor = box.data('spaceDataExists') ?
-                                self.options.colors.data_exists : self.options.item_row_default_background_color;
+                                self.options.colors.data_exists + ' !important' :
+                                self.options.item_row_default_background_color + ' !important';
 
                             // Push the change.
                             box.css('background', newColor);
@@ -550,7 +551,7 @@
                     if (self._timeBoxes != null) {
 
                         $.each(self._timeBoxes, function(i, box) {
-                            $(box).css('background', self.options.spacetime_background_color);
+                            $(box).css('background', self.options.spacetime_background_color + ' !important');
                         });
 
                     }
@@ -569,7 +570,8 @@
                             // Get the new color.
                             var box = $(box);
                             var newColor = box.data('timeDataExists') ?
-                                self.options.colors.data_exists : self.options.item_row_default_background_color;
+                                self.options.colors.data_exists + ' !important' :
+                                self.options.item_row_default_background_color + ' !important';
 
                             // Push the change.
                             box.css('background', newColor);
@@ -757,18 +759,11 @@
 
                     'mousedown': function() {
 
-                        var newVal = !spaceCheckbox.prop('checked');
-                        spaceCheckbox.prop('checked', newVal);
-
-                        // Register the new status.
-                        if (newVal) {
-                            item.data('space', true);
-                        } else {
-                            item.data('space', false);
-                        }
+                        // Check the box.
+                        self._checkStatusBlock(item, 'space');
 
                         // Do status change ajax.
-                        self._saveStatus(item, 'space', newVal);
+                        self._saveStatus(item, 'space', true);
 
                     },
 
@@ -803,18 +798,11 @@
 
                     'mousedown': function() {
 
-                        var newVal = !timeCheckbox.prop('checked');
-                        timeCheckbox.prop('checked', !timeCheckbox.prop('checked'));
-
-                        // Register the new status.
-                        if (newVal) {
-                            item.data('time', true);
-                        } else {
-                            item.data('time', false);
-                        }
+                        // Check the box.
+                        self._checkStatusBlock(item, 'time');
 
                         // Do status change ajax.
-                        self._saveStatus(item, 'time', newVal);
+                        self._saveStatus(item, 'time', true);
 
                     },
 
@@ -868,6 +856,22 @@
             // Fetch the space and time boxes and set the class global buckets.
             this._spaceBoxes = this.items.find('.space');
             this._timeBoxes = this.items.find('.time');
+
+        },
+
+        _checkStatusBlock: function(item, spaceOrTime) {
+
+            var block = item.find('.' + spaceOrTime);
+            var checkbox = block.find('input[type="checkbox"]');
+            var newVal = !checkbox.prop('checked');
+            checkbox.prop('checked', newVal);
+
+            // Register the new status.
+            if (newVal) {
+                item.data(spaceOrTime, true);
+            } else {
+                item.data(spaceOrTime, false);
+            }
 
         },
 
@@ -1134,14 +1138,21 @@
             var spaceBlock = this._currentFormItem.find('.space');
             var spaceCheckbox = spaceBlock.find('input[type="checkbox"]');
 
+            // Space and time status variables for the save post.
+            var spaceStatus = spaceCheckbox.prop('checked');
+            var timeStatus = timeCheckbox.prop('checked');
+
             // If time data has been entered, check the record active automatically.
             if (startDate_Value != '' && !timeCheckbox.prop('checked')) {
-                timeBlock.trigger('mousedown');
+                this._checkStatusBlock(this._currentFormItem, 'time');
+                timeStatus = !timeStatus;
             }
 
             // If space data has been entered, check the record active automatically.
-            if (geocoverage_Value != '' && !spaceCheckbox.prop('checked')) {
-                spaceBlock.trigger('mousedown');
+            if (geocoverage_Value[0] && !spaceCheckbox.prop('checked')) {
+                this._checkStatusBlock(this._currentFormItem, 'space');
+                spaceStatus = !spaceStatus;
+                console.log('do');
             }
 
             // Save data.
@@ -1159,7 +1170,9 @@
                     start_time: startTime_Value,
                     end_date: endDate_Value,
                     end_time: endTime_Value,
-                    geocoverage: geocoverage_Value
+                    geocoverage: geocoverage_Value,
+                    space_staus: spaceStatus,
+                    time_status: timeStatus
                 },
 
                 success: function() {
@@ -1185,9 +1198,13 @@
 
         },
 
-        _saveStatus: function(item, spaceOrTime, value) {
+        _saveStatus: function(item, spaceOrTime, reload) {
 
             var self = this;
+
+            var block = item.find('.' + spaceOrTime);
+            var checkbox = block.find('input[type="checkbox"]');
+            var value = checkbox.prop('checked');
 
             // Get the Omeka item id and the title div.
             var itemId = item.next().find('recordid');
@@ -1218,7 +1235,9 @@
                         'color': self.options.colors.text_default
                     }, 200);
 
-                    self._trigger('savecomplete');
+                    if (reload) {
+                        self._trigger('savecomplete');
+                    }
 
                 }
 
