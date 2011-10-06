@@ -471,15 +471,21 @@ class NeatlineNeatline extends Omeka_record
                 'description' => $description
             );
 
+            // If there is a valid start stamp.
             if (!is_null($timestamps[0])) {
+
                 $eventArray['start'] = $timestamps[0];
+
+                // If there is a valid end stamp.
+                if (!is_null($timestamps[1])) {
+                    $eventArray['end'] = $timestamps[1];
+                }
+
+                // Only push if there is at least a start.
+                $json['events'][] = $eventArray;
+
             }
 
-            if (!is_null($timestamps[1])) {
-                $eventArray['end'] = $timestamps[1];
-            }
-
-            $json['events'][] = $eventArray;
 
         }
 

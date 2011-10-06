@@ -1142,17 +1142,44 @@
             var spaceStatus = spaceCheckbox.prop('checked');
             var timeStatus = timeCheckbox.prop('checked');
 
-            // If time data has been entered, check the record active automatically.
-            if (startDate_Value != '' && !timeCheckbox.prop('checked')) {
-                this._checkStatusBlock(this._currentFormItem, 'time');
-                timeStatus = !timeStatus;
+            // If time data has been entered, check the record active automatically
+            // and add the color indication to the box.
+
+            // Space.
+            if (startDate_Value != '' ||
+                startTime_Value != '' ||
+                endDate_Value != '' ||
+                endTime_Value != '') {
+
+                // Add the color indication.
+                spaceBlock.addClass('data-exists');
+                spaceBlock.data('spaceDataExists', true);
+                spaceBlock.css('background-color', this.options.colors.data_exists);
+
+                // If there is data, and the box is not currently checked as active,
+                // default the box to checked.
+                if (!timeCheckbox.prop('checked')) {
+                    this._checkStatusBlock(this._currentFormItem, 'time');
+                    timeStatus = !timeStatus;
+                }
+
             }
 
-            // If space data has been entered, check the record active automatically.
-            if (geocoverage_Value[0] && !spaceCheckbox.prop('checked')) {
-                this._checkStatusBlock(this._currentFormItem, 'space');
-                spaceStatus = !spaceStatus;
-                console.log('do');
+            // Time.
+            if (geocoverage_Value[0] != null) {
+
+                // Add the color indication.
+                spaceBlock.addClass('data-exists');
+                spaceBlock.data('spaceDataExists', true);
+                spaceBlock.css('background-color', this.options.colors.data_exists);
+
+                // If there is data, and the box is not currently checked as active,
+                // default the box to checked.
+                if (!spaceCheckbox.prop('checked')) {
+                    this._checkStatusBlock(this._currentFormItem, 'space');
+                    timeStatus = !timeStatus;
+                }
+
             }
 
             // Save data.
