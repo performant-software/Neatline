@@ -73,7 +73,7 @@ head(array('content_class' => 'neatline'));
     <?php echo neatline_hiddenElement('is_undated_items', $neatline->is_timeline); ?>
 
     <?php echo neatline_buttonTo('', 'save_neatline',
-        'Create Neatline', array('class' => 'neatline btn primary'), 'save-neatline', false); ?>
+        'Create Neatline', array('class' => 'neatline btn primary'), 'create-neatline', array(), false, 'create-fieldset'); ?>
 
 </form>
 
