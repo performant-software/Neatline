@@ -1131,9 +1131,17 @@
             // If there is date information entered, add an active record by default.
             var timeBlock = this._currentFormItem.find('.time');
             var timeCheckbox = timeBlock.find('input[type="checkbox"]');
+            var spaceBlock = this._currentFormItem.find('.space');
+            var spaceCheckbox = spaceBlock.find('input[type="checkbox"]');
 
+            // If time data has been entered, check the record active automatically.
             if (startDate_Value != '' && !timeCheckbox.prop('checked')) {
                 timeBlock.trigger('mousedown');
+            }
+
+            // If space data has been entered, check the record active automatically.
+            if (geocoverage_Value != '' && !spaceCheckbox.prop('checked')) {
+                spaceBlock.trigger('mousedown');
             }
 
             // Save data.
@@ -1156,6 +1164,7 @@
 
                 success: function() {
 
+                    // Walk up the opacity.
                     editForm.animate({
                         'opacity': 1
                     });
