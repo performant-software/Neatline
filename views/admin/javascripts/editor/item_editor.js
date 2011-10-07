@@ -1009,6 +1009,12 @@
 
             });
 
+            // Fire general item edit event to focus timeline and map
+            // if data exists for the item.
+            this._trigger('itemedit', {}, {
+                'itemId': item.attr('recordid')
+            });
+
             // Fire off the event to show the map editor controls.
             this._trigger('mapedit', {}, {
                 'item': item

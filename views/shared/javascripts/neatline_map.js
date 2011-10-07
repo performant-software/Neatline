@@ -139,7 +139,6 @@
             if (this._isData) {
 
                 $.each(this._currentVectorLayers, function(i, layer) {
-                    console.log(layer)
                     self.map.removeLayer(layer);
                 });
 

@@ -89,6 +89,17 @@ jQuery(document).ready(function($) {
             neatlineContainer.neatline('reloadTimeline');
             neatlineContainer.neatline('reloadMap');
 
+        },
+
+        // When an item edit form is opened, focus the map and timeline
+        // on the data corresponding to the item, if plotted data exists.
+        'itemedit': function(event, obj) {
+
+            console.log(obj);
+
+            // Focus the map.
+            neatlineContainer.neatline('zoomMapToItemVectors', obj.itemId);
+
         }
 
     });
