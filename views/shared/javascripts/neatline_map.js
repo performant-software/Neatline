@@ -60,6 +60,7 @@
             // Trackers and buckets.
             this._isData = false;
             this._currentVectorLayers = [];
+            this._currentEditItem = null;
 
             // Load data.
             this.loadData();
@@ -153,8 +154,17 @@
                 dataType: 'json',
 
                 success: function(data) {
+
+                    // Build the new layers.
                     self._buildVectorLayers(data);
                     self._isData = true;
+
+                    // If a layer was being edited before the save,
+                    // make that layer the active edit layer again.
+                    if (self._currentEditItem != null) {
+                        self.edit(self._currentEditItem);
+                    }
+
                 }
 
             });
@@ -206,16 +216,23 @@
 
             // Get the id of the item and try to fetch the layer.
             var itemId = item.attr('recordid');
-            this.currentEditLayer = this.idToLayer[itemId];
+            this._currentEditLayer = this.idToLayer[itemId];
             this._newVectors = false;
 
+            // Record the id of the current edit layer, so that the layer can be
+            // reactivated as the current layer after save.
+            this._currentEditItem = item;
+
             // If the item does not have an existing vector layer, create a new one.
-            if (!this.currentEditLayer) {
+            if (!this._currentEditLayer) {
+
                 var itemName = item.find('span.item-title-text').text();
-                this.currentEditLayer = new OpenLayers.Layer.Vector(itemName);
-                this.map.addLayer(this.currentEditLayer);
+                this._currentEditLayer = new OpenLayers.Layer.Vector(itemName);
+                this.map.addLayer(this._currentEditLayer);
+
                 this._newVectors = true;
-                this.idToLayer[itemId] = this.currentEditLayer;
+                this.idToLayer[itemId] = this._currentEditLayer;
+
             }
 
             // Create the controls and toolbar.
@@ -225,7 +242,7 @@
                 new OpenLayers.Control.Navigation(),
 
                 // Draw lines.
-                new OpenLayers.Control.DrawFeature(this.currentEditLayer, OpenLayers.Handler.Path, {
+                new OpenLayers.Control.DrawFeature(this._currentEditLayer, OpenLayers.Handler.Path, {
                     displayClass: 'olControlDrawFeaturePath',
                     featureAdded: function() {
                         self._trigger('featureadded');
@@ -233,7 +250,7 @@
                 }),
 
                 // Draw points.
-                new OpenLayers.Control.DrawFeature(this.currentEditLayer, OpenLayers.Handler.Point, {
+                new OpenLayers.Control.DrawFeature(this._currentEditLayer, OpenLayers.Handler.Point, {
                     displayClass: 'olControlDrawFeaturePoint',
                     featureAdded: function() {
                         self._trigger('featureadded');
@@ -241,7 +258,7 @@
                 }),
 
                 // Draw polygons.
-                new OpenLayers.Control.DrawFeature(this.currentEditLayer, OpenLayers.Handler.Polygon, {
+                new OpenLayers.Control.DrawFeature(this._currentEditLayer, OpenLayers.Handler.Polygon, {
                     displayClass: 'olControlDrawFeaturePolygon',
                     featureAdded: function() {
                         self._trigger('featureadded');
@@ -257,10 +274,10 @@
 
             this.editToolbar.addControls(panelControls);
 
-            // this.editingToolbar = new OpenLayers.Control.EditingToolbar(this.currentEditLayer);
+            // this.editingToolbar = new OpenLayers.Control.EditingToolbar(this._currentEditLayer);
 
             // Push the edit layer onto the non-base layers stack.
-            this._currentVectorLayers.push(this.currentEditLayer);
+            this._currentVectorLayers.push(this._currentEditLayer);
 
             // Add the layer and show the toolbar.
             this.map.addControl(this.editToolbar);
@@ -272,8 +289,8 @@
             // Remove controls.
             this.map.removeControl(this.editingToolbar);
 
-            if (this.currentEditLayer.features.length == 0) {
-                this.map.removeLayer(this.currentEditLayer);
+            if (this._currentEditLayer.features.length == 0) {
+                this.map.removeLayer(this._currentEditLayer);
             }
 
         },
@@ -284,7 +301,7 @@
 
             // Push each of the wkt representations of the geometry
             // onto the array.
-            $.each(this.currentEditLayer.features, function(i, feature) {
+            $.each(this._currentEditLayer.features, function(i, feature) {
                 wkts[i] = feature.geometry.toString();
             });
 
