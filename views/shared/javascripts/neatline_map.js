@@ -139,6 +139,7 @@
             if (this._isData) {
 
                 $.each(this._currentVectorLayers, function(i, layer) {
+                    console.log(layer)
                     self.map.removeLayer(layer);
                 });
 
@@ -230,6 +231,9 @@
                 this._currentEditLayer = new OpenLayers.Layer.Vector(itemName);
                 this.map.addLayer(this._currentEditLayer);
 
+                // Push the edit layer onto the non-base layers stack.
+                this._currentVectorLayers.push(this._currentEditLayer);
+
                 this._newVectors = true;
                 this.idToLayer[itemId] = this._currentEditLayer;
 
@@ -273,11 +277,6 @@
             });
 
             this.editToolbar.addControls(panelControls);
-
-            // this.editingToolbar = new OpenLayers.Control.EditingToolbar(this._currentEditLayer);
-
-            // Push the edit layer onto the non-base layers stack.
-            this._currentVectorLayers.push(this._currentEditLayer);
 
             // Add the layer and show the toolbar.
             this.map.addControl(this.editToolbar);
