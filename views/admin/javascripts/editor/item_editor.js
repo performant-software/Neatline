@@ -1146,37 +1146,37 @@
             // and add the color indication to the box.
 
             // Space.
+            if (geocoverage_Value[0] != null) {
+
+                // Add the color indication.
+                spaceBlock.addClass('data-exists');
+                spaceBlock.data('spaceDataExists', true);
+                spaceBlock.css('background-color', this.options.colors.data_exists + ' !important');
+
+                // If there is data, and the box is not currently checked as active,
+                // default the box to checked.
+                if (!spaceCheckbox.prop('checked')) {
+                    this._checkStatusBlock(this._currentFormItem, 'space');
+                    spaceStatus = !spaceStatus;
+                }
+
+            }
+
+            // Time.
             if (startDate_Value != '' ||
                 startTime_Value != '' ||
                 endDate_Value != '' ||
                 endTime_Value != '') {
 
                 // Add the color indication.
-                spaceBlock.addClass('data-exists');
-                spaceBlock.data('spaceDataExists', true);
-                spaceBlock.css('background-color', this.options.colors.data_exists);
+                timeBlock.addClass('data-exists');
+                timeBlock.data('spaceDataExists', true);
+                timeBlock.css('background-color', this.options.colors.data_exists + ' !important');
 
                 // If there is data, and the box is not currently checked as active,
                 // default the box to checked.
                 if (!timeCheckbox.prop('checked')) {
                     this._checkStatusBlock(this._currentFormItem, 'time');
-                    timeStatus = !timeStatus;
-                }
-
-            }
-
-            // Time.
-            if (geocoverage_Value[0] != null) {
-
-                // Add the color indication.
-                spaceBlock.addClass('data-exists');
-                spaceBlock.data('spaceDataExists', true);
-                spaceBlock.css('background-color', this.options.colors.data_exists);
-
-                // If there is data, and the box is not currently checked as active,
-                // default the box to checked.
-                if (!spaceCheckbox.prop('checked')) {
-                    this._checkStatusBlock(this._currentFormItem, 'space');
                     timeStatus = !timeStatus;
                 }
 
@@ -1198,8 +1198,8 @@
                     end_date: endDate_Value,
                     end_time: endTime_Value,
                     geocoverage: geocoverage_Value,
-                    space_staus: spaceStatus,
-                    time_status: timeStatus
+                    space_status: this.__stringifyBooleanForJson(spaceStatus),
+                    time_status: this.__stringifyBooleanForJson(timeStatus)
                 },
 
                 success: function() {
@@ -1252,7 +1252,7 @@
                     item_id: itemId.text(),
                     neatline_id: this.neatlineData.id,
                     space_or_time: spaceOrTime,
-                    value: value
+                    value: this.__stringifyBooleanForJson(value)
                 },
 
                 success: function() {
@@ -1382,6 +1382,12 @@
                 div.parent().remove();
 
             }
+
+        },
+
+        __stringifyBooleanForJson: function(boolean) {
+
+            return boolean ? 'true' : 'false';
 
         }
 

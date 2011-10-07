@@ -55,11 +55,11 @@ class NeatlineRecordStatusTable extends Omeka_Db_Table
             switch ($spaceOrTime) {
 
                 case 'space':
-                    $record->space = ($value) ? 1 : 0;
+                    $record->space = ($value == 'true') ? 1 : 0;
                 break;
 
                 case 'time':
-                    $record->time = ($value) ? 1 : 0;
+                    $record->time = ($value == 'true') ? 1 : 0;
                 break;
 
             }
@@ -88,11 +88,11 @@ class NeatlineRecordStatusTable extends Omeka_Db_Table
             switch ($spaceOrTime) {
 
                 case 'space':
-                    $record->space = ($value) ? 1 : 0;
+                    $record->space = ($value == 'true') ? 1 : 0;
                 break;
 
                 case 'time':
-                    $record->time = ($value) ? 1 : 0;
+                    $record->time = ($value == 'true') ? 1 : 0;
                 break;
 
             }

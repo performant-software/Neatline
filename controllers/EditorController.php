@@ -133,8 +133,11 @@ class Neatline_EditorController extends Omeka_Controller_Action
         $endDate = $_post['end_date'];
         $endTime = $_post['end_time'];
         $geoCoverage = json_encode($_post['geocoverage']);
-        $spaceStatus = json_decode($_post['space_status']);
-        $timeStatus = json_decode($_post['time_status']);
+        $spaceStatus = $_post['space_status'];
+        $timeStatus = $_post['time_status'];
+
+        echo $spaceStatus;
+        echo $timeStatus;
 
         // Fetch the Neatline exhibit record and item record.
         $neatline = $this->_neatlinesTable->find($neatlineId);
@@ -188,7 +191,7 @@ class Neatline_EditorController extends Omeka_Controller_Action
         $itemId = $_post['item_id'];
         $neatlineId = $_post['neatline_id'];
         $spaceOrTime = $_post['space_or_time'];
-        $value = json_decode($_post['value']);
+        $value = $_post['value'];
 
         // Fetch the Neatline exhibit record and item record.
         $neatline = $this->_neatlinesTable->find($neatlineId);
