@@ -149,6 +149,15 @@
             // Override the default click event callbacks.
             this._overrideClickCallbacks();
 
+            // Reposition on window resize.
+            this._window.bind({
+
+                'resize': function() {
+                    self.timeline.layout();
+                }
+
+            });
+
         },
 
         _overrideClickCallbacks: function() {
@@ -212,6 +221,8 @@
                 self.eventSource.clear();
                 self.eventSource.loadJSON(json, url);
             });
+
+            console.log(this.timeline);
 
         }
 
