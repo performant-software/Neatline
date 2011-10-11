@@ -229,7 +229,7 @@
         zoomToEvent: function(id) {
 
             var self = this;
-
+            console.log(id);
 
         }
 
