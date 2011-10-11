@@ -718,8 +718,7 @@
 
                 // Set the starting expanded tracker and record the item's
                 // native vertical offset.
-                item.data('expanded', false);
-                item.data('topOffset', item.position().top);
+                self._calculateTopOffset(item);
 
                 // Set the starting 'changed' data parameter.
                 itemTitleText.data('changed', false);
@@ -856,6 +855,12 @@
             // Fetch the space and time boxes and set the class global buckets.
             this._spaceBoxes = this.items.find('.space');
             this._timeBoxes = this.items.find('.time');
+
+        },
+
+        _calculateTopOffset: function(item) {
+
+            item.data('topOffset', item.position().top);
 
         },
 
