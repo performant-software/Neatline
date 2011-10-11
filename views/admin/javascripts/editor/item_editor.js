@@ -839,7 +839,7 @@
 
                         // If the form is not expanded, do expand.
                         if (!item.data('expanded')) {
-                            self._showForm(item);
+                            self._showForm(item, true, true);
                         }
 
                         // If the form is expanded, hide.
@@ -875,16 +875,16 @@
 
         },
 
-        showFormByItemId: function(id) {
+        showFormByItemId: function(id, scrollMap, scrollTimeline) {
 
             var item = this.idToItem[id];
             if (item != this._currentFormItem) {
-                this._showForm(this.idToItem[id]);
+                this._showForm(this.idToItem[id], scrollMap, scrollTimeline);
             }
 
         },
 
-        _showForm: function(item) {
+        _showForm: function(item, scrollMap, scrollTimeline) {
 
             var self = this;
 
@@ -1012,7 +1012,9 @@
             // Fire general item edit event to focus timeline and map
             // if data exists for the item.
             this._trigger('itemedit', {}, {
-                'itemId': item.attr('recordid')
+                'itemId': item.attr('recordid'),
+                'scrollMap': scrollMap,
+                'scrollTimeline': scrollTimeline
             });
 
             // Fire off the event to show the map editor controls.

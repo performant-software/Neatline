@@ -105,10 +105,14 @@
 
         _hidePopup: function() {
 
+            var self = this;
+
             // Fade down.
             this.popup.animate({
                 'opacity': 0
-            }, 100);
+            }, 100, function() {
+                self.popup.css('display', 'none');
+            });
 
         },
 
@@ -191,6 +195,7 @@
                 });
 
                 // Fade in.
+                self.popup.css('display', 'block');
                 self.popup.animate({
                     'opacity': 1
                 }, 100);
@@ -233,9 +238,11 @@
             // by a given attribute. If a match is found, scroll the timeline to
             // the start location of the event.
             $.each(this.timeline._bands[0]._eventSource._events._idToEvent, function(i, event) {
+
                 if (event._eventID == id) {
                     self.timeline.getBand(0).setCenterVisibleDate(event._start);
                 }
+
             });
 
         }

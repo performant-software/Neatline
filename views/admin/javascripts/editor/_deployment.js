@@ -34,7 +34,7 @@ jQuery(document).ready(function($) {
                 'timelineeventclick': function(event, obj) {
 
                     // Show the edit form.
-                    editorContainer.itemeditor('showFormByItemId', obj.itemId);
+                    editorContainer.itemeditor('showFormByItemId', obj.itemId, true, false);
 
                     // Focus the map.
                     neatlineContainer.neatline('zoomMapToItemVectors', obj.itemId);
@@ -95,11 +95,17 @@ jQuery(document).ready(function($) {
         // on the data corresponding to the item, if plotted data exists.
         'itemedit': function(event, obj) {
 
-            // Focus the map.
-            neatlineContainer.neatline('zoomMapToItemVectors', obj.itemId);
+            if (obj.scrollMap) {
+                // Focus the map.
+                neatlineContainer.neatline('zoomMapToItemVectors', obj.itemId);
+                console.log('map');
+            }
 
-            // Focus the timeline.
-            neatlineContainer.neatline('zoomTimelineToEvent', obj.itemId);
+            if (obj.scrollTimeline) {
+                // Focus the timeline.
+                neatlineContainer.neatline('zoomTimelineToEvent', obj.itemId);
+                console.log('timeline');
+            }
 
         }
 
