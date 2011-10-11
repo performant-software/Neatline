@@ -34,7 +34,7 @@ class Neatline_JsonController extends Omeka_Controller_Action
      * ~ AJAX ~
      * Get events JSON for the timeline.
      *
-     * @return void
+     * @return JSON The events array.
      */
     public function simileAction()
     {
@@ -55,7 +55,7 @@ class Neatline_JsonController extends Omeka_Controller_Action
      * ~ AJAX ~
      * Get item-wkt JSON for the map.
      *
-     * @return void
+     * @return JSON The vector data.
      */
     public function openlayersAction()
     {

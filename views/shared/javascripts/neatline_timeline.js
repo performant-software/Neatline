@@ -222,14 +222,21 @@
                 self.eventSource.loadJSON(json, url);
             });
 
-            console.log(this.timeline);
-
         },
 
         zoomToEvent: function(id) {
 
             var self = this;
-            console.log(id);
+
+            // Walk the events registry and try to find an event for the item id.
+            // This is inefficient, but Simile does not have a utility to get an event
+            // by a given attribute. If a match is found, scroll the timeline to
+            // the start location of the event.
+            $.each(this.timeline._bands[0]._eventSource._events._idToEvent, function(i, event) {
+                if (event._eventID == id) {
+                    self.timeline.getBand(0).setCenterVisibleDate(event._start);
+                }
+            });
 
         }
 
