@@ -501,7 +501,7 @@
                                 item.css('display', 'none');
                                 item.next('tr.edit-form').css('display', 'none');
                             }
-                        })
+                        });
 
                         self.spaceHeader.addClass('active');
                         self._spaceSorted = true;
@@ -522,7 +522,7 @@
                                 }
                             }
 
-                        })
+                        });
 
                         self.spaceHeader.removeClass('active');
                         self._spaceSorted = false;
@@ -597,7 +597,7 @@
                                 item.next('tr.edit-form').css('display', 'none');
                             }
 
-                        })
+                        });
 
                         self.timeHeader.addClass('active');
                         self._timeSorted = true;
@@ -619,7 +619,7 @@
                                 }
                             }
 
-                        })
+                        });
 
                         self.timeHeader.removeClass('active');
                         self._timeSorted = false;

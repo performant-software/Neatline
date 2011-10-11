@@ -311,7 +311,7 @@
 
             var layer = this.idToLayer[id];
 
-            if (layer != null) {
+            if (layer != null && layer.features.length > 0) {
                 this.map.zoomToExtent(layer.getDataExtent());
             }
 

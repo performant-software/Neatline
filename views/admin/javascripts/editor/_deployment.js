@@ -95,8 +95,6 @@ jQuery(document).ready(function($) {
         // on the data corresponding to the item, if plotted data exists.
         'itemedit': function(event, obj) {
 
-            console.log(obj);
-
             // Focus the map.
             neatlineContainer.neatline('zoomMapToItemVectors', obj.itemId);
 
