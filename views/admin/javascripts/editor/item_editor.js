@@ -489,6 +489,11 @@
 
                 'mousedown': function() {
 
+                    // If there is an active form, close it.
+                    if (self._currentFormItem) {
+                        self._hideForm(self._currentFormItem, true);
+                    }
+
                     // If not sorted, sort.
                     if (!self._spaceSorted) {
 
@@ -501,6 +506,7 @@
                                 item.css('display', 'none');
                                 item.next('tr.edit-form').css('display', 'none');
                             }
+
                         });
 
                         self.spaceHeader.addClass('active');
@@ -528,6 +534,9 @@
                         self._spaceSorted = false;
 
                     }
+
+                    // Recalculate all top offsets.
+                    self._calculateAllTopOffsets();
 
                 }
 
@@ -584,6 +593,11 @@
 
                 'mousedown': function() {
 
+                    // If there is an active form, close it.
+                    if(self._currentFormItem) {
+                        self._hideForm(self._currentFormItem, true);
+                    }
+
                     // If not sorted, sort.
                     if (!self._timeSorted) {
 
@@ -625,6 +639,9 @@
                         self._timeSorted = false;
 
                     }
+
+                    // Recalculate all top offsets.
+                    self._calculateAllTopOffsets();
 
                 }
 
@@ -843,7 +860,7 @@
 
                         // If the form is expanded, hide.
                         else {
-                            self._hideForm(item);
+                            self._hideForm(item, false);
                         }
 
                     }
@@ -861,6 +878,17 @@
         _calculateTopOffset: function(item) {
 
             item.data('topOffset', item.position().top);
+
+        },
+
+        _calculateAllTopOffsets: function() {
+
+            var self = this;
+
+            // Walk the items and do the offset calculation for each.
+            $.each(this.items, function(i, item) {
+                self._calculateTopOffset($(item));
+            });
 
         },
 
@@ -891,11 +919,13 @@
 
         _showForm: function(item, scrollMap, scrollTimeline) {
 
+            console.log(item.data('topOffset'));
+
             var self = this;
 
             // If another form is currently expanded, hide it.
             if (this._currentFormItem != null) {
-                this._hideForm(this._currentFormItem);
+                this._hideForm(this._currentFormItem, true);
             }
 
             // Get child markup.
@@ -977,7 +1007,7 @@
             cancelButton.bind({
 
                 'mousedown': function() {
-                    self._hideForm(item);
+                    self._hideForm(item, false);
                 },
 
                 'click': function(event) {
@@ -1043,7 +1073,7 @@
 
         },
 
-        _hideForm: function(item) {
+        _hideForm: function(item, immediate) {
 
             // Get child markup.
             var editFormTd = item.next().find('td');
@@ -1070,15 +1100,25 @@
                 'font-weight': textWeight
             }, 100);
 
-            // Animate up the height.
-            editForm.animate({
-                'height': 0
-            }, 300, function() {
-                // Hide the form.
-                editFormTd.css({
+            // Animate or snap up the height, depending on the value
+            // of immediate.
+            if (!immediate) {
+                editForm.animate({
+                    'height': 0
+                }, 300, function() {
+                    // Hide the form.
+                    editFormTd.css({
+                        'display': 'none'
+                    });
+                });
+            }
+
+            else {
+                editForm.css({
+                    'height': 0,
                     'display': 'none'
                 });
-            });
+            }
 
             // Change the data record.
             item.data('expanded', false);
