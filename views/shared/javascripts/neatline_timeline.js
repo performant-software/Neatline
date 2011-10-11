@@ -224,6 +224,13 @@
 
             console.log(this.timeline);
 
+        },
+
+        zoomToEvent: function(id) {
+
+            var self = this;
+
+
         }
 
     });

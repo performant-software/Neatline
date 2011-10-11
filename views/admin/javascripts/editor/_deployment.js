@@ -98,6 +98,9 @@ jQuery(document).ready(function($) {
             // Focus the map.
             neatlineContainer.neatline('zoomMapToItemVectors', obj.itemId);
 
+            // Focus the timeline.
+            neatlineContainer.neatline('zoomTimelineToEvent', obj.itemId);
+
         }
 
     });

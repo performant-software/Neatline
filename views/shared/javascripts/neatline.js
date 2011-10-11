@@ -372,6 +372,12 @@
 
             this.map.neatlinemap('zoomToItemVectors', id);
 
+        },
+
+        zoomTimelineToEvent: function(id) {
+
+            this.timeline.neatlinetimeline('zoomToEvent', id);
+
         }
 
     });
