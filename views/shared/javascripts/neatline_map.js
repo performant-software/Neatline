@@ -208,16 +208,6 @@
 
             });
 
-            // Add the feature select control.
-            // var editControl = new OpenLayers.Control.DrawFeature(this._currentEditLayer, OpenLayers.Handler.Path, {
-            //         displayClass: 'olControlDrawFeaturePath',
-            //         featureAdded: function() {
-            //             self._trigger('featureadded');
-            //         }
-            //     });
-
-            // this.map.addControl(editControl);
-
         },
 
         edit: function(item) {
@@ -276,7 +266,7 @@
                     featureAdded: function() {
                         self._trigger('featureadded');
                     }
-                }),
+                })
 
             ];
 
