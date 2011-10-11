@@ -66,8 +66,8 @@ jQuery(document).ready(function($) {
 
         // When vector data is added to the map, and then the item
         // form is closed without saving.
-        'endmapedit': function() {
-            neatlineContainer.neatline('endMapEditWithoutSave');
+        'endmapedit': function(event, obj) {
+            neatlineContainer.neatline('endMapEditWithoutSave', obj.itemId);
         },
 
         // When an item form is saved, and new vector data needs to
@@ -98,13 +98,11 @@ jQuery(document).ready(function($) {
             if (obj.scrollMap) {
                 // Focus the map.
                 neatlineContainer.neatline('zoomMapToItemVectors', obj.itemId);
-                console.log('map');
             }
 
             if (obj.scrollTimeline) {
                 // Focus the timeline.
                 neatlineContainer.neatline('zoomTimelineToEvent', obj.itemId);
-                console.log('timeline');
             }
 
         }

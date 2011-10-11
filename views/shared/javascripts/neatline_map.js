@@ -282,13 +282,17 @@
 
         },
 
-        endEditWithoutSave: function() {
+        endEditWithoutSave: function(id) {
 
             // Remove controls.
             this.map.removeControl(this.editingToolbar);
 
             if (this._currentEditLayer.features.length == 0) {
+
+                // Pop off the layer, remove the id-layer association.
                 this.map.removeLayer(this._currentEditLayer);
+                delete this.idToLayer[id];
+
             }
 
         },

@@ -344,9 +344,9 @@
 
         },
 
-        endMapEditWithoutSave: function() {
+        endMapEditWithoutSave: function(id) {
 
-            this.map.neatlinemap('endEditWithoutSave');
+            this.map.neatlinemap('endEditWithoutSave', id);
 
         },
 

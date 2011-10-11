@@ -1043,6 +1043,7 @@
             // Get child markup.
             var editFormTd = item.next().find('td');
             var editForm = editFormTd.find('form');
+            var itemId = editForm.find('recordid').text();
             var textSpan = item.find('.' + this.options.item_title_text_class);
             var faderSpan = item.find('.' + this.options.item_title_fader_class);
             var allInputs = editForm.find('input[type="text"], textarea')
@@ -1096,7 +1097,9 @@
             });
 
             // Fire the end edit without save callback.
-            this._trigger('endmapedit');
+            this._trigger('endmapedit', {}, {
+                'itemId': itemId
+            });
 
         },
 
