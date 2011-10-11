@@ -788,6 +788,11 @@
                         // Make the color change on the box.
                         spaceBlock.css('background-color', self.options.spacetime_background_color + ' !important');
 
+                        // Force the color change on the time block.
+                        var timeBlockColor = timeBlock.data('timeDataExists') ?
+                            self.options.colors.data_exists : self.options.item_row_highlight_background_color;
+                        timeBlock.css('background-color', timeBlockColor + ' !important');
+
                         // Make the color change on the item title.
                         itemTitleTd.css('background-color', self.options.item_row_highlight_background_color + ' !important');
 
@@ -801,6 +806,11 @@
 
                         // Push the change.
                         spaceBlock.css('background-color', newColor + ' !important');
+
+                        // Force the color change on the time block.
+                        var timeBlockColor = timeBlock.data('timeDataExists') ?
+                            self.options.colors.data_exists : self.options.item_row_default_background_color;
+                        timeBlock.css('background-color', timeBlockColor + ' !important');
 
                         // Make the color change on the item title.
                         itemTitleTd.css('background-color', self.options.item_row_default_background_color + ' !important');
@@ -827,6 +837,11 @@
                         // Make the color change on the box.
                         timeBlock.css('background-color', self.options.spacetime_background_color + ' !important');
 
+                        // Force the color change on the space block.
+                        var spaceBlockColor = spaceBlock.data('spaceDataExists') ?
+                            self.options.colors.data_exists : self.options.item_row_highlight_background_color;
+                        spaceBlock.css('background-color', spaceBlockColor + ' !important');
+
                         // Make the color change on the item title.
                         itemTitleTd.css('background-color', self.options.item_row_highlight_background_color + ' !important');
 
@@ -840,6 +855,11 @@
 
                         // Push the change.
                         timeBlock.css('background-color', newColor + ' !important');
+
+                        // Force the color change on the space block.
+                        var spaceBlockColor = spaceBlock.data('spaceDataExists') ?
+                            self.options.colors.data_exists : self.options.item_row_default_background_color;
+                        spaceBlock.css('background-color', spaceBlockColor + ' !important');
 
                         // Make the color change on the item title.
                         itemTitleTd.css('background-color', self.options.item_row_default_background_color + ' !important');
@@ -918,8 +938,6 @@
         },
 
         _showForm: function(item, scrollMap, scrollTimeline) {
-
-            console.log(item.data('topOffset'));
 
             var self = this;
 
@@ -1103,6 +1121,7 @@
             // Animate or snap up the height, depending on the value
             // of immediate.
             if (!immediate) {
+
                 editForm.animate({
                     'height': 0
                 }, 300, function() {
@@ -1111,13 +1130,16 @@
                         'display': 'none'
                     });
                 });
+
             }
 
             else {
+
                 editForm.css({
                     'height': 0,
                     'display': 'none'
                 });
+
             }
 
             // Change the data record.
