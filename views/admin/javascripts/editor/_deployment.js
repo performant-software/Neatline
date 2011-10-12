@@ -41,6 +41,17 @@ jQuery(document).ready(function($) {
 
                 },
 
+                // When the user clicks on a feature on the map.
+                'mapfeatureclick': function(event, obj) {
+
+                    // Show the edit form.
+                    editorContainer.itemeditor('showFormByItemId', obj.itemId, false, true);
+
+                    // Focus the timeline.
+                    // neatlineContainer.neatline('zoomMapToItemVectors', obj.itemId);
+
+                },
+
                 // When a geometry vector is added to the map.
                 'mapfeatureadded': function() {
 

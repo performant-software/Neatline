@@ -310,6 +310,12 @@
 
                     'featureadded': function() {
                         self._trigger('mapfeatureadded');
+                    },
+
+                    'featureclick': function(event, obj) {
+                        self._trigger('mapfeatureclick', {}, {
+                            'itemId': obj.itemId
+                        });
                     }
 
                 });

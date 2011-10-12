@@ -139,7 +139,9 @@
             if (this._isData) {
 
                 $.each(this._currentVectorLayers, function(i, layer) {
-                    self.map.removeLayer(layer);
+                    // self.map.removeLayer(layer);
+                    layer.destroy();
+                    console.log('test');
                 });
 
                 // Empty out the container.
@@ -175,8 +177,9 @@
 
             var self = this;
 
-            // Instantiate associations object.
+            // Instantiate associations objects.
             this.idToLayer = {};
+            this.layerToId = {};
 
             $.each(data, function(i, item) {
 
@@ -202,22 +205,37 @@
 
                 // Add to associations.
                 self.idToLayer[itemId] = vectorLayer;
+                self.layerToId[vectorLayer.id] = itemId;
 
                 // Add to the layers array.
                 self._currentVectorLayers.push(vectorLayer);
 
             });
 
-            // Create the selector control.
+            // Create the highlight and click control.
             var highlightControl = new OpenLayers.Control.SelectFeature(self._currentVectorLayers, {
                 hover: true,
                 highlightOnly: true,
                 renderIntent: 'temporary'
             });
 
-            // Add to the map.
+            var clickControl = new OpenLayers.Control.SelectFeature(self._currentVectorLayers, {
+                clickout: true,
+                onSelect: function(feature) {
+
+                    // Trigger out to the deployment code.
+                    self._trigger('featureclick', {}, {
+                        'itemId': self.layerToId[feature.layer.id]
+                    });
+
+                }
+            });
+
+            // Add and activate.
             self.map.addControl(highlightControl);
             highlightControl.activate();
+            self.map.addControl(clickControl);
+            clickControl.activate();
 
         },
 
