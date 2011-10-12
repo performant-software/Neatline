@@ -69,11 +69,12 @@
     margin: 8px 30px 0 20px;
 }
 
-div.top-bar-title {
+span.top-bar-title {
     font-family: 'Crimson Text', Georgia, serif;
     color: #fff;
-    font-size: 2.3em;
-    margin: 18px 0 0 0;
+    font-size: 2.2em;
+    top: 16px;
+    position: relative;
 }
 
 
@@ -81,7 +82,7 @@ div.top-bar-title {
 
 .topbar div > ul, .nav {
   display: block;
-  float: left;
+  float: right;
   margin: 0 10px 0 20px;
   position: relative;
   left: 0;
@@ -90,7 +91,6 @@ div.top-bar-title {
 
 .topbar div > ul > li, .nav > li {
   display: block;
-  float: left;
   height: 100%;
 }
 
@@ -103,6 +103,7 @@ div.top-bar-title {
   font-size: 1.1em;
   height: 100%;
   cursor: pointer;
+  color: #f9f9f9;
 }
 
 .topbar div > ul a:hover, .nav a:hover {

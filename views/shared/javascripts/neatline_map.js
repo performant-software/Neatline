@@ -267,9 +267,6 @@
 
             }
 
-            // Remove the default feature selector.
-            this.map.removeControl();
-
             // Create the controls and toolbar.
             var panelControls = [
 

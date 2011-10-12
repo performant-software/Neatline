@@ -26,6 +26,16 @@
 ?>
 
 <div id="topbar" class="topbar-inner topbar">
+
     <img id="neatline-logo" src="<?php echo img('neatline-logo-white-small.png'); ?>" />
-    <div class="top-bar-title"><?php echo $title; ?></div>
+    <span class="top-bar-title"><?php echo $title; ?></span>
+
+    <!--
+    <ul class="nav">
+        <li><a href="#">Item 1</a></li>
+        <li><a href="#">Item 2</a></li>
+        <li><a href="#">Item 3</a></li>
+    </ul>
+    -->
+
 </div>
