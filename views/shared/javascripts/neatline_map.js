@@ -75,9 +75,11 @@
 
             var tiled;
             var pureCoverage = true;
-            // pink tile avoidance
+
+            // Pink tile avoidance.
             OpenLayers.IMAGE_RELOAD_ATTEMPTS = 5;
-            // make OL compute scale according to WMS spec
+
+            // Make OL compute scale according to WMS spec.
             OpenLayers.DOTS_PER_INCH = 25.4 / 0.28;
 
             format = 'image/png';
@@ -139,9 +141,7 @@
             if (this._isData) {
 
                 $.each(this._currentVectorLayers, function(i, layer) {
-                    // self.map.removeLayer(layer);
                     layer.destroy();
-                    console.log('test');
                 });
 
                 // Empty out the container.
@@ -213,13 +213,13 @@
             });
 
             // Create the highlight and click control.
-            var highlightControl = new OpenLayers.Control.SelectFeature(self._currentVectorLayers, {
+            this.highlightControl = new OpenLayers.Control.SelectFeature(self._currentVectorLayers, {
                 hover: true,
                 highlightOnly: true,
                 renderIntent: 'temporary'
             });
 
-            var clickControl = new OpenLayers.Control.SelectFeature(self._currentVectorLayers, {
+            this.clickControl = new OpenLayers.Control.SelectFeature(self._currentVectorLayers, {
                 clickout: true,
                 onSelect: function(feature) {
 
@@ -232,10 +232,10 @@
             });
 
             // Add and activate.
-            self.map.addControl(highlightControl);
-            highlightControl.activate();
-            self.map.addControl(clickControl);
-            clickControl.activate();
+            this.map.addControl(this.highlightControl);
+            this.highlightControl.activate();
+            this.map.addControl(this.clickControl);
+            this.clickControl.activate();
 
         },
 
@@ -266,6 +266,9 @@
                 this.idToLayer[itemId] = this._currentEditLayer;
 
             }
+
+            // Remove the default feature selector.
+            this.map.removeControl();
 
             // Create the controls and toolbar.
             var panelControls = [
@@ -313,6 +316,7 @@
 
         endEditWithoutSave: function(id) {
 
+
             // Remove controls.
             this.map.removeControl(this.editingToolbar);
 
@@ -321,6 +325,7 @@
                 // Pop off the layer, remove the id-layer association.
                 this.map.removeLayer(this._currentEditLayer);
                 delete this.idToLayer[id];
+                delete this.layerToId[this._currentEditLayer.id];
 
             }
 

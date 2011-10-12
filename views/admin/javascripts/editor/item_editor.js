@@ -931,6 +931,7 @@
         showFormByItemId: function(id, scrollMap, scrollTimeline) {
 
             var item = this.idToItem[id];
+
             if (item != this._currentFormItem) {
                 this._showForm(this.idToItem[id], scrollMap, scrollTimeline);
             }
@@ -1003,7 +1004,7 @@
 
             // Position at the top of the frame.
             this.element.animate({
-                'scrollTop': item.data('topOffset') - this.options.container_top_margin
+                'scrollTop': item.data('topOffset') - this.options.container_top_margin + 1
             }, 300);
 
             // Change the data record.

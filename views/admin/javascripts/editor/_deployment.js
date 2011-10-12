@@ -36,9 +36,6 @@ jQuery(document).ready(function($) {
                     // Show the edit form.
                     editorContainer.itemeditor('showFormByItemId', obj.itemId, true, false);
 
-                    // Focus the map.
-                    neatlineContainer.neatline('zoomMapToItemVectors', obj.itemId);
-
                 },
 
                 // When the user clicks on a feature on the map.
@@ -46,9 +43,6 @@ jQuery(document).ready(function($) {
 
                     // Show the edit form.
                     editorContainer.itemeditor('showFormByItemId', obj.itemId, false, true);
-
-                    // Focus the timeline.
-                    // neatlineContainer.neatline('zoomMapToItemVectors', obj.itemId);
 
                 },
 
