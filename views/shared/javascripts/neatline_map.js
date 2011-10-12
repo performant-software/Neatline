@@ -208,6 +208,17 @@
 
             });
 
+            // Create the selector control.
+            var highlightControl = new OpenLayers.Control.SelectFeature(self._currentVectorLayers, {
+                hover: true,
+                highlightOnly: true,
+                renderIntent: 'temporary'
+            });
+
+            // Add to the map.
+            self.map.addControl(highlightControl);
+            highlightControl.activate();
+
         },
 
         edit: function(item) {
