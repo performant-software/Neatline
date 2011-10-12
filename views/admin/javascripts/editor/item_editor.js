@@ -1136,9 +1136,13 @@
 
             else {
 
-                editForm.css({
-                    'height': 0,
-                    'display': 'none'
+                editForm.animate({
+                    'height': 0
+                }, 0, function() {
+                    // Hide the form.
+                    editFormTd.css({
+                        'display': 'none'
+                    });
                 });
 
             }
