@@ -316,9 +316,8 @@
 
         endEditWithoutSave: function(id) {
 
-
             // Remove controls.
-            this.map.removeControl(this.editingToolbar);
+            this.map.removeControl(this.editToolbar);
 
             if (this._currentEditLayer.features.length == 0) {
 
