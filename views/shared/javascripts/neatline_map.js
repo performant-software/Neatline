@@ -61,6 +61,7 @@
             this._isData = false;
             this._currentVectorLayers = [];
             this._currentEditItem = null;
+            this._currentEditLayer = null;
 
             // Load data.
             this.loadData();
