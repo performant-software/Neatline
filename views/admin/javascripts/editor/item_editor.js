@@ -49,6 +49,8 @@
             start_time_input_name: 'start-date-time',
             end_date_input_name: 'end-date-date',
             end_time_input_name: 'end-date-time',
+            color_picker_container_class: 'colorpicker',
+            color_picker_input_id: 'color-',
 
             // Durations and CSS constants.
             item_list_highlight_duration: 10,
@@ -947,7 +949,8 @@
                 this._hideForm(this._currentFormItem, true);
             }
 
-            // Get child markup.
+            // Get child markup and parameters.
+            var itemId = item.attr('recordid');
             var editFormTd = item.next().find('td');
             var editForm = editFormTd.find('form');
             var textSpan = item.find('.' + this.options.item_title_text_class);
@@ -955,6 +958,10 @@
             var itemTitleText = item.find('.' + this.options.item_title_text_class);
             var allInputs = editForm.find('input[type="text"], textarea')
             var descriptionTextarea = editForm.find('textarea[name="description"]');
+            // var colorPickerContainer = editForm.find('.' + this.options.color_picker_container_class + ':first-child');
+
+            // Instantiate the color picker.
+            // colorPickerContainer.farbtastic('#' + this.options.color_picker_input_id + itemId);
 
             // Calculate the native height of the form.
             var cloneFormTd = editFormTd

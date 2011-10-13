@@ -32,6 +32,24 @@
 }
 
 
+/* Map */
+
+.edit-geometry {
+    display: none !important;
+    z-index: 999;
+    position: absolute;
+    top: 34px;
+    right: 5px;
+    padding: 3px 12px 3px !important;
+    font-size: 0.9em;
+}
+
+.olControlLayerSwitcher .maximizeDiv, .olControlLayerSwitcher .minimizeDiv {
+    top: 35px !important;
+}
+
+
+
 /* Timeline */
 
 .popover {

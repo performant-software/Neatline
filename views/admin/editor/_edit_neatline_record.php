@@ -69,6 +69,12 @@
                 </div>
             </div>
 
+            <div class="clearfix">
+                <label>Vector Color</label>
+                <input type="text" id="color-<?php echo $item->id; ?>" name="color" value="#5c7bff" />
+                <div class="colorpicker"></div>
+            </div>
+
             <div class="actions">
                 <input type="submit" class="btn primary" value="Save">&nbsp;<button type="reset" class="btn">Close</button>
             </div>

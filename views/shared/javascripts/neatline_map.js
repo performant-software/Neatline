@@ -101,7 +101,7 @@
                   new OpenLayers.Control.PanZoomBar(),
                   new OpenLayers.Control.Permalink('permalink'),
                   new OpenLayers.Control.MousePosition(),
-                  new OpenLayers.Control.LayerSwitcher({'ascending': false}),
+                  // new OpenLayers.Control.LayerSwitcher({'ascending': false}),
                   new OpenLayers.Control.Navigation(),
                   new OpenLayers.Control.ScaleLine(),
                 ],
@@ -131,6 +131,10 @@
 
             this.map.addLayers([this.baseLayer]);
             this.map.zoomToExtent(bounds);
+
+            // Insert the edit geometry button.
+            this.editGeometryButton = $('<button class="btn edit-geometry">Edit Geometry</button>');
+            this.element.append(this.editGeometryButton);
 
         },
 
@@ -307,15 +311,20 @@
 
             this.editToolbar.addControls(panelControls);
 
-            // Add the layer and show the toolbar.
+            // Show the toolbar, add the other controls.
             this.map.addControl(this.editToolbar);
+
+            // Insert the edit geometry button.
+            this.editGeometryButton.css('display', 'inline-block !important');
+            this.element.append(this.editGeometryButton);
 
         },
 
         endEditWithoutSave: function(id) {
 
             // Remove controls.
-            this.map.removeControl(this.editToolbar);
+            this.editToolbar.deactivate();
+            this.editGeometryButton.css('display', 'none !important');
 
             if (this._currentEditLayer.features.length == 0) {
 
