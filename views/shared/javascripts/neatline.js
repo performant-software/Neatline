@@ -358,7 +358,7 @@
 
         getWktForSave: function() {
 
-            return this.map.neatlinemap('getWktForSave');;
+            return this.map.neatlinemap('getWktForSave');
 
         },
 

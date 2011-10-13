@@ -323,6 +323,7 @@
                 this.map.removeLayer(this._currentEditLayer);
                 delete this.idToLayer[id];
                 delete this.layerToId[this._currentEditLayer.id];
+                this._currentEditLayer = null;
 
             }
 

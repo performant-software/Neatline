@@ -98,12 +98,14 @@ function neatline_queueNeatlineAssets()
 
     // Core Neatline stylesheet.
     queue_css('neatline');
+    queue_css('farbtastic', 'all', false, 'javascripts/editor/farbtastic');
 
     // The Neatline JavaScript application.
     queue_js('neatline', 'javascripts');
     queue_js('neatline_map', 'javascripts');
     queue_js('neatline_timeline', 'javascripts');
     queue_js('neatline_undateditems', 'javascripts');
+    queue_js('farbtastic', 'javascripts/editor/farbtastic');
 
     // Timeglider JavaScript assets.
     // queue_js('timeglider/js/jquery-ui-1.8.9.custom.min');
