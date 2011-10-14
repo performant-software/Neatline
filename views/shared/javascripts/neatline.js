@@ -45,7 +45,7 @@
             // CSS constants.
             css: {
                 top_block_height_percent: 55,
-                undated_items_width_percent: 30
+                undated_items_width_percent: 31
             },
 
             // Hexes.
