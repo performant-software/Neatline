@@ -58,7 +58,42 @@
             this._instantiateOpenLayers();
 
             // Instantiate the geometry editor.
-            this.element.editgeometry();
+            this.element.editgeometry({
+
+                // Define callbacks.
+                'dragactivate': function() {
+
+                },
+
+                'dragdeactivate': function() {
+
+                },
+
+                'scaleactivate': function() {
+
+                },
+
+                'scaledeactivate': function() {
+
+                },
+
+                'rotateactivate': function() {
+
+                },
+
+                'rotatedeactivate': function() {
+
+                },
+
+                'reshapeactivate': function() {
+
+                },
+
+                'reshapedeactivete': function() {
+
+                }
+
+            });
 
             // Trackers and buckets.
             this._isData = false;
