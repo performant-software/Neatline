@@ -337,7 +337,9 @@
                 'update': function(event, obj) {
 
                     // Reset to reshape by default.
-                    self.modifyFeatures.mode = OpenLayers.Control.ModifyFeature.RESHAPE;
+                    if (obj.reshape) {
+                        self.modifyFeatures.mode = OpenLayers.Control.ModifyFeature.RESHAPE;
+                    }
 
                     // Rotation.
                     if (obj.rotate) {
