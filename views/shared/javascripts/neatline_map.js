@@ -47,7 +47,8 @@
 
             // Hexes.
             colors: {
-                neatline_purple: '#724E85'
+                neatline_purple: '#724E85',
+                highlight_red: '#d04545'
             }
 
         },
@@ -166,8 +167,6 @@
                     // Build the new layers.
                     self._buildVectorLayers(data);
                     self._isData = true;
-
-                    console.log(self._currentEditItem);
 
                     // If a layer was being edited before the save,
                     // make that layer the active edit layer again.
@@ -373,7 +372,13 @@
                 },
 
                 'delete': function() {
-                    self._currentEditLayer.eraseFeatures([ self.modifyFeatures.feature ]);
+
+                    if (self.modifyFeatures.feature) {
+                        var feature = self.modifyFeatures.feature;
+                        self.modifyFeatures.feature = null;
+                        self._currentEditLayer.destroyFeatures([ feature ]);
+                    }
+
                 }
 
             });
