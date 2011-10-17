@@ -406,9 +406,11 @@
                 'delete': function() {
 
                     if (self.modifyFeatures.feature) {
+
                         var feature = self.modifyFeatures.feature;
-                        self.modifyFeatures.feature = null;
+                        self.modifyFeatures.selectControl.unselect(feature);
                         self._currentEditLayer.destroyFeatures([ feature ]);
+
                     }
 
                 }
