@@ -336,10 +336,8 @@
                 // On update.
                 'update': function(event, obj) {
 
-                    // Reset to reshape by default.
-                    if (obj.reshape) {
-                        self.modifyFeatures.mode = OpenLayers.Control.ModifyFeature.RESHAPE;
-                    }
+                    // Default to reshape.
+                    self.modifyFeatures.mode = OpenLayers.Control.ModifyFeature.RESHAPE;
 
                     // Rotation.
                     if (obj.rotate) {
@@ -347,9 +345,9 @@
                     }
 
                     // Resize.
-                    if (obj.resize) {
+                    if (obj.scale) {
                         self.modifyFeatures.mode |= OpenLayers.Control.ModifyFeature.RESIZE;
-                        self.modifyFeatures.mode &= -OpenLayers.Control.ModifyFeature.RESHAPE;
+                        // self.modifyFeatures.mode &= -OpenLayers.Control.ModifyFeature.RESHAPE;
                     }
 
                     // Drag.

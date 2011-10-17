@@ -53,27 +53,22 @@
     -webkit-transition: 0.0s linear all !important;
 }
 
-#reshape-button {
-    font-size: 0.85em;
-    right: 124px;
-}
-
 #rotate-button {
     font-size: 0.85em;
     width: 52px;
-    right: 193px;
+    right: 124px;
 }
 
 #scale-button {
     font-size: 0.85em;
     width: 47px;
-    right: 251px;
+    right: 182px;
 }
 
 #drag-button {
     font-size: 0.85em;
     width: 45px;
-    right: 304px;
+    right: 235px;
 }
 
 

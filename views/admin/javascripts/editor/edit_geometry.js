@@ -54,9 +54,6 @@
             var self = this;
 
             // Build the buttons, insert, and gloss.
-            this.reshapeButton =
-                $('<button id="reshape-button" class="btn edit-geometry-small geo-edit">Reshape</button>');
-
             this.scaleButton =
                 $('<button id="scale-button" class="btn edit-geometry-small geo-edit">Scale</button>');
 
@@ -67,13 +64,11 @@
                 $('<button id="drag-button" class="btn edit-geometry-small geo-edit">Drag</button>');
 
             // Insert the buttons.
-            this.element.append(this.reshapeButton);
             this.element.append(this.dragButton);
             this.element.append(this.rotateButton);
             this.element.append(this.scaleButton);
 
             // Store starting status data trackers.
-            this.reshapeButton.data('activated', false);
             this.scaleButton.data('activated', false);
             this.rotateButton.data('activated', false);
             this.dragButton.data('activated', false);
@@ -107,7 +102,6 @@
 
                     // Fire out the update event.
                     self._trigger('update', {}, {
-                        'reshape': self.reshapeButton.data('activated'),
                         'drag': self.dragButton.data('activated'),
                         'rotate': self.rotateButton.data('activated'),
                         'scale': self.scaleButton.data('activated')
@@ -146,7 +140,6 @@
 
                     // Fire out the update event.
                     self._trigger('update', {}, {
-                        'reshape': self.reshapeButton.data('activated'),
                         'drag': self.dragButton.data('activated'),
                         'rotate': self.rotateButton.data('activated'),
                         'scale': self.scaleButton.data('activated')
@@ -185,46 +178,6 @@
 
                     // Fire out the update event.
                     self._trigger('update', {}, {
-                        'reshape': self.reshapeButton.data('activated'),
-                        'drag': self.dragButton.data('activated'),
-                        'rotate': self.rotateButton.data('activated'),
-                        'scale': self.scaleButton.data('activated')
-                    });
-
-                }
-
-            });
-
-            // Gloss the reshape button.
-            this.reshapeButton.bind({
-
-                'mousedown': function() {
-
-                    // If not activated, activate.
-                    if (!self.reshapeButton.data('activated')) {
-
-                        // Do the color change.
-                        self.reshapeButton.addClass('primary');
-
-                        // Change the tracker.
-                        self.reshapeButton.data('activated', true);
-
-                    }
-
-                    // If activated, deactivate.
-                    else {
-
-                        // Do the color change.
-                        self.reshapeButton.removeClass('primary');
-
-                        // Change the tracker.
-                        self.reshapeButton.data('activated', false);
-
-                    }
-
-                    // Fire out the update event.
-                    self._trigger('update', {}, {
-                        'reshape': self.reshapeButton.data('activated'),
                         'drag': self.dragButton.data('activated'),
                         'rotate': self.rotateButton.data('activated'),
                         'scale': self.scaleButton.data('activated')
@@ -270,10 +223,6 @@
             // Rotate.
             this.rotateButton.removeClass('primary');
             this.rotateButton.data('activated', false);
-
-            // Reshape.
-            this.reshapeButton.removeClass('primary');
-            this.reshapeButton.data('activated', false);
 
         }
 
