@@ -369,6 +369,9 @@
 
             }
 
+            // Clear the item tracker.
+            this._currentEditItem = null;
+
         },
 
         getWktForSave: function() {
