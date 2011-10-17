@@ -62,45 +62,6 @@
             // Ignition.
             this._instantiateOpenLayers();
 
-            // Instantiate the geometry editor.
-            this.element.editgeometry({
-
-                // Define callbacks.
-                'dragactivate': function() {
-                    console.log('dragactivate');
-                    self.modifyFeatures.mode |= OpenLayers.Control.ModifyFeature.DRAG;
-                },
-
-                'dragdeactivate': function() {
-
-                },
-
-                'scaleactivate': function() {
-
-                },
-
-                'scaledeactivate': function() {
-
-                },
-
-                'rotateactivate': function() {
-
-                },
-
-                'rotatedeactivate': function() {
-
-                },
-
-                'reshapeactivate': function() {
-
-                },
-
-                'reshapedeactivete': function() {
-
-                }
-
-            });
-
             // Trackers and buckets.
             this._isData = false;
             this._currentVectorLayers = [];
@@ -352,7 +313,7 @@
 
             ];
 
-            // Instantiate the modify feature control.
+            // Instantiate and activate the modify feature control.
             this.modifyFeatures = new OpenLayers.Control.ModifyFeature(this._currentEditLayer);
 
             // Instantiate the edit toolbar.
@@ -367,6 +328,45 @@
             // Show the toolbar, add the other controls.
             this.map.addControl(this.editToolbar);
             this.map.addControl(this.modifyFeatures);
+            this.modifyFeatures.activate();
+
+            // Instantiate the geometry editor.
+            this.element.editgeometry({
+
+                // Define callbacks.
+                'dragactivate': function() {
+                    self.modifyFeatures.mode |= OpenLayers.Control.ModifyFeature.DRAG;
+                },
+
+                'dragdeactivate': function() {
+                    self.modifyFeatures.mode &= -OpenLayers.Control.ModifyFeature.DRAG;
+                },
+
+                'scaleactivate': function() {
+                    self.modifyFeatures.mode |= OpenLayers.Control.ModifyFeature.RESIZE;
+                },
+
+                'scaledeactivate': function() {
+                    self.modifyFeatures.mode &= -OpenLayers.Control.ModifyFeature.RESIZE;
+                },
+
+                'rotateactivate': function() {
+                    self.modifyFeatures.mode |= OpenLayers.Control.ModifyFeature.ROTATE;
+                },
+
+                'rotatedeactivate': function() {
+                    self.modifyFeatures.mode &= -OpenLayers.Control.ModifyFeature.ROTATE;
+                },
+
+                'reshapeactivate': function() {
+                    self.modifyFeatures.mode |= OpenLayers.Control.ModifyFeature.RESHAPE;
+                },
+
+                'reshapedeactivete': function() {
+                    self.modifyFeatures.mode &= -OpenLayers.Control.ModifyFeature.RESHAPE;
+                }
+
+            });
 
             // Insert the edit geometry button.
             this.element.editgeometry('showButtons');

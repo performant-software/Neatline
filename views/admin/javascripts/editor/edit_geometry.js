@@ -213,7 +213,7 @@
                     else {
 
                         // Trigger the deactivate event.
-                        self._trigger('rotatedeactivate');
+                        self._trigger('reshapedeactivate');
 
                         // Do the color change.
                         self.reshapeButton.removeClass('primary');
