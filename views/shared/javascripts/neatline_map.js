@@ -57,6 +57,9 @@
             // Ignition.
             this._instantiateOpenLayers();
 
+            // Instantiate the geometry editor.
+            this.element.editgeometry();
+
             // Trackers and buckets.
             this._isData = false;
             this._currentVectorLayers = [];
@@ -131,10 +134,6 @@
 
             this.map.addLayers([this.baseLayer]);
             this.map.zoomToExtent(bounds);
-
-            // Insert the edit geometry button.
-            this.editGeometryButton = $('<button class="btn edit-geometry">Edit Geometry</button>');
-            this.element.append(this.editGeometryButton);
 
         },
 
@@ -315,8 +314,7 @@
             this.map.addControl(this.editToolbar);
 
             // Insert the edit geometry button.
-            this.editGeometryButton.css('display', 'inline-block !important');
-            this.element.append(this.editGeometryButton);
+            this.element.editgeometry('showButtons');
 
         },
 
@@ -324,7 +322,7 @@
 
             // Remove controls.
             this.editToolbar.deactivate();
-            this.editGeometryButton.css('display', 'none !important');
+            // this.editGeometryButton.css('display', 'none !important');
 
             if (this._currentEditLayer.features.length == 0) {
 

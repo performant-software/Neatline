@@ -29,7 +29,7 @@
 
             // Markup hooks.
             markup: {
-
+                geo_edit_class: 'geo-edit'
             },
 
             // Animation constants.
@@ -50,6 +50,34 @@
         },
 
         _create: function() {
+
+            // Build the buttons, insert, and gloss.
+            this.reshapeButton =
+                $('<button id="reshape-button" class="btn edit-geometry-small geo-edit">Reshape</button>');
+
+            this.scaleButton =
+                $('<button id="scale-button" class="btn edit-geometry-small geo-edit">Scale</button>');
+
+            this.rotateButton =
+                $('<button id="rotate-button" class="btn edit-geometry-small geo-edit">Rotate</button>');
+
+            this.dragButton =
+                $('<button id="drag-button" class="btn edit-geometry-small geo-edit">Drag</button>');
+
+            // Insert the buttons.
+            this.element.append(this.reshapeButton);
+            this.element.append(this.dragButton);
+            this.element.append(this.rotateButton);
+            this.element.append(this.scaleButton);
+
+        },
+
+        showButtons: function() {
+
+            // Display:block the buttons.
+            $('.' + this.options.markup.geo_edit_class).css({
+                'display': 'block !important'
+            });
 
         }
 

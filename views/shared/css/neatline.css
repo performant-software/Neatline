@@ -34,20 +34,46 @@
 
 /* Map */
 
-.edit-geometry {
-    display: none !important;
-    z-index: 999;
-    position: absolute;
-    top: 34px;
-    right: 5px;
-    padding: 3px 12px 3px !important;
-    font-size: 0.9em;
-}
-
 .olControlLayerSwitcher .maximizeDiv, .olControlLayerSwitcher .minimizeDiv {
     top: 35px !important;
 }
 
+#edit-geometry-button {
+    top: 37px;
+}
+
+.geo-edit {
+    z-index: 999;
+    position: absolute;
+    padding: 4px 5px !important;
+    font-size: 0.9em;
+    top: 5px;
+    width: 63px;
+    display: none !important;
+}
+
+#reshape-button {
+    font-size: 0.85em;
+    right: 124px;
+}
+
+#rotate-button {
+    font-size: 0.85em;
+    width: 52px;
+    right: 193px;
+}
+
+#scale-button {
+    font-size: 0.85em;
+    width: 47px;
+    right: 251px;
+}
+
+#drag-button {
+    font-size: 0.85em;
+    width: 45px;
+    right: 304px;
+}
 
 
 /* Timeline */

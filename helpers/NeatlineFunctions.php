@@ -84,6 +84,7 @@ function neatline_queueEditorAssets()
     queue_js('editor/item_editor', 'javascripts');
     queue_js('editor/item_filter', 'javascripts');
     queue_js('editor/small_scroll', 'javascripts');
+    queue_js('editor/edit_geometry', 'javascripts');
     queue_js('editor/_deployment', 'javascripts');
 
 }
@@ -105,7 +106,7 @@ function neatline_queueNeatlineAssets()
     queue_js('neatline_map', 'javascripts');
     queue_js('neatline_timeline', 'javascripts');
     queue_js('neatline_undateditems', 'javascripts');
-    queue_js('farbtastic', 'javascripts/editor/farbtastic');
+    // queue_js('farbtastic', 'javascripts/editor/farbtastic');
 
     // Timeglider JavaScript assets.
     // queue_js('timeglider/js/jquery-ui-1.8.9.custom.min');
