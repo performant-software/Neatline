@@ -68,6 +68,7 @@
             this._currentVectorLayers = [];
             this._currentEditItem = null;
             this._currentEditLayer = null;
+            this._clickedFeature = null;
 
             // Load data.
             this.loadData();
@@ -148,7 +149,6 @@
 
                 $.each(this._currentVectorLayers, function(i, layer) {
                     self.map.removeLayer(layer);
-                    // layer.destroy();
                 });
 
                 // Empty out the container.
@@ -219,6 +219,25 @@
 
             });
 
+            this._addClickControls();
+
+        },
+
+        _addClickControls: function() {
+
+            var self = this;
+
+            // If there are existing lick and highlight controls, destroy them.
+            if (this.highlightControl != undefined) {
+                this.map.removeControl(this.highlightControl);
+                this.highlightControl = undefined;
+            }
+
+            if (this.clickControl != undefined) {
+                this.map.removeControl(this.clickControl);
+                this.clickControl = undefined;
+            }
+
             // Create the highlight and click control.
             this.highlightControl = new OpenLayers.Control.SelectFeature(self._currentVectorLayers, {
                 hover: true,
@@ -229,6 +248,9 @@
             this.clickControl = new OpenLayers.Control.SelectFeature(self._currentVectorLayers, {
                 clickout: true,
                 onSelect: function(feature) {
+
+                    // Store the feature in the tracker.
+                    self._clickedFeature = feature;
 
                     // Trigger out to the deployment code.
                     self._trigger('featureclick', {}, {
@@ -326,6 +348,12 @@
 
             });
 
+            // If there is an existing edit toolbar, scrub it.
+            if (this.editToolbar != undefined) {
+                this.map.removeControl(this.editToolbar);
+                this.editToolbar = undefined;
+            }
+
             // Instantiate the edit toolbar.
             this.editToolbar = new OpenLayers.Control.Panel({
                 defaultControl: panelControls[0],
@@ -369,6 +397,10 @@
                         self.modifyFeatures.mode &= -OpenLayers.Control.ModifyFeature.RESHAPE;
                     }
 
+                    var feature = self.modifyFeatures.feature;
+                    self.modifyFeatures.selectControl.unselect(feature);
+                    self.modifyFeatures.selectControl.select(feature);
+
                 },
 
                 'delete': function() {
@@ -386,22 +418,32 @@
             // Insert the edit geometry button.
             this.element.editgeometry('showButtons');
 
+            // If the last selected features is among the features in the
+            // new currentEditLayer, mark it as selected by default. Notably,
+            // this would be the case of the edit flow was triggered by a
+            // feature click in the editor.
+            var inLayer = false;
+            $.each(this._currentEditLayer.features, function(i, feature) {
+                if (feature == self._clickedFeature) {
+                    inLayer = true;
+                }
+            });
+
+            if (inLayer) {
+                this.modifyFeatures.selectControl.select(this._clickedFeature);
+            }
+
         },
 
         endEditWithoutSave: function(id) {
 
             // Remove controls.
-            this.editToolbar.deactivate();
             this.element.editgeometry('hideButtons');
-
-            // Nuke the modify features control. For strange reasons,
-            // this is necessary.
-            this.modifyFeatures.deactivate();
-            delete this.modifyFeatures;
+            this.map.removeControl(this.modifyFeatures);
+            this.map.removeControl(this.editToolbar);
 
             // Reactivate the default selection controls.
-            this.clickControl.activate();
-            this.highlightControl.activate();
+            this._addClickControls();
 
             if (this._currentEditLayer.features.length == 0) {
 
