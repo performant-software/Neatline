@@ -51,6 +51,8 @@
 
         _create: function() {
 
+            var self = this;
+
             // Build the buttons, insert, and gloss.
             this.reshapeButton =
                 $('<button id="reshape-button" class="btn edit-geometry-small geo-edit">Reshape</button>');
@@ -70,6 +72,123 @@
             this.element.append(this.rotateButton);
             this.element.append(this.scaleButton);
 
+            // Store starting status data trackers.
+            this.reshapeButton.data('activated', false);
+            this.scaleButton.data('activated', false);
+            this.rotateButton.data('activated', false);
+            this.dragButton.data('activated', false);
+
+            // Gloss the drag button.
+            this.dragButton.bind({
+
+                'mousedown': function() {
+
+                    // If not activated, activate.
+                    if (!self.dragButton.data('activated')) {
+
+                        // Trigger the activate event.
+                        self._trigger('dragactivate');
+
+                        // Do the color change.
+                        self.dragButton.addClass('primary');
+
+                        // Change the tracker.
+                        self.dragButton.data('activated', true);
+
+                    }
+
+                    // If activated, deactivate.
+                    else {
+
+                        // Trigger the deactivate event.
+                        self._trigger('dragdeactivate');
+
+                        // Do the color change.
+                        self.dragButton.removeClass('primary');
+
+                        // Change the tracker.
+                        self.dragButton.data('activated', false);
+
+                    }
+
+                }
+
+            });
+
+            // Gloss the scale button.
+            this.scaleButton.bind({
+
+                'mousedown': function() {
+
+                    // If not activated, activate.
+                    if (!self.scaleButton.data('activated')) {
+
+                        // Trigger the activate event.
+                        self._trigger('scaleactivate');
+
+                        // Do the color change.
+                        self.scaleButton.addClass('primary');
+
+                        // Change the tracker.
+                        self.scaleButton.data('activated', true);
+
+                    }
+
+                    // If activated, deactivate.
+                    else {
+
+                        // Trigger the deactivate event.
+                        self._trigger('scaledeactivate');
+
+                        // Do the color change.
+                        self.scaleButton.removeClass('primary');
+
+                        // Change the tracker.
+                        self.scaleButton.data('activated', false);
+
+                    }
+
+                }
+
+            });
+
+            // Gloss the rotate button.
+            this.rotateButton.bind({
+
+                'mousedown': function() {
+
+                    // If not activated, activate.
+                    if (!self.rotateButton.data('activated')) {
+
+                        // Trigger the activate event.
+                        self._trigger('rotateactivate');
+
+                        // Do the color change.
+                        self.rotateButton.addClass('primary');
+
+                        // Change the tracker.
+                        self.rotateButton.data('activated', true);
+
+                    }
+
+                    // If activated, deactivate.
+                    else {
+
+                        // Trigger the deactivate event.
+                        self._trigger('rotatedeactivate');
+
+                        // Do the color change.
+                        self.rotateButton.removeClass('primary');
+
+                        // Change the tracker.
+                        self.rotateButton.data('activated', false);
+
+                    }
+
+                }
+
+            });
+
         },
 
         showButtons: function() {
@@ -77,6 +196,15 @@
             // Display:block the buttons.
             $('.' + this.options.markup.geo_edit_class).css({
                 'display': 'block !important'
+            });
+
+        },
+
+        hideButtons: function() {
+
+            // Display:none the buttons.
+            $('.' + this.options.markup.geo_edit_class).css({
+                'display': 'none !important'
             });
 
         }

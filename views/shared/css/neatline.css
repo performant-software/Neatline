@@ -50,6 +50,7 @@
     top: 5px;
     width: 63px;
     display: none !important;
+    -webkit-transition: 0.0s linear all !important;
 }
 
 #reshape-button {

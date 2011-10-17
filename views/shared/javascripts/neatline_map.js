@@ -322,7 +322,7 @@
 
             // Remove controls.
             this.editToolbar.deactivate();
-            // this.editGeometryButton.css('display', 'none !important');
+            this.element.editgeometry('hideButtons');
 
             if (this._currentEditLayer.features.length == 0) {
 
