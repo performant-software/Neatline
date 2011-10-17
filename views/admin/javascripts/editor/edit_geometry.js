@@ -63,10 +63,14 @@
             this.dragButton =
                 $('<button id="drag-button" class="btn edit-geometry-small geo-edit">Drag</button>');
 
+            this.deleteButton =
+                $('<button id="delete-button" class="btn danger edit-geometry-small geo-edit">Delete</button>');
+
             // Insert the buttons.
             this.element.append(this.dragButton);
             this.element.append(this.rotateButton);
             this.element.append(this.scaleButton);
+            this.element.append(this.deleteButton);
 
             // Store starting status data trackers.
             this.scaleButton.data('activated', false);
@@ -183,6 +187,16 @@
                         'scale': self.scaleButton.data('activated')
                     });
 
+                }
+
+            });
+
+            // Gloss the delete button.
+            this.deleteButton.bind({
+
+                // Fire out the delete event.
+                'mousedown': function() {
+                    self._trigger('delete');
                 }
 
             });

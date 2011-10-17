@@ -47,7 +47,7 @@
 
             // Hexes.
             colors: {
-
+                neatline_purple: '#724E85'
             }
 
         },
@@ -313,7 +313,7 @@
 
             ];
 
-            // Instantiate and activate the modify feature control.
+            // Instantiate the modify feature control.
             this.modifyFeatures = new OpenLayers.Control.ModifyFeature(this._currentEditLayer, {
 
                 // OL marks this callback as deprecated, but I can't find
@@ -333,7 +333,7 @@
             // Add the controls.
             this.editToolbar.addControls(panelControls);
 
-            // Show the toolbar, add the other controls.
+            // Show the toolbar, add and activate the other controls.
             this.map.addControl(this.editToolbar);
             this.map.addControl(this.modifyFeatures);
             this.modifyFeatures.activate();
@@ -367,6 +367,10 @@
                         self.modifyFeatures.mode &= -OpenLayers.Control.ModifyFeature.RESHAPE;
                     }
 
+                },
+
+                'delete': function() {
+                    self._currentEditLayer.eraseFeatures([ self.modifyFeatures.feature ]);
                 }
 
             });
@@ -409,6 +413,8 @@
         getWktForSave: function() {
 
             var wkts = {};
+
+            this.modifyFeatures.selectControl.unselectAll();
 
             // Push each of the wkt representations of the geometry
             // onto the array.

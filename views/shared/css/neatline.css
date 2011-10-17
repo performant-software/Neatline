@@ -71,6 +71,12 @@
     right: 235px;
 }
 
+#delete-button {
+    font-size: 0.85em;
+    width: 45px;
+    right: 286px;
+}
+
 
 /* Timeline */
 
