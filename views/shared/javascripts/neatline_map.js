@@ -146,7 +146,8 @@
             if (this._isData) {
 
                 $.each(this._currentVectorLayers, function(i, layer) {
-                    layer.destroy();
+                    self.map.removeLayer(layer);
+                    // layer.destroy();
                 });
 
                 // Empty out the container.
@@ -165,6 +166,8 @@
                     // Build the new layers.
                     self._buildVectorLayers(data);
                     self._isData = true;
+
+                    console.log(self._currentEditItem);
 
                     // If a layer was being edited before the save,
                     // make that layer the active edit layer again.
