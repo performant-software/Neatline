@@ -314,7 +314,15 @@
             ];
 
             // Instantiate and activate the modify feature control.
-            this.modifyFeatures = new OpenLayers.Control.ModifyFeature(this._currentEditLayer);
+            this.modifyFeatures = new OpenLayers.Control.ModifyFeature(this._currentEditLayer, {
+
+                // OL marks this callback as deprecated, but I can't find
+                // any alternative and kosher way of hooking on to this.
+                onModificationStart: function() {
+                    self._trigger('featureadded');
+                }
+
+            });
 
             // Instantiate the edit toolbar.
             this.editToolbar = new OpenLayers.Control.Panel({
@@ -347,7 +355,6 @@
                     // Resize.
                     if (obj.scale) {
                         self.modifyFeatures.mode |= OpenLayers.Control.ModifyFeature.RESIZE;
-                        // self.modifyFeatures.mode &= -OpenLayers.Control.ModifyFeature.RESHAPE;
                     }
 
                     // Drag.
