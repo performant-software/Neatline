@@ -27,6 +27,9 @@
 
         options: {
 
+            // Application mode setting; 'edit' or 'public.'
+            mode: 'edit',
+
             // Markup hooks.
             markup: {
 
@@ -51,6 +54,8 @@
 
         _create: function() {
 
+            var self = this;
+
             // Getters.
             this.params = Neatline;
 
@@ -62,7 +67,8 @@
 
                 // Define callbacks.
                 'dragactivate': function() {
-
+                    console.log('dragactivate');
+                    self.modifyFeatures.mode |= OpenLayers.Control.ModifyFeature.DRAG;
                 },
 
                 'dragdeactivate': function() {
@@ -139,7 +145,6 @@
                   new OpenLayers.Control.PanZoomBar(),
                   new OpenLayers.Control.Permalink('permalink'),
                   new OpenLayers.Control.MousePosition(),
-                  // new OpenLayers.Control.LayerSwitcher({'ascending': false}),
                   new OpenLayers.Control.Navigation(),
                   new OpenLayers.Control.ScaleLine(),
                 ],
@@ -282,6 +287,15 @@
 
             var self = this;
 
+            // If in edit mode, turn off the default feature selection
+            // in preparation for the instantiation of the vector editing
+            // controls.
+            if (this.options.mode == 'edit') {
+                this.clickControl.unselectAll();
+                this.highlightControl.deactivate();
+                this.clickControl.deactivate();
+            }
+
             // Get the id of the item and try to fetch the layer.
             var itemId = item.attr('recordid');
             this._currentEditLayer = this.idToLayer[itemId];
@@ -338,15 +352,21 @@
 
             ];
 
+            // Instantiate the modify feature control.
+            this.modifyFeatures = new OpenLayers.Control.ModifyFeature(this._currentEditLayer);
+
+            // Instantiate the edit toolbar.
             this.editToolbar = new OpenLayers.Control.Panel({
                 defaultControl: panelControls[0],
                 displayClass: 'olControlEditingToolbar'
             });
 
+            // Add the controls.
             this.editToolbar.addControls(panelControls);
 
             // Show the toolbar, add the other controls.
             this.map.addControl(this.editToolbar);
+            this.map.addControl(this.modifyFeatures);
 
             // Insert the edit geometry button.
             this.element.editgeometry('showButtons');
@@ -358,6 +378,10 @@
             // Remove controls.
             this.editToolbar.deactivate();
             this.element.editgeometry('hideButtons');
+
+            // Reactivate the default selection controls.
+            this.clickControl.activate();
+            this.highlightControl.activate();
 
             if (this._currentEditLayer.features.length == 0) {
 

@@ -77,7 +77,6 @@
             this.scaleButton.data('activated', false);
             this.rotateButton.data('activated', false);
             this.dragButton.data('activated', false);
-            this._currentActivatedButton = null;
 
             // Gloss the drag button.
             this.dragButton.bind({
@@ -86,14 +85,6 @@
 
                     // If not activated, activate.
                     if (!self.dragButton.data('activated')) {
-
-                        // Deactivate the currently activated button.
-                        if (self._currentActivatedButton != null
-                            && self._currentActivatedButton != self.dragButton) {
-
-                            self._currentActivatedButton.trigger('mousedown');
-
-                        }
 
                         // Trigger the activate event.
                         self._trigger('dragactivate');
@@ -118,7 +109,6 @@
 
                         // Change the tracker.
                         self.dragButton.data('activated', false);
-                        self._currentActivatedButton = null;
 
                     }
 
@@ -134,14 +124,6 @@
                     // If not activated, activate.
                     if (!self.scaleButton.data('activated')) {
 
-                        // Deactivate the currently activated button.
-                        if (self._currentActivatedButton != null
-                            && self._currentActivatedButton != self.scaleButton) {
-
-                            self._currentActivatedButton.trigger('mousedown');
-
-                        }
-
                         // Trigger the activate event.
                         self._trigger('scaleactivate');
 
@@ -150,7 +132,6 @@
 
                         // Change the trackers.
                         self.scaleButton.data('activated', true);
-                        self._currentActivatedButton = self.scaleButton;
 
                     }
 
@@ -165,7 +146,6 @@
 
                         // Change the tracker.
                         self.scaleButton.data('activated', false);
-                        self._currentActivatedButton = null;
 
                     }
 
@@ -181,14 +161,6 @@
                     // If not activated, activate.
                     if (!self.rotateButton.data('activated')) {
 
-                        // Deactivate the currently activated button.
-                        if (self._currentActivatedButton != null
-                            && self._currentActivatedButton != self.rotateButton) {
-
-                            self._currentActivatedButton.trigger('mousedown');
-
-                        }
-
                         // Trigger the activate event.
                         self._trigger('rotateactivate');
 
@@ -197,7 +169,6 @@
 
                         // Change the tracker.
                         self.rotateButton.data('activated', true);
-                        self._currentActivatedButton = self.rotateButton;
 
                     }
 
@@ -212,7 +183,6 @@
 
                         // Change the tracker.
                         self.rotateButton.data('activated', false);
-                        self._currentActivatedButton = null;
 
                     }
 
@@ -228,14 +198,6 @@
                     // If not activated, activate.
                     if (!self.reshapeButton.data('activated')) {
 
-                        // Deactivate the currently activated button.
-                        if (self._currentActivatedButton != null
-                            && self._currentActivatedButton != self.reshapeButton) {
-
-                            self._currentActivatedButton.trigger('mousedown');
-
-                        }
-
                         // Trigger the activate event.
                         self._trigger('reshapeactivate');
 
@@ -244,7 +206,6 @@
 
                         // Change the tracker.
                         self.reshapeButton.data('activated', true);
-                        self._currentActivatedButton = self.reshapeButton;
 
                     }
 
@@ -259,7 +220,6 @@
 
                         // Change the tracker.
                         self.reshapeButton.data('activated', false);
-                        self._currentActivatedButton = null;
 
                     }
 

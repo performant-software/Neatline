@@ -66,7 +66,6 @@ jQuery(document).ready(function($) {
         // When an item form is opened and the item's vector becomes
         // available for editing.
         'mapedit': function(event, obj) {
-            console.log('test');
             neatlineContainer.neatline('editMap', obj.item);
         },
 
