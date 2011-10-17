@@ -336,6 +336,8 @@
                 // On update.
                 'update': function(event, obj) {
 
+                    // Mostly copied from OL examples. lolwut?
+
                     // Reset to reshape by default.
                     self.modifyFeatures.mode = OpenLayers.Control.ModifyFeature.RESHAPE;
 
@@ -352,7 +354,7 @@
 
                     // Drag.
                     if (obj.drag) {
-                        self.modifyFeatures.mode |= OpenLayers.Control.ModifyFeature.DRAG;
+                        self.modifyFeatures.mode &= -OpenLayers.Control.ModifyFeature.DRAG;
                     }
 
                     // If rotate or drag, pop off reshape.
@@ -361,6 +363,39 @@
                     }
 
                 }
+
+                // Define callbacks.
+                // 'dragactivate': function() {
+                //     self.modifyFeatures.mode |= OpenLayers.Control.ModifyFeature.DRAG;
+                // },
+
+                // 'dragdeactivate': function() {
+                //     self.modifyFeatures.mode &= -OpenLayers.Control.ModifyFeature.DRAG;
+                // },
+
+                // 'scaleactivate': function() {
+                //     self.modifyFeatures.mode |= OpenLayers.Control.ModifyFeature.RESIZE;
+                // },
+
+                // 'scaledeactivate': function() {
+                //     self.modifyFeatures.mode &= -OpenLayers.Control.ModifyFeature.RESIZE;
+                // },
+
+                // 'rotateactivate': function() {
+                //     self.modifyFeatures.mode |= OpenLayers.Control.ModifyFeature.ROTATE;
+                // },
+
+                // 'rotatedeactivate': function() {
+                //     self.modifyFeatures.mode &= -OpenLayers.Control.ModifyFeature.ROTATE;
+                // },
+
+                // 'reshapeactivate': function() {
+                //     self.modifyFeatures.mode |= OpenLayers.Control.ModifyFeature.RESHAPE;
+                // },
+
+                // 'reshapedeactivete': function() {
+                //     self.modifyFeatures.mode &= -OpenLayers.Control.ModifyFeature.RESHAPE;
+                // }
 
             });
 
@@ -374,11 +409,6 @@
             // Remove controls.
             this.editToolbar.deactivate();
             this.element.editgeometry('hideButtons');
-
-            // Nuke the modify features control. For strange reasons,
-            // this is necessary.
-            this.modifyFeatures.deactivate();
-            delete this.modifyFeatures;
 
             // Reactivate the default selection controls.
             this.clickControl.activate();

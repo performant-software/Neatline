@@ -86,23 +86,16 @@
                     // If not activated, activate.
                     if (!self.dragButton.data('activated')) {
 
-                        // Trigger the activate event.
-                        self._trigger('dragactivate');
-
                         // Do the color change.
                         self.dragButton.addClass('primary');
 
                         // Change the trackers.
                         self.dragButton.data('activated', true);
-                        self._currentActivatedButton = self.dragButton;
 
                     }
 
                     // If activated, deactivate.
                     else {
-
-                        // Trigger the deactivate event.
-                        self._trigger('dragdeactivate');
 
                         // Do the color change.
                         self.dragButton.removeClass('primary');
@@ -111,6 +104,14 @@
                         self.dragButton.data('activated', false);
 
                     }
+
+                    // Fire out the update event.
+                    self._trigger('update', {}, {
+                        'reshape': self.reshapeButton.data('activated'),
+                        'drag': self.dragButton.data('activated'),
+                        'rotate': self.rotateButton.data('activated'),
+                        'scale': self.scaleButton.data('activated')
+                    });
 
                 }
 
@@ -124,9 +125,6 @@
                     // If not activated, activate.
                     if (!self.scaleButton.data('activated')) {
 
-                        // Trigger the activate event.
-                        self._trigger('scaleactivate');
-
                         // Do the color change.
                         self.scaleButton.addClass('primary');
 
@@ -138,9 +136,6 @@
                     // If activated, deactivate.
                     else {
 
-                        // Trigger the deactivate event.
-                        self._trigger('scaledeactivate');
-
                         // Do the color change.
                         self.scaleButton.removeClass('primary');
 
@@ -148,6 +143,14 @@
                         self.scaleButton.data('activated', false);
 
                     }
+
+                    // Fire out the update event.
+                    self._trigger('update', {}, {
+                        'reshape': self.reshapeButton.data('activated'),
+                        'drag': self.dragButton.data('activated'),
+                        'rotate': self.rotateButton.data('activated'),
+                        'scale': self.scaleButton.data('activated')
+                    });
 
                 }
 
@@ -161,9 +164,6 @@
                     // If not activated, activate.
                     if (!self.rotateButton.data('activated')) {
 
-                        // Trigger the activate event.
-                        self._trigger('rotateactivate');
-
                         // Do the color change.
                         self.rotateButton.addClass('primary');
 
@@ -175,9 +175,6 @@
                     // If activated, deactivate.
                     else {
 
-                        // Trigger the deactivate event.
-                        self._trigger('rotatedeactivate');
-
                         // Do the color change.
                         self.rotateButton.removeClass('primary');
 
@@ -185,6 +182,14 @@
                         self.rotateButton.data('activated', false);
 
                     }
+
+                    // Fire out the update event.
+                    self._trigger('update', {}, {
+                        'reshape': self.reshapeButton.data('activated'),
+                        'drag': self.dragButton.data('activated'),
+                        'rotate': self.rotateButton.data('activated'),
+                        'scale': self.scaleButton.data('activated')
+                    });
 
                 }
 
@@ -198,9 +203,6 @@
                     // If not activated, activate.
                     if (!self.reshapeButton.data('activated')) {
 
-                        // Trigger the activate event.
-                        self._trigger('reshapeactivate');
-
                         // Do the color change.
                         self.reshapeButton.addClass('primary');
 
@@ -212,9 +214,6 @@
                     // If activated, deactivate.
                     else {
 
-                        // Trigger the deactivate event.
-                        self._trigger('reshapedeactivate');
-
                         // Do the color change.
                         self.reshapeButton.removeClass('primary');
 
@@ -222,6 +221,14 @@
                         self.reshapeButton.data('activated', false);
 
                     }
+
+                    // Fire out the update event.
+                    self._trigger('update', {}, {
+                        'reshape': self.reshapeButton.data('activated'),
+                        'drag': self.dragButton.data('activated'),
+                        'rotate': self.rotateButton.data('activated'),
+                        'scale': self.scaleButton.data('activated')
+                    });
 
                 }
 
@@ -236,6 +243,9 @@
                 'display': 'block !important'
             });
 
+            // By default, deactivate all buttons.
+            this.deactivateAllButtons();
+
         },
 
         hideButtons: function() {
@@ -244,6 +254,26 @@
             $('.' + this.options.markup.geo_edit_class).css({
                 'display': 'none !important'
             });
+
+        },
+
+        deactivateAllButtons: function() {
+
+            // Drag.
+            this.dragButton.removeClass('primary');
+            this.dragButton.data('activated', false);
+
+            // Scale.
+            this.scaleButton.removeClass('primary');
+            this.scaleButton.data('activated', false);
+
+            // Rotate.
+            this.rotateButton.removeClass('primary');
+            this.rotateButton.data('activated', false);
+
+            // Reshape.
+            this.reshapeButton.removeClass('primary');
+            this.reshapeButton.data('activated', false);
 
         }
 
