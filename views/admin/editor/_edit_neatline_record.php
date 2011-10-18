@@ -34,7 +34,7 @@
             <div class="clearfix">
                 <label for="title">Title</label>
                 <div class="input">
-                    <input class="xlarge" name="title" size="30" type="text" value="<?php echo $neatline->getTextByItemAndField($item, 'Title'); ?>" />
+                    <input class="xlarge" name="title" size="30" placeholder="Title" type="text" value="<?php echo $neatline->getTextByItemAndField($item, 'Title'); ?>" />
                     <span class="help-block">The text displayed as the item's icon on the timeline.</span>
                 </div>
             </div>
@@ -42,7 +42,7 @@
             <div class="clearfix">
                 <label for="map-description">Description</label>
                 <div class="input">
-                    <textarea class="xlarge" name="description" rows="4"><?php echo $neatline->getTextByItemAndField($item, 'Description'); ?></textarea>
+                    <textarea class="xlarge" name="description" placeholder="Description" rows="4"><?php echo $neatline->getTextByItemAndField($item, 'Description'); ?></textarea>
                     <span class="help-block">Descriptive text associated with the item's timeline entry.</span>
                 </div>
             </div>
@@ -51,8 +51,8 @@
                 <label>Start Date</label>
                 <div class="input">
                     <div class="inline-inputs">
-                        <input class="medium" name="start-date-date" type="text" value="<?php echo $neatline->getTimeTextByItemAndField($item, 'start_date'); ?>">
-                        <input class="mini" name="start-date-time" type="text" value="<?php echo $neatline->getTimeTextByItemAndField($item, 'start_time'); ?>">
+                        <input class="medium" name="start-date-date" type="text" placeholder="Date" value="<?php echo $neatline->getTimeTextByItemAndField($item, 'start_date'); ?>">
+                        <input class="mini" name="start-date-time" type="text" placeholder="Time" value="<?php echo $neatline->getTimeTextByItemAndField($item, 'start_time'); ?>">
                         <span class="help-inline">Enter the date (or start date) of the item.</span>
                     </div>
                 </div>
@@ -62,8 +62,8 @@
                 <label>End Date</label>
                 <div class="input">
                     <div class="inline-inputs">
-                        <input class="medium" name="end-date-date" type="text" value="<?php echo $neatline->getTimeTextByItemAndField($item, 'end_date'); ?>">
-                        <input class="mini" name="end-date-time" type="text" value="<?php echo $neatline->getTimeTextByItemAndField($item, 'end_time'); ?>">
+                        <input class="medium" name="end-date-date" type="text" placeholder="Date" value="<?php echo $neatline->getTimeTextByItemAndField($item, 'end_date'); ?>">
+                        <input class="mini" name="end-date-time" type="text" placeholder="Time" value="<?php echo $neatline->getTimeTextByItemAndField($item, 'end_time'); ?>">
                         <span class="help-inline">Enter an ending date, if applicable.</span>
                     </div>
                 </div>
