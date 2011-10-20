@@ -34,7 +34,7 @@
 
             // Animation constants.
             animation: {
-
+                fade_in_duration: 500
             },
 
             // CSS constants.
@@ -207,8 +207,9 @@
 
             // Display:block the buttons.
             $('.' + this.options.markup.geo_edit_class).css({
-                'display': 'block !important'
-            });
+                'display': 'block !important',
+                'opacity': 0
+            }).animate({ 'opacity': 1}, this.options.animation.fade_duration);
 
             // By default, deactivate all buttons.
             this.deactivateAllButtons();
@@ -217,9 +218,14 @@
 
         hideButtons: function() {
 
-            // Display:none the buttons.
-            $('.' + this.options.markup.geo_edit_class).css({
-                'display': 'none !important'
+            // Get the buttons.
+            var buttons = $('.' + this.options.markup.geo_edit_class);
+
+            // Fade down.
+            buttons.animate({
+                'opacity': 0
+            }, this.options.markup.fade_duration, function() {
+                buttons.css('display', 'none !important');
             });
 
         },
