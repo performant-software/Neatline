@@ -27,6 +27,8 @@
 
 <div class="neatline-record-edit-form">
 
+    <div class="small-scroll-content">
+
     <form class="form-stacked">
 
         <fieldset>
@@ -85,6 +87,6 @@
 
     </form>
 
-    <div class="form-save-loader"></div>
+    </div>
 
 </div>

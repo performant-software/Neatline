@@ -42,7 +42,8 @@
             item_title_text_class: 'item-title-text',
             item_title_fader_class: 'item-title-fader',
             item_title_cell_class: 'item-title',
-            edit_form_class: 'neatline-edit-record-form',
+            edit_form_container_class: 'neatline-record-edit-form',
+            small_scroll_content_class: 'small-scroll-content',
             title_input_name: 'title',
             description_input_name: 'description',
             start_date_input_name: 'start-date-date',
@@ -952,16 +953,13 @@
             // Get child markup and parameters.
             var itemId = item.attr('recordid');
             var editFormTd = item.next().find('td');
+            var editFormContainer = editFormTd.find('.' + this.options.edit_form_container_class);
             var editForm = editFormTd.find('form');
             var textSpan = item.find('.' + this.options.item_title_text_class);
             var faderSpan = item.find('.' + this.options.item_title_fader_class);
             var itemTitleText = item.find('.' + this.options.item_title_text_class);
             var allInputs = editForm.find('input[type="text"], textarea')
             var descriptionTextarea = editForm.find('textarea[name="description"]');
-            // var colorPickerContainer = editForm.find('.' + this.options.color_picker_container_class + ':first-child');
-
-            // Instantiate the color picker.
-            // colorPickerContainer.farbtastic('#' + this.options.color_picker_input_id + itemId);
 
             // Calculate the native height of the form.
             var cloneFormTd = editFormTd
@@ -983,6 +981,9 @@
             // Register the height of the cloned form, delete it.
             var formHeight = cloneForm.height();
             cloneFormTd.remove();
+
+            // Measure the height of the item editor column.
+            var editorHeight = this.element.height() - this.options.container_top_margin;
 
             // By default, fade to the default text color and weight.
             var textColor = this.options.colors.text_default;
@@ -1055,20 +1056,23 @@
 
             });
 
-            // Set the change tracker on each of the inputs and bind the change event.
+            // Set the change tracker on each of the inputs and bind
+            // the change event.
             $.each(allInputs, function(i, input) {
 
                 $(input).bind({
-
                     'keydown': function() {
-
                         self.markItemTitleAsUnsaved();
-
                     }
-
                 });
 
             });
+
+            // If the form is taller than the total height of the editor
+            // column, add a scrollbar.
+            if (formHeight > editorHeight) {
+                editFormContainer.smallscroll();
+            }
 
             // Fire general item edit event to focus timeline and map
             // if data exists for the item.
