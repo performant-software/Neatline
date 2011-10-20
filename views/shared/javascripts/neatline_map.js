@@ -147,8 +147,10 @@
             // Clear existing vectors.
             if (this._isData) {
 
-                $.each(this._currentVectorLayers, function(i, layer) {
+                var vectors = this.map.getLayersByClass('OpenLayers.Layer.Vector');
+                $.each(vectors, function(i, layer) {
                     self.map.removeLayer(layer);
+                    layer.destroy();
                 });
 
                 // Empty out the container.
@@ -284,6 +286,7 @@
             // Get the id of the item and try to fetch the layer.
             var itemId = item.attr('recordid');
             this._currentEditLayer = this.idToLayer[itemId];
+            this._currentEditId = itemId;
             this._newVectors = false;
 
             // Record the id of the current edit layer, so that the layer can be
