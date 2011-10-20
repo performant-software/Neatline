@@ -25,11 +25,11 @@
  */
 ?>
 
-<div id="topbar" class="topbar-inner topbar">
-
-    <img id="neatline-logo" src="<?php echo img('neatline-logo-white-small.png'); ?>" />
-    <span class="top-bar-title"><?php echo $title; ?></span>
-
-    <?php echo $this->partial('editor/_topbar_navigation.php'); ?>
-
-</div>
+<ul class="nav">
+    <li class="dropdown"><a href="" class="dropdown-toggle">Configure Layout</a></li>
+    <li class="dropdown">
+        <a class="omeka-logo" href="<?php echo html_escape(uri('neatline-exhibits')); ?>">
+            <img id="omeka-logo" src="<?php echo img('back-to-omeka-white.png'); ?>" />
+        </a>
+    </li>
+</ul>

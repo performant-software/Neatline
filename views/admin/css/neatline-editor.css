@@ -71,14 +71,18 @@
 
 #omeka-logo {
     float: right;
-    margin: 8px 10px 0 20px;
+    /* margin: 8px 20px 0 20px;*/
+}
+
+a.omeka-logo {
+    padding: 8px 20px 0 20px !important;
 }
 
 span.top-bar-title {
     font-family: 'Crimson Text', Georgia, serif;
     color: #fff;
-    font-size: 2.2em;
-    top: 16px;
+    font-size: 2em;
+    top: 18px;
     position: relative;
 }
 
@@ -88,7 +92,7 @@ span.top-bar-title {
 .topbar div > ul, .nav {
   display: block;
   float: right;
-  margin: 0 10px 0 20px;
+  margin: 0 0 0 20px;
   position: relative;
   left: 0;
   height: 100%;
@@ -106,9 +110,9 @@ span.top-bar-title {
   line-height: 19px;
   text-decoration: none;
   font-size: 1.1em;
-  height: 100%;
   cursor: pointer;
   color: #f9f9f9;
+  z-index: -1;
 }
 
 .topbar div > ul a:hover, .nav a:hover {

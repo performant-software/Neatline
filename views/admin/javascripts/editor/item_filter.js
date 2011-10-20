@@ -525,18 +525,3 @@
 
 
 })( jQuery );
-
-
-// Remove() - Removes all instances of element el from an array.
-// Emulates Python's set.remove().
-Array.prototype.remove = function(el) {
-
-    for (var i = 0; i < this.length; i++) {
-        if (this[i] == el) {
-            this.splice(i,1);
-            this.remove(el);
-            break;
-        }
-    }
-
-};
