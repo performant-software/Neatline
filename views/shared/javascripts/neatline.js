@@ -344,15 +344,15 @@
 
         },
 
-        editMap: function(item) {
+        editMap: function(item, immediate) {
 
-            this.map.neatlinemap('edit', item);
+            this.map.neatlinemap('edit', item, immediate);
 
         },
 
-        endMapEditWithoutSave: function(id) {
+        endMapEditWithoutSave: function(id, immediate) {
 
-            this.map.neatlinemap('endEditWithoutSave', id);
+            this.map.neatlinemap('endEditWithoutSave', id, immediate);
 
         },
 

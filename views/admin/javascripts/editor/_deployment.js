@@ -66,13 +66,13 @@ jQuery(document).ready(function($) {
         // When an item form is opened and the item's vector becomes
         // available for editing.
         'mapedit': function(event, obj) {
-            neatlineContainer.neatline('editMap', obj.item);
+            neatlineContainer.neatline('editMap', obj.item, obj.immediate);
         },
 
         // When vector data is added to the map, and then the item
         // form is closed without saving.
         'endmapedit': function(event, obj) {
-            neatlineContainer.neatline('endMapEditWithoutSave', obj.itemId);
+            neatlineContainer.neatline('endMapEditWithoutSave', obj.itemId, obj.immediate);
         },
 
         // When an item form is saved, and new vector data needs to

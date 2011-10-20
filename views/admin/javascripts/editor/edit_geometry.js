@@ -209,7 +209,7 @@
             $('.' + this.options.markup.geo_edit_class).css({
                 'display': 'block !important',
                 'opacity': 0
-            }).animate({ 'opacity': 1}, this.options.animation.fade_duration);
+            }).stop().animate({ 'opacity': 1}, this.options.animation.fade_duration);
 
             // By default, deactivate all buttons.
             this.deactivateAllButtons();
@@ -222,7 +222,7 @@
             var buttons = $('.' + this.options.markup.geo_edit_class);
 
             // Fade down.
-            buttons.animate({
+            buttons.stop().animate({
                 'opacity': 0
             }, this.options.markup.fade_duration, function() {
                 buttons.css('display', 'none !important');

@@ -268,7 +268,7 @@
 
         },
 
-        edit: function(item) {
+        edit: function(item, immediate) {
 
             var self = this;
 
@@ -422,13 +422,26 @@
 
             });
 
-            // Insert the edit geometry button.
-            this.element.editgeometry('showButtons');
+            // Only do the fade if the form open does not coincide with
+            // another form close.
+            if (!immediate) {
 
-            // Fade up the toolbar.
-            $('.' + this.options.markup.toolbar_class).animate({
-                'opacity': 1
-            }, this.options.animation.fade_duration);
+                // Insert the edit geometry button.
+                this.element.editgeometry('showButtons', immediate);
+
+                // Fade up the toolbar.
+                $('.' + this.options.markup.toolbar_class).animate({
+                    'opacity': 1
+                }, this.options.animation.fade_duration);
+
+            }
+
+            else {
+
+                // Pop up the toolbar.
+                $('.' + this.options.markup.toolbar_class).css('opacity', 1);
+
+            }
 
             // If the last selected features is among the features in the
             // new currentEditLayer, mark it as selected by default. Notably,
@@ -447,24 +460,32 @@
 
         },
 
-        endEditWithoutSave: function(id) {
+        endEditWithoutSave: function(id, immediate) {
 
             // Before OpenLayers axes the toolbar controls, clone the div so
             // that it can be faded down in unison with the buttons.
             var toolbarClone = $('.' + this.options.markup.toolbar_class).clone();
 
             // Remove controls.
-            this.element.editgeometry('hideButtons');
             this.map.removeControl(this.modifyFeatures);
             this.map.removeControl(this.editToolbar);
 
-            // Reinsert the dummy toolbar and fade it down.
-            this.element.append(toolbarClone);
-            toolbarClone.animate({
-                'opacity': 0
-            }, this.options.animation.fade_duration, function() {
-                toolbarClone.remove();
-            });
+            // If the form is immediately switching to another form, do not do
+            // the fade down, as as to avoid a little opacity dip in the buttons
+            // when the form switches.
+            if (!immediate) {
+
+                this.element.editgeometry('hideButtons');
+
+                // Reinsert the dummy toolbar and fade it down.
+                this.element.append(toolbarClone);
+                toolbarClone.animate({
+                    'opacity': 0
+                }, this.options.animation.fade_duration, function() {
+                    toolbarClone.remove();
+                });
+
+            }
 
             // Reactivate the default selection controls.
             this._addClickControls();

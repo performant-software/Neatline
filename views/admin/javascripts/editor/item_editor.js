@@ -945,10 +945,12 @@
         _showForm: function(item, scrollMap, scrollTimeline) {
 
             var self = this;
+            var immediate = false;
 
             // If another form is currently expanded, hide it.
             if (this._currentFormItem != null) {
                 this._hideForm(this._currentFormItem, true);
+                immediate = true;
             }
 
             // Get child markup and parameters.
@@ -1086,7 +1088,8 @@
 
             // Fire off the event to show the map editor controls.
             this._trigger('mapedit', {}, {
-                'item': item
+                'item': item,
+                'immediate': immediate
             });
 
         },
@@ -1183,7 +1186,8 @@
 
             // Fire the end edit without save callback.
             this._trigger('endmapedit', {}, {
-                'itemId': itemId
+                'itemId': itemId,
+                'immediate': immediate
             });
 
         },
