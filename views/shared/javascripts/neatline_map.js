@@ -467,6 +467,7 @@
             var toolbarClone = $('.' + this.options.markup.toolbar_class).clone();
 
             // Remove controls.
+            this.modifyFeatures.selectControl.unselectAll();
             this.map.removeControl(this.modifyFeatures);
             this.map.removeControl(this.editToolbar);
 
