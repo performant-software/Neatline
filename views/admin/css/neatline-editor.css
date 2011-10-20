@@ -69,6 +69,11 @@
     margin: 8px 30px 0 20px;
 }
 
+#omeka-logo {
+    float: right;
+    margin: 8px 10px 0 20px;
+}
+
 span.top-bar-title {
     font-family: 'Crimson Text', Georgia, serif;
     color: #fff;

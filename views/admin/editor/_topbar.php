@@ -30,4 +30,8 @@
     <img id="neatline-logo" src="<?php echo img('neatline-logo-white-small.png'); ?>" />
     <span class="top-bar-title"><?php echo $title; ?></span>
 
+    <a href="<?php echo html_escape(uri('neatline-exhibits')); ?>">
+        <img id="omeka-logo" src="<?php echo img('back-to-omeka-white.png'); ?>" />
+    </a>
+
 </div>

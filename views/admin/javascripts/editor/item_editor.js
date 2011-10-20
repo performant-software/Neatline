@@ -1073,7 +1073,7 @@
             // If the form is taller than the total height of the editor
             // column, add a scrollbar.
             if (formHeight > editorHeight) {
-                editFormContainer.smallscroll();
+                // editFormContainer.smallscroll();
             }
 
             // Fire general item edit event to focus timeline and map
