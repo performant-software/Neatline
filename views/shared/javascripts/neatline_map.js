@@ -342,7 +342,7 @@
 
                 // OL marks this callback as deprecated, but I can't find
                 // any alternative and kosher way of hooking on to this.
-                onModificationStart: function() {
+                onModification: function() {
                     self._trigger('featureadded');
                 }
 

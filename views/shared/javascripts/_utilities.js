@@ -19,7 +19,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache 2 License
  */
 
-// Remove() - Removes all instances of element el from an array.
+// remove() - Removes all instances of element el from an array.
 // Emulates Python's set.remove().
 Array.prototype.remove = function(el) {
 
@@ -30,5 +30,19 @@ Array.prototype.remove = function(el) {
             break;
         }
     }
+
+};
+
+// contains() - Checks to see if the supplied element is in the array.
+Array.prototype.contains = function(el) {
+
+    var match = false;
+    for (var i = 0; i < this.length; i++) {
+        if (this[i] == el) {
+            match = true;
+        }
+    }
+
+    return match;
 
 };
