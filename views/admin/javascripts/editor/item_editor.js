@@ -75,6 +75,7 @@
 
             // Hexes.
             colors: {
+                neatline_purple: '#724E85',
                 item_list_highlight: '#f2f3fa',
                 drag_border: '#a79aae',
                 text_default: '#383838',
@@ -952,6 +953,7 @@
 
             // Get child markup and parameters.
             var itemId = item.attr('recordid');
+            var itemTitleTd = item.find('td.item-title');
             var editFormTd = item.next().find('td');
             var editFormContainer = editFormTd.find('.' + this.options.edit_form_container_class);
             var editForm = editFormTd.find('form');

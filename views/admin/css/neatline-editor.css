@@ -432,14 +432,11 @@ div.filter-option span {
 }
 
 .highlight-region {
-    /* position: absolute;*/
-    /* display: block;*/
-    /* right: 0;*/
-    /* top: 0;*/
-    /* height: 100%;*/
-    position: relative;
+    position: absolute;
     display: block;
-    float: right;
+    right: 0;
+    top: 0;
+    height: 100%;
 }
 
 .small-scroll-content {

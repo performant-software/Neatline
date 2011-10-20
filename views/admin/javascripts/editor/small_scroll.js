@@ -78,6 +78,11 @@
             this.highlightRegion = $('<div class="highlight-region"></div>');
             this.bar = $('<div class="small-scrollbar"></div>');
 
+            // Position the highlight region.
+            if (this.element.css('position') == 'relative') {
+                console.log('relative');
+            }
+
             // Inject.
             this.element.append(this.highlightRegion);
             this.highlightRegion.append(this.bar);
