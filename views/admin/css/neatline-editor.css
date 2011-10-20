@@ -577,3 +577,10 @@ table#items td.col-2 {
 .twipsy-inner {
     font-weight: bold;
 }
+
+
+/* Map editor controls */
+
+.olControlEditingToolbar {
+    opacity: 0;
+}

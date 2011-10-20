@@ -34,7 +34,7 @@
 
             // Animation constants.
             animation: {
-                fade_in_duration: 500
+                fade_duration: 500
             },
 
             // CSS constants.

@@ -32,12 +32,12 @@
 
             // Markup hooks.
             markup: {
-
+                toolbar_class: 'olControlEditingToolbar'
             },
 
             // Animation constants.
             animation: {
-
+                fade_duration: 500
             },
 
             // CSS constants.
@@ -420,6 +420,11 @@
             // Insert the edit geometry button.
             this.element.editgeometry('showButtons');
 
+            // Fade up the toolbar.
+            $('.' + this.options.markup.toolbar_class).animate({
+                'opacity': 1
+            }, this.options.animation.fade_duration);
+
             // If the last selected features is among the features in the
             // new currentEditLayer, mark it as selected by default. Notably,
             // this would be the case of the edit flow was triggered by a
@@ -439,10 +444,22 @@
 
         endEditWithoutSave: function(id) {
 
+            // Before OpenLayers axes the toolbar controls, clone the div so
+            // that it can be faded down in unison with the buttons.
+            var toolbarClone = $('.' + this.options.markup.toolbar_class).clone();
+
             // Remove controls.
             this.element.editgeometry('hideButtons');
             this.map.removeControl(this.modifyFeatures);
             this.map.removeControl(this.editToolbar);
+
+            // Reinsert the dummy toolbar and fade it down.
+            this.element.append(toolbarClone);
+            toolbarClone.animate({
+                'opacity': 0
+            }, this.options.animation.fade_duration, function() {
+                toolbarClone.destroy();
+            });
 
             // Reactivate the default selection controls.
             this._addClickControls();
