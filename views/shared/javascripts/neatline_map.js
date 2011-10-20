@@ -399,6 +399,8 @@
 
                     var feature = self.modifyFeatures.feature;
 
+                    // If there is a selected feature, unselect and reselect it to apply
+                    // the new configuration.
                     if (feature != null) {
                         self.modifyFeatures.selectControl.unselect(feature);
                         self.modifyFeatures.selectControl.select(feature);
