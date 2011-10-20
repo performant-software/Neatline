@@ -398,8 +398,11 @@
                     }
 
                     var feature = self.modifyFeatures.feature;
-                    self.modifyFeatures.selectControl.unselect(feature);
-                    self.modifyFeatures.selectControl.select(feature);
+
+                    if (feature != null) {
+                        self.modifyFeatures.selectControl.unselect(feature);
+                        self.modifyFeatures.selectControl.select(feature);
+                    }
 
                 },
 
@@ -458,7 +461,7 @@
             toolbarClone.animate({
                 'opacity': 0
             }, this.options.animation.fade_duration, function() {
-                toolbarClone.destroy();
+                toolbarClone.remove();
             });
 
             // Reactivate the default selection controls.
