@@ -61,7 +61,7 @@
             this.params = Neatline;
 
             // Ignition.
-            this._instantiateOpenLayers();
+            // this._instantiateOpenLayers();
 
             // Trackers and buckets.
             this._currentVectorLayers = [];
@@ -147,10 +147,16 @@
             var self = this;
 
             // Clear existing vectors.
-            $.each(this.idToLayer, function(i, layer) {
-                self.map.removeLayer(layer);
-                layer.destroy();
-            });
+            // $.each(this.idToLayer, function(i, layer) {
+            //     self.map.removeLayer(layer);
+            //     layer.destroy();
+            // });
+
+            if (this.map != undefined) {
+                this.map.destroy();
+            }
+
+            this._instantiateOpenLayers();
 
             // Empty out the containers.
             this._currentVectorLayers = [];
@@ -224,7 +230,7 @@
 
             });
 
-            this._addClickControls();
+            self._addClickControls();
 
         },
 
@@ -232,7 +238,7 @@
 
             var self = this;
 
-            // If there are existing lick and highlight controls, destroy them.
+            // If there are existing click and highlight controls, destroy them.
             if (this.highlightControl != undefined) {
                 this.map.removeControl(this.highlightControl);
                 this.highlightControl = undefined;
@@ -277,14 +283,8 @@
 
             var self = this;
 
-            // If in edit mode, turn off the default feature selection
-            // in preparation for the instantiation of the vector editing
-            // controls.
-            if (this.options.mode == 'edit') {
-                // this.clickControl.unselectAll();
-                // this.highlightControl.deactivate();
-                // this.clickControl.deactivate();
-            }
+            this.clickControl.deactivate();
+            this.highlightControl.deactivate();
 
             // Get the id of the item and try to fetch the layer.
             var itemId = item.attr('recordid');
@@ -301,10 +301,12 @@
                 var itemName = item.find('span.item-title-text').text();
                 this._currentEditLayer = new OpenLayers.Layer.Vector(itemName);
                 this.map.addLayer(this._currentEditLayer);
+                this._currentEditLayer.setMap(this.map);
 
                 // Push the edit layer onto the non-base layers stack.
                 this._currentVectorLayers.push(this._currentEditLayer);
                 this.idToLayer[itemId] = this._currentEditLayer;
+                this.layerToId[this._currentEditLayer.id] = itemId;
 
             }
 
