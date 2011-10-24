@@ -60,6 +60,7 @@
 
             // Trackers and buckets.
             this._currentVectorLayers = [];
+            this._controls = [];
             this._currentEditItem = null;
             this._currentEditLayer = null;
             this._clickedFeature = null;
@@ -142,7 +143,7 @@
             var self = this;
 
             // If there are existing click and highlight controls, destroy them.
-            this._removeClickControls();
+            this._removeControls();
 
             // Clear existing vectors.
             $.each(this._currentVectorLayers, function(i, layer) {
@@ -233,7 +234,7 @@
             var self = this;
 
             // If there are existing click and highlight controls, destroy them.
-            this._removeClickControls();
+            this._removeControls();
 
             // Create the highlight and click control.
             this.highlightControl = new OpenLayers.Control.SelectFeature(this._currentVectorLayers, {
@@ -263,22 +264,23 @@
             this.map.addControl(this.clickControl);
             this.clickControl.activate();
 
+            // Add to tracker.
+            this._controls.push(this.highlightControl);
+            this._controls.push(this.clickControl);
+
         },
 
-        _removeClickControls: function() {
+        _removeControls: function() {
 
-            // If there are existing click and highlight controls, destroy them.
-            if (this.highlightControl != undefined) {
-                this.map.removeControl(this.highlightControl);
-                this.highlightControl.destroy();
-                this.highlightControl = undefined;
-            }
+            var self = this;
 
-            if (this.clickControl != undefined) {
-                this.map.removeControl(this.clickControl);
-                this.clickControl.destroy();
-                this.clickControl = undefined;
-            }
+            // Walk the array of controls and remove.
+            $.each(this._controls, function(i, control) {
+                self.map.removeControl(control);
+                control.destroy();
+            });
+
+            this._controls = [];
 
         },
 
@@ -286,7 +288,7 @@
 
             var self = this;
 
-            this._removeClickControls();
+            this._removeControls();
 
             // Get the id of the item and try to fetch the layer.
             var itemId = item.attr('recordid');
@@ -368,6 +370,10 @@
             this.map.addControl(this.editToolbar);
             this.map.addControl(this.modifyFeatures);
             this.modifyFeatures.activate();
+
+            // Push the new controls into the tracker.
+            this._controls.push(this.editToolbar);
+            this._controls.push(this.modifyFeatures);
 
             // Instantiate the geometry editor.
             this.element.editgeometry({
@@ -512,6 +518,7 @@
 
             var wkts = {};
 
+            console.log(this.modifyFeatures.selectControl);
             this.modifyFeatures.selectControl.unselectAll();
 
             // Push the wkt's onto the array.
