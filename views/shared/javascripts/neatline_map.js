@@ -354,19 +354,6 @@
 
             ];
 
-            // Scrub existing modifyFeatures and editToolbar controls.
-            // if (this.modifyFeatures != undefined) {
-            //     this.map.removeControl(this.modifyFeatures);
-            //     this.modifyFeatures.destroy();
-            //     this.modifyFeatures = undefined;
-            // }
-
-            // if (this.editToolbar != undefined) {
-            //     this.map.removeControl(this.editToolbar);
-            //     this.editToolbar.destroy();
-            //     this.editToolbar = undefined;
-            // }
-
             // Instantiate the modify feature control.
             this.modifyFeatures = new OpenLayers.Control.ModifyFeature(this._currentEditLayer, {
 
