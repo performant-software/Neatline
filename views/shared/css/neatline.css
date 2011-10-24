@@ -35,7 +35,7 @@
 /* Map */
 
 .olControlLayerSwitcher .maximizeDiv, .olControlLayerSwitcher .minimizeDiv {
-    top: 35px !important;
+    top: 10px !important;
 }
 
 #edit-geometry-button {

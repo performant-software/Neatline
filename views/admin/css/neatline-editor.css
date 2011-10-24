@@ -104,6 +104,8 @@ span.top-bar-title {
 }
 
 .topbar div > ul a, .nav a {
+  font-family: 'Crimson Text', Georgia, serif;
+  font-size: 1.3em !important;
   display: block;
   float: none;
   padding: 18px 15px 11px 15px;

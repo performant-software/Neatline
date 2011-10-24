@@ -64,11 +64,12 @@
             this._instantiateOpenLayers();
 
             // Trackers and buckets.
-            this._isData = false;
             this._currentVectorLayers = [];
             this._currentEditItem = null;
             this._currentEditLayer = null;
             this._clickedFeature = null;
+            this.idToLayer = {};
+            this.requestData = null;
 
             // Load data.
             this.loadData();
@@ -108,6 +109,7 @@
                   new OpenLayers.Control.PanZoomBar(),
                   new OpenLayers.Control.Permalink('permalink'),
                   new OpenLayers.Control.MousePosition(),
+                  new OpenLayers.Control.LayerSwitcher(),
                   new OpenLayers.Control.Navigation(),
                   new OpenLayers.Control.ScaleLine(),
                 ],
@@ -145,21 +147,22 @@
             var self = this;
 
             // Clear existing vectors.
-            if (this._isData) {
+            $.each(this.idToLayer, function(i, layer) {
+                self.map.removeLayer(layer);
+                layer.destroy();
+            });
 
-                var vectors = this.map.getLayersByClass('OpenLayers.Layer.Vector');
-                $.each(vectors, function(i, layer) {
-                    self.map.removeLayer(layer);
-                    layer.destroy();
-                });
+            // Empty out the containers.
+            this._currentVectorLayers = [];
+            this.idToLayer = {};
 
-                // Empty out the container.
-                this._currentVectorLayers = [];
-
+            // Abort the request if it is running.
+            if (this.requestData != null) {
+                this.requestData.abort();
             }
 
             // Hit the json server.
-            $.ajax({
+            this.requestData = $.ajax({
 
                 url: this.params.dataSources.map,
                 dataType: 'json',
@@ -168,12 +171,11 @@
 
                     // Build the new layers.
                     self._buildVectorLayers(data);
-                    self._isData = true;
 
                     // If a layer was being edited before the save,
                     // make that layer the active edit layer again.
                     if (self._currentEditItem != null) {
-                        self.edit(self._currentEditItem);
+                        self.edit(self._currentEditItem, true);
                     }
 
                 }
@@ -197,7 +199,6 @@
 
                 // Build the layers.
                 var vectorLayer = new OpenLayers.Layer.Vector(item.title);
-                self.map.addLayer(vectorLayer);
 
                 // Empty array to hold features objects.
                 var features = [];
@@ -211,13 +212,15 @@
 
                 // Add the vectors to the layer.
                 vectorLayer.addFeatures(features);
+                vectorLayer.setMap(self.map);
 
                 // Add to associations.
                 self.idToLayer[itemId] = vectorLayer;
                 self.layerToId[vectorLayer.id] = itemId;
 
-                // Add to the layers array.
+                // Add to the layers array and add to map.
                 self._currentVectorLayers.push(vectorLayer);
+                self.map.addLayer(vectorLayer);
 
             });
 
@@ -278,16 +281,15 @@
             // in preparation for the instantiation of the vector editing
             // controls.
             if (this.options.mode == 'edit') {
-                this.clickControl.unselectAll();
-                this.highlightControl.deactivate();
-                this.clickControl.deactivate();
+                // this.clickControl.unselectAll();
+                // this.highlightControl.deactivate();
+                // this.clickControl.deactivate();
             }
 
             // Get the id of the item and try to fetch the layer.
             var itemId = item.attr('recordid');
             this._currentEditLayer = this.idToLayer[itemId];
             this._currentEditId = itemId;
-            this._newVectors = false;
 
             // Record the id of the current edit layer, so that the layer can be
             // reactivated as the current layer after save.
@@ -296,14 +298,14 @@
             // If the item does not have an existing vector layer, create a new one.
             if (!this._currentEditLayer) {
 
+                console.log('test');
+
                 var itemName = item.find('span.item-title-text').text();
                 this._currentEditLayer = new OpenLayers.Layer.Vector(itemName);
                 this.map.addLayer(this._currentEditLayer);
 
                 // Push the edit layer onto the non-base layers stack.
                 this._currentVectorLayers.push(this._currentEditLayer);
-
-                this._newVectors = true;
                 this.idToLayer[itemId] = this._currentEditLayer;
 
             }
