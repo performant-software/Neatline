@@ -167,18 +167,14 @@
 
                 success: function(data) {
 
-                    // Build the new layers.
+                    // Build the new layers and add default click controls.
                     self._buildVectorLayers(data);
+                    self._addClickControls();
 
                     // If a layer was being edited before the save,
                     // make that layer the active edit layer again.
                     if (self._currentEditItem != null) {
-                        self._addClickControls();
                         self.edit(self._currentEditItem, true);
-                    }
-
-                    else {
-                        self._addClickControls();
                     }
 
                 }
