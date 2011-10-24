@@ -40,11 +40,6 @@
                 fade_duration: 500
             },
 
-            // CSS constants.
-            css: {
-
-            },
-
             // Hexes.
             colors: {
                 neatline_purple: '#724E85',
@@ -61,7 +56,7 @@
             this.params = Neatline;
 
             // Ignition.
-            // this._instantiateOpenLayers();
+            this._instantiateOpenLayers();
 
             // Trackers and buckets.
             this._currentVectorLayers = [];
@@ -146,17 +141,24 @@
 
             var self = this;
 
-            // Clear existing vectors.
-            // $.each(this.idToLayer, function(i, layer) {
-            //     self.map.removeLayer(layer);
-            //     layer.destroy();
-            // });
-
-            if (this.map != undefined) {
-                this.map.destroy();
+            // If there are existing click and highlight controls, destroy them.
+            if (this.highlightControl != undefined) {
+                this.map.removeControl(this.highlightControl);
+                this.highlightControl.destroy();
+                this.highlightControl = undefined;
             }
 
-            this._instantiateOpenLayers();
+            if (this.clickControl != undefined) {
+                this.map.removeControl(this.clickControl);
+                this.clickControl.destroy();
+                this.clickControl = undefined;
+            }
+
+            // Clear existing vectors.
+            $.each(this._currentVectorLayers, function(i, layer) {
+                self.map.removeLayer(layer);
+                layer.destroy();
+            });
 
             // Empty out the containers.
             this._currentVectorLayers = [];
@@ -182,6 +184,10 @@
                     // make that layer the active edit layer again.
                     if (self._currentEditItem != null) {
                         self.edit(self._currentEditItem, true);
+                    }
+
+                    else {
+                        self._addClickControls();
                     }
 
                 }
@@ -230,8 +236,6 @@
 
             });
 
-            self._addClickControls();
-
         },
 
         _addClickControls: function() {
@@ -241,11 +245,13 @@
             // If there are existing click and highlight controls, destroy them.
             if (this.highlightControl != undefined) {
                 this.map.removeControl(this.highlightControl);
+                this.highlightControl.destroy();
                 this.highlightControl = undefined;
             }
 
             if (this.clickControl != undefined) {
                 this.map.removeControl(this.clickControl);
+                this.clickControl.destroy();
                 this.clickControl = undefined;
             }
 
@@ -283,8 +289,14 @@
 
             var self = this;
 
-            this.clickControl.deactivate();
-            this.highlightControl.deactivate();
+            if (this.clickControl != undefined) {
+                this.clickControl.unselectAll();
+                this.clickControl.deactivate();
+            }
+
+            if (this.highlightControl != undefined) {
+                this.highlightControl.deactivate();
+            }
 
             // Get the id of the item and try to fetch the layer.
             var itemId = item.attr('recordid');
@@ -342,6 +354,19 @@
 
             ];
 
+            // Scrub existing modifyFeatures and editToolbar controls.
+            // if (this.modifyFeatures != undefined) {
+            //     this.map.removeControl(this.modifyFeatures);
+            //     this.modifyFeatures.destroy();
+            //     this.modifyFeatures = undefined;
+            // }
+
+            // if (this.editToolbar != undefined) {
+            //     this.map.removeControl(this.editToolbar);
+            //     this.editToolbar.destroy();
+            //     this.editToolbar = undefined;
+            // }
+
             // Instantiate the modify feature control.
             this.modifyFeatures = new OpenLayers.Control.ModifyFeature(this._currentEditLayer, {
 
@@ -352,12 +377,6 @@
                 }
 
             });
-
-            // If there is an existing edit toolbar, scrub it.
-            if (this.editToolbar != undefined) {
-                this.map.removeControl(this.editToolbar);
-                this.editToolbar = undefined;
-            }
 
             // Instantiate the edit toolbar.
             this.editToolbar = new OpenLayers.Control.Panel({
@@ -518,8 +537,7 @@
 
             this.modifyFeatures.selectControl.unselectAll();
 
-            // Push each of the wkt representations of the geometry
-            // onto the array.
+            // Push the wkt's onto the array.
             $.each(this._currentEditLayer.features, function(i, feature) {
                 wkts[i] = feature.geometry.toString();
             });
