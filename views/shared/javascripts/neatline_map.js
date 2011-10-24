@@ -142,17 +142,7 @@
             var self = this;
 
             // If there are existing click and highlight controls, destroy them.
-            if (this.highlightControl != undefined) {
-                this.map.removeControl(this.highlightControl);
-                this.highlightControl.destroy();
-                this.highlightControl = undefined;
-            }
-
-            if (this.clickControl != undefined) {
-                this.map.removeControl(this.clickControl);
-                this.clickControl.destroy();
-                this.clickControl = undefined;
-            }
+            this._removeClickControls();
 
             // Clear existing vectors.
             $.each(this._currentVectorLayers, function(i, layer) {
@@ -243,26 +233,16 @@
             var self = this;
 
             // If there are existing click and highlight controls, destroy them.
-            if (this.highlightControl != undefined) {
-                this.map.removeControl(this.highlightControl);
-                this.highlightControl.destroy();
-                this.highlightControl = undefined;
-            }
-
-            if (this.clickControl != undefined) {
-                this.map.removeControl(this.clickControl);
-                this.clickControl.destroy();
-                this.clickControl = undefined;
-            }
+            this._removeClickControls();
 
             // Create the highlight and click control.
-            this.highlightControl = new OpenLayers.Control.SelectFeature(self._currentVectorLayers, {
+            this.highlightControl = new OpenLayers.Control.SelectFeature(this._currentVectorLayers, {
                 hover: true,
                 highlightOnly: true,
                 renderIntent: 'temporary'
             });
 
-            this.clickControl = new OpenLayers.Control.SelectFeature(self._currentVectorLayers, {
+            this.clickControl = new OpenLayers.Control.SelectFeature(this._currentVectorLayers, {
                 clickout: true,
                 onSelect: function(feature) {
 
@@ -285,18 +265,28 @@
 
         },
 
+        _removeClickControls: function() {
+
+            // If there are existing click and highlight controls, destroy them.
+            if (this.highlightControl != undefined) {
+                this.map.removeControl(this.highlightControl);
+                this.highlightControl.destroy();
+                this.highlightControl = undefined;
+            }
+
+            if (this.clickControl != undefined) {
+                this.map.removeControl(this.clickControl);
+                this.clickControl.destroy();
+                this.clickControl = undefined;
+            }
+
+        },
+
         edit: function(item, immediate) {
 
             var self = this;
 
-            if (this.clickControl != undefined) {
-                this.clickControl.unselectAll();
-                this.clickControl.deactivate();
-            }
-
-            if (this.highlightControl != undefined) {
-                this.highlightControl.deactivate();
-            }
+            this._removeClickControls();
 
             // Get the id of the item and try to fetch the layer.
             var itemId = item.attr('recordid');
