@@ -298,8 +298,6 @@
             // If the item does not have an existing vector layer, create a new one.
             if (!this._currentEditLayer) {
 
-                console.log('test');
-
                 var itemName = item.find('span.item-title-text').text();
                 this._currentEditLayer = new OpenLayers.Layer.Vector(itemName);
                 this.map.addLayer(this._currentEditLayer);
