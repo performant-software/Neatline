@@ -28,7 +28,9 @@
 
             // Markup hooks.
             markup: {
-
+                dropdown_container_id: 'configure-layout',
+                layout_builder_id: 'layout-builder',
+                dropdown_class: 'dropdown-toggle'
             },
 
             // Animation constants.
@@ -40,7 +42,63 @@
 
         _create: function() {
 
-            console.log('test');
+            // Getters.
+            this.button = $('a.' + this.options.markup.dropdown_class);
+            this.dropdownContainer = $('#' + this.options.markup.dropdown_container_id);
+            this.layoutBuilder = $('#' + this.options.markup.layout_builder_id);
+
+            // Trackers.
+            this._expanded = false;
+
+            // Gloss the button.
+            this._addButtonEvents();
+
+            // Instantiate the layout builder.
+            this.layoutBuilder.layoutbuilder();
+
+        },
+
+        _addButtonEvents: function() {
+
+            var self = this;
+
+            this.button.bind({
+
+                'mousedown': function() {
+
+                    switch (self._expanded) {
+
+                        case false:
+                            self.show();
+                        break;
+
+                        case true:
+                            self.hide();
+                        break;
+
+                    }
+
+                },
+
+                'click': function(event) {
+                    event.preventDefault();
+                }
+
+            });
+
+        },
+
+        show: function() {
+
+            this._expanded = !this._expanded;
+            console.log('show');
+
+        },
+
+        hide: function() {
+
+            this._expanded = !this._expanded;
+            console.log('hide');
 
         }
 

@@ -85,23 +85,23 @@
             this.buttons = $('#' + this.options.options_id);
             this.dragbox = $('#' + this.options.dragbox_id);
 
-            // Getters for the hidden form attributes.
-            this.top_element_input = $('#' + this.options.top_element_input_id);
-            this.udi_position_input = $('#' + this.options.udi_position_input_id);
-            this.udi_height_input = $('#' + this.options.udi_height_input_id);
-            this.is_map_input = $('#' + this.options.is_map_input_id);
-            this.is_timeline_input = $('#' + this.options.is_timeline_input_id);
-            this.is_undated_items_input = $('#' + this.options.is_undated_items_input_id);
+            // // Getters for the hidden form attributes.
+            // this.top_element_input = $('#' + this.options.top_element_input_id);
+            // this.udi_position_input = $('#' + this.options.udi_position_input_id);
+            // this.udi_height_input = $('#' + this.options.udi_height_input_id);
+            // this.is_map_input = $('#' + this.options.is_map_input_id);
+            // this.is_timeline_input = $('#' + this.options.is_timeline_input_id);
+            // this.is_undated_items_input = $('#' + this.options.is_undated_items_input_id);
 
-            // Getters for map and timeline select dropdowns.
-            this.map_select = $('#' + this.options.map_select_id);
-            this.timeline_select = $('#' + this.options.timeline_select_id);
+            // // Getters for map and timeline select dropdowns.
+            // this.map_select = $('#' + this.options.map_select_id);
+            // this.timeline_select = $('#' + this.options.timeline_select_id);
 
             // Set dropdown select tracker default, wire the
             // layout builder up with the selects.
-            this._last_map_dropdown_selection = this.options.no_selection_string;
-            this._last_timeline_dropdown_selection = this.options.no_selection_string;
-            this._addToggleEvents();
+            // this._last_map_dropdown_selection = this.options.no_selection_string;
+            // this._last_timeline_dropdown_selection = this.options.no_selection_string;
+            // this._addToggleEvents();
 
             // Get fixed pixel values for heights.
             this._getPxConstants();
@@ -128,12 +128,12 @@
 
         _setStartingParameters: function() {
 
-            var top_element_starter = this.top_element_input.attr('value');
-            var undated_items_position_starter = this.udi_position_input.attr('value');
-            var undated_items_height_starter = this.udi_height_input.attr('value');
-            var is_map_starter = this.is_map_input.attr('value');
-            var is_timeline_starter = this.is_timeline_input.attr('value');
-            var is_undated_items_starter = this.is_undated_items_input.attr('value');
+            var top_element_starter = Neatline.top_element;
+            var undated_items_position_starter = Neatline.undated_items_position;
+            var undated_items_height_starter = Neatline.undated_items_height;
+            var is_map_starter = Neatline.is_map;
+            var is_timeline_starter = Neatline.is_timeline;
+            var is_undated_items_starter = Neatline.is_undated_items;
 
             this._top_element = (top_element_starter) ? top_element_starter :
                 this.options.def_top_element;
@@ -153,28 +153,10 @@
             this._is_undated_items = (is_undated_items_starter) ? is_undated_items_starter :
                 this.options.def_is_undated_items;
 
-            this.top_element_input.attr('value', this._top_element);
-            this.udi_position_input.attr('value', this._undated_items_position);
-            this.udi_height_input.attr('value', this._undated_items_height);
-            this.is_map_input.attr('value', this._is_map);
-            this.is_timeline_input.attr('value', this._is_timeline);
-            this.is_undated_items_input.attr('value', this._is_undated_items);
-
-            // If there are dropdown selects (on add page), fire change on them.
-            if (this.map_select.length > 0 && this.timeline_select.length > 0) {
-                this.map_select.trigger('change');
-                this.timeline_select.trigger('change');
-            }
-
             // If not (on edit page), enable the toggle buttons directly.
-            else {
-                this.map_toggle.togglebutton('enable');
-                this.map_toggle.togglebutton('press');
-                this.timeline_toggle.togglebutton('enable');
-                this.timeline_toggle.togglebutton('press');
-                this.undated_items_toggle.togglebutton('enable');
-                this.undated_items_toggle.togglebutton('press');
-            }
+            this.map_toggle.togglebutton('enable');
+            this.timeline_toggle.togglebutton('enable');
+            this.undated_items_toggle.togglebutton('enable');
 
         },
 
@@ -184,14 +166,9 @@
             this._dragbox_width = this.dragbox.width();
             this._dragbox_position = this.dragbox.offset();
 
-            this._top_block_height = this._dragbox_height *
-                (this.options.top_block_percentage/100);
-
-            this._bottom_block_height = this._dragbox_height -
-                this._top_block_height;
-
-            this._undated_items_left_offset = this._dragbox_width -
-                this.options.undated_items_width;
+            this._top_block_height = this._dragbox_height * (this.options.top_block_percentage/100);
+            this._bottom_block_height = this._dragbox_height - this._top_block_height;
+            this._undated_items_left_offset = this._dragbox_width - this.options.undated_items_width;
 
         },
 
@@ -217,21 +194,21 @@
             this.undated_items_toggle = $('#toggle-undated-items');
 
             this.map_toggle.togglebutton({
-                pressed_by_default: false,
-                enabled_by_default: false,
+                pressed_by_default: Neatline.is_map,
+                enabled_by_default: true,
                 press: $.proxy(this._toggleMap, this),
                 unpress: $.proxy(this._toggleMap, this)
             });
 
             this.timeline_toggle.togglebutton({
-                pressed_by_default: false,
-                enabled_by_default: false,
+                pressed_by_default: Neatline.is_timeline,
+                enabled_by_default: true,
                 press: $.proxy(this._toggleTimeline, this),
                 unpress: $.proxy(this._toggleTimeline, this)
             });
 
             this.undated_items_toggle.togglebutton({
-                pressed_by_default: false,
+                pressed_by_default: Neatline.is_undated_items,
                 visible_by_default: false,
                 press: $.proxy(this._toggleUndatedItems, this),
                 unpress: $.proxy(this._toggleUndatedItems, this)
@@ -450,7 +427,6 @@
                 case true:
 
                     this._is_map = false;
-                    this.is_map_input.attr('value', this._is_map);
 
                     // Display none the map.
                     this.map_drag.css('display', 'none');
@@ -460,7 +436,6 @@
                 case false:
 
                     this._is_map = true;
-                    this.is_map_input.attr('value', this._is_map);
 
                     // Show the div.
                     this.map_drag.css('display', 'block');
@@ -481,7 +456,6 @@
                 case true:
 
                     this._is_timeline = false;
-                    this.is_timeline_input.attr('value', this._is_timeline);
 
                     // Display none the timeline.
                     this.timeline_drag.css('display', 'none');
@@ -498,7 +472,6 @@
                 case false:
 
                     this._is_timeline = true;
-                    this.is_timeline_input.attr('value', this._is_timeline);
 
                     // Show the div.
                     this.timeline_drag.css('display', 'block');
@@ -525,7 +498,6 @@
 
                 case true:
 
-                    this._is_undated_items = false;
                     this.is_undated_items_input.attr('value', this._is_undated_items);
 
                     // Display none the timeline.
@@ -536,7 +508,6 @@
                 case false:
 
                     this._is_undated_items = true;
-                    this.is_undated_items_input.attr('value', this._is_undated_items);
 
                     // Show the div.
                     this.undated_items_drag.css('display', 'block');
