@@ -386,7 +386,9 @@
                     self._body.css('cursor', 'auto');
 
                     // Resize the expanded edit forms.
-                    self._resizeForms();
+                    if (self._currentFormItem != null) {
+                        self._resizeForms();
+                    }
 
                 }
 
