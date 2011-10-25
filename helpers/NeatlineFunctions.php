@@ -55,6 +55,8 @@ function neatline_queueLayoutBuilderCssAndJs()
     queue_js('admin/layout_builder', 'javascripts');
     queue_js('admin/toggle_button', 'javascripts');
 
+    queue_css('layout-builder');
+
 }
 
 /**
@@ -80,11 +82,13 @@ function neatline_queueEditorAssets()
 
     queue_css('bootstrap-1.2.0');
     queue_css('neatline-editor');
+    queue_css('layout-builder');
 
     queue_js('editor/item_editor', 'javascripts');
     queue_js('editor/item_filter', 'javascripts');
     queue_js('editor/small_scroll', 'javascripts');
     queue_js('editor/edit_geometry', 'javascripts');
+    queue_js('admin/layout_builder', 'javascripts');
     queue_js('editor/_deployment', 'javascripts');
 
 }

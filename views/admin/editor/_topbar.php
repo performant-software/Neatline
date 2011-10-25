@@ -32,4 +32,8 @@
 
     <?php echo $this->partial('editor/_topbar_navigation.php'); ?>
 
+    <div id="configure-layout">
+        <?php echo $this->partial('index/_layout_builder.php'); ?>
+    </div>
+
 </div>

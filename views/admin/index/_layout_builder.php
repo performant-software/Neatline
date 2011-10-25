@@ -33,12 +33,6 @@
         <span id="toggle-timeline">Timeline</span>
         <span id="toggle-undated-items">Undated Items</span>
 
-        <!--
-        <input type="checkbox" id="toggle_map" /><label for="toggle_map">Map</label>
-        <input type="checkbox" id="toggle_timeline" /><label for="toggle_timeline">Timeline</label>
-        <input type="checkbox" id="toggle_undated_items" /><label for="toggle_undated_items">Undated Items</label>
-        -->
-
     </div>
 
     <div id="drag-box"></div>

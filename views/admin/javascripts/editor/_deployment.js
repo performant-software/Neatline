@@ -23,7 +23,9 @@ jQuery(document).ready(function($) {
 
     var neatlineContainer = $('#neatline-editor');
     var editorContainer = $('#item-browser');
+    var layoutBuilderContainer = $('#configure-layout');
 
+    // Editor instantiation.
     editorContainer.itemeditor({
 
         'neatlineready': function() {
@@ -113,5 +115,8 @@ jQuery(document).ready(function($) {
         }
 
     });
+
+    // Layout builder instantiation.
+    layoutBuilderContainer.configurelayout();
 
 });

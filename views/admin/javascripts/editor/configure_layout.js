@@ -40,7 +40,7 @@
 
         _create: function() {
 
-
+            console.log('test');
 
         }
 

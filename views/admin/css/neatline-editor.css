@@ -634,3 +634,11 @@ table#items td.col-2 {
     width: 45px;
     right: 286px;
 }
+
+
+/* Configure layout */
+
+#configure-layout {
+    background-color: #FFFEF5;
+    width: 640px;
+}
