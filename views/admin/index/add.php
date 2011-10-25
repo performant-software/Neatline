@@ -62,16 +62,6 @@ head(array('content_class' => 'neatline'));
 
     <hr>
 
-    <h2 class="neatline-label">Configure Layout:</h2>
-    <?php echo $this->partial('index/_layout_builder.php'); ?>
-
-    <?php echo neatline_hiddenElement('top_element', $neatline->top_element); ?>
-    <?php echo neatline_hiddenElement('undated_items_position', $neatline->undated_items_position); ?>
-    <?php echo neatline_hiddenElement('undated_items_height', $neatline->undated_items_height); ?>
-    <?php echo neatline_hiddenElement('is_map', $neatline->is_map); ?>
-    <?php echo neatline_hiddenElement('is_timeline', $neatline->is_timeline); ?>
-    <?php echo neatline_hiddenElement('is_undated_items', $neatline->is_timeline); ?>
-
     <?php echo neatline_buttonTo('', 'save_neatline',
         'Create Neatline', array('class' => 'neatline btn primary'), 'create-neatline', array(), false, 'create-fieldset'); ?>
 

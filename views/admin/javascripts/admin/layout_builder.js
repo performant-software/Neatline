@@ -1525,11 +1525,3 @@
 
 
 })( jQuery );
-
-
-// Usage.
-jQuery(document).ready(function($) {
-
-    $('#layout-builder').layoutbuilder();
-
-});
