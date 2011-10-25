@@ -71,11 +71,11 @@
 
 #omeka-logo {
     float: right;
-    /* margin: 8px 20px 0 20px;*/
 }
 
 a.omeka-logo {
-    padding: 8px 20px 0 20px !important;
+    padding: 10px 15px 0 15px !important;
+    height: 53px;
 }
 
 span.top-bar-title {
@@ -106,15 +106,15 @@ span.top-bar-title {
 .topbar div > ul a, .nav a {
   font-family: 'Crimson Text', Georgia, serif;
   font-size: 1.6em !important;
-  /* height: 100%;*/
+  padding: 16px 15px 18px 15px;
   display: block;
   float: none;
-  padding: 16px 15px 11px 15px;
   line-height: 19px;
   text-decoration: none;
   cursor: pointer;
   color: #f9f9f9;
-  z-index: -99;
+  z-index: -99 !important;
+  margin: 0 0 0 10px;
 }
 
 .topbar div > ul a:hover, .nav a:hover {
@@ -594,4 +594,43 @@ table#items td.col-2 {
 
 .olControlEditingToolbar {
     opacity: 0;
+}
+
+#edit-geometry-button {
+    top: 37px;
+}
+
+.geo-edit {
+    z-index: 999;
+    position: absolute;
+    padding: 4px 5px !important;
+    font-size: 0.9em;
+    top: 5px;
+    width: 63px;
+    display: none !important;
+    -webkit-transition: 0.0s linear all !important;
+}
+
+#rotate-button {
+    font-size: 0.85em;
+    width: 52px;
+    right: 124px;
+}
+
+#scale-button {
+    font-size: 0.85em;
+    width: 47px;
+    right: 182px;
+}
+
+#drag-button {
+    font-size: 0.85em;
+    width: 45px;
+    right: 235px;
+}
+
+#delete-button {
+    font-size: 0.85em;
+    width: 45px;
+    right: 286px;
 }

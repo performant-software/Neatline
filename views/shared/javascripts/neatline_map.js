@@ -241,8 +241,6 @@
 
             this.clickControl = new OpenLayers.Control.SelectFeature(this._currentVectorLayers, {
 
-                clickout: true,
-
                 onSelect: function(feature) {
 
                     // Store the feature in the tracker.
@@ -308,6 +306,10 @@
         edit: function(item, immediate) {
 
             var self = this;
+
+            if (this.highlightControl !== undefined) {
+                this.highlightControl.deactivate();
+            }
 
             // Get the id of the item and try to fetch the layer.
             var itemId = item.attr('recordid');
