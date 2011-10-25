@@ -35,16 +35,6 @@
             // Animation constants.
             animation: {
                 fade_duration: 500
-            },
-
-            // CSS constants.
-            css: {
-
-            },
-
-            // Hexes.
-            colors: {
-
             }
 
         },

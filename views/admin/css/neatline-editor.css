@@ -114,7 +114,7 @@ span.top-bar-title {
   cursor: pointer;
   color: #f9f9f9;
   z-index: -99 !important;
-  margin: 0 0 0 10px;
+  margin: 0 0 0 0;
 }
 
 .topbar div > ul a:hover, .nav a:hover {
