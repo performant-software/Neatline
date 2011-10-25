@@ -426,8 +426,8 @@
                     // If there is a selected feature, unselect and reselect it to apply
                     // the new configuration.
                     if (feature != null) {
-                        self.modifyFeatures.selectControl.unselect(feature);
-                        self.modifyFeatures.selectControl.select(feature);
+                        self.modifyFeatures.unselectFeature(feature);
+                        self.modifyFeatures.selectFeature(feature);
                     }
 
                 },
@@ -437,7 +437,7 @@
                     if (self.modifyFeatures.feature) {
 
                         var feature = self.modifyFeatures.feature;
-                        self.modifyFeatures.selectControl.unselect(feature);
+                        self.modifyFeatures.unselectFeature(feature);
                         self._currentEditLayer.destroyFeatures([ feature ]);
 
                     }

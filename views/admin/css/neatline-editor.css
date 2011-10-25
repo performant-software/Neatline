@@ -100,21 +100,21 @@ span.top-bar-title {
 
 .topbar div > ul > li, .nav > li {
   display: block;
-  height: 100%;
+  height: 53px;
 }
 
 .topbar div > ul a, .nav a {
   font-family: 'Crimson Text', Georgia, serif;
-  font-size: 1.3em !important;
+  font-size: 1.6em !important;
+  /* height: 100%;*/
   display: block;
   float: none;
-  padding: 18px 15px 11px 15px;
+  padding: 16px 15px 11px 15px;
   line-height: 19px;
   text-decoration: none;
-  font-size: 1.1em;
   cursor: pointer;
   color: #f9f9f9;
-  z-index: -1;
+  z-index: -99;
 }
 
 .topbar div > ul a:hover, .nav a:hover {
