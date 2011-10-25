@@ -144,19 +144,33 @@
             this._undated_items_height = (undated_items_height_starter) ? undated_items_height_starter :
                 this.options.def_udi_height;
 
-            this._is_map = (is_map_starter) ? is_map_starter :
+            this._is_map = (is_map_starter == 1) ? true :
                 this.options.def_is_map;
 
-            this._is_timeline = (is_timeline_starter) ? is_timeline_starter :
+            this._is_timeline = (is_timeline_starter == 1) ? true :
                 this.options.def_is_timeline;
 
-            this._is_undated_items = (is_undated_items_starter) ? is_undated_items_starter :
+            this._is_undated_items = (is_undated_items_starter == 1) ? true :
                 this.options.def_is_undated_items;
 
             // If not (on edit page), enable the toggle buttons directly.
             this.map_toggle.togglebutton('enable');
             this.timeline_toggle.togglebutton('enable');
             this.undated_items_toggle.togglebutton('enable');
+
+            if (this._is_map) {
+                this.map_toggle.togglebutton('press');
+            }
+
+            if (this._is_timeline) {
+                this.timeline_toggle.togglebutton('press');
+            }
+
+            if (this._is_undated_items) {
+                this.undated_items_toggle.togglebutton('press');
+            }
+
+            console.log(Neatline);
 
         },
 
@@ -194,21 +208,21 @@
             this.undated_items_toggle = $('#toggle-undated-items');
 
             this.map_toggle.togglebutton({
-                pressed_by_default: Neatline.is_map,
-                enabled_by_default: true,
+                pressed_by_default: true,
+                enabled_by_default: false,
                 press: $.proxy(this._toggleMap, this),
                 unpress: $.proxy(this._toggleMap, this)
             });
 
             this.timeline_toggle.togglebutton({
-                pressed_by_default: Neatline.is_timeline,
-                enabled_by_default: true,
+                pressed_by_default: true,
+                enabled_by_default: false,
                 press: $.proxy(this._toggleTimeline, this),
                 unpress: $.proxy(this._toggleTimeline, this)
             });
 
             this.undated_items_toggle.togglebutton({
-                pressed_by_default: Neatline.is_undated_items,
+                pressed_by_default: true,
                 visible_by_default: false,
                 press: $.proxy(this._toggleUndatedItems, this),
                 unpress: $.proxy(this._toggleUndatedItems, this)
@@ -498,7 +512,7 @@
 
                 case true:
 
-                    this.is_undated_items_input.attr('value', this._is_undated_items);
+                    this._is_undated_items = false;
 
                     // Display none the timeline.
                     this.undated_items_drag.css('display', 'none');
@@ -1036,8 +1050,6 @@
                     this._undated_items_height
                 ];
 
-                this.__updateHiddenInputs();
-
             }
 
         },
@@ -1101,8 +1113,6 @@
             this._animate_position_tag(this.timeline_drag, newTimelineHeight);
             this._animate_position_tag(this.undated_items_drag, newUndatedItemsHeight);
 
-            this.__updateHiddenInputs();
-
         },
 
         __slideMap: function(ending_slide) {
@@ -1156,8 +1166,6 @@
                     this._undated_items_height
                 ];
 
-                this.__updateHiddenInputs();
-
             }
 
         },
@@ -1198,7 +1206,6 @@
             }
 
             this._animate_position_tag(this.undated_items_drag, newUndatedItemsHeight);
-            this.__updateHiddenInputs();
 
         },
 

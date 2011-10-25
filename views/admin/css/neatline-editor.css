@@ -44,6 +44,7 @@
     -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), inset 0 -1px 0 rgba(0, 0, 0, 0.1);
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), inset 0 -1px 0 rgba(0, 0, 0, 0.1);
     vertical-align: middle;
+    z-index: 99;
 }
 
 #search-box {
@@ -641,4 +642,18 @@ table#items td.col-2 {
 #configure-layout {
     background-color: #FFFEF5;
     width: 640px;
+    padding: 1.5em;
+    position: absolute;
+    height: auto;
+    top: 0;
+    right: 0;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#724e85', endColorstr='#543664', GradientType=0);
+    -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.35), inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    border: 1px solid #745982;
+    z-index: 1;
 }
