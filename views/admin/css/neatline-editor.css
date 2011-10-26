@@ -609,6 +609,8 @@ table#items td.col-2 {
     top: 5px;
     width: 63px;
     display: none !important;
+    -moz-transition: 0.0s linear all !important;
+    transition: 0.0s linear all !important;
     -webkit-transition: 0.0s linear all !important;
 }
 

@@ -102,6 +102,7 @@
             // loadouts that triggered a div slide.
             this._last_map_slide_params = null;
             this._last_timeline_slide_params = null;
+            this._last_undated_items_slide_params = null;
 
             // Gloss.
             this._addDragEvents();
@@ -302,13 +303,12 @@
                 },
 
                 'mouseleave': function() {
-                    if (!self._is_dragging) {
-                        self.__mapHighlight('leave');
-                    }
+                    self.__mapHighlight('leave');
                 },
 
                 'mousedown': function(e) {
                     if (!self._is_dragging) {
+                        self._current_dragger = 'map';
                         self.__doMapDrag(e);
                     }
                 }
@@ -325,13 +325,12 @@
                 },
 
                 'mouseleave': function() {
-                    if (!self._is_dragging) {
-                        self.__timelineHighlight('leave');
-                    }
+                    self.__timelineHighlight('leave');
                 },
 
                 'mousedown': function(e) {
                     if (!self._is_dragging) {
+                        self._current_dragger = 'timeline';
                         self.__doTimelineDrag(e);
                     }
                 }
@@ -348,13 +347,12 @@
                 },
 
                 'mouseleave': function() {
-                    if (!self._is_dragging) {
-                        self.__undatedItemsHighlight('leave');
-                    }
+                    self.__undatedItemsHighlight('leave');
                 },
 
                 'mousedown': function(e) {
                     if (!self._is_dragging) {
+                        self._current_dragger = 'undated';
                         self.__doUndatedItemsDrag(e);
                     }
                 }
@@ -531,7 +529,7 @@
 
             }
 
-            this.map_drag.animate({
+            this.map_drag.clearQueue().animate({
                 'background-color': target
             }, this.options.gloss_fade_duration);
 
@@ -552,7 +550,7 @@
 
             }
 
-            this.timeline_drag.animate({
+            this.timeline_drag.clearQueue().animate({
                 'background-color': target
             }, this.options.gloss_fade_duration);
 
@@ -624,7 +622,38 @@
                             // of the timeline div, slide the timeline up.
                             if (e.pageY > (self._top_block_height + self._dragbox_position.top)) {
                                 self._top_element = 'timeline';
-                                self.__slideTimelineAndUndatedItems(false);
+                                self.__slideTimeline(false);
+                                self.__slideUndatedItems(false);
+                            }
+
+                            else {
+
+                                if (self._is_undated_items && self._undated_items_vertical_position == 'top'
+                                   && self._undated_items_horizontal_position == 'left') {
+
+                                    // If the cursor crosses over the centerline going left.
+                                    if (e.pageX < (self._dragbox_position.left + (self._dragbox_width / 2))) {
+
+                                        self._undated_items_horizontal_position = 'right';
+                                        self.__slideUndatedItems(false);
+
+                                    }
+
+                                }
+
+                                else if (self._is_undated_items && self._undated_items_vertical_position == 'top'
+                                   && self._undated_items_horizontal_position == 'right') {
+
+                                    // If the cursor crosses over the centerline going right.
+                                    if (e.pageX > (self._dragbox_position.left + (self._dragbox_width / 2))) {
+
+                                        self._undated_items_horizontal_position = 'left';
+                                        self.__slideUndatedItems(false);
+
+                                    }
+
+                                }
+
                             }
 
                         }
@@ -636,7 +665,38 @@
                             // of the timeline div, slide the timeline down.
                             if (e.pageY < (self._dragbox_position.top + self._top_block_height)) {
                                 self._top_element = 'map';
-                                self.__slideTimelineAndUndatedItems(false);
+                                self.__slideTimeline(false);
+                                self.__slideUndatedItems(false);
+                            }
+
+                            else {
+
+                                if (self._is_undated_items && self._undated_items_vertical_position == 'bottom'
+                                   && self._undated_items_horizontal_position == 'left') {
+
+                                    // If the cursor crosses over the centerline going left.
+                                    if (e.pageX < (self._dragbox_position.left + (self._dragbox_width / 2))) {
+
+                                        self._undated_items_horizontal_position = 'right';
+                                        self.__slideUndatedItems(false);
+
+                                    }
+
+                                }
+
+                                else if (self._is_undated_items && self._undated_items_vertical_position == 'bottom'
+                                   && self._undated_items_horizontal_position == 'right') {
+
+                                    // If the cursor crosses over the centerline going right.
+                                    if (e.pageX > (self._dragbox_position.left + (self._dragbox_width / 2))) {
+
+                                        self._undated_items_horizontal_position = 'left';
+                                        self.__slideUndatedItems(false);
+
+                                    }
+
+                                }
+
                             }
 
                         }
@@ -667,19 +727,12 @@
             // Get starting div offsets.
             var timelineStartingOffsetX = this.__getTimelineLeftOffset();
             var timelineStartingOffsetY = this.__getTimelineTopOffset();
-            var undatedItemsStartingOffsetX = this.__getUndatedItemsLeftOffset();
-            var undatedItemsStartingOffsetY = this.__getUndatedItemsTopOffset();
 
             // Bind self.
             var self = this;
 
             // Make the drag divs see-through and always on top.
             this.timeline_drag.css({
-                'opacity': 0.5,
-                'z-index': 99
-            });
-
-            this.undated_items_drag.css({
                 'opacity': 0.5,
                 'z-index': 99
             });
@@ -704,7 +757,7 @@
                         // Get current map top offset.
                         var mapTopOffset = self.__getMapTopOffset();
 
-                        // If the map is on the bottom.
+                        // If the timeline is on top.
                         if (self._top_element == 'timeline') {
 
                             // If the cursor dips below the top border
@@ -712,11 +765,42 @@
                             if (e.pageY > (mapTopOffset + self._dragbox_position.top)) {
                                 self._top_element = 'map';
                                 self.__slideMap(false);
+                                self.__slideUndatedItems(false);
+                            }
+
+                            else {
+
+                                if (self._is_undated_items && self._undated_items_vertical_position == 'top'
+                                   && self._undated_items_horizontal_position == 'left') {
+
+                                    // If the cursor crosses over the centerline going left.
+                                    if (e.pageX < (self._dragbox_position.left + (self._dragbox_width / 2))) {
+
+                                        self._undated_items_horizontal_position = 'right';
+                                        self.__slideUndatedItems(false);
+
+                                    }
+
+                                }
+
+                                else if (self._is_undated_items && self._undated_items_vertical_position == 'top'
+                                   && self._undated_items_horizontal_position == 'right') {
+
+                                    // If the cursor crosses over the centerline going right.
+                                    if (e.pageX > (self._dragbox_position.left + (self._dragbox_width / 2))) {
+
+                                        self._undated_items_horizontal_position = 'left';
+                                        self.__slideUndatedItems(false);
+
+                                    }
+
+                                }
+
                             }
 
                         }
 
-                        // If the timeline is on the top.
+                        // If the timeline is on the bottom.
                         else {
 
                             // If the cursor moves above the bottom border
@@ -724,6 +808,37 @@
                             if (e.pageY < (self._dragbox_position.top + self._top_block_height)) {
                                 self._top_element = 'timeline';
                                 self.__slideMap(false);
+                                self.__slideUndatedItems(false);
+                            }
+
+                            else {
+
+                                if (self._is_undated_items && self._undated_items_vertical_position == 'bottom'
+                                   && self._undated_items_horizontal_position == 'left') {
+
+                                    // If the cursor crosses over the centerline going left.
+                                    if (e.pageX < (self._dragbox_position.left + (self._dragbox_width / 2))) {
+
+                                        self._undated_items_horizontal_position = 'right';
+                                        self.__slideUndatedItems(false);
+
+                                    }
+
+                                }
+
+                                else if (self._is_undated_items && self._undated_items_vertical_position == 'bottom'
+                                   && self._undated_items_horizontal_position == 'right') {
+
+                                    // If the cursor crosses over the centerline going right.
+                                    if (e.pageX > (self._dragbox_position.left + (self._dragbox_width / 2))) {
+
+                                        self._undated_items_horizontal_position = 'left';
+                                        self.__slideUndatedItems(false);
+
+                                    }
+
+                                }
+
                             }
 
                         }
@@ -943,10 +1058,11 @@
             var _current_params = [
                 this._top_element,
                 this._undated_items_horizontal_position,
+                this._undated_items_vertical_position,
                 this._undated_items_height
             ];
 
-            if (!$.compare(_current_params, this._last_timeline_slide_params)) {
+            if (!$.compare(_current_params, this._last_timeline_slide_params) || this._current_dragger == 'timeline') {
 
                 if (ending_slide) {
 
@@ -962,9 +1078,7 @@
 
                         // On complete, if the slide is an ending
                         // slide, unset the dragging tracker.
-                        if (ending_slide) {
-                            self._is_dragging = false;
-                        }
+                        self._is_dragging = false;
 
                     });
 
@@ -988,71 +1102,11 @@
                 this._last_timeline_slide_params = [
                     this._top_element,
                     this._undated_items_horizontal_position,
+                    this._undated_items_vertical_position,
                     this._undated_items_height
                 ];
 
             }
-
-        },
-
-        __slideTimelineAndUndatedItems: function(ending_slide) {
-
-            var self = this;
-            var newTimelineHeight = this.__getTimelineHeight();
-            var newUndatedItemsHeight = this.__getUndatedItemsHeight();
-
-            if (ending_slide) {
-
-                // Slide the timeline and undated items.
-                this.timeline_drag.stop().animate({
-                    'height': newTimelineHeight,
-                    'width': this.__getTimelineWidth(),
-                    'top': this.__getTimelineTopOffset(),
-                    'left': this.__getTimelineLeftOffset(),
-                    'opacity': 1,
-                    'z-index': 0
-                });
-
-                this.undated_items_drag.stop().animate({
-                    'height': newUndatedItemsHeight,
-                    'width': this.__getUndatedItemsWidth(),
-                    'top': this.__getUndatedItemsTopOffset(),
-                    'left': this.__getUndatedItemsLeftOffset(),
-                    'opacity': 1,
-                    'z-index': 0
-                }, function() {
-
-                    // On complete, if the slide is an ending
-                    // slide, unset the dragging tracker.
-                    if (ending_slide) {
-                        self._is_dragging = false;
-                    }
-
-                });
-
-            }
-
-            else {
-
-                // Slide the timeline and undated items.
-                this.timeline_drag.stop().animate({
-                    'height': newTimelineHeight,
-                    'width': this.__getTimelineWidth(),
-                    'top': this.__getTimelineTopOffset(),
-                    'left': this.__getTimelineLeftOffset()
-                });
-
-                this.undated_items_drag.stop().animate({
-                    'height': newUndatedItemsHeight,
-                    'width': this.__getUndatedItemsWidth(),
-                    'top': this.__getUndatedItemsTopOffset(),
-                    'left': this.__getUndatedItemsLeftOffset()
-                });
-
-            }
-
-            this._animate_position_tag(this.timeline_drag, newTimelineHeight);
-            this._animate_position_tag(this.undated_items_drag, newUndatedItemsHeight);
 
         },
 
@@ -1063,10 +1117,11 @@
             var _current_params = [
                 this._top_element,
                 this._undated_items_horizontal_position,
+                this._undated_items_vertical_position,
                 this._undated_items_height
             ];
 
-            if (!$.compare(_current_params, this._last_map_slide_params)) {
+            if (!$.compare(_current_params, this._last_map_slide_params) || this._current_dragger == 'map') {
 
                 if (ending_slide) {
 
@@ -1079,9 +1134,11 @@
                         'opacity': 1,
                         'z-index': 0
                     }, function() {
+
                         // On complete, if the slide is an ending
                         // slide, unset the dragging tracker.
-                            self._is_dragging = false;
+                        self._is_dragging = false;
+
                     });
 
                 }
@@ -1104,6 +1161,7 @@
                 this._last_map_slide_params = [
                     this._top_element,
                     this._undated_items_horizontal_position,
+                    this._undated_items_vertical_position,
                     this._undated_items_height
                 ];
 
@@ -1115,38 +1173,58 @@
 
             var self = this;
             var newUndatedItemsHeight = this.__getUndatedItemsHeight();
+            var _current_params = [
+                this._top_element,
+                this._undated_items_horizontal_position,
+                this._undated_items_vertical_position,
+                this._undated_items_height
+            ];
 
-            if (ending_slide) {
+            if (!$.compare(_current_params, this._last_undated_items_slide_params) || this._current_dragger == 'undated') {
 
-                // Slide the timeline and undated items.
-                this.undated_items_drag.stop().animate({
-                    'height': newUndatedItemsHeight,
-                    'width': this.__getUndatedItemsWidth(),
-                    'top': this.__getUndatedItemsTopOffset(),
-                    'left': this.__getUndatedItemsLeftOffset(),
-                    'opacity': 1,
-                    'z-index': 0
-                }, function() {
-                    // On complete, if the slide is an ending
-                    // slide, unset the dragging tracker.
+                if (ending_slide) {
+
+                    // Slide the timeline and undated items.
+                    this.undated_items_drag.stop().animate({
+                        'height': newUndatedItemsHeight,
+                        'width': this.__getUndatedItemsWidth(),
+                        'top': this.__getUndatedItemsTopOffset(),
+                        'left': this.__getUndatedItemsLeftOffset(),
+                        'opacity': 1,
+                        'z-index': 0
+                    }, function() {
+
+                        // On complete, if the slide is an ending
+                        // slide, unset the dragging tracker.
                         self._is_dragging = false;
-                });
+
+                    });
+
+                }
+
+                else {
+
+                    // Slide the timeline and undated items.
+                    this.undated_items_drag.stop().animate({
+                        'height': newUndatedItemsHeight,
+                        'width': this.__getUndatedItemsWidth(),
+                        'top': this.__getUndatedItemsTopOffset(),
+                        'left': this.__getUndatedItemsLeftOffset()
+                    });
+
+                }
+
+                this._animate_position_tag(this.undated_items_drag, newUndatedItemsHeight);
+
+                // Record params loadout for the last slide.
+                this._last_undated_items_slide_params = [
+                    this._top_element,
+                    this._undated_items_horizontal_position,
+                    this._undated_items_vertical_position,
+                    this._undated_items_height
+                ];
 
             }
-
-            else {
-
-                // Slide the timeline and undated items.
-                this.undated_items_drag.stop().animate({
-                    'height': newUndatedItemsHeight,
-                    'width': this.__getUndatedItemsWidth(),
-                    'top': this.__getUndatedItemsTopOffset(),
-                    'left': this.__getUndatedItemsLeftOffset()
-                });
-
-            }
-
-            this._animate_position_tag(this.undated_items_drag, newUndatedItemsHeight);
 
         },
 
@@ -1203,7 +1281,11 @@
 
             var height = null;
 
-            if (this._undated_items_height == 'full') {
+            if (this._undated_items_height == 'full'
+               || (!this._is_timeline && this._is_map && this._top_element == 'map' && this._undated_items_vertical_position == 'top')
+               || (!this._is_map && this._is_timeline && this._top_element == 'timeline' && this._undated_items_vertical_position == 'top')
+               || (!this._is_timeline && this._is_map && this._top_element == 'timeline' && this._undated_items_vertical_position == 'bottom')
+               || (!this._is_map && this._is_timeline && this._top_element == 'map' && this._undated_items_vertical_position == 'bottom')) {
                 height = this._dragbox_height;
             }
 
@@ -1225,7 +1307,20 @@
 
         __getUndatedItemsWidth: function() {
 
-            return this.options.undated_items_width;
+            width = this.options.undated_items_width;
+
+            if ((this._is_map && !this._is_timeline) || (this._is_map && !this._is_timeline)) {
+
+                if ((!this._is_timeline && this._top_element == 'map' && this._undated_items_vertical_position == 'bottom')
+                   || (!this._is_map && this._top_element == 'timeline' && this._undated_items_vertical_position == 'bottom')
+                   || (!this._is_timeline && this._top_element == 'timeline' && this._undated_items_vertical_position == 'top')
+                   || (!this._is_map && this._top_element == 'map' && this._undated_items_vertical_position == 'top')) {
+                    width = this._dragbox_width;
+                }
+
+            }
+
+            return width;
 
         },
 
@@ -1282,7 +1377,7 @@
 
             var height = this._top_block_height;
 
-            if (this._is_timeline) {
+            if (this._is_timeline || (this._is_undated_items && this._undated_items_height == 'partial')) {
                 if (this._top_element == 'map') {
                     height = this._top_block_height;
                 }
@@ -1321,7 +1416,8 @@
 
             var offset = 0;
 
-            if (this._top_element == 'timeline' && this._is_timeline) {
+            if (this._top_element == 'timeline' && (this._is_timeline
+               || (this._undated_items_vertical_position == 'top' && this._undated_items_height = 'partial'))) {
                 offset = this._top_block_height;
             }
 
