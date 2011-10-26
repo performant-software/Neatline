@@ -86,7 +86,7 @@
             this.dragbox = $('#' + this.options.dragbox_id);
 
             // Get fixed pixel values for heights.
-            this._getPxConstants();
+            this.getPxConstants();
 
             // Create draggers.
             this._createDraggers();
@@ -145,7 +145,7 @@
 
         },
 
-        _getPxConstants: function() {
+        getPxConstants: function() {
 
             this._dragbox_height = this.dragbox.height();
             this._dragbox_width = this.dragbox.width();
@@ -388,11 +388,11 @@
             });
 
             // Center tags.
-            this._centerAllTags();
+            this.centerAllTags();
 
         },
 
-        _centerAllTags: function() {
+        centerAllTags: function() {
 
             this._position_tag(this.map_drag);
             this._position_tag(this.timeline_drag);

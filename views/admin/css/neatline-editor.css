@@ -642,7 +642,8 @@ table#items td.col-2 {
 /* Configure layout */
 
 #configure-layout {
-    padding: 2em;
+    padding: 0em 2em 0 2em;
+    width: 404px;
     display: none;
     background-color: #fffef8;
     position: absolute;
@@ -655,5 +656,5 @@ table#items td.col-2 {
     -moz-border-radius: 4px;
     border-radius: 4px;
     border: 1px solid #745982;
-    z-index: -99;
+    z-index: 99;
 }

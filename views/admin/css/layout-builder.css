@@ -25,7 +25,7 @@
 
 
 #layout-builder {
-    margin: 1em 0 3em 0;
+    margin: 0.3em 0 1.6em 0;
 }
 
 #drag-box {
@@ -110,4 +110,12 @@ span.drag-tag {
     background-color: #f0f0f0;
     font-size: 1.3em !important;
     line-height: 1.2em;
+}
+
+#layout-builder button {
+    margin: 1em 1em 0 0;
+}
+
+#layout-builder hr {
+    margin: 10px 0;
 }

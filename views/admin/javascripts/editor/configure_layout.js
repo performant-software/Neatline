@@ -60,12 +60,11 @@
             // Trackers.
             this._expanded = false;
 
-            // Instantiate the layout builder.
-            this.layoutBuilder.layoutbuilder();
-
             // Get positioning constants and position.
             this._getPxConstants();
-            this._position();
+
+            // Instantiate the layout builder.
+            this.layoutBuilder.layoutbuilder();
 
             // Gloss the button.
             this._addButtonEvents();
@@ -73,6 +72,7 @@
             // Add resize event.
             this._window.bind('resize', function() {
                 self._position();
+                self._updateLayoutBuilderConstants();
             });
 
         },
@@ -109,11 +109,15 @@
 
         show: function() {
 
-            // Show.
+            // Position.
+            this._position();
+
+            // Show and recalculate positions on the layout builder.
             this.dropdownContainer.css('display', 'block');
+            this._updateLayoutBuilderConstants();
 
             // Animate.
-            this.dropdownContainer.animate({
+            this.dropdownContainer.stop().animate({
                 'top': this.topbarHeight - this.options.css.offset_padding
             }, this.options.animation.duration);
 
@@ -127,8 +131,8 @@
             var self = this;
 
             // Animate.
-            this.dropdownContainer.animate({
-                'top': 0 - this.dropdownHeight - this.options.css.offset_padding + this.topbarHeight
+            this.dropdownContainer.stop().animate({
+                'top': 0 - this.dropdownHeight - this.options.css.offset_padding
             }, this.options.animation.duration, function() {
 
                 // Show.
@@ -146,6 +150,7 @@
             this.dropdownWidth = this.dropdownContainer.outerWidth();
             this.dropdownHeight = this.dropdownContainer.height();
             this.topbarHeight = this.topbar.height();
+            this.buttonWidth = this.button.width();
 
         },
 
@@ -153,8 +158,7 @@
 
             // Get button position and dropdown width.
             var buttonOffset = this.button.offset();
-            var buttonWidth = this.button.width();
-            var buttonLeftBoundary = buttonOffset.left + buttonWidth;
+            var buttonLeftBoundary = buttonOffset.left + this.buttonWidth;
 
             // If closed.
             if (!this._expanded) {
@@ -177,6 +181,13 @@
                 });
 
             }
+
+        },
+
+        _updateLayoutBuilderConstants: function() {
+
+            this.layoutBuilder.layoutbuilder('getPxConstants');
+            this.layoutBuilder.layoutbuilder('centerAllTags');
 
         }
 

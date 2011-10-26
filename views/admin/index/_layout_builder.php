@@ -28,13 +28,20 @@
 <div id="layout-builder">
 
     <div id="options">
-
         <span id="toggle-map">Map</span>
         <span id="toggle-timeline">Timeline</span>
         <span id="toggle-undated-items">Undated Items</span>
-
     </div>
 
     <div id="drag-box"></div>
+
+    <button class="btn primary save">Save Arrangement</button>
+    <button class="btn save">Fix starting viewport positions</button>
+
+    <hr />
+
+    <p>Use the toggle buttons to activate and deactivate blocks; drag the
+    blocks to rearrange them. Click the "Fix starting viewport positions" button
+    to store the current viewport settings as the public defaults.</p>
 
 </div>

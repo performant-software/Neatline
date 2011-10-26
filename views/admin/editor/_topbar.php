@@ -25,15 +25,15 @@
  */
 ?>
 
+<div id="configure-layout">
+    <?php echo $this->partial('index/_layout_builder.php'); ?>
+</div>
+
 <div id="topbar" class="topbar-inner topbar">
 
     <img id="neatline-logo" src="<?php echo img('neatline-logo-white-small.png'); ?>" />
     <span class="top-bar-title"><?php echo $title; ?></span>
 
     <?php echo $this->partial('editor/_topbar_navigation.php'); ?>
-
-    <div id="configure-layout">
-        <?php echo $this->partial('index/_layout_builder.php'); ?>
-    </div>
 
 </div>
