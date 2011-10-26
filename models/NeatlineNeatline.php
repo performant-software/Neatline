@@ -95,16 +95,25 @@ class NeatlineNeatline extends Omeka_record
         $this->added = neatline_getMysqlDatetime();
         $this->name = $_post['title'];
 
-        $this->map_id = $_post['map'];
-        $this->timeline_id = $_post['timeline'];
+        // Check for map and timeline.
+        if (is_numeric($_post['map'])) {
+            $this->map_id = $_post['map'];
+            $this->is_map = 1;
+        } else {
+            $this->map_id = null;
+            $this->is_map = 0;
+        }
 
-        $this->top_element = $_post['top_element'];
-        $this->undated_items_position = $_post['undated_items_position'];
-        $this->undated_items_height = $_post['undated_items_height'];
+        if (is_numeric($_post['timeline'])) {
+            $this->timeline_id = $_post['timeline'];
+            $this->is_timeline = 1;
+        } else {
+            $this->timeline_id = null;
+            $this->is_timeline = 0;
+        }
 
-        $this->is_map = ($_post['is_map'] == 'false') ? 0 : 1;
-        $this->is_timeline = ($_post['is_timeline'] == 'false') ? 0 : 1;
-        $this->is_undated_items = ($_post['is_undated_items'] == 'false') ? 0 : 1;
+        // By default, activate undated items.
+        $this->is_undated_items = 1;
 
     }
 
