@@ -35,7 +35,7 @@
 
     <div id="drag-box"></div>
 
-    <button class="btn primary save">Save Arrangement</button>
+    <button class="btn primary save">Save arrangement</button>
     <button class="btn save">Fix starting viewport positions</button>
 
     <hr />
