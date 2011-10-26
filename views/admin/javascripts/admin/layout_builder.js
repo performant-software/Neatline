@@ -321,18 +321,12 @@
                 'mouseenter': function() {
                     if (!self._is_dragging) {
                         self.__timelineHighlight('enter');
-                        if (self._undated_items_height == 'partial') {
-                            self.__undatedItemsHighlight('enter');
-                        }
                     }
                 },
 
                 'mouseleave': function() {
                     if (!self._is_dragging) {
                         self.__timelineHighlight('leave');
-                        if (self._undated_items_height == 'partial') {
-                            self.__undatedItemsHighlight('leave');
-                        }
                     }
                 },
 
@@ -704,13 +698,6 @@
                         'top': timelineStartingOffsetY + offsetY
                     });
 
-                    if (self._undated_items_height == 'partial') {
-                        self.undated_items_drag.css({
-                            'left': undatedItemsStartingOffsetX + offsetX,
-                            'top': undatedItemsStartingOffsetY + offsetY
-                        });
-                    }
-
                     // If there is a map.
                     if (self._is_map) {
 
@@ -747,7 +734,7 @@
 
                 'mouseup': function() {
 
-                    self.__slideTimelineAndUndatedItems(true);
+                    self.__slideTimeline(true);
                     self._window.unbind('mousemove mouseup');
 
                 }
@@ -912,14 +899,11 @@
                     if (self._undated_items_horizontal_position == 'right') {
 
                         // If the cursor crosses over the centerline going left.
-                        if (e.pageX < (self._dragbox_width / 2)) {
+                        if (e.pageX < (self._dragbox_position.left + (self._dragbox_width / 2))) {
 
                             self._undated_items_horizontal_position = 'left';
                             self.__slideTimeline(false);
-
-                            if (self._undated_items_height == 'full') {
-                                self.__slideMap(false);
-                            }
+                            self.__slideMap(false);
 
                         }
 
@@ -929,14 +913,11 @@
                     else {
 
                         // If the cursor crosses over the centerline going left.
-                        if (e.pageX > (self._dragbox_width / 2)) {
+                        if (e.pageX > (self._dragbox_position.left + (self._dragbox_width / 2))) {
 
                             self._undated_items_horizontal_position = 'right';
                             self.__slideTimeline(false);
-
-                            if (self._undated_items_height == 'full') {
-                                self.__slideMap(false);
-                            }
+                            self.__slideMap(false);
 
                         }
 
@@ -1322,9 +1303,11 @@
 
             var offset = 0;
 
-            if (this._undated_items_height == 'full'
-                && this._is_undated_items
-                && this._undated_items_horizontal_position == 'left') {
+            if (this._is_undated_items && this._undated_items_horizontal_position == 'left'
+                && (this._undated_items_height == 'full'
+                  || (this._undated_items_height == 'partial' &&
+                  ((this._top_element == 'map' && this._undated_items_vertical_position == 'top')
+                  || (this._top_element == 'timeline' && this._undated_items_vertical_position == 'bottom'))))) {
 
                     offset = this.options.undated_items_width;
 
@@ -1383,8 +1366,14 @@
 
             var offset = 0;
 
-            if (this._is_undated_items && this._undated_items_horizontal_position == 'left') {
-                offset = this.options.undated_items_width;
+            if (this._is_undated_items && this._undated_items_horizontal_position == 'left'
+                && (this._undated_items_height == 'full'
+                  || (this._undated_items_height == 'partial' &&
+                  ((this._top_element == 'timeline' && this._undated_items_vertical_position == 'top')
+                  || (this._top_element == 'map' && this._undated_items_vertical_position == 'bottom'))))) {
+
+                    offset = this.options.undated_items_width;
+
             }
 
             return offset;
