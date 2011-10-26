@@ -61,16 +61,16 @@
             // Hex defaults.
             colors: {
                 map: {
-                    default: '#eef7ff',
-                    target: '#dcefff'
+                    default: '#f9f9f9',
+                    target: '#fffcf4'
                 },
                 timeline: {
-                    default: '#fffded',
-                    target: '#fffad2'
+                    default: '#f4f4f4',
+                    target: '#fffcf4'
                 },
                 undated_items: {
-                    default: '#ffedef',
-                    target: '#ffdbdf'
+                    default: '#f0f0f0',
+                    target: '#fffcf4'
                 }
             }
 

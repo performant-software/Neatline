@@ -94,20 +94,20 @@ div.draggable {
 
 span.drag-tag {
     position: relative;
-    color: #636363;
+    color: #835a98;
 }
 
 #drag-map {
-    background-color: #eef7ff;
+    background-color: #f9f9f9;
     width: 100%;
 }
 
 #drag-timeline {
-    background-color: #fffded;
+    background-color: #f4f4f4;
 }
 
 #drag-undated-items {
-    background-color: #ffedef;
+    background-color: #f0f0f0;
     font-size: 1.3em !important;
     line-height: 1.2em;
 }
