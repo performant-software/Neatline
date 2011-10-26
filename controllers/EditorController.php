@@ -60,9 +60,18 @@ class Neatline_EditorController extends Omeka_Controller_Action
         $neatline = $this->_neatlinesTable->find($id);
         $this->view->neatline = $neatline;
 
+        // Get the map and timeline records.
+        $map = $neatline->getMap();
+        $timeline = $neatline->getTimeline();
+
         // Push the map and timeline records into the view.
-        $this->view->map = new GeoserverMap_Map($neatline->getMap());
-        $this->view->timeline = $neatline->getTimeline();
+        if ($map) {
+            $this->view->map = new GeoserverMap_Map($neatline->getMap());
+        }
+
+        if ($timeline) {
+            $this->view->timeline = $neatline->getTimeline();
+        }
 
         $collections = $this->getTable('Collection')->findAll();
         $tags = $this->getTable('Tag')->findAll();
