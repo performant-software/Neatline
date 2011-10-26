@@ -28,33 +28,52 @@
 
             // Markup hooks.
             markup: {
+                topbar_id: 'topbar',
                 dropdown_container_id: 'configure-layout',
                 layout_builder_id: 'layout-builder',
-                dropdown_class: 'dropdown-toggle'
+                dropdown_button_id: 'configure-layout-button'
+            },
+
+            // CSS constants.
+            css: {
+                offset_padding: 3
             },
 
             // Animation constants.
             animation: {
-
+                duration: 400
             }
 
         },
 
         _create: function() {
 
+            var self = this;
+
             // Getters.
-            this.button = $('a.' + this.options.markup.dropdown_class);
+            this._window = $(window);
+            this.button = $('#' + this.options.markup.dropdown_button_id);
             this.dropdownContainer = $('#' + this.options.markup.dropdown_container_id);
             this.layoutBuilder = $('#' + this.options.markup.layout_builder_id);
+            this.topbar = $('#' + this.options.markup.topbar_id);
 
             // Trackers.
             this._expanded = false;
 
+            // Instantiate the layout builder.
+            this.layoutBuilder.layoutbuilder();
+
+            // Get positioning constants and position.
+            this._getPxConstants();
+            this._position();
+
             // Gloss the button.
             this._addButtonEvents();
 
-            // Instantiate the layout builder.
-            this.layoutBuilder.layoutbuilder();
+            // Add resize event.
+            this._window.bind('resize', function() {
+                self._position();
+            });
 
         },
 
@@ -90,15 +109,74 @@
 
         show: function() {
 
-            this._expanded = !this._expanded;
-            console.log('show');
+            // Show.
+            this.dropdownContainer.css('display', 'block');
+
+            // Animate.
+            this.dropdownContainer.animate({
+                'top': this.topbarHeight - this.options.css.offset_padding
+            }, this.options.animation.duration);
+
+            // Update tracker.
+            this._expanded = true;
 
         },
 
         hide: function() {
 
-            this._expanded = !this._expanded;
-            console.log('hide');
+            var self = this;
+
+            // Animate.
+            this.dropdownContainer.animate({
+                'top': 0 - this.dropdownHeight - this.options.css.offset_padding + this.topbarHeight
+            }, this.options.animation.duration, function() {
+
+                // Show.
+                self.dropdownContainer.css('display', 'none');
+
+            });
+
+            // Update tracker.
+            this._expanded = false;
+
+        },
+
+        _getPxConstants: function() {
+
+            this.dropdownWidth = this.dropdownContainer.outerWidth();
+            this.dropdownHeight = this.dropdownContainer.height();
+            this.topbarHeight = this.topbar.height();
+
+        },
+
+        _position: function() {
+
+            // Get button position and dropdown width.
+            var buttonOffset = this.button.offset();
+            var buttonWidth = this.button.width();
+            var buttonLeftBoundary = buttonOffset.left + buttonWidth;
+
+            // If closed.
+            if (!this._expanded) {
+
+                // Position the dropdown.
+                this.dropdownContainer.css({
+                    'left': buttonLeftBoundary - this.dropdownWidth,
+                    'top': 0 - this.dropdownHeight - this.options.css.offset_padding + this.topbarHeight
+                });
+
+            }
+
+            // If expanded.
+            else {
+
+                // Position the dropdown.
+                this.dropdownContainer.css({
+                    'left': buttonLeftBoundary - this.dropdownWidth,
+                    'top': this.topbarHeight - this.options.css.offset_padding
+                });
+
+            }
 
         }
 

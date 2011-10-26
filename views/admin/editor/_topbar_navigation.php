@@ -26,7 +26,7 @@
 ?>
 
 <ul class="nav">
-    <li class="dropdown"><a href="" class="dropdown-toggle">Configure Layout</a></li>
+    <li class="dropdown"><a href="" id="configure-layout-button" class="dropdown-toggle">Configure Layout</a></li>
     <li class="dropdown">
         <a class="omeka-logo" href="<?php echo html_escape(uri('neatline-exhibits')); ?>">
             <img id="omeka-logo" src="<?php echo img('back-to-omeka-white.png'); ?>" />

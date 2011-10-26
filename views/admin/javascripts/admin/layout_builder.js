@@ -1417,7 +1417,7 @@
             var offset = 0;
 
             if (this._top_element == 'timeline' && (this._is_timeline
-               || (this._undated_items_vertical_position == 'top' && this._undated_items_height = 'partial'))) {
+               || (this._undated_items_vertical_position == 'top' && this._undated_items_height == 'partial'))) {
                 offset = this._top_block_height;
             }
 
