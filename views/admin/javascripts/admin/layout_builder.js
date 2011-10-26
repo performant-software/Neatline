@@ -320,14 +320,18 @@
                 'mouseenter': function() {
                     if (!self._is_dragging) {
                         self.__timelineHighlight('enter');
-                        self.__undatedItemsHighlight('enter');
+                        if (self._undated_items_height == 'partial') {
+                            self.__undatedItemsHighlight('enter');
+                        }
                     }
                 },
 
                 'mouseleave': function() {
                     if (!self._is_dragging) {
                         self.__timelineHighlight('leave');
-                        self.__undatedItemsHighlight('leave');
+                        if (self._undated_items_height == 'partial') {
+                            self.__undatedItemsHighlight('leave');
+                        }
                     }
                 },
 
