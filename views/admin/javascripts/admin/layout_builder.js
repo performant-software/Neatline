@@ -32,7 +32,7 @@
             dragbox_id: 'drag-box',
             options_id: 'options',
             top_element_input_id: 'top_element',
-            udi_position_input_id: 'undated_items_position',
+            udi_position_input_id: 'undated_items_horizontal_position',
             udi_height_input_id: 'undated_items_height',
             is_map_input_id: 'is_map',
             is_timeline_input_id: 'is_timeline',
@@ -112,7 +112,8 @@
 
             // Get starting parameters out of the Neatline global.
             this._top_element = Neatline.top_element;
-            this._undated_items_position = Neatline.undated_items_position;
+            this._undated_items_horizontal_position = Neatline.undated_items_horizontal_position;
+            this._undated_items_vertical_position = Neatline.undated_items_vertical_position;
             this._undated_items_height = Neatline.undated_items_height;
             this._is_map = Neatline.is_map;
             this._is_timeline = Neatline.is_timeline;
@@ -769,7 +770,7 @@
 
             // Set starting height and position status.
             this._udi_height_at_start_of_drag = this._undated_items_height;
-            this._udi_position_at_start_of_drag = (this._top_element == 'map') ? 'bottom' : 'top';
+            this._udi_position_at_start_of_drag = this._undated_items_vertical_position;
 
             // Bind self.
             var self = this;
@@ -811,7 +812,7 @@
                             // through the first offset tier.
                             if (offsetY < 0 && offsetY > -vt1) {
                                 self._undated_items_height = 'partial';
-                                self._top_element = 'map';
+                                self._undated_items_vertical_position = 'bottom';
                                 self.__slideTimeline(false);
                                 self.__slideMap(false);
                             }
@@ -828,7 +829,7 @@
                             // second tier threshold.
                             else if (offsetY < -vt2) {
                                 self._undated_items_height = 'partial';
-                                // self._top_element = 'timeline';
+                                self._undated_items_vertical_position = 'top';
                                 self.__slideTimeline(false);
                                 self.__slideMap(false);
                             }
@@ -842,7 +843,7 @@
                             // through the first offset tier.
                             if (offsetY > 0 && offsetY < vt1) {
                                 self._undated_items_height = 'partial';
-                                self._top_element = 'timeline';
+                                self._undated_items_vertical_position = 'top';
                                 self.__slideTimeline(false);
                                 self.__slideMap(false);
                             }
@@ -859,7 +860,7 @@
                             // second tier threshold.
                             else if (offsetY > vt2) {
                                 self._undated_items_height = 'partial';
-                                self._top_element = 'map';
+                                self._undated_items_vertical_position = 'bottom';
                                 self.__slideTimeline(false);
                                 self.__slideMap(false);
                             }
@@ -883,7 +884,7 @@
                         // the first vertical tier.
                         else if (offsetY < -vt1) {
                             self._undated_items_height = 'partial';
-                            self._top_element = 'timeline';
+                            self._undated_items_vertical_position = 'top';
                             self.__slideTimeline(false);
                             self.__slideMap(false);
                         }
@@ -900,7 +901,7 @@
                         // the first vertical tier.
                         else if (offsetY > vt1) {
                             self._undated_items_height = 'partial';
-                            self._top_element = 'map';
+                            self._undated_items_vertical_position = 'bottom';
                             self.__slideTimeline(false);
                             self.__slideMap(false);
                         }
@@ -908,12 +909,12 @@
                     }
 
                     // If udi is on the right.
-                    if (self._undated_items_position == 'right') {
+                    if (self._undated_items_horizontal_position == 'right') {
 
                         // If the cursor crosses over the centerline going left.
                         if (e.pageX < (self._dragbox_width / 2)) {
 
-                            self._undated_items_position = 'left';
+                            self._undated_items_horizontal_position = 'left';
                             self.__slideTimeline(false);
 
                             if (self._undated_items_height == 'full') {
@@ -930,7 +931,7 @@
                         // If the cursor crosses over the centerline going left.
                         if (e.pageX > (self._dragbox_width / 2)) {
 
-                            self._undated_items_position = 'right';
+                            self._undated_items_horizontal_position = 'right';
                             self.__slideTimeline(false);
 
                             if (self._undated_items_height == 'full') {
@@ -960,7 +961,7 @@
             var newTimelineHeight = this.__getTimelineHeight();
             var _current_params = [
                 this._top_element,
-                this._undated_items_position,
+                this._undated_items_horizontal_position,
                 this._undated_items_height
             ];
 
@@ -1005,7 +1006,7 @@
                 // Record params loadout for the last slide.
                 this._last_timeline_slide_params = [
                     this._top_element,
-                    this._undated_items_position,
+                    this._undated_items_horizontal_position,
                     this._undated_items_height
                 ];
 
@@ -1080,7 +1081,7 @@
             var newMapHeight = this.__getMapHeight();
             var _current_params = [
                 this._top_element,
-                this._undated_items_position,
+                this._undated_items_horizontal_position,
                 this._undated_items_height
             ];
 
@@ -1121,7 +1122,7 @@
                 // Record params loadout for the last slide.
                 this._last_map_slide_params = [
                     this._top_element,
-                    this._undated_items_position,
+                    this._undated_items_horizontal_position,
                     this._undated_items_height
                 ];
 
@@ -1171,7 +1172,7 @@
         __updateHiddenInputs: function() {
 
             this.top_element_input.attr('value', this._top_element);
-            this.udi_position_input.attr('value', this._undated_items_position);
+            this.udi_position_input.attr('value', this._undated_items_horizontal_position);
             this.udi_height_input.attr('value', this._undated_items_height);
 
         },
@@ -1227,20 +1228,12 @@
 
             else {
 
-                if (this._is_map) {
-
-                    if (this._top_element == 'map') {
-                        height = this._bottom_block_height;
-                    }
-
-                    else {
-                        height = this._top_block_height;
-                    }
-
+                if (this._undated_items_vertical_position == 'top') {
+                    height = this._top_block_height;
                 }
 
                 else {
-                    height = this._dragbox_height;
+                    height = this._bottom_block_height;
                 }
 
             }
@@ -1259,7 +1252,7 @@
 
             var left_offset = null;
 
-            if (this._undated_items_position == 'left') {
+            if (this._undated_items_horizontal_position == 'left') {
                 left_offset = 0;
             }
 
@@ -1275,27 +1268,13 @@
 
             var top_offset = null;
 
-            if (this._undated_items_height == 'full') {
+            if (this._undated_items_height == 'full' || this._undated_items_vertical_position == 'top') {
                 top_offset = 0;
             }
 
             else {
 
-                if (this._is_map) {
-
-                    if (this._top_element == 'map') {
-                        top_offset = this._top_block_height;
-                    }
-
-                    else {
-                        top_offset = 0;
-                    }
-
-                }
-
-                else {
-                    top_offset = 0;
-                }
+                top_offset = this._top_block_height;
 
             }
 
@@ -1307,7 +1286,10 @@
 
             var width = this._dragbox_width;
 
-            if (this._undated_items_height == 'full' && this._is_undated_items) {
+            if ((this._undated_items_height == 'full'
+                || (this._undated_items_vertical_position == 'top' && this._top_element == 'map')
+                || (this._undated_items_vertical_position == 'bottom' && this._top_element == 'timeline'))
+                && this._is_undated_items) {
                 width -= this.options.undated_items_width;
             }
 
@@ -1342,7 +1324,7 @@
 
             if (this._undated_items_height == 'full'
                 && this._is_undated_items
-                && this._undated_items_position == 'left') {
+                && this._undated_items_horizontal_position == 'left') {
 
                     offset = this.options.undated_items_width;
 
@@ -1368,7 +1350,10 @@
 
             var width = this._dragbox_width;
 
-            if (this._is_undated_items) {
+            if ((this._undated_items_height == 'full'
+                || (this._undated_items_vertical_position == 'top' && this._top_element == 'timeline')
+                || (this._undated_items_vertical_position == 'bottom' && this._top_element == 'map'))
+                && this._is_undated_items) {
                 width -= this.options.undated_items_width;
             }
 
@@ -1398,7 +1383,7 @@
 
             var offset = 0;
 
-            if (this._is_undated_items && this._undated_items_position == 'left') {
+            if (this._is_undated_items && this._undated_items_horizontal_position == 'left') {
                 offset = this.options.undated_items_width;
             }
 

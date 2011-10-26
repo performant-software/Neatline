@@ -116,6 +116,12 @@ class NeatlineNeatline extends Omeka_record
         // By default, activate undated items.
         $this->is_undated_items = 1;
 
+        // Set defaults layout parameters.
+        $this->top_element = 'map';
+        $this->undated_items_vertical_position = 'bottom';
+        $this->undated_items_horizontal_position = 'left';
+        $this->undated_items_height = 'partial';
+
     }
 
     /**
