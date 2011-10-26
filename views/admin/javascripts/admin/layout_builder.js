@@ -828,7 +828,7 @@
                             // second tier threshold.
                             else if (offsetY < -vt2) {
                                 self._undated_items_height = 'partial';
-                                self._top_element = 'timeline';
+                                // self._top_element = 'timeline';
                                 self.__slideTimeline(false);
                                 self.__slideMap(false);
                             }
