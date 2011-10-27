@@ -51,8 +51,9 @@
     float: left;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 10px;
-    font-weight: 13px;
+    font-weight: bold;
     font-size: 1em;
+    color: #835A98;
     line-height: 1;
     padding: 3px 20px 3px 5px;
     margin: 8px 10px 0 18px;
@@ -337,7 +338,8 @@ ul.filter-items {
 .tabs > li > a {
     padding: 0 10px;
     margin: 4px 0 0 0;
-    color: #724e85;
+    color: #835A98;
+    font-weight: bold;
     font-size: 0.9em;
     border-top: 1px solid #d2d2d2;
     border-left: 1px solid #d2d2d2;
