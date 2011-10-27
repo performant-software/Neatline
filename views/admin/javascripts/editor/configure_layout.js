@@ -85,16 +85,14 @@
 
                 'mousedown': function() {
 
-                    switch (self._expanded) {
+                    // Hide if shown.
+                    if (self._expanded) {
+                        self.hide();
+                    }
 
-                        case false:
-                            self.show();
-                        break;
-
-                        case true:
-                            self.hide();
-                        break;
-
+                    // Show if hidden.
+                    else {
+                        self.show();
                     }
 
                 },
@@ -163,10 +161,14 @@
             // If closed.
             if (!this._expanded) {
 
+                // Calculate the new top offset.
+                var topOffset = this.dropdownHeight -
+                    this.options.css.offset_padding + this.topbarHeight;
+
                 // Position the dropdown.
                 this.dropdownContainer.css({
                     'left': buttonLeftBoundary - this.dropdownWidth,
-                    'top': 0 - this.dropdownHeight - this.options.css.offset_padding + this.topbarHeight
+                    'top': -topOffset
                 });
 
             }
@@ -174,10 +176,13 @@
             // If expanded.
             else {
 
+                // Calculate the new top offset.
+                var topOffset = this.topbarHeight - this.options.css.offset_padding
+
                 // Position the dropdown.
                 this.dropdownContainer.css({
                     'left': buttonLeftBoundary - this.dropdownWidth,
-                    'top': this.topbarHeight - this.options.css.offset_padding
+                    'top': topOffset
                 });
 
             }
@@ -186,6 +191,8 @@
 
         _updateLayoutBuilderConstants: function() {
 
+            // Recalculate the positioning parameters on the layout
+            // builder dependent on display status and page position.
             this.layoutBuilder.layoutbuilder('getPxConstants');
             this.layoutBuilder.layoutbuilder('centerAllTags');
 
