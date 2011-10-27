@@ -1287,16 +1287,6 @@
                 return this._dragbox_height;
             }
 
-            // If there is a map but not a timeline.
-            if (this._is_map && !this._is_timeline) {
-                return this._dragbox_height;
-            }
-
-            // If there is a timeline but not a map.
-            if (this._is_timeline && !this._is_map) {
-                return this._dragbox_height;
-            }
-
             // If there is neither a map nor a timeline.
             if (!this._is_timeline && !this._is_map) {
                 return this._dragbox_height;
@@ -1361,69 +1351,56 @@
 
             return this.options.undated_items_width;
 
-            // width = this.options.undated_items_width;
-
-            // if ((this._is_map && !this._is_timeline) || (this._is_map && !this._is_timeline)) {
-
-            //     if ((!this._is_timeline && this._top_element == 'map' && this._undated_items_vertical_position == 'bottom')
-            //        || (!this._is_map && this._top_element == 'timeline' && this._undated_items_vertical_position == 'bottom')
-            //        || (!this._is_timeline && this._top_element == 'timeline' && this._undated_items_vertical_position == 'top')
-            //        || (!this._is_map && this._top_element == 'map' && this._undated_items_vertical_position == 'top')) {
-            //         width = this._dragbox_width;
-            //     }
-
-            // }
-
-            // return width;
-
         },
 
         __getUndatedItemsLeftOffset: function() {
 
-            var left_offset = null;
-
             if (this._undated_items_horizontal_position == 'left') {
-                left_offset = 0;
+                return 0;
             }
 
             else {
-                left_offset = this._undated_items_left_offset;
+                return this._undated_items_left_offset;
             }
-
-            return left_offset;
 
         },
 
         __getUndatedItemsTopOffset: function() {
 
-            var top_offset = null;
-
-            if (this._undated_items_height == 'full' || this._undated_items_vertical_position == 'top') {
-                top_offset = 0;
+            if (this._undated_items_height == 'full'|| this._undated_items_vertical_position == 'top') {
+                return 0;
             }
 
             else {
-
-                top_offset = this._top_block_height;
-
+                return this._top_block_height;
             }
-
-            return top_offset;
 
         },
 
         __getMapWidth: function() {
 
-            var width = this._dragbox_width;
+            var partialWidth = this._dragbox_width - this.options.undated_items_width;
 
-            if ((this._undated_items_height == 'full'
-                || (this._undated_items_vertical_position == 'top' && this._top_element == 'map')
-                || (this._undated_items_vertical_position == 'bottom' && this._top_element == 'timeline'))
-                && this._is_undated_items) {
-                width -= this.options.undated_items_width;
+            // If UDI is full height.
+            if (this._undated_items_height == 'full') {
+                return partialWidth;
             }
 
-            return width;
+            // If UDI is partial height.
+            else {
+
+                // If the map and UDI are in matching vertical positions.
+                if (this._undated_items_vertical_position == 'top' && this._top_element == 'map') {
+                    return partialWidth;
+                }
+
+                else if (this._undated_items_vertical_position == 'bottom' && this._top_element == 'timeline') {
+                    return partialWidth;
+                }
+
+            }
+
+            return this._dragbox_width;
 
         },
 
