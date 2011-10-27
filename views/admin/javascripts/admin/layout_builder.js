@@ -1062,7 +1062,8 @@
                 this._undated_items_height
             ];
 
-            if (!$.compare(_current_params, this._last_timeline_slide_params) || this._current_dragger == 'timeline') {
+            if (!$.compare(_current_params, this._last_timeline_slide_params)
+                || this._current_dragger == 'timeline') {
 
                 if (ending_slide) {
 
@@ -1121,7 +1122,8 @@
                 this._undated_items_height
             ];
 
-            if (!$.compare(_current_params, this._last_map_slide_params) || this._current_dragger == 'map') {
+            if (!$.compare(_current_params, this._last_map_slide_params)
+                || this._current_dragger == 'map') {
 
                 if (ending_slide) {
 
@@ -1180,7 +1182,8 @@
                 this._undated_items_height
             ];
 
-            if (!$.compare(_current_params, this._last_undated_items_slide_params) || this._current_dragger == 'undated') {
+            if (!$.compare(_current_params, this._last_undated_items_slide_params)
+                || this._current_dragger == 'undated') {
 
                 if (ending_slide) {
 
@@ -1281,27 +1284,38 @@
 
             var height = null;
 
-            if (this._undated_items_height == 'full'
-               || (!this._is_timeline && this._is_map && this._top_element == 'map' && this._undated_items_vertical_position == 'top')
-               || (!this._is_map && this._is_timeline && this._top_element == 'timeline' && this._undated_items_vertical_position == 'top')
-               || (!this._is_timeline && this._is_map && this._top_element == 'timeline' && this._undated_items_vertical_position == 'bottom')
-               || (!this._is_map && this._is_timeline && this._top_element == 'map' && this._undated_items_vertical_position == 'bottom')) {
-                height = this._dragbox_height;
+            // If UDI is full height.
+            if (this._undated_items_height == 'full') {
+                return this._dragbox_height;
             }
 
-            else {
+            // If there is a map but not a timeline.
+            if (this._is_map && !this._is_timeline) {
+                return this._dragbox_height;
+            }
+
+            // If there is a timeline but not a map.
+            if (this._is_timeline && !this._is_map) {
+                return this._dragbox_height;
+            }
+
+            // If there is neither a map nor a timeline.
+            if (!this._is_timeline && !this._is_map) {
+                return this._dragbox_height;
+            }
+
+            // If there is a map and a timeline.
+            if (this._is_map && this._is_timeline) {
 
                 if (this._undated_items_vertical_position == 'top') {
-                    height = this._top_block_height;
+                    return this._top_block_height;
                 }
 
                 else {
-                    height = this._bottom_block_height;
+                    return this._bottom_block_height;
                 }
 
             }
-
-            return height;
 
         },
 

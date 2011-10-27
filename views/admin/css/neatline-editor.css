@@ -642,7 +642,7 @@ table#items td.col-2 {
 /* Configure layout */
 
 #configure-layout {
-    padding: 0em 2em 0 2em;
+    padding: 0.5em 2em 0 2em;
     width: 404px;
     display: none;
     background-color: #fffef8;
