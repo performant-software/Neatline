@@ -114,6 +114,7 @@
 
             // Show and recalculate positions on the layout builder.
             this.dropdownContainer.css('display', 'block');
+            this._updateLayoutBuilderConstants();
 
             // Animate.
             this.dropdownContainer.stop().animate({

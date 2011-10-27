@@ -1359,6 +1359,10 @@
                 return 0;
             }
 
+            if (!this._is_map && !this._is_timeline) {
+                return 0;
+            }
+
             else {
                 return this._undated_items_left_offset;
             }
@@ -1368,15 +1372,28 @@
         __getUndatedItemsTopOffset: function() {
 
             // If UDI is on top or full height.
-            if (this._undated_items_height == 'full'|| this._undated_items_vertical_position == 'top') {
+            if (this._undated_items_height == 'full') {
                 return 0;
             }
 
-            // * dev.
-
+            // If the UDI is partial height.
             else {
-                return this._top_block_height;
+
+                if ((!this._is_map || !this._is_timeline) && this._undated_items_vertical_position == 'top') {
+
+                    if (this._is_map && this._top_element == 'timeline') {
+                        return 0;
+                    }
+
+                    else if (this._is_timeline && this._top_element == 'map') {
+                        return 0;
+                    }
+
+                }
+
             }
+
+            return this._top_block_height;
 
         },
 
