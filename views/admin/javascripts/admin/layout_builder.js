@@ -613,7 +613,7 @@
                     });
 
                     // If there is a timeline.
-                    if (self._is_timeline) {
+                    if (self._is_timeline || self._is_undated_items) {
 
                         // If the timeline is on the bottom.
                         if (self._top_element == 'map') {
@@ -636,6 +636,7 @@
 
                                         self._undated_items_horizontal_position = 'right';
                                         self.__slideUndatedItems(false);
+                                        self.__slideTimeline(false);
 
                                     }
 
@@ -649,6 +650,7 @@
 
                                         self._undated_items_horizontal_position = 'left';
                                         self.__slideUndatedItems(false);
+                                        self.__slideTimeline(false);
 
                                     }
 
@@ -679,6 +681,7 @@
 
                                         self._undated_items_horizontal_position = 'right';
                                         self.__slideUndatedItems(false);
+                                        self.__slideTimeline(false);
 
                                     }
 
@@ -692,6 +695,7 @@
 
                                         self._undated_items_horizontal_position = 'left';
                                         self.__slideUndatedItems(false);
+                                        self.__slideTimeline(false);
 
                                     }
 
@@ -752,7 +756,7 @@
                     });
 
                     // If there is a map.
-                    if (self._is_map) {
+                    if (self._is_map || self._is_undated_items) {
 
                         // Get current map top offset.
                         var mapTopOffset = self.__getMapTopOffset();
@@ -778,6 +782,7 @@
 
                                         self._undated_items_horizontal_position = 'right';
                                         self.__slideUndatedItems(false);
+                                        self.__slideMap(false);
 
                                     }
 
@@ -791,6 +796,7 @@
 
                                         self._undated_items_horizontal_position = 'left';
                                         self.__slideUndatedItems(false);
+                                        self.__slideMap(false);
 
                                     }
 
@@ -821,6 +827,7 @@
 
                                         self._undated_items_horizontal_position = 'right';
                                         self.__slideUndatedItems(false);
+                                        self.__slideMap(false);
 
                                     }
 
@@ -834,6 +841,7 @@
 
                                         self._undated_items_horizontal_position = 'left';
                                         self.__slideUndatedItems(false);
+                                        self.__slideMap(false);
 
                                     }
 
@@ -1468,14 +1476,14 @@
             else {
 
                 // If there is UDI.
-                if (this._is_undated_items) {
+                if (this._is_undated_items && this._undated_items_height == 'partial') {
 
                     // If the map and UDI are in opposite vertical positions.
                     if (this._undated_items_vertical_position == 'top' && this._top_element == 'timeline') {
                         return this._bottom_block_height;
                     }
 
-                    else if (this._undated_items_vertical_position == 'bottom' && this._top_element == 'map') {
+                    if (this._undated_items_vertical_position == 'bottom' && this._top_element == 'map') {
                         return this._top_block_height;
                     }
 
@@ -1525,13 +1533,9 @@
                 return 0;
             }
 
-            else {
-
-                // If there is a timeline.
-                if (this._is_timeline && this._top_element == 'timeline') {
-                    return this._top_block_height;
-                }
-
+            // If there is a timeline.
+            if (this._is_timeline && this._top_element == 'timeline') {
+                return this._top_block_height;
             }
 
             return 0;
@@ -1588,7 +1592,7 @@
             else {
 
                 // If there is UDI.
-                if (this._is_undated_items) {
+                if (this._is_undated_items && this._undated_items_height == 'partial') {
 
                     // If the timeline and UDI are in opposite vertical positions.
                     if (this._undated_items_vertical_position == 'top' && this._top_element == 'map') {
@@ -1645,13 +1649,9 @@
                 return 0;
             }
 
-            else {
-
-                // If there is a map.
-                if (this._is_map && this._top_element == 'map') {
-                    return this._top_block_height;
-                }
-
+            // If there is a map.
+            if (this._is_map && this._top_element == 'map') {
+                return this._top_block_height;
             }
 
             return 0;
