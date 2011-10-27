@@ -1424,6 +1424,24 @@
 
             }
 
+            else {
+
+                // If there is UDI.
+                if (this._is_undated_items) {
+
+                    // If the map and UDI are in opposite vertical positions.
+                    if (this._undated_items_vertical_position == 'top' && this._top_element == 'timeline') {
+                        return this._bottom_block_height;
+                    }
+
+                    else if (this._undated_items_vertical_position == 'bottom' && this._top_element == 'map') {
+                        return this._top_block_height;
+                    }
+
+                }
+
+            }
+
             return this._dragbox_height;
 
         },
@@ -1461,77 +1479,141 @@
 
         __getMapTopOffset: function() {
 
-            var offset = 0;
-
-            if (this._top_element == 'timeline' && (this._is_timeline
-               || (this._undated_items_vertical_position == 'top' && this._undated_items_height == 'partial'))) {
-                offset = this._top_block_height;
+            // If the map is the top element.
+            if (this._top_element == 'map') {
+                return 0;
             }
 
-            return offset;
+            else {
+
+                // If there is a timeline.
+                if (this._is_timeline && this._top_element == 'timeline') {
+                    return this._top_block_height;
+                }
+
+            }
+
+            return 0;
 
         },
 
         __getTimelineWidth: function() {
 
-            var width = this._dragbox_width;
+            var partialWidth = this._dragbox_width - this.options.undated_items_width;
 
-            if ((this._undated_items_height == 'full'
-                || (this._undated_items_vertical_position == 'top' && this._top_element == 'timeline')
-                || (this._undated_items_vertical_position == 'bottom' && this._top_element == 'map'))
-                && this._is_undated_items) {
-                width -= this.options.undated_items_width;
+            // If UDI is present.
+            if (this._is_undated_items) {
+
+                // If UDI is full height.
+                if (this._undated_items_height == 'full') {
+                    return partialWidth;
+                }
+
+                // If UDI is partial height.
+                else {
+
+                    // If the timeline and UDI are in matching vertical positions.
+                    if (this._undated_items_vertical_position == 'top' && this._top_element == 'timeline') {
+                        return partialWidth;
+                    }
+
+                    else if (this._undated_items_vertical_position == 'bottom' && this._top_element == 'map') {
+                        return partialWidth;
+                    }
+
+                }
+
             }
 
-            return width;
+            return this._dragbox_width;
 
         },
 
         __getTimelineHeight: function() {
 
-            var height = this._bottom_block_height;
-
+            // If there is a map.
             if (this._is_map) {
+
                 if (this._top_element == 'timeline') {
-                    height = this._top_block_height;
+                    return this._top_block_height;
                 }
+
+                else {
+                    return this._bottom_block_height;
+                }
+
             }
 
             else {
-                height = this._dragbox_height;
+
+                // If there is UDI.
+                if (this._is_undated_items) {
+
+                    // If the timeline and UDI are in opposite vertical positions.
+                    if (this._undated_items_vertical_position == 'top' && this._top_element == 'map') {
+                        return this._bottom_block_height;
+                    }
+
+                    else if (this._undated_items_vertical_position == 'bottom' && this._top_element == 'timeline') {
+                        return this._top_block_height;
+                    }
+
+                }
+
             }
 
-            return height;
+            return this._dragbox_height;
 
         },
 
         __getTimelineLeftOffset: function() {
 
-            var offset = 0;
+            if (this._is_undated_items && this._undated_items_horizontal_position == 'left') {
 
-            if (this._is_undated_items && this._undated_items_horizontal_position == 'left'
-                && (this._undated_items_height == 'full'
-                  || (this._undated_items_height == 'partial' &&
-                  ((this._top_element == 'timeline' && this._undated_items_vertical_position == 'top')
-                  || (this._top_element == 'map' && this._undated_items_vertical_position == 'bottom'))))) {
+                // If UDI is full height.
+                if (this._undated_items_height == 'full') {
 
-                    offset = this.options.undated_items_width;
+                    return this.options.undated_items_width;
+
+                }
+
+                // If UDI is partial height.
+                else {
+
+                    // If the timeline and UDI are in matching vertical positions.
+                    if (this._undated_items_vertical_position == 'top' && this._top_element == 'timeline') {
+                        return this.options.undated_items_width;
+                    }
+
+                    else if (this._undated_items_vertical_position == 'bottom' && this._top_element == 'map') {
+                        return this.options.undated_items_width;
+                    }
+
+                }
 
             }
 
-            return offset;
+            return 0;
 
         },
 
         __getTimelineTopOffset: function() {
 
-            var offset = 0;
-
-            if (this._top_element == 'map' && this._is_map) {
-                offset = this._top_block_height;
+            // If the timeline is the top element.
+            if (this._top_element == 'timeline') {
+                return 0;
             }
 
-            return offset;
+            else {
+
+                // If there is a map.
+                if (this._is_map && this._top_element == 'map') {
+                    return this._top_block_height;
+                }
+
+            }
+
+            return 0;
 
         }
 

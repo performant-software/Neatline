@@ -107,17 +107,20 @@
 
         show: function() {
 
+            var self = this;
+
             // Position.
             this._position();
 
             // Show and recalculate positions on the layout builder.
             this.dropdownContainer.css('display', 'block');
-            this._updateLayoutBuilderConstants();
 
             // Animate.
             this.dropdownContainer.stop().animate({
                 'top': this.topbarHeight - this.options.css.offset_padding
-            }, this.options.animation.duration);
+            }, this.options.animation.duration, function() {
+                self._updateLayoutBuilderConstants();
+            });
 
             // Update tracker.
             this._expanded = true;
