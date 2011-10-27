@@ -1430,19 +1430,32 @@
 
         __getMapLeftOffset: function() {
 
-            var offset = 0;
+            if (this._is_undated_items && this._undated_items_horizontal_position == 'left') {
 
-            if (this._is_undated_items && this._undated_items_horizontal_position == 'left'
-                && (this._undated_items_height == 'full'
-                  || (this._undated_items_height == 'partial' &&
-                  ((this._top_element == 'map' && this._undated_items_vertical_position == 'top')
-                  || (this._top_element == 'timeline' && this._undated_items_vertical_position == 'bottom'))))) {
+                // If UDI is full height.
+                if (this._undated_items_height == 'full') {
 
-                    offset = this.options.undated_items_width;
+                    return this.options.undated_items_width;
+
+                }
+
+                // If UDI is partial height.
+                else {
+
+                    // If the map and UDI are in matching vertical positions.
+                    if (this._undated_items_vertical_position == 'top' && this._top_element == 'map') {
+                        return this.options.undated_items_width;
+                    }
+
+                    else if (this._undated_items_vertical_position == 'bottom' && this._top_element == 'timeline') {
+                        return this.options.undated_items_width;
+                    }
+
+                }
 
             }
 
-            return offset;
+            return 0;
 
         },
 
