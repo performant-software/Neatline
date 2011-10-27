@@ -1381,21 +1381,26 @@
 
             var partialWidth = this._dragbox_width - this.options.undated_items_width;
 
-            // If UDI is full height.
-            if (this._undated_items_height == 'full') {
-                return partialWidth;
-            }
+            // If UDI is present.
+            if (this._is_undated_items) {
 
-            // If UDI is partial height.
-            else {
-
-                // If the map and UDI are in matching vertical positions.
-                if (this._undated_items_vertical_position == 'top' && this._top_element == 'map') {
+                // If UDI is full height.
+                if (this._undated_items_height == 'full') {
                     return partialWidth;
                 }
 
-                else if (this._undated_items_vertical_position == 'bottom' && this._top_element == 'timeline') {
-                    return partialWidth;
+                // If UDI is partial height.
+                else {
+
+                    // If the map and UDI are in matching vertical positions.
+                    if (this._undated_items_vertical_position == 'top' && this._top_element == 'map') {
+                        return partialWidth;
+                    }
+
+                    else if (this._undated_items_vertical_position == 'bottom' && this._top_element == 'timeline') {
+                        return partialWidth;
+                    }
+
                 }
 
             }
@@ -1406,22 +1411,20 @@
 
         __getMapHeight: function() {
 
-            var height = this._top_block_height;
+            // If there is a timeline.
+            if (this._is_timeline) {
 
-            if (this._is_timeline || (this._is_undated_items && this._undated_items_height == 'partial')) {
                 if (this._top_element == 'map') {
-                    height = this._top_block_height;
+                    return this._top_block_height;
                 }
+
                 else {
-                    height = this._bottom_block_height;
+                    return this._bottom_block_height;
                 }
+
             }
 
-            else {
-                height = this._dragbox_height;
-            }
-
-            return height;
+            return this._dragbox_height;
 
         },
 
