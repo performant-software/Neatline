@@ -1367,9 +1367,12 @@
 
         __getUndatedItemsTopOffset: function() {
 
+            // If UDI is on top or full height.
             if (this._undated_items_height == 'full'|| this._undated_items_vertical_position == 'top') {
                 return 0;
             }
+
+            // * dev.
 
             else {
                 return this._top_block_height;
