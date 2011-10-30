@@ -50,8 +50,7 @@
             start_time_input_name: 'start-date-time',
             end_date_input_name: 'end-date-date',
             end_time_input_name: 'end-date-time',
-            color_picker_container_class: 'colorpicker',
-            color_picker_input_id: 'color-',
+            color_picker_input_class: 'color-picker',
 
             // Durations and CSS constants.
             item_list_highlight_duration: 10,
@@ -1060,6 +1059,7 @@
             var itemTitleText = item.find('.' + this.options.item_title_text_class);
             var allInputs = editForm.find('input[type="text"], textarea')
             var descriptionTextarea = editForm.find('textarea[name="description"]');
+            var colorPickerInput = editForm.find('.' + this.options.color_picker_input_class);
 
             // Calculate the native height of the form.
             var cloneFormTd = editFormTd
@@ -1173,6 +1173,9 @@
             if (formHeight > editorHeight) {
                 // editFormContainer.smallscroll();
             }
+
+            // Instantiate the color picker.
+            colorPickerInput.miniColors();
 
             // Fire general item edit event to focus timeline and map
             // if data exists for the item.

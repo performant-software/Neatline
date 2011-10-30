@@ -73,8 +73,7 @@
 
             <div class="clearfix">
                 <label>Vector Color</label>
-                <input type="text" id="color-<?php echo $item->id; ?>" name="color" value="#5c7bff" />
-                <div class="colorpicker"></div>
+                <input type="text" id="color-<?php echo $item->id; ?>" class="color-picker" name="color" value="#5c7bff" />
             </div>
 
             <div class="actions">
