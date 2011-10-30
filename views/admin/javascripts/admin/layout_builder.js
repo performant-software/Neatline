@@ -956,7 +956,7 @@
                     }
 
                     // If udi was full-height at the start of the drag.
-                    else if (self._udi_height_at_start_of_drag == 'full') {
+                    else if (self._udi_height_at_start_of_drag == 'full' && self._is_map && self._is_timeline) {
 
                         // If the mouse has moved upwards but has not crossed
                         // through the first vertical tier.
