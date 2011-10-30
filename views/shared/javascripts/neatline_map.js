@@ -48,7 +48,9 @@
 
             styles: {
                 default_opacity: 0.4,
-                default_color: '#ffb80e'
+                default_color: '#ffb80e',
+                select_point_radius: 10,
+                select_stroke_color: '#ea3a3a'
             }
 
         },
@@ -204,12 +206,8 @@
                 // Try to get a color from the JSON, revert to default if no color is set..
                 var color = (item.color != '') ? item.color : self.options.styles.default_color;
 
-                // Build the layer style.
-                var style = new OpenLayers.StyleMap({
-                    fillColor: color,
-                    fillOpacity: self.options.styles.default_opacity,
-                    strokeColor: color
-                });
+                // Build the layer styles.
+                var style = self._getStyleMap(color);
 
                 // Build the layers.
                 var vectorLayer = new OpenLayers.Layer.Vector(item.title, {
@@ -575,14 +573,31 @@
 
         },
 
+        _getStyleMap: function(fillColor) {
+
+            return new OpenLayers.StyleMap({
+                'default': new OpenLayers.Style({
+                    fillColor: fillColor,
+                    fillOpacity: this.options.styles.default_opacity,
+                    strokeColor: fillColor,
+                    pointRadius: this.options.styles.select_point_radius,
+                    strokeWidth: 1
+                }),
+                'select': new OpenLayers.Style({
+                    fillColor: fillColor,
+                    fillOpacity: this.options.styles.default_opacity,
+                    strokeColor: this.options.styles.select_stroke_color,
+                    pointRadius: this.options.styles.select_point_radius,
+                    strokeWidth: 2
+                }),
+            });
+
+        },
+
         setItemColor: function(color) {
 
             // Rebuild the style map.
-            this._currentEditLayer.styleMap = new OpenLayers.StyleMap({
-                fillColor: color,
-                fillOpacity: this.options.styles.default_opacity,
-                strokeColor: color
-            });
+            this._currentEditLayer.styleMap = this._getStyleMap(color);
 
             // Rerender the layer to manifest the change.
             this._currentEditLayer.redraw();

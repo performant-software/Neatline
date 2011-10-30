@@ -1148,7 +1148,7 @@
 
                 'mousedown': function() {
                     self._saveItemForm();
-                },
+                10},
 
                 'click': function(event) {
                     event.preventDefault();
@@ -1217,13 +1217,17 @@
 
             var itemTitleText = this._currentFormItem.find('.' + this.options.item_title_text_class);
 
-            // Tween the title color.
-            itemTitleText.animate({
-                'color': this.options.colors.unchanged_red
-            }, 200);
+            if (!itemTitleText.data('changed')) {
 
-            // Store the new status.
-            itemTitleText.data('changed', true);
+                // Tween the title color.
+                itemTitleText.animate({
+                    'color': this.options.colors.unchanged_red
+                }, 200);
+
+                // Store the new status.
+                itemTitleText.data('changed', true);
+
+            }
 
         },
 
