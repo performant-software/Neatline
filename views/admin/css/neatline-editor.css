@@ -178,6 +178,7 @@ span.top-bar-title {
     height: 40px;
     background: whiteSmoke;
     border-bottom: 1px solid #DDD;
+    z-index: 99;
 }
 
 div#drag-handle {
