@@ -237,7 +237,7 @@
             // Save data.
             $.ajax({
 
-                url: 'save',
+                url: 'positions',
                 type: 'POST',
 
                 data: {
@@ -245,12 +245,6 @@
                     map_extent: mapExtent,
                     map_zoom: mapZoom,
                     timeline_center: timelineCenter
-                },
-
-                success: function() {
-
-                    console.log('success');
-
                 }
 
             });
