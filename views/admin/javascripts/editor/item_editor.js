@@ -1174,8 +1174,12 @@
                 // editFormContainer.smallscroll();
             }
 
-            // Instantiate the color picker.
-            colorPickerInput.miniColors();
+            // Instantiate the color picker and define change callback.
+            colorPickerInput.miniColors({
+                'change': function() {
+                    self.markItemTitleAsUnsaved();
+                }
+            });
 
             // Fire general item edit event to focus timeline and map
             // if data exists for the item.
