@@ -1176,9 +1176,20 @@
 
             // Instantiate the color picker and define change callback.
             colorPickerInput.miniColors({
-                'change': function() {
+
+                'change': function(hex, rgb) {
+
+                    // Mark the item title unsaved.
                     self.markItemTitleAsUnsaved();
+
+                    // Trigger out to push the new color immediately onto
+                    // the map.
+                    self._trigger('coloredit', {}, {
+                        'color': hex,
+                    });
+
                 }
+
             });
 
             // Fire general item edit event to focus timeline and map

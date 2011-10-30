@@ -384,6 +384,13 @@
 
             this.timeline.neatlinetimeline('zoomToEvent', id);
 
+        },
+
+        setItemColor: function(color) {
+
+            this.map.neatlinemap('setItemColor', color);
+
+
         }
 
     });

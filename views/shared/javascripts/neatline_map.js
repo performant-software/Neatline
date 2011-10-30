@@ -573,6 +573,20 @@
                 this.map.zoomToExtent(layer.getDataExtent());
             }
 
+        },
+
+        setItemColor: function(color) {
+
+            // Rebuild the style map.
+            this._currentEditLayer.styleMap = new OpenLayers.StyleMap({
+                fillColor: color,
+                fillOpacity: this.options.styles.default_opacity,
+                strokeColor: color
+            });
+
+            // Rerender the layer to manifest the change.
+            this._currentEditLayer.redraw();
+
         }
 
     });

@@ -112,6 +112,14 @@ jQuery(document).ready(function($) {
                 neatlineContainer.neatline('zoomTimelineToEvent', obj.itemId);
             }
 
+        },
+
+        // When the color picker value is changed, push the new color onto
+        // the item's vectors.
+        'coloredit': function(event, obj) {
+
+            neatlineContainer.neatline('setItemColor', obj.color);
+
         }
 
     });
