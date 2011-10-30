@@ -86,6 +86,9 @@
 
         },
 
+        /*
+         * Initialize. Get markup, initialize trackers, and call preparatory methods.
+         */
         _create: function() {
 
             // Getters.
@@ -169,6 +172,9 @@
 
         },
 
+        /*
+         * Disable text selection on the entire window.
+         */
         _disableSelect: function() {
 
             // Turn off text selection on the whole container div.
@@ -179,6 +185,9 @@
 
         },
 
+        /*
+         * Calcualte the width and height of the container, window, and top bar.
+         */
         _getDimensions: function() {
 
             // Container dimensions.
@@ -194,6 +203,12 @@
 
         },
 
+        /*
+         * Make the height of the container stretch to fit the height of the window,
+         * fix the position of the top bar header (the search bar, filter items) at
+         * the top of the container, and call the method to position the Neatline
+         * container.
+         */
         _positionDivs: function() {
 
             // Update dimensions and set new height.
@@ -217,6 +232,9 @@
 
         },
 
+        /*
+         * Set the dimensions of the Neatline container.
+         */
         _positionNeatline: function() {
 
             // Position the Neatline container to the right
@@ -230,6 +248,10 @@
 
         },
 
+        /*
+         * Position the width dragging container div to the right of the right
+         * boundary of the editor.
+         */
         _positionDragHandle: function() {
 
             // Set the height of the drag handle.
@@ -240,12 +262,20 @@
 
         },
 
+        /*
+         * Populate a tracker variable with geocoverage data for a given
+         * collection of features on the map. Called in advance of the item
+         * saving routine.
+         */
         setCoverageData: function(data) {
 
             this.coverageData = data;
 
         },
 
+        /*
+         * On window resize, reposition all containers.
+         */
         _addWindowResizeListener: function() {
 
             var self = this;
@@ -257,6 +287,9 @@
 
         },
 
+        /*
+         * Build functionality for the width dragging handle.
+         */
         _buildDragHandle: function() {
 
             var self = this;
@@ -328,6 +361,10 @@
 
         },
 
+        /*
+         * On mousedown on the drag handle, bind the move event on the
+         * window and render the width change.
+         */
         _doWidthDrag: function(trigger_event_object) {
 
             var self = this;
@@ -396,6 +433,12 @@
 
         },
 
+        /*
+         * Build functionality on the search box. On keyup, fire the request
+         * to fetch new items; on mousedown on the cancel 'x', zero out the
+         * input value and trigger the keyup event to re-fetch the base-case
+         * all results.
+         */
         _glossSearchBox: function() {
 
             var self = this;
@@ -421,6 +464,9 @@
 
         },
 
+        /*
+         * Define selection change callback on the item filter widget.
+         */
         _glossItemFilter: function() {
 
             var self = this;
@@ -436,6 +482,12 @@
 
         },
 
+        /*
+         * Build functionality on the Space/Time column headers. On mouseover,
+         * highlight the column to show that it is filterable by a click; on
+         * mousedown, hide all items that do not have an active record in the
+         * clicked column.
+         */
         _glossColumnHeaders: function() {
 
             var self = this;
@@ -655,6 +707,14 @@
 
         },
 
+        /*
+         * Get items for the browser. On success, populate the container with
+         * the fresh markup. If it is the first request made on pageload, trigger
+         * out to deployment that the Neatline can be instantiated. This ordering
+         * is necessary to avoid a tricky suite of positioning bugs that occur
+         * if the Neatline is initialized before the full editor markup is present
+         * and occupying space on the page.
+         */
         _getItems: function() {
 
             var self = this;
@@ -692,6 +752,10 @@
 
         },
 
+        /*
+         * Once the raw markup is from the items ajax query is pushed into the
+         * container, build the functionality for each item.
+         */
         _glossItems: function() {
 
             var self = this;
@@ -901,12 +965,24 @@
 
         },
 
+        /*
+         * Given an item <tr> in the browser list, calculate its native top offset
+         * relative to the container. This value is used to position the items
+         * at the top of the div when the form opens. The value needs to be calculated
+         * in advance for each item because it doesn't work to just get the value
+         * at the time of a mousedown event on the item - if there is already an open
+         * form _above_ the item in the stack, the offset would reflect the height
+         * of that form and the final positioning of the new item form is incorrect.
+         */
         _calculateTopOffset: function(item) {
 
             item.data('topOffset', item.position().top);
 
         },
 
+        /*
+         * Do the offset calculation for all current items.
+         */
         _calculateAllTopOffsets: function() {
 
             var self = this;
@@ -918,6 +994,9 @@
 
         },
 
+        /*
+         * Check or uncheck a space or time status box for an item.
+         */
         _checkStatusBlock: function(item, spaceOrTime) {
 
             var block = item.find('.' + spaceOrTime);
@@ -934,6 +1013,18 @@
 
         },
 
+        /*
+         * Expand the form for a given item id. Public method used by the deployment
+         * script in response to a feature or timeline click on the exhibit. The
+         * scrollMap and scrollTimeline booleans are passed into the _showForm method,
+         * and are then used to control whether or not the focusing routines for
+         * each of the blocks is triggered by the form open. This control is necessary
+         * because in certain situations it is undesirable for one or both of the
+         * blocks to react to a click. For example, if there is a click on a feature,
+         * it can be confusing and discombobulating for the the map to react and focus
+         * in on the feature if the click occurred when the map was at a comparatively
+         * distant zoom level, etc.
+         */
         showFormByItemId: function(id, scrollMap, scrollTimeline) {
 
             var item = this.idToItem[id];
@@ -944,6 +1035,9 @@
 
         },
 
+        /*
+         * Expand and gloss an item edit form.
+         */
         _showForm: function(item, scrollMap, scrollTimeline) {
 
             var self = this;
@@ -1096,6 +1190,11 @@
 
         },
 
+        /*
+         * Make the item title fade to red to indicate that a change has been
+         * made to the item's Neatline record but that the new data has not been
+         * committed to the server.
+         */
         markItemTitleAsUnsaved: function() {
 
             var itemTitleText = this._currentFormItem.find('.' + this.options.item_title_text_class);
@@ -1110,6 +1209,9 @@
 
         },
 
+        /*
+         * Collapse an item edit form and unbind all events.
+         */
         _hideForm: function(item, immediate) {
 
             // Get child markup.
@@ -1194,6 +1296,10 @@
 
         },
 
+        /*
+         * Pluck data from form, get geocoverage data, build ajax request and
+         * send data for save.
+         */
         _saveItemForm: function() {
 
             var self = this;
@@ -1327,6 +1433,10 @@
 
         },
 
+        /*
+         * When a status checkbox is checked or unchecked, dial back and commit
+         * the status record.
+         */
         _saveStatus: function(item, spaceOrTime, reload) {
 
             var self = this;
@@ -1374,6 +1484,11 @@
 
         },
 
+        /*
+         * Expand/contract the height of an open item form. Called after a width
+         * drag on the container div that might affect the wrapped height of the
+         * form contents.
+         */
         _resizeForms: function() {
 
             var item = this._currentFormItem;
@@ -1413,6 +1528,10 @@
 
         },
 
+        /*
+         * Position the divs that provide the opacity gradient on the right
+         * edge of width-occluded item titles in the browser pane.
+         */
         _positionTitleFaders: function() {
 
             var self = this;
@@ -1438,6 +1557,11 @@
 
         },
 
+        /*
+         * Calculate the width of the browser-default scrollbar. Used by the
+         * calculation that positions the static browser pane top bar (with the
+         * search box and item filterer).
+         */
         __getScrollBarWidth: function() {
 
             this.scrollbarWidth = 0;
@@ -1487,6 +1611,10 @@
 
         },
 
+        /*
+         * Convert JavaScript boolean true/false to string true/false. Needed
+         * to prevent typecasting chaos during parsing on the server.
+         */
         __stringifyBooleanForJson: function(boolean) {
 
             return boolean ? 'true' : 'false';
