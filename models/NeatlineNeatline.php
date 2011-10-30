@@ -158,6 +158,7 @@ class NeatlineNeatline extends Omeka_record
      * @param string $startTime The time of the start.
      * @param string $endDate The month/day/year of the end.
      * @param string $endTime The time of the end.
+     * @param string $vectorColor The hex value for the feature vectors.
      * @param array $geoCoverage The array of geocoverage data from
      * the map annotations.
      *
@@ -171,6 +172,7 @@ class NeatlineNeatline extends Omeka_record
         $startTime,
         $endDate,
         $endTime,
+        $vectorColor,
         $geoCoverage
     )
     {
@@ -194,6 +196,9 @@ class NeatlineNeatline extends Omeka_record
         $coverageElement = $elementTable
             ->findByElementSetNameAndElementName('Dublin Core', 'Coverage');
 
+        $identifierElement = $elementTable
+            ->findByElementSetNameAndElementName('Dublin Core', 'Identifier');
+
         // Try to find existing data records given the item and
         // element object.
         $titleRecord = $dataTable
@@ -201,6 +206,9 @@ class NeatlineNeatline extends Omeka_record
 
         $descriptionRecord = $dataTable
             ->findByElement($this->id, $item->id, $descriptionElement->id);
+
+        $colorRecord = $dataTable
+            ->findByElement($this->id, $item->id, $identifierElement->id);
 
         $geoCoverageRecord = $dataTable
             ->findByElement($this->id, $item->id, $coverageElement->id);
@@ -222,7 +230,7 @@ class NeatlineNeatline extends Omeka_record
         // Otherwise, create one.
         else if ($title != '') {
 
-            // Creat the new record.
+            // Create the new record.
             $record = new NeatlineRecord();
             $record->neatline_id = $this->id;
             $record->item_id = $item->id;
@@ -230,8 +238,6 @@ class NeatlineNeatline extends Omeka_record
 
             // Create the new text.
             $elementText = $record->createElementText($title, 'Title');
-
-            print_r($elementText);
 
             // If a text with the supplied data does not already exist.
             if ($elementText != null) {
@@ -255,7 +261,7 @@ class NeatlineNeatline extends Omeka_record
         // Otherwise, create one.
         else if ($description != '') {
 
-            // Creat the new record.
+            // Create the new record.
             $record = new NeatlineRecord();
             $record->neatline_id = $this->id;
             $record->item_id = $item->id;
@@ -263,6 +269,37 @@ class NeatlineNeatline extends Omeka_record
 
             // Create the new text.
             $elementText = $record->createElementText($description, 'Description');
+
+            // If a text with the supplied data does not already exist.
+            if ($elementText != null) {
+                $record->element_text_id = $elementText->id;
+                $record->save();
+            }
+
+        }
+
+
+        // ** Color **
+
+        // If a color record already exists, update it.
+        if ($colorRecord != null) {
+
+            // Update the text.
+            $colorRecord->updateElementText($vectorColor);
+
+        }
+
+        // Otherwise, create one.
+        else if ($vectorColor != '') {
+
+            // Create the new record.
+            $record = new NeatlineRecord();
+            $record->neatline_id = $this->id;
+            $record->item_id = $item->id;
+            $record->element_id = $identifierElement->id;
+
+            // Create the new text.
+            $elementText = $record->createElementText($vectorColor, 'Identifier');
 
             // If a text with the supplied data does not already exist.
             if ($elementText != null) {
@@ -545,9 +582,7 @@ class NeatlineNeatline extends Omeka_record
                 // Weird hack to get rid of the opening and closing brackets that OpenLayers
                 // tacks onto the geometry descriptions by default. They cause errors when the
                 // JavaScript tries to ingest them.
-                // $text = json_decode(str_replace(array('[', ']'), '', $record->getElementText()->text));
                 $text = str_replace(array('[', ']'), '', json_decode($record->getElementText()->text));
-                // $text = json_decode($record->getElementText()->text);
                 $title = $this->getTextByItemAndField($item, 'Title');
 
                 $json[] = array(

@@ -144,9 +144,7 @@ class Neatline_EditorController extends Omeka_Controller_Action
         $geoCoverage = json_encode($_post['geocoverage']);
         $spaceStatus = $_post['space_status'];
         $timeStatus = $_post['time_status'];
-
-        echo $spaceStatus;
-        echo $timeStatus;
+        $vectorColor = $_post['vector_color'];
 
         // Fetch the Neatline exhibit record and item record.
         $neatline = $this->_neatlinesTable->find($neatlineId);
@@ -161,6 +159,7 @@ class Neatline_EditorController extends Omeka_Controller_Action
             $startTime,
             $endDate,
             $endTime,
+            $vectorColor,
             $geoCoverage
         );
 

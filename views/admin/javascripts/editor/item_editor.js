@@ -1319,6 +1319,7 @@
             var startTimeInput = editForm.find('input[name="' + this.options.start_time_input_name + '"]');
             var endDateInput = editForm.find('input[name="' + this.options.end_date_input_name + '"]');
             var endTimeInput = editForm.find('input[name="' + this.options.end_time_input_name + '"]');
+            var colorPickerInput = editForm.find('.' + this.options.color_picker_input_class);
             var itemId = editForm.find('recordid');
 
             // Get all of the inputs.
@@ -1341,6 +1342,7 @@
             var startTime_Value = startTimeInput.val();
             var endDate_Value = endDateInput.val();
             var endTime_Value = endTimeInput.val();
+            var colorValue = colorPickerInput.val();
             var geocoverage_Value = this.coverageData;
 
             // If there is date information entered, add an active record by default.
@@ -1408,6 +1410,7 @@
                     start_time: startTime_Value,
                     end_date: endDate_Value,
                     end_time: endTime_Value,
+                    vector_color: colorValue,
                     geocoverage: geocoverage_Value,
                     space_status: this.__stringifyBooleanForJson(spaceStatus),
                     time_status: this.__stringifyBooleanForJson(timeStatus)
