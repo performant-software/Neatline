@@ -626,33 +626,27 @@
                                 self.__slideUndatedItems(false);
                             }
 
-                            else {
+                            if (self._is_undated_items && self._undated_items_horizontal_position == 'left') {
 
-                                if (self._is_undated_items && self._undated_items_vertical_position == 'top'
-                                   && self._undated_items_horizontal_position == 'left') {
+                                // If the cursor crosses over the centerline going left.
+                                if (e.pageX < (self._dragbox_position.left + (self._dragbox_width / 2))) {
 
-                                    // If the cursor crosses over the centerline going left.
-                                    if (e.pageX < (self._dragbox_position.left + (self._dragbox_width / 2))) {
-
-                                        self._undated_items_horizontal_position = 'right';
-                                        self.__slideUndatedItems(false);
-                                        self.__slideTimeline(false);
-
-                                    }
+                                    self._undated_items_horizontal_position = 'right';
+                                    self.__slideUndatedItems(false);
+                                    self.__slideTimeline(false);
 
                                 }
 
-                                else if (self._is_undated_items && self._undated_items_vertical_position == 'top'
-                                   && self._undated_items_horizontal_position == 'right') {
+                            }
 
-                                    // If the cursor crosses over the centerline going right.
-                                    if (e.pageX > (self._dragbox_position.left + (self._dragbox_width / 2))) {
+                            else if (self._is_undated_items && self._undated_items_horizontal_position == 'right') {
 
-                                        self._undated_items_horizontal_position = 'left';
-                                        self.__slideUndatedItems(false);
-                                        self.__slideTimeline(false);
+                                // If the cursor crosses over the centerline going right.
+                                if (e.pageX > (self._dragbox_position.left + (self._dragbox_width / 2))) {
 
-                                    }
+                                    self._undated_items_horizontal_position = 'left';
+                                    self.__slideUndatedItems(false);
+                                    self.__slideTimeline(false);
 
                                 }
 
@@ -671,33 +665,27 @@
                                 self.__slideUndatedItems(false);
                             }
 
-                            else {
+                            if (self._is_undated_items && self._undated_items_horizontal_position == 'left') {
 
-                                if (self._is_undated_items && self._undated_items_vertical_position == 'bottom'
-                                   && self._undated_items_horizontal_position == 'left') {
+                                // If the cursor crosses over the centerline going left.
+                                if (e.pageX < (self._dragbox_position.left + (self._dragbox_width / 2))) {
 
-                                    // If the cursor crosses over the centerline going left.
-                                    if (e.pageX < (self._dragbox_position.left + (self._dragbox_width / 2))) {
-
-                                        self._undated_items_horizontal_position = 'right';
-                                        self.__slideUndatedItems(false);
-                                        self.__slideTimeline(false);
-
-                                    }
+                                    self._undated_items_horizontal_position = 'right';
+                                    self.__slideUndatedItems(false);
+                                    self.__slideTimeline(false);
 
                                 }
 
-                                else if (self._is_undated_items && self._undated_items_vertical_position == 'bottom'
-                                   && self._undated_items_horizontal_position == 'right') {
+                            }
 
-                                    // If the cursor crosses over the centerline going right.
-                                    if (e.pageX > (self._dragbox_position.left + (self._dragbox_width / 2))) {
+                            else if (self._is_undated_items && self._undated_items_horizontal_position == 'right') {
 
-                                        self._undated_items_horizontal_position = 'left';
-                                        self.__slideUndatedItems(false);
-                                        self.__slideTimeline(false);
+                                // If the cursor crosses over the centerline going right.
+                                if (e.pageX > (self._dragbox_position.left + (self._dragbox_width / 2))) {
 
-                                    }
+                                    self._undated_items_horizontal_position = 'left';
+                                    self.__slideUndatedItems(false);
+                                    self.__slideTimeline(false);
 
                                 }
 
@@ -772,33 +760,27 @@
                                 self.__slideUndatedItems(false);
                             }
 
-                            else {
+                            if (self._is_undated_items && self._undated_items_horizontal_position == 'left') {
 
-                                if (self._is_undated_items && self._undated_items_vertical_position == 'top'
-                                   && self._undated_items_horizontal_position == 'left') {
+                                // If the cursor crosses over the centerline going left.
+                                if (e.pageX < (self._dragbox_position.left + (self._dragbox_width / 2))) {
 
-                                    // If the cursor crosses over the centerline going left.
-                                    if (e.pageX < (self._dragbox_position.left + (self._dragbox_width / 2))) {
-
-                                        self._undated_items_horizontal_position = 'right';
-                                        self.__slideUndatedItems(false);
-                                        self.__slideMap(false);
-
-                                    }
+                                    self._undated_items_horizontal_position = 'right';
+                                    self.__slideUndatedItems(false);
+                                    self.__slideMap(false);
 
                                 }
 
-                                else if (self._is_undated_items && self._undated_items_vertical_position == 'top'
-                                   && self._undated_items_horizontal_position == 'right') {
+                            }
 
-                                    // If the cursor crosses over the centerline going right.
-                                    if (e.pageX > (self._dragbox_position.left + (self._dragbox_width / 2))) {
+                            else if (self._is_undated_items && self._undated_items_horizontal_position == 'right') {
 
-                                        self._undated_items_horizontal_position = 'left';
-                                        self.__slideUndatedItems(false);
-                                        self.__slideMap(false);
+                                // If the cursor crosses over the centerline going right.
+                                if (e.pageX > (self._dragbox_position.left + (self._dragbox_width / 2))) {
 
-                                    }
+                                    self._undated_items_horizontal_position = 'left';
+                                    self.__slideUndatedItems(false);
+                                    self.__slideMap(false);
 
                                 }
 
@@ -817,33 +799,27 @@
                                 self.__slideUndatedItems(false);
                             }
 
-                            else {
+                            if (self._is_undated_items && self._undated_items_horizontal_position == 'left') {
 
-                                if (self._is_undated_items && self._undated_items_vertical_position == 'bottom'
-                                   && self._undated_items_horizontal_position == 'left') {
+                                // If the cursor crosses over the centerline going left.
+                                if (e.pageX < (self._dragbox_position.left + (self._dragbox_width / 2))) {
 
-                                    // If the cursor crosses over the centerline going left.
-                                    if (e.pageX < (self._dragbox_position.left + (self._dragbox_width / 2))) {
-
-                                        self._undated_items_horizontal_position = 'right';
-                                        self.__slideUndatedItems(false);
-                                        self.__slideMap(false);
-
-                                    }
+                                    self._undated_items_horizontal_position = 'right';
+                                    self.__slideUndatedItems(false);
+                                    self.__slideMap(false);
 
                                 }
 
-                                else if (self._is_undated_items && self._undated_items_vertical_position == 'bottom'
-                                   && self._undated_items_horizontal_position == 'right') {
+                            }
 
-                                    // If the cursor crosses over the centerline going right.
-                                    if (e.pageX > (self._dragbox_position.left + (self._dragbox_width / 2))) {
+                            else if (self._is_undated_items && self._undated_items_horizontal_position == 'right') {
 
-                                        self._undated_items_horizontal_position = 'left';
-                                        self.__slideUndatedItems(false);
-                                        self.__slideMap(false);
+                                // If the cursor crosses over the centerline going right.
+                                if (e.pageX > (self._dragbox_position.left + (self._dragbox_width / 2))) {
 
-                                    }
+                                    self._undated_items_horizontal_position = 'left';
+                                    self.__slideUndatedItems(false);
+                                    self.__slideMap(false);
 
                                 }
 

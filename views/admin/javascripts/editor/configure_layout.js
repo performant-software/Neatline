@@ -152,7 +152,7 @@
             this.dropdownWidth = this.dropdownContainer.outerWidth();
             this.dropdownHeight = this.dropdownContainer.height();
             this.topbarHeight = this.topbar.height();
-            this.buttonWidth = this.button.width();
+            this.buttonWidth = this.button.outerWidth();
 
         },
 
@@ -160,7 +160,7 @@
 
             // Get button position and dropdown width.
             var buttonOffset = this.button.offset();
-            var buttonLeftBoundary = buttonOffset.left + this.buttonWidth;
+            var buttonRightBoundary = buttonOffset.left + this.buttonWidth;
 
             // If closed.
             if (!this._expanded) {
@@ -171,7 +171,7 @@
 
                 // Position the dropdown.
                 this.dropdownContainer.css({
-                    'left': buttonLeftBoundary - this.dropdownWidth,
+                    'left': buttonRightBoundary - this.dropdownWidth,
                     'top': -topOffset
                 });
 
