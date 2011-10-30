@@ -101,6 +101,8 @@ class NeatlinePlugin
                 `is_map` tinyint(1) NOT NULL,
                 `is_timeline` tinyint(1) NOT NULL,
                 `is_undated_items` tinyint(1) NOT NULL,
+                `default_map_bounds` varchar(100),
+                `default_timeline_focus_date` varchar(100),
                  PRIMARY KEY (`id`)
                ) ENGINE=innodb DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
 

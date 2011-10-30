@@ -620,7 +620,7 @@
 
                             // If the cursor dips below the top border
                             // of the timeline div, slide the timeline up.
-                            if (e.pageY > (self._top_block_height + self._dragbox_position.top)) {
+                            if (e.pageY > (self._top_block_height + self._dragbox_position.top) && self._is_timeline) {
                                 self._top_element = 'timeline';
                                 self.__slideTimeline(false);
                                 self.__slideUndatedItems(false);
@@ -659,7 +659,7 @@
 
                             // If the cursor moves above the bottom border
                             // of the timeline div, slide the timeline down.
-                            if (e.pageY < (self._dragbox_position.top + self._top_block_height)) {
+                            if (e.pageY < (self._dragbox_position.top + self._top_block_height) && self._is_timeline) {
                                 self._top_element = 'map';
                                 self.__slideTimeline(false);
                                 self.__slideUndatedItems(false);
@@ -754,7 +754,7 @@
 
                             // If the cursor dips below the top border
                             // of the timeline div, slide the timeline up.
-                            if (e.pageY > (mapTopOffset + self._dragbox_position.top)) {
+                            if (e.pageY > (mapTopOffset + self._dragbox_position.top) && self._is_map) {
                                 self._top_element = 'map';
                                 self.__slideMap(false);
                                 self.__slideUndatedItems(false);
@@ -793,7 +793,7 @@
 
                             // If the cursor moves above the bottom border
                             // of the timeline div, slide the timeline down.
-                            if (e.pageY < (self._dragbox_position.top + self._top_block_height)) {
+                            if (e.pageY < (self._dragbox_position.top + self._top_block_height) && self._is_map) {
                                 self._top_element = 'timeline';
                                 self.__slideMap(false);
                                 self.__slideUndatedItems(false);

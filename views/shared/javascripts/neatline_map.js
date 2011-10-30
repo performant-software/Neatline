@@ -106,6 +106,8 @@
                 parseFloat(boundsArray[3])
             );
 
+            console.log(bounds.toString());
+
             var options = {
                 controls: [
                   new OpenLayers.Control.PanZoomBar(),
