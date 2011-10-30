@@ -584,10 +584,12 @@ class NeatlineNeatline extends Omeka_record
                 // JavaScript tries to ingest them.
                 $text = str_replace(array('[', ']'), '', json_decode($record->getElementText()->text));
                 $title = $this->getTextByItemAndField($item, 'Title');
+                $color = $this->getTextByItemAndField($item, 'Identifier');
 
                 $json[] = array(
                     'id' => $item->id,
                     'title' => $title,
+                    'color' => $color,
                     'wkt' => $text
                 );
 

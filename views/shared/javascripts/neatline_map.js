@@ -44,6 +44,11 @@
             colors: {
                 neatline_purple: '#724E85',
                 highlight_red: '#d04545'
+            },
+
+            styles: {
+                default_opacity: 0.4,
+                default_color: '#ffb80e'
             }
 
         },
@@ -196,8 +201,20 @@
                 // Get the id of the item.
                 var itemId = item.id;
 
+                // Try to get a color from the JSON, revert to default if no color is set..
+                var color = (item.color != '') ? item.color : self.options.styles.default_color;
+
+                // Build the layer style.
+                var style = new OpenLayers.StyleMap({
+                    fillColor: color,
+                    fillOpacity: self.options.styles.default_opacity,
+                    strokeColor: color
+                });
+
                 // Build the layers.
-                var vectorLayer = new OpenLayers.Layer.Vector(item.title);
+                var vectorLayer = new OpenLayers.Layer.Vector(item.title, {
+                    styleMap: style
+                });
 
                 // Empty array to hold features objects.
                 var features = [];
