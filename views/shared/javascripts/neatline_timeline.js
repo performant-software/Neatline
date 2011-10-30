@@ -245,6 +245,12 @@
 
             });
 
+        },
+
+        getCenterForSave: function() {
+
+            return this.timeline.getBand(0).getCenterVisibleDate().toString();
+
         }
 
     });

@@ -31,12 +31,15 @@
                 topbar_id: 'topbar',
                 dropdown_container_id: 'configure-layout',
                 layout_builder_id: 'layout-builder',
-                dropdown_button_id: 'configure-layout-button'
+                dropdown_button_id: 'configure-layout-button',
+                save_arrangement_id: 'save-arrangement',
+                fix_positions_id: 'fix-positions'
             },
 
             // CSS constants.
             css: {
-                offset_padding: 3
+                offset_padding: 3,
+                button_open_background: '#724E85'
             },
 
             // Animation constants.
@@ -56,6 +59,8 @@
             this.dropdownContainer = $('#' + this.options.markup.dropdown_container_id);
             this.layoutBuilder = $('#' + this.options.markup.layout_builder_id);
             this.topbar = $('#' + this.options.markup.topbar_id);
+            this.saveArrangement = $('#' + this.options.markup.save_arrangement_id);
+            this.fixPositions = $('#' + this.options.markup.fix_positions_id);
 
             // Trackers.
             this._expanded = false;
@@ -123,6 +128,22 @@
                 self._updateLayoutBuilderConstants();
             });
 
+            // Fix the hover style on the button.
+            this.button.addClass('open');
+
+            // Add events to the save arrangement and fix starting positions buttons.
+            this.saveArrangement.bind({
+                'mousedown': function() {
+                    self._trigger('savearrangement');
+                }
+            });
+
+            this.fixPositions.bind({
+                'mousedown': function() {
+                    self._trigger('savepositions');
+                }
+            });
+
             // Update tracker.
             this._expanded = true;
 
@@ -141,6 +162,10 @@
                 self.dropdownContainer.css('display', 'none');
 
             });
+
+            // Pop off the open style on the button.
+            this.button.removeClass('open');
+
 
             // Update tracker.
             this._expanded = false;
@@ -185,7 +210,7 @@
 
                 // Position the dropdown.
                 this.dropdownContainer.css({
-                    'left': buttonLeftBoundary - this.dropdownWidth,
+                    'left': buttonRightBoundary - this.dropdownWidth,
                     'top': topOffset
                 });
 
@@ -199,6 +224,36 @@
             // builder dependent on display status and page position.
             this.layoutBuilder.layoutbuilder('getPxConstants');
             this.layoutBuilder.layoutbuilder('centerAllTags');
+
+        },
+
+        saveArrangement: function() {
+
+
+        },
+
+        savePositions: function(mapExtent, mapZoom, timelineCenter) {
+
+            // Save data.
+            $.ajax({
+
+                url: 'save',
+                type: 'POST',
+
+                data: {
+                    neatline_id: Neatline.id,
+                    map_extent: mapExtent,
+                    map_zoom: mapZoom,
+                    timeline_center: timelineCenter
+                },
+
+                success: function() {
+
+                    console.log('success');
+
+                }
+
+            });
 
         }
 

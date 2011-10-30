@@ -41,6 +41,9 @@ class NeatlineNeatline extends Omeka_record
     public $is_map;
     public $is_timeline;
     public $is_undated_items;
+    public $default_map_bounds;
+    public $default_map_zoom;
+    public $default_timeline_focus_date;
 
     /**
      * Validate the add Neatline form.
@@ -598,6 +601,26 @@ class NeatlineNeatline extends Omeka_record
         }
 
         return json_encode($json);
+
+    }
+
+    /**
+     * Save default viewport positions.
+     *
+     * @param string $mapExtent The bounding box for the map.
+     * @param string $mapZoom The integer zoom value.
+     * @param string $timelineCenter The timestamp for the timeline focus.
+     *
+     * @return Omeka_record The map.
+     */
+    public function saveViewportPositions($mapExtent, $mapZoom, $timelineCenter)
+    {
+
+        // Set values.
+        $this->default_map_bounds = $mapExtent;
+        $this->default_map_zoom = intval($mapZoom);
+        $this->default_timeline_focus_date = $timelineCenter;
+        $this->save();
 
     }
 

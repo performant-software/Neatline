@@ -390,6 +390,23 @@
 
             this.map.neatlinemap('setItemColor', color);
 
+        },
+
+        getMapExtent: function() {
+
+            return this.map.neatlinemap('getExtentForSave');
+
+        },
+
+        getMapZoom: function() {
+
+            return this.map.neatlinemap('getZoomForSave');
+
+        },
+
+        getTimelineCenter: function() {
+
+            return this.timeline.neatlinetimeline('getCenterForSave');
 
         }
 

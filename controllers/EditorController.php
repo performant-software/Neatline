@@ -215,4 +215,37 @@ class Neatline_EditorController extends Omeka_Controller_Action
 
     }
 
+    /**
+     * ~ AJAX ~
+     * Save default viewport focus positions.
+     *
+     * @return void
+     */
+    public function positionsAction()
+    {
+
+        // Supress the default Zend layout-sniffer functionality.
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        // Get the post.
+        $_post = $this->_request->getPost();
+
+        // Get parameters from the ajax request.
+        $neatlineId = $_post['neatline_id'];
+        $mapExtent = $_post['map_extent'];
+        $mapZoom = $_post['map_zoom'];
+        $timelineCenter = $_post['timeline_center'];
+
+        // Fetch the Neatline exhibit record and item record.
+        $neatline = $this->_neatlinesTable->find($neatlineId);
+
+        // Save.
+        $neatline->saveViewportPositions(
+            $mapExtent,
+            $mapZoom,
+            $timelineCenter
+        );
+
+    }
+
 }

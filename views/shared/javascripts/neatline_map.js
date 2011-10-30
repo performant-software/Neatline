@@ -106,8 +106,6 @@
                 parseFloat(boundsArray[3])
             );
 
-            console.log(bounds.toString());
-
             var options = {
                 controls: [
                   new OpenLayers.Control.PanZoomBar(),
@@ -562,6 +560,18 @@
             });
 
             return wkts;
+
+        },
+
+        getExtentForSave: function() {
+
+            return this.map.getExtent().toString();
+
+        },
+
+        getZoomForSave: function() {
+
+            return this.map.getZoom();
 
         },
 

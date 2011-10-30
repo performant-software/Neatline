@@ -125,6 +125,23 @@ jQuery(document).ready(function($) {
     });
 
     // Layout builder instantiation.
-    layoutBuilderContainer.configurelayout();
+    layoutBuilderContainer.configurelayout({
+
+        // When the 'Fix starting viewport positions' button is pushed.
+        'savepositions': function() {
+
+            // Get the map extent and zoom.
+            var mapExtent = neatlineContainer.neatline('getMapExtent');
+            var mapZoom = neatlineContainer.neatline('getMapZoom');
+
+            // Get the timeline center date.
+            var timelineCenter = neatlineContainer.neatline('getTimelineCenter');
+
+            // Save.
+            layoutBuilderContainer.configurelayout('savePositions', mapExtent, mapZoom, timelineCenter);
+
+        }
+
+    });
 
 });
