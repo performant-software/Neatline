@@ -83,6 +83,7 @@ function neatline_queueEditorAssets()
     queue_css('bootstrap-1.2.0');
     queue_css('neatline-editor');
     queue_css('layout-builder');
+    queue_css('jquery.miniColors');
 
     queue_js('editor/item_editor', 'javascripts');
     queue_js('editor/item_filter', 'javascripts');
@@ -92,6 +93,7 @@ function neatline_queueEditorAssets()
     queue_js('admin/layout_builder', 'javascripts');
     queue_js('admin/toggle_button', 'javascripts');
     queue_js('editor/_deployment', 'javascripts');
+    queue_js('editor/jquery.miniColors-0.1/jquery.miniColors.min', 'javascripts');
 
 }
 
