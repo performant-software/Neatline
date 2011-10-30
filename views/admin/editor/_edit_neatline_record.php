@@ -73,7 +73,7 @@
 
             <div class="clearfix">
                 <label>Vector Color</label>
-                <input type="text" id="color-<?php echo $item->id; ?>" class="color-picker" name="color" value="#5c7bff" />
+                <input type="text" id="color-<?php echo $item->id; ?>" class="color-picker" name="color" value="<?php echo $neatline->getTextByItemAndField($item, 'Identifier'); ?>" />
             </div>
 
             <div class="actions">
