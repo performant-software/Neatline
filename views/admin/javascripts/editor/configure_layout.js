@@ -237,6 +237,7 @@
             // Save data.
             $.ajax({
                 url: 'arrangement',
+                type: 'POST',
                 data: params
             });
 

@@ -265,9 +265,9 @@ class Neatline_EditorController extends Omeka_Controller_Action
 
         // Get parameters from the ajax request.
         $neatlineId = $_post['neatline_id'];
-        $isMap = json_decode($_post['is_map']);
-        $isTimeline = json_decode($_post['is_timeline']);
-        $isUndatedItems = json_decode($_post['is_undated_items']);
+        $isMap = $_post['is_map'];
+        $isTimeline = $_post['is_timeline'];
+        $isUndatedItems = $_post['is_undated_items'];
         $topElement = $_post['top_element'];
         $udiHorizontalPosition = $_post['udi_horizontal_position'];
         $udiVerticalPosition = $_post['udi_vertical_position'];
