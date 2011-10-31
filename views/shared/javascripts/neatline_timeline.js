@@ -227,6 +227,9 @@
                 self.eventSource.loadJSON(json, url);
             });
 
+            // Set the starting date.
+            this.timeline.getBand(0).setCenterVisibleDate(Date.parse(Neatline.default_timeline_focus_date));
+
         },
 
         zoomToEvent: function(id) {
