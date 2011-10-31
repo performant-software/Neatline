@@ -59,8 +59,8 @@
             this.dropdownContainer = $('#' + this.options.markup.dropdown_container_id);
             this.layoutBuilder = $('#' + this.options.markup.layout_builder_id);
             this.topbar = $('#' + this.options.markup.topbar_id);
-            this.saveArrangement = $('#' + this.options.markup.save_arrangement_id);
-            this.fixPositions = $('#' + this.options.markup.fix_positions_id);
+            this.saveArrangementButton = $('#' + this.options.markup.save_arrangement_id);
+            this.fixPositionsButton = $('#' + this.options.markup.fix_positions_id);
 
             // Trackers.
             this._expanded = false;
@@ -132,13 +132,13 @@
             this.button.addClass('open');
 
             // Add events to the save arrangement and fix starting positions buttons.
-            this.saveArrangement.bind({
+            this.saveArrangementButton.bind({
                 'mousedown': function() {
-                    self._trigger('savearrangement');
+                    self.saveArrangement();
                 }
             });
 
-            this.fixPositions.bind({
+            this.fixPositionsButton.bind({
                 'mousedown': function() {
                     self._trigger('savepositions');
                 }
@@ -166,6 +166,9 @@
             // Pop off the open style on the button.
             this.button.removeClass('open');
 
+            // Pop the events.
+            this.saveArrangementButton.unbind('mousedown');
+            this.fixPositionsButton.unbind('mousedown');
 
             // Update tracker.
             this._expanded = false;
@@ -229,6 +232,13 @@
 
         saveArrangement: function() {
 
+            var params = this.layoutBuilder.layoutbuilder('getArrangementParameters');
+
+            // Save data.
+            $.ajax({
+                url: 'arrangement',
+                data: params
+            });
 
         },
 

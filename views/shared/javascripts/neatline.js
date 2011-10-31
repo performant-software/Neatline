@@ -59,7 +59,6 @@
 
             // Setters.
             this.params = Neatline;
-            this.params.is_undated_items = 0;
 
             // Getters.
             this._window = $(window);

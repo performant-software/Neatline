@@ -248,4 +248,45 @@ class Neatline_EditorController extends Omeka_Controller_Action
 
     }
 
+    /**
+     * ~ AJAX ~
+     * Save viewport arrangement configuration.
+     *
+     * @return void
+     */
+    public function arrangementAction()
+    {
+
+        // Supress the default Zend layout-sniffer functionality.
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        // Get the post.
+        $_post = $this->_request->getPost();
+
+        // Get parameters from the ajax request.
+        $neatlineId = $_post['neatline_id'];
+        $isMap = json_decode($_post['is_map']);
+        $isTimeline = json_decode($_post['is_timeline']);
+        $isUndatedItems = json_decode($_post['is_undated_items']);
+        $topElement = $_post['top_element'];
+        $udiHorizontalPosition = $_post['udi_horizontal_position'];
+        $udiVerticalPosition = $_post['udi_vertical_position'];
+        $udiHeight = $_post['udi_height'];
+
+        // Fetch the Neatline exhibit record and item record.
+        $neatline = $this->_neatlinesTable->find($neatlineId);
+
+        // Save.
+        $neatline->saveViewportArrangement(
+            $isMap,
+            $isTimeline,
+            $isUndatedItems,
+            $topElement,
+            $udiHorizontalPosition,
+            $udiVerticalPosition,
+            $udiHeight
+        );
+
+    }
+
 }

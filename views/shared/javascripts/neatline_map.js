@@ -55,6 +55,9 @@
 
         },
 
+        /*
+         * Grab the Neatline global, shell out trackers, startup.
+         */
         _create: function() {
 
             var self = this;
@@ -78,8 +81,12 @@
 
         },
 
+        /*
+         * Grab the Neatline global, shell out trackers, startup.
+         */
         _instantiateOpenLayers: function() {
 
+            // Set OL global attributes.
             OpenLayers.IMAGE_RELOAD_ATTEMTPS = 3;
             OpenLayers.Util.onImageLoadErrorColor = "transparent";
             OpenLayers.ImgPath = 'http://js.mapbox.com/theme/dark/';
@@ -93,11 +100,13 @@
             // Make OL compute scale according to WMS spec.
             OpenLayers.DOTS_PER_INCH = 25.4 / 0.28;
 
+            // Set tile image format.
             format = 'image/png';
             if(pureCoverage) {
                 format = "image/png8";
             }
 
+            // Build the default bounds array.
             var boundsArray = this.params.map.boundingBox.split(',');
             var bounds = new OpenLayers.Bounds(
                 parseFloat(boundsArray[0]),
@@ -106,6 +115,7 @@
                 parseFloat(boundsArray[3])
             );
 
+            // Starting options.
             var options = {
                 controls: [
                   new OpenLayers.Control.PanZoomBar(),
@@ -121,6 +131,7 @@
                 units: 'm'
             };
 
+            // Instantiate the map.
             this.map = new OpenLayers.Map('map', options);
 
             this.baseLayer = new OpenLayers.Layer.WMS(

@@ -1632,6 +1632,22 @@
 
             return 0;
 
+        },
+
+        getArrangementParameters: function() {
+
+            // Assemble an object with the position tracker variables.
+            return {
+                neatline_id: Neatline.id,
+                is_map: this._is_map,
+                is_timeline: this._is_timeline,
+                is_undated_items: this._is_undated_items,
+                top_element: this._top_element,
+                udi_horizontal_position: this._undated_items_horizontal_position,
+                udi_vertical_position: this._undated_items_vertical_position,
+                udi_height: this._undated_items_height
+            }
+
         }
 
     });

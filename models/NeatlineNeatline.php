@@ -625,6 +625,42 @@ class NeatlineNeatline extends Omeka_record
     }
 
     /**
+     * Save viewport arrangement.
+     *
+     * @param boolean $isMap True if map is present.
+     * @param boolean $isTimeline True if timeline is present.
+     * @param boolean $isUndatedItems True if undated items is present.
+     * @param string $topElement 'map' or 'timeline'.
+     * @param string $udiHorizontalPosition 'left' or 'right'.
+     * @param string $udiVerticalPosition 'top' or 'bottom'.
+     * @param string $udiHeight 'full' or 'partial'.
+     *
+     * @return Omeka_record The map.
+     */
+    public function saveViewportArrangement(
+        $isMap,
+        $isTimeline,
+        $isUndatedItems,
+        $topElement,
+        $udiHorizontalPosition,
+        $udiVerticalPosition,
+        $udiHeight
+    )
+    {
+
+        // Set values.
+        $this->is_map = $isMap;
+        $this->is_timeline = $isTimeline;
+        $this->is_undated_items = $isUndatedItems;
+        $this->top_element = $topElement;
+        $this->undated_items_horizontal_position = $udiHorizontalPosition;
+        $this->undated_items_vertical_position = $udiVerticalPosition;
+        $this->undated_items_height = $udiHeight;
+        $this->save();
+
+    }
+
+    /**
      * Delete status and element text association records
      * on exhibit delete.
      *
