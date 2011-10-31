@@ -269,8 +269,7 @@ class Neatline_EditorController extends Omeka_Controller_Action
         $isTimeline = $_post['is_timeline'];
         $isUndatedItems = $_post['is_undated_items'];
         $topElement = $_post['top_element'];
-        $udiHorizontalPosition = $_post['udi_horizontal_position'];
-        $udiVerticalPosition = $_post['udi_vertical_position'];
+        $udiPosition = $_post['udi_position'];
         $udiHeight = $_post['udi_height'];
 
         // Fetch the Neatline exhibit record and item record.
@@ -282,8 +281,7 @@ class Neatline_EditorController extends Omeka_Controller_Action
             $isTimeline,
             $isUndatedItems,
             $topElement,
-            $udiHorizontalPosition,
-            $udiVerticalPosition,
+            $udiPosition,
             $udiHeight
         );
 

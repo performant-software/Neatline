@@ -35,8 +35,7 @@ class NeatlineNeatline extends Omeka_record
     public $map_id;
     public $timeline_id;
     public $top_element;
-    public $undated_items_vertical_position;
-    public $undated_items_horizontal_position;
+    public $undated_items_position;
     public $undated_items_height;
     public $is_map;
     public $is_timeline;
@@ -121,8 +120,7 @@ class NeatlineNeatline extends Omeka_record
 
         // Set defaults layout parameters.
         $this->top_element = 'map';
-        $this->undated_items_vertical_position = 'bottom';
-        $this->undated_items_horizontal_position = 'left';
+        $this->undated_items_position = 'left';
         $this->undated_items_height = 'partial';
 
     }
@@ -631,8 +629,7 @@ class NeatlineNeatline extends Omeka_record
      * @param boolean $isTimeline True if timeline is present.
      * @param boolean $isUndatedItems True if undated items is present.
      * @param string $topElement 'map' or 'timeline'.
-     * @param string $udiHorizontalPosition 'left' or 'right'.
-     * @param string $udiVerticalPosition 'top' or 'bottom'.
+     * @param string $udiPosition 'left' or 'right'.
      * @param string $udiHeight 'full' or 'partial'.
      *
      * @return Omeka_record The map.
@@ -642,8 +639,7 @@ class NeatlineNeatline extends Omeka_record
         $isTimeline,
         $isUndatedItems,
         $topElement,
-        $udiHorizontalPosition,
-        $udiVerticalPosition,
+        $udiPosition,
         $udiHeight
     )
     {
@@ -653,8 +649,7 @@ class NeatlineNeatline extends Omeka_record
         $this->is_timeline = $isTimeline;
         $this->is_undated_items = $isUndatedItems;
         $this->top_element = $topElement;
-        $this->undated_items_horizontal_position = $udiHorizontalPosition;
-        $this->undated_items_vertical_position = $udiVerticalPosition;
+        $this->undated_items_position = $udiPosition;
         $this->undated_items_height = $udiHeight;
         $this->save();
 

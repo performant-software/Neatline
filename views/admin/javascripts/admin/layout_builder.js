@@ -120,9 +120,14 @@
             this._is_undated_items = Neatline.is_undated_items;
 
             // If not (on edit page), enable the toggle buttons directly.
-            this.map_toggle.togglebutton('enable');
-            this.timeline_toggle.togglebutton('enable');
-            this.undated_items_toggle.togglebutton('enable');
+            if (Neatline.map_id != null) {
+                this.map_toggle.togglebutton('enable');
+            }
+
+            if (Neatline.timeline_id != null) {
+                this.timeline_toggle.togglebutton('enable');
+                this.undated_items_toggle.togglebutton('enable');
+            }
 
             // For each block, if active then temporarily knock false
             // the tracker (so that the button press initializes the
@@ -130,16 +135,22 @@
             if (this._is_map) {
                 this._is_map = false;
                 this.map_toggle.togglebutton('press');
+            } else {
+                this._is_map = false;
             }
 
             if (this._is_timeline) {
                 this._is_timeline = false;
                 this.timeline_toggle.togglebutton('press');
+            } else {
+                this._is_timeline = false;
             }
 
             if (this._is_undated_items) {
                 this._is_undated_items = false;
                 this.undated_items_toggle.togglebutton('press');
+            } else {
+                this._is_undated_items = false;
             }
 
         },
@@ -219,75 +230,6 @@
 
         },
 
-        _addToggleEvents: function() {
-
-            var self = this;
-
-            // Bind callback on map selection change.
-            this.map_select.bind('change', function() {
-
-                var value = self.map_select.find('option:selected').html();
-
-                if (value != self._last_map_dropdown_selection) {
-
-                    if (value == self.options.no_selection_string && self._is_map) {
-                        self.map_toggle.togglebutton('press');
-                        self.map_toggle.togglebutton('disable');
-                    }
-
-                    else if (value == self.options.no_selection_string && !self._is_map) {
-                        self.map_toggle.togglebutton('disable');
-                    }
-
-                    else if (value != self.options.no_selection_string && !self._is_map) {
-                        self.map_toggle.togglebutton('enable');
-                        self.map_toggle.togglebutton('press');
-                    }
-
-                }
-
-                self._last_map_dropdown_selection = value;
-
-            });
-
-            // Bind callback on map selection change.
-            this.timeline_select.bind('change', function() {
-
-                var value = self.timeline_select.find('option:selected').html();
-
-                if (value != self._last_timeline_dropdown_selection) {
-
-                    if (value == self.options.no_selection_string && self._is_timeline) {
-
-                        if (self._is_undated_items) {
-                            self.undated_items_toggle.togglebutton('press');
-                            self.undated_items_toggle.togglebutton('disable');
-                        }
-
-                        self.timeline_toggle.togglebutton('press');
-                        self.timeline_toggle.togglebutton('disable');
-
-                    }
-
-                    else if (value == self.options.no_selection_string && !self._is_timeline) {
-                        self.timeline_toggle.togglebutton('disable');
-                    }
-
-                    else if (value != self.options.no_selection_string && !self._is_timeline) {
-                        self.timeline_toggle.togglebutton('enable');
-                        self.timeline_toggle.togglebutton('press');
-                        self.undated_items_toggle.togglebutton('enable');
-                        self.undated_items_toggle.togglebutton('press');
-                    }
-
-                }
-
-                self._last_timeline_dropdown_selection = value;
-
-            });
-
-        },
-
         _addDragEvents: function() {
 
             var self = this;
@@ -309,6 +251,7 @@
 
                 'mousedown': function(e) {
                     if (!self._is_dragging) {
+                        self._current_dragger = 'map';
                         self.__doMapDrag(e);
                     }
                 }
@@ -338,6 +281,7 @@
 
                 'mousedown': function(e) {
                     if (!self._is_dragging) {
+                        self._current_dragger = 'timeline';
                         self.__doTimelineDrag(e);
                     }
                 }
@@ -361,6 +305,7 @@
 
                 'mousedown': function(e) {
                     if (!self._is_dragging) {
+                        self._current_dragger = 'undated';
                         self.__doUndatedItemsDrag(e);
                     }
                 }
@@ -448,6 +393,14 @@
                     // Display none the timeline.
                     this.timeline_drag.css('display', 'none');
 
+                    this._recuperate_udi_on_timeline_toggle = false;
+
+                    if (this._is_undated_items) {
+                        this._toggleUndatedItems();
+                        this.undated_items_toggle.togglebutton('disable');
+                        this._recuperate_udi_on_timeline_toggle = true;
+                    }
+
                 break;
 
                 case false:
@@ -456,6 +409,11 @@
 
                     // Show the div.
                     this.timeline_drag.css('display', 'block');
+
+                    if (this._recuperate_udi_on_timeline_toggle) {
+                        this.undated_items_toggle.togglebutton('enable');
+                        this._toggleUndatedItems();
+                    }
 
                 break;
 
@@ -514,10 +472,6 @@
 
         },
 
-        _destroy: function() {
-
-        },
-
         /*
          * Glossing and dragging methods.
          */
@@ -537,7 +491,7 @@
 
             }
 
-            this.map_drag.animate({
+            this.map_drag.clearQueue().animate({
                 'background-color': target
             }, this.options.gloss_fade_duration);
 
@@ -558,7 +512,7 @@
 
             }
 
-            this.timeline_drag.animate({
+            this.timeline_drag.clearQueue().animate({
                 'background-color': target
             }, this.options.gloss_fade_duration);
 
@@ -912,7 +866,7 @@
                     if (self._undated_items_position == 'right') {
 
                         // If the cursor crosses over the centerline going left.
-                        if (e.pageX < (self._dragbox_width / 2)) {
+                        if (e.pageX < (self._dragbox_position.left + self._dragbox_width / 2)) {
 
                             self._undated_items_position = 'left';
                             self.__slideTimeline(false);
@@ -929,7 +883,7 @@
                     else {
 
                         // If the cursor crosses over the centerline going left.
-                        if (e.pageX > (self._dragbox_width / 2)) {
+                        if (e.pageX > (self._dragbox_position.left + self._dragbox_width / 2)) {
 
                             self._undated_items_position = 'right';
                             self.__slideTimeline(false);
@@ -959,13 +913,15 @@
 
             var self = this;
             var newTimelineHeight = this.__getTimelineHeight();
+
             var _current_params = [
                 this._top_element,
                 this._undated_items_position,
                 this._undated_items_height
             ];
 
-            if (!$.compare(_current_params, this._last_timeline_slide_params)) {
+            if (!$.compare(_current_params, this._last_timeline_slide_params)
+               || this._current_dragger == 'timeline') {
 
                 if (ending_slide) {
 
@@ -1017,6 +973,7 @@
         __slideTimelineAndUndatedItems: function(ending_slide) {
 
             var self = this;
+
             var newTimelineHeight = this.__getTimelineHeight();
             var newUndatedItemsHeight = this.__getUndatedItemsHeight();
 
@@ -1085,7 +1042,8 @@
                 this._undated_items_height
             ];
 
-            if (!$.compare(_current_params, this._last_map_slide_params)) {
+            if (!$.compare(_current_params, this._last_map_slide_params)
+               || this._current_dragger == 'map') {
 
                 if (ending_slide) {
 
@@ -1098,9 +1056,11 @@
                         'opacity': 1,
                         'z-index': 0
                     }, function() {
+
                         // On complete, if the slide is an ending
                         // slide, unset the dragging tracker.
                             self._is_dragging = false;
+
                     });
 
                 }
@@ -1146,9 +1106,11 @@
                     'opacity': 1,
                     'z-index': 0
                 }, function() {
+
                     // On complete, if the slide is an ending
                     // slide, unset the dragging tracker.
                         self._is_dragging = false;
+
                 });
 
             }
@@ -1416,6 +1378,26 @@
             }
 
             return offset;
+
+        },
+
+        getArrangementParameters: function() {
+
+            // Prep booleans for the database.
+            var is_map = this._is_map ? 1 : 0;
+            var is_timeline = this._is_timeline ? 1 : 0;
+            var is_undated_items = this._is_undated_items ? 1 : 0;
+
+            // Assemble an object with the position tracker variables.
+            return {
+                neatline_id: Neatline.id,
+                is_map: is_map,
+                is_timeline: is_timeline,
+                is_undated_items: is_undated_items,
+                top_element: this._top_element,
+                udi_position: this._undated_items_position,
+                udi_height: this._undated_items_height
+            }
 
         }
 
