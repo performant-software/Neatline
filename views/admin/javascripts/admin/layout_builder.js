@@ -1225,9 +1225,8 @@
 
 
         /*
-         * Positioning calculators and toggling helpers.
+         * Construct the undated items dragger div.
          */
-
         __toggleUndatedItemsButton: function() {
 
             if (this._is_timeline) {
@@ -1240,6 +1239,9 @@
 
         },
 
+        /*
+         * Construct the map dragger div.
+         */
         __createMapDiv: function() {
 
             return $('<div id="drag-map" class="draggable">\
@@ -1248,6 +1250,9 @@
 
         },
 
+        /*
+         * Construct the timeline dragger div.
+         */
         __createTimelineDiv: function() {
 
             return $('<div id="drag-timeline" class="draggable">\
@@ -1256,6 +1261,9 @@
 
         },
 
+        /*
+         * Construct the undated items dragger div.
+         */
         __createUndatedItemsDiv: function() {
 
             return $('<div id="drag-undated-items" class="draggable">\
@@ -1264,6 +1272,9 @@
 
         },
 
+        /*
+         * Calculate the height of the undated items block.
+         */
         __getUndatedItemsHeight: function() {
 
             // If UDI is full height.
@@ -1322,6 +1333,9 @@
 
         },
 
+        /*
+         * Calculate the width of the undated items block.
+         */
         __getUndatedItemsWidth: function() {
 
             // If there is neither a map nor a timeline.
@@ -1368,6 +1382,9 @@
 
         },
 
+        /*
+         * Calculate the left offset for the undated items block.
+         */
         __getUndatedItemsLeftOffset: function() {
 
             if (this._undated_items_horizontal_position == 'left') {
@@ -1378,12 +1395,45 @@
                 return 0;
             }
 
-            else {
-                return this._undated_items_left_offset;
+            if (this._undated_items_height == 'partial') {
+
+                // If there is a map and not a timeline.
+                if (this._is_map && !this._is_timeline) {
+
+                    // If the udi and the map are in opposite vertical positions.
+                    if (this._top_element == 'map' && this._undated_items_vertical_position == 'bottom') {
+                        return 0;
+                    }
+
+                    if (this._top_element == 'timeline' && this._undated_items_vertical_position == 'top') {
+                        return 0;
+                    }
+
+                }
+
+                // If there is a timeline and not a map.
+                if (!this._is_map && this._is_timeline) {
+
+                    // If the udi and the timeline are in opposite vertical positions.
+                    if (this._top_element == 'map' && this._undated_items_vertical_position == 'top') {
+                        return 0;
+                    }
+
+                    if (this._top_element == 'timeline' && this._undated_items_vertical_position == 'bottom') {
+                        return 0;
+                    }
+
+                }
+
             }
+
+            return this._undated_items_left_offset;
 
         },
 
+        /*
+         * Calculate the top offset for the undated items block.
+         */
         __getUndatedItemsTopOffset: function() {
 
             if (this._undated_items_height == 'partial' && this._undated_items_vertical_position == 'bottom') {
@@ -1402,6 +1452,9 @@
 
         },
 
+        /*
+         * Calculate the width of the map block.
+         */
         __getMapWidth: function() {
 
             var partialWidth = this._dragbox_width - this.options.undated_items_width;
@@ -1434,6 +1487,9 @@
 
         },
 
+        /*
+         * Calculate the height of the map block.
+         */
         __getMapHeight: function() {
 
             // If there is a timeline.
@@ -1471,6 +1527,9 @@
 
         },
 
+        /*
+         * Calculate the left offset for the map block.
+         */
         __getMapLeftOffset: function() {
 
             if (this._is_undated_items && this._undated_items_horizontal_position == 'left') {
@@ -1502,6 +1561,9 @@
 
         },
 
+        /*
+         * Calculate the top offset for the map block.
+         */
         __getMapTopOffset: function() {
 
             // If the map is the top element.
@@ -1518,6 +1580,9 @@
 
         },
 
+        /*
+         * Calculate the width of the timeline block.
+         */
         __getTimelineWidth: function() {
 
             var partialWidth = this._dragbox_width - this.options.undated_items_width;
@@ -1550,6 +1615,9 @@
 
         },
 
+        /*
+         * Calculate the height of the timeline block.
+         */
         __getTimelineHeight: function() {
 
             // If there is a map.
@@ -1587,6 +1655,9 @@
 
         },
 
+        /*
+         * Calculate the left offset for the timeline block.
+         */
         __getTimelineLeftOffset: function() {
 
             if (this._is_undated_items && this._undated_items_horizontal_position == 'left') {
@@ -1618,6 +1689,9 @@
 
         },
 
+        /*
+         * Calculate the top offset for the timeline block.
+         */
         __getTimelineTopOffset: function() {
 
             // If the timeline is the top element.
@@ -1634,6 +1708,9 @@
 
         },
 
+        /*
+         * Return the current positioning parameter loadout.
+         */
         getArrangementParameters: function() {
 
             // Assemble an object with the position tracker variables.
@@ -1653,17 +1730,12 @@
     });
 
 
-    /*
-     * Somewhat shockingly, browser implementations of JavaScript do
-     * not support array comparison. This function takes two arrays, walks
-     * each and compares the elements, and returns true if the arrays
-     * contain the same set. This is used in the code that checks to see
-     * whether or not a div animation needs to occur, based on the
-     * parameter loadout of the last slide.
-     */
 
     $.extend({
 
+        /*
+         * Evaluate two arrays for equality.
+         */
         compare: function(array1, array2) {
 
             if (array1 == null || array2 == null) {
