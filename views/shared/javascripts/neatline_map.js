@@ -140,6 +140,20 @@
             );
 
             this.map.addLayers([this.baseLayer]);
+
+            // If there is a default bounding box set for the exhibit, construct
+            // a second Bounds object to use as the starting zoom target.
+            if (this.params.default_map_bounds != null) {
+                var boundsArray = this.params.default_map_bounds.split(',');
+                var bounds = new OpenLayers.Bounds(
+                    parseFloat(boundsArray[0]),
+                    parseFloat(boundsArray[1]),
+                    parseFloat(boundsArray[2]),
+                    parseFloat(boundsArray[3])
+                );
+            }
+
+            // Set starting zoom focus.
             this.map.zoomToExtent(bounds);
 
         },

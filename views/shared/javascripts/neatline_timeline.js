@@ -227,8 +227,11 @@
                 self.eventSource.loadJSON(json, url);
             });
 
-            // Set the starting date.
-            this.timeline.getBand(0).setCenterVisibleDate(Date.parse(Neatline.default_timeline_focus_date));
+            // Set the starting date, if defined.
+            if (this.params.default_timeline_focus_date != null) {
+                var startDate = Date.parse(this.params.default_timeline_focus_date);
+                this.timeline.getBand(0).setCenterVisibleDate(startDate);
+            }
 
         },
 
