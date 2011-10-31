@@ -113,8 +113,7 @@
 
             // Get starting parameters out of the Neatline global.
             this._top_element = Neatline.top_element;
-            this._undated_items_horizontal_position = Neatline.undated_items_horizontal_position;
-            this._undated_items_vertical_position = Neatline.undated_items_vertical_position;
+            this._undated_items_position = Neatline.undated_items_horizontal_position;
             this._undated_items_height = Neatline.undated_items_height;
             this._is_map = Neatline.is_map;
             this._is_timeline = Neatline.is_timeline;
@@ -303,12 +302,13 @@
                 },
 
                 'mouseleave': function() {
-                    self.__mapHighlight('leave');
+                    if (!self._is_dragging) {
+                        self.__mapHighlight('leave');
+                    }
                 },
 
                 'mousedown': function(e) {
                     if (!self._is_dragging) {
-                        self._current_dragger = 'map';
                         self.__doMapDrag(e);
                     }
                 }
@@ -321,16 +321,23 @@
                 'mouseenter': function() {
                     if (!self._is_dragging) {
                         self.__timelineHighlight('enter');
+                        if (self._undated_items_height == 'partial') {
+                            self.__undatedItemsHighlight('enter');
+                        }
                     }
                 },
 
                 'mouseleave': function() {
-                    self.__timelineHighlight('leave');
+                    if (!self._is_dragging) {
+                        self.__timelineHighlight('leave');
+                        if (self._undated_items_height == 'partial') {
+                            self.__undatedItemsHighlight('leave');
+                        }
+                    }
                 },
 
                 'mousedown': function(e) {
                     if (!self._is_dragging) {
-                        self._current_dragger = 'timeline';
                         self.__doTimelineDrag(e);
                     }
                 }
@@ -347,12 +354,13 @@
                 },
 
                 'mouseleave': function() {
-                    self.__undatedItemsHighlight('leave');
+                    if (!self._is_dragging) {
+                        self.__undatedItemsHighlight('leave');
+                    }
                 },
 
                 'mousedown': function(e) {
                     if (!self._is_dragging) {
-                        self._current_dragger = 'undated';
                         self.__doUndatedItemsDrag(e);
                     }
                 }
@@ -388,11 +396,11 @@
             });
 
             // Center tags.
-            this.centerAllTags();
+            this._centerAllTags();
 
         },
 
-        centerAllTags: function() {
+        _centerAllTags: function() {
 
             this._position_tag(this.map_drag);
             this._position_tag(this.timeline_drag);
@@ -529,7 +537,7 @@
 
             }
 
-            this.map_drag.clearQueue().animate({
+            this.map_drag.animate({
                 'background-color': target
             }, this.options.gloss_fade_duration);
 
@@ -550,7 +558,7 @@
 
             }
 
-            this.timeline_drag.clearQueue().animate({
+            this.timeline_drag.animate({
                 'background-color': target
             }, this.options.gloss_fade_duration);
 
@@ -613,43 +621,16 @@
                     });
 
                     // If there is a timeline.
-                    if (self._is_timeline || self._is_undated_items) {
+                    if (self._is_timeline) {
 
                         // If the timeline is on the bottom.
                         if (self._top_element == 'map') {
 
                             // If the cursor dips below the top border
                             // of the timeline div, slide the timeline up.
-                            if (e.pageY > (self._top_block_height + self._dragbox_position.top) && self._is_timeline) {
+                            if (e.pageY > (self._top_block_height + self._dragbox_position.top)) {
                                 self._top_element = 'timeline';
-                                self.__slideTimeline(false);
-                                self.__slideUndatedItems(false);
-                            }
-
-                            if (self._is_undated_items && self._undated_items_horizontal_position == 'left') {
-
-                                // If the cursor crosses over the centerline going left.
-                                if (e.pageX < (self._dragbox_position.left + (self._dragbox_width / 2))) {
-
-                                    self._undated_items_horizontal_position = 'right';
-                                    self.__slideUndatedItems(false);
-                                    self.__slideTimeline(false);
-
-                                }
-
-                            }
-
-                            else if (self._is_undated_items && self._undated_items_horizontal_position == 'right') {
-
-                                // If the cursor crosses over the centerline going right.
-                                if (e.pageX > (self._dragbox_position.left + (self._dragbox_width / 2))) {
-
-                                    self._undated_items_horizontal_position = 'left';
-                                    self.__slideUndatedItems(false);
-                                    self.__slideTimeline(false);
-
-                                }
-
+                                self.__slideTimelineAndUndatedItems(false);
                             }
 
                         }
@@ -659,36 +640,9 @@
 
                             // If the cursor moves above the bottom border
                             // of the timeline div, slide the timeline down.
-                            if (e.pageY < (self._dragbox_position.top + self._top_block_height) && self._is_timeline) {
+                            if (e.pageY < (self._dragbox_position.top + self._top_block_height)) {
                                 self._top_element = 'map';
-                                self.__slideTimeline(false);
-                                self.__slideUndatedItems(false);
-                            }
-
-                            if (self._is_undated_items && self._undated_items_horizontal_position == 'left') {
-
-                                // If the cursor crosses over the centerline going left.
-                                if (e.pageX < (self._dragbox_position.left + (self._dragbox_width / 2))) {
-
-                                    self._undated_items_horizontal_position = 'right';
-                                    self.__slideUndatedItems(false);
-                                    self.__slideTimeline(false);
-
-                                }
-
-                            }
-
-                            else if (self._is_undated_items && self._undated_items_horizontal_position == 'right') {
-
-                                // If the cursor crosses over the centerline going right.
-                                if (e.pageX > (self._dragbox_position.left + (self._dragbox_width / 2))) {
-
-                                    self._undated_items_horizontal_position = 'left';
-                                    self.__slideUndatedItems(false);
-                                    self.__slideTimeline(false);
-
-                                }
-
+                                self.__slideTimelineAndUndatedItems(false);
                             }
 
                         }
@@ -719,12 +673,19 @@
             // Get starting div offsets.
             var timelineStartingOffsetX = this.__getTimelineLeftOffset();
             var timelineStartingOffsetY = this.__getTimelineTopOffset();
+            var undatedItemsStartingOffsetX = this.__getUndatedItemsLeftOffset();
+            var undatedItemsStartingOffsetY = this.__getUndatedItemsTopOffset();
 
             // Bind self.
             var self = this;
 
             // Make the drag divs see-through and always on top.
             this.timeline_drag.css({
+                'opacity': 0.5,
+                'z-index': 99
+            });
+
+            this.undated_items_drag.css({
                 'opacity': 0.5,
                 'z-index': 99
             });
@@ -743,86 +704,39 @@
                         'top': timelineStartingOffsetY + offsetY
                     });
 
+                    if (self._undated_items_height == 'partial') {
+                        self.undated_items_drag.css({
+                            'left': undatedItemsStartingOffsetX + offsetX,
+                            'top': undatedItemsStartingOffsetY + offsetY
+                        });
+                    }
+
                     // If there is a map.
-                    if (self._is_map || self._is_undated_items) {
+                    if (self._is_map) {
 
                         // Get current map top offset.
                         var mapTopOffset = self.__getMapTopOffset();
 
-                        // If the timeline is on top.
+                        // If the map is on the bottom.
                         if (self._top_element == 'timeline') {
 
                             // If the cursor dips below the top border
                             // of the timeline div, slide the timeline up.
-                            if (e.pageY > (mapTopOffset + self._dragbox_position.top) && self._is_map) {
+                            if (e.pageY > (mapTopOffset + self._dragbox_position.top)) {
                                 self._top_element = 'map';
                                 self.__slideMap(false);
-                                self.__slideUndatedItems(false);
-                            }
-
-                            if (self._is_undated_items && self._undated_items_horizontal_position == 'left') {
-
-                                // If the cursor crosses over the centerline going left.
-                                if (e.pageX < (self._dragbox_position.left + (self._dragbox_width / 2))) {
-
-                                    self._undated_items_horizontal_position = 'right';
-                                    self.__slideUndatedItems(false);
-                                    self.__slideMap(false);
-
-                                }
-
-                            }
-
-                            else if (self._is_undated_items && self._undated_items_horizontal_position == 'right') {
-
-                                // If the cursor crosses over the centerline going right.
-                                if (e.pageX > (self._dragbox_position.left + (self._dragbox_width / 2))) {
-
-                                    self._undated_items_horizontal_position = 'left';
-                                    self.__slideUndatedItems(false);
-                                    self.__slideMap(false);
-
-                                }
-
                             }
 
                         }
 
-                        // If the timeline is on the bottom.
+                        // If the timeline is on the top.
                         else {
 
                             // If the cursor moves above the bottom border
                             // of the timeline div, slide the timeline down.
-                            if (e.pageY < (self._dragbox_position.top + self._top_block_height) && self._is_map) {
+                            if (e.pageY < (self._dragbox_position.top + self._top_block_height)) {
                                 self._top_element = 'timeline';
                                 self.__slideMap(false);
-                                self.__slideUndatedItems(false);
-                            }
-
-                            if (self._is_undated_items && self._undated_items_horizontal_position == 'left') {
-
-                                // If the cursor crosses over the centerline going left.
-                                if (e.pageX < (self._dragbox_position.left + (self._dragbox_width / 2))) {
-
-                                    self._undated_items_horizontal_position = 'right';
-                                    self.__slideUndatedItems(false);
-                                    self.__slideMap(false);
-
-                                }
-
-                            }
-
-                            else if (self._is_undated_items && self._undated_items_horizontal_position == 'right') {
-
-                                // If the cursor crosses over the centerline going right.
-                                if (e.pageX > (self._dragbox_position.left + (self._dragbox_width / 2))) {
-
-                                    self._undated_items_horizontal_position = 'left';
-                                    self.__slideUndatedItems(false);
-                                    self.__slideMap(false);
-
-                                }
-
                             }
 
                         }
@@ -833,7 +747,7 @@
 
                 'mouseup': function() {
 
-                    self.__slideTimeline(true);
+                    self.__slideTimelineAndUndatedItems(true);
                     self._window.unbind('mousemove mouseup');
 
                 }
@@ -856,7 +770,7 @@
 
             // Set starting height and position status.
             this._udi_height_at_start_of_drag = this._undated_items_height;
-            this._udi_position_at_start_of_drag = this._undated_items_vertical_position;
+            this._udi_position_at_start_of_drag = (this._top_element == 'map') ? 'bottom' : 'top';
 
             // Bind self.
             var self = this;
@@ -898,7 +812,7 @@
                             // through the first offset tier.
                             if (offsetY < 0 && offsetY > -vt1) {
                                 self._undated_items_height = 'partial';
-                                self._undated_items_vertical_position = 'bottom';
+                                self._top_element = 'map';
                                 self.__slideTimeline(false);
                                 self.__slideMap(false);
                             }
@@ -915,7 +829,7 @@
                             // second tier threshold.
                             else if (offsetY < -vt2) {
                                 self._undated_items_height = 'partial';
-                                self._undated_items_vertical_position = 'top';
+                                self._top_element = 'timeline';
                                 self.__slideTimeline(false);
                                 self.__slideMap(false);
                             }
@@ -929,7 +843,7 @@
                             // through the first offset tier.
                             if (offsetY > 0 && offsetY < vt1) {
                                 self._undated_items_height = 'partial';
-                                self._undated_items_vertical_position = 'top';
+                                self._top_element = 'timeline';
                                 self.__slideTimeline(false);
                                 self.__slideMap(false);
                             }
@@ -946,7 +860,7 @@
                             // second tier threshold.
                             else if (offsetY > vt2) {
                                 self._undated_items_height = 'partial';
-                                self._undated_items_vertical_position = 'bottom';
+                                self._top_element = 'map';
                                 self.__slideTimeline(false);
                                 self.__slideMap(false);
                             }
@@ -956,7 +870,7 @@
                     }
 
                     // If udi was full-height at the start of the drag.
-                    else if (self._udi_height_at_start_of_drag == 'full' && self._is_map && self._is_timeline) {
+                    else if (self._udi_height_at_start_of_drag == 'full') {
 
                         // If the mouse has moved upwards but has not crossed
                         // through the first vertical tier.
@@ -970,7 +884,7 @@
                         // the first vertical tier.
                         else if (offsetY < -vt1) {
                             self._undated_items_height = 'partial';
-                            self._undated_items_vertical_position = 'top';
+                            self._top_element = 'timeline';
                             self.__slideTimeline(false);
                             self.__slideMap(false);
                         }
@@ -987,7 +901,7 @@
                         // the first vertical tier.
                         else if (offsetY > vt1) {
                             self._undated_items_height = 'partial';
-                            self._undated_items_vertical_position = 'bottom';
+                            self._top_element = 'map';
                             self.__slideTimeline(false);
                             self.__slideMap(false);
                         }
@@ -995,14 +909,17 @@
                     }
 
                     // If udi is on the right.
-                    if (self._undated_items_horizontal_position == 'right') {
+                    if (self._undated_items_position == 'right') {
 
                         // If the cursor crosses over the centerline going left.
-                        if (e.pageX < (self._dragbox_position.left + (self._dragbox_width / 2))) {
+                        if (e.pageX < (self._dragbox_width / 2)) {
 
-                            self._undated_items_horizontal_position = 'left';
+                            self._undated_items_position = 'left';
                             self.__slideTimeline(false);
-                            self.__slideMap(false);
+
+                            if (self._undated_items_height == 'full') {
+                                self.__slideMap(false);
+                            }
 
                         }
 
@@ -1012,11 +929,14 @@
                     else {
 
                         // If the cursor crosses over the centerline going left.
-                        if (e.pageX > (self._dragbox_position.left + (self._dragbox_width / 2))) {
+                        if (e.pageX > (self._dragbox_width / 2)) {
 
-                            self._undated_items_horizontal_position = 'right';
+                            self._undated_items_position = 'right';
                             self.__slideTimeline(false);
-                            self.__slideMap(false);
+
+                            if (self._undated_items_height == 'full') {
+                                self.__slideMap(false);
+                            }
 
                         }
 
@@ -1041,13 +961,11 @@
             var newTimelineHeight = this.__getTimelineHeight();
             var _current_params = [
                 this._top_element,
-                this._undated_items_horizontal_position,
-                this._undated_items_vertical_position,
+                this._undated_items_position,
                 this._undated_items_height
             ];
 
-            if (!$.compare(_current_params, this._last_timeline_slide_params)
-                || this._current_dragger == 'timeline') {
+            if (!$.compare(_current_params, this._last_timeline_slide_params)) {
 
                 if (ending_slide) {
 
@@ -1063,7 +981,9 @@
 
                         // On complete, if the slide is an ending
                         // slide, unset the dragging tracker.
-                        self._is_dragging = false;
+                        if (ending_slide) {
+                            self._is_dragging = false;
+                        }
 
                     });
 
@@ -1086,12 +1006,72 @@
                 // Record params loadout for the last slide.
                 this._last_timeline_slide_params = [
                     this._top_element,
-                    this._undated_items_horizontal_position,
-                    this._undated_items_vertical_position,
+                    this._undated_items_position,
                     this._undated_items_height
                 ];
 
             }
+
+        },
+
+        __slideTimelineAndUndatedItems: function(ending_slide) {
+
+            var self = this;
+            var newTimelineHeight = this.__getTimelineHeight();
+            var newUndatedItemsHeight = this.__getUndatedItemsHeight();
+
+            if (ending_slide) {
+
+                // Slide the timeline and undated items.
+                this.timeline_drag.stop().animate({
+                    'height': newTimelineHeight,
+                    'width': this.__getTimelineWidth(),
+                    'top': this.__getTimelineTopOffset(),
+                    'left': this.__getTimelineLeftOffset(),
+                    'opacity': 1,
+                    'z-index': 0
+                });
+
+                this.undated_items_drag.stop().animate({
+                    'height': newUndatedItemsHeight,
+                    'width': this.__getUndatedItemsWidth(),
+                    'top': this.__getUndatedItemsTopOffset(),
+                    'left': this.__getUndatedItemsLeftOffset(),
+                    'opacity': 1,
+                    'z-index': 0
+                }, function() {
+
+                    // On complete, if the slide is an ending
+                    // slide, unset the dragging tracker.
+                    if (ending_slide) {
+                        self._is_dragging = false;
+                    }
+
+                });
+
+            }
+
+            else {
+
+                // Slide the timeline and undated items.
+                this.timeline_drag.stop().animate({
+                    'height': newTimelineHeight,
+                    'width': this.__getTimelineWidth(),
+                    'top': this.__getTimelineTopOffset(),
+                    'left': this.__getTimelineLeftOffset()
+                });
+
+                this.undated_items_drag.stop().animate({
+                    'height': newUndatedItemsHeight,
+                    'width': this.__getUndatedItemsWidth(),
+                    'top': this.__getUndatedItemsTopOffset(),
+                    'left': this.__getUndatedItemsLeftOffset()
+                });
+
+            }
+
+            this._animate_position_tag(this.timeline_drag, newTimelineHeight);
+            this._animate_position_tag(this.undated_items_drag, newUndatedItemsHeight);
 
         },
 
@@ -1101,13 +1081,11 @@
             var newMapHeight = this.__getMapHeight();
             var _current_params = [
                 this._top_element,
-                this._undated_items_horizontal_position,
-                this._undated_items_vertical_position,
+                this._undated_items_position,
                 this._undated_items_height
             ];
 
-            if (!$.compare(_current_params, this._last_map_slide_params)
-                || this._current_dragger == 'map') {
+            if (!$.compare(_current_params, this._last_map_slide_params)) {
 
                 if (ending_slide) {
 
@@ -1120,11 +1098,9 @@
                         'opacity': 1,
                         'z-index': 0
                     }, function() {
-
                         // On complete, if the slide is an ending
                         // slide, unset the dragging tracker.
-                        self._is_dragging = false;
-
+                            self._is_dragging = false;
                     });
 
                 }
@@ -1146,8 +1122,7 @@
                 // Record params loadout for the last slide.
                 this._last_map_slide_params = [
                     this._top_element,
-                    this._undated_items_horizontal_position,
-                    this._undated_items_vertical_position,
+                    this._undated_items_position,
                     this._undated_items_height
                 ];
 
@@ -1159,74 +1134,54 @@
 
             var self = this;
             var newUndatedItemsHeight = this.__getUndatedItemsHeight();
-            var _current_params = [
-                this._top_element,
-                this._undated_items_horizontal_position,
-                this._undated_items_vertical_position,
-                this._undated_items_height
-            ];
 
-            if (!$.compare(_current_params, this._last_undated_items_slide_params)
-                || this._current_dragger == 'undated') {
+            if (ending_slide) {
 
-                if (ending_slide) {
-
-                    // Slide the timeline and undated items.
-                    this.undated_items_drag.stop().animate({
-                        'height': newUndatedItemsHeight,
-                        'width': this.__getUndatedItemsWidth(),
-                        'top': this.__getUndatedItemsTopOffset(),
-                        'left': this.__getUndatedItemsLeftOffset(),
-                        'opacity': 1,
-                        'z-index': 0
-                    }, function() {
-
-                        // On complete, if the slide is an ending
-                        // slide, unset the dragging tracker.
+                // Slide the timeline and undated items.
+                this.undated_items_drag.stop().animate({
+                    'height': newUndatedItemsHeight,
+                    'width': this.__getUndatedItemsWidth(),
+                    'top': this.__getUndatedItemsTopOffset(),
+                    'left': this.__getUndatedItemsLeftOffset(),
+                    'opacity': 1,
+                    'z-index': 0
+                }, function() {
+                    // On complete, if the slide is an ending
+                    // slide, unset the dragging tracker.
                         self._is_dragging = false;
-
-                    });
-
-                }
-
-                else {
-
-                    // Slide the timeline and undated items.
-                    this.undated_items_drag.stop().animate({
-                        'height': newUndatedItemsHeight,
-                        'width': this.__getUndatedItemsWidth(),
-                        'top': this.__getUndatedItemsTopOffset(),
-                        'left': this.__getUndatedItemsLeftOffset()
-                    });
-
-                }
-
-                this._animate_position_tag(this.undated_items_drag, newUndatedItemsHeight);
-
-                // Record params loadout for the last slide.
-                this._last_undated_items_slide_params = [
-                    this._top_element,
-                    this._undated_items_horizontal_position,
-                    this._undated_items_vertical_position,
-                    this._undated_items_height
-                ];
+                });
 
             }
+
+            else {
+
+                // Slide the timeline and undated items.
+                this.undated_items_drag.stop().animate({
+                    'height': newUndatedItemsHeight,
+                    'width': this.__getUndatedItemsWidth(),
+                    'top': this.__getUndatedItemsTopOffset(),
+                    'left': this.__getUndatedItemsLeftOffset()
+                });
+
+            }
+
+            this._animate_position_tag(this.undated_items_drag, newUndatedItemsHeight);
 
         },
 
         __updateHiddenInputs: function() {
 
             this.top_element_input.attr('value', this._top_element);
-            this.udi_position_input.attr('value', this._undated_items_horizontal_position);
+            this.udi_position_input.attr('value', this._undated_items_position);
             this.udi_height_input.attr('value', this._undated_items_height);
 
         },
 
 
         /*
-         * Construct the undated items dragger div.
+         * Positioning calculators and toggling helpers.
          */
+
         __toggleUndatedItemsButton: function() {
 
             if (this._is_timeline) {
@@ -1239,9 +1194,6 @@
 
         },
 
-        /*
-         * Construct the map dragger div.
-         */
         __createMapDiv: function() {
 
             return $('<div id="drag-map" class="draggable">\
@@ -1250,9 +1202,6 @@
 
         },
 
-        /*
-         * Construct the timeline dragger div.
-         */
         __createTimelineDiv: function() {
 
             return $('<div id="drag-timeline" class="draggable">\
@@ -1261,9 +1210,6 @@
 
         },
 
-        /*
-         * Construct the undated items dragger div.
-         */
         __createUndatedItemsDiv: function() {
 
             return $('<div id="drag-undated-items" class="draggable">\
@@ -1272,458 +1218,204 @@
 
         },
 
-        /*
-         * Calculate the height of the undated items block.
-         */
         __getUndatedItemsHeight: function() {
 
-            // If UDI is full height.
+            var height = null;
+
             if (this._undated_items_height == 'full') {
-                return this._dragbox_height;
+                height = this._dragbox_height;
             }
 
-            // If UDI is partial height.
-            if (this._undated_items_height == 'partial' && (!this._is_map || !this._is_timeline)) {
+            else {
 
                 if (this._is_map) {
 
-                    // If the map and UDI are in matching vertical positions.
-                    if (this._undated_items_vertical_position == 'top' && this._top_element == 'map') {
-                        return this._dragbox_height;
+                    if (this._top_element == 'map') {
+                        height = this._bottom_block_height;
                     }
 
-                    else if (this._undated_items_vertical_position == 'bottom' && this._top_element == 'timeline') {
-                        return this._dragbox_height;
+                    else {
+                        height = this._top_block_height;
                     }
 
-                }
-
-                if (this._is_timeline) {
-
-                    // If the timeline and UDI are in matching vertical positions.
-                    if (this._undated_items_vertical_position == 'top' && this._top_element == 'timeline') {
-                        return this._dragbox_height;
-                    }
-
-                    else if (this._undated_items_vertical_position == 'bottom' && this._top_element == 'map') {
-                        return this._dragbox_height;
-                    }
-
-                }
-
-            }
-
-            // If there is neither a map nor a timeline.
-            if (!this._is_timeline && !this._is_map) {
-                return this._dragbox_height;
-            }
-
-            // If there is a map and a timeline.
-            if (this._is_map && this._is_timeline) {
-
-                if (this._undated_items_vertical_position == 'top') {
-                    return this._top_block_height;
                 }
 
                 else {
-                    return this._bottom_block_height;
+                    height = this._dragbox_height;
                 }
 
             }
+
+            return height;
 
         },
 
-        /*
-         * Calculate the width of the undated items block.
-         */
         __getUndatedItemsWidth: function() {
-
-            // If there is neither a map nor a timeline.
-            if (!this._is_timeline && !this._is_map) {
-                return this._dragbox_width;
-            }
-
-            // If UDI is partial height.
-            if (this._undated_items_height == 'partial') {
-
-                // If there is a map and not a timeline.
-                if (this._is_map && !this._is_timeline) {
-
-                    // If the map and UDI are in opposite vertical
-                    // positions.
-                    if (this._undated_items_vertical_position == 'top' && this._top_element == 'timeline') {
-                        return this._dragbox_width;
-                    }
-
-                    else if (this._undated_items_vertical_position == 'bottom' && this._top_element == 'map') {
-                        return this._dragbox_width;
-                    }
-
-                }
-
-                // If there is a timeline and not a map.
-                else if (!this._is_map && this._is_timeline) {
-
-                    // If the map and UDI are in opposite vertical
-                    // positions.
-                    if (this._undated_items_vertical_position == 'top' && this._top_element == 'map') {
-                        return this._dragbox_width;
-                    }
-
-                    else if (this._undated_items_vertical_position == 'bottom' && this._top_element == 'timeline') {
-                        return this._dragbox_width;
-                    }
-
-                }
-
-            }
 
             return this.options.undated_items_width;
 
         },
 
-        /*
-         * Calculate the left offset for the undated items block.
-         */
         __getUndatedItemsLeftOffset: function() {
 
-            if (this._undated_items_horizontal_position == 'left') {
-                return 0;
+            var left_offset = null;
+
+            if (this._undated_items_position == 'left') {
+                left_offset = 0;
             }
 
-            if (!this._is_map && !this._is_timeline) {
-                return 0;
+            else {
+                left_offset = this._undated_items_left_offset;
             }
 
-            if (this._undated_items_height == 'partial') {
-
-                // If there is a map and not a timeline.
-                if (this._is_map && !this._is_timeline) {
-
-                    // If the udi and the map are in opposite vertical positions.
-                    if (this._top_element == 'map' && this._undated_items_vertical_position == 'bottom') {
-                        return 0;
-                    }
-
-                    if (this._top_element == 'timeline' && this._undated_items_vertical_position == 'top') {
-                        return 0;
-                    }
-
-                }
-
-                // If there is a timeline and not a map.
-                if (!this._is_map && this._is_timeline) {
-
-                    // If the udi and the timeline are in opposite vertical positions.
-                    if (this._top_element == 'map' && this._undated_items_vertical_position == 'top') {
-                        return 0;
-                    }
-
-                    if (this._top_element == 'timeline' && this._undated_items_vertical_position == 'bottom') {
-                        return 0;
-                    }
-
-                }
-
-            }
-
-            return this._undated_items_left_offset;
+            return left_offset;
 
         },
 
-        /*
-         * Calculate the top offset for the undated items block.
-         */
         __getUndatedItemsTopOffset: function() {
 
-            if (this._undated_items_height == 'partial' && this._undated_items_vertical_position == 'bottom') {
+            var top_offset = null;
 
-                if (this._is_map && this._top_element == 'map') {
-                    return this._top_block_height;
+            if (this._undated_items_height == 'full') {
+                top_offset = 0;
+            }
+
+            else {
+
+                if (this._is_map) {
+
+                    if (this._top_element == 'map') {
+                        top_offset = this._top_block_height;
+                    }
+
+                    else {
+                        top_offset = 0;
+                    }
+
                 }
 
-                else if (this._is_timeline && this._top_element == 'timeline') {
-                    return this._top_block_height;
+                else {
+                    top_offset = 0;
                 }
 
             }
 
-            return 0;
+            return top_offset;
 
         },
 
-        /*
-         * Calculate the width of the map block.
-         */
         __getMapWidth: function() {
 
-            var partialWidth = this._dragbox_width - this.options.undated_items_width;
+            var width = this._dragbox_width;
 
-            // If UDI is present.
-            if (this._is_undated_items) {
-
-                // If UDI is full height.
-                if (this._undated_items_height == 'full') {
-                    return partialWidth;
-                }
-
-                // If UDI is partial height.
-                else {
-
-                    // If the map and UDI are in matching vertical positions.
-                    if (this._undated_items_vertical_position == 'top' && this._top_element == 'map') {
-                        return partialWidth;
-                    }
-
-                    else if (this._undated_items_vertical_position == 'bottom' && this._top_element == 'timeline') {
-                        return partialWidth;
-                    }
-
-                }
-
+            if (this._undated_items_height == 'full' && this._is_undated_items) {
+                width -= this.options.undated_items_width;
             }
 
-            return this._dragbox_width;
+            return width;
 
         },
 
-        /*
-         * Calculate the height of the map block.
-         */
         __getMapHeight: function() {
 
-            // If there is a timeline.
+            var height = this._top_block_height;
+
             if (this._is_timeline) {
-
                 if (this._top_element == 'map') {
-                    return this._top_block_height;
+                    height = this._top_block_height;
                 }
-
                 else {
-                    return this._bottom_block_height;
+                    height = this._bottom_block_height;
                 }
-
             }
 
             else {
-
-                // If there is UDI.
-                if (this._is_undated_items && this._undated_items_height == 'partial') {
-
-                    // If the map and UDI are in opposite vertical positions.
-                    if (this._undated_items_vertical_position == 'top' && this._top_element == 'timeline') {
-                        return this._bottom_block_height;
-                    }
-
-                    if (this._undated_items_vertical_position == 'bottom' && this._top_element == 'map') {
-                        return this._top_block_height;
-                    }
-
-                }
-
+                height = this._dragbox_height;
             }
 
-            return this._dragbox_height;
+            return height;
 
         },
 
-        /*
-         * Calculate the left offset for the map block.
-         */
         __getMapLeftOffset: function() {
 
-            if (this._is_undated_items && this._undated_items_horizontal_position == 'left') {
+            var offset = 0;
 
-                // If UDI is full height.
-                if (this._undated_items_height == 'full') {
+            if (this._undated_items_height == 'full'
+                && this._is_undated_items
+                && this._undated_items_position == 'left') {
 
-                    return this.options.undated_items_width;
-
-                }
-
-                // If UDI is partial height.
-                else {
-
-                    // If the map and UDI are in matching vertical positions.
-                    if (this._undated_items_vertical_position == 'top' && this._top_element == 'map') {
-                        return this.options.undated_items_width;
-                    }
-
-                    else if (this._undated_items_vertical_position == 'bottom' && this._top_element == 'timeline') {
-                        return this.options.undated_items_width;
-                    }
-
-                }
+                    offset = this.options.undated_items_width;
 
             }
 
-            return 0;
+            return offset;
 
         },
 
-        /*
-         * Calculate the top offset for the map block.
-         */
         __getMapTopOffset: function() {
 
-            // If the map is the top element.
-            if (this._top_element == 'map') {
-                return 0;
+            var offset = 0;
+
+            if (this._top_element == 'timeline' && this._is_timeline) {
+                offset = this._top_block_height;
             }
 
-            // If there is a timeline.
-            if (this._is_timeline && this._top_element == 'timeline') {
-                return this._top_block_height;
-            }
-
-            return 0;
+            return offset;
 
         },
 
-        /*
-         * Calculate the width of the timeline block.
-         */
         __getTimelineWidth: function() {
 
-            var partialWidth = this._dragbox_width - this.options.undated_items_width;
+            var width = this._dragbox_width;
 
-            // If UDI is present.
             if (this._is_undated_items) {
-
-                // If UDI is full height.
-                if (this._undated_items_height == 'full') {
-                    return partialWidth;
-                }
-
-                // If UDI is partial height.
-                else {
-
-                    // If the timeline and UDI are in matching vertical positions.
-                    if (this._undated_items_vertical_position == 'top' && this._top_element == 'timeline') {
-                        return partialWidth;
-                    }
-
-                    else if (this._undated_items_vertical_position == 'bottom' && this._top_element == 'map') {
-                        return partialWidth;
-                    }
-
-                }
-
+                width -= this.options.undated_items_width;
             }
 
-            return this._dragbox_width;
+            return width;
 
         },
 
-        /*
-         * Calculate the height of the timeline block.
-         */
         __getTimelineHeight: function() {
 
-            // If there is a map.
+            var height = this._bottom_block_height;
+
             if (this._is_map) {
-
                 if (this._top_element == 'timeline') {
-                    return this._top_block_height;
+                    height = this._top_block_height;
                 }
-
-                else {
-                    return this._bottom_block_height;
-                }
-
             }
 
             else {
-
-                // If there is UDI.
-                if (this._is_undated_items && this._undated_items_height == 'partial') {
-
-                    // If the timeline and UDI are in opposite vertical positions.
-                    if (this._undated_items_vertical_position == 'top' && this._top_element == 'map') {
-                        return this._bottom_block_height;
-                    }
-
-                    else if (this._undated_items_vertical_position == 'bottom' && this._top_element == 'timeline') {
-                        return this._top_block_height;
-                    }
-
-                }
-
+                height = this._dragbox_height;
             }
 
-            return this._dragbox_height;
+            return height;
 
         },
 
-        /*
-         * Calculate the left offset for the timeline block.
-         */
         __getTimelineLeftOffset: function() {
 
-            if (this._is_undated_items && this._undated_items_horizontal_position == 'left') {
+            var offset = 0;
 
-                // If UDI is full height.
-                if (this._undated_items_height == 'full') {
-
-                    return this.options.undated_items_width;
-
-                }
-
-                // If UDI is partial height.
-                else {
-
-                    // If the timeline and UDI are in matching vertical positions.
-                    if (this._undated_items_vertical_position == 'top' && this._top_element == 'timeline') {
-                        return this.options.undated_items_width;
-                    }
-
-                    else if (this._undated_items_vertical_position == 'bottom' && this._top_element == 'map') {
-                        return this.options.undated_items_width;
-                    }
-
-                }
-
+            if (this._is_undated_items && this._undated_items_position == 'left') {
+                offset = this.options.undated_items_width;
             }
 
-            return 0;
+            return offset;
 
         },
 
-        /*
-         * Calculate the top offset for the timeline block.
-         */
         __getTimelineTopOffset: function() {
 
-            // If the timeline is the top element.
-            if (this._top_element == 'timeline') {
-                return 0;
+            var offset = 0;
+
+            if (this._top_element == 'map' && this._is_map) {
+                offset = this._top_block_height;
             }
 
-            // If there is a map.
-            if (this._is_map && this._top_element == 'map') {
-                return this._top_block_height;
-            }
-
-            return 0;
-
-        },
-
-        /*
-         * Return the current positioning parameter loadout.
-         */
-        getArrangementParameters: function() {
-
-            // Assemble an object with the position tracker variables.
-            return {
-                neatline_id: Neatline.id,
-                is_map: this._is_map,
-                is_timeline: this._is_timeline,
-                is_undated_items: this._is_undated_items,
-                top_element: this._top_element,
-                udi_horizontal_position: this._undated_items_horizontal_position,
-                udi_vertical_position: this._undated_items_vertical_position,
-                udi_height: this._undated_items_height
-            }
+            return offset;
 
         }
 
