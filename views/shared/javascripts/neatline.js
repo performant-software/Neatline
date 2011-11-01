@@ -75,6 +75,12 @@
 
         },
 
+        setParams: function(params) {
+
+            this.params = params;
+
+        },
+
         positionDivs: function() {
 
             // Update the container dimension trackers.

@@ -140,6 +140,16 @@ jQuery(document).ready(function($) {
             // Save.
             layoutBuilderContainer.configurelayout('savePositions', mapExtent, mapZoom, timelineCenter);
 
+        },
+
+        // When a new arrangement is saved and NL blocks need to be repositioned
+        // to manifest the change.
+        'newarrangement': function(event, obj) {
+
+            // Reset the core attributes object and reposition.
+            neatlineContainer.neatline('setParams', obj.params);
+            neatlineContainer.neatline('positionDivs');
+
         }
 
     });

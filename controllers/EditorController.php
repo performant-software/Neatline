@@ -285,6 +285,9 @@ class Neatline_EditorController extends Omeka_Controller_Action
             $udiHeight
         );
 
+        // Return the updated exhibit object.
+        echo json_encode($neatline);
+
     }
 
 }

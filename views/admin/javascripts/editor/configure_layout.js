@@ -228,13 +228,25 @@
 
         saveArrangement: function() {
 
+            var self = this;
             var params = this.layoutBuilder.layoutbuilder('getArrangementParameters');
 
             // Save data.
             $.ajax({
+
                 url: 'arrangement',
                 type: 'POST',
-                data: params
+                dataType: 'json',
+                data: params,
+
+                success: function(data) {
+
+                    self._trigger('newarrangement', {}, {
+                        'params': data
+                    });
+
+                }
+
             });
 
         },
