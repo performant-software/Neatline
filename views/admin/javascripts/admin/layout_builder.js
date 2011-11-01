@@ -46,6 +46,7 @@
             vertical_offset_tier1: 75,
             vertical_offset_tier2: 150,
             gloss_fade_duration: 300,
+            slide_duration: 200,
 
             // Starting configuration params.
             def_top_element: 'map',
@@ -936,10 +937,10 @@
                     }, function() {
 
                         // On complete, if the slide is an ending
-                        // slide, unset the dragging tracker.
-                        if (ending_slide) {
-                            self._is_dragging = false;
-                        }
+                        // slide, unset the dragging tracker, and forcibly
+                        // mouseleave the dragger div.
+                        self._is_dragging = false;
+                        self.timeline_drag.trigger('mouseleave');
 
                     });
 
@@ -999,10 +1000,11 @@
                 }, function() {
 
                     // On complete, if the slide is an ending
-                    // slide, unset the dragging tracker.
-                    if (ending_slide) {
-                        self._is_dragging = false;
-                    }
+                    // slide, unset the dragging tracker, and forcibly
+                    // mouseleave the dragger div.
+                    self._is_dragging = false;
+                    self.timeline_drag.trigger('mouseleave');
+                    self.undated_items_drag.trigger('mouseleave');
 
                 });
 
@@ -1058,8 +1060,10 @@
                     }, function() {
 
                         // On complete, if the slide is an ending
-                        // slide, unset the dragging tracker.
-                            self._is_dragging = false;
+                        // slide, unset the dragging tracker, and forcibly
+                        // mouseleave the dragger div.
+                        self._is_dragging = false;
+                        self.map_drag.trigger('mouseleave');
 
                     });
 
@@ -1108,8 +1112,10 @@
                 }, function() {
 
                     // On complete, if the slide is an ending
-                    // slide, unset the dragging tracker.
-                        self._is_dragging = false;
+                    // slide, unset the dragging tracker, and forcibly
+                    // mouseleave the dragger div.
+                    self._is_dragging = false;
+                    self.undated_items_drag.trigger('mouseleave');
 
                 });
 
