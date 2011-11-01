@@ -91,14 +91,10 @@
                 'mousedown': function() {
 
                     // Hide if shown.
-                    if (self._expanded) {
-                        self.hide();
-                    }
+                    if (self._expanded) { self.hide(); }
 
                     // Show if hidden.
-                    else {
-                        self.show();
-                    }
+                    else { self.show(); }
 
                 },
 

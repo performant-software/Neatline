@@ -341,11 +341,11 @@
             });
 
             // Center tags.
-            this._centerAllTags();
+            this.centerAllTags();
 
         },
 
-        _centerAllTags: function() {
+        centerAllTags: function() {
 
             this._position_tag(this.map_drag);
             this._position_tag(this.timeline_drag);
@@ -1402,7 +1402,6 @@
         }
 
     });
-
 
 
     $.extend({
