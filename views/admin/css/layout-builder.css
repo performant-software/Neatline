@@ -119,3 +119,19 @@ span.drag-tag {
 #layout-builder hr {
     margin: 10px 0;
 }
+
+#layout-save {
+    display: block;
+    position: absolute;
+    z-index: 999;
+    background: #FFFEF8;
+    top: 0;
+    left: 0;
+    font-size: 2em;
+    font-weight: bold;
+    text-align: center;
+}
+
+#layout-save .drag-tag {
+    color: #639937;
+}

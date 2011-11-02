@@ -395,6 +395,13 @@
 
         },
 
+        saveSuccess: function() {
+
+            this.element.css('opacity', 0);
+            this.element.animate({ 'opacity': 1 }, 1000);
+
+        },
+
         editMap: function(item, immediate) {
 
             this.map.neatlinemap('edit', item, immediate);

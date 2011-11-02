@@ -241,6 +241,7 @@
 
                 success: function(data) {
 
+                    // Trigger the block updates in the exhibit.
                     self._trigger('newarrangement', {}, {
                         'params': data
                     });

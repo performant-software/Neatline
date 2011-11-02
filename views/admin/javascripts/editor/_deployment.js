@@ -150,6 +150,7 @@ jQuery(document).ready(function($) {
             neatlineContainer.neatline('setParams', obj.params);
             neatlineContainer.neatline('positionDivs');
             neatlineContainer.neatline('instantiateBlocks');
+            neatlineContainer.neatline('saveSuccess');
 
         }
 
