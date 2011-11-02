@@ -173,10 +173,10 @@
 
         _getPxConstants: function() {
 
-            this.dropdownWidth = this.dropdownContainer.outerWidth();
+            this.dropdownWidth = this.dropdownContainer.width();
             this.dropdownHeight = this.dropdownContainer.height();
             this.topbarHeight = this.topbar.height();
-            this.buttonWidth = this.button.outerWidth();
+            this.buttonWidth = this.button.width();
 
         },
 

@@ -124,6 +124,9 @@ span.top-bar-title {
   text-decoration: none;
 }
 
+.topbar div > ul a.open, .nav a.open {
+  background: rgba(255, 255, 255, 0.05);
+}
 
 /* Item browser */
 
