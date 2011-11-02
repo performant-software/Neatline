@@ -232,6 +232,10 @@
                 // If the udi is on the left.
                 if (this.params.undated_items_position == 'left') {
 
+                    this.undated.css({
+                        'left': 0
+                    });
+
                     this.timeline.css({
                         'width': withUndatedItemsWidth,
                         'left': undatedItemsWidth
@@ -257,7 +261,8 @@
                 if (this.params.undated_items_height == 'full') {
 
                     this.undated.css({
-                        'height': this.containerHeight
+                        'height': this.containerHeight,
+                        'top': 0
                     });
 
                     // If the udi is on the left.
@@ -266,6 +271,10 @@
                         this.map.css({
                             'width': withUndatedItemsWidth,
                             'left': undatedItemsWidth
+                        });
+
+                        this.undated.css({
+                            'left': 0
                         });
 
                     }
@@ -299,7 +308,8 @@
                     else {
 
                         this.undated.css({
-                            'height': topBlockHeight
+                            'height': topBlockHeight,
+                            'top': 0
                         });
 
                     }

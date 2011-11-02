@@ -114,7 +114,7 @@
 
             // Get starting parameters out of the Neatline global.
             this._top_element = Neatline.top_element;
-            this._undated_items_position = Neatline.undated_items_horizontal_position;
+            this._undated_items_position = Neatline.undated_items_position;
             this._undated_items_height = Neatline.undated_items_height;
             this._is_map = Neatline.is_map;
             this._is_timeline = Neatline.is_timeline;
