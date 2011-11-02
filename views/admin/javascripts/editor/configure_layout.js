@@ -254,6 +254,8 @@
 
         savePositions: function(mapExtent, mapZoom, timelineCenter) {
 
+            var self = this;
+
             // Save data.
             $.ajax({
 
@@ -265,6 +267,10 @@
                     map_extent: mapExtent,
                     map_zoom: mapZoom,
                     timeline_center: timelineCenter
+                },
+
+                success: function() {
+                    self._trigger('newpositions');
                 }
 
             });

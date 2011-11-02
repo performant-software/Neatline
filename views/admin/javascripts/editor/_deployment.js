@@ -152,6 +152,11 @@ jQuery(document).ready(function($) {
             neatlineContainer.neatline('instantiateBlocks');
             neatlineContainer.neatline('saveSuccess');
 
+        },
+
+        // When new starting positions are fixed, do success flash.
+        'newpositions': function() {
+            neatlineContainer.neatline('saveSuccess');
         }
 
     });
