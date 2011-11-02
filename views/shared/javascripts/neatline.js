@@ -67,11 +67,16 @@
             this.timeline = $('#' + this.options.markup.timeline_id);
             this.undated = $('#' + this.options.markup.undated_id);
 
+            // Trackers for instantiation status of blocks.
+            this.instantiated_map = false;
+            this.instantiated_timeline = false;
+            this.instantiated_undated = false;
+
             // Position the divs.
             this.positionDivs();
 
             // Startup for the component widgets.
-            this._instantiateBlocks();
+            this.instantiateBlocks();
 
         },
 
@@ -150,6 +155,16 @@
 
             }
 
+            // If there is not a map.
+            else {
+
+                // Hide the map. This needs to be enumerated in the case where
+                // an arrangement edit zeros out a block that was set visible by
+                // a previous call on positionDivs().
+                this.map.css('display', 'none');
+
+            }
+
             // ** Position the timeline. **
 
             // If there is a timeline.
@@ -191,6 +206,16 @@
                     });
 
                 }
+
+            }
+
+            // If there is not a timeline.
+            else {
+
+                // Hide the timeline. This needs to be enumerated in the case where
+                // an arrangement edit zeros out a block that was set visible by
+                // a previous call on positionDivs().
+                this.timeline.css('display', 'none');
 
             }
 
@@ -295,6 +320,16 @@
 
             }
 
+            // If there is not undated items.
+            else {
+
+                // Hide the udi. This needs to be enumerated in the case where
+                // an arrangement edit zeros out a block that was set visible by
+                // a previous call on positionDivs().
+                this.undated.css('display', 'none');
+
+            }
+
         },
 
         _getContainerDimensions: function() {
@@ -304,12 +339,12 @@
 
         },
 
-        _instantiateBlocks: function() {
+        instantiateBlocks: function() {
 
             var self = this;
 
             // Map.
-            if (this.params.is_map) {
+            if (this.params.is_map && !this.instantiated_map) {
 
                 this.map.neatlinemap({
 
@@ -325,10 +360,13 @@
 
                 });
 
+                // Register the presence of the map instantiation.
+                this.instantiated_map = true;
+
             }
 
             // Timeline.
-            if (this.params.is_timeline) {
+            if (this.params.is_timeline && !this.instantiated_timeline) {
 
                 this.timeline.neatlinetimeline({
 
@@ -340,11 +378,19 @@
 
                 });
 
+                // Register the presence of the timeline instantiation.
+                this.instantiated_timeline = true;
+
             }
 
             // Undated items.
-            if (this.params.is_undated_items) {
+            if (this.params.is_undated_items && !this.instantiated_undated) {
+
                 this.undated.neatlineundateditems();
+
+                // Register the presence of the udi instantiation.
+                this.instantiated_undated = true;
+
             }
 
         },

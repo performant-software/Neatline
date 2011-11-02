@@ -149,6 +149,7 @@ jQuery(document).ready(function($) {
             // Reset the core attributes object and reposition.
             neatlineContainer.neatline('setParams', obj.params);
             neatlineContainer.neatline('positionDivs');
+            neatlineContainer.neatline('instantiateBlocks');
 
         }
 
