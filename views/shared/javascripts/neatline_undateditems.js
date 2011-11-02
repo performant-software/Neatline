@@ -49,11 +49,42 @@
 
         },
 
+        /*
+         * Getters and starting get items call.
+         */
         _create: function() {
 
             // Getters.
             this._window = $(window);
             this._body = $('body');
+
+            // Build list.
+            this._getItems();
+
+        },
+
+        /*
+         * Populate content.
+         */
+        _getItems: function() {
+
+            var self = this;
+
+            // Core ajax call to get items.
+            $.ajax({
+
+                url: '',
+                dataType: 'html',
+
+                data: {
+                    neatline_id: this.neatlineData.id
+                },
+
+                success: function(data) {
+
+                }
+
+            });
 
         }
 
@@ -61,5 +92,3 @@
 
 
 })( jQuery );
-
-

@@ -27,7 +27,7 @@
 
 <?php
 
-class Neatline_JsonController extends Omeka_Controller_Action
+class Neatline_DataController extends Omeka_Controller_Action
 {
 
     /**

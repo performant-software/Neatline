@@ -26,5 +26,6 @@
 ?>
 
 <div id="undated-items-header">
-    <h2>Undated Items</h2>
+    <span id="undated-items-title">Undated Items</span>
+    <div id="undated-items-list-container"></div>
 </div>

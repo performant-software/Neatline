@@ -700,7 +700,7 @@ function neatline_getDeleteExhibitUrl($neatline_id)
 function neatline_getTimelineDataUrl($neatline_id)
 {
 
-    return WEB_ROOT . '/admin/neatline-exhibits/' . $neatline_id . '/json/simile';
+    return WEB_ROOT . '/neatline-exhibits/' . $neatline_id . '/data/simile';
 
 }
 
@@ -714,6 +714,6 @@ function neatline_getTimelineDataUrl($neatline_id)
 function neatline_getMapDataUrl($neatline_id)
 {
 
-    return WEB_ROOT . '/admin/neatline-exhibits/' . $neatline_id . '/json/openlayers';
+    return WEB_ROOT . '/neatline-exhibits/' . $neatline_id . '/data/openlayers';
 
 }
