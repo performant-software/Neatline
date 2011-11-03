@@ -72,6 +72,17 @@
             </div>
 
             <div class="clearfix">
+                <label>Date Ambiguity</label>
+                <div class="input">
+                    <div class="inline-inputs">
+                        <div class="date-ambiguity-container"></div>
+                        <input name="date-ambiguity" type="hidden">
+                        <span class="help-inline">Drag the sliders to capture uncertainty over the date interval.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="clearfix">
                 <label>Vector Color</label>
                 <input type="text" id="color-<?php echo $item->id; ?>" class="color-picker" name="color" value="<?php echo $neatline->getTextByItemAndField($item, 'Identifier'); ?>" />
                 <span class="help-inline">Select a color for the item's spatial vectors.</span>

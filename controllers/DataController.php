@@ -72,4 +72,25 @@ class Neatline_DataController extends Omeka_Controller_Action
 
     }
 
+    /**
+     * ~ AJAX ~
+     * Get item list markup for the undated items block.
+     *
+     * @return HTML The items.
+     */
+    public function udiAction()
+    {
+
+        // Set the layout.
+        $this->_helper->viewRenderer('udi-ajax');
+
+        // Get the exhibit id and statuses table.
+        $neatlineId = $this->_request->getParam('neatline_id');
+        $statusesTable = $this->getTable('NeatlineRecordStatus');
+
+        // Get items.
+        $this->view->items = $statusesTable->getUndatedItems($neatlineId);
+
+    }
+
 }

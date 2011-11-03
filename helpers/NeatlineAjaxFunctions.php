@@ -112,6 +112,7 @@ function neatline_getItemsForBrowser(
 function neatline_getRecordStatusForCheckBox($neatline, $item, $spaceOrTime)
 {
 
+    // Get the statuses table.
     $_db = get_db();
     $statusesTable = $_db->getTable('NeatlineRecordStatus');
 

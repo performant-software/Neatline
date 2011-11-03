@@ -57,9 +57,10 @@
             // Getters.
             this._window = $(window);
             this._body = $('body');
+            this.params = Neatline;
 
             // Build list.
-            this._getItems();
+            // this._getItems();
 
         },
 
@@ -73,15 +74,15 @@
             // Core ajax call to get items.
             $.ajax({
 
-                url: '',
+                url: this.params.dataSources.undated,
                 dataType: 'html',
 
                 data: {
-                    neatline_id: this.neatlineData.id
+                    neatline_id: this.params.id
                 },
 
                 success: function(data) {
-
+                    console.log(data);
                 }
 
             });

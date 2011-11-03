@@ -717,3 +717,17 @@ function neatline_getMapDataUrl($neatline_id)
     return WEB_ROOT . '/neatline-exhibits/' . $neatline_id . '/data/openlayers';
 
 }
+
+/**
+ * Construct the HTML data source url for the undated items block.
+ *
+ * @param integer $neatline_id The id of the exhibit.
+ *
+ * @return string The url.
+ */
+function neatline_getUndatedItemsDataUrl($neatline_id)
+{
+
+    return WEB_ROOT . '/neatline-exhibits/' . $neatline_id . '/data/udi';
+
+}

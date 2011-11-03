@@ -51,7 +51,8 @@
     ),
     'dataSources' => array(
         'timeline' => neatline_getTimelineDataUrl($neatline->id),
-        'map' => neatline_getMapDataUrl($neatline->id)
+        'map' => neatline_getMapDataUrl($neatline->id),
+        'undated' => neatline_getUndatedItemsDataUrl($neatline->id)
     )
 )); ?>
 
