@@ -41,7 +41,7 @@
 
             // CSS constants.
             css: {
-
+                stop_marker_width_correction: 5
             },
 
             // Hexes.
@@ -52,28 +52,40 @@
         },
 
         /*
-         * Get markup, position the stop markers.
+         * Get markup, shell out trackers, position the stop markers.
          */
         _create: function() {
 
             // Getters.
+            this._window = $(window);
             this.editor = this.element.find('.' + this.options.markup.editor_class);
             this.leftMarker = this.element.find('.' + this.options.markup.left_marker_class);
             this.rightMarker = this.element.find('.' + this.options.markup.right_marker_class);
             this.swatches = this.element.find('.' + this.options.markup.color_swatch_class)
 
+            // Percentage trackers.
+            this.leftPercent = null;
+            this.rightPercent = null;
+
+            // Measure markup.
+            this._getDimensions();
+
             // Position the stop markers.
             this.positionMarkers(0, 100);
+
+            // Add events to markers.
+            this._addEvents();
 
         },
 
         /*
-         * Get the size of the editor block.
+         * Get the size and position of the editor block.
          */
-        _getDimensions: function(leftPercentage, rightPercentage) {
+        _getDimensions: function() {
 
             this.editorWidth = this.editor.width();
             this.editorHeight = this.editor.height();
+            this.editorOffset = this.editor.offset();
 
         },
 
@@ -83,18 +95,162 @@
          * from the left boundary of the editor block as a percentage
          * of the total width.
          */
-        positionMarkers: function(leftPercentage, rightPercentage) {
+        positionMarkers: function(leftPercent, rightPercent) {
 
+            // Calculate offets.
+            var leftDecimal = leftPercent / 100;
+            var rightDecimal = rightPercent / 100;
+            var leftOffset = this.editorWidth * leftDecimal;
+            var rightOffset = this.editorWidth - (this.editorWidth * rightDecimal);
+
+            // Position.
+            this.leftMarker.css({
+                'left': leftOffset - this.options.css.stop_marker_width_correction,
+                'top': this.editorHeight
+            });
+
+            this.rightMarker.css({
+                'right': rightOffset - this.options.css.stop_marker_width_correction,
+                'top': this.editorHeight
+            });
+
+            // Set the trackers.
+            this.leftPercent = leftPercent;
+            this.rightPercent = rightPercent;
 
         },
 
         /*
-         * Set the base color of the editor block and the swatches.
+         * Set the base color of the editor block.
          */
         setColor: function(color) {
 
             this.editor.css('background', color);
-            this.swatches.css('background', color);
+
+        },
+
+        /*
+         * Add the dragging functionality to the stop markers.
+         */
+        _addEvents: function() {
+
+            var self = this;
+
+            // Left handle.
+            this.leftMarker.bind({
+                'mousedown': function(e) {
+                    self._doLeftDrag(e);
+                }
+            });
+
+            // Right handle.
+            this.rightMarker.bind({
+                'mousedown': function(e) {
+                    self._doRightDrag(e);
+                }
+            });
+
+        },
+
+        /*
+         * Manifest a left stop marker drag.
+         */
+        _doLeftDrag: function(event) {
+
+            var self = this;
+
+            // Capture the starting mouse position and offset.
+            var startingX = event.pageX;
+            var startingOffset = this.__pxToInt(this.leftMarker.css('left'));
+
+            // Add the mousemove event to the window.
+            this._window.bind({
+
+                'mousemove': function(e) {
+
+                    // Calculate new offset.
+                    var xDelta = e.pageX - startingX;
+                    var newOffset = startingOffset + xDelta;
+
+                    // If the new offset is in bounds.
+                    if (newOffset + self.options.css.stop_marker_width_correction >= 0) {
+
+                        // Manifest new offest.
+                        self.leftMarker.css('left', newOffset);
+
+                    }
+
+                    // Otherwise, fix at zero.
+                    else {
+                        self.leftMarker.css('left', -(self.options.css.stop_marker_width_correction));
+                    }
+
+                },
+
+                'mouseup': function() {
+
+                    self._window.unbind('mousemove mouseup');
+
+                }
+
+            });
+
+        },
+
+        /*
+         * Manifest a right stop marker drag.
+         */
+        _doRightDrag: function(event) {
+
+            var self = this;
+
+            // Capture the starting mouse position and offset.
+            var startingX = event.pageX;
+            var startingOffset = this.__pxToInt(this.rightMarker.css('right'));
+
+            // Add the mousemove event to the window.
+            this._window.bind({
+
+                'mousemove': function(e) {
+
+                    // Calculate new offset.
+                    var xDelta = e.pageX - startingX;
+                    var newOffset = startingOffset - xDelta;
+
+                    // If the new offset is in bounds.
+                    if (newOffset + self.options.css.stop_marker_width_correction >= 0) {
+
+                        // Manifest new offest.
+                        self.rightMarker.css('right', newOffset);
+
+                    }
+
+                    // Otherwise, fix at zero.
+                    else {
+                        self.rightMarker.css('right', -(self.options.css.stop_marker_width_correction));
+                    }
+
+                },
+
+                'mouseup': function() {
+
+                    self._window.unbind('mousemove mouseup');
+
+                }
+
+            });
+
+        },
+
+        /*
+         * Extract an integer value from a css string value of format 'Xpx'.
+         * No, jQuery does not provide this.
+         */
+        __pxToInt: function(px) {
+
+            // Find the location of the 'px'.
+            var pxIndex = px.indexOf('px');
+            return parseInt(px.slice(0, pxIndex));
 
         }
 
