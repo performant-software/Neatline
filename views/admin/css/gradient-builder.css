@@ -22,9 +22,25 @@
  */
 
 
-.date-ambiguity-container {
+.date-ambiguity-editor {
     display: block;
     height: 30px;
-    width: 280px;
-    background: red;
+    width: 85%;
+    margin: 0 0 20px 0;
+}
+
+.stop-marker {
+    background-image: url('../images/stop-marker.png');
+    background-position: right;
+    position: absolute;
+    height: 17px;
+    width: 11px;
+}
+
+.stop-marker.left {
+    float: left;
+}
+
+.stop-marker.right {
+    float: right;
 }

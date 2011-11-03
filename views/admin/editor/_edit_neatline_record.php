@@ -75,9 +75,14 @@
                 <label>Date Ambiguity</label>
                 <div class="input">
                     <div class="inline-inputs">
-                        <div class="date-ambiguity-container"></div>
-                        <input name="date-ambiguity" type="hidden">
-                        <span class="help-inline">Drag the sliders to capture uncertainty over the date interval.</span>
+                        <div class="date-ambiguity-container">
+                            <div class="date-ambiguity-editor">
+                                <div class="stop-marker left"><div class="color-swatch"></div></div>
+                                <div class="stop-marker right"><div class="color-swatch"></div></div>
+                            </div>
+                            <input name="date-ambiguity" type="hidden">
+                        </div>
+                        <span class="help-inline">Drag the beginning and ending sliders inward to capture uncertainty over the date interval.</span>
                     </div>
                 </div>
             </div>

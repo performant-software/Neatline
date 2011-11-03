@@ -300,6 +300,10 @@ tr.edit-form td {
     top: 0;
 }
 
+.input-xlarge, input.xlarge, textarea.xlarge, select.xlarge {
+    width: 85%;
+}
+
 
 /* Search Cancel */
 

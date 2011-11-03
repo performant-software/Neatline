@@ -51,6 +51,7 @@
             end_date_input_name: 'end-date-date',
             end_time_input_name: 'end-date-time',
             color_picker_input_class: 'color-picker',
+            date_ambiguity_container_class: 'date-ambiguity-container',
 
             // Durations and CSS constants.
             item_list_highlight_duration: 10,
@@ -1060,6 +1061,7 @@
             var allInputs = editForm.find('input[type="text"], textarea')
             var descriptionTextarea = editForm.find('textarea[name="description"]');
             var colorPickerInput = editForm.find('.' + this.options.color_picker_input_class);
+            var dateAmbiguityContainer = editForm.find('.' + this.options.date_ambiguity_container_class);
 
             // Calculate the native height of the form.
             var cloneFormTd = editFormTd
@@ -1174,6 +1176,10 @@
                 // editFormContainer.smallscroll();
             }
 
+            // Instantiate the date ambiguity builder and set the starting color.
+            dateAmbiguityContainer.gradientbuilder();
+            dateAmbiguityContainer.gradientbuilder('setColor', colorPickerInput.val());
+
             // Instantiate the color picker and define change callback.
             colorPickerInput.miniColors({
 
@@ -1185,8 +1191,11 @@
                     // Trigger out to push the new color immediately onto
                     // the map.
                     self._trigger('coloredit', {}, {
-                        'color': hex,
+                        'color': hex
                     });
+
+                    // Manifest the change on the gradient builder.
+                    dateAmbiguityContainer.gradientbuilder('setColor', hex);
 
                 }
 
@@ -1243,6 +1252,7 @@
             var textSpan = item.find('.' + this.options.item_title_text_class);
             var faderSpan = item.find('.' + this.options.item_title_fader_class);
             var allInputs = editForm.find('input[type="text"], textarea')
+            var colorPickerInput = editForm.find('.' + this.options.color_picker_input_class);
 
             // By default, fade to the default text color and weight.
             var textColor = this.options.colors.text_default;
@@ -1294,6 +1304,9 @@
 
             // Set the tracker to null.
             this._currentFormItem = null;
+
+            // Destroy the color picker.
+            colorPickerInput.miniColors('destroy');
 
             // Bind the button actions.
             var cancelButton = editForm.find('button[type="reset"]');
