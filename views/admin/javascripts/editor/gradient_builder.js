@@ -182,8 +182,12 @@
 
                     // Otherwise, fix at zero.
                     else {
-                        self.leftMarker.css('left', -(self.options.css.stop_marker_width_correction));
+                        newOffset = -(self.options.css.stop_marker_width_correction);
+                        self.leftMarker.css('left', newOffset);
                     }
+
+                    // Register the new offest percentage.
+                    self.leftPercent = self._leftPercentFromOffset(newOffset);
 
                 },
 
@@ -227,8 +231,12 @@
 
                     // Otherwise, fix at zero.
                     else {
-                        self.rightMarker.css('right', -(self.options.css.stop_marker_width_correction));
+                        newOffset = -(self.options.css.stop_marker_width_correction);
+                        self.rightMarker.css('right', newOffset);
                     }
+
+                    // Register the new offest percentage.
+                    self.rightPercent = self._rightPercentFromOffset(newOffset);
 
                 },
 
@@ -239,6 +247,26 @@
                 }
 
             });
+
+        },
+
+        /*
+         * Given a left pixel offset, calculate the new relative
+         * percentage of the left stop marker.
+         */
+        _leftPercentFromOffset: function(offset) {
+
+
+
+        },
+
+        /*
+         * Given a right pixel offset, calculate the new relative
+         * percentage of the right stop marker.
+         */
+        _rightPercentFromOffset: function(offset) {
+
+
 
         },
 
