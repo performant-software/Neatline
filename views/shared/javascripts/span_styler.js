@@ -37,15 +37,6 @@
         },
 
         /*
-         * Get markup, shell out trackers.
-         */
-        _create: function() {
-
-            console.log(this.element);
-
-        },
-
-        /*
          * Build the css.
          */
         constructCss: function(color, leftPercent, rightPercent) {

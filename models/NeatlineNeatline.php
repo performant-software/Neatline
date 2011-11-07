@@ -557,6 +557,9 @@ class NeatlineNeatline extends Omeka_record
         // pack them up.
         foreach ($activeItems as $item) {
 
+            // Fetch record.
+            $record = $this->getTimeRecord($item);
+
             // Title and description fields.
             $title = $this->getTextByItemAndField($item, 'Title');
             $description = $this->getTextByItemAndField($item, 'Description');
@@ -575,10 +578,18 @@ class NeatlineNeatline extends Omeka_record
                 $endTime
             );
 
+            // Color and ambiguity settings.
+            $color = $this->getTextByItemAndField($item, 'Identifier');
+            $leftPercentage = $record->left_ambiguity_percentage;
+            $rightPercentage = $record->right_ambiguity_percentage;
+
             $eventArray = array(
                 'eventID' => $item->id,
                 'title' => $title,
-                'description' => $description
+                'description' => $description,
+                'color' => $color,
+                'left_ambiguity' => $leftPercentage,
+                'right_ambiguity' => $rightPercentage
             );
 
             // If there is a valid start stamp.

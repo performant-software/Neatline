@@ -223,8 +223,11 @@
 
             // Ping the json server and get the events data.
             this.timeline.loadJSON(this.params.dataSources.timeline, function(json, url) {
+
+                // Render the events.
                 self.eventSource.clear();
                 self.eventSource.loadJSON(json, url);
+
             });
 
             // Set the starting date, if defined.
@@ -263,4 +266,6 @@
 
 
 })( jQuery );
+
+
 
