@@ -50,3 +50,11 @@
     float: right;
     z-index: 2;
 }
+
+.color-swatch {
+    position: absolute;
+    top: 8px;
+    left: 2px;
+    width: 7px;
+    height: 7px;
+}
