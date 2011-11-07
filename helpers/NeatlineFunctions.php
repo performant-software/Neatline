@@ -115,6 +115,7 @@ function neatline_queueNeatlineAssets()
     queue_js('neatline_map', 'javascripts');
     queue_js('neatline_timeline', 'javascripts');
     queue_js('neatline_undateditems', 'javascripts');
+    queue_js('span_styler', 'javascripts');
     queue_js('_utilities', 'javascripts');
 
 }

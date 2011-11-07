@@ -1,5 +1,8 @@
 /*
- * Miscellaneous JavaScript workers.
+ * Worker class to build and apply the color and opacity gradient on a
+ * timeline time interval span. Used by the editor to render changes on
+ * the "Date Ambiguity" builder block and to apply the settings on the
+ * public-facing timeline.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -19,30 +22,31 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache 2 License
  */
 
-// remove() - Removes all instances of element el from an array.
-// Emulates Python's set.remove().
-Array.prototype.remove = function(el) {
+(function($, undefined) {
 
-    for (var i = 0; i < this.length; i++) {
-        if (this[i] == el) {
-            this.splice(i,1);
-            this.remove(el);
-            break;
+
+    $.widget('neatline.spanstyler', {
+
+        options: {
+
+            // Markup hooks.
+            markup: {
+
+            }
+
+        },
+
+        /*
+         * Get markup, shell out trackers.
+         */
+        _create: function() {
+
+            // Getters.
+            this._window = $(window);
+
         }
-    }
 
-};
+    });
 
-// contains() - Checks to see if the supplied element is in the array.
-Array.prototype.contains = function(el) {
 
-    var match = false;
-    for (var i = 0; i < this.length; i++) {
-        if (this[i] == el) {
-            match = true;
-        }
-    }
-
-    return match;
-
-};
+})( jQuery );
