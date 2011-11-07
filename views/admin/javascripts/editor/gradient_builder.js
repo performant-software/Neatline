@@ -31,7 +31,9 @@
                 editor_class: 'date-ambiguity-editor',
                 color_swatch_class: 'color-swatch',
                 left_marker_class: 'stop-marker.left',
-                right_marker_class: 'stop-marker.right'
+                right_marker_class: 'stop-marker.right',
+                left_percent_input_name: 'left-ambiguity-percentage',
+                right_percent_input_name: 'right-ambiguity-percentage'
             },
 
             // CSS constants.
@@ -52,6 +54,11 @@
             this.leftMarker = this.element.find('.' + this.options.markup.left_marker_class);
             this.rightMarker = this.element.find('.' + this.options.markup.right_marker_class);
             this.swatches = this.element.find('.' + this.options.markup.color_swatch_class)
+            this.leftPercentInput = this.element.find('input[name="' + this.options.markup.left_percent_input_name + '"]');
+            this.rightPercentInput = this.element.find('input[name="' + this.options.markup.right_percent_input_name + '"]');
+
+            console.log(this.leftPercentInput);
+            console.log(this.rightPercentInput);
 
             // Percentage trackers.
             this.leftPercent = null;
@@ -104,9 +111,11 @@
                 'top': this.editorHeight
             });
 
-            // Set the trackers.
+            // Set the trackers and inputs.
             this.leftPercent = leftPercent;
+            this.leftPercentInput.val(leftPercent);
             this.rightPercent = rightPercent;
+            this.rightPercentInput.val(rightPercent);
 
         },
 
@@ -200,8 +209,10 @@
                         self.leftMarker.css('left', newOffset);
                     }
 
-                    // Register the new offest percentage.
+                    // Register the new offest percentage and manifest
+                    // the value in the hidden input.
                     self.leftPercent = self._leftPercentFromOffset(newOffset);
+                    self.leftPercentInput.val(self.leftPercent);
 
                     // Build and apply the new css.
                     self._constructCss();
@@ -269,8 +280,10 @@
                         self.rightMarker.css('right', newOffset);
                     }
 
-                    // Register the new offest percentage.
+                    // Register the new offest percentage and manifest
+                    // the new value in the hidden input.
                     self.rightPercent = self._rightPercentFromOffset(newOffset);
+                    self.rightPercentInput.val(self.rightPercent);
 
                     // Build and apply the new css.
                     self._constructCss();

@@ -80,7 +80,8 @@
                                 <div class="stop-marker left"><div class="color-swatch"></div></div>
                                 <div class="stop-marker right"><div class="color-swatch"></div></div>
                             </div>
-                            <input name="date-ambiguity" type="hidden">
+                            <input name="left-ambiguity-percentage" type="hidden">
+                            <input name="right-ambiguity-percentage" type="hidden">
                         </div>
                         <span class="help-inline">Drag the beginning and ending sliders inward to capture uncertainty over the date interval.</span>
                     </div>

@@ -50,6 +50,8 @@
             start_time_input_name: 'start-date-time',
             end_date_input_name: 'end-date-date',
             end_time_input_name: 'end-date-time',
+            left_percent_input_name: 'left-ambiguity-percentage',
+            right_percent_input_name: 'right-ambiguity-percentage',
             color_picker_input_class: 'color-picker',
             date_ambiguity_container_class: 'date-ambiguity-container',
 
@@ -1351,6 +1353,8 @@
             var startTimeInput = editForm.find('input[name="' + this.options.start_time_input_name + '"]');
             var endDateInput = editForm.find('input[name="' + this.options.end_date_input_name + '"]');
             var endTimeInput = editForm.find('input[name="' + this.options.end_time_input_name + '"]');
+            var leftPercentageInput = editForm.find('input[name="' + this.options.left_percent_input_name + '"]');
+            var rightPercentageInput = editForm.find('input[name="' + this.options.right_percent_input_name + '"]');
             var colorPickerInput = editForm.find('.' + this.options.color_picker_input_class);
             var itemId = editForm.find('recordid');
 
@@ -1374,6 +1378,8 @@
             var startTime_Value = startTimeInput.val();
             var endDate_Value = endDateInput.val();
             var endTime_Value = endTimeInput.val();
+            var leftPercentage_Value = leftPercentageValue.val();
+            var rightPercentage_Value = rightPercentageValue.val();
             var colorValue = colorPickerInput.val();
             var geocoverage_Value = this.coverageData;
 
@@ -1442,6 +1448,8 @@
                     start_time: startTime_Value,
                     end_date: endDate_Value,
                     end_time: endTime_Value,
+                    left_percentage: leftPercentage_Value,
+                    right_percentage: rightPercentage_Value,
                     vector_color: colorValue,
                     geocoverage: geocoverage_Value,
                     space_status: this.__stringifyBooleanForJson(spaceStatus),
