@@ -67,6 +67,9 @@
             // Position the stop markers.
             this.positionMarkers(this.leftPercent, this.rightPercent);
 
+            // Instantiate the span styler on the edit block.
+            this.editor.spanstyler();
+
             // Add events to markers.
             this._addEvents();
 
@@ -125,8 +128,8 @@
             this.color = color;
 
             // Manifest the color on the block.
-            this._constructCss();
-            this._applyCss();
+            this.editor.spanstyler('constructCss', color, this.leftPercent, this.rightPercent);
+            this.editor.spanstyler('applyCss');
 
             // Change the colors of the stop markers.
             this.swatches.css('background', color);
@@ -212,8 +215,8 @@
                     self.leftPercentInput.val(self.leftPercent);
 
                     // Build and apply the new css.
-                    self._constructCss();
-                    self._applyCss();
+                    self.editor.spanstyler('constructCss', self.color, self.leftPercent, self.rightPercent);
+                    self.editor.spanstyler('applyCss');
 
                 },
 
@@ -283,8 +286,8 @@
                     self.rightPercentInput.val(self.rightPercent);
 
                     // Build and apply the new css.
-                    self._constructCss();
-                    self._applyCss();
+                    self.editor.spanstyler('constructCss', self.color, self.leftPercent, self.rightPercent);
+                    self.editor.spanstyler('applyCss');
 
                 },
 
@@ -322,39 +325,6 @@
         },
 
         /*
-         * Build the css.
-         */
-        _constructCss: function() {
-
-            // Build the rgba strings.
-            var rgb = this.__hexToRgb(this.color);
-            var fullOpacity = this.__rgbObjectToCssValue(rgb, 1);
-            var zeroOpacity = this.__rgbObjectToCssValue(rgb, 0);
-
-            this.css = ' \
-                background: #2989d8; \
-                background: -moz-linear-gradient(top,  #1e5799 0%, #2989d8 99%); \
-                background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#1e5799), color-stop(99%,#2989d8)); \
-                background: -webkit-linear-gradient(left, ' + zeroOpacity + ' 0%, ' + fullOpacity + ' ' + this.leftPercent + '%, ' + fullOpacity + ' ' + this.rightPercent + '%,' + zeroOpacity + ' 99%); \
-                background: -o-linear-gradient(top,  #1e5799 0%,#2989d8 99%); \
-                background: -ms-linear-gradient(top,  #1e5799 0%,#2989d8 99%); \
-                background: linear-gradient(top,  #1e5799 0%,#2989d8 99%); \
-                filter: progid:DXImageTransform.Microsoft.gradient( startColorstr="#1e5799", endColorstr="#2989d8",GradientType=0 );';
-
-        },
-
-        /*
-         * Apply the new style to the editor block and trigger out with
-         * the new value.
-         */
-        _applyCss: function() {
-
-            // Push the new style onto the editor block.
-            this.editor.attr('style', this.css);
-
-        },
-
-        /*
          * Extract an integer value from a css string value of format 'Xpx'.
          * No, jQuery does not provide this.
          */
@@ -365,36 +335,6 @@
             return parseInt(px.slice(0, pxIndex));
 
         },
-
-        /*
-         * Convert hex to rbg array.
-         */
-        __hexToRgb: function(hex) {
-
-            if (hex[0] == '#') {
-                hex = hex.slice(1);
-            }
-
-            var r = parseInt(hex.substring(0,2), 16);
-            var g = parseInt(hex.substring(2,4), 16);
-            var b = parseInt(hex.substring(4,6), 16);
-
-            return {
-                'red': r,
-                'green': g,
-                'blue': b
-            };
-
-        },
-
-        /*
-         * Convert rbg array to valid css value.
-         */
-        __rgbObjectToCssValue: function(rgb, alpha) {
-
-            return 'rgba(' + rgb.red + ', ' + rgb.green + ', ' + rgb.blue + ', ' + alpha + ')';
-
-        }
 
     });
 

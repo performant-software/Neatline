@@ -41,8 +41,70 @@
          */
         _create: function() {
 
-            // Getters.
-            this._window = $(window);
+            console.log(this.element);
+
+        },
+
+        /*
+         * Build the css.
+         */
+        constructCss: function(color, leftPercent, rightPercent) {
+
+            // Build the rgba strings.
+            var rgb = this.__hexToRgb(color);
+            var fullOpacity = this.__rgbObjectToCssValue(rgb, 1);
+            var zeroOpacity = this.__rgbObjectToCssValue(rgb, 0);
+
+            this.css = ' \
+                background: #2989d8; \
+                background: -moz-linear-gradient(left,  ' + zeroOpacity + ' 0%, ' + fullOpacity + ' ' + leftPercent + '%, ' + fullOpacity + ' ' + rightPercent + '%,' + zeroOpacity + ' 99%); \
+                background: -webkit-gradient(linear, left top, right top, color-stop(0%,' + zeroOpacity + '), color-stop(' + leftPercent + '%,' + fullOpacity + '), color-stop(' + rightPercent + '%,' + fullOpacity + '), color-stop(100%,' + zeroOpacity + ')); \
+                background: -webkit-linear-gradient(left, ' + zeroOpacity + ' 0%, ' + fullOpacity + ' ' + leftPercent + '%, ' + fullOpacity + ' ' + rightPercent + '%,' + zeroOpacity + ' 99%); \
+                background: -o-linear-gradient(left,  ' + zeroOpacity + ' 0%, ' + fullOpacity + ' ' + leftPercent + '%, ' + fullOpacity + ' ' + rightPercent + '%,' + zeroOpacity + ' 99%); \
+                background: -ms-linear-gradient(left,  ' + zeroOpacity + ' 0%, ' + fullOpacity + ' ' + leftPercent + '%, ' + fullOpacity + ' ' + rightPercent + '%,' + zeroOpacity + ' 99%); \
+                background: linear-gradient(left, ' + zeroOpacity + ' 0%, ' + fullOpacity + ' ' + leftPercent + '%, ' + fullOpacity + ' ' + rightPercent + '%,' + zeroOpacity + ' 99%); \
+                filter: progid:DXImageTransform.Microsoft.gradient( startColorstr="#1e5799", endColorstr="#2989d8",GradientType=0 );';
+
+        },
+
+        /*
+         * Apply the new style to the editor block and trigger out with
+         * the new value.
+         */
+        applyCss: function() {
+
+            // Push the new style onto the editor block.
+            this.element.attr('style', this.css);
+
+        },
+
+        /*
+         * Convert hex to rbg array.
+         */
+        __hexToRgb: function(hex) {
+
+            if (hex[0] == '#') {
+                hex = hex.slice(1);
+            }
+
+            var r = parseInt(hex.substring(0,2), 16);
+            var g = parseInt(hex.substring(2,4), 16);
+            var b = parseInt(hex.substring(4,6), 16);
+
+            return {
+                'red': r,
+                'green': g,
+                'blue': b
+            };
+
+        },
+
+        /*
+         * Convert rbg array to valid css value.
+         */
+        __rgbObjectToCssValue: function(rgb, alpha) {
+
+            return 'rgba(' + rgb.red + ', ' + rgb.green + ', ' + rgb.blue + ', ' + alpha + ')';
 
         }
 
