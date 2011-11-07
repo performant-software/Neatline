@@ -145,6 +145,8 @@ class Neatline_EditorController extends Omeka_Controller_Action
         $spaceStatus = $_post['space_status'];
         $timeStatus = $_post['time_status'];
         $vectorColor = $_post['vector_color'];
+        $leftPercentage = $_post['left_percentage'];
+        $rightPercentage = $_post['right_percentage'];
 
         // Fetch the Neatline exhibit record and item record.
         $neatline = $this->_neatlinesTable->find($neatlineId);
@@ -160,6 +162,8 @@ class Neatline_EditorController extends Omeka_Controller_Action
             $endDate,
             $endTime,
             $vectorColor,
+            $leftPercentage,
+            $rightPercentage,
             $geoCoverage
         );
 

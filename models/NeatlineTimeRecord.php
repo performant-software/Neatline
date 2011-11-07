@@ -36,6 +36,8 @@ class NeatlineTimeRecord extends Omeka_record
     public $start_time_element_text_id;
     public $end_date_element_text_id;
     public $end_time_element_text_id;
+    public $left_ambiguity_percentage;
+    public $right_ambiguity_percentage;
 
     /**
      * Get the element text record for one of the date pieces.

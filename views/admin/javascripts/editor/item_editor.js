@@ -1378,8 +1378,8 @@
             var startTime_Value = startTimeInput.val();
             var endDate_Value = endDateInput.val();
             var endTime_Value = endTimeInput.val();
-            var leftPercentage_Value = leftPercentageValue.val();
-            var rightPercentage_Value = rightPercentageValue.val();
+            var leftPercentage_Value = leftPercentageInput.val();
+            var rightPercentage_Value = rightPercentageInput.val();
             var colorValue = colorPickerInput.val();
             var geocoverage_Value = this.coverageData;
 

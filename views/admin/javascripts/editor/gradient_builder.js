@@ -57,18 +57,15 @@
             this.leftPercentInput = this.element.find('input[name="' + this.options.markup.left_percent_input_name + '"]');
             this.rightPercentInput = this.element.find('input[name="' + this.options.markup.right_percent_input_name + '"]');
 
-            console.log(this.leftPercentInput);
-            console.log(this.rightPercentInput);
-
             // Percentage trackers.
-            this.leftPercent = null;
-            this.rightPercent = null;
+            this.leftPercent = parseInt(this.leftPercentInput.val());
+            this.rightPercent = parseInt(this.rightPercentInput.val());
 
             // Measure markup.
             this._getDimensions();
 
             // Position the stop markers.
-            this.positionMarkers(0, 100);
+            this.positionMarkers(this.leftPercent, this.rightPercent);
 
             // Add events to markers.
             this._addEvents();

@@ -160,6 +160,8 @@ class NeatlineNeatline extends Omeka_record
      * @param string $endDate The month/day/year of the end.
      * @param string $endTime The time of the end.
      * @param string $vectorColor The hex value for the feature vectors.
+     * @param string $leftPercentage The left side ambiguity parameter.
+     * @param string $rightPercentage The right side ambiguity parameter.
      * @param array $geoCoverage The array of geocoverage data from
      * the map annotations.
      *
@@ -174,6 +176,8 @@ class NeatlineNeatline extends Omeka_record
         $endDate,
         $endTime,
         $vectorColor,
+        $leftPercentage,
+        $rightPercentage,
         $geoCoverage
     )
     {
@@ -321,8 +325,15 @@ class NeatlineNeatline extends Omeka_record
                 $startDate,
                 $startTime,
                 $endDate,
-                $endTime
+                $endTime,
+                $leftPercentage,
+                $rightPercentage
             );
+
+            // Update the percentages.
+            $dateRecord->left_ambiguity_percentage = $leftPercentage;
+            $dateRecord->right_ambiguity_percentage = $rightPercentage;
+            $dateRecord->save();
 
         }
 
@@ -333,6 +344,8 @@ class NeatlineNeatline extends Omeka_record
             $record = new NeatlineTimeRecord();
             $record->neatline_id = $this->id;
             $record->item_id = $item->id;
+            $record->left_ambiguity_percentage = $leftPercentage;
+            $record->right_ambiguity_percentage = $rightPercentage;
 
             // Create the texts.
             $record->createElementTexts(
@@ -386,7 +399,7 @@ class NeatlineNeatline extends Omeka_record
      * @param Omeka_record $item The item.
      * @param string $field The name of the DC field.
      *
-     * @return Omeka_record The map.
+     * @return Omeka_record The text.
      */
     public function getTextByItemAndField($item, $field)
     {
@@ -446,7 +459,7 @@ class NeatlineNeatline extends Omeka_record
      * @param string $piece The piece to get - can be 'start_date',
      * 'start_time', 'end_date', or 'end_time'.
      *
-     * @return Omeka_record The map.
+     * @return Omeka_record The text.
      */
     public function getTimeTextByItemAndField($item, $piece)
     {
@@ -472,6 +485,49 @@ class NeatlineNeatline extends Omeka_record
         }
 
         return $text;
+
+    }
+
+    /**
+     * Get the temporal record for an item.
+     *
+     * @param Omeka_record $item The item.
+     *
+     * @return Omeka_record The temporal record.
+     */
+    public function getTimeRecord($item)
+    {
+
+        // Try to find the record.
+        $dataTable = $this->getTable('NeatlineTimeRecord');
+        return $dataTable->findByElement($this->id, $item->id);
+
+    }
+
+    /**
+     * Get an ambiguity percentage for the left or right side.
+     *
+     * @param Omeka_record $item The item.
+     * @param string $side 'left' or 'right'.
+     *
+     * @return Omeka_record The value.
+     */
+    public function getAmbiguityPercentage($item, $side)
+    {
+
+        // Defaults if no settings present.
+        $percentage = ($side == 'left') ? 0 : 100;
+
+        // Try to get a record.
+        $record = $this->getTimeRecord($item);
+
+        // If there is a record, get the value.
+        if ($record != null) {
+            $percentage = ($side == 'left') ?
+                $record->left_ambiguity_percentage : $record->right_ambiguity_percentage;
+        }
+
+        return $percentage;
 
     }
 
