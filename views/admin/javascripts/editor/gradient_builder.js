@@ -166,11 +166,27 @@
                     // Calculate new offset.
                     var xDelta = e.pageX - startingX;
                     var newOffset = startingOffset + xDelta;
+                    var newLeftPercent = self._leftPercentFromOffset(newOffset);
 
                     // If the new offset is in bounds.
-                    if (newOffset + self.options.css.stop_marker_width_correction >= 0) {
+                    if (newOffset + self.options.css.stop_marker_width_correction >= 0
+                       && newLeftPercent < self.rightPercent) {
 
                         // Manifest new offest.
+                        self.leftMarker.css('left', newOffset);
+
+                    }
+
+                    // If the drag extends beyond the position of the
+                    // right dragger, fix the left dragger at the same
+                    // position as the right.
+                    else if (newLeftPercent >= self.rightPercent) {
+
+                        // Get the offset of the right dragger.
+                        newOffset = self.editorWidth - self.__pxToInt(self.rightMarker.css('right')) -
+                            (2 * (self.options.css.stop_marker_width_correction)) - 1;
+
+                        // Manifest.
                         self.leftMarker.css('left', newOffset);
 
                     }
@@ -219,11 +235,27 @@
                     // Calculate new offset.
                     var xDelta = e.pageX - startingX;
                     var newOffset = startingOffset - xDelta;
+                    var newRightPercent = self._rightPercentFromOffset(newOffset);
 
                     // If the new offset is in bounds.
-                    if (newOffset + self.options.css.stop_marker_width_correction >= 0) {
+                    if (newOffset + self.options.css.stop_marker_width_correction >= 0
+                       && newRightPercent > self.leftPercent) {
 
                         // Manifest new offest.
+                        self.rightMarker.css('right', newOffset);
+
+                    }
+
+                    // If the drag extends beyond the position of the
+                    // right dragger, fix the left dragger at the same
+                    // position as the right.
+                    else if (newRightPercent <= self.leftPercent) {
+
+                        // Get the offset of the right dragger.
+                        newOffset = self.editorWidth - self.__pxToInt(self.leftMarker.css('left')) -
+                            (2 * (self.options.css.stop_marker_width_correction)) - 1;
+
+                        // Manifest.
                         self.rightMarker.css('right', newOffset);
 
                     }
