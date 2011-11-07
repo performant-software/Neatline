@@ -34,19 +34,9 @@
                 right_marker_class: 'stop-marker.right'
             },
 
-            // Animation constants.
-            animation: {
-
-            },
-
             // CSS constants.
             css: {
                 stop_marker_width_correction: 5
-            },
-
-            // Hexes.
-            colors: {
-
             }
 
         },
