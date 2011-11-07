@@ -118,8 +118,11 @@
             // Store the value.
             this.color = color;
 
-            // Manifest.
-            this.editor.css('background', color);
+            // Manifest the color on the block.
+            this._constructCss();
+            this._applyCss();
+
+            // Change the colors of the stop markers.
             this.swatches.css('background', color);
 
         },

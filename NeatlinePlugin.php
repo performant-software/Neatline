@@ -127,6 +127,8 @@ class NeatlinePlugin
                 `start_time_element_text_id` int(10) unsigned NULL,
                 `end_date_element_text_id` int(10) unsigned NULL,
                 `end_time_element_text_id` int(10) unsigned NULL,
+                `left_ambiguity_percentage` int(10) unsigned NULL,
+                `right_ambiguity_percentage` int(10) unsigned NULL,
                  PRIMARY KEY (`id`)
                ) ENGINE=innodb DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
 
