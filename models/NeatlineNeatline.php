@@ -588,6 +588,7 @@ class NeatlineNeatline extends Omeka_record
                 'title' => $title,
                 'description' => $description,
                 'color' => $color,
+                'textColor' => '#6b6b6b',
                 'left_ambiguity' => $leftPercentage,
                 'right_ambiguity' => $rightPercentage
             );
