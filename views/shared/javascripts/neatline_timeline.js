@@ -236,6 +236,29 @@
                 this.timeline.getBand(0).setCenterVisibleDate(startDate);
             }
 
+            // Apply the ambiguity gradients.
+            var band0 = this.timeline.getBand(0);
+            var painter0 = band0.getEventPainter();
+
+            var band1 = this.timeline.getBand(1);
+            var painter1 = band1.getEventPainter();
+
+            painter0.addEventPaintListener(function(band, op, evt, els) {
+
+                if (els != null) {
+
+                    var tape = $(els[0]);
+                    tape.spanstyler();
+                    tape.spanstyler('constructCss', evt._obj.color, evt._obj.left_ambiguity, evt._obj.right_ambiguity);
+                    tape.spanstyler('applyCss');
+
+                }
+
+            });
+
+            painter1.addEventPaintListener(function(band, op, evt, els) {
+            });
+
         },
 
         zoomToEvent: function(id) {

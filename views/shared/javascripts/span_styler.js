@@ -27,15 +27,6 @@
 
     $.widget('neatline.spanstyler', {
 
-        options: {
-
-            // Markup hooks.
-            markup: {
-
-            }
-
-        },
-
         /*
          * Build the css.
          */
@@ -64,8 +55,11 @@
          */
         applyCss: function() {
 
+            // Get the starting styling.
+            var startingStyle = this.element.attr('style');
+
             // Push the new style onto the editor block.
-            this.element.attr('style', this.css);
+            this.element.attr('style', startingStyle + this.css);
 
         },
 
