@@ -1178,8 +1178,23 @@
                 // editFormContainer.smallscroll();
             }
 
-            // Instantiate the date ambiguity builder and set the starting color.
-            dateAmbiguityContainer.gradientbuilder();
+            // Instantiate the date ambiguity builder and define callbacks.
+            dateAmbiguityContainer.gradientbuilder({
+
+                'stopHandleDrag': function(event, obj) {
+
+                    self._trigger('ambiguityChange', {}, {
+                        'itemId': itemId,
+                        'color': obj.color,
+                        'leftPercent': obj.leftPercent,
+                        'rightPercent': obj.rightPercent
+                    });
+
+                }
+
+            });
+
+            // Set the starting color.
             dateAmbiguityContainer.gradientbuilder('setColor', colorPickerInput.val());
 
             // Instantiate the color picker and define change callback.

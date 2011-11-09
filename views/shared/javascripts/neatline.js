@@ -460,6 +460,12 @@
 
         },
 
+        setDateAmbiguity: function(id, color, leftPercent, rightPercent) {
+
+            this.timeline.neatlinetimeline('setDateAmbiguity', id, color, leftPercent, rightPercent);
+
+        },
+
         getMapExtent: function() {
 
             return this.map.neatlinemap('getExtentForSave');

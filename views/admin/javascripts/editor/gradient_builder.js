@@ -218,6 +218,13 @@
                     self.editor.spanstyler('constructCss', self.color, self.leftPercent, self.rightPercent);
                     self.editor.spanstyler('applyCss');
 
+                    // Trigger the change out to the item editor.
+                    self._trigger('stopHandleDrag', {}, {
+                        'color': self.color,
+                        'leftPercent': self.leftPercent,
+                        'rightPercent': self.rightPercent
+                    });
+
                 },
 
                 'mouseup': function() {

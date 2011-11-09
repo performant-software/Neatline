@@ -73,6 +73,7 @@
             // Initialize popup and tracker.
             this._onPopup = false;
             this._initializePopup();
+            this._idToTapeElements = {};
 
             // Initialize resize timer.
             this.resizeTimerId = null;
@@ -247,16 +248,45 @@
 
                 if (els != null) {
 
+                    // Get the tape element.
                     var tape = $(els[0]);
+
+                    // Store the Simile positioning styles.
+                    tape.data('positioningStyles', tape.attr('style'));
+
+                    // Instantiate the span styler on the tape.
                     tape.spanstyler();
                     tape.spanstyler('constructCss', evt._obj.color, evt._obj.left_ambiguity, evt._obj.right_ambiguity);
                     tape.spanstyler('applyCss');
+
+                    // Push the id-element association into the tracker object.
+                    self._idToTapeElements[evt._eventID] = [tape];
 
                 }
 
             });
 
             painter1.addEventPaintListener(function(band, op, evt, els) {
+
+                if (els != null) {
+
+                    // Get the tape element.
+                    var tape = $(els[0]);
+
+                    // Store the Simile positioning styles.
+                    tape.data('positioningStyles', tape.attr('style'));
+
+                    // Instantiate the span styler on the tape.
+                    tape.spanstyler();
+                    tape.spanstyler('constructCss', evt._obj.color, evt._obj.left_ambiguity, evt._obj.right_ambiguity);
+                    tape.spanstyler('applyCss');
+
+                    // Push the id-element association into the tracker object.
+                    self._idToTapeElements[evt._eventID].push(tape);
+
+                }
+
+
             });
 
         },
@@ -282,6 +312,23 @@
         getCenterForSave: function() {
 
             return this.timeline.getBand(0).getCenterVisibleDate().toString();
+
+        },
+
+        setDateAmbiguity: function(id, color, leftPercent, rightPercent) {
+
+            var self = this;
+
+            $.each(this._idToTapeElements[id], function(i, el) {
+
+                // First, strip off the styles and reapply just the simile positioning.
+                el.attr('style', el.data('positioningStyles'));
+
+                // Apply the gradient style.
+                el.spanstyler('constructCss', color, leftPercent, rightPercent);
+                el.spanstyler('applyCss');
+
+            });
 
         }
 
