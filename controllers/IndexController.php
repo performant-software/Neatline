@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
 
 /**
- * Index controller.
+ * Admin controller.
  *
  * PHP version 5
  *
