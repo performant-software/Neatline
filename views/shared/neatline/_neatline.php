@@ -25,7 +25,7 @@
  */
 ?>
 
-<div id="neatline-editor" class="neatline-container">
+<div id="neatline" class="neatline-container">
 
     <div id="map" class="neatline-block"></div>
 

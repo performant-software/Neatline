@@ -35,7 +35,7 @@
             items_list_container_id: 'items-list-container',
             items_list_header_id: 'items-list-header',
             item_filter_container_id: 'filter-items',
-            neatline_id: 'neatline-editor',
+            neatline_id: 'neatline',
             drag_tooltip_id: 'drag-tip',
             space_tooltip_id: 'space-tip',
             time_tooltip_id: 'time-tip',

@@ -37,21 +37,11 @@
                 undated_id: 'undated'
             },
 
-            // Animation constants.
-            animation: {
-
-            },
-
             // CSS constants.
             css: {
                 top_block_height_percent: 55,
                 undated_items_width_percent: 31
             },
-
-            // Hexes.
-            colors: {
-
-            }
 
         },
 
@@ -77,6 +67,9 @@
 
             // Startup for the component widgets.
             this.instantiateBlocks();
+
+            console.log(this.element.parent());
+            console.log(this.element.css('height'));
 
         },
 
