@@ -186,7 +186,7 @@
                 var width = self.popup.width();
 
                 // Position the scrollbar.
-                self.popupContent.smallscroll('positionBar');
+                // self.popupContent.smallscroll('positionBar');
 
                 // Position and show.
                 self.popup.css({

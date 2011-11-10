@@ -80,7 +80,6 @@ function neatline_queueBrowseJs()
 function neatline_queueEditorAssets()
 {
 
-    queue_css('bootstrap-1.2.0');
     queue_css('neatline-editor');
     queue_css('layout-builder');
     queue_css('gradient-builder');
@@ -120,6 +119,7 @@ function neatline_queueNeatlineAssets()
 {
 
     // Core Neatline stylesheet.
+    queue_css('bootstrap-1.2.0');
     queue_css('neatline');
 
     // The Neatline JavaScript application.
