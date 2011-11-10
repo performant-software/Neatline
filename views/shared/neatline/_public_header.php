@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
 
 /**
- * Public-facing Neatline exhibit.
+ * Page header markup for the editor.
  *
  * PHP version 5
  *
@@ -25,23 +25,24 @@
  */
 ?>
 
-<?php echo $this->partial('neatline/_public_header.php', array(
-    'titlePrefix' => 'Neatline',
-    'title' => $neatline->name
-)); ?>
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <title><?php echo $titlePrefix; ?>: <?php echo $title; ?></title>
 
-<?php echo $this->partial('neatline/_neatline.php', array(
-    'neatline' => $neatline,
-    'timeline' => $timeline,
-    'map' => array(
-        'boundingBox' => $map->boundingBox,
-        'epsg' => $map->epsg,
-        'wmsAddress' => $map->wmsAddress,
-        'layers' => $map->layers
-    ),
-    'dataSources' => array(
-        'timeline' => neatline_getTimelineDataUrl($neatline->id),
-        'map' => neatline_getMapDataUrl($neatline->id),
-        'undated' => neatline_getUndatedItemsDataUrl($neatline->id)
-    )
-)); ?>
+<!-- Plugin Stuff -->
+<?php plugin_header(); ?>
+
+<!-- Stylesheets -->
+<?php display_css(); ?>
+
+<!-- JavaScripts -->
+<?php display_js(); ?>
+
+<link href='http://fonts.googleapis.com/css?family=Crimson+Text:400,400italic,600,600italic,700,700italic' rel='stylesheet' type='text/css'>
+<script type="text/javascript" src="http://openlayers.org/api/OpenLayers.js"></script>
+<script src="http://api.simile-widgets.org/timeline/2.3.1/timeline-api.js?bundle=true" type="text/javascript"></script>
+
+</head>
+<?php echo body_tag(array('id' => @$bodyid, 'class' => @$bodyclass)); ?>

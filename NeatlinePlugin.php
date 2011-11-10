@@ -191,10 +191,8 @@ class NeatlinePlugin
      *
      * @return void
      */
-    public function adminThemeHeader()
+    public function adminThemeHeader($request)
     {
-
-        $request = Zend_Controller_Front::getInstance()->getRequest();
 
         // Queue CSS.
         if ($request->getModuleName() == 'neatline' &&
@@ -240,7 +238,7 @@ class NeatlinePlugin
      *
      * @return void
      */
-    public function publicThemeHeader()
+    public function publicThemeHeader($request)
     {
 
         // Queue static assets for public-facing Neatline exhibits.
@@ -249,6 +247,7 @@ class NeatlinePlugin
             $request->getActionName() == 'show') {
 
               neatline_queueNeatlineAssets();
+              neatline_queuePublicAssets();
 
         }
 

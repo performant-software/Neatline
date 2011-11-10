@@ -100,6 +100,18 @@ function neatline_queueEditorAssets()
 }
 
 /**
+ * Include the static files for a public-facing exhibit.
+ *
+ * @return void.
+ */
+function neatline_queuePublicAssets()
+{
+
+    queue_js('_deployment', 'javascripts');
+
+}
+
+/**
  * Include the static files for the Neatline.
  *
  * @return void.

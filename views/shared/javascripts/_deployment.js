@@ -1,10 +1,5 @@
-<?php
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
-
-/**
- * Public-facing Neatline exhibit.
- *
- * PHP version 5
+/*
+ * Widget instantiations for the Neatline editor.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -23,25 +18,29 @@
  * @copyright   2011 The Board and Visitors of the University of Virginia
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache 2 License
  */
-?>
 
-<?php echo $this->partial('neatline/_public_header.php', array(
-    'titlePrefix' => 'Neatline',
-    'title' => $neatline->name
-)); ?>
+jQuery(document).ready(function($) {
 
-<?php echo $this->partial('neatline/_neatline.php', array(
-    'neatline' => $neatline,
-    'timeline' => $timeline,
-    'map' => array(
-        'boundingBox' => $map->boundingBox,
-        'epsg' => $map->epsg,
-        'wmsAddress' => $map->wmsAddress,
-        'layers' => $map->layers
-    ),
-    'dataSources' => array(
-        'timeline' => neatline_getTimelineDataUrl($neatline->id),
-        'map' => neatline_getMapDataUrl($neatline->id),
-        'undated' => neatline_getUndatedItemsDataUrl($neatline->id)
-    )
-)); ?>
+    var neatlineContainer = $('.neatline-container');
+
+    neatlineContainer.neatline({
+
+        // When the user clicks on an item on the timeline.
+        'timelineeventclick': function(event, obj) {
+
+            // Focus the map.
+            neatlineContainer.neatline('zoomMapToItemVectors', obj.itemId);
+
+        },
+
+        // When the user clicks on a feature on the map.
+        'mapfeatureclick': function(event, obj) {
+
+            // Focus the timeline.
+            neatlineContainer.neatline('zoomTimelineToEvent', obj.itemId);
+
+        }
+
+    });
+
+});

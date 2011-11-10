@@ -26,7 +26,7 @@
  */
 ?>
 
-<?php echo $this->partial('neatline/_header.php', array(
+<?php echo $this->partial('editor/_editor_header.php', array(
     'titlePrefix' => 'Neatline Editor',
     'title' => $neatline->name
 )); ?>
