@@ -25,7 +25,7 @@
  */
 ?>
 
-<div id="neatline-editor" class="neatline">
+<div id="neatline-editor" class="neatline-container">
 
     <div id="map" class="neatline-block"></div>
 
@@ -38,16 +38,7 @@
 </div>
 
 <!-- Generic markup for the timeline popups. -->
-<div id="timeline-popup" class="popover above">
-    <div class="arrow"></div>
-    <div class="inner">
-        <div class="title">
-            <a href="#" class="close">×</a>
-            <h3 class="title-text"></h3>
-        </div>
-        <div class="content"></div>
-    </div>
-</div>
+<?php echo $this->partial('index/_popups.php'); ?>
 
 <!-- JSON globals. -->
 <script type="text/javascript">

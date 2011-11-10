@@ -31,6 +31,23 @@ class Neatline_PublicController extends Omeka_Controller_Action
 {
 
     /**
+     * Get table objects.
+     *
+     * @return void
+     */
+    public function init()
+    {
+
+        // Get tables.
+        $this->_neatlinesTable = $this->getTable('NeatlineNeatline');
+        $this->_mapsTable = $this->getTable('NeatlineMapsMap');
+        $this->_timelinesTable = $this->getTable('NeatlineTimeTimeline');
+        $this->_itemsTable = $this->getTable('Item');
+        $this->_statusesTable = $this->getTable('NeatlineRecordStatus');
+
+    }
+
+    /**
      * Public-facing Neatline exhibit.
      *
      * @return void
@@ -38,8 +55,31 @@ class Neatline_PublicController extends Omeka_Controller_Action
     public function showAction()
     {
 
+        // Push the Neatline into the view.
         $id = $this->_request->getParam('id');
-        echo 'test';
+        $neatline = $this->_neatlinesTable->find($id);
+        $this->view->neatline = $neatline;
+
+        // Get the map and timeline records.
+        $map = $neatline->getMap();
+        $timeline = $neatline->getTimeline();
+
+        // Push the map and timeline records into the view.
+        if ($map) {
+            $this->view->map = new GeoserverMap_Map($neatline->getMap());
+        }
+
+        if ($timeline) {
+            $this->view->timeline = $neatline->getTimeline();
+        }
+
+        $collections = $this->getTable('Collection')->findAll();
+        $tags = $this->getTable('Tag')->findAll();
+        $types = $this->getTable('ItemType')->findAll();
+
+        $this->view->collections = $collections;
+        $this->view->tags = $tags;
+        $this->view->types = $types;
 
     }
 

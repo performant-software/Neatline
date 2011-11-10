@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
 
 /**
- * Public-facing Neatline exhibit.
+ * Base markup for a Neatline.
  *
  * PHP version 5
  *
@@ -25,18 +25,13 @@
  */
 ?>
 
-<?php echo $this->partial('index/_neatline.php', array(
-    'neatline' => $neatline,
-    'timeline' => $timeline,
-    'map' => array(
-        'boundingBox' => $map->boundingBox,
-        'epsg' => $map->epsg,
-        'wmsAddress' => $map->wmsAddress,
-        'layers' => $map->layers
-    ),
-    'dataSources' => array(
-        'timeline' => neatline_getTimelineDataUrl($neatline->id),
-        'map' => neatline_getMapDataUrl($neatline->id),
-        'undated' => neatline_getUndatedItemsDataUrl($neatline->id)
-    )
-)); ?>
+<div id="timeline-popup" class="popover above">
+    <div class="arrow"></div>
+    <div class="inner">
+        <div class="title">
+            <a href="#" class="close">×</a>
+            <h3 class="title-text"></h3>
+        </div>
+        <div class="content"></div>
+    </div>
+</div>

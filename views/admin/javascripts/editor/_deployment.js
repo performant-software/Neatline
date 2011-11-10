@@ -21,7 +21,7 @@
 
 jQuery(document).ready(function($) {
 
-    var neatlineContainer = $('#neatline-editor');
+    var neatlineContainer = $('.neatline-container');
     var editorContainer = $('#item-browser');
     var layoutBuilderContainer = $('#configure-layout');
 

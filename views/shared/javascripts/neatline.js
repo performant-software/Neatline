@@ -55,7 +55,7 @@
 
         },
 
-        _create: function(test) {
+        _create: function() {
 
             // Setters.
             this.params = Neatline;

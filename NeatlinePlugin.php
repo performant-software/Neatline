@@ -36,6 +36,7 @@ class NeatlinePlugin
         'define_routes',
         'define_acl',
         'admin_theme_header',
+        'public_theme_header',
         'admin_append_to_plugin_uninstall_message'
     );
 
@@ -186,7 +187,7 @@ class NeatlinePlugin
     }
 
     /**
-     * Include the the neatline CSS changes in the admin header.
+     * Push administrative Neatline assets.
      *
      * @return void
      */
@@ -229,6 +230,25 @@ class NeatlinePlugin
 
               neatline_queueNeatlineAssets();
               neatline_queueEditorAssets();
+
+        }
+
+    }
+
+    /**
+     * Push public-facing Neatline assets.
+     *
+     * @return void
+     */
+    public function publicThemeHeader()
+    {
+
+        // Queue static assets for public-facing Neatline exhibits.
+        if ($request->getModuleName() == 'neatline' &&
+            $request->getControllerName() == 'public' &&
+            $request->getActionName() == 'show') {
+
+              neatline_queueNeatlineAssets();
 
         }
 
