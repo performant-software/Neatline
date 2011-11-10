@@ -26,7 +26,8 @@
  */
 ?>
 
-<?php echo $this->partial('editor/_editor_header.php', array(
+<?php echo $this->partial('neatline/_header.php', array(
+    'titlePrefix' => 'Neatline Editor',
     'title' => $neatline->name
 )); ?>
 
@@ -40,7 +41,7 @@
     'types' => $types
 )); ?>
 
-<?php echo $this->partial('index/_neatline.php', array(
+<?php echo $this->partial('neatline/_neatline.php', array(
     'neatline' => $neatline,
     'timeline' => $timeline,
     'map' => array(

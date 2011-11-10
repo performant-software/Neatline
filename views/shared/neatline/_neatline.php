@@ -32,13 +32,13 @@
     <div id="timeline" class="neatline-block"></div>
 
     <div id="undated" class="neatline-block">
-        <?php echo $this->partial('index/_undated_items.php'); ?>
+        <?php echo $this->partial('neatline/_undated_items.php'); ?>
     </div>
 
 </div>
 
 <!-- Generic markup for the timeline popups. -->
-<?php echo $this->partial('index/_popups.php'); ?>
+<?php echo $this->partial('neatline/_popups.php'); ?>
 
 <!-- JSON globals. -->
 <script type="text/javascript">

@@ -25,7 +25,12 @@
  */
 ?>
 
-<?php echo $this->partial('index/_neatline.php', array(
+<?php echo $this->partial('neatline/_header.php', array(
+    'titlePrefix' => 'Neatline',
+    'title' => $neatline->name
+)); ?>
+
+<?php echo $this->partial('neatline/_neatline.php', array(
     'neatline' => $neatline,
     'timeline' => $timeline,
     'map' => array(
