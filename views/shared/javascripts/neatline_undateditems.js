@@ -36,9 +36,14 @@
                 header_container_id: 'public-items-list-header'
             },
 
+            // CSS constants.
+            css: {
+                header_height: 40
+            },
+
             // Hexes.
             colors: {
-
+                purple: '#724E85'
             }
 
         },
@@ -55,9 +60,10 @@
             this.listHeader = $('#' + this.options.markup.header_container_id);
             this.params = Neatline;
 
-            // Id-to-item and id-to-offset association objects.
+            // Trackers.
             this._idToItem = {};
             this._idToOffset = {};
+            this._currentItem = null;
 
             // Get starting offets and position markup.
             this.__getScrollBarWidth();
@@ -106,6 +112,7 @@
 
             this._window.bind('resize', function() {
                 self._positionMarkup();
+                self._getItemOffsets();
             });
 
         },
@@ -155,7 +162,6 @@
 
             // Empty the id-to-item association object.
             this._idToItem = {};
-            this._idToOffset = {};
 
             // Position the faders.
             this._positionTitleFaders();
@@ -186,6 +192,36 @@
 
             });
 
+            // Register the native top offsets.
+            this._getItemOffsets();
+
+        },
+
+        /*
+         * Once the raw markup is from the items ajax query is pushed into the
+         * container, build the functionality for each item.
+         */
+        _getItemOffsets: function() {
+
+            var self = this;
+
+            // Get the new items.
+            this.items = this.listContainer.find('.item-row');
+
+            // Empty the association object.
+            this._idToOffset = {};
+
+            // Bind events to the item rows.
+            $.each(this.items, function(i, item) {
+
+                var item = $(item);
+                var itemId = item.attr('recordid');
+
+                // Measure and store the item's native vertical offset.
+                self._idToOffset[itemId] = item.position().top
+
+            });
+
         },
 
         /*
@@ -193,7 +229,28 @@
          */
         scrollToItem: function(id) {
 
-            console.log(this._idToOffset[id]);
+            // If there is a currently selected item, fade down the title.
+            if (this._currentItem != null) {
+                var oldTitle = this._currentItem.find('.' + this.options.markup.item_title_text_class);
+                oldTitle.css('color', '');
+            }
+
+            // Fetch the markup and get components.
+            var item = this._idToItem[id];
+            var title = item.find('.' + this.options.markup.item_title_text_class);
+
+            // Position at the top of the frame.
+            this.element.animate({
+                'scrollTop': this._idToOffset[id] - this.options.css.header_height + 1
+            }, 300);
+
+            // Fade the title to purple.
+            title.animate({
+                'color': this.options.colors.purple
+            }, 200);
+
+            // Set the current item tracker.
+            this._currentItem = item;
 
         },
 
