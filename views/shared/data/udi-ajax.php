@@ -25,7 +25,7 @@
  */
 ?>
 
-<table id="items">
+<table id="undated-items-list-container">
 
     <?php foreach ($items as $item): ?>
 

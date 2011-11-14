@@ -29,7 +29,10 @@
 
             // Markup hooks.
             markup: {
-                list_container_id: 'undated-items-list-container'
+                list_container_id: 'undated-items-list-container',
+                item_title_text_class: 'item-title-text',
+                item_title_fader_class: 'item-title-fader',
+                item_row_class: '.item-row'
             },
 
             // Hexes.
@@ -80,11 +83,79 @@
 
                 success: function(data) {
                     self.listContainer.html(data);
+                    self._glossItems();
                 }
 
             });
 
-        }
+        },
+
+        /*
+         * Once the raw markup is from the items ajax query is pushed into the
+         * container, build the functionality for each item.
+         */
+        _glossItems: function() {
+
+            var self = this;
+
+            // Get the new items.
+            this.items = this.listContainer.find('.item-row');
+
+            // Position the faders.
+            this._positionTitleFaders();
+
+            // Bind events to the item rows.
+            $.each(this.items, function(i, item) {
+
+                var item = $(item);
+                var itemId = item.attr('recordid');
+
+                // Listen for events.
+                item.bind({
+
+                    'mousedown': function() {
+
+                        // Trigger out to the deployment code.
+                        self._trigger('undateditemclick', {}, {
+                            'itemId': itemId
+                        });
+
+                    }
+
+                });
+
+            });
+
+        },
+
+        /*
+         * Position the divs that provide the opacity gradient on the right
+         * edge of width-occluded item titles in the browser pane.
+         */
+        _positionTitleFaders: function() {
+
+            var self = this;
+
+            $.each(this.items, function(i, item) {
+
+                var item = $(item);
+
+                // Get the spans for the text and fader.
+                var textSpan = item.find('.' + self.options.markup.item_title_text_class);
+                var faderSpan = item.find('.' + self.options.markup.item_title_fader_class);
+
+                // Measure the height of the block produced by the text
+                // and the width of the entire row.
+                var titleHeight = textSpan.height();
+
+                // Position the fader.
+                faderSpan.css({
+                    'height': titleHeight
+                });
+
+            });
+
+        },
 
     });
 

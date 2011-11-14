@@ -386,7 +386,15 @@
             // Undated items.
             if (this.params.is_undated_items && !this.instantiated_undated) {
 
-                this.undated.neatlineundateditems();
+                this.undated.neatlineundateditems({
+
+                    'undateditemclick': function(event, obj) {
+                        self._trigger('timelineeventclick', {}, {
+                            'itemId': obj.itemId
+                        });
+                    }
+
+                });
 
                 // Register the presence of the udi instantiation.
                 this.instantiated_undated = true;
