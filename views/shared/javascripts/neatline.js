@@ -469,6 +469,12 @@
 
         },
 
+        showItemDescription: function(id) {
+
+            this.undated.neatlineundateditems('scrollToItem', id);
+
+        },
+
         setItemColor: function(color) {
 
             this.map.neatlinemap('setItemColor', color);

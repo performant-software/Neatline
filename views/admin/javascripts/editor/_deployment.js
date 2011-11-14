@@ -121,6 +121,9 @@ jQuery(document).ready(function($) {
                 neatlineContainer.neatline('zoomTimelineToEvent', obj.itemId);
             }
 
+            // Always focus the sequence tray.
+            neatlineContainer.neatline('showItemDescription', obj.itemId);
+
         },
 
         // When the color picker value is changed, push the new color onto

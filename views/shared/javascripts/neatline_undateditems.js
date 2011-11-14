@@ -55,8 +55,9 @@
             this.listHeader = $('#' + this.options.markup.header_container_id);
             this.params = Neatline;
 
-            // Id-to-item association object.
+            // Id-to-item and id-to-offset association objects.
             this._idToItem = {};
+            this._idToOffset = {};
 
             // Get starting offets and position markup.
             this.__getScrollBarWidth();
@@ -154,6 +155,7 @@
 
             // Empty the id-to-item association object.
             this._idToItem = {};
+            this._idToOffset = {};
 
             // Position the faders.
             this._positionTitleFaders();
@@ -164,6 +166,9 @@
                 var item = $(item);
                 var itemId = item.attr('recordid');
                 self._idToItem[itemId] = item;
+
+                // Measure and store the item's native vertical offset.
+                self._idToOffset[itemId] = item.position().top
 
                 // Listen for events.
                 item.bind({
@@ -180,6 +185,15 @@
                 });
 
             });
+
+        },
+
+        /*
+         * Vertical scroll to item.
+         */
+        scrollToItem: function(id) {
+
+            console.log(this._idToOffset[id]);
 
         },
 
