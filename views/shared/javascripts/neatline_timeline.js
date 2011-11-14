@@ -188,31 +188,31 @@
                 // Position the scrollbar.
                 // self.popupContent.smallscroll('positionBar');
 
-                // Position and show.
-                self.popup.css({
-                    'display': 'block',
-                    'top': y - height - self.options.css.popup_vertical_offset,
-                    'left': x - (width / 2)
-                });
+                // // Position and show.
+                // self.popup.css({
+                //     'display': 'block',
+                //     'top': y - height - self.options.css.popup_vertical_offset,
+                //     'left': x - (width / 2)
+                // });
 
-                // Fade in.
-                self.popup.css('display', 'block');
-                self.popup.animate({
-                    'opacity': 1
-                }, 100);
+                // // Fade in.
+                // self.popup.css('display', 'block');
+                // self.popup.animate({
+                //     'opacity': 1
+                // }, 100);
 
-                // Add cursor tracker.
-                self.popup.bind({
+                // // Add cursor tracker.
+                // self.popup.bind({
 
-                    'mouseenter': function() {
-                        self._onPopup = true;
-                    },
+                //     'mouseenter': function() {
+                //         self._onPopup = true;
+                //     },
 
-                    'mouseleave': function() {
-                        self._onPopup = false;
-                    }
+                //     'mouseleave': function() {
+                //         self._onPopup = false;
+                //     }
 
-                });
+                // });
 
             }
 
