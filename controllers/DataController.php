@@ -87,9 +87,11 @@ class Neatline_DataController extends Omeka_Controller_Action
         // Get the exhibit id and statuses table.
         $neatlineId = $this->_request->getParam('id');
         $statusesTable = $this->getTable('NeatlineRecordStatus');
+        $neatlinesTable = $this->getTable('NeatlineNeatline');
 
-        // Get items.
+        // Get items, push items and Neatline record into view.
         $this->view->items = $statusesTable->getUndatedItems($neatlineId);
+        $this->view->neatline = $neatline = $neatlinesTable->find($neatlineId);
 
     }
 

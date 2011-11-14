@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
 
 /**
- * Items browse markup.
+ * Partial template for the Nealtine record edit form.
  *
  * PHP version 5
  *
@@ -25,26 +25,10 @@
  */
 ?>
 
-<table id="undated-items-list-container">
+<div class="neatline-item-details">
 
-    <?php foreach ($items as $item): ?>
+    <div class="small-scroll-content">
+        <div class="item-description"><?php echo $neatline->getTextByItemAndField($item, 'Description'); ?></div>
+    </div>
 
-        <tr class="item-row" recordid="<?php echo $item->id; ?>">
-            <td class="item-title">
-                <span class="item-title-text"><?php echo item('Dublin Core', 'Title', null, $item); ?></span>
-                <span class="item-title-fader"></span>
-            </td>
-        </tr>
-
-        <tr class="item-details">
-            <td>
-                <?php echo $this->partial('data/_item_details.php', array(
-                    'item' => $item,
-                    'neatline' => $neatline
-                )); ?>
-            </td>
-        </tr>
-
-    <?php endforeach; ?>
-
-</table>
+</div>

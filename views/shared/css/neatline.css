@@ -153,3 +153,8 @@
     display: block;
     width: 80%;
 }
+
+#undated-items-list-container div.neatline-item-details {
+    padding-left: 24px;
+    line-height: 1.4em;
+}
