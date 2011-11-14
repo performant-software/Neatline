@@ -389,9 +389,17 @@
                 this.undated.neatlineundateditems({
 
                     'undateditemclick': function(event, obj) {
+
+                        // Focus the map.
                         self._trigger('timelineeventclick', {}, {
                             'itemId': obj.itemId
                         });
+
+                        // Focus the timeline.
+                        self._trigger('mapfeatureclick', {}, {
+                            'itemId': obj.itemId
+                        });
+
                     }
 
                 });

@@ -214,7 +214,7 @@ class NeatlineRecordStatusTable extends Omeka_Db_Table
         $_itemsTable = $this->getTable('Item');
 
         // Get the matching status records.
-        $statuses = $this->findBySql('neatline_id = ? AND space = 1 AND (time = 0 OR time = NULL)', array($neatline_id));
+        $statuses = $this->findBySql('neatline_id = ? AND (space = 1 OR time = 1)', array($neatline_id));
 
         // Walk the results, fetch the items, pack them up.
         $items = array();

@@ -122,6 +122,29 @@ function neatline_getRecordStatusForCheckBox($neatline, $item, $spaceOrTime)
 }
 
 /**
+ * Check to see whether an item has an active space or time record for a
+ * given Neatline exhibit. If it does, return the 'active' class string for
+ * the template checkbox; if not, return an empty string.
+ *
+ * @param Omeka_record $neatline The Neatline exhibit.
+ * @param Omeka_record $item The item.
+ * @param string $spaceOrTime 'space' or 'time'.
+ *
+ * @return array of Omeka_records $items The items.
+ */
+function neatline_getRecordStatusForIcon($neatline, $item, $spaceOrTime)
+{
+
+    // Get the statuses table.
+    $_db = get_db();
+    $statusesTable = $_db->getTable('NeatlineRecordStatus');
+
+    return $statusesTable
+        ->checkStatus($item, $neatline, $spaceOrTime) ? 'active' : 'inactive';
+
+}
+
+/**
  * Check to see whether an item has extant data in it's DC record that
  * could be used for map or timeline data. If so, return the 'data-exists'
  * class for the template checkbox; if not, return an empty string.

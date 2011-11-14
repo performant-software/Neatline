@@ -25,7 +25,7 @@
  */
 ?>
 
-<table id="undated-items-list-container">
+<table>
 
     <?php foreach ($items as $item): ?>
 
@@ -34,10 +34,16 @@
                 <span class="item-title-text"><?php echo item('Dublin Core', 'Title', null, $item); ?></span>
                 <span class="item-title-fader"></span>
             </td>
+            <td class="col-1 col-row space <?php echo neatline_getExistingDataStatusForCheckBox($neatline, $item, 'space'); ?>">
+                <img src="<?php echo img('space_icon.png'); ?>" class="<?php echo neatline_getRecordStatusForIcon($neatline, $item, 'space'); ?>" />
+            </td>
+            <td class="col-2 col-row time <?php echo neatline_getExistingDataStatusForCheckBox($neatline, $item, 'time'); ?>">
+                <img src="<?php echo img('time_icon.png'); ?>" class="<?php echo neatline_getRecordStatusForIcon($neatline, $item, 'time'); ?>" />
+            </td>
         </tr>
 
         <tr class="item-details">
-            <td>
+            <td colspan="3">
                 <?php echo $this->partial('data/_item_details.php', array(
                     'item' => $item,
                     'neatline' => $neatline

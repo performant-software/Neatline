@@ -25,4 +25,7 @@
  */
 ?>
 
+<div id="public-items-list-header">
+</div>
+
 <div id="undated-items-list-container"></div>

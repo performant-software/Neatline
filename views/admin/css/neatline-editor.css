@@ -521,18 +521,25 @@ div.col-2 {
 div.columns div.col-header span.header {
     text-transform: uppercase;
     display: inline-block;
-    padding: 0 5px 0 5px;
-    background-color: #724e85;
+    padding: 0 2px 0 2px;
     font-weight: bold;
     color: white;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    border-radius: 3px;
-    width: 10px;
+    width: 16px;
+    height: 16px;
     text-align: center;
     cursor: pointer;
     top: 12px;
     position: relative;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+div.columns div.col-header.col-1 span.header {
+    background-image: url('../../shared/images/space_icon.png');
+}
+
+div.columns div.col-header.col-2 span.header {
+    background-image: url('../../shared/images/time_icon.png');
 }
 
 div.columns span.row-marker {
@@ -546,7 +553,7 @@ div.columns span.row-marker {
 }
 
 div.columns span.header:hover, div.columns span.header.active {
-    background-color: #f0b925 !important;
+    /* background-color: #f0b925 !important;*/
 }
 
 table#items {
