@@ -68,9 +68,6 @@
             // Startup for the component widgets.
             this.instantiateBlocks();
 
-            console.log(this.element.parent());
-            console.log(this.element.css('height'));
-
         },
 
         setParams: function(params) {
@@ -398,6 +395,14 @@
 
         },
 
+        /*
+         * Interface callbacks with deployment scripts. These methods mostly
+         * just delegate behaviors / data retrieval tasks to the individual block
+         * classes, but they are wired through the master Neatline plugin so as
+         * to fully encapsulate all Neatline functionality and avoid any direct
+         * communication among the deployment code and the component blocks.
+         */
+
         saveSuccess: function() {
 
             this.element.css('opacity', 0);
@@ -432,6 +437,12 @@
         reloadMap: function() {
 
             this.map.neatlinemap('loadData');
+
+        },
+
+        reloadUndatedItems: function() {
+
+            this.undated.neatlineundateditems('loadData');
 
         },
 

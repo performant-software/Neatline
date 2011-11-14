@@ -29,17 +29,7 @@
 
             // Markup hooks.
             markup: {
-
-            },
-
-            // Animation constants.
-            animation: {
-
-            },
-
-            // CSS constants.
-            css: {
-
+                list_container_id: 'undated-items-list-container'
             },
 
             // Hexes.
@@ -57,10 +47,21 @@
             // Getters.
             this._window = $(window);
             this._body = $('body');
+            this.listContainer = $('#' + this.options.markup.list_container_id);
             this.params = Neatline;
 
             // Build list.
-            // this._getItems();
+            this._getItems();
+
+        },
+
+        /*
+         * Request item markup and gloss the results.
+         */
+        loadData: function() {
+
+            // Build list.
+            this._getItems();
 
         },
 
@@ -77,12 +78,8 @@
                 url: this.params.dataSources.undated,
                 dataType: 'html',
 
-                data: {
-                    neatline_id: this.params.id
-                },
-
                 success: function(data) {
-                    console.log(data);
+                    self.listContainer.html(data);
                 }
 
             });

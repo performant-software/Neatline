@@ -26,6 +26,10 @@
 
 /* Layout */
 
+#neatline{
+    height: 600px;
+}
+
 .neatline-block {
     display: none;
     position: absolute;
@@ -91,8 +95,4 @@
 
 #undated-items-title {
     font-size: 1.6em;
-}
-
-#neatline{
-    height: 600px;
 }

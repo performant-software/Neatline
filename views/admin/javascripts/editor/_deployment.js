@@ -95,6 +95,7 @@ jQuery(document).ready(function($) {
             // Reload data for all blocks.
             neatlineContainer.neatline('reloadTimeline');
             neatlineContainer.neatline('reloadMap');
+            neatlineContainer.neatline('reloadUndatedItems');
 
         },
 

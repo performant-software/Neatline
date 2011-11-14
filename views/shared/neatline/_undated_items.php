@@ -25,7 +25,4 @@
  */
 ?>
 
-<div id="undated-items-header">
-    <span id="undated-items-title">Undated Items</span>
-    <div id="undated-items-list-container"></div>
-</div>
+<div id="undated-items-list-container"></div>

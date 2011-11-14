@@ -85,7 +85,7 @@ class Neatline_DataController extends Omeka_Controller_Action
         $this->_helper->viewRenderer('udi-ajax');
 
         // Get the exhibit id and statuses table.
-        $neatlineId = $this->_request->getParam('neatline_id');
+        $neatlineId = $this->_request->getParam('id');
         $statusesTable = $this->getTable('NeatlineRecordStatus');
 
         // Get items.
