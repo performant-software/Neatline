@@ -55,6 +55,9 @@
             this.listHeader = $('#' + this.options.markup.header_container_id);
             this.params = Neatline;
 
+            // Id-to-item association object.
+            this._idToItem = {};
+
             // Get starting offets and position markup.
             this.__getScrollBarWidth();
             this._positionMarkup();
@@ -149,6 +152,9 @@
             // Get the new items.
             this.items = this.listContainer.find('.item-row');
 
+            // Empty the id-to-item association object.
+            this._idToItem = {};
+
             // Position the faders.
             this._positionTitleFaders();
 
@@ -157,6 +163,7 @@
 
                 var item = $(item);
                 var itemId = item.attr('recordid');
+                self._idToItem[itemId] = item;
 
                 // Listen for events.
                 item.bind({

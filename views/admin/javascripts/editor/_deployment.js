@@ -48,6 +48,14 @@ jQuery(document).ready(function($) {
 
                 },
 
+                // When the user clicks on an item in the sequencing tray.
+                'undateditemclick': function(event, obj) {
+
+                    // Show the edit form.
+                    editorContainer.itemeditor('showFormByItemId', obj.itemId, true, true);
+
+                },
+
                 // When a geometry vector is added to the map.
                 'mapfeatureadded': function() {
 

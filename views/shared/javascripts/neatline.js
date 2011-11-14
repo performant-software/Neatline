@@ -390,13 +390,8 @@
 
                     'undateditemclick': function(event, obj) {
 
-                        // Focus the map.
-                        self._trigger('timelineeventclick', {}, {
-                            'itemId': obj.itemId
-                        });
-
-                        // Focus the timeline.
-                        self._trigger('mapfeatureclick', {}, {
+                        // Focus the map and timeline.
+                        self._trigger('undateditemclick', {}, {
                             'itemId': obj.itemId
                         });
 
