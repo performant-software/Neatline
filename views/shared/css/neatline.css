@@ -163,7 +163,7 @@
 }
 
 #undated-items-list-container div.neatline-item-details {
-    padding-left: 18px;
+    padding-left: 12px;
     line-height: 1.4em;
 }
 
@@ -176,9 +176,10 @@
 }
 
 #public-items-list-header {
-    position: absolute;
-    top: 0px;
+    position: fixed;
     height: 40px;
-    width: 100%;
     display: block;
+    background: whiteSmoke;
+    z-index: 99;
+    border-bottom: 1px solid #DDD;
 }

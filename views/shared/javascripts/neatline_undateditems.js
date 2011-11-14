@@ -32,7 +32,8 @@
                 list_container_id: 'undated-items-list-container',
                 item_title_text_class: 'item-title-text',
                 item_title_fader_class: 'item-title-fader',
-                item_row_class: '.item-row'
+                item_row_class: '.item-row',
+                header_container_id: 'public-items-list-header'
             },
 
             // Hexes.
@@ -51,10 +52,57 @@
             this._window = $(window);
             this._body = $('body');
             this.listContainer = $('#' + this.options.markup.list_container_id);
+            this.listHeader = $('#' + this.options.markup.header_container_id);
             this.params = Neatline;
+
+            // Get starting offets and position markup.
+            this.__getScrollBarWidth();
+            this._positionMarkup();
+            this._addWindowResizeListener();
 
             // Build list.
             this._getItems();
+
+        },
+
+        /*
+         * Get the offset of the container.
+         */
+        _getOffsets: function() {
+
+            this.containerOffset = this.element.offset();
+            this.containerHeight = this.element.height();
+            this.containerWidth = this.element.width();
+
+        },
+
+        /*
+         * Position the header.
+         */
+        _positionMarkup: function() {
+
+            // Reget offsets.
+            this._getOffsets();
+
+            // Set the top and left offsets for the header.
+            this.listHeader.css({
+                'top': this.containerOffset.top,
+                'left': this.containerOffset.left,
+                'width': this.containerWidth - this.scrollbarWidth
+            });
+
+        },
+
+        /*
+         * On window resize, reposition the header.
+         */
+        _addWindowResizeListener: function() {
+
+            var self = this;
+
+            this._window.bind('resize', function() {
+                self._positionMarkup();
+            });
 
         },
 
@@ -156,6 +204,60 @@
             });
 
         },
+
+        /*
+         * Calculate the width of the browser-default scrollbar. Used by the
+         * calculation that positions the static browser pane top bar (with the
+         * search box and item filterer).
+         */
+        __getScrollBarWidth: function() {
+
+            this.scrollbarWidth = 0;
+
+            if ($.browser.msie) {
+
+                var textarea1 = $('<textarea cols="10" rows="2"></textarea>')
+                    .css({
+                        position: 'absolute',
+                        top: -1000,
+                        left: -1000
+                    }).appendTo('body');
+
+                var textarea2 = $('<textarea cols="10" rows="2"></textarea>')
+                    .css({
+                        position: 'absolute',
+                        top: -1000,
+                        left: -1000,
+                        overflow: 'hidden'
+                    }).appendTo('body');
+
+                this.scrollbarWidth = textarea1.width() - textarea2.width();
+                textarea1.remove();
+                textarea2.remove();
+
+            }
+
+            else {
+
+                var div = $('<div />')
+                    .css({
+                        width: 100,
+                        height: 100,
+                        overflow: 'auto',
+                        position: 'absolute',
+                        top: -1000,
+                        left: -1000
+                    }).prependTo('body').append('<div />').find('div').css({
+                        width: '100%',
+                        height: 200
+                    });
+
+                this.scrollbarWidth = 100 - div.width();
+                div.parent().remove();
+
+            }
+
+        }
 
     });
 
