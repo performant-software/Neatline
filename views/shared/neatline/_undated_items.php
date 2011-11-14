@@ -26,6 +26,10 @@
 ?>
 
 <div id="public-items-list-header">
+    <div id="arrows">
+        <div id="left-arrow" class="arrow left"></div>
+        <div id="right-arrow" class="arrow right"></div>
+    </div>
 </div>
 
 <div id="undated-items-list-container"></div>

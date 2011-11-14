@@ -33,7 +33,9 @@
                 item_title_text_class: 'item-title-text',
                 item_title_fader_class: 'item-title-fader',
                 item_row_class: '.item-row',
-                header_container_id: 'public-items-list-header'
+                header_container_id: 'public-items-list-header',
+                left_arrow_id: 'left-arrow',
+                right_arrow_id: 'right-arrow'
             },
 
             // CSS constants.
@@ -58,17 +60,24 @@
             this._body = $('body');
             this.listContainer = $('#' + this.options.markup.list_container_id);
             this.listHeader = $('#' + this.options.markup.header_container_id);
+            this.leftArrow = $('#' + this.options.markup.left_arrow_id);
+            this.rightArrow = $('#' + this.options.markup.right_arrow_id);
             this.params = Neatline;
 
             // Trackers.
             this._idToItem = {};
             this._idToOffset = {};
             this._currentItem = null;
+            this._currentItemId = null;
+            this._idOrdering = [];
 
             // Get starting offets and position markup.
             this.__getScrollBarWidth();
             this._positionMarkup();
             this._addWindowResizeListener();
+
+            // Add events to to the arrows.
+            this._glossArrows();
 
             // Build list.
             this._getItems();
@@ -172,9 +181,7 @@
                 var item = $(item);
                 var itemId = item.attr('recordid');
                 self._idToItem[itemId] = item;
-
-                // Measure and store the item's native vertical offset.
-                self._idToOffset[itemId] = item.position().top
+                self._idOrdering.push(itemId);
 
                 // Listen for events.
                 item.bind({
@@ -194,6 +201,107 @@
 
             // Register the native top offsets.
             this._getItemOffsets();
+
+        },
+
+        /*
+         * Build scrolling functionality.
+         */
+        _glossArrows: function() {
+
+            var self = this;
+
+            // Events on left arrow.
+            this.leftArrow.bind('mousedown', function() {
+
+                // Compute the new id.
+                var id = self._getNewScrollId('left');
+                self.scrollToItem(id);
+
+                // Trigger out to the deployment code.
+                self._trigger('undateditemclick', {}, {
+                    'itemId': self._currentItemId
+                });
+
+            });
+
+            // Events on right arrow.
+            this.rightArrow.bind('mousedown', function() {
+
+                // Compute the new id.
+                var id = self._getNewScrollId('right');
+                self.scrollToItem(id);
+
+                // Trigger out to the deployment code.
+                self._trigger('undateditemclick', {}, {
+                    'itemId': self._currentItemId
+                });
+
+            });
+
+        },
+
+        /*
+         * Figure out the id of the item that should be scrolled to. Direction
+         * is 'left' or 'right'.
+         */
+        _getNewScrollId: function(direction) {
+
+            switch (direction) {
+
+                case 'left':
+
+                    // If there is no set current id, scroll to the last item.
+                    if (this._currentItemId == null) {
+                        return this._idOrdering[this._idOrdering.length - 1];
+                    }
+
+                    // If there is a set current id.
+                    else {
+
+                        // Get the current id.
+                        var currentIndex = this._idOrdering.indexOf(this._currentItemId)
+
+                        // If the current item is the first item, loop to the last.
+                        if (currentIndex == 0) {
+                            return this._idOrdering[this._idOrdering.length - 1];
+                        }
+
+                        else {
+                            return this._idOrdering[currentIndex - 1];
+                        }
+
+                    }
+
+                break;
+
+                case 'right':
+
+                    // If there is no set current id, scroll to the first item.
+                    if (this._currentItemId == null) {
+                        return this._idOrdering[0];
+                    }
+
+                    // If there is a set current id.
+                    else {
+
+                        // Get the current id.
+                        var currentIndex = this._idOrdering.indexOf(this._currentItemId)
+
+                        // If the current item is the last item, loop to the first.
+                        if (currentIndex == this._idOrdering.length - 1) {
+                            return this._idOrdering[0];
+                        }
+
+                        else {
+                            return this._idOrdering[currentIndex + 1];
+                        }
+
+                    }
+
+                break;
+
+            }
 
         },
 
@@ -237,20 +345,28 @@
 
             // Fetch the markup and get components.
             var item = this._idToItem[id];
-            var title = item.find('.' + this.options.markup.item_title_text_class);
 
-            // Position at the top of the frame.
-            this.element.animate({
-                'scrollTop': this._idToOffset[id] - this.options.css.header_height + 1
-            }, 300);
+            // If the item is present in the squence tray.
+            if (item != null) {
 
-            // Fade the title to purple.
-            title.animate({
-                'color': this.options.colors.purple
-            }, 200);
+                // Get the item title.
+                var title = item.find('.' + this.options.markup.item_title_text_class);
 
-            // Set the current item tracker.
-            this._currentItem = item;
+                // Position at the top of the frame.
+                this.element.animate({
+                    'scrollTop': this._idToOffset[id] - this.options.css.header_height + 1
+                }, 300);
+
+                // Fade the title to purple.
+                title.animate({
+                    'color': this.options.colors.purple
+                }, 200);
+
+                // Set the trackers.
+                this._currentItem = item;
+                this._currentItemId = id;
+
+            }
 
         },
 

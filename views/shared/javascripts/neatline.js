@@ -390,6 +390,8 @@
 
                     'undateditemclick': function(event, obj) {
 
+                        console.log(obj);
+
                         // Focus the map and timeline.
                         self._trigger('undateditemclick', {}, {
                             'itemId': obj.itemId

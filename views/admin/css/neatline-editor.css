@@ -44,7 +44,7 @@
     -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), inset 0 -1px 0 rgba(0, 0, 0, 0.1);
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), inset 0 -1px 0 rgba(0, 0, 0, 0.1);
     vertical-align: middle;
-    z-index: 99;
+    z-index: 101;
 }
 
 #search-box {
@@ -672,5 +672,5 @@ table#items td.col-2 {
     -moz-border-radius: 4px;
     border-radius: 4px;
     border: 1px solid #745982;
-    z-index: 99;
+    z-index: 100;
 }
