@@ -406,6 +406,13 @@
 
         },
 
+        positionBlockMarkup: function() {
+
+            // Items tray.
+            this.undated.neatlineundateditems('positionMarkup');
+
+        },
+
         /*
          * Interface callbacks with deployment scripts. These methods mostly
          * just delegate behaviors / data retrieval tasks to the individual block

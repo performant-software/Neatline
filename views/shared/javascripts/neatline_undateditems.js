@@ -76,7 +76,7 @@
 
             // Get starting offets and position markup.
             this.__getScrollBarWidth();
-            this._positionMarkup();
+            this.positionMarkup();
             this._addWindowResizeListener();
 
             // Add events to to the arrows.
@@ -101,7 +101,7 @@
         /*
          * Position the header.
          */
-        _positionMarkup: function() {
+        positionMarkup: function() {
 
             // Reget offsets.
             this._getOffsets();
@@ -123,7 +123,7 @@
             var self = this;
 
             this._window.bind('resize', function() {
-                self._positionMarkup();
+                self.positionMarkup();
                 self._getItemOffsets();
             });
 
