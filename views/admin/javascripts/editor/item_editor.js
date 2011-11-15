@@ -1027,12 +1027,12 @@
          * in on the feature if the click occurred when the map was at a comparatively
          * distant zoom level, etc.
          */
-        showFormByItemId: function(id, scrollMap, scrollTimeline) {
+        showFormByItemId: function(id, scrollMap, scrollTimeline, focusItems) {
 
             var item = this.idToItem[id];
 
             if (item != this._currentFormItem) {
-                this._showForm(this.idToItem[id], scrollMap, scrollTimeline);
+                this._showForm(this.idToItem[id], scrollMap, scrollTimeline, focusItems);
             }
 
         },
@@ -1040,7 +1040,7 @@
         /*
          * Expand and gloss an item edit form.
          */
-        _showForm: function(item, scrollMap, scrollTimeline) {
+        _showForm: function(item, scrollMap, scrollTimeline, focusItems) {
 
             var self = this;
             var immediate = false;
@@ -1223,7 +1223,8 @@
             this._trigger('itemedit', {}, {
                 'itemId': item.attr('recordid'),
                 'scrollMap': scrollMap,
-                'scrollTimeline': scrollTimeline
+                'scrollTimeline': scrollTimeline,
+                'focusItems': focusItems
             });
 
             // Fire off the event to show the map editor controls.

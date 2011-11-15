@@ -35,7 +35,9 @@
                 item_row_class: '.item-row',
                 header_container_id: 'public-items-list-header',
                 left_arrow_id: 'left-arrow',
-                right_arrow_id: 'right-arrow'
+                right_arrow_id: 'right-arrow',
+                description_td_class: 'item-description',
+                description_content_class: 'item-description-content'
             },
 
             // CSS constants.
@@ -181,10 +183,14 @@
             // Bind events to the item rows.
             $.each(this.items, function(i, item) {
 
+                // Get item id and populate tracker literals.
                 var item = $(item);
                 var itemId = item.attr('recordid');
                 self._idToItem[itemId] = item;
                 self._idOrdering.push(itemId);
+
+                // By default, register the items as contracted.
+                item.data('expanded', false);
 
                 // Listen for events.
                 item.bind({
@@ -193,8 +199,19 @@
 
                         // Trigger out to the deployment code.
                         self._trigger('undateditemclick', {}, {
-                            'itemId': itemId
+                            'itemId': itemId,
+                            'scrollItems': false
                         });
+
+                        // If the form is hidden, show it.
+                        if (!item.data('expanded')) {
+                            self.scrollToItem(itemId);
+                        }
+
+                        // If the form is visible, hide it.
+                        else {
+                            self.hideItem(itemId);
+                        }
 
                     }
 
@@ -222,7 +239,8 @@
 
                 // Trigger out to the deployment code.
                 self._trigger('undateditemclick', {}, {
-                    'itemId': id
+                    'itemId': id,
+                    'scrollItems': true
                 });
 
             });
@@ -235,7 +253,8 @@
 
                 // Trigger out to the deployment code.
                 self._trigger('undateditemclick', {}, {
-                    'itemId': id
+                    'itemId': id,
+                    'scrollItems': true
                 });
 
             });
@@ -340,48 +359,62 @@
 
             // If there is a currently selected item, fade down the title.
             if (this._currentItem != null) {
-
-                var oldTitle = this._currentItem.find('.' + this.options.markup.item_title_text_class);
-
-                // Fade the title to white.
-                oldTitle.animate({
-                    'color': this.options.colors.text_default
-                }, 200);
-
-                // Fade the row background to purple.
-                this._currentItem.animate({
-                    'background-color': this.options.colors.background_default
-                }, 200);
-
+                this.__unhighlightTitle(this._currentItem);
             }
 
             // Fetch the markup and get components.
             var item = this._idToItem[id];
+            var descriptionTd = item.next('tr').find('td.' + this.options.markup.description_td_class);
 
             // If the item is present in the squence tray.
             if (item != null) {
 
-                // Get the item title.
-                var title = item.find('.' + this.options.markup.item_title_text_class);
+                // Highlight the title.
+                this.__highlightTitle(item);
+
+                // Set the trackers.
+                this._currentItem = item;
+                this._currentItemId = id;
 
                 // Position at the top of the frame.
                 this.element.animate({
                     'scrollTop': this._idToOffset[id] - this.options.css.header_height + 1
                 }, 300);
 
-                // Fade the title to white.
-                title.animate({
-                    'color': '#fff'
-                }, 200);
+                // Expand the description.
+                // this.__expandDescription(descriptionTd);
 
-                // Fade the row background to purple.
-                item.animate({
-                    'background-color': this.options.colors.purple
-                }, 200);
+                // Store the item as expanded.
+                item.data('expanded', true);
+
+            }
+
+        },
+
+        /*
+         * Contract item.
+         */
+        hideItem: function(id) {
+
+            // Fetch the markup and get components.
+            var item = this._idToItem[id];
+            var descriptionTd = item.next('tr').find('td.' + this.options.markup.description_td_class);
+
+            // If the item is present in the squence tray.
+            if (item != null) {
+
+                // Highlight the title.
+                this.__unhighlightTitle(item);
 
                 // Set the trackers.
-                this._currentItem = item;
-                this._currentItemId = id;
+                this._currentItem = null;
+                this._currentItemId = null;
+
+                // Contract the description.
+                // this.__contractDescription(descriptionTd);
+
+                // Store the item as expanded.
+                item.data('expanded', false);
 
             }
 
@@ -467,6 +500,112 @@
                 div.parent().remove();
 
             }
+
+        },
+
+        /*
+         * Measure the full height of a div given some width and display property.
+         */
+        __measureNativeHeight: function(div, width, display) {
+
+            // Clone and reposition.
+            var clone = div
+                .clone()
+                .css({
+                    'top': -1000,
+                    'left': -1000,
+                    'display': display,
+                    'width': width,
+                    'height': 'auto'
+                })
+                .appendTo(this._body);
+
+            // Register the height of the cloned form, delete it.
+            var height = clone.height();
+            clone.remove();
+
+            return height;
+
+        },
+
+        /*
+         * DOM hits.
+         */
+
+        /*
+         * Mark as not-highlighted the title of an item listing.
+         */
+        __unhighlightTitle: function(item) {
+
+            var oldTitle = item.find('.' + this.options.markup.item_title_text_class);
+
+            // Fade the title to white.
+            oldTitle.animate({
+                'color': this.options.colors.text_default
+            }, 200);
+
+            // Fade the row background to purple.
+            item.animate({
+                'background-color': this.options.colors.background_default
+            }, 200);
+
+        },
+
+        /*
+         * Mark as highlighted the title of an item listing.
+         */
+        __highlightTitle: function(item) {
+
+            // Get the item title.
+            var title = item.find('.' + this.options.markup.item_title_text_class);
+
+            // Fade the title to white.
+            title.animate({
+                'color': '#fff'
+            }, 200);
+
+            // Fade the row background to purple.
+            item.animate({
+                'background-color': this.options.colors.purple
+            }, 200);
+
+        },
+
+        /*
+         * Expand an item description
+         */
+        __expandDescription: function(descriptionTd) {
+
+            // Get the description content div.
+            var contentDiv = descriptionTd.find('div.' + this.options.markup.description_content_class);
+
+            // Measure the native height of the content.
+            var nativeHeight = this.__measureNativeHeight(contentDiv, this.containerWidth, 'block');
+
+            // Display the row.
+            descriptionTd.css('display', 'table-cell');
+
+            // Roll down.
+            contentDiv.animate({
+                'height': nativeHeight
+            }, 300);
+
+        },
+
+        /*
+         * Contract an item description
+         */
+        __contractDescription: function(descriptionTd) {
+
+            // Get the description content div.
+            var contentDiv = descriptionTd.find('div.' + this.options.markup.description_content_class);
+
+            // Roll up and hide the row on complete.
+            contentDiv.animate({
+                'height': 0
+            }, 300, function() {
+                descriptionTd.css('display', 'none');
+            });
 
         }
 

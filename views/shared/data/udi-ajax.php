@@ -42,7 +42,7 @@
         </tr>
 
         <tr class="item-details">
-            <td colspan="3">
+            <td class="item-description" colspan="3">
                 <?php echo $this->partial('data/_item_details.php', array(
                     'item' => $item,
                     'neatline' => $neatline

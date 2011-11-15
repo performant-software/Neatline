@@ -390,9 +390,10 @@
 
                     'undateditemclick': function(event, obj) {
 
-                        // Focus the map and timeline.
+                        // When the user clicks on an item title.
                         self._trigger('undateditemclick', {}, {
-                            'itemId': obj.itemId
+                            'itemId': obj.itemId,
+                            'scrollItems': obj.scrollItems
                         });
 
                     }

@@ -36,7 +36,7 @@ jQuery(document).ready(function($) {
                 'timelineeventclick': function(event, obj) {
 
                     // Show the edit form.
-                    editorContainer.itemeditor('showFormByItemId', obj.itemId, true, false);
+                    editorContainer.itemeditor('showFormByItemId', obj.itemId, true, false, true);
 
                 },
 
@@ -44,7 +44,7 @@ jQuery(document).ready(function($) {
                 'mapfeatureclick': function(event, obj) {
 
                     // Show the edit form.
-                    editorContainer.itemeditor('showFormByItemId', obj.itemId, false, true);
+                    editorContainer.itemeditor('showFormByItemId', obj.itemId, false, true, true);
 
                 },
 
@@ -52,7 +52,7 @@ jQuery(document).ready(function($) {
                 'undateditemclick': function(event, obj) {
 
                     // Show the edit form.
-                    editorContainer.itemeditor('showFormByItemId', obj.itemId, true, true);
+                    editorContainer.itemeditor('showFormByItemId', obj.itemId, true, true, obj.scrollItems);
 
                 },
 
@@ -121,8 +121,10 @@ jQuery(document).ready(function($) {
                 neatlineContainer.neatline('zoomTimelineToEvent', obj.itemId);
             }
 
-            // Always focus the sequence tray.
-            neatlineContainer.neatline('showItemDescription', obj.itemId);
+            if (obj.focusItems) {
+                // Focus the items tray.
+                neatlineContainer.neatline('showItemDescription', obj.itemId);
+            }
 
         },
 
