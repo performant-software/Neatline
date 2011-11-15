@@ -32,7 +32,6 @@
         <tr class="item-row" recordid="<?php echo $item->id; ?>">
             <td class="item-title">
                 <span class="item-title-text"><?php echo item('Dublin Core', 'Title', null, $item); ?></span>
-                <span class="item-title-fader"></span>
             </td>
             <td class="col-1 col-row space <?php echo neatline_getExistingDataStatusForCheckBox($neatline, $item, 'space'); ?>">
                 <img src="<?php echo img('space_icon.png'); ?>" class="<?php echo neatline_getRecordStatusForIcon($neatline, $item, 'space'); ?>" />

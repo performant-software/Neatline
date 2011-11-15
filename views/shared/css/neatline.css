@@ -86,6 +86,10 @@
     margin: 40px 0 0 0;
 }
 
+#undated-items-list-container table {
+    margin: 0;
+}
+
 #undated-items-list-container ul {
     list-style: none;
     margin: 0;
@@ -158,7 +162,7 @@
     float: left;
     position: relative;
     display: block;
-    width: 80%;
+    width: 100%;
     font-weight: bold;
 }
 

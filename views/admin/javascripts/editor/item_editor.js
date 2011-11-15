@@ -69,7 +69,7 @@
             item_title_fader_width: 40,
             item_name_default_color: '#515151',
             item_name_highlight_color: '#303030',
-            item_row_default_background_color: '#FFFEF5',
+            item_row_default_background_color: '#FFFEF8',
             item_row_highlight_background_color: '#f3f6ff',
             spacetime_background_color: '#ffda82',
             item_name_default_size: 12,

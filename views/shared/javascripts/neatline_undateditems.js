@@ -45,7 +45,10 @@
 
             // Hexes.
             colors: {
-                purple: '#724E85'
+                purple: '#724E85',
+                blue: '#2149cc',
+                text_default: '#515151',
+                background_default: '#FFFEF8'
             }
 
         },
@@ -216,11 +219,10 @@
 
                 // Compute the new id.
                 var id = self._getNewScrollId('left');
-                self.scrollToItem(id);
 
                 // Trigger out to the deployment code.
                 self._trigger('undateditemclick', {}, {
-                    'itemId': self._currentItemId
+                    'itemId': id
                 });
 
             });
@@ -230,11 +232,10 @@
 
                 // Compute the new id.
                 var id = self._getNewScrollId('right');
-                self.scrollToItem(id);
 
                 // Trigger out to the deployment code.
                 self._trigger('undateditemclick', {}, {
-                    'itemId': self._currentItemId
+                    'itemId': id
                 });
 
             });
@@ -339,8 +340,19 @@
 
             // If there is a currently selected item, fade down the title.
             if (this._currentItem != null) {
+
                 var oldTitle = this._currentItem.find('.' + this.options.markup.item_title_text_class);
-                oldTitle.css('color', '');
+
+                // Fade the title to white.
+                oldTitle.animate({
+                    'color': this.options.colors.text_default
+                }, 200);
+
+                // Fade the row background to purple.
+                this._currentItem.animate({
+                    'background-color': this.options.colors.background_default
+                }, 200);
+
             }
 
             // Fetch the markup and get components.
@@ -357,9 +369,14 @@
                     'scrollTop': this._idToOffset[id] - this.options.css.header_height + 1
                 }, 300);
 
-                // Fade the title to purple.
+                // Fade the title to white.
                 title.animate({
-                    'color': this.options.colors.purple
+                    'color': '#fff'
+                }, 200);
+
+                // Fade the row background to purple.
+                item.animate({
+                    'background-color': this.options.colors.purple
                 }, 200);
 
                 // Set the trackers.
