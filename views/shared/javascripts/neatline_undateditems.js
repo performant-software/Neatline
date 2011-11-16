@@ -233,30 +233,63 @@
 
             // Events on left arrow.
             this.leftArrow.bind('mousedown', function() {
-
-                // Compute the new id.
-                var id = self._getNewScrollId('left');
-
-                // Trigger out to the deployment code.
-                self._trigger('undateditemclick', {}, {
-                    'itemId': id,
-                    'scrollItems': true
-                });
-
+                self._scrollLeft();
             });
 
             // Events on right arrow.
             this.rightArrow.bind('mousedown', function() {
+                self._scrollRight();
+            });
 
-                // Compute the new id.
-                var id = self._getNewScrollId('right');
+            // Listen for arrow keystrokes on the window.
+            this._window.bind({
 
-                // Trigger out to the deployment code.
-                self._trigger('undateditemclick', {}, {
-                    'itemId': id,
-                    'scrollItems': true
-                });
+                'keydown': function(event) {
 
+                    // If left arrow.
+                    if (event.which == 37) {
+                        self._scrollLeft();
+                    }
+
+                    // If right arrow.
+                    if (event.which == 39) {
+                        self._scrollRight();
+                    }
+
+                }
+
+            });
+
+        },
+
+        /*
+         * Scroll to the right.
+         */
+        _scrollRight: function() {
+
+            // Compute the new id.
+            var id = this._getNewScrollId('right');
+
+            // Trigger out to the deployment code.
+            this._trigger('undateditemclick', {}, {
+                'itemId': id,
+                'scrollItems': true
+            });
+
+        },
+
+        /*
+         * Scroll to the right.
+         */
+        _scrollLeft: function() {
+
+            // Compute the new id.
+            var id = this._getNewScrollId('left');
+
+            // Trigger out to the deployment code.
+            this._trigger('undateditemclick', {}, {
+                'itemId': id,
+                'scrollItems': true
             });
 
         },
