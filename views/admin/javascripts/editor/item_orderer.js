@@ -30,8 +30,9 @@
          */
         _create: function() {
 
-            // Get the button.
+            // Get the buttons.
             this.reorderItemsButton = $('#' + this.options.markup.reorder_items_id);
+            this.orderSaveButton = $('#' + this.options.markup.order_save_button_id);
 
             // Status tracker.
             this._isOrdering = false;
@@ -59,6 +60,7 @@
 
                         // Hide the item descriptions, set tracker.
                         self._hideAllDescriptions();
+                        self._showSaveButton();
                         self._isOrdering = true;
 
                     }
@@ -69,6 +71,7 @@
 
                         // Show the item descriptions, set tracker.
                         self._showAllDescriptions();
+                        self._hideSaveButton();
                         self._isOrdering = false;
 
                     }
@@ -76,6 +79,40 @@
                 }
 
             });
+
+        },
+
+        /*
+         * Display the save button.
+         */
+        _showSaveButton: function() {
+
+            var self = this;
+
+            // Show.
+            this.orderSaveButton.css('display', 'block');
+
+            // Fade up.
+            this.orderSaveButton.stop().animate({
+                'opacity': 1
+            }, 500);
+
+        },
+
+        /*
+         * Hide the save button.
+         */
+        _hideSaveButton: function() {
+
+            var self = this;
+
+            // Show.
+            this.orderSaveButton.css('display', 'none');
+
+            // Fade up.
+            this.orderSaveButton.stop().animate({
+                'opacity': 0
+            }, 500);
 
         },
 

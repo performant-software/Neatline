@@ -32,6 +32,7 @@
     </div>
     <!-- DEV: Add ACL check for edit privileges here. -->
     <div id="reorder-items"></div>
+    <button id="order-save-button" class="btn primary small">Save</button>
 </div>
 
 <div id="undated-items-list-container"></div>

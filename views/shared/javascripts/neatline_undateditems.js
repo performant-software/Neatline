@@ -38,7 +38,8 @@
                 right_arrow_id: 'right-arrow',
                 description_td_class: 'item-description',
                 description_content_class: 'item-description-content',
-                reorder_items_id: 'reorder-items'
+                reorder_items_id: 'reorder-items',
+                order_save_button_id: 'order-save-button'
             },
 
             // CSS constants.

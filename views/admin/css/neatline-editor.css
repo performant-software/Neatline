@@ -693,3 +693,13 @@ table#items td.col-2 {
     margin: 0 1em 0 0;
     background-image: url('../../shared/images/reorder_items_icon.png');
 }
+
+#order-save-button {
+    opacity: 0;
+    display: none;
+    position: relative;
+    float: right;
+    padding: 4px 6px 4px !important;
+    top: 10px;
+    margin-right: 1.5em;
+}
