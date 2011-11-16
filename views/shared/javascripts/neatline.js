@@ -386,7 +386,7 @@
             // Undated items.
             if (this.params.is_undated_items && !this.instantiated_undated) {
 
-                this.undated.neatlineundateditems({
+                this.undated.itemorderer({
 
                     'undateditemclick': function(event, obj) {
 

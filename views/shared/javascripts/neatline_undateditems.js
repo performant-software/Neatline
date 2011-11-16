@@ -359,7 +359,7 @@
 
             // If there is a currently selected item, fade down the title.
             if (this._currentItem != null) {
-                this.__unhighlightTitle(this._currentItem);
+                this.hideItem(this._currentItemId);
             }
 
             // Fetch the markup and get components.

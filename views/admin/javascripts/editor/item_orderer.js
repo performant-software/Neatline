@@ -1,10 +1,6 @@
-<?php
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
-
-/**
- * Undated items markup.
- *
- * PHP version 5
+/*
+ * Component widget that controls the undated items block. Instantiated by the
+ * parent Neatline widget.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -23,14 +19,24 @@
  * @copyright   2011 The Board and Visitors of the University of Virginia
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache 2 License
  */
-?>
 
-<div id="public-items-list-header">
-    <div id="arrows">
-        <div id="left-arrow" class="arrow left"></div>
-        <div id="right-arrow" class="arrow right"></div>
-    </div>
-    <!--<div id="expand-contract"></div>-->
-</div>
+(function($, undefined) {
 
-<div id="undated-items-list-container"></div>
+
+    $.widget('neatline.itemorderer', $.extend({}, $.neatline.neatlineundateditems.prototype, {
+
+        /*
+         * Getters and starting get items call.
+         */
+        _create: function() {
+
+            return $.neatline.neatlineundateditems.prototype._create.apply(this, arguments);
+
+        }
+
+    }));
+
+    $.neatline.neatlineundateditems.defaults = $.extend({}, $.neatline.neatlineundateditems.defaults);
+
+
+})( jQuery );

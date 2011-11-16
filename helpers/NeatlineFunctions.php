@@ -92,6 +92,7 @@ function neatline_queueEditorAssets()
     queue_js('editor/configure_layout', 'javascripts');
     queue_js('admin/layout_builder', 'javascripts');
     queue_js('admin/toggle_button', 'javascripts');
+    queue_js('editor/item_orderer', 'javascripts');
     queue_js('editor/gradient_builder', 'javascripts');
     queue_js('editor/_deployment', 'javascripts');
     queue_js('editor/jquery.miniColors-0.1/jquery.miniColors.min', 'javascripts');
