@@ -182,7 +182,17 @@ class NeatlinePlugin
     public function defineAcl($acl)
     {
 
+         // Omeka_Acl_Resource is deprecated in 2.0.
+         if (version_compare(OMEKA_VERSION, '2.0-dev', '<')) {
+             $editorResource = new Omeka_Acl_Resource('Neatline_Editor');
+             $editorResource->add(array('index', 'items', 'save', 'status', 'positions', 'arrangement'));
+         } else {
+             $editorResource = new Zend_Acl_Resource('Neatline_Editor');
+         }
 
+         $acl->add($editorResource);
+         $acl->allow('super', 'Neatline_Editor');
+         $acl->allow('admin', 'Neatline_Editor');
 
     }
 

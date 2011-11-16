@@ -49,7 +49,6 @@
 
             // Setters.
             this.params = Neatline;
-            console.log(this.params);
 
             // Getters.
             this._window = $(window);
@@ -387,19 +386,43 @@
             // Undated items.
             if (this.params.is_undated_items && !this.instantiated_undated) {
 
-                this.undated.itemorderer({
+                // If the Neatline is public, instantiate the default item tray.
+                if (this.params.public) {
 
-                    'undateditemclick': function(event, obj) {
+                    this.undated.neatlineundateditems({
 
-                        // When the user clicks on an item title.
-                        self._trigger('undateditemclick', {}, {
-                            'itemId': obj.itemId,
-                            'scrollItems': obj.scrollItems
-                        });
+                        'undateditemclick': function(event, obj) {
 
-                    }
+                            // When the user clicks on an item title.
+                            self._trigger('undateditemclick', {}, {
+                                'itemId': obj.itemId,
+                                'scrollItems': obj.scrollItems
+                            });
 
-                });
+                        }
+
+                    });
+
+                }
+
+                // Otherwise, do the editing-enabled tray.
+                else {
+
+                    this.undated.itemorderer({
+
+                        'undateditemclick': function(event, obj) {
+
+                            // When the user clicks on an item title.
+                            self._trigger('undateditemclick', {}, {
+                                'itemId': obj.itemId,
+                                'scrollItems': obj.scrollItems
+                            });
+
+                        }
+
+                    });
+
+                }
 
                 // Register the presence of the udi instantiation.
                 this.instantiated_undated = true;
