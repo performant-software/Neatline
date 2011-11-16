@@ -30,7 +30,8 @@
         <div id="left-arrow" class="arrow left"></div>
         <div id="right-arrow" class="arrow right"></div>
     </div>
-    <!--<div id="expand-contract"></div>-->
+    <!-- DEV: Add ACL check for edit privileges here. -->
+    <div id="reorder-items"></div>
 </div>
 
 <div id="undated-items-list-container"></div>
