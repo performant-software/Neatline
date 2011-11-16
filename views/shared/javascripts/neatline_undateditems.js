@@ -37,7 +37,8 @@
                 left_arrow_id: 'left-arrow',
                 right_arrow_id: 'right-arrow',
                 description_td_class: 'item-description',
-                description_content_class: 'item-description-content'
+                description_content_class: 'item-description-content',
+                reorder_items_id: 'reorder-items'
             },
 
             // CSS constants.
@@ -549,7 +550,8 @@
                     'left': -1000,
                     'display': display,
                     'width': width,
-                    'height': 'auto'
+                    'height': '',
+                    'position': 'absolute'
                 })
                 .appendTo(this._body);
 
@@ -619,9 +621,7 @@
             descriptionTd.css('display', 'table-cell');
 
             // Roll down.
-            contentDiv.animate({
-                'height': nativeHeight
-            }, 300);
+            contentDiv.css('height', 'auto');
 
         },
 
@@ -634,11 +634,8 @@
             var contentDiv = descriptionTd.find('div.' + this.options.markup.description_content_class);
 
             // Roll up and hide the row on complete.
-            contentDiv.animate({
-                'height': 0
-            }, 300, function() {
-                descriptionTd.css('display', 'none');
-            });
+            contentDiv.css('height', 0);
+            descriptionTd.css('display', 'none');
 
         }
 

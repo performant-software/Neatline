@@ -116,6 +116,7 @@
 
 #undated-items-list-container tr.item-details td {
     white-space: normal;
+    padding: 0;
 }
 
 #undated-items-list-container tr.item-row:hover {
@@ -167,7 +168,6 @@
 }
 
 #undated-items-list-container div.neatline-item-details {
-    padding-left: 12px;
     line-height: 1.4em;
 }
 
@@ -236,6 +236,7 @@
     /* display: none;*/
 }
 
-#undated-items-list-container td.item-description-content {
-    /* height: 0;*/
+#undated-items-list-container div.item-description-content {
+    padding: 0;
+    margin: 10px 20px;
 }

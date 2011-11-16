@@ -30,7 +30,92 @@
          */
         _create: function() {
 
+            // Get the button.
+            this.reorderItemsButton = $('#' + this.options.markup.reorder_items_id);
+
+            // Status tracker.
+            this._isOrdering = false;
+
+            // Add functionality.
+            this._addReorderingFunctionality();
+
             return $.neatline.neatlineundateditems.prototype._create.apply(this, arguments);
+
+        },
+
+        /*
+         * Build on the ordering application.
+         */
+        _addReorderingFunctionality: function() {
+
+            var self = this;
+
+            this.reorderItemsButton.bind({
+
+                'mousedown': function() {
+
+                    // If the stack is not in ordering mode.
+                    if (!self._isOrdering) {
+
+                        // Hide the item descriptions, set tracker.
+                        self._hideAllDescriptions();
+                        self._isOrdering = true;
+
+                    }
+
+                    // If the stack is in ordering mode, commit the order
+                    // and return to normal mode.
+                    else {
+
+                        // Show the item descriptions, set tracker.
+                        self._showAllDescriptions();
+                        self._isOrdering = false;
+
+                    }
+
+                }
+
+            });
+
+        },
+
+        /*
+         * Hide the item descriptions.
+         */
+        _hideAllDescriptions: function() {
+
+            var self = this;
+
+            $.each(this.items, function(i, item) {
+
+                // Get the description.
+                var item = $(item);
+                var descriptionTd = item.next('tr').find('td.' + self.options.markup.description_td_class);
+
+                // Hide the description.
+                self.__contractDescription(descriptionTd);
+
+            });
+
+        },
+
+        /*
+         * Show the item descriptions.
+         */
+        _showAllDescriptions: function() {
+
+            var self = this;
+
+            $.each(this.items, function(i, item) {
+
+                // Get the description.
+                var item = $(item);
+                var descriptionTd = item.next('tr').find('td.' + self.options.markup.description_td_class);
+
+                // Show the description.
+                self.__expandDescription(descriptionTd);
+
+            });
 
         }
 
