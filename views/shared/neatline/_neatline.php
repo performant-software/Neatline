@@ -46,4 +46,5 @@
         Neatline.timeline = <?php echo json_encode($timeline); ?>;
         Neatline.map = <?php echo json_encode($map); ?>;
         Neatline.dataSources = <?php echo json_encode($dataSources); ?>;
+        Neatline.public = <?php echo json_encode($public); ?>;
 </script>

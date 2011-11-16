@@ -49,6 +49,7 @@
 
             // Setters.
             this.params = Neatline;
+            console.log(this.params);
 
             // Getters.
             this._window = $(window);
