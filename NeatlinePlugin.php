@@ -122,8 +122,8 @@ class NeatlinePlugin
                 `left_ambiguity_percentage` int(10) unsigned NULL,
                 `right_ambiguity_percentage` int(10) unsigned NULL,
                 `vector_color` tinytext COLLATE utf8_unicode_ci NULL,
-                `space_active` tinyint(1) NOT NULL,
-                `time_active` tinyint(1) NOT NULL,
+                `space_active` tinyint(1) NULL,
+                `time_active` tinyint(1) NULL,
                 `display_order` int(10) unsigned NULL,
                  PRIMARY KEY (`id`)
                ) ENGINE=innodb DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
@@ -179,6 +179,10 @@ class NeatlinePlugin
 
         // Drop the exhibits table.
         $sql = "DROP TABLE IF EXISTS `{$this->_db->prefix}neatline_neatlines`";
+        $this->_db->query($sql);
+
+        // Drop the data table.
+        $sql = "DROP TABLE IF EXISTS `{$this->_db->prefix}neatline_data_records`";
         $this->_db->query($sql);
 
         // Drop the records table.

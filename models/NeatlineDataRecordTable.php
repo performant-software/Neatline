@@ -61,7 +61,9 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
         $vectorColor,
         $leftPercentage,
         $rightPercentage,
-        $geoCoverage
+        $geoCoverage,
+        $spaceStatus,
+        $timeStatus
     )
     {
 
@@ -70,6 +72,7 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
 
         // If there is a record, update it.
         if ($record) {
+
             $record->populateData(
                 $title,
                 $description,
@@ -80,11 +83,17 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
                 $vectorColor,
                 $leftPercentage,
                 $rightPercentage,
-                $geoCoverage);
+                $geoCoverage,
+                $spaceStatus,
+                $timeStatus);
+
+            $record->save();
+
         }
 
         // If there is not a record, create one.
         else {
+
             $newRecord = new NeatlineDataRecord(
                 $item,
                 $neatline,
@@ -97,7 +106,12 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
                 $vectorColor,
                 $leftPercentage,
                 $rightPercentage,
-                $geoCoverage);
+                $geoCoverage,
+                $spaceStatus,
+                $timeStatus);
+
+            $newRecord->save();
+
         }
 
     }

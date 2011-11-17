@@ -77,7 +77,9 @@ class NeatlineDataRecord extends Omeka_record
         $vectorColor,
         $leftPercentage,
         $rightPercentage,
-        $geoCoverage
+        $geoCoverage,
+        $spaceStatus,
+        $timeStatus
     )
     {
 
@@ -89,6 +91,7 @@ class NeatlineDataRecord extends Omeka_record
         $this->title = $neatline->id;
 
         // Set data attributes.
+        $this->__setNotEmpty('title', $title, '');
         $this->__setNotEmpty('description', $description, '');
         $this->__setNotEmpty('start_date', $startDate, '');
         $this->__setNotEmpty('start_time', $startTime, '');
@@ -98,6 +101,57 @@ class NeatlineDataRecord extends Omeka_record
         $this->__setNotEmpty('left_ambiguity_percentage', $leftPercentage, '');
         $this->__setNotEmpty('right_ambiguity_percentage', $rightPercentage, '');
         $this->__setNotEmpty('geocoverage', $geoCoverage, '');
+        $this->__setStatus('space', $spaceStatus);
+        $this->__setStatus('time', $timeStatus);
+
+    }
+
+    /**
+     * Update data.
+     *
+     * @param string $title The title.
+     * @param string $description The description.
+     * @param string $startDate The month/day/year of the start.
+     * @param string $startTime The time of the start.
+     * @param string $endDate The month/day/year of the end.
+     * @param string $endTime The time of the end.
+     * @param string $vectorColor The hex value for the feature vectors.
+     * @param string $leftPercentage The left side ambiguity parameter.
+     * @param string $rightPercentage The right side ambiguity parameter.
+     * @param array $geoCoverage The array of geocoverage data from
+     * the map annotations.
+     *
+     * @return void.
+     */
+    public function populateData(
+        $title,
+        $description,
+        $startDate,
+        $startTime,
+        $endDate,
+        $endTime,
+        $vectorColor,
+        $leftPercentage,
+        $rightPercentage,
+        $geoCoverage,
+        $spaceStatus,
+        $timeStatus
+    )
+    {
+
+        // Set data attributes.
+        $this->__setNotEmpty('title', $title, '');
+        $this->__setNotEmpty('description', $description, '');
+        $this->__setNotEmpty('start_date', $startDate, '');
+        $this->__setNotEmpty('start_time', $startTime, '');
+        $this->__setNotEmpty('end_date', $endDate, '');
+        $this->__setNotEmpty('end_time', $endTime, '');
+        $this->__setNotEmpty('vector_color', $vectorColor, '');
+        $this->__setNotEmpty('left_ambiguity_percentage', $leftPercentage, '');
+        $this->__setNotEmpty('right_ambiguity_percentage', $rightPercentage, '');
+        $this->__setNotEmpty('geocoverage', $geoCoverage, '');
+        $this->__setStatus('space', $spaceStatus);
+        $this->__setStatus('time', $timeStatus);
 
     }
 
@@ -122,6 +176,34 @@ class NeatlineDataRecord extends Omeka_record
         }
 
         return $success;
+
+    }
+
+    /**
+     * Set a property if the passed value is not empty/null/false, as
+     * defined by the $emptyValue parameter.
+     *
+     * @param string $name 'space' or 'time'.
+     * @param boolean $value The value to set.
+     *
+     * @return void.
+     */
+    private function __setStatus($spaceOrTime, $value)
+    {
+
+        $success = false;
+
+        switch ($spaceOrTime) {
+
+            case 'space':
+                $this->space_active = is_bool($value) ? $value : null;
+            break;
+
+            case 'time':
+                $this->time_active = is_bool($value) ? $value : null;
+            break;
+
+        }
 
     }
 

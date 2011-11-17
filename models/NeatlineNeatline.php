@@ -33,7 +33,6 @@ class NeatlineNeatline extends Omeka_record
     public $added;
     public $name;
     public $map_id;
-    public $timeline_id;
     public $top_element;
     public $undated_items_position;
     public $undated_items_height;

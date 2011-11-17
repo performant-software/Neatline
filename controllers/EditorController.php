@@ -143,8 +143,8 @@ class Neatline_EditorController extends Omeka_Controller_Action
         $endDate = $_post['end_date'];
         $endTime = $_post['end_time'];
         $geoCoverage = json_encode($_post['geocoverage']);
-        $spaceStatus = $_post['space_status'];
-        $timeStatus = $_post['time_status'];
+        $spaceStatus = json_decode($_post['space_status']);
+        $timeStatus = json_decode($_post['time_status']);
         $vectorColor = $_post['vector_color'];
         $leftPercentage = $_post['left_percentage'];
         $rightPercentage = $_post['right_percentage'];
@@ -166,21 +166,8 @@ class Neatline_EditorController extends Omeka_Controller_Action
             $vectorColor,
             $leftPercentage,
             $rightPercentage,
-            $geoCoverage
-        );
-
-        // Save the status data.
-        $this->_statusesTable->saveStatus(
-            $item,
-            $neatline,
-            'space',
-            $spaceStatus
-        );
-
-        $this->_statusesTable->saveStatus(
-            $item,
-            $neatline,
-            'time',
+            $geoCoverage,
+            $staceStatus,
             $timeStatus
         );
 
