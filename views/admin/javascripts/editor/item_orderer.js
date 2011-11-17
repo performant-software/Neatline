@@ -34,13 +34,33 @@
             this.reorderItemsButton = $('#' + this.options.markup.reorder_items_id);
             this.orderSaveButton = $('#' + this.options.markup.order_save_button_id);
 
-            // Status tracker.
+            // Trackers.
             this._isOrdering = false;
+            this._dragId = null;
 
             // Add functionality.
             this._addReorderingFunctionality();
 
             return $.neatline.neatlineundateditems.prototype._create.apply(this, arguments);
+
+        },
+
+        /*
+         * Build an array of the starting record id ordering.
+         */
+        _getRowOrder: function() {
+
+            var self = this;
+
+            this._order = [];
+
+            // Walk the items.
+            $.each(this.items, function(i, item) {
+
+                var item = $(item);
+                self._order.push(item.attr('recordid'));
+
+            });
 
         },
 
@@ -60,8 +80,8 @@
                     if (!self._isOrdering) {
 
                         // Hide the item descriptions, set tracker.
-                        self._hideAllDescriptions();
-                        self._showSaveButton();
+                        self.__hideAllDescriptions();
+                        self.__showSaveButton();
                         self._addOrderingEventsToItems();
                         self._isOrdering = true;
 
@@ -72,8 +92,8 @@
                     else {
 
                         // Show the item descriptions, set tracker.
-                        self._showAllDescriptions();
-                        self._hideSaveButton();
+                        self.__showAllDescriptions();
+                        self.__hideSaveButton();
                         self._removeOrderingEventsToItems();
                         self._isOrdering = false;
 
@@ -90,13 +110,108 @@
          */
         _addOrderingEventsToItems: function() {
 
+            var self = this;
+
             // Walk the items.
             $.each(this.items, function(i, item) {
 
                 var item = $(item);
+
+                // Strip off the default mousedown glossing.
                 item.unbind('mousedown');
 
+                // Set the cursor.
+                self.__setMoveCursor(item);
+
+                // Bind on the click and move events.
+                item.bind('mousedown', function() {
+                    self._doItemDrag(item);
+                });
+
             });
+
+        },
+
+        /*
+         * Drag item.
+         */
+        _doItemDrag: function(dragItem) {
+
+            var self = this;
+
+            // Get the description row.
+            var dragDescription = dragItem.next('tr.item-details');
+
+            // Register the starting row order.
+            this._getRowOrder();
+
+            // Track the drag id.
+            this._dragId = dragItem.attr('recordid');
+
+            // Gray out the item.
+            this.__fadeItem(dragItem);
+
+            // On each of the items, listen for mouseenter.
+            $.each(this.items, function(i, item) {
+
+                var item = $(item);
+                var enterItemId = item.attr('recordid');
+
+                // Get the item description.
+                var enterDescription = item.next('tr.item-details');
+
+                item.bind({
+
+                    'mouseenter': function() {
+
+                        // If the new item different from the item being dragged.
+                        if (enterItemId != self._dragId) {
+
+                            // If the item being dragged is currently below the item
+                            // that is being dragged into.
+                            if (self._order.indexOf(enterItemId) < self._order.indexOf(self._dragId)) {
+                                dragItem.detach().insertBefore(item);
+                                dragDescription.detach().insertAfter(dragItem);
+                            }
+
+                            // If the item being dragged is currently above the item
+                            // that is being dragged into.
+                            else if (self._order.indexOf(enterItemId) > self._order.indexOf(self._dragId)) {
+                                dragItem.detach().insertAfter(enterDescription);
+                                dragDescription.detach().insertAfter(dragItem);
+                            }
+
+                            // Update the ordering.
+                            self._getRowOrder();
+
+                        }
+
+                    }
+
+                });
+
+            });
+
+            // Listen for mouseup on window.
+            this._window.bind({
+
+                // Pop off the events, fade up.
+                'mouseup': function() {
+                    self._endItemDrag(dragItem);
+                }
+
+            });
+
+        },
+
+        /*
+         * Close out an item drag.
+         */
+        _endItemDrag: function(dragItem) {
+
+            this.__unfadeItem(dragItem);
+            this._window.unbind('mouseup');
+            this.items.unbind('mouseenter');
 
         },
 
@@ -121,9 +236,13 @@
         },
 
         /*
+         * DOM hits.
+         */
+
+        /*
          * Display the save button.
          */
-        _showSaveButton: function() {
+        __showSaveButton: function() {
 
             var self = this;
 
@@ -140,7 +259,7 @@
         /*
          * Hide the save button.
          */
-        _hideSaveButton: function() {
+        __hideSaveButton: function() {
 
             var self = this;
 
@@ -157,7 +276,7 @@
         /*
          * Hide the item descriptions.
          */
-        _hideAllDescriptions: function() {
+        __hideAllDescriptions: function() {
 
             var self = this;
 
@@ -182,7 +301,7 @@
         /*
          * Show the item descriptions.
          */
-        _showAllDescriptions: function() {
+        __showAllDescriptions: function() {
 
             var self = this;
 
@@ -196,6 +315,33 @@
                 self.__expandDescription(descriptionTd);
 
             });
+
+        },
+
+        /*
+         * Set move cursor on item.
+         */
+        __setMoveCursor: function(item) {
+
+            item.css('cursor', 'move');
+
+        },
+
+        /*
+         * Gray out an item.
+         */
+        __fadeItem: function(item) {
+
+            item.css('opacity', 0.4);
+
+        },
+
+        /*
+         * Fade up an item.
+         */
+        __unfadeItem: function(item) {
+
+            item.css('opacity', 1);
 
         }
 
