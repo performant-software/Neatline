@@ -51,6 +51,7 @@
 
             var self = this;
 
+            // Gloss the reorder button.
             this.reorderItemsButton.bind({
 
                 'mousedown': function() {
@@ -61,6 +62,7 @@
                         // Hide the item descriptions, set tracker.
                         self._hideAllDescriptions();
                         self._showSaveButton();
+                        self._addOrderingEventsToItems();
                         self._isOrdering = true;
 
                     }
@@ -72,6 +74,7 @@
                         // Show the item descriptions, set tracker.
                         self._showAllDescriptions();
                         self._hideSaveButton();
+                        self._removeOrderingEventsToItems();
                         self._isOrdering = false;
 
                     }
@@ -79,6 +82,41 @@
                 }
 
             });
+
+        },
+
+        /*
+         * Bind the dragging functionality onto the rows.
+         */
+        _addOrderingEventsToItems: function() {
+
+            // Walk the items.
+            $.each(this.items, function(i, item) {
+
+                var item = $(item);
+                item.unbind('mousedown');
+
+            });
+
+        },
+
+        /*
+         * Return the rows to normal state.
+         */
+        _removeOrderingEventsToItems: function() {
+
+            var self = this;
+
+            // Walk the items.
+            $.each(this.items, function(i, item) {
+
+                var item = $(item);
+                item.unbind('mousedown');
+
+            });
+
+            // Regloss the items as normal.
+            this._glossItems();
 
         },
 
@@ -133,6 +171,11 @@
                 self.__contractDescription(descriptionTd);
 
             });
+
+            // If there is a selected item, unhighlight the title.
+            if (this._currentItem != null) {
+                this.__unhighlightTitle(this._currentItem);
+            }
 
         },
 
