@@ -30,6 +30,19 @@
 class NeatlineDataRecord extends Omeka_record
 {
 
-
+    // Expose the columns.
+    public $item_id;
+    public $exhibit_id;
+    public $title;
+    public $description;
+    public $start_date;
+    public $start_time;
+    public $end_date;
+    public $end_time;
+    public $left_ambiguity_percentage;
+    public $right_ambiguity_percentage;
+    public $space_active;
+    public $time_active;
+    public $display_order;
 
 }
