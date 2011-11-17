@@ -109,6 +109,24 @@ class NeatlinePlugin
 
         $this->_db->query($sql);
 
+        $sql = "CREATE TABLE IF NOT EXISTS `{$this->_db->prefix}neatline_data_records` (
+                `id` int(10) unsigned not null auto_increment,
+                `item_id` int(10) unsigned NULL,
+                `exhibit_id` int(10) unsigned NULL,
+                `title` tinytext COLLATE utf8_unicode_ci NULL,
+                `description` mediumtext COLLATE utf8_unicode_ci NULL,
+                `start_date` tinytext COLLATE utf8_unicode_ci NULL,
+                `start_time` tinytext COLLATE utf8_unicode_ci NULL,
+                `end_date` tinytext COLLATE utf8_unicode_ci NULL,
+                `end_time` tinytext COLLATE utf8_unicode_ci NULL,
+                `left_ambiguity_percentage` int(10) unsigned NULL,
+                `right_ambiguity_percentage` int(10) unsigned NULL,
+                `vector_color` tinytext COLLATE utf8_unicode_ci NULL,
+                 PRIMARY KEY (`id`)
+               ) ENGINE=innodb DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
+
+        $this->_db->query($sql);
+
         $sql = "CREATE TABLE IF NOT EXISTS `{$this->_db->prefix}neatline_records` (
                 `id` int(10) unsigned not null auto_increment,
                 `neatline_id` int(10) unsigned NOT NULL,

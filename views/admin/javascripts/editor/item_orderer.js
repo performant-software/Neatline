@@ -91,9 +91,13 @@
                     // and return to normal mode.
                     else {
 
-                        // Show the item descriptions, set tracker.
+                        // Show the item descriptions and change the cursor.
                         self.__showAllDescriptions();
                         self.__hideSaveButton();
+                        self.__setPointerCursor();
+
+                        // Recalculate native item offsets.
+                        self._getItemOffsets();
                         self._removeOrderingEventsToItems();
                         self._isOrdering = false;
 
@@ -112,6 +116,9 @@
 
             var self = this;
 
+            // Set the cursor.
+            self.__setMoveCursor();
+
             // Walk the items.
             $.each(this.items, function(i, item) {
 
@@ -119,9 +126,6 @@
 
                 // Strip off the default mousedown glossing.
                 item.unbind('mousedown');
-
-                // Set the cursor.
-                self.__setMoveCursor(item);
 
                 // Bind on the click and move events.
                 item.bind('mousedown', function() {
@@ -321,9 +325,22 @@
         /*
          * Set move cursor on item.
          */
-        __setMoveCursor: function(item) {
+        __setMoveCursor: function() {
 
-            item.css('cursor', 'move');
+            $.each(this.items, function(i, item) {
+                $(item).css('cursor', 'move');
+            });
+
+        },
+
+        /*
+         * Set pointer cursor on item.
+         */
+        __setPointerCursor: function() {
+
+            $.each(this.items, function(i, item) {
+                $(item).css('cursor', 'pointer');
+            });
 
         },
 
