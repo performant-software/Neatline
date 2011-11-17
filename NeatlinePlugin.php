@@ -118,6 +118,7 @@ class NeatlinePlugin
                 `start_time` tinytext COLLATE utf8_unicode_ci NULL,
                 `end_date` tinytext COLLATE utf8_unicode_ci NULL,
                 `end_time` tinytext COLLATE utf8_unicode_ci NULL,
+                `geocoverage` mediumtext COLLATE utf8_unicode_ci NULL,
                 `left_ambiguity_percentage` int(10) unsigned NULL,
                 `right_ambiguity_percentage` int(10) unsigned NULL,
                 `vector_color` tinytext COLLATE utf8_unicode_ci NULL,

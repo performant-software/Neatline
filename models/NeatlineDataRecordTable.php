@@ -30,6 +30,96 @@
 class NeatlineDataRecordTable extends Omeka_Db_Table
 {
 
+    /**
+     * Commit changes ajaxed back from the editor.
+     *
+     * @param Omeka_record $item The item record.
+     * @param Omeka_record $neatline The exhibit record.
+     * @param string $title The title.
+     * @param string $description The description.
+     * @param string $startDate The month/day/year of the start.
+     * @param string $startTime The time of the start.
+     * @param string $endDate The month/day/year of the end.
+     * @param string $endTime The time of the end.
+     * @param string $vectorColor The hex value for the feature vectors.
+     * @param string $leftPercentage The left side ambiguity parameter.
+     * @param string $rightPercentage The right side ambiguity parameter.
+     * @param array $geoCoverage The array of geocoverage data from
+     * the map annotations.
+     *
+     * @return boolean True if the save succeeds.
+     */
+    public function saveData(
+        $item,
+        $neatline,
+        $title,
+        $description,
+        $startDate,
+        $startTime,
+        $endDate,
+        $endTime,
+        $vectorColor,
+        $leftPercentage,
+        $rightPercentage,
+        $geoCoverage
+    )
+    {
 
+        // Check for an existing record for the item/exhibit.
+        $record = $this->_checkForExistingRecord($item, $neatline);
+
+        // If there is a record, update it.
+        if ($record) {
+            $record->populateData(
+                $title,
+                $description,
+                $startDate,
+                $startTime,
+                $endDate,
+                $endTime,
+                $vectorColor,
+                $leftPercentage,
+                $rightPercentage,
+                $geoCoverage);
+        }
+
+        // If there is not a record, create one.
+        else {
+            $newRecord = new NeatlineDataRecord(
+                $item,
+                $neatline,
+                $title,
+                $description,
+                $startDate,
+                $startTime,
+                $endDate,
+                $endTime,
+                $vectorColor,
+                $leftPercentage,
+                $rightPercentage,
+                $geoCoverage);
+        }
+
+    }
+
+    /**
+     * Check to see if there is a record for a given item and exhibit.
+     *
+     * @param Omeka_record $item The item record.
+     * @param Omeka_record $neatline The exhibit record.
+     *
+     * @return Omeka_record $record if a record exists, else boolean False.
+     */
+    protected function _checkForExistingRecord($item, $neatline)
+    {
+
+        $record = $this->findBySql('item_id = ? AND exhibit_id = ?', array(
+            $item->id,
+            $neatline->id,
+        ));
+
+        return $record ? $record : false;
+
+    }
 
 }

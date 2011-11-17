@@ -39,10 +39,90 @@ class NeatlineDataRecord extends Omeka_record
     public $start_time;
     public $end_date;
     public $end_time;
+    public $geocoverage;
     public $left_ambiguity_percentage;
     public $right_ambiguity_percentage;
     public $space_active;
     public $time_active;
     public $display_order;
+
+    /**
+     * Instantiate and set parameters.
+     *
+     * @param Omeka_record $item The item record.
+     * @param Omeka_record $neatline The exhibit record.
+     * @param string $title The title.
+     * @param string $description The description.
+     * @param string $startDate The month/day/year of the start.
+     * @param string $startTime The time of the start.
+     * @param string $endDate The month/day/year of the end.
+     * @param string $endTime The time of the end.
+     * @param string $vectorColor The hex value for the feature vectors.
+     * @param string $leftPercentage The left side ambiguity parameter.
+     * @param string $rightPercentage The right side ambiguity parameter.
+     * @param array $geoCoverage The array of geocoverage data from
+     * the map annotations.
+     *
+     * @return Omeka_record $this.
+     */
+    public function __construct(
+        $item,
+        $neatline,
+        $title,
+        $description,
+        $startDate,
+        $startTime,
+        $endDate,
+        $endTime,
+        $vectorColor,
+        $leftPercentage,
+        $rightPercentage,
+        $geoCoverage
+    )
+    {
+
+        parent::__construct();
+
+        // Set foreign keys.
+        $this->item_id = $item->id;
+        $this->exhibit_id = $neatline->id;
+        $this->title = $neatline->id;
+
+        // Set data attributes.
+        $this->__setNotEmpty('description', $description, '');
+        $this->__setNotEmpty('start_date', $startDate, '');
+        $this->__setNotEmpty('start_time', $startTime, '');
+        $this->__setNotEmpty('end_date', $endDate, '');
+        $this->__setNotEmpty('end_time', $endTime, '');
+        $this->__setNotEmpty('vector_color', $vectorColor, '');
+        $this->__setNotEmpty('left_ambiguity_percentage', $leftPercentage, '');
+        $this->__setNotEmpty('right_ambiguity_percentage', $rightPercentage, '');
+        $this->__setNotEmpty('geocoverage', $geoCoverage, '');
+
+    }
+
+    /**
+     * Set a property if the passed value is not empty/null/false, as
+     * defined by the $emptyValue parameter.
+     *
+     * @param string $name The name of the parameter to set.
+     * @param mixed $value The value to set.
+     * @param mixed $value The empty value to protect against.
+     *
+     * @return boolean $success True if the attribute is set.
+     */
+    private function __setNotEmpty($name, $value, $emptyValue)
+    {
+
+        $success = false;
+
+        if ($value != $emptyValue) {
+            $this->$name = $value;
+            $success = true;
+        }
+
+        return $success;
+
+    }
 
 }
