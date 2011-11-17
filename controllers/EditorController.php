@@ -154,7 +154,7 @@ class Neatline_EditorController extends Omeka_Controller_Action
         $item = $this->_itemsTable->find($itemId);
 
         // Save the record data.
-        $this->_recordsTable->saveData(
+        $this->_recordsTable->saveItemFormData(
             $item,
             $neatline,
             $title,

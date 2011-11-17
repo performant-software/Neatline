@@ -39,6 +39,7 @@ class NeatlineDataRecord extends Omeka_record
     public $start_time;
     public $end_date;
     public $end_time;
+    public $vector_color;
     public $geocoverage;
     public $left_ambiguity_percentage;
     public $right_ambiguity_percentage;
@@ -123,7 +124,7 @@ class NeatlineDataRecord extends Omeka_record
      *
      * @return void.
      */
-    public function populateData(
+    public function saveItemFormData(
         $title,
         $description,
         $startDate,

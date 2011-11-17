@@ -49,7 +49,7 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
      *
      * @return boolean True if the save succeeds.
      */
-    public function saveData(
+    public function saveItemFormData(
         $item,
         $neatline,
         $title,
@@ -73,7 +73,7 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
         // If there is a record, update it.
         if ($record) {
 
-            $record->populateData(
+            $record->saveItemFormData(
                 $title,
                 $description,
                 $startDate,
@@ -127,10 +127,10 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
     protected function _checkForExistingRecord($item, $neatline)
     {
 
-        $record = $this->findBySql('item_id = ? AND exhibit_id = ?', array(
-            $item->id,
-            $neatline->id,
-        ));
+        $record = $this->fetchObject(
+            $this->getSelect()->where('item_id = '. $item->id
+                . ' AND exhibit_id = ' . $neatline->id)
+        );
 
         return $record ? $record : false;
 
