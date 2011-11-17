@@ -60,11 +60,6 @@ class NeatlineNeatline extends Omeka_record
             $errors['title'] = 'Enter a title';
         }
 
-        if ($_post['map'] == 'none' && $_post['timeline'] == 'none') {
-            $errors['map'] = 'Select a map or a timeline';
-            $errors['timeline'] = 'Select a map or a timeline';
-        }
-
         return $errors;
 
     }
@@ -80,7 +75,6 @@ class NeatlineNeatline extends Omeka_record
     {
 
         $this->populateData($_post);
-
         return $this->save() ? true : false;
 
     }
@@ -98,7 +92,7 @@ class NeatlineNeatline extends Omeka_record
         $this->added = neatline_getMysqlDatetime();
         $this->name = $_post['title'];
 
-        // Check for map and timeline.
+        // Check for map.
         if (is_numeric($_post['map'])) {
             $this->map_id = $_post['map'];
             $this->is_map = 1;
@@ -107,13 +101,8 @@ class NeatlineNeatline extends Omeka_record
             $this->is_map = 0;
         }
 
-        if (is_numeric($_post['timeline'])) {
-            $this->timeline_id = $_post['timeline'];
-            $this->is_timeline = 1;
-        } else {
-            $this->timeline_id = null;
-            $this->is_timeline = 0;
-        }
+        // By default, enable the timeline.
+        $this->is_timeline = 1;
 
         // By default, activate undated items.
         $this->is_undated_items = 1;

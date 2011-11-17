@@ -48,7 +48,7 @@ class Neatline_EditorController extends Omeka_Controller_Action
     }
 
     /**
-     * Redirect index route to browse.
+     * Run the editor application.
      *
      * @return void
      */

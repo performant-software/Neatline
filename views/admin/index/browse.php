@@ -48,7 +48,6 @@ head(array('content_class' => 'neatline'));
         <?php browse_headings(array(
             'Title' => 'name',
             'Map' => null,
-            'Timeline' => null,
             'Created' => 'added',
             'Actions' => null
         )); ?>
@@ -60,7 +59,6 @@ head(array('content_class' => 'neatline'));
         <tr exhibitid="<?php echo $neatline->id; ?>">
             <td class="title"><?php echo neatline_linkToNeatline($neatline); ?></td>
             <td class="map"><?php echo neatline_linkToMap($neatline); ?></td>
-            <td class="timeline"><?php echo neatline_linkToTimeline($neatline); ?></td>
             <td class="added"><?php echo neatline_formatDate($neatline->added); ?></td>
             <td><?php echo $this->partial('index/_action_buttons.php', array(
                 'uriSlug' => 'neatline-exhibits',

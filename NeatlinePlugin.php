@@ -94,7 +94,6 @@ class NeatlinePlugin
                 `added` timestamp NOT NULL default NOW(),
                 `name` tinytext collate utf8_unicode_ci,
                 `map_id` int(10) unsigned NULL,
-                `timeline_id` int(10) unsigned NULL,
                 `top_element` ENUM('map', 'timeline') DEFAULT 'map',
                 `undated_items_position` ENUM('right', 'left') DEFAULT 'right',
                 `undated_items_height` ENUM('partial', 'full') DEFAULT 'partial',
@@ -122,6 +121,8 @@ class NeatlinePlugin
                 `left_ambiguity_percentage` int(10) unsigned NULL,
                 `right_ambiguity_percentage` int(10) unsigned NULL,
                 `vector_color` tinytext COLLATE utf8_unicode_ci NULL,
+                `space_active` tinyint(1) NOT NULL,
+                `time_active` tinyint(1) NOT NULL,
                  PRIMARY KEY (`id`)
                ) ENGINE=innodb DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
 

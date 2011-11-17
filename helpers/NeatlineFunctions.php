@@ -241,7 +241,7 @@ function neatline_hiddenElement($name, $value)
 function neatline_linkToNeatline($neatline)
 {
 
-    return '<a class="neatline-title" href="' . uri('neatline-exhibits/' . $neatline->id) . '">'
+    return '<a class="neatline-title" href="' . uri('neatline-exhibits/editor/' . $neatline->id) . '">'
          . $neatline->name
          . '</a>';
 
