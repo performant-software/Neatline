@@ -30,7 +30,7 @@
     <div id="options">
         <span id="toggle-map">Map</span>
         <span id="toggle-timeline">Timeline</span>
-        <span id="toggle-undated-items">Undated Items</span>
+        <span id="toggle-undated-items">Items</span>
     </div>
 
     <div id="drag-box"></div>

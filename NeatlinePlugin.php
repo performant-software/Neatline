@@ -123,6 +123,7 @@ class NeatlinePlugin
                 `vector_color` tinytext COLLATE utf8_unicode_ci NULL,
                 `space_active` tinyint(1) NOT NULL,
                 `time_active` tinyint(1) NOT NULL,
+                `display_order` int(10) unsigned NULL,
                  PRIMARY KEY (`id`)
                ) ENGINE=innodb DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
 

@@ -120,15 +120,14 @@
             this._is_timeline = Neatline.is_timeline;
             this._is_undated_items = Neatline.is_undated_items;
 
-            // If not (on edit page), enable the toggle buttons directly.
+            // Enable the map toggle toggle button, if there is a map.
             if (Neatline.map_id != null) {
                 this.map_toggle.togglebutton('enable');
             }
 
-            if (Neatline.timeline_id != null) {
-                this.timeline_toggle.togglebutton('enable');
-                this.undated_items_toggle.togglebutton('enable');
-            }
+            // Enable the timeline toggle button.
+            this.timeline_toggle.togglebutton('enable');
+            this.undated_items_toggle.togglebutton('enable');
 
             // For each block, if active then temporarily knock false
             // the tracker (so that the button press initializes the
@@ -1181,7 +1180,7 @@
         __createUndatedItemsDiv: function() {
 
             return $('<div id="drag-undated-items" class="draggable">\
-                        <span class="drag-tag">Undated Items</span>\
+                        <span class="drag-tag">Items</span>\
                       </div>');
 
         },
