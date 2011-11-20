@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
 
 /**
- * Data record row tests.
+ * Data record table tests.
  *
  * PHP version 5
  *
@@ -27,7 +27,7 @@
 
 <?php
 
-class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
+class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
 {
 
     /**
@@ -42,107 +42,68 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         $this->helper = new Neatline_Test_AppTestCase;
         $this->helper->setUpPlugin();
         $this->db = get_db();
+        $this->_recordsTable = $this->db->getTable('NeatlineDataRecord');
 
     }
 
     /**
-     * Test column defaults.
+     * Test getRecordByItemAndExhibit() when no record exists.
      *
      * @return void.
      */
-    public function testAttributeDefaults()
+    public function testGetRecordByItemAndExhibitWithNoRecord()
     {
 
-        // Create a record.
-        $record = $this->helper->_createRecord();
-
-        // Status columns should be false.
-        $this->assertEquals($record->space_active, 0);
-        $this->assertEquals($record->time_active, 0);
-
-        // Ambiguity percentages should be 0 and 100.
-        $this->assertEquals($record->left_ambiguity_percentage, 0);
-        $this->assertEquals($record->right_ambiguity_percentage, 100);
-
-    }
-
-    /**
-     * Test setStatus() with valid inputs.
-     *
-     * @return void.
-     */
-    public function testSetStatusWithValidData()
-    {
-
-        // Create a record.
-        $record = $this->helper->_createRecord();
-
-        // Test true.
-        $record->setStatus('space', true);
-        $this->assertEquals($record->space_active, 1);
-
-        // Test false.
-        $record->setStatus('space', false);
-        $this->assertEquals($record->space_active, 0);
-
-        // Test true.
-        $record->setStatus('time', true);
-        $this->assertEquals($record->time_active, 1);
-
-        // Test false.
-        $record->setStatus('time', false);
-        $this->assertEquals($record->time_active, 0);
-
-    }
-
-    /**
-     * Test setStatus() with invalid inputs.
-     *
-     * @return void.
-     */
-    public function testSetStatusWithInvalidData()
-    {
-
-        // Create a record.
-        $record = $this->helper->_createRecord();
-
-        // Test invalid space.
-        $record->setStatus('space', 'notBoolean');
-        $this->assertEquals($record->space_active, 0);
-
-        // Test invalid time.
-        $record->setStatus('time', 'notBoolean');
-        $this->assertEquals($record->time_active, 0);
-
-        // Create a record and set values to true.
-        $record = $this->helper->_createRecord();
-        $record->space_active = 1;
-        $record->time_active = 1;
-
-        // Test invalid space reverts to already-set true.
-        $record->setStatus('space', 'notBoolean');
-        $this->assertEquals($record->space_active, 1);
-
-        // Test invalid time reverts to already-set true.
-        $record->setStatus('time', 'notBoolean');
-        $this->assertEquals($record->time_active, 1);
-
-    }
-
-    /**
-     * Test populateRecord().
-     *
-     * @return void.
-     */
-    public function testPopulateRecord()
-    {
-
+        // Create item and exhibit.
         $item = $this->helper->_createItem();
         $neatline = $this->helper->_createNeatline();
 
-        // Create a record and fill it with valid data.
+        // Try to get a non-existent record.
+        $noRecord = $this->_recordsTable->getRecordByItemAndExhibit($item, $neatline);
+        $this->assertFalse($noRecord);
+
+    }
+
+    /**
+     * Test getRecordByItemAndExhibit() when the record exists.
+     *
+     * @return void.
+     */
+    public function testGetRecordByItemAndExhibitWithRecord()
+    {
+
+        // Create item, exhibit, and record.
+        $item = $this->helper->_createItem();
+        $neatline = $this->helper->_createNeatline();
         $record = new NeatlineDataRecord($item, $neatline);
-        $record->populateRecord(
+        $record->save();
+
+        // Get a non-existent record.
+        $retrievedRecord = $this->_recordsTable->getRecordByItemAndExhibit($item, $neatline);
+        $this->assertEquals($record->id, $retrievedRecord->id);
+
+    }
+
+    /**
+     * Test saveItemFormData() when there is not a record for the
+     * item/exhibit.
+     *
+     * @return void.
+     */
+    public function testSaveItemFormDataWithNoRecord()
+    {
+
+        // Create item and exhibit, and record.
+        $item = $this->helper->_createItem();
+        $neatline = $this->helper->_createNeatline();
+
+        // At the start, no records.
+        $this->assertEquals($this->_recordsTable->count(), 0);
+
+        // Save form data for a non-existent record.
+        $this->_recordsTable->saveItemFormData(
+            $item,
+            $neatline,
             'Test Title',
             'Test description.',
             'April 26, 1564',
@@ -157,7 +118,11 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
             true
         );
 
-        // Test that the attributes were set.
+        // After the save, there should be 1 record.
+        $this->assertEquals($this->_recordsTable->count(), 1);
+
+        // Get the new record and check that the attributes.
+        $record = $this->_recordsTable->getRecordByItemAndExhibit($item, $neatline);
         $this->assertEquals($record->item_id, $item->id);
         $this->assertEquals($record->exhibit_id, $neatline->id);
         $this->assertEquals($record->title, 'Test Title');

@@ -55,15 +55,19 @@ class NeatlineDataRecord extends Omeka_record
      *
      * @return Omeka_record $this.
      */
-    public function __construct($item, $neatline)
+    public function __construct($item = null, $neatline = null)
     {
 
         parent::__construct();
 
-        // Set foreign keys.
-        $this->item_id = $item->id;
-        $this->exhibit_id = $neatline->id;
-        $this->title = $neatline->id;
+        // If defined, set the foreign keys.
+        if (!is_null($item) && !is_null($neatline)) {
+
+            // Set foreign keys.
+            $this->item_id = $item->id;
+            $this->exhibit_id = $neatline->id;
+
+        }
 
         // Set defaults.
         $this->left_ambiguity_percentage = 0;

@@ -47,7 +47,7 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
      * @param array $geoCoverage The array of geocoverage data from
      * the map annotations.
      *
-     * @return boolean True if the save succeeds.
+     * @return void.
      */
     public function saveItemFormData(
         $item,
@@ -68,7 +68,7 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
     {
 
         // Check for an existing record for the item/exhibit.
-        $record = $this->_getRecordByItemAndExhibit($item, $neatline);
+        $record = $this->getRecordByItemAndExhibit($item, $neatline);
 
         // If there is a record, update it.
         if ($record) {
@@ -133,7 +133,7 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
     {
 
         // Get the record.
-        $record = $this->_getRecordByItemAndExhibit($item, $neatline);
+        $record = $this->getRecordByItemAndExhibit($item, $neatline);
 
         // If there is not an existing record, create one.
         if (!$record) {
@@ -154,7 +154,7 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
      *
      * @return Omeka_record $record if a record exists, else boolean False.
      */
-    protected function _getRecordByItemAndExhibit($item, $neatline)
+    public function getRecordByItemAndExhibit($item, $neatline)
     {
 
         $record = $this->fetchObject(
