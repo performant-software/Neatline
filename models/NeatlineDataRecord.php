@@ -47,6 +47,7 @@ class NeatlineDataRecord extends Omeka_record
     public $time_active;
     public $display_order;
 
+
     /**
      * Instantiate and foreign keys.
      *

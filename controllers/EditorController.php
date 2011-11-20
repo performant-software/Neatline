@@ -143,8 +143,8 @@ class Neatline_EditorController extends Omeka_Controller_Action
         $endDate = $_post['end_date'];
         $endTime = $_post['end_time'];
         $geoCoverage = json_encode($_post['geocoverage']);
-        $spaceStatus = json_decode($_post['space_status']);
-        $timeStatus = json_decode($_post['time_status']);
+        $spaceStatus = (boolean) json_decode($_post['space_status']);
+        $timeStatus = (boolean) json_decode($_post['time_status']);
         $vectorColor = $_post['vector_color'];
         $leftPercentage = $_post['left_percentage'];
         $rightPercentage = $_post['right_percentage'];
