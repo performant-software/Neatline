@@ -84,8 +84,6 @@ class NeatlineDataRecord extends Omeka_record
     )
     {
 
-        parent::__construct();
-
         // Set foreign keys.
         $this->item_id = $item->id;
         $this->exhibit_id = $neatline->id;
@@ -157,7 +155,7 @@ class NeatlineDataRecord extends Omeka_record
     }
 
     /**
-     * A status setting.
+     * Update a status setting.
      *
      * @param string $spaceOrTime 'space' or 'time'.
      * @param boolean $value The new value.
@@ -219,16 +217,14 @@ class NeatlineDataRecord extends Omeka_record
 
         $success = false;
 
-        switch ($spaceOrTime) {
+        // If space.
+        if ($spaceOrTime == 'space') {
+            $this->space_active = is_bool($value) ? $value : null;
+        }
 
-            case 'space':
-                $this->space_active = is_bool($value) ? $value : null;
-            break;
-
-            case 'time':
-                $this->time_active = is_bool($value) ? $value : null;
-            break;
-
+        // If time.
+        else {
+            $this->time_active = is_bool($value) ? $value : null;
         }
 
     }

@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
 
 /**
- * Test Runner.
+ * Data record row tests.
  *
  * PHP version 5
  *
@@ -15,44 +15,49 @@
  * language governing permissions and limitations under the License.
  *
  * @package     omeka
- * @subpackage  neatlinemaps
+ * @subpackage  neatline
  * @author      Scholars' Lab <>
  * @author      Bethany Nowviskie <bethany@virginia.edu>
  * @author      Adam Soroka <ajs6f@virginia.edu>
  * @author      David McClure <david.mcclure@virginia.edu>
- * @copyright   2010 The Board and Visitors of the University of Virginia
+ * @copyright   2011 The Board and Visitors of the University of Virginia
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache 2 License
- * @version     $Id$
  */
 ?>
 
 <?php
 
-require_once 'Neatline_Test_AppTestCase.php';
-
-class Neatline_AllTests extends PHPUnit_Framework_TestSuite
+class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
 {
 
     /**
-     * Aggregate the tests.
+     * Instantiate the helper class, install the plugins, get the database.
      *
-     * @return Neatline_AllTests $suite The test suite.
+     * @param string $spaceOrTime 'space' or 'time'.
+     * @param boolean $value The new value.
+     *
+     * @return void.
      */
-    public static function suite()
+    public function setUp()
     {
 
-        $suite = new Neatline_AllTests('Neatline Tests');
+        parent::setUp();
+        $this->helper = new Neatline_Test_AppTestCase;
+        $this->helper->setUpPlugin();
+        $this->db = get_db();
 
-        $collector = new PHPUnit_Runner_IncludePathTestCollector(
-            array(
-                dirname(__FILE__) . '/integration',
-                dirname(__FILE__) . '/unit'
-            )
-        );
+    }
 
-        $suite->addTestFiles($collector->collectTests());
+    /**
+     * Test.
+     *
+     * @return void.
+     */
+    public function testTest()
+    {
 
-        return $suite;
+        // Inspect the returned server.
+        $this->assertEquals(true, true);
 
     }
 
