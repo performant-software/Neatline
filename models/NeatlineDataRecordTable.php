@@ -137,7 +137,7 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
 
         // If there is not an existing record, create one.
         if (!$record) {
-            $record = new NeatlineDataRecord;
+            $record = new NeatlineDataRecord($item, $neatline);
         }
 
         // Update.

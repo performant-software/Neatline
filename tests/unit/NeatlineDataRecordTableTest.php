@@ -136,7 +136,7 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
         $this->assertEquals($record->right_ambiguity_percentage, 100);
         $this->assertEquals($record->geocoverage, '["POINT(-1.0, 1.0)"]');
         $this->assertEquals($record->space_active, 1);
-        $this->assertEquals($record->space_active, 1);
+        $this->assertEquals($record->time_active, 1);
 
     }
 
@@ -146,6 +146,158 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
      * @return void.
      */
     public function testSaveItemFormDataWithRecord()
+    {
+
+        // Create item and exhibit.
+        $item = $this->helper->_createItem();
+        $neatline = $this->helper->_createNeatline();
+
+        // Create a record and fill it with valid data.
+        $record = new NeatlineDataRecord($item, $neatline);
+        $record->populateRecord(
+            'Test Title',
+            'Test description.',
+            'April 26, 1564',
+            '6:00 AM',
+            'April 23, 1616',
+            '6:00 AM',
+            '#ffffff',
+            0,
+            100,
+            '["POINT(-1.0, 1.0)"]',
+            true,
+            true
+        );
+        $record->save();
+
+        // There should be a record.
+        $this->assertEquals($this->_recordsTable->count(), 1);
+
+        // Save form data with update values.
+        $this->_recordsTable->saveItemFormData(
+            $item,
+            $neatline,
+            'New Title',
+            'New description.',
+            'April 27, 1564',
+            '7:00 AM',
+            'April 24, 1616',
+            '7:00 AM',
+            '#000000',
+            30,
+            70,
+            '["POINT(-2.0, 2.0)"]',
+            false,
+            false
+        );
+
+        // There should still be just 1 record.
+        $this->assertEquals($this->_recordsTable->count(), 1);
+
+        // Get the new record and check that the attributes were updated.
+        $retrievedRecord = $this->_recordsTable->getRecordByItemAndExhibit($item, $neatline);
+        $this->assertEquals($retrievedRecord->item_id, $item->id);
+        $this->assertEquals($retrievedRecord->exhibit_id, $neatline->id);
+        $this->assertEquals($retrievedRecord->title, 'New Title');
+        $this->assertEquals($retrievedRecord->description, 'New description.');
+        $this->assertEquals($retrievedRecord->start_date, 'April 27, 1564');
+        $this->assertEquals($retrievedRecord->start_time, '7:00 AM');
+        $this->assertEquals($retrievedRecord->end_date, 'April 24, 1616');
+        $this->assertEquals($retrievedRecord->end_time, '7:00 AM');
+        $this->assertEquals($retrievedRecord->vector_color, '#000000');
+        $this->assertEquals($retrievedRecord->left_ambiguity_percentage, 30);
+        $this->assertEquals($retrievedRecord->right_ambiguity_percentage, 70);
+        $this->assertEquals($retrievedRecord->geocoverage, '["POINT(-2.0, 2.0)"]');
+        $this->assertEquals($retrievedRecord->space_active, 0);
+        $this->assertEquals($retrievedRecord->time_active, 0);
+
+    }
+
+    /**
+     * Test saveRecordStatus() when there is not a record for the
+     * item/exhibit.
+     *
+     * @return void.
+     */
+    public function testSaveRecordStatusWithNoRecord()
+    {
+
+        // Create item, exhibit, and record.
+        $item = $this->helper->_createItem();
+        $neatline = $this->helper->_createNeatline();
+
+        // Space, true.
+
+        // At the start, no records.
+        $this->assertEquals($this->_recordsTable->count(), 0);
+
+        // Save form data for a non-existent record.
+        $this->_recordsTable->saveRecordStatus($item, $neatline, 'space', true);
+
+        // After the save, there should be 1 record.
+        $this->assertEquals($this->_recordsTable->count(), 1);
+
+        // Get the new record, check the attributes, delete.
+        $record = $this->_recordsTable->getRecordByItemAndExhibit($item, $neatline);
+        $this->assertEquals($record->space_active, 1);
+        $record->delete();
+
+        // Space, false.
+
+        // At the start, no records.
+        $this->assertEquals($this->_recordsTable->count(), 0);
+
+        // Save form data for a non-existent record.
+        $this->_recordsTable->saveRecordStatus($item, $neatline, 'space', false);
+
+        // After the save, there should be 1 record.
+        $this->assertEquals($this->_recordsTable->count(), 1);
+
+        // Get the new record, check the attributes, delete.
+        $record = $this->_recordsTable->getRecordByItemAndExhibit($item, $neatline);
+        $this->assertEquals($record->space_active, 0);
+        $record->delete();
+
+        // Time, true.
+
+        // At the start, no records.
+        $this->assertEquals($this->_recordsTable->count(), 0);
+
+        // Save form data for a non-existent record.
+        $this->_recordsTable->saveRecordStatus($item, $neatline, 'time', true);
+
+        // After the save, there should be 1 record.
+        $this->assertEquals($this->_recordsTable->count(), 1);
+
+        // Get the new record, check the attributes, delete.
+        $record = $this->_recordsTable->getRecordByItemAndExhibit($item, $neatline);
+        $this->assertEquals($record->time_active, 1);
+        $record->delete();
+
+        // Time, false.
+
+        // At the start, no records.
+        $this->assertEquals($this->_recordsTable->count(), 0);
+
+        // Save form data for a non-existent record.
+        $this->_recordsTable->saveRecordStatus($item, $neatline, 'time', false);
+
+        // After the save, there should be 1 record.
+        $this->assertEquals($this->_recordsTable->count(), 1);
+
+        // Get the new record, check the attributes, delete.
+        $record = $this->_recordsTable->getRecordByItemAndExhibit($item, $neatline);
+        $this->assertEquals($record->time_active, 0);
+        $record->delete();
+
+    }
+
+    /**
+     * Test saveRecordStatus() when there is a record for the item/exhibit.
+     *
+     * @return void.
+     */
+    public function testSaveRecordStatusWithRecord()
     {
 
         // Create item and exhibit.
