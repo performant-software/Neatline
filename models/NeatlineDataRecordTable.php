@@ -68,7 +68,7 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
     {
 
         // Check for an existing record for the item/exhibit.
-        $record = $this->_checkForExistingRecord($item, $neatline);
+        $record = $this->_getRecordByItemAndExhibit($item, $neatline);
 
         // If there is a record, update it.
         if ($record) {
@@ -94,7 +94,8 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
         // If there is not a record, create one.
         else {
 
-            $newRecord = new NeatlineDataRecord(
+            $newRecord = new NeatlineDataRecord;
+            $newRecord->populateRecord(
                 $item,
                 $neatline,
                 $title,
@@ -117,14 +118,40 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
     }
 
     /**
-     * Check to see if there is a record for a given item and exhibit.
+     * Save a record status change.
+     *
+     * @param Omeka_record $item The item record.
+     * @param Omeka_record $neatline The exhibit record.
+     * @param string $spaceOrTime 'space' or 'time'.
+     * @param boolean $value Boolean value of new status.
+     *
+     * @return void.
+     */
+    public function saveRecordStatus($item, $neatline, $spaceOrTime, $value)
+    {
+
+        // Get the record.
+        $record = $this->_getRecordByItemAndExhibit($item, $neatline);
+
+        // If there is not an existing record, create one.
+        if (!$record) {
+            $record = new NeatlineDataRecord;
+        }
+
+        // Update.
+        $record->updateRecordStatus($spaceOrTime, $value);
+
+    }
+
+    /**
+     * Find a record for a given item and exhibit.
      *
      * @param Omeka_record $item The item record.
      * @param Omeka_record $neatline The exhibit record.
      *
      * @return Omeka_record $record if a record exists, else boolean False.
      */
-    protected function _checkForExistingRecord($item, $neatline)
+    protected function _getRecordByItemAndExhibit($item, $neatline)
     {
 
         $record = $this->fetchObject(

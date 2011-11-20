@@ -66,7 +66,7 @@ class NeatlineDataRecord extends Omeka_record
      *
      * @return Omeka_record $this.
      */
-    public function __construct(
+    public function populateRecord(
         $item,
         $neatline,
         $title,
@@ -153,6 +153,31 @@ class NeatlineDataRecord extends Omeka_record
         $this->__setNotEmpty('geocoverage', $geoCoverage, '');
         $this->__setStatus('space', $spaceStatus);
         $this->__setStatus('time', $timeStatus);
+
+    }
+
+    /**
+     * A status setting.
+     *
+     * @param string $spaceOrTime 'space' or 'time'.
+     * @param boolean $value The new value.
+     *
+     * @return void.
+     */
+    public function updateRecordStatus($spaceOrTime, $value)
+    {
+
+        // If space.
+        if ($spaceOrTime == 'space') {
+            $this->space_active = $value;
+        }
+
+        // If time.
+        else {
+            $this->time_active = $value;
+        }
+
+        $this->save();
 
     }
 
