@@ -73,7 +73,8 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
         // If there is a record, update it.
         if ($record) {
 
-            $record->saveItemFormData(
+            // Populate.
+            $record->populateRecord(
                 $title,
                 $description,
                 $startDate,
@@ -94,10 +95,11 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
         // If there is not a record, create one.
         else {
 
-            $newRecord = new NeatlineDataRecord;
+            // Instantiate.
+            $newRecord = new NeatlineDataRecord($item, $neatline);
+
+            // Populate.
             $newRecord->populateRecord(
-                $item,
-                $neatline,
                 $title,
                 $description,
                 $startDate,
@@ -139,7 +141,8 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
         }
 
         // Update.
-        $record->updateRecordStatus($spaceOrTime, $value);
+        $record->setStatus($spaceOrTime, $value);
+        $record->save();
 
     }
 

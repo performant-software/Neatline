@@ -90,4 +90,66 @@ class Neatline_Test_AppTestCase extends Omeka_Test_AppTestCase
 
     }
 
+
+    /**
+     * Testing helpers.
+     */
+
+
+    /**
+     * Create a Neatline exhibit.
+     *
+     * @return Omeka_record $neatline The exhibit.
+     */
+    public function _createNeatline(
+        $name = 'Test Exhibit',
+        $is_map = 1,
+        $is_timeline = 1,
+        $is_undated_items = 1
+    )
+    {
+
+        $neatline = new NeatlineNeatline;
+        $neatline->name = $name;
+        $neatline->is_map = $is_map;
+        $neatline->is_timeline = $is_timeline;
+        $neatline->is_undated_items = $is_undated_items;
+        $neatline->save();
+
+        return $neatline;
+
+    }
+
+    /**
+     * Create an Item.
+     *
+     * @return Omeka_record $item The item.
+     */
+    public function _createItem()
+    {
+
+        $item = new Item;
+        $item->save();
+
+        return $item;
+
+    }
+
+    /**
+     * Create a data record.
+     *
+     * @return Omeka_record $item The record.
+     */
+    public function _createRecord()
+    {
+
+        $item = $this->_createItem();
+        $neatline = $this->_createNeatline();
+        $record = new NeatlineDataRecord($item, $neatline);
+        $record->save();
+
+        return $record;
+
+    }
+
 }

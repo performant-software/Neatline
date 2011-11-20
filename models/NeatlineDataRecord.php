@@ -48,60 +48,28 @@ class NeatlineDataRecord extends Omeka_record
     public $display_order;
 
     /**
-     * Instantiate and set parameters.
+     * Instantiate and foreign keys.
      *
      * @param Omeka_record $item The item record.
      * @param Omeka_record $neatline The exhibit record.
-     * @param string $title The title.
-     * @param string $description The description.
-     * @param string $startDate The month/day/year of the start.
-     * @param string $startTime The time of the start.
-     * @param string $endDate The month/day/year of the end.
-     * @param string $endTime The time of the end.
-     * @param string $vectorColor The hex value for the feature vectors.
-     * @param string $leftPercentage The left side ambiguity parameter.
-     * @param string $rightPercentage The right side ambiguity parameter.
-     * @param array $geoCoverage The array of geocoverage data from
-     * the map annotations.
      *
      * @return Omeka_record $this.
      */
-    public function populateRecord(
-        $item,
-        $neatline,
-        $title,
-        $description,
-        $startDate,
-        $startTime,
-        $endDate,
-        $endTime,
-        $vectorColor,
-        $leftPercentage,
-        $rightPercentage,
-        $geoCoverage,
-        $spaceStatus,
-        $timeStatus
-    )
+    public function __construct($item, $neatline)
     {
+
+        parent::__construct();
 
         // Set foreign keys.
         $this->item_id = $item->id;
         $this->exhibit_id = $neatline->id;
         $this->title = $neatline->id;
 
-        // Set data attributes.
-        $this->__setNotEmpty('title', $title, '');
-        $this->__setNotEmpty('description', $description, '');
-        $this->__setNotEmpty('start_date', $startDate, '');
-        $this->__setNotEmpty('start_time', $startTime, '');
-        $this->__setNotEmpty('end_date', $endDate, '');
-        $this->__setNotEmpty('end_time', $endTime, '');
-        $this->__setNotEmpty('vector_color', $vectorColor, '');
-        $this->__setNotEmpty('left_ambiguity_percentage', $leftPercentage, '');
-        $this->__setNotEmpty('right_ambiguity_percentage', $rightPercentage, '');
-        $this->__setNotEmpty('geocoverage', $geoCoverage, '');
-        $this->__setStatus('space', $spaceStatus);
-        $this->__setStatus('time', $timeStatus);
+        // Set defaults.
+        $this->left_ambiguity_percentage = 0;
+        $this->right_ambiguity_percentage = 100;
+        $this->space_active = 0;
+        $this->time_active = 0;
 
     }
 
@@ -122,7 +90,7 @@ class NeatlineDataRecord extends Omeka_record
      *
      * @return void.
      */
-    public function saveItemFormData(
+    public function populateRecord(
         $title,
         $description,
         $startDate,
@@ -139,67 +107,20 @@ class NeatlineDataRecord extends Omeka_record
     {
 
         // Set data attributes.
-        $this->__setNotEmpty('title', $title, '');
-        $this->__setNotEmpty('description', $description, '');
-        $this->__setNotEmpty('start_date', $startDate, '');
-        $this->__setNotEmpty('start_time', $startTime, '');
-        $this->__setNotEmpty('end_date', $endDate, '');
-        $this->__setNotEmpty('end_time', $endTime, '');
-        $this->__setNotEmpty('vector_color', $vectorColor, '');
-        $this->__setNotEmpty('left_ambiguity_percentage', $leftPercentage, '');
-        $this->__setNotEmpty('right_ambiguity_percentage', $rightPercentage, '');
-        $this->__setNotEmpty('geocoverage', $geoCoverage, '');
-        $this->__setStatus('space', $spaceStatus);
-        $this->__setStatus('time', $timeStatus);
+        $this->title = $title;
+        $this->description = $description;
+        $this->start_date = $startDate;
+        $this->start_time = $startTime;
+        $this->end_date = $endDate;
+        $this->end_time = $endTime;
+        $this->vector_color = $vectorColor;
+        $this->left_ambiguity_percentage = $leftPercentage;
+        $this->right_ambiguity_percentage = $rightPercentage;
+        $this->geocoverage = $geoCoverage;
 
-    }
-
-    /**
-     * Update a status setting.
-     *
-     * @param string $spaceOrTime 'space' or 'time'.
-     * @param boolean $value The new value.
-     *
-     * @return void.
-     */
-    public function updateRecordStatus($spaceOrTime, $value)
-    {
-
-        // If space.
-        if ($spaceOrTime == 'space') {
-            $this->space_active = $value;
-        }
-
-        // If time.
-        else {
-            $this->time_active = $value;
-        }
-
-        $this->save();
-
-    }
-
-    /**
-     * Set a property if the passed value is not empty/null/false, as
-     * defined by the $emptyValue parameter.
-     *
-     * @param string $name The name of the parameter to set.
-     * @param mixed $value The value to set.
-     * @param mixed $value The empty value to protect against.
-     *
-     * @return boolean $success True if the attribute is set.
-     */
-    private function __setNotEmpty($name, $value, $emptyValue)
-    {
-
-        $success = false;
-
-        if ($value != $emptyValue) {
-            $this->$name = $value;
-            $success = true;
-        }
-
-        return $success;
+        // Set status trackers.
+        $this->setStatus('space', $spaceStatus);
+        $this->setStatus('time', $timeStatus);
 
     }
 
@@ -212,19 +133,25 @@ class NeatlineDataRecord extends Omeka_record
      *
      * @return void.
      */
-    private function __setStatus($spaceOrTime, $value)
+    public function setStatus($spaceOrTime, $value)
     {
 
         $success = false;
 
         // If space.
         if ($spaceOrTime == 'space') {
-            $this->space_active = is_bool($value) ? $value : null;
+
+            // Only change if the input is boolean; otherwise.
+            $this->space_active = is_bool($value) ? (int) $value : $this->space_active;
+
         }
 
         // If time.
         else {
-            $this->time_active = is_bool($value) ? $value : null;
+
+            // Only change if the input is boolean; otherwise.
+            $this->time_active = is_bool($value) ? (int) $value : $this->time_active;
+
         }
 
     }
