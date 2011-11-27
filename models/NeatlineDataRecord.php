@@ -30,7 +30,9 @@
 class NeatlineDataRecord extends Omeka_record
 {
 
-    // Expose the columns.
+    /**
+     * Record attributes.
+     */
     public $item_id;
     public $exhibit_id;
     public $title;
@@ -75,57 +77,6 @@ class NeatlineDataRecord extends Omeka_record
         $this->right_ambiguity_percentage = 100;
         $this->space_active = 0;
         $this->time_active = 0;
-
-    }
-
-    /**
-     * Update data.
-     *
-     * @param string $title The title.
-     * @param string $description The description.
-     * @param string $startDate The month/day/year of the start.
-     * @param string $startTime The time of the start.
-     * @param string $endDate The month/day/year of the end.
-     * @param string $endTime The time of the end.
-     * @param string $vectorColor The hex value for the feature vectors.
-     * @param string $leftPercentage The left side ambiguity parameter.
-     * @param string $rightPercentage The right side ambiguity parameter.
-     * @param array $geoCoverage The array of geocoverage data from
-     * the map annotations.
-     *
-     * @return void.
-     */
-    public function populateRecord(
-        $title,
-        $description,
-        $startDate,
-        $startTime,
-        $endDate,
-        $endTime,
-        $vectorColor,
-        $leftPercentage,
-        $rightPercentage,
-        $geoCoverage,
-        $spaceStatus,
-        $timeStatus
-    )
-    {
-
-        // Set data attributes.
-        $this->title = $title;
-        $this->description = $description;
-        $this->start_date = $startDate;
-        $this->start_time = $startTime;
-        $this->end_date = $endDate;
-        $this->end_time = $endTime;
-        $this->vector_color = $vectorColor;
-        $this->left_ambiguity_percentage = $leftPercentage;
-        $this->right_ambiguity_percentage = $rightPercentage;
-        $this->geocoverage = $geoCoverage;
-
-        // Set status trackers.
-        $this->setStatus('space', $spaceStatus);
-        $this->setStatus('time', $timeStatus);
 
     }
 

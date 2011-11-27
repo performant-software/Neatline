@@ -70,52 +70,29 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
         // Check for an existing record for the item/exhibit.
         $record = $this->getRecordByItemAndExhibit($item, $neatline);
 
-        // If there is a record, update it.
-        if ($record) {
-
-            // Populate.
-            $record->populateRecord(
-                $title,
-                $description,
-                $startDate,
-                $startTime,
-                $endDate,
-                $endTime,
-                $vectorColor,
-                $leftPercentage,
-                $rightPercentage,
-                $geoCoverage,
-                $spaceStatus,
-                $timeStatus);
-
-            $record->save();
-
-        }
-
         // If there is not a record, create one.
-        else {
-
-            // Instantiate.
-            $newRecord = new NeatlineDataRecord($item, $neatline);
-
-            // Populate.
-            $newRecord->populateRecord(
-                $title,
-                $description,
-                $startDate,
-                $startTime,
-                $endDate,
-                $endTime,
-                $vectorColor,
-                $leftPercentage,
-                $rightPercentage,
-                $geoCoverage,
-                $spaceStatus,
-                $timeStatus);
-
-            $newRecord->save();
-
+        if (!$record) {
+            $record = new NeatlineDataRecord($item, $neatline);
         }
+
+        // Set parameters.
+        $record->title = $title;
+        $record->description = $description;
+        $record->start_date = $startDate;
+        $record->start_time = $startTime;
+        $record->end_date = $endDate;
+        $record->end_time = $endTime;
+        $record->vector_color = $vectorColor;
+        $record->left_ambiguity_percentage = $leftPercentage;
+        $record->right_ambiguity_percentage = $rightPercentage;
+        $record->geocoverage = $geoCoverage;
+
+        // Set status trackers.
+        $record->setStatus('space', $spaceStatus);
+        $record->setStatus('time', $timeStatus);
+
+        // Commit.
+        $record->save();
 
     }
 

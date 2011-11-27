@@ -46,7 +46,11 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
     }
 
     /**
-     * Test column defaults.
+     * When a new data record is created, four of the attributes should
+     * automatically be set to non-null values. The space and time status
+     * trackers should be set to 0/false, and the two date ambiguity
+     * settings should be fully expanded - the left should be at 0 and
+     * the right at 100.
      *
      * @return void.
      */
@@ -54,7 +58,13 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
     {
 
         // Create a record.
-        $record = $this->helper->_createRecord();
+        $item = $this->helper->_createItem();
+        $neatline = $this->helper->_createNeatline();
+        $record = new NeatlineDataRecord($item, $neatline);
+
+        // Item and exhibit keys should be set.
+        $this->assertEquals($record->exhibit_id, $neatline->id);
+        $this->assertEquals($record->item_id, $item->id);
 
         // Status columns should be false.
         $this->assertEquals($record->space_active, 0);
@@ -67,7 +77,9 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
     }
 
     /**
-     * Test setStatus() with valid inputs.
+     * The time and space status trackers can only take native boolean
+     * values as input parameters. The setStatus() method should check
+     * to make sure that the input is boolean and set the integer value.
      *
      * @return void.
      */
@@ -96,7 +108,9 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
     }
 
     /**
-     * Test setStatus() with invalid inputs.
+     * The setStatus() method should reject non-boolean inputs. If a
+     * non-boolean value is passed to the method, the record field should
+     * be unchanged.
      *
      * @return void.
      */
@@ -126,52 +140,6 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         // Test invalid time reverts to already-set true.
         $record->setStatus('time', 'notBoolean');
         $this->assertEquals($record->time_active, 1);
-
-    }
-
-    /**
-     * Test populateRecord().
-     *
-     * @return void.
-     */
-    public function testPopulateRecord()
-    {
-
-        $item = $this->helper->_createItem();
-        $neatline = $this->helper->_createNeatline();
-
-        // Create a record and fill it with valid data.
-        $record = new NeatlineDataRecord($item, $neatline);
-        $record->populateRecord(
-            'Test Title',
-            'Test description.',
-            'April 26, 1564',
-            '6:00 AM',
-            'April 23, 1616',
-            '6:00 AM',
-            '#ffffff',
-            0,
-            100,
-            '["POINT(-1.0, 1.0)"]',
-            true,
-            true
-        );
-
-        // Test that the attributes were set.
-        $this->assertEquals($record->item_id, $item->id);
-        $this->assertEquals($record->exhibit_id, $neatline->id);
-        $this->assertEquals($record->title, 'Test Title');
-        $this->assertEquals($record->description, 'Test description.');
-        $this->assertEquals($record->start_date, 'April 26, 1564');
-        $this->assertEquals($record->start_time, '6:00 AM');
-        $this->assertEquals($record->end_date, 'April 23, 1616');
-        $this->assertEquals($record->end_time, '6:00 AM');
-        $this->assertEquals($record->vector_color, '#ffffff');
-        $this->assertEquals($record->left_ambiguity_percentage, 0);
-        $this->assertEquals($record->right_ambiguity_percentage, 100);
-        $this->assertEquals($record->geocoverage, '["POINT(-1.0, 1.0)"]');
-        $this->assertEquals($record->space_active, 1);
-        $this->assertEquals($record->space_active, 1);
 
     }
 
