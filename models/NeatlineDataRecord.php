@@ -143,19 +143,21 @@ class NeatlineDataRecord extends Omeka_record
 
         $success = false;
 
-        // If space.
-        if ($spaceOrTime == 'space') {
+        // Only change if the input is boolean.
+        if (is_bool($value)) {
 
-            // Only change if the input is boolean; otherwise.
-            $this->space_active = is_bool($value) ? (int) $value : $this->space_active;
+            // Cast the boolean to int.
+            $intValue = (int) $value;
 
-        }
+            // If space.
+            if ($spaceOrTime == 'space') {
+                $this->space_active = $intValue;
+            }
 
-        // If time.
-        else {
-
-            // Only change if the input is boolean; otherwise.
-            $this->time_active = is_bool($value) ? (int) $value : $this->time_active;
+            // If time.
+            else {
+                $this->time_active = $intValue;
+            }
 
         }
 
