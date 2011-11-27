@@ -92,8 +92,6 @@ class NeatlineDataRecord extends Omeka_record
     public function setStatus($spaceOrTime, $value)
     {
 
-        $success = false;
-
         // Only change if the input is boolean.
         if (is_bool($value)) {
 

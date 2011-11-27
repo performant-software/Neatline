@@ -31,7 +31,7 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
 {
 
     // Testing parameters.
-    private static $testParams = array(
+    private static $__testParams = array(
         'title' => 'Test Title',
         'description' => 'Test description.',
         'start_date' => 'April 26, 1564',
@@ -121,18 +121,18 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
         $this->_recordsTable->saveItemFormData(
             $item,
             $neatline,
-            $this->__testParams['title'],
-            $this->__testParams['description'],
-            $this->__testParams['start_date'],
-            $this->__testParams['start_time'],
-            $this->__testParams['end_date'],
-            $this->__testParams['end_time'],
-            $this->__testParams['vector_color'],
-            $this->__testParams['left_percent'],
-            $this->__testParams['right_percent'],
-            $this->__testParams['geocoverage'],
-            $this->__testParams['space_active'],
-            $this->__testParams['time_active']
+            self::$__testParams['title'],
+            self::$__testParams['description'],
+            self::$__testParams['start_date'],
+            self::$__testParams['start_time'],
+            self::$__testParams['end_date'],
+            self::$__testParams['end_time'],
+            self::$__testParams['vector_color'],
+            self::$__testParams['left_percent'],
+            self::$__testParams['right_percent'],
+            self::$__testParams['geocoverage'],
+            self::$__testParams['space_active'],
+            self::$__testParams['time_active']
         );
 
         // After the save, there should be 1 record.
@@ -144,62 +144,62 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
         // Test that the attributes were set.
         $this->assertEquals(
             $record->title,
-            $this->__testParams['title']
+            self::$__testParams['title']
         );
 
         $this->assertEquals(
             $record->description,
-            $this->__testParams['description']
+            self::$__testParams['description']
         );
 
         $this->assertEquals(
             $record->start_date,
-            $this->__testParams['start_date']
+            self::$__testParams['start_date']
         );
 
         $this->assertEquals(
             $record->start_time,
-            $this->__testParams['start_time']
+            self::$__testParams['start_time']
         );
 
         $this->assertEquals(
             $record->end_date,
-            $this->__testParams['end_date']
+            self::$__testParams['end_date']
         );
 
         $this->assertEquals(
             $record->end_time,
-            $this->__testParams['end_time']
+            self::$__testParams['end_time']
         );
 
         $this->assertEquals(
             $record->vector_color,
-            $this->__testParams['vector_color']
+            self::$__testParams['vector_color']
         );
 
         $this->assertEquals(
             $record->left_ambiguity_percentage,
-            $this->__testParams['left_percent']
+            self::$__testParams['left_percent']
         );
 
         $this->assertEquals(
             $record->right_ambiguity_percentage,
-            $this->__testParams['right_percent']
+            self::$__testParams['right_percent']
         );
 
         $this->assertEquals(
             $record->geocoverage,
-            $this->__testParams['geocoverage']
+            self::$__testParams['geocoverage']
         );
 
         $this->assertEquals(
             $record->space_active,
-            $this->__testParams['space_active']
+            (int) self::$__testParams['space_active']
         );
 
         $this->assertEquals(
             $record->time_active,
-            $this->__testParams['time_active']
+            (int) self::$__testParams['time_active']
         );
 
     }
@@ -227,88 +227,91 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
         $this->_recordsTable->saveItemFormData(
             $item,
             $neatline,
-            $this->__testParams['title'],
-            $this->__testParams['description'],
-            $this->__testParams['start_date'],
-            $this->__testParams['start_time'],
-            $this->__testParams['end_date'],
-            $this->__testParams['end_time'],
-            $this->__testParams['vector_color'],
-            $this->__testParams['left_percent'],
-            $this->__testParams['right_percent'],
-            $this->__testParams['geocoverage'],
-            $this->__testParams['space_active'],
-            $this->__testParams['time_active']
+            self::$__testParams['title'],
+            self::$__testParams['description'],
+            self::$__testParams['start_date'],
+            self::$__testParams['start_time'],
+            self::$__testParams['end_date'],
+            self::$__testParams['end_time'],
+            self::$__testParams['vector_color'],
+            self::$__testParams['left_percent'],
+            self::$__testParams['right_percent'],
+            self::$__testParams['geocoverage'],
+            self::$__testParams['space_active'],
+            self::$__testParams['time_active']
         );
 
         // There should still be just one record.
         $this->assertEquals($this->_recordsTable->count(), 1);
 
+        // Re-get the record.
+        $record = $this->_recordsTable->getRecordByItemAndExhibit($item, $neatline);
+
         // Test that the attributes were set.
         $this->assertEquals(
             $record->title,
-            $this->__testParams['title']
+            self::$__testParams['title']
         );
 
         $this->assertEquals(
             $record->description,
-            $this->__testParams['description']
+            self::$__testParams['description']
         );
 
         $this->assertEquals(
             $record->start_date,
-            $this->__testParams['start_date']
+            self::$__testParams['start_date']
         );
 
         $this->assertEquals(
             $record->start_time,
-            $this->__testParams['start_time']
+            self::$__testParams['start_time']
         );
 
         $this->assertEquals(
             $record->end_date,
-            $this->__testParams['end_date']
+            self::$__testParams['end_date']
         );
 
         $this->assertEquals(
             $record->end_time,
-            $this->__testParams['end_time']
+            self::$__testParams['end_time']
         );
 
         $this->assertEquals(
             $record->vector_color,
-            $this->__testParams['vector_color']
+            self::$__testParams['vector_color']
         );
 
         $this->assertEquals(
             $record->left_ambiguity_percentage,
-            $this->__testParams['left_percent']
+            self::$__testParams['left_percent']
         );
 
         $this->assertEquals(
             $record->right_ambiguity_percentage,
-            $this->__testParams['right_percent']
+            self::$__testParams['right_percent']
         );
 
         $this->assertEquals(
             $record->geocoverage,
-            $this->__testParams['geocoverage']
+            self::$__testParams['geocoverage']
         );
 
         $this->assertEquals(
             $record->space_active,
-            $this->__testParams['space_active']
+            (int) self::$__testParams['space_active']
         );
 
         $this->assertEquals(
             $record->time_active,
-            $this->__testParams['time_active']
+            (int) self::$__testParams['time_active']
         );
 
     }
 
     /**
-     * saveRecordStatus() should create a new record when there whenthere
+     * saveRecordStatus() should create a new record when there when there
      * is no existing record.
      *
      * @return void.
@@ -336,8 +339,7 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
     }
 
     /**
-     * saveRecordStatus() should create a new record when there whenthere
-     * is no existing record.
+     * saveRecordStatus() should update an existing record if one exists.
      *
      * @return void.
      */
@@ -358,6 +360,9 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
 
         // After the save, there should be 1 record.
         $this->assertEquals($this->_recordsTable->count(), 1);
+
+        // Re-get the record.
+        $record = $this->_recordsTable->getRecordByItemAndExhibit($item, $neatline);
 
         // Check that the parameter was set.
         $this->assertEquals($record->space_active, 1);
