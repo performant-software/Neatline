@@ -30,6 +30,22 @@
 class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
 {
 
+    // Testing parameters.
+    private static $testParams = array(
+        'title' => 'Test Title',
+        'description' => 'Test description.',
+        'start_date' => 'April 26, 1564',
+        'start_time' => '6:00 AM',
+        'end_date' => 'April 23, 1616',
+        'end_time' => '6:00 AM',
+        'vector_color' => '#ffffff',
+        'left_percent' => 0,
+        'right_percent' => 100,
+        'geocoverage' => '[POINT(-1.0, 1.0)]',
+        'space_active' => true,
+        'time_active' => true
+    );
+
     /**
      * Instantiate the helper class, install the plugins, get the database.
      *
@@ -47,7 +63,8 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
     }
 
     /**
-     * Test getRecordByItemAndExhibit() when no record exists.
+     * getRecordByItemAndExhibit() should return boolean false when there is
+     * no record for the given exhibit/item combination.
      *
      * @return void.
      */
@@ -65,7 +82,7 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
     }
 
     /**
-     * Test getRecordByItemAndExhibit() when the record exists.
+     * getRecordByItemAndExhibit() should return the record when the record exists.
      *
      * @return void.
      */
@@ -78,15 +95,15 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
         $record = new NeatlineDataRecord($item, $neatline);
         $record->save();
 
-        // Get a non-existent record.
+        // Get the record.
         $retrievedRecord = $this->_recordsTable->getRecordByItemAndExhibit($item, $neatline);
         $this->assertEquals($record->id, $retrievedRecord->id);
 
     }
 
     /**
-     * Test saveItemFormData() when there is not a record for the
-     * item/exhibit.
+     * When saveItemFormData() when there is no existing record for the item /
+     * exhibit combination, a new data record should be created and populated.
      *
      * @return void.
      */
@@ -97,25 +114,25 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
         $item = $this->helper->_createItem();
         $neatline = $this->helper->_createNeatline();
 
-        // At the start, no records.
+        // At the start, no record.
         $this->assertEquals($this->_recordsTable->count(), 0);
 
         // Save form data for a non-existent record.
         $this->_recordsTable->saveItemFormData(
             $item,
             $neatline,
-            'Test Title',
-            'Test description.',
-            'April 26, 1564',
-            '6:00 AM',
-            'April 23, 1616',
-            '6:00 AM',
-            '#ffffff',
-            0,
-            100,
-            '["POINT(-1.0, 1.0)"]',
-            true,
-            true
+            $this->__testParams['title'],
+            $this->__testParams['description'],
+            $this->__testParams['start_date'],
+            $this->__testParams['start_time'],
+            $this->__testParams['end_date'],
+            $this->__testParams['end_time'],
+            $this->__testParams['vector_color'],
+            $this->__testParams['left_percent'],
+            $this->__testParams['right_percent'],
+            $this->__testParams['geocoverage'],
+            $this->__testParams['space_active'],
+            $this->__testParams['time_active']
         );
 
         // After the save, there should be 1 record.
@@ -123,20 +140,67 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
 
         // Get the new record and check the attributes.
         $record = $this->_recordsTable->getRecordByItemAndExhibit($item, $neatline);
-        $this->assertEquals($record->item_id, $item->id);
-        $this->assertEquals($record->exhibit_id, $neatline->id);
-        $this->assertEquals($record->title, 'Test Title');
-        $this->assertEquals($record->description, 'Test description.');
-        $this->assertEquals($record->start_date, 'April 26, 1564');
-        $this->assertEquals($record->start_time, '6:00 AM');
-        $this->assertEquals($record->end_date, 'April 23, 1616');
-        $this->assertEquals($record->end_time, '6:00 AM');
-        $this->assertEquals($record->vector_color, '#ffffff');
-        $this->assertEquals($record->left_ambiguity_percentage, 0);
-        $this->assertEquals($record->right_ambiguity_percentage, 100);
-        $this->assertEquals($record->geocoverage, '["POINT(-1.0, 1.0)"]');
-        $this->assertEquals($record->space_active, 1);
-        $this->assertEquals($record->time_active, 1);
+
+        // Test that the attributes were set.
+        $this->assertEquals(
+            $record->title,
+            $this->__testParams['title']
+        );
+
+        $this->assertEquals(
+            $record->description,
+            $this->__testParams['description']
+        );
+
+        $this->assertEquals(
+            $record->start_date,
+            $this->__testParams['start_date']
+        );
+
+        $this->assertEquals(
+            $record->start_time,
+            $this->__testParams['start_time']
+        );
+
+        $this->assertEquals(
+            $record->end_date,
+            $this->__testParams['end_date']
+        );
+
+        $this->assertEquals(
+            $record->end_time,
+            $this->__testParams['end_time']
+        );
+
+        $this->assertEquals(
+            $record->vector_color,
+            $this->__testParams['vector_color']
+        );
+
+        $this->assertEquals(
+            $record->left_ambiguity_percentage,
+            $this->__testParams['left_percent']
+        );
+
+        $this->assertEquals(
+            $record->right_ambiguity_percentage,
+            $this->__testParams['right_percent']
+        );
+
+        $this->assertEquals(
+            $record->geocoverage,
+            $this->__testParams['geocoverage']
+        );
+
+        $this->assertEquals(
+            $record->space_active,
+            $this->__testParams['space_active']
+        );
+
+        $this->assertEquals(
+            $record->time_active,
+            $this->__testParams['time_active']
+        );
 
     }
 
@@ -154,20 +218,6 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
 
         // Create a record and fill it with valid data.
         $record = new NeatlineDataRecord($item, $neatline);
-        $record->populateRecord(
-            'Test Title',
-            'Test description.',
-            'April 26, 1564',
-            '6:00 AM',
-            'April 23, 1616',
-            '6:00 AM',
-            '#ffffff',
-            0,
-            100,
-            '["POINT(-1.0, 1.0)"]',
-            true,
-            true
-        );
         $record->save();
 
         // There should be a record.
@@ -177,45 +227,89 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
         $this->_recordsTable->saveItemFormData(
             $item,
             $neatline,
-            'New Title',
-            'New description.',
-            'April 27, 1564',
-            '7:00 AM',
-            'April 24, 1616',
-            '7:00 AM',
-            '#000000',
-            30,
-            70,
-            '["POINT(-2.0, 2.0)"]',
-            false,
-            false
+            $this->__testParams['title'],
+            $this->__testParams['description'],
+            $this->__testParams['start_date'],
+            $this->__testParams['start_time'],
+            $this->__testParams['end_date'],
+            $this->__testParams['end_time'],
+            $this->__testParams['vector_color'],
+            $this->__testParams['left_percent'],
+            $this->__testParams['right_percent'],
+            $this->__testParams['geocoverage'],
+            $this->__testParams['space_active'],
+            $this->__testParams['time_active']
         );
 
-        // There should still be just 1 record.
+        // There should still be just one record.
         $this->assertEquals($this->_recordsTable->count(), 1);
 
-        // Get the new record and check that the attributes were updated.
-        $retrievedRecord = $this->_recordsTable->getRecordByItemAndExhibit($item, $neatline);
-        $this->assertEquals($retrievedRecord->item_id, $item->id);
-        $this->assertEquals($retrievedRecord->exhibit_id, $neatline->id);
-        $this->assertEquals($retrievedRecord->title, 'New Title');
-        $this->assertEquals($retrievedRecord->description, 'New description.');
-        $this->assertEquals($retrievedRecord->start_date, 'April 27, 1564');
-        $this->assertEquals($retrievedRecord->start_time, '7:00 AM');
-        $this->assertEquals($retrievedRecord->end_date, 'April 24, 1616');
-        $this->assertEquals($retrievedRecord->end_time, '7:00 AM');
-        $this->assertEquals($retrievedRecord->vector_color, '#000000');
-        $this->assertEquals($retrievedRecord->left_ambiguity_percentage, 30);
-        $this->assertEquals($retrievedRecord->right_ambiguity_percentage, 70);
-        $this->assertEquals($retrievedRecord->geocoverage, '["POINT(-2.0, 2.0)"]');
-        $this->assertEquals($retrievedRecord->space_active, 0);
-        $this->assertEquals($retrievedRecord->time_active, 0);
+        // Test that the attributes were set.
+        $this->assertEquals(
+            $record->title,
+            $this->__testParams['title']
+        );
+
+        $this->assertEquals(
+            $record->description,
+            $this->__testParams['description']
+        );
+
+        $this->assertEquals(
+            $record->start_date,
+            $this->__testParams['start_date']
+        );
+
+        $this->assertEquals(
+            $record->start_time,
+            $this->__testParams['start_time']
+        );
+
+        $this->assertEquals(
+            $record->end_date,
+            $this->__testParams['end_date']
+        );
+
+        $this->assertEquals(
+            $record->end_time,
+            $this->__testParams['end_time']
+        );
+
+        $this->assertEquals(
+            $record->vector_color,
+            $this->__testParams['vector_color']
+        );
+
+        $this->assertEquals(
+            $record->left_ambiguity_percentage,
+            $this->__testParams['left_percent']
+        );
+
+        $this->assertEquals(
+            $record->right_ambiguity_percentage,
+            $this->__testParams['right_percent']
+        );
+
+        $this->assertEquals(
+            $record->geocoverage,
+            $this->__testParams['geocoverage']
+        );
+
+        $this->assertEquals(
+            $record->space_active,
+            $this->__testParams['space_active']
+        );
+
+        $this->assertEquals(
+            $record->time_active,
+            $this->__testParams['time_active']
+        );
 
     }
 
     /**
-     * Test saveRecordStatus() when there is not a record for the
-     * item/exhibit.
+     * saveRecordStatus() should create a new record when there whenthere
+     * is no existing record.
      *
      * @return void.
      */
@@ -226,8 +320,6 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
         $item = $this->helper->_createItem();
         $neatline = $this->helper->_createNeatline();
 
-        // Space, true.
-
         // At the start, no records.
         $this->assertEquals($this->_recordsTable->count(), 0);
 
@@ -237,131 +329,38 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
         // After the save, there should be 1 record.
         $this->assertEquals($this->_recordsTable->count(), 1);
 
-        // Get the new record, check the attributes, delete.
+        // Check that the parameter was set.
         $record = $this->_recordsTable->getRecordByItemAndExhibit($item, $neatline);
         $this->assertEquals($record->space_active, 1);
-        $record->delete();
-
-        // Space, false.
-
-        // At the start, no records.
-        $this->assertEquals($this->_recordsTable->count(), 0);
-
-        // Save form data for a non-existent record.
-        $this->_recordsTable->saveRecordStatus($item, $neatline, 'space', false);
-
-        // After the save, there should be 1 record.
-        $this->assertEquals($this->_recordsTable->count(), 1);
-
-        // Get the new record, check the attributes, delete.
-        $record = $this->_recordsTable->getRecordByItemAndExhibit($item, $neatline);
-        $this->assertEquals($record->space_active, 0);
-        $record->delete();
-
-        // Time, true.
-
-        // At the start, no records.
-        $this->assertEquals($this->_recordsTable->count(), 0);
-
-        // Save form data for a non-existent record.
-        $this->_recordsTable->saveRecordStatus($item, $neatline, 'time', true);
-
-        // After the save, there should be 1 record.
-        $this->assertEquals($this->_recordsTable->count(), 1);
-
-        // Get the new record, check the attributes, delete.
-        $record = $this->_recordsTable->getRecordByItemAndExhibit($item, $neatline);
-        $this->assertEquals($record->time_active, 1);
-        $record->delete();
-
-        // Time, false.
-
-        // At the start, no records.
-        $this->assertEquals($this->_recordsTable->count(), 0);
-
-        // Save form data for a non-existent record.
-        $this->_recordsTable->saveRecordStatus($item, $neatline, 'time', false);
-
-        // After the save, there should be 1 record.
-        $this->assertEquals($this->_recordsTable->count(), 1);
-
-        // Get the new record, check the attributes, delete.
-        $record = $this->_recordsTable->getRecordByItemAndExhibit($item, $neatline);
-        $this->assertEquals($record->time_active, 0);
-        $record->delete();
 
     }
 
     /**
-     * Test saveRecordStatus() when there is a record for the item/exhibit.
+     * saveRecordStatus() should create a new record when there whenthere
+     * is no existing record.
      *
      * @return void.
      */
     public function testSaveRecordStatusWithRecord()
     {
 
-        // Create item and exhibit.
+        // Create item, exhibit, and record.
         $item = $this->helper->_createItem();
         $neatline = $this->helper->_createNeatline();
-
-        // Create a record and fill it with valid data.
         $record = new NeatlineDataRecord($item, $neatline);
-        $record->populateRecord(
-            'Test Title',
-            'Test description.',
-            'April 26, 1564',
-            '6:00 AM',
-            'April 23, 1616',
-            '6:00 AM',
-            '#ffffff',
-            0,
-            100,
-            '["POINT(-1.0, 1.0)"]',
-            true,
-            true
-        );
         $record->save();
 
-        // There should be a record.
+        // At the start, no records.
         $this->assertEquals($this->_recordsTable->count(), 1);
 
-        // Save form data with update values.
-        $this->_recordsTable->saveItemFormData(
-            $item,
-            $neatline,
-            'New Title',
-            'New description.',
-            'April 27, 1564',
-            '7:00 AM',
-            'April 24, 1616',
-            '7:00 AM',
-            '#000000',
-            30,
-            70,
-            '["POINT(-2.0, 2.0)"]',
-            false,
-            false
-        );
+        // Save form data for a non-existent record.
+        $this->_recordsTable->saveRecordStatus($item, $neatline, 'space', true);
 
-        // There should still be just 1 record.
+        // After the save, there should be 1 record.
         $this->assertEquals($this->_recordsTable->count(), 1);
 
-        // Get the new record and check that the attributes were updated.
-        $retrievedRecord = $this->_recordsTable->getRecordByItemAndExhibit($item, $neatline);
-        $this->assertEquals($retrievedRecord->item_id, $item->id);
-        $this->assertEquals($retrievedRecord->exhibit_id, $neatline->id);
-        $this->assertEquals($retrievedRecord->title, 'New Title');
-        $this->assertEquals($retrievedRecord->description, 'New description.');
-        $this->assertEquals($retrievedRecord->start_date, 'April 27, 1564');
-        $this->assertEquals($retrievedRecord->start_time, '7:00 AM');
-        $this->assertEquals($retrievedRecord->end_date, 'April 24, 1616');
-        $this->assertEquals($retrievedRecord->end_time, '7:00 AM');
-        $this->assertEquals($retrievedRecord->vector_color, '#000000');
-        $this->assertEquals($retrievedRecord->left_ambiguity_percentage, 30);
-        $this->assertEquals($retrievedRecord->right_ambiguity_percentage, 70);
-        $this->assertEquals($retrievedRecord->geocoverage, '["POINT(-2.0, 2.0)"]');
-        $this->assertEquals($retrievedRecord->space_active, 0);
-        $this->assertEquals($retrievedRecord->space_active, 0);
+        // Check that the parameter was set.
+        $this->assertEquals($record->space_active, 1);
 
     }
 
