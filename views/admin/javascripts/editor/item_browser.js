@@ -26,23 +26,6 @@
 
         options: {
 
-            // Markup hooks.
-            item_title_text_class: 'item-title-text',
-            item_title_fader_class: 'item-title-fader',
-            item_title_cell_class: 'item-title',
-            edit_form_container_class: 'neatline-record-edit-form',
-            small_scroll_content_class: 'small-scroll-content',
-            title_input_name: 'title',
-            description_input_name: 'description',
-            start_date_input_name: 'start-date-date',
-            start_time_input_name: 'start-date-time',
-            end_date_input_name: 'end-date-date',
-            end_time_input_name: 'end-date-time',
-            left_percent_input_name: 'left-ambiguity-percentage',
-            right_percent_input_name: 'right-ambiguity-percentage',
-            color_picker_input_class: 'color-picker',
-            date_ambiguity_container_class: 'date-ambiguity-container',
-
             // CSS constants.
             css: {
                 default_text_size: 12,
@@ -440,7 +423,7 @@
                     if (self._spaceBoxes != null) {
 
                         $.each(self._spaceBoxes, function(i, box) {
-                            $(box).css('background', self.options.colors.orange + ' !important');
+                            $(box).css('background-color', self.options.colors.orange);
                         });
 
                     }
@@ -455,16 +438,7 @@
                     if (self._spaceBoxes != null) {
 
                         $.each(self._spaceBoxes, function(i, box) {
-
-                            // Get the new color.
-                            var box = $(box);
-                            var newColor = box.data('spaceDataExists') ?
-                                self.options.colors.data_exists + ' !important' :
-                                self.options.colors.light_yellow + ' !important';
-
-                            // Push the change.
-                            box.css('background', newColor);
-
+                            $(box).css('background-color', self.options.colors.light_yellow);
                         });
 
                     }
@@ -544,7 +518,7 @@
                     if (self._timeBoxes != null) {
 
                         $.each(self._timeBoxes, function(i, box) {
-                            $(box).css('background', self.options.colors.orange + ' !important');
+                            $(box).css('background-color', self.options.colors.orange);
                         });
 
                     }
@@ -559,16 +533,7 @@
                     if (self._timeBoxes != null) {
 
                         $.each(self._timeBoxes, function(i, box) {
-
-                            // Get the new color.
-                            var box = $(box);
-                            var newColor = box.data('timeDataExists') ?
-                                self.options.colors.data_exists + ' !important' :
-                                self.options.colors.light_yellow + ' !important';
-
-                            // Push the change.
-                            box.css('background', newColor);
-
+                            $(box).css('background-color', self.options.colors.light_yellow);
                         });
 
                     }
@@ -702,14 +667,14 @@
             $.each(this.items, function(i, item) {
 
                 // DOM fetch.
-                var item = $(item);
-                var itemId = item.attr('recordid');
-                var itemTitleTd = item.find('.item-title');
-                var itemTitleText = item.find('.' + self.options.item_title_text_class);
-                var spaceBlock = item.find('.space');
-                var spaceCheckbox = spaceBlock.find('input[type="checkbox"]');
-                var timeBlock = item.find('.time');
-                var timeCheckbox = timeBlock.find('input[type="checkbox"]');
+                var item =                  $(item);
+                var itemId =                item.attr('recordid');
+                var itemTitleTd =           item.find('.item-title');
+                var itemTitleText =         item.find('.item-title-text');
+                var spaceBlock =            item.find('.space');
+                var spaceCheckbox =         spaceBlock.find('input[type="checkbox"]');
+                var timeBlock =             item.find('.time');
+                var timeCheckbox =          timeBlock.find('input[type="checkbox"]');
 
                 // Register the item in the associations object.
                 self.idToItem[itemId] = item;
@@ -721,19 +686,7 @@
                 if (timeCheckbox.prop('checked')) { item.data('time', true); }
                 else { item.data('time', false); }
 
-                // Store the existing-data status on the DOM.
-                if (spaceBlock.hasClass('data-exists')) {
-                    spaceBlock.data('spaceDataExists', true);
-                    spaceBlock.css('background-color', self.options.colors.data_exists);
-                } else { spaceBlock.data('spaceDataExists', false); }
-
-                if (timeBlock.hasClass('data-exists')) {
-                    timeBlock.data('timeDataExists', true);
-                    timeBlock.css('background-color', self.options.colors.data_exists);
-                } else { timeBlock.data('timeDataExists', false); }
-
-                // Set the starting expanded tracker and record the item's
-                // native vertical offset.
+                // Record the item's native vertical offset.
                 self._calculateTopOffset(item);
 
                 // Set the starting 'changed' data parameter.
@@ -744,14 +697,12 @@
 
                     'mouseenter': function() {
                         item.find('td')
-                            .not('.data-exists')
-                            .css('background-color', self.options.colors.light_blue + ' !important');
+                            .css('background-color', self.options.colors.light_blue);
                     },
 
                     'mouseleave': function() {
                         item.find('td')
-                            .not('.data-exists')
-                            .css('background-color', self.options.colors.light_yellow + ' !important');
+                            .css('background-color', self.options.colors.light_yellow);
                     }
 
                 });
@@ -785,15 +736,15 @@
                     'mouseenter': function() {
 
                         // Make the color change on the box.
-                        spaceBlock.css('background-color', self.options.colors.orange + ' !important');
+                        spaceBlock.css('background-color', self.options.colors.orange);
 
                         // Force the color change on the time block.
                         var timeBlockColor = timeBlock.data('timeDataExists') ?
-                            self.options.colors.data_exists : self.options.colors.light_blue;
-                        timeBlock.css('background-color', timeBlockColor + ' !important');
+                            self.options.colors.red : self.options.colors.light_blue;
+                        timeBlock.css('background-color', timeBlockColor);
 
                         // Make the color change on the item title.
-                        itemTitleTd.css('background-color', self.options.colors.light_blue + ' !important');
+                        itemTitleTd.css('background-color', self.options.colors.light_blue);
 
                     },
 
@@ -801,18 +752,18 @@
 
                         // Get the new color.
                         var newColor = spaceBlock.data('spaceDataExists') ?
-                            self.options.colors.data_exists : self.options.colors.light_yellow;
+                            self.options.colors.red : self.options.colors.light_yellow;
 
                         // Push the change.
-                        spaceBlock.css('background-color', newColor + ' !important');
+                        spaceBlock.css('background-color', newColor);
 
                         // Force the color change on the time block.
                         var timeBlockColor = timeBlock.data('timeDataExists') ?
-                            self.options.colors.data_exists : self.options.colors.light_yellow;
-                        timeBlock.css('background-color', timeBlockColor + ' !important');
+                            self.options.colors.red : self.options.colors.light_yellow;
+                        timeBlock.css('background-color', timeBlockColor);
 
                         // Make the color change on the item title.
-                        itemTitleTd.css('background-color', self.options.colors.light_yellow + ' !important');
+                        itemTitleTd.css('background-color', self.options.colors.light_yellow);
 
                     }
 
@@ -834,15 +785,15 @@
                     'mouseenter': function() {
 
                         // Make the color change on the box.
-                        timeBlock.css('background-color', self.options.colors.orange + ' !important');
+                        timeBlock.css('background-color', self.options.colors.orange);
 
                         // Force the color change on the space block.
                         var spaceBlockColor = spaceBlock.data('spaceDataExists') ?
-                            self.options.colors.data_exists : self.options.colors.light_blue;
-                        spaceBlock.css('background-color', spaceBlockColor + ' !important');
+                            self.options.colors.red : self.options.colors.light_blue;
+                        spaceBlock.css('background-color', spaceBlockColor);
 
                         // Make the color change on the item title.
-                        itemTitleTd.css('background-color', self.options.colors.light_blue + ' !important');
+                        itemTitleTd.css('background-color', self.options.colors.light_blue);
 
                     },
 
@@ -850,18 +801,18 @@
 
                         // Get the new color.
                         var newColor = timeBlock.data('timeDataExists') ?
-                            self.options.colors.data_exists : self.options.colors.light_yellow;
+                            self.options.colors.red : self.options.colors.light_yellow;
 
                         // Push the change.
-                        timeBlock.css('background-color', newColor + ' !important');
+                        timeBlock.css('background-color', newColor);
 
                         // Force the color change on the space block.
                         var spaceBlockColor = spaceBlock.data('spaceDataExists') ?
-                            self.options.colors.data_exists : self.options.colors.light_yellow;
-                        spaceBlock.css('background-color', spaceBlockColor + ' !important');
+                            self.options.colors.red : self.options.colors.light_yellow;
+                        spaceBlock.css('background-color', spaceBlockColor);
 
                         // Make the color change on the item title.
-                        itemTitleTd.css('background-color', self.options.colors.light_yellow + ' !important');
+                        itemTitleTd.css('background-color', self.options.colors.light_yellow);
 
                     }
 
@@ -896,12 +847,7 @@
 
         /*
          * Given an item <tr> in the browser list, calculate its native top offset
-         * relative to the container. This value is used to position the items
-         * at the top of the div when the form opens. The value needs to be calculated
-         * in advance for each item because it doesn't work to just get the value
-         * at the time of a mousedown event on the item - if there is already an open
-         * form _above_ the item in the stack, the offset would reflect the height
-         * of that form and the final positioning of the new item form is incorrect.
+         * relative to the container.
          */
         _calculateTopOffset: function(item) {
 
@@ -943,21 +889,14 @@
         },
 
         /*
-         * Expand the form for a given item id. Public method used by the deployment
-         * script in response to a feature or timeline click on the exhibit. The
-         * scrollMap and scrollTimeline booleans are passed into the _showForm method,
-         * and are then used to control whether or not the focusing routines for
-         * each of the blocks is triggered by the form open. This control is necessary
-         * because in certain situations it is undesirable for one or both of the
-         * blocks to react to a click. For example, if there is a click on a feature,
-         * it can be confusing and discombobulating for the the map to react and focus
-         * in on the feature if the click occurred when the map was at a comparatively
-         * distant zoom level, etc.
+         * Expand the form for a given item id.
          */
         showFormByItemId: function(id, scrollMap, scrollTimeline, focusItems) {
 
+            // Get the item from the id hash.
             var item = this.idToItem[id];
 
+            // If the item is not already visible, show the form.
             if (item != this._currentFormItem) {
                 this._showForm(this.idToItem[id], scrollMap, scrollTimeline, focusItems);
             }
@@ -969,196 +908,7 @@
          */
         _showForm: function(item, scrollMap, scrollTimeline, focusItems) {
 
-            var self = this;
-            var immediate = false;
 
-            // If another form is currently expanded, hide it.
-            if (this._currentFormItem != null) {
-                this._hideForm(this._currentFormItem, true);
-                immediate = true;
-            }
-
-            // Get child markup and parameters.
-            var itemId = item.attr('recordid');
-            var itemTitleTd = item.find('td.item-title');
-            var editFormTd = item.next().find('td');
-            var editFormContainer = editFormTd.find('.' + this.options.edit_form_container_class);
-            var editForm = editFormTd.find('form');
-            var textSpan = item.find('.' + this.options.item_title_text_class);
-            var faderSpan = item.find('.' + this.options.item_title_fader_class);
-            var itemTitleText = item.find('.' + this.options.item_title_text_class);
-            var allInputs = editForm.find('input[type="text"], textarea')
-            var descriptionTextarea = editForm.find('textarea[name="description"]');
-            var colorPickerInput = editForm.find('.' + this.options.color_picker_input_class);
-            var dateAmbiguityContainer = editForm.find('.' + this.options.date_ambiguity_container_class);
-
-            // Calculate the native height of the form.
-            var cloneFormTd = editFormTd
-                .clone()
-                .css({
-                    'top': -1000,
-                    'left': -1000,
-                    'display': 'table-cell'
-                })
-                .appendTo(this._body);
-
-            var cloneForm = cloneFormTd.find('form');
-            var actionsDiv = cloneFormTd.find('div.actions');
-            cloneForm.css({
-                'height': 'auto',
-                'width': this.containerWidth
-            });
-
-            // Register the height of the cloned form, delete it.
-            var formHeight = cloneForm.height();
-            cloneFormTd.remove();
-
-            // Measure the height of the item editor column.
-            var editorHeight = this.element.height() - this.options.css.top_margin;
-
-            // By default, fade to the default text color and weight.
-            var textColor = this.options.colors.dark_purple;
-
-            // Keep the title bold red if the form was not saved.
-            if (textSpan.data('changed')) {
-                textColor = this.options.colors.red;
-            }
-
-            // Highlight the item title.
-            textSpan.stop().animate({
-                'color': textColor,
-                'font-size': 14,
-                'font-weight': 'bold'
-            }, 100);
-
-            // Display the form.
-            editFormTd.css({
-                'display': 'table-cell'
-            });
-
-            // Animate up the height.
-            editForm.animate({
-                'height': formHeight
-            }, 300);
-
-            // Position at the top of the frame.
-            this.element.animate({
-                'scrollTop': item.data('topOffset') - this.options.css.top_margin + 1
-            }, 300);
-
-            // Change the data record.
-            item.data('expanded', true);
-
-            // Record the expanded form.
-            this._currentFormItem = item;
-
-            // Bind the button actions.
-            var cancelButton = editForm.find('button[type="reset"]');
-            var saveButton = editForm.find('input[type="submit"]');
-
-            // On textarea resize, resize the form.
-            descriptionTextarea.unbind('mouseup').bind('mouseup', function() {
-                self._resizeForms();
-            });
-
-            // Cancel form.
-            cancelButton.bind({
-
-                'mousedown': function() {
-                    self._hideForm(item, false);
-                },
-
-                'click': function(event) {
-                    event.preventDefault();
-                }
-
-            });
-
-            // Save form.
-            saveButton.bind({
-
-                'mousedown': function() {
-                    self._saveItemForm();
-                10},
-
-                'click': function(event) {
-                    event.preventDefault();
-                }
-
-            });
-
-            // Set the change tracker on each of the inputs and bind
-            // the change event.
-            $.each(allInputs, function(i, input) {
-
-                $(input).bind({
-                    'keydown': function() {
-                        self.markItemTitleAsUnsaved();
-                    }
-                });
-
-            });
-
-            // If the form is taller than the total height of the editor
-            // column, add a scrollbar.
-            if (formHeight > editorHeight) {
-                // editFormContainer.smallscroll();
-            }
-
-            // Instantiate the date ambiguity builder and define callbacks.
-            dateAmbiguityContainer.gradientbuilder({
-
-                'stopHandleDrag': function(event, obj) {
-
-                    self._trigger('ambiguityChange', {}, {
-                        'itemId': itemId,
-                        'color': obj.color,
-                        'leftPercent': obj.leftPercent,
-                        'rightPercent': obj.rightPercent
-                    });
-
-                }
-
-            });
-
-            // Set the starting color.
-            dateAmbiguityContainer.gradientbuilder('setColor', colorPickerInput.val());
-
-            // Instantiate the color picker and define change callback.
-            colorPickerInput.miniColors({
-
-                'change': function(hex, rgb) {
-
-                    // Mark the item title unsaved.
-                    self.markItemTitleAsUnsaved();
-
-                    // Trigger out to push the new color immediately onto
-                    // the map.
-                    self._trigger('coloredit', {}, {
-                        'color': hex
-                    });
-
-                    // Manifest the change on the gradient builder.
-                    dateAmbiguityContainer.gradientbuilder('setColor', hex);
-
-                }
-
-            });
-
-            // Fire general item edit event to focus timeline and map
-            // if data exists for the item.
-            this._trigger('itemedit', {}, {
-                'itemId': item.attr('recordid'),
-                'scrollMap': scrollMap,
-                'scrollTimeline': scrollTimeline,
-                'focusItems': focusItems
-            });
-
-            // Fire off the event to show the map editor controls.
-            this._trigger('mapedit', {}, {
-                'item': item,
-                'immediate': immediate
-            });
 
         },
 
@@ -1167,89 +917,7 @@
          */
         _hideForm: function(item, immediate) {
 
-            // Get child markup.
-            var editFormTd = item.next().find('td');
-            var editForm = editFormTd.find('form');
-            var itemId = editForm.find('recordid').text();
-            var textSpan = item.find('.' + this.options.item_title_text_class);
-            var faderSpan = item.find('.' + this.options.item_title_fader_class);
-            var allInputs = editForm.find('input[type="text"], textarea')
-            var colorPickerInput = editForm.find('.' + this.options.color_picker_input_class);
 
-            // By default, fade to the default text color and weight.
-            var textColor = this.options.colors.text;
-            var textWeight = 'normal';
-
-            // Keep the title bold red if the form was not saved.
-            if (textSpan.data('changed')) {
-                textColor = this.options.colors.red;
-                textWeight = 'bold';
-            }
-
-            // Highlight the item title.
-            textSpan.stop().animate({
-                'color': textColor,
-                'font-size': this.options.css.default_text_size,
-                'font-weight': textWeight
-            }, 100);
-
-            // Animate or snap up the height, depending on the value
-            // of immediate.
-            if (!immediate) {
-
-                editForm.animate({
-                    'height': 0
-                }, 300, function() {
-                    // Hide the form.
-                    editFormTd.css({
-                        'display': 'none'
-                    });
-                });
-
-            }
-
-            else {
-
-                editForm.animate({
-                    'height': 0
-                }, 0, function() {
-                    // Hide the form.
-                    editFormTd.css({
-                        'display': 'none'
-                    });
-                });
-
-            }
-
-            // Change the data record.
-            item.data('expanded', false);
-
-            // Set the tracker to null.
-            this._currentFormItem = null;
-
-            // Destroy the color picker.
-            colorPickerInput.miniColors('destroy');
-
-            // Bind the button actions.
-            var cancelButton = editForm.find('button[type="reset"]');
-            var saveButton = editForm.find('input[type="submit"]');
-
-            // Pull events off cancel form.
-            cancelButton.unbind('mousedown click');
-
-            // Pull events off save form.
-            saveButton.unbind('mousedown click');
-
-            // Pull events off of inputs.
-            $.each(allInputs, function(i, input) {
-                $(input).unbind('keydown');
-            });
-
-            // Fire the end edit without save callback.
-            this._trigger('endmapedit', {}, {
-                'itemId': itemId,
-                'immediate': immediate
-            });
 
         },
 
@@ -1259,143 +927,18 @@
          */
         _saveItemForm: function() {
 
-            var self = this;
 
-            // Get child markup.
-            var editFormTd = this._currentFormItem.next().find('td');
-            var editForm = editFormTd.find('form');
-            var itemTitleText = this._currentFormItem.find('.' + this.options.item_title_text_class);
 
-            // Get the form inputs.
-            var titleInput = editForm.find('input[name="' + this.options.title_input_name + '"]');
-            var descriptionInput = editForm.find('textarea[name="' + this.options.description_input_name + '"]');
-            var startDateInput = editForm.find('input[name="' + this.options.start_date_input_name + '"]');
-            var startTimeInput = editForm.find('input[name="' + this.options.start_time_input_name + '"]');
-            var endDateInput = editForm.find('input[name="' + this.options.end_date_input_name + '"]');
-            var endTimeInput = editForm.find('input[name="' + this.options.end_time_input_name + '"]');
-            var leftPercentageInput = editForm.find('input[name="' + this.options.left_percent_input_name + '"]');
-            var rightPercentageInput = editForm.find('input[name="' + this.options.right_percent_input_name + '"]');
-            var colorPickerInput = editForm.find('.' + this.options.color_picker_input_class);
-            var itemId = this._currentFormItem.attr('recordid');
+        },
 
-            // Get all of the inputs.
-            var allInputs = editForm.find('input[type="text"], textarea')
+        /*
+         * Expand/contract the height of an open item form. Called after a width
+         * drag on the container div that might affect the wrapped height of the
+         * form contents.
+         */
+        _resizeForms: function() {
 
-            // Fetch the geocoverage data from OpenLayers.
-            this._trigger('savemapedit');
 
-            // Blur out the form to visually register the submission.
-            editForm.animate({
-                'opacity': 0.3
-            }, 200);
-
-            // Get the values out of the form.
-            var itemId_Value = itemId.text();
-            var neatlineId_Value = Neatline.id;
-            var title_Value = titleInput.val();
-            var description_Value = descriptionInput.val();
-            var startDate_Value = startDateInput.val();
-            var startTime_Value = startTimeInput.val();
-            var endDate_Value = endDateInput.val();
-            var endTime_Value = endTimeInput.val();
-            var leftPercentage_Value = leftPercentageInput.val();
-            var rightPercentage_Value = rightPercentageInput.val();
-            var colorValue = colorPickerInput.val();
-            var geocoverage_Value = this.coverageData;
-
-            // If there is date information entered, add an active record by default.
-            var timeBlock = this._currentFormItem.find('.time');
-            var timeCheckbox = timeBlock.find('input[type="checkbox"]');
-            var spaceBlock = this._currentFormItem.find('.space');
-            var spaceCheckbox = spaceBlock.find('input[type="checkbox"]');
-
-            // Space and time status variables for the save post.
-            var spaceStatus = spaceCheckbox.prop('checked');
-            var timeStatus = timeCheckbox.prop('checked');
-
-            // If time data has been entered, check the record active automatically
-            // and add the color indication to the box.
-
-            // Space.
-            if (geocoverage_Value[0] != null) {
-
-                // Add the color indication.
-                spaceBlock.addClass('data-exists');
-                spaceBlock.data('spaceDataExists', true);
-                spaceBlock.css('background-color', this.options.colors.data_exists + ' !important');
-
-                // If there is data, and the box is not currently checked as active,
-                // default the box to checked.
-                if (!spaceCheckbox.prop('checked')) {
-                    this._checkStatusBlock(this._currentFormItem, 'space');
-                    spaceStatus = !spaceStatus;
-                }
-
-            }
-
-            // Time.
-            if (startDate_Value != '' ||
-                startTime_Value != '' ||
-                endDate_Value != '' ||
-                endTime_Value != '') {
-
-                // Add the color indication.
-                timeBlock.addClass('data-exists');
-                timeBlock.data('spaceDataExists', true);
-                timeBlock.css('background-color', this.options.colors.data_exists + ' !important');
-
-                // If there is data, and the box is not currently checked as active,
-                // default the box to checked.
-                if (!timeCheckbox.prop('checked')) {
-                    this._checkStatusBlock(this._currentFormItem, 'time');
-                    timeStatus = !timeStatus;
-                }
-
-            }
-
-            // Save data.
-            $.ajax({
-
-                url: 'save',
-                type: 'POST',
-
-                data: {
-                    item_id: itemId,
-                    neatline_id: neatlineId_Value,
-                    title: title_Value,
-                    description: description_Value,
-                    start_date: startDate_Value,
-                    start_time: startTime_Value,
-                    end_date: endDate_Value,
-                    end_time: endTime_Value,
-                    left_percentage: leftPercentage_Value,
-                    right_percentage: rightPercentage_Value,
-                    vector_color: colorValue,
-                    geocoverage: geocoverage_Value,
-                    space_status: this.__stringifyBooleanForJson(spaceStatus),
-                    time_status: this.__stringifyBooleanForJson(timeStatus)
-                },
-
-                success: function() {
-
-                    // Walk up the opacity.
-                    editForm.animate({
-                        'opacity': 1
-                    });
-
-                    // Tween the title color.
-                    itemTitleText.animate({
-                        'color': self.options.colors.text
-                    }, 200);
-
-                    // Register the change.
-                    itemTitleText.data('changed', false);
-
-                    self._trigger('savecomplete');
-
-                }
-
-            });
 
         },
 
@@ -1430,7 +973,7 @@
                     item_id: itemId,
                     neatline_id: Neatline.id,
                     space_or_time: spaceOrTime,
-                    value: this.__stringifyBooleanForJson(value)
+                    value: String(value)
                 },
 
                 success: function() {
@@ -1447,50 +990,6 @@
                 }
 
             });
-
-        },
-
-        /*
-         * Expand/contract the height of an open item form. Called after a width
-         * drag on the container div that might affect the wrapped height of the
-         * form contents.
-         */
-        _resizeForms: function() {
-
-            var item = this._currentFormItem;
-
-            // Get child markup.
-            var editFormTd = item.next().find('td');
-            var editForm = editFormTd.find('form');
-            var textSpan = item.find('.' + this.options.item_title_text_class);
-            var faderSpan = item.find('.' + this.options.item_title_fader_class);
-
-            // Calculate the native height of the form.
-            var cloneFormTd = editFormTd
-                .clone()
-                .css({
-                    'top': -1000,
-                    'left': -1000,
-                    'display': 'table-cell'
-                })
-                .appendTo(this._body);
-
-            var cloneForm = cloneFormTd.find('form');
-            var actionsDiv = cloneFormTd.find('div.actions');
-            cloneForm.css({
-                'height': 'auto',
-                'width': this.containerWidth
-            });
-
-            // Register the height of the cloned form,
-            // delete it.
-            var formHeight = cloneForm.height();
-            cloneFormTd.remove();
-
-            // Animate up the height.
-            editForm.animate({
-                'height': formHeight
-            }, 300);
 
         },
 
@@ -1523,16 +1022,6 @@
 
         },
 
-        /*
-         * Convert JavaScript boolean true/false to string true/false. Needed
-         * to prevent typecasting chaos during parsing on the server.
-         */
-        __stringifyBooleanForJson: function(boolean) {
-
-            return boolean ? 'true' : 'false';
-
-        },
-
 
         /*
          * =================
@@ -1559,7 +1048,7 @@
          */
         markItemTitleAsUnsaved: function() {
 
-            var itemTitleText = this._currentFormItem.find('.' + this.options.item_title_text_class);
+            var itemTitleText = this._currentFormItem.find('.item-title-text');
 
             if (!itemTitleText.data('changed')) {
 
