@@ -668,6 +668,7 @@
 
                 // DOM fetch.
                 var item =                  $(item);
+                var allCells =              item.find('td');
                 var itemId =                item.attr('recordid');
                 var itemTitleTd =           item.find('.item-title');
                 var itemTitleText =         item.find('.item-title-text');
@@ -676,48 +677,25 @@
                 var timeBlock =             item.find('.time');
                 var timeCheckbox =          timeBlock.find('input[type="checkbox"]');
 
-                // Register the item in the associations object.
+                // Register the item, calculate offset.
                 self.idToItem[itemId] = item;
-
-                // Store the space/time status on the DOM.
-                if (spaceCheckbox.prop('checked')) { item.data('space', true); }
-                else { item.data('space', false); }
-
-                if (timeCheckbox.prop('checked')) { item.data('time', true); }
-                else { item.data('time', false); }
-
-                // Record the item's native vertical offset.
                 self._calculateTopOffset(item);
-
-                // Set the starting 'changed' data parameter.
-                itemTitleText.data('changed', false);
 
                 // Add mouseenter glossing to row.
                 itemTitleTd.bind({
-
                     'mouseenter': function() {
-                        item.find('td')
-                            .css('background-color', self.options.colors.light_blue);
+                        allCells.css('background-color', self.options.colors.light_blue);
                     },
-
                     'mouseleave': function() {
-                        item.find('td')
-                            .css('background-color', self.options.colors.light_yellow);
-                    }
-
-                });
-
-                // Turn off the default checkbox behevior for the S/T boxes.
-                spaceCheckbox.bind({
-                    'click': function(event) {
-                        event.preventDefault();
+                        allCells.css('background-color', self.options.colors.light_yellow);
                     }
                 });
 
-                timeCheckbox.bind({
-                    'click': function(event) {
+                // Disable checkbox behevior for the space/time boxes.
+                $.each([spaceCheckbox, timeCheckbox], function(i, box) {
+                    box.bind('click', function(event) {
                         event.preventDefault();
-                    }
+                    });
                 });
 
                 // Bind the checkbox click functionality to the boxes.
