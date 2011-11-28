@@ -46,3 +46,19 @@ Array.prototype.contains = function(el) {
     return match;
 
 };
+
+// disableSelect() - Nukes default browser text selection.
+var NeatlineHelpers = {
+
+    'disableSelect': function() {
+
+        var _window = $(window);
+
+        $(window).css('MozUserSelect', 'none');
+        $(window).bind('selectstart', function() {
+            return false;
+        });
+
+    }
+
+}

@@ -65,7 +65,7 @@
 
             // Hexes.
             colors: {
-                neatline_purple: '#724E85',
+                purple: '#724e85',
                 item_list_highlight: '#f2f3fa',
                 drag_border: '#a79aae',
                 text_default: '#383838',
@@ -96,6 +96,8 @@
             this.dragTip =                  $('#drag-tip');
             this.spaceTip =                 $('#space-tip');
             this.timeTip =                  $('#time-tip');
+            this.spaceHeader =              $('div.col-1.col-header span.header');
+            this.timeHeader =               $('div.col-2.col-header span.header');
 
             // Trackers.
             this._searchString = '';
@@ -107,8 +109,8 @@
             this._firstRequest = true;
 
             // Prepare the document, position elements, listen for resize.
-            this._disableSelect();
-            this._getScrollBarWidth();
+            this._window.disableSelection();
+            this._scrollbarWidth = $.getScrollbarWidth();
             this._positionDivs();
             this._addWindowResizeListener();
             this._buildDragHandle();
@@ -118,36 +120,13 @@
 
         },
 
-        /*
-         * Disable text selection on the entire window.
-         */
-        _disableSelect: function() {
-
-            // Turn off text selection on the whole container div.
-            this._window.css('MozUserSelect', 'none');
-            this._window.bind('selectstart', function() {
-                return false;
-            });
-
-        },
 
         /*
-         * Calcualte the width and height of the container, window, and top bar.
+         * =================
+         * Preparatory workers.
+         * =================
          */
-        _getDimensions: function() {
 
-            // Container dimensions.
-            this.containerWidth = this.element.width();
-            this.containerHeight = this.element.height();
-
-            // Window dimensions.
-            this.windowWidth = this._window.width();
-            this.windowHeight = this._window.height();
-
-            // Top bar height.
-            this.topBarHeight = this.topBar.height();
-
-        },
 
         /*
          * Make the height of the container stretch to fit the height of the window,
@@ -176,7 +155,7 @@
             // Set the height of the header.
             this.itemsListHeader.css({
                 'top': this.topBarHeight,
-                'width': this.containerWidth - this.scrollbarWidth
+                'width': this.containerWidth - this._scrollbarWidth
             });
 
             // Position the Neatline div.
@@ -185,43 +164,15 @@
         },
 
         /*
-         * Set the dimensions of the Neatline container.
+         * Calcualte the width and height of the container, window, and top bar.
          */
-        _positionNeatline: function() {
+        _getDimensions: function() {
 
-            // Position the Neatline container to the right
-            // of the item browser.
-            this.neatlineContainer.css({
-                'height': this.windowHeight - this.topBarHeight,
-                'width': this.windowWidth - this.containerWidth - 1,
-            });
-
-            this._trigger('reposition');
-
-        },
-
-        /*
-         * Position the width dragging container div to the right of the right
-         * boundary of the editor.
-         */
-        _positionDragHandle: function() {
-
-            // Set the height of the drag handle.
-            this.dragHandle.css({
-                'height': this.windowHeight - this.topBarHeight - 1,
-                'top': this.topBarHeight
-            });
-
-        },
-
-        /*
-         * Populate a tracker variable with geocoverage data for a given
-         * collection of features on the map. Called in advance of the item
-         * saving routine.
-         */
-        setCoverageData: function(data) {
-
-            this.coverageData = data;
+            this.containerWidth = this.element.width();
+            this.containerHeight = this.element.height();
+            this.windowWidth = this._window.width();
+            this.windowHeight = this._window.height();
+            this.topBarHeight = this.topBar.height();
 
         },
 
@@ -264,10 +215,8 @@
                 'mouseenter': function() {
 
                     if (!self._just_dragged) {
-
                         self.dragHandle.trigger('mousemove');
                         self.dragHandle.css('border-right', '1px dashed #cac8c2');
-
                     }
 
                 },
@@ -305,6 +254,7 @@
 
                 'mousedown': function(event) {
 
+                    // Manifest the drag.
                     self._doWidthDrag(event);
 
                 }
@@ -417,6 +367,35 @@
         },
 
         /*
+         * Set the dimensions of the Neatline container.
+         */
+        _positionNeatline: function() {
+
+            // Position the Neatline container to the right of the item browser.
+            this.neatlineContainer.css({
+                'height': this.windowHeight - this.topBarHeight,
+                'width': this.windowWidth - this.containerWidth - 1,
+            });
+
+            this._trigger('reposition');
+
+        },
+
+        /*
+         * Position the width dragging container div to the right of the right
+         * boundary of the editor.
+         */
+        _positionDragHandle: function() {
+
+            // Set the height of the drag handle.
+            this.dragHandle.css({
+                'height': this.windowHeight - this.topBarHeight - 1,
+                'top': this.topBarHeight
+            });
+
+        },
+
+        /*
          * Define selection change callback on the item filter widget.
          */
         _glossItemFilter: function() {
@@ -443,10 +422,6 @@
 
             var self = this;
 
-            // Gloss the columns.
-            this.spaceHeader = $('div.col-1.col-header span.header');
-            this.timeHeader = $('div.col-2.col-header span.header');
-
             this.spaceHeader.bind({
 
                 'mouseenter': function(e) {
@@ -454,7 +429,7 @@
                     // Get coordinates of the header.
                     var offset = self.spaceHeader.offset();
 
-                    // Position and show dragTip.
+                    // Position and show the tooltip.
                     self.spaceTip.css({
                         'display': 'block',
                         'top': offset.top + self.options.space_tooltip_Y_offset,
@@ -1188,29 +1163,6 @@
         },
 
         /*
-         * Make the item title fade to red to indicate that a change has been
-         * made to the item's Neatline record but that the new data has not been
-         * committed to the server.
-         */
-        markItemTitleAsUnsaved: function() {
-
-            var itemTitleText = this._currentFormItem.find('.' + this.options.item_title_text_class);
-
-            if (!itemTitleText.data('changed')) {
-
-                // Tween the title color.
-                itemTitleText.animate({
-                    'color': this.options.colors.unchanged_red
-                }, 200);
-
-                // Store the new status.
-                itemTitleText.data('changed', true);
-
-            }
-
-        },
-
-        /*
          * Collapse an item edit form and unbind all events.
          */
         _hideForm: function(item, immediate) {
@@ -1572,60 +1524,6 @@
         },
 
         /*
-         * Calculate the width of the browser-default scrollbar. Used by the
-         * calculation that positions the static browser pane top bar (with the
-         * search box and item filterer).
-         */
-        _getScrollBarWidth: function() {
-
-            this.scrollbarWidth = 0;
-
-            if ($.browser.msie) {
-
-                var textarea1 = $('<textarea cols="10" rows="2"></textarea>')
-                    .css({
-                        position: 'absolute',
-                        top: -1000,
-                        left: -1000
-                    }).appendTo('body');
-
-                var textarea2 = $('<textarea cols="10" rows="2"></textarea>')
-                    .css({
-                        position: 'absolute',
-                        top: -1000,
-                        left: -1000,
-                        overflow: 'hidden'
-                    }).appendTo('body');
-
-                this.scrollbarWidth = textarea1.width() - textarea2.width();
-                textarea1.remove();
-                textarea2.remove();
-
-            }
-
-            else {
-
-                var div = $('<div />')
-                    .css({
-                        width: 100,
-                        height: 100,
-                        overflow: 'auto',
-                        position: 'absolute',
-                        top: -1000,
-                        left: -1000
-                    }).prependTo('body').append('<div />').find('div').css({
-                        width: '100%',
-                        height: 200
-                    });
-
-                this.scrollbarWidth = 100 - div.width();
-                div.parent().remove();
-
-            }
-
-        },
-
-        /*
          * Convert JavaScript boolean true/false to string true/false. Needed
          * to prevent typecasting chaos during parsing on the server.
          */
@@ -1633,7 +1531,49 @@
 
             return boolean ? 'true' : 'false';
 
-        }
+        },
+
+
+        /*
+         * =================
+         * Public methods.
+         * =================
+         */
+
+
+        /*
+         * Populate a tracker variable with geocoverage data for a given
+         * collection of features on the map. Called in advance of the item
+         * saving routine.
+         */
+        setCoverageData: function(data) {
+
+            this.coverageData = data;
+
+        },
+
+        /*
+         * Make the item title fade to red to indicate that a change has been
+         * made to the item's Neatline record but that the new data has not been
+         * committed to the server.
+         */
+        markItemTitleAsUnsaved: function() {
+
+            var itemTitleText = this._currentFormItem.find('.' + this.options.item_title_text_class);
+
+            if (!itemTitleText.data('changed')) {
+
+                // Tween the title color.
+                itemTitleText.animate({
+                    'color': this.options.colors.unchanged_red
+                }, 200);
+
+                // Store the new status.
+                itemTitleText.data('changed', true);
+
+            }
+
+        },
 
     });
 

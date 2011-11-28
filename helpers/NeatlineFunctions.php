@@ -95,7 +95,7 @@ function neatline_queueEditorAssets()
     queue_js('editor/item_orderer', 'javascripts');
     queue_js('editor/gradient_builder', 'javascripts');
     queue_js('editor/_deployment', 'javascripts');
-    queue_js('editor/jquery.miniColors-0.1/jquery.miniColors.min', 'javascripts');
+    queue_js('libraries/jquery.miniColors-0.1/jquery.miniColors.min', 'javascripts');
 
 }
 
@@ -129,7 +129,8 @@ function neatline_queueNeatlineAssets()
     queue_js('neatline_timeline', 'javascripts');
     queue_js('neatline_undateditems', 'javascripts');
     queue_js('span_styler', 'javascripts');
-    queue_js('_utilities', 'javascripts');
+    queue_js('_utilities', 'javascripts/libraries');
+    queue_js('jquery.getscrollbarwidth', 'javascripts/libraries');
 
 }
 
