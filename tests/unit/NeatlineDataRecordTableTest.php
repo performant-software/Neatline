@@ -369,4 +369,68 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
 
     }
 
+    /**
+     * If there is a record for an item, getRecordStatus() should return the
+     * space or time active status.
+     *
+     * @return void.
+     */
+    public function testGetRecordStatusWithExistingRecord()
+    {
+
+        // Create item, exhibit, and record.
+        $item = $this->helper->_createItem();
+        $neatline = $this->helper->_createNeatline();
+        $record = new NeatlineDataRecord($item, $neatline);
+
+        // Populate statuses with trues.
+        $record->space_active = 1;
+        $record->time_active = 1;
+        $record->save();
+
+        // Get.
+        $spaceStatus = $this->_recordsTable->getRecordStatus($item, $neatline, 'space');
+        $timeStatus = $this->_recordsTable->getRecordStatus($item, $neatline, 'time');
+
+        // Check.
+        $this->assertTrue($spaceStatus);
+        $this->assertTrue($timeStatus);
+
+        // Populate statuses with falses.
+        $record->space_active = 0;
+        $record->time_active = 0;
+        $record->save();
+
+        // Get.
+        $spaceStatus = $this->_recordsTable->getRecordStatus($item, $neatline, 'space');
+        $timeStatus = $this->_recordsTable->getRecordStatus($item, $neatline, 'time');
+
+        // Check.
+        $this->assertFalse($spaceStatus);
+        $this->assertFalse($timeStatus);
+
+    }
+
+    /**
+     * If there is not a record for an item, getRecordStatus() should return false.
+     *
+     * @return void.
+     */
+    public function testGetRecordStatusWithNoExistingRecord()
+    {
+
+        // Create item, exhibit, and record.
+        $item = $this->helper->_createItem();
+        $neatline = $this->helper->_createNeatline();
+
+        // Get.
+        $spaceStatus = $this->_recordsTable->getRecordStatus($item, $neatline, 'space');
+        $timeStatus = $this->_recordsTable->getRecordStatus($item, $neatline, 'time');
+
+        // Check.
+        $this->assertFalse($spaceStatus);
+        $this->assertFalse($timeStatus);
+
+    }
+
 }
