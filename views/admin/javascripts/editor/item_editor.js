@@ -1456,7 +1456,7 @@
                 type: 'POST',
 
                 data: {
-                    item_id: itemId_Value,
+                    item_id: itemId,
                     neatline_id: neatlineId_Value,
                     title: title_Value,
                     description: description_Value,
@@ -1508,7 +1508,7 @@
             var value = checkbox.prop('checked');
 
             // Get the Omeka item id and the title div.
-            var itemId = item.next().find('recordid');
+            var itemId = item.attr('recordid');
             var itemTitleText = item.find('.' + this.options.item_title_text_class);
 
             // Tween the title color.
@@ -1523,7 +1523,7 @@
                 type: 'POST',
 
                 data: {
-                    item_id: itemId.text(),
+                    item_id: itemId,
                     neatline_id: this.neatlineData.id,
                     space_or_time: spaceOrTime,
                     value: this.__stringifyBooleanForJson(value)
