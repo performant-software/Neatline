@@ -30,6 +30,9 @@
 class NeatlineNeatline extends Omeka_record
 {
 
+    /**
+     * Record attributes.
+     */
     public $added;
     public $name;
     public $map_id;
@@ -708,6 +711,25 @@ class NeatlineNeatline extends Omeka_record
         $this->undated_items_position = $udiPosition;
         $this->undated_items_height = $udiHeight;
         $this->save();
+
+    }
+
+    /**
+     * Check whether a given record is active on the map or timeline.
+     *
+     * @param Omeka_record $item The item record.
+     * @param Omeka_record $neatline The exhibit record.
+     *
+     * @return boolean True if the record is active.
+     */
+    public function getRecordStatus($item, $spaceOrTime)
+    {
+
+        // Get the data record table.
+        $_recordsTable = $this->getTable('NeatlineDataRecord');
+
+        // Get the status.
+        return $_recordsTable->getRecordStatus($item, $this, $spaceOrTime);
 
     }
 
