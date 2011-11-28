@@ -195,7 +195,8 @@ class Neatline_EditorController extends Omeka_Controller_Action
         $itemId = $_post['item_id'];
         $neatlineId = $_post['neatline_id'];
         $spaceOrTime = $_post['space_or_time'];
-        $value = (boolean) json_decode($_post['value']);
+        $value = json_decode($_post['value']);
+        echo $value;
 
         // Fetch the Neatline exhibit record and item record.
         $neatline = $this->_neatlinesTable->find($neatlineId);

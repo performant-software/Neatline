@@ -135,7 +135,7 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
     {
 
         $record = $this->fetchObject(
-            $this->getSelect()->where('item_id = '. $item->id
+            $this->getSelect()->where('item_id = ' . $item->id
                 . ' AND exhibit_id = ' . $neatline->id)
         );
 

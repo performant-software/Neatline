@@ -1372,7 +1372,7 @@
             var leftPercentageInput = editForm.find('input[name="' + this.options.left_percent_input_name + '"]');
             var rightPercentageInput = editForm.find('input[name="' + this.options.right_percent_input_name + '"]');
             var colorPickerInput = editForm.find('.' + this.options.color_picker_input_class);
-            var itemId = editForm.find('recordid');
+            var itemId = this._currentFormItem.attr('recordid');
 
             // Get all of the inputs.
             var allInputs = editForm.find('input[type="text"], textarea')

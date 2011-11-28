@@ -58,20 +58,79 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->helper = new Neatline_Test_AppTestCase;
         $this->helper->setUpPlugin();
         $this->db = get_db();
+        $this->_recordsTable = $this->db->getTable('NeatlineDataRecord');
 
     }
 
     /**
-     * Hitting the /status route with a well-formed POST should result in
-     * the correct data commits to the space_active and time_active fields
-     * in the correct data record.
+     * Hitting the /status route with a well-formed POST should result in the
+     * correct data commits to the space_active field in the correct record.
      *
      * @return void.
      */
-    public function testStatusSave()
+    public function testSpaceStatusSave()
     {
 
-        $this->assertTrue(true);
+        // Create item, exhibit, and record.
+        $item = $this->helper->_createItem();
+        $neatline = $this->helper->_createNeatline();
+        $record = new NeatlineDataRecord($item, $neatline);
+
+        // Form the POST for a space change.
+        $this->request->setMethod('POST')
+            ->setPost(array(
+                'item_id' => $item->id,
+                'neatline_id' => $neatline->id,
+                'space_or_time' => 'space',
+                'value' => 'true'
+            )
+        );
+
+        // Hit the route.
+        $this->dispatch('neatline-exhibits/editor/status');
+
+        // Re-get the record.
+        $record = $this->_recordsTable->getRecordByItemAndExhibit($item, $neatline);
+
+        // Space status should be true, time status unchanged.
+        $this->assertEquals($record->space_active, 1);
+        $this->assertEquals($record->time_active, 0);
+
+    }
+
+    /**
+     * Hitting the /status route with a well-formed POST should result in the
+     * correct data commits to the time_active field in the correct record.
+     *
+     * @return void.
+     */
+    public function testTimeStatusSave()
+    {
+
+        // Create item, exhibit, and record.
+        $item = $this->helper->_createItem();
+        $neatline = $this->helper->_createNeatline();
+        $record = new NeatlineDataRecord($item, $neatline);
+
+        // Form the POST for a space change.
+        $this->request->setMethod('POST')
+            ->setPost(array(
+                'item_id' => $item->id,
+                'neatline_id' => $neatline->id,
+                'space_or_time' => 'time',
+                'value' => 'true'
+            )
+        );
+
+        // Hit the route.
+        $this->dispatch('neatline-exhibits/editor/status');
+
+        // Re-get the record.
+        $record = $this->_recordsTable->getRecordByItemAndExhibit($item, $neatline);
+
+        // Time status should be true, space status unchanged.
+        $this->assertEquals($record->time_active, 1);
+        $this->assertEquals($record->space_active, 0);
 
     }
 
