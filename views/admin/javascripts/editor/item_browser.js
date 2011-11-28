@@ -104,7 +104,7 @@
 
         /*
          * =================
-         * Preparatory workers.
+         * Preparatory workers and positioners.
          * =================
          */
 
@@ -170,6 +170,43 @@
             });
 
         },
+
+        /*
+         * Set the dimensions of the Neatline container.
+         */
+        _positionNeatline: function() {
+
+            // Position the Neatline container to the right of the item browser.
+            this.neatlineContainer.css({
+                'height': this.windowHeight - this.topBarHeight,
+                'width': this.windowWidth - this.containerWidth - 1,
+            });
+
+            this._trigger('reposition');
+
+        },
+
+        /*
+         * Position the width dragging container div to the right of the right
+         * boundary of the editor.
+         */
+        _positionDragHandle: function() {
+
+            // Set the height of the drag handle.
+            this.dragHandle.css({
+                'height': this.windowHeight - this.topBarHeight - 1,
+                'top': this.topBarHeight
+            });
+
+        },
+
+
+        /*
+         * =================
+         * Event constructors.
+         * =================
+         */
+
 
         /*
          * Build functionality for the width dragging handle.
@@ -345,35 +382,6 @@
                     self.searchBox.trigger('keyup');
                 }
 
-            });
-
-        },
-
-        /*
-         * Set the dimensions of the Neatline container.
-         */
-        _positionNeatline: function() {
-
-            // Position the Neatline container to the right of the item browser.
-            this.neatlineContainer.css({
-                'height': this.windowHeight - this.topBarHeight,
-                'width': this.windowWidth - this.containerWidth - 1,
-            });
-
-            this._trigger('reposition');
-
-        },
-
-        /*
-         * Position the width dragging container div to the right of the right
-         * boundary of the editor.
-         */
-        _positionDragHandle: function() {
-
-            // Set the height of the drag handle.
-            this.dragHandle.css({
-                'height': this.windowHeight - this.topBarHeight - 1,
-                'top': this.topBarHeight
             });
 
         },
@@ -877,11 +885,6 @@
             var itemId = item.attr('recordid');
             var itemTitleText = item.find('.' + this.options.item_title_text_class);
 
-            // Tween the title color.
-            itemTitleText.animate({
-                'color': this.options.colors.red
-            }, 200);
-
             // Save the new status.
             $.ajax({
 
@@ -896,11 +899,6 @@
                 },
 
                 success: function() {
-
-                    // Tween the title color.
-                    itemTitleText.animate({
-                        'color': self.options.colors.text
-                    }, 200);
 
                     if (reload) {
                         self._trigger('savecomplete');
@@ -925,8 +923,8 @@
                 var item = $(item);
 
                 // Get the spans for the text and fader.
-                var textSpan = item.find('.' + self.options.item_title_text_class);
-                var faderSpan = item.find('.' + self.options.item_title_fader_class);
+                var textSpan = item.find('.item-title-text');
+                var faderSpan = item.find('.item-title-fader');
 
                 // Measure the height of the block produced by the text
                 // and the width of the entire row.
