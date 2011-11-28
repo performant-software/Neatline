@@ -438,7 +438,7 @@
                     if (self._spaceBoxes != null) {
 
                         $.each(self._spaceBoxes, function(i, box) {
-                            $(box).css('background-color', self.options.colors.light_yellow);
+                            $(box).css('background-color', '');
                         });
 
                     }
@@ -533,7 +533,7 @@
                     if (self._timeBoxes != null) {
 
                         $.each(self._timeBoxes, function(i, box) {
-                            $(box).css('background-color', self.options.colors.light_yellow);
+                            $(box).css('background-color', '');
                         });
 
                     }
@@ -681,16 +681,6 @@
                 self.idToItem[itemId] = item;
                 self._calculateTopOffset(item);
 
-                // Add mouseenter glossing to row.
-                itemTitleTd.bind({
-                    'mouseenter': function() {
-                        allCells.css('background-color', self.options.colors.light_blue);
-                    },
-                    'mouseleave': function() {
-                        allCells.css('background-color', self.options.colors.light_yellow);
-                    }
-                });
-
                 // Disable checkbox behevior for the space/time boxes.
                 $.each([spaceCheckbox, timeCheckbox], function(i, box) {
                     box.bind('click', function(event) {
@@ -698,51 +688,33 @@
                     });
                 });
 
+                // Add mouseenter glossing to row.
+                item.bind({
+
+                    'mouseenter': function() {
+                        item.css('background-color', self.options.colors.light_blue);
+                    },
+
+                    'mouseleave': function() {
+                        item.css('background-color', self.options.colors.light_yellow);
+                    }
+
+                });
+
                 // Bind the checkbox click functionality to the boxes.
                 spaceBlock.bind({
 
                     'mousedown': function() {
-
-                        // Check the box.
                         self._checkStatusBlock(item, 'space');
-
-                        // Do status change ajax.
                         self._saveStatus(item, 'space', true);
-
                     },
 
                     'mouseenter': function() {
-
-                        // Make the color change on the box.
                         spaceBlock.css('background-color', self.options.colors.orange);
-
-                        // Force the color change on the time block.
-                        var timeBlockColor = timeBlock.data('timeDataExists') ?
-                            self.options.colors.red : self.options.colors.light_blue;
-                        timeBlock.css('background-color', timeBlockColor);
-
-                        // Make the color change on the item title.
-                        itemTitleTd.css('background-color', self.options.colors.light_blue);
-
                     },
 
                     'mouseleave': function() {
-
-                        // Get the new color.
-                        var newColor = spaceBlock.data('spaceDataExists') ?
-                            self.options.colors.red : self.options.colors.light_yellow;
-
-                        // Push the change.
-                        spaceBlock.css('background-color', newColor);
-
-                        // Force the color change on the time block.
-                        var timeBlockColor = timeBlock.data('timeDataExists') ?
-                            self.options.colors.red : self.options.colors.light_yellow;
-                        timeBlock.css('background-color', timeBlockColor);
-
-                        // Make the color change on the item title.
-                        itemTitleTd.css('background-color', self.options.colors.light_yellow);
-
+                        spaceBlock.css('background-color', '');
                     }
 
                 });
@@ -751,47 +723,16 @@
                 timeBlock.bind({
 
                     'mousedown': function() {
-
-                        // Check the box.
                         self._checkStatusBlock(item, 'time');
-
-                        // Do status change ajax.
                         self._saveStatus(item, 'time', true);
-
                     },
 
                     'mouseenter': function() {
-
-                        // Make the color change on the box.
                         timeBlock.css('background-color', self.options.colors.orange);
-
-                        // Force the color change on the space block.
-                        var spaceBlockColor = spaceBlock.data('spaceDataExists') ?
-                            self.options.colors.red : self.options.colors.light_blue;
-                        spaceBlock.css('background-color', spaceBlockColor);
-
-                        // Make the color change on the item title.
-                        itemTitleTd.css('background-color', self.options.colors.light_blue);
-
                     },
 
                     'mouseleave': function() {
-
-                        // Get the new color.
-                        var newColor = timeBlock.data('timeDataExists') ?
-                            self.options.colors.red : self.options.colors.light_yellow;
-
-                        // Push the change.
-                        timeBlock.css('background-color', newColor);
-
-                        // Force the color change on the space block.
-                        var spaceBlockColor = spaceBlock.data('spaceDataExists') ?
-                            self.options.colors.red : self.options.colors.light_yellow;
-                        spaceBlock.css('background-color', spaceBlockColor);
-
-                        // Make the color change on the item title.
-                        itemTitleTd.css('background-color', self.options.colors.light_yellow);
-
+                        timeBlock.css('background-color', '');
                     }
 
                 });
