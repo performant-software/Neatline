@@ -519,7 +519,13 @@
 
             }
 
-        }
+        },
+
+        getSelected: function() {
+
+            return this.selected;
+
+        },
 
     });
 

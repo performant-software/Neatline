@@ -24,6 +24,16 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache 2 License
  */
 
+/* Neatline container. */
+
+#neatline {
+    display: block;
+    position: relative;
+    float: right;
+    background: #f1f1f1;
+}
+
+
 /* Top bar */
 
 #topbar {

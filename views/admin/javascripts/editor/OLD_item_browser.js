@@ -27,6 +27,18 @@
         options: {
 
             // Markup hooks.
+            topbar_id: 'topbar',
+            items_table_class: 'items',
+            search_wrapper_id: 'search-wrapper',
+            search_box_id: 'search-box',
+            search_cancel_id: 'search-cancel',
+            items_list_container_id: 'items-list-container',
+            items_list_header_id: 'items-list-header',
+            item_filter_container_id: 'filter-items',
+            neatline_id: 'neatline',
+            drag_tooltip_id: 'drag-tip',
+            space_tooltip_id: 'space-tip',
+            time_tooltip_id: 'time-tip',
             item_title_text_class: 'item-title-text',
             item_title_fader_class: 'item-title-fader',
             item_title_cell_class: 'item-title',
@@ -82,39 +94,83 @@
         _create: function() {
 
             // Getters.
-            this._window =                  $(window);
-            this._body =                    $('body');
-            this.topBar =                   $('#topbar');
-            this.searchWrapper =            $('#search-wrapper');
-            this.searchBox =                $('#search-box');
-            this.itemsList =                $('#items-list-container');
-            this.itemsListHeader =          $('#items-list-header');
-            this.searchCancel =             $('#search-cancel');
-            this.itemFilterContainer =      $('#filter-items');
-            this.neatlineContainer =        $('#neatline');
-            this.itemsTable =               $('#items');
-            this.dragTip =                  $('#drag-tip');
-            this.spaceTip =                 $('#space-tip');
-            this.timeTip =                  $('#time-tip');
+            this._window = $(window);
+            this._body = $('body');
+            this.topBar = $('#' + this.options.topbar_id);
+            this.searchWrapper = $('#' + this.options.search_wrapper_id);
+            this.searchBox = $('#' + this.options.search_box_id);
+            this.itemsList = $('#' + this.options.items_list_container_id);
+            this.itemsListHeader = $('#' + this.options.items_list_header_id);
+            this.searchCancel = $('#' + this.options.search_cancel_id);
+            this.itemFilterContainer = $('#' + this.options.item_filter_container_id);
+            this.neatlineContainer = $('#' + this.options.neatline_id);
+            this.itemsTable = $('table.' + this.options.items_table_class);
 
-            // Trackers.
+            this.neatlineData = Neatline;
+
+            // Tooltips.
+            this.dragTip = $('#' + this.options.drag_tooltip_id);
+            this.spaceTip = $('#' + this.options.space_tooltip_id);
+            this.timeTip = $('#' + this.options.time_tooltip_id);
+
+            // A facade for the real tracker object in item_filter.
+            this.selected = {
+                tags: [],
+                types: [],
+                collections: [],
+                all: false
+            };
+
+            // Disable text selection on the document. This is aggressive
+            // and controversial, but it solves lots of annoyances.
+            this._disableSelect();
+
+            // Get the os scrollbar width.
+            this.__getScrollBarWidth();
+
+            // Set the starting width of the container.
+            this.element.css('width', this.options.starting_item_list_width);
+
+            // Position the container, add window resize listener.
+            this._positionDivs();
+            this._addWindowResizeListener();
+
+            // Construct the drag handle on the items stack.
+            this._buildDragHandle();
+
+            // Set search string tracker.
             this._searchString = '';
+
+            // Add listener to the search box.
+            this._glossSearchBox();
+
+            // Add tooltips to column headers.
+            this._glossColumnHeaders();
+
+            // Instantiate the item filter widget.
+            this._glossItemFilter();
+
+            // Tracker for the current expanded form, space boxes,
+            // and time boxes.
             this._currentFormItem = null;
             this._spaceBoxes = null;
             this._timeBoxes = null;
+
+            // Boolean trackers for space and time results cropping.
             this._spaceSorted = false;
             this._timeSorted = false;
-            this._firstRequest = true;
 
-            // Prepare the document, position elements, listen for resize.
-            this._disableSelect();
-            this._getScrollBarWidth();
-            this._positionDivs();
-            this._addWindowResizeListener();
-            this._buildDragHandle();
-            this._glossSearchBox();
-            this._glossColumnHeaders();
-            this._glossItemFilter();
+            // Set static CSS parameters for the Neatline.
+            this.neatlineContainer.css({
+                'display': 'block',
+                'float': 'right',
+                'top': this.topBarHeight,
+                'position': 'relative',
+                'background': '#f1f1f1'
+            });
+
+            // Fire starting ajax request.
+            this._firstRequest = true;
 
         },
 
@@ -156,12 +212,6 @@
          * container.
          */
         _positionDivs: function() {
-
-            // Set the starting width of the container.
-            this.element.css('width', this.options.starting_item_list_width);
-
-            // Set static CSS parameters for the Neatline.
-            this.neatlineContainer.css('top', this.topBarHeight);
 
             // Update dimensions and set new height.
             this._getDimensions();
@@ -426,6 +476,7 @@
             this.itemFilterContainer.itemfilter({
 
                 'selectionchange': function(eventObject, selected) {
+                    self.selected = selected;
                     self._getItems();
                 }
 
@@ -670,9 +721,6 @@
 
             var self = this;
 
-            // Get the selection tracker out of the filter widget.
-            var selected = this.itemFilterContainer.itemfilter('getSelected');
-
             // Core ajax call to get items.
             $.ajax({
 
@@ -681,11 +729,11 @@
 
                 data: {
                     search: this._searchString,
-                    tags: selected.tags,
-                    types: selected.types,
-                    collections: selected.collections,
-                    all: selected.all,
-                    neatline_id: Neatline.id
+                    tags: this.selected.tags,
+                    types: this.selected.types,
+                    collections: this.selected.collections,
+                    all: this.selected.all,
+                    neatline_id: this.neatlineData.id
                 },
 
                 success: function(data) {
@@ -715,7 +763,7 @@
             var self = this;
 
             // Get the new items.
-            this.items = this.itemsList.find('.item-row');
+            this.items = $('#' + this.options.items_list_container_id + ' .item-row');
 
             // Position the faders.
             this._positionTitleFaders();
@@ -1339,7 +1387,7 @@
 
             // Get the values out of the form.
             var itemId_Value = itemId.text();
-            var neatlineId_Value = Neatline.id;
+            var neatlineId_Value = this.neatlineData.id;
             var title_Value = titleInput.val();
             var description_Value = descriptionInput.val();
             var startDate_Value = startDateInput.val();
@@ -1476,7 +1524,7 @@
 
                 data: {
                     item_id: itemId,
-                    neatline_id: Neatline.id,
+                    neatline_id: this.neatlineData.id,
                     space_or_time: spaceOrTime,
                     value: this.__stringifyBooleanForJson(value)
                 },
@@ -1576,7 +1624,7 @@
          * calculation that positions the static browser pane top bar (with the
          * search box and item filterer).
          */
-        _getScrollBarWidth: function() {
+        __getScrollBarWidth: function() {
 
             this.scrollbarWidth = 0;
 
