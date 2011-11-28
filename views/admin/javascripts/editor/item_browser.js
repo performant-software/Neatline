@@ -43,35 +43,33 @@
             color_picker_input_class: 'color-picker',
             date_ambiguity_container_class: 'date-ambiguity-container',
 
-            // Durations and CSS constants.
-            item_list_highlight_duration: 10,
-            starting_item_list_width: 400,
-            item_list_min_width: 400,
-            drag_handle_width: 4,
-            drag_tooltip_Y_offset: 16,
-            drag_tooltip_X_offset: 15,
-            space_tooltip_Y_offset: -38,
-            space_tooltip_X_offset: -19,
-            time_tooltip_Y_offset: -38,
-            time_tooltip_X_offset: -15,
-            item_title_fader_width: 40,
-            item_name_default_color: '#515151',
-            item_name_highlight_color: '#303030',
-            item_row_default_background_color: '#FFFEF8',
-            item_row_highlight_background_color: '#f3f6ff',
-            spacetime_background_color: '#ffda82',
-            item_name_default_size: 12,
-            container_top_margin: 40,
+            // CSS constants.
+            css: {
+                default_text_size: 12,
+                top_margin: 40,
+                fader_width: 40,
+                container_min_width: 400,
+                drag_handle_width: 4,
+                tooltips: {
+                    drag_y_offset: 16,
+                    drag_x_offset: 15,
+                    space_y_offset: -38,
+                    space_x_offset: -20,
+                    time_y_offset: -38,
+                    time_x_offset: -16,
+                }
+            },
 
             // Hexes.
             colors: {
+                light_blue: '#f3f6ff',
+                light_yellow: '#fffef8',
+                dark_purple: '#4f1d6a',
                 purple: '#724e85',
-                item_list_highlight: '#f2f3fa',
-                drag_border: '#a79aae',
-                text_default: '#383838',
-                text_gray: '#8d8d8d',
-                unchanged_red: '#ca3c3c',
-                data_exists: '#fff2d3'
+                text: '#515151',
+                gray: '#8d8d8d',
+                red: '#ca3c3c',
+                orange: '#ffda82'
             }
 
         },
@@ -137,7 +135,7 @@
         _positionDivs: function() {
 
             // Set the starting width of the container.
-            this.element.css('width', this.options.starting_item_list_width);
+            this.element.css('width', this.options.css.container_min_width);
 
             // Set static CSS parameters for the Neatline.
             this.neatlineContainer.css('top', this.topBarHeight);
@@ -197,13 +195,15 @@
 
             var self = this;
 
-            // Construct, size, and position the handle div.
+            // Construct the handle div.
             this.dragHandle = $('<div id="drag-handle"></div>');
+
             this.dragHandle.css({
-                'width': this.options.drag_handle_width,
+                'width': this.options.css.drag_handle_width,
                 'height': this.windowHeight - this.topBarHeight - 1,
                 'top': this.topBarHeight,
-                'left': this.options.starting_item_list_width
+                'left': this.options.css.container_min_width,
+                'z-index': 1000
             });
 
             // Append.
@@ -232,8 +232,8 @@
                         // Position and show dragTip.
                         self.dragTip.css({
                             'display': 'block',
-                            'top': offsetY - self.options.drag_tooltip_Y_offset,
-                            'left': offsetX + self.options.drag_tooltip_X_offset
+                            'top': offsetY - self.options.css.tooltips.drag_y_offset,
+                            'left': offsetX + self.options.css.tooltips.drag_x_offset
                         });
 
                     }
@@ -294,8 +294,8 @@
 
                     // If the cursor position position squeezes the width beyond
                     // the min-width.
-                    if (newWidth <= self.options.item_list_min_width) {
-                        newWidth = self.options.item_list_min_width;
+                    if (newWidth <= self.options.css.container_min_width) {
+                        newWidth = self.options.css.container_min_width;
                     }
 
                     // Resize the container and header.
@@ -432,15 +432,15 @@
                     // Position and show the tooltip.
                     self.spaceTip.css({
                         'display': 'block',
-                        'top': offset.top + self.options.space_tooltip_Y_offset,
-                        'left': offset.left + self.options.space_tooltip_X_offset
+                        'top': offset.top + self.options.css.tooltips.space_y_offset,
+                        'left': offset.left + self.options.css.tooltips.space_x_offset
                     });
 
                     // Only do the gloss if the markup is loaded and registered.
                     if (self._spaceBoxes != null) {
 
                         $.each(self._spaceBoxes, function(i, box) {
-                            $(box).css('background', self.options.spacetime_background_color + ' !important');
+                            $(box).css('background', self.options.colors.orange + ' !important');
                         });
 
                     }
@@ -460,7 +460,7 @@
                             var box = $(box);
                             var newColor = box.data('spaceDataExists') ?
                                 self.options.colors.data_exists + ' !important' :
-                                self.options.item_row_default_background_color + ' !important';
+                                self.options.colors.light_yellow + ' !important';
 
                             // Push the change.
                             box.css('background', newColor);
@@ -536,15 +536,15 @@
                     // Position and show dragTip.
                     self.timeTip.css({
                         'display': 'block',
-                        'top': offset.top + self.options.time_tooltip_Y_offset,
-                        'left': offset.left + self.options.time_tooltip_X_offset
+                        'top': offset.top + self.options.css.tooltips.time_y_offset,
+                        'left': offset.left + self.options.css.tooltips.time_x_offset
                     });
 
                     // Only do the gloss if the markup is loaded and registered.
                     if (self._timeBoxes != null) {
 
                         $.each(self._timeBoxes, function(i, box) {
-                            $(box).css('background', self.options.spacetime_background_color + ' !important');
+                            $(box).css('background', self.options.colors.orange + ' !important');
                         });
 
                     }
@@ -564,7 +564,7 @@
                             var box = $(box);
                             var newColor = box.data('timeDataExists') ?
                                 self.options.colors.data_exists + ' !important' :
-                                self.options.item_row_default_background_color + ' !important';
+                                self.options.colors.light_yellow + ' !important';
 
                             // Push the change.
                             box.css('background', newColor);
@@ -745,13 +745,13 @@
                     'mouseenter': function() {
                         item.find('td')
                             .not('.data-exists')
-                            .css('background-color', self.options.item_row_highlight_background_color + ' !important');
+                            .css('background-color', self.options.colors.light_blue + ' !important');
                     },
 
                     'mouseleave': function() {
                         item.find('td')
                             .not('.data-exists')
-                            .css('background-color', self.options.item_row_default_background_color + ' !important');
+                            .css('background-color', self.options.colors.light_yellow + ' !important');
                     }
 
                 });
@@ -785,15 +785,15 @@
                     'mouseenter': function() {
 
                         // Make the color change on the box.
-                        spaceBlock.css('background-color', self.options.spacetime_background_color + ' !important');
+                        spaceBlock.css('background-color', self.options.colors.orange + ' !important');
 
                         // Force the color change on the time block.
                         var timeBlockColor = timeBlock.data('timeDataExists') ?
-                            self.options.colors.data_exists : self.options.item_row_highlight_background_color;
+                            self.options.colors.data_exists : self.options.colors.light_blue;
                         timeBlock.css('background-color', timeBlockColor + ' !important');
 
                         // Make the color change on the item title.
-                        itemTitleTd.css('background-color', self.options.item_row_highlight_background_color + ' !important');
+                        itemTitleTd.css('background-color', self.options.colors.light_blue + ' !important');
 
                     },
 
@@ -801,18 +801,18 @@
 
                         // Get the new color.
                         var newColor = spaceBlock.data('spaceDataExists') ?
-                            self.options.colors.data_exists : self.options.item_row_default_background_color;
+                            self.options.colors.data_exists : self.options.colors.light_yellow;
 
                         // Push the change.
                         spaceBlock.css('background-color', newColor + ' !important');
 
                         // Force the color change on the time block.
                         var timeBlockColor = timeBlock.data('timeDataExists') ?
-                            self.options.colors.data_exists : self.options.item_row_default_background_color;
+                            self.options.colors.data_exists : self.options.colors.light_yellow;
                         timeBlock.css('background-color', timeBlockColor + ' !important');
 
                         // Make the color change on the item title.
-                        itemTitleTd.css('background-color', self.options.item_row_default_background_color + ' !important');
+                        itemTitleTd.css('background-color', self.options.colors.light_yellow + ' !important');
 
                     }
 
@@ -834,15 +834,15 @@
                     'mouseenter': function() {
 
                         // Make the color change on the box.
-                        timeBlock.css('background-color', self.options.spacetime_background_color + ' !important');
+                        timeBlock.css('background-color', self.options.colors.orange + ' !important');
 
                         // Force the color change on the space block.
                         var spaceBlockColor = spaceBlock.data('spaceDataExists') ?
-                            self.options.colors.data_exists : self.options.item_row_highlight_background_color;
+                            self.options.colors.data_exists : self.options.colors.light_blue;
                         spaceBlock.css('background-color', spaceBlockColor + ' !important');
 
                         // Make the color change on the item title.
-                        itemTitleTd.css('background-color', self.options.item_row_highlight_background_color + ' !important');
+                        itemTitleTd.css('background-color', self.options.colors.light_blue + ' !important');
 
                     },
 
@@ -850,18 +850,18 @@
 
                         // Get the new color.
                         var newColor = timeBlock.data('timeDataExists') ?
-                            self.options.colors.data_exists : self.options.item_row_default_background_color;
+                            self.options.colors.data_exists : self.options.colors.light_yellow;
 
                         // Push the change.
                         timeBlock.css('background-color', newColor + ' !important');
 
                         // Force the color change on the space block.
                         var spaceBlockColor = spaceBlock.data('spaceDataExists') ?
-                            self.options.colors.data_exists : self.options.item_row_default_background_color;
+                            self.options.colors.data_exists : self.options.colors.light_yellow;
                         spaceBlock.css('background-color', spaceBlockColor + ' !important');
 
                         // Make the color change on the item title.
-                        itemTitleTd.css('background-color', self.options.item_row_default_background_color + ' !important');
+                        itemTitleTd.css('background-color', self.options.colors.light_yellow + ' !important');
 
                     }
 
@@ -1014,14 +1014,14 @@
             cloneFormTd.remove();
 
             // Measure the height of the item editor column.
-            var editorHeight = this.element.height() - this.options.container_top_margin;
+            var editorHeight = this.element.height() - this.options.css.top_margin;
 
             // By default, fade to the default text color and weight.
-            var textColor = this.options.colors.text_default;
+            var textColor = this.options.colors.dark_purple;
 
             // Keep the title bold red if the form was not saved.
             if (textSpan.data('changed')) {
-                textColor = this.options.colors.unchanged_red;
+                textColor = this.options.colors.red;
             }
 
             // Highlight the item title.
@@ -1043,7 +1043,7 @@
 
             // Position at the top of the frame.
             this.element.animate({
-                'scrollTop': item.data('topOffset') - this.options.container_top_margin + 1
+                'scrollTop': item.data('topOffset') - this.options.css.top_margin + 1
             }, 300);
 
             // Change the data record.
@@ -1177,19 +1177,19 @@
             var colorPickerInput = editForm.find('.' + this.options.color_picker_input_class);
 
             // By default, fade to the default text color and weight.
-            var textColor = this.options.colors.text_default;
+            var textColor = this.options.colors.text;
             var textWeight = 'normal';
 
             // Keep the title bold red if the form was not saved.
             if (textSpan.data('changed')) {
-                textColor = this.options.colors.unchanged_red;
+                textColor = this.options.colors.red;
                 textWeight = 'bold';
             }
 
             // Highlight the item title.
             textSpan.stop().animate({
                 'color': textColor,
-                'font-size': this.options.item_name_default_size,
+                'font-size': this.options.css.default_text_size,
                 'font-weight': textWeight
             }, 100);
 
@@ -1385,7 +1385,7 @@
 
                     // Tween the title color.
                     itemTitleText.animate({
-                        'color': self.options.colors.text_default
+                        'color': self.options.colors.text
                     }, 200);
 
                     // Register the change.
@@ -1417,7 +1417,7 @@
 
             // Tween the title color.
             itemTitleText.animate({
-                'color': this.options.colors.unchanged_red
+                'color': this.options.colors.red
             }, 200);
 
             // Save the new status.
@@ -1437,7 +1437,7 @@
 
                     // Tween the title color.
                     itemTitleText.animate({
-                        'color': self.options.colors.text_default
+                        'color': self.options.colors.text
                     }, 200);
 
                     if (reload) {
@@ -1565,7 +1565,7 @@
 
                 // Tween the title color.
                 itemTitleText.animate({
-                    'color': this.options.colors.unchanged_red
+                    'color': this.options.colors.red
                 }, 200);
 
                 // Store the new status.
