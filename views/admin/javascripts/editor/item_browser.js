@@ -22,7 +22,7 @@
 (function($, undefined) {
 
 
-    $.widget('neatline.itemeditor', {
+    $.widget('neatline.itembrowser', {
 
         options: {
 

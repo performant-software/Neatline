@@ -26,7 +26,7 @@ jQuery(document).ready(function($) {
     var layoutBuilderContainer = $('#configure-layout');
 
     // Editor instantiation.
-    editorContainer.itemeditor({
+    editorContainer.itembrowser({
 
         'neatlineready': function() {
 

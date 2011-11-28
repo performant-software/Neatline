@@ -85,7 +85,7 @@ function neatline_queueEditorAssets()
     queue_css('gradient-builder');
     queue_css('jquery.miniColors');
 
-    queue_js('editor/item_editor', 'javascripts');
+    queue_js('editor/item_browser', 'javascripts');
     queue_js('editor/item_filter', 'javascripts');
     queue_js('editor/small_scroll', 'javascripts');
     queue_js('editor/edit_geometry', 'javascripts');
