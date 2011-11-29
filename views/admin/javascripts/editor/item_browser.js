@@ -413,194 +413,146 @@
 
             var self = this;
 
-            this.spaceHeader.bind({
+            // Build events on both of the headers.
+            $.each([this.spaceHeader, this.timeHeader], function(i, header) {
 
-                'mouseenter': function(e) {
+                header.bind({
 
-                    // Get coordinates of the header.
-                    var offset = self.spaceHeader.offset();
+                    'mouseenter': function(e) {
 
-                    // Position and show the tooltip.
-                    self.spaceTip.css({
-                        'display': 'block',
-                        'top': offset.top + self.options.css.tooltips.space_y_offset,
-                        'left': offset.left + self.options.css.tooltips.space_x_offset
-                    });
+                        // Get header-specific items.
+                        if (header == self.spaceHeader) {
+                            var tip = self.spaceTip;
+                            var boxes = self._spaceBoxes;
+                            var y_offset = self.options.css.tooltips.space_y_offset
+                            var x_offset = self.options.css.tooltips.space_x_offset
+                        } else {
+                            var tip = self.timeTip;
+                            var boxes = self._timeBoxes;
+                            var y_offset = self.options.css.tooltips.time_y_offset
+                            var x_offset = self.options.css.tooltips.time_x_offset
+                        }
 
-                    // Only do the gloss if the markup is loaded and registered.
-                    if (self._spaceBoxes != null) {
+                        // Get coordinates of the header.
+                        var offset = header.offset();
 
-                        $.each(self._spaceBoxes, function(i, box) {
-                            $(box).css('background-color', self.options.colors.orange);
+                        // Position and show the tooltip.
+                        tip.css({
+                            'display': 'block',
+                            'top': offset.top + y_offset,
+                            'left': offset.left + x_offset
                         });
 
-                    }
+                        // Only do the gloss if the markup is loaded and registered.
+                        if (boxes != null) {
 
-                },
+                            $.each(boxes, function(i, box) {
+                                $(box).css('background-color', self.options.colors.orange);
+                            });
 
-                'mouseleave': function() {
+                        }
 
-                    self.spaceTip.css('display', 'none');
+                    },
 
-                    // Only do the gloss if the markup is loaded and registered.
-                    if (self._spaceBoxes != null) {
+                    'mouseleave': function() {
 
-                        $.each(self._spaceBoxes, function(i, box) {
-                            $(box).css('background-color', '');
-                        });
+                        // Get header-specific items.
+                        if (header == self.spaceHeader) {
+                            var tip = self.spaceTip;
+                            var boxes = self._spaceBoxes;
+                        } else {
+                            var tip = self.timeTip;
+                            var boxes = self._timeBoxes;
+                        }
 
-                    }
+                        tip.css('display', 'none');
 
-                },
+                        // Only do the gloss if the markup is loaded and registered.
+                        if (boxes != null) {
 
-                'mousedown': function() {
+                            $.each(boxes, function(i, box) {
+                                $(box).css('background-color', '');
+                            });
 
-                    // If there is an active form, close it.
-                    if (self._currentFormItem) {
-                        self._hideForm(self._currentFormItem, true);
-                    }
+                        }
 
-                    // If not sorted, sort.
-                    if (!self._spaceSorted) {
+                    },
 
-                        // Hide everything without an active space record.
-                        $.each(self.items, function(i, item) {
+                    'mousedown': function() {
 
-                            var item = $(item);
+                        // Get header-specific items.
+                        if (header == self.spaceHeader) {
+                            var sorted = self._spaceSorted;
+                            var otherSorted = self._timeSorted;
+                            var dataKey = 'space';
+                            var otherDataKey = 'time';
+                        } else {
+                            var sorted = self._timeSorted;
+                            var otherSorted = self._spaceSorted;
+                            var dataKey = 'time';
+                            var otherDataKey = 'space';
+                        }
 
-                            if (!item.data('space')) {
-                                item.css('display', 'none');
-                                item.next('tr.edit-form').css('display', 'none');
-                            }
+                        // If there is an active form, close it.
+                        if (self._currentFormItem) {
+                            self._hideForm(self._currentFormItem, true);
+                        }
 
-                        });
+                        // If not sorted, sort.
+                        if (!sorted) {
 
-                        self.spaceHeader.addClass('active');
-                        self._spaceSorted = true;
+                            // Hide everything without an active space record.
+                            $.each(self.items, function(i, item) {
 
-                    }
+                                var item = $(item);
 
-                    // Else, unsort.
-                    else {
-
-                        $.each(self.items, function(i, item) {
-
-                            var item = $(item);
-
-                            if (!item.data('space')) {
-                                if (!(self._timeSorted && !item.data('time'))) {
-                                    item.css('display', '');
-                                    item.next('tr.edit-form').css('display', '');
+                                if (!item.data(dataKey)) {
+                                    item.css('display', 'none');
+                                    item.next('tr.edit-form').css('display', 'none');
                                 }
-                            }
 
-                        });
+                            });
 
-                        self.spaceHeader.removeClass('active');
-                        self._spaceSorted = false;
+                            // Add active class to header.
+                            header.addClass('active');
 
-                    }
+                            // Set the tracker.
+                            if (header == self.spaceHeader) { self._spaceSorted = true; }
+                            else { self._timeSorted = true; }
 
-                    // Recalculate all top offsets.
-                    self._calculateAllTopOffsets();
+                        }
 
-                }
+                        // Else, unsort.
+                        else {
 
-            });
+                            $.each(self.items, function(i, item) {
 
-            this.timeHeader.bind({
+                                var item = $(item);
 
-                'mouseenter': function(e) {
-
-                    // Get coordinates of the header.
-                    var offset = self.timeHeader.offset();
-
-                    // Position and show dragTip.
-                    self.timeTip.css({
-                        'display': 'block',
-                        'top': offset.top + self.options.css.tooltips.time_y_offset,
-                        'left': offset.left + self.options.css.tooltips.time_x_offset
-                    });
-
-                    // Only do the gloss if the markup is loaded and registered.
-                    if (self._timeBoxes != null) {
-
-                        $.each(self._timeBoxes, function(i, box) {
-                            $(box).css('background-color', self.options.colors.orange);
-                        });
-
-                    }
-
-                },
-
-                'mouseleave': function() {
-
-                    self.timeTip.css('display', 'none');
-
-                    // Only do the gloss if the markup is loaded and registered.
-                    if (self._timeBoxes != null) {
-
-                        $.each(self._timeBoxes, function(i, box) {
-                            $(box).css('background-color', '');
-                        });
-
-                    }
-
-                },
-
-                'mousedown': function() {
-
-                    // If there is an active form, close it.
-                    if(self._currentFormItem) {
-                        self._hideForm(self._currentFormItem, true);
-                    }
-
-                    // If not sorted, sort.
-                    if (!self._timeSorted) {
-
-                        // Hide everything without an active space record.
-                        $.each(self.items, function(i, item) {
-
-                            var item = $(item);
-
-                            if (!item.data('time')) {
-                                item.css('display', 'none');
-                                item.next('tr.edit-form').css('display', 'none');
-                            }
-
-                        });
-
-                        self.timeHeader.addClass('active');
-                        self._timeSorted = true;
-
-                    }
-
-                    // Else, unsort.
-                    else {
-
-                        // Hide everything without an active space record.
-                        $.each(self.items, function(i, item) {
-
-                            var item = $(item);
-
-                            if (!item.data('time')) {
-                                if (!(self._spaceSorted && !item.data('space'))) {
-                                    item.css('display', '');
-                                    item.next('tr.edit-form').css('display', '');
+                                if (!item.data(dataKey)) {
+                                    if (!(otherSorted && !item.data(otherDataKey))) {
+                                        item.css('display', '');
+                                        item.next('tr.edit-form').css('display', '');
+                                    }
                                 }
-                            }
 
-                        });
+                            });
 
-                        self.timeHeader.removeClass('active');
-                        self._timeSorted = false;
+                            // Add active class to header.
+                            header.removeClass('active');
+
+                            // Set the tracker.
+                            if (header == self.spaceHeader) { self._spaceSorted = false; }
+                            else { self._timeSorted = false; }
+
+                        }
+
+                        // Recalculate all top offsets.
+                        self._calculateAllTopOffsets();
 
                     }
 
-                    // Recalculate all top offsets.
-                    self._calculateAllTopOffsets();
-
-                }
+                });
 
             });
 
@@ -688,6 +640,12 @@
                 // Register the item, calculate offset.
                 self.idToItem[itemId] = item;
                 self._calculateTopOffset(item);
+
+                // Store the space/time status on the DOM.
+                if (spaceCheckbox.prop('checked')) { item.data('space', true); }
+                else { item.data('space', false); }
+                if (timeCheckbox.prop('checked')) { item.data('time', true); }
+                else { item.data('time', false); }
 
                 // Disable checkbox behevior for the space/time boxes.
                 $.each([spaceCheckbox, timeCheckbox], function(i, box) {
