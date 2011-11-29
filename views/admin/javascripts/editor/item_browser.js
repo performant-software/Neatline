@@ -104,7 +104,7 @@
 
         /*
          * =================
-         * Preparatory workers and positioners.
+         * Start-up routines, workers, positioners, and calculators.
          * =================
          */
 
@@ -197,6 +197,78 @@
                 'height': this.windowHeight - this.topBarHeight - 1,
                 'top': this.topBarHeight
             });
+
+        },
+
+        /*
+         * Position the divs that provide the opacity gradient on the right
+         * edge of width-occluded item titles in the browser pane.
+         */
+        _positionTitleFaders: function() {
+
+            var self = this;
+
+            $.each(this.items, function(i, item) {
+
+                var item = $(item);
+
+                // Get the spans for the text and fader.
+                var textSpan = item.find('.item-title-text');
+                var faderSpan = item.find('.item-title-fader');
+
+                // Measure the height of the block produced by the text
+                // and the width of the entire row.
+                var titleHeight = textSpan.height();
+
+                // Position the fader.
+                faderSpan.css({
+                    'height': titleHeight
+                });
+
+            });
+
+        },
+
+        /*
+         * Given an item <tr> in the browser list, calculate its native top offset
+         * relative to the container.
+         */
+        _calculateTopOffset: function(item) {
+
+            item.data('topOffset', item.position().top);
+
+        },
+
+        /*
+         * Do the offset calculation for all current items.
+         */
+        _calculateAllTopOffsets: function() {
+
+            var self = this;
+
+            // Walk the items and do the offset calculation for each.
+            $.each(this.items, function(i, item) {
+                self._calculateTopOffset($(item));
+            });
+
+        },
+
+        /*
+         * Check or uncheck a space or time status box for an item.
+         */
+        _checkStatusBlock: function(item, spaceOrTime) {
+
+            var block = item.find('.' + spaceOrTime);
+            var checkbox = block.find('input[type="checkbox"]');
+            var newVal = !checkbox.prop('checked');
+            checkbox.prop('checked', newVal);
+
+            // Register the new status.
+            if (newVal) {
+                item.data(spaceOrTime, true);
+            } else {
+                item.data(spaceOrTime, false);
+            }
 
         },
 
@@ -559,54 +631,6 @@
         },
 
         /*
-         * Get items for the browser. On success, populate the container with
-         * the fresh markup. If it is the first request made on pageload, trigger
-         * out to deployment that the Neatline can be instantiated. This ordering
-         * is necessary to avoid a tricky suite of positioning bugs that occur
-         * if the Neatline is initialized before the full editor markup is present
-         * and occupying space on the page.
-         */
-        _getItems: function() {
-
-            var self = this;
-
-            // Get the selection tracker out of the filter widget.
-            var selected = this.itemFilterContainer.itemfilter('getSelected');
-
-            // Core ajax call to get items.
-            $.ajax({
-
-                url: 'items',
-                dataType: 'html',
-
-                data: {
-                    search: this._searchString,
-                    tags: selected.tags,
-                    types: selected.types,
-                    collections: selected.collections,
-                    all: selected.all,
-                    neatline_id: Neatline.id
-                },
-
-                success: function(data) {
-
-                    self.itemsList.html(data);
-                    self._positionDivs();
-                    self._glossItems();
-
-                    // Trigger neatlineready event.
-                    if (self._firstRequest) {
-                        self._trigger('neatlineready');
-                        self._firstRequest = false;
-                    }
-
-                }
-
-            });
-
-        },
-
-        /*
          * Once the raw markup is from the items ajax query is pushed into the
          * container, build the functionality for each item.
          */
@@ -730,100 +754,59 @@
 
         },
 
-        /*
-         * Given an item <tr> in the browser list, calculate its native top offset
-         * relative to the container.
-         */
-        _calculateTopOffset: function(item) {
-
-            item.data('topOffset', item.position().top);
-
-        },
 
         /*
-         * Do the offset calculation for all current items.
+         * =================
+         * Ajax calls.
+         * =================
          */
-        _calculateAllTopOffsets: function() {
+
+
+        /*
+         * Get items for the browser. On success, populate the container with
+         * the fresh markup. If it is the first request made on pageload, trigger
+         * out to deployment that the Neatline can be instantiated. This ordering
+         * is necessary to avoid a tricky suite of positioning bugs that occur
+         * if the Neatline is initialized before the full editor markup is present
+         * and occupying space on the page.
+         */
+        _getItems: function() {
 
             var self = this;
 
-            // Walk the items and do the offset calculation for each.
-            $.each(this.items, function(i, item) {
-                self._calculateTopOffset($(item));
+            // Get the selection tracker out of the filter widget.
+            var selected = this.itemFilterContainer.itemfilter('getSelected');
+
+            // Core ajax call to get items.
+            $.ajax({
+
+                url: 'items',
+                dataType: 'html',
+
+                data: {
+                    search: this._searchString,
+                    tags: selected.tags,
+                    types: selected.types,
+                    collections: selected.collections,
+                    all: selected.all,
+                    neatline_id: Neatline.id
+                },
+
+                success: function(data) {
+
+                    self.itemsList.html(data);
+                    self._positionDivs();
+                    self._glossItems();
+
+                    // Trigger neatlineready event.
+                    if (self._firstRequest) {
+                        self._trigger('neatlineready');
+                        self._firstRequest = false;
+                    }
+
+                }
+
             });
-
-        },
-
-        /*
-         * Check or uncheck a space or time status box for an item.
-         */
-        _checkStatusBlock: function(item, spaceOrTime) {
-
-            var block = item.find('.' + spaceOrTime);
-            var checkbox = block.find('input[type="checkbox"]');
-            var newVal = !checkbox.prop('checked');
-            checkbox.prop('checked', newVal);
-
-            // Register the new status.
-            if (newVal) {
-                item.data(spaceOrTime, true);
-            } else {
-                item.data(spaceOrTime, false);
-            }
-
-        },
-
-        /*
-         * Expand the form for a given item id.
-         */
-        showFormByItemId: function(id, scrollMap, scrollTimeline, focusItems) {
-
-            // Get the item from the id hash.
-            var item = this.idToItem[id];
-
-            // If the item is not already visible, show the form.
-            if (item != this._currentFormItem) {
-                this._showForm(this.idToItem[id], scrollMap, scrollTimeline, focusItems);
-            }
-
-        },
-
-        /*
-         * Expand and gloss an item edit form.
-         */
-        _showForm: function(item, scrollMap, scrollTimeline, focusItems) {
-
-
-
-        },
-
-        /*
-         * Collapse an item edit form and unbind all events.
-         */
-        _hideForm: function(item, immediate) {
-
-
-
-        },
-
-        /*
-         * Pluck data from form, get geocoverage data, build ajax request and
-         * send data for save.
-         */
-        _saveItemForm: function() {
-
-
-
-        },
-
-        /*
-         * Expand/contract the height of an open item form. Called after a width
-         * drag on the container div that might affect the wrapped height of the
-         * form contents.
-         */
-        _resizeForms: function() {
-
-
 
         },
 
@@ -863,35 +846,6 @@
                     }
 
                 }
-
-            });
-
-        },
-
-        /*
-         * Position the divs that provide the opacity gradient on the right
-         * edge of width-occluded item titles in the browser pane.
-         */
-        _positionTitleFaders: function() {
-
-            var self = this;
-
-            $.each(this.items, function(i, item) {
-
-                var item = $(item);
-
-                // Get the spans for the text and fader.
-                var textSpan = item.find('.item-title-text');
-                var faderSpan = item.find('.item-title-fader');
-
-                // Measure the height of the block produced by the text
-                // and the width of the entire row.
-                var titleHeight = textSpan.height();
-
-                // Position the fader.
-                faderSpan.css({
-                    'height': titleHeight
-                });
 
             });
 
@@ -938,6 +892,65 @@
             }
 
         },
+
+        /*
+         * Expand the form for a given item id.
+         */
+        showFormByItemId: function(id, scrollMap, scrollTimeline, focusItems) {
+
+            // Get the item from the id hash.
+            var item = this.idToItem[id];
+
+            // If the item is not already visible, show the form.
+            if (item != this._currentFormItem) {
+                this._showForm(this.idToItem[id], scrollMap, scrollTimeline, focusItems);
+            }
+
+        }
+
+
+
+        // **dev: shells of old methods that need to be replaced by the item_form widget.
+
+
+        /*
+         * Expand and gloss an item edit form.
+         */
+        _showForm: function(item, scrollMap, scrollTimeline, focusItems) {
+
+
+
+        },
+
+        /*
+         * Collapse an item edit form and unbind all events.
+         */
+        _hideForm: function(item, immediate) {
+
+
+
+        },
+
+        /*
+         * Pluck data from form, get geocoverage data, build ajax request and
+         * send data for save.
+         */
+        _saveItemForm: function() {
+
+
+
+        },
+
+        /*
+         * Expand/contract the height of an open item form. Called after a width
+         * drag on the container div that might affect the wrapped height of the
+         * form contents.
+         */
+        _resizeForms: function() {
+
+
+
+        }
 
     });
 
