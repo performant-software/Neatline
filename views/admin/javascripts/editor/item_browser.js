@@ -320,7 +320,7 @@
 
                     // Resize the container and header.
                     self.element.css('width', newWidth);
-                    self.itemsListHeader.css('width', newWidth - self.scrollbarWidth);
+                    self.itemsListHeader.css('width', newWidth - self._scrollbarWidth);
 
                     // Reposition the dragger.
                     self.dragHandle.css('left', newWidth);

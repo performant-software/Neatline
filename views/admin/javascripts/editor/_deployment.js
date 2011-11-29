@@ -36,7 +36,7 @@ jQuery(document).ready(function($) {
                 'timelineeventclick': function(event, obj) {
 
                     // Show the edit form.
-                    editorContainer.itemeditor('showFormByItemId', obj.itemId, true, false, true);
+                    editorContainer.itembrowser('showFormByItemId', obj.itemId, true, false, true);
 
                 },
 
@@ -44,7 +44,7 @@ jQuery(document).ready(function($) {
                 'mapfeatureclick': function(event, obj) {
 
                     // Show the edit form.
-                    editorContainer.itemeditor('showFormByItemId', obj.itemId, false, true, true);
+                    editorContainer.itembrowser('showFormByItemId', obj.itemId, false, true, true);
 
                 },
 
@@ -52,14 +52,14 @@ jQuery(document).ready(function($) {
                 'undateditemclick': function(event, obj) {
 
                     // Show the edit form.
-                    editorContainer.itemeditor('showFormByItemId', obj.itemId, true, true, obj.scrollItems);
+                    editorContainer.itembrowser('showFormByItemId', obj.itemId, true, true, obj.scrollItems);
 
                 },
 
                 // When a geometry vector is added to the map.
                 'mapfeatureadded': function() {
 
-                    editorContainer.itemeditor('markItemTitleAsUnsaved');
+                    editorContainer.itembrowser('markItemTitleAsUnsaved');
 
                 }
 
@@ -71,6 +71,7 @@ jQuery(document).ready(function($) {
         // need to be repositioned.
         'reposition': function() {
             neatlineContainer.neatline('positionDivs');
+            neatlineContainer.neatline('positionBlockMarkup');
         },
 
         // When an item form is opened and the item's vector becomes
@@ -92,7 +93,7 @@ jQuery(document).ready(function($) {
             // Fetch the coverage data from the map, push back into
             // the item editor.
             var wkts = neatlineContainer.neatline('getWktForSave');
-            editorContainer.itemeditor('setCoverageData', wkts);
+            editorContainer.itembrowser('setCoverageData', wkts);
 
         },
 

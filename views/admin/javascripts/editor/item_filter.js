@@ -110,13 +110,9 @@
             this._allTypesChecked = false;
             this._allCollectionsChecked = false;
 
-            // Measure.
+            // Measure markup, position divs, add events.
             this._getDimensions();
-
-            // Bind events to the tab.
             this._glossTab();
-
-            // Gloss the checkboxes.
             this._addCheckBoxEvents();
 
             // By default, check all the boxes.
@@ -126,11 +122,13 @@
 
         _getDimensions: function() {
 
-            // Get total height of stack.
+            // Measure the stack, top offset, and window.
             this.totalHeight = this.element.height();
-
-            // Get static css.
             this.topOffset = this.element.css('top').replace('px', '');
+            var windowHeight = this._window.height();
+
+            // Calculate the maximum height given the current size of the window.
+            this.maxHeight = windowHeight - this.topOffset - this.options.bottom_padding;
 
         },
 
@@ -138,15 +136,18 @@
 
             var self = this;
 
+            // Gloss the 'Filter Items' tab.
             this.tab.bind({
 
                 'mousedown': function() {
 
+                    // If hidden, show.
                     if (!self._isExpanded) {
                         self.show();
                         self.tabLink.css('background', self.options.colors.hover_gray);
                     }
 
+                    // If exapnded, hide.
                     else {
                         self.hide();
                         self.tabLink.css('background', self.options.colors.default_gray);
@@ -154,6 +155,7 @@
 
                 },
 
+                // Track cursor enter/exit on the tab.
                 'mouseenter': function() {
                     self._isOnTab = true;
                 },
@@ -164,6 +166,7 @@
 
             });
 
+            // Track cursor enter/exit on the stack.
             this.dropdown.bind({
 
                 'mouseenter': function() {
@@ -176,25 +179,20 @@
 
             });
 
+            // Listen for window clicks and resize.
             this._window.bind({
 
                 'mousedown': function() {
 
-                    if (!self._isOnDropdown &&
-                        !self._isOnTab &&
-                        self._isExpanded) {
-
+                    if (!self._isOnDropdown && !self._isOnTab && self._isExpanded) {
                           self.hide();
                           self.tabLink.css('background',self.options.colors.default_gray);
-
                     }
 
                 },
 
                 'resize': function() {
-
                     self.resize();
-
                 }
 
             });
@@ -205,33 +203,18 @@
 
             var self = this;
 
-            // Register the show.
-            this._isExpanded = true;
-
-            // Get the current window height.
-            var windowHeight = this._window.height();
-
-            // Calculate the maximum height given the current size
-            // of the window.
-            var maxHeight = windowHeight - this.topOffset -
-                this.options.bottom_padding;
-
-            // Calculate height and bottom border.
-            if (this.totalHeight > maxHeight) {
-                var height = maxHeight;
+            // Calculate height and set the bottom border.
+            if (this.totalHeight > this.maxHeight) {
+                this.height = this.maxHeight;
                 this.element.css('border-bottom', '1px solid #D2D2D2');
             }
 
             else {
-                var height = this.totalHeight;
+                this.height = this.totalHeight;
                 this.element.css('border-bottom', 'none');
             }
 
-            // Set the height based on the amount of space available.
-            var height = (this.totalHeight > maxHeight) ? maxHeight :
-                this.totalHeight;
-
-            // Show.
+            // Display and set height to 0.
             this.element.css({
                 'display': 'block',
                 'height': 0
@@ -239,16 +222,19 @@
 
             // Animate.
             this.element.stop().animate({
-                'height': height
+                'height': this.height
             }, this.options.fade_duration, function() {
 
                 // Add the scrollbar.
-                if (self.totalHeight > maxHeight) {
+                if (self.totalHeight > self.maxHeight) {
                     self._addScrollbar();
                     self.element.smallscroll('positionBar');
                 }
 
             });
+
+            // Register the show.
+            this._isExpanded = true;
 
         },
 
