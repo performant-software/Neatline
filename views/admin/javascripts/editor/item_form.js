@@ -43,6 +43,46 @@
                 orange: '#ffda82'
             }
 
+        },
+
+
+        /*
+         * Expand and gloss an item edit form.
+         */
+        showForm: function(item, scrollMap, scrollTimeline, focusItems) {
+
+
+
+        },
+
+        /*
+         * Collapse an item edit form and unbind all events.
+         */
+        hideForm: function(item, immediate) {
+
+
+
+        },
+
+        /*
+         * Pluck data from form, get geocoverage data, build ajax request and
+         * send data for save.
+         */
+        saveItemForm: function() {
+
+
+
+        },
+
+        /*
+         * Expand/contract the height of an open item form. Called after a width
+         * drag on the container div that might affect the wrapped height of the
+         * form contents.
+         */
+        resizeForms: function() {
+
+
+
         }
 
     });
