@@ -906,50 +906,6 @@
                 this._showForm(this.idToItem[id], scrollMap, scrollTimeline, focusItems);
             }
 
-        },
-
-
-
-        // **dev: shells of old methods that need to be replaced by the item_form widget.
-
-
-        /*
-         * Expand and gloss an item edit form.
-         */
-        _showForm: function(item, scrollMap, scrollTimeline, focusItems) {
-
-
-
-        },
-
-        /*
-         * Collapse an item edit form and unbind all events.
-         */
-        _hideForm: function(item, immediate) {
-
-
-
-        },
-
-        /*
-         * Pluck data from form, get geocoverage data, build ajax request and
-         * send data for save.
-         */
-        _saveItemForm: function() {
-
-
-
-        },
-
-        /*
-         * Expand/contract the height of an open item form. Called after a width
-         * drag on the container div that might affect the wrapped height of the
-         * form contents.
-         */
-        _resizeForms: function() {
-
-
-
         }
 
     });
