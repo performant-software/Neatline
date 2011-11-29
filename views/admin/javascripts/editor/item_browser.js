@@ -906,7 +906,7 @@
                 this._showForm(this.idToItem[id], scrollMap, scrollTimeline, focusItems);
             }
 
-        }
+        },
 
 
 

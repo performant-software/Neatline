@@ -87,6 +87,7 @@ function neatline_queueEditorAssets()
 
     queue_js('editor/item_browser', 'javascripts');
     queue_js('editor/item_filter', 'javascripts');
+    queue_js('editor/item_form', 'javascripts');
     queue_js('editor/small_scroll', 'javascripts');
     queue_js('editor/edit_geometry', 'javascripts');
     queue_js('editor/configure_layout', 'javascripts');
