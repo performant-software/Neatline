@@ -30,22 +30,6 @@
 class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
 {
 
-    // Testing parameters.
-    private static $__testParams = array(
-        'title' => 'Test Title',
-        'description' => 'Test description.',
-        'start_date' => 'April 26, 1564',
-        'start_time' => '6:00 AM',
-        'end_date' => 'April 23, 1616',
-        'end_time' => '6:00 AM',
-        'vector_color' => '#ffffff',
-        'left_percent' => 0,
-        'right_percent' => 100,
-        'geocoverage' => '[POINT(-1.0, 1.0)]',
-        'space_active' => true,
-        'time_active' => true
-    );
-
     /**
      * Instantiate the helper class, install the plugins, get the database.
      *
@@ -131,6 +115,127 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         // Time status should be true, space status unchanged.
         $this->assertEquals($record->time_active, 1);
         $this->assertEquals($record->space_active, 0);
+
+    }
+
+    /**
+     * When there is no Neatline-native data record, the /form route should output
+     * a well-formed JSON object with the correct defaults.
+     *
+     * @return void.
+     */
+    public function testFormDataJsonWithNoRecordAndNoMetadata()
+    {
+
+        // Create item, exhibit, and record.
+        $item = $this->helper->_createItem();
+        $neatline = $this->helper->_createNeatline();
+
+        // Form the POST for a space change.
+        $this->request->setMethod('GET')
+            ->setParams(array(
+                'item_id' => $item->id,
+                'neatline_id' => $neatline->id
+            )
+        );
+
+        // Hit the route and capture the response.
+        $this->dispatch('neatline-exhibits/editor/form');
+        $response = $this->getResponse()->getBody('default');
+
+        // Test the raw construction with no available DC values.
+        $this->assertEquals(
+            $response,
+            '{"title":"","description":"","start_date":"","start_time":"","end_date":"","end_time":"","left_percent":0,"right_percent":100,"vector_color":"#724e85"}'
+        );
+
+    }
+
+    /**
+     * When there is no Neatline-native data record, the /form route should output
+     * a well-formed JSON object with the correct defaults and DC texts.
+     *
+     * @return void.
+     */
+    public function testFormDataJsonWithNoRecordAndMetadata()
+    {
+
+        // Create an item and exhibit.
+        $item = $this->helper->_createItem();
+        $neatline = $this->helper->_createNeatline();
+
+        // Create title and description element texts.
+        $this->helper->_createElementText($item, 'Dublin Core', 'Title', 'Test Title');
+        $this->helper->_createElementText($item, 'Dublin Core', 'Description', 'Test Description.');
+
+        // Form the POST for a space change.
+        $this->request->setMethod('GET')
+            ->setParams(array(
+                'item_id' => $item->id,
+                'neatline_id' => $neatline->id
+            )
+        );
+
+        // Hit the route and capture the response.
+        $this->dispatch('neatline-exhibits/editor/form');
+        $response = $this->getResponse()->getBody('default');
+
+        // Check for proper construction.
+        $this->assertEquals(
+            $response,
+            '{"title":"Test Title","description":"Test Description.","start_date":"","start_time":"","end_date":"","end_time":"","left_percent":0,"right_percent":100,"vector_color":"#724e85"}'
+        );
+
+    }
+
+    /**
+     * When there is a Neatline-native data record, the /form route should output
+     * a well-formed JSON object with the correct record attributes.
+     *
+     * @return void.
+     */
+    public function testFormDataJsonWithRecord()
+    {
+
+        // Create item, exhibit, and record.
+        $item = $this->helper->_createItem();
+        $neatline = $this->helper->_createNeatline();
+
+        // Save form data with update values.
+        $this->_recordsTable->saveItemFormData(
+            $item,
+            $neatline,
+            't',
+            'd',
+            'sd',
+            'st',
+            'ed',
+            'et',
+            'vc',
+            40,
+            60,
+            'g',
+            1,
+            1
+        );
+
+        // Form the POST for a space change.
+        $this->request->setMethod('GET')
+            ->setParams(array(
+                'item_id' => $item->id,
+                'neatline_id' => $neatline->id
+            )
+        );
+
+        // Hit the route and capture the response.
+        $this->dispatch('neatline-exhibits/editor/form');
+        $response = $this->getResponse()->getBody('default');
+
+        // Test the raw construction with no available DC values.
+        $this->assertEquals(
+            $response,
+            '{"title":"t","description":"d","start_date":"sd","start_time":"st","end_date":"ed","end_time":"et","left_percent":40,"right_percent":60,"vector_color":"vc"}'
+        );
 
     }
 

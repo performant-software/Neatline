@@ -499,4 +499,33 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
 
     }
 
+    /**
+     * If is not a record for an item but the item has existing DC metadata,
+     * editFormDataJson() should default in appropriate values for the Title and
+     * Description fields.
+     *
+     * @return void.
+     */
+    public function testEditFormDataJsonDefaultDcFields()
+    {
+
+        // Create an item and exhibit.
+        $item = $this->helper->_createItem();
+        $neatline = $this->helper->_createNeatline();
+
+        // Create title and description element texts.
+        $this->helper->_createElementText($item, 'Dublin Core', 'Title', 'Test Title');
+        $this->helper->_createElementText($item, 'Dublin Core', 'Description', 'Test Description.');
+
+        // Ping the method for the json.
+        $json = $this->_recordsTable->editFormDataJson($item, $neatline);
+
+        // Check for proper construction.
+        $this->assertEquals(
+            $json,
+            '{"title":"Test Title","description":"Test Description.","start_date":"","start_time":"","end_date":"","end_time":"","left_percent":0,"right_percent":100,"vector_color":"#724e85"}'
+        );
+
+    }
+
 }
