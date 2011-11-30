@@ -51,7 +51,7 @@
          */
         showForm: function(item, scrollMap, scrollTimeline, focusItems) {
 
-
+            console.log('show');
 
         },
 
@@ -60,7 +60,7 @@
          */
         hideForm: function(item, immediate) {
 
-
+            console.log('hide');
 
         },
 
@@ -70,7 +70,7 @@
          */
         saveItemForm: function() {
 
-
+            console.log('save');
 
         },
 
@@ -79,9 +79,9 @@
          * drag on the container div that might affect the wrapped height of the
          * form contents.
          */
-        resizeForms: function() {
+        resizeForm: function() {
 
-
+            console.log('resize');
 
         }
 

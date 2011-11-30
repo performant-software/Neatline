@@ -79,6 +79,7 @@
             this.timeTip =                  $('#time-tip');
             this.spaceHeader =              $('div.col-1.col-header span.header');
             this.timeHeader =               $('div.col-2.col-header span.header');
+            this.editForm =                 $('#edit-form');
 
             // Trackers.
             this._searchString = '';
@@ -278,7 +279,7 @@
          */
         _instantiateFormManager: function() {
 
-            
+            this.editForm.itemform();
 
         },
 
@@ -577,7 +578,7 @@
 
                         // If there is an active form, close it.
                         if (self._currentFormItem) {
-                            self._hideForm(self._currentFormItem, true);
+                            self.editForm.itemform('hideForm', self._currentFormItem, true);
                         }
 
                         // If not sorted, sort.
@@ -744,12 +745,12 @@
 
                         // If the form is not expanded, do expand.
                         if (!item.data('expanded')) {
-                            self._showForm(item, true, true);
+                            self.editForm.itemform('showForm', item, true, true);
                         }
 
                         // If the form is expanded, hide.
                         else {
-                            self._hideForm(item, false);
+                            self.editForm.itemform('hideForm', item, false);
                         }
 
                     }
@@ -913,7 +914,12 @@
 
             // If the item is not already visible, show the form.
             if (item != this._currentFormItem) {
-                this._showForm(this.idToItem[id], scrollMap, scrollTimeline, focusItems);
+                this.editForm.itemform(
+                    'showForm',
+                    this.idToItem[id],
+                    scrollMap,
+                    scrollTimeline,
+                    focusItems);
             }
 
         }

@@ -25,7 +25,7 @@
  */
 ?>
 
-<div class="neatline-record-edit-form">
+<div id="edit-form" class="neatline-record-edit-form">
 
     <div class="small-scroll-content">
 
