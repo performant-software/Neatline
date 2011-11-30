@@ -58,8 +58,10 @@
          */
         showForm: function(item, scrollMap, scrollTimeline, focusItems) {
 
-            // Getters.
-            this.container = item.next('tr').find('td');
+            // Getters and setters.
+            this.item =                     item;
+            this.container =                item.next('tr').find('td');
+            this.textSpan =                 item.find('.item-title-text');
 
             // Inject the form markup.
             this.container.append(this.element);
@@ -114,7 +116,26 @@
 
          },
 
+        /*
+         * Grow title size, set color depending on whether the form has been
+         * saved or not.
+         */
          _expandTitle: function() {
+
+            // By default, fade to the default text color and weight.
+            var textColor = this.options.colors.dark_purple;
+
+            // Keep the title bold red if the form was not saved.
+            if (this.textSpan.data('changed')) {
+                textColor = this.options.colors.red;
+            }
+
+            // Highlight the item title.
+            this.textSpan.stop().animate({
+                'color': textColor,
+                'font-size': 14,
+                'font-weight': 'bold'
+            }, 100);
 
          },
 
