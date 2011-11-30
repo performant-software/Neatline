@@ -166,6 +166,23 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
 
         }
 
+        // Otherwise, try to find existing DC data.
+        else {
+
+            $data['title'] = item(
+                'Dublin Core',
+                'Title',
+                array('all' => false),
+                $item);
+
+            $data['description'] = item(
+                'Dublin Core',
+                'Description',
+                array('all' => false),
+                $item);
+
+        }
+
         // JSON-ify the array.
         return json_encode($data);
 

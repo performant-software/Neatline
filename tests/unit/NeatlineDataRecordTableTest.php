@@ -475,4 +475,28 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
 
     }
 
+    /**
+     * If there is not a record for an item, editFormDataJson() should return
+     * a well-formed empty object literal with the correct default values.
+     *
+     * @return void.
+     */
+    public function testEditFormDataJsonWithNoExistingRecord()
+    {
+
+        // Create an item and exhibit.
+        $item = $this->helper->_createItem();
+        $neatline = $this->helper->_createNeatline();
+
+        // Ping the method for the json.
+        $json = $this->_recordsTable->editFormDataJson($item, $neatline);
+
+        // Check for proper construction.
+        $this->assertEquals(
+            $json,
+            '{"title":"","description":"","start_date":"","start_time":"","end_date":"","end_time":"","left_percent":0,"right_percent":100,"vector_color":"#724e85"}'
+        );
+
+    }
+
 }

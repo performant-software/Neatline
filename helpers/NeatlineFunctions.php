@@ -749,3 +749,18 @@ function neatline_getUndatedItemsDataUrl($neatline_id)
     return WEB_ROOT . '/neatline-exhibits/' . $neatline_id . '/data/udi';
 
 }
+
+/**
+ * An emulation of item(), but to be used in model methods.
+ *
+ * @param Omeka_record $item The item to work on.
+ * @param string $elementSet The element set.
+ * @param string $elementName The element name.
+ *
+ * @return string $text The element text content.
+ */
+function neatline_getItemMetadata($item, $elementSet, $elementName)
+{
+
+
+}
