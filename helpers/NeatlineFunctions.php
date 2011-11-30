@@ -345,51 +345,6 @@ function neatline_pagination($pagination, $numberOfNeatlines)
 }
 
 /**
- * Do the markup for the delete confirm boxes.
- *
- * @return void.
- */
-function neatline_deleteConfirmMarkup()
-{
-
-?>
-
-    <div id="neatline-cover">
-
-        <div class="transparency"></div>
-
-        <div id="neatline-delete-confirm" class="modal">
-
-            <div class="modal-header"><h1>Are you sure?</h1></div>
-
-            <div class="modal-body">
-                <p>This will permanently delete the "<span class="neatline-delete-exhibit-name"></span>"
-                    exhibit. Spatial and temporal metadata added by way of the Neatline interface
-                    is stored at the level of the items themselves, and will be unaffected.</p>
-            </div>
-
-            <div class="modal-footer">
-                    <?php echo neatline_deleteConfirmForm(); ?>
-                    <?php echo neatline_buttonTo(
-                        '',
-                        'cancel-neatline',
-                        'Cancel',
-                        array('class' => 'neatline btn gray large'),
-                        'edit-neatline',
-                        array('class' => 'inline'),
-                        true, 'neatline-inline');
-                    ?>
-            </div>
-
-        </div>
-
-    </div>
-
-<?php
-
-}
-
-/**
  * Checks the supplied $tab parameter to see if it matches the
  * baseline $value; if so, return the 'current' CSS class.
  *
