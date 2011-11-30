@@ -169,17 +169,15 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
         // Otherwise, try to find existing DC data.
         else {
 
-            $data['title'] = item(
+            $data['title'] = neatline_getItemMetadata(
+                $item,
                 'Dublin Core',
-                'Title',
-                array('all' => false),
-                $item);
+                'Title');
 
-            $data['description'] = item(
+            $data['description'] = neatline_getItemMetadata(
+                $item,
                 'Dublin Core',
-                'Description',
-                array('all' => false),
-                $item);
+                'Description');
 
         }
 

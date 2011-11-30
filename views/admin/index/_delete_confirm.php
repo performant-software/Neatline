@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
 
 /**
- * Partial for "Actions" buttons in Neatline browse views.
+ * Partial for the delete confirm lightbox in the browse view.
  *
  * PHP version 5
  *

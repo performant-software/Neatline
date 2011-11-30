@@ -706,7 +706,7 @@ function neatline_getUndatedItemsDataUrl($neatline_id)
 }
 
 /**
- * An emulation of item(), but to be used in model methods.
+ * Since item() is broken.
  *
  * @param Omeka_record $item The item to work on.
  * @param string $elementSet The element set.
@@ -717,5 +717,36 @@ function neatline_getUndatedItemsDataUrl($neatline_id)
 function neatline_getItemMetadata($item, $elementSet, $elementName)
 {
 
+    // Get the database and set the default value.
+    $_db = get_db();
+    $text = '';
+
+    // Get tables.
+    $elementTable = $_db->getTable('Element');
+    $elementTextTable = $_db->getTable('ElementText');
+    $recordTypeTable = $_db->getTable('RecordType');
+
+    // Fetch the element record for the field.
+    $element = $elementTable->findByElementSetNameAndElementName($elementSet, $elementName);
+
+    // Get the record type for Item.
+    $itemTypeId = $recordTypeTable->findIdFromName('Item');
+
+    // Try to find a text.
+    $existingTexts = $elementTextTable->fetchObjects(
+
+        $elementTextTable->getSelect()->where(
+                'record_id = ' . $item->id
+                . ' AND record_type_id = ' . $itemTypeId
+                . ' AND element_id = ' . $element->id
+            )
+
+    );
+
+    if ($existingTexts != null) {
+        $text = $existingTexts[0]->text;
+    }
+
+    return $text;
 
 }
