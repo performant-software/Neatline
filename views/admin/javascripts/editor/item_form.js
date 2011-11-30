@@ -169,12 +169,45 @@
 
         /*
          * =================
+         * Ajax calls.
+         * =================
+         */
+
+
+        /*
+         * Get data to populate the form.
+         */
+        _getFormData: function() {
+
+            var self = this;
+
+            $.ajax({
+
+                url: 'form',
+                dataType: 'json',
+
+                data: {
+                    item_id: this.item.attr('recordid'),
+                    neatline_id: Neatline.id
+                },
+
+                success: function(data) {
+                    console.log(data);
+                }
+
+            });
+
+        },
+
+
+        /*
+         * =================
          * Utilities.
          * =================
          */
 
         /*
-         * 
+         * Get the native height of the form.
          */
          _measureForm: function() {
 
