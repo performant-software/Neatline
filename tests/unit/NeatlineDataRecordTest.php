@@ -209,4 +209,79 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
 
     }
 
+    /**
+     * The getTitle() method should return the record title attribute when it
+     * is not null; if it is null, try to default in the DC value.
+     *
+     * @return void.
+     */
+    public function testGetTitle()
+    {
+
+        // Create an item, exhibit, and record.
+        $item = $this->helper->_createItem();
+        $neatline = $this->helper->_createNeatline();
+        $record = new NeatlineDataRecord($item, $neatline);
+
+        // Create title and description element texts.
+        $this->helper->_createElementText($item, 'Dublin Core', 'Title', 'Test Title');
+
+        // Should return the DC value.
+        $this->assertEquals($record->getTitle(), 'Test Title');
+
+        // Should return the native value.
+        $record->title = 'Native Title';
+        $this->assertEquals($record->getTitle(), 'Native Title');
+
+    }
+
+    /**
+     * The getDescription() method should return the record description attribute when it
+     * is not null; if it is null, try to default in the DC value.
+     *
+     * @return void.
+     */
+    public function testGetDescription()
+    {
+
+        // Create an item, exhibit, and record.
+        $item = $this->helper->_createItem();
+        $neatline = $this->helper->_createNeatline();
+        $record = new NeatlineDataRecord($item, $neatline);
+
+        // Create title and description element texts.
+        $this->helper->_createElementText($item, 'Dublin Core', 'Description', 'Test description.');
+
+        // Should return the DC value.
+        $this->assertEquals($record->getDescription(), 'Test description.');
+
+        // Should return the native value.
+        $record->description = 'Native description.';
+        $this->assertEquals($record->getDescription(), 'Native description.');
+
+    }
+
+    /**
+     * The getColor() method should return the record vector color attribute when it
+     * is not null; if it is null, return the default Neatline purple.
+     *
+     * @return void.
+     */
+    public function testGetColor()
+    {
+
+        // Create an item, exhibit, and record.
+        $item = $this->helper->_createItem();
+        $neatline = $this->helper->_createNeatline();
+        $record = new NeatlineDataRecord($item, $neatline);
+
+        // Should return Neatline purple.
+        $this->assertEquals($record->getColor(), '#724e85');
+
+        // Should return the native value.
+        $record->vector_color = '#ffffff';
+        $this->assertEquals($record->getColor(), '#ffffff');
+
+    }
+
 }
