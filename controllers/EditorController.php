@@ -123,6 +123,31 @@ class Neatline_EditorController extends Omeka_Controller_Action
 
     /**
      * ~ AJAX ~
+     * Get data for an item form.
+     *
+     * @return void
+     */
+    public function formAction()
+    {
+
+        // Supress the default Zend layout-sniffer functionality.
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        // Get parameters from the ajax request.
+        $neatlineId = $this->_request->getParam('neatline_id');
+        $itemId = $this->_request->getParam('item_id');
+
+        // Fetch the Neatline exhibit record and item record.
+        $neatline = $this->_neatlinesTable->find($neatlineId);
+        $item = $this->_itemsTable->find($itemId);
+
+        // Output the JSON string.
+        echo $this->_recordsTable->editFormDataJson($item, $neatline);
+
+    }
+
+    /**
+     * ~ AJAX ~
      * Fetch items for the browser.
      *
      * @return void

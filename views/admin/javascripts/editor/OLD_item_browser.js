@@ -1042,14 +1042,14 @@
          */
         _showForm: function(item, scrollMap, scrollTimeline, focusItems) {
 
-            var self = this;
-            var immediate = false;
+            // var self = this;
+            // var immediate = false;
 
-            // If another form is currently expanded, hide it.
-            if (this._currentFormItem != null) {
-                this._hideForm(this._currentFormItem, true);
-                immediate = true;
-            }
+            // // If another form is currently expanded, hide it.
+            // if (this._currentFormItem != null) {
+            //     this._hideForm(this._currentFormItem, true);
+            //     immediate = true;
+            // }
 
             // Get child markup and parameters.
             var itemId = item.attr('recordid');
@@ -1120,14 +1120,14 @@
             // }, 300);
 
             // Change the data record.
-            item.data('expanded', true);
+            // item.data('expanded', true);
 
             // Record the expanded form.
-            this._currentFormItem = item;
+            // this._currentFormItem = item;
 
             // Bind the button actions.
-            var cancelButton = editForm.find('button[type="reset"]');
-            var saveButton = editForm.find('input[type="submit"]');
+            // var cancelButton = editForm.find('button[type="reset"]');
+            // var saveButton = editForm.find('input[type="submit"]');
 
             // On textarea resize, resize the form.
             descriptionTextarea.unbind('mouseup').bind('mouseup', function() {
@@ -1218,20 +1218,20 @@
 
             });
 
-            // Fire general item edit event to focus timeline and map
-            // if data exists for the item.
-            this._trigger('itemedit', {}, {
-                'itemId': item.attr('recordid'),
-                'scrollMap': scrollMap,
-                'scrollTimeline': scrollTimeline,
-                'focusItems': focusItems
-            });
+            // // Fire general item edit event to focus timeline and map
+            // // if data exists for the item.
+            // this._trigger('itemedit', {}, {
+            //     'itemId': item.attr('recordid'),
+            //     'scrollMap': scrollMap,
+            //     'scrollTimeline': scrollTimeline,
+            //     'focusItems': focusItems
+            // });
 
-            // Fire off the event to show the map editor controls.
-            this._trigger('mapedit', {}, {
-                'item': item,
-                'immediate': immediate
-            });
+            // // Fire off the event to show the map editor controls.
+            // this._trigger('mapedit', {}, {
+            //     'item': item,
+            //     'immediate': immediate
+            // });
 
         },
 

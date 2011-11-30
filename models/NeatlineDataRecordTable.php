@@ -124,6 +124,54 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
     }
 
     /**
+     * Construct a JSON representation of a record's fields to be used in the
+     * item edit form.
+     *
+     * @param Omeka_record $item The item record.
+     * @param Omeka_record $neatline The exhibit record.
+     *
+     * @return JSON The data.
+     */
+    public function editFormDataJson($item, $neatline)
+    {
+
+        // Shell out the object literal structure.
+        $data = array(
+            'title' => null,
+            'description' => null,
+            'start_date' => null,
+            'start_time' => null,
+            'end_date' => null,
+            'end_time' => null,
+            'left_percent' => 0,
+            'right_percent' => 100,
+            'vector_color' => '#724e85'
+        );
+
+        // Try to get the record.
+        $record = $this->getRecordByItemAndExhibit($item, $neatline);
+
+        // If the record exists, populate the data.
+        if ($record) {
+
+            $data['title'] = $record->title;
+            $data['description'] = $record->description;
+            $data['start_date'] = $record->start_date;
+            $data['start_time'] = $record->start_time;
+            $data['end_date'] = $record->end_date;
+            $data['end_time'] = $record->end_time;
+            $data['left_percent'] = $record->left_ambiguity_percentage;
+            $data['right_percent'] = $record->right_ambiguity_percentage;
+            $data['vector_color'] = $record->vector_color;
+
+        }
+
+        // JSON-ify the array.
+        return json_encode($data);
+
+    }
+
+    /**
      * Find a record for a given item and exhibit.
      *
      * @param Omeka_record $item The item record.
