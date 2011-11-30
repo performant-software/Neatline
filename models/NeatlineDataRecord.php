@@ -80,6 +80,25 @@ class NeatlineDataRecord extends Omeka_record
 
     }
 
+
+    /**
+     * Get the parent item record.
+     *
+     * @return Omeka_record $item The parent item.
+     */
+    public function getItem()
+    {
+
+        return $this->getTable('Item')->find($this->item_id);
+
+    }
+
+
+    /**
+     * Setters.
+     */
+
+
     /**
      * Set the space_active or time_active attributes. Reject non-
      * boolean parameters.
@@ -87,28 +106,29 @@ class NeatlineDataRecord extends Omeka_record
      * @param string $name 'space' or 'time'.
      * @param boolean $value The value to set.
      *
-     * @return void.
+     * @return boolean True if the set succeeds.
      */
     public function setStatus($spaceOrTime, $value)
     {
 
-        // Only change if the input is boolean.
-        if (is_bool($value)) {
-
-            // Cast the boolean to int.
-            $intValue = (int) $value;
-
-            // If space.
-            if ($spaceOrTime == 'space') {
-                $this->space_active = $intValue;
-            }
-
-            // If time.
-            else {
-                $this->time_active = $intValue;
-            }
-
+        if (!is_bool($value)) {
+            return false;
         }
+
+        // Cast the boolean to int.
+        $intValue = (int) $value;
+
+        // If space.
+        if ($spaceOrTime == 'space') {
+            $this->space_active = $intValue;
+        }
+
+        // If time.
+        else {
+            $this->time_active = $intValue;
+        }
+
+        return true;
 
     }
 
@@ -117,28 +137,72 @@ class NeatlineDataRecord extends Omeka_record
      * attributes. Only accept integers between 0 and 100, and require that
      * the right value always be greater than or equal to the left.
      *
-     * @param string $name 'space' or 'time'.
-     * @param boolean $value The value to set.
+     * @param integer $left The left-hand value.
+     * @param integer $right The right-hand value.
      *
-     * @return void.
+     * @return boolean True if the set succeeds.
      */
-    public function setPercentage($leftOrRight, $value)
+    public function setPercentages($left, $right)
     {
 
-        // Only change if the input is boolean.
-        if (is_int($value)) {
-
-            // If left.
-            if ($leftOrRight == 'left' && $value <= $this->right_ambiguity_percentage) {
-                $this->left_ambiguity_percentage = $value;
-            }
-
-            // If right.
-            else if ($leftOrRight == 'right' && $value >= $this->left_ambiguity_percentage) {
-                $this->right_ambiguity_percentage = $value;
-            }
-
+        if (!is_int($left) ||
+            !is_int($right) ||
+            !(0 <= $left && $left <= $right && $right <= 100)) {
+            return false;
         }
+
+        $this->left_ambiguity_percentage = $left;
+        $this->right_ambiguity_percentage = $right;
+
+        return true;
+
+    }
+
+
+    /**
+     * Getters.
+     */
+
+
+    /**
+     * Return title.
+     *
+     * @return string $title The title.
+     */
+    public function getTitle()
+    {
+
+        return !is_null($this->title) ?
+            $this->title :
+            neatline_getItemMetadata($this->getItem(), 'Dublin Core', 'Title');
+
+    }
+
+    /**
+     * Return description.
+     *
+     * @return string $description The description.
+     */
+    public function getDescription()
+    {
+
+        return !is_null($this->description) ?
+            $this->description :
+            neatline_getItemMetadata($this->getItem(), 'Dublin Core', 'Description');
+
+    }
+
+    /**
+     * Return vector color.
+     *
+     * @return string $color The color.
+     */
+    public function getColor()
+    {
+
+        return !is_null($this->vector_color) ?
+            $this->vector_color :
+            '#724e85';
 
     }
 

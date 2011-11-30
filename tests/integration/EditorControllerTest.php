@@ -119,82 +119,12 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
     }
 
     /**
-     * When there is no Neatline-native data record, the /form route should output
-     * a well-formed JSON object with the correct defaults.
-     *
-     * @return void.
-     */
-    public function testFormDataJsonWithNoRecordAndNoMetadata()
-    {
-
-        // Create item, exhibit, and record.
-        $item = $this->helper->_createItem();
-        $neatline = $this->helper->_createNeatline();
-
-        // Form the POST for a space change.
-        $this->request->setMethod('GET')
-            ->setParams(array(
-                'item_id' => $item->id,
-                'neatline_id' => $neatline->id
-            )
-        );
-
-        // Hit the route and capture the response.
-        $this->dispatch('neatline-exhibits/editor/form');
-        $response = $this->getResponse()->getBody('default');
-
-        // Test the raw construction with no available DC values.
-        $this->assertEquals(
-            $response,
-            '{"title":"","description":"","start_date":"","start_time":"","end_date":"","end_time":"","left_percent":0,"right_percent":100,"vector_color":"#724e85"}'
-        );
-
-    }
-
-    /**
-     * When there is no Neatline-native data record, the /form route should output
-     * a well-formed JSON object with the correct defaults and DC texts.
-     *
-     * @return void.
-     */
-    public function testFormDataJsonWithNoRecordAndMetadata()
-    {
-
-        // Create an item and exhibit.
-        $item = $this->helper->_createItem();
-        $neatline = $this->helper->_createNeatline();
-
-        // Create title and description element texts.
-        $this->helper->_createElementText($item, 'Dublin Core', 'Title', 'Test Title');
-        $this->helper->_createElementText($item, 'Dublin Core', 'Description', 'Test Description.');
-
-        // Form the POST for a space change.
-        $this->request->setMethod('GET')
-            ->setParams(array(
-                'item_id' => $item->id,
-                'neatline_id' => $neatline->id
-            )
-        );
-
-        // Hit the route and capture the response.
-        $this->dispatch('neatline-exhibits/editor/form');
-        $response = $this->getResponse()->getBody('default');
-
-        // Check for proper construction.
-        $this->assertEquals(
-            $response,
-            '{"title":"Test Title","description":"Test Description.","start_date":"","start_time":"","end_date":"","end_time":"","left_percent":0,"right_percent":100,"vector_color":"#724e85"}'
-        );
-
-    }
-
-    /**
      * When there is a Neatline-native data record, the /form route should output
      * a well-formed JSON object with the correct record attributes.
      *
      * @return void.
      */
-    public function testFormDataJsonWithRecord()
+    public function testFormDataJson()
     {
 
         // Create item, exhibit, and record.

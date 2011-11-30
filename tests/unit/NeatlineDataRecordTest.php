@@ -90,20 +90,24 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         $record = $this->helper->_createRecord();
 
         // Test true.
-        $record->setStatus('space', true);
+        $success = $record->setStatus('space', true);
         $this->assertEquals($record->space_active, 1);
+        $this->assertTrue($success);
 
         // Test false.
-        $record->setStatus('space', false);
+        $success = $record->setStatus('space', false);
         $this->assertEquals($record->space_active, 0);
+        $this->assertTrue($success);
 
         // Test true.
-        $record->setStatus('time', true);
+        $success = $record->setStatus('time', true);
         $this->assertEquals($record->time_active, 1);
+        $this->assertTrue($success);
 
         // Test false.
-        $record->setStatus('time', false);
+        $success = $record->setStatus('time', false);
         $this->assertEquals($record->time_active, 0);
+        $this->assertTrue($success);
 
     }
 
@@ -121,12 +125,14 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         $record = $this->helper->_createRecord();
 
         // Test invalid space.
-        $record->setStatus('space', 'notBoolean');
+        $failure = $record->setStatus('space', 'notBoolean');
         $this->assertEquals($record->space_active, 0);
+        $this->assertFalse($failure);
 
         // Test invalid time.
-        $record->setStatus('time', 'notBoolean');
+        $failure = $record->setStatus('time', 'notBoolean');
         $this->assertEquals($record->time_active, 0);
+        $this->assertFalse($failure);
 
         // Create a record and set values to true.
         $record = $this->helper->_createRecord();
@@ -134,12 +140,72 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         $record->time_active = 1;
 
         // Test invalid space reverts to already-set true.
-        $record->setStatus('space', 'notBoolean');
+        $failure = $record->setStatus('space', 'notBoolean');
         $this->assertEquals($record->space_active, 1);
+        $this->assertFalse($failure);
 
         // Test invalid time reverts to already-set true.
-        $record->setStatus('time', 'notBoolean');
+        $failure = $record->setStatus('time', 'notBoolean');
         $this->assertEquals($record->time_active, 1);
+        $this->assertFalse($failure);
+
+    }
+
+    /**
+     * The setPercentages() method should set the percentage values when the
+     * left does not exceed the right and both values are between 0 and 100.
+     *
+     * @return void.
+     */
+    public function testSetPercentagesWithValidData()
+    {
+
+        // Create a record.
+        $record = $this->helper->_createRecord();
+
+        // Set values.
+        $success = $record->setPercentages(50, 60);
+        $this->assertEquals($record->left_ambiguity_percentage, 50);
+        $this->assertEquals($record->right_ambiguity_percentage, 60);
+        $this->assertTrue($success);
+
+    }
+
+    /**
+     * The setPercentages() method should disallow values when the left does
+     * exceeds the right or one of the values is less than 0 greater than 100.
+     *
+     * @return void.
+     */
+    public function testSetPercentagesWithInvalidData()
+    {
+
+        // Create a record.
+        $record = $this->helper->_createRecord();
+
+        // Try to make the left greater than the right.
+        $failure = $record->setPercentages(90, 70);
+        $this->assertEquals($record->left_ambiguity_percentage, 0);
+        $this->assertEquals($record->right_ambiguity_percentage, 100);
+        $this->assertFalse($failure);
+
+        // Try to make one of the values too small.
+        $failure = $record->setPercentages(-10, 90);
+        $this->assertEquals($record->left_ambiguity_percentage, 0);
+        $this->assertEquals($record->right_ambiguity_percentage, 100);
+        $this->assertFalse($failure);
+
+        // Try to make one of the values too large.
+        $failure = $record->setPercentages(10, 110);
+        $this->assertEquals($record->left_ambiguity_percentage, 0);
+        $this->assertEquals($record->right_ambiguity_percentage, 100);
+        $this->assertFalse($failure);
+
+        // Try to make the values non-integer.
+        $failure = $record->setPercentages('notInt', 100);
+        $this->assertEquals($record->left_ambiguity_percentage, 0);
+        $this->assertEquals($record->right_ambiguity_percentage, 100);
+        $this->assertFalse($failure);
 
     }
 

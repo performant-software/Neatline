@@ -90,8 +90,7 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
         $record->setStatus('time', $timeStatus);
 
         // Set the ambiguity percentages.
-        $record->setPercentage('left', $leftPercentage);
-        $record->setPercentage('right', $rightPercentage);
+        $record->setPercentages($leftPercentage, $rightPercentage);
 
         // Commit.
         $record->save();
@@ -156,22 +155,10 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
         // If the record exists, populate the data.
         if ($record) {
 
-            $title = !is_null($record->title) ?
-                $record->title :
-                neatline_getItemMetadata($item, 'Dublin Core', 'Title');
-
-            $description = !is_null($record->description) ?
-                $record->description :
-                neatline_getItemMetadata($item, 'Dublin Core', 'Description');
-
-            $color = !is_null($record->vector_color) ?
-                $record->vector_color :
-                '#724e85';
-
             // Set the array values.
-            $data['title'] =            $title;
-            $data['description'] =      $description;
-            $data['vector_color'] =     $color;
+            $data['title'] =            $record->getTitle();
+            $data['description'] =      $record->getDescription();
+            $data['vector_color'] =     $record->getColor();
             $data['start_date'] =       (string) $record->start_date;
             $data['start_time'] =       (string) $record->start_time;
             $data['end_date'] =         (string) $record->end_date;
