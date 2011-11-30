@@ -45,6 +45,21 @@
 
         },
 
+        /*
+         * Get and measure markup.
+         */
+        _create: function() {
+
+            // Getters.
+            this.form =                     this.element.find('form');
+            this.cancelButton =             this.form.find('button[type="reset"]');
+            this.saveButton =               this.form.find('input[type="submit"]');
+
+            // Measure the native height of the form.
+            this._measureForm();
+
+        },
+
 
         /*
          * =================
@@ -60,8 +75,8 @@
 
             // Getters and setters.
             this.item =                     item;
-            this.container =                item.next('tr').find('td');
-            this.textSpan =                 item.find('.item-title-text');
+            this.container =                this.item.next('tr').find('td');
+            this.textSpan =                 this.item.find('.item-title-text');
 
             // Inject the form markup.
             this.container.append(this.element);
@@ -69,7 +84,6 @@
             // DOM touches.
             this._showContainer();
             this._expandTitle();
-            this._scrollItemList();
             this._addFormEvents();
 
         },
@@ -114,6 +128,15 @@
 
          _showContainer: function() {
 
+            // Display the form and zero the height.
+            this.container.css('display', 'table-cell');
+            this.form.css('height', 0);
+
+            // Animate up the height.
+            this.form.animate({
+                'height': this._nativeHeight
+            }, 300);
+
          },
 
         /*
@@ -139,13 +162,25 @@
 
          },
 
-         _scrollItemList: function() {
-
-         },
-
          _addFormEvents: function() {
 
          },
+
+
+        /*
+         * =================
+         * Utilities.
+         * =================
+         */
+
+        /*
+         * 
+         */
+         _measureForm: function() {
+
+            this._nativeHeight = this.form.height();
+
+         }
 
     });
 

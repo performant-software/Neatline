@@ -1065,59 +1065,59 @@
             var colorPickerInput = editForm.find('.' + this.options.color_picker_input_class);
             var dateAmbiguityContainer = editForm.find('.' + this.options.date_ambiguity_container_class);
 
-            // Calculate the native height of the form.
-            var cloneFormTd = editFormTd
-                .clone()
-                .css({
-                    'top': -1000,
-                    'left': -1000,
-                    'display': 'table-cell'
-                })
-                .appendTo(this._body);
+            // // Calculate the native height of the form.
+            // var cloneFormTd = editFormTd
+            //     .clone()
+            //     .css({
+            //         'top': -1000,
+            //         'left': -1000,
+            //         'display': 'table-cell'
+            //     })
+            //     .appendTo(this._body);
 
-            var cloneForm = cloneFormTd.find('form');
-            var actionsDiv = cloneFormTd.find('div.actions');
-            cloneForm.css({
-                'height': 'auto',
-                'width': this.containerWidth
-            });
+            // var cloneForm = cloneFormTd.find('form');
+            // var actionsDiv = cloneFormTd.find('div.actions');
+            // cloneForm.css({
+            //     'height': 'auto',
+            //     'width': this.containerWidth
+            // });
 
-            // Register the height of the cloned form, delete it.
-            var formHeight = cloneForm.height();
-            cloneFormTd.remove();
+            // // Register the height of the cloned form, delete it.
+            // var formHeight = cloneForm.height();
+            // cloneFormTd.remove();
 
             // Measure the height of the item editor column.
             var editorHeight = this.element.height() - this.options.container_top_margin;
 
-            // By default, fade to the default text color and weight.
-            var textColor = this.options.colors.text_default;
+            // // By default, fade to the default text color and weight.
+            // var textColor = this.options.colors.text_default;
 
-            // Keep the title bold red if the form was not saved.
-            if (textSpan.data('changed')) {
-                textColor = this.options.colors.unchanged_red;
-            }
+            // // Keep the title bold red if the form was not saved.
+            // if (textSpan.data('changed')) {
+            //     textColor = this.options.colors.unchanged_red;
+            // }
 
-            // Highlight the item title.
-            textSpan.stop().animate({
-                'color': textColor,
-                'font-size': 14,
-                'font-weight': 'bold'
-            }, 100);
+            // // Highlight the item title.
+            // textSpan.stop().animate({
+            //     'color': textColor,
+            //     'font-size': 14,
+            //     'font-weight': 'bold'
+            // }, 100);
 
-            // Display the form.
-            editFormTd.css({
-                'display': 'table-cell'
-            });
+            // // Display the form.
+            // editFormTd.css({
+            //     'display': 'table-cell'
+            // });
 
-            // Animate up the height.
-            editForm.animate({
-                'height': formHeight
-            }, 300);
+            // // Animate up the height.
+            // editForm.animate({
+            //     'height': formHeight
+            // }, 300);
 
-            // Position at the top of the frame.
-            this.element.animate({
-                'scrollTop': item.data('topOffset') - this.options.container_top_margin + 1
-            }, 300);
+            // // Position at the top of the frame.
+            // this.element.animate({
+            //     'scrollTop': item.data('topOffset') - this.options.container_top_margin + 1
+            // }, 300);
 
             // Change the data record.
             item.data('expanded', true);

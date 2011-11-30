@@ -784,6 +784,12 @@
                 immediate = true;
             }
 
+            // Position at the top of the frame. Bumps up the scroll position by
+            // 1px to get rid of unattractive border doubling at the top of the frame.
+            this.element.animate({
+                'scrollTop': item.data('topOffset') - this.options.css.top_margin + 1
+            }, 300);
+
             // Display the form.
             this.editForm.itemform(
                 'showForm',
@@ -805,6 +811,10 @@
                 'item': item,
                 'immediate': immediate
             });
+
+            // Update trackers.
+            item.data('expanded', true);
+            this._currentFormItem = item;
 
          },
 

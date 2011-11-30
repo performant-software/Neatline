@@ -257,7 +257,6 @@ tr.edit-form td {
 .neatline-record-edit-form form {
     padding-left: 10px;
     overflow: hidden;
-    height: 0;
 }
 
 .neatline-record-edit-form div.actions {
