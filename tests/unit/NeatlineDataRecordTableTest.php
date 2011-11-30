@@ -528,4 +528,51 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
 
     }
 
+    /**
+     * If is a record for an item but the record has null values for fields
+     * that map to DC elements, the DC elements shouuld be defaulted in regardless.
+     *
+     * @return void.
+     */
+    public function testEditFormDataJsonTitleAndDescriptionOverwrites()
+    {
+
+        // Create an item and exhibit.
+        $item = $this->helper->_createItem();
+        $neatline = $this->helper->_createNeatline();
+
+        // Commit a status change, leave everything else null.
+        $this->_recordsTable->saveItemFormData(
+            $item,
+            $neatline,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            1
+        );
+
+        // Create title and description element texts.
+        $this->helper->_createElementText($item, 'Dublin Core', 'Title', 'Test Title');
+        $this->helper->_createElementText($item, 'Dublin Core', 'Description', 'Test Description.');
+
+        // Ping the method for the json.
+        $json = $this->_recordsTable->editFormDataJson($item, $neatline);
+
+        // The title, description, and color fields should still be intelligently
+        // populated with possible DC values if there is a null value in the record.
+        $this->assertEquals(
+            $json,
+            '{"title":"Test Title","description":"Test Description.","start_date":"","start_time":"","end_date":"","end_time":"","left_percent":0,"right_percent":100,"vector_color":"#724e85"}'
+        );
+
+    }
+
 }

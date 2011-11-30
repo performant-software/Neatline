@@ -81,8 +81,8 @@ class NeatlineDataRecord extends Omeka_record
     }
 
     /**
-     * Set a property if the passed value is not empty/null/false, as
-     * defined by the $emptyValue parameter.
+     * Set the space_active or time_active attributes. Reject non-
+     * boolean parameters.
      *
      * @param string $name 'space' or 'time'.
      * @param boolean $value The value to set.
@@ -106,6 +106,36 @@ class NeatlineDataRecord extends Omeka_record
             // If time.
             else {
                 $this->time_active = $intValue;
+            }
+
+        }
+
+    }
+
+    /**
+     * Set the left_ambiguity_percentage or right_ambiguity_percentage
+     * attributes. Only accept integers between 0 and 100, and require that
+     * the right value always be greater than or equal to the left.
+     *
+     * @param string $name 'space' or 'time'.
+     * @param boolean $value The value to set.
+     *
+     * @return void.
+     */
+    public function setPercentage($leftOrRight, $value)
+    {
+
+        // Only change if the input is boolean.
+        if (is_int($value)) {
+
+            // If left.
+            if ($leftOrRight == 'left' && $value <= $this->right_ambiguity_percentage) {
+                $this->left_ambiguity_percentage = $value;
+            }
+
+            // If right.
+            else if ($leftOrRight == 'right' && $value >= $this->left_ambiguity_percentage) {
+                $this->right_ambiguity_percentage = $value;
             }
 
         }

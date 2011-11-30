@@ -83,13 +83,15 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
         $record->end_date = $endDate;
         $record->end_time = $endTime;
         $record->vector_color = $vectorColor;
-        $record->left_ambiguity_percentage = $leftPercentage;
-        $record->right_ambiguity_percentage = $rightPercentage;
         $record->geocoverage = $geoCoverage;
 
         // Set status trackers.
         $record->setStatus('space', $spaceStatus);
         $record->setStatus('time', $timeStatus);
+
+        // Set the ambiguity percentages.
+        $record->setPercentage('left', $leftPercentage);
+        $record->setPercentage('right', $rightPercentage);
 
         // Commit.
         $record->save();
@@ -154,15 +156,28 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
         // If the record exists, populate the data.
         if ($record) {
 
-            $data['title'] = $record->title;
-            $data['description'] = $record->description;
-            $data['start_date'] = $record->start_date;
-            $data['start_time'] = $record->start_time;
-            $data['end_date'] = $record->end_date;
-            $data['end_time'] = $record->end_time;
-            $data['left_percent'] = $record->left_ambiguity_percentage;
-            $data['right_percent'] = $record->right_ambiguity_percentage;
-            $data['vector_color'] = $record->vector_color;
+            $title = !is_null($record->title) ?
+                $record->title :
+                neatline_getItemMetadata($item, 'Dublin Core', 'Title');
+
+            $description = !is_null($record->description) ?
+                $record->description :
+                neatline_getItemMetadata($item, 'Dublin Core', 'Description');
+
+            $color = !is_null($record->vector_color) ?
+                $record->vector_color :
+                '#724e85';
+
+            // Set the array values.
+            $data['title'] =            $title;
+            $data['description'] =      $description;
+            $data['vector_color'] =     $color;
+            $data['start_date'] =       (string) $record->start_date;
+            $data['start_time'] =       (string) $record->start_time;
+            $data['end_date'] =         (string) $record->end_date;
+            $data['end_time'] =         (string) $record->end_time;
+            $data['left_percent'] =     $record->left_ambiguity_percentage;
+            $data['right_percent'] =    $record->right_ambiguity_percentage;
 
         }
 

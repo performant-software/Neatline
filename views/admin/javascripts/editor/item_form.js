@@ -54,6 +54,12 @@
             this.form =                     this.element.find('form');
             this.cancelButton =             this.form.find('button[type="reset"]');
             this.saveButton =               this.form.find('input[type="submit"]');
+            this.title =                    this.form.find('input[name="title"]');
+            this.description =              this.form.find('textarea[name="description"]');
+            this.startDate =                this.form.find('input[name="start-date-date"]');
+            this.startTime =                this.form.find('input[name="start-date-time"]');
+            this.endDate =                  this.form.find('input[name="end-date-date"]');
+            this.endTime =                  this.form.find('input[name="end-date-time"]');
 
             // Measure the native height of the form.
             this._measureForm();
@@ -82,6 +88,7 @@
             this.container.append(this.element);
 
             // DOM touches.
+            this._getFormData();
             this._showContainer();
             this._expandTitle();
             this._addFormEvents();
@@ -162,6 +169,16 @@
 
          },
 
+        /*
+         * Push the form data into the input fields.
+         */
+         _applyData: function(data) {
+
+            this.title.attr('value', data.title);
+            this.description.text(data.description);
+
+         },
+
          _addFormEvents: function() {
 
          },
@@ -192,7 +209,10 @@
                 },
 
                 success: function(data) {
-                    console.log(data);
+
+                    // Push the data into the form.
+                    self._applyData(data);
+
                 }
 
             });
