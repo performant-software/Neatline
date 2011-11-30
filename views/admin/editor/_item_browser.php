@@ -54,4 +54,6 @@
 
     <div id="items-list-container"></div>
 
+    <?php echo $this->partial('editor/_edit_form.php'); ?>
+
 </div>

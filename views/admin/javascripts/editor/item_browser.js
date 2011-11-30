@@ -98,6 +98,7 @@
             this._glossSearchBox();
             this._glossColumnHeaders();
             this._glossItemFilter();
+            this._instantiateFormManager();
 
         },
 
@@ -269,6 +270,15 @@
             } else {
                 item.data(spaceOrTime, false);
             }
+
+        },
+
+        /*
+         * Initialize the form manager widget and define callbacks.
+         */
+        _instantiateFormManager: function() {
+
+            
 
         },
 
