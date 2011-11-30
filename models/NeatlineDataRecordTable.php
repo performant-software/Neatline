@@ -137,12 +137,12 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
 
         // Shell out the object literal structure.
         $data = array(
-            'title' => null,
-            'description' => null,
-            'start_date' => null,
-            'start_time' => null,
-            'end_date' => null,
-            'end_time' => null,
+            'title' => '',
+            'description' => '',
+            'start_date' => '',
+            'start_time' => '',
+            'end_date' => '',
+            'end_time' => '',
             'left_percent' => 0,
             'right_percent' => 100,
             'vector_color' => '#724e85'
