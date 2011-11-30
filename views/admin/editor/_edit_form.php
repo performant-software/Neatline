@@ -27,8 +27,6 @@
 
 <div id="edit-form" class="neatline-record-edit-form">
 
-    <div class="small-scroll-content">
-
     <form class="form-stacked">
 
         <fieldset>
@@ -101,10 +99,6 @@
 
         </fieldset>
 
-        <recordid><?php echo $item->id; ?></recordid>
-
     </form>
-
-    </div>
 
 </div>

@@ -47,11 +47,28 @@
 
 
         /*
+         * =================
+         * Public methods.
+         * =================
+         */
+
+
+        /*
          * Expand and gloss an item edit form.
          */
         showForm: function(item, scrollMap, scrollTimeline, focusItems) {
 
-            console.log('show');
+            // Getters.
+            this.container = item.next('tr').find('td');
+
+            // Inject the form markup.
+            this.container.append(this.element);
+
+            // DOM touches.
+            this._showContainer();
+            this._expandTitle();
+            this._scrollItemList();
+            this._addFormEvents();
 
         },
 
@@ -83,7 +100,31 @@
 
             console.log('resize');
 
-        }
+        },
+
+
+        /*
+         * =================
+         * DOM touches.
+         * =================
+         */
+
+
+         _showContainer: function() {
+
+         },
+
+         _expandTitle: function() {
+
+         },
+
+         _scrollItemList: function() {
+
+         },
+
+         _addFormEvents: function() {
+
+         },
 
     });
 

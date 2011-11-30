@@ -578,7 +578,7 @@
 
                         // If there is an active form, close it.
                         if (self._currentFormItem) {
-                            self.editForm.itemform('hideForm', self._currentFormItem, true);
+                            self._hideForm(self._currentFormItem, true);
                         }
 
                         // If not sorted, sort.
@@ -745,12 +745,12 @@
 
                         // If the form is not expanded, do expand.
                         if (!item.data('expanded')) {
-                            self.editForm.itemform('showForm', item, true, true);
+                            self._showForm(item, true, true);
                         }
 
                         // If the form is expanded, hide.
                         else {
-                            self.editForm.itemform('hideForm', item, false);
+                            self._hideForm(item, false);
                         }
 
                     }
@@ -764,6 +764,55 @@
             this._timeBoxes = this.items.find('.time');
 
         },
+
+
+        /*
+         * =================
+         * Form interface methods.
+         * =================
+         */
+
+
+         _showForm: function(item, scrollMap, scrollTimeline, focusItems) {
+
+            var self = this;
+            var immediate = false;
+
+            // If another form is currently expanded, hide it.
+            if (this._currentFormItem != null) {
+                this._hideForm(this._currentFormItem, true);
+                immediate = true;
+            }
+
+            // Display the form.
+            this.editForm.itemform(
+                'showForm',
+                item,
+                scrollMap,
+                scrollTimeline,
+                focusItems);
+
+            // Fire events to focus the Neatline blocks.
+            this._trigger('itemedit', {}, {
+                'itemId': item.attr('recordid'),
+                'scrollMap': scrollMap,
+                'scrollTimeline': scrollTimeline,
+                'focusItems': focusItems
+            });
+
+            // Fire event to show the map controls.
+            this._trigger('mapedit', {}, {
+                'item': item,
+                'immediate': immediate
+            });
+
+         },
+
+         _hideForm: function(item, immediate) {
+
+
+
+         },
 
 
         /*
@@ -914,12 +963,7 @@
 
             // If the item is not already visible, show the form.
             if (item != this._currentFormItem) {
-                this.editForm.itemform(
-                    'showForm',
-                    this.idToItem[id],
-                    scrollMap,
-                    scrollTimeline,
-                    focusItems);
+                this._showForm(this.idToItem[id], scrollMap, scrollTimeline, focusItems);
             }
 
         }
