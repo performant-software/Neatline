@@ -251,7 +251,8 @@ tr.edit-form td {
     display: none;
 }
 
-.neatline-record-edit-form {
+#edit-form {
+    visibility: hidden;
 }
 
 .neatline-record-edit-form form {

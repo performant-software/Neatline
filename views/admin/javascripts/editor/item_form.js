@@ -137,6 +137,7 @@
 
             // Display the form and zero the height.
             this.container.css('display', 'table-cell');
+            this.element.css('visibility', 'visible');
             this.form.css('height', 0);
 
             // Animate up the height.
