@@ -218,6 +218,9 @@
                 'height': this._nativeHeight
             }, this.options.css.form_duration);
 
+            // Rebuilt the gradient builder.
+            this.ambiguity.gradientbuilder('refresh');
+
         },
 
 
@@ -326,16 +329,16 @@
             this.endTime.attr('value', data.end_time);
             this.description.text(data.description);
 
-            // Set the gradient builder color.
-            this.ambiguity.gradientbuilder(
-                'setColor',
-                data.vector_color);
-
             // Reposition the draggers.
             this.ambiguity.gradientbuilder(
                 'positionMarkers',
                 data.left_percent,
                 data.right_percent);
+
+            // Set the gradient builder color.
+            this.ambiguity.gradientbuilder(
+                'setColor',
+                data.vector_color);
 
             // Push the new color onto the picker. Need to set the global
             // _opened tracker to circumvent miniColors' automatic firing of

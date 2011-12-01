@@ -468,7 +468,7 @@
 
                     // Resize the expanded edit forms.
                     if (self._currentFormItem != null) {
-                        self._resizeForms();
+                        self.editForm.itemform('resizeForm');
                     }
 
                 }

@@ -52,7 +52,7 @@
             this.rightPercent = parseInt(this.rightPercentInput.val());
 
             // Measure markup.
-            this._getDimensions();
+            this.getDimensions();
 
             // Position the stop markers.
             this.positionMarkers(this.leftPercent, this.rightPercent);
@@ -68,7 +68,7 @@
         /*
          * Get the size and position of the editor block.
          */
-        _getDimensions: function() {
+        getDimensions: function() {
 
             this.editorWidth = this.editor.width();
             this.editorHeight = this.editor.height();
@@ -123,6 +123,17 @@
 
             // Change the colors of the stop markers.
             this.swatches.css('background', color);
+
+        },
+
+        /*
+         * Recalculate the dimensions, push updated css.
+         */
+        refresh: function() {
+
+            this.getDimensions();
+            this.positionMarkers(this.leftPercent, this.rightPercent);
+            this.setColor(this.color);
 
         },
 
