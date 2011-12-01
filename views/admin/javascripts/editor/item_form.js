@@ -28,7 +28,7 @@
 
             // CSS constants.
             css: {
-
+                form_duration: 300
             },
 
             // Hexes.
@@ -100,7 +100,9 @@
          */
         hideForm: function(item, immediate) {
 
-            console.log('hide');
+            // DOM touches.
+            this._hideContainer(immediate);
+            this._contractTitle();
 
         },
 
@@ -133,7 +135,10 @@
          */
 
 
-         _showContainer: function() {
+        /*
+         * Expand the item form.
+         */
+        _showContainer: function() {
 
             // Display the form and zero the height.
             this.container.css('display', 'table-cell');
@@ -143,7 +148,24 @@
             // Animate up the height.
             this.form.animate({
                 'height': this._nativeHeight
-            }, 300);
+            }, this.options.css.form_duration);
+
+         },
+
+        /*
+         * Contract the item form.
+         */
+        _hideContainer: function(immediate) {
+
+            var self = this;
+
+            // Get the duration.
+            var duration = immediate ? 0 : this.options.css.form_duration;
+
+            // Animate down.
+            this.form.animate({ 'height': 0 }, duration, function() {
+                self.container.css('display', 'none');
+            });
 
          },
 
@@ -151,7 +173,7 @@
          * Grow title size, set color depending on whether the form has been
          * saved or not.
          */
-         _expandTitle: function() {
+        _expandTitle: function() {
 
             // By default, fade to the default text color and weight.
             var textColor = this.options.colors.dark_purple;
@@ -171,6 +193,31 @@
          },
 
         /*
+         * Shrink title size, set color depending on whether the form has been
+         * saved or not.
+         */
+        _contractTitle: function() {
+
+            // By default, fade to the default text color and weight.
+            var textColor = this.options.colors.text;
+            var textWeight = 'normal';
+
+            // Keep the title bold red if the form was not saved.
+            if (this.textSpan.data('changed')) {
+                textColor = this.options.colors.red;
+                textWeight = 'bold';
+            }
+
+            // Highlight the item title.
+            this.textSpan.stop().animate({
+                'color': textColor,
+                'font-size': 12,
+                'font-weight': textWeight
+            }, 100);
+
+         },
+
+        /*
          * Push the form data into the input fields.
          */
          _applyData: function(data) {
@@ -180,7 +227,12 @@
 
          },
 
-         _addFormEvents: function() {
+        /*
+         * Add event listeners to the form elements.
+         */
+        _addFormEvents: function() {
+
+
 
          },
 
@@ -230,7 +282,7 @@
         /*
          * Get the native height of the form.
          */
-         _measureForm: function() {
+        _measureForm: function() {
 
             this._nativeHeight = this.form.height();
 

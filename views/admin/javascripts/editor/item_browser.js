@@ -820,7 +820,15 @@
 
          _hideForm: function(item, immediate) {
 
+            // Hide the form.
+            this.editForm.itemform(
+                'hideForm',
+                item,
+                immediate);
 
+            // Update trackers.
+            item.data('expanded', false);
+            this._currentFormItem = null;
 
          },
 
