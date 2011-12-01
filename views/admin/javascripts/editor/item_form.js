@@ -71,7 +71,6 @@
             this.ambiguity =                this.form.find('.date-ambiguity-container');
 
             // Trackers.
-            this._unsaved = false;
             this._db = TAFFY();
 
             // Preparatory routines.
@@ -110,7 +109,6 @@
                     // Trigger out, change gradient.
                     if (!self._opened) {
                         self._trigger('formEdit');
-                        self._unsaved = true;
                     }
 
                     self._trigger('coloredit', {}, { 'color': hex });
@@ -123,7 +121,6 @@
             // On keydown in any of the text fields, trigger change event.
             this.textInputs.bind('keydown', function() {
                 self._trigger('formEdit');
-                self._unsaved = true;
             });
 
             // Close button.
@@ -179,6 +176,7 @@
             // Getters and setters.
             this.item =                     item;
             this.itemId =                   item.attr('recordid');
+            this.itemTitleText =            item.find('.item-title-text');
             this.container =                this.item.next('tr').find('td');
             this.textSpan =                 this.item.find('.item-title-text');
 
@@ -198,9 +196,28 @@
         hideForm: function(item, immediate) {
 
             // If the form is unsaved, store the changed data.
-            if (this._unsaved) {
-                this._data['recordid'] = this.itemId;
-                this._db.insert(this._data);
+            if (this.itemTitleText.data('changed')) {
+
+                // Grab data out of the form, try to find an existing record.
+                var data = this._getData();
+                var record = this._db({recordid: this.itemId});
+
+                // Check for an existing record.
+                if (record.count()) {
+                    record.update({
+                        recordid: this.itemId,
+                        data: data
+                    });
+                }
+
+                // If no record, create one.
+                else {
+                    this._db.insert({
+                        recordid: this.itemId,
+                        data: data
+                    });
+                }
+
             }
 
             // DOM touches.
@@ -335,15 +352,15 @@
         _applyData: function() {
 
             // Populate inputs.
-            this.title.attr('value', this._data.title);
-            this.color.attr('value', this._data.vector_color);
-            this.leftPercent.attr('value', this._data.left_percent);
-            this.rightPercent.attr('value', this._data.right_percent);
-            this.startDate.attr('value', this._data.start_date);
-            this.startTime.attr('value', this._data.start_time);
-            this.endDate.attr('value', this._data.end_date);
-            this.endTime.attr('value', this._data.end_time);
-            this.description.text(this._data.description);
+            this.title.val(this._data.title);
+            this.color.val(this._data.vector_color);
+            this.leftPercent.val(this._data.left_percent);
+            this.rightPercent.val(this._data.right_percent);
+            this.startDate.val(this._data.start_date);
+            this.startTime.val(this._data.start_time);
+            this.endDate.val(this._data.end_date);
+            this.endTime.val(this._data.end_time);
+            this.description.val(this._data.description);
 
             // Reposition the draggers.
             this.ambiguity.gradientbuilder(
@@ -362,6 +379,26 @@
             this._opened = true;
             this.color.miniColors('value', this._data.vector_color);
             this._opened = false;
+
+         },
+
+        /*
+         * Get form data.
+         */
+        _getData: function() {
+
+            var data = {};
+            data['title'] = this.title.val();
+            data['left_percent'] = parseInt(this.leftPercent.val());
+            data['right_percent'] = parseInt(this.rightPercent.val());
+            data['start_date'] = this.startDate.val();
+            data['start_time'] = this.startTime.val();
+            data['end_date'] = this.endDate.val();
+            data['end_time'] = this.endTime.val();
+            data['description'] = this.description.val();
+            data['vector_color'] = this.color.val();
+
+            return data;
 
          },
 
@@ -385,9 +422,9 @@
 
             // If there is unsaved data, reapply it.
             if (unsavedData) {
-                console.log(unsavedData);
-                this._data = unsavedData;
+                this._data = unsavedData.data;
                 this._applyData();
+                console.log(unsavedData);
             }
 
             // Otherwise, hit the server for data.
@@ -406,9 +443,9 @@
                     success: function(data) {
 
                         // Push the data into the form.
-                        console.log(data);
                         self._data = data;
                         self._applyData();
+                        console.log(data);
 
                     }
 

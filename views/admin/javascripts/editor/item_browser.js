@@ -293,6 +293,7 @@
                 'ambiguityChange': function(event, obj) {
 
                     var itemId = self._currentFormItem.attr('recordid');
+                    self.markItemTitleAsUnsaved();
 
                     self._trigger('ambiguityChange', {}, {
                         'itemId': itemId,
