@@ -26,19 +26,9 @@
 
         options: {
 
-            // Markup hooks.
-            markup: {
-                editor_class: 'date-ambiguity-editor',
-                color_swatch_class: 'color-swatch',
-                left_marker_class: 'stop-marker.left',
-                right_marker_class: 'stop-marker.right',
-                left_percent_input_name: 'left-ambiguity-percentage',
-                right_percent_input_name: 'right-ambiguity-percentage'
-            },
-
             // CSS constants.
             css: {
-                stop_marker_width_correction: 5
+                width_offset: 5
             }
 
         },
@@ -49,13 +39,13 @@
         _create: function() {
 
             // Getters.
-            this._window = $(window);
-            this.editor = this.element.find('.' + this.options.markup.editor_class);
-            this.leftMarker = this.element.find('.' + this.options.markup.left_marker_class);
-            this.rightMarker = this.element.find('.' + this.options.markup.right_marker_class);
-            this.swatches = this.element.find('.' + this.options.markup.color_swatch_class)
-            this.leftPercentInput = this.element.find('input[name="' + this.options.markup.left_percent_input_name + '"]');
-            this.rightPercentInput = this.element.find('input[name="' + this.options.markup.right_percent_input_name + '"]');
+            this._window =                  $(window);
+            this.editor =                   this.element.find('.date-ambiguity-editor');
+            this.leftMarker =               this.element.find('.stop-marker.left');
+            this.rightMarker =              this.element.find('.stop-marker.right');
+            this.swatches =                 this.element.find('.color-swatch')
+            this.leftPercentInput =         this.element.find('input[name="left-ambiguity-percentage"]');
+            this.rightPercentInput =        this.element.find('input[name="right-ambiguity-percentage"]');
 
             // Percentage trackers.
             this.leftPercent = parseInt(this.leftPercentInput.val());
@@ -102,12 +92,12 @@
 
             // Position.
             this.leftMarker.css({
-                'left': leftOffset - this.options.css.stop_marker_width_correction,
+                'left': leftOffset - this.options.css.width_offset,
                 'top': this.editorHeight
             });
 
             this.rightMarker.css({
-                'right': rightOffset - this.options.css.stop_marker_width_correction,
+                'right': rightOffset - this.options.css.width_offset,
                 'top': this.editorHeight
             });
 
@@ -181,7 +171,7 @@
                     var newLeftPercent = self._leftPercentFromOffset(newOffset);
 
                     // If the new offset is in bounds.
-                    if (newOffset + self.options.css.stop_marker_width_correction >= 0
+                    if (newOffset + self.options.css.width_offset >= 0
                        && newLeftPercent < self.rightPercent) {
 
                         // Manifest new offest.
@@ -196,7 +186,7 @@
 
                         // Get the offset of the right dragger.
                         newOffset = self.editorWidth - self.__pxToInt(self.rightMarker.css('right')) -
-                            (2 * (self.options.css.stop_marker_width_correction)) - 1;
+                            (2 * (self.options.css.width_offset)) - 1;
 
                         // Manifest.
                         self.leftMarker.css('left', newOffset);
@@ -205,7 +195,7 @@
 
                     // Otherwise, fix at zero.
                     else {
-                        newOffset = -(self.options.css.stop_marker_width_correction);
+                        newOffset = -(self.options.css.width_offset);
                         self.leftMarker.css('left', newOffset);
                     }
 
@@ -259,7 +249,7 @@
                     var newRightPercent = self._rightPercentFromOffset(newOffset);
 
                     // If the new offset is in bounds.
-                    if (newOffset + self.options.css.stop_marker_width_correction >= 0
+                    if (newOffset + self.options.css.width_offset >= 0
                        && newRightPercent > self.leftPercent) {
 
                         // Manifest new offest.
@@ -274,7 +264,7 @@
 
                         // Get the offset of the right dragger.
                         newOffset = self.editorWidth - self.__pxToInt(self.leftMarker.css('left')) -
-                            (2 * (self.options.css.stop_marker_width_correction)) - 1;
+                            (2 * (self.options.css.width_offset)) - 1;
 
                         // Manifest.
                         self.rightMarker.css('right', newOffset);
@@ -283,7 +273,7 @@
 
                     // Otherwise, fix at zero.
                     else {
-                        newOffset = -(self.options.css.stop_marker_width_correction);
+                        newOffset = -(self.options.css.width_offset);
                         self.rightMarker.css('right', newOffset);
                     }
 
@@ -321,7 +311,7 @@
          */
         _leftPercentFromOffset: function(offset) {
 
-            return Math.round(((offset + this.options.css.stop_marker_width_correction)
+            return Math.round(((offset + this.options.css.width_offset)
                     / this.editorWidth) * 100);
 
         },
@@ -332,7 +322,7 @@
          */
         _rightPercentFromOffset: function(offset) {
 
-            return Math.round(((this.editorWidth - offset - this.options.css.stop_marker_width_correction)
+            return Math.round(((this.editorWidth - offset - this.options.css.width_offset)
                     / this.editorWidth) * 100);
 
 
@@ -348,7 +338,7 @@
             var pxIndex = px.indexOf('px');
             return parseInt(px.slice(0, pxIndex));
 
-        },
+        }
 
     });
 

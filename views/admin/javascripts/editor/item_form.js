@@ -61,10 +61,39 @@
             this.endDate =                  this.form.find('input[name="end-date-date"]');
             this.endTime =                  this.form.find('input[name="end-date-time"]');
             this.endTime =                  this.form.find('input[name="end-date-time"]');
-            this.textInputs =               this.form.find('input[type="text"], textarea')
+            this.color =                    this.form.find('input[name="color"]');
+            this.leftPercent =              this.form.find('input[name="left-ambiguity-percentage"]');
+            this.rightPercent =             this.form.find('input[name="right-ambiguity-percentage"]');
+            this.textInputs =               this.form.find('input[type="text"], textarea');
+            this.ambiguity =                this.form.find('.date-ambiguity-container');
 
-            // Measure the native height of the form.
+            // Preparatory routines.
             this._measureForm();
+            this._instantiateWidgets();
+
+        },
+
+        /*
+         * Instantiate the ambiguity sliders and color picker.
+         */
+        _instantiateWidgets: function() {
+
+            var self = this;
+
+            // Gradient builder.
+            this.ambiguity.gradientbuilder({
+
+                'stopHandleDrag': function(event, obj) {
+
+                    self._trigger('ambiguityChange', {}, {
+                        'color': obj.color,
+                        'leftPercent': obj.leftPercent,
+                        'rightPercent': obj.rightPercent
+                    });
+
+                }
+
+            });
 
         },
 
@@ -93,7 +122,7 @@
             this._getFormData();
             this._showContainer();
             this._expandTitle();
-            this._addFormEvents();
+            this._buildFormFunctionality();
 
         },
 
@@ -222,23 +251,43 @@
         /*
          * Push the form data into the input fields.
          */
-         _applyData: function(data) {
+        _applyData: function(data) {
 
+            // Populate inputs.
             this.title.attr('value', data.title);
+            this.color.attr('value', data.vector_color);
+            this.leftPercent.attr('value', data.left_percent);
+            this.rightPercent.attr('value', data.right_percent);
+            this.startDate.attr('value', data.start_date);
+            this.startTime.attr('value', data.start_time);
+            this.endDate.attr('value', data.end_date);
+            this.endTime.attr('value', data.end_time);
             this.description.text(data.description);
+
+            // Set the gradient builder color.
+            this.ambiguity.gradientbuilder(
+                'setColor',
+                data.vector_color);
+
+            // Reposition the draggers.
+            this.ambiguity.gradientbuilder(
+                'positionMarkers',
+                data.left_percent,
+                data.right_percent);
 
          },
 
         /*
-         * Add event listeners to the form elements.
+         * Add event listeners to the form elements, instantiate the color
+         * picker and ambiguity widget.
          */
-        _addFormEvents: function() {
+        _buildFormFunctionality: function() {
 
             var self = this;
 
             // On keydown in any of the text fields, trigger change event.
             this.textInputs.bind('keydown', function() {
-                self._trigger('change');
+                self._trigger('formEdit');
             });
 
          },

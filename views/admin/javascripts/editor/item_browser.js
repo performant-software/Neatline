@@ -281,10 +281,26 @@
 
             var self = this;
 
+            // Instantiate the widget and define callbacks.
             this.editForm.itemform({
-                'change': function() {
+
+                'formEdit': function() {
                     self.markItemTitleAsUnsaved();
+                },
+
+                'ambiguityChange': function(event, obj) {
+
+                    var itemId = self._currentFormItem.attr('recordid');
+
+                    self._trigger('ambiguityChange', {}, {
+                        'itemId': itemId,
+                        'color': obj.color,
+                        'leftPercent': obj.leftPercent,
+                        'rightPercent': obj.rightPercent
+                    });
+
                 }
+
             });
 
         },

@@ -38,7 +38,7 @@
             var zeroOpacity = this.__rgbObjectToCssValue(rgb, 0);
 
             this.css = ' \
-                background: #2989d8; \
+                background: ' + color + '; \
                 background: -moz-linear-gradient(left,  ' + zeroOpacity + ' 0%, ' + fullOpacity + ' ' + leftPercent + '%, ' + fullOpacity + ' ' + rightPercent + '%,' + zeroOpacity + ' 99%); \
                 background: -webkit-gradient(linear, left top, right top, color-stop(0%,' + zeroOpacity + '), color-stop(' + leftPercent + '%,' + fullOpacity + '), color-stop(' + rightPercent + '%,' + fullOpacity + '), color-stop(100%,' + zeroOpacity + ')); \
                 background: -webkit-linear-gradient(left, ' + zeroOpacity + ' 0%, ' + fullOpacity + ' ' + leftPercent + '%, ' + fullOpacity + ' ' + rightPercent + '%,' + zeroOpacity + ' 99%); \
@@ -57,9 +57,10 @@
 
             // Get the starting styling.
             var startingStyle = this.element.attr('style');
+            var styleBase = (typeof startingStyle === 'undefined') ? '' : startingStyle;
 
             // Push the new style onto the editor block.
-            this.element.attr('style', startingStyle + this.css);
+            this.element.attr('style', styleBase + this.css);
 
         },
 

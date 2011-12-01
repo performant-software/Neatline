@@ -1160,17 +1160,17 @@
 
             });
 
-            // Set the change tracker on each of the inputs and bind
-            // the change event.
-            $.each(allInputs, function(i, input) {
+            // // Set the change tracker on each of the inputs and bind
+            // // the change event.
+            // $.each(allInputs, function(i, input) {
 
-                $(input).bind({
-                    'keydown': function() {
-                        self.markItemTitleAsUnsaved();
-                    }
-                });
+            //     $(input).bind({
+            //         'keydown': function() {
+            //             self.markItemTitleAsUnsaved();
+            //         }
+            //     });
 
-            });
+            // });
 
             // If the form is taller than the total height of the editor
             // column, add a scrollbar.
