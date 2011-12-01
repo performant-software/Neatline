@@ -71,14 +71,14 @@
 
             // Preparatory routines.
             this._measureForm();
-            this._instantiateWidgets();
+            this._buildFormFunctionality();
 
         },
 
         /*
          * Instantiate the ambiguity sliders and color picker.
          */
-        _instantiateWidgets: function() {
+        _buildFormFunctionality: function() {
 
             var self = this;
 
@@ -111,6 +111,37 @@
 
             });
 
+            // On keydown in any of the text fields, trigger change event.
+            this.textInputs.bind('keydown', function() {
+                self._trigger('formEdit');
+            });
+
+            // Close button.
+            this.closeButton.bind({
+
+                'mousedown': function() {
+                    self._trigger('hide');
+                },
+
+                'click': function(event) {
+                    event.preventDefault();
+                }
+
+            });
+
+            // Save button.
+            this.saveButton.bind({
+
+                'mousedown': function() {
+                    self._trigger('save');
+                },
+
+                'click': function(event) {
+                    event.preventDefault();
+                }
+
+            });
+
         },
 
 
@@ -138,7 +169,6 @@
             this._getFormData();
             this._showContainer();
             this._expandTitle();
-            this._buildFormFunctionality();
 
         },
 
@@ -297,47 +327,6 @@
             this._opened = true;
             this.color.miniColors('value', data.vector_color);
             this._opened = false;
-
-         },
-
-        /*
-         * Add event listeners to the form elements, instantiate the color
-         * picker and ambiguity widget.
-         */
-        _buildFormFunctionality: function() {
-
-            var self = this;
-
-            // On keydown in any of the text fields, trigger change event.
-            this.textInputs.bind('keydown', function() {
-                self._trigger('formEdit');
-            });
-
-            // Close button.
-            this.closeButton.bind({
-
-                'mousedown': function() {
-                    self._trigger('hide');
-                },
-
-                'click': function(event) {
-                    event.preventDefault();
-                }
-
-            });
-
-            // Save button.
-            this.saveButton.bind({
-
-                'mousedown': function() {
-                    self._trigger('save');
-                },
-
-                'click': function(event) {
-                    event.preventDefault();
-                }
-
-            });
 
          },
 

@@ -284,10 +284,12 @@
             // Instantiate the widget and define callbacks.
             this.editForm.itemform({
 
+                // When form data is changed.
                 'formEdit': function() {
                     self.markItemTitleAsUnsaved();
                 },
 
+                // When the ambiguity sliders are changed.
                 'ambiguityChange': function(event, obj) {
 
                     var itemId = self._currentFormItem.attr('recordid');
@@ -301,15 +303,17 @@
 
                 },
 
+                // When the color is changed.
                 'colorEdit': function(event, obj) {
                     self._trigger('coloredit', {}, { 'color': obj.hex });
                 },
 
+                // When a form is closed.
                 'hide': function() {
-                    console.log(self._currentFormItem);
                     self._hideForm(self._currentFormItem, false);
                 },
 
+                // When a form is saved.
                 'save': function() {
                     self._saveForm();
                 }
@@ -860,6 +864,12 @@
                 'hideForm',
                 item,
                 immediate);
+
+            // Fire the end edit without save callback.
+            this._trigger('endmapedit', {}, {
+                'itemId': item.attr('recordid'),
+                'immediate': immediate
+            });
 
             // Update trackers.
             item.data('expanded', false);
