@@ -70,6 +70,10 @@
             this.fieldset =                 this.form.find('fieldset');
             this.ambiguity =                this.form.find('.date-ambiguity-container');
 
+            // Trackers.
+            this._unsaved = false;
+            this._db = TAFFY();
+
             // Preparatory routines.
             this._measureForm();
             this._buildFormFunctionality();
@@ -104,7 +108,11 @@
                 'change': function(hex, rgb) {
 
                     // Trigger out, change gradient.
-                    if (!self._opened) self._trigger('formEdit');
+                    if (!self._opened) {
+                        self._trigger('formEdit');
+                        self._unsaved = true;
+                    }
+
                     self._trigger('coloredit', {}, { 'color': hex });
                     self.ambiguity.gradientbuilder('setColor', hex);
 
@@ -115,6 +123,7 @@
             // On keydown in any of the text fields, trigger change event.
             this.textInputs.bind('keydown', function() {
                 self._trigger('formEdit');
+                self._unsaved = true;
             });
 
             // Close button.
@@ -169,6 +178,7 @@
 
             // Getters and setters.
             this.item =                     item;
+            this.itemId =                   item.attr('recordid');
             this.container =                this.item.next('tr').find('td');
             this.textSpan =                 this.item.find('.item-title-text');
 
@@ -186,6 +196,12 @@
          * Collapse an item edit form and unbind all events.
          */
         hideForm: function(item, immediate) {
+
+            // If the form is unsaved, store the changed data.
+            if (this._unsaved) {
+                this._data['recordid'] = this.itemId;
+                this._db.insert(this._data);
+            }
 
             // DOM touches.
             this._hideContainer(immediate);
@@ -316,35 +332,35 @@
         /*
          * Push the form data into the input fields.
          */
-        _applyData: function(data) {
+        _applyData: function() {
 
             // Populate inputs.
-            this.title.attr('value', data.title);
-            this.color.attr('value', data.vector_color);
-            this.leftPercent.attr('value', data.left_percent);
-            this.rightPercent.attr('value', data.right_percent);
-            this.startDate.attr('value', data.start_date);
-            this.startTime.attr('value', data.start_time);
-            this.endDate.attr('value', data.end_date);
-            this.endTime.attr('value', data.end_time);
-            this.description.text(data.description);
+            this.title.attr('value', this._data.title);
+            this.color.attr('value', this._data.vector_color);
+            this.leftPercent.attr('value', this._data.left_percent);
+            this.rightPercent.attr('value', this._data.right_percent);
+            this.startDate.attr('value', this._data.start_date);
+            this.startTime.attr('value', this._data.start_time);
+            this.endDate.attr('value', this._data.end_date);
+            this.endTime.attr('value', this._data.end_time);
+            this.description.text(this._data.description);
 
             // Reposition the draggers.
             this.ambiguity.gradientbuilder(
                 'positionMarkers',
-                data.left_percent,
-                data.right_percent);
+                this._data.left_percent,
+                this._data.right_percent);
 
             // Set the gradient builder color.
             this.ambiguity.gradientbuilder(
                 'setColor',
-                data.vector_color);
+                this._data.vector_color);
 
             // Push the new color onto the picker. Need to set the global
             // _opened tracker to circumvent miniColors' automatic firing of
             // the change callback on value set.
             this._opened = true;
-            this.color.miniColors('value', data.vector_color);
+            this.color.miniColors('value', this._data.vector_color);
             this._opened = false;
 
          },
@@ -364,24 +380,41 @@
 
             var self = this;
 
-            $.ajax({
+            // First, check for unsaved data.
+            var unsavedData = this._db({recordid: this.itemId}).first();
 
-                url: 'form',
-                dataType: 'json',
+            // If there is unsaved data, reapply it.
+            if (unsavedData) {
+                console.log(unsavedData);
+                this._data = unsavedData;
+                this._applyData();
+            }
 
-                data: {
-                    item_id: this.item.attr('recordid'),
-                    neatline_id: Neatline.id
-                },
+            // Otherwise, hit the server for data.
+            else {
 
-                success: function(data) {
+                $.ajax({
 
-                    // Push the data into the form.
-                    self._applyData(data);
+                    url: 'form',
+                    dataType: 'json',
 
-                }
+                    data: {
+                        item_id: this.itemId,
+                        neatline_id: Neatline.id
+                    },
 
-            });
+                    success: function(data) {
+
+                        // Push the data into the form.
+                        console.log(data);
+                        self._data = data;
+                        self._applyData();
+
+                    }
+
+                });
+
+            }
 
         },
 
