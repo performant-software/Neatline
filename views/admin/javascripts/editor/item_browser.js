@@ -279,7 +279,13 @@
          */
         _instantiateFormManager: function() {
 
-            this.editForm.itemform();
+            var self = this;
+
+            this.editForm.itemform({
+                'change': function() {
+                    self.markItemTitleAsUnsaved();
+                }
+            });
 
         },
 

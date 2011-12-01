@@ -60,6 +60,8 @@
             this.startTime =                this.form.find('input[name="start-date-time"]');
             this.endDate =                  this.form.find('input[name="end-date-date"]');
             this.endTime =                  this.form.find('input[name="end-date-time"]');
+            this.endTime =                  this.form.find('input[name="end-date-time"]');
+            this.textInputs =               this.form.find('input[type="text"], textarea')
 
             // Measure the native height of the form.
             this._measureForm();
@@ -232,7 +234,12 @@
          */
         _addFormEvents: function() {
 
+            var self = this;
 
+            // On keydown in any of the text fields, trigger change event.
+            this.textInputs.bind('keydown', function() {
+                self._trigger('change');
+            });
 
          },
 
