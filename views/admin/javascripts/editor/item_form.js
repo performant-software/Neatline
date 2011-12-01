@@ -103,7 +103,7 @@
                 'change': function(hex, rgb) {
 
                     // Trigger out, change gradient.
-                    self._trigger('formEdit');
+                    if (!self._opened) self._trigger('formEdit');
                     self._trigger('coloredit', {}, { 'color': hex });
                     self.ambiguity.gradientbuilder('setColor', hex);
 
@@ -291,8 +291,12 @@
                 data.left_percent,
                 data.right_percent);
 
-            // Push the new color onto the picker.
+            // Push the new color onto the picker. Need to set the global
+            // _opened tracker to circumvent miniColors' automatic firing of
+            // the change callback on value set.
+            this._opened = true;
             this.color.miniColors('value', data.vector_color);
+            this._opened = false;
 
          },
 
