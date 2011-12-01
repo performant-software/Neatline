@@ -1178,45 +1178,45 @@
                 // editFormContainer.smallscroll();
             }
 
-            // Instantiate the date ambiguity builder and define callbacks.
-            dateAmbiguityContainer.gradientbuilder({
+            // // Instantiate the date ambiguity builder and define callbacks.
+            // dateAmbiguityContainer.gradientbuilder({
 
-                'stopHandleDrag': function(event, obj) {
+            //     'stopHandleDrag': function(event, obj) {
 
-                    self._trigger('ambiguityChange', {}, {
-                        'itemId': itemId,
-                        'color': obj.color,
-                        'leftPercent': obj.leftPercent,
-                        'rightPercent': obj.rightPercent
-                    });
+            //         self._trigger('ambiguityChange', {}, {
+            //             'itemId': itemId,
+            //             'color': obj.color,
+            //             'leftPercent': obj.leftPercent,
+            //             'rightPercent': obj.rightPercent
+            //         });
 
-                }
+            //     }
 
-            });
+            // });
 
-            // Set the starting color.
-            dateAmbiguityContainer.gradientbuilder('setColor', colorPickerInput.val());
+            // // Set the starting color.
+            // dateAmbiguityContainer.gradientbuilder('setColor', colorPickerInput.val());
 
-            // Instantiate the color picker and define change callback.
-            colorPickerInput.miniColors({
+            // // Instantiate the color picker and define change callback.
+            // colorPickerInput.miniColors({
 
-                'change': function(hex, rgb) {
+            //     'change': function(hex, rgb) {
 
-                    // Mark the item title unsaved.
-                    self.markItemTitleAsUnsaved();
+            //         // Mark the item title unsaved.
+            //         self.markItemTitleAsUnsaved();
 
-                    // Trigger out to push the new color immediately onto
-                    // the map.
-                    self._trigger('coloredit', {}, {
-                        'color': hex
-                    });
+            //         // Trigger out to push the new color immediately onto
+            //         // the map.
+            //         self._trigger('coloredit', {}, {
+            //             'color': hex
+            //         });
 
-                    // Manifest the change on the gradient builder.
-                    dateAmbiguityContainer.gradientbuilder('setColor', hex);
+            //         // Manifest the change on the gradient builder.
+            //         dateAmbiguityContainer.gradientbuilder('setColor', hex);
 
-                }
+            //     }
 
-            });
+            // });
 
             // // Fire general item edit event to focus timeline and map
             // // if data exists for the item.

@@ -64,6 +64,8 @@
             this.color =                    this.form.find('input[name="color"]');
             this.leftPercent =              this.form.find('input[name="left-ambiguity-percentage"]');
             this.rightPercent =             this.form.find('input[name="right-ambiguity-percentage"]');
+            this.closeButton =              this.form.find('button[type="reset"]');
+            this.saveButton =               this.form.find('input[type="submit"]');
             this.textInputs =               this.form.find('input[type="text"], textarea');
             this.ambiguity =                this.form.find('.date-ambiguity-container');
 
@@ -90,6 +92,20 @@
                         'leftPercent': obj.leftPercent,
                         'rightPercent': obj.rightPercent
                     });
+
+                }
+
+            });
+
+            // Color picker.
+            this.color.miniColors({
+
+                'change': function(hex, rgb) {
+
+                    // Trigger out, change gradient.
+                    self._trigger('formEdit');
+                    self._trigger('coloredit', {}, { 'color': hex });
+                    self.ambiguity.gradientbuilder('setColor', hex);
 
                 }
 
@@ -275,6 +291,9 @@
                 data.left_percent,
                 data.right_percent);
 
+            // Push the new color onto the picker.
+            this.color.miniColors('value', data.vector_color);
+
          },
 
         /*
@@ -288,6 +307,32 @@
             // On keydown in any of the text fields, trigger change event.
             this.textInputs.bind('keydown', function() {
                 self._trigger('formEdit');
+            });
+
+            // Close button.
+            this.closeButton.bind({
+
+                'mousedown': function() {
+                    self._trigger('hide');
+                },
+
+                'click': function(event) {
+                    event.preventDefault();
+                }
+
+            });
+
+            // Save button.
+            this.saveButton.bind({
+
+                'mousedown': function() {
+                    self._trigger('save');
+                },
+
+                'click': function(event) {
+                    event.preventDefault();
+                }
+
             });
 
          },

@@ -319,16 +319,20 @@
 
             var self = this;
 
-            $.each(this._idToTapeElements[id], function(i, el) {
+            if (typeof this._idToTapeElements[id] !== 'undefined') {
 
-                // First, strip off the styles and reapply just the simile positioning.
-                el.attr('style', el.data('positioningStyles'));
+                $.each(this._idToTapeElements[id], function(i, el) {
 
-                // Apply the gradient style.
-                el.spanstyler('constructCss', color, leftPercent, rightPercent);
-                el.spanstyler('applyCss');
+                    // First, strip off the styles and reapply just the simile positioning.
+                    el.attr('style', el.data('positioningStyles'));
 
-            });
+                    // Apply the gradient style.
+                    el.spanstyler('constructCss', color, leftPercent, rightPercent);
+                    el.spanstyler('applyCss');
+
+                });
+
+            }
 
         }
 

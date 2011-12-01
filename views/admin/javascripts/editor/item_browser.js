@@ -299,6 +299,19 @@
                         'rightPercent': obj.rightPercent
                     });
 
+                },
+
+                'colorEdit': function(event, obj) {
+                    self._trigger('coloredit', {}, { 'color': obj.hex });
+                },
+
+                'hide': function() {
+                    console.log(self._currentFormItem);
+                    self._hideForm(self._currentFormItem, false);
+                },
+
+                'save': function() {
+                    self._saveForm();
                 }
 
             });
@@ -851,6 +864,12 @@
             // Update trackers.
             item.data('expanded', false);
             this._currentFormItem = null;
+
+         },
+
+         _saveForm: function() {
+
+            console.log('save');
 
          },
 
