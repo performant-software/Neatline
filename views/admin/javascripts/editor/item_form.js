@@ -67,6 +67,7 @@
             this.closeButton =              this.form.find('button[type="reset"]');
             this.saveButton =               this.form.find('input[type="submit"]');
             this.textInputs =               this.form.find('input[type="text"], textarea');
+            this.fieldset =                 this.form.find('fieldset');
             this.ambiguity =                this.form.find('.date-ambiguity-container');
 
             // Preparatory routines.
@@ -142,6 +143,15 @@
 
             });
 
+            // Description text area.
+            this.description.bind({
+
+                'mouseup': function() {
+                    self.resizeForm();
+                }
+
+            });
+
         },
 
 
@@ -200,7 +210,13 @@
          */
         resizeForm: function() {
 
-            console.log('resize');
+            // Re-measure the form.
+            this._measureForm();
+
+            // Animate the height.
+            this.form.animate({
+                'height': this._nativeHeight
+            }, this.options.css.form_duration);
 
         },
 
@@ -378,7 +394,7 @@
          */
         _measureForm: function() {
 
-            this._nativeHeight = this.form.height();
+            this._nativeHeight = this.fieldset[0].scrollHeight;
 
          }
 
