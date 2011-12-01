@@ -97,6 +97,7 @@ function neatline_queueEditorAssets()
     queue_js('editor/gradient_builder', 'javascripts');
     queue_js('editor/_deployment', 'javascripts');
     queue_js('libraries/jquery.miniColors-0.1/jquery.miniColors.min', 'javascripts');
+    queue_js('libraries/taffy-min', 'javascripts');
 
 }
 
