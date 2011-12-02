@@ -305,4 +305,66 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
 
     }
 
+    /**
+     * Construct Simile JSON.
+     *
+     * @param Omeka_record $neatline The exhibit record.
+     *
+     * @return JSON The data.
+     */
+    public function buildTimelineJson($neatline)
+    {
+
+        // Shell array.
+        $data = array(
+            'dateTimeFormat' => 'Gregorian',
+            'events' => array()
+        );
+
+        // Get records.
+        $records = $this->getRecordsByExhibit($neatline);
+
+        // Walk the records and build out the array.
+        foreach ($records as $record) {
+
+            // Build the timestamps.
+            $timestamps = neatline_generateTimegliderTimestamps(
+                $record->start_date,
+                $record->start_time,
+                $record->end_date,
+                $record->end_time
+            );
+
+            $eventArray = array(
+                'eventID' => $record->item_id,
+                'title' => $record->title,
+                'description' => $record->description,
+                'color' => $record->vector_color,
+                'textColor' => '#6b6b6b',
+                'left_ambiguity' => $record->left_ambiguity_percentage,
+                'right_ambiguity' => $record->right_ambiguity_percentage
+            );
+
+            // If there is a valid start stamp.
+            if (!is_null($timestamps[0])) {
+
+                $eventArray['start'] = $timestamps[0];
+
+                // If there is a valid end stamp.
+                if (!is_null($timestamps[1])) {
+                    $eventArray['end'] = $timestamps[1];
+                }
+
+                // Only push if there is at least a start.
+                $data['events'][] = $eventArray;
+
+            }
+
+        }
+
+        // JSON-ify the array.
+        return json_encode($data);
+
+    }
+
 }
