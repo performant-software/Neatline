@@ -140,7 +140,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
      *
      * @return void.
      */
-    public function testFormDataJson()
+    public function testForm()
     {
 
         // Create item, exhibit, and record.
