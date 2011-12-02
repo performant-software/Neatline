@@ -39,6 +39,7 @@ class Neatline_DataController extends Omeka_Controller_Action
     {
 
         $this->_neatlinesTable = $this->getTable('NeatlineExhibit');
+        $this->_recordsTable = $this->getTable('NeatlineDataRecord');
 
     }
 
@@ -74,11 +75,11 @@ class Neatline_DataController extends Omeka_Controller_Action
         // Supress the default Zend layout-sniffer functionality.
         $this->_helper->viewRenderer->setNoRender(true);
 
-        // Fetch the record.
-        $neatline = $this->_neatlinesTable->find($this->_request->getParam('id'));
+        // Get id.
+        $exhibitId = $this->_request->getParam('id');
 
         // Output the JSON string.
-        echo $neatline->openlayersVectorJson();
+        echo $_recordsTable->buildOpenlayersJson($exhibitId);
 
     }
 

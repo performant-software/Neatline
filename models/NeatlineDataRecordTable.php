@@ -125,6 +125,66 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
     }
 
     /**
+     * Find a record for a given item and exhibit.
+     *
+     * @param Omeka_record $item The item record.
+     * @param Omeka_record $neatline The exhibit record.
+     *
+     * @return Omeka_record $record if a record exists, else boolean False.
+     */
+    public function getRecordByItemAndExhibit($item, $neatline)
+    {
+
+        $record = $this->fetchObject(
+            $this->getSelect()->where('item_id = ' . $item->id
+                . ' AND exhibit_id = ' . $neatline->id)
+        );
+
+        return $record ? $record : false;
+
+    }
+
+    /**
+     * Check whether a given record is active on the map or timeline.
+     *
+     * @param Omeka_record $item The item record.
+     * @param Omeka_record $neatline The exhibit record.
+     *
+     * @return boolean True if the record is active.
+     */
+    public function getRecordStatus($item, $neatline, $spaceOrTime)
+    {
+
+        // Try to get the record.
+        $record = $this->getRecordByItemAndExhibit($item, $neatline);
+
+        // If there is a record.
+        if ($record) {
+
+            // If space.
+            if ($spaceOrTime == 'space') {
+                return (bool) $record->space_active;
+            }
+
+            // If time.
+            else {
+                return (bool) $record->time_active;
+            }
+
+        }
+
+        // If no record, return false.
+        return false;
+
+    }
+
+
+    /**
+     * JSON constructors.
+     */
+
+
+    /**
      * Construct a JSON representation of a record's fields to be used in the
      * item edit form.
      *
@@ -133,7 +193,7 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
      *
      * @return JSON The data.
      */
-    public function editFormDataJson($item, $neatline)
+    public function buildEditFormJson($item, $neatline)
     {
 
         // Shell out the object literal structure.
@@ -189,56 +249,22 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
     }
 
     /**
-     * Find a record for a given item and exhibit.
+     * Construct OpenLayers JSON.
      *
-     * @param Omeka_record $item The item record.
      * @param Omeka_record $neatline The exhibit record.
      *
-     * @return Omeka_record $record if a record exists, else boolean False.
+     * @return JSON The data.
      */
-    public function getRecordByItemAndExhibit($item, $neatline)
+    public function buildMapJson($neatline)
     {
 
-        $record = $this->fetchObject(
-            $this->getSelect()->where('item_id = ' . $item->id
-                . ' AND exhibit_id = ' . $neatline->id)
-        );
+        // Shell array.
+        $data = array();
 
-        return $record ? $record : false;
 
-    }
 
-    /**
-     * Check whether a given record is active on the map or timeline.
-     *
-     * @param Omeka_record $item The item record.
-     * @param Omeka_record $neatline The exhibit record.
-     *
-     * @return boolean True if the record is active.
-     */
-    public function getRecordStatus($item, $neatline, $spaceOrTime)
-    {
-
-        // Try to get the record.
-        $record = $this->getRecordByItemAndExhibit($item, $neatline);
-
-        // If there is a record.
-        if ($record) {
-
-            // If space.
-            if ($spaceOrTime == 'space') {
-                return (bool) $record->space_active;
-            }
-
-            // If time.
-            else {
-                return (bool) $record->time_active;
-            }
-
-        }
-
-        // If no record, return false.
-        return false;
+        // JSON-ify the array.
+        return json_encode($data);
 
     }
 

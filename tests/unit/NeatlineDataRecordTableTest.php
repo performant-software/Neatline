@@ -434,12 +434,12 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
     }
 
     /**
-     * If there is a record for an item, editFormDataJson() should return a JSON
+     * If there is a record for an item, buildEditFormJson() should return a JSON
      * string with the correct attributes.
      *
      * @return void.
      */
-    public function testEditFormDataJsonWithExistingRecord()
+    public function testBuildEditFormJsonWithExistingRecord()
     {
 
         // Create an item and exhibit.
@@ -465,7 +465,7 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
         );
 
         // Ping the method for the json.
-        $json = $this->_recordsTable->editFormDataJson($item, $neatline);
+        $json = $this->_recordsTable->buildEditFormJson($item, $neatline);
 
         // Check for proper construction.
         $this->assertEquals(
@@ -476,12 +476,12 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
     }
 
     /**
-     * If there is not a record for an item, editFormDataJson() should return
+     * If there is not a record for an item, buildEditFormJson() should return
      * a well-formed empty object literal with the correct default values.
      *
      * @return void.
      */
-    public function testEditFormDataJsonWithNoExistingRecord()
+    public function testBuildEditFormJsonWithNoExistingRecord()
     {
 
         // Create an item and exhibit.
@@ -489,7 +489,7 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
         $neatline = $this->helper->_createNeatline();
 
         // Ping the method for the json.
-        $json = $this->_recordsTable->editFormDataJson($item, $neatline);
+        $json = $this->_recordsTable->buildEditFormJson($item, $neatline);
 
         // Check for proper construction.
         $this->assertEquals(
@@ -501,12 +501,12 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
 
     /**
      * If is not a record for an item but the item has existing DC metadata,
-     * editFormDataJson() should default in appropriate values for the Title and
+     * buildEditFormJson() should default in appropriate values for the Title and
      * Description fields.
      *
      * @return void.
      */
-    public function testEditFormDataJsonDefaultDcFields()
+    public function testBuildEditFormJsonDefaultDcFields()
     {
 
         // Create an item and exhibit.
@@ -518,7 +518,7 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
         $this->helper->_createElementText($item, 'Dublin Core', 'Description', 'Test Description.');
 
         // Ping the method for the json.
-        $json = $this->_recordsTable->editFormDataJson($item, $neatline);
+        $json = $this->_recordsTable->buildEditFormJson($item, $neatline);
 
         // Check for proper construction.
         $this->assertEquals(
@@ -534,7 +534,7 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
      *
      * @return void.
      */
-    public function testEditFormDataJsonTitleAndDescriptionOverwrites()
+    public function testBuildEditFormJsonTitleAndDescriptionOverwrites()
     {
 
         // Create an item and exhibit.
@@ -564,7 +564,7 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
         $this->helper->_createElementText($item, 'Dublin Core', 'Description', 'Test Description.');
 
         // Ping the method for the json.
-        $json = $this->_recordsTable->editFormDataJson($item, $neatline);
+        $json = $this->_recordsTable->buildEditFormJson($item, $neatline);
 
         // The title, description, and color fields should still be intelligently
         // populated with possible DC values if there is a null value in the record.
