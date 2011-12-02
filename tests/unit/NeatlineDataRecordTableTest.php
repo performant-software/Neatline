@@ -575,4 +575,50 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
 
     }
 
+    /**
+     * The getRecordsByExhibit() should return all data records associated with a
+     * given Neatline exhibit.
+     *
+     * @return void.
+     */
+    public function testGetRecordsByExhibitWithExhibits()
+    {
+
+        // Create two items and an exhibit.
+        $item1 = $this->helper->_createItem();
+        $item2 = $this->helper->_createItem();
+        $neatline = $this->helper->_createNeatline();
+
+        // Create two records.
+        $record1 = new NeatlineDataRecord($item1, $neatline);
+        $record1->save();
+        $record2 = new NeatlineDataRecord($item2, $neatline);
+        $record2->save();
+
+        // Get the records and check result.
+        $records = $this->_recordsTable->getRecordsByExhibit($neatline);
+        $this->assertEquals(count($records), 2);
+        $this->assertEquals($records[0]->id, $record1->id);
+        $this->assertEquals($records[1]->id, $record2->id);
+
+    }
+
+    /**
+     * When there are no records for an exhibit, getRecordsByExhibit() should
+     * return false.
+     *
+     * @return void.
+     */
+    public function testGetRecordsByExhibitWithNoExhibits()
+    {
+
+        // Create two items and an exhibit.
+        $neatline = $this->helper->_createNeatline();
+
+        // Get the records and check result.
+        $records = $this->_recordsTable->getRecordsByExhibit($neatline);
+        $this->assertFalse($records);
+
+    }
+
 }

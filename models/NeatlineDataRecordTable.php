@@ -145,6 +145,24 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
     }
 
     /**
+     * Find all records associated with a given exhibit.
+     *
+     * @param Omeka_record $neatline The exhibit record.
+     *
+     * @return array of Omeka_record The records.
+     */
+    public function getRecordsByExhibit($neatline)
+    {
+
+        $records = $this->fetchObjects(
+            $this->getSelect()->where('exhibit_id = ' . $neatline->id)
+        );
+
+        return $records ? $records : false;
+
+    }
+
+    /**
      * Check whether a given record is active on the map or timeline.
      *
      * @param Omeka_record $item The item record.
