@@ -163,7 +163,7 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         // Create a record.
         $record = $this->helper->_createRecord();
 
-        // Set values.
+        // Set int values.
         $success = $record->setPercentages(50, 60);
         $this->assertEquals($record->left_ambiguity_percentage, 50);
         $this->assertEquals($record->right_ambiguity_percentage, 60);

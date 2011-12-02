@@ -58,6 +58,7 @@ class NeatlineNeatline extends Omeka_record
 
         $errors = array();
 
+        // Title.
         if ($_post['title'] == '') {
             $errors['title'] = 'Enter a title';
         }
@@ -125,400 +126,6 @@ class NeatlineNeatline extends Omeka_record
     {
 
         return $this->getTable('NeatlineMapsMap')->find($this->map_id);
-
-    }
-
-    /**
-     * Fetch the parent timeline.
-     *
-     * @return Omeka_record The map.
-     */
-    public function getTimeline()
-    {
-
-        return $this->getTable('NeatlineTimeTimeline')->find($this->timeline_id);
-
-    }
-
-    /**
-     * Commit changes ajaxed back from the editor.
-     *
-     * @param Omeka_record $item The item.
-     * @param string $title The title.
-     * @param string $description The description.
-     * @param string $startDate The month/day/year of the start.
-     * @param string $startTime The time of the start.
-     * @param string $endDate The month/day/year of the end.
-     * @param string $endTime The time of the end.
-     * @param string $vectorColor The hex value for the feature vectors.
-     * @param string $leftPercentage The left side ambiguity parameter.
-     * @param string $rightPercentage The right side ambiguity parameter.
-     * @param array $geoCoverage The array of geocoverage data from
-     * the map annotations.
-     *
-     * @return boolean True if the save succeeds.
-     */
-    public function saveData(
-        $item,
-        $title,
-        $description,
-        $startDate,
-        $startTime,
-        $endDate,
-        $endTime,
-        $vectorColor,
-        $leftPercentage,
-        $rightPercentage,
-        $geoCoverage
-    )
-    {
-
-        // Get the tables.
-        $dataTable = $this->getTable('NeatlineRecord');
-        $timeDataTable = $this->getTable('NeatlineTimeRecord');
-        $elementTable = $this->getTable('Element');
-
-        // Get the element record for each of the DC fields
-        // that will be used to house the data.
-        $titleElement = $elementTable
-            ->findByElementSetNameAndElementName('Dublin Core', 'Title');
-
-        $descriptionElement = $elementTable
-            ->findByElementSetNameAndElementName('Dublin Core', 'Description');
-
-        $dateElement = $elementTable
-            ->findByElementSetNameAndElementName('Dublin Core', 'Date');
-
-        $coverageElement = $elementTable
-            ->findByElementSetNameAndElementName('Dublin Core', 'Coverage');
-
-        $identifierElement = $elementTable
-            ->findByElementSetNameAndElementName('Dublin Core', 'Identifier');
-
-        // Try to find existing data records given the item and
-        // element object.
-        $titleRecord = $dataTable
-            ->findByElement($this->id, $item->id, $titleElement->id);
-
-        $descriptionRecord = $dataTable
-            ->findByElement($this->id, $item->id, $descriptionElement->id);
-
-        $colorRecord = $dataTable
-            ->findByElement($this->id, $item->id, $identifierElement->id);
-
-        $geoCoverageRecord = $dataTable
-            ->findByElement($this->id, $item->id, $coverageElement->id);
-
-        $dateRecord = $timeDataTable
-            ->findByElement($this->id, $item->id);
-
-
-        // ** Title **
-
-        // If a title record already exists, update it.
-        if ($titleRecord != null) {
-
-            // Update the text.
-            $titleRecord->updateElementText($title);
-
-        }
-
-        // Otherwise, create one.
-        else if ($title != '') {
-
-            // Create the new record.
-            $record = new NeatlineRecord();
-            $record->neatline_id = $this->id;
-            $record->item_id = $item->id;
-            $record->element_id = $titleElement->id;
-
-            // Create the new text.
-            $elementText = $record->createElementText($title, 'Title');
-
-            // If a text with the supplied data does not already exist.
-            if ($elementText != null) {
-                $record->element_text_id = $elementText->id;
-                $record->save();
-            }
-
-        }
-
-
-        // ** Description **
-
-        // If a description record already exists, update it.
-        if ($descriptionRecord != null) {
-
-            // Update the text.
-            $descriptionRecord->updateElementText($description);
-
-        }
-
-        // Otherwise, create one.
-        else if ($description != '') {
-
-            // Create the new record.
-            $record = new NeatlineRecord();
-            $record->neatline_id = $this->id;
-            $record->item_id = $item->id;
-            $record->element_id = $descriptionElement->id;
-
-            // Create the new text.
-            $elementText = $record->createElementText($description, 'Description');
-
-            // If a text with the supplied data does not already exist.
-            if ($elementText != null) {
-                $record->element_text_id = $elementText->id;
-                $record->save();
-            }
-
-        }
-
-
-        // ** Color **
-
-        // If a color record already exists, update it.
-        if ($colorRecord != null) {
-
-            // Update the text.
-            $colorRecord->updateElementText($vectorColor);
-
-        }
-
-        // Otherwise, create one.
-        else if ($vectorColor != '') {
-
-            // Create the new record.
-            $record = new NeatlineRecord();
-            $record->neatline_id = $this->id;
-            $record->item_id = $item->id;
-            $record->element_id = $identifierElement->id;
-
-            // Create the new text.
-            $elementText = $record->createElementText($vectorColor, 'Identifier');
-
-            // If a text with the supplied data does not already exist.
-            if ($elementText != null) {
-                $record->element_text_id = $elementText->id;
-                $record->save();
-            }
-
-        }
-
-
-        // ** Date **
-
-        // If a date record already exists, update it.
-        if ($dateRecord != null) {
-
-            // Update the texts.
-            $dateRecord->updateElementTexts(
-                $startDate,
-                $startTime,
-                $endDate,
-                $endTime,
-                $leftPercentage,
-                $rightPercentage
-            );
-
-            // Update the percentages.
-            $dateRecord->left_ambiguity_percentage = $leftPercentage;
-            $dateRecord->right_ambiguity_percentage = $rightPercentage;
-            $dateRecord->save();
-
-        }
-
-        // Otherwise, create one.
-        else {
-
-            // Create the new record.
-            $record = new NeatlineTimeRecord();
-            $record->neatline_id = $this->id;
-            $record->item_id = $item->id;
-            $record->left_ambiguity_percentage = $leftPercentage;
-            $record->right_ambiguity_percentage = $rightPercentage;
-
-            // Create the texts.
-            $record->createElementTexts(
-                $startDate,
-                $startTime,
-                $endDate,
-                $endTime
-            );
-
-        }
-
-
-        // ** Geocoverage **
-
-        // If a coverage record already exists, update it.
-        if ($geoCoverageRecord != null) {
-
-            // Update the texts.
-            $geoCoverageRecord->updateElementText($geoCoverage);
-
-        }
-
-        // Otherwise, create one.
-        else if ($geoCoverage != 'null') {
-
-            echo 'test';
-            echo $geoCoverage;
-
-            // Creat the new record.
-            $record = new NeatlineRecord();
-            $record->neatline_id = $this->id;
-            $record->item_id = $item->id;
-            $record->element_id = $coverageElement->id;
-
-            // Create the new text.
-            $elementText = $record->createElementText($geoCoverage, 'Coverage');
-
-            // If a text with the supplied data does not already exist.
-            if ($elementText != null) {
-                $record->element_text_id = $elementText->id;
-                $record->save();
-            }
-
-        }
-
-    }
-
-    /**
-     * Get the value of a non-temporal Neatline data store.
-     *
-     * @param Omeka_record $item The item.
-     * @param string $field The name of the DC field.
-     *
-     * @return Omeka_record The text.
-     */
-    public function getTextByItemAndField($item, $field)
-    {
-
-        $text = '';
-
-        // Get the tables.
-        $dataTable = $this->getTable('NeatlineRecord');
-        $elementTable = $this->getTable('Element');
-        $elementTextTable = $this->getTable('ElementText');
-        $recordTypeTable = $this->getTable('RecordType');
-
-        // Fetch the element record for the field.
-        $element = $elementTable
-            ->findByElementSetNameAndElementName('Dublin Core', $field);
-
-        // Get the record type for Item.
-        $itemTypeId = $recordTypeTable->findIdFromName('Item');
-
-        // Attempt to find an existing Neatline record.
-        $record = $dataTable
-            ->findByElement($this->id, $item->id, $element->id);
-
-        // If a record exists, return it.
-        if ($record != null) {
-
-            // Update the text.
-            $text = $record->getElementText()->text;
-
-        }
-
-        // Otherwise, look for an existing field to use.
-        else {
-
-            // Because item() is broken, this has to be done manually.
-            $existingTexts = $elementTextTable->fetchObjects(
-                $elementTextTable->getSelect()
-                    ->where('record_id = ' . $item->id
-                        . ' AND record_type_id = ' . $itemTypeId
-                        . ' AND element_id = ' . $element->id)
-            );
-
-            if ($existingTexts != null) {
-                $text = $existingTexts[0]->text;
-            }
-
-        }
-
-        return $text;
-
-    }
-
-    /**
-     * Get the value of a temporal Neatline data store.
-     *
-     * @param Omeka_record $item The item.
-     * @param string $piece The piece to get - can be 'start_date',
-     * 'start_time', 'end_date', or 'end_time'.
-     *
-     * @return Omeka_record The text.
-     */
-    public function getTimeTextByItemAndField($item, $piece)
-    {
-
-        $text = '';
-
-        // Get the tables.
-        $dataTable = $this->getTable('NeatlineTimeRecord');
-        $elementTable = $this->getTable('Element');
-
-        $record = $dataTable
-            ->findByElement($this->id, $item->id);
-
-        // Try to get a value.
-        if ($record != null) {
-
-            $elementText = $record->getElementText($piece);
-
-            if ($elementText != null) {
-                $text = $elementText->text;
-            }
-
-        }
-
-        return $text;
-
-    }
-
-    /**
-     * Get the temporal record for an item.
-     *
-     * @param Omeka_record $item The item.
-     *
-     * @return Omeka_record The temporal record.
-     */
-    public function getTimeRecord($item)
-    {
-
-        // Try to find the record.
-        $dataTable = $this->getTable('NeatlineTimeRecord');
-        return $dataTable->findByElement($this->id, $item->id);
-
-    }
-
-    /**
-     * Get an ambiguity percentage for the left or right side.
-     *
-     * @param Omeka_record $item The item.
-     * @param string $side 'left' or 'right'.
-     *
-     * @return Omeka_record The value.
-     */
-    public function getAmbiguityPercentage($item, $side)
-    {
-
-        // Defaults if no settings present.
-        $percentage = ($side == 'left') ? 0 : 100;
-
-        // Try to get a record.
-        $record = $this->getTimeRecord($item);
-
-        // If there is a record, get the value.
-        if ($record != null) {
-            $percentage = ($side == 'left') ?
-                $record->left_ambiguity_percentage : $record->right_ambiguity_percentage;
-        }
-
-        return $percentage;
 
     }
 
@@ -614,48 +221,42 @@ class NeatlineNeatline extends Omeka_record
     public function openlayersVectorJson()
     {
 
-        // Table getters.
-        $_statusesTable = $this->getTable('NeatlineRecordStatus');
-        $_recordsTable = $this->getTable('NeatlineRecord');
-        $_elementTable = $this->getTable('Element');
-
-        // Get the coverage element.
-        $coverageElement = $_elementTable
-            ->findByElementSetNameAndElementName('Dublin Core', 'Coverage');
+        // Get the data records table.
+        $_recordsTable = $this->getTable('NeatlineDataRecord');
 
         // Shell array for the vector data.
         $json = array();
 
-        // Hit the record statuses table to get a list of all
-        // items that have active space records.
-        $activeItems = $_statusesTable->getItemsWithActiveSpaceRecords($this->id);
+        // // Hit the record statuses table to get a list of all
+        // // items that have active space records.
+        // $activeItems = $_statusesTable->getItemsWithActiveSpaceRecords($this->id);
 
-        // Walk the items with active records, fetch the time records,
-        // pack them up.
-        foreach ($activeItems as $item) {
+        // // Walk the items with active records, fetch the time records,
+        // // pack them up.
+        // foreach ($activeItems as $item) {
 
-            // Try to find a record.
-            $record = $_recordsTable->findByElement($this->id, $item->id, $coverageElement->id);
+        //     // Try to find a record.
+        //     $record = $_recordsTable->findByElement($this->id, $item->id, $coverageElement->id);
 
-            if (!is_null($record)) {
+        //     if (!is_null($record)) {
 
-                // Weird hack to get rid of the opening and closing brackets that OpenLayers
-                // tacks onto the geometry descriptions by default. They cause errors when the
-                // JavaScript tries to ingest them.
-                $text = str_replace(array('[', ']'), '', json_decode($record->getElementText()->text));
-                $title = $this->getTextByItemAndField($item, 'Title');
-                $color = $this->getTextByItemAndField($item, 'Identifier');
+        //         // Weird hack to get rid of the opening and closing brackets that OpenLayers
+        //         // tacks onto the geometry descriptions by default. They cause errors when the
+        //         // JavaScript tries to ingest them.
+        //         $text = str_replace(array('[', ']'), '', json_decode($record->getElementText()->text));
+        //         $title = $this->getTextByItemAndField($item, 'Title');
+        //         $color = $this->getTextByItemAndField($item, 'Identifier');
 
-                $json[] = array(
-                    'id' => $item->id,
-                    'title' => $title,
-                    'color' => $color,
-                    'wkt' => $text
-                );
+        //         $json[] = array(
+        //             'id' => $item->id,
+        //             'title' => $title,
+        //             'color' => $color,
+        //             'wkt' => $text
+        //         );
 
-            }
+        //     }
 
-        }
+        // }
 
         return json_encode($json);
 

@@ -63,16 +63,10 @@ class Neatline_EditorController extends Omeka_Controller_Action
 
         // Get the map and timeline records.
         $map = $neatline->getMap();
-        $timeline = $neatline->getTimeline();
 
         // Push the map into the view.
         if ($map) {
             $this->view->map = new GeoserverMap_Map($neatline->getMap());
-        }
-
-        // Push the timeline into the view.
-        if ($timeline) {
-            $this->view->timeline = $neatline->getTimeline();
         }
 
         // Get taxonomy records.
@@ -171,11 +165,11 @@ class Neatline_EditorController extends Omeka_Controller_Action
         $endDate =                  $_post['end_date'];
         $endTime =                  $_post['end_time'];
         $geoCoverage =              $_post['geocoverage'];
+        $vectorColor =              $_post['vector_color'];
         $spaceStatus =              (boolean) json_decode($_post['space_active']);
         $timeStatus =               (boolean) json_decode($_post['time_active']);
-        $vectorColor =              $_post['vector_color'];
-        $leftPercentage =           $_post['left_percent'];
-        $rightPercentage =          $_post['right_percent'];
+        $leftPercentage =           (int) $_post['left_percent'];
+        $rightPercentage =          (int) $_post['right_percent'];
 
         // Fetch the Neatline exhibit record and item record.
         $neatline = $this->_neatlinesTable->find($neatlineId);
