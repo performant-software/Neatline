@@ -56,7 +56,7 @@ class Neatline_DataController extends Omeka_Controller_Action
         $this->_helper->viewRenderer->setNoRender(true);
 
         // Fetch the record.
-        $neatline = $this->_neatlinesTable->find($this->_request->getParam('id'));
+        $exhibit = $this->_neatlinesTable->find($this->_request->getParam('id'));
 
         // Output the JSON string.
         echo $this->_recordsTable->buildTimelineJson($exhibit);

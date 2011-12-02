@@ -110,4 +110,73 @@ class Neatline_DataControllerTest extends Omeka_Test_AppTestCase
 
     }
 
+    /**
+     * The /simile route should return a well-formed JSON string for the
+     * timeline block.
+     *
+     * @return void.
+     */
+    public function testSimile()
+    {
+
+        // Create an exhibit and items.
+        $neatline = $this->helper->_createNeatline();
+        $item1 = $this->helper->_createItem();
+        $item2 = $this->helper->_createItem();
+
+        // Create two records.
+        $record1 = new NeatlineDataRecord($item1, $neatline);
+        $record2 = new NeatlineDataRecord($item2, $neatline);
+
+        // Populate map-relevant attributes.
+        $record1->title = 'Item 1 Title';
+        $record2->title = 'Item 2 Title';
+        $record1->description = 'Item 1 description.';
+        $record2->description = 'Item 2 description.';
+        $record1->start_date = 'January 2011';
+        $record2->start_date = 'January 2011';
+        $record1->end_date = 'January 2012';
+        $record2->end_date = 'January 2012';
+        $record1->vector_color = '#ffffff';
+        $record2->vector_color = '#000000';
+        $record1->left_ambiguity_percentage = 0;
+        $record2->left_ambiguity_percentage = 0;
+        $record1->right_ambiguity_percentage = 100;
+        $record1->right_ambiguity_percentage = 100;
+        $record1->time_active = 1;
+        $record2->time_active = 1;
+        $record1->save();
+        $record2->save();
+
+        // Hit the route and capture the response.
+        $this->dispatch('neatline-exhibits/' . $neatline->id . '/data/simile');
+        $response = $this->getResponse()->getBody('default');
+
+        // Check format.
+        $this->assertEquals(
+            $response,
+            '{"dateTimeFormat":"Gregorian",' .
+            '"events":[{' .
+            '"eventID":' . $record1->item_id . ',' .
+            '"title":"' . $record1->title . '",' .
+            '"description":"' . $record1->description . '",' .
+            '"color":"' . $record1->vector_color . '",' .
+            '"textColor":"#6b6b6b",' .
+            '"left_ambiguity":' . $record1->left_ambiguity_percentage . ',' .
+            '"right_ambiguity":' . $record1->right_ambiguity_percentage . ',' .
+            '"start":"2011-01-01 00:00:00",' .
+            '"end":"2012-01-01 00:00:00"},{' .
+            '"eventID":' . $record2->item_id . ',' .
+            '"title":"' . $record2->title . '",' .
+            '"description":"' . $record2->description . '",' .
+            '"color":"' . $record2->vector_color . '",' .
+            '"textColor":"#6b6b6b",' .
+            '"left_ambiguity":' . $record2->left_ambiguity_percentage . ',' .
+            '"right_ambiguity":' . $record2->right_ambiguity_percentage . ',' .
+            '"start":"2011-01-01 00:00:00",' .
+            '"end":"2012-01-01 00:00:00"}]}'
+        );
+
+    }
+
 }

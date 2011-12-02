@@ -673,7 +673,7 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
 
     /**
      * The buildMapJson() method should construct well-formed JSON string with
-     * the correct attribute and geocoverage fields populated for each record.
+     * the correct attributes and geocoverage fields populated for each record.
      *
      * @return void.
      */
@@ -715,6 +715,147 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
             '"title":"Item 2 Title",' .
             '"color":"#000000",' .
             '"wkt":"POINT(0,1)"}]'
+        );
+
+    }
+
+    /**
+     * The buildMapJson() method should exclude items without active
+     * space status trackers.
+     *
+     * @return void.
+     */
+    public function testBuildMapJsonWithInactiveStatus()
+    {
+
+        // Create an exhibit and items.
+        $neatline = $this->helper->_createNeatline();
+        $item = $this->helper->_createItem();
+
+        // Create record.
+        $record = new NeatlineDataRecord($item, $neatline);
+
+        // Populate map-relevant attributes.
+        $record->title = 'Title';
+        $record->vector_color = '#ffffff';
+        $record->geocoverage = 'POINT(1,0)';
+        $record->space_active = 0;
+        $record->save();
+
+        // Build the JSON.
+        $json = $this->_recordsTable->buildMapJson($neatline);
+
+        // Check format.
+        $this->assertEquals(
+            $json,
+            '[]'
+        );
+
+    }
+
+    /**
+     * The buildTimelineJson() method should construct well-formed JSON string with
+     * the correct attributes populated for each record.
+     *
+     * @return void.
+     */
+    public function testBuildTimelineJson()
+    {
+
+        // Create an exhibit and items.
+        $neatline = $this->helper->_createNeatline();
+        $item1 = $this->helper->_createItem();
+        $item2 = $this->helper->_createItem();
+
+        // Create two records.
+        $record1 = new NeatlineDataRecord($item1, $neatline);
+        $record2 = new NeatlineDataRecord($item2, $neatline);
+
+        // Populate map-relevant attributes.
+        $record1->title = 'Item 1 Title';
+        $record2->title = 'Item 2 Title';
+        $record1->description = 'Item 1 description.';
+        $record2->description = 'Item 2 description.';
+        $record1->start_date = 'January 2011';
+        $record2->start_date = 'January 2011';
+        $record1->end_date = 'January 2012';
+        $record2->end_date = 'January 2012';
+        $record1->vector_color = '#ffffff';
+        $record2->vector_color = '#000000';
+        $record1->left_ambiguity_percentage = 0;
+        $record2->left_ambiguity_percentage = 0;
+        $record1->right_ambiguity_percentage = 100;
+        $record1->right_ambiguity_percentage = 100;
+        $record1->time_active = 1;
+        $record2->time_active = 1;
+        $record1->save();
+        $record2->save();
+
+        // Build the JSON.
+        $json = $this->_recordsTable->buildTimelineJson($neatline);
+
+        // Check format.
+        $this->assertEquals(
+            $json,
+            '{"dateTimeFormat":"Gregorian",' .
+            '"events":[{' .
+            '"eventID":' . $record1->item_id . ',' .
+            '"title":"' . $record1->title . '",' .
+            '"description":"' . $record1->description . '",' .
+            '"color":"' . $record1->vector_color . '",' .
+            '"textColor":"#6b6b6b",' .
+            '"left_ambiguity":' . $record1->left_ambiguity_percentage . ',' .
+            '"right_ambiguity":' . $record1->right_ambiguity_percentage . ',' .
+            '"start":"2011-01-01 00:00:00",' .
+            '"end":"2012-01-01 00:00:00"},{' .
+            '"eventID":' . $record2->item_id . ',' .
+            '"title":"' . $record2->title . '",' .
+            '"description":"' . $record2->description . '",' .
+            '"color":"' . $record2->vector_color . '",' .
+            '"textColor":"#6b6b6b",' .
+            '"left_ambiguity":' . $record2->left_ambiguity_percentage . ',' .
+            '"right_ambiguity":' . $record2->right_ambiguity_percentage . ',' .
+            '"start":"2011-01-01 00:00:00",' .
+            '"end":"2012-01-01 00:00:00"}]}'
+        );
+
+    }
+
+    /**
+     * The buildTimelineJson() method should exclude items without active
+     * space status trackers.
+     *
+     * @return void.
+     */
+    public function testBuildTimelineJsonWithInactiveStatus()
+    {
+
+        // Create an exhibit and items.
+        $neatline = $this->helper->_createNeatline();
+        $item = $this->helper->_createItem();
+
+        // Create two records.
+        $record = new NeatlineDataRecord($item, $neatline);
+
+        // Populate map-relevant attributes.
+        $record->title = 'Item Title';
+        $record->description = 'Item description.';
+        $record->start_date = 'January 2011';
+        $record->end_date = 'January 2012';
+        $record->vector_color = '#ffffff';
+        $record->left_ambiguity_percentage = 0;
+        $record->right_ambiguity_percentage = 100;
+        $record->time_active = 0;
+        $record->save();
+
+        // Build the JSON.
+        $json = $this->_recordsTable->buildTimelineJson($neatline);
+
+        // Check format.
+        $this->assertEquals(
+            $json,
+            '{"dateTimeFormat":"Gregorian",' .
+            '"events":[]}'
         );
 
     }

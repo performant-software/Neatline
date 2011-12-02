@@ -346,7 +346,7 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
             );
 
             // If there is a valid start stamp.
-            if (!is_null($timestamps[0])) {
+            if (!is_null($timestamps[0]) && $record->time_active == 1) {
 
                 $eventArray['start'] = $timestamps[0];
 
