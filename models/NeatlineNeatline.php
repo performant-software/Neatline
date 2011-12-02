@@ -137,9 +137,8 @@ class NeatlineNeatline extends Omeka_record
     public function timelineEventsJson()
     {
 
-        // Table getters.
-        $_statusesTable = $this->getTable('NeatlineRecordStatus');
-        $_timeRecordsTable = $this->getTable('NeatlineTimeRecord');
+        // Get the records table.
+        $_recordsTable = $this->getTable('NeatlineDataRecord');
 
         // Shell array for the events data.
         $json = array(
@@ -147,67 +146,66 @@ class NeatlineNeatline extends Omeka_record
             'events' => array()
         );
 
-        // Hit the record statuses table to get a list of all
-        // items that have active time records.
-        $activeItems = $_statusesTable->getItemsWithActiveTimeRecords($this->id);
+        // // Hit the record statuses table to get a list of all
+        // // items that have active time records.
+        // $activeItems = $_statusesTable->getItemsWithActiveTimeRecords($this->id);
 
-        // Walk the items with active records, fetch the time records,
-        // pack them up.
-        foreach ($activeItems as $item) {
+        // // Walk the items with active records, fetch the time records,
+        // // pack them up.
+        // foreach ($activeItems as $item) {
 
-            // Fetch record.
-            $record = $this->getTimeRecord($item);
+        //     // Fetch record.
+        //     $record = $this->getTimeRecord($item);
 
-            // Title and description fields.
-            $title = $this->getTextByItemAndField($item, 'Title');
-            $description = $this->getTextByItemAndField($item, 'Description');
+        //     // Title and description fields.
+        //     $title = $this->getTextByItemAndField($item, 'Title');
+        //     $description = $this->getTextByItemAndField($item, 'Description');
 
-            // Date/time raw strings.
-            $startDate = $this->getTimeTextByItemAndField($item, 'start_date');
-            $startTime = $this->getTimeTextByItemAndField($item, 'start_time');
-            $endDate = $this->getTimeTextByItemAndField($item, 'end_date');
-            $endTime = $this->getTimeTextByItemAndField($item, 'end_time');
+        //     // Date/time raw strings.
+        //     $startDate = $this->getTimeTextByItemAndField($item, 'start_date');
+        //     $startTime = $this->getTimeTextByItemAndField($item, 'start_time');
+        //     $endDate = $this->getTimeTextByItemAndField($item, 'end_date');
+        //     $endTime = $this->getTimeTextByItemAndField($item, 'end_time');
 
-            // Pass the pieces through the timestamp algorithm.
-            $timestamps = neatline_generateTimegliderTimestamps(
-                $startDate,
-                $startTime,
-                $endDate,
-                $endTime
-            );
+        //     // Pass the pieces through the timestamp algorithm.
+        //     $timestamps = neatline_generateTimegliderTimestamps(
+        //         $startDate,
+        //         $startTime,
+        //         $endDate,
+        //         $endTime
+        //     );
 
-            // Color and ambiguity settings.
-            $color = $this->getTextByItemAndField($item, 'Identifier');
-            $leftPercentage = $record->left_ambiguity_percentage;
-            $rightPercentage = $record->right_ambiguity_percentage;
+        //     // Color and ambiguity settings.
+        //     $color = $this->getTextByItemAndField($item, 'Identifier');
+        //     $leftPercentage = $record->left_ambiguity_percentage;
+        //     $rightPercentage = $record->right_ambiguity_percentage;
 
-            $eventArray = array(
-                'eventID' => $item->id,
-                'title' => $title,
-                'description' => $description,
-                'color' => $color,
-                'textColor' => '#6b6b6b',
-                'left_ambiguity' => $leftPercentage,
-                'right_ambiguity' => $rightPercentage
-            );
+        //     $eventArray = array(
+        //         'eventID' => $item->id,
+        //         'title' => $title,
+        //         'description' => $description,
+        //         'color' => $color,
+        //         'textColor' => '#6b6b6b',
+        //         'left_ambiguity' => $leftPercentage,
+        //         'right_ambiguity' => $rightPercentage
+        //     );
 
-            // If there is a valid start stamp.
-            if (!is_null($timestamps[0])) {
+        //     // If there is a valid start stamp.
+        //     if (!is_null($timestamps[0])) {
 
-                $eventArray['start'] = $timestamps[0];
+        //         $eventArray['start'] = $timestamps[0];
 
-                // If there is a valid end stamp.
-                if (!is_null($timestamps[1])) {
-                    $eventArray['end'] = $timestamps[1];
-                }
+        //         // If there is a valid end stamp.
+        //         if (!is_null($timestamps[1])) {
+        //             $eventArray['end'] = $timestamps[1];
+        //         }
 
-                // Only push if there is at least a start.
-                $json['events'][] = $eventArray;
+        //         // Only push if there is at least a start.
+        //         $json['events'][] = $eventArray;
 
-            }
+        //     }
 
-
-        }
+        // }
 
         return json_encode($json);
 
