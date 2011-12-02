@@ -95,14 +95,17 @@ class Neatline_DataController extends Omeka_Controller_Action
         // Set the layout.
         $this->_helper->viewRenderer('udi-ajax');
 
-        // // Get the exhibit id and statuses table.
-        // $neatlineId = $this->_request->getParam('id');
-        // $statusesTable = $this->getTable('NeatlineRecordStatus');
-        // $neatlinesTable = $this->getTable('NeatlineNeatline');
+        // Get the exhibit and active records.
+        $neatlineId = $this->_request->getParam('id');
+        $neatline = $this->_neatlinesTable->find($neatlineId);;
+        $records = $this->_recordsTable->getActiveRecordsByExhibit($neatline);
 
-        // // Get items, push items and Neatline record into view.
-        // $this->view->items = $statusesTable->getUndatedItems($neatlineId);
-        // $this->view->neatline = $neatline = $neatlinesTable->find($neatlineId);
+        // If no active records, pass empty array.
+        if (!$records) $records = array();
+
+        // Get items, push items and Neatline record into view.
+        $this->view->records = $records;
+        $this->view->neatline = $neatline;
 
     }
 

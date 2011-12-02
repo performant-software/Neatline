@@ -163,6 +163,28 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
     }
 
     /**
+     * Find all records associated with a given exhibit that have either
+     * an active space or time status.
+     *
+     * @param Omeka_record $neatline The exhibit record.
+     *
+     * @return array of Omeka_record The records.
+     */
+    public function getActiveRecordsByExhibit($neatline)
+    {
+
+        $records = $this->fetchObjects(
+            $this->getSelect()->where(
+                'exhibit_id = ' . $neatline->id .
+                ' AND (space_active = 1 OR time_active = 1)'
+            )
+        );
+
+        return $records ? $records : false;
+
+    }
+
+    /**
      * Check whether a given record is active on the map or timeline.
      *
      * @param Omeka_record $item The item record.
@@ -287,7 +309,7 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
 
             // If the geocoverage is populated.
             if ($record->space_active == 1 &&
-                !is_null($record->geocoverage)) {
+                !is_null($record->getGeocoverage())) {
 
                 $data[] = array(
                     'id' => $record->item_id,

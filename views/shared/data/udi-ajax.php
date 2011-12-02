@@ -27,24 +27,24 @@
 
 <table>
 
-    <?php foreach ($items as $item): ?>
+    <?php foreach ($records as $record): ?>
 
-        <tr class="item-row" recordid="<?php echo $item->id; ?>">
+        <tr class="item-row" recordid="<?php echo $record->item_id; ?>">
             <td class="item-title">
-                <span class="item-title-text"><?php echo item('Dublin Core', 'Title', null, $item); ?></span>
+                <span class="item-title-text"><?php echo $record->title; ?></span>
             </td>
-            <td class="col-1 col-row space <?php echo neatline_getExistingDataStatusForCheckBox($neatline, $item, 'space'); ?>">
-                <img src="<?php echo img('space_icon.png'); ?>" class="<?php echo neatline_getRecordStatusForIcon($neatline, $item, 'space'); ?>" />
+            <td class="col-1 col-row space">
+                <img src="<?php echo img('space_icon.png'); ?>" class="<?php echo $record->space_active == 1 ? 'active' : 'inactive'; ?>" />
             </td>
-            <td class="col-2 col-row time <?php echo neatline_getExistingDataStatusForCheckBox($neatline, $item, 'time'); ?>">
-                <img src="<?php echo img('time_icon.png'); ?>" class="<?php echo neatline_getRecordStatusForIcon($neatline, $item, 'time'); ?>" />
+            <td class="col-2 col-row time">
+                <img src="<?php echo img('time_icon.png'); ?>" class="<?php echo $record->time_active == 1 ? 'active': 'inactive'; ?>" />
             </td>
         </tr>
 
         <tr class="item-details">
             <td class="item-description" colspan="3">
                 <?php echo $this->partial('data/_item_details.php', array(
-                    'item' => $item,
+                    'record' => $record,
                     'neatline' => $neatline
                 )); ?>
             </td>

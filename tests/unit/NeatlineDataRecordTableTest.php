@@ -672,6 +672,62 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
     }
 
     /**
+     * The getActiveRecordsByExhibit() should return all data records associated
+     * with a given Neatline exhibit that have an active space or time record.
+     *
+     * @return void.
+     */
+    public function testGetActiveRecordsByExhibit()
+    {
+
+        // Create two items and an exhibit.
+        $item1 = $this->helper->_createItem();
+        $item2 = $this->helper->_createItem();
+        $neatline = $this->helper->_createNeatline();
+
+        // Create two records with inactive status settings.
+        $record1 = new NeatlineDataRecord($item1, $neatline);
+        $record1->save();
+        $record2 = new NeatlineDataRecord($item2, $neatline);
+        $record2->save();
+
+        // Should return false.
+        $records = $this->_recordsTable->getActiveRecordsByExhibit($neatline);
+        $this->assertFalse($records);
+
+        $record1->delete();
+        $record2->delete();
+
+        // Create two records, one with an active space status.
+        $record1 = new NeatlineDataRecord($item1, $neatline);
+        $record1->save();
+        $record2 = new NeatlineDataRecord($item2, $neatline);
+        $record2->space_active = 1;
+        $record2->save();
+
+        // Get the records and check result.
+        $records = $this->_recordsTable->getActiveRecordsByExhibit($neatline);
+        $this->assertEquals(count($records), 1);
+        $this->assertEquals($records[0]->id, $record2->id);
+
+        $record1->delete();
+        $record2->delete();
+
+        // Create two records, one with an active space status.
+        $record1 = new NeatlineDataRecord($item1, $neatline);
+        $record1->save();
+        $record2 = new NeatlineDataRecord($item2, $neatline);
+        $record2->time_active = 1;
+        $record2->save();
+
+        // Get the records and check result.
+        $records = $this->_recordsTable->getActiveRecordsByExhibit($neatline);
+        $this->assertEquals(count($records), 1);
+        $this->assertEquals($records[0]->id, $record2->id);
+
+    }
+
+    /**
      * The buildMapJson() method should construct well-formed JSON string with
      * the correct attributes and geocoverage fields populated for each record.
      *

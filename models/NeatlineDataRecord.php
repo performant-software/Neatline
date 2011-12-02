@@ -80,7 +80,6 @@ class NeatlineDataRecord extends Omeka_record
 
     }
 
-
     /**
      * Get the parent item record.
      *
@@ -203,6 +202,20 @@ class NeatlineDataRecord extends Omeka_record
         return !is_null($this->vector_color) ?
             $this->vector_color :
             '#724e85';
+
+    }
+
+    /**
+     * Return coverage.
+     *
+     * @return string $color The color.
+     */
+    public function getGeocoverage()
+    {
+
+        return ($this->geocoverage != '') ?
+            $this->geocoverage :
+            null;
 
     }
 

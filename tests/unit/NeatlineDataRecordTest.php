@@ -284,4 +284,31 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
 
     }
 
+    /**
+     * The getGeocoverage() method should return the vector data attribute when it
+     * is not an empty string; if it is null, return null.
+     *
+     * @return void.
+     */
+    public function testGetGeocoverage()
+    {
+
+        // Create an item, exhibit, and record.
+        $item = $this->helper->_createItem();
+        $neatline = $this->helper->_createNeatline();
+        $record = new NeatlineDataRecord($item, $neatline);
+
+        // Should return null when the value is null.
+        $this->assertNull($record->getGeocoverage());
+
+        // Should return the value when the value is set.
+        $record->geocoverage = 'POINT(0,1)';
+        $this->assertEquals($record->getGeocoverage(), 'POINT(0,1)');
+
+        // Should return null when the value is an empty string.
+        $record->geocoverage = '';
+        $this->assertNull($record->getGeocoverage());
+
+    }
+
 }

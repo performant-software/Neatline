@@ -28,7 +28,7 @@
 <div class="neatline-item-details">
 
     <div class="small-scroll-content">
-        <div class="item-description-content"><?php echo nl2br($neatline->getTextByItemAndField($item, 'Description')); ?></div>
+        <div class="item-description-content"><?php echo nl2br($record->description); ?></div>
     </div>
 
 </div>
