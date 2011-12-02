@@ -45,4 +45,9 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
 
     }
 
+    public function testStub()
+    {
+
+    }
+
 }

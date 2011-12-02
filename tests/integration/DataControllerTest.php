@@ -179,4 +179,62 @@ class Neatline_DataControllerTest extends Omeka_Test_AppTestCase
 
     }
 
+    /**
+     * The /udi route should return well-formed markup for the items pane.
+     *
+     * @return void.
+     */
+    public function testUdi()
+    {
+
+        // Create an exhibit, item, and record.
+        $neatline = $this->helper->_createNeatline();
+        $item = $this->helper->_createItem();
+        $record = new NeatlineDataRecord($item, $neatline);
+
+        // Populate items-relevant attributes.
+        $record->title = 'Item 1 Title';
+        $record->description = 'Item 1 description.';
+        $record->space_active = 1;
+        $record->time_active = 1;
+        $record->save();
+
+        // Hit the route.
+        $this->dispatch('neatline-exhibits/' . $neatline->id . '/data/udi');
+
+        // Check markup.
+        $this->assertQuery('tr.item-row[recordid="' . $item->id . '"]');
+        $this->assertQuery('td.space img.active');
+        $this->assertQuery('td.time img.active');
+
+        $this->assertQueryContentContains(
+            'span.item-title-text',
+            'Item 1 Title');
+
+        $this->assertQueryContentContains(
+            'div.item-description-content',
+            'Item 1 description.');
+
+        // Disable the time status.
+        $record->space_active = 0;
+        $record->time_active = 1;
+        $record->save();
+
+        // Hit the route and check the 'active'/'inactive' classes.
+        $this->dispatch('neatline-exhibits/' . $neatline->id . '/data/udi');
+        $this->assertQuery('td.space img.inactive');
+        $this->assertQuery('td.time img.active');
+
+        // Disable the time status.
+        $record->space_active = 1;
+        $record->time_active = 0;
+        $record->save();
+
+        // Hit the route and check the 'active'/'inactive' classes.
+        $this->dispatch('neatline-exhibits/' . $neatline->id . '/data/udi');
+        $this->assertQuery('td.space img.active');
+        $this->assertQuery('td.time img.inactive');
+
+    }
+
 }

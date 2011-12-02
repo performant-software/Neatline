@@ -115,7 +115,20 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
 
         // If there is not an existing record, create one.
         if (!$record) {
+
             $record = new NeatlineDataRecord($item, $neatline);
+
+            // Try to find DC values.
+            $record->title = neatline_getItemMetadata(
+                $item,
+                'Dublin Core',
+                'Title');
+
+            $record->description = neatline_getItemMetadata(
+                $item,
+                'Dublin Core',
+                'Description');
+
         }
 
         // Update.
