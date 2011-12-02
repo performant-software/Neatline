@@ -279,7 +279,26 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
         // Shell array.
         $data = array();
 
+        // Get records.
+        $records = $this->getRecordsByExhibit($neatline);
 
+        // Walk the records and build out the array.
+        foreach ($records as $record) {
+
+            // If the geocoverage is populated.
+            if ($record->space_active == 1 &&
+                !is_null($record->geocoverage)) {
+
+                $data[] = array(
+                    'id' => $record->item_id,
+                    'title' => $record->title,
+                    'color' => $record->vector_color,
+                    'wkt' => $record->geocoverage
+                );
+
+            }
+
+        }
 
         // JSON-ify the array.
         return json_encode($data);

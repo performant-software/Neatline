@@ -75,11 +75,11 @@ class Neatline_DataController extends Omeka_Controller_Action
         // Supress the default Zend layout-sniffer functionality.
         $this->_helper->viewRenderer->setNoRender(true);
 
-        // Get id.
-        $exhibitId = $this->_request->getParam('id');
+        // Get id and exhibit.
+        $exhibit = $this->_neatlinesTable->find($this->_request->getParam('id'));
 
         // Output the JSON string.
-        echo $_recordsTable->buildOpenlayersJson($exhibitId);
+        echo $this->_recordsTable->buildMapJson($exhibit);
 
     }
 

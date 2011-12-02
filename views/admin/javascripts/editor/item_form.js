@@ -265,7 +265,7 @@
          */
         setCoverageData: function(coverage) {
 
-            this.coverage = coverage[0];
+            this.coverage = coverage;
 
         },
 

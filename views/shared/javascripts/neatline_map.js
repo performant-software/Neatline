@@ -27,8 +27,8 @@
 
         options: {
 
-            // Application mode setting; 'edit' or 'public.'
             mode: 'edit',
+            wkt_delimiter: '|',
 
             // Markup hooks.
             markup: {
@@ -243,7 +243,7 @@
                 var features = [];
 
                 // Build the features.
-                $.each(item.wkt, function(i, wkt) {
+                $.each(item.wkt.split(self.options.wkt_delimiter), function(i, wkt) {
                     var geometry = new OpenLayers.Geometry.fromWKT(wkt);
                     var feature = new OpenLayers.Feature.Vector(geometry);
                     features.push(feature);
@@ -575,16 +575,16 @@
 
         getWktForSave: function() {
 
-            var wkts = {};
+            var wkts = [];
 
             this.modifyFeatures.unselectFeature(this._clickedFeature);
 
             // Push the wkt's onto the array.
             $.each(this._currentEditLayer.features, function(i, feature) {
-                wkts[i] = feature.geometry.toString();
+                wkts.push(feature.geometry.toString());
             });
 
-            return wkts;
+            return wkts.join(this.options.wkt_delimiter);
 
         },
 

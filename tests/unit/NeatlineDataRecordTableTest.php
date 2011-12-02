@@ -621,4 +621,52 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
 
     }
 
+    /**
+     * The buildMapJson() method should construct well-formed JSON string with
+     * the correct attribute and geocoverage fields populated for each record.
+     *
+     * @return void.
+     */
+    public function testBuildMapJson()
+    {
+
+        // Create an exhibit and items.
+        $neatline = $this->helper->_createNeatline();
+        $item1 = $this->helper->_createItem();
+        $item2 = $this->helper->_createItem();
+
+        // Create two records.
+        $record1 = new NeatlineDataRecord($item1, $neatline);
+        $record2 = new NeatlineDataRecord($item2, $neatline);
+
+        // Populate map-relevant attributes.
+        $record1->title = 'Item 1 Title';
+        $record2->title = 'Item 2 Title';
+        $record1->vector_color = '#ffffff';
+        $record2->vector_color = '#000000';
+        $record1->geocoverage = 'POINT(1,0)';
+        $record2->geocoverage = 'POINT(0,1)';
+        $record1->space_active = 1;
+        $record2->space_active = 1;
+        $record1->save();
+        $record2->save();
+
+        // Build the JSON.
+        $json = $this->_recordsTable->buildMapJson($neatline);
+
+        // Check format.
+        $this->assertEquals(
+            $json,
+            '[{"id":' . $record1->item_id . ',' .
+            '"title":"Item 1 Title",' .
+            '"color":"#ffffff",' .
+            '"wkt":"POINT(1,0)"},' .
+            '{"id":' . $record2->item_id . ',' .
+            '"title":"Item 2 Title",' .
+            '"color":"#000000",' .
+            '"wkt":"POINT(0,1)"}]'
+        );
+
+    }
+
 }
