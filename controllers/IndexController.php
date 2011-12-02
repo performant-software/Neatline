@@ -38,9 +38,8 @@ class Neatline_IndexController extends Omeka_Controller_Action
     public function init()
     {
 
-        $this->_neatlinesTable = $this->getTable('NeatlineNeatline');
+        $this->_neatlinesTable = $this->getTable('NeatlineExhibit');
         $this->_mapsTable = $this->getTable('NeatlineMapsMap');
-        $this->_timelinesTable = $this->getTable('NeatlineTimeTimeline');
 
     }
 
@@ -82,7 +81,7 @@ class Neatline_IndexController extends Omeka_Controller_Action
     public function addAction()
     {
 
-        $neatline = new NeatlineNeatline;
+        $neatline = new NeatlineExhibit;
 
         // Try to create the Neatline if the form has been submitted.
         if ($this->_request->isPost()) {

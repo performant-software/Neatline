@@ -89,7 +89,7 @@ class NeatlinePlugin
     public function install()
     {
 
-        $sql = "CREATE TABLE IF NOT EXISTS `{$this->_db->prefix}neatline_neatlines` (
+        $sql = "CREATE TABLE IF NOT EXISTS `{$this->_db->prefix}neatline_exhibits` (
                 `id` int(10) unsigned not null auto_increment,
                 `added` timestamp NOT NULL default NOW(),
                 `name` tinytext collate utf8_unicode_ci,
@@ -130,43 +130,6 @@ class NeatlinePlugin
 
         $this->_db->query($sql);
 
-        $sql = "CREATE TABLE IF NOT EXISTS `{$this->_db->prefix}neatline_records` (
-                `id` int(10) unsigned not null auto_increment,
-                `neatline_id` int(10) unsigned NOT NULL,
-                `item_id` int(10) unsigned NOT NULL,
-                `element_id` int(10) unsigned NOT NULL,
-                `element_text_id` int(10) unsigned NOT NULL,
-                 PRIMARY KEY (`id`)
-               ) ENGINE=innodb DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
-
-        $this->_db->query($sql);
-
-        $sql = "CREATE TABLE IF NOT EXISTS `{$this->_db->prefix}neatline_time_records` (
-                `id` int(10) unsigned not null auto_increment,
-                `neatline_id` int(10) unsigned NOT NULL,
-                `item_id` int(10) unsigned NOT NULL,
-                `start_date_element_text_id` int(10) unsigned NULL,
-                `start_time_element_text_id` int(10) unsigned NULL,
-                `end_date_element_text_id` int(10) unsigned NULL,
-                `end_time_element_text_id` int(10) unsigned NULL,
-                `left_ambiguity_percentage` int(10) unsigned NULL,
-                `right_ambiguity_percentage` int(10) unsigned NULL,
-                 PRIMARY KEY (`id`)
-               ) ENGINE=innodb DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
-
-        $this->_db->query($sql);
-
-        $sql = "CREATE TABLE IF NOT EXISTS `{$this->_db->prefix}neatline_record_statuses` (
-                `id` int(10) unsigned not null auto_increment,
-                `neatline_id` int(10) unsigned NOT NULL,
-                `item_id` int(10) unsigned NOT NULL,
-                `space` tinyint(1) NULL,
-                `time` tinyint(1) NULL,
-                 PRIMARY KEY (`id`)
-               ) ENGINE=innodb DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
-
-        $this->_db->query($sql);
-
     }
 
     /**
@@ -178,23 +141,11 @@ class NeatlinePlugin
     {
 
         // Drop the exhibits table.
-        $sql = "DROP TABLE IF EXISTS `{$this->_db->prefix}neatline_neatlines`";
+        $sql = "DROP TABLE IF EXISTS `{$this->_db->prefix}neatline_exhibits`";
         $this->_db->query($sql);
 
         // Drop the data table.
         $sql = "DROP TABLE IF EXISTS `{$this->_db->prefix}neatline_data_records`";
-        $this->_db->query($sql);
-
-        // Drop the records table.
-        $sql = "DROP TABLE IF EXISTS `{$this->_db->prefix}neatline_records`";
-        $this->_db->query($sql);
-
-        // Drop the time records table.
-        $sql = "DROP TABLE IF EXISTS `{$this->_db->prefix}neatline_time_records`";
-        $this->_db->query($sql);
-
-        // Drop the statuses table.
-        $sql = "DROP TABLE IF EXISTS `{$this->_db->prefix}neatline_record_statuses`";
         $this->_db->query($sql);
 
     }

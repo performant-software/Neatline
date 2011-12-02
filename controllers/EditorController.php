@@ -39,7 +39,7 @@ class Neatline_EditorController extends Omeka_Controller_Action
     {
 
         // Get tables.
-        $this->_neatlinesTable =    $this->getTable('NeatlineNeatline');
+        $this->_neatlinesTable =    $this->getTable('NeatlineExhibit');
         $this->_recordsTable =      $this->getTable('NeatlineDataRecord');
         $this->_mapsTable =         $this->getTable('NeatlineMapsMap');
         $this->_timelinesTable =    $this->getTable('NeatlineTimeTimeline');

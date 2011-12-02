@@ -38,12 +38,7 @@ class Neatline_PublicController extends Omeka_Controller_Action
     public function init()
     {
 
-        // Get tables.
-        $this->_neatlinesTable = $this->getTable('NeatlineNeatline');
-        $this->_mapsTable = $this->getTable('NeatlineMapsMap');
-        $this->_timelinesTable = $this->getTable('NeatlineTimeTimeline');
-        $this->_itemsTable = $this->getTable('Item');
-        $this->_statusesTable = $this->getTable('NeatlineRecordStatus');
+        $this->_neatlinesTable = $this->getTable('NeatlineExhibit');
 
     }
 
@@ -60,17 +55,12 @@ class Neatline_PublicController extends Omeka_Controller_Action
         $neatline = $this->_neatlinesTable->find($id);
         $this->view->neatline = $neatline;
 
-        // Get the map and timeline records.
+        // Get the map record.
         $map = $neatline->getMap();
-        $timeline = $neatline->getTimeline();
 
         // Push the map and timeline records into the view.
         if ($map) {
             $this->view->map = new GeoserverMap_Map($neatline->getMap());
-        }
-
-        if ($timeline) {
-            $this->view->timeline = $neatline->getTimeline();
         }
 
         $collections = $this->getTable('Collection')->findAll();

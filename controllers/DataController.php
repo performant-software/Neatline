@@ -31,6 +31,18 @@ class Neatline_DataController extends Omeka_Controller_Action
 {
 
     /**
+     * Get table objects.
+     *
+     * @return void
+     */
+    public function init()
+    {
+
+        $this->_neatlinesTable = $this->getTable('NeatlineExhibit');
+
+    }
+
+    /**
      * ~ AJAX ~
      * Get events JSON for the timeline.
      *
@@ -42,9 +54,8 @@ class Neatline_DataController extends Omeka_Controller_Action
         // Supress the default Zend layout-sniffer functionality.
         $this->_helper->viewRenderer->setNoRender(true);
 
-        // Get the exhibits table and fetch the record.
-        $_neatlinesTable = $this->getTable('NeatlineNeatline');
-        $neatline = $_neatlinesTable->find($this->_request->getParam('id'));
+        // Fetch the record.
+        $neatline = $this->_neatlinesTable->find($this->_request->getParam('id'));
 
         // Output the JSON string.
         echo $neatline->timelineEventsJson();
@@ -63,9 +74,8 @@ class Neatline_DataController extends Omeka_Controller_Action
         // Supress the default Zend layout-sniffer functionality.
         $this->_helper->viewRenderer->setNoRender(true);
 
-        // Get the exhibits table and fetch the record.
-        $_neatlinesTable = $this->getTable('NeatlineNeatline');
-        $neatline = $_neatlinesTable->find($this->_request->getParam('id'));
+        // Fetch the record.
+        $neatline = $this->_neatlinesTable->find($this->_request->getParam('id'));
 
         // Output the JSON string.
         echo $neatline->openlayersVectorJson();
@@ -84,14 +94,14 @@ class Neatline_DataController extends Omeka_Controller_Action
         // Set the layout.
         $this->_helper->viewRenderer('udi-ajax');
 
-        // Get the exhibit id and statuses table.
-        $neatlineId = $this->_request->getParam('id');
-        $statusesTable = $this->getTable('NeatlineRecordStatus');
-        $neatlinesTable = $this->getTable('NeatlineNeatline');
+        // // Get the exhibit id and statuses table.
+        // $neatlineId = $this->_request->getParam('id');
+        // $statusesTable = $this->getTable('NeatlineRecordStatus');
+        // $neatlinesTable = $this->getTable('NeatlineNeatline');
 
-        // Get items, push items and Neatline record into view.
-        $this->view->items = $statusesTable->getUndatedItems($neatlineId);
-        $this->view->neatline = $neatline = $neatlinesTable->find($neatlineId);
+        // // Get items, push items and Neatline record into view.
+        // $this->view->items = $statusesTable->getUndatedItems($neatlineId);
+        // $this->view->neatline = $neatline = $neatlinesTable->find($neatlineId);
 
     }
 

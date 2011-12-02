@@ -341,20 +341,10 @@ class NeatlineExhibit extends Omeka_record
     public function delete()
     {
 
-        // Table getters.
-        $_statusesTable = $this->getTable('NeatlineRecordStatus');
-        $_recordsTable = $this->getTable('NeatlineRecord');
-        $_timeRecordsTable = $this->getTable('NeatlineTimeRecord');
-
-        // Get records.
-        $statusRecords = $_statusesTable->findBySql('neatline_id = ?', array($this->id));
+        // Get the records table, delete child data.
+        $_recordsTable = $this->getTable('NeatlineDataRecord');
         $records = $_recordsTable->findBySql('neatline_id = ?', array($this->id));
-        $timeRecords = $_timeRecordsTable->findBySql('neatline_id = ?', array($this->id));
-
-        // Delete.
-        foreach ($statusRecords as $record) { $record->delete(); }
         foreach ($records as $record) { $record->delete(); }
-        foreach ($timeRecords as $record) { $record->delete(); }
 
         // Call parent.
         parent::delete();

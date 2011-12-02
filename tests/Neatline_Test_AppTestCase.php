@@ -109,7 +109,7 @@ class Neatline_Test_AppTestCase extends Omeka_Test_AppTestCase
     )
     {
 
-        $neatline = new NeatlineNeatline;
+        $neatline = new NeatlineExhibit;
         $neatline->name = $name;
         $neatline->is_map = $is_map;
         $neatline->is_timeline = $is_timeline;
