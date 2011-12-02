@@ -59,7 +59,12 @@ jQuery(document).ready(function($) {
                 // When a geometry vector is added to the map.
                 'mapfeatureadded': function() {
 
+                    // Make the item title red.
                     editorContainer.itembrowser('markItemTitleAsUnsaved');
+
+                    // Fetch the coverage data from the map.
+                    var wkts = neatlineContainer.neatline('getWktForSave');
+                    editorContainer.itembrowser('setCoverageData', wkts);
 
                 }
 
@@ -84,17 +89,6 @@ jQuery(document).ready(function($) {
         // form is closed without saving.
         'endmapedit': function(event, obj) {
             neatlineContainer.neatline('endMapEditWithoutSave', obj.itemId, obj.immediate);
-        },
-
-        // When an item form is saved, and new vector data needs to
-        // be fethed and posted back to the server.
-        'savemapedit': function() {
-
-            // Fetch the coverage data from the map, push back into
-            // the item editor.
-            var wkts = neatlineContainer.neatline('getWktForSave');
-            editorContainer.itembrowser('setCoverageData', wkts);
-
         },
 
         // After an edit form save, when the JSON for the map and
