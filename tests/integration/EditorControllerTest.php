@@ -193,4 +193,68 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
 
     }
 
+    /**
+     * When form data is saved via the /save route, the controller should return a
+     * JSON string that reports the final space and time active statuses that resulted
+     * from the data commit.
+     *
+     * @return void.
+     */
+    public function testSave()
+    {
+
+        // Create item, exhibit, and record.
+        $item = $this->helper->_createItem();
+        $neatline = $this->helper->_createNeatline();
+
+        // Save form data with update values.
+        $this->_recordsTable->saveItemFormData(
+            $item,
+            $neatline,
+            null,
+            null,
+            'June 25, 1987',
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+        );
+
+        // Form the POST for a space change.
+        $this->request->setMethod('POST')
+            ->setPost(array(
+                'item_id' => $item->id,
+                'neatline_id' => $neatline->id,
+                'space_active' => 'false',
+                'time_active' => 'false',
+                'geocoverage' => 'POINT(0,1)',
+                'title' => '',
+                'description' => '',
+                'start_date' => 'December, 2011',
+                'start_time' => '',
+                'end_date' => '',
+                'end_time' => '',
+                'left_percent' => 0,
+                'right_percent' => 100,
+                'vector_color' => ''
+            )
+        );
+
+        // Hit the route and capture the response.
+        $this->dispatch('neatline-exhibits/editor/save');
+        $response = $this->getResponse()->getBody('default');
+
+        // Test the raw construction with no available DC values.
+        $this->assertEquals(
+            $response,
+            '{"space":true,"time":true}'
+        );
+
+    }
+
 }

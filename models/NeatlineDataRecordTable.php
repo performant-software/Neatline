@@ -47,7 +47,8 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
      * @param array $geoCoverage The array of geocoverage data from
      * the map annotations.
      *
-     * @return void.
+     * @return array $statuses An associative array with the final space and time
+     * statuses that result from the data commit.
      */
     public function saveItemFormData(
         $item,
@@ -59,8 +60,8 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
         $endDate,
         $endTime,
         $vectorColor,
-        $leftPercentage,
-        $rightPercentage,
+        $left,
+        $right,
         $geoCoverage,
         $spaceStatus,
         $timeStatus
@@ -75,6 +76,17 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
             $record = new NeatlineDataRecord($item, $neatline);
         }
 
+        // Capture starting space and time parameters and statuses.
+        $startingSpaceStatus = $record->space_active;
+        $startingTimeStatus = $record->time_active;
+        $startingCoverage = $record->coverage;
+        $startingTime = array(
+            $record->start_date,
+            $record->start_time,
+            $record->end_date,
+            $record->end_time,
+        );
+
         // Set parameters.
         $record->title = $title;
         $record->description = $description;
@@ -84,16 +96,31 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
         $record->end_time = $endTime;
         $record->vector_color = $vectorColor;
         $record->geocoverage = $geoCoverage;
+        $record->setPercentages($left, $right);
 
-        // Set status trackers.
+        // Check for new space data.
+        if (in_array($startingCoverage, array('', null)) && $geoCoverage != '') {
+            $spaceStatus = true;
+        }
+
+        // Check for new time data.
+        if ($startingTime = array('','','','') &&
+            ($startDate != '' || $startTime != '' || $endDate != '' || $endTime != '')) {
+            $timeStatus = true;
+        }
+
+        // Set the statuses.
         $record->setStatus('space', $spaceStatus);
         $record->setStatus('time', $timeStatus);
 
-        // Set the ambiguity percentages.
-        $record->setPercentages($leftPercentage, $rightPercentage);
-
         // Commit.
         $record->save();
+
+        // Return an array with the final statuses.
+        return array(
+            'space' => is_bool($spaceStatus) ? $spaceStatus : (bool) $startingSpaceStatus,
+            'time' => is_bool($timeStatus) ? $timeStatus : (bool) $startingTimeStatus
+        );
 
     }
 

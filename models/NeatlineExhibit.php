@@ -205,7 +205,7 @@ class NeatlineExhibit extends Omeka_record
      * Delete status and element text association records
      * on exhibit delete.
      *
-     * @return JSON string The events JSON.
+     * @return void.
      */
     public function delete()
     {

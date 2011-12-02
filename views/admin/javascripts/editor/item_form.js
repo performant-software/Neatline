@@ -535,14 +535,25 @@
             $.ajax({
 
                 url: 'save',
+                dataType: 'json',
                 type: 'POST',
                 data: data,
 
-                success: function() {
+                success: function(data) {
 
                     // Fade up and trigger out.
                     self._fadeUp();
                     self._trigger('savecomplete');
+
+                    // Update space tracker.
+                    if (data.space) {
+                        self._trigger('spaceactive');
+                    }
+
+                    // Update time tracker.
+                    if (data.time) {
+                        self._trigger('timeactive');
+                    }
 
                 }
 

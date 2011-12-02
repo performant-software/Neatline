@@ -311,6 +311,208 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
     }
 
     /**
+     * saveRecordStatus() should automatically activate space/time status settings
+     * when novel data is saved.
+     *
+     * @return void.
+     */
+    public function testSaveItemFormDataStatusUpdates()
+    {
+
+        // Create item and exhibit.
+        $item = $this->helper->_createItem();
+        $neatline = $this->helper->_createNeatline();
+
+        // Create a record and fill it with valid data.
+        $record = new NeatlineDataRecord($item, $neatline);
+        $record->save();
+
+        // Save form data with updated start_date.
+        $statuses = $this->_recordsTable->saveItemFormData(
+            $item,
+            $neatline,
+            null,
+            null,
+            'June 25, 1987',
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+        );
+
+        // Test the status response.
+        $this->assertTrue($statuses['time']);
+        $this->assertFalse($statuses['space']);
+
+        // Re-get the record, test for time_active.
+        $record = $this->_recordsTable->getRecordByItemAndExhibit($item, $neatline);
+        $this->assertEquals($record->time_active, 1);
+        $record->delete();
+
+        // Create a record and fill it with valid data.
+        $record = new NeatlineDataRecord($item, $neatline);
+        $record->save();
+
+        // Save form data with updated start_time.
+        $statuses = $this->_recordsTable->saveItemFormData(
+            $item,
+            $neatline,
+            null,
+            null,
+            null,
+            '6:00 AM',
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+        );
+
+        // Test the status response.
+        $this->assertTrue($statuses['time']);
+        $this->assertFalse($statuses['space']);
+
+        // Re-get the record, test for time_active.
+        $record = $this->_recordsTable->getRecordByItemAndExhibit($item, $neatline);
+        $this->assertEquals($record->time_active, 1);
+        $record->delete();
+
+        // Create a record and fill it with valid data.
+        $record = new NeatlineDataRecord($item, $neatline);
+        $record->save();
+
+        // Save form data with updated end_date.
+        $statuses = $this->_recordsTable->saveItemFormData(
+            $item,
+            $neatline,
+            null,
+            null,
+            null,
+            null,
+            'June 25, 1987',
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+        );
+
+        // Test the status response.
+        $this->assertTrue($statuses['time']);
+        $this->assertFalse($statuses['space']);
+
+        // Re-get the record, test for time_active.
+        $record = $this->_recordsTable->getRecordByItemAndExhibit($item, $neatline);
+        $this->assertEquals($record->time_active, 1);
+        $record->delete();
+
+        // Create a record and fill it with valid data.
+        $record = new NeatlineDataRecord($item, $neatline);
+        $record->save();
+
+        // Save form data with updated end_time.
+        $statuses = $this->_recordsTable->saveItemFormData(
+            $item,
+            $neatline,
+            null,
+            null,
+            null,
+            null,
+            null,
+            '6:00 AM',
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+        );
+
+        // Test the status response.
+        $this->assertTrue($statuses['time']);
+        $this->assertFalse($statuses['space']);
+
+        // Re-get the record, test for time_active.
+        $record = $this->_recordsTable->getRecordByItemAndExhibit($item, $neatline);
+        $this->assertEquals($record->time_active, 1);
+        $record->delete();
+
+        // Create a record and fill it with valid data.
+        $record = new NeatlineDataRecord($item, $neatline);
+        $record->save();
+
+        // Save form data with updated end_time.
+        $statuses = $this->_recordsTable->saveItemFormData(
+            $item,
+            $neatline,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            'POINT(0,1)',
+            null,
+            null
+        );
+
+        // Test the status response.
+        $this->assertFalse($statuses['time']);
+        $this->assertTrue($statuses['space']);
+
+        // Re-get the record, test for time_active.
+        $record = $this->_recordsTable->getRecordByItemAndExhibit($item, $neatline);
+        $this->assertEquals($record->space_active, 1);
+        $record->delete();
+
+        // Create a record and fill it with valid data.
+        $record = new NeatlineDataRecord($item, $neatline);
+        $record->save();
+
+        // Save form data with updated space and time attribute.
+        $statuses = $this->_recordsTable->saveItemFormData(
+            $item,
+            $neatline,
+            null,
+            null,
+            'June 25, 1987',
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            'POINT(0,1)',
+            null,
+            null
+        );
+
+        // Test the status response.
+        $this->assertTrue($statuses['time']);
+        $this->assertTrue($statuses['space']);
+
+        // Re-get the record, test for time_active.
+        $record = $this->_recordsTable->getRecordByItemAndExhibit($item, $neatline);
+        $this->assertEquals($record->space_active, 1);
+        $this->assertEquals($record->time_active, 1);
+        $record->delete();
+
+    }
+
+    /**
      * saveRecordStatus() should create a new record when there when there
      * is no existing record.
      *

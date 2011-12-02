@@ -256,6 +256,36 @@
         },
 
         /*
+         * Check a space or time status box for an item.
+         */
+        _checkStatusBlockOn: function(item, spaceOrTime) {
+
+            // Get the markup.
+            var block = item.find('.' + spaceOrTime);
+            var checkbox = block.find('input[type="checkbox"]');
+
+            // Check, register.
+            checkbox.prop('checked', true);
+            item.data(spaceOrTime, true);
+
+        },
+
+        /*
+         * Uncheck a space or time status box for an item.
+         */
+        _checkStatusBlockOff: function(item, spaceOrTime) {
+
+            // Get the markup.
+            var block = item.find('.' + spaceOrTime);
+            var checkbox = block.find('input[type="checkbox"]');
+
+            // Uncheck, register.
+            checkbox.prop('checked', false);
+            item.data(spaceOrTime, false);
+
+        },
+
+        /*
          * Check or uncheck a space or time status box for an item.
          */
         _checkStatusBlock: function(item, spaceOrTime) {
@@ -323,6 +353,16 @@
                 'savecomplete': function() {
                     self._trigger('savecomplete');
                     self.markItemTitleAsSaved();
+                },
+
+                // Mark space active on current item.
+                'spaceactive': function() {
+                    self._checkStatusBlockOn(self._currentFormItem, 'space');
+                },
+
+                // Mark time active on current item.
+                'timeactive': function() {
+                    self._checkStatusBlockOn(self._currentFormItem, 'time');
                 }
 
             });

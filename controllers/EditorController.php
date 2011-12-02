@@ -144,7 +144,8 @@ class Neatline_EditorController extends Omeka_Controller_Action
      * ~ AJAX ~
      * Fetch items for the browser.
      *
-     * @return void
+     * @return JSON $statuses An array with the final space and time statuses
+     * that result from the data commit.
      */
     public function saveAction()
     {
@@ -176,7 +177,7 @@ class Neatline_EditorController extends Omeka_Controller_Action
         $item = $this->_itemsTable->find($itemId);
 
         // Save the record data.
-        $this->_recordsTable->saveItemFormData(
+        $statuses = $this->_recordsTable->saveItemFormData(
             $item,
             $neatline,
             $title,
@@ -189,9 +190,11 @@ class Neatline_EditorController extends Omeka_Controller_Action
             $leftPercentage,
             $rightPercentage,
             $geoCoverage,
-            $staceStatus,
+            $spaceStatus,
             $timeStatus
         );
+
+        echo json_encode($statuses);
 
     }
 
