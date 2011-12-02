@@ -450,18 +450,18 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
         $this->_recordsTable->saveItemFormData(
             $item,
             $neatline,
-            't',
-            'd',
-            'sd',
-            'st',
-            'ed',
-            'et',
-            'vc',
-            40,
-            60,
-            'g',
-            1,
-            1
+            self::$__testParams['title'],
+            self::$__testParams['description'],
+            self::$__testParams['start_date'],
+            self::$__testParams['start_time'],
+            self::$__testParams['end_date'],
+            self::$__testParams['end_time'],
+            self::$__testParams['vector_color'],
+            self::$__testParams['left_percent'],
+            self::$__testParams['right_percent'],
+            self::$__testParams['geocoverage'],
+            self::$__testParams['space_active'],
+            self::$__testParams['time_active']
         );
 
         // Ping the method for the json.
@@ -470,7 +470,15 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
         // Check for proper construction.
         $this->assertEquals(
             $json,
-            '{"title":"t","description":"d","start_date":"sd","start_time":"st","end_date":"ed","end_time":"et","left_percent":40,"right_percent":60,"vector_color":"vc"}'
+            '{"title":"' . self::$__testParams['title'] . '",' .
+            '"description":"' . self::$__testParams['description'] . '",' .
+            '"start_date":"' . self::$__testParams['start_date'] . '",' .
+            '"start_time":"' . self::$__testParams['start_time'] . '",' .
+            '"end_date":"' . self::$__testParams['end_date'] . '",' .
+            '"end_time":"' . self::$__testParams['end_time'] . '",' .
+            '"left_percent":' . self::$__testParams['left_percent'] . ',' .
+            '"right_percent":' . self::$__testParams['right_percent'] . ',' .
+            '"vector_color":"' . self::$__testParams['vector_color'] . '"}'
         );
 
     }
@@ -494,7 +502,15 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
         // Check for proper construction.
         $this->assertEquals(
             $json,
-            '{"title":"","description":"","start_date":"","start_time":"","end_date":"","end_time":"","left_percent":0,"right_percent":100,"vector_color":"#724e85"}'
+            '{"title":"",' .
+            '"description":"",' .
+            '"start_date":"",' .
+            '"start_time":"",' .
+            '"end_date":"",' .
+            '"end_time":"",' .
+            '"left_percent":0,' .
+            '"right_percent":100,' .
+            '"vector_color":"#724e85"}'
         );
 
     }
@@ -514,8 +530,17 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
         $neatline = $this->helper->_createNeatline();
 
         // Create title and description element texts.
-        $this->helper->_createElementText($item, 'Dublin Core', 'Title', 'Test Title');
-        $this->helper->_createElementText($item, 'Dublin Core', 'Description', 'Test Description.');
+        $this->helper->_createElementText(
+            $item,
+            'Dublin Core',
+            'Title',
+            'Test Title');
+
+        $this->helper->_createElementText(
+            $item,
+            'Dublin Core',
+            'Description',
+            'Test Description.');
 
         // Ping the method for the json.
         $json = $this->_recordsTable->buildEditFormJson($item, $neatline);
@@ -523,7 +548,15 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
         // Check for proper construction.
         $this->assertEquals(
             $json,
-            '{"title":"Test Title","description":"Test Description.","start_date":"","start_time":"","end_date":"","end_time":"","left_percent":0,"right_percent":100,"vector_color":"#724e85"}'
+            '{"title":"Test Title",' .
+            '"description":"Test Description.",' .
+            '"start_date":"",' .
+            '"start_time":"",' .
+            '"end_date":"",' .
+            '"end_time":"",' .
+            '"left_percent":0,' .
+            '"right_percent":100,' .
+            '"vector_color":"#724e85"}'
         );
 
     }
@@ -560,8 +593,17 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
         );
 
         // Create title and description element texts.
-        $this->helper->_createElementText($item, 'Dublin Core', 'Title', 'Test Title');
-        $this->helper->_createElementText($item, 'Dublin Core', 'Description', 'Test Description.');
+        $this->helper->_createElementText(
+            $item,
+            'Dublin Core',
+            'Title',
+            'Test Title');
+
+        $this->helper->_createElementText(
+            $item,
+            'Dublin Core',
+            'Description',
+            'Test Description.');
 
         // Ping the method for the json.
         $json = $this->_recordsTable->buildEditFormJson($item, $neatline);
@@ -570,7 +612,15 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
         // populated with possible DC values if there is a null value in the record.
         $this->assertEquals(
             $json,
-            '{"title":"Test Title","description":"Test Description.","start_date":"","start_time":"","end_date":"","end_time":"","left_percent":0,"right_percent":100,"vector_color":"#724e85"}'
+            '{"title":"Test Title",' .
+            '"description":"Test Description.",' .
+            '"start_date":"",' .
+            '"start_time":"",' .
+            '"end_date":"",' .
+            '"end_time":"",' .
+            '"left_percent":0,' .
+            '"right_percent":100,' .
+            '"vector_color":"#724e85"}'
         );
 
     }

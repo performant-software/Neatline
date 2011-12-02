@@ -30,6 +30,22 @@
 class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
 {
 
+    // Testing parameters.
+    private static $__testParams = array(
+        'title' => 'Test Title',
+        'description' => 'Test description.',
+        'start_date' => 'April 26, 1564',
+        'start_time' => '6:00 AM',
+        'end_date' => 'April 23, 1616',
+        'end_time' => '6:00 AM',
+        'vector_color' => '#ffffff',
+        'left_percent' => 0,
+        'right_percent' => 100,
+        'geocoverage' => '[POINT(-1.0, 1.0)]',
+        'space_active' => true,
+        'time_active' => true
+    );
+
     /**
      * Instantiate the helper class, install the plugins, get the database.
      *
@@ -135,18 +151,18 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->_recordsTable->saveItemFormData(
             $item,
             $neatline,
-            't',
-            'd',
-            'sd',
-            'st',
-            'ed',
-            'et',
-            'vc',
-            40,
-            60,
-            'g',
-            1,
-            1
+            self::$__testParams['title'],
+            self::$__testParams['description'],
+            self::$__testParams['start_date'],
+            self::$__testParams['start_time'],
+            self::$__testParams['end_date'],
+            self::$__testParams['end_time'],
+            self::$__testParams['vector_color'],
+            self::$__testParams['left_percent'],
+            self::$__testParams['right_percent'],
+            self::$__testParams['geocoverage'],
+            self::$__testParams['space_active'],
+            self::$__testParams['time_active']
         );
 
         // Form the POST for a space change.
@@ -164,7 +180,15 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         // Test the raw construction with no available DC values.
         $this->assertEquals(
             $response,
-            '{"title":"t","description":"d","start_date":"sd","start_time":"st","end_date":"ed","end_time":"et","left_percent":40,"right_percent":60,"vector_color":"vc"}'
+            '{"title":"' . self::$__testParams['title'] . '",' .
+            '"description":"' . self::$__testParams['description'] . '",' .
+            '"start_date":"' . self::$__testParams['start_date'] . '",' .
+            '"start_time":"' . self::$__testParams['start_time'] . '",' .
+            '"end_date":"' . self::$__testParams['end_date'] . '",' .
+            '"end_time":"' . self::$__testParams['end_time'] . '",' .
+            '"left_percent":' . self::$__testParams['left_percent'] . ',' .
+            '"right_percent":' . self::$__testParams['right_percent'] . ',' .
+            '"vector_color":"' . self::$__testParams['vector_color'] . '"}'
         );
 
     }
