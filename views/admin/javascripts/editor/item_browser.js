@@ -880,7 +880,8 @@
 
          _saveForm: function() {
 
-            console.log('save');
+            // Post the data.
+            this.editForm.itemform('saveItemForm');
 
          },
 
@@ -996,7 +997,7 @@
          */
         setCoverageData: function(data) {
 
-            this.coverageData = data;
+            this.editForm.itemform('setCoverageData', data);
 
         },
 

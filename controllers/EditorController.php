@@ -39,12 +39,12 @@ class Neatline_EditorController extends Omeka_Controller_Action
     {
 
         // Get tables.
-        $this->_neatlinesTable = $this->getTable('NeatlineNeatline');
-        $this->_recordsTable = $this->getTable('NeatlineDataRecord');
-        $this->_mapsTable = $this->getTable('NeatlineMapsMap');
-        $this->_timelinesTable = $this->getTable('NeatlineTimeTimeline');
-        $this->_itemsTable = $this->getTable('Item');
-        $this->_statusesTable = $this->getTable('NeatlineRecordStatus');
+        $this->_neatlinesTable =    $this->getTable('NeatlineNeatline');
+        $this->_recordsTable =      $this->getTable('NeatlineDataRecord');
+        $this->_mapsTable =         $this->getTable('NeatlineMapsMap');
+        $this->_timelinesTable =    $this->getTable('NeatlineTimeTimeline');
+        $this->_itemsTable =        $this->getTable('Item');
+        $this->_statusesTable =     $this->getTable('NeatlineRecordStatus');
 
     }
 
@@ -100,12 +100,12 @@ class Neatline_EditorController extends Omeka_Controller_Action
         $this->_helper->viewRenderer('items-ajax');
 
         // Get parameters from the ajax request.
-        $searchString = $this->_request->getParam('search');
-        $tags = $this->_request->getParam('tags');
-        $types = $this->_request->getParam('types');
-        $collections = $this->_request->getParam('collections');
-        $all = json_decode($this->_request->getParam('all'));
-        $neatlineId = $this->_request->getParam('neatline_id');
+        $searchString =             $this->_request->getParam('search');
+        $tags =                     $this->_request->getParam('tags');
+        $types =                    $this->_request->getParam('types');
+        $collections =              $this->_request->getParam('collections');
+        $all =                      json_decode($this->_request->getParam('all'));
+        $neatlineId =               $this->_request->getParam('neatline_id');
 
         // Push in the Neatline exhibit record.
         $this->view->neatline = $this->_neatlinesTable->find($neatlineId);
@@ -162,20 +162,20 @@ class Neatline_EditorController extends Omeka_Controller_Action
         $_post = $this->_request->getPost();
 
         // Get parameters from the ajax request.
-        $itemId = $_post['item_id'];
-        $neatlineId = $_post['neatline_id'];
-        $title = $_post['title'];
-        $description = $_post['description'];
-        $startDate = $_post['start_date'];
-        $startTime = $_post['start_time'];
-        $endDate = $_post['end_date'];
-        $endTime = $_post['end_time'];
-        $geoCoverage = json_encode($_post['geocoverage']);
-        $spaceStatus = (boolean) json_decode($_post['space_status']);
-        $timeStatus = (boolean) json_decode($_post['time_status']);
-        $vectorColor = $_post['vector_color'];
-        $leftPercentage = $_post['left_percentage'];
-        $rightPercentage = $_post['right_percentage'];
+        $itemId =                   $_post['item_id'];
+        $neatlineId =               $_post['neatline_id'];
+        $title =                    $_post['title'];
+        $description =              $_post['description'];
+        $startDate =                $_post['start_date'];
+        $startTime =                $_post['start_time'];
+        $endDate =                  $_post['end_date'];
+        $endTime =                  $_post['end_time'];
+        $geoCoverage =              json_decode($_post['geocoverage']);
+        $spaceStatus =              (boolean) json_decode($_post['space_active']);
+        $timeStatus =               (boolean) json_decode($_post['time_active']);
+        $vectorColor =              $_post['vector_color'];
+        $leftPercentage =           $_post['left_percent'];
+        $rightPercentage =          $_post['right_percent'];
 
         // Fetch the Neatline exhibit record and item record.
         $neatline = $this->_neatlinesTable->find($neatlineId);
@@ -217,10 +217,10 @@ class Neatline_EditorController extends Omeka_Controller_Action
         $_post = $this->_request->getPost();
 
         // Get parameters from the ajax request.
-        $itemId = $_post['item_id'];
-        $neatlineId = $_post['neatline_id'];
-        $spaceOrTime = $_post['space_or_time'];
-        $value = json_decode($_post['value']);
+        $itemId =                   $_post['item_id'];
+        $neatlineId =               $_post['neatline_id'];
+        $spaceOrTime =              $_post['space_or_time'];
+        $value =                    json_decode($_post['value']);
 
         // Fetch the Neatline exhibit record and item record.
         $neatline = $this->_neatlinesTable->find($neatlineId);
@@ -252,10 +252,10 @@ class Neatline_EditorController extends Omeka_Controller_Action
         $_post = $this->_request->getPost();
 
         // Get parameters from the ajax request.
-        $neatlineId = $_post['neatline_id'];
-        $mapExtent = $_post['map_extent'];
-        $mapZoom = $_post['map_zoom'];
-        $timelineCenter = $_post['timeline_center'];
+        $neatlineId =               $_post['neatline_id'];
+        $mapExtent =                $_post['map_extent'];
+        $mapZoom =                  $_post['map_zoom'];
+        $timelineCenter =           $_post['timeline_center'];
 
         // Fetch the Neatline exhibit record and item record.
         $neatline = $this->_neatlinesTable->find($neatlineId);
@@ -285,13 +285,13 @@ class Neatline_EditorController extends Omeka_Controller_Action
         $_post = $this->_request->getPost();
 
         // Get parameters from the ajax request.
-        $neatlineId = $_post['neatline_id'];
-        $isMap = $_post['is_map'];
-        $isTimeline = $_post['is_timeline'];
-        $isUndatedItems = $_post['is_undated_items'];
-        $topElement = $_post['top_element'];
-        $udiPosition = $_post['udi_position'];
-        $udiHeight = $_post['udi_height'];
+        $neatlineId =               $_post['neatline_id'];
+        $isMap =                    $_post['is_map'];
+        $isTimeline =               $_post['is_timeline'];
+        $isUndatedItems =           $_post['is_undated_items'];
+        $topElement =               $_post['top_element'];
+        $udiPosition =              $_post['udi_position'];
+        $udiHeight =                $_post['udi_height'];
 
         // Fetch the Neatline exhibit record and item record.
         $neatline = $this->_neatlinesTable->find($neatlineId);

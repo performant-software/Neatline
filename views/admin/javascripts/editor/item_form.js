@@ -72,6 +72,7 @@
 
             // Trackers.
             this._db = TAFFY();
+            this.coverage = null;
 
             // Preparatory routines.
             this._measureForm();
@@ -179,6 +180,8 @@
             this.itemTitleText =            item.find('.item-title-text');
             this.container =                this.item.next('tr').find('td');
             this.textSpan =                 this.item.find('.item-title-text');
+            this.time =                     this.item.find('.time input');
+            this.space =                    this.item.find('.space input');
 
             // Inject the form markup.
             this.container.append(this.element);
@@ -227,12 +230,13 @@
         },
 
         /*
-         * Pluck data from form, get geocoverage data, build ajax request and
-         * send data for save.
+         * Get form data, get geocoverage data, build ajax request and send
+         * data for save.
          */
         saveItemForm: function() {
 
-            console.log('save');
+            // Post the data.
+            this._postFormData();
 
         },
 
@@ -253,6 +257,15 @@
 
             // Rebuilt the gradient builder.
             this.ambiguity.gradientbuilder('refresh');
+
+        },
+
+        /*
+         * Register geocoverage data from the map.
+         */
+        setCoverageData: function(coverage) {
+
+            this.coverage = coverage;
 
         },
 
@@ -388,15 +401,35 @@
         _getData: function() {
 
             var data = {};
-            data['title'] = this.title.val();
-            data['left_percent'] = parseInt(this.leftPercent.val());
-            data['right_percent'] = parseInt(this.rightPercent.val());
-            data['start_date'] = this.startDate.val();
-            data['start_time'] = this.startTime.val();
-            data['end_date'] = this.endDate.val();
-            data['end_time'] = this.endTime.val();
-            data['description'] = this.description.val();
-            data['vector_color'] = this.color.val();
+
+            // Get the form field data.
+            data['title'] =                 this.title.val();
+            data['left_percent'] =          parseInt(this.leftPercent.val());
+            data['right_percent'] =         parseInt(this.rightPercent.val());
+            data['start_date'] =            this.startDate.val();
+            data['start_time'] =            this.startTime.val();
+            data['end_date'] =              this.endDate.val();
+            data['end_time'] =              this.endTime.val();
+            data['description'] =           this.description.val();
+            data['vector_color'] =          this.color.val();
+
+            return data;
+
+         },
+
+        /*
+         * Get form data and merge with status and coverage data.
+         */
+        _getDataForSave: function() {
+
+            var data = this._getData();
+
+            // Merge the status and coverage data.
+            data['item_id'] =               parseInt(this.itemId);
+            data['neatline_id'] =           Neatline.id;
+            data['space_active'] =          this.space.prop('checked').toString();
+            data['time_active'] =           this.time.prop('checked').toString();
+            data['geocoverage'] =           this.coverage;
 
             return data;
 
@@ -424,7 +457,6 @@
             if (unsavedData) {
                 this._data = unsavedData.data;
                 this._applyData();
-                console.log(unsavedData);
             }
 
             // Otherwise, hit the server for data.
@@ -445,13 +477,36 @@
                         // Push the data into the form.
                         self._data = data;
                         self._applyData();
-                        console.log(data);
 
                     }
 
                 });
 
             }
+
+        },
+
+        /*
+         * Save form data.
+         */
+        _postFormData: function() {
+
+            // Get the data.
+            var data = this._getDataForSave();
+            console.log(data);
+
+            // Commit.
+            $.ajax({
+
+                url: 'save',
+                type: 'POST',
+                data: data,
+
+                success: function() {
+                    console.log('success');
+                }
+
+            });
 
         },
 
