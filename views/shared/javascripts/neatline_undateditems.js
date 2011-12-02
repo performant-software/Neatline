@@ -29,13 +29,9 @@
 
             // Markup hooks.
             markup: {
-                list_container_id: 'undated-items-list-container',
                 item_title_text_class: 'item-title-text',
                 item_title_fader_class: 'item-title-fader',
                 item_row_class: '.item-row',
-                header_container_id: 'public-items-list-header',
-                left_arrow_id: 'left-arrow',
-                right_arrow_id: 'right-arrow',
                 description_td_class: 'item-description',
                 description_content_class: 'item-description-content',
                 reorder_items_id: 'reorder-items',
@@ -63,20 +59,19 @@
         _create: function() {
 
             // Getters.
-            this._window = $(window);
-            this._body = $('body');
-            this.listContainer = $('#' + this.options.markup.list_container_id);
-            this.listHeader = $('#' + this.options.markup.header_container_id);
-            this.leftArrow = $('#' + this.options.markup.left_arrow_id);
-            this.rightArrow = $('#' + this.options.markup.right_arrow_id);
-            this.params = Neatline;
+            this._window =                  $(window);
+            this._body =                    $('body');
+            this.listContainer =            $('#undated-items-list-container');
+            this.listHeader =               $('#public-items-list-header');
+            this.leftArrow =                $('#left-arrow');
+            this.rightArrow =               $('#right-arrow');
 
             // Trackers.
-            this._idToItem = {};
-            this._idToOffset = {};
-            this._currentItem = null;
-            this._currentItemId = null;
-            this._idOrdering = [];
+            this._idToItem =                {};
+            this._idToOffset =              {};
+            this._currentItem =             null;
+            this._currentItemId =           null;
+            this._idOrdering =              [];
 
             // Get starting offets and position markup.
             this.__getScrollBarWidth();
@@ -153,7 +148,7 @@
             // Core ajax call to get items.
             $.ajax({
 
-                url: this.params.dataSources.undated,
+                url: Neatline.dataSources.undated,
                 dataType: 'html',
 
                 success: function(data) {
@@ -178,6 +173,8 @@
 
             // Empty the id-to-item association object.
             this._idToItem = {};
+            this._currentItem = null;
+            this._currentItemId = null;
 
             // Position the faders.
             this._positionTitleFaders();
