@@ -513,7 +513,8 @@
                 data: data,
 
                 success: function() {
-                    console.log('success');
+
+
                 }
 
             });

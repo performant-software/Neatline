@@ -82,7 +82,13 @@ jQuery(document).ready(function($) {
         // When an item form is opened and the item's vector becomes
         // available for editing.
         'mapedit': function(event, obj) {
+
             neatlineContainer.neatline('editMap', obj.item, obj.immediate);
+
+            // Fetch the coverage data from the map.
+            var wkts = neatlineContainer.neatline('getWktForSave');
+            editorContainer.itembrowser('setCoverageData', wkts);
+
         },
 
         // When vector data is added to the map, and then the item
