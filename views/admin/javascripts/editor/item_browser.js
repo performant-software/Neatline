@@ -306,7 +306,7 @@
 
                 // When the color is changed.
                 'colorEdit': function(event, obj) {
-                    self._trigger('coloredit', {}, { 'color': obj.hex });
+                    self._trigger('coloredit', {}, { 'color': obj.color });
                 },
 
                 // When a form is closed.
@@ -317,6 +317,12 @@
                 // When a form is saved.
                 'save': function() {
                     self._saveForm();
+                },
+
+                // When a save finishes.
+                'savecomplete': function() {
+                    self._trigger('savecomplete');
+                    self.markItemTitleAsSaved();
                 }
 
             });
@@ -1025,6 +1031,23 @@
                 itemTitleText.data('changed', true);
 
             }
+
+        },
+
+        /*
+         * Make the item title fade to black to indicate that it has been saved.
+         */
+        markItemTitleAsSaved: function() {
+
+            var itemTitleText = this._currentFormItem.find('.item-title-text');
+
+            // Tween the title color.
+            itemTitleText.animate({
+                'color': this.options.colors.text
+            }, 200);
+
+            // Store the new status.
+            itemTitleText.data('changed', false);
 
         },
 

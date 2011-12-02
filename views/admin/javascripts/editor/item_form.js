@@ -112,7 +112,7 @@
                         self._trigger('formEdit');
                     }
 
-                    self._trigger('coloredit', {}, { 'color': hex });
+                    self._trigger('colorEdit', {}, { 'color': hex });
                     self.ambiguity.gradientbuilder('setColor', hex);
 
                 }
@@ -235,7 +235,8 @@
          */
         saveItemForm: function() {
 
-            // Post the data.
+            // Fade the form, post the data.
+            this._fadeDown();
             this._postFormData();
 
         },
@@ -366,6 +367,30 @@
                 'font-size': 12,
                 'font-weight': textWeight
             }, 100);
+
+         },
+
+        /*
+         * Drop down the opacity during data commit.
+         */
+        _fadeDown: function() {
+
+            // Highlight the item title.
+            this.element.animate({
+                'opacity': 0.3
+            }, 200);
+
+         },
+
+        /*
+         * Push up the opacity after data commit.
+         */
+        _fadeUp: function() {
+
+            // Highlight the item title.
+            this.element.animate({
+                'opacity': 1
+            }, 200);
 
          },
 
@@ -501,9 +526,10 @@
          */
         _postFormData: function() {
 
+            var self = this;
+
             // Get the data.
             var data = this._getDataForSave();
-            console.log(data);
 
             // Commit.
             $.ajax({
@@ -514,6 +540,9 @@
 
                 success: function() {
 
+                    // Fade up and trigger out.
+                    self._fadeUp();
+                    self._trigger('savecomplete');
 
                 }
 
