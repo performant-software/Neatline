@@ -269,6 +269,16 @@
 
         },
 
+        /*
+         * Pop the form out of the DOM to avoid overwriting the markup when new
+         * items are ajaxed into the browse list.
+         */
+        detachForm: function() {
+
+            this.element.detach();
+
+        },
+
 
         /*
          * =================

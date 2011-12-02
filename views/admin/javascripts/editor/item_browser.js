@@ -925,6 +925,10 @@
 
                 success: function(data) {
 
+                    // Pop the edit form out of the DOM.
+                    self.editForm.itemform('detachForm');
+
+                    // Update items.
                     self.itemsList.html(data);
                     self._positionDivs();
                     self._glossItems();
