@@ -44,5 +44,5 @@
         'map' => neatline_getMapDataUrl($neatline->id),
         'undated' => neatline_getUndatedItemsDataUrl($neatline->id)
     ),
-    'public' => false
+    'public' => true
 )); ?>
