@@ -139,7 +139,7 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
         $records = $this->getRecordsByExhibit($neatline);
 
         foreach ($records as $record) {
-            $record->display_order = $order[$record->id];
+            $record->display_order = $order[$record->item_id];
             $record->save();
         }
 
@@ -238,7 +238,7 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
             $this->getSelect()->where(
                 'exhibit_id = ' . $neatline->id .
                 ' AND (space_active = 1 OR time_active = 1)'
-            )
+            )->order('display_order ASC')
         );
 
         return $records ? $records : false;

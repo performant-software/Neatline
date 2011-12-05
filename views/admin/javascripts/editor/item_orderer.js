@@ -405,6 +405,7 @@
 
             this._getRowOrder();
             var orderObject = this.__objectifyOrder();
+            console.log(orderObject);
 
             // Commit.
             $.ajax({

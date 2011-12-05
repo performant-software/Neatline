@@ -287,10 +287,10 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
             ->setPost(array(
                 'neatline_id' => $neatline->id,
                 'order' => array(
-                    $record1->id => 3,
-                    $record2->id => 2,
-                    $record3->id => 1,
-                    $record4->id => 0
+                    $item1->id => 3,
+                    $item2->id => 2,
+                    $item3->id => 1,
+                    $item4->id => 0
                 )
             )
         );

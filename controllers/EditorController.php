@@ -256,6 +256,8 @@ class Neatline_EditorController extends Omeka_Controller_Action
         $neatline = $this->_neatlinesTable->find($neatlineId);
         $this->_recordsTable->saveOrder($neatline, $order);
 
+        print_r($order);
+
     }
 
     /**
