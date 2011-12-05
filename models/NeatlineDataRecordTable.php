@@ -125,6 +125,28 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
     }
 
     /**
+     * Save a new record ordering.
+     *
+     * @param Omeka_record $neatline The exhibit record.
+     * @param array $order The ordering.
+     *
+     * @return void.
+     */
+    public function saveOrder($neatline, $order)
+    {
+
+        // Get all records for the exhibit, flip the order.
+        $records = $this->getRecordsByExhibit($neatline);
+        $order = array_flip($order);
+
+        foreach ($records as $record) {
+            $record->display_order = $order[$record->id];
+            $record->save();
+        }
+
+    }
+
+    /**
      * Save a record status change.
      *
      * @param Omeka_record $item The item record.

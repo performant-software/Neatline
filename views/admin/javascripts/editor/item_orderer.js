@@ -38,9 +38,9 @@
             // Trackers.
             this._isOrdering = false;
             this._dragId = null;
-            this._order = this._getRowOrder();
 
-            // Add functionality.
+            // Get starting order and add functionality.
+            this._getRowOrder();
             this._addReorderingFunctionality();
 
             return $.neatline.neatlineundateditems.prototype._create.apply(
@@ -65,7 +65,7 @@
             $.each(items, function(i, item) {
 
                 var item = $(item);
-                self._order.push(item.attr('recordid'));
+                self._order.push(parseInt(item.attr('recordid')));
 
             });
 
@@ -166,7 +166,7 @@
             this._getRowOrder();
 
             // Track the drag id.
-            this._dragId = dragItem.attr('recordid');
+            this._dragId = parseInt(dragItem.attr('recordid'));
 
             // Gray out the item.
             this.__fadeItem(dragItem);
@@ -175,7 +175,7 @@
             $.each(this.items, function(i, item) {
 
                 var item = $(item);
-                var enterItemId = item.attr('recordid');
+                var enterItemId = parseInt(item.attr('recordid'));
 
                 // Get the item description.
                 var enterDescription = item.next('tr.item-details');
@@ -389,18 +389,17 @@
          */
         _saveOrder: function(item) {
 
-            // Cast the order array to int.
-            var intArray = [];
-            for (var i = 0, len = this._order.length; i < len; i++) {
-                intArray[i] = parseInt(this._order[i]);
-            }
+            console.log(this._order);
 
             // Commit.
             $.ajax({
 
                 url: 'order',
                 type: 'POST',
-                data: intArray,
+                data: {
+                    neatline_id: Neatline.id,
+                    order: this._order
+                },
 
                 success: function() {
 

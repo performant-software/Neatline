@@ -235,6 +235,31 @@ class Neatline_EditorController extends Omeka_Controller_Action
 
     /**
      * ~ AJAX ~
+     * Save new record display ordering.
+     *
+     * @return void
+     */
+    public function orderAction()
+    {
+
+        // Supress the default Zend layout-sniffer functionality.
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        // Get the post.
+        $_post = $this->_request->getPost();
+
+        // Get parameters from the ajax request.
+        $neatlineId =               $_post['neatline_id'];
+        $order =                    $_post['order'];
+
+        // Fetch the Neatline exhibit and save the ordering.
+        $neatline = $this->_neatlinesTable->find($neatlineId);
+        $this->_recordsTable->saveOrder($neatline, $order);
+
+    }
+
+    /**
+     * ~ AJAX ~
      * Save default viewport focus positions.
      *
      * @return void
