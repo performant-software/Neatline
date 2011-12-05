@@ -172,6 +172,8 @@
 
                     'mouseenter': function() {
 
+                        console.log(self._order.indexOf(enterItemId), self._order.indexOf(self._dragId));
+
                         // If the new item different from the item being dragged.
                         if (enterItemId != self._dragId) {
 

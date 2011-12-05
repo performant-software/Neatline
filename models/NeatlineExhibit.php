@@ -212,7 +212,7 @@ class NeatlineExhibit extends Omeka_record
 
         // Get the records table, delete child data.
         $_recordsTable = $this->getTable('NeatlineDataRecord');
-        $records = $_recordsTable->findBySql('neatline_id = ?', array($this->id));
+        $records = $_recordsTable->findBySql('exhibit_id = ?', array($this->id));
         foreach ($records as $record) { $record->delete(); }
 
         // Call parent.
