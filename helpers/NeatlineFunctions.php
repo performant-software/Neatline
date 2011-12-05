@@ -95,7 +95,7 @@ function neatline_queueEditorAssets()
     queue_js('admin/toggle_button', 'javascripts');
     queue_js('editor/item_orderer', 'javascripts');
     queue_js('editor/gradient_builder', 'javascripts');
-    queue_js('editor/_deployment', 'javascripts');
+    queue_js('editor/_constructEditor', 'javascripts');
     queue_js('libraries/jquery.miniColors-0.1/jquery.miniColors.min', 'javascripts');
     queue_js('libraries/taffy-min', 'javascripts');
 
@@ -109,7 +109,7 @@ function neatline_queueEditorAssets()
 function neatline_queuePublicAssets()
 {
 
-    queue_js('_deployment', 'javascripts');
+    queue_js('_constructNeatline', 'javascripts');
 
 }
 
