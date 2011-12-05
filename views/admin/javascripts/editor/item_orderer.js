@@ -384,6 +384,28 @@
         },
 
         /*
+         * Gray out the items.
+         */
+        __fadeItems: function() {
+
+            this.items.animate({
+                'opacity': 0.3
+            }, 200);
+
+        },
+
+        /*
+         * Return the items to full opacity.
+         */
+        __unfadeItems: function() {
+
+            this.items.animate({
+                'opacity': 1
+            }, 200);
+
+        },
+
+        /*
          * Convert the ordering array into an object literal of format
          * recordid => order integer.
          */
@@ -403,9 +425,14 @@
          */
         _saveOrder: function(item) {
 
+            var self = this;
+
+            // Prep the object literal for the backend.
             this._getRowOrder();
             var orderObject = this.__objectifyOrder();
-            console.log(orderObject);
+
+            // Fade down the editor.
+            this.__fadeItems()
 
             // Commit.
             $.ajax({
@@ -418,7 +445,7 @@
                 },
 
                 success: function() {
-
+                    self.__unfadeItems()
                 }
 
             });

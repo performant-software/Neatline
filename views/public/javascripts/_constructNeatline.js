@@ -31,6 +31,9 @@ jQuery(document).ready(function($) {
             // Focus the map.
             neatlineContainer.neatline('zoomMapToItemVectors', obj.itemId);
 
+            // Focus the items tray.
+            neatlineContainer.neatline('showItemDescription', obj.itemId);
+
         },
 
         // When the user clicks on a feature on the map.
@@ -38,6 +41,9 @@ jQuery(document).ready(function($) {
 
             // Focus the timeline.
             neatlineContainer.neatline('zoomTimelineToEvent', obj.itemId);
+
+            // Focus the items tray.
+            neatlineContainer.neatline('showItemDescription', obj.itemId);
 
         }
 
