@@ -38,6 +38,7 @@
             // Trackers.
             this._isOrdering = false;
             this._dragId = null;
+            this._order = this._getRowOrder();
 
             // Add functionality.
             this._addReorderingFunctionality();
@@ -140,6 +141,15 @@
 
             });
 
+            // Listen for click on the save button.
+            this.orderSaveButton.bind({
+
+                'mousedown': function() {
+                    self._saveOrder();
+                }
+
+            });
+
         },
 
         /*
@@ -182,8 +192,6 @@
                             if (self._order.indexOf(enterItemId)
                                 < self._order.indexOf(self._dragId)) {
 
-                                console.log('up');
-
                                 dragItem.detach().insertBefore(item);
                                 dragDescription.detach().insertAfter(dragItem);
 
@@ -193,8 +201,6 @@
                             // that is being dragged into.
                             else if (self._order.indexOf(enterItemId) >
                                      self._order.indexOf(self._dragId)) {
-
-                                console.log('down');
 
                                 dragItem.detach().insertAfter(enterDescription);
                                 dragDescription.detach().insertAfter(dragItem);
@@ -375,6 +381,32 @@
         __unfadeItem: function(item) {
 
             item.css('opacity', 1);
+
+        },
+
+        /*
+         * Commit an ordering.
+         */
+        _saveOrder: function(item) {
+
+            // Cast the order array to int.
+            var intArray = [];
+            for (var i = 0, len = this._order.length; i < len; i++) {
+                intArray[i] = parseInt(this._order[i]);
+            }
+
+            // Commit.
+            $.ajax({
+
+                url: 'order',
+                type: 'POST',
+                data: intArray,
+
+                success: function() {
+
+                }
+
+            });
 
         }
 
