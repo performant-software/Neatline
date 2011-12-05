@@ -23,7 +23,8 @@
 (function($, undefined) {
 
 
-    $.widget('neatline.itemorderer', $.extend({}, $.neatline.neatlineundateditems.prototype, {
+    $.widget('neatline.itemorderer', $.extend(
+        {}, $.neatline.neatlineundateditems.prototype, {
 
         /*
          * Getters and starting get items call.
@@ -31,8 +32,8 @@
         _create: function() {
 
             // Get the buttons.
-            this.reorderItemsButton = $('#' + this.options.markup.reorder_items_id);
-            this.orderSaveButton = $('#' + this.options.markup.order_save_button_id);
+            this.reorderItemsButton =       $('#reorder-items');
+            this.orderSaveButton =          $('#order-save-button');
 
             // Trackers.
             this._isOrdering = false;
@@ -41,7 +42,10 @@
             // Add functionality.
             this._addReorderingFunctionality();
 
-            return $.neatline.neatlineundateditems.prototype._create.apply(this, arguments);
+            return $.neatline.neatlineundateditems.prototype._create.apply(
+                this,
+                arguments
+            );
 
         },
 
@@ -173,16 +177,22 @@
 
                             // If the item being dragged is currently below the item
                             // that is being dragged into.
-                            if (self._order.indexOf(enterItemId) < self._order.indexOf(self._dragId)) {
+                            if (self._order.indexOf(enterItemId)
+                                < self._order.indexOf(self._dragId)) {
+
                                 dragItem.detach().insertBefore(item);
                                 dragDescription.detach().insertAfter(dragItem);
+
                             }
 
                             // If the item being dragged is currently above the item
                             // that is being dragged into.
-                            else if (self._order.indexOf(enterItemId) > self._order.indexOf(self._dragId)) {
+                            else if (self._order.indexOf(enterItemId) >
+                                     self._order.indexOf(self._dragId)) {
+
                                 dragItem.detach().insertAfter(enterDescription);
                                 dragDescription.detach().insertAfter(dragItem);
+
                             }
 
                             // Update the ordering.
@@ -288,7 +298,7 @@
 
                 // Get the description.
                 var item = $(item);
-                var descriptionTd = item.next('tr').find('td.' + self.options.markup.description_td_class);
+                var descriptionTd = item.next('tr').find('td.item-description');
 
                 // Hide the description.
                 self.__contractDescription(descriptionTd);
@@ -313,7 +323,7 @@
 
                 // Get the description.
                 var item = $(item);
-                var descriptionTd = item.next('tr').find('td.' + self.options.markup.description_td_class);
+                var descriptionTd = item.next('tr').find('td.item-description');
 
                 // Show the description.
                 self.__expandDescription(descriptionTd);
@@ -364,7 +374,8 @@
 
     }));
 
-    $.neatline.neatlineundateditems.defaults = $.extend({}, $.neatline.neatlineundateditems.defaults);
+    $.neatline.neatlineundateditems.defaults = $.extend(
+        {},$.neatline.neatlineundateditems.defaults);
 
 
 })( jQuery );
