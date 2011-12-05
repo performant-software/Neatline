@@ -55,11 +55,13 @@
         _getRowOrder: function() {
 
             var self = this;
-
             this._order = [];
 
+            // Re-get the items.
+            var items = this.element.find('.item-row');
+
             // Walk the items.
-            $.each(this.items, function(i, item) {
+            $.each(items, function(i, item) {
 
                 var item = $(item);
                 self._order.push(item.attr('recordid'));
@@ -172,8 +174,6 @@
 
                     'mouseenter': function() {
 
-                        console.log(self._order.indexOf(enterItemId), self._order.indexOf(self._dragId));
-
                         // If the new item different from the item being dragged.
                         if (enterItemId != self._dragId) {
 
@@ -181,6 +181,8 @@
                             // that is being dragged into.
                             if (self._order.indexOf(enterItemId)
                                 < self._order.indexOf(self._dragId)) {
+
+                                console.log('up');
 
                                 dragItem.detach().insertBefore(item);
                                 dragDescription.detach().insertAfter(dragItem);
@@ -192,15 +194,17 @@
                             else if (self._order.indexOf(enterItemId) >
                                      self._order.indexOf(self._dragId)) {
 
+                                console.log('down');
+
                                 dragItem.detach().insertAfter(enterDescription);
                                 dragDescription.detach().insertAfter(dragItem);
 
                             }
 
-                            // Update the ordering.
-                            self._getRowOrder();
-
                         }
+
+                        // Update the ordering.
+                        self._getRowOrder();
 
                     }
 
