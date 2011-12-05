@@ -1132,4 +1132,55 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
 
     }
 
+    /**
+     * The saveOrder() method should commit a new record ordering.
+     *
+     * @return void.
+     */
+    public function testSaveOrder()
+    {
+
+        // Create an exhibit, items, and records.
+        $neatline = $this->helper->_createNeatline();
+        $item1 = $this->helper->_createItem();
+        $item2 = $this->helper->_createItem();
+        $item3 = $this->helper->_createItem();
+        $item4 = $this->helper->_createItem();
+        $record1 = new NeatlineDataRecord($item1, $neatline);
+        $record2 = new NeatlineDataRecord($item2, $neatline);
+        $record3 = new NeatlineDataRecord($item3, $neatline);
+        $record4 = new NeatlineDataRecord($item4, $neatline);
+        $record1->save();
+        $record2->save();
+        $record3->save();
+        $record4->save();
+
+        // By default, the display_order columns should be null.
+        $this->assertNull($record1->display_order);
+        $this->assertNull($record2->display_order);
+        $this->assertNull($record3->display_order);
+        $this->assertNull($record4->display_order);
+
+        $order = array(
+            $record1->id => 3,
+            $record2->id => 2,
+            $record3->id => 1,
+            $record4->id => 0
+        );
+
+        // Push a new order, reget the items.
+        $this->_recordsTable->saveOrder($neatline, $order);
+        $record1 = $this->_recordsTable->getRecordByItemAndExhibit($item1, $neatline);
+        $record2 = $this->_recordsTable->getRecordByItemAndExhibit($item2, $neatline);
+        $record3 = $this->_recordsTable->getRecordByItemAndExhibit($item3, $neatline);
+        $record4 = $this->_recordsTable->getRecordByItemAndExhibit($item4, $neatline);
+
+        // Check the values.
+        $this->assertEquals($record1->display_order, 3);
+        $this->assertEquals($record2->display_order, 2);
+        $this->assertEquals($record3->display_order, 1);
+        $this->assertEquals($record4->display_order, 0);
+
+    }
+
 }

@@ -137,7 +137,6 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
 
         // Get all records for the exhibit, flip the order.
         $records = $this->getRecordsByExhibit($neatline);
-        $order = array_flip($order);
 
         foreach ($records as $record) {
             $record->display_order = $order[$record->id];

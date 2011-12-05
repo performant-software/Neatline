@@ -40,7 +40,6 @@
             this._dragId = null;
 
             // Get starting order and add functionality.
-            this._getRowOrder();
             this._addReorderingFunctionality();
 
             return $.neatline.neatlineundateditems.prototype._create.apply(
@@ -385,11 +384,27 @@
         },
 
         /*
+         * Convert the ordering array into an object literal of format
+         * recordid => order integer.
+         */
+        __objectifyOrder: function() {
+
+            var order = {};
+            $.each(this._order, function(i, recordid) {
+                order[recordid] = i;
+            });
+
+            return order;
+
+        },
+
+        /*
          * Commit an ordering.
          */
         _saveOrder: function(item) {
 
-            console.log(this._order);
+            this._getRowOrder();
+            var orderObject = this.__objectifyOrder();
 
             // Commit.
             $.ajax({
@@ -398,7 +413,7 @@
                 type: 'POST',
                 data: {
                     neatline_id: Neatline.id,
-                    order: this._order
+                    order: orderObject
                 },
 
                 success: function() {
