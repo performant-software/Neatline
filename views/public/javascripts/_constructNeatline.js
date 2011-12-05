@@ -23,6 +23,17 @@ jQuery(document).ready(function($) {
 
     var neatlineContainer = $('.neatline-container');
 
+    // Positioning manager.
+    neatlineContainer.fullscreenpositioner({
+
+        'resize': function() {
+            neatlineContainer.neatline('positionDivs');
+            neatlineContainer.neatline('positionBlockMarkup');
+        }
+
+    });
+
+    // Neatline.
     neatlineContainer.neatline({
 
         // When the user clicks on an item on the timeline.
@@ -45,7 +56,23 @@ jQuery(document).ready(function($) {
             // Focus the items tray.
             neatlineContainer.neatline('showItemDescription', obj.itemId);
 
+        },
+
+        // When the user clicks on an item in the items tray.
+        'undateditemclick': function(event, obj) {
+
+            // Focus the map.
+            neatlineContainer.neatline('zoomMapToItemVectors', obj.itemId);
+
+            // Focus the timeline.
+            neatlineContainer.neatline('zoomTimelineToEvent', obj.itemId);
+
+            // Focus the items tray.
+            neatlineContainer.neatline('showItemDescription', obj.itemId);
+
         }
+
+
 
     });
 

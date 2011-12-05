@@ -30,9 +30,10 @@
         <div id="left-arrow" class="arrow left"></div>
         <div id="right-arrow" class="arrow right"></div>
     </div>
-    <!-- DEV: Add ACL check for edit privileges here. -->
-    <div id="reorder-items"></div>
-    <button id="order-save-button" class="btn primary small">Save</button>
+    <?php if (!$public): ?>
+        <div id="reorder-items"></div>
+        <button id="order-save-button" class="btn primary small">Save</button>
+    <?php endif; ?>
 </div>
 
 <div id="undated-items-list-container"></div>
