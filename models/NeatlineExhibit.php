@@ -49,18 +49,18 @@ class NeatlineExhibit extends Omeka_record
     /**
      * Validate the add Neatline form.
      *
-     * @param $_post The post data.
+     * @param string $title The title.
      *
      * @return array $errors A list of errors to display.
      */
-    public function validateForm($_post)
+    public function validateForm($title)
     {
 
         $errors = array();
 
         // Title.
-        if ($_post['title'] == '') {
-            $errors['title'] = 'Enter a title';
+        if ($title == '') {
+            $errors['title'] = 'Enter a title.';
         }
 
         return $errors;
@@ -74,30 +74,15 @@ class NeatlineExhibit extends Omeka_record
      *
      * @return boolean True if save is successful.
      */
-    public function saveForm($_post)
-    {
-
-        $this->populateData($_post);
-        return $this->save() ? true : false;
-
-    }
-
-    /**
-     * Populate parameters.
-     *
-     * @param $_post The post data.
-     *
-     * @return void.
-     */
-    public function populateData($_post)
+    public function saveForm($title, $map)
     {
 
         $this->added = neatline_getMysqlDatetime();
-        $this->name = $_post['title'];
+        $this->name = $title;
 
         // Check for map.
-        if (is_numeric($_post['map'])) {
-            $this->map_id = $_post['map'];
+        if (is_numeric($map)) {
+            $this->map_id = $map;
             $this->is_map = 1;
         } else {
             $this->map_id = null;
@@ -112,8 +97,10 @@ class NeatlineExhibit extends Omeka_record
 
         // Set defaults layout parameters.
         $this->top_element = 'map';
-        $this->undated_items_position = 'left';
-        $this->undated_items_height = 'partial';
+        $this->undated_items_position = 'right';
+        $this->undated_items_height = 'full';
+
+        return $this->save() ? true : false;
 
     }
 
