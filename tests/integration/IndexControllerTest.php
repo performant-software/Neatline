@@ -47,14 +47,99 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
     }
 
     /**
-     * Do.
+     * Index should redirect to the browse action.
      *
      * @return void.
      */
-    public function testStub()
+    public function testIndexRedirect()
     {
 
+        $this->dispatch('neatline-exhibits');
+        $this->assertModule('neatline');
+        $this->assertController('index');
+        $this->assertAction('browse');
 
+    }
+
+    /**
+     * Check for base markup in the browse view.
+     *
+     * @return void.
+     */
+    public function testBrowseBaseMarkup()
+    {
+
+        $this->dispatch('neatline-exhibits');
+
+        // There should be a 'Create Neatline' button.
+        $this->assertQueryContentContains(
+            'a.add',
+            'Create a Neatline'
+        );
+
+    }
+
+    /**
+     * When there are no exhibits, the browse view should display a link
+     * to create an exhibit.
+     *
+     * @return void.
+     */
+    public function testBrowseWithNoExhibits()
+    {
+
+        $this->dispatch('neatline-exhibits');
+
+        $this->assertQueryContentContains(
+            'p.neatline-alert',
+            'There are no Neatline exhibits yet.'
+        );
+
+        $this->assertQueryContentContains(
+            'a',
+            'Create one!'
+        );
+
+    }
+
+    /**
+     * When there are exhibits, the browse view should list them.
+     *
+     * @return void.
+     */
+    public function testBrowseWithExhibits()
+    {
+
+        // Create entities.
+        $exhibit = $this->helper->_createNeatline();
+        $map = new NeatlineMapsMap;
+        $map->name = 'Test Map';
+        $map->save();
+        $exhibit->map_id = $map->id;
+
+        $this->dispatch('neatline-exhibits');
+
+        // Title.
+        $this->assertQueryContentContains(
+            'a.neatline-title',
+            'Test Exhibit'
+        );
+
+        // Map name.
+        $this->assertQueryContentContains(
+            'a.neatline',
+            'Test Map'
+        );
+
+        // Edit.
+        $this->assertQueryContains(
+            'form[action="' . __v()->uriSlug . '/editor/' . $exhibit->id . '"]'
+        );
+
+        // Delete.
+        $this->assertQueryContains(
+            'form[action="' . __v()->uriSlug . '/delete/' . $exhibit->id . '"]'
+        );
 
     }
 
