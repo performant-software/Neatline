@@ -64,6 +64,30 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
     }
 
     /**
+     * The index view should render the base markup for the editing application.
+     *
+     * @return void.
+     */
+    public function testIndex()
+    {
+
+
+
+    }
+
+    /**
+     * The /items route should return a correctly-filtered list of items.
+     *
+     * @return void.
+     */
+    public function testItems()
+    {
+
+
+
+    }
+
+    /**
      * Hitting the /status route with a well-formed POST should result in the
      * correct data commits to the space_active field in the correct record.
      *
@@ -313,7 +337,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
     }
 
     /**
-     * When a new arrangement configuration saved via the /save route, the
+     * When a new arrangement configuration saved via the /arrangement route, the
      * exhibit record should be updated and the view should return a json-encoded
      * representation of the updated exhibit record.
      *
@@ -378,6 +402,39 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
             '"default_timeline_focus_date":null,' .
             '"id":1}'
         );
+
+    }
+
+    /**
+     * When a new default map/timeline focus data is saved via the /positions
+     * route, the corresponding attributes should be updated on the exhibit record.
+     *
+     * @return void.
+     */
+    public function testPositions()
+    {
+
+        // Create an exhibit.
+        $exhibit = $this->helper->_createNeatline();
+
+        // Form the POST for a space change.
+        $this->request->setMethod('POST')
+            ->setPost(array(
+                'neatline_id' => $exhibit->id,
+                'map_extent' => 'extent',
+                'map_zoom' => 1,
+                'timeline_center' => 'center'
+            )
+        );
+
+        // Hit the positions save route, reget the exhibit.
+        $this->dispatch('neatline-exhibits/editor/positions');
+        $exhibit = $this->_exhibitsTable->find($exhibit->id);
+
+        // Check the attributes.
+        $this->assertEquals($exhibit->default_map_bounds, 'extent');
+        $this->assertEquals($exhibit->default_map_zoom, 1);
+        $this->assertEquals($exhibit->default_timeline_focus_date, 'center');
 
     }
 
