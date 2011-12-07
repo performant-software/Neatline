@@ -324,10 +324,10 @@ function neatline_linkToTimeline($neatline)
  *
  * @return void.
  */
-function neatline_pagination($pagination, $numberOfNeatlines)
+function neatline_pagination($pagination)
 {
 
-    if ($numberOfNeatlines > $pagination['per_page']) {
+    if ($pagination['total_results'] > $pagination['per_page']) {
 
         ?>
 

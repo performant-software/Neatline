@@ -71,7 +71,7 @@ class NeatlineExhibitTable extends Omeka_Db_Table
     {
 
         return array(
-            'current_page' => $request->page,
+            'current_page' => $page,
             'per_page' => get_option('per_page_admin'),
             'total_results' => $this->count()
         );

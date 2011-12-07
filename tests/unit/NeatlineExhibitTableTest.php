@@ -134,4 +134,32 @@ class Neatline_NeatlineExhibitTableTest extends Omeka_Test_AppTestCase
 
     }
 
+    /**
+     * getPaginationSettings() should return a well-formed configuration array for
+     * the pagination view helpers.
+     *
+     * @return void.
+     */
+    public function testGetPaginationSettings()
+    {
+
+        // Create exhibits.
+        $exhibit1 = $this->helper->_createNeatline();
+        $exhibit2 = $this->helper->_createNeatline();
+        $exhibit3 = $this->helper->_createNeatline();
+        $exhibit4 = $this->helper->_createNeatline();
+
+        // Check.
+        set_option('per_page_admin', 2);
+        $this->assertEquals(
+            $this->_exhibitsTable->getPaginationSettings(1),
+            array(
+                'current_page' => 1,
+                'per_page' => 2,
+                'total_results' => 4
+            )
+        );
+
+    }
+
 }
