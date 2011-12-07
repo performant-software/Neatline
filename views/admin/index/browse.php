@@ -45,6 +45,7 @@ head(array('content_class' => 'neatline'));
 
     <thead>
         <tr>
+        <!-- Column headings. -->
         <?php browse_headings(array(
             'Title' => 'name',
             'Map' => null,
@@ -55,6 +56,7 @@ head(array('content_class' => 'neatline'));
     </thead>
 
     <tbody>
+        <!-- Exhibit listings. -->
         <?php foreach ($neatlines as $neatline): ?>
         <tr exhibitid="<?php echo $neatline->id; ?>">
             <td class="title"><?php echo neatline_linkToNeatline($neatline); ?></td>
@@ -69,7 +71,19 @@ head(array('content_class' => 'neatline'));
 
 </table>
 
-<?php echo neatline_pagination($pagination); ?>
+<!-- Pagination. -->
+<?php if ($pagination['total_results'] > $pagination['per_page']): ?>
+    <div class="neatline-pagination">
+        <?php echo pagination_links(array('scrolling_style' => 'All',
+        'page_range' => '5',
+        'partial_file' => 'index/_pagination.php',
+        'page' => $pagination['current_page'],
+        'per_page' => $pagination['per_page'],
+        'total_results' => $pagination['total_results'])); ?>
+    </div>
+<?php endif; ?>
+
+<!-- Delete confirm markup. -->
 <?php echo $this->partial('index/_delete_confirm.php'); ?>
 
 <?php else: ?>

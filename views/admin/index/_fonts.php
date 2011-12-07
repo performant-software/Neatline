@@ -2,11 +2,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
 
 /**
- * Header partial template for logo, nav, and add button. For the navigation, the
- * template uses raw markup instead of the nav() helper because of an inflexibility
- * in the is_current_uri() function, which in this situation interprets the
- * 'neatline-exhibits' route as being active in all three cases, which causes the
- * 'Neatlines' tab to have the current class in all cases, which is not appropriate.
+ * Google fonts.
  *
  * PHP version 5
  *
@@ -29,16 +25,4 @@
  */
 ?>
 
-<div id="neatline-header">
-
-    <a href="<?php echo uri('neatline-exhibits'); ?>">
-        <img id="neatline-logo" src="<?php echo img('neatline-logo-rgb-small.png'); ?>" />
-    </a>
-
-    <p class="add-button">
-        <a class="add" href="<?php echo html_escape(uri($add_button_uri)); ?>">
-            <?php echo $add_button_text; ?>
-        </a>
-    </p>
-
-</div>
+  <link href='http://fonts.googleapis.com/css?family=Crimson+Text:400,400italic,600,600italic,700,700italic' rel='stylesheet' type='text/css'>

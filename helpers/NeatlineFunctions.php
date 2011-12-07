@@ -38,9 +38,7 @@ function neatline_queueAdminCss()
     queue_css('neatline-admin');
     queue_css('bootstrap-excerpts');
 
-    ?>
-    <link href='http://fonts.googleapis.com/css?family=Crimson+Text:400,400italic,600,600italic,700,700italic' rel='stylesheet' type='text/css'>
-    <?php
+    echo __v()->partial('index/_fonts.php');
 
 }
 
@@ -206,9 +204,9 @@ function neatline_deleteConfirmForm()
     }
 
     $fieldset = '<fieldset class="' . $fieldsetClass . '">'
-                . $view->formSubmit($name, $value, $attribs)
-                . '</fieldset>'
-                . $view->formHidden('confirmed', 'confirmed');
+        . $view->formSubmit($name, $value, $attribs)
+        . '</fieldset>'
+        . $view->formHidden('confirmed', 'confirmed');
 
     $form = $view->form($formName, $formAttribs, $fieldset);
 
@@ -228,8 +226,7 @@ function neatline_hiddenElement($name, $value)
 {
 
     $element = new Zend_Form_Element_Hidden($name);
-    $element->setValue($value)
-        ->setDecorators(array('ViewHelper'));
+    $element->setValue($value)->setDecorators(array('ViewHelper'));
 
     return $element;
 
@@ -245,9 +242,9 @@ function neatline_hiddenElement($name, $value)
 function neatline_linkToNeatline($neatline)
 {
 
-    return '<a class="neatline-title" href="' . uri('neatline-exhibits/editor/' . $neatline->id) . '">'
-         . $neatline->name
-         . '</a>';
+    $url = uri('neatline-exhibits/editor/' . $neatline->id);
+
+    return '<a class="neatline-title" href="' . $uri . '">' . $neatline->name . '</a>';
 
 }
 
@@ -264,14 +261,13 @@ function neatline_linkToMap($neatline)
     $map = $neatline->getMap();
 
     if (!$map) {
-        return '<span class="neatline-null">'
-             . '( no map )'
-             . '</span>';
+        return '<span class="neatline-null">( no map )</span>';
     }
 
-    return '<a class="neatline"  href="' . uri('neatline-maps/maps/' . $map->id . '/files') . '">'
-         . $map->name
-         . '</a>';
+    else {
+        $uri = uri('neatline-maps/maps/' . $map->id . '/files');
+        return '<a class="neatline"  href="' . $uri . '">' . $map->name . '</a>';
+    }
 
 }
 
@@ -314,35 +310,6 @@ function neatline_linkToTimeline($neatline)
     return '<a class="neatline"  href="' . uri('neatline-time/timelines/show/' . $timeline->id) . '">'
          . $timeline->title
          . '</a>';
-
-}
-
-/**
- * Do pagination markup.
- *
- * @param array $pagination Array with parameters.
- *
- * @return void.
- */
-function neatline_pagination($pagination)
-{
-
-    if ($pagination['total_results'] > $pagination['per_page']) {
-
-        ?>
-
-            <div class="neatline-pagination">
-                <?php echo pagination_links(array('scrolling_style' => 'All',
-                'page_range' => '5',
-                'partial_file' => 'index/_pagination.php',
-                'page' => $pagination['current_page'],
-                'per_page' => $pagination['per_page'],
-                'total_results' => $pagination['total_results'])); ?>
-            </div>
-
-        <?php
-
-    }
 
 }
 
@@ -408,52 +375,6 @@ function neatline_mapSelect($id)
 }
 
 /**
- * Construct the timelines dropdown select.
- *
- * @param integer $id The id of the selected map.
- *
- * @return void.
- */
-function neatline_timelineSelect($id)
-{
-
-    // If no default is set, make choice 'none'.
-    if ($id == null) {
-        $id = 'none';
-    }
-
-    $timelines = neatline_getTimelinesForSelect();
-    $timelineSelect = new Zend_Form_Element_Select('timeline');
-
-    $timelineSelect->addMultiOption('none', '-');
-    foreach ($timelines as $timeline) {
-        $timelineSelect->addMultiOption($timeline->id, $timeline->title);
-    }
-
-    // Set the default value.
-    $timelineSelect->setValue($id);
-
-    return $timelineSelect;
-
-}
-
-/**
- * Construct the timelines dropdown select.
- *
- * @param string $text The value of the input.
- *
- * @return void.
- */
-function neatline_titleInput($text)
-{
-
-    $neatlineTitle = new Zend_Form_Element_Text('title');
-    $neatlineTitle->setValue($text);
-    return $neatlineTitle;
-
-}
-
-/**
  * Query for maps, adding data about the parent items
  * to use while constructing the order in the drop-down.
  *
@@ -464,7 +385,8 @@ function neatline_getMapsForSelect()
 
     $_db = get_db();
     $mapsTable = $_db->getTable('NeatlineMapsMap');
-    $parentItemSql = "(SELECT text from `$_db->ElementText` WHERE record_id = m.item_id AND element_id = 50 LIMIT 1)";
+    $parentItemSql = "(SELECT text from `$_db->ElementText` WHERE " .
+       "record_id = m.item_id AND element_id = 50 LIMIT 1)";
 
     $select = $mapsTable->select()
         ->from(array('m' => $_db->prefix . 'neatline_maps_maps'))
@@ -729,7 +651,10 @@ function neatline_getItemMetadata($item, $elementSet, $elementName)
     $recordTypeTable = $_db->getTable('RecordType');
 
     // Fetch the element record for the field.
-    $element = $elementTable->findByElementSetNameAndElementName($elementSet, $elementName);
+    $element = $elementTable->findByElementSetNameAndElementName(
+        $elementSet,
+        $elementName
+    );
 
     // Get the record type for Item.
     $itemTypeId = $recordTypeTable->findIdFromName('Item');
