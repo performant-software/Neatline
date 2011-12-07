@@ -33,20 +33,19 @@ class NeatlineExhibitTable extends Omeka_Db_Table
     /**
      * Fetch Neatlines for the main browse view.
      *
-     * @param array $request The request passed in from the controller.
+     * @param string $sortField The column to sort by.
+     * @param string $sortDir 'a' or 'd' for ASC and DESC.
+     * @param integer $page The page number.
      *
      * @return array of Omeka_record $neatlines The Neatlines.
      */
-    public function getNeatlinesForBrowse($request)
+    public function getNeatlinesForBrowse(
+        $sortField = 'added',
+        $sortDir = 'd',
+        $page = 1)
     {
 
-        $_db = get_db();
-
-        $sortField = $request->getParam('sort_field');
-        $sortDir = $request->getParam('sort_dir');
-        $page = $request->page;
         $orderClause = neatline_buildOrderClause($sortField, $sortDir);
-
         $select = $this->getSelect();
 
         if (isset($page)) {
@@ -64,11 +63,11 @@ class NeatlineExhibitTable extends Omeka_Db_Table
     /**
      * Build array with current_page, per_page, and total_results.
      *
-     * @param array $request The request passed in from the controller.
+     * @param integer $page The page number.
      *
      * @return array $pagination The settings.
      */
-    public function getPaginationSettings($request)
+    public function getPaginationSettings($page)
     {
 
         return array(

@@ -63,13 +63,17 @@ class Neatline_IndexController extends Omeka_Controller_Action
     public function browseAction()
     {
 
+        $sortField =    $this->_request->getParam('sort_field');
+        $sortDir =      $this->_request->getParam('sort_dir');
+        $page =         $this->_request->page;
+
         // Push pagination variables.
         $this->view->pagination = $this->_neatlinesTable
-            ->getPaginationSettings($this->_request);
+            ->getPaginationSettings($page);
 
         // Push Neatlines.
         $this->view->neatlines = $this->_neatlinesTable
-            ->getNeatlinesForBrowse($this->_request);
+            ->getNeatlinesForBrowse($sortField, $sortDir, $page);
 
     }
 
