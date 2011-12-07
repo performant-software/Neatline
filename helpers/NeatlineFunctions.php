@@ -283,33 +283,7 @@ function neatline_formatDate($date)
 
     $date = new DateTime($date);
 
-    return '<span class="neatline-date">'
-        . $date->format('F j, Y')
-        . '</span>';
-
-}
-
-/**
- * Build link to Neatline exhibit.
- *
- * @param Omeka_record $neatline The Neatline.
- *
- * @return string The link.
- */
-function neatline_linkToTimeline($neatline)
-{
-
-    $timeline = $neatline->getTimeline();
-
-    if (!$timeline) {
-        return '<span class="neatline-null">'
-             . '( no timeline )'
-             . '</span>';
-    }
-
-    return '<a class="neatline"  href="' . uri('neatline-time/timelines/show/' . $timeline->id) . '">'
-         . $timeline->title
-         . '</a>';
+    return '<span class="neatline-date">' . $date->format('F j, Y') . '</span>';
 
 }
 
