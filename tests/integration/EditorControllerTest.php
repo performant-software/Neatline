@@ -324,13 +324,15 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
 
         // Create an exhibit.
         $exhibit =                              new NeatlineExhibit();
-        $exhibit->name =                        'Test';
+        $exhibit->name =                        'Test Title';
         $exhibit->is_map =                      0;
         $exhibit->is_timeline =                 0;
         $exhibit->is_undated_items =            0;
         $exhibit->top_element =                 'timeline';
         $exhibit->undated_items_position =      'left';
         $exhibit->undated_items_height =        'partial';
+        $exhibit->added =                       '1000-00-00 00:00:00';
+        $exhibit->map_id =                      1;
         $exhibit->save();
 
         // Form the POST for a space change.
@@ -357,6 +359,25 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->assertEquals($exhibit->top_element, 'map');
         $this->assertEquals($exhibit->undated_items_position, 'right');
         $this->assertEquals($exhibit->undated_items_height, 'full');
+
+        // Check the JSON representation of the updated exhibit.
+        $response = $this->getResponse()->getBody('default');
+        $this->assertEquals(
+            $response,
+            '{"added":"0000-00-00 00:00:00",' .
+            '"name":"Test Title",' .
+            '"map_id":1,' .
+            '"top_element":"map",' .
+            '"undated_items_position":"right",' .
+            '"undated_items_height":"full",' .
+            '"is_map":1,' .
+            '"is_timeline":1,' .
+            '"is_undated_items":1,' .
+            '"default_map_bounds":null,' .
+            '"default_map_zoom":null,' .
+            '"default_timeline_focus_date":null,' .
+            '"id":1}'
+        );
 
     }
 
