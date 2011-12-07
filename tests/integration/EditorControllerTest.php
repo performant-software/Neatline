@@ -59,6 +59,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->helper->setUpPlugin();
         $this->db = get_db();
         $this->_recordsTable = $this->db->getTable('NeatlineDataRecord');
+        $this->_exhibitsTable = $this->db->getTable('NeatlineExhibit');
 
     }
 
@@ -258,9 +259,8 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
     }
 
     /**
-     * When form data is saved via the /save route, the controller should return a
-     * JSON string that reports the final space and time active statuses that resulted
-     * from the data commit.
+     * When ordeirng data is saved via the /order route, data records should
+     * updated correctly with the new order integers.
      *
      * @return void.
      */
@@ -310,7 +310,53 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->assertEquals($record3->display_order, 1);
         $this->assertEquals($record4->display_order, 0);
 
+    }
 
+    /**
+     * When a new arrangement configuration saved via the /save route, the
+     * exhibit record should be updated and the view should return a json-encoded
+     * representation of the updated exhibit record.
+     *
+     * @return void.
+     */
+    public function testArrangement()
+    {
+
+        // Create an exhibit.
+        $exhibit =                              new NeatlineExhibit();
+        $exhibit->name =                        'Test';
+        $exhibit->is_map =                      0;
+        $exhibit->is_timeline =                 0;
+        $exhibit->is_undated_items =            0;
+        $exhibit->top_element =                 'timeline';
+        $exhibit->undated_items_position =      'left';
+        $exhibit->undated_items_height =        'partial';
+        $exhibit->save();
+
+        // Form the POST for a space change.
+        $this->request->setMethod('POST')
+            ->setPost(array(
+                'neatline_id' => $exhibit->id,
+                'is_map' => 1,
+                'is_timeline' => 1,
+                'is_undated_items' => 1,
+                'top_element' => 'map',
+                'udi_position' => 'right',
+                'udi_height' => 'full'
+            )
+        );
+
+        // Hit the arrangement save route, reget the exhibit.
+        $this->dispatch('neatline-exhibits/editor/arrangement');
+        $exhibit = $this->_exhibitsTable->find($exhibit->id);
+
+        // Check the attributes.
+        $this->assertEquals($exhibit->is_map, 1);
+        $this->assertEquals($exhibit->is_timeline, 1);
+        $this->assertEquals($exhibit->is_undated_items, 1);
+        $this->assertEquals($exhibit->top_element, 'map');
+        $this->assertEquals($exhibit->undated_items_position, 'right');
+        $this->assertEquals($exhibit->undated_items_height, 'full');
 
     }
 
