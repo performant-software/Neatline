@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
 
 /**
- * Index controller integration tests.
+ * Public controller integration tests.
  *
  * PHP version 5
  *
@@ -27,7 +27,7 @@
 
 <?php
 
-class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
+class Neatline_PublicControllerTest extends Omeka_Test_AppTestCase
 {
 
     /**
@@ -42,7 +42,6 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
         $this->helper = new Neatline_Test_AppTestCase;
         $this->helper->setUpPlugin();
         $this->db = get_db();
-        $this->_exhibitsTable = $this->db->getTable('NeatlineExhibit');
 
     }
 

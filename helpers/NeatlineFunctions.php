@@ -455,6 +455,20 @@ function neatline_compareObjects($a, $b)
 }
 
 /**
+ * Construct the timelines dropdown select.
+ *
+ * @param string $text The value of the input.
+ *
+ * @return void.
+ */
+function neatline_titleInput($text)
+{
+    $neatlineTitle = new Zend_Form_Element_Text('title');
+    $neatlineTitle->setValue($text);
+    return $neatlineTitle;
+}
+
+/**
  * Build order clause for SQL queries.
  *
  * @param string $sort_field The column to sort on.
