@@ -232,6 +232,16 @@ form.inline {
     margin-right: 0.4em;
 }
 
+a.neatline-button, a.neatline-button:hover {
+    text-decoration: none;
+}
+
+button.neatline {
+    clear: none;
+    float: left;
+    margin: 0 1em 0 0;
+}
+
 /* Delete confirm */
 
 #neatline-cover {

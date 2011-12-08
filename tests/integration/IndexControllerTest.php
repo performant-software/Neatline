@@ -133,12 +133,12 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
 
         // Edit.
         $this->assertQueryContains(
-            'form[action="' . __v()->uriSlug . '/editor/' . $exhibit->id . '"]'
+            'a[href="' . __v()->uriSlug . '/editor/' . $exhibit->id . '"]'
         );
 
         // Delete.
         $this->assertQueryContains(
-            'form[action="' . __v()->uriSlug . '/delete/' . $exhibit->id . '"]'
+            'a[href="' . __v()->uriSlug . '/delete/' . $exhibit->id . '"]'
         );
 
     }

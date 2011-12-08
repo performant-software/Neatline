@@ -83,9 +83,6 @@ head(array('content_class' => 'neatline'));
     </div>
 <?php endif; ?>
 
-<!-- Delete confirm markup. -->
-<?php echo $this->partial('index/_delete_confirm.php'); ?>
-
 <?php else: ?>
 
     <p class="neatline-alert">There are no Neatline exhibits yet.

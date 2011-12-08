@@ -189,15 +189,6 @@ class NeatlinePlugin
 
         }
 
-        // Queue layout builder JavaScript.
-        if ($request->getModuleName() == 'neatline' &&
-            $request->getControllerName() == 'index' &&
-            in_array($request->getActionName(), array('add'))) {
-
-              neatline_queueLayoutBuilderCssAndJs();
-
-        }
-
         // Queue row glosser for browse actions.
         if ($request->getModuleName() == 'neatline' &&
             $request->getControllerName() == 'index' &&

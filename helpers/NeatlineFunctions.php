@@ -40,24 +40,7 @@ function neatline_queueAdminCss()
 
     echo __v()->partial('index/_fonts.php');
 
-}
-
-/**
- * Include the layout builder widget.
- *
- * @return void.
- */
-function neatline_queueLayoutBuilderCssAndJs()
-{
-
-    queue_js('admin/layout_builder', 'javascripts');
-    queue_js('admin/toggle_button', 'javascripts');
-
-    queue_css('layout-builder');
-
-}
-
-/**
+}/**
  * Include the row glosser widget.
  *
  * @return void.
@@ -66,7 +49,6 @@ function neatline_queueBrowseJs()
 {
 
     queue_js('admin/browse_gloss', 'javascripts');
-    queue_js('admin/delete_confirm', 'javascripts');
 
 }
 
@@ -89,8 +71,8 @@ function neatline_queueEditorAssets()
     queue_js('editor/small_scroll', 'javascripts');
     queue_js('editor/edit_geometry', 'javascripts');
     queue_js('editor/configure_layout', 'javascripts');
-    queue_js('admin/layout_builder', 'javascripts');
-    queue_js('admin/toggle_button', 'javascripts');
+    queue_js('editor/layout_builder', 'javascripts');
+    queue_js('editor/toggle_button', 'javascripts');
     queue_js('editor/item_orderer', 'javascripts');
     queue_js('editor/gradient_builder', 'javascripts');
     queue_js('editor/_constructEditor', 'javascripts');
