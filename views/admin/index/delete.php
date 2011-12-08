@@ -31,8 +31,8 @@ head(array('content_class' => 'neatline'));
 
 <?php echo $this->partial('index/_header.php', array(
     'tab' => 'maps',
-    'add_button_uri' => 'neatline-maps/maps/create',
-    'add_button_text' => 'Create a Map'
+    'add_button_uri' => 'neatline-exhibits/add',
+    'add_button_text' => 'Create a Neatline'
 )); ?>
 
 <div id="primary" class="neatline-delete-confirm-static">
@@ -44,7 +44,7 @@ head(array('content_class' => 'neatline'));
 
     <div class="alert-actions">
 
-        <?php echo neatline_deleteConfirmForm(); ?>
+        <?php echo neatline_deleteConfirmForm($neatline->id); ?>
 
     </div>
 

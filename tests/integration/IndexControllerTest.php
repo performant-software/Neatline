@@ -113,9 +113,12 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
         // Create entities.
         $exhibit = $this->helper->_createNeatline();
         $map = new NeatlineMapsMap;
+
         $map->name = 'Test Map';
         $map->save();
+
         $exhibit->map_id = $map->id;
+        $exhibit->save();
 
         $this->dispatch('neatline-exhibits');
 
@@ -132,14 +135,53 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
         );
 
         // Edit.
-        $this->assertQueryContains(
-            'a[href="' . __v()->uriSlug . '/editor/' . $exhibit->id . '"]'
+        $this->assertQueryContentContains(
+            'button', 'Edit'
         );
 
         // Delete.
-        $this->assertQueryContains(
-            'a[href="' . __v()->uriSlug . '/delete/' . $exhibit->id . '"]'
+        $this->assertQuery(
+            'button', 'Delete'
         );
+
+    }
+
+    /**
+     * When there are more exhibits than can fit on the page, show
+     * pagination.
+     *
+     * @return void.
+     */
+    public function testBrowsePagination()
+    {
+
+        // Create entities.
+        $exhibit1 = $this->helper->_createNeatline();
+        $exhibit2 = $this->helper->_createNeatline();
+        $exhibit3 = $this->helper->_createNeatline();
+        $exhibit4 = $this->helper->_createNeatline();
+
+        $map = new NeatlineMapsMap;
+        $map->name = 'Test Map';
+        $map->save();
+
+        $exhibit1->map_id = $map->id;
+        $exhibit1->save();
+        $exhibit2->map_id = $map->id;
+        $exhibit2->save();
+        $exhibit3->map_id = $map->id;
+        $exhibit3->save();
+        $exhibit4->map_id = $map->id;
+        $exhibit4->save();
+
+        // Set the paging limit.
+        set_option('per_page_admin', 2);
+
+        $this->dispatch('neatline-exhibits');
+
+        // Title.
+        $this->assertQueryCount('table.neatline tr td.title', 2);
+        $this->assertQuery('div.neatline-pagination');
 
     }
 

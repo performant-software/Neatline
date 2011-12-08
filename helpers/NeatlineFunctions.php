@@ -167,12 +167,14 @@ function neatline_buttonTo(
 /**
  * Build the delete confirm button.
  *
+ * @param integer $id The exhibit id.
+ *
  * @return string HTML form.
  */
-function neatline_deleteConfirmForm()
+function neatline_deleteConfirmForm($id)
 {
 
-    $action = neatline_getDeleteExhibitUrl();
+    $action = neatline_getDeleteExhibitUrl($id);
     $name = 'delete-neatline';
     $value = 'Delete';
     $attribs = array('class' => 'neatline btn danger large');

@@ -143,6 +143,7 @@ class Neatline_IndexController extends Omeka_Controller_Action
         $_post = $this->_request->getPost();
         $id = $this->_request->getParam('id');
         $neatline = $this->_neatlinesTable->find($id);
+        $this->view->neatline = $neatline;
 
         // If the delete is confirmed.
         if (isset($_post['confirmed'])) {
