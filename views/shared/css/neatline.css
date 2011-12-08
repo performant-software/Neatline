@@ -165,6 +165,8 @@
     display: block;
     width: 90%;
     font-weight: bold;
+    line-height: 1.3em;
+    font-size: 1.1em;
 }
 
 #undated-items-list-container div.neatline-item-details {

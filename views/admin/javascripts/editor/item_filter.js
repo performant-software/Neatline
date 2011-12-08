@@ -27,9 +27,9 @@
         options: {
 
             // Durations and CSS constants.
-            bottom_padding: 75,
+            bottom: 75,
+            header: 40,
             fade_duration: 400,
-            header_height: 40,
 
             // Hexes.
             colors: {
@@ -126,17 +126,36 @@
             // Measure the stack, top offset, and window.
             this.totalHeight = this.element.height();
             this.topOffset = this.tabOffset.top + this.tabHeight;
-            var windowHeight = this._window.height();
+
+            // Get the dropdown height.
+            this._getHeight();
+
+        },
+
+        _getHeight: function() {
+
+            // Measure the window.
+            this.windowHeight = this._window.height();
 
             // Calculate the maximum height given the current size of the window.
-            this.maxHeight = windowHeight -
-                this.options.header_height - this.options.bottom_padding;
+            this.maxHeight = this.windowHeight - this.options.header -
+                this.options.bottom;
+
+            // Set the height based on the amount of space available.
+            if (this.totalHeight > this.maxHeight) {
+                this.height = this.maxHeight;
+                this.element.css('border-bottom', '1px solid #d2d2d2');
+            } else {
+                this.height = this.totalHeight;
+                this.element.css('border-bottom', 'none');
+            }
+
+            // Set the collapsed top target.
+            this.collapsedTop = -(this.height - this.tabHeight);
 
         },
 
         _positionDivs: function() {
-
-            this.collapsedTop = -(this.totalHeight - this.tabHeight);
 
             // Position the stack.
             this.element.css({
@@ -217,16 +236,8 @@
 
             var self = this;
 
-            // Calculate height and set the bottom border.
-            if (this.totalHeight > this.maxHeight) {
-                this.height = this.maxHeight;
-                this.element.css('border-bottom', '1px solid #D2D2D2');
-            }
-
-            else {
-                this.height = this.totalHeight;
-                this.element.css('border-bottom', 'none');
-            }
+            // Calculate the height.
+            this._getHeight();
 
             // Show and set height.
             this.element.css({
@@ -236,7 +247,7 @@
 
             // Animate.
             this.element.stop().animate({
-                'top': this.options.header_height - 1
+                'top': this.options.header - 1
             }, this.options.fade_duration, function() {
 
                 // Add the scrollbar.
@@ -254,20 +265,11 @@
 
         resize: function() {
 
-            // Get the current window height.
-            var windowHeight = this._window.height();
-
-            // Calculate the maximum height given the current size
-            // of the window.
-            var maxHeight = windowHeight - this.options.header_height -
-                this.options.bottom_padding;
-
-            // Set the height based on the amount of space available.
-            var height = (this.totalHeight > maxHeight) ? maxHeight :
-                this.totalHeight;
+            // Calculate the height.
+            this._getHeight();
 
             // Reset the height.
-            this.element.css('height', height);
+            this.element.css('height', this.height);
 
             // Reposition the bar.
             this.element.smallscroll('positionBar');
