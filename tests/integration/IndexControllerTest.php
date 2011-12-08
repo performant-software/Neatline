@@ -185,4 +185,22 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
 
     }
 
+    /**
+     * Check for base markup in the browse view.
+     *
+     * @return void.
+     */
+    public function testAddBaseMarkup()
+    {
+
+        $this->dispatch('neatline-exhibits/add');
+
+        // There should be a title field.
+        $this->assertQuery('input#title[name="title"]');
+
+        // There should be a map select.
+        $this->assertQuery('select#map[name="map"]');
+
+    }
+
 }

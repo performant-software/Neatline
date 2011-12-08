@@ -46,13 +46,12 @@ head(array('content_class' => 'neatline'));
 
     <h2 class="neatline-label">Enter a Title:</h2>
     <?php echo neatline_titleInput($neatline->name); ?>
-    <?php echo neatline_error($errors['title']); ?>
+    <?php if (isset($errors)) { echo neatline_error($errors['title']); } ?>
 
     <hr>
 
     <h2 class="neatline-label">Choose a Map:</h2>
     <?php echo neatline_mapSelect($neatline->map_id); ?>
-    <?php echo neatline_error($errors['map']); ?>
 
     <hr>
 

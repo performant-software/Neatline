@@ -118,15 +118,6 @@ class Neatline_IndexController extends Omeka_Controller_Action
 
         }
 
-        // Bounce back if there are no maps or no timelines.
-        if ($this->_mapsTable->count() == 0 &&
-            $this->_timelinesTable->count() == 0) {
-
-            $this->flashError(neatline_noMapsOrTimelinesErrorMessage());
-            $this->_redirect('neatline-exhibits');
-
-        }
-
         // Push Neatline object into view.
         $this->view->neatline = $neatline;
 
