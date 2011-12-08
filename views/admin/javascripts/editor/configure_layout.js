@@ -26,16 +26,6 @@
 
         options: {
 
-            // Markup hooks.
-            markup: {
-                topbar_id: 'topbar',
-                dropdown_container_id: 'configure-layout',
-                layout_builder_id: 'layout-builder',
-                dropdown_button_id: 'configure-layout-button',
-                save_arrangement_id: 'save-arrangement',
-                fix_positions_id: 'fix-positions'
-            },
-
             // CSS constants.
             css: {
                 offset_padding: 3,
@@ -54,13 +44,13 @@
             var self = this;
 
             // Getters.
-            this._window = $(window);
-            this.button = $('#' + this.options.markup.dropdown_button_id);
-            this.dropdownContainer = $('#' + this.options.markup.dropdown_container_id);
-            this.layoutBuilder = $('#' + this.options.markup.layout_builder_id);
-            this.topbar = $('#' + this.options.markup.topbar_id);
-            this.saveArrangementButton = $('#' + this.options.markup.save_arrangement_id);
-            this.fixPositionsButton = $('#' + this.options.markup.fix_positions_id);
+            this._window =                  $(window);
+            this.button =                   $('#configure-layout-button');
+            this.dropdownContainer =        $('#configure-layout');
+            this.layoutBuilder =            $('#layout-builder');
+            this.topbar =                   $('#topbar');
+            this.saveArrangementButton =    $('#save-arrangement');
+            this.fixPositionsButton =       $('#fix-positions');
 
             // Trackers.
             this._expanded = false;

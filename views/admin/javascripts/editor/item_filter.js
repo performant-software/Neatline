@@ -26,14 +26,10 @@
 
         options: {
 
-            // Markup hooks.
-            container_id: 'item-browser',
-            tab_li_id: 'filter-items-tab',
-            dropdown_id: 'filter-items',
-
             // Durations and CSS constants.
             bottom_padding: 75,
-            fade_duration: 300,
+            fade_duration: 400,
+            header_height: 40,
 
             // Hexes.
             colors: {
@@ -47,12 +43,12 @@
         _create: function() {
 
             // Getters.
-            this._window = $(window);
-            this._body = $('body');
-            this.container = $('#' + this.options.container_id);
-            this.dropdown = $('#' + this.options.dropdown_id);
-            this.tab = $('#' + this.options.tab_li_id);
-            this.tabLink = this.tab.find('a');
+            this._window =                  $(window);
+            this._body =                    $('body');
+            this.container =                $('#item-browser');
+            this.dropdown =                 $('#filter-items');
+            this.tab =                      $('#filter-items-tab');
+            this.tabLink =                  this.tab.find('a');
 
             // Initialize tracker object for the selections.
             this.selected = {
@@ -63,31 +59,31 @@
             };
 
             // Get the containers for the checkbox columns.
-            this.tagsContainer = $('div.filter-items-column.tags');
-            this.typesContainer = $('div.filter-items-column.types');
-            this.collectionsContainer = $('div.filter-items-column.collections');
+            this.tagsContainer =            $('div.filter-items-column.tags');
+            this.typesContainer =           $('div.filter-items-column.types');
+            this.collectionsContainer =     $('div.filter-items-column.collections');
 
             // Get the container divs for the taxonomy headers.
-            this.allNoneContainer = $('div.filter-option.all-none');
-            this.allTagsContainer = this.tagsContainer.find('.filter-header');
-            this.allTypesContainer = this.typesContainer.find('.filter-header');
-            this.allCollectionsContainer = this.collectionsContainer.find('.filter-header');
+            this.allNoneContainer =         $('div.filter-option.all-none');
+            this.allTagsContainer =         this.tagsContainer.find('.filter-header');
+            this.allTypesContainer =        this.typesContainer.find('.filter-header');
+            this.allCollectionsContainer =  this.collectionsContainer.find('.filter-header');
 
             // Get the inputs divs for the taxonomy headers.
-            this.allNoneInput = this.allNoneContainer.find('input');
-            this.allTagsInput = this.allTagsContainer.find('input');
-            this.allTypesInput = this.allTypesContainer.find('input');
-            this.allCollectionsInput = this.allCollectionsContainer.find('input');
+            this.allNoneInput =             this.allNoneContainer.find('input');
+            this.allTagsInput =             this.allTagsContainer.find('input');
+            this.allTypesInput =            this.allTypesContainer.find('input');
+            this.allCollectionsInput =      this.allCollectionsContainer.find('input');
 
             // Get the container divs for the individual options.
-            this.tags = this.tagsContainer.find('.filter-option');
-            this.types = this.typesContainer.find('.filter-option');
-            this.collections = this.collectionsContainer.find('.filter-option');
+            this.tags =                     this.tagsContainer.find('.filter-option');
+            this.types =                    this.typesContainer.find('.filter-option');
+            this.collections =              this.collectionsContainer.find('.filter-option');
 
             // Get the individual checkbox inputs.
-            this.tagsInputs = this.tagsContainer.find('.filter-option input');
-            this.typesInputs = this.typesContainer.find('.filter-option input');
-            this.collectionsInputs = this.collectionsContainer.find('.filter-option input');
+            this.tagsInputs =               this.tagsContainer.find('.filter-option input');
+            this.typesInputs =              this.typesContainer.find('.filter-option input');
+            this.collectionsInputs =        this.collectionsContainer.find('.filter-option input');
 
             this.allInputs = this.allNoneInput
                 .add(this.allTagsInput)
@@ -102,16 +98,17 @@
                 .add(this.collections);
 
             // Status tracker starters.
-            this._isOnDropdown = false;
-            this._isOnTab = false;
-            this._isExpanded = false;
-            this._allChecked = false;
-            this._allTagsChecked = false;
-            this._allTypesChecked = false;
-            this._allCollectionsChecked = false;
+            this._isOnDropdown =            false;
+            this._isOnTab =                 false;
+            this._isExpanded =              false;
+            this._allChecked =              false;
+            this._allTagsChecked =          false;
+            this._allTypesChecked =         false;
+            this._allCollectionsChecked =   false;
 
             // Measure markup, position divs, add events.
             this._getDimensions();
+            this._positionDivs();
             this._glossTab();
             this._addCheckBoxEvents();
 
@@ -122,13 +119,30 @@
 
         _getDimensions: function() {
 
+            // Get the position and size of the tab.
+            this.tabOffset = this.tab.offset();
+            this.tabHeight = this.tab.height();
+
             // Measure the stack, top offset, and window.
             this.totalHeight = this.element.height();
-            this.topOffset = this.element.css('top').replace('px', '');
+            this.topOffset = this.tabOffset.top + this.tabHeight;
             var windowHeight = this._window.height();
 
             // Calculate the maximum height given the current size of the window.
-            this.maxHeight = windowHeight - this.topOffset - this.options.bottom_padding;
+            this.maxHeight = windowHeight -
+                this.options.header_height - this.options.bottom_padding;
+
+        },
+
+        _positionDivs: function() {
+
+            this.collapsedTop = -(this.totalHeight - this.tabHeight);
+
+            // Position the stack.
+            this.element.css({
+                'left': this.tabOffset.left,
+                'top': this.collapsedTop
+            });
 
         },
 
@@ -214,15 +228,15 @@
                 this.element.css('border-bottom', 'none');
             }
 
-            // Display and set height to 0.
+            // Show and set height.
             this.element.css({
                 'display': 'block',
-                'height': 0
+                'height': this.height
             });
 
             // Animate.
             this.element.stop().animate({
-                'height': this.height
+                'top': this.options.header_height - 1
             }, this.options.fade_duration, function() {
 
                 // Add the scrollbar.
@@ -245,7 +259,7 @@
 
             // Calculate the maximum height given the current size
             // of the window.
-            var maxHeight = windowHeight - this.topOffset -
+            var maxHeight = windowHeight - this.options.header_height -
                 this.options.bottom_padding;
 
             // Set the height based on the amount of space available.
@@ -270,7 +284,7 @@
 
             // Hide.
             this.element.stop().animate({
-                'height': 0
+                'top': this.collapsedTop
             }, this.options.fade_duration, function() {
                 self.element.css('display', 'none');
             });

@@ -27,6 +27,12 @@
 
 <div id="item-browser">
 
+    <?php echo $this->partial('editor/_filter_items.php', array(
+        'tags' => $tags,
+        'collections' => $collections,
+        'types' => $types
+    )); ?>
+
     <div id="items-list-header">
 
         <input type="text" placeholder="Search items" id="search-box" />
@@ -36,12 +42,6 @@
             <li id="filter-items-tab" class="drop-down">
                 <a href="#" class="dropdown-toggle">Filter Items</a>
             </li>
-
-            <?php echo $this->partial('editor/_filter_items.php', array(
-                'tags' => $tags,
-                'collections' => $collections,
-                'types' => $types
-            )); ?>
 
         </ul>
 
