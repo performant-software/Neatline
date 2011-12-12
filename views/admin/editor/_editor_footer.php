@@ -26,23 +26,5 @@
  */
 ?>
 
-<?php echo $this->partial('editor/_editor_header.php', array(
-    'titlePrefix' => 'Neatline Editor',
-    'title' => $neatline->name
-)); ?>
-
-<?php echo $this->partial('editor/_topbar.php', array(
-    'title' => $neatline->name
-)); ?>
-
-<?php echo $this->partial('editor/_item_browser.php', array(
-    'tags' => $tags,
-    'collections' => $collections,
-    'types' => $types
-)); ?>
-
-<?php echo $this->partial('neatline/_neatline.php', $neatlineData); ?>
-
-<?php echo $this->partial('editor/_tooltips.php'); ?>
-
-<?php echo $this->partial('editor/_editor_footer.php'); ?>
+    </body>
+</html>

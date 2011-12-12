@@ -43,7 +43,7 @@
                 <label for="map-description">Description</label>
                 <div class="input">
                     <textarea class="xlarge" name="description" placeholder="Description" rows="4"></textarea>
-                    <span class="help-block">Descriptive text associated with the item's timeline entry.</span>
+                    <span class="help-block">Descriptive or annotate the item.</span>
                 </div>
             </div>
 

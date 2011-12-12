@@ -35,20 +35,10 @@
                 initial_zoom: 40
             },
 
-            // Animation constants.
-            animation: {
-
-            },
-
             // CSS constants.
             css: {
                 popup_vertical_offset: 30,
                 popup_content_max_height: 200
-            },
-
-            // Hexes.
-            colors: {
-
             }
 
         },
@@ -214,6 +204,7 @@
 
             // Ping the json server and get the events data.
             this.timeline.loadJSON(Neatline.dataSources.timeline, function(json, url) {
+                console.log(json);
 
                 // Render the events.
                 self.eventSource.clear();

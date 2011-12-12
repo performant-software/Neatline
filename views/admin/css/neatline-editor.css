@@ -353,6 +353,7 @@ span#search-cancel:hover {
     box-shadow: none;
     -webkit-box-shadow: none;
     color: #383838;
+    margin-bottom: 5px;
 }
 
 .neatline-record-edit-form input:focus, .neatline-record-edit-form textarea:focus {

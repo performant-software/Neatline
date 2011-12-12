@@ -400,7 +400,7 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
 
         // Shell array.
         $data = array(
-            'dateTimeFormat' => 'Gregorian',
+            'dateTimeFormat' => 'iso8601',
             'events' => array()
         );
 
