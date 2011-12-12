@@ -46,6 +46,55 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
     }
 
     /**
+     * Test get and set on columns.
+     *
+     * @return void.
+     */
+    public function testAttributeAccess()
+    {
+
+        // Create a record.
+        $item = $this->helper->_createItem();
+        $neatline = $this->helper->_createNeatline();
+        $record = new NeatlineDataRecord($item, $neatline);
+
+        // Set.
+        $record->title =                        'title';
+        $record->description =                  'description';
+        $record->start_date =                   'startdate';
+        $record->start_time =                   'starttime';
+        $record->end_date =                     'enddate';
+        $record->end_time =                     'endtime';
+        $record->vector_color =                 '#ffffff';
+        $record->geocoverage =                  'POINT()';
+        $record->left_ambiguity_percengage =    30;
+        $record->right_ambiguity_percengage =   80;
+        $record->space_active =                 1;
+        $record->time_active =                  1;
+        $record->display_order =                1;
+        $record->map_bounds =                   'BOUND()';
+        $record->map_zoom =                     5;
+
+        // Get.
+        $this->assertEquals($record->title, 'title');
+        $this->assertEquals($record->description, 'description');
+        $this->assertEquals($record->start_date, 'startdate');
+        $this->assertEquals($record->start_time, 'starttime');
+        $this->assertEquals($record->end_date, 'enddate');
+        $this->assertEquals($record->end_time, 'endtime');
+        $this->assertEquals($record->vector_color, '#ffffff');
+        $this->assertEquals($record->geocoverage, 'POINT()');
+        $this->assertEquals($record->left_ambiguity_percengage, 30);
+        $this->assertEquals($record->right_ambiguity_percengage, 80);
+        $this->assertEquals($record->space_active, 1);
+        $this->assertEquals($record->time_active, 1);
+        $this->assertEquals($record->display_order, 1);
+        $this->assertEquals($record->map_bounds, 'BOUND()');
+        $this->assertEquals($record->map_zoom, 5);
+
+    }
+
+    /**
      * When a new data record is created, four of the attributes should
      * automatically be set to non-null values. The space and time status
      * trackers should be set to 0/false, and the two date ambiguity

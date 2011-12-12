@@ -1126,7 +1126,7 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
         // Check format.
         $this->assertEquals(
             $json,
-            '{"dateTimeFormat":"Gregorian",' .
+            '{"dateTimeFormat":"iso8601",' .
             '"events":[{' .
             '"eventID":' . $record1->item_id . ',' .
             '"title":"' . $record1->title . '",' .
@@ -1183,7 +1183,7 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
         // Check format.
         $this->assertEquals(
             $json,
-            '{"dateTimeFormat":"Gregorian",' .
+            '{"dateTimeFormat":"iso8601",' .
             '"events":[]}'
         );
 

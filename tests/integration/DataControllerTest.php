@@ -155,7 +155,7 @@ class Neatline_DataControllerTest extends Omeka_Test_AppTestCase
         // Check format.
         $this->assertEquals(
             $response,
-            '{"dateTimeFormat":"Gregorian",' .
+            '{"dateTimeFormat":"iso8601",' .
             '"events":[{' .
             '"eventID":' . $record1->item_id . ',' .
             '"title":"' . $record1->title . '",' .

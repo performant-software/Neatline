@@ -125,6 +125,8 @@ class NeatlinePlugin
                 `space_active` tinyint(1) NULL,
                 `time_active` tinyint(1) NULL,
                 `display_order` int(10) unsigned NULL,
+                `map_bounds` varchar(100) NULL,
+                `map_zoom` int(10) unsigned NULL,
                  PRIMARY KEY (`id`)
                ) ENGINE=innodb DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
 

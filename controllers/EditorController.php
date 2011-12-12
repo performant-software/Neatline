@@ -355,4 +355,42 @@ class Neatline_EditorController extends Omeka_Controller_Action
 
     }
 
+    /**
+     * ~ AJAX ~
+     * Save item-specific map focusing.
+     *
+     * @return void
+     */
+    public function focusAction()
+    {
+
+        // Supress the default Zend layout-sniffer functionality.
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        // Get the post.
+        $_post = $this->_request->getPost();
+
+        // Get parameters from the ajax request.
+        $itemId =                   $_post['item_id'];
+        $neatlineId =               $_post['neatline_id'];
+        $extent =                   $_post['extent'];
+        $zoom =                     $_post['zoom'];
+
+        // Fetch the data record.
+        $neatline = $this->_neatlinesTable->find($neatlineId);
+        $item = $this->_itemsTable->find($itemId);
+        $record = $this->_recordsTable->getRecordByItemAndExhibit($item, $neatline);
+
+        // If no record, create one.
+        if (!$record) {
+            $record = new NeatlineDataRecord($item, $neatline);
+        }
+
+        // Update.
+        $record->map_bounds = $extent;
+        $record->map_zoom = $zoom;
+        $record->save();
+
+    }
+
 }

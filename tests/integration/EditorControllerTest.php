@@ -478,7 +478,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         // Create an exhibit.
         $exhibit = $this->helper->_createNeatline();
 
-        // Form the POST for a space change.
+        // Form the POST.
         $this->request->setMethod('POST')
             ->setPost(array(
                 'neatline_id' => $exhibit->id,
@@ -496,6 +496,87 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->assertEquals($exhibit->default_map_bounds, 'extent');
         $this->assertEquals($exhibit->default_map_zoom, 1);
         $this->assertEquals($exhibit->default_timeline_focus_date, 'center');
+
+    }
+
+    /**
+     * When a new item-specific map focus data is saved via the /focus route,
+     * the corresponding attributes should be updated on the data record.
+     *
+     * @return void.
+     */
+    public function testFocusWithExistingRecord()
+    {
+
+        // Create entities.
+        $exhibit = $this->helper->_createNeatline();
+        $item = $this->helper->_createItem();
+        $record = new NeatlineDataRecord($item, $exhibit);
+        $record->save();
+
+        // Form the POST.
+        $this->request->setMethod('POST')
+            ->setPost(array(
+                'neatline_id' => $exhibit->id,
+                'item_id' => $item->id,
+                'extent' => 'BOUNDS()',
+                'zoom' => 5
+            )
+        );
+
+        // 1 record.
+        $this->assertEquals($this->_recordsTable->count(), 1);
+
+        // Hit the focus route, reget the record.
+        $this->dispatch('neatline-exhibits/editor/focus');
+        $record = $this->_recordsTable->find($record->id);
+
+        // Should not create a new record.
+        $this->assertEquals($this->_recordsTable->count(), 1);
+
+        // Check the attributes.
+        $this->assertEquals($record->map_bounds, 'BOUNDS()');
+        $this->assertEquals($record->map_zoom, 5);
+
+    }
+
+    /**
+     * When a new item-specific map focus data is saved via the /focus route
+     * and there is not an extant data record for the exhibit/item, create a
+     * new item and set theattributes.
+     *
+     * @return void.
+     */
+    public function testFocusWithoutExistingRecord()
+    {
+
+        // Create entities.
+        $exhibit = $this->helper->_createNeatline();
+        $item = $this->helper->_createItem();
+
+        // Form the POST.
+        $this->request->setMethod('POST')
+            ->setPost(array(
+                'neatline_id' => $exhibit->id,
+                'item_id' => $item->id,
+                'extent' => 'BOUNDS()',
+                'zoom' => 5
+            )
+        );
+
+        // 1 record.
+        $this->assertEquals($this->_recordsTable->count(), 0);
+
+        // Hit the focus route, reget the record.
+        $this->dispatch('neatline-exhibits/editor/focus');
+        $record = $this->_recordsTable->getRecordByItemAndExhibit($item, $exhibit);
+
+        // Should not create a new record.
+        $this->assertEquals($this->_recordsTable->count(), 1);
+
+        // Check the attributes.
+        $this->assertEquals($record->map_bounds, 'BOUNDS()');
+        $this->assertEquals($record->map_zoom, 5);
 
     }
 

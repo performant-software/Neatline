@@ -582,8 +582,10 @@
                 url: 'focus',
                 type: 'POST',
                 data: {
-                    'extent': extent,
-                    'zoom': zoom
+                    item_id: this.itemId,
+                    neatline_id: Neatline.id,
+                    extent: extent,
+                    zoom: zoom
                 },
 
                 success: function() {

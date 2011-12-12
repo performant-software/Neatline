@@ -48,6 +48,8 @@ class NeatlineDataRecord extends Omeka_record
     public $space_active;
     public $time_active;
     public $display_order;
+    public $map_bounds;
+    public $map_zoom;
 
 
     /**
