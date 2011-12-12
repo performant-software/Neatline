@@ -91,7 +91,6 @@
             this._firstRequest = true;
 
             // Prepare the document, position elements, listen for resize.
-            this._window.disableSelection();
             this._scrollbarWidth = $.getScrollbarWidth();
             this._positionDivs();
             this._addWindowResizeListener();
