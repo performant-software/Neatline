@@ -30,6 +30,8 @@
 class Neatline_PublicControllerTest extends Omeka_Test_AppTestCase
 {
 
+    protected $_isAdminTest = false;
+
     /**
      * Instantiate the helper class, install the plugins, get the database.
      *
@@ -46,11 +48,72 @@ class Neatline_PublicControllerTest extends Omeka_Test_AppTestCase
     }
 
     /**
-     * Do.
+     * The show view should render the base markup for the editing application.
+     * If the exhibit has no map, then there should not be a map object in the view.
      *
      * @return void.
      */
-    public function testStub()
+    public function testShowWithoutMap()
+    {
+
+        // Create entities.
+        $exhibit = $this->helper->_createNeatline();
+
+        // Hit the route and capture the view.
+        $this->dispatch('neatline/' . $exhibit->id);
+        $this->assertResponseCode(200);
+        $v = __v();
+
+        // Check for the template variables.
+        $this->assertNotNull($v->neatline);
+        $this->assertNotNull($v->neatlineData);
+        $this->assertNull($v->map);
+
+        // Check the construction of the data array.
+        $this->assertTrue($v->neatlineData['public']);
+
+        $this->assertEquals(
+            $v->neatlineData['neatline']->id,
+            $exhibit->id
+        );
+
+        $this->assertEquals(
+            $v->neatlineData['dataSources']['timeline'],
+            neatline_getTimelineDataUrl($exhibit->id)
+        );
+
+        $this->assertEquals(
+            $v->neatlineData['dataSources']['map'],
+            neatline_getMapDataUrl($exhibit->id)
+        );
+
+        $this->assertEquals(
+            $v->neatlineData['dataSources']['undated'],
+            neatline_getUndatedItemsDataUrl($exhibit->id)
+        );
+
+    }
+
+    /**
+     * The index view should render the base markup for the editing application.
+     * If the exhibit has a Geoserver-based map, then the map object in the view.
+     *
+     * @return void.
+     */
+    public function testShowWithGeoserverMap()
+    {
+
+
+
+    }
+
+    /**
+     * The index view should render the base markup for the editing application.
+     * If the exhibit has a file-based map, then the map object in the view.
+     *
+     * @return void.
+     */
+    public function testShowWithFileMap()
     {
 
 
