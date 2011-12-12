@@ -555,7 +555,7 @@ function neatline_error($text)
 function neatline_getDeleteExhibitUrl($neatline_id)
 {
 
-    return WEB_ROOT . '/admin/neatline-exhibits/delete/';
+    return WEB_ROOT . '/admin/neatline-exhibits/delete/' . $neatline_id;
 
 }
 

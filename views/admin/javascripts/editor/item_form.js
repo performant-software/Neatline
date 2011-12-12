@@ -93,6 +93,7 @@
                 'stopHandleDrag': function(event, obj) {
 
                     self._trigger('ambiguityChange', {}, {
+                        'itemId': obj.itemId,
                         'color': obj.color,
                         'leftPercent': obj.leftPercent,
                         'rightPercent': obj.rightPercent
@@ -112,6 +113,7 @@
                         self._trigger('formEdit');
                     }
 
+                    // Change the color.
                     self._trigger('colorEdit', {}, { 'color': hex });
                     self.ambiguity.gradientbuilder('setColor', hex);
 

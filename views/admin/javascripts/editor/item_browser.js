@@ -336,7 +336,13 @@
 
                 // When the color is changed.
                 'colorEdit': function(event, obj) {
-                    self._trigger('coloredit', {}, { 'color': obj.color });
+
+                    var itemId = self._currentFormItem.attr('recordid');
+                    self._trigger('coloredit', {}, {
+                        'itemId': itemId,
+                        'color': obj.color
+                    });
+
                 },
 
                 // When a form is closed.

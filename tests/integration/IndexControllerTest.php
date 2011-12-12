@@ -203,4 +203,126 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
 
     }
 
+    /**
+     * Check for error flashing.
+     *
+     * @return void.
+     */
+    public function testAddErrorFlashing()
+    {
+
+        // Missing title.
+        $this->request->setMethod('POST')
+            ->setPost(array(
+                'title' => '',
+                'map' => ''
+            )
+        );
+
+        // No exhibits at the start.
+        $this->assertEquals($this->_exhibitsTable->count(), 0);
+
+        // Submit the form.
+        $this->dispatch('neatline-exhibits/add');
+
+        // Should redirect to the add view.
+        $this->assertModule('neatline');
+        $this->assertController('index');
+        $this->assertAction('add');
+
+        // Check for the error.
+        $this->assertQueryContentContains(
+            'div.neatline-error',
+            'Enter a title.'
+        );
+
+        // No exhibit should have been created.
+        $this->assertEquals($this->_exhibitsTable->count(), 0);
+
+    }
+
+    /**
+     * Valid form should create new exhibit.
+     *
+     * @return void.
+     */
+    public function testAddSuccess()
+    {
+
+        // Create a map.
+        $map = new NeatlineMapsMap;
+        $map->name = 'Test Map';
+        $map->save();
+
+        // No exhibits at the start.
+        $this->assertEquals($this->_exhibitsTable->count(), 0);
+
+        // Valid form.
+        $this->request->setMethod('POST')
+            ->setPost(array(
+                'title' => 'Test Title',
+                'map' => $map->id
+            )
+        );
+
+        // Submit the form.
+        $this->dispatch('neatline-exhibits/add');
+
+        // Check for the new exhibit.
+        $this->assertEquals($this->_exhibitsTable->count(), 1);
+
+    }
+
+    /**
+     * Test delete confirm page.
+     *
+     * @return void.
+     */
+    public function testDeleteConfirm()
+    {
+
+        // Create exhibit.
+        $exhibit = $this->helper->_createNeatline();
+
+        // Hit the route.
+        $this->dispatch('neatline-exhibits/delete/' . $exhibit->id);
+        $this->assertResponseCode(200);
+
+        // Check the form and action.
+        $action = neatline_getDeleteExhibitUrl($exhibit->id);
+        $this->assertQuery('form#delete-neatline[action="' . $action . '"]');
+
+    }
+
+    /**
+     * Test delete.
+     *
+     * @return void.
+     */
+    public function testDeleteSuccess()
+    {
+
+        // Create exhibits.
+        $exhibit1 = $this->helper->_createNeatline();
+        $exhibit2 = $this->helper->_createNeatline();
+
+        // 2 exhibits.
+        $this->assertEquals($this->_exhibitsTable->count(), 2);
+
+        // Confirm delete.
+        $this->request->setMethod('POST')
+            ->setPost(array(
+                'confirmed' => 'confirmed'
+            )
+        );
+
+        // Hit the route.
+        $this->dispatch('neatline-exhibits/delete/' . $exhibit1->id);
+
+        // 1 exhibit, check identity.
+        $this->assertEquals($this->_exhibitsTable->count(), 1);
+        $this->assertNotNull($this->_exhibitsTable->find($exhibit2->id));
+
+    }
+
 }

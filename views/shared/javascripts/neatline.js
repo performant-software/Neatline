@@ -507,7 +507,7 @@
 
         },
 
-        setItemColor: function(color) {
+        setItemColor: function(color, itemId) {
 
             this.map.neatlinemap('setItemColor', color);
 

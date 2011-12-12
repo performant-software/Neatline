@@ -102,7 +102,7 @@ class Neatline_IndexController extends Omeka_Controller_Action
             if (count($errors) == 0) {
 
                 if ($neatline->saveForm($title, $map)) {
-                    $this->_redirect('neatline-exhibits');
+                    return $this->_redirect('neatline-exhibits');
                 }
 
                 else {
@@ -112,7 +112,6 @@ class Neatline_IndexController extends Omeka_Controller_Action
             }
 
             else {
-                $neatline->populateData($_post);
                 $this->view->errors = $errors;
             }
 
