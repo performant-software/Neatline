@@ -93,8 +93,14 @@
                 <span class="help-inline">Select a color for the item's spatial vectors.</span>
             </div>
 
+            <div class="clearfix">
+                <button class="btn icon home">Fix Item-Specific Map Focus</button>
+                <span class="help-inline">Click here to set a custom map focus for the item.</span>
+            </div>
+
             <div class="actions">
-                <input type="submit" class="btn primary" value="Save">&nbsp;<button type="reset" class="btn">Close</button>
+                <input type="submit" class="btn primary" value="Save">
+                <button type="reset" class="btn">Close</button>
             </div>
 
         </fieldset>

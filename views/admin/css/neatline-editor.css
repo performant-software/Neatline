@@ -368,6 +368,10 @@ ul.filter-items {
     margin: 0 10px 0 0;
 }
 
+.tabs:before, .tabs:after {
+    content: none !important;
+}
+
 .tabs > li {
     z-index: 999;
 }
@@ -621,6 +625,10 @@ table#items td.col-1 {
 
 table#items td.col-2 {
     width: 33px !important;
+}
+
+table#items th, table#items td {
+    padding: 10px 10px 8px;
 }
 
 

@@ -35,6 +35,10 @@
     position: absolute;
 }
 
+table th, table td {
+    padding: 10px 6px 9px;
+}
+
 
 /* Map */
 

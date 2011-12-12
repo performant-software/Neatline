@@ -22,6 +22,7 @@
 
 (function($, undefined) {
 
+    'use strict';
 
     $.widget('neatline.neatlinetimeline', {
 
@@ -32,14 +33,6 @@
                 min_zoom: 5,
                 max_zoom: 60,
                 initial_zoom: 40
-            },
-
-            // Markup hooks.
-            markup: {
-                popup_id: 'timeline-popup',
-                popup_title: 'h3.title-text',
-                popup_content: 'div.content',
-                popup_close: 'a.close'
             },
 
             // Animation constants.
@@ -63,22 +56,19 @@
         _create: function() {
 
             // Getters.
-            this.params = Neatline;
-            this._window = $(window);
-            this.popup = $('#' + this.options.markup.popup_id);
-            this.popupTitle = this.popup.find(this.options.markup.popup_title);
-            this.popupContent = this.popup.find(this.options.markup.popup_content);
-            this.popupClose = this.popup.find(this.options.markup.popup_close);
+            this._window =                  $(window);
+            this.popup =                    $('#timeline-popup');
+            this.popupTitle =               this.popup.find('h3.title-text');
+            this.popupContent =             this.popup.find('div.content');
+            this.popupClose =               this.popup.find('a.close');
 
             // Initialize popup and tracker.
             this._onPopup = false;
             this._initializePopup();
             this._idToTapeElements = {};
-
-            // Initialize resize timer.
             this.resizeTimerId = null;
 
-            // Ignition.
+            // Start-up.
             this._instantiateSimile();
 
         },
@@ -223,7 +213,7 @@
             var self = this;
 
             // Ping the json server and get the events data.
-            this.timeline.loadJSON(this.params.dataSources.timeline, function(json, url) {
+            this.timeline.loadJSON(Neatline.dataSources.timeline, function(json, url) {
 
                 // Render the events.
                 self.eventSource.clear();
@@ -232,8 +222,8 @@
             });
 
             // Set the starting date, if defined.
-            if (this.params.default_timeline_focus_date != null) {
-                var startDate = Date.parse(this.params.default_timeline_focus_date);
+            if (Neatline.default_timeline_focus_date != null) {
+                var startDate = Date.parse(Neatline.default_timeline_focus_date);
                 this.timeline.getBand(0).setCenterVisibleDate(startDate);
             }
 
@@ -286,7 +276,6 @@
 
                 }
 
-
             });
 
         },
@@ -338,8 +327,4 @@
 
     });
 
-
 })( jQuery );
-
-
-

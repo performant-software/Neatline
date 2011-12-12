@@ -103,7 +103,7 @@ function neatline_queueNeatlineAssets()
 {
 
     // Core Neatline stylesheet.
-    queue_css('bootstrap-1.2.0');
+    queue_css('bootstrap.xtra.min');
     queue_css('neatline');
 
     // The Neatline JavaScript application.

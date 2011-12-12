@@ -40,10 +40,10 @@ class Neatline_PublicControllerTest extends Omeka_Test_AppTestCase
     public function setUp()
     {
 
-        parent::setUp();
         $this->helper = new Neatline_Test_AppTestCase;
         $this->helper->setUpPlugin();
         $this->db = get_db();
+        parent::setUp();
 
     }
 
