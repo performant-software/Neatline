@@ -41,21 +41,6 @@
     'types' => $types
 )); ?>
 
-<?php echo $this->partial('neatline/_neatline.php', array(
-    'neatline' => $neatline,
-    'timeline' => $timeline,
-    'map' => array(
-        'boundingBox' => $map->boundingBox,
-        'epsg' => $map->epsg,
-        'wmsAddress' => $map->wmsAddress,
-        'layers' => $map->layers
-    ),
-    'dataSources' => array(
-        'timeline' => neatline_getTimelineDataUrl($neatline->id),
-        'map' => neatline_getMapDataUrl($neatline->id),
-        'undated' => neatline_getUndatedItemsDataUrl($neatline->id)
-    ),
-    'public' => false
-)); ?>
+<?php echo $this->partial('neatline/_neatline.php', $neatlineData); ?>
 
 <?php echo $this->partial('editor/_tooltips.php'); ?>

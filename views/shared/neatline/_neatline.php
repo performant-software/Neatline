@@ -44,9 +44,13 @@
 
 <!-- JSON globals. -->
 <script type="text/javascript">
+
     var Neatline = <?php echo json_encode($neatline); ?>;
-        Neatline.timeline = <?php echo json_encode($timeline); ?>;
-        Neatline.map = <?php echo json_encode($map); ?>;
         Neatline.dataSources = <?php echo json_encode($dataSources); ?>;
         Neatline.public = <?php echo json_encode($public); ?>;
+
+    <?php if (isset($map)): ?>
+        Neatline.map = <?php echo json_encode($map); ?>;
+    <?php endif; ?>
+
 </script>

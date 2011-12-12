@@ -56,28 +56,50 @@ class Neatline_EditorController extends Omeka_Controller_Action
     public function indexAction()
     {
 
-        // Push the neatline into the view.
-        $id = $this->_request->getParam('id');
-        $neatline = $this->_neatlinesTable->find($id);
-        $this->view->neatline = $neatline;
+        // Get records.
+        $id =                       $this->_request->getParam('id');
+        $neatline =                 $this->_neatlinesTable->find($id);
+        $map =                      $neatline->getMap();
 
-        // Get the map and timeline records.
-        $map = $neatline->getMap();
+        // Get Omeka taxonomies.
+        $collections =              $this->getTable('Collection')->findAll();
+        $tags =                     $this->getTable('Tag')->findAll();
+        $types =                    $this->getTable('ItemType')->findAll();
+
+        // Construct the data array for the exhibit.
+        $neatlineData = array(
+            'public' =>             false,
+            'neatline' =>           $neatline,
+            'dataSources' => array(
+                'timeline' =>       neatline_getTimelineDataUrl($neatline->id),
+                'map' =>            neatline_getMapDataUrl($neatline->id),
+                'undated' =>        neatline_getUndatedItemsDataUrl($neatline->id)
+            )
+        );
 
         // Push the map into the view.
         if ($map) {
-            $this->view->map = new GeoserverMap_Map($neatline->getMap());
+
+            // Instantiate the map.
+            $map = new GeoserverMap_Map($map);
+
+            // Add to the parameters array.
+            $neatlineData['map'] = array(
+                'boundingBox' =>    $map->boundingBox,
+                'epsg' =>           $map->epsg,
+                'wmsAddress' =>     $map->wmsAddress,
+                'layers' =>         $map->layers
+            );
+
         }
 
-        // Get taxonomy records.
-        $collections = $this->getTable('Collection')->findAll();
-        $tags = $this->getTable('Tag')->findAll();
-        $types = $this->getTable('ItemType')->findAll();
-
-        // Push taxonomy records.
-        $this->view->collections = $collections;
-        $this->view->tags = $tags;
-        $this->view->types = $types;
+        // Push records.
+        $this->view->neatline =     $neatline;
+        $this->view->neatlineData = $neatlineData;
+        $this->view->map =          $map;
+        $this->view->collections =  $collections;
+        $this->view->tags =         $tags;
+        $this->view->types =        $types;
 
     }
 

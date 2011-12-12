@@ -72,7 +72,14 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
     public function testIndexWithoutMap()
     {
 
+        // Create entities.
+        $exhibit = $this->helper->_createNeatline();
 
+        // Hit the route.
+        $this->dispatch('neatline-exhibits/editor/' . $exhibit->id);
+
+        // Check for the template variables.
+        $this->assertNotNull(__v()->neatline);
 
     }
 
