@@ -351,7 +351,7 @@
 
                 // When a form is saved.
                 'save': function() {
-                    self._saveForm();
+                    self._trigger('saveform');
                 },
 
                 // When a save finishes.
@@ -934,10 +934,10 @@
 
          },
 
-         _saveForm: function() {
+         saveForm: function(coverage) {
 
             // Post the data.
-            this.editForm.itemform('saveItemForm');
+            this.editForm.itemform('saveItemForm', coverage);
 
          },
 

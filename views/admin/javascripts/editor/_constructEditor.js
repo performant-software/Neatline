@@ -62,10 +62,6 @@ jQuery(document).ready(function($) {
                     // Make the item title red.
                     editorContainer.itembrowser('markItemTitleAsUnsaved');
 
-                    // Fetch the coverage data from the map.
-                    var wkts = neatlineContainer.neatline('getWktForSave');
-                    editorContainer.itembrowser('setCoverageData', wkts);
-
                 }
 
             });
@@ -84,10 +80,6 @@ jQuery(document).ready(function($) {
         'mapedit': function(event, obj) {
 
             neatlineContainer.neatline('editMap', obj.item, obj.immediate);
-
-            // Fetch the coverage data from the map.
-            var wkts = neatlineContainer.neatline('getWktForSave');
-            editorContainer.itembrowser('setCoverageData', wkts);
 
         },
 
@@ -154,6 +146,17 @@ jQuery(document).ready(function($) {
 
             // Set.
             editorContainer.itembrowser('saveMapFocus', mapExtent, mapZoom);
+
+        },
+
+        // When the save button is clicked, get the coverage data.
+        'saveform': function() {
+
+            // Get the map extent and zoom.
+            var coverage = neatlineContainer.neatline('getWktForSave');
+
+            // Post the data.
+            editorContainer.itembrowser('saveForm', coverage);
 
         }
 

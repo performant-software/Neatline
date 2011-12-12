@@ -250,11 +250,11 @@
          * Get form data, get geocoverage data, build ajax request and send
          * data for save.
          */
-        saveItemForm: function() {
+        saveItemForm: function(coverage) {
 
             // Fade the form, post the data.
             this._fadeDown();
-            this._postFormData();
+            this._postFormData(coverage);
 
         },
 
@@ -275,15 +275,6 @@
 
             // Rebuilt the gradient builder.
             this.ambiguity.gradientbuilder('refresh');
-
-        },
-
-        /*
-         * Register geocoverage data from the map.
-         */
-        setCoverageData: function(coverage) {
-
-            this.coverage = coverage;
 
         },
 
@@ -472,7 +463,7 @@
         /*
          * Get form data and merge with status and coverage data.
          */
-        _getDataForSave: function() {
+        _getDataForSave: function(coverage) {
 
             var data = this._getData();
 
@@ -481,7 +472,7 @@
             data['neatline_id'] =           Neatline.id;
             data['space_active'] =          this.space.prop('checked').toString();
             data['time_active'] =           this.time.prop('checked').toString();
-            data['geocoverage'] =           this.coverage;
+            data['geocoverage'] =           coverage;
 
             return data;
 
@@ -541,12 +532,12 @@
         /*
          * Save form data.
          */
-        _postFormData: function() {
+        _postFormData: function(coverage) {
 
             var self = this;
 
             // Get the data.
-            var data = this._getDataForSave();
+            var data = this._getDataForSave(coverage);
 
             // Commit.
             $.ajax({
