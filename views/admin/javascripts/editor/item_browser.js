@@ -1119,15 +1119,9 @@
         /*
          * Set the current map focus on the form widget.
          */
-        setMapFocus: function() {
+        saveMapFocus: function(extent, zoom) {
 
-            // Get the item from the id hash.
-            var item = this.idToItem[id];
-
-            // If the item is not already visible, show the form.
-            if (item != this._currentFormItem) {
-                this._showForm(this.idToItem[id], scrollMap, scrollTimeline, focusItems);
-            }
+            this.editForm.itemform('postMapFocus', extent, zoom);
 
         }
 

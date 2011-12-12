@@ -577,8 +577,6 @@
 
             var wkts = [];
 
-            this.modifyFeatures.unselectFeature(this._clickedFeature);
-
             // Push the wkt's onto the array.
             $.each(this._currentEditLayer.features, function(i, feature) {
                 wkts.push(feature.geometry.toString());

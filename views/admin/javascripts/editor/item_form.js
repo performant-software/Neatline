@@ -581,7 +581,7 @@
         /*
          * Save item-specific map focus.
          */
-        postMapFocus: function(bounds) {
+        postMapFocus: function(extent, zoom) {
 
             var self = this;
 
@@ -590,7 +590,10 @@
 
                 url: 'focus',
                 type: 'POST',
-                data: { 'bounds': bounds },
+                data: {
+                    'extent': extent,
+                    'zoom': zoom
+                },
 
                 success: function() {
 
