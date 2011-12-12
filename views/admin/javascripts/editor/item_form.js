@@ -69,6 +69,7 @@
             this.textInputs =               this.form.find('input[type="text"], textarea');
             this.fieldset =                 this.form.find('fieldset');
             this.ambiguity =                this.form.find('.date-ambiguity-container');
+            this.mapFocus =                this.form.find('.map-focus');
 
             // Trackers.
             this._db = TAFFY();
@@ -81,7 +82,7 @@
         },
 
         /*
-         * Instantiate the ambiguity sliders and color picker.
+         * Build component widgets and attach event listeners.
          */
         _buildFormFunctionality: function() {
 
@@ -157,6 +158,20 @@
 
                 'mouseup': function() {
                     self.resizeForm();
+                }
+
+            });
+
+            // Map focus button.
+            this.mapFocus.bind({
+
+                'mousedown': function() {
+                    self._fadeDown();
+                    self._trigger('savemapfocus');
+                },
+
+                'click': function(e) {
+                    e.preventDefault();
                 }
 
             });
@@ -556,6 +571,31 @@
                     if (data.time) {
                         self._trigger('timeactive');
                     }
+
+                }
+
+            });
+
+        },
+
+        /*
+         * Save item-specific map focus.
+         */
+        postMapFocus: function(bounds) {
+
+            var self = this;
+
+            // Commit.
+            $.ajax({
+
+                url: 'focus',
+                type: 'POST',
+                data: { 'bounds': bounds },
+
+                success: function() {
+
+                    // Fade up.
+                    self._fadeUp();
 
                 }
 

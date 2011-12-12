@@ -368,6 +368,11 @@
                 // Mark time active on current item.
                 'timeactive': function() {
                     self._checkStatusBlockOn(self._currentFormItem, 'time');
+                },
+
+                // Get current map focus for item.
+                'savemapfocus': function() {
+                    self._trigger('savemapfocus');
                 }
 
             });
@@ -1100,6 +1105,21 @@
          * Expand the form for a given item id.
          */
         showFormByItemId: function(id, scrollMap, scrollTimeline, focusItems) {
+
+            // Get the item from the id hash.
+            var item = this.idToItem[id];
+
+            // If the item is not already visible, show the form.
+            if (item != this._currentFormItem) {
+                this._showForm(this.idToItem[id], scrollMap, scrollTimeline, focusItems);
+            }
+
+        },
+
+        /*
+         * Set the current map focus on the form widget.
+         */
+        setMapFocus: function() {
 
             // Get the item from the id hash.
             var item = this.idToItem[id];

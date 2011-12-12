@@ -142,6 +142,19 @@ jQuery(document).ready(function($) {
 
             neatlineContainer.neatline('setDateAmbiguity', obj.itemId, obj.color, obj.leftPercent, obj.rightPercent);
 
+        },
+
+        // When the fix item-specific map focus button is pressed, get
+        // the map bounds and pass to the ajax interface in the form.
+        'savemapfocus': function() {
+
+            // Get the map extent and zoom.
+            var mapExtent = neatlineContainer.neatline('getMapExtent');
+            var mapZoom = neatlineContainer.neatline('getMapZoom');
+
+            // Set.
+            editorContainer.itembrowser('setItemMapFocus', mapExtent, mapZoom);
+
         }
 
     });

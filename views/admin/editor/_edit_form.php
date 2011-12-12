@@ -94,7 +94,7 @@
             </div>
 
             <div class="clearfix">
-                <button class="btn icon home">Fix Item-Specific Map Focus</button>
+                <button class="btn icon home map-focus">Fix Item-Specific Map Focus</button>
                 <span class="help-inline">Click here to set a custom map focus for the item.</span>
             </div>
 
