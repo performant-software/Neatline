@@ -65,10 +65,24 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
 
     /**
      * The index view should render the base markup for the editing application.
+     * If the exhibit has no map, then there should not be a map object in the view.
      *
      * @return void.
      */
-    public function testIndex()
+    public function testIndexWithoutMap()
+    {
+
+
+
+    }
+
+    /**
+     * The index view should render the base markup for the editing application.
+     * If the exhibit has a map, then the map object in the view.
+     *
+     * @return void.
+     */
+    public function testIndexWithMap()
     {
 
 
