@@ -26,23 +26,6 @@
 
     $.widget('neatline.neatlinetimeline', {
 
-        options: {
-
-            // Timeline constants.
-            timeglider: {
-                min_zoom: 5,
-                max_zoom: 60,
-                initial_zoom: 40
-            },
-
-            // CSS constants.
-            css: {
-                popup_vertical_offset: 30,
-                popup_content_max_height: 200
-            }
-
-        },
-
         _create: function() {
 
             // Getters.
@@ -52,48 +35,11 @@
             this.popupContent =             this.popup.find('div.content');
             this.popupClose =               this.popup.find('a.close');
 
-            // Initialize popup and tracker.
-            this._onPopup = false;
-            this._initializePopup();
+            // Tracker array for tape elements.
             this._idToTapeElements = {};
-            this.resizeTimerId = null;
 
             // Start-up.
             this._instantiateSimile();
-
-        },
-
-        _initializePopup: function() {
-
-            var self = this;
-
-            // Bind close event.
-            this.popupClose.bind('mousedown', function() {
-                self._hidePopup();
-            });
-
-            // Bind close event to window.
-            this._window.bind('mousedown', function() {
-                if (!self._onPopup) {
-                    self._hidePopup();
-                }
-            });
-
-            // Set the max-height property on the content div.
-            this.popupContent.css('max-height', this.options.css.popup_content_max_height);
-
-        },
-
-        _hidePopup: function() {
-
-            var self = this;
-
-            // Fade down.
-            this.popup.animate({
-                'opacity': 0
-            }, 100, function() {
-                self.popup.css('display', 'none');
-            });
 
         },
 
@@ -128,11 +74,12 @@
             this.bandInfos[1].highlight = true;
 
             // Instantiate and load JSON.
-            this.timeline = Timeline.create(document.getElementById("timeline"), this.bandInfos);
+            var container = document.getElementById('timeline');
+            this.timeline = Timeline.create(container, this.bandInfos);
             this.loadData();
 
             // Override the default click event callbacks.
-            this._overrideClickCallbacks();
+            this._catchClickCallbacks();
 
             // Reposition on window resize.
             this._window.bind({
@@ -145,7 +92,7 @@
 
         },
 
-        _overrideClickCallbacks: function() {
+        _catchClickCallbacks: function() {
 
             var self = this;
 
@@ -164,35 +111,6 @@
                 // Calculate top and left offsets based on the size of the popup.
                 var height = self.popup.height();
                 var width = self.popup.width();
-
-                // Position the scrollbar.
-                // self.popupContent.smallscroll('positionBar');
-
-                // // Position and show.
-                // self.popup.css({
-                //     'display': 'block',
-                //     'top': y - height - self.options.css.popup_vertical_offset,
-                //     'left': x - (width / 2)
-                // });
-
-                // // Fade in.
-                // self.popup.css('display', 'block');
-                // self.popup.animate({
-                //     'opacity': 1
-                // }, 100);
-
-                // // Add cursor tracker.
-                // self.popup.bind({
-
-                //     'mouseenter': function() {
-                //         self._onPopup = true;
-                //     },
-
-                //     'mouseleave': function() {
-                //         self._onPopup = false;
-                //     }
-
-                // });
 
             }
 

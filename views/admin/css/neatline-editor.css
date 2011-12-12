@@ -616,6 +616,10 @@ table#items td.col-row {
     text-align: center;
 }
 
+table#items td.col-row input {
+    margin-top: 12px;
+}
+
 table#items td.col-1:hover, table#items td.col-2:hover {
     background-color: #ffda82;
 }
