@@ -169,6 +169,9 @@
 
         },
 
+        /*
+         * Load the feature data.
+         */
         loadData: function() {
 
             var self = this;
@@ -215,6 +218,9 @@
 
         },
 
+        /*
+         * Construct the features from the source JSON.
+         */
         _buildVectorLayers: function(data) {
 
             var self = this;
@@ -265,6 +271,9 @@
 
         },
 
+        /*
+         * Listen for mouseenter and mousedown on the features.
+         */
         _addClickControls: function() {
 
             var self = this;
@@ -315,6 +324,9 @@
 
         },
 
+        /*
+         * Remove all edit/select controls.
+         */
         _removeControls: function() {
 
             if (this.modifyFeatures !== undefined) {
@@ -343,6 +355,9 @@
 
         },
 
+        /*
+         * Build and activate the editing funcitonalty.
+         */
         edit: function(item, immediate) {
 
             var self = this;
@@ -526,6 +541,9 @@
 
         },
 
+        /*
+         * Remove editing functionality, return to default mode.
+         */
         endEditWithoutSave: function(id, immediate) {
 
             // Before OpenLayers axes the toolbar controls, clone the div so
@@ -573,6 +591,9 @@
 
         },
 
+        /*
+         * Get the WKT representation of the current layer.
+         */
         getWktForSave: function() {
 
             var wkts = [];
@@ -588,18 +609,27 @@
 
         },
 
+        /*
+         * Get the current extent of the viewport.
+         */
         getExtentForSave: function() {
 
             return this.map.getExtent().toString();
 
         },
 
+        /*
+         * Get the current zoom of the viewport.
+         */
         getZoomForSave: function() {
 
             return this.map.getZoom();
 
         },
 
+        /*
+         * Focus the map on the feature data for a given item.
+         */
         zoomToItemVectors: function(id) {
 
             var layer = this.idToLayer[id];
@@ -610,6 +640,9 @@
 
         },
 
+        /*
+         * Construct a StyleMap object with a given color.
+         */
         _getStyleMap: function(fillColor) {
 
             return new OpenLayers.StyleMap({
@@ -631,6 +664,9 @@
 
         },
 
+        /*
+         * Update the feature color for the current editing layer.
+         */
         setItemColor: function(color) {
 
             // Rebuild the style map.
