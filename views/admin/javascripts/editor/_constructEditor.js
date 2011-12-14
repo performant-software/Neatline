@@ -132,7 +132,7 @@ jQuery(document).ready(function($) {
         // When date ambiguity sliders are changed in an item edit form.
         'ambiguityChange': function(event, obj) {
 
-            neatlineContainer.neatline('setDateAmbiguity', obj.itemId, obj.color, obj.leftPercent, obj.rightPercent);
+            neatlineContainer.neatline('setDateAmbiguity', obj.recordid, obj.color, obj.leftPercent, obj.rightPercent);
 
         },
 
