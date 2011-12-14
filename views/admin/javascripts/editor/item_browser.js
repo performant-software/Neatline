@@ -323,11 +323,11 @@
                 // When the ambiguity sliders are changed.
                 'ambiguityChange': function(event, obj) {
 
-                    var itemId = self._currentFormItem.attr('recordid');
+                    var recordid = self._currentFormItem.attr('recordid');
                     self.markItemTitleAsUnsaved();
 
                     self._trigger('ambiguityChange', {}, {
-                        'itemId': itemId,
+                        'recordid': recordid,
                         'color': obj.color,
                         'leftPercent': obj.leftPercent,
                         'rightPercent': obj.rightPercent
@@ -338,9 +338,9 @@
                 // When the color is changed.
                 'colorEdit': function(event, obj) {
 
-                    var itemId = self._currentFormItem.attr('recordid');
+                    var recordid = self._currentFormItem.attr('recordid');
                     self._trigger('coloredit', {}, {
-                        'itemId': itemId,
+                        'recordid': recordid,
                         'color': obj.color
                     });
 
@@ -779,7 +779,7 @@
                 // DOM fetch.
                 var item =                  $(item);
                 var allCells =              item.find('td');
-                var itemId =                item.attr('recordid');
+                var recordid =              item.attr('recordid');
                 var itemTitleTd =           item.find('.item-title');
                 var itemTitleText =         item.find('.item-title-text');
                 var spaceBlock =            item.find('.space');
@@ -798,7 +798,7 @@
                 timeCheckbox], function(el, i) { el.unbind(); });
 
                 // Register the item, calculate offset.
-                self.idToItem[itemId] = item;
+                self.idToItem[recordid] = item;
                 self._calculateTopOffset(item);
 
                 // Store the space/time status on the DOM.
@@ -928,7 +928,7 @@
 
             // Fire events to focus the Neatline blocks.
             this._trigger('itemedit', {}, {
-                'itemId': item.attr('recordid'),
+                'recordid': item.attr('recordid'),
                 'scrollMap': scrollMap,
                 'scrollTimeline': scrollTimeline,
                 'focusItems': focusItems
@@ -959,7 +959,7 @@
 
             // Fire the end edit without save callback.
             this._trigger('endmapedit', {}, {
-                'itemId': item.attr('recordid'),
+                'recordid': item.attr('recordid'),
                 'immediate': immediate
             });
 
@@ -1052,7 +1052,7 @@
             var value = checkbox.prop('checked');
 
             // Get the Omeka item id and the title div.
-            var itemId = item.attr('recordid');
+            var recordid = item.attr('recordid');
             var itemTitleText = item.find('.' + this.options.item_title_text_class);
 
             // Save the new status.
@@ -1062,7 +1062,7 @@
                 type: 'POST',
 
                 data: {
-                    item_id: itemId,
+                    item_id: recordid,
                     neatline_id: Neatline.id,
                     space_or_time: spaceOrTime,
                     value: String(value)
@@ -1167,7 +1167,7 @@
         /*
          * Expand the form for a given item id.
          */
-        showFormByItemId: function(id, scrollMap, scrollTimeline, focusItems) {
+        showFormByrecordid: function(id, scrollMap, scrollTimeline, focusItems) {
 
             // Get the item from the id hash.
             var item = this.idToItem[id];

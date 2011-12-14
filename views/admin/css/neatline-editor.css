@@ -276,6 +276,7 @@ tr.header-row td {
     background-image: -o-linear-gradient(top, #724e85, #543664);
     background-image: linear-gradient(top, #724e85, #543664);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#724e85', endColorstr='#543664', GradientType=0);
+    opacity: 0.9;
 }
 
 

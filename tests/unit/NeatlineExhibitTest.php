@@ -194,6 +194,49 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
     }
 
     /**
+     * The getRecordIdByItem() method should return the id of the data
+     * record for the passed item in the current exhibit.
+     *
+     * @return void.
+     */
+    public function testGetRecordIdByItemWithRecord()
+    {
+
+        // Create an exhibit and item.
+        $neatline = $this->helper->_createNeatline();
+        $item = $this->helper->_createItem();
+
+        // Create a record.
+        $record = new NeatlineDataRecord($item, $neatline);
+        $record->save();
+
+        // Check for the correct id.
+        $retrievedId = $neatline->getRecordIdByItem($item);
+        $this->assertNotNull($retrievedId);
+        $this->assertEquals($retrievedId, $record->id);
+
+    }
+
+    /**
+     * The getRecordIdByItem() method should null if there is no extant
+     * data record for the passed item.
+     *
+     * @return void.
+     */
+    public function testGetRecordIdByItemWithNoRecord()
+    {
+
+        // Create an exhibit and item.
+        $neatline = $this->helper->_createNeatline();
+        $item = $this->helper->_createItem();
+
+        // Check for null.
+        $retrievedId = $neatline->getRecordIdByItem($item);
+        $this->assertNull($retrievedId);
+
+    }
+
+    /**
      * The delete() method should delete the exhibit record and any
      * existing child data records.
      *

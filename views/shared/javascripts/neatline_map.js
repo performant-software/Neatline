@@ -638,7 +638,6 @@
 
             // Get the record out of the database.
             var record = this._db({ recordid: parseInt(id) }).first();
-            console.log(record);
 
             // If the record exists and there is a map feature.
             if (record.layer != null && record.layer.features.length > 0) {

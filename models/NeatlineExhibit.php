@@ -189,6 +189,27 @@ class NeatlineExhibit extends Omeka_record
     }
 
     /**
+     * Return the id of the data record for the passed item in the current
+     * exhibit. If there is no record, return null.
+     *
+     * @param Omeka_record $item The item record.
+     *
+     * @return integer $id The id.
+     */
+    public function getRecordIdByItem($item)
+    {
+
+        // Get the data record table.
+        $_recordsTable = $this->getTable('NeatlineDataRecord');
+
+        // Try to get a record.
+        $record = $_recordsTable->getRecordByItemAndExhibit($item, $this);
+
+        return ($record) ? $record->id : null;
+
+    }
+
+    /**
      * Delete status and element text association records
      * on exhibit delete.
      *
