@@ -231,6 +231,27 @@
 
             }
 
+        },
+
+        setDateColor: function(id, color) {
+
+            var self = this;
+
+            if (typeof this._idToTapeElements[id] !== 'undefined') {
+
+                $.each(this._idToTapeElements[id], function(i, el) {
+
+                    // First, strip off the styles and reapply just the simile positioning.
+                    el.attr('style', el.data('positioningStyles'));
+
+                    // Apply the gradient style.
+                    el.spanstyler('constructCss', color, null, null);
+                    el.spanstyler('applyCss');
+
+                });
+
+            }
+
         }
 
     });

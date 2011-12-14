@@ -28,9 +28,43 @@
     $.widget('neatline.spanstyler', {
 
         /*
+         * Initialize percentage trackers to null.
+         */
+        _create: function() {
+
+            this.leftPercent = null;
+            this.rightPercent = null;
+
+        },
+
+        /*
          * Build the css.
          */
         constructCss: function(color, leftPercent, rightPercent) {
+
+            // If percentages are passed.
+            if (leftPercent != null && rightPercent != null) {
+
+                // Store the percentages.
+                this.leftPercent = leftPercent;
+                this.rightPercent = rightPercent;
+
+            }
+
+            // Otherwise, try to retrieve stored values, or revert to defaults.
+            else {
+
+                if (this.leftPercent != null && this.rightPercent != null) {
+                    leftPercent = this.leftPercent;
+                    rightPercent = this.rightPercent;
+                }
+
+                else {
+                    leftPercent = 0;
+                    rightPercent = 100;
+                }
+
+            }
 
             // Build the rgba strings.
             var rgb = this.__hexToRgb(color);

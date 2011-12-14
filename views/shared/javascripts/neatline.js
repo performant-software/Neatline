@@ -507,9 +507,10 @@
 
         },
 
-        setItemColor: function(color, itemId) {
+        setItemColor: function(color, id) {
 
             this.map.neatlinemap('setItemColor', color);
+            this.timeline.neatlinetimeline('setDateColor', id, color);
 
         },
 

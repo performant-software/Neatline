@@ -125,7 +125,7 @@ jQuery(document).ready(function($) {
         // the item's vectors.
         'coloredit': function(event, obj) {
 
-            neatlineContainer.neatline('setItemColor', obj.color, obj.itemId);
+            neatlineContainer.neatline('setItemColor', obj.color, obj.recordid);
 
         },
 
