@@ -204,9 +204,14 @@
             this.container.append(this.element);
 
             // DOM touches.
-            this._getFormData();
             this._showContainer();
             this._expandTitle();
+
+            // If the form is for an existing item, populate the fields.
+            console.log(this.item);
+            if (this.itemId != 'new') {
+                this._getFormData();
+            }
 
         },
 

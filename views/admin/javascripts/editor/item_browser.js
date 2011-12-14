@@ -898,7 +898,12 @@
          */
 
 
+        /*
+         * Expand an item form.
+         */
          _showForm: function(item, scrollMap, scrollTimeline, focusItems) {
+
+            console.log(item);
 
             var self = this;
             var immediate = false;
@@ -943,6 +948,9 @@
 
          },
 
+        /*
+         * Contract an expended item form.
+         */
          _hideForm: function(item, immediate) {
 
             // Hide the form.
@@ -963,6 +971,9 @@
 
          },
 
+        /*
+         * Ping the form manager to save the current form data.
+         */
          saveForm: function(coverage) {
 
             // Post the data.
@@ -1090,10 +1101,11 @@
                     // Append the new markup to the top of the stack.
                     var itemsBody = $('#items tbody');
                     itemsBody.prepend(html);
-                    var item = itemsBody.first('tr');
 
-                    // Regloss.
+                    // Open the form and re-gloss the items.
+                    var item = itemsBody.find('tr').first();
                     self._glossItems();
+                    self._showForm(item, false, false, false);
 
                 }
 
