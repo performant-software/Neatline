@@ -225,19 +225,16 @@
 
             var self = this;
 
-            // Instantiate associations objects.
+            // Instantiate database and associations objects.
+            this._db = TAFFY();
             this.idToLayer = {};
             this.layerToId = {};
 
             $.each(data, function(i, item) {
 
-                // Get the id of the item.
+                // Get item id and color, construct style.
                 var itemId = item.id;
-
-                // Try to get a color from the JSON, revert to default if no color is set..
                 var color = (item.color != '') ? item.color : self.options.styles.default_color;
-
-                // Build the layer styles.
                 var style = self._getStyleMap(color);
 
                 // Build the layers.
@@ -262,6 +259,13 @@
                 // Add to associations.
                 self.idToLayer[itemId] = vectorLayer;
                 self.layerToId[vectorLayer.id] = itemId;
+
+                // Add the database record.
+                self._db.insert({
+                    recordid: itemId,
+                    data: item,
+                    layer: vectorLayer
+                });
 
                 // Add to the layers array and add to map.
                 self._currentVectorLayers.push(vectorLayer);
@@ -632,10 +636,10 @@
          */
         zoomToItemVectors: function(id) {
 
-            var layer = this.idToLayer[id];
+            var record = this._db({ recordid: parseInt(id) }).first();
 
-            if (layer != null && layer.features.length > 0) {
-                this.map.zoomToExtent(layer.getDataExtent());
+            if (record.layer != null && record.layer.features.length > 0) {
+                this.map.zoomToExtent(record.layer.getDataExtent());
             }
 
         },

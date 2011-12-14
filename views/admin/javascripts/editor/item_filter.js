@@ -27,9 +27,10 @@
         options: {
 
             // Durations and CSS constants.
+            fade_duration: 400,
+            top_bar_height: 53,
             bottom: 75,
             header: 40,
-            fade_duration: 400,
 
             // Hexes.
             colors: {
@@ -40,6 +41,9 @@
 
         },
 
+        /*
+         * Get markup and run preparatory routines.
+         */
         _create: function() {
 
             // Getters.
@@ -117,6 +121,9 @@
 
         },
 
+        /*
+         * Measure the offset of the tab and the size of the dropdown.
+         */
         _getDimensions: function() {
 
             // Get the position and size of the tab.
@@ -132,6 +139,10 @@
 
         },
 
+        /*
+         * Calculate an adjusted height for the dropdown that will fit
+         * into the vertical space available.
+         */
         _getHeight: function() {
 
             // Measure the window.
@@ -155,6 +166,9 @@
 
         },
 
+        /*
+         * Set the starting contracted position for the stack.
+         */
         _positionDivs: function() {
 
             // Position the stack.
@@ -165,6 +179,9 @@
 
         },
 
+        /*
+         * Attach event listeners to the tab.
+         */
         _glossTab: function() {
 
             var self = this;
@@ -232,12 +249,16 @@
 
         },
 
+        /*
+         * Expand the stack.
+         */
         show: function() {
 
             var self = this;
 
             // Calculate the height.
-            this._getHeight();
+            this._getDimensions();
+            this._positionDivs();
 
             // Show and set height.
             this.element.css({
@@ -247,7 +268,7 @@
 
             // Animate.
             this.element.stop().animate({
-                'top': this.options.header - 1
+                'top': this.options.header + this.options.top_bar_height - 1
             }, this.options.fade_duration, function() {
 
                 // Add the scrollbar.
@@ -263,6 +284,9 @@
 
         },
 
+        /*
+         * Reposition the stack on window resize.
+         */
         resize: function() {
 
             // Calculate the height.
@@ -277,6 +301,9 @@
 
         },
 
+        /*
+         * Contract the stack.
+         */
         hide: function() {
 
             var self = this;
@@ -293,12 +320,18 @@
 
         },
 
+        /*
+         * Instantiate smallscroll on the stack.
+         */
         _addScrollbar: function() {
 
             this.element.smallscroll();
 
         },
 
+        /*
+         * Push or pop a tag/type/collection in or out of the selection.
+         */
         _addCheckBoxEvents: function() {
 
             var self = this;
@@ -466,6 +499,9 @@
 
         },
 
+        /*
+         * Push or pop a tag/type/collection in or out of the selection.
+         */
         _toggleArrayMembership: function(input, value) {
 
             var recordDiv = input.closest('.filter-option').find('recordid');
@@ -523,6 +559,9 @@
 
         },
 
+        /*
+         * Emit the current selected array.
+         */
         getSelected: function() {
 
             return this.selected;

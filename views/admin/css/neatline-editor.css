@@ -402,7 +402,7 @@ ul.filter-items {
 
 div#filter-items {
     display: block;
-    position: absolute;
+    position: fixed;
     z-index: 98;
     overflow: hidden;
     display: none;
