@@ -595,6 +595,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         // Hit the route, check for the markup.
         $this->dispatch('neatline-exhibits/editor/add');
         $this->assertQuery('tr.item-row[recordid="new"]');
+        $this->assertQueryContentContains('span.item-title-text', '[New Item]');
         $this->assertQuery('tr.edit-form');
 
     }
