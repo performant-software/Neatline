@@ -285,8 +285,7 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
 
         // Save form data with updated end_date.
         $statuses = $this->_recordsTable->saveItemFormData(
-            $item,
-            $neatline,
+            $record,
             null,
             null,
             null,
@@ -316,8 +315,7 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
 
         // Save form data with updated end_time.
         $statuses = $this->_recordsTable->saveItemFormData(
-            $item,
-            $neatline,
+            $record,
             null,
             null,
             null,
@@ -347,8 +345,7 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
 
         // Save form data with updated end_time.
         $statuses = $this->_recordsTable->saveItemFormData(
-            $item,
-            $neatline,
+            $record,
             null,
             null,
             null,
@@ -378,8 +375,7 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
 
         // Save form data with updated space and time attribute.
         $statuses = $this->_recordsTable->saveItemFormData(
-            $item,
-            $neatline,
+            $record,
             null,
             null,
             'June 25, 1987',
