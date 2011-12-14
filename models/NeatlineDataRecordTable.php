@@ -224,6 +224,26 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
     }
 
     /**
+     * Find all records associated with a given exhibit that do not have a
+     * parent item.
+     *
+     * @param Omeka_record $neatline The exhibit record.
+     *
+     * @return array of Omeka_record The records.
+     */
+    public function getNeatlineRecordsByExhibit($neatline)
+    {
+
+        $records = $this->fetchObjects(
+            $this->getSelect()->where('exhibit_id = ' . $neatline->id . 
+                ' AND item_id IS NULL')
+        );
+
+        return $records ? $records : false;
+
+    }
+
+    /**
      * Find all records associated with a given exhibit that have either
      * an active space or time status.
      *

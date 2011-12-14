@@ -847,7 +847,7 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
      *
      * @return void.
      */
-    public function testGetRecordsByExhibitWithExhibits()
+    public function testGetRecordsByExhibitWithRecords()
     {
 
         // Create two items and an exhibit.
@@ -860,12 +860,15 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
         $record1->save();
         $record2 = new NeatlineDataRecord($item2, $neatline);
         $record2->save();
+        $record3 = new NeatlineDataRecord(null, $neatline);
+        $record3->save();
 
         // Get the records and check result.
         $records = $this->_recordsTable->getRecordsByExhibit($neatline);
-        $this->assertEquals(count($records), 2);
+        $this->assertEquals(count($records), 3);
         $this->assertEquals($records[0]->id, $record1->id);
         $this->assertEquals($records[1]->id, $record2->id);
+        $this->assertEquals($records[2]->id, $record3->id);
 
     }
 
@@ -875,7 +878,7 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
      *
      * @return void.
      */
-    public function testGetRecordsByExhibitWithNoExhibits()
+    public function testGetRecordsByExhibitWithNoRecords()
     {
 
         // Create two items and an exhibit.
@@ -883,6 +886,55 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
 
         // Get the records and check result.
         $records = $this->_recordsTable->getRecordsByExhibit($neatline);
+        $this->assertFalse($records);
+
+    }
+
+    /**
+     * When there are records for an exhibit that do not have a parent item,
+     * getNeatlineRecordsByExhibit() should return the records.
+     *
+     * @return void.
+     */
+    public function testGetNeatlineRecordsByExhibitWithRecords()
+    {
+
+        // Create an exhibit.
+        $neatline = $this->helper->_createNeatline();
+        $item = $this->helper->_createItem();
+
+        // Create two records, one with a parent item and one without.
+        $record1 = new NeatlineDataRecord(null, $neatline);
+        $record1->save();
+        $record2 = new NeatlineDataRecord($item, $neatline);
+        $record2->save();
+
+        // Get the records and check result.
+        $records = $this->_recordsTable->getNeatlineRecordsByExhibit($neatline);
+        $this->assertEquals(count($records), 1);
+        $this->assertEquals($records[0]->id, $record1->id);
+
+    }
+
+    /**
+     * When there are no item-null records for an exhibit, getNeatlineRecordsByExhibit()
+     * should return false.
+     *
+     * @return void.
+     */
+    public function testGetNeatlineRecordsByExhibitWithNoRecords()
+    {
+
+        // Create two items and an exhibit.
+        $neatline = $this->helper->_createNeatline();
+        $item = $this->helper->_createItem();
+
+        // Create two records, one with a parent item and one without.
+        $record = new NeatlineDataRecord($item, $neatline);
+        $record->save();
+
+        // Get the records and check result.
+        $records = $this->_recordsTable->getNeatlineRecordsByExhibit($neatline);
         $this->assertFalse($records);
 
     }

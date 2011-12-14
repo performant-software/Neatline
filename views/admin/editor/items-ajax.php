@@ -27,23 +27,62 @@
 
 <table id="items">
 
-    <?php foreach ($items as $item): ?>
+    <?php if ($records): ?>
 
-        <tr class="item-row" recordid="<?php echo $item->id; ?>">
-            <td class="item-title">
-                <span class="item-title-text"><?php echo item('Dublin Core', 'Title', null, $item); ?></span>
-                <span class="item-title-fader"></span>
-            </td>
-            <td class="col-1 col-row space">
-                <input type="checkbox" <?php echo $neatline->getRecordStatus($item, 'space')? 'checked' : ''; ?> />
-            </td>
-            <td class="col-2 col-row time">
-                <input type="checkbox" <?php echo $neatline->getRecordStatus($item, 'time')? 'checked' : ''; ?> />
-            </td>
+        <tr class="header-row">
+            <td>Neatline Records</td>
+            <td class="col-1"></td>
+            <td class="col-2"></td>
         </tr>
 
-        <tr class="edit-form"><td colspan="3"></td></tr>
+        <?php foreach ($records as $record): ?>
 
-    <?php endforeach; ?>
+            <tr class="item-row" recordid="<?php echo $record->id; ?>">
+                <td class="item-title">
+                    <span class="item-title-text"><?php echo $record->title; ?></span>
+                    <span class="item-title-fader"></span>
+                </td>
+                <td class="col-1 col-row space">
+                    <input type="checkbox" <?php echo ($record->space_active == 1) ? 'checked' : ''; ?> />
+                </td>
+                <td class="col-2 col-row time">
+                    <input type="checkbox" <?php echo ($record->time_active == 1) ? 'checked' : ''; ?> />
+                </td>
+            </tr>
+
+            <tr class="edit-form"><td colspan="3"></td></tr>
+
+        <?php endforeach; ?>
+
+    <?php endif; ?>
+
+    <?php if (count($items) > 0): ?>
+
+        <tr class="header-row">
+            <td>Omeka Records</td>
+            <td class="col-1"></td>
+            <td class="col-2"></td>
+        </tr>
+
+        <?php foreach ($items as $item): ?>
+
+            <tr class="item-row" itemid="<?php echo $item->id; ?>">
+                <td class="item-title">
+                    <span class="item-title-text"><?php echo item('Dublin Core', 'Title', null, $item); ?></span>
+                    <span class="item-title-fader"></span>
+                </td>
+                <td class="col-1 col-row space">
+                    <input type="checkbox" <?php echo $neatline->getRecordStatus($item, 'space')? 'checked' : ''; ?> />
+                </td>
+                <td class="col-2 col-row time">
+                    <input type="checkbox" <?php echo $neatline->getRecordStatus($item, 'time')? 'checked' : ''; ?> />
+                </td>
+            </tr>
+
+            <tr class="edit-form"><td colspan="3"></td></tr>
+
+        <?php endforeach; ?>
+
+    <?php endif; ?>
 
 </table>

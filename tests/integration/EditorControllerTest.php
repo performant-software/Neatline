@@ -137,14 +137,105 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
     }
 
     /**
-     * The /items route should return a correctly-filtered list of items.
+     * When Omeka records exist but Neatline-endemic records do not exist, /items
+     * should return the Omeka items without the Neatline Records heading.
      *
      * @return void.
      */
-    public function testItems()
+    public function testItemsWithOmekaRecords()
     {
 
+        // Get rid of the default item.
+        $this->db->getTable('Item')->find(1)->delete();
 
+        // Create item, exhibit, and record.
+        $item = $this->helper->_createItem();
+        $neatline = $this->helper->_createNeatline();
+        $record = new NeatlineDataRecord($item, $neatline);
+        $record->save();
+
+        // Prepare the request.
+        $this->request->setMethod('GET')
+            ->setParams(array(
+                'neatline_id' => $neatline->id,
+                'all' => 'true'
+            )
+        );
+
+        // Hit the route, check the markup.
+        $this->dispatch('neatline-exhibits/editor/items');
+        $this->assertQueryContentContains('tr.header-row td', 'Omeka Records');
+        $this->assertNotQueryContentContains('tr.header-row td', 'Neatline Records');
+        $this->assertQueryCount('tr.item-row', 1);
+
+    }
+
+    /**
+     * When Omeka records do not exist but Neatline-endemic records do exist, /items
+     * should return the Neatline records without the Omeka Records heading.
+     *
+     * @return void.
+     */
+    public function testItemsWithNeatlineRecords()
+    {
+
+        // Get rid of the default item.
+        $this->db->getTable('Item')->find(1)->delete();
+
+        // Create item, exhibit, and record.
+        $neatline = $this->helper->_createNeatline();
+        $record = new NeatlineDataRecord(null, $neatline);
+        $record->save();
+
+        // Prepare the request.
+        $this->request->setMethod('GET')
+            ->setParams(array(
+                'neatline_id' => $neatline->id,
+                'all' => 'true'
+            )
+        );
+
+        // Hit the route, check the markup.
+        $this->dispatch('neatline-exhibits/editor/items');
+        $this->assertNotQueryContentContains('tr.header-row td', 'Omeka Records');
+        $this->assertQueryContentContains('tr.header-row td', 'Neatline Records');
+        $this->assertQueryCount('tr.item-row', 1);
+
+    }
+
+    /**
+     * When Omeka records and Neatline-endemic records exist, /items should return
+     * all records with both headings.
+     *
+     * @return void.
+     */
+    public function testItemsWithNeatlineRecordsAndOmekaRecords()
+    {
+
+        // Get rid of the default item.
+        $this->db->getTable('Item')->find(1)->delete();
+
+        // Create item, exhibit, and record.
+        $item = $this->helper->_createItem();
+        $neatline = $this->helper->_createNeatline();
+        $record1 = new NeatlineDataRecord($item, $neatline);
+        $record1->save();
+        $record2 = new NeatlineDataRecord(null, $neatline);
+        $record2->save();
+
+        // Prepare the request.
+        $this->request->setMethod('GET')
+            ->setParams(array(
+                'neatline_id' => $neatline->id,
+                'all' => 'true'
+            )
+        );
+
+        // Hit the route, check the markup.
+        $this->dispatch('neatline-exhibits/editor/items');
+        $this->assertQueryContentContains('tr.header-row td', 'Omeka Records');
+        $this->assertQueryContentContains('tr.header-row td', 'Neatline Records');
+        $this->assertQueryCount('tr.item-row', 2);
 
     }
 
@@ -592,11 +683,14 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $neatline = $this->helper->_createNeatline();
         $item = $this->helper->_createItem();
 
+        // 0 records.
+        $this->assertEquals($this->_recordsTable->count(), 0);
+
         // Hit the route, check for the markup.
         $this->dispatch('neatline-exhibits/editor/add');
-        $this->assertQuery('tr.item-row[recordid="new"]');
-        $this->assertQueryContentContains('span.item-title-text', '[New Item]');
-        $this->assertQuery('tr.edit-form');
+
+        // 1 record.
+        $this->assertEquals($this->_recordsTable->count(), 1);
 
     }
 

@@ -261,6 +261,23 @@ span.item-title-text {
     left: 10px;
 }
 
+tr.header-row td {
+    color: #fff;
+    font-size: 0.9em;
+    padding: 3px 0 3px 20px !important;
+    background-color: #724e85;
+    background-color: #724e85;
+    background-repeat: repeat-x;
+    background-image: -khtml-gradient(linear, left top, left bottom, from(#724e85), to(#543664));
+    background-image: -moz-linear-gradient(top, #724e85, #543664);
+    background-image: -ms-linear-gradient(top, #724e85, #543664);
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #724e85), color-stop(100%, #543664));
+    background-image: -webkit-linear-gradient(top, #724e85, #543664);
+    background-image: -o-linear-gradient(top, #724e85, #543664);
+    background-image: linear-gradient(top, #724e85, #543664);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#724e85', endColorstr='#543664', GradientType=0);
+}
+
 
 /* Edit form */
 

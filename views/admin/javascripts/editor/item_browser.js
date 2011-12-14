@@ -1092,18 +1092,12 @@
 
                 url: 'add',
                 type: 'GET',
-                dataType: 'html',
+                data: { neatline_id: Neatline.id },
 
-                success: function(html) {
+                success: function() {
 
-                    // Append the new markup to the top of the stack.
-                    var itemsBody = $('#items tbody');
-                    itemsBody.prepend(html);
-
-                    // Open the form and re-gloss the items.
-                    var item = itemsBody.find('tr').first();
-                    self._glossItems();
-                    self._showForm(item, false, false, false);
+                    // Re-get items.
+                    self._getItems();
 
                 }
 

@@ -208,7 +208,7 @@
             this._expandTitle();
 
             // If the form is for an existing item, populate the fields.
-            if (this.itemId != 'new') {
+            if (this.itemId != ':null') {
                 this._getFormData();
             }
 
