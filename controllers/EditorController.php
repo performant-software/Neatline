@@ -393,4 +393,18 @@ class Neatline_EditorController extends Omeka_Controller_Action
 
     }
 
+    /**
+     * ~ AJAX ~
+     * Construct markup for a new item row.
+     *
+     * @return void
+     */
+    public function addAction()
+    {
+
+        // Set the layout.
+        $this->_helper->viewRenderer('row-ajax');
+
+    }
+
 }

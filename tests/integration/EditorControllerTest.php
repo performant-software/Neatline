@@ -580,4 +580,23 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
 
     }
 
+    /**
+     * The /add route should return markup for a new item row.
+     *
+     * @return void.
+     */
+    public function testAdd()
+    {
+
+        // Create an exhibit, item, and record.
+        $neatline = $this->helper->_createNeatline();
+        $item = $this->helper->_createItem();
+
+        // Hit the route, check for the markup.
+        $this->dispatch('neatline-exhibits/editor/add');
+        $this->assertQuery('tr.item-row[recordid="new"]');
+        $this->assertQuery('tr.edit-form');
+
+    }
+
 }

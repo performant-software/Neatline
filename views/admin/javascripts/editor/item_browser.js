@@ -80,6 +80,7 @@
             this.spaceHeader =              $('div.col-1.col-header span.header');
             this.timeHeader =               $('div.col-2.col-header span.header');
             this.editForm =                 $('#edit-form');
+            this.newItemButton =            $('#new-item-button');
 
             // Trackers.
             this._searchString = '';
@@ -98,6 +99,7 @@
             this._glossSearchBox();
             this._glossColumnHeaders();
             this._glossItemFilter();
+            this._glossNewItemButton();
             this._instantiateFormManager();
 
         },
@@ -583,6 +585,23 @@
         },
 
         /*
+         * Listen for mousedown on teh "New" button.
+         */
+        _glossNewItemButton: function() {
+
+            var self = this;
+
+            this.newItemButton.bind({
+
+                'mousedown': function() {
+                    self._getNewItemMarkup();
+                }
+
+            });
+
+        },
+
+        /*
          * Build functionality on the Space/Time column headers. On mouseover,
          * highlight the column to show that it is filterable by a click; on
          * mousedown, hide all items that do not have an active record in the
@@ -1036,6 +1055,32 @@
                         self._trigger('savecomplete');
                     }
 
+                }
+
+            });
+
+        },
+
+        /*
+         * Hit the server for base markup for a new item row.
+         */
+        _getNewItemMarkup: function() {
+
+            var self = this;
+
+            // Get the HTML.
+            $.ajax({
+
+                url: 'add',
+                type: 'GET',
+
+                data: {
+                    item_id: itemId,
+                    neatline_id: Neatline.id,
+                },
+
+                success: function(html) {
+                    console.log(html);
                 }
 
             });
