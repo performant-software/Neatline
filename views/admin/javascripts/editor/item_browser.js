@@ -1167,7 +1167,7 @@
         /*
          * Expand the form for a given item id.
          */
-        showFormByrecordid: function(id, scrollMap, scrollTimeline, focusItems) {
+        showFormByItemId: function(id, scrollMap, scrollTimeline, focusItems) {
 
             // Get the item from the id hash.
             var item = this.idToItem[id];

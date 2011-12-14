@@ -393,7 +393,7 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
                 !is_null($record->getGeocoverage())) {
 
                 $data[] = array(
-                    'id' => $record->item_id,
+                    'id' => $record->id,
                     'title' => $record->title,
                     'color' => $record->vector_color,
                     'bounds' => $record->map_bounds,
@@ -441,7 +441,7 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
             );
 
             $eventArray = array(
-                'eventID' => $record->item_id,
+                'eventID' => $record->id,
                 'title' => $record->title,
                 'description' => $record->description,
                 'color' => $record->vector_color,

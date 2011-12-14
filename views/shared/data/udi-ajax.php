@@ -29,7 +29,7 @@
 
     <?php foreach ($records as $record): ?>
 
-        <tr class="item-row" recordid="<?php echo $record->item_id; ?>">
+        <tr class="item-row" recordid="<?php echo $record->id; ?>">
             <td class="item-title">
                 <span class="item-title-text"><?php echo $record->title; ?></span>
             </td>
