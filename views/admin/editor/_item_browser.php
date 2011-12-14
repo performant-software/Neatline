@@ -40,10 +40,12 @@
 
         <ul class="tabs filter-items">
             <li id="filter-items-tab" class="drop-down">
-                <a href="#" class="dropdown-toggle">Filter Items</a>
+                <a href="#" class="dropdown-toggle">Filter</a>
             </li>
 
         </ul>
+
+        <button id="new-item-button" class="btn icon add">New</button>
 
         <div class="columns">
             <div class="col-1 col-cell col-header"><span class="header"></span></div>

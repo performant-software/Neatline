@@ -72,7 +72,7 @@ html {
     line-height: 1;
     padding: 3px 20px 3px 5px;
     margin: 8px 10px 0 18px;
-    width: 130px;
+    width: 80px;
     box-shadow: none;
     -webkit-box-shadow: none;
 }
@@ -255,6 +255,12 @@ span.item-title-text {
     width: 80%;
 }
 
+#new-item-button {
+    position: relative;
+    top: 7px;
+    left: 10px;
+}
+
 
 /* Edit form */
 
@@ -337,7 +343,7 @@ span#search-cancel {
     cursor: pointer;
     font-size: 0.8em;
     padding: 5px;
-    left: 155px;
+    left: 107px;
     top: 5px;
 }
 
