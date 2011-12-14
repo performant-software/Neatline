@@ -381,7 +381,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
     public function testSaveWithRecordIdAndNoItemId()
     {
 
-        // Createexhibit and record.
+        // Create exhibit and record.
         $neatline = $this->helper->_createNeatline();
         $record = new NeatlineDataRecord(null, $neatline);
         $record->save();
@@ -425,6 +425,238 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
 
         // Get the record and check the attributes.
         $record = $this->_recordsTable->find($record->id);
+
+        $this->assertEquals(
+            $record->title,
+            self::$__testParams['title']
+        );
+
+        $this->assertEquals(
+            $record->description,
+            self::$__testParams['description']
+        );
+
+        $this->assertEquals(
+            $record->start_date,
+            self::$__testParams['start_date']
+        );
+
+        $this->assertEquals(
+            $record->start_time,
+            self::$__testParams['start_time']
+        );
+
+        $this->assertEquals(
+            $record->end_date,
+            self::$__testParams['end_date']
+        );
+
+        $this->assertEquals(
+            $record->end_time,
+            self::$__testParams['end_time']
+        );
+
+        $this->assertEquals(
+            $record->vector_color,
+            self::$__testParams['vector_color']
+        );
+
+        $this->assertEquals(
+            $record->geocoverage,
+            self::$__testParams['geocoverage']
+        );
+
+        $this->assertEquals(
+            $record->left_ambiguity_percentage,
+            self::$__testParams['left_percent']
+        );
+
+        $this->assertEquals(
+            $record->right_ambiguity_percentage,
+            self::$__testParams['right_percent']
+        );
+
+        $this->assertEquals(
+            $record->space_active,
+            1
+        );
+
+        $this->assertEquals(
+            $record->time_active,
+            1
+        );
+
+    }
+
+    /**
+     * If there is a non-null item id on the post and a null record id, the action
+     * /save should create and populate a new data record.
+     *
+     * @return void.
+     */
+    public function testSaveWithItemIdAndNoRecordId()
+    {
+
+        // Create exhibit and item.
+        $neatline = $this->helper->_createNeatline();
+        $item = $this->helper->_createItem();
+
+        // Form the POST for a space change.
+        $this->request->setMethod('POST')
+            ->setPost(array(
+                'item_id' =>        $item->id,
+                'record_id' =>      '',
+                'neatline_id' =>    $neatline->id,
+                'space_active' =>   (string) self::$__testParams['space_active'],
+                'time_active' =>    (string) self::$__testParams['time_active'],
+                'geocoverage' =>    self::$__testParams['geocoverage'],
+                'title' =>          self::$__testParams['title'],
+                'description' =>    self::$__testParams['description'],
+                'start_date' =>     self::$__testParams['start_date'],
+                'start_time' =>     self::$__testParams['start_time'],
+                'end_date' =>       self::$__testParams['end_date'],
+                'end_time' =>       self::$__testParams['end_time'],
+                'left_percent' =>   self::$__testParams['left_percent'],
+                'right_percent' =>  self::$__testParams['right_percent'],
+                'vector_color' =>   self::$__testParams['vector_color']
+            )
+        );
+
+        // 0 records.
+        $this->assertEquals($this->_recordsTable->count(), 0);
+
+        // Hit the route and capture the response.
+        $this->dispatch('neatline-exhibits/editor/save');
+        $response = $this->getResponse()->getBody('default');
+
+        // 1 record.
+        $this->assertEquals($this->_recordsTable->count(), 1);
+
+        // Test the raw construction with no available DC values.
+        $this->assertEquals(
+            $response,
+            '{"space":true,"time":true}'
+        );
+
+        // Get the record and check the attributes.
+        $record = $this->_recordsTable->getRecordByItemAndExhibit($item, $neatline);
+
+        $this->assertEquals(
+            $record->title,
+            self::$__testParams['title']
+        );
+
+        $this->assertEquals(
+            $record->description,
+            self::$__testParams['description']
+        );
+
+        $this->assertEquals(
+            $record->start_date,
+            self::$__testParams['start_date']
+        );
+
+        $this->assertEquals(
+            $record->start_time,
+            self::$__testParams['start_time']
+        );
+
+        $this->assertEquals(
+            $record->end_date,
+            self::$__testParams['end_date']
+        );
+
+        $this->assertEquals(
+            $record->end_time,
+            self::$__testParams['end_time']
+        );
+
+        $this->assertEquals(
+            $record->vector_color,
+            self::$__testParams['vector_color']
+        );
+
+        $this->assertEquals(
+            $record->geocoverage,
+            self::$__testParams['geocoverage']
+        );
+
+        $this->assertEquals(
+            $record->left_ambiguity_percentage,
+            self::$__testParams['left_percent']
+        );
+
+        $this->assertEquals(
+            $record->right_ambiguity_percentage,
+            self::$__testParams['right_percent']
+        );
+
+        $this->assertEquals(
+            $record->space_active,
+            1
+        );
+
+        $this->assertEquals(
+            $record->time_active,
+            1
+        );
+
+    }
+
+    /**
+     * If there is a non-null item id on the post and a non-null record id, the action
+     * /save should update the existing data record for the item.
+     *
+     * @return void.
+     */
+    public function testSaveWithItemIdAndRecordId()
+    {
+
+        // Create exhibit and item.
+        $neatline = $this->helper->_createNeatline();
+        $item = $this->helper->_createItem();
+        $record = new NeatlineDataRecord($item, $neatline);
+        $record->save();
+
+        // Form the POST for a space change.
+        $this->request->setMethod('POST')
+            ->setPost(array(
+                'item_id' =>        $item->id,
+                'record_id' =>      $record->id,
+                'neatline_id' =>    $neatline->id,
+                'space_active' =>   (string) self::$__testParams['space_active'],
+                'time_active' =>    (string) self::$__testParams['time_active'],
+                'geocoverage' =>    self::$__testParams['geocoverage'],
+                'title' =>          self::$__testParams['title'],
+                'description' =>    self::$__testParams['description'],
+                'start_date' =>     self::$__testParams['start_date'],
+                'start_time' =>     self::$__testParams['start_time'],
+                'end_date' =>       self::$__testParams['end_date'],
+                'end_time' =>       self::$__testParams['end_time'],
+                'left_percent' =>   self::$__testParams['left_percent'],
+                'right_percent' =>  self::$__testParams['right_percent'],
+                'vector_color' =>   self::$__testParams['vector_color']
+            )
+        );
+
+        // 1 record.
+        $this->assertEquals($this->_recordsTable->count(), 1);
+
+        // Hit the route and capture the response.
+        $this->dispatch('neatline-exhibits/editor/save');
+        $response = $this->getResponse()->getBody('default');
+
+        // 1 record.
+        $this->assertEquals($this->_recordsTable->count(), 1);
+
+        // Test the raw construction with no available DC values.
+        $this->assertEquals(
+            $response,
+            '{"space":true,"time":true}'
+        );
+
+        // Get the record and check the attributes.
+        $record = $this->_recordsTable->getRecordByItemAndExhibit($item, $neatline);
 
         $this->assertEquals(
             $record->title,
