@@ -510,6 +510,7 @@
 
             // Merge the status and coverage data.
             data['item_id'] =               parseInt(this.itemId);
+            data['record_id'] =             parseInt(this.recordId);
             data['neatline_id'] =           Neatline.id;
             data['space_active'] =          this.space.prop('checked').toString();
             data['time_active'] =           this.time.prop('checked').toString();

@@ -32,7 +32,7 @@
     </div>
     <?php if (!$public): ?>
         <div id="reorder-items"></div>
-        <button id="order-save-button" class="btn primary small">Save</button>
+        <button id="order-save-button" class="btn icon approve">Save</button>
     <?php endif; ?>
 </div>
 

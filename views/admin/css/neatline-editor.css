@@ -765,7 +765,6 @@ table#items th, table#items td {
     display: none;
     position: relative;
     float: right;
-    padding: 4px 6px 4px !important;
-    top: 10px;
+    top: 7px;
     margin-right: 1.5em;
 }
