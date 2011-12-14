@@ -1092,13 +1092,13 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
         // Check format.
         $this->assertEquals(
             $json,
-            '[{"id":' . $record1->item_id . ',' .
+            '[{"id":' . $record1->id . ',' .
             '"title":"Item 1 Title",' .
             '"color":"#ffffff",' .
             '"bounds":"BOUND(1)",' .
             '"zoom":4,' .
             '"wkt":"POINT(1,0)"},' .
-            '{"id":' . $record2->item_id . ',' .
+            '{"id":' . $record2->id . ',' .
             '"title":"Item 2 Title",' .
             '"color":"#000000",' .
             '"bounds":"BOUND(2)",' .
@@ -1144,13 +1144,13 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
         // Check format.
         $this->assertEquals(
             $json,
-            '[{"id":' . $record1->item_id . ',' .
+            '[{"id":' . $record1->id . ',' .
             '"title":"Item 1 Title",' .
             '"color":"#ffffff",' .
             '"bounds":null,' .
             '"zoom":null,' .
             '"wkt":"POINT(1,0)"},' .
-            '{"id":' . $record2->item_id . ',' .
+            '{"id":' . $record2->id . ',' .
             '"title":"Item 2 Title",' .
             '"color":"#000000",' .
             '"bounds":null,' .
@@ -1240,7 +1240,7 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
             $json,
             '{"dateTimeFormat":"iso8601",' .
             '"events":[{' .
-            '"eventID":' . $record1->item_id . ',' .
+            '"eventID":' . $record1->id . ',' .
             '"title":"' . $record1->title . '",' .
             '"description":"' . $record1->description . '",' .
             '"color":"' . $record1->vector_color . '",' .
@@ -1249,7 +1249,7 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
             '"right_ambiguity":' . $record1->right_ambiguity_percentage . ',' .
             '"start":"2011-01-01 00:00:00",' .
             '"end":"2012-01-01 00:00:00"},{' .
-            '"eventID":' . $record2->item_id . ',' .
+            '"eventID":' . $record2->id . ',' .
             '"title":"' . $record2->title . '",' .
             '"description":"' . $record2->description . '",' .
             '"color":"' . $record2->vector_color . '",' .
