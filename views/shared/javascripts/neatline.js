@@ -354,7 +354,7 @@
 
                     'featureclick': function(event, obj) {
                         self._trigger('mapfeatureclick', {}, {
-                            'itemId': obj.itemId
+                            'recordid': obj.recordid
                         });
                     }
 
@@ -395,7 +395,7 @@
 
                             // When the user clicks on an item title.
                             self._trigger('undateditemclick', {}, {
-                                'itemId': obj.itemId,
+                                'recordid': obj.recordid,
                                 'scrollItems': obj.scrollItems
                             });
 
@@ -414,7 +414,7 @@
 
                             // When the user clicks on an item title.
                             self._trigger('undateditemclick', {}, {
-                                'itemId': obj.itemId,
+                                'recordid': obj.recordid,
                                 'scrollItems': obj.scrollItems
                             });
 

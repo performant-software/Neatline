@@ -301,7 +301,7 @@
 
                     // Trigger out to the deployment code.
                     self._trigger('featureclick', {}, {
-                        'itemId': self.layerToId[feature.layer.id]
+                        'recordid': self.layerToId[feature.layer.id]
                     });
 
                     if (self.modifyFeatures != undefined) {
@@ -371,9 +371,9 @@
             }
 
             // Get the id of the item and try to fetch the layer.
-            var itemId = item.attr('recordid');
-            this._currentEditLayer = this.idToLayer[itemId];
-            this._currentEditId = itemId;
+            var recordid = item.attr('recordid');
+            this._currentEditLayer = this.idToLayer[recordid];
+            this._currentEditId = recordid;
 
             // Record the id of the current edit layer, so that the layer can be
             // reactivated as the current layer after save.
@@ -389,8 +389,8 @@
 
                 // Push the edit layer onto the non-base layers stack.
                 this._currentVectorLayers.push(this._currentEditLayer);
-                this.idToLayer[itemId] = this._currentEditLayer;
-                this.layerToId[this._currentEditLayer.id] = itemId;
+                this.idToLayer[recordid] = this._currentEditLayer;
+                this.layerToId[this._currentEditLayer.id] = recordid;
 
             }
 

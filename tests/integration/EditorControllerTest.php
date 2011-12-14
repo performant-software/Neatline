@@ -323,11 +323,11 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         // Create item, exhibit, and record.
         $item = $this->helper->_createItem();
         $neatline = $this->helper->_createNeatline();
+        $record = new NeatlineDataRecord($item, $neatline);
 
         // Save form data with update values.
         $this->_recordsTable->saveItemFormData(
-            $item,
-            $neatline,
+            $record,
             self::$__testParams['title'],
             self::$__testParams['description'],
             self::$__testParams['start_date'],
@@ -357,15 +357,15 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         // Test the raw construction with no available DC values.
         $this->assertEquals(
             $response,
-            '{"title":"' . self::$__testParams['title'] . '",' .
-            '"description":"' . self::$__testParams['description'] . '",' .
-            '"start_date":"' . self::$__testParams['start_date'] . '",' .
-            '"start_time":"' . self::$__testParams['start_time'] . '",' .
-            '"end_date":"' . self::$__testParams['end_date'] . '",' .
-            '"end_time":"' . self::$__testParams['end_time'] . '",' .
-            '"left_percent":' . self::$__testParams['left_percent'] . ',' .
-            '"right_percent":' . self::$__testParams['right_percent'] . ',' .
-            '"vector_color":"' . self::$__testParams['vector_color'] . '"}'
+            '{"title":"' .          self::$__testParams['title'] . '",' .
+            '"description":"' .     self::$__testParams['description'] . '",' .
+            '"start_date":"' .      self::$__testParams['start_date'] . '",' .
+            '"start_time":"' .      self::$__testParams['start_time'] . '",' .
+            '"end_date":"' .        self::$__testParams['end_date'] . '",' .
+            '"end_time":"' .        self::$__testParams['end_time'] . '",' .
+            '"left_percent":' .     self::$__testParams['left_percent'] . ',' .
+            '"right_percent":' .    self::$__testParams['right_percent'] . ',' .
+            '"vector_color":"' .    self::$__testParams['vector_color'] . '"}'
         );
 
     }
@@ -373,63 +373,117 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
     /**
      * When form data is saved via the /save route, the controller should return a
      * JSON string that reports the final space and time active statuses that resulted
-     * from the data commit.
+     * from the data commit. If there is a non-null record id on the post and a null
+     * item id, the action should update the correct item-less data record.
      *
      * @return void.
      */
-    public function testSave()
+    public function testSaveWithRecordIdAndNoItemId()
     {
 
-        // Create item, exhibit, and record.
-        $item = $this->helper->_createItem();
+        // Createexhibit and record.
         $neatline = $this->helper->_createNeatline();
-
-        // Save form data with update values.
-        $this->_recordsTable->saveItemFormData(
-            $item,
-            $neatline,
-            null,
-            null,
-            'June 25, 1987',
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null
-        );
+        $record = new NeatlineDataRecord(null, $neatline);
+        $record->save();
 
         // Form the POST for a space change.
         $this->request->setMethod('POST')
             ->setPost(array(
-                'item_id' => $item->id,
-                'neatline_id' => $neatline->id,
-                'space_active' => 'false',
-                'time_active' => 'false',
-                'geocoverage' => 'POINT(0,1)',
-                'title' => '',
-                'description' => '',
-                'start_date' => 'December, 2011',
-                'start_time' => '',
-                'end_date' => '',
-                'end_time' => '',
-                'left_percent' => 0,
-                'right_percent' => 100,
-                'vector_color' => ''
+                'item_id' =>        '',
+                'record_id' =>      $record->id,
+                'neatline_id' =>    $neatline->id,
+                'space_active' =>   (string) self::$__testParams['space_active'],
+                'time_active' =>    (string) self::$__testParams['time_active'],
+                'geocoverage' =>    self::$__testParams['geocoverage'],
+                'title' =>          self::$__testParams['title'],
+                'description' =>    self::$__testParams['description'],
+                'start_date' =>     self::$__testParams['start_date'],
+                'start_time' =>     self::$__testParams['start_time'],
+                'end_date' =>       self::$__testParams['end_date'],
+                'end_time' =>       self::$__testParams['end_time'],
+                'left_percent' =>   self::$__testParams['left_percent'],
+                'right_percent' =>  self::$__testParams['right_percent'],
+                'vector_color' =>   self::$__testParams['vector_color']
             )
         );
+
+        // 1 record.
+        $this->assertEquals($this->_recordsTable->count(), 1);
 
         // Hit the route and capture the response.
         $this->dispatch('neatline-exhibits/editor/save');
         $response = $this->getResponse()->getBody('default');
 
+        // 1 record.
+        $this->assertEquals($this->_recordsTable->count(), 1);
+
         // Test the raw construction with no available DC values.
         $this->assertEquals(
             $response,
             '{"space":true,"time":true}'
+        );
+
+        // Get the record and check the attributes.
+        $record = $this->_recordsTable->find($record->id);
+
+        $this->assertEquals(
+            $record->title,
+            self::$__testParams['title']
+        );
+
+        $this->assertEquals(
+            $record->description,
+            self::$__testParams['description']
+        );
+
+        $this->assertEquals(
+            $record->start_date,
+            self::$__testParams['start_date']
+        );
+
+        $this->assertEquals(
+            $record->start_time,
+            self::$__testParams['start_time']
+        );
+
+        $this->assertEquals(
+            $record->end_date,
+            self::$__testParams['end_date']
+        );
+
+        $this->assertEquals(
+            $record->end_time,
+            self::$__testParams['end_time']
+        );
+
+        $this->assertEquals(
+            $record->vector_color,
+            self::$__testParams['vector_color']
+        );
+
+        $this->assertEquals(
+            $record->geocoverage,
+            self::$__testParams['geocoverage']
+        );
+
+        $this->assertEquals(
+            $record->left_ambiguity_percentage,
+            self::$__testParams['left_percent']
+        );
+
+        $this->assertEquals(
+            $record->right_ambiguity_percentage,
+            self::$__testParams['right_percent']
+        );
+
+        $this->assertEquals(
+            $record->space_active,
+            1
+        );
+
+        $this->assertEquals(
+            $record->time_active,
+            1
         );
 
     }

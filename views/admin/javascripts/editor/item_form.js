@@ -194,6 +194,7 @@
             // Getters and setters.
             this.item =                     item;
             this.itemId =                   item.attr('itemid');
+            this.recordId =                 item.attr('recordid');
             this.itemTitleText =            item.find('.item-title-text');
             this.container =                this.item.next('tr').find('td');
             this.textSpan =                 this.item.find('.item-title-text');

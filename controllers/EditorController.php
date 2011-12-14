@@ -184,6 +184,7 @@ class Neatline_EditorController extends Omeka_Controller_Action
 
         // Get parameters from the ajax request.
         $itemId =                   $_post['item_id'];
+        $recordId =                 $_post['record_id'];
         $neatlineId =               $_post['neatline_id'];
         $title =                    $_post['title'];
         $description =              $_post['description'];
@@ -198,14 +199,23 @@ class Neatline_EditorController extends Omeka_Controller_Action
         $leftPercentage =           (int) $_post['left_percent'];
         $rightPercentage =          (int) $_post['right_percent'];
 
-        // Fetch the Neatline exhibit record and item record.
+        // Fetch the exhibit, item, and record objects.
         $neatline = $this->_neatlinesTable->find($neatlineId);
-        $item = $this->_itemsTable->find($itemId);
+
+        // If there is a record id in the post, get the record.
+        if ($recordId != null) {
+            $record = $this->_recordsTable->find($recordId);
+        }
+
+        // Otherwise, create a new record.
+        else {
+            $item = $this->_itemsTable->find($itemId);
+            $record = new NeatlineDataRecord($item, $neatline);
+        }
 
         // Save the record data.
         $statuses = $this->_recordsTable->saveItemFormData(
-            $item,
-            $neatline,
+            $record,
             $title,
             $description,
             $startDate,

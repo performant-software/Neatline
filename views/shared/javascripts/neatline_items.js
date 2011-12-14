@@ -184,9 +184,9 @@
 
                 // Get item id and populate tracker literals.
                 var item = $(item);
-                var itemId = item.attr('recordid');
-                self._idToItem[itemId] = item;
-                self._idOrdering.push(itemId);
+                var recordid = item.attr('recordid');
+                self._idToItem[recordid] = item;
+                self._idOrdering.push(recordid);
 
                 // By default, register the items as contracted.
                 item.data('expanded', false);
@@ -198,18 +198,18 @@
 
                         // Trigger out to the deployment code.
                         self._trigger('undateditemclick', {}, {
-                            'itemId': itemId,
+                            'recordid': recordid,
                             'scrollItems': false
                         });
 
                         // If the form is hidden, show it.
                         if (!item.data('expanded')) {
-                            self.scrollToItem(itemId);
+                            self.scrollToItem(recordid);
                         }
 
                         // If the form is visible, hide it.
                         else {
-                            self.hideItem(itemId);
+                            self.hideItem(recordid);
                         }
 
                     }
@@ -271,7 +271,7 @@
 
             // Trigger out to the deployment code.
             this._trigger('undateditemclick', {}, {
-                'itemId': id,
+                'recordid': id,
                 'scrollItems': true
             });
 
@@ -287,7 +287,7 @@
 
             // Trigger out to the deployment code.
             this._trigger('undateditemclick', {}, {
-                'itemId': id,
+                'recordid': id,
                 'scrollItems': true
             });
 
@@ -396,7 +396,6 @@
 
             // Fetch the markup and get components.
             var item = this._idToItem[id];
-            var descriptionTd = item.next('tr').find('td.' + this.options.markup.description_td_class);
 
             // If the item is present in the squence tray.
             if (item != null) {

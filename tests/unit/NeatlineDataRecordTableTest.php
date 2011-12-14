@@ -102,109 +102,6 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
     }
 
     /**
-     * When saveItemFormData() when there is no existing record for the item /
-     * exhibit combination, a new data record should be created and populated.
-     *
-     * @return void.
-     */
-    public function testSaveItemFormDataWithNoRecord()
-    {
-
-        // Create item, exhibit, and record.
-        $item = $this->helper->_createItem();
-        $neatline = $this->helper->_createNeatline();
-
-        // At the start, no record.
-        $this->assertEquals($this->_recordsTable->count(), 0);
-
-        // Save form data for a non-existent record.
-        $this->_recordsTable->saveItemFormData(
-            $item,
-            $neatline,
-            self::$__testParams['title'],
-            self::$__testParams['description'],
-            self::$__testParams['start_date'],
-            self::$__testParams['start_time'],
-            self::$__testParams['end_date'],
-            self::$__testParams['end_time'],
-            self::$__testParams['vector_color'],
-            self::$__testParams['left_percent'],
-            self::$__testParams['right_percent'],
-            self::$__testParams['geocoverage'],
-            self::$__testParams['space_active'],
-            self::$__testParams['time_active']
-        );
-
-        // After the save, there should be 1 record.
-        $this->assertEquals($this->_recordsTable->count(), 1);
-
-        // Get the new record and check the attributes.
-        $record = $this->_recordsTable->getRecordByItemAndExhibit($item, $neatline);
-
-        // Test that the attributes were set.
-        $this->assertEquals(
-            $record->title,
-            self::$__testParams['title']
-        );
-
-        $this->assertEquals(
-            $record->description,
-            self::$__testParams['description']
-        );
-
-        $this->assertEquals(
-            $record->start_date,
-            self::$__testParams['start_date']
-        );
-
-        $this->assertEquals(
-            $record->start_time,
-            self::$__testParams['start_time']
-        );
-
-        $this->assertEquals(
-            $record->end_date,
-            self::$__testParams['end_date']
-        );
-
-        $this->assertEquals(
-            $record->end_time,
-            self::$__testParams['end_time']
-        );
-
-        $this->assertEquals(
-            $record->vector_color,
-            self::$__testParams['vector_color']
-        );
-
-        $this->assertEquals(
-            $record->left_ambiguity_percentage,
-            self::$__testParams['left_percent']
-        );
-
-        $this->assertEquals(
-            $record->right_ambiguity_percentage,
-            self::$__testParams['right_percent']
-        );
-
-        $this->assertEquals(
-            $record->geocoverage,
-            self::$__testParams['geocoverage']
-        );
-
-        $this->assertEquals(
-            $record->space_active,
-            (int) self::$__testParams['space_active']
-        );
-
-        $this->assertEquals(
-            $record->time_active,
-            (int) self::$__testParams['time_active']
-        );
-
-    }
-
-    /**
      * Test saveItemFormData() when there is a record for the item/exhibit.
      *
      * @return void.
@@ -225,8 +122,7 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
 
         // Save form data with update values.
         $this->_recordsTable->saveItemFormData(
-            $item,
-            $neatline,
+            $record,
             self::$__testParams['title'],
             self::$__testParams['description'],
             self::$__testParams['start_date'],
@@ -329,8 +225,7 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
 
         // Save form data with updated start_date.
         $statuses = $this->_recordsTable->saveItemFormData(
-            $item,
-            $neatline,
+            $record,
             null,
             null,
             'June 25, 1987',
@@ -360,8 +255,7 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
 
         // Save form data with updated start_time.
         $statuses = $this->_recordsTable->saveItemFormData(
-            $item,
-            $neatline,
+            $record,
             null,
             null,
             null,
@@ -661,11 +555,12 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
         // Create an item and exhibit.
         $item = $this->helper->_createItem();
         $neatline = $this->helper->_createNeatline();
+        $record = new NeatlineDataRecord($item, $neatline);
+        $record->save();
 
         // Save form data with update values.
         $this->_recordsTable->saveItemFormData(
-            $item,
-            $neatline,
+            $record,
             self::$__testParams['title'],
             self::$__testParams['description'],
             self::$__testParams['start_date'],
@@ -778,7 +673,7 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
     }
 
     /**
-     * If is a record for an item but the record has null values for fields
+     * If there is a record for an item but the record has null values for fields
      * that map to DC elements, the DC elements shouuld be defaulted in regardless.
      *
      * @return void.
@@ -789,11 +684,12 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
         // Create an item and exhibit.
         $item = $this->helper->_createItem();
         $neatline = $this->helper->_createNeatline();
+        $record = new NeatlineDataRecord($item, $neatline);
+        $record->save();
 
         // Commit a status change, leave everything else null.
         $this->_recordsTable->saveItemFormData(
-            $item,
-            $neatline,
+            $record,
             null,
             null,
             null,

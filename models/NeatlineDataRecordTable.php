@@ -51,8 +51,7 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
      * statuses that result from the data commit.
      */
     public function saveItemFormData(
-        $item,
-        $neatline,
+        $record,
         $title,
         $description,
         $startDate,
@@ -67,14 +66,6 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
         $timeStatus
     )
     {
-
-        // Check for an existing record for the item/exhibit.
-        $record = $this->getRecordByItemAndExhibit($item, $neatline);
-
-        // If there is not a record, create one.
-        if (!$record) {
-            $record = new NeatlineDataRecord($item, $neatline);
-        }
 
         // Capture starting space and time parameters and statuses.
         $startingSpaceStatus = $record->space_active;

@@ -44,7 +44,7 @@ jQuery(document).ready(function($) {
                 'mapfeatureclick': function(event, obj) {
 
                     // Show the edit form.
-                    editorContainer.itembrowser('showFormByRecordId', obj.itemId, false, true, true);
+                    editorContainer.itembrowser('showFormByRecordId', obj.recordid, false, true, true);
 
                 },
 
@@ -52,7 +52,7 @@ jQuery(document).ready(function($) {
                 'undateditemclick': function(event, obj) {
 
                     // Show the edit form.
-                    editorContainer.itembrowser('showFormByRecordId', obj.itemId, true, true, obj.scrollItems);
+                    editorContainer.itembrowser('showFormByRecordId', obj.recordid, true, true, obj.scrollItems);
 
                 },
 
