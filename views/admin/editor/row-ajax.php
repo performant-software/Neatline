@@ -27,7 +27,7 @@
 
 <tr class="item-row" recordid="new">
     <td class="item-title">
-        <span class="item-title-text"></span>
+        <span class="item-title-text">[New Item]</span>
         <span class="item-title-fader"></span>
     </td>
     <td class="col-1 col-row space">

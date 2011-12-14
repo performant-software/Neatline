@@ -787,6 +787,16 @@
                 var timeBlock =             item.find('.time');
                 var timeCheckbox =          timeBlock.find('input[type="checkbox"]');
 
+                // Unbind all existing events.
+                $.map([item,
+                allCells,
+                itemTitleTd,
+                itemTitleText,
+                spaceBlock,
+                spaceCheckbox,
+                timeBlock,
+                timeCheckbox], function(el, i) { el.unbind(); });
+
                 // Register the item, calculate offset.
                 self.idToItem[itemId] = item;
                 self._calculateTopOffset(item);
@@ -1073,14 +1083,18 @@
 
                 url: 'add',
                 type: 'GET',
-
-                data: {
-                    item_id: itemId,
-                    neatline_id: Neatline.id,
-                },
+                dataType: 'html',
 
                 success: function(html) {
-                    console.log(html);
+
+                    // Append the new markup to the top of the stack.
+                    var itemsBody = $('#items tbody');
+                    itemsBody.prepend(html);
+                    var item = itemsBody.first('tr');
+
+                    // Regloss.
+                    self._glossItems();
+
                 }
 
             });
