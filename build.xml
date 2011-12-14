@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<!--
+  Requirements:
+
+  Closure:
+  - Closure Linter: http://code.google.com/closure/utilities/docs/linter_howto.html
+  - Closure Compiler (brew install closure-compiler)
+  - 
+-->
+
 <project name="Neatline" default="build">
  <target name="build"
    depends="prepare,lint,phploc,pdepend,phpmd-ci,phpcs-ci,phpcpd,phpdoc,phpunit,phpcb"/>
@@ -52,7 +61,25 @@
     <modified />
    </fileset>
   </apply>
- </target>
+  </target>
+
+  <target name="jslint" description="Use the Google Linter to find issues in
+    your JavaScript">
+    <exec executable="gjslint">
+      <arg value="--nojsdoc" />
+      <arg value="-r" />
+      <arg path="${basedir}" />
+    </exec>
+  </target>
+
+  <target name="fixstyle" description="Automate the fixing of common JavaScript
+    errors">
+    <exec executable="fixjsstyle">
+      <arg value="--nojsdoc" />
+      <arg value="-r" />
+      <arg path="${basedir}/" />
+    </exec>
+  </target>
 
  <target name="phploc" description="Measure project size using PHPLOC">
   <exec executable="phploc">
