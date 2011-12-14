@@ -36,7 +36,7 @@ jQuery(document).ready(function($) {
                 'timelineeventclick': function(event, obj) {
 
                     // Show the edit form.
-                    editorContainer.itembrowser('showFormByItemId', obj.itemId, true, false, true);
+                    editorContainer.itembrowser('showFormByRecordId', obj.recordid, true, false, true);
 
                 },
 
@@ -44,7 +44,7 @@ jQuery(document).ready(function($) {
                 'mapfeatureclick': function(event, obj) {
 
                     // Show the edit form.
-                    editorContainer.itembrowser('showFormByItemId', obj.itemId, false, true, true);
+                    editorContainer.itembrowser('showFormByRecordId', obj.itemId, false, true, true);
 
                 },
 
@@ -52,7 +52,7 @@ jQuery(document).ready(function($) {
                 'undateditemclick': function(event, obj) {
 
                     // Show the edit form.
-                    editorContainer.itembrowser('showFormByItemId', obj.itemId, true, true, obj.scrollItems);
+                    editorContainer.itembrowser('showFormByRecordId', obj.itemId, true, true, obj.scrollItems);
 
                 },
 
@@ -106,17 +106,17 @@ jQuery(document).ready(function($) {
 
             if (obj.scrollMap) {
                 // Focus the map.
-                neatlineContainer.neatline('zoomMapToItemVectors', obj.itemId);
+                neatlineContainer.neatline('zoomMapToItemVectors', obj.recordid);
             }
 
             if (obj.scrollTimeline) {
                 // Focus the timeline.
-                neatlineContainer.neatline('zoomTimelineToEvent', obj.itemId);
+                neatlineContainer.neatline('zoomTimelineToEvent', obj.recordid);
             }
 
             if (obj.focusItems) {
                 // Focus the items tray.
-                neatlineContainer.neatline('showItemDescription', obj.itemId);
+                neatlineContainer.neatline('showItemDescription', obj.recordid);
             }
 
         },

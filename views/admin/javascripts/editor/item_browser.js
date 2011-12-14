@@ -339,6 +339,7 @@
                 'colorEdit': function(event, obj) {
 
                     var recordid = self._currentFormItem.attr('recordid');
+
                     self._trigger('coloredit', {}, {
                         'recordid': recordid,
                         'color': obj.color
@@ -870,7 +871,7 @@
 
                         // If the form is not expanded, do expand.
                         if (!item.data('expanded')) {
-                            self._showForm(item, true, true);
+                            self._showForm(item, true, true, true);
                         }
 
                         // If the form is expanded, hide.
@@ -1165,16 +1166,16 @@
         },
 
         /*
-         * Expand the form for a given item id.
+         * Expand the form for a given record id.
          */
-        showFormByItemId: function(id, scrollMap, scrollTimeline, focusItems) {
+        showFormByRecordId: function(id, scrollMap, scrollTimeline, focusItems) {
 
             // Get the item from the id hash.
             var item = this.idToItem[id];
 
             // If the item is not already visible, show the form.
             if (item != this._currentFormItem) {
-                this._showForm(this.idToItem[id], scrollMap, scrollTimeline, focusItems);
+                this._showForm(item, scrollMap, scrollTimeline, focusItems);
             }
 
         },

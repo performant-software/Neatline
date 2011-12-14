@@ -24,7 +24,7 @@
 
 
     $.widget('neatline.itemorderer', $.extend(
-        {}, $.neatline.neatlineundateditems.prototype, {
+        {}, $.neatline.neatlineitems.prototype, {
 
         /*
          * Getters and starting get items call.
@@ -42,7 +42,7 @@
             // Get starting order and add functionality.
             this._addReorderingFunctionality();
 
-            return $.neatline.neatlineundateditems.prototype._create.apply(
+            return $.neatline.neatlineitems.prototype._create.apply(
                 this,
                 arguments
             );
@@ -454,8 +454,8 @@
 
     }));
 
-    $.neatline.neatlineundateditems.defaults = $.extend(
-        {},$.neatline.neatlineundateditems.defaults);
+    $.neatline.neatlineitems.defaults = $.extend(
+        {},$.neatline.neatlineitems.defaults);
 
 
 })( jQuery );

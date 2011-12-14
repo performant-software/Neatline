@@ -372,7 +372,7 @@
 
                     'eventclick': function(event, obj) {
                         self._trigger('timelineeventclick', {}, {
-                            'itemId': obj.itemId
+                            'recordid': obj.recordid
                         });
                     }
 
@@ -389,7 +389,7 @@
                 // If the Neatline is public, instantiate the default item tray.
                 if (this.params.public) {
 
-                    this.undated.neatlineundateditems({
+                    this.undated.neatlineitems({
 
                         'undateditemclick': function(event, obj) {
 
@@ -434,7 +434,7 @@
         positionBlockMarkup: function() {
 
             // Items tray.
-            this.undated.neatlineundateditems('positionMarkup');
+            this.undated.neatlineitems('positionMarkup');
 
         },
 
@@ -485,7 +485,7 @@
 
         reloadUndatedItems: function() {
 
-            this.undated.neatlineundateditems('loadData');
+            this.undated.neatlineitems('loadData');
 
         },
 
@@ -503,7 +503,7 @@
 
         showItemDescription: function(id) {
 
-            this.undated.neatlineundateditems('scrollToItem', id);
+            this.undated.neatlineitems('scrollToItem', id);
 
         },
 

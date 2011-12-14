@@ -101,7 +101,7 @@
 
                 // Trigger out to the deployment code.
                 self._trigger('eventclick', {}, {
-                    'itemId': evt._eventID
+                    'recordid': evt._eventID
                 });
 
                 // Populate data in the popup.
