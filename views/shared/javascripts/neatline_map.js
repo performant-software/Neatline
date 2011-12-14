@@ -636,10 +636,24 @@
          */
         zoomToItemVectors: function(id) {
 
+            // Get the record out of the database.
             var record = this._db({ recordid: parseInt(id) }).first();
+            console.log(record);
 
+            // If the record exists and there is a map feature.
             if (record.layer != null && record.layer.features.length > 0) {
-                this.map.zoomToExtent(record.layer.getDataExtent());
+
+                // If there is item-specific data.
+                if (record.data.bounds != null && record.data.zoom != null) {
+                    this.map.zoomToExtent(new OpenLayers.Bounds.fromString(record.data.bounds));
+                    this.map.zoomTo(record.data.zoom);
+                }
+
+                // Otherwise, just fit the vectors in the viewport.
+                else {
+                    this.map.zoomToExtent(record.layer.getDataExtent());
+                }
+
             }
 
         },
