@@ -126,6 +126,25 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
     }
 
     /**
+     * If null is passed for the $item parameter to __construct(), the record
+     * should not be associated with any item.
+     *
+     * @return void.
+     */
+    public function testAttributeDefaultsWithNoParentItem()
+    {
+
+        // Create a record.
+        $neatline = $this->helper->_createNeatline();
+        $record = new NeatlineDataRecord(null, $neatline);
+
+        // Item and exhibit keys should be set.
+        $this->assertEquals($record->exhibit_id, $neatline->id);
+        $this->assertEquals($record->item_id, null);
+
+    }
+
+    /**
      * The time and space status trackers can only take native boolean
      * values as input parameters. The setStatus() method should check
      * to make sure that the input is boolean and set the integer value.

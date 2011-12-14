@@ -903,8 +903,6 @@
          */
          _showForm: function(item, scrollMap, scrollTimeline, focusItems) {
 
-            console.log(item);
-
             var self = this;
             var immediate = false;
 

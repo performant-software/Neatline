@@ -208,9 +208,13 @@
             this._expandTitle();
 
             // If the form is for an existing item, populate the fields.
-            console.log(this.item);
             if (this.itemId != 'new') {
                 this._getFormData();
+            }
+
+            // Otherwise, blank out the fields.
+            else {
+                this._clearData();
             }
 
         },
@@ -439,6 +443,37 @@
             // the change callback on value set.
             this._opened = true;
             this.color.miniColors('value', this._data.vector_color);
+            this._opened = false;
+
+         },
+
+        /*
+         * Empty out the form data.
+         */
+        _clearData: function() {
+
+            // Populate inputs.
+            this.title.val('');
+            this.color.val('');
+            this.leftPercent.val(0);
+            this.rightPercent.val(100);
+            this.startDate.val('');
+            this.startTime.val('');
+            this.endDate.val('');
+            this.endTime.val('');
+            this.description.val('');
+
+            // Reposition the draggers.
+            this.ambiguity.gradientbuilder('positionMarkers', 0, 100);
+
+            // Set the gradient builder color.
+            this.ambiguity.gradientbuilder('setColor', this.options.colors.purple);
+
+            // Push the new color onto the picker. Need to set the global
+            // _opened tracker to circumvent miniColors' automatic firing of
+            // the change callback on value set.
+            this._opened = true;
+            this.color.miniColors('value', this.options.colors.purple);
             this._opened = false;
 
          },
