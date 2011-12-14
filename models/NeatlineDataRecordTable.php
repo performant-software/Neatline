@@ -376,6 +376,8 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
                     'id' => $record->item_id,
                     'title' => $record->title,
                     'color' => $record->vector_color,
+                    'bounds' => $record->map_bounds,
+                    'zoom' => $record->map_zoom,
                     'wkt' => $record->geocoverage
                 );
 

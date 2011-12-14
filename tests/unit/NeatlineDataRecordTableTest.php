@@ -1027,6 +1027,10 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
         $record2->geocoverage = 'POINT(0,1)';
         $record1->space_active = 1;
         $record2->space_active = 1;
+        $record1->map_bounds = 'BOUND(1)';
+        $record2->map_bounds = 'BOUND(2)';
+        $record1->map_zoom = 4;
+        $record2->map_zoom = 5;
         $record1->save();
         $record2->save();
 
@@ -1039,10 +1043,14 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
             '[{"id":' . $record1->item_id . ',' .
             '"title":"Item 1 Title",' .
             '"color":"#ffffff",' .
+            '"bounds":"BOUND(1)",' .
+            '"zoom":4,' .
             '"wkt":"POINT(1,0)"},' .
             '{"id":' . $record2->item_id . ',' .
             '"title":"Item 2 Title",' .
             '"color":"#000000",' .
+            '"bounds":"BOUND(2)",' .
+            '"zoom":5,' .
             '"wkt":"POINT(0,1)"}]'
         );
 
