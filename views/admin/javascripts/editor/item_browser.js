@@ -810,7 +810,7 @@
                 timeCheckbox], function(el, i) { el.unbind(); });
 
                 // Register the item, calculate offset.
-                self.idToItem[recordid] = item;
+                self.idToItem[parseInt(recordid)] = item;
                 self._calculateTopOffset(item);
 
                 // Store the space/time status on the DOM.
