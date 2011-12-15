@@ -674,8 +674,9 @@
 
                 success: function() {
 
-                    // Fade up.
+                    // Fade up, reload the map.
                     self._fadeUp();
+                    self._trigger('savecomplete');
 
                 }
 

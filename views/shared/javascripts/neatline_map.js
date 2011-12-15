@@ -125,7 +125,6 @@
                   new OpenLayers.Control.Navigation(),
                   new OpenLayers.Control.ScaleLine(),
                 ],
-                maxExtent: bounds,
                 maxResolution: 'auto',
                 projection: this.params.map.epsg[0],
                 units: 'm'

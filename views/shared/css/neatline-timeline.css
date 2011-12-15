@@ -124,7 +124,7 @@ elements inside the event body.
     font-size: 1em !important;
 }
 
-/* The timestamp at the bottom of an event bubble.*/
+/* The timestamp at the bottom of an event bubble. */
 .timeline-event-bubble-time {
     padding-top: 10px;
     font-weight:bold;

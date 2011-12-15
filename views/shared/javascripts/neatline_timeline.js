@@ -26,6 +26,15 @@
 
     $.widget('neatline.neatlinetimeline', {
 
+        options: {
+
+            // CSS constants.
+            css: {
+                tape_height: 8
+            }
+
+        },
+
         _create: function() {
 
             // Getters.
@@ -104,14 +113,6 @@
                 self._trigger('eventclick', {}, {
                     'recordid': evt._eventID
                 });
-
-                // Populate data in the popup.
-                self.popupTitle.text(evt._text);
-                self.popupContent.text(evt._description);
-
-                // Calculate top and left offsets based on the size of the popup.
-                var height = self.popup.height();
-                var width = self.popup.width();
 
             }
 
