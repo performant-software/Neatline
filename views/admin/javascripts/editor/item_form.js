@@ -127,11 +127,11 @@
                 self._trigger('formEdit');
             });
 
-            // Close button.
-            this.closeButton.bind({
+            // Save button.
+            this.saveButton.bind({
 
                 'mousedown': function() {
-                    self._trigger('hide');
+                    self._trigger('save');
                 },
 
                 'click': function(event) {
@@ -140,11 +140,16 @@
 
             });
 
-            // Save button.
-            this.saveButton.bind({
+            // Delete button.
+            this.deleteButton.bind({
 
                 'mousedown': function() {
-                    self._trigger('save');
+
+                    // Only do the delete if the record is Neatline-endemic.
+                    if (typeof this.itemId === 'undefined') {
+                        self._postRecordDelete();
+                    }
+
                 },
 
                 'click': function(event) {
@@ -655,6 +660,31 @@
 
                     // Fade up.
                     self._fadeUp();
+
+                }
+
+            });
+
+        },
+
+        /*
+         * Delete a Neatline endemic record.
+         */
+        _postRecordDelete: function() {
+
+            console.log('postDelete');
+            var self = this;
+
+            // Commit.
+            $.ajax({
+
+                url: 'delete',
+                type: 'POST',
+                data: {
+                    record_id: this.recordId,
+                },
+
+                success: function() {
 
                 }
 
