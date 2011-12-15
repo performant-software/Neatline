@@ -69,12 +69,12 @@
             this._instantiateOpenLayers();
 
             // Trackers and buckets.
-            this._currentVectorLayers = [];
-            this._currentEditItem = null;
-            this._currentEditLayer = null;
-            this._clickedFeature = null;
-            this.idToLayer = {};
-            this.requestData = null;
+            this._currentEditItem =         null;
+            this._currentEditLayer =        null;
+            this._clickedFeature =          null;
+            this._currentVectorLayers =     [];
+            this.idToLayer =                {};
+            this.requestData =              null;
 
             // Load data.
             this.loadData();
