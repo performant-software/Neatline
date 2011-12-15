@@ -431,8 +431,9 @@ class Neatline_EditorController extends Omeka_Controller_Action
             $record = new NeatlineDataRecord($item, $neatline);
         }
 
-        $record->map_bounds = $extent;
-        $record->map_zoom = $zoom;
+        $record->map_bounds =       $extent;
+        $record->map_zoom =         $zoom;
+        $record->space_active =     1;
         $record->save();
 
     }

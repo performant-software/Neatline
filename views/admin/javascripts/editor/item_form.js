@@ -677,6 +677,7 @@
 
                     // Fade up, reload the map.
                     self._fadeUp();
+                    self._trigger('spaceactive');
                     self._trigger('savecomplete');
 
                 }
