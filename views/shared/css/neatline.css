@@ -255,4 +255,6 @@ table th, table td {
 #undated-items-list-container div.item-description-content {
     padding: 0;
     margin: 10px 20px;
+    font-size: 0.9em;
+    color: #5e5e5e;
 }
