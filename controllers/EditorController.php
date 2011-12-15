@@ -414,21 +414,23 @@ class Neatline_EditorController extends Omeka_Controller_Action
 
         // Get parameters from the ajax request.
         $itemId =                   $_post['item_id'];
+        $recordId =                 $_post['record_id'];
         $neatlineId =               $_post['neatline_id'];
         $extent =                   $_post['extent'];
         $zoom =                     $_post['zoom'];
 
-        // Fetch the data record.
-        $neatline = $this->_neatlinesTable->find($neatlineId);
-        $item = $this->_itemsTable->find($itemId);
-        $record = $this->_recordsTable->getRecordByItemAndExhibit($item, $neatline);
+        // If there is a record id, get the record and update.
+        if ($recordId != null) {
+            $record = $this->_recordsTable->find($recordId);
+        }
 
-        // If no record, create one.
-        if (!$record) {
+        // Otherwise, create a new record.
+        else {
+            $neatline = $this->_neatlinesTable->find($neatlineId);
+            $item = $this->_itemsTable->find($itemId);
             $record = new NeatlineDataRecord($item, $neatline);
         }
 
-        // Update.
         $record->map_bounds = $extent;
         $record->map_zoom = $zoom;
         $record->save();

@@ -560,8 +560,6 @@
 
                     success: function(data) {
 
-                        console.log(data);
-
                         // Push the data into the form.
                         self._data = data;
                         self._applyData();
@@ -628,6 +626,7 @@
                 type: 'POST',
                 data: {
                     item_id: this.itemId,
+                    record_id: this.recordId,
                     neatline_id: Neatline.id,
                     extent: extent,
                     zoom: zoom

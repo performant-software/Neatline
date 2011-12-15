@@ -1133,6 +1133,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
             ->setPost(array(
                 'neatline_id' => $exhibit->id,
                 'item_id' => $item->id,
+                'record_id' => $record->id,
                 'extent' => 'BOUNDS()',
                 'zoom' => 5
             )
@@ -1173,6 +1174,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
             ->setPost(array(
                 'neatline_id' => $exhibit->id,
                 'item_id' => $item->id,
+                'record_id' => '',
                 'extent' => 'BOUNDS()',
                 'zoom' => 5
             )
@@ -1184,6 +1186,48 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         // Hit the focus route, reget the record.
         $this->dispatch('neatline-exhibits/editor/focus');
         $record = $this->_recordsTable->getRecordByItemAndExhibit($item, $exhibit);
+
+        // Should not create a new record.
+        $this->assertEquals($this->_recordsTable->count(), 1);
+
+        // Check the attributes.
+        $this->assertEquals($record->map_bounds, 'BOUNDS()');
+        $this->assertEquals($record->map_zoom, 5);
+
+    }
+
+    /**
+     * When a new item-specific map focus data is saved via the /focus route
+     * and there is an extant data record that does not have a parent item, the
+     * record should be correctly updated.
+     *
+     * @return void.
+     */
+    public function testFocusWithNeatlineEndemicRecord()
+    {
+
+        // Create entities.
+        $exhibit = $this->helper->_createNeatline();
+        $record = new NeatlineDataRecord(null, $exhibit);
+        $record->save();
+
+        // Form the POST.
+        $this->request->setMethod('POST')
+            ->setPost(array(
+                'neatline_id' => $exhibit->id,
+                'item_id' => '',
+                'record_id' => $record->id,
+                'extent' => 'BOUNDS()',
+                'zoom' => 5
+            )
+        );
+
+        // 1 record.
+        $this->assertEquals($this->_recordsTable->count(), 1);
+
+        // Hit the focus route, reget the record.
+        $this->dispatch('neatline-exhibits/editor/focus');
+        $record = $this->_recordsTable->find($record->id);
 
         // Should not create a new record.
         $this->assertEquals($this->_recordsTable->count(), 1);
