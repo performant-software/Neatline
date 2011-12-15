@@ -300,7 +300,7 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
      *
      * @return void.
      */
-    public function testGetTitle()
+    public function testGetTitleWithItem()
     {
 
         // Create an item, exhibit, and record.
@@ -317,6 +317,29 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         // Should return the native value.
         $record->title = 'Native Title';
         $this->assertEquals($record->getTitle(), 'Native Title');
+
+    }
+
+    /**
+     * When there is no parent item, getTitle() should return the record title,
+     * and an empty string if the record attribute is null.
+     *
+     * @return void.
+     */
+    public function testGetTitleWithNoItem()
+    {
+
+        // Create an item, exhibit, and record.
+        $neatline = $this->helper->_createNeatline();
+        $record = new NeatlineDataRecord(null, $neatline);
+
+        // Should return the native value.
+        $record->title = 'Native Title';
+        $this->assertEquals($record->getTitle(), 'Native Title');
+
+        // Should return the native value.
+        $record->title = null;
+        $this->assertEquals($record->getTitle(), '');
 
     }
 
@@ -343,6 +366,29 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         // Should return the native value.
         $record->description = 'Native description.';
         $this->assertEquals($record->getDescription(), 'Native description.');
+
+    }
+
+    /**
+     * When there is no parent item, getDescription() should return the record description,
+     * and an empty string if the record attribute is null.
+     *
+     * @return void.
+     */
+    public function testGetDescriptionWithNoItem()
+    {
+
+        // Create an item, exhibit, and record.
+        $neatline = $this->helper->_createNeatline();
+        $record = new NeatlineDataRecord(null, $neatline);
+
+        // Should return the native value.
+        $record->description = 'Native description.';
+        $this->assertEquals($record->getDescription(), 'Native description.');
+
+        // Should return the native value.
+        $record->description = null;
+        $this->assertEquals($record->getDescription(), '');
 
     }
 

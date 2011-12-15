@@ -560,6 +560,8 @@
 
                     success: function(data) {
 
+                        console.log(data);
+
                         // Push the data into the form.
                         self._data = data;
                         self._applyData();

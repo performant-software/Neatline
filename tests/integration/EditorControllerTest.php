@@ -563,6 +563,51 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
     }
 
     /**
+     * When there is a Neatline-native data record that does not have a parent item, the
+     * /form route should output a well-formed JSON object that defaults in correct ambiguity
+     * and color values.
+     *
+     * @return void.
+     */
+    public function testFormWithNeatlineEndemicRecord()
+    {
+
+        // Create item and exhibit.
+        $item = $this->helper->_createItem();
+        $neatline = $this->helper->_createNeatline();
+        $record = new NeatlineDataRecord(null, $neatline);
+        $record->save();
+
+        // Form the POST for a space change.
+        $this->request->setMethod('GET')
+            ->setParams(array(
+                'item_id' => '',
+                'neatline_id' => $neatline->id,
+                'record_id' => $record->id
+            )
+        );
+
+        // Hit the route and capture the response.
+        $this->dispatch('neatline-exhibits/editor/form');
+        $response = $this->getResponse()->getBody('default');
+
+        // Check for proper construction.
+        $this->assertEquals(
+            $response,
+            '{"title":"",' .
+            '"description":"",' .
+            '"start_date":"",' .
+            '"start_time":"",' .
+            '"end_date":"",' .
+            '"end_time":"",' .
+            '"left_percent":0,' .
+            '"right_percent":100,' .
+            '"vector_color":"#724e85"}'
+        );
+
+    }
+
+    /**
      * When form data is saved via the /save route, the controller should return a
      * JSON string that reports the final space and time active statuses that resulted
      * from the data commit. If there is a non-null record id on the post and a null

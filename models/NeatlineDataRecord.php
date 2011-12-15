@@ -213,9 +213,17 @@ class NeatlineDataRecord extends Omeka_record
     public function getTitle()
     {
 
-        return !is_null($this->title) ?
-            $this->title :
-            neatline_getItemMetadata($this->getItem(), 'Dublin Core', 'Title');
+        if (!is_null($this->title)) {
+            return $this->title;
+        }
+
+        else if (!is_null($this->item_id)) {
+            return neatline_getItemMetadata($this->getItem(), 'Dublin Core', 'Title');
+        }
+
+        else {
+            return '';
+        }
 
     }
 
@@ -227,9 +235,17 @@ class NeatlineDataRecord extends Omeka_record
     public function getDescription()
     {
 
-        return !is_null($this->description) ?
-            $this->description :
-            neatline_getItemMetadata($this->getItem(), 'Dublin Core', 'Description');
+        if (!is_null($this->description)) {
+            return $this->description;
+        }
+
+        else if (!is_null($this->item_id)) {
+            return neatline_getItemMetadata($this->getItem(), 'Dublin Core', 'Description');
+        }
+
+        else {
+            return '';
+        }
 
     }
 
