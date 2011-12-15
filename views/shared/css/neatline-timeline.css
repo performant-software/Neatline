@@ -46,9 +46,10 @@
 /* Text label for events on the top band. */
 .neatlinetime-timeline .timeline-event-label {
     /*background: rgba(0,0,0, 0.05);*/
-    font-family: 'Crimson Text', serif;
-    font-size: 1.2em;
+    font-family: 'Petrona', serif;
+    font-size: 1.15em;
     color: rgba(0,0,0,0.6);
+    padding: 5px 0 0 0;
 }
 
 /* Hide the icons for events on the top band.*/

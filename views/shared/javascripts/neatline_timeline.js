@@ -140,9 +140,6 @@
             var band0 = this.timeline.getBand(0);
             var painter0 = band0.getEventPainter();
 
-            var band1 = this.timeline.getBand(1);
-            var painter1 = band1.getEventPainter();
-
             painter0.addEventPaintListener(function(band, op, evt, els) {
 
                 if (els != null) {
@@ -160,28 +157,6 @@
 
                     // Push the id-element association into the tracker object.
                     self._idToTapeElements[evt._eventID] = [tape];
-
-                }
-
-            });
-
-            painter1.addEventPaintListener(function(band, op, evt, els) {
-
-                if (els != null) {
-
-                    // Get the tape element.
-                    var tape = $(els[0]);
-
-                    // Store the Simile positioning styles.
-                    tape.data('positioningStyles', tape.attr('style'));
-
-                    // Instantiate the span styler on the tape.
-                    tape.spanstyler();
-                    tape.spanstyler('constructCss', evt._obj.color, evt._obj.left_ambiguity, evt._obj.right_ambiguity);
-                    tape.spanstyler('applyCss');
-
-                    // Push the id-element association into the tracker object.
-                    self._idToTapeElements[evt._eventID].push(tape);
 
                 }
 

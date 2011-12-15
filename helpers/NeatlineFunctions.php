@@ -116,6 +116,8 @@ function neatline_queueNeatlineAssets()
     queue_js('_utilities', 'javascripts/libraries');
     queue_js('jquery.getscrollbarwidth', 'javascripts/libraries');
 
+    echo __v()->partial('index/_fonts.php');
+
 }
 
 /**
