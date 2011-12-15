@@ -540,57 +540,6 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
     }
 
     /**
-     * If there is a record for an item, buildEditFormJson() should return a JSON
-     * string with the correct attributes.
-     *
-     * @return void.
-     */
-    public function testBuildEditFormJsonWithExistingRecord()
-    {
-
-        // Create an item and exhibit.
-        $item = $this->helper->_createItem();
-        $neatline = $this->helper->_createNeatline();
-        $record = new NeatlineDataRecord($item, $neatline);
-        $record->save();
-
-        // Save form data with update values.
-        $this->_recordsTable->saveItemFormData(
-            $record,
-            self::$__testParams['title'],
-            self::$__testParams['description'],
-            self::$__testParams['start_date'],
-            self::$__testParams['start_time'],
-            self::$__testParams['end_date'],
-            self::$__testParams['end_time'],
-            self::$__testParams['vector_color'],
-            self::$__testParams['left_percent'],
-            self::$__testParams['right_percent'],
-            self::$__testParams['geocoverage'],
-            self::$__testParams['space_active'],
-            self::$__testParams['time_active']
-        );
-
-        // Ping the method for the json.
-        $json = $this->_recordsTable->buildEditFormJson($item, $neatline);
-
-        // Check for proper construction.
-        $this->assertEquals(
-            $json,
-            '{"title":"' . self::$__testParams['title'] . '",' .
-            '"description":"' . self::$__testParams['description'] . '",' .
-            '"start_date":"' . self::$__testParams['start_date'] . '",' .
-            '"start_time":"' . self::$__testParams['start_time'] . '",' .
-            '"end_date":"' . self::$__testParams['end_date'] . '",' .
-            '"end_time":"' . self::$__testParams['end_time'] . '",' .
-            '"left_percent":' . self::$__testParams['left_percent'] . ',' .
-            '"right_percent":' . self::$__testParams['right_percent'] . ',' .
-            '"vector_color":"' . self::$__testParams['vector_color'] . '"}'
-        );
-
-    }
-
-    /**
      * If there is not a record for an item, buildEditFormJson() should return
      * a well-formed empty object literal with the correct default values.
      *

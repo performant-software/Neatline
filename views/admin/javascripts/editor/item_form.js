@@ -554,7 +554,8 @@
 
                     data: {
                         item_id: this.itemId,
-                        neatline_id: Neatline.id
+                        record_id: this.recordId,
+                        neatline_id: Neatline.id,
                     },
 
                     success: function(data) {

@@ -97,6 +97,45 @@ class NeatlineDataRecord extends Omeka_record
 
 
     /**
+     * Construct a JSON representation of the attributes to be used in the
+     * item edit form.
+     *
+     * @return JSON The data.
+     */
+    public function buildEditFormJson()
+    {
+
+        // Shell out the object literal structure.
+        $data = array(
+            'title' => '',
+            'description' => '',
+            'start_date' => '',
+            'start_time' => '',
+            'end_date' => '',
+            'end_time' => '',
+            'left_percent' => 0,
+            'right_percent' => 100,
+            'vector_color' => '#724e85'
+        );
+
+        // Set the array values.
+        $data['title'] =            $this->getTitle();
+        $data['description'] =      $this->getDescription();
+        $data['vector_color'] =     $this->getColor();
+        $data['start_date'] =       (string) $this->start_date;
+        $data['start_time'] =       (string) $this->start_time;
+        $data['end_date'] =         (string) $this->end_date;
+        $data['end_time'] =         (string) $this->end_time;
+        $data['left_percent'] =     $this->left_ambiguity_percentage;
+        $data['right_percent'] =    $this->right_ambiguity_percentage;
+
+        // JSON-ify the array.
+        return json_encode($data);
+
+    }
+
+
+    /**
      * Setters.
      */
 

@@ -317,7 +317,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
      *
      * @return void.
      */
-    public function testForm()
+    public function testFormWithExistingRecord()
     {
 
         // Create item, exhibit, and record.
@@ -346,7 +346,8 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->request->setMethod('GET')
             ->setParams(array(
                 'item_id' => $item->id,
-                'neatline_id' => $neatline->id
+                'neatline_id' => $neatline->id,
+                'record_id' => $record->id
             )
         );
 
@@ -366,6 +367,61 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
             '"left_percent":' .     self::$__testParams['left_percent'] . ',' .
             '"right_percent":' .    self::$__testParams['right_percent'] . ',' .
             '"vector_color":"' .    self::$__testParams['vector_color'] . '"}'
+        );
+
+    }
+
+    /**
+     * When there is not a Neatline-native data record, the /form route should output
+     * a well-formed JSON object that defaults in DC values for title and description.
+     *
+     * @return void.
+     */
+    public function testFormWithNoExistingRecord()
+    {
+
+        // Create item and exhibit.
+        $item = $this->helper->_createItem();
+        $neatline = $this->helper->_createNeatline();
+
+        // Create element texts.
+        $this->helper->_createElementText(
+            $item,
+            'Dublin Core',
+            'Title',
+            'Test Title');
+
+        $this->helper->_createElementText(
+            $item,
+            'Dublin Core',
+            'Description',
+            'Test description.');
+
+        // Form the POST for a space change.
+        $this->request->setMethod('GET')
+            ->setParams(array(
+                'item_id' => $item->id,
+                'neatline_id' => $neatline->id,
+                'record_id' => ''
+            )
+        );
+
+        // Hit the route and capture the response.
+        $this->dispatch('neatline-exhibits/editor/form');
+        $response = $this->getResponse()->getBody('default');
+
+        // Check for proper construction.
+        $this->assertEquals(
+            $response,
+            '{"title":"Test Title",' .
+            '"description":"Test description.",' .
+            '"start_date":"",' .
+            '"start_time":"",' .
+            '"end_date":"",' .
+            '"end_time":"",' .
+            '"left_percent":0,' .
+            '"right_percent":100,' .
+            '"vector_color":"#724e85"}'
         );
 
     }

@@ -30,6 +30,22 @@
 class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
 {
 
+    // Testing parameters.
+    private static $__testParams = array(
+        'title' => 'Test Title',
+        'description' => 'Test description.',
+        'start_date' => 'April 26, 1564',
+        'start_time' => '6:00 AM',
+        'end_date' => 'April 23, 1616',
+        'end_time' => '6:00 AM',
+        'vector_color' => '#ffffff',
+        'left_percent' => 0,
+        'right_percent' => 100,
+        'geocoverage' => '[POINT(-1.0, 1.0)]',
+        'space_active' => true,
+        'time_active' => true
+    );
+
     /**
      * Instantiate the helper class, install the plugins, get the database.
      *
@@ -42,6 +58,7 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         $this->helper = new Neatline_Test_AppTestCase;
         $this->helper->setUpPlugin();
         $this->db = get_db();
+        $this->_recordsTable = $this->db->getTable('NeatlineDataRecord');
 
     }
 
@@ -376,6 +393,56 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         // Should return null when the value is an empty string.
         $record->geocoverage = '';
         $this->assertNull($record->getGeocoverage());
+
+    }
+
+    /**
+     * The buildEditFormJson() method should construct a JSON object to populate
+     * the record edit form in the editor.
+     *
+     * @return void.
+     */
+    public function testBuildEditFormJson()
+    {
+
+        // Create an item and exhibit.
+        $neatline = $this->helper->_createNeatline();
+        $record = new NeatlineDataRecord(null, $neatline);
+        $record->save();
+
+        // Save form data with update values.
+        $this->_recordsTable->saveItemFormData(
+            $record,
+            self::$__testParams['title'],
+            self::$__testParams['description'],
+            self::$__testParams['start_date'],
+            self::$__testParams['start_time'],
+            self::$__testParams['end_date'],
+            self::$__testParams['end_time'],
+            self::$__testParams['vector_color'],
+            self::$__testParams['left_percent'],
+            self::$__testParams['right_percent'],
+            self::$__testParams['geocoverage'],
+            self::$__testParams['space_active'],
+            self::$__testParams['time_active']
+        );
+
+        // Ping the method for the json.
+        $json = $record->buildEditFormJson();
+
+        // Check for proper construction.
+        $this->assertEquals(
+            $json,
+            '{"title":"' . self::$__testParams['title'] . '",' .
+            '"description":"' . self::$__testParams['description'] . '",' .
+            '"start_date":"' . self::$__testParams['start_date'] . '",' .
+            '"start_time":"' . self::$__testParams['start_time'] . '",' .
+            '"end_date":"' . self::$__testParams['end_date'] . '",' .
+            '"end_time":"' . self::$__testParams['end_time'] . '",' .
+            '"left_percent":' . self::$__testParams['left_percent'] . ',' .
+            '"right_percent":' . self::$__testParams['right_percent'] . ',' .
+            '"vector_color":"' . self::$__testParams['vector_color'] . '"}'
+        );
 
     }
 

@@ -321,39 +321,15 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
             'vector_color' => '#724e85'
         );
 
-        // Try to get the record.
-        $record = $this->getRecordByItemAndExhibit($item, $neatline);
+        $data['title'] = neatline_getItemMetadata(
+            $item,
+            'Dublin Core',
+            'Title');
 
-        // If the record exists, populate the data.
-        if ($record) {
-
-            // Set the array values.
-            $data['title'] =            $record->getTitle();
-            $data['description'] =      $record->getDescription();
-            $data['vector_color'] =     $record->getColor();
-            $data['start_date'] =       (string) $record->start_date;
-            $data['start_time'] =       (string) $record->start_time;
-            $data['end_date'] =         (string) $record->end_date;
-            $data['end_time'] =         (string) $record->end_time;
-            $data['left_percent'] =     $record->left_ambiguity_percentage;
-            $data['right_percent'] =    $record->right_ambiguity_percentage;
-
-        }
-
-        // Otherwise, try to find existing DC data.
-        else {
-
-            $data['title'] = neatline_getItemMetadata(
-                $item,
-                'Dublin Core',
-                'Title');
-
-            $data['description'] = neatline_getItemMetadata(
-                $item,
-                'Dublin Core',
-                'Description');
-
-        }
+        $data['description'] = neatline_getItemMetadata(
+            $item,
+            'Dublin Core',
+            'Description');
 
         // JSON-ify the array.
         return json_encode($data);
