@@ -376,6 +376,17 @@
                 // Get current map focus for item.
                 'savemapfocus': function() {
                     self._trigger('savemapfocus');
+                },
+
+                // Reload the items list.
+                'reload': function() {
+                    self._trigger('savecomplete');
+                    self._getItems();
+                },
+
+                // Update the current record title.
+                'settitle': function(event, obj) {
+                    self._currentRecordTitle.text(obj.text);
                 }
 
             });
@@ -944,6 +955,7 @@
             // Update trackers.
             item.data('expanded', true);
             this._currentFormItem = item;
+            this._currentRecordTitle = item.find('span.item-title-text');
 
          },
 

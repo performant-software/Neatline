@@ -147,6 +147,7 @@
 
                     // Only do the delete if the record is Neatline-endemic.
                     if (typeof this.itemId === 'undefined') {
+                        self._fadeDown();
                         self._postRecordDelete();
                     }
 
@@ -419,6 +420,18 @@
          },
 
         /*
+         * If the record is Neatline-endemic and has a non-empty title, push
+         * on the title to the title text span.
+         */
+        _updateTitleText: function() {
+
+            if (typeof this.itemId === 'undefined' && this.title.val() != '') {
+                this._trigger('settitle', {}, { 'text': this.title.val() });
+            }
+
+         },
+
+        /*
          * Display the delete record button.
          */
         _showDeleteButton: function() {
@@ -630,6 +643,9 @@
                         self._trigger('timeactive');
                     }
 
+                    // Update the title text, if necessary.
+                    self._updateTitleText();
+
                 }
 
             });
@@ -684,7 +700,8 @@
                 },
 
                 success: function() {
-
+                    self._fadeUp();
+                    self._trigger('reload');
                 }
 
             });
