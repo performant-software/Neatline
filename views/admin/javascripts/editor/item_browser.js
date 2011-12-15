@@ -972,7 +972,6 @@
 
             // Fire the end edit without save callback.
             this._trigger('endmapedit', {}, {
-                'recordid': item.attr('recordid'),
                 'immediate': immediate
             });
 

@@ -69,14 +69,15 @@
             this._instantiateOpenLayers();
 
             // Trackers and buckets.
+            this._db =                      TAFFY();
+            this._currentVectorLayers =     [];
             this._currentEditItem =         null;
             this._currentEditLayer =        null;
             this._clickedFeature =          null;
-            this._currentVectorLayers =     [];
-            this.idToLayer =                {};
             this.requestData =              null;
+            // this.idToLayer =                {};
 
-            // Load data.
+            // Start-up.
             this.loadData();
 
         },
@@ -184,9 +185,10 @@
                 layer.destroy();
             });
 
-            // Empty out the containers.
+            // Empty out the layers database.
+            this._db = TAFFY();
             this._currentVectorLayers = [];
-            this.idToLayer = {};
+            // this.idToLayer = {};
 
             // Abort the request if it is running.
             if (this.requestData != null) {
@@ -226,13 +228,13 @@
 
             // Instantiate database and associations objects.
             this._db = TAFFY();
-            this.idToLayer = {};
-            this.layerToId = {};
+            // this.idToLayer = {};
+            // this.layerToId = {};
 
             $.each(data, function(i, item) {
 
                 // Get item id and color, construct style.
-                var itemId = item.id;
+                var recordid = item.id;
                 var color = (item.color != '') ? item.color : self.options.styles.default_color;
                 var style = self._getStyleMap(color);
 
@@ -256,14 +258,16 @@
                 vectorLayer.setMap(self.map);
 
                 // Add to associations.
-                self.idToLayer[itemId] = vectorLayer;
-                self.layerToId[vectorLayer.id] = itemId;
+                // self.idToLayer[itemId] = vectorLayer;
+                // self.layerToId[vectorLayer.id] = itemId;
 
                 // Add the database record.
                 self._db.insert({
-                    recordid: itemId,
+                    itemid: null,
+                    layerid: vectorLayer.id,
+                    recordid: recordid,
                     data: item,
-                    layer: vectorLayer
+                    layer: vectorLayer,
                 });
 
                 // Add to the layers array and add to map.
@@ -295,12 +299,13 @@
 
                 onSelect: function(feature) {
 
-                    // Store the feature in the tracker.
+                    // Get the record for the layer.
+                    var record = self._db({ layerid: feature.layer.id }).first();
                     self._clickedFeature = feature;
 
                     // Trigger out to the deployment code.
                     self._trigger('featureclick', {}, {
-                        'recordid': self.layerToId[feature.layer.id]
+                        'recordid': record.recordid
                     });
 
                     if (self.modifyFeatures != undefined) {
@@ -369,27 +374,44 @@
                 this.highlightControl.deactivate();
             }
 
-            // Get the id of the item and try to fetch the layer.
+            // Try to get record and item id's.
             var recordid = item.attr('recordid');
-            this._currentEditLayer = this.idToLayer[recordid];
-            this._currentEditId = recordid;
+            var itemid = item.attr('recordid');
 
-            // Record the id of the current edit layer, so that the layer can be
-            // reactivated as the current layer after save.
+            // If there is a record id, get the layer.
+            if (typeof recordid !== 'undefined') {
+                this._currentEditLayer = this._db({ recordid: recordid }).first();
+            }
+
+            // If there is an item id, try to find a layer.
+            else if (typeof itemid !== 'undefined') {
+                this._currentEditLayer = this._db({ itemid: itemid }).first();
+            }
+
+            // Store the current edit item so that the layer can be reactivatee as
+            // the current layer after save.
             this._currentEditItem = item;
 
             // If the item does not have an existing vector layer, create a new one.
             if (!this._currentEditLayer) {
 
                 var itemName = item.find('span.item-title-text').text();
-                this._currentEditLayer = new OpenLayers.Layer.Vector(itemName);
+                var newLayer = new OpenLayers.Layer.Vector(itemName);
+
+                // Push the edit layer onto the non-base layers stack, add to map.
+                this._currentEditLayer = newLayer;
+                this._currentVectorLayers.push(this._currentEditLayer);
                 this.map.addLayer(this._currentEditLayer);
                 this._currentEditLayer.setMap(this.map);
 
-                // Push the edit layer onto the non-base layers stack.
-                this._currentVectorLayers.push(this._currentEditLayer);
-                this.idToLayer[recordid] = this._currentEditLayer;
-                this.layerToId[this._currentEditLayer.id] = recordid;
+                // Add the database record.
+                self._db.insert({
+                    itemid: itemid,
+                    layerid: newLayer.id,
+                    recordid: recordid,
+                    data: item,
+                    layer: newLayer,
+                });
 
             }
 
@@ -547,7 +569,7 @@
         /*
          * Remove editing functionality, return to default mode.
          */
-        endEditWithoutSave: function(id, immediate) {
+        endEditWithoutSave: function(immediate) {
 
             // Before OpenLayers axes the toolbar controls, clone the div so
             // that it can be faded down in unison with the buttons.
@@ -575,22 +597,20 @@
 
             }
 
-            // Reactivate the default selection controls.
-            this._addClickControls();
-
             if (this._currentEditLayer.features.length == 0) {
 
-                // Pop off the layer, remove the id-layer association.
+                // Pop off the layer, remove from database, null the tracker..
                 this.map.removeLayer(this._currentEditLayer);
                 this._currentVectorLayers.remove(this._currentEditLayer);
-                delete this.idToLayer[id];
-                delete this.layerToId[this._currentEditLayer.id];
+                this._db({ layerid: this._currentEditLayer.id }).remove();
                 this._currentEditLayer = null;
 
             }
 
-            // Clear the item tracker.
+            // Clear the item tracker, re-add the click controls.
             this._currentEditItem = null;
+            this._addClickControls();
+
 
         },
 

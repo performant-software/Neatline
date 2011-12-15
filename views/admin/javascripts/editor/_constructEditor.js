@@ -86,7 +86,7 @@ jQuery(document).ready(function($) {
         // When vector data is added to the map, and then the item
         // form is closed without saving.
         'endmapedit': function(event, obj) {
-            neatlineContainer.neatline('endMapEditWithoutSave', obj.itemId, obj.immediate);
+            neatlineContainer.neatline('endMapEditWithoutSave', obj.immediate);
         },
 
         // After an edit form save, when the JSON for the map and
