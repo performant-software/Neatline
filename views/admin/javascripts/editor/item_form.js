@@ -52,8 +52,8 @@
 
             // Getters.
             this.form =                     this.element.find('form');
-            this.cancelButton =             this.form.find('button[type="reset"]');
             this.saveButton =               this.form.find('input[type="submit"]');
+            this.deleteButton =             this.form.find('#record-delete-button');
             this.title =                    this.form.find('input[name="title"]');
             this.description =              this.form.find('textarea[name="description"]');
             this.startDate =                this.form.find('input[name="start-date-date"]');
@@ -207,15 +207,16 @@
             // DOM touches.
             this._showContainer();
             this._expandTitle();
+            this._getFormData();
 
-            // If the form is for an existing item, populate the fields.
-            if (this.itemId != ':null') {
-                this._getFormData();
+            // If there is no item id, display the delete button.
+            if (typeof this.itemId === 'undefined') {
+                this._showDeleteButton();
             }
 
-            // Otherwise, blank out the fields.
+            // Otherwise, hide it.
             else {
-                this._clearData();
+                this._hideDeleteButton();
             }
 
         },
@@ -409,6 +410,24 @@
             this.element.animate({
                 'opacity': 1
             }, 200);
+
+         },
+
+        /*
+         * Display the delete record button.
+         */
+        _showDeleteButton: function() {
+
+            this.deleteButton.css('visibility', 'visible');
+
+         },
+
+        /*
+         * Hide the delete record button.
+         */
+        _hideDeleteButton: function() {
+
+            this.deleteButton.css('visibility', 'hidden');
 
          },
 

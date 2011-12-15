@@ -353,8 +353,8 @@ tr.edit-form td {
     width: 85%;
 }
 
-#delete-button {
-    display: none;
+#record-delete-button {
+    visibility: hidden;
 }
 
 

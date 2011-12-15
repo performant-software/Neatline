@@ -100,7 +100,7 @@
 
             <div class="actions">
                 <input type="submit" class="btn primary" value="Save">
-                <button id="delete-button" class="btn danger">Delete</button>
+                <button id="record-delete-button" class="btn danger">Delete</button>
             </div>
 
         </fieldset>
