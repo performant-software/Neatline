@@ -1261,4 +1261,42 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
 
     }
 
+    /**
+     * The /delete route should delete a Neatline-endemic data record.
+     *
+     * @return void.
+     */
+    public function testDelete()
+    {
+
+        // Create an exhibit and records.
+        $neatline = $this->helper->_createNeatline();
+        $record1 = new NeatlineDataRecord(null, $neatline);
+        $record1->save();
+        $record2 = new NeatlineDataRecord(null, $neatline);
+        $record2->save();
+
+        // Form the POST.
+        $this->request->setMethod('POST')
+            ->setPost(array(
+                'record_id' => $record1->id
+            )
+        );
+
+        // 2 records.
+        $this->assertEquals($this->_recordsTable->count(), 2);
+
+        // Hit the route, check for the markup.
+        $this->dispatch('neatline-exhibits/editor/delete');
+
+        // 1 record.
+        $this->assertEquals($this->_recordsTable->count(), 1);
+
+        // Check that the right record was deleted.
+        $this->assertNull($this->_recordsTable->find($record1->id));
+        $this->assertNotNull($this->_recordsTable->find($record2->id));
+
+
+    }
+
 }

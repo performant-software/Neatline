@@ -459,4 +459,26 @@ class Neatline_EditorController extends Omeka_Controller_Action
 
     }
 
+    /**
+     * ~ AJAX ~
+     * Delete a Neatline-endemic data record.
+     *
+     * @return void
+     */
+    public function deleteAction()
+    {
+
+        // Supress the default Zend layout-sniffer functionality.
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        // Get the post.
+        $_post = $this->_request->getPost();
+
+        // Get the record and delete.
+        $recordId = $_post['record_id'];
+        $record = $this->_recordsTable->find($recordId);
+        $record->delete();
+
+    }
+
 }
