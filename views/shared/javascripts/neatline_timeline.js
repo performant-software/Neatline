@@ -55,14 +55,15 @@
 
                 Timeline.createBandInfo({
                     eventSource:    this.eventSource,
-                    width:          "60%",
+                    width:          "80%",
                     intervalUnit:   Timeline.DateTime.MONTH,
                     intervalPixels: 100
                 }),
 
                 Timeline.createBandInfo({
+                    overview:       true,
                     eventSource:    this.eventSource,
-                    width:          "40%",
+                    width:          "20%",
                     intervalUnit:   Timeline.DateTime.YEAR,
                     intervalPixels: 200
                 })

@@ -105,6 +105,7 @@ function neatline_queueNeatlineAssets()
     // Core Neatline stylesheet.
     queue_css('bootstrap.xtra.min');
     queue_css('neatline');
+    queue_css('neatline-timeline');
 
     // The Neatline JavaScript application.
     queue_js('neatline', 'javascripts');
