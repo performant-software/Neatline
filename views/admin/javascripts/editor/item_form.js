@@ -216,7 +216,7 @@
             this._getFormData();
 
             // If there is no item id, display the delete button.
-            if (typeof this.itemId === 'undefined') {
+            if (this.itemId == '') {
                 this._showDeleteButton();
             }
 
@@ -543,11 +543,12 @@
          */
         _getDataForSave: function(coverage) {
 
+            // Build the base form data.
             var data = this._getData();
 
             // Merge the status and coverage data.
-            data['item_id'] =               parseInt(this.itemId);
-            data['record_id'] =             parseInt(this.recordId);
+            data['item_id'] =               this.itemId;
+            data['record_id'] =             this.recordId;
             data['neatline_id'] =           Neatline.id;
             data['space_active'] =          this.space.prop('checked').toString();
             data['time_active'] =           this.time.prop('checked').toString();

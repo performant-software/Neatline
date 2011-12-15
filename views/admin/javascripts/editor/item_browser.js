@@ -1112,6 +1112,7 @@
 
                     // Re-get items.
                     self._getItems();
+                    self._calculateAllTopOffsets();
 
                 }
 

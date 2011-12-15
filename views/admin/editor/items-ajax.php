@@ -37,7 +37,7 @@
 
         <?php foreach ($records as $record): ?>
 
-            <tr class="item-row" recordid="<?php echo $record->id; ?>">
+            <tr class="item-row" recordid="<?php echo $record->id; ?>" itemid="">
                 <td class="item-title">
                     <span class="item-title-text"><?php echo ($record->title != null) ? $record->title : '[Untitled]'; ?></span>
                     <span class="item-title-fader"></span>

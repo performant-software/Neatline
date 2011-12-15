@@ -75,7 +75,6 @@
             this._currentEditLayer =        null;
             this._clickedFeature =          null;
             this.requestData =              null;
-            // this.idToLayer =                {};
 
             // Start-up.
             this.loadData();
@@ -188,7 +187,6 @@
             // Empty out the layers database.
             this._db = TAFFY();
             this._currentVectorLayers = [];
-            // this.idToLayer = {};
 
             // Abort the request if it is running.
             if (this.requestData != null) {
@@ -228,8 +226,6 @@
 
             // Instantiate database and associations objects.
             this._db = TAFFY();
-            // this.idToLayer = {};
-            // this.layerToId = {};
 
             $.each(data, function(i, item) {
 
@@ -256,10 +252,6 @@
                 // Add the vectors to the layer.
                 vectorLayer.addFeatures(features);
                 vectorLayer.setMap(self.map);
-
-                // Add to associations.
-                // self.idToLayer[itemId] = vectorLayer;
-                // self.layerToId[vectorLayer.id] = itemId;
 
                 // Add the database record.
                 self._db.insert({
@@ -324,9 +316,11 @@
 
             });
 
-            // Add and activate.
+            // Add and activate the highlight control.
             this.map.addControl(this.highlightControl);
             this.highlightControl.activate();
+
+            // Add and activate the click control.
             this.map.addControl(this.clickControl);
             this.clickControl.activate();
 
