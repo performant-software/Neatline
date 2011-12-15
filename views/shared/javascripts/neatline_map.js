@@ -48,8 +48,8 @@
 
             styles: {
                 default_opacity: 0.4,
+                select_point_radius: 6,
                 default_color: '#ffb80e',
-                select_point_radius: 10,
                 select_stroke_color: '#ea3a3a'
             }
 
@@ -182,7 +182,6 @@
             });
 
             // Empty out the layers database.
-            this._db = TAFFY();
             this._currentVectorLayers = [];
 
             // Abort the request if it is running.
@@ -256,7 +255,7 @@
                     layerid: vectorLayer.id,
                     recordid: recordid,
                     data: item,
-                    layer: vectorLayer,
+                    layer: vectorLayer
                 });
 
                 // Add to the layers array and add to map.
@@ -367,21 +366,24 @@
 
             // Try to get record and item id's.
             var recordid = item.attr('recordid');
-            var itemid = item.attr('recordid');
+            var itemid = item.attr('itemid');
 
             // If there is a record id, get the layer.
-            if (typeof recordid !== 'undefined') {
-                this._currentEditLayer = this._db({ recordid: recordid }).first();
+            if (recordid !== '') {
+                var record = this._db({ recordid: parseInt(recordid) }).first();
+                this._currentEditLayer = record.layer;
             }
 
             // If there is an item id, try to find a layer.
-            else if (typeof itemid !== 'undefined') {
-                this._currentEditLayer = this._db({ itemid: itemid }).first();
+            else if (itemid !== '') {
+                var record = this._db({ itemid: parseInt(itemid) }).first();
+                this._currentEditLayer = record.layer;
             }
 
             // Store the current edit item so that the layer can be reactivatee as
             // the current layer after save.
             this._currentEditItem = item;
+            console.log(this._currentEditLayer);
 
             // If the item does not have an existing vector layer, create a new one.
             if (!this._currentEditLayer) {
@@ -401,7 +403,7 @@
                     layerid: newLayer.id,
                     recordid: recordid,
                     data: item,
-                    layer: newLayer,
+                    layer: newLayer
                 });
 
             }
