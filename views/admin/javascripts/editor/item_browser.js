@@ -1054,6 +1054,7 @@
 
             // Get the Omeka item id and the title div.
             var recordid = item.attr('recordid');
+            var itemid = item.attr('itemid');
             var itemTitleText = item.find('.' + this.options.item_title_text_class);
 
             // Save the new status.
@@ -1063,7 +1064,8 @@
                 type: 'POST',
 
                 data: {
-                    item_id: recordid,
+                    item_id: itemid,
+                    record_id: recordid,
                     neatline_id: Neatline.id,
                     space_or_time: spaceOrTime,
                     value: String(value)

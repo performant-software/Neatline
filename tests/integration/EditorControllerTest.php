@@ -245,26 +245,34 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
      *
      * @return void.
      */
-    public function testSpaceStatusSave()
+    public function testSpaceStatusSaveWithExistingRecord()
     {
 
         // Create item, exhibit, and record.
         $item = $this->helper->_createItem();
         $neatline = $this->helper->_createNeatline();
         $record = new NeatlineDataRecord($item, $neatline);
+        $record->save();
 
         // Form the POST for a space change.
         $this->request->setMethod('POST')
             ->setPost(array(
                 'item_id' => $item->id,
                 'neatline_id' => $neatline->id,
+                'record_id' => $record->id,
                 'space_or_time' => 'space',
                 'value' => 'true'
             )
         );
 
+        // 1 record.
+        $this->assertEquals($this->_recordsTable->count(), 1);
+
         // Hit the route.
         $this->dispatch('neatline-exhibits/editor/status');
+
+        // Should not create a new record.
+        $this->assertEquals($this->_recordsTable->count(), 1);
 
         // Re-get the record.
         $record = $this->_recordsTable->getRecordByItemAndExhibit($item, $neatline);
@@ -281,26 +289,34 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
      *
      * @return void.
      */
-    public function testTimeStatusSave()
+    public function testTimeStatusSaveWithExistingRecord()
     {
 
         // Create item, exhibit, and record.
         $item = $this->helper->_createItem();
         $neatline = $this->helper->_createNeatline();
         $record = new NeatlineDataRecord($item, $neatline);
+        $record->save();
 
         // Form the POST for a space change.
         $this->request->setMethod('POST')
             ->setPost(array(
                 'item_id' => $item->id,
                 'neatline_id' => $neatline->id,
+                'record_id' => $record->id,
                 'space_or_time' => 'time',
                 'value' => 'true'
             )
         );
 
+        // 1 record.
+        $this->assertEquals($this->_recordsTable->count(), 1);
+
         // Hit the route.
         $this->dispatch('neatline-exhibits/editor/status');
+
+        // Should not create a new record.
+        $this->assertEquals($this->_recordsTable->count(), 1);
 
         // Re-get the record.
         $record = $this->_recordsTable->getRecordByItemAndExhibit($item, $neatline);
@@ -308,6 +324,126 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         // Time status should be true, space status unchanged.
         $this->assertEquals($record->time_active, 1);
         $this->assertEquals($record->space_active, 0);
+
+    }
+
+    /**
+     * Hitting the /status route with a well-formed POST when there is no existing
+     * data record should create a new record, commit the status, and default in
+     * DC values for title and description.
+     *
+     * @return void.
+     */
+    public function testSpaceStatusSaveWithNoExistingRecord()
+    {
+
+        // Create item, exhibit, and record.
+        $item = $this->helper->_createItem();
+        $neatline = $this->helper->_createNeatline();
+
+        // Create element texts.
+        $this->helper->_createElementText(
+            $item,
+            'Dublin Core',
+            'Title',
+            'Test Title');
+
+        $this->helper->_createElementText(
+            $item,
+            'Dublin Core',
+            'Description',
+            'Test description.');
+
+        // Form the POST for a space change.
+        $this->request->setMethod('POST')
+            ->setPost(array(
+                'item_id' => $item->id,
+                'neatline_id' => $neatline->id,
+                'record_id' => '',
+                'space_or_time' => 'space',
+                'value' => 'true'
+            )
+        );
+
+        // 0 records.
+        $this->assertEquals($this->_recordsTable->count(), 0);
+
+        // Hit the route.
+        $this->dispatch('neatline-exhibits/editor/status');
+
+        // Should create a new record.
+        $this->assertEquals($this->_recordsTable->count(), 1);
+
+        // Re-get the record.
+        $record = $this->_recordsTable->getRecordByItemAndExhibit($item, $neatline);
+
+        // Space status should be true, time status unchanged.
+        $this->assertEquals($record->space_active, 1);
+        $this->assertEquals($record->time_active, 0);
+
+        // Check that the DC defaults were pushed in.
+        $this->assertEquals($record->title, 'Test Title');
+        $this->assertEquals($record->description, 'Test description.');
+
+    }
+
+    /**
+     * Hitting the /status route with a well-formed POST when there is no existing
+     * data record should create a new record, commit the status, and default in
+     * DC values for title and description.
+     *
+     * @return void.
+     */
+    public function testTimeStatusSaveWithNoExistingRecord()
+    {
+
+        // Create item, exhibit, and record.
+        $item = $this->helper->_createItem();
+        $neatline = $this->helper->_createNeatline();
+
+        // Create element texts.
+        $this->helper->_createElementText(
+            $item,
+            'Dublin Core',
+            'Title',
+            'Test Title');
+
+        $this->helper->_createElementText(
+            $item,
+            'Dublin Core',
+            'Description',
+            'Test description.');
+
+        // Form the POST for a space change.
+        $this->request->setMethod('POST')
+            ->setPost(array(
+                'item_id' => $item->id,
+                'neatline_id' => $neatline->id,
+                'record_id' => '',
+                'space_or_time' => 'time',
+                'value' => 'true'
+            )
+        );
+
+        // 0 records.
+        $this->assertEquals($this->_recordsTable->count(), 0);
+
+        // Hit the route.
+        $this->dispatch('neatline-exhibits/editor/status');
+
+        // Should create a new record.
+        $this->assertEquals($this->_recordsTable->count(), 1);
+
+        // Re-get the record.
+        $record = $this->_recordsTable->getRecordByItemAndExhibit($item, $neatline);
+
+        // Space status should be true, time status unchanged.
+        $this->assertEquals($record->space_active, 0);
+        $this->assertEquals($record->time_active, 1);
+
+        // Check that the DC defaults were pushed in.
+        $this->assertEquals($record->title, 'Test Title');
+        $this->assertEquals($record->description, 'Test description.');
 
     }
 

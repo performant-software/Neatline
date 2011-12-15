@@ -265,21 +265,35 @@ class Neatline_EditorController extends Omeka_Controller_Action
 
         // Get parameters from the ajax request.
         $itemId =                   $_post['item_id'];
+        $recordId =                 $_post['record_id'];
         $neatlineId =               $_post['neatline_id'];
         $spaceOrTime =              $_post['space_or_time'];
         $value =                    json_decode($_post['value']);
 
-        // Fetch the Neatline exhibit record and item record.
-        $neatline = $this->_neatlinesTable->find($neatlineId);
-        $item = $this->_itemsTable->find($itemId);
+        // If there is a record id, get the record and update.
+        if ($recordId != null) {
 
-        // Save the data.
-        $this->_recordsTable->saveRecordStatus(
-            $item,
-            $neatline,
-            $spaceOrTime,
-            $value
-        );
+            $record = $this->_recordsTable->find($recordId);
+            $record->setStatus($spaceOrTime, $value);
+            $record->save();
+
+        }
+
+        // Otherwise, create a new record.
+        else {
+
+            $neatline = $this->_neatlinesTable->find($neatlineId);
+            $item = $this->_itemsTable->find($itemId);
+
+            // Save the data.
+            $this->_recordsTable->saveRecordStatus(
+                $item,
+                $neatline,
+                $spaceOrTime,
+                $value
+            );
+
+        }
 
     }
 
