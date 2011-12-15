@@ -44,14 +44,21 @@ head(array('content_class' => 'neatline'));
         <h3 id="neatline-add-subheader">Step 1: Select a map and a timeline, customize the layout</h3>
     </div>
 
-    <h2 class="neatline-label">Enter a Title:</h2>
+    <h2 class="neatline-label">Enter a title:</h2>
     <?php echo neatline_titleInput($neatline->name); ?>
     <?php if (isset($errors)) { echo neatline_error($errors['title']); } ?>
 
     <hr>
 
-    <h2 class="neatline-label">Choose a Map:</h2>
-    <?php echo neatline_mapSelect($neatline->map_id); ?>
+    <div class="neatline-select-container">
+        <h2 class="neatline-label">Choose a map:</h2>
+        <?php echo neatline_mapSelect($neatline->map_id); ?>
+    </div>
+
+    <div class="neatline-select-container">
+        <h2 class="neatline-label">Or, choose an image:</h2>
+        <?php echo neatline_imageSelect(); ?>
+    </div>
 
     <hr>
 

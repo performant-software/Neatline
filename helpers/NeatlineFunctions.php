@@ -379,6 +379,33 @@ function neatline_getMapsForSelect()
 }
 
 /**
+ * Construct the images dropdown select.
+ *
+ * @param integer $id The id of the selected map.
+ *
+ * @return void.
+ */
+function neatline_imageSelect()
+{
+
+    return '';
+
+}
+
+/**
+ * Query for images, adding data about the parent items
+ * to use while constructing the order in the drop-down.
+ *
+ * @return array of ? $images The images.
+ */
+function neatline_getImagesForSelect()
+{
+
+
+
+}
+
+/**
  * Query for timelines.
  *
  * @return array of Omeka_records $maps The maps.

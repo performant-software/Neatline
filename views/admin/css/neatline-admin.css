@@ -173,6 +173,11 @@ select[name="map"], select[name="timeline"] {
     margin: 0 0 3em 0;
 }
 
+div.neatline-select-container {
+    display: inline-block;
+    margin: 0 2em 0 0;
+}
+
 
 /* Browse */
 
