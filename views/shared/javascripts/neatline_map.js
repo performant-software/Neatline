@@ -62,9 +62,6 @@
 
             var self = this;
 
-            // Getters.
-            this.params = Neatline;
-
             // Ignition.
             this._instantiateOpenLayers();
 
@@ -107,7 +104,7 @@
             }
 
             // Build the default bounds array.
-            var boundsArray = this.params.map.boundingBox.split(',');
+            var boundsArray = Neatline.map.boundingBox.split(',');
             var bounds = new OpenLayers.Bounds(
                 parseFloat(boundsArray[0]),
                 parseFloat(boundsArray[1]),
@@ -126,7 +123,7 @@
                   new OpenLayers.Control.ScaleLine(),
                 ],
                 maxResolution: 'auto',
-                projection: this.params.map.epsg[0],
+                projection: Neatline.map.epsg[0],
                 units: 'm'
             };
 
@@ -134,9 +131,9 @@
             this.map = new OpenLayers.Map('map', options);
 
             this.baseLayer = new OpenLayers.Layer.WMS(
-                this.params.name, this.params.map.wmsAddress,
+                Neatline.name, Neatline.map.wmsAddress,
                 {
-                    LAYERS: this.params.map.layers,
+                    LAYERS: Neatline.map.layers,
                     STYLES: '',
                     format: 'image/jpeg',
                     tiled: !pureCoverage,
@@ -153,8 +150,8 @@
 
             // If there is a default bounding box set for the exhibit, construct
             // a second Bounds object to use as the starting zoom target.
-            if (this.params.default_map_bounds != null) {
-                var boundsArray = this.params.default_map_bounds.split(',');
+            if (Neatline.default_map_bounds != null) {
+                var boundsArray = Neatline.default_map_bounds.split(',');
                 var bounds = new OpenLayers.Bounds(
                     parseFloat(boundsArray[0]),
                     parseFloat(boundsArray[1]),
@@ -196,7 +193,7 @@
             // Hit the json server.
             this.requestData = $.ajax({
 
-                url: this.params.dataSources.map,
+                url: Neatline.dataSources.map,
                 dataType: 'json',
 
                 success: function(data) {

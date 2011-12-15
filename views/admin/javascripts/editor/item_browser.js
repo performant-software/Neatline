@@ -900,6 +900,9 @@
             this._spaceBoxes = this.items.find('.space');
             this._timeBoxes = this.items.find('.time');
 
+            // Re-perform the offset calculations.
+            this._calculateAllTopOffsets();
+
         },
 
 
@@ -1112,7 +1115,6 @@
 
                     // Re-get items.
                     self._getItems();
-                    self._calculateAllTopOffsets();
 
                 }
 
