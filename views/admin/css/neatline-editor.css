@@ -505,7 +505,7 @@ div.filter-option span {
 .small-scrollbar {
     position: absolute;
     display: block;
-    width: 10px;
+    width: 13px;
     background-color: #c3c3c3;
     opacity: 0;
     -webkit-border-radius: 2px;

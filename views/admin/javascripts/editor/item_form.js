@@ -672,7 +672,6 @@
          */
         _postRecordDelete: function() {
 
-            console.log('postDelete');
             var self = this;
 
             // Commit.

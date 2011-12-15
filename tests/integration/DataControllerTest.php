@@ -169,7 +169,7 @@ class Neatline_DataControllerTest extends Omeka_Test_AppTestCase
             '"title":"' . $record1->title . '",' .
             '"description":"' . $record1->description . '",' .
             '"color":"' . $record1->vector_color . '",' .
-            '"textColor":"#6b6b6b",' .
+            '"textColor":"#4a4a4a",' .
             '"left_ambiguity":' . $record1->left_ambiguity_percentage . ',' .
             '"right_ambiguity":' . $record1->right_ambiguity_percentage . ',' .
             '"start":"2011-01-01 00:00:00",' .
@@ -178,7 +178,7 @@ class Neatline_DataControllerTest extends Omeka_Test_AppTestCase
             '"title":"' . $record2->title . '",' .
             '"description":"' . $record2->description . '",' .
             '"color":"' . $record2->vector_color . '",' .
-            '"textColor":"#6b6b6b",' .
+            '"textColor":"#4a4a4a",' .
             '"left_ambiguity":' . $record2->left_ambiguity_percentage . ',' .
             '"right_ambiguity":' . $record2->right_ambiguity_percentage . ',' .
             '"start":"2011-01-01 00:00:00",' .
