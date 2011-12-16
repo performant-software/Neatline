@@ -94,6 +94,7 @@ class NeatlinePlugin
                 `added` timestamp NOT NULL default NOW(),
                 `name` tinytext collate utf8_unicode_ci,
                 `map_id` int(10) unsigned NULL,
+                `image_id` int(10) unsigned NULL,
                 `top_element` ENUM('map', 'timeline') DEFAULT 'map',
                 `undated_items_position` ENUM('right', 'left') DEFAULT 'right',
                 `undated_items_height` ENUM('partial', 'full') DEFAULT 'partial',

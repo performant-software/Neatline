@@ -36,6 +36,7 @@ class NeatlineExhibit extends Omeka_record
     public $added;
     public $name;
     public $map_id;
+    public $image_id;
     public $top_element;
     public $undated_items_position;
     public $undated_items_height;
@@ -53,14 +54,24 @@ class NeatlineExhibit extends Omeka_record
      *
      * @return array $errors A list of errors to display.
      */
-    public function validateForm($title)
+    public function validateForm($title, $map, $image)
     {
 
         $errors = array();
 
-        // Title.
+        // No title.
         if ($title == '') {
             $errors['title'] = 'Enter a title.';
+        }
+
+        // No map or image.
+        if ($map == 'none' && $image == 'none') {
+            $errors['map'] = 'Choose a map or an image.';
+        }
+
+        // Map and image.
+        if (is_numeric($map) && is_numeric($image)) {
+            $errors['map'] = 'Choose a map or an image, not both.';
         }
 
         return $errors;
@@ -70,23 +81,30 @@ class NeatlineExhibit extends Omeka_record
     /**
      * Save the add Neatline form.
      *
-     * @param $_post The post data.
+     * @param string $title The title.
+     * @param varchar $map The map id.
+     * @param varchar $image The image id.
      *
      * @return boolean True if save is successful.
      */
-    public function saveForm($title, $map)
+    public function saveForm($title, $map, $image)
     {
 
         $this->added = neatline_getMysqlDatetime();
         $this->name = $title;
+        $this->map_id = null;
+        $this->is_map = 0;
 
         // Check for map.
         if (is_numeric($map)) {
             $this->map_id = $map;
             $this->is_map = 1;
-        } else {
-            $this->map_id = null;
-            $this->is_map = 0;
+        }
+
+        // Check for image.
+        if (is_numeric($image)) {
+            $this->image_id = $image;
+            $this->is_map = 1;
         }
 
         // By default, enable the timeline.
@@ -99,8 +117,6 @@ class NeatlineExhibit extends Omeka_record
         $this->top_element = 'map';
         $this->undated_items_position = 'right';
         $this->undated_items_height = 'full';
-
-        return $this->save() ? true : false;
 
     }
 
@@ -225,6 +241,26 @@ class NeatlineExhibit extends Omeka_record
 
         // Call parent.
         parent::delete();
+
+    }
+
+    /**
+     * The exhibit should not save if map_id or image_id are both non-null.
+     *
+     * @return void.
+     */
+    public function save()
+    {
+
+        if (!(!is_null($this->map_id) && !is_null($this->image_id))) {
+
+            parent::save();
+
+        }
+
+        else {
+            return false;
+        }
 
     }
 

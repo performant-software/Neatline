@@ -201,21 +201,25 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
         // There should be a map select.
         $this->assertQuery('select#map[name="map"]');
 
+        // There should be an image select.
+        $this->assertQuery('select#image[name="image"]');
+
     }
 
     /**
-     * Check for error flashing.
+     * If the title field is blank, flash error.
      *
      * @return void.
      */
-    public function testAddErrorFlashing()
+    public function testNoTitleError()
     {
 
         // Missing title.
         $this->request->setMethod('POST')
             ->setPost(array(
                 'title' => '',
-                'map' => ''
+                'map' => 'none',
+                'image' => 'none'
             )
         );
 
@@ -242,11 +246,89 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
     }
 
     /**
+     * If neither a map nor an image is selected, flash error.
+     *
+     * @return void.
+     */
+    public function testNoMapOrImageError()
+    {
+
+        // Missing title.
+        $this->request->setMethod('POST')
+            ->setPost(array(
+                'title' => 'Test Title',
+                'map' => 'none',
+                'image' => 'none'
+            )
+        );
+
+        // No exhibits at the start.
+        $this->assertEquals($this->_exhibitsTable->count(), 0);
+
+        // Submit the form.
+        $this->dispatch('neatline-exhibits/add');
+
+        // Should redirect to the add view.
+        $this->assertModule('neatline');
+        $this->assertController('index');
+        $this->assertAction('add');
+
+        // Check for the error.
+        $this->assertQueryContentContains(
+            'div.neatline-error',
+            'Choose a map or an image.'
+        );
+
+        // No exhibit should have been created.
+        $this->assertEquals($this->_exhibitsTable->count(), 0);
+
+    }
+
+    /**
+     * If a map and an image is selected, flash error.
+     *
+     * @return void.
+     */
+    public function testBothMapAndImageError()
+    {
+
+        // Missing title.
+        $this->request->setMethod('POST')
+            ->setPost(array(
+                'title' => 'Test Title',
+                'map' => 1,
+                'image' => 1
+            )
+        );
+
+        // No exhibits at the start.
+        $this->assertEquals($this->_exhibitsTable->count(), 0);
+
+        // Submit the form.
+        $this->dispatch('neatline-exhibits/add');
+
+        // Should redirect to the add view.
+        $this->assertModule('neatline');
+        $this->assertController('index');
+        $this->assertAction('add');
+
+        // Check for the error.
+        $this->assertQueryContentContains(
+            'div.neatline-error',
+            'Choose a map or an image, not both.'
+        );
+
+        // No exhibit should have been created.
+        $this->assertEquals($this->_exhibitsTable->count(), 0);
+
+    }
+
+    /**
      * Valid form should create new exhibit.
      *
      * @return void.
      */
-    public function testAddSuccess()
+    public function testAddSuccessWithMap()
     {
 
         // Create a map.
@@ -261,7 +343,8 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
         $this->request->setMethod('POST')
             ->setPost(array(
                 'title' => 'Test Title',
-                'map' => $map->id
+                'map' => $map->id,
+                'image' => 'none'
             )
         );
 
@@ -270,6 +353,46 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
 
         // Check for the new exhibit.
         $this->assertEquals($this->_exhibitsTable->count(), 1);
+
+        // Get and check the new exhibit.
+        $exhibit = $this->_exhibitsTable->find(1);
+        $this->assertNull($exhibit->image_id);
+        $this->assertNotNull($exhibit->map_id);
+        $this->assertEquals($exhibit->map_id, $map->id);
+
+    }
+
+    /**
+     * Valid form should create new exhibit.
+     *
+     * @return void.
+     */
+    public function testAddSuccessWithImage()
+    {
+
+        // No exhibits at the start.
+        $this->assertEquals($this->_exhibitsTable->count(), 0);
+
+        // Valid form.
+        $this->request->setMethod('POST')
+            ->setPost(array(
+                'title' => 'Test Title',
+                'map' => 'none',
+                'image' => 1
+            )
+        );
+
+        // Submit the form.
+        $this->dispatch('neatline-exhibits/add');
+
+        // Check for the new exhibit.
+        $this->assertEquals($this->_exhibitsTable->count(), 1);
+
+        // Get and check the new exhibit.
+        $exhibit = $this->_exhibitsTable->find(1);
+        $this->assertNotNull($exhibit->image_id);
+        $this->assertNull($exhibit->map_id);
+        $this->assertEquals($exhibit->image_id, 1);
 
     }
 

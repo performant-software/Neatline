@@ -1128,6 +1128,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
             '{"added":"0000-00-00 00:00:00",' .
             '"name":"Test Title",' .
             '"map_id":1,' .
+            '"image_id":null,' .
             '"top_element":"map",' .
             '"undated_items_position":"right",' .
             '"undated_items_height":"full",' .

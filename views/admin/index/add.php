@@ -46,7 +46,7 @@ head(array('content_class' => 'neatline'));
 
     <h2 class="neatline-label">Enter a title:</h2>
     <?php echo neatline_titleInput($neatline->name); ?>
-    <?php if (isset($errors)) { echo neatline_error($errors['title']); } ?>
+    <?php if (array_key_exists('title', $errors)) { echo neatline_error($errors['title']); } ?>
 
     <hr>
 
@@ -59,6 +59,7 @@ head(array('content_class' => 'neatline'));
         <h2 class="neatline-label">Or, choose an image:</h2>
         <?php echo neatline_imageSelect(); ?>
     </div>
+    <?php if (array_key_exists('map', $errors)) { echo neatline_error($errors['map']); } ?>
 
     <hr>
 
