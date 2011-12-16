@@ -388,23 +388,23 @@ function neatline_getMapsForSelect()
 function neatline_imageSelect()
 {
 
-    // // Get the images, split up into alphabetized buckets
-    // // according to the parent item.
-    // $bucketedImages = neatline_getImagesForSelect();
+    // Get the images, split up into alphabetized buckets
+    // according to the parent item.
+    $bucketedImages = neatline_getImagesForSelect();
 
-    // // Construct element.
-    // $imageSelect = new Zend_Form_Element_Select('image');
-    // $imageSelect->addMultiOption('none', '-');
+    // Construct element.
+    $imageSelect = new Zend_Form_Element_Select('image');
+    $imageSelect->addMultiOption('none', '-');
 
-    // foreach ($bucketedImages as $itemName => $images) {
-    //     $optionsArray = array();
-    //     foreach ($images as $image) {
-    //         $optionsArray[$image->id] = $image->original_filename;
-    //     }
-    //     $mapSelect->addMultiOptions(array($itemName => $optionsArray));
-    // }
+    foreach ($bucketedImages as $itemName => $images) {
+        $optionsArray = array();
+        foreach ($images as $image) {
+            $optionsArray[$image->id] = $image->original_filename;
+        }
+        $imageSelect->addMultiOptions(array($itemName => $optionsArray));
+    }
 
-    // return $mapSelect;
+    return $imageSelect;
 
 }
 
@@ -417,7 +417,38 @@ function neatline_imageSelect()
 function neatline_getImagesForSelect()
 {
 
+    $_db = get_db();
+    $filesTable = $_db->getTable('File');
+    $parentItemSql = "(SELECT text from `$_db->ElementText` WHERE " .
+       "record_id = f.item_id AND element_id = 50 LIMIT 1)";
 
+    $select = $filesTable->select()
+        ->from(array('f' => $_db->prefix . 'files'))
+        ->where('mime_os LIKE "image/%"')
+        ->joinLeft(array('i' => $_db->prefix . 'items'), 'f.item_id = i.id')
+        ->columns(array('file_id' => 'f.id', 'parent_item' => $parentItemSql));
+
+    $images = $filesTable->fetchObjects($select);
+    $itemBuckets = array();
+
+    // Put the images into an associative array of structure
+    // array('parent_item_name' => array($image1, $image2, ...)).
+    foreach ($images as $image) {
+        if (!array_key_exists($image->parent_item, $itemBuckets)) {
+            $itemBuckets[$image->parent_item] = array($image);
+        } else {
+            $itemBuckets[$mage->parent_item][] = $image;
+        }
+    }
+
+    // Sort the contents of the buckets.
+    foreach ($itemBuckets as $bucket) {
+        usort($bucket, 'neatline_compareObjects');
+    }
+
+    // Then sort the buckets by the name of the parent item.
+    asort($itemBuckets);
+    return $itemBuckets;
 
 }
 
