@@ -368,16 +368,15 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
         foreach ($records as $record) {
 
             // If the geocoverage is populated.
-            if ($record->space_active == 1 &&
-                !is_null($record->getGeocoverage())) {
+            if ($record->space_active == 1) {
 
                 $data[] = array(
                     'id' => $record->id,
-                    'title' => $record->title,
+                    'title' => $record->getTitle(),
                     'color' => $record->vector_color,
                     'bounds' => $record->map_bounds,
                     'zoom' => $record->map_zoom,
-                    'wkt' => $record->geocoverage
+                    'wkt' => $record->getGeocoverage()
                 );
 
             }

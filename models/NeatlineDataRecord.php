@@ -266,14 +266,14 @@ class NeatlineDataRecord extends Omeka_record
     /**
      * Return coverage.
      *
-     * @return string $color The color.
+     * @return string The coverage data.
      */
     public function getGeocoverage()
     {
 
-        return ($this->geocoverage != '') ?
+        return (!is_null($this->geocoverage) && $this->geocoverage != '') ?
             $this->geocoverage :
-            null;
+            'POINT()';
 
     }
 

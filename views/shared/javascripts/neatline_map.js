@@ -240,6 +240,7 @@
 
                 // Build the features.
                 $.each(item.wkt.split(self.options.wkt_delimiter), function(i, wkt) {
+                    console.log(wkt);
                     var geometry = new OpenLayers.Geometry.fromWKT(wkt);
                     var feature = new OpenLayers.Feature.Vector(geometry);
                     features.push(feature);

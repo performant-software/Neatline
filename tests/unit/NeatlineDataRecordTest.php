@@ -430,15 +430,15 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         $record = new NeatlineDataRecord($item, $neatline);
 
         // Should return null when the value is null.
-        $this->assertNull($record->getGeocoverage());
+        $this->assertEquals($record->getGeocoverage(), 'POINT()');
+
+        // Should return empty WKT for empty string.
+        $record->geocoverage = '';
+        $this->assertEquals($record->getGeocoverage(), 'POINT()');
 
         // Should return the value when the value is set.
         $record->geocoverage = 'POINT(0,1)';
         $this->assertEquals($record->getGeocoverage(), 'POINT(0,1)');
-
-        // Should return null when the value is an empty string.
-        $record->geocoverage = '';
-        $this->assertNull($record->getGeocoverage());
 
     }
 

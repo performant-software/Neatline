@@ -954,7 +954,6 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
         $record1->vector_color = '#ffffff';
         $record2->vector_color = '#000000';
         $record1->geocoverage = 'POINT(1,0)';
-        $record2->geocoverage = 'POINT(0,1)';
         $record1->space_active = 1;
         $record2->space_active = 1;
         $record1->map_bounds = 'BOUND(1)';
@@ -981,7 +980,7 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
             '"color":"#000000",' .
             '"bounds":"BOUND(2)",' .
             '"zoom":5,' .
-            '"wkt":"POINT(0,1)"}]'
+            '"wkt":"POINT()"}]'
         );
 
     }
