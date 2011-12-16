@@ -418,7 +418,7 @@ function neatline_imageSelect($id)
     foreach ($bucketedImages as $itemName => $images) {
         $optionsArray = array();
         foreach ($images as $image) {
-            $optionsArray[$image->id] = $image->original_filename;
+            $optionsArray[$image->file_id] = $image->original_filename;
         }
         $imageSelect->addMultiOptions(array($itemName => $optionsArray));
     }

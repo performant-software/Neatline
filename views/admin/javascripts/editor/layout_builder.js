@@ -121,7 +121,7 @@
             this._is_undated_items = Neatline.is_undated_items;
 
             // Enable the map toggle toggle button, if there is a map.
-            if (Neatline.map_id != null) {
+            if (Neatline.map_id != null || Neatline.image_id) {
                 this.map_toggle.togglebutton('enable');
             }
 

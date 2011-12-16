@@ -44,6 +44,7 @@ class Neatline_EditorController extends Omeka_Controller_Action
         $this->_mapsTable =         $this->getTable('NeatlineMapsMap');
         $this->_timelinesTable =    $this->getTable('NeatlineTimeTimeline');
         $this->_itemsTable =        $this->getTable('Item');
+        $this->_filesTable =        $this->getTable('File');
         $this->_statusesTable =     $this->getTable('NeatlineRecordStatus');
 
     }
@@ -89,6 +90,20 @@ class Neatline_EditorController extends Omeka_Controller_Action
                 'epsg' =>           $map->epsg,
                 'wmsAddress' =>     $map->wmsAddress,
                 'layers' =>         $map->layers
+            );
+
+        }
+
+        // Push image data into the view.
+        else if ($neatline->is_map == 1 && !is_null($neatline->image_id)) {
+
+            // Get the image.
+            $image = $this->_filesTable->find($neatline->image_id);
+            $neatlineData['image'] = array(
+                'path' =>           $image->getWebPath(),
+                'name' =>           $image->original_filename
+                // 'height' =>         item_file('id'),
+                // 'width' =>          item_file('id')
             );
 
         }

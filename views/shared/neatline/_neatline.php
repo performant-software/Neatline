@@ -53,4 +53,8 @@
         Neatline.map = <?php echo json_encode($map); ?>;
     <?php endif; ?>
 
+    <?php if (isset($image)): ?>
+        Neatline.image = <?php echo json_encode($image); ?>;
+    <?php endif; ?>
+
 </script>

@@ -62,9 +62,6 @@
 
             var self = this;
 
-            // Ignition.
-            this._instantiateOpenLayers();
-
             // Trackers and buckets.
             this._db =                      TAFFY();
             this._currentVectorLayers =     [];
@@ -73,15 +70,25 @@
             this._clickedFeature =          null;
             this.requestData =              null;
 
+            // Construct WMS-based map.
+            if (Neatline.map_id) {
+                this._instantiateGeoserverMap();
+            }
+
+            // Construct image-based map.
+            else if(Neatline.image_id) {
+                this._instantiateImageMap();
+            }
+
             // Start-up.
             this.loadData();
 
         },
 
         /*
-         * Grab the Neatline global, shell out trackers, startup.
+         * Initialize a Geoserver-based map with a WMS base layer.
          */
-        _instantiateOpenLayers: function() {
+        _instantiateGeoserverMap: function() {
 
             // Set OL global attributes.
             OpenLayers.IMAGE_RELOAD_ATTEMTPS = 3;
@@ -116,7 +123,6 @@
             var options = {
                 controls: [
                   new OpenLayers.Control.PanZoomBar(),
-                  new OpenLayers.Control.Permalink('permalink'),
                   new OpenLayers.Control.MousePosition(),
                   new OpenLayers.Control.LayerSwitcher(),
                   new OpenLayers.Control.Navigation(),
@@ -130,8 +136,10 @@
             // Instantiate the map.
             this.map = new OpenLayers.Map('map', options);
 
+            // Build the baselayer.
             this.baseLayer = new OpenLayers.Layer.WMS(
-                Neatline.name, Neatline.map.wmsAddress,
+                Neatline.name,
+                Neatline.map.wmsAddress,
                 {
                     LAYERS: Neatline.map.layers,
                     STYLES: '',
@@ -146,6 +154,66 @@
                 }
             );
 
+            // Push the base layer onto the map.
+            this.map.addLayers([this.baseLayer]);
+
+            // If there is a default bounding box set for the exhibit, construct
+            // a second Bounds object to use as the starting zoom target.
+            if (Neatline.default_map_bounds != null) {
+                var boundsArray = Neatline.default_map_bounds.split(',');
+                var bounds = new OpenLayers.Bounds(
+                    parseFloat(boundsArray[0]),
+                    parseFloat(boundsArray[1]),
+                    parseFloat(boundsArray[2]),
+                    parseFloat(boundsArray[3])
+                );
+            }
+
+            // Set starting zoom focus.
+            this.map.zoomToExtent(bounds);
+
+        },
+
+        /*
+         * Initialize an image-based map.
+         */
+        _instantiateImageMap: function() {
+
+
+
+            // Set OL global attributes.
+            OpenLayers.IMAGE_RELOAD_ATTEMTPS = 3;
+            OpenLayers.Util.onImageLoadErrorColor = "transparent";
+            OpenLayers.ImgPath = 'http://js.mapbox.com/theme/dark/';
+
+            // Starting options.
+            var options = {
+                controls: [
+                  new OpenLayers.Control.PanZoomBar(),
+                  new OpenLayers.Control.MousePosition(),
+                  new OpenLayers.Control.LayerSwitcher(),
+                  new OpenLayers.Control.Navigation(),
+                ],
+                maxResolution: 'auto',
+            };
+
+            // Instantiate the map.
+            this.map = new OpenLayers.Map('map', options);
+
+            // Build the bounds and size objects.
+            var bounds = new OpenLayers.Bounds(0, 0, 2496, 3120);
+            var size = new OpenLayers.Size(2496, 3120);
+
+            // Build the baselayer.
+            this.baseLayer = new OpenLayers.Layer.Image(
+                Neatline.image.name,
+                Neatline.image.path,
+                bounds,
+                size,
+                options
+            );
+
+            // Push the base layer onto the map.
             this.map.addLayers([this.baseLayer]);
 
             // If there is a default bounding box set for the exhibit, construct
