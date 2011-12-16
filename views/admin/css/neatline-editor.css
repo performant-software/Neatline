@@ -664,6 +664,10 @@ table#items th, table#items td {
     padding: 10px 10px 8px;
 }
 
+table#items tr.hidden {
+    display: none;
+}
+
 
 /* Tooltips */
 

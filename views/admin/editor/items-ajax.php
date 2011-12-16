@@ -27,62 +27,56 @@
 
 <table id="items">
 
-    <?php if ($records): ?>
 
-        <tr class="header-row">
-            <td>Neatline Records</td>
-            <td class="col-1"></td>
-            <td class="col-2"></td>
+    <tr id="neatline-header" class="header-row <?php if (!$records) { echo 'hidden'; } ?>">
+        <td>Neatline Records</td>
+        <td class="col-1"></td>
+        <td class="col-2"></td>
+    </tr>
+
+    <?php foreach ($records as $record): ?>
+
+        <tr class="item-row" recordid="<?php echo $record->id; ?>" itemid="">
+            <td class="item-title">
+                <span class="item-title-text"><?php echo ($record->title != null) ? $record->title : '[Untitled]'; ?></span>
+                <span class="item-title-fader"></span>
+            </td>
+            <td class="col-1 col-row space">
+                <input type="checkbox" <?php echo ($record->space_active == 1) ? 'checked' : ''; ?> />
+            </td>
+            <td class="col-2 col-row time">
+                <input type="checkbox" <?php echo ($record->time_active == 1) ? 'checked' : ''; ?> />
+            </td>
         </tr>
 
-        <?php foreach ($records as $record): ?>
+        <tr class="edit-form"><td colspan="3"></td></tr>
 
-            <tr class="item-row" recordid="<?php echo $record->id; ?>" itemid="">
-                <td class="item-title">
-                    <span class="item-title-text"><?php echo ($record->title != null) ? $record->title : '[Untitled]'; ?></span>
-                    <span class="item-title-fader"></span>
-                </td>
-                <td class="col-1 col-row space">
-                    <input type="checkbox" <?php echo ($record->space_active == 1) ? 'checked' : ''; ?> />
-                </td>
-                <td class="col-2 col-row time">
-                    <input type="checkbox" <?php echo ($record->time_active == 1) ? 'checked' : ''; ?> />
-                </td>
-            </tr>
+    <?php endforeach; ?>
 
-            <tr class="edit-form"><td colspan="3"></td></tr>
 
-        <?php endforeach; ?>
+    <tr id="omeka-header" class="header-row <?php if (count($items) == 0) { echo 'hidden'; } ?>">
+        <td>Omeka Records</td>
+        <td class="col-1"></td>
+        <td class="col-2"></td>
+    </tr>
 
-    <?php endif; ?>
+    <?php foreach ($items as $item): ?>
 
-    <?php if (count($items) > 0): ?>
-
-        <tr class="header-row">
-            <td>Omeka Records</td>
-            <td class="col-1"></td>
-            <td class="col-2"></td>
+        <tr class="item-row" recordid="<?php echo $neatline->getRecordIdByItem($item); ?>" itemid="<?php echo $item->id; ?>">
+            <td class="item-title">
+                <span class="item-title-text"><?php echo item('Dublin Core', 'Title', null, $item); ?></span>
+                <span class="item-title-fader"></span>
+            </td>
+            <td class="col-1 col-row space">
+                <input type="checkbox" <?php echo $neatline->getRecordStatus($item, 'space')? 'checked' : ''; ?> />
+            </td>
+            <td class="col-2 col-row time">
+                <input type="checkbox" <?php echo $neatline->getRecordStatus($item, 'time')? 'checked' : ''; ?> />
+            </td>
         </tr>
 
-        <?php foreach ($items as $item): ?>
+        <tr class="edit-form"><td colspan="3"></td></tr>
 
-            <tr class="item-row" recordid="<?php echo $neatline->getRecordIdByItem($item); ?>" itemid="<?php echo $item->id; ?>">
-                <td class="item-title">
-                    <span class="item-title-text"><?php echo item('Dublin Core', 'Title', null, $item); ?></span>
-                    <span class="item-title-fader"></span>
-                </td>
-                <td class="col-1 col-row space">
-                    <input type="checkbox" <?php echo $neatline->getRecordStatus($item, 'space')? 'checked' : ''; ?> />
-                </td>
-                <td class="col-2 col-row time">
-                    <input type="checkbox" <?php echo $neatline->getRecordStatus($item, 'time')? 'checked' : ''; ?> />
-                </td>
-            </tr>
-
-            <tr class="edit-form"><td colspan="3"></td></tr>
-
-        <?php endforeach; ?>
-
-    <?php endif; ?>
+    <?php endforeach; ?>
 
 </table>

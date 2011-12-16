@@ -165,7 +165,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         // Hit the route, check the markup.
         $this->dispatch('neatline-exhibits/editor/items');
         $this->assertQueryContentContains('tr.header-row td', 'Omeka Records');
-        $this->assertNotQueryContentContains('tr.header-row td', 'Neatline Records');
+        $this->assertQueryContentContains('tr.header-row.hidden td', 'Neatline Records');
         $this->assertQueryCount('tr.item-row', 1);
 
     }
@@ -197,7 +197,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
 
         // Hit the route, check the markup.
         $this->dispatch('neatline-exhibits/editor/items');
-        $this->assertNotQueryContentContains('tr.header-row td', 'Omeka Records');
+        $this->assertQueryContentContains('tr.header-row.hidden td', 'Omeka Records');
         $this->assertQueryContentContains('tr.header-row td', 'Neatline Records');
         $this->assertQueryCount('tr.item-row', 1);
 

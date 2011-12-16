@@ -128,7 +128,8 @@ class Neatline_EditorController extends Omeka_Controller_Action
         $this->view->neatline = $neatline;
 
         // Get records.
-        $this->view->records = $this->_recordsTable->getNeatlineRecordsByExhibit($neatline);
+        $records = $this->_recordsTable->getNeatlineRecordsByExhibit($neatline);
+        $this->view->records = ($records) ? $records : array();
 
         // Get items.
         $this->view->items = neatline_getItemsForBrowser(
@@ -454,9 +455,6 @@ class Neatline_EditorController extends Omeka_Controller_Action
     public function addAction()
     {
 
-        // Supress the default Zend layout-sniffer functionality.
-        $this->_helper->viewRenderer->setNoRender(true);
-
         // Fetch the exhibit record.
         $neatlineId = (int) $this->_request->neatline_id;
         $neatline = $this->_neatlinesTable->find($neatlineId);
@@ -464,6 +462,9 @@ class Neatline_EditorController extends Omeka_Controller_Action
         // Create the new record.
         $record = new NeatlineDataRecord(null, $neatline);
         $record->save();
+
+        // Push into the view.
+        $this->view->record = $record;
 
     }
 

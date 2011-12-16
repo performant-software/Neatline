@@ -776,8 +776,10 @@
 
             var self = this;
 
-            // Get the new items.
-            this.items = this.itemsList.find('.item-row');
+            // Get the new items and record headers.
+            this.items =                    this.itemsList.find('.item-row');
+            this.neatlineRecordsHeader =    this.itemsList.find('#neatline-header');
+            this.omekaRecordsHeader =       this.itemsList.find('#omeka-header');
 
             // Position the faders.
             this._positionTitleFaders();
@@ -904,6 +906,24 @@
             this._calculateAllTopOffsets();
 
         },
+
+        /*
+         * Add a new record row to the list and expand it.
+         */
+         _insertNewRecordRow: function(html) {
+
+             // Show the Neatline header, append the new markup.
+             this.neatlineRecordsHeader.css('display', 'table-row');
+             this.neatlineRecordsHeader.after(html);
+
+             // Re-gloss.
+             this._glossItems();
+
+             // Expand the form.
+             var newRecord = this.neatlineRecordsHeader.next('tr');
+             this._showForm(newRecord, false, false, false);
+
+         },
 
 
         /*
@@ -1109,13 +1129,11 @@
 
                 url: 'add',
                 type: 'GET',
+                dataType: 'html',
                 data: { neatline_id: Neatline.id },
 
-                success: function() {
-
-                    // Re-get items.
-                    self._getItems();
-
+                success: function(html) {
+                    self._insertNewRecordRow(html);
                 }
 
             });
