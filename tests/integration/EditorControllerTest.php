@@ -400,6 +400,51 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         // Create item, exhibit, and record.
         $item = $this->helper->_createItem();
         $neatline = $this->helper->_createNeatline();
+        $record = new NeatlineDataRecord($item, $neatline);
+        $record->save();
+
+        // Form the POST for a space change.
+        $this->request->setMethod('POST')
+            ->setPost(array(
+                'item_id' => $item->id,
+                'neatline_id' => $neatline->id,
+                'record_id' => '',
+                'space_or_time' => 'time',
+                'value' => 'true'
+            )
+        );
+
+        // 0 records.
+        $this->assertEquals($this->_recordsTable->count(), 1);
+
+        // Hit the route.
+        $this->dispatch('neatline-exhibits/editor/status');
+
+        // Should create a new record.
+        $this->assertEquals($this->_recordsTable->count(), 1);
+
+        // Re-get the record.
+        $record = $this->_recordsTable->getRecordByItemAndExhibit($item, $neatline);
+
+        // Space status should be true, time status unchanged.
+        $this->assertEquals($record->space_active, 0);
+        $this->assertEquals($record->time_active, 1);
+
+    }
+
+    /**
+     * If there is an existing record for an item/exhibit and the /status route
+     * is hit with a post that does not include a record id, the code should check
+     * for the existing record before creating a new one.
+     *
+     * @return void.
+     */
+    public function testStatusSaveNoDuplication()
+    {
+
+        // Create item, exhibit, and record.
+        $item = $this->helper->_createItem();
+        $neatline = $this->helper->_createNeatline();
 
         // Create element texts.
         $this->helper->_createElementText(
@@ -958,6 +1003,57 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
     }
 
     /**
+     * When /save is hit with a post that defines a item and but not a record id,
+     * the code should check to make sure that there isn't actually an existing data
+     * record for the item/exhibit combination before creating the new record. This
+     * could be possible in some cases - for example, if the user has set a map focus
+     * for a raw Omeka item, and then commits the form before reloading the item
+     * list, which would update the record attributes on the row listing.
+     *
+     * @return void.
+     */
+    public function testDuplicateProtectionOnSave()
+    {
+
+        // Create exhibit and item.
+        $neatline = $this->helper->_createNeatline();
+        $item = $this->helper->_createItem();
+        $record = new NeatlineDataRecord($item, $neatline);
+        $record->save();
+
+        // Form the POST for a space change.
+        $this->request->setMethod('POST')
+            ->setPost(array(
+                'item_id' =>        $item->id,
+                'record_id' =>      '',
+                'neatline_id' =>    $neatline->id,
+                'space_active' =>   (string) self::$__testParams['space_active'],
+                'time_active' =>    (string) self::$__testParams['time_active'],
+                'geocoverage' =>    self::$__testParams['geocoverage'],
+                'title' =>          self::$__testParams['title'],
+                'description' =>    self::$__testParams['description'],
+                'start_date' =>     self::$__testParams['start_date'],
+                'start_time' =>     self::$__testParams['start_time'],
+                'end_date' =>       self::$__testParams['end_date'],
+                'end_time' =>       self::$__testParams['end_time'],
+                'left_percent' =>   self::$__testParams['left_percent'],
+                'right_percent' =>  self::$__testParams['right_percent'],
+                'vector_color' =>   self::$__testParams['vector_color']
+            )
+        );
+
+        // 1 record.
+        $this->assertEquals($this->_recordsTable->count(), 1);
+
+        // Hit the route and capture the response.
+        $this->dispatch('neatline-exhibits/editor/save');
+
+        // 1 record.
+        $this->assertEquals($this->_recordsTable->count(), 1);
+
+    }
+
+    /**
      * When ordeirng data is saved via the /order route, data records should
      * updated correctly with the new order integers.
      *
@@ -1219,6 +1315,50 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
                 'neatline_id' => $exhibit->id,
                 'item_id' => '',
                 'record_id' => $record->id,
+                'extent' => 'BOUNDS()',
+                'zoom' => 5
+            )
+        );
+
+        // 1 record.
+        $this->assertEquals($this->_recordsTable->count(), 1);
+
+        // Hit the focus route, reget the record.
+        $this->dispatch('neatline-exhibits/editor/focus');
+        $record = $this->_recordsTable->find($record->id);
+
+        // Should not create a new record.
+        $this->assertEquals($this->_recordsTable->count(), 1);
+
+        // Check the attributes.
+        $this->assertEquals($record->map_bounds, 'BOUNDS()');
+        $this->assertEquals($record->map_zoom, 5);
+        $this->assertEquals($record->space_active, 1);
+
+    }
+
+    /**
+     * If there is an existing data record for an item/exhibit and the /focus
+     * route is hit with a post that specifies an item id but not a record id, the
+     * code should check for the existing record before creating a new one.
+     *
+     * @return void.
+     */
+    public function testFocusNoDuplication()
+    {
+
+        // Create entities.
+        $exhibit = $this->helper->_createNeatline();
+        $item = $this->helper->_createItem();
+        $record = new NeatlineDataRecord($item, $exhibit);
+        $record->save();
+
+        // Form the POST.
+        $this->request->setMethod('POST')
+            ->setPost(array(
+                'neatline_id' => $exhibit->id,
+                'item_id' => $item->id,
+                'record_id' => '',
                 'extent' => 'BOUNDS()',
                 'zoom' => 5
             )

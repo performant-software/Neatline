@@ -388,23 +388,23 @@ function neatline_getMapsForSelect()
 function neatline_imageSelect()
 {
 
-    // Get the images, split up into alphabetized buckets
-    // according to the parent item.
-    $bucketedImages = neatline_getImagesForSelect();
+    // // Get the images, split up into alphabetized buckets
+    // // according to the parent item.
+    // $bucketedImages = neatline_getImagesForSelect();
 
-    // Construct element.
-    $imageSelect = new Zend_Form_Element_Select('image');
-    $imageSelect->addMultiOption('none', '-');
+    // // Construct element.
+    // $imageSelect = new Zend_Form_Element_Select('image');
+    // $imageSelect->addMultiOption('none', '-');
 
-    foreach ($bucketedImages as $itemName => $images) {
-        $optionsArray = array();
-        foreach ($images as $image) {
-            $optionsArray[$image->id] = $image->original_filename;
-        }
-        $mapSelect->addMultiOptions(array($itemName => $optionsArray));
-    }
+    // foreach ($bucketedImages as $itemName => $images) {
+    //     $optionsArray = array();
+    //     foreach ($images as $image) {
+    //         $optionsArray[$image->id] = $image->original_filename;
+    //     }
+    //     $mapSelect->addMultiOptions(array($itemName => $optionsArray));
+    // }
 
-    return $mapSelect;
+    // return $mapSelect;
 
 }
 

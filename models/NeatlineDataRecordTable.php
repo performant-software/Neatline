@@ -116,6 +116,29 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
     }
 
     /**
+     * For a given item and exhibit combination, check to see if there is an existing
+     * record. If there is, return it. If not, create a new record and return it.
+     *
+     * @param Omeka_record $item The item.
+     * @param Omeka_record $exhibit The exhibit.
+     *
+     * @return void.
+     */
+    public function createOrGetRecord($item, $exhibit)
+    {
+
+        $record = $this->getRecordByItemAndExhibit($item, $exhibit);
+
+        if (!$record) {
+            $record = new NeatlineDataRecord($item, $exhibit);
+            $record->save();
+        }
+
+        return $record;
+
+    }
+
+    /**
      * Save a new record ordering.
      *
      * @param Omeka_record $neatline The exhibit record.

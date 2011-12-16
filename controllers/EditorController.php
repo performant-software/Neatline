@@ -224,7 +224,7 @@ class Neatline_EditorController extends Omeka_Controller_Action
         // Otherwise, create a new record.
         else {
             $item = $this->_itemsTable->find($itemId);
-            $record = new NeatlineDataRecord($item, $neatline);
+            $record = $this->_recordsTable->createOrGetRecord($item, $neatline);
         }
 
         // Save the record data.
@@ -428,7 +428,7 @@ class Neatline_EditorController extends Omeka_Controller_Action
         else {
             $neatline = $this->_neatlinesTable->find($neatlineId);
             $item = $this->_itemsTable->find($itemId);
-            $record = new NeatlineDataRecord($item, $neatline);
+            $record = $this->_recordsTable->createOrGetRecord($item, $neatline);
         }
 
         $record->map_bounds =       $extent;

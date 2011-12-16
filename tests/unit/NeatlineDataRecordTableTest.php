@@ -63,6 +63,58 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
     }
 
     /**
+     * createOrGetRecord() should return an existing record when one exists.
+     *
+     * @return void.
+     */
+    public function testCreateOrGetRecordWithRecord()
+    {
+
+        // Create item, exhibit, and record.
+        $item = $this->helper->_createItem();
+        $neatline = $this->helper->_createNeatline();
+        $record1 = new NeatlineDataRecord($item, $neatline);
+        $record1->save();
+        $record2 = new NeatlineDataRecord(null, $neatline);
+        $record2->save();
+
+        // 2 records.
+        $this->assertEquals($this->_recordsTable->count(), 2);
+
+        // Get the record and check identity.
+        $retrievedRecord = $this->_recordsTable->createOrGetRecord($item, $neatline);
+        $this->assertEquals($retrievedRecord->id, $record1->id);
+
+        // Still 2 records.
+        $this->assertEquals($this->_recordsTable->count(), 2);
+
+    }
+
+    /**
+     * createOrGetRecord() should create a new record when one does not exist.
+     *
+     * @return void.
+     */
+    public function testCreateOrGetRecordWithNoRecord()
+    {
+
+        // Create item, exhibit, and record.
+        $item = $this->helper->_createItem();
+        $neatline = $this->helper->_createNeatline();
+
+        // 0 records.
+        $this->assertEquals($this->_recordsTable->count(), 0);
+
+        // Get the record and check identity.
+        $newRecord = $this->_recordsTable->createOrGetRecord($item, $neatline);
+        $this->assertEquals($newRecord->item_id, $item->id);
+
+        // 1 record.
+        $this->assertEquals($this->_recordsTable->count(), 1);
+
+    }
+
+    /**
      * getRecordByItemAndExhibit() should return boolean false when there is
      * no record for the given exhibit/item combination.
      *
