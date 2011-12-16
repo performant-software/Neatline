@@ -426,9 +426,16 @@ class Neatline_EditorController extends Omeka_Controller_Action
 
         // Otherwise, create a new record.
         else {
+
             $neatline = $this->_neatlinesTable->find($neatlineId);
             $item = $this->_itemsTable->find($itemId);
-            $record = $this->_recordsTable->createOrGetRecord($item, $neatline);
+            $record = $this->_recordsTable->getRecordByItemAndExhibit($item, $neatline);
+
+            // If no existing record, create a record and default in DC values.
+            if (!$record) {
+                $record = new NeatlineDataRecord($item, $neatline);
+            }
+
         }
 
         $record->map_bounds =       $extent;

@@ -467,19 +467,6 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
         $item = $this->helper->_createItem();
         $neatline = $this->helper->_createNeatline();
 
-        // Create title and description element texts.
-        $this->helper->_createElementText(
-            $item,
-            'Dublin Core',
-            'Title',
-            'Test Title');
-
-        $this->helper->_createElementText(
-            $item,
-            'Dublin Core',
-            'Description',
-            'Test description.');
-
         // At the start, no records.
         $this->assertEquals($this->_recordsTable->count(), 0);
 
@@ -491,8 +478,6 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
 
         // Check that the parameter was set and that the DC defaults were applied.
         $record = $this->_recordsTable->getRecordByItemAndExhibit($item, $neatline);
-        $this->assertEquals($record->title, 'Test Title');
-        $this->assertEquals($record->description, 'Test description.');
 
     }
 

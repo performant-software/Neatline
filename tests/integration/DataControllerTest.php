@@ -245,4 +245,74 @@ class Neatline_DataControllerTest extends Omeka_Test_AppTestCase
 
     }
 
+    /**
+     * When there are null values for title and description on a record, the /udi
+     * templating should default in DC values.
+     *
+     * @return void.
+     */
+    public function testUdiDcDefaulting()
+    {
+
+        // Create an exhibit, item, and record.
+        $neatline = $this->helper->_createNeatline();
+        $item = $this->helper->_createItem();
+        $record = new NeatlineDataRecord($item, $neatline);
+
+        // Populate items-relevant attributes.
+        $record->space_active = 1;
+        $record->time_active = 1;
+        $record->save();
+
+        // Create element texts.
+        $this->helper->_createElementText(
+            $item,
+            'Dublin Core',
+            'Title',
+            'Test Title');
+
+        $this->helper->_createElementText(
+            $item,
+            'Dublin Core',
+            'Description',
+            'Test description.');
+
+        // Hit the route.
+        $this->dispatch('neatline-exhibits/' . $neatline->id . '/data/udi');
+
+        // Check markup.
+        $this->assertQuery('tr.item-row[recordid="' . $record->id . '"]');
+        $this->assertQuery('td.space img.active');
+        $this->assertQuery('td.time img.active');
+
+        $this->assertQueryContentContains(
+            'span.item-title-text',
+            'Test Title');
+
+        $this->assertQueryContentContains(
+            'div.item-description-content',
+            'Test description.');
+
+        // Disable the time status.
+        $record->space_active = 0;
+        $record->time_active = 1;
+        $record->save();
+
+        // Hit the route and check the 'active'/'inactive' classes.
+        $this->dispatch('neatline-exhibits/' . $neatline->id . '/data/udi');
+        $this->assertQuery('td.space img.inactive');
+        $this->assertQuery('td.time img.active');
+
+        // Disable the time status.
+        $record->space_active = 1;
+        $record->time_active = 0;
+        $record->save();
+
+        // Hit the route and check the 'active'/'inactive' classes.
+        $this->dispatch('neatline-exhibits/' . $neatline->id . '/data/udi');
+        $this->assertQuery('td.space img.active');
+        $this->assertQuery('td.time img.inactive');
+
+    }
+
 }

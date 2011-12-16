@@ -341,19 +341,6 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $item = $this->helper->_createItem();
         $neatline = $this->helper->_createNeatline();
 
-        // Create element texts.
-        $this->helper->_createElementText(
-            $item,
-            'Dublin Core',
-            'Title',
-            'Test Title');
-
-        $this->helper->_createElementText(
-            $item,
-            'Dublin Core',
-            'Description',
-            'Test description.');
-
         // Form the POST for a space change.
         $this->request->setMethod('POST')
             ->setPost(array(
@@ -380,10 +367,6 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         // Space status should be true, time status unchanged.
         $this->assertEquals($record->space_active, 1);
         $this->assertEquals($record->time_active, 0);
-
-        // Check that the DC defaults were pushed in.
-        $this->assertEquals($record->title, 'Test Title');
-        $this->assertEquals($record->description, 'Test description.');
 
     }
 
@@ -446,19 +429,6 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $item = $this->helper->_createItem();
         $neatline = $this->helper->_createNeatline();
 
-        // Create element texts.
-        $this->helper->_createElementText(
-            $item,
-            'Dublin Core',
-            'Title',
-            'Test Title');
-
-        $this->helper->_createElementText(
-            $item,
-            'Dublin Core',
-            'Description',
-            'Test description.');
-
         // Form the POST for a space change.
         $this->request->setMethod('POST')
             ->setPost(array(
@@ -485,10 +455,6 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         // Space status should be true, time status unchanged.
         $this->assertEquals($record->space_active, 0);
         $this->assertEquals($record->time_active, 1);
-
-        // Check that the DC defaults were pushed in.
-        $this->assertEquals($record->title, 'Test Title');
-        $this->assertEquals($record->description, 'Test description.');
 
     }
 

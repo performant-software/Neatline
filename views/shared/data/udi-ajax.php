@@ -31,7 +31,7 @@
 
         <tr class="item-row" recordid="<?php echo $record->id; ?>">
             <td class="item-title">
-                <span class="item-title-text"><?php echo $record->title; ?></span>
+                <span class="item-title-text"><?php echo $record->getTitle(); ?></span>
             </td>
             <td class="col-1 col-row space">
                 <img src="<?php echo img('space_icon.png'); ?>" class="<?php echo $record->space_active == 1 ? 'active' : 'inactive'; ?>" />

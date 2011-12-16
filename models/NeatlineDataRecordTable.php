@@ -127,8 +127,10 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
     public function createOrGetRecord($item, $exhibit)
     {
 
+        // Try to get existing record.
         $record = $this->getRecordByItemAndExhibit($item, $exhibit);
 
+        // If no record, create.
         if (!$record) {
             $record = new NeatlineDataRecord($item, $exhibit);
             $record->save();
@@ -177,20 +179,7 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
 
         // If there is not an existing record, create one.
         if (!$record) {
-
             $record = new NeatlineDataRecord($item, $neatline);
-
-            // Try to find DC values.
-            $record->title = neatline_getItemMetadata(
-                $item,
-                'Dublin Core',
-                'Title');
-
-            $record->description = neatline_getItemMetadata(
-                $item,
-                'Dublin Core',
-                'Description');
-
         }
 
         // Update.
