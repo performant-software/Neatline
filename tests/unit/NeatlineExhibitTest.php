@@ -196,16 +196,29 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
     {
 
         // Create an exhibit and map.
-        $neatline = $this->helper->_createNeatline();
+        $exhibit = $this->helper->_createNeatline();
         $map = new NeatlineMapsMap();
         $map->save();
-        $neatline->saveForm('Title', $map->id, 'none');
+        $exhibit->saveForm('Title', $map->id, 'none');
 
         // Get the map and check.
-        $retrievedMap = $neatline->getMap();
+        $retrievedMap = $exhibit->getMap();
         $this->assertEquals($map->id, $retrievedMap->id);
 
     }
+
+    /**
+     * The getImage() method should return an exhibit's image record.
+     *
+     * @return void.
+     */
+    public function testGetImage()
+    {
+
+        // TODO: How to mock a file?
+
+    }
+
 
     /**
      * The saveViewportPositions() method should commit viewport

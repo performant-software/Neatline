@@ -57,10 +57,11 @@ class Neatline_EditorController extends Omeka_Controller_Action
     public function indexAction()
     {
 
-        // Get records.
+        // Get records and shell out defaults.
         $id =                       $this->_request->getParam('id');
         $neatline =                 $this->_neatlinesTable->find($id);
         $map =                      $neatline->getMap();
+        $image =                    $neatline->getImage();
 
         // Get Omeka taxonomies.
         $collections =              $this->getTable('Collection')->findAll();
@@ -99,11 +100,11 @@ class Neatline_EditorController extends Omeka_Controller_Action
 
             // Get the image.
             $image = $this->_filesTable->find($neatline->image_id);
+
+            // Add the parameters array.
             $neatlineData['image'] = array(
                 'path' =>           $image->getWebPath(),
                 'name' =>           $image->original_filename
-                // 'height' =>         item_file('id'),
-                // 'width' =>          item_file('id')
             );
 
         }

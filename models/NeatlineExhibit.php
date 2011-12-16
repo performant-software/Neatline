@@ -128,6 +128,18 @@ class NeatlineExhibit extends Omeka_record
     }
 
     /**
+     * Fetch the parent image.
+     *
+     * @return Omeka_record The map.
+     */
+    public function getImage()
+    {
+
+        return $this->getTable('NeatlineMapsMap')->find($this->image_id);
+
+    }
+
+    /**
      * Save default viewport positions.
      *
      * @param string $mapExtent The bounding box for the map.
