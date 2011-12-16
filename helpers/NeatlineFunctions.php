@@ -236,24 +236,43 @@ function neatline_linkToNeatline($neatline)
 }
 
 /**
- * Build link to Neatline exhibit.
+ * Build link to the map.
  *
- * @param Omeka_record $neatline The Neatline.
+ * @param Omeka_record $neatline The exhibit.
  *
  * @return string The link.
  */
 function neatline_linkToMap($neatline)
 {
 
-    $map = $neatline->getMap();
+    // If there is a map.
+    if (!is_null($neatline->map_id)) {
 
-    if (!$map) {
-        return '<span class="neatline-null">( no map )</span>';
-    }
+        $map = $neatline->getMap();
 
-    else {
         $uri = uri('neatline-maps/maps/' . $map->id . '/files');
         return '<a class="neatline"  href="' . $uri . '">' . $map->name . '</a>';
+
+    }
+
+    // If there is an image.
+    else if (!is_null($neatline->image_id)) {
+
+        // Get the record.
+        $_db = get_db();
+        $_filesTable = $_db->getTable('File');
+        $image = $_filesTable->find($neatline->image_id);
+
+        // Get the path.
+        $uri = $image->getWebPath();
+        return '<a class="neatline"  href="files/show/' . $neatline->image_id . '">' .
+            $image->original_filename . '</a>';
+
+    }
+
+    // If there is no map.
+    else {
+        return '<span class="neatline-null">( no map )</span>';
     }
 
 }

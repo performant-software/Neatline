@@ -121,10 +121,6 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
         // Create an exhibit.
         $neatline = $this->helper->_createNeatline();
 
-        // Call with no map or image id's.
-        $errors = $neatline->validateForm('Title', 'none', 'none');
-        $this->assertEquals($errors['map'], 'Choose a map or an image.');
-
         // Call with map id.
         $errors = $neatline->validateForm('Title', 1, 'none');
         $this->assertEquals($errors, array());

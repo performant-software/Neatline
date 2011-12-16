@@ -64,11 +64,6 @@ class NeatlineExhibit extends Omeka_record
             $errors['title'] = 'Enter a title.';
         }
 
-        // No map or image.
-        if ($map == 'none' && $image == 'none') {
-            $errors['map'] = 'Choose a map or an image.';
-        }
-
         // Map and image.
         if (is_numeric($map) && is_numeric($image)) {
             $errors['map'] = 'Choose a map or an image, not both.';

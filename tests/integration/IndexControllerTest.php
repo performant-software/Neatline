@@ -246,45 +246,6 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
     }
 
     /**
-     * If neither a map nor an image is selected, flash error.
-     *
-     * @return void.
-     */
-    public function testNoMapOrImageError()
-    {
-
-        // Missing title.
-        $this->request->setMethod('POST')
-            ->setPost(array(
-                'title' => 'Test Title',
-                'map' => 'none',
-                'image' => 'none'
-            )
-        );
-
-        // No exhibits at the start.
-        $this->assertEquals($this->_exhibitsTable->count(), 0);
-
-        // Submit the form.
-        $this->dispatch('neatline-exhibits/add');
-
-        // Should redirect to the add view.
-        $this->assertModule('neatline');
-        $this->assertController('index');
-        $this->assertAction('add');
-
-        // Check for the error.
-        $this->assertQueryContentContains(
-            'div.neatline-error',
-            'Choose a map or an image.'
-        );
-
-        // No exhibit should have been created.
-        $this->assertEquals($this->_exhibitsTable->count(), 0);
-
-    }
-
-    /**
      * If a map and an image is selected, flash error.
      *
      * @return void.
