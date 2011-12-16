@@ -103,12 +103,14 @@ class Neatline_DataControllerTest extends Omeka_Test_AppTestCase
         $this->assertEquals(
             $response,
             '[{"id":' . $record1->id . ',' .
+            '"item_id":' . $item1->id . ',' .
             '"title":"Item 1 Title",' .
             '"color":"#ffffff",' .
             '"bounds":"BOUND(1)",' .
             '"zoom":4,' .
             '"wkt":"POINT(1,0)"},' .
             '{"id":' . $record2->id . ',' .
+            '"item_id":' . $item2->id . ',' .
             '"title":"Item 2 Title",' .
             '"color":"#000000",' .
             '"bounds":"BOUND(2)",' .

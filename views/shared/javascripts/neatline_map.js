@@ -251,7 +251,7 @@
 
                 // Add the database record.
                 self._db.insert({
-                    itemid: null,
+                    itemid: item.item_id,
                     layerid: vectorLayer.id,
                     recordid: recordid,
                     data: item,
