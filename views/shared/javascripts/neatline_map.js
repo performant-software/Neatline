@@ -383,7 +383,6 @@
             // Store the current edit item so that the layer can be reactivatee as
             // the current layer after save.
             this._currentEditItem = item;
-            console.log(this._currentEditLayer);
 
             // If the item does not have an existing vector layer, create a new one.
             if (!this._currentEditLayer) {
