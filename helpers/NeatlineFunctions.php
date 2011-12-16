@@ -381,11 +381,11 @@ function neatline_getMapsForSelect()
 /**
  * Construct the images dropdown select.
  *
- * @param integer $id The id of the selected map.
+ * @param integer $id The id of the selected image.
  *
  * @return void.
  */
-function neatline_imageSelect()
+function neatline_imageSelect($id)
 {
 
     // Get the images, split up into alphabetized buckets
@@ -403,6 +403,9 @@ function neatline_imageSelect()
         }
         $imageSelect->addMultiOptions(array($itemName => $optionsArray));
     }
+
+    // Set the default.
+    $imageSelect->setValue($id);
 
     return $imageSelect;
 

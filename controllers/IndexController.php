@@ -99,11 +99,11 @@ class Neatline_IndexController extends Omeka_Controller_Action
 
             // Validate.
             $errors = $neatline->validateForm($title, $map, $image);
+            $neatline->saveForm($title, $map, $image);
 
             // If no errors, save form and redirect.
             if (count($errors) == 0) {
 
-                $neatline->saveForm($title, $map, $image);
                 $neatline->save();
 
                 return $this->_redirect('neatline-exhibits');
