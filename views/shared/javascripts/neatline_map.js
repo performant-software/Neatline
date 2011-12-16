@@ -291,8 +291,6 @@
                     var record = self._db({ layerid: feature.layer.id }).first();
                     self._clickedFeature = feature;
 
-                    console.log(record);
-
                     // Trigger out to the deployment code.
                     self._trigger('featureclick', {}, {
                         'recordid': record.recordid

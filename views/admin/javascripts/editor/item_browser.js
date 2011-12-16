@@ -392,6 +392,7 @@
                 // Update the recordid attribute on the current item.
                 'updatedid': function(event, obj) {
                     self._currentFormItem.attr('recordid', obj.recordid);
+                    self.idToItem[parseInt(obj.recordid)] = self._currentFormItem;
                 }
 
             });
