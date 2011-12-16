@@ -245,7 +245,10 @@ class Neatline_EditorController extends Omeka_Controller_Action
             $timeStatus
         );
 
-        echo json_encode($statuses);
+        echo json_encode(array(
+            'statuses' => $statuses,
+            'recordid' => $record->id
+        ));
 
     }
 

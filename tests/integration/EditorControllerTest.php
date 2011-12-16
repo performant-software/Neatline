@@ -668,7 +668,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         // Test the raw construction with no available DC values.
         $this->assertEquals(
             $response,
-            '{"space":true,"time":true}'
+            '{"statuses":{"space":true,"time":true},"recordid":' . $record->id . '}'
         );
 
         // Get the record and check the attributes.
@@ -783,7 +783,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         // Test the raw construction with no available DC values.
         $this->assertEquals(
             $response,
-            '{"space":true,"time":true}'
+            '{"statuses":{"space":true,"time":true},"recordid":1}'
         );
 
         // Get the record and check the attributes.
@@ -900,7 +900,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         // Test the raw construction with no available DC values.
         $this->assertEquals(
             $response,
-            '{"space":true,"time":true}'
+            '{"statuses":{"space":true,"time":true},"recordid":' . $record->id . '}'
         );
 
         // Get the record and check the attributes.

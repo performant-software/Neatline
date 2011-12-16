@@ -425,7 +425,7 @@
          */
         _updateTitleText: function() {
 
-            if (typeof this.itemId === 'undefined' && this.title.val() != '') {
+            if (this.itemId == '' && this.title.val() != '') {
                 this._trigger('settitle', {}, { 'text': this.title.val() });
             }
 
@@ -635,14 +635,19 @@
                     self._trigger('savecomplete');
 
                     // Update space tracker.
-                    if (data.space) {
+                    if (data.statuses.space) {
                         self._trigger('spaceactive');
                     }
 
                     // Update time tracker.
-                    if (data.time) {
+                    if (data.statuses.time) {
                         self._trigger('timeactive');
                     }
+
+                    // Manifest the recordid on the item row.
+                    self._trigger('updatedid', {}, {
+                        'recordid': data.recordid
+                    });
 
                     // Update the title text, if necessary.
                     self._updateTitleText();
