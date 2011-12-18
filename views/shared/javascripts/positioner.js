@@ -30,12 +30,30 @@
 
         options: {
 
+            // Markup hooks.
+            markup: {
+                map: '#drag-map',
+                timeline: '#drag-timeline',
+                items: '#drag-items'
+            },
+
+            // Positioning constants.
+            constants: {
+                h_percent: 20,
+                v_percent: 60
+            }
+
         },
 
         /*
-         * Shell out local trackers for parameters.
+         * Get markup, shell out local trackers for parameters.
          */
         _create: function() {
+
+            // Get the block markup.
+            this.map =                  $(this.options.markup.map);
+            this.timeline =             $(this.options.markup.timeline);
+            this.items =                $(this.options.markup.timeline);
 
             // Trackers for positioning parameters.
             this._is_map =              false;
@@ -43,6 +61,32 @@
             this._is_items =            false;
             this._items_h =             'right'; // 'right' or 'left'.
             this._items_v =             'full';  // 'full' or 'partial'.
+
+            // Dimensions tracker.
+            this.positions: {
+
+                map: {
+                    height: null,
+                    width:  null,
+                    top:    null,
+                    left:   null
+                },
+
+                timeline: {
+                    height: null,
+                    width:  null,
+                    top:    null,
+                    left:   null
+                },
+
+                items: {
+                    height: null,
+                    width:  null,
+                    top:    null,
+                    left:   null
+                }
+
+            }
 
         },
 
@@ -60,7 +104,9 @@
          */
         apply: function() {
 
-
+            this.map.css(this.positions.map);
+            this.timeline.css(this.positions.timeline);
+            this.items.css(this.positions.items);
 
         },
 

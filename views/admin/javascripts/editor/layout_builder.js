@@ -86,26 +86,18 @@
             this.buttons = $('#' + this.options.options_id);
             this.dragbox = $('#' + this.options.dragbox_id);
 
-            // Get fixed pixel values for heights.
-            this.getPxConstants();
-
-            // Create draggers.
-            this._createDraggers();
-
-            // Squash text selection and gloss the buttons.
-            this._disableSelect();
-            this._createButtons();
-
-            // Set tracker variables for element position.
-            this._setStartingParameters();
-
             // Set tracker arrays that record the last parameter
             // loadouts that triggered a div slide.
             this._last_map_slide_params = null;
             this._last_timeline_slide_params = null;
             this._last_undated_items_slide_params = null;
 
-            // Gloss.
+            // Start-up routine.
+            this.getPxConstants();
+            this._createDraggers();
+            this._disableSelect();
+            this._createButtons();
+            this._setStartingParameters();
             this._addDragEvents();
 
         },
@@ -1179,7 +1171,7 @@
 
         __createUndatedItemsDiv: function() {
 
-            return $('<div id="drag-undated-items" class="draggable">\
+            return $('<div id="drag-items" class="draggable">\
                         <span class="drag-tag">Items</span>\
                       </div>');
 
