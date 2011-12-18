@@ -28,24 +28,14 @@
 
         options: {
 
-            // Css dimension defaults, animation constants.
-            top_block_percentage: 60,
-            undated_items_width: 150,
-            vertical_offset_tier1: 75,
-            vertical_offset_tier2: 150,
-            gloss_fade_duration: 300,
-            slide_duration: 200,
-
-            // Starting configuration params.
-            def_top_element: 'map',
-            def_udi_position: 'right',
-            def_udi_height: 'partial',
-            def_is_map: false,
-            def_is_timeline: false,
-            def_is_items: false,
-
-            // Miscellaneous
-            no_selection_string: '-',
+            // CSS constants.
+            css: {
+                top_block_percentage: 60,
+                undated_items_width: 150,
+                vertical_offset_tier1: 75,
+                vertical_offset_tier2: 150,
+                gloss_fade_duration: 300,
+            },
 
             // Hex defaults.
             colors: {
@@ -83,32 +73,47 @@
             this._last_timeline_slide_params = null;
             this._last_items_slide_params = null;
 
+            // Build and prepare markup.
+            this._disableSelect();
+            this._createDraggers();
+
+            // Instantiate the positioning manager.
+            this.dragbox.positioner({
+                markup: {
+                    map: '#drag-map',
+                    timeline: '#drag-timeline',
+                    items: '#drag-items'
+                }
+            });
+
             // Start-up routine.
             this.getPxConstants();
             this._createButtons();
-            this._createDraggers();
-            this._disableSelect();
             this._setStartingParameters();
             this._addDragEvents();
 
         },
 
+        /*
+         * Pull the saved positioning constants out of the Nealtine global
+         * and prepare the buttons.
+         */
         _setStartingParameters: function() {
 
             // Get starting parameters out of the Neatline global.
             this._top_element =             Neatline.top_element;
-            this._items_position =          Neatline.undated_items_position;
-            this._items_height =            Neatline.undated_items_height;
-            this._is_map =                  Neatline.is_map;
-            this._is_timeline =             Neatline.is_timeline;
-            this._is_items =                Neatline.is_items;
+            this._items_h_pos =             Neatline.items_h_pos;
+            this._items_v_pos =             Neatline.items_v_pos;
+            this._items_height =            Neatline.items_height;
+            this._is_map =                  Boolean(Neatline.is_map);
+            this._is_timeline =             Boolean(Neatline.is_timeline);
+            this._is_items =                Boolean(Neatline.is_items);
 
-            // Enable the map toggle toggle button, if there is a map.
-            if (Neatline.map_id != null || Neatline.image_id) {
-                this.map_toggle.togglebutton('enable');
-            }
+            // Push starting params into positioner and do first position.
+            this._computePositions();
 
-            // Enable the timeline toggle button.
+            // Enable the buttons.
+            this.map_toggle.togglebutton('enable');
             this.timeline_toggle.togglebutton('enable');
             this.items_toggle.togglebutton('enable');
 
@@ -138,18 +143,36 @@
 
         },
 
+        /*
+         * Re-measure the container div.
+         */
         getPxConstants: function() {
 
-            this._dragbox_height = this.dragbox.height();
-            this._dragbox_width = this.dragbox.width();
-            this._dragbox_position = this.dragbox.offset();
-
-            this._top_block_height = this._dragbox_height * (this.options.top_block_percentage/100);
-            this._bottom_block_height = this._dragbox_height - this._top_block_height;
-            this._undated_items_left_offset = this._dragbox_width - this.options.undated_items_width;
+            this.dragbox.positioner('measure');
 
         },
 
+        /*
+         * Compute new positions from the current values of the trackers.
+         */
+        _computePositions: function() {
+
+            this.positions = this.dragbox.positioner(
+                'compute',
+                this._is_map,
+                this._is_timeline,
+                this._is_items,
+                this._top_element,
+                this._items_v_pos,
+                this._items_h_pos,
+                this._items_height
+            );
+
+        },
+
+        /*
+         * Turn off text selection on the container.
+         */
         _disableSelect: function() {
 
             // Turn off text selection on the whole container div.
@@ -190,31 +213,33 @@
             this.items_toggle.togglebutton({
                 pressed_by_default: false,
                 enabled_by_default: false,
-                press: $.proxy(this._toggleUndatedItems, this),
-                unpress: $.proxy(this._toggleUndatedItems, this)
+                press: $.proxy(this._toggleItems, this),
+                unpress: $.proxy(this._toggleItems, this)
             });
 
         },
 
+        /*
+         * Build the markup for the drag boxes.
+         */
         _createDraggers: function() {
 
-            // Create the map.
-            this.map_drag = this.__createMapDiv();
-
-            // Create the timeline.
-            this.timeline_drag = this.__createTimelineDiv();
-
-            // Create the undated items.
-            this.undated_items_drag = this.__createUndatedItemsDiv();
+            // Create the boxes.
+            this.map_drag =         this.__createMapDiv();
+            this.timeline_drag =    this.__createTimelineDiv();
+            this.items_drag =       this.__createItemsDiv();
 
             // Inject.
             this.dragbox.append(
                 this.map_drag,
                 this.timeline_drag,
-                this.undated_items_drag);
+                this.items_drag);
 
         },
 
+        /*
+         * Bind event listeners onto the drag boxes.
+         */
         _addDragEvents: function() {
 
             var self = this;
@@ -249,18 +274,12 @@
                 'mouseenter': function() {
                     if (!self._is_dragging) {
                         self.__timelineHighlight('enter');
-                        if (self._items_height == 'partial') {
-                            self.__undatedItemsHighlight('enter');
-                        }
                     }
                 },
 
                 'mouseleave': function() {
                     if (!self._is_dragging) {
                         self.__timelineHighlight('leave');
-                        if (self._items_height == 'partial') {
-                            self.__undatedItemsHighlight('leave');
-                        }
                     }
                 },
 
@@ -274,7 +293,7 @@
             });
 
             // Gloss undated items.
-            this.undated_items_drag.bind({
+            this.items_drag.bind({
 
                 'mouseenter': function() {
                     if (!self._is_dragging) {
@@ -291,7 +310,7 @@
                 'mousedown': function(e) {
                     if (!self._is_dragging) {
                         self._current_dragger = 'undated';
-                        self.__doUndatedItemsDrag(e);
+                        self.__doItemsDrag(e);
                     }
                 }
 
@@ -299,45 +318,46 @@
 
         },
 
-        _repositionDraggers: function() {
+        /*
+         * Re-render the block positioning.
+         */
+        _reposition: function() {
 
-            // Map.
-            this.map_drag.css({
-                'height': this.__getMapHeight(),
-                'width': this.__getMapWidth(),
-                'top': this.__getMapTopOffset(),
-                'left': this.__getMapLeftOffset()
-            });
-
-            // Timeline.
-            this.timeline_drag.css({
-                'height': this.__getTimelineHeight(),
-                'width': this.__getTimelineWidth(),
-                'top': this.__getTimelineTopOffset(),
-                'left': this.__getTimelineLeftOffset()
-            });
-
-            // Undated items.
-            this.undated_items_drag.css({
-                'height': this.__getUndatedItemsHeight(),
-                'width': this.__getUndatedItemsWidth(),
-                'top': this.__getUndatedItemsTopOffset(),
-                'left': this.__getUndatedItemsLeftOffset()
-            });
+            // Manifest the parameters.
+            this.dragbox.positioner('apply');
 
             // Center tags.
             this.centerAllTags();
 
         },
 
+        /*
+         * Center the label for an individual block.
+         */
+        _position_tag: function(draggable) {
+
+            var tag = draggable.find('.drag-tag');
+            var draggable_height = draggable.height();
+            var tag_height = tag.height();
+
+            tag.css('top', (draggable_height/2)-(tag_height/2) + 'px');
+
+        },
+
+        /*
+         * Center the block labels.
+         */
         centerAllTags: function() {
 
             this._position_tag(this.map_drag);
             this._position_tag(this.timeline_drag);
-            this._position_tag(this.undated_items_drag);
+            this._position_tag(this.items_drag);
 
         },
 
+        /*
+         * Toggle the map block.
+         */
         _toggleMap: function() {
 
             switch(this._is_map) {
@@ -348,6 +368,12 @@
 
                     // Display none the map.
                     this.map_drag.css('display', 'none');
+
+                    // If no timeline, disable items.
+                    if (!this._is_timeline) {
+                        this.items_toggle.togglebutton('disable');
+                        this._toggleItems();
+                    }
 
                 break;
 
@@ -363,10 +389,13 @@
             }
 
             // Recalculate all positions for all divs.
-            this._repositionDraggers();
+            this._reposition();
 
         },
 
+        /*
+         * Toggle the timeline block.
+         */
         _toggleTimeline: function() {
 
             switch(this._is_timeline) {
@@ -378,12 +407,10 @@
                     // Display none the timeline.
                     this.timeline_drag.css('display', 'none');
 
-                    this._recuperate_udi_on_timeline_toggle = false;
-
-                    if (this._is_items) {
-                        this._toggleUndatedItems();
+                    // If no timeline, disable items.
+                    if (!this._is_map) {
                         this.items_toggle.togglebutton('disable');
-                        this._recuperate_udi_on_timeline_toggle = true;
+                        this._toggleItems();
                     }
 
                 break;
@@ -395,21 +422,19 @@
                     // Show the div.
                     this.timeline_drag.css('display', 'block');
 
-                    if (this._recuperate_udi_on_timeline_toggle) {
-                        this.items_toggle.togglebutton('enable');
-                        this._toggleUndatedItems();
-                    }
-
                 break;
 
             }
 
             // Recalculate all positions for all divs.
-            this._repositionDraggers();
+            this._reposition();
 
         },
 
-        _toggleUndatedItems: function() {
+        /*
+         * Toggle the items block.
+         */
+        _toggleItems: function() {
 
             switch(this._is_items) {
 
@@ -418,7 +443,7 @@
                     this._is_items = false;
 
                     // Display none the timeline.
-                    this.undated_items_drag.css('display', 'none');
+                    this.items_drag.css('display', 'none');
 
                 break;
 
@@ -427,27 +452,20 @@
                     this._is_items = true;
 
                     // Show the div.
-                    this.undated_items_drag.css('display', 'block');
+                    this.items_drag.css('display', 'block');
 
                 break;
 
             }
 
             // Recalculate all positions for all divs.
-            this._repositionDraggers();
+            this._reposition();
 
         },
 
-        _position_tag: function(draggable) {
-
-            var tag = draggable.find('.drag-tag');
-            var draggable_height = draggable.height();
-            var tag_height = tag.height();
-
-            tag.css('top', (draggable_height/2)-(tag_height/2) + 'px');
-
-        },
-
+        /*
+         * Slide a block tag to the center of the container.
+         */
         _animate_position_tag: function(draggable, height) {
 
             var tag = draggable.find('.drag-tag');
@@ -457,10 +475,17 @@
 
         },
 
+
         /*
+         * =================
          * Glossing and dragging methods.
+         * =================
          */
 
+
+        /*
+         * Highlight the map block.
+         */
         __mapHighlight: function(enter_or_leave) {
 
             // Figure out which color to tween to.
@@ -478,10 +503,13 @@
 
             this.map_drag.clearQueue().animate({
                 'background-color': target
-            }, this.options.gloss_fade_duration);
+            }, this.options.css.gloss_fade_duration);
 
         },
 
+        /*
+         * Highlight the timeline block.
+         */
         __timelineHighlight: function(enter_or_leave) {
 
             // Figure out which color to tween to.
@@ -499,10 +527,13 @@
 
             this.timeline_drag.clearQueue().animate({
                 'background-color': target
-            }, this.options.gloss_fade_duration);
+            }, this.options.css.gloss_fade_duration);
 
         },
 
+        /*
+         * Highlight the items block.
+         */
         __undatedItemsHighlight: function(enter_or_leave) {
 
             // Figure out which color to tween to.
@@ -518,12 +549,15 @@
 
             }
 
-            this.undated_items_drag.clearQueue().animate({
+            this.items_drag.clearQueue().animate({
                 'background-color': target
-            }, this.options.gloss_fade_duration);
+            }, this.options.css.gloss_fade_duration);
 
         },
 
+        /*
+         * Map drag handler.
+         */
         __doMapDrag: function(trigger_event_object) {
 
             this._is_dragging = true;
@@ -601,6 +635,9 @@
 
         },
 
+        /*
+         * Timeline drag handler.
+         */
         __doTimelineDrag: function(trigger_event_object) {
 
             this._is_dragging = true;
@@ -612,8 +649,8 @@
             // Get starting div offsets.
             var timelineStartingOffsetX = this.__getTimelineLeftOffset();
             var timelineStartingOffsetY = this.__getTimelineTopOffset();
-            var undatedItemsStartingOffsetX = this.__getUndatedItemsLeftOffset();
-            var undatedItemsStartingOffsetY = this.__getUndatedItemsTopOffset();
+            var undatedItemsStartingOffsetX = this.__getItemsLeftOffset();
+            var undatedItemsStartingOffsetY = this.__getItemsTopOffset();
 
             // Bind self.
             var self = this;
@@ -624,7 +661,7 @@
                 'z-index': 99
             });
 
-            this.undated_items_drag.css({
+            this.items_drag.css({
                 'opacity': 0.5,
                 'z-index': 99
             });
@@ -644,7 +681,7 @@
                     });
 
                     if (self._items_height == 'partial') {
-                        self.undated_items_drag.css({
+                        self.items_drag.css({
                             'left': undatedItemsStartingOffsetX + offsetX,
                             'top': undatedItemsStartingOffsetY + offsetY
                         });
@@ -695,7 +732,10 @@
 
         },
 
-        __doUndatedItemsDrag: function(trigger_event_object) {
+        /*
+         * Items drag handler.
+         */
+        __doItemsDrag: function(trigger_event_object) {
 
             this._is_dragging = true;
 
@@ -704,8 +744,8 @@
             var startingY = trigger_event_object.pageY;
 
             // Get starting div offsets.
-            var StartingOffsetX = this.__getUndatedItemsLeftOffset();
-            var StartingOffsetY = this.__getUndatedItemsTopOffset();
+            var StartingOffsetX = this.__getItemsLeftOffset();
+            var StartingOffsetY = this.__getItemsTopOffset();
 
             // Set starting height and position status.
             this._udi_height_at_start_of_drag = this._items_height;
@@ -715,11 +755,11 @@
             var self = this;
 
             // Create typable facades for vertical tier parameters.
-            var vt1 = this.options.vertical_offset_tier1;
-            var vt2 = this.options.vertical_offset_tier2;
+            var vt1 = this.options.css.vertical_offset_tier1;
+            var vt2 = this.options.css.vertical_offset_tier2;
 
             // Make the drag div see-through and always on top.
-            this.undated_items_drag.css({
+            this.items_drag.css({
                 'opacity': 0.5,
                 'z-index': 99
             });
@@ -733,7 +773,7 @@
                     var offsetY = e.pageY - startingY;
 
                     // Apply new position.
-                    self.undated_items_drag.css({
+                    self.items_drag.css({
                         'left': StartingOffsetX + offsetX,
                         'top': StartingOffsetY + offsetY
                     });
@@ -885,7 +925,7 @@
 
                 'mouseup': function() {
 
-                    self.__slideUndatedItems(true);
+                    self.__slideItems(true);
                     self._window.unbind('mousemove mouseup');
 
                 }
@@ -894,6 +934,9 @@
 
         },
 
+        /*
+         * Manifest new timeline position.
+         */
         __slideTimeline: function(ending_slide) {
 
             var self = this;
@@ -955,69 +998,9 @@
 
         },
 
-        __slideTimelineAndUndatedItems: function(ending_slide) {
-
-            var self = this;
-
-            var newTimelineHeight = this.__getTimelineHeight();
-            var newUndatedItemsHeight = this.__getUndatedItemsHeight();
-
-            if (ending_slide) {
-
-                // Slide the timeline and undated items.
-                this.timeline_drag.stop().animate({
-                    'height': newTimelineHeight,
-                    'width': this.__getTimelineWidth(),
-                    'top': this.__getTimelineTopOffset(),
-                    'left': this.__getTimelineLeftOffset(),
-                    'opacity': 1,
-                    'z-index': 0
-                });
-
-                this.undated_items_drag.stop().animate({
-                    'height': newUndatedItemsHeight,
-                    'width': this.__getUndatedItemsWidth(),
-                    'top': this.__getUndatedItemsTopOffset(),
-                    'left': this.__getUndatedItemsLeftOffset(),
-                    'opacity': 1,
-                    'z-index': 0
-                }, function() {
-
-                    // On complete, if the slide is an ending
-                    // slide, unset the dragging tracker, and forcibly
-                    // mouseleave the dragger div.
-                    self._is_dragging = false;
-                    self.timeline_drag.trigger('mouseleave');
-                    self.undated_items_drag.trigger('mouseleave');
-
-                });
-
-            }
-
-            else {
-
-                // Slide the timeline and undated items.
-                this.timeline_drag.stop().animate({
-                    'height': newTimelineHeight,
-                    'width': this.__getTimelineWidth(),
-                    'top': this.__getTimelineTopOffset(),
-                    'left': this.__getTimelineLeftOffset()
-                });
-
-                this.undated_items_drag.stop().animate({
-                    'height': newUndatedItemsHeight,
-                    'width': this.__getUndatedItemsWidth(),
-                    'top': this.__getUndatedItemsTopOffset(),
-                    'left': this.__getUndatedItemsLeftOffset()
-                });
-
-            }
-
-            this._animate_position_tag(this.timeline_drag, newTimelineHeight);
-            this._animate_position_tag(this.undated_items_drag, newUndatedItemsHeight);
-
-        },
-
+        /*
+         * Manifest new map position.
+         */
         __slideMap: function(ending_slide) {
 
             var self = this;
@@ -1078,19 +1061,22 @@
 
         },
 
-        __slideUndatedItems: function(ending_slide) {
+        /*
+         * Manifest new items position.
+         */
+        __slideItems: function(ending_slide) {
 
             var self = this;
-            var newUndatedItemsHeight = this.__getUndatedItemsHeight();
+            var newItemsHeight = this.__getItemsHeight();
 
             if (ending_slide) {
 
                 // Slide the timeline and undated items.
-                this.undated_items_drag.stop().animate({
-                    'height': newUndatedItemsHeight,
-                    'width': this.__getUndatedItemsWidth(),
-                    'top': this.__getUndatedItemsTopOffset(),
-                    'left': this.__getUndatedItemsLeftOffset(),
+                this.items_drag.stop().animate({
+                    'height': newItemsHeight,
+                    'width': this.__getItemsWidth(),
+                    'top': this.__getItemsTopOffset(),
+                    'left': this.__getItemsLeftOffset(),
                     'opacity': 1,
                     'z-index': 0
                 }, function() {
@@ -1099,7 +1085,7 @@
                     // slide, unset the dragging tracker, and forcibly
                     // mouseleave the dragger div.
                     self._is_dragging = false;
-                    self.undated_items_drag.trigger('mouseleave');
+                    self.items_drag.trigger('mouseleave');
 
                 });
 
@@ -1108,44 +1094,30 @@
             else {
 
                 // Slide the timeline and undated items.
-                this.undated_items_drag.stop().animate({
-                    'height': newUndatedItemsHeight,
-                    'width': this.__getUndatedItemsWidth(),
-                    'top': this.__getUndatedItemsTopOffset(),
-                    'left': this.__getUndatedItemsLeftOffset()
+                this.items_drag.stop().animate({
+                    'height': newItemsHeight,
+                    'width': this.__getItemsWidth(),
+                    'top': this.__getItemsTopOffset(),
+                    'left': this.__getItemsLeftOffset()
                 });
 
             }
 
-            this._animate_position_tag(this.undated_items_drag, newUndatedItemsHeight);
-
-        },
-
-        __updateHiddenInputs: function() {
-
-            this.top_element_input.attr('value', this._top_element);
-            this.udi_position_input.attr('value', this._items_position);
-            this.udi_height_input.attr('value', this._items_height);
+            this._animate_position_tag(this.items_drag, newItemsHeight);
 
         },
 
 
         /*
-         * Positioning calculators and toggling helpers.
+         * =================
+         * Positioning calculators and DOM helpers.
+         * =================
          */
 
-        __toggleUndatedItemsButton: function() {
 
-            if (this._is_timeline) {
-                $('#toggle-undated-items').css('display', 'inline');
-            }
-
-            else {
-                $('#toggle-undated-items').css('display', 'none');
-            }
-
-        },
-
+        /*
+         * Build the map dragger.
+         */
         __createMapDiv: function() {
 
             return $('<div id="drag-map" class="draggable">\
@@ -1154,6 +1126,9 @@
 
         },
 
+        /*
+         * Build the timeline dragger.
+         */
         __createTimelineDiv: function() {
 
             return $('<div id="drag-timeline" class="draggable">\
@@ -1162,7 +1137,10 @@
 
         },
 
-        __createUndatedItemsDiv: function() {
+        /*
+         * Build the items dragger.
+         */
+        __createItemsDiv: function() {
 
             return $('<div id="drag-items" class="draggable">\
                         <span class="drag-tag">Items</span>\
@@ -1170,7 +1148,7 @@
 
         },
 
-        __getUndatedItemsHeight: function() {
+        __getItemsHeight: function() {
 
             var height = null;
 
@@ -1202,13 +1180,13 @@
 
         },
 
-        __getUndatedItemsWidth: function() {
+        __getItemsWidth: function() {
 
-            return this.options.undated_items_width;
+            return this.options.css.undated_items_width;
 
         },
 
-        __getUndatedItemsLeftOffset: function() {
+        __getItemsLeftOffset: function() {
 
             var left_offset = null;
 
@@ -1224,7 +1202,7 @@
 
         },
 
-        __getUndatedItemsTopOffset: function() {
+        __getItemsTopOffset: function() {
 
             var top_offset = null;
 
@@ -1261,7 +1239,7 @@
             var width = this._dragbox_width;
 
             if (this._items_height == 'full' && this._is_items) {
-                width -= this.options.undated_items_width;
+                width -= this.options.css.undated_items_width;
             }
 
             return width;
@@ -1297,7 +1275,7 @@
                 && this._is_items
                 && this._items_position == 'left') {
 
-                    offset = this.options.undated_items_width;
+                    offset = this.options.css.undated_items_width;
 
             }
 
@@ -1322,7 +1300,7 @@
             var width = this._dragbox_width;
 
             if (this._is_items) {
-                width -= this.options.undated_items_width;
+                width -= this.options.css.undated_items_width;
             }
 
             return width;
@@ -1352,7 +1330,7 @@
             var offset = 0;
 
             if (this._is_items && this._items_position == 'left') {
-                offset = this.options.undated_items_width;
+                offset = this.options.css.undated_items_width;
             }
 
             return offset;

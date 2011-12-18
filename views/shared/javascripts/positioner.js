@@ -39,7 +39,7 @@
 
             // Positioning constants.
             constants: {
-                h_percent:      20,
+                h_percent:      30,
                 v_percent:      60
             },
 
@@ -64,7 +64,7 @@
             // Get the block markup.
             this.map =                  $(this.options.markup.map);
             this.timeline =             $(this.options.markup.timeline);
-            this.items =                $(this.options.markup.timeline);
+            this.items =                $(this.options.markup.items);
 
             // Trackers for positioning parameters.
             this._is_map =              this.options.positions.is_map;
@@ -132,13 +132,13 @@
         compute: function(is_m, is_t, is_i, top, i_v_pos, i_h_pos, i_h) {
 
             // Set trackers.
-            this._is_map =              is_map;
-            this._is_timeline =         is_timeline;
-            this._is_items =            is_items;
+            this._is_map =              is_m;
+            this._is_timeline =         is_t;
+            this._is_items =            is_i;
             this._top =                 top;
-            this._items_v_pos =         items_v_pos;
-            this._items_h_pos =         items_h_pos;
-            this._items_height =        items_height;
+            this._items_v_pos =         i_v_pos;
+            this._items_h_pos =         i_h_pos;
+            this._items_height =        i_h;
 
             /*
              * Case enumeration.
@@ -313,6 +313,8 @@
                     else if (this._items_h_pos == 'right' &&
                              this._items_height == 'full') {
 
+                        console.log('full right');
+
                         this.positions = {
 
                             map: {
@@ -333,7 +335,7 @@
                                 height: this.height,
                                 width:  this.minorWidth,
                                 top:    0,
-                                left:   null
+                                left:   this.majorWidth
                             }
 
                         };
@@ -804,6 +806,9 @@
 
             }
 
+            // Return the object.
+            return this.positions;
+
         },
 
         /*
@@ -811,7 +816,31 @@
          */
         apply: function() {
 
+            console.log(this.positions);
 
+            // Map.
+            if (this._is_map) {
+                this.map.css('display', 'block');
+                this.map.css(this.positions.map);
+            } else {
+                this.map.css('display', 'none');
+            }
+
+            // Timeline.
+            if (this._is_timeline) {
+                this.timeline.css('display', 'block');
+                this.timeline.css(this.positions.timeline);
+            } else {
+                this.timeline.css('display', 'none');
+            }
+
+            // Items.
+            if (this._is_items) {
+                this.items.css('display', 'block');
+                this.items.css(this.positions.items);
+            } else {
+                this.items.css('display', 'none');
+            }
 
         }
 
