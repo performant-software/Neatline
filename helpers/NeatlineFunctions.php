@@ -35,9 +35,11 @@
 function neatline_queueAdminCss()
 {
 
+    // Custom CSS.
     queue_css('neatline-admin');
     queue_css('bootstrap-excerpts');
 
+    // Google fonts.
     echo __v()->partial('index/_fonts.php');
 
 }
@@ -50,11 +52,13 @@ function neatline_queueAdminCss()
 function neatline_queueEditorAssets()
 {
 
+    // CSS.
     queue_css('neatline-editor');
     queue_css('layout-builder');
     queue_css('gradient-builder');
     queue_css('jquery.miniColors');
 
+    // Application classes and controller script.
     queue_js('editor/item_browser', 'javascripts');
     queue_js('editor/item_filter', 'javascripts');
     queue_js('editor/item_form', 'javascripts');
@@ -66,6 +70,8 @@ function neatline_queueEditorAssets()
     queue_js('editor/item_orderer', 'javascripts');
     queue_js('editor/gradient_builder', 'javascripts');
     queue_js('editor/_constructEditor', 'javascripts');
+
+    // 3rd party code.
     queue_js('libraries/jquery.miniColors-0.1/jquery.miniColors.min', 'javascripts');
     queue_js('libraries/taffy-min', 'javascripts');
 
@@ -97,15 +103,17 @@ function neatline_queueNeatlineAssets()
     queue_css('neatline');
     queue_css('neatline-timeline');
 
-    // The Neatline JavaScript application.
+    // Application classes.
     queue_js('neatline', 'javascripts');
     queue_js('neatline_map', 'javascripts');
     queue_js('neatline_timeline', 'javascripts');
     queue_js('neatline_items', 'javascripts');
     queue_js('span_styler', 'javascripts');
+    queue_js('positioner', 'javascripts');
     queue_js('_utilities', 'javascripts/libraries');
     queue_js('jquery.getscrollbarwidth', 'javascripts/libraries');
 
+    // Google fonts.
     echo __v()->partial('index/_fonts.php');
 
 }
