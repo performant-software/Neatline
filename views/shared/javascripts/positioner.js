@@ -95,7 +95,35 @@
          */
         compute: function() {
 
+            // MAP and TIMELINE and ITEMS:
+            if (this._is_map && this._is_timeline && this._is_items) {
 
+            }
+
+            // MAP and ITEMS:
+            else if (this._is_map && this._is_items && !this._is_timeline) {
+
+            }
+
+            // TIMELINE and ITEMS:
+            else if (this._is_timeline && this._is_items && !this._is_map) {
+
+            }
+
+            // MAP and TIMELINE:
+            else if (this._is_map && this._is_timeline && !this._is_items) {
+
+            }
+
+            // MAP:
+            else if (this._is_map && !this._is_timeline && !this._is_items) {
+
+            }
+
+            // TIMELINE:
+            else if (this._is_timeline && !this._is_map && !this._is_items) {
+
+            }
 
         },
 
