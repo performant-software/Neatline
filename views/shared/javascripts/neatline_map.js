@@ -201,8 +201,8 @@
             this.map = new OpenLayers.Map('map', options);
 
             // Build the bounds and size objects.
-            var bounds = new OpenLayers.Bounds(0, 0, 2496, 3120);
-            var size = new OpenLayers.Size(2496, 3120);
+            var bounds = new OpenLayers.Bounds(0, 0, Neatline.image.width, Neatline.image.height);
+            var size = new OpenLayers.Size(Neatline.image.width, Neatline.image.height);
 
             // Build the baselayer.
             this.baseLayer = new OpenLayers.Layer.Image(
