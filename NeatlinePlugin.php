@@ -90,44 +90,45 @@ class NeatlinePlugin
     {
 
         $sql = "CREATE TABLE IF NOT EXISTS `{$this->_db->prefix}neatline_exhibits` (
-                `id` int(10) unsigned not null auto_increment,
-                `added` timestamp NOT NULL default NOW(),
-                `name` tinytext collate utf8_unicode_ci,
-                `map_id` int(10) unsigned NULL,
-                `image_id` int(10) unsigned NULL,
-                `top_element` ENUM('map', 'timeline') DEFAULT 'map',
-                `undated_items_position` ENUM('right', 'left') DEFAULT 'right',
-                `undated_items_height` ENUM('partial', 'full') DEFAULT 'partial',
-                `is_map` tinyint(1) NOT NULL,
-                `is_timeline` tinyint(1) NOT NULL,
-                `is_undated_items` tinyint(1) NOT NULL,
-                `default_map_bounds` varchar(100) NULL,
-                `default_map_zoom` int(10) unsigned NULL,
-                `default_timeline_focus_date` varchar(100) NULL,
+                `id`                    int(10) unsigned not null auto_increment,
+                `added`                 TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                `name`                  tinytext collate utf8_unicode_ci,
+                `map_id`                int(10) unsigned NULL,
+                `image_id`              int(10) unsigned NULL,
+                `top_element`           ENUM('map', 'timeline') DEFAULT 'map',
+                `items_h_pos`           ENUM('right', 'left') DEFAULT 'right',
+                `items_v_pos`           ENUM('top', 'bottom') DEFAULT 'bottom',
+                `items_height`          ENUM('full', 'partial') DEFAULT 'partial',
+                `is_map`                tinyint(1) NOT NULL,
+                `is_timeline`           tinyint(1) NOT NULL,
+                `is_items`              tinyint(1) NOT NULL,
+                `default_map_bounds`    varchar(100) NULL,
+                `default_map_zoom`      int(10) unsigned NULL,
+                `default_focus_date`    varchar(100) NULL,
                  PRIMARY KEY (`id`)
                ) ENGINE=innodb DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
 
         $this->_db->query($sql);
 
         $sql = "CREATE TABLE IF NOT EXISTS `{$this->_db->prefix}neatline_data_records` (
-                `id` int(10) unsigned not null auto_increment,
-                `item_id` int(10) unsigned NULL,
-                `exhibit_id` int(10) unsigned NULL,
-                `title` tinytext COLLATE utf8_unicode_ci NULL,
-                `description` mediumtext COLLATE utf8_unicode_ci NULL,
-                `start_date` tinytext COLLATE utf8_unicode_ci NULL,
-                `start_time` tinytext COLLATE utf8_unicode_ci NULL,
-                `end_date` tinytext COLLATE utf8_unicode_ci NULL,
-                `end_time` tinytext COLLATE utf8_unicode_ci NULL,
-                `geocoverage` mediumtext COLLATE utf8_unicode_ci NULL,
+                `id`                    int(10) unsigned not null auto_increment,
+                `item_id`               int(10) unsigned NULL,
+                `exhibit_id`            int(10) unsigned NULL,
+                `title`                 tinytext COLLATE utf8_unicode_ci NULL,
+                `description`           mediumtext COLLATE utf8_unicode_ci NULL,
+                `start_date`            tinytext COLLATE utf8_unicode_ci NULL,
+                `start_time`            tinytext COLLATE utf8_unicode_ci NULL,
+                `end_date`              tinytext COLLATE utf8_unicode_ci NULL,
+                `end_time`              tinytext COLLATE utf8_unicode_ci NULL,
+                `geocoverage`           mediumtext COLLATE utf8_unicode_ci NULL,
                 `left_ambiguity_percentage` int(10) unsigned NULL,
                 `right_ambiguity_percentage` int(10) unsigned NULL,
-                `vector_color` tinytext COLLATE utf8_unicode_ci NULL,
-                `space_active` tinyint(1) NULL,
-                `time_active` tinyint(1) NULL,
-                `display_order` int(10) unsigned NULL,
-                `map_bounds` varchar(100) NULL,
-                `map_zoom` int(10) unsigned NULL,
+                `vector_color`          tinytext COLLATE utf8_unicode_ci NULL,
+                `space_active`          tinyint(1) NULL,
+                `time_active`           tinyint(1) NULL,
+                `display_order`         int(10) unsigned NULL,
+                `map_bounds`            varchar(100) NULL,
+                `map_zoom`              int(10) unsigned NULL,
                  PRIMARY KEY (`id`)
                ) ENGINE=innodb DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
 
@@ -161,17 +162,7 @@ class NeatlinePlugin
     public function defineAcl($acl)
     {
 
-         // Omeka_Acl_Resource is deprecated in 2.0.
-         if (version_compare(OMEKA_VERSION, '2.0-dev', '<')) {
-             $editorResource = new Omeka_Acl_Resource('Neatline_Editor');
-             $editorResource->add(array('index', 'items', 'save', 'status', 'positions', 'arrangement'));
-         } else {
-             $editorResource = new Zend_Acl_Resource('Neatline_Editor');
-         }
-
-         $acl->add($editorResource);
-         $acl->allow('super', 'Neatline_Editor');
-         $acl->allow('admin', 'Neatline_Editor');
+        // TODO.
 
     }
 
@@ -185,8 +176,7 @@ class NeatlinePlugin
 
         // Queue CSS.
         if ($request->getModuleName() == 'neatline' &&
-            $request->getControllerName() == 'index' &&
-            $request->getActionName() != 'edit') {
+            $request->getControllerName() == 'index') {
 
               neatline_queueAdminCss();
 

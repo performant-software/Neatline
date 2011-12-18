@@ -38,14 +38,15 @@ class NeatlineExhibit extends Omeka_record
     public $map_id;
     public $image_id;
     public $top_element;
-    public $undated_items_position;
-    public $undated_items_height;
+    public $items_h_pos;
+    public $items_v_pos;
+    public $items_height;
     public $is_map;
     public $is_timeline;
-    public $is_undated_items;
+    public $is_items;
     public $default_map_bounds;
     public $default_map_zoom;
-    public $default_timeline_focus_date;
+    public $default_focus_date;
 
     /**
      * Validate the add Neatline form.
@@ -85,33 +86,26 @@ class NeatlineExhibit extends Omeka_record
     public function saveForm($title, $map, $image)
     {
 
-        $this->added = neatline_getMysqlDatetime();
-        $this->name = $title;
-        $this->map_id = null;
-        $this->is_map = 0;
+        // Set default values.
+        $this->name =                   $title;
+        $this->top_element =            'map';
+        $this->items_h_pos =            'right';
+        $this->items_v_pos =            'bottom';
+        $this->items_height =           'full';
+        $this->is_map =            1;
+        $this->is_timeline =            1;
+        $this->is_items =               1;
+        $this->map_id =                 null;
 
         // Check for map.
         if (is_numeric($map)) {
             $this->map_id = $map;
-            $this->is_map = 1;
         }
 
         // Check for image.
         if (is_numeric($image)) {
             $this->image_id = $image;
-            $this->is_map = 1;
         }
-
-        // By default, enable the timeline.
-        $this->is_timeline = 1;
-
-        // By default, activate undated items.
-        $this->is_undated_items = 1;
-
-        // Set defaults layout parameters.
-        $this->top_element = 'map';
-        $this->undated_items_position = 'right';
-        $this->undated_items_height = 'full';
 
     }
 
@@ -154,7 +148,7 @@ class NeatlineExhibit extends Omeka_record
         // Set values.
         $this->default_map_bounds = $mapExtent;
         $this->default_map_zoom = intval($mapZoom);
-        $this->default_timeline_focus_date = $timelineCenter;
+        $this->default_focus_date = $timelineCenter;
         $this->save();
 
     }
@@ -164,30 +158,33 @@ class NeatlineExhibit extends Omeka_record
      *
      * @param boolean $isMap True if map is present.
      * @param boolean $isTimeline True if timeline is present.
-     * @param boolean $isUndatedItems True if undated items is present.
+     * @param boolean $isItems True if items is present.
      * @param string $topElement 'map' or 'timeline'.
-     * @param string $udiPosition 'left' or 'right'.
-     * @param string $udiHeight 'full' or 'partial'.
+     * @param string $itemsHorizPos 'left' or 'right'.
+     * @param string $itemsVertPos 'top' or 'bottom'.
+     * @param string $itemsHeight 'full' or 'partial'.
      *
      * @return Omeka_record The map.
      */
     public function saveViewportArrangement(
         $isMap,
         $isTimeline,
-        $isUndatedItems,
+        $isItems,
         $topElement,
-        $udiPosition,
-        $udiHeight
+        $itemsHorizPos,
+        $itemsVertPos,
+        $itemsHeight
     )
     {
 
         // Set values.
         $this->is_map = $isMap;
         $this->is_timeline = $isTimeline;
-        $this->is_undated_items = $isUndatedItems;
+        $this->is_items = $isItems;
         $this->top_element = $topElement;
-        $this->undated_items_position = $udiPosition;
-        $this->undated_items_height = $udiHeight;
+        $this->items_h_pos = $itemsHorizPos;
+        $this->items_v_pos = $itemsVertPos;
+        $this->items_height = $itemsHeight;
         $this->save();
 
     }

@@ -59,7 +59,7 @@ class Neatline_NeatlineExhibitTableTest extends Omeka_Test_AppTestCase
         $exhibit1->name = 'B';
         $exhibit1->is_map = 1;
         $exhibit1->is_timeline = 1;
-        $exhibit1->is_undated_items = 1;
+        $exhibit1->is_items = 1;
         $exhibit1->added = '2011-12-05 09:16:00';
         $exhibit1->save();
 
@@ -67,7 +67,7 @@ class Neatline_NeatlineExhibitTableTest extends Omeka_Test_AppTestCase
         $exhibit2->name = 'A';
         $exhibit2->is_map = 1;
         $exhibit2->is_timeline = 1;
-        $exhibit2->is_undated_items = 1;
+        $exhibit2->is_items = 1;
         $exhibit2->added = '2011-12-05 09:16:01';
         $exhibit2->save();
 
@@ -75,7 +75,7 @@ class Neatline_NeatlineExhibitTableTest extends Omeka_Test_AppTestCase
         $exhibit3->name = 'D';
         $exhibit3->is_map = 1;
         $exhibit3->is_timeline = 1;
-        $exhibit3->is_undated_items = 1;
+        $exhibit3->is_items = 1;
         $exhibit3->added = '2011-12-05 09:16:02';
         $exhibit3->save();
 
@@ -83,7 +83,7 @@ class Neatline_NeatlineExhibitTableTest extends Omeka_Test_AppTestCase
         $exhibit4->name = 'C';
         $exhibit4->is_map = 1;
         $exhibit4->is_timeline = 1;
-        $exhibit4->is_undated_items = 1;
+        $exhibit4->is_items = 1;
         $exhibit4->added = '2011-12-05 09:16:03';
         $exhibit4->save();
 

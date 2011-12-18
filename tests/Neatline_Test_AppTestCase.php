@@ -113,7 +113,7 @@ class Neatline_Test_AppTestCase extends Omeka_Test_AppTestCase
         $neatline->name = $name;
         $neatline->is_map = $is_map;
         $neatline->is_timeline = $is_timeline;
-        $neatline->is_undated_items = $is_undated_items;
+        $neatline->is_items = $is_undated_items;
         $neatline->save();
 
         return $neatline;

@@ -395,10 +395,11 @@ class Neatline_EditorController extends Omeka_Controller_Action
         $neatlineId =               $_post['neatline_id'];
         $isMap =                    $_post['is_map'];
         $isTimeline =               $_post['is_timeline'];
-        $isUndatedItems =           $_post['is_undated_items'];
+        $isItems =                  $_post['is_items'];
         $topElement =               $_post['top_element'];
-        $udiPosition =              $_post['udi_position'];
-        $udiHeight =                $_post['udi_height'];
+        $itemsHorizPos =            $_post['items_h_pos'];
+        $itemsVertPos =             $_post['items_v_pos'];
+        $itemsHeight =              $_post['items_height'];
 
         // Fetch the Neatline exhibit record and item record.
         $neatline = $this->_neatlinesTable->find($neatlineId);
@@ -407,10 +408,11 @@ class Neatline_EditorController extends Omeka_Controller_Action
         $neatline->saveViewportArrangement(
             $isMap,
             $isTimeline,
-            $isUndatedItems,
+            $isItems,
             $topElement,
-            $udiPosition,
-            $udiHeight
+            $itemsHorizPos,
+            $itemsVertPos,
+            $itemsHeight
         );
 
         // Return the updated exhibit object.

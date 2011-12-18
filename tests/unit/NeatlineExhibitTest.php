@@ -63,14 +63,15 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
         $exhibit->map_id =                      1;
         $exhibit->image_id =                    1;
         $exhibit->top_element =                 'map';
-        $exhibit->undated_items_position =      'right';
-        $exhibit->undated_items_height =        'full';
+        $exhibit->items_h_pos =                 'right';
+        $exhibit->items_v_pos =                 'top';
+        $exhibit->items_height =                'full';
         $exhibit->is_map =                      1;
         $exhibit->is_timeline =                 1;
-        $exhibit->is_undated_items =            1;
+        $exhibit->is_items =                    1;
         $exhibit->default_map_bounds =          'BOUND()';
         $exhibit->default_map_zoom =            1;
-        $exhibit->default_timeline_focus_date = 'date';
+        $exhibit->default_focus_date =          'date';
 
         // Get.
         $this->assertEquals($exhibit->added, 'now');
@@ -78,14 +79,15 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
         $this->assertEquals($exhibit->map_id, 1);
         $this->assertEquals($exhibit->image_id, 1);
         $this->assertEquals($exhibit->top_element, 'map');
-        $this->assertEquals($exhibit->undated_items_position, 'right');
-        $this->assertEquals($exhibit->undated_items_height, 'full');
+        $this->assertEquals($exhibit->items_h_pos, 'right');
+        $this->assertEquals($exhibit->items_v_pos, 'top');
+        $this->assertEquals($exhibit->items_height, 'full');
         $this->assertEquals($exhibit->is_map, 1);
         $this->assertEquals($exhibit->is_timeline, 1);
-        $this->assertEquals($exhibit->is_undated_items, 1);
+        $this->assertEquals($exhibit->is_items, 1);
         $this->assertEquals($exhibit->default_map_bounds, 'BOUND()');
         $this->assertEquals($exhibit->default_map_zoom, 1);
-        $this->assertEquals($exhibit->default_timeline_focus_date, 'date');
+        $this->assertEquals($exhibit->default_focus_date, 'date');
 
     }
 
@@ -148,16 +150,16 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
 
         // Save with valid map id and check.
         $success = $neatline->saveForm('Title', 1, 'none');
-        $this->assertNotNull($neatline->added);
         $this->assertNull($neatline->image_id);
         $this->assertEquals($neatline->name, 'Title');
-        $this->assertEquals($neatline->is_timeline, 1);
-        $this->assertEquals($neatline->is_undated_items, 1);
         $this->assertEquals($neatline->is_map, 1);
+        $this->assertEquals($neatline->is_timeline, 1);
+        $this->assertEquals($neatline->is_items, 1);
         $this->assertEquals($neatline->map_id, 1);
         $this->assertEquals($neatline->top_element, 'map');
-        $this->assertEquals($neatline->undated_items_position, 'right');
-        $this->assertEquals($neatline->undated_items_height, 'full');
+        $this->assertEquals($neatline->items_h_pos, 'right');
+        $this->assertEquals($neatline->items_v_pos, 'bottom');
+        $this->assertEquals($neatline->items_height, 'full');
 
     }
 
@@ -174,16 +176,16 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
 
         // Save with valid map id and check.
         $success = $neatline->saveForm('Title', 'none', 1);
-        $this->assertNotNull($neatline->added);
         $this->assertNull($neatline->map_id);
         $this->assertEquals($neatline->name, 'Title');
-        $this->assertEquals($neatline->is_timeline, 1);
-        $this->assertEquals($neatline->is_undated_items, 1);
         $this->assertEquals($neatline->is_map, 1);
+        $this->assertEquals($neatline->is_timeline, 1);
+        $this->assertEquals($neatline->is_items, 1);
         $this->assertEquals($neatline->image_id, 1);
         $this->assertEquals($neatline->top_element, 'map');
-        $this->assertEquals($neatline->undated_items_position, 'right');
-        $this->assertEquals($neatline->undated_items_height, 'full');
+        $this->assertEquals($neatline->items_h_pos, 'right');
+        $this->assertEquals($neatline->items_v_pos, 'bottom');
+        $this->assertEquals($neatline->items_height, 'full');
 
     }
 
@@ -236,7 +238,7 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
         $neatline->saveViewportPositions('bounds', 5, 'date');
         $this->assertEquals($neatline->default_map_bounds, 'bounds');
         $this->assertEquals($neatline->default_map_zoom, 5);
-        $this->assertEquals($neatline->default_timeline_focus_date, 'date');
+        $this->assertEquals($neatline->default_focus_date, 'date');
 
         // Save with str zoom and check.
         $neatline->saveViewportPositions('bounds', '5', 'date');
@@ -257,13 +259,14 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
         $neatline = $this->helper->_createNeatline();
 
         // Save and check.
-        $neatline->saveViewportArrangement(1, 1, 1, 'map', 'right', 'full');
+        $neatline->saveViewportArrangement(1, 1, 1, 'map', 'right', 'top', 'full');
         $this->assertEquals($neatline->is_map, 1);
         $this->assertEquals($neatline->is_timeline, 1);
-        $this->assertEquals($neatline->is_undated_items, 1);
+        $this->assertEquals($neatline->is_items, 1);
         $this->assertEquals($neatline->top_element, 'map');
-        $this->assertEquals($neatline->undated_items_position, 'right');
-        $this->assertEquals($neatline->undated_items_height, 'full');
+        $this->assertEquals($neatline->items_h_pos, 'right');
+        $this->assertEquals($neatline->items_v_pos, 'top');
+        $this->assertEquals($neatline->items_height, 'full');
 
     }
 
