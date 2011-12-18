@@ -32,11 +32,37 @@
 
         },
 
+        /*
+         * Shell out local trackers for parameters.
+         */
         _create: function() {
 
-            console.log('positioner');
+            // Trackers for positioning parameters.
+            this._is_map =              false;
+            this._is_timeline =         false;
+            this._is_items =            false;
+            this._items_h =             'right'; // 'right' or 'left'.
+            this._items_v =             'full';  // 'full' or 'partial'.
 
-        }
+        },
+
+        /*
+         * Given a fresh parameter loadout, recompute the positions.
+         */
+        compute: function() {
+
+
+
+        },
+
+        /*
+         * Apply computer positions to the markup.
+         */
+        apply: function() {
+
+
+
+        },
 
     });
 
