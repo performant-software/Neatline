@@ -76,7 +76,7 @@
             this._items_height =        this.options.positions.items_height; // 'full' or 'partial'.
 
             // Dimensions tracker.
-            this.positions: {
+            this.positions = {
 
                 map: {
                     height: null,
@@ -99,7 +99,21 @@
                     left:   null
                 }
 
-            }
+            };
+
+        },
+
+        /*
+         * Measure the container, compute percentage-based constants.
+         */
+        measure: function() {
+
+            this.width =                this.element.width();
+            this.height =               this.element.height();
+            this.minorWidth =           this.width * (this.options.constants.h_percent / 100);
+            this.majorWidth =           this.width - this.minorWidth;
+            this.majorHeight =          this.height * (this.options.constants.v_percent / 100);
+            this.minorHeight =          this.height - this.majorHeight;
 
         },
 
@@ -141,6 +155,31 @@
                         this._items_v_pos == 'bottom' &&
                         this._items_height == 'partial') {
 
+                            this.positions = {
+
+                                map: {
+                                    height: null,
+                                    width:  null,
+                                    top:    null,
+                                    left:   null
+                                },
+
+                                timeline: {
+                                    height: null,
+                                    width:  null,
+                                    top:    null,
+                                    left:   null
+                                },
+
+                                items: {
+                                    height: null,
+                                    width:  null,
+                                    top:    null,
+                                    left:   null
+                                }
+
+                            };
+
                     }
 
                     // ITEMS left, top, partial:
@@ -148,11 +187,61 @@
                         this._items_v_pos == 'top' &&
                         this._items_height == 'partial') {
 
+                            this.positions = {
+
+                                map: {
+                                    height: null,
+                                    width:  null,
+                                    top:    null,
+                                    left:   null
+                                },
+
+                                timeline: {
+                                    height: null,
+                                    width:  null,
+                                    top:    null,
+                                    left:   null
+                                },
+
+                                items: {
+                                    height: null,
+                                    width:  null,
+                                    top:    null,
+                                    left:   null
+                                }
+
+                            };
+
                     }
 
                     // ITEMS left, full:
                     else if (this._items_h_pos == 'left' &&
                              this._items_height == 'full') {
+
+                            this.positions = {
+
+                                map: {
+                                    height: null,
+                                    width:  null,
+                                    top:    null,
+                                    left:   null
+                                },
+
+                                timeline: {
+                                    height: null,
+                                    width:  null,
+                                    top:    null,
+                                    left:   null
+                                },
+
+                                items: {
+                                    height: null,
+                                    width:  null,
+                                    top:    null,
+                                    left:   null
+                                }
+
+                            };
 
                     }
 
@@ -161,6 +250,31 @@
                         this._items_v_pos == 'bottom' &&
                         this._items_height == 'partial') {
 
+                            this.positions = {
+
+                                map: {
+                                    height: null,
+                                    width:  null,
+                                    top:    null,
+                                    left:   null
+                                },
+
+                                timeline: {
+                                    height: null,
+                                    width:  null,
+                                    top:    null,
+                                    left:   null
+                                },
+
+                                items: {
+                                    height: null,
+                                    width:  null,
+                                    top:    null,
+                                    left:   null
+                                }
+
+                            };
+
                     }
 
                     // ITEMS right, top, partial:
@@ -168,11 +282,61 @@
                         this._items_v_pos == 'top' &&
                         this._items_height == 'partial') {
 
+                            this.positions = {
+
+                                map: {
+                                    height: null,
+                                    width:  null,
+                                    top:    null,
+                                    left:   null
+                                },
+
+                                timeline: {
+                                    height: null,
+                                    width:  null,
+                                    top:    null,
+                                    left:   null
+                                },
+
+                                items: {
+                                    height: null,
+                                    width:  null,
+                                    top:    null,
+                                    left:   null
+                                }
+
+                            };
+
                     }
 
                     // ITEMS right, full:
                     else if (this._items_h_pos == 'right' &&
                              this._items_height == 'full') {
+
+                            this.positions = {
+
+                                map: {
+                                    height: null,
+                                    width:  null,
+                                    top:    null,
+                                    left:   null
+                                },
+
+                                timeline: {
+                                    height: null,
+                                    width:  null,
+                                    top:    null,
+                                    left:   null
+                                },
+
+                                items: {
+                                    height: null,
+                                    width:  null,
+                                    top:    null,
+                                    left:   null
+                                }
+
+                            };
 
                     }
 
@@ -186,6 +350,31 @@
                         this._items_v_pos == 'bottom' &&
                         this._items_height == 'partial') {
 
+                            this.positions = {
+
+                                map: {
+                                    height: null,
+                                    width:  null,
+                                    top:    null,
+                                    left:   null
+                                },
+
+                                timeline: {
+                                    height: null,
+                                    width:  null,
+                                    top:    null,
+                                    left:   null
+                                },
+
+                                items: {
+                                    height: null,
+                                    width:  null,
+                                    top:    null,
+                                    left:   null
+                                }
+
+                            };
+
                     }
 
                     // ITEMS left, top, partial:
@@ -193,11 +382,61 @@
                         this._items_v_pos == 'top' &&
                         this._items_height == 'partial') {
 
+                            this.positions = {
+
+                                map: {
+                                    height: null,
+                                    width:  null,
+                                    top:    null,
+                                    left:   null
+                                },
+
+                                timeline: {
+                                    height: null,
+                                    width:  null,
+                                    top:    null,
+                                    left:   null
+                                },
+
+                                items: {
+                                    height: null,
+                                    width:  null,
+                                    top:    null,
+                                    left:   null
+                                }
+
+                            };
+
                     }
 
                     // ITEMS left, full:
                     else if (this._items_h_pos == 'left' &&
                              this._items_height == 'full') {
+
+                            this.positions = {
+
+                                map: {
+                                    height: null,
+                                    width:  null,
+                                    top:    null,
+                                    left:   null
+                                },
+
+                                timeline: {
+                                    height: null,
+                                    width:  null,
+                                    top:    null,
+                                    left:   null
+                                },
+
+                                items: {
+                                    height: null,
+                                    width:  null,
+                                    top:    null,
+                                    left:   null
+                                }
+
+                            };
 
                     }
 
@@ -206,6 +445,31 @@
                         this._items_v_pos == 'bottom' &&
                         this._items_height == 'partial') {
 
+                            this.positions = {
+
+                                map: {
+                                    height: null,
+                                    width:  null,
+                                    top:    null,
+                                    left:   null
+                                },
+
+                                timeline: {
+                                    height: null,
+                                    width:  null,
+                                    top:    null,
+                                    left:   null
+                                },
+
+                                items: {
+                                    height: null,
+                                    width:  null,
+                                    top:    null,
+                                    left:   null
+                                }
+
+                            };
+
                     }
 
                     // ITEMS right, top, partial:
@@ -213,11 +477,61 @@
                         this._items_v_pos == 'top' &&
                         this._items_height == 'partial') {
 
+                            this.positions = {
+
+                                map: {
+                                    height: null,
+                                    width:  null,
+                                    top:    null,
+                                    left:   null
+                                },
+
+                                timeline: {
+                                    height: null,
+                                    width:  null,
+                                    top:    null,
+                                    left:   null
+                                },
+
+                                items: {
+                                    height: null,
+                                    width:  null,
+                                    top:    null,
+                                    left:   null
+                                }
+
+                            };
+
                     }
 
                     // ITEMS right, full:
                     else if (this._items_h_pos == 'right' &&
                              this._items_height == 'full') {
+
+                            this.positions = {
+
+                                map: {
+                                    height: null,
+                                    width:  null,
+                                    top:    null,
+                                    left:   null
+                                },
+
+                                timeline: {
+                                    height: null,
+                                    width:  null,
+                                    top:    null,
+                                    left:   null
+                                },
+
+                                items: {
+                                    height: null,
+                                    width:  null,
+                                    top:    null,
+                                    left:   null
+                                }
+
+                            };
 
                     }
 
@@ -233,10 +547,58 @@
                 // MAP left, ITEMS right:
                 if (this._items_h_pos == 'right') {
 
+                    this.positions = {
+
+                        map: {
+                            height: this.height,
+                            width:  this.majorWidth,
+                            top:    0,
+                            left:   0
+                        },
+
+                        timeline: {
+                            height: null,
+                            width:  null,
+                            top:    null,
+                            left:   null
+                        },
+
+                        items: {
+                            height: this.height,
+                            width:  this.minorWidth,
+                            top:    0,
+                            left:   this.majorWidth
+                        }
+
+                    };
+
                 }
 
                 // MAP right, ITEMS left:
                 else if (this._items_h_pos == 'left') {
+
+                    this.positions = {
+
+                        map: {
+                            height: this.height,
+                            width:  this.majorWidth,
+                            top:    0,
+                            left:   this.majorWidth
+                        },
+
+                        timeline: {
+                            height: null,
+                            width:  null,
+                            top:    null,
+                            left:   null
+                        },
+
+                        items: {
+                            height: this.height,
+                            width:  this.minorWidth,
+                            top:    0,
+                            left:   0
+                        }
 
                 }
 
@@ -250,10 +612,60 @@
                 // TIMELINE left, ITEMS right:
                 if (this._items_h_pos == 'right') {
 
+                    this.positions = {
+
+                        map: {
+                            height: null,
+                            width:  null,
+                            top:    null,
+                            left:   null
+                        },
+
+                        timeline: {
+                            height: this.height,
+                            width:  this.majorWidth,
+                            top:    0,
+                            left:   0
+                        },
+
+                        items: {
+                            height: this.height,
+                            width:  this.minorWidth,
+                            top:    0,
+                            left:   this.majorWidth
+                        }
+
+                    };
+
                 }
 
                 // TIMELINE right, ITEMS left:
                 else if (this._items_h_pos == 'left') {
+
+                    this.positions = {
+
+                        map: {
+                            height: null,
+                            width:  null,
+                            top:    null,
+                            left:   null
+                        },
+
+                        timeline: {
+                            height: this.height,
+                            width:  this.majorWidth,
+                            top:    0,
+                            left:   this.majorWidth
+                        },
+
+                        items: {
+                            height: this.height,
+                            width:  this.minorWidth,
+                            top:    0,
+                            left:   0
+                        }
+
+                    };
 
                 }
 
@@ -267,10 +679,60 @@
                 // MAP top, TIMELINE bottom.
                 if (this._top == 'map') {
 
+                    this.positions = {
+
+                        map: {
+                            height: this.majorHeight,
+                            width:  this.width,
+                            top:    0,
+                            left:   0
+                        },
+
+                        timeline: {
+                            height: this.minorHeight,
+                            width:  this.width,
+                            top:    this.majorHeight,
+                            left:   0
+                        },
+
+                        items: {
+                            height: null,
+                            width:  null,
+                            top:    null,
+                            left:   null
+                        }
+
+                    };
+
                 }
 
                 // MAP bottom, TIMELINE top.
                 else if (this._top == 'timeline') {
+
+                    this.positions = {
+
+                        map: {
+                            height: this.minorHeight,
+                            width:  this.width,
+                            top:    this.majorHeight,
+                            left:   0
+                        },
+
+                        timeline: {
+                            height: this.majorHeight,
+                            width:  this.width,
+                            top:    0,
+                            left:   0
+                        },
+
+                        items: {
+                            height: null,
+                            width:  null,
+                            top:    null,
+                            left:   null
+                        }
+
+                    };
 
                 }
 
@@ -281,12 +743,62 @@
                      !this._is_timeline &&
                      !this._is_items) {
 
+                this.positions = {
+
+                    map: {
+                        height: this.height,
+                        width:  this.width,
+                        top:    0,
+                        left:   0
+                    },
+
+                    timeline: {
+                        height: null,
+                        width:  null,
+                        top:    null,
+                        left:   null
+                    },
+
+                    items: {
+                        height: null,
+                        width:  null,
+                        top:    null,
+                        left:   null
+                    }
+
+                };
+
             }
 
             // TIMELINE:
             else if (this._is_timeline &&
                      !this._is_map &&
                      !this._is_items) {
+
+                this.positions = {
+
+                    map: {
+                        height: null,
+                        width:  null,
+                        top:    null,
+                        left:   null
+                    },
+
+                    timeline: {
+                        height: this.height,
+                        width:  this.width,
+                        top:    0,
+                        left:   0
+                    },
+
+                    items: {
+                        height: null,
+                        width:  null,
+                        top:    null,
+                        left:   null
+                    }
+
+                };
 
             }
 
