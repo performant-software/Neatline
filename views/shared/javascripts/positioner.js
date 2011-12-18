@@ -155,30 +155,30 @@
                         this._items_v_pos == 'bottom' &&
                         this._items_height == 'partial') {
 
-                            this.positions = {
+                        this.positions = {
 
-                                map: {
-                                    height: null,
-                                    width:  null,
-                                    top:    null,
-                                    left:   null
-                                },
+                            map: {
+                                height: this.majorHeight,
+                                width:  this.width,
+                                top:    0,
+                                left:   0
+                            },
 
-                                timeline: {
-                                    height: null,
-                                    width:  null,
-                                    top:    null,
-                                    left:   null
-                                },
+                            timeline: {
+                                height: this.minorHeight,
+                                width:  this.majorWidth,
+                                top:    this.majorHeight,
+                                left:   this.minorWidth
+                            },
 
-                                items: {
-                                    height: null,
-                                    width:  null,
-                                    top:    null,
-                                    left:   null
-                                }
+                            items: {
+                                height: this.minorHeight,
+                                width:  this.minorWidth,
+                                top:    this.majorHeight,
+                                left:   0
+                            }
 
-                            };
+                        };
 
                     }
 
@@ -187,30 +187,30 @@
                         this._items_v_pos == 'top' &&
                         this._items_height == 'partial') {
 
-                            this.positions = {
+                        this.positions = {
 
-                                map: {
-                                    height: null,
-                                    width:  null,
-                                    top:    null,
-                                    left:   null
-                                },
+                            map: {
+                                height: this.majorHeight,
+                                width:  this.majorWidth,
+                                top:    0,
+                                left:   this.minorWidth
+                            },
 
-                                timeline: {
-                                    height: null,
-                                    width:  null,
-                                    top:    null,
-                                    left:   null
-                                },
+                            timeline: {
+                                height: this.minorHeight,
+                                width:  this.width,
+                                top:    this.majorHeight,
+                                left:   0
+                            },
 
-                                items: {
-                                    height: null,
-                                    width:  null,
-                                    top:    null,
-                                    left:   null
-                                }
+                            items: {
+                                height: this.minorHeight,
+                                width:  this.minorWidth,
+                                top:    0,
+                                left:   0
+                            }
 
-                            };
+                        };
 
                     }
 
@@ -218,30 +218,30 @@
                     else if (this._items_h_pos == 'left' &&
                              this._items_height == 'full') {
 
-                            this.positions = {
+                        this.positions = {
 
-                                map: {
-                                    height: null,
-                                    width:  null,
-                                    top:    null,
-                                    left:   null
-                                },
+                            map: {
+                                height: this.majorHeight,
+                                width:  this.majorWidth,
+                                top:    0,
+                                left:   this.minorWidth
+                            },
 
-                                timeline: {
-                                    height: null,
-                                    width:  null,
-                                    top:    null,
-                                    left:   null
-                                },
+                            timeline: {
+                                height: this.minorHeight,
+                                width:  this.majorWidth,
+                                top:    this.majorHeight,
+                                left:   this.minorWidth
+                            },
 
-                                items: {
-                                    height: null,
-                                    width:  null,
-                                    top:    null,
-                                    left:   null
-                                }
+                            items: {
+                                height: this.majorHeight,
+                                width:  this.minorWidth,
+                                top:    0,
+                                left:   0
+                            }
 
-                            };
+                        };
 
                     }
 
@@ -250,30 +250,30 @@
                         this._items_v_pos == 'bottom' &&
                         this._items_height == 'partial') {
 
-                            this.positions = {
+                        this.positions = {
 
-                                map: {
-                                    height: null,
-                                    width:  null,
-                                    top:    null,
-                                    left:   null
-                                },
+                            map: {
+                                height: this.majorHeight,
+                                width:  this.width,
+                                top:    0,
+                                left:   0
+                            },
 
-                                timeline: {
-                                    height: null,
-                                    width:  null,
-                                    top:    null,
-                                    left:   null
-                                },
+                            timeline: {
+                                height: this.minorHeight,
+                                width:  this.majorWidth,
+                                top:    this.majorHeight,
+                                left:   0
+                            },
 
-                                items: {
-                                    height: null,
-                                    width:  null,
-                                    top:    null,
-                                    left:   null
-                                }
+                            items: {
+                                height: this.minorHeight,
+                                width:  this.minorWidth,
+                                top:    this.majorHeight,
+                                left:   this.majorWidth
+                            }
 
-                            };
+                        };
 
                     }
 
@@ -282,30 +282,30 @@
                         this._items_v_pos == 'top' &&
                         this._items_height == 'partial') {
 
-                            this.positions = {
+                        this.positions = {
 
-                                map: {
-                                    height: null,
-                                    width:  null,
-                                    top:    null,
-                                    left:   null
-                                },
+                            map: {
+                                height: this.majorHeight,
+                                width:  this.majorWidth,
+                                top:    0,
+                                left:   0
+                            },
 
-                                timeline: {
-                                    height: null,
-                                    width:  null,
-                                    top:    null,
-                                    left:   null
-                                },
+                            timeline: {
+                                height: this.minorHeight,
+                                width:  this.width,
+                                top:    this.majorHeight,
+                                left:   0
+                            },
 
-                                items: {
-                                    height: null,
-                                    width:  null,
-                                    top:    null,
-                                    left:   null
-                                }
+                            items: {
+                                height: this.majorHeight,
+                                width:  this.minorWidth,
+                                top:    0,
+                                left:   this.majorWidth
+                            }
 
-                            };
+                        };
 
                     }
 
@@ -313,30 +313,30 @@
                     else if (this._items_h_pos == 'right' &&
                              this._items_height == 'full') {
 
-                            this.positions = {
+                        this.positions = {
 
-                                map: {
-                                    height: null,
-                                    width:  null,
-                                    top:    null,
-                                    left:   null
-                                },
+                            map: {
+                                height: this.majorHeight,
+                                width:  this.majorWidth,
+                                top:    0,
+                                left:   0
+                            },
 
-                                timeline: {
-                                    height: null,
-                                    width:  null,
-                                    top:    null,
-                                    left:   null
-                                },
+                            timeline: {
+                                height: this.minorHeight,
+                                width:  this.majorWidth,
+                                top:    this.majorHeight,
+                                left:   0
+                            },
 
-                                items: {
-                                    height: null,
-                                    width:  null,
-                                    top:    null,
-                                    left:   null
-                                }
+                            items: {
+                                height: this.height,
+                                width:  this.minorWidth,
+                                top:    0,
+                                left:   null
+                            }
 
-                            };
+                        };
 
                     }
 
@@ -350,30 +350,30 @@
                         this._items_v_pos == 'bottom' &&
                         this._items_height == 'partial') {
 
-                            this.positions = {
+                        this.positions = {
 
-                                map: {
-                                    height: null,
-                                    width:  null,
-                                    top:    null,
-                                    left:   null
-                                },
+                            map: {
+                                height: this.minorHeight,
+                                width:  this.majorWidth,
+                                top:    this.majorHeight,
+                                left:   this.minorWidth
+                            },
 
-                                timeline: {
-                                    height: null,
-                                    width:  null,
-                                    top:    null,
-                                    left:   null
-                                },
+                            timeline: {
+                                height: this.majorHeight,
+                                width:  this.width,
+                                top:    0,
+                                left:   0
+                            },
 
-                                items: {
-                                    height: null,
-                                    width:  null,
-                                    top:    null,
-                                    left:   null
-                                }
+                            items: {
+                                height: this.minorHeight,
+                                width:  this.minorWidth,
+                                top:    this.majorHeight,
+                                left:   0
+                            }
 
-                            };
+                        };
 
                     }
 
@@ -382,30 +382,30 @@
                         this._items_v_pos == 'top' &&
                         this._items_height == 'partial') {
 
-                            this.positions = {
+                        this.positions = {
 
-                                map: {
-                                    height: null,
-                                    width:  null,
-                                    top:    null,
-                                    left:   null
-                                },
+                            map: {
+                                height: this.minorHeight,
+                                width:  this.width,
+                                top:    this.majorHeight,
+                                left:   0
+                            },
 
-                                timeline: {
-                                    height: null,
-                                    width:  null,
-                                    top:    null,
-                                    left:   null
-                                },
+                            timeline: {
+                                height: this.majorHeight,
+                                width:  this.majorWidth,
+                                top:    0,
+                                left:   this.minorWidth
+                            },
 
-                                items: {
-                                    height: null,
-                                    width:  null,
-                                    top:    null,
-                                    left:   null
-                                }
+                            items: {
+                                height: this.majorHeight,
+                                width:  this.minorWidth,
+                                top:    0,
+                                left:   0
+                            }
 
-                            };
+                        };
 
                     }
 
@@ -413,30 +413,30 @@
                     else if (this._items_h_pos == 'left' &&
                              this._items_height == 'full') {
 
-                            this.positions = {
+                        this.positions = {
 
-                                map: {
-                                    height: null,
-                                    width:  null,
-                                    top:    null,
-                                    left:   null
-                                },
+                            map: {
+                                height: this.minorHeight,
+                                width:  this.majorWidth,
+                                top:    this.majorHeight,
+                                left:   this.minorWidth
+                            },
 
-                                timeline: {
-                                    height: null,
-                                    width:  null,
-                                    top:    null,
-                                    left:   null
-                                },
+                            timeline: {
+                                height: this.majorHeight,
+                                width:  this.majorWidth,
+                                top:    0,
+                                left:   this.minorWidth
+                            },
 
-                                items: {
-                                    height: null,
-                                    width:  null,
-                                    top:    null,
-                                    left:   null
-                                }
+                            items: {
+                                height: this.height,
+                                width:  this.minorWidth,
+                                top:    0,
+                                left:   0
+                            }
 
-                            };
+                        };
 
                     }
 
@@ -445,30 +445,30 @@
                         this._items_v_pos == 'bottom' &&
                         this._items_height == 'partial') {
 
-                            this.positions = {
+                        this.positions = {
 
-                                map: {
-                                    height: null,
-                                    width:  null,
-                                    top:    null,
-                                    left:   null
-                                },
+                            map: {
+                                height: this.minorHeight,
+                                width:  this.majorWidth,
+                                top:    this.majorHeight,
+                                left:   0
+                            },
 
-                                timeline: {
-                                    height: null,
-                                    width:  null,
-                                    top:    null,
-                                    left:   null
-                                },
+                            timeline: {
+                                height: this.majorHeight,
+                                width:  this.width,
+                                top:    0,
+                                left:   0
+                            },
 
-                                items: {
-                                    height: null,
-                                    width:  null,
-                                    top:    null,
-                                    left:   null
-                                }
+                            items: {
+                                height: this.minorHeight,
+                                width:  this.minorWidth,
+                                top:    this.majorHeight,
+                                left:   this.majorWidth
+                            }
 
-                            };
+                        };
 
                     }
 
@@ -477,30 +477,30 @@
                         this._items_v_pos == 'top' &&
                         this._items_height == 'partial') {
 
-                            this.positions = {
+                        this.positions = {
 
-                                map: {
-                                    height: null,
-                                    width:  null,
-                                    top:    null,
-                                    left:   null
-                                },
+                            map: {
+                                height: this.minorHeight,
+                                width:  this.width,
+                                top:    this.majorHeight,
+                                left:   0
+                            },
 
-                                timeline: {
-                                    height: null,
-                                    width:  null,
-                                    top:    null,
-                                    left:   null
-                                },
+                            timeline: {
+                                height: this.majorHeight,
+                                width:  this.majorWidth,
+                                top:    0,
+                                left:   0
+                            },
 
-                                items: {
-                                    height: null,
-                                    width:  null,
-                                    top:    null,
-                                    left:   null
-                                }
+                            items: {
+                                height: this.majorHeight,
+                                width:  this.minorWidth,
+                                top:    0,
+                                left:   this.majorWidth
+                            }
 
-                            };
+                        };
 
                     }
 
@@ -508,30 +508,30 @@
                     else if (this._items_h_pos == 'right' &&
                              this._items_height == 'full') {
 
-                            this.positions = {
+                        this.positions = {
 
-                                map: {
-                                    height: null,
-                                    width:  null,
-                                    top:    null,
-                                    left:   null
-                                },
+                            map: {
+                                height: this.minorHeight,
+                                width:  this.majorWidth,
+                                top:    this.majorHeight,
+                                left:   0
+                            },
 
-                                timeline: {
-                                    height: null,
-                                    width:  null,
-                                    top:    null,
-                                    left:   null
-                                },
+                            timeline: {
+                                height: this.majorHeight,
+                                width:  this.majorWidth,
+                                top:    0,
+                                left:   0
+                            },
 
-                                items: {
-                                    height: null,
-                                    width:  null,
-                                    top:    null,
-                                    left:   null
-                                }
+                            items: {
+                                height: this.height,
+                                width:  this.minorWidth,
+                                top:    0,
+                                left:   this.majorWidth
+                            }
 
-                            };
+                        };
 
                     }
 
