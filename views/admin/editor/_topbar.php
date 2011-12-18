@@ -26,7 +26,7 @@
 ?>
 
 <div id="configure-layout">
-    <?php echo $this->partial('index/_layout_builder.php'); ?>
+    <?php echo $this->partial('editor/_layout_builder.php'); ?>
 </div>
 
 <div id="topbar" class="topbar-inner topbar">

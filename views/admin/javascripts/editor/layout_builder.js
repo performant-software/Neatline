@@ -28,18 +28,6 @@
 
         options: {
 
-            // Ids.
-            dragbox_id: 'drag-box',
-            options_id: 'options',
-            top_element_input_id: 'top_element',
-            udi_position_input_id: 'undated_items_horizontal_position',
-            udi_height_input_id: 'undated_items_height',
-            is_map_input_id: 'is_map',
-            is_timeline_input_id: 'is_timeline',
-            is_undated_items_input_id: 'is_undated_items',
-            timeline_select_id: 'timeline',
-            map_select_id: 'map',
-
             // Css dimension defaults, animation constants.
             top_block_percentage: 60,
             undated_items_width: 150,
@@ -54,7 +42,7 @@
             def_udi_height: 'partial',
             def_is_map: false,
             def_is_timeline: false,
-            def_is_undated_items: false,
+            def_is_items: false,
 
             // Miscellaneous
             no_selection_string: '-',
@@ -77,26 +65,29 @@
 
         },
 
+        /*
+         * Get markup, run start-up routine.
+         */
         _create: function() {
 
             // Get window for mousemove binding.
             this._window = $(window);
 
             // Getters for options and dragbox divs.
-            this.buttons = $('#' + this.options.options_id);
-            this.dragbox = $('#' + this.options.dragbox_id);
+            this.buttons = $('#options');
+            this.dragbox = $('#drag-box');
 
             // Set tracker arrays that record the last parameter
             // loadouts that triggered a div slide.
             this._last_map_slide_params = null;
             this._last_timeline_slide_params = null;
-            this._last_undated_items_slide_params = null;
+            this._last_items_slide_params = null;
 
             // Start-up routine.
             this.getPxConstants();
+            this._createButtons();
             this._createDraggers();
             this._disableSelect();
-            this._createButtons();
             this._setStartingParameters();
             this._addDragEvents();
 
@@ -105,12 +96,12 @@
         _setStartingParameters: function() {
 
             // Get starting parameters out of the Neatline global.
-            this._top_element = Neatline.top_element;
-            this._items_position = Neatline.undated_items_position;
-            this._items_height = Neatline.undated_items_height;
-            this._is_map = Neatline.is_map;
-            this._is_timeline = Neatline.is_timeline;
-            this._is_undated_items = Neatline.is_undated_items;
+            this._top_element =             Neatline.top_element;
+            this._items_position =          Neatline.undated_items_position;
+            this._items_height =            Neatline.undated_items_height;
+            this._is_map =                  Neatline.is_map;
+            this._is_timeline =             Neatline.is_timeline;
+            this._is_items =                Neatline.is_items;
 
             // Enable the map toggle toggle button, if there is a map.
             if (Neatline.map_id != null || Neatline.image_id) {
@@ -119,7 +110,7 @@
 
             // Enable the timeline toggle button.
             this.timeline_toggle.togglebutton('enable');
-            this.undated_items_toggle.togglebutton('enable');
+            this.items_toggle.togglebutton('enable');
 
             // For each block, if active then temporarily knock false
             // the tracker (so that the button press initializes the
@@ -138,11 +129,11 @@
                 this._is_timeline = false;
             }
 
-            if (this._is_undated_items) {
-                this._is_undated_items = false;
-                this.undated_items_toggle.togglebutton('press');
+            if (this._is_items) {
+                this._is_items = false;
+                this.items_toggle.togglebutton('press');
             } else {
-                this._is_undated_items = false;
+                this._is_items = false;
             }
 
         },
@@ -172,13 +163,15 @@
 
         },
 
+        /*
+         * Construct the toggle button widgets.
+         */
         _createButtons: function() {
 
             // Instantiate buttons, define callbacks.
-
-            this.map_toggle = $('#toggle-map');
-            this.timeline_toggle = $('#toggle-timeline');
-            this.undated_items_toggle = $('#toggle-undated-items');
+            this.map_toggle =               $('#toggle-map');
+            this.timeline_toggle =          $('#toggle-timeline');
+            this.items_toggle =             $('#toggle-items');
 
             this.map_toggle.togglebutton({
                 pressed_by_default: false,
@@ -194,7 +187,7 @@
                 unpress: $.proxy(this._toggleTimeline, this)
             });
 
-            this.undated_items_toggle.togglebutton({
+            this.items_toggle.togglebutton({
                 pressed_by_default: false,
                 enabled_by_default: false,
                 press: $.proxy(this._toggleUndatedItems, this),
@@ -387,9 +380,9 @@
 
                     this._recuperate_udi_on_timeline_toggle = false;
 
-                    if (this._is_undated_items) {
+                    if (this._is_items) {
                         this._toggleUndatedItems();
-                        this.undated_items_toggle.togglebutton('disable');
+                        this.items_toggle.togglebutton('disable');
                         this._recuperate_udi_on_timeline_toggle = true;
                     }
 
@@ -403,7 +396,7 @@
                     this.timeline_drag.css('display', 'block');
 
                     if (this._recuperate_udi_on_timeline_toggle) {
-                        this.undated_items_toggle.togglebutton('enable');
+                        this.items_toggle.togglebutton('enable');
                         this._toggleUndatedItems();
                     }
 
@@ -418,11 +411,11 @@
 
         _toggleUndatedItems: function() {
 
-            switch(this._is_undated_items) {
+            switch(this._is_items) {
 
                 case true:
 
-                    this._is_undated_items = false;
+                    this._is_items = false;
 
                     // Display none the timeline.
                     this.undated_items_drag.css('display', 'none');
@@ -431,7 +424,7 @@
 
                 case false:
 
-                    this._is_undated_items = true;
+                    this._is_items = true;
 
                     // Show the div.
                     this.undated_items_drag.css('display', 'block');
@@ -1267,7 +1260,7 @@
 
             var width = this._dragbox_width;
 
-            if (this._items_height == 'full' && this._is_undated_items) {
+            if (this._items_height == 'full' && this._is_items) {
                 width -= this.options.undated_items_width;
             }
 
@@ -1301,7 +1294,7 @@
             var offset = 0;
 
             if (this._items_height == 'full'
-                && this._is_undated_items
+                && this._is_items
                 && this._items_position == 'left') {
 
                     offset = this.options.undated_items_width;
@@ -1328,7 +1321,7 @@
 
             var width = this._dragbox_width;
 
-            if (this._is_undated_items) {
+            if (this._is_items) {
                 width -= this.options.undated_items_width;
             }
 
@@ -1358,7 +1351,7 @@
 
             var offset = 0;
 
-            if (this._is_undated_items && this._items_position == 'left') {
+            if (this._is_items && this._items_position == 'left') {
                 offset = this.options.undated_items_width;
             }
 
@@ -1383,7 +1376,7 @@
             // Prep booleans for the database.
             var is_map = this._is_map ? 1 : 0;
             var is_timeline = this._is_timeline ? 1 : 0;
-            var is_undated_items = this._is_undated_items ? 1 : 0;
+            var is_undated_items = this._is_items ? 1 : 0;
 
             // Assemble an object with the position tracker variables.
             return {
