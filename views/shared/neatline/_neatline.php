@@ -54,7 +54,18 @@
     <?php endif; ?>
 
     <?php if (isset($image)): ?>
-        Neatline.image = <?php echo json_encode($image); ?>;
+        Neatline.image = {
+            path: '<?php echo $image['path']; ?>',
+            name: '<?php echo $image['name']; ?>',
+            width: <?php echo $this->fileMetadata(
+                $image['record'],
+                'Omeka Image File',
+                'Width'); ?>,
+            height: <?php echo $this->fileMetadata(
+                $image['record'],
+                'Omeka Image File',
+                'Height'); ?>,
+        };
     <?php endif; ?>
 
 </script>

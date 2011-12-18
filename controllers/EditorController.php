@@ -98,13 +98,14 @@ class Neatline_EditorController extends Omeka_Controller_Action
         // Push image data into the view.
         else if ($neatline->is_map == 1 && !is_null($neatline->image_id)) {
 
-            // Get the image.
+            // Get the image and dimensions.
             $image = $this->_filesTable->find($neatline->image_id);
 
             // Add the parameters array.
             $neatlineData['image'] = array(
                 'path' =>           $image->getWebPath(),
-                'name' =>           $image->original_filename
+                'name' =>           $image->original_filename,
+                'record' =>         $image
             );
 
         }
