@@ -83,6 +83,7 @@ div.success {
     font-size: 1.5em;
 }
 
+
 /* Navigation */
 
 #neatline-header {
@@ -132,6 +133,7 @@ p.add-button a {
 p.add-button a:hover {
     color: #5b396c;
 }
+
 
 /* Add Neatline workflow */
 
@@ -197,6 +199,10 @@ table.neatline th, table.neatline td {
 
 table.neatline td {
     height: 40px;
+}
+
+table.neatline tbody tr:hover {
+    background-color: #f7f3f9;
 }
 
 a.neatline-title {

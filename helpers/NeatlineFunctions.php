@@ -40,16 +40,6 @@ function neatline_queueAdminCss()
 
     echo __v()->partial('index/_fonts.php');
 
-}/**
- * Include the row glosser widget.
- *
- * @return void.
- */
-function neatline_queueBrowseJs()
-{
-
-    queue_js('admin/browse_gloss', 'javascripts');
-
 }
 
 /**

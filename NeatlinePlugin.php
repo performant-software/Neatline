@@ -192,15 +192,6 @@ class NeatlinePlugin
 
         }
 
-        // Queue row glosser for browse actions.
-        if ($request->getModuleName() == 'neatline' &&
-            $request->getControllerName() == 'index' &&
-            $request->getActionName() == 'browse') {
-
-              neatline_queueBrowseJs();
-
-        }
-
         // Queue static assets for the Neatline editor.
         if ($request->getModuleName() == 'neatline' &&
             $request->getControllerName() == 'editor' &&
