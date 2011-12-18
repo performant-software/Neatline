@@ -313,8 +313,6 @@
                     else if (this._items_h_pos == 'right' &&
                              this._items_height == 'full') {
 
-                        console.log('full right');
-
                         this.positions = {
 
                             map: {
@@ -812,11 +810,9 @@
         },
 
         /*
-         * Apply computer positions to the markup.
+         * Apply computed positions to the markup.
          */
         apply: function() {
-
-            console.log(this.positions);
 
             // Map.
             if (this._is_map) {
