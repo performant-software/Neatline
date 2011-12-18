@@ -137,8 +137,8 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         $this->assertEquals($record->time_active, 0);
 
         // Ambiguity percentages should be 0 and 100.
-        $this->assertEquals($record->left_ambiguity_percentage, 0);
-        $this->assertEquals($record->right_ambiguity_percentage, 100);
+        $this->assertEquals($record->left_percent, 0);
+        $this->assertEquals($record->right_percent, 100);
 
     }
 
@@ -250,8 +250,8 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
 
         // Set int values.
         $success = $record->setPercentages(50, 60);
-        $this->assertEquals($record->left_ambiguity_percentage, 50);
-        $this->assertEquals($record->right_ambiguity_percentage, 60);
+        $this->assertEquals($record->left_percent, 50);
+        $this->assertEquals($record->right_percent, 60);
         $this->assertTrue($success);
 
     }
@@ -270,26 +270,26 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
 
         // Try to make the left greater than the right.
         $failure = $record->setPercentages(90, 70);
-        $this->assertEquals($record->left_ambiguity_percentage, 0);
-        $this->assertEquals($record->right_ambiguity_percentage, 100);
+        $this->assertEquals($record->left_percent, 0);
+        $this->assertEquals($record->right_percent, 100);
         $this->assertFalse($failure);
 
         // Try to make one of the values too small.
         $failure = $record->setPercentages(-10, 90);
-        $this->assertEquals($record->left_ambiguity_percentage, 0);
-        $this->assertEquals($record->right_ambiguity_percentage, 100);
+        $this->assertEquals($record->left_percent, 0);
+        $this->assertEquals($record->right_percent, 100);
         $this->assertFalse($failure);
 
         // Try to make one of the values too large.
         $failure = $record->setPercentages(10, 110);
-        $this->assertEquals($record->left_ambiguity_percentage, 0);
-        $this->assertEquals($record->right_ambiguity_percentage, 100);
+        $this->assertEquals($record->left_percent, 0);
+        $this->assertEquals($record->right_percent, 100);
         $this->assertFalse($failure);
 
         // Try to make the values non-integer.
         $failure = $record->setPercentages('notInt', 100);
-        $this->assertEquals($record->left_ambiguity_percentage, 0);
-        $this->assertEquals($record->right_ambiguity_percentage, 100);
+        $this->assertEquals($record->left_percent, 0);
+        $this->assertEquals($record->right_percent, 100);
         $this->assertFalse($failure);
 
     }

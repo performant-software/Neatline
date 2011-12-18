@@ -232,12 +232,12 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
         );
 
         $this->assertEquals(
-            $record->left_ambiguity_percentage,
+            $record->left_percent,
             self::$__testParams['left_percent']
         );
 
         $this->assertEquals(
-            $record->right_ambiguity_percentage,
+            $record->right_percent,
             self::$__testParams['right_percent']
         );
 
@@ -1104,10 +1104,10 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
         $record2->end_date = 'January 2012';
         $record1->vector_color = '#ffffff';
         $record2->vector_color = '#000000';
-        $record1->left_ambiguity_percentage = 0;
-        $record2->left_ambiguity_percentage = 0;
-        $record1->right_ambiguity_percentage = 100;
-        $record1->right_ambiguity_percentage = 100;
+        $record1->left_percent = 0;
+        $record2->left_percent = 0;
+        $record1->right_percent = 100;
+        $record1->right_percent = 100;
         $record1->time_active = 1;
         $record2->time_active = 1;
         $record1->save();
@@ -1126,8 +1126,8 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
             '"description":"' . $record1->description . '",' .
             '"color":"' . $record1->vector_color . '",' .
             '"textColor":"#4a4a4a",' .
-            '"left_ambiguity":' . $record1->left_ambiguity_percentage . ',' .
-            '"right_ambiguity":' . $record1->right_ambiguity_percentage . ',' .
+            '"left_ambiguity":' . $record1->left_percent . ',' .
+            '"right_ambiguity":' . $record1->right_percent . ',' .
             '"start":"2011-01-01 00:00:00",' .
             '"end":"2012-01-01 00:00:00"},{' .
             '"eventID":' . $record2->id . ',' .
@@ -1135,8 +1135,8 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
             '"description":"' . $record2->description . '",' .
             '"color":"' . $record2->vector_color . '",' .
             '"textColor":"#4a4a4a",' .
-            '"left_ambiguity":' . $record2->left_ambiguity_percentage . ',' .
-            '"right_ambiguity":' . $record2->right_ambiguity_percentage . ',' .
+            '"left_ambiguity":' . $record2->left_percent . ',' .
+            '"right_ambiguity":' . $record2->right_percent . ',' .
             '"start":"2011-01-01 00:00:00",' .
             '"end":"2012-01-01 00:00:00"}]}'
         );
@@ -1165,8 +1165,8 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
         $record->start_date = 'January 2011';
         $record->end_date = 'January 2012';
         $record->vector_color = '#ffffff';
-        $record->left_ambiguity_percentage = 0;
-        $record->right_ambiguity_percentage = 100;
+        $record->left_percent = 0;
+        $record->right_percent = 100;
         $record->time_active = 0;
         $record->save();
 

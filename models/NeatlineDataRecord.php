@@ -43,8 +43,8 @@ class NeatlineDataRecord extends Omeka_record
     public $end_time;
     public $vector_color;
     public $geocoverage;
-    public $left_ambiguity_percentage;
-    public $right_ambiguity_percentage;
+    public $left_percent;
+    public $right_percent;
     public $space_active;
     public $time_active;
     public $display_order;
@@ -76,8 +76,8 @@ class NeatlineDataRecord extends Omeka_record
         }
 
         // Set defaults.
-        $this->left_ambiguity_percentage = 0;
-        $this->right_ambiguity_percentage = 100;
+        $this->left_percent = 0;
+        $this->right_percent = 100;
         $this->space_active = 0;
         $this->time_active = 0;
 
@@ -126,8 +126,8 @@ class NeatlineDataRecord extends Omeka_record
         $data['start_time'] =       (string) $this->start_time;
         $data['end_date'] =         (string) $this->end_date;
         $data['end_time'] =         (string) $this->end_time;
-        $data['left_percent'] =     $this->left_ambiguity_percentage;
-        $data['right_percent'] =    $this->right_ambiguity_percentage;
+        $data['left_percent'] =     $this->left_percent;
+        $data['right_percent'] =    $this->right_percent;
 
         // JSON-ify the array.
         return json_encode($data);
@@ -174,9 +174,9 @@ class NeatlineDataRecord extends Omeka_record
     }
 
     /**
-     * Set the left_ambiguity_percentage or right_ambiguity_percentage
-     * attributes. Only accept integers between 0 and 100, and require that
-     * the right value always be greater than or equal to the left.
+     * Set the left_percent or right_percent attributes. Only accept integers
+     * between 0 and 100, and require that the right value always be greater
+     * than or equal to the left.
      *
      * @param integer $left The left-hand value.
      * @param integer $right The right-hand value.
@@ -192,8 +192,8 @@ class NeatlineDataRecord extends Omeka_record
             return false;
         }
 
-        $this->left_ambiguity_percentage = $left;
-        $this->right_ambiguity_percentage = $right;
+        $this->left_percent = $left;
+        $this->right_percent = $right;
 
         return true;
 

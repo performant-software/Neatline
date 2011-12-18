@@ -425,8 +425,8 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
                 'description' => $record->description,
                 'color' => $record->vector_color,
                 'textColor' => '#4a4a4a',
-                'left_ambiguity' => $record->left_ambiguity_percentage,
-                'right_ambiguity' => $record->right_ambiguity_percentage
+                'left_ambiguity' => $record->left_percent,
+                'right_ambiguity' => $record->right_percent
             );
 
             // If there is a valid start stamp.

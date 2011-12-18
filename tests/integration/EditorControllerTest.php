@@ -715,12 +715,12 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         );
 
         $this->assertEquals(
-            $record->left_ambiguity_percentage,
+            $record->left_percent,
             self::$__testParams['left_percent']
         );
 
         $this->assertEquals(
-            $record->right_ambiguity_percentage,
+            $record->right_percent,
             self::$__testParams['right_percent']
         );
 
@@ -830,12 +830,12 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         );
 
         $this->assertEquals(
-            $record->left_ambiguity_percentage,
+            $record->left_percent,
             self::$__testParams['left_percent']
         );
 
         $this->assertEquals(
-            $record->right_ambiguity_percentage,
+            $record->right_percent,
             self::$__testParams['right_percent']
         );
 
@@ -947,12 +947,12 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         );
 
         $this->assertEquals(
-            $record->left_ambiguity_percentage,
+            $record->left_percent,
             self::$__testParams['left_percent']
         );
 
         $this->assertEquals(
-            $record->right_ambiguity_percentage,
+            $record->right_percent,
             self::$__testParams['right_percent']
         );
 
