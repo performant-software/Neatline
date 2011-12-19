@@ -31,6 +31,11 @@
             markup: {
                 content: 'div.dropdown-content',
                 topbar: '#topbar'
+            },
+
+            // CSS constants.
+            css: {
+                duration: 400
             }
 
         },
@@ -91,8 +96,8 @@
 
                 'mousedown': function() {
 
-                    if (this._expanded) { this.hide(); }
-                    else { this.show(); }
+                    if (self._expanded) { self.hide(); }
+                    else { self.show(); }
 
                 },
 
@@ -120,7 +125,7 @@
 
                 // Manifest new position.
                 this.content.css({
-                    'left': this.buttonOffsetleft + this.buttonWidth - this.contentWidth,
+                    'left': this.buttonOffset.left + this.buttonWidth - this.contentWidth,
                     'top': -(topOffset)
                 });
 
@@ -134,7 +139,7 @@
 
                 // Manifest new position.
                 this.content.css({
-                    'left': this.buttonOffsetleft + this.buttonWidth - this.contentWidth,
+                    'left': this.buttonOffset.left + this.buttonWidth - this.contentWidth,
                     'top': topOffset
                 });
 
@@ -147,6 +152,19 @@
          */
         show: function() {
 
+            var self = this;
+
+            // Position and display.
+            this.position();
+            this.content.css('display', 'block');
+
+            // Animate down.
+            this.content.stop().animate({
+                'top': this.topbarHeight
+            }, this.options.css.duration, function() {
+                self._trigger('show');
+            });
+
             this._expanded = true;
 
         },
@@ -155,6 +173,16 @@
          * Hide the dropdown.
          */
         hide: function() {
+
+            var self = this;
+
+            // Animate up.
+            this.content.stop().animate({
+                'top': -(this.contentHeight)
+            }, this.options.css.duration, function() {
+                self.content.css('display', 'none');
+                self._trigger('hide');
+            });
 
             this._expanded = false;
 
