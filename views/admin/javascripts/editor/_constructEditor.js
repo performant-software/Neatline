@@ -25,8 +25,8 @@ jQuery(document).ready(function($) {
     // Get markup.
     var neatlineContainer =         $('.neatline-container');
     var editorContainer =           $('#item-browser');
-    var layoutBuilderContainer =    $('#configure-layout');
-    var configureMapButton =        $('#configure-map-button');
+    var configureLayoutButton =     $('#configure-layout-button');
+    // var configureMapButton =        $('#configure-map-button');
 
 
     /*
@@ -187,7 +187,7 @@ jQuery(document).ready(function($) {
 
 
     // Configure layout.
-    layoutBuilderContainer.configurelayout({
+    configureLayoutButton.configurelayout({
 
         // When the 'Fix starting viewport positions' button is pushed.
         'savepositions': function() {
@@ -200,7 +200,7 @@ jQuery(document).ready(function($) {
             var timelineCenter = neatlineContainer.neatline('getTimelineCenter');
 
             // Save.
-            layoutBuilderContainer.configurelayout('savePositions', mapExtent, mapZoom, timelineCenter);
+            configureLayoutButton.configurelayout('savePositions', mapExtent, mapZoom, timelineCenter);
 
         },
 
@@ -224,7 +224,7 @@ jQuery(document).ready(function($) {
 
     });
 
-    // Configure map.
-    configureMapButton.configuremap();
+    // // Configure map.
+    // configureMapButton.configuremap();
 
 });

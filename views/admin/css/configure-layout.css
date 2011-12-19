@@ -1,7 +1,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
 
 /**
- * CSS for layout builder application. Used in Omeka admin and Neatline editor.
+ * CSS for layout builder application. Used in the Neatline editor.
  *
  * PHP version 5
  *
@@ -24,8 +24,13 @@
  */
 
 
-#layout-builder {
-    margin: 0.3em 0 1.6em 0;
+#configure-layout {
+    width: 404px;
+    margin: 0 0 0 0;
+}
+
+#configure-layout p {
+    margin-bottom: 0;
 }
 
 #drag-box {
@@ -108,14 +113,6 @@ span.drag-tag {
 
 #drag-undated-items {
     background-color: #f0f0f0;
-}
-
-#layout-builder button {
-    margin: 1em 1em 0 0;
-}
-
-#layout-builder hr {
-    margin: 10px 0;
 }
 
 #layout-save {

@@ -1,8 +1,7 @@
-<?php
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
 
 /**
- * Markup for the map options dropdown.
+ * CSS for layout builder application. Used in the Neatline editor.
  *
  * PHP version 5
  *
@@ -23,18 +22,5 @@
  * @copyright   2011 The Board and Visitors of the University of Virginia
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache 2 License
  */
-?>
 
-<!-- Color picker. -->
-<h5>Default Vector Color:</h5>
-<input type="text" class="color-picker miniColors" name="default-vector-color" />
 
-<hr />
-
-<!-- Base layer picker. -->
-<h5>Base Layer:</h5>
-<select>
-    <option>OpenStreetMap</option>
-</select>
-
-<button class="btn icon approve save">Save</button>

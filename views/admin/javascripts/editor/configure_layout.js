@@ -1,5 +1,5 @@
 /*
- * Configure layout dropdown in Neatline Editor.
+ * Map dropdown menu.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -24,100 +24,34 @@
 
     $.widget('neatline.configurelayout', {
 
-        options: {
-
-            // CSS constants.
-            css: {
-                offset_padding: 3,
-                button_open_background: '#724E85'
-            },
-
-            // Animation constants.
-            animation: {
-                duration: 400
-            }
-
-        },
-
+        /*
+         * Get and prepare markup, run start-up routine.
+         */
         _create: function() {
 
-            var self = this;
-
-            // Getters.
-            this._window =                  $(window);
-            this.button =                   $('#configure-layout-button');
-            this.dropdownContainer =        $('#configure-layout');
-            this.layoutBuilder =            $('#layout-builder');
-            this.topbar =                   $('#topbar');
+            // Get the buttons.
             this.saveArrangementButton =    $('#save-arrangement');
             this.fixPositionsButton =       $('#fix-positions');
 
-            // Trackers.
-            this._expanded = false;
-
-            // Get positioning constants and position.
-            this._getPxConstants();
+            // Construct the dropdown manager.
+            this._constructDropdown();
 
             // Instantiate the layout builder.
+            this.layoutBuilder = $('#configure-layout');
             this.layoutBuilder.layoutbuilder();
 
-            // Gloss the button.
-            this._addButtonEvents();
-
-            // Add resize event.
-            this._window.bind('resize', function() {
-                self._position();
-                self._updateLayoutBuilderConstants();
-            });
+            // Add events to buttons.
+            this._addEvents();
 
         },
 
-        _addButtonEvents: function() {
+        /*
+         * Listen for mousedown on the buttons.
+         */
+        _addEvents: function() {
 
             var self = this;
 
-            this.button.bind({
-
-                'mousedown': function() {
-
-                    // Hide if shown.
-                    if (self._expanded) { self.hide(); }
-
-                    // Show if hidden.
-                    else { self.show(); }
-
-                },
-
-                'click': function(event) {
-                    event.preventDefault();
-                }
-
-            });
-
-        },
-
-        show: function() {
-
-            var self = this;
-
-            // Position.
-            this._position();
-
-            // Show and recalculate positions on the layout builder.
-            this.dropdownContainer.css('display', 'block');
-            this._updateLayoutBuilderConstants();
-
-            // Animate.
-            this.dropdownContainer.stop().animate({
-                'top': this.topbarHeight - this.options.css.offset_padding
-            }, this.options.animation.duration, function() {
-                self._updateLayoutBuilderConstants();
-            });
-
-            // Fix the hover style on the button.
-            this.button.addClass('open');
-
-            // Add events to the save arrangement and fix starting positions buttons.
             this.saveArrangementButton.bind({
                 'mousedown': function() {
                     self.saveArrangement();
@@ -130,92 +64,35 @@
                 }
             });
 
-            // Update tracker.
-            this._expanded = true;
-
         },
 
-        hide: function() {
+        /*
+         * Instantiate the dropdown manager widget, define callbacks.
+         */
+        _constructDropdown: function() {
 
             var self = this;
 
-            // Animate.
-            this.dropdownContainer.stop().animate({
-                'top': 0 - this.dropdownHeight - this.options.css.offset_padding
-            }, this.options.animation.duration, function() {
+            this.element.dropdown({
 
-                // Show.
-                self.dropdownContainer.css('display', 'none');
+                // On resize, update the layout builder markup.
+                'resize': function() {
+                    self.layoutBuilder.layoutbuilder('getPxConstants');
+                    self.layoutBuilder.layoutbuilder('centerAllTags');
+                },
+
+                'show': function() {
+                    self.layoutBuilder.layoutbuilder('getPxConstants');
+                    self.layoutBuilder.layoutbuilder('centerAllTags');
+                }
 
             });
 
-            // Pop off the open style on the button.
-            this.button.removeClass('open');
-
-            // Pop the events.
-            this.saveArrangementButton.unbind('mousedown');
-            this.fixPositionsButton.unbind('mousedown');
-
-            // Update tracker.
-            this._expanded = false;
-
         },
 
-        _getPxConstants: function() {
-
-            this.dropdownWidth = this.dropdownContainer.width();
-            this.dropdownHeight = this.dropdownContainer.height();
-            this.topbarHeight = this.topbar.height();
-            this.buttonWidth = this.button.width();
-
-        },
-
-        _position: function() {
-
-            // Get button position and dropdown width.
-            var buttonOffset = this.button.offset();
-            var buttonRightBoundary = buttonOffset.left + this.buttonWidth;
-
-            // If closed.
-            if (!this._expanded) {
-
-                // Calculate the new top offset.
-                var topOffset = this.dropdownHeight -
-                    this.options.css.offset_padding + this.topbarHeight;
-
-                // Position the dropdown.
-                this.dropdownContainer.css({
-                    'left': buttonRightBoundary - this.dropdownWidth,
-                    'top': -topOffset
-                });
-
-            }
-
-            // If expanded.
-            else {
-
-                // Calculate the new top offset.
-                var topOffset = this.topbarHeight - this.options.css.offset_padding
-
-                // Position the dropdown.
-                this.dropdownContainer.css({
-                    'left': buttonRightBoundary - this.dropdownWidth,
-                    'top': topOffset
-                });
-
-            }
-
-        },
-
-        _updateLayoutBuilderConstants: function() {
-
-            // Recalculate the positioning parameters on the layout
-            // builder dependent on display status and page position.
-            this.layoutBuilder.layoutbuilder('getPxConstants');
-            this.layoutBuilder.layoutbuilder('centerAllTags');
-
-        },
-
+        /*
+         * Post a new set of arrangement parameters.
+         */
         saveArrangement: function() {
 
             var self = this;
@@ -242,6 +119,9 @@
 
         },
 
+        /*
+         * Post a new positioning defaults.
+         */
         savePositions: function(mapExtent, mapZoom, timelineCenter) {
 
             var self = this;

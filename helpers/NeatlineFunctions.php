@@ -54,9 +54,10 @@ function neatline_queueEditorAssets()
 
     // CSS.
     queue_css('neatline-editor');
-    queue_css('layout-builder');
     queue_css('gradient-builder');
     queue_css('jquery.miniColors');
+    queue_css('configure-layout');
+    queue_css('configure-map');
 
     // Application classes and controller script.
     queue_js('editor/item_browser', 'javascripts');

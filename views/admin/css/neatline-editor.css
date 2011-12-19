@@ -373,7 +373,9 @@ span#search-cancel:hover {
     color: #f0b925;
 }
 
-.neatline-record-edit-form input[type="text"], .neatline-record-edit-form textarea {
+.neatline-record-edit-form input[type="text"],
+.neatline-record-edit-form textarea,
+.dropdown-content input[type="text"] {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 10px;
     font-weight: 13px;
@@ -384,7 +386,9 @@ span#search-cancel:hover {
     margin-bottom: 5px;
 }
 
-.neatline-record-edit-form input:focus, .neatline-record-edit-form textarea:focus {
+.neatline-record-edit-form input:focus,
+.neatline-record-edit-form textarea:focus,
+.dropdown-content input:focus{
     border-color: #9f7cb1;
 }
 
@@ -732,8 +736,7 @@ table#items tr.hidden {
 /* Dropdown menus */
 
 .dropdown-content {
-    padding: 0.5em 2em 0 2em;
-    width: 404px;
+    padding: 0.5em 2em 2em 2em;
     display: none;
     background-color: #fffef8;
     position: absolute;
@@ -749,6 +752,14 @@ table#items tr.hidden {
     border-right: 1px solid #745982;
     border-bottom: 1px solid #745982;
     z-index: 100;
+}
+
+.dropdown-content button {
+    margin: 1em 0.7em 0 0;
+}
+
+.dropdown-content hr {
+    margin: 10px 0;
 }
 
 

@@ -25,10 +25,6 @@
  */
 ?>
 
-<div id="configure-layout" class="dropdown-content">
-    <?php echo $this->partial('editor/_layout_builder.php'); ?>
-</div>
-
 <div id="topbar" class="topbar-inner topbar">
 
     <img id="neatline-logo" src="<?php echo img('neatline-logo-white-small.png'); ?>" />

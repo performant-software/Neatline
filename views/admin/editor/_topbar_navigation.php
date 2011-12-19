@@ -28,14 +28,10 @@
 <ul class="nav">
 
     <li class="dropdown">
-        <a href="" id="configure-map-button" class="dropdown-toggle">Map</a>
-        <div class="dropdown-content">
-            <?php echo $this->partial('editor/_configure_map.php'); ?>
-        </div>
-    </li>
-
-    <li class="dropdown">
         <a href="" id="configure-layout-button" class="dropdown-toggle">Layout</a>
+        <div id="configure-layout" class="dropdown-content">
+            <?php echo $this->partial('editor/_configure_layout.php'); ?>
+        </div>
     </li>
 
     <li class="dropdown">

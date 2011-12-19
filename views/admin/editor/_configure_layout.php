@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
 
 /**
- * Markup for the map options dropdown.
+ * Markup base for the layout builder block.
  *
  * PHP version 5
  *
@@ -25,16 +25,19 @@
  */
 ?>
 
-<!-- Color picker. -->
-<h5>Default Vector Color:</h5>
-<input type="text" class="color-picker miniColors" name="default-vector-color" />
+<div id="options">
+    <span id="toggle-map">Map</span>
+    <span id="toggle-timeline">Timeline</span>
+    <span id="toggle-items">Items</span>
+</div>
+
+<div id="drag-box"></div>
+
+<button id="save-arrangement" class="btn icon approve save">Save arrangement</button>
+<button id="fix-positions" class="btn icon pin save">Fix starting viewport positions</button>
 
 <hr />
 
-<!-- Base layer picker. -->
-<h5>Base Layer:</h5>
-<select>
-    <option>OpenStreetMap</option>
-</select>
-
-<button class="btn icon approve save">Save</button>
+<p>Use the toggle buttons to activate and deactivate blocks; drag the
+blocks to rearrange them. Click the "Fix starting viewport positions" button
+to store the current viewport settings as the public defaults.</p>

@@ -150,7 +150,8 @@
                 {
                     buffer: 0,
                     displayOutsideMaxExtent: true,
-                    isBaseLayer: true
+                    isBaseLayer: true,
+                    transparent: true
                 }
             );
 

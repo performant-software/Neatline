@@ -47,6 +47,7 @@
 
             // Getters.
             this._body =            $('body');
+            this._window =          $(window);
             this.topbar =           $(this.options.markup.topbar);
 
             // Get, detach, and re-append the content div.
@@ -59,7 +60,7 @@
 
             // Start-up.
             this._measure();
-            this._addEventsToButton();
+            this._addEvents();
 
         },
 
@@ -85,9 +86,9 @@
         },
 
         /*
-         * Listen for mousedown and click on the dropdown tab.
+         * Listen for mousedown and click on the dropdown tab, resize on window.
          */
-        _addEventsToButton: function() {
+        _addEvents: function() {
 
             var self = this;
 
@@ -105,6 +106,12 @@
                     e.preventDefault();
                 }
 
+            });
+
+            // Listen for resize on window.
+            this._window.bind('resize', function() {
+                self.position();
+                self._trigger('resize');
             });
 
         },
@@ -165,6 +172,9 @@
                 self._trigger('show');
             });
 
+            // Add class to button.
+            this.element.addClass('open');
+
             this._expanded = true;
 
         },
@@ -183,6 +193,9 @@
                 self.content.css('display', 'none');
                 self._trigger('hide');
             });
+
+            // Add class to button.
+            this.element.removeClass('open');
 
             this._expanded = false;
 
