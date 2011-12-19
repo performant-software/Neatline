@@ -40,7 +40,7 @@ function neatline_queueAdminCss()
     queue_css('bootstrap-excerpts');
 
     // Google fonts.
-    echo __v()->partial('index/_fonts.php');
+    echo __v()->partial('neatline/_fonts.php');
 
 }
 
@@ -73,7 +73,6 @@ function neatline_queueEditorAssets()
 
     // 3rd party code.
     queue_js('libraries/jquery.miniColors-0.1/jquery.miniColors.min', 'javascripts');
-    queue_js('libraries/taffy-min', 'javascripts');
 
 }
 
@@ -113,8 +112,11 @@ function neatline_queueNeatlineAssets()
     queue_js('_utilities', 'javascripts/libraries');
     queue_js('jquery.getscrollbarwidth', 'javascripts/libraries');
 
+    // 3rd party code.
+    queue_js('libraries/taffy-min', 'javascripts');
+
     // Google fonts.
-    echo __v()->partial('index/_fonts.php');
+    echo __v()->partial('neatline/_fonts.php');
 
 }
 

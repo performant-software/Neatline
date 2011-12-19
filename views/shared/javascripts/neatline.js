@@ -81,8 +81,6 @@
 
         positionDivs: function() {
 
-            console.log(this.params);
-
             // Compute the positions.
             this.positions = this.element.positioner(
                 'compute',
