@@ -120,13 +120,15 @@
         /*
          * Given a fresh parameter loadout, recompute the positions.
          *
-         * - param boolean is_m:    Map presence.
-         * - param boolean is_t:    Timeline presence.
-         * - param boolean is_i:    Items presence.
-         * - param string top:      Top element; 'map' or 'timeline'.
-         * - param string i_v_pos:  Items vertical position; 'top' or 'bottom'.
-         * - param string i_h_pos:  Items horizontal position; 'left' or 'right'.
-         * - param string i_h:      Items height; 'full' or 'partial'.
+         * - param boolean is_m:        Map presence.
+         * - param boolean is_t:        Timeline presence.
+         * - param boolean is_i:        Items presence.
+         * - param string top:          Top element; 'map' or 'timeline'.
+         * - param string i_v_pos:      Items vertical position; 'top' or 'bottom'.
+         * - param string i_h_pos:      Items horizontal position; 'left' or 'right'.
+         * - param string i_h:          Items height; 'full' or 'partial'.
+         *
+         * - return object positions:   The final positions object literal.
          *
          */
         compute: function(is_m, is_t, is_i, top, i_v_pos, i_h_pos, i_h) {
@@ -837,6 +839,19 @@
             } else {
                 this.items.css('display', 'none');
             }
+
+        },
+
+        /*
+         * Emit a protected class attribute.
+         *
+         * - param string attr:    The name of the attribute.
+         *
+         * - return mixed attr:    The value of the attribute.
+         */
+        getAttr: function(attr) {
+
+            return this[attr];
 
         }
 

@@ -47,7 +47,7 @@
                     default: '#f4f4f4',
                     target: '#fffcf4'
                 },
-                undated_items: {
+                items: {
                     default: '#f0f0f0',
                     target: '#fffcf4'
                 }
@@ -69,9 +69,7 @@
 
             // Set tracker arrays that record the last parameter
             // loadouts that triggered a div slide.
-            this._last_map_slide_params = null;
-            this._last_timeline_slide_params = null;
-            this._last_items_slide_params = null;
+            this._lastParams = null;
 
             // Build and prepare markup.
             this._disableSelect();
@@ -148,7 +146,19 @@
          */
         getPxConstants: function() {
 
+            // Hit the measuring method on the positioner.
             this.dragbox.positioner('measure');
+
+            // Capture the new constants.
+            this.width =                this.dragbox.positioner('getAttr', 'width');
+            this.height =               this.dragbox.positioner('getAttr', 'height');
+            this.minorWidth =           this.dragbox.positioner('getAttr', 'minorWidth');
+            this.majorWidth =           this.dragbox.positioner('getAttr', 'majorWidth');
+            this.majorHeight =          this.dragbox.positioner('getAttr', 'majorHeight');
+            this.minorHeight =          this.dragbox.positioner('getAttr', 'minorHeight');
+
+            // Get the offset of the container relative to the window.
+            this.dragboxOffset = this.dragbox.offset();
 
         },
 
@@ -191,6 +201,8 @@
          */
         _createButtons: function() {
 
+            var self = this;
+
             // Instantiate buttons, define callbacks.
             this.map_toggle =               $('#toggle-map');
             this.timeline_toggle =          $('#toggle-timeline');
@@ -199,22 +211,22 @@
             this.map_toggle.togglebutton({
                 pressed_by_default: false,
                 enabled_by_default: false,
-                press: $.proxy(this._toggleMap, this),
-                unpress: $.proxy(this._toggleMap, this)
+                press: function() { self._toggleMap(); },
+                unpress: function() { self._toggleMap(); },
             });
 
             this.timeline_toggle.togglebutton({
                 pressed_by_default: false,
                 enabled_by_default: false,
-                press: $.proxy(this._toggleTimeline, this),
-                unpress: $.proxy(this._toggleTimeline, this)
+                press: function() { self._toggleTimeline(); },
+                unpress: function() { self._toggleTimeline(); }
             });
 
             this.items_toggle.togglebutton({
                 pressed_by_default: false,
                 enabled_by_default: false,
-                press: $.proxy(this._toggleItems, this),
-                unpress: $.proxy(this._toggleItems, this)
+                press: function() { self._toggleItems(); },
+                unpress: function() { self._toggleItems(); }
             });
 
         },
@@ -292,24 +304,24 @@
 
             });
 
-            // Gloss undated items.
+            // Gloss items.
             this.items_drag.bind({
 
                 'mouseenter': function() {
                     if (!self._is_dragging) {
-                        self.__undatedItemsHighlight('enter');
+                        self.__itemsHighlight('enter');
                     }
                 },
 
                 'mouseleave': function() {
                     if (!self._is_dragging) {
-                        self.__undatedItemsHighlight('leave');
+                        self.__itemsHighlight('leave');
                     }
                 },
 
                 'mousedown': function(e) {
                     if (!self._is_dragging) {
-                        self._current_dragger = 'undated';
+                        self._current_dragger = 'items';
                         self.__doItemsDrag(e);
                     }
                 }
@@ -366,9 +378,6 @@
 
                     this._is_map = false;
 
-                    // Display none the map.
-                    this.map_drag.css('display', 'none');
-
                     // If no timeline, disable items.
                     if (!this._is_timeline) {
                         this.items_toggle.togglebutton('disable');
@@ -381,14 +390,12 @@
 
                     this._is_map = true;
 
-                    // Show the div.
-                    this.map_drag.css('display', 'block');
-
                 break;
 
             }
 
             // Recalculate all positions for all divs.
+            this._computePositions();
             this._reposition();
 
         },
@@ -404,9 +411,6 @@
 
                     this._is_timeline = false;
 
-                    // Display none the timeline.
-                    this.timeline_drag.css('display', 'none');
-
                     // If no timeline, disable items.
                     if (!this._is_map) {
                         this.items_toggle.togglebutton('disable');
@@ -419,14 +423,12 @@
 
                     this._is_timeline = true;
 
-                    // Show the div.
-                    this.timeline_drag.css('display', 'block');
-
                 break;
 
             }
 
             // Recalculate all positions for all divs.
+            this._computePositions();
             this._reposition();
 
         },
@@ -442,23 +444,18 @@
 
                     this._is_items = false;
 
-                    // Display none the timeline.
-                    this.items_drag.css('display', 'none');
-
                 break;
 
                 case false:
 
                     this._is_items = true;
 
-                    // Show the div.
-                    this.items_drag.css('display', 'block');
-
                 break;
 
             }
 
             // Recalculate all positions for all divs.
+            this._computePositions();
             this._reposition();
 
         },
@@ -534,17 +531,17 @@
         /*
          * Highlight the items block.
          */
-        __undatedItemsHighlight: function(enter_or_leave) {
+        __itemsHighlight: function(enter_or_leave) {
 
             // Figure out which color to tween to.
             switch (enter_or_leave) {
 
                 case 'enter':
-                    var target = this.options.colors.undated_items.target
+                    var target = this.options.colors.items.target
                 break;
 
                 case 'leave':
-                    var target = this.options.colors.undated_items.default
+                    var target = this.options.colors.items.default
                 break;
 
             }
@@ -560,6 +557,9 @@
          */
         __doMapDrag: function(trigger_event_object) {
 
+            var self = this;
+
+            // Set dragging tracker.
             this._is_dragging = true;
 
             // Get starting pointer coordinates.
@@ -567,17 +567,11 @@
             var startingY = trigger_event_object.pageY;
 
             // Get starting div offsets.
-            var startingOffsetX = this.__getMapLeftOffset();
-            var startingOffsetY = this.__getMapTopOffset();
-
-            // Bind self.
-            var self = this;
+            var startingOffsetX = this.positions.map.left;
+            var startingOffsetY = this.positions.map.top;
 
             // Make the drag div see-through and always on top.
-            this.map_drag.css({
-                'opacity': 0.5,
-                'z-index': 99
-            });
+            this.__fadeDragger(this.map_drag);
 
             this._window.bind({
 
@@ -593,29 +587,93 @@
                         'top': startingOffsetY + offsetY
                     });
 
-                    // If there is a timeline.
-                    if (self._is_timeline) {
+                    /*
+                     * Repositioning listeners.
+                     */
 
-                        // If the timeline is on the bottom.
+                    // TIMELINE and ITEMS.
+                    if (self._is_timeline && self._is_items) {
+
+                        // Vertical switching between map and timeline.
+
+                        // MAP on top:
                         if (self._top_element == 'map') {
 
-                            // If the cursor dips below the top border
-                            // of the timeline div, slide the timeline up.
-                            if (e.pageY > (self._top_block_height + self._dragbox_position.top)) {
+                            // ** Cursor down.
+                            if (e.pageY > (self.dragboxOffset.top + self.majorHeight)) {
                                 self._top_element = 'timeline';
-                                self.__slideTimelineAndUndatedItems(false);
+                                self.__slideTimeline(false);
+                                self.__slideItems(false);
                             }
 
                         }
 
-                        // If the timeline is on the top.
-                        else {
+                        // TIMELINE on top:
+                        else if (self._top_element == 'timeline') {
 
-                            // If the cursor moves above the bottom border
-                            // of the timeline div, slide the timeline down.
-                            if (e.pageY < (self._dragbox_position.top + self._top_block_height)) {
+                            // ** Cursor up.
+                            if (e.pageY < (self.dragboxOffset.top + self.majorHeight)) {
                                 self._top_element = 'map';
-                                self.__slideTimelineAndUndatedItems(false);
+                                self.__slideTimeline(false);
+                                self.__slideItems(false);
+
+                            }
+
+                        }
+
+                        // Horizontal switching between map and items.
+
+                        if (self.__mapIsLevelWithItems()) {
+
+                            // ITEMS on right:
+                            if (self._items_h_pos == 'right') {
+
+                                // ** Cursor right.
+                                if (e.pageX > (self.dragoxOffset.left + self.majorWidth)) {
+                                    self._items_h_pos = 'left';
+                                    self.__slideItems(false);
+                                }
+
+                            }
+
+                            // ITEMS on left:
+                            else if (self._items_h_pos == 'left') {
+
+                                // ** Cursor left.
+                                if (e.pageX < (self.dragoxOffset.left + self.minorWidth)) {
+                                    self._items_h_pos = 'right';
+                                    self.__slideItems(false);
+                                }
+
+                            }
+
+                        }
+
+                    }
+
+                    // TIMELINE:
+                    else if (self._is_timeline && !self._is_items) {
+
+                        // Vertical switching between map and timeline.
+
+                        // MAP on top:
+                        if (self._top_element == 'map') {
+
+                            // ** Cursor down.
+                            if (e.pageY > (self.dragboxOffset.top + self.majorHeight)) {
+                                self._top_element = 'timeline';
+                                self.__slideTimeline(false);
+                            }
+
+                        }
+
+                        // TIMELINE on top:
+                        else if (self._top_element == 'timeline') {
+
+                            // ** Cursor up.
+                            if (e.pageY < (self.dragboxOffset.top + self.majorHeight)) {
+                                self._top_element = 'map';
+                                self.__slideTimeline(false);
                             }
 
                         }
@@ -640,6 +698,9 @@
          */
         __doTimelineDrag: function(trigger_event_object) {
 
+            var self = this;
+
+            // Set dragging tracker.
             this._is_dragging = true;
 
             // Get starting pointer coordinates.
@@ -647,24 +708,11 @@
             var startingY = trigger_event_object.pageY;
 
             // Get starting div offsets.
-            var timelineStartingOffsetX = this.__getTimelineLeftOffset();
-            var timelineStartingOffsetY = this.__getTimelineTopOffset();
-            var undatedItemsStartingOffsetX = this.__getItemsLeftOffset();
-            var undatedItemsStartingOffsetY = this.__getItemsTopOffset();
+            var startingOffsetX = this.positions.timeline.left;
+            var startingOffsetY = this.positions.timeline.top;
 
-            // Bind self.
-            var self = this;
-
-            // Make the drag divs see-through and always on top.
-            this.timeline_drag.css({
-                'opacity': 0.5,
-                'z-index': 99
-            });
-
-            this.items_drag.css({
-                'opacity': 0.5,
-                'z-index': 99
-            });
+            // Make the drag div see-through and always on top.
+            this.__fadeDragger(this.timeline_drag);
 
             this._window.bind({
 
@@ -676,41 +724,95 @@
 
                     // Apply new position.
                     self.timeline_drag.css({
-                        'left': timelineStartingOffsetX + offsetX,
-                        'top': timelineStartingOffsetY + offsetY
+                        'left': startingOffsetX + offsetX,
+                        'top': startingOffsetY + offsetY
                     });
 
-                    if (self._items_height == 'partial') {
-                        self.items_drag.css({
-                            'left': undatedItemsStartingOffsetX + offsetX,
-                            'top': undatedItemsStartingOffsetY + offsetY
-                        });
-                    }
+                    /*
+                     * Repositioning listeners.
+                     */
 
-                    // If there is a map.
-                    if (self._is_map) {
+                    // MAP and ITEMS.
+                    if (self._is_map && self._is_items) {
 
-                        // Get current map top offset.
-                        var mapTopOffset = self.__getMapTopOffset();
+                        // Vertical switching between map and timeline.
 
-                        // If the map is on the bottom.
+                        // TIMELINE on top:
                         if (self._top_element == 'timeline') {
 
-                            // If the cursor dips below the top border
-                            // of the timeline div, slide the timeline up.
-                            if (e.pageY > (mapTopOffset + self._dragbox_position.top)) {
+                            // ** Cursor down.
+                            if (e.pageY > (self.dragboxOffset.top + self.majorHeight)) {
+                                self._top_element = 'map';
+                                self.__slideMap(false);
+                                self.__slideItems(false);
+                            }
+
+                        }
+
+                        // MAP on top:
+                        else if (self._top_element == 'map') {
+
+                            // ** Cursor up.
+                            if (e.pageY < (self.dragboxOffset.top + self.majorHeight)) {
+                                self._top_element = 'timeline';
+                                self.__slideMap(false);
+                                self.__slideItems(false);
+
+                            }
+
+                        }
+
+                        // Horizontal switching between map and items.
+
+                        if (self.__timelineIsLevelWithItems()) {
+
+                            // ITEMS on right:
+                            if (self._items_h_pos == 'right') {
+
+                                // ** Cursor right.
+                                if (e.pageX > (self.dragoxOffset.left + self.majorWidth)) {
+                                    self._items_h_pos = 'left';
+                                    self.__slideItems(false);
+                                }
+
+                            }
+
+                            // ITEMS on left:
+                            else if (self._items_h_pos == 'left') {
+
+                                // ** Cursor left.
+                                if (e.pageX < (self.dragoxOffset.left + self.minorWidth)) {
+                                    self._items_h_pos = 'right';
+                                    self.__slideItems(false);
+                                }
+
+                            }
+
+                        }
+
+                    }
+
+                    // MAP:
+                    else if (self._is_map && !self._is_items) {
+
+                        // Vertical switching between map and timeline.
+
+                        // TIMELINE on top:
+                        if (self._top_element == 'timeline') {
+
+                            // ** Cursor down.
+                            if (e.pageY > (self.dragboxOffset.top + self.majorHeight)) {
                                 self._top_element = 'map';
                                 self.__slideMap(false);
                             }
 
                         }
 
-                        // If the timeline is on the top.
-                        else {
+                        // MAP on top:
+                        else if (self._top_element == 'map') {
 
-                            // If the cursor moves above the bottom border
-                            // of the timeline div, slide the timeline down.
-                            if (e.pageY < (self._dragbox_position.top + self._top_block_height)) {
+                            // ** Cursor up.
+                            if (e.pageY < (self.dragboxOffset.top + self.majorHeight)) {
                                 self._top_element = 'timeline';
                                 self.__slideMap(false);
                             }
@@ -723,7 +825,7 @@
 
                 'mouseup': function() {
 
-                    self.__slideTimelineAndUndatedItems(true);
+                    self.__slideTimeline(true);
                     self._window.unbind('mousemove mouseup');
 
                 }
@@ -737,260 +839,271 @@
          */
         __doItemsDrag: function(trigger_event_object) {
 
-            this._is_dragging = true;
+            // this._is_dragging = true;
 
-            // Get starting pointer coordinates.
-            var startingX = trigger_event_object.pageX;
-            var startingY = trigger_event_object.pageY;
+            // // Get starting pointer coordinates.
+            // var startingX = trigger_event_object.pageX;
+            // var startingY = trigger_event_object.pageY;
 
-            // Get starting div offsets.
-            var StartingOffsetX = this.__getItemsLeftOffset();
-            var StartingOffsetY = this.__getItemsTopOffset();
+            // // Get starting div offsets.
+            // var StartingOffsetX = this.__getItemsLeftOffset();
+            // var StartingOffsetY = this.__getItemsTopOffset();
 
-            // Set starting height and position status.
-            this._udi_height_at_start_of_drag = this._items_height;
-            this._udi_position_at_start_of_drag = (this._top_element == 'map') ? 'bottom' : 'top';
+            // // Set starting height and position status.
+            // this._udi_height_at_start_of_drag = this._items_height;
+            // this._udi_position_at_start_of_drag = (this._top_element == 'map') ? 'bottom' : 'top';
 
-            // Bind self.
-            var self = this;
+            // // Bind self.
+            // var self = this;
 
-            // Create typable facades for vertical tier parameters.
-            var vt1 = this.options.css.vertical_offset_tier1;
-            var vt2 = this.options.css.vertical_offset_tier2;
+            // // Create typable facades for vertical tier parameters.
+            // var vt1 = this.options.css.vertical_offset_tier1;
+            // var vt2 = this.options.css.vertical_offset_tier2;
 
-            // Make the drag div see-through and always on top.
-            this.items_drag.css({
-                'opacity': 0.5,
-                'z-index': 99
-            });
+            // // Make the drag div see-through and always on top.
+            // this.items_drag.css({
+            //     'opacity': 0.5,
+            //     'z-index': 99
+            // });
 
-            this._window.bind({
+            // this._window.bind({
 
-                'mousemove': function(e) {
+            //     'mousemove': function(e) {
 
-                    // Calculate new offsets.
-                    var offsetX = e.pageX - startingX;
-                    var offsetY = e.pageY - startingY;
+            //         // Calculate new offsets.
+            //         var offsetX = e.pageX - startingX;
+            //         var offsetY = e.pageY - startingY;
 
-                    // Apply new position.
-                    self.items_drag.css({
-                        'left': StartingOffsetX + offsetX,
-                        'top': StartingOffsetY + offsetY
-                    });
+            //         // Apply new position.
+            //         self.items_drag.css({
+            //             'left': StartingOffsetX + offsetX,
+            //             'top': StartingOffsetY + offsetY
+            //         });
 
-                    // Control flow to determine where/when the udi
-                    // should be animated as the mouse position changes.
+            //         // Control flow to determine where/when the udi
+            //         // should be animated as the mouse position changes.
 
-                    // If udi was partial-height at drag start.
-                    if (self._udi_height_at_start_of_drag == 'partial') {
+            //         // If udi was partial-height at drag start.
+            //         if (self._udi_height_at_start_of_drag == 'partial') {
 
-                        // If udi was on the bottom when the drag started.
-                        if (self._udi_position_at_start_of_drag == 'bottom') {
+            //             // If udi was on the bottom when the drag started.
+            //             if (self._udi_position_at_start_of_drag == 'bottom') {
 
-                            // If the mouse has moved upwards but has not crossed
-                            // through the first offset tier.
-                            if (offsetY < 0 && offsetY > -vt1) {
-                                self._items_height = 'partial';
-                                self._top_element = 'map';
-                                self.__slideTimeline(false);
-                                self.__slideMap(false);
-                            }
+            //                 // If the mouse has moved upwards but has not crossed
+            //                 // through the first offset tier.
+            //                 if (offsetY < 0 && offsetY > -vt1) {
+            //                     self._items_height = 'partial';
+            //                     self._top_element = 'map';
+            //                     self.__slideTimeline(false);
+            //                     self.__slideMap(false);
+            //                 }
 
-                            // If the mouse has moved upwards and the vertical
-                            // offset is between the two vertical offset tiers.
-                            else if (offsetY < -vt1 && offsetY > -vt2) {
-                                self._items_height = 'full';
-                                self.__slideTimeline(false);
-                                self.__slideMap(false);
-                            }
+            //                 // If the mouse has moved upwards and the vertical
+            //                 // offset is between the two vertical offset tiers.
+            //                 else if (offsetY < -vt1 && offsetY > -vt2) {
+            //                     self._items_height = 'full';
+            //                     self.__slideTimeline(false);
+            //                     self.__slideMap(false);
+            //                 }
 
-                            // If the mouse has moved upwards and is over the
-                            // second tier threshold.
-                            else if (offsetY < -vt2) {
-                                self._items_height = 'partial';
-                                self._top_element = 'timeline';
-                                self.__slideTimeline(false);
-                                self.__slideMap(false);
-                            }
+            //                 // If the mouse has moved upwards and is over the
+            //                 // second tier threshold.
+            //                 else if (offsetY < -vt2) {
+            //                     self._items_height = 'partial';
+            //                     self._top_element = 'timeline';
+            //                     self.__slideTimeline(false);
+            //                     self.__slideMap(false);
+            //                 }
 
-                        }
+            //             }
 
-                        // If udi was on the top when the drag started.
-                        else if (self._udi_position_at_start_of_drag == 'top') {
+            //             // If udi was on the top when the drag started.
+            //             else if (self._udi_position_at_start_of_drag == 'top') {
 
-                            // If the mouse has moved downwards but has not crossed
-                            // through the first offset tier.
-                            if (offsetY > 0 && offsetY < vt1) {
-                                self._items_height = 'partial';
-                                self._top_element = 'timeline';
-                                self.__slideTimeline(false);
-                                self.__slideMap(false);
-                            }
+            //                 // If the mouse has moved downwards but has not crossed
+            //                 // through the first offset tier.
+            //                 if (offsetY > 0 && offsetY < vt1) {
+            //                     self._items_height = 'partial';
+            //                     self._top_element = 'timeline';
+            //                     self.__slideTimeline(false);
+            //                     self.__slideMap(false);
+            //                 }
 
-                            // If the mouse has moved downwards and the vertical
-                            // offset is between the two vertical offset tiers.
-                            else if (offsetY > vt1 && offsetY < vt2) {
-                                self._items_height = 'full';
-                                self.__slideTimeline(false);
-                                self.__slideMap(false);
-                            }
+            //                 // If the mouse has moved downwards and the vertical
+            //                 // offset is between the two vertical offset tiers.
+            //                 else if (offsetY > vt1 && offsetY < vt2) {
+            //                     self._items_height = 'full';
+            //                     self.__slideTimeline(false);
+            //                     self.__slideMap(false);
+            //                 }
 
-                            // If the mouse has moved downwards and is over the
-                            // second tier threshold.
-                            else if (offsetY > vt2) {
-                                self._items_height = 'partial';
-                                self._top_element = 'map';
-                                self.__slideTimeline(false);
-                                self.__slideMap(false);
-                            }
+            //                 // If the mouse has moved downwards and is over the
+            //                 // second tier threshold.
+            //                 else if (offsetY > vt2) {
+            //                     self._items_height = 'partial';
+            //                     self._top_element = 'map';
+            //                     self.__slideTimeline(false);
+            //                     self.__slideMap(false);
+            //                 }
 
-                        }
+            //             }
 
-                    }
+            //         }
 
-                    // If udi was full-height at the start of the drag.
-                    else if (self._udi_height_at_start_of_drag == 'full') {
+            //         // If udi was full-height at the start of the drag.
+            //         else if (self._udi_height_at_start_of_drag == 'full') {
 
-                        // If the mouse has moved upwards but has not crossed
-                        // through the first vertical tier.
-                        if (offsetY < 0 && offsetY > -vt1) {
-                            self._items_height = 'full';
-                            self.__slideTimeline(false);
-                            self.__slideMap(false);
-                        }
+            //             // If the mouse has moved upwards but has not crossed
+            //             // through the first vertical tier.
+            //             if (offsetY < 0 && offsetY > -vt1) {
+            //                 self._items_height = 'full';
+            //                 self.__slideTimeline(false);
+            //                 self.__slideMap(false);
+            //             }
 
-                        // If the mouse has moved upwards and has crossed through
-                        // the first vertical tier.
-                        else if (offsetY < -vt1) {
-                            self._items_height = 'partial';
-                            self._top_element = 'timeline';
-                            self.__slideTimeline(false);
-                            self.__slideMap(false);
-                        }
+            //             // If the mouse has moved upwards and has crossed through
+            //             // the first vertical tier.
+            //             else if (offsetY < -vt1) {
+            //                 self._items_height = 'partial';
+            //                 self._top_element = 'timeline';
+            //                 self.__slideTimeline(false);
+            //                 self.__slideMap(false);
+            //             }
 
-                        // If the mouse has moved downwards but has not crossed
-                        // through the first vertical tier.
-                        else if (offsetY > 0 && offsetY < vt1) {
-                            self._items_height = 'full';
-                            self.__slideTimeline(false);
-                            self.__slideMap(false);
-                        }
+            //             // If the mouse has moved downwards but has not crossed
+            //             // through the first vertical tier.
+            //             else if (offsetY > 0 && offsetY < vt1) {
+            //                 self._items_height = 'full';
+            //                 self.__slideTimeline(false);
+            //                 self.__slideMap(false);
+            //             }
 
-                        // If the mouse has moved downwards and has crossed through
-                        // the first vertical tier.
-                        else if (offsetY > vt1) {
-                            self._items_height = 'partial';
-                            self._top_element = 'map';
-                            self.__slideTimeline(false);
-                            self.__slideMap(false);
-                        }
+            //             // If the mouse has moved downwards and has crossed through
+            //             // the first vertical tier.
+            //             else if (offsetY > vt1) {
+            //                 self._items_height = 'partial';
+            //                 self._top_element = 'map';
+            //                 self.__slideTimeline(false);
+            //                 self.__slideMap(false);
+            //             }
 
-                    }
+            //         }
 
-                    // If udi is on the right.
-                    if (self._items_position == 'right') {
+            //         // If udi is on the right.
+            //         if (self._items_position == 'right') {
 
-                        // If the cursor crosses over the centerline going left.
-                        if (e.pageX < (self._dragbox_position.left + self._dragbox_width / 2)) {
+            //             // If the cursor crosses over the centerline going left.
+            //             if (e.pageX < (self._dragbox_position.left + self._dragbox_width / 2)) {
 
-                            self._items_position = 'left';
-                            self.__slideTimeline(false);
+            //                 self._items_position = 'left';
+            //                 self.__slideTimeline(false);
 
-                            if (self._items_height == 'full') {
-                                self.__slideMap(false);
-                            }
+            //                 if (self._items_height == 'full') {
+            //                     self.__slideMap(false);
+            //                 }
 
-                        }
+            //             }
 
-                    }
+            //         }
 
-                    // If udi is on the left.
-                    else {
+            //         // If udi is on the left.
+            //         else {
 
-                        // If the cursor crosses over the centerline going left.
-                        if (e.pageX > (self._dragbox_position.left + self._dragbox_width / 2)) {
+            //             // If the cursor crosses over the centerline going left.
+            //             if (e.pageX > (self._dragbox_position.left + self._dragbox_width / 2)) {
 
-                            self._items_position = 'right';
-                            self.__slideTimeline(false);
+            //                 self._items_position = 'right';
+            //                 self.__slideTimeline(false);
 
-                            if (self._items_height == 'full') {
-                                self.__slideMap(false);
-                            }
+            //                 if (self._items_height == 'full') {
+            //                     self.__slideMap(false);
+            //                 }
 
-                        }
+            //             }
 
-                    }
+            //         }
 
-                },
+            //     },
 
-                'mouseup': function() {
+            //     'mouseup': function() {
 
-                    self.__slideItems(true);
-                    self._window.unbind('mousemove mouseup');
+            //         self.__slideItems(true);
+            //         self._window.unbind('mousemove mouseup');
 
-                }
+            //     }
 
-            });
+            // });
 
         },
 
         /*
          * Manifest new timeline position.
+         *
+         * - param boolean endingSlide: True if the slide was triggered by
+         *   a mouseup on the dragger dif, which case the dragger should be
+         *   pushed back to full opacity at the end of the slide tween.
          */
-        __slideTimeline: function(ending_slide) {
+        __slideTimeline: function(endingSlide) {
 
             var self = this;
-            var newTimelineHeight = this.__getTimelineHeight();
 
-            var _current_params = [
+            // Capture the current positioning loadout.
+            var newParams = [
                 this._top_element,
-                this._items_position,
+                this._items_h_pos,
+                this._items_v_pos,
                 this._items_height
             ];
 
-            if (!$.compare(_current_params, this._last_timeline_slide_params)
-               || this._current_dragger == 'timeline') {
+            // If there is a parameter change.
+            if (!$.compare(newParams, this.lastParams) ||
+                this._current_dragger == 'timeline') {
 
-                if (ending_slide) {
+                // Recompute positions.
+                this._computePositions();
 
-                    // Slide the timeline and undated items.
+                // If ending slide.
+                if (endingSlide) {
+
+                    // Slide the timeline.
                     this.timeline_drag.stop().animate({
-                        'height': newTimelineHeight,
-                        'width': this.__getTimelineWidth(),
-                        'top': this.__getTimelineTopOffset(),
-                        'left': this.__getTimelineLeftOffset(),
+                        'height': this.positions.timeline.height,
+                        'width': this.positions.timeline.width,
+                        'top': this.positions.timeline.top,
+                        'left': this.positions.timeline.left,
                         'opacity': 1,
                         'z-index': 0
                     }, function() {
-
-                        // On complete, if the slide is an ending
-                        // slide, unset the dragging tracker, and forcibly
-                        // mouseleave the dragger div.
                         self._is_dragging = false;
                         self.timeline_drag.trigger('mouseleave');
-
                     });
 
                 }
 
+                // If not an ending slide.
                 else {
 
-                    // Slide the timeline and undated items.
+                    // Slide the timeline.
                     this.timeline_drag.stop().animate({
-                        'height': newTimelineHeight,
-                        'width': this.__getTimelineWidth(),
-                        'top': this.__getTimelineTopOffset(),
-                        'left': this.__getTimelineLeftOffset()
+                        'height': this.positions.timeline.height,
+                        'width': this.positions.timeline.width,
+                        'top': this.positions.timeline.top,
+                        'left': this.positions.timeline.left
                     });
 
                 }
 
-                this._animate_position_tag(this.timeline_drag, newTimelineHeight);
+                // Recenter the tag.
+                this._animate_position_tag(
+                    this.timeline_drag,
+                    this.positions.timeline.height
+                );
 
-                // Record params loadout for the last slide.
-                this._last_timeline_slide_params = [
+                // Capture the new positioning loadout.
+                this.lastParams = [
                     this._top_element,
-                    this._items_position,
+                    this._items_h_pos,
+                    this._items_v_pos,
                     this._items_height
                 ];
 
@@ -1000,60 +1113,72 @@
 
         /*
          * Manifest new map position.
+         *
+         * - param boolean endingSlide: True if the slide was triggered by
+         *   a mouseup on the dragger dif, which case the dragger should be
+         *   pushed back to full opacity at the end of the slide tween.
          */
-        __slideMap: function(ending_slide) {
+        __slideMap: function(endingSlide) {
 
             var self = this;
-            var newMapHeight = this.__getMapHeight();
-            var _current_params = [
+
+            // Capture the current positioning loadout.
+            var newParams = [
                 this._top_element,
-                this._items_position,
+                this._items_h_pos,
+                this._items_v_pos,
                 this._items_height
             ];
 
-            if (!$.compare(_current_params, this._last_map_slide_params)
-               || this._current_dragger == 'map') {
+            // If there is a parameter change.
+            if (!$.compare(newParams, this.lastParams) ||
+                this._current_dragger == 'map') {
 
-                if (ending_slide) {
+                // Recompute positions.
+                this._computePositions();
 
-                    // Slide the timeline and undated items.
+                // If ending slide.
+                if (endingSlide) {
+
+                    // Slide the timeline.
                     this.map_drag.stop().animate({
-                        'height': newMapHeight,
-                        'width': this.__getMapWidth(),
-                        'top': this.__getMapTopOffset(),
-                        'left': this.__getMapLeftOffset(),
+                        'height': this.positions.map.height,
+                        'width': this.positions.map.width,
+                        'top': this.positions.map.top,
+                        'left': this.positions.map.left,
                         'opacity': 1,
                         'z-index': 0
                     }, function() {
-
-                        // On complete, if the slide is an ending
-                        // slide, unset the dragging tracker, and forcibly
-                        // mouseleave the dragger div.
                         self._is_dragging = false;
                         self.map_drag.trigger('mouseleave');
-
                     });
 
                 }
 
+                // If not an ending slide.
                 else {
 
-                    // Slide the timeline and undated items.
+                    // Slide the timeline.
                     this.map_drag.stop().animate({
-                        'height': newMapHeight,
-                        'width': this.__getMapWidth(),
-                        'top': this.__getMapTopOffset(),
-                        'left': this.__getMapLeftOffset()
+                        'height': this.positions.map.height,
+                        'width': this.positions.map.width,
+                        'top': this.positions.map.top,
+                        'left': this.positions.map.left
                     });
 
                 }
 
-                this._animate_position_tag(this.map_drag, newMapHeight);
+                // Recenter the tag.
+                this._animate_position_tag(
+                    this.map_drag,
+                    this.positions.map.height
+                );
 
-                // Record params loadout for the last slide.
-                this._last_map_slide_params = [
+                // Capture the new positioning loadout.
+                this.lastParams = [
                     this._top_element,
-                    this._items_position,
+                    this._items_h_pos,
+                    this._items_v_pos,
                     this._items_height
                 ];
 
@@ -1063,47 +1188,76 @@
 
         /*
          * Manifest new items position.
+         *
+         * - param boolean endingSlide: True if the slide was triggered by
+         *   a mouseup on the dragger dif, which case the dragger should be
+         *   pushed back to full opacity at the end of the slide tween.
          */
-        __slideItems: function(ending_slide) {
+        __slideItems: function(endingSlide) {
 
             var self = this;
-            var newItemsHeight = this.__getItemsHeight();
 
-            if (ending_slide) {
+            // Capture the current positioning loadout.
+            var newParams = [
+                this._top_element,
+                this._items_h_pos,
+                this._items_v_pos,
+                this._items_height
+            ];
 
-                // Slide the timeline and undated items.
-                this.items_drag.stop().animate({
-                    'height': newItemsHeight,
-                    'width': this.__getItemsWidth(),
-                    'top': this.__getItemsTopOffset(),
-                    'left': this.__getItemsLeftOffset(),
-                    'opacity': 1,
-                    'z-index': 0
-                }, function() {
+            // If there is a parameter change.
+            if (!$.compare(newParams, this.lastParams) ||
+                this._current_dragger == 'items') {
 
-                    // On complete, if the slide is an ending
-                    // slide, unset the dragging tracker, and forcibly
-                    // mouseleave the dragger div.
-                    self._is_dragging = false;
-                    self.items_drag.trigger('mouseleave');
+                // Recompute positions.
+                this._computePositions();
 
-                });
+                // If ending slide.
+                if (endingSlide) {
+
+                    // Slide the timeline.
+                    this.items_drag.stop().animate({
+                        'height': this.positions.items.height,
+                        'width': this.positions.items.width,
+                        'top': this.positions.items.top,
+                        'left': this.positions.items.left,
+                        'opacity': 1,
+                        'z-index': 0
+                    }, function() {
+                        self._is_dragging = false;
+                        self.items_drag.trigger('mouseleave');
+                    });
+
+                }
+
+                // If not an ending slide.
+                else {
+
+                    // Slide the timeline.
+                    this.items_drag.stop().animate({
+                        'height': this.positions.items.height,
+                        'width': this.positions.items.width,
+                        'top': this.positions.items.top,
+                        'left': this.positions.items.left
+                    });
+
+                }
+
+                // Recenter the tag.
+                this._animate_position_tag(
+                    this.tems_drag,
+                    this.positions.items.height
+                );
+
+                // Capture the new positioning loadout.
+                this.lastParams = [
+                    this._top_element,
+                    this._items_h_pos,
+                    this._items_v_pos,
+                    this._items_height
+                ];
 
             }
-
-            else {
-
-                // Slide the timeline and undated items.
-                this.items_drag.stop().animate({
-                    'height': newItemsHeight,
-                    'width': this.__getItemsWidth(),
-                    'top': this.__getItemsTopOffset(),
-                    'left': this.__getItemsLeftOffset()
-                });
-
-            }
-
-            this._animate_position_tag(this.items_drag, newItemsHeight);
 
         },
 
@@ -1145,6 +1299,94 @@
             return $('<div id="drag-items" class="draggable">\
                         <span class="drag-tag">Items</span>\
                       </div>');
+
+        },
+
+        /*
+         * Fade out a drag box when a drag event starts.
+         */
+        __fadeDragger: function(dragger) {
+
+            dragger.css({
+                'opacity': 0.5,
+                'z-index': 99
+            })
+
+        },
+
+        /*
+         * Return boolean true if the map dragger is horizontally level with
+         * the items block, and the items block is partial height.
+         *
+         * - return boolean: True if the map is level with ITEMS.
+         */
+        __mapIsLevelWithItems: function() {
+
+            // If all three blocks are present.
+            if (this._is_map && this._is_timeline && this._is_items) {
+
+                if (this._top_element == 'map' &&
+                    this._items_height == 'partial' &&
+                    this._items_v_pos == 'top') {
+
+                    return true;
+
+                }
+
+                if (this._top_element == 'timeline' &&
+                    this._items_height == 'partial' &&
+                    this._items_v_pos == 'bottom') {
+
+                    return true;
+
+                }
+
+            }
+
+            // If just the map and items are present.
+            else if (this._is_map && !this._is_timeline && this._is_items) {
+                return true;
+            }
+
+            return false;
+
+        },
+
+        /*
+         * Return boolean true if the timeline dragger is horizontally level with
+         * the items block, and the items block is partial height.
+         *
+         * - return boolean: True if the timeline is level with ITEMS.
+         */
+        __timelineIsLevelWithItems: function() {
+
+            // If all three blocks are present.
+            if (this._is_map && this._is_timeline && this._is_items) {
+
+                if (this._top_element == 'timeline' &&
+                    this._items_height == 'partial' &&
+                    this._items_v_pos == 'top') {
+
+                    return true;
+
+                }
+
+                if (this._top_element == 'map' &&
+                    this._items_height == 'partial' &&
+                    this._items_v_pos == 'bottom') {
+
+                    return true;
+
+                }
+
+            }
+
+            // If just the map and items are present.
+            else if (!this._is_map && this._is_timeline && this._is_items) {
+                return true;
+            }
+
+            return false;
 
         },
 
