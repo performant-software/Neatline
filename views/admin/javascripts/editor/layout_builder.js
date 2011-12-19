@@ -1678,19 +1678,20 @@
         getArrangementParameters: function() {
 
             // Prep booleans for the database.
-            var is_map = this._is_map ? 1 : 0;
-            var is_timeline = this._is_timeline ? 1 : 0;
-            var is_undated_items = this._is_items ? 1 : 0;
+            var is_map =        this._is_map ? 1 : 0;
+            var is_timeline =   this._is_timeline ? 1 : 0;
+            var is_items =      this._is_items ? 1 : 0;
 
             // Assemble an object with the position tracker variables.
             return {
-                neatline_id: Neatline.id,
-                is_map: is_map,
-                is_timeline: is_timeline,
-                is_undated_items: is_undated_items,
-                top_element: this._top_element,
-                udi_position: this._items_position,
-                udi_height: this._items_height
+                neatline_id:    Neatline.id,
+                is_map:         is_map,
+                is_timeline:    is_timeline,
+                is_items:       is_items,
+                top_element:    this._top_element,
+                items_h_pos:    this._items_h_pos,
+                items_v_pos:    this._items_v_pos,
+                items_height:   this._items_height
             }
 
         }

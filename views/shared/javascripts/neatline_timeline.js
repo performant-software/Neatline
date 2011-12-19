@@ -132,8 +132,8 @@
             });
 
             // Set the starting date, if defined.
-            if (Neatline.default_timeline_focus_date != null) {
-                var startDate = Date.parse(Neatline.default_timeline_focus_date);
+            if (Neatline.default_focus_date != null) {
+                var startDate = Date.parse(Neatline.default_focus_date);
                 this.timeline.getBand(0).setCenterVisibleDate(startDate);
             }
 
