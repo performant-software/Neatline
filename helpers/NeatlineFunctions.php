@@ -447,7 +447,7 @@ function neatline_getImagesForSelect()
 
     $select = $filesTable->select()
         ->from(array('f' => $_db->prefix . 'files'))
-        ->where('mime_os LIKE "image/%"')
+        ->where('has_derivative_image = 1')
         ->joinLeft(array('i' => $_db->prefix . 'items'), 'f.item_id = i.id')
         ->columns(array('file_id' => 'f.id', 'parent_item' => $parentItemSql));
 
