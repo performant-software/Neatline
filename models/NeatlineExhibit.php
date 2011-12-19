@@ -178,13 +178,13 @@ class NeatlineExhibit extends Omeka_record
     {
 
         // Set values.
-        $this->is_map = $isMap;
-        $this->is_timeline = $isTimeline;
-        $this->is_items = $isItems;
-        $this->top_element = $topElement;
-        $this->items_h_pos = $itemsHorizPos;
-        $this->items_v_pos = $itemsVertPos;
-        $this->items_height = $itemsHeight;
+        $this->is_map =                 $isMap;
+        $this->is_timeline =            $isTimeline;
+        $this->is_items =               $isItems;
+        $this->top_element =            $topElement;
+        $this->items_h_pos =            $itemsHorizPos;
+        $this->items_v_pos =            $itemsVertPos;
+        $this->items_height =           $itemsHeight;
         $this->save();
 
     }

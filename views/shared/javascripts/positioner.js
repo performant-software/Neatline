@@ -101,6 +101,9 @@
 
             };
 
+            // By default, measure on creation.
+            this.measure();
+
         },
 
         /*

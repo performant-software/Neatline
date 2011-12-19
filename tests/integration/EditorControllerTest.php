@@ -1148,6 +1148,79 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
     }
 
     /**
+     * The arrangement action should not allow string-casted versions of
+     * bitwise-booleans to be saved to the database.
+     *
+     * @return void.
+     */
+    public function testArrangementIntTypecasting()
+    {
+
+        // Create an exhibit.
+        $exhibit =                              new NeatlineExhibit();
+        $exhibit->name =                        'Test Title';
+        $exhibit->is_map =                      0;
+        $exhibit->is_timeline =                 0;
+        $exhibit->is_items =                    0;
+        $exhibit->top_element =                 'timeline';
+        $exhibit->items_h_pos =                 'left';
+        $exhibit->items_v_pos =                 'top';
+        $exhibit->items_height =                'partial';
+        $exhibit->added =                       '2011-12-05 09:16:00';
+        $exhibit->map_id =                      1;
+        $exhibit->save();
+
+        // Form the POST for a space change.
+        $this->request->setMethod('POST')
+            ->setPost(array(
+                'neatline_id' =>                $exhibit->id,
+                'is_map' =>                     '1',
+                'is_timeline' =>                '1',
+                'is_items' =>                   '1',
+                'top_element' =>                'map',
+                'items_h_pos' =>                'right',
+                'items_v_pos' =>                'bottom',
+                'items_height' =>               'full'
+            )
+        );
+
+        // Hit the arrangement save route, reget the exhibit.
+        $this->dispatch('neatline-exhibits/editor/arrangement');
+        $exhibit = $this->_exhibitsTable->find($exhibit->id);
+
+        // Check the attributes.
+        $this->assertEquals($exhibit->is_map, 1);
+        $this->assertEquals($exhibit->is_timeline, 1);
+        $this->assertEquals($exhibit->is_items, 1);
+        $this->assertEquals($exhibit->top_element, 'map');
+        $this->assertEquals($exhibit->items_h_pos, 'right');
+        $this->assertEquals($exhibit->items_v_pos, 'bottom');
+        $this->assertEquals($exhibit->items_height, 'full');
+
+        // Check the JSON representation of the updated exhibit.
+        $response = $this->getResponse()->getBody('default');
+        $this->assertEquals(
+            $response,
+            '{"added":"2011-12-05 09:16:00",' .
+            '"name":"Test Title",' .
+            '"map_id":1,' .
+            '"image_id":null,' .
+            '"top_element":"map",' .
+            '"items_h_pos":"right",' .
+            '"items_v_pos":"bottom",' .
+            '"items_height":"full",' .
+            '"is_map":1,' .
+            '"is_timeline":1,' .
+            '"is_items":1,' .
+            '"default_map_bounds":null,' .
+            '"default_map_zoom":null,' .
+            '"default_focus_date":null,' .
+            '"id":1}'
+        );
+
+    }
+
+    /**
      * When a new default map/timeline focus data is saved via the /positions
      * route, the corresponding attributes should be updated on the exhibit record.
      *
