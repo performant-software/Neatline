@@ -152,6 +152,29 @@
         },
 
         /*
+         * Return the rows to normal state.
+         */
+        _removeOrderingEventsToItems: function() {
+
+            var self = this;
+
+            // Walk the items.
+            $.each(this.items, function(i, item) {
+
+                var item = $(item);
+                item.unbind('mousedown');
+
+            });
+
+            // Remove the event off of the save button.
+            this.orderSaveButton.unbind('mousedown');
+
+            // Regloss the items as normal.
+            this._glossItems();
+
+        },
+
+        /*
          * Drag item.
          */
         _doItemDrag: function(dragItem) {
@@ -237,26 +260,6 @@
             this.__unfadeItem(dragItem);
             this._window.unbind('mouseup');
             this.items.unbind('mouseenter');
-
-        },
-
-        /*
-         * Return the rows to normal state.
-         */
-        _removeOrderingEventsToItems: function() {
-
-            var self = this;
-
-            // Walk the items.
-            $.each(this.items, function(i, item) {
-
-                var item = $(item);
-                item.unbind('mousedown');
-
-            });
-
-            // Regloss the items as normal.
-            this._glossItems();
 
         },
 
@@ -430,6 +433,8 @@
             // Prep the object literal for the backend.
             this._getRowOrder();
             var orderObject = this.__objectifyOrder();
+
+            console.log(orderObject);
 
             // Fade down the editor.
             this.__fadeItems()

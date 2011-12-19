@@ -143,19 +143,19 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
     /**
      * Save a new record ordering.
      *
-     * @param Omeka_record $neatline The exhibit record.
+     * @param Omeka_record $exhibit The exhibit record.
      * @param array $order The ordering.
      *
      * @return void.
      */
-    public function saveOrder($neatline, $order)
+    public function saveOrder($exhibit, $order)
     {
 
         // Get all records for the exhibit, flip the order.
-        $records = $this->getRecordsByExhibit($neatline);
+        $records = $this->getActiveRecordsByExhibit($exhibit);
 
         foreach ($records as $record) {
-            $record->display_order = $order[$record->item_id];
+            $record->display_order = $order[$record->id];
             $record->save();
         }
 
@@ -250,16 +250,16 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
      * Find all records associated with a given exhibit that have either
      * an active space or time status.
      *
-     * @param Omeka_record $neatline The exhibit record.
+     * @param Omeka_record $exhibit The exhibit record.
      *
      * @return array of Omeka_record The records.
      */
-    public function getActiveRecordsByExhibit($neatline)
+    public function getActiveRecordsByExhibit($exhibit)
     {
 
         $records = $this->fetchObjects(
             $this->getSelect()->where(
-                'exhibit_id = ' . $neatline->id .
+                'exhibit_id = ' . $exhibit->id .
                 ' AND (space_active = 1 OR time_active = 1)'
             )->order('display_order ASC')
         );
