@@ -81,8 +81,11 @@
 
         positionDivs: function() {
 
+            // Measure.
+            this.element.positioner('measure');
+
             // Compute the positions.
-            this.positions = this.element.positioner(
+            this.element.positioner(
                 'compute',
                 this.params.is_map,
                 this.params.is_timeline,
