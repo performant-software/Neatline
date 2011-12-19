@@ -62,13 +62,14 @@ function neatline_queueEditorAssets()
     queue_js('editor/item_browser', 'javascripts');
     queue_js('editor/item_filter', 'javascripts');
     queue_js('editor/item_form', 'javascripts');
-    queue_js('editor/small_scroll', 'javascripts');
     queue_js('editor/edit_geometry', 'javascripts');
     queue_js('editor/configure_layout', 'javascripts');
     queue_js('editor/layout_builder', 'javascripts');
-    queue_js('editor/toggle_button', 'javascripts');
     queue_js('editor/item_orderer', 'javascripts');
-    queue_js('editor/gradient_builder', 'javascripts');
+
+    queue_js('editor/utilities/_small_scroll', 'javascripts');
+    queue_js('editor/utilities/_toggle_button', 'javascripts');
+    queue_js('editor/utilities/_gradient_builder', 'javascripts');
     queue_js('editor/_constructEditor', 'javascripts');
 
     // 3rd party code.
