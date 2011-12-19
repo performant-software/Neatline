@@ -1,8 +1,7 @@
-<?php
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
 
 /**
- * Partial template for the editor top bar.
+ * CSS for layout builder application. Used in the Neatline editor.
  *
  * PHP version 5
  *
@@ -23,21 +22,5 @@
  * @copyright   2011 The Board and Visitors of the University of Virginia
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache 2 License
  */
-?>
 
-<ul class="nav">
 
-    <li class="dropdown">
-        <a href="" id="configure-layout-button" class="dropdown-toggle">Configure Layout</a>
-        <div id="configure-layout" class="dropdown-content">
-            <?php echo $this->partial('editor/_configure_layout.php'); ?>
-        </div>
-    </li>
-
-    <li class="dropdown">
-        <a class="omeka-logo" href="<?php echo html_escape(uri('neatline-exhibits')); ?>">
-            <img id="omeka-logo" src="<?php echo img('back-to-omeka-white.png'); ?>" />
-        </a>
-    </li>
-
-</ul>

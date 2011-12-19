@@ -31,8 +31,8 @@
             // CSS constants.
             css: {
                 gloss_fade_duration: 300,
-                vt1_percentage: 33,
-                vt2_percentage: 66
+                vt1_percentage: 15,
+                vt2_percentage: 85
             },
 
             // Hex defaults.

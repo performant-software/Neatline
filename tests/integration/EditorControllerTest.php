@@ -1034,24 +1034,31 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $item2 = $this->helper->_createItem();
         $item3 = $this->helper->_createItem();
         $item4 = $this->helper->_createItem();
+        $item5 = $this->helper->_createItem();
         $record1 = new NeatlineDataRecord($item1, $neatline);
         $record2 = new NeatlineDataRecord($item2, $neatline);
         $record3 = new NeatlineDataRecord($item3, $neatline);
         $record4 = new NeatlineDataRecord($item4, $neatline);
+        $record5 = new NeatlineDataRecord($item5, $neatline);
+        $record1->space_active = 1;
+        $record2->space_active = 1;
+        $record3->space_active = 1;
+        $record4->space_active = 1;
         $record1->save();
         $record2->save();
         $record3->save();
         $record4->save();
+        $record5->save();
 
         // Form the POST for a space change.
         $this->request->setMethod('POST')
             ->setPost(array(
                 'neatline_id' => $neatline->id,
                 'order' => array(
-                    $item1->id => 3,
-                    $item2->id => 2,
-                    $item3->id => 1,
-                    $item4->id => 0
+                    $record1->id => 3,
+                    $record2->id => 2,
+                    $record3->id => 1,
+                    $record4->id => 0
                 )
             )
         );
@@ -1064,12 +1071,14 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $record2 = $this->_recordsTable->getRecordByItemAndExhibit($item2, $neatline);
         $record3 = $this->_recordsTable->getRecordByItemAndExhibit($item3, $neatline);
         $record4 = $this->_recordsTable->getRecordByItemAndExhibit($item4, $neatline);
+        $record5 = $this->_recordsTable->getRecordByItemAndExhibit($item5, $neatline);
 
         // Check the values.
         $this->assertEquals($record1->display_order, 3);
         $this->assertEquals($record2->display_order, 2);
         $this->assertEquals($record3->display_order, 1);
         $this->assertEquals($record4->display_order, 0);
+        $this->assertNull($record5->display_order);
 
     }
 

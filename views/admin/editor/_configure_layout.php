@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
 
 /**
- * Partial template for the editor top bar.
+ * Markup base for the layout builder block.
  *
  * PHP version 5
  *
@@ -25,19 +25,19 @@
  */
 ?>
 
-<ul class="nav">
+<div id="options">
+    <span id="toggle-map">Map</span>
+    <span id="toggle-timeline">Timeline</span>
+    <span id="toggle-items">Items</span>
+</div>
 
-    <li class="dropdown">
-        <a href="" id="configure-layout-button" class="dropdown-toggle">Configure Layout</a>
-        <div id="configure-layout" class="dropdown-content">
-            <?php echo $this->partial('editor/_configure_layout.php'); ?>
-        </div>
-    </li>
+<div id="drag-box"></div>
 
-    <li class="dropdown">
-        <a class="omeka-logo" href="<?php echo html_escape(uri('neatline-exhibits')); ?>">
-            <img id="omeka-logo" src="<?php echo img('back-to-omeka-white.png'); ?>" />
-        </a>
-    </li>
+<button id="save-arrangement" class="btn icon approve save">Save arrangement</button>
+<button id="fix-positions" class="btn icon pin save">Fix starting viewport positions</button>
 
-</ul>
+<hr />
+
+<p>Use the toggle buttons to activate and deactivate blocks; drag the
+blocks to rearrange them. Click the "Fix starting viewport positions" button
+to store the current viewport settings as the public defaults.</p>

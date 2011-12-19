@@ -910,10 +910,10 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
         $this->assertEquals($records[3]->item_id, $item4->id);
 
         $order = array(
-            $item1->id => 3,
-            $item2->id => 2,
-            $item3->id => 1,
-            $item4->id => 0
+            $record1->id => 3,
+            $record2->id => 2,
+            $record3->id => 1,
+            $record4->id => 0
         );
 
         // Push a new order.
@@ -1200,6 +1200,10 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
         $record2 = new NeatlineDataRecord($item2, $neatline);
         $record3 = new NeatlineDataRecord($item3, $neatline);
         $record4 = new NeatlineDataRecord($item4, $neatline);
+        $record1->space_active = 1;
+        $record2->space_active = 1;
+        $record3->space_active = 1;
+        $record4->space_active = 1;
         $record1->save();
         $record2->save();
         $record3->save();
@@ -1212,10 +1216,10 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
         $this->assertNull($record4->display_order);
 
         $order = array(
-            $item1->id => 3,
-            $item2->id => 2,
-            $item3->id => 1,
-            $item4->id => 0
+            $record1->id => 3,
+            $record2->id => 2,
+            $record3->id => 1,
+            $record4->id => 0
         );
 
         // Push a new order, reget the items.
