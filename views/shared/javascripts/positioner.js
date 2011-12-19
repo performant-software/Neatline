@@ -206,7 +206,7 @@
                             },
 
                             items: {
-                                height: this.minorHeight,
+                                height: this.majorHeight,
                                 width:  this.minorWidth,
                                 top:    0,
                                 left:   0
@@ -237,7 +237,7 @@
                             },
 
                             items: {
-                                height: this.majorHeight,
+                                height: this.height,
                                 width:  this.minorWidth,
                                 top:    0,
                                 left:   0
@@ -585,7 +585,7 @@
                             height: this.height,
                             width:  this.majorWidth,
                             top:    0,
-                            left:   this.majorWidth
+                            left:   this.minorWidth
                         },
 
                         timeline: {
@@ -659,7 +659,7 @@
                             height: this.height,
                             width:  this.majorWidth,
                             top:    0,
-                            left:   this.majorWidth
+                            left:   this.minorWidth
                         },
 
                         items: {
