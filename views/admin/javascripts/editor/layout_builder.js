@@ -383,9 +383,8 @@
                     this._is_map = false;
 
                     // If no timeline, disable items.
-                    if (!this._is_timeline) {
-                        this.items_toggle.togglebutton('disable');
-                        this._toggleItems();
+                    if (!this._is_timeline && this._is_items) {
+                        this.items_toggle.togglebutton('press');
                     }
 
                 break;
@@ -414,9 +413,8 @@
                     this._is_timeline = false;
 
                     // If no timeline, disable items.
-                    if (!this._is_map) {
-                        this.items_toggle.togglebutton('disable');
-                        this._toggleItems();
+                    if (!this._is_map && this._is_items) {
+                        this.items_toggle.togglebutton('press');
                     }
 
                 break;

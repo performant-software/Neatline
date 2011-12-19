@@ -103,14 +103,16 @@
 
         },
 
+        isPressed: function() {
+
+            return this.pressed;
+
+        },
+
         _highlight: function() {
 
             this.element.toggleClass('neatline-highlighted');
 
-        },
-
-        _destroy: function() {
-            // do teardown.
         }
 
     });
