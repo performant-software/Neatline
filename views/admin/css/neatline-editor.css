@@ -729,7 +729,11 @@ table#items tr.hidden {
 }
 
 
-/* Configure layout */
+/* Dropdown menus */
+
+.dropdown-content {
+    display: none;
+}
 
 #configure-layout {
     padding: 0.5em 2em 0 2em;

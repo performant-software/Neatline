@@ -27,13 +27,44 @@
 
         options: {
 
+            // Markup hooks.
+            markup: {
+                content: 'div.dropdown-content'
+            }
+
         },
 
+        /*
+         * Get and prepare markup, run start-up routine.
+         */
         _create: function() {
 
+            // Getters.
+            this._window =                  $(window);
+            this._body =                    $('body');
 
+            // Get, detach, and re-append the content div.
+            this.content = this.element.next(this.options.markup.content);
+            this.content.detach();
+            this._body.append(this.content);
 
-        }
+            // Start-up.
+            this._addEventsToButton();
+
+        },
+
+        /*
+         * Listen for mousedown and click on the dropdown tab.
+         */
+        _addEventsToButton: function() {
+
+            this.element.bind({
+
+                
+
+            });
+
+        },
 
     });
 

@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
 
 /**
- * Partial template for the editor top bar.
+ * Markup for the map options dropdown.
  *
  * PHP version 5
  *
@@ -25,23 +25,8 @@
  */
 ?>
 
-<ul class="nav">
+<!-- Color picker. -->
+<h5>Default Vector Color:</h5>
+<input type="text" class="color-picker miniColors" name="default-vector-color" />
 
-    <li class="dropdown">
-        <a href="" id="configure-map-button" class="dropdown-toggle">Map</a>
-        <div class="dropdown-content">
-            <?php echo $this->partial('editor/_configure_map.php'); ?>
-        </div>
-    </li>
-
-    <li class="dropdown">
-        <a href="" id="configure-layout-button" class="dropdown-toggle">Layout</a>
-    </li>
-
-    <li class="dropdown">
-        <a class="omeka-logo" href="<?php echo html_escape(uri('neatline-exhibits')); ?>">
-            <img id="omeka-logo" src="<?php echo img('back-to-omeka-white.png'); ?>" />
-        </a>
-    </li>
-
-</ul>
+<!-- Base layer picker. -->
