@@ -21,14 +21,30 @@
 
 jQuery(document).ready(function($) {
 
-    var neatlineContainer = $('.neatline-container');
-    var editorContainer = $('#item-browser');
-    var layoutBuilderContainer = $('#configure-layout');
 
-    // Editor instantiation.
+    // Get markup.
+    var neatlineContainer =         $('.neatline-container');
+    var editorContainer =           $('#item-browser');
+    var layoutBuilderContainer =    $('#configure-layout');
+    var configureMapButton =        $('#configure-map-button');
+
+
+    /*
+     * =================
+     * Item browser.
+     * =================
+     */
+
+
     editorContainer.itembrowser({
 
         'neatlineready': function() {
+
+            /*
+             * =================
+             * Neatline.
+             * =================
+             */
 
             neatlineContainer.neatline({
 
@@ -162,7 +178,15 @@ jQuery(document).ready(function($) {
 
     });
 
-    // Layout builder instantiation.
+
+    /*
+     * =================
+     * Dropdown menus.
+     * =================
+     */
+
+
+    // Configure layout.
     layoutBuilderContainer.configurelayout({
 
         // When the 'Fix starting viewport positions' button is pushed.
@@ -199,5 +223,8 @@ jQuery(document).ready(function($) {
         }
 
     });
+
+    // Configure map.
+    configureMapButton.configuremap();
 
 });

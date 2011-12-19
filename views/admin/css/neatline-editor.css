@@ -732,10 +732,6 @@ table#items tr.hidden {
 /* Dropdown menus */
 
 .dropdown-content {
-    display: none;
-}
-
-#configure-layout {
     padding: 0.5em 2em 0 2em;
     width: 404px;
     display: none;
