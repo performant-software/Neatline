@@ -1071,4 +1071,227 @@ describe('Positioner', function() {
 
     });
 
+    describe('apply', function() {
+
+        var neatline;
+
+        beforeEach(function() {
+
+            // Get exhibit markup.
+            loadFixtures('neatline.html');
+
+            // Get container and set dimensions.
+            neatline = $('#neatline');
+            neatline.css({
+                'width': 100,
+                'height': 100
+            });
+
+            // Roll up the positioner.
+            neatline.positioner({
+                markup: {
+                    map:            '#test-map',
+                    timeline:       '#test-timeline',
+                    items:          '#test-items'
+                },
+                constants: {
+                    h_percent:      30,
+                    v_percent:      60
+                },
+            });
+
+        });
+
+        describe('existence manifesting', function() {
+
+            describe('non-existence', function() {
+
+                it('should render non-existence on the map', function() {
+
+                    neatline.positioner('compute',
+                        false,
+                        true,
+                        false,
+                        'map',
+                        'bottom',
+                        'left',
+                        'partial'
+                    );
+
+                    neatline.positioner('apply');
+
+                    expect(neatline.positioner('getAttr', 'map')).not.toBeVisible();
+
+                });
+
+                it('should render non-existence on the timeline', function() {
+
+                    neatline.positioner('compute',
+                        true,
+                        false,
+                        false,
+                        'map',
+                        'bottom',
+                        'left',
+                        'partial'
+                    );
+
+                    neatline.positioner('apply');
+
+                    expect(neatline.positioner('getAttr', 'timeline')).not.toBeVisible();
+
+                });
+
+                it('should render non-existence on the timeline', function() {
+
+                    neatline.positioner('compute',
+                        true,
+                        false,
+                        false,
+                        'map',
+                        'bottom',
+                        'left',
+                        'partial'
+                    );
+
+                    neatline.positioner('apply');
+
+                    expect(neatline.positioner('getAttr', 'items')).not.toBeVisible();
+
+                });
+
+            });
+
+            describe('existence', function() {
+
+                it('should render existence on the map', function() {
+
+                    neatline.positioner('compute',
+                        true,
+                        true,
+                        true,
+                        'map',
+                        'bottom',
+                        'left',
+                        'partial'
+                    );
+
+                    neatline.positioner('apply');
+
+                    expect(neatline.positioner('getAttr', 'map')).toBeVisible();
+
+                });
+
+                it('should render existence on the timeline', function() {
+
+                    neatline.positioner('compute',
+                        true,
+                        true,
+                        true,
+                        'map',
+                        'bottom',
+                        'left',
+                        'partial'
+                    );
+
+                    neatline.positioner('apply');
+
+                    expect(neatline.positioner('getAttr', 'timeline')).toBeVisible();
+
+                });
+
+                it('should render existence on the timeline', function() {
+
+                    neatline.positioner('compute',
+                        true,
+                        true,
+                        true,
+                        'map',
+                        'bottom',
+                        'left',
+                        'partial'
+                    );
+
+                    neatline.positioner('apply');
+
+                    expect(neatline.positioner('getAttr', 'items')).toBeVisible();
+
+                });
+
+            });
+
+        });
+
+        describe('parameter manifesting', function() {
+
+            it('should render positioning styles on the map', function() {
+
+                neatline.positioner('compute',
+                    true,
+                    true,
+                    true,
+                    'map',
+                    'bottom',
+                    'left',
+                    'partial'
+                );
+
+                neatline.positioner('apply');
+                var mapStyle = neatline.positioner('getAttr', 'map').attr('style');
+
+                expect(mapStyle).toContain('height: 60px');
+                expect(mapStyle).toContain('width: 100px');
+                expect(mapStyle).toContain('top: 0px');
+                expect(mapStyle).toContain('left: 0px');
+
+            });
+
+            it('should render positioning styles on the timeline', function() {
+
+                neatline.positioner('compute',
+                    true,
+                    true,
+                    true,
+                    'map',
+                    'bottom',
+                    'left',
+                    'partial'
+                );
+
+                neatline.positioner('apply');
+                var timelineStyle = neatline.positioner('getAttr', 'timeline').attr('style');
+
+                expect(timelineStyle).toContain('height: 40px');
+                expect(timelineStyle).toContain('width: 70px');
+                expect(timelineStyle).toContain('top: 60px');
+                expect(timelineStyle).toContain('left: 30px');
+
+            });
+
+            it('should render positioning styles on the items', function() {
+
+                neatline.positioner('compute',
+                    true,
+                    true,
+                    true,
+                    'map',
+                    'bottom',
+                    'left',
+                    'partial'
+                );
+
+                neatline.positioner('apply');
+                var itemsStyle = neatline.positioner('getAttr', 'items').attr('style');
+
+                expect(itemsStyle).toContain('height: 40px');
+                expect(itemsStyle).toContain('width: 30px');
+                expect(itemsStyle).toContain('top: 60px');
+                expect(itemsStyle).toContain('left: 0px');
+
+            });
+
+        });
+
+    });
+
 });
