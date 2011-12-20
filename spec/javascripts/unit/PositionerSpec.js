@@ -15,10 +15,7 @@ describe('Positioner', function() {
 
             // Get container and set dimensions.
             neatline = $('#neatline');
-            neatline.css({
-                'width': 100,
-                'height': 100
-            });
+            neatline.css({ 'width': 100, 'height': 100 });
 
             // Roll up the positioner.
             neatline.positioner({
@@ -46,9 +43,12 @@ describe('Positioner', function() {
 
         it('should select the markup for the component blocks', function() {
 
-            expect(neatline.positioner('getAttr', 'map')).toBe('#map');
-            expect(neatline.positioner('getAttr', 'timeline')).toBe('#timeline');
-            expect(neatline.positioner('getAttr', 'items')).toBe('#items');
+            expect(neatline.positioner('getAttr', 'map')).toBeDefined();
+            expect(neatline.positioner('getAttr', 'map')).not.toBeNull();
+            expect(neatline.positioner('getAttr', 'timeline')).toBeDefined();
+            expect(neatline.positioner('getAttr', 'timeline')).not.toBeNull();
+            expect(neatline.positioner('getAttr', 'items')).toBeDefined();
+            expect(neatline.positioner('getAttr', 'items')).not.toBeNull();
 
         });
 
@@ -113,10 +113,7 @@ describe('Positioner', function() {
 
             // Get container and set dimensions.
             neatline = $('#neatline');
-            neatline.css({
-                'width': 100,
-                'height': 100
-            });
+            neatline.css({ 'width': 100, 'height': 100 });
 
             // Roll up the positioner.
             neatline.positioner({
@@ -147,10 +144,7 @@ describe('Positioner', function() {
         it('should compute new constants correctly after a container resize', function() {
 
             // Change the size of the container.
-            neatline.css({
-                'width': 200,
-                'height': 200
-            });
+            neatline.css({ 'width': 200, 'height': 200 });
 
             // Re-measure.
             neatline.positioner('measure');
@@ -177,10 +171,7 @@ describe('Positioner', function() {
 
             // Get container and set dimensions.
             neatline = $('#neatline');
-            neatline.css({
-                'width': 100,
-                'height': 100
-            });
+            neatline.css({ 'width': 100, 'height': 100 });
 
             // Roll up the positioner.
             neatline.positioner({
@@ -1082,10 +1073,7 @@ describe('Positioner', function() {
 
             // Get container and set dimensions.
             neatline = $('#neatline');
-            neatline.css({
-                'width': 100,
-                'height': 100
-            });
+            neatline.css({ 'width': 100, 'height': 100 });
 
             // Roll up the positioner.
             neatline.positioner({

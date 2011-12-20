@@ -83,13 +83,13 @@
             this.newItemButton =            $('#new-item-button');
 
             // Trackers.
-            this._searchString = '';
-            this._currentFormItem = null;
-            this._spaceBoxes = null;
-            this._timeBoxes = null;
-            this._spaceSorted = false;
-            this._timeSorted = false;
-            this._firstRequest = true;
+            this._searchString =            '';
+            this._currentFormItem =         null;
+            this._spaceBoxes =              null;
+            this._timeBoxes =               null;
+            this._spaceSorted =             false;
+            this._timeSorted =              false;
+            this._firstRequest =            true;
 
             // Prepare the document, position elements, listen for resize.
             this._scrollbarWidth = $.getScrollbarWidth();
@@ -1227,6 +1227,13 @@
 
             this.editForm.itemform('postMapFocus', extent, zoom);
 
+        },
+
+        /*
+         * Emit a protected class attribute.
+         */
+        getAttr: function(attr) {
+            return this[attr];
         }
 
     });

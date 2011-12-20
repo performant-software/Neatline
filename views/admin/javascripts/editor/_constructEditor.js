@@ -23,7 +23,7 @@ jQuery(document).ready(function($) {
 
 
     // Get markup.
-    var neatlineContainer =         $('.neatline-container');
+    var neatlineContainer =         $('#neatline');
     var editorContainer =           $('#item-browser');
     var configureLayoutButton =     $('#configure-layout-button');
 
