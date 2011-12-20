@@ -11,7 +11,7 @@ describe('Positioner', function() {
         beforeEach(function() {
 
             // Get exhibit markup.
-            loadFixtures('neatline.html');
+            loadFixtures('neatline-base-markup.html');
 
             // Get container and set dimensions.
             neatline = $('#neatline');
@@ -23,9 +23,9 @@ describe('Positioner', function() {
             // Roll up the positioner.
             neatline.positioner({
                 markup: {
-                    map:            '#test-map',
-                    timeline:       '#test-timeline',
-                    items:          '#test-items'
+                    map:            '#map',
+                    timeline:       '#timeline',
+                    items:          '#items'
                 },
                 constants: {
                     h_percent:      30,
@@ -46,9 +46,9 @@ describe('Positioner', function() {
 
         it('should select the markup for the component blocks', function() {
 
-            expect(neatline.positioner('getAttr', 'map')).toBe('#test-map');
-            expect(neatline.positioner('getAttr', 'timeline')).toBe('#test-timeline');
-            expect(neatline.positioner('getAttr', 'items')).toBe('#test-items');
+            expect(neatline.positioner('getAttr', 'map')).toBe('#map');
+            expect(neatline.positioner('getAttr', 'timeline')).toBe('#timeline');
+            expect(neatline.positioner('getAttr', 'items')).toBe('#items');
 
         });
 
@@ -109,7 +109,7 @@ describe('Positioner', function() {
         beforeEach(function() {
 
             // Get exhibit markup.
-            loadFixtures('neatline.html');
+            loadFixtures('neatline-base-markup.html');
 
             // Get container and set dimensions.
             neatline = $('#neatline');
@@ -121,9 +121,9 @@ describe('Positioner', function() {
             // Roll up the positioner.
             neatline.positioner({
                 markup: {
-                    map:            '#test-map',
-                    timeline:       '#test-timeline',
-                    items:          '#test-items'
+                    map:            '#map',
+                    timeline:       '#timeline',
+                    items:          '#items'
                 },
                 constants: {
                     h_percent:      30,
@@ -173,7 +173,7 @@ describe('Positioner', function() {
         beforeEach(function() {
 
             // Get exhibit markup.
-            loadFixtures('neatline.html');
+            loadFixtures('neatline-base-markup.html');
 
             // Get container and set dimensions.
             neatline = $('#neatline');
@@ -1078,7 +1078,7 @@ describe('Positioner', function() {
         beforeEach(function() {
 
             // Get exhibit markup.
-            loadFixtures('neatline.html');
+            loadFixtures('neatline-base-markup.html');
 
             // Get container and set dimensions.
             neatline = $('#neatline');
@@ -1090,9 +1090,9 @@ describe('Positioner', function() {
             // Roll up the positioner.
             neatline.positioner({
                 markup: {
-                    map:            '#test-map',
-                    timeline:       '#test-timeline',
-                    items:          '#test-items'
+                    map:            '#map',
+                    timeline:       '#timeline',
+                    items:          '#items'
                 },
                 constants: {
                     h_percent:      30,

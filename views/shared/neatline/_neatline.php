@@ -32,7 +32,7 @@
 
     <div id="timeline" class="neatline-block neatlinetime-timeline"></div>
 
-    <div id="undated" class="neatline-block">
+    <div id="items" class="neatline-block">
         <?php echo $this->partial('neatline/_undated_items.php', array(
             'public' => $public
         )); ?>

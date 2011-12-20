@@ -621,54 +621,54 @@ div.columns span.header:hover, div.columns span.header.active {
     /* background-color: #f0b925 !important;*/
 }
 
-table#items {
+table#items-table {
     table-layout: fixed;
     overflow: hidden;
     white-space: nowrap;
     margin-bottom: 0;
 }
 
-table#items tr {
+table#items-table tr {
     display: table-row;
 }
 
-table#items td {
+table#items-table td {
     border-bottom: none;
     border-top: 1px solid #f0f0f0;
 }
 
-table#items tr:first-child td {
+table#items-table tr:first-child td {
     border-top: none;
 }
 
-table#items td.col-row {
+table#items-table td.col-row {
     margin: 0;
     padding: 0;
     border-left: 1px solid #f0f0f0;
     text-align: center;
 }
 
-table#items td.col-row input {
+table#items-table td.col-row input {
     margin-top: 12px;
 }
 
-table#items td.col-1:hover, table#items td.col-2:hover {
+table#items-table td.col-1:hover, table#items td.col-2:hover {
     background-color: #ffda82;
 }
 
-table#items td.col-1 {
+table#items-table td.col-1 {
     width: 33px !important;
 }
 
-table#items td.col-2 {
+table#items-table td.col-2 {
     width: 33px !important;
 }
 
-table#items th, table#items td {
+table#items-table th, table#items td {
     padding: 10px 10px 8px;
 }
 
-table#items tr.hidden {
+table#items-table tr.hidden {
     display: none;
 }
 

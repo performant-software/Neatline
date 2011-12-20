@@ -25,8 +25,7 @@
  */
 ?>
 
-<table id="items">
-
+<table id="items-table">
 
     <tr id="neatline-header" class="header-row <?php if (!$records) { echo 'hidden'; } ?>">
         <td>Neatline Records</td>

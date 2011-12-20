@@ -1,0 +1,47 @@
+
+<!-- Neatline container. -->
+<div id="neatline" class="neatline-container">
+
+    <div id="map" class="neatline-block"></div>
+
+    <div id="timeline" class="neatline-block neatlinetime-timeline"></div>
+
+    <div id="items" class="neatline-block">
+        
+<div id="public-items-list-header">
+    <div id="arrows">
+        <div id="left-arrow" class="arrow left"></div>
+        <div id="right-arrow" class="arrow right"></div>
+    </div>
+            <div id="reorder-items"></div>
+        <button id="order-save-button" class="btn icon approve">Save</button>
+    </div>
+
+<div id="undated-items-list-container"></div>
+    </div>
+
+</div>
+
+<!-- Generic markup for the timeline popups. -->
+
+<div id="timeline-popup" class="popover above">
+    <div class="arrow"></div>
+    <div class="inner">
+        <div class="title">
+            <a href="#" class="close">×</a>
+            <h3 class="title-text"></h3>
+        </div>
+        <div class="content"></div>
+    </div>
+</div>
+
+<!-- JSON globals. -->
+<script type="text/javascript">
+
+    var Neatline = null;
+        Neatline.dataSources = null;
+        Neatline.public = null;
+
+    
+    
+</script>

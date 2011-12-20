@@ -2,7 +2,9 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
 
 /**
- * Template emitter for the Jasmine test suite.
+ * Special 'test' suite that hits each of the routes in the fixtures controller
+ * and saves off the baked markup. Ensures that the front end test suite is always
+ * working on real-application HTML.
  *
  * PHP version 5
  *
@@ -27,37 +29,39 @@
 
 <?php
 
-class Neatline_FixtureController extends Omeka_Controller_Action
+class Neatline_FixtureBuilderTest extends Omeka_Test_AppTestCase
 {
 
+    private static $path_to_fixtures = '../spec/javascripts/fixtures/';
+
     /**
-     * Get table objects.
+     * Instantiate the helper class, install the plugins, get the database.
      *
-     * @return void
+     * @return void.
      */
-    public function init()
+    public function setUp()
     {
 
-        // Get tables.
-        $this->_neatlinesTable =    $this->getTable('NeatlineExhibit');
-        $this->_recordsTable =      $this->getTable('NeatlineDataRecord');
-        $this->_mapsTable =         $this->getTable('NeatlineMapsMap');
-        $this->_timelinesTable =    $this->getTable('NeatlineTimeTimeline');
-        $this->_itemsTable =        $this->getTable('Item');
-        $this->_filesTable =        $this->getTable('File');
-        $this->_statusesTable =     $this->getTable('NeatlineRecordStatus');
+        parent::setUp();
+        $this->helper = new Neatline_Test_AppTestCase;
+        $this->helper->setUpPlugin();
+        $this->db = get_db();
 
     }
 
     /**
-     * Run the editor application.
+     * Hit each of the fixture routes and save off the body.
      *
-     * @return void
+     * @return void.
      */
-    public function indexAction()
+    public function testBuildNeatlineBaseMarkup()
     {
 
-
+        $fixture = fopen(self::$path_to_fixtures . 'neatline-base-markup.html', 'w');
+        $this->dispatch('neatline/fixtures/neatlinebasemarkup');
+        $response = $this->getResponse()->getBody('default');
+        echo fwrite($fixture, $response);
+        fclose($fixture);
 
     }
 

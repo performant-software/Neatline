@@ -73,7 +73,7 @@
             this.searchCancel =             $('#search-cancel');
             this.itemFilterContainer =      $('#filter-items');
             this.neatlineContainer =        $('#neatline');
-            this.itemsTable =               $('#items');
+            this.itemsTable =               $('#items-table');
             this.dragTip =                  $('#drag-tip');
             this.spaceTip =                 $('#space-tip');
             this.timeTip =                  $('#time-tip');
