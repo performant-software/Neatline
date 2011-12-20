@@ -166,4 +166,220 @@ describe('Positioner', function() {
 
     });
 
+    describe('compute', function() {
+
+        var neatline;
+
+        beforeEach(function() {
+
+            // Get exhibit markup.
+            loadFixtures('neatline.html');
+
+            // Get container and set dimensions.
+            neatline = $('#neatline');
+            neatline.css({
+                'width': 100,
+                'height': 100
+            });
+
+            // Roll up the positioner.
+            neatline.positioner({
+                markup: {
+                    map:            '#test-map',
+                    timeline:       '#test-timeline',
+                    items:          '#test-items'
+                },
+                constants: {
+                    h_percent:      30,
+                    v_percent:      60
+                },
+            });
+
+        });
+
+        describe('MAP and TIMELINE and ITEMS', function() {
+
+            describe('MAP top, TIMELINE bottom', function() {
+
+                it('CASE: ITEMS left, bottom, partial', function() {
+
+                    var positions = neatline.positioner('compute',
+                        true,
+                        true,
+                        true,
+                        'map',
+                        'bottom',
+                        'left',
+                        'partial'
+                    );
+
+                    expect(positions).toEqual({
+                        map: {
+                            height: 60,
+                            width:  100,
+                            top:    0,
+                            left:   0
+                        },
+                        timeline: {
+                            height: 40,
+                            width:  70,
+                            top:    60,
+                            left:   30
+                        },
+                        items: {
+                            height: 40,
+                            width:  30,
+                            top:    60,
+                            left:   0
+                        }
+                    });
+
+                });
+
+                it('CASE: ITEMS left, top, partial', function() {
+
+                    var positions = neatline.positioner('compute',
+                        true,
+                        true,
+                        true,
+                        'map',
+                        'top',
+                        'left',
+                        'partial'
+                    );
+
+                    expect(positions).toEqual({
+                        map: {
+                            height: 60,
+                            width:  70,
+                            top:    0,
+                            left:   30
+                        },
+                        timeline: {
+                            height: 40,
+                            width:  100,
+                            top:    60,
+                            left:   0
+                        },
+                        items: {
+                            height: 60,
+                            width:  30,
+                            top:    0,
+                            left:   0
+                        }
+                    });
+
+                });
+
+                it('CASE: ITEMS left, full; with v_pos TOP', function() {
+
+                    var positions = neatline.positioner('compute',
+                        true,
+                        true,
+                        true,
+                        'map',
+                        'top',
+                        'left',
+                        'full'
+                    );
+
+                    expect(positions).toEqual({
+                        map: {
+                            height: 60,
+                            width:  70,
+                            top:    0,
+                            left:   30
+                        },
+                        timeline: {
+                            height: 40,
+                            width:  70,
+                            top:    60,
+                            left:   30
+                        },
+                        items: {
+                            height: 100,
+                            width:  30,
+                            top:    0,
+                            left:   0
+                        }
+                    });
+
+                });
+
+                it('CASE: ITEMS left, full; with v_pos BOTTOM', function() {
+
+                    var positions = neatline.positioner('compute',
+                        true,
+                        true,
+                        true,
+                        'map',
+                        'bottom',
+                        'left',
+                        'full'
+                    );
+
+                    expect(positions).toEqual({
+                        map: {
+                            height: 60,
+                            width:  70,
+                            top:    0,
+                            left:   30
+                        },
+                        timeline: {
+                            height: 40,
+                            width:  70,
+                            top:    60,
+                            left:   30
+                        },
+                        items: {
+                            height: 100,
+                            width:  30,
+                            top:    0,
+                            left:   0
+                        }
+                    });
+
+                });
+
+                it('CASE: ITEMS right, bottom, partial', function() {
+
+                    var positions = neatline.positioner('compute',
+                        true,
+                        true,
+                        true,
+                        'map',
+                        'bottom',
+                        'right',
+                        'partial'
+                    );
+
+                    expect(positions).toEqual({
+                        map: {
+                            height: 60,
+                            width:  100,
+                            top:    0,
+                            left:   0
+                        },
+                        timeline: {
+                            height: 40,
+                            width:  70,
+                            top:    60,
+                            left:   0
+                        },
+                        items: {
+                            height: 40,
+                            width:  30,
+                            top:    60,
+                            left:   70
+                        }
+                    });
+
+                });
+
+            });
+
+        });
+
+    });
+
 });

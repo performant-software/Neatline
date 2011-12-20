@@ -133,6 +133,39 @@
          *
          * - return object positions:   The final positions object literal.
          *
+         * The method enumerates these positioning cases:
+
+            - MAP and TIMElLINE and ITEMS
+              - MAP top, TIMELINE bottom
+                - ITEMS left partial bottom
+                - ITEMS left full
+                - ITEMS left partial top
+                - ITEMS right partial bottom
+                - ITEMS right full
+                - ITEMS right partial top
+              - MAP bottom, TIMELINE top
+                - ITEMS left partial bottom
+                - ITEMS left full
+                - ITEMS left partial top
+                - ITEMS right partial bottom
+                - ITEMS right full
+                - ITEMS partial top
+            - MAP and ITEMS
+              - MAP left, ITEMS right
+              - MAP right, ITEMS left
+            - TIMELINE and ITEMS
+              - TIMELINE left, ITEMS right
+              - TIMELINE right, ITEMS left
+            - MAP and TIMELINE
+              - MAP top, TIMELINE bottom
+              - MAP bottom, TIMELINE top
+            - MAP
+              - MAP fullscreen
+            - TIMELINE
+              - TIMELINE fullscreen
+
+         *
+         *
          */
         compute: function(is_m, is_t, is_i, top, i_v_pos, i_h_pos, i_h) {
 
