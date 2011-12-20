@@ -62,9 +62,9 @@ class Neatline_FixturesController extends Omeka_Controller_Action
 
         // Render.
         echo $this->view->partial('neatline/_neatline.php', array(
-            'public' => null,
-            'neatline' => null,
-            'dataSources' => null,
+            'public' => true,
+            'neatline' => array(),
+            'dataSources' => array(),
         ));
 
     }

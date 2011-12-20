@@ -60,7 +60,7 @@ class Neatline_FixtureBuilderTest extends Omeka_Test_AppTestCase
         $fixture = fopen(self::$path_to_fixtures . 'neatline-base-markup.html', 'w');
         $this->dispatch('neatline/fixtures/neatlinebasemarkup');
         $response = $this->getResponse()->getBody('default');
-        echo fwrite($fixture, $response);
+        fwrite($fixture, $response);
         fclose($fixture);
 
     }
