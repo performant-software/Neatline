@@ -72,7 +72,7 @@
             this._is_items =            this.options.positions.is_items;
             this._top =                 this.options.positions.top;          // 'map' or 'timeline'.
             this._items_v_pos =         this.options.positions.items_v_pos;  // 'top' or 'bottom'.
-            this._items_h_pos =         this.options.positions.items_h;      // 'right' or 'left'.
+            this._items_h_pos =         this.options.positions.items_h_pos;  // 'right' or 'left'.
             this._items_height =        this.options.positions.items_height; // 'full' or 'partial'.
 
             // Dimensions tracker.
