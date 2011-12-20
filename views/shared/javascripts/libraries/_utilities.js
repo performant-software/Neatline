@@ -38,7 +38,7 @@ Array.prototype.contains = function(el) {
 
     var match = false;
     for (var i = 0; i < this.length; i++) {
-        if (this[i] == el) {
+        if (this[i] === el) {
             match = true;
         }
     }
@@ -46,19 +46,3 @@ Array.prototype.contains = function(el) {
     return match;
 
 };
-
-// disableSelect() - Nukes default browser text selection.
-var NeatlineHelpers = {
-
-    'disableSelect': function() {
-
-        var _window = $(window);
-
-        $(window).css('MozUserSelect', 'none');
-        $(window).bind('selectstart', function() {
-            return false;
-        });
-
-    }
-
-}
