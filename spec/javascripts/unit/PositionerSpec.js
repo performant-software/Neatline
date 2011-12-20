@@ -43,12 +43,9 @@ describe('Positioner', function() {
 
         it('should select the markup for the component blocks', function() {
 
-            expect(neatline.positioner('getAttr', 'map')).toBeDefined();
-            expect(neatline.positioner('getAttr', 'map')).not.toBeNull();
-            expect(neatline.positioner('getAttr', 'timeline')).toBeDefined();
-            expect(neatline.positioner('getAttr', 'timeline')).not.toBeNull();
-            expect(neatline.positioner('getAttr', 'items')).toBeDefined();
-            expect(neatline.positioner('getAttr', 'items')).not.toBeNull();
+            expect(neatline.positioner('getAttr', 'map')).toBe('#map');
+            expect(neatline.positioner('getAttr', 'timeline')).toBe('#timeline');
+            expect(neatline.positioner('getAttr', 'items')).toBe('#items');
 
         });
 

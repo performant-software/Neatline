@@ -27,42 +27,22 @@ describe('Item Browser', function() {
 
         it('should select component markup', function() {
 
-            expect(browser.itembrowser('getAttr', '_window')).toBeDefined();
-            expect(browser.itembrowser('getAttr', '_window')).not.toBeNull();
-            expect(browser.itembrowser('getAttr', '_body')).toBeDefined();
-            expect(browser.itembrowser('getAttr', '_body')).not.toBeNull();
-            expect(browser.itembrowser('getAttr', 'topBar')).toBeDefined();
-            expect(browser.itembrowser('getAttr', 'topBar')).not.toBeNull();
-            expect(browser.itembrowser('getAttr', 'searchWrapper')).toBeDefined();
-            expect(browser.itembrowser('getAttr', 'searchWrapper')).not.toBeNull();
-            expect(browser.itembrowser('getAttr', 'searchBox')).toBeDefined();
-            expect(browser.itembrowser('getAttr', 'searchBox')).not.toBeNull();
-            expect(browser.itembrowser('getAttr', 'itemsList')).toBeDefined();
-            expect(browser.itembrowser('getAttr', 'itemsList')).not.toBeNull();
-            expect(browser.itembrowser('getAttr', 'itemsListHeader')).toBeDefined();
-            expect(browser.itembrowser('getAttr', 'itemsListHeader')).not.toBeNull();
-            expect(browser.itembrowser('getAttr', 'searchCancel')).toBeDefined();
-            expect(browser.itembrowser('getAttr', 'searchCancel')).not.toBeNull();
-            expect(browser.itembrowser('getAttr', 'itemFilterContainer')).toBeDefined();
-            expect(browser.itembrowser('getAttr', 'itemFilterContainer')).not.toBeNull();
-            expect(browser.itembrowser('getAttr', 'neatlineContainer')).toBeDefined();
-            expect(browser.itembrowser('getAttr', 'neatlineContainer')).not.toBeNull();
-            expect(browser.itembrowser('getAttr', 'itemsTable')).toBeDefined();
-            expect(browser.itembrowser('getAttr', 'itemsTable')).not.toBeNull();
-            expect(browser.itembrowser('getAttr', 'dragTip')).toBeDefined();
-            expect(browser.itembrowser('getAttr', 'dragTip')).not.toBeNull();
-            expect(browser.itembrowser('getAttr', 'spaceTip')).toBeDefined();
-            expect(browser.itembrowser('getAttr', 'spaceTip')).not.toBeNull();
-            expect(browser.itembrowser('getAttr', 'timeTip')).toBeDefined();
-            expect(browser.itembrowser('getAttr', 'timeTip')).not.toBeNull();
-            expect(browser.itembrowser('getAttr', 'spaceHeader')).toBeDefined();
-            expect(browser.itembrowser('getAttr', 'spaceHeader')).not.toBeNull();
-            expect(browser.itembrowser('getAttr', 'timeHeader')).toBeDefined();
-            expect(browser.itembrowser('getAttr', 'timeHeader')).not.toBeNull();
-            expect(browser.itembrowser('getAttr', 'editForm')).toBeDefined();
-            expect(browser.itembrowser('getAttr', 'editForm')).not.toBeNull();
-            expect(browser.itembrowser('getAttr', 'newItemButton')).toBeDefined();
-            expect(browser.itembrowser('getAttr', 'newItemButton')).not.toBeNull();
+            expect(browser.itembrowser('getAttr', 'topBar')).toBe('#topbar');
+            expect(browser.itembrowser('getAttr', 'searchWrapper')).toBe('#search-wrapper');
+            expect(browser.itembrowser('getAttr', 'searchBox')).toBe('#search-box');
+            expect(browser.itembrowser('getAttr', 'itemsList')).toBe('#items-list-container');
+            expect(browser.itembrowser('getAttr', 'itemsListHeader')).toBe('#items-list-header');
+            expect(browser.itembrowser('getAttr', 'searchCancel')).toBe('#search-cancel');
+            expect(browser.itembrowser('getAttr', 'itemFilterContainer')).toBe('#filter-items');
+            expect(browser.itembrowser('getAttr', 'neatlineContainer')).toBe('#neatline');
+            expect(browser.itembrowser('getAttr', 'itemsTable')).toBe('#items-table');
+            expect(browser.itembrowser('getAttr', 'dragTip')).toBe('#drag-tip');
+            expect(browser.itembrowser('getAttr', 'spaceTip')).toBe('#space-tip');
+            expect(browser.itembrowser('getAttr', 'timeTip')).toBe('#time-top');
+            expect(browser.itembrowser('getAttr', 'spaceHeader')).toBe('#div.col-1.col-header span.header');
+            expect(browser.itembrowser('getAttr', 'timeHeader')).toBe('div.col-2.col-header span.header');
+            expect(browser.itembrowser('getAttr', 'editForm')).toBe('#edit-form');
+            expect(browser.itembrowser('getAttr', 'newItemButton')).toBe('#new-item-button');
 
         });
 
