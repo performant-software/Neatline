@@ -50,16 +50,36 @@ class Neatline_FixtureBuilderTest extends Omeka_Test_AppTestCase
     }
 
     /**
-     * Hit each of the fixture routes and save off the body.
+     * Base Neatline exhibit markup.
      *
      * @return void.
      */
-    public function testBuildNeatlineBaseMarkup()
+    public function testBuildNeatlineMarkup()
     {
 
-        $fixture = fopen(self::$path_to_fixtures . 'neatline-base-markup.html', 'w');
-        $this->dispatch('neatline/fixtures/neatlinebasemarkup');
+        $fixture = fopen(self::$path_to_fixtures . 'neatline-base.html', 'w');
+
+        $this->dispatch('neatline/fixtures/neatlinebase');
         $response = $this->getResponse()->getBody('default');
+
+        fwrite($fixture, $response);
+        fclose($fixture);
+
+    }
+
+    /**
+     * Item browser markup.
+     *
+     * @return void.
+     */
+    public function testBuildItemBrowserMarkup()
+    {
+
+        $fixture = fopen(self::$path_to_fixtures . 'item-browser.html', 'w');
+
+        $this->dispatch('neatline/fixtures/itembrowser');
+        $response = $this->getResponse()->getBody('default');
+
         fwrite($fixture, $response);
         fclose($fixture);
 

@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
 
 /**
- * Template emitter for the Jasmine test suite.
+ * Markup emitter for the Jasmine test suite.
  *
  * PHP version 5
  *
@@ -39,22 +39,22 @@ class Neatline_FixturesController extends Omeka_Controller_Action
     {
 
         // Get tables.
+        $this->_itemsTable =        $this->getTable('Item');
+        $this->_filesTable =        $this->getTable('File');
         $this->_neatlinesTable =    $this->getTable('NeatlineExhibit');
         $this->_recordsTable =      $this->getTable('NeatlineDataRecord');
         $this->_mapsTable =         $this->getTable('NeatlineMapsMap');
         $this->_timelinesTable =    $this->getTable('NeatlineTimeTimeline');
-        $this->_itemsTable =        $this->getTable('Item');
-        $this->_filesTable =        $this->getTable('File');
         $this->_statusesTable =     $this->getTable('NeatlineRecordStatus');
 
     }
 
     /**
-     * Run the editor application.
+     * Base exhibit markup.
      *
      * @return void
      */
-    public function neatlinebasemarkupAction()
+    public function neatlinebaseAction()
     {
 
         // Supress the default Zend layout-sniffer functionality.
@@ -62,9 +62,50 @@ class Neatline_FixturesController extends Omeka_Controller_Action
 
         // Render.
         echo $this->view->partial('neatline/_neatline.php', array(
-            'public' => true,
-            'neatline' => array(),
-            'dataSources' => array(),
+            'neatline' =>           array(),
+            'public' =>             true,
+            'dataSources' =>        array(),
+        ));
+
+    }
+
+    /**
+     * Item browser markup.
+     *
+     * @return void
+     */
+    public function itembrowserAction()
+    {
+
+        // Supress the default Zend layout-sniffer functionality.
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        // Mock tags.
+        $tags = array(
+            (object) array('id' => 1, 'name' => 'Tag1'),
+            (object) array('id' => 2, 'name' => 'Tag2'),
+            (object) array('id' => 3, 'name' => 'Tag3'),
+        );
+
+        // Mock types.
+        $types = array(
+            (object) array('id' => 1, 'name' => 'Type1'),
+            (object) array('id' => 2, 'name' => 'Type2'),
+            (object) array('id' => 3, 'name' => 'Type3'),
+        );
+
+        // Mock collections.
+        $collections = array(
+            (object) array('id' => 1, 'name' => 'Coll1'),
+            (object) array('id' => 2, 'name' => 'Coll2'),
+            (object) array('id' => 3, 'name' => 'Coll3'),
+        );
+
+        // Render.
+        echo $this->view->partial('editor/_item_browser.php', array(
+            'tags' =>               $tags,
+            'types' =>              $types,
+            'collections' =>        $collections
         ));
 
     }

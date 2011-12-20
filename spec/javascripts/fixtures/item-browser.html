@@ -1,0 +1,203 @@
+
+<div id="item-browser">
+
+    
+<div id="filter-items">
+
+    <div class="filter-items-content small-scroll-content">
+
+        <div class="filter-items-column">
+            <div class="filter-option all-none">
+                <input type="checkbox" />
+                <span class="filter-items-all-none">All / None</span>
+            </div>
+        </div>
+
+        <div class="filter-items-column tags">
+
+            <div class="filter-header">
+                <input type="checkbox" />
+                <h5 class="title">Tags</h5>
+            </div>
+
+                            <div class="filter-option">
+                    <input type="checkbox" />
+                    <span>Tag1</span>
+                    <recordid type="tag">1</recordid>
+                </div>
+                            <div class="filter-option">
+                    <input type="checkbox" />
+                    <span>Tag2</span>
+                    <recordid type="tag">2</recordid>
+                </div>
+                            <div class="filter-option">
+                    <input type="checkbox" />
+                    <span>Tag3</span>
+                    <recordid type="tag">3</recordid>
+                </div>
+            
+        </div>
+
+        <div class="filter-items-column types">
+
+            <div class="filter-header">
+                <input type="checkbox" />
+                <h5 class="title">Types</h5>
+            </div>
+
+                            <div class="filter-option">
+                    <input type="checkbox" />
+                    <span>Type1</span>
+                    <recordid type="type">1</recordid>
+                </div>
+                            <div class="filter-option">
+                    <input type="checkbox" />
+                    <span>Type2</span>
+                    <recordid type="type">2</recordid>
+                </div>
+                            <div class="filter-option">
+                    <input type="checkbox" />
+                    <span>Type3</span>
+                    <recordid type="type">3</recordid>
+                </div>
+            
+        </div>
+
+        <div class="filter-items-column collections">
+
+            <div class="filter-header">
+                <input type="checkbox" />
+                <h5 class="title">Collections</h5>
+            </div>
+
+                            <div class="filter-option">
+                    <input type="checkbox" />
+                    <span>Coll1</span>
+                    <recordid type="collection">1</recordid>
+                </div>
+                            <div class="filter-option">
+                    <input type="checkbox" />
+                    <span>Coll2</span>
+                    <recordid type="collection">2</recordid>
+                </div>
+                            <div class="filter-option">
+                    <input type="checkbox" />
+                    <span>Coll3</span>
+                    <recordid type="collection">3</recordid>
+                </div>
+            
+        </div>
+
+    </div>
+
+</div>
+
+    <div id="items-list-header">
+
+        <input type="text" placeholder="Search items" id="search-box" />
+        <span id="search-cancel">x</span>
+
+        <ul class="tabs filter-items">
+            <li id="filter-items-tab" class="drop-down">
+                <a href="#" class="dropdown-toggle">Filter</a>
+            </li>
+
+        </ul>
+
+        <button id="new-item-button" class="btn icon add">New</button>
+
+        <div class="columns">
+            <div class="col-1 col-cell col-header"><span class="header"></span></div>
+            <div class="col-2 col-cell col-header"><span class="header"></span></div>
+        </div>
+
+    </div>
+
+    <div id="items-list-container"></div>
+
+    
+<div id="edit-form" class="neatline-record-edit-form">
+
+    <form class="form-stacked">
+
+        <fieldset>
+
+            <div class="clearfix">
+                <label for="title">Title</label>
+                <div class="input">
+                    <input class="xlarge" name="title" size="30" placeholder="Title" type="text" />
+                    <span class="help-block">The text displayed as the item's icon on the timeline.</span>
+                </div>
+            </div>
+
+            <div class="clearfix">
+                <label for="map-description">Description</label>
+                <div class="input">
+                    <textarea class="xlarge" name="description" placeholder="Description" rows="4"></textarea>
+                    <span class="help-block">Descriptive or annotate the item.</span>
+                </div>
+            </div>
+
+            <div class="clearfix">
+                <label>Start Date</label>
+                <div class="input">
+                    <div class="inline-inputs">
+                        <input class="medium" name="start-date-date" type="text" placeholder="Date" />
+                        <input class="mini" name="start-date-time" type="text" placeholder="Time" />
+                        <span class="help-inline">Enter the date (or start date) of the item.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="clearfix">
+                <label>End Date</label>
+                <div class="input">
+                    <div class="inline-inputs">
+                        <input class="medium" name="end-date-date" type="text" placeholder="Date" />
+                        <input class="mini" name="end-date-time" type="text" placeholder="Time" />
+                        <span class="help-inline">Enter an ending date, if applicable.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="clearfix">
+                <label>Date Ambiguity</label>
+                <div class="input">
+                    <div class="inline-inputs">
+                        <div class="date-ambiguity-container">
+                            <div class="date-ambiguity-editor">
+                                <div class="stop-marker left"><div class="color-swatch"></div></div>
+                                <div class="stop-marker right"><div class="color-swatch"></div></div>
+                            </div>
+                            <input name="left-ambiguity-percentage" type="hidden" />
+                            <input name="right-ambiguity-percentage" type="hidden" />
+                        </div>
+                        <span class="help-inline">Drag the beginning and ending sliders inward to capture
+                            uncertainty over the date interval.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="clearfix">
+                <label>Vector Color</label>
+                <input type="text" id="color" class="color-picker" name="color" />
+                <span class="help-inline">Select a color for the item's spatial vectors.</span>
+            </div>
+
+            <div class="clearfix">
+                <button class="btn icon home map-focus">Fix Item-Specific Map Focus</button>
+                <span class="help-inline">Click here to set a custom map focus for the item.</span>
+            </div>
+
+            <div class="actions">
+                <input type="submit" class="btn primary" value="Save">
+                <button id="record-delete-button" class="btn danger">Delete</button>
+            </div>
+
+        </fieldset>
+
+    </form>
+
+</div>
+
+</div>

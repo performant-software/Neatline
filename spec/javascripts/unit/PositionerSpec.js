@@ -11,7 +11,7 @@ describe('Positioner', function() {
         beforeEach(function() {
 
             // Get exhibit markup.
-            loadFixtures('neatline-base-markup.html');
+            loadFixtures('neatline-base.html');
 
             // Get container and set dimensions.
             neatline = $('#neatline');
@@ -109,7 +109,7 @@ describe('Positioner', function() {
         beforeEach(function() {
 
             // Get exhibit markup.
-            loadFixtures('neatline-base-markup.html');
+            loadFixtures('neatline-base.html');
 
             // Get container and set dimensions.
             neatline = $('#neatline');
@@ -173,7 +173,7 @@ describe('Positioner', function() {
         beforeEach(function() {
 
             // Get exhibit markup.
-            loadFixtures('neatline-base-markup.html');
+            loadFixtures('neatline-base.html');
 
             // Get container and set dimensions.
             neatline = $('#neatline');
@@ -1078,7 +1078,7 @@ describe('Positioner', function() {
         beforeEach(function() {
 
             // Get exhibit markup.
-            loadFixtures('neatline-base-markup.html');
+            loadFixtures('neatline-base.html');
 
             // Get container and set dimensions.
             neatline = $('#neatline');
