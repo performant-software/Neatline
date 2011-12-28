@@ -68,16 +68,68 @@ class Neatline_FixtureBuilderTest extends Omeka_Test_AppTestCase
     }
 
     /**
-     * Item browser markup.
+     * Editor markup.
      *
      * @return void.
      */
-    public function testBuildItemBrowserMarkup()
+    public function testBuildEditorMarkup()
     {
 
-        $fixture = fopen(self::$path_to_fixtures . 'item-browser.html', 'w');
+        // Mock tags.
+        $tag1 = new Tag;
+        $tag1->name = 'tag1';
+        $tag1->save();
+        $tag2 = new Tag;
+        $tag2->name = 'tag2';
+        $tag2->save();
 
-        $this->dispatch('neatline/fixtures/itembrowser');
+        // Mock types.
+        $type1 = new ItemType;
+        $type1->name = 'type1';
+        $type1->save();
+        $type2 = new ItemType;
+        $type2->name = 'type2';
+        $type2->save();
+
+        // Mock collections.
+        $col1 = new Collection;
+        $col1->name = 'col1';
+        $col1->save();
+        $col2 = new Collection;
+        $col2->name = 'col2';
+        $col2->save();
+
+        // Mock item.
+        $item = new Item;
+        $item->save();
+
+        // Mock file.
+        $sql = "INSERT INTO omeka_files (" .
+               "item_id," .
+               "size," .
+               "has_derivative_image," .
+               "archive_filename," .
+               "original_filename) " .
+               "VALUES (" .
+               $item->id . ',' .
+               "1000," .
+               "0," .
+               "'test.jpg'," .
+               "'hex.jpg')";
+        $this->db->query($sql);
+
+        // Mock exhibit.
+        $exhibit = new NeatlineExhibit;
+        $exhibit->name = 'Test Exhibit';
+        $exhibit->is_map = 1;
+        $exhibit->is_timeline = 1;
+        $exhibit->is_items = 1;
+        $exhibit->image_id = 1;
+        $exhibit->save();
+
+        $fixture = fopen(self::$path_to_fixtures . 'editor.html', 'w');
+
+        $this->dispatch('neatline-exhibits/editor/' . $exhibit->id);
         $response = $this->getResponse()->getBody('default');
 
         fwrite($fixture, $response);

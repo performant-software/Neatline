@@ -14,7 +14,7 @@ describe('Item Browser', function() {
         beforeEach(function() {
 
             // Get exhibit markup.
-            loadFixtures('item-browser.html');
+            loadFixtures('editor.html');
 
             // Get container and set dimensions.
             browser = $('#item-browser');
