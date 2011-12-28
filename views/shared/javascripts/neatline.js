@@ -34,7 +34,7 @@
             markup: {
                 map_id: 'map',
                 timeline_id: 'timeline',
-                items_id: 'undated'
+                items_id: 'items'
             }
 
         },

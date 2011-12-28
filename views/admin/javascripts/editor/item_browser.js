@@ -66,14 +66,12 @@
             this._window =                  $(window);
             this._body =                    $('body');
             this.topBar =                   $('#topbar');
-            this.searchWrapper =            $('#search-wrapper');
             this.searchBox =                $('#search-box');
             this.itemsList =                $('#items-list-container');
             this.itemsListHeader =          $('#items-list-header');
             this.searchCancel =             $('#search-cancel');
             this.itemFilterContainer =      $('#filter-items');
             this.neatlineContainer =        $('#neatline');
-            this.itemsTable =               $('#items');
             this.dragTip =                  $('#drag-tip');
             this.spaceTip =                 $('#space-tip');
             this.timeTip =                  $('#time-tip');
@@ -83,13 +81,13 @@
             this.newItemButton =            $('#new-item-button');
 
             // Trackers.
-            this._searchString = '';
-            this._currentFormItem = null;
-            this._spaceBoxes = null;
-            this._timeBoxes = null;
-            this._spaceSorted = false;
-            this._timeSorted = false;
-            this._firstRequest = true;
+            this._searchString =            '';
+            this._currentFormItem =         null;
+            this._spaceBoxes =              null;
+            this._timeBoxes =               null;
+            this._spaceSorted =             false;
+            this._timeSorted =              false;
+            this._firstRequest =            true;
 
             // Prepare the document, position elements, listen for resize.
             this._scrollbarWidth = $.getScrollbarWidth();
@@ -136,9 +134,12 @@
                 'top': this.topBarHeight
             });
 
+            // Get the absolute offset of the container.
+            this.containerOffset = this.element.offset();
+
             // Set the height of the header.
             this.itemsListHeader.css({
-                'top': this.topBarHeight,
+                'top': this.containerOffset.top,
                 'width': this.containerWidth - this._scrollbarWidth
             });
 
@@ -1227,6 +1228,13 @@
 
             this.editForm.itemform('postMapFocus', extent, zoom);
 
+        },
+
+        /*
+         * Emit a protected class attribute.
+         */
+        getAttr: function(attr) {
+            return this[attr];
         }
 
     });

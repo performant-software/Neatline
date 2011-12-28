@@ -39,6 +39,10 @@
 
         /*
          * Build the css.
+         *
+         * - param string color: The color as a hex value.
+         * - param integer leftPercent: The left-side percentage.
+         * - param integer rightPercent: The right-side percentage.
          */
         constructCss: function(color, leftPercent, rightPercent) {
 
@@ -61,7 +65,7 @@
 
                 else {
                     leftPercent = 0;
-                    rightPercent = 100;
+                    rightPercent = 99;
                 }
 
             }
@@ -70,17 +74,39 @@
             var rgb = this.__hexToRgb(color);
             var fullOpacity = this.__rgbObjectToCssValue(rgb, 1);
             var zeroOpacity = this.__rgbObjectToCssValue(rgb, 0);
+            var color = (color[0] == '#') ? color : '#' + color;
 
-            this.css = ' \
-                background: ' + color + '; \
-                background: -moz-linear-gradient(left,  ' + zeroOpacity + ' 0%, ' + fullOpacity + ' ' + leftPercent + '%, ' + fullOpacity + ' ' + rightPercent + '%,' + zeroOpacity + ' 99%); \
-                background: -webkit-gradient(linear, left top, right top, color-stop(0%,' + zeroOpacity + '), color-stop(' + leftPercent + '%,' + fullOpacity + '), color-stop(' + rightPercent + '%,' + fullOpacity + '), color-stop(100%,' + zeroOpacity + ')); \
-                background: -webkit-linear-gradient(left, ' + zeroOpacity + ' 0%, ' + fullOpacity + ' ' + leftPercent + '%, ' + fullOpacity + ' ' + rightPercent + '%,' + zeroOpacity + ' 99%); \
-                background: -o-linear-gradient(left,  ' + zeroOpacity + ' 0%, ' + fullOpacity + ' ' + leftPercent + '%, ' + fullOpacity + ' ' + rightPercent + '%,' + zeroOpacity + ' 99%); \
-                background: -ms-linear-gradient(left,  ' + zeroOpacity + ' 0%, ' + fullOpacity + ' ' + leftPercent + '%, ' + fullOpacity + ' ' + rightPercent + '%,' + zeroOpacity + ' 99%); \
-                background: linear-gradient(left, ' + zeroOpacity + ' 0%, ' + fullOpacity + ' ' + leftPercent + '%, ' + fullOpacity + ' ' + rightPercent + '%,' + zeroOpacity + ' 99%); \
-                filter: progid:DXImageTransform.Microsoft.gradient( startColorstr="#1e5799", endColorstr="#2989d8",GradientType=0 );';
-
+            this.css = 'background: ' + color + '; ' +
+                'background: -moz-linear-gradient(left, ' +
+                    zeroOpacity + ' 0%, '+
+                    fullOpacity + ' ' + leftPercent + '%, ' +
+                    fullOpacity + ' ' + rightPercent + '%, ' +
+                    zeroOpacity + ' 99%); ' +
+                'background: -webkit-gradient(linear, left top, right top, ' +
+                    'color-stop(0%,' + zeroOpacity + '), ' +
+                    'color-stop(' + leftPercent + '%,' + fullOpacity + '), ' +
+                    'color-stop(' + rightPercent + '%,' + fullOpacity + '), ' +
+                    'color-stop(99%,' + zeroOpacity + ')); ' +
+                'background: -webkit-linear-gradient(left, ' +
+                    zeroOpacity + ' 0%, '+
+                    fullOpacity + ' ' + leftPercent + '%, ' +
+                    fullOpacity + ' ' + rightPercent + '%, ' +
+                    zeroOpacity + ' 99%); ' +
+                'background: -o-linear-gradient(left, ' +
+                    zeroOpacity + ' 0%, '+
+                    fullOpacity + ' ' + leftPercent + '%, ' +
+                    fullOpacity + ' ' + rightPercent + '%, ' +
+                    zeroOpacity + ' 99%); ' +
+                'background: -ms-linear-gradient(left, ' +
+                    zeroOpacity + ' 0%, '+
+                    fullOpacity + ' ' + leftPercent + '%, ' +
+                    fullOpacity + ' ' + rightPercent + '%, ' +
+                    zeroOpacity + ' 99%); ' +
+                'background: linear-gradient(left, ' +
+                    zeroOpacity + ' 0%, '+
+                    fullOpacity + ' ' + leftPercent + '%, ' +
+                    fullOpacity + ' ' + rightPercent + '%, ' +
+                    zeroOpacity + ' 99%); ';
         },
 
         /*
@@ -100,6 +126,10 @@
 
         /*
          * Convert hex to rbg array.
+         *
+         * - param string hex: The hex value.
+         *
+         * - return object rbg: An object with the red, green, and blue values.
          */
         __hexToRgb: function(hex) {
 
@@ -124,7 +154,27 @@
          */
         __rgbObjectToCssValue: function(rgb, alpha) {
 
-            return 'rgba(' + rgb.red + ', ' + rgb.green + ', ' + rgb.blue + ', ' + alpha + ')';
+            return 'rgba(' +
+                rgb.red +
+                ', ' +
+                rgb.green +
+                ', ' +
+                rgb.blue +
+                ', ' +
+                alpha +')';
+
+        },
+
+        /*
+         * Emit a protected class attribute.
+         *
+         * - param string attr: The name of the attribute.
+         *
+         * - return mixed attr: The value of the attribute.
+         */
+        getAttr: function(attr) {
+
+            return this[attr];
 
         }
 

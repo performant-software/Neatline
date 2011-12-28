@@ -32,7 +32,7 @@
 
     <div id="timeline" class="neatline-block neatlinetime-timeline"></div>
 
-    <div id="undated" class="neatline-block">
+    <div id="items" class="neatline-block">
         <?php echo $this->partial('neatline/_undated_items.php', array(
             'public' => $public
         )); ?>
@@ -55,18 +55,22 @@
     <?php endif; ?>
 
     <?php if (isset($image)): ?>
-        Neatline.image = {
-            path: '<?php echo $image['path']; ?>',
-            name: '<?php echo $image['name']; ?>',
-            width: <?php echo $this->fileMetadata(
-                $image['record'],
-                'Omeka Image File',
-                'Width'); ?>,
-            height: <?php echo $this->fileMetadata(
-                $image['record'],
-                'Omeka Image File',
-                'Height'); ?>,
-        };
+
+        Neatline.image = <?php echo json_encode(
+            array(
+                'path' => $image['path'],
+                'name' => $image['name'],
+                'width' => $this->fileMetadata(
+                        $image['record'],
+                        'Omeka Image File',
+                        'Width'),
+                'height' => $this->fileMetadata(
+                        $image['record'],
+                        'Omeka Image File',
+                        'Height')
+            )
+        ); ?>
+
     <?php endif; ?>
 
 </script>

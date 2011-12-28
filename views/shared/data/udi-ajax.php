@@ -33,12 +33,14 @@
             <td class="item-title">
                 <span class="item-title-text"><?php echo $record->getTitle(); ?></span>
             </td>
+            <!--
             <td class="col-1 col-row space">
                 <img src="<?php echo img('space_icon.png'); ?>" class="<?php echo $record->space_active == 1 ? 'active' : 'inactive'; ?>" />
             </td>
             <td class="col-2 col-row time">
                 <img src="<?php echo img('time_icon.png'); ?>" class="<?php echo $record->time_active == 1 ? 'active': 'inactive'; ?>" />
             </td>
+            -->
         </tr>
 
         <tr class="item-details">

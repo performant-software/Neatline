@@ -48,7 +48,8 @@
                 purple: '#724E85',
                 blue: '#2149cc',
                 text_default: '#515151',
-                background_default: '#FFFEF8'
+                background_default: '#FFFEF8',
+                background_highlight: '#f3f6ff'
             }
 
         },
@@ -210,6 +211,30 @@
                         // If the form is visible, hide it.
                         else {
                             self.hideItem(recordid);
+                        }
+
+                    },
+
+                    'mouseenter': function() {
+
+                        // If the item is not expanded, fade the
+                        // background to purple.
+                        if (!item.data('expanded')) {
+                            item.animate({
+                                'background-color': self.options.colors.background_highlight
+                            }, 20);
+                        }
+
+                    },
+
+                    'mouseleave': function() {
+
+                        // If the item is not expanded, fade the
+                        // background to purple.
+                        if (!item.data('expanded')) {
+                            item.animate({
+                                'background-color': self.options.colors.background_default
+                            }, 20);
                         }
 
                     }
