@@ -134,9 +134,12 @@
                 'top': this.topBarHeight
             });
 
+            // Get the absolute offset of the container.
+            this.containerOffset = this.element.offset();
+
             // Set the height of the header.
             this.itemsListHeader.css({
-                'top': this.topBarHeight,
+                'top': this.containerOffset.top,
                 'width': this.containerWidth - this._scrollbarWidth
             });
 
