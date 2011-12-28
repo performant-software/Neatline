@@ -126,10 +126,6 @@ table th, table td {
     padding: 0;
 }
 
-#undated-items-list-container tr.item-row:hover {
-    background-color: #f3f6ff;
-}
-
 #undated-items-list-container span.item-title-fader {
 
     float: right;
