@@ -107,11 +107,14 @@ table th, table td {
     background-color: #FFFEF8;
 }
 
+#undated-items-list-container td {
+    border-top: none;
+}
+
 #undated-items-list-container td.item-title {
-    padding-left: 20px;
-    padding-right: 0;
+    padding: 7px 0 7px 20px;
     overflow: hidden;
-    border-bottom: 1px solid #f0f0f0;
+    border-top: 1px solid #ddd;
 }
 
 #undated-items-list-container td.col-row {
@@ -254,7 +257,7 @@ table th, table td {
 
 #undated-items-list-container div.item-description-content {
     padding: 0;
-    margin: 10px 20px;
+    margin: 5px 20px 7px;
     font-size: 0.9em;
     color: #5e5e5e;
 }

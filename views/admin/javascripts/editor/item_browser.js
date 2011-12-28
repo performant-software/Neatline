@@ -66,14 +66,12 @@
             this._window =                  $(window);
             this._body =                    $('body');
             this.topBar =                   $('#topbar');
-            this.searchWrapper =            $('#search-wrapper');
             this.searchBox =                $('#search-box');
             this.itemsList =                $('#items-list-container');
             this.itemsListHeader =          $('#items-list-header');
             this.searchCancel =             $('#search-cancel');
             this.itemFilterContainer =      $('#filter-items');
             this.neatlineContainer =        $('#neatline');
-            this.itemsTable =               $('#items-table');
             this.dragTip =                  $('#drag-tip');
             this.spaceTip =                 $('#space-tip');
             this.timeTip =                  $('#time-tip');

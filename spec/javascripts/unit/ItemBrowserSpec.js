@@ -28,18 +28,16 @@ describe('Item Browser', function() {
         it('should select component markup', function() {
 
             expect(browser.itembrowser('getAttr', 'topBar')).toBe('#topbar');
-            expect(browser.itembrowser('getAttr', 'searchWrapper')).toBe('#search-wrapper');
             expect(browser.itembrowser('getAttr', 'searchBox')).toBe('#search-box');
             expect(browser.itembrowser('getAttr', 'itemsList')).toBe('#items-list-container');
             expect(browser.itembrowser('getAttr', 'itemsListHeader')).toBe('#items-list-header');
             expect(browser.itembrowser('getAttr', 'searchCancel')).toBe('#search-cancel');
             expect(browser.itembrowser('getAttr', 'itemFilterContainer')).toBe('#filter-items');
             expect(browser.itembrowser('getAttr', 'neatlineContainer')).toBe('#neatline');
-            expect(browser.itembrowser('getAttr', 'itemsTable')).toBe('#items-table');
             expect(browser.itembrowser('getAttr', 'dragTip')).toBe('#drag-tip');
             expect(browser.itembrowser('getAttr', 'spaceTip')).toBe('#space-tip');
-            expect(browser.itembrowser('getAttr', 'timeTip')).toBe('#time-top');
-            expect(browser.itembrowser('getAttr', 'spaceHeader')).toBe('#div.col-1.col-header span.header');
+            expect(browser.itembrowser('getAttr', 'timeTip')).toBe('#time-tip');
+            expect(browser.itembrowser('getAttr', 'spaceHeader')).toBe('div.col-1.col-header span.header');
             expect(browser.itembrowser('getAttr', 'timeHeader')).toBe('div.col-2.col-header span.header');
             expect(browser.itembrowser('getAttr', 'editForm')).toBe('#edit-form');
             expect(browser.itembrowser('getAttr', 'newItemButton')).toBe('#new-item-button');
@@ -63,6 +61,22 @@ describe('Item Browser', function() {
     });
 
     describe('positioning', function() {
+
+        it('should position the items column to fill the available height', function() {
+
+        });
+
+        it('should position the browser header at the top of the column', function() {
+
+        });
+
+        it('should position the exhibit container', function() {
+
+        });
+
+        it('should position the drag handle along the edge of the column', function() {
+
+        });
 
     });
 
