@@ -1,64 +1,4 @@
 
-
-<!DOCTYPE html>
-<html lang="en-us">
-<head>
-    <meta charset="utf-8">
-    <title>Neatline Editor: Test Exhibit</title>
-
-<!-- Plugin Stuff -->
-
-<link href='http://fonts.googleapis.com/css?family=Crimson+Text:400,400italic,600,600italic,700,700italic' rel='stylesheet' type='text/css'>
-<link href='http://fonts.googleapis.com/css?family=IM+Fell+DW+Pica' rel='stylesheet' type='text/css'>
-<link href='http://fonts.googleapis.com/css?family=Petrona' rel='stylesheet' type='text/css'>
-
-<!-- Stylesheets -->
-<link href="http:///Users/davidmcclure/pear/bin/plugins/Neatline/views/shared/css/bootstrap.xtra.min.css" media="all" rel="stylesheet" type="text/css" >
-<link href="http:///Users/davidmcclure/pear/bin/plugins/Neatline/views/shared/css/neatline.css" media="all" rel="stylesheet" type="text/css" >
-<link href="http:///Users/davidmcclure/pear/bin/plugins/Neatline/views/shared/css/neatline-timeline.css" media="all" rel="stylesheet" type="text/css" >
-<link href="http:///Users/davidmcclure/pear/bin/plugins/Neatline/views/admin/css/neatline-editor.css" media="all" rel="stylesheet" type="text/css" >
-<link href="http:///Users/davidmcclure/pear/bin/plugins/Neatline/views/admin/css/gradient-builder.css" media="all" rel="stylesheet" type="text/css" >
-<link href="http:///Users/davidmcclure/pear/bin/plugins/Neatline/views/admin/css/jquery.miniColors.css" media="all" rel="stylesheet" type="text/css" >
-<link href="http:///Users/davidmcclure/pear/bin/plugins/Neatline/views/admin/css/configure-layout.css" media="all" rel="stylesheet" type="text/css" >
-<link href="http:///Users/davidmcclure/pear/bin/plugins/Neatline/views/admin/css/configure-map.css" media="all" rel="stylesheet" type="text/css" >
-<!-- JavaScripts -->
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.13/jquery-ui.min.js"></script>
-<script type="text/javascript">
-    //<!--
-jQuery.noConflict();    //-->
-</script>
-<script type="text/javascript" src="http:///Users/davidmcclure/pear/bin/plugins/Neatline/views/shared/javascripts/neatline.js"></script>
-<script type="text/javascript" src="http:///Users/davidmcclure/pear/bin/plugins/Neatline/views/shared/javascripts/neatline_map.js"></script>
-<script type="text/javascript" src="http:///Users/davidmcclure/pear/bin/plugins/Neatline/views/shared/javascripts/neatline_timeline.js"></script>
-<script type="text/javascript" src="http:///Users/davidmcclure/pear/bin/plugins/Neatline/views/shared/javascripts/neatline_items.js"></script>
-<script type="text/javascript" src="http:///Users/davidmcclure/pear/bin/plugins/Neatline/views/shared/javascripts/span_styler.js"></script>
-<script type="text/javascript" src="http:///Users/davidmcclure/pear/bin/plugins/Neatline/views/shared/javascripts/positioner.js"></script>
-<script type="text/javascript" src="http:///Users/davidmcclure/pear/bin/plugins/Neatline/views/shared/javascripts/libraries/_utilities.js"></script>
-<script type="text/javascript" src="http:///Users/davidmcclure/pear/bin/plugins/Neatline/views/shared/javascripts/libraries/jquery.getscrollbarwidth.js"></script>
-<script type="text/javascript" src="http:///Users/davidmcclure/pear/bin/plugins/Neatline/views/shared/javascripts/libraries/taffy-min.js"></script>
-<script type="text/javascript" src="http:///Users/davidmcclure/pear/bin/plugins/Neatline/views/admin/javascripts/editor/item_browser.js"></script>
-<script type="text/javascript" src="http:///Users/davidmcclure/pear/bin/plugins/Neatline/views/admin/javascripts/editor/item_filter.js"></script>
-<script type="text/javascript" src="http:///Users/davidmcclure/pear/bin/plugins/Neatline/views/admin/javascripts/editor/item_form.js"></script>
-<script type="text/javascript" src="http:///Users/davidmcclure/pear/bin/plugins/Neatline/views/admin/javascripts/editor/edit_geometry.js"></script>
-<script type="text/javascript" src="http:///Users/davidmcclure/pear/bin/plugins/Neatline/views/admin/javascripts/editor/layout_builder.js"></script>
-<script type="text/javascript" src="http:///Users/davidmcclure/pear/bin/plugins/Neatline/views/admin/javascripts/editor/item_orderer.js"></script>
-<script type="text/javascript" src="http:///Users/davidmcclure/pear/bin/plugins/Neatline/views/admin/javascripts/editor/configure_layout.js"></script>
-<script type="text/javascript" src="http:///Users/davidmcclure/pear/bin/plugins/Neatline/views/admin/javascripts/editor/configure_map.js"></script>
-<script type="text/javascript" src="http:///Users/davidmcclure/pear/bin/plugins/Neatline/views/admin/javascripts/editor/utilities/_small_scroll.js"></script>
-<script type="text/javascript" src="http:///Users/davidmcclure/pear/bin/plugins/Neatline/views/admin/javascripts/editor/utilities/_toggle_button.js"></script>
-<script type="text/javascript" src="http:///Users/davidmcclure/pear/bin/plugins/Neatline/views/admin/javascripts/editor/utilities/_gradient_builder.js"></script>
-<script type="text/javascript" src="http:///Users/davidmcclure/pear/bin/plugins/Neatline/views/admin/javascripts/editor/utilities/_dropdown.js"></script>
-<script type="text/javascript" src="http:///Users/davidmcclure/pear/bin/plugins/Neatline/views/admin/javascripts/editor/_constructEditor.js"></script>
-<script type="text/javascript" src="http:///Users/davidmcclure/pear/bin/plugins/Neatline/views/shared/javascripts/libraries/jquery.miniColors-0.1/jquery.miniColors.min.js"></script>
-<link href='http://fonts.googleapis.com/css?family=Crimson+Text:400,400italic,600,600italic,700,700italic' rel='stylesheet' type='text/css'>
-<script type="text/javascript" src="http://openlayers.org/api/OpenLayers.js"></script>
-<script src="http://api.simile-widgets.org/timeline/2.3.1/timeline-api.js?bundle=true" type="text/javascript"></script>
-
-</head>
-<body>
-
-
 <div id="topbar" class="topbar-inner topbar">
 
     <img id="neatline-logo" src="http:///Users/davidmcclure/pear/bin/plugins/Neatline/views/admin/images/neatline-logo-white-small.png" />
@@ -99,7 +39,6 @@ to store the current viewport settings as the public defaults.</p>
 </ul>
 
 </div>
-
 
 <div id="item-browser">
 
@@ -339,7 +278,6 @@ to store the current viewport settings as the public defaults.</p>
 
 </div>
 
-
 <!-- Neatline container. -->
 <div id="neatline" class="neatline-container">
 
@@ -379,7 +317,7 @@ to store the current viewport settings as the public defaults.</p>
 <!-- JSON globals. -->
 <script type="text/javascript">
 
-    var Neatline = {"added":"2011-12-28 15:26:37","name":"Test Exhibit","map_id":null,"image_id":1,"top_element":null,"items_h_pos":null,"items_v_pos":null,"items_height":null,"is_map":1,"is_timeline":1,"is_items":1,"default_map_bounds":null,"default_map_zoom":null,"default_focus_date":null,"id":1};
+    var Neatline = {"added":"2011-12-28 16:03:15","name":"Test Exhibit","map_id":null,"image_id":1,"top_element":null,"items_h_pos":null,"items_v_pos":null,"items_height":null,"is_map":1,"is_timeline":1,"is_items":1,"default_map_bounds":null,"default_map_zoom":null,"default_focus_date":null,"id":1};
         Neatline.dataSources = {"timeline":"http:\/\/\/Users\/davidmcclure\/pear\/bin\/neatline-exhibits\/1\/data\/simile","map":"http:\/\/\/Users\/davidmcclure\/pear\/bin\/neatline-exhibits\/1\/data\/openlayers","undated":"http:\/\/\/Users\/davidmcclure\/pear\/bin\/neatline-exhibits\/1\/data\/udi"};
         Neatline.public = false;
 
@@ -392,7 +330,6 @@ to store the current viewport settings as the public defaults.</p>
         };
     
 </script>
-
 
 <div id="drag-tip" class="twipsy fade right in">
     <div class="twipsy-arrow"></div>
@@ -408,7 +345,3 @@ to store the current viewport settings as the public defaults.</p>
     <div class="twipsy-arrow"></div>
     <div class="twipsy-inner">Time</div>
 </div>
-
-
-    </body>
-</html>

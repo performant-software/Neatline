@@ -129,7 +129,7 @@ class Neatline_FixtureBuilderTest extends Omeka_Test_AppTestCase
 
         $fixture = fopen(self::$path_to_fixtures . 'editor.html', 'w');
 
-        $this->dispatch('neatline-exhibits/editor/' . $exhibit->id);
+        $this->dispatch('neatline/fixtures/editor');
         $response = $this->getResponse()->getBody('default');
 
         fwrite($fixture, $response);
