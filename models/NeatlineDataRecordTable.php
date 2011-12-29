@@ -322,15 +322,15 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
 
         // Shell out the object literal structure.
         $data = array(
-            'title' => '',
-            'description' => '',
-            'start_date' => '',
-            'start_time' => '',
-            'end_date' => '',
-            'end_time' => '',
-            'left_percent' => 0,
-            'right_percent' => 100,
-            'vector_color' => '#724e85'
+            'title' =>                      '',
+            'description' =>                '',
+            'start_date' =>                 '',
+            'start_time' =>                 '',
+            'end_date' =>                   '',
+            'end_time' =>                   '',
+            'left_percent' =>               0,
+            'right_percent' =>              100,
+            'vector_color' =>               '#724e85'
         );
 
         $data['title'] = neatline_getItemMetadata(
@@ -371,13 +371,18 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
             if ($record->space_active == 1) {
 
                 $data[] = array(
-                    'id' => $record->id,
-                    'item_id' => $record->item_id,
-                    'title' => $record->getTitle(),
-                    'color' => $record->vector_color,
-                    'bounds' => $record->map_bounds,
-                    'zoom' => $record->map_zoom,
-                    'wkt' => $record->getGeocoverage()
+                    'id' =>                 $record->id,
+                    'item_id' =>            $record->item_id,
+                    'title' =>              $record->getTitle(),
+                    'vector_color' =>       $record->vector_color,
+                    'vector_opacity' =>     $record->vector_opacity,
+                    'stroke_opacity' =>     $record->stroke_opacity,
+                    'stroke_color' =>       $record->stroke_color,
+                    'stroke_width' =>       $record->stroke_color,
+                    'point_radius' =>       $record->point_radius,
+                    'bounds' =>             $record->map_bounds,
+                    'zoom' =>               $record->map_zoom,
+                    'wkt' =>                $record->getGeocoverage()
                 );
 
             }
@@ -420,13 +425,13 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
             );
 
             $eventArray = array(
-                'eventID' => $record->id,
-                'title' => $record->title,
-                'description' => $record->description,
-                'color' => $record->vector_color,
-                'textColor' => '#4a4a4a',
-                'left_ambiguity' => $record->left_percent,
-                'right_ambiguity' => $record->right_percent
+                'eventID' =>                $record->id,
+                'title' =>                  $record->title,
+                'description' =>            $record->description,
+                'color' =>                  $record->vector_color,
+                'textColor' =>              '#4a4a4a',
+                'left_ambiguity' =>         $record->left_percent,
+                'right_ambiguity' =>        $record->right_percent
             );
 
             // If there is a valid start stamp.

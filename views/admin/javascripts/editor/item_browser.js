@@ -351,10 +351,7 @@
                 // When the stroke color is changed.
                 'strokeColorEdit': function(event, obj) {
 
-                    var recordid = self._currentFormItem.attr('recordid');
-
                     self._trigger('strokecoloredit', {}, {
-                        'recordid': recordid,
                         'color': obj.color
                     });
 

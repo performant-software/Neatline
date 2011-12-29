@@ -47,10 +47,12 @@
             },
 
             styles: {
-                default_opacity: 0.4,
-                select_point_radius: 6,
-                default_color: '#ffb80e',
-                select_stroke_color: '#ea3a3a'
+                vector_color: '#ffb80e',
+                stroke_color: '#ea3a3a',
+                vector_opacity: 0.4,
+                stroke_opacity: 0.6,
+                stroke_width: 1,
+                point_radius: 6
             }
 
         },
@@ -295,10 +297,14 @@
 
             $.each(data, function(i, item) {
 
-                // Get item id and color, construct style.
-                var recordid = item.id;
-                var color = (item.color != '') ? item.color : self.options.styles.default_color;
-                var style = self._getStyleMap(color);
+                // Construct the style.
+                var style = self._getStyleMap(
+                    item.vector_color,
+                    item.vector_opacity,
+                    item.stroke_color,
+                    item.stroke_opacity,
+                    item.stroke_width,
+                    item.point_radius);
 
                 // Build the layers.
                 var vectorLayer = new OpenLayers.Layer.Vector(item.title, {
@@ -323,7 +329,7 @@
                 self._db.insert({
                     itemid: item.item_id,
                     layerid: vectorLayer.id,
-                    recordid: recordid,
+                    recordid: item.id,
                     data: item,
                     layer: vectorLayer
                 });
@@ -440,14 +446,14 @@
 
             // If there is a record id, get the layer.
             if (recordid !== '') {
-                var record = this._db({ recordid: parseInt(recordid) }).first();
-                this._currentEditLayer = record.layer;
+                this.record = this._db({ recordid: parseInt(recordid) }).first();
+                this._currentEditLayer = this.record.layer;
             }
 
             // If there is an item id, try to find a layer.
             else if (itemid !== '') {
-                var record = this._db({ itemid: parseInt(itemid) }).first();
-                this._currentEditLayer = record.layer;
+                this.record = this._db({ itemid: parseInt(itemid) }).first();
+                this._currentEditLayer = this.record.layer;
             }
 
             // Store the current edit item so that the layer can be reactivatee as
@@ -741,22 +747,55 @@
         /*
          * Construct a StyleMap object with a given color.
          */
-        _getStyleMap: function(fillColor) {
+        _getStyleMap: function(
+            fillColor,
+            fillOpacity,
+            strokeColor,
+            strokeOpacity,
+            strokeWidth,
+            pointRadius) {
 
+            // Capture fill color.
+            var fillColor = (fillColor != null) ? fillColor :
+                this.options.styles.vector_color;
+
+            // Capture fill opacity.
+            var fillOpacity = (fillOpacity != null) ? fillOpacity :
+                this.options.styles.vector_opacity;
+
+            // Capture stroke color.
+            var strokeColor = (strokeColor != null) ? strokeColor :
+                this.options.styles.stroke_color;
+
+            // Capture stroke opacity.
+            var strokeOpacity = (strokeOpacity != null) ? strokeOpacity :
+                this.options.styles.stroke_opacity;
+
+            // Capture stroke width.
+            var strokeWidth = (strokeWidth != null) ? strokeWidth :
+                this.options.styles.stroke_width;
+
+            // Capture point radius.
+            var pointRadius = (pointRadius != null) ? pointRadius :
+                this.options.styles.point_radius;
+
+            // Construct and return the StyleMaps.
             return new OpenLayers.StyleMap({
                 'default': new OpenLayers.Style({
                     fillColor: fillColor,
-                    fillOpacity: this.options.styles.default_opacity,
-                    strokeColor: fillColor,
-                    pointRadius: this.options.styles.select_point_radius,
-                    strokeWidth: 1
+                    fillOpacity: fillOpacity,
+                    strokeColor: strokeColor,
+                    strokeOpacity: strokeOpacity,
+                    pointRadius: pointRadius,
+                    strokeWidth: strokeWidth
                 }),
                 'select': new OpenLayers.Style({
                     fillColor: fillColor,
-                    fillOpacity: this.options.styles.default_opacity,
-                    strokeColor: this.options.styles.select_stroke_color,
-                    pointRadius: this.options.styles.select_point_radius,
-                    strokeWidth: 2
+                    fillOpacity: fillOpacity,
+                    strokeColor: this.options.colors.highlight_red,
+                    strokeOpacity: strokeOpacity,
+                    pointRadius: pointRadius,
+                    strokeWidth: strokeWidth
                 }),
             });
 
@@ -776,7 +815,32 @@
         setItemVectorColor: function(color) {
 
             // Rebuild the style map.
-            this._currentEditLayer.styleMap = this._getStyleMap(color);
+            this._currentEditLayer.styleMap = this._getStyleMap(
+                color,
+                this.record.data.vector_opacity,
+                this.record.data.stroke_color,
+                this.record.data.stroke_opacity,
+                this.record.data.stroke_width,
+                this.record.data.point_radius);
+
+            // Rerender the layer to manifest the change.
+            this._currentEditLayer.redraw();
+
+        },
+
+        /*
+         * Update the stroke color for the current editing layer.
+         */
+        setItemStrokeColor: function(color) {
+
+            // Rebuild the style map.
+            this._currentEditLayer.styleMap = this._getStyleMap(
+                this.record.data.vector_color,
+                this.record.data.vector_opacity,
+                color,
+                this.record.data.stroke_opacity,
+                this.record.data.stroke_width,
+                this.record.data.point_radius);
 
             // Rerender the layer to manifest the change.
             this._currentEditLayer.redraw();

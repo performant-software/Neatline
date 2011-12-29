@@ -360,8 +360,9 @@
         },
 
         /*
-         * Focus the items tray for a given record.
+         * Set the fill color for a record's features.
          *
+         * - param string color: The color for the span.
          * - param integer id: The record id.
          *
          * - return void.
@@ -369,6 +370,17 @@
         setItemVectorColor: function(color, id) {
             this.map.neatlinemap('setItemVectorColor', color);
             this.timeline.neatlinetimeline('setDateColor', id, color);
+        },
+
+        /*
+         * Set the stroke color for the current item.
+         *
+         * - param string color: The color for the span.
+         *
+         * - return void.
+         */
+        setItemStrokeColor: function(color) {
+            this.map.neatlinemap('setItemStrokeColor', color);
         },
 
         /*

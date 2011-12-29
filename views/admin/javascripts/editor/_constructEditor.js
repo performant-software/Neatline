@@ -160,7 +160,7 @@ jQuery(document).ready(function($) {
         // When the stroke color picker value is changed, push the new color onto
         // the item's vectors.
         'strokecoloredit': function(event, obj) {
-            neatlineContainer.neatline('setItemStrokeColor', obj.color, obj.recordid);
+            neatlineContainer.neatline('setItemStrokeColor', obj.color);
         },
 
         // When date ambiguity sliders are changed in an item edit form.
