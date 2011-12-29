@@ -336,12 +336,24 @@
 
                 },
 
-                // When the color is changed.
-                'colorEdit': function(event, obj) {
+                // When the vector color is changed.
+                'vectorColorEdit': function(event, obj) {
 
                     var recordid = self._currentFormItem.attr('recordid');
 
-                    self._trigger('coloredit', {}, {
+                    self._trigger('vectorcoloredit', {}, {
+                        'recordid': recordid,
+                        'color': obj.color
+                    });
+
+                },
+
+                // When the stroke color is changed.
+                'strokeColorEdit': function(event, obj) {
+
+                    var recordid = self._currentFormItem.attr('recordid');
+
+                    self._trigger('strokecoloredit', {}, {
                         'recordid': recordid,
                         'color': obj.color
                     });

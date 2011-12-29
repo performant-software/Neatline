@@ -762,10 +762,18 @@
 
         },
 
+
+        /*
+         * =================
+         * Style change handlers.
+         * =================
+         */
+
+
         /*
          * Update the feature color for the current editing layer.
          */
-        setItemColor: function(color) {
+        setItemVectorColor: function(color) {
 
             // Rebuild the style map.
             this._currentEditLayer.styleMap = this._getStyleMap(color);

@@ -121,7 +121,7 @@
             // ** SHAPE COLOR.
             this.vectorColor.miniColors({
 
-                'change': function(hex, rgb) {
+                change: function(hex, rgb) {
 
                     // Trigger out, change gradient.
                     if (!self._opened) {
@@ -129,7 +129,7 @@
                     }
 
                     // Change the color.
-                    self._trigger('colorEdit', {}, { 'color': hex });
+                    self._trigger('vectorColorEdit', {}, { 'color': hex });
                     self.ambiguity.gradientbuilder('setColor', hex);
 
                 }
@@ -137,34 +137,53 @@
             });
 
             // ** LINE COLOR.
-            this.strokeColor.miniColors();
+            this.strokeColor.miniColors({
+
+                // Change the color.
+                change: function(hex, rgb) {
+                    self._trigger('strokeColorEdit', {}, { 'color': hex });
+                }
+
+            });
 
             // ** SHAPE OPACITY.
             this.vectorOpacity.integerdragger({
                 min: 0,
                 max: 100,
-                px_per_unit: 1
+                px_per_unit: 1,
+                change: function(evt, obj) {
+                    console.log(obj.value);
+                }
             });
 
             // ** LINE OPACITY.
             this.strokeOpacity.integerdragger({
                 min: 0,
                 max: 100,
-                px_per_unit: 1
+                px_per_unit: 1,
+                change: function(evt, obj) {
+                    console.log(obj.value);
+                }
             });
 
             // ** LINE THICKNESS.
             this.strokeWidth.integerdragger({
                 min: 0,
                 default: 1,
-                px_per_unit: 8
+                px_per_unit: 8,
+                change: function(evt, obj) {
+                    console.log(obj.value);
+                }
             });
 
             // ** POINT RADIUS.
             this.pointRadius.integerdragger({
                 min: 1,
                 default: 6,
-                px_per_unit: 8
+                px_per_unit: 8,
+                change: function(evt, obj) {
+                    console.log(obj.value);
+                }
             });
 
             // ** SAVE.

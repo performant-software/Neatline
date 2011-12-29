@@ -51,7 +51,12 @@ jQuery(document).ready(function($) {
                 'timelineeventclick': function(event, obj) {
 
                     // Show the edit form.
-                    editorContainer.itembrowser('showFormByRecordId', obj.recordid, true, false, true);
+                    editorContainer.itembrowser(
+                        'showFormByRecordId',
+                        obj.recordid,
+                        true,
+                        false,
+                        true);
 
                 },
 
@@ -59,7 +64,12 @@ jQuery(document).ready(function($) {
                 'mapfeatureclick': function(event, obj) {
 
                     // Show the edit form.
-                    editorContainer.itembrowser('showFormByRecordId', obj.recordid, false, true, true);
+                    editorContainer.itembrowser(
+                        'showFormByRecordId',
+                        obj.recordid,
+                        false,
+                        true,
+                        true);
 
                 },
 
@@ -67,7 +77,12 @@ jQuery(document).ready(function($) {
                 'undateditemclick': function(event, obj) {
 
                     // Show the edit form.
-                    editorContainer.itembrowser('showFormByRecordId', obj.recordid, true, true, obj.scrollItems);
+                    editorContainer.itembrowser(
+                        'showFormByRecordId',
+                        obj.recordid,
+                        true,
+                        true,
+                        obj.scrollItems);
 
                 },
 
@@ -136,18 +151,27 @@ jQuery(document).ready(function($) {
 
         },
 
-        // When the color picker value is changed, push the new color onto
+        // When the fill color picker value is changed, push the new color onto
         // the item's vectors.
-        'coloredit': function(event, obj) {
+        'vectorcoloredit': function(event, obj) {
+            neatlineContainer.neatline('setItemVectorColor', obj.color, obj.recordid);
+        },
 
-            neatlineContainer.neatline('setItemColor', obj.color, obj.recordid);
-
+        // When the stroke color picker value is changed, push the new color onto
+        // the item's vectors.
+        'strokecoloredit': function(event, obj) {
+            neatlineContainer.neatline('setItemStrokeColor', obj.color, obj.recordid);
         },
 
         // When date ambiguity sliders are changed in an item edit form.
         'ambiguityChange': function(event, obj) {
 
-            neatlineContainer.neatline('setDateAmbiguity', obj.recordid, obj.color, obj.leftPercent, obj.rightPercent);
+            neatlineContainer.neatline(
+                'setDateAmbiguity',
+                obj.recordid,
+                obj.color,
+                obj.leftPercent,
+                obj.rightPercent);
 
         },
 
@@ -199,7 +223,11 @@ jQuery(document).ready(function($) {
             var timelineCenter = neatlineContainer.neatline('getTimelineCenter');
 
             // Save.
-            configureLayoutButton.configurelayout('savePositions', mapExtent, mapZoom, timelineCenter);
+            configureLayoutButton.configurelayout(
+                'savePositions',
+                mapExtent,
+                mapZoom,
+                timelineCenter);
 
         },
 
