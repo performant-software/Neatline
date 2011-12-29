@@ -172,7 +172,7 @@
                 default: 1,
                 px_per_unit: 8,
                 change: function(evt, obj) {
-                    console.log(obj.value);
+                    self._trigger('strokeWidthEdit', {}, { 'value': obj.value });
                 }
             });
 
@@ -182,7 +182,7 @@
                 default: 6,
                 px_per_unit: 8,
                 change: function(evt, obj) {
-                    console.log(obj.value);
+                    self._trigger('pointRadiusEdit', {}, { 'value': obj.value });
                 }
             });
 

@@ -899,6 +899,50 @@
             // Rerender the layer to manifest the change.
             this._currentEditLayer.redraw();
 
+        },
+
+        /*
+         * Update the stroke width for the current editing layer.
+         */
+        setItemStrokeWidth: function(value) {
+
+            // Update the record tracker object.
+            this.record.data.stroke_width = value;
+
+            // Rebuild the style map.
+            this._currentEditLayer.styleMap = this._getStyleMap(
+                this.record.data.vector_color,
+                this.record.data.vector_opacity,
+                this.record.data.stroke_color,
+                this.record.data.stroke_opacity,
+                this.record.data.stroke_width,
+                this.record.data.point_radius);
+
+            // Rerender the layer to manifest the change.
+            this._currentEditLayer.redraw();
+
+        },
+
+        /*
+         * Update the point radius for the current editing layer.
+         */
+        setItemPointRadius: function(value) {
+
+            // Update the record tracker object.
+            this.record.data.point_radius = value;
+
+            // Rebuild the style map.
+            this._currentEditLayer.styleMap = this._getStyleMap(
+                this.record.data.vector_color,
+                this.record.data.vector_opacity,
+                this.record.data.stroke_color,
+                this.record.data.stroke_opacity,
+                this.record.data.stroke_width,
+                this.record.data.point_radius);
+
+            // Rerender the layer to manifest the change.
+            this._currentEditLayer.redraw();
+
         }
 
     });

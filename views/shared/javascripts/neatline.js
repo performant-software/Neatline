@@ -406,6 +406,28 @@
         },
 
         /*
+         * Set the stroke width for the current item.
+         *
+         * - param integer value: The width, 0-+inf.
+         *
+         * - return void.
+         */
+        setItemStrokeWidth: function(value) {
+            this.map.neatlinemap('setItemStrokeWidth', value);
+        },
+
+        /*
+         * Set the point radius for the current item.
+         *
+         * - param integer value: The radius, 0-+inf.
+         *
+         * - return void.
+         */
+        setItemPointRadius: function(value) {
+            this.map.neatlinemap('setItemPointRadius', value);
+        },
+
+        /*
          * Render a date ambiguity on a timeline span.
          *
          * - param integer id: The record id.

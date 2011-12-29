@@ -175,6 +175,18 @@ jQuery(document).ready(function($) {
             neatlineContainer.neatline('setItemStrokeOpacity', obj.value);
         },
 
+        // When the stroke width dragger is changed, push the value onto the
+        // item's vectors.
+        'strokewidthedit': function(event, obj) {
+            neatlineContainer.neatline('setItemStrokeWidth', obj.value);
+        },
+
+        // When the point radius dragger is changed, push the value onto the
+        // item's vectors.
+        'pointradiusedit': function(event, obj) {
+            neatlineContainer.neatline('setItemPointRadius', obj.value);
+        },
+
         // When date ambiguity sliders are changed in an item edit form.
         'ambiguityChange': function(event, obj) {
 

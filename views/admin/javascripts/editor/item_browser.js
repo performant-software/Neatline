@@ -375,6 +375,24 @@
 
                 },
 
+                // When the stroke width is changed.
+                'strokeWidthEdit': function(event, obj) {
+
+                    self._trigger('strokewidthedit', {}, {
+                        'value': obj.value
+                    });
+
+                },
+
+                // When the point radius.
+                'pointRadiusEdit': function(event, obj) {
+
+                    self._trigger('pointradiusedit', {}, {
+                        'value': obj.value
+                    });
+
+                },
+
                 // When a form is closed.
                 'hide': function() {
                     self._hideForm(self._currentFormItem, false);
