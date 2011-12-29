@@ -142,13 +142,15 @@
             // ** SHAPE OPACITY.
             this.vectorOpacity.integerdragger({
                 min: 0,
-                max: 100
+                max: 100,
+                px_per_unit: 1
             });
 
             // ** LINE OPACITY.
             this.strokeOpacity.integerdragger({
                 min: 0,
-                max: 100
+                max: 100,
+                px_per_unit: 1
             });
 
             // ** LINE THICKNESS.

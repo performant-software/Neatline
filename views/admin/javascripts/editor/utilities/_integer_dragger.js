@@ -36,6 +36,9 @@
             // The default value.
             default: 0,
 
+            // Pixels of cursor movement per integer change.
+            px_per_unit: 5,
+
             // Tooltip parameters.
             tip: {
 
@@ -63,7 +66,12 @@
         _create: function() {
 
             // Get markup.
-            this._body = $('body');
+            this._body =        $('body');
+            this._window =      $(window);
+
+            // Trackers.
+            this.currentVal = null;
+            this.isDragging = false;
 
             // Set the starting value.
             this._setInputValue(this.options.default);
@@ -111,26 +119,45 @@
 
                 // Show the tooltip.
                 'mouseenter': function() {
-                    if (self.options.tip.show) {
+                    if (self.options.tip.show && !self.isDragging) {
                         self._showToolTip();
                     }
                 },
 
                 // Hide the tooltip.
                 'mouseleave': function() {
-                    if (self.options.tip.show) {
+                    if (self.options.tip.show && !self.isDragging) {
                         self._hideToolTip();
                     }
                 },
 
                 // Listen for drag.
-                'mousedown': function() {
-                    console.log('down');
-                },
+                'mousedown': function(e) {
 
-                // Strip drag listener
-                'mouseup': function() {
-                    console.log('up');
+                    // Set dragging tracker.
+                    self.isDragging = true;
+
+                    // Capture starting y-offset and value.
+                    var startY = e.pageY;
+                    var startVal = self.currentVal;
+
+                    self._window.bind({
+
+                        // On move, compute y-delta and apply.
+                        'mousemove': function(e) {
+                            var yDelta = (startY - e.pageY) / self.options.px_per_unit;
+                            self._setInputValue(startVal + Math.round(yDelta));
+                        },
+
+                        // Strip drag listener
+                        'mouseup': function() {
+                            self.isDragging = false;
+                            self._window.unbind('mousemove');
+                            self._hideToolTip();
+                        }
+
+                    });
+
                 }
 
             });
@@ -146,15 +173,39 @@
 
 
         /*
-         * Set the input's value.
+         * Set the input's value, update tracker.
          *
          * - param integer val: The value.
          *
-         * - return void.
+         * - return boolean: True if the value is permissible and the
+         *   change is manifested, False if the value is impermissible.
          */
         _setInputValue: function(val) {
 
+            // If a min is set, and the passed val is too small.
+            if (this.options.min != null && val < this.options.min) {
+                this.element.val(this.options.min);
+                this.currentVal = this.options.min;
+                return false;
+            }
+
+            // If a max is set, and the passed val is too large.
+            if (this.options.max != null && val > this.options.max) {
+                this.element.val(this.options.max);
+                this.currentVal = this.options.max;
+                return false;
+            }
+
+            // If passed val is permissible.
             this.element.val(val);
+            this.currentVal = val;
+
+            // Emit new value.
+            this._trigger('change', {}, {
+                value: this.currentVal
+            });
+
+            return true;
 
         },
 
