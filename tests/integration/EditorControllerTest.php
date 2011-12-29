@@ -1151,7 +1151,12 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
             '"default_map_bounds":null,' .
             '"default_map_zoom":null,' .
             '"default_focus_date":null,' .
-            '"id":1}'
+            '"id":1,' .
+            '"default_vector_color":null,' .
+            '"default_vector_opacity":null,' .
+            '"default_stroke_color":null,' .
+            '"default_stroke_width":null,' .
+            '"default_point_radius":null}'
         );
 
     }
@@ -1224,7 +1229,12 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
             '"default_map_bounds":null,' .
             '"default_map_zoom":null,' .
             '"default_focus_date":null,' .
-            '"id":1}'
+            '"id":1,' .
+            '"default_vector_color":null,' .
+            '"default_vector_opacity":null,' .
+            '"default_stroke_color":null,' .
+            '"default_stroke_width":null,' .
+            '"default_point_radius":null}'
         );
 
     }

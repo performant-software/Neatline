@@ -106,9 +106,10 @@ class NeatlinePlugin
                 `default_map_zoom`      int(10) unsigned NULL,
                 `default_focus_date`    varchar(100) NULL,
                 `default_vector_color`  tinytext COLLATE utf8_unicode_ci NULL,
+                `default_vector_opacity`int(10) unsigned NULL,
                 `default_stroke_color`  tinytext COLLATE utf8_unicode_ci NULL,
                 `default_stroke_width`  int(10) unsigned NULL,
-                `point_radius`          int(10) unsigned NULL,
+                `default_point_radius`  int(10) unsigned NULL,
                  PRIMARY KEY (`id`)
                ) ENGINE=innodb DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
 
@@ -128,6 +129,7 @@ class NeatlinePlugin
                 `left_percent`          int(10) unsigned NULL,
                 `right_percent`         int(10) unsigned NULL,
                 `vector_color`          tinytext COLLATE utf8_unicode_ci NULL,
+                `vector_opacity`        int(10) unsigned NULL,
                 `stroke_color`          tinytext COLLATE utf8_unicode_ci NULL,
                 `stroke_width`          int(10) unsigned NULL,
                 `point_radius`          int(10) unsigned NULL,
