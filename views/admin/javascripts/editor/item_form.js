@@ -156,13 +156,15 @@
             // ** LINE THICKNESS.
             this.strokeWidth.integerdragger({
                 min: 0,
-                default: 1
+                default: 1,
+                px_per_unit: 8
             });
 
             // ** POINT RADIUS.
             this.pointRadius.integerdragger({
                 min: 1,
-                default: 6
+                default: 6,
+                px_per_unit: 8
             });
 
             // ** SAVE.
