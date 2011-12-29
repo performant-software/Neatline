@@ -62,7 +62,11 @@
             this.endTime =                  this.form.find('input[name="end-date-time"]');
             this.endTime =                  this.form.find('input[name="end-date-time"]');
             this.vectorColor =              this.form.find('input[name="vector-color"]');
-            this.lineColor =                this.form.find('input[name="stroke-color"]');
+            this.strokeColor =              this.form.find('input[name="stroke-color"]');
+            this.vectorOpacity =            this.form.find('input[name="vector-opacity"]');
+            this.strokeOpacity =            this.form.find('input[name="stroke-opacity"]');
+            this.strokeWidth =              this.form.find('input[name="stroke-width"]');
+            this.pointRadius =              this.form.find('input[name="point-radius"]');
             this.leftPercent =              this.form.find('input[name="left-ambiguity-percentage"]');
             this.rightPercent =             this.form.find('input[name="right-ambiguity-percentage"]');
             this.closeButton =              this.form.find('button[type="reset"]');
@@ -89,7 +93,16 @@
 
             var self = this;
 
-            // Gradient builder.
+            // ** DESCRIPTION.
+            this.description.bind({
+
+                'mouseup': function() {
+                    self.resizeForm();
+                }
+
+            });
+
+            // ** DATE AMBIGUITY.
             this.ambiguity.gradientbuilder({
 
                 'stopHandleDrag': function(event, obj) {
@@ -105,7 +118,7 @@
 
             });
 
-            // Shape color picker.
+            // ** SHAPE COLOR.
             this.vectorColor.miniColors({
 
                 'change': function(hex, rgb) {
@@ -123,15 +136,34 @@
 
             });
 
-            // Line color picker.
-            this.lineColor.miniColors();
+            // ** LINE COLOR.
+            this.strokeColor.miniColors();
 
-            // On keydown in any of the text fields, trigger change event.
-            this.textInputs.bind('keydown', function() {
-                self._trigger('formEdit');
+            // ** SHAPE OPACITY.
+            this.vectorOpacity.integerdragger({
+                min: 0,
+                max: 100
             });
 
-            // Save button.
+            // ** LINE OPACITY.
+            this.strokeOpacity.integerdragger({
+                min: 0,
+                max: 100
+            });
+
+            // ** LINE THICKNESS.
+            this.strokeWidth.integerdragger({
+                min: 0,
+                default: 1
+            });
+
+            // ** POINT RADIUS.
+            this.pointRadius.integerdragger({
+                min: 1,
+                default: 6
+            });
+
+            // ** SAVE.
             this.saveButton.bind({
 
                 'mousedown': function() {
@@ -144,7 +176,7 @@
 
             });
 
-            // Delete button.
+            // ** DELETE.
             this.deleteButton.bind({
 
                 'mousedown': function() {
@@ -163,16 +195,7 @@
 
             });
 
-            // Description text area.
-            this.description.bind({
-
-                'mouseup': function() {
-                    self.resizeForm();
-                }
-
-            });
-
-            // Map focus button.
+            // ** FIX ITEM-SPECIFIC MAP FOCUS
             this.mapFocus.bind({
 
                 'mousedown': function() {
@@ -184,6 +207,11 @@
                     e.preventDefault();
                 }
 
+            });
+
+            // On keydown in any of the text fields, trigger change event.
+            this.textInputs.bind('keydown', function() {
+                self._trigger('formEdit');
             });
 
         },

@@ -361,6 +361,11 @@ input.integer-dragger {
     width: 50px;
 }
 
+span.intdragger-tooltip {
+    font-size: 13px;
+    color: #bfbfbf;
+}
+
 
 /* Search Cancel */
 

@@ -141,7 +141,7 @@
                 <label>Point Radius</label>
                 <div class="input">
                     <div class="inline-inputs">
-                        <input type="text" class="integer-dragger" name="stroke-width" />
+                        <input type="text" class="integer-dragger" name="point-radius" />
                         <span class="help-inline">Set the radius for point on the map.</span>
                     </div>
                 </div>
