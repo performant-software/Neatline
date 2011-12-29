@@ -88,9 +88,29 @@
             </div>
 
             <div class="clearfix">
-                <label>Vector Color</label>
+                <label>Shape Color</label>
                 <input type="text" id="color" class="color-picker" name="color" />
                 <span class="help-inline">Select a color for the item's spatial vectors.</span>
+            </div>
+
+            <div class="clearfix">
+                <label>Shape Opacity</label>
+                <span class="help-inline">Set the opacity for the item's vectors on the map.</span>
+            </div>
+
+            <div class="clearfix">
+                <label>Line Color</label>
+                <span class="help-inline">Select a color for the border lines around shapes on the map.</span>
+            </div>
+
+            <div class="clearfix">
+                <label>Line Thickness</label>
+                <span class="help-inline">Set the width, in pixels, for the border lines.</span>
+            </div>
+
+            <div class="clearfix">
+                <label>Point Radius</label>
+                <span class="help-inline">Set the radius for point on the map.</span>
             </div>
 
             <div class="clearfix">
