@@ -395,6 +395,17 @@
         },
 
         /*
+         * Set the stroke opacity for the current item.
+         *
+         * - param integer value: The opacity, 0-100.
+         *
+         * - return void.
+         */
+        setItemStrokeOpacity: function(value) {
+            this.map.neatlinemap('setItemStrokeOpacity', value);
+        },
+
+        /*
          * Render a date ambiguity on a timeline span.
          *
          * - param integer id: The record id.

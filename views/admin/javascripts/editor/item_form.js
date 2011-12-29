@@ -162,7 +162,7 @@
                 max: 100,
                 px_per_unit: 1,
                 change: function(evt, obj) {
-                    console.log(obj.value);
+                    self._trigger('strokeOpacityEdit', {}, { 'value': obj.value });
                 }
             });
 

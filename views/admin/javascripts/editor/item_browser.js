@@ -366,6 +366,15 @@
 
                 },
 
+                // When the stroke opacity is changed.
+                'strokeOpacityEdit': function(event, obj) {
+
+                    self._trigger('strokeopacityedit', {}, {
+                        'value': obj.value
+                    });
+
+                },
+
                 // When a form is closed.
                 'hide': function() {
                     self._hideForm(self._currentFormItem, false);
