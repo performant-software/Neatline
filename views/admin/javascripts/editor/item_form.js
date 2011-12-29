@@ -62,7 +62,7 @@
             this.endTime =                  this.form.find('input[name="end-date-time"]');
             this.endTime =                  this.form.find('input[name="end-date-time"]');
             this.vectorColor =              this.form.find('input[name="vector-color"]');
-            this.lineColor =                this.form.find('input[name="line-color"]');
+            this.lineColor =                this.form.find('input[name="stroke-color"]');
             this.leftPercent =              this.form.find('input[name="left-ambiguity-percentage"]');
             this.rightPercent =             this.form.find('input[name="right-ambiguity-percentage"]');
             this.closeButton =              this.form.find('button[type="reset"]');
@@ -105,7 +105,7 @@
 
             });
 
-            // Color picker.
+            // Shape color picker.
             this.vectorColor.miniColors({
 
                 'change': function(hex, rgb) {
@@ -122,6 +122,9 @@
                 }
 
             });
+
+            // Line color picker.
+            this.lineColor.miniColors();
 
             // On keydown in any of the text fields, trigger change event.
             this.textInputs.bind('keydown', function() {

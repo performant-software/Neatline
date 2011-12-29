@@ -1154,6 +1154,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
             '"id":1,' .
             '"default_vector_color":null,' .
             '"default_vector_opacity":null,' .
+            '"default_stroke_opacity":null,' .
             '"default_stroke_color":null,' .
             '"default_stroke_width":null,' .
             '"default_point_radius":null}'
@@ -1232,6 +1233,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
             '"id":1,' .
             '"default_vector_color":null,' .
             '"default_vector_opacity":null,' .
+            '"default_stroke_opacity":null,' .
             '"default_stroke_color":null,' .
             '"default_stroke_width":null,' .
             '"default_point_radius":null}'

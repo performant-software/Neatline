@@ -118,6 +118,16 @@
             </div>
 
             <div class="clearfix">
+                <label>Line Opacity</label>
+                <div class="input">
+                    <div class="inline-inputs">
+                        <input type="text" class="integer-dragger" name="stroke-opacity" />
+                        <span class="help-inline">Set the opacity for the border lines.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="clearfix">
                 <label>Line Thickness</label>
                 <div class="input">
                     <div class="inline-inputs">
