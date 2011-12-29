@@ -70,6 +70,7 @@
             this._currentEditItem =         null;
             this._currentEditLayer =        null;
             this._clickedFeature =          null;
+            this.record =                   null;
             this.requestData =              null;
 
             // Construct WMS-based map.
@@ -296,6 +297,10 @@
             this._db = TAFFY();
 
             $.each(data, function(i, item) {
+
+                // Get float values for opacities.
+                item.vector_opacity = item.vector_opacity / 100;
+                item.stroke_opacity = item.stroke_opacity / 100;
 
                 // Construct the style.
                 var style = self._getStyleMap(
@@ -677,6 +682,7 @@
 
             // Clear the item tracker, re-add the click controls.
             this._currentEditItem = null;
+            this.record = null;
             this._addClickControls();
 
 
@@ -704,18 +710,14 @@
          * Get the current extent of the viewport.
          */
         getExtentForSave: function() {
-
             return this.map.getExtent().toString();
-
         },
 
         /*
          * Get the current zoom of the viewport.
          */
         getZoomForSave: function() {
-
             return this.map.getZoom();
-
         },
 
         /*
@@ -814,6 +816,11 @@
          */
         setItemVectorColor: function(color) {
 
+            // If there is no extant data record, abort.
+            if (typeof this.record.data === 'undefined') {
+                return;
+            }
+
             // Update the record tracker object.
             this.record.data.vector_color = color;
 
@@ -835,6 +842,11 @@
          * Update the stroke color for the current editing layer.
          */
         setItemStrokeColor: function(color) {
+
+            // If there is no extant data record, abort.
+            if (typeof this.record.data === 'undefined') {
+                return;
+            }
 
             // Update the record tracker object.
             this.record.data.stroke_color = color;
@@ -858,6 +870,12 @@
          */
         setItemVectorOpacity: function(value) {
 
+            // If there is no extant data record, abort.
+            if (typeof this.record.data === 'undefined') {
+                return;
+            }
+
+            // Get the decimal value.
             var floatVal = value / 100;
 
             // Update the record tracker object.
@@ -882,6 +900,12 @@
          */
         setItemStrokeOpacity: function(value) {
 
+            // If there is no extant data record, abort.
+            if (typeof this.record.data === 'undefined') {
+                return;
+            }
+
+            // Get the decimal value.
             var floatVal = value / 100;
 
             // Update the record tracker object.
@@ -906,6 +930,11 @@
          */
         setItemStrokeWidth: function(value) {
 
+            // If there is no extant data record, abort.
+            if (typeof this.record.data === 'undefined') {
+                return;
+            }
+
             // Update the record tracker object.
             this.record.data.stroke_width = value;
 
@@ -927,6 +956,11 @@
          * Update the point radius for the current editing layer.
          */
         setItemPointRadius: function(value) {
+
+            // If there is no extant data record, abort.
+            if (typeof this.record.data === 'undefined') {
+                return;
+            }
 
             // Update the record tracker object.
             this.record.data.point_radius = value;

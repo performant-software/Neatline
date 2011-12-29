@@ -39,6 +39,11 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         'end_date' => 'April 23, 1616',
         'end_time' => '6:00 AM',
         'vector_color' => '#ffffff',
+        'stroke_color' => '#000000',
+        'vector_opacity' => 60,
+        'stroke_opacity' => 40,
+        'stroke_width' => 5,
+        'point_radius' => 7,
         'left_percent' => 0,
         'right_percent' => 100,
         'geocoverage' => '[POINT(-1.0, 1.0)]',
@@ -89,13 +94,17 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         $record->stroke_width =                 3;
         $record->point_radius =                 3;
         $record->geocoverage =                  'POINT()';
-        $record->left_ambiguity_percengage =    30;
-        $record->right_ambiguity_percengage =   80;
+        $record->left_percent =                 30;
+        $record->right_percent =                80;
         $record->space_active =                 1;
         $record->time_active =                  1;
         $record->display_order =                1;
         $record->map_bounds =                   'BOUND()';
         $record->map_zoom =                     5;
+        $record->save();
+
+        // Re-get the record object.
+        $record = $this->_recordsTable->find(1);
 
         // Get.
         $this->assertEquals($record->title, 'title');
@@ -111,8 +120,8 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         $this->assertEquals($record->stroke_width, 3);
         $this->assertEquals($record->point_radius, 3);
         $this->assertEquals($record->geocoverage, 'POINT()');
-        $this->assertEquals($record->left_ambiguity_percengage, 30);
-        $this->assertEquals($record->right_ambiguity_percengage, 80);
+        $this->assertEquals($record->left_percent, 30);
+        $this->assertEquals($record->right_percent, 80);
         $this->assertEquals($record->space_active, 1);
         $this->assertEquals($record->time_active, 1);
         $this->assertEquals($record->display_order, 1);
@@ -476,6 +485,11 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
             self::$__testParams['end_date'],
             self::$__testParams['end_time'],
             self::$__testParams['vector_color'],
+            self::$__testParams['vector_opacity'],
+            self::$__testParams['stroke_color'],
+            self::$__testParams['stroke_opacity'],
+            self::$__testParams['stroke_width'],
+            self::$__testParams['point_radius'],
             self::$__testParams['left_percent'],
             self::$__testParams['right_percent'],
             self::$__testParams['geocoverage'],

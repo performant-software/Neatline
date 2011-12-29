@@ -588,6 +588,11 @@
             data['end_time'] =              this.endTime.val();
             data['description'] =           this.description.val();
             data['vector_color'] =          this.vectorColor.val();
+            data['vector_opacity'] =        parseInt(this.vectorOpacity.val());
+            data['stroke_color'] =          this.strokeColor.val();
+            data['stroke_opacity'] =        parseInt(this.strokeOpacity.val());
+            data['stroke_width'] =          parseInt(this.strokeWidth.val());
+            data['point_radius'] =          parseInt(this.pointRadius.val());
 
             return data;
 

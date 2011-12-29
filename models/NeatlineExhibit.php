@@ -47,6 +47,12 @@ class NeatlineExhibit extends Omeka_record
     public $default_map_bounds;
     public $default_map_zoom;
     public $default_focus_date;
+    public $default_vector_color;
+    public $default_vector_opacity;
+    public $default_stroke_color;
+    public $default_stroke_opacity;
+    public $default_stroke_width;
+    public $default_point_radius;
 
     /**
      * Validate the add Neatline form.

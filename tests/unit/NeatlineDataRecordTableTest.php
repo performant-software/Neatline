@@ -39,6 +39,11 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
         'end_date' => 'April 23, 1616',
         'end_time' => '6:00 AM',
         'vector_color' => '#ffffff',
+        'stroke_color' => '#000000',
+        'vector_opacity' => 60,
+        'stroke_opacity' => 40,
+        'stroke_width' => 5,
+        'point_radius' => 7,
         'left_percent' => 0,
         'right_percent' => 100,
         'geocoverage' => '[POINT(-1.0, 1.0)]',
@@ -182,6 +187,11 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
             self::$__testParams['end_date'],
             self::$__testParams['end_time'],
             self::$__testParams['vector_color'],
+            self::$__testParams['vector_opacity'],
+            self::$__testParams['stroke_color'],
+            self::$__testParams['stroke_opacity'],
+            self::$__testParams['stroke_width'],
+            self::$__testParams['point_radius'],
             self::$__testParams['left_percent'],
             self::$__testParams['right_percent'],
             self::$__testParams['geocoverage'],
@@ -229,6 +239,31 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
         $this->assertEquals(
             $record->vector_color,
             self::$__testParams['vector_color']
+        );
+
+        $this->assertEquals(
+            $record->stroke_color,
+            self::$__testParams['stroke_color']
+        );
+
+        $this->assertEquals(
+            $record->vector_opacity,
+            self::$__testParams['vector_opacity']
+        );
+
+        $this->assertEquals(
+            $record->stroke_opacity,
+            self::$__testParams['stroke_opacity']
+        );
+
+        $this->assertEquals(
+            $record->stroke_width,
+            self::$__testParams['stroke_width']
+        );
+
+        $this->assertEquals(
+            $record->point_radius,
+            self::$__testParams['point_radius']
         );
 
         $this->assertEquals(
@@ -289,6 +324,11 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
             null,
             null,
             null,
+            null,
+            null,
+            null,
+            null,
+            null,
             null
         );
 
@@ -312,6 +352,11 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
             null,
             null,
             '6:00 AM',
+            null,
+            null,
+            null,
+            null,
+            null,
             null,
             null,
             null,
@@ -349,6 +394,11 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
             null,
             null,
             null,
+            null,
+            null,
+            null,
+            null,
+            null,
             null
         );
 
@@ -379,6 +429,11 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
             null,
             null,
             null,
+            null,
+            null,
+            null,
+            null,
+            null,
             null
         );
 
@@ -398,6 +453,11 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
         // Save form data with updated end_time.
         $statuses = $this->_recordsTable->saveItemFormData(
             $record,
+            null,
+            null,
+            null,
+            null,
+            null,
             null,
             null,
             null,
@@ -431,6 +491,11 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
             null,
             null,
             'June 25, 1987',
+            null,
+            null,
+            null,
+            null,
+            null,
             null,
             null,
             null,
@@ -672,6 +737,11 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
         // Commit a status change, leave everything else null.
         $this->_recordsTable->saveItemFormData(
             $record,
+            null,
+            null,
+            null,
+            null,
+            null,
             null,
             null,
             null,
@@ -953,7 +1023,18 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
         $record2->title = 'Item 2 Title';
         $record1->vector_color = '#ffffff';
         $record2->vector_color = '#000000';
+        $record1->vector_opacity = 60;
+        $record2->vector_opacity = 40;
+        $record1->stroke_opacity = 60;
+        $record2->stroke_opacity = 40;
+        $record1->stroke_color = '#ffffff';
+        $record2->stroke_color = '#000000';
+        $record1->stroke_width = 3;
+        $record2->stroke_width = 2;
+        $record1->point_radius = 3;
+        $record2->point_radius = 2;
         $record1->geocoverage = 'POINT(1,0)';
+        $record2->geocoverage = 'POINT(0,1)';
         $record1->space_active = 1;
         $record2->space_active = 1;
         $record1->map_bounds = 'BOUND(1)';
@@ -972,28 +1053,38 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
             '[{"id":' . $record1->id . ',' .
             '"item_id":' . $item1->id . ',' .
             '"title":"Item 1 Title",' .
-            '"color":"#ffffff",' .
+            '"vector_color":"#ffffff",' .
+            '"vector_opacity":60,' .
+            '"stroke_opacity":60,' .
+            '"stroke_color":"#ffffff",' .
+            '"stroke_width":3,' .
+            '"point_radius":3,' .
             '"bounds":"BOUND(1)",' .
             '"zoom":4,' .
             '"wkt":"POINT(1,0)"},' .
             '{"id":' . $record2->id . ',' .
             '"item_id":' . $item2->id . ',' .
             '"title":"Item 2 Title",' .
-            '"color":"#000000",' .
+            '"vector_color":"#000000",' .
+            '"vector_opacity":40,' .
+            '"stroke_opacity":40,' .
+            '"stroke_color":"#000000",' .
+            '"stroke_width":2,' .
+            '"point_radius":2,' .
             '"bounds":"BOUND(2)",' .
             '"zoom":5,' .
-            '"wkt":"POINT()"}]'
+            '"wkt":"POINT(0,1)"}]'
         );
 
     }
 
     /**
-     * If item-specific focus data has not been set, buildMapJson() should
+     * If item-specific focus/style data has not been set, buildMapJson() should
      * return null for the bouds and zoom fields.
      *
      * @return void.
      */
-    public function testBuildMapJsonWithUnsetFocusData()
+    public function testBuildMapJsonWithUnsetFocusAndStylingData()
     {
 
         // Create an exhibit and items.
@@ -1008,8 +1099,6 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
         // Populate map-relevant attributes.
         $record1->title = 'Item 1 Title';
         $record2->title = 'Item 2 Title';
-        $record1->vector_color = '#ffffff';
-        $record2->vector_color = '#000000';
         $record1->geocoverage = 'POINT(1,0)';
         $record2->geocoverage = 'POINT(0,1)';
         $record1->space_active = 1;
@@ -1026,14 +1115,24 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
             '[{"id":' . $record1->id . ',' .
             '"item_id":' . $item1->id . ',' .
             '"title":"Item 1 Title",' .
-            '"color":"#ffffff",' .
+            '"vector_color":null,' .
+            '"vector_opacity":null,' .
+            '"stroke_opacity":null,' .
+            '"stroke_color":null,' .
+            '"stroke_width":null,' .
+            '"point_radius":null,' .
             '"bounds":null,' .
             '"zoom":null,' .
             '"wkt":"POINT(1,0)"},' .
             '{"id":' . $record2->id . ',' .
             '"item_id":' . $item2->id . ',' .
             '"title":"Item 2 Title",' .
-            '"color":"#000000",' .
+            '"vector_color":null,' .
+            '"vector_opacity":null,' .
+            '"stroke_opacity":null,' .
+            '"stroke_color":null,' .
+            '"stroke_width":null,' .
+            '"point_radius":null,' .
             '"bounds":null,' .
             '"zoom":null,' .
             '"wkt":"POINT(0,1)"}]'

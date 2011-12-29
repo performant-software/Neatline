@@ -226,6 +226,11 @@ class Neatline_EditorController extends Omeka_Controller_Action
         $endTime =                  $_post['end_time'];
         $geoCoverage =              $_post['geocoverage'];
         $vectorColor =              $_post['vector_color'];
+        $vectorOpacity =            $_post['vector_opacity'];
+        $strokeColor =              $_post['stroke_color'];
+        $strokeOpacity =            $_post['stroke_opacity'];
+        $strokeWidth =              $_post['stroke_width'];
+        $pointRadius =              $_post['point_radius'];
         $spaceStatus =              (boolean) json_decode($_post['space_active']);
         $timeStatus =               (boolean) json_decode($_post['time_active']);
         $leftPercentage =           (int) $_post['left_percent'];
@@ -255,6 +260,11 @@ class Neatline_EditorController extends Omeka_Controller_Action
             $endDate,
             $endTime,
             $vectorColor,
+            $vectorOpacity,
+            $strokeColor,
+            $strokeOpacity,
+            $strokeWidth,
+            $pointRadius,
             $leftPercentage,
             $rightPercentage,
             $geoCoverage,

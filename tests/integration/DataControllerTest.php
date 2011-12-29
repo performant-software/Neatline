@@ -84,6 +84,16 @@ class Neatline_DataControllerTest extends Omeka_Test_AppTestCase
         $record2->title = 'Item 2 Title';
         $record1->vector_color = '#ffffff';
         $record2->vector_color = '#000000';
+        $record1->vector_opacity = 60;
+        $record2->vector_opacity = 40;
+        $record1->stroke_opacity = 60;
+        $record2->stroke_opacity = 40;
+        $record1->stroke_color = '#ffffff';
+        $record2->stroke_color = '#000000';
+        $record1->stroke_width = 3;
+        $record2->stroke_width = 2;
+        $record1->point_radius = 3;
+        $record2->point_radius = 2;
         $record1->geocoverage = 'POINT(1,0)';
         $record2->geocoverage = 'POINT(0,1)';
         $record1->space_active = 1;
@@ -105,14 +115,24 @@ class Neatline_DataControllerTest extends Omeka_Test_AppTestCase
             '[{"id":' . $record1->id . ',' .
             '"item_id":' . $item1->id . ',' .
             '"title":"Item 1 Title",' .
-            '"color":"#ffffff",' .
+            '"vector_color":"#ffffff",' .
+            '"vector_opacity":60,' .
+            '"stroke_opacity":60,' .
+            '"stroke_color":"#ffffff",' .
+            '"stroke_width":3,' .
+            '"point_radius":3,' .
             '"bounds":"BOUND(1)",' .
             '"zoom":4,' .
             '"wkt":"POINT(1,0)"},' .
             '{"id":' . $record2->id . ',' .
             '"item_id":' . $item2->id . ',' .
             '"title":"Item 2 Title",' .
-            '"color":"#000000",' .
+            '"vector_color":"#000000",' .
+            '"vector_opacity":40,' .
+            '"stroke_opacity":40,' .
+            '"stroke_color":"#000000",' .
+            '"stroke_width":2,' .
+            '"point_radius":2,' .
             '"bounds":"BOUND(2)",' .
             '"zoom":5,' .
             '"wkt":"POINT(0,1)"}]'

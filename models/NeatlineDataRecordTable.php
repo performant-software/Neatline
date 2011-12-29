@@ -59,6 +59,11 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
         $endDate,
         $endTime,
         $vectorColor,
+        $vectorOpacity,
+        $strokeColor,
+        $strokeOpacity,
+        $strokeWidth,
+        $pointRadius,
         $left,
         $right,
         $geoCoverage,
@@ -68,25 +73,30 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
     {
 
         // Capture starting space and time parameters and statuses.
-        $startingSpaceStatus = $record->space_active;
-        $startingTimeStatus = $record->time_active;
-        $startingCoverage = $record->coverage;
-        $startingTime = array(
-            $record->start_date,
-            $record->start_time,
-            $record->end_date,
-            $record->end_time,
-        );
+        $startingSpaceStatus =              $record->space_active;
+        $startingTimeStatus =               $record->time_active;
+        $startingCoverage =                 $record->coverage;
+        $startingTime =                     array(
+                                                $record->start_date,
+                                                $record->start_time,
+                                                $record->end_date,
+                                                $record->end_time,
+                                            );
 
         // Set parameters.
-        $record->title = $title;
-        $record->description = $description;
-        $record->start_date = $startDate;
-        $record->start_time = $startTime;
-        $record->end_date = $endDate;
-        $record->end_time = $endTime;
-        $record->vector_color = $vectorColor;
-        $record->geocoverage = $geoCoverage;
+        $record->title =                    $title;
+        $record->description =              $description;
+        $record->start_date =               $startDate;
+        $record->start_time =               $startTime;
+        $record->end_date =                 $endDate;
+        $record->end_time =                 $endTime;
+        $record->vector_color =             $vectorColor;
+        $record->vector_opacity =           $vectorOpacity;
+        $record->stroke_color =             $strokeColor;
+        $record->stroke_opacity =           $strokeOpacity;
+        $record->stroke_width =             $strokeWidth;
+        $record->point_radius =             $pointRadius;
+        $record->geocoverage =              $geoCoverage;
         $record->setPercentages($left, $right);
 
         // Check for new space data.
@@ -330,7 +340,7 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
             'end_time' =>                   '',
             'left_percent' =>               0,
             'right_percent' =>              100,
-            'vector_color' =>               '#724e85'
+            'vector_color' =>               '#724e85',
         );
 
         $data['title'] = neatline_getItemMetadata(
@@ -378,7 +388,7 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
                     'vector_opacity' =>     $record->vector_opacity,
                     'stroke_opacity' =>     $record->stroke_opacity,
                     'stroke_color' =>       $record->stroke_color,
-                    'stroke_width' =>       $record->stroke_color,
+                    'stroke_width' =>       $record->stroke_width,
                     'point_radius' =>       $record->point_radius,
                     'bounds' =>             $record->map_bounds,
                     'zoom' =>               $record->map_zoom,

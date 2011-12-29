@@ -42,6 +42,11 @@ class NeatlineDataRecord extends Omeka_record
     public $end_date;
     public $end_time;
     public $vector_color;
+    public $vector_opacity;
+    public $stroke_color;
+    public $stroke_opacity;
+    public $stroke_width;
+    public $point_radius;
     public $geocoverage;
     public $left_percent;
     public $right_percent;

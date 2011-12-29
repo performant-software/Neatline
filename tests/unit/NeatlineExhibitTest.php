@@ -55,13 +55,11 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
     {
 
         // Create a record.
-        $exhibit = $this->helper->_createNeatline();
+        $exhibit = new NeatlineExhibit();
 
         // Set.
-        $exhibit->added =                       'now';
         $exhibit->name =                        'name';
         $exhibit->map_id =                      1;
-        $exhibit->image_id =                    1;
         $exhibit->top_element =                 'map';
         $exhibit->items_h_pos =                 'right';
         $exhibit->items_v_pos =                 'top';
@@ -78,12 +76,16 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
         $exhibit->default_stroke_color =        '#ffffff';
         $exhibit->default_stroke_width =        3;
         $exhibit->default_point_radius =        3;
+        $exhibit->save();
+
+        // Re-get the exhibit object.
+        $exhibit = $this->_exhibitsTable->find(1);
 
         // Get.
-        $this->assertEquals($exhibit->added, 'now');
+        $this->assertNotNull($exhibit->added);
         $this->assertEquals($exhibit->name, 'name');
         $this->assertEquals($exhibit->map_id, 1);
-        $this->assertEquals($exhibit->image_id, 1);
+        $this->assertNull($exhibit->image_id, 1);
         $this->assertEquals($exhibit->top_element, 'map');
         $this->assertEquals($exhibit->items_h_pos, 'right');
         $this->assertEquals($exhibit->items_v_pos, 'top');
