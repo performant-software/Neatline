@@ -156,7 +156,8 @@
             );
 
             // Push the base layer onto the map.
-            this.map.addLayers([this.baseLayer]);
+            // this.map.addLayers([this.baseLayer]);
+            this.map.addLayers([new OpenLayers.Layer.OSM()]);
 
             // If there is a default bounding box set for the exhibit, construct
             // a second Bounds object to use as the starting zoom target.

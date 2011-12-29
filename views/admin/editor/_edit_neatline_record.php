@@ -89,7 +89,7 @@
             </div>
 
             <div class="clearfix">
-                <label>Vector Color</label>
+                <label>Shape Color</label>
                 <input type="text" id="color-<?php echo $item->id; ?>" class="color-picker" name="color" value="<?php echo $neatline->getTextByItemAndField($item, 'Identifier'); ?>" />
                 <span class="help-inline">Select a color for the item's spatial vectors.</span>
             </div>
