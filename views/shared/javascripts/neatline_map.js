@@ -851,6 +851,30 @@
             // Rerender the layer to manifest the change.
             this._currentEditLayer.redraw();
 
+        },
+
+        /*
+         * Update the vector opacity for the current editing layer.
+         */
+        setItemVectorOpacity: function(value) {
+
+            var floatVal = value / 100;
+
+            // Update the record tracker object.
+            this.record.data.vector_opacity = floatVal;
+
+            // Rebuild the style map.
+            this._currentEditLayer.styleMap = this._getStyleMap(
+                this.record.data.vector_color,
+                this.record.data.vector_opacity,
+                this.record.data.stroke_color,
+                this.record.data.stroke_opacity,
+                this.record.data.stroke_width,
+                this.record.data.point_radius);
+
+            // Rerender the layer to manifest the change.
+            this._currentEditLayer.redraw();
+
         }
 
     });

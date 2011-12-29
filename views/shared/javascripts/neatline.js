@@ -384,6 +384,17 @@
         },
 
         /*
+         * Set the vector opacity for the current item.
+         *
+         * - param integer value: The opacity, 0-100.
+         *
+         * - return void.
+         */
+        setItemVectorOpacity: function(value) {
+            this.map.neatlinemap('setItemVectorOpacity', value);
+        },
+
+        /*
          * Render a date ambiguity on a timeline span.
          *
          * - param integer id: The record id.

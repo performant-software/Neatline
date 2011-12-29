@@ -163,6 +163,12 @@ jQuery(document).ready(function($) {
             neatlineContainer.neatline('setItemStrokeColor', obj.color);
         },
 
+        // When the stroke opacity dragger is changed, push the value onto the
+        // item's vectors.
+        'vectoropacityedit': function(event, obj) {
+            neatlineContainer.neatline('setItemVectorOpacity', obj.value);
+        },
+
         // When date ambiguity sliders are changed in an item edit form.
         'ambiguityChange': function(event, obj) {
 

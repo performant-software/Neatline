@@ -357,6 +357,15 @@
 
                 },
 
+                // When the vector opacity is changed.
+                'vectorOpacityEdit': function(event, obj) {
+
+                    self._trigger('vectoropacityedit', {}, {
+                        'value': obj.value
+                    });
+
+                },
+
                 // When a form is closed.
                 'hide': function() {
                     self._hideForm(self._currentFormItem, false);
