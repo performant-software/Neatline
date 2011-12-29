@@ -89,33 +89,61 @@
 
             <div class="clearfix">
                 <label>Shape Color</label>
-                <input type="text" id="color" class="color-picker" name="color" />
-                <span class="help-inline">Select a color for the item's spatial vectors.</span>
-            </div>
-
-            <div class="clearfix">
-                <label>Shape Opacity</label>
-                <span class="help-inline">Set the opacity for the item's vectors on the map.</span>
+                <div class="input">
+                    <div class="inline-inputs">
+                        <input type="text" class="color-picker" name="vector-color" />
+                        <span class="help-inline">Select a color for the item's spatial vectors.</span>
+                    </div>
+                </div>
             </div>
 
             <div class="clearfix">
                 <label>Line Color</label>
-                <span class="help-inline">Select a color for the border lines around shapes on the map.</span>
+                <div class="input">
+                    <div class="inline-inputs">
+                        <input type="text" class="color-picker" name="stroke-color" />
+                        <span class="help-inline">Select a color for the border lines around shapes.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="clearfix">
+                <label>Shape Opacity</label>
+                <div class="input">
+                    <div class="inline-inputs">
+                        <input type="text" class="integer-dragger" name="vector-opacity" />
+                        <span class="help-inline">Set the opacity for the item's vectors on the map.</span>
+                    </div>
+                </div>
             </div>
 
             <div class="clearfix">
                 <label>Line Thickness</label>
-                <span class="help-inline">Set the width, in pixels, for the border lines.</span>
+                <div class="input">
+                    <div class="inline-inputs">
+                        <input type="text" class="integer-dragger" name="stroke-width" />
+                        <span class="help-inline">Set the width, in pixels, for the border lines.</span>
+                    </div>
+                </div>
             </div>
 
             <div class="clearfix">
                 <label>Point Radius</label>
-                <span class="help-inline">Set the radius for point on the map.</span>
+                <div class="input">
+                    <div class="inline-inputs">
+                        <input type="text" class="integer-dragger" name="stroke-width" />
+                        <span class="help-inline">Set the radius for point on the map.</span>
+                    </div>
+                </div>
             </div>
 
             <div class="clearfix">
-                <button class="btn icon home map-focus">Fix Item-Specific Map Focus</button>
-                <span class="help-inline">Click here to set a custom map focus for the item.</span>
+                <div class="input">
+                    <div class="inline-inputs">
+                        <button class="btn icon home map-focus">Fix Item-Specific Map Focus</button>
+                        <span class="help-inline">Click here to set a custom map focus for the item.</span>
+                    </div>
+                </div>
             </div>
 
             <div class="actions">

@@ -61,7 +61,8 @@
             this.endDate =                  this.form.find('input[name="end-date-date"]');
             this.endTime =                  this.form.find('input[name="end-date-time"]');
             this.endTime =                  this.form.find('input[name="end-date-time"]');
-            this.color =                    this.form.find('input[name="color"]');
+            this.vectorColor =              this.form.find('input[name="vector-color"]');
+            this.lineColor =                this.form.find('input[name="line-color"]');
             this.leftPercent =              this.form.find('input[name="left-ambiguity-percentage"]');
             this.rightPercent =             this.form.find('input[name="right-ambiguity-percentage"]');
             this.closeButton =              this.form.find('button[type="reset"]');
@@ -69,7 +70,7 @@
             this.textInputs =               this.form.find('input[type="text"], textarea');
             this.fieldset =                 this.form.find('fieldset');
             this.ambiguity =                this.form.find('.date-ambiguity-container');
-            this.mapFocus =                this.form.find('.map-focus');
+            this.mapFocus =                 this.form.find('.map-focus');
 
             // Trackers.
             this._db = TAFFY();
@@ -105,7 +106,7 @@
             });
 
             // Color picker.
-            this.color.miniColors({
+            this.vectorColor.miniColors({
 
                 'change': function(hex, rgb) {
 
@@ -456,7 +457,7 @@
 
             // Populate inputs.
             this.title.val(this._data.title);
-            this.color.val(this._data.vector_color);
+            this.vectorColor.val(this._data.vector_color);
             this.leftPercent.val(this._data.left_percent);
             this.rightPercent.val(this._data.right_percent);
             this.startDate.val(this._data.start_date);
@@ -480,7 +481,7 @@
             // _opened tracker to circumvent miniColors' automatic firing of
             // the change callback on value set.
             this._opened = true;
-            this.color.miniColors('value', this._data.vector_color);
+            this.vectorColor.miniColors('value', this._data.vector_color);
             this._opened = false;
 
          },
@@ -492,7 +493,7 @@
 
             // Populate inputs.
             this.title.val('');
-            this.color.val('');
+            this.vectorColor.val('');
             this.leftPercent.val(0);
             this.rightPercent.val(100);
             this.startDate.val('');
@@ -511,7 +512,7 @@
             // _opened tracker to circumvent miniColors' automatic firing of
             // the change callback on value set.
             this._opened = true;
-            this.color.miniColors('value', this.options.colors.purple);
+            this.vectorColor.miniColors('value', this.options.colors.purple);
             this._opened = false;
 
          },
@@ -532,7 +533,7 @@
             data['end_date'] =              this.endDate.val();
             data['end_time'] =              this.endTime.val();
             data['description'] =           this.description.val();
-            data['vector_color'] =          this.color.val();
+            data['vector_color'] =          this.vectorColor.val();
 
             return data;
 

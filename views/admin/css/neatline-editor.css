@@ -357,6 +357,10 @@ tr.edit-form td {
     visibility: hidden;
 }
 
+input.integer-dragger {
+    width: 50px;
+}
+
 
 /* Search Cancel */
 
