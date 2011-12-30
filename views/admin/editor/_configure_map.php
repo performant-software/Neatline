@@ -26,35 +26,41 @@
 ?>
 
 <!-- Vector color. -->
-<h5>Default Shape Color:</h5>
+<h5>Default Shape Color</h5>
 <input type="text" class="color-picker miniColors" name="default-vector-color" />
 <hr />
 
 <!-- Stroke color. -->
-<h5>Default Line Color:</h5>
+<h5>Default Line Color</h5>
 <input type="text" class="color-picker miniColors" name="default-stroke-color" />
 <hr />
 
 <!-- Vector opacity. -->
-<h5>Default Shape Opacity:</h5>
+<h5>Default Shape Opacity</h5>
 <input type="text" class="integer-dragger" name="default-vector-opacity" />
 <hr />
 
+<!-- Stroke opacity. -->
+<h5>Default Line Opacity</h5>
+<input type="text" class="integer-dragger" name="default-stroke-opacity" />
+<hr />
+
 <!-- Stroke width. -->
-<h5>Default Line Thickness:</h5>
+<h5>Default Line Thickness</h5>
 <input type="text" class="integer-dragger" name="default-stroke-width" />
 <hr />
 
 <!-- Point radius. -->
-<h5>Default Point Radius:</h5>
+<h5>Default Point Radius</h5>
 <input type="text" class="integer-dragger" name="default-point-radius" />
 <hr />
 
 <!-- Base layer picker. -->
-<h5>Base Layer:</h5>
-<select>
+<h5>Base Layer</h5>
+<select name="base-layer">
     <option>[none]</option>
     <option>OpenStreetMap</option>
 </select>
+<hr />
 
 <button class="btn icon approve save">Save</button>
