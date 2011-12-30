@@ -164,6 +164,7 @@
             // Position and display.
             this.position();
             this.content.css('display', 'block');
+            this._trigger('showstart');
 
             // Animate down.
             this.content.stop().animate({

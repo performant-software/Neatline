@@ -361,6 +361,10 @@ input.integer-dragger {
     width: 50px;
 }
 
+input.color-picker {
+    width: 100px;
+}
+
 span.intdragger-tooltip {
     font-size: 13px;
     color: #bfbfbf;

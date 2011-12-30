@@ -81,6 +81,11 @@
                     self.layoutBuilder.layoutbuilder('centerAllTags');
                 },
 
+                'showstart': function() {
+                    self.layoutBuilder.layoutbuilder('getPxConstants');
+                    self.layoutBuilder.layoutbuilder('centerAllTags');
+                },
+
                 'show': function() {
                     self.layoutBuilder.layoutbuilder('getPxConstants');
                     self.layoutBuilder.layoutbuilder('centerAllTags');

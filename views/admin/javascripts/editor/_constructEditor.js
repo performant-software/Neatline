@@ -26,6 +26,7 @@ jQuery(document).ready(function($) {
     var neatlineContainer =         $('#neatline');
     var editorContainer =           $('#item-browser');
     var configureLayoutButton =     $('#configure-layout-button');
+    var configureMapButton =        $('#configure-map-button');
 
 
     /*
@@ -274,5 +275,8 @@ jQuery(document).ready(function($) {
         }
 
     });
+
+    // Configure map.
+    configureMapButton.configuremap();
 
 });
