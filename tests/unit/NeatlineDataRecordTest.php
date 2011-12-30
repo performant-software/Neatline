@@ -554,6 +554,52 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
     }
 
     /**
+     * The getLeftPercent() method should return the record left percent attribute
+     * when it is not null; if it is null, return the default.
+     *
+     * @return void.
+     */
+    public function testGetLeftPercent()
+    {
+
+        // Create an item, exhibit, and record.
+        $item = $this->helper->_createItem();
+        $neatline = $this->helper->_createNeatline();
+        $record = new NeatlineDataRecord($item, $neatline);
+
+        // Should return default.
+        $this->assertEquals($record->getLeftPercent(), 0);
+
+        // Should return the native value.
+        $record->left_percent = 10;
+        $this->assertEquals($record->getLeftPercent(), 10);
+
+    }
+
+    /**
+     * The getRightPercent() method should return the record right percent attribute
+     * when it is not null; if it is null, return the default.
+     *
+     * @return void.
+     */
+    public function testGetRightPercent()
+    {
+
+        // Create an item, exhibit, and record.
+        $item = $this->helper->_createItem();
+        $neatline = $this->helper->_createNeatline();
+        $record = new NeatlineDataRecord($item, $neatline);
+
+        // Should return default.
+        $this->assertEquals($record->getRightPercent(), 100);
+
+        // Should return the native value.
+        $record->right_percent = 90;
+        $this->assertEquals($record->getRightPercent(), 90);
+
+    }
+
+    /**
      * The getGeocoverage() method should return the vector data attribute when it
      * is not an empty string; if it is null, return null.
      *
@@ -586,7 +632,7 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
      *
      * @return void.
      */
-    public function testBuildEditFormJson()
+    public function testBuildEditFormJsonWithData()
     {
 
         // Create an item and exhibit.
@@ -621,7 +667,7 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
 
         // Check the construction.
         $this->assertContains(
-            '{"title":"' . self::$__testParams['title'] . '"',
+            '"title":"' . self::$__testParams['title'] . '"',
             $json
         );
 
@@ -676,12 +722,192 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         );
 
         $this->assertContains(
-            '"stroke_width":' . self::$__testParams['stroke_color'],
+            '"stroke_width":' . self::$__testParams['stroke_width'],
             $json
         );
 
         $this->assertContains(
             '"point_radius":' . self::$__testParams['point_radius'],
+            $json
+        );
+
+    }
+
+    /**
+     * The buildEditFormJson() method should construct a JSON object to populate
+     * the record edit form in the editor. When there is no data, default values
+     * should be used.
+     *
+     * @return void.
+     */
+    public function testBuildEditFormJsonWithoutData()
+    {
+
+        // Create an item and exhibit.
+        $neatline = $this->helper->_createNeatline();
+        $record = new NeatlineDataRecord(null, $neatline);
+        $record->save();
+
+        // Ping the method for the json.
+        $json = $record->buildEditFormJson();
+
+        // Check the construction.
+        $this->assertContains(
+            '"title":""',
+            $json
+        );
+
+        $this->assertContains(
+            '"description":""',
+            $json
+        );
+
+        $this->assertContains(
+            '"start_date":""',
+            $json
+        );
+
+        $this->assertContains(
+            '"start_time":""',
+            $json
+        );
+
+        $this->assertContains(
+            '"end_date":""',
+            $json
+        );
+
+        $this->assertContains(
+            '"end_time":""',
+            $json
+        );
+
+        $this->assertContains(
+            '"left_percent":0',
+            $json
+        );
+
+        $this->assertContains(
+            '"right_percent":100',
+            $json
+        );
+
+        $this->assertContains(
+            '"vector_color":"#724e85"',
+            $json
+        );
+
+        $this->assertContains(
+            '"vector_opacity":40',
+            $json
+        );
+
+        $this->assertContains(
+            '"stroke_color":"#ffda82"',
+            $json
+        );
+
+        $this->assertContains(
+            '"stroke_width":1',
+            $json
+        );
+
+        $this->assertContains(
+            '"point_radius":6',
+            $json
+        );
+
+    }
+
+    /**
+     * The buildEditFormForNewRecordJson() method should construct a
+     * starting JSON object for a fresh Omeka-item-based record that
+     * defaults in DC values.
+     *
+     * @return void.
+     */
+    public function testBuildEditFormForNewRecordJson()
+    {
+
+        // Create an item and texts.
+        $item = $this->helper->_createItem();
+        $this->helper->_createElementText(
+            $item,
+            'Dublin Core',
+            'Title',
+            'Test Title');
+        $this->helper->_createElementText(
+            $item,
+            'Dublin Core',
+            'Description',
+            'Test description.');
+
+        // Ping the method for the json.
+        $json = NeatlineDataRecord::buildEditFormForNewRecordJson($item);
+
+        // Check the construction.
+        $this->assertContains(
+            '"title":"Test Title"',
+            $json
+        );
+
+        $this->assertContains(
+            '"description":"Test description."',
+            $json
+        );
+
+        $this->assertContains(
+            '"start_date":""',
+            $json
+        );
+
+        $this->assertContains(
+            '"start_time":""',
+            $json
+        );
+
+        $this->assertContains(
+            '"end_date":""',
+            $json
+        );
+
+        $this->assertContains(
+            '"end_time":""',
+            $json
+        );
+
+        $this->assertContains(
+            '"left_percent":0',
+            $json
+        );
+
+        $this->assertContains(
+            '"right_percent":100',
+            $json
+        );
+
+        $this->assertContains(
+            '"vector_color":"#724e85"',
+            $json
+        );
+
+        $this->assertContains(
+            '"vector_opacity":40',
+            $json
+        );
+
+        $this->assertContains(
+            '"stroke_color":"#ffda82"',
+            $json
+        );
+
+        $this->assertContains(
+            '"stroke_width":1',
+            $json
+        );
+
+        $this->assertContains(
+            '"point_radius":6',
             $json
         );
 

@@ -464,12 +464,12 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
     }
 
     /**
-     * When there is a Neatline-native data record, the /form route should output
-     * a well-formed JSON object with the correct record attributes.
+     * When there is a Neatline-native data record with data, the /form route
+     * should output a well-formed JSON object with the correct record attributes.
      *
      * @return void.
      */
-    public function testFormWithExistingRecord()
+    public function testFormWithExistingRecordWithData()
     {
 
         // Create item, exhibit, and record.
@@ -514,7 +514,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
 
         // Test the construction.
         $this->assertContains(
-            '{"title":"' . self::$__testParams['title'] . '"',
+            '"title":"' . self::$__testParams['title'] . '"',
             $response
         );
 
@@ -569,12 +569,107 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         );
 
         $this->assertContains(
-            '"stroke_width":' . self::$__testParams['stroke_color'],
+            '"stroke_width":' . self::$__testParams['stroke_width'],
             $response
         );
 
         $this->assertContains(
             '"point_radius":' . self::$__testParams['point_radius'],
+            $response
+        );
+
+    }
+
+    /**
+     * When there is a Neatline-native data record without data, the /form route
+     * should output a well-formed JSON object with the correct default attributes.
+     *
+     * @return void.
+     */
+    public function testFormWithExistingRecordWithoutData()
+    {
+
+        // Create item, exhibit, and record.
+        $item = $this->helper->_createItem();
+        $neatline = $this->helper->_createNeatline();
+        $record = new NeatlineDataRecord($item, $neatline);
+
+        // Form the POST for a space change.
+        $this->request->setMethod('GET')
+            ->setParams(array(
+                'item_id' => $item->id,
+                'neatline_id' => $neatline->id,
+                'record_id' => $record->id
+            )
+        );
+
+        // Hit the route and capture the response.
+        $this->dispatch('neatline-exhibits/editor/form');
+        $response = $this->getResponse()->getBody('default');
+
+        // Test the construction.
+        $this->assertContains(
+            '"title":""',
+            $response
+        );
+
+        $this->assertContains(
+            '"description":""',
+            $response
+        );
+
+        $this->assertContains(
+            '"start_date":""',
+            $response
+        );
+
+        $this->assertContains(
+            '"start_time":""',
+            $response
+        );
+
+        $this->assertContains(
+            '"end_date":""',
+            $response
+        );
+
+        $this->assertContains(
+            '"end_time":""',
+            $response
+        );
+
+        $this->assertContains(
+            '"left_percent":0',
+            $response
+        );
+
+        $this->assertContains(
+            '"right_percent":100',
+            $response
+        );
+
+        $this->assertContains(
+            '"vector_color":"#724e85"',
+            $response
+        );
+
+        $this->assertContains(
+            '"vector_opacity":40',
+            $response
+        );
+
+        $this->assertContains(
+            '"stroke_color":"#ffda82"',
+            $response
+        );
+
+        $this->assertContains(
+            '"stroke_width":1',
+            $response
+        );
+
+        $this->assertContains(
+            '"point_radius":6',
             $response
         );
 
@@ -688,51 +783,6 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->assertContains(
             '"point_radius":6',
             $response
-        );
-
-    }
-
-    /**
-     * When there is a Neatline-native data record that does not have a parent item, the
-     * /form route should output a well-formed JSON object that defaults in correct ambiguity
-     * and color values.
-     *
-     * @return void.
-     */
-    public function testFormWithNeatlineEndemicRecord()
-    {
-
-        // Create item and exhibit.
-        $item = $this->helper->_createItem();
-        $neatline = $this->helper->_createNeatline();
-        $record = new NeatlineDataRecord(null, $neatline);
-        $record->save();
-
-        // Form the POST for a space change.
-        $this->request->setMethod('GET')
-            ->setParams(array(
-                'item_id' => '',
-                'neatline_id' => $neatline->id,
-                'record_id' => $record->id
-            )
-        );
-
-        // Hit the route and capture the response.
-        $this->dispatch('neatline-exhibits/editor/form');
-        $response = $this->getResponse()->getBody('default');
-
-        // Check for proper construction.
-        $this->assertEquals(
-            $response,
-            '{"title":"",' .
-            '"description":"",' .
-            '"start_date":"",' .
-            '"start_time":"",' .
-            '"end_date":"",' .
-            '"end_time":"",' .
-            '"left_percent":0,' .
-            '"right_percent":100,' .
-            '"vector_color":"#724e85"}'
         );
 
     }
@@ -1349,30 +1399,28 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
 
         // Check the JSON representation of the updated exhibit.
         $response = $this->getResponse()->getBody('default');
-        $this->assertEquals(
-            $response,
-            '{"added":"2011-12-05 09:16:00",' .
-            '"name":"Test Title",' .
-            '"map_id":1,' .
-            '"image_id":null,' .
-            '"top_element":"map",' .
-            '"items_h_pos":"right",' .
-            '"items_v_pos":"bottom",' .
-            '"items_height":"full",' .
-            '"is_map":1,' .
-            '"is_timeline":1,' .
-            '"is_items":1,' .
-            '"default_map_bounds":null,' .
-            '"default_map_zoom":null,' .
-            '"default_focus_date":null,' .
-            '"default_vector_color":null,' .
-            '"default_vector_opacity":null,' .
-            '"default_stroke_color":null,' .
-            '"default_stroke_opacity":null,' .
-            '"default_stroke_width":null,' .
-            '"default_point_radius":null,' .
-            '"id":1}'
-        );
+        $this->assertContains('"added":"2011-12-05 09:16:00"', $response);
+        $this->assertContains('"name":"Test Title"', $response);
+        $this->assertContains('"map_id":1', $response);
+        $this->assertContains('"image_id":null', $response);
+        $this->assertContains('"top_element":"map"', $response);
+        $this->assertContains('"items_h_pos":"right"', $response);
+        $this->assertContains('"items_v_pos":"bottom"', $response);
+        $this->assertContains('"items_height":"full"', $response);
+        $this->assertContains('"is_map":1', $response);
+        $this->assertContains('"is_timeline":1', $response);
+        $this->assertContains('"is_items":1', $response);
+        $this->assertContains('"default_map_bounds":null', $response);
+        $this->assertContains('"default_map_zoom":null', $response);
+        $this->assertContains('"default_focus_date":null', $response);
+        $this->assertContains('"default_vector_color":null', $response);
+        $this->assertContains('"default_vector_opacity":null', $response);
+        $this->assertContains('"default_stroke_color":null', $response);
+        $this->assertContains('"default_stroke_opacity":null', $response);
+        $this->assertContains('"default_stroke_width":null', $response);
+        $this->assertContains('"default_point_radius":null', $response);
+        $this->assertContains('"default_point_radius":null', $response);
+        $this->assertContains('"id":1', $response);
 
     }
 
@@ -1428,30 +1476,28 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
 
         // Check the JSON representation of the updated exhibit.
         $response = $this->getResponse()->getBody('default');
-        $this->assertEquals(
-            $response,
-            '{"added":"2011-12-05 09:16:00",' .
-            '"name":"Test Title",' .
-            '"map_id":1,' .
-            '"image_id":null,' .
-            '"top_element":"map",' .
-            '"items_h_pos":"right",' .
-            '"items_v_pos":"bottom",' .
-            '"items_height":"full",' .
-            '"is_map":1,' .
-            '"is_timeline":1,' .
-            '"is_items":1,' .
-            '"default_map_bounds":null,' .
-            '"default_map_zoom":null,' .
-            '"default_focus_date":null,' .
-            '"default_vector_color":null,' .
-            '"default_vector_opacity":null,' .
-            '"default_stroke_color":null,' .
-            '"default_stroke_opacity":null,' .
-            '"default_stroke_width":null,' .
-            '"default_point_radius":null,' .
-            '"id":1}'
-        );
+        $this->assertContains('"added":"2011-12-05 09:16:00"', $response);
+        $this->assertContains('"name":"Test Title"', $response);
+        $this->assertContains('"map_id":1', $response);
+        $this->assertContains('"image_id":null', $response);
+        $this->assertContains('"top_element":"map"', $response);
+        $this->assertContains('"items_h_pos":"right"', $response);
+        $this->assertContains('"items_v_pos":"bottom"', $response);
+        $this->assertContains('"items_height":"full"', $response);
+        $this->assertContains('"is_map":1', $response);
+        $this->assertContains('"is_timeline":1', $response);
+        $this->assertContains('"is_items":1', $response);
+        $this->assertContains('"default_map_bounds":null', $response);
+        $this->assertContains('"default_map_zoom":null', $response);
+        $this->assertContains('"default_focus_date":null', $response);
+        $this->assertContains('"default_vector_color":null', $response);
+        $this->assertContains('"default_vector_opacity":null', $response);
+        $this->assertContains('"default_stroke_color":null', $response);
+        $this->assertContains('"default_stroke_opacity":null', $response);
+        $this->assertContains('"default_stroke_width":null', $response);
+        $this->assertContains('"default_point_radius":null', $response);
+        $this->assertContains('"default_point_radius":null', $response);
+        $this->assertContains('"id":1', $response);
 
     }
 

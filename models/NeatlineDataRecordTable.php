@@ -319,46 +319,6 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
 
 
     /**
-     * Construct a JSON representation of a record's fields to be used in the
-     * item edit form.
-     *
-     * @param Omeka_record $item The item record.
-     * @param Omeka_record $neatline The exhibit record.
-     *
-     * @return JSON The data.
-     */
-    public function buildEditFormJson($item, $neatline)
-    {
-
-        // Shell out the object literal structure.
-        $data = array(
-            'title' =>                      '',
-            'description' =>                '',
-            'start_date' =>                 '',
-            'start_time' =>                 '',
-            'end_date' =>                   '',
-            'end_time' =>                   '',
-            'left_percent' =>               0,
-            'right_percent' =>              100,
-            'vector_color' =>               '#724e85',
-        );
-
-        $data['title'] = neatline_getItemMetadata(
-            $item,
-            'Dublin Core',
-            'Title');
-
-        $data['description'] = neatline_getItemMetadata(
-            $item,
-            'Dublin Core',
-            'Description');
-
-        // JSON-ify the array.
-        return json_encode($data);
-
-    }
-
-    /**
      * Construct OpenLayers JSON.
      *
      * @param Omeka_record $neatline The exhibit record.

@@ -642,154 +642,6 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
     }
 
     /**
-     * If there is not a record for an item, buildEditFormJson() should return
-     * a well-formed empty object literal with the correct default values.
-     *
-     * @return void.
-     */
-    public function testBuildEditFormJsonWithNoExistingRecord()
-    {
-
-        // Create an item and exhibit.
-        $item = $this->helper->_createItem();
-        $neatline = $this->helper->_createNeatline();
-
-        // Ping the method for the json.
-        $json = $this->_recordsTable->buildEditFormJson($item, $neatline);
-
-        // Check for proper construction.
-        $this->assertEquals(
-            $json,
-            '{"title":"",' .
-            '"description":"",' .
-            '"start_date":"",' .
-            '"start_time":"",' .
-            '"end_date":"",' .
-            '"end_time":"",' .
-            '"left_percent":0,' .
-            '"right_percent":100,' .
-            '"vector_color":"#724e85"}'
-        );
-
-    }
-
-    /**
-     * If is not a record for an item but the item has existing DC metadata,
-     * buildEditFormJson() should default in appropriate values for the Title and
-     * Description fields.
-     *
-     * @return void.
-     */
-    public function testBuildEditFormJsonDefaultDcFields()
-    {
-
-        // Create an item and exhibit.
-        $item = $this->helper->_createItem();
-        $neatline = $this->helper->_createNeatline();
-
-        // Create title and description element texts.
-        $this->helper->_createElementText(
-            $item,
-            'Dublin Core',
-            'Title',
-            'Test Title');
-
-        $this->helper->_createElementText(
-            $item,
-            'Dublin Core',
-            'Description',
-            'Test Description.');
-
-        // Ping the method for the json.
-        $json = $this->_recordsTable->buildEditFormJson($item, $neatline);
-
-        // Check for proper construction.
-        $this->assertEquals(
-            $json,
-            '{"title":"Test Title",' .
-            '"description":"Test Description.",' .
-            '"start_date":"",' .
-            '"start_time":"",' .
-            '"end_date":"",' .
-            '"end_time":"",' .
-            '"left_percent":0,' .
-            '"right_percent":100,' .
-            '"vector_color":"#724e85"}'
-        );
-
-    }
-
-    /**
-     * If there is a record for an item but the record has null values for fields
-     * that map to DC elements, the DC elements shouuld be defaulted in regardless.
-     *
-     * @return void.
-     */
-    public function testBuildEditFormJsonTitleAndDescriptionOverwrites()
-    {
-
-        // Create an item and exhibit.
-        $item = $this->helper->_createItem();
-        $neatline = $this->helper->_createNeatline();
-        $record = new NeatlineDataRecord($item, $neatline);
-        $record->save();
-
-        // Commit a status change, leave everything else null.
-        $this->_recordsTable->saveItemFormData(
-            $record,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            1
-        );
-
-        // Create title and description element texts.
-        $this->helper->_createElementText(
-            $item,
-            'Dublin Core',
-            'Title',
-            'Test Title');
-
-        $this->helper->_createElementText(
-            $item,
-            'Dublin Core',
-            'Description',
-            'Test Description.');
-
-        // Ping the method for the json.
-        $json = $this->_recordsTable->buildEditFormJson($item, $neatline);
-
-        // The title, description, and color fields should still be intelligently
-        // populated with possible DC values if there is a null value in the record.
-        $this->assertEquals(
-            $json,
-            '{"title":"Test Title",' .
-            '"description":"Test Description.",' .
-            '"start_date":"",' .
-            '"start_time":"",' .
-            '"end_date":"",' .
-            '"end_time":"",' .
-            '"left_percent":0,' .
-            '"right_percent":100,' .
-            '"vector_color":"#724e85"}'
-        );
-
-    }
-
-    /**
      * The getRecordsByExhibit() should return all data records associated with a
      * given Neatline exhibit.
      *
@@ -1048,33 +900,30 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
         $json = $this->_recordsTable->buildMapJson($neatline);
 
         // Check format.
-        $this->assertEquals(
-            $json,
-            '[{"id":' . $record1->id . ',' .
-            '"item_id":' . $item1->id . ',' .
-            '"title":"Item 1 Title",' .
-            '"vector_color":"#ffffff",' .
-            '"vector_opacity":60,' .
-            '"stroke_opacity":60,' .
-            '"stroke_color":"#ffffff",' .
-            '"stroke_width":3,' .
-            '"point_radius":3,' .
-            '"bounds":"BOUND(1)",' .
-            '"zoom":4,' .
-            '"wkt":"POINT(1,0)"},' .
-            '{"id":' . $record2->id . ',' .
-            '"item_id":' . $item2->id . ',' .
-            '"title":"Item 2 Title",' .
-            '"vector_color":"#000000",' .
-            '"vector_opacity":40,' .
-            '"stroke_opacity":40,' .
-            '"stroke_color":"#000000",' .
-            '"stroke_width":2,' .
-            '"point_radius":2,' .
-            '"bounds":"BOUND(2)",' .
-            '"zoom":5,' .
-            '"wkt":"POINT(0,1)"}]'
-        );
+        $this->assertContains('"id":' . $record1->id, $json);
+        $this->assertContains('"item_id":' . $item1->id, $json);
+        $this->assertContains('"title":"Item 1 Title"', $json);
+        $this->assertContains('"vector_color":"#ffffff"', $json);
+        $this->assertContains('"vector_opacity":60', $json);
+        $this->assertContains('"stroke_opacity":60', $json);
+        $this->assertContains('"stroke_color":"#ffffff"', $json);
+        $this->assertContains('"stroke_width":3', $json);
+        $this->assertContains('"point_radius":3', $json);
+        $this->assertContains('"bounds":"BOUND(1)"', $json);
+        $this->assertContains('"zoom":4', $json);
+        $this->assertContains('"wkt":"POINT(1,0)"', $json);
+        $this->assertContains('"id":' . $record2->id, $json);
+        $this->assertContains('"item_id":' . $item2->id, $json);
+        $this->assertContains('"title":"Item 1 Title"', $json);
+        $this->assertContains('"vector_color":"#000000"', $json);
+        $this->assertContains('"vector_opacity":40', $json);
+        $this->assertContains('"stroke_opacity":40', $json);
+        $this->assertContains('"stroke_color":"#000000"', $json);
+        $this->assertContains('"stroke_width":2', $json);
+        $this->assertContains('"point_radius":2', $json);
+        $this->assertContains('"bounds":"BOUND(2)"', $json);
+        $this->assertContains('"zoom":5', $json);
+        $this->assertContains('"wkt":"POINT(0,1)"', $json);
 
     }
 
@@ -1110,33 +959,30 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
         $json = $this->_recordsTable->buildMapJson($neatline);
 
         // Check format.
-        $this->assertEquals(
-            $json,
-            '[{"id":' . $record1->id . ',' .
-            '"item_id":' . $item1->id . ',' .
-            '"title":"Item 1 Title",' .
-            '"vector_color":null,' .
-            '"vector_opacity":null,' .
-            '"stroke_opacity":null,' .
-            '"stroke_color":null,' .
-            '"stroke_width":null,' .
-            '"point_radius":null,' .
-            '"bounds":null,' .
-            '"zoom":null,' .
-            '"wkt":"POINT(1,0)"},' .
-            '{"id":' . $record2->id . ',' .
-            '"item_id":' . $item2->id . ',' .
-            '"title":"Item 2 Title",' .
-            '"vector_color":null,' .
-            '"vector_opacity":null,' .
-            '"stroke_opacity":null,' .
-            '"stroke_color":null,' .
-            '"stroke_width":null,' .
-            '"point_radius":null,' .
-            '"bounds":null,' .
-            '"zoom":null,' .
-            '"wkt":"POINT(0,1)"}]'
-        );
+        $this->assertContains('"id":' . $record1->id, $json);
+        $this->assertContains('"item_id":' . $item1->id, $json);
+        $this->assertContains('"title":"Item 1 Title"', $json);
+        $this->assertContains('"vector_color":null', $json);
+        $this->assertContains('"vector_opacity":null', $json);
+        $this->assertContains('"stroke_opacity":null', $json);
+        $this->assertContains('"stroke_color":null', $json);
+        $this->assertContains('"stroke_width":null', $json);
+        $this->assertContains('"point_radius":null', $json);
+        $this->assertContains('"bounds":null', $json);
+        $this->assertContains('"zoom":null', $json);
+        $this->assertContains('"wkt":"POINT(1,0)"', $json);
+        $this->assertContains('"id":' . $record2->id, $json);
+        $this->assertContains('"item_id":' . $item2->id, $json);
+        $this->assertContains('"title":"Item 1 Title"', $json);
+        $this->assertContains('"vector_color":null', $json);
+        $this->assertContains('"vector_opacity":null', $json);
+        $this->assertContains('"stroke_opacity":null', $json);
+        $this->assertContains('"stroke_color":null', $json);
+        $this->assertContains('"stroke_width":null', $json);
+        $this->assertContains('"point_radius":null', $json);
+        $this->assertContains('"bounds":null', $json);
+        $this->assertContains('"zoom":null', $json);
+        $this->assertContains('"wkt":"POINT(0,1)"', $json);
 
     }
 
@@ -1216,28 +1062,114 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
         $json = $this->_recordsTable->buildTimelineJson($neatline);
 
         // Check format.
-        $this->assertEquals(
-            $json,
-            '{"dateTimeFormat":"iso8601",' .
-            '"events":[{' .
-            '"eventID":' . $record1->id . ',' .
-            '"title":"' . $record1->title . '",' .
-            '"description":"' . $record1->description . '",' .
-            '"color":"' . $record1->vector_color . '",' .
-            '"textColor":"#4a4a4a",' .
-            '"left_ambiguity":' . $record1->left_percent . ',' .
-            '"right_ambiguity":' . $record1->right_percent . ',' .
-            '"start":"2011-01-01 00:00:00",' .
-            '"end":"2012-01-01 00:00:00"},{' .
-            '"eventID":' . $record2->id . ',' .
-            '"title":"' . $record2->title . '",' .
-            '"description":"' . $record2->description . '",' .
-            '"color":"' . $record2->vector_color . '",' .
-            '"textColor":"#4a4a4a",' .
-            '"left_ambiguity":' . $record2->left_percent . ',' .
-            '"right_ambiguity":' . $record2->right_percent . ',' .
-            '"start":"2011-01-01 00:00:00",' .
-            '"end":"2012-01-01 00:00:00"}]}'
+        $this->assertContains(
+            '"dateTimeFormat":"iso8601"',
+            $json
+        );
+
+        $this->assertContains(
+            '"events":',
+            $json
+        );
+
+        $this->assertContains(
+            '"eventID":' . $record1->id,
+            $json
+        );
+
+        $this->assertContains(
+            '"title":"' . $record1->title . '"',
+            $json
+        );
+
+        $this->assertContains(
+            '"description":"' . $record1->description . '"',
+            $json
+        );
+
+        $this->assertContains(
+            '"color":"' . $record1->vector_color . '"',
+            $json
+        );
+
+        $this->assertContains(
+            '"textColor":"#4a4a4a"',
+            $json
+        );
+
+        $this->assertContains(
+            '"left_ambiguity":' . $record1->left_percent,
+            $json
+        );
+
+        $this->assertContains(
+            '"right_ambiguity":' . $record1->right_percent,
+            $json
+        );
+
+        $this->assertContains(
+            '"start":"2011-01-01 00:00:00"',
+            $json
+        );
+
+        $this->assertContains(
+            '"end":"2012-01-01 00:00:00"',
+            $json
+        );
+
+        $this->assertContains(
+            '"dateTimeFormat":"iso8601"',
+            $json
+        );
+
+        $this->assertContains(
+            '"events":',
+            $json
+        );
+
+        $this->assertContains(
+            '"eventID":' . $record2->id,
+            $json
+        );
+
+        $this->assertContains(
+            '"title":"' . $record2->title . '"',
+            $json
+        );
+
+        $this->assertContains(
+            '"description":"' . $record2->description . '"',
+            $json
+        );
+
+        $this->assertContains(
+            '"color":"' . $record2->vector_color . '"',
+            $json
+        );
+
+        $this->assertContains(
+            '"textColor":"#4a4a4a"',
+            $json
+        );
+
+        $this->assertContains(
+            '"left_ambiguity":' . $record2->left_percent,
+            $json
+        );
+
+        $this->assertContains(
+            '"right_ambiguity":' . $record2->right_percent,
+            $json
+        );
+
+        $this->assertContains(
+            '"start":"2011-01-01 00:00:00"',
+            $json
+        );
+
+        $this->assertContains(
+            '"end":"2012-01-01 00:00:00"',
+            $json
         );
 
     }
@@ -1273,11 +1205,8 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
         $json = $this->_recordsTable->buildTimelineJson($neatline);
 
         // Check format.
-        $this->assertEquals(
-            $json,
-            '{"dateTimeFormat":"iso8601",' .
-            '"events":[]}'
-        );
+        $this->assertContains('"dateTimeFormat":"iso8601"', $json);
+        $this->assertContains('"events":[]', $json);
 
     }
 

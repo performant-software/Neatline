@@ -66,6 +66,8 @@ class NeatlineDataRecord extends Omeka_record
         'stroke_opacity' => 60,
         'stroke_width' => 1,
         'point_radius' => 6,
+        'left_percent' => 0,
+        'right_percent' => 100,
         'geocoverage' => 'POINT()'
     );
 
@@ -113,7 +115,6 @@ class NeatlineDataRecord extends Omeka_record
 
     }
 
-
     /**
      * Construct a JSON representation of the attributes to be used in the
      * item edit form.
@@ -123,29 +124,67 @@ class NeatlineDataRecord extends Omeka_record
     public function buildEditFormJson()
     {
 
-        // Shell out the object literal structure.
-        $data = array(
-            'title' => '',
-            'description' => '',
-            'start_date' => '',
-            'start_time' => '',
-            'end_date' => '',
-            'end_time' => '',
-            'left_percent' => 0,
-            'right_percent' => 100,
-            'vector_color' => '#724e85'
-        );
+        // Shell out the array.
+        $data = array();
 
         // Set the array values.
         $data['title'] =            $this->getTitle();
         $data['description'] =      $this->getDescription();
         $data['vector_color'] =     $this->getVectorColor();
+        $data['vector_opacity'] =   $this->getVectorOpacity();
+        $data['stroke_color'] =     $this->getStrokeColor();
+        $data['stroke_opacity'] =   $this->getStrokeOpacity();
+        $data['stroke_width'] =     $this->getStrokeWidth();
+        $data['point_radius'] =     $this->getPointRadius();
         $data['start_date'] =       (string) $this->start_date;
         $data['start_time'] =       (string) $this->start_time;
         $data['end_date'] =         (string) $this->end_date;
         $data['end_time'] =         (string) $this->end_time;
-        $data['left_percent'] =     $this->left_percent;
-        $data['right_percent'] =    $this->right_percent;
+        $data['left_percent'] =     $this->getLeftPercent();
+        $data['right_percent'] =    $this->getRightPercent();
+
+        // JSON-ify the array.
+        return json_encode($data);
+
+    }
+
+    /**
+     * Construct a starting attribute set for an Omeka-item-based record.
+     *
+     * @param Omeka_record $item The item record.
+     *
+     * @return JSON The data.
+     */
+    public static function buildEditFormForNewRecordJson($item)
+    {
+
+        // Shell out the array.
+        $data = array();
+
+        // Set the array values.
+        $data['vector_color'] =     self::$defaults['vector_color'];
+        $data['vector_opacity'] =   self::$defaults['vector_opacity'];
+        $data['stroke_color'] =     self::$defaults['stroke_color'];
+        $data['stroke_opacity'] =   self::$defaults['stroke_opacity'];
+        $data['stroke_width'] =     self::$defaults['stroke_width'];
+        $data['point_radius'] =     self::$defaults['point_radius'];
+        $data['left_percent'] =     self::$defaults['left_percent'];
+        $data['right_percent'] =    self::$defaults['right_percent'];
+        $data['start_date'] =       '';
+        $data['start_time'] =       '';
+        $data['end_date'] =         '';
+        $data['end_time'] =         '';
+
+        // Get DC defaults.
+        $data['title'] = neatline_getItemMetadata(
+            $item,
+            'Dublin Core',
+            'Title');
+
+        $data['description'] = neatline_getItemMetadata(
+            $item,
+            'Dublin Core',
+            'Description');
 
         // JSON-ify the array.
         return json_encode($data);
@@ -236,7 +275,13 @@ class NeatlineDataRecord extends Omeka_record
         }
 
         else if (!is_null($this->item_id)) {
-            return neatline_getItemMetadata($this->getItem(), 'Dublin Core', 'Title');
+
+            return neatline_getItemMetadata(
+                $this->getItem(),
+                'Dublin Core',
+                'Title'
+            );
+
         }
 
         else {
@@ -258,7 +303,13 @@ class NeatlineDataRecord extends Omeka_record
         }
 
         else if (!is_null($this->item_id)) {
-            return neatline_getItemMetadata($this->getItem(), 'Dublin Core', 'Description');
+
+            return neatline_getItemMetadata(
+                $this->getItem(),
+                'Dublin Core',
+                'Description'
+            );
+
         }
 
         else {
@@ -348,6 +399,34 @@ class NeatlineDataRecord extends Omeka_record
         return !is_null($this->point_radius) ?
             $this->point_radius :
             self::$defaults['point_radius'];
+
+    }
+
+    /**
+     * Return left percent.
+     *
+     * @return integer $percent The percent.
+     */
+    public function getLeftPercent()
+    {
+
+        return !is_null($this->left_percent) ?
+            $this->left_percent :
+            self::$defaults['left_percent'];
+
+    }
+
+    /**
+     * Return right percent.
+     *
+     * @return integer $percent The percent.
+     */
+    public function getRightPercent()
+    {
+
+        return !is_null($this->right_percent) ?
+            $this->right_percent :
+            self::$defaults['right_percent'];
 
     }
 
