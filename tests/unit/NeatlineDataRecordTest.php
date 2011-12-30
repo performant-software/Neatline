@@ -369,6 +369,28 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
     }
 
     /**
+     * When a non-style column name is passed to setStyle(), return
+     * false and do not set the value.
+     *
+     * @return void.
+     */
+    public function testSetStyleFalseForNonStyle()
+    {
+
+        // Create a record.
+        $neatline = $this->helper->_createNeatline();
+        $item = $this->helper->_createItem();
+        $record = new NeatlineDataRecord($item, $neatline);
+
+        // Set.
+        $record->setStyle('title', 'shouldNotSet');
+
+        // Check.
+        $this->assertNull($record->title);
+
+    }
+
+    /**
      * If a passed style attribute does not match the system defaults
      * and there is not an exhibit default for the column, set the value.
      *
@@ -383,13 +405,12 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         $record = new NeatlineDataRecord($item, $neatline);
 
         // Set.
-        $record->setStyle('vector_color', '#000000');
-        $record->setStyle('vector_opacity', 100);
-        $record->setStyle('stroke_color', '#000000');
-        $record->setStyle('stroke_opacity', 100);
-        $record->setStyle('stroke_width', 100);
-        $record->setStyle('point_radius', 100);
-        $record->setStyle('title', 'shouldNotSet');
+        $this->assertTrue($record->setStyle('vector_color', '#000000'));
+        $this->assertTrue($record->setStyle('vector_opacity', 100));
+        $this->assertTrue($record->setStyle('stroke_color', '#000000'));
+        $this->assertTrue($record->setStyle('stroke_opacity', 100));
+        $this->assertTrue($record->setStyle('stroke_width', 100));
+        $this->assertTrue($record->setStyle('point_radius', 100));
 
         // Check.
         $this->assertEquals($record->vector_color, '#000000');
@@ -398,7 +419,6 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         $this->assertEquals($record->stroke_opacity, 100);
         $this->assertEquals($record->stroke_width, 100);
         $this->assertEquals($record->point_radius, 100);
-        $this->assertNull($record->title);
 
     }
 
@@ -417,12 +437,12 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         $record = new NeatlineDataRecord($item, $neatline);
 
         // Set.
-        $record->setStyle('vector_color', '#724e85');
-        $record->setStyle('vector_opacity', 40);
-        $record->setStyle('stroke_color', '#ffda82');
-        $record->setStyle('stroke_opacity', 60);
-        $record->setStyle('stroke_width', 1);
-        $record->setStyle('point_radius', 6);
+        $this->assertFalse($record->setStyle('vector_color', '#724e85'));
+        $this->assertFalse($record->setStyle('vector_opacity', 40));
+        $this->assertFalse($record->setStyle('stroke_color', '#ffda82'));
+        $this->assertFalse($record->setStyle('stroke_opacity', 60));
+        $this->assertFalse($record->setStyle('stroke_width', 1));
+        $this->assertFalse($record->setStyle('point_radius', 6));
 
         // Check.
         $this->assertNull($record->vector_color);
@@ -456,12 +476,12 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         $neatline->save();
 
         // Set.
-        $record->setStyle('vector_color', '#000000');
-        $record->setStyle('vector_opacity', 100);
-        $record->setStyle('stroke_color', '#000000');
-        $record->setStyle('stroke_opacity', 100);
-        $record->setStyle('stroke_width', 100);
-        $record->setStyle('point_radius', 100);
+        $this->assertTrue($record->setStyle('vector_color', '#000000'));
+        $this->assertTrue($record->setStyle('vector_opacity', 100));
+        $this->assertTrue($record->setStyle('stroke_color', '#000000'));
+        $this->assertTrue($record->setStyle('stroke_opacity', 100));
+        $this->assertTrue($record->setStyle('stroke_width', 100));
+        $this->assertTrue($record->setStyle('point_radius', 100));
 
         // Check.
         $this->assertEquals($record->vector_color, '#000000');
@@ -495,12 +515,12 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         $neatline->save();
 
         // Set.
-        $record->setStyle('vector_color', '#ffffff');
-        $record->setStyle('vector_opacity', 20);
-        $record->setStyle('stroke_color', '#ffffff');
-        $record->setStyle('stroke_opacity', 20);
-        $record->setStyle('stroke_width', 20);
-        $record->setStyle('point_radius', 20);
+        $this->assertFalse($record->setStyle('vector_color', '#ffffff'));
+        $this->assertFalse($record->setStyle('vector_opacity', 20));
+        $this->assertFalse($record->setStyle('stroke_color', '#ffffff'));
+        $this->assertFalse($record->setStyle('stroke_opacity', 20));
+        $this->assertFalse($record->setStyle('stroke_width', 20));
+        $this->assertFalse($record->setStyle('point_radius', 20));
 
         // Check.
         $this->assertNull($record->vector_color);
@@ -509,6 +529,138 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         $this->assertNull($record->stroke_opacity);
         $this->assertNull($record->stroke_width);
         $this->assertNull($record->point_radius);
+
+    }
+
+    /**
+     * getStyle() should return a set row value when one exists and
+     * there is not an exhibit default.
+     *
+     * @return void.
+     */
+    public function testGetStyleWithRowValueAndNoExhibitDefault()
+    {
+
+        // Create a record.
+        $neatline = $this->helper->_createNeatline();
+        $item = $this->helper->_createItem();
+        $record = new NeatlineDataRecord($item, $neatline);
+
+        // Set values.
+        $record->vector_color = '#ffffff';
+        $record->vector_opacity = 20;
+        $record->stroke_color = '#ffffff';
+        $record->stroke_opacity = 20;
+        $record->stroke_width = 20;
+        $record->point_radius = 20;
+        $record->save();
+
+        // Get and check.
+        $this->assertEquals($record->getStyle('vector_color'), '#ffffff');
+        $this->assertEquals($record->getStyle('vector_opacity'), 20);
+        $this->assertEquals($record->getStyle('stroke_color'), '#ffffff');
+        $this->assertEquals($record->getStyle('stroke_opacity'), 20);
+        $this->assertEquals($record->getStyle('stroke_width'), 20);
+        $this->assertEquals($record->getStyle('point_radius'), 20);
+
+    }
+
+    /**
+     * getStyle() should return a set row value when one exists and
+     * there is an exhibit default.
+     *
+     * @return void.
+     */
+    public function testGetStyleWithRowValueAndExhibitDefault()
+    {
+
+        // Create a record.
+        $neatline = $this->helper->_createNeatline();
+        $item = $this->helper->_createItem();
+        $record = new NeatlineDataRecord($item, $neatline);
+
+        // Set values.
+        $record->vector_color = '#ffffff';
+        $record->vector_opacity = 20;
+        $record->stroke_color = '#ffffff';
+        $record->stroke_opacity = 20;
+        $record->stroke_width = 20;
+        $record->point_radius = 20;
+        $record->save();
+        $neatline->default_vector_color = '#fffffg';
+        $neatline->default_vector_opacity = 21;
+        $neatline->default_stroke_color = '#fffffg';
+        $neatline->default_stroke_opacity = 21;
+        $neatline->default_stroke_width = 21;
+        $neatline->default_point_radius = 21;
+        $neatline->save();
+
+        // Get and check.
+        $this->assertEquals($record->getStyle('vector_color'), '#ffffff');
+        $this->assertEquals($record->getStyle('vector_opacity'), 20);
+        $this->assertEquals($record->getStyle('stroke_color'), '#ffffff');
+        $this->assertEquals($record->getStyle('stroke_opacity'), 20);
+        $this->assertEquals($record->getStyle('stroke_width'), 20);
+        $this->assertEquals($record->getStyle('point_radius'), 20);
+
+    }
+
+    /**
+     * getStyle() should return the exhibit default when one exists and
+     * when a row value is not set.
+     *
+     * @return void.
+     */
+    public function testGetStyleWithNoRowValueAndExhibitDefault()
+    {
+
+        // Create a record.
+        $neatline = $this->helper->_createNeatline();
+        $item = $this->helper->_createItem();
+        $record = new NeatlineDataRecord($item, $neatline);
+        $record->save();
+
+        // Set values.
+        $neatline->default_vector_color = '#ffffff';
+        $neatline->default_vector_opacity = 20;
+        $neatline->default_stroke_color = '#ffffff';
+        $neatline->default_stroke_opacity = 20;
+        $neatline->default_stroke_width = 20;
+        $neatline->default_point_radius = 20;
+        $neatline->save();
+
+        // Get and check.
+        $this->assertEquals($record->getStyle('vector_color'), '#ffffff');
+        $this->assertEquals($record->getStyle('vector_opacity'), 20);
+        $this->assertEquals($record->getStyle('stroke_color'), '#ffffff');
+        $this->assertEquals($record->getStyle('stroke_opacity'), 20);
+        $this->assertEquals($record->getStyle('stroke_width'), 20);
+        $this->assertEquals($record->getStyle('point_radius'), 20);
+
+    }
+
+    /**
+     * getStyle() should return the system default there is no row value
+     * and no exhibit default.
+     *
+     * @return void.
+     */
+    public function testGetStyleWithNoRowValueAndNoExhibitDefault()
+    {
+
+        // Create a record.
+        $neatline = $this->helper->_createNeatline();
+        $item = $this->helper->_createItem();
+        $record = new NeatlineDataRecord($item, $neatline);
+        $record->save();
+
+        // Get and check.
+        $this->assertEquals($record->getStyle('vector_color'), '#724e85');
+        $this->assertEquals($record->getStyle('vector_opacity'), 40);
+        $this->assertEquals($record->getStyle('stroke_color'), '#ffda82');
+        $this->assertEquals($record->getStyle('stroke_opacity'), 60);
+        $this->assertEquals($record->getStyle('stroke_width'), 1);
+        $this->assertEquals($record->getStyle('point_radius'), 6);
 
     }
 
@@ -611,144 +763,6 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         // Should return the native value.
         $record->description = null;
         $this->assertEquals($record->getDescription(), '');
-
-    }
-
-    /**
-     * The getVectorColor() method should return the record vector color attribute when it
-     * is not null; if it is null, return the default.
-     *
-     * @return void.
-     */
-    public function testGetVectorColor()
-    {
-
-        // Create an item, exhibit, and record.
-        $item = $this->helper->_createItem();
-        $neatline = $this->helper->_createNeatline();
-        $record = new NeatlineDataRecord($item, $neatline);
-
-        // Should return default.
-        $this->assertEquals($record->getVectorColor(), '#724e85');
-
-        // Should return the native value.
-        $record->vector_color = '#ffffff';
-        $this->assertEquals($record->getVectorColor(), '#ffffff');
-
-    }
-
-    /**
-     * The getVectorOpacity() method should return the record vector opacity attribute when it
-     * is not null; if it is null, return the default.
-     *
-     * @return void.
-     */
-    public function testGetVectorOpacity()
-    {
-
-        // Create an item, exhibit, and record.
-        $item = $this->helper->_createItem();
-        $neatline = $this->helper->_createNeatline();
-        $record = new NeatlineDataRecord($item, $neatline);
-
-        // Should return default.
-        $this->assertEquals($record->getVectorOpacity(), 40);
-
-        // Should return the native value.
-        $record->vector_opacity = 80;
-        $this->assertEquals($record->getVectorOpacity(), 80);
-
-    }
-
-    /**
-     * The getStrokeColor() method should return the record stroke color attribute when it
-     * is not null; if it is null, return the default.
-     *
-     * @return void.
-     */
-    public function testGetStrokeColor()
-    {
-
-        // Create an item, exhibit, and record.
-        $item = $this->helper->_createItem();
-        $neatline = $this->helper->_createNeatline();
-        $record = new NeatlineDataRecord($item, $neatline);
-
-        // Should return default.
-        $this->assertEquals($record->getStrokeColor(), '#ffda82');
-
-        // Should return the native value.
-        $record->stroke_color = '#ffffff';
-        $this->assertEquals($record->getStrokeColor(), '#ffffff');
-
-    }
-
-    /**
-     * The getStrokeOpacity() method should return the record vector opacity attribute
-     * when it is not null; if it is null, return the default.
-     *
-     * @return void.
-     */
-    public function testGetStrokeOpacity()
-    {
-
-        // Create an item, exhibit, and record.
-        $item = $this->helper->_createItem();
-        $neatline = $this->helper->_createNeatline();
-        $record = new NeatlineDataRecord($item, $neatline);
-
-        // Should return default.
-        $this->assertEquals($record->getStrokeOpacity(), 60);
-
-        // Should return the native value.
-        $record->stroke_opacity = 80;
-        $this->assertEquals($record->getStrokeOpacity(), 80);
-
-    }
-
-    /**
-     * The getStrokeWidth() method should return the record stroke width attribute
-     * when it is not null; if it is null, return the default.
-     *
-     * @return void.
-     */
-    public function testGetStrokeWidth()
-    {
-
-        // Create an item, exhibit, and record.
-        $item = $this->helper->_createItem();
-        $neatline = $this->helper->_createNeatline();
-        $record = new NeatlineDataRecord($item, $neatline);
-
-        // Should return default.
-        $this->assertEquals($record->getStrokeWidth(), 1);
-
-        // Should return the native value.
-        $record->stroke_width = 2;
-        $this->assertEquals($record->getStrokeWidth(), 2);
-
-    }
-
-    /**
-     * The getPointRadius() method should return the record point radius attribute
-     * when it is not null; if it is null, return the default.
-     *
-     * @return void.
-     */
-    public function testGetPointRadius()
-    {
-
-        // Create an item, exhibit, and record.
-        $item = $this->helper->_createItem();
-        $neatline = $this->helper->_createNeatline();
-        $record = new NeatlineDataRecord($item, $neatline);
-
-        // Should return default.
-        $this->assertEquals($record->getPointRadius(), 6);
-
-        // Should return the native value.
-        $record->point_radius = 2;
-        $this->assertEquals($record->getPointRadius(), 2);
 
     }
 

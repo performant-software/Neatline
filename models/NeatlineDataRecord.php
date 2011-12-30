@@ -173,12 +173,12 @@ class NeatlineDataRecord extends Omeka_record
         // Set the array values.
         $data['title'] =            $this->getTitle();
         $data['description'] =      $this->getDescription();
-        $data['vector_color'] =     $this->getVectorColor();
-        $data['vector_opacity'] =   $this->getVectorOpacity();
-        $data['stroke_color'] =     $this->getStrokeColor();
-        $data['stroke_opacity'] =   $this->getStrokeOpacity();
-        $data['stroke_width'] =     $this->getStrokeWidth();
-        $data['point_radius'] =     $this->getPointRadius();
+        $data['vector_color'] =     $this->getStyle('vector_color');
+        $data['vector_opacity'] =   $this->getStyle('vector_opacity');
+        $data['stroke_color'] =     $this->getStyle('stroke_color');
+        $data['stroke_opacity'] =   $this->getStyle('stroke_opacity');
+        $data['stroke_width'] =     $this->getStyle('stroke_width');
+        $data['point_radius'] =     $this->getStyle('point_radius');
         $data['start_date'] =       (string) $this->start_date;
         $data['start_time'] =       (string) $this->start_time;
         $data['end_date'] =         (string) $this->end_date;
@@ -346,6 +346,37 @@ class NeatlineDataRecord extends Omeka_record
 
 
     /**
+     * Get a style attribute. In order or priority, return the row
+     * value, exhibit default, or system default.
+     *
+     * @param string style The name of the style.
+     *
+     * @return mixed The value.
+     */
+    public function getStyle($style)
+    {
+
+        // Get the exhibit.
+        $exhibit = $this->getExhibit();
+
+        // If there is a row value.
+        if (!is_null($this[$style])) {
+            return $this[$style];
+        }
+
+        // If there is an exhibit default
+        else if (!is_null($exhibit['default_' . $style])) {
+            return $exhibit['default_' . $style];
+        }
+
+        // Fall back to system default.
+        else {
+            return self::$defaults[$style];
+        }
+
+    }
+
+    /**
      * Return title.
      *
      * @return string $title The title.
@@ -398,90 +429,6 @@ class NeatlineDataRecord extends Omeka_record
         else {
             return '';
         }
-
-    }
-
-    /**
-     * Return vector color.
-     *
-     * @return string $color The color.
-     */
-    public function getVectorColor()
-    {
-
-        return !is_null($this->vector_color) ?
-            $this->vector_color :
-            self::$defaults['vector_color'];
-
-    }
-
-    /**
-     * Return vector opacity.
-     *
-     * @return integer $opacity The opacity.
-     */
-    public function getVectorOpacity()
-    {
-
-        return !is_null($this->vector_opacity) ?
-            $this->vector_opacity :
-            self::$defaults['vector_opacity'];
-
-    }
-
-    /**
-     * Return stroke color.
-     *
-     * @return string $color The color.
-     */
-    public function getStrokeColor()
-    {
-
-        return !is_null($this->stroke_color) ?
-            $this->stroke_color :
-            self::$defaults['stroke_color'];
-
-    }
-
-    /**
-     * Return stroke opacity.
-     *
-     * @return integer $opacity The opacity.
-     */
-    public function getStrokeOpacity()
-    {
-
-        return !is_null($this->stroke_opacity) ?
-            $this->stroke_opacity :
-            self::$defaults['stroke_opacity'];
-
-    }
-
-    /**
-     * Return stroke width.
-     *
-     * @return integer $width The width.
-     */
-    public function getStrokeWidth()
-    {
-
-        return !is_null($this->stroke_width) ?
-            $this->stroke_width :
-            self::$defaults['stroke_width'];
-
-    }
-
-    /**
-     * Return point radius.
-     *
-     * @return integer $radius The radius.
-     */
-    public function getPointRadius()
-    {
-
-        return !is_null($this->point_radius) ?
-            $this->point_radius :
-            self::$defaults['point_radius'];
 
     }
 
