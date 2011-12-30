@@ -512,6 +512,11 @@
             // Populate inputs.
             this.title.val(this._data.title);
             this.vectorColor.val(this._data.vector_color);
+            this.vectorOpacity.val(this._data.vector_opacity);
+            this.strokeColor.val(this._data.stroke_color);
+            this.strokeOpacity.val(this._data.stroke_opacity);
+            this.strokeWidth.val(this._data.stroke_width);
+            this.pointRadius.val(this._data.point_radius);
             this.leftPercent.val(this._data.left_percent);
             this.rightPercent.val(this._data.right_percent);
             this.startDate.val(this._data.start_date);
@@ -536,6 +541,7 @@
             // the change callback on value set.
             this._opened = true;
             this.vectorColor.miniColors('value', this._data.vector_color);
+            this.strokeColor.miniColors('value', this._data.stroke_color);
             this._opened = false;
 
          },

@@ -139,7 +139,7 @@
 
                     // Capture starting y-offset and value.
                     var startY = e.pageY;
-                    var startVal = self.currentVal;
+                    var startVal = parseInt(self.element.val());
 
                     self._window.bind({
 
