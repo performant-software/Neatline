@@ -233,8 +233,8 @@ class Neatline_EditorController extends Omeka_Controller_Action
         $pointRadius =              $_post['point_radius'];
         $spaceStatus =              (boolean) json_decode($_post['space_active']);
         $timeStatus =               (boolean) json_decode($_post['time_active']);
-        $leftPercentage =           (int) $_post['left_percent'];
-        $rightPercentage =          (int) $_post['right_percent'];
+        $leftPercent =              (int) $_post['left_percent'];
+        $rightPercent =             (int) $_post['right_percent'];
 
         // Fetch the exhibit, item, and record objects.
         $neatline = $this->_neatlinesTable->find($neatlineId);
@@ -250,31 +250,49 @@ class Neatline_EditorController extends Omeka_Controller_Action
             $record = $this->_recordsTable->createOrGetRecord($item, $neatline);
         }
 
-        // Save the record data.
-        $statuses = $this->_recordsTable->saveItemFormData(
-            $record,
-            $title,
-            $description,
-            $startDate,
-            $startTime,
-            $endDate,
-            $endTime,
-            $vectorColor,
-            $vectorOpacity,
-            $strokeColor,
-            $strokeOpacity,
-            $strokeWidth,
-            $pointRadius,
-            $leftPercentage,
-            $rightPercentage,
-            $geoCoverage,
-            $spaceStatus,
-            $timeStatus
-        );
+        // Capture starting time and space parameters.
+        $originalCoverage = $record->geocoverage;
+        $originalDate = $record->start_date;
 
+        // Set text parameters.
+        $record->setNotEmpty('title', $title);
+        $record->setNotEmpty('description', $description);
+        $record->setNotEmpty('start_date', $startDate);
+        $record->setNotEmpty('start_time', $startTime);
+        $record->setNotEmpty('end_date', $endDate);
+        $record->setNotEmpty('end_time', $endTime);
+        $record->setNotEmpty('geocoverage', $geoCoverage);
+
+        // Set styles and percentages.
+        $record->setStyle('vector_color', $vectorColor);
+        $record->setStyle('vector_opacity', $vectorOpacity);
+        $record->setStyle('stroke_color', $strokeColor);
+        $record->setStyle('stroke_opacity', $strokeOpacity);
+        $record->setStyle('stroke_width', $strokeWidth);
+        $record->setStyle('point_radius', $pointRadius);
+        $record->setPercentages($leftPercent, $rightPercent);
+
+        // If there is novel coverage data, flip on the status.
+        if (is_null($originalCoverage) && !is_null($record->geocoverage)) {
+            $record->setStatus('space', true);
+        }
+
+        // If there is novel date data, flip on the status.
+        if (is_null($originalDate) && !is_null($record->start_date)) {
+            $record->setStatus('time', true);
+        }
+
+        // Commit.
+        $record->save();
+
+        // Return a JSON array containing the (potentially new) record id
+        // and the updated space and time status trackers.
         echo json_encode(array(
-            'statuses' => $statuses,
-            'recordid' => $record->id
+            'recordid' =>   $record->id,
+            'statuses' =>   array(
+                'space' =>  (bool) $record->space_active,
+                'time' =>   (bool) $record->time_active
+            )
         ));
 
     }

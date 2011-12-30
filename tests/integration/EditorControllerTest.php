@@ -477,27 +477,25 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $neatline = $this->helper->_createNeatline();
         $record = new NeatlineDataRecord($item, $neatline);
 
-        // Save form data with update values.
-        $this->_recordsTable->saveItemFormData(
-            $record,
-            self::$__testParams['title'],
-            self::$__testParams['description'],
-            self::$__testParams['start_date'],
-            self::$__testParams['start_time'],
-            self::$__testParams['end_date'],
-            self::$__testParams['end_time'],
-            self::$__testParams['vector_color'],
-            self::$__testParams['vector_opacity'],
-            self::$__testParams['stroke_color'],
-            self::$__testParams['stroke_opacity'],
-            self::$__testParams['stroke_width'],
-            self::$__testParams['point_radius'],
-            self::$__testParams['left_percent'],
-            self::$__testParams['right_percent'],
-            self::$__testParams['geocoverage'],
-            self::$__testParams['space_active'],
-            self::$__testParams['time_active']
-        );
+        // Populate fields.
+        $record->title =            self::$__testParams['title'];
+        $record->description =      self::$__testParams['description'];
+        $record->start_date =       self::$__testParams['start_date'];
+        $record->start_time =       self::$__testParams['start_time'];
+        $record->end_date =         self::$__testParams['end_date'];
+        $record->end_time =         self::$__testParams['end_time'];
+        $record->vector_color =     self::$__testParams['vector_color'];
+        $record->stroke_color =     self::$__testParams['stroke_color'];
+        $record->vector_opacity =   self::$__testParams['vector_opacity'];
+        $record->stroke_opacity =   self::$__testParams['stroke_opacity'];
+        $record->stroke_width =     self::$__testParams['stroke_width'];
+        $record->point_radius =     self::$__testParams['point_radius'];
+        $record->left_percent =     self::$__testParams['left_percent'];
+        $record->right_percent =    self::$__testParams['right_percent'];
+        $record->geocoverage =      self::$__testParams['geocoverage'];
+        $record->space_active =     self::$__testParams['space_active'];
+        $record->time_active =      self::$__testParams['time_active'];
+        $record->save();
 
         // Form the POST for a space change.
         $this->request->setMethod('GET')
@@ -840,10 +838,10 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->assertEquals($this->_recordsTable->count(), 1);
 
         // Test the raw construction with no available DC values.
-        $this->assertEquals(
-            $response,
-            '{"statuses":{"space":true,"time":true},"recordid":' . $record->id . '}'
-        );
+        $this->assertContains('"statuses":', $response);
+        $this->assertContains('"space":true', $response);
+        $this->assertContains('"time":true', $response);
+        $this->assertContains('"recordid":' . $record->id, $response);
 
         // Get the record and check the attributes.
         $record = $this->_recordsTable->find($record->id);
@@ -985,10 +983,10 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->assertEquals($this->_recordsTable->count(), 1);
 
         // Test the raw construction with no available DC values.
-        $this->assertEquals(
-            $response,
-            '{"statuses":{"space":true,"time":true},"recordid":1}'
-        );
+        $this->assertContains('"statuses":', $response);
+        $this->assertContains('"space":true', $response);
+        $this->assertContains('"time":true', $response);
+        $this->assertContains('"recordid":1', $response);
 
         // Get the record and check the attributes.
         $record = $this->_recordsTable->getRecordByItemAndExhibit($item, $neatline);
@@ -1131,11 +1129,11 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         // 1 record.
         $this->assertEquals($this->_recordsTable->count(), 1);
 
-        // Test the raw construction with no available DC values.
-        $this->assertEquals(
-            $response,
-            '{"statuses":{"space":true,"time":true},"recordid":' . $record->id . '}'
-        );
+        // Test the raw construction with 
+        $this->assertContains('"statuses":', $response);
+        $this->assertContains('"space":true', $response);
+        $this->assertContains('"time":true', $response);
+        $this->assertContains('"recordid":' . $record->id, $response);
 
         // Get the record and check the attributes.
         $record = $this->_recordsTable->getRecordByItemAndExhibit($item, $neatline);
@@ -1203,6 +1201,10 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->assertEquals(
             $record->geocoverage,
             self::$__testParams['geocoverage']
+        );
+
+        $this->assertNotNull(
+            $record->geocoverage
         );
 
         $this->assertEquals(
@@ -1280,6 +1282,216 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
 
         // 1 record.
         $this->assertEquals($this->_recordsTable->count(), 1);
+
+    }
+
+    /**
+     * If there is a null geocoverage field and a hit to /save commits novel
+     * coverage data, the space_active tracker on an existing record should
+     * be flipped on.
+     *
+     * @return void.
+     */
+    public function testSpaceStatusActivationOnSaveWithExistingRecord()
+    {
+
+        // Create exhibit and item.
+        $neatline = $this->helper->_createNeatline();
+        $item = $this->helper->_createItem();
+        $record = new NeatlineDataRecord($item, $neatline);
+        $record->save();
+
+        // At the start, both trackers false.
+        $this->assertFalse((bool) $record->space_active);
+        $this->assertFalse((bool) $record->time_active);
+
+        // Form the POST with new geocoverage data.
+        $this->request->setMethod('POST')
+            ->setPost(array(
+                'item_id' =>        $item->id,
+                'record_id' =>      $record->id,
+                'neatline_id' =>    $neatline->id,
+                'space_active' =>   (string) self::$__testParams['space_active'],
+                'time_active' =>    (string) self::$__testParams['time_active'],
+                'geocoverage' =>    self::$__testParams['geocoverage'],
+                'title' =>          self::$__testParams['title'],
+                'description' =>    self::$__testParams['description'],
+                'start_date' =>     '',
+                'start_time' =>     self::$__testParams['start_time'],
+                'end_date' =>       self::$__testParams['end_date'],
+                'end_time' =>       self::$__testParams['end_time'],
+                'left_percent' =>   self::$__testParams['left_percent'],
+                'right_percent' =>  self::$__testParams['right_percent'],
+                'vector_color' =>   self::$__testParams['vector_color'],
+                'stroke_color' =>   self::$__testParams['stroke_color'],
+                'vector_opacity' => self::$__testParams['vector_opacity'],
+                'stroke_opacity' => self::$__testParams['stroke_opacity'],
+                'stroke_width' =>   self::$__testParams['stroke_width'],
+                'point_radius' =>   self::$__testParams['point_radius']
+            )
+        );
+
+        // Hit the route.
+        $this->dispatch('neatline-exhibits/editor/save');
+
+        // Get the record and check the attributes.
+        $record = $this->_recordsTable->getRecordByItemAndExhibit($item, $neatline);
+        $this->assertTrue((bool) $record->space_active);
+        $this->assertFalse((bool) $record->time_active);
+
+    }
+
+    /**
+     * If there is a null geocoverage field and a hit to /save commits novel
+     * coverage data, the space_active tracker on a new record should be flipped on.
+     *
+     * @return void.
+     */
+    public function testSpaceStatusActivationOnSaveWithoutExistingRecord()
+    {
+
+        // Create exhibit and item.
+        $neatline = $this->helper->_createNeatline();
+        $item = $this->helper->_createItem();
+
+        // Form the POST with new geocoverage data.
+        $this->request->setMethod('POST')
+            ->setPost(array(
+                'item_id' =>        $item->id,
+                'record_id' =>      '',
+                'neatline_id' =>    $neatline->id,
+                'space_active' =>   (string) self::$__testParams['space_active'],
+                'time_active' =>    (string) self::$__testParams['time_active'],
+                'geocoverage' =>    self::$__testParams['geocoverage'],
+                'title' =>          self::$__testParams['title'],
+                'description' =>    self::$__testParams['description'],
+                'start_date' =>     '',
+                'start_time' =>     self::$__testParams['start_time'],
+                'end_date' =>       self::$__testParams['end_date'],
+                'end_time' =>       self::$__testParams['end_time'],
+                'left_percent' =>   self::$__testParams['left_percent'],
+                'right_percent' =>  self::$__testParams['right_percent'],
+                'vector_color' =>   self::$__testParams['vector_color'],
+                'stroke_color' =>   self::$__testParams['stroke_color'],
+                'vector_opacity' => self::$__testParams['vector_opacity'],
+                'stroke_opacity' => self::$__testParams['stroke_opacity'],
+                'stroke_width' =>   self::$__testParams['stroke_width'],
+                'point_radius' =>   self::$__testParams['point_radius']
+            )
+        );
+
+        // Hit the route.
+        $this->dispatch('neatline-exhibits/editor/save');
+
+        // Get the record and check the attributes.
+        $record = $this->_recordsTable->find(1);
+        $this->assertTrue((bool) $record->space_active);
+        $this->assertFalse((bool) $record->time_active);
+
+    }
+
+    /**
+     * If there is a null geocoverage field and a hit to /save commits novel
+     * coverage data, the time_active tracker on an existing record should
+     * be flipped on.
+     *
+     * @return void.
+     */
+    public function testTimeStatusActivationOnSaveWithExistingRecord()
+    {
+
+        // Create exhibit and item.
+        $neatline = $this->helper->_createNeatline();
+        $item = $this->helper->_createItem();
+        $record = new NeatlineDataRecord($item, $neatline);
+        $record->save();
+
+        // At the start, both trackers false.
+        $this->assertFalse((bool) $record->space_active);
+        $this->assertFalse((bool) $record->time_active);
+
+        // Form the POST with new geocoverage data.
+        $this->request->setMethod('POST')
+            ->setPost(array(
+                'item_id' =>        $item->id,
+                'record_id' =>      $record->id,
+                'neatline_id' =>    $neatline->id,
+                'space_active' =>   (string) self::$__testParams['space_active'],
+                'time_active' =>    (string) self::$__testParams['time_active'],
+                'geocoverage' =>    '',
+                'title' =>          self::$__testParams['title'],
+                'description' =>    self::$__testParams['description'],
+                'start_date' =>     self::$__testParams['start_date'],
+                'start_time' =>     self::$__testParams['start_time'],
+                'end_date' =>       self::$__testParams['end_date'],
+                'end_time' =>       self::$__testParams['end_time'],
+                'left_percent' =>   self::$__testParams['left_percent'],
+                'right_percent' =>  self::$__testParams['right_percent'],
+                'vector_color' =>   self::$__testParams['vector_color'],
+                'stroke_color' =>   self::$__testParams['stroke_color'],
+                'vector_opacity' => self::$__testParams['vector_opacity'],
+                'stroke_opacity' => self::$__testParams['stroke_opacity'],
+                'stroke_width' =>   self::$__testParams['stroke_width'],
+                'point_radius' =>   self::$__testParams['point_radius']
+            )
+        );
+
+        // Hit the route.
+        $this->dispatch('neatline-exhibits/editor/save');
+
+        // Get the record and check the attributes.
+        $record = $this->_recordsTable->getRecordByItemAndExhibit($item, $neatline);
+        $this->assertFalse((bool) $record->space_active);
+        $this->assertTrue((bool) $record->time_active);
+
+    }
+
+    /**
+     * If there is a null geocoverage field and a hit to /save commits novel
+     * coverage data, the time_active tracker on a new record should be flipped on.
+     *
+     * @return void.
+     */
+    public function testTimeStatusActivationOnSaveWithoutExistingRecord()
+    {
+
+        // Create exhibit and item.
+        $neatline = $this->helper->_createNeatline();
+        $item = $this->helper->_createItem();
+
+        // Form the POST with new geocoverage data.
+        $this->request->setMethod('POST')
+            ->setPost(array(
+                'item_id' =>        $item->id,
+                'record_id' =>      '',
+                'neatline_id' =>    $neatline->id,
+                'space_active' =>   (string) self::$__testParams['space_active'],
+                'time_active' =>    (string) self::$__testParams['time_active'],
+                'geocoverage' =>    '',
+                'title' =>          self::$__testParams['title'],
+                'description' =>    self::$__testParams['description'],
+                'start_date' =>     self::$__testParams['start_date'],
+                'start_time' =>     self::$__testParams['start_time'],
+                'end_date' =>       self::$__testParams['end_date'],
+                'end_time' =>       self::$__testParams['end_time'],
+                'left_percent' =>   self::$__testParams['left_percent'],
+                'right_percent' =>  self::$__testParams['right_percent'],
+                'vector_color' =>   self::$__testParams['vector_color'],
+                'stroke_color' =>   self::$__testParams['stroke_color'],
+                'vector_opacity' => self::$__testParams['vector_opacity'],
+                'stroke_opacity' => self::$__testParams['stroke_opacity'],
+                'stroke_width' =>   self::$__testParams['stroke_width'],
+                'point_radius' =>   self::$__testParams['point_radius']
+            )
+        );
+
+        // Hit the route.
+        $this->dispatch('neatline-exhibits/editor/save');
+
+        // Get the record and check the attributes.
+        $record = $this->_recordsTable->find(1);
+        $this->assertFalse((bool) $record->space_active);
+        $this->assertTrue((bool) $record->time_active);
 
     }
 

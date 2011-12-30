@@ -509,6 +509,8 @@
          */
         _applyData: function() {
 
+            console.log(this._data);
+
             // Populate inputs.
             this.title.val(this._data.title);
             this.vectorColor.val(this._data.vector_color);

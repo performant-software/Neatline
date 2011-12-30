@@ -236,6 +236,51 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
     }
 
     /**
+     * setNotEmpty() should set value when value is not null or ''.
+     *
+     * @return void.
+     */
+    public function testSetNotEmptyWithNonEmptyValue()
+    {
+
+        // Create a record.
+        $record = $this->helper->_createRecord();
+
+        // Test with empty value, check for set.
+        $record->setNotEmpty('title', 'Title');
+        $this->assertNotNull($record->title);
+        $this->assertEquals($record->title, 'Title');
+
+    }
+
+    /**
+     * setNotEmpty() should set null when value is null or ''.
+     *
+     * @return void.
+     */
+    public function testSetNotEmptyWithEmptyValue()
+    {
+
+        // Create a record.
+        $record = $this->helper->_createRecord();
+
+        // Test with empty value, check for set.
+        $record->setNotEmpty('title', '');
+        $this->assertNull($record->title);
+        $record->setNotEmpty('title', null);
+        $this->assertNull($record->title);
+
+        // Test with populated value, check for set.
+        $record->title = 'Title';
+        $record->setNotEmpty('title', '');
+        $this->assertNull($record->title);
+        $record->title = 'Title';
+        $record->setNotEmpty('title', null);
+        $this->assertNull($record->title);
+
+    }
+
+    /**
      * The time and space status trackers can only take native boolean
      * values as input parameters. The setStatus() method should check
      * to make sure that the input is boolean and set the integer value.
@@ -851,29 +896,26 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         // Create an item and exhibit.
         $neatline = $this->helper->_createNeatline();
         $record = new NeatlineDataRecord(null, $neatline);
-        $record->save();
 
-        // Save form data with update values.
-        $this->_recordsTable->saveItemFormData(
-            $record,
-            self::$__testParams['title'],
-            self::$__testParams['description'],
-            self::$__testParams['start_date'],
-            self::$__testParams['start_time'],
-            self::$__testParams['end_date'],
-            self::$__testParams['end_time'],
-            self::$__testParams['vector_color'],
-            self::$__testParams['vector_opacity'],
-            self::$__testParams['stroke_color'],
-            self::$__testParams['stroke_opacity'],
-            self::$__testParams['stroke_width'],
-            self::$__testParams['point_radius'],
-            self::$__testParams['left_percent'],
-            self::$__testParams['right_percent'],
-            self::$__testParams['geocoverage'],
-            self::$__testParams['space_active'],
-            self::$__testParams['time_active']
-        );
+        // Populate fields.
+        $record->title =            self::$__testParams['title'];
+        $record->description =      self::$__testParams['description'];
+        $record->start_date =       self::$__testParams['start_date'];
+        $record->start_time =       self::$__testParams['start_time'];
+        $record->end_date =         self::$__testParams['end_date'];
+        $record->end_time =         self::$__testParams['end_time'];
+        $record->vector_color =     self::$__testParams['vector_color'];
+        $record->stroke_color =     self::$__testParams['stroke_color'];
+        $record->vector_opacity =   self::$__testParams['vector_opacity'];
+        $record->stroke_opacity =   self::$__testParams['stroke_opacity'];
+        $record->stroke_width =     self::$__testParams['stroke_width'];
+        $record->point_radius =     self::$__testParams['point_radius'];
+        $record->left_percent =     self::$__testParams['left_percent'];
+        $record->right_percent =    self::$__testParams['right_percent'];
+        $record->geocoverage =      self::$__testParams['geocoverage'];
+        $record->space_active =     self::$__testParams['space_active'];
+        $record->time_active =      self::$__testParams['time_active'];
+        $record->save();
 
         // Ping the method for the json.
         $json = $record->buildEditFormJson();

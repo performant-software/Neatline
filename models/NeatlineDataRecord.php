@@ -241,6 +241,27 @@ class NeatlineDataRecord extends Omeka_record
 
 
     /**
+     * Set the an attribute if the passed value is not null or ''.
+     *
+     * @param string $attribute The name of the attribute.
+     * @param boolean $value The value to set.
+     *
+     * @return void.
+     */
+    public function setNotEmpty($attribute, $value)
+    {
+
+        if ($value == '') {
+            $this[$attribute] = null;
+        }
+
+        else {
+            $this[$attribute] = $value;
+        }
+
+    }
+
+    /**
      * Set the space_active or time_active attributes. Reject non-
      * boolean parameters.
      *
