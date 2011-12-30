@@ -181,6 +181,61 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
     }
 
     /**
+     * getItem() should return the parent item when one exists.
+     *
+     * @return void.
+     */
+    public function testGetItemWithItem()
+    {
+
+        // Create a record.
+        $neatline = $this->helper->_createNeatline();
+        $item = $this->helper->_createItem();
+        $record = new NeatlineDataRecord($item, $neatline);
+
+        // Get the item.
+        $retrievedItem = $record->getItem();
+        $this->assertEquals($item->id, $retrievedItem->id);
+
+    }
+
+    /**
+     * getItem() should return null when there is not a parent item.
+     *
+     * @return void.
+     */
+    public function testGetItemWithNoItem()
+    {
+
+        // Create a record.
+        $neatline = $this->helper->_createNeatline();
+        $record = new NeatlineDataRecord(null, $neatline);
+
+        // Get the item.
+        $retrievedItem = $record->getItem();
+        $this->assertNull($retrievedItem);
+
+    }
+
+    /**
+     * getExhibit() should return the parent exhibit.
+     *
+     * @return void.
+     */
+    public function testGetExhibit()
+    {
+
+        // Create a record.
+        $neatline = $this->helper->_createNeatline();
+        $record = new NeatlineDataRecord(null, $neatline);
+
+        // Get the exhibit.
+        $retrievedExhibit = $record->getExhibit();
+        $this->assertEquals($neatline->id, $retrievedExhibit->id);
+
+    }
+
+    /**
      * The time and space status trackers can only take native boolean
      * values as input parameters. The setStatus() method should check
      * to make sure that the input is boolean and set the integer value.
@@ -310,6 +365,150 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         $this->assertEquals($record->left_percent, 0);
         $this->assertEquals($record->right_percent, 100);
         $this->assertFalse($failure);
+
+    }
+
+    /**
+     * If a passed style attribute does not match the system defaults
+     * and there is not an exhibit default for the column, set the value.
+     *
+     * @return void.
+     */
+    public function testSetStyleWithNoDefaultsWhenValueIsNovel()
+    {
+
+        // Create a record.
+        $neatline = $this->helper->_createNeatline();
+        $item = $this->helper->_createItem();
+        $record = new NeatlineDataRecord($item, $neatline);
+
+        // Set.
+        $record->setStyle('vector_color', '#000000');
+        $record->setStyle('vector_opacity', 100);
+        $record->setStyle('stroke_color', '#000000');
+        $record->setStyle('stroke_opacity', 100);
+        $record->setStyle('stroke_width', 100);
+        $record->setStyle('point_radius', 100);
+        $record->setStyle('title', 'shouldNotSet');
+
+        // Check.
+        $this->assertEquals($record->vector_color, '#000000');
+        $this->assertEquals($record->vector_opacity, 100);
+        $this->assertEquals($record->stroke_color, '#000000');
+        $this->assertEquals($record->stroke_opacity, 100);
+        $this->assertEquals($record->stroke_width, 100);
+        $this->assertEquals($record->point_radius, 100);
+        $this->assertNull($record->title);
+
+    }
+
+    /**
+     * If a passed style attribute matches the system defaults and there
+     * is not an exhibit default for the column, do not set the value.
+     *
+     * @return void.
+     */
+    public function testSetStyleWithNoDefaultsWhenValueIsNotNovel()
+    {
+
+        // Create a record.
+        $neatline = $this->helper->_createNeatline();
+        $item = $this->helper->_createItem();
+        $record = new NeatlineDataRecord($item, $neatline);
+
+        // Set.
+        $record->setStyle('vector_color', '#724e85');
+        $record->setStyle('vector_opacity', 40);
+        $record->setStyle('stroke_color', '#ffda82');
+        $record->setStyle('stroke_opacity', 60);
+        $record->setStyle('stroke_width', 1);
+        $record->setStyle('point_radius', 6);
+
+        // Check.
+        $this->assertNull($record->vector_color);
+        $this->assertNull($record->vector_opacity);
+        $this->assertNull($record->stroke_color);
+        $this->assertNull($record->stroke_opacity);
+        $this->assertNull($record->stroke_width);
+        $this->assertNull($record->point_radius);
+
+    }
+
+    /**
+     * If a passed style attribute does not match the exhibit default,
+     * set the value.
+     *
+     * @return void.
+     */
+    public function testSetStyleWithDefaultsWhenValueIsNovel()
+    {
+
+        // Create a record, set exhibit defaults.
+        $neatline = $this->helper->_createNeatline();
+        $item = $this->helper->_createItem();
+        $record = new NeatlineDataRecord($item, $neatline);
+        $neatline->default_vector_color = '#ffffff';
+        $neatline->default_vector_opacity = 20;
+        $neatline->default_stroke_color = '#ffffff';
+        $neatline->default_stroke_opacity = 20;
+        $neatline->default_stroke_width = 20;
+        $neatline->default_point_radius = 20;
+        $neatline->save();
+
+        // Set.
+        $record->setStyle('vector_color', '#000000');
+        $record->setStyle('vector_opacity', 100);
+        $record->setStyle('stroke_color', '#000000');
+        $record->setStyle('stroke_opacity', 100);
+        $record->setStyle('stroke_width', 100);
+        $record->setStyle('point_radius', 100);
+
+        // Check.
+        $this->assertEquals($record->vector_color, '#000000');
+        $this->assertEquals($record->vector_opacity, 100);
+        $this->assertEquals($record->stroke_color, '#000000');
+        $this->assertEquals($record->stroke_opacity, 100);
+        $this->assertEquals($record->stroke_width, 100);
+        $this->assertEquals($record->point_radius, 100);
+
+    }
+
+    /**
+     * If a passed style attribute matches the exhibit default, set
+     * the value.
+     *
+     * @return void.
+     */
+    public function testSetStyleWithDefaultsWhenValueIsNotNovel()
+    {
+
+        // Create a record.
+        $neatline = $this->helper->_createNeatline();
+        $item = $this->helper->_createItem();
+        $record = new NeatlineDataRecord($item, $neatline);
+        $neatline->default_vector_color = '#ffffff';
+        $neatline->default_vector_opacity = 20;
+        $neatline->default_stroke_color = '#ffffff';
+        $neatline->default_stroke_opacity = 20;
+        $neatline->default_stroke_width = 20;
+        $neatline->default_point_radius = 20;
+        $neatline->save();
+
+        // Set.
+        $record->setStyle('vector_color', '#ffffff');
+        $record->setStyle('vector_opacity', 20);
+        $record->setStyle('stroke_color', '#ffffff');
+        $record->setStyle('stroke_opacity', 20);
+        $record->setStyle('stroke_width', 20);
+        $record->setStyle('point_radius', 20);
+
+        // Check.
+        $this->assertNull($record->vector_color);
+        $this->assertNull($record->vector_opacity);
+        $this->assertNull($record->stroke_color);
+        $this->assertNull($record->stroke_opacity);
+        $this->assertNull($record->stroke_width);
+        $this->assertNull($record->point_radius);
 
     }
 

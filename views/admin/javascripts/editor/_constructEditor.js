@@ -277,6 +277,38 @@ jQuery(document).ready(function($) {
     });
 
     // Configure map.
-    configureMapButton.configuremap();
+    configureMapButton.configuremap({
+
+        // Manifest new default vector fill color.
+        'vectorcoloredit': function(event, obj) {
+            neatlineContainer.neatline('setDefaultVectorColor', obj.color);
+        },
+
+        // Manifest new default stroke color.
+        'strokecoloredit': function(event, obj) {
+            neatlineContainer.neatline('setDefaultStrokeColor', obj.color);
+        },
+
+        // Manifest new default vector opacity.
+        'vectoropacityedit': function(event, obj) {
+            neatlineContainer.neatline('setDefaultVectorOpacity', obj.value);
+        },
+
+        // Manifest new default stroke opacity.
+        'strokeopacityedit': function(event, obj) {
+            neatlineContainer.neatline('setDefaultStrokeOpacity', obj.value);
+        },
+
+        // Manifest new default stroke width.
+        'strokewidthedit': function(event, obj) {
+            neatlineContainer.neatline('setDefaultStrokeWidth', obj.value);
+        },
+
+        // Manifest new default point radius.
+        'pointradiusedit': function(event, obj) {
+            neatlineContainer.neatline('setDefaultPointRadius', obj.value);
+        }
+
+    });
 
 });

@@ -8,6 +8,52 @@
 <ul class="nav">
 
     <li class="dropdown">
+        <a href="" id="configure-map-button" class="dropdown-toggle">Map Settings</a>
+        <div id="configure-map" class="dropdown-content">
+            
+<!-- Vector color. -->
+<h5>Default Shape Color</h5>
+<input type="text" class="color-picker miniColors" name="default-vector-color" />
+<hr />
+
+<!-- Stroke color. -->
+<h5>Default Line Color</h5>
+<input type="text" class="color-picker miniColors" name="default-stroke-color" />
+<hr />
+
+<!-- Vector opacity. -->
+<h5>Default Shape Opacity</h5>
+<input type="text" class="integer-dragger" name="default-vector-opacity" />
+<hr />
+
+<!-- Stroke opacity. -->
+<h5>Default Line Opacity</h5>
+<input type="text" class="integer-dragger" name="default-stroke-opacity" />
+<hr />
+
+<!-- Stroke width. -->
+<h5>Default Line Thickness</h5>
+<input type="text" class="integer-dragger" name="default-stroke-width" />
+<hr />
+
+<!-- Point radius. -->
+<h5>Default Point Radius</h5>
+<input type="text" class="integer-dragger" name="default-point-radius" />
+<hr />
+
+<!-- Base layer picker. -->
+<h5>Base Layer</h5>
+<select name="base-layer">
+    <option>[none]</option>
+    <option>OpenStreetMap</option>
+</select>
+<hr />
+
+<button class="btn icon approve save">Save</button>
+        </div>
+    </li>
+
+    <li class="dropdown">
         <a href="" id="configure-layout-button" class="dropdown-toggle">Configure Layout</a>
         <div id="configure-layout" class="dropdown-content">
             
@@ -375,7 +421,7 @@ to store the current viewport settings as the public defaults.</p>
 <!-- JSON globals. -->
 <script type="text/javascript">
 
-    var Neatline = {"added":"2011-12-30 11:27:41","name":"Test Exhibit","map_id":null,"image_id":1,"top_element":null,"items_h_pos":null,"items_v_pos":null,"items_height":null,"is_map":1,"is_timeline":1,"is_items":1,"default_map_bounds":null,"default_map_zoom":null,"default_focus_date":null,"default_vector_color":null,"default_vector_opacity":null,"default_stroke_color":null,"default_stroke_opacity":null,"default_stroke_width":null,"default_point_radius":null,"id":1};
+    var Neatline = {"added":"2011-12-30 15:01:59","name":"Test Exhibit","map_id":null,"image_id":1,"top_element":null,"items_h_pos":null,"items_v_pos":null,"items_height":null,"is_map":1,"is_timeline":1,"is_items":1,"default_map_bounds":null,"default_map_zoom":null,"default_focus_date":null,"default_vector_color":null,"default_vector_opacity":null,"default_stroke_color":null,"default_stroke_opacity":null,"default_stroke_width":null,"default_point_radius":null,"id":1};
         Neatline.dataSources = {"timeline":"http:\/\/\/Users\/davidmcclure\/pear\/bin\/neatline-exhibits\/1\/data\/simile","map":"http:\/\/\/Users\/davidmcclure\/pear\/bin\/neatline-exhibits\/1\/data\/openlayers","undated":"http:\/\/\/Users\/davidmcclure\/pear\/bin\/neatline-exhibits\/1\/data\/udi"};
         Neatline.public = false;
 

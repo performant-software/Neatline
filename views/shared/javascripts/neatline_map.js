@@ -839,6 +839,18 @@
         },
 
         /*
+         * Set default fill color.
+         */
+        setDefaultVectorColor: function(color) {
+
+            // Walk the current edit layers.
+            this._db().each(function(record, id) {
+                console.log(record);
+            });
+
+        },
+
+        /*
          * Update the stroke color for the current editing layer.
          */
         setItemStrokeColor: function(color) {

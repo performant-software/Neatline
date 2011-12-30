@@ -987,6 +987,53 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
     }
 
     /**
+     * buildMapJson() should include '_native_styles' key that contains
+     * the record-endemic (not iterpolated from system or exhibit
+     * defaults) styling columns.
+     *
+     * @return void.
+     */
+    public function testBuildMapJsonNativeStyles()
+    {
+
+        // Create an exhibit and items.
+        $neatline = $this->helper->_createNeatline();
+        $item = $this->helper->_createItem();
+
+        // Create two records.
+        $record = new NeatlineDataRecord($item, $neatline);
+
+        // Populate map-relevant attributes and some, but not all, style
+        // attributes.
+        $record->title = 'Title';
+        $record->geocoverage = 'POINT(1,0)';
+        $record->space_active = 1;
+        $record->vector_color = '#ffffff';
+        $record->stroke_opacity = 50;
+        $record->stroke_width = 50;
+        $record->save();
+
+        // Build the JSON.
+        $json = $this->_recordsTable->buildMapJson($neatline);
+
+        // Check format.
+        $this->assertContains('"id":' . $record->id, $json);
+        $this->assertContains('"item_id":' . $item->id, $json);
+        $this->assertContains('"title":"Title"', $json);
+        $this->assertContains('"vector_opacity":null', $json);
+        $this->assertContains('"stroke_color":null', $json);
+        $this->assertContains('"point_radius":null', $json);
+        $this->assertContains('"bounds":null', $json);
+        $this->assertContains('"zoom":null', $json);
+        $this->assertContains('"wkt":"POINT(1,0)"', $json);
+        $this->assertContains('"_native_styles":', $json);
+        $this->assertContains('"vector_color":"#ffffff"', $json);
+        $this->assertContains('"stroke_opacity":50', $json);
+        $this->assertContains('"stroke_width":50', $json);
+
+    }
+
+    /**
      * The buildMapJson() method should exclude items without active
      * space status trackers.
      *

@@ -33,42 +33,66 @@ class NeatlineDataRecord extends Omeka_record
     /**
      * Record attributes.
      */
+
+    // Foreign keys.
     public $item_id;
     public $exhibit_id;
+
+    // Text fields.
     public $title;
     public $description;
+
+    // Dates.
     public $start_date;
     public $start_time;
     public $end_date;
     public $end_time;
+    public $left_percent;
+    public $right_percent;
+
+    // Styles.
     public $vector_color;
     public $vector_opacity;
     public $stroke_color;
     public $stroke_opacity;
     public $stroke_width;
     public $point_radius;
+
+    // Coverage.
     public $geocoverage;
-    public $left_percent;
-    public $right_percent;
+    public $map_bounds;
+    public $map_zoom;
+
+    // Statuses and ordering.
     public $space_active;
     public $time_active;
     public $display_order;
-    public $map_bounds;
-    public $map_zoom;
 
     /**
      * Default attributes.
      */
     private static $defaults = array(
-        'vector_color' => '#724e85',
-        'vector_opacity' => 40,
-        'stroke_color' => '#ffda82',
-        'stroke_opacity' => 60,
-        'stroke_width' => 1,
-        'point_radius' => 6,
-        'left_percent' => 0,
-        'right_percent' => 100,
-        'geocoverage' => 'POINT()'
+        'vector_color' =>       '#724e85',
+        'vector_opacity' =>     40,
+        'stroke_color' =>       '#ffda82',
+        'stroke_opacity' =>     60,
+        'stroke_width' =>       1,
+        'point_radius' =>       6,
+        'left_percent' =>       0,
+        'right_percent' =>      100,
+        'geocoverage' =>        'POINT()'
+    );
+
+    /**
+     * Valid style attribute names.
+     */
+    private static $styles = array(
+        'vector_color',
+        'vector_opacity',
+        'stroke_color',
+        'stroke_opacity',
+        'stroke_width',
+        'point_radius'
     );
 
 
@@ -111,7 +135,26 @@ class NeatlineDataRecord extends Omeka_record
     public function getItem()
     {
 
-        return $this->getTable('Item')->find($this->item_id);
+        $item = null;
+
+        // If record id is defined, get item.
+        if (!is_null($this->item_id)) {
+           $item = $this->getTable('Item')->find($this->item_id);
+        }
+
+        return $item;
+
+    }
+
+    /**
+     * Get the parent exhibit record.
+     *
+     * @return Omeka_record $exhibit The parent exhibit.
+     */
+    public function getExhibit()
+    {
+
+        return $this->getTable('NeatlineExhibit')->find($this->exhibit_id);
 
     }
 
@@ -253,6 +296,46 @@ class NeatlineDataRecord extends Omeka_record
         $this->right_percent = $right;
 
         return true;
+
+    }
+
+    /**
+     * Set a style attribute. If there is an exhibit default, only set
+     * if the passed value is different. If there is no exhibit default,
+     * only set if the passed value is different from the system
+     * default. If a non-style column name is passed, return false.
+     *
+     * @param string style The name of the style.
+     * @param mixed $value The value to set.
+     *
+     * @return boolean True if the set succeeds.
+     */
+    public function setStyle($style, $value)
+    {
+
+        // If a non-style property is passed, return false.
+        if (!in_array($style, self::$styles)) {
+            return false;
+        }
+
+        // Get the exhibit.
+        $exhibit = $this->getExhibit();
+
+        // If there is an exhibit default.
+        if (!is_null($exhibit['default_' . $style])) {
+            if ($value != $exhibit['default_' . $style]) {
+                $this[$style] = $value;
+                return true;
+            }
+        }
+
+        // If the value does not match the system default.
+        else if ($value != self::$defaults[$style]) {
+            $this[$style] = $value;
+            return true;
+        }
+
+        return false;
 
     }
 

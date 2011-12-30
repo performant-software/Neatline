@@ -71,7 +71,7 @@
 
                 // Change the color.
                 change: function(hex, rgb) {
-                    self._trigger('vectorColorEdit', {}, { 'color': hex });
+                    self._trigger('vectorcoloredit', {}, { 'color': hex });
                 }
 
             });
@@ -81,7 +81,7 @@
 
                 // Change the color.
                 change: function(hex, rgb) {
-                    self._trigger('strokeColorEdit', {}, { 'color': hex });
+                    self._trigger('strokecoloredit', {}, { 'color': hex });
                 }
 
             });
@@ -92,7 +92,7 @@
                 max: 100,
                 px_per_unit: 1,
                 change: function(evt, obj) {
-                    self._trigger('vectorOpacityEdit', {}, { 'value': obj.value });
+                    self._trigger('vectoropacityedit', {}, { 'value': obj.value });
                 }
             });
 
@@ -102,7 +102,7 @@
                 max: 100,
                 px_per_unit: 1,
                 change: function(evt, obj) {
-                    self._trigger('strokeOpacityEdit', {}, { 'value': obj.value });
+                    self._trigger('strokeopacityedit', {}, { 'value': obj.value });
                 }
             });
 
@@ -112,7 +112,7 @@
                 default: 1,
                 px_per_unit: 8,
                 change: function(evt, obj) {
-                    self._trigger('strokeWidthEdit', {}, { 'value': obj.value });
+                    self._trigger('strokewidthedit', {}, { 'value': obj.value });
                 }
             });
 
@@ -122,7 +122,7 @@
                 default: 6,
                 px_per_unit: 8,
                 change: function(evt, obj) {
-                    self._trigger('pointRadiusEdit', {}, { 'value': obj.value });
+                    self._trigger('pointradiusedit', {}, { 'value': obj.value });
                 }
             });
 

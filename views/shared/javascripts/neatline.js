@@ -428,6 +428,73 @@
         },
 
         /*
+         * Set the default fill color.
+         *
+         * - param string color: The color for the span.
+         *
+         * - return void.
+         */
+        setDefaultVectorColor: function(color) {
+            this.map.neatlinemap('setDefaultVectorColor', color);
+            this.timeline.neatlinetimeline('setDefaultDateColor', color);
+        },
+
+        /*
+         * Set the default stroke color.
+         *
+         * - param string color: The color for the span.
+         *
+         * - return void.
+         */
+        setDefaultStrokeColor: function(color) {
+            this.map.neatlinemap('setDefaultStrokeColor', color);
+        },
+
+        /*
+         * Set the default vector opacity.
+         *
+         * - param integer value: The opacity, 0-100.
+         *
+         * - return void.
+         */
+        setDefaultVectorOpacity: function(value) {
+            this.map.neatlinemap('setDefaultVectorOpacity', value);
+        },
+
+        /*
+         * Set the default stroke opacity.
+         *
+         * - param integer value: The opacity, 0-100.
+         *
+         * - return void.
+         */
+        setDefaultStrokeOpacity: function(value) {
+            this.map.neatlinemap('setDefaultStrokeOpacity', value);
+        },
+
+        /*
+         * Set the default stroke width.
+         *
+         * - param integer value: The width, 0-+inf.
+         *
+         * - return void.
+         */
+        setDefaultStrokeWidth: function(value) {
+            this.map.neatlinemap('setDefaultStrokeWidth', value);
+        },
+
+        /*
+         * Set the default point radius.
+         *
+         * - param integer value: The radius, 0-+inf.
+         *
+         * - return void.
+         */
+        setDefaultPointRadius: function(value) {
+            this.map.neatlinemap('setDefaultPointRadius', value);
+        },
+
+        /*
          * Render a date ambiguity on a timeline span.
          *
          * - param integer id: The record id.

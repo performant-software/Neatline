@@ -90,14 +90,16 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
         $record->start_time =               $startTime;
         $record->end_date =                 $endDate;
         $record->end_time =                 $endTime;
+        $record->geocoverage =              $geoCoverage;
+        $record->setPercentages($left, $right);
+
+        // Set styles.
         $record->vector_color =             $vectorColor;
         $record->vector_opacity =           $vectorOpacity;
         $record->stroke_color =             $strokeColor;
         $record->stroke_opacity =           $strokeOpacity;
         $record->stroke_width =             $strokeWidth;
         $record->point_radius =             $pointRadius;
-        $record->geocoverage =              $geoCoverage;
-        $record->setPercentages($left, $right);
 
         // Check for new space data.
         if (in_array($startingCoverage, array('', null)) && $geoCoverage != '') {
@@ -352,7 +354,15 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
                     'point_radius' =>       $record->point_radius,
                     'bounds' =>             $record->map_bounds,
                     'zoom' =>               $record->map_zoom,
-                    'wkt' =>                $record->getGeocoverage()
+                    'wkt' =>                $record->getGeocoverage(),
+                    '_native_styles' =>     array(
+                      'vector_color' =>     $record->vector_color,
+                      'vector_opacity' =>   $record->vector_opacity,
+                      'stroke_color' =>     $record->stroke_color,
+                      'stroke_opacity' =>   $record->stroke_opacity,
+                      'stroke_width' =>     $record->stroke_width,
+                      'point_radius' =>     $record->point_radius,
+                    )
                 );
 
             }
