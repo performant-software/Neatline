@@ -843,9 +843,31 @@
          */
         setDefaultVectorColor: function(color) {
 
+            var self = this;
+
             // Walk the current edit layers.
             this._db().each(function(record, id) {
-                console.log(record);
+
+                // Only push the change if the native style is null.
+                if (record.data._native_styles.vector_color == null) {
+
+                    // Update the record tracker object.
+                    record.data.vector_color = color;
+
+                    // Rebuild the style map.
+                    record.layer.styleMap = self._getStyleMap(
+                        record.data.vector_color,
+                        record.data.vector_opacity,
+                        record.data.stroke_color,
+                        record.data.stroke_opacity,
+                        record.data.stroke_width,
+                        record.data.point_radius);
+
+                    // Rerender the layer to manifest the change.
+                    record.layer.redraw();
+
+                }
+
             });
 
         },
