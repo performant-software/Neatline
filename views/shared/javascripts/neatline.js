@@ -368,7 +368,7 @@
          * - return void.
          */
         setItemVectorColor: function(color, id) {
-            this.map.neatlinemap('setItemVectorColor', color);
+            this.map.neatlinemap('setCurrentRecordStyle', 'vector_color', color);
             this.timeline.neatlinetimeline('setDateColor', id, color);
         },
 
@@ -380,7 +380,7 @@
          * - return void.
          */
         setItemStrokeColor: function(color) {
-            this.map.neatlinemap('setItemStrokeColor', color);
+            this.map.neatlinemap('setCurrentRecordStyle', 'stroke_color', color);
         },
 
         /*
@@ -391,7 +391,7 @@
          * - return void.
          */
         setItemVectorOpacity: function(value) {
-            this.map.neatlinemap('setItemVectorOpacity', value);
+            this.map.neatlinemap('setCurrentRecordStyle', 'vector_opacity', value/100);
         },
 
         /*
@@ -402,7 +402,7 @@
          * - return void.
          */
         setItemStrokeOpacity: function(value) {
-            this.map.neatlinemap('setItemStrokeOpacity', value);
+            this.map.neatlinemap('setCurrentRecordStyle', 'stroke_opacity', value/100);
         },
 
         /*
@@ -413,7 +413,7 @@
          * - return void.
          */
         setItemStrokeWidth: function(value) {
-            this.map.neatlinemap('setItemStrokeWidth', value);
+            this.map.neatlinemap('setCurrentRecordStyle', 'stroke_width', value);
         },
 
         /*
@@ -424,7 +424,7 @@
          * - return void.
          */
         setItemPointRadius: function(value) {
-            this.map.neatlinemap('setItemPointRadius', value);
+            this.map.neatlinemap('setCurrentRecordStyle', 'point_radius', value);
         },
 
         /*
@@ -435,7 +435,7 @@
          * - return void.
          */
         setDefaultVectorColor: function(color) {
-            this.map.neatlinemap('setDefaultVectorColor', color);
+            this.map.neatlinemap('setDefaultStyle', 'vector_color', color);
             this.timeline.neatlinetimeline('setDefaultDateColor', color);
         },
 
@@ -447,7 +447,7 @@
          * - return void.
          */
         setDefaultStrokeColor: function(color) {
-            this.map.neatlinemap('setDefaultStrokeColor', color);
+            this.map.neatlinemap('setDefaultStyle', 'stroke_color', color);
         },
 
         /*
@@ -458,7 +458,7 @@
          * - return void.
          */
         setDefaultVectorOpacity: function(value) {
-            this.map.neatlinemap('setDefaultVectorOpacity', value);
+            this.map.neatlinemap('setDefaultStyle', 'vector_opacity', value/100);
         },
 
         /*
@@ -469,7 +469,7 @@
          * - return void.
          */
         setDefaultStrokeOpacity: function(value) {
-            this.map.neatlinemap('setDefaultStrokeOpacity', value);
+            this.map.neatlinemap('setDefaultStyle', 'stroke_opacity', value/100);
         },
 
         /*
@@ -480,7 +480,7 @@
          * - return void.
          */
         setDefaultStrokeWidth: function(value) {
-            this.map.neatlinemap('setDefaultStrokeWidth', value);
+            this.map.neatlinemap('setDefaultStyle', 'stroke_width', value);
         },
 
         /*
@@ -491,7 +491,7 @@
          * - return void.
          */
         setDefaultPointRadius: function(value) {
-            this.map.neatlinemap('setDefaultPointRadius', value);
+            this.map.neatlinemap('setDefaultStyle', 'point_radius', value);
         },
 
         /*
