@@ -94,12 +94,12 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
         $record->setPercentages($left, $right);
 
         // Set styles.
-        $record->vector_color =             $vectorColor;
-        $record->vector_opacity =           $vectorOpacity;
-        $record->stroke_color =             $strokeColor;
-        $record->stroke_opacity =           $strokeOpacity;
-        $record->stroke_width =             $strokeWidth;
-        $record->point_radius =             $pointRadius;
+        $record->setStyle('vector_color', $vectorColor);
+        $record->setStyle('vector_opacity', $vectorOpacity);
+        $record->setStyle('stroke_color', $strokeColor);
+        $record->setStyle('stroke_opacity', $strokeOpacity);
+        $record->setStyle('stroke_width', $strokeWidth);
+        $record->setStyle('point_radius', $pointRadius);
 
         // Check for new space data.
         if (in_array($startingCoverage, array('', null)) && $geoCoverage != '') {
