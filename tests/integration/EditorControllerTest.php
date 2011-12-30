@@ -512,18 +512,70 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->dispatch('neatline-exhibits/editor/form');
         $response = $this->getResponse()->getBody('default');
 
-        // Test the raw construction with no available DC values.
-        $this->assertEquals(
-            $response,
-            '{"title":"' .          self::$__testParams['title'] . '",' .
-            '"description":"' .     self::$__testParams['description'] . '",' .
-            '"start_date":"' .      self::$__testParams['start_date'] . '",' .
-            '"start_time":"' .      self::$__testParams['start_time'] . '",' .
-            '"end_date":"' .        self::$__testParams['end_date'] . '",' .
-            '"end_time":"' .        self::$__testParams['end_time'] . '",' .
-            '"left_percent":' .     self::$__testParams['left_percent'] . ',' .
-            '"right_percent":' .    self::$__testParams['right_percent'] . ',' .
-            '"vector_color":"' .    self::$__testParams['vector_color'] . '"}'
+        // Test the construction.
+        $this->assertContains(
+            '{"title":"' . self::$__testParams['title'] . '"',
+            $response
+        );
+
+        $this->assertContains(
+            '"description":"' . self::$__testParams['description'] . '"',
+            $response
+        );
+
+        $this->assertContains(
+            '"start_date":"' . self::$__testParams['start_date'] . '"',
+            $response
+        );
+
+        $this->assertContains(
+            '"start_time":"' . self::$__testParams['start_time'] . '"',
+            $response
+        );
+
+        $this->assertContains(
+            '"end_date":"' . self::$__testParams['end_date'] . '"',
+            $response
+        );
+
+        $this->assertContains(
+            '"end_time":"' . self::$__testParams['end_time'] . '"',
+            $response
+        );
+
+        $this->assertContains(
+            '"left_percent":' . self::$__testParams['left_percent'],
+            $response
+        );
+
+        $this->assertContains(
+            '"right_percent":' . self::$__testParams['right_percent'],
+            $response
+        );
+
+        $this->assertContains(
+            '"vector_color":"' . self::$__testParams['vector_color'] . '"',
+            $response
+        );
+
+        $this->assertContains(
+            '"vector_opacity":' . self::$__testParams['vector_opacity'],
+            $response
+        );
+
+        $this->assertContains(
+            '"stroke_color":"' . self::$__testParams['stroke_color'] . '"',
+            $response
+        );
+
+        $this->assertContains(
+            '"stroke_width":' . self::$__testParams['stroke_color'],
+            $response
+        );
+
+        $this->assertContains(
+            '"point_radius":' . self::$__testParams['point_radius'],
+            $response
         );
 
     }
@@ -568,17 +620,74 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $response = $this->getResponse()->getBody('default');
 
         // Check for proper construction.
-        $this->assertEquals(
-            $response,
-            '{"title":"Test Title",' .
-            '"description":"Test description.",' .
-            '"start_date":"",' .
-            '"start_time":"",' .
-            '"end_date":"",' .
-            '"end_time":"",' .
-            '"left_percent":0,' .
-            '"right_percent":100,' .
-            '"vector_color":"#724e85"}'
+        $this->assertContains(
+            '"title":"Test Title"',
+            $response
+        );
+
+        $this->assertContains(
+            '"description":"Test description."',
+            $response
+        );
+
+        $this->assertContains(
+            '"start_date":""',
+            $response
+        );
+
+        $this->assertContains(
+            '"start_time":""',
+            $response
+        );
+
+        $this->assertContains(
+            '"end_date":""',
+            $response
+        );
+
+        $this->assertContains(
+            '"end_time":""',
+            $response
+        );
+
+        $this->assertContains(
+            '"left_percent":0',
+            $response
+        );
+
+        $this->assertContains(
+            '"right_percent":100',
+            $response
+        );
+
+        $this->assertContains(
+            '"vector_color":"#724e85"',
+            $response
+        );
+
+        $this->assertContains(
+            '"vector_opacity":40',
+            $response
+        );
+
+        $this->assertContains(
+            '"stroke_color":"#ffda82"',
+            $response
+        );
+
+        $this->assertContains(
+            '"stroke_opacity":60',
+            $response
+        );
+
+        $this->assertContains(
+            '"stroke_width":1',
+            $response
+        );
+
+        $this->assertContains(
+            '"point_radius":6',
+            $response
         );
 
     }

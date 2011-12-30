@@ -56,6 +56,19 @@ class NeatlineDataRecord extends Omeka_record
     public $map_bounds;
     public $map_zoom;
 
+    /**
+     * Default attributes.
+     */
+    private static $defaults = array(
+        'vector_color' => '#724e85',
+        'vector_opacity' => 40,
+        'stroke_color' => '#ffda82',
+        'stroke_opacity' => 60,
+        'stroke_width' => 1,
+        'point_radius' => 6,
+        'geocoverage' => 'POINT()'
+    );
+
 
     /**
      * Instantiate and foreign keys.
@@ -126,7 +139,7 @@ class NeatlineDataRecord extends Omeka_record
         // Set the array values.
         $data['title'] =            $this->getTitle();
         $data['description'] =      $this->getDescription();
-        $data['vector_color'] =     $this->getColor();
+        $data['vector_color'] =     $this->getVectorColor();
         $data['start_date'] =       (string) $this->start_date;
         $data['start_time'] =       (string) $this->start_time;
         $data['end_date'] =         (string) $this->end_date;
@@ -259,12 +272,82 @@ class NeatlineDataRecord extends Omeka_record
      *
      * @return string $color The color.
      */
-    public function getColor()
+    public function getVectorColor()
     {
 
         return !is_null($this->vector_color) ?
             $this->vector_color :
-            '#724e85';
+            self::$defaults['vector_color'];
+
+    }
+
+    /**
+     * Return vector opacity.
+     *
+     * @return integer $opacity The opacity.
+     */
+    public function getVectorOpacity()
+    {
+
+        return !is_null($this->vector_opacity) ?
+            $this->vector_opacity :
+            self::$defaults['vector_opacity'];
+
+    }
+
+    /**
+     * Return stroke color.
+     *
+     * @return string $color The color.
+     */
+    public function getStrokeColor()
+    {
+
+        return !is_null($this->stroke_color) ?
+            $this->stroke_color :
+            self::$defaults['stroke_color'];
+
+    }
+
+    /**
+     * Return stroke opacity.
+     *
+     * @return integer $opacity The opacity.
+     */
+    public function getStrokeOpacity()
+    {
+
+        return !is_null($this->stroke_opacity) ?
+            $this->stroke_opacity :
+            self::$defaults['stroke_opacity'];
+
+    }
+
+    /**
+     * Return stroke width.
+     *
+     * @return integer $width The width.
+     */
+    public function getStrokeWidth()
+    {
+
+        return !is_null($this->stroke_width) ?
+            $this->stroke_width :
+            self::$defaults['stroke_width'];
+
+    }
+
+    /**
+     * Return point radius.
+     *
+     * @return integer $radius The radius.
+     */
+    public function getPointRadius()
+    {
+
+        return !is_null($this->point_radius) ?
+            $this->point_radius :
+            self::$defaults['point_radius'];
 
     }
 
@@ -278,7 +361,7 @@ class NeatlineDataRecord extends Omeka_record
 
         return (!is_null($this->geocoverage) && $this->geocoverage != '') ?
             $this->geocoverage :
-            'POINT()';
+            self::$defaults['geocoverage'];
 
     }
 

@@ -377,7 +377,11 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         $record = new NeatlineDataRecord($item, $neatline);
 
         // Create title and description element texts.
-        $this->helper->_createElementText($item, 'Dublin Core', 'Description', 'Test description.');
+        $this->helper->_createElementText(
+            $item,
+            'Dublin Core',
+            'Description',
+            'Test description.');
 
         // Should return the DC value.
         $this->assertEquals($record->getDescription(), 'Test description.');
@@ -412,12 +416,12 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
     }
 
     /**
-     * The getColor() method should return the record vector color attribute when it
-     * is not null; if it is null, return the default Neatline purple.
+     * The getVectorColor() method should return the record vector color attribute when it
+     * is not null; if it is null, return the default.
      *
      * @return void.
      */
-    public function testGetColor()
+    public function testGetVectorColor()
     {
 
         // Create an item, exhibit, and record.
@@ -425,12 +429,127 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         $neatline = $this->helper->_createNeatline();
         $record = new NeatlineDataRecord($item, $neatline);
 
-        // Should return Neatline purple.
-        $this->assertEquals($record->getColor(), '#724e85');
+        // Should return default.
+        $this->assertEquals($record->getVectorColor(), '#724e85');
 
         // Should return the native value.
         $record->vector_color = '#ffffff';
-        $this->assertEquals($record->getColor(), '#ffffff');
+        $this->assertEquals($record->getVectorColor(), '#ffffff');
+
+    }
+
+    /**
+     * The getVectorOpacity() method should return the record vector opacity attribute when it
+     * is not null; if it is null, return the default.
+     *
+     * @return void.
+     */
+    public function testGetVectorOpacity()
+    {
+
+        // Create an item, exhibit, and record.
+        $item = $this->helper->_createItem();
+        $neatline = $this->helper->_createNeatline();
+        $record = new NeatlineDataRecord($item, $neatline);
+
+        // Should return default.
+        $this->assertEquals($record->getVectorOpacity(), 40);
+
+        // Should return the native value.
+        $record->vector_opacity = 80;
+        $this->assertEquals($record->getVectorOpacity(), 80);
+
+    }
+
+    /**
+     * The getStrokeColor() method should return the record stroke color attribute when it
+     * is not null; if it is null, return the default.
+     *
+     * @return void.
+     */
+    public function testGetStrokeColor()
+    {
+
+        // Create an item, exhibit, and record.
+        $item = $this->helper->_createItem();
+        $neatline = $this->helper->_createNeatline();
+        $record = new NeatlineDataRecord($item, $neatline);
+
+        // Should return default.
+        $this->assertEquals($record->getStrokeColor(), '#ffda82');
+
+        // Should return the native value.
+        $record->stroke_color = '#ffffff';
+        $this->assertEquals($record->getStrokeColor(), '#ffffff');
+
+    }
+
+    /**
+     * The getStrokeOpacity() method should return the record vector opacity attribute
+     * when it is not null; if it is null, return the default.
+     *
+     * @return void.
+     */
+    public function testGetStrokeOpacity()
+    {
+
+        // Create an item, exhibit, and record.
+        $item = $this->helper->_createItem();
+        $neatline = $this->helper->_createNeatline();
+        $record = new NeatlineDataRecord($item, $neatline);
+
+        // Should return default.
+        $this->assertEquals($record->getStrokeOpacity(), 60);
+
+        // Should return the native value.
+        $record->stroke_opacity = 80;
+        $this->assertEquals($record->getStrokeOpacity(), 80);
+
+    }
+
+    /**
+     * The getStrokeWidth() method should return the record stroke width attribute
+     * when it is not null; if it is null, return the default.
+     *
+     * @return void.
+     */
+    public function testGetStrokeWidth()
+    {
+
+        // Create an item, exhibit, and record.
+        $item = $this->helper->_createItem();
+        $neatline = $this->helper->_createNeatline();
+        $record = new NeatlineDataRecord($item, $neatline);
+
+        // Should return default.
+        $this->assertEquals($record->getStrokeWidth(), 1);
+
+        // Should return the native value.
+        $record->stroke_width = 2;
+        $this->assertEquals($record->getStrokeWidth(), 2);
+
+    }
+
+    /**
+     * The getPointRadius() method should return the record point radius attribute
+     * when it is not null; if it is null, return the default.
+     *
+     * @return void.
+     */
+    public function testGetPointRadius()
+    {
+
+        // Create an item, exhibit, and record.
+        $item = $this->helper->_createItem();
+        $neatline = $this->helper->_createNeatline();
+        $record = new NeatlineDataRecord($item, $neatline);
+
+        // Should return default.
+        $this->assertEquals($record->getPointRadius(), 6);
+
+        // Should return the native value.
+        $record->point_radius = 2;
+        $this->assertEquals($record->getPointRadius(), 2);
 
     }
 
@@ -500,18 +619,70 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         // Ping the method for the json.
         $json = $record->buildEditFormJson();
 
-        // Check for proper construction.
-        $this->assertEquals(
-            $json,
-            '{"title":"' . self::$__testParams['title'] . '",' .
-            '"description":"' . self::$__testParams['description'] . '",' .
-            '"start_date":"' . self::$__testParams['start_date'] . '",' .
-            '"start_time":"' . self::$__testParams['start_time'] . '",' .
-            '"end_date":"' . self::$__testParams['end_date'] . '",' .
-            '"end_time":"' . self::$__testParams['end_time'] . '",' .
-            '"left_percent":' . self::$__testParams['left_percent'] . ',' .
-            '"right_percent":' . self::$__testParams['right_percent'] . ',' .
-            '"vector_color":"' . self::$__testParams['vector_color'] . '"}'
+        // Check the construction.
+        $this->assertContains(
+            '{"title":"' . self::$__testParams['title'] . '"',
+            $json
+        );
+
+        $this->assertContains(
+            '"description":"' . self::$__testParams['description'] . '"',
+            $json
+        );
+
+        $this->assertContains(
+            '"start_date":"' . self::$__testParams['start_date'] . '"',
+            $json
+        );
+
+        $this->assertContains(
+            '"start_time":"' . self::$__testParams['start_time'] . '"',
+            $json
+        );
+
+        $this->assertContains(
+            '"end_date":"' . self::$__testParams['end_date'] . '"',
+            $json
+        );
+
+        $this->assertContains(
+            '"end_time":"' . self::$__testParams['end_time'] . '"',
+            $json
+        );
+
+        $this->assertContains(
+            '"left_percent":' . self::$__testParams['left_percent'],
+            $json
+        );
+
+        $this->assertContains(
+            '"right_percent":' . self::$__testParams['right_percent'],
+            $json
+        );
+
+        $this->assertContains(
+            '"vector_color":"' . self::$__testParams['vector_color'] . '"',
+            $json
+        );
+
+        $this->assertContains(
+            '"vector_opacity":' . self::$__testParams['vector_opacity'],
+            $json
+        );
+
+        $this->assertContains(
+            '"stroke_color":"' . self::$__testParams['stroke_color'] . '"',
+            $json
+        );
+
+        $this->assertContains(
+            '"stroke_width":' . self::$__testParams['stroke_color'],
+            $json
+        );
+
+        $this->assertContains(
+            '"point_radius":' . self::$__testParams['point_radius'],
+            $json
         );
 
     }
