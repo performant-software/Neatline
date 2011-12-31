@@ -78,6 +78,7 @@
             this.inputs =                   this.form.find('#edit-form-inputs');
             this.ambiguity =                this.form.find('.date-ambiguity-container');
             this.mapFocus =                 this.form.find('.map-focus');
+            this.resetStyles =              this.form.find('.reset-styles');
 
             // Trackers.
             this._db = TAFFY();
@@ -227,6 +228,20 @@
                 'mousedown': function() {
                     self._fadeDown();
                     self._trigger('savemapfocus');
+                },
+
+                'click': function(e) {
+                    e.preventDefault();
+                }
+
+            });
+
+            // ** RESET ITEM STYLES
+            this.resetStyles.bind({
+
+                'mousedown': function() {
+                    self._fadeDown();
+                    self._postResetStyles();
                 },
 
                 'click': function(e) {
@@ -789,6 +804,32 @@
                 success: function() {
                     self._fadeUp();
                     self._trigger('reload');
+                }
+
+            });
+
+        },
+
+        /*
+         * Reset record-specific styles.
+         */
+        _postResetStyles: function() {
+
+            var self = this;
+
+            // Commit.
+            $.ajax({
+
+                url: 'resetstyles',
+                type: 'POST',
+                data: {
+                    record_id: this.recordId,
+                },
+
+                success: function() {
+                    self._fadeUp();
+                    self._trigger('savecomplete');
+                    self._getFormData();
                 }
 
             });

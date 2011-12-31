@@ -556,6 +556,31 @@ class Neatline_EditorController extends Omeka_Controller_Action
 
     /**
      * ~ AJAX ~
+     * Set all styles on a record to null.
+     *
+     * @return void
+     */
+    public function resetstylesAction()
+    {
+
+        // Supress the default Zend layout-sniffer functionality.
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        // Get the post.
+        $_post = $this->_request->getPost();
+
+        // Get the record.
+        $recordId = (int) $_post['record_id'];
+        $record = $this->_recordsTable->find($recordId);
+
+        // Reset.
+        $record->resetStyles();
+        $record->save();
+
+    }
+
+    /**
+     * ~ AJAX ~
      * Delete a Neatline-endemic data record.
      *
      * @return void

@@ -152,8 +152,17 @@
             <div class="clearfix">
                 <div class="input">
                     <div class="inline-inputs">
+                        <button class="btn icon undo reset-styles">Reset Item Styles</button>
+                        <span class="help-inline">Reset all styles to match the exhibit defaults.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="clearfix">
+                <div class="input">
+                    <div class="inline-inputs">
                         <button class="btn icon home map-focus">Fix Item-Specific Map Focus</button>
-                        <span class="help-inline">Click here to set a custom map focus for the item.</span>
+                        <span class="help-inline">Set a custom map focus for the item.</span>
                     </div>
                 </div>
             </div>

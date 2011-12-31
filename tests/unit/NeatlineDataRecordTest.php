@@ -1168,4 +1168,38 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
 
     }
 
+    /**
+     * The resetStyles() method should null out all style parameters.
+     *
+     * @return void.
+     */
+    public function testResetStyles()
+    {
+
+        // Create an item, exhibit, and record.
+        $item = $this->helper->_createItem();
+        $neatline = $this->helper->_createNeatline();
+        $record = new NeatlineDataRecord($item, $neatline);
+
+        // Set styles.
+        $record->vector_color = '#ffffff';
+        $record->vector_opacity = 50;
+        $record->stroke_color = '#ffffff';
+        $record->stroke_opacity = 50;
+        $record->stroke_width = 50;
+        $record->point_radius = 50;
+
+        // Reset.
+        $record->resetStyles();
+
+        // Check.
+        $this->assertNull($record->vector_color);
+        $this->assertNull($record->vector_opacity);
+        $this->assertNull($record->stroke_color);
+        $this->assertNull($record->stroke_opacity);
+        $this->assertNull($record->stroke_width);
+        $this->assertNull($record->point_radius);
+
+    }
+
 }
