@@ -25,16 +25,44 @@
  */
 ?>
 
-<!-- Color picker. -->
-<h5>Default Vector Color:</h5>
-<input type="text" class="color-picker miniColors" name="default-vector-color" />
+<!-- Vector color. -->
+<h5>Default Shape Color</h5>
+<input type="text" class="color-picker miniColors" name="default-vector-color" value="<?php echo $neatline->getStyle('vector_color'); ?>" />
+<hr />
 
+<!-- Stroke color. -->
+<h5>Default Line Color</h5>
+<input type="text" class="color-picker miniColors" name="default-stroke-color" value="<?php echo $neatline->getStyle('stroke_color'); ?>" />
+<hr />
+
+<!-- Vector opacity. -->
+<h5>Default Shape Opacity</h5>
+<input type="text" class="integer-dragger" name="default-vector-opacity" value="<?php echo $neatline->getStyle('vector_opacity'); ?>" />
+<hr />
+
+<!-- Stroke opacity. -->
+<h5>Default Line Opacity</h5>
+<input type="text" class="integer-dragger" name="default-stroke-opacity" value="<?php echo $neatline->getStyle('stroke_opacity'); ?>" />
+<hr />
+
+<!-- Stroke width. -->
+<h5>Default Line Thickness</h5>
+<input type="text" class="integer-dragger" name="default-stroke-width" value="<?php echo $neatline->getStyle('stroke_width'); ?>" />
+<hr />
+
+<!-- Point radius. -->
+<h5>Default Point Radius</h5>
+<input type="text" class="integer-dragger" name="default-point-radius" value="<?php echo $neatline->getStyle('point_radius'); ?>" />
 <hr />
 
 <!-- Base layer picker. -->
-<h5>Base Layer:</h5>
-<select>
+<!--
+<h5>Base Layer</h5>
+<select name="base-layer">
+    <option>[none]</option>
     <option>OpenStreetMap</option>
 </select>
+<hr />
+-->
 
 <button class="btn icon approve save">Save</button>

@@ -51,6 +51,7 @@
         _create: function() {
 
             // Getters.
+            this._window =                  $(window);
             this.form =                     this.element.find('form');
             this.saveButton =               this.form.find('input[type="submit"]');
             this.deleteButton =             this.form.find('#record-delete-button');
@@ -61,15 +62,23 @@
             this.endDate =                  this.form.find('input[name="end-date-date"]');
             this.endTime =                  this.form.find('input[name="end-date-time"]');
             this.endTime =                  this.form.find('input[name="end-date-time"]');
-            this.color =                    this.form.find('input[name="color"]');
+            this.vectorColor =              this.form.find('input[name="vector-color"]');
+            this.strokeColor =              this.form.find('input[name="stroke-color"]');
+            this.vectorOpacity =            this.form.find('input[name="vector-opacity"]');
+            this.strokeOpacity =            this.form.find('input[name="stroke-opacity"]');
+            this.strokeWidth =              this.form.find('input[name="stroke-width"]');
+            this.pointRadius =              this.form.find('input[name="point-radius"]');
             this.leftPercent =              this.form.find('input[name="left-ambiguity-percentage"]');
             this.rightPercent =             this.form.find('input[name="right-ambiguity-percentage"]');
             this.closeButton =              this.form.find('button[type="reset"]');
             this.saveButton =               this.form.find('input[type="submit"]');
             this.textInputs =               this.form.find('input[type="text"], textarea');
             this.fieldset =                 this.form.find('fieldset');
+            this.actions =                  this.form.find('#edit-form-actions');
+            this.inputs =                   this.form.find('#edit-form-inputs');
             this.ambiguity =                this.form.find('.date-ambiguity-container');
-            this.mapFocus =                this.form.find('.map-focus');
+            this.mapFocus =                 this.form.find('.map-focus');
+            this.resetStyles =              this.form.find('.reset-styles');
 
             // Trackers.
             this._db = TAFFY();
@@ -88,7 +97,16 @@
 
             var self = this;
 
-            // Gradient builder.
+            // ** DESCRIPTION.
+            this.description.bind({
+
+                'mouseup': function() {
+                    self.resizeForm();
+                }
+
+            });
+
+            // ** DATE AMBIGUITY.
             this.ambiguity.gradientbuilder({
 
                 'stopHandleDrag': function(event, obj) {
@@ -104,10 +122,10 @@
 
             });
 
-            // Color picker.
-            this.color.miniColors({
+            // ** SHAPE COLOR.
+            this.vectorColor.miniColors({
 
-                'change': function(hex, rgb) {
+                change: function(hex, rgb) {
 
                     // Trigger out, change gradient.
                     if (!self._opened) {
@@ -115,19 +133,64 @@
                     }
 
                     // Change the color.
-                    self._trigger('colorEdit', {}, { 'color': hex });
+                    self._trigger('vectorColorEdit', {}, { 'color': hex });
                     self.ambiguity.gradientbuilder('setColor', hex);
 
                 }
 
             });
 
-            // On keydown in any of the text fields, trigger change event.
-            this.textInputs.bind('keydown', function() {
-                self._trigger('formEdit');
+            // ** LINE COLOR.
+            this.strokeColor.miniColors({
+
+                // Change the color.
+                change: function(hex, rgb) {
+                    self._trigger('strokeColorEdit', {}, { 'color': hex });
+                }
+
             });
 
-            // Save button.
+            // ** SHAPE OPACITY.
+            this.vectorOpacity.integerdragger({
+                min: 0,
+                max: 100,
+                px_per_unit: 1,
+                change: function(evt, obj) {
+                    self._trigger('vectorOpacityEdit', {}, { 'value': obj.value });
+                }
+            });
+
+            // ** LINE OPACITY.
+            this.strokeOpacity.integerdragger({
+                min: 0,
+                max: 100,
+                px_per_unit: 1,
+                change: function(evt, obj) {
+                    self._trigger('strokeOpacityEdit', {}, { 'value': obj.value });
+                }
+            });
+
+            // ** LINE THICKNESS.
+            this.strokeWidth.integerdragger({
+                min: 0,
+                default: 1,
+                px_per_unit: 8,
+                change: function(evt, obj) {
+                    self._trigger('strokeWidthEdit', {}, { 'value': obj.value });
+                }
+            });
+
+            // ** POINT RADIUS.
+            this.pointRadius.integerdragger({
+                min: 1,
+                default: 6,
+                px_per_unit: 8,
+                change: function(evt, obj) {
+                    self._trigger('pointRadiusEdit', {}, { 'value': obj.value });
+                }
+            });
+
+            // ** SAVE.
             this.saveButton.bind({
 
                 'mousedown': function() {
@@ -140,7 +203,7 @@
 
             });
 
-            // Delete button.
+            // ** DELETE.
             this.deleteButton.bind({
 
                 'mousedown': function() {
@@ -159,16 +222,7 @@
 
             });
 
-            // Description text area.
-            this.description.bind({
-
-                'mouseup': function() {
-                    self.resizeForm();
-                }
-
-            });
-
-            // Map focus button.
+            // ** FIX ITEM-SPECIFIC MAP FOCUS
             this.mapFocus.bind({
 
                 'mousedown': function() {
@@ -180,6 +234,25 @@
                     e.preventDefault();
                 }
 
+            });
+
+            // ** RESET ITEM STYLES
+            this.resetStyles.bind({
+
+                'mousedown': function() {
+                    self._fadeDown();
+                    self._postResetStyles();
+                },
+
+                'click': function(e) {
+                    e.preventDefault();
+                }
+
+            });
+
+            // On keydown in any of the text fields, trigger change event.
+            this.textInputs.bind('keydown', function() {
+                self._trigger('formEdit');
             });
 
         },
@@ -319,9 +392,19 @@
         _showContainer: function() {
 
             // Display the form and zero the height.
+            this.form.css('height', 0);
             this.container.css('display', 'table-cell');
             this.element.css('visibility', 'visible');
-            this.form.css('height', 0);
+
+            // Calculate the amount of vertical space available under
+            // the bottom of the item row listing.
+            var itemBottomOffset = this.item.offset().top + this.item.height();
+            var availableHeight = this._window.height() - itemBottomOffset;
+
+            // If the form fits in the space.
+            if (this._nativeHeight <= availableHeight) {
+
+            }
 
             // Animate up the height.
             this.form.animate({
@@ -456,7 +539,12 @@
 
             // Populate inputs.
             this.title.val(this._data.title);
-            this.color.val(this._data.vector_color);
+            this.vectorColor.val(this._data.vector_color);
+            this.vectorOpacity.val(this._data.vector_opacity);
+            this.strokeColor.val(this._data.stroke_color);
+            this.strokeOpacity.val(this._data.stroke_opacity);
+            this.strokeWidth.val(this._data.stroke_width);
+            this.pointRadius.val(this._data.point_radius);
             this.leftPercent.val(this._data.left_percent);
             this.rightPercent.val(this._data.right_percent);
             this.startDate.val(this._data.start_date);
@@ -480,7 +568,8 @@
             // _opened tracker to circumvent miniColors' automatic firing of
             // the change callback on value set.
             this._opened = true;
-            this.color.miniColors('value', this._data.vector_color);
+            this.vectorColor.miniColors('value', this._data.vector_color);
+            this.strokeColor.miniColors('value', this._data.stroke_color);
             this._opened = false;
 
          },
@@ -492,7 +581,7 @@
 
             // Populate inputs.
             this.title.val('');
-            this.color.val('');
+            this.vectorColor.val('');
             this.leftPercent.val(0);
             this.rightPercent.val(100);
             this.startDate.val('');
@@ -511,7 +600,7 @@
             // _opened tracker to circumvent miniColors' automatic firing of
             // the change callback on value set.
             this._opened = true;
-            this.color.miniColors('value', this.options.colors.purple);
+            this.vectorColor.miniColors('value', this.options.colors.purple);
             this._opened = false;
 
          },
@@ -532,7 +621,12 @@
             data['end_date'] =              this.endDate.val();
             data['end_time'] =              this.endTime.val();
             data['description'] =           this.description.val();
-            data['vector_color'] =          this.color.val();
+            data['vector_color'] =          this.vectorColor.val();
+            data['vector_opacity'] =        parseInt(this.vectorOpacity.val());
+            data['stroke_color'] =          this.strokeColor.val();
+            data['stroke_opacity'] =        parseInt(this.strokeOpacity.val());
+            data['stroke_width'] =          parseInt(this.strokeWidth.val());
+            data['point_radius'] =          parseInt(this.pointRadius.val());
 
             return data;
 
@@ -716,6 +810,32 @@
 
         },
 
+        /*
+         * Reset record-specific styles.
+         */
+        _postResetStyles: function() {
+
+            var self = this;
+
+            // Commit.
+            $.ajax({
+
+                url: 'resetstyles',
+                type: 'POST',
+                data: {
+                    record_id: this.recordId,
+                },
+
+                success: function() {
+                    self._fadeUp();
+                    self._trigger('savecomplete');
+                    self._getFormData();
+                }
+
+            });
+
+        },
+
 
         /*
          * =================
@@ -729,6 +849,7 @@
         _measureForm: function() {
 
             this._nativeHeight = this.fieldset[0].scrollHeight;
+            this._actionsHeight = this.actions.height();
 
          }
 

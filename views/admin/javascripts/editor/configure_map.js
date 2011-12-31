@@ -24,30 +24,171 @@
 
     $.widget('neatline.configuremap', {
 
-        options: {
-
-        },
-
         /*
          * Get and prepare markup, run start-up routine.
+         *
+         * - return void.
          */
         _create: function() {
 
-            // Construct the dropdown manager.
+            // Get markup.
+            this.content =              $('#configure-map');
+            this.vectorColor =          this.content.find('input[name="default-vector-color"]');
+            this.strokeColor =          this.content.find('input[name="default-stroke-color"]');
+            this.vectorOpacity =        this.content.find('input[name="default-vector-opacity"]');
+            this.strokeOpacity =        this.content.find('input[name="default-stroke-opacity"]');
+            this.strokeWidth =          this.content.find('input[name="default-stroke-width"]');
+            this.pointRadius =          this.content.find('input[name="default-point-radius"]');
+            this.baseLayer =            this.content.find('select[name="base-layer"]');
+            this.saveButton =           this.content.find('button.save');
+
+            // Construct the dropdown manager and form widgets.
             this._constructDropdown();
+            this._constructFormWidgets();
 
         },
 
         /*
          * Instantiate the dropdown manager widget, define callbacks.
+         *
+         * - return void.
          */
         _constructDropdown: function() {
-
             this.element.dropdown();
+        },
+
+        /*
+         * Instantiate miniColors and integerDragger on the inputs.
+         *
+         * - return void.
+         */
+        _constructFormWidgets: function() {
+
+            var self = this;
+
+            // ** VECTOR COLOR.
+            this.vectorColor.miniColors({
+
+                // Change the color.
+                change: function(hex, rgb) {
+                    self._trigger('vectorcoloredit', {}, { 'color': hex });
+                }
+
+            });
+
+            // ** STROKE COLOR.
+            this.strokeColor.miniColors({
+
+                // Change the color.
+                change: function(hex, rgb) {
+                    self._trigger('strokecoloredit', {}, { 'color': hex });
+                }
+
+            });
+
+            // ** VECTOR OPACITY.
+            this.vectorOpacity.integerdragger({
+                min: 0,
+                max: 100,
+                px_per_unit: 1,
+                change: function(evt, obj) {
+                    self._trigger('vectoropacityedit', {}, { 'value': obj.value });
+                }
+            });
+
+            // ** STROKE OPACITY.
+            this.strokeOpacity.integerdragger({
+                min: 0,
+                max: 100,
+                px_per_unit: 1,
+                change: function(evt, obj) {
+                    self._trigger('strokeopacityedit', {}, { 'value': obj.value });
+                }
+            });
+
+            // ** STROKE WIDTH.
+            this.strokeWidth.integerdragger({
+                min: 0,
+                default: 1,
+                px_per_unit: 8,
+                change: function(evt, obj) {
+                    self._trigger('strokewidthedit', {}, { 'value': obj.value });
+                }
+            });
+
+            // ** POINT RADIUS.
+            this.pointRadius.integerdragger({
+                min: 1,
+                default: 6,
+                px_per_unit: 8,
+                change: function(evt, obj) {
+                    self._trigger('pointradiusedit', {}, { 'value': obj.value });
+                }
+            });
+
+            // ** SAVE.
+            this.saveButton.bind({
+
+                'mousedown': function() {
+                    self._postSettings();
+                },
+
+                'click': function(event) {
+                    event.preventDefault();
+                }
+
+            });
+
+        },
+
+        /*
+         * Get values out of inputs.
+         *
+         * - return object: The data.
+         */
+        _getData: function() {
+
+            var data = {};
+
+            data['exhibit_id'] =            Neatline.id;
+            data['vector_color'] =          this.vectorColor.val();
+            data['stroke_color'] =          this.strokeColor.val();
+            data['vector_opacity'] =        parseInt(this.vectorOpacity.val());
+            data['stroke_opacity'] =        parseInt(this.strokeOpacity.val());
+            data['stroke_width'] =          parseInt(this.strokeWidth.val());
+            data['point_radius'] =          parseInt(this.pointRadius.val());
+
+            return data;
+
+        },
+
+        /*
+         * Commit the settings.
+         *
+         * - return void.
+         */
+        _postSettings: function() {
+
+            var self = this;
+
+            // Get the settings.
+            var data = this._getData();
+
+            // Commit.
+            $.ajax({
+
+                url: 'mapsettings',
+                type: 'POST',
+                data: data,
+
+                success: function() {
+                    self._trigger('newdefaults');
+                }
+
+            });
 
         }
 
     });
-
 
 })( jQuery );

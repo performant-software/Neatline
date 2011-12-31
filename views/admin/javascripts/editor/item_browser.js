@@ -336,14 +336,59 @@
 
                 },
 
-                // When the color is changed.
-                'colorEdit': function(event, obj) {
+                // When the vector color is changed.
+                'vectorColorEdit': function(event, obj) {
 
                     var recordid = self._currentFormItem.attr('recordid');
 
-                    self._trigger('coloredit', {}, {
+                    self._trigger('vectorcoloredit', {}, {
                         'recordid': recordid,
                         'color': obj.color
+                    });
+
+                },
+
+                // When the stroke color is changed.
+                'strokeColorEdit': function(event, obj) {
+
+                    self._trigger('strokecoloredit', {}, {
+                        'color': obj.color
+                    });
+
+                },
+
+                // When the vector opacity is changed.
+                'vectorOpacityEdit': function(event, obj) {
+
+                    self._trigger('vectoropacityedit', {}, {
+                        'value': obj.value
+                    });
+
+                },
+
+                // When the stroke opacity is changed.
+                'strokeOpacityEdit': function(event, obj) {
+
+                    self._trigger('strokeopacityedit', {}, {
+                        'value': obj.value
+                    });
+
+                },
+
+                // When the stroke width is changed.
+                'strokeWidthEdit': function(event, obj) {
+
+                    self._trigger('strokewidthedit', {}, {
+                        'value': obj.value
+                    });
+
+                },
+
+                // When the point radius.
+                'pointRadiusEdit': function(event, obj) {
+
+                    self._trigger('pointradiusedit', {}, {
+                        'value': obj.value
                     });
 
                 },

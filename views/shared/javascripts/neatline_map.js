@@ -47,10 +47,12 @@
             },
 
             styles: {
-                default_opacity: 0.4,
-                select_point_radius: 6,
-                default_color: '#ffb80e',
-                select_stroke_color: '#ea3a3a'
+                vector_color: '#ffb80e',
+                stroke_color: '#ea3a3a',
+                vector_opacity: 0.4,
+                stroke_opacity: 0.6,
+                stroke_width: 1,
+                point_radius: 6
             }
 
         },
@@ -68,6 +70,7 @@
             this._currentEditItem =         null;
             this._currentEditLayer =        null;
             this._clickedFeature =          null;
+            this.record =                   null;
             this.requestData =              null;
 
             // Construct WMS-based map.
@@ -124,7 +127,6 @@
                 controls: [
                   new OpenLayers.Control.PanZoomBar(),
                   new OpenLayers.Control.MousePosition(),
-                  new OpenLayers.Control.LayerSwitcher(),
                   new OpenLayers.Control.Navigation(),
                   new OpenLayers.Control.ScaleLine(),
                 ],
@@ -156,7 +158,8 @@
             );
 
             // Push the base layer onto the map.
-            this.map.addLayers([this.baseLayer]);
+            // this.map.addLayers([this.baseLayer]);
+            this.map.addLayers([new OpenLayers.Layer.OSM()]);
 
             // If there is a default bounding box set for the exhibit, construct
             // a second Bounds object to use as the starting zoom target.
@@ -180,8 +183,6 @@
          */
         _instantiateImageMap: function() {
 
-
-
             // Set OL global attributes.
             OpenLayers.IMAGE_RELOAD_ATTEMTPS = 3;
             OpenLayers.Util.onImageLoadErrorColor = "transparent";
@@ -192,7 +193,6 @@
                 controls: [
                   new OpenLayers.Control.PanZoomBar(),
                   new OpenLayers.Control.MousePosition(),
-                  new OpenLayers.Control.LayerSwitcher(),
                   new OpenLayers.Control.Navigation(),
                 ],
                 maxResolution: 'auto',
@@ -294,10 +294,18 @@
 
             $.each(data, function(i, item) {
 
-                // Get item id and color, construct style.
-                var recordid = item.id;
-                var color = (item.color != '') ? item.color : self.options.styles.default_color;
-                var style = self._getStyleMap(color);
+                // Get float values for opacities.
+                item.vector_opacity = item.vector_opacity / 100;
+                item.stroke_opacity = item.stroke_opacity / 100;
+
+                // Construct the style.
+                var style = self._getStyleMap(
+                    item.vector_color,
+                    item.vector_opacity,
+                    item.stroke_color,
+                    item.stroke_opacity,
+                    item.stroke_width,
+                    item.point_radius);
 
                 // Build the layers.
                 var vectorLayer = new OpenLayers.Layer.Vector(item.title, {
@@ -322,7 +330,7 @@
                 self._db.insert({
                     itemid: item.item_id,
                     layerid: vectorLayer.id,
-                    recordid: recordid,
+                    recordid: item.id,
                     data: item,
                     layer: vectorLayer
                 });
@@ -439,14 +447,14 @@
 
             // If there is a record id, get the layer.
             if (recordid !== '') {
-                var record = this._db({ recordid: parseInt(recordid) }).first();
-                this._currentEditLayer = record.layer;
+                this.record = this._db({ recordid: parseInt(recordid) }).first();
+                this._currentEditLayer = this.record.layer;
             }
 
             // If there is an item id, try to find a layer.
             else if (itemid !== '') {
-                var record = this._db({ itemid: parseInt(itemid) }).first();
-                this._currentEditLayer = record.layer;
+                this.record = this._db({ itemid: parseInt(itemid) }).first();
+                this._currentEditLayer = this.record.layer;
             }
 
             // Store the current edit item so that the layer can be reactivatee as
@@ -670,6 +678,7 @@
 
             // Clear the item tracker, re-add the click controls.
             this._currentEditItem = null;
+            this.record = null;
             this._addClickControls();
 
 
@@ -697,18 +706,14 @@
          * Get the current extent of the viewport.
          */
         getExtentForSave: function() {
-
             return this.map.getExtent().toString();
-
         },
 
         /*
          * Get the current zoom of the viewport.
          */
         getZoomForSave: function() {
-
             return this.map.getZoom();
-
         },
 
         /*
@@ -740,37 +745,126 @@
         /*
          * Construct a StyleMap object with a given color.
          */
-        _getStyleMap: function(fillColor) {
+        _getStyleMap: function(
+            fillColor,
+            fillOpacity,
+            strokeColor,
+            strokeOpacity,
+            strokeWidth,
+            pointRadius) {
 
+            // Capture fill color.
+            var fillColor = (fillColor != null) ? fillColor :
+                this.options.styles.vector_color;
+
+            // Capture fill opacity.
+            var fillOpacity = (fillOpacity != null) ? fillOpacity :
+                this.options.styles.vector_opacity;
+
+            // Capture stroke color.
+            var strokeColor = (strokeColor != null) ? strokeColor :
+                this.options.styles.stroke_color;
+
+            // Capture stroke opacity.
+            var strokeOpacity = (strokeOpacity != null) ? strokeOpacity :
+                this.options.styles.stroke_opacity;
+
+            // Capture stroke width.
+            var strokeWidth = (strokeWidth != null) ? strokeWidth :
+                this.options.styles.stroke_width;
+
+            // Capture point radius.
+            var pointRadius = (pointRadius != null) ? pointRadius :
+                this.options.styles.point_radius;
+
+            // Construct and return the StyleMaps.
             return new OpenLayers.StyleMap({
                 'default': new OpenLayers.Style({
                     fillColor: fillColor,
-                    fillOpacity: this.options.styles.default_opacity,
-                    strokeColor: fillColor,
-                    pointRadius: this.options.styles.select_point_radius,
-                    strokeWidth: 1
+                    fillOpacity: fillOpacity,
+                    strokeColor: strokeColor,
+                    strokeOpacity: strokeOpacity,
+                    pointRadius: pointRadius,
+                    strokeWidth: strokeWidth
                 }),
                 'select': new OpenLayers.Style({
                     fillColor: fillColor,
-                    fillOpacity: this.options.styles.default_opacity,
-                    strokeColor: this.options.styles.select_stroke_color,
-                    pointRadius: this.options.styles.select_point_radius,
-                    strokeWidth: 2
+                    fillOpacity: fillOpacity,
+                    strokeColor: this.options.colors.highlight_red,
+                    strokeOpacity: strokeOpacity,
+                    pointRadius: pointRadius,
+                    strokeWidth: strokeWidth
                 }),
             });
 
         },
 
+
+        /*
+         * =================
+         * Style change handlers.
+         * =================
+         */
+
+
         /*
          * Update the feature color for the current editing layer.
          */
-        setItemColor: function(color) {
+        setCurrentRecordStyle: function(style, value) {
+
+            // If there is no extant data record, abort.
+            if (typeof this.record.data === 'undefined') {
+                return;
+            }
+
+            // Update the record tracker object.
+            this.record.data[style] = value;
 
             // Rebuild the style map.
-            this._currentEditLayer.styleMap = this._getStyleMap(color);
+            this._currentEditLayer.styleMap = this._getStyleMap(
+                this.record.data.vector_color,
+                this.record.data.vector_opacity,
+                this.record.data.stroke_color,
+                this.record.data.stroke_opacity,
+                this.record.data.stroke_width,
+                this.record.data.point_radius);
 
             // Rerender the layer to manifest the change.
             this._currentEditLayer.redraw();
+
+        },
+
+        /*
+         * Set default fill color.
+         */
+        setDefaultStyle: function(style, value) {
+
+            var self = this;
+
+            // Walk the current edit layers.
+            this._db().each(function(record, id) {
+
+                // Only push the change if the native style is null.
+                if (record.data._native_styles[style] == null) {
+
+                    // Update the record tracker object.
+                    record.data[style] = value;
+
+                    // Rebuild the style map.
+                    record.layer.styleMap = self._getStyleMap(
+                        record.data.vector_color,
+                        record.data.vector_opacity,
+                        record.data.stroke_color,
+                        record.data.stroke_opacity,
+                        record.data.stroke_width,
+                        record.data.point_radius);
+
+                    // Rerender the layer to manifest the change.
+                    record.layer.redraw();
+
+                }
+
+            });
 
         }
 

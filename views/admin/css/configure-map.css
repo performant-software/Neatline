@@ -23,4 +23,13 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache 2 License
  */
 
+#configure-map {
+    padding-top: 1.4em;
+    width: 156px;
+}
 
+#configure-map h5 {
+    font-size: 1.1em;
+    color: #4E4950;
+    line-height: 24px;
+}

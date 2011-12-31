@@ -26,23 +26,30 @@
  */
 ?>
 
+<!-- Custom page header. -->
 <?php echo $this->partial('editor/_editor_header.php', array(
     'titlePrefix' => 'Neatline Editor',
     'title' => $neatline->name
 )); ?>
 
+<!-- The top bar. -->
 <?php echo $this->partial('editor/_topbar.php', array(
-    'title' => $neatline->name
+    'neatline' => $neatline
 )); ?>
 
+<!-- The item browser. -->
 <?php echo $this->partial('editor/_item_browser.php', array(
     'tags' => $tags,
     'collections' => $collections,
     'types' => $types
 )); ?>
 
+<!-- The core Neatline partial. -->
 <?php echo $this->partial('neatline/_neatline.php', $neatlineData); ?>
 
+<!-- Templates for tooltips and geometry editing. -->
 <?php echo $this->partial('editor/_tooltips.php'); ?>
+<?php echo $this->partial('editor/_edit_geometry.php'); ?>
 
+<!-- Custom footer. -->
 <?php echo $this->partial('editor/_editor_footer.php'); ?>

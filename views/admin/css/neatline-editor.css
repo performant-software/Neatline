@@ -357,6 +357,19 @@ tr.edit-form td {
     visibility: hidden;
 }
 
+input.integer-dragger {
+    width: 50px;
+}
+
+input.color-picker {
+    width: 100px;
+}
+
+span.intdragger-tooltip {
+    font-size: 13px;
+    color: #bfbfbf;
+}
+
 
 /* Search Cancel */
 
@@ -695,41 +708,36 @@ table#items-table tr.hidden {
     top: 37px;
 }
 
-.geo-edit {
+#geo-edit {
     z-index: 999;
     position: absolute;
-    padding: 4px 5px !important;
-    font-size: 0.9em;
-    top: 5px;
-    width: 63px;
     display: none !important;
+    top: 36px;
+    right: 4px;
+}
+
+#regular-shapes {
+    z-index: 999;
+    position: absolute;
+    display: none !important;
+    top: 3px;
+    right: 126px;
+}
+
+#regular-shapes select {
+    color: black;
+    width: 100px;
+}
+
+#geo-edit button.geo-edit {
+    clear: both;
+    display: block;
+    float: right;
+    width: 70px;
+    margin: 0 0 5px 0;
     -moz-transition: 0.0s linear all !important;
     transition: 0.0s linear all !important;
     -webkit-transition: 0.0s linear all !important;
-}
-
-#rotate-button {
-    font-size: 0.85em;
-    width: 52px;
-    right: 124px;
-}
-
-#scale-button {
-    font-size: 0.85em;
-    width: 47px;
-    right: 182px;
-}
-
-#drag-button {
-    font-size: 0.85em;
-    width: 45px;
-    right: 235px;
-}
-
-#delete-button {
-    font-size: 0.85em;
-    width: 45px;
-    right: 286px;
 }
 
 

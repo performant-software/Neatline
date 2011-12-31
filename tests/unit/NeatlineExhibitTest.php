@@ -55,13 +55,11 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
     {
 
         // Create a record.
-        $exhibit = $this->helper->_createNeatline();
+        $exhibit = new NeatlineExhibit();
 
         // Set.
-        $exhibit->added =                       'now';
         $exhibit->name =                        'name';
         $exhibit->map_id =                      1;
-        $exhibit->image_id =                    1;
         $exhibit->top_element =                 'map';
         $exhibit->items_h_pos =                 'right';
         $exhibit->items_v_pos =                 'top';
@@ -72,12 +70,22 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
         $exhibit->default_map_bounds =          'BOUND()';
         $exhibit->default_map_zoom =            1;
         $exhibit->default_focus_date =          'date';
+        $exhibit->default_vector_color =        '#ffffff';
+        $exhibit->default_vector_opacity =      50;
+        $exhibit->default_stroke_opacity =      50;
+        $exhibit->default_stroke_color =        '#ffffff';
+        $exhibit->default_stroke_width =        3;
+        $exhibit->default_point_radius =        3;
+        $exhibit->save();
+
+        // Re-get the exhibit object.
+        $exhibit = $this->_exhibitsTable->find(1);
 
         // Get.
-        $this->assertEquals($exhibit->added, 'now');
+        $this->assertNotNull($exhibit->added);
         $this->assertEquals($exhibit->name, 'name');
         $this->assertEquals($exhibit->map_id, 1);
-        $this->assertEquals($exhibit->image_id, 1);
+        $this->assertNull($exhibit->image_id, 1);
         $this->assertEquals($exhibit->top_element, 'map');
         $this->assertEquals($exhibit->items_h_pos, 'right');
         $this->assertEquals($exhibit->items_v_pos, 'top');
@@ -88,6 +96,12 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
         $this->assertEquals($exhibit->default_map_bounds, 'BOUND()');
         $this->assertEquals($exhibit->default_map_zoom, 1);
         $this->assertEquals($exhibit->default_focus_date, 'date');
+        $this->assertEquals($exhibit->default_vector_color, '#ffffff');
+        $this->assertEquals($exhibit->default_vector_opacity, 50);
+        $this->assertEquals($exhibit->default_stroke_opacity, 50);
+        $this->assertEquals($exhibit->default_stroke_color, '#ffffff');
+        $this->assertEquals($exhibit->default_stroke_width, 3);
+        $this->assertEquals($exhibit->default_point_radius, 3);
 
     }
 
@@ -428,6 +442,141 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
 
         // Should not save.
         $this->assertFalse($exhibit->save());
+
+    }
+
+    /**
+     * setStyle() should save a row value if the passed value is different
+     * from the system default.
+     *
+     * @return void.
+     */
+    public function testSetStyleWithNovelValues()
+    {
+
+        // Create a record.
+        $exhibit = $this->helper->_createNeatline();
+
+        // Set system styling defaults.
+        set_option('vector_color', '#5033de');
+        set_option('stroke_color', '#1e2ee6');
+        set_option('vector_opacity', 20);
+        set_option('stroke_opacity', 70);
+        set_option('stroke_width', 4);
+        set_option('point_radius', 6);
+
+        // Set.
+        $this->assertTrue($exhibit->setStyle('vector_color', '#ffffff'));
+        $this->assertTrue($exhibit->setStyle('vector_opacity', 5));
+        $this->assertTrue($exhibit->setStyle('stroke_color', '#ffffff'));
+        $this->assertTrue($exhibit->setStyle('stroke_opacity', 5));
+        $this->assertTrue($exhibit->setStyle('stroke_width', 5));
+        $this->assertTrue($exhibit->setStyle('point_radius', 5));
+
+        // Check.
+        $this->assertEquals($exhibit->default_vector_color, '#ffffff');
+        $this->assertEquals($exhibit->default_vector_opacity, 5);
+        $this->assertEquals($exhibit->default_stroke_color, '#ffffff');
+        $this->assertEquals($exhibit->default_stroke_opacity, 5);
+        $this->assertEquals($exhibit->default_stroke_width, 5);
+        $this->assertEquals($exhibit->default_point_radius, 5);
+
+    }
+
+    /**
+     * setStyle() should not save a row value if the passed value is the
+     * same as the system default.
+     *
+     * @return void.
+     */
+    public function testSetStyleWithNonNovelDuplicateValues()
+    {
+
+        // Create a record.
+        $exhibit = $this->helper->_createNeatline();
+
+        // Set.
+        $this->assertFalse($exhibit->setStyle('vector_color', get_option('vector_color')));
+        $this->assertFalse($exhibit->setStyle('vector_opacity', get_option('vector_opacity')));
+        $this->assertFalse($exhibit->setStyle('stroke_color', get_option('stroke_color')));
+        $this->assertFalse($exhibit->setStyle('stroke_opacity', get_option('stroke_opacity')));
+        $this->assertFalse($exhibit->setStyle('stroke_width', get_option('stroke_width')));
+        $this->assertFalse($exhibit->setStyle('point_radius', get_option('point_radius')));
+
+        // Check.
+        $this->assertNull($exhibit->default_vector_color);
+        $this->assertNull($exhibit->default_vector_opacity);
+        $this->assertNull($exhibit->default_stroke_color);
+        $this->assertNull($exhibit->default_stroke_opacity);
+        $this->assertNull($exhibit->default_stroke_width);
+        $this->assertNull($exhibit->default_point_radius);
+
+    }
+
+    /**
+     * getStyle() should return the exhibit-specific default when one exists.
+     *
+     * @return void.
+     */
+    public function testGetStyleWithExhibitDefaults()
+    {
+
+        // Create a record.
+        $exhibit = $this->helper->_createNeatline();
+
+        // Set system styling defaults.
+        set_option('vector_color', '#5033de');
+        set_option('stroke_color', '#1e2ee6');
+        set_option('vector_opacity', 20);
+        set_option('stroke_opacity', 70);
+        set_option('stroke_width', 4);
+        set_option('point_radius', 6);
+
+        // Set exhibit defaults.
+        $exhibit->default_vector_color = '#ffffff';
+        $exhibit->default_stroke_color = '#ffffff';
+        $exhibit->default_vector_opacity = 5;
+        $exhibit->default_stroke_opacity = 5;
+        $exhibit->default_stroke_width = 5;
+        $exhibit->default_point_radius = 5;
+
+        // Check.
+        $this->assertEquals($exhibit->getStyle('vector_color'), '#ffffff');
+        $this->assertEquals($exhibit->getStyle('vector_opacity'), 5);
+        $this->assertEquals($exhibit->getStyle('stroke_color'), '#ffffff');
+        $this->assertEquals($exhibit->getStyle('stroke_opacity'), 5);
+        $this->assertEquals($exhibit->getStyle('stroke_width'), 5);
+        $this->assertEquals($exhibit->getStyle('point_radius'), 5);
+
+    }
+
+    /**
+     * getStyle() should return the system default when an exhibit-specific
+     * default does not exist.
+     *
+     * @return void.
+     */
+    public function testGetStyleWithoutExhibitDefaults()
+    {
+
+        // Create a record.
+        $exhibit = $this->helper->_createNeatline();
+
+        // Set system styling defaults.
+        set_option('vector_color', '#5033de');
+        set_option('stroke_color', '#1e2ee6');
+        set_option('vector_opacity', 20);
+        set_option('stroke_opacity', 70);
+        set_option('stroke_width', 4);
+        set_option('point_radius', 6);
+
+        // Check.
+        $this->assertEquals($exhibit->getStyle('vector_color'), '#5033de');
+        $this->assertEquals($exhibit->getStyle('vector_opacity'), 20);
+        $this->assertEquals($exhibit->getStyle('stroke_color'), '#1e2ee6');
+        $this->assertEquals($exhibit->getStyle('stroke_opacity'), 70);
+        $this->assertEquals($exhibit->getStyle('stroke_width'), 4);
+        $this->assertEquals($exhibit->getStyle('point_radius'), 6);
 
     }
 

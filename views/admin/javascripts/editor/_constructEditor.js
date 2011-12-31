@@ -26,6 +26,7 @@ jQuery(document).ready(function($) {
     var neatlineContainer =         $('#neatline');
     var editorContainer =           $('#item-browser');
     var configureLayoutButton =     $('#configure-layout-button');
+    var configureMapButton =        $('#configure-map-button');
 
 
     /*
@@ -51,7 +52,12 @@ jQuery(document).ready(function($) {
                 'timelineeventclick': function(event, obj) {
 
                     // Show the edit form.
-                    editorContainer.itembrowser('showFormByRecordId', obj.recordid, true, false, true);
+                    editorContainer.itembrowser(
+                        'showFormByRecordId',
+                        obj.recordid,
+                        true,
+                        false,
+                        true);
 
                 },
 
@@ -59,7 +65,12 @@ jQuery(document).ready(function($) {
                 'mapfeatureclick': function(event, obj) {
 
                     // Show the edit form.
-                    editorContainer.itembrowser('showFormByRecordId', obj.recordid, false, true, true);
+                    editorContainer.itembrowser(
+                        'showFormByRecordId',
+                        obj.recordid,
+                        false,
+                        true,
+                        true);
 
                 },
 
@@ -67,7 +78,12 @@ jQuery(document).ready(function($) {
                 'undateditemclick': function(event, obj) {
 
                     // Show the edit form.
-                    editorContainer.itembrowser('showFormByRecordId', obj.recordid, true, true, obj.scrollItems);
+                    editorContainer.itembrowser(
+                        'showFormByRecordId',
+                        obj.recordid,
+                        true,
+                        true,
+                        obj.scrollItems);
 
                 },
 
@@ -136,18 +152,51 @@ jQuery(document).ready(function($) {
 
         },
 
-        // When the color picker value is changed, push the new color onto
+        // When the fill color picker value is changed, push the new color onto
         // the item's vectors.
-        'coloredit': function(event, obj) {
+        'vectorcoloredit': function(event, obj) {
+            neatlineContainer.neatline('setItemVectorColor', obj.color, obj.recordid);
+        },
 
-            neatlineContainer.neatline('setItemColor', obj.color, obj.recordid);
+        // When the stroke color picker value is changed, push the new color onto
+        // the item's vectors.
+        'strokecoloredit': function(event, obj) {
+            neatlineContainer.neatline('setItemStrokeColor', obj.color);
+        },
 
+        // When the vector opacity dragger is changed, push the value onto the
+        // item's vectors.
+        'vectoropacityedit': function(event, obj) {
+            neatlineContainer.neatline('setItemVectorOpacity', obj.value);
+        },
+
+        // When the stroke opacity dragger is changed, push the value onto the
+        // item's vectors.
+        'strokeopacityedit': function(event, obj) {
+            neatlineContainer.neatline('setItemStrokeOpacity', obj.value);
+        },
+
+        // When the stroke width dragger is changed, push the value onto the
+        // item's vectors.
+        'strokewidthedit': function(event, obj) {
+            neatlineContainer.neatline('setItemStrokeWidth', obj.value);
+        },
+
+        // When the point radius dragger is changed, push the value onto the
+        // item's vectors.
+        'pointradiusedit': function(event, obj) {
+            neatlineContainer.neatline('setItemPointRadius', obj.value);
         },
 
         // When date ambiguity sliders are changed in an item edit form.
         'ambiguityChange': function(event, obj) {
 
-            neatlineContainer.neatline('setDateAmbiguity', obj.recordid, obj.color, obj.leftPercent, obj.rightPercent);
+            neatlineContainer.neatline(
+                'setDateAmbiguity',
+                obj.recordid,
+                obj.color,
+                obj.leftPercent,
+                obj.rightPercent);
 
         },
 
@@ -199,7 +248,11 @@ jQuery(document).ready(function($) {
             var timelineCenter = neatlineContainer.neatline('getTimelineCenter');
 
             // Save.
-            configureLayoutButton.configurelayout('savePositions', mapExtent, mapZoom, timelineCenter);
+            configureLayoutButton.configurelayout(
+                'savePositions',
+                mapExtent,
+                mapZoom,
+                timelineCenter);
 
         },
 
@@ -218,6 +271,46 @@ jQuery(document).ready(function($) {
 
         // When new starting positions are fixed, do success flash.
         'newpositions': function() {
+            neatlineContainer.neatline('saveSuccess');
+        }
+
+    });
+
+    // Configure map.
+    configureMapButton.configuremap({
+
+        // Manifest new default vector fill color.
+        'vectorcoloredit': function(event, obj) {
+            neatlineContainer.neatline('setDefaultVectorColor', obj.color);
+        },
+
+        // Manifest new default stroke color.
+        'strokecoloredit': function(event, obj) {
+            neatlineContainer.neatline('setDefaultStrokeColor', obj.color);
+        },
+
+        // Manifest new default vector opacity.
+        'vectoropacityedit': function(event, obj) {
+            neatlineContainer.neatline('setDefaultVectorOpacity', obj.value);
+        },
+
+        // Manifest new default stroke opacity.
+        'strokeopacityedit': function(event, obj) {
+            neatlineContainer.neatline('setDefaultStrokeOpacity', obj.value);
+        },
+
+        // Manifest new default stroke width.
+        'strokewidthedit': function(event, obj) {
+            neatlineContainer.neatline('setDefaultStrokeWidth', obj.value);
+        },
+
+        // Manifest new default point radius.
+        'pointradiusedit': function(event, obj) {
+            neatlineContainer.neatline('setDefaultPointRadius', obj.value);
+        },
+
+        // When new defaults have been successfully committed.
+        'newdefaults': function(event, obj) {
             neatlineContainer.neatline('saveSuccess');
         }
 

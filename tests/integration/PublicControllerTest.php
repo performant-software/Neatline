@@ -56,41 +56,7 @@ class Neatline_PublicControllerTest extends Omeka_Test_AppTestCase
     public function testShowWithoutMap()
     {
 
-        // // Create entities.
-        // $exhibit = $this->helper->_createNeatline();
 
-        // // Hit the route and capture the view.
-        // $this->dispatch('neatline/' . $exhibit->id);
-        // $this->assertResponseCode(200);
-        // $v = __v();
-
-        // // Check for the template variables.
-        // $this->assertNotNull($v->neatline);
-        // $this->assertNotNull($v->neatlineData);
-        // $this->assertNull($v->map);
-
-        // // Check the construction of the data array.
-        // $this->assertTrue($v->neatlineData['public']);
-
-        // $this->assertEquals(
-        //     $v->neatlineData['neatline']->id,
-        //     $exhibit->id
-        // );
-
-        // $this->assertEquals(
-        //     $v->neatlineData['dataSources']['timeline'],
-        //     neatline_getTimelineDataUrl($exhibit->id)
-        // );
-
-        // $this->assertEquals(
-        //     $v->neatlineData['dataSources']['map'],
-        //     neatline_getMapDataUrl($exhibit->id)
-        // );
-
-        // $this->assertEquals(
-        //     $v->neatlineData['dataSources']['undated'],
-        //     neatline_getUndatedItemsDataUrl($exhibit->id)
-        // );
 
     }
 

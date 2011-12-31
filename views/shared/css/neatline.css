@@ -101,7 +101,7 @@ table th, table td {
 }
 
 #undated-items-list-container tr.item-row {
-    font-size: 12px;
+    font-size: 15px;
     color: #515151;
     cursor: pointer;
     background-color: #FFFEF8;
@@ -124,6 +124,7 @@ table th, table td {
 #undated-items-list-container tr.item-details td {
     white-space: normal;
     padding: 0;
+    font-size: 14px;
 }
 
 #undated-items-list-container span.item-title-fader {

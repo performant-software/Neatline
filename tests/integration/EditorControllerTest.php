@@ -39,6 +39,11 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         'end_date' => 'April 23, 1616',
         'end_time' => '6:00 AM',
         'vector_color' => '#ffffff',
+        'stroke_color' => '#000000',
+        'vector_opacity' => 60,
+        'stroke_opacity' => 40,
+        'stroke_width' => 5,
+        'point_radius' => 7,
         'left_percent' => 0,
         'right_percent' => 100,
         'geocoverage' => '[POINT(-1.0, 1.0)]',
@@ -459,12 +464,12 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
     }
 
     /**
-     * When there is a Neatline-native data record, the /form route should output
-     * a well-formed JSON object with the correct record attributes.
+     * When there is a Neatline-native data record with data, the /form route
+     * should output a well-formed JSON object with the correct record attributes.
      *
      * @return void.
      */
-    public function testFormWithExistingRecord()
+    public function testFormWithExistingRecordWithData()
     {
 
         // Create item, exhibit, and record.
@@ -472,22 +477,25 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $neatline = $this->helper->_createNeatline();
         $record = new NeatlineDataRecord($item, $neatline);
 
-        // Save form data with update values.
-        $this->_recordsTable->saveItemFormData(
-            $record,
-            self::$__testParams['title'],
-            self::$__testParams['description'],
-            self::$__testParams['start_date'],
-            self::$__testParams['start_time'],
-            self::$__testParams['end_date'],
-            self::$__testParams['end_time'],
-            self::$__testParams['vector_color'],
-            self::$__testParams['left_percent'],
-            self::$__testParams['right_percent'],
-            self::$__testParams['geocoverage'],
-            self::$__testParams['space_active'],
-            self::$__testParams['time_active']
-        );
+        // Populate fields.
+        $record->title =            self::$__testParams['title'];
+        $record->description =      self::$__testParams['description'];
+        $record->start_date =       self::$__testParams['start_date'];
+        $record->start_time =       self::$__testParams['start_time'];
+        $record->end_date =         self::$__testParams['end_date'];
+        $record->end_time =         self::$__testParams['end_time'];
+        $record->vector_color =     self::$__testParams['vector_color'];
+        $record->stroke_color =     self::$__testParams['stroke_color'];
+        $record->vector_opacity =   self::$__testParams['vector_opacity'];
+        $record->stroke_opacity =   self::$__testParams['stroke_opacity'];
+        $record->stroke_width =     self::$__testParams['stroke_width'];
+        $record->point_radius =     self::$__testParams['point_radius'];
+        $record->left_percent =     self::$__testParams['left_percent'];
+        $record->right_percent =    self::$__testParams['right_percent'];
+        $record->geocoverage =      self::$__testParams['geocoverage'];
+        $record->space_active =     self::$__testParams['space_active'];
+        $record->time_active =      self::$__testParams['time_active'];
+        $record->save();
 
         // Form the POST for a space change.
         $this->request->setMethod('GET')
@@ -502,18 +510,165 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->dispatch('neatline-exhibits/editor/form');
         $response = $this->getResponse()->getBody('default');
 
-        // Test the raw construction with no available DC values.
-        $this->assertEquals(
-            $response,
-            '{"title":"' .          self::$__testParams['title'] . '",' .
-            '"description":"' .     self::$__testParams['description'] . '",' .
-            '"start_date":"' .      self::$__testParams['start_date'] . '",' .
-            '"start_time":"' .      self::$__testParams['start_time'] . '",' .
-            '"end_date":"' .        self::$__testParams['end_date'] . '",' .
-            '"end_time":"' .        self::$__testParams['end_time'] . '",' .
-            '"left_percent":' .     self::$__testParams['left_percent'] . ',' .
-            '"right_percent":' .    self::$__testParams['right_percent'] . ',' .
-            '"vector_color":"' .    self::$__testParams['vector_color'] . '"}'
+        // Test the construction.
+        $this->assertContains(
+            '"title":"' . self::$__testParams['title'] . '"',
+            $response
+        );
+
+        $this->assertContains(
+            '"description":"' . self::$__testParams['description'] . '"',
+            $response
+        );
+
+        $this->assertContains(
+            '"start_date":"' . self::$__testParams['start_date'] . '"',
+            $response
+        );
+
+        $this->assertContains(
+            '"start_time":"' . self::$__testParams['start_time'] . '"',
+            $response
+        );
+
+        $this->assertContains(
+            '"end_date":"' . self::$__testParams['end_date'] . '"',
+            $response
+        );
+
+        $this->assertContains(
+            '"end_time":"' . self::$__testParams['end_time'] . '"',
+            $response
+        );
+
+        $this->assertContains(
+            '"left_percent":' . self::$__testParams['left_percent'],
+            $response
+        );
+
+        $this->assertContains(
+            '"right_percent":' . self::$__testParams['right_percent'],
+            $response
+        );
+
+        $this->assertContains(
+            '"vector_color":"' . self::$__testParams['vector_color'] . '"',
+            $response
+        );
+
+        $this->assertContains(
+            '"vector_opacity":' . self::$__testParams['vector_opacity'],
+            $response
+        );
+
+        $this->assertContains(
+            '"stroke_color":"' . self::$__testParams['stroke_color'] . '"',
+            $response
+        );
+
+        $this->assertContains(
+            '"stroke_width":' . self::$__testParams['stroke_width'],
+            $response
+        );
+
+        $this->assertContains(
+            '"point_radius":' . self::$__testParams['point_radius'],
+            $response
+        );
+
+    }
+
+    /**
+     * When there is a Neatline-native data record without data, the /form route
+     * should output a well-formed JSON object with the correct default attributes.
+     *
+     * @return void.
+     */
+    public function testFormWithExistingRecordWithoutData()
+    {
+
+        // Create item, exhibit, and record.
+        $item = $this->helper->_createItem();
+        $neatline = $this->helper->_createNeatline();
+        $record = new NeatlineDataRecord($item, $neatline);
+
+        // Form the POST for a space change.
+        $this->request->setMethod('GET')
+            ->setParams(array(
+                'item_id' => $item->id,
+                'neatline_id' => $neatline->id,
+                'record_id' => $record->id
+            )
+        );
+
+        // Hit the route and capture the response.
+        $this->dispatch('neatline-exhibits/editor/form');
+        $response = $this->getResponse()->getBody('default');
+
+        // Test the construction.
+        $this->assertContains(
+            '"title":""',
+            $response
+        );
+
+        $this->assertContains(
+            '"description":""',
+            $response
+        );
+
+        $this->assertContains(
+            '"start_date":""',
+            $response
+        );
+
+        $this->assertContains(
+            '"start_time":""',
+            $response
+        );
+
+        $this->assertContains(
+            '"end_date":""',
+            $response
+        );
+
+        $this->assertContains(
+            '"end_time":""',
+            $response
+        );
+
+        $this->assertContains(
+            '"left_percent":0',
+            $response
+        );
+
+        $this->assertContains(
+            '"right_percent":100',
+            $response
+        );
+
+        $this->assertContains(
+            '"vector_color":"' . get_option('vector_color') . '"',
+            $response
+        );
+
+        $this->assertContains(
+            '"vector_opacity":' . get_option('vector_opacity'),
+            $response
+        );
+
+        $this->assertContains(
+            '"stroke_color":"' . get_option('stroke_color') . '"',
+            $response
+        );
+
+        $this->assertContains(
+            '"stroke_width":' . get_option('stroke_width'),
+            $response
+        );
+
+        $this->assertContains(
+            '"point_radius":' . get_option('point_radius'),
+            $response
         );
 
     }
@@ -558,62 +713,69 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $response = $this->getResponse()->getBody('default');
 
         // Check for proper construction.
-        $this->assertEquals(
-            $response,
-            '{"title":"Test Title",' .
-            '"description":"Test description.",' .
-            '"start_date":"",' .
-            '"start_time":"",' .
-            '"end_date":"",' .
-            '"end_time":"",' .
-            '"left_percent":0,' .
-            '"right_percent":100,' .
-            '"vector_color":"#724e85"}'
+        $this->assertContains(
+            '"title":"Test Title"',
+            $response
         );
 
-    }
-
-    /**
-     * When there is a Neatline-native data record that does not have a parent item, the
-     * /form route should output a well-formed JSON object that defaults in correct ambiguity
-     * and color values.
-     *
-     * @return void.
-     */
-    public function testFormWithNeatlineEndemicRecord()
-    {
-
-        // Create item and exhibit.
-        $item = $this->helper->_createItem();
-        $neatline = $this->helper->_createNeatline();
-        $record = new NeatlineDataRecord(null, $neatline);
-        $record->save();
-
-        // Form the POST for a space change.
-        $this->request->setMethod('GET')
-            ->setParams(array(
-                'item_id' => '',
-                'neatline_id' => $neatline->id,
-                'record_id' => $record->id
-            )
+        $this->assertContains(
+            '"description":"Test description."',
+            $response
         );
 
-        // Hit the route and capture the response.
-        $this->dispatch('neatline-exhibits/editor/form');
-        $response = $this->getResponse()->getBody('default');
+        $this->assertContains(
+            '"start_date":""',
+            $response
+        );
 
-        // Check for proper construction.
-        $this->assertEquals(
-            $response,
-            '{"title":"",' .
-            '"description":"",' .
-            '"start_date":"",' .
-            '"start_time":"",' .
-            '"end_date":"",' .
-            '"end_time":"",' .
-            '"left_percent":0,' .
-            '"right_percent":100,' .
-            '"vector_color":"#724e85"}'
+        $this->assertContains(
+            '"start_time":""',
+            $response
+        );
+
+        $this->assertContains(
+            '"end_date":""',
+            $response
+        );
+
+        $this->assertContains(
+            '"end_time":""',
+            $response
+        );
+
+        $this->assertContains(
+            '"left_percent":0',
+            $response
+        );
+
+        $this->assertContains(
+            '"right_percent":100',
+            $response
+        );
+
+        $this->assertContains(
+            '"vector_color":"' . get_option('vector_color') . '"',
+            $response
+        );
+
+        $this->assertContains(
+            '"vector_opacity":' . get_option('vector_opacity'),
+            $response
+        );
+
+        $this->assertContains(
+            '"stroke_color":"' . get_option('stroke_color') . '"',
+            $response
+        );
+
+        $this->assertContains(
+            '"stroke_width":' . get_option('stroke_width'),
+            $response
+        );
+
+        $this->assertContains(
+            '"point_radius":' . get_option('point_radius'),
+            $response
         );
 
     }
@@ -651,7 +813,12 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
                 'end_time' =>       self::$__testParams['end_time'],
                 'left_percent' =>   self::$__testParams['left_percent'],
                 'right_percent' =>  self::$__testParams['right_percent'],
-                'vector_color' =>   self::$__testParams['vector_color']
+                'vector_color' =>   self::$__testParams['vector_color'],
+                'stroke_color' =>   self::$__testParams['stroke_color'],
+                'vector_opacity' => self::$__testParams['vector_opacity'],
+                'stroke_opacity' => self::$__testParams['stroke_opacity'],
+                'stroke_width' =>   self::$__testParams['stroke_width'],
+                'point_radius' =>   self::$__testParams['point_radius']
             )
         );
 
@@ -666,10 +833,10 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->assertEquals($this->_recordsTable->count(), 1);
 
         // Test the raw construction with no available DC values.
-        $this->assertEquals(
-            $response,
-            '{"statuses":{"space":true,"time":true},"recordid":' . $record->id . '}'
-        );
+        $this->assertContains('"statuses":', $response);
+        $this->assertContains('"space":true', $response);
+        $this->assertContains('"time":true', $response);
+        $this->assertContains('"recordid":' . $record->id, $response);
 
         // Get the record and check the attributes.
         $record = $this->_recordsTable->find($record->id);
@@ -707,6 +874,31 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->assertEquals(
             $record->vector_color,
             self::$__testParams['vector_color']
+        );
+
+        $this->assertEquals(
+            $record->stroke_color,
+            self::$__testParams['stroke_color']
+        );
+
+        $this->assertEquals(
+            $record->vector_opacity,
+            self::$__testParams['vector_opacity']
+        );
+
+        $this->assertEquals(
+            $record->stroke_opacity,
+            self::$__testParams['stroke_opacity']
+        );
+
+        $this->assertEquals(
+            $record->stroke_width,
+            self::$__testParams['stroke_width']
+        );
+
+        $this->assertEquals(
+            $record->point_radius,
+            self::$__testParams['point_radius']
         );
 
         $this->assertEquals(
@@ -766,7 +958,12 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
                 'end_time' =>       self::$__testParams['end_time'],
                 'left_percent' =>   self::$__testParams['left_percent'],
                 'right_percent' =>  self::$__testParams['right_percent'],
-                'vector_color' =>   self::$__testParams['vector_color']
+                'vector_color' =>   self::$__testParams['vector_color'],
+                'stroke_color' =>   self::$__testParams['stroke_color'],
+                'vector_opacity' => self::$__testParams['vector_opacity'],
+                'stroke_opacity' => self::$__testParams['stroke_opacity'],
+                'stroke_width' =>   self::$__testParams['stroke_width'],
+                'point_radius' =>   self::$__testParams['point_radius']
             )
         );
 
@@ -781,10 +978,10 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->assertEquals($this->_recordsTable->count(), 1);
 
         // Test the raw construction with no available DC values.
-        $this->assertEquals(
-            $response,
-            '{"statuses":{"space":true,"time":true},"recordid":1}'
-        );
+        $this->assertContains('"statuses":', $response);
+        $this->assertContains('"space":true', $response);
+        $this->assertContains('"time":true', $response);
+        $this->assertContains('"recordid":1', $response);
 
         // Get the record and check the attributes.
         $record = $this->_recordsTable->getRecordByItemAndExhibit($item, $neatline);
@@ -822,6 +1019,31 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->assertEquals(
             $record->vector_color,
             self::$__testParams['vector_color']
+        );
+
+        $this->assertEquals(
+            $record->stroke_color,
+            self::$__testParams['stroke_color']
+        );
+
+        $this->assertEquals(
+            $record->vector_opacity,
+            self::$__testParams['vector_opacity']
+        );
+
+        $this->assertEquals(
+            $record->stroke_opacity,
+            self::$__testParams['stroke_opacity']
+        );
+
+        $this->assertEquals(
+            $record->stroke_width,
+            self::$__testParams['stroke_width']
+        );
+
+        $this->assertEquals(
+            $record->point_radius,
+            self::$__testParams['point_radius']
         );
 
         $this->assertEquals(
@@ -883,7 +1105,12 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
                 'end_time' =>       self::$__testParams['end_time'],
                 'left_percent' =>   self::$__testParams['left_percent'],
                 'right_percent' =>  self::$__testParams['right_percent'],
-                'vector_color' =>   self::$__testParams['vector_color']
+                'vector_color' =>   self::$__testParams['vector_color'],
+                'stroke_color' =>   self::$__testParams['stroke_color'],
+                'vector_opacity' => self::$__testParams['vector_opacity'],
+                'stroke_opacity' => self::$__testParams['stroke_opacity'],
+                'stroke_width' =>   self::$__testParams['stroke_width'],
+                'point_radius' =>   self::$__testParams['point_radius']
             )
         );
 
@@ -897,11 +1124,11 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         // 1 record.
         $this->assertEquals($this->_recordsTable->count(), 1);
 
-        // Test the raw construction with no available DC values.
-        $this->assertEquals(
-            $response,
-            '{"statuses":{"space":true,"time":true},"recordid":' . $record->id . '}'
-        );
+        // Test the raw construction with 
+        $this->assertContains('"statuses":', $response);
+        $this->assertContains('"space":true', $response);
+        $this->assertContains('"time":true', $response);
+        $this->assertContains('"recordid":' . $record->id, $response);
 
         // Get the record and check the attributes.
         $record = $this->_recordsTable->getRecordByItemAndExhibit($item, $neatline);
@@ -942,8 +1169,37 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         );
 
         $this->assertEquals(
+            $record->stroke_color,
+            self::$__testParams['stroke_color']
+        );
+
+        $this->assertEquals(
+            $record->vector_opacity,
+            self::$__testParams['vector_opacity']
+        );
+
+        $this->assertEquals(
+            $record->stroke_opacity,
+            self::$__testParams['stroke_opacity']
+        );
+
+        $this->assertEquals(
+            $record->stroke_width,
+            self::$__testParams['stroke_width']
+        );
+
+        $this->assertEquals(
+            $record->point_radius,
+            self::$__testParams['point_radius']
+        );
+
+        $this->assertEquals(
             $record->geocoverage,
             self::$__testParams['geocoverage']
+        );
+
+        $this->assertNotNull(
+            $record->geocoverage
         );
 
         $this->assertEquals(
@@ -1004,7 +1260,12 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
                 'end_time' =>       self::$__testParams['end_time'],
                 'left_percent' =>   self::$__testParams['left_percent'],
                 'right_percent' =>  self::$__testParams['right_percent'],
-                'vector_color' =>   self::$__testParams['vector_color']
+                'vector_color' =>   self::$__testParams['vector_color'],
+                'stroke_color' =>   self::$__testParams['stroke_color'],
+                'vector_opacity' => self::$__testParams['vector_opacity'],
+                'stroke_opacity' => self::$__testParams['stroke_opacity'],
+                'stroke_width' =>   self::$__testParams['stroke_width'],
+                'point_radius' =>   self::$__testParams['point_radius']
             )
         );
 
@@ -1016,6 +1277,216 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
 
         // 1 record.
         $this->assertEquals($this->_recordsTable->count(), 1);
+
+    }
+
+    /**
+     * If there is a null geocoverage field and a hit to /save commits novel
+     * coverage data, the space_active tracker on an existing record should
+     * be flipped on.
+     *
+     * @return void.
+     */
+    public function testSpaceStatusActivationOnSaveWithExistingRecord()
+    {
+
+        // Create exhibit and item.
+        $neatline = $this->helper->_createNeatline();
+        $item = $this->helper->_createItem();
+        $record = new NeatlineDataRecord($item, $neatline);
+        $record->save();
+
+        // At the start, both trackers false.
+        $this->assertFalse((bool) $record->space_active);
+        $this->assertFalse((bool) $record->time_active);
+
+        // Form the POST with new geocoverage data.
+        $this->request->setMethod('POST')
+            ->setPost(array(
+                'item_id' =>        $item->id,
+                'record_id' =>      $record->id,
+                'neatline_id' =>    $neatline->id,
+                'space_active' =>   (string) self::$__testParams['space_active'],
+                'time_active' =>    (string) self::$__testParams['time_active'],
+                'geocoverage' =>    self::$__testParams['geocoverage'],
+                'title' =>          self::$__testParams['title'],
+                'description' =>    self::$__testParams['description'],
+                'start_date' =>     '',
+                'start_time' =>     self::$__testParams['start_time'],
+                'end_date' =>       self::$__testParams['end_date'],
+                'end_time' =>       self::$__testParams['end_time'],
+                'left_percent' =>   self::$__testParams['left_percent'],
+                'right_percent' =>  self::$__testParams['right_percent'],
+                'vector_color' =>   self::$__testParams['vector_color'],
+                'stroke_color' =>   self::$__testParams['stroke_color'],
+                'vector_opacity' => self::$__testParams['vector_opacity'],
+                'stroke_opacity' => self::$__testParams['stroke_opacity'],
+                'stroke_width' =>   self::$__testParams['stroke_width'],
+                'point_radius' =>   self::$__testParams['point_radius']
+            )
+        );
+
+        // Hit the route.
+        $this->dispatch('neatline-exhibits/editor/save');
+
+        // Get the record and check the attributes.
+        $record = $this->_recordsTable->getRecordByItemAndExhibit($item, $neatline);
+        $this->assertTrue((bool) $record->space_active);
+        $this->assertFalse((bool) $record->time_active);
+
+    }
+
+    /**
+     * If there is a null geocoverage field and a hit to /save commits novel
+     * coverage data, the space_active tracker on a new record should be flipped on.
+     *
+     * @return void.
+     */
+    public function testSpaceStatusActivationOnSaveWithoutExistingRecord()
+    {
+
+        // Create exhibit and item.
+        $neatline = $this->helper->_createNeatline();
+        $item = $this->helper->_createItem();
+
+        // Form the POST with new geocoverage data.
+        $this->request->setMethod('POST')
+            ->setPost(array(
+                'item_id' =>        $item->id,
+                'record_id' =>      '',
+                'neatline_id' =>    $neatline->id,
+                'space_active' =>   (string) self::$__testParams['space_active'],
+                'time_active' =>    (string) self::$__testParams['time_active'],
+                'geocoverage' =>    self::$__testParams['geocoverage'],
+                'title' =>          self::$__testParams['title'],
+                'description' =>    self::$__testParams['description'],
+                'start_date' =>     '',
+                'start_time' =>     self::$__testParams['start_time'],
+                'end_date' =>       self::$__testParams['end_date'],
+                'end_time' =>       self::$__testParams['end_time'],
+                'left_percent' =>   self::$__testParams['left_percent'],
+                'right_percent' =>  self::$__testParams['right_percent'],
+                'vector_color' =>   self::$__testParams['vector_color'],
+                'stroke_color' =>   self::$__testParams['stroke_color'],
+                'vector_opacity' => self::$__testParams['vector_opacity'],
+                'stroke_opacity' => self::$__testParams['stroke_opacity'],
+                'stroke_width' =>   self::$__testParams['stroke_width'],
+                'point_radius' =>   self::$__testParams['point_radius']
+            )
+        );
+
+        // Hit the route.
+        $this->dispatch('neatline-exhibits/editor/save');
+
+        // Get the record and check the attributes.
+        $record = $this->_recordsTable->find(1);
+        $this->assertTrue((bool) $record->space_active);
+        $this->assertFalse((bool) $record->time_active);
+
+    }
+
+    /**
+     * If there is a null geocoverage field and a hit to /save commits novel
+     * coverage data, the time_active tracker on an existing record should
+     * be flipped on.
+     *
+     * @return void.
+     */
+    public function testTimeStatusActivationOnSaveWithExistingRecord()
+    {
+
+        // Create exhibit and item.
+        $neatline = $this->helper->_createNeatline();
+        $item = $this->helper->_createItem();
+        $record = new NeatlineDataRecord($item, $neatline);
+        $record->save();
+
+        // At the start, both trackers false.
+        $this->assertFalse((bool) $record->space_active);
+        $this->assertFalse((bool) $record->time_active);
+
+        // Form the POST with new geocoverage data.
+        $this->request->setMethod('POST')
+            ->setPost(array(
+                'item_id' =>        $item->id,
+                'record_id' =>      $record->id,
+                'neatline_id' =>    $neatline->id,
+                'space_active' =>   (string) self::$__testParams['space_active'],
+                'time_active' =>    (string) self::$__testParams['time_active'],
+                'geocoverage' =>    '',
+                'title' =>          self::$__testParams['title'],
+                'description' =>    self::$__testParams['description'],
+                'start_date' =>     self::$__testParams['start_date'],
+                'start_time' =>     self::$__testParams['start_time'],
+                'end_date' =>       self::$__testParams['end_date'],
+                'end_time' =>       self::$__testParams['end_time'],
+                'left_percent' =>   self::$__testParams['left_percent'],
+                'right_percent' =>  self::$__testParams['right_percent'],
+                'vector_color' =>   self::$__testParams['vector_color'],
+                'stroke_color' =>   self::$__testParams['stroke_color'],
+                'vector_opacity' => self::$__testParams['vector_opacity'],
+                'stroke_opacity' => self::$__testParams['stroke_opacity'],
+                'stroke_width' =>   self::$__testParams['stroke_width'],
+                'point_radius' =>   self::$__testParams['point_radius']
+            )
+        );
+
+        // Hit the route.
+        $this->dispatch('neatline-exhibits/editor/save');
+
+        // Get the record and check the attributes.
+        $record = $this->_recordsTable->getRecordByItemAndExhibit($item, $neatline);
+        $this->assertFalse((bool) $record->space_active);
+        $this->assertTrue((bool) $record->time_active);
+
+    }
+
+    /**
+     * If there is a null geocoverage field and a hit to /save commits novel
+     * coverage data, the time_active tracker on a new record should be flipped on.
+     *
+     * @return void.
+     */
+    public function testTimeStatusActivationOnSaveWithoutExistingRecord()
+    {
+
+        // Create exhibit and item.
+        $neatline = $this->helper->_createNeatline();
+        $item = $this->helper->_createItem();
+
+        // Form the POST with new geocoverage data.
+        $this->request->setMethod('POST')
+            ->setPost(array(
+                'item_id' =>        $item->id,
+                'record_id' =>      '',
+                'neatline_id' =>    $neatline->id,
+                'space_active' =>   (string) self::$__testParams['space_active'],
+                'time_active' =>    (string) self::$__testParams['time_active'],
+                'geocoverage' =>    '',
+                'title' =>          self::$__testParams['title'],
+                'description' =>    self::$__testParams['description'],
+                'start_date' =>     self::$__testParams['start_date'],
+                'start_time' =>     self::$__testParams['start_time'],
+                'end_date' =>       self::$__testParams['end_date'],
+                'end_time' =>       self::$__testParams['end_time'],
+                'left_percent' =>   self::$__testParams['left_percent'],
+                'right_percent' =>  self::$__testParams['right_percent'],
+                'vector_color' =>   self::$__testParams['vector_color'],
+                'stroke_color' =>   self::$__testParams['stroke_color'],
+                'vector_opacity' => self::$__testParams['vector_opacity'],
+                'stroke_opacity' => self::$__testParams['stroke_opacity'],
+                'stroke_width' =>   self::$__testParams['stroke_width'],
+                'point_radius' =>   self::$__testParams['point_radius']
+            )
+        );
+
+        // Hit the route.
+        $this->dispatch('neatline-exhibits/editor/save');
+
+        // Get the record and check the attributes.
+        $record = $this->_recordsTable->find(1);
+        $this->assertFalse((bool) $record->space_active);
+        $this->assertTrue((bool) $record->time_active);
 
     }
 
@@ -1135,24 +1606,28 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
 
         // Check the JSON representation of the updated exhibit.
         $response = $this->getResponse()->getBody('default');
-        $this->assertEquals(
-            $response,
-            '{"added":"2011-12-05 09:16:00",' .
-            '"name":"Test Title",' .
-            '"map_id":1,' .
-            '"image_id":null,' .
-            '"top_element":"map",' .
-            '"items_h_pos":"right",' .
-            '"items_v_pos":"bottom",' .
-            '"items_height":"full",' .
-            '"is_map":1,' .
-            '"is_timeline":1,' .
-            '"is_items":1,' .
-            '"default_map_bounds":null,' .
-            '"default_map_zoom":null,' .
-            '"default_focus_date":null,' .
-            '"id":1}'
-        );
+        $this->assertContains('"added":"2011-12-05 09:16:00"', $response);
+        $this->assertContains('"name":"Test Title"', $response);
+        $this->assertContains('"map_id":1', $response);
+        $this->assertContains('"image_id":null', $response);
+        $this->assertContains('"top_element":"map"', $response);
+        $this->assertContains('"items_h_pos":"right"', $response);
+        $this->assertContains('"items_v_pos":"bottom"', $response);
+        $this->assertContains('"items_height":"full"', $response);
+        $this->assertContains('"is_map":1', $response);
+        $this->assertContains('"is_timeline":1', $response);
+        $this->assertContains('"is_items":1', $response);
+        $this->assertContains('"default_map_bounds":null', $response);
+        $this->assertContains('"default_map_zoom":null', $response);
+        $this->assertContains('"default_focus_date":null', $response);
+        $this->assertContains('"default_vector_color":null', $response);
+        $this->assertContains('"default_vector_opacity":null', $response);
+        $this->assertContains('"default_stroke_color":null', $response);
+        $this->assertContains('"default_stroke_opacity":null', $response);
+        $this->assertContains('"default_stroke_width":null', $response);
+        $this->assertContains('"default_point_radius":null', $response);
+        $this->assertContains('"default_point_radius":null', $response);
+        $this->assertContains('"id":1', $response);
 
     }
 
@@ -1208,24 +1683,28 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
 
         // Check the JSON representation of the updated exhibit.
         $response = $this->getResponse()->getBody('default');
-        $this->assertEquals(
-            $response,
-            '{"added":"2011-12-05 09:16:00",' .
-            '"name":"Test Title",' .
-            '"map_id":1,' .
-            '"image_id":null,' .
-            '"top_element":"map",' .
-            '"items_h_pos":"right",' .
-            '"items_v_pos":"bottom",' .
-            '"items_height":"full",' .
-            '"is_map":1,' .
-            '"is_timeline":1,' .
-            '"is_items":1,' .
-            '"default_map_bounds":null,' .
-            '"default_map_zoom":null,' .
-            '"default_focus_date":null,' .
-            '"id":1}'
-        );
+        $this->assertContains('"added":"2011-12-05 09:16:00"', $response);
+        $this->assertContains('"name":"Test Title"', $response);
+        $this->assertContains('"map_id":1', $response);
+        $this->assertContains('"image_id":null', $response);
+        $this->assertContains('"top_element":"map"', $response);
+        $this->assertContains('"items_h_pos":"right"', $response);
+        $this->assertContains('"items_v_pos":"bottom"', $response);
+        $this->assertContains('"items_height":"full"', $response);
+        $this->assertContains('"is_map":1', $response);
+        $this->assertContains('"is_timeline":1', $response);
+        $this->assertContains('"is_items":1', $response);
+        $this->assertContains('"default_map_bounds":null', $response);
+        $this->assertContains('"default_map_zoom":null', $response);
+        $this->assertContains('"default_focus_date":null', $response);
+        $this->assertContains('"default_vector_color":null', $response);
+        $this->assertContains('"default_vector_opacity":null', $response);
+        $this->assertContains('"default_stroke_color":null', $response);
+        $this->assertContains('"default_stroke_opacity":null', $response);
+        $this->assertContains('"default_stroke_width":null', $response);
+        $this->assertContains('"default_point_radius":null', $response);
+        $this->assertContains('"default_point_radius":null', $response);
+        $this->assertContains('"id":1', $response);
 
     }
 
@@ -1492,6 +1971,140 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->assertNull($this->_recordsTable->find($record1->id));
         $this->assertNotNull($this->_recordsTable->find($record2->id));
 
+
+    }
+
+    /**
+     * The /mapsettings route should commit row-level style defaults on
+     * the exhibit record when they do not match the system defaults.
+     *
+     * @return void.
+     */
+    public function testMapSettingsWithNovelValues()
+    {
+
+        // Create an exhibit.
+        $exhibit = $this->helper->_createNeatline();
+
+        // Set system styling defaults.
+        set_option('vector_color', '#5033de');
+        set_option('stroke_color', '#1e2ee6');
+        set_option('vector_opacity', 20);
+        set_option('stroke_opacity', 70);
+        set_option('stroke_width', 4);
+        set_option('point_radius', 6);
+
+        // Form the POST.
+        $this->request->setMethod('POST')
+            ->setPost(array(
+                'exhibit_id' => $exhibit->id,
+                'vector_color' => '#ffffff',
+                'vector_opacity' => 5,
+                'stroke_color' => '#ffffff',
+                'stroke_opacity' => 5,
+                'stroke_width' => 5,
+                'point_radius' => 5
+            )
+        );
+
+        // Hit the route, re-get the record.
+        $this->dispatch('neatline-exhibits/editor/mapsettings');
+        $exhibit = $this->_exhibitsTable->find($exhibit->id);
+
+        // Check.
+        $this->assertNotNull($exhibit->default_vector_color);
+        $this->assertEquals($exhibit->default_vector_color, '#ffffff');
+        $this->assertNotNull($exhibit->default_vector_opacity);
+        $this->assertEquals($exhibit->default_vector_opacity, 5);
+        $this->assertNotNull($exhibit->default_stroke_color);
+        $this->assertEquals($exhibit->default_stroke_color, '#ffffff');
+        $this->assertNotNull($exhibit->default_stroke_opacity);
+        $this->assertEquals($exhibit->default_stroke_opacity, 5);
+        $this->assertNotNull($exhibit->default_stroke_width);
+        $this->assertEquals($exhibit->default_stroke_width, 5);
+        $this->assertNotNull($exhibit->default_point_radius);
+        $this->assertEquals($exhibit->default_point_radius, 5);
+
+    }
+
+    /**
+     * The /mapsettings route should not commit row-level style defaults on
+     * the exhibit record when they match the system defaults.
+     *
+     * @return void.
+     */
+    public function testMapSettingsWithNonNovelValues()
+    {
+
+        // Create an exhibit.
+        $exhibit = $this->helper->_createNeatline();
+
+        // Form the POST.
+        $this->request->setMethod('POST')
+            ->setPost(array(
+                'exhibit_id' => $exhibit->id,
+                'vector_color' => get_option('vector_color'),
+                'vector_opacity' => get_option('vector_opacity'),
+                'stroke_color' => get_option('stroke_color'),
+                'stroke_opacity' => get_option('stroke_opacity'),
+                'stroke_width' => get_option('stroke_width'),
+                'point_radius' => get_option('point_radius')
+            )
+        );
+
+        // Hit the route, re-get the record.
+        $this->dispatch('neatline-exhibits/editor/mapsettings');
+        $exhibit = $this->_exhibitsTable->find($exhibit->id);
+
+        // Check.
+        $this->assertNull($exhibit->default_vector_color);
+        $this->assertNull($exhibit->default_vector_opacity);
+        $this->assertNull($exhibit->default_stroke_color);
+        $this->assertNull($exhibit->default_stroke_opacity);
+        $this->assertNull($exhibit->default_stroke_width);
+        $this->assertNull($exhibit->default_point_radius);
+
+    }
+
+    /**
+     * The /resetstyles action should null all style attributes for a record.
+     *
+     * @return void.
+     */
+    public function testResetStyles()
+    {
+
+        // Create an exhibit.
+        $exhibit = $this->helper->_createNeatline();
+        $record = new NeatlineDataRecord(null, $exhibit);
+
+        // Set styles.
+        $record->vector_color = '#ffffff';
+        $record->vector_opacity = 50;
+        $record->stroke_color = '#ffffff';
+        $record->stroke_opacity = 50;
+        $record->stroke_width = 50;
+        $record->point_radius = 50;
+        $record->save();
+
+        // Form the POST.
+        $this->request->setMethod('POST')
+            ->setPost(array(
+                'record_id' => $record->id
+            )
+        );
+
+        // Hit the route, re-get the record.
+        $this->dispatch('neatline-exhibits/editor/resetstyles');
+        $record = $this->_recordsTable->find($record->id);
+
+        // Check.
+        $this->assertNull($record->vector_color);
+        $this->assertNull($record->vector_opacity);
+        $this->assertNull($record->stroke_color);
+        $this->assertNull($record->stroke_opacity);
+        $this->assertNull($record->stroke_width);
+        $this->assertNull($record->point_radius);
 
     }
 

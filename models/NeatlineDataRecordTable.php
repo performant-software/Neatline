@@ -31,91 +31,6 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
 {
 
     /**
-     * Commit changes ajaxed back from the editor.
-     *
-     * @param Omeka_record $item The item record.
-     * @param Omeka_record $neatline The exhibit record.
-     * @param string $title The title.
-     * @param string $description The description.
-     * @param string $startDate The month/day/year of the start.
-     * @param string $startTime The time of the start.
-     * @param string $endDate The month/day/year of the end.
-     * @param string $endTime The time of the end.
-     * @param string $vectorColor The hex value for the feature vectors.
-     * @param string $leftPercentage The left side ambiguity parameter.
-     * @param string $rightPercentage The right side ambiguity parameter.
-     * @param array $geoCoverage The array of geocoverage data from
-     * the map annotations.
-     *
-     * @return array $statuses An associative array with the final space and time
-     * statuses that result from the data commit.
-     */
-    public function saveItemFormData(
-        $record,
-        $title,
-        $description,
-        $startDate,
-        $startTime,
-        $endDate,
-        $endTime,
-        $vectorColor,
-        $left,
-        $right,
-        $geoCoverage,
-        $spaceStatus,
-        $timeStatus
-    )
-    {
-
-        // Capture starting space and time parameters and statuses.
-        $startingSpaceStatus = $record->space_active;
-        $startingTimeStatus = $record->time_active;
-        $startingCoverage = $record->coverage;
-        $startingTime = array(
-            $record->start_date,
-            $record->start_time,
-            $record->end_date,
-            $record->end_time,
-        );
-
-        // Set parameters.
-        $record->title = $title;
-        $record->description = $description;
-        $record->start_date = $startDate;
-        $record->start_time = $startTime;
-        $record->end_date = $endDate;
-        $record->end_time = $endTime;
-        $record->vector_color = $vectorColor;
-        $record->geocoverage = $geoCoverage;
-        $record->setPercentages($left, $right);
-
-        // Check for new space data.
-        if (in_array($startingCoverage, array('', null)) && $geoCoverage != '') {
-            $spaceStatus = true;
-        }
-
-        // Check for new time data.
-        if ($startingTime = array('','','','') &&
-            ($startDate != '' || $startTime != '' || $endDate != '' || $endTime != '')) {
-            $timeStatus = true;
-        }
-
-        // Set the statuses.
-        $record->setStatus('space', $spaceStatus);
-        $record->setStatus('time', $timeStatus);
-
-        // Commit.
-        $record->save();
-
-        // Return an array with the final statuses.
-        return array(
-            'space' => is_bool($spaceStatus) ? $spaceStatus : (bool) $startingSpaceStatus,
-            'time' => is_bool($timeStatus) ? $timeStatus : (bool) $startingTimeStatus
-        );
-
-    }
-
-    /**
      * For a given item and exhibit combination, check to see if there is an existing
      * record. If there is, return it. If not, create a new record and return it.
      *
@@ -309,46 +224,6 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
 
 
     /**
-     * Construct a JSON representation of a record's fields to be used in the
-     * item edit form.
-     *
-     * @param Omeka_record $item The item record.
-     * @param Omeka_record $neatline The exhibit record.
-     *
-     * @return JSON The data.
-     */
-    public function buildEditFormJson($item, $neatline)
-    {
-
-        // Shell out the object literal structure.
-        $data = array(
-            'title' => '',
-            'description' => '',
-            'start_date' => '',
-            'start_time' => '',
-            'end_date' => '',
-            'end_time' => '',
-            'left_percent' => 0,
-            'right_percent' => 100,
-            'vector_color' => '#724e85'
-        );
-
-        $data['title'] = neatline_getItemMetadata(
-            $item,
-            'Dublin Core',
-            'Title');
-
-        $data['description'] = neatline_getItemMetadata(
-            $item,
-            'Dublin Core',
-            'Description');
-
-        // JSON-ify the array.
-        return json_encode($data);
-
-    }
-
-    /**
      * Construct OpenLayers JSON.
      *
      * @param Omeka_record $neatline The exhibit record.
@@ -371,13 +246,26 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
             if ($record->space_active == 1) {
 
                 $data[] = array(
-                    'id' => $record->id,
-                    'item_id' => $record->item_id,
-                    'title' => $record->getTitle(),
-                    'color' => $record->vector_color,
-                    'bounds' => $record->map_bounds,
-                    'zoom' => $record->map_zoom,
-                    'wkt' => $record->getGeocoverage()
+                    'id' =>                 $record->id,
+                    'item_id' =>            $record->item_id,
+                    'title' =>              $record->getTitle(),
+                    'vector_color' =>       $record->getStyle('vector_color'),
+                    'vector_opacity' =>     $record->getStyle('vector_opacity'),
+                    'stroke_opacity' =>     $record->getStyle('stroke_opacity'),
+                    'stroke_color' =>       $record->getStyle('stroke_color'),
+                    'stroke_width' =>       $record->getStyle('stroke_width'),
+                    'point_radius' =>       $record->getStyle('point_radius'),
+                    'bounds' =>             $record->map_bounds,
+                    'zoom' =>               $record->map_zoom,
+                    'wkt' =>                $record->getGeocoverage(),
+                    '_native_styles' =>     array(
+                      'vector_color' =>     $record->vector_color,
+                      'vector_opacity' =>   $record->vector_opacity,
+                      'stroke_color' =>     $record->stroke_color,
+                      'stroke_opacity' =>   $record->stroke_opacity,
+                      'stroke_width' =>     $record->stroke_width,
+                      'point_radius' =>     $record->point_radius,
+                    )
                 );
 
             }
@@ -420,13 +308,13 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
             );
 
             $eventArray = array(
-                'eventID' => $record->id,
-                'title' => $record->title,
-                'description' => $record->description,
-                'color' => $record->vector_color,
-                'textColor' => '#4a4a4a',
-                'left_ambiguity' => $record->left_percent,
-                'right_ambiguity' => $record->right_percent
+                'eventID' =>                $record->id,
+                'title' =>                  $record->title,
+                'description' =>            $record->description,
+                'color' =>                  $record->vector_color,
+                'textColor' =>              '#4a4a4a',
+                'left_ambiguity' =>         $record->left_percent,
+                'right_ambiguity' =>        $record->right_percent
             );
 
             // If there is a valid start stamp.

@@ -73,6 +73,7 @@ function neatline_queueEditorAssets()
     queue_js('editor/utilities/_toggle_button', 'javascripts');
     queue_js('editor/utilities/_gradient_builder', 'javascripts');
     queue_js('editor/utilities/_dropdown', 'javascripts');
+    queue_js('editor/utilities/_integer_dragger', 'javascripts');
     queue_js('editor/_constructEditor', 'javascripts');
 
     // 3rd party code.

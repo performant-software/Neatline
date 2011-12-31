@@ -89,6 +89,7 @@ class NeatlinePlugin
     public function install()
     {
 
+        // Exhibits table.
         $sql = "CREATE TABLE IF NOT EXISTS `{$this->_db->prefix}neatline_exhibits` (
                 `id`                    int(10) unsigned not null auto_increment,
                 `added`                 TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -105,11 +106,18 @@ class NeatlinePlugin
                 `default_map_bounds`    varchar(100) NULL,
                 `default_map_zoom`      int(10) unsigned NULL,
                 `default_focus_date`    varchar(100) NULL,
+                `default_vector_color`  tinytext COLLATE utf8_unicode_ci NULL,
+                `default_vector_opacity`int(10) unsigned NULL,
+                `default_stroke_opacity`int(10) unsigned NULL,
+                `default_stroke_color`  tinytext COLLATE utf8_unicode_ci NULL,
+                `default_stroke_width`  int(10) unsigned NULL,
+                `default_point_radius`  int(10) unsigned NULL,
                  PRIMARY KEY (`id`)
                ) ENGINE=innodb DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
 
         $this->_db->query($sql);
 
+        // Records table.
         $sql = "CREATE TABLE IF NOT EXISTS `{$this->_db->prefix}neatline_data_records` (
                 `id`                    int(10) unsigned not null auto_increment,
                 `item_id`               int(10) unsigned NULL,
@@ -124,6 +132,11 @@ class NeatlinePlugin
                 `left_percent`          int(10) unsigned NULL,
                 `right_percent`         int(10) unsigned NULL,
                 `vector_color`          tinytext COLLATE utf8_unicode_ci NULL,
+                `vector_opacity`        int(10) unsigned NULL,
+                `stroke_opacity`        int(10) unsigned NULL,
+                `stroke_color`          tinytext COLLATE utf8_unicode_ci NULL,
+                `stroke_width`          int(10) unsigned NULL,
+                `point_radius`          int(10) unsigned NULL,
                 `space_active`          tinyint(1) NULL,
                 `time_active`           tinyint(1) NULL,
                 `display_order`         int(10) unsigned NULL,
@@ -133,6 +146,14 @@ class NeatlinePlugin
                ) ENGINE=innodb DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
 
         $this->_db->query($sql);
+
+        // Set system styling defaults.
+        set_option('vector_color', '#5033de');
+        set_option('stroke_color', '#1e2ee6');
+        set_option('vector_opacity', 20);
+        set_option('stroke_opacity', 70);
+        set_option('stroke_width', 4);
+        set_option('point_radius', 6);
 
     }
 

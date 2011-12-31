@@ -33,23 +33,61 @@ class NeatlineDataRecord extends Omeka_record
     /**
      * Record attributes.
      */
+
+    // Foreign keys.
     public $item_id;
     public $exhibit_id;
+
+    // Text fields.
     public $title;
     public $description;
+
+    // Dates.
     public $start_date;
     public $start_time;
     public $end_date;
     public $end_time;
-    public $vector_color;
-    public $geocoverage;
     public $left_percent;
     public $right_percent;
+
+    // Styles.
+    public $vector_color;
+    public $vector_opacity;
+    public $stroke_color;
+    public $stroke_opacity;
+    public $stroke_width;
+    public $point_radius;
+
+    // Coverage.
+    public $geocoverage;
+    public $map_bounds;
+    public $map_zoom;
+
+    // Statuses and ordering.
     public $space_active;
     public $time_active;
     public $display_order;
-    public $map_bounds;
-    public $map_zoom;
+
+    /**
+     * Default attributes.
+     */
+    private static $defaults = array(
+        'left_percent' =>       0,
+        'right_percent' =>      100,
+        'geocoverage' =>        'POINT()'
+    );
+
+    /**
+     * Valid style attribute names.
+     */
+    private static $styles = array(
+        'vector_color',
+        'vector_opacity',
+        'stroke_color',
+        'stroke_opacity',
+        'stroke_width',
+        'point_radius'
+    );
 
 
     /**
@@ -91,10 +129,28 @@ class NeatlineDataRecord extends Omeka_record
     public function getItem()
     {
 
-        return $this->getTable('Item')->find($this->item_id);
+        $item = null;
+
+        // If record id is defined, get item.
+        if (!is_null($this->item_id)) {
+           $item = $this->getTable('Item')->find($this->item_id);
+        }
+
+        return $item;
 
     }
 
+    /**
+     * Get the parent exhibit record.
+     *
+     * @return Omeka_record $exhibit The parent exhibit.
+     */
+    public function getExhibit()
+    {
+
+        return $this->getTable('NeatlineExhibit')->find($this->exhibit_id);
+
+    }
 
     /**
      * Construct a JSON representation of the attributes to be used in the
@@ -105,29 +161,67 @@ class NeatlineDataRecord extends Omeka_record
     public function buildEditFormJson()
     {
 
-        // Shell out the object literal structure.
-        $data = array(
-            'title' => '',
-            'description' => '',
-            'start_date' => '',
-            'start_time' => '',
-            'end_date' => '',
-            'end_time' => '',
-            'left_percent' => 0,
-            'right_percent' => 100,
-            'vector_color' => '#724e85'
-        );
+        // Shell out the array.
+        $data = array();
 
         // Set the array values.
         $data['title'] =            $this->getTitle();
         $data['description'] =      $this->getDescription();
-        $data['vector_color'] =     $this->getColor();
+        $data['vector_color'] =     $this->getStyle('vector_color');
+        $data['vector_opacity'] =   $this->getStyle('vector_opacity');
+        $data['stroke_color'] =     $this->getStyle('stroke_color');
+        $data['stroke_opacity'] =   $this->getStyle('stroke_opacity');
+        $data['stroke_width'] =     $this->getStyle('stroke_width');
+        $data['point_radius'] =     $this->getStyle('point_radius');
         $data['start_date'] =       (string) $this->start_date;
         $data['start_time'] =       (string) $this->start_time;
         $data['end_date'] =         (string) $this->end_date;
         $data['end_time'] =         (string) $this->end_time;
-        $data['left_percent'] =     $this->left_percent;
-        $data['right_percent'] =    $this->right_percent;
+        $data['left_percent'] =     $this->getLeftPercent();
+        $data['right_percent'] =    $this->getRightPercent();
+
+        // JSON-ify the array.
+        return json_encode($data);
+
+    }
+
+    /**
+     * Construct a starting attribute set for an Omeka-item-based record.
+     *
+     * @param Omeka_record $item The item record.
+     *
+     * @return JSON The data.
+     */
+    public static function buildEditFormForNewRecordJson($item)
+    {
+
+        // Shell out the array.
+        $data = array();
+
+        // Set the array values.
+        $data['vector_color'] =     get_option('vector_color');
+        $data['vector_opacity'] =   get_option('vector_opacity');
+        $data['stroke_color'] =     get_option('stroke_color');
+        $data['stroke_opacity'] =   get_option('stroke_opacity');
+        $data['stroke_width'] =     get_option('stroke_width');
+        $data['point_radius'] =     get_option('point_radius');
+        $data['left_percent'] =     self::$defaults['left_percent'];
+        $data['right_percent'] =    self::$defaults['right_percent'];
+        $data['start_date'] =       '';
+        $data['start_time'] =       '';
+        $data['end_date'] =         '';
+        $data['end_time'] =         '';
+
+        // Get DC defaults.
+        $data['title'] = neatline_getItemMetadata(
+            $item,
+            'Dublin Core',
+            'Title');
+
+        $data['description'] = neatline_getItemMetadata(
+            $item,
+            'Dublin Core',
+            'Description');
 
         // JSON-ify the array.
         return json_encode($data);
@@ -139,6 +233,27 @@ class NeatlineDataRecord extends Omeka_record
      * Setters.
      */
 
+
+    /**
+     * Set the an attribute if the passed value is not null or ''.
+     *
+     * @param string $attribute The name of the attribute.
+     * @param boolean $value The value to set.
+     *
+     * @return void.
+     */
+    public function setNotEmpty($attribute, $value)
+    {
+
+        if ($value == '') {
+            $this[$attribute] = null;
+        }
+
+        else {
+            $this[$attribute] = $value;
+        }
+
+    }
 
     /**
      * Set the space_active or time_active attributes. Reject non-
@@ -199,11 +314,99 @@ class NeatlineDataRecord extends Omeka_record
 
     }
 
+    /**
+     * Set a style attribute. If there is an exhibit default, only set
+     * if the passed value is different. If there is no exhibit default,
+     * only set if the passed value is different from the system
+     * default. If a non-style column name is passed, return false.
+     *
+     * @param string style The name of the style.
+     * @param mixed $value The value to set.
+     *
+     * @return boolean True if the set succeeds.
+     */
+    public function setStyle($style, $value)
+    {
+
+        // If a non-style property is passed, return false.
+        if (!in_array($style, self::$styles)) {
+            return false;
+        }
+
+        // Get the exhibit.
+        $exhibit = $this->getExhibit();
+
+        // If there is an exhibit default.
+        if (!is_null($exhibit['default_' . $style])) {
+            if ($value != $exhibit['default_' . $style]) {
+                $this[$style] = $value;
+                return true;
+            }
+        }
+
+        // If the value does not match the system default.
+        else if ($value != get_option($style)) {
+            $this[$style] = $value;
+            return true;
+        }
+
+        return false;
+
+    }
+
+    /**
+     * Set all style attributes to null.
+     *
+     * @return void.
+     */
+    public function resetStyles()
+    {
+
+        $this->vector_color =   null;
+        $this->vector_opacity = null;
+        $this->stroke_color =   null;
+        $this->stroke_opacity = null;
+        $this->stroke_width =   null;
+        $this->point_radius =   null;
+
+    }
+
 
     /**
      * Getters.
      */
 
+
+    /**
+     * Get a style attribute. In order or priority, return the row
+     * value, exhibit default, or system default.
+     *
+     * @param string style The name of the style.
+     *
+     * @return mixed The value.
+     */
+    public function getStyle($style)
+    {
+
+        // Get the exhibit.
+        $exhibit = $this->getExhibit();
+
+        // If there is a row value.
+        if (!is_null($this[$style])) {
+            return $this[$style];
+        }
+
+        // If there is an exhibit default
+        else if (!is_null($exhibit['default_' . $style])) {
+            return $exhibit['default_' . $style];
+        }
+
+        // Fall back to system default.
+        else {
+            return get_option($style);
+        }
+
+    }
 
     /**
      * Return title.
@@ -218,7 +421,13 @@ class NeatlineDataRecord extends Omeka_record
         }
 
         else if (!is_null($this->item_id)) {
-            return neatline_getItemMetadata($this->getItem(), 'Dublin Core', 'Title');
+
+            return neatline_getItemMetadata(
+                $this->getItem(),
+                'Dublin Core',
+                'Title'
+            );
+
         }
 
         else {
@@ -240,7 +449,13 @@ class NeatlineDataRecord extends Omeka_record
         }
 
         else if (!is_null($this->item_id)) {
-            return neatline_getItemMetadata($this->getItem(), 'Dublin Core', 'Description');
+
+            return neatline_getItemMetadata(
+                $this->getItem(),
+                'Dublin Core',
+                'Description'
+            );
+
         }
 
         else {
@@ -250,16 +465,30 @@ class NeatlineDataRecord extends Omeka_record
     }
 
     /**
-     * Return vector color.
+     * Return left percent.
      *
-     * @return string $color The color.
+     * @return integer $percent The percent.
      */
-    public function getColor()
+    public function getLeftPercent()
     {
 
-        return !is_null($this->vector_color) ?
-            $this->vector_color :
-            '#724e85';
+        return !is_null($this->left_percent) ?
+            $this->left_percent :
+            self::$defaults['left_percent'];
+
+    }
+
+    /**
+     * Return right percent.
+     *
+     * @return integer $percent The percent.
+     */
+    public function getRightPercent()
+    {
+
+        return !is_null($this->right_percent) ?
+            $this->right_percent :
+            self::$defaults['right_percent'];
 
     }
 
@@ -273,7 +502,7 @@ class NeatlineDataRecord extends Omeka_record
 
         return (!is_null($this->geocoverage) && $this->geocoverage != '') ?
             $this->geocoverage :
-            'POINT()';
+            self::$defaults['geocoverage'];
 
     }
 

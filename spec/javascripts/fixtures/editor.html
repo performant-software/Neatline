@@ -8,6 +8,54 @@
 <ul class="nav">
 
     <li class="dropdown">
+        <a href="" id="configure-map-button" class="dropdown-toggle">Map Settings</a>
+        <div id="configure-map" class="dropdown-content">
+            
+<!-- Vector color. -->
+<h5>Default Shape Color</h5>
+<input type="text" class="color-picker miniColors" name="default-vector-color" value="#5033de" />
+<hr />
+
+<!-- Stroke color. -->
+<h5>Default Line Color</h5>
+<input type="text" class="color-picker miniColors" name="default-stroke-color" value="#1e2ee6" />
+<hr />
+
+<!-- Vector opacity. -->
+<h5>Default Shape Opacity</h5>
+<input type="text" class="integer-dragger" name="default-vector-opacity" value="20" />
+<hr />
+
+<!-- Stroke opacity. -->
+<h5>Default Line Opacity</h5>
+<input type="text" class="integer-dragger" name="default-stroke-opacity" value="70" />
+<hr />
+
+<!-- Stroke width. -->
+<h5>Default Line Thickness</h5>
+<input type="text" class="integer-dragger" name="default-stroke-width" value="4" />
+<hr />
+
+<!-- Point radius. -->
+<h5>Default Point Radius</h5>
+<input type="text" class="integer-dragger" name="default-point-radius" value="6" />
+<hr />
+
+<!-- Base layer picker. -->
+<!--
+<h5>Base Layer</h5>
+<select name="base-layer">
+    <option>[none]</option>
+    <option>OpenStreetMap</option>
+</select>
+<hr />
+-->
+
+<button class="btn icon approve save">Save</button>
+        </div>
+    </li>
+
+    <li class="dropdown">
         <a href="" id="configure-layout-button" class="dropdown-toggle">Configure Layout</a>
         <div id="configure-layout" class="dropdown-content">
             
@@ -198,6 +246,8 @@ to store the current viewport settings as the public defaults.</p>
 
         <fieldset>
 
+            <div id="edit-form-inputs" class="inputs">
+
             <div class="clearfix">
                 <label for="title">Title</label>
                 <div class="input">
@@ -255,17 +305,86 @@ to store the current viewport settings as the public defaults.</p>
             </div>
 
             <div class="clearfix">
-                <label>Vector Color</label>
-                <input type="text" id="color" class="color-picker" name="color" />
-                <span class="help-inline">Select a color for the item's spatial vectors.</span>
+                <label>Shape Color</label>
+                <div class="input">
+                    <div class="inline-inputs">
+                        <input type="text" class="color-picker" name="vector-color" />
+                        <span class="help-inline">Select a color for the item's spatial vectors.</span>
+                    </div>
+                </div>
             </div>
 
             <div class="clearfix">
-                <button class="btn icon home map-focus">Fix Item-Specific Map Focus</button>
-                <span class="help-inline">Click here to set a custom map focus for the item.</span>
+                <label>Line Color</label>
+                <div class="input">
+                    <div class="inline-inputs">
+                        <input type="text" class="color-picker" name="stroke-color" />
+                        <span class="help-inline">Select a color for the border lines around shapes.</span>
+                    </div>
+                </div>
             </div>
 
-            <div class="actions">
+            <div class="clearfix">
+                <label>Shape Opacity</label>
+                <div class="input">
+                    <div class="inline-inputs">
+                        <input type="text" class="integer-dragger" name="vector-opacity" />
+                        <span class="help-inline">Set the opacity for the item's vectors on the map.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="clearfix">
+                <label>Line Opacity</label>
+                <div class="input">
+                    <div class="inline-inputs">
+                        <input type="text" class="integer-dragger" name="stroke-opacity" />
+                        <span class="help-inline">Set the opacity for the border lines.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="clearfix">
+                <label>Line Thickness</label>
+                <div class="input">
+                    <div class="inline-inputs">
+                        <input type="text" class="integer-dragger" name="stroke-width" />
+                        <span class="help-inline">Set the width, in pixels, for the border lines.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="clearfix">
+                <label>Point Radius</label>
+                <div class="input">
+                    <div class="inline-inputs">
+                        <input type="text" class="integer-dragger" name="point-radius" />
+                        <span class="help-inline">Set the radius for point on the map.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="clearfix">
+                <div class="input">
+                    <div class="inline-inputs">
+                        <button class="btn icon undo reset-styles">Reset Item Styles</button>
+                        <span class="help-inline">Reset all styles to match the exhibit defaults.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="clearfix">
+                <div class="input">
+                    <div class="inline-inputs">
+                        <button class="btn icon home map-focus">Fix Item-Specific Map Focus</button>
+                        <span class="help-inline">Set a custom map focus for the item.</span>
+                    </div>
+                </div>
+            </div>
+
+            </div>
+
+            <div id="edit-form-actions" class="actions">
                 <input type="submit" class="btn primary" value="Save">
                 <button id="record-delete-button" class="btn danger">Delete</button>
             </div>
@@ -317,7 +436,7 @@ to store the current viewport settings as the public defaults.</p>
 <!-- JSON globals. -->
 <script type="text/javascript">
 
-    var Neatline = {"added":"2011-12-28 16:26:03","name":"Test Exhibit","map_id":null,"image_id":1,"top_element":null,"items_h_pos":null,"items_v_pos":null,"items_height":null,"is_map":1,"is_timeline":1,"is_items":1,"default_map_bounds":null,"default_map_zoom":null,"default_focus_date":null,"id":1};
+    var Neatline = {"added":"2011-12-31 11:26:09","name":"Test Exhibit","map_id":null,"image_id":1,"top_element":null,"items_h_pos":null,"items_v_pos":null,"items_height":null,"is_map":1,"is_timeline":1,"is_items":1,"default_map_bounds":null,"default_map_zoom":null,"default_focus_date":null,"default_vector_color":null,"default_vector_opacity":null,"default_stroke_color":null,"default_stroke_opacity":null,"default_stroke_width":null,"default_point_radius":null,"id":1};
         Neatline.dataSources = {"timeline":"http:\/\/\/Users\/davidmcclure\/pear\/bin\/neatline-exhibits\/1\/data\/simile","map":"http:\/\/\/Users\/davidmcclure\/pear\/bin\/neatline-exhibits\/1\/data\/openlayers","undated":"http:\/\/\/Users\/davidmcclure\/pear\/bin\/neatline-exhibits\/1\/data\/udi"};
         Neatline.public = false;
 

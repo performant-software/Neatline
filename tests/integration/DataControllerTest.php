@@ -84,6 +84,16 @@ class Neatline_DataControllerTest extends Omeka_Test_AppTestCase
         $record2->title = 'Item 2 Title';
         $record1->vector_color = '#ffffff';
         $record2->vector_color = '#000000';
+        $record1->vector_opacity = 60;
+        $record2->vector_opacity = 40;
+        $record1->stroke_opacity = 60;
+        $record2->stroke_opacity = 40;
+        $record1->stroke_color = '#ffffff';
+        $record2->stroke_color = '#000000';
+        $record1->stroke_width = 3;
+        $record2->stroke_width = 2;
+        $record1->point_radius = 3;
+        $record2->point_radius = 2;
         $record1->geocoverage = 'POINT(1,0)';
         $record2->geocoverage = 'POINT(0,1)';
         $record1->space_active = 1;
@@ -100,23 +110,30 @@ class Neatline_DataControllerTest extends Omeka_Test_AppTestCase
         $response = $this->getResponse()->getBody('default');
 
         // Test the raw construction with no available DC values.
-        $this->assertEquals(
-            $response,
-            '[{"id":' . $record1->id . ',' .
-            '"item_id":' . $item1->id . ',' .
-            '"title":"Item 1 Title",' .
-            '"color":"#ffffff",' .
-            '"bounds":"BOUND(1)",' .
-            '"zoom":4,' .
-            '"wkt":"POINT(1,0)"},' .
-            '{"id":' . $record2->id . ',' .
-            '"item_id":' . $item2->id . ',' .
-            '"title":"Item 2 Title",' .
-            '"color":"#000000",' .
-            '"bounds":"BOUND(2)",' .
-            '"zoom":5,' .
-            '"wkt":"POINT(0,1)"}]'
-        );
+        $this->assertContains('"id":' . $record1->id, $response);
+        $this->assertContains('"item_id":' . $item1->id, $response);
+        $this->assertContains('"title":"Item 1 Title"', $response);
+        $this->assertContains('"vector_color":"#ffffff"', $response);
+        $this->assertContains('"vector_opacity":60', $response);
+        $this->assertContains('"stroke_opacity":60', $response);
+        $this->assertContains('"stroke_color":"#ffffff"', $response);
+        $this->assertContains('"stroke_width":3', $response);
+        $this->assertContains('"point_radius":3', $response);
+        $this->assertContains('"bounds":"BOUND(1)"', $response);
+        $this->assertContains('"zoom":4', $response);
+        $this->assertContains('"wkt":"POINT(1,0)"', $response);
+        $this->assertContains('"id":' . $record2->id, $response);
+        $this->assertContains('"item_id":' . $item2->id, $response);
+        $this->assertContains('"title":"Item 1 Title"', $response);
+        $this->assertContains('"vector_color":"#000000"', $response);
+        $this->assertContains('"vector_opacity":40', $response);
+        $this->assertContains('"stroke_opacity":40', $response);
+        $this->assertContains('"stroke_color":"#000000"', $response);
+        $this->assertContains('"stroke_width":2', $response);
+        $this->assertContains('"point_radius":2', $response);
+        $this->assertContains('"bounds":"BOUND(2)"', $response);
+        $this->assertContains('"zoom":5', $response);
+        $this->assertContains('"wkt":"POINT(0,1)"', $response);
 
     }
 
@@ -163,28 +180,114 @@ class Neatline_DataControllerTest extends Omeka_Test_AppTestCase
         $response = $this->getResponse()->getBody('default');
 
         // Check format.
-        $this->assertEquals(
-            $response,
-            '{"dateTimeFormat":"iso8601",' .
-            '"events":[{' .
-            '"eventID":' . $record1->id . ',' .
-            '"title":"' . $record1->title . '",' .
-            '"description":"' . $record1->description . '",' .
-            '"color":"' . $record1->vector_color . '",' .
-            '"textColor":"#4a4a4a",' .
-            '"left_ambiguity":' . $record1->left_percent . ',' .
-            '"right_ambiguity":' . $record1->right_percent . ',' .
-            '"start":"2011-01-01 00:00:00",' .
-            '"end":"2012-01-01 00:00:00"},{' .
-            '"eventID":' . $record2->id . ',' .
-            '"title":"' . $record2->title . '",' .
-            '"description":"' . $record2->description . '",' .
-            '"color":"' . $record2->vector_color . '",' .
-            '"textColor":"#4a4a4a",' .
-            '"left_ambiguity":' . $record2->left_percent . ',' .
-            '"right_ambiguity":' . $record2->right_percent . ',' .
-            '"start":"2011-01-01 00:00:00",' .
-            '"end":"2012-01-01 00:00:00"}]}'
+        $this->assertContains(
+            '"dateTimeFormat":"iso8601"',
+            $response
+        );
+
+        $this->assertContains(
+            '"events":',
+            $response
+        );
+
+        $this->assertContains(
+            '"eventID":' . $record1->id,
+            $response
+        );
+
+        $this->assertContains(
+            '"title":"' . $record1->title . '"',
+            $response
+        );
+
+        $this->assertContains(
+            '"description":"' . $record1->description . '"',
+            $response
+        );
+
+        $this->assertContains(
+            '"color":"' . $record1->vector_color . '"',
+            $response
+        );
+
+        $this->assertContains(
+            '"textColor":"#4a4a4a"',
+            $response
+        );
+
+        $this->assertContains(
+            '"left_ambiguity":' . $record1->left_percent,
+            $response
+        );
+
+        $this->assertContains(
+            '"right_ambiguity":' . $record1->right_percent,
+            $response
+        );
+
+        $this->assertContains(
+            '"start":"2011-01-01 00:00:00"',
+            $response
+        );
+
+        $this->assertContains(
+            '"end":"2012-01-01 00:00:00"',
+            $response
+        );
+
+        $this->assertContains(
+            '"dateTimeFormat":"iso8601"',
+            $response
+        );
+
+        $this->assertContains(
+            '"events":',
+            $response
+        );
+
+        $this->assertContains(
+            '"eventID":' . $record2->id,
+            $response
+        );
+
+        $this->assertContains(
+            '"title":"' . $record2->title . '"',
+            $response
+        );
+
+        $this->assertContains(
+            '"description":"' . $record2->description . '"',
+            $response
+        );
+
+        $this->assertContains(
+            '"color":"' . $record2->vector_color . '"',
+            $response
+        );
+
+        $this->assertContains(
+            '"textColor":"#4a4a4a"',
+            $response
+        );
+
+        $this->assertContains(
+            '"left_ambiguity":' . $record2->left_percent,
+            $response
+        );
+
+        $this->assertContains(
+            '"right_ambiguity":' . $record2->right_percent,
+            $response
+        );
+
+        $this->assertContains(
+            '"start":"2011-01-01 00:00:00"',
+            $response
+        );
+
+        $this->assertContains(
+            '"end":"2012-01-01 00:00:00"',
+            $response
         );
 
     }
@@ -214,8 +317,6 @@ class Neatline_DataControllerTest extends Omeka_Test_AppTestCase
 
         // Check markup.
         $this->assertQuery('tr.item-row[recordid="' . $record->id . '"]');
-        // $this->assertQuery('td.space img.active');
-        // $this->assertQuery('td.time img.active');
 
         $this->assertQueryContentContains(
             'span.item-title-text',
@@ -232,8 +333,6 @@ class Neatline_DataControllerTest extends Omeka_Test_AppTestCase
 
         // Hit the route and check the 'active'/'inactive' classes.
         $this->dispatch('neatline-exhibits/' . $neatline->id . '/data/udi');
-        // $this->assertQuery('td.space img.inactive');
-        // $this->assertQuery('td.time img.active');
 
         // Disable the time status.
         $record->space_active = 1;
@@ -242,8 +341,6 @@ class Neatline_DataControllerTest extends Omeka_Test_AppTestCase
 
         // Hit the route and check the 'active'/'inactive' classes.
         $this->dispatch('neatline-exhibits/' . $neatline->id . '/data/udi');
-        // $this->assertQuery('td.space img.active');
-        // $this->assertQuery('td.time img.inactive');
 
     }
 
@@ -284,8 +381,6 @@ class Neatline_DataControllerTest extends Omeka_Test_AppTestCase
 
         // Check markup.
         $this->assertQuery('tr.item-row[recordid="' . $record->id . '"]');
-        // $this->assertQuery('td.space img.active');
-        // $this->assertQuery('td.time img.active');
 
         $this->assertQueryContentContains(
             'span.item-title-text',
@@ -302,8 +397,6 @@ class Neatline_DataControllerTest extends Omeka_Test_AppTestCase
 
         // Hit the route and check the 'active'/'inactive' classes.
         $this->dispatch('neatline-exhibits/' . $neatline->id . '/data/udi');
-        // $this->assertQuery('td.space img.inactive');
-        // $this->assertQuery('td.time img.active');
 
         // Disable the time status.
         $record->space_active = 1;
@@ -312,8 +405,6 @@ class Neatline_DataControllerTest extends Omeka_Test_AppTestCase
 
         // Hit the route and check the 'active'/'inactive' classes.
         $this->dispatch('neatline-exhibits/' . $neatline->id . '/data/udi');
-        // $this->assertQuery('td.space img.active');
-        // $this->assertQuery('td.time img.inactive');
 
     }
 

@@ -118,7 +118,7 @@ class Neatline_FixturesController extends Omeka_Controller_Action
          */
 
         echo $this->view->partial('editor/_topbar.php', array(
-            'title' => $neatline->name
+            'neatline' => $neatline
         ));
 
         echo $this->view->partial('editor/_item_browser.php', array(

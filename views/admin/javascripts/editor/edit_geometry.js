@@ -43,24 +43,18 @@
 
             var self = this;
 
-            // Build the buttons, insert, and gloss.
-            this.scaleButton =
-                $('<button id="scale-button" class="btn edit-geometry-small geo-edit">Scale</button>');
+            // Get markup.
+            this.editContainer =            $('#geo-edit');
+            this.geoContainer =             $('#regular-shapes');
+            this.regularShapes =            $('#regular-shapes-select');
+            this.scaleButton =              $('#scale-button');
+            this.rotateButton =             $('#rotate-button');
+            this.dragButton =               $('#drag-button');
+            this.deleteButton =             $('#delete-button');
 
-            this.rotateButton =
-                $('<button id="rotate-button" class="btn edit-geometry-small geo-edit">Rotate</button>');
-
-            this.dragButton =
-                $('<button id="drag-button" class="btn edit-geometry-small geo-edit">Drag</button>');
-
-            this.deleteButton =
-                $('<button id="delete-button" class="btn danger edit-geometry-small geo-edit">Delete</button>');
-
-            // Insert the buttons.
-            this.element.append(this.dragButton);
-            this.element.append(this.rotateButton);
-            this.element.append(this.scaleButton);
-            this.element.append(this.deleteButton);
+            // Insert the containers.
+            this.element.append(this.editContainer);
+            this.element.append(this.geoContainer);
 
             // Store starting status data trackers.
             this.scaleButton.data('activated', false);
@@ -195,8 +189,14 @@
 
         showButtons: function() {
 
-            // Display:block the buttons.
-            $('.' + this.options.markup.geo_edit_class).css({
+            // Display the edit controls.
+            this.editContainer.css({
+                'display': 'block !important',
+                'opacity': 0
+            }).stop().animate({ 'opacity': 1}, this.options.animation.fade_duration);
+
+            // Display the regular shapes select.
+            this.geoContainer.css({
                 'display': 'block !important',
                 'opacity': 0
             }).stop().animate({ 'opacity': 1}, this.options.animation.fade_duration);
@@ -208,15 +208,14 @@
 
         hideButtons: function() {
 
-            // Get the buttons.
-            var buttons = $('.' + this.options.markup.geo_edit_class);
-
             // Fade down.
-            buttons.stop().animate({
+            this.editContainer.stop().animate({
                 'opacity': 0
-            }, this.options.markup.fade_duration, function() {
-                buttons.css('display', 'none !important');
-            });
+            }, this.options.markup.fade_duration);
+
+            this.geoContainer.stop().animate({
+                'opacity': 0
+            }, this.options.markup.fade_duration);
 
         },
 

@@ -31,6 +31,8 @@
 
         <fieldset>
 
+            <div id="edit-form-inputs" class="inputs">
+
             <div class="clearfix">
                 <label for="title">Title</label>
                 <div class="input">
@@ -88,17 +90,86 @@
             </div>
 
             <div class="clearfix">
-                <label>Vector Color</label>
-                <input type="text" id="color" class="color-picker" name="color" />
-                <span class="help-inline">Select a color for the item's spatial vectors.</span>
+                <label>Shape Color</label>
+                <div class="input">
+                    <div class="inline-inputs">
+                        <input type="text" class="color-picker" name="vector-color" />
+                        <span class="help-inline">Select a color for the item's spatial vectors.</span>
+                    </div>
+                </div>
             </div>
 
             <div class="clearfix">
-                <button class="btn icon home map-focus">Fix Item-Specific Map Focus</button>
-                <span class="help-inline">Click here to set a custom map focus for the item.</span>
+                <label>Line Color</label>
+                <div class="input">
+                    <div class="inline-inputs">
+                        <input type="text" class="color-picker" name="stroke-color" />
+                        <span class="help-inline">Select a color for the border lines around shapes.</span>
+                    </div>
+                </div>
             </div>
 
-            <div class="actions">
+            <div class="clearfix">
+                <label>Shape Opacity</label>
+                <div class="input">
+                    <div class="inline-inputs">
+                        <input type="text" class="integer-dragger" name="vector-opacity" />
+                        <span class="help-inline">Set the opacity for the item's vectors on the map.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="clearfix">
+                <label>Line Opacity</label>
+                <div class="input">
+                    <div class="inline-inputs">
+                        <input type="text" class="integer-dragger" name="stroke-opacity" />
+                        <span class="help-inline">Set the opacity for the border lines.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="clearfix">
+                <label>Line Thickness</label>
+                <div class="input">
+                    <div class="inline-inputs">
+                        <input type="text" class="integer-dragger" name="stroke-width" />
+                        <span class="help-inline">Set the width, in pixels, for the border lines.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="clearfix">
+                <label>Point Radius</label>
+                <div class="input">
+                    <div class="inline-inputs">
+                        <input type="text" class="integer-dragger" name="point-radius" />
+                        <span class="help-inline">Set the radius for point on the map.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="clearfix">
+                <div class="input">
+                    <div class="inline-inputs">
+                        <button class="btn icon undo reset-styles">Reset Item Styles</button>
+                        <span class="help-inline">Reset all styles to match the exhibit defaults.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="clearfix">
+                <div class="input">
+                    <div class="inline-inputs">
+                        <button class="btn icon home map-focus">Fix Item-Specific Map Focus</button>
+                        <span class="help-inline">Set a custom map focus for the item.</span>
+                    </div>
+                </div>
+            </div>
+
+            </div>
+
+            <div id="edit-form-actions" class="actions">
                 <input type="submit" class="btn primary" value="Save">
                 <button id="record-delete-button" class="btn danger">Delete</button>
             </div>

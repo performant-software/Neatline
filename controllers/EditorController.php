@@ -192,7 +192,7 @@ class Neatline_EditorController extends Omeka_Controller_Action
             $item = $this->_itemsTable->find($itemId);
 
             // Output the JSON string.
-            echo $this->_recordsTable->buildEditFormJson($item, $neatline);
+            echo NeatlineDataRecord::buildEditFormForNewRecordJson($item);
 
         }
 
@@ -226,10 +226,15 @@ class Neatline_EditorController extends Omeka_Controller_Action
         $endTime =                  $_post['end_time'];
         $geoCoverage =              $_post['geocoverage'];
         $vectorColor =              $_post['vector_color'];
+        $vectorOpacity =            $_post['vector_opacity'];
+        $strokeColor =              $_post['stroke_color'];
+        $strokeOpacity =            $_post['stroke_opacity'];
+        $strokeWidth =              $_post['stroke_width'];
+        $pointRadius =              $_post['point_radius'];
         $spaceStatus =              (boolean) json_decode($_post['space_active']);
         $timeStatus =               (boolean) json_decode($_post['time_active']);
-        $leftPercentage =           (int) $_post['left_percent'];
-        $rightPercentage =          (int) $_post['right_percent'];
+        $leftPercent =              (int) $_post['left_percent'];
+        $rightPercent =             (int) $_post['right_percent'];
 
         // Fetch the exhibit, item, and record objects.
         $neatline = $this->_neatlinesTable->find($neatlineId);
@@ -245,26 +250,49 @@ class Neatline_EditorController extends Omeka_Controller_Action
             $record = $this->_recordsTable->createOrGetRecord($item, $neatline);
         }
 
-        // Save the record data.
-        $statuses = $this->_recordsTable->saveItemFormData(
-            $record,
-            $title,
-            $description,
-            $startDate,
-            $startTime,
-            $endDate,
-            $endTime,
-            $vectorColor,
-            $leftPercentage,
-            $rightPercentage,
-            $geoCoverage,
-            $spaceStatus,
-            $timeStatus
-        );
+        // Capture starting time and space parameters.
+        $originalCoverage = $record->geocoverage;
+        $originalDate = $record->start_date;
 
+        // Set text parameters.
+        $record->setNotEmpty('title', $title);
+        $record->setNotEmpty('description', $description);
+        $record->setNotEmpty('start_date', $startDate);
+        $record->setNotEmpty('start_time', $startTime);
+        $record->setNotEmpty('end_date', $endDate);
+        $record->setNotEmpty('end_time', $endTime);
+        $record->setNotEmpty('geocoverage', $geoCoverage);
+
+        // Set styles and percentages.
+        $record->setStyle('vector_color', $vectorColor);
+        $record->setStyle('vector_opacity', $vectorOpacity);
+        $record->setStyle('stroke_color', $strokeColor);
+        $record->setStyle('stroke_opacity', $strokeOpacity);
+        $record->setStyle('stroke_width', $strokeWidth);
+        $record->setStyle('point_radius', $pointRadius);
+        $record->setPercentages($leftPercent, $rightPercent);
+
+        // If there is novel coverage data, flip on the status.
+        if (is_null($originalCoverage) && !is_null($record->geocoverage)) {
+            $record->setStatus('space', true);
+        }
+
+        // If there is novel date data, flip on the status.
+        if (is_null($originalDate) && !is_null($record->start_date)) {
+            $record->setStatus('time', true);
+        }
+
+        // Commit.
+        $record->save();
+
+        // Return a JSON array containing the (potentially new) record id
+        // and the updated space and time status trackers.
         echo json_encode(array(
-            'statuses' => $statuses,
-            'recordid' => $record->id
+            'recordid' =>   $record->id,
+            'statuses' =>   array(
+                'space' =>  (bool) $record->space_active,
+                'time' =>   (bool) $record->time_active
+            )
         ));
 
     }
@@ -470,6 +498,42 @@ class Neatline_EditorController extends Omeka_Controller_Action
 
     /**
      * ~ AJAX ~
+     * Save default map settings.
+     *
+     * @return void
+     */
+    public function mapsettingsAction()
+    {
+
+        // Supress the default Zend layout-sniffer functionality.
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        // Get the post.
+        $_post = $this->_request->getPost();
+
+        // Get parameters from the ajax request.
+        $exhibitId =                (int) $_post['exhibit_id'];
+        $vectorColor =              $_post['vector_color'];
+        $strokeColor =              $_post['stroke_color'];
+        $vectorOpacity =            (int) $_post['vector_opacity'];
+        $strokeOpacity =            (int) $_post['stroke_opacity'];
+        $strokeWidth =              (int) $_post['stroke_width'];
+        $pointRadius =              (int) $_post['point_radius'];
+
+        // Do save.
+        $exhibit = $this->_neatlinesTable->find($exhibitId);
+        $exhibit->setStyle('vector_color', $vectorColor);
+        $exhibit->setStyle('stroke_color', $strokeColor);
+        $exhibit->setStyle('vector_opacity', $vectorOpacity);
+        $exhibit->setStyle('stroke_opacity', $strokeOpacity);
+        $exhibit->setStyle('stroke_width', $strokeWidth);
+        $exhibit->setStyle('point_radius', $pointRadius);
+        $exhibit->save();
+
+    }
+
+    /**
+     * ~ AJAX ~
      * Construct markup for a new item row.
      *
      * @return void
@@ -487,6 +551,31 @@ class Neatline_EditorController extends Omeka_Controller_Action
 
         // Push into the view.
         $this->view->record = $record;
+
+    }
+
+    /**
+     * ~ AJAX ~
+     * Set all styles on a record to null.
+     *
+     * @return void
+     */
+    public function resetstylesAction()
+    {
+
+        // Supress the default Zend layout-sniffer functionality.
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        // Get the post.
+        $_post = $this->_request->getPost();
+
+        // Get the record.
+        $recordId = (int) $_post['record_id'];
+        $record = $this->_recordsTable->find($recordId);
+
+        // Reset.
+        $record->resetStyles();
+        $record->save();
 
     }
 
