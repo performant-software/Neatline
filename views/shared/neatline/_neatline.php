@@ -33,10 +33,13 @@
     <div id="timeline" class="neatline-block neatlinetime-timeline"></div>
 
     <div id="items" class="neatline-block">
-        <?php echo $this->partial('neatline/_items.php', array(
-            'public' => $public
-        )); ?>
+        <div id="items-container"></div>
     </div>
+
+    <div id="scroll">
+        <div class="left"></div>
+        <div class="right"></div>
+    <div>
 
 </div>
 

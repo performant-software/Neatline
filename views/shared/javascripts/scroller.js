@@ -1,10 +1,5 @@
-<?php
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
-
-/**
- * Undated items markup.
- *
- * PHP version 5
+/*
+ * Left and right scroll buttons.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -23,6 +18,30 @@
  * @copyright   2011 The Board and Visitors of the University of Virginia
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache 2 License
  */
-?>
 
-<div id="items-container"></div>
+(function($, undefined) {
+
+
+    $.widget('neatline.scroller', {
+
+        options: {
+
+        },
+
+        /*
+         * .
+         *
+         * - return void.
+         */
+        _create: function() {
+
+            // Get markup.
+            this._body =        $('body');
+            this._window =      $(window);
+
+        }
+
+    });
+
+
+})( jQuery );

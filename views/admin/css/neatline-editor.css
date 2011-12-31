@@ -682,7 +682,7 @@ table#items-table th, table#items td {
 }
 
 table#items-table tr.hidden {
-    visibility: hidden;
+    display: none;
 }
 
 
