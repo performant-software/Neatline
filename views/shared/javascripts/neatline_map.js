@@ -127,7 +127,6 @@
                 controls: [
                   new OpenLayers.Control.PanZoomBar(),
                   new OpenLayers.Control.MousePosition(),
-                  new OpenLayers.Control.LayerSwitcher(),
                   new OpenLayers.Control.Navigation(),
                   new OpenLayers.Control.ScaleLine(),
                 ],
@@ -184,8 +183,6 @@
          */
         _instantiateImageMap: function() {
 
-
-
             // Set OL global attributes.
             OpenLayers.IMAGE_RELOAD_ATTEMTPS = 3;
             OpenLayers.Util.onImageLoadErrorColor = "transparent";
@@ -196,7 +193,6 @@
                 controls: [
                   new OpenLayers.Control.PanZoomBar(),
                   new OpenLayers.Control.MousePosition(),
-                  new OpenLayers.Control.LayerSwitcher(),
                   new OpenLayers.Control.Navigation(),
                 ],
                 maxResolution: 'auto',
@@ -870,217 +866,7 @@
 
             });
 
-        },
-
-
-
-
-
-
-
-
-
-        /*
-         * Update the feature color for the current editing layer.
-         */
-        // setItemVectorColor: function(color) {
-
-        //     // If there is no extant data record, abort.
-        //     if (typeof this.record.data === 'undefined') {
-        //         return;
-        //     }
-
-        //     // Update the record tracker object.
-        //     this.record.data.vector_color = color;
-
-        //     // Rebuild the style map.
-        //     this._currentEditLayer.styleMap = this._getStyleMap(
-        //         this.record.data.vector_color,
-        //         this.record.data.vector_opacity,
-        //         this.record.data.stroke_color,
-        //         this.record.data.stroke_opacity,
-        //         this.record.data.stroke_width,
-        //         this.record.data.point_radius);
-
-        //     // Rerender the layer to manifest the change.
-        //     this._currentEditLayer.redraw();
-
-        // },
-
-        /*
-         * Set default fill color.
-         */
-        // setDefaultVectorColor: function(color) {
-
-        //     var self = this;
-
-        //     // Walk the current edit layers.
-        //     this._db().each(function(record, id) {
-
-        //         // Only push the change if the native style is null.
-        //         if (record.data._native_styles.vector_color == null) {
-
-        //             // Update the record tracker object.
-        //             record.data.vector_color = color;
-
-        //             // Rebuild the style map.
-        //             record.layer.styleMap = self._getStyleMap(
-        //                 record.data.vector_color,
-        //                 record.data.vector_opacity,
-        //                 record.data.stroke_color,
-        //                 record.data.stroke_opacity,
-        //                 record.data.stroke_width,
-        //                 record.data.point_radius);
-
-        //             // Rerender the layer to manifest the change.
-        //             record.layer.redraw();
-
-        //         }
-
-        //     });
-
-        // },
-
-        /*
-         * Update the stroke color for the current editing layer.
-         */
-        // setItemStrokeColor: function(color) {
-
-        //     // If there is no extant data record, abort.
-        //     if (typeof this.record.data === 'undefined') {
-        //         return;
-        //     }
-
-        //     // Update the record tracker object.
-        //     this.record.data.stroke_color = color;
-
-        //     // Rebuild the style map.
-        //     this._currentEditLayer.styleMap = this._getStyleMap(
-        //         this.record.data.vector_color,
-        //         this.record.data.vector_opacity,
-        //         this.record.data.stroke_color,
-        //         this.record.data.stroke_opacity,
-        //         this.record.data.stroke_width,
-        //         this.record.data.point_radius);
-
-        //     // Rerender the layer to manifest the change.
-        //     this._currentEditLayer.redraw();
-
-        // },
-
-        /*
-         * Update the vector opacity for the current editing layer.
-         */
-        // setItemVectorOpacity: function(value) {
-
-        //     // If there is no extant data record, abort.
-        //     if (typeof this.record.data === 'undefined') {
-        //         return;
-        //     }
-
-        //     // Get the decimal value.
-        //     var floatVal = value / 100;
-
-        //     // Update the record tracker object.
-        //     this.record.data.vector_opacity = floatVal;
-
-        //     // Rebuild the style map.
-        //     this._currentEditLayer.styleMap = this._getStyleMap(
-        //         this.record.data.vector_color,
-        //         this.record.data.vector_opacity,
-        //         this.record.data.stroke_color,
-        //         this.record.data.stroke_opacity,
-        //         this.record.data.stroke_width,
-        //         this.record.data.point_radius);
-
-        //     // Rerender the layer to manifest the change.
-        //     this._currentEditLayer.redraw();
-
-        // },
-
-        /*
-         * Update the stroke opacity for the current editing layer.
-         */
-        // setItemStrokeOpacity: function(value) {
-
-        //     // If there is no extant data record, abort.
-        //     if (typeof this.record.data === 'undefined') {
-        //         return;
-        //     }
-
-        //     // Get the decimal value.
-        //     var floatVal = value / 100;
-
-        //     // Update the record tracker object.
-        //     this.record.data.stroke_opacity = floatVal;
-
-        //     // Rebuild the style map.
-        //     this._currentEditLayer.styleMap = this._getStyleMap(
-        //         this.record.data.vector_color,
-        //         this.record.data.vector_opacity,
-        //         this.record.data.stroke_color,
-        //         this.record.data.stroke_opacity,
-        //         this.record.data.stroke_width,
-        //         this.record.data.point_radius);
-
-        //     // Rerender the layer to manifest the change.
-        //     this._currentEditLayer.redraw();
-
-        // },
-
-        /*
-         * Update the stroke width for the current editing layer.
-         */
-        // setItemStrokeWidth: function(value) {
-
-        //     // If there is no extant data record, abort.
-        //     if (typeof this.record.data === 'undefined') {
-        //         return;
-        //     }
-
-        //     // Update the record tracker object.
-        //     this.record.data.stroke_width = value;
-
-        //     // Rebuild the style map.
-        //     this._currentEditLayer.styleMap = this._getStyleMap(
-        //         this.record.data.vector_color,
-        //         this.record.data.vector_opacity,
-        //         this.record.data.stroke_color,
-        //         this.record.data.stroke_opacity,
-        //         this.record.data.stroke_width,
-        //         this.record.data.point_radius);
-
-        //     // Rerender the layer to manifest the change.
-        //     this._currentEditLayer.redraw();
-
-        // },
-
-        /*
-         * Update the point radius for the current editing layer.
-         */
-        // setItemPointRadius: function(value) {
-
-        //     // If there is no extant data record, abort.
-        //     if (typeof this.record.data === 'undefined') {
-        //         return;
-        //     }
-
-        //     // Update the record tracker object.
-        //     this.record.data.point_radius = value;
-
-        //     // Rebuild the style map.
-        //     this._currentEditLayer.styleMap = this._getStyleMap(
-        //         this.record.data.vector_color,
-        //         this.record.data.vector_opacity,
-        //         this.record.data.stroke_color,
-        //         this.record.data.stroke_opacity,
-        //         this.record.data.stroke_width,
-        //         this.record.data.point_radius);
-
-        //     // Rerender the layer to manifest the change.
-        //     this._currentEditLayer.redraw();
-
-        // }
+        }
 
     });
 
