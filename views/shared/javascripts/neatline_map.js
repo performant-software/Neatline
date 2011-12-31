@@ -83,6 +83,11 @@
                 this._instantiateImageMap();
             }
 
+            // Construct OSM.
+            else {
+                this._instantiateOSMMap();
+            }
+
             // Start-up.
             this.loadData();
 
@@ -158,7 +163,74 @@
             );
 
             // Push the base layer onto the map.
-            // this.map.addLayers([this.baseLayer]);
+            this.map.addLayers([this.baseLayer]);
+
+            // If there is a default bounding box set for the exhibit, construct
+            // a second Bounds object to use as the starting zoom target.
+            if (Neatline.default_map_bounds != null) {
+                var boundsArray = Neatline.default_map_bounds.split(',');
+                var bounds = new OpenLayers.Bounds(
+                    parseFloat(boundsArray[0]),
+                    parseFloat(boundsArray[1]),
+                    parseFloat(boundsArray[2]),
+                    parseFloat(boundsArray[3])
+                );
+            }
+
+            // Set starting zoom focus.
+            this.map.zoomToExtent(bounds);
+
+        },
+
+        /*
+         * Initialize an OpenStreetMap-based map.
+         */
+        _instantiateOSMMap: function() {
+
+            // Set OL global attributes.
+            OpenLayers.IMAGE_RELOAD_ATTEMTPS = 3;
+            OpenLayers.Util.onImageLoadErrorColor = "transparent";
+            OpenLayers.ImgPath = 'http://js.mapbox.com/theme/dark/';
+
+            var tiled;
+            var pureCoverage = true;
+
+            // Pink tile avoidance.
+            OpenLayers.IMAGE_RELOAD_ATTEMPTS = 5;
+
+            // Make OL compute scale according to WMS spec.
+            OpenLayers.DOTS_PER_INCH = 25.4 / 0.28;
+
+            // Set tile image format.
+            format = 'image/png';
+            if(pureCoverage) {
+                format = "image/png8";
+            }
+
+            // Build the default bounds array.
+            var bounds = new OpenLayers.Bounds(
+                -2414397.3028494,
+                3903715.4710087,
+                4952909.2303634,
+                7778155.5601883
+            );
+
+            // Starting options.
+            var options = {
+                controls: [
+                  new OpenLayers.Control.PanZoomBar(),
+                  new OpenLayers.Control.MousePosition(),
+                  new OpenLayers.Control.Navigation(),
+                  new OpenLayers.Control.ScaleLine(),
+                ],
+                maxResolution: 'auto',
+                units: 'm'
+            };
+
+            // Instantiate the map.
+            this.map = new OpenLayers.Map('map', options);
+
+            // Push the base layer onto the map.
             this.map.addLayers([new OpenLayers.Layer.OSM()]);
 
             // If there is a default bounding box set for the exhibit, construct
