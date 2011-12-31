@@ -31,6 +31,8 @@
 
         <fieldset>
 
+            <div id="edit-form-inputs" class="inputs">
+
             <div class="clearfix">
                 <label for="title">Title</label>
                 <div class="input">
@@ -156,7 +158,9 @@
                 </div>
             </div>
 
-            <div class="actions">
+            </div>
+
+            <div id="edit-form-actions" class="actions">
                 <input type="submit" class="btn primary" value="Save">
                 <button id="record-delete-button" class="btn danger">Delete</button>
             </div>

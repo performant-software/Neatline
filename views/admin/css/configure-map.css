@@ -26,3 +26,9 @@
 #configure-map {
     width: 212px;
 }
+
+#configure-map h5 {
+    font-size: 1.1em;
+    color: #4E4950;
+    line-height: 24px;
+}

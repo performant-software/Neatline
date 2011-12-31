@@ -51,6 +51,7 @@
         _create: function() {
 
             // Getters.
+            this._window =                  $(window);
             this.form =                     this.element.find('form');
             this.saveButton =               this.form.find('input[type="submit"]');
             this.deleteButton =             this.form.find('#record-delete-button');
@@ -73,6 +74,8 @@
             this.saveButton =               this.form.find('input[type="submit"]');
             this.textInputs =               this.form.find('input[type="text"], textarea');
             this.fieldset =                 this.form.find('fieldset');
+            this.actions =                  this.form.find('#edit-form-actions');
+            this.inputs =                   this.form.find('#edit-form-inputs');
             this.ambiguity =                this.form.find('.date-ambiguity-container');
             this.mapFocus =                 this.form.find('.map-focus');
 
@@ -374,9 +377,19 @@
         _showContainer: function() {
 
             // Display the form and zero the height.
+            this.form.css('height', 0);
             this.container.css('display', 'table-cell');
             this.element.css('visibility', 'visible');
-            this.form.css('height', 0);
+
+            // Calculate the amount of vertical space available under
+            // the bottom of the item row listing.
+            var itemBottomOffset = this.item.offset().top + this.item.height();
+            var availableHeight = this._window.height() - itemBottomOffset;
+
+            // If the form fits in the space.
+            if (this._nativeHeight <= availableHeight) {
+
+            }
 
             // Animate up the height.
             this.form.animate({
@@ -797,6 +810,7 @@
         _measureForm: function() {
 
             this._nativeHeight = this.fieldset[0].scrollHeight;
+            this._actionsHeight = this.actions.height();
 
          }
 
