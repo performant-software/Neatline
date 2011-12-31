@@ -646,8 +646,8 @@ table#items-table tr {
 }
 
 table#items-table td {
-    border-bottom: none;
-    border-top: 1px solid #f0f0f0;
+    border-top: none;
+    border-bottom: 1px solid #f0f0f0;
 }
 
 table#items-table tr:first-child td {
@@ -682,7 +682,7 @@ table#items-table th, table#items td {
 }
 
 table#items-table tr.hidden {
-    display: none;
+    visibility: hidden;
 }
 
 

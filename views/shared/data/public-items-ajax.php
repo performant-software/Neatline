@@ -30,7 +30,7 @@
     <?php foreach ($records as $record): ?>
 
         <li class="item-title"><?php echo $record->getTitle(); ?></li>
-        <li class="item-title"><?php echo nl2br($record->getDescription()); ?></li>
+        <li class="item-description"><?php echo nl2br($record->getDescription()); ?></li>
 
     <?php endforeach; ?>
 
