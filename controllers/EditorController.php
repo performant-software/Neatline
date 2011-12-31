@@ -104,7 +104,7 @@ class Neatline_EditorController extends Omeka_Controller_Action
             // Add the parameters array.
             $neatlineData['image'] = array(
                 'record' =>         $image,
-                'path' =>           $image->getWebPath(),
+                'path' =>           $image->getWebPath('archive'),
                 'name' =>           $image->original_filename
             );
 

@@ -76,7 +76,7 @@ function neatline_queueEditorAssets()
     queue_js('editor/utilities/_integer_dragger', 'javascripts');
     queue_js('editor/_constructEditor', 'javascripts');
 
-    // 3rd party code.
+    // Extenal libraries.
     queue_js('libraries/jquery.miniColors-0.1/jquery.miniColors.min', 'javascripts');
 
 }

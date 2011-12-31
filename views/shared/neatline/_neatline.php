@@ -37,8 +37,8 @@
     </div>
 
     <div id="scroll">
-        <div class="left"></div>
-        <div class="right"></div>
+        <div class="arrow-left">‹</div>
+        <div class="arrow-right">›</div>
     <div>
 
 </div>
@@ -61,16 +61,16 @@
 
         Neatline.image = <?php echo json_encode(
             array(
-                'path' => $image['path'],
-                'name' => $image['name'],
-                'width' => $this->fileMetadata(
-                        $image['record'],
-                        'Omeka Image File',
-                        'Width'),
-                'height' => $this->fileMetadata(
-                        $image['record'],
-                        'Omeka Image File',
-                        'Height')
+                'path' =>   $image['path'],
+                'name' =>   $image['name'],
+                'width' =>  (int) $this->fileMetadata(
+                                $image['record'],
+                                'Omeka Image File',
+                                'Width'),
+                'height' => (int) $this->fileMetadata(
+                                $image['record'],
+                                'Omeka Image File',
+                                'Height')
             )
         ); ?>
 

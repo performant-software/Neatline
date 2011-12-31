@@ -74,6 +74,7 @@ table th, table td {
     text-decoration: none;
 }
 
+
 /* Items */
 
 #items {
@@ -83,19 +84,59 @@ table th, table td {
 
 #items-container ul {
     list-style: none;
-    margin: 1.5em;
+    margin: 0;
+}
+
+#items-container li{
+    cursor: pointer;
 }
 
 #items-container li.item-title {
     font-size: 1.5em;
     font-weight: bold;
-    color: #434343;
+    color: #202020;
+    padding: 13px 20px;
+}
+
+#items-container li.item-title.active {
+    color: #fff;
+    opacity: 0.9;
+    background-color: #4c3f53;
+    background-repeat: repeat-x;
+    background-image: -khtml-gradient(linear, left top, left bottom, from(#4c3f53), to(#2d2531));
+    background-image: -moz-linear-gradient(top, #4c3f53, #2d2531);
+    background-image: -ms-linear-gradient(top, #4c3f53, #2d2531);
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #4c3f53), color-stop(100%, #2d2531));
+    background-image: -webkit-linear-gradient(top, #4c3f53, #2d2531);
+    background-image: -o-linear-gradient(top, #4c3f53, #2d2531);
+    background-image: linear-gradient(top, #4c3f53, #2d2531);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#4c3f53', endColorstr='#2d2531', GradientType=0);
 }
 
 #items-container li.item-description {
     font-size: 14px;
-    margin-top: 1em;
-    margin-bottom: 2em;
+    margin-bottom: 1em;
     line-height: 19px;
     color: #616161;
+    padding: 5px 20px 0 20px;
+}
+
+
+/* Scroller */
+
+#scroll {
+    display: block;
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    z-index: 999;
+}
+
+#scroll .arrow-left, #scroll .arrow-right {
+    display: inline;
+    font-size: 90px;
+    cursor: pointer;
+    font-family: Trykker;
+    padding: 0 15px 0 15px;
+    font-weight: bold;
 }

@@ -44,8 +44,8 @@
             <div class="clearfix">
                 <label for="map-description">Description</label>
                 <div class="input">
-                    <textarea class="xlarge" name="description" placeholder="Description" rows="4"></textarea>
-                    <span class="help-block">Descriptive or annotate the item.</span>
+                    <textarea id="item-description" class="xlarge" name="description" placeholder="Description" rows="4"></textarea>
+                    <span class="help-block">Describe or annotate the item.</span>
                 </div>
             </div>
 

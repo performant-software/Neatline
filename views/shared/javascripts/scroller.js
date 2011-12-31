@@ -26,10 +26,22 @@
 
         options: {
 
+            colors: {
+                default: '#404040',
+                purple: '#866398',
+                orange: '#f19f00'
+            },
+
+            durations: {
+                enter: 70,
+                leave: 120,
+                click: 300
+            }
+
         },
 
         /*
-         * .
+         * Inject the markup, bind events.
          *
          * - return void.
          */
@@ -38,8 +50,129 @@
             // Get markup.
             this._body =        $('body');
             this._window =      $(window);
+            this.container =    $('#scroll');
+            this.leftArrow =    this.container.find('.arrow-left');
+            this.rightArrow =   this.container.find('.arrow-right');
 
-        }
+            // Inject the container.
+            this.element.append(this.container);
+
+            // Bind events.
+            this._addEvents();
+
+        },
+
+        /*
+         * Listen for mouseenter, mousedown, mouseleave.
+         *
+         * - return void.
+         */
+        _addEvents: function() {
+
+            var self = this;
+
+            // Left.
+            this.leftArrow.bind({
+
+                // Highlight.
+                'mouseenter': function() {
+                    self._highlightArrow(self.leftArrow);
+                },
+
+                // Un-highlight.
+                'mouseleave': function() {
+                    self._unhighlightArrow(self.leftArrow);
+                },
+
+                // Click.
+                'mousedown': function() {
+                    self._clickArrow(self.leftArrow);
+                    self._trigger('left');
+                }
+
+            });
+
+            // Right.
+            this.rightArrow.bind({
+
+                // Highlight.
+                'mouseenter': function() {
+                    self._highlightArrow(self.rightArrow);
+                },
+
+                // Un-highlight.
+                'mouseleave': function() {
+                    self._unhighlightArrow(self.rightArrow);
+                },
+
+                // Click.
+                'mousedown': function() {
+                    self._clickArrow(self.rightArrow);
+                    self._trigger('right');
+                }
+
+            });
+
+        },
+
+
+        /*
+         * =================
+         * DOM touches.
+         * =================
+         */
+
+
+        /*
+         * Fade up an arrow on mouseenter.
+         *
+         * - param DOM arrow: The arrow.
+         *
+         * - return void.
+         */
+        _highlightArrow: function(arrow) {
+
+            arrow.stop().animate({
+                'color': this.options.colors.purple
+            }, this.options.durations.enter);
+
+        },
+
+        /*
+         * Fade down an arrow on mouseleave.
+         *
+         * - param DOM arrow: The arrow.
+         *
+         * - return void.
+         */
+        _unhighlightArrow: function(arrow) {
+
+            arrow.stop().animate({
+                'color': this.options.colors.default
+            }, this.options.durations.leave);
+
+        },
+
+        /*
+         * Click effect.
+         *
+         * - param DOM arrow: The arrow.
+         *
+         * - return void.
+         */
+        _clickArrow: function(arrow) {
+
+            var self = this;
+
+            // Pop.
+            arrow.css('color', this.options.colors.orange);
+
+            // Fade down.
+            arrow.stop().animate({
+                'color': self.options.colors.purple
+            }, self.options.durations.click, 'easeInQuart');
+
+        },
 
     });
 

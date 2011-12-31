@@ -203,7 +203,7 @@
 
                     this.items.neatlineitems({
 
-                        'undateditemclick': function(event, obj) {
+                        'itemclick': function(event, obj) {
 
                             // When the user clicks on an item title.
                             self._trigger('undateditemclick', {}, {
@@ -222,7 +222,7 @@
 
                     this.items.itemorderer({
 
-                        'undateditemclick': function(event, obj) {
+                        'itemclick': function(event, obj) {
 
                             // When the user clicks on an item title.
                             self._trigger('undateditemclick', {}, {
@@ -242,7 +242,17 @@
             }
 
             // ** SCROLLER
-            this.majorBlock.scroller();
+            this.majorBlock.scroller({
+
+                'left': function() {
+                    self.items.neatlineitems('scrollLeft');
+                },
+
+                'right': function() {
+                    self.items.neatlineitems('scrollRight');
+                }
+
+            });
 
         },
 
