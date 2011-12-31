@@ -169,6 +169,8 @@
          */
         _postSettings: function() {
 
+            var self = this;
+
             // Get the settings.
             var data = this._getData();
 
@@ -176,12 +178,11 @@
             $.ajax({
 
                 url: 'mapsettings',
-                dataType: 'json',
                 type: 'POST',
                 data: data,
 
                 success: function() {
-                    console.log('success');
+                    self._trigger('newdefaults');
                 }
 
             });

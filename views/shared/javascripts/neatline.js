@@ -259,7 +259,7 @@
          */
         saveSuccess: function() {
             this.element.css('opacity', 0);
-            this.element.animate({ 'opacity': 1 }, 1000);
+            this.element.animate({ 'opacity': 1 }, 500);
         },
 
         /*

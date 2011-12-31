@@ -34,7 +34,7 @@
 
 <!-- The top bar. -->
 <?php echo $this->partial('editor/_topbar.php', array(
-    'title' => $neatline->name
+    'neatline' => $neatline
 )); ?>
 
 <!-- The item browser. -->

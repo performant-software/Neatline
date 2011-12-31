@@ -74,7 +74,7 @@
             this.isDragging = false;
 
             // Set the starting value.
-            this._setInputValue(this.options.default);
+            this._setStartingValue();
 
             // Build the tooltip.
             if (this.options.tip.show) {
@@ -171,6 +171,30 @@
          * =================
          */
 
+
+        /*
+         * Set the starting value. If there is a value in the input when
+         * the widget is instantiated, try to use the existing value.
+         * Otherwise, revent to the default in the options.
+         *
+         * - return void.
+         */
+        _setStartingValue: function() {
+
+            // Get val.
+            var val = this.element.val();
+
+            // If integer, set.
+            if (!isNaN(parseInt(val))) {
+                this._setInputValue(val);
+            }
+
+            // Otherwise, revent to default.
+            else {
+                this._setInputValue(this.options.default);
+            }
+
+        },
 
         /*
          * Set the input's value, update tracker.

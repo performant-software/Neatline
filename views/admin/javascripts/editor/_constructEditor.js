@@ -307,6 +307,11 @@ jQuery(document).ready(function($) {
         // Manifest new default point radius.
         'pointradiusedit': function(event, obj) {
             neatlineContainer.neatline('setDefaultPointRadius', obj.value);
+        },
+
+        // When new defaults have been successfully committed.
+        'newdefaults': function(event, obj) {
+            neatlineContainer.neatline('saveSuccess');
         }
 
     });
