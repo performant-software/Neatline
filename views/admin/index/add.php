@@ -50,18 +50,32 @@ head(array('content_class' => 'neatline'));
 
     <hr>
 
-    <div class="neatline-select-container">
-        <h2 class="neatline-label">Choose a map:</h2>
-        <?php echo neatline_mapSelect($neatline->map_id); ?>
-    </div>
+    <?php if (plugin_is_active('NeatlineMaps')): ?>
 
-    <div class="neatline-select-container">
-        <h2 class="neatline-label">Or, choose an image:</h2>
-        <?php echo neatline_imageSelect($neatline->image_id); ?>
-    </div>
-    <?php if (array_key_exists('map', $errors)) { echo neatline_error($errors['map']); } ?>
+        <div class="neatline-select-container">
+            <h2 class="neatline-label">Choose a map:</h2>
+            <?php echo neatline_mapSelect($neatline->map_id); ?>
+        </div>
 
-    <hr>
+        <div class="neatline-select-container">
+            <h2 class="neatline-label">Or, choose an image:</h2>
+            <?php echo neatline_imageSelect($neatline->image_id); ?>
+        </div>
+        <?php if (array_key_exists('map', $errors)) { echo neatline_error($errors['map']); } ?>
+
+        <hr>
+
+    <?php else: ?>
+
+        <div class="neatline-select-container">
+            <h2 class="neatline-label">Choose an image:</h2>
+            <?php echo neatline_imageSelect($neatline->image_id); ?>
+        </div>
+        <?php if (array_key_exists('map', $errors)) { echo neatline_error($errors['map']); } ?>
+
+        <hr>
+
+    <?php endif; ?>
 
     <?php echo neatline_buttonTo('', 'save_neatline',
         'Create Neatline', array('class' => 'neatline btn primary'), 'create-neatline', array(), false, 'create-fieldset'); ?>
