@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
 
 /**
- * Undated items markup.
+ * Items browse markup.
  *
  * PHP version 5
  *
@@ -25,15 +25,13 @@
  */
 ?>
 
-<div id="public-items-list-header">
-    <div id="arrows">
-        <div id="left-arrow" class="arrow left"></div>
-        <div id="right-arrow" class="arrow right"></div>
-    </div>
-    <?php if (!$public): ?>
-        <div id="reorder-items"></div>
-        <button id="order-save-button" class="btn icon approve">Save</button>
-    <?php endif; ?>
-</div>
+<ul>
 
-<div id="undated-items-list-container"></div>
+    <?php foreach ($records as $record): ?>
+
+        <li class="item-title"><?php echo $record->getTitle(); ?></li>
+        <li class="item-title"><?php echo nl2br($record->getDescription()); ?></li>
+
+    <?php endforeach; ?>
+
+</ul>

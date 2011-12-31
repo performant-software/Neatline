@@ -62,7 +62,7 @@
             // Getters.
             this._window =                  $(window);
             this._body =                    $('body');
-            this.listContainer =            $('#undated-items-list-container');
+            this.listContainer =            $('#items-container');
             this.listHeader =               $('#public-items-list-header');
             this.leftArrow =                $('#left-arrow');
             this.rightArrow =               $('#right-arrow');

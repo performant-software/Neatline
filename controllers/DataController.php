@@ -93,7 +93,7 @@ class Neatline_DataController extends Omeka_Controller_Action
     {
 
         // Set the layout.
-        $this->_helper->viewRenderer('udi-ajax');
+        $this->_helper->viewRenderer('public-items-ajax');
 
         // Get the exhibit and active records.
         $neatlineId = $this->_request->getParam('id');
