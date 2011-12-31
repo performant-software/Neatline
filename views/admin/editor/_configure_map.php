@@ -56,11 +56,13 @@
 <hr />
 
 <!-- Base layer picker. -->
+<!--
 <h5>Base Layer</h5>
 <select name="base-layer">
     <option>[none]</option>
     <option>OpenStreetMap</option>
 </select>
 <hr />
+-->
 
 <button class="btn icon approve save">Save</button>

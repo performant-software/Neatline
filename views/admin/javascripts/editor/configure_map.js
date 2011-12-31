@@ -130,11 +130,59 @@
             this.saveButton.bind({
 
                 'mousedown': function() {
-                    self._trigger('save');
+                    self._postSettings();
                 },
 
                 'click': function(event) {
                     event.preventDefault();
+                }
+
+            });
+
+        },
+
+        /*
+         * Get values out of inputs.
+         *
+         * - return object: The data.
+         */
+        _getData: function() {
+
+            var data = {};
+
+            data['vector_color'] =          this.vectorColor.val();
+            data['stroke_color'] =          this.strokeColor.val();
+            data['vector_opacity'] =        parseInt(this.vectorOpacity.val());
+            data['stroke_opacity'] =        parseInt(this.strokeOpacity.val());
+            data['stroke_width'] =          parseInt(this.strokeWidth.val());
+            data['point_radius'] =          parseInt(this.pointRadius.val());
+
+            return data;
+
+        },
+
+        /*
+         * Commit the settings.
+         *
+         * - return void.
+         */
+        _postSettings: function() {
+
+            // Get the settings.
+            var data = this._getData();
+
+            console.log(data);
+
+            // Commit.
+            $.ajax({
+
+                url: 'mapsettings',
+                dataType: 'json',
+                type: 'POST',
+                data: data,
+
+                success: function() {
+                    console.log('success');
                 }
 
             });
