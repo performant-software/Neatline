@@ -150,6 +150,7 @@
 
             var data = {};
 
+            data['exhibit_id'] =            Neatline.id;
             data['vector_color'] =          this.vectorColor.val();
             data['stroke_color'] =          this.strokeColor.val();
             data['vector_opacity'] =        parseInt(this.vectorOpacity.val());

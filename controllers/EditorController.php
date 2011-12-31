@@ -498,6 +498,34 @@ class Neatline_EditorController extends Omeka_Controller_Action
 
     /**
      * ~ AJAX ~
+     * Save default map settings.
+     *
+     * @return void
+     */
+    public function mapsettingsAction()
+    {
+
+        // Supress the default Zend layout-sniffer functionality.
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        // Get the post.
+        $_post = $this->_request->getPost();
+
+        // Get parameters from the ajax request.
+        $exhibitId =                (int) $_post['neatline_id'];
+        $vectorColor =              $_post['vector_color'];
+        $strokeColor =              $_post['stroke_color'];
+        $vectorOpacity =            (int) $_post['vector_opacity'];
+        $strokeOpacity =            (int) $_post['stroke_opacity'];
+        $strokeWidth =              (int) $_post['stroke_width'];
+        $pointRadius =              (int) $_post['point_radius'];
+
+        // Do save.
+
+    }
+
+    /**
+     * ~ AJAX ~
      * Construct markup for a new item row.
      *
      * @return void
