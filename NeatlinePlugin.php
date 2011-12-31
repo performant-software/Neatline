@@ -89,6 +89,7 @@ class NeatlinePlugin
     public function install()
     {
 
+        // Exhibits table.
         $sql = "CREATE TABLE IF NOT EXISTS `{$this->_db->prefix}neatline_exhibits` (
                 `id`                    int(10) unsigned not null auto_increment,
                 `added`                 TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -116,6 +117,7 @@ class NeatlinePlugin
 
         $this->_db->query($sql);
 
+        // Records table.
         $sql = "CREATE TABLE IF NOT EXISTS `{$this->_db->prefix}neatline_data_records` (
                 `id`                    int(10) unsigned not null auto_increment,
                 `item_id`               int(10) unsigned NULL,
@@ -144,6 +146,14 @@ class NeatlinePlugin
                ) ENGINE=innodb DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
 
         $this->_db->query($sql);
+
+        // Set system styling defaults.
+        set_option('vector_color', '#5033de');
+        set_option('stroke_color', '#1e2ee6');
+        set_option('vector_opacity', 20);
+        set_option('stroke_opacity', 70);
+        set_option('stroke_width', 4);
+        set_option('point_radius', 6);
 
     }
 

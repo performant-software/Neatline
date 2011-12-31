@@ -72,12 +72,6 @@ class NeatlineDataRecord extends Omeka_record
      * Default attributes.
      */
     private static $defaults = array(
-        'vector_color' =>       '#724e85',
-        'vector_opacity' =>     40,
-        'stroke_color' =>       '#ffda82',
-        'stroke_opacity' =>     60,
-        'stroke_width' =>       1,
-        'point_radius' =>       6,
         'left_percent' =>       0,
         'right_percent' =>      100,
         'geocoverage' =>        'POINT()'
@@ -205,12 +199,12 @@ class NeatlineDataRecord extends Omeka_record
         $data = array();
 
         // Set the array values.
-        $data['vector_color'] =     self::$defaults['vector_color'];
-        $data['vector_opacity'] =   self::$defaults['vector_opacity'];
-        $data['stroke_color'] =     self::$defaults['stroke_color'];
-        $data['stroke_opacity'] =   self::$defaults['stroke_opacity'];
-        $data['stroke_width'] =     self::$defaults['stroke_width'];
-        $data['point_radius'] =     self::$defaults['point_radius'];
+        $data['vector_color'] =     get_option('vector_color');
+        $data['vector_opacity'] =   get_option('vector_opacity');
+        $data['stroke_color'] =     get_option('stroke_color');
+        $data['stroke_opacity'] =   get_option('stroke_opacity');
+        $data['stroke_width'] =     get_option('stroke_width');
+        $data['point_radius'] =     get_option('point_radius');
         $data['left_percent'] =     self::$defaults['left_percent'];
         $data['right_percent'] =    self::$defaults['right_percent'];
         $data['start_date'] =       '';
@@ -351,7 +345,7 @@ class NeatlineDataRecord extends Omeka_record
         }
 
         // If the value does not match the system default.
-        else if ($value != self::$defaults[$style]) {
+        else if ($value != get_option($style)) {
             $this[$style] = $value;
             return true;
         }
@@ -392,7 +386,7 @@ class NeatlineDataRecord extends Omeka_record
 
         // Fall back to system default.
         else {
-            return self::$defaults[$style];
+            return get_option($style);
         }
 
     }

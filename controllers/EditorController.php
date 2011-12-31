@@ -512,7 +512,7 @@ class Neatline_EditorController extends Omeka_Controller_Action
         $_post = $this->_request->getPost();
 
         // Get parameters from the ajax request.
-        $exhibitId =                (int) $_post['neatline_id'];
+        $exhibitId =                (int) $_post['exhibit_id'];
         $vectorColor =              $_post['vector_color'];
         $strokeColor =              $_post['stroke_color'];
         $vectorOpacity =            (int) $_post['vector_opacity'];
@@ -521,6 +521,14 @@ class Neatline_EditorController extends Omeka_Controller_Action
         $pointRadius =              (int) $_post['point_radius'];
 
         // Do save.
+        $exhibit = $this->_neatlinesTable->find($exhibitId);
+        $exhibit->setStyle('vector_color', $vectorColor);
+        $exhibit->setStyle('stroke_color', $strokeColor);
+        $exhibit->setStyle('vector_opacity', $vectorOpacity);
+        $exhibit->setStyle('stroke_opacity', $strokeOpacity);
+        $exhibit->setStyle('stroke_width', $strokeWidth);
+        $exhibit->setStyle('point_radius', $pointRadius);
+        $exhibit->save();
 
     }
 

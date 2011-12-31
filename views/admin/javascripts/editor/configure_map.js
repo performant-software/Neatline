@@ -172,8 +172,6 @@
             // Get the settings.
             var data = this._getData();
 
-            console.log(data);
-
             // Commit.
             $.ajax({
 

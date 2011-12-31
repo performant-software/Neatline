@@ -482,12 +482,12 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         $record = new NeatlineDataRecord($item, $neatline);
 
         // Set.
-        $this->assertFalse($record->setStyle('vector_color', '#724e85'));
-        $this->assertFalse($record->setStyle('vector_opacity', 40));
-        $this->assertFalse($record->setStyle('stroke_color', '#ffda82'));
-        $this->assertFalse($record->setStyle('stroke_opacity', 60));
-        $this->assertFalse($record->setStyle('stroke_width', 1));
-        $this->assertFalse($record->setStyle('point_radius', 6));
+        $this->assertFalse($record->setStyle('vector_color', get_option('vector_color')));
+        $this->assertFalse($record->setStyle('vector_opacity', get_option('vector_opacity')));
+        $this->assertFalse($record->setStyle('stroke_color', get_option('stroke_color')));
+        $this->assertFalse($record->setStyle('stroke_opacity', get_option('stroke_opacity')));
+        $this->assertFalse($record->setStyle('stroke_width', get_option('stroke_width')));
+        $this->assertFalse($record->setStyle('point_radius', get_option('point_radius')));
 
         // Check.
         $this->assertNull($record->vector_color);
@@ -539,7 +539,7 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
     }
 
     /**
-     * If a passed style attribute matches the exhibit default, set
+     * If a passed style attribute matches the exhibit default, do not set
      * the value.
      *
      * @return void.
@@ -700,12 +700,12 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         $record->save();
 
         // Get and check.
-        $this->assertEquals($record->getStyle('vector_color'), '#724e85');
-        $this->assertEquals($record->getStyle('vector_opacity'), 40);
-        $this->assertEquals($record->getStyle('stroke_color'), '#ffda82');
-        $this->assertEquals($record->getStyle('stroke_opacity'), 60);
-        $this->assertEquals($record->getStyle('stroke_width'), 1);
-        $this->assertEquals($record->getStyle('point_radius'), 6);
+        $this->assertEquals($record->getStyle('vector_color'), get_option('vector_color'));
+        $this->assertEquals($record->getStyle('vector_opacity'), get_option('vector_opacity'));
+        $this->assertEquals($record->getStyle('stroke_color'), get_option('stroke_color'));
+        $this->assertEquals($record->getStyle('stroke_opacity'), get_option('stroke_opacity'));
+        $this->assertEquals($record->getStyle('stroke_width'), get_option('stroke_width'));
+        $this->assertEquals($record->getStyle('point_radius'), get_option('point_radius'));
 
     }
 
@@ -1048,27 +1048,27 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         );
 
         $this->assertContains(
-            '"vector_color":"#724e85"',
+            '"vector_color":"' . get_option('vector_color') . '"',
             $json
         );
 
         $this->assertContains(
-            '"vector_opacity":40',
+            '"vector_opacity":' . get_option('vector_opacity'),
             $json
         );
 
         $this->assertContains(
-            '"stroke_color":"#ffda82"',
+            '"stroke_color":"' . get_option('stroke_color') . '"',
             $json
         );
 
         $this->assertContains(
-            '"stroke_width":1',
+            '"stroke_width":' . get_option('stroke_width'),
             $json
         );
 
         $this->assertContains(
-            '"point_radius":6',
+            '"point_radius":' . get_option('point_radius'),
             $json
         );
 
@@ -1142,27 +1142,27 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         );
 
         $this->assertContains(
-            '"vector_color":"#724e85"',
+            '"vector_color":"' . get_option('vector_color') . '"',
             $json
         );
 
         $this->assertContains(
-            '"vector_opacity":40',
+            '"vector_opacity":' . get_option('vector_opacity'),
             $json
         );
 
         $this->assertContains(
-            '"stroke_color":"#ffda82"',
+            '"stroke_color":"' . get_option('stroke_color') . '"',
             $json
         );
 
         $this->assertContains(
-            '"stroke_width":1',
+            '"stroke_width":' . get_option('stroke_width'),
             $json
         );
 
         $this->assertContains(
-            '"point_radius":6',
+            '"point_radius":' . get_option('point_radius'),
             $json
         );
 

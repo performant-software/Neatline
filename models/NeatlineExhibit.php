@@ -33,26 +33,53 @@ class NeatlineExhibit extends Omeka_record
     /**
      * Record attributes.
      */
+
+
     public $added;
     public $name;
+
+    // Foreign keys.
     public $map_id;
     public $image_id;
+
+    // Layout parameters.
     public $top_element;
     public $items_h_pos;
     public $items_v_pos;
     public $items_height;
+
+    // Viewport presence.
     public $is_map;
     public $is_timeline;
     public $is_items;
+
+    // Map position defaults.
     public $default_map_bounds;
     public $default_map_zoom;
+
+    // Default timeline focus.
     public $default_focus_date;
+
+    // Default styles.
     public $default_vector_color;
     public $default_vector_opacity;
     public $default_stroke_color;
     public $default_stroke_opacity;
     public $default_stroke_width;
     public $default_point_radius;
+
+    /**
+     * Valid style attribute names.
+     */
+    private static $styles = array(
+        'default_vector_color',
+        'default_vector_opacity',
+        'default_stroke_color',
+        'default_stroke_opacity',
+        'default_stroke_width',
+        'default_point_radius'
+    );
+
 
     /**
      * Validate the add Neatline form.
@@ -122,9 +149,7 @@ class NeatlineExhibit extends Omeka_record
      */
     public function getMap()
     {
-
         return $this->getTable('NeatlineMapsMap')->find($this->map_id);
-
     }
 
     /**
@@ -134,9 +159,7 @@ class NeatlineExhibit extends Omeka_record
      */
     public function getImage()
     {
-
         return $this->getTable('NeatlineMapsMap')->find($this->image_id);
-
     }
 
     /**
@@ -192,6 +215,56 @@ class NeatlineExhibit extends Omeka_record
         $this->items_v_pos =            $itemsVertPos;
         $this->items_height =           $itemsHeight;
         $this->save();
+
+    }
+
+    /**
+     * Set a style attribute. Only set a value if it is different from
+     * the system default. Return true if a row value is set.
+     *
+     * @param string style The name of the style.
+     * @param mixed $value The value to set.
+     *
+     * @return boolean True if the set succeeds.
+     */
+    public function setStyle($style, $value)
+    {
+
+        // If a non-style property is passed, return false.
+        if (!in_array('default_' . $style, self::$styles)) {
+            return false;
+        }
+
+        // If the value does not match the system default.
+        else if ($value != get_option($style)) {
+            $this['default_' . $style] = $value;
+            return true;
+        }
+
+        return false;
+
+    }
+
+    /**
+     * Get a style attribute. Look for exhibit-specific default, and
+     * fall back on system defaults when local value is unset.
+     *
+     * @param string style The name of the style.
+     *
+     * @return mixed The style.
+     */
+    public function getStyle($style)
+    {
+
+        // If there is a row value.
+        if (!is_null($this['default_' . $style])) {
+            return $this['default_' . $style];
+        }
+
+        // Fall back to system default.
+        else {
+            return get_option($style);
+        }
 
     }
 
@@ -263,9 +336,7 @@ class NeatlineExhibit extends Omeka_record
     {
 
         if (!(!is_null($this->map_id) && !is_null($this->image_id))) {
-
             parent::save();
-
         }
 
         else {
