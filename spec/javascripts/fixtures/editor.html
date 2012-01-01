@@ -8,6 +8,19 @@
 <ul class="nav">
 
     <li class="dropdown">
+        <a href="" id="configure-items-button" class="dropdown-toggle">Item Settings</a>
+        <div id="configure-items" class="dropdown-content">
+            
+<!-- Edit order. -->
+<button class="btn icon loop">Edit Item Order</button>
+<p>Click to edit the ordering of the items in the description tray.</p>
+<hr />
+
+<button class="btn icon approve save">Save</button>
+        </div>
+    </li>
+
+    <li class="dropdown">
         <a href="" id="configure-map-button" class="dropdown-toggle">Map Settings</a>
         <div id="configure-map" class="dropdown-content">
             
@@ -259,8 +272,8 @@ to store the current viewport settings as the public defaults.</p>
             <div class="clearfix">
                 <label for="map-description">Description</label>
                 <div class="input">
-                    <textarea class="xlarge" name="description" placeholder="Description" rows="4"></textarea>
-                    <span class="help-block">Descriptive or annotate the item.</span>
+                    <textarea id="item-description" class="xlarge" name="description" placeholder="Description" rows="4"></textarea>
+                    <span class="help-block">Describe or annotate the item.</span>
                 </div>
             </div>
 
@@ -405,18 +418,13 @@ to store the current viewport settings as the public defaults.</p>
     <div id="timeline" class="neatline-block neatlinetime-timeline"></div>
 
     <div id="items" class="neatline-block">
-        
-<div id="public-items-list-header">
-    <div id="arrows">
-        <div id="left-arrow" class="arrow left"></div>
-        <div id="right-arrow" class="arrow right"></div>
-    </div>
-            <div id="reorder-items"></div>
-        <button id="order-save-button" class="btn icon approve">Save</button>
+        <div id="items-container"></div>
     </div>
 
-<div id="undated-items-list-container"></div>
-    </div>
+    <div id="scroll">
+        <div class="arrow-left">‹</div>
+        <div class="arrow-right">›</div>
+    <div>
 
 </div>
 
@@ -436,13 +444,16 @@ to store the current viewport settings as the public defaults.</p>
 <!-- JSON globals. -->
 <script type="text/javascript">
 
-    var Neatline = {"added":"2011-12-31 11:26:09","name":"Test Exhibit","map_id":null,"image_id":1,"top_element":null,"items_h_pos":null,"items_v_pos":null,"items_height":null,"is_map":1,"is_timeline":1,"is_items":1,"default_map_bounds":null,"default_map_zoom":null,"default_focus_date":null,"default_vector_color":null,"default_vector_opacity":null,"default_stroke_color":null,"default_stroke_opacity":null,"default_stroke_width":null,"default_point_radius":null,"id":1};
+    // Exhibit parameters.
+    var Neatline = {"added":"2012-01-01 13:52:14","name":"Test Exhibit","map_id":null,"image_id":1,"top_element":null,"items_h_pos":null,"items_v_pos":null,"items_height":null,"is_map":1,"is_timeline":1,"is_items":1,"default_map_bounds":null,"default_map_zoom":null,"default_focus_date":null,"default_vector_color":null,"default_vector_opacity":null,"default_stroke_color":null,"default_stroke_opacity":null,"default_stroke_width":null,"default_point_radius":null,"id":1};
         Neatline.dataSources = {"timeline":"http:\/\/\/Users\/davidmcclure\/pear\/bin\/neatline-exhibits\/1\/data\/simile","map":"http:\/\/\/Users\/davidmcclure\/pear\/bin\/neatline-exhibits\/1\/data\/openlayers","undated":"http:\/\/\/Users\/davidmcclure\/pear\/bin\/neatline-exhibits\/1\/data\/udi"};
         Neatline.public = false;
 
+    // Map parameters.
     
+    // Image parameters.
     
-        Neatline.image = {"path":"\/fullsize\/test.jpg","name":"hex.jpg","width":false,"height":false}
+        Neatline.image = {"path":"\/fullsize\/test.jpg","name":"hex.jpg","width":0,"height":0}
     
 </script>
 

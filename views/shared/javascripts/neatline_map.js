@@ -426,13 +426,6 @@
             // If there are existing click and highlight controls, destroy them.
             this._removeControls();
 
-            // Create the highlight and click control.
-            this.highlightControl = new OpenLayers.Control.SelectFeature(this._currentVectorLayers, {
-                hover: true,
-                highlightOnly: true,
-                renderIntent: 'temporary'
-            });
-
             this.clickControl = new OpenLayers.Control.SelectFeature(this._currentVectorLayers, {
 
                 onSelect: function(feature) {
@@ -461,10 +454,6 @@
                 }
 
             });
-
-            // Add and activate the highlight control.
-            this.map.addControl(this.highlightControl);
-            this.highlightControl.activate();
 
             // Add and activate the click control.
             this.map.addControl(this.clickControl);
@@ -495,12 +484,6 @@
                 delete this.clickControl;
             }
 
-            if (this.highlightControl !== undefined) {
-                this.map.removeControl(this.highlightControl);
-                this.highlightControl.destroy();
-                delete this.highlightControl;
-            }
-
         },
 
         /*
@@ -509,10 +492,6 @@
         edit: function(item, immediate) {
 
             var self = this;
-
-            if (this.highlightControl !== undefined) {
-                this.highlightControl.deactivate();
-            }
 
             // Try to get record and item id's.
             var recordid = item.attr('recordid');
@@ -867,7 +846,7 @@
                     strokeOpacity: strokeOpacity,
                     pointRadius: pointRadius,
                     strokeWidth: strokeWidth
-                }),
+                })
             });
 
         },

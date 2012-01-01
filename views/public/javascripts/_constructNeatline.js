@@ -25,16 +25,6 @@ jQuery(document).ready(function($) {
     // Get markup.
     var neatlineContainer = $('.neatline-container');
 
-    // Positioning manager.
-    // neatlineContainer.fullscreenpositioner({
-
-    //     'resize': function() {
-    //         neatlineContainer.neatline('positionDivs');
-    //         neatlineContainer.neatline('positionBlockMarkup');
-    //     }
-
-    // });
-
 
     /*
      * =================

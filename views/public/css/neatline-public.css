@@ -1,8 +1,7 @@
-<?php
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
 
 /**
- * API calls.
+ * CSS for Neatline. Shared by editor and public instantiations.
  *
  * PHP version 5
  *
@@ -23,7 +22,17 @@
  * @copyright   2011 The Board and Visitors of the University of Virginia
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache 2 License
  */
-?>
 
-<script type="text/javascript" src="http://openlayers.org/api/OpenLayers.js"></script>
-<script src="http://api.simile-widgets.org/timeline/2.3.1/timeline-api.js?bundle=true" type="text/javascript"></script>
+
+/* Layout */
+
+#neatline {
+    position: relative;
+    height: 600px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 13px;
+    font-weight: normal;
+    line-height: 18px;
+    color: #404040;
+    border: 1px solid rgba(90, 80, 100, 0.5);
+}

@@ -316,31 +316,9 @@ class Neatline_DataControllerTest extends Omeka_Test_AppTestCase
         $this->dispatch('neatline-exhibits/' . $neatline->id . '/data/udi');
 
         // Check markup.
-        $this->assertQuery('tr.item-row[recordid="' . $record->id . '"]');
-
-        $this->assertQueryContentContains(
-            'span.item-title-text',
-            'Item 1 Title');
-
-        $this->assertQueryContentContains(
-            'div.item-description-content',
-            'Item 1 description.');
-
-        // Disable the time status.
-        $record->space_active = 0;
-        $record->time_active = 1;
-        $record->save();
-
-        // Hit the route and check the 'active'/'inactive' classes.
-        $this->dispatch('neatline-exhibits/' . $neatline->id . '/data/udi');
-
-        // Disable the time status.
-        $record->space_active = 1;
-        $record->time_active = 0;
-        $record->save();
-
-        // Hit the route and check the 'active'/'inactive' classes.
-        $this->dispatch('neatline-exhibits/' . $neatline->id . '/data/udi');
+        $this->assertQuery('li.item-title[recordid="' . $record->id . '"]');
+        $this->assertQueryContentContains('li.item-title', 'Item 1 Title');
+        $this->assertQueryContentContains('li.item-description', 'Item 1 description.');
 
     }
 
@@ -380,31 +358,9 @@ class Neatline_DataControllerTest extends Omeka_Test_AppTestCase
         $this->dispatch('neatline-exhibits/' . $neatline->id . '/data/udi');
 
         // Check markup.
-        $this->assertQuery('tr.item-row[recordid="' . $record->id . '"]');
-
-        $this->assertQueryContentContains(
-            'span.item-title-text',
-            'Test Title');
-
-        $this->assertQueryContentContains(
-            'div.item-description-content',
-            'Test description.');
-
-        // Disable the time status.
-        $record->space_active = 0;
-        $record->time_active = 1;
-        $record->save();
-
-        // Hit the route and check the 'active'/'inactive' classes.
-        $this->dispatch('neatline-exhibits/' . $neatline->id . '/data/udi');
-
-        // Disable the time status.
-        $record->space_active = 1;
-        $record->time_active = 0;
-        $record->save();
-
-        // Hit the route and check the 'active'/'inactive' classes.
-        $this->dispatch('neatline-exhibits/' . $neatline->id . '/data/udi');
+        $this->assertQuery('li.item-title[recordid="' . $record->id . '"]');
+        $this->assertQueryContentContains('li.item-title', 'Test Title');
+        $this->assertQueryContentContains('li.item-description', 'Test description.');
 
     }
 

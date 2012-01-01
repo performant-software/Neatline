@@ -53,6 +53,7 @@ function neatline_queueEditorAssets()
 {
 
     // CSS.
+    queue_css('bootstrap.xtra.min');
     queue_css('neatline-editor');
     queue_css('gradient-builder');
     queue_css('jquery.miniColors');
@@ -91,12 +92,16 @@ function neatline_queueEditorAssets()
 function neatline_queuePublicAssets()
 {
 
+    // Neatline runner.
     queue_js('_constructNeatline', 'javascripts');
-    queue_js('fullscreen_positioner', 'javascripts');
+
+    // Public-specific CSS additions.
+    queue_css('neatline-public');
 
     $openlayersSrc = 'http://openlayers.org/api/OpenLayers.js';
     $simileSrc = 'http://api.simile-widgets.org/timeline/2.3.1/timeline-api.js?bundle=true';
 
+    // API calls.
     $headScript = __v()->headScript();
     $headScript->appendScript('','text/javascript', array('src' => $openlayersSrc));
     $headScript->appendScript('', 'text/javascript', array('src' => $simileSrc));
@@ -112,7 +117,6 @@ function neatline_queueNeatlineAssets()
 {
 
     // Core Neatline stylesheet.
-    queue_css('bootstrap.xtra.min');
     queue_css('neatline');
     queue_css('neatline-timeline');
 

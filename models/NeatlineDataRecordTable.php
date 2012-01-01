@@ -311,7 +311,7 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
                 'eventID' =>                $record->id,
                 'title' =>                  $record->title,
                 'description' =>            $record->description,
-                'color' =>                  $record->vector_color,
+                'color' =>                  $record->getStyle('vector_color'),
                 'textColor' =>              '#4a4a4a',
                 'left_ambiguity' =>         $record->left_percent,
                 'right_ambiguity' =>        $record->right_percent

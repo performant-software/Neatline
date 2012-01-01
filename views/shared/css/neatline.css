@@ -27,8 +27,13 @@
 /* Layout */
 
 #neatline {
-    height: 600px;
     position: relative;
+    height: 600px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 13px;
+    font-weight: normal;
+    line-height: 18px;
+    color: #404040;
 }
 
 .neatline-block {
@@ -93,10 +98,11 @@ table th, table td {
 }
 
 #items-container li.item-title {
-    font-size: 1.5em;
+    font-size: 20px;
     font-weight: bold;
     color: #202020;
     padding: 13px 20px;
+    line-height 180px;
 }
 
 #items-container li.item-description {

@@ -897,6 +897,83 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
     }
 
     /**
+     * The buildTimelineJson() method should default in the exhibit color
+     * default for the 'color' attribute in the JSON.
+     *
+     * @return void.
+     */
+    public function testBuildTimelineJsonWithNullVectorColorAndExhibitDefault()
+    {
+
+        // Create an exhibit and items.
+        $neatline = $this->helper->_createNeatline();
+        $item = $this->helper->_createItem();
+
+        // Set an exhibit default.
+        $neatline->default_vector_color = '#ffffff';
+        $neatline->save();
+
+        // Create record.
+        $record = new NeatlineDataRecord($item, $neatline);
+
+        // Populate map-relevant attributes.
+        $record->title = 'Item Title';
+        $record->start_date = 'January 2011';
+        $record->end_date = 'January 2012';
+        $record->left_percent = 0;
+        $record->right_percent = 100;
+        $record->time_active = 1;
+        $record->save();
+
+        // Build the JSON.
+        $json = $this->_recordsTable->buildTimelineJson($neatline);
+
+        $this->assertContains(
+            '"color":"#ffffff"',
+            $json
+        );
+
+    }
+
+    /**
+     * The buildTimelineJson() method should default in the system color
+     * default for the 'color' attribute in the JSON.
+     *
+     * @return void.
+     */
+    public function testBuildTimelineJsonWithNullVectorColorAndSystemDefault()
+    {
+
+        // Create an exhibit and items.
+        $neatline = $this->helper->_createNeatline();
+        $item = $this->helper->_createItem();
+
+        // Set a system default.
+        set_option('vector_color', '#000000');
+
+        // Create record.
+        $record = new NeatlineDataRecord($item, $neatline);
+
+        // Populate map-relevant attributes.
+        $record->title = 'Item Title';
+        $record->start_date = 'January 2011';
+        $record->end_date = 'January 2012';
+        $record->left_percent = 0;
+        $record->right_percent = 100;
+        $record->time_active = 1;
+        $record->save();
+
+        // Build the JSON.
+        $json = $this->_recordsTable->buildTimelineJson($neatline);
+
+        $this->assertContains(
+            '"color":"#000000"',
+            $json
+        );
+
+    }
+
+    /**
      * The saveOrder() method should commit a new record ordering.
      *
      * @return void.

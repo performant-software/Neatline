@@ -94,9 +94,13 @@ class Neatline_FixtureBuilderTest extends Omeka_Test_AppTestCase
         // Mock collections.
         $col1 = new Collection;
         $col1->name = 'col1';
+        $col1->description = 'desc';
+        $col1->collectors = 'col';
         $col1->save();
         $col2 = new Collection;
         $col2->name = 'col2';
+        $col2->description = 'desc';
+        $col2->collectors = 'col';
         $col2->save();
 
         // Mock item.
