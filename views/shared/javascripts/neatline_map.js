@@ -317,6 +317,8 @@
          */
         _instantiateEditor: function() {
 
+            var self = this;
+
             // Instantiate the geometry editor.
             this.element.editgeometry({
 
@@ -894,6 +896,8 @@
          */
         _buildPanelControls: function() {
 
+            var self = this;
+
             // Create the controls and toolbar.
             return [
 
@@ -907,9 +911,8 @@
                         displayClass: 'olControlDrawFeaturePath',
                         featureAdded: function() {
                             self._trigger('featureadded');
-                            // self._addClickControls();
-                            // self.edit(self._currentEditItem, true);
-                    }
+                            self.clickControl.setLayer(self._currentEditLayer);
+                        }
                 }),
 
                 // Draw points.
@@ -919,9 +922,8 @@
                         displayClass: 'olControlDrawFeaturePoint',
                         featureAdded: function() {
                             self._trigger('featureadded');
-                            // self._addClickControls();
-                            // self.edit(self._currentEditItem, true);
-                    }
+                            self.clickControl.setLayer(self._currentEditLayer);
+                        }
                 }),
 
                 // Draw polygons.
@@ -931,9 +933,8 @@
                         displayClass: 'olControlDrawFeaturePolygon',
                         featureAdded: function() {
                             self._trigger('featureadded');
-                            // self._addClickControls();
-                            // self.edit(self._currentEditItem, true);
-                    }
+                            self.clickControl.setLayer(self._currentEditLayer);
+                        }
                 })
 
             ];
