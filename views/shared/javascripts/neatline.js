@@ -216,7 +216,7 @@
                         'itemclick': function(event, obj) {
 
                             // When the user clicks on an item title.
-                            self._trigger('undateditemclick', {}, {
+                            self._trigger('itemclick', {}, {
                                 'recordid': obj.recordid,
                                 'scrollItems': obj.scrollItems
                             });
@@ -235,7 +235,7 @@
                         'itemclick': function(event, obj) {
 
                             // When the user clicks on an item title.
-                            self._trigger('undateditemclick', {}, {
+                            self._trigger('itemclick', {}, {
                                 'recordid': obj.recordid,
                                 'scrollItems': obj.scrollItems
                             });

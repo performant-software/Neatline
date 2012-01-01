@@ -189,8 +189,6 @@
                                 dragItem.detach().insertBefore(item);
                                 dragDescription.detach().insertAfter(dragItem);
 
-                                console.log(dragDescription);
-
                             }
 
                             // If the item being dragged is currently above the item

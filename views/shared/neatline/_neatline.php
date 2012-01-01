@@ -49,14 +49,17 @@
 <!-- JSON globals. -->
 <script type="text/javascript">
 
+    // Exhibit parameters.
     var Neatline = <?php echo json_encode($neatline); ?>;
         Neatline.dataSources = <?php echo json_encode($dataSources); ?>;
         Neatline.public = <?php echo json_encode($public); ?>;
 
+    // Map parameters.
     <?php if (isset($map)): ?>
         Neatline.map = <?php echo json_encode($map); ?>;
     <?php endif; ?>
 
+    // Image parameters.
     <?php if (isset($image)): ?>
 
         Neatline.image = <?php echo json_encode(

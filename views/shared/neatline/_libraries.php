@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
 
 /**
- * Public-facing Neatline exhibit.
+ * API calls.
  *
  * PHP version 5
  *
@@ -25,14 +25,5 @@
  */
 ?>
 
-<?php
-    $head = array('bodyclass' => 'neatline primary', 'title' => $neatline->name);
-    head($head);
-?>
-
-    <h1><?php echo $neatline->name; ?></h1>
-    <div id="primary">
-        <?php echo $this->partial('neatline/_neatline.php', $neatlineData); ?>
-    </div>
-
-<?php foot(); ?>
+<script type="text/javascript" src="http://openlayers.org/api/OpenLayers.js"></script>
+<script src="http://api.simile-widgets.org/timeline/2.3.1/timeline-api.js?bundle=true" type="text/javascript"></script>

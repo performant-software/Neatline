@@ -1,5 +1,5 @@
 /*
- * Widget instantiations for the Neatline editor.
+ * Application runner for public-facing Neatline exhibits.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -21,29 +21,38 @@
 
 jQuery(document).ready(function($) {
 
+
+    // Get markup.
     var neatlineContainer = $('.neatline-container');
 
     // Positioning manager.
-    neatlineContainer.fullscreenpositioner({
+    // neatlineContainer.fullscreenpositioner({
 
-        'resize': function() {
-            neatlineContainer.neatline('positionDivs');
-            neatlineContainer.neatline('positionBlockMarkup');
-        }
+    //     'resize': function() {
+    //         neatlineContainer.neatline('positionDivs');
+    //         neatlineContainer.neatline('positionBlockMarkup');
+    //     }
 
-    });
+    // });
 
-    // Neatline.
+
+    /*
+     * =================
+     * Neatline.
+     * =================
+     */
+
+
     neatlineContainer.neatline({
 
         // When the user clicks on an item on the timeline.
         'timelineeventclick': function(event, obj) {
 
             // Focus the map.
-            neatlineContainer.neatline('zoomMapToItemVectors', obj.itemId);
+            neatlineContainer.neatline('zoomMapToItemVectors', obj.recordid);
 
             // Focus the items tray.
-            neatlineContainer.neatline('showItemDescription', obj.itemId);
+            neatlineContainer.neatline('showItemDescription', obj.recordid);
 
         },
 
@@ -51,24 +60,24 @@ jQuery(document).ready(function($) {
         'mapfeatureclick': function(event, obj) {
 
             // Focus the timeline.
-            neatlineContainer.neatline('zoomTimelineToEvent', obj.itemId);
+            neatlineContainer.neatline('zoomTimelineToEvent', obj.recordid);
 
             // Focus the items tray.
-            neatlineContainer.neatline('showItemDescription', obj.itemId);
+            neatlineContainer.neatline('showItemDescription', obj.recordid);
 
         },
 
         // When the user clicks on an item in the items tray.
-        'undateditemclick': function(event, obj) {
+        'itemclick': function(event, obj) {
 
             // Focus the map.
-            neatlineContainer.neatline('zoomMapToItemVectors', obj.itemId);
+            neatlineContainer.neatline('zoomMapToItemVectors', obj.recordid);
 
             // Focus the timeline.
-            neatlineContainer.neatline('zoomTimelineToEvent', obj.itemId);
+            neatlineContainer.neatline('zoomTimelineToEvent', obj.recordid);
 
             // Focus the items tray.
-            neatlineContainer.neatline('showItemDescription', obj.itemId);
+            neatlineContainer.neatline('showItemDescription', obj.recordid);
 
         }
 

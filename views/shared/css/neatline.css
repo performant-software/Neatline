@@ -28,6 +28,7 @@
 
 #neatline {
     height: 600px;
+    position: relative;
 }
 
 .neatline-block {

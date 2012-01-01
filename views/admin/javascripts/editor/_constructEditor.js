@@ -76,7 +76,7 @@ jQuery(document).ready(function($) {
                 },
 
                 // When the user clicks on an item in the sequencing tray.
-                'undateditemclick': function(event, obj) {
+                'itemclick': function(event, obj) {
 
                     // Show the edit form.
                     editorContainer.itembrowser(
