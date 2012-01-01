@@ -39,7 +39,7 @@
     <div id="scroll">
         <div class="arrow-left">‹</div>
         <div class="arrow-right">›</div>
-    <div>
+    </div>
 
 </div>
 
