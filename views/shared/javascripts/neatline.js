@@ -571,7 +571,11 @@
          * - return integer: The level.
          */
         getTimelineCenter: function() {
-            return this.timeline.neatlinetimeline('getCenterForSave');
+            if (this.is_instantiated_timeline) {
+                return this.timeline.neatlinetimeline('getCenterForSave');
+            } else {
+                return '';
+            }
         },
 
         /*
