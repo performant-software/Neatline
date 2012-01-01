@@ -88,6 +88,11 @@
                 this._instantiateOSMMap();
             }
 
+            // Construct the editing manager.
+            if (!Neatline.public) {
+                this._instantiateEditor();
+            }
+
             // Start-up.
             this.loadData();
 
@@ -304,6 +309,72 @@
 
             // Set starting zoom focus.
             this.map.zoomToExtent(bounds);
+
+        },
+
+        /*
+         * Initialize the editing manager widget.
+         */
+        _instantiateEditor: function() {
+
+            // Instantiate the geometry editor.
+            this.element.editgeometry({
+
+                // On update.
+                'update': function(event, obj) {
+
+                    // Default to reshape.
+                    self.modifyFeatures.mode =
+                        OpenLayers.Control.ModifyFeature.RESHAPE;
+
+                    // Rotation.
+                    if (obj.rotate) {
+                        self.modifyFeatures.mode |=
+                            OpenLayers.Control.ModifyFeature.ROTATE;
+                    }
+
+                    // Resize.
+                    if (obj.scale) {
+                        self.modifyFeatures.mode |=
+                            OpenLayers.Control.ModifyFeature.RESIZE;
+                    }
+
+                    // Drag.
+                    if (obj.drag) {
+                        self.modifyFeatures.mode |=
+                            OpenLayers.Control.ModifyFeature.DRAG;
+                    }
+
+                    // If rotate or drag, pop off reshape.
+                    if (obj.drag || obj.rotate) {
+                        self.modifyFeatures.mode &=
+                            -OpenLayers.Control.ModifyFeature.RESHAPE;
+                    }
+
+                    var feature = self.modifyFeatures.feature;
+
+                    // If there is a selected feature, unselect and reselect it to apply
+                    // the new configuration.
+                    if (feature != null) {
+                        self.modifyFeatures.unselectFeature(feature);
+                        self.modifyFeatures.selectFeature(feature);
+                    }
+
+                },
+
+                'delete': function() {
+
+                    if (self.modifyFeatures.feature) {
+
+                        var feature = self.modifyFeatures.feature;
+                        self.modifyFeatures.unselectFeature(feature);
+                        self._currentEditLayer.destroyFeatures([ feature ]);
+
+                    }
+
+                }
+
+            });
 
         },
 
@@ -537,55 +608,17 @@
             }
 
             // Create the controls and toolbar.
-            var panelControls = [
-
-                // Panning.
-                new OpenLayers.Control.Navigation(),
-
-                // Draw lines.
-                new OpenLayers.Control.DrawFeature(this._currentEditLayer, OpenLayers.Handler.Path, {
-                    displayClass: 'olControlDrawFeaturePath',
-                    featureAdded: function() {
-                        self._trigger('featureadded');
-                        // self._addClickControls();
-                        // self.edit(self._currentEditItem, true);
-                    }
-                }),
-
-                // Draw points.
-                new OpenLayers.Control.DrawFeature(this._currentEditLayer, OpenLayers.Handler.Point, {
-                    displayClass: 'olControlDrawFeaturePoint',
-                    featureAdded: function() {
-                        self._trigger('featureadded');
-                        // self._addClickControls();
-                        // self.edit(self._currentEditItem, true);
-                    }
-                }),
-
-                // Draw polygons.
-                new OpenLayers.Control.DrawFeature(this._currentEditLayer, OpenLayers.Handler.Polygon, {
-                    displayClass: 'olControlDrawFeaturePolygon',
-                    featureAdded: function() {
-                        self._trigger('featureadded');
-                        // self._addClickControls();
-                        // self.edit(self._currentEditItem, true);
-                    }
-                })
-
-            ];
+            var panelControls = this._buildPanelControls();
 
             // Instantiate the modify feature control.
-            this.modifyFeatures = new OpenLayers.Control.ModifyFeature(this._currentEditLayer, {
-
-                // OL marks this callback as deprecated, but I can't find
-                // any alternative and kosher way of hooking on to this.
-                onModification: function() {
-                    self._trigger('featureadded');
-                },
-
-                standalone: true
-
-            });
+            this.modifyFeatures = new OpenLayers.Control.ModifyFeature(
+                this._currentEditLayer, {
+                    standalone: true,
+                    onModification: function() {
+                        self._trigger('featureadded');
+                    }
+                }
+            );
 
             // Instantiate the edit toolbar.
             this.editToolbar = new OpenLayers.Control.Panel({
@@ -601,95 +634,17 @@
             this.map.addControl(this.modifyFeatures);
             this.modifyFeatures.activate();
 
-            // Instantiate the geometry editor.
-            this.element.editgeometry({
+            // Show the edit control markup.
+            if (!immediate) { this._fadeUpEditControls(); }
+            else { this._popUpEditControls(); }
 
-                // On update.
-                'update': function(event, obj) {
-
-                    // Default to reshape.
-                    self.modifyFeatures.mode = OpenLayers.Control.ModifyFeature.RESHAPE;
-
-                    // Rotation.
-                    if (obj.rotate) {
-                        self.modifyFeatures.mode |= OpenLayers.Control.ModifyFeature.ROTATE;
-                    }
-
-                    // Resize.
-                    if (obj.scale) {
-                        self.modifyFeatures.mode |= OpenLayers.Control.ModifyFeature.RESIZE;
-                    }
-
-                    // Drag.
-                    if (obj.drag) {
-                        self.modifyFeatures.mode |= OpenLayers.Control.ModifyFeature.DRAG;
-                    }
-
-                    // If rotate or drag, pop off reshape.
-                    if (obj.drag || obj.rotate) {
-                        self.modifyFeatures.mode &= -OpenLayers.Control.ModifyFeature.RESHAPE;
-                    }
-
-                    var feature = self.modifyFeatures.feature;
-
-                    // If there is a selected feature, unselect and reselect it to apply
-                    // the new configuration.
-                    if (feature != null) {
-                        self.modifyFeatures.unselectFeature(feature);
-                        self.modifyFeatures.selectFeature(feature);
-                    }
-
-                },
-
-                'delete': function() {
-
-                    if (self.modifyFeatures.feature) {
-
-                        var feature = self.modifyFeatures.feature;
-                        self.modifyFeatures.unselectFeature(feature);
-                        self._currentEditLayer.destroyFeatures([ feature ]);
-
-                    }
-
-                }
-
-            });
-
-            // Only do the fade if the form open does not coincide with
-            // another form close.
-            if (!immediate) {
-
-                // Insert the edit geometry button.
-                this.element.editgeometry('showButtons', immediate);
-
-                // Fade up the toolbar.
-                $('.' + this.options.markup.toolbar_class).animate({
-                    'opacity': 1
-                }, this.options.animation.fade_duration);
-
-            }
-
-            else {
-
-                // Pop up the toolbar.
-                $('.' + this.options.markup.toolbar_class).css('opacity', 1);
-
-            }
-
-            // If the last selected features is among the features in the
-            // new currentEditLayer, mark it as selected by default. Notably,
-            // this would be the case of the edit flow was triggered by a
-            // feature click in the editor.
-            var inLayer = false;
+            // If necessary, reselect a clicked feature.
             $.each(this._currentEditLayer.features, function(i, feature) {
                 if (feature == self._clickedFeature) {
-                    inLayer = true;
+                    self.modifyFeatures.selectFeature(self._clickedFeature);
+                    return;
                 }
             });
-
-            if (inLayer) {
-                this.modifyFeatures.selectFeature(this._clickedFeature);
-            }
 
         },
 
@@ -924,6 +879,95 @@
 
             });
 
+        },
+
+
+        /*
+         * =================
+         * Asset constructors.
+         * =================
+         */
+
+
+        /*
+         * Build the panel control handler object.
+         */
+        _buildPanelControls: function() {
+
+            // Create the controls and toolbar.
+            return [
+
+                // Panning.
+                new OpenLayers.Control.Navigation(),
+
+                // Draw lines.
+                new OpenLayers.Control.DrawFeature(
+                    this._currentEditLayer,
+                    OpenLayers.Handler.Path, {
+                        displayClass: 'olControlDrawFeaturePath',
+                        featureAdded: function() {
+                            self._trigger('featureadded');
+                            // self._addClickControls();
+                            // self.edit(self._currentEditItem, true);
+                    }
+                }),
+
+                // Draw points.
+                new OpenLayers.Control.DrawFeature(
+                    this._currentEditLayer,
+                    OpenLayers.Handler.Point, {
+                        displayClass: 'olControlDrawFeaturePoint',
+                        featureAdded: function() {
+                            self._trigger('featureadded');
+                            // self._addClickControls();
+                            // self.edit(self._currentEditItem, true);
+                    }
+                }),
+
+                // Draw polygons.
+                new OpenLayers.Control.DrawFeature(
+                    this._currentEditLayer,
+                    OpenLayers.Handler.Polygon, {
+                        displayClass: 'olControlDrawFeaturePolygon',
+                        featureAdded: function() {
+                            self._trigger('featureadded');
+                            // self._addClickControls();
+                            // self.edit(self._currentEditItem, true);
+                    }
+                })
+
+            ];
+
+        },
+
+
+        /*
+         * =================
+         * DOM touches.
+         * =================
+         */
+
+
+        /*
+         * Fade up the geometry add and edit buttons.
+         */
+        _fadeUpEditControls: function() {
+
+            // Insert the edit geometry button.
+            this.element.editgeometry('showButtons', false);
+
+            // Fade up the toolbar.
+            $('.' + this.options.markup.toolbar_class).animate({
+                'opacity': 1
+            }, this.options.animation.fade_duration);
+
+        },
+
+        /*
+         * Pop up the geometry add and edit buttons.
+         */
+        _popUpEditControls: function() {
+            $('.' + this.options.markup.toolbar_class).css('opacity', 1);
         }
 
     });
