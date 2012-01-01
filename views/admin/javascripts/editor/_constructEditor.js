@@ -27,6 +27,7 @@ jQuery(document).ready(function($) {
     var editorContainer =           $('#item-browser');
     var configureLayoutButton =     $('#configure-layout-button');
     var configureMapButton =        $('#configure-map-button');
+    var configureItemsButton =      $('#configure-items-button');
 
 
     /*
@@ -311,6 +312,33 @@ jQuery(document).ready(function($) {
 
         // When new defaults have been successfully committed.
         'newdefaults': function(event, obj) {
+            neatlineContainer.neatline('saveSuccess');
+        }
+
+    });
+
+    // Configure items.
+    configureItemsButton.configureitems({
+
+        // Put the item try into reorder mode.
+        'reorder': function() {
+            neatlineContainer.neatline('reorderItems');
+        },
+
+        // Get ordering.
+        'getorder': function() {
+            var order = neatlineContainer.neatline('getOrder');
+            configureItemsButton.configureitems('setOrder', order);
+        },
+
+        // End reordering session and set new order.
+        'endreorder': function() {
+            var order = neatlineContainer.neatline('endReorderItems');
+            configureItemsButton.configureitems('setOrder', order);
+        },
+
+        // When a order save succeeds.
+        'neworder': function(event, obj) {
             neatlineContainer.neatline('saveSuccess');
         }
 

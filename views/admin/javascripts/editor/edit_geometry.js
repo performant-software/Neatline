@@ -45,8 +45,6 @@
 
             // Get markup.
             this.editContainer =            $('#geo-edit');
-            this.geoContainer =             $('#regular-shapes');
-            this.regularShapes =            $('#regular-shapes-select');
             this.scaleButton =              $('#scale-button');
             this.rotateButton =             $('#rotate-button');
             this.dragButton =               $('#drag-button');
@@ -54,7 +52,6 @@
 
             // Insert the containers.
             this.element.append(this.editContainer);
-            this.element.append(this.geoContainer);
 
             // Store starting status data trackers.
             this.scaleButton.data('activated', false);
@@ -192,30 +189,24 @@
             // Display the edit controls.
             this.editContainer.css({
                 'display': 'block !important',
-                'opacity': 0
-            }).stop().animate({ 'opacity': 1}, this.options.animation.fade_duration);
+                'opacity': 0,
+                'z-index': 999
+            }).stop().animate({ 'opacity': 1}, this.options.animation.fade_duration);            // By default, deactivate all buttons.
 
-            // Display the regular shapes select.
-            this.geoContainer.css({
-                'display': 'block !important',
-                'opacity': 0
-            }).stop().animate({ 'opacity': 1}, this.options.animation.fade_duration);
-
-            // By default, deactivate all buttons.
             this.deactivateAllButtons();
 
         },
 
         hideButtons: function() {
 
+            var self = this;
+
             // Fade down.
             this.editContainer.stop().animate({
                 'opacity': 0
-            }, this.options.markup.fade_duration);
-
-            this.geoContainer.stop().animate({
-                'opacity': 0
-            }, this.options.markup.fade_duration);
+            }, this.options.markup.fade_duration, function() {
+                self.editContainer.css('z-index', -99);
+            });
 
         },
 

@@ -713,8 +713,8 @@ table#items-table tr.hidden {
     z-index: 999;
     position: absolute;
     display: none !important;
-    top: 65px;
-    left: 61px;
+    top: 33px;
+    left: 60px;
 }
 
 #regular-shapes {

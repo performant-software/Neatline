@@ -101,9 +101,19 @@
          */
         _getMajorBlock: function() {
 
-            this.majorBlock = (this.params.top_element == 'map') ?
-                this.map :
-                this.timeline;
+            // If there is a map and a timeline, take the top div.
+            if (this.params.is_map && this.params.is_timeline) {
+                this.majorBlock = (this.params.top_element == 'map') ?
+                    this.map :
+                    this.timeline;
+            }
+
+            // Otherwise, take the present block.
+            else {
+                this.majorBlock = (this.params.is_map) ?
+                    this.map :
+                    this.timeline;
+            }
 
         },
 
@@ -562,6 +572,33 @@
          */
         getTimelineCenter: function() {
             return this.timeline.neatlinetimeline('getCenterForSave');
+        },
+
+        /*
+         * Put the items tray into reorder mode.
+         *
+         * - return integer: The level.
+         */
+        reorderItems: function() {
+            this.items.neatlineitems('reorder');
+        },
+
+        /*
+         * Get an ordering.
+         *
+         * - return integer: The level.
+         */
+        getOrder: function() {
+            return this.items.neatlineitems('objectifyOrder');
+        },
+
+        /*
+         * Put the item tray into default mode and return the order.
+         *
+         * - return integer: The level.
+         */
+        endReorderItems: function() {
+            return this.items.neatlineitems('endreorder');
         }
 
     });

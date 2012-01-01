@@ -31,16 +31,9 @@
          */
         _create: function() {
 
-            // Get the buttons.
-            this.reorderItemsButton =       $('#reorder-items');
-            this.orderSaveButton =          $('#order-save-button');
-
             // Trackers.
             this._isOrdering = false;
             this._dragId = null;
-
-            // Get starting order and add functionality.
-            this._addReorderingFunctionality();
 
             return $.neatline.neatlineitems.prototype._create.apply(
                 this,
@@ -58,7 +51,7 @@
             this._order = [];
 
             // Re-get the items.
-            var items = this.element.find('.item-row');
+            var items = this.element.find('.item-title');
 
             // Walk the items.
             $.each(items, function(i, item) {
@@ -73,45 +66,36 @@
         /*
          * Build on the ordering application.
          */
-        _addReorderingFunctionality: function() {
+        reorder: function() {
 
-            var self = this;
+            // Disable selection.
+            this.element.disableSelection();
 
-            // Gloss the reorder button.
-            this.reorderItemsButton.bind({
+            // Hide the item descriptions, set tracker.
+            this.__hideAllDescriptions();
+            this._addOrderingEventsToItems();
+            this._isOrdering = true;
 
-                'mousedown': function() {
+            // Register the row order.
+            this._getRowOrder();
 
-                    // If the stack is not in ordering mode.
-                    if (!self._isOrdering) {
+        },
 
-                        // Hide the item descriptions, set tracker.
-                        self.__hideAllDescriptions();
-                        self.__showSaveButton();
-                        self._addOrderingEventsToItems();
-                        self._isOrdering = true;
+        /*
+         * Remove the ordering application, return the order.
+         */
+        endreorder: function() {
 
-                    }
+            // Show the item descriptions and change the cursor.
+            this.__showAllDescriptions();
+            this.__setPointerCursor();
 
-                    // If the stack is in ordering mode, commit the order
-                    // and return to normal mode.
-                    else {
+            // Recalculate native item offsets.
+            this._getItemOffsets();
+            this._removeOrderingEventsToItems();
+            this._isOrdering = false;
 
-                        // Show the item descriptions and change the cursor.
-                        self.__showAllDescriptions();
-                        self.__hideSaveButton();
-                        self.__setPointerCursor();
-
-                        // Recalculate native item offsets.
-                        self._getItemOffsets();
-                        self._removeOrderingEventsToItems();
-                        self._isOrdering = false;
-
-                    }
-
-                }
-
-            });
+            return this.objectifyOrder();
 
         },
 
@@ -140,15 +124,6 @@
 
             });
 
-            // Listen for click on the save button.
-            this.orderSaveButton.bind({
-
-                'mousedown': function() {
-                    self._saveOrder();
-                }
-
-            });
-
         },
 
         /*
@@ -166,9 +141,6 @@
 
             });
 
-            // Remove the event off of the save button.
-            this.orderSaveButton.unbind('mousedown');
-
             // Regloss the items as normal.
             this._glossItems();
 
@@ -182,7 +154,7 @@
             var self = this;
 
             // Get the description row.
-            var dragDescription = dragItem.next('tr.item-details');
+            var dragDescription = dragItem.next('li.item-description');
 
             // Register the starting row order.
             this._getRowOrder();
@@ -200,7 +172,7 @@
                 var enterItemId = parseInt(item.attr('recordid'));
 
                 // Get the item description.
-                var enterDescription = item.next('tr.item-details');
+                var enterDescription = item.next('li.item-description');
 
                 item.bind({
 
@@ -217,6 +189,8 @@
                                 dragItem.detach().insertBefore(item);
                                 dragDescription.detach().insertAfter(dragItem);
 
+                                console.log(dragDescription);
+
                             }
 
                             // If the item being dragged is currently above the item
@@ -226,6 +200,7 @@
 
                                 dragItem.detach().insertAfter(enterDescription);
                                 dragDescription.detach().insertAfter(dragItem);
+                                console.log(dragDescription);
 
                             }
 
@@ -266,41 +241,6 @@
         /*
          * DOM hits.
          */
-
-        /*
-         * Display the save button.
-         */
-        __showSaveButton: function() {
-
-            var self = this;
-
-            // Show.
-            this.orderSaveButton.css('display', 'block');
-
-            // Fade up.
-            this.orderSaveButton.stop().animate({
-                'opacity': 1
-            }, 500);
-
-        },
-
-        /*
-         * Hide the save button.
-         */
-        __hideSaveButton: function() {
-
-            var self = this;
-
-            // Show.
-            this.orderSaveButton.css('display', 'none');
-
-            // Fade up.
-            this.orderSaveButton.stop().animate({
-                'opacity': 0
-            }, 500);
-
-        },
-
         /*
          * Hide the item descriptions.
          */
@@ -312,17 +252,12 @@
 
                 // Get the description.
                 var item = $(item);
-                var descriptionTd = item.next('tr').find('td.item-description');
+                var description = item.next('li.item-description');
 
                 // Hide the description.
-                self.__contractDescription(descriptionTd);
+                description.css('display', 'none');
 
             });
-
-            // If there is a selected item, unhighlight the title.
-            if (this._currentItem != null) {
-                this.__unhighlightTitle(this._currentItem);
-            }
 
         },
 
@@ -337,10 +272,10 @@
 
                 // Get the description.
                 var item = $(item);
-                var descriptionTd = item.next('tr').find('td.item-description');
+                var description = item.next('li.item-description');
 
                 // Show the description.
-                self.__expandDescription(descriptionTd);
+                description.css('display', 'block');
 
             });
 
@@ -412,7 +347,7 @@
          * Convert the ordering array into an object literal of format
          * recordid => order integer.
          */
-        __objectifyOrder: function() {
+        objectifyOrder: function() {
 
             var order = {};
             $.each(this._order, function(i, recordid) {
@@ -420,40 +355,6 @@
             });
 
             return order;
-
-        },
-
-        /*
-         * Commit an ordering.
-         */
-        _saveOrder: function(item) {
-
-            var self = this;
-
-            // Prep the object literal for the backend.
-            this._getRowOrder();
-            var orderObject = this.__objectifyOrder();
-
-            console.log(orderObject);
-
-            // Fade down the editor.
-            this.__fadeItems()
-
-            // Commit.
-            $.ajax({
-
-                url: 'order',
-                type: 'POST',
-                data: {
-                    neatline_id: Neatline.id,
-                    order: orderObject
-                },
-
-                success: function() {
-                    self.__unfadeItems()
-                }
-
-            });
 
         }
 

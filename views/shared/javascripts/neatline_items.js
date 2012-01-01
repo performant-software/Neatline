@@ -32,7 +32,7 @@
                 purple: '#724E85',
                 background: '#FFFEF8',
                 title: '#202020',
-                highlight: '#f6f4f4'
+                highlight: '#f2eff3'
             },
 
             // CSS constants.
@@ -61,6 +61,7 @@
 
             // Build list.
             this._getItems();
+            this._addResizeListener();
 
         },
 
@@ -97,6 +98,19 @@
         },
 
         /*
+         * On window resize, recompute the top offsets.
+         */
+        _addResizeListener: function() {
+
+            var self = this;
+
+            this._window.bind('resize', function() {
+                self._getItemOffsets();
+            });
+
+        },
+
+        /*
          * Once the raw markup is from the items ajax query is pushed into the
          * container, build the functionality for each item.
          */
@@ -118,7 +132,6 @@
                 // Populate trackers.
                 self._idToItem[recordid] = item;
                 self._idOrdering.push(recordid);
-                item.data('active', false);
 
                 // Listen for events.
                 item.add(description).bind({
@@ -128,26 +141,19 @@
                         // Trigger out to the deployment code.
                         self._trigger('itemclick', {}, {
                             'recordid': recordid,
-                            'scrollItems': false
+                            'scrollItems': true
                         });
-
-                        // Scroll to the item, record status.
-                        self.scrollToItem(recordid);
 
                     },
 
                     // Highlight.
                     'mouseenter': function() {
-                        if (!item.data('active')) {
-                            self.__highlightItem(item);
-                        }
+                        self.__highlightItem(item);
                     },
 
                     // Un-highlight.
                     'mouseleave': function() {
-                        if (!item.data('active')) {
-                            self.__unhighlightItem(item);
-                        }
+                        self.__unhighlightItem(item);
                     }
 
                 });
@@ -287,19 +293,11 @@
          */
         scrollToItem: function(id) {
 
-            // Deselect currently selected item.
-            if (this._currentItem != null) {
-                this.__unselectItem(this._currentItem);
-            }
-
             // Fetch the markup and get components.
             var item = this._idToItem[id];
 
             // If the item is present in the squence tray.
             if (item != null) {
-
-                // Highlight the title.
-                this.__selectItem(item);
 
                 // Set the trackers.
                 this._currentItem = item;
@@ -318,29 +316,6 @@
          * DOM hits.
          */
 
-        /*
-         * Fade up the item title.
-         */
-        __selectItem: function(item) {
-
-            item.stop().animate({
-                'background-color': this.options.colors.highlight
-            }, 100);
-
-            // Store status.
-            item.data('active', true);
-
-        },
-
-        /*
-         * Fade down the item title.
-         */
-        __unselectItem: function(item) {
-
-            // Store status.
-            item.data('active', false);
-
-        },
 
         /*
          * Gloss title and description on mouseenter.

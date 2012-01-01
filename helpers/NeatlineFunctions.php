@@ -58,6 +58,7 @@ function neatline_queueEditorAssets()
     queue_css('jquery.miniColors');
     queue_css('configure-layout');
     queue_css('configure-map');
+    queue_css('configure-items');
 
     // Application classes and controller script.
     queue_js('editor/item_browser', 'javascripts');
@@ -68,6 +69,7 @@ function neatline_queueEditorAssets()
     queue_js('editor/item_orderer', 'javascripts');
     queue_js('editor/configure_layout', 'javascripts');
     queue_js('editor/configure_map', 'javascripts');
+    queue_js('editor/configure_items', 'javascripts');
 
     queue_js('editor/utilities/_small_scroll', 'javascripts');
     queue_js('editor/utilities/_toggle_button', 'javascripts');

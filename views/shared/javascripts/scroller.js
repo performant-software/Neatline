@@ -113,6 +113,9 @@
 
             });
 
+            // Disable selection.
+            this.element.disableSelection();
+
         },
 
 
