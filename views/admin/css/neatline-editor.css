@@ -712,7 +712,7 @@ table#items-table tr.hidden {
 #geo-edit {
     z-index: 999;
     position: absolute;
-    display: none !important;
+    display: none;
     top: 33px;
     left: 60px;
 }

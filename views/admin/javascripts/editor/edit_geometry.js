@@ -188,10 +188,10 @@
 
             // Display the edit controls.
             this.editContainer.css({
-                'display': 'block !important',
+                'display': 'block',
                 'opacity': 0,
                 'z-index': 999
-            }).stop().animate({ 'opacity': 1}, this.options.animation.fade_duration);            // By default, deactivate all buttons.
+            }).stop().animate({ 'opacity': 1}, this.options.animation.fade_duration);
 
             this.deactivateAllButtons();
 
