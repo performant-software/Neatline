@@ -94,6 +94,13 @@ function neatline_queuePublicAssets()
     queue_js('_constructNeatline', 'javascripts');
     queue_js('fullscreen_positioner', 'javascripts');
 
+    $openlayersSrc = 'http://openlayers.org/api/OpenLayers.js';
+    $simileSrc = 'http://api.simile-widgets.org/timeline/2.3.1/timeline-api.js?bundle=true';
+
+    $headScript = __v()->headScript();
+    $headScript->appendScript('','text/javascript', array('src' => $openlayersSrc));
+    $headScript->appendScript('', 'text/javascript', array('src' => $simileSrc));
+
 }
 
 /**
