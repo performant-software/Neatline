@@ -173,7 +173,7 @@
             // ** LINE THICKNESS.
             this.strokeWidth.integerdragger({
                 min: 0,
-                default: 1,
+                def: 1,
                 px_per_unit: 8,
                 change: function(evt, obj) {
                     self._trigger('strokeWidthEdit', {}, { 'value': obj.value });
@@ -183,7 +183,7 @@
             // ** POINT RADIUS.
             this.pointRadius.integerdragger({
                 min: 1,
-                default: 6,
+                def: 6,
                 px_per_unit: 8,
                 change: function(evt, obj) {
                     self._trigger('pointRadiusEdit', {}, { 'value': obj.value });

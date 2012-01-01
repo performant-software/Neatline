@@ -38,15 +38,15 @@
             // Hex defaults.
             colors: {
                 map: {
-                    default: '#f9f9f9',
+                    def: '#f9f9f9',
                     target: '#fffcf4'
                 },
                 timeline: {
-                    default: '#f4f4f4',
+                    def: '#f4f4f4',
                     target: '#fffcf4'
                 },
                 items: {
-                    default: '#f0f0f0',
+                    def: '#f0f0f0',
                     target: '#fffcf4'
                 }
             }
@@ -487,7 +487,7 @@
                 break;
 
                 case 'leave':
-                    var target = this.options.colors.map.default;
+                    var target = this.options.colors.map.def;
                 break;
 
             }
@@ -511,7 +511,7 @@
                 break;
 
                 case 'leave':
-                    var target = this.options.colors.timeline.default
+                    var target = this.options.colors.timeline.def
                 break;
 
             }
@@ -535,7 +535,7 @@
                 break;
 
                 case 'leave':
-                    var target = this.options.colors.items.default
+                    var target = this.options.colors.items.def
                 break;
 
             }

@@ -34,7 +34,7 @@
             max: null,
 
             // The default value.
-            default: 0,
+            def: 0,
 
             // Pixels of cursor movement per integer change.
             px_per_unit: 5,
@@ -95,7 +95,7 @@
 
             // Construct.
             this.tip = $('<span></span>')
-                .addClass(this.options.tip.class)
+                .addClass(this.options.tip['class'])
                 .text(this.options.tip.text)
                 .css('position', 'absolute');
 
@@ -196,7 +196,7 @@
 
             // Otherwise, revent to default.
             else {
-                this._setInputValue(this.options.default);
+                this._setInputValue(this.options.def);
             }
 
         },

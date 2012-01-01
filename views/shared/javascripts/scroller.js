@@ -27,7 +27,7 @@
         options: {
 
             colors: {
-                default: '#404040',
+                text: '#404040',
                 purple: '#866398',
                 orange: '#f19f00'
             },
@@ -151,7 +151,7 @@
         _unhighlightArrow: function(arrow) {
 
             arrow.stop().animate({
-                'color': this.options.colors.default
+                'color': this.options.colors.text
             }, this.options.durations.leave);
 
         },
