@@ -58,6 +58,7 @@ function neatline_queueEditorAssets()
     queue_css('jquery.miniColors');
     queue_css('configure-layout');
     queue_css('configure-map');
+    queue_css('configure-items');
 
     // Application classes and controller script.
     queue_js('editor/item_browser', 'javascripts');
@@ -68,6 +69,7 @@ function neatline_queueEditorAssets()
     queue_js('editor/item_orderer', 'javascripts');
     queue_js('editor/configure_layout', 'javascripts');
     queue_js('editor/configure_map', 'javascripts');
+    queue_js('editor/configure_items', 'javascripts');
 
     queue_js('editor/utilities/_small_scroll', 'javascripts');
     queue_js('editor/utilities/_toggle_button', 'javascripts');
@@ -76,7 +78,7 @@ function neatline_queueEditorAssets()
     queue_js('editor/utilities/_integer_dragger', 'javascripts');
     queue_js('editor/_constructEditor', 'javascripts');
 
-    // 3rd party code.
+    // Extenal libraries.
     queue_js('libraries/jquery.miniColors-0.1/jquery.miniColors.min', 'javascripts');
 
 }
@@ -114,6 +116,7 @@ function neatline_queueNeatlineAssets()
     queue_js('neatline_items', 'javascripts');
     queue_js('span_styler', 'javascripts');
     queue_js('positioner', 'javascripts');
+    queue_js('scroller', 'javascripts');
     queue_js('_utilities', 'javascripts/libraries');
     queue_js('jquery.getscrollbarwidth', 'javascripts/libraries');
 

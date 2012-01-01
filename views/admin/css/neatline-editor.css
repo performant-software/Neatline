@@ -46,7 +46,6 @@ html {
     height: 53px;
     display: inline;
     background-color: #724e85;
-    background-color: #724e85;
     background-repeat: repeat-x;
     background-image: -khtml-gradient(linear, left top, left bottom, from(#724e85), to(#543664));
     background-image: -moz-linear-gradient(top, #724e85, #543664);
@@ -646,8 +645,8 @@ table#items-table tr {
 }
 
 table#items-table td {
-    border-bottom: none;
-    border-top: 1px solid #f0f0f0;
+    border-top: none;
+    border-bottom: 1px solid #f0f0f0;
 }
 
 table#items-table tr:first-child td {
@@ -702,6 +701,8 @@ table#items-table tr.hidden {
 
 .olControlEditingToolbar {
     opacity: 0;
+    right: auto !important;
+    left: 55px;
 }
 
 #edit-geometry-button {
@@ -712,16 +713,16 @@ table#items-table tr.hidden {
     z-index: 999;
     position: absolute;
     display: none !important;
-    top: 36px;
-    right: 4px;
+    top: 33px;
+    left: 60px;
 }
 
 #regular-shapes {
     z-index: 999;
     position: absolute;
     display: none !important;
-    top: 3px;
-    right: 126px;
+    top: 33px;
+    left: 62px;
 }
 
 #regular-shapes select {
@@ -732,7 +733,7 @@ table#items-table tr.hidden {
 #geo-edit button.geo-edit {
     clear: both;
     display: block;
-    float: right;
+    float: left;
     width: 70px;
     margin: 0 0 5px 0;
     -moz-transition: 0.0s linear all !important;

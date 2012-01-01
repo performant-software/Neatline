@@ -131,6 +131,11 @@
                     }
                 },
 
+                // Listen for keystroke.
+                'keyup': function() {
+                    self._setInputValue(parseInt(self.element.val()));
+                },
+
                 // Listen for drag.
                 'mousedown': function(e) {
 

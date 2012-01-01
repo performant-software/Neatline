@@ -1,8 +1,7 @@
-<?php
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
 
 /**
- * Google fonts.
+ * CSS for configure items dropdown. Used in the Neatline editor.
  *
  * PHP version 5
  *
@@ -23,9 +22,18 @@
  * @copyright   2011 The Board and Visitors of the University of Virginia
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache 2 License
  */
-?>
 
-<link href='http://fonts.googleapis.com/css?family=Crimson+Text:400,400italic,600,600italic,700,700italic' rel='stylesheet' type='text/css'>
-<link href='http://fonts.googleapis.com/css?family=IM+Fell+DW+Pica' rel='stylesheet' type='text/css'>
-<link href='http://fonts.googleapis.com/css?family=Petrona' rel='stylesheet' type='text/css'>
-<link href='http://fonts.googleapis.com/css?family=Trykker' rel='stylesheet' type='text/css'>
+#configure-items {
+    padding-top: 1.4em;
+    width: 200px;
+}
+
+#configure-items button {
+    margin: 0.5em 0;
+}
+
+#configure-items button.loop {
+    -moz-transition: 0.0s linear all !important;
+    transition: 0.0s linear all !important;
+    -webkit-transition: 0.0s linear all !important;
+}

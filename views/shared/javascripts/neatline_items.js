@@ -27,29 +27,17 @@
 
         options: {
 
-            // Markup hooks.
-            markup: {
-                item_title_text_class: 'item-title-text',
-                item_title_fader_class: 'item-title-fader',
-                item_row_class: '.item-row',
-                description_td_class: 'item-description',
-                description_content_class: 'item-description-content',
-                reorder_items_id: 'reorder-items',
-                order_save_button_id: 'order-save-button'
+            // Hexes.
+            colors: {
+                purple: '#724E85',
+                background: '#FFFEF8',
+                title: '#202020',
+                highlight: '#f2eff3'
             },
 
             // CSS constants.
             css: {
-                header_height: 40
-            },
-
-            // Hexes.
-            colors: {
-                purple: '#724E85',
-                blue: '#2149cc',
-                text_default: '#515151',
-                background_default: '#FFFEF8',
-                background_highlight: '#f3f6ff'
+                def_opacity: 0.7
             }
 
         },
@@ -62,10 +50,7 @@
             // Getters.
             this._window =                  $(window);
             this._body =                    $('body');
-            this.listContainer =            $('#undated-items-list-container');
-            this.listHeader =               $('#public-items-list-header');
-            this.leftArrow =                $('#left-arrow');
-            this.rightArrow =               $('#right-arrow');
+            this.listContainer =            $('#items-container');
 
             // Trackers.
             this._idToItem =                {};
@@ -74,58 +59,9 @@
             this._currentItemId =           null;
             this._idOrdering =              [];
 
-            // Get starting offets and position markup.
-            this.__getScrollBarWidth();
-            this.positionMarkup();
-            this._addWindowResizeListener();
-
-            // Add events to to the arrows.
-            this._glossArrows();
-
             // Build list.
             this._getItems();
-
-        },
-
-        /*
-         * Get the offset of the container.
-         */
-        _getOffsets: function() {
-
-            this.containerOffset = this.element.offset();
-            this.containerHeight = this.element.height();
-            this.containerWidth = this.element.width();
-
-        },
-
-        /*
-         * Position the header.
-         */
-        positionMarkup: function() {
-
-            // Reget offsets.
-            this._getOffsets();
-
-            // Set the top and left offsets for the header.
-            this.listHeader.css({
-                'top': this.containerOffset.top,
-                'left': this.containerOffset.left,
-                'width': this.containerWidth - this.scrollbarWidth
-            });
-
-        },
-
-        /*
-         * On window resize, reposition the header.
-         */
-        _addWindowResizeListener: function() {
-
-            var self = this;
-
-            this._window.bind('resize', function() {
-                self.positionMarkup();
-                self._getItemOffsets();
-            });
+            this._addResizeListener();
 
         },
 
@@ -162,6 +98,19 @@
         },
 
         /*
+         * On window resize, recompute the top offsets.
+         */
+        _addResizeListener: function() {
+
+            var self = this;
+
+            this._window.bind('resize', function() {
+                self._getItemOffsets();
+            });
+
+        },
+
+        /*
          * Once the raw markup is from the items ajax query is pushed into the
          * container, build the functionality for each item.
          */
@@ -170,73 +119,41 @@
             var self = this;
 
             // Get the new items.
-            this.items = this.listContainer.find('.item-row');
-
-            // Empty the id-to-item association object.
-            this._idToItem = {};
-            this._currentItem = null;
-            this._currentItemId = null;
-
-            // Position the faders.
-            this._positionTitleFaders();
+            this.items = this.listContainer.find('.item-title');
 
             // Bind events to the item rows.
             $.each(this.items, function(i, item) {
 
-                // Get item id and populate tracker literals.
+                // Get item id and description.
                 var item = $(item);
+                var description = item.next('li.item-description');
                 var recordid = item.attr('recordid');
+
+                // Populate trackers.
                 self._idToItem[recordid] = item;
                 self._idOrdering.push(recordid);
 
-                // By default, register the items as contracted.
-                item.data('expanded', false);
-
                 // Listen for events.
-                item.bind({
+                item.add(description).bind({
 
                     'mousedown': function() {
 
                         // Trigger out to the deployment code.
-                        self._trigger('undateditemclick', {}, {
+                        self._trigger('itemclick', {}, {
                             'recordid': recordid,
-                            'scrollItems': false
+                            'scrollItems': true
                         });
 
-                        // If the form is hidden, show it.
-                        if (!item.data('expanded')) {
-                            self.scrollToItem(recordid);
-                        }
-
-                        // If the form is visible, hide it.
-                        else {
-                            self.hideItem(recordid);
-                        }
-
                     },
 
+                    // Highlight.
                     'mouseenter': function() {
-
-                        // If the item is not expanded, fade the
-                        // background to purple.
-                        if (!item.data('expanded')) {
-                            item.animate({
-                                'background-color': self.options.colors.background_highlight
-                            }, 20);
-                        }
-
+                        self.__highlightItem(item);
                     },
 
+                    // Un-highlight.
                     'mouseleave': function() {
-
-                        // If the item is not expanded, fade the
-                        // background to purple.
-                        if (!item.data('expanded')) {
-                            item.animate({
-                                'background-color': self.options.colors.background_default
-                            }, 20);
-                        }
-
+                        self.__unhighlightItem(item);
                     }
 
                 });
@@ -249,53 +166,15 @@
         },
 
         /*
-         * Build scrolling functionality.
-         */
-        _glossArrows: function() {
-
-            var self = this;
-
-            // Events on left arrow.
-            this.leftArrow.bind('mousedown', function() {
-                self._scrollLeft();
-            });
-
-            // Events on right arrow.
-            this.rightArrow.bind('mousedown', function() {
-                self._scrollRight();
-            });
-
-            // Listen for arrow keystrokes on the window.
-            this._window.bind({
-
-                'keydown': function(event) {
-
-                    // If left arrow.
-                    if (event.which == 37) {
-                        self._scrollLeft();
-                    }
-
-                    // If right arrow.
-                    if (event.which == 39) {
-                        self._scrollRight();
-                    }
-
-                }
-
-            });
-
-        },
-
-        /*
          * Scroll to the right.
          */
-        _scrollRight: function() {
+        scrollRight: function() {
 
             // Compute the new id.
             var id = this._getNewScrollId('right');
 
             // Trigger out to the deployment code.
-            this._trigger('undateditemclick', {}, {
+            this._trigger('itemclick', {}, {
                 'recordid': id,
                 'scrollItems': true
             });
@@ -305,13 +184,13 @@
         /*
          * Scroll to the right.
          */
-        _scrollLeft: function() {
+        scrollLeft: function() {
 
             // Compute the new id.
             var id = this._getNewScrollId('left');
 
             // Trigger out to the deployment code.
-            this._trigger('undateditemclick', {}, {
+            this._trigger('itemclick', {}, {
                 'recordid': id,
                 'scrollItems': true
             });
@@ -391,7 +270,7 @@
             var self = this;
 
             // Get the new items.
-            this.items = this.listContainer.find('.item-row');
+            this.items = this.listContainer.find('.item-title');
 
             // Empty the association object.
             this._idToOffset = {};
@@ -414,19 +293,11 @@
          */
         scrollToItem: function(id) {
 
-            // If there is a currently selected item, fade down the title.
-            if (this._currentItem != null) {
-                this.hideItem(this._currentItemId);
-            }
-
             // Fetch the markup and get components.
             var item = this._idToItem[id];
 
             // If the item is present in the squence tray.
             if (item != null) {
-
-                // Highlight the title.
-                this.__highlightTitle(item);
 
                 // Set the trackers.
                 this._currentItem = item;
@@ -434,154 +305,10 @@
 
                 // Position at the top of the frame.
                 this.element.animate({
-                    'scrollTop': this._idToOffset[id] - this.options.css.header_height + 1
+                    'scrollTop': this._idToOffset[id] + 1
                 }, 300);
 
-                // Expand the description.
-                // this.__expandDescription(descriptionTd);
-
-                // Store the item as expanded.
-                item.data('expanded', true);
-
             }
-
-        },
-
-        /*
-         * Contract item.
-         */
-        hideItem: function(id) {
-
-            // Fetch the markup and get components.
-            var item = this._idToItem[id];
-            var descriptionTd = item.next('tr').find('td.' + this.options.markup.description_td_class);
-
-            // If the item is present in the squence tray.
-            if (item != null) {
-
-                // Highlight the title.
-                this.__unhighlightTitle(item);
-
-                // Set the trackers.
-                this._currentItem = null;
-                this._currentItemId = null;
-
-                // Contract the description.
-                // this.__contractDescription(descriptionTd);
-
-                // Store the item as expanded.
-                item.data('expanded', false);
-
-            }
-
-        },
-
-        /*
-         * Position the divs that provide the opacity gradient on the right
-         * edge of width-occluded item titles in the browser pane.
-         */
-        _positionTitleFaders: function() {
-
-            var self = this;
-
-            $.each(this.items, function(i, item) {
-
-                var item = $(item);
-
-                // Get the spans for the text and fader.
-                var textSpan = item.find('.' + self.options.markup.item_title_text_class);
-                var faderSpan = item.find('.' + self.options.markup.item_title_fader_class);
-
-                // Measure the height of the block produced by the text
-                // and the width of the entire row.
-                var titleHeight = textSpan.height();
-
-                // Position the fader.
-                faderSpan.css({
-                    'height': titleHeight
-                });
-
-            });
-
-        },
-
-        /*
-         * Calculate the width of the browser-default scrollbar. Used by the
-         * calculation that positions the static browser pane top bar (with the
-         * search box and item filterer).
-         */
-        __getScrollBarWidth: function() {
-
-            this.scrollbarWidth = 0;
-
-            if ($.browser.msie) {
-
-                var textarea1 = $('<textarea cols="10" rows="2"></textarea>')
-                    .css({
-                        position: 'absolute',
-                        top: -1000,
-                        left: -1000
-                    }).appendTo('body');
-
-                var textarea2 = $('<textarea cols="10" rows="2"></textarea>')
-                    .css({
-                        position: 'absolute',
-                        top: -1000,
-                        left: -1000,
-                        overflow: 'hidden'
-                    }).appendTo('body');
-
-                this.scrollbarWidth = textarea1.width() - textarea2.width();
-                textarea1.remove();
-                textarea2.remove();
-
-            }
-
-            else {
-
-                var div = $('<div />')
-                    .css({
-                        width: 100,
-                        height: 100,
-                        overflow: 'auto',
-                        position: 'absolute',
-                        top: -1000,
-                        left: -1000
-                    }).prependTo('body').append('<div />').find('div').css({
-                        width: '100%',
-                        height: 200
-                    });
-
-                this.scrollbarWidth = 100 - div.width();
-                div.parent().remove();
-
-            }
-
-        },
-
-        /*
-         * Measure the full height of a div given some width and display property.
-         */
-        __measureNativeHeight: function(div, width, display) {
-
-            // Clone and reposition.
-            var clone = div
-                .clone()
-                .css({
-                    'top': -1000,
-                    'left': -1000,
-                    'display': display,
-                    'width': width,
-                    'height': '',
-                    'position': 'absolute'
-                })
-                .appendTo(this._body);
-
-            // Register the height of the cloned form, delete it.
-            var height = clone.height();
-            clone.remove();
-
-            return height;
 
         },
 
@@ -589,75 +316,26 @@
          * DOM hits.
          */
 
+
         /*
-         * Mark as not-highlighted the title of an item listing.
+         * Gloss title and description on mouseenter.
          */
-        __unhighlightTitle: function(item) {
+        __highlightItem: function(item) {
 
-            var oldTitle = item.find('.' + this.options.markup.item_title_text_class);
-
-            // Fade the title to white.
-            oldTitle.animate({
-                'color': this.options.colors.text_default
-            }, 200);
-
-            // Fade the row background to purple.
-            item.animate({
-                'background-color': this.options.colors.background_default
-            }, 200);
+            item.stop().animate({
+                'background-color': this.options.colors.highlight
+            }, 100);
 
         },
 
         /*
-         * Mark as highlighted the title of an item listing.
+         * Push title and description back to default state.
          */
-        __highlightTitle: function(item) {
+        __unhighlightItem: function(item) {
 
-            // Get the item title.
-            var title = item.find('.' + this.options.markup.item_title_text_class);
-
-            // Fade the title to white.
-            title.animate({
-                'color': '#fff'
-            }, 200);
-
-            // Fade the row background to purple.
-            item.animate({
-                'background-color': this.options.colors.purple
-            }, 200);
-
-        },
-
-        /*
-         * Expand an item description
-         */
-        __expandDescription: function(descriptionTd) {
-
-            // Get the description content div.
-            var contentDiv = descriptionTd.find('div.' + this.options.markup.description_content_class);
-
-            // Measure the native height of the content.
-            var nativeHeight = this.__measureNativeHeight(contentDiv, this.containerWidth, 'block');
-
-            // Display the row.
-            descriptionTd.css('display', 'table-cell');
-
-            // Roll down.
-            contentDiv.css('height', 'auto');
-
-        },
-
-        /*
-         * Contract an item description
-         */
-        __contractDescription: function(descriptionTd) {
-
-            // Get the description content div.
-            var contentDiv = descriptionTd.find('div.' + this.options.markup.description_content_class);
-
-            // Roll up and hide the row on complete.
-            contentDiv.css('height', 0);
-            descriptionTd.css('display', 'none');
+            item.stop().animate({
+                'background-color': this.options.colors.background
+            }, 100);
 
         }
 

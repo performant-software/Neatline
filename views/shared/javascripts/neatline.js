@@ -32,9 +32,10 @@
 
             // Markup hooks.
             markup: {
-                map_id: 'map',
-                timeline_id: 'timeline',
-                items_id: 'items'
+                map_id:         'map',
+                timeline_id:    'timeline',
+                items_id:       'items',
+                scroller:       'scroll'
             }
 
         },
@@ -55,11 +56,13 @@
             this.map =                      $('#' + this.options.markup.map_id);
             this.timeline =                 $('#' + this.options.markup.timeline_id);
             this.items =                    $('#' + this.options.markup.items_id);
+            this.scroller =                 $('#' + this.options.markup.scroller);
 
-            // Trackers for instantiation status of blocks.
+            // Trackers.
             this.instantiated_map =         false;
             this.instantiated_timeline =    false;
             this.instantiated_undated =     false;
+            this._getMajorBlock();
 
             // Instantiate the positioning manager.
             this.element.positioner({
@@ -70,10 +73,8 @@
                 }
             });
 
-            // Position the divs.
+            // Position divs and run viewport managers.
             this.positionDivs();
-
-            // Startup for the component widgets.
             this.instantiateBlocks();
 
         },
@@ -87,7 +88,32 @@
          */
         setParams: function(params) {
 
+            // Set the parameters and re-get the major block.
             this.params = params;
+            this._getMajorBlock();
+
+        },
+
+        /*
+         * Figure out which viewport should house the scroller.
+         *
+         * - return void.
+         */
+        _getMajorBlock: function() {
+
+            // If there is a map and a timeline, take the top div.
+            if (this.params.is_map && this.params.is_timeline) {
+                this.majorBlock = (this.params.top_element == 'map') ?
+                    this.map :
+                    this.timeline;
+            }
+
+            // Otherwise, take the present block.
+            else {
+                this.majorBlock = (this.params.is_map) ?
+                    this.map :
+                    this.timeline;
+            }
 
         },
 
@@ -139,7 +165,7 @@
 
             var self = this;
 
-            // Map.
+            // ** MAP
             if (this.params.is_map && !this.instantiated_map) {
 
                 this.map.neatlinemap({
@@ -161,7 +187,7 @@
 
             }
 
-            // Timeline.
+            // ** TIMELINE
             if (this.params.is_timeline && !this.instantiated_timeline) {
 
                 this.timeline.neatlinetimeline({
@@ -179,7 +205,7 @@
 
             }
 
-            // Undated items.
+            // ** ITEMS
             if (this.params.is_items && !this.instantiated_undated) {
 
                 // If the Neatline is public, instantiate the default item tray.
@@ -187,7 +213,7 @@
 
                     this.items.neatlineitems({
 
-                        'undateditemclick': function(event, obj) {
+                        'itemclick': function(event, obj) {
 
                             // When the user clicks on an item title.
                             self._trigger('undateditemclick', {}, {
@@ -206,7 +232,7 @@
 
                     this.items.itemorderer({
 
-                        'undateditemclick': function(event, obj) {
+                        'itemclick': function(event, obj) {
 
                             // When the user clicks on an item title.
                             self._trigger('undateditemclick', {}, {
@@ -224,6 +250,19 @@
                 this.instantiated_undated = true;
 
             }
+
+            // ** SCROLLER
+            this.majorBlock.scroller({
+
+                'left': function() {
+                    self.items.neatlineitems('scrollLeft');
+                },
+
+                'right': function() {
+                    self.items.neatlineitems('scrollRight');
+                }
+
+            });
 
         },
 
@@ -533,6 +572,33 @@
          */
         getTimelineCenter: function() {
             return this.timeline.neatlinetimeline('getCenterForSave');
+        },
+
+        /*
+         * Put the items tray into reorder mode.
+         *
+         * - return integer: The level.
+         */
+        reorderItems: function() {
+            this.items.neatlineitems('reorder');
+        },
+
+        /*
+         * Get an ordering.
+         *
+         * - return integer: The level.
+         */
+        getOrder: function() {
+            return this.items.neatlineitems('objectifyOrder');
+        },
+
+        /*
+         * Put the item tray into default mode and return the order.
+         *
+         * - return integer: The level.
+         */
+        endReorderItems: function() {
+            return this.items.neatlineitems('endreorder');
         }
 
     });

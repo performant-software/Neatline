@@ -259,6 +259,7 @@
             OpenLayers.IMAGE_RELOAD_ATTEMTPS = 3;
             OpenLayers.Util.onImageLoadErrorColor = "transparent";
             OpenLayers.ImgPath = 'http://js.mapbox.com/theme/dark/';
+            OpenLayers.DOTS_PER_INCH = 25.4 / 0.28;
 
             // Starting options.
             var options = {

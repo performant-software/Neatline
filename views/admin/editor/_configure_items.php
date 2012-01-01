@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
 
 /**
- * Google fonts.
+ * Markup for the items options dropdown.
  *
  * PHP version 5
  *
@@ -25,7 +25,9 @@
  */
 ?>
 
-<link href='http://fonts.googleapis.com/css?family=Crimson+Text:400,400italic,600,600italic,700,700italic' rel='stylesheet' type='text/css'>
-<link href='http://fonts.googleapis.com/css?family=IM+Fell+DW+Pica' rel='stylesheet' type='text/css'>
-<link href='http://fonts.googleapis.com/css?family=Petrona' rel='stylesheet' type='text/css'>
-<link href='http://fonts.googleapis.com/css?family=Trykker' rel='stylesheet' type='text/css'>
+<!-- Edit order. -->
+<button class="btn icon loop">Edit Item Order</button>
+<p>Click to edit the ordering of the items in the description tray.</p>
+<hr />
+
+<button class="btn icon approve save">Save</button>

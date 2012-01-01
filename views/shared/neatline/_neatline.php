@@ -33,10 +33,13 @@
     <div id="timeline" class="neatline-block neatlinetime-timeline"></div>
 
     <div id="items" class="neatline-block">
-        <?php echo $this->partial('neatline/_undated_items.php', array(
-            'public' => $public
-        )); ?>
+        <div id="items-container"></div>
     </div>
+
+    <div id="scroll">
+        <div class="arrow-left">‹</div>
+        <div class="arrow-right">›</div>
+    <div>
 
 </div>
 
@@ -58,16 +61,16 @@
 
         Neatline.image = <?php echo json_encode(
             array(
-                'path' => $image['path'],
-                'name' => $image['name'],
-                'width' => $this->fileMetadata(
-                        $image['record'],
-                        'Omeka Image File',
-                        'Width'),
-                'height' => $this->fileMetadata(
-                        $image['record'],
-                        'Omeka Image File',
-                        'Height')
+                'path' =>   $image['path'],
+                'name' =>   $image['name'],
+                'width' =>  (int) $this->fileMetadata(
+                                $image['record'],
+                                'Omeka Image File',
+                                'Width'),
+                'height' => (int) $this->fileMetadata(
+                                $image['record'],
+                                'Omeka Image File',
+                                'Height')
             )
         ); ?>
 
