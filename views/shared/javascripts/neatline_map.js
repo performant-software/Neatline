@@ -547,6 +547,8 @@
                     displayClass: 'olControlDrawFeaturePath',
                     featureAdded: function() {
                         self._trigger('featureadded');
+                        self._addClickControls();
+                        self.edit(self._currentEditItem, true);
                     }
                 }),
 
@@ -555,6 +557,8 @@
                     displayClass: 'olControlDrawFeaturePoint',
                     featureAdded: function() {
                         self._trigger('featureadded');
+                        self._addClickControls();
+                        self.edit(self._currentEditItem, true);
                     }
                 }),
 
@@ -563,6 +567,8 @@
                     displayClass: 'olControlDrawFeaturePolygon',
                     featureAdded: function() {
                         self._trigger('featureadded');
+                        self._addClickControls();
+                        self.edit(self._currentEditItem, true);
                     }
                 })
 
