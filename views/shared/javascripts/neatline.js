@@ -361,7 +361,7 @@
          *
          * - return void.
          */
-        reloadUndatedItems: function() {
+        reloadItems: function() {
             this.items.neatlineitems('loadData');
         },
 

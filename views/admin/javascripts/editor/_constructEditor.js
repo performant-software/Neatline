@@ -121,14 +121,13 @@ jQuery(document).ready(function($) {
             neatlineContainer.neatline('endMapEditWithoutSave', obj.immediate);
         },
 
-        // After an edit form save, when the JSON for the map and
-        // timeline needs to be reloaded.
+        // After an edit form save, reload viewport data.
         'savecomplete': function() {
 
             // Reload data for all blocks.
             neatlineContainer.neatline('reloadTimeline');
             neatlineContainer.neatline('reloadMap');
-            neatlineContainer.neatline('reloadUndatedItems');
+            neatlineContainer.neatline('reloadItems');
 
         },
 

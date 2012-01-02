@@ -171,11 +171,11 @@
         scrollRight: function() {
 
             // Compute the new id.
-            var id = this._getNewScrollId('right');
+            this._currentItemId = this._getNewScrollId('right');
 
             // Trigger out to the deployment code.
             this._trigger('itemclick', {}, {
-                'recordid': id,
+                'recordid': this._currentItemId,
                 'scrollItems': true
             });
 
@@ -187,11 +187,11 @@
         scrollLeft: function() {
 
             // Compute the new id.
-            var id = this._getNewScrollId('left');
+            this._currentItemId = this._getNewScrollId('left');
 
             // Trigger out to the deployment code.
             this._trigger('itemclick', {}, {
-                'recordid': id,
+                'recordid': this._currentItemId,
                 'scrollItems': true
             });
 
