@@ -198,13 +198,12 @@
 
                                 dragItem.detach().insertAfter(enterDescription);
                                 dragDescription.detach().insertAfter(dragItem);
-                                console.log(dragDescription);
 
                             }
 
                         }
 
-                        // Update the ordering.
+                        // Update the ordering and title offsets.
                         self._getRowOrder();
 
                     }

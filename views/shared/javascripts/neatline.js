@@ -335,7 +335,11 @@
          * - return string: The WKT.
          */
         getWktForSave: function() {
-            return this.map.neatlinemap('getWktForSave');
+            if (this.is_instantiated_map) {
+                return this.map.neatlinemap('getWktForSave');
+            } else {
+                return null;
+            }
         },
 
         /*
@@ -574,7 +578,7 @@
             if (this.is_instantiated_timeline) {
                 return this.timeline.neatlinetimeline('getCenterForSave');
             } else {
-                return '';
+                return null;
             }
         },
 
