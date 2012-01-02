@@ -335,7 +335,7 @@
          * - return string: The WKT.
          */
         getWktForSave: function() {
-            if (this.is_instantiated_map) {
+            if (this.instantiated_map) {
                 return this.map.neatlinemap('getWktForSave');
             } else {
                 return null;
@@ -575,7 +575,7 @@
          * - return integer: The level.
          */
         getTimelineCenter: function() {
-            if (this.is_instantiated_timeline) {
+            if (this.instantiated_timeline) {
                 return this.timeline.neatlinetimeline('getCenterForSave');
             } else {
                 return null;

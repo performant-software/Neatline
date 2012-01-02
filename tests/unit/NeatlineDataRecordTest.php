@@ -578,6 +578,56 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
     }
 
     /**
+     * If 'null' is passed to setGeocoverage, do not set.
+     *
+     * @return void.
+     */
+    public function testSetGeocoverageWithNullValue()
+    {
+
+        // Create a record.
+        $neatline = $this->helper->_createNeatline();
+        $item = $this->helper->_createItem();
+        $record = new NeatlineDataRecord($item, $neatline);
+        $neatline->save();
+
+        // Set record that is already null.
+        $this->assertFalse($record->setGeocoverage('null'));
+        $this->assertNull($record->vector_color);
+
+        // Set record that has coverage.
+        $record->geocoverage = 'POINT(1,0)';
+        $this->assertFalse($record->setGeocoverage('null'));
+        $this->assertEquals($record->geocoverage, 'POINT(1,0)');
+
+    }
+
+    /**
+     * If anything other than 'null' is passed to setGeocoverage, set.
+     *
+     * @return void.
+     */
+    public function testSetGeocoverageWithNonNullValue()
+    {
+
+        // Create a record.
+        $neatline = $this->helper->_createNeatline();
+        $item = $this->helper->_createItem();
+        $record = new NeatlineDataRecord($item, $neatline);
+        $neatline->save();
+
+        // Set record that is already null.
+        $record->setGeocoverage('POINT(1,0)');
+        $this->assertNull($record->vector_color);
+
+        // Set record that has coverage.
+        $record->geocoverage = 'POINT(1,0)';
+        $record->setGeocoverage('POINT(2,0)');
+        $this->assertEquals($record->geocoverage, 'POINT(2,0)');
+
+    }
+
+    /**
      * getStyle() should return a set row value when one exists and
      * there is not an exhibit default.
      *

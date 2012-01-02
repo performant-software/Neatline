@@ -315,6 +315,26 @@ class NeatlineDataRecord extends Omeka_record
     }
 
     /**
+     * Set the geocoverage field if the passed value is not <string>'null', which
+     * is true when there was not an instantiated map when the  triggering save
+     * action was performed in the editor.
+     *
+     * @param integer $value The value.
+     *
+     * @return boolean True if the set succeeds.
+     */
+    public function setGeocoverage($value)
+    {
+
+        if ($value == 'null') {
+            return false;
+        }
+
+        return $this->setNotEmpty('geocoverage', $value);
+
+    }
+
+    /**
      * Set a style attribute. If there is an exhibit default, only set
      * if the passed value is different. If there is no exhibit default,
      * only set if the passed value is different from the system

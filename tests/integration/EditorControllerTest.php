@@ -1225,6 +1225,61 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
     }
 
     /**
+     * When geocoverage => 'null' is posted to /save, the geocoverage  field
+     * should not be set. This is the case when a user saves a form and there
+     * is not an instantiated map in the exhibit. If there was a  map in the
+     * past, though, and vectors were added for the item, those vectors would
+     * otherwise be deleted, since the absence of the map at the time of save
+     * would register in the front-end application as a wkt of 'null'.
+     *
+     * @return void.
+     */
+    public function testSaveNullStringGeocoverage()
+    {
+
+        // Create exhibit and record.
+        $neatline = $this->helper->_createNeatline();
+        $record = new NeatlineDataRecord(null, $neatline);
+        $record->geocoverage = 'POINT(1,0)';
+        $record->save();
+
+        // Form the POST for a space change.
+        $this->request->setMethod('POST')
+            ->setPost(array(
+                'item_id' =>        '',
+                'record_id' =>      $record->id,
+                'neatline_id' =>    $neatline->id,
+                'space_active' =>   (string) self::$__testParams['space_active'],
+                'time_active' =>    (string) self::$__testParams['time_active'],
+                'geocoverage' =>    'null',
+                'title' =>          self::$__testParams['title'],
+                'description' =>    self::$__testParams['description'],
+                'start_date' =>     self::$__testParams['start_date'],
+                'start_time' =>     self::$__testParams['start_time'],
+                'end_date' =>       self::$__testParams['end_date'],
+                'end_time' =>       self::$__testParams['end_time'],
+                'left_percent' =>   self::$__testParams['left_percent'],
+                'right_percent' =>  self::$__testParams['right_percent'],
+                'vector_color' =>   self::$__testParams['vector_color'],
+                'stroke_color' =>   self::$__testParams['stroke_color'],
+                'vector_opacity' => self::$__testParams['vector_opacity'],
+                'stroke_opacity' => self::$__testParams['stroke_opacity'],
+                'stroke_width' =>   self::$__testParams['stroke_width'],
+                'point_radius' =>   self::$__testParams['point_radius']
+            )
+        );
+
+        // Hit the route and capture the response.
+        $this->dispatch('neatline-exhibits/editor/save');
+
+        // Get the record and check the attributes.
+        $record = $this->_recordsTable->find($record->id);
+        $this->assertEquals($record->geocoverage, 'POINT(1,0)');
+        $this->assertNotEquals($record->geocoverage, 'null');
+
+    }
+
+    /**
      * When /save is hit with a post that defines a item and but not a record id,
      * the code should check to make sure that there isn't actually an existing data
      * record for the item/exhibit combination before creating the new record. This

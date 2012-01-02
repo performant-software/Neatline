@@ -261,7 +261,7 @@ class Neatline_EditorController extends Omeka_Controller_Action
         $record->setNotEmpty('start_time', $startTime);
         $record->setNotEmpty('end_date', $endDate);
         $record->setNotEmpty('end_time', $endTime);
-        $record->setNotEmpty('geocoverage', $geoCoverage);
+        $record->setGeocoverage($geoCoverage);
 
         // Set styles and percentages.
         $record->setStyle('vector_color', $vectorColor);
