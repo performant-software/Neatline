@@ -355,8 +355,8 @@
 
                     var feature = self.modifyFeatures.feature;
 
-                    // If there is a selected feature, unselect and reselect it to apply
-                    // the new configuration.
+                    // If there is a selected feature, unselect and
+                    // reselect it to apply the new configuration.
                     if (feature != null) {
                         self.modifyFeatures.unselectFeature(feature);
                         self.modifyFeatures.selectFeature(feature);

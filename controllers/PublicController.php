@@ -38,6 +38,7 @@ class Neatline_PublicController extends Omeka_Controller_Action
     public function init()
     {
 
+        $this->_filesTable = $this->getTable('File');
         $this->_neatlinesTable = $this->getTable('NeatlineExhibit');
 
     }
@@ -50,10 +51,11 @@ class Neatline_PublicController extends Omeka_Controller_Action
     public function showAction()
     {
 
-        // Get records.
+        // Get records and shell out defaults.
         $id =                       $this->_request->getParam('id');
         $neatline =                 $this->_neatlinesTable->find($id);
         $map =                      $neatline->getMap();
+        $image =                    $neatline->getImage();
 
         // Construct the data array for the exhibit.
         $neatlineData = array(
@@ -78,6 +80,21 @@ class Neatline_PublicController extends Omeka_Controller_Action
                 'epsg' =>           $map->epsg,
                 'wmsAddress' =>     $map->wmsAddress,
                 'layers' =>         $map->layers
+            );
+
+        }
+
+        // Push image data into the view.
+        else if ($neatline->is_map == 1 && !is_null($neatline->image_id)) {
+
+            // Get the image and dimensions.
+            $image = $this->_filesTable->find($neatline->image_id);
+
+            // Add the parameters array.
+            $neatlineData['image'] = array(
+                'record' =>         $image,
+                'path' =>           $image->getWebPath('archive'),
+                'name' =>           $image->original_filename
             );
 
         }
