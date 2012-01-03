@@ -125,7 +125,7 @@ class NeatlineExhibit extends Omeka_record
         $this->items_h_pos =            'right';
         $this->items_v_pos =            'bottom';
         $this->items_height =           'full';
-        $this->is_map =            1;
+        $this->is_map =                 1;
         $this->is_timeline =            1;
         $this->is_items =               1;
         $this->map_id =                 null;
@@ -149,7 +149,13 @@ class NeatlineExhibit extends Omeka_record
      */
     public function getMap()
     {
-        return $this->getTable('NeatlineMapsMap')->find($this->map_id);
+
+        if (!is_null($this->map_id)) {
+            return $this->getTable('NeatlineMapsMap')->find($this->map_id);
+        }
+
+        return false;
+
     }
 
     /**
@@ -159,7 +165,13 @@ class NeatlineExhibit extends Omeka_record
      */
     public function getImage()
     {
-        return $this->getTable('NeatlineMapsMap')->find($this->image_id);
+
+        if (!is_null($this->image_id)) {
+            return $this->getTable('NeatlineMapsMap')->find($this->image_id);
+        }
+
+        return false;
+
     }
 
     /**
