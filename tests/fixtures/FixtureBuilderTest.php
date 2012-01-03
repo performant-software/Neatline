@@ -128,7 +128,6 @@ class Neatline_FixtureBuilderTest extends Omeka_Test_AppTestCase
         $exhibit->is_map = 1;
         $exhibit->is_timeline = 1;
         $exhibit->is_items = 1;
-        $exhibit->image_id = 1;
         $exhibit->save();
 
         $fixture = fopen(self::$path_to_fixtures . 'editor.html', 'w');

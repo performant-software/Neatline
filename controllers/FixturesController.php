@@ -101,16 +101,6 @@ class Neatline_FixturesController extends Omeka_Controller_Action
             )
         );
 
-        // Get the image and dimensions.
-        $image = $this->_filesTable->find($neatline->image_id);
-
-        // Add the parameters array.
-        $neatlineData['image'] = array(
-            'record' =>         $image,
-            'path' =>           $image->getWebPath(),
-            'name' =>           $image->original_filename
-        );
-
         /**
          * ---------------
          * Render the partials.

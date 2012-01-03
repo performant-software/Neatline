@@ -224,6 +224,26 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
     }
 
     /**
+     * When there is no map, getMap() method should return null.
+     *
+     * @return void.
+     */
+    public function testGetMapWithNullKey()
+    {
+
+        // Create an exhibit and map.
+        $exhibit = $this->helper->_createNeatline();
+        $map = new NeatlineMapsMap();
+        $map->save();
+        $exhibit->saveForm('Title', 'none', 'none');
+
+        // Get the map and check.
+        $retrievedMap = $exhibit->getMap();
+        $this->assertNull($retrievedMap);
+
+    }
+
+    /**
      * The getImage() method should return an exhibit's image record.
      *
      * @return void.
@@ -232,6 +252,26 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
     {
 
         // TODO: How to mock a file?
+
+    }
+
+    /**
+     * When there is no map, getMap() method should return null.
+     *
+     * @return void.
+     */
+    public function testGetImageWithNullKey()
+    {
+
+        // Create an exhibit and map.
+        $exhibit = $this->helper->_createNeatline();
+        $map = new NeatlineMapsMap();
+        $map->save();
+        $exhibit->saveForm('Title', 'none', 'none');
+
+        // Get the map and check.
+        $retrievedImage = $exhibit->getMap();
+        $this->assertNull($retrievedImage);
 
     }
 

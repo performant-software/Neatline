@@ -154,7 +154,7 @@ class NeatlineExhibit extends Omeka_record
             return $this->getTable('NeatlineMapsMap')->find($this->map_id);
         }
 
-        return false;
+        return null;
 
     }
 
@@ -170,7 +170,7 @@ class NeatlineExhibit extends Omeka_record
             return $this->getTable('NeatlineMapsMap')->find($this->image_id);
         }
 
-        return false;
+        return null;
 
     }
 
