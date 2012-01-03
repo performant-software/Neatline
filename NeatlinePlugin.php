@@ -153,7 +153,7 @@ class NeatlinePlugin
         set_option('point_radius', 6);
 
         // Create demo exhibit.
-        if (get_plugin_ini('Neatline', 'testing_mode') == 'true') {
+        if (get_plugin_ini('Neatline', 'testing_mode') == 'false') {
             neatline_createDemoExhibit();
         }
 
