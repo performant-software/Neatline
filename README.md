@@ -9,7 +9,7 @@ For detailed instructions about installing Omeka, refer to the [documentation][o
 1. Create a MySQL database and a user with create permissions;
 2. Clone the [Omeka codebase][omeka-github] into a pubically-accessible location on your server;
 3. Make these three changes to the out-of-box code:
-a.  Open db.ini.changeme in the root directory and populate the host, username, password, and dbname parameters;
+    * Open db.ini.changeme in the root directory and populate the host, username, password, and dbname parameters;
 
 ### Neatline
 
