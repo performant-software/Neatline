@@ -23,9 +23,6 @@
  * @copyright   2011 The Board and Visitors of the University of Virginia
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache 2 License
  */
-?>
-
-<?php
 
 /**
  * Include the neatline-admin.css stylesheet and the Google Fonts include.
