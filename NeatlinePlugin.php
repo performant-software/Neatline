@@ -155,6 +155,9 @@ class NeatlinePlugin
         set_option('stroke_width', 4);
         set_option('point_radius', 6);
 
+        // Create demo exhibit.
+        neatline_createDemoExhibit();
+
     }
 
     /**
