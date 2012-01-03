@@ -156,7 +156,9 @@ class NeatlinePlugin
         set_option('point_radius', 6);
 
         // Create demo exhibit.
-        // neatline_createDemoExhibit();
+        if (get_plugin_ini('Neatline', 'testing_mode') == 'true') {
+            neatline_createDemoExhibit();
+        }
 
     }
 
