@@ -37,12 +37,12 @@ head(array('content_class' => 'neatline'));
 
 <div id="primary">
 
-<form method="post" id="create-neatline">
+<div id="title-text">
+    <h1 id="neatline-add-header">Create a Neatline Exhibit</h1>
+    <h3 id="neatline-add-subheader">Enter a title and select a base layer</h3>
+</div>
 
-    <div id="title-text">
-        <h1 id="neatline-add-header">Create a Neatline Exhibit</h1>
-        <h3 id="neatline-add-subheader">Step 1: Select a map and a timeline, customize the layout</h3>
-    </div>
+<form method="post" id="create-neatline">
 
     <h2 class="neatline-label">Enter a title:</h2>
     <?php echo neatline_titleInput($neatline->name); ?>
@@ -63,8 +63,6 @@ head(array('content_class' => 'neatline'));
         </div>
         <?php if (array_key_exists('map', $errors)) { echo neatline_error($errors['map']); } ?>
 
-        <hr>
-
     <?php else: ?>
 
         <div class="neatline-select-container">
@@ -73,9 +71,11 @@ head(array('content_class' => 'neatline'));
         </div>
         <?php if (array_key_exists('map', $errors)) { echo neatline_error($errors['map']); } ?>
 
-        <hr>
-
     <?php endif; ?>
+
+    <h3>Leave blank to use an OpenStreetMap base layer.</h3>
+
+    <hr>
 
     <?php echo neatline_buttonTo('', 'save_neatline',
         'Create Neatline', array('class' => 'neatline btn primary'), 'create-neatline', array(), false, 'create-fieldset'); ?>

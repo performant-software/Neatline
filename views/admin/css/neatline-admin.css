@@ -180,6 +180,11 @@ div.neatline-select-container {
     margin: 0 2em 0 0;
 }
 
+form#create-neatline h3 {
+    margin-top: 0.5em;
+    font-style: italic;
+}
+
 
 /* Browse */
 
