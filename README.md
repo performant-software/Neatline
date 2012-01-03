@@ -1,6 +1,6 @@
 # Neatline
 
-Neatline is a suite of plugins for Omeka that makes it possible to plot objects, events, places, people, concepts, and imaginative topologies in space and time.
+Neatline is an interpretive visualization tool that makes it possible to plot objects, events, places, people, concepts, and imaginative topologies in space and time.
 
 ## Installation
 
