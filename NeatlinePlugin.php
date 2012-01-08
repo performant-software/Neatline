@@ -31,7 +31,6 @@ class NeatlinePlugin
         'install',
         'uninstall',
         'define_routes',
-        'define_acl',
         'admin_theme_header',
         'public_theme_header',
         'admin_append_to_plugin_uninstall_message'
@@ -178,18 +177,6 @@ class NeatlinePlugin
     }
 
     /**
-     * Establish access privileges.
-     *
-     * @return void.
-     */
-    public function defineAcl($acl)
-    {
-
-        // TODO.
-
-    }
-
-    /**
      * Push administrative Neatline assets.
      *
      * @return void
@@ -278,7 +265,10 @@ class NeatlinePlugin
     public function adminNavigationMain($tabs)
     {
 
-        $tabs['Neatline'] = uri('neatline-exhibits');
+        if (get_plugin_ini('Neatline', 'saas') == 'false') {
+            $tabs['Neatline'] = uri('neatline-exhibits');
+        }
+
         return $tabs;
 
     }
