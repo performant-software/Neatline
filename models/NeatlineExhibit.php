@@ -33,6 +33,7 @@ class NeatlineExhibit extends Omeka_record
 
 
     public $added;
+    public $modified;
     public $name;
 
     // Foreign keys.
@@ -330,6 +331,17 @@ class NeatlineExhibit extends Omeka_record
         $records = $_recordsTable->getActiveRecordsByExhibit($this);
 
         return ($records) ? count($records) : 0;
+
+    }
+
+    /**
+     * Set the 'modified' column to the current timestamp.
+     *
+     * @return void.
+     */
+    public function setModified()
+    {
+
 
     }
 

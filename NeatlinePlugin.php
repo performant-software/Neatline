@@ -89,6 +89,7 @@ class NeatlinePlugin
         $sql = "CREATE TABLE IF NOT EXISTS `{$this->_db->prefix}neatline_exhibits` (
                 `id`                    int(10) unsigned not null auto_increment,
                 `added`                 TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                `modified`              TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                 `name`                  tinytext collate utf8_unicode_ci,
                 `map_id`                int(10) unsigned NULL,
                 `image_id`              int(10) unsigned NULL,

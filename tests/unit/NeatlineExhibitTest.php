@@ -80,6 +80,7 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
 
         // Get.
         $this->assertNotNull($exhibit->added);
+        $this->assertNotNull($exhibit->modified);
         $this->assertEquals($exhibit->name, 'name');
         $this->assertEquals($exhibit->map_id, 1);
         $this->assertNull($exhibit->image_id, 1);
