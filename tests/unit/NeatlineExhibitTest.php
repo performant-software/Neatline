@@ -617,4 +617,36 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
 
     }
 
+    /**
+     * getNumberOfRecords() should return the exhibit record count.
+     *
+     * @return void.
+     */
+    public function testGetNumberOfRecords()
+    {
+
+        // Create exhibits and items.
+        $neatline1 = $this->helper->_createNeatline();
+        $neatline2 = $this->helper->_createNeatline();
+
+        // Create records.
+        $record1 = new NeatlineDataRecord(null, $neatline1);
+        $record2 = new NeatlineDataRecord(null, $neatline1);
+        $record3 = new NeatlineDataRecord(null, $neatline1);
+        $record4 = new NeatlineDataRecord(null, $neatline2);
+        $record1->space_active = 1;
+        $record2->space_active = 1;
+        $record3->space_active = 1;
+        $record4->space_active = 1;
+        $record1->save();
+        $record2->save();
+        $record3->save();
+        $record4->save();
+
+        // Check count.
+        $this->assertEquals($neatline1->getNumberOfRecords(), 3);
+        $this->assertEquals($neatline2->getNumberOfRecords(), 1);
+
+    }
+
 }

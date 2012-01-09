@@ -318,6 +318,22 @@ class NeatlineExhibit extends Omeka_record
     }
 
     /**
+     * Return the total number of data records.
+     *
+     * @return integer $id The record count.
+     */
+    public function getNumberOfRecords()
+    {
+
+        // Get the data record table and query for active records.
+        $_recordsTable = $this->getTable('NeatlineDataRecord');
+        $records = $_recordsTable->getActiveRecordsByExhibit($this);
+
+        return count($records);
+
+    }
+
+    /**
      * Delete status and element text association records
      * on exhibit delete.
      *
