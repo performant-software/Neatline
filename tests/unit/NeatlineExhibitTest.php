@@ -618,14 +618,30 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
     }
 
     /**
+     * getNumberOfRecords() should return 0 when there are no records.
+     *
+     * @return void.
+     */
+    public function testGetNumberOfRecordsWhenNoRecordsExist()
+    {
+
+        // Create exhibits.
+        $neatline = $this->helper->_createNeatline();
+
+        // Check count.
+        $this->assertEquals($neatline->getNumberOfRecords(), 0);
+
+    }
+
+    /**
      * getNumberOfRecords() should return the exhibit record count.
      *
      * @return void.
      */
-    public function testGetNumberOfRecords()
+    public function testGetNumberOfRecordsWhenRecordsExist()
     {
 
-        // Create exhibits and items.
+        // Create exhibits.
         $neatline1 = $this->helper->_createNeatline();
         $neatline2 = $this->helper->_createNeatline();
 

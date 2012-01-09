@@ -329,7 +329,7 @@ class NeatlineExhibit extends Omeka_record
         $_recordsTable = $this->getTable('NeatlineDataRecord');
         $records = $_recordsTable->getActiveRecordsByExhibit($this);
 
-        return count($records);
+        return ($records) ? count($records) : 0;
 
     }
 

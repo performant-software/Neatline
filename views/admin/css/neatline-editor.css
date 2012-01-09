@@ -45,16 +45,16 @@ html {
 #topbar {
     height: 53px;
     display: inline;
-    background-color: #724e85;
+    background-color: #373737;
     background-repeat: repeat-x;
-    background-image: -khtml-gradient(linear, left top, left bottom, from(#724e85), to(#543664));
-    background-image: -moz-linear-gradient(top, #724e85, #543664);
-    background-image: -ms-linear-gradient(top, #724e85, #543664);
-    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #724e85), color-stop(100%, #543664));
-    background-image: -webkit-linear-gradient(top, #724e85, #543664);
-    background-image: -o-linear-gradient(top, #724e85, #543664);
-    background-image: linear-gradient(top, #724e85, #543664);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#724e85', endColorstr='#543664', GradientType=0);
+    background-image: -khtml-gradient(linear, left top, left bottom, from(#373737), to(#323232));
+    background-image: -moz-linear-gradient(top, #373737, #323232);
+    background-image: -ms-linear-gradient(top, #373737, #323232);
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #373737), color-stop(100%, #323232));
+    background-image: -webkit-linear-gradient(top, #373737, #323232);
+    background-image: -o-linear-gradient(top, #373737, #323232);
+    background-image: linear-gradient(top, #373737, #323232);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#373737', endColorstr='#323232', GradientType=0);
     -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), inset 0 -1px 0 rgba(0, 0, 0, 0.1);
     -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), inset 0 -1px 0 rgba(0, 0, 0, 0.1);
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), inset 0 -1px 0 rgba(0, 0, 0, 0.1);
@@ -67,7 +67,7 @@ html {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 10px;
     font-size: 1em;
-    color: #724E85;
+    color: #373737;
     line-height: 1;
     padding: 3px 20px 3px 5px;
     margin: 8px 10px 0 18px;
@@ -264,17 +264,17 @@ tr.header-row td {
     color: #fff;
     font-size: 0.9em;
     padding: 3px 0 3px 20px !important;
-    background-color: #724e85;
-    background-color: #724e85;
+    background-color: #373737;
+    background-color: #373737;
     background-repeat: repeat-x;
-    background-image: -khtml-gradient(linear, left top, left bottom, from(#724e85), to(#543664));
-    background-image: -moz-linear-gradient(top, #724e85, #543664);
-    background-image: -ms-linear-gradient(top, #724e85, #543664);
-    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #724e85), color-stop(100%, #543664));
-    background-image: -webkit-linear-gradient(top, #724e85, #543664);
-    background-image: -o-linear-gradient(top, #724e85, #543664);
-    background-image: linear-gradient(top, #724e85, #543664);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#724e85', endColorstr='#543664', GradientType=0);
+    background-image: -khtml-gradient(linear, left top, left bottom, from(#373737), to(#323232));
+    background-image: -moz-linear-gradient(top, #373737, #323232);
+    background-image: -ms-linear-gradient(top, #373737, #323232);
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #373737), color-stop(100%, #323232));
+    background-image: -webkit-linear-gradient(top, #373737, #323232);
+    background-image: -o-linear-gradient(top, #373737, #323232);
+    background-image: linear-gradient(top, #373737, #323232);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#373737', endColorstr='#323232', GradientType=0);
     opacity: 0.9;
 }
 
@@ -472,7 +472,7 @@ div.filter-option {
 }
 
 div.filter-option:hover {
-    background-color: #724e85;
+    background-color: #373737;
     color: #fff;
     cursor: pointer;
 }
@@ -498,7 +498,7 @@ div.filter-header {
 }
 
 div.filter-header:hover h5 {
-    color: #724e85;
+    color: #373737;
 }
 
 div.filter-header h5 {
@@ -510,7 +510,7 @@ div.filter-header h5 {
 }
 
 div.filter-header h5:hover {
-    color: #724e85;
+    color: #373737;
 }
 
 div.filter-option span {
@@ -750,7 +750,7 @@ table#items-table tr.hidden {
     background-color: #fffef8;
     position: absolute;
     top: 0;
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#724e85', endColorstr='#543664', GradientType=0);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#373737', endColorstr='#323232', GradientType=0);
     -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.35), inset 0 -1px 0 rgba(0, 0, 0, 0.1);
     -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), inset 0 -1px 0 rgba(0, 0, 0, 0.1);
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), inset 0 -1px 0 rgba(0, 0, 0, 0.1);
