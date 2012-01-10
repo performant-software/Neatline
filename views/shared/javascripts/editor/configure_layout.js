@@ -106,7 +106,7 @@
             // Save data.
             $.ajax({
 
-                url: 'arrangement',
+                url: 'ajax/arrangement',
                 type: 'POST',
                 dataType: 'json',
                 data: params,
@@ -138,7 +138,7 @@
                 type: 'POST',
 
                 data: {
-                    neatline_id: Neatline.id,
+                    exhibit_id: Neatline.id,
                     map_extent: mapExtent,
                     map_zoom: mapZoom,
                     timeline_center: timelineCenter

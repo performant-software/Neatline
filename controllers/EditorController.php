@@ -135,10 +135,10 @@ class Neatline_EditorController extends Omeka_Controller_Action
         $types =                    $this->_request->getParam('types');
         $collections =              $this->_request->getParam('collections');
         $all =                      json_decode($this->_request->getParam('all'));
-        $neatlineId =               $this->_request->getParam('neatline_id');
+        $exhibidId =                $this->_request->getParam('exhibit_id');
 
         // Push in the Neatline exhibit record.
-        $neatline = $this->_neatlinesTable->find($neatlineId);
+        $neatline = $this->_neatlinesTable->find($exhibidId);
         $this->view->neatline = $neatline;
 
         // Get records.
@@ -169,7 +169,7 @@ class Neatline_EditorController extends Omeka_Controller_Action
         $this->_helper->viewRenderer->setNoRender(true);
 
         // Get parameters from the ajax request.
-        $neatlineId =               $this->_request->getParam('neatline_id');
+        $exhibidId =                $this->_request->getParam('exhibit_id');
         $itemId =                   $this->_request->getParam('item_id');
         $recordId =                 $this->_request->getParam('record_id');
 
@@ -185,7 +185,7 @@ class Neatline_EditorController extends Omeka_Controller_Action
         else {
 
             // Fetch the Neatline exhibit record and item record.
-            $neatline = $this->_neatlinesTable->find($neatlineId);
+            $neatline = $this->_neatlinesTable->find($exhibidId);
             $item = $this->_itemsTable->find($itemId);
 
             // Output the JSON string.
@@ -214,7 +214,7 @@ class Neatline_EditorController extends Omeka_Controller_Action
         // Get parameters from the ajax request.
         $itemId =                   $_post['item_id'];
         $recordId =                 $_post['record_id'];
-        $neatlineId =               $_post['neatline_id'];
+        $exhibitId =               $_post['exhibit_id'];
         $title =                    $_post['title'];
         $description =              $_post['description'];
         $startDate =                $_post['start_date'];
@@ -234,7 +234,7 @@ class Neatline_EditorController extends Omeka_Controller_Action
         $rightPercent =             (int) $_post['right_percent'];
 
         // Fetch the exhibit, item, and record objects.
-        $neatline = $this->_neatlinesTable->find($neatlineId);
+        $neatline = $this->_neatlinesTable->find($exhibitId);
 
         // If there is a record id in the post, get the record.
         if ($recordId != null) {
@@ -310,9 +310,9 @@ class Neatline_EditorController extends Omeka_Controller_Action
         $_post = $this->_request->getPost();
 
         // Get parameters from the ajax request.
+        $exhibitId =                $_post['exhibit_id'];
         $itemId =                   $_post['item_id'];
         $recordId =                 $_post['record_id'];
-        $neatlineId =               $_post['neatline_id'];
         $spaceOrTime =              $_post['space_or_time'];
         $value =                    json_decode($_post['value']);
 
@@ -328,7 +328,7 @@ class Neatline_EditorController extends Omeka_Controller_Action
         // Otherwise, create a new record.
         else {
 
-            $neatline = $this->_neatlinesTable->find($neatlineId);
+            $neatline = $this->_neatlinesTable->find($exhibitId);
             $item = $this->_itemsTable->find($itemId);
 
             // Save the data.
@@ -359,11 +359,11 @@ class Neatline_EditorController extends Omeka_Controller_Action
         $_post = $this->_request->getPost();
 
         // Get parameters from the ajax request.
-        $neatlineId =               $_post['neatline_id'];
+        $exhibitId =                $_post['exhibit_id'];
         $order =                    $_post['order'];
 
         // Fetch the Neatline exhibit and save the ordering.
-        $neatline = $this->_neatlinesTable->find($neatlineId);
+        $neatline = $this->_neatlinesTable->find($exhibitId);
         $this->_recordsTable->saveOrder($neatline, $order);
 
     }
@@ -384,13 +384,13 @@ class Neatline_EditorController extends Omeka_Controller_Action
         $_post = $this->_request->getPost();
 
         // Get parameters from the ajax request.
-        $neatlineId =               $_post['neatline_id'];
+        $exhibitId =                $_post['exhibit_id'];
         $mapExtent =                $_post['map_extent'];
         $mapZoom =                  $_post['map_zoom'];
         $timelineCenter =           $_post['timeline_center'];
 
         // Fetch the Neatline exhibit record and item record.
-        $neatline = $this->_neatlinesTable->find($neatlineId);
+        $neatline = $this->_neatlinesTable->find($exhibitId);
 
         // Save.
         $neatline->saveViewportPositions(
@@ -417,7 +417,7 @@ class Neatline_EditorController extends Omeka_Controller_Action
         $_post = $this->_request->getPost();
 
         // Get parameters from the ajax request.
-        $neatlineId =               (int) $_post['neatline_id'];
+        $exhibitId =                (int) $_post['exhibit_id'];
         $isMap =                    (int) $_post['is_map'];
         $isTimeline =               (int) $_post['is_timeline'];
         $isItems =                  (int) $_post['is_items'];
@@ -427,7 +427,7 @@ class Neatline_EditorController extends Omeka_Controller_Action
         $itemsHeight =              $_post['items_height'];
 
         // Fetch the Neatline exhibit record and item record.
-        $neatline = $this->_neatlinesTable->find($neatlineId);
+        $neatline = $this->_neatlinesTable->find($exhibitId);
 
         // Save.
         $neatline->saveViewportArrangement(
@@ -463,7 +463,7 @@ class Neatline_EditorController extends Omeka_Controller_Action
         // Get parameters from the ajax request.
         $itemId =                   $_post['item_id'];
         $recordId =                 $_post['record_id'];
-        $neatlineId =               $_post['neatline_id'];
+        $exhibitId =                $_post['exhibit_id'];
         $extent =                   $_post['extent'];
         $zoom =                     $_post['zoom'];
 
@@ -475,9 +475,9 @@ class Neatline_EditorController extends Omeka_Controller_Action
         // Otherwise, create a new record.
         else {
 
-            $neatline = $this->_neatlinesTable->find($neatlineId);
-            $item = $this->_itemsTable->find($itemId);
-            $record = $this->_recordsTable->getRecordByItemAndExhibit($item, $neatline);
+            $neatline =     $this->_neatlinesTable->find($exhibitId);
+            $item =         $this->_itemsTable->find($itemId);
+            $record =       $this->_recordsTable->getRecordByItemAndExhibit($item, $neatline);
 
             // If no existing record, create a record and default in DC values.
             if (!$record) {
@@ -539,8 +539,8 @@ class Neatline_EditorController extends Omeka_Controller_Action
     {
 
         // Fetch the exhibit record.
-        $neatlineId = (int) $this->_request->neatline_id;
-        $neatline = $this->_neatlinesTable->find($neatlineId);
+        $exhibitId = (int) $this->_request->exhibit_id;
+        $neatline = $this->_neatlinesTable->find($exhibitId);
 
         // Create the new record.
         $record = new NeatlineDataRecord(null, $neatline);

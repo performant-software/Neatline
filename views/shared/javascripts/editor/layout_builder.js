@@ -1684,7 +1684,7 @@
 
             // Assemble an object with the position tracker variables.
             return {
-                neatline_id:    Neatline.id,
+                exhibit_id:     Neatline.id,
                 is_map:         is_map,
                 is_timeline:    is_timeline,
                 is_items:       is_items,

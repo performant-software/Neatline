@@ -1096,12 +1096,12 @@
                 dataType: 'html',
 
                 data: {
+                    exhibit_id: Neatline.id,
                     search: this._searchString,
                     tags: selected.tags,
                     types: selected.types,
                     collections: selected.collections,
-                    all: selected.all,
-                    neatline_id: Neatline.id
+                    all: selected.all
                 },
 
                 success: function(data) {
@@ -1150,9 +1150,9 @@
                 type: 'POST',
 
                 data: {
+                    exhibit_id: Neatline.id,
                     item_id: itemid,
                     record_id: recordid,
-                    neatline_id: Neatline.id,
                     space_or_time: spaceOrTime,
                     value: String(value)
                 },
@@ -1182,7 +1182,7 @@
                 url: 'ajax/add',
                 type: 'GET',
                 dataType: 'html',
-                data: { neatline_id: Neatline.id },
+                data: { exhibit_id: Neatline.id },
 
                 success: function(html) {
                     self._insertNewRecordRow(html);

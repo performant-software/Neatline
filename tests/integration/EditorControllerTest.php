@@ -159,7 +159,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         // Prepare the request.
         $this->request->setMethod('GET')
             ->setParams(array(
-                'neatline_id' => $neatline->id,
+                'exhibit_id' => $neatline->id,
                 'all' => 'true'
             )
         );
@@ -192,7 +192,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         // Prepare the request.
         $this->request->setMethod('GET')
             ->setParams(array(
-                'neatline_id' => $neatline->id,
+                'exhibit_id' => $neatline->id,
                 'all' => 'true'
             )
         );
@@ -228,7 +228,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         // Prepare the request.
         $this->request->setMethod('GET')
             ->setParams(array(
-                'neatline_id' => $neatline->id,
+                'exhibit_id' => $neatline->id,
                 'all' => 'true'
             )
         );
@@ -260,7 +260,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->request->setMethod('POST')
             ->setPost(array(
                 'item_id' => $item->id,
-                'neatline_id' => $neatline->id,
+                'exhibit_id' => $neatline->id,
                 'record_id' => $record->id,
                 'space_or_time' => 'space',
                 'value' => 'true'
@@ -304,7 +304,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->request->setMethod('POST')
             ->setPost(array(
                 'item_id' => $item->id,
-                'neatline_id' => $neatline->id,
+                'exhibit_id' => $neatline->id,
                 'record_id' => $record->id,
                 'space_or_time' => 'time',
                 'value' => 'true'
@@ -347,7 +347,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->request->setMethod('POST')
             ->setPost(array(
                 'item_id' => $item->id,
-                'neatline_id' => $neatline->id,
+                'exhibit_id' => $neatline->id,
                 'record_id' => '',
                 'space_or_time' => 'space',
                 'value' => 'true'
@@ -392,7 +392,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->request->setMethod('POST')
             ->setPost(array(
                 'item_id' => $item->id,
-                'neatline_id' => $neatline->id,
+                'exhibit_id' => $neatline->id,
                 'record_id' => '',
                 'space_or_time' => 'time',
                 'value' => 'true'
@@ -435,7 +435,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->request->setMethod('POST')
             ->setPost(array(
                 'item_id' => $item->id,
-                'neatline_id' => $neatline->id,
+                'exhibit_id' => $neatline->id,
                 'record_id' => '',
                 'space_or_time' => 'time',
                 'value' => 'true'
@@ -498,7 +498,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->request->setMethod('GET')
             ->setParams(array(
                 'item_id' => $item->id,
-                'neatline_id' => $neatline->id,
+                'exhibit_id' => $neatline->id,
                 'record_id' => $record->id
             )
         );
@@ -593,7 +593,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->request->setMethod('GET')
             ->setParams(array(
                 'item_id' => $item->id,
-                'neatline_id' => $neatline->id,
+                'exhibit_id' => $neatline->id,
                 'record_id' => $record->id
             )
         );
@@ -700,7 +700,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->request->setMethod('GET')
             ->setParams(array(
                 'item_id' => $item->id,
-                'neatline_id' => $neatline->id,
+                'exhibit_id' => $neatline->id,
                 'record_id' => ''
             )
         );
@@ -798,7 +798,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
             ->setPost(array(
                 'item_id' =>        '',
                 'record_id' =>      $record->id,
-                'neatline_id' =>    $neatline->id,
+                'exhibit_id' =>     $neatline->id,
                 'space_active' =>   (string) self::$__testParams['space_active'],
                 'time_active' =>    (string) self::$__testParams['time_active'],
                 'geocoverage' =>    self::$__testParams['geocoverage'],
@@ -943,7 +943,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
             ->setPost(array(
                 'item_id' =>        $item->id,
                 'record_id' =>      '',
-                'neatline_id' =>    $neatline->id,
+                'exhibit_id' =>     $neatline->id,
                 'space_active' =>   (string) self::$__testParams['space_active'],
                 'time_active' =>    (string) self::$__testParams['time_active'],
                 'geocoverage' =>    self::$__testParams['geocoverage'],
@@ -1090,7 +1090,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
             ->setPost(array(
                 'item_id' =>        $item->id,
                 'record_id' =>      $record->id,
-                'neatline_id' =>    $neatline->id,
+                'exhibit_id' =>     $neatline->id,
                 'space_active' =>   (string) self::$__testParams['space_active'],
                 'time_active' =>    (string) self::$__testParams['time_active'],
                 'geocoverage' =>    self::$__testParams['geocoverage'],
@@ -1245,7 +1245,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
             ->setPost(array(
                 'item_id' =>        '',
                 'record_id' =>      $record->id,
-                'neatline_id' =>    $neatline->id,
+                'exhibit_id' =>     $neatline->id,
                 'space_active' =>   (string) self::$__testParams['space_active'],
                 'time_active' =>    (string) self::$__testParams['time_active'],
                 'geocoverage' =>    'null',
@@ -1300,7 +1300,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
             ->setPost(array(
                 'item_id' =>        $item->id,
                 'record_id' =>      '',
-                'neatline_id' =>    $neatline->id,
+                'exhibit_id' =>     $neatline->id,
                 'space_active' =>   (string) self::$__testParams['space_active'],
                 'time_active' =>    (string) self::$__testParams['time_active'],
                 'geocoverage' =>    self::$__testParams['geocoverage'],
@@ -1357,7 +1357,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
             ->setPost(array(
                 'item_id' =>        $item->id,
                 'record_id' =>      $record->id,
-                'neatline_id' =>    $neatline->id,
+                'exhibit_id' =>     $neatline->id,
                 'space_active' =>   (string) self::$__testParams['space_active'],
                 'time_active' =>    (string) self::$__testParams['time_active'],
                 'geocoverage' =>    self::$__testParams['geocoverage'],
@@ -1406,7 +1406,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
             ->setPost(array(
                 'item_id' =>        $item->id,
                 'record_id' =>      '',
-                'neatline_id' =>    $neatline->id,
+                'exhibit_id' =>     $neatline->id,
                 'space_active' =>   (string) self::$__testParams['space_active'],
                 'time_active' =>    (string) self::$__testParams['time_active'],
                 'geocoverage' =>    self::$__testParams['geocoverage'],
@@ -1462,7 +1462,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
             ->setPost(array(
                 'item_id' =>        $item->id,
                 'record_id' =>      $record->id,
-                'neatline_id' =>    $neatline->id,
+                'exhibit_id' =>     $neatline->id,
                 'space_active' =>   (string) self::$__testParams['space_active'],
                 'time_active' =>    (string) self::$__testParams['time_active'],
                 'geocoverage' =>    '',
@@ -1511,7 +1511,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
             ->setPost(array(
                 'item_id' =>        $item->id,
                 'record_id' =>      '',
-                'neatline_id' =>    $neatline->id,
+                'exhibit_id' =>     $neatline->id,
                 'space_active' =>   (string) self::$__testParams['space_active'],
                 'time_active' =>    (string) self::$__testParams['time_active'],
                 'geocoverage' =>    '',
@@ -1576,7 +1576,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         // Form the POST for a space change.
         $this->request->setMethod('POST')
             ->setPost(array(
-                'neatline_id' => $neatline->id,
+                'exhibit_id' => $neatline->id,
                 'order' => array(
                     $record1->id => 3,
                     $record2->id => 2,
@@ -1632,7 +1632,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         // Form the POST for a space change.
         $this->request->setMethod('POST')
             ->setPost(array(
-                'neatline_id' =>                $exhibit->id,
+                'exhibit_id' =>                $exhibit->id,
                 'is_map' =>                     1,
                 'is_timeline' =>                1,
                 'is_items' =>                   1,
@@ -1709,7 +1709,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         // Form the POST for a space change.
         $this->request->setMethod('POST')
             ->setPost(array(
-                'neatline_id' =>                $exhibit->id,
+                'exhibit_id' =>                $exhibit->id,
                 'is_map' =>                     '1',
                 'is_timeline' =>                '1',
                 'is_items' =>                   '1',
@@ -1775,7 +1775,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         // Form the POST.
         $this->request->setMethod('POST')
             ->setPost(array(
-                'neatline_id' => $exhibit->id,
+                'exhibit_id' => $exhibit->id,
                 'map_extent' => 'extent',
                 'map_zoom' => 1,
                 'timeline_center' => 'center'
@@ -1811,7 +1811,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         // Form the POST.
         $this->request->setMethod('POST')
             ->setPost(array(
-                'neatline_id' => $exhibit->id,
+                'exhibit_id' => $exhibit->id,
                 'item_id' => $item->id,
                 'record_id' => $record->id,
                 'extent' => 'BOUNDS()',
@@ -1839,7 +1839,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
     /**
      * When a new item-specific map focus data is saved via the /focus route
      * and there is not an extant data record for the exhibit/item, create a
-     * new item and set theattributes.
+     * new item and set the attributes.
      *
      * @return void.
      */
@@ -1853,7 +1853,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         // Form the POST.
         $this->request->setMethod('POST')
             ->setPost(array(
-                'neatline_id' => $exhibit->id,
+                'exhibit_id' => $exhibit->id,
                 'item_id' => $item->id,
                 'record_id' => '',
                 'extent' => 'BOUNDS()',
@@ -1896,7 +1896,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         // Form the POST.
         $this->request->setMethod('POST')
             ->setPost(array(
-                'neatline_id' => $exhibit->id,
+                'exhibit_id' => $exhibit->id,
                 'item_id' => '',
                 'record_id' => $record->id,
                 'extent' => 'BOUNDS()',
@@ -1940,7 +1940,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         // Form the POST.
         $this->request->setMethod('POST')
             ->setPost(array(
-                'neatline_id' => $exhibit->id,
+                'exhibit_id' => $exhibit->id,
                 'item_id' => $item->id,
                 'record_id' => '',
                 'extent' => 'BOUNDS()',
@@ -1977,6 +1977,13 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $neatline = $this->helper->_createNeatline();
         $item = $this->helper->_createItem();
 
+        // Prepare the request.
+        $this->request->setMethod('GET')
+            ->setParams(array(
+                'exhibit_id' => $neatline->id
+            )
+        );
+
         // 0 records.
         $this->assertEquals($this->_recordsTable->count(), 0);
 
@@ -1985,6 +1992,10 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
 
         // 1 record.
         $this->assertEquals($this->_recordsTable->count(), 1);
+
+        // Check identity.
+        $newRecord = $this->_recordsTable->find(1);
+        $this->assertEquals($newRecord->exhibit_id, $neatline->id);
 
     }
 
