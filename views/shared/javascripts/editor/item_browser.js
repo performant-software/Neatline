@@ -638,6 +638,7 @@
 
             var self = this;
 
+            // Instantiate the item filterer.
             this.itemFilterContainer.itemfilter({
 
                 'selectionchange': function(eventObject, selected) {

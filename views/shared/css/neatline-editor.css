@@ -87,6 +87,7 @@ html {
 
 #omeka-logo {
     float: right;
+    margin: 8px 20px 0 0;
 }
 
 a.omeka-logo {
@@ -108,7 +109,7 @@ span.top-bar-title {
 .topbar div > ul, .nav {
   display: block;
   float: right;
-  margin: 0 0 0 20px;
+  margin: 0 40px 0 20px;
   position: relative;
   left: 0;
   height: 100%;
