@@ -681,7 +681,7 @@
 
                 $.ajax({
 
-                    url: 'form',
+                    url: 'ajax/form',
                     dataType: 'json',
 
                     data: {
@@ -717,7 +717,7 @@
             // Commit.
             $.ajax({
 
-                url: 'save',
+                url: 'ajax/save',
                 dataType: 'json',
                 type: 'POST',
                 data: data,
@@ -762,7 +762,7 @@
             // Commit.
             $.ajax({
 
-                url: 'focus',
+                url: 'ajax/focus',
                 type: 'POST',
                 data: {
                     item_id: this.itemId,
@@ -795,7 +795,7 @@
             // Commit.
             $.ajax({
 
-                url: 'delete',
+                url: 'ajax/delete',
                 type: 'POST',
                 data: {
                     record_id: this.recordId,
@@ -820,7 +820,7 @@
             // Commit.
             $.ajax({
 
-                url: 'resetstyles',
+                url: 'ajax/resetstyles',
                 type: 'POST',
                 data: {
                     record_id: this.recordId,

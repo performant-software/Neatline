@@ -1249,4 +1249,34 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
 
     }
 
+    /**
+     * save() should update the modified field on the parent exhibit.
+     *
+     * @return void.
+     */
+    public function testUpdateExhibitModifiedOnSave()
+    {
+
+        // Get time.
+        $timestamp = neatline_getTimestamp();
+
+        // Set the modified date back, get delta and check.
+        $exhibit = $this->helper->_createNeatline();
+        $exhibit->modified = '2010-01-01 00:00:00';
+        $delta = strtotime($timestamp) - strtotime($exhibit->modified);
+        $this->assertGreaterThanOrEqual(1, $delta);
+
+        // Create a record and save.
+        $record = new NeatlineDataRecord(null, $exhibit);
+        $record->save();
+
+        // Reget the record.
+        $exhibit = $record->getExhibit();
+
+        // Get delta and check.
+        $delta = strtotime($timestamp) - strtotime($exhibit->modified);
+        $this->assertLessThanOrEqual(1, $delta);
+
+    }
+
 }

@@ -341,8 +341,7 @@ class NeatlineExhibit extends Omeka_record
      */
     public function setModified()
     {
-
-
+        $this->modified = neatline_getTimestamp();
     }
 
     /**
@@ -372,7 +371,11 @@ class NeatlineExhibit extends Omeka_record
     public function save()
     {
 
-        if (!(!is_null($this->map_id) && !is_null($this->image_id))) {
+        // Update the modified field.
+        $this->setModified();
+
+        // If map_id is null or image_id is null.
+        if (is_null($this->map_id) || is_null($this->image_id)) {
             parent::save();
         }
 

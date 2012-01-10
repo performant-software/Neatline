@@ -1092,7 +1092,7 @@
             // Core ajax call to get items.
             $.ajax({
 
-                url: 'items',
+                url: 'ajax/items',
                 dataType: 'html',
 
                 data: {
@@ -1146,7 +1146,7 @@
             // Save the new status.
             $.ajax({
 
-                url: 'status',
+                url: 'ajax/status',
                 type: 'POST',
 
                 data: {
@@ -1179,7 +1179,7 @@
             // Get the HTML.
             $.ajax({
 
-                url: 'add',
+                url: 'ajax/add',
                 type: 'GET',
                 dataType: 'html',
                 data: { neatline_id: Neatline.id },

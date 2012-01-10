@@ -133,7 +133,7 @@
             // Commit.
             $.ajax({
 
-                url: 'order',
+                url: 'ajax/order',
                 type: 'POST',
                 data: {
                     neatline_id: Neatline.id,

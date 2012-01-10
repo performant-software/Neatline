@@ -134,7 +134,7 @@
             // Save data.
             $.ajax({
 
-                url: 'positions',
+                url: 'ajax/positions',
                 type: 'POST',
 
                 data: {

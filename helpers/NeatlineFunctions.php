@@ -566,7 +566,7 @@ function neatline_buildOrderClause($sort_field, $sort_dir)
  *
  * @return string $timestemp The timestamp.
  */
-function neatline_getMysqlDatetime()
+function neatline_getTimestamp()
 {
 
     return date('Y-m-d H:i:s');

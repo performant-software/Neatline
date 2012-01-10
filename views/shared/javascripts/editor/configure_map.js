@@ -177,7 +177,7 @@
             // Commit.
             $.ajax({
 
-                url: 'mapsettings',
+                url: 'ajax/mapsettings',
                 type: 'POST',
                 data: data,
 

@@ -51,11 +51,13 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
     public function testAttributeAccess()
     {
 
-        // Create a record.
+        // Create a record, capture time.
         $exhibit = new NeatlineExhibit();
+        $timestamp = neatline_getTimestamp();
 
         // Set.
         $exhibit->name =                        'name';
+        $exhibit->modified =                    $timestamp;
         $exhibit->map_id =                      1;
         $exhibit->top_element =                 'map';
         $exhibit->items_h_pos =                 'right';
@@ -81,6 +83,7 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
         // Get.
         $this->assertNotNull($exhibit->added);
         $this->assertNotNull($exhibit->modified);
+        $this->assertEquals($exhibit->modified, $timestamp);
         $this->assertEquals($exhibit->name, 'name');
         $this->assertEquals($exhibit->map_id, 1);
         $this->assertNull($exhibit->image_id, 1);
@@ -663,6 +666,54 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
         // Check count.
         $this->assertEquals($neatline1->getNumberOfRecords(), 3);
         $this->assertEquals($neatline2->getNumberOfRecords(), 1);
+
+    }
+
+    /**
+     * setModified() should update the modified field.
+     *
+     * @return void.
+     */
+    public function testSetModified()
+    {
+
+        // Create exhibit, get time, set.
+        $exhibit = $this->helper->_createNeatline();
+        $timestamp = neatline_getTimestamp();
+        $exhibit->setModified();
+
+        // Get delta and check.
+        $delta = strtotime($timestamp) - strtotime($exhibit->modified);
+        $this->assertLessThanOrEqual(1, $delta);
+
+    }
+
+    /**
+     * save() should trigger an update of the modified field.
+     *
+     * @return void.
+     */
+    public function testUpdateModifiedOnSave()
+    {
+
+        // Get time.
+        $timestamp = neatline_getTimestamp();
+
+        // Create an exhibit.
+        $exhibit = $this->helper->_createNeatline();
+
+        // Check for column set.
+        $this->assertNotNull($exhibit->modified);
+
+        // Set the modified date back, get delta and check.
+        $exhibit->modified = '2010-01-01 00:00:00';
+        $delta = strtotime($timestamp) - strtotime($exhibit->modified);
+        $this->assertGreaterThanOrEqual(1, $delta);
+
+        // Set the modified date back, get delta and check.
+        $exhibit->save();
+        $delta = strtotime($timestamp) - strtotime($exhibit->modified);
+        $this->assertLessThanOrEqual(1, $delta);
 
     }
 

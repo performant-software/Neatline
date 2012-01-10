@@ -165,7 +165,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         );
 
         // Hit the route, check the markup.
-        $this->dispatch('neatline-exhibits/editor/items');
+        $this->dispatch('neatline-exhibits/editor/ajax/items');
         $this->assertQueryContentContains('tr.header-row td', 'Omeka Records');
         $this->assertQueryContentContains('tr.header-row.hidden td', 'Neatline Records');
         $this->assertQueryCount('tr.item-row', 1);
@@ -198,7 +198,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         );
 
         // Hit the route, check the markup.
-        $this->dispatch('neatline-exhibits/editor/items');
+        $this->dispatch('neatline-exhibits/editor/ajax/items');
         $this->assertQueryContentContains('tr.header-row.hidden td', 'Omeka Records');
         $this->assertQueryContentContains('tr.header-row td', 'Neatline Records');
         $this->assertQueryCount('tr.item-row', 1);
@@ -234,7 +234,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         );
 
         // Hit the route, check the markup.
-        $this->dispatch('neatline-exhibits/editor/items');
+        $this->dispatch('neatline-exhibits/editor/ajax/items');
         $this->assertQueryContentContains('tr.header-row td', 'Omeka Records');
         $this->assertQueryContentContains('tr.header-row td', 'Neatline Records');
         $this->assertQueryCount('tr.item-row', 2);
@@ -271,7 +271,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->assertEquals($this->_recordsTable->count(), 1);
 
         // Hit the route.
-        $this->dispatch('neatline-exhibits/editor/status');
+        $this->dispatch('neatline-exhibits/editor/ajax/status');
 
         // Should not create a new record.
         $this->assertEquals($this->_recordsTable->count(), 1);
@@ -315,7 +315,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->assertEquals($this->_recordsTable->count(), 1);
 
         // Hit the route.
-        $this->dispatch('neatline-exhibits/editor/status');
+        $this->dispatch('neatline-exhibits/editor/ajax/status');
 
         // Should not create a new record.
         $this->assertEquals($this->_recordsTable->count(), 1);
@@ -358,7 +358,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->assertEquals($this->_recordsTable->count(), 0);
 
         // Hit the route.
-        $this->dispatch('neatline-exhibits/editor/status');
+        $this->dispatch('neatline-exhibits/editor/ajax/status');
 
         // Should create a new record.
         $this->assertEquals($this->_recordsTable->count(), 1);
@@ -403,7 +403,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->assertEquals($this->_recordsTable->count(), 1);
 
         // Hit the route.
-        $this->dispatch('neatline-exhibits/editor/status');
+        $this->dispatch('neatline-exhibits/editor/ajax/status');
 
         // Should create a new record.
         $this->assertEquals($this->_recordsTable->count(), 1);
@@ -446,7 +446,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->assertEquals($this->_recordsTable->count(), 0);
 
         // Hit the route.
-        $this->dispatch('neatline-exhibits/editor/status');
+        $this->dispatch('neatline-exhibits/editor/ajax/status');
 
         // Should create a new record.
         $this->assertEquals($this->_recordsTable->count(), 1);
@@ -504,7 +504,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         );
 
         // Hit the route and capture the response.
-        $this->dispatch('neatline-exhibits/editor/form');
+        $this->dispatch('neatline-exhibits/editor/ajax/form');
         $response = $this->getResponse()->getBody('default');
 
         // Test the construction.
@@ -599,7 +599,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         );
 
         // Hit the route and capture the response.
-        $this->dispatch('neatline-exhibits/editor/form');
+        $this->dispatch('neatline-exhibits/editor/ajax/form');
         $response = $this->getResponse()->getBody('default');
 
         // Test the construction.
@@ -706,7 +706,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         );
 
         // Hit the route and capture the response.
-        $this->dispatch('neatline-exhibits/editor/form');
+        $this->dispatch('neatline-exhibits/editor/ajax/form');
         $response = $this->getResponse()->getBody('default');
 
         // Check for proper construction.
@@ -823,7 +823,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->assertEquals($this->_recordsTable->count(), 1);
 
         // Hit the route and capture the response.
-        $this->dispatch('neatline-exhibits/editor/save');
+        $this->dispatch('neatline-exhibits/editor/ajax/save');
         $response = $this->getResponse()->getBody('default');
 
         // 1 record.
@@ -968,7 +968,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->assertEquals($this->_recordsTable->count(), 0);
 
         // Hit the route and capture the response.
-        $this->dispatch('neatline-exhibits/editor/save');
+        $this->dispatch('neatline-exhibits/editor/ajax/save');
         $response = $this->getResponse()->getBody('default');
 
         // 1 record.
@@ -1115,7 +1115,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->assertEquals($this->_recordsTable->count(), 1);
 
         // Hit the route and capture the response.
-        $this->dispatch('neatline-exhibits/editor/save');
+        $this->dispatch('neatline-exhibits/editor/ajax/save');
         $response = $this->getResponse()->getBody('default');
 
         // 1 record.
@@ -1267,7 +1267,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         );
 
         // Hit the route and capture the response.
-        $this->dispatch('neatline-exhibits/editor/save');
+        $this->dispatch('neatline-exhibits/editor/ajax/save');
 
         // Get the record and check the attributes.
         $record = $this->_recordsTable->find($record->id);
@@ -1325,7 +1325,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->assertEquals($this->_recordsTable->count(), 1);
 
         // Hit the route and capture the response.
-        $this->dispatch('neatline-exhibits/editor/save');
+        $this->dispatch('neatline-exhibits/editor/ajax/save');
 
         // 1 record.
         $this->assertEquals($this->_recordsTable->count(), 1);
@@ -1379,7 +1379,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         );
 
         // Hit the route.
-        $this->dispatch('neatline-exhibits/editor/save');
+        $this->dispatch('neatline-exhibits/editor/ajax/save');
 
         // Get the record and check the attributes.
         $record = $this->_recordsTable->getRecordByItemAndExhibit($item, $neatline);
@@ -1428,7 +1428,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         );
 
         // Hit the route.
-        $this->dispatch('neatline-exhibits/editor/save');
+        $this->dispatch('neatline-exhibits/editor/ajax/save');
 
         // Get the record and check the attributes.
         $record = $this->_recordsTable->find(1);
@@ -1484,7 +1484,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         );
 
         // Hit the route.
-        $this->dispatch('neatline-exhibits/editor/save');
+        $this->dispatch('neatline-exhibits/editor/ajax/save');
 
         // Get the record and check the attributes.
         $record = $this->_recordsTable->getRecordByItemAndExhibit($item, $neatline);
@@ -1533,7 +1533,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         );
 
         // Hit the route.
-        $this->dispatch('neatline-exhibits/editor/save');
+        $this->dispatch('neatline-exhibits/editor/ajax/save');
 
         // Get the record and check the attributes.
         $record = $this->_recordsTable->find(1);
@@ -1587,7 +1587,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         );
 
         // Hit the order save route.
-        $this->dispatch('neatline-exhibits/editor/order');
+        $this->dispatch('neatline-exhibits/editor/ajax/order');
 
         // Reget the items.
         $record1 = $this->_recordsTable->getRecordByItemAndExhibit($item1, $neatline);
@@ -1644,7 +1644,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         );
 
         // Hit the arrangement save route, reget the exhibit.
-        $this->dispatch('neatline-exhibits/editor/arrangement');
+        $this->dispatch('neatline-exhibits/editor/ajax/arrangement');
         $exhibit = $this->_exhibitsTable->find($exhibit->id);
 
         // Check the attributes.
@@ -1721,7 +1721,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         );
 
         // Hit the arrangement save route, reget the exhibit.
-        $this->dispatch('neatline-exhibits/editor/arrangement');
+        $this->dispatch('neatline-exhibits/editor/ajax/arrangement');
         $exhibit = $this->_exhibitsTable->find($exhibit->id);
 
         // Check the attributes.
@@ -1783,7 +1783,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         );
 
         // Hit the positions save route, reget the exhibit.
-        $this->dispatch('neatline-exhibits/editor/positions');
+        $this->dispatch('neatline-exhibits/editor/ajax/positions');
         $exhibit = $this->_exhibitsTable->find($exhibit->id);
 
         // Check the attributes.
@@ -1823,7 +1823,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->assertEquals($this->_recordsTable->count(), 1);
 
         // Hit the focus route, reget the record.
-        $this->dispatch('neatline-exhibits/editor/focus');
+        $this->dispatch('neatline-exhibits/editor/ajax/focus');
         $record = $this->_recordsTable->find($record->id);
 
         // Should not create a new record.
@@ -1865,7 +1865,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->assertEquals($this->_recordsTable->count(), 0);
 
         // Hit the focus route, reget the record.
-        $this->dispatch('neatline-exhibits/editor/focus');
+        $this->dispatch('neatline-exhibits/editor/ajax/focus');
         $record = $this->_recordsTable->getRecordByItemAndExhibit($item, $exhibit);
 
         // Should not create a new record.
@@ -1908,7 +1908,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->assertEquals($this->_recordsTable->count(), 1);
 
         // Hit the focus route, reget the record.
-        $this->dispatch('neatline-exhibits/editor/focus');
+        $this->dispatch('neatline-exhibits/editor/ajax/focus');
         $record = $this->_recordsTable->find($record->id);
 
         // Should not create a new record.
@@ -1952,7 +1952,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->assertEquals($this->_recordsTable->count(), 1);
 
         // Hit the focus route, reget the record.
-        $this->dispatch('neatline-exhibits/editor/focus');
+        $this->dispatch('neatline-exhibits/editor/ajax/focus');
         $record = $this->_recordsTable->find($record->id);
 
         // Should not create a new record.
@@ -1981,7 +1981,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->assertEquals($this->_recordsTable->count(), 0);
 
         // Hit the route, check for the markup.
-        $this->dispatch('neatline-exhibits/editor/add');
+        $this->dispatch('neatline-exhibits/editor/ajax/add');
 
         // 1 record.
         $this->assertEquals($this->_recordsTable->count(), 1);
@@ -2014,7 +2014,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->assertEquals($this->_recordsTable->count(), 2);
 
         // Hit the route, check for the markup.
-        $this->dispatch('neatline-exhibits/editor/delete');
+        $this->dispatch('neatline-exhibits/editor/ajax/delete');
 
         // 1 record.
         $this->assertEquals($this->_recordsTable->count(), 1);
@@ -2060,7 +2060,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         );
 
         // Hit the route, re-get the record.
-        $this->dispatch('neatline-exhibits/editor/mapsettings');
+        $this->dispatch('neatline-exhibits/editor/ajax/mapsettings');
         $exhibit = $this->_exhibitsTable->find($exhibit->id);
 
         // Check.
@@ -2105,7 +2105,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         );
 
         // Hit the route, re-get the record.
-        $this->dispatch('neatline-exhibits/editor/mapsettings');
+        $this->dispatch('neatline-exhibits/editor/ajax/mapsettings');
         $exhibit = $this->_exhibitsTable->find($exhibit->id);
 
         // Check.
@@ -2147,7 +2147,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         );
 
         // Hit the route, re-get the record.
-        $this->dispatch('neatline-exhibits/editor/resetstyles');
+        $this->dispatch('neatline-exhibits/editor/ajax/resetstyles');
         $record = $this->_recordsTable->find($record->id);
 
         // Check.

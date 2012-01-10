@@ -144,9 +144,7 @@ class NeatlineDataRecord extends Omeka_record
      */
     public function getExhibit()
     {
-
         return $this->getTable('NeatlineExhibit')->find($this->exhibit_id);
-
     }
 
     /**
@@ -520,6 +518,23 @@ class NeatlineDataRecord extends Omeka_record
         return (!is_null($this->geocoverage) && $this->geocoverage != '') ?
             $this->geocoverage :
             self::$defaults['geocoverage'];
+
+    }
+
+    /**
+     * On save, update the modified column on the parent exhibit.
+     *
+     * @return void.
+     */
+    public function save()
+    {
+
+        if (!is_null($this->exhibit_id)) {
+            $exhibit = $this->getExhibit();
+            $exhibit->save();
+        }
+
+        parent::save();
 
     }
 
