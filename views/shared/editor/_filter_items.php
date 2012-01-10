@@ -36,6 +36,7 @@
             </div>
         </div>
 
+        <?php if (count($tags) > 0): ?>
         <div class="filter-items-column tags">
 
             <div class="filter-header">
@@ -52,7 +53,9 @@
             <?php endforeach; ?>
 
         </div>
+        <?php endif; ?>
 
+        <?php if (count($types) > 0): ?>
         <div class="filter-items-column types">
 
             <div class="filter-header">
@@ -69,7 +72,9 @@
             <?php endforeach; ?>
 
         </div>
+        <?php endif; ?>
 
+        <?php if (count($collections) > 0): ?>
         <div class="filter-items-column collections">
 
             <div class="filter-header">
@@ -86,6 +91,7 @@
             <?php endforeach; ?>
 
         </div>
+        <?php endif; ?>
 
     </div>
 
