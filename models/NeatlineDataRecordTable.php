@@ -150,8 +150,33 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
     {
 
         $records = $this->fetchObjects(
-            $this->getSelect()->where('exhibit_id = ' . $neatline->id . 
+            $this->getSelect()->where('exhibit_id = ' . $neatline->id .
                 ' AND item_id IS NULL')
+        );
+
+        return $records ? $records : false;
+
+    }
+
+    /**
+     * Simple title searching for Neatline-native records by exhibit.
+     *
+     * @param Omeka_record $neatline The exhibit record.
+     * @param string $search The search string.
+     *
+     * @return array of Omeka_record The records.
+     */
+    public function searchNeatlineRecordsByExhibit($neatline, $search)
+    {
+
+        // If the search string is empty, get all records.
+        if ($search == '') {
+            return $this->getNeatlineRecordsByExhibit($neatline);
+        }
+
+        $records = $this->fetchObjects(
+            $this->getSelect()->where('exhibit_id = ' . $neatline->id .
+                ' AND item_id IS NULL AND title LIKE "%' . $search . '%"')
         );
 
         return $records ? $records : false;

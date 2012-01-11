@@ -25,9 +25,7 @@
  */
 ?>
 
-<a class="omeka-logo" href="<?php echo html_escape(uri('neatline-exhibits')); ?>">
-    Omeka
-</a>
+<a class="omeka-logo" href="<?php echo html_escape(uri('neatline-exhibits')); ?>">Omeka</a>
 
 <ul class="nav">
 
