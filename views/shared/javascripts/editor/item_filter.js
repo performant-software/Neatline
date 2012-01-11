@@ -28,7 +28,6 @@
 
             // Durations and CSS constants.
             fade_duration: 400,
-            top_bar_height: 53,
             bottom: 75,
             header: 40,
 
@@ -49,6 +48,7 @@
             // Getters.
             this._window =                  $(window);
             this._body =                    $('body');
+            this.topbar =                   $('#topbar');
             this.container =                $('#item-browser');
             this.dropdown =                 $('#filter-items');
             this.tab =                      $('#filter-items-tab');
@@ -129,6 +129,9 @@
             // Get the position and size of the tab.
             this.tabOffset = this.tab.offset();
             this.tabHeight = this.tab.height();
+
+            // Measure the topbar.
+            this.topBarHeight = this.topbar.height();
 
             // Measure the stack, top offset, and window.
             this.totalHeight = this.element.height();
@@ -268,7 +271,7 @@
 
             // Animate.
             this.element.stop().animate({
-                'top': this.options.header + this.options.top_bar_height - 1
+                'top': this.options.header + this.topBarHeight - 1
             }, this.options.fade_duration, function() {
 
                 // Add the scrollbar.

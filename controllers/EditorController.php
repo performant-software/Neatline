@@ -138,12 +138,12 @@ class Neatline_EditorController extends Omeka_Controller_Action
         $exhibidId =                $this->_request->getParam('exhibit_id');
 
         // Push in the Neatline exhibit record.
-        $neatline = $this->_neatlinesTable->find($exhibidId);
-        $this->view->neatline = $neatline;
+        $exhibit = $this->_neatlinesTable->find($exhibidId);
+        $this->view->neatline = $exhibit;
 
         // Get records.
-        $records = $this->_recordsTable->getNeatlineRecordsByExhibit($neatline);
-        $this->view->records = ($records) ? $records : array();
+        $records = $this->_recordsTable->getNeatlineRecordsByExhibit($exhibit);
+        $this->view->records = $records;
 
         // Get items.
         $this->view->items = neatline_getItemsForBrowser(

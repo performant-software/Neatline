@@ -100,6 +100,9 @@
             this._glossNewItemButton();
             this._instantiateFormManager();
 
+            // Get starting items.
+            this._getItems();
+
         },
 
 
@@ -642,7 +645,9 @@
             this.itemFilterContainer.itemfilter({
 
                 'selectionchange': function(eventObject, selected) {
-                    self._getItems();
+                    if (!self._firstRequest) {
+                        self._getItems();
+                    }
                 }
 
             });

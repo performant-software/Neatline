@@ -25,8 +25,13 @@
  */
 
 /**
- * Query for items and crop down the result objects for the
- * item browser
+ * Get items for the browser.
+ *
+ * @param string $search        The search string.
+ * @param array $tags           The array of tag id's.
+ * @param array $types          The array of type id's.
+ * @param array $collections    The array of collection id's.
+ * @param boolean $all          True when the all option is active.
  *
  * @return array of Omeka_records $items The items.
  */

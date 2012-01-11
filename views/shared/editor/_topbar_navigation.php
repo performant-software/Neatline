@@ -26,7 +26,7 @@
 ?>
 
 <a class="omeka-logo" href="<?php echo html_escape(uri('neatline-exhibits')); ?>">
-    <img id="omeka-logo" src="<?php echo img('back-to-omeka-white.png'); ?>" />
+    Omeka
 </a>
 
 <ul class="nav">
@@ -48,7 +48,7 @@
     </li>
 
     <li class="dropdown">
-        <a href="" id="configure-layout-button" class="dropdown-toggle">Configure Layout</a>
+        <a href="" id="configure-layout-button" class="dropdown-toggle">Layout Editor</a>
         <div id="configure-layout" class="dropdown-content">
             <?php echo $this->partial('editor/_configure_layout.php'); ?>
         </div>

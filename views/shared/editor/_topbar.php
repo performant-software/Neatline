@@ -27,7 +27,7 @@
 
 <div id="topbar" class="topbar-inner topbar">
 
-    <img id="neatline-logo" src="<?php echo img('neatline-logo-white-small.png'); ?>" />
+    <img id="neatline-logo" src="<?php echo img('neatline-logo-editor.png'); ?>" />
     <span class="top-bar-title"><?php echo $neatline->name; ?></span>
 
     <?php echo $this->partial('editor/_topbar_navigation.php', array(
