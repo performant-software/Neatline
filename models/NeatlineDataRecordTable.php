@@ -175,8 +175,10 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
         }
 
         $records = $this->fetchObjects(
-            $this->getSelect()->where('exhibit_id = ' . $neatline->id .
-                ' AND item_id IS NULL AND title LIKE "%' . $search . '%"')
+            $this->getSelect()->where(
+                'exhibit_id = ' . $neatline->id .
+                ' AND item_id IS NULL' .
+                ' AND title LIKE "%' . $search . '%"')
         );
 
         return $records ? $records : false;

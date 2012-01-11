@@ -376,6 +376,80 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
     }
 
     /**
+     * When there are records for an exhibit that do not have a parent item,
+     * searchNeatlineRecordsByExhibit() should return the records with title
+     * substrings that match the passed search parameter.
+     *
+     * @return void.
+     */
+    public function testSearchNeatlineRecordsByExhibitWithRecords()
+    {
+
+        // Create an exhibit.
+        $neatline = $this->helper->_createNeatline();
+
+        // Create two records, one with a parent item and one without.
+        $record1 = new NeatlineDataRecord(null, $neatline);
+        $record1->title = 'test title';
+        $record1->save();
+        $record2 = new NeatlineDataRecord(null, $neatline);
+        $record2->title = 'no match';
+        $record2->save();
+
+        // Should get 1 record.
+        $records = $this->_recordsTable->searchNeatlineRecordsByExhibit($neatline, 'test');
+        $this->assertEquals(count($records), 1);
+
+        // Check identity.
+        $this->assertEquals($records[0]->id, $record1->id);
+
+    }
+
+    /**
+     * When there are no item-null records for an exhibit searchNeatlineRecordsByExhibit()
+     * should return false.
+     *
+     * @return void.
+     */
+    public function testSearchNeatlineRecordsByExhibitWithNoRecords()
+    {
+
+        // Create an exhibit.
+        $neatline = $this->helper->_createNeatline();
+
+        // False when no records.
+        $records = $this->_recordsTable->searchNeatlineRecordsByExhibit($neatline, 'test');
+        $this->assertFalse($records);
+
+    }
+
+    /**
+     * When there are no item-null records for an exhibit that match the passed search
+     * string, searchNeatlineRecordsByExhibit() should return false.
+     *
+     * @return void.
+     */
+    public function testSearchNeatlineRecordsByExhibitWithNoMatchingRecords()
+    {
+
+        // Create an exhibit.
+        $neatline = $this->helper->_createNeatline();
+
+        // Create two records, one with a parent item and one without.
+        $record1 = new NeatlineDataRecord(null, $neatline);
+        $record1->title = 'no match';
+        $record1->save();
+        $record2 = new NeatlineDataRecord(null, $neatline);
+        $record2->title = 'another no match';
+        $record2->save();
+
+        // Should return false for no matches.
+        $records = $this->_recordsTable->searchNeatlineRecordsByExhibit($neatline, 'test');
+        $this->assertFalse($records);
+
+    }
+
+    /**
      * getActiveRecordsByExhibit() should return all data records associated
      * with a given Neatline exhibit that have an active space or time record.
      *

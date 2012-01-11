@@ -142,10 +142,13 @@ class Neatline_EditorController extends Omeka_Controller_Action
         $this->view->neatline = $exhibit;
 
         // Get records.
-        $this->view->records = $this->_recordsTable->searchNeatlineRecordsByExhibit(
+        $records = $this->_recordsTable->searchNeatlineRecordsByExhibit(
             $exhibit,
-            $serchString
+            $searchString
         );
+
+        // Push the records (empty array if false).
+        $this->view->records = $records ? $records : array();
 
         // Get items.
         $this->view->items = neatline_getItemsForBrowser(
