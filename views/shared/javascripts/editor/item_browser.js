@@ -435,7 +435,7 @@
 
                 // Update the current record title.
                 'settitle': function(event, obj) {
-                    self._currentRecordTitle.text(obj.text);
+                    self._currentRecordTitle.html(obj.text);
                 },
 
                 // Update the recordid attribute on the current item.

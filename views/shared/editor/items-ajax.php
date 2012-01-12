@@ -53,9 +53,9 @@
     <?php endforeach; ?>
 
     <tr id="omeka-header" class="header-row <?php if (count($items) == 0) { echo 'hidden'; } ?>">
-        <td>Omeka Records</td>
-        <td class="col-1"></td>
-        <td class="col-2"></td>
+        <td class="neatline-bar">Omeka Records</td>
+        <td class="col-1 neatline-bar"></td>
+        <td class="col-2 neatline-bar"></td>
     </tr>
 
     <?php foreach ($items as $item): ?>
