@@ -28,9 +28,9 @@
 <table id="items-table">
 
     <tr id="neatline-header" class="header-row <?php if (!$records) { echo 'hidden'; } ?>">
-        <td>Neatline Records</td>
-        <td class="col-1"></td>
-        <td class="col-2"></td>
+        <td class="neatline-bar">Neatline Records</td>
+        <td class="col-1 neatline-bar"></td>
+        <td class="col-2 neatline-bar"></td>
     </tr>
 
     <?php foreach ($records as $record): ?>

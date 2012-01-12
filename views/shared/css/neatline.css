@@ -45,6 +45,20 @@ table th, table td {
     padding: 10px 6px 9px;
 }
 
+.neatline-bar {
+    background-color: #77488b;
+    background-color: #77488b;
+    background-repeat: repeat-x;
+    background-image: -khtml-gradient(linear, left top, left bottom, from(#67467d), to(#77488b));
+    background-image: -moz-linear-gradient(top, #67467d, #77488b);
+    background-image: -ms-linear-gradient(top, #67467d, #77488b);
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #67467d), color-stop(100%, #77488b));
+    background-image: -webkit-linear-gradient(top, #67467d, #77488b);
+    background-image: -o-linear-gradient(top, #67467d, #77488b);
+    background-image: linear-gradient(top, #67467d, #77488b);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#67467d', endColorstr='#77488b', GradientType=0);
+}
+
 
 /* Map */
 
