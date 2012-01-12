@@ -238,6 +238,7 @@ span.item-title-text {
     float: left;
     display: block;
     width: 80%;
+    font-size: 14px;
 }
 
 #new-item-button {

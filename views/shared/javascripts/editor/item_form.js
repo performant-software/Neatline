@@ -28,6 +28,7 @@
 
             // CSS constants.
             css: {
+                default_text_size: 14,
                 form_duration: 300
             },
 
@@ -472,7 +473,7 @@
             // Highlight the item title.
             this.textSpan.stop().animate({
                 'color': textColor,
-                'font-size': 12,
+                'font-size': this.options.css.default_text_size,
                 'font-weight': textWeight
             }, 100);
 

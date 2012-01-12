@@ -235,8 +235,22 @@
             // Instantiate the map.
             this.map = new OpenLayers.Map('map', options);
 
+
+            // Google base layer.
+            var gmap = new OpenLayers.Layer.Google(
+                "Google Streets", // the default
+                {numZoomLevels: 20}
+            );
+
             // Push the base layer onto the map.
-            this.map.addLayers([new OpenLayers.Layer.OSM()]);
+            this.map.addLayers([gmap]);
+
+            // Google.v3 uses EPSG:900913 as projection, so we have to
+            // transform our coordinates
+            this.map.setCenter(new OpenLayers.LonLat(10.2, 48.9).transform(
+                new OpenLayers.Projection("EPSG:4326"),
+                this.map.getProjectionObject()
+            ), 5);
 
             // If there is a default bounding box set for the exhibit, construct
             // a second Bounds object to use as the starting zoom target.

@@ -42,7 +42,8 @@
 
 <link href='http://fonts.googleapis.com/css?family=Crimson+Text:400,400italic,600,600italic,700,700italic' rel='stylesheet' type='text/css'>
 <script type="text/javascript" src="http://openlayers.org/api/OpenLayers.js"></script>
-<script src="http://api.simile-widgets.org/timeline/2.3.1/timeline-api.js?bundle=true" type="text/javascript"></script>
+<script type="text/javascript" src="http://api.simile-widgets.org/timeline/2.3.1/timeline-api.js?bundle=true"></script>
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?v=3.5&amp;sensor=false"></script>
 
 </head>
 <?php echo body_tag(array('id' => @$bodyid, 'class' => @$bodyclass)); ?>

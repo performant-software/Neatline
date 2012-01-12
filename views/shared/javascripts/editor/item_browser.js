@@ -28,7 +28,7 @@
 
             // CSS constants.
             css: {
-                default_text_size: 12,
+                default_text_size: 14,
                 top_margin: 40,
                 fader_width: 40,
                 container_min_width: 400,

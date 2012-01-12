@@ -95,13 +95,13 @@ function neatline_queuePublicAssets()
     // Public-specific CSS additions.
     queue_css('neatline-public');
 
-    $openlayersSrc = 'http://openlayers.org/api/OpenLayers.js';
-    $simileSrc = 'http://api.simile-widgets.org/timeline/2.3.1/timeline-api.js?bundle=true';
+    $openlayers = 'http://openlayers.org/api/OpenLayers.js';
+    $simile = 'http://api.simile-widgets.org/timeline/2.3.1/timeline-api.js?bundle=true';
 
     // API calls.
     $headScript = __v()->headScript();
-    $headScript->appendScript('','text/javascript', array('src' => $openlayersSrc));
-    $headScript->appendScript('', 'text/javascript', array('src' => $simileSrc));
+    $headScript->appendScript('','text/javascript', array('src' => $openlayers));
+    $headScript->appendScript('', 'text/javascript', array('src' => $simile));
 
 }
 
