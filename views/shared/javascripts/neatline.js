@@ -223,12 +223,12 @@
 
                         // When the cursor enters an item title.
                         'itementer': function(event, obj) {
-                            console.log(obj.recordid);
+                            self.map.neatlinemap('highlightVectors', obj.recordid);
                         },
 
                         // When the cursor leaves an item title.
                         'itemleave': function(event, obj) {
-                            console.log(obj.recordid);
+                            self.map.neatlinemap('unhighlightVectors', obj.recordid);
                         }
 
                     });
@@ -250,12 +250,12 @@
 
                         // When the cursor enters an item title.
                         'itementer': function(event, obj) {
-                            console.log(obj.recordid);
+                            self.map.neatlinemap('highlightVectors', obj.recordid);
                         },
 
                         // When the cursor leaves an item title.
                         'itemleave': function(event, obj) {
-                            console.log(obj.recordid);
+                            self.map.neatlinemap('unhighlightVectors', obj.recordid);
                         }
 
                     });

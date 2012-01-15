@@ -49,6 +49,7 @@
             styles: {
                 vector_color: '#ffb80e',
                 stroke_color: '#ea3a3a',
+                highlight_color: '#ff0000',
                 vector_opacity: 0.4,
                 stroke_opacity: 0.6,
                 stroke_width: 1,
@@ -894,6 +895,60 @@
                 }
 
             });
+
+        },
+
+        /*
+         * Render a highlight on an item's vectors.
+         */
+        highlightVectors: function(recordid) {
+
+            // Get the item record.
+            var record = this._db({ recordid: parseInt(recordid) }).first();
+
+            // If there is no extant data record, abort.
+            if (typeof record.data === 'undefined') {
+                return;
+            }
+
+            // Rebuild the style map.
+            record.layer.styleMap = this._getStyleMap(
+                this.options.colors.highlight_color,
+                record.data.vector_opacity,
+                this.options.colors.highlight_color,
+                record.data.stroke_opacity,
+                record.data.stroke_width,
+                record.data.point_radius);
+
+            // Rerender the layer to manifest the change.
+            record.layer.redraw();
+
+        },
+
+        /*
+         * Remove a highlight on an item's vectors.
+         */
+        unhighlightVectors: function(recordid) {
+
+            // Get the item record.
+            var record = this._db({ recordid: parseInt(recordid) }).first();
+
+            // If there is no extant data record, abort.
+            if (typeof record.data === 'undefined') {
+                return;
+            }
+
+            // Rebuild the style map.
+            record.layer.styleMap = this._getStyleMap(
+                record.data.vector_color,
+                record.data.vector_opacity,
+                record.data.stroke_color,
+                record.data.stroke_opacity,
+                record.data.stroke_width,
+                record.data.point_radius);
+
+            // Rerender the layer to manifest the change.
+            record.layer.redraw();
 
         },
 
