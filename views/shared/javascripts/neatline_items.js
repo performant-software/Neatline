@@ -164,12 +164,27 @@
 
                     // Highlight.
                     'mouseenter': function() {
+
+                        // Gloss the title.
                         self.__highlightItem(item);
+
+                        // Trigger out to the deployment code.
+                        self._trigger('itementer', {}, {
+                            'recordid': recordid
+                        });
+
                     },
 
                     // Un-highlight.
                     'mouseleave': function() {
+
+                        // De-gloss the title.
                         self.__unhighlightItem(item);
+
+                        // Trigger out to the deployment code.
+                        self._trigger('itemleave', {}, {
+                            'recordid': recordid
+                        });
                     }
 
                 });

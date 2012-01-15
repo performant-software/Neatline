@@ -86,8 +86,7 @@
          */
         endreorder: function() {
 
-            // Show the item descriptions and change the cursor.
-            this.__showAllDescriptions();
+            // Change the cursor.
             this.__setPointerCursor();
 
             // Recalculate native item offsets.
@@ -253,26 +252,6 @@
 
                 // Hide the description.
                 description.css('display', 'none');
-
-            });
-
-        },
-
-        /*
-         * Show the item descriptions.
-         */
-        __showAllDescriptions: function() {
-
-            var self = this;
-
-            $.each(this.items, function(i, item) {
-
-                // Get the description.
-                var item = $(item);
-                var description = item.next('li.item-description');
-
-                // Show the description.
-                description.css('display', 'block');
 
             });
 

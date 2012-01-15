@@ -213,14 +213,22 @@
 
                     this.items.neatlineitems({
 
+                        // When the user clicks on an item title.
                         'itemclick': function(event, obj) {
-
-                            // When the user clicks on an item title.
                             self._trigger('itemclick', {}, {
                                 'recordid': obj.recordid,
                                 'scrollItems': obj.scrollItems
                             });
+                        },
 
+                        // When the cursor enters an item title.
+                        'itementer': function(event, obj) {
+                            console.log(obj.recordid);
+                        },
+
+                        // When the cursor leaves an item title.
+                        'itemleave': function(event, obj) {
+                            console.log(obj.recordid);
                         }
 
                     });
@@ -232,14 +240,22 @@
 
                     this.items.itemorderer({
 
+                        // When the user clicks on an item title.
                         'itemclick': function(event, obj) {
-
-                            // When the user clicks on an item title.
                             self._trigger('itemclick', {}, {
                                 'recordid': obj.recordid,
                                 'scrollItems': obj.scrollItems
                             });
+                        },
 
+                        // When the cursor enters an item title.
+                        'itementer': function(event, obj) {
+                            console.log(obj.recordid);
+                        },
+
+                        // When the cursor leaves an item title.
+                        'itemleave': function(event, obj) {
+                            console.log(obj.recordid);
                         }
 
                     });
