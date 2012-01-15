@@ -100,11 +100,9 @@
 
             // ** DESCRIPTION.
             this.description.bind({
-
                 'mouseup': function() {
                     self.resizeForm();
                 }
-
             });
 
             // ** DATE AMBIGUITY.
