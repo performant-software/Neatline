@@ -32,7 +32,7 @@
                 purple: '#724E85',
                 background: '#FFFEF8',
                 title: '#202020',
-                highlight: '#f2eff3'
+                highlight: '#f3f6ff'
             },
 
             // CSS constants.
@@ -132,6 +132,9 @@
                 // Populate trackers.
                 self._idToItem[recordid] = item;
                 self._idOrdering.push(recordid);
+
+                // Unbind all events.
+                item.add(description).unbind();
 
                 // Listen for events.
                 item.add(description).bind({
@@ -303,10 +306,19 @@
                 this._currentItem = item;
                 this._currentItemId = id;
 
+                // Get the new scrollTop.
+                var scrollTop = item.position().top + this.element.scrollTop();
+
+                // If the new scroll is greater than the total height,
+                // scroll exactly to the bottom.
+                if (scrollTop > this.element[0].scrollHeight) {
+                    scrollTop = this.element[0].scrollHeight;
+                }
+
                 // Position at the top of the frame.
                 this.element.animate({
-                    'scrollTop': this._idToOffset[id] + 1
-                }, 300);
+                    'scrollTop': scrollTop + 1
+                }, 200);
 
             }
 
@@ -321,22 +333,14 @@
          * Gloss title and description on mouseenter.
          */
         __highlightItem: function(item) {
-
-            item.stop().animate({
-                'background-color': this.options.colors.highlight
-            }, 100);
-
+            item.css('background-color', this.options.colors.highlight);
         },
 
         /*
          * Push title and description back to default state.
          */
         __unhighlightItem: function(item) {
-
-            item.stop().animate({
-                'background-color': this.options.colors.background
-            }, 100);
-
+            item.css('background-color', this.options.colors.background);
         }
 
     });
