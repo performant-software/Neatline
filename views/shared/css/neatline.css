@@ -127,6 +127,8 @@ table th, table td {
     line-height: 20px;
     color: #616161;
     padding: 5px 20px 0 20px;
+    height: 0;
+    overflow: hidden;
 }
 
 

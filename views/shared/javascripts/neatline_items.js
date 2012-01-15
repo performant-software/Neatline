@@ -37,7 +37,9 @@
 
             // CSS constants.
             css: {
-                def_opacity: 0.7
+                def_opacity: 0.7,
+                def_font_size: 14,
+                active_font_size: 18
             }
 
         },
@@ -69,10 +71,7 @@
          * Request item markup and gloss the results.
          */
         loadData: function() {
-
-            // Build list.
             this._getItems();
-
         },
 
         /*
@@ -132,20 +131,34 @@
                 // Populate trackers.
                 self._idToItem[recordid] = item;
                 self._idOrdering.push(recordid);
+                item.data('expanded', false);
 
                 // Unbind all events.
                 item.add(description).unbind();
 
                 // Listen for events.
-                item.add(description).bind({
+                item.bind({
 
                     'mousedown': function() {
 
-                        // Trigger out to the deployment code.
-                        self._trigger('itemclick', {}, {
-                            'recordid': recordid,
-                            'scrollItems': true
-                        });
+                        // If hidden, expand.
+                        if (!item.data('expanded')) {
+
+                            // Show the description.
+                            self.__expandDescription(item);
+
+                            // Trigger out to the deployment code.
+                            self._trigger('itemclick', {}, {
+                                'recordid': recordid,
+                                'scrollItems': true
+                            });
+
+                        }
+
+                        // If expanded, hide.
+                        else {
+                            self.__contractDescription(item);
+                        }
 
                     },
 
@@ -302,9 +315,8 @@
             // If the item is present in the squence tray.
             if (item != null) {
 
-                // Set the trackers.
-                this._currentItem = item;
-                this._currentItemId = id;
+                // Expand the description.
+                this.__expandDescription(item);
 
                 // Get the new scrollTop.
                 var scrollTop = item.position().top + this.element.scrollTop();
@@ -341,6 +353,96 @@
          */
         __unhighlightItem: function(item) {
             item.css('background-color', this.options.colors.background);
+        },
+
+        /*
+         * Pop the title as active.
+         */
+        __activateTitle: function(item) {
+            item.stop().animate({
+                'font-size': this.options.css.active_font_size,
+                'color': this.options.colors.purple
+            }, 100);
+        },
+
+        /*
+         * Return the title to normal.
+         */
+        __deactivateTitle: function(item) {
+            item.stop().animate({
+                'font-size': this.options.css.def_font_size,
+                'color': this.options.colors.title
+            }, 100);
+        },
+
+        /*
+         * Expand the description.
+         */
+        __expandDescription: function(item) {
+
+            // If another item is expanded, hide.
+            if (this._currentItem != null) {
+                this.__hideCurrentDescription();
+                this._currentItem.data('expanded', false);
+            }
+
+            // Mark the title as active.
+            this.__activateTitle(item);
+
+            // Get the description, display, measure native height.
+            var description = item.next('li');
+            description.css('display', 'list-item');
+            var height = description[0].scrollHeight;
+
+            // Expand.
+            description.animate({
+                'height': height
+            }, 200);
+
+            // Set trackers.
+            this._currentItem = item;
+            item.data('expanded', true);
+
+        },
+
+        /*
+         * Expand the description.
+         */
+        __contractDescription: function(item) {
+
+            // Get the description.
+            var description = item.next('li');
+
+            // Mark the title as inactive.
+            this.__deactivateTitle(item);
+
+            // Contract and hide.
+            description.animate({
+                'height': 0
+            }, 200, function() {
+                description.css('display', 'none');
+            });
+
+            // Set trackers.
+            this._currentItem = null;
+            item.data('expanded', false);
+
+        },
+
+        /*
+         * Dissapear the currently-expanded description.
+         */
+        __hideCurrentDescription: function() {
+
+            // Deactivate the title.
+            this.__deactivateTitle(this._currentItem);
+
+            // Hide.
+            this._currentItem.next('li').css({
+                'height': 0,
+                'display': 'none'
+            });
+
         }
 
     });

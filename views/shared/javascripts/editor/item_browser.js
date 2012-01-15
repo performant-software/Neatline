@@ -326,74 +326,58 @@
 
                 // When the ambiguity sliders are changed.
                 'ambiguityChange': function(event, obj) {
-
                     var recordid = self._currentFormItem.attr('recordid');
                     self.markItemTitleAsUnsaved();
-
                     self._trigger('ambiguityChange', {}, {
                         'recordid': recordid,
                         'color': obj.color,
                         'leftPercent': obj.leftPercent,
                         'rightPercent': obj.rightPercent
                     });
-
                 },
 
                 // When the vector color is changed.
                 'vectorColorEdit': function(event, obj) {
-
                     var recordid = self._currentFormItem.attr('recordid');
-
                     self._trigger('vectorcoloredit', {}, {
                         'recordid': recordid,
                         'color': obj.color
                     });
-
                 },
 
                 // When the stroke color is changed.
                 'strokeColorEdit': function(event, obj) {
-
                     self._trigger('strokecoloredit', {}, {
                         'color': obj.color
                     });
-
                 },
 
                 // When the vector opacity is changed.
                 'vectorOpacityEdit': function(event, obj) {
-
                     self._trigger('vectoropacityedit', {}, {
                         'value': obj.value
                     });
-
                 },
 
                 // When the stroke opacity is changed.
                 'strokeOpacityEdit': function(event, obj) {
-
                     self._trigger('strokeopacityedit', {}, {
                         'value': obj.value
                     });
-
                 },
 
                 // When the stroke width is changed.
                 'strokeWidthEdit': function(event, obj) {
-
                     self._trigger('strokewidthedit', {}, {
                         'value': obj.value
                     });
-
                 },
 
                 // When the point radius.
                 'pointRadiusEdit': function(event, obj) {
-
                     self._trigger('pointradiusedit', {}, {
                         'value': obj.value
                     });
-
                 },
 
                 // When a form is closed.
@@ -414,12 +398,18 @@
 
                 // Mark space active on current item.
                 'spaceactive': function() {
-                    self._checkStatusBlockOn(self._currentFormItem, 'space');
+                    self._checkStatusBlockOn(
+                        self._currentFormItem,
+                        'space'
+                    );
                 },
 
                 // Mark time active on current item.
                 'timeactive': function() {
-                    self._checkStatusBlockOn(self._currentFormItem, 'time');
+                    self._checkStatusBlockOn(
+                        self._currentFormItem,
+                        'time'
+                    );
                 },
 
                 // Get current map focus for item.
