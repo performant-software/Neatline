@@ -228,6 +228,7 @@
                   new OpenLayers.Control.MousePosition(),
                   new OpenLayers.Control.Navigation(),
                   new OpenLayers.Control.ScaleLine(),
+                  new OpenLayers.Control.LayerSwitcher(),
                 ],
                 maxResolution: 'auto',
                 units: 'm'
@@ -236,15 +237,27 @@
             // Instantiate the map.
             this.map = new OpenLayers.Map('map', options);
 
-
-            // Google base layer.
+            // Construct the base layers.
+            var gphy = new OpenLayers.Layer.Google(
+                "Google Physical",
+                {type: google.maps.MapTypeId.TERRAIN}
+            );
             var gmap = new OpenLayers.Layer.Google(
-                "Google Streets", // the default
+                "Google Streets",
                 {numZoomLevels: 20}
             );
+            var ghyb = new OpenLayers.Layer.Google(
+                "Google Hybrid",
+                {type: google.maps.MapTypeId.HYBRID, numZoomLevels: 20}
+            );
+            var gsat = new OpenLayers.Layer.Google(
+                "Google Satellite",
+                {type: google.maps.MapTypeId.SATELLITE, numZoomLevels: 22}
+            );
+            var osm = new OpenLayers.Layer.OSM()
 
             // Push the base layer onto the map.
-            this.map.addLayers([gmap]);
+            this.map.addLayers([gphy, gmap, ghyb, gsat, osm]);
 
             // Google.v3 uses EPSG:900913 as projection, so we have to
             // transform our coordinates
