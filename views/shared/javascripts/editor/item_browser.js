@@ -93,7 +93,7 @@
             this._scrollbarWidth = $.getScrollbarWidth();
             this._positionDivs();
             this._addWindowResizeListener();
-            this._buildDragHandle();
+            // this._buildDragHandle();
             this._glossSearchBox();
             this._glossColumnHeaders();
             this._glossItemFilter();
@@ -173,7 +173,7 @@
 
             this._window.bind('resize', function() {
                 self._positionDivs();
-                self._positionDragHandle();
+                // self._positionDragHandle();
             });
 
         },
