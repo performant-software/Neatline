@@ -94,6 +94,19 @@ jQuery(document).ready(function($) {
                     // Make the item title red.
                     editorContainer.itembrowser('markItemTitleAsUnsaved');
 
+                },
+
+                // When the item tray is reloaded.
+                'newitems': function() {
+
+                    // Get the current edit item on the browser.
+                    var editId = editorContainer.itembrowser('getCurrentEditId');
+
+                    // If there is an active edit form.
+                    if (editId) {
+                        neatlineContainer.neatline('showItemDescription', editId);
+                    }
+
                 }
 
             });

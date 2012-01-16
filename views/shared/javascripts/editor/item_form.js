@@ -94,6 +94,7 @@
 
             // Trackers.
             this._db =                      TAFFY();
+            this._isForm =                  false;
             this.coverage =                 null;
 
             // Preparatory routines.
@@ -110,6 +111,8 @@
             var self = this;
 
             // ** DESCRIPTION.
+
+            // Construct CLEditor.
             this.rte = this.description.cleditor(
                 this.options.cleditor
             )[0];
@@ -306,6 +309,9 @@
                 this._hideDeleteButton();
             }
 
+            // Update the tracker.
+            this._isForm = true;
+
         },
 
         /*
@@ -341,6 +347,9 @@
             // DOM touches.
             this._hideContainer(immediate);
             this._contractTitle();
+
+            // Update the tracker.
+            this._isForm = false;
 
         },
 
@@ -863,7 +872,21 @@
             this._nativeHeight = this.fieldset[0].scrollHeight;
             this._actionsHeight = this.actions.height();
 
-         }
+         },
+
+        /*
+         * Emit the current edit item recordid.
+         */
+        getCurrentEditId: function() {
+            return this._isForm ? this.recordId : false;
+        },
+
+        /*
+         * Emit a protected class attribute.
+         */
+        getAttr: function(attr) {
+            return this[attr];
+        }
 
     });
 

@@ -1266,9 +1266,15 @@
          * Set the current map focus on the form widget.
          */
         saveMapFocus: function(extent, zoom) {
-
             this.editForm.itemform('postMapFocus', extent, zoom);
+        },
 
+        /*
+         * Retrieve the recordid of the current edit form. If there is not an active
+         * edit form, return false.
+         */
+        getCurrentEditId: function() {
+            return this.editForm.itemform('getCurrentEditId');
         },
 
         /*

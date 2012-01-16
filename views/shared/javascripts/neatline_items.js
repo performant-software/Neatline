@@ -90,6 +90,7 @@
                 success: function(data) {
                     self.listContainer.html(data);
                     self._glossItems();
+                    self._trigger('newitems');
                 }
 
             });

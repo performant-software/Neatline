@@ -256,6 +256,11 @@
                         // When the cursor leaves an item title.
                         'itemleave': function(event, obj) {
                             self.map.neatlinemap('unhighlightVectors', obj.recordid);
+                        },
+
+                        // When the item tray is reloaded.
+                        'newitems': function(event, obj) {
+                            self._trigger('newitems');
                         }
 
                     });
