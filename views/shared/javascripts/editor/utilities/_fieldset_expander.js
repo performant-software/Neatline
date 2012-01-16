@@ -116,8 +116,7 @@
         _hideFieldset: function() {
 
             this.fieldset.css({
-                height: 0,
-                display: 'none'
+                height: 0
             });
 
             this._trigger('change');
@@ -134,9 +133,7 @@
 
             var self = this;
 
-            this.fieldset.css({
-                display: 'block'
-            }).stop().animate({
+            this.fieldset.stop().animate({
                 height: this.fieldset[0].scrollHeight,
             }, 100, function() {
                 self._trigger('change');
@@ -158,7 +155,6 @@
             this.fieldset.stop().animate({
                 height: 0,
             }, 100, function() {
-                self.fieldset.css('display', 'none');
                 self._trigger('change');
             });
 
@@ -181,7 +177,7 @@
          */
         isExpanded: function() {
             return this._expanded;
-        },
+        }
 
     });
 

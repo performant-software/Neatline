@@ -29,8 +29,7 @@
             // CSS constants.
             css: {
                 default_text_size: 14,
-                form_duration: 300,
-                form_bottom_padding: 10
+                form_duration: 300
             },
 
             // Hexes.
@@ -292,14 +291,14 @@
             // Title and description.
             this.titleDescriptionFieldset.fieldsetexpander({
                 'change': function() {
-                    self.resizeForm();
+                    // self.resizeForm();
                 }
             });
 
             // Date information.
             this.dateInformationFieldset.fieldsetexpander({
                 'change': function() {
-                    self.resizeForm();
+                    // self.resizeForm();
                 }
             });
 
@@ -307,7 +306,7 @@
             this.dateStylesFieldset.fieldsetexpander({
                 default_status: false,
                 'change': function() {
-                    self.resizeForm();
+                    // self.resizeForm();
                 }
             });
 
@@ -315,7 +314,7 @@
             this.mapStylesFieldset.fieldsetexpander({
                 default_status: false,
                 'change': function() {
-                    self.resizeForm();
+                    // self.resizeForm();
                 }
             });
 
@@ -461,6 +460,8 @@
          */
         _showContainer: function() {
 
+            var self = this;
+
             // Display the form and zero the height.
             this.form.css('height', 0);
             this.container.css('display', 'table-cell');
@@ -469,7 +470,9 @@
             // Animate up the height.
             this.form.animate({
                 'height': this._nativeHeight
-            }, this.options.css.form_duration);
+            }, this.options.css.form_duration, function() {
+                self.form.css('height', 'auto');
+            });
 
          },
 
@@ -918,10 +921,8 @@
          * Get the native height of the form.
          */
         _measureForm: function() {
-
             this._nativeHeight = this.actions.position().top +
-                this.options.css.form_bottom_padding;
-
+                this.actions.height();
          },
 
         /*
