@@ -291,14 +291,14 @@
             // Title and description.
             this.titleDescriptionFieldset.fieldsetexpander({
                 'change': function() {
-                    // self.resizeForm();
+                    self._measureForm();
                 }
             });
 
             // Date information.
             this.dateInformationFieldset.fieldsetexpander({
                 'change': function() {
-                    // self.resizeForm();
+                    self._measureForm();
                 }
             });
 
@@ -306,7 +306,7 @@
             this.dateStylesFieldset.fieldsetexpander({
                 default_status: false,
                 'change': function() {
-                    // self.resizeForm();
+                    self._measureForm();
                 }
             });
 
@@ -314,7 +314,7 @@
             this.mapStylesFieldset.fieldsetexpander({
                 default_status: false,
                 'change': function() {
-                    // self.resizeForm();
+                    self._measureForm();
                 }
             });
 
@@ -463,16 +463,10 @@
             var self = this;
 
             // Display the form and zero the height.
-            this.form.css('height', 0);
             this.container.css('display', 'table-cell');
             this.element.css('visibility', 'visible');
 
-            // Animate up the height.
-            this.form.animate({
-                'height': this._nativeHeight
-            }, this.options.css.form_duration, function() {
-                self.form.css('height', 'auto');
-            });
+            this.form.css('height', 'auto');
 
          },
 
