@@ -29,7 +29,8 @@
             // CSS constants.
             css: {
                 default_text_size: 14,
-                form_duration: 300
+                form_duration: 300,
+                form_bottom_padding: 10
             },
 
             // Hexes.
@@ -286,20 +287,36 @@
          */
         _buildFieldsets: function() {
 
+            var self = this;
+
             // Title and description.
-            this.titleDescriptionFieldset.fieldsetexpander();
+            this.titleDescriptionFieldset.fieldsetexpander({
+                'change': function() {
+                    self.resizeForm();
+                }
+            });
 
             // Date information.
-            this.dateInformationFieldset.fieldsetexpander();
+            this.dateInformationFieldset.fieldsetexpander({
+                'change': function() {
+                    self.resizeForm();
+                }
+            });
 
             // Date styles.
             this.dateStylesFieldset.fieldsetexpander({
-                default_status: false
+                default_status: false,
+                'change': function() {
+                    self.resizeForm();
+                }
             });
 
             // Map styles.
             this.mapStylesFieldset.fieldsetexpander({
-                default_status: false
+                default_status: false,
+                'change': function() {
+                    self.resizeForm();
+                }
             });
 
         },
@@ -416,8 +433,10 @@
                 'height': this._nativeHeight
             }, this.options.css.form_duration);
 
-            // Rebuilt the gradient builder.
-            this.ambiguity.gradientbuilder('refresh');
+            // If the date styles fieldset is visible, Rebuilt the gradient builder.
+            if (this.dateStylesFieldset.fieldsetexpander('isExpanded')) {
+                this.ambiguity.gradientbuilder('refresh');
+            }
 
         },
 
@@ -446,11 +465,6 @@
             this.form.css('height', 0);
             this.container.css('display', 'table-cell');
             this.element.css('visibility', 'visible');
-
-            // Calculate the amount of vertical space available under
-            // the bottom of the item row listing.
-            var itemBottomOffset = this.item.offset().top + this.item.height();
-            var availableHeight = this._window.height() - itemBottomOffset;
 
             // Animate up the height.
             this.form.animate({
@@ -905,8 +919,8 @@
          */
         _measureForm: function() {
 
-            this._nativeHeight = this.form[0].scrollHeight;
-            this._actionsHeight = this.actions.height();
+            this._nativeHeight = this.actions.position().top +
+                this.options.css.form_bottom_padding;
 
          },
 

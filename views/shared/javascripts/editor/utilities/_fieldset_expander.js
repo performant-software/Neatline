@@ -51,26 +51,9 @@
             // Trackers.
             this._expanded = this.options.default_status;
 
-            // Construct the arrow.
-            this._buildArrow();
-
             // Set starting status and bind listeners.
             this._setStartingStatus();
             this._addEvents();
-
-        },
-
-        /*
-         * Construct and position the arrow.
-         *
-         * - return void.
-         */
-        _buildArrow: function() {
-
-            // Construct.
-            this.arrow = $('<span></span>')
-                .addClass(this.options.arrow['class'])
-                .css('position', 'absolute');
 
         },
 
@@ -137,6 +120,7 @@
                 display: 'none'
             });
 
+            this._trigger('change');
             this._expanded = false;
 
         },
@@ -148,11 +132,15 @@
          */
         _expandFieldset: function() {
 
+            var self = this;
+
             this.fieldset.css({
                 display: 'block'
             }).stop().animate({
                 height: this.fieldset[0].scrollHeight,
-            }, 100);
+            }, 100, function() {
+                self._trigger('change');
+            });
 
             this._expanded = true;
 
@@ -171,11 +159,29 @@
                 height: 0,
             }, 100, function() {
                 self.fieldset.css('display', 'none');
+                self._trigger('change');
             });
 
             this._expanded = false;
 
-        }
+        },
+
+
+        /*
+         * =================
+         * Public methods.
+         * =================
+         */
+
+
+        /*
+         * Emit expanded tracker.
+         *
+         * - return void.
+         */
+        isExpanded: function() {
+            return this._expanded;
+        },
 
     });
 
