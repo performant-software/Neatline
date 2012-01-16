@@ -621,13 +621,15 @@
             data['start_time'] =            this.startTime.val();
             data['end_date'] =              this.endDate.val();
             data['end_time'] =              this.endTime.val();
-            data['description'] =           this.description.val();
             data['vector_color'] =          this.vectorColor.val();
             data['vector_opacity'] =        parseInt(this.vectorOpacity.val());
             data['stroke_color'] =          this.strokeColor.val();
             data['stroke_opacity'] =        parseInt(this.strokeOpacity.val());
             data['stroke_width'] =          parseInt(this.strokeWidth.val());
             data['point_radius'] =          parseInt(this.pointRadius.val());
+
+            // Get the content of the text editor.
+            data['description'] =           this._getCLEditorContent();
 
             return data;
 
@@ -651,6 +653,13 @@
 
             return data;
 
+         },
+
+        /*
+         * Get the <body> content out of cleditor.
+         */
+        _getCLEditorContent: function(coverage) {
+            return this.description.next('iframe').contents().find('body').html();
          },
 
 
