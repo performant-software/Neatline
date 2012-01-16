@@ -271,6 +271,7 @@ tr.edit-form td {
 
 .neatline-record-edit-form form {
     padding-left: 0;
+    padding-top: 9px;
     overflow: hidden;
 }
 
@@ -347,6 +348,10 @@ span.intdragger-tooltip {
 div.item-styles {
     display: none;
     height: 0;
+}
+
+a.fieldset {
+    margin: 0 40px 0 20px;
 }
 
 

@@ -47,12 +47,20 @@
             // CLEditor.
             cleditor: {
                 width: 340,
-                height: 300,
+                height: 240,
                 controls:
                     "bold italic underline | font size " +
                     "| color removeformat | bullets numbering | outdent " +
                     "indent | alignleft center alignright justify | " +
                     "rule image link unlink | source"
+            },
+
+            // Default fieldset statuses.
+            fieldsets: {
+                title_and_description: true,
+                date: true,
+                date_styles: true,
+                map_styles: true
             }
 
         },
@@ -99,6 +107,7 @@
 
             // Preparatory routines.
             this._buildFormFunctionality();
+            this._buildFieldsets();
             this._measureForm();
 
         },
@@ -265,6 +274,15 @@
             this.textInputs.bind('keydown', function() {
                 self._trigger('formEdit');
             });
+
+        },
+
+        /*
+         * Instantiate the fieldset expanders.
+         */
+        _buildFieldsets: function() {
+
+
 
         },
 
@@ -869,7 +887,7 @@
          */
         _measureForm: function() {
 
-            this._nativeHeight = this.fieldset[0].scrollHeight;
+            this._nativeHeight = this.form[0].scrollHeight;
             this._actionsHeight = this.actions.height();
 
          },

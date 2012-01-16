@@ -75,6 +75,7 @@ function neatline_queueEditorAssets()
     queue_js('editor/utilities/_gradient_builder', 'javascripts');
     queue_js('editor/utilities/_dropdown', 'javascripts');
     queue_js('editor/utilities/_integer_dragger', 'javascripts');
+    queue_js('editor/utilities/_fieldset_expander', 'javascripts');
     queue_js('editor/_constructEditor', 'javascripts');
 
     // Extenal libraries.
