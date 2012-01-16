@@ -42,6 +42,17 @@
                 gray: '#8d8d8d',
                 red: '#ca3c3c',
                 orange: '#ffda82'
+            },
+
+            // CLEditor.
+            cleditor: {
+                width: 340,
+                height: 300,
+                controls:
+                    "bold italic underline | font size " +
+                    "| color removeformat | bullets numbering | outdent " +
+                    "indent | alignleft center alignright justify | " +
+                    "rule image link unlink | source"
             }
 
         },
@@ -86,8 +97,8 @@
             this.coverage = null;
 
             // Preparatory routines.
-            this._measureForm();
             this._buildFormFunctionality();
+            this._measureForm();
 
         },
 
@@ -99,11 +110,9 @@
             var self = this;
 
             // ** DESCRIPTION.
-            this.description.bind({
-                'mouseup': function() {
-                    self.resizeForm();
-                }
-            });
+            this.rte = this.description.cleditor(
+                this.options.cleditor
+            )[0];
 
             // ** DATE AMBIGUITY.
             this.ambiguity.gradientbuilder({
@@ -372,9 +381,7 @@
          * items are ajaxed into the browse list.
          */
         detachForm: function() {
-
             this.element.detach();
-
         },
 
 
@@ -399,11 +406,6 @@
             // the bottom of the item row listing.
             var itemBottomOffset = this.item.offset().top + this.item.height();
             var availableHeight = this._window.height() - itemBottomOffset;
-
-            // If the form fits in the space.
-            if (this._nativeHeight <= availableHeight) {
-
-            }
 
             // Animate up the height.
             this.form.animate({
@@ -517,18 +519,14 @@
          * Display the delete record button.
          */
         _showDeleteButton: function() {
-
             this.deleteButton.css('visibility', 'visible');
-
          },
 
         /*
          * Hide the delete record button.
          */
         _hideDeleteButton: function() {
-
             this.deleteButton.css('visibility', 'hidden');
-
          },
 
         /*
@@ -550,7 +548,10 @@
             this.startTime.val(this._data.start_time);
             this.endDate.val(this._data.end_date);
             this.endTime.val(this._data.end_time);
-            this.description.val(this._data.description);
+
+            // Update CLEditor.
+            this.rte.$area.val(this._data.description);
+            this.rte.updateFrame();
 
             // Reposition the draggers.
             this.ambiguity.gradientbuilder(

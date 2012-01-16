@@ -53,10 +53,11 @@ function neatline_queueEditorAssets()
     queue_css('bootstrap.xtra.min');
     queue_css('neatline-editor');
     queue_css('gradient-builder');
-    queue_css('jquery.miniColors');
     queue_css('configure-layout');
     queue_css('configure-map');
     queue_css('configure-items');
+    queue_css('jquery.miniColors');
+    queue_css('jquery.cleditor');
 
     // Application classes and controller script.
     queue_js('editor/item_browser', 'javascripts');
@@ -78,6 +79,7 @@ function neatline_queueEditorAssets()
 
     // Extenal libraries.
     queue_js('libraries/jquery.miniColors-0.1/jquery.miniColors.min', 'javascripts');
+    queue_js('libraries/CLEditor-1.3.0/jquery.cleditor.min', 'javascripts');
 
 }
 

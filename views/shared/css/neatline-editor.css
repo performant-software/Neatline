@@ -270,7 +270,7 @@ tr.edit-form td {
 }
 
 .neatline-record-edit-form form {
-    padding-left: 10px;
+    padding-left: 0;
     overflow: hidden;
 }
 
@@ -289,7 +289,7 @@ tr.edit-form td {
 
 .neatline-record-edit-form label {
     font-weight: bold;
-    font-size: 1.1em;
+    font-size: 1em;
     color: #4e4950;
 }
 
@@ -324,7 +324,7 @@ tr.edit-form td {
 }
 
 .input-xlarge, input.xlarge, textarea.xlarge, select.xlarge {
-    width: 85%;
+    width: 336px;
 }
 
 #record-delete-button {
@@ -342,6 +342,11 @@ input.color-picker {
 span.intdragger-tooltip {
     font-size: 13px;
     color: #bfbfbf;
+}
+
+div.item-styles {
+    display: none;
+    height: 0;
 }
 
 
