@@ -29,7 +29,7 @@
 
     <form class="form-stacked">
 
-        <a class="fieldset" href="">Title and Description</a>
+        <a class="fieldset title-and-description" href="">Title and Description</a>
         <fieldset>
 
             <div class="clearfix">
@@ -50,7 +50,9 @@
 
         </fieldset>
 
-        <a class="fieldset" href="">Date Information</a>
+        <hr />
+
+        <a class="fieldset date-information" href="">Date Information</a>
         <fieldset>
 
             <div class="clearfix">
@@ -77,7 +79,9 @@
 
         </fieldset>
 
-        <a class="fieldset" href="">Date Styles</a>
+        <hr />
+
+        <a class="fieldset date-styles" href="">Date Styles</a>
         <fieldset>
 
             <div class="clearfix">
@@ -100,7 +104,9 @@
 
         </fieldset>
 
-        <a class="fieldset" href="">Map Styles</a>
+        <hr />
+
+        <a class="fieldset map-styles" href="">Map Styles</a>
         <fieldset>
 
             <div class="clearfix">
@@ -182,6 +188,8 @@
             </div>
 
         </fieldset>
+
+        <hr />
 
         <fieldset>
 

@@ -26,6 +26,10 @@
 
         options: {
 
+            // The starting expansion status.
+            default_status: true,
+
+            // Parameters for the dropdown arrow.
             arrow: {
                 'class': 'fieldset-expander'
             }
@@ -42,8 +46,16 @@
             // Get markup.
             this._body =        $('body');
             this._window =      $(window);
+            this.fieldset =     this.element.next('fieldset');
 
-            // Bind listeners.
+            // Trackers.
+            this._expanded = this.options.default_status;
+
+            // Construct the arrow.
+            this._buildArrow();
+
+            // Set starting status and bind listeners.
+            this._setStartingStatus();
             this._addEvents();
 
         },
@@ -58,8 +70,20 @@
             // Construct.
             this.arrow = $('<span></span>')
                 .addClass(this.options.arrow['class'])
-                .text(this.options.arrow.text)
                 .css('position', 'absolute');
+
+        },
+
+        /*
+         * If the starting status is false, hide the fieldset.
+         *
+         * - return void.
+         */
+        _setStartingStatus: function() {
+
+            if (!this.options.default_status) {
+                this._hideFieldset();
+            }
 
         },
 
@@ -72,6 +96,25 @@
 
             var self = this;
 
+            this.element.bind({
+
+                'mousedown': function() {
+                    switch (self._expanded) {
+                        case true:
+                            self._contractFieldset();
+                        break;
+                        case false:
+                            self._expandFieldset();
+                        break;
+                    }
+                },
+
+                'click': function(e) {
+                    e.preventDefault();
+                }
+
+            });
+
         },
 
 
@@ -83,13 +126,56 @@
 
 
         /*
-         * .
+         * Disappear the fieldset.
          *
          * - return void.
          */
-        _stub: function() {
+        _hideFieldset: function() {
+
+            this.fieldset.css({
+                height: 0,
+                display: 'none'
+            });
+
+            this._expanded = false;
 
         },
+
+        /*
+         * Animate up the fieldset.
+         *
+         * - return void.
+         */
+        _expandFieldset: function() {
+
+            this.fieldset.css({
+                display: 'block'
+            }).stop().animate({
+                height: this.fieldset[0].scrollHeight,
+            }, 100);
+
+            this._expanded = true;
+
+        },
+
+        /*
+         * Animate down the fieldset.
+         *
+         * - return void.
+         */
+        _contractFieldset: function() {
+
+            var self = this;
+
+            this.fieldset.stop().animate({
+                height: 0,
+            }, 100, function() {
+                self.fieldset.css('display', 'none');
+            });
+
+            this._expanded = false;
+
+        }
 
     });
 

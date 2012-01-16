@@ -47,7 +47,7 @@
             // CLEditor.
             cleditor: {
                 width: 340,
-                height: 240,
+                height: 200,
                 controls:
                     "bold italic underline | font size " +
                     "| color removeformat | bullets numbering | outdent " +
@@ -99,6 +99,10 @@
             this.ambiguity =                this.form.find('.date-ambiguity-container');
             this.mapFocus =                 this.form.find('.map-focus');
             this.resetStyles =              this.form.find('.reset-styles');
+            this.titleDescriptionFieldset = this.form.find('a.fieldset.title-and-description');
+            this.dateInformationFieldset =  this.form.find('a.fieldset.date-information');
+            this.dateStylesFieldset =       this.form.find('a.fieldset.date-styles');
+            this.mapStylesFieldset =        this.form.find('a.fieldset.map-styles');
 
             // Trackers.
             this._db =                      TAFFY();
@@ -282,7 +286,21 @@
          */
         _buildFieldsets: function() {
 
+            // Title and description.
+            this.titleDescriptionFieldset.fieldsetexpander();
 
+            // Date information.
+            this.dateInformationFieldset.fieldsetexpander();
+
+            // Date styles.
+            this.dateStylesFieldset.fieldsetexpander({
+                default_status: false
+            });
+
+            // Map styles.
+            this.mapStylesFieldset.fieldsetexpander({
+                default_status: false
+            });
 
         },
 
