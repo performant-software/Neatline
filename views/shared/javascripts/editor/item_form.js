@@ -94,7 +94,6 @@
 
             // Trackers.
             this._db =                      TAFFY();
-            this._isEditor =                false;
             this.coverage =                 null;
 
             // Preparatory routines.
@@ -109,6 +108,11 @@
         _buildFormFunctionality: function() {
 
             var self = this;
+
+            // ** DESCRIPTION.
+            this.rte = this.description.cleditor(
+                this.options.cleditor
+            )[0];
 
             // ** DATE AMBIGUITY.
             this.ambiguity.gradientbuilder({
@@ -288,7 +292,6 @@
             this.container.append(this.element);
 
             // DOM touches.
-            this._constructEditor()
             this._showContainer();
             this._expandTitle();
             this._getFormData();
@@ -548,7 +551,7 @@
 
             // Update CLEditor.
             this.description.val(this._data.description);
-            this.rte.updateFrame();
+            this.rte.updateFrame().refresh();
 
             // Reposition the draggers.
             this.ambiguity.gradientbuilder(
@@ -647,21 +650,6 @@
             data['geocoverage'] =           coverage;
 
             return data;
-
-         },
-
-        /*
-         * Instantiate the RTE on the description field.
-         */
-        _constructEditor: function() {
-
-            if (!this._isEditor) {
-                this.rte = this.description.cleditor(
-                    this.options.cleditor
-                )[0];
-            }
-
-            this._isEditor = true;
 
          },
 
