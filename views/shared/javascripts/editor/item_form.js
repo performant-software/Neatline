@@ -93,8 +93,9 @@
             this.resetStyles =              this.form.find('.reset-styles');
 
             // Trackers.
-            this._db = TAFFY();
-            this.coverage = null;
+            this._db =                      TAFFY();
+            this._isEditor =                false;
+            this.coverage =                 null;
 
             // Preparatory routines.
             this._buildFormFunctionality();
@@ -108,11 +109,6 @@
         _buildFormFunctionality: function() {
 
             var self = this;
-
-            // ** DESCRIPTION.
-            this.rte = this.description.cleditor(
-                this.options.cleditor
-            )[0];
 
             // ** DATE AMBIGUITY.
             this.ambiguity.gradientbuilder({
@@ -292,6 +288,7 @@
             this.container.append(this.element);
 
             // DOM touches.
+            this._constructEditor()
             this._showContainer();
             this._expandTitle();
             this._getFormData();
@@ -550,7 +547,7 @@
             this.endTime.val(this._data.end_time);
 
             // Update CLEditor.
-            this.rte.$area.val(this._data.description);
+            this.description.val(this._data.description);
             this.rte.updateFrame();
 
             // Reposition the draggers.
@@ -589,6 +586,7 @@
             this.endDate.val('');
             this.endTime.val('');
             this.description.val('');
+            this.rte.updateFrame();
 
             // Reposition the draggers.
             this.ambiguity.gradientbuilder('positionMarkers', 0, 100);
@@ -649,6 +647,21 @@
             data['geocoverage'] =           coverage;
 
             return data;
+
+         },
+
+        /*
+         * Instantiate the RTE on the description field.
+         */
+        _constructEditor: function() {
+
+            if (!this._isEditor) {
+                this.rte = this.description.cleditor(
+                    this.options.cleditor
+                )[0];
+            }
+
+            this._isEditor = true;
 
          },
 
