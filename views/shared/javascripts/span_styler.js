@@ -32,8 +32,12 @@
          */
         _create: function() {
 
+            // Percentage trackers.
             this.leftPercent = null;
             this.rightPercent = null;
+
+            // Capture starting styles.
+            this.baseStyle = this.element.attr('style');
 
         },
 
@@ -116,8 +120,7 @@
         applyCss: function() {
 
             // Get the starting styling.
-            var startingStyle = this.element.attr('style');
-            var styleBase = (typeof startingStyle === 'undefined') ? '' : startingStyle;
+            var styleBase = (typeof this.baseStyle === 'undefined') ? '' : this.baseStyle;
 
             // Push the new style onto the editor block.
             this.element.attr('style', styleBase + this.css);
