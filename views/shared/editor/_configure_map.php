@@ -56,16 +56,12 @@
 <hr />
 
 <!-- Base layer picker. -->
-<!--
 <h5>Default Base Layer</h5>
 <select name="base-layer">
-    <option>Google Physical</option>
-    <option>Google Streets</option>
-    <option>Google Hybrid</option>
-    <option>Google Sattelite</option>
-    <option>OpenStreetMap</option>
+    <?php foreach ($layers as $layer): ?>
+    <option value="<?php echo $layer->id; ?>"><?php echo $layer->name; ?></option>
+    <?php endforeach; ?>
 </select>
 <hr />
--->
 
 <button class="btn icon approve save">Save</button>

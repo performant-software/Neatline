@@ -31,7 +31,8 @@
     <span class="top-bar-title"><?php echo $neatline->name; ?></span>
 
     <?php echo $this->partial('editor/_topbar_navigation.php', array(
-        'neatline' => $neatline
+        'neatline' => $neatline,
+        'layers' => $layers
     )); ?>
 
 </div>

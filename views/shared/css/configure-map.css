@@ -33,3 +33,7 @@
     color: #4E4950;
     line-height: 24px;
 }
+
+#configure-map select {
+    width: 150px;
+}

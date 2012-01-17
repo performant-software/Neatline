@@ -40,7 +40,8 @@
         <a href="" id="configure-map-button" class="dropdown-toggle">Map Settings</a>
         <div id="configure-map" class="dropdown-content">
             <?php echo $this->partial('editor/_configure_map.php', array(
-                'neatline' => $neatline
+                'neatline' => $neatline,
+                'layers' => $layers
             )); ?>
         </div>
     </li>
