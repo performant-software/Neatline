@@ -38,8 +38,6 @@
          */
         _create: function() {
 
-            console.log('create');
-
             // Getters.
             this._window =                  $(window);
             this._body =                    $('body');
@@ -91,8 +89,6 @@
          * Fill window.
          */
         _position: function() {
-
-            console.log('test');
 
             this.element.css({
                 'height': this._windowHeight - this._topbarHeight,
