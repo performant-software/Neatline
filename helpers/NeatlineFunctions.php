@@ -767,3 +767,40 @@ function neatline_getItemMetadata($item, $elementSet, $elementName)
     return $text;
 
 }
+
+/**
+ * Install base layers set.
+ *
+ * @return void.
+ */
+function neatline_installBaseLayers()
+{
+
+    $_db = get_db();
+
+    // OpenStreetMaps.
+    $osm = new NeatlineBaseLayer;
+    $osm->name = 'OpenStreetMap';
+    $osm->save();
+
+    // Google physical.
+    $gphy = new NeatlineBaseLayer;
+    $gphy->name = 'Google Physical';
+    $gphy->save();
+
+    // Google streets.
+    $gstr = new NeatlineBaseLayer;
+    $gstr->name = 'Google Streets';
+    $gstr->save();
+
+    // Google hybrid.
+    $ghyb = new NeatlineBaseLayer;
+    $ghyb->name = 'Google Hybrid';
+    $ghyb->save();
+
+    // Google sattelite.
+    $gsat = new NeatlineBaseLayer;
+    $gsat->name = 'Google Satellite';
+    $gsat->save();
+
+}

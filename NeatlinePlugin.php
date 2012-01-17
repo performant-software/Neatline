@@ -161,6 +161,9 @@ class NeatlinePlugin
         set_option('stroke_width', 4);
         set_option('point_radius', 6);
 
+        // Install base layers.
+        neatline_installBaseLayers();
+
         // Create demo exhibit.
         if (get_plugin_ini('Neatline', 'testing_mode') == 'false') {
             neatline_createDemoExhibit();
