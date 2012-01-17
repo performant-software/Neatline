@@ -24,14 +24,26 @@
 
     $.widget('neatline.fullscreenpositioner', {
 
+        options: {
+
+            // Markup hooks.
+            markup: {
+                topbar: '#topbar'
+            }
+
+        },
+
         /*
          * Measure window, position, and listen for resizes.
          */
         _create: function() {
 
+            console.log('create');
+
             // Getters.
             this._window =                  $(window);
             this._body =                    $('body');
+            this.topbar =                   $(this.options.markup.topbar);
 
             // Measure the window, listen for resize, position.
             this._measureWindow();
@@ -45,8 +57,9 @@
          */
         _measureWindow: function() {
 
-            this._windowHeight = this._window.height();
-            this._windowWidth = this._window.width();
+            this._windowHeight =            this._window.height();
+            this._windowWidth =             this._window.width();
+            this._topbarHeight =            this.topbar.height();
 
         },
 
@@ -79,9 +92,12 @@
          */
         _position: function() {
 
+            console.log('test');
+
             this.element.css({
-                'height': this._windowHeight,
-                'width': this._windowWidth
+                'height': this._windowHeight - this._topbarHeight,
+                'width': this._windowWidth,
+                'top': this._topbarHeight
             });
 
         }
@@ -89,3 +105,4 @@
     });
 
 })( jQuery );
+

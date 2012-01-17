@@ -228,11 +228,19 @@ class NeatlinePlugin
 
         // Queue static assets for public-facing Neatline exhibits.
         if ($request->getModuleName() == 'neatline' &&
-            $request->getControllerName() == 'public' &&
-            $request->getActionName() == 'show') {
+            $request->getControllerName() == 'public') {
 
-              neatline_queueNeatlineAssets();
-              neatline_queuePublicAssets();
+            $actionName = $request->getActionName();
+
+            if ($actionName == 'show') {
+                neatline_queueNeatlineAssets();
+                neatline_queueInThemeAssets();
+            }
+
+            else if ($actionName == 'fullscreen') {
+                neatline_queueNeatlineAssets();
+                neatline_queueFullscreenAssets();
+            }
 
         }
 

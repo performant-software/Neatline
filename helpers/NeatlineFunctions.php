@@ -89,11 +89,11 @@ function neatline_queueEditorAssets()
  *
  * @return void.
  */
-function neatline_queuePublicAssets()
+function neatline_queueInThemeAssets()
 {
 
     // Neatline runner.
-    queue_js('_constructNeatline', 'javascripts');
+    queue_js('_constructInThemeNeatline', 'javascripts');
 
     // Public-specific CSS additions.
     queue_css('neatline-public');
@@ -106,6 +106,23 @@ function neatline_queuePublicAssets()
     $headScript->appendScript('','text/javascript', array('src' => $openlayers));
     $headScript->appendScript('', 'text/javascript', array('src' => $simile));
 
+}
+
+/**
+ * Include the fullscreen stylesheet.
+ *
+ * @return void.
+ */
+function neatline_queueFullscreenAssets()
+{
+
+    // Neatline runner.
+    queue_js('_constructFullscreenNeatline', 'javascripts');
+    queue_js('utilities/_fullscreen_positioner', 'javascripts');
+
+    // Fullscreen-specific CSS.
+    queue_css('bootstrap.xtra.min');
+    queue_css('neatline-fullscreen');
 }
 
 /**
