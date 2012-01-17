@@ -58,9 +58,12 @@ class Neatline_FixturesController extends Omeka_Controller_Action
         // Supress the default Zend layout-sniffer functionality.
         $this->_helper->viewRenderer->setNoRender(true);
 
+        // Get mock exhibit.
+        $neatline = $this->_neatlinesTable->find(1);
+
         // Render.
         echo $this->view->partial('neatline/_neatline.php', array(
-            'neatline' =>           array(),
+            'neatline' =>           $neatline,
             'public' =>             true,
             'dataSources' =>        array(),
         ));

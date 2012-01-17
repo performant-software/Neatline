@@ -54,6 +54,14 @@ class Neatline_FixtureBuilderTest extends Omeka_Test_AppTestCase
     public function testBuildNeatlineMarkup()
     {
 
+        // Mock exhibit.
+        $exhibit = new NeatlineExhibit;
+        $exhibit->name = 'Test Exhibit';
+        $exhibit->is_map = 1;
+        $exhibit->is_timeline = 1;
+        $exhibit->is_items = 1;
+        $exhibit->save();
+
         $fixture = fopen(self::$path_to_fixtures . 'neatline-base.html', 'w');
 
         $this->dispatch('neatline/fixtures/neatlinebase');

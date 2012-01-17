@@ -525,7 +525,8 @@
                 eventListeners: {
 
                     featurehighlighted: function(e) {
-                        self._showTitleTip(e);
+                        var record = self._db({ layerid: e.feature.layer.id }).first();
+                        self._showTitleTip(record);
                     },
 
                     featureunhighlighted: function(e) {
@@ -1034,6 +1035,9 @@
             // Rerender the layer to manifest the change.
             record.layer.redraw();
 
+            // Show the title tip.
+            this._showTitleTip(record);
+
         },
 
         /*
@@ -1060,6 +1064,9 @@
 
             // Rerender the layer to manifest the change.
             record.layer.redraw();
+
+            // Hide the title tip.
+            this._hideTitleTip();
 
         },
 
@@ -1154,10 +1161,7 @@
         /*
          * Render title tooltip.
          */
-        _showTitleTip: function(e) {
-
-            // Get the item record.
-            var record = this._db({ layerid: e.feature.layer.id }).first();
+        _showTitleTip: function(record) {
 
             // Construct the tip.
             this.titleTip = $('<div class="title-tip"></div>').
@@ -1170,7 +1174,8 @@
         /*
          * Remove title tooltip.
          */
-        _hideTitleTip: function(e) {
+        _hideTitleTip: function() {
+            console.log(this.titleTip);
             this.titleTip.remove();
         }
 
