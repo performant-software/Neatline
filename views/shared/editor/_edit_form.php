@@ -30,7 +30,7 @@
     <form class="form-stacked">
 
         <a class="fieldset title-and-description" href="">
-            <div class="fieldset-arrow-down"></div>Title and Description
+            <div class="fieldset-arrow-down"></div>Text Description
         </a>
         <fieldset>
 
@@ -55,7 +55,7 @@
         <hr />
 
         <a class="fieldset date-information" href="">
-            <div class="fieldset-arrow-down"></div>Date Information
+            <div class="fieldset-arrow-down"></div>Start and End Dates
         </a>
         <fieldset>
 
@@ -86,7 +86,7 @@
         <hr />
 
         <a class="fieldset date-styles" href="">
-            <div class="fieldset-arrow-right"></div>Timeline Styles
+            <div class="fieldset-arrow-down"></div>Timeline Styles
         </a>
         <fieldset>
 
@@ -113,7 +113,7 @@
         <hr />
 
         <a class="fieldset map-styles" href="">
-            <div class="fieldset-arrow-right"></div>Map Styles
+            <div class="fieldset-arrow-down"></div>Map Styles
         </a>
         <fieldset>
 

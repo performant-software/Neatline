@@ -47,20 +47,12 @@
             // CLEditor.
             cleditor: {
                 width: 340,
-                height: 200,
+                height: 240,
                 controls:
                     "bold italic underline | font size " +
                     "| color removeformat | bullets numbering | outdent " +
                     "indent | alignleft center alignright justify | " +
                     "rule image link unlink | source"
-            },
-
-            // Default fieldset statuses.
-            fieldsets: {
-                title_and_description: true,
-                date: true,
-                date_styles: true,
-                map_styles: true
             }
 
         },
@@ -290,6 +282,7 @@
 
             // Title and description.
             this.titleDescriptionFieldset.fieldsetexpander({
+                // default_status: false,
                 'change': function() {
                     self._measureForm();
                 }
@@ -297,6 +290,7 @@
 
             // Date information.
             this.dateInformationFieldset.fieldsetexpander({
+                // default_status: false,
                 'change': function() {
                     self._measureForm();
                 }

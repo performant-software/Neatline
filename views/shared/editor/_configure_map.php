@@ -57,9 +57,12 @@
 
 <!-- Base layer picker. -->
 <!--
-<h5>Base Layer</h5>
+<h5>Default Base Layer</h5>
 <select name="base-layer">
-    <option>[none]</option>
+    <option>Google Physical</option>
+    <option>Google Streets</option>
+    <option>Google Hybrid</option>
+    <option>Google Sattelite</option>
     <option>OpenStreetMap</option>
 </select>
 <hr />

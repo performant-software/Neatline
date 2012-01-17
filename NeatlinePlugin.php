@@ -144,6 +144,15 @@ class NeatlinePlugin
 
         $this->_db->query($sql);
 
+        // Layers table.
+        $sql = "CREATE TABLE IF NOT EXISTS `{$this->_db->prefix}neatline_base_layers` (
+                `id`                    int(10) unsigned not null auto_increment,
+                `name`                  tinytext COLLATE utf8_unicode_ci NULL,
+                 PRIMARY KEY (`id`)
+               ) ENGINE=innodb DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
+
+        $this->_db->query($sql);
+
         // Set system styling defaults.
         set_option('vector_color', '#5033de');
         set_option('stroke_color', '#1e2ee6');

@@ -371,12 +371,12 @@ a.fieldset {
 .fieldset-arrow-right {
     position: relative;
     float: left;
-    margin: 4px 5px 0 0;
+    margin: 3px 5px 0 0;
     width: 0;
     height: 0;
-    border-left: 4px solid transparent;
-    border-right: 4px solid transparent;
-    border-top: 4px solid #000;
+    border-top: 4px solid transparent;
+    border-bottom: 4px solid transparent;
+    border-left: 4px solid #000;
 }
 
 
