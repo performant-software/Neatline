@@ -512,7 +512,31 @@
             // If there are existing click and highlight controls, destroy them.
             this._removeControls();
 
+            // Highlight controller.
+            this.highlightControl = new OpenLayers.Control.SelectFeature(this._currentVectorLayers, {
+
+                hover: true,
+                highlightOnly: true,
+                renderIntent: 'temporary',
+
+                eventListeners: {
+
+                    featurehighlighted: function(e) {
+                        console.log(e);
+                    },
+
+                    featureunhighlighted: function(e) {
+                        console.log(e);
+                    }
+
+                }
+
+            });
+
+            // Click controller.
             this.clickControl = new OpenLayers.Control.SelectFeature(this._currentVectorLayers, {
+
+                clickout: true,
 
                 onSelect: function(feature) {
 
@@ -541,6 +565,10 @@
 
             });
 
+            // Add and activate the highlight control.
+            this.map.addControl(this.highlightControl);
+            this.highlightControl.activate();
+
             // Add and activate the click control.
             this.map.addControl(this.clickControl);
             this.clickControl.activate();
@@ -568,6 +596,12 @@
                 this.map.removeControl(this.clickControl);
                 this.clickControl.destroy();
                 delete this.clickControl;
+            }
+
+            if (this.highlightControl !== undefined) {
+                this.map.removeControl(this.highlightControl);
+                this.highlightControl.destroy();
+                delete this.highlightControl;
             }
 
         },
@@ -822,6 +856,14 @@
                     strokeOpacity: strokeOpacity,
                     pointRadius: pointRadius,
                     strokeWidth: strokeWidth
+                }),
+                'temporary': new OpenLayers.Style({
+                    fillColor: fillColor,
+                    fillOpacity: fillOpacity,
+                    strokeColor: this.options.colors.highlight_red,
+                    strokeOpacity: strokeOpacity,
+                    pointRadius: pointRadius,
+                    strokeWidth: strokeWidth
                 })
             });
 
@@ -857,7 +899,7 @@
             );
 
             // OpenStreetMap.
-            this.osm = new OpenLayers.Layer.OSM()
+            this.osm = new OpenLayers.Layer.OSM();
 
             return [this.gphy, this.gmap, this.ghyb, this.gsat, this.osm];
 
