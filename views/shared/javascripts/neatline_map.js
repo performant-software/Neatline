@@ -65,6 +65,9 @@
 
             var self = this;
 
+            // Getters.
+            this._window = $(window);
+
             // Trackers and buckets.
             this._db =                      TAFFY();
             this._currentVectorLayers =     [];
@@ -522,11 +525,11 @@
                 eventListeners: {
 
                     featurehighlighted: function(e) {
-                        console.log(e);
+                        self._showTitleTip(e);
                     },
 
                     featureunhighlighted: function(e) {
-                        console.log(e);
+                        self._hideTitleTip();
                     }
 
                 }
@@ -1146,6 +1149,29 @@
          */
         _popUpEditControls: function() {
             $('.' + this.options.markup.toolbar_class).css('opacity', 1);
+        },
+
+        /*
+         * Render title tooltip.
+         */
+        _showTitleTip: function(e) {
+
+            // Get the item record.
+            var record = this._db({ layerid: e.feature.layer.id }).first();
+
+            // Construct the tip.
+            this.titleTip = $('<div class="title-tip"></div>').
+                text(record.data.title);
+
+            this.element.append(this.titleTip);
+
+        },
+
+        /*
+         * Remove title tooltip.
+         */
+        _hideTitleTip: function(e) {
+            this.titleTip.remove();
         }
 
     });
