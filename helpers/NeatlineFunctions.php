@@ -52,6 +52,7 @@ function neatline_queueEditorAssets()
     // CSS.
     queue_css('bootstrap.xtra.min');
     queue_css('neatline-editor');
+    queue_css('neatline-fullscreen');
     queue_css('gradient-builder');
     queue_css('configure-layout');
     queue_css('configure-map');
@@ -100,11 +101,13 @@ function neatline_queueInThemeAssets()
 
     $openlayers = 'http://openlayers.org/api/OpenLayers.js';
     $simile = 'http://api.simile-widgets.org/timeline/2.3.1/timeline-api.js?bundle=true';
+    $google = 'http://maps.google.com/maps/api/js?v=3.5&sensor=false';
 
     // API calls.
     $headScript = __v()->headScript();
-    $headScript->appendScript('','text/javascript', array('src' => $openlayers));
+    $headScript->appendScript('', 'text/javascript', array('src' => $openlayers));
     $headScript->appendScript('', 'text/javascript', array('src' => $simile));
+    $headScript->appendScript('', 'text/javascript', array('src' => $google));
 
 }
 
