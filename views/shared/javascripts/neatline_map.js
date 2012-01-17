@@ -1175,7 +1175,6 @@
          * Remove title tooltip.
          */
         _hideTitleTip: function() {
-            console.log(this.titleTip);
             this.titleTip.remove();
         }
 
