@@ -157,6 +157,7 @@
             data['stroke_opacity'] =        parseInt(this.strokeOpacity.val());
             data['stroke_width'] =          parseInt(this.strokeWidth.val());
             data['point_radius'] =          parseInt(this.pointRadius.val());
+            data['base_layer'] =            parseInt(this.baseLayer.val());
 
             return data;
 

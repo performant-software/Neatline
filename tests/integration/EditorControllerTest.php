@@ -2066,7 +2066,8 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
                 'stroke_color' => '#ffffff',
                 'stroke_opacity' => 5,
                 'stroke_width' => 5,
-                'point_radius' => 5
+                'point_radius' => 5,
+                'base_layer' => 1
             )
         );
 
@@ -2087,6 +2088,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->assertEquals($exhibit->default_stroke_width, 5);
         $this->assertNotNull($exhibit->default_point_radius);
         $this->assertEquals($exhibit->default_point_radius, 5);
+        $this->assertEquals($exhibit->default_base_layer, 1);
 
     }
 
@@ -2111,7 +2113,8 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
                 'stroke_color' => get_option('stroke_color'),
                 'stroke_opacity' => get_option('stroke_opacity'),
                 'stroke_width' => get_option('stroke_width'),
-                'point_radius' => get_option('point_radius')
+                'point_radius' => get_option('point_radius'),
+                'base_layer' => 1
             )
         );
 
@@ -2126,6 +2129,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->assertNull($exhibit->default_stroke_opacity);
         $this->assertNull($exhibit->default_stroke_width);
         $this->assertNull($exhibit->default_point_radius);
+        $this->assertEquals($exhibit->default_base_layer, 1);
 
     }
 

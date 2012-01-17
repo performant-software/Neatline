@@ -75,6 +75,7 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
         $exhibit->default_stroke_color =        '#ffffff';
         $exhibit->default_stroke_width =        3;
         $exhibit->default_point_radius =        3;
+        $exhibit->default_base_layer =          1;
         $exhibit->save();
 
         // Re-get the exhibit object.
@@ -103,6 +104,7 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
         $this->assertEquals($exhibit->default_stroke_color, '#ffffff');
         $this->assertEquals($exhibit->default_stroke_width, 3);
         $this->assertEquals($exhibit->default_point_radius, 3);
+        $this->assertEquals($exhibit->default_base_layer, 1);
 
     }
 
@@ -666,6 +668,53 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
         // Check count.
         $this->assertEquals($neatline1->getNumberOfRecords(), 3);
         $this->assertEquals($neatline2->getNumberOfRecords(), 1);
+
+    }
+
+    /**
+     * getBaseLayer() should return the default exhibit when there is
+     * no local default setting.
+     *
+     * @return void.
+     */
+    public function testGetBaseLayerWithNoLocalSetting()
+    {
+
+        // Create exhibit.
+        $neatline = $this->helper->_createNeatline();
+
+        // Get base layer.
+        $baseLayer = $neatline->getBaseLayer();
+
+        // Check identity.
+        $this->assertEquals($baseLayer->name, 'Google Physical');
+
+    }
+
+    /**
+     * getBaseLayer() should return the locally set default when there
+     * is a non-null value for the base layer key.
+     *
+     * @return void.
+     */
+    public function testGetBaseLayerWithLocalSetting()
+    {
+
+        // Create exhibit and layer.
+        $neatline = $this->helper->_createNeatline();
+        $layer = new NeatlineBaseLayer;
+        $layer->name = 'Test Layer';
+        $layer->save();
+
+        // Set key.
+        $neatline->default_base_layer = $layer->id;
+        $neatline->save();
+
+        // Get base layer.
+        $baseLayer = $neatline->getBaseLayer();
+
+        // Check identity.
+        $this->assertEquals($baseLayer->name, 'Test Layer');
 
     }
 

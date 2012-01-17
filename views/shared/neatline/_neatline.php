@@ -53,6 +53,7 @@
     var Neatline = <?php echo json_encode($neatline); ?>;
         Neatline.dataSources = <?php echo json_encode($dataSources); ?>;
         Neatline.public = <?php echo json_encode($public); ?>;
+        Neatline.baseLayer = <?php echo json_encode($neatline->getBaseLayer()); ?>;
 
     // Map parameters.
     <?php if (isset($map)): ?>

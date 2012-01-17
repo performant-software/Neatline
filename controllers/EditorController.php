@@ -524,6 +524,7 @@ class Neatline_EditorController extends Omeka_Controller_Action
         $strokeOpacity =            (int) $_post['stroke_opacity'];
         $strokeWidth =              (int) $_post['stroke_width'];
         $pointRadius =              (int) $_post['point_radius'];
+        $baseLayer =                (int) $_post['base_layer'];
 
         // Do save.
         $exhibit = $this->_neatlinesTable->find($exhibitId);
@@ -533,6 +534,7 @@ class Neatline_EditorController extends Omeka_Controller_Action
         $exhibit->setStyle('stroke_opacity', $strokeOpacity);
         $exhibit->setStyle('stroke_width', $strokeWidth);
         $exhibit->setStyle('point_radius', $pointRadius);
+        $exhibit->default_base_layer = $baseLayer;
         $exhibit->save();
 
     }

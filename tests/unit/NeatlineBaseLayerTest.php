@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
 
 /**
- * Table class for Neatline base layers.
+ * Base layer row tests.
  *
  * PHP version 5
  *
@@ -24,9 +24,46 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache 2 License
  */
 
-class NeatlineBaseLayersTable extends Omeka_Db_Table
+class Neatline_NeatlineBaseLayerTest extends Omeka_Test_AppTestCase
 {
 
+    /**
+     * Instantiate the helper class, install the plugins, get the database.
+     *
+     * @return void.
+     */
+    public function setUp()
+    {
 
+        parent::setUp();
+        $this->helper = new Neatline_Test_AppTestCase;
+        $this->helper->setUpPlugin();
+        $this->db = get_db();
+        $this->_layersTable = $this->db->getTable('NeatlineBaseLayer');
+
+    }
+
+    /**
+     * Test get and set on columns.
+     *
+     * @return void.
+     */
+    public function testAttributeAccess()
+    {
+
+        // Create a record.
+        $layer = new NeatlineBaseLayer();
+
+        // Set.
+        $layer->name = 'name';
+        $layer->save();
+
+        // Re-get the exhibit object.
+        $layer = $this->_layersTable->find($layer->id);
+
+        // Get.
+        $this->assertEquals($layer->name, 'name');
+
+    }
 
 }

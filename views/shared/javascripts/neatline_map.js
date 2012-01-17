@@ -86,7 +86,7 @@
 
             // Construct OSM.
             else {
-                this._instantiateOSMMap();
+                this._instantiateRealGeographyMap();
             }
 
             // Construct the editing manager.
@@ -189,9 +189,9 @@
         },
 
         /*
-         * Initialize an OpenStreetMap-based map.
+         * Initialize a map with real-geography base-layer.
          */
-        _instantiateOSMMap: function() {
+        _instantiateRealGeographyMap: function() {
 
             // Set OL global attributes.
             OpenLayers.IMAGE_RELOAD_ATTEMTPS = 3;
@@ -238,26 +238,11 @@
             this.map = new OpenLayers.Map('map', options);
 
             // Construct the base layers.
-            var gphy = new OpenLayers.Layer.Google(
-                "Google Physical",
-                {type: google.maps.MapTypeId.TERRAIN}
-            );
-            var gmap = new OpenLayers.Layer.Google(
-                "Google Streets",
-                {numZoomLevels: 20}
-            );
-            var ghyb = new OpenLayers.Layer.Google(
-                "Google Hybrid",
-                {type: google.maps.MapTypeId.HYBRID, numZoomLevels: 20}
-            );
-            var gsat = new OpenLayers.Layer.Google(
-                "Google Satellite",
-                {type: google.maps.MapTypeId.SATELLITE, numZoomLevels: 22}
-            );
-            var osm = new OpenLayers.Layer.OSM()
+            var layers = this._getBaseLayers();
 
-            // Push the base layer onto the map.
-            this.map.addLayers([gphy, gmap, ghyb, gsat, osm]);
+            // Push the base layers onto the map, set default.
+            this.map.addLayers(layers);
+            this._setDefaultLayer();
 
             // Google.v3 uses EPSG:900913 as projection, so we have to
             // transform our coordinates
@@ -839,6 +824,74 @@
                     strokeWidth: strokeWidth
                 })
             });
+
+        },
+
+        /*
+         * Construct the base layer objects, set default.
+         */
+        _getBaseLayers: function() {
+
+            // Google physical.
+            this.gphy = new OpenLayers.Layer.Google(
+                "Google Physical",
+                {type: google.maps.MapTypeId.TERRAIN}
+            );
+
+            // Google streets.
+            this.gmap = new OpenLayers.Layer.Google(
+                "Google Streets",
+                {numZoomLevels: 20}
+            );
+
+            // Google hybrid.
+            this.ghyb = new OpenLayers.Layer.Google(
+                "Google Hybrid",
+                {type: google.maps.MapTypeId.HYBRID, numZoomLevels: 20}
+            );
+
+            // Google sattelite.
+            this.gsat = new OpenLayers.Layer.Google(
+                "Google Satellite",
+                {type: google.maps.MapTypeId.SATELLITE, numZoomLevels: 22}
+            );
+
+            // OpenStreetMap.
+            this.osm = new OpenLayers.Layer.OSM()
+
+            return [this.gphy, this.gmap, this.ghyb, this.gsat, this.osm];
+
+        },
+
+        /*
+         * Set the default base layer.
+         */
+        _setDefaultLayer: function() {
+
+            // Set default.
+            switch (Neatline.baseLayer.name) {
+
+                case 'Google Physical':
+                    this.map.setBaseLayer(this.ghpy);
+                break;
+
+                case 'Google Streets':
+                    this.map.setBaseLayer(this.gmap);
+                break;
+
+                case 'Google Hybrid':
+                    this.map.setBaseLayer(this.ghyb);
+                break;
+
+                case 'Google Satellite':
+                    this.map.setBaseLayer(this.gsat);
+                break;
+
+                case 'OpenStreetMap':
+                    this.map.setBaseLayer(this.osm);
+                break;
+
+            }
 
         },
 

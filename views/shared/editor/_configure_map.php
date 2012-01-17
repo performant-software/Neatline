@@ -59,7 +59,9 @@
 <h5>Default Base Layer</h5>
 <select name="base-layer">
     <?php foreach ($layers as $layer): ?>
-    <option value="<?php echo $layer->id; ?>"><?php echo $layer->name; ?></option>
+    <option value="<?php echo $layer->id; ?>" <?php if ($neatline->getBaseLayer()->id == $layer->id) { echo 'selected="selected"'; } ?>>
+        <?php echo $layer->name; ?>
+    </option>
     <?php endforeach; ?>
 </select>
 <hr />

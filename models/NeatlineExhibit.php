@@ -65,6 +65,7 @@ class NeatlineExhibit extends Omeka_record
     public $default_stroke_opacity;
     public $default_stroke_width;
     public $default_point_radius;
+    public $default_base_layer;
 
     /**
      * Valid style attribute names.
@@ -331,6 +332,31 @@ class NeatlineExhibit extends Omeka_record
         $records = $_recordsTable->getActiveRecordsByExhibit($this);
 
         return ($records) ? count($records) : 0;
+
+    }
+
+    /**
+     * Get the base layer record.
+     *
+     * @return Omeka_record The record.
+     */
+    public function getBaseLayer()
+    {
+
+        // Get the data record table and query for active records.
+        $_layersTable = $this->getTable('NeatlineBaseLayer');
+
+        // If exhibit value is null, get and return default.
+        if (is_null($this->default_base_layer)) {
+            return $_layersTable->fetchObject(
+                $_layersTable->getSelect()->where('name = "Google Physical"')
+            );
+        }
+
+        // If exhibit value is set, return the setting.
+        else {
+            return $_layersTable->find($this->default_base_layer);
+        }
 
     }
 

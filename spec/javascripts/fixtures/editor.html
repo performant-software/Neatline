@@ -57,14 +57,20 @@
 <hr />
 
 <!-- Base layer picker. -->
-<!--
-<h5>Base Layer</h5>
+<h5>Default Base Layer</h5>
 <select name="base-layer">
-    <option>[none]</option>
-    <option>OpenStreetMap</option>
-</select>
+        <option value="1" >
+        OpenStreetMap    </option>
+        <option value="2" selected="selected">
+        Google Physical    </option>
+        <option value="3" >
+        Google Streets    </option>
+        <option value="4" >
+        Google Hybrid    </option>
+        <option value="5" >
+        Google Satellite    </option>
+    </select>
 <hr />
--->
 
 <button class="btn icon approve save">Save</button>
         </div>
@@ -244,9 +250,10 @@ to store the current viewport settings as the public defaults.</p>
 
     <form class="form-stacked">
 
+        <a class="fieldset title-and-description" href="">
+            <div class="fieldset-arrow-down"></div>Text Description
+        </a>
         <fieldset>
-
-            <div id="edit-form-inputs" class="inputs">
 
             <div class="clearfix">
                 <label for="title">Title</label>
@@ -264,13 +271,22 @@ to store the current viewport settings as the public defaults.</p>
                 </div>
             </div>
 
+        </fieldset>
+
+        <hr />
+
+        <a class="fieldset date-information" href="">
+            <div class="fieldset-arrow-down"></div>Start and End Dates
+        </a>
+        <fieldset>
+
             <div class="clearfix">
                 <label>Start Date</label>
                 <div class="input">
                     <div class="inline-inputs">
-                        <input class="medium" name="start-date-date" type="text" placeholder="Date" />
-                        <input class="mini" name="start-date-time" type="text" placeholder="Time" />
-                        <span class="help-inline">Enter the date (or start date) of the item.</span>
+                        <input class="medium" name="start-date-date" type="text" placeholder="Start Date" />
+                        <input class="mini" name="start-date-time" type="text" placeholder="Start Time" />
+                        <span class="help-inline">Enter the date (or start date, if there is an interval).</span>
                     </div>
                 </div>
             </div>
@@ -279,12 +295,21 @@ to store the current viewport settings as the public defaults.</p>
                 <label>End Date</label>
                 <div class="input">
                     <div class="inline-inputs">
-                        <input class="medium" name="end-date-date" type="text" placeholder="Date" />
-                        <input class="mini" name="end-date-time" type="text" placeholder="Time" />
+                        <input class="medium" name="end-date-date" type="text" placeholder="End Date" />
+                        <input class="mini" name="end-date-time" type="text" placeholder="End Time" />
                         <span class="help-inline">Enter an ending date, if applicable.</span>
                     </div>
                 </div>
             </div>
+
+        </fieldset>
+
+        <hr />
+
+        <a class="fieldset date-styles" href="">
+            <div class="fieldset-arrow-down"></div>Timeline Styles
+        </a>
+        <fieldset>
 
             <div class="clearfix">
                 <label>Date Ambiguity</label>
@@ -303,6 +328,15 @@ to store the current viewport settings as the public defaults.</p>
                     </div>
                 </div>
             </div>
+
+        </fieldset>
+
+        <hr />
+
+        <a class="fieldset map-styles" href="">
+            <div class="fieldset-arrow-down"></div>Map Styles
+        </a>
+        <fieldset>
 
             <div class="clearfix">
                 <label>Shape Color</label>
@@ -382,7 +416,11 @@ to store the current viewport settings as the public defaults.</p>
                 </div>
             </div>
 
-            </div>
+        </fieldset>
+
+        <hr />
+
+        <fieldset>
 
             <div id="edit-form-actions" class="actions">
                 <input type="submit" class="btn primary" value="Save">
@@ -432,7 +470,7 @@ to store the current viewport settings as the public defaults.</p>
 <script type="text/javascript">
 
     // Exhibit parameters.
-    var Neatline = {"added":"2012-01-15 16:51:52","modified":"2012-01-15 16:51:52","name":"Test Exhibit","map_id":null,"image_id":null,"top_element":null,"items_h_pos":null,"items_v_pos":null,"items_height":null,"is_map":1,"is_timeline":1,"is_items":1,"default_map_bounds":null,"default_map_zoom":null,"default_focus_date":null,"default_vector_color":null,"default_vector_opacity":null,"default_stroke_color":null,"default_stroke_opacity":null,"default_stroke_width":null,"default_point_radius":null,"id":1};
+    var Neatline = {"added":"2012-01-17 09:00:18","modified":"2012-01-17 09:00:18","name":"Test Exhibit","map_id":null,"image_id":null,"top_element":null,"items_h_pos":null,"items_v_pos":null,"items_height":null,"is_map":1,"is_timeline":1,"is_items":1,"default_map_bounds":null,"default_map_zoom":null,"default_focus_date":null,"default_vector_color":null,"default_vector_opacity":null,"default_stroke_color":null,"default_stroke_opacity":null,"default_stroke_width":null,"default_point_radius":null,"default_base_layer":null,"id":1};
         Neatline.dataSources = {"timeline":"http:\/\/\/Users\/davidmcclure\/pear\/bin\/neatline-exhibits\/1\/data\/simile","map":"http:\/\/\/Users\/davidmcclure\/pear\/bin\/neatline-exhibits\/1\/data\/openlayers","undated":"http:\/\/\/Users\/davidmcclure\/pear\/bin\/neatline-exhibits\/1\/data\/udi"};
         Neatline.public = false;
 

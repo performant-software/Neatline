@@ -43,6 +43,7 @@ class Neatline_FixturesController extends Omeka_Controller_Action
         $this->_mapsTable =         $this->getTable('NeatlineMapsMap');
         $this->_timelinesTable =    $this->getTable('NeatlineTimeTimeline');
         $this->_statusesTable =     $this->getTable('NeatlineRecordStatus');
+        $this->_layersTable =       $this->getTable('NeatlineBaseLayer');
 
     }
 
@@ -82,10 +83,11 @@ class Neatline_FixturesController extends Omeka_Controller_Action
         $map =                      $neatline->getMap();
         $image =                    $neatline->getImage();
 
-        // Get Omeka taxonomies.
+        // Get Omeka taxonomies and layers.
         $collections =              $this->getTable('Collection')->findAll();
         $tags =                     $this->getTable('Tag')->findAll();
         $types =                    $this->getTable('ItemType')->findAll();
+        $layers =                   $this->_layersTable->findAll();
 
         // Construct the data array for the exhibit.
         $neatlineData = array(
@@ -105,7 +107,8 @@ class Neatline_FixturesController extends Omeka_Controller_Action
          */
 
         echo $this->view->partial('editor/_topbar.php', array(
-            'neatline' => $neatline
+            'neatline' => $neatline,
+            'layers' => $layers
         ));
 
         echo $this->view->partial('editor/_item_browser.php', array(
