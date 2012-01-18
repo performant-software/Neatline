@@ -282,7 +282,7 @@
 
             // Title and description.
             this.titleDescriptionFieldset.fieldsetexpander({
-                // default_status: false,
+                default_status: false,
                 'change': function() {
                     self._measureForm();
                 }
@@ -290,7 +290,7 @@
 
             // Date information.
             this.dateInformationFieldset.fieldsetexpander({
-                // default_status: false,
+                default_status: false,
                 'change': function() {
                     self._measureForm();
                 }
