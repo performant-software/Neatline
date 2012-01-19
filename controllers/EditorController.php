@@ -222,7 +222,7 @@ class Neatline_EditorController extends Omeka_Controller_Action
         // Get parameters from the ajax request.
         $itemId =                   $_post['item_id'];
         $recordId =                 $_post['record_id'];
-        $exhibitId =               $_post['exhibit_id'];
+        $exhibitId =                $_post['exhibit_id'];
         $title =                    $_post['title'];
         $description =              $_post['description'];
         $startDate =                $_post['start_date'];
