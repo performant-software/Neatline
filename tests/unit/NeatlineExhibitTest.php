@@ -527,36 +527,6 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
     }
 
     /**
-     * setStyle() should not save a row value if the passed value is the
-     * same as the system default.
-     *
-     * @return void.
-     */
-    public function testSetStyleWithNonNovelDuplicateValues()
-    {
-
-        // Create a record.
-        $exhibit = $this->helper->_createNeatline();
-
-        // Set.
-        $this->assertFalse($exhibit->setStyle('vector_color', get_option('vector_color')));
-        $this->assertFalse($exhibit->setStyle('vector_opacity', get_option('vector_opacity')));
-        $this->assertFalse($exhibit->setStyle('stroke_color', get_option('stroke_color')));
-        $this->assertFalse($exhibit->setStyle('stroke_opacity', get_option('stroke_opacity')));
-        $this->assertFalse($exhibit->setStyle('stroke_width', get_option('stroke_width')));
-        $this->assertFalse($exhibit->setStyle('point_radius', get_option('point_radius')));
-
-        // Check.
-        $this->assertNull($exhibit->default_vector_color);
-        $this->assertNull($exhibit->default_vector_opacity);
-        $this->assertNull($exhibit->default_stroke_color);
-        $this->assertNull($exhibit->default_stroke_opacity);
-        $this->assertNull($exhibit->default_stroke_width);
-        $this->assertNull($exhibit->default_point_radius);
-
-    }
-
-    /**
      * getStyle() should return the exhibit-specific default when one exists.
      *
      * @return void.

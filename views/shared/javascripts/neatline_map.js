@@ -659,6 +659,9 @@
                 this.map.addLayer(this._currentEditLayer);
                 this._currentEditLayer.setMap(this.map);
 
+                // Set default style.
+                this.setDefaultStyle();
+
                 // Add the database record.
                 self._db.insert({
                     itemid: itemid,

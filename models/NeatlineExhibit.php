@@ -246,13 +246,8 @@ class NeatlineExhibit extends Omeka_record
             return false;
         }
 
-        // If the value does not match the system default.
-        else if ($value != get_option($style)) {
-            $this['default_' . $style] = $value;
-            return true;
-        }
-
-        return false;
+        $this['default_' . $style] = $value;
+        return true;
 
     }
 

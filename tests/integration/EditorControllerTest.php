@@ -2093,47 +2093,6 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
     }
 
     /**
-     * The /mapsettings route should not commit row-level style defaults on
-     * the exhibit record when they match the system defaults.
-     *
-     * @return void.
-     */
-    public function testMapSettingsWithNonNovelValues()
-    {
-
-        // Create an exhibit.
-        $exhibit = $this->helper->_createNeatline();
-
-        // Form the POST.
-        $this->request->setMethod('POST')
-            ->setPost(array(
-                'exhibit_id' => $exhibit->id,
-                'vector_color' => get_option('vector_color'),
-                'vector_opacity' => get_option('vector_opacity'),
-                'stroke_color' => get_option('stroke_color'),
-                'stroke_opacity' => get_option('stroke_opacity'),
-                'stroke_width' => get_option('stroke_width'),
-                'point_radius' => get_option('point_radius'),
-                'base_layer' => 1
-            )
-        );
-
-        // Hit the route, re-get the record.
-        $this->dispatch('neatline-exhibits/editor/ajax/mapsettings');
-        $exhibit = $this->_exhibitsTable->find($exhibit->id);
-
-        // Check.
-        $this->assertNull($exhibit->default_vector_color);
-        $this->assertNull($exhibit->default_vector_opacity);
-        $this->assertNull($exhibit->default_stroke_color);
-        $this->assertNull($exhibit->default_stroke_opacity);
-        $this->assertNull($exhibit->default_stroke_width);
-        $this->assertNull($exhibit->default_point_radius);
-        $this->assertEquals($exhibit->default_base_layer, 1);
-
-    }
-
-    /**
      * The /resetstyles action should null all style attributes for a record.
      *
      * @return void.
