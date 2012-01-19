@@ -543,6 +543,7 @@
 
                 clickout: true,
 
+                // When the feature is selected.
                 onSelect: function(feature) {
 
                     // Get the record for the layer.
@@ -560,12 +561,20 @@
 
                 },
 
+                // When the feature is unselected.
                 onUnselect: function(feature) {
 
                     if (self.modifyFeatures != undefined) {
                         self.modifyFeatures.unselectFeature(feature);
                     }
 
+                },
+
+                // Listen for mouseleave.
+                callbacks: {
+                    out: function() {
+                        self._hideTitleTip();
+                    }
                 }
 
             });
