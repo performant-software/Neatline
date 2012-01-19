@@ -282,7 +282,7 @@
 
             // Title and description.
             this.titleDescriptionFieldset.fieldsetexpander({
-                default_status: false,
+                // default_status: false,
                 'change': function() {
                     self._measureForm();
                 }

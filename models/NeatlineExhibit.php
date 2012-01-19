@@ -411,4 +411,14 @@ class NeatlineExhibit extends Omeka_record
 
     }
 
+    /**
+     * Call native save.
+     *
+     * @return void.
+     */
+    public function parentSave()
+    {
+        parent::save();
+    }
+
 }

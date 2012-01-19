@@ -67,7 +67,7 @@ table th, table td {
 }
 
 div.title-tip {
-    display: block;
+    display: none;
     position: absolute;
     bottom: 30px;
     right: 20px;

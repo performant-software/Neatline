@@ -98,6 +98,7 @@
             }
 
             // Start-up.
+            this._constructTitleTip();
             this.loadData();
 
         },
@@ -1159,15 +1160,26 @@
         },
 
         /*
+         * Build title tooltip.
+         */
+        _constructTitleTip: function(record) {
+
+            // Construct the tip.
+            this.titleTip = $('<div class="title-tip"></div>');
+            this.element.append(this.titleTip);
+
+        },
+
+        /*
          * Render title tooltip.
          */
         _showTitleTip: function(record) {
 
-            // Construct the tip.
-            this.titleTip = $('<div class="title-tip"></div>').
-                text(record.data.title);
+            // Populate title.
+            this.titleTip.text(record.data.title);
 
-            this.element.append(this.titleTip);
+            // Show.
+            this.titleTip.css('display', 'block');
 
         },
 
@@ -1175,7 +1187,7 @@
          * Remove title tooltip.
          */
         _hideTitleTip: function() {
-            this.titleTip.remove();
+            this.titleTip.css('display', 'none');
         }
 
     });
