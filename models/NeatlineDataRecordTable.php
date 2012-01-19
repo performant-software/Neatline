@@ -150,8 +150,9 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
     {
 
         $records = $this->fetchObjects(
-            $this->getSelect()->where('exhibit_id = ' . $neatline->id .
-                ' AND item_id IS NULL')
+            $this->getSelect()
+                 ->where('exhibit_id = ' . $neatline->id . ' AND item_id IS NULL')
+                 ->order('display_order ASC')
         );
 
         return $records ? $records : false;
