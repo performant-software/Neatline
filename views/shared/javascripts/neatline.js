@@ -64,18 +64,37 @@
             this.instantiated_undated =     false;
             this._getMajorBlock();
 
-            // Instantiate the positioning manager.
+            // Position divs and run viewport managers.
+            this._instantiatePositioner();
+            this.positionDivs();
+            this.instantiateBlocks();
+
+        },
+
+        /*
+         * Construct the positioner and define callbacks.
+         *
+         * - return void.
+         */
+        _instantiatePositioner: function() {
+
+            var self = this;
+
             this.element.positioner({
+
+                // Pass viewport markup.
                 markup: {
                     map:                    '#' + this.options.markup.map_id,
                     timeline:               '#' + this.options.markup.timeline_id,
                     items:                  '#' + this.options.markup.items_id
-                }
-            });
+                },
 
-            // Position divs and run viewport managers.
-            this.positionDivs();
-            this.instantiateBlocks();
+                // On new layout, rerender viewports.
+                layoutChange: function() {
+                    self.timeline.neatlinetimeline('refresh');
+                }
+
+            });
 
         },
 

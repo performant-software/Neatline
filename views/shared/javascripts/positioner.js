@@ -1190,7 +1190,7 @@
             // Ineject.
             this.element.append(this.v_drag, this.h_drag);
 
-            // Bind listeners.
+            // Bind listeners to horizontal drag handle.
             this.h_drag.bind({
 
                 'mousedown': function(e) {
@@ -1251,6 +1251,9 @@
                             self.__enableSelection();
                             self._window.unbind('mousemove');
 
+                            // Trigger new layout.
+                            self._trigger('layoutChange');
+
                         }
 
                     });
@@ -1259,7 +1262,7 @@
 
             });
 
-            // Bind listeners.
+            // Bind listeners to vertical drag handle.
             this.v_drag.bind({
 
                 'mousedown': function(e) {
@@ -1307,6 +1310,9 @@
                             self.__unhighlightVerticalHandle();
                             self.__enableSelection();
                             self._window.unbind('mousemove');
+
+                            // Trigger new layout.
+                            self._trigger('layoutChange');
 
                         }
 

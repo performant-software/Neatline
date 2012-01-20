@@ -22,8 +22,6 @@
 
 (function($, undefined) {
 
-    'use strict';
-
     $.widget('neatline.neatlinetimeline', {
 
         options: {
@@ -35,6 +33,9 @@
 
         },
 
+        /*
+         * - return void.
+         */
         _create: function() {
 
             // Getters.
@@ -52,6 +53,11 @@
 
         },
 
+        /*
+         * Construct the timeline.
+         *
+         * - return void.
+         */
         _instantiateSimile: function() {
 
             var self = this;
@@ -102,6 +108,11 @@
 
         },
 
+        /*
+         * Listen for event clicks.
+         *
+         * - return void.
+         */
         _catchClickCallbacks: function() {
 
             var self = this;
@@ -118,6 +129,11 @@
 
         },
 
+        /*
+         * Fetch and render events.
+         *
+         * - return void.
+         */
         loadData: function() {
 
             var self = this;
@@ -153,7 +169,16 @@
 
                     // Instantiate the span styler on the tape.
                     tape.spanstyler();
-                    tape.spanstyler('constructCss', evt._obj.color, evt._obj.left_ambiguity, evt._obj.right_ambiguity);
+
+                    // Build CSS.
+                    tape.spanstyler(
+                        'constructCss',
+                        evt._obj.color,
+                        evt._obj.left_ambiguity,
+                        evt._obj.right_ambiguity
+                    );
+
+                    // Manifest.
                     tape.spanstyler('applyCss');
 
                     // Push the id-element association into the tracker object.
@@ -165,14 +190,17 @@
 
         },
 
+        /*
+         * Focus on the listing for the record with the passed id.
+         *
+         * - param integer id:      The id of the record.
+         *
+         * - return void.
+         */
         zoomToEvent: function(id) {
 
             var self = this;
 
-            // Walk the events registry and try to find an event for the item id.
-            // This is inefficient, but Simile does not have a utility to get an event
-            // by a given attribute. If a match is found, scroll the timeline to
-            // the start location of the event.
             $.each(this.timeline._bands[0]._eventSource._events._idToEvent, function(i, event) {
 
                 if (event._eventID == id) {
@@ -183,12 +211,25 @@
 
         },
 
+        /*
+         * Get the current center date.
+         *
+         * - return string date             The center date:
+         */
         getCenterForSave: function() {
-
             return this.timeline.getBand(0).getCenterVisibleDate().toString();
-
         },
 
+        /*
+         * Set the date ambiguity for the record with the passed id.
+         *
+         * - param integer id:              The id of the record.
+         * - param string color:            The color to set.
+         * - param integer leftPercent:     The left percentage threshold.
+         * - param integer rightPercent:    The right percentage threshold.
+         *
+         * - return void.
+         */
         setDateAmbiguity: function(id, color, leftPercent, rightPercent) {
 
             var self = this;
@@ -210,6 +251,14 @@
 
         },
 
+        /*
+         * Set the color for the record with the passed id.
+         *
+         * - param integer id:      The id of the record.
+         * - param string color:    The color to set.
+         *
+         * - return void.
+         */
         setDateColor: function(id, color) {
 
             var self = this;
@@ -229,6 +278,13 @@
 
             }
 
+        },
+
+        /*
+         * Rerender the timeline.
+         */
+        refresh: function() {
+            this.timeline.layout()
         }
 
     });
