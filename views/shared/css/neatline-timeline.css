@@ -6,7 +6,7 @@
 .neatlinetime-timeline {
     height: 250px;
     margin-bottom: 20px;
-    font-family:Verdana, sans-serif;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     border-top: 1px solid rgba(90,80,100, 0.5);
     border-bottom: 1px solid rgba(90,80,100, 0.5);
 }
