@@ -40,7 +40,7 @@
             // Positioning constants.
             constants: {
                 h_percent:      30,
-                v_percent:      60
+                v_percent:      80
             },
 
             // Starting parameters.
