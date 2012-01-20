@@ -71,7 +71,7 @@
                 Timeline.createBandInfo({
                     eventSource:    this.eventSource,
                     width:          "100%",
-                    intervalUnit:   Timeline.DateTime.MONTH,
+                    intervalUnit:   Timeline.DateTime.YEAR,
                     intervalPixels: 100,
                     zoomIndex:      10,
                     zoomSteps:      new Array(
