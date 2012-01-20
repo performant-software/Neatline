@@ -1197,7 +1197,6 @@
 
                     // Register cursor starting coordinates.
                     var startX = e.pageX;
-                    var startY = e.pageY;
 
                     // Highlight the handle, disable selection.
                     self.__highlightHorizontalHandle();
@@ -1249,6 +1248,63 @@
                             // Re-render, hide handle, and strip move listener.
                             self.refresh();
                             self.__unhighlightHorizontalHandle();
+                            self.__enableSelection();
+                            self._window.unbind('mousemove');
+
+                        }
+
+                    });
+
+                }
+
+            });
+
+            // Bind listeners.
+            this.v_drag.bind({
+
+                'mousedown': function(e) {
+
+                    // Register cursor starting coordinates.
+                    var startY = e.pageY;
+
+                    // Highlight the handle, disable selection.
+                    self.__highlightVerticalHandle();
+                    self.__disableSelection();
+
+                    // Listen for mousemove.
+                    self._window.bind({
+
+                        // Manifest drag.
+                        'mousemove': function(e) {
+
+                            // Get new x offset and max width.
+                            var newY = self.dragPositions.v.top - (startY - e.pageY);
+                            var maxHeight = self.height - self.options.constants.drag_width
+
+                            // If left of viewport.
+                            if (newY < 0) {
+                                newY = 0;
+                            }
+
+                            // If right of container.
+                            else if (newY > maxHeight) {
+                                newY = maxHeight;
+                            }
+
+                            // Manifest.
+                            self.v_drag.css('top', newY);
+
+                            // Get new v_percent.
+                            self.options.constants.v_percent = (newY / self.height) * 100;
+
+                        },
+
+                        // Apply new dimensions.
+                        'mouseup': function() {
+
+                            // Re-render, hide handle, and strip move listener.
+                            self.refresh();
+                            self.__unhighlightVerticalHandle();
                             self.__enableSelection();
                             self._window.unbind('mousemove');
 
@@ -1339,6 +1395,36 @@
          * - return void.
          */
         __unhighlightHorizontalHandle: function() {
+
+            // Highlight the handle.
+            this.h_drag.css(
+                'border-left',
+                ''
+            );
+
+        },
+
+        /*
+         * Pop the color of the handle during the drag.
+         *
+         * - return void.
+         */
+        __highlightVerticalHandle: function() {
+
+            // Highlight the handle.
+            this.h_drag.css(
+                'border-top',
+                '1px dashed ' + this.options.colors.drag_active
+            );
+
+        },
+
+        /*
+         * Hide the handle.
+         *
+         * - return void.
+         */
+        __unhighlightVerticalHandle: function() {
 
             // Highlight the handle.
             this.h_drag.css(

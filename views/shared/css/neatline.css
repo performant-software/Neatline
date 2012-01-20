@@ -78,6 +78,12 @@ table th, table td {
     cursor: ns-resize;
 }
 
+.v-drag:hover {
+    border-top: 1px dashed #7e3434;
+}
+
+
+
 
 /* Map */
 
