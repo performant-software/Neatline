@@ -47,7 +47,7 @@
 
             // Positioning constants.
             constants: {
-                h_percent:      30,
+                h_percent:      24,
                 v_percent:      80,
                 drag_width:      5
             },

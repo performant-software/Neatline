@@ -157,9 +157,9 @@ div.title-tip {
 #items-container li.item-title {
     font-size: 14px;
     color: #202020;
-    padding: 10px 20px;
+    padding: 8px 20px;
     line-height 180px;
-    border-bottom: 1px solid #F0F0F0;
+    border-bottom: 1px dotted #cdcdcd;
     font-weight: bold;
 }
 
