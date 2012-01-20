@@ -70,24 +70,51 @@
 
                 Timeline.createBandInfo({
                     eventSource:    this.eventSource,
-                    width:          "80%",
-                    intervalUnit:   Timeline.DateTime.YEAR,
-                    intervalPixels: 50
+                    width:          "100%",
+                    intervalUnit:   Timeline.DateTime.MONTH,
+                    intervalPixels: 100,
+                    zoomIndex:      10,
+                    zoomSteps:      new Array(
+                      {pixelsPerInterval: 280,  unit: Timeline.DateTime.HOUR},
+                      {pixelsPerInterval: 140,  unit: Timeline.DateTime.HOUR},
+                      {pixelsPerInterval:  70,  unit: Timeline.DateTime.HOUR},
+                      {pixelsPerInterval:  35,  unit: Timeline.DateTime.HOUR},
+                      {pixelsPerInterval: 400,  unit: Timeline.DateTime.DAY},
+                      {pixelsPerInterval: 200,  unit: Timeline.DateTime.DAY},
+                      {pixelsPerInterval: 100,  unit: Timeline.DateTime.DAY},
+                      {pixelsPerInterval:  50,  unit: Timeline.DateTime.DAY},
+                      {pixelsPerInterval: 400,  unit: Timeline.DateTime.MONTH},
+                      {pixelsPerInterval: 200,  unit: Timeline.DateTime.MONTH},
+                      {pixelsPerInterval: 100,  unit: Timeline.DateTime.MONTH},
+                      {pixelsPerInterval:  50,  unit: Timeline.DateTime.MONTH},
+                      {pixelsPerInterval: 400,  unit: Timeline.DateTime.YEAR},
+                      {pixelsPerInterval: 200,  unit: Timeline.DateTime.YEAR},
+                      {pixelsPerInterval: 100,  unit: Timeline.DateTime.YEAR},
+                      {pixelsPerInterval:  50,  unit: Timeline.DateTime.YEAR},
+                      {pixelsPerInterval: 400,  unit: Timeline.DateTime.DECADE},
+                      {pixelsPerInterval: 200,  unit: Timeline.DateTime.DECADE},
+                      {pixelsPerInterval: 100,  unit: Timeline.DateTime.DECADE},
+                      {pixelsPerInterval:  50,  unit: Timeline.DateTime.DECADE},
+                      {pixelsPerInterval: 400,  unit: Timeline.DateTime.CENTURY},
+                      {pixelsPerInterval: 200,  unit: Timeline.DateTime.CENTURY},
+                      {pixelsPerInterval: 100,  unit: Timeline.DateTime.CENTURY},
+                      {pixelsPerInterval:  50,  unit: Timeline.DateTime.CENTURY}
+                    )
                 }),
 
-                Timeline.createBandInfo({
-                    overview:       true,
-                    eventSource:    this.eventSource,
-                    width:          "20%",
-                    intervalUnit:   Timeline.DateTime.YEAR,
-                    intervalPixels: 30
-                })
+                // Timeline.createBandInfo({
+                //     overview:       true,
+                //     eventSource:    this.eventSource,
+                //     width:          "20%",
+                //     intervalUnit:   Timeline.DateTime.DECADE,
+                //     intervalPixels: 200
+                // })
 
             ];
 
             // Sync bands.
-            this.bandInfos[1].syncWith = 0;
-            this.bandInfos[1].highlight = true;
+            // this.bandInfos[1].syncWith = 0;
+            // this.bandInfos[1].highlight = true;
 
             // Instantiate and load JSON.
             var container = document.getElementById('timeline');
