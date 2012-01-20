@@ -71,8 +71,8 @@
                 Timeline.createBandInfo({
                     eventSource:    this.eventSource,
                     width:          "80%",
-                    intervalUnit:   Timeline.DateTime.MONTH,
-                    intervalPixels: 100
+                    intervalUnit:   Timeline.DateTime.YEAR,
+                    intervalPixels: 50
                 }),
 
                 Timeline.createBandInfo({
@@ -80,7 +80,7 @@
                     eventSource:    this.eventSource,
                     width:          "20%",
                     intervalUnit:   Timeline.DateTime.YEAR,
-                    intervalPixels: 200
+                    intervalPixels: 30
                 })
 
             ];
