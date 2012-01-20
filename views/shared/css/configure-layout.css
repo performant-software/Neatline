@@ -99,6 +99,7 @@ div.draggable {
 
 span.drag-tag {
     position: relative;
+    display: block;
     color: #835a98;
 }
 
