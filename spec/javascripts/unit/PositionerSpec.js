@@ -19,6 +19,7 @@ describe('Positioner', function() {
 
             // Roll up the positioner.
             neatline.positioner({
+                drag_width: 4,
                 markup: {
                     map:            '#map',
                     timeline:       '#timeline',
@@ -222,6 +223,22 @@ describe('Positioner', function() {
                         }
                     });
 
+                    var dragPos = neatline.positioner('getAttr', 'dragPositions');
+
+                    expect(dragPos.h).toEqual({
+                        height:     40,
+                        width:      4,
+                        top:        60,
+                        left:       30
+                    });
+
+                    expect(dragPos.v).toEqual({
+                        height:     4,
+                        width:      100,
+                        top:        60,
+                        left:       0
+                    });
+
                 });
 
                 it('CASE: ITEMS left, top, partial', function() {
@@ -255,6 +272,22 @@ describe('Positioner', function() {
                             top:    0,
                             left:   0
                         }
+                    });
+
+                    var dragPos = neatline.positioner('getAttr', 'dragPositions');
+
+                    expect(dragPos.h).toEqual({
+                        height:     60,
+                        width:      4,
+                        top:        0,
+                        left:       30
+                    });
+
+                    expect(dragPos.v).toEqual({
+                        height:     4,
+                        width:      100,
+                        top:        60,
+                        left:       0
                     });
 
                 });
@@ -292,6 +325,22 @@ describe('Positioner', function() {
                         }
                     });
 
+                    var dragPos = neatline.positioner('getAttr', 'dragPositions');
+
+                    expect(dragPos.h).toEqual({
+                        height:     100,
+                        width:      4,
+                        top:        0,
+                        left:       30
+                    });
+
+                    expect(dragPos.v).toEqual({
+                        height:     4,
+                        width:      70,
+                        top:        60,
+                        left:       30
+                    });
+
                 });
 
                 it('CASE: ITEMS left, full; with v_pos BOTTOM', function() {
@@ -325,6 +374,22 @@ describe('Positioner', function() {
                             top:    0,
                             left:   0
                         }
+                    });
+
+                    var dragPos = neatline.positioner('getAttr', 'dragPositions');
+
+                    expect(dragPos.h).toEqual({
+                        height:     100,
+                        width:      4,
+                        top:        0,
+                        left:       30
+                    });
+
+                    expect(dragPos.v).toEqual({
+                        height:     4,
+                        width:      70,
+                        top:        60,
+                        left:       30
                     });
 
                 });
@@ -362,6 +427,22 @@ describe('Positioner', function() {
                         }
                     });
 
+                    var dragPos = neatline.positioner('getAttr', 'dragPositions');
+
+                    expect(dragPos.h).toEqual({
+                        height:     40,
+                        width:      4,
+                        top:        60,
+                        left:       70
+                    });
+
+                    expect(dragPos.v).toEqual({
+                        height:     4,
+                        width:      100,
+                        top:        60,
+                        left:       0
+                    });
+
                 });
 
                 it('CASE: ITEMS right, top, partial', function() {
@@ -395,6 +476,22 @@ describe('Positioner', function() {
                             top:    0,
                             left:   70
                         }
+                    });
+
+                    var dragPos = neatline.positioner('getAttr', 'dragPositions');
+
+                    expect(dragPos.h).toEqual({
+                        height:     60,
+                        width:      4,
+                        top:        0,
+                        left:       70
+                    });
+
+                    expect(dragPos.v).toEqual({
+                        height:     4,
+                        width:      100,
+                        top:        60,
+                        left:       0
                     });
 
                 });
@@ -432,6 +529,22 @@ describe('Positioner', function() {
                         }
                     });
 
+                    var dragPos = neatline.positioner('getAttr', 'dragPositions');
+
+                    expect(dragPos.h).toEqual({
+                        height:     100,
+                        width:      4,
+                        top:        0,
+                        left:       70
+                    });
+
+                    expect(dragPos.v).toEqual({
+                        height:     4,
+                        width:      70,
+                        top:        60,
+                        left:       0
+                    });
+
                 });
 
                 it('CASE: ITEMS right, full; with v_pos BOTTOM', function() {
@@ -465,6 +578,22 @@ describe('Positioner', function() {
                             top:    0,
                             left:   70
                         }
+                    });
+
+                    var dragPos = neatline.positioner('getAttr', 'dragPositions');
+
+                    expect(dragPos.h).toEqual({
+                        height:     100,
+                        width:      4,
+                        top:        0,
+                        left:       70
+                    });
+
+                    expect(dragPos.v).toEqual({
+                        height:     4,
+                        width:      70,
+                        top:        60,
+                        left:       0
                     });
 
                 });
@@ -506,6 +635,22 @@ describe('Positioner', function() {
                         }
                     });
 
+                    var dragPos = neatline.positioner('getAttr', 'dragPositions');
+
+                    expect(dragPos.h).toEqual({
+                        height:     40,
+                        width:      4,
+                        top:        60,
+                        left:       30
+                    });
+
+                    expect(dragPos.v).toEqual({
+                        height:     4,
+                        width:      100,
+                        top:        60,
+                        left:       0
+                    });
+
                 });
 
                 it('CASE: ITEMS left, top, partial', function() {
@@ -539,6 +684,22 @@ describe('Positioner', function() {
                             top:    0,
                             left:   0
                         }
+                    });
+
+                    var dragPos = neatline.positioner('getAttr', 'dragPositions');
+
+                    expect(dragPos.h).toEqual({
+                        height:     60,
+                        width:      4,
+                        top:        0,
+                        left:       30
+                    });
+
+                    expect(dragPos.v).toEqual({
+                        height:     4,
+                        width:      100,
+                        top:        60,
+                        left:       0
                     });
 
                 });
@@ -576,6 +737,22 @@ describe('Positioner', function() {
                         }
                     });
 
+                    var dragPos = neatline.positioner('getAttr', 'dragPositions');
+
+                    expect(dragPos.h).toEqual({
+                        height:     100,
+                        width:      4,
+                        top:        0,
+                        left:       30
+                    });
+
+                    expect(dragPos.v).toEqual({
+                        height:     4,
+                        width:      70,
+                        top:        60,
+                        left:       30
+                    });
+
                 });
 
                 it('CASE: ITEMS left, full; with v_pos BOTTOM', function() {
@@ -609,6 +786,22 @@ describe('Positioner', function() {
                             top:    0,
                             left:   0
                         }
+                    });
+
+                    var dragPos = neatline.positioner('getAttr', 'dragPositions');
+
+                    expect(dragPos.h).toEqual({
+                        height:     100,
+                        width:      4,
+                        top:        0,
+                        left:       30
+                    });
+
+                    expect(dragPos.v).toEqual({
+                        height:     4,
+                        width:      70,
+                        top:        60,
+                        left:       30
                     });
 
                 });
@@ -646,6 +839,22 @@ describe('Positioner', function() {
                         }
                     });
 
+                    var dragPos = neatline.positioner('getAttr', 'dragPositions');
+
+                    expect(dragPos.h).toEqual({
+                        height:     40,
+                        width:      4,
+                        top:        60,
+                        left:       70
+                    });
+
+                    expect(dragPos.v).toEqual({
+                        height:     4,
+                        width:      100,
+                        top:        60,
+                        left:       0
+                    });
+
                 });
 
                 it('CASE: ITEMS right, top, partial', function() {
@@ -680,6 +889,24 @@ describe('Positioner', function() {
                             left:   70
                         }
                     });
+
+                    var dragPos = neatline.positioner('getAttr', 'dragPositions');
+
+                    expect(dragPos.h).toEqual({
+                        height:     60,
+                        width:      4,
+                        top:        0,
+                        left:       70
+                    });
+
+                    expect(dragPos.v).toEqual({
+                        height:     4,
+                        width:      100,
+                        top:        60,
+                        left:       0
+                    });
+
+
 
                 });
 
@@ -716,6 +943,22 @@ describe('Positioner', function() {
                         }
                     });
 
+                    var dragPos = neatline.positioner('getAttr', 'dragPositions');
+
+                    expect(dragPos.h).toEqual({
+                        height:     100,
+                        width:      4,
+                        top:        0,
+                        left:       70
+                    });
+
+                    expect(dragPos.v).toEqual({
+                        height:     4,
+                        width:      70,
+                        top:        60,
+                        left:       0
+                    });
+
                 });
 
                 it('CASE: ITEMS right, full; with v_pos BOTTOM', function() {
@@ -749,6 +992,22 @@ describe('Positioner', function() {
                             top:    0,
                             left:   70
                         }
+                    });
+
+                    var dragPos = neatline.positioner('getAttr', 'dragPositions');
+
+                    expect(dragPos.h).toEqual({
+                        height:     100,
+                        width:      4,
+                        top:        0,
+                        left:       70
+                    });
+
+                    expect(dragPos.v).toEqual({
+                        height:     4,
+                        width:      70,
+                        top:        60,
+                        left:       0
                     });
 
                 });
@@ -792,6 +1051,15 @@ describe('Positioner', function() {
                     }
                 });
 
+                var dragPos = neatline.positioner('getAttr', 'dragPositions');
+
+                expect(dragPos.h).toEqual({
+                    height:     100,
+                    width:      4,
+                    top:        0,
+                    left:       70
+                });
+
             });
 
             it('CASE: MAP right, ITEMS left', function() {
@@ -825,6 +1093,15 @@ describe('Positioner', function() {
                         top:    0,
                         left:   0
                     }
+                });
+
+                var dragPos = neatline.positioner('getAttr', 'dragPositions');
+
+                expect(dragPos.h).toEqual({
+                    height:     100,
+                    width:      4,
+                    top:        0,
+                    left:       70
                 });
 
             });
@@ -866,6 +1143,15 @@ describe('Positioner', function() {
                     }
                 });
 
+                var dragPos = neatline.positioner('getAttr', 'dragPositions');
+
+                expect(dragPos.h).toEqual({
+                    height:     100,
+                    width:      4,
+                    top:        0,
+                    left:       70
+                });
+
             });
 
             it('CASE: MAP right, ITEMS left', function() {
@@ -899,6 +1185,15 @@ describe('Positioner', function() {
                         top:    0,
                         left:   0
                     }
+                });
+
+                var dragPos = neatline.positioner('getAttr', 'dragPositions');
+
+                expect(dragPos.h).toEqual({
+                    height:     100,
+                    width:      4,
+                    top:        0,
+                    left:       70
                 });
 
             });
@@ -940,6 +1235,15 @@ describe('Positioner', function() {
                     }
                 });
 
+                var dragPos = neatline.positioner('getAttr', 'dragPositions');
+
+                expect(dragPos.v).toEqual({
+                    height:     4,
+                    width:      100,
+                    top:        60,
+                    left:       0
+                });
+
             });
 
             it('CASE: MAP bottom, TIMELINE top', function() {
@@ -973,6 +1277,15 @@ describe('Positioner', function() {
                         top:    null,
                         left:   null
                     }
+                });
+
+                var dragPos = neatline.positioner('getAttr', 'dragPositions');
+
+                expect(dragPos.v).toEqual({
+                    height:     4,
+                    width:      100,
+                    top:        60,
+                    left:       0
                 });
 
             });

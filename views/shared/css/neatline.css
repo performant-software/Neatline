@@ -59,6 +59,21 @@ table th, table td {
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#67467d', endColorstr='#77488b', GradientType=0);
 }
 
+.h-drag, .v-drag {
+    position: absolute;
+    display: none;
+    background: red;
+    z-index: 9999;
+}
+
+.h-drag {
+    cursor: col-resize;
+}
+
+.v-drag {
+    cursor: ns-resize;
+}
+
 
 /* Map */
 

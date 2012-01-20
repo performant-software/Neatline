@@ -30,6 +30,10 @@
 
         options: {
 
+            // True if the positiner should construct and manage width
+            // and height dragging.
+            draggable: true,
+
             // Markup hooks.
             markup: {
                 map:            '#map',
@@ -40,7 +44,8 @@
             // Positioning constants.
             constants: {
                 h_percent:      30,
-                v_percent:      80
+                v_percent:      80,
+                drag_width:      4
             },
 
             // Starting parameters.
@@ -75,6 +80,10 @@
             this._items_h_pos =         this.options.positions.items_h_pos;  // 'right' or 'left'.
             this._items_height =        this.options.positions.items_height; // 'full' or 'partial'.
 
+            // Shell trackers for drag handles.
+            this.v_drag = null;
+            this.h_drag = null;
+
             // Dimensions tracker.
             this.positions = {
 
@@ -100,6 +109,11 @@
                 }
 
             };
+
+            // Build the draggers.
+            if (this.options.draggable) {
+                this._constructDraggers();
+            }
 
             // By default, measure on creation.
             this.measure();
@@ -218,6 +232,21 @@
 
                         };
 
+                        this.dragPositions = {
+                            h: {
+                                height:     this.minorHeight,
+                                width:      this.options.constants.drag_width,
+                                top:        this.majorHeight,
+                                left:       this.minorWidth
+                            },
+                            v: {
+                                height:     this.options.constants.drag_width,
+                                width:      this.width,
+                                top:        this.majorHeight,
+                                left:       0
+                            }
+                        };
+
                     }
 
                     // ITEMS left, top, partial:
@@ -250,6 +279,21 @@
 
                         };
 
+                        this.dragPositions = {
+                            h: {
+                                height:     this.majorHeight,
+                                width:      this.options.constants.drag_width,
+                                top:        0,
+                                left:       this.minorWidth
+                            },
+                            v: {
+                                height:     this.options.constants.drag_width,
+                                width:      this.width,
+                                top:        this.majorHeight,
+                                left:       0
+                            }
+                        };
+
                     }
 
                     // ITEMS left, full:
@@ -279,6 +323,21 @@
                                 left:   0
                             }
 
+                        };
+
+                        this.dragPositions = {
+                            h: {
+                                height:     this.height,
+                                width:      this.options.constants.drag_width,
+                                top:        0,
+                                left:       this.minorWidth
+                            },
+                            v: {
+                                height:     this.options.constants.drag_width,
+                                width:      this.majorWidth,
+                                top:        this.majorHeight,
+                                left:       this.minorWidth
+                            }
                         };
 
                     }
@@ -313,6 +372,21 @@
 
                         };
 
+                        this.dragPositions = {
+                            h: {
+                                height:     this.minorHeight,
+                                width:      this.options.constants.drag_width,
+                                top:        this.majorHeight,
+                                left:       this.majorWidth
+                            },
+                            v: {
+                                height:     this.options.constants.drag_width,
+                                width:      this.width,
+                                top:        this.majorHeight,
+                                left:       0
+                            }
+                        };
+
                     }
 
                     // ITEMS right, top, partial:
@@ -345,6 +419,21 @@
 
                         };
 
+                        this.dragPositions = {
+                            h: {
+                                height:     this.majorHeight,
+                                width:      this.options.constants.drag_width,
+                                top:        0,
+                                left:       this.majorWidth
+                            },
+                            v: {
+                                height:     this.options.constants.drag_width,
+                                width:      this.width,
+                                top:        this.majorHeight,
+                                left:       0
+                            }
+                        };
+
                     }
 
                     // ITEMS right, full:
@@ -374,6 +463,21 @@
                                 left:   this.majorWidth
                             }
 
+                        };
+
+                        this.dragPositions = {
+                            h: {
+                                height:     this.height,
+                                width:      this.options.constants.drag_width,
+                                top:        0,
+                                left:       this.majorWidth
+                            },
+                            v: {
+                                height:     this.options.constants.drag_width,
+                                width:      this.majorWidth,
+                                top:        this.majorHeight,
+                                left:       0
+                            }
                         };
 
                     }
@@ -413,6 +517,21 @@
 
                         };
 
+                        this.dragPositions = {
+                            h: {
+                                height:     this.minorHeight,
+                                width:      this.options.constants.drag_width,
+                                top:        this.majorHeight,
+                                left:       this.minorWidth
+                            },
+                            v: {
+                                height:     this.options.constants.drag_width,
+                                width:      this.width,
+                                top:        this.majorHeight,
+                                left:       0
+                            }
+                        };
+
                     }
 
                     // ITEMS left, top, partial:
@@ -445,6 +564,21 @@
 
                         };
 
+                        this.dragPositions = {
+                            h: {
+                                height:     this.majorHeight,
+                                width:      this.options.constants.drag_width,
+                                top:        0,
+                                left:       this.minorWidth
+                            },
+                            v: {
+                                height:     this.options.constants.drag_width,
+                                width:      this.width,
+                                top:        this.majorHeight,
+                                left:       0
+                            }
+                        };
+
                     }
 
                     // ITEMS left, full:
@@ -474,6 +608,21 @@
                                 left:   0
                             }
 
+                        };
+
+                        this.dragPositions = {
+                            h: {
+                                height:     this.height,
+                                width:      this.options.constants.drag_width,
+                                top:        0,
+                                left:       this.minorWidth
+                            },
+                            v: {
+                                height:     this.options.constants.drag_width,
+                                width:      this.majorWidth,
+                                top:        this.majorHeight,
+                                left:       this.minorWidth
+                            }
                         };
 
                     }
@@ -508,6 +657,21 @@
 
                         };
 
+                        this.dragPositions = {
+                            h: {
+                                height:     this.minorHeight,
+                                width:      this.options.constants.drag_width,
+                                top:        this.majorHeight,
+                                left:       this.majorWidth
+                            },
+                            v: {
+                                height:     this.options.constants.drag_width,
+                                width:      this.width,
+                                top:        this.majorHeight,
+                                left:       0
+                            }
+                        };
+
                     }
 
                     // ITEMS right, top, partial:
@@ -540,6 +704,21 @@
 
                         };
 
+                        this.dragPositions = {
+                            h: {
+                                height:     this.majorHeight,
+                                width:      this.options.constants.drag_width,
+                                top:        0,
+                                left:       this.majorWidth
+                            },
+                            v: {
+                                height:     this.options.constants.drag_width,
+                                width:      this.width,
+                                top:        this.majorHeight,
+                                left:       0
+                            }
+                        };
+
                     }
 
                     // ITEMS right, full:
@@ -569,6 +748,21 @@
                                 left:   this.majorWidth
                             }
 
+                        };
+
+                        this.dragPositions = {
+                            h: {
+                                height:     this.height,
+                                width:      this.options.constants.drag_width,
+                                top:        0,
+                                left:       this.majorWidth
+                            },
+                            v: {
+                                height:     this.options.constants.drag_width,
+                                width:      this.majorWidth,
+                                top:        this.majorHeight,
+                                left:       0
+                            }
                         };
 
                     }
@@ -610,6 +804,21 @@
 
                     };
 
+                    this.dragPositions = {
+                        h: {
+                            height:     this.height,
+                            width:      this.options.constants.drag_width,
+                            top:        0,
+                            left:       this.majorWidth
+                        },
+                        v: {
+                            height:     null,
+                            width:      null,
+                            top:        null,
+                            left:       null,
+                        }
+                    };
+
                 }
 
                 // MAP right, ITEMS left:
@@ -638,6 +847,21 @@
                             left:   0
                         }
 
+                    };
+
+                    this.dragPositions = {
+                        h: {
+                            height:     this.height,
+                            width:      this.options.constants.drag_width,
+                            top:        0,
+                            left:       this.majorWidth
+                        },
+                        v: {
+                            height:     null,
+                            width:      null,
+                            top:        null,
+                            left:       null,
+                        }
                     };
 
                 }
@@ -677,6 +901,21 @@
 
                     };
 
+                    this.dragPositions = {
+                        h: {
+                            height:     this.height,
+                            width:      this.options.constants.drag_width,
+                            top:        0,
+                            left:       this.majorWidth
+                        },
+                        v: {
+                            height:     null,
+                            width:      null,
+                            top:        null,
+                            left:       null,
+                        }
+                    };
+
                 }
 
                 // TIMELINE right, ITEMS left:
@@ -705,6 +944,21 @@
                             left:   0
                         }
 
+                    };
+
+                    this.dragPositions = {
+                        h: {
+                            height:     this.height,
+                            width:      this.options.constants.drag_width,
+                            top:        0,
+                            left:       this.majorWidth
+                        },
+                        v: {
+                            height:     null,
+                            width:      null,
+                            top:        null,
+                            left:       null,
+                        }
                     };
 
                 }
@@ -744,6 +998,21 @@
 
                     };
 
+                    this.dragPositions = {
+                        h: {
+                            height:     null,
+                            width:      null,
+                            top:        null,
+                            left:       null,
+                        },
+                        v: {
+                            height:     this.options.constants.drag_width,
+                            width:      this.width,
+                            top:        this.majorHeight,
+                            left:       0
+                        }
+                    };
+
                 }
 
                 // MAP bottom, TIMELINE top.
@@ -772,6 +1041,21 @@
                             left:   null
                         }
 
+                    };
+
+                    this.dragPositions = {
+                        h: {
+                            height:     null,
+                            width:      null,
+                            top:        null,
+                            left:       null,
+                        },
+                        v: {
+                            height:     this.options.constants.drag_width,
+                            width:      this.width,
+                            top:        this.majorHeight,
+                            left:       0
+                        }
                     };
 
                 }
@@ -842,6 +1126,11 @@
 
             }
 
+            // If dragging is enabled, update handles.
+            if (this.options.draggable) {
+                this._showDraggers();
+            }
+
             // Return the object.
             return this.positions;
 
@@ -879,6 +1168,49 @@
         },
 
         /*
+         * Build and inject the draggers.
+         */
+        _constructDraggers: function() {
+
+            // Vertical.
+            this.v_drag = $('<div class="v-drag">\
+                              </div>');
+
+            // Horizontal.
+            this.h_drag = $('<div class="h-drag">\
+                              </div>');
+
+            // Ineject.
+            this.element.append(this.v_drag, this.h_drag);
+
+        },
+
+        /*
+         * Show/hide the drag handles.
+         */
+        _showDraggers: function() {
+
+            // Show/hide vertical dragger.
+            if (this._is_map && this._is_timeline) {
+                this.v_drag.css('display', 'block')
+            } else {
+                this.v_drag.css('display', 'none')
+            }
+
+            // Show/hide horizontal dragger.
+            if (this._is_items) {
+                this.h_drag.css('display', 'block')
+            } else {
+                this.h_drag.css('display', 'none')
+            }
+
+            // Manifest the new positions.
+            // this.h_drag.css(this.dragPositions.h);
+            // this.v_drag.css(this.dragPositions.v);
+
+        },
+
+        /*
          * Emit a protected class attribute.
          *
          * - param string attr:    The name of the attribute.
@@ -886,9 +1218,7 @@
          * - return mixed attr:    The value of the attribute.
          */
         getAttr: function(attr) {
-
             return this[attr];
-
         }
 
     });
