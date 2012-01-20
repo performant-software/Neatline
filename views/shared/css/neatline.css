@@ -62,12 +62,16 @@ table th, table td {
 .h-drag, .v-drag {
     position: absolute;
     display: none;
-    background: red;
     z-index: 9999;
 }
 
 .h-drag {
     cursor: col-resize;
+    margin: 0 4px 0 0;
+}
+
+.h-drag:hover {
+    border-left: 1px dashed #7e3434;
 }
 
 .v-drag {

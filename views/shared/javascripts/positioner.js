@@ -34,6 +34,10 @@
             // and height dragging.
             draggable: true,
 
+            colors: {
+                drag_active: '#7e3434'
+            },
+
             // Markup hooks.
             markup: {
                 map:            '#map',
@@ -45,7 +49,7 @@
             constants: {
                 h_percent:      30,
                 v_percent:      80,
-                drag_width:      4
+                drag_width:      5
             },
 
             // Starting parameters.
@@ -67,6 +71,7 @@
         _create: function() {
 
             // Get the block markup.
+            this._window =              $(window);
             this.map =                  $(this.options.markup.map);
             this.timeline =             $(this.options.markup.timeline);
             this.items =                $(this.options.markup.items);
@@ -1172,6 +1177,8 @@
          */
         _constructDraggers: function() {
 
+            var self = this;
+
             // Vertical.
             this.v_drag = $('<div class="v-drag">\
                               </div>');
@@ -1182,6 +1189,76 @@
 
             // Ineject.
             this.element.append(this.v_drag, this.h_drag);
+
+            // Bind listeners.
+            this.h_drag.bind({
+
+                'mousedown': function(e) {
+
+                    // Register cursor starting coordinates.
+                    var startX = e.pageX;
+                    var startY = e.pageY;
+
+                    // Highlight the handle, disable selection.
+                    self.__highlightHorizontalHandle();
+                    self.__disableSelection();
+
+                    // Listen for mousemove.
+                    self._window.bind({
+
+                        // Manifest drag.
+                        'mousemove': function(e) {
+
+                            // Get new x offset and max width.
+                            var newX = self.dragPositions.h.left - (startX - e.pageX);
+                            var maxWidth = self.width - self.options.constants.drag_width
+
+                            // If left of viewport.
+                            if (newX < 0) {
+                                newX = 0;
+                            }
+
+                            // If right of container.
+                            else if (newX > maxWidth) {
+                                newX = maxWidth;
+                            }
+
+                            // Manifest.
+                            self.h_drag.css('left', newX);
+
+                            // Get new h_percent.
+                            switch (self._items_h_pos) {
+
+                                case 'left':
+                                    self.options.constants.h_percent =
+                                        (newX / self.width) * 100;
+                                break;
+
+                                case 'right':
+                                    self.options.constants.h_percent =
+                                        ((self.width - newX) / self.width) * 100;
+                                break;
+
+                            }
+
+                        },
+
+                        // Apply new dimensions.
+                        'mouseup': function() {
+
+                            // Re-render, hide handle, and strip move listener.
+                            self.refresh();
+                            self.__unhighlightHorizontalHandle();
+                            self.__enableSelection();
+                            self._window.unbind('mousemove');
+
+                        }
+
+                    });
+
+                }
+
+            });
 
         },
 
@@ -1205,9 +1282,98 @@
             }
 
             // Manifest the new positions.
-            // this.h_drag.css(this.dragPositions.h);
-            // this.v_drag.css(this.dragPositions.v);
+            this.h_drag.css(this.dragPositions.h);
+            this.v_drag.css(this.dragPositions.v);
 
+        },
+
+        /*
+         * Re-render exhibit with current set attributes.
+         *
+         * - return void.
+         */
+        refresh: function(attr) {
+
+            this.measure();
+
+            this.compute(
+                this._is_map,
+                this._is_timeline,
+                this._is_items,
+                this._top,
+                this._items_v_pos,
+                this._items_h_pos,
+                this._items_height
+            );
+
+            this.apply();
+
+        },
+
+
+        /*
+         * =================
+         * DOM touches.
+         * =================
+         */
+
+
+        /*
+         * Pop the color of the handle during the drag.
+         *
+         * - return void.
+         */
+        __highlightHorizontalHandle: function() {
+
+            // Highlight the handle.
+            this.h_drag.css(
+                'border-left',
+                '1px dashed ' + this.options.colors.drag_active
+            );
+
+        },
+
+        /*
+         * Hide the handle.
+         *
+         * - return void.
+         */
+        __unhighlightHorizontalHandle: function() {
+
+            // Highlight the handle.
+            this.h_drag.css(
+                'border-left',
+                ''
+            );
+
+        },
+
+        /*
+         * Disable text selection on the container..
+         *
+         * - return void.
+         */
+        __disableSelection: function() {
+            this.element.css({
+                '-moz-user-select': 'none',
+                '-khtml-user-select': 'none',
+                '-webkit-user-select': 'none',
+                'user-select': 'none'
+            });
+        },
+
+        /*
+         * Enable text selection on the container..
+         *
+         * - return void.
+         */
+        __enableSelection: function() {
+            this.element.css({
+                '-moz-user-select': '',
+                '-khtml-user-select': '',
+                '-webkit-user-select': '',
+                'user-select': ''
+            });
         },
 
         /*
