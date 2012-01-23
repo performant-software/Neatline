@@ -1197,6 +1197,7 @@
 
                     // Register cursor starting coordinates.
                     var startX = e.pageX;
+                    var startDragLeft = self.dragPositions.h.left;
 
                     // Highlight the handle, disable selection.
                     self.__highlightHorizontalHandle();
@@ -1209,7 +1210,7 @@
                         'mousemove': function(e) {
 
                             // Get new x offset and max width.
-                            var newX = self.dragPositions.h.left - (startX - e.pageX);
+                            var newX = startDragLeft - (startX - e.pageX);
                             var maxWidth = self.width - self.options.constants.drag_width
 
                             // If left of viewport.
@@ -1246,6 +1247,9 @@
                                 'v_percent': self.options.constants.v_percent
                             });
 
+                            // Rerender.
+                            self.refresh();
+
                         },
 
                         // Apply new dimensions.
@@ -1275,6 +1279,7 @@
 
                     // Register cursor starting coordinates.
                     var startY = e.pageY;
+                    var startDragTop = self.dragPositions.v.top;
 
                     // Highlight the handle, disable selection.
                     self.__highlightVerticalHandle();
@@ -1287,7 +1292,7 @@
                         'mousemove': function(e) {
 
                             // Get new x offset and max width.
-                            var newY = self.dragPositions.v.top - (startY - e.pageY);
+                            var newY = startDragTop - (startY - e.pageY);
                             var maxHeight = self.height - self.options.constants.drag_width
 
                             // If left of viewport.
@@ -1312,6 +1317,7 @@
                                 'v_percent': self.options.constants.v_percent
                             });
 
+                            // Rerender.
                             self.refresh();
 
                         },

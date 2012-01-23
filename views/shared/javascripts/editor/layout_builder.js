@@ -104,6 +104,9 @@
                 // On width drag.
                 drag: function(event, obj) {
                     self._trigger('widthDrag', {}, obj);
+                    self.centerAllTags();
+                    self.getPxConstants();
+                    self._computePositions();
                 },
 
                 // On width drag completion.

@@ -92,6 +92,7 @@
                 // On proportion drag.
                 drag: function(event, obj) {
                     self._trigger('widthdrag', {}, obj);
+                    self.timeline.neatlinetimeline('refresh');
                 },
 
                 // On proportion drag completion.
