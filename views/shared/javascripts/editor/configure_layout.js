@@ -131,6 +131,7 @@
 
             var self = this;
             var params = this.layoutBuilder.layoutbuilder('getArrangementParameters');
+            console.log(params);
 
             // Save data.
             $.ajax({

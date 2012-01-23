@@ -62,7 +62,7 @@ table th, table td {
 .h-drag, .v-drag {
     position: absolute;
     display: none;
-    z-index: 9999;
+    z-index: 999;
 }
 
 .h-drag {

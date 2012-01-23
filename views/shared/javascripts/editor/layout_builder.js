@@ -1523,6 +1523,9 @@
             var is_timeline =   this._is_timeline ? 1 : 0;
             var is_items =      this._is_items ? 1 : 0;
 
+            // Get the horizontal and vertical percentages.
+            var options = this.dragbox.positioner('getAttr', 'options');
+
             // Assemble an object with the position tracker variables.
             return {
                 exhibit_id:     Neatline.id,
@@ -1532,7 +1535,9 @@
                 top_element:    this._top_element,
                 items_h_pos:    this._items_h_pos,
                 items_v_pos:    this._items_v_pos,
-                items_height:   this._items_height
+                items_height:   this._items_height,
+                h_percent:      options.constants.h_percent,
+                v_percent:      options.constants.v_percent
             }
 
         }
