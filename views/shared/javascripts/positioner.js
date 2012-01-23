@@ -35,7 +35,7 @@
             draggable: true,
 
             colors: {
-                drag_active: '#7e3434'
+                drag_active: '#1e1e1e'
             },
 
             // Markup hooks.
@@ -1464,8 +1464,8 @@
         __unhighlightVerticalHandle: function() {
 
             // Highlight the handle.
-            this.h_drag.css(
-                'border-left',
+            this.v_drag.css(
+                'border-top',
                 ''
             );
 

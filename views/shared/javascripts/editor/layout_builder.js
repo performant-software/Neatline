@@ -109,6 +109,8 @@
                 // On width drag completion.
                 layoutChange: function(event, obj) {
                     self.centerAllTags();
+                    self.getPxConstants();
+                    self._computePositions();
                 }
 
             });
