@@ -1312,6 +1312,8 @@
                                 'v_percent': self.options.constants.v_percent
                             });
 
+                            self.refresh();
+
                         },
 
                         // Apply new dimensions.
