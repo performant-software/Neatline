@@ -824,3 +824,49 @@ function neatline_installBaseLayers()
     $gsat->save();
 
 }
+
+/**
+ * Set map style options.
+ *
+ * @return void.
+ */
+function neatline_setMapStyleDefaults()
+{
+
+    // Vector color.
+    set_option('vector_color', get_plugin_ini(
+        'Neatline',
+        'default_vector_color'
+    ));
+
+    // Stroke color.
+    set_option('stroke_color', get_plugin_ini(
+        'Neatline',
+        'default_stroke_color'
+    ));
+
+    // Vector opacity.
+    set_option('vector_opacity', (int) get_plugin_ini(
+        'Neatline',
+        'default_vector_opacity'
+    ));
+
+    // Stroke opacity.
+    set_option('stroke_opacity', (int) get_plugin_ini(
+        'Neatline',
+        'default_stroke_opacity'
+    ));
+
+    // Stroke opacity.
+    set_option('stroke_width', (int) get_plugin_ini(
+        'Neatline',
+        'default_stroke_width'
+    ));
+
+    // Stroke opacity.
+    set_option('point_radius', (int) get_plugin_ini(
+        'Neatline',
+        'default_point_radius'
+    ));
+
+}

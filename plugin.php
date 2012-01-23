@@ -43,7 +43,6 @@ if (!defined('NEATLINE_PLUGIN_DIR')) {
 require_once NEATLINE_PLUGIN_DIR . '/NeatlinePlugin.php';
 require_once NEATLINE_PLUGIN_DIR . '/helpers/NeatlineFunctions.php';
 require_once NEATLINE_PLUGIN_DIR . '/helpers/NeatlineAjaxFunctions.php';
-require_once NEATLINE_PLUGIN_DIR . '/helpers/DemoExhibit.php';
 
 // }}}
 
