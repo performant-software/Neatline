@@ -110,6 +110,8 @@ class NeatlinePlugin
                 `default_stroke_width`  int(10) unsigned NULL,
                 `default_point_radius`  int(10) unsigned NULL,
                 `default_base_layer`    int(10) unsigned NULL,
+                `default_h_percent`     int(10) unsigned NULL,
+                `default_v_percent`     int(10) unsigned NULL,
                  PRIMARY KEY (`id`)
                ) ENGINE=innodb DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
 

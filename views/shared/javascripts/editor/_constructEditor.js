@@ -285,6 +285,15 @@ jQuery(document).ready(function($) {
         // When new starting positions are fixed, do success flash.
         'newpositions': function() {
             neatlineContainer.neatline('saveSuccess');
+        },
+
+        // When the width of the viewports is dragged.
+        'widthDrag': function(event, obj) {
+            neatlineContainer.neatline(
+                'applyViewportProportions',
+                obj.h_percent,
+                obj.v_percent
+            );
         }
 
     });

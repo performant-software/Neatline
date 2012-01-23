@@ -32,16 +32,31 @@
             // Get the buttons.
             this.saveArrangementButton =    $('#save-arrangement');
             this.fixPositionsButton =       $('#fix-positions');
+            this.layoutBuilder =            $('#configure-layout');
 
             // Construct the dropdown manager.
             this._constructDropdown();
 
             // Instantiate the layout builder.
-            this.layoutBuilder = $('#configure-layout');
-            this.layoutBuilder.layoutbuilder();
+            this._instantiateLayoutBuilder();
 
             // Add events to buttons.
             this._addEvents();
+
+        },
+
+        /*
+         * Run the layout builder application.
+         */
+        _instantiateLayoutBuilder: function() {
+
+            var self = this;
+
+            this.layoutBuilder.layoutbuilder({
+                widthDrag: function(event, obj) {
+                    self._trigger('widthDrag', {}, obj);
+                }
+            });
 
         },
 

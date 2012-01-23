@@ -75,20 +75,44 @@
             this._disableSelect();
             this._createDraggers();
 
-            // Instantiate the positioning manager.
-            this.dragbox.positioner({
-                markup: {
-                    map: '#drag-map',
-                    timeline: '#drag-timeline',
-                    items: '#drag-items'
-                }
-            });
-
             // Start-up routine.
+            this._instantiatePositioner();
             this.getPxConstants();
             this._createButtons();
             this._setStartingParameters();
             this._addDragEvents();
+
+        },
+
+        /*
+         * Run the positioning manager on the container.
+         */
+        _instantiatePositioner: function() {
+
+            var self = this;
+
+            // Instantiate the positioning manager.
+            this.dragbox.positioner({
+
+                // Block markup.
+                markup: {
+                    map:        '#drag-map',
+                    timeline:   '#drag-timeline',
+                    items:      '#drag-items'
+                },
+
+                // On width drag.
+                drag: function(event, obj) {
+                    self._trigger('widthDrag', {}, obj);
+                    // self.centerAllTags();
+                },
+
+                // On width drag completion.
+                layoutChange: function(event, obj) {
+                    self.centerAllTags();
+                }
+
+            });
 
         },
 

@@ -1240,6 +1240,12 @@
 
                             }
 
+                            // Trigger drag callback.
+                            self._trigger('drag', {}, {
+                                'h_percent': self.options.constants.h_percent,
+                                'v_percent': self.options.constants.v_percent
+                            });
+
                         },
 
                         // Apply new dimensions.
@@ -1300,6 +1306,12 @@
                             // Get new v_percent.
                             self.options.constants.v_percent = (newY / self.height) * 100;
 
+                            // Trigger drag callback.
+                            self._trigger('drag', {}, {
+                                'h_percent': self.options.constants.h_percent,
+                                'v_percent': self.options.constants.v_percent
+                            });
+
                         },
 
                         // Apply new dimensions.
@@ -1350,11 +1362,30 @@
         },
 
         /*
+         * Set new viewport proportions and refresh.
+         *
+         * - param float h_percent: The new h_percent.
+         * - param float v_percent: The new v_percent.
+         *
+         * - return void.
+         */
+        applyProportions: function(h_percent, v_percent) {
+
+            // Set new percentages.
+            this.options.constants.h_percent = h_percent;
+            this.options.constants.v_percent = v_percent;
+
+            // Rerender.
+            this.refresh();
+
+        },
+
+        /*
          * Re-render exhibit with current set attributes.
          *
          * - return void.
          */
-        refresh: function(attr) {
+        refresh: function() {
 
             this.measure();
 

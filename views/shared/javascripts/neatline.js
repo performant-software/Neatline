@@ -647,6 +647,28 @@
          */
         endReorderItems: function() {
             return this.items.neatlineitems('endreorder');
+        },
+
+        /*
+         * Render a new h_percent and v_percent loadout.
+         *
+         * - param float h_percent: The new h_percent.
+         * - param float v_percent: The new v_percent.
+         *
+         * - return void.
+         */
+        applyViewportProportions: function(h_percent, v_percent) {
+
+            // Rerender the viewports.
+            this.element.positioner(
+                'applyProportions',
+                h_percent,
+                v_percent
+            );
+
+            // Resize Simile.
+            this.timeline.neatlinetimeline('refresh');
+
         }
 
     });
