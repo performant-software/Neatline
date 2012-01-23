@@ -107,6 +107,15 @@ jQuery(document).ready(function($) {
                         neatlineContainer.neatline('showItemDescription', editId);
                     }
 
+                },
+
+                // When the viewport dimensions are dragged.
+                'widthdrag': function(event, obj) {
+                    configureLayoutButton.configurelayout(
+                        'setViewportProportions',
+                        obj.h_percent,
+                        obj.v_percent
+                    );
                 }
 
             });

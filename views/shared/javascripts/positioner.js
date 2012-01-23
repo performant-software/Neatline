@@ -1449,7 +1449,7 @@
         __highlightVerticalHandle: function() {
 
             // Highlight the handle.
-            this.h_drag.css(
+            this.v_drag.css(
                 'border-top',
                 '1px dashed ' + this.options.colors.drag_active
             );

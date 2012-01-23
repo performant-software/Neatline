@@ -104,7 +104,6 @@
                 // On width drag.
                 drag: function(event, obj) {
                     self._trigger('widthDrag', {}, obj);
-                    // self.centerAllTags();
                 },
 
                 // On width drag completion.
@@ -355,6 +354,23 @@
                 }
 
             });
+
+        },
+
+        /*
+         * Re-render the block width and height percentages.
+         */
+        applyProportions: function(h_percent, v_percent) {
+
+            // Rerender
+            this.dragbox.positioner(
+                'applyProportions',
+                h_percent,
+                v_percent
+            );
+
+            // Center tags.
+            this.centerAllTags();
 
         },
 

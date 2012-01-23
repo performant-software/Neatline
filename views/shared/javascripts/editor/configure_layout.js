@@ -111,6 +111,20 @@
         },
 
         /*
+         * Set viewport proportions on layout builder.
+         */
+        setViewportProportions: function(h_percent, v_percent) {
+
+            // Rerender the viewports.
+            this.layoutBuilder.layoutbuilder(
+                'applyProportions',
+                h_percent,
+                v_percent
+            );
+
+        },
+
+        /*
          * Post a new set of arrangement parameters.
          */
         saveArrangement: function() {

@@ -89,7 +89,12 @@
                     items:                  '#' + this.options.markup.items_id
                 },
 
-                // On new layout, rerender viewports.
+                // On proportion drag.
+                drag: function(event, obj) {
+                    self._trigger('widthdrag', {}, obj);
+                },
+
+                // On proportion drag completion.
                 layoutChange: function() {
                     self.timeline.neatlinetimeline('refresh');
                 }
@@ -160,6 +165,9 @@
 
             // Manifest.
             this.element.positioner('apply');
+
+            // Rerender timeline.
+            this.timeline.neatlinetimeline('refresh');
 
         },
 
