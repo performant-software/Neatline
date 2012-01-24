@@ -803,7 +803,8 @@
          * Get the current zoom of the viewport.
          */
         getZoomForSave: function() {
-            return this.map.getZoom();
+            // +1 to fix an apparent bug in OL.
+            return this.map.getZoom() + 1;
         },
 
         /*

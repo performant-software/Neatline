@@ -181,6 +181,10 @@ class NeatlinePlugin
         $sql = "DROP TABLE IF EXISTS `{$this->_db->prefix}neatline_data_records`";
         $this->_db->query($sql);
 
+        // Drop the data table.
+        $sql = "DROP TABLE IF EXISTS `{$this->_db->prefix}neatline_base_layers`";
+        $this->_db->query($sql);
+
     }
 
     /**
