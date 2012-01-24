@@ -46,7 +46,9 @@
             this.popupClose =               this.popup.find('a.close');
 
             // Tracker array for tape elements.
-            this._idToTapeElements = {};
+            this._idToTapeElements =    {};
+            this._zoomSteps =           this.getZoomIndexArray();
+            this._currentZoomStep =     null;
 
             // Start-up.
             this._instantiateSimile();
@@ -74,7 +76,7 @@
                     intervalUnit:   Timeline.DateTime.YEAR,
                     intervalPixels: 100,
                     zoomIndex:      15,
-                    zoomSteps:      this.getZoomIndexArray()
+                    zoomSteps:      this._zoomSteps
                 }),
 
                 Timeline.createBandInfo({
@@ -96,8 +98,9 @@
             this.timeline = Timeline.create(container, this.bandInfos);
             this.loadData();
 
-            // Override the default click event callbacks.
-            this._catchClickCallbacks();
+            // Override default click and zom callbacks.
+            this._catchClickCallback();
+            this._catchZoomCallback();
 
             // Reposition on window resize.
             this._window.bind({
@@ -115,7 +118,7 @@
          *
          * - return void.
          */
-        _catchClickCallbacks: function() {
+        _catchClickCallback: function() {
 
             var self = this;
 
@@ -126,6 +129,41 @@
                 self._trigger('eventclick', {}, {
                     'recordid': evt._eventID
                 });
+
+            }
+
+        },
+
+        /*
+         * Listen for zoom.
+         *
+         * - return void.
+         */
+        _catchZoomCallback: function() {
+
+            var self = this;
+
+            // Whitewash over the default bubble popup event so as to get event id data.
+            Timeline._Band.prototype.zoom = function(zoomIn, x, y, target) {
+
+                console.log(zoomIn, x, y, target);
+
+                if (!this._zoomSteps) {
+                    return;
+                }
+
+                // Shift the x value by our offset
+                x += this._viewOffset;
+
+                var zoomDate = this._ether.pixelOffsetToDate(x);
+                var netIntervalChange = this._ether.zoom(zoomIn);
+                this._etherPainter.zoom(netIntervalChange);
+
+                // Shift our zoom date to the far left
+                this._moveEther(Math.round(-this._ether.dateToPixelOffset(zoomDate)));
+
+                // Then shift it back to where the mouse was
+                this._moveEther(x);
 
             }
 
