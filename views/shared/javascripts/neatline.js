@@ -649,7 +649,11 @@
          * - return integer: The level.
          */
         getTimelineZoom: function() {
-            return this.timeline.neatlinetimeline('getZoomForSave');
+            if (this.instantiated_timeline) {
+                return this.timeline.neatlinetimeline('getZoomForSave');
+            } else {
+                return null;
+            }
         },
 
         /*
