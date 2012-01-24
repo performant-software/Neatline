@@ -707,6 +707,56 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
     }
 
     /**
+     * getViewportProportions() should return system defaults when there are no
+     * set values on the exhibit record.
+     *
+     * @return void.
+     */
+    public function testGetViewportProportionsWithNoLocalSettings()
+    {
+
+        // Set system defaults.
+        set_option('h_percent', 25);
+        set_option('v_percent', 85);
+
+        // Create exhibit.
+        $exhibit = $this->helper->_createNeatline();
+
+        // Test for system defaults.
+        $this->assertEquals(
+            $exhibit->getViewportProportions(),
+            array('horizontal' => 25, 'vertical' => 85)
+        );
+
+    }
+
+    /**
+     * getViewportProportions() should return record specific settings when
+     * there are local values on the row.
+     *
+     * @return void.
+     */
+    public function testGetViewportProportionsWithLocalSettings()
+    {
+
+        // Set system defaults.
+        set_option('h_percent', 25);
+        set_option('v_percent', 85);
+
+        // Create exhibit and set local values.
+        $exhibit = $this->helper->_createNeatline();
+        $exhibit->h_percent = 10;
+        $exhibit->v_percent = 20;
+
+        // Test for system defaults.
+        $this->assertEquals(
+            $exhibit->getViewportProportions(),
+            array('horizontal' => 10, 'vertical' => 20)
+        );
+
+    }
+
+    /**
      * setModified() should update the modified field.
      *
      * @return void.

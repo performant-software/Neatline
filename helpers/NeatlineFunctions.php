@@ -869,4 +869,16 @@ function neatline_setMapStyleDefaults()
         'default_point_radius'
     ));
 
+    // Horizontal percentage.
+    set_option('h_percent', (int) get_plugin_ini(
+        'Neatline',
+        'default_h_percent'
+    ));
+
+    // Vertical percentage.
+    set_option('v_percent', (int) get_plugin_ini(
+        'Neatline',
+        'default_v_percent'
+    ));
+
 }

@@ -362,6 +362,30 @@ class NeatlineExhibit extends Omeka_record
     }
 
     /**
+     * Get the horizontal and vertical viewport percentages.
+     *
+     * @return array $proportions array('horizontal' => integer, 'vertical' => integer).
+     */
+    public function getViewportProportions()
+    {
+
+        // Shell out array with defaults.
+        $proportions = array(
+            'horizontal' =>     get_option('h_percent'),
+            'vertical' =>       get_option('v_percent')
+        );
+
+        // Use row-specifc values if present.
+        if (!is_null($this->h_percent) && !is_null($this->v_percent)) {
+            $proportions['horizontal'] =    $this->h_percent;
+            $proportions['vertical'] =      $this->v_percent;
+        }
+
+        return $proportions;
+
+    }
+
+    /**
      * Set the 'modified' column to the current timestamp.
      *
      * @return void.
