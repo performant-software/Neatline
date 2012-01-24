@@ -881,4 +881,10 @@ function neatline_setMapStyleDefaults()
         'default_v_percent'
     ));
 
+    // Timeline zoom.
+    set_option('timeline_zoom', (int) get_plugin_ini(
+        'Neatline',
+        'default_timeline_zoom'
+    ));
+
 }

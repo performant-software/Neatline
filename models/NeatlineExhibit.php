@@ -387,6 +387,17 @@ class NeatlineExhibit extends Omeka_record
     }
 
     /**
+     * Get the starting timeline zoom.
+     *
+     * @return integer $zoom The zoom index.
+     */
+    public function getTimelineZoom()
+    {
+
+
+    }
+
+    /**
      * Set the 'modified' column to the current timestamp.
      *
      * @return void.

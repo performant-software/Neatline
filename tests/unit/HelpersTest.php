@@ -63,6 +63,7 @@ class Neatline_HelpersTest extends Omeka_Test_AppTestCase
         $this->assertNotNull(get_option('point_radius'));
         $this->assertNotNull(get_option('h_percent'));
         $this->assertNotNull(get_option('v_percent'));
+        $this->assertNotNull(get_option('timeline_zoom'));
 
         // Check for integer typecasting.
         $this->assertTrue(is_int(get_option('vector_opacity')));
@@ -70,7 +71,7 @@ class Neatline_HelpersTest extends Omeka_Test_AppTestCase
         $this->assertTrue(is_int(get_option('stroke_width')));
         $this->assertTrue(is_int(get_option('point_radius')));
         $this->assertTrue(is_int(get_option('h_percent')));
-        $this->assertTrue(is_int(get_option('v_percent')));
+        $this->assertTrue(is_int(get_option('timeline_zoom')));
 
     }
 
