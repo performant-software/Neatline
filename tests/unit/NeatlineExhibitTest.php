@@ -298,13 +298,14 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
         $neatline = $this->helper->_createNeatline();
 
         // Save with int zoom and check.
-        $neatline->saveViewportPositions('bounds', 5, 'date');
+        $neatline->saveViewportPositions('bounds', 5, 'date', 10);
         $this->assertEquals($neatline->default_map_bounds, 'bounds');
         $this->assertEquals($neatline->default_map_zoom, 5);
         $this->assertEquals($neatline->default_focus_date, 'date');
+        $this->assertEquals($neatline->default_timeline_zoom, 10);
 
         // Save with str zoom and check.
-        $neatline->saveViewportPositions('bounds', '5', 'date');
+        $neatline->saveViewportPositions('bounds', '5', 'date', 10);
         $this->assertEquals($neatline->default_map_zoom, 5);
 
     }
@@ -754,6 +755,53 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
         $this->assertEquals(
             $exhibit->getViewportProportions(),
             array('horizontal' => 10, 'vertical' => 20)
+        );
+
+    }
+
+    /**
+     * getTimelineZoom() should return system default when there is no
+     * set value on the exhibit record.
+     *
+     * @return void.
+     */
+    public function testGetTimelineZoomWithNoLocalSettings()
+    {
+
+        // Set system default.
+        set_option('timeline_zoom', 25);
+
+        // Create exhibit.
+        $exhibit = $this->helper->_createNeatline();
+
+        // Test for system default.
+        $this->assertEquals(
+            $exhibit->getTimelineZoom(),
+            25
+        );
+
+    }
+
+    /**
+     * getTimelineZoom() should return the record specific setting when
+     * there are local values on the row.
+     *
+     * @return void.
+     */
+    public function testGetTimelineZoomWithLocalSettings()
+    {
+
+        // Set system default.
+        set_option('timeline_zoom', 25);
+
+        // Create exhibit.
+        $exhibit = $this->helper->_createNeatline();
+        $exhibit->default_timeline_zoom = 3;
+
+        // Test for system default.
+        $this->assertEquals(
+            $exhibit->getTimelineZoom(),
+            3
         );
 
     }

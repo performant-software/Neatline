@@ -55,6 +55,7 @@
         Neatline.public = <?php echo json_encode($public); ?>;
         Neatline.baseLayer = <?php echo json_encode($neatline->getBaseLayer()); ?>;
         Neatline.proportions = <?php echo json_encode($neatline->getViewportProportions()); ?>;
+        Neatline.timelineZoom = <?php echo $neatline->getTimelineZoom(); ?>;
 
     // Map parameters.
     <?php if (isset($map)): ?>

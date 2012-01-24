@@ -157,7 +157,7 @@
         /*
          * Post a new positioning defaults.
          */
-        savePositions: function(mapExtent, mapZoom, timelineCenter) {
+        savePositions: function(mapExtent, mapZoom, timelineCenter, timelineZoom) {
 
             var self = this;
 
@@ -171,7 +171,8 @@
                     exhibit_id: Neatline.id,
                     map_extent: mapExtent,
                     map_zoom: mapZoom,
-                    timeline_center: timelineCenter
+                    timeline_center: timelineCenter,
+                    timeline_zoom: timelineZoom
                 },
 
                 success: function() {

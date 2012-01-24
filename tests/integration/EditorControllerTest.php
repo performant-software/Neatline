@@ -1792,7 +1792,8 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
                 'exhibit_id' => $exhibit->id,
                 'map_extent' => 'extent',
                 'map_zoom' => 1,
-                'timeline_center' => 'center'
+                'timeline_center' => 'center',
+                'timeline_zoom' => 10
             )
         );
 
@@ -1804,6 +1805,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->assertEquals($exhibit->default_map_bounds, 'extent');
         $this->assertEquals($exhibit->default_map_zoom, 1);
         $this->assertEquals($exhibit->default_focus_date, 'center');
+        $this->assertEquals($exhibit->default_timeline_zoom, 10);
 
     }
 

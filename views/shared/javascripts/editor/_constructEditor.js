@@ -266,15 +266,18 @@ jQuery(document).ready(function($) {
             var mapExtent = neatlineContainer.neatline('getMapExtent');
             var mapZoom = neatlineContainer.neatline('getMapZoom');
 
-            // Get the timeline center date.
-            var timelineCenter = neatlineContainer.neatline('getTimelineCenter');
+            // Get the timeline center date and zoom.
+            var timelineCenter =    neatlineContainer.neatline('getTimelineCenter');
+            var timelineZoom =      neatlineContainer.neatline('getTimelineZoom');
 
             // Save.
             configureLayoutButton.configurelayout(
                 'savePositions',
                 mapExtent,
                 mapZoom,
-                timelineCenter);
+                timelineCenter,
+                timelineZoom
+            );
 
         },
 

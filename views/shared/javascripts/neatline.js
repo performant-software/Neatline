@@ -633,7 +633,7 @@
         /*
          * Get the current focus date on the timeline.
          *
-         * - return integer: The level.
+         * - return string: The date.
          */
         getTimelineCenter: function() {
             if (this.instantiated_timeline) {
@@ -641,6 +641,15 @@
             } else {
                 return null;
             }
+        },
+
+        /*
+         * Get the current zoom level on the timeline.
+         *
+         * - return integer: The level.
+         */
+        getTimelineZoom: function() {
+            return this.timeline.neatlinetimeline('getZoomForSave');
         },
 
         /*

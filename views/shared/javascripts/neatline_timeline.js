@@ -48,7 +48,7 @@
             // Tracker array for tape elements.
             this._idToTapeElements =    {};
             this._zoomSteps =           this.getZoomIndexArray();
-            this._currentZoomStep =     null;
+            this._currentZoomStep =     Neatline.timelineZoom;
 
             // Start-up.
             this._instantiateSimile();
@@ -67,15 +67,20 @@
             // Instantiate the event source object.
             this.eventSource = new Timeline.DefaultEventSource();
 
+            // Get the starting intervalUnit and intervalPixels.
+            var startingZoomStep =  this._zoomSteps[this._currentZoomStep]
+            var intervalUnit =      startingZoomStep.unit;
+            var intervalPixels =    startingZoomStep.pixelsPerInterval;
+
             // Define band data.
             this.bandInfos = [
 
                 Timeline.createBandInfo({
                     eventSource:    this.eventSource,
                     width:          "80%",
-                    intervalUnit:   Timeline.DateTime.YEAR,
-                    intervalPixels: 100,
-                    zoomIndex:      15,
+                    intervalUnit:   intervalUnit,
+                    intervalPixels: intervalPixels,
+                    zoomIndex:      this._currentZoomStep,
                     zoomSteps:      this._zoomSteps
                 }),
 
@@ -146,8 +151,6 @@
             // Whitewash over the default bubble popup event so as to get event id data.
             Timeline._Band.prototype.zoom = function(zoomIn, x, y, target) {
 
-                console.log(zoomIn, x, y, target);
-
                 if (!this._zoomSteps) {
                     return;
                 }
@@ -164,6 +167,13 @@
 
                 // Then shift it back to where the mouse was
                 this._moveEther(x);
+
+                // Increment zoom step.
+                if (zoomIn) {
+                    self._incrementZoomStepDown();
+                } else {
+                    self._incrementZoomStepUp();
+                }
 
             }
 
@@ -254,10 +264,19 @@
         /*
          * Get the current center date.
          *
-         * - return string date             The center date:
+         * - return string date             The center date.
          */
         getCenterForSave: function() {
             return this.timeline.getBand(0).getCenterVisibleDate().toString();
+        },
+
+        /*
+         * Get the current zoom level.
+         *
+         * - return integer zoome           The zoom level.
+         */
+        getZoomForSave: function() {
+            return this._currentZoomStep;
         },
 
         /*
@@ -354,6 +373,24 @@
                 {pixelsPerInterval:  50,  unit: Timeline.DateTime.CENTURY}
             );
 
+        },
+
+        /*
+         * Increment zoom step up.
+         */
+        _incrementZoomStepUp: function() {
+            if (this._currentZoomStep < this._zoomSteps.length-1) {
+                this._currentZoomStep++;
+            }
+        },
+
+        /*
+         * Increment zoom step down.
+         */
+        _incrementZoomStepDown: function() {
+            if (this._currentZoomStep > 0) {
+                this._currentZoomStep--;
+            }
         },
 
         /*

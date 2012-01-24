@@ -182,16 +182,23 @@ class NeatlineExhibit extends Omeka_record
      * @param string $mapExtent The bounding box for the map.
      * @param string $mapZoom The integer zoom value.
      * @param string $timelineCenter The timestamp for the timeline focus.
+     * @param string $timelineZoom The timeline zoom level.
      *
      * @return Omeka_record The map.
      */
-    public function saveViewportPositions($mapExtent, $mapZoom, $timelineCenter)
+    public function saveViewportPositions(
+        $mapExtent,
+        $mapZoom,
+        $timelineCenter,
+        $timelineZoom
+    )
     {
 
         // Set values.
         $this->default_map_bounds = $mapExtent;
         $this->default_map_zoom = intval($mapZoom);
         $this->default_focus_date = $timelineCenter;
+        $this->default_timeline_zoom = $timelineZoom;
         $this->save();
 
     }
@@ -393,8 +400,9 @@ class NeatlineExhibit extends Omeka_record
      */
     public function getTimelineZoom()
     {
-
-
+        return !is_null($this->default_timeline_zoom) ?
+            $this->default_timeline_zoom :
+            get_option('timeline_zoom');
     }
 
     /**
