@@ -774,7 +774,18 @@
 
             // Push the wkt's onto the array.
             $.each(this._currentEditLayer.features, function(i, feature) {
-                wkts.push(feature.geometry.toString());
+
+                // Cast the feature to wkt.
+                var wkt = feature.geometry.toString();
+
+                // ** A hack to prevent phantom empty points from getting
+                // saved in the wkt strings. It is not clear why these artifacts
+                // are getting generated and committed, but they cause erratic
+                // bound calculation and zooming bugs. This needs a real fix.
+                if (wkt != 'POINT(NaN NaN)') {
+                    wkts.push(wkt);
+                }
+
             });
 
             return wkts.join(this.options.wkt_delimiter);
