@@ -429,6 +429,8 @@ class Neatline_EditorController extends Omeka_Controller_Action
         $isMap =                    (int) $_post['is_map'];
         $isTimeline =               (int) $_post['is_timeline'];
         $isItems =                  (int) $_post['is_items'];
+        $hPercent =                 (int) $_post['h_percent'];
+        $vPercent =                 (int) $_post['v_percent'];
         $topElement =               $_post['top_element'];
         $itemsHorizPos =            $_post['items_h_pos'];
         $itemsVertPos =             $_post['items_v_pos'];
@@ -445,7 +447,9 @@ class Neatline_EditorController extends Omeka_Controller_Action
             $topElement,
             $itemsHorizPos,
             $itemsVertPos,
-            $itemsHeight
+            $itemsHeight,
+            $hPercent,
+            $vPercent
         );
 
         // Return the updated exhibit object.

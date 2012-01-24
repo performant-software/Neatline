@@ -38,7 +38,7 @@
             // CSS constants.
             css: {
                 def_opacity: 0.7,
-                def_font_size: 14,
+                def_font_size: 13,
                 active_font_size: 18
             }
 

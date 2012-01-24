@@ -66,6 +66,8 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
         $exhibit->is_map =                      1;
         $exhibit->is_timeline =                 1;
         $exhibit->is_items =                    1;
+        $exhibit->h_percent =                   50;
+        $exhibit->v_percent =                   50;
         $exhibit->default_map_bounds =          'BOUND()';
         $exhibit->default_map_zoom =            1;
         $exhibit->default_focus_date =          'date';
@@ -95,6 +97,8 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
         $this->assertEquals($exhibit->is_map, 1);
         $this->assertEquals($exhibit->is_timeline, 1);
         $this->assertEquals($exhibit->is_items, 1);
+        $this->assertEquals($exhibit->h_percent, 50);
+        $this->assertEquals($exhibit->v_percent, 50);
         $this->assertEquals($exhibit->default_map_bounds, 'BOUND()');
         $this->assertEquals($exhibit->default_map_zoom, 1);
         $this->assertEquals($exhibit->default_focus_date, 'date');
@@ -315,8 +319,20 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
         // Create an exhibit and map.
         $neatline = $this->helper->_createNeatline();
 
-        // Save and check.
-        $neatline->saveViewportArrangement(1, 1, 1, 'map', 'right', 'top', 'full');
+        // Save.
+        $neatline->saveViewportArrangement(
+            1,
+            1,
+            1,
+            'map',
+            'right',
+            'top',
+            'full',
+            40,
+            60
+        );
+
+        // Check.
         $this->assertEquals($neatline->is_map, 1);
         $this->assertEquals($neatline->is_timeline, 1);
         $this->assertEquals($neatline->is_items, 1);
@@ -324,6 +340,8 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
         $this->assertEquals($neatline->items_h_pos, 'right');
         $this->assertEquals($neatline->items_v_pos, 'top');
         $this->assertEquals($neatline->items_height, 'full');
+        $this->assertEquals($neatline->h_percent, 40);
+        $this->assertEquals($neatline->v_percent, 60);
 
     }
 

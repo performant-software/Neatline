@@ -155,12 +155,11 @@ div.title-tip {
 }
 
 #items-container li.item-title {
-    font-size: 14px;
+    font-size: 13px;
     color: #202020;
-    padding: 8px 20px;
+    padding: 6px 20px;
     line-height 180px;
     border-bottom: 1px dotted #cdcdcd;
-    font-weight: bold;
 }
 
 #items-container li.item-description {

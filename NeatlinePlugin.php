@@ -100,6 +100,8 @@ class NeatlinePlugin
                 `is_map`                tinyint(1) NOT NULL,
                 `is_timeline`           tinyint(1) NOT NULL,
                 `is_items`              tinyint(1) NOT NULL,
+                `h_percent`             int(10) unsigned NULL,
+                `v_percent`             int(10) unsigned NULL,
                 `default_map_bounds`    varchar(100) NULL,
                 `default_map_zoom`      int(10) unsigned NULL,
                 `default_focus_date`    varchar(100) NULL,

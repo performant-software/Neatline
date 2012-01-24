@@ -36,7 +36,13 @@
                 timeline_id:    'timeline',
                 items_id:       'items',
                 scroller:       'scroll'
-            }
+            },
+
+            // Positioning constants.
+            constants: {
+                h_percent:      24,
+                v_percent:      84
+            },
 
         },
 

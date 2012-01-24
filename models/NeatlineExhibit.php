@@ -45,6 +45,8 @@ class NeatlineExhibit extends Omeka_record
     public $items_h_pos;
     public $items_v_pos;
     public $items_height;
+    public $h_percent;
+    public $v_percent;
 
     // Viewport presence.
     public $is_map;
@@ -213,7 +215,9 @@ class NeatlineExhibit extends Omeka_record
         $topElement,
         $itemsHorizPos,
         $itemsVertPos,
-        $itemsHeight
+        $itemsHeight,
+        $hPercent,
+        $vPercent
     )
     {
 
@@ -225,6 +229,8 @@ class NeatlineExhibit extends Omeka_record
         $this->items_h_pos =            $itemsHorizPos;
         $this->items_v_pos =            $itemsVertPos;
         $this->items_height =           $itemsHeight;
+        $this->h_percent =      $hPercent;
+        $this->v_percent =      $vPercent;
         $this->save();
 
     }

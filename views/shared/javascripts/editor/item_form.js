@@ -46,13 +46,24 @@
 
             // CLEditor.
             cleditor: {
-                width: 340,
-                height: 240,
-                controls:
-                    "bold italic underline | font size " +
-                    "| color removeformat | bullets numbering | outdent " +
-                    "indent | alignleft center alignright justify | " +
-                    "rule image link unlink | source"
+
+                description: {
+                    width: 340,
+                    height: 240,
+                    controls:
+                        "bold italic underline | font size " +
+                        "| color removeformat | bullets numbering | outdent " +
+                        "indent | alignleft center alignright justify | " +
+                        "rule image link unlink | source"
+                },
+
+                title: {
+                    width: 340,
+                    height: 50,
+                    controls: "bold italic underline | font size color | " +
+                        "source removeformat"
+                }
+
             }
 
         },
@@ -67,7 +78,7 @@
             this.form =                     this.element.find('form');
             this.saveButton =               this.form.find('input[type="submit"]');
             this.deleteButton =             this.form.find('#record-delete-button');
-            this.title =                    this.form.find('input[name="title"]');
+            this.title =                    this.form.find('textarea[name="title"]');
             this.description =              this.form.find('textarea[name="description"]');
             this.startDate =                this.form.find('input[name="start-date-date"]');
             this.startTime =                this.form.find('input[name="start-date-time"]');
@@ -115,11 +126,14 @@
 
             var self = this;
 
-            // ** DESCRIPTION.
+            // ** TITLE.
+            this.titleEditor = this.title.cleditor(
+                this.options.cleditor.title
+            )[0];
 
-            // Construct CLEditor.
-            this.rte = this.description.cleditor(
-                this.options.cleditor
+            // ** DESCRIPTION.
+            this.descriptionEditor = this.description.cleditor(
+                this.options.cleditor.description
             )[0];
 
             // ** DATE AMBIGUITY.
@@ -584,8 +598,15 @@
          */
         _applyData: function() {
 
-            // Populate inputs.
+            // Update title.
             this.title.val(this._data.title);
+            this.titleEditor.updateFrame().refresh();
+
+            // Update description.
+            this.description.val(this._data.description);
+            this.descriptionEditor.updateFrame().refresh();
+
+            // Populate inputs.
             this.vectorColor.val(this._data.vector_color);
             this.vectorOpacity.val(this._data.vector_opacity);
             this.strokeColor.val(this._data.stroke_color);
@@ -598,10 +619,6 @@
             this.startTime.val(this._data.start_time);
             this.endDate.val(this._data.end_date);
             this.endTime.val(this._data.end_time);
-
-            // Update CLEditor.
-            this.description.val(this._data.description);
-            this.rte.updateFrame().refresh();
 
             // Reposition the draggers.
             this.ambiguity.gradientbuilder(
@@ -639,7 +656,7 @@
             this.endDate.val('');
             this.endTime.val('');
             this.description.val('');
-            this.rte.updateFrame();
+            this.descriptionEditor.updateFrame();
 
             // Reposition the draggers.
             this.ambiguity.gradientbuilder('positionMarkers', 0, 100);
@@ -663,8 +680,11 @@
 
             var data = {};
 
+            // Get the content of the text editors.
+            data['description'] =           this._getDescriptionContent();
+            data['title'] =                 this._getTitleContent();
+
             // Get the form field data.
-            data['title'] =                 this.title.val();
             data['left_percent'] =          parseInt(this.leftPercent.val());
             data['right_percent'] =         parseInt(this.rightPercent.val());
             data['start_date'] =            this.startDate.val();
@@ -677,9 +697,6 @@
             data['stroke_opacity'] =        parseInt(this.strokeOpacity.val());
             data['stroke_width'] =          parseInt(this.strokeWidth.val());
             data['point_radius'] =          parseInt(this.pointRadius.val());
-
-            // Get the content of the text editor.
-            data['description'] =           this._getCLEditorContent();
 
             return data;
 
@@ -706,10 +723,17 @@
          },
 
         /*
-         * Get the <body> content out of cleditor.
+         * Get the <body> content out of the description cleditor.
          */
-        _getCLEditorContent: function(coverage) {
+        _getDescriptionContent: function(coverage) {
             return this.description.next('iframe').contents().find('body').html();
+         },
+
+        /*
+         * Get the <body> content out of the description cleditor.
+         */
+        _getTitleContent: function(coverage) {
+            return this.title.next('iframe').contents().find('body').html();
          },
 
 

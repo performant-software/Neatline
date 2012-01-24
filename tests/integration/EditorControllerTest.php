@@ -1625,6 +1625,8 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $exhibit->items_h_pos =                 'left';
         $exhibit->items_v_pos =                 'top';
         $exhibit->items_height =                'partial';
+        $exhibit->h_percent =                   50;
+        $exhibit->v_percent =                   50;
         $exhibit->added =                       '2011-12-05 09:16:00';
         $exhibit->map_id =                      1;
         $exhibit->save();
@@ -1639,7 +1641,9 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
                 'top_element' =>                'map',
                 'items_h_pos' =>                'right',
                 'items_v_pos' =>                'bottom',
-                'items_height' =>               'full'
+                'items_height' =>               'full',
+                'h_percent' =>                  30,
+                'v_percent' =>                  70
             )
         );
 
@@ -1655,6 +1659,8 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->assertEquals($exhibit->items_h_pos, 'right');
         $this->assertEquals($exhibit->items_v_pos, 'bottom');
         $this->assertEquals($exhibit->items_height, 'full');
+        $this->assertEquals($exhibit->h_percent, 30);
+        $this->assertEquals($exhibit->v_percent, 70);
 
         // Check the JSON representation of the updated exhibit.
         $response = $this->getResponse()->getBody('default');
@@ -1669,6 +1675,8 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->assertContains('"is_map":1', $response);
         $this->assertContains('"is_timeline":1', $response);
         $this->assertContains('"is_items":1', $response);
+        $this->assertContains('"h_percent":30', $response);
+        $this->assertContains('"v_percent":70', $response);
         $this->assertContains('"default_map_bounds":null', $response);
         $this->assertContains('"default_map_zoom":null', $response);
         $this->assertContains('"default_focus_date":null', $response);
@@ -1716,7 +1724,9 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
                 'top_element' =>                'map',
                 'items_h_pos' =>                'right',
                 'items_v_pos' =>                'bottom',
-                'items_height' =>               'full'
+                'items_height' =>               'full',
+                'h_percent' =>                  '30',
+                'v_percent' =>                  '70'
             )
         );
 
@@ -1732,6 +1742,8 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->assertEquals($exhibit->items_h_pos, 'right');
         $this->assertEquals($exhibit->items_v_pos, 'bottom');
         $this->assertEquals($exhibit->items_height, 'full');
+        $this->assertEquals($exhibit->h_percent, 30);
+        $this->assertEquals($exhibit->v_percent, 70);
 
         // Check the JSON representation of the updated exhibit.
         $response = $this->getResponse()->getBody('default');
@@ -1746,6 +1758,8 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->assertContains('"is_map":1', $response);
         $this->assertContains('"is_timeline":1', $response);
         $this->assertContains('"is_items":1', $response);
+        $this->assertContains('"h_percent":30', $response);
+        $this->assertContains('"v_percent":70', $response);
         $this->assertContains('"default_map_bounds":null', $response);
         $this->assertContains('"default_map_zoom":null', $response);
         $this->assertContains('"default_focus_date":null', $response);

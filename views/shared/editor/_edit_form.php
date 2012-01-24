@@ -37,7 +37,7 @@
             <div class="clearfix">
                 <label for="title">Title</label>
                 <div class="input">
-                    <input class="xlarge" name="title" size="30" placeholder="Title" type="text" />
+                    <textarea id="item-title" class="xlarge" name="title" placeholder="Title" rows="1"></textarea>
                     <span class="help-block">The text displayed as the item's icon on the timeline.</span>
                 </div>
             </div>
