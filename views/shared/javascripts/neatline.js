@@ -95,6 +95,12 @@
                     items:                  '#' + this.options.markup.items_id
                 },
 
+                // Positioning constants.
+                constants: {
+                    h_percent:      this.params.proportions.horizontal,
+                    v_percent:      this.params.proportions.vertical
+                },
+
                 // On proportion drag.
                 drag: function(event, obj) {
                     self._trigger('widthdrag', {}, obj);

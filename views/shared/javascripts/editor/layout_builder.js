@@ -101,6 +101,12 @@
                     items:      '#drag-items'
                 },
 
+                // Positioning constants.
+                constants: {
+                    h_percent:  Neatline.proportions.horizontal,
+                    v_percent:  Neatline.proportions.vertical
+                },
+
                 // On width drag.
                 drag: function(event, obj) {
                     self._trigger('widthDrag', {}, obj);
