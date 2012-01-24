@@ -1188,7 +1188,9 @@
         _showTitleTip: function(record) {
 
             // Populate title.
-            this.titleTip.text(record.data.title);
+            this.titleTip.text(
+                $('<span></span>').html(record.data.title).text()
+            );
 
             // Show.
             this.titleTip.css('display', 'block');
