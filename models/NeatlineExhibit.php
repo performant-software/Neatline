@@ -57,8 +57,9 @@ class NeatlineExhibit extends Omeka_record
     public $default_map_bounds;
     public $default_map_zoom;
 
-    // Default timeline focus.
+    // Timeline position defaults.
     public $default_focus_date;
+    public $default_timeline_zoom;
 
     // Default styles.
     public $default_vector_color;

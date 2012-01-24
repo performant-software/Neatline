@@ -73,33 +73,8 @@
                     width:          "80%",
                     intervalUnit:   Timeline.DateTime.YEAR,
                     intervalPixels: 100,
-                    zoomIndex:      10,
-                    zoomSteps:      new Array(
-                      {pixelsPerInterval: 280,  unit: Timeline.DateTime.HOUR},
-                      {pixelsPerInterval: 140,  unit: Timeline.DateTime.HOUR},
-                      {pixelsPerInterval:  70,  unit: Timeline.DateTime.HOUR},
-                      {pixelsPerInterval:  35,  unit: Timeline.DateTime.HOUR},
-                      {pixelsPerInterval: 400,  unit: Timeline.DateTime.DAY},
-                      {pixelsPerInterval: 200,  unit: Timeline.DateTime.DAY},
-                      {pixelsPerInterval: 100,  unit: Timeline.DateTime.DAY},
-                      {pixelsPerInterval:  50,  unit: Timeline.DateTime.DAY},
-                      {pixelsPerInterval: 400,  unit: Timeline.DateTime.MONTH},
-                      {pixelsPerInterval: 200,  unit: Timeline.DateTime.MONTH},
-                      {pixelsPerInterval: 100,  unit: Timeline.DateTime.MONTH},
-                      {pixelsPerInterval:  50,  unit: Timeline.DateTime.MONTH},
-                      {pixelsPerInterval: 400,  unit: Timeline.DateTime.YEAR},
-                      {pixelsPerInterval: 200,  unit: Timeline.DateTime.YEAR},
-                      {pixelsPerInterval: 100,  unit: Timeline.DateTime.YEAR},
-                      {pixelsPerInterval:  50,  unit: Timeline.DateTime.YEAR},
-                      {pixelsPerInterval: 400,  unit: Timeline.DateTime.DECADE},
-                      {pixelsPerInterval: 200,  unit: Timeline.DateTime.DECADE},
-                      {pixelsPerInterval: 100,  unit: Timeline.DateTime.DECADE},
-                      {pixelsPerInterval:  50,  unit: Timeline.DateTime.DECADE},
-                      {pixelsPerInterval: 400,  unit: Timeline.DateTime.CENTURY},
-                      {pixelsPerInterval: 200,  unit: Timeline.DateTime.CENTURY},
-                      {pixelsPerInterval: 100,  unit: Timeline.DateTime.CENTURY},
-                      {pixelsPerInterval:  50,  unit: Timeline.DateTime.CENTURY}
-                    )
+                    zoomIndex:      15,
+                    zoomSteps:      this.getZoomIndexArray()
                 }),
 
                 Timeline.createBandInfo({
@@ -304,6 +279,42 @@
                 });
 
             }
+
+        },
+
+        /*
+         * Get array of zoom indices.
+         *
+         * - return void.
+         */
+        getZoomIndexArray: function() {
+
+            return new Array(
+                {pixelsPerInterval: 280,  unit: Timeline.DateTime.HOUR},
+                {pixelsPerInterval: 140,  unit: Timeline.DateTime.HOUR},
+                {pixelsPerInterval:  70,  unit: Timeline.DateTime.HOUR},
+                {pixelsPerInterval:  35,  unit: Timeline.DateTime.HOUR},
+                {pixelsPerInterval: 400,  unit: Timeline.DateTime.DAY},
+                {pixelsPerInterval: 200,  unit: Timeline.DateTime.DAY},
+                {pixelsPerInterval: 100,  unit: Timeline.DateTime.DAY},
+                {pixelsPerInterval:  50,  unit: Timeline.DateTime.DAY},
+                {pixelsPerInterval: 400,  unit: Timeline.DateTime.MONTH},
+                {pixelsPerInterval: 200,  unit: Timeline.DateTime.MONTH},
+                {pixelsPerInterval: 100,  unit: Timeline.DateTime.MONTH},
+                {pixelsPerInterval:  50,  unit: Timeline.DateTime.MONTH},
+                {pixelsPerInterval: 400,  unit: Timeline.DateTime.YEAR},
+                {pixelsPerInterval: 200,  unit: Timeline.DateTime.YEAR},
+                {pixelsPerInterval: 100,  unit: Timeline.DateTime.YEAR},
+                {pixelsPerInterval:  50,  unit: Timeline.DateTime.YEAR},
+                {pixelsPerInterval: 400,  unit: Timeline.DateTime.DECADE},
+                {pixelsPerInterval: 200,  unit: Timeline.DateTime.DECADE},
+                {pixelsPerInterval: 100,  unit: Timeline.DateTime.DECADE},
+                {pixelsPerInterval:  50,  unit: Timeline.DateTime.DECADE},
+                {pixelsPerInterval: 400,  unit: Timeline.DateTime.CENTURY},
+                {pixelsPerInterval: 200,  unit: Timeline.DateTime.CENTURY},
+                {pixelsPerInterval: 100,  unit: Timeline.DateTime.CENTURY},
+                {pixelsPerInterval:  50,  unit: Timeline.DateTime.CENTURY}
+            );
 
         },
 

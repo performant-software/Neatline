@@ -105,6 +105,7 @@ class NeatlinePlugin
                 `default_map_bounds`    varchar(100) NULL,
                 `default_map_zoom`      int(10) unsigned NULL,
                 `default_focus_date`    varchar(100) NULL,
+                `default_timeline_zoom` int(10) unsigned NULL,
                 `default_vector_color`  tinytext COLLATE utf8_unicode_ci NULL,
                 `default_vector_opacity`int(10) unsigned NULL,
                 `default_stroke_opacity`int(10) unsigned NULL,
