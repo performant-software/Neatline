@@ -260,8 +260,21 @@ class NeatlineExhibit extends Omeka_record
             return false;
         }
 
-        $this['default_' . $style] = $value;
-        return true;
+        // If the value does not match the system default.
+        else if ($value != get_option($style)) {
+            $this['default_' . $style] = $value;
+            return true;
+        }
+
+        // If the value matches the system default and there is an existing
+        // row-level value on the exhibit.
+        else if ($value == get_option($style) &&
+            !is_null($this['default_' . $style])) {
+                $this['default_' . $style] = null;
+                return true;
+        }
+
+        return false;
 
     }
 

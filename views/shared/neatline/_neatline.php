@@ -30,7 +30,12 @@
 
     <div id="map" class="neatline-block"></div>
 
-    <div id="timeline" class="neatline-block neatlinetime-timeline"></div>
+    <div id="timeline" class="neatline-block neatlinetime-timeline">
+        <div class="buttons">
+            <div class="button zoom-in"></div>
+            <div class="button zoom-out"></div>
+        </div>
+    </div>
 
     <div id="items" class="neatline-block">
         <div id="items-container"></div>

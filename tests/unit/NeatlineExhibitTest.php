@@ -548,6 +548,81 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
     }
 
     /**
+     * setStyle() should not save a row value if the passed value is the
+     * same as the system default and there is not a non-null row value.
+     *
+     * @return void.
+     */
+    public function testSetStyleWithNonNovelDuplicateValuesAndUnsetRowValues()
+    {
+
+        // Create a record.
+        $exhibit = $this->helper->_createNeatline();
+
+        // Set.
+        $this->assertFalse($exhibit->setStyle('vector_color', get_option('vector_color')));
+        $this->assertFalse($exhibit->setStyle('vector_opacity', get_option('vector_opacity')));
+        $this->assertFalse($exhibit->setStyle('stroke_color', get_option('stroke_color')));
+        $this->assertFalse($exhibit->setStyle('stroke_opacity', get_option('stroke_opacity')));
+        $this->assertFalse($exhibit->setStyle('stroke_width', get_option('stroke_width')));
+        $this->assertFalse($exhibit->setStyle('point_radius', get_option('point_radius')));
+
+        // Check.
+        $this->assertNull($exhibit->default_vector_color);
+        $this->assertNull($exhibit->default_vector_opacity);
+        $this->assertNull($exhibit->default_stroke_color);
+        $this->assertNull($exhibit->default_stroke_opacity);
+        $this->assertNull($exhibit->default_stroke_width);
+        $this->assertNull($exhibit->default_point_radius);
+
+    }
+
+    /**
+     * setStyle() should null a row-level value when the passed value is the same
+     * as the system default and there is a non-null existing row value.
+     *
+     * @return void.
+     */
+    public function testSetStyleWithNonNovelDuplicateValuesAndSetRowValues()
+    {
+
+        // Create a record.
+        $exhibit = $this->helper->_createNeatline();
+        $exhibit->default_vector_color = '#000000';
+        $exhibit->default_stroke_color = '#000000';
+        $exhibit->default_vector_opacity = 1;
+        $exhibit->default_stroke_opacity = 1;
+        $exhibit->default_stroke_width = 1;
+        $exhibit->default_point_radius = 1;
+        $exhibit->save();
+
+        // Set system styling defaults.
+        set_option('vector_color', '#5033de');
+        set_option('stroke_color', '#1e2ee6');
+        set_option('vector_opacity', 20);
+        set_option('stroke_opacity', 70);
+        set_option('stroke_width', 4);
+        set_option('point_radius', 6);
+
+        // Set.
+        $this->assertTrue($exhibit->setStyle('vector_color', '#5033de'));
+        $this->assertTrue($exhibit->setStyle('vector_opacity', 20));
+        $this->assertTrue($exhibit->setStyle('stroke_color', '#1e2ee6'));
+        $this->assertTrue($exhibit->setStyle('stroke_opacity', 70));
+        $this->assertTrue($exhibit->setStyle('stroke_width', 4));
+        $this->assertTrue($exhibit->setStyle('point_radius', 6));
+
+        // Check.
+        $this->assertNull($exhibit->default_vector_color);
+        $this->assertNull($exhibit->default_stroke_color);
+        $this->assertNull($exhibit->default_vector_opacity);
+        $this->assertNull($exhibit->default_stroke_opacity);
+        $this->assertNull($exhibit->default_stroke_width);
+        $this->assertNull($exhibit->default_point_radius);
+
+    }
+
+    /**
      * getStyle() should return the exhibit-specific default when one exists.
      *
      * @return void.
