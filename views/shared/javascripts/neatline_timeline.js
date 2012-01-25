@@ -40,10 +40,9 @@
 
             // Getters.
             this._window =                  $(window);
-            this.popup =                    $('#timeline-popup');
-            this.popupTitle =               this.popup.find('h3.title-text');
-            this.popupContent =             this.popup.find('div.content');
-            this.popupClose =               this.popup.find('a.close');
+            this.zoomContainer =            $('#zoom-buttons');
+            this.zoomIn =                   this.zoomContainer.find('.zoom-in');
+            this.zoomOut =                  this.zoomContainer.find('.zoom-out');
 
             // Tracker array for tape elements.
             this._idToTapeElements =    {};
@@ -64,6 +63,9 @@
         _instantiateSimile: function() {
 
             var self = this;
+
+            // Detach the zoom buttons container.
+            this.zoomContainer.detach();
 
             // Instantiate the event source object.
             this.eventSource = new Timeline.DefaultEventSource();
@@ -126,6 +128,54 @@
          */
         _constructZoomButtons: function() {
 
+            var self = this;
+
+            // Re-inject the container.
+            this.element.append(this.zoomContainer);
+
+            // Listen for zoom in click.
+            this.zoomIn.bind('mousedown', function() {
+
+                // If the zoom track is not at min.
+                if (self._currentZoomStep > 0) {
+
+                    // Compute center coordinate and zoom.
+                    var centerCoords = self._getCenterOffset();
+                    self.timeline.getBand(0).zoom(
+                        true,
+                        centerCoords.x,
+                        centerCoords.y,
+                        self.timeline.getBand(0)._div
+                    );
+
+                }
+
+                // Notch down the step counter.
+                self._incrementZoomStepDown();
+
+            });
+
+            // Listen for zoom out click.
+            this.zoomOut.bind('mousedown', function() {
+
+                // If the zoom track is not at max.
+                if (self._currentZoomStep < self._zoomSteps.length-1) {
+
+                    // Compute center coordinate and zoom.
+                    var centerCoords = self._getCenterOffset();
+                    self.timeline.getBand(0).zoom(
+                        false,
+                        centerCoords.x,
+                        centerCoords.y,
+                        self.timeline.getBand(0)._div
+                    );
+
+                }
+
+                // Notch up the step counter.
+                self._incrementZoomStepUp();
+
+            });
 
         },
 
@@ -248,6 +298,23 @@
                 }
 
             });
+
+        },
+
+        /*
+         * Calculate the offset of the center point on the timeline.
+         *
+         * - return object:         An object with x and y values.
+         */
+        _getCenterOffset: function() {
+
+            // Get the main band div.
+            var band = this.timeline.getBand(0)._div;
+
+            return {
+                x: -(parseInt($(band).css('left'))) + (this.element.width() / 2),
+                y: -(parseInt($(band).css('top'))) + (this.element.height() / 2)
+            };
 
         },
 
