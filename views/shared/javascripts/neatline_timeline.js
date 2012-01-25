@@ -52,6 +52,7 @@
 
             // Start-up.
             this._instantiateSimile();
+            this._constructZoomButtons();
 
         },
 
@@ -115,6 +116,16 @@
                 }
 
             });
+
+        },
+
+        /*
+         * Construct and gloss the zoom buttons.
+         *
+         * - return void.
+         */
+        _constructZoomButtons: function() {
+
 
         },
 

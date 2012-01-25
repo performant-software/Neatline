@@ -407,13 +407,20 @@
 
             // Get the description, display, measure native height.
             var description = item.next('li');
-            description.css('display', 'list-item');
-            var height = description[0].scrollHeight;
 
-            // Expand.
-            description.animate({
-                'height': height
-            }, 200);
+            // Only show the description if it has content.
+            if (description.text() != '') {
+
+                // Show and measure the description.
+                description.css('display', 'list-item');
+                var height = description[0].scrollHeight;
+
+                // Expand.
+                description.animate({
+                    'height': height
+                }, 200);
+
+            }
 
             // Set trackers.
             this._currentItem = item;
