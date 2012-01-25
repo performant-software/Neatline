@@ -458,7 +458,6 @@
             if (this._currentZoomStep < this._zoomSteps.length-1) {
                 this._currentZoomStep++;
             }
-            console.log(this._currentZoomStep);
         },
 
         /*
@@ -468,7 +467,6 @@
             if (this._currentZoomStep > 0) {
                 this._currentZoomStep--;
             }
-            console.log(this._currentZoomStep);
         },
 
         /*

@@ -255,7 +255,7 @@ function neatline_generateTimegliderTimestamps(
 
     // Try to match a single year.
     if (preg_match('/^[0-9]{4}$/', $startDate, $matches)) {
-        $sYear = $matches[0];
+        $start['year'] = $matches[0];
     }
 
     // Try to match a month and a year.
