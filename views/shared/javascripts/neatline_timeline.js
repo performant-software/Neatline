@@ -144,14 +144,16 @@
                     self.timeline.getBand(0).zoom(
                         true,
                         centerCoords.x,
-                        centerCoords.y,
-                        self.timeline.getBand(0)._div
+                        centerCoords.y
                     );
 
                 }
 
                 // Notch down the step counter.
                 self._incrementZoomStepDown();
+
+                // Re-render.
+                self.refresh();
 
             });
 
@@ -166,14 +168,16 @@
                     self.timeline.getBand(0).zoom(
                         false,
                         centerCoords.x,
-                        centerCoords.y,
-                        self.timeline.getBand(0)._div
+                        centerCoords.y
                     );
 
                 }
 
                 // Notch up the step counter.
                 self._incrementZoomStepUp();
+
+                // Re-render.
+                self.refresh();
 
             });
 
