@@ -126,6 +126,25 @@ function neatline_queueFullscreenAssets()
     // Fullscreen-specific CSS.
     queue_css('bootstrap.xtra.min');
     queue_css('neatline-fullscreen');
+
+}
+
+/**
+ * Include the embedded stylesheet.
+ *
+ * @return void.
+ */
+function neatline_queueEmbedAssets()
+{
+
+    // Neatline runner.
+    queue_js('_constructFullscreenNeatline', 'javascripts');
+    queue_js('utilities/_fullscreen_positioner', 'javascripts');
+
+    // Fullscreen-specific CSS.
+    queue_css('bootstrap.xtra.min');
+    queue_css('neatline-embedded');
+
 }
 
 /**

@@ -239,6 +239,11 @@ class NeatlinePlugin
                 neatline_queueFullscreenAssets();
             }
 
+            else if ($actionName == 'embed') {
+                neatline_queueNeatlineAssets();
+                neatline_queueEmbedAssets();
+            }
+
         }
 
     }
