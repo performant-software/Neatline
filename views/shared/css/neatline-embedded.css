@@ -43,31 +43,20 @@ html {
 #topbar {
     display: none;
     height: 0px;
-    -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25),inset 0 -1px 0 rgba(0, 0, 0, 0.1);
-    -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25),inset 0 -1px 0 rgba(0, 0, 0, 0.1);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25),inset 0 -1px 0 rgba(0, 0, 0, 0.1);
-    text-shadow: 0 -2px 0 rgba(0, 0, 0, 0.25);
-}
-
-#neatline-logo {
-    float: left;
-    margin: 7px 30px 0 20px;
-}
-
-a.omeka-logo {
-    font-family: 'Crimson Text', Georgia, serif;
-    font-size: 19px;
-    float: right;
-    margin: 8px 20px 0 0;
-    color: #e7e7e7;
-}
-
-span.top-bar-title {
-    font-family: 'Crimson Text', Georgia, serif;
-    color: #fff;
-    font-size: 24px;
-    top: 9px;
-    position: relative;
 }
 
 
+/* Exhibit overrides */
+
+#items-container li.item-description {
+    font-size: 12px;
+    line-height: 17px;
+}
+
+#items-container li.item-title {
+    padding: 6px 15px;
+}
+
+#items-container li.item-description {
+    padding: 5px 15px 0 15px;
+}
