@@ -376,7 +376,7 @@
          */
         __activateTitle: function(item) {
             item.stop().animate({
-                'font-size': this.options.css.active_font_size,
+                'font-size': '+=7px',
                 'color': this.options.colors.purple
             }, 100);
         },
@@ -386,7 +386,7 @@
          */
         __deactivateTitle: function(item) {
             item.stop().animate({
-                'font-size': this.options.css.def_font_size,
+                'font-size': '-=7px',
                 'color': this.options.colors.title
             }, 100);
         },
