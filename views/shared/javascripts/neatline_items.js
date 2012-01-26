@@ -137,6 +137,9 @@
                 // Unbind all events.
                 item.add(description).unbind();
 
+                // Disable selection on the titles.
+                item.disableSelection();
+
                 // Listen for events.
                 item.bind({
 
@@ -376,7 +379,7 @@
          */
         __activateTitle: function(item) {
             item.stop().animate({
-                'font-size': '+=7px',
+                'font-size': '+=5px',
                 'color': this.options.colors.purple
             }, 100);
         },
@@ -386,7 +389,7 @@
          */
         __deactivateTitle: function(item) {
             item.stop().animate({
-                'font-size': '-=7px',
+                'font-size': '-=5px',
                 'color': this.options.colors.title
             }, 100);
         },

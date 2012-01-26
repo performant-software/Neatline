@@ -183,7 +183,7 @@ div.title-tip {
     font-size: 13px;
     color: #202020;
     padding: 6px 20px;
-    line-height 180px;
+    line-height: normal !important;
     border-bottom: 1px dotted #cdcdcd;
 }
 
