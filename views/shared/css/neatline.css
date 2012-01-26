@@ -83,6 +83,44 @@ table th, table td {
 }
 
 
+/* Filters */
+
+.topbar div > ul, .nav {
+  display: block;
+  float: right;
+  margin: 0 20px 0 20px;
+  position: relative;
+  left: 0;
+  height: 100%;
+}
+
+.topbar div > ul > li, .nav > li {
+  display: block;
+  height: 34px;
+}
+
+.topbar div > ul a, .nav a {
+  font-family: 'Crimson Text', Georgia, serif;
+  font-size: 20px !important;
+  padding: 8px 15px 11px 15px;
+  display: block;
+  float: none;
+  line-height: 19px;
+  text-decoration: none;
+  cursor: pointer;
+  color: #f9f9f9;
+  z-index: -99 !important;
+  margin: 0 0 0 0;
+}
+
+.topbar div > ul a:hover, .nav a:hover {
+  color: #fff;
+  text-decoration: none;
+}
+
+.topbar div > ul a.open, .nav a.open {
+  background: rgba(255, 255, 255, 0.05);
+}
 
 
 /* Map */

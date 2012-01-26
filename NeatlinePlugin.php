@@ -230,18 +230,18 @@ class NeatlinePlugin
             $actionName = $request->getActionName();
 
             if ($actionName == 'show') {
-                neatline_queueNeatlineAssets();
                 neatline_queueInThemeAssets();
+                neatline_queueNeatlineAssets();
             }
 
             else if ($actionName == 'fullscreen') {
-                neatline_queueNeatlineAssets();
                 neatline_queueFullscreenAssets();
+                neatline_queueNeatlineAssets();
             }
 
             else if ($actionName == 'embed') {
-                neatline_queueNeatlineAssets();
                 neatline_queueEmbedAssets();
+                neatline_queueNeatlineAssets();
             }
 
         }
