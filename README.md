@@ -20,7 +20,7 @@ Neatline is the best tool for these kinds of use cases:
 
 ## Before you start
 
-Neatline can be used in two ways: As a free, public-facing webservice by way of webservice.neatline.org, or as a plugin for Omeka, an open-source web publishing platform similar to Wordpress or Drupal that makes it possible to build and display archival collections with Dublin Core data. Each option - using the webservice or installing Omeka + Neatline in your own hosting environment - has its own pros and cons, and the decision should be guided by the specific requirements of your project.
+Neatline can be used in two ways: As a free, public-facing webservice by way of webservice.neatline.org, or as a plugin for Omeka, an open-source web publishing platform similar to Wordpress or Drupal that makes it possible to build and display archival collections with Dublin Core or EAD metadata. Each option - using the webservice or installing Omeka + Neatline in your own hosting environment - has its own pros and cons, and the decision should be guided by the specific requirements of your project.
 
 The version of the Neatline application delivered by the webservice is identical to the self-hosted version, with the one limitation: Webservice users are limited to "real-geography" base layers (Google Maps and OpenStreetMap layers). If you want to use static or georectified images as base layers, you'll need to run your own instance of Omeka and Neatline, as well as the auxilary software that makes it possible to upload and host the images - the Neatline Maps plugin and Geoserver, a powerful Java-based geospatial server that houses and delivers the custom map assets.
 
@@ -45,7 +45,7 @@ Some general considerations:
       - Best for scholaraly projects where the portability and structural integrity of data is of a premium.
     * _Cons_
       - Requires basic knowledge of web hosting environments, MySQL administration, and web-based software installation.
-      - Although Omeka and Neatline are easy to install and configure, Geoserver (the optional open-source geospatial server that makes it possible to use .tiff images as base layers) is a complex piece of software that can be comparatively difficult deploy.
+      - Geoserver (the optional open-source geospatial server that makes it possible to use .tiff images as base layers) is a complex piece of software that can be comparatively difficult deploy.
 
 
 
