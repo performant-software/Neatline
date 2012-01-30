@@ -20,9 +20,9 @@ Neatline is the best tool for these kinds of use cases:
 
 ## Before you start
 
-Neatline can be used in two ways: As a free, public-facing webservice by way of webservice.neatline.org, or as a plugin for Omeka, an open-source web publishing platform similar to Wordpress or Drupal that makes it possible to build and display archival collections with Dublin Core or EAD metadata. Each option - using the webservice or installing Omeka + Neatline in your own hosting environment - has its own pros and cons, and the decision should be guided by the specific requirements of your project.
+Neatline can be used in two ways: As a free, public-facing webservice by way of [webservice.neatline.org][neatline-webservice], or as a plugin for [Omeka][omeka], an open-source web publishing platform similar to Wordpress or Drupal that makes it possible to build and display archival collections with Dublin Core or EAD metadata. Each option - using the webservice or installing Omeka + Neatline in your own hosting environment - has its own pros and cons, and the decision should be guided by the specific requirements of your project.
 
-The version of the Neatline application delivered by the webservice is identical to the self-hosted version, with the one limitation: Webservice users are limited to "real-geography" base layers (Google Maps and OpenStreetMap layers). If you want to use static or georectified images as base layers, you'll need to run your own instance of Omeka and Neatline, as well as the auxilary software that makes it possible to upload and host the images - the Neatline Maps plugin and Geoserver, a powerful Java-based geospatial server that houses and delivers the custom map assets.
+The version of the Neatline application delivered by the webservice is identical to the self-hosted version, with the one limitation: Webservice users are limited to "real-geography" base layers (Google Maps and OpenStreetMap layers). If you want to use static or georectified images as base layers, you'll need to run your own instance of Omeka and Neatline, as well as the auxilary software that makes it possible to upload and host the images - the [Neatline Maps][neatline-maps-github] plugin and [Geoserver][geoserver], a powerful Java-based geospatial server that houses and delivers the custom map assets.
 
 Some general considerations:
 
@@ -45,8 +45,13 @@ Some general considerations:
       - Requires basic knowledge of web hosting environments, MySQL administration, and web-based software installation.
       - Geoserver, the optional geospatial server that makes it possible to use georectified .tiff images as base layers, is a complex piece of software that can be comparatively difficult deploy.
 
+While the webservice is a fully capable solution for many (if not most) use cases, it also serves a sandbox environment for advanced users who want to demo a fully-functional installation of the software before committing further time and resources. 
 
+## Installation and Setup
 
+### Neatline Web Service
+
+### Self-hosted Omeka + Neatline
 
 
 
@@ -90,9 +95,11 @@ To install Neatline Maps:
 2. Click on the "Plugins" tab, find the listing for Neatline, and click "Install."
 
 
+[omeka]: http://omeka.org
 [omeka-install-documentation]: http://omeka.org/codex/Installation 
 [omeka-github]: https://github.com/omeka/Omeka
 [neatline-github]: https://github.com/scholarslab/Neatline
 [neatline-maps-github]: https://github.com/scholarslab/NeatlineMaps
 [geoserver]: http://geoserver.org
 [openstreetmap]: http://www.openstreetmap.org
+[neatline-web-service]: http://webservice.neatline.org
