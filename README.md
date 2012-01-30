@@ -97,17 +97,29 @@ Neatline is a plugin for [Omeka][omeka], an open-source web publishing platform 
 Installing Omeka + Neatline is a two-step process: Omeka first, then the Neatline plugin. Omeka is a PHP/MySQL application that will run on almost any commertical hosting provider. Before you start, you'll need:
 
   1. A hosting environment that supports PHP and MySQL;
-  2. A way to transfer files onto your server space and make simple text edits . In most cases, it's easiest to use a FTP client like [FileZilla][filezilla]. 
+  2. A way to transfer files onto your server space and make simple text edits. In most cases, a simple FTP client like [FileZilla][filezilla] works well. 
+  3. Credentials for a MySQL database user on your server and the name of a fresh, production database for the Omeka installation. If you don't already have a database user account, most commercial hosting providers provide access to a point-and-click database administration tool like phpMyAdmin where you can create databases and users.
 
 #### Install Omeka
 
-For detailed instructions, refer to the [official documentation][omeka-install-documentation]. In brief:
+For detailed instructions and troubleshooting, refer to the [official documentation][omeka-install-documentation]. In brief:
+
+  1. Go to the [Omeka download][omeka-download] page and click "Download Omeka 1.4.2."
+  2. Once the file is finished downloading, uncompress the .zip file and place the Omeka directory (using an FTP client, if you're working on a remote location) in publicly-accessible directory on your webhost. This is often called something like "public_html" or "www."
+  3. Enter the Omeka directory and edit the db.ini file. Change host to "localhost"; enter the username and password with the credentials of your database user; and change the dbname to the name of the database. When you're done, save the file (and if
+you're working remotely, make sure the changes get committed to the server).
+  4. Open a web browser and go to public location of the Omeka installation folder. If the folder is named "Omeka" and your webhost serves you public content at username.webhost.com, go to username.webhost.com/Omeka.
+  5. If everything is set up properly and the credentials in the db.ini file are valid, you will see a screen titled "Omeka Installation" with a long form. A number of things can go wrong at this point - if your database credentials are invalid, or the database user doesn't have the required access privileges, you might see an error screen saying "Omeka has encountered an internal error." If so, head over to the [official documentation][omeka-install-documentation] for troubleshooting.
+  6. Fill out the "Username," "Password," "Re-type the Password," "Email," "Administrator Email," and "Site Title" information.
+  7. Click "Install."
+  8. Once the installer finishes, click on the "admin panel" link in the success message.
 
 
 
 
 [omeka]: http://omeka.org
 [omeka-install-documentation]: http://omeka.org/codex/Installation 
+[omeka-download]: http://omeka.org/download 
 [omeka-github]: https://github.com/omeka/Omeka
 [neatline-github]: https://github.com/scholarslab/Neatline
 [neatline-maps-github]: https://github.com/scholarslab/NeatlineMaps
