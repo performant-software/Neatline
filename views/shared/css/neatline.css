@@ -227,9 +227,9 @@ div.title-tip {
 
 #items-container li.item-description {
     display: none;
-    font-size: 14px;
+    font-size: 13px;
     margin-bottom: 1em;
-    line-height: 20px;
+    line-height: 1.4em;
     color: #616161;
     padding: 5px 20px 0 20px;
     height: 0;
