@@ -30,7 +30,7 @@ Some general considerations:
     * _Pros_
       - Free, easy, and fast to get up and running. As simple as signing up for an email account.
       - No hosting costs or server administration overhead. No technical knowledge is necessary.
-      - Great for GIS-style use cases that only require "real-geography" base layers (satellite imagery, street maps, etc.). For example, Neatline can easily be used as a drop-in replacement for the custom map-creation functionality in Google maps for users who need a richer feature set.
+      - Great for straightforward, GIS-style use cases that only require "real-geography" base layers (satellite imagery, street maps, etc.). For example, Neatline excels as a drop-in replacement for the custom map-creation functionality in Google maps for users who need a richer feature set.
     * _Cons_
       - Can't upload static images or georectified .tiff files to use as base layers.
       - Can't leverage the archival capabilities or rich metadata support of Omeka.
