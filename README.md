@@ -41,7 +41,7 @@ Some general considerations:
       - Best for complex scholaraly projects where the portability and structural integrity of data is of a premium.
     * _Cons_
       - Requires basic knowledge of web hosting environments, MySQL administration, and web-based software installation.
-      - Geoserver, the optional geospatial server that makes it possible to use georectified .tiff images as base layers, is a complex piece of software that can be comparatively difficult deploy.
+      - Geoserver, the optional geospatial software that makes it possible to serve .tiff files as base layers, is a complex piece of software that can be comparatively difficult deploy.
 
 While the webservice is a fully capable solution for many (if not most) use cases, it also serves a sandbox environment for advanced users who want to demo a fully-functional installation of the software before investing further time and resources. 
 
