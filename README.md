@@ -56,11 +56,11 @@ and password, and click "Sign Up." You'll get redirected to the main "Browse Exh
 your exhibits.
 
 #### Create a New Exhibit
-    1. Click the "New Exhibit" button.
-    2. Enter a title for the exhibit. The title will be displayed in large text at the top of the public display page for the exhibit.
-    3. As you type, the form will automatically generate a "URL Slug" in the box below. The slug is a string of hyphenated text that the webservice will use to form the public URL for the exhibit - below the URL Slug input, the form automatically populates a preview of the final URL for the exhibit. If you want to use a custom URL slug that's different from the title text, just manually edit the form field for the slug at any point and it will stop mirroring the title text.
-    4. Finally, check the "Public" checkbox if you want the exhibit to be publicly accessible. As long as this box is left unchecked, visitors to the public URL for the exhibit will see a "Coming Soon" placeholder. You can come back to this page at any point and toggle this option on and off.  
-    5. Click the "Create" button. You'll get redirected to the Browse Exhibits page, where you'll see a listing for the new exhibit.
+  1. Click the "New Exhibit" button.
+  2. Enter a title for the exhibit. The title will be displayed in large text at the top of the public display page for the exhibit.
+  3. As you type, the form will automatically generate a "URL Slug" in the box below. The slug is a string of hyphenated text that the webservice will use to form the public URL for the exhibit - below the URL Slug input, the form automatically populates a preview of the final URL for the exhibit. If you want to use a custom URL slug that's different from the title text, just manually edit the form field for the slug at any point and it will stop mirroring the title text.
+  4. Finally, check the "Public" checkbox if you want the exhibit to be publicly accessible. As long as this box is left unchecked, visitors to the public URL for the exhibit will see a "Coming Soon" placeholder. You can come back to this page at any point and toggle this option on and off.  
+  5. Click the "Create" button. You'll get redirected to the Browse Exhibits page, where you'll see a listing for the new exhibit.
 
 ### Self-hosted Omeka + Neatline
 
