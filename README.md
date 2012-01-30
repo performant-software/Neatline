@@ -26,9 +26,32 @@ The version of the Neatline application delivered by the webservice is identical
 
 Some general considerations:
 
-  * Webservice: 
-    - Easy and fast to get up and running - as simple as signing up for an email account.
-    - Free and zero-maintenance - no hosting costs or server administration overhead.
+  * **Webservice**: 
+    * _Pros_
+      - Free, easy, and fast to get up and running. As simple as signing up for an email account.
+      - No hosting costs or server administration overhead.
+      - No technical knowledge is necessary.
+      - Great for GIS-style use cases that require "real-geography" base layers (satellite imagery, street maps, hybrid layers).
+      - Great projects that do not require image-based layers or any kind of customization of the out-of-the-box feature set.
+    * _Cons_
+      - Can't upload static images or georectified .tiff files to use as base layers.
+      - Can't leverage the archival functionality of Omeka.
+      - Less direct control over your data.
+
+  * **Self-Hosted**: 
+    * _Pros_
+      - Total control over the hosting environment and deployment of Omeka and Neatline.
+      - Possible to static images and georectified .tiff files as base layers.
+      - Direct ownership of your data.
+      - Full access to the Omeka installation that sits behind Neatline. This makes it possible to create Neatline exhbits that directly extend and build on existing archives of Dublin Core or EAD metadata.
+      - Best for scholaraly projects where the portability and structural integrity of data is of a premium.
+    * _Cons_
+      - Requires basic knowledge of web hosting environments, MySQL administration, and web-based software installation (but not much - this document should be sufficient to walk you through the process).
+      - Although Omeka and Neatline are easy to install and configure, Geoserver (the open-source geospatial server that makes it possible to use .tiff images as base layers) is a robust and complex piece of software that can be comparatively difficult deploy. Again, though, the Neatline documentation provides an extremely detailed walkthrough of the necessary steps. 
+
+
+
+
 
 
 ## Installation
