@@ -20,7 +20,7 @@ Neatline is the best tool for these kinds of use cases:
 
 ## Before you start
 
-Neatline can be used in two ways: As a free, public-facing webservice by way of webservice.neatline.org, or as a suite of plugins for Omeka, an open-source web publishing platform similar to Wordpress or Drupal that makes it possible to build and display archival collections with Dublin Core data. Each option - using the webservice or installing Omeka + Neatline in your own hosting environment - has its own pros and cons, and the decision should be guided by the specific requirements of your project.
+Neatline can be used in two ways: As a free, public-facing webservice by way of webservice.neatline.org, or as a plugin for Omeka, an open-source web publishing platform similar to Wordpress or Drupal that makes it possible to build and display archival collections with Dublin Core data. Each option - using the webservice or installing Omeka + Neatline in your own hosting environment - has its own pros and cons, and the decision should be guided by the specific requirements of your project.
 
 The version of the Neatline application delivered by the webservice is identical to the self-hosted version, with the one limitation: Webservice users are limited to "real-geography" base layers (Google Maps and OpenStreetMap layers). If you want to use static or georectified images as base layers, you'll need to run your own instance of Omeka and Neatline, as well as the auxilary software that makes it possible to upload and host the images - the Neatline Maps plugin and Geoserver, a powerful Java-based geospatial server that houses and delivers the custom map assets.
 
@@ -29,21 +29,19 @@ Some general considerations:
   * **Webservice**: 
     * _Pros_
       - Free, easy, and fast to get up and running. As simple as signing up for an email account.
-      - No hosting costs or server administration overhead.
-      - No technical knowledge is necessary.
+      - No hosting costs or server administration overhead. No technical knowledge is necessary.
       - Great for GIS-style use cases that require "real-geography" base layers (satellite imagery, street maps, hybrid layers).
       - Great projects that do not require image-based layers or any kind of customization of the out-of-the-box feature set.
     * _Cons_
       - Can't upload static images or georectified .tiff files to use as base layers.
       - Can't leverage the archival functionality of Omeka.
-      - Less direct control over your data.
 
   * **Self-Hosted**: 
     * _Pros_
       - Total control over the hosting environment and deployment of Omeka and Neatline.
       - Possible to static images and georectified .tiff files as base layers.
-      - Direct ownership of your data.
       - Full access to the Omeka installation that sits behind Neatline. This makes it possible to create Neatline exhbits that directly extend and build on existing archives of Dublin Core or EAD metadata.
+      - Full access to the Neatline codebase for modification or extension.
       - Best for scholaraly projects where the portability and structural integrity of data is of a premium.
     * _Cons_
       - Requires basic knowledge of web hosting environments, MySQL administration, and web-based software installation (but not much - this document should be sufficient to walk you through the process).
