@@ -92,13 +92,16 @@ In addition to providing the full-screen view for an exhibit, Neatline also make
 
 ### Self-hosted Omeka + Neatline
 
-Neatline is a plugin for Omeka, an open-source web publishing platform that makes it possible to create, curate, and display archival collections based on Dublin Core or EAD metadata. While the web service is designed to make it easy to experiment with Neatline and build exhibits based on real-geography base layers, using Neatline _directly_, inside of the Omeka, makes it possible to base Neatline exhibits on an underlying archive of Omeka items that conforms to rigorous and portable metadata standards.
+Neatline is a plugin for [Omeka][omeka], an open-source web publishing platform that makes it possible to create, curate, and display archival collections based on Dublin Core or EAD metadata. While the web service is designed to make it easy to experiment with Neatline and build exhibits based on real-geography base layers, using Neatline _directly_, inside of the Omeka, makes it possible to base Neatline exhibits on an underlying archive of Omeka items that conforms to rigorous and portable metadata standards.
 
 Installing Omeka + Neatline is a two-step process: Omeka first, then the Neatline plugin. Omeka is a PHP/MySQL application that will run on almost any commertical hosting provider. Before you start, you'll need:
 
   1. A hosting environment that supports PHP and MySQL;
-  2. A way to transfer assets onto your server space and make simple text edits to files. In most cases, it's easiest to use a FTP client like [FileZilla][filezilla]. 
+  2. A way to transfer files onto your server space and make simple text edits . In most cases, it's easiest to use a FTP client like [FileZilla][filezilla]. 
 
+#### Install Omeka
+
+For detailed instructions, refer to the [official documentation][omeka-install-documentation]. In brief:
 
 
 
