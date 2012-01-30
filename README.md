@@ -28,18 +28,16 @@ Some general considerations:
 
   * **Webservice**: 
     * _Pros_
-      - Free, easy, and fast to get up and running. As simple as signing up for an email account.
-      - No hosting costs or server administration overhead. No technical knowledge is necessary.
-      - Great for straightforward, GIS-style use cases that only require "real-geography" base layers (satellite imagery, street maps). Neatline excels as a drop-in replacement for the custom map-making application in Google maps.
+      - Free, easy, and fast to get up and running. As simple as signing up for an email account. No hosting costs or server administration overhead. No technical knowledge is necessary.
+      - Great for straightforward, GIS-style use cases that require only "real-geography" base layers (satellite imagery, street maps). Neatline excels as a drop-in replacement for the custom map-making application in Google maps.
     * _Cons_
       - Can't upload static images or georectified .tiff files to use as base layers.
-      - Can't leverage the archival capabilities or rich metadata support of Omeka.
+      - Can't leverage the underlying archive-building capabilities of Omeka.
 
   * **Self-Hosted**: 
     * _Pros_
-      - Possible to static images and georectified .tiff files as base layers.
+      - Used in conjunction with the Neatline Maps plugin and Geoserver, it's possible to use static images and georectified historical maps as base layers.
       - Full access to the Omeka installation that sits behind Neatline. This makes it possible to create Neatline exhbits that directly extend and build on existing archives of Dublin Core or EAD metadata.
-      - Full access to the Neatline codebase for modification or extension.
       - Best for complex scholaraly projects where the portability and structural integrity of data is of a premium.
     * _Cons_
       - Requires basic knowledge of web hosting environments, MySQL administration, and web-based software installation.
