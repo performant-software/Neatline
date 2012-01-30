@@ -378,20 +378,28 @@
          * Pop the title as active.
          */
         __activateTitle: function(item) {
-            item.stop().animate({
-                'font-size': '+=5px',
-                'color': this.options.colors.purple
-            }, 100);
+
+            if (!item.data('expanded')) {
+                item.stop().animate({
+                    'font-size': '+=5px',
+                    'color': this.options.colors.purple
+                }, 100).data('expanded', true);
+            }
+
         },
 
         /*
          * Return the title to normal.
          */
         __deactivateTitle: function(item) {
-            item.stop().animate({
-                'font-size': '-=5px',
-                'color': this.options.colors.title
-            }, 100);
+
+            if (item.data('expanded')) {
+                item.stop().animate({
+                    'font-size': '-=5px',
+                    'color': this.options.colors.title
+                }, 100).data('expanded', false);
+            }
+
         },
 
         /*
