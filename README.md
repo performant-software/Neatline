@@ -43,7 +43,7 @@ Some general considerations:
       - Requires basic knowledge of web hosting environments, MySQL administration, and web-based software installation.
       - Geoserver, the optional geospatial software that makes it possible to serve .tiff files as base layers, is a complex piece of software that can be comparatively difficult deploy.
 
-While the webservice is a fully capable solution for many (if not most) use cases, it also serves a sandbox environment for advanced users who want to demo a fully-functional installation of the software before investing further time and resources. 
+While the webservice is a fully capable solution for many (if not most) use cases, it's also designed to serve as a sandbox environment for advanced users who want to demo a fully-functional installation of the software before investing further time and resources. 
 
 ## Installation and Setup
 
@@ -68,7 +68,17 @@ After creating an exhibit, you may want to go back and change some of the option
   1. Find the listing for the exhibit that you want to edit and click the "edit details" link below the exhibit title.
   2. You'll get an edit form that's identical to the one that you used to create the exhibit. Edit the Title, URL Slug, or Public options, and click "Save" to commit the changes.
 
+#### View the Public Display Page for an Exhibit
 
+Neatline generates a full-screen page for each of your exhibits that serves as the primary publicly-accessible display for the project. In the browse exhibits view, click the "public" link under the exhibit title to go to the full-screen view. If you do not want the exhibit to be publicly-visible, uncheck the "Public" checkbox in the "edit details" form.
+
+#### Embed An Exhibit 
+
+In addition to providing the full-screen view for an exhibit, Neatline also makes it possible to embed exhibits in any context where HTML markup is allowed. For example, you might want to include a small version of an exhibit in a Wordpress blog post. Neatline includes a dynamic application that lets you configure the dimensions of the embedded exhibit and auto-generates the HTML markup.
+
+  1. Find the listing for the exhibit that you want to embed on the Browse Exhibits page and click the "embed" link below the exhibit title.
+  2. Use the Width and Height inputs to set the dimensions for the embedded exhibit. To increase or decrease the values in the inputs, click on the field and drag the cursor up and down on the page. The value in the input will go up and down, and the preview of the exhibit at the bottom of the page will automaticaly update. If you already know the dimensions that you want for the exhibit, you can also just type directly into the fields.
+  3. Once you've set the dimensions, just copy the contents of the "Embed Code" field and paste the HTML into the destination context.
 
 ### Self-hosted Omeka + Neatline
 
