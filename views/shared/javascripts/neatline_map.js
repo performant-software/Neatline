@@ -144,6 +144,7 @@
                   new OpenLayers.Control.MousePosition(),
                   new OpenLayers.Control.Navigation(),
                   new OpenLayers.Control.ScaleLine(),
+                  new OpenLayers.Control.LayerSwitcher()
                 ],
                 maxResolution: 'auto',
                 projection: Neatline.map.epsg[0],
