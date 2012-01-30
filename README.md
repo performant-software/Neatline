@@ -30,22 +30,28 @@ Some general considerations:
     * _Pros_
       - Free, easy, and fast to get up and running. As simple as signing up for an email account.
       - No hosting costs or server administration overhead. No technical knowledge is necessary.
-      - Great for GIS-style use cases that require "real-geography" base layers (satellite imagery, street maps, hybrid layers).
-      - Great projects that do not require image-based layers or any kind of customization of the out-of-the-box feature set.
+      - Great for GIS-style use cases that only require "real-geography" base layers (satellite imagery, street maps, etc.).
+      - Great projects that do not require image-based layers or any kind of customization of the out-of-the-box feature set. For example, Neatline can easily be used as a drop-in replacement for the custom map-maker functionality in Google maps for users who need a richer features set.
     * _Cons_
       - Can't upload static images or georectified .tiff files to use as base layers.
       - Can't leverage the archival functionality of Omeka.
 
   * **Self-Hosted**: 
     * _Pros_
-      - Total control over the hosting environment and deployment of Omeka and Neatline.
       - Possible to static images and georectified .tiff files as base layers.
       - Full access to the Omeka installation that sits behind Neatline. This makes it possible to create Neatline exhbits that directly extend and build on existing archives of Dublin Core or EAD metadata.
       - Full access to the Neatline codebase for modification or extension.
-      - Best for scholaraly projects where the portability and structural integrity of data is of a premium.
+      - Best for complex scholaraly projects where the portability and structural integrity of data is of a premium.
     * _Cons_
       - Requires basic knowledge of web hosting environments, MySQL administration, and web-based software installation.
-      - Geoserver (the optional open-source geospatial server that makes it possible to use .tiff images as base layers) is a complex piece of software that can be comparatively difficult deploy.
+      - Geoserver, the optional geospatial server that makes it possible to use georectified .tiff images as base layers, is a complex piece of software that can be comparatively difficult deploy.
+
+
+
+
+
+
+
 
 
 
