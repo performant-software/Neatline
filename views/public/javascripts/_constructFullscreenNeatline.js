@@ -81,9 +81,6 @@ jQuery(document).ready(function($) {
             // Focus the timeline.
             neatlineContainer.neatline('zoomTimelineToEvent', obj.recordid);
 
-            // Focus the items tray.
-            neatlineContainer.neatline('showItemDescription', obj.recordid);
-
         }
 
     });

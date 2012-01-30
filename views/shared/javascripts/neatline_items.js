@@ -379,13 +379,11 @@
          */
         __activateTitle: function(item) {
 
-            console.log(item.data('expanded'));
-
             if (!item.data('expanded')) {
                 item.stop().animate({
                     'font-size': '+=5px',
                     'color': this.options.colors.purple
-                }, 100).data('expanded', true);
+                }, 100);
             }
 
         },
@@ -399,7 +397,7 @@
                 item.stop().animate({
                     'font-size': '-=5px',
                     'color': this.options.colors.title
-                }, 100).data('expanded', false);
+                }, 100);
             }
 
         },
@@ -409,10 +407,14 @@
          */
         __expandDescription: function(item) {
 
-            // If another item is expanded, hide.
-            if (this._currentItem != null) {
+            // If another item is expanded and the expanded items is not the
+            // same as the passed item, hide.
+            if (this._currentItem != null &&
+                this._currentItem.attr('recordid') != item.attr('recordid')) {
+
                 this.__hideCurrentDescription();
                 this._currentItem.data('expanded', false);
+
             }
 
             // Mark the title as active.
