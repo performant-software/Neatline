@@ -44,8 +44,8 @@ Some general considerations:
       - Full access to the Neatline codebase for modification or extension.
       - Best for scholaraly projects where the portability and structural integrity of data is of a premium.
     * _Cons_
-      - Requires basic knowledge of web hosting environments, MySQL administration, and web-based software installation (but not much - this document should be sufficient to walk you through the process).
-      - Although Omeka and Neatline are easy to install and configure, Geoserver (the open-source geospatial server that makes it possible to use .tiff images as base layers) is a robust and complex piece of software that can be comparatively difficult deploy. Again, though, the Neatline documentation provides an extremely detailed walkthrough of the necessary steps. 
+      - Requires basic knowledge of web hosting environments, MySQL administration, and web-based software installation.
+      - Although Omeka and Neatline are easy to install and configure, Geoserver (the optional open-source geospatial server that makes it possible to use .tiff images as base layers) is a complex piece of software that can be comparatively difficult deploy.
 
 
 
