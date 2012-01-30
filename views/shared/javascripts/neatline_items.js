@@ -334,9 +334,6 @@
             // If the item is present in the squence tray.
             if (item != null) {
 
-                // Expand the description.
-                this.__expandDescription(item);
-
                 // Get the new scrollTop.
                 var scrollTop = item.position().top + this.element.scrollTop();
 
@@ -350,6 +347,9 @@
                 this.element.animate({
                     'scrollTop': scrollTop + 1
                 }, 200);
+
+                // Expand the description.
+                this.__expandDescription(item);
 
             }
 
