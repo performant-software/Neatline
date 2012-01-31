@@ -113,6 +113,18 @@ you're working remotely, make sure the changes get committed to the server).
   6. Fill out the "Username," "Password," "Re-type the Password," "Email," "Administrator Email," and "Site Title" information.
   7. Click "Install."
   8. Once the installer finishes, click on the "admin panel" link in the success message.
+  9. Enter the administrative credentials that you entered in the installation form and click "Log In."
+
+#### Install Neatline
+
+  1. Go to the [Neatline download][neatline-download] page and download the Neatline plugin.
+  2. Once the file is finished downloading, uncompress the .zip file and place the "Neatline" directory in the plugins/ folder in your Omeka installation .
+  3. Open a web browser and go to your-omeka-site.org/admin, enter your administrative credentials, and click on the "Settings" button
+     at the top right of the screen.
+  4. Click on the "Plugins" tab in the vertical column on the left and find the listing for the Neatline plugin.
+  5. Click the "Install" button.
+
+Once the installation is finished, you'll see a new tab along the top of the administrative interface labeled "Neatline."
 
 
 
@@ -128,3 +140,4 @@ you're working remotely, make sure the changes get committed to the server).
 [neatline-webservice]: http://webservice.neatline.org
 [neatline-webservice-register]: http://webservice.neatline.org/register
 [filezilla]: http://filezilla-project.org/
+[neatline-download]: http://neatline.org/download
