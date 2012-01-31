@@ -198,7 +198,39 @@ To create a new record:
 
   3. As you make changes to the form, the title will become red, indicating that there are un-saved changes in the form. At any point, click the blue "Save" button at the bottom of the form to save the changes. The viewports in the exhibit will automatically reload and display the newly-updated record. 
 
+  4. When you're done with the record, click on its title to contract the form. Click again on the title to reopen it. 
+
+  **Omeka + Neatline**: In addition to the ability to create altogether new records that exist just in the context of the current exhibit, Neatline automatically populates the item browser list with all of the items in your Omeka collection. These work just like the native Neatline records described above, except that they can be reused across exhibits - the same Omeka record can be used, with completely different data, in as mnay exhibits as you want.
+
+  Data entered by way of the Neatline editor does not affect the item's archival metadata in any way. Neatline tracks the associations that tie together an Omeka item, an Neatline exhibit, and the exhibit-specific representation of the item, but doesn't make any changes to the original Dublin Core or EAD metadata.
+
 ### Plot Records on the Map
+
+When you open a record's edit form in the browser tray, 8 new controls appear on the map:
+
+  * Pan (hand icon): The default editing state, this lets you click and drag to pan the focus position of the map.
+
+  * Point (pencil icon): Plot individual points. Click where you want the point. When you're finished, click the hand icon to reactivate the default panning mode.
+
+  * Line (line icon): Plot individual points. To create a straight line that connects a series of points, click where you want the points. When you're finished, double click to lock the final line segment. To draw a free-form, curved line, hold down the SHIFT key, click, and then drag out the line.
+
+  * Polygon (rectangle icon): Create shapes. This works similarly to the line tool - click out a series of points to make flat-edge shapes, or press the SHIFT key and drag out irregular shapes.
+
+When you're done annotating the item, click the blue "Save" button at the bottom of the edit form in the browser tray. 
+
+### Edit Map Shapes
+
+You can edit the map annotation for a record at any point. First, open the edit form the record that you want to change. This can be done either by clicking directly on on the title of the record in the browser tray or by clicking on any of the record's representations on the map or timeline).
+
+  * To edit a point, line, or polygon on the map, click on the shape. The vector will be outlined in red and all points associated with it will expand to indicate that it is ready for editing. 
+
+  * Once the shape is selected, you can toggle on and off any of the three editing modes - Drag, Rotate, and Scale.
+
+    * _Drag_: When Drag is active, an extra point will appear at the geometric center of the shape. Click and drag on the point to drag the postion of the entire shape.
+
+    * _Rotate_: When Rotate is active, an extra point will appear below and to the left of the shape. Click and drag on the point to rotate the shape.
+
+    * _Scale_: When Scale is active, an extra point will appear below and to the left of the shape. Click and drag on the point to skew the vertical and horizontal dimensions of the shape.
 
 ### Plot Records on the Timeline
 
