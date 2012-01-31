@@ -129,16 +129,21 @@ Once the installation is finished, you'll see a new tab along the top of the adm
 #### Install Neatline Maps (Optional)
 
   1. Go to the [Neatline download][neatline-download] page and download the Neatline Maps plugin.
-  2. Once the file is finished downloading, uncompress the .zip file and place the "Neatline" directory in the plugins/ folder in your Omeka installation .
-  3. Open a web browser and go to your-omeka-site.org/admin, enter your administrative credentials, and click on the "Settings" button
-     at the top right of the screen.
-  4. Click on the "Plugins" tab in the vertical column on the left and find the listing for the Neatline Maps plugin.
-  5. Click the "Install" button.
-
-Once the installation is finished, you'll see a new tab along the top of the administrative interface labeled "Neatline Maps."
+  2. Repeat steps 2-5 above.
 
 #### Install Geoserver (Optional)
 
+#### Create a New Exhibit
+
+#### Edit Exhibit Information
+
+#### View the Public Display Page for an Exhibit
+
+#### Embed an Exhibit
+
+#### Delete an Exhibit
+
+## Building Neatline Exhibits
 
 
 
