@@ -232,6 +232,26 @@ You can edit the map annotation for a record at any point. First, open the edit 
 
     * _Scale_: When Scale is active, an extra point will appear below and to the left of the shape. Click and drag on the point to skew the vertical and horizontal dimensions of the shape.
 
+  * Click the red "Delete" button to delete the record. This cannot be undone.
+
+### Edit Map Styles
+
+In addition to the shape drawing and editing tools, Neatline makes it possible to fully customize the color, thickness, and opacity of all geospatial annotations. You can set custom styles both at the level of the entire exhibit and at the level of individual records. Style settings on individual records will always override the exhibit defaults.
+
+To edit exhibit-wide style defaults:
+  
+  * Click on the "Map Settings" tab in the top bar of the browser. A dropdown menu will appear with editing inputs for the 7 exhibit-wide style defaults:
+  
+    * _Default Shape Color_: The fill color of the polygons (everything inside of the border lines, not including the lines).
+
+    * _Default Line Color_: The color of the border lines.
+
+    * _Default Shape Opacity_: The opacity of the polygons (not including the border lines).
+
+    * _Default Line Opacity_: The opacity of the border lines.
+
+    * _Default Point Radius_: The radius of standalone points and verties on lines and polygons.
+
 ### Plot Records on the Timeline
 
 
