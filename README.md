@@ -254,7 +254,25 @@ To edit exhibit-wide style defaults:
 
     * _Default Point Radius_: The radius of standalone points and verties on lines and polygons. Enter a positive integer in the input, or click and drag up and down to gradually modulate the value.
 
+    * _Default Base Layer_: Select the default starting base layer for the exhibit. Users can manually change the base layer with the layer switcher widget at the top right of the map.
+
+As you make changes to the color, radius, and width styles, the shapes on the map _that do not have an item-specific setting for the style in question_ will automatically update the reflect the new settings.
+
+When you're done editing the default styles, click the "Save" button at the bottom of the dropdown to lock the changes.
+
+To edit item-specific styles:
+
+  1. Open the edit form for the record that you want to style.
+
+  2. If it's not already visible, click on the "Map Styles" fieldset heading to display the style options.
+
+  3. Edit the inputs for Shape Color, Line Color, Line Opacity, Line Thickness, and Point Radius as described above. As you make
+     changes, the record's shapes will update to reflect the new settings.
+
+When you're done editing the styles, click the blue "Save" button at the bottom of the edit form.
+
 ### Plot Records on the Timeline
+
 
 
 
