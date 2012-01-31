@@ -169,6 +169,29 @@ Click the "Save Arrangement" button to save the changes to the server.
 
 ### Create Records
 
+Fundamentally, a Neatline exhibit is just a collection of records that are plotted on the map, on the timeline, or both. Records can have these fields:
+
+  * Text Description
+    * Title
+    * Description
+  * Start and End Dates
+    * Start Date
+    * Start Time
+    * End Date
+    * End Time
+  * Timeline Styles
+    * Date Ambiguity
+  * Map Styles
+    * Shape Color
+    * Line Color
+    * Shape Opacity
+    * Line Opacity
+    * Line Thickness
+    * Point Radius
+    * Map Focus
+
+To create a new record, click the "New Item" button at the top of the left pane in the editor. A new listing for the "[Untitled]" record will appear in the record browser tray, and the editing form will be expanded below the new entry.
+
 ### Plot Records on the Map
 
 ### Plot Records on the Timeline
