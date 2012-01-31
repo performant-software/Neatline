@@ -145,11 +145,27 @@ At the heart of Neatline is the editing application, a web interface that lets y
 
 ### Create a Layout
 
+Neatline includes a flexible layout builder that lets you choose exactly which elements you want present in your exhibit, how you want to arrange them, and how large they should be relative to one another.
+
+To open the layout configuration menu, click on the "Layout Editor" link at the top right of the editing interface.
+
 #### Toggle Viewports On and Off
 
-#### Drag Viewports to Create Arrangements
+By default, all three viewports - Map, Timeline, and Items - are activated for new exhibits. To toggle viewports, click on the the buttons along the top of the "Layout Editor" dropdown. The preview layout will react and mock the new viewport configuration. Once a viewport has been disabled, click on its toggle button again to re-enable it.
+
+Click the "Save Arrangement" button to save the changes to the server.
+
+#### Drag Viewports to Create New Arrangements
+
+Click and drag on the viewports in the preview layout to reconfigure the arrangement of the blocks. You can switch the vertical positions of the Map and Timeline and change the height and horizontal alignment of the Items block.
+
+Click the "Save Arrangement" button to save the changes to the server.
 
 #### Set Default Viewport Heights and Widths
+
+As you move your mouse over borders between the blocks in the preview layout, a dotted line will appear along the border and the pointer will change to a resize cursor. Click and drag to adjust the height and width of any of the blocks in the layout.
+
+Click the "Save Arrangement" button to save the changes to the server.
 
 ### Create Records
 
