@@ -1,6 +1,6 @@
 # Neatline
 
-Neatline is a geo-temporal mapping application that makes it possible to plot any _collection of things_ - objects, events, places, people, concepts, or imaginative topologies - on maps, images, and timelines, accompanied by a built-in interface for presenting long-format interpretive text that is tightly coupled with the representations of the objects in space and time.
+Neatline is a geo-temporal mapping application that makes it possible to plot any _collection of things_ - objects, events, places, people, concepts, or imaginative topologies - on maps and timelines, accompanied by a built-in interface for presenting long-format interpretive text that is tightly coupled with the representations of the objects in space and time.
 
 By design, the software is completely agnostic about the original structure of the data that is being represented, and about the structure of final interpretive representations of the data in the exhibit. The geographic footprint of an object can be depicted by any arbitrary shape or collection of shapes on the map, and the temporal footprint can be rendered as a point in time, a span of time, or a rising and falling gradient that captures uncertainty or inherent ambiguity across a time interval.
 
@@ -125,6 +125,20 @@ you're working remotely, make sure the changes get committed to the server).
   5. Click the "Install" button.
 
 Once the installation is finished, you'll see a new tab along the top of the administrative interface labeled "Neatline."
+
+#### Install Neatline Maps (Optional)
+
+  1. Go to the [Neatline download][neatline-download] page and download the Neatline Maps plugin.
+  2. Once the file is finished downloading, uncompress the .zip file and place the "Neatline" directory in the plugins/ folder in your Omeka installation .
+  3. Open a web browser and go to your-omeka-site.org/admin, enter your administrative credentials, and click on the "Settings" button
+     at the top right of the screen.
+  4. Click on the "Plugins" tab in the vertical column on the left and find the listing for the Neatline Maps plugin.
+  5. Click the "Install" button.
+
+Once the installation is finished, you'll see a new tab along the top of the administrative interface labeled "Neatline Maps."
+
+#### Install Geoserver (Optional)
+
 
 
 
