@@ -10,6 +10,8 @@ The basic workflow is simple:
 
   * Each individual record can be plotted on any of three "axes" in the exhibit - the map, the timeline, and a pane that houses long-format descriptive text, images, and other supporting information about the record. As the editor of the exhibit, you can toggle on and off any of the three viewport and configure the arrangements and default sizes of the various blocks.
 
+  * As you create records and draw representations of the material on the map and timeline, you have full control over the _ordering_ of the content in the exhibit, making it possible to construct complex narratives that convey information and arguments in a controlled sequence.
+
 By design, the software is completely agnostic about the original structure of the data that is being represented, and about the structure of final interpretive representations of the data in the exhibit. The geographic footprint of an object can be depicted by any arbitrary shape or collection of shapes on the map, and the temporal footprint can be rendered as a point in time, a span of time, or a rising and falling gradient that captures uncertainty or inherent ambiguity across a time interval.
 
 Once data is plotted in space and time, the representations of a given object on the two major "axes" is tightly coupled. As a user interacts with the map or the timeline, the other viewports in the exhibit automatically update to reflect the current focus of the block that is being directly manipulated. 
@@ -35,23 +37,12 @@ The version of the Neatline application delivered by the webservice is identical
 Some general considerations:
 
   * **Webservice**: 
-    * _Pros_
-      - Free, easy, and fast to get up and running. As simple as signing up for an email account. No hosting costs, software installation, or server administration overhead. No technical knowledge is necessary.
-      - Great for straightforward, GIS-style use cases that require only "real-geography" base layers (satellite imagery, street maps). Neatline excels as a drop-in replacement for the custom map-making application in Google maps.
-    * _Cons_
-      - Can't upload static images or georectified .tiff files to use as base layers.
-      - Can't leverage the underlying archive-building capabilities of Omeka.
+    * _Pros_: Free, easy, and fast to get up and running. As simple as signing up for an email account. No hosting costs, software installation, or server administration overhead. No technical knowledge is necessary. Great for straightforward, GIS-style use cases that require only "real-geography" base layers (satellite imagery, street maps). Neatline excels as a drop-in replacement for the custom map-making application in Google maps.
+    * _Cons_: Can't upload static images or georectified .tiff files to use as base layers. Can't leverage the underlying archive-building capabilities of Omeka.
 
   * **Self-Hosted**: 
-    * _Pros_
-      - Used in conjunction with the Neatline Maps plugin and Geoserver, it's possible to use static images and georectified historical maps as base layers.
-      - Full access to the Omeka installation that sits behind Neatline. This makes it possible to create Neatline exhbits that directly extend and build on existing archives of Dublin Core or EAD metadata.
-      - Best for complex scholaraly projects where the portability and structural integrity of data is of a premium.
-    * _Cons_
-      - Requires basic knowledge of web hosting environments, MySQL administration, and web-based software installation.
-      - Geoserver, the optional geospatial software that makes it possible to serve .tiff files as base layers, is a complex piece of software that can be comparatively difficult deploy.
-
-While the webservice is a fully capable solution for many (if not most) use cases, it's also designed to serve as a sandbox environment for advanced users who want to demo a fully-functional installation of the software before investing further time and resources. 
+    * _Pros_: Used in conjunction with the Neatline Maps plugin and Geoserver, it's possible to use static images and georectified historical maps as base layers. Full access to the Omeka installation that sits behind Neatline. This makes it possible to create Neatline exhbits that directly extend and build on existing archives of Dublin Core or EAD metadata. Best for complex scholaraly projects where the portability and structural integrity of data is of a premium.
+    * _Cons_: Requires basic knowledge of web hosting environments, MySQL administration, and web-based software installation. Geoserver, the optional geospatial software that makes it possible to serve .tiff files as base layers, is a complex piece of software that can be comparatively difficult deploy.
 
 ## Installation and Configuration
 
