@@ -2,6 +2,13 @@
 
 Neatline is a geo-temporal mapping application that makes it possible to plot any _collection of things_ - objects, events, places, people, concepts, or imaginative topologies - on maps and timelines, accompanied by a built-in interface for presenting long-format interpretive text that is tightly coupled with the representations of the objects in space and time.
 
+The basic workflow is simple:
+  * Create a starting environment for your exhibit using georectified historical maps, static images, or real-geography base layers
+    (Google Maps or OpenStreetMap layers).
+  * Create records for the exhibit. Records can represent anything at all - letters, stanzas, people, events, or a completely
+    heterogeneous mix of things.
+  * Each individual record can be plotted on any of three "axes" in the exhibit - the map, the timeline, and a pane that houses long-format descriptive text, images, and other supporting information about the record. As the editor of the exhibit, you can toggle on and off any of the three viewport and configure the arrangements and default sizes of the various blocks.
+
 By design, the software is completely agnostic about the original structure of the data that is being represented, and about the structure of final interpretive representations of the data in the exhibit. The geographic footprint of an object can be depicted by any arbitrary shape or collection of shapes on the map, and the temporal footprint can be rendered as a point in time, a span of time, or a rising and falling gradient that captures uncertainty or inherent ambiguity across a time interval.
 
 Once data is plotted in space and time, the representations of a given object on the two major "axes" is tightly coupled. As a user interacts with the map or the timeline, the other viewports in the exhibit automatically update to reflect the current focus of the block that is being directly manipulated. 
@@ -126,13 +133,6 @@ you're working remotely, make sure the changes get committed to the server).
 
 Once the installation is finished, you'll see a new tab along the top of the administrative interface labeled "Neatline."
 
-#### Install Neatline Maps (Optional)
-
-  1. Go to the [Neatline download][neatline-download] page and download the Neatline Maps plugin.
-  2. Repeat steps 2-5 above.
-
-#### Install Geoserver (Optional)
-
 #### Create a New Exhibit
 
 #### Edit Exhibit Information
@@ -144,6 +144,7 @@ Once the installation is finished, you'll see a new tab along the top of the adm
 #### Delete an Exhibit
 
 ## Building Neatline Exhibits
+
 
 
 
