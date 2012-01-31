@@ -12,7 +12,7 @@ The basic workflow is simple:
 
   * As you create records and draw representations of the material on the map and timeline, you have full control over the _ordering_ of the content in the exhibit, making it possible to construct complex narratives that convey information and arguments in a controlled sequence.
 
-By design, the software is completely agnostic about the original structure of the data that is being represented, and about the structure of final interpretive representations of the data in the exhibit. The geographic footprint of an object can be depicted by any arbitrary shape or collection of shapes on the map, and the temporal footprint can be rendered as a point in time, a span of time, or a rising and falling gradient that captures uncertainty or inherent ambiguity across a time interval.
+By design, the software is completely agnostic about the original structure of the data that is being represented, and about the structure of final interpretive representations of the data in the exhibit. The geographic footprint of an object can be depicted by any arbitrary shape or collection of shapes on the map, and the temporal footprint can be rendered as a point, a span, or a rising and falling gradient that captures uncertainty or inherent ambiguity across a time interval.
 
 Once data is plotted in space and time, the representations of a given object on the two major "axes" is tightly coupled. As a user interacts with the map or the timeline, the other viewports in the exhibit automatically update to reflect the current focus of the block that is being directly manipulated. 
 
@@ -129,13 +129,21 @@ Once the installation is finished, you'll see a new tab along the top of the adm
 
 #### Edit Exhibit Information
 
-#### View the Public Display Page for an Exhibit
+#### View the Full-Screen Display Page for an Exhibit
+
+#### View the In-Theme Display Page for an Exhibit
 
 #### Embed an Exhibit
 
 #### Delete an Exhibit
 
 ## Building Neatline Exhibits
+
+At the heart of Neatline is the editor application, a web interface that lets you create exhibits, add records, annotate maps and timelines, and construct complex sequences and progressions that unfold arguments about geospatial entities. 
+
+**Note:** Although the exhibit-building feature set delivered by the Neatline webservice is almost identical to the functionality of the self-hosted version of the software, there are a handful of extra features in the self-hosted version that make it possible to integrate existing archival collections in Omeka with Neatline exhibits. In the following documentation, these features will be prefaced with the **Omeka + Neatline Feature:** label.
+
+
 
 
 
