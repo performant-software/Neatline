@@ -242,15 +242,17 @@ To edit exhibit-wide style defaults:
   
   * Click on the "Map Settings" tab in the top bar of the browser. A dropdown menu will appear with editing inputs for the 7 exhibit-wide style defaults:
   
-    * _Default Shape Color_: The fill color of the polygons (everything inside of the border lines, not including the lines).
+    * _Default Shape Color_: The fill color of the polygons (everything inside of the border lines, not including the lines). Click on the  swatch to the right of the input to open a color picker.
 
-    * _Default Line Color_: The color of the border lines.
+    * _Default Line Color_: The color of the border lines. Click on the  swatch to the right of the input to open a color picker.
 
-    * _Default Shape Opacity_: The opacity of the polygons (not including the border lines).
+    * _Default Shape Opacity_: The opacity of the polygons (not including the border lines). Enter a number between 0 and 100 in the input, or click and drag up and down to gradually modulate the value.
 
-    * _Default Line Opacity_: The opacity of the border lines.
+    * _Default Line Opacity_: The opacity of the border lines. Enter a number between 0 and 100 in the input, or click and drag up and down to gradually modulate the value.
 
-    * _Default Point Radius_: The radius of standalone points and verties on lines and polygons.
+    * _Default Line Thickness_: The thickness of the border lines in pixels. Enter a positive integer in the input, or click and drag up and down to gradually modulate the value.
+
+    * _Default Point Radius_: The radius of standalone points and verties on lines and polygons. Enter a positive integer in the input, or click and drag up and down to gradually modulate the value.
 
 ### Plot Records on the Timeline
 
