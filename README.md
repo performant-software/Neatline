@@ -193,7 +193,7 @@ Records have these fields:
 
     * **Title**: The title is used to label the record on the timeline and in the prose description tray. The form field includes a simple rich-text editor, which can be used to apply different colors, font-sizes, and emphases to the text. Used in conjunction with ordering functionality, this makes it possible to create implicit hierarchies and parent-child relationships among records. For example, if you are building an exhibit that shows the positions of fifty-odd records in five different cities, you could create a "category" record for each of the cities, set the text to bold and increase the font size, and then focus each of the category records at a zoomed-back view of the corresponding city on the map. Then, each of the individual records can be placed granularly on the map and dragged "under" the parent category record in the description tray.
 
-    * **Description**: The description is a catch-all field that can be used in a number of different ways - it can accomodate anything from short little snippets of annotation to long-format interpretive prose. This field includes a more complex rich-text editor, which makes it possible to use more advanced formatting options - bullets, numbered lists, indentations, text alignments, links, and images. If you need complete control over the markup and styling, click the "\<\>" button at the bottom right of the control bar to view and edit the raw HTML for the field.
+    * **Description**: The description is a catch-all field that can be used in a number of different ways - it can accomodate anything from short little snippets of annotation to long-format interpretive prose. This field includes a more complex rich-text editor, which makes it possible to use more advanced formatting options - bullets, numbered lists, indentations, text alignments, links, and images. If you need complete control over the markup and styling, click the "\< \>" button at the bottom right of the control bar to view and edit the raw HTML for the field.
 
   * Start and End Dates
 
@@ -210,29 +210,29 @@ Records have these fields:
       * 10:15 PM
       * 15:15
 
-    * **End Date**: Same as start date. If a date is entered here, the record will be rendered as a span on the timeline, as opposed to a single point.
+    * **End Date**: Same as start date. If a date is entered here, the record will be represented as a span, as opposed to a single point.
 
     * **End Time**: Same as start time.
 
   * Timeline Styles
 
-    * Date Ambiguity
+    * **Date Ambiguity**: Especially in a humanistic context, the concept of time is often slippery and imprecise. Although Neatline does not aspire to do full justice to the nuance of the subject, the Date Ambiguity widget lets you drag out a gradient of uncertainty or fuzziness across a time interval. Drag the two controls handles inward to create an "ascent" and "descent" of intensity or certainty over the span; create a continuous increase or decrease by dragging both handles all the way to one side or the other. This is a crude control that just scratches the surface of temporal modeling, but it at least allows you to avoid inadvertently making the incorrect impression that a period of time is fixed or definite.
 
   * Map Styles
 
-    * Shape Color
+    * **Shape Color**: The fill color of the polygons (everything inside of the border lines, not including the lines). Click on the  swatch to the right of the input to open a color picker.
 
-    * Line Color
+    * **Line Color**: The color of the border lines. Click on the  swatch to the right of the input to open a color picker.
 
-    * Shape Opacity
+    * **Shape Opacity**: The opacity of the polygons (not including the border lines). Enter a number between 0 and 100 in the input, or click and drag up and down to gradually modulate the value.
 
-    * Line Opacity
+    * **Line Opacity**: The opacity of the border lines. Enter a number between 0 and 100 in the input, or click and drag up and down to gradually modulate the value.
 
-    * Line Thickness
+    * **Line Thickness**: The thickness of the border lines in pixels. Enter a positive integer in the input, or click and drag up and down to gradually modulate the value.
 
-    * Point Radius
+    * **Point Radius**: The radius of standalone points and verties on lines and polygons. Enter a positive integer in the input, or click and drag up and down to gradually modulate the value.
 
-    * Map Focus
+    * **Fix Item-Specific Map Focus**: The Map Focus for a record is the position and zoom that the map viewport is set to when the record is "activated" by any action elsewhere in the exhibit. For example, if a user clicks on a listing for the record in the description tray or scrolls to the item using the next and previous arrows, the map will automatically refocus at this latitude/longitude and zoom level. By default, if a custom focus has not been set, Neatline approximates a map focus for the record based on the dimensions of the shapes, lines, and points associated with the record on the map. Sometimes, this is sufficient, but in many cases you'll want to configure the default focus - you might want to zoom out to get more context on the screen when the user arrives at the item, or nudge over the focus position to contetualize the record relative to some other specific entity nearby on the map.  To set a focus, adjust the map position and zoom to the exact configuration that you want to use as the default for the record, and then click the "Fix Item-Specific Map Focus" button to save the position. **Note:** Neatline also makes it possible to _just_ set a focus position for a record, even if you haven't added any geometry for the record on the map. So, if there's a location on the map that's self-evident and doesn't need any interpretive shapes, lines, or points, you can use the item-specific focus to just "pin" the map to a particular viewport location and zoom, which will then be retrieved and recreated whenver the user clicks on or scrolls to the record. 
 
 ### Plot Records on the Map
 
