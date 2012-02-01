@@ -127,10 +127,14 @@ Once the installation is finished, you'll see a new tab along the top of the adm
 
 #### Create a New Exhibit
 
-#### View the Full-Screen Display Page for an Exhibit
-
-#### View the In-Theme Display Page for an Exhibit
-
+  1. Click on the "Neatline" tab along the top of the administrative interface.
+  2. Click the "Create an Exhibit" button.
+  3. Enter a title for the exhibit. The title will be displayed at the top of the full-screen public display view. 
+  4. Choose a base layer:
+    * **Option 1**: If you are using Neatline Maps and Geoserver to serve georectified .tiff images, use the "Choose a Map" dropdown menu to select the map that you want to build the exhibit with.
+    * **Option 2**: You can also use any static image associated with an Omeka item as the base layer. Use the "Choose an Image" dropdown to browse all images in your archive, grouped by parent item.
+    * **Option 3**: To use a package of real-geography base layers (OpenStreetMaps, Google Physical, Google Streets, Google Hybrid, and Google Sattelite), just leave both of the dropdown fields empty.
+  5. Click "Create Exhibit."
 
 ## Building Neatline Exhibits
 

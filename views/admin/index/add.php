@@ -78,7 +78,7 @@ head(array('content_class' => 'neatline'));
     <hr>
 
     <?php echo neatline_buttonTo('', 'save_neatline',
-        'Create Neatline', array('class' => 'neatline btn primary'), 'create-neatline', array(), false, 'create-fieldset'); ?>
+        'Create Exhibit', array('class' => 'neatline btn primary'), 'create-neatline', array(), false, 'create-fieldset'); ?>
 
 </form>
 
