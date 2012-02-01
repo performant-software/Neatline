@@ -169,10 +169,28 @@ Click the "Save Arrangement" button to save the changes to the server.
 
 ### Create Records
 
-Fundamentally, a Neatline exhibit is just a collection of records that are plotted on the map, on the timeline, or both. Records can have these fields:
+Fundamentally, a Neatline exhibit is just a collection of records that are plotted on the map, on the timeline, or both.
+
+To create a new record:
+
+  1. Click the "New Item" button at the top of the left pane in the editor. A new listing for the "[Untitled]" record will appear in the record browser tray, and the editing form will be expanded below the new entry.
+
+  2. Fill out the form fields that are necessary to describe the object or concept that the record represents. By default, the "Text Description" and "Start and End Dates" field sets are expanded, but you can manually expand and contract each of the four field sets by clicking on the blue titles. The state of the form - which of the fieldsets are visible - will persist even when you move to the form for a different record, making it easy to make a batch of similar changes on a number of records.
+
+  3. As you make changes to the form, the title will become red, indicating that there are un-saved changes in the form. At any point, click the blue "Save" button at the bottom of the form to save the changes. The viewports in the exhibit will automatically reload and display the newly-updated record. 
+
+  4. When you're done with the record, click on its title to contract the form. Click again on the title to reopen it. 
+
+**Omeka + Neatline**: In addition to the ability to create altogether new records that exist just in the context of the current exhibit, Neatline automatically populates the item browser list with all of the items in your Omeka collection. These work just like the native Neatline records described above, except that they can be reused across exhibits - the same Omeka record can be used, with completely different data, in as mnay exhibits as you want.
+
+Data entered by way of the Neatline editor does not affect the item's archival metadata in any way. Neatline tracks the associations that tie together an Omeka item, an Neatline exhibit, and the exhibit-specific representation of the item, but doesn't make any changes to the original Dublin Core or EAD metadata.
+
+#### Record Fields
+
+Records have these fields:
 
   * Text Description
-    * Title
+    * **Title**: The title is used to label the record on the timeline and in the prose description tray. The form field includes a simple rich-text editor, which can be used to apply different colors, font-sizes, and emphases to the text. Used in conjunction with ordering functionality, this makes it possible to create "heading" or "category" records that preface a collection of related sub-records. For example, if you are building an exhibit that shows the positions of 50 records in 5 different cities, you might create a "category" record for each of the cities, set the text to bold and increase the font size, and then focus each of the category records at a zoomed-back view of the corresponding city on the map.
     * Description
   * Start and End Dates
     * Start Date
@@ -190,23 +208,9 @@ Fundamentally, a Neatline exhibit is just a collection of records that are plott
     * Point Radius
     * Map Focus
 
-To create a new record:
-
-  1. Click the "New Item" button at the top of the left pane in the editor. A new listing for the "[Untitled]" record will appear in the record browser tray, and the editing form will be expanded below the new entry.
-
-  2. Fill out the form fields that are necessary to describe the object or concept that the record represents. By default, the "Text Description" and "Start and End Dates" field sets are expanded, but you can manually expand and contract each of the four field sets by clicking on the blue titles. The state of the form - which of the fieldsets are visible - will persist even when you move to the form for a different record, making it easy to make a batch of similar changes on a number of records.
-
-  3. As you make changes to the form, the title will become red, indicating that there are un-saved changes in the form. At any point, click the blue "Save" button at the bottom of the form to save the changes. The viewports in the exhibit will automatically reload and display the newly-updated record. 
-
-  4. When you're done with the record, click on its title to contract the form. Click again on the title to reopen it. 
-
-  **Omeka + Neatline**: In addition to the ability to create altogether new records that exist just in the context of the current exhibit, Neatline automatically populates the item browser list with all of the items in your Omeka collection. These work just like the native Neatline records described above, except that they can be reused across exhibits - the same Omeka record can be used, with completely different data, in as mnay exhibits as you want.
-
-  Data entered by way of the Neatline editor does not affect the item's archival metadata in any way. Neatline tracks the associations that tie together an Omeka item, an Neatline exhibit, and the exhibit-specific representation of the item, but doesn't make any changes to the original Dublin Core or EAD metadata.
-
 ### Plot Records on the Map
 
-When you open a record's edit form in the browser tray, 8 new controls appear on the map:
+When you open a record's edit form in the browser tray, four editing controls appear at the top left of the map:
 
   * Pan (hand icon): The default editing state, this lets you click and drag to pan the focus position of the map.
 
