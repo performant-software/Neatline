@@ -232,7 +232,9 @@ Records have these fields:
 
     * **Point Radius**: The radius of standalone points and verties on lines and polygons. Enter a positive integer in the input, or click and drag up and down to gradually modulate the value.
 
-    * **Fix Item-Specific Map Focus**: The Map Focus for a record is the position and zoom that the map viewport is set to when the record is "activated" by any action elsewhere in the exhibit. For example, if a user clicks on a listing for the record in the description tray or scrolls to the item using the next and previous arrows, the map will automatically refocus at this latitude/longitude and zoom level. By default, if a custom focus has not been set, Neatline approximates a map focus for the record based on the dimensions of the shapes, lines, and points associated with the record on the map. Sometimes, this is sufficient, but in many cases you'll want to configure the default focus - you might want to zoom out to get more context on the screen when the user arrives at the item, or nudge over the focus position to contetualize the record relative to some other specific entity nearby on the map.
+    * **Reset Item Styles**: Click this button to void any item-specific styles set for the record with any of the 6 previous controls. This will cause the record to fall back to the exhibit-wide defaults, which can be configured by way of the "Map Settings" dropdown in the top bar.
+
+    * **Fix Item-Specific Map Focus**: The "map focus" for a record is the position and zoom that the map viewport is set to when the record is "activated" by any action elsewhere in the exhibit. For example, if a user clicks on a listing for the record in the description tray or scrolls to the item using the next and previous arrows, the map will automatically refocus at this latitude/longitude and zoom level. By default, if a custom focus has not been set, Neatline approximates a map focus for the record based on the dimensions of the shapes, lines, and points associated with the record on the map. Sometimes, this is sufficient, but in many cases you'll want to configure the default focus - you might want to zoom out to get more context on the screen when the user arrives at the item, or nudge over the focus position to contetualize the record relative to some other specific entity nearby on the map.
 
       * To set a focus, adjust the map position and zoom to the exact configuration that you want to use as the default for the record, and then click the "Fix Item-Specific Map Focus" button to save the position.
 
@@ -305,7 +307,15 @@ To edit item-specific styles:
 
 When you're done editing the styles, click the blue "Save" button at the bottom of the edit form.
 
-### Plot Records on the Timeline
+### Activate and Deactivate Records
+
+After you've created records, you can toggle the representations of the records on the map and timeline on and off at any point. In the record browser tray on the left side of the screen, there are two columns of checkboxes on the left side of the panel, two checkboxes for each record. The left column, headed by the pin-marker icon, indicates whether a given record is active on the map; the right column, headed by the clock icon, shows whether the record is active on the timeline.
+
+Just check or uncheck any of the blocks at any point, and the status setting will immediately be saved and applied on the exhibit.
+
+**Note:** You can click on the map-pin and clock header icons to filter the records list to just display the records that are activated for the map, the timeline, or both. Click on the headers again to unset the filter and return the list to the full display.
+
+### Edit Record Order
 
 
 
