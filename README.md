@@ -205,7 +205,7 @@ Records have these fields:
       * 10:15 PM
       * 15:15
 
-    * **End Date**: Same as start date. If a date is entered here, the record will be represented as a span, as opposed to a single point.
+    * **End Date**: Same as start date. If an end date is entered, the record will be represented as a span (as opposed to a single point).
 
     * **End Time**: Same as start time.
 
@@ -301,7 +301,20 @@ Just check or uncheck any of the blocks at any point, and the status setting wil
 
 ### Edit Record Order
 
-In some cases, 
+In some cases, an exhibit needs to unfold content in a structured, linear sequence - an argument needs to be traced from start to finish, the representation of a series of events needs to be followed in a specific order.
+
+For these situations, Neatline makes it possible to customize the order in which records display in the description tray. When a user comes to the exhibit, she can use the forwards and backwards arrows the scroll linearly through the contents of the exhibit.
+
+To create a custom ordering:
+
+  1. Click the "Item Settings" tab at the top right of the editor.
+
+  2. Click the "Edit Item Order" button in the dropdown menu. The button will turn blue to indicate that the description tray is in reorder mode.
+
+  3. Click on record listings in the description tray and drag them up and down to reorder the exhibit.
+
+  4. When you're finished, click the "Save" button on the "Item Settings" dropdown. Click the "Edit Item Order" button again to return the description tray to its normal mode.
+
 
 
 
