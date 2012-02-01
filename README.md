@@ -127,15 +127,10 @@ Once the installation is finished, you'll see a new tab along the top of the adm
 
 #### Create a New Exhibit
 
-#### Edit Exhibit Information
-
 #### View the Full-Screen Display Page for an Exhibit
 
 #### View the In-Theme Display Page for an Exhibit
 
-#### Embed an Exhibit
-
-#### Delete an Exhibit
 
 ## Building Neatline Exhibits
 
@@ -296,17 +291,6 @@ As you make changes to the color, radius, and width styles, the shapes on the ma
 
 When you're done editing the default styles, click the "Save" button at the bottom of the dropdown to lock the changes.
 
-To edit item-specific styles:
-
-  1. Open the edit form for the record that you want to style.
-
-  2. If it's not already visible, click on the "Map Styles" fieldset heading to display the style options.
-
-  3. Edit the inputs for Shape Color, Line Color, Line Opacity, Line Thickness, and Point Radius as described above. As you make
-     changes, the record's shapes will update to reflect the new settings.
-
-When you're done editing the styles, click the blue "Save" button at the bottom of the edit form.
-
 ### Activate and Deactivate Records
 
 After you've created records, you can toggle the representations of the records on the map and timeline on and off at any point. In the record browser tray on the left side of the screen, there are two columns of checkboxes on the left side of the panel, two checkboxes for each record. The left column, headed by the pin-marker icon, indicates whether a given record is active on the map; the right column, headed by the clock icon, shows whether the record is active on the timeline.
@@ -317,7 +301,7 @@ Just check or uncheck any of the blocks at any point, and the status setting wil
 
 ### Edit Record Order
 
-
+In some cases, 
 
 
 
