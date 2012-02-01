@@ -257,11 +257,11 @@ You can edit the map annotation for a record at any point. First, open the edit 
 
   * Once the shape is selected, you can toggle on and off any of the three editing modes - Drag, Rotate, and Scale.
 
-    * _Drag_: When Drag is active, an extra point will appear at the geometric center of the shape. Click and drag on the point to drag the postion of the entire shape.
+    * **Drag**: When Drag is active, an extra point will appear at the geometric center of the shape. Click and drag on the point to drag the postion of the entire shape.
 
-    * _Rotate_: When Rotate is active, an extra point will appear below and to the left of the shape. Click and drag on the point to rotate the shape.
+    * **Rotate**: When Rotate is active, an extra point will appear below and to the left of the shape. Click and drag on the point to rotate the shape.
 
-    * _Scale_: When Scale is active, an extra point will appear below and to the left of the shape. Click and drag on the point to skew the vertical and horizontal dimensions of the shape.
+    * **Scale**: When Scale is active, an extra point will appear below and to the left of the shape. Click and drag on the point to skew the vertical and horizontal dimensions of the shape.
 
   * Click the red "Delete" button to delete the record. This cannot be undone.
 
@@ -273,19 +273,19 @@ To edit exhibit-wide style defaults:
   
   * Click on the "Map Settings" tab in the top bar of the browser. A dropdown menu will appear with editing inputs for the 7 exhibit-wide style defaults:
   
-    * _Default Shape Color_: The fill color of the polygons (everything inside of the border lines, not including the lines). Click on the  swatch to the right of the input to open a color picker.
+    * **Default Shape Color**: The fill color of the polygons (everything inside of the border lines, not including the lines). Click on the  swatch to the right of the input to open a color picker.
 
-    * _Default Line Color_: The color of the border lines. Click on the  swatch to the right of the input to open a color picker.
+    * **Default Line Color**: The color of the border lines. Click on the  swatch to the right of the input to open a color picker.
 
-    * _Default Shape Opacity_: The opacity of the polygons (not including the border lines). Enter a number between 0 and 100 in the input, or click and drag up and down to gradually modulate the value.
+    * **Default Shape Opacity**: The opacity of the polygons (not including the border lines). Enter a number between 0 and 100 in the input, or click and drag up and down to gradually modulate the value.
 
-    * _Default Line Opacity_: The opacity of the border lines. Enter a number between 0 and 100 in the input, or click and drag up and down to gradually modulate the value.
+    * **Default Line Opacity**: The opacity of the border lines. Enter a number between 0 and 100 in the input, or click and drag up and down to gradually modulate the value.
 
-    * _Default Line Thickness_: The thickness of the border lines in pixels. Enter a positive integer in the input, or click and drag up and down to gradually modulate the value.
+    * **Default Line Thickness**: The thickness of the border lines in pixels. Enter a positive integer in the input, or click and drag up and down to gradually modulate the value.
 
-    * _Default Point Radius_: The radius of standalone points and verties on lines and polygons. Enter a positive integer in the input, or click and drag up and down to gradually modulate the value.
+    * **Default Point Radius**: The radius of standalone points and verties on lines and polygons. Enter a positive integer in the input, or click and drag up and down to gradually modulate the value.
 
-    * _Default Base Layer_: Select the default starting base layer for the exhibit. Users can manually change the base layer with the layer switcher widget at the top right of the map.
+    * **Default Base Layer**: Select the default starting base layer for the exhibit. Users can manually change the base layer with the layer switcher widget at the top right of the map.
 
 As you make changes to the color, radius, and width styles, the shapes on the map _that do not have an item-specific setting for the style in question_ will automatically update the reflect the new settings.
 
