@@ -4,7 +4,7 @@ Neatline is a geo-temporal mapping application that makes it possible to plot an
 
 The basic workflow is simple:
 
-  * Create a starting environment for your exhibit using georectified historical maps, static images, or real-geography base layers (Google Maps or OpenStreetMap layers).
+  * Create a starting environment for your exhibit using georectified historical maps, static images, or real-geography base layers (Google Maps or OpenStreetMap).
 
   * Create records for the exhibit. Records can represent anything at all - letters, stanzas, people, events, or a completely heterogeneous mix of things.
 
@@ -14,9 +14,9 @@ The basic workflow is simple:
 
 By design, the software is completely agnostic about the original structure of the data that is being represented and the structure of final interpretive representations of the data in the exhibit. The geographic footprint of an object can be depicted by any arbitrary shape or collection of shapes on the map, and the temporal footprint can be rendered as a point, a span, or a rising and falling gradient that captures uncertainty or inherent ambiguity across a time interval.
 
-Once data is plotted in space and time, the representations of a given object on the two major "axes" is tightly coupled. As a user interacts with the map or the timeline, the other viewports in the exhibit automatically update to reflect the current focus of the block that is being directly manipulated. 
+Once data is plotted in space and time, the representations of a given object on the three "axes" are tightly coupled. As a user interacts with the map or the timeline, the other viewports in the exhibit automatically update to reflect the current focus of the block that is being directly manipulated. 
 
-This combination of maps, timelines, and long-format interpretive text makes it possible to gracefully represent large, complex, and heterogeneous collections of concepts that would otherwise be difficult box into the limiting confines of simple x-y geographic coordinates and second-specific timestamps. Neatline is designed to make is possible to capture the interpretive freeplay and fuzz that form the bedrock of humanistic narrative and argument.
+This combination of maps, timelines, and long-format interpretive text makes it possible to represent complex ideas, narratives, arguments, archives, and interpretations that would otherwise be difficult box into the limiting confines of simple x-y geographic coordinates and hyper-granular timestamps. Neatline is designed to make is possible to capture the interpretive freeplay and fuzz that form the bedrock of humanistic narrative and argument.
 
 Neatline is the best tool for these kinds of use cases:
 
