@@ -180,7 +180,7 @@ To create a new record:
 
   4. When you're done with the record, click on its title to contract the form. Click again on the title to reopen it. 
 
-**Omeka + Neatline**: In addition to the ability to create altogether new records that exist just in the context of the current exhibit, Neatline automatically populates the item browser list with all of the items in your Omeka collection. These work just like the native Neatline records described above, except that they can be reused across exhibits - the same Omeka record can be used, with completely different data, in as mnay exhibits as you want.
+**Omeka + Neatline**: In addition to the ability to create altogether new records that exist just in the context of the current exhibit, Neatline automatically populates the item browser list with all of the items in your Omeka collection. These work just like the native Neatline records described above, except that they can be reused across exhibits - the same Omeka record can be used, with completely different data, in as many exhibits as you want.
 
 Data entered by way of the Neatline editor does not affect the item's archival metadata in any way. Neatline tracks the associations that tie together an Omeka item, an Neatline exhibit, and the exhibit-specific representation of the item, but doesn't make any changes to the original Dublin Core or EAD metadata.
 
