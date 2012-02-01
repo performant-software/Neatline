@@ -190,22 +190,48 @@ Data entered by way of the Neatline editor does not affect the item's archival m
 Records have these fields:
 
   * Text Description
+
     * **Title**: The title is used to label the record on the timeline and in the prose description tray. The form field includes a simple rich-text editor, which can be used to apply different colors, font-sizes, and emphases to the text. Used in conjunction with ordering functionality, this makes it possible to create implicit hierarchies and parent-child relationships among records. For example, if you are building an exhibit that shows the positions of fifty-odd records in five different cities, you could create a "category" record for each of the cities, set the text to bold and increase the font size, and then focus each of the category records at a zoomed-back view of the corresponding city on the map. Then, each of the individual records can be placed granularly on the map and dragged "under" the parent category record in the description tray.
-    * **Description**: The description is a catch-all field that can be used in a number of different ways - it can accomodate anything from short little snippets of annotation to long-format interpretive prose. This field includes a more complex rich-text editor, which makes it possible to use more advanced formatting options - bullets, numbered lists, indentations, text alignments, links, and images. If you need complete control over the markup and styling, click the "\<\>" button at the bottom right of the control bar to view the raw HTML for the field.
+
+    * **Description**: The description is a catch-all field that can be used in a number of different ways - it can accomodate anything from short little snippets of annotation to long-format interpretive prose. This field includes a more complex rich-text editor, which makes it possible to use more advanced formatting options - bullets, numbered lists, indentations, text alignments, links, and images. If you need complete control over the markup and styling, click the "\<\>" button at the bottom right of the control bar to view and edit the raw HTML for the field.
+
   * Start and End Dates
-    * Start Date
-    * Start Time
-    * End Date
-    * End Time
+
+    * **Start Date**: The start date of the record. This is the only field that is required in order for the record to be displayed on the timeline. Neatline understands dates in any of these formats:
+      * 2012
+      * June, 2012
+      * June 5, 2012
+
+    * **Start Time**: The time of day that the event started. Neatline understands times in any of these formats:
+      * 10:15
+      * 10:15 am
+      * 10:15 AM
+      * 10:15 pm
+      * 10:15 PM
+      * 15:15
+
+    * **End Date**: Same as start date. If a date is entered here, the record will be rendered as a span on the timeline, as opposed to a single point.
+
+    * **End Time**: Same as start time.
+
   * Timeline Styles
+
     * Date Ambiguity
+
   * Map Styles
+
     * Shape Color
+
     * Line Color
+
     * Shape Opacity
+
     * Line Opacity
+
     * Line Thickness
+
     * Point Radius
+
     * Map Focus
 
 ### Plot Records on the Map
