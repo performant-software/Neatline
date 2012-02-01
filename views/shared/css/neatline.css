@@ -46,17 +46,19 @@ table th, table td {
 }
 
 .neatline-bar {
-    background-color: #77488b;
-    background-color: #77488b;
-    background-repeat: repeat-x;
-    background-image: -khtml-gradient(linear, left top, left bottom, from(#67467d), to(#77488b));
-    background-image: -moz-linear-gradient(top, #67467d, #77488b);
-    background-image: -ms-linear-gradient(top, #67467d, #77488b);
-    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #67467d), color-stop(100%, #77488b));
-    background-image: -webkit-linear-gradient(top, #67467d, #77488b);
-    background-image: -o-linear-gradient(top, #67467d, #77488b);
-    background-image: linear-gradient(top, #67467d, #77488b);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#67467d', endColorstr='#77488b', GradientType=0);
+  background-color: hsl(280, 29%, 38%);
+  background-repeat: repeat-x;
+  background-image: -khtml-gradient(linear, left top, left bottom, from(hsl(280, 29%, 58%)), to(hsl(280, 29%, 38%)));
+  background-image: -moz-linear-gradient(top, hsl(280, 29%, 58%), hsl(280, 29%, 38%));
+  background-image: -ms-linear-gradient(top, hsl(280, 29%, 58%), hsl(280, 29%, 38%));
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, hsl(280, 29%, 58%)), color-stop(100%, hsl(280, 29%, 38%)));
+  background-image: -webkit-linear-gradient(top, hsl(280, 29%, 58%), hsl(280, 29%, 38%));
+  background-image: -o-linear-gradient(top, hsl(280, 29%, 58%), hsl(280, 29%, 38%));
+  background-image: linear-gradient(top, hsl(280, 29%, 58%), hsl(280, 29%, 38%));
+  border-color: hsl(280, 29%, 38%) hsl(280, 29%, 38%) hsl(280, 29%, 33%);
+  color: #fff;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.33);
+  -webkit-font-smoothing: antialiased;
 }
 
 .h-drag, .v-drag {
@@ -213,7 +215,7 @@ div.title-tip {
     margin: 0;
 }
 
-#items-container li{
+#items-container li {
     cursor: pointer;
 }
 
