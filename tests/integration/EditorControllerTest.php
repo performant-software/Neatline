@@ -37,6 +37,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         'end_time' => '6:00 AM',
         'vector_color' => '#ffffff',
         'stroke_color' => '#000000',
+        'highlight_color' => '#000000',
         'vector_opacity' => 60,
         'stroke_opacity' => 40,
         'stroke_width' => 5,
@@ -483,6 +484,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $record->end_time =         self::$__testParams['end_time'];
         $record->vector_color =     self::$__testParams['vector_color'];
         $record->stroke_color =     self::$__testParams['stroke_color'];
+        $record->highlight_color =  self::$__testParams['highlight_color'];
         $record->vector_opacity =   self::$__testParams['vector_opacity'];
         $record->stroke_opacity =   self::$__testParams['stroke_opacity'];
         $record->stroke_width =     self::$__testParams['stroke_width'];
@@ -554,12 +556,17 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         );
 
         $this->assertContains(
-            '"vector_opacity":' . self::$__testParams['vector_opacity'],
+            '"stroke_color":"' . self::$__testParams['stroke_color'] . '"',
             $response
         );
 
         $this->assertContains(
-            '"stroke_color":"' . self::$__testParams['stroke_color'] . '"',
+            '"highlight_color":"' . self::$__testParams['highlight_color'] . '"',
+            $response
+        );
+
+        $this->assertContains(
+            '"vector_opacity":' . self::$__testParams['vector_opacity'],
             $response
         );
 
@@ -649,12 +656,17 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         );
 
         $this->assertContains(
-            '"vector_opacity":' . get_option('vector_opacity'),
+            '"stroke_color":"' . get_option('stroke_color') . '"',
             $response
         );
 
         $this->assertContains(
-            '"stroke_color":"' . get_option('stroke_color') . '"',
+            '"highlight_color":"' . get_option('highlight_color') . '"',
+            $response
+        );
+
+        $this->assertContains(
+            '"vector_opacity":' . get_option('vector_opacity'),
             $response
         );
 
@@ -756,12 +768,17 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         );
 
         $this->assertContains(
-            '"vector_opacity":' . get_option('vector_opacity'),
+            '"stroke_color":"' . get_option('stroke_color') . '"',
             $response
         );
 
         $this->assertContains(
-            '"stroke_color":"' . get_option('stroke_color') . '"',
+            '"highlight_color":"' . get_option('highlight_color') . '"',
+            $response
+        );
+
+        $this->assertContains(
+            '"vector_opacity":' . get_option('vector_opacity'),
             $response
         );
 
@@ -796,26 +813,27 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         // Form the POST for a space change.
         $this->request->setMethod('POST')
             ->setPost(array(
-                'item_id' =>        '',
-                'record_id' =>      $record->id,
-                'exhibit_id' =>     $neatline->id,
-                'space_active' =>   (string) self::$__testParams['space_active'],
-                'time_active' =>    (string) self::$__testParams['time_active'],
-                'geocoverage' =>    self::$__testParams['geocoverage'],
-                'title' =>          self::$__testParams['title'],
-                'description' =>    self::$__testParams['description'],
-                'start_date' =>     self::$__testParams['start_date'],
-                'start_time' =>     self::$__testParams['start_time'],
-                'end_date' =>       self::$__testParams['end_date'],
-                'end_time' =>       self::$__testParams['end_time'],
-                'left_percent' =>   self::$__testParams['left_percent'],
-                'right_percent' =>  self::$__testParams['right_percent'],
-                'vector_color' =>   self::$__testParams['vector_color'],
-                'stroke_color' =>   self::$__testParams['stroke_color'],
-                'vector_opacity' => self::$__testParams['vector_opacity'],
-                'stroke_opacity' => self::$__testParams['stroke_opacity'],
-                'stroke_width' =>   self::$__testParams['stroke_width'],
-                'point_radius' =>   self::$__testParams['point_radius']
+                'item_id' =>            '',
+                'record_id' =>          $record->id,
+                'exhibit_id' =>         $neatline->id,
+                'space_active' =>       (string) self::$__testParams['space_active'],
+                'time_active' =>        (string) self::$__testParams['time_active'],
+                'geocoverage' =>        self::$__testParams['geocoverage'],
+                'title' =>              self::$__testParams['title'],
+                'description' =>        self::$__testParams['description'],
+                'start_date' =>         self::$__testParams['start_date'],
+                'start_time' =>         self::$__testParams['start_time'],
+                'end_date' =>           self::$__testParams['end_date'],
+                'end_time' =>           self::$__testParams['end_time'],
+                'left_percent' =>       self::$__testParams['left_percent'],
+                'right_percent' =>      self::$__testParams['right_percent'],
+                'vector_color' =>       self::$__testParams['vector_color'],
+                'stroke_color' =>       self::$__testParams['stroke_color'],
+                'highlight_color' =>    self::$__testParams['highlight_color'],
+                'vector_opacity' =>     self::$__testParams['vector_opacity'],
+                'stroke_opacity' =>     self::$__testParams['stroke_opacity'],
+                'stroke_width' =>       self::$__testParams['stroke_width'],
+                'point_radius' =>       self::$__testParams['point_radius']
             )
         );
 
@@ -876,6 +894,11 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->assertEquals(
             $record->stroke_color,
             self::$__testParams['stroke_color']
+        );
+
+        $this->assertEquals(
+            $record->highlight_color,
+            self::$__testParams['highlight_color']
         );
 
         $this->assertEquals(
@@ -941,26 +964,27 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         // Form the POST for a space change.
         $this->request->setMethod('POST')
             ->setPost(array(
-                'item_id' =>        $item->id,
-                'record_id' =>      '',
-                'exhibit_id' =>     $neatline->id,
-                'space_active' =>   (string) self::$__testParams['space_active'],
-                'time_active' =>    (string) self::$__testParams['time_active'],
-                'geocoverage' =>    self::$__testParams['geocoverage'],
-                'title' =>          self::$__testParams['title'],
-                'description' =>    self::$__testParams['description'],
-                'start_date' =>     self::$__testParams['start_date'],
-                'start_time' =>     self::$__testParams['start_time'],
-                'end_date' =>       self::$__testParams['end_date'],
-                'end_time' =>       self::$__testParams['end_time'],
-                'left_percent' =>   self::$__testParams['left_percent'],
-                'right_percent' =>  self::$__testParams['right_percent'],
-                'vector_color' =>   self::$__testParams['vector_color'],
-                'stroke_color' =>   self::$__testParams['stroke_color'],
-                'vector_opacity' => self::$__testParams['vector_opacity'],
-                'stroke_opacity' => self::$__testParams['stroke_opacity'],
-                'stroke_width' =>   self::$__testParams['stroke_width'],
-                'point_radius' =>   self::$__testParams['point_radius']
+                'item_id' =>            $item->id,
+                'record_id' =>          '',
+                'exhibit_id' =>         $neatline->id,
+                'space_active' =>       (string) self::$__testParams['space_active'],
+                'time_active' =>        (string) self::$__testParams['time_active'],
+                'geocoverage' =>        self::$__testParams['geocoverage'],
+                'title' =>              self::$__testParams['title'],
+                'description' =>        self::$__testParams['description'],
+                'start_date' =>         self::$__testParams['start_date'],
+                'start_time' =>         self::$__testParams['start_time'],
+                'end_date' =>           self::$__testParams['end_date'],
+                'end_time' =>           self::$__testParams['end_time'],
+                'left_percent' =>       self::$__testParams['left_percent'],
+                'right_percent' =>      self::$__testParams['right_percent'],
+                'vector_color' =>       self::$__testParams['vector_color'],
+                'stroke_color' =>       self::$__testParams['stroke_color'],
+                'highlight_color' =>    self::$__testParams['highlight_color'],
+                'vector_opacity' =>     self::$__testParams['vector_opacity'],
+                'stroke_opacity' =>     self::$__testParams['stroke_opacity'],
+                'stroke_width' =>       self::$__testParams['stroke_width'],
+                'point_radius' =>       self::$__testParams['point_radius']
             )
         );
 
@@ -1021,6 +1045,11 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->assertEquals(
             $record->stroke_color,
             self::$__testParams['stroke_color']
+        );
+
+        $this->assertEquals(
+            $record->highlight_color,
+            self::$__testParams['highlight_color']
         );
 
         $this->assertEquals(
@@ -1088,26 +1117,27 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         // Form the POST for a space change.
         $this->request->setMethod('POST')
             ->setPost(array(
-                'item_id' =>        $item->id,
-                'record_id' =>      $record->id,
-                'exhibit_id' =>     $neatline->id,
-                'space_active' =>   (string) self::$__testParams['space_active'],
-                'time_active' =>    (string) self::$__testParams['time_active'],
-                'geocoverage' =>    self::$__testParams['geocoverage'],
-                'title' =>          self::$__testParams['title'],
-                'description' =>    self::$__testParams['description'],
-                'start_date' =>     self::$__testParams['start_date'],
-                'start_time' =>     self::$__testParams['start_time'],
-                'end_date' =>       self::$__testParams['end_date'],
-                'end_time' =>       self::$__testParams['end_time'],
-                'left_percent' =>   self::$__testParams['left_percent'],
-                'right_percent' =>  self::$__testParams['right_percent'],
-                'vector_color' =>   self::$__testParams['vector_color'],
-                'stroke_color' =>   self::$__testParams['stroke_color'],
-                'vector_opacity' => self::$__testParams['vector_opacity'],
-                'stroke_opacity' => self::$__testParams['stroke_opacity'],
-                'stroke_width' =>   self::$__testParams['stroke_width'],
-                'point_radius' =>   self::$__testParams['point_radius']
+                'item_id' =>            $item->id,
+                'record_id' =>          $record->id,
+                'exhibit_id' =>         $neatline->id,
+                'space_active' =>       (string) self::$__testParams['space_active'],
+                'time_active' =>        (string) self::$__testParams['time_active'],
+                'geocoverage' =>        self::$__testParams['geocoverage'],
+                'title' =>              self::$__testParams['title'],
+                'description' =>        self::$__testParams['description'],
+                'start_date' =>         self::$__testParams['start_date'],
+                'start_time' =>         self::$__testParams['start_time'],
+                'end_date' =>           self::$__testParams['end_date'],
+                'end_time' =>           self::$__testParams['end_time'],
+                'left_percent' =>       self::$__testParams['left_percent'],
+                'right_percent' =>      self::$__testParams['right_percent'],
+                'vector_color' =>       self::$__testParams['vector_color'],
+                'stroke_color' =>       self::$__testParams['stroke_color'],
+                'highlight_color' =>    self::$__testParams['highlight_color'],
+                'vector_opacity' =>     self::$__testParams['vector_opacity'],
+                'stroke_opacity' =>     self::$__testParams['stroke_opacity'],
+                'stroke_width' =>       self::$__testParams['stroke_width'],
+                'point_radius' =>       self::$__testParams['point_radius']
             )
         );
 
@@ -1168,6 +1198,11 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->assertEquals(
             $record->stroke_color,
             self::$__testParams['stroke_color']
+        );
+
+        $this->assertEquals(
+            $record->highlight_color,
+            self::$__testParams['highlight_color']
         );
 
         $this->assertEquals(
@@ -1244,25 +1279,26 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->request->setMethod('POST')
             ->setPost(array(
                 'item_id' =>        '',
-                'record_id' =>      $record->id,
-                'exhibit_id' =>     $neatline->id,
-                'space_active' =>   (string) self::$__testParams['space_active'],
-                'time_active' =>    (string) self::$__testParams['time_active'],
-                'geocoverage' =>    'null',
-                'title' =>          self::$__testParams['title'],
-                'description' =>    self::$__testParams['description'],
-                'start_date' =>     self::$__testParams['start_date'],
-                'start_time' =>     self::$__testParams['start_time'],
-                'end_date' =>       self::$__testParams['end_date'],
-                'end_time' =>       self::$__testParams['end_time'],
-                'left_percent' =>   self::$__testParams['left_percent'],
-                'right_percent' =>  self::$__testParams['right_percent'],
-                'vector_color' =>   self::$__testParams['vector_color'],
-                'stroke_color' =>   self::$__testParams['stroke_color'],
-                'vector_opacity' => self::$__testParams['vector_opacity'],
-                'stroke_opacity' => self::$__testParams['stroke_opacity'],
-                'stroke_width' =>   self::$__testParams['stroke_width'],
-                'point_radius' =>   self::$__testParams['point_radius']
+                'record_id' =>          $record->id,
+                'exhibit_id' =>         $neatline->id,
+                'space_active' =>       (string) self::$__testParams['space_active'],
+                'time_active' =>        (string) self::$__testParams['time_active'],
+                'geocoverage' =>        'null',
+                'title' =>              self::$__testParams['title'],
+                'description' =>        self::$__testParams['description'],
+                'start_date' =>         self::$__testParams['start_date'],
+                'start_time' =>         self::$__testParams['start_time'],
+                'end_date' =>           self::$__testParams['end_date'],
+                'end_time' =>           self::$__testParams['end_time'],
+                'left_percent' =>       self::$__testParams['left_percent'],
+                'right_percent' =>      self::$__testParams['right_percent'],
+                'vector_color' =>       self::$__testParams['vector_color'],
+                'stroke_color' =>       self::$__testParams['stroke_color'],
+                'highlight_color' =>    self::$__testParams['highlight_color'],
+                'vector_opacity' =>     self::$__testParams['vector_opacity'],
+                'stroke_opacity' =>     self::$__testParams['stroke_opacity'],
+                'stroke_width' =>       self::$__testParams['stroke_width'],
+                'point_radius' =>       self::$__testParams['point_radius']
             )
         );
 
@@ -1298,26 +1334,27 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         // Form the POST for a space change.
         $this->request->setMethod('POST')
             ->setPost(array(
-                'item_id' =>        $item->id,
-                'record_id' =>      '',
-                'exhibit_id' =>     $neatline->id,
-                'space_active' =>   (string) self::$__testParams['space_active'],
-                'time_active' =>    (string) self::$__testParams['time_active'],
-                'geocoverage' =>    self::$__testParams['geocoverage'],
-                'title' =>          self::$__testParams['title'],
-                'description' =>    self::$__testParams['description'],
-                'start_date' =>     self::$__testParams['start_date'],
-                'start_time' =>     self::$__testParams['start_time'],
-                'end_date' =>       self::$__testParams['end_date'],
-                'end_time' =>       self::$__testParams['end_time'],
-                'left_percent' =>   self::$__testParams['left_percent'],
-                'right_percent' =>  self::$__testParams['right_percent'],
-                'vector_color' =>   self::$__testParams['vector_color'],
-                'stroke_color' =>   self::$__testParams['stroke_color'],
-                'vector_opacity' => self::$__testParams['vector_opacity'],
-                'stroke_opacity' => self::$__testParams['stroke_opacity'],
-                'stroke_width' =>   self::$__testParams['stroke_width'],
-                'point_radius' =>   self::$__testParams['point_radius']
+                'item_id' =>            $item->id,
+                'record_id' =>          '',
+                'exhibit_id' =>         $neatline->id,
+                'space_active' =>       (string) self::$__testParams['space_active'],
+                'time_active' =>        (string) self::$__testParams['time_active'],
+                'geocoverage' =>        self::$__testParams['geocoverage'],
+                'title' =>              self::$__testParams['title'],
+                'description' =>        self::$__testParams['description'],
+                'start_date' =>         self::$__testParams['start_date'],
+                'start_time' =>         self::$__testParams['start_time'],
+                'end_date' =>           self::$__testParams['end_date'],
+                'end_time' =>           self::$__testParams['end_time'],
+                'left_percent' =>       self::$__testParams['left_percent'],
+                'right_percent' =>      self::$__testParams['right_percent'],
+                'vector_color' =>       self::$__testParams['vector_color'],
+                'stroke_color' =>       self::$__testParams['stroke_color'],
+                'highlight_color' =>    self::$__testParams['highlight_color'],
+                'vector_opacity' =>     self::$__testParams['vector_opacity'],
+                'stroke_opacity' =>     self::$__testParams['stroke_opacity'],
+                'stroke_width' =>       self::$__testParams['stroke_width'],
+                'point_radius' =>       self::$__testParams['point_radius']
             )
         );
 
@@ -1355,26 +1392,27 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         // Form the POST with new geocoverage data.
         $this->request->setMethod('POST')
             ->setPost(array(
-                'item_id' =>        $item->id,
-                'record_id' =>      $record->id,
-                'exhibit_id' =>     $neatline->id,
-                'space_active' =>   (string) self::$__testParams['space_active'],
-                'time_active' =>    (string) self::$__testParams['time_active'],
-                'geocoverage' =>    self::$__testParams['geocoverage'],
-                'title' =>          self::$__testParams['title'],
-                'description' =>    self::$__testParams['description'],
-                'start_date' =>     '',
-                'start_time' =>     self::$__testParams['start_time'],
-                'end_date' =>       self::$__testParams['end_date'],
-                'end_time' =>       self::$__testParams['end_time'],
-                'left_percent' =>   self::$__testParams['left_percent'],
-                'right_percent' =>  self::$__testParams['right_percent'],
-                'vector_color' =>   self::$__testParams['vector_color'],
-                'stroke_color' =>   self::$__testParams['stroke_color'],
-                'vector_opacity' => self::$__testParams['vector_opacity'],
-                'stroke_opacity' => self::$__testParams['stroke_opacity'],
-                'stroke_width' =>   self::$__testParams['stroke_width'],
-                'point_radius' =>   self::$__testParams['point_radius']
+                'item_id' =>            $item->id,
+                'record_id' =>          $record->id,
+                'exhibit_id' =>         $neatline->id,
+                'space_active' =>       (string) self::$__testParams['space_active'],
+                'time_active' =>        (string) self::$__testParams['time_active'],
+                'geocoverage' =>        self::$__testParams['geocoverage'],
+                'title' =>              self::$__testParams['title'],
+                'description' =>        self::$__testParams['description'],
+                'start_date' =>         '',
+                'start_time' =>         self::$__testParams['start_time'],
+                'end_date' =>           self::$__testParams['end_date'],
+                'end_time' =>           self::$__testParams['end_time'],
+                'left_percent' =>       self::$__testParams['left_percent'],
+                'right_percent' =>      self::$__testParams['right_percent'],
+                'vector_color' =>       self::$__testParams['vector_color'],
+                'stroke_color' =>       self::$__testParams['stroke_color'],
+                'highlight_color' =>    self::$__testParams['stroke_color'],
+                'vector_opacity' =>     self::$__testParams['vector_opacity'],
+                'stroke_opacity' =>     self::$__testParams['stroke_opacity'],
+                'stroke_width' =>       self::$__testParams['stroke_width'],
+                'point_radius' =>       self::$__testParams['point_radius']
             )
         );
 
@@ -1404,26 +1442,27 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         // Form the POST with new geocoverage data.
         $this->request->setMethod('POST')
             ->setPost(array(
-                'item_id' =>        $item->id,
-                'record_id' =>      '',
-                'exhibit_id' =>     $neatline->id,
-                'space_active' =>   (string) self::$__testParams['space_active'],
-                'time_active' =>    (string) self::$__testParams['time_active'],
-                'geocoverage' =>    self::$__testParams['geocoverage'],
-                'title' =>          self::$__testParams['title'],
-                'description' =>    self::$__testParams['description'],
-                'start_date' =>     '',
-                'start_time' =>     self::$__testParams['start_time'],
-                'end_date' =>       self::$__testParams['end_date'],
-                'end_time' =>       self::$__testParams['end_time'],
-                'left_percent' =>   self::$__testParams['left_percent'],
-                'right_percent' =>  self::$__testParams['right_percent'],
-                'vector_color' =>   self::$__testParams['vector_color'],
-                'stroke_color' =>   self::$__testParams['stroke_color'],
-                'vector_opacity' => self::$__testParams['vector_opacity'],
-                'stroke_opacity' => self::$__testParams['stroke_opacity'],
-                'stroke_width' =>   self::$__testParams['stroke_width'],
-                'point_radius' =>   self::$__testParams['point_radius']
+                'item_id' =>            $item->id,
+                'record_id' =>          '',
+                'exhibit_id' =>         $neatline->id,
+                'space_active' =>       (string) self::$__testParams['space_active'],
+                'time_active' =>        (string) self::$__testParams['time_active'],
+                'geocoverage' =>        self::$__testParams['geocoverage'],
+                'title' =>              self::$__testParams['title'],
+                'description' =>        self::$__testParams['description'],
+                'start_date' =>         '',
+                'start_time' =>         self::$__testParams['start_time'],
+                'end_date' =>           self::$__testParams['end_date'],
+                'end_time' =>           self::$__testParams['end_time'],
+                'left_percent' =>       self::$__testParams['left_percent'],
+                'right_percent' =>      self::$__testParams['right_percent'],
+                'vector_color' =>       self::$__testParams['vector_color'],
+                'stroke_color' =>       self::$__testParams['stroke_color'],
+                'highlight_color' =>    self::$__testParams['stroke_color'],
+                'vector_opacity' =>     self::$__testParams['vector_opacity'],
+                'stroke_opacity' =>     self::$__testParams['stroke_opacity'],
+                'stroke_width' =>       self::$__testParams['stroke_width'],
+                'point_radius' =>       self::$__testParams['point_radius']
             )
         );
 
@@ -1460,26 +1499,27 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         // Form the POST with new geocoverage data.
         $this->request->setMethod('POST')
             ->setPost(array(
-                'item_id' =>        $item->id,
-                'record_id' =>      $record->id,
-                'exhibit_id' =>     $neatline->id,
-                'space_active' =>   (string) self::$__testParams['space_active'],
-                'time_active' =>    (string) self::$__testParams['time_active'],
-                'geocoverage' =>    '',
-                'title' =>          self::$__testParams['title'],
-                'description' =>    self::$__testParams['description'],
-                'start_date' =>     self::$__testParams['start_date'],
-                'start_time' =>     self::$__testParams['start_time'],
-                'end_date' =>       self::$__testParams['end_date'],
-                'end_time' =>       self::$__testParams['end_time'],
-                'left_percent' =>   self::$__testParams['left_percent'],
-                'right_percent' =>  self::$__testParams['right_percent'],
-                'vector_color' =>   self::$__testParams['vector_color'],
-                'stroke_color' =>   self::$__testParams['stroke_color'],
-                'vector_opacity' => self::$__testParams['vector_opacity'],
-                'stroke_opacity' => self::$__testParams['stroke_opacity'],
-                'stroke_width' =>   self::$__testParams['stroke_width'],
-                'point_radius' =>   self::$__testParams['point_radius']
+                'item_id' =>            $item->id,
+                'record_id' =>          $record->id,
+                'exhibit_id' =>         $neatline->id,
+                'space_active' =>       (string) self::$__testParams['space_active'],
+                'time_active' =>        (string) self::$__testParams['time_active'],
+                'geocoverage' =>        '',
+                'title' =>              self::$__testParams['title'],
+                'description' =>        self::$__testParams['description'],
+                'start_date' =>         self::$__testParams['start_date'],
+                'start_time' =>         self::$__testParams['start_time'],
+                'end_date' =>           self::$__testParams['end_date'],
+                'end_time' =>           self::$__testParams['end_time'],
+                'left_percent' =>       self::$__testParams['left_percent'],
+                'right_percent' =>      self::$__testParams['right_percent'],
+                'vector_color' =>       self::$__testParams['vector_color'],
+                'stroke_color' =>       self::$__testParams['stroke_color'],
+                'highlight_color' =>    self::$__testParams['stroke_color'],
+                'vector_opacity' =>     self::$__testParams['vector_opacity'],
+                'stroke_opacity' =>     self::$__testParams['stroke_opacity'],
+                'stroke_width' =>       self::$__testParams['stroke_width'],
+                'point_radius' =>       self::$__testParams['point_radius']
             )
         );
 
@@ -1509,26 +1549,27 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         // Form the POST with new geocoverage data.
         $this->request->setMethod('POST')
             ->setPost(array(
-                'item_id' =>        $item->id,
-                'record_id' =>      '',
-                'exhibit_id' =>     $neatline->id,
-                'space_active' =>   (string) self::$__testParams['space_active'],
-                'time_active' =>    (string) self::$__testParams['time_active'],
-                'geocoverage' =>    '',
-                'title' =>          self::$__testParams['title'],
-                'description' =>    self::$__testParams['description'],
-                'start_date' =>     self::$__testParams['start_date'],
-                'start_time' =>     self::$__testParams['start_time'],
-                'end_date' =>       self::$__testParams['end_date'],
-                'end_time' =>       self::$__testParams['end_time'],
-                'left_percent' =>   self::$__testParams['left_percent'],
-                'right_percent' =>  self::$__testParams['right_percent'],
-                'vector_color' =>   self::$__testParams['vector_color'],
-                'stroke_color' =>   self::$__testParams['stroke_color'],
-                'vector_opacity' => self::$__testParams['vector_opacity'],
-                'stroke_opacity' => self::$__testParams['stroke_opacity'],
-                'stroke_width' =>   self::$__testParams['stroke_width'],
-                'point_radius' =>   self::$__testParams['point_radius']
+                'item_id' =>            $item->id,
+                'record_id' =>          '',
+                'exhibit_id' =>         $neatline->id,
+                'space_active' =>       (string) self::$__testParams['space_active'],
+                'time_active' =>        (string) self::$__testParams['time_active'],
+                'geocoverage' =>        '',
+                'title' =>              self::$__testParams['title'],
+                'description' =>        self::$__testParams['description'],
+                'start_date' =>         self::$__testParams['start_date'],
+                'start_time' =>         self::$__testParams['start_time'],
+                'end_date' =>           self::$__testParams['end_date'],
+                'end_time' =>           self::$__testParams['end_time'],
+                'left_percent' =>       self::$__testParams['left_percent'],
+                'right_percent' =>      self::$__testParams['right_percent'],
+                'vector_color' =>       self::$__testParams['vector_color'],
+                'stroke_color' =>       self::$__testParams['stroke_color'],
+                'highlight_color' =>    self::$__testParams['stroke_color'],
+                'vector_opacity' =>     self::$__testParams['vector_opacity'],
+                'stroke_opacity' =>     self::$__testParams['stroke_opacity'],
+                'stroke_width' =>       self::$__testParams['stroke_width'],
+                'point_radius' =>       self::$__testParams['point_radius']
             )
         );
 

@@ -611,9 +611,7 @@
             this.descriptionEditor.updateFrame().refresh();
 
             // Populate inputs.
-            this.vectorColor.val(this._data.vector_color);
             this.vectorOpacity.val(this._data.vector_opacity);
-            this.strokeColor.val(this._data.stroke_color);
             this.strokeOpacity.val(this._data.stroke_opacity);
             this.strokeWidth.val(this._data.stroke_width);
             this.pointRadius.val(this._data.point_radius);
@@ -635,12 +633,13 @@
                 'setColor',
                 this._data.vector_color);
 
-            // Push the new color onto the picker. Need to set the global
+            // Push the new colors onto the pickers. Need to set the global
             // _opened tracker to circumvent miniColors' automatic firing of
             // the change callback on value set.
             this._opened = true;
             this.vectorColor.miniColors('value', this._data.vector_color);
             this.strokeColor.miniColors('value', this._data.stroke_color);
+            this.highlightColor.miniColors('value', this._data.highlight_color);
             this._opened = false;
 
          },
@@ -696,8 +695,9 @@
             data['end_date'] =              this.endDate.val();
             data['end_time'] =              this.endTime.val();
             data['vector_color'] =          this.vectorColor.val();
-            data['vector_opacity'] =        parseInt(this.vectorOpacity.val());
             data['stroke_color'] =          this.strokeColor.val();
+            data['highlight_color'] =       this.highlightColor.val();
+            data['vector_opacity'] =        parseInt(this.vectorOpacity.val());
             data['stroke_opacity'] =        parseInt(this.strokeOpacity.val());
             data['stroke_width'] =          parseInt(this.strokeWidth.val());
             data['point_radius'] =          parseInt(this.pointRadius.val());
@@ -801,6 +801,8 @@
 
             // Get the data.
             var data = this._getDataForSave(coverage);
+
+            console.log(data);
 
             // Commit.
             $.ajax({

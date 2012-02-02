@@ -80,7 +80,8 @@ class NeatlineExhibit extends Omeka_record
         'default_stroke_color',
         'default_stroke_opacity',
         'default_stroke_width',
-        'default_point_radius'
+        'default_point_radius',
+        'default_highlight_color'
     );
 
 

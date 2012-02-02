@@ -37,6 +37,7 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         'end_time' => '6:00 AM',
         'vector_color' => '#ffffff',
         'stroke_color' => '#000000',
+        'highlight_color' => '#ff0000',
         'vector_opacity' => 60,
         'stroke_opacity' => 40,
         'stroke_width' => 5,
@@ -1002,6 +1003,7 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         $record->end_time =         self::$__testParams['end_time'];
         $record->vector_color =     self::$__testParams['vector_color'];
         $record->stroke_color =     self::$__testParams['stroke_color'];
+        $record->highlight_color =  self::$__testParams['highlight_color'];
         $record->vector_opacity =   self::$__testParams['vector_opacity'];
         $record->stroke_opacity =   self::$__testParams['stroke_opacity'];
         $record->stroke_width =     self::$__testParams['stroke_width'];
@@ -1063,12 +1065,17 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         );
 
         $this->assertContains(
-            '"vector_opacity":' . self::$__testParams['vector_opacity'],
+            '"stroke_color":"' . self::$__testParams['stroke_color'] . '"',
             $json
         );
 
         $this->assertContains(
-            '"stroke_color":"' . self::$__testParams['stroke_color'] . '"',
+            '"highlight_color":"' . self::$__testParams['highlight_color'] . '"',
+            $json
+        );
+
+        $this->assertContains(
+            '"vector_opacity":' . self::$__testParams['vector_opacity'],
             $json
         );
 
@@ -1149,12 +1156,17 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         );
 
         $this->assertContains(
-            '"vector_opacity":' . get_option('vector_opacity'),
+            '"stroke_color":"' . get_option('stroke_color') . '"',
             $json
         );
 
         $this->assertContains(
-            '"stroke_color":"' . get_option('stroke_color') . '"',
+            '"highlight_color":"' . get_option('highlight_color') . '"',
+            $json
+        );
+
+        $this->assertContains(
+            '"vector_opacity":' . get_option('vector_opacity'),
             $json
         );
 

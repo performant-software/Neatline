@@ -57,6 +57,7 @@ class Neatline_HelpersTest extends Omeka_Test_AppTestCase
         // Check for option presence.
         $this->assertNotNull(get_option('vector_color'));
         $this->assertNotNull(get_option('stroke_color'));
+        $this->assertNotNull(get_option('highlight_color'));
         $this->assertNotNull(get_option('vector_opacity'));
         $this->assertNotNull(get_option('stroke_opacity'));
         $this->assertNotNull(get_option('stroke_width'));

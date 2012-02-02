@@ -84,7 +84,8 @@ class NeatlineDataRecord extends Omeka_record
         'stroke_color',
         'stroke_opacity',
         'stroke_width',
-        'point_radius'
+        'point_radius',
+        'highlight_color'
     );
 
 
@@ -164,8 +165,9 @@ class NeatlineDataRecord extends Omeka_record
         $data['title'] =            $this->getTitle();
         $data['description'] =      $this->getDescription();
         $data['vector_color'] =     $this->getStyle('vector_color');
-        $data['vector_opacity'] =   $this->getStyle('vector_opacity');
         $data['stroke_color'] =     $this->getStyle('stroke_color');
+        $data['highlight_color'] =  $this->getStyle('highlight_color');
+        $data['vector_opacity'] =   $this->getStyle('vector_opacity');
         $data['stroke_opacity'] =   $this->getStyle('stroke_opacity');
         $data['stroke_width'] =     $this->getStyle('stroke_width');
         $data['point_radius'] =     $this->getStyle('point_radius');
@@ -196,8 +198,9 @@ class NeatlineDataRecord extends Omeka_record
 
         // Set the array values.
         $data['vector_color'] =     get_option('vector_color');
-        $data['vector_opacity'] =   get_option('vector_opacity');
         $data['stroke_color'] =     get_option('stroke_color');
+        $data['highlight_color'] =  get_option('highlight_color');
+        $data['vector_opacity'] =   get_option('vector_opacity');
         $data['stroke_opacity'] =   get_option('stroke_opacity');
         $data['stroke_width'] =     get_option('stroke_width');
         $data['point_radius'] =     get_option('point_radius');

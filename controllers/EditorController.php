@@ -231,8 +231,9 @@ class Neatline_EditorController extends Omeka_Controller_Action
         $endTime =                  $_post['end_time'];
         $geoCoverage =              $_post['geocoverage'];
         $vectorColor =              $_post['vector_color'];
-        $vectorOpacity =            $_post['vector_opacity'];
         $strokeColor =              $_post['stroke_color'];
+        $highlightColor =           $_post['highlight_color'];
+        $vectorOpacity =            $_post['vector_opacity'];
         $strokeOpacity =            $_post['stroke_opacity'];
         $strokeWidth =              $_post['stroke_width'];
         $pointRadius =              $_post['point_radius'];
@@ -270,8 +271,9 @@ class Neatline_EditorController extends Omeka_Controller_Action
 
         // Set styles and percentages.
         $record->setStyle('vector_color', $vectorColor);
-        $record->setStyle('vector_opacity', $vectorOpacity);
         $record->setStyle('stroke_color', $strokeColor);
+        $record->setStyle('highlight_color', $highlightColor);
+        $record->setStyle('vector_opacity', $vectorOpacity);
         $record->setStyle('stroke_opacity', $strokeOpacity);
         $record->setStyle('stroke_width', $strokeWidth);
         $record->setStyle('point_radius', $pointRadius);

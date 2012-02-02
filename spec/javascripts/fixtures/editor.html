@@ -36,6 +36,11 @@
 <input type="text" class="color-picker miniColors" name="default-stroke-color" value="#1e2ee6" />
 <hr />
 
+<!-- Highlight color. -->
+<h5>Default Highlight Color</h5>
+<input type="text" class="color-picker miniColors" name="default-highlight-color" value="#ff0000" />
+<hr />
+
 <!-- Vector opacity. -->
 <h5>Default Shape Opacity</h5>
 <input type="text" class="integer-dragger" name="default-vector-opacity" value="20" />
@@ -359,6 +364,16 @@ to store the current viewport settings as the public defaults.</p>
             </div>
 
             <div class="clearfix">
+                <label>Highlight Color</label>
+                <div class="input">
+                    <div class="inline-inputs">
+                        <input type="text" class="color-picker" name="highlight-color" />
+                        <span class="help-inline">Select a highlight color.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="clearfix">
                 <label>Shape Opacity</label>
                 <div class="input">
                     <div class="inline-inputs">
@@ -475,7 +490,7 @@ to store the current viewport settings as the public defaults.</p>
 <script type="text/javascript">
 
     // Exhibit parameters.
-    var Neatline = {"added":"2012-02-02 14:19:56","modified":"2012-02-02 14:19:56","name":"Test Exhibit","map_id":null,"image_id":null,"top_element":null,"items_h_pos":null,"items_v_pos":null,"items_height":null,"h_percent":null,"v_percent":null,"is_map":1,"is_timeline":1,"is_items":1,"default_map_bounds":null,"default_map_zoom":null,"default_focus_date":null,"default_timeline_zoom":null,"default_vector_color":null,"default_stroke_color":null,"default_highlight_color":null,"default_vector_opacity":null,"default_stroke_opacity":null,"default_stroke_width":null,"default_point_radius":null,"default_base_layer":null,"id":1};
+    var Neatline = {"added":"2012-02-02 15:55:44","modified":"2012-02-02 15:55:44","name":"Test Exhibit","map_id":null,"image_id":null,"top_element":null,"items_h_pos":null,"items_v_pos":null,"items_height":null,"h_percent":null,"v_percent":null,"is_map":1,"is_timeline":1,"is_items":1,"default_map_bounds":null,"default_map_zoom":null,"default_focus_date":null,"default_timeline_zoom":null,"default_vector_color":null,"default_stroke_color":null,"default_highlight_color":null,"default_vector_opacity":null,"default_stroke_opacity":null,"default_stroke_width":null,"default_point_radius":null,"default_base_layer":null,"id":1};
         Neatline.dataSources = {"timeline":"http:\/\/\/Users\/davidmcclure\/pear\/bin\/neatline-exhibits\/1\/data\/simile","map":"http:\/\/\/Users\/davidmcclure\/pear\/bin\/neatline-exhibits\/1\/data\/openlayers","undated":"http:\/\/\/Users\/davidmcclure\/pear\/bin\/neatline-exhibits\/1\/data\/udi"};
         Neatline.public = false;
         Neatline.baseLayer = {"name":"Google Physical","id":2};
