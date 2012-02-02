@@ -740,7 +740,7 @@ table#items-table tr.hidden {
 .dropdown-content {
     padding: 0.3em 1.5em 1.5em 1.5em;
     display: none;
-    background-color: #fffef8;
+    background-color: #F9F9F9;
     position: absolute;
     top: 0;
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#434343', endColorstr='#343434', GradientType=0);
