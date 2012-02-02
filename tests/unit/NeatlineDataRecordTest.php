@@ -575,6 +575,53 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
     }
 
     /**
+     * If a passed style attribute matches the exhibit default and the record
+     * style is not null, null out the value.
+     *
+     * @return void.
+     */
+    public function testSetStyleWithDefaultsWhenValueIsNotNovelWithExistingNonNullValue()
+    {
+
+        // Create a record.
+        $neatline = $this->helper->_createNeatline();
+        $item = $this->helper->_createItem();
+        $record = new NeatlineDataRecord($item, $neatline);
+        $record->vector_color = '#ffffff';
+        $record->vector_opacity = 20;
+        $record->stroke_color = '#ffffff';
+        $record->stroke_opacity = 20;
+        $record->stroke_width = 20;
+        $record->point_radius = 20;
+        $record->save();
+
+        // Set.
+        $this->assertTrue($record->setStyle('vector_color', get_option('vector_color')));
+        $this->assertTrue($record->setStyle('vector_opacity', get_option('vector_opacity')));
+        $this->assertTrue($record->setStyle('stroke_color', get_option('stroke_color')));
+        $this->assertTrue($record->setStyle('stroke_opacity', get_option('stroke_opacity')));
+        $this->assertTrue($record->setStyle('stroke_width', get_option('stroke_width')));
+        $this->assertTrue($record->setStyle('point_radius', get_option('point_radius')));
+
+        // Check.
+        $this->assertNull($record->vector_color);
+        $this->assertNull($record->vector_opacity);
+        $this->assertNull($record->stroke_color);
+        $this->assertNull($record->stroke_opacity);
+        $this->assertNull($record->stroke_width);
+        $this->assertNull($record->point_radius);
+
+        // Check getters.
+        $this->assertEquals($record->getStyle('vector_color'), get_option('vector_color'));
+        $this->assertEquals($record->getStyle('vector_opacity'),get_option('vector_opacity'));
+        $this->assertEquals($record->getStyle('stroke_color'), get_option('stroke_color'));
+        $this->assertEquals($record->getStyle('stroke_opacity'), get_option('stroke_opacity'));
+        $this->assertEquals($record->getStyle('stroke_width'), get_option('stroke_width'));
+        $this->assertEquals($record->getStyle('point_radius'), get_option('point_radius'));
+
+    }
+
+    /**
      * If 'null' is passed to setGeocoverage, do not set.
      *
      * @return void.

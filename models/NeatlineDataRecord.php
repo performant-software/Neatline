@@ -353,15 +353,32 @@ class NeatlineDataRecord extends Omeka_record
 
         // If there is an exhibit default.
         if (!is_null($exhibit['default_' . $style])) {
+
+            // If the value does not match the default.
             if ($value != $exhibit['default_' . $style]) {
                 $this[$style] = $value;
                 return true;
             }
+
+            // If the value matches the default and there is a non-null
+            // value set on the record, null the record value.
+            else if (!is_null($this[$style])) {
+                $this[$style] = null;
+                return true;
+            }
+
         }
 
         // If the value does not match the system default.
         else if ($value != get_option($style)) {
             $this[$style] = $value;
+            return true;
+        }
+
+        // If the value matches the system default and there is a non-null
+        // value set on the record, null the record value.
+        else if (!is_null($this[$style])) {
+            $this[$style] = null;
             return true;
         }
 
