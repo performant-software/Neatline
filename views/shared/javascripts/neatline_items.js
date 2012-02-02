@@ -149,7 +149,7 @@
                         if (!item.data('expanded')) {
 
                             // Show the description.
-                            self.__expandDescription(item);
+                            // self.__expandDescription(item);
 
                             // Trigger out to the deployment code.
                             self._trigger('itemclick', {}, {
@@ -421,15 +421,8 @@
          */
         __expandDescription: function(item) {
 
-            // If another item is expanded and the expanded items is not the
-            // same as the passed item, hide.
-            if (this._currentItem != null &&
-                this._currentItem.attr('recordid') != item.attr('recordid')) {
-
-                this.__hideCurrentDescription();
-                this._currentItem.data('expanded', false);
-
-            }
+            // Capture the id of the new record.
+            var recordId = item.attr('recordid');
 
             // Mark the title as active.
             this.__activateTitle(item);
@@ -447,12 +440,25 @@
                 // Expand.
                 description.animate({
                     'height': height
-                }, 200);
+                }, 200, function() {
+
+                    // If another item is expanded and the expanded items is not the
+                    // same as the passed item, hide.
+                    if (this._currentItemId != null &&
+                        this._currentItemId != recordId) {
+
+                        this.__hideCurrentDescription();
+                        this._currentItem.data('expanded', false);
+
+                    }
+
+                });
 
             }
 
             // Set trackers.
             this._currentItem = item;
+            this._currentItemId = item.attr('recordid');
             item.data('expanded', true);
 
         },
@@ -477,6 +483,7 @@
 
             // Set trackers.
             this._currentItem = null;
+            this._currentItemId = null;
             item.data('expanded', false);
 
         },

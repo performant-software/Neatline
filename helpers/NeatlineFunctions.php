@@ -171,6 +171,7 @@ function neatline_queueNeatlineAssets()
     queue_js('jquery.getscrollbarwidth', 'javascripts/libraries');
 
     // 3rd party code.
+    queue_js('libraries/openlayers/OpenLayers', 'javascripts');
     queue_js('libraries/taffy-min', 'javascripts');
 
     // Google fonts.
