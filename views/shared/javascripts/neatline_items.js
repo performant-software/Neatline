@@ -30,7 +30,7 @@
             // Hexes.
             colors: {
                 purple: '#724E85',
-                background: '#FFFEF8',
+                background: '#f9f9f9',
                 title: '#202020',
                 highlight: '#f3f6ff'
             },

@@ -45,7 +45,7 @@
 
             // Hexes.
             colors: {
-                light_blue: '#f3f6ff',
+                light_blue: '#FFFEF8',
                 light_yellow: '#f9f9f9',
                 dark_purple: '#4f1d6a',
                 purple: '#724e85',

@@ -134,7 +134,7 @@
     font-size: 12px;
     color: #515151;
     cursor: pointer;
-    background-color: #FFFEF8;
+    background-color: #f9f9f9;
 }
 
 #items-list-container td.item-title {
@@ -182,14 +182,14 @@ span.item-title-fader {
     width: 20%;
 
     background-image: -webkit-gradient(
-      linear, left top, right top, from(rgba(255, 254, 245, 0)),
-      to(rgba(255, 254, 245, 1.0))
+      linear, left top, right top, from(rgba(249, 249, 249, 0)),
+      to(rgba(249, 249, 249, 1.0))
     );
 
     /* mozilla example - FF3.6+ */
     background-image: -moz-linear-gradient(
       right center,
-      rgba(255, 254, 245, 1.0) 20%, rgba(255, 254, 245, 0) 95%
+      rgba(249, 249, 249, 1.0) 20%, rgba(249, 249, 249, 0) 95%
     );
 
 }
@@ -197,14 +197,14 @@ span.item-title-fader {
 #items-list-container tr:hover span.item-title-fader {
 
     background-image: -webkit-gradient(
-      linear, left top, right top, from(rgba(243, 246, 255, 0)),
-      to(rgba(243, 246, 255, 1.0))
+      linear, left top, right top, from(rgba(255, 254, 248, 0)),
+      to(rgba(255, 254, 248, 1.0))
     );
 
     /* mozilla example - FF3.6+ */
     background-image: -moz-linear-gradient(
       right center,
-      rgba(243, 246, 255, 1.0) 20%, rgba(243, 246, 255, 0) 95%
+      rgba(255, 254, 248, 1.0) 20%, rgba(255, 254, 248, 0) 95%
     );
 
 }
