@@ -52,6 +52,7 @@
             // Start-up.
             this._instantiateSimile();
             this._constructZoomButtons();
+            this.element.disableSelection();
 
         },
 
