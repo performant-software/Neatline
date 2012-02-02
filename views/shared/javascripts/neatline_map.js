@@ -1048,8 +1048,6 @@
                 return;
             }
 
-            console.log(record);
-
             // Rebuild the style map.
             record.layer.styleMap = this._getStyleMap(
                 this.options.colors.highlight_color,

@@ -447,12 +447,12 @@
                 // Expand.
                 description.animate({ 'height': height }, 200);
 
-                // Set trackers.
-                self._currentItem = item;
-                self._currentItemId = item.attr('recordid');
-                item.data('expanded', true);
-
             }
+
+            // Set trackers.
+            self._currentItem = item;
+            self._currentItemId = item.attr('recordid');
+            item.data('expanded', true);
 
         },
 
