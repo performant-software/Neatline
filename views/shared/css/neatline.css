@@ -208,6 +208,10 @@ div.title-tip {
 #items {
     background-color: #f9f9f9;
     overflow-y: scroll;
+    -webkit-box-shadow: 1px 1px 6px 1px #4d4d4d;
+    -moz-box-shadow: 1px 1px 6px 1px #4d4d4d;
+    box-shadow: 1px 1px 6px 1px #4d4d4d;
+    z-index: 10;
 }
 
 #items-container ul {
