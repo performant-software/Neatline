@@ -36,7 +36,7 @@
 #drag-box {
     width: 400px;
     height: 220px;
-    border: 1px solid #ddd;
+    /* border: 1px solid #ddd;*/
     margin: 1em 0 0 0;
     padding: 10px
     -moz-border-radius: 2px;
@@ -95,6 +95,7 @@ div.draggable {
     position: absolute;
     top: 0;
     left: 0;
+    border: 1px solid #ddd;
 }
 
 span.drag-tag {
@@ -104,16 +105,16 @@ span.drag-tag {
 }
 
 #drag-map {
-    background-color: #f9f9f9;
+    background-color: #fff;
     width: 100%;
 }
 
 #drag-timeline {
-    background-color: #f4f4f4;
+    background-color: #fff;
 }
 
-#drag-undated-items {
-    background-color: #f0f0f0;
+#drag-items {
+    background-color: #fff;
 }
 
 #layout-save {

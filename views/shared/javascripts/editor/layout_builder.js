@@ -38,15 +38,15 @@
             // Hex defaults.
             colors: {
                 map: {
-                    def: '#f9f9f9',
+                    def: '#fff',
                     target: '#fffcf4'
                 },
                 timeline: {
-                    def: '#f4f4f4',
+                    def: '#fff',
                     target: '#fffcf4'
                 },
                 items: {
-                    def: '#f0f0f0',
+                    def: '#fff',
                     target: '#fffcf4'
                 }
             }
