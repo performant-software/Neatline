@@ -99,14 +99,10 @@ function neatline_queueInThemeAssets()
     // Public-specific CSS additions.
     queue_css('neatline-public');
 
-    $openlayers = 'http://openlayers.org/api/OpenLayers.js';
-    $simile = 'http://api.simile-widgets.org/timeline/2.3.1/timeline-api.js?bundle=true';
     $google = 'http://maps.google.com/maps/api/js?v=3.5&sensor=false';
 
     // API calls.
     $headScript = __v()->headScript();
-    $headScript->appendScript('', 'text/javascript', array('src' => $openlayers));
-    $headScript->appendScript('', 'text/javascript', array('src' => $simile));
     $headScript->appendScript('', 'text/javascript', array('src' => $google));
 
 }
@@ -172,6 +168,7 @@ function neatline_queueNeatlineAssets()
 
     // 3rd party code.
     queue_js('libraries/openlayers/OpenLayers', 'javascripts');
+    queue_js('libraries/simile/timeline-api/timeline-api', 'javascripts');
     queue_js('libraries/taffy-min', 'javascripts');
 
     // Google fonts.

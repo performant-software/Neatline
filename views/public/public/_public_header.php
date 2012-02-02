@@ -40,7 +40,6 @@
 <!-- JavaScripts -->
 <?php display_js(); ?>
 
-<script type="text/javascript" src="http://api.simile-widgets.org/timeline/2.3.1/timeline-api.js?bundle=true"></script>
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?v=3.5&amp;sensor=false"></script>
 
 </head>
