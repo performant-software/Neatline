@@ -35,6 +35,11 @@
 <input type="text" class="color-picker miniColors" name="default-stroke-color" value="<?php echo $neatline->getStyle('stroke_color'); ?>" />
 <hr />
 
+<!-- Highlight color. -->
+<h5>Default Highlight Color</h5>
+<input type="text" class="color-picker miniColors" name="default-highlight-color" value="<?php echo $neatline->getStyle('highlight_color'); ?>" />
+<hr />
+
 <!-- Vector opacity. -->
 <h5>Default Shape Opacity</h5>
 <input type="text" class="integer-dragger" name="default-vector-opacity" value="<?php echo $neatline->getStyle('vector_opacity'); ?>" />

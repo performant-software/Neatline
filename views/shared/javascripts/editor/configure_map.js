@@ -35,6 +35,7 @@
             this.content =              $('#configure-map');
             this.vectorColor =          this.content.find('input[name="default-vector-color"]');
             this.strokeColor =          this.content.find('input[name="default-stroke-color"]');
+            this.highlightColor =       this.content.find('input[name="default-highlight-color"]');
             this.vectorOpacity =        this.content.find('input[name="default-vector-opacity"]');
             this.strokeOpacity =        this.content.find('input[name="default-stroke-opacity"]');
             this.strokeWidth =          this.content.find('input[name="default-stroke-width"]');
@@ -85,6 +86,9 @@
                 }
 
             });
+
+            // ** HIGHLIGHT COLOR.
+            this.highlightColor.miniColors();
 
             // ** VECTOR OPACITY.
             this.vectorOpacity.integerdragger({

@@ -87,6 +87,7 @@
             this.endTime =                  this.form.find('input[name="end-date-time"]');
             this.vectorColor =              this.form.find('input[name="vector-color"]');
             this.strokeColor =              this.form.find('input[name="stroke-color"]');
+            this.highlightColor =           this.form.find('input[name="highlight-color"]');
             this.vectorOpacity =            this.form.find('input[name="vector-opacity"]');
             this.strokeOpacity =            this.form.find('input[name="stroke-opacity"]');
             this.strokeWidth =              this.form.find('input[name="stroke-width"]');
@@ -179,6 +180,9 @@
                 }
 
             });
+
+            // ** HIGHLIGHT COLOR.
+            this.highlightColor.miniColors();
 
             // ** SHAPE OPACITY.
             this.vectorOpacity.integerdragger({

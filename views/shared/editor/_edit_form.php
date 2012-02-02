@@ -138,6 +138,16 @@
             </div>
 
             <div class="clearfix">
+                <label>Highlight Color</label>
+                <div class="input">
+                    <div class="inline-inputs">
+                        <input type="text" class="color-picker" name="highlight-color" />
+                        <span class="help-inline">Select a highlight color.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="clearfix">
                 <label>Shape Opacity</label>
                 <div class="input">
                     <div class="inline-inputs">

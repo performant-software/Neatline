@@ -862,6 +862,12 @@ function neatline_setMapStyleDefaults()
         'default_stroke_color'
     ));
 
+    // Highlight color.
+    set_option('highlight_color', get_plugin_ini(
+        'Neatline',
+        'default_highlight_color'
+    ));
+
     // Vector opacity.
     set_option('vector_opacity', (int) get_plugin_ini(
         'Neatline',
