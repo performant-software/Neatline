@@ -157,6 +157,7 @@
             data['exhibit_id'] =            Neatline.id;
             data['vector_color'] =          this.vectorColor.val();
             data['stroke_color'] =          this.strokeColor.val();
+            data['highlight_color'] =       this.highlightColor.val();
             data['vector_opacity'] =        parseInt(this.vectorOpacity.val());
             data['stroke_opacity'] =        parseInt(this.strokeOpacity.val());
             data['stroke_width'] =          parseInt(this.strokeWidth.val());

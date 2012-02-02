@@ -2109,6 +2109,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         // Set system styling defaults.
         set_option('vector_color', '#5033de');
         set_option('stroke_color', '#1e2ee6');
+        set_option('highlight_color', '#000000');
         set_option('vector_opacity', 20);
         set_option('stroke_opacity', 70);
         set_option('stroke_width', 4);
@@ -2119,8 +2120,9 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
             ->setPost(array(
                 'exhibit_id' => $exhibit->id,
                 'vector_color' => '#ffffff',
-                'vector_opacity' => 5,
                 'stroke_color' => '#ffffff',
+                'highlight_color' => '#ffffff',
+                'vector_opacity' => 5,
                 'stroke_opacity' => 5,
                 'stroke_width' => 5,
                 'point_radius' => 5,
@@ -2135,10 +2137,12 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         // Check.
         $this->assertNotNull($exhibit->default_vector_color);
         $this->assertEquals($exhibit->default_vector_color, '#ffffff');
-        $this->assertNotNull($exhibit->default_vector_opacity);
-        $this->assertEquals($exhibit->default_vector_opacity, 5);
         $this->assertNotNull($exhibit->default_stroke_color);
         $this->assertEquals($exhibit->default_stroke_color, '#ffffff');
+        $this->assertNotNull($exhibit->default_highlight_color);
+        $this->assertEquals($exhibit->default_highlight_color, '#ffffff');
+        $this->assertNotNull($exhibit->default_vector_opacity);
+        $this->assertEquals($exhibit->default_vector_opacity, 5);
         $this->assertNotNull($exhibit->default_stroke_opacity);
         $this->assertEquals($exhibit->default_stroke_opacity, 5);
         $this->assertNotNull($exhibit->default_stroke_width);
@@ -2168,6 +2172,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
                 'vector_color' => get_option('vector_color'),
                 'vector_opacity' => get_option('vector_opacity'),
                 'stroke_color' => get_option('stroke_color'),
+                'highlight_color' => get_option('highlight_color'),
                 'stroke_opacity' => get_option('stroke_opacity'),
                 'stroke_width' => get_option('stroke_width'),
                 'point_radius' => get_option('point_radius'),
@@ -2181,8 +2186,9 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
 
         // Check.
         $this->assertNull($exhibit->default_vector_color);
-        $this->assertNull($exhibit->default_vector_opacity);
         $this->assertNull($exhibit->default_stroke_color);
+        $this->assertNull($exhibit->default_highlight_color);
+        $this->assertNull($exhibit->default_vector_opacity);
         $this->assertNull($exhibit->default_stroke_opacity);
         $this->assertNull($exhibit->default_stroke_width);
         $this->assertNull($exhibit->default_point_radius);
@@ -2212,6 +2218,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         // Set system styling defaults.
         set_option('vector_color', '#5033de');
         set_option('stroke_color', '#1e2ee6');
+        set_option('highlight_color', '#000000');
         set_option('vector_opacity', 20);
         set_option('stroke_opacity', 70);
         set_option('stroke_width', 4);
@@ -2222,8 +2229,9 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
             ->setPost(array(
                 'exhibit_id' => $exhibit->id,
                 'vector_color' => get_option('vector_color'),
-                'vector_opacity' => get_option('vector_opacity'),
                 'stroke_color' => get_option('stroke_color'),
+                'highlight_color' => get_option('highlight_color'),
+                'vector_opacity' => get_option('vector_opacity'),
                 'stroke_opacity' => get_option('stroke_opacity'),
                 'stroke_width' => get_option('stroke_width'),
                 'point_radius' => get_option('point_radius'),
@@ -2237,8 +2245,9 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
 
         // Check.
         $this->assertNull($exhibit->default_vector_color);
-        $this->assertNull($exhibit->default_vector_opacity);
         $this->assertNull($exhibit->default_stroke_color);
+        $this->assertNull($exhibit->default_highlight_color);
+        $this->assertNull($exhibit->default_vector_opacity);
         $this->assertNull($exhibit->default_stroke_opacity);
         $this->assertNull($exhibit->default_stroke_width);
         $this->assertNull($exhibit->default_point_radius);
@@ -2262,8 +2271,9 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
 
         // Set styles.
         $record->vector_color = '#ffffff';
-        $record->vector_opacity = 50;
         $record->stroke_color = '#ffffff';
+        $record->highlight_color = '#ffffff';
+        $record->vector_opacity = 50;
         $record->stroke_opacity = 50;
         $record->stroke_width = 50;
         $record->point_radius = 50;
@@ -2282,8 +2292,9 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
 
         // Check.
         $this->assertNull($record->vector_color);
-        $this->assertNull($record->vector_opacity);
         $this->assertNull($record->stroke_color);
+        $this->assertNull($record->highlight_color);
+        $this->assertNull($record->vector_opacity);
         $this->assertNull($record->stroke_opacity);
         $this->assertNull($record->stroke_width);
         $this->assertNull($record->point_radius);

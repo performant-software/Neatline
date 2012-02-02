@@ -399,8 +399,9 @@ class NeatlineDataRecord extends Omeka_record
     {
 
         $this->vector_color =   null;
-        $this->vector_opacity = null;
         $this->stroke_color =   null;
+        $this->highlight_color =   null;
+        $this->vector_opacity = null;
         $this->stroke_opacity = null;
         $this->stroke_width =   null;
         $this->point_radius =   null;

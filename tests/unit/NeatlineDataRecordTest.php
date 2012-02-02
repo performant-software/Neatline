@@ -1291,8 +1291,9 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
 
         // Set styles.
         $record->vector_color = '#ffffff';
-        $record->vector_opacity = 50;
         $record->stroke_color = '#ffffff';
+        $record->highlight_color = '#ffffff';
+        $record->vector_opacity = 50;
         $record->stroke_opacity = 50;
         $record->stroke_width = 50;
         $record->point_radius = 50;
@@ -1302,8 +1303,9 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
 
         // Check.
         $this->assertNull($record->vector_color);
-        $this->assertNull($record->vector_opacity);
         $this->assertNull($record->stroke_color);
+        $this->assertNull($record->highlight_color);
+        $this->assertNull($record->vector_opacity);
         $this->assertNull($record->stroke_opacity);
         $this->assertNull($record->stroke_width);
         $this->assertNull($record->point_radius);
