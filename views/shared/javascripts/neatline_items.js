@@ -391,13 +391,27 @@
         /*
          * Return the title to normal.
          */
-        __deactivateTitle: function(item) {
+        __deactivateTitle: function(item, immediate) {
 
+            // Halt if the item is not currently activated.
             if (item.data('expanded')) {
-                item.stop().animate({
-                    'font-size': '-=5px',
-                    'color': this.options.colors.title
-                }, 100);
+
+                // If not immediate, animate down.
+                if (!immediate) {
+                    item.stop().animate({
+                        'font-size': '-=5px',
+                        'color': this.options.colors.title
+                    }, 100);
+                }
+
+                // If immediate, manifest directly.
+                else {
+                    item.css({
+                        'font-size': '-=5px',
+                        'color': this.options.colors.title
+                    });
+                }
+
             }
 
         },
@@ -473,7 +487,7 @@
         __hideCurrentDescription: function() {
 
             // Deactivate the title.
-            this.__deactivateTitle(this._currentItem);
+            this.__deactivateTitle(this._currentItem, true);
 
             // Hide.
             this._currentItem.next('li').css({
