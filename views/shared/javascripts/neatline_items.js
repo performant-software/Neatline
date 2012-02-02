@@ -206,11 +206,11 @@
         scrollRight: function() {
 
             // Compute the new id.
-            this._currentItemId = this._getNewScrollId('right');
+            var newId = this._getNewScrollId('right');
 
             // Trigger out to the deployment code.
             this._trigger('itemclick', {}, {
-                'recordid': this._currentItemId,
+                'recordid': newId,
                 'scrollItems': true
             });
 
@@ -222,11 +222,11 @@
         scrollLeft: function() {
 
             // Compute the new id.
-            this._currentItemId = this._getNewScrollId('left');
+            var newId = this._getNewScrollId('left');
 
             // Trigger out to the deployment code.
             this._trigger('itemclick', {}, {
-                'recordid': this._currentItemId,
+                'recordid': newId,
                 'scrollItems': true
             });
 
@@ -334,6 +334,13 @@
             // If the item is present in the squence tray.
             if (item != null) {
 
+                // If another item is expanded, hide.
+                if (this._currentItemId != null &&
+                    this._currentItemId != id) {
+                        this.__hideCurrentDescription();
+                        this._currentItem.data('expanded', false);
+                }
+
                 // Get the new scrollTop.
                 var scrollTop = item.position().top + this.element.scrollTop();
 
@@ -421,14 +428,14 @@
          */
         __expandDescription: function(item) {
 
-            // Capture the id of the new record.
+            var self = this;
+
+            // Capture the id of the new record, get description.
             var recordId = item.attr('recordid');
+            var description = item.next('li');
 
             // Mark the title as active.
             this.__activateTitle(item);
-
-            // Get the description, display, measure native height.
-            var description = item.next('li');
 
             // Only show the description if it has content.
             if (description.text() != '') {
@@ -438,28 +445,14 @@
                 var height = description[0].scrollHeight;
 
                 // Expand.
-                description.animate({
-                    'height': height
-                }, 200, function() {
+                description.animate({ 'height': height }, 200);
 
-                    // If another item is expanded and the expanded items is not the
-                    // same as the passed item, hide.
-                    if (this._currentItemId != null &&
-                        this._currentItemId != recordId) {
-
-                        this.__hideCurrentDescription();
-                        this._currentItem.data('expanded', false);
-
-                    }
-
-                });
+                // Set trackers.
+                self._currentItem = item;
+                self._currentItemId = item.attr('recordid');
+                item.data('expanded', true);
 
             }
-
-            // Set trackers.
-            this._currentItem = item;
-            this._currentItemId = item.attr('recordid');
-            item.data('expanded', true);
 
         },
 
