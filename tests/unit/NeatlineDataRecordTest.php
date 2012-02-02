@@ -85,9 +85,10 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         $record->end_date =                     'enddate';
         $record->end_time =                     'endtime';
         $record->vector_color =                 '#ffffff';
+        $record->stroke_color =                 '#ffffff';
+        $record->highlight_color =              '#ffffff';
         $record->vector_opacity =               50;
         $record->stroke_opacity =               50;
-        $record->stroke_color =                 '#ffffff';
         $record->stroke_width =                 3;
         $record->point_radius =                 3;
         $record->geocoverage =                  'POINT()';
@@ -111,9 +112,10 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         $this->assertEquals($record->end_date, 'enddate');
         $this->assertEquals($record->end_time, 'endtime');
         $this->assertEquals($record->vector_color, '#ffffff');
+        $this->assertEquals($record->stroke_color, '#ffffff');
+        $this->assertEquals($record->highlight_color, '#ffffff');
         $this->assertEquals($record->vector_opacity, 50);
         $this->assertEquals($record->stroke_opacity, 50);
-        $this->assertEquals($record->stroke_color, '#ffffff');
         $this->assertEquals($record->stroke_width, 3);
         $this->assertEquals($record->point_radius, 3);
         $this->assertEquals($record->geocoverage, 'POINT()');

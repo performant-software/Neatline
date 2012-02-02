@@ -137,6 +137,9 @@
                 parseFloat(boundsArray[3])
             );
 
+            console.log(boundsArray);
+            console.log(Neatline.map.epsg[0]);
+
             // Starting options.
             var options = {
                 controls: [
@@ -154,22 +157,29 @@
             // Instantiate the map.
             this.map = new OpenLayers.Map('map', options);
 
-            // Build the baselayer.
+            // // Construct the base layers.
+            // var layers = this._getBaseLayers();
+
+            // // Push the base layers onto the map, set default.
+            // this.map.addLayers(layers);
+            // this._setDefaultLayer();
+
+            // Build the WMS layer.
             this.baseLayer = new OpenLayers.Layer.WMS(
                 Neatline.name,
                 Neatline.map.wmsAddress,
                 {
                     LAYERS: Neatline.map.layers,
                     STYLES: '',
-                    format: 'image/jpeg',
+                    format: format,
                     tiled: !pureCoverage,
                     tilesOrigin : this.map.maxExtent.left + ',' + this.map.maxExtent.bottom
                 },
                 {
                     buffer: 0,
                     displayOutsideMaxExtent: true,
-                    isBaseLayer: true,
-                    transparent: true
+                    isBaseLayer: true
+                    // transparent: 'true'
                 }
             );
 
