@@ -852,7 +852,8 @@
             strokeColor,
             strokeOpacity,
             strokeWidth,
-            pointRadius) {
+            pointRadius,
+            highlightColor) {
 
             // Capture fill color.
             var fillColor = (fillColor != null) ? fillColor :
@@ -865,6 +866,10 @@
             // Capture stroke color.
             var strokeColor = (strokeColor != null) ? strokeColor :
                 this.options.styles.stroke_color;
+
+            // Capture highlight color.
+            var highlightColor = (highlightColor != null) ? highlightColor :
+                Neatline.highlightColor;
 
             // Capture stroke opacity.
             var strokeOpacity = (strokeOpacity != null) ? strokeOpacity :
@@ -891,7 +896,7 @@
                 'select': new OpenLayers.Style({
                     fillColor: fillColor,
                     fillOpacity: fillOpacity,
-                    strokeColor: this.options.colors.highlight_red,
+                    strokeColor: strokeColor,
                     strokeOpacity: strokeOpacity,
                     pointRadius: pointRadius,
                     strokeWidth: strokeWidth
@@ -899,7 +904,7 @@
                 'temporary': new OpenLayers.Style({
                     fillColor: fillColor,
                     fillOpacity: fillOpacity,
-                    strokeColor: this.options.colors.highlight_red,
+                    strokeColor: highlightColor,
                     strokeOpacity: strokeOpacity,
                     pointRadius: pointRadius,
                     strokeWidth: strokeWidth
@@ -1004,7 +1009,8 @@
                 this.record.data.stroke_color,
                 this.record.data.stroke_opacity,
                 this.record.data.stroke_width,
-                this.record.data.point_radius);
+                this.record.data.point_radius,
+                this.record.data.highlight_color);
 
             // Rerender the layer to manifest the change.
             this._currentEditLayer.redraw();
@@ -1034,7 +1040,8 @@
                         record.data.stroke_color,
                         record.data.stroke_opacity,
                         record.data.stroke_width,
-                        record.data.point_radius);
+                        record.data.point_radius,
+                        record.data.highlight_color);
 
                     // Rerender the layer to manifest the change.
                     record.layer.redraw();
@@ -1050,6 +1057,8 @@
          */
         highlightVectors: function(recordid) {
 
+            var self = this;
+
             // Get the item record.
             var record = this._db({ recordid: parseInt(recordid) }).first();
 
@@ -1058,17 +1067,10 @@
                 return;
             }
 
-            // Rebuild the style map.
-            record.layer.styleMap = this._getStyleMap(
-                this.options.colors.highlight_color,
-                record.data.vector_opacity,
-                this.options.colors.highlight_color,
-                record.data.stroke_opacity,
-                record.data.stroke_width,
-                record.data.point_radius);
-
-            // Rerender the layer to manifest the change.
-            record.layer.redraw();
+            // Highlight.
+            $.each(record.layer.features, function(i, feature) {
+                self.highlightControl.highlight(feature);
+            });
 
             // Show the title tip.
             this._showTitleTip(record);
@@ -1080,6 +1082,8 @@
          */
         unhighlightVectors: function(recordid) {
 
+            var self = this;
+
             // Get the item record.
             var record = this._db({ recordid: parseInt(recordid) }).first();
 
@@ -1088,17 +1092,10 @@
                 return;
             }
 
-            // Rebuild the style map.
-            record.layer.styleMap = this._getStyleMap(
-                record.data.vector_color,
-                record.data.vector_opacity,
-                record.data.stroke_color,
-                record.data.stroke_opacity,
-                record.data.stroke_width,
-                record.data.point_radius);
-
-            // Rerender the layer to manifest the change.
-            record.layer.redraw();
+            // Highlight.
+            $.each(record.layer.features, function(i, feature) {
+                self.highlightControl.unhighlight(feature);
+            });
 
             // Hide the title tip.
             this._hideTitleTip();
