@@ -137,9 +137,6 @@
                 parseFloat(boundsArray[3])
             );
 
-            console.log(boundsArray);
-            console.log(Neatline.map.epsg[0]);
-
             // Starting options.
             var options = {
                 controls: [

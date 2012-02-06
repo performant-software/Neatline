@@ -802,8 +802,6 @@
             // Get the data.
             var data = this._getDataForSave(coverage);
 
-            console.log(data);
-
             // Commit.
             $.ajax({
 
