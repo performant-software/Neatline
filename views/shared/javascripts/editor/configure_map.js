@@ -88,7 +88,14 @@
             });
 
             // ** HIGHLIGHT COLOR.
-            this.highlightColor.miniColors();
+            this.highlightColor.miniColors({
+
+                // Change the color.
+                change: function(hex, rgb) {
+                    self._trigger('highlightcoloredit', {}, { 'color': hex });
+                }
+
+            });
 
             // ** VECTOR OPACITY.
             this.vectorOpacity.integerdragger({

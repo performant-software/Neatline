@@ -555,6 +555,17 @@
         },
 
         /*
+         * Set the default highlight color.
+         *
+         * - param string color: The color for the span.
+         *
+         * - return void.
+         */
+        setDefaultHighlightColor: function(color) {
+            this.map.neatlinemap('setDefaultStyle', 'highlight_color', color);
+        },
+
+        /*
          * Set the default vector opacity.
          *
          * - param integer value: The opacity, 0-100.

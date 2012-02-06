@@ -323,6 +323,11 @@ jQuery(document).ready(function($) {
             neatlineContainer.neatline('setDefaultStrokeColor', obj.color);
         },
 
+        // Manifest new default highlight color.
+        'highlightcoloredit': function(event, obj) {
+            neatlineContainer.neatline('setDefaultHighlightColor', obj.color);
+        },
+
         // Manifest new default vector opacity.
         'vectoropacityedit': function(event, obj) {
             neatlineContainer.neatline('setDefaultVectorOpacity', obj.value);
