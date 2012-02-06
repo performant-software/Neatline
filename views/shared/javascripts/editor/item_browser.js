@@ -1202,9 +1202,7 @@
          * saving routine.
          */
         setCoverageData: function(data) {
-
             this.editForm.itemform('setCoverageData', data);
-
         },
 
         /*
@@ -1267,6 +1265,13 @@
          */
         saveMapFocus: function(extent, zoom) {
             this.editForm.itemform('postMapFocus', extent, zoom);
+        },
+
+        /*
+         * Reload the item form.
+         */
+        reloadItemForm: function(extent, zoom) {
+            this.editForm.itemform('reloadForm');
         },
 
         /*
