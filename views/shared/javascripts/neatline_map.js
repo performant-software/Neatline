@@ -1015,7 +1015,7 @@
         },
 
         /*
-         * Set default fill color.
+         * Set default style.
          */
         setDefaultStyle: function(style, value) {
 
@@ -1041,7 +1041,13 @@
                         record.data.highlight_color);
 
                     // Rerender the layer to manifest the change.
-                    record.layer.redraw();
+                    // record.layer.redraw();
+
+                    // redraw() (above) is _not_ working. This is a hack to
+                    // trigger a rerender on the features.
+                    $.each(record.layer.features, function(i, feature) {
+                        self.highlightControl.unhighlight(feature);
+                    });
 
                 }
 
@@ -1064,9 +1070,23 @@
                 return;
             }
 
-            // Highlight.
+            // Rebuild the style map.
+            record.layer.styleMap = self._getStyleMap(
+                record.data.vector_color,
+                record.data.vector_opacity,
+                record.data.highlight_color,
+                record.data.stroke_opacity,
+                record.data.stroke_width,
+                record.data.point_radius,
+                record.data.highlight_color);
+
+            // Rerender the layer to manifest the change.
+            // record.layer.redraw();
+
+            // redraw() (above) is _not_ working. This is a hack to
+            // trigger a rerender on the features.
             $.each(record.layer.features, function(i, feature) {
-                self.highlightControl.highlight(feature);
+                self.highlightControl.unhighlight(feature);
             });
 
             // Show the title tip.
@@ -1089,7 +1109,21 @@
                 return;
             }
 
-            // Highlight.
+            // Rebuild the style map.
+            record.layer.styleMap = self._getStyleMap(
+                record.data.vector_color,
+                record.data.vector_opacity,
+                record.data.stroke_color,
+                record.data.stroke_opacity,
+                record.data.stroke_width,
+                record.data.point_radius,
+                record.data.highlight_color);
+
+            // Rerender the layer to manifest the change.
+            // record.layer.redraw();
+
+            // redraw() (above) is _not_ working. This is a hack to
+            // trigger a rerender on the features.
             $.each(record.layer.features, function(i, feature) {
                 self.highlightControl.unhighlight(feature);
             });
