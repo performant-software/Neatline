@@ -230,7 +230,7 @@ Records have these fields:
 
     * **Line Thickness**: The thickness of the border lines in pixels. Enter a positive integer in the input, or click and drag up and down to gradually modulate the value. Although there's no theoretical limit on how thick the lines can be, in practice you'll probably want to keep them between about 1-10 pixels.
 
-    * **Point Radius**: The radius of standalone points and verties on lines and polygons. Enter a positive integer in the input, or click and drag up and down to gradually modulate the value.
+    * **Point Radius**: The radius of standalone points and verties on lines and polygons. Enter a positive integer in the input, or click and drag up and down to gradually modulate the value. Like with the line thickness parameter, there's no limit to how large points can be, but keep in mind that the radius of points on the map is _fixed_, in that it is not affected by the zoom level - a 5-pixel point will be 5 pixels when the map is zoomed to 100 meters or 1000 miles.
 
     * **Reset Item Styles**: Click this button to void any item-specific styles set for the record with any of the 6 previous controls. This will cause the record to fall back to the exhibit-wide defaults, which are configured by way of the "Map Settings" dropdown in the top bar.
 
@@ -240,7 +240,7 @@ Records have these fields:
 
       * To set a focus, adjust the map position and zoom to the exact configuration that you want to use as the default for the record, and then click the "Fix Item-Specific Map Focus" button to save the position.
 
-      * **Note:** Neatline also makes it possible to _just_ set a focus position for a record, even if you haven't added any geometry for the record on the map. So, if there's a location on the map that's self-evident and doesn't need any interpretive shapes, lines, or points, you can use the item-specific focus to just "pin" the map to a particular viewport location and zoom, which will then be retrieved and recreated whenver the user clicks on or scrolls to the record. 
+      * **Note:** Neatline also makes it possible _just_ to set a focus position for a record, even if you haven't added any geometry for the record on the map. So, if there's a location on the map that's self-evident and doesn't need any interpretive shapes, lines, or points, you can use the item-specific focus to just "pin" the map to a particular viewport location and zoom level, which will then be retrieved and recreated whenver the user clicks on or scrolls to the record. 
 
 ### Plot Records on the Map
 
@@ -258,11 +258,13 @@ When you're done annotating the item, click the blue "Save" button at the bottom
 
 ### Edit Map Shapes
 
-You can edit the map annotation for a record at any point. First, open the edit form the record that you want to change. This can be done either by clicking directly on on the title of the record in the browser tray or by clicking on any of the record's representations on the map or timeline).
+You can edit the map annotation for a record at any point.
 
-  * To edit a point, line, or polygon on the map, click on the shape. The vector will be outlined in red and all points associated with it will expand to indicate that it is ready for editing. 
+  1. Open the edit form the record that you want to change. This can be done either by clicking directly on on the title of the record in the browser tray or by clicking on any of the record's representations on the map or timeline.
 
-  * Once the shape is selected, you can toggle on and off any of the three editing modes - Drag, Rotate, and Scale.
+  2. To edit a point, line, or polygon on the map, click on the shape. The vector will be outlined in red and all points associated with it will expand to indicate that it is ready for editing. 
+
+  3. Once the shape is selected, you can toggle on and off any of the three editing modes - Drag, Rotate, and Scale.
 
     * **Drag**: When Drag is active, an extra point will appear at the geometric center of the shape. Click and drag on the point to drag the postion of the entire shape.
 
@@ -270,7 +272,7 @@ You can edit the map annotation for a record at any point. First, open the edit 
 
     * **Scale**: When Scale is active, an extra point will appear below and to the left of the shape. Click and drag on the point to skew the vertical and horizontal dimensions of the shape.
 
-  * Click the red "Delete" button to delete the record. This cannot be undone.
+  * Click the red "Delete" button to delete the record. **This cannot be undone.**
 
 ### Edit Map Styles
 
@@ -284,17 +286,17 @@ To edit exhibit-wide style defaults:
 
     * **Default Line Color**: The color of the border lines. Click on the  swatch to the right of the input to open a color picker.
 
-    * **Default Shape Opacity**: The opacity of the polygons (not including the border lines). Enter a number between 0 and 100 in the input, or click and drag up and down to gradually modulate the value.
+    * **Default Shape Opacity**: The opacity of the polygons (not including the border lines). Enter a number between 0 and 100 (0 being transparent, 100 completely opaque) in the input, or click and drag up and down to gradually modulate the value. 
 
-    * **Default Line Opacity**: The opacity of the border lines. Enter a number between 0 and 100 in the input, or click and drag up and down to gradually modulate the value.
+    * **Default Line Opacity**: The opacity of the border lines. Enter a number between 0 and 100 (0 being transparent, 100 completely opaque) in the input, or click and drag up and down to gradually modulate the value.
 
-    * **Default Line Thickness**: The thickness of the border lines in pixels. Enter a positive integer in the input, or click and drag up and down to gradually modulate the value.
+    * **Default Line Thickness**: The thickness of the border lines in pixels. Enter a positive integer in the input, or click and drag up and down to gradually modulate the value. Although there's no theoretical limit on how thick the lines can be, in practice you'll probably want to keep them between about 1-10 pixels.
 
-    * **Default Point Radius**: The radius of standalone points and verties on lines and polygons. Enter a positive integer in the input, or click and drag up and down to gradually modulate the value.
+    * **Default Point Radius**: The radius of standalone points and verties on lines and polygons. Enter a positive integer in the input, or click and drag up and down to gradually modulate the value. Like with the line thickness parameter, there's no limit to how large points can be, but keep in mind that the radius of points on the map is _fixed_, in that it is not affected by the zoom level - a 5-pixel point will be 5 pixels when the map is zoomed to 100 meters or 1000 miles.
 
     * **Default Base Layer**: Select the default starting base layer for the exhibit. Users can manually change the base layer with the layer switcher widget at the top right of the map.
 
-As you make changes to the color, radius, and width styles, the shapes on the map _that do not have an item-specific setting for the style in question_ will automatically update the reflect the new settings.
+As you make changes to the color, radius, and width styles, only the shapes on the map _that do not have an item-specific setting for the style in question_ will automatically update the reflect the new settings. If you want to unset item-specific styling settings for a given item, open its editing form and click the "Reset Item Styles" button.
 
 When you're done editing the default styles, click the "Save" button at the bottom of the dropdown to lock the changes.
 
@@ -308,9 +310,9 @@ Just check or uncheck any of the blocks at any point, and the status setting wil
 
 ### Edit Record Order
 
-In some cases, an exhibit needs to unfold content in a structured, linear sequence - an argument needs to be traced from start to finish, the representation of a series of events needs to be followed in a specific order.
+In some cases, an exhibit needs to unfold content in a structured, linear sequence - an argument needs to be traced from start to finish, the representation of a series of events needs to be followed in a fixed order.
 
-For these situations, Neatline makes it possible to customize the order in which records display in the description tray. When a user comes to the exhibit, she can use the forwards and backwards arrows the scroll linearly through the contents of the exhibit.
+For these situations, Neatline makes it possible to customize the order in which records display in the description tray. When a user comes to the exhibit, she can use the forward and backward arrows to scroll linearly through the contents of the exhibit.
 
 To create a custom ordering:
 
