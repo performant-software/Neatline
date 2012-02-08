@@ -2,19 +2,95 @@
 
 <!--
   Requirements:
+ 
+  Pear:
+    - phpcs
+    -
+  PECL:
+    - xdebug
 
-  Closure:
-  - Closure Linter: http://code.google.com/closure/utilities/docs/linter_howto.html
-  - Closure Compiler (brew install closure-compiler)
-  - 
+  JavaScript:
+  - closure-compiler (npm install -g closure-compiler): Bindings to Google's Closure Compiler
+  - jshint (npm install -g jshint): A CLI for JSHint
+  - fixmyjs (npm install -g fixmyjs): Automatically fixes silly errors from jshint 
+  
+  
 -->
 
 <project name="Neatline" default="build">
+  
+  <property environment="ENV" />
+  
+  <property name="build_dir" value="${build_dir}/" />
+  <property name="report_dir" value="${build_dir}/report" />
+  
+  <!-- Load the Ant-contrib to give us access to some very useful tasks! -->
+  <!-- the .jar file is located in the tools directory -->
+  <taskdef resource="net/sf/antcontrib/antlib.xml">
+    <classpath>
+      <pathelement location="${build_dir}/tools/ant-contrib-1.0b3.jar"/>
+    </classpath>
+  </taskdef>
+  
+  
  <target name="build"
    depends="prepare,lint,phploc,pdepend,phpmd-ci,phpcs-ci,phpcpd,phpdoc,phpunit,phpcb"/>
 
  <target name="build-parallel"
    depends="prepare,lint,tools-parallel,phpunit,phpcb"/>
+  
+  <target name="install-dependencies" description="Installs PEAR and node dependencies">
+    <!-- auto-discover channels -->
+    <exec executable="pear">
+      <arg value="config-set"/>
+      <arg value="auto_discover"/>
+      <arg value="1" />
+    </exec>
+    
+    <exec executable="pear">
+      <arg value="install" />
+      <arg value="--alldeps" />
+      <arg value="pear.phpunit.de/PHPUnit" />
+      <arg value="PHP_CodeSniffer" />
+      <arg value="pear.pdepend.org/PHP_Depend" />
+      <arg value="pear.phpmd.org/PHP_PMD" />
+      <arg value="pear.phpqatools.org/phpqatools" />
+      <arg value="pear.netpirates.net/phpDox" />
+    </exec>
+    
+    <exec executable="pecl">
+      <arg value="install" />
+      <arg value="xdebug"/>
+    </exec>
+    
+    <echo>Installing npm packages...</echo>
+    
+    <exec executable="npm">
+      <arg value="-g" />
+      <arg value="install"/>
+      <arg value="closure-compiler" />
+      <arg value="jshint" />
+      <arg value="fixmyjs" />
+    </exec>
+  </target>
+  
+  <target name="update-dependencies" description="Updates testing dependencies">
+    <exec executable="pear">
+      <arg value="update-channels" />
+    </exec>
+    
+    <exec executable="pear">
+      <arg value="upgrade-all" />
+    </exec>
+    
+    <exec executable="pecl">
+      <arg value="upgrade-all" />
+    </exec>
+    
+    <exec executable="npm">
+      <arg value="update"/>
+    </exec>
+  </target>
 
  <target name="tools-parallel"
          description="Run tools in parallel">
@@ -31,20 +107,20 @@
  </target>
 
  <target name="clean" description="Cleanup build artifacts">
-  <delete dir="${basedir}/build/api"/>
-  <delete dir="${basedir}/build/code-browser"/>
-  <delete dir="${basedir}/build/coverage"/>
-  <delete dir="${basedir}/build/logs"/>
-  <delete dir="${basedir}/build/pdepend"/>
+  <delete dir="${build_dir}/api"/>
+  <delete dir="${build_dir}/code-browser"/>
+  <delete dir="${build_dir}/coverage"/>
+  <delete dir="${build_dir}/logs"/>
+  <delete dir="${build_dir}/pdepend"/>
  </target>
 
  <target name="prepare" depends="clean"
          description="Prepare for build">
-  <mkdir dir="${basedir}/build/api"/>
-  <mkdir dir="${basedir}/build/code-browser"/>
-  <mkdir dir="${basedir}/build/coverage"/>
-  <mkdir dir="${basedir}/build/logs"/>
-  <mkdir dir="${basedir}/build/pdepend"/>
+  <mkdir dir="${build_dir}/api"/>
+  <mkdir dir="${build_dir}/code-browser"/>
+  <mkdir dir="${build_dir}/coverage"/>
+  <mkdir dir="${build_dir}/logs"/>
+  <mkdir dir="${build_dir}/pdepend"/>
  </target>
 
  <target name="lint">
@@ -63,9 +139,9 @@
   </apply>
   </target>
 
-  <target name="jslint" description="Use the Google Linter to find issues in
+  <target name="jshint" description="Use the JSHint Linter to find issues in
     your JavaScript">
-    <exec executable="gjslint">
+    <exec executable="jshint">
       <arg value="--nojsdoc" />
       <arg value="-r" />
       <arg path="${basedir}" />
@@ -84,7 +160,7 @@
  <target name="phploc" description="Measure project size using PHPLOC">
   <exec executable="phploc">
    <arg value="--log-csv" />
-   <arg value="${basedir}/build/logs/phploc.csv" />
+   <arg value="${build_dir}/logs/phploc.csv" />
    <arg path="${basedir}/" />
   </exec>
  </target>
@@ -92,9 +168,9 @@
  <target name="pdepend"
          description="Calculate software metrics using PHP_Depend">
   <exec executable="pdepend">
-   <arg value="--jdepend-xml=${basedir}/build/logs/jdepend.xml" />
-   <arg value="--jdepend-chart=${basedir}/build/pdepend/dependencies.svg" />
-   <arg value="--overview-pyramid=${basedir}/build/pdepend/overview-pyramid.svg" />
+   <arg value="--jdepend-xml=${build_dir}/logs/jdepend.xml" />
+   <arg value="--jdepend-chart=${build_dir}/pdepend/dependencies.svg" />
+   <arg value="--overview-pyramid=${build_dir}/pdepend/overview-pyramid.svg" />
    <arg path="${basedir}/" />
   </exec>
  </target>
@@ -104,7 +180,7 @@
   <exec executable="phpmd">
    <arg path="${basedir}/" />
    <arg value="text" />
-   <arg value="${basedir}/build/phpmd.xml" />
+   <arg value="${build_dir}/phpmd.xml" />
   </exec>
  </target>
 
@@ -113,16 +189,16 @@
   <exec executable="phpmd">
    <arg path="${basedir}/" />
    <arg value="xml" />
-   <arg value="${basedir}/build/phpmd.xml" />
+   <arg value="${build_dir}/phpmd.xml" />
    <arg value="--reportfile" />
-   <arg value="${basedir}/build/logs/pmd.xml" />
+   <arg value="${build_dir}/logs/pmd.xml" />
   </exec>
  </target>
 
  <target name="phpcs"
          description="Find coding standard violations using PHP_CodeSniffer">
   <exec executable="phpcs">
-   <arg value="--standard=${basedir}/build/phpcs.xml" />
+   <arg value="--standard=${build_dir}/phpcs.xml" />
    <arg path="${basedir}/" />
   </exec>
  </target>
@@ -131,8 +207,8 @@
          description="Find coding standard violations using PHP_CodeSniffer">
   <exec executable="phpcs" output="/dev/null">
    <arg value="--report=checkstyle" />
-   <arg value="--report-file=${basedir}/build/logs/checkstyle.xml" />
-   <arg value="--standard=${basedir}/build/phpcs.xml" />
+   <arg value="--report-file=${build_dir}/logs/checkstyle.xml" />
+   <arg value="--standard=${build_dir}/phpcs.xml" />
    <arg path="${basedir}/" />
   </exec>
  </target>
@@ -140,7 +216,7 @@
  <target name="phpcpd" description="Find duplicate code using PHPCPD">
   <exec executable="phpcpd">
    <arg value="--log-pmd" />
-   <arg value="${basedir}/build/logs/pmd-cpd.xml" />
+   <arg value="${build_dir}/logs/pmd-cpd.xml" />
    <arg path="${basedir}/" />
   </exec>
  </target>
@@ -151,7 +227,7 @@
    <arg value="--directory" />
    <arg path="${basedir}/" />
    <arg value="--target" />
-   <arg path="${basedir}/build/api" />
+   <arg path="${build_dir}/api" />
   </exec>
  </target>
 
@@ -163,11 +239,11 @@
          description="Aggregate tool output with PHP_CodeBrowser">
   <exec executable="phpcb">
    <arg value="--log" />
-   <arg path="${basedir}/build/logs" />
+   <arg path="${build_dir}/logs" />
    <arg value="--source" />
    <arg path="${basedir}/" />
    <arg value="--output" />
-   <arg path="${basedir}/build/code-browser" />
+   <arg path="${build_dir}/code-browser" />
   </exec>
  </target>
 </project>
