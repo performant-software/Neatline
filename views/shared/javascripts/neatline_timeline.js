@@ -114,7 +114,7 @@
                     'recordid': evt._eventID
                 });
 
-            }
+            };
 
         },
 
@@ -132,7 +132,7 @@
             });
 
             // Set the starting date, if defined.
-            if (Neatline.default_focus_date != null) {
+            if (Neatline.default_focus_date !== null) {
                 var startDate = Date.parse(Neatline.default_focus_date);
                 this.timeline.getBand(0).setCenterVisibleDate(startDate);
             }
@@ -143,7 +143,7 @@
 
             painter0.addEventPaintListener(function(band, op, evt, els) {
 
-                if (els != null) {
+                if (els !== null) {
 
                     // Get the tape element.
                     var tape = $(els[0]);
@@ -175,7 +175,7 @@
             // the start location of the event.
             $.each(this.timeline._bands[0]._eventSource._events._idToEvent, function(i, event) {
 
-                if (event._eventID == id) {
+                if (event._eventID === id) {
                     self.timeline.getBand(0).setCenterVisibleDate(event._start);
                 }
 
@@ -233,4 +233,4 @@
 
     });
 
-})( jQuery );
+})(jQuery);

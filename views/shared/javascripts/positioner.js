@@ -25,6 +25,7 @@
 
 (function($, undefined) {
 
+    'use strict';
 
     $.widget('neatline.positioner', {
 
@@ -186,12 +187,12 @@
             if (this._is_map && this._is_timeline && this._is_items) {
 
                 // MAP top, TIMELINE bottom.
-                if (this._top == 'map') {
+                if (this._top === 'map') {
 
                     // ITEMS left, bottom, partial:
-                    if (this._items_h_pos == 'left' &&
-                        this._items_v_pos == 'bottom' &&
-                        this._items_height == 'partial') {
+                    if (this._items_h_pos === 'left' &&
+                        this._items_v_pos === 'bottom' &&
+                        this._items_height === 'partial') {
 
                         this.positions = {
 
@@ -221,9 +222,9 @@
                     }
 
                     // ITEMS left, top, partial:
-                    if (this._items_h_pos == 'left' &&
-                        this._items_v_pos == 'top' &&
-                        this._items_height == 'partial') {
+                    if (this._items_h_pos === 'left' &&
+                        this._items_v_pos === 'top' &&
+                        this._items_height === 'partial') {
 
                         this.positions = {
 
@@ -253,8 +254,8 @@
                     }
 
                     // ITEMS left, full:
-                    else if (this._items_h_pos == 'left' &&
-                             this._items_height == 'full') {
+                    else if (this._items_h_pos === 'left' &&
+                             this._items_height === 'full') {
 
                         this.positions = {
 
@@ -284,9 +285,9 @@
                     }
 
                     // ITEMS right, bottom, partial:
-                    if (this._items_h_pos == 'right' &&
-                        this._items_v_pos == 'bottom' &&
-                        this._items_height == 'partial') {
+                    if (this._items_h_pos === 'right' &&
+                        this._items_v_pos === 'bottom' &&
+                        this._items_height === 'partial') {
 
                         this.positions = {
 
@@ -316,9 +317,9 @@
                     }
 
                     // ITEMS right, top, partial:
-                    if (this._items_h_pos == 'right' &&
-                        this._items_v_pos == 'top' &&
-                        this._items_height == 'partial') {
+                    if (this._items_h_pos === 'right' &&
+                        this._items_v_pos === 'top' &&
+                        this._items_height === 'partial') {
 
                         this.positions = {
 
@@ -348,8 +349,8 @@
                     }
 
                     // ITEMS right, full:
-                    else if (this._items_h_pos == 'right' &&
-                             this._items_height == 'full') {
+                    else if (this._items_h_pos === 'right' &&
+                             this._items_height === 'full') {
 
                         this.positions = {
 
@@ -381,12 +382,12 @@
                 }
 
                 // MAP bottom, TIMELINE top.
-                else if (this._top == 'timeline') {
+                else if (this._top === 'timeline') {
 
                     // ITEMS left, bottom, partial:
-                    if (this._items_h_pos == 'left' &&
-                        this._items_v_pos == 'bottom' &&
-                        this._items_height == 'partial') {
+                    if (this._items_h_pos === 'left' &&
+                        this._items_v_pos === 'bottom' &&
+                        this._items_height === 'partial') {
 
                         this.positions = {
 
@@ -416,9 +417,9 @@
                     }
 
                     // ITEMS left, top, partial:
-                    if (this._items_h_pos == 'left' &&
-                        this._items_v_pos == 'top' &&
-                        this._items_height == 'partial') {
+                    if (this._items_h_pos === 'left' &&
+                        this._items_v_pos === 'top' &&
+                        this._items_height === 'partial') {
 
                         this.positions = {
 
@@ -448,8 +449,8 @@
                     }
 
                     // ITEMS left, full:
-                    else if (this._items_h_pos == 'left' &&
-                             this._items_height == 'full') {
+                    else if (this._items_h_pos === 'left' &&
+                             this._items_height === 'full') {
 
                         this.positions = {
 
@@ -479,9 +480,9 @@
                     }
 
                     // ITEMS right, bottom, partial:
-                    if (this._items_h_pos == 'right' &&
-                        this._items_v_pos == 'bottom' &&
-                        this._items_height == 'partial') {
+                    if (this._items_h_pos === 'right' &&
+                        this._items_v_pos === 'bottom' &&
+                        this._items_height === 'partial') {
 
                         this.positions = {
 
@@ -511,9 +512,9 @@
                     }
 
                     // ITEMS right, top, partial:
-                    if (this._items_h_pos == 'right' &&
-                        this._items_v_pos == 'top' &&
-                        this._items_height == 'partial') {
+                    if (this._items_h_pos === 'right' &&
+                        this._items_v_pos === 'top' &&
+                        this._items_height === 'partial') {
 
                         this.positions = {
 
@@ -543,8 +544,8 @@
                     }
 
                     // ITEMS right, full:
-                    else if (this._items_h_pos == 'right' &&
-                             this._items_height == 'full') {
+                    else if (this._items_h_pos === 'right' &&
+                             this._items_height === 'full') {
 
                         this.positions = {
 
@@ -583,7 +584,7 @@
                      !this._is_timeline) {
 
                 // MAP left, ITEMS right:
-                if (this._items_h_pos == 'right') {
+                if (this._items_h_pos === 'right') {
 
                     this.positions = {
 
@@ -613,7 +614,7 @@
                 }
 
                 // MAP right, ITEMS left:
-                else if (this._items_h_pos == 'left') {
+                else if (this._items_h_pos === 'left') {
 
                     this.positions = {
 
@@ -650,7 +651,7 @@
                      !this._is_map) {
 
                 // TIMELINE left, ITEMS right:
-                if (this._items_h_pos == 'right') {
+                if (this._items_h_pos === 'right') {
 
                     this.positions = {
 
@@ -680,7 +681,7 @@
                 }
 
                 // TIMELINE right, ITEMS left:
-                else if (this._items_h_pos == 'left') {
+                else if (this._items_h_pos === 'left') {
 
                     this.positions = {
 
@@ -717,7 +718,7 @@
                      !this._is_items) {
 
                 // MAP top, TIMELINE bottom.
-                if (this._top == 'map') {
+                if (this._top === 'map') {
 
                     this.positions = {
 
@@ -747,7 +748,7 @@
                 }
 
                 // MAP bottom, TIMELINE top.
-                else if (this._top == 'timeline') {
+                else if (this._top === 'timeline') {
 
                     this.positions = {
 
@@ -894,4 +895,4 @@
     });
 
 
-})( jQuery );
+})(jQuery);

@@ -22,6 +22,7 @@
 
 (function($, undefined) {
 
+  'use strict';
 
     $.widget('neatline.neatlineitems', {
 
@@ -208,7 +209,7 @@
                 case 'left':
 
                     // If there is no set current id, scroll to the last item.
-                    if (this._currentItemId == null) {
+                    if (this._currentItemId === null) {
                         return this._idOrdering[this._idOrdering.length - 1];
                     }
 
@@ -216,10 +217,10 @@
                     else {
 
                         // Get the current id.
-                        var currentIndex = this._idOrdering.indexOf(this._currentItemId)
+                        var currentIndex = this._idOrdering.indexOf(this._currentItemId);
 
                         // If the current item is the first item, loop to the last.
-                        if (currentIndex == 0) {
+                        if (currentIndex === 0) {
                             return this._idOrdering[this._idOrdering.length - 1];
                         }
 
@@ -234,7 +235,7 @@
                 case 'right':
 
                     // If there is no set current id, scroll to the first item.
-                    if (this._currentItemId == null) {
+                    if (this._currentItemId === null) {
                         return this._idOrdering[0];
                     }
 
@@ -242,10 +243,10 @@
                     else {
 
                         // Get the current id.
-                        var currentIndex = this._idOrdering.indexOf(this._currentItemId)
+                        var currentIndex = this._idOrdering.indexOf(this._currentItemId);
 
                         // If the current item is the last item, loop to the first.
-                        if (currentIndex == this._idOrdering.length - 1) {
+                        if (currentIndex === this._idOrdering.length - 1) {
                             return this._idOrdering[0];
                         }
 
@@ -282,7 +283,7 @@
                 var itemId = item.attr('recordid');
 
                 // Measure and store the item's native vertical offset.
-                self._idToOffset[itemId] = item.position().top
+                self._idToOffset[itemId] = item.position().top;
 
             });
 
@@ -297,7 +298,7 @@
             var item = this._idToItem[id];
 
             // If the item is present in the squence tray.
-            if (item != null) {
+            if (item !== null) {
 
                 // Set the trackers.
                 this._currentItem = item;
@@ -342,4 +343,4 @@
     });
 
 
-})( jQuery );
+})(jQuery);

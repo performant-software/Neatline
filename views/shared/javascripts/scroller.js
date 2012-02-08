@@ -21,6 +21,7 @@
 
 (function($, undefined) {
 
+    'use strict';
 
     $.widget('neatline.scroller', {
 
@@ -175,9 +176,9 @@
                 'color': self.options.colors.purple
             }, self.options.durations.click, 'easeInQuart');
 
-        },
+        }
 
     });
 
 
-})( jQuery );
+})(jQuery);

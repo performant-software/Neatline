@@ -22,6 +22,7 @@
 
 (function($, undefined) {
 
+  'use strict';
 
     $.widget('neatline.neatlinemap', {
 
@@ -79,7 +80,7 @@
             }
 
             // Construct image-based map.
-            else if(Neatline.image_id) {
+            else if (Neatline.image_id) {
                 this._instantiateImageMap();
             }
 
@@ -89,6 +90,7 @@
             }
 
             // Construct the editing manager.
+            // TODO: public is a reserved word and should be avoided as a property
             if (!Neatline.public) {
                 this._instantiateEditor();
             }
@@ -105,7 +107,7 @@
 
             // Set OL global attributes.
             OpenLayers.IMAGE_RELOAD_ATTEMTPS = 3;
-            OpenLayers.Util.onImageLoadErrorColor = "transparent";
+            OpenLayers.Util.onImageLoadErrorColor = 'transparent';
             OpenLayers.ImgPath = 'http://js.mapbox.com/theme/dark/';
 
             var tiled;
@@ -119,8 +121,8 @@
 
             // Set tile image format.
             format = 'image/png';
-            if(pureCoverage) {
-                format = "image/png8";
+            if (pureCoverage) {
+                format = 'image/png8';
             }
 
             // Build the default bounds array.
@@ -138,7 +140,7 @@
                   new OpenLayers.Control.PanZoomBar(),
                   new OpenLayers.Control.MousePosition(),
                   new OpenLayers.Control.Navigation(),
-                  new OpenLayers.Control.ScaleLine(),
+                  new OpenLayers.Control.ScaleLine()
                 ],
                 maxResolution: 'auto',
                 projection: Neatline.map.epsg[0],
@@ -157,7 +159,7 @@
                     STYLES: '',
                     format: 'image/jpeg',
                     tiled: !pureCoverage,
-                    tilesOrigin : this.map.maxExtent.left + ',' + this.map.maxExtent.bottom
+                    tilesOrigin: this.map.maxExtent.left + ',' + this.map.maxExtent.bottom
                 },
                 {
                     buffer: 0,
@@ -172,7 +174,7 @@
 
             // If there is a default bounding box set for the exhibit, construct
             // a second Bounds object to use as the starting zoom target.
-            if (Neatline.default_map_bounds != null) {
+            if (Neatline.default_map_bounds !== null) {
                 var boundsArray = Neatline.default_map_bounds.split(',');
                 var bounds = new OpenLayers.Bounds(
                     parseFloat(boundsArray[0]),
@@ -194,7 +196,7 @@
 
             // Set OL global attributes.
             OpenLayers.IMAGE_RELOAD_ATTEMTPS = 3;
-            OpenLayers.Util.onImageLoadErrorColor = "transparent";
+            OpenLayers.Util.onImageLoadErrorColor = 'transparent';
             OpenLayers.ImgPath = 'http://js.mapbox.com/theme/dark/';
 
             var tiled;
@@ -208,8 +210,8 @@
 
             // Set tile image format.
             format = 'image/png';
-            if(pureCoverage) {
-                format = "image/png8";
+            if (pureCoverage) {
+                format = 'image/png8';
             }
 
             // Build the default bounds array.
@@ -226,7 +228,7 @@
                   new OpenLayers.Control.PanZoomBar(),
                   new OpenLayers.Control.MousePosition(),
                   new OpenLayers.Control.Navigation(),
-                  new OpenLayers.Control.ScaleLine(),
+                  new OpenLayers.Control.ScaleLine()
                 ],
                 maxResolution: 'auto',
                 units: 'm'
@@ -240,7 +242,7 @@
 
             // If there is a default bounding box set for the exhibit, construct
             // a second Bounds object to use as the starting zoom target.
-            if (Neatline.default_map_bounds != null) {
+            if (Neatline.default_map_bounds !== null) {
                 var boundsArray = Neatline.default_map_bounds.split(',');
                 var bounds = new OpenLayers.Bounds(
                     parseFloat(boundsArray[0]),
@@ -262,7 +264,7 @@
 
             // Set OL global attributes.
             OpenLayers.IMAGE_RELOAD_ATTEMTPS = 3;
-            OpenLayers.Util.onImageLoadErrorColor = "transparent";
+            OpenLayers.Util.onImageLoadErrorColor = 'transparent';
             OpenLayers.ImgPath = 'http://js.mapbox.com/theme/dark/';
             OpenLayers.DOTS_PER_INCH = 25.4 / 0.28;
 
@@ -271,9 +273,9 @@
                 controls: [
                   new OpenLayers.Control.PanZoomBar(),
                   new OpenLayers.Control.MousePosition(),
-                  new OpenLayers.Control.Navigation(),
+                  new OpenLayers.Control.Navigation()
                 ],
-                maxResolution: 'auto',
+                maxResolution: 'auto'
             };
 
             // Instantiate the map.
@@ -297,7 +299,7 @@
 
             // If there is a default bounding box set for the exhibit, construct
             // a second Bounds object to use as the starting zoom target.
-            if (Neatline.default_map_bounds != null) {
+            if (Neatline.default_map_bounds !== null) {
                 var boundsArray = Neatline.default_map_bounds.split(',');
                 var bounds = new OpenLayers.Bounds(
                     parseFloat(boundsArray[0]),
@@ -357,7 +359,7 @@
 
                     // If there is a selected feature, unselect and
                     // reselect it to apply the new configuration.
-                    if (feature != null) {
+                    if (feature !== null) {
                         self.modifyFeatures.unselectFeature(feature);
                         self.modifyFeatures.selectFeature(feature);
                     }
@@ -370,7 +372,7 @@
 
                         var feature = self.modifyFeatures.feature;
                         self.modifyFeatures.unselectFeature(feature);
-                        self._currentEditLayer.destroyFeatures([ feature ]);
+                        self._currentEditLayer.destroyFeatures([feature]);
 
                     }
 
@@ -400,7 +402,7 @@
             this._currentVectorLayers = [];
 
             // Abort the request if it is running.
-            if (this.requestData != null) {
+            if (this.requestData !== null) {
                 this.requestData.abort();
             }
 
@@ -418,7 +420,7 @@
 
                     // If a layer was being edited before the save,
                     // make that layer the active edit layer again.
-                    if (self._currentEditItem != null) {
+                    if (self._currentEditItem !== null) {
                         self.edit(self._currentEditItem, true);
                     }
 
@@ -512,7 +514,7 @@
                         'recordid': record.recordid
                     });
 
-                    if (self.modifyFeatures != undefined) {
+                    if (self.modifyFeatures !== undefined) {
                         self.modifyFeatures.selectFeature(feature);
                     }
 
@@ -520,7 +522,7 @@
 
                 onUnselect: function(feature) {
 
-                    if (self.modifyFeatures != undefined) {
+                    if (self.modifyFeatures !== undefined) {
                         self.modifyFeatures.unselectFeature(feature);
                     }
 
@@ -572,13 +574,13 @@
 
             // If there is a record id, get the layer.
             if (recordid !== '') {
-                this.record = this._db({ recordid: parseInt(recordid) }).first();
+                this.record = this._db({ recordid: parseInt(recordid, 10) }).first();
                 this._currentEditLayer = this.record.layer;
             }
 
             // If there is an item id, try to find a layer.
             else if (itemid !== '') {
-                this.record = this._db({ itemid: parseInt(itemid) }).first();
+                this.record = this._db({ itemid: parseInt(itemid, 10) }).first();
                 this._currentEditLayer = this.record.layer;
             }
 
@@ -642,7 +644,7 @@
 
             // If necessary, reselect a clicked feature.
             $.each(this._currentEditLayer.features, function(i, feature) {
-                if (feature == self._clickedFeature) {
+                if (feature === self._clickedFeature) {
                     self.modifyFeatures.selectFeature(self._clickedFeature);
                     return;
                 }
@@ -681,7 +683,7 @@
 
             }
 
-            if (this._currentEditLayer.features.length == 0) {
+            if (this._currentEditLayer.features.length === 0) {
 
                 // Pop off the layer, remove from database, null the tracker..
                 this.map.removeLayer(this._currentEditLayer);
@@ -737,13 +739,13 @@
         zoomToItemVectors: function(id) {
 
             // Get the record out of the database.
-            var record = this._db({ recordid: parseInt(id) }).first();
+            var record = this._db({ recordid: parseInt(id, 10) }).first();
 
             // If the record exists and there is a map feature.
-            if (record.layer != null && record.layer.features.length > 0) {
+            if (record.layer !== null && record.layer.features.length > 0) {
 
                 // If there is item-specific data.
-                if (record.data.bounds != null && record.data.zoom != null) {
+                if (record.data.bounds !== null && record.data.zoom !== null) {
                     this.map.zoomToExtent(new OpenLayers.Bounds.fromString(record.data.bounds));
                     this.map.zoomTo(record.data.zoom);
                 }
@@ -769,27 +771,27 @@
             pointRadius) {
 
             // Capture fill color.
-            var fillColor = (fillColor != null) ? fillColor :
+            var fillColor = (fillColor !== null) ? fillColor :
                 this.options.styles.vector_color;
 
             // Capture fill opacity.
-            var fillOpacity = (fillOpacity != null) ? fillOpacity :
+            var fillOpacity = (fillOpacity !== null) ? fillOpacity :
                 this.options.styles.vector_opacity;
 
             // Capture stroke color.
-            var strokeColor = (strokeColor != null) ? strokeColor :
+            var strokeColor = (strokeColor !== null) ? strokeColor :
                 this.options.styles.stroke_color;
 
             // Capture stroke opacity.
-            var strokeOpacity = (strokeOpacity != null) ? strokeOpacity :
+            var strokeOpacity = (strokeOpacity !== null) ? strokeOpacity :
                 this.options.styles.stroke_opacity;
 
             // Capture stroke width.
-            var strokeWidth = (strokeWidth != null) ? strokeWidth :
+            var strokeWidth = (strokeWidth !== null) ? strokeWidth :
                 this.options.styles.stroke_width;
 
             // Capture point radius.
-            var pointRadius = (pointRadius != null) ? pointRadius :
+            var pointRadius = (pointRadius !== null) ? pointRadius :
                 this.options.styles.point_radius;
 
             // Construct and return the StyleMaps.
@@ -973,4 +975,4 @@
 
     });
 
-})( jQuery );
+})(jQuery);

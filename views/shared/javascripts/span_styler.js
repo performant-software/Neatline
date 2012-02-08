@@ -24,6 +24,7 @@
 
 (function($, undefined) {
 
+    'use strict';
 
     $.widget('neatline.spanstyler', {
 
@@ -47,7 +48,7 @@
         constructCss: function(color, leftPercent, rightPercent) {
 
             // If percentages are passed.
-            if (leftPercent != null && rightPercent != null) {
+            if (leftPercent !== null && rightPercent !== null) {
 
                 // Store the percentages.
                 this.leftPercent = leftPercent;
@@ -58,7 +59,7 @@
             // Otherwise, try to retrieve stored values, or revert to defaults.
             else {
 
-                if (this.leftPercent != null && this.rightPercent != null) {
+                if (this.leftPercent !== null && this.rightPercent !== null) {
                     leftPercent = this.leftPercent;
                     rightPercent = this.rightPercent;
                 }
@@ -74,7 +75,7 @@
             var rgb = this.__hexToRgb(color);
             var fullOpacity = this.__rgbObjectToCssValue(rgb, 1);
             var zeroOpacity = this.__rgbObjectToCssValue(rgb, 0);
-            var color = (color[0] == '#') ? color : '#' + color;
+            var color = (color[0] === '#') ? color : '#' + color;
 
             this.css = 'background: ' + color + '; ' +
                 'background: -moz-linear-gradient(left, ' +
@@ -133,7 +134,7 @@
          */
         __hexToRgb: function(hex) {
 
-            if (hex[0] == '#') {
+            if (hex[0] === '#') {
                 hex = hex.slice(1);
             }
 
