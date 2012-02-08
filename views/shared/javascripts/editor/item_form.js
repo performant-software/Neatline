@@ -459,6 +459,13 @@
             this.element.detach();
         },
 
+        /*
+         * Reload the form data.
+         */
+        reloadForm: function() {
+            this._getFormData();
+        },
+
 
         /*
          * =================
