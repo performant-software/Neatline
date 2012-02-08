@@ -24,17 +24,8 @@
 
     $.widget('neatline.neatlinetimeline', {
 
-        options: {
-
-            // CSS constants.
-            css: {
-                tape_height: 8
-            }
-
-        },
-
         /*
-         * - return void.
+         * .
          */
         _create: function() {
 
