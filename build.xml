@@ -89,6 +89,11 @@
     
     <exec executable="npm">
       <arg value="update"/>
+      <arg value="npm" />
+      <arg value="closure-compiler" />
+      <arg value="jshint" />
+      <arg value="fixmyjs" />
+      <arg value="-g" />
     </exec>
   </target>
 
