@@ -1,4 +1,4 @@
-/*
+/**
  * Manager class for the dropdown item edit forms in the Neatline editor.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
@@ -782,7 +782,7 @@
                     data: {
                         item_id: this.itemId,
                         record_id: this.recordId,
-                        exhibit_id: Neatline.id,
+                        exhibit_id: Neatline.id
                     },
 
                     success: function(data) {

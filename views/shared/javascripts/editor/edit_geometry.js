@@ -1,4 +1,4 @@
-/*
+/**
  * Geometry editor widget that appears at the top right corner of the
  * map during an item edit in the Neatline editor.
  *

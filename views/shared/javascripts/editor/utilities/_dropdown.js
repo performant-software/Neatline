@@ -1,4 +1,4 @@
-/*
+/**
  * Worker class that provides basic dropdown functionality for configuration
  * menus across the top bar of the editor.
  *
@@ -200,7 +200,7 @@
 
             this._expanded = false;
 
-        },
+        }
 
     });
 

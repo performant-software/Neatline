@@ -1,4 +1,4 @@
-/*
+/**
  * Worker class to build and apply the color and opacity gradient on a
  * timeline time interval span. Used by the editor to render changes on
  * the "Date Ambiguity" builder block and to apply the settings on the

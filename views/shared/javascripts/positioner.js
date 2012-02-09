@@ -1,6 +1,6 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
 
-/*
+/**
  * Given a set of layout parameters, this class computes the positions for the
  * Neatline blocks inside of the container. Used by the layout builder in the
  * editor and by the main application code that constructs the exhibit at runtime.

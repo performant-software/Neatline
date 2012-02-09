@@ -1,4 +1,4 @@
-/*
+/**
  * Worker class that durably positions a div to fill the entire screen.
  * Used by the public isntantiations of Neatline.
  *

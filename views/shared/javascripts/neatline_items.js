@@ -1,4 +1,4 @@
-/*
+/**
  * Component widget that controls the undated items block. Instantiated by the
  * parent Neatline widget.
  *
