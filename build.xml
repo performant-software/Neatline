@@ -151,14 +151,10 @@
     <apply executable="java" parallel="false">
       <fileset dir="${staging.dir}/${views.dir}" excludes="**/*.min.js, **/spec/**," includes="**/*.js" />
       <arg line="-jar" />
-      <arg path="${basedir}/build/tools/closure-compiler-v1346.jar" />
-
-      <arg line="--js" />
+      <!-- <arg path="${basedir}/build/tools/closure-compiler-v1346.jar" /> -->
+      <arg path="${basedir}/build/tools/yuicompressor-2.4.5.jar" />
       <srcfile/>
-      <arg line="--compilation_level" />
-       <arg value="SIMPLE_OPTIMIZATIONS" />
-      <!--<arg value="ADVANCED_OPTIMIZATIONS" />-->
-      <arg line="--js_output_file" />
+      <arg line="-o" />
       <mapper type="glob" from="*.js" to="${staging.dir}/${views.dir}/*.min.js" />
       <!--<mapper type="identity" /> -->
       <targetfile/>
