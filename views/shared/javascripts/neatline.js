@@ -249,7 +249,7 @@
             if (this.params.is_items && !this.instantiated_undated) {
 
                 // If the Neatline is public, instantiate the default item tray.
-                if (this.params.public) {
+                if (this.params.isPublic) {
 
                     this.items.neatlineitems({
 

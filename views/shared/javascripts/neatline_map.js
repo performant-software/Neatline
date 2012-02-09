@@ -93,7 +93,7 @@
             }
 
             // Construct the editing manager.
-            if (!Neatline.public) {
+            if (!Neatline.isPublic) {
                 this._instantiateEditor();
             }
 
