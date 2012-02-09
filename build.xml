@@ -25,6 +25,9 @@
   <property name="report.dir" value="${build.dir}/report" />
   <property name="dist.dir" value="${build.dir}/dist" />
   <property name="staging.dir" value="${build.dir}/tmp" />
+
+  <property name="dir.views" value="views" />
+
   
   <!-- Load the Ant-contrib to give us access to some very useful tasks! -->
   <!-- the .jar file is located in the tools directory -->
@@ -146,8 +149,6 @@
   <target name="minify-js" depends="_copy" description="Minifies JavaScript using Google's Closure Compiler">
     <echo message="Minifying JavaScript..." />
 
-    <property name="views.dir" value="views" />
-
     <apply executable="java" parallel="false">
       <fileset dir="${staging.dir}/${views.dir}" excludes="**/*.min.js, **/spec/**," includes="**/*.js" />
       <arg line="-jar" />
@@ -168,8 +169,6 @@
   <target name="minify-css" depends="_copy" description="Minifies CSS files">
      <echo message="Minifying CSS files" />
 
-     <property name="dir.views" value="views" />
-
      <apply executable="java" parallel="false">
 
        <fileset dir="${staging.dir}/${dir.views}/" excludes="**/*.min.css" includes="**/*.css"/>
@@ -181,6 +180,48 @@
       <!-- <mapper type="identity" /> -->
       <targetfile />
     </apply>
+
+  </target>
+
+  <target name="optimize-png" depends="_copy" description="Optimizes .png images">
+    <echo message="Optimizing pngs..." />
+    <echo message="This may tak a while, but everything else is already done." />
+    <echo message=" " />
+
+    <echo message="Running optipng on the .png files..." />
+
+       <!-- On *nix's and OS X, check for optipng and give a helpful message if it's not installed -->
+    <if>
+      <and>
+        <os family="unix" />
+        <available file="optipng" filepath="${ENV.PATH}" />
+      </and>
+      <then>
+        <!-- work around https://sourceforge.net/tracker/?func=detail&aid=2671422&group_id=151404&atid=780916 -->
+        <delete>
+          <fileset dir="${staging.dir}/${dir.views}/">
+            <include name="**/*.png"/>
+          </fileset>
+        </delete>
+        <apply executable="optipng"  osfamily="unix">
+          <fileset dir="${basedir}/${dir.views}/" includes="**/*.png" />
+          <arg value="-quiet"/>
+          <arg value="-o7"/>
+          <arg value="-out"/>
+          <targetfile/>
+          <srcfile/>
+          <mapper type="glob" from="*.png" to="${staging.dir}/${dir.views}/*.png"/>
+        </apply>
+      </then>
+      <elseif>
+        <os family="unix" />
+        <then>
+          <echo message="*** optipng NOT INSTALLED. SKIPPING OPTIMIZATION OF PNGs." />
+          <echo message="*** Install optipng to enable png optimization." />
+          <echo message="*** For instructions see 'Dependencies' at: http://html5boilerplate.com/docs/#Build-script#dependencies" />
+        </then>
+      </elseif>
+    </if>
 
   </target>
   
