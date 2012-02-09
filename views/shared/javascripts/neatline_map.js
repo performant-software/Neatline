@@ -1,4 +1,4 @@
-/*
+/**
  * Component widget that controls the map. Instantiated by the parent Neatline
  * widget.
  *

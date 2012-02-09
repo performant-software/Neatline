@@ -1,6 +1,6 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
 
-/*
+/**
  * Dynamic layout builder application in the add view.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not

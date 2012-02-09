@@ -1,4 +1,4 @@
-/*
+/**
  * Component widget that controls the timeline. Instantiated by the parent
  * Neatline widget.
  *

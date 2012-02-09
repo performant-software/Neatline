@@ -1,4 +1,4 @@
-/*
+/**
  * Item browser and editor column in the Neatline editor.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
@@ -39,7 +39,7 @@
                     space_y_offset: -38,
                     space_x_offset: -20,
                     time_y_offset: -38,
-                    time_x_offset: -16,
+                    time_x_offset: -16
                 }
             },
 
@@ -186,7 +186,7 @@
             // Position the Neatline container to the right of the item browser.
             this.neatlineContainer.css({
                 'height': this.windowHeight - this.topBarHeight,
-                'width': this.windowWidth - this.containerWidth - 1,
+                'width': this.windowWidth - this.containerWidth - 1
             });
 
             this._trigger('reposition');

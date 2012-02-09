@@ -1,4 +1,4 @@
-/*
+/**
  * Expand and contract fieldsets.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
@@ -134,7 +134,7 @@
             var self = this;
 
             this.fieldset.stop().animate({
-                height: this.fieldset[0].scrollHeight,
+                height: this.fieldset[0].scrollHeight
             }, 100, function() {
                 self._trigger('change');
             });
@@ -153,7 +153,7 @@
             var self = this;
 
             this.fieldset.stop().animate({
-                height: 0,
+                height: 0
             }, 100, function() {
                 self._trigger('change');
             });

@@ -1,4 +1,4 @@
-/*
+/**
  * A simple gloss on a text input that lets the user click and drag up
  * or down to change the integer value of the input.
  *

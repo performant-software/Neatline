@@ -1,4 +1,4 @@
-/*
+/**
  * The core orchestrator class for a Neatline exhibit. This widget (a) reads in the
  * object literal pushed onto the page by the template with basic information
  * about the Neatline, (b) constructs the component divs, (c) initializes the widgets

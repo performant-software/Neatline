@@ -137,47 +137,47 @@
 
   <target name="jshint" description="Runs JSHint on JavaScript">
     <echo message="Linting JavaScript..." />
-    
     <apply executable="jshint">
       <fileset dir="${basedir}/views" excludes="**/*.min.js, **/build/**" includes="**/*.js" />
       <srcfile/>
     </apply>
-    
   </target>
   
   <target name="minify-js" depends="_copy" description="Minifies JavaScript using Google's Closure Compiler">
     <echo message="Minifying JavaScript..." />
-    
-    <apply executable="java" parallel="false">
-      <fileset dir="${staging.dir}" excludes="**/*.min.js, **/spec/**," includes="**/tmp**/*.js" />
-      <arg line="-jar" />
-      <arg path="${basedir}/build/tools/closure-compiler-v1346.jar" />
 
-      <arg line="--js" />
+    <property name="views.dir" value="views" />
+
+    <apply executable="java" parallel="false">
+      <fileset dir="${staging.dir}/${views.dir}" excludes="**/*.min.js, **/spec/**," includes="**/*.js" />
+      <arg line="-jar" />
+      <!-- <arg path="${basedir}/build/tools/closure-compiler-v1346.jar" /> -->
+      <arg path="${basedir}/build/tools/yuicompressor-2.4.5.jar" />
       <srcfile/>
-      <arg line="--compilation_level" />
-      <arg value="SIMPLE_OPTIMIZATIONS" />
-      <arg line="--js_output_file" />
-      <mapper type="glob" from="*.js" to="*.min.js" />
+      <arg line="-o" />
+      <mapper type="glob" from="*.js" to="${staging.dir}/${views.dir}/*.min.js" />
       <!--<mapper type="identity" /> -->
       <targetfile/>
     </apply>
   </target>
-  
+
   <target name="minify-css" depends="_copy" description="Minifies CSS files">
      <echo message="Minifying CSS files" />
-    
-    <apply executable="java" parallel="false">
-      <fileset dir="${basedir}/build/tmp/" excludes="**/*.min.css" includes="**/*.css"/>
+
+     <property name="dir.views" value="views" />
+
+     <apply executable="java" parallel="false">
+
+       <fileset dir="${staging.dir}/${dir.views}/" excludes="**/*.min.css" includes="**/*.css"/>
       <arg line="-jar" />
       <arg path="${build.dir}/tools/yuicompressor-2.4.5.jar" />
       <srcfile/>
-      <arg line="-v"/>
       <arg line="-o" />
-      <mapper type="glob" from="*.css" to="*.min.css" />
+      <mapper type="glob" from="*.css" to="${staging.dir}/${dir.views}/*.min.css" />
       <!-- <mapper type="identity" /> -->
       <targetfile />
     </apply>
+
     
   </target>
   

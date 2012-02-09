@@ -1,4 +1,4 @@
-/*
+/**
  * Widget to add small, non-browser-default scrollbar to tight UX elements.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
