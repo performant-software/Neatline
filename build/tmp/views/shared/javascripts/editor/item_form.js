@@ -61,7 +61,7 @@
                     width: 340,
                     height: 50,
                     controls: "bold italic underline | font size color | " +
-                        "bullets outdent indent | source removeformat"
+                        "source removeformat"
                 }
 
             }

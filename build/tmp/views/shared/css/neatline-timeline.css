@@ -1,0 +1,136 @@
+/**
+ * Updated formatting for displaying the SIMILE timeline.
+ */
+
+/* Timeline container div */
+.neatlinetime-timeline {
+    height: 250px;
+    margin-bottom: 20px;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    border-top: 1px solid rgba(90,80,100, 0.5);
+    border-bottom: 1px solid rgba(90,80,100, 0.5);
+    font-size: 12px;
+}
+
+.neatlinetime-timeline .timeline-copyright {
+    display:none;
+}
+
+/* Resets the background for all timeline bands to white, so we know what the base is. */
+.neatlinetime-timeline .timeline-band {
+    background: #fff !important;
+}
+
+/* Background colors for the top band. */
+.neatlinetime-timeline .timeline-band-0 .timeline-ether-bg{
+    background-color:rgba(90,80,100, 0.02);
+    background: -moz-linear-gradient(top,  rgba(90,80,100,0) 0%, rgba(90,80,100,0.12) 80%, rgba(90,80,100,0.15) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(90,80,100,0)), color-stop(80%,rgba(90,80,100,0.12)), color-stop(100%,rgba(90,80,100,0.15))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  rgba(90,80,100,0) 0%,rgba(90,80,100,0.12) 80%,rgba(90,80,100,0.15) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  rgba(90,80,100,0) 0%,rgba(90,80,100,0.12) 80%,rgba(90,80,100,0.15) 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  rgba(90,80,100,0) 0%,rgba(90,80,100,0.12) 80%,rgba(90,80,100,0.15) 100%); /* IE10+ */
+    background: linear-gradient(top,  rgba(90,80,100,0) 0%,rgba(90,80,100,0.12) 80%,rgba(90,80,100,0.15) 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#005a5064', endColorstr='#265a5064',GradientType=0 ); /* IE6-9 */
+}
+
+/* Background color for the bottom band. */
+.neatlinetime-timeline .timeline-band-1 .timeline-ether-bg{
+    background-color:rgba(90,80,100, 0.9);
+    background: -moz-linear-gradient(top,  rgba(90,80,100,0.9) 0%, rgba(90,80,100,0.95) 50%, rgba(90,80,100,1) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(90,80,100,0.9)), color-stop(50%,rgba(90,80,100,0.95)), color-stop(100%,rgba(90,80,100,1))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  rgba(90,80,100,0.9) 0%,rgba(90,80,100,0.95) 50%,rgba(90,80,100,1) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  rgba(90,80,100,0.9) 0%,rgba(90,80,100,0.95) 50%,rgba(90,80,100,1) 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  rgba(90,80,100,0.9) 0%,rgba(90,80,100,0.95) 50%,rgba(90,80,100,1) 100%); /* IE10+ */
+    background: linear-gradient(top,  rgba(90,80,100,0.9) 0%,rgba(90,80,100,0.95) 50%,rgba(90,80,100,1) 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e65a5064', endColorstr='#5a5064',GradientType=0 ); /* IE6-9 */
+}
+
+/* Text label for events on the top band. */
+.neatlinetime-timeline .timeline-event-label {
+    /*background: rgba(0,0,0, 0.05);*/
+    /* font-family: 'Petrona', serif;*/
+    /* font-size: 1.1em;*/
+    color: rgba(0,0,0,0.6);
+    padding: 0;
+}
+
+/* Hide the icons for events on the top band.*/
+.neatlinetime-timeline .timeline-event-icon img {
+    display:none;
+}
+
+/*
+Now, we'll use some CSS magic to make a 6px circle with border radius.
+
+To change the background color of an event dot, just change the 'background'
+property to whatever you'd like. To change the width and height, modify
+'width' and 'height' to your liking, then make sure 'border-radius' is half
+of whatever you set for width/height, if you want a circle.
+*/
+.neatlinetime-timeline .timeline-event-icon {
+    background: rgba(190, 160, 5, 0.75);
+    width: 6px;
+    height: 6px;
+    border-radius: 3px;
+}
+
+.neatlinetime-timeline .timeline-band-1 .timeline-ether-highlight {
+    background: rgba(255,255,255, 0.35);
+}
+
+.neatlinetime-timeline .timeline-band-1 .timeline-small-event-icon {
+    background: rgba(240, 200, 15, 0.75);
+}
+
+/* Styles for the month label on the top band. */
+.neatlinetime-timeline .timeline-date-label {
+    color: rgba(0,0,0,0.3);
+}
+
+/* Styles for the year label on the top band. */
+.neatlinetime-timeline .timeline-date-label-em {
+    color:rgba(190, 160, 5, 0.75);
+    font-weight:bold;
+    height:1.5em !important;
+}
+
+/* Styles for the date label on the bottom band. */
+.neatlinetime-timeline .timeline-band-1 .timeline-date-label {
+    color: rgba(255,255,255,0.9);
+}
+
+/* Title inside an event bubble. */
+.timeline-event-bubble-title {
+    font-size: 1.5em !important;
+    border:none !important;
+}
+
+/* Link inside the title inside an event bubble. */
+.timeline-event-bubble-title a {
+    text-decoration:none !important;
+}
+
+/* The event description inside an event bubble. */
+.timeline-event-bubble-body {
+    font-size: 1.2em !important;
+    padding: 10px 0 !important;
+    border: 1px dotted #eee !important;
+    border-width: 1px 0 !important;
+}
+
+/*
+Reset the font size to 1em, in case there are paragraphs or other HTML
+elements inside the event body.
+*/
+.timeline-event-bubble-body * {
+    font-size: 1em !important;
+}
+
+/* The timestamp at the bottom of an event bubble. */
+.timeline-event-bubble-time {
+    padding-top: 10px;
+    font-weight:bold;
+    color: rgba(0,0,0,0.5);
+    text-align:right;
+    margin-bottom: 0 !important;
+}

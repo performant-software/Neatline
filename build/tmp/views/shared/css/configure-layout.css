@@ -1,0 +1,134 @@
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
+
+/**
+ * CSS for layout builder application. Used in the Neatline editor.
+ *
+ * PHP version 5
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at http://www.apache.org/licenses/LICENSE-2.0 Unless required by
+ * applicable law or agreed to in writing, software distributed under the
+ * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS
+ * OF ANY KIND, either express or implied. See the License for the specific
+ * language governing permissions and limitations under the License.
+ *
+ * @package     omeka
+ * @subpackage  neatline
+ * @author      Scholars' Lab <>
+ * @author      Bethany Nowviskie <bethany@virginia.edu>
+ * @author      Adam Soroka <ajs6f@virginia.edu>
+ * @author      David McClure <david.mcclure@virginia.edu>
+ * @copyright   2011 The Board and Visitors of the University of Virginia
+ * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache 2 License
+ */
+
+
+#configure-layout {
+    width: 404px;
+    margin: 0 0 0 0;
+}
+
+#configure-layout p {
+    margin-bottom: 0;
+}
+
+#drag-box {
+    width: 400px;
+    height: 220px;
+    /* border: 1px solid #ddd;*/
+    margin: 1em 0 0 0;
+    padding: 10px
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    -khtml-border-radius: 2px;
+    border-radius: 2px;
+    position: relative;
+}
+
+#options {
+    margin: 1.7em 0 0 0;
+    display: block;
+}
+
+span.neatline-toggle-button {
+    cursor: pointer;
+    font-size: 13px;
+    font-family: Helvetica, Arial, sans-serif;
+    border: 1px solid;
+    padding: 0.4em 0.6em 0.4em 0.6em;
+    margin: 0 1em 0 0;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -khtml-border-radius: 5px;
+    border-radius: 5px;
+    font-weight: bold;
+    background-image: -ms-linear-gradient(top, #FFFFFF 0%, #F7F7F7 100%);
+    background-image: -moz-linear-gradient(top, #FFFFFF 0%, #F7F7F7 100%);
+    background-image: -o-linear-gradient(top, #FFFFFF 0%, #F7F7F7 100%);
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #FFFFFF), color-stop(1, #F7F7F7));
+    background-image: -webkit-linear-gradient(top, #FFFFFF 0%, #F7F7F7 100%);
+    background-image: linear-gradient(top, #FFFFFF 0%, #F7F7F7 100%);
+    color: #acacac;
+    border-color: #d9d9d9;
+}
+
+span.neatline-pressed {
+    color: #835A98;
+    border-color: #b49ac2;
+}
+
+span.neatline-highlighted {
+    /* border-color: #efcb3c;*/
+}
+
+div.draggable {
+    display: none;
+    text-align: center;
+    font-size: 2em;
+    font-family: Helvetica, Arial, sans-serif;
+    font-weight: bold;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    -khtml-border-radius: 2px;
+    border-radius: 2px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border: 1px solid #ddd;
+}
+
+span.drag-tag {
+    position: relative;
+    display: block;
+    color: #835a98;
+}
+
+#drag-map {
+    background-color: #fff;
+    width: 100%;
+}
+
+#drag-timeline {
+    background-color: #fff;
+}
+
+#drag-items {
+    background-color: #fff;
+}
+
+#layout-save {
+    display: block;
+    position: absolute;
+    z-index: 999;
+    background: #FFFEF8;
+    top: 0;
+    left: 0;
+    font-size: 2em;
+    font-weight: bold;
+    text-align: center;
+}
+
+#layout-save .drag-tag {
+    color: #639937;
+}
