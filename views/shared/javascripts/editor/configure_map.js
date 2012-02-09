@@ -156,10 +156,14 @@
          * Get values out of inputs.
          *
          * - return object: The data.
+         *   
          */
         _getData: function() {
 
             var data = {};
+
+            //TODO: rewrite in dot notation
+            // data.exhibit_id
 
             data['exhibit_id'] =            Neatline.id;
             data['vector_color'] =          this.vectorColor.val();

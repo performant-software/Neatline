@@ -250,7 +250,7 @@
                 pressed_by_default: false,
                 enabled_by_default: false,
                 press: function() { self._toggleMap(); },
-                unpress: function() { self._toggleMap(); },
+                unpress: function() { self._toggleMap(); }
             });
 
             this.timeline_toggle.togglebutton({
@@ -558,11 +558,11 @@
             switch (enter_or_leave) {
 
                 case 'enter':
-                    var target = this.options.colors.timeline.target
+                    var target = this.options.colors.timeline.target;
                 break;
 
                 case 'leave':
-                    var target = this.options.colors.timeline.def
+                    var target = this.options.colors.timeline.def;
                 break;
 
             }
@@ -582,11 +582,11 @@
             switch (enter_or_leave) {
 
                 case 'enter':
-                    var target = this.options.colors.items.target
+                    var target = this.options.colors.items.target;
                 break;
 
                 case 'leave':
-                    var target = this.options.colors.items.def
+                    var target = this.options.colors.items.def;
                 break;
 
             }
@@ -642,7 +642,7 @@
                         // Vertical switching between map and timeline.
 
                         // MAP on top:
-                        if (self._top_element == 'map') {
+                        if (self._top_element === 'map') {
 
                             // ** Cursor down.
                             if (e.pageY > (self.dragboxOffset.top + self.majorHeight)) {
@@ -654,7 +654,7 @@
                         }
 
                         // TIMELINE on top:
-                        else if (self._top_element == 'timeline') {
+                        else if (self._top_element === 'timeline') {
 
                             // ** Cursor up.
                             if (e.pageY < (self.dragboxOffset.top + self.majorHeight)) {
@@ -671,7 +671,7 @@
                         if (self.__mapIsLevelWithItems()) {
 
                             // ITEMS on right:
-                            if (self._items_h_pos == 'right') {
+                            if (self._items_h_pos === 'right') {
 
                                 // ** Cursor right.
                                 if (e.pageX > (self.dragboxOffset.left + self.majorWidth)) {
@@ -682,7 +682,7 @@
                             }
 
                             // ITEMS on left:
-                            else if (self._items_h_pos == 'left') {
+                            else if (self._items_h_pos === 'left') {
 
                                 // ** Cursor left.
                                 if (e.pageX < (self.dragboxOffset.left + self.minorWidth)) {
@@ -702,7 +702,7 @@
                         // Vertical switching between map and timeline.
 
                         // MAP on top:
-                        if (self._top_element == 'map') {
+                        if (self._top_element === 'map') {
 
                             // ** Cursor down.
                             if (e.pageY > (self.dragboxOffset.top + self.majorHeight)) {
@@ -713,7 +713,7 @@
                         }
 
                         // TIMELINE on top:
-                        else if (self._top_element == 'timeline') {
+                        else if (self._top_element === 'timeline') {
 
                             // ** Cursor up.
                             if (e.pageY < (self.dragboxOffset.top + self.majorHeight)) {
@@ -733,7 +733,7 @@
                         if (self.__mapIsLevelWithItems()) {
 
                             // ITEMS on right:
-                            if (self._items_h_pos == 'right') {
+                            if (self._items_h_pos === 'right') {
 
                                 // ** Cursor right.
                                 if (e.pageX > (self.dragboxOffset.left + self.majorWidth)) {
@@ -744,7 +744,7 @@
                             }
 
                             // ITEMS on left:
-                            else if (self._items_h_pos == 'left') {
+                            else if (self._items_h_pos === 'left') {
 
                                 // ** Cursor left.
                                 if (e.pageX < (self.dragboxOffset.left + self.minorWidth)) {
@@ -816,7 +816,7 @@
                         // Vertical switching between map and timeline.
 
                         // TIMELINE on top:
-                        if (self._top_element == 'timeline') {
+                        if (self._top_element === 'timeline') {
 
                             // ** Cursor down.
                             if (e.pageY > (self.dragboxOffset.top + self.majorHeight)) {
@@ -828,7 +828,7 @@
                         }
 
                         // MAP on top:
-                        else if (self._top_element == 'map') {
+                        else if (self._top_element === 'map') {
 
                             // ** Cursor up.
                             if (e.pageY < (self.dragboxOffset.top + self.majorHeight)) {
@@ -845,7 +845,7 @@
                         if (self.__timelineIsLevelWithItems()) {
 
                             // ITEMS on right:
-                            if (self._items_h_pos == 'right') {
+                            if (self._items_h_pos === 'right') {
 
                                 // ** Cursor right.
                                 if (e.pageX > (self.dragboxOffset.left + self.majorWidth)) {
@@ -856,7 +856,7 @@
                             }
 
                             // ITEMS on left:
-                            else if (self._items_h_pos == 'left') {
+                            else if (self._items_h_pos === 'left') {
 
                                 // ** Cursor left.
                                 if (e.pageX < (self.dragboxOffset.left + self.minorWidth)) {
@@ -876,7 +876,7 @@
                         // Vertical switching between map and timeline.
 
                         // TIMELINE on top:
-                        if (self._top_element == 'timeline') {
+                        if (self._top_element === 'timeline') {
 
                             // ** Cursor down.
                             if (e.pageY > (self.dragboxOffset.top + self.majorHeight)) {
@@ -887,7 +887,7 @@
                         }
 
                         // MAP on top:
-                        else if (self._top_element == 'map') {
+                        else if (self._top_element === 'map') {
 
                             // ** Cursor up.
                             if (e.pageY < (self.dragboxOffset.top + self.majorHeight)) {
@@ -907,7 +907,7 @@
                         if (self.__timelineIsLevelWithItems()) {
 
                             // ITEMS on right:
-                            if (self._items_h_pos == 'right') {
+                            if (self._items_h_pos === 'right') {
 
                                 // ** Cursor right.
                                 if (e.pageX > (self.dragboxOffset.left + self.majorWidth)) {
@@ -918,7 +918,7 @@
                             }
 
                             // ITEMS on left:
-                            else if (self._items_h_pos == 'left') {
+                            else if (self._items_h_pos === 'left') {
 
                                 // ** Cursor left.
                                 if (e.pageX < (self.dragboxOffset.left + self.minorWidth)) {
@@ -1019,7 +1019,7 @@
                         if (self.__mapIsLevelWithItems()) {
 
                             // Items on right.
-                            if (self._items_h_pos == 'right') {
+                            if (self._items_h_pos === 'right') {
 
                                 // Cursor left.
                                 if (e.pageX < (self.dragboxOffset.left + (self.width/2))) {
@@ -1030,7 +1030,7 @@
                             }
 
                             // Items on left.
-                            if (self._items_h_pos == 'left') {
+                            if (self._items_h_pos === 'left') {
 
                                 // Cursor right.
                                 if (e.pageX > (self.dragboxOffset.left + (self.width/2))) {
@@ -1046,7 +1046,7 @@
                         if (self.__timelineIsLevelWithItems()) {
 
                             // Items on right.
-                            if (self._items_h_pos == 'right') {
+                            if (self._items_h_pos === 'right') {
 
                                 // Cursor left.
                                 if (e.pageX < (self.dragboxOffset.left + (self.width/2))) {
@@ -1057,7 +1057,7 @@
                             }
 
                             // Items on left.
-                            if (self._items_h_pos == 'left') {
+                            if (self._items_h_pos === 'left') {
 
                                 // Cursor right.
                                 if (e.pageX > (self.dragboxOffset.left + (self.width/2))) {
@@ -1070,10 +1070,10 @@
                         }
 
                         // With map and timeline.
-                        if (self._items_height == 'full') {
+                        if (self._items_height === 'full') {
 
                             // Items on right.
-                            if (self._items_h_pos == 'right') {
+                            if (self._items_h_pos === 'right') {
 
                                 // Cursor left.
                                 if (e.pageX < (self.dragboxOffset.left + (self.width/2))) {
@@ -1085,7 +1085,7 @@
                             }
 
                             // Items on left.
-                            if (self._items_h_pos == 'left') {
+                            if (self._items_h_pos === 'left') {
 
                                 // Cursor right.
                                 if (e.pageX > (self.dragboxOffset.left + (self.width/2))) {
@@ -1106,7 +1106,7 @@
                         // Map and items horizontal switching.
 
                         // Items on right.
-                        if (self._items_h_pos == 'right') {
+                        if (self._items_h_pos === 'right') {
 
                             // Cursor left.
                             if (e.pageX < (self.dragboxOffset.left + (self.width/2))) {
@@ -1117,7 +1117,7 @@
                         }
 
                         // Items on left.
-                        if (self._items_h_pos == 'left') {
+                        if (self._items_h_pos === 'left') {
 
                             // Cursor right.
                             if (e.pageX > (self.dragboxOffset.left + (self.width/2))) {
@@ -1135,7 +1135,7 @@
                         // Map and items horizontal switching.
 
                         // Items on right.
-                        if (self._items_h_pos == 'right') {
+                        if (self._items_h_pos === 'right') {
 
                             // Cursor left.
                             if (e.pageX < (self.dragboxOffset.left + (self.width/2))) {
@@ -1146,7 +1146,7 @@
                         }
 
                         // Items on left.
-                        if (self._items_h_pos == 'left') {
+                        if (self._items_h_pos === 'left') {
 
                             // Cursor right.
                             if (e.pageX > (self.dragboxOffset.left + (self.width/2))) {
@@ -1192,7 +1192,7 @@
 
             // If there is a parameter change.
             if (!$.compare(newParams, this.lastTimelineParams) ||
-                this._current_dragger == 'timeline') {
+                this._current_dragger === 'timeline') {
 
                 // Recompute positions.
                 this._computePositions();
@@ -1267,7 +1267,7 @@
 
             // If there is a parameter change.
             if (!$.compare(newParams, this.lastMapParams) ||
-                this._current_dragger == 'map') {
+                this._current_dragger === 'map') {
 
                 // Recompute positions.
                 this._computePositions();
@@ -1342,7 +1342,7 @@
 
             // If there is a parameter change.
             if (!$.compare(newParams, this.lastItemParams) ||
-                this._current_dragger == 'items') {
+                this._current_dragger === 'items') {
 
                 // Recompute positions.
                 this._computePositions();
@@ -1445,7 +1445,7 @@
             dragger.css({
                 'opacity': 0.5,
                 'z-index': 99
-            })
+            });
 
         },
 
@@ -1460,17 +1460,17 @@
             // If all three blocks are present.
             if (this._is_map && this._is_timeline && this._is_items) {
 
-                if (this._top_element == 'map' &&
-                    this._items_height == 'partial' &&
-                    this._items_v_pos == 'top') {
+                if (this._top_element === 'map' &&
+                    this._items_height === 'partial' &&
+                    this._items_v_pos === 'top') {
 
                     return true;
 
                 }
 
-                if (this._top_element == 'timeline' &&
-                    this._items_height == 'partial' &&
-                    this._items_v_pos == 'bottom') {
+                if (this._top_element === 'timeline' &&
+                    this._items_height === 'partial' &&
+                    this._items_v_pos === 'bottom') {
 
                     return true;
 
@@ -1498,17 +1498,17 @@
             // If all three blocks are present.
             if (this._is_map && this._is_timeline && this._is_items) {
 
-                if (this._top_element == 'timeline' &&
-                    this._items_height == 'partial' &&
-                    this._items_v_pos == 'top') {
+                if (this._top_element === 'timeline' &&
+                    this._items_height === 'partial' &&
+                    this._items_v_pos === 'top') {
 
                     return true;
 
                 }
 
-                if (this._top_element == 'map' &&
-                    this._items_height == 'partial' &&
-                    this._items_v_pos == 'bottom') {
+                if (this._top_element === 'map' &&
+                    this._items_height === 'partial' &&
+                    this._items_v_pos === 'bottom') {
 
                     return true;
 
@@ -1547,7 +1547,7 @@
                 items_height:   this._items_height,
                 h_percent:      options.constants.h_percent,
                 v_percent:      options.constants.v_percent
-            }
+            };
 
         }
 
@@ -1561,11 +1561,11 @@
          */
         compare: function(array1, array2) {
 
-            if (array1 == null || array2 == null) {
+            if (array1 === null || array2 === null) {
                 return false;
             }
 
-            if (array1.length != array2.length) {
+            if (array1.length !== array2.length) {
                 return false;
             }
 
@@ -1581,11 +1581,11 @@
                 }
             }
 
-            return true
+            return true;
 
         }
 
     });
 
 
-})( jQuery );
+})(jQuery);

@@ -24,8 +24,8 @@
 Array.prototype.remove = function(el) {
 
     for (var i = 0; i < this.length; i++) {
-        if (this[i] == el) {
-            this.splice(i,1);
+        if (this[i] === el) {
+            this.splice(i, 1);
             this.remove(el);
             break;
         }

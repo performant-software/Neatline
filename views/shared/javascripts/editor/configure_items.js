@@ -141,7 +141,7 @@
                 },
 
                 success: function() {
-                    self._trigger('neworder')
+                    self._trigger('neworder');
                 }
 
             });
