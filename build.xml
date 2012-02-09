@@ -9,10 +9,6 @@
   PECL:
     - xdebug
 
-  JavaScript:
-  - closure-compiler (npm install -g closure-compiler): Bindings to Google's Closure Compiler
-  - jshint (npm install -g jshint): A CLI for JSHint
-  - fixmyjs (npm install -g fixmyjs): Automatically fixes silly errors from jshint 
 
 
 -->
@@ -70,15 +66,7 @@
       <arg value="xdebug"/>
     </exec>
 
-    <echo>Installing npm packages...</echo>
 
-    <exec executable="npm">
-      <arg value="-g" />
-      <arg value="install"/>
-      <arg value="closure-compiler" />
-      <arg value="jshint" />
-      <arg value="fixmyjs" />
-    </exec>
   </target>
 
   <target name="update-dependencies" description="Updates testing dependencies">
@@ -94,14 +82,7 @@
       <arg value="upgrade-all" />
     </exec>
 
-    <exec executable="npm">
-      <arg value="update"/>
-      <arg value="npm" />
-      <arg value="closure-compiler" />
-      <arg value="jshint" />
-      <arg value="fixmyjs" />
-      <arg value="-g" />
-    </exec>
+
   </target>
 
   <target name="tools-parallel"
