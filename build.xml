@@ -151,10 +151,14 @@
     <apply executable="java" parallel="false">
       <fileset dir="${staging.dir}/${views.dir}" excludes="**/*.min.js, **/spec/**," includes="**/*.js" />
       <arg line="-jar" />
-      <!-- <arg path="${basedir}/build/tools/closure-compiler-v1346.jar" /> -->
-      <arg path="${basedir}/build/tools/yuicompressor-2.4.5.jar" />
+      <arg path="${basedir}/build/tools/closure-compiler-v1346.jar" />
+      <!--<arg path="${basedir}/build/tools/yuicompressor-2.4.5.jar" />-->
+
+      <arg line="--js" />
       <srcfile/>
-      <arg line="-o" />
+      <arg line="--compilation_level" />
+      <arg value="SIMPLE_OPTIMIZATIONS" />
+      <arg line="--js_output_file" />
       <mapper type="glob" from="*.js" to="${staging.dir}/${views.dir}/*.min.js" />
       <!--<mapper type="identity" /> -->
       <targetfile/>
@@ -178,7 +182,6 @@
       <targetfile />
     </apply>
 
-    
   </target>
   
   <target name="package" description="Build a package of this plugin" depends="_copy">
