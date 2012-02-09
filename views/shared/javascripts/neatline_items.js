@@ -243,7 +243,7 @@
                 case 'left':
 
                     // If there is no set current id, scroll to the last item.
-                    if (this._currentItemId == null) {
+                    if (this._currentItemId === null) {
                         return this._idOrdering[this._idOrdering.length - 1];
                     }
 
@@ -251,10 +251,10 @@
                     else {
 
                         // Get the current id.
-                        var currentIndex = this._idOrdering.indexOf(this._currentItemId)
+                        var currentIndex = this._idOrdering.indexOf(this._currentItemId);
 
                         // If the current item is the first item, loop to the last.
-                        if (currentIndex == 0) {
+                        if (currentIndex === 0) {
                             return this._idOrdering[this._idOrdering.length - 1];
                         }
 
@@ -269,7 +269,7 @@
                 case 'right':
 
                     // If there is no set current id, scroll to the first item.
-                    if (this._currentItemId == null) {
+                    if (this._currentItemId === null) {
                         return this._idOrdering[0];
                     }
 
@@ -277,10 +277,10 @@
                     else {
 
                         // Get the current id.
-                        var currentIndex = this._idOrdering.indexOf(this._currentItemId)
+                        var currentIndex = this._idOrdering.indexOf(this._currentItemId);
 
                         // If the current item is the last item, loop to the first.
-                        if (currentIndex == this._idOrdering.length - 1) {
+                        if (currentIndex === this._idOrdering.length - 1) {
                             return this._idOrdering[0];
                         }
 
@@ -317,7 +317,7 @@
                 var itemId = item.attr('recordid');
 
                 // Measure and store the item's native vertical offset.
-                self._idToOffset[itemId] = item.position().top
+                self._idToOffset[itemId] = item.position().top;
 
             });
 
@@ -332,11 +332,11 @@
             var item = this._idToItem[id];
 
             // If the item is present in the squence tray.
-            if (item != null) {
+            if (item !== null) {
 
                 // If another item is expanded, hide.
-                if (this._currentItemId != null &&
-                    this._currentItemId != id) {
+                if (this._currentItemId !== null &&
+                    this._currentItemId !== id) {
                         this.__hideCurrentDescription();
                         this._currentItem.data('expanded', false);
                 }
@@ -438,7 +438,7 @@
             this.__activateTitle(item);
 
             // Only show the description if it has content.
-            if (description.text() != '') {
+            if (description.text() !== '') {
 
                 // Show and measure the description.
                 description.css('display', 'list-item');

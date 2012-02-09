@@ -175,7 +175,7 @@
                 'color': self.options.colors.purple
             }, self.options.durations.click, 'easeInQuart');
 
-        },
+        }
 
     });
 

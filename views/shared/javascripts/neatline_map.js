@@ -185,7 +185,7 @@
 
             // If there is a default bounding box set for the exhibit, construct
             // a second Bounds object to use as the starting zoom target.
-            if (Neatline.default_map_bounds != null) {
+            if (Neatline.default_map_bounds !== null) {
                 var boundsArray = Neatline.default_map_bounds.split(',');
                 var bounds = new OpenLayers.Bounds(
                     parseFloat(boundsArray[0]),
@@ -240,7 +240,7 @@
                   new OpenLayers.Control.MousePosition(),
                   new OpenLayers.Control.Navigation(),
                   new OpenLayers.Control.ScaleLine(),
-                  new OpenLayers.Control.LayerSwitcher(),
+                  new OpenLayers.Control.LayerSwitcher()
                 ],
                 maxResolution: 'auto',
                 units: 'm'
@@ -265,7 +265,7 @@
 
             // If there is a default bounding box set for the exhibit, construct
             // a second Bounds object to use as the starting zoom target.
-            if (Neatline.default_map_bounds != null) {
+            if (Neatline.default_map_bounds !== null) {
                 var boundsArray = Neatline.default_map_bounds.split(',');
                 var bounds = new OpenLayers.Bounds(
                     parseFloat(boundsArray[0]),
@@ -287,7 +287,7 @@
 
             // Set OL global attributes.
             OpenLayers.IMAGE_RELOAD_ATTEMTPS = 3;
-            OpenLayers.Util.onImageLoadErrorColor = "transparent";
+            OpenLayers.Util.onImageLoadErrorColor = 'transparent';
             OpenLayers.ImgPath = 'http://js.mapbox.com/theme/dark/';
             OpenLayers.DOTS_PER_INCH = 25.4 / 0.28;
 
@@ -296,9 +296,9 @@
                 controls: [
                   new OpenLayers.Control.PanZoomBar(),
                   new OpenLayers.Control.MousePosition(),
-                  new OpenLayers.Control.Navigation(),
+                  new OpenLayers.Control.Navigation()
                 ],
-                maxResolution: 'auto',
+                maxResolution: 'auto'
             };
 
             // Instantiate the map.
@@ -322,7 +322,7 @@
 
             // If there is a default bounding box set for the exhibit, construct
             // a second Bounds object to use as the starting zoom target.
-            if (Neatline.default_map_bounds != null) {
+            if (Neatline.default_map_bounds !== null) {
                 var boundsArray = Neatline.default_map_bounds.split(',');
                 var bounds = new OpenLayers.Bounds(
                     parseFloat(boundsArray[0]),
@@ -382,7 +382,7 @@
 
                     // If there is a selected feature, unselect and
                     // reselect it to apply the new configuration.
-                    if (feature != null) {
+                    if (feature !== null) {
                         self.modifyFeatures.unselectFeature(feature);
                         self.modifyFeatures.selectFeature(feature);
                     }
@@ -425,7 +425,7 @@
             this._currentVectorLayers = [];
 
             // Abort the request if it is running.
-            if (this.requestData != null) {
+            if (this.requestData !== null) {
                 this.requestData.abort();
             }
 
@@ -443,7 +443,7 @@
 
                     // If a layer was being edited before the save,
                     // make that layer the active edit layer again.
-                    if (self._currentEditItem != null) {
+                    if (self._currentEditItem !== null) {
                         self.edit(self._currentEditItem, true);
                     }
 
@@ -563,7 +563,7 @@
                         'recordid': record.recordid
                     });
 
-                    if (self.modifyFeatures != undefined) {
+                    if (self.modifyFeatures !== undefined) {
                         self.modifyFeatures.selectFeature(feature);
                     }
 
@@ -572,7 +572,7 @@
                 // When the feature is unselected.
                 onUnselect: function(feature) {
 
-                    if (self.modifyFeatures != undefined) {
+                    if (self.modifyFeatures !== undefined) {
                         self.modifyFeatures.unselectFeature(feature);
                     }
 
@@ -641,13 +641,13 @@
 
             // If there is a record id, get the layer.
             if (recordid !== '') {
-                this.record = this._db({ recordid: parseInt(recordid) }).first();
+                this.record = this._db({ recordid: parseInt(recordid, 10) }).first();
                 this._currentEditLayer = this.record.layer;
             }
 
             // If there is an item id, try to find a layer.
             else if (itemid !== '') {
-                this.record = this._db({ itemid: parseInt(itemid) }).first();
+                this.record = this._db({ itemid: parseInt(itemid, 10) }).first();
                 this._currentEditLayer = this.record.layer;
             }
 
@@ -714,7 +714,7 @@
 
             // If necessary, reselect a clicked feature.
             $.each(this._currentEditLayer.features, function(i, feature) {
-                if (feature == self._clickedFeature) {
+                if (feature === self._clickedFeature) {
                     self.modifyFeatures.selectFeature(self._clickedFeature);
                     return;
                 }
@@ -753,7 +753,7 @@
 
             }
 
-            if (this._currentEditLayer.features.length == 0) {
+            if (this._currentEditLayer.features.length === 0) {
 
                 // Pop off the layer, remove from database, null the tracker..
                 this.map.removeLayer(this._currentEditLayer);
@@ -790,7 +790,7 @@
                 // saved in the wkt strings. It is not clear why these artifacts
                 // are getting generated and committed, but they cause erratic
                 // bound calculation and zooming bugs. This needs a real fix.
-                if (wkt != 'POINT(NaN NaN)') {
+                if (wkt !== 'POINT(NaN NaN)') {
                     wkts.push(wkt);
                 }
 
@@ -820,13 +820,13 @@
         zoomToItemVectors: function(id) {
 
             // Get the record out of the database.
-            var record = this._db({ recordid: parseInt(id) }).first();
+            var record = this._db({ recordid: parseInt(id, 10) }).first();
 
             // If the record exists and there is a map feature.
-            if (record.layer != null && record.layer.features.length > 0) {
+            if (record.layer !== null && record.layer.features.length > 0) {
 
                 // If there is item-specific data.
-                if (record.data.bounds != null && record.data.zoom != null) {
+                if (record.data.bounds !== null && record.data.zoom !== null) {
                     this.map.zoomToExtent(new OpenLayers.Bounds.fromString(record.data.bounds));
                     this.map.zoomTo(record.data.zoom);
                 }
@@ -853,31 +853,31 @@
             highlightColor) {
 
             // Capture fill color.
-            var fillColor = (fillColor != null) ? fillColor :
+            var fillColor = (fillColor !== null) ? fillColor :
                 this.options.styles.vector_color;
 
             // Capture fill opacity.
-            var fillOpacity = (fillOpacity != null) ? fillOpacity :
+            var fillOpacity = (fillOpacity !== null) ? fillOpacity :
                 this.options.styles.vector_opacity;
 
             // Capture stroke color.
-            var strokeColor = (strokeColor != null) ? strokeColor :
+            var strokeColor = (strokeColor !== null) ? strokeColor :
                 this.options.styles.stroke_color;
 
             // Capture highlight color.
-            var highlightColor = (highlightColor != null) ? highlightColor :
+            var highlightColor = (highlightColor !== null) ? highlightColor :
                 Neatline.highlightColor;
 
             // Capture stroke opacity.
-            var strokeOpacity = (strokeOpacity != null) ? strokeOpacity :
+            var strokeOpacity = (strokeOpacity !== null) ? strokeOpacity :
                 this.options.styles.stroke_opacity;
 
             // Capture stroke width.
-            var strokeWidth = (strokeWidth != null) ? strokeWidth :
+            var strokeWidth = (strokeWidth !== null) ? strokeWidth :
                 this.options.styles.stroke_width;
 
             // Capture point radius.
-            var pointRadius = (pointRadius != null) ? pointRadius :
+            var pointRadius = (pointRadius !== null) ? pointRadius :
                 this.options.styles.point_radius;
 
             // Construct and return the StyleMaps.
@@ -1025,7 +1025,7 @@
             this._db().each(function(record, id) {
 
                 // Only push the change if the native style is null.
-                if (record.data._native_styles[style] == null) {
+                if (record.data._native_styles[style] === null) {
 
                     // Update the record tracker object.
                     record.data[style] = value;
@@ -1063,7 +1063,7 @@
             var self = this;
 
             // Get the item record.
-            var record = this._db({ recordid: parseInt(recordid) }).first();
+            var record = this._db({ recordid: parseInt(recordid, 10) }).first();
 
             // If there is no extant data record, abort.
             if (typeof record.data === 'undefined') {
@@ -1102,7 +1102,7 @@
             var self = this;
 
             // Get the item record.
-            var record = this._db({ recordid: parseInt(recordid) }).first();
+            var record = this._db({ recordid: parseInt(recordid, 10) }).first();
 
             // If there is no extant data record, abort.
             if (typeof record.data === 'undefined') {

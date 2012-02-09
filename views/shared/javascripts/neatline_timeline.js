@@ -63,7 +63,7 @@
             this.eventSource = new Timeline.DefaultEventSource();
 
             // Get the starting intervalUnit and intervalPixels.
-            var startingZoomStep =  this._zoomSteps[this._currentZoomStep]
+            var startingZoomStep =  this._zoomSteps[this._currentZoomStep];
             var intervalUnit =      startingZoomStep.unit;
             var intervalPixels =    startingZoomStep.pixelsPerInterval;
 
@@ -186,7 +186,7 @@
                     'recordid': evt._eventID
                 });
 
-            }
+            };
 
         },
 
@@ -226,7 +226,7 @@
                     self._incrementZoomStepUp();
                 }
 
-            }
+            };
 
         },
 
@@ -249,7 +249,7 @@
             });
 
             // Set the starting date, if defined.
-            if (Neatline.default_focus_date != null) {
+            if (Neatline.default_focus_date !== null) {
                 var startDate = Date.parse(Neatline.default_focus_date);
                 this.timeline.getBand(0).setCenterVisibleDate(startDate);
             }
@@ -260,7 +260,7 @@
 
             painter0.addEventPaintListener(function(band, op, evt, els) {
 
-                if (els != null) {
+                if (els !== null) {
 
                     // Get the tape element.
                     var tape = $(els[0]);
@@ -302,8 +302,8 @@
             var band = this.timeline.getBand(0)._div;
 
             return {
-                x: -(parseInt($(band).css('left'))) + (this.element.width() / 2),
-                y: -(parseInt($(band).css('top'))) + (this.element.height() / 2)
+                x: -(parseInt($(band).css('left'), 10)) + (this.element.width() / 2),
+                y: -(parseInt($(band).css('top'), 10)) + (this.element.height() / 2)
             };
 
         },
@@ -321,7 +321,7 @@
 
             $.each(this.timeline._bands[0]._eventSource._events._idToEvent, function(i, event) {
 
-                if (event._eventID == id) {
+                if (event._eventID === id) {
                     self.timeline.getBand(0).setCenterVisibleDate(event._start);
                 }
 
@@ -465,7 +465,7 @@
          * Rerender the timeline.
          */
         refresh: function() {
-            this.timeline.layout()
+            this.timeline.layout();
         }
 
     });

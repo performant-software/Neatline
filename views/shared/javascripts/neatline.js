@@ -42,7 +42,7 @@
             constants: {
                 h_percent:      24,
                 v_percent:      84
-            },
+            }
 
         },
 
@@ -140,7 +140,7 @@
 
             // If there is a map and a timeline, take the top div.
             if (this.params.is_map && this.params.is_timeline) {
-                this.majorBlock = (this.params.top_element == 'map') ?
+                this.majorBlock = (this.params.top_element === 'map') ?
                     this.map :
                     this.timeline;
             }
