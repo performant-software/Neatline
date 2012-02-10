@@ -1561,7 +1561,7 @@
          */
         compare: function(array1, array2) {
 
-            if (array1 === null || array2 === null) {
+            if (_.isUndefined(array1) || _.isUndefined(array2)) {
                 return false;
             }
 

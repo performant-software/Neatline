@@ -563,7 +563,7 @@
                         'recordid': record.recordid
                     });
 
-                    if (self.modifyFeatures !== undefined) {
+                    if (!_.isUndefined(self.modifyFeatures)) {
                         self.modifyFeatures.selectFeature(feature);
                     }
 
@@ -572,7 +572,7 @@
                 // When the feature is unselected.
                 onUnselect: function(feature) {
 
-                    if (self.modifyFeatures !== undefined) {
+                    if (!_.isUndefined(self.modifyFeatures)) {
                         self.modifyFeatures.unselectFeature(feature);
                     }
 
@@ -602,25 +602,25 @@
          */
         _removeControls: function() {
 
-            if (this.modifyFeatures !== undefined) {
+            if (!_.isUndefined(this.modifyFeatures)) {
                 this.map.removeControl(this.modifyFeatures);
                 this.modifyFeatures.destroy();
                 delete this.modifyFeatures;
             }
 
-            if (this.editToolbar !== undefined) {
+            if (!_.isUndefined(this.editToolbar)) {
                 this.map.removeControl(this.editToolbar);
                 this.editToolbar.destroy();
                 delete this.editToolbar;
             }
 
-            if (this.clickControl !== undefined) {
+            if (!_.isUndefined(this.clickControl)) {
                 this.map.removeControl(this.clickControl);
                 this.clickControl.destroy();
                 delete this.clickControl;
             }
 
-            if (this.highlightControl !== undefined) {
+            if (!_.isUndefined(this.highlightControl)) {
                 this.map.removeControl(this.highlightControl);
                 this.highlightControl.destroy();
                 delete this.highlightControl;
@@ -992,7 +992,7 @@
         setCurrentRecordStyle: function(style, value) {
 
             // If there is no extant data record, abort.
-            if (typeof this.record.data === 'undefined') {
+            if (_.isUndefined(this.record.data)) {
                 return;
             }
 
@@ -1068,7 +1068,7 @@
             }).first();
 
             // If there is no extant data record, abort.
-            if (!record || typeof record.data === 'undefined') {
+            if (!record || _.isUndefined(record.data)) {
                 return;
             }
 
@@ -1107,7 +1107,7 @@
             var record = this._db({ recordid: parseInt(recordid, 10) }).first();
 
             // If there is no extant data record, abort.
-            if (typeof record.data === 'undefined') {
+            if (_.isUndefined(record.data)) {
                 return;
             }
 
