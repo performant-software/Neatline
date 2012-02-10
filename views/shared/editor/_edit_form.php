@@ -32,7 +32,7 @@
         <a class="fieldset title-and-description" href="">
             <div class="fieldset-arrow-down"></div>Text Description
         </a>
-        <fieldset>
+        <div class="fieldset">
 
             <div class="clearfix">
                 <label for="title">Title</label>
@@ -50,14 +50,14 @@
                 </div>
             </div>
 
-        </fieldset>
+        </div>
 
         <hr />
 
         <a class="fieldset date-information" href="">
             <div class="fieldset-arrow-down"></div>Start and End Dates
         </a>
-        <fieldset>
+        <div class="fieldset">
 
             <div class="clearfix">
                 <label>Start Date</label>
@@ -81,14 +81,14 @@
                 </div>
             </div>
 
-        </fieldset>
+        </div>
 
         <hr />
 
         <a class="fieldset date-styles" href="">
             <div class="fieldset-arrow-down"></div>Timeline Styles
         </a>
-        <fieldset>
+        <div class="fieldset">
 
             <div class="clearfix">
                 <label>Date Ambiguity</label>
@@ -108,14 +108,14 @@
                 </div>
             </div>
 
-        </fieldset>
+        </div>
 
         <hr />
 
         <a class="fieldset map-styles" href="">
             <div class="fieldset-arrow-down"></div>Map Styles
         </a>
-        <fieldset>
+        <div class="fieldset">
 
             <div class="clearfix">
                 <label>Shape Color</label>
@@ -205,18 +205,18 @@
                 </div>
             </div>
 
-        </fieldset>
+        </div>
 
         <hr />
 
-        <fieldset>
+        <div class="fieldset">
 
             <div id="edit-form-actions" class="actions">
                 <input type="submit" class="btn primary" value="Save">
                 <button id="record-delete-button" class="btn danger">Delete</button>
             </div>
 
-        </fieldset>
+        </div>
 
     </form>
 

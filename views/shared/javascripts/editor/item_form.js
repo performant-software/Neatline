@@ -364,7 +364,7 @@
             this._getFormData();
 
             // If there is no item id, display the delete button.
-            if (this.itemId == '') {
+            if (this.itemId === '') {
                 this._showDeleteButton();
             }
 
@@ -584,7 +584,7 @@
          */
         _updateTitleText: function() {
 
-            if (this.itemId == '' && this.title.val() != '') {
+            if (this.itemId === '' && this.title.val() !== '') {
                 this._trigger('settitle', {}, { 'text': this.title.val() });
             }
 
@@ -691,23 +691,23 @@
             var data = {};
 
             // Get the content of the text editors.
-            data['description'] =           this._getDescriptionContent();
-            data['title'] =                 this._getTitleContent();
+            data.description =              this._getDescriptionContent();
+            data.title =                    this._getTitleContent();
 
             // Get the form field data.
-            data['left_percent'] =          parseInt(this.leftPercent.val());
-            data['right_percent'] =         parseInt(this.rightPercent.val());
-            data['start_date'] =            this.startDate.val();
-            data['start_time'] =            this.startTime.val();
-            data['end_date'] =              this.endDate.val();
-            data['end_time'] =              this.endTime.val();
-            data['vector_color'] =          this.vectorColor.val();
-            data['stroke_color'] =          this.strokeColor.val();
-            data['highlight_color'] =       this.highlightColor.val();
-            data['vector_opacity'] =        parseInt(this.vectorOpacity.val());
-            data['stroke_opacity'] =        parseInt(this.strokeOpacity.val());
-            data['stroke_width'] =          parseInt(this.strokeWidth.val());
-            data['point_radius'] =          parseInt(this.pointRadius.val());
+            data.left_percent =             parseInt(this.leftPercent.val(), 10);
+            data.right_percent =            parseInt(this.rightPercent.val(), 10);
+            datastart_date =                this.startDate.val();
+            data.start_time =               this.startTime.val();
+            data.end_date =                 this.endDate.val();
+            data.end_time =                 this.endTime.val();
+            data.vector_color =             this.vectorColor.val();
+            data.stroke_color =             this.strokeColor.val();
+            data.highlight_color =          this.highlightColor.val();
+            data.vector_opacity =           parseInt(this.vectorOpacity.val(), 10);
+            data.stroke_opacity =           parseInt(this.strokeOpacity.val(), 10);
+            data.stroke_width =             parseInt(this.strokeWidth.val(), 10);
+            data.point_radius =             parseInt(this.pointRadius.val(), 10);
 
             return data;
 
@@ -722,12 +722,12 @@
             var data = this._getData();
 
             // Merge the status and coverage data.
-            data['item_id'] =               this.itemId;
-            data['record_id'] =             this.recordId;
-            data['exhibit_id'] =            Neatline.id;
-            data['space_active'] =          this.space.prop('checked').toString();
-            data['time_active'] =           this.time.prop('checked').toString();
-            data['geocoverage'] =           coverage;
+            data.item_id =                  this.itemId;
+            data.record_id =                this.recordId;
+            data.exhibit_id =               Neatline.id;
+            data.space_active =             this.space.prop('checked').toString();
+            data.time_active =              this.time.prop('checked').toString();
+            data.geocoverage =              coverage;
 
             return data;
 

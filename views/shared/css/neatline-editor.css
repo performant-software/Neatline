@@ -274,7 +274,7 @@ tr.edit-form td {
     margin: 0.3em 0 0 0;
 }
 
-.neatline-record-edit-form fieldset {
+.neatline-record-edit-form div.fieldset {
     overflow-y: hidden;
     overflow-x: visible;
     margin: 0 40px 0 20px;
@@ -328,7 +328,7 @@ div.item-styles {
 }
 
 a.fieldset {
-    margin: 10px 40px 0 20px;
+    margin: 10px 40px 10px 20px;
     display: block;
 }
 
