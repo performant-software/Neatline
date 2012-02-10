@@ -1063,7 +1063,9 @@
             var self = this;
 
             // Get the item record.
-            var record = this._db({ recordid: parseInt(recordid, 10) }).first();
+            var record = this._db({
+                recordid: parseInt(recordid, 10)
+            }).first();
 
             // If there is no extant data record, abort.
             if (!record || typeof record.data === 'undefined') {
