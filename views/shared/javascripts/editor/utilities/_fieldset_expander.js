@@ -46,7 +46,7 @@
             // Get markup.
             this._body =        $('body');
             this._window =      $(window);
-            this.fieldset =     this.element.next('fieldset');
+            this.fieldset =     this.element.next('div.fieldset');
 
             // Trackers.
             this._expanded = this.options.default_status;
@@ -134,7 +134,7 @@
             var self = this;
 
             this.fieldset.stop().animate({
-                height: this.fieldset[0].scrollHeight
+                height: this.fieldset.get(0).scrollHeight
             }, 100, function() {
                 self._trigger('change');
             });
@@ -159,6 +159,23 @@
             });
 
             this._expanded = false;
+
+        },
+
+        /*
+         * Get native height of element.
+         *
+         * - param DOM element: The element.
+         *
+         * - return void.
+         */
+        __getNativeHeight: function(element) {
+
+            element.css('overflow', 'auto');
+            var height = element[0].scrollHeight;
+            element.css('overflow', 'hidden');
+
+            return height;
 
         },
 

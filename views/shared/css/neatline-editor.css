@@ -274,7 +274,7 @@ tr.edit-form td {
     margin: 0.3em 0 0 0;
 }
 
-.neatline-record-edit-form fieldset {
+.neatline-record-edit-form div.fieldset {
     overflow-y: hidden;
     overflow-x: visible;
     margin: 0 40px 0 20px;
@@ -328,7 +328,7 @@ div.item-styles {
 }
 
 a.fieldset {
-    margin: 10px 40px 0 20px;
+    margin: 10px 40px 10px 20px;
     display: block;
 }
 
@@ -661,12 +661,13 @@ table#items-table td.col-1:hover, table#items td.col-2:hover {
     background-color: #ffda82;
 }
 
-table#items-table td.col-1 {
-    width: 33px !important;
-}
-
+table#items-table td.col-1,
 table#items-table td.col-2 {
-    width: 33px !important;
+    width: 33px;
+}
+.mozilla table#items-table td.col-1,
+.mozilla table#items-table td.col-2 {
+    width: 13px;
 }
 
 table#items-table th, table#items td {
