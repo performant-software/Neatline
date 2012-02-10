@@ -24,7 +24,8 @@
   <property name="build.dir" value="${basedir}/build" />
   <property name="report.dir" value="${build.dir}/report" />
   <property name="dist.dir" value="${build.dir}/dist" />
-  <property name="staging.dir" value="${build.dir}/tmp" />
+  <property name="tmp.dir" value="${build.dir}/tmp" />
+  <property name="staging.dir" value="${build.dir}/tmp/Neatline" />
 
   <property name="dir.views" value="views" />
 
@@ -137,7 +138,7 @@
   <target name="jshint" description="Runs JSHint on JavaScript">
     <echo message="Linting JavaScript..." />
     <apply executable="jshint">
-      <fileset dir="${basedir}/views" excludes="**/*.min.js, **/build/**" includes="**/*.js" />
+      <fileset dir="${basedir}/views" excludes="**/*.min.js, **/*-min.js, **/build/**, **/simile/**, **/jquery*/**, **/taffy*.js. **/openlayers/**" includes="**/*.js" />
       <srcfile/>
     </apply>
   </target>
@@ -296,11 +297,20 @@
   </target>
 
 
-  <target name="package" description="Build a package of this plugin" depends="_copy">
+  <target name="package" description="Build a package of this plugin" 
+    depends="clean,minify-css, minify-js, optimize-png, optimize-jpeg">
+
     <tstamp />
-    <property name="tar" value="${project.name}-${now}.tar"/>
+
+    <property name="now" value="${DSTAMP}-${TSTAMP}" />
+    <property name="tar" value="${ant.project.name}-${now}.tar"/>
     <property name="gzip" value="${tar}.gz" />
 
+    <tar destfile="${dist.dir}/${tar}"
+      basedir="${tmp.dir}" />
+
+    <gzip zipfile="${dist.dir}/${gzip}" src="${dist.dir}/${tar}" />
+    <delete file="${dist.dir}/${tar}" />
 
   </target>
 
@@ -319,6 +329,13 @@
 
     <property name="tar" value="${project.name}.tar"/>
     <property name="gzip" value="${tar}.gz" />
+
+    <tar destfile="${dist.dir}/${tar}.tar"
+      basedir="${staging.dir}/tmp"
+      excludes="test/**,spec**" />
+
+    <gzip zipfile="${dist.dir}/${gzip}" src="${tar}" />
+    <delete file="${dist.dir}/${tar}" />
 
 
   </target>
@@ -425,5 +442,9 @@
       <arg value="--output" />
       <arg path="${build.dir}/code-browser" />
     </exec>
+  </target>
+
+  <target name="usage">
+    <echo message="Type ant -p to list all the targets available in this build script." />
   </target>
 </project>
