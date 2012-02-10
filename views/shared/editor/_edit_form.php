@@ -65,7 +65,7 @@
                     <div class="inline-inputs">
                         <input class="medium" name="start-date-date" type="text" placeholder="Start Date" />
                         <input class="mini" name="start-date-time" type="text" placeholder="Start Time" />
-                        <span class="help-inline">Enter the date (or start date, if there is an interval).</span>
+                        <span class="help-inline">Enter regular dates: 'April 23, 1616' and '10:15 am'</span>
                     </div>
                 </div>
             </div>
