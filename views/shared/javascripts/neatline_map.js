@@ -853,31 +853,31 @@
             highlightColor) {
 
             // Capture fill color.
-            var fillColor = (!_.isNull(fillColor)) ? fillColor :
+            var fillColor = (!_.isUndefined(fillColor)) ? fillColor :
                 this.options.styles.vector_color;
 
             // Capture fill opacity.
-            var fillOpacity = (!_.isNull(fillOpacity)) ? fillOpacity :
+            var fillOpacity = (!_.isUndefined(fillOpacity)) ? fillOpacity :
                 this.options.styles.vector_opacity;
 
             // Capture stroke color.
-            var strokeColor = (!_.isNull(strokeColor)) ? strokeColor :
+            var strokeColor = (!_.isUndefined(strokeColor)) ? strokeColor :
                 this.options.styles.stroke_color;
 
             // Capture highlight color.
-            var highlightColor = (!_.isNull(highlightColor)) ? highlightColor :
+            var highlightColor = (!_.isUndefined(highlightColor)) ? highlightColor :
                 Neatline.highlightColor;
 
             // Capture stroke opacity.
-            var strokeOpacity = (!_.isNull(strokeOpacity)) ? strokeOpacity :
+            var strokeOpacity = (!_.isUndefined(strokeOpacity)) ? strokeOpacity :
                 this.options.styles.stroke_opacity;
 
             // Capture stroke width.
-            var strokeWidth = (!_.isNull(strokeWidth)) ? strokeWidth :
+            var strokeWidth = (!_.isUndefined(strokeWidth)) ? strokeWidth :
                 this.options.styles.stroke_width;
 
             // Capture point radius.
-            var pointRadius = (!_.isNull(pointRadius)) ? pointRadius :
+            var pointRadius = (!_.isUndefined(pointRadius)) ? pointRadius :
                 this.options.styles.point_radius;
 
             // Construct and return the StyleMaps.
@@ -1034,7 +1034,7 @@
             this._db().each(function(record, id) {
 
                 // Only push the change if the native style is null.
-                if (record.data._native_styles[style] === null) {
+                if (_.isNull(record.data._native_styles[style])) {
 
                     // Update the record tracker object.
                     record.data[style] = value;
