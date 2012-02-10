@@ -853,31 +853,31 @@
             highlightColor) {
 
             // Capture fill color.
-            var fillColor = (fillColor !== null) ? fillColor :
+            var fillColor = (!_.isNull(fillColor)) ? fillColor :
                 this.options.styles.vector_color;
 
             // Capture fill opacity.
-            var fillOpacity = (fillOpacity !== null) ? fillOpacity :
+            var fillOpacity = (!_.isNull(fillOpacity)) ? fillOpacity :
                 this.options.styles.vector_opacity;
 
             // Capture stroke color.
-            var strokeColor = (strokeColor !== null) ? strokeColor :
+            var strokeColor = (!_.isNull(strokeColor)) ? strokeColor :
                 this.options.styles.stroke_color;
 
             // Capture highlight color.
-            var highlightColor = (highlightColor !== null) ? highlightColor :
+            var highlightColor = (!_.isNull(highlightColor)) ? highlightColor :
                 Neatline.highlightColor;
 
             // Capture stroke opacity.
-            var strokeOpacity = (strokeOpacity !== null) ? strokeOpacity :
+            var strokeOpacity = (!_.isNull(strokeOpacity)) ? strokeOpacity :
                 this.options.styles.stroke_opacity;
 
             // Capture stroke width.
-            var strokeWidth = (strokeWidth !== null) ? strokeWidth :
+            var strokeWidth = (!_.isNull(strokeWidth)) ? strokeWidth :
                 this.options.styles.stroke_width;
 
             // Capture point radius.
-            var pointRadius = (pointRadius !== null) ? pointRadius :
+            var pointRadius = (!_.isNull(pointRadius)) ? pointRadius :
                 this.options.styles.point_radius;
 
             // Construct and return the StyleMaps.
@@ -991,8 +991,11 @@
          */
         setCurrentRecordStyle: function(style, value) {
 
+            var self = this;
+
             // If there is no extant data record, abort.
             if (_.isUndefined(this.record.data)) {
+                console.log('out');
                 return;
             }
 
@@ -1011,6 +1014,12 @@
 
             // Rerender the layer to manifest the change.
             this._currentEditLayer.redraw();
+
+            // redraw() (above) is _not_ working. This is a hack to
+            // trigger a rerender on the features.
+            $.each(this._currentEditLayer.features, function(i, feature) {
+                self.highlightControl.unhighlight(feature);
+            });
 
         },
 
