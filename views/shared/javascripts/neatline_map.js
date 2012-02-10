@@ -823,7 +823,7 @@
             var record = this._db({ recordid: parseInt(id, 10) }).first();
 
             // If the record exists and there is a map feature.
-            if (record.layer !== null && record.layer.features.length > 0) {
+            if (record && record.layer.features.length > 0) {
 
                 // If there is item-specific data.
                 if (record.data.bounds !== null && record.data.zoom !== null) {
@@ -1066,7 +1066,7 @@
             var record = this._db({ recordid: parseInt(recordid, 10) }).first();
 
             // If there is no extant data record, abort.
-            if (typeof record.data === 'undefined') {
+            if (!record || typeof record.data === 'undefined') {
                 return;
             }
 
