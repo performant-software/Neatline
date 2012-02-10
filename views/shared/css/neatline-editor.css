@@ -661,12 +661,13 @@ table#items-table td.col-1:hover, table#items td.col-2:hover {
     background-color: #ffda82;
 }
 
-table#items-table td.col-1 {
-    width: 33px !important;
-}
-
+table#items-table td.col-1,
 table#items-table td.col-2 {
-    width: 33px !important;
+    width: 33px;
+}
+.mozilla table#items-table td.col-1,
+.mozilla table#items-table td.col-2 {
+    width: 13px;
 }
 
 table#items-table th, table#items td {

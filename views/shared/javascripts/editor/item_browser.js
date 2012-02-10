@@ -91,9 +91,9 @@
 
             // Prepare the document, position elements, listen for resize.
             this._scrollbarWidth = $.getScrollbarWidth();
+            this._addGlobalClasses();
             this._positionDivs();
             this._addWindowResizeListener();
-            // this._buildDragHandle();
             this._glossSearchBox();
             this._glossColumnHeaders();
             this._glossItemFilter();
@@ -112,6 +112,18 @@
          * =================
          */
 
+
+        /*
+         * Add document classes to <html> tag.
+         */
+        _addGlobalClasses: function() {
+
+            // Firefox.
+            if ($.browser.mozilla) {
+                this._body.addClass('mozilla');
+            }
+
+        },
 
         /*
          * Make the height of the container stretch to fit the height of the window,
@@ -431,7 +443,7 @@
                 // Update the recordid attribute on the current item.
                 'updatedid': function(event, obj) {
                     self._currentFormItem.attr('recordid', obj.recordid);
-                    self.idToItem[parseInt(obj.recordid)] = self._currentFormItem;
+                    self.idToItem[parseInt(obj.recordid, 10)] = self._currentFormItem;
                 }
 
             });
@@ -445,153 +457,6 @@
          * =================
          */
 
-
-        /*
-         * Build functionality for the width dragging handle.
-         */
-        _buildDragHandle: function() {
-
-            var self = this;
-
-            // Construct the handle div.
-            this.dragHandle = $('<div id="drag-handle"></div>');
-
-            this.dragHandle.css({
-                'width': this.options.css.drag_handle_width,
-                'height': this.windowHeight - this.topBarHeight - 1,
-                'top': this.topBarHeight,
-                'left': this.options.css.container_min_width,
-                'z-index': 1000
-            });
-
-            // Append.
-            this._body.append(this.dragHandle);
-
-            // Add events.
-            this.dragHandle.bind({
-
-                'mouseenter': function() {
-
-                    if (!self._just_dragged) {
-                        self.dragHandle.trigger('mousemove');
-                        self.dragHandle.css('border-right', '1px dashed #cac8c2');
-                    }
-
-                },
-
-                'mousemove': function(e) {
-
-                    if (!self._is_dragging_width && !self._just_dragged) {
-
-                        // Get pointer coordinates.
-                        var offsetX = e.pageX;
-                        var offsetY = e.pageY;
-
-                        // Position and show dragTip.
-                        self.dragTip.css({
-                            'display': 'block',
-                            'top': offsetY - self.options.css.tooltips.drag_y_offset,
-                            'left': offsetX + self.options.css.tooltips.drag_x_offset
-                        });
-
-                    }
-
-                },
-
-                'mouseleave': function() {
-
-                    // Hide the dragTip.
-                    self.dragTip.css('display', 'none');
-
-                    if (!self._is_dragging_width) {
-                        self.dragHandle.css('border-right', 'none');
-                        self._just_dragged = false;
-                    }
-
-                },
-
-                'mousedown': function(event) {
-
-                    // Manifest the drag.
-                    self._doWidthDrag(event);
-
-                }
-
-            });
-
-        },
-
-        /*
-         * On mousedown on the drag handle, bind the move event on the
-         * window and render the width change.
-         */
-        _doWidthDrag: function(trigger_event_object) {
-
-            var self = this;
-            this._is_dragging_width = true;
-
-            // Fix the cursor as resize during the drag.
-            self._body.css('cursor', 'col-resize');
-
-            // Get the starting pointer coordinates.
-            var startingX = trigger_event_object.pageX;
-
-            // Update the dimensions trackers.
-            this._getDimensions();
-
-            // Get the starting width of the container.
-            var startingContainerWidth = this.containerWidth;
-
-            this._window.bind({
-
-                'mousemove': function(e) {
-
-                    // Get the relative offset and new width.
-                    var offsetX = e.pageX - startingX;
-                    var newWidth = startingContainerWidth + offsetX;
-
-                    // If the cursor position position squeezes the width beyond
-                    // the min-width.
-                    if (newWidth <= self.options.css.container_min_width) {
-                        newWidth = self.options.css.container_min_width;
-                    }
-
-                    // Resize the container and header.
-                    self.element.css('width', newWidth);
-                    self.itemsListHeader.css('width', newWidth - self._scrollbarWidth);
-
-                    // Reposition the dragger.
-                    self.dragHandle.css('left', newWidth);
-
-                    // Update the container width tracker.
-                    self.containerWidth = newWidth;
-
-                    // Reposition the Neatline container.
-                    self._positionNeatline();
-
-                },
-
-                'mouseup': function() {
-
-                    self._is_dragging_width = false;
-                    self._just_dragged = true;
-
-                    // Unbind the events added for the drag.
-                    self._window.unbind('mousemove mouseup');
-
-                    // Set the cursor back to auto.
-                    self._body.css('cursor', 'auto');
-
-                    // Resize the expanded edit forms.
-                    if (self._currentFormItem != null) {
-                        self.editForm.itemform('resizeForm');
-                    }
-
-                }
-
-            });
-
-        },
 
         /*
          * Build functionality on the search box. On keyup, fire the request
