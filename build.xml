@@ -156,7 +156,7 @@
 
     <apply executable="java" parallel="false">
       <!--<fileset dir="${basedir}/${dir.views}/" excludes="**/*.min.js, **/spec/**," includes="**/*.js" />-->
-      <fileset dir="${basedir}/${dir.views}/" excludes="**/*.min.js" includes="**/*.js"/>
+      <fileset dir="${basedir}/${dir.views}/" excludes="**/spec/**" includes="**/*.js"/>
 
       <arg line="-jar" />
       <arg path="${basedir}/build/tools/closure-compiler-v1346.jar" />
