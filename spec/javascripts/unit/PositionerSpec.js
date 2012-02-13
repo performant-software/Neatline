@@ -181,7 +181,7 @@ describe('Positioner', function() {
                 constants: {
                     h_percent:      30,
                     v_percent:      60
-                },
+                }
             });
 
         });
@@ -227,13 +227,13 @@ describe('Positioner', function() {
 
                     expect(dragPos.h).toEqual({
                         height:     40,
-                        width:      4,
+                        width:      5,
                         top:        60,
                         left:       30
                     });
 
                     expect(dragPos.v).toEqual({
-                        height:     4,
+                        height:     5,
                         width:      100,
                         top:        60,
                         left:       0
@@ -278,13 +278,13 @@ describe('Positioner', function() {
 
                     expect(dragPos.h).toEqual({
                         height:     60,
-                        width:      4,
+                        width:      5,
                         top:        0,
                         left:       30
                     });
 
                     expect(dragPos.v).toEqual({
-                        height:     4,
+                        height:     5,
                         width:      100,
                         top:        60,
                         left:       0
@@ -329,13 +329,13 @@ describe('Positioner', function() {
 
                     expect(dragPos.h).toEqual({
                         height:     100,
-                        width:      4,
+                        width:      5,
                         top:        0,
                         left:       30
                     });
 
                     expect(dragPos.v).toEqual({
-                        height:     4,
+                        height:     5,
                         width:      70,
                         top:        60,
                         left:       30
@@ -380,13 +380,13 @@ describe('Positioner', function() {
 
                     expect(dragPos.h).toEqual({
                         height:     100,
-                        width:      4,
+                        width:      5,
                         top:        0,
                         left:       30
                     });
 
                     expect(dragPos.v).toEqual({
-                        height:     4,
+                        height:     5,
                         width:      70,
                         top:        60,
                         left:       30
@@ -431,13 +431,13 @@ describe('Positioner', function() {
 
                     expect(dragPos.h).toEqual({
                         height:     40,
-                        width:      4,
+                        width:      5,
                         top:        60,
                         left:       70
                     });
 
                     expect(dragPos.v).toEqual({
-                        height:     4,
+                        height:     5,
                         width:      100,
                         top:        60,
                         left:       0
@@ -482,13 +482,13 @@ describe('Positioner', function() {
 
                     expect(dragPos.h).toEqual({
                         height:     60,
-                        width:      4,
+                        width:      5,
                         top:        0,
                         left:       70
                     });
 
                     expect(dragPos.v).toEqual({
-                        height:     4,
+                        height:     5,
                         width:      100,
                         top:        60,
                         left:       0
@@ -533,13 +533,13 @@ describe('Positioner', function() {
 
                     expect(dragPos.h).toEqual({
                         height:     100,
-                        width:      4,
+                        width:      5,
                         top:        0,
                         left:       70
                     });
 
                     expect(dragPos.v).toEqual({
-                        height:     4,
+                        height:     5,
                         width:      70,
                         top:        60,
                         left:       0
@@ -584,13 +584,13 @@ describe('Positioner', function() {
 
                     expect(dragPos.h).toEqual({
                         height:     100,
-                        width:      4,
+                        width:      5,
                         top:        0,
                         left:       70
                     });
 
                     expect(dragPos.v).toEqual({
-                        height:     4,
+                        height:     5,
                         width:      70,
                         top:        60,
                         left:       0
@@ -639,13 +639,13 @@ describe('Positioner', function() {
 
                     expect(dragPos.h).toEqual({
                         height:     40,
-                        width:      4,
+                        width:      5,
                         top:        60,
                         left:       30
                     });
 
                     expect(dragPos.v).toEqual({
-                        height:     4,
+                        height:     5,
                         width:      100,
                         top:        60,
                         left:       0
@@ -690,13 +690,13 @@ describe('Positioner', function() {
 
                     expect(dragPos.h).toEqual({
                         height:     60,
-                        width:      4,
+                        width:      5,
                         top:        0,
                         left:       30
                     });
 
                     expect(dragPos.v).toEqual({
-                        height:     4,
+                        height:     5,
                         width:      100,
                         top:        60,
                         left:       0
@@ -741,13 +741,13 @@ describe('Positioner', function() {
 
                     expect(dragPos.h).toEqual({
                         height:     100,
-                        width:      4,
+                        width:      5,
                         top:        0,
                         left:       30
                     });
 
                     expect(dragPos.v).toEqual({
-                        height:     4,
+                        height:     5,
                         width:      70,
                         top:        60,
                         left:       30
@@ -792,13 +792,13 @@ describe('Positioner', function() {
 
                     expect(dragPos.h).toEqual({
                         height:     100,
-                        width:      4,
+                        width:      5,
                         top:        0,
                         left:       30
                     });
 
                     expect(dragPos.v).toEqual({
-                        height:     4,
+                        height:     5,
                         width:      70,
                         top:        60,
                         left:       30
@@ -843,13 +843,13 @@ describe('Positioner', function() {
 
                     expect(dragPos.h).toEqual({
                         height:     40,
-                        width:      4,
+                        width:      5,
                         top:        60,
                         left:       70
                     });
 
                     expect(dragPos.v).toEqual({
-                        height:     4,
+                        height:     5,
                         width:      100,
                         top:        60,
                         left:       0
@@ -894,13 +894,13 @@ describe('Positioner', function() {
 
                     expect(dragPos.h).toEqual({
                         height:     60,
-                        width:      4,
+                        width:      5,
                         top:        0,
                         left:       70
                     });
 
                     expect(dragPos.v).toEqual({
-                        height:     4,
+                        height:     5,
                         width:      100,
                         top:        60,
                         left:       0
@@ -947,13 +947,13 @@ describe('Positioner', function() {
 
                     expect(dragPos.h).toEqual({
                         height:     100,
-                        width:      4,
+                        width:      5,
                         top:        0,
                         left:       70
                     });
 
                     expect(dragPos.v).toEqual({
-                        height:     4,
+                        height:     5,
                         width:      70,
                         top:        60,
                         left:       0
@@ -998,13 +998,13 @@ describe('Positioner', function() {
 
                     expect(dragPos.h).toEqual({
                         height:     100,
-                        width:      4,
+                        width:      5,
                         top:        0,
                         left:       70
                     });
 
                     expect(dragPos.v).toEqual({
-                        height:     4,
+                        height:     5,
                         width:      70,
                         top:        60,
                         left:       0
@@ -1055,7 +1055,7 @@ describe('Positioner', function() {
 
                 expect(dragPos.h).toEqual({
                     height:     100,
-                    width:      4,
+                    width:      5,
                     top:        0,
                     left:       70
                 });
@@ -1099,7 +1099,7 @@ describe('Positioner', function() {
 
                 expect(dragPos.h).toEqual({
                     height:     100,
-                    width:      4,
+                    width:      5,
                     top:        0,
                     left:       70
                 });
@@ -1147,7 +1147,7 @@ describe('Positioner', function() {
 
                 expect(dragPos.h).toEqual({
                     height:     100,
-                    width:      4,
+                    width:      5,
                     top:        0,
                     left:       70
                 });
@@ -1191,7 +1191,7 @@ describe('Positioner', function() {
 
                 expect(dragPos.h).toEqual({
                     height:     100,
-                    width:      4,
+                    width:      5,
                     top:        0,
                     left:       70
                 });
@@ -1238,7 +1238,7 @@ describe('Positioner', function() {
                 var dragPos = neatline.positioner('getAttr', 'dragPositions');
 
                 expect(dragPos.v).toEqual({
-                    height:     4,
+                    height:     5,
                     width:      100,
                     top:        60,
                     left:       0
@@ -1282,7 +1282,7 @@ describe('Positioner', function() {
                 var dragPos = neatline.positioner('getAttr', 'dragPositions');
 
                 expect(dragPos.v).toEqual({
-                    height:     4,
+                    height:     5,
                     width:      100,
                     top:        60,
                     left:       0
@@ -1395,7 +1395,7 @@ describe('Positioner', function() {
                 constants: {
                     h_percent:      30,
                     v_percent:      60
-                },
+                }
             });
 
         });

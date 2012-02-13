@@ -1097,6 +1097,21 @@
 
                 };
 
+                this.dragPositions = {
+                    h: {
+                        height:     null,
+                        width:      null,
+                        top:        null,
+                        left:       null
+                    },
+                    v: {
+                        height:     null,
+                        width:      null,
+                        top:        null,
+                        left:       null
+                    }
+                };
+
             }
 
             // TIMELINE:
@@ -1127,6 +1142,21 @@
                         left:   null
                     }
 
+                };
+
+                this.dragPositions = {
+                    h: {
+                        height:     null,
+                        width:      null,
+                        top:        null,
+                        left:       null
+                    },
+                    v: {
+                        height:     null,
+                        width:      null,
+                        top:        null,
+                        left:       null
+                    }
                 };
 
             }

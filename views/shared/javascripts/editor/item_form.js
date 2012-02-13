@@ -697,7 +697,7 @@
             // Get the form field data.
             data.left_percent =             parseInt(this.leftPercent.val(), 10);
             data.right_percent =            parseInt(this.rightPercent.val(), 10);
-            datastart_date =                this.startDate.val();
+            data.start_date =               this.startDate.val();
             data.start_time =               this.startTime.val();
             data.end_date =                 this.endDate.val();
             data.end_time =                 this.endTime.val();
@@ -808,6 +808,8 @@
 
             // Get the data.
             var data = this._getDataForSave(coverage);
+
+            console.log(data);
 
             // Commit.
             $.ajax({

@@ -51,7 +51,7 @@
         constructCss: function(color, leftPercent, rightPercent) {
 
             // If percentages are passed.
-            if (leftPercent !== null && rightPercent !== null) {
+            if (!_.isUndefined(leftPercent) && !_.isUndefined(rightPercent)) {
 
                 // Store the percentages.
                 this.leftPercent = leftPercent;
@@ -62,7 +62,7 @@
             // Otherwise, try to retrieve stored values, or revert to defaults.
             else {
 
-                if (this.leftPercent !== null && this.rightPercent !== null) {
+                if (!_.isNull(this.leftPercent) && !_.isNull(this.rightPercent)) {
                     leftPercent = this.leftPercent;
                     rightPercent = this.rightPercent;
                 }

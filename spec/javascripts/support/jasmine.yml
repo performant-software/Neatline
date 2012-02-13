@@ -15,8 +15,10 @@ src_files:
     - spec/lib/jquery-ui.js
     - spec/lib/jasmine-jquery-1.3.1.js
     - views/admin/javascripts/**/*.js
-    - views/shared/javascripts/**/*.js
     - views/public/javascripts/**/*.js
+    - views/shared/javascripts/*.js
+    - views/shared/javascripts/editor/*.js
+    - views/shared/javascripts/libraries/*.js
 
 # stylesheets
 #
