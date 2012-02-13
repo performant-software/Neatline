@@ -45,7 +45,9 @@
         },
 
         /*
-         * Getters and starting get items call.
+         * .
+         *
+         * - return void.
          */
         _create: function() {
 
@@ -69,6 +71,8 @@
 
         /*
          * Request item markup and gloss the results.
+         *
+         * - return void.
          */
         loadData: function() {
             this._getItems();
@@ -76,6 +80,8 @@
 
         /*
          * Populate content.
+         *
+         * - return void.
          */
         _getItems: function() {
 
@@ -99,6 +105,8 @@
 
         /*
          * On window resize, recompute the top offsets.
+         *
+         * - return void.
          */
         _addResizeListener: function() {
 
@@ -113,6 +121,8 @@
         /*
          * Once the raw markup is from the items ajax query is pushed into the
          * container, build the functionality for each item.
+         *
+         * - return void.
          */
         _glossItems: function() {
 
@@ -202,6 +212,8 @@
 
         /*
          * Scroll to the right.
+         *
+         * - return void.
          */
         scrollRight: function() {
 
@@ -218,6 +230,8 @@
 
         /*
          * Scroll to the right.
+         *
+         * - return void.
          */
         scrollLeft: function() {
 
@@ -235,6 +249,10 @@
         /*
          * Figure out the id of the item that should be scrolled to. Direction
          * is 'left' or 'right'.
+         *
+         * - param string direction: 'left' or 'right'.
+         *
+         * - return integer: The id of the new item.
          */
         _getNewScrollId: function(direction) {
 
@@ -299,6 +317,8 @@
         /*
          * Once the raw markup is from the items ajax query is pushed into the
          * container, build the functionality for each item.
+         *
+         * - return void.
          */
         _getItemOffsets: function() {
 
@@ -325,6 +345,10 @@
 
         /*
          * Vertical scroll to item.
+         *
+         * - param integer id: The recordid of the item to scroll to.
+         *
+         * - return void.
          */
         scrollToItem: function(id) {
 
@@ -369,6 +393,10 @@
 
         /*
          * Gloss title and description on mouseenter.
+         *
+         * - param DOM item: The <li> of the item to expand.
+         *
+         * - return void.
          */
         __highlightItem: function(item) {
             item.css('background-color', this.options.colors.highlight);
@@ -376,6 +404,10 @@
 
         /*
          * Push title and description back to default state.
+         *
+         * - param DOM item: The <li> of the item to expand.
+         *
+         * - return void.
          */
         __unhighlightItem: function(item) {
             item.css('background-color', this.options.colors.background);
@@ -383,6 +415,10 @@
 
         /*
          * Pop the title as active.
+         *
+         * - param DOM item: The <li> of the item to expand.
+         *
+         * - return void.
          */
         __activateTitle: function(item) {
 
@@ -397,6 +433,11 @@
 
         /*
          * Return the title to normal.
+         *
+         * - param DOM item: The <li> of the item to expand.
+         * - param boolean immediate: If true, .css() instead of .animate();
+         *
+         * - return void.
          */
         __deactivateTitle: function(item, immediate) {
 
@@ -425,6 +466,10 @@
 
         /*
          * Expand the description.
+         *
+         * - param DOM item: The <li> of the item to expand.
+         *
+         * - return void.
          */
         __expandDescription: function(item) {
 
@@ -458,6 +503,10 @@
 
         /*
          * Expand the description.
+         *
+         * - param DOM item: The <li> of the item to expand.
+         *
+         * - return void.
          */
         __contractDescription: function(item) {
 
@@ -483,6 +532,8 @@
 
         /*
          * Dissapear the currently-expanded description.
+         *
+         * - return void.
          */
         __hideCurrentDescription: function() {
 
@@ -495,6 +546,17 @@
                 'display': 'none'
             });
 
+        },
+
+        /*
+         * Emit a protected class attribute.
+         *
+         * - param string attr: The name of the attribute.
+         *
+         * - return mixed attr: The value of the attribute.
+         */
+        getAttr: function(attr) {
+            return this[attr];
         }
 
     });

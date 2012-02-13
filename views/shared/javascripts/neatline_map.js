@@ -899,7 +899,7 @@
                     strokeWidth: strokeWidth
                 }),
                 'temporary': new OpenLayers.Style({
-                    fillColor: fillColor,
+                    fillColor: highlightColor,
                     fillOpacity: fillOpacity,
                     strokeColor: highlightColor,
                     strokeOpacity: strokeOpacity,

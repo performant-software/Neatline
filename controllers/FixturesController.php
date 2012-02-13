@@ -141,4 +141,31 @@ class Neatline_FixturesController extends Omeka_Controller_Action
 
     }
 
+    /**
+     * Public items list markup.
+     *
+     * @return void
+     */
+    public function publicitemsAction()
+    {
+
+        // Supress the default Zend layout-sniffer functionality.
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        // Get the exhibit and active records.
+        $neatlineId = $this->_request->getParam('id');
+        $neatline = $this->_neatlinesTable->find($neatlineId);;
+        $records = $this->_recordsTable->getActiveRecordsByExhibit($neatline);
+
+        // If no active records, pass empty array.
+        if (!$records) $records = array();
+
+        // Set the layout.
+        echo $this->view->partial('data/public-items-ajax.php', array(
+            'records' => $records,
+            'neatline' => $neatline
+        ));
+
+    }
+
 }
