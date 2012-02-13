@@ -563,7 +563,7 @@
                         'recordid': record.recordid
                     });
 
-                    if (self.modifyFeatures !== undefined) {
+                    if (!_.isUndefined(self.modifyFeatures)) {
                         self.modifyFeatures.selectFeature(feature);
                     }
 
@@ -572,7 +572,7 @@
                 // When the feature is unselected.
                 onUnselect: function(feature) {
 
-                    if (self.modifyFeatures !== undefined) {
+                    if (!_.isUndefined(self.modifyFeatures)) {
                         self.modifyFeatures.unselectFeature(feature);
                     }
 
@@ -602,25 +602,25 @@
          */
         _removeControls: function() {
 
-            if (this.modifyFeatures !== undefined) {
+            if (!_.isUndefined(this.modifyFeatures)) {
                 this.map.removeControl(this.modifyFeatures);
                 this.modifyFeatures.destroy();
                 delete this.modifyFeatures;
             }
 
-            if (this.editToolbar !== undefined) {
+            if (!_.isUndefined(this.editToolbar)) {
                 this.map.removeControl(this.editToolbar);
                 this.editToolbar.destroy();
                 delete this.editToolbar;
             }
 
-            if (this.clickControl !== undefined) {
+            if (!_.isUndefined(this.clickControl)) {
                 this.map.removeControl(this.clickControl);
                 this.clickControl.destroy();
                 delete this.clickControl;
             }
 
-            if (this.highlightControl !== undefined) {
+            if (!_.isUndefined(this.highlightControl)) {
                 this.map.removeControl(this.highlightControl);
                 this.highlightControl.destroy();
                 delete this.highlightControl;
@@ -853,31 +853,31 @@
             highlightColor) {
 
             // Capture fill color.
-            var fillColor = (fillColor !== null) ? fillColor :
+            var fillColor = (!_.isUndefined(fillColor)) ? fillColor :
                 this.options.styles.vector_color;
 
             // Capture fill opacity.
-            var fillOpacity = (fillOpacity !== null) ? fillOpacity :
+            var fillOpacity = (!_.isUndefined(fillOpacity)) ? fillOpacity :
                 this.options.styles.vector_opacity;
 
             // Capture stroke color.
-            var strokeColor = (strokeColor !== null) ? strokeColor :
+            var strokeColor = (!_.isUndefined(strokeColor)) ? strokeColor :
                 this.options.styles.stroke_color;
 
             // Capture highlight color.
-            var highlightColor = (highlightColor !== null) ? highlightColor :
+            var highlightColor = (!_.isUndefined(highlightColor)) ? highlightColor :
                 Neatline.highlightColor;
 
             // Capture stroke opacity.
-            var strokeOpacity = (strokeOpacity !== null) ? strokeOpacity :
+            var strokeOpacity = (!_.isUndefined(strokeOpacity)) ? strokeOpacity :
                 this.options.styles.stroke_opacity;
 
             // Capture stroke width.
-            var strokeWidth = (strokeWidth !== null) ? strokeWidth :
+            var strokeWidth = (!_.isUndefined(strokeWidth)) ? strokeWidth :
                 this.options.styles.stroke_width;
 
             // Capture point radius.
-            var pointRadius = (pointRadius !== null) ? pointRadius :
+            var pointRadius = (!_.isUndefined(pointRadius)) ? pointRadius :
                 this.options.styles.point_radius;
 
             // Construct and return the StyleMaps.
@@ -991,8 +991,11 @@
          */
         setCurrentRecordStyle: function(style, value) {
 
+            var self = this;
+
             // If there is no extant data record, abort.
-            if (typeof this.record.data === 'undefined') {
+            if (_.isUndefined(this.record.data)) {
+                console.log('out');
                 return;
             }
 
@@ -1012,6 +1015,12 @@
             // Rerender the layer to manifest the change.
             this._currentEditLayer.redraw();
 
+            // redraw() (above) is _not_ working. This is a hack to
+            // trigger a rerender on the features.
+            $.each(this._currentEditLayer.features, function(i, feature) {
+                self.highlightControl.unhighlight(feature);
+            });
+
         },
 
         /*
@@ -1025,7 +1034,7 @@
             this._db().each(function(record, id) {
 
                 // Only push the change if the native style is null.
-                if (record.data._native_styles[style] === null) {
+                if (_.isNull(record.data._native_styles[style])) {
 
                     // Update the record tracker object.
                     record.data[style] = value;
@@ -1068,7 +1077,7 @@
             }).first();
 
             // If there is no extant data record, abort.
-            if (!record || typeof record.data === 'undefined') {
+            if (!record || _.isUndefined(record.data)) {
                 return;
             }
 
@@ -1107,7 +1116,7 @@
             var record = this._db({ recordid: parseInt(recordid, 10) }).first();
 
             // If there is no extant data record, abort.
-            if (typeof record.data === 'undefined') {
+            if (_.isUndefined(record.data)) {
                 return;
             }
 
