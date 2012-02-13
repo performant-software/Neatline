@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
 
 /**
- * Base markup for timeline popups.
+ * Base markup for scroller arrows.
  *
  * PHP version 5
  *
@@ -25,13 +25,7 @@
  */
 ?>
 
-<div id="timeline-popup" class="popover above">
-    <div class="arrow"></div>
-    <div class="inner">
-        <div class="title">
-            <a href="#" class="close">×</a>
-            <h3 class="title-text"></h3>
-        </div>
-        <div class="content"></div>
-    </div>
+<div id="scroll">
+    <div class="arrow-left">‹</div>
+    <div class="arrow-right">›</div>
 </div>

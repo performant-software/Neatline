@@ -31,20 +31,16 @@
     <div id="map" class="neatline-block"></div>
 
     <div id="timeline" class="neatline-block neatlinetime-timeline">
-        <div id="zoom-buttons">
-            <div class="button zoom-in"></div>
-            <div class="button zoom-out"></div>
-        </div>
+        <!-- Timeline zoom buttons. -->
+        <?php echo $this->partial('neatline/_timeline_zoom.php'); ?>
     </div>
 
     <div id="items" class="neatline-block">
         <div id="items-container"></div>
     </div>
 
-    <div id="scroll">
-        <div class="arrow-left">‹</div>
-        <div class="arrow-right">›</div>
-    </div>
+    <!-- Forward/backward scroll arrows. -->
+    <?php echo $this->partial('neatline/_arrows.php'); ?>
 
 </div>
 

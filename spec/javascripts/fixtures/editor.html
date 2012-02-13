@@ -258,7 +258,7 @@ to store the current viewport settings as the public defaults.</p>
         <a class="fieldset title-and-description" href="">
             <div class="fieldset-arrow-down"></div>Text Description
         </a>
-        <fieldset>
+        <div class="fieldset">
 
             <div class="clearfix">
                 <label for="title">Title</label>
@@ -276,14 +276,14 @@ to store the current viewport settings as the public defaults.</p>
                 </div>
             </div>
 
-        </fieldset>
+        </div>
 
         <hr />
 
         <a class="fieldset date-information" href="">
             <div class="fieldset-arrow-down"></div>Start and End Dates
         </a>
-        <fieldset>
+        <div class="fieldset">
 
             <div class="clearfix">
                 <label>Start Date</label>
@@ -291,7 +291,7 @@ to store the current viewport settings as the public defaults.</p>
                     <div class="inline-inputs">
                         <input class="medium" name="start-date-date" type="text" placeholder="Start Date" />
                         <input class="mini" name="start-date-time" type="text" placeholder="Start Time" />
-                        <span class="help-inline">Enter the date (or start date, if there is an interval).</span>
+                        <span class="help-inline">Enter regular dates: 'April 23, 1616' and '10:15 am'</span>
                     </div>
                 </div>
             </div>
@@ -307,14 +307,14 @@ to store the current viewport settings as the public defaults.</p>
                 </div>
             </div>
 
-        </fieldset>
+        </div>
 
         <hr />
 
         <a class="fieldset date-styles" href="">
             <div class="fieldset-arrow-down"></div>Timeline Styles
         </a>
-        <fieldset>
+        <div class="fieldset">
 
             <div class="clearfix">
                 <label>Date Ambiguity</label>
@@ -334,14 +334,14 @@ to store the current viewport settings as the public defaults.</p>
                 </div>
             </div>
 
-        </fieldset>
+        </div>
 
         <hr />
 
         <a class="fieldset map-styles" href="">
             <div class="fieldset-arrow-down"></div>Map Styles
         </a>
-        <fieldset>
+        <div class="fieldset">
 
             <div class="clearfix">
                 <label>Shape Color</label>
@@ -422,6 +422,12 @@ to store the current viewport settings as the public defaults.</p>
                 </div>
             </div>
 
+        </div>
+
+        <hr />
+
+        <div class="fieldset">
+
             <div class="clearfix">
                 <div class="input">
                     <div class="inline-inputs">
@@ -431,18 +437,12 @@ to store the current viewport settings as the public defaults.</p>
                 </div>
             </div>
 
-        </fieldset>
-
-        <hr />
-
-        <fieldset>
-
             <div id="edit-form-actions" class="actions">
                 <input type="submit" class="btn primary" value="Save">
                 <button id="record-delete-button" class="btn danger">Delete</button>
             </div>
 
-        </fieldset>
+        </div>
 
     </form>
 
@@ -490,9 +490,9 @@ to store the current viewport settings as the public defaults.</p>
 <script type="text/javascript">
 
     // Exhibit parameters.
-    var Neatline = {"added":"2012-02-08 14:06:06","modified":"2012-02-08 14:06:06","name":"Test Exhibit","map_id":null,"image_id":null,"top_element":null,"items_h_pos":null,"items_v_pos":null,"items_height":null,"h_percent":null,"v_percent":null,"is_map":1,"is_timeline":1,"is_items":1,"default_map_bounds":null,"default_map_zoom":null,"default_focus_date":null,"default_timeline_zoom":null,"default_vector_color":null,"default_stroke_color":null,"default_highlight_color":null,"default_vector_opacity":null,"default_stroke_opacity":null,"default_stroke_width":null,"default_point_radius":null,"default_base_layer":null,"id":1};
+    var Neatline = {"added":"2012-02-13 10:00:14","modified":"2012-02-13 10:00:14","name":"Test Exhibit","map_id":null,"image_id":null,"top_element":null,"items_h_pos":null,"items_v_pos":null,"items_height":null,"h_percent":null,"v_percent":null,"is_map":1,"is_timeline":1,"is_items":1,"default_map_bounds":null,"default_map_zoom":null,"default_focus_date":null,"default_timeline_zoom":null,"default_vector_color":null,"default_stroke_color":null,"default_highlight_color":null,"default_vector_opacity":null,"default_stroke_opacity":null,"default_stroke_width":null,"default_point_radius":null,"default_base_layer":null,"id":1};
         Neatline.dataSources = {"timeline":"http:\/\/\/Users\/davidmcclure\/pear\/bin\/neatline-exhibits\/1\/data\/simile","map":"http:\/\/\/Users\/davidmcclure\/pear\/bin\/neatline-exhibits\/1\/data\/openlayers","undated":"http:\/\/\/Users\/davidmcclure\/pear\/bin\/neatline-exhibits\/1\/data\/udi"};
-        Neatline.public = false;
+        Neatline.isPublic = false;
         Neatline.baseLayer = {"name":"Google Physical","id":2};
         Neatline.proportions = {"horizontal":24,"vertical":84};
         Neatline.timelineZoom = 15;
