@@ -125,4 +125,20 @@ class Neatline_FixturesController extends Omeka_Controller_Action
 
     }
 
+    /**
+     * Scroll arrows markup.
+     *
+     * @return void
+     */
+    public function scrollarrowsAction()
+    {
+
+        // Supress the default Zend layout-sniffer functionality.
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        // Render.
+        echo $this->view->partial('neatline/_arrows.php');
+
+    }
+
 }

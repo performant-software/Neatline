@@ -73,6 +73,24 @@ class Neatline_FixtureBuilderTest extends Omeka_Test_AppTestCase
     }
 
     /**
+     * Base scroll arrows markup.
+     *
+     * @return void.
+     */
+    public function testBuildScrollArrowsMarkup()
+    {
+
+        $fixture = fopen(self::$path_to_fixtures . 'scroll-arrows.html', 'w');
+
+        $this->dispatch('neatline/fixtures/scrollarrows');
+        $response = $this->getResponse()->getBody('default');
+
+        fwrite($fixture, $response);
+        fclose($fixture);
+
+    }
+
+    /**
      * Editor markup.
      *
      * @return void.
