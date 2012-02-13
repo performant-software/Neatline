@@ -156,7 +156,7 @@
 
     <apply executable="java" parallel="false">
       <!--<fileset dir="${basedir}/${dir.views}/" excludes="**/*.min.js, **/spec/**," includes="**/*.js" />-->
-      <fileset dir="${basedir}/${dir.views}/" excludes="**/*.min.js" includes="**/*.js"/>
+      <fileset dir="${basedir}/${dir.views}/" excludes="**/spec/**" includes="**/*.js"/>
 
       <arg line="-jar" />
       <arg path="${basedir}/build/tools/closure-compiler-v1346.jar" />
@@ -306,11 +306,16 @@
     <property name="tar" value="${ant.project.name}-${now}.tar"/>
     <property name="gzip" value="${tar}.gz" />
 
+    <echo message="Creating zipped tarball" />
     <tar destfile="${dist.dir}/${tar}"
       basedir="${tmp.dir}" />
 
     <gzip zipfile="${dist.dir}/${gzip}" src="${dist.dir}/${tar}" />
     <delete file="${dist.dir}/${tar}" />
+
+    <echo message="Creating zip file" />
+    <zip destfile="${dist.dir}/${ant.project.name}-${now}.zip"
+      basedir="${tmp.dir}" />
 
   </target>
 
