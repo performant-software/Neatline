@@ -13,7 +13,8 @@
 src_files:
     - spec/lib/jquery.js
     - spec/lib/jquery-ui.js
-    - spec/lib/jasmine-jquery-1.3.1.js
+    - spec/lib/jasmine-jquery/lib/jasmine-jquery.js
+    - spec/lib/jasmine-ajax/lib/mock-ajax.js
     - spec/lib/jasmine-ui/src/jasmine-ui.js
     - views/admin/javascripts/**/*.js
     - views/public/javascripts/**/*.js
