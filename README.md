@@ -101,22 +101,12 @@ Installing Omeka + Neatline is a two-step process: Omeka first, then the Neatlin
 
 #### Install Omeka
 
-For detailed instructions and troubleshooting, refer to the [official documentation][omeka-install-documentation]. In brief:
-
-  1. Go to the [Omeka download][omeka-download] page and click "Download Omeka 1.4.2."
-  2. Once the file is finished downloading, uncompress the .zip file and place the Omeka directory (using an FTP client, if you're working on a remote location) in publicly-accessible directory on your webhost. This is often called something like "public_html" or "www."
-  3. Enter the Omeka directory and edit the _db.ini_ file. Change host to "localhost"; enter the username and password with the credentials of your database user; and change the "dbname" to the name of the database. When you're done, save the file (and if you're working remotely, make sure the changes get committed to the server).
-  4. Open a web browser and go to the public location of the Omeka installation folder. For example, if the folder is named "Omeka" and your webhost serves you public content at _username.webhost.com_, go to _username.webhost.com/Omeka_.
-  5. If everything is set up properly and the credentials in the _db.ini_ file are valid, you will see a screen titled "Omeka Installation" with a long form. A number of things can go wrong at this point - if your database credentials are invalid, or the database user doesn't have the required access privileges, you might see an error screen saying "Omeka has encountered an internal error." If so, head over to the [official documentation][omeka-install-documentation] for troubleshooting.
-  6. Fill out the "Username," "Password," "Re-type the Password," "Email," "Administrator Email," and "Site Title" information.
-  7. Click "Install."
-  8. Once the installer finishes, click on the "admin panel" link in the success message.
-  9. Enter the administrative credentials that you entered in the installation form and click "Log In."
+For detailed instructions and troubleshooting, refer to the [official documentation][omeka-install-documentation].
 
 #### Install Neatline
 
   1. Go to the [Neatline download][neatline-download] page and download the Neatline plugin.
-  2. Once the file is finished downloading, uncompress the .zip file and place the "Neatline" directory in the plugins/ folder in your Omeka installation .
+  2. Once the file is finished downloading, uncompress the .zip file and place the "Neatline" directory in the plugins/ folder in your Omeka installation.
   3. Open a web browser and go to _your-omeka-site.org/admin_, enter your administrative credentials, and click on the "Settings" button
      at the top right of the screen.
   4. Click on the "Plugins" tab in the vertical column on the left and find the listing for the Neatline plugin.
