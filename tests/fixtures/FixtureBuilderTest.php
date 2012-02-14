@@ -204,8 +204,8 @@ class Neatline_FixtureBuilderTest extends Omeka_Test_AppTestCase
 
         // Record 3.
         $record3 = new NeatlineDataRecord();
-        $record3->title = 'Title1';
-        $record3->description = 'Description 1.';
+        $record3->title = 'Title3';
+        $record3->description = 'Description 3.';
         $record3->exhibit_id = $exhibit->id;
         $record3->item_id = $item->id;
         $record3->space_active = 1;
@@ -213,10 +213,9 @@ class Neatline_FixtureBuilderTest extends Omeka_Test_AppTestCase
 
         // Record 4.
         $record4 = new NeatlineDataRecord();
-        $record4->title = 'Title2';
-        $record4->description = 'Description 2.';
+        $record4->title = 'Title4';
         $record4->exhibit_id = $exhibit->id;
-        $record3->item_id = $item->id;
+        $record4->item_id = $item->id;
         $record4->time_active = 1;
         $record4->save();
 

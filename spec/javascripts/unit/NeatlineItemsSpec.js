@@ -120,17 +120,27 @@ describe('Neatline Items', function() {
             describe('when there is a current record id', function() {
 
                 it('should return the last record when the current id is the first record', function() {
+
+                    // 1 -> 4
                     items.neatlineitems('setAttr', '_currentItemId', 1);
                     expect(items.neatlineitems('getNewScrollId', 'left')).toEqual(4);
+
                 });
 
                 it('should return the previous record when the current id is not the first record', function() {
+
+                    // 2 -> 1
                     items.neatlineitems('setAttr', '_currentItemId', 2);
                     expect(items.neatlineitems('getNewScrollId', 'left')).toEqual(1);
+
+                    // 3 -> 2
                     items.neatlineitems('setAttr', '_currentItemId', 3);
                     expect(items.neatlineitems('getNewScrollId', 'left')).toEqual(2);
+
+                    // 4 -> 3
                     items.neatlineitems('setAttr', '_currentItemId', 4);
                     expect(items.neatlineitems('getNewScrollId', 'left')).toEqual(3);
+
                 });
 
             });
@@ -150,20 +160,161 @@ describe('Neatline Items', function() {
             describe('when there is a current record id', function() {
 
                 it('should return the first record when the current id is the last record', function() {
+
+                    // 4 -> 1
                     items.neatlineitems('setAttr', '_currentItemId', 4);
                     expect(items.neatlineitems('getNewScrollId', 'right')).toEqual(1);
+
                 });
 
                 it('should return the next record when the current id is not the last record', function() {
+
+                    // 1 -> 2
                     items.neatlineitems('setAttr', '_currentItemId', 1);
                     expect(items.neatlineitems('getNewScrollId', 'right')).toEqual(2);
+
+                    // 2 -> 3
                     items.neatlineitems('setAttr', '_currentItemId', 2);
                     expect(items.neatlineitems('getNewScrollId', 'right')).toEqual(3);
+
+                    // 3 -> 4
                     items.neatlineitems('setAttr', '_currentItemId', 3);
                     expect(items.neatlineitems('getNewScrollId', 'right')).toEqual(4);
+
                 });
 
             });
+
+        });
+
+    });
+
+    describe('scrollLeft', function() {
+
+        it('should issue the item click event', function() {
+            items.neatlineitems('scrollLeft');
+            expect(itemClick).toHaveBeenCalled();
+        });
+
+    });
+
+    describe('scrollRight', function() {
+
+        it('should issue the item click event', function() {
+            items.neatlineitems('scrollRight');
+            expect(itemClick).toHaveBeenCalled();
+        });
+
+    });
+
+    describe('scrollToItem', function() {
+
+        beforeEach(function() {
+
+            // Null out the current record id tracker.
+            items.neatlineitems('setAttr', '_currentItemId', null);
+            items.neatlineitems('setAttr', '_currentItem', null);
+
+        });
+
+        it('should do nothing when there is no record with the passed id', function() {
+
+            // Set current id, call with non-existent id.
+            items.neatlineitems('setAttr', '_currentItemId', 1);
+            items.neatlineitems('scrollToItem', 5);
+
+            // Current id should be unchanged.
+            expect(items.neatlineitems('getAttr', '_currentItemId')).toEqual(1);
+
+        });
+
+        it('should scroll to the record when a valid id is passed', function() {
+
+            // Call with valid id.
+            items.neatlineitems('scrollToItem', 4);
+
+            // Check for changed current id and expanded item.
+            expect(items.neatlineitems('getAttr', '_currentItemId')).toEqual(4);
+            expect(items.neatlineitems('getAttr', '_currentItem').data('expanded')).toBeTruthy();
+
+        });
+
+    });
+
+    describe('expand/contract description', function() {
+
+        var title, description, recordId;
+
+        beforeEach(function() {
+
+            // Get a title, reset expanded tracker.
+            title = container.find('li.item-title').first();
+            description = title.next('li');
+            recordId = parseInt(title.attr('recordid'), 10);
+
+        });
+
+        describe('expandDescription', function() {
+
+            beforeEach(function() {
+
+                // Reset expanded status.
+                title.data('expanded', false);
+
+                // Null out the current record id tracker.
+                items.neatlineitems('setAttr', '_currentItemId', null);
+                items.neatlineitems('setAttr', '_currentItem', null);
+
+            });
+
+            it('should set status trackers', function() {
+
+                items.neatlineitems('expandDescription', title);
+
+                // Check trackers.
+                expect(items.neatlineitems('getAttr', '_currentItem')).toEqual(title);
+                expect(items.neatlineitems('getAttr', '_currentItemId')).toEqual(recordId);
+                expect(title.data('expanded')).toBeTruthy();
+
+            });
+
+            it('should not expand the description when the description is empty', function() {
+
+                // Get the listing for the last item, with no description.
+                var lastTitle = container.find('li.item-title').last();
+                console.log(lastTitle);
+
+                // Call the method, check description visibility.
+                items.neatlineitems('expandDescription', lastTitle);
+                expect(description.css('display')).toEqual('none');
+
+            });
+
+        });
+
+        describe('contractDescription', function() {
+
+            beforeEach(function() {
+
+                // Expand the record.
+                items.neatlineitems('expandDescription', title);
+
+            });
+
+            it('should clear out status trackers', function() {
+
+                items.neatlineitems('contractDescription', title);
+
+                // Check for null/false trackers.
+                expect(items.neatlineitems('getAttr', '_currentItem')).toBeNull();
+                expect(items.neatlineitems('getAttr', '_currentItemId')).toBeNull();
+                expect(title.data('expanded')).toBeFalsy();
+
+            });
+
+        });
+
+        describe('hideCurrentDescription', function() {
 
 
 

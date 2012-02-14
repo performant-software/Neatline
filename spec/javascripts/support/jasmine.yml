@@ -34,6 +34,8 @@ src_files:
 #   - stylesheets/*.css
 #
 stylesheets:
+    - views/shared/css/neatline.css
+    - views/shared/css/neatline-editor.css
 
 # helpers
 #

@@ -168,7 +168,7 @@
 
                         // If expanded, hide.
                         else {
-                            self.__contractDescription(item);
+                            self.contractDescription(item);
                         }
 
                     },
@@ -341,6 +341,77 @@
         },
 
         /*
+         * Expand the description.
+         *
+         * - param DOM item: The <li> of the item to expand.
+         *
+         * - return void.
+         */
+        expandDescription: function(item) {
+
+            var self = this;
+
+            // Capture the id of the new record, get description.
+            var recordId = item.attr('recordid');
+            var description = item.next('li');
+
+            // Mark the title as active.
+            this.__activateTitle(item);
+
+            // Only show the description if it has content.
+            if (description.text() !== '') {
+
+                // Show and measure the description.
+                description.css('display', 'list-item');
+                var height = description[0].scrollHeight;
+
+                // Expand.
+                description.animate({ 'height': height }, 200);
+
+            }
+
+            // Set trackers.
+            self._currentItem = item;
+            self._currentItemId = parseInt(item.attr('recordid'), 10);
+            item.data('expanded', true);
+
+        },
+
+        /*
+         * Expand the description.
+         *
+         * - param DOM item: The <li> of the item to expand.
+         *
+         * - return void.
+         */
+        contractDescription: function(item) {
+
+            // Get the description.
+            var description = item.next('li');
+
+            // Mark the title as inactive.
+            this.__deactivateTitle(item);
+
+            // Contract and hide.
+            description.animate({
+                'height': 0
+            }, 200, function() {
+                description.css('display', 'none');
+            });
+
+            // Set trackers.
+            this._currentItem = null;
+            this._currentItemId = null;
+            item.data('expanded', false);
+
+        },
+
+        /*
+         * DOM hits.
+         */
+
+
+        /*
          * Vertical scroll to item.
          *
          * - param integer id: The recordid of the item to scroll to.
@@ -358,7 +429,7 @@
                 // If another item is expanded, hide.
                 if (this._currentItemId !== null &&
                     this._currentItemId !== id) {
-                        this.__hideCurrentDescription();
+                        this.hideCurrentDescription();
                         this._currentItem.data('expanded', false);
                 }
 
@@ -377,16 +448,11 @@
                 }, 200);
 
                 // Expand the description.
-                this.__expandDescription(item);
+                this.expandDescription(item);
 
             }
 
         },
-
-        /*
-         * DOM hits.
-         */
-
 
         /*
          * Gloss title and description on mouseenter.
@@ -462,86 +528,25 @@
         },
 
         /*
-         * Expand the description.
-         *
-         * - param DOM item: The <li> of the item to expand.
-         *
-         * - return void.
-         */
-        __expandDescription: function(item) {
-
-            var self = this;
-
-            // Capture the id of the new record, get description.
-            var recordId = item.attr('recordid');
-            var description = item.next('li');
-
-            // Mark the title as active.
-            this.__activateTitle(item);
-
-            // Only show the description if it has content.
-            if (description.text() !== '') {
-
-                // Show and measure the description.
-                description.css('display', 'list-item');
-                var height = description[0].scrollHeight;
-
-                // Expand.
-                description.animate({ 'height': height }, 200);
-
-            }
-
-            // Set trackers.
-            self._currentItem = item;
-            self._currentItemId = item.attr('recordid');
-            item.data('expanded', true);
-
-        },
-
-        /*
-         * Expand the description.
-         *
-         * - param DOM item: The <li> of the item to expand.
-         *
-         * - return void.
-         */
-        __contractDescription: function(item) {
-
-            // Get the description.
-            var description = item.next('li');
-
-            // Mark the title as inactive.
-            this.__deactivateTitle(item);
-
-            // Contract and hide.
-            description.animate({
-                'height': 0
-            }, 200, function() {
-                description.css('display', 'none');
-            });
-
-            // Set trackers.
-            this._currentItem = null;
-            this._currentItemId = null;
-            item.data('expanded', false);
-
-        },
-
-        /*
          * Dissapear the currently-expanded description.
          *
          * - return void.
          */
-        __hideCurrentDescription: function() {
+        hideCurrentDescription: function() {
 
             // Deactivate the title.
-            this.__deactivateTitle(this._currentItem, true);
+            if (!_.isNull(this._currentItem)) {
 
-            // Hide.
-            this._currentItem.next('li').css({
-                'height': 0,
-                'display': 'none'
-            });
+                // Deactivate the title.
+                this.__deactivateTitle(this._currentItem, true);
+
+                // Hide the description.
+                this._currentItem.next('li').css({
+                    'height': 0,
+                    'display': 'none'
+                });
+
+            }
 
         },
 
