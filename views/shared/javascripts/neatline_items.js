@@ -353,7 +353,7 @@
             var item = this._idToItem[id];
 
             // If the item is present in the squence tray.
-            if (item !== null && typeof item !== 'undefined') {
+            if (!_.isUndefined(item)) {
 
                 // If another item is expanded, hide.
                 if (this._currentItemId !== null &&
