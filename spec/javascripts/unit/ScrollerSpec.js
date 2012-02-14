@@ -28,7 +28,6 @@ describe('Scroller', function() {
         // Add spies to callback methods.
         spyOn(stubCallbacks, 'left');
         spyOn(stubCallbacks, 'right');
-        spyOn(container, 'disableSelection');
 
         // Run the scroller, bind _trigger callbacks.
         container.scroller({

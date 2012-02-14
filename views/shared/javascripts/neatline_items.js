@@ -141,7 +141,7 @@
 
                 // Populate trackers.
                 self._idToItem[recordid] = item;
-                self._idOrdering.push(recordid);
+                self._idOrdering.push(parseInt(recordid, 10));
                 item.data('expanded', false);
 
                 // Unbind all events.
@@ -157,9 +157,6 @@
 
                         // If hidden, expand.
                         if (!item.data('expanded')) {
-
-                            // Show the description.
-                            // self.__expandDescription(item);
 
                             // Trigger out to the deployment code.
                             self._trigger('itemclick', {}, {
@@ -218,7 +215,7 @@
         scrollRight: function() {
 
             // Compute the new id.
-            var newId = this._getNewScrollId('right');
+            var newId = this.getNewScrollId('right');
 
             // Trigger out to the deployment code.
             this._trigger('itemclick', {}, {
@@ -236,7 +233,7 @@
         scrollLeft: function() {
 
             // Compute the new id.
-            var newId = this._getNewScrollId('left');
+            var newId = this.getNewScrollId('left');
 
             // Trigger out to the deployment code.
             this._trigger('itemclick', {}, {
@@ -254,7 +251,7 @@
          *
          * - return integer: The id of the new item.
          */
-        _getNewScrollId: function(direction) {
+        getNewScrollId: function(direction) {
 
             switch (direction) {
 
@@ -557,6 +554,17 @@
          */
         getAttr: function(attr) {
             return this[attr];
+        },
+
+        /*
+         * Set a class attribute.
+         *
+         * - param string attr: The name of the attribute.
+         *
+         * - return void.
+         */
+        setAttr: function(attr, value) {
+            return this[attr] = value;
         }
 
     });
