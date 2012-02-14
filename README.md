@@ -116,6 +116,9 @@ Once the installation is finished, you'll see a new tab along the top of the adm
 
 #### Install Geoserver
 
+For detailed instructions on installing Geoserver, refer to [Geoserver's official
+documentation][geoserver-install-documentation].
+
 #### Create a New Exhibit
 
   1. Click on the "Neatline" tab along the top of the administrative interface.
@@ -326,6 +329,7 @@ To create a custom ordering:
 [neatline-github]: https://github.com/scholarslab/Neatline
 [neatline-maps-github]: https://github.com/scholarslab/NeatlineMaps
 [geoserver]: http://geoserver.org
+[geoserver-install-documentation]:http://docs.geoserver.org/stable/en/user/installation/index.html
 [openstreetmap]: http://www.openstreetmap.org
 [neatline-webservice]: http://webservice.neatline.org
 [neatline-webservice-register]: http://webservice.neatline.org/register
