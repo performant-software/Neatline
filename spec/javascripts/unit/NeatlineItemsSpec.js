@@ -4,7 +4,8 @@
 
 describe('Neatline Items', function() {
 
-    var items, request, container, stubCallbacks;
+    var items, request, container;
+    var itemClick, itemEnter, itemLeave;
 
     // Mock _getItems() response.
     itemsResponse = {
@@ -23,23 +24,16 @@ describe('Neatline Items', function() {
         // Install AJAX mock.
         jasmine.Ajax.useMock();
 
-        // Define _trigger callback stubs.
-        stubCallbacks = {
-            'itemClick': function(event, obj) { return; },
-            'itemEnter': function(event, obj) { return; },
-            'itemLeave': function(event, obj) { return; }
-        };
-
-        // Add spies to callback methods.
-        spyOn(stubCallbacks, 'itemClick');
-        spyOn(stubCallbacks, 'itemEnter');
-        spyOn(stubCallbacks, 'itemLeave');
+        // Create spies for events.
+        itemClick = jasmine.createSpy('itemclick');
+        itemEnter = jasmine.createSpy('itementer');
+        itemLeave = jasmine.createSpy('itemleave');
 
         // Run the widget and wire up event spies.
         items.neatlineitems({
-            'itemclick': stubCallbacks.itemClick,
-            'itementer': stubCallbacks.itemEnter,
-            'itemleave': stubCallbacks.itemLeave
+            'itemclick': itemClick,
+            'itementer': itemEnter,
+            'itemleave': itemLeave
         });
 
         // Get list container.
@@ -69,34 +63,33 @@ describe('Neatline Items', function() {
 
     describe('_glossItems', function() {
 
-        var title, id;
+        var title;
 
         beforeEach(function() {
             // Get a title, reset expanded tracker.
             title = container.find('li.item-title').first();
             title.data('expanded', false);
-            id = title.attr('recordid');
         });
 
         it('should issue itemclick on mousedown on title when title is not expanded', function() {
             title.mousedown();
-            expect(stubCallbacks.itemClick).toHaveBeenCalledWith({}, { recordid: id });
+            expect(itemClick).toHaveBeenCalled();
         });
 
         it('should not issue itemclick on mousedown on title when title is not expanded', function() {
             title.data('expanded', true);
             title.mousedown();
-            expect(stubCallbacks.itemClick).not.toHaveBeenCalled();
+            expect(itemClick).not.toHaveBeenCalled();
         });
 
         it('should issue itementer even on mouseenter on title', function() {
             title.mouseenter();
-            expect(stubCallbacks.itemEnter).toHaveBeenCalledWith({}, { recordid: id });
+            expect(itemEnter).toHaveBeenCalled();
         });
 
         it('should issue itementer even on mouseleave on title', function() {
             title.mouseleave();
-            expect(stubCallbacks.itemLeave).toHaveBeenCalledWith({}, { recordid: id });
+            expect(itemLeave).toHaveBeenCalled();
         });
 
         it('should populate the _idOrdering array', function() {
