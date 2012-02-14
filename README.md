@@ -101,7 +101,7 @@ Installing Omeka + Neatline is a two-step process: Omeka first, then the Neatlin
 
 #### Install Omeka
 
-For detailed instructions and troubleshooting, refer to the [official documentation][omeka-install-documentation].
+For detailed instructions on installing Omeka, refer to [Omeka's official documentation][omeka-install-documentation].
 
 #### Install Neatline
 
