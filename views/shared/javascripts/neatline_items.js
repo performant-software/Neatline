@@ -429,7 +429,7 @@
                 // If another item is expanded, hide.
                 if (this._currentItemId !== null &&
                     this._currentItemId !== id) {
-                        this.hideCurrentDescription();
+                        this.__hideCurrentDescription();
                         this._currentItem.data('expanded', false);
                 }
 
@@ -532,7 +532,7 @@
          *
          * - return void.
          */
-        hideCurrentDescription: function() {
+        __hideCurrentDescription: function() {
 
             // Deactivate the title.
             if (!_.isNull(this._currentItem)) {

@@ -66,17 +66,19 @@ describe('Neatline Items', function() {
         var title;
 
         beforeEach(function() {
+
             // Get a title, reset expanded tracker.
             title = container.find('li.item-title').first();
             title.data('expanded', false);
+
         });
 
-        it('should issue itemclick on mousedown on title when title is not expanded', function() {
+        it('should issue itemclick on mousedown when title is not expanded', function() {
             title.mousedown();
             expect(itemClick).toHaveBeenCalled();
         });
 
-        it('should not issue itemclick on mousedown on title when title is not expanded', function() {
+        it('should not issue itemclick on mousedown when title is not expanded', function() {
             title.data('expanded', true);
             title.mousedown();
             expect(itemClick).not.toHaveBeenCalled();
@@ -103,8 +105,10 @@ describe('Neatline Items', function() {
     describe('getNewScrollId', function() {
 
         beforeEach(function() {
+
             // Null out the current record id tracker.
             items.neatlineitems('setAttr', '_currentItemId', null);
+
         });
 
         describe('left', function() {
@@ -119,7 +123,7 @@ describe('Neatline Items', function() {
 
             describe('when there is a current record id', function() {
 
-                it('should return the last record when the current id is the first record', function() {
+                it('should return the last id when the current id is the first', function() {
 
                     // 1 -> 4
                     items.neatlineitems('setAttr', '_currentItemId', 1);
@@ -127,7 +131,7 @@ describe('Neatline Items', function() {
 
                 });
 
-                it('should return the previous record when the current id is not the first record', function() {
+                it('should return the previous id when the current id is not the first', function() {
 
                     // 2 -> 1
                     items.neatlineitems('setAttr', '_currentItemId', 2);
@@ -159,7 +163,7 @@ describe('Neatline Items', function() {
 
             describe('when there is a current record id', function() {
 
-                it('should return the first record when the current id is the last record', function() {
+                it('should return the first id when the current id is the last', function() {
 
                     // 4 -> 1
                     items.neatlineitems('setAttr', '_currentItemId', 4);
@@ -167,7 +171,7 @@ describe('Neatline Items', function() {
 
                 });
 
-                it('should return the next record when the current id is not the last record', function() {
+                it('should return the next id when the current id is not the last', function() {
 
                     // 1 -> 2
                     items.neatlineitems('setAttr', '_currentItemId', 1);
@@ -311,12 +315,6 @@ describe('Neatline Items', function() {
                 expect(title.data('expanded')).toBeFalsy();
 
             });
-
-        });
-
-        describe('hideCurrentDescription', function() {
-
-
 
         });
 
