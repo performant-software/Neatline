@@ -111,6 +111,7 @@
             // Trackers.
             this._db =                      TAFFY();
             this._isForm =                  false;
+            this._data =                    null;
             this.coverage =                 null;
 
             // Preparatory routines.

@@ -112,6 +112,124 @@ describe('Item Form', function() {
 
         });
 
+        it('should reload saved local data when it exists');
+
+    });
+
+    describe('hideForm', function() {
+
+        var _db, recordId;
+
+        beforeEach(function() {
+
+            // Show the form, get the database.
+            form.itemform('showForm', record);
+            _db = form.itemform('getAttr', '_db');
+            recordId = parseInt(record.attr('recordid'), 10);
+
+            // Clear out the records database.
+            _db().remove();
+
+        });
+
+        describe('unsaved data persistence', function() {
+
+            it('should store local data when the title is changed', function() {
+
+                // Change the title, hide the form.
+                form.itemform('getAttr', 'title').val('New Title');
+                form.itemform('hideForm', record);
+
+                // Check for the local data record, inspect value.
+                var localRecord = _db({ recordid: recordId }).first();
+                expect(localRecord).not.toBeFalsy();
+                expect(localRecord.data.title).toEqual('New Title');
+
+            });
+
+            it('should store local data when the description is changed', function() {
+
+                // Change the title, hide the form.
+                form.itemform('getAttr', 'description').val('New description.');
+                form.itemform('hideForm', record);
+
+                // Check for the local data record, inspect value.
+                var localRecord = _db({ recordid: recordId }).first();
+                expect(localRecord).not.toBeFalsy();
+                expect(localRecord.data.description).toEqual('New description.');
+
+            });
+
+            it('should store local data when the start date is changed', function() {
+
+                // Change the title, hide the form.
+                form.itemform('getAttr', 'startDate').val('April 26, 1564');
+                form.itemform('hideForm', record);
+
+                // Check for the local data record, inspect value.
+                var localRecord = _db({ recordid: recordId }).first();
+                expect(localRecord).not.toBeFalsy();
+                expect(localRecord.data.start_date).toEqual('April 26, 1564');
+
+            });
+
+            it('should store local data when the start time is changed', function() {
+
+                // Change the title, hide the form.
+                form.itemform('getAttr', 'startTime').val('8:00 am');
+                form.itemform('hideForm', record);
+
+                // Check for the local data record, inspect value.
+                var localRecord = _db({ recordid: recordId }).first();
+                expect(localRecord).not.toBeFalsy();
+                expect(localRecord.data.start_time).toEqual('8:00 am');
+
+            });
+
+            it('should store local data when the end date is changed', function() {
+
+                // Change the title, hide the form.
+                form.itemform('getAttr', 'endDate').val('April 23, 1616');
+                form.itemform('hideForm', record);
+
+                // Check for the local data record, inspect value.
+                var localRecord = _db({ recordid: recordId }).first();
+                expect(localRecord).not.toBeFalsy();
+                expect(localRecord.data.end_date).toEqual('April 23, 1616');
+
+            });
+
+            it('should store local data when the end time is changed', function() {
+
+                // Change the title, hide the form.
+                form.itemform('getAttr', 'endTime').val('8:01 am');
+                form.itemform('hideForm', record);
+
+                // Check for the local data record, inspect value.
+                var localRecord = _db({ recordid: recordId }).first();
+                expect(localRecord).not.toBeFalsy();
+                expect(localRecord.data.end_time).toEqual('8:01 am');
+
+            });
+
+            it('should store local data when the left percentage is changed');
+
+            it('should store local data when the shape color is changed');
+
+            it('should store local data when the line color is changed');
+
+            it('should store local data when the highlight color is changed');
+
+            it('should store local data when the shape opacity is changed');
+
+            it('should store local data when the line opacity is changed');
+
+            it('should store local data when the line thickness is changed');
+
+            it('should store local data when the point radius is changed');
+
+        });
+
     });
 
     describe('saveItemForm', function() {
