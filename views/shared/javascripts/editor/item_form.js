@@ -245,7 +245,7 @@
                     // Only do the delete if the record is Neatline-endemic.
                     if (typeof this.itemId === 'undefined') {
                         self._fadeDown();
-                        self._postRecordDelete();
+                        self.postRecordDelete();
                     }
 
                 },
@@ -275,7 +275,7 @@
 
                 'mousedown': function() {
                     self._fadeDown();
-                    self._postResetStyles();
+                    self.postResetStyles();
                 },
 
                 'click': function(e) {
@@ -900,7 +900,7 @@
         /*
          * Delete a Neatline endemic record.
          */
-        _postRecordDelete: function() {
+        postRecordDelete: function() {
 
             var self = this;
 
@@ -926,7 +926,7 @@
         /*
          * Reset record-specific styles.
          */
-        _postResetStyles: function() {
+        postResetStyles: function() {
 
             var self = this;
 

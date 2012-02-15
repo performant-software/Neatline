@@ -178,4 +178,54 @@ describe('Item Form', function() {
 
     });
 
+    describe('postRecordDelete', function() {
+
+        beforeEach(function() {
+
+            // Show the form, push in stub data.
+            form.itemform('showForm', itemRecord);
+            request = mostRecentAjaxRequest();
+            request.response(formResponse);
+
+        });
+
+        it('should post a well-formed request with the exhibit id and record id', function() {
+
+            // Call saveItemForm, capture outgoing request.
+            form.itemform('postRecordDelete');
+            var post = mostRecentAjaxRequest();
+
+            // Check params.
+            expect(post.params).toContain('record_id=4');
+            expect(post.params).toContain('exhibit_id=1');
+
+        });
+
+    });
+
+    describe('postResetStyles', function() {
+
+        beforeEach(function() {
+
+            // Show the form, push in stub data.
+            form.itemform('showForm', itemRecord);
+            request = mostRecentAjaxRequest();
+            request.response(formResponse);
+
+        });
+
+        it('should post a well-formed request with the exhibit id and record id', function() {
+
+            // Call saveItemForm, capture outgoing request.
+            form.itemform('postResetStyles');
+            var post = mostRecentAjaxRequest();
+
+            // Check params.
+            expect(post.params).toContain('record_id=4');
+            expect(post.params).toContain('exhibit_id=1');
+
+        });
+
+    });
+
 });
