@@ -31,6 +31,11 @@
             bottom: 75,
             header: 40,
 
+            // Classes.
+            css: {
+                neatline_bar: 'neatline-bar'
+            },
+
             // Hexes.
             colors: {
                 purple: '#724E85',
@@ -362,6 +367,14 @@
 
                     },
 
+                    'mouseenter': function() {
+                        input.addClass(self.options.css.neatline_bar);
+                    },
+
+                    'mouseleave': function() {
+                        input.removeClass(self.options.css.neatline_bar);
+                    },
+
                     'click': function(event) {
                         event.preventDefault();
                     }
@@ -396,6 +409,14 @@
                     // Trigger the event in item_browser.
                     self._trigger('selectionchange', null, self.selected);
 
+                },
+
+                'mouseenter': function() {
+                    self.allNoneContainer.addClass(self.options.css.neatline_bar);
+                },
+
+                'mouseleave': function() {
+                    self.allNoneContainer.removeClass(self.options.css.neatline_bar);
                 },
 
                 'click': function(event) {

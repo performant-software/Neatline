@@ -465,7 +465,6 @@ div.filter-option {
 }
 
 div.filter-option:hover {
-    background-color: #434343;
     color: #fff;
     cursor: pointer;
 }

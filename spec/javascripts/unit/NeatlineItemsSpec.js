@@ -4,7 +4,7 @@
 
 describe('Neatline Items', function() {
 
-    var items, request, container;
+    var items, request, container, itemsResponse;
     var itemClick, itemEnter, itemLeave;
 
     // Mock _getItems() response.
@@ -286,7 +286,6 @@ describe('Neatline Items', function() {
 
                 // Get the listing for the last item, with no description.
                 var lastTitle = container.find('li.item-title').last();
-                console.log(lastTitle);
 
                 // Call the method, check description visibility.
                 items.neatlineitems('expandDescription', lastTitle);

@@ -224,7 +224,80 @@ class Neatline_FixtureBuilderTest extends Omeka_Test_AppTestCase
             ->setParams(array('id' => $exhibit->id)
         );
 
-        $this->dispatch('neatline/fixtures/publicitems');
+        $this->dispatch('neatline-exhibits/' . $exhibit->id . '/data/udi');
+        $response = $this->getResponse()->getBody('default');
+
+        fwrite($fixture, $response);
+        fclose($fixture);
+
+    }
+
+    /**
+     * Editor items list markup.
+     *
+     * @return void.
+     */
+    public function testBuildEditorItemsList()
+    {
+
+        $fixture = fopen(self::$path_to_fixtures . 'editor-items-ajax.html', 'w');
+
+        // Mock items.
+        $item1 = new Item;
+        $item1->save();
+        $item2 = new Item;
+        $item2->save();
+
+        // Mock exhibit.
+        $exhibit = new NeatlineExhibit;
+        $exhibit->name = 'Test Exhibit';
+        $exhibit->is_map = 1;
+        $exhibit->is_timeline = 1;
+        $exhibit->is_items = 1;
+        $exhibit->save();
+
+        // Record 1.
+        $record1 = new NeatlineDataRecord();
+        $record1->title = 'Title1';
+        $record1->description = 'Description 1.';
+        $record1->exhibit_id = $exhibit->id;
+        $record1->space_active = 1;
+        $record1->save();
+
+        // Record 2.
+        $record2 = new NeatlineDataRecord();
+        $record2->title = 'Title2';
+        $record2->description = 'Description 2.';
+        $record2->exhibit_id = $exhibit->id;
+        $record2->time_active = 1;
+        $record2->save();
+
+        // Record 3.
+        $record3 = new NeatlineDataRecord();
+        $record3->title = 'Title3';
+        $record3->description = 'Description 3.';
+        $record3->exhibit_id = $exhibit->id;
+        $record3->item_id = $item1->id;
+        $record3->space_active = 1;
+        $record3->save();
+
+        // Record 4.
+        $record4 = new NeatlineDataRecord();
+        $record4->title = 'Title4';
+        $record4->exhibit_id = $exhibit->id;
+        $record4->item_id = $item2->id;
+        $record4->time_active = 1;
+        $record4->save();
+
+        // Prepare the request.
+        $this->request->setMethod('GET')
+            ->setParams(array(
+              'exhibit_id' => $exhibit->id,
+              'all' => true
+            )
+        );
+
+        $this->dispatch('neatline-exhibits/editor/ajax/items');
         $response = $this->getResponse()->getBody('default');
 
         fwrite($fixture, $response);

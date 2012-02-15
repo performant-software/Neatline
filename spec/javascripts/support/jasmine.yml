@@ -20,6 +20,9 @@ src_files:
     - views/public/javascripts/**/*.js
     - views/shared/javascripts/*.js
     - views/shared/javascripts/editor/*.js
+    - views/shared/javascripts/libraries/CLEditor-1.3.0/*.js
+    - views/shared/javascripts/libraries/jquery.miniColors-0.1/*.js
+    - views/shared/javascripts/editor/utilities/*.js
     - views/shared/javascripts/libraries/*.js
 
 # stylesheets

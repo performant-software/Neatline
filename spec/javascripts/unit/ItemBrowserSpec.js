@@ -4,7 +4,7 @@
 
 describe('Item Browser', function() {
 
-    var browser, request;
+    var browser, list, request;
 
     // Mock _getItems() response.
     itemsResponse = {
@@ -34,25 +34,32 @@ describe('Item Browser', function() {
         //     'itementer': itemEnter,
         //     'itemleave': itemLeave
         // });
-        itemBrowser.itembrowser();
+        browser.itembrowser();
+        list = browser.itembrowser('getAttr', 'itemsList');
 
         // Capture the request and set response.
         request = mostRecentAjaxRequest();
-        request.response(itemsResponse);
 
     });
 
     describe('_create', function() {
 
+        beforeEach(function() {
+
+            // Set response mock.
+            request.response(itemsResponse);
+
+        });
+
         it('should load items', function() {
 
-            // Check for markup presence.
-            // expect(container).not.toBeEmpty();
-            // expect(container).toContain($('ul'));
-            // expect(container).toContain($('ul li.item-title[recordid="1"]'));
-            // expect(container).toContain($('ul li.item-title[recordid="2"]'));
-            // expect(container).toContain($('ul li.item-title[recordid="3"]'));
-            // expect(container).toContain($('ul li.item-title[recordid="4"]'));
+            // Check for the items list.
+            expect(list).not.toBeEmpty();
+            expect(list).toContain($('table#items-table'));
+            expect(list).toContain($('tr.item-row[recordid="1"]'));
+            expect(list).toContain($('tr.item-row[recordid="2"]'));
+            expect(list).toContain($('tr.item-row[recordid="3"]'));
+            expect(list).toContain($('tr.item-row[recordid="4"]'));
 
         });
 
