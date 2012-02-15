@@ -239,7 +239,7 @@ describe('Neatline Items', function() {
 
             // Check for changed current id and expanded item.
             expect(items.neatlineitems('getAttr', '_currentItemId')).toEqual(4);
-            expect(items.neatlineitems('getAttr', '_currentItem').data('expanded')).toBeTruthy();
+            expect(items.neatlineitems('getAttr', '_currentItem')).toHaveData('expanded', true);
 
         });
 
@@ -278,7 +278,7 @@ describe('Neatline Items', function() {
                 // Check trackers.
                 expect(items.neatlineitems('getAttr', '_currentItem')).toEqual(title);
                 expect(items.neatlineitems('getAttr', '_currentItemId')).toEqual(recordId);
-                expect(title.data('expanded')).toBeTruthy();
+                expect(title).toHaveData('expanded', true);
 
             });
 
@@ -311,7 +311,7 @@ describe('Neatline Items', function() {
                 // Check for null/false trackers.
                 expect(items.neatlineitems('getAttr', '_currentItem')).toBeNull();
                 expect(items.neatlineitems('getAttr', '_currentItemId')).toBeNull();
-                expect(title.data('expanded')).toBeFalsy();
+                expect(title).toHaveData('expanded', false);
 
             });
 

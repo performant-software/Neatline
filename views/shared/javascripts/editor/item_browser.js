@@ -867,12 +867,7 @@
             }, 300);
 
             // Display the form.
-            this.editForm.itemform(
-                'showForm',
-                item,
-                scrollMap,
-                scrollTimeline,
-                focusItems);
+            this.editForm.itemform('showForm', item);
 
             // Fire events to focus the Neatline blocks.
             this._trigger('itemedit', {}, {

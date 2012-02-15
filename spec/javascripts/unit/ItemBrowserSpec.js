@@ -23,17 +23,7 @@ describe('Item Browser', function() {
         // Install AJAX mock.
         jasmine.Ajax.useMock();
 
-        // Create spies for events.
-        // itemClick = jasmine.createSpy('itemclick');
-        // itemEnter = jasmine.createSpy('itementer');
-        // itemLeave = jasmine.createSpy('itemleave');
-
-        // Run the widget and wire up event spies.
-        // items.neatlineitems({
-        //     'itemclick': itemClick,
-        //     'itementer': itemEnter,
-        //     'itemleave': itemLeave
-        // });
+        // Run the widget, get component markup.
         browser.itembrowser();
         list = browser.itembrowser('getAttr', 'itemsList');
 

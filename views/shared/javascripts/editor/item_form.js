@@ -343,7 +343,7 @@
         /*
          * Expand and gloss an item edit form.
          */
-        showForm: function(item, scrollMap, scrollTimeline, focusItems) {
+        showForm: function(item) {
 
             // Getters and setters.
             this.item =                     item;

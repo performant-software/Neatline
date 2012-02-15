@@ -305,4 +305,57 @@ class Neatline_FixtureBuilderTest extends Omeka_Test_AppTestCase
 
     }
 
+    /**
+     * Editor form data.
+     *
+     * @return void.
+     */
+    public function testBuildFormData()
+    {
+
+        $fixture = fopen(self::$path_to_fixtures . 'editor-form-ajax.html', 'w');
+
+        // Mock exhibit.
+        $exhibit = new NeatlineExhibit;
+        $exhibit->name = 'Test Exhibit';
+        $exhibit->is_map = 1;
+        $exhibit->is_timeline = 1;
+        $exhibit->is_items = 1;
+        $exhibit->save();
+
+        // Mock record.
+        $record = new NeatlineDataRecord();
+        $record->title = 'Title1';
+        $record->description = 'Description 1.';
+        $record->start_date = 'June 25, 1987';
+        $record->start_time = '6:00 am';
+        $record->end_date = 'June 26, 1987';
+        $record->end_time = '6:00 am';
+        $record->vector_color = '#ffffff';
+        $record->stroke_color = '#000000';
+        $record->highlight_color = '#ffff00';
+        $record->vector_opacity = 20;
+        $record->stroke_opacity = 80;
+        $record->stroke_width = 3;
+        $record->point_radius = 5;
+        $record->exhibit_id = $exhibit->id;
+        $record->space_active = 1;
+        $record->save();
+
+        // Prepare the request.
+        $this->request->setMethod('GET')
+            ->setParams(array(
+              'exhibit_id' => $exhibit->id,
+              'record_id' => $record->id,
+            )
+        );
+
+        $this->dispatch('neatline-exhibits/editor/ajax/form');
+        $response = $this->getResponse()->getBody('default');
+
+        fwrite($fixture, $response);
+        fclose($fixture);
+
+    }
+
 }
