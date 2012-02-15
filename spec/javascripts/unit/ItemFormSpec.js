@@ -64,6 +64,9 @@ describe('Item Form', function() {
 
         });
 
+        it('should enable the save button when the data request succeeds');
+        it('should not enable the save button when the data request fails');
+
         it('should populate the edit form with data', function() {
 
             // Capture the request and set response.
@@ -90,6 +93,15 @@ describe('Item Form', function() {
     });
 
     describe('save', function() {
+
+        it('should post a well-formed request with the form data', function() {
+
+            // Show the form.
+            form.itemform('showForm', record);
+
+
+
+        });
 
     });
 

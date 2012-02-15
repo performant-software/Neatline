@@ -1083,7 +1083,7 @@
 
             // Rebuild the style map.
             record.layer.styleMap = self._getStyleMap(
-                record.data.vector_color,
+                record.data.highlight_color,
                 record.data.vector_opacity,
                 record.data.highlight_color,
                 record.data.stroke_opacity,
