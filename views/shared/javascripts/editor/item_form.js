@@ -359,6 +359,7 @@
             this.container.append(this.element);
 
             // DOM touches.
+            this._disableButtons();
             this._showContainer();
             this._expandTitle();
             this._getFormData();
@@ -475,6 +476,22 @@
 
 
         /*
+         * Disable the save and delete buttons.
+         */
+        _disableButtons: function() {
+            this.saveButton.attr('disabled', 'disabled');
+            this.deleteButton.attr('disabled', 'disabled');
+        },
+
+        /*
+         * Enable the save and delete buttons.
+         */
+        _enableButtons: function() {
+            this.saveButton.removeAttr('disabled');
+            this.deleteButton.removeAttr('disabled');
+        },
+
+        /*
          * Expand the item form.
          */
         _showContainer: function() {
@@ -487,7 +504,7 @@
 
             this.form.css('height', 'auto');
 
-         },
+        },
 
         /*
          * Contract the item form.
@@ -504,7 +521,7 @@
                 self.container.css('display', 'none');
             });
 
-         },
+        },
 
         /*
          * Grow title size, set color depending on whether the form has been
@@ -527,7 +544,7 @@
                 'font-weight': 'bold'
             }, 100);
 
-         },
+        },
 
         /*
          * Shrink title size, set color depending on whether the form has been
@@ -552,7 +569,7 @@
                 'font-weight': textWeight
             }, 100);
 
-         },
+        },
 
         /*
          * Drop down the opacity during data commit.
@@ -564,7 +581,7 @@
                 'opacity': 0.3
             }, 200);
 
-         },
+        },
 
         /*
          * Push up the opacity after data commit.
@@ -576,7 +593,7 @@
                 'opacity': 1
             }, 200);
 
-         },
+        },
 
         /*
          * If the record is Neatline-endemic and has a non-empty title, push
@@ -588,21 +605,21 @@
                 this._trigger('settitle', {}, { 'text': this.title.val() });
             }
 
-         },
+        },
 
         /*
          * Display the delete record button.
          */
         _showDeleteButton: function() {
             this.deleteButton.css('visibility', 'visible');
-         },
+        },
 
         /*
          * Hide the delete record button.
          */
         _hideDeleteButton: function() {
             this.deleteButton.css('visibility', 'hidden');
-         },
+        },
 
         /*
          * Push the form data into the input fields.
@@ -649,7 +666,7 @@
             this.highlightColor.miniColors('value', this._data.highlight_color);
             this._opened = false;
 
-         },
+        },
 
         /*
          * Empty out the form data.
@@ -681,7 +698,7 @@
             this.vectorColor.miniColors('value', this.options.colors.purple);
             this._opened = false;
 
-         },
+        },
 
         /*
          * Get form data.
@@ -711,7 +728,7 @@
 
             return data;
 
-         },
+        },
 
         /*
          * Get form data and merge with status and coverage data.
@@ -731,21 +748,21 @@
 
             return data;
 
-         },
+        },
 
         /*
          * Get the <body> content out of the description cleditor.
          */
         _getDescriptionContent: function(coverage) {
             return this.description.next('iframe').contents().find('body').html();
-         },
+        },
 
         /*
          * Get the <body> content out of the description cleditor.
          */
         _getTitleContent: function(coverage) {
             return this.title.next('iframe').contents().find('body').html();
-         },
+        },
 
 
         /*
@@ -790,6 +807,9 @@
                         // Push the data into the form.
                         self._data = data;
                         self._applyData();
+
+                        // Enable the save and delete buttons.
+                        self._enableButtons();
 
                     }
 
