@@ -325,12 +325,12 @@ class Neatline_FixtureBuilderTest extends Omeka_Test_AppTestCase
 
         // Mock record.
         $record = new NeatlineDataRecord();
-        $record->title = 'Title1';
-        $record->description = 'Description 1.';
+        $record->title = 'Test Title';
+        $record->description = 'Test description.';
         $record->start_date = 'June 25, 1987';
         $record->start_time = '6:00 am';
         $record->end_date = 'June 26, 1987';
-        $record->end_time = '6:00 am';
+        $record->end_time = '6:01 am';
         $record->vector_color = '#ffffff';
         $record->stroke_color = '#000000';
         $record->highlight_color = '#ffff00';
