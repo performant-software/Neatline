@@ -385,6 +385,10 @@
          */
         hideForm: function(item, immediate) {
 
+            // console.log(this._data);
+            // console.log(this._getData());
+            console.log(_.isEqual(this._data, this._getData()));
+
             // If the form is unsaved, store the changed data.
             if (this.itemTitleText.data('changed')) {
 

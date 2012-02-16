@@ -1080,12 +1080,131 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         );
 
         $this->assertContains(
+            '"stroke_opacity":' . self::$__testParams['stroke_opacity'],
+            $json
+        );
+
+        $this->assertContains(
             '"stroke_width":' . self::$__testParams['stroke_width'],
             $json
         );
 
         $this->assertContains(
             '"point_radius":' . self::$__testParams['point_radius'],
+            $json
+        );
+
+    }
+
+    /**
+     * The buildEditFormJson() method should cast integer styles.
+     *
+     * @return void.
+     */
+    public function testBuildEditFormJsonIntTypecasting()
+    {
+
+        // Create an item and exhibit.
+        $neatline = $this->helper->_createNeatline();
+        $record = new NeatlineDataRecord(null, $neatline);
+
+        // Populate fields.
+        $record->title =            self::$__testParams['title'];
+        $record->description =      self::$__testParams['description'];
+        $record->start_date =       self::$__testParams['start_date'];
+        $record->start_time =       self::$__testParams['start_time'];
+        $record->end_date =         self::$__testParams['end_date'];
+        $record->end_time =         self::$__testParams['end_time'];
+        $record->vector_color =     self::$__testParams['vector_color'];
+        $record->stroke_color =     self::$__testParams['stroke_color'];
+        $record->highlight_color =  self::$__testParams['highlight_color'];
+        $record->vector_opacity =   '20';
+        $record->stroke_opacity =   '30';
+        $record->stroke_width =     '5';
+        $record->point_radius =     '6';
+        $record->left_percent =     '0';
+        $record->right_percent =    '100';
+        $record->geocoverage =      self::$__testParams['geocoverage'];
+        $record->space_active =     self::$__testParams['space_active'];
+        $record->time_active =      self::$__testParams['time_active'];
+        $record->save();
+
+        // Ping the method for the json.
+        $json = $record->buildEditFormJson();
+
+        // Check the construction.
+        $this->assertContains(
+            '"title":"' . self::$__testParams['title'] . '"',
+            $json
+        );
+
+        $this->assertContains(
+            '"description":"' . self::$__testParams['description'] . '"',
+            $json
+        );
+
+        $this->assertContains(
+            '"start_date":"' . self::$__testParams['start_date'] . '"',
+            $json
+        );
+
+        $this->assertContains(
+            '"start_time":"' . self::$__testParams['start_time'] . '"',
+            $json
+        );
+
+        $this->assertContains(
+            '"end_date":"' . self::$__testParams['end_date'] . '"',
+            $json
+        );
+
+        $this->assertContains(
+            '"end_time":"' . self::$__testParams['end_time'] . '"',
+            $json
+        );
+
+        $this->assertContains(
+            '"left_percent":0',
+            $json
+        );
+
+        $this->assertContains(
+            '"right_percent":100',
+            $json
+        );
+
+        $this->assertContains(
+            '"vector_color":"' . self::$__testParams['vector_color'] . '"',
+            $json
+        );
+
+        $this->assertContains(
+            '"stroke_color":"' . self::$__testParams['stroke_color'] . '"',
+            $json
+        );
+
+        $this->assertContains(
+            '"highlight_color":"' . self::$__testParams['highlight_color'] . '"',
+            $json
+        );
+
+        $this->assertContains(
+            '"vector_opacity":20',
+            $json
+        );
+
+        $this->assertContains(
+            '"stroke_opacity":30',
+            $json
+        );
+
+        $this->assertContains(
+            '"stroke_width":5',
+            $json
+        );
+
+        $this->assertContains(
+            '"point_radius":6',
             $json
         );
 
@@ -1166,17 +1285,22 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         );
 
         $this->assertContains(
-            '"vector_opacity":' . get_option('vector_opacity'),
+            '"vector_opacity":' . (int) get_option('vector_opacity'),
             $json
         );
 
         $this->assertContains(
-            '"stroke_width":' . get_option('stroke_width'),
+            '"stroke_opacity":' . (int) get_option('stroke_opacity'),
             $json
         );
 
         $this->assertContains(
-            '"point_radius":' . get_option('point_radius'),
+            '"stroke_width":' . (int) get_option('stroke_width'),
+            $json
+        );
+
+        $this->assertContains(
+            '"point_radius":' . (int) get_option('point_radius'),
             $json
         );
 
@@ -1255,7 +1379,12 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         );
 
         $this->assertContains(
-            '"vector_opacity":' . get_option('vector_opacity'),
+            '"vector_opacity":' . (int) get_option('vector_opacity'),
+            $json
+        );
+
+        $this->assertContains(
+            '"stroke_opacity":' . (int) get_option('stroke_opacity'),
             $json
         );
 
@@ -1265,12 +1394,12 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         );
 
         $this->assertContains(
-            '"stroke_width":' . get_option('stroke_width'),
+            '"stroke_width":' . (int) get_option('stroke_width'),
             $json
         );
 
         $this->assertContains(
-            '"point_radius":' . get_option('point_radius'),
+            '"point_radius":' . (int) get_option('point_radius'),
             $json
         );
 
