@@ -4,8 +4,8 @@
 
 describe('Item Form', function() {
 
-    var browser, form, record,
-        itemRecord, formContainer;
+    var browser, form, record, recordId,
+        itemRecord, itemRecordId, formContainer;
 
     // Mock _getItems() response.
     var itemsResponse = {
@@ -49,6 +49,8 @@ describe('Item Form', function() {
         record = browser.find('tr.item-row[recordid="1"]');
         itemRecord = browser.find('tr.item-row[recordid="4"]');
         formContainer = record.next('tr').find('td');
+        recordId = parseInt(record.attr('recordid'), 10);
+        itemRecordId = parseInt(itemRecord.attr('recordid'), 10);
 
     });
 
@@ -63,10 +65,13 @@ describe('Item Form', function() {
 
     describe('showForm', function() {
 
+        var _db;
+
         beforeEach(function() {
 
             // Show the form.
             form.itemform('showForm', record);
+            _db = form.itemform('getAttr', '_db');
 
         });
 
@@ -152,7 +157,53 @@ describe('Item Form', function() {
 
         });
 
-        it('should reload saved local data when it exists');
+        it('should reload saved local data when it exists', function() {
+
+            // Capture the request and set response.
+            request = mostRecentAjaxRequest();
+            request.response(formResponse);
+
+            // Change data on form.
+            form.itemform('getAttr', 'title').val('New Title');
+            form.itemform('getAttr', 'titleEditor').updateFrame().refresh();
+            form.itemform('getAttr', 'description').val('New description.');
+            form.itemform('getAttr', 'descriptionEditor').updateFrame().refresh();
+            form.itemform('getAttr', 'startDate').val('April 26, 1564');
+            form.itemform('getAttr', 'startTime').val('8:00 am');
+            form.itemform('getAttr', 'endDate').val('April 23, 1616');
+            form.itemform('getAttr', 'endTime').val('8:01 am');
+            form.itemform('getAttr', 'leftPercent').val(20);
+            form.itemform('getAttr', 'rightPercent').val(80);
+            form.itemform('getAttr', 'vectorColor').val('#000000');
+            form.itemform('getAttr', 'strokeColor').val('#ffffff');
+            form.itemform('getAttr', 'highlightColor').val('#000000');
+            form.itemform('getAttr', 'vectorOpacity').val(40);
+            form.itemform('getAttr', 'strokeOpacity').val(40);
+            form.itemform('getAttr', 'strokeWidth').val(5);
+            form.itemform('getAttr', 'pointRadius').val(6);
+
+            browser.itembrowser('showFormByItemId', itemRecordId, false, false, false);
+            browser.itembrowser('showFormByItemId', recordId, false, false, false);
+
+            // Check the inputs for the correct values.
+            expect(form.itemform('getAttr', 'title').val()).toEqual('New Title');
+            expect(form.itemform('getAttr', 'description').val()).toEqual('New description.');
+            expect(form.itemform('getAttr', 'startDate').val()).toEqual('April 26, 1564');
+            expect(form.itemform('getAttr', 'startTime').val()).toEqual('8:00 am');
+            expect(form.itemform('getAttr', 'endDate').val()).toEqual('April 23, 1616');
+            expect(form.itemform('getAttr', 'endTime').val()).toEqual('8:01 am');
+            expect(form.itemform('getAttr', 'leftPercent').val()).toEqual('20');
+            expect(form.itemform('getAttr', 'rightPercent').val()).toEqual('80');
+            expect(form.itemform('getAttr', 'vectorColor').val()).toEqual('#000000');
+            expect(form.itemform('getAttr', 'strokeColor').val()).toEqual('#ffffff');
+            expect(form.itemform('getAttr', 'highlightColor').val()).toEqual('#000000');
+            expect(form.itemform('getAttr', 'vectorOpacity').val()).toEqual('40');
+            expect(form.itemform('getAttr', 'strokeOpacity').val()).toEqual('40');
+            expect(form.itemform('getAttr', 'strokeWidth').val()).toEqual('5');
+            expect(form.itemform('getAttr', 'pointRadius').val()).toEqual('6');
+
+
+        });
 
     });
 

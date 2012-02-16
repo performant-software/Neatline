@@ -55,18 +55,4 @@ describe('Item Browser', function() {
 
     });
 
-    describe('search', function() {
-
-        it('should issue a request for results');
-        it('should update the item list with the results');
-
-    });
-
-    describe('new record', function() {
-
-        it('should issue request to create record and get params');
-        it('should inject the new record into the listings');
-
-    });
-
 });
