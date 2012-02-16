@@ -76,7 +76,6 @@
             // Getters.
             this._window =                  $(window);
             this.form =                     this.element.find('form');
-            this.saveButton =               this.form.find('input[type="submit"]');
             this.deleteButton =             this.form.find('#record-delete-button');
             this.title =                    this.form.find('textarea[name="title"]');
             this.description =              this.form.find('textarea[name="description"]');

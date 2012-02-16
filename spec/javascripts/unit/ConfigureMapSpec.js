@@ -2,7 +2,7 @@
  * Unit tests for the map configuration dropdown.
  */
 
-describe('Item Form', function() {
+describe('Configure Map', function() {
 
     var tab;
 
@@ -53,10 +53,6 @@ describe('Item Form', function() {
 
         });
 
-    });
-
-    describe('_constructFormWidgets', function() {
-
         it('should trigger the save request when the "Save" button is pressed', function() {
 
             // Set form values.
@@ -69,7 +65,7 @@ describe('Item Form', function() {
             tab.configuremap('getAttr', 'pointRadius').val(11);
             tab.configuremap('getAttr', 'baseLayer').val(2);
 
-            // Call saveItemForm, capture outgoing request.
+            // Trigger click on "Save" button.
             tab.configuremap('getAttr', 'saveButton').mousedown();
             var post = mostRecentAjaxRequest();
 

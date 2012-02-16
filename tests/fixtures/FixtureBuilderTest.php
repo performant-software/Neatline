@@ -152,6 +152,12 @@ class Neatline_FixtureBuilderTest extends Omeka_Test_AppTestCase
         $exhibit->is_map = 1;
         $exhibit->is_timeline = 1;
         $exhibit->is_items = 1;
+        $exhibit->top_element = 'map';
+        $exhibit->items_h_pos = 'right';
+        $exhibit->items_v_pos = 'top';
+        $exhibit->items_height = 'full';
+        $exhibit->h_percent = 50;
+        $exhibit->v_percent = 60;
         $exhibit->save();
 
         $fixture = fopen(self::$path_to_fixtures . 'editor.html', 'w');

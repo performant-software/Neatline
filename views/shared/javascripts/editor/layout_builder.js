@@ -1525,6 +1525,11 @@
 
         },
 
+        /*
+         * Emit current arrangement parameters.
+         *
+         * - return object: The parameters.
+         */
         getArrangementParameters: function() {
 
             // Prep booleans for the database.
@@ -1549,6 +1554,17 @@
                 v_percent:      options.constants.v_percent
             };
 
+        },
+
+        /*
+         * Emit a protected class attribute.
+         *
+         * - param string attr: The name of the attribute.
+         *
+         * - return mixed: The attribute value.
+         */
+        getAttr: function(attr) {
+            return this[attr];
         }
 
     });

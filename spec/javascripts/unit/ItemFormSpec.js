@@ -460,6 +460,8 @@ describe('Item Form', function() {
 
         });
 
+        it('should trigger the save request when the "Save" button is pressed');
+
     });
 
     describe('postMapFocus', function() {
