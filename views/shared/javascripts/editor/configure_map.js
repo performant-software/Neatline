@@ -141,7 +141,7 @@
             this.saveButton.bind({
 
                 'mousedown': function() {
-                    self._postSettings();
+                    self.postSettings();
                 },
 
                 'click': function(event) {
@@ -156,24 +156,20 @@
          * Get values out of inputs.
          *
          * - return object: The data.
-         *   
          */
         _getData: function() {
 
             var data = {};
 
-            //TODO: rewrite in dot notation
-            // data.exhibit_id
-
-            data['exhibit_id'] =            Neatline.id;
-            data['vector_color'] =          this.vectorColor.val();
-            data['stroke_color'] =          this.strokeColor.val();
-            data['highlight_color'] =       this.highlightColor.val();
-            data['vector_opacity'] =        parseInt(this.vectorOpacity.val());
-            data['stroke_opacity'] =        parseInt(this.strokeOpacity.val());
-            data['stroke_width'] =          parseInt(this.strokeWidth.val());
-            data['point_radius'] =          parseInt(this.pointRadius.val());
-            data['base_layer'] =            parseInt(this.baseLayer.val());
+            data.exhibit_id =               Neatline.id;
+            data.vector_color =             this.vectorColor.val();
+            data.stroke_color =             this.strokeColor.val();
+            data.highlight_color =          this.highlightColor.val();
+            data.vector_opacity =           parseInt(this.vectorOpacity.val(), 10);
+            data.stroke_opacity =           parseInt(this.strokeOpacity.val(), 10);
+            data.stroke_width =             parseInt(this.strokeWidth.val(), 10);
+            data.point_radius =             parseInt(this.pointRadius.val(), 10);
+            data.base_layer =               parseInt(this.baseLayer.val(), 10);
 
             return data;
 
@@ -184,7 +180,7 @@
          *
          * - return void.
          */
-        _postSettings: function() {
+        postSettings: function() {
 
             var self = this;
 
@@ -204,6 +200,17 @@
 
             });
 
+        },
+
+        /*
+         * Emit a protected class attribute.
+         *
+         * - param string attr: The name of the attribute.
+         *
+         * - return mixed: The attribute.
+         */
+        getAttr: function(attr) {
+            return this[attr];
         }
 
     });
