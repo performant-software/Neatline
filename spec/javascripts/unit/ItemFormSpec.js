@@ -52,6 +52,15 @@ describe('Item Form', function() {
 
     });
 
+    afterEach(function() {
+
+        // Purge markup outside of the fixtures container by the .js.
+        $('span.intdragger-tooltip').remove();
+        $('div.cleditorList').remove();
+        $('div.cleditorPopup').remove();
+
+    });
+
     describe('showForm', function() {
 
         beforeEach(function() {
