@@ -221,21 +221,122 @@ describe('Item Form', function() {
 
             });
 
-            it('should store local data when the left percentage is changed');
+            it('should store local data when the left percentage is changed', function() {
 
-            it('should store local data when the shape color is changed');
+                // Change the title, hide the form.
+                form.itemform('getAttr', 'leftPercent').val(20);
+                form.itemform('hideForm', record);
 
-            it('should store local data when the line color is changed');
+                // Check for the local data record, inspect value.
+                var localRecord = _db({ recordid: recordId }).first();
+                expect(localRecord).not.toBeFalsy();
+                expect(localRecord.data.left_percent).toEqual(20);
 
-            it('should store local data when the highlight color is changed');
+            });
 
-            it('should store local data when the shape opacity is changed');
+            it('should store local data when the right percentage is changed', function() {
 
-            it('should store local data when the line opacity is changed');
+                // Change the title, hide the form.
+                form.itemform('getAttr', 'rightPercent').val(80);
+                form.itemform('hideForm', record);
 
-            it('should store local data when the line thickness is changed');
+                // Check for the local data record, inspect value.
+                var localRecord = _db({ recordid: recordId }).first();
+                expect(localRecord).not.toBeFalsy();
+                expect(localRecord.data.right_percent).toEqual(80);
 
-            it('should store local data when the point radius is changed');
+            });
+
+            it('should store local data when the vector color is changed', function() {
+
+                // Change the title, hide the form.
+                form.itemform('getAttr', 'vectorColor').val('#000000');
+                form.itemform('hideForm', record);
+
+                // Check for the local data record, inspect value.
+                var localRecord = _db({ recordid: recordId }).first();
+                expect(localRecord).not.toBeFalsy();
+                expect(localRecord.data.vector_color).toEqual('#000000');
+
+            });
+
+            it('should store local data when the line color is changed', function() {
+
+                // Change the title, hide the form.
+                form.itemform('getAttr', 'strokeColor').val('#ffffff');
+                form.itemform('hideForm', record);
+
+                // Check for the local data record, inspect value.
+                var localRecord = _db({ recordid: recordId }).first();
+                expect(localRecord).not.toBeFalsy();
+                expect(localRecord.data.stroke_color).toEqual('#ffffff');
+
+            });
+
+            it('should store local data when the highlight color is changed', function() {
+
+                // Change the title, hide the form.
+                form.itemform('getAttr', 'highlightColor').val('#000000');
+                form.itemform('hideForm', record);
+
+                // Check for the local data record, inspect value.
+                var localRecord = _db({ recordid: recordId }).first();
+                expect(localRecord).not.toBeFalsy();
+                expect(localRecord.data.highlight_color).toEqual('#000000');
+
+            });
+
+            it('should store local data when the vector opacity is changed', function() {
+
+                // Change the title, hide the form.
+                form.itemform('getAttr', 'vectorOpacity').val(40);
+                form.itemform('hideForm', record);
+
+                // Check for the local data record, inspect value.
+                var localRecord = _db({ recordid: recordId }).first();
+                expect(localRecord).not.toBeFalsy();
+                expect(localRecord.data.vector_opacity).toEqual(40);
+
+            });
+
+            it('should store local data when the stroke opacity is changed', function() {
+
+                // Change the title, hide the form.
+                form.itemform('getAttr', 'strokeOpacity').val(40);
+                form.itemform('hideForm', record);
+
+                // Check for the local data record, inspect value.
+                var localRecord = _db({ recordid: recordId }).first();
+                expect(localRecord).not.toBeFalsy();
+                expect(localRecord.data.stroke_opacity).toEqual(40);
+
+            });
+
+            it('should store local data when the stroke thickness is changed', function() {
+
+                // Change the title, hide the form.
+                form.itemform('getAttr', 'strokeWidth').val(5);
+                form.itemform('hideForm', record);
+
+                // Check for the local data record, inspect value.
+                var localRecord = _db({ recordid: recordId }).first();
+                expect(localRecord).not.toBeFalsy();
+                expect(localRecord.data.stroke_width).toEqual(5);
+
+            });
+
+            it('should store local data when the point radius is changed', function() {
+
+                // Change the title, hide the form.
+                form.itemform('getAttr', 'pointRadius').val(6);
+                form.itemform('hideForm', record);
+
+                // Check for the local data record, inspect value.
+                var localRecord = _db({ recordid: recordId }).first();
+                expect(localRecord).not.toBeFalsy();
+                expect(localRecord.data.point_radius).toEqual(6);
+
+            });
 
         });
 
