@@ -84,7 +84,9 @@ describe('Item Form', function() {
             request = mostRecentAjaxRequest();
             request.response(formResponse);
 
-            expect(form.itemform('getAttr', 'saveButton')).not.toHaveAttr('disabled');
+            expect(
+                form.itemform('getAttr', 'saveButton')
+            ).not.toHaveAttr('disabled');
 
         });
 
@@ -94,7 +96,36 @@ describe('Item Form', function() {
             request = mostRecentAjaxRequest();
             request.response(errorResponse);
 
-            expect(form.itemform('getAttr', 'saveButton')).toHaveAttr('disabled');
+            expect(
+                form.itemform('getAttr', 'saveButton')
+            ).toHaveAttr('disabled');
+
+        });
+
+        it('should show the delete button when there is no itemid on the record', function() {
+
+            // Set failure response.
+            request = mostRecentAjaxRequest();
+            request.response(formResponse);
+
+            expect(
+                form.itemform('getAttr', 'deleteButton').css('visibility')
+            ).toEqual('visible');
+
+        });
+
+        it('should not show the delete button when there is an itemid on the record', function() {
+
+            // Show the form.
+            form.itemform('showForm', itemRecord);
+
+            // Set failure response.
+            request = mostRecentAjaxRequest();
+            request.response(formResponse);
+
+            expect(
+                form.itemform('getAttr', 'deleteButton').css('visibility')
+            ).not.toEqual('visible');
 
         });
 
@@ -147,6 +178,7 @@ describe('Item Form', function() {
 
                 // Change the title, hide the form.
                 form.itemform('getAttr', 'title').val('New Title');
+                form.itemform('getAttr', 'titleEditor').updateFrame().refresh();
                 form.itemform('hideForm', record);
 
                 // Check for the local data record, inspect value.
@@ -160,6 +192,7 @@ describe('Item Form', function() {
 
                 // Change the title, hide the form.
                 form.itemform('getAttr', 'description').val('New description.');
+                form.itemform('getAttr', 'descriptionEditor').updateFrame().refresh();
                 form.itemform('hideForm', record);
 
                 // Check for the local data record, inspect value.

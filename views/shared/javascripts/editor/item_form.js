@@ -348,8 +348,8 @@
 
             // Getters and setters.
             this.item =                     item;
-            this.itemId =                   item.attr('itemid');
-            this.recordId =                 item.attr('recordid');
+            this.itemId =                   parseInt(item.attr('itemid'), 10);
+            this.recordId =                 parseInt(item.attr('recordid'), 10);
             this.itemTitleText =            item.find('.item-title-text');
             this.container =                this.item.next('tr').find('td');
             this.textSpan =                 this.item.find('.item-title-text');
@@ -366,7 +366,7 @@
             this._getFormData();
 
             // If there is no item id, display the delete button.
-            if (this.itemId === '') {
+            if (_.isNaN(this.itemId)) {
                 this._showDeleteButton();
             }
 
@@ -385,32 +385,30 @@
          */
         hideForm: function(item, immediate) {
 
-            // console.log(this._data);
-            // console.log(this._getData());
-            console.log(_.isEqual(this._data, this._getData()));
+            // Capture current form data.
+            var currentData = this._getData();
 
             // If the form is unsaved, store the changed data.
-            if (this.itemTitleText.data('changed')) {
+            if (!_.isEqual(this._data, currentData)) {
 
                 // Grab data out of the form, try to find an existing record.
                 var data = this._getData();
-                var record = this._db({recordid: this.itemId});
+                var record = this._db({recordid: this.recordId}).first();
 
                 // Check for an existing record.
-                if (record.count()) {
-                    record.update({
-                        recordid: this.itemId,
-                        data: data
-                    });
+                if (record) {
+                    record.data = currentData;
                 }
 
                 // If no record, create one.
                 else {
                     this._db.insert({
-                        recordid: this.itemId,
-                        data: data
+                        recordid: this.recordId,
+                        data: currentData
                     });
                 }
+
+                console.log(currentData);
 
             }
 
@@ -785,7 +783,7 @@
             var self = this;
 
             // First, check for unsaved data.
-            var unsavedData = this._db({recordid: this.itemId}).first();
+            var unsavedData = this._db({recordid: this.recordId}).first();
 
             // If there is unsaved data, reapply it.
             if (unsavedData) {

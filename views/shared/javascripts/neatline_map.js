@@ -995,7 +995,6 @@
 
             // If there is no extant data record, abort.
             if (_.isUndefined(this.record.data)) {
-                console.log('out');
                 return;
             }
 
