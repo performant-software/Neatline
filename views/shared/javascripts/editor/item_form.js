@@ -781,13 +781,12 @@
 
             // First, check for unsaved data.
             var unsavedData = this._db({recordid: this.recordId}).first();
-            console.log(unsavedData);
 
             // If there is unsaved data, reapply it.
             if (unsavedData) {
                 this._data = unsavedData.data;
                 this._applyData();
-                console.log('local');
+                this._enableButtons();
             }
 
             // Otherwise, hit the server for data.

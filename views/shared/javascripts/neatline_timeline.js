@@ -321,7 +321,7 @@
 
             $.each(this.timeline._bands[0]._eventSource._events._idToEvent, function(i, event) {
 
-                if (event._eventID === id) {
+                if (event._eventID === parseInt(id, 10)) {
                     self.timeline.getBand(0).setCenterVisibleDate(event._start);
                 }
 
