@@ -918,7 +918,6 @@
          saveForm: function(coverage) {
 
             // Post the data.
-            console.log('item browse save call');
             this.editForm.itemform('saveItemForm', coverage);
 
          },
