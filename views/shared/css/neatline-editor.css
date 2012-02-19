@@ -289,7 +289,7 @@ tr.edit-form td {
 .neatline-record-edit-form div.fieldset {
     overflow-y: hidden;
     overflow-x: visible;
-    margin: 0 40px 0 20px;
+    padding: 0 40px 0 20px;
     width: 90%;
     white-space: normal;
 }
@@ -342,6 +342,11 @@ div.item-styles {
 a.fieldset {
     margin: 10px 40px 10px 20px;
     display: block;
+    color: #6A457D;
+}
+
+a.fieldset:hover {
+    color: #6A457D;
 }
 
 .fieldset-arrow-down {
