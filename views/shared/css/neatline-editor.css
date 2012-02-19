@@ -63,6 +63,18 @@
     border-color: #9f7cb1;
 }
 
+#save-button {
+    font-style: italic;
+    font-weight: bold;
+    margin: 1px;
+    color: #d4d4d4;
+}
+
+#save-button:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: #fff;
+}
+
 
 /* Filters */
 
