@@ -81,14 +81,8 @@
             this.element.bind({
 
                 'mousedown': function() {
-                    switch (self._expanded) {
-                        case true:
-                            self._contractFieldset();
-                        break;
-                        case false:
-                            self._expandFieldset();
-                        break;
-                    }
+                    if (self._expanded) self._contractFieldset();
+                    else self._expandFieldset();
                 },
 
                 'click': function(e) {
