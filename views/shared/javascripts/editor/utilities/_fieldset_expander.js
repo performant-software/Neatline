@@ -29,9 +29,10 @@
             // The starting expansion status.
             default_status: true,
 
-            // Parameters for the dropdown arrow.
-            arrow: {
-                'class': 'fieldset-expander'
+            // Markup hooks.
+            css: {
+                expanded: 'fieldset-arrow-down',
+                contracted: 'fieldset-arrow-right'
             }
 
         },
@@ -47,6 +48,7 @@
             this._body =        $('body');
             this._window =      $(window);
             this.fieldset =     this.element.next('div.fieldset');
+            this.arrow =        this.element.find('div.fieldset-arrow');
 
             // Trackers.
             this._expanded = this.options.default_status;
@@ -63,11 +65,8 @@
          * - return void.
          */
         _setStartingStatus: function() {
-
-            if (!this.options.default_status) {
-                this._hideFieldset();
-            }
-
+            if (!this.options.default_status) this._hideFieldset();
+            else this._showFieldset();
         },
 
         /*
@@ -113,11 +112,30 @@
          *
          * - return void.
          */
+        _showFieldset: function() {
+
+            // Set height and change arrow.
+            this.fieldset.css('height', this.fieldset.get(0).scrollHeight);
+            this.arrow.removeClass(this.options.css.contracted);
+            this.arrow.addClass(this.options.css.expanded);
+
+            this._trigger('change');
+            this._expanded = true;
+
+        },
+
+
+        /*
+         * Appear the fieldset.
+         *
+         * - return void.
+         */
         _hideFieldset: function() {
 
-            this.fieldset.css({
-                height: 0
-            });
+            // Set height and change arrow.
+            this.fieldset.css('height', 0);
+            this.arrow.removeClass(this.options.css.expanded);
+            this.arrow.addClass(this.options.css.contracted);
 
             this._trigger('change');
             this._expanded = false;
@@ -133,6 +151,11 @@
 
             var self = this;
 
+            // Change arrow.
+            this.arrow.removeClass(this.options.css.contracted);
+            this.arrow.addClass(this.options.css.expanded);
+
+            // Set height.
             this.fieldset.stop().animate({
                 height: this.fieldset.get(0).scrollHeight
             }, 100, function() {
@@ -152,6 +175,11 @@
 
             var self = this;
 
+            // Change arrow.
+            this.arrow.removeClass(this.options.css.expanded);
+            this.arrow.addClass(this.options.css.contracted);
+
+            // Set height.
             this.fieldset.stop().animate({
                 height: 0
             }, 100, function() {

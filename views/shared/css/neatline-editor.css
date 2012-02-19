@@ -343,6 +343,7 @@ a.fieldset {
     margin: 10px 40px 10px 20px;
     display: block;
     color: #6A457D;
+    font-style: italic;
 }
 
 a.fieldset:hover {
@@ -350,26 +351,50 @@ a.fieldset:hover {
 }
 
 .fieldset-arrow-down {
-    position: relative;
-    float: left;
-    margin: 4px 5px 0 0;
-    width: 0;
-    height: 0;
-    border-left: 4px solid transparent;
-    border-right: 4px solid transparent;
-    border-top: 4px solid #000;
-}
-
-.fieldset-arrow-right {
+    display: block;
     position: relative;
     float: left;
     margin: 3px 5px 0 0;
-    width: 0;
-    height: 0;
-    border-top: 4px solid transparent;
-    border-bottom: 4px solid transparent;
-    border-left: 4px solid #000;
+    width: 8px;
+    height: 5px;
+    background-image: url('../images/expander_expanded.png');
+    background-repeat: no-repeat;
+    background-position: left center;
 }
+
+.fieldset-arrow-right {
+    display: block;
+    position: relative;
+    float: left;
+    margin: 2px 5px 0 0;
+    width: 5px;
+    height: 8px;
+    background-image: url('../images/expander_contracted.png');
+    background-repeat: no-repeat;
+    background-position: left center;
+}
+
+/* .fieldset-arrow-down {*/
+/*     position: relative;*/
+/*     float: left;*/
+/*     margin: 4px 5px 0 0;*/
+/*     width: 0;*/
+/*     height: 0;*/
+/*     border-left: 4px solid transparent;*/
+/*     border-right: 4px solid transparent;*/
+/*     border-top: 4px solid #000;*/
+/* }*/
+
+/* .fieldset-arrow-right {*/
+/*     position: relative;*/
+/*     float: left;*/
+/*     margin: 3px 5px 0 0;*/
+/*     width: 0;*/
+/*     height: 0;*/
+/*     border-top: 4px solid transparent;*/
+/*     border-bottom: 4px solid transparent;*/
+/*     border-left: 4px solid #000;*/
+/* }*/
 
 
 /* Search Cancel */
