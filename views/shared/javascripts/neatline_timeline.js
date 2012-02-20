@@ -463,6 +463,17 @@
          */
         refresh: function() {
             this.timeline.layout();
+        },
+
+        /*
+         * Emit a protected class attribute.
+         *
+         * - param string attr: The name of the attribute.
+         *
+         * - return mixed attr: The value of the attribute.
+         */
+        getAttr: function(attr) {
+            return this[attr];
         }
 
     });

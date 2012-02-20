@@ -6,12 +6,6 @@ describe('Neatline Timeline', function() {
 
     var timeline;
 
-    // Mock data response.
-    dataResponse = {
-        status: 200,
-        responseText: readFixtures('timeline-data-ajax.html')
-    };
-
     beforeEach(function() {
 
         // Get exhibit markup.
@@ -24,19 +18,13 @@ describe('Neatline Timeline', function() {
         jasmine.Ajax.useMock();
 
         // Instantiate the widget.
-        timeline.neatlinetimeline();
-
-        // Capture the request and set response.
-        request = mostRecentAjaxRequest();
-        request.response(dataResponse);
+        // timeline.neatlinetimeline();
 
     });
 
     describe('_create', function() {
 
-        it('stub', function() {
-
-        });
+        it('should load events');
 
     });
 
