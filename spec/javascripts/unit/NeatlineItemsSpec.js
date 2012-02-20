@@ -282,6 +282,8 @@ describe('Neatline Items', function() {
 
             });
 
+            it('should expand the description');
+
             it('should not expand the description when the description is empty', function() {
 
                 // Get the listing for the last item, with no description.
@@ -314,6 +316,8 @@ describe('Neatline Items', function() {
                 expect(title).toHaveData('expanded', false);
 
             });
+
+            it('should contract the description');
 
         });
 
