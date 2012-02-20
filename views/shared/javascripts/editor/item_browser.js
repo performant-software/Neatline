@@ -1116,9 +1116,7 @@
             var item = this.idToItem[id];
 
             // If the item is not already visible, show the form.
-            if (item != this._currentFormItem) {
-                this._showForm(item, scrollMap, scrollTimeline, focusItems);
-            }
+            this._showForm(item, scrollMap, scrollTimeline, focusItems);
 
         },
 
