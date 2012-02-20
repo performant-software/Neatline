@@ -24,7 +24,7 @@ describe('Neatline Timeline', function() {
         );
 
         // Instantiate the widget.
-        timeline.neatlinetimeline();
+        // timeline.neatlinetimeline();
         server.respond();
 
     });
