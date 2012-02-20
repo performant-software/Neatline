@@ -384,7 +384,7 @@ describe('Item Form', function() {
             recordId = parseInt(record.attr('recordid'), 10);
 
             // Clear out the records database.
-            _db().remove();
+            form.itemform('clearLocalData');
 
         });
 

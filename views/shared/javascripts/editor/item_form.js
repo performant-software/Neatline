@@ -981,6 +981,13 @@
         },
 
         /*
+         * Claer the local form data Taffy instance.
+         */
+        clearLocalData: function() {
+            this._db().remove();
+        },
+
+        /*
          * Emit a protected class attribute.
          */
         getAttr: function(attr) {
