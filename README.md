@@ -44,7 +44,7 @@ Some general considerations:
 
   * **Self-Hosted**: 
     * _Pros_: Used in conjunction with the Neatline Maps plugin and Geoserver, it's possible to use static images and georectified historical maps as base layers. Full access to the Omeka installation that sits behind Neatline, which makes it possible to create Neatline exhbits that directly extend and build on existing archives of Dublin Core or EAD metadata. Best for complex scholaraly projects where the portability and structural integrity of data is of a premium.
-    * _Cons_: Requires basic knowledge of web hosting environments, MySQL administration, and web-based software installation. Geoserver, the optional geospatial software that makes it possible to serve .tiff files as base layers, is a complex piece of software that can be comparatively difficult deploy.
+    * _Cons_: Requires basic knowledge of web hosting environments, MySQL administration, and web-based software installation. Geoserver, the optional geospatial software that makes it possible to serve .tiff files as base layers, is a complex piece of software that can be comparatively difficult to deploy.
 
 ## Installation and Configuration
 
