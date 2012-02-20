@@ -94,7 +94,7 @@
             this.saveButton.bind({
 
                 'mousedown': function() {
-                    self._postOrder();
+                    self.saveOrder();
                 },
 
                 'click': function(event) {
@@ -123,7 +123,7 @@
          *
          * - return void.
          */
-        _postOrder: function() {
+        saveOrder: function() {
 
             var self = this;
 
