@@ -282,7 +282,25 @@ describe('Neatline Items', function() {
 
             });
 
-            it('should expand the description');
+            it('should expand the description', function() {
+
+                // TODO: Test the actual display DOM expansion.
+
+                // Mock timers.
+                // var clock = sinon.useFakeTimers();
+
+                // Expand description and tick clock.
+                items.neatlineitems('expandDescription', title);
+                // clock.tick(210);
+
+                // Check display and height.
+                expect(description.css('display')).toEqual('list-item');
+                expect(description.css('height')).toEqual(description[0].scrollHeight);
+
+                // Restore default clock.
+                // clock.restore();
+
+            });
 
             it('should not expand the description when the description is empty', function() {
 

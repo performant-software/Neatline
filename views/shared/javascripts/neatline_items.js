@@ -364,6 +364,7 @@
                 // Show and measure the description.
                 description.css('display', 'list-item');
                 var height = description[0].scrollHeight;
+                console.log(height);
 
                 // Expand.
                 description.animate({ 'height': height }, 200);
