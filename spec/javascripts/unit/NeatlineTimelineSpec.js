@@ -4,13 +4,7 @@
 
 describe('Neatline Timeline', function() {
 
-    var timeline, xhr, requests;
-
-    // Mock data response.
-    dataResponse = {
-        status: 200,
-        responseText: readFixtures('timeline-data-ajax.html')
-    };
+    var timeline, server;
 
     beforeEach(function() {
 
@@ -20,18 +14,23 @@ describe('Neatline Timeline', function() {
         // Get container.
         timeline = $('#timeline');
 
-        // Install Sinon fake XHR.
-        xhr = sinon.useFakeXMLHttpRequest();
-        requests = [];
-        xhr.onCreate = function(xhr) { requests.push(xhr); };
+        // Install Sinon fake server.
+        server = sinon.fakeServer.create();
+
+        // Define events json response.
+        server.respondWith(
+            [200, {}, readFixtures('timeline-data-ajax.html')],
+            readFixtures('timeline-data-ajax.html')
+        );
 
         // Instantiate the widget.
         timeline.neatlinetimeline();
+        server.respond();
 
     });
 
     afterEach(function() {
-        xhr.restore();
+        server.restore();
     });
 
     describe('_create', function() {
