@@ -7,10 +7,10 @@ describe('Neatline Timeline', function() {
     var timeline;
 
     // Mock data response.
-    // dataResponse = {
-    //     status: 200,
-    //     responseText: readFixtures('public-items-ajax.html')
-    // };
+    dataResponse = {
+        status: 200,
+        responseText: readFixtures('timeline-data-ajax.html')
+    };
 
     beforeEach(function() {
 
@@ -28,7 +28,7 @@ describe('Neatline Timeline', function() {
 
         // Capture the request and set response.
         request = mostRecentAjaxRequest();
-        request.response(itemsResponse);
+        request.response(dataResponse);
 
     });
 

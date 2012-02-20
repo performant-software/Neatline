@@ -241,11 +241,8 @@
 
             // Ping the json server and get the events data.
             this.timeline.loadJSON(Neatline.dataSources.timeline, function(json, url) {
-
-                // Render the events.
                 self.eventSource.clear();
                 self.eventSource.loadJSON(json, url);
-
             });
 
             // Set the starting date, if defined.
