@@ -66,9 +66,9 @@ class Neatline_FixturesController extends Omeka_Controller_Action
             'neatline' =>           $neatline,
             'public' =>             true,
             'dataSources' =>        array(
-                'map' => 'stub',
-                'timeline' => 'stub',
-                'undated' => 'stub')
+                'map' => 'http://localhost:1337/stub',
+                'timeline' => 'http://localhost:1337/stub',
+                'undated' => 'http://localhost:1337/stub')
         ));
 
     }

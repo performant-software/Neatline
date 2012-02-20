@@ -4,7 +4,13 @@
 
 describe('Neatline Timeline', function() {
 
-    var timeline;
+    var timeline, xhr, requests;
+
+    // Mock data response.
+    dataResponse = {
+        status: 200,
+        responseText: readFixtures('timeline-data-ajax.html')
+    };
 
     beforeEach(function() {
 
@@ -14,17 +20,26 @@ describe('Neatline Timeline', function() {
         // Get container.
         timeline = $('#timeline');
 
-        // Install AJAX mock.
-        jasmine.Ajax.useMock();
+        // Install Sinon fake XHR.
+        xhr = sinon.useFakeXMLHttpRequest();
+        requests = [];
+        xhr.onCreate = function(xhr) { requests.push(xhr); };
 
         // Instantiate the widget.
-        // timeline.neatlinetimeline();
+        timeline.neatlinetimeline();
 
+    });
+
+    afterEach(function() {
+        xhr.restore();
     });
 
     describe('_create', function() {
 
-        it('should load events');
+        it('should load events', function() {
+
+
+        });
 
     });
 
