@@ -974,6 +974,13 @@
         },
 
         /*
+         * Insert a data record into the local form data Taffy instance.
+         */
+        insertLocalData: function(obj) {
+            this._db.insert(obj);
+        },
+
+        /*
          * Emit a protected class attribute.
          */
         getAttr: function(attr) {

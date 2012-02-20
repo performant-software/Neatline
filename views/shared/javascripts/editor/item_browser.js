@@ -350,11 +350,13 @@
 
                 // When the vector color is changed.
                 'vectorColorEdit': function(event, obj) {
-                    var recordid = self._currentFormItem.attr('recordid');
-                    self._trigger('vectorcoloredit', {}, {
-                        'recordid': recordid,
-                        'color': obj.color
-                    });
+                    if (!_.isNull(self._currentFormItem)) {
+                        var recordid = self._currentFormItem.attr('recordid');
+                        self._trigger('vectorcoloredit', {}, {
+                            'recordid': recordid,
+                            'color': obj.color
+                        });
+                    }
                 },
 
                 // When the stroke color is changed.
