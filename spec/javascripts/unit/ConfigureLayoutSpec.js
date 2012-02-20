@@ -73,4 +73,37 @@ describe('Configure Layout', function() {
 
     });
 
+    describe('savePositions', function() {
+
+        it('should post a well-formed request with the postitions params', function() {
+
+            // Call savePositions, capture outgoing request.
+            tab.configurelayout('savePositions', 'mExtent', 5, 'tlCenter', 6);
+            var post = mostRecentAjaxRequest();
+
+            // Check params.
+            expect(post.params).toContain('exhibit_id=1');
+            expect(post.params).toContain('map_extent=mExtent');
+            expect(post.params).toContain('map_zoom=5');
+            expect(post.params).toContain('timeline_center=tlCenter');
+            expect(post.params).toContain('timeline_zoom=6');
+
+        });
+
+        it('should trigger the request when "Fix Starting Viewport Positions" is pressed', function() {
+
+            tab.configurelayout('getAttr', 'fixPositionsButton').mousedown();
+            var post = mostRecentAjaxRequest();
+
+            // Check params.
+            expect(post.params).toContain('exhibit_id=1');
+            expect(post.params).toContain('map_extent=mExtent');
+            expect(post.params).toContain('map_zoom=5');
+            expect(post.params).toContain('timeline_center=tlCenter');
+            expect(post.params).toContain('timeline_zoom=6');
+
+        });
+
+    });
+
 });
