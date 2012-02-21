@@ -446,6 +446,13 @@
                 'updatedid': function(event, obj) {
                     self._currentFormItem.attr('recordid', obj.recordid);
                     self.idToItem[parseInt(obj.recordid, 10)] = self._currentFormItem;
+                },
+
+                // After a record is deleted, remove its listing.
+                'deletecomplete': function(event, obj) {
+                    self._currentFormItem.remove();
+                    self._glossItems();
+                    self._trigger('savecomplete');
                 }
 
             });

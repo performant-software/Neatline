@@ -600,11 +600,9 @@
          * on the title to the title text span.
          */
         _updateTitleText: function() {
-
             if (this.itemId === '' && this.title.val() !== '') {
                 this._trigger('settitle', {}, { 'text': this.title.val() });
             }
-
         },
 
         /*
@@ -892,6 +890,7 @@
                 success: function() {
                     self._fadeUp();
                     self._trigger('spaceactive');
+                    self._trigger('savecomplete');
                 }
 
             });
@@ -917,7 +916,8 @@
 
                 success: function() {
                     self._fadeUp();
-                    self._trigger('reload');
+                    self.hideForm(self.item, true);
+                    self._trigger('deletecomplete');
                 }
 
             });
