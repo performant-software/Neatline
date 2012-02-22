@@ -587,6 +587,9 @@
 
             });
 
+            this.highlightControl.handlers.feature.stopDown = false;
+            this.clickControl.handlers.feature.stopDown = false;
+
             // Add and activate the highlight control.
             this.map.addControl(this.highlightControl);
             this.highlightControl.activate();
