@@ -68,6 +68,11 @@
          */
         reorder: function() {
 
+            // If there is an expanded description, close it.
+            if (!_.isNull(this._currentItem)) {
+                this.contractDescription(this._currentItem);
+            }
+
             // Disable selection.
             this.element.disableSelection();
 
