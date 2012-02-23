@@ -100,6 +100,8 @@ class Neatline_Test_AppTestCase extends Omeka_Test_AppTestCase
      */
     public function _createNeatline(
         $name = 'Test Exhibit',
+        $slug = 'test-exhibit',
+        $public = 1,
         $is_map = 1,
         $is_timeline = 1,
         $is_undated_items = 1
@@ -108,6 +110,8 @@ class Neatline_Test_AppTestCase extends Omeka_Test_AppTestCase
 
         $neatline = new NeatlineExhibit();
         $neatline->name = $name;
+        $neatline->slug = $slug;
+        $neatline->public = $public;
         $neatline->is_map = $is_map;
         $neatline->is_timeline = $is_timeline;
         $neatline->is_items = $is_undated_items;

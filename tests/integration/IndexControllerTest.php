@@ -121,24 +121,24 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
 
         // Title.
         $this->assertQueryContentContains(
-            'a.neatline-title',
+            'td.title a',
             'Test Exhibit'
         );
 
         // Map name.
         $this->assertQueryContentContains(
-            'a.neatline',
+            'td.map a',
             'Test Map'
         );
 
         // Edit.
         $this->assertQueryContentContains(
-            'button', 'Edit'
+            'a.edit', 'Edit Details'
         );
 
         // Delete.
         $this->assertQuery(
-            'button', 'Delete'
+            'a.delete', 'Delete'
         );
 
     }
