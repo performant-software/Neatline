@@ -193,6 +193,9 @@ class NeatlinePlugin
     /**
      * Upgrade.
      *
+     * @param string $oldVersion: The current version number.
+     * @param string $newVersion: The target version number.
+     *
      * @return void.
      */
     public function upgrade($oldVersion, $newVersion)
