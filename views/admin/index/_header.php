@@ -31,9 +31,7 @@
 
 <div id="neatline-header">
 
-    <a href="<?php echo uri('neatline-exhibits'); ?>">
-        <img id="neatline-logo" src="<?php echo img('neatline-logo-rgb-small.png'); ?>" />
-    </a>
+    <h1>Neatline | <?php echo $subtitle; ?></h1>
 
     <p class="add-button">
         <a class="add" href="<?php echo html_escape(uri($add_button_uri)); ?>">

@@ -25,10 +25,5 @@
  */
 ?>
 
-<a href="<?php echo uri($uriSlug . '/editor/' . $neatline->id); ?>" class="neatline-button">
-    <button class="neatline btn primary">Edit</button>
-</a>
-
-<a href="<?php echo uri($uriSlug . '/delete/' . $neatline->id); ?>" class="neatline-button">
-    <button class="neatline btn danger">Delete</button>
-</a>
+<a href="<?php echo uri($uriSlug . '/editor/' . $neatline->id); ?>" class="edit">Edit Details</a>
+<a href="<?php echo uri($uriSlug . '/delete/' . $neatline->id); ?>" class="delete">Delete</a>

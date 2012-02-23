@@ -34,10 +34,6 @@ function neatline_queueAdminCss()
 
     // Custom CSS.
     queue_css('neatline-admin');
-    queue_css('bootstrap-excerpts');
-
-    // Google fonts.
-    echo __v()->partial('neatline/_fonts.php');
 
 }
 
