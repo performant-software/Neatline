@@ -124,7 +124,7 @@
             OpenLayers.DOTS_PER_INCH = 25.4 / 0.28;
 
             // Set tile image format.
-            format = 'image/png';
+            var format = 'image/png';
             if (pureCoverage) {
                 format = 'image/png8';
             }
@@ -221,7 +221,7 @@
             OpenLayers.DOTS_PER_INCH = 25.4 / 0.28;
 
             // Set tile image format.
-            format = 'image/png';
+            var format = 'image/png';
             if (pureCoverage) {
                 format = 'image/png8';
             }
