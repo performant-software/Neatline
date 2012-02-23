@@ -30,6 +30,7 @@ class NeatlinePlugin
     private static $_hooks = array(
         'install',
         'uninstall',
+        'upgrade',
         'define_routes',
         'admin_theme_header',
         'public_theme_header',
@@ -186,6 +187,69 @@ class NeatlinePlugin
         // Drop the data table.
         $sql = "DROP TABLE IF EXISTS `{$this->_db->prefix}neatline_base_layers`";
         $this->_db->query($sql);
+
+    }
+
+    /**
+     * Upgrade.
+     *
+     * @return void.
+     */
+    public function upgrade($oldVersion, $newVersion)
+    {
+
+        if (version_compare($oldVersion, '0.1', '<=')) {
+
+            // `modified` column.
+            $sql = "ALTER TABLE `{$this->_db->prefix}neatline_exhibits`
+                ADD COLUMN `modified` TIMESTAMP NULL";
+            $this->_db->query($sql);
+
+            // `h_percent` column.
+            $sql = "ALTER TABLE `{$this->_db->prefix}neatline_exhibits`
+                ADD COLUMN `h_percent` int(10) unsigned NULL";
+            $this->_db->query($sql);
+
+            // `v_percent` column.
+            $sql = "ALTER TABLE `{$this->_db->prefix}neatline_exhibits`
+                ADD COLUMN `v_percent` int(10) unsigned NULL";
+            $this->_db->query($sql);
+
+            // `default_timeline_zoom` column.
+            $sql = "ALTER TABLE `{$this->_db->prefix}neatline_exhibits`
+                ADD COLUMN `default_timeline_zoom` int(10) unsigned NULL";
+            $this->_db->query($sql);
+
+            // `default_highlight_color` column.
+            $sql = "ALTER TABLE `{$this->_db->prefix}neatline_exhibits`
+                ADD COLUMN `default_highlight_color` tinytext COLLATE utf8_unicode_ci NULL";
+            $this->_db->query($sql);
+
+            // `default_base_layer` column.
+            $sql = "ALTER TABLE `{$this->_db->prefix}neatline_exhibits`
+                ADD COLUMN `default_base_layer` int(10) unsigned NULL";
+            $this->_db->query($sql);
+
+            // `highlight_color` column.
+            $sql = "ALTER TABLE `{$this->_db->prefix}neatline_data_records`
+                ADD COLUMN `highlight_color` tinytext COLLATE utf8_unicode_ci NULL";
+            $this->_db->query($sql);
+
+            // Create layers table.
+            $sql = "CREATE TABLE IF NOT EXISTS `{$this->_db->prefix}neatline_base_layers` (
+                    `id`                    int(10) unsigned not null auto_increment,
+                    `name`                  tinytext COLLATE utf8_unicode_ci NULL,
+                     PRIMARY KEY (`id`)
+                   ) ENGINE=innodb DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
+            $this->_db->query($sql);
+
+            // Set default map style attributes.
+            neatline_setMapStyleDefaults();
+
+            // Install base layers.
+            neatline_installBaseLayers();
+
+        }
 
     }
 
