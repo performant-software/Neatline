@@ -1,4 +1,4 @@
-/*
+/**
  * The core orchestrator class for a Neatline exhibit. This widget (a) reads in the
  * object literal pushed onto the page by the template with basic information
  * about the Neatline, (b) constructs the component divs, (c) initializes the widgets
@@ -37,6 +37,12 @@
                 timeline_id:    'timeline',
                 items_id:       'items',
                 scroller:       'scroll'
+            },
+
+            // Positioning constants.
+            constants: {
+                h_percent:      24,
+                v_percent:      84
             }
 
         },
@@ -65,18 +71,49 @@
             this.instantiated_undated =     false;
             this._getMajorBlock();
 
-            // Instantiate the positioning manager.
+            // Position divs and run viewport managers.
+            this._instantiatePositioner();
+            this.positionDivs();
+            this.instantiateBlocks();
+
+        },
+
+        /*
+         * Construct the positioner and define callbacks.
+         *
+         * - return void.
+         */
+        _instantiatePositioner: function() {
+
+            var self = this;
+
             this.element.positioner({
+
+                // Pass viewport markup.
                 markup: {
                     map:                    '#' + this.options.markup.map_id,
                     timeline:               '#' + this.options.markup.timeline_id,
                     items:                  '#' + this.options.markup.items_id
-                }
-            });
+                },
 
-            // Position divs and run viewport managers.
-            this.positionDivs();
-            this.instantiateBlocks();
+                // Positioning constants.
+                constants: {
+                    h_percent:      this.params.proportions.horizontal,
+                    v_percent:      this.params.proportions.vertical
+                },
+
+                // On proportion drag.
+                drag: function(event, obj) {
+                    self._trigger('widthdrag', {}, obj);
+                    self.timeline.neatlinetimeline('refresh');
+                },
+
+                // On proportion drag completion.
+                layoutChange: function() {
+                    self.timeline.neatlinetimeline('refresh');
+                }
+
+            });
 
         },
 
@@ -142,6 +179,9 @@
 
             // Manifest.
             this.element.positioner('apply');
+
+            // Rerender timeline.
+            this.timeline.neatlinetimeline('refresh');
 
         },
 
@@ -210,18 +250,26 @@
             if (this.params.is_items && !this.instantiated_undated) {
 
                 // If the Neatline is public, instantiate the default item tray.
-                if (this.params.public) {
+                if (this.params.isPublic) {
 
                     this.items.neatlineitems({
 
+                        // When the user clicks on an item title.
                         'itemclick': function(event, obj) {
-
-                            // When the user clicks on an item title.
                             self._trigger('itemclick', {}, {
                                 'recordid': obj.recordid,
                                 'scrollItems': obj.scrollItems
                             });
+                        },
 
+                        // When the cursor enters an item title.
+                        'itementer': function(event, obj) {
+                            self.map.neatlinemap('highlightVectors', obj.recordid);
+                        },
+
+                        // When the cursor leaves an item title.
+                        'itemleave': function(event, obj) {
+                            self.map.neatlinemap('unhighlightVectors', obj.recordid);
                         }
 
                     });
@@ -233,14 +281,27 @@
 
                     this.items.itemorderer({
 
+                        // When the user clicks on an item title.
                         'itemclick': function(event, obj) {
-
-                            // When the user clicks on an item title.
                             self._trigger('itemclick', {}, {
                                 'recordid': obj.recordid,
                                 'scrollItems': obj.scrollItems
                             });
+                        },
 
+                        // When the cursor enters an item title.
+                        'itementer': function(event, obj) {
+                            self.map.neatlinemap('highlightVectors', obj.recordid);
+                        },
+
+                        // When the cursor leaves an item title.
+                        'itemleave': function(event, obj) {
+                            self.map.neatlinemap('unhighlightVectors', obj.recordid);
+                        },
+
+                        // When the item tray is reloaded.
+                        'newitems': function(event, obj) {
+                            self._trigger('newitems');
                         }
 
                     });
@@ -495,6 +556,17 @@
         },
 
         /*
+         * Set the default highlight color.
+         *
+         * - param string color: The color for the span.
+         *
+         * - return void.
+         */
+        setDefaultHighlightColor: function(color) {
+            this.map.neatlinemap('setDefaultStyle', 'highlight_color', color);
+        },
+
+        /*
          * Set the default vector opacity.
          *
          * - param integer value: The opacity, 0-100.
@@ -573,11 +645,24 @@
         /*
          * Get the current focus date on the timeline.
          *
-         * - return integer: The level.
+         * - return string: The date.
          */
         getTimelineCenter: function() {
             if (this.instantiated_timeline) {
                 return this.timeline.neatlinetimeline('getCenterForSave');
+            } else {
+                return null;
+            }
+        },
+
+        /*
+         * Get the current zoom level on the timeline.
+         *
+         * - return integer: The level.
+         */
+        getTimelineZoom: function() {
+            if (this.instantiated_timeline) {
+                return this.timeline.neatlinetimeline('getZoomForSave');
             } else {
                 return null;
             }
@@ -608,6 +693,28 @@
          */
         endReorderItems: function() {
             return this.items.neatlineitems('endreorder');
+        },
+
+        /*
+         * Render a new h_percent and v_percent loadout.
+         *
+         * - param float h_percent: The new h_percent.
+         * - param float v_percent: The new v_percent.
+         *
+         * - return void.
+         */
+        applyViewportProportions: function(h_percent, v_percent) {
+
+            // Rerender the viewports.
+            this.element.positioner(
+                'applyProportions',
+                h_percent,
+                v_percent
+            );
+
+            // Resize Simile.
+            this.timeline.neatlinetimeline('refresh');
+
         }
 
     });

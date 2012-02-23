@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
 
 /**
- * Base markup for a Neatline.
+ * Base markup for timeline popups.
  *
  * PHP version 5
  *

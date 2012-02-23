@@ -1,4 +1,4 @@
-/*
+/**
  * Worker class to build and apply the color and opacity gradient on a
  * timeline time interval span. Used by the editor to render changes on
  * the "Date Ambiguity" builder block and to apply the settings on the
@@ -33,8 +33,12 @@
          */
         _create: function() {
 
+            // Percentage trackers.
             this.leftPercent = null;
             this.rightPercent = null;
+
+            // Capture starting styles.
+            this.baseStyle = this.element.attr('style');
 
         },
 
@@ -48,7 +52,7 @@
         constructCss: function(color, leftPercent, rightPercent) {
 
             // If percentages are passed.
-            if (leftPercent !== null && rightPercent !== null) {
+            if (!_.isUndefined(leftPercent) && !_.isUndefined(rightPercent)) {
 
                 // Store the percentages.
                 this.leftPercent = leftPercent;
@@ -59,7 +63,7 @@
             // Otherwise, try to retrieve stored values, or revert to defaults.
             else {
 
-                if (this.leftPercent !== null && this.rightPercent !== null) {
+                if (!_.isNull(this.leftPercent) && !_.isNull(this.rightPercent)) {
                     leftPercent = this.leftPercent;
                     rightPercent = this.rightPercent;
                 }
@@ -117,8 +121,7 @@
         applyCss: function() {
 
             // Get the starting styling.
-            var startingStyle = this.element.attr('style');
-            var styleBase = (typeof startingStyle === 'undefined') ? '' : startingStyle;
+            var styleBase = (typeof this.baseStyle === 'undefined') ? '' : this.baseStyle;
 
             // Push the new style onto the editor block.
             this.element.attr('style', styleBase + this.css);

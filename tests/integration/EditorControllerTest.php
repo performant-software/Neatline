@@ -37,6 +37,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         'end_time' => '6:00 AM',
         'vector_color' => '#ffffff',
         'stroke_color' => '#000000',
+        'highlight_color' => '#000000',
         'vector_opacity' => 60,
         'stroke_opacity' => 40,
         'stroke_width' => 5,
@@ -159,13 +160,13 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         // Prepare the request.
         $this->request->setMethod('GET')
             ->setParams(array(
-                'neatline_id' => $neatline->id,
+                'exhibit_id' => $neatline->id,
                 'all' => 'true'
             )
         );
 
         // Hit the route, check the markup.
-        $this->dispatch('neatline-exhibits/editor/items');
+        $this->dispatch('neatline-exhibits/editor/ajax/items');
         $this->assertQueryContentContains('tr.header-row td', 'Omeka Records');
         $this->assertQueryContentContains('tr.header-row.hidden td', 'Neatline Records');
         $this->assertQueryCount('tr.item-row', 1);
@@ -192,13 +193,13 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         // Prepare the request.
         $this->request->setMethod('GET')
             ->setParams(array(
-                'neatline_id' => $neatline->id,
+                'exhibit_id' => $neatline->id,
                 'all' => 'true'
             )
         );
 
         // Hit the route, check the markup.
-        $this->dispatch('neatline-exhibits/editor/items');
+        $this->dispatch('neatline-exhibits/editor/ajax/items');
         $this->assertQueryContentContains('tr.header-row.hidden td', 'Omeka Records');
         $this->assertQueryContentContains('tr.header-row td', 'Neatline Records');
         $this->assertQueryCount('tr.item-row', 1);
@@ -228,13 +229,13 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         // Prepare the request.
         $this->request->setMethod('GET')
             ->setParams(array(
-                'neatline_id' => $neatline->id,
+                'exhibit_id' => $neatline->id,
                 'all' => 'true'
             )
         );
 
         // Hit the route, check the markup.
-        $this->dispatch('neatline-exhibits/editor/items');
+        $this->dispatch('neatline-exhibits/editor/ajax/items');
         $this->assertQueryContentContains('tr.header-row td', 'Omeka Records');
         $this->assertQueryContentContains('tr.header-row td', 'Neatline Records');
         $this->assertQueryCount('tr.item-row', 2);
@@ -260,7 +261,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->request->setMethod('POST')
             ->setPost(array(
                 'item_id' => $item->id,
-                'neatline_id' => $neatline->id,
+                'exhibit_id' => $neatline->id,
                 'record_id' => $record->id,
                 'space_or_time' => 'space',
                 'value' => 'true'
@@ -271,7 +272,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->assertEquals($this->_recordsTable->count(), 1);
 
         // Hit the route.
-        $this->dispatch('neatline-exhibits/editor/status');
+        $this->dispatch('neatline-exhibits/editor/ajax/status');
 
         // Should not create a new record.
         $this->assertEquals($this->_recordsTable->count(), 1);
@@ -304,7 +305,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->request->setMethod('POST')
             ->setPost(array(
                 'item_id' => $item->id,
-                'neatline_id' => $neatline->id,
+                'exhibit_id' => $neatline->id,
                 'record_id' => $record->id,
                 'space_or_time' => 'time',
                 'value' => 'true'
@@ -315,7 +316,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->assertEquals($this->_recordsTable->count(), 1);
 
         // Hit the route.
-        $this->dispatch('neatline-exhibits/editor/status');
+        $this->dispatch('neatline-exhibits/editor/ajax/status');
 
         // Should not create a new record.
         $this->assertEquals($this->_recordsTable->count(), 1);
@@ -347,7 +348,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->request->setMethod('POST')
             ->setPost(array(
                 'item_id' => $item->id,
-                'neatline_id' => $neatline->id,
+                'exhibit_id' => $neatline->id,
                 'record_id' => '',
                 'space_or_time' => 'space',
                 'value' => 'true'
@@ -358,7 +359,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->assertEquals($this->_recordsTable->count(), 0);
 
         // Hit the route.
-        $this->dispatch('neatline-exhibits/editor/status');
+        $this->dispatch('neatline-exhibits/editor/ajax/status');
 
         // Should create a new record.
         $this->assertEquals($this->_recordsTable->count(), 1);
@@ -392,7 +393,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->request->setMethod('POST')
             ->setPost(array(
                 'item_id' => $item->id,
-                'neatline_id' => $neatline->id,
+                'exhibit_id' => $neatline->id,
                 'record_id' => '',
                 'space_or_time' => 'time',
                 'value' => 'true'
@@ -403,7 +404,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->assertEquals($this->_recordsTable->count(), 1);
 
         // Hit the route.
-        $this->dispatch('neatline-exhibits/editor/status');
+        $this->dispatch('neatline-exhibits/editor/ajax/status');
 
         // Should create a new record.
         $this->assertEquals($this->_recordsTable->count(), 1);
@@ -435,7 +436,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->request->setMethod('POST')
             ->setPost(array(
                 'item_id' => $item->id,
-                'neatline_id' => $neatline->id,
+                'exhibit_id' => $neatline->id,
                 'record_id' => '',
                 'space_or_time' => 'time',
                 'value' => 'true'
@@ -446,7 +447,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->assertEquals($this->_recordsTable->count(), 0);
 
         // Hit the route.
-        $this->dispatch('neatline-exhibits/editor/status');
+        $this->dispatch('neatline-exhibits/editor/ajax/status');
 
         // Should create a new record.
         $this->assertEquals($this->_recordsTable->count(), 1);
@@ -483,6 +484,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $record->end_time =         self::$__testParams['end_time'];
         $record->vector_color =     self::$__testParams['vector_color'];
         $record->stroke_color =     self::$__testParams['stroke_color'];
+        $record->highlight_color =  self::$__testParams['highlight_color'];
         $record->vector_opacity =   self::$__testParams['vector_opacity'];
         $record->stroke_opacity =   self::$__testParams['stroke_opacity'];
         $record->stroke_width =     self::$__testParams['stroke_width'];
@@ -498,13 +500,13 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->request->setMethod('GET')
             ->setParams(array(
                 'item_id' => $item->id,
-                'neatline_id' => $neatline->id,
+                'exhibit_id' => $neatline->id,
                 'record_id' => $record->id
             )
         );
 
         // Hit the route and capture the response.
-        $this->dispatch('neatline-exhibits/editor/form');
+        $this->dispatch('neatline-exhibits/editor/ajax/form');
         $response = $this->getResponse()->getBody('default');
 
         // Test the construction.
@@ -554,12 +556,17 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         );
 
         $this->assertContains(
-            '"vector_opacity":' . self::$__testParams['vector_opacity'],
+            '"stroke_color":"' . self::$__testParams['stroke_color'] . '"',
             $response
         );
 
         $this->assertContains(
-            '"stroke_color":"' . self::$__testParams['stroke_color'] . '"',
+            '"highlight_color":"' . self::$__testParams['highlight_color'] . '"',
+            $response
+        );
+
+        $this->assertContains(
+            '"vector_opacity":' . self::$__testParams['vector_opacity'],
             $response
         );
 
@@ -593,13 +600,13 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->request->setMethod('GET')
             ->setParams(array(
                 'item_id' => $item->id,
-                'neatline_id' => $neatline->id,
+                'exhibit_id' => $neatline->id,
                 'record_id' => $record->id
             )
         );
 
         // Hit the route and capture the response.
-        $this->dispatch('neatline-exhibits/editor/form');
+        $this->dispatch('neatline-exhibits/editor/ajax/form');
         $response = $this->getResponse()->getBody('default');
 
         // Test the construction.
@@ -649,12 +656,17 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         );
 
         $this->assertContains(
-            '"vector_opacity":' . get_option('vector_opacity'),
+            '"stroke_color":"' . get_option('stroke_color') . '"',
             $response
         );
 
         $this->assertContains(
-            '"stroke_color":"' . get_option('stroke_color') . '"',
+            '"highlight_color":"' . get_option('highlight_color') . '"',
+            $response
+        );
+
+        $this->assertContains(
+            '"vector_opacity":' . get_option('vector_opacity'),
             $response
         );
 
@@ -700,13 +712,13 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->request->setMethod('GET')
             ->setParams(array(
                 'item_id' => $item->id,
-                'neatline_id' => $neatline->id,
+                'exhibit_id' => $neatline->id,
                 'record_id' => ''
             )
         );
 
         // Hit the route and capture the response.
-        $this->dispatch('neatline-exhibits/editor/form');
+        $this->dispatch('neatline-exhibits/editor/ajax/form');
         $response = $this->getResponse()->getBody('default');
 
         // Check for proper construction.
@@ -756,12 +768,17 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         );
 
         $this->assertContains(
-            '"vector_opacity":' . get_option('vector_opacity'),
+            '"stroke_color":"' . get_option('stroke_color') . '"',
             $response
         );
 
         $this->assertContains(
-            '"stroke_color":"' . get_option('stroke_color') . '"',
+            '"highlight_color":"' . get_option('highlight_color') . '"',
+            $response
+        );
+
+        $this->assertContains(
+            '"vector_opacity":' . get_option('vector_opacity'),
             $response
         );
 
@@ -796,26 +813,27 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         // Form the POST for a space change.
         $this->request->setMethod('POST')
             ->setPost(array(
-                'item_id' =>        '',
-                'record_id' =>      $record->id,
-                'neatline_id' =>    $neatline->id,
-                'space_active' =>   (string) self::$__testParams['space_active'],
-                'time_active' =>    (string) self::$__testParams['time_active'],
-                'geocoverage' =>    self::$__testParams['geocoverage'],
-                'title' =>          self::$__testParams['title'],
-                'description' =>    self::$__testParams['description'],
-                'start_date' =>     self::$__testParams['start_date'],
-                'start_time' =>     self::$__testParams['start_time'],
-                'end_date' =>       self::$__testParams['end_date'],
-                'end_time' =>       self::$__testParams['end_time'],
-                'left_percent' =>   self::$__testParams['left_percent'],
-                'right_percent' =>  self::$__testParams['right_percent'],
-                'vector_color' =>   self::$__testParams['vector_color'],
-                'stroke_color' =>   self::$__testParams['stroke_color'],
-                'vector_opacity' => self::$__testParams['vector_opacity'],
-                'stroke_opacity' => self::$__testParams['stroke_opacity'],
-                'stroke_width' =>   self::$__testParams['stroke_width'],
-                'point_radius' =>   self::$__testParams['point_radius']
+                'item_id' =>            '',
+                'record_id' =>          $record->id,
+                'exhibit_id' =>         $neatline->id,
+                'space_active' =>       (string) self::$__testParams['space_active'],
+                'time_active' =>        (string) self::$__testParams['time_active'],
+                'geocoverage' =>        self::$__testParams['geocoverage'],
+                'title' =>              self::$__testParams['title'],
+                'description' =>        self::$__testParams['description'],
+                'start_date' =>         self::$__testParams['start_date'],
+                'start_time' =>         self::$__testParams['start_time'],
+                'end_date' =>           self::$__testParams['end_date'],
+                'end_time' =>           self::$__testParams['end_time'],
+                'left_percent' =>       self::$__testParams['left_percent'],
+                'right_percent' =>      self::$__testParams['right_percent'],
+                'vector_color' =>       self::$__testParams['vector_color'],
+                'stroke_color' =>       self::$__testParams['stroke_color'],
+                'highlight_color' =>    self::$__testParams['highlight_color'],
+                'vector_opacity' =>     self::$__testParams['vector_opacity'],
+                'stroke_opacity' =>     self::$__testParams['stroke_opacity'],
+                'stroke_width' =>       self::$__testParams['stroke_width'],
+                'point_radius' =>       self::$__testParams['point_radius']
             )
         );
 
@@ -823,7 +841,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->assertEquals($this->_recordsTable->count(), 1);
 
         // Hit the route and capture the response.
-        $this->dispatch('neatline-exhibits/editor/save');
+        $this->dispatch('neatline-exhibits/editor/ajax/save');
         $response = $this->getResponse()->getBody('default');
 
         // 1 record.
@@ -876,6 +894,11 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->assertEquals(
             $record->stroke_color,
             self::$__testParams['stroke_color']
+        );
+
+        $this->assertEquals(
+            $record->highlight_color,
+            self::$__testParams['highlight_color']
         );
 
         $this->assertEquals(
@@ -941,26 +964,27 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         // Form the POST for a space change.
         $this->request->setMethod('POST')
             ->setPost(array(
-                'item_id' =>        $item->id,
-                'record_id' =>      '',
-                'neatline_id' =>    $neatline->id,
-                'space_active' =>   (string) self::$__testParams['space_active'],
-                'time_active' =>    (string) self::$__testParams['time_active'],
-                'geocoverage' =>    self::$__testParams['geocoverage'],
-                'title' =>          self::$__testParams['title'],
-                'description' =>    self::$__testParams['description'],
-                'start_date' =>     self::$__testParams['start_date'],
-                'start_time' =>     self::$__testParams['start_time'],
-                'end_date' =>       self::$__testParams['end_date'],
-                'end_time' =>       self::$__testParams['end_time'],
-                'left_percent' =>   self::$__testParams['left_percent'],
-                'right_percent' =>  self::$__testParams['right_percent'],
-                'vector_color' =>   self::$__testParams['vector_color'],
-                'stroke_color' =>   self::$__testParams['stroke_color'],
-                'vector_opacity' => self::$__testParams['vector_opacity'],
-                'stroke_opacity' => self::$__testParams['stroke_opacity'],
-                'stroke_width' =>   self::$__testParams['stroke_width'],
-                'point_radius' =>   self::$__testParams['point_radius']
+                'item_id' =>            $item->id,
+                'record_id' =>          '',
+                'exhibit_id' =>         $neatline->id,
+                'space_active' =>       (string) self::$__testParams['space_active'],
+                'time_active' =>        (string) self::$__testParams['time_active'],
+                'geocoverage' =>        self::$__testParams['geocoverage'],
+                'title' =>              self::$__testParams['title'],
+                'description' =>        self::$__testParams['description'],
+                'start_date' =>         self::$__testParams['start_date'],
+                'start_time' =>         self::$__testParams['start_time'],
+                'end_date' =>           self::$__testParams['end_date'],
+                'end_time' =>           self::$__testParams['end_time'],
+                'left_percent' =>       self::$__testParams['left_percent'],
+                'right_percent' =>      self::$__testParams['right_percent'],
+                'vector_color' =>       self::$__testParams['vector_color'],
+                'stroke_color' =>       self::$__testParams['stroke_color'],
+                'highlight_color' =>    self::$__testParams['highlight_color'],
+                'vector_opacity' =>     self::$__testParams['vector_opacity'],
+                'stroke_opacity' =>     self::$__testParams['stroke_opacity'],
+                'stroke_width' =>       self::$__testParams['stroke_width'],
+                'point_radius' =>       self::$__testParams['point_radius']
             )
         );
 
@@ -968,7 +992,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->assertEquals($this->_recordsTable->count(), 0);
 
         // Hit the route and capture the response.
-        $this->dispatch('neatline-exhibits/editor/save');
+        $this->dispatch('neatline-exhibits/editor/ajax/save');
         $response = $this->getResponse()->getBody('default');
 
         // 1 record.
@@ -1021,6 +1045,11 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->assertEquals(
             $record->stroke_color,
             self::$__testParams['stroke_color']
+        );
+
+        $this->assertEquals(
+            $record->highlight_color,
+            self::$__testParams['highlight_color']
         );
 
         $this->assertEquals(
@@ -1088,26 +1117,27 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         // Form the POST for a space change.
         $this->request->setMethod('POST')
             ->setPost(array(
-                'item_id' =>        $item->id,
-                'record_id' =>      $record->id,
-                'neatline_id' =>    $neatline->id,
-                'space_active' =>   (string) self::$__testParams['space_active'],
-                'time_active' =>    (string) self::$__testParams['time_active'],
-                'geocoverage' =>    self::$__testParams['geocoverage'],
-                'title' =>          self::$__testParams['title'],
-                'description' =>    self::$__testParams['description'],
-                'start_date' =>     self::$__testParams['start_date'],
-                'start_time' =>     self::$__testParams['start_time'],
-                'end_date' =>       self::$__testParams['end_date'],
-                'end_time' =>       self::$__testParams['end_time'],
-                'left_percent' =>   self::$__testParams['left_percent'],
-                'right_percent' =>  self::$__testParams['right_percent'],
-                'vector_color' =>   self::$__testParams['vector_color'],
-                'stroke_color' =>   self::$__testParams['stroke_color'],
-                'vector_opacity' => self::$__testParams['vector_opacity'],
-                'stroke_opacity' => self::$__testParams['stroke_opacity'],
-                'stroke_width' =>   self::$__testParams['stroke_width'],
-                'point_radius' =>   self::$__testParams['point_radius']
+                'item_id' =>            $item->id,
+                'record_id' =>          $record->id,
+                'exhibit_id' =>         $neatline->id,
+                'space_active' =>       (string) self::$__testParams['space_active'],
+                'time_active' =>        (string) self::$__testParams['time_active'],
+                'geocoverage' =>        self::$__testParams['geocoverage'],
+                'title' =>              self::$__testParams['title'],
+                'description' =>        self::$__testParams['description'],
+                'start_date' =>         self::$__testParams['start_date'],
+                'start_time' =>         self::$__testParams['start_time'],
+                'end_date' =>           self::$__testParams['end_date'],
+                'end_time' =>           self::$__testParams['end_time'],
+                'left_percent' =>       self::$__testParams['left_percent'],
+                'right_percent' =>      self::$__testParams['right_percent'],
+                'vector_color' =>       self::$__testParams['vector_color'],
+                'stroke_color' =>       self::$__testParams['stroke_color'],
+                'highlight_color' =>    self::$__testParams['highlight_color'],
+                'vector_opacity' =>     self::$__testParams['vector_opacity'],
+                'stroke_opacity' =>     self::$__testParams['stroke_opacity'],
+                'stroke_width' =>       self::$__testParams['stroke_width'],
+                'point_radius' =>       self::$__testParams['point_radius']
             )
         );
 
@@ -1115,7 +1145,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->assertEquals($this->_recordsTable->count(), 1);
 
         // Hit the route and capture the response.
-        $this->dispatch('neatline-exhibits/editor/save');
+        $this->dispatch('neatline-exhibits/editor/ajax/save');
         $response = $this->getResponse()->getBody('default');
 
         // 1 record.
@@ -1168,6 +1198,11 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->assertEquals(
             $record->stroke_color,
             self::$__testParams['stroke_color']
+        );
+
+        $this->assertEquals(
+            $record->highlight_color,
+            self::$__testParams['highlight_color']
         );
 
         $this->assertEquals(
@@ -1244,30 +1279,31 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->request->setMethod('POST')
             ->setPost(array(
                 'item_id' =>        '',
-                'record_id' =>      $record->id,
-                'neatline_id' =>    $neatline->id,
-                'space_active' =>   (string) self::$__testParams['space_active'],
-                'time_active' =>    (string) self::$__testParams['time_active'],
-                'geocoverage' =>    'null',
-                'title' =>          self::$__testParams['title'],
-                'description' =>    self::$__testParams['description'],
-                'start_date' =>     self::$__testParams['start_date'],
-                'start_time' =>     self::$__testParams['start_time'],
-                'end_date' =>       self::$__testParams['end_date'],
-                'end_time' =>       self::$__testParams['end_time'],
-                'left_percent' =>   self::$__testParams['left_percent'],
-                'right_percent' =>  self::$__testParams['right_percent'],
-                'vector_color' =>   self::$__testParams['vector_color'],
-                'stroke_color' =>   self::$__testParams['stroke_color'],
-                'vector_opacity' => self::$__testParams['vector_opacity'],
-                'stroke_opacity' => self::$__testParams['stroke_opacity'],
-                'stroke_width' =>   self::$__testParams['stroke_width'],
-                'point_radius' =>   self::$__testParams['point_radius']
+                'record_id' =>          $record->id,
+                'exhibit_id' =>         $neatline->id,
+                'space_active' =>       (string) self::$__testParams['space_active'],
+                'time_active' =>        (string) self::$__testParams['time_active'],
+                'geocoverage' =>        'null',
+                'title' =>              self::$__testParams['title'],
+                'description' =>        self::$__testParams['description'],
+                'start_date' =>         self::$__testParams['start_date'],
+                'start_time' =>         self::$__testParams['start_time'],
+                'end_date' =>           self::$__testParams['end_date'],
+                'end_time' =>           self::$__testParams['end_time'],
+                'left_percent' =>       self::$__testParams['left_percent'],
+                'right_percent' =>      self::$__testParams['right_percent'],
+                'vector_color' =>       self::$__testParams['vector_color'],
+                'stroke_color' =>       self::$__testParams['stroke_color'],
+                'highlight_color' =>    self::$__testParams['highlight_color'],
+                'vector_opacity' =>     self::$__testParams['vector_opacity'],
+                'stroke_opacity' =>     self::$__testParams['stroke_opacity'],
+                'stroke_width' =>       self::$__testParams['stroke_width'],
+                'point_radius' =>       self::$__testParams['point_radius']
             )
         );
 
         // Hit the route and capture the response.
-        $this->dispatch('neatline-exhibits/editor/save');
+        $this->dispatch('neatline-exhibits/editor/ajax/save');
 
         // Get the record and check the attributes.
         $record = $this->_recordsTable->find($record->id);
@@ -1298,26 +1334,27 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         // Form the POST for a space change.
         $this->request->setMethod('POST')
             ->setPost(array(
-                'item_id' =>        $item->id,
-                'record_id' =>      '',
-                'neatline_id' =>    $neatline->id,
-                'space_active' =>   (string) self::$__testParams['space_active'],
-                'time_active' =>    (string) self::$__testParams['time_active'],
-                'geocoverage' =>    self::$__testParams['geocoverage'],
-                'title' =>          self::$__testParams['title'],
-                'description' =>    self::$__testParams['description'],
-                'start_date' =>     self::$__testParams['start_date'],
-                'start_time' =>     self::$__testParams['start_time'],
-                'end_date' =>       self::$__testParams['end_date'],
-                'end_time' =>       self::$__testParams['end_time'],
-                'left_percent' =>   self::$__testParams['left_percent'],
-                'right_percent' =>  self::$__testParams['right_percent'],
-                'vector_color' =>   self::$__testParams['vector_color'],
-                'stroke_color' =>   self::$__testParams['stroke_color'],
-                'vector_opacity' => self::$__testParams['vector_opacity'],
-                'stroke_opacity' => self::$__testParams['stroke_opacity'],
-                'stroke_width' =>   self::$__testParams['stroke_width'],
-                'point_radius' =>   self::$__testParams['point_radius']
+                'item_id' =>            $item->id,
+                'record_id' =>          '',
+                'exhibit_id' =>         $neatline->id,
+                'space_active' =>       (string) self::$__testParams['space_active'],
+                'time_active' =>        (string) self::$__testParams['time_active'],
+                'geocoverage' =>        self::$__testParams['geocoverage'],
+                'title' =>              self::$__testParams['title'],
+                'description' =>        self::$__testParams['description'],
+                'start_date' =>         self::$__testParams['start_date'],
+                'start_time' =>         self::$__testParams['start_time'],
+                'end_date' =>           self::$__testParams['end_date'],
+                'end_time' =>           self::$__testParams['end_time'],
+                'left_percent' =>       self::$__testParams['left_percent'],
+                'right_percent' =>      self::$__testParams['right_percent'],
+                'vector_color' =>       self::$__testParams['vector_color'],
+                'stroke_color' =>       self::$__testParams['stroke_color'],
+                'highlight_color' =>    self::$__testParams['highlight_color'],
+                'vector_opacity' =>     self::$__testParams['vector_opacity'],
+                'stroke_opacity' =>     self::$__testParams['stroke_opacity'],
+                'stroke_width' =>       self::$__testParams['stroke_width'],
+                'point_radius' =>       self::$__testParams['point_radius']
             )
         );
 
@@ -1325,7 +1362,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->assertEquals($this->_recordsTable->count(), 1);
 
         // Hit the route and capture the response.
-        $this->dispatch('neatline-exhibits/editor/save');
+        $this->dispatch('neatline-exhibits/editor/ajax/save');
 
         // 1 record.
         $this->assertEquals($this->_recordsTable->count(), 1);
@@ -1355,31 +1392,32 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         // Form the POST with new geocoverage data.
         $this->request->setMethod('POST')
             ->setPost(array(
-                'item_id' =>        $item->id,
-                'record_id' =>      $record->id,
-                'neatline_id' =>    $neatline->id,
-                'space_active' =>   (string) self::$__testParams['space_active'],
-                'time_active' =>    (string) self::$__testParams['time_active'],
-                'geocoverage' =>    self::$__testParams['geocoverage'],
-                'title' =>          self::$__testParams['title'],
-                'description' =>    self::$__testParams['description'],
-                'start_date' =>     '',
-                'start_time' =>     self::$__testParams['start_time'],
-                'end_date' =>       self::$__testParams['end_date'],
-                'end_time' =>       self::$__testParams['end_time'],
-                'left_percent' =>   self::$__testParams['left_percent'],
-                'right_percent' =>  self::$__testParams['right_percent'],
-                'vector_color' =>   self::$__testParams['vector_color'],
-                'stroke_color' =>   self::$__testParams['stroke_color'],
-                'vector_opacity' => self::$__testParams['vector_opacity'],
-                'stroke_opacity' => self::$__testParams['stroke_opacity'],
-                'stroke_width' =>   self::$__testParams['stroke_width'],
-                'point_radius' =>   self::$__testParams['point_radius']
+                'item_id' =>            $item->id,
+                'record_id' =>          $record->id,
+                'exhibit_id' =>         $neatline->id,
+                'space_active' =>       (string) self::$__testParams['space_active'],
+                'time_active' =>        (string) self::$__testParams['time_active'],
+                'geocoverage' =>        self::$__testParams['geocoverage'],
+                'title' =>              self::$__testParams['title'],
+                'description' =>        self::$__testParams['description'],
+                'start_date' =>         '',
+                'start_time' =>         self::$__testParams['start_time'],
+                'end_date' =>           self::$__testParams['end_date'],
+                'end_time' =>           self::$__testParams['end_time'],
+                'left_percent' =>       self::$__testParams['left_percent'],
+                'right_percent' =>      self::$__testParams['right_percent'],
+                'vector_color' =>       self::$__testParams['vector_color'],
+                'stroke_color' =>       self::$__testParams['stroke_color'],
+                'highlight_color' =>    self::$__testParams['stroke_color'],
+                'vector_opacity' =>     self::$__testParams['vector_opacity'],
+                'stroke_opacity' =>     self::$__testParams['stroke_opacity'],
+                'stroke_width' =>       self::$__testParams['stroke_width'],
+                'point_radius' =>       self::$__testParams['point_radius']
             )
         );
 
         // Hit the route.
-        $this->dispatch('neatline-exhibits/editor/save');
+        $this->dispatch('neatline-exhibits/editor/ajax/save');
 
         // Get the record and check the attributes.
         $record = $this->_recordsTable->getRecordByItemAndExhibit($item, $neatline);
@@ -1404,31 +1442,32 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         // Form the POST with new geocoverage data.
         $this->request->setMethod('POST')
             ->setPost(array(
-                'item_id' =>        $item->id,
-                'record_id' =>      '',
-                'neatline_id' =>    $neatline->id,
-                'space_active' =>   (string) self::$__testParams['space_active'],
-                'time_active' =>    (string) self::$__testParams['time_active'],
-                'geocoverage' =>    self::$__testParams['geocoverage'],
-                'title' =>          self::$__testParams['title'],
-                'description' =>    self::$__testParams['description'],
-                'start_date' =>     '',
-                'start_time' =>     self::$__testParams['start_time'],
-                'end_date' =>       self::$__testParams['end_date'],
-                'end_time' =>       self::$__testParams['end_time'],
-                'left_percent' =>   self::$__testParams['left_percent'],
-                'right_percent' =>  self::$__testParams['right_percent'],
-                'vector_color' =>   self::$__testParams['vector_color'],
-                'stroke_color' =>   self::$__testParams['stroke_color'],
-                'vector_opacity' => self::$__testParams['vector_opacity'],
-                'stroke_opacity' => self::$__testParams['stroke_opacity'],
-                'stroke_width' =>   self::$__testParams['stroke_width'],
-                'point_radius' =>   self::$__testParams['point_radius']
+                'item_id' =>            $item->id,
+                'record_id' =>          '',
+                'exhibit_id' =>         $neatline->id,
+                'space_active' =>       (string) self::$__testParams['space_active'],
+                'time_active' =>        (string) self::$__testParams['time_active'],
+                'geocoverage' =>        self::$__testParams['geocoverage'],
+                'title' =>              self::$__testParams['title'],
+                'description' =>        self::$__testParams['description'],
+                'start_date' =>         '',
+                'start_time' =>         self::$__testParams['start_time'],
+                'end_date' =>           self::$__testParams['end_date'],
+                'end_time' =>           self::$__testParams['end_time'],
+                'left_percent' =>       self::$__testParams['left_percent'],
+                'right_percent' =>      self::$__testParams['right_percent'],
+                'vector_color' =>       self::$__testParams['vector_color'],
+                'stroke_color' =>       self::$__testParams['stroke_color'],
+                'highlight_color' =>    self::$__testParams['stroke_color'],
+                'vector_opacity' =>     self::$__testParams['vector_opacity'],
+                'stroke_opacity' =>     self::$__testParams['stroke_opacity'],
+                'stroke_width' =>       self::$__testParams['stroke_width'],
+                'point_radius' =>       self::$__testParams['point_radius']
             )
         );
 
         // Hit the route.
-        $this->dispatch('neatline-exhibits/editor/save');
+        $this->dispatch('neatline-exhibits/editor/ajax/save');
 
         // Get the record and check the attributes.
         $record = $this->_recordsTable->find(1);
@@ -1460,31 +1499,32 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         // Form the POST with new geocoverage data.
         $this->request->setMethod('POST')
             ->setPost(array(
-                'item_id' =>        $item->id,
-                'record_id' =>      $record->id,
-                'neatline_id' =>    $neatline->id,
-                'space_active' =>   (string) self::$__testParams['space_active'],
-                'time_active' =>    (string) self::$__testParams['time_active'],
-                'geocoverage' =>    '',
-                'title' =>          self::$__testParams['title'],
-                'description' =>    self::$__testParams['description'],
-                'start_date' =>     self::$__testParams['start_date'],
-                'start_time' =>     self::$__testParams['start_time'],
-                'end_date' =>       self::$__testParams['end_date'],
-                'end_time' =>       self::$__testParams['end_time'],
-                'left_percent' =>   self::$__testParams['left_percent'],
-                'right_percent' =>  self::$__testParams['right_percent'],
-                'vector_color' =>   self::$__testParams['vector_color'],
-                'stroke_color' =>   self::$__testParams['stroke_color'],
-                'vector_opacity' => self::$__testParams['vector_opacity'],
-                'stroke_opacity' => self::$__testParams['stroke_opacity'],
-                'stroke_width' =>   self::$__testParams['stroke_width'],
-                'point_radius' =>   self::$__testParams['point_radius']
+                'item_id' =>            $item->id,
+                'record_id' =>          $record->id,
+                'exhibit_id' =>         $neatline->id,
+                'space_active' =>       (string) self::$__testParams['space_active'],
+                'time_active' =>        (string) self::$__testParams['time_active'],
+                'geocoverage' =>        '',
+                'title' =>              self::$__testParams['title'],
+                'description' =>        self::$__testParams['description'],
+                'start_date' =>         self::$__testParams['start_date'],
+                'start_time' =>         self::$__testParams['start_time'],
+                'end_date' =>           self::$__testParams['end_date'],
+                'end_time' =>           self::$__testParams['end_time'],
+                'left_percent' =>       self::$__testParams['left_percent'],
+                'right_percent' =>      self::$__testParams['right_percent'],
+                'vector_color' =>       self::$__testParams['vector_color'],
+                'stroke_color' =>       self::$__testParams['stroke_color'],
+                'highlight_color' =>    self::$__testParams['stroke_color'],
+                'vector_opacity' =>     self::$__testParams['vector_opacity'],
+                'stroke_opacity' =>     self::$__testParams['stroke_opacity'],
+                'stroke_width' =>       self::$__testParams['stroke_width'],
+                'point_radius' =>       self::$__testParams['point_radius']
             )
         );
 
         // Hit the route.
-        $this->dispatch('neatline-exhibits/editor/save');
+        $this->dispatch('neatline-exhibits/editor/ajax/save');
 
         // Get the record and check the attributes.
         $record = $this->_recordsTable->getRecordByItemAndExhibit($item, $neatline);
@@ -1509,31 +1549,32 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         // Form the POST with new geocoverage data.
         $this->request->setMethod('POST')
             ->setPost(array(
-                'item_id' =>        $item->id,
-                'record_id' =>      '',
-                'neatline_id' =>    $neatline->id,
-                'space_active' =>   (string) self::$__testParams['space_active'],
-                'time_active' =>    (string) self::$__testParams['time_active'],
-                'geocoverage' =>    '',
-                'title' =>          self::$__testParams['title'],
-                'description' =>    self::$__testParams['description'],
-                'start_date' =>     self::$__testParams['start_date'],
-                'start_time' =>     self::$__testParams['start_time'],
-                'end_date' =>       self::$__testParams['end_date'],
-                'end_time' =>       self::$__testParams['end_time'],
-                'left_percent' =>   self::$__testParams['left_percent'],
-                'right_percent' =>  self::$__testParams['right_percent'],
-                'vector_color' =>   self::$__testParams['vector_color'],
-                'stroke_color' =>   self::$__testParams['stroke_color'],
-                'vector_opacity' => self::$__testParams['vector_opacity'],
-                'stroke_opacity' => self::$__testParams['stroke_opacity'],
-                'stroke_width' =>   self::$__testParams['stroke_width'],
-                'point_radius' =>   self::$__testParams['point_radius']
+                'item_id' =>            $item->id,
+                'record_id' =>          '',
+                'exhibit_id' =>         $neatline->id,
+                'space_active' =>       (string) self::$__testParams['space_active'],
+                'time_active' =>        (string) self::$__testParams['time_active'],
+                'geocoverage' =>        '',
+                'title' =>              self::$__testParams['title'],
+                'description' =>        self::$__testParams['description'],
+                'start_date' =>         self::$__testParams['start_date'],
+                'start_time' =>         self::$__testParams['start_time'],
+                'end_date' =>           self::$__testParams['end_date'],
+                'end_time' =>           self::$__testParams['end_time'],
+                'left_percent' =>       self::$__testParams['left_percent'],
+                'right_percent' =>      self::$__testParams['right_percent'],
+                'vector_color' =>       self::$__testParams['vector_color'],
+                'stroke_color' =>       self::$__testParams['stroke_color'],
+                'highlight_color' =>    self::$__testParams['stroke_color'],
+                'vector_opacity' =>     self::$__testParams['vector_opacity'],
+                'stroke_opacity' =>     self::$__testParams['stroke_opacity'],
+                'stroke_width' =>       self::$__testParams['stroke_width'],
+                'point_radius' =>       self::$__testParams['point_radius']
             )
         );
 
         // Hit the route.
-        $this->dispatch('neatline-exhibits/editor/save');
+        $this->dispatch('neatline-exhibits/editor/ajax/save');
 
         // Get the record and check the attributes.
         $record = $this->_recordsTable->find(1);
@@ -1576,7 +1617,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         // Form the POST for a space change.
         $this->request->setMethod('POST')
             ->setPost(array(
-                'neatline_id' => $neatline->id,
+                'exhibit_id' => $neatline->id,
                 'order' => array(
                     $record1->id => 3,
                     $record2->id => 2,
@@ -1587,7 +1628,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         );
 
         // Hit the order save route.
-        $this->dispatch('neatline-exhibits/editor/order');
+        $this->dispatch('neatline-exhibits/editor/ajax/order');
 
         // Reget the items.
         $record1 = $this->_recordsTable->getRecordByItemAndExhibit($item1, $neatline);
@@ -1625,6 +1666,8 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $exhibit->items_h_pos =                 'left';
         $exhibit->items_v_pos =                 'top';
         $exhibit->items_height =                'partial';
+        $exhibit->h_percent =                   50;
+        $exhibit->v_percent =                   50;
         $exhibit->added =                       '2011-12-05 09:16:00';
         $exhibit->map_id =                      1;
         $exhibit->save();
@@ -1632,19 +1675,21 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         // Form the POST for a space change.
         $this->request->setMethod('POST')
             ->setPost(array(
-                'neatline_id' =>                $exhibit->id,
+                'exhibit_id' =>                $exhibit->id,
                 'is_map' =>                     1,
                 'is_timeline' =>                1,
                 'is_items' =>                   1,
                 'top_element' =>                'map',
                 'items_h_pos' =>                'right',
                 'items_v_pos' =>                'bottom',
-                'items_height' =>               'full'
+                'items_height' =>               'full',
+                'h_percent' =>                  30,
+                'v_percent' =>                  70
             )
         );
 
         // Hit the arrangement save route, reget the exhibit.
-        $this->dispatch('neatline-exhibits/editor/arrangement');
+        $this->dispatch('neatline-exhibits/editor/ajax/arrangement');
         $exhibit = $this->_exhibitsTable->find($exhibit->id);
 
         // Check the attributes.
@@ -1655,6 +1700,8 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->assertEquals($exhibit->items_h_pos, 'right');
         $this->assertEquals($exhibit->items_v_pos, 'bottom');
         $this->assertEquals($exhibit->items_height, 'full');
+        $this->assertEquals($exhibit->h_percent, 30);
+        $this->assertEquals($exhibit->v_percent, 70);
 
         // Check the JSON representation of the updated exhibit.
         $response = $this->getResponse()->getBody('default');
@@ -1669,6 +1716,8 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->assertContains('"is_map":1', $response);
         $this->assertContains('"is_timeline":1', $response);
         $this->assertContains('"is_items":1', $response);
+        $this->assertContains('"h_percent":30', $response);
+        $this->assertContains('"v_percent":70', $response);
         $this->assertContains('"default_map_bounds":null', $response);
         $this->assertContains('"default_map_zoom":null', $response);
         $this->assertContains('"default_focus_date":null', $response);
@@ -1709,19 +1758,21 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         // Form the POST for a space change.
         $this->request->setMethod('POST')
             ->setPost(array(
-                'neatline_id' =>                $exhibit->id,
+                'exhibit_id' =>                $exhibit->id,
                 'is_map' =>                     '1',
                 'is_timeline' =>                '1',
                 'is_items' =>                   '1',
                 'top_element' =>                'map',
                 'items_h_pos' =>                'right',
                 'items_v_pos' =>                'bottom',
-                'items_height' =>               'full'
+                'items_height' =>               'full',
+                'h_percent' =>                  '30',
+                'v_percent' =>                  '70'
             )
         );
 
         // Hit the arrangement save route, reget the exhibit.
-        $this->dispatch('neatline-exhibits/editor/arrangement');
+        $this->dispatch('neatline-exhibits/editor/ajax/arrangement');
         $exhibit = $this->_exhibitsTable->find($exhibit->id);
 
         // Check the attributes.
@@ -1732,6 +1783,8 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->assertEquals($exhibit->items_h_pos, 'right');
         $this->assertEquals($exhibit->items_v_pos, 'bottom');
         $this->assertEquals($exhibit->items_height, 'full');
+        $this->assertEquals($exhibit->h_percent, 30);
+        $this->assertEquals($exhibit->v_percent, 70);
 
         // Check the JSON representation of the updated exhibit.
         $response = $this->getResponse()->getBody('default');
@@ -1746,6 +1799,8 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->assertContains('"is_map":1', $response);
         $this->assertContains('"is_timeline":1', $response);
         $this->assertContains('"is_items":1', $response);
+        $this->assertContains('"h_percent":30', $response);
+        $this->assertContains('"v_percent":70', $response);
         $this->assertContains('"default_map_bounds":null', $response);
         $this->assertContains('"default_map_zoom":null', $response);
         $this->assertContains('"default_focus_date":null', $response);
@@ -1775,21 +1830,23 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         // Form the POST.
         $this->request->setMethod('POST')
             ->setPost(array(
-                'neatline_id' => $exhibit->id,
+                'exhibit_id' => $exhibit->id,
                 'map_extent' => 'extent',
                 'map_zoom' => 1,
-                'timeline_center' => 'center'
+                'timeline_center' => 'center',
+                'timeline_zoom' => 10
             )
         );
 
         // Hit the positions save route, reget the exhibit.
-        $this->dispatch('neatline-exhibits/editor/positions');
+        $this->dispatch('neatline-exhibits/editor/ajax/positions');
         $exhibit = $this->_exhibitsTable->find($exhibit->id);
 
         // Check the attributes.
         $this->assertEquals($exhibit->default_map_bounds, 'extent');
         $this->assertEquals($exhibit->default_map_zoom, 1);
         $this->assertEquals($exhibit->default_focus_date, 'center');
+        $this->assertEquals($exhibit->default_timeline_zoom, 10);
 
     }
 
@@ -1811,7 +1868,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         // Form the POST.
         $this->request->setMethod('POST')
             ->setPost(array(
-                'neatline_id' => $exhibit->id,
+                'exhibit_id' => $exhibit->id,
                 'item_id' => $item->id,
                 'record_id' => $record->id,
                 'extent' => 'BOUNDS()',
@@ -1823,7 +1880,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->assertEquals($this->_recordsTable->count(), 1);
 
         // Hit the focus route, reget the record.
-        $this->dispatch('neatline-exhibits/editor/focus');
+        $this->dispatch('neatline-exhibits/editor/ajax/focus');
         $record = $this->_recordsTable->find($record->id);
 
         // Should not create a new record.
@@ -1839,7 +1896,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
     /**
      * When a new item-specific map focus data is saved via the /focus route
      * and there is not an extant data record for the exhibit/item, create a
-     * new item and set theattributes.
+     * new item and set the attributes.
      *
      * @return void.
      */
@@ -1853,7 +1910,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         // Form the POST.
         $this->request->setMethod('POST')
             ->setPost(array(
-                'neatline_id' => $exhibit->id,
+                'exhibit_id' => $exhibit->id,
                 'item_id' => $item->id,
                 'record_id' => '',
                 'extent' => 'BOUNDS()',
@@ -1865,7 +1922,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->assertEquals($this->_recordsTable->count(), 0);
 
         // Hit the focus route, reget the record.
-        $this->dispatch('neatline-exhibits/editor/focus');
+        $this->dispatch('neatline-exhibits/editor/ajax/focus');
         $record = $this->_recordsTable->getRecordByItemAndExhibit($item, $exhibit);
 
         // Should not create a new record.
@@ -1896,7 +1953,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         // Form the POST.
         $this->request->setMethod('POST')
             ->setPost(array(
-                'neatline_id' => $exhibit->id,
+                'exhibit_id' => $exhibit->id,
                 'item_id' => '',
                 'record_id' => $record->id,
                 'extent' => 'BOUNDS()',
@@ -1908,7 +1965,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->assertEquals($this->_recordsTable->count(), 1);
 
         // Hit the focus route, reget the record.
-        $this->dispatch('neatline-exhibits/editor/focus');
+        $this->dispatch('neatline-exhibits/editor/ajax/focus');
         $record = $this->_recordsTable->find($record->id);
 
         // Should not create a new record.
@@ -1940,7 +1997,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         // Form the POST.
         $this->request->setMethod('POST')
             ->setPost(array(
-                'neatline_id' => $exhibit->id,
+                'exhibit_id' => $exhibit->id,
                 'item_id' => $item->id,
                 'record_id' => '',
                 'extent' => 'BOUNDS()',
@@ -1952,7 +2009,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->assertEquals($this->_recordsTable->count(), 1);
 
         // Hit the focus route, reget the record.
-        $this->dispatch('neatline-exhibits/editor/focus');
+        $this->dispatch('neatline-exhibits/editor/ajax/focus');
         $record = $this->_recordsTable->find($record->id);
 
         // Should not create a new record.
@@ -1977,14 +2034,25 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $neatline = $this->helper->_createNeatline();
         $item = $this->helper->_createItem();
 
+        // Prepare the request.
+        $this->request->setMethod('GET')
+            ->setParams(array(
+                'exhibit_id' => $neatline->id
+            )
+        );
+
         // 0 records.
         $this->assertEquals($this->_recordsTable->count(), 0);
 
         // Hit the route, check for the markup.
-        $this->dispatch('neatline-exhibits/editor/add');
+        $this->dispatch('neatline-exhibits/editor/ajax/add');
 
         // 1 record.
         $this->assertEquals($this->_recordsTable->count(), 1);
+
+        // Check identity.
+        $newRecord = $this->_recordsTable->find(1);
+        $this->assertEquals($newRecord->exhibit_id, $neatline->id);
 
     }
 
@@ -2014,7 +2082,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->assertEquals($this->_recordsTable->count(), 2);
 
         // Hit the route, check for the markup.
-        $this->dispatch('neatline-exhibits/editor/delete');
+        $this->dispatch('neatline-exhibits/editor/ajax/delete');
 
         // 1 record.
         $this->assertEquals($this->_recordsTable->count(), 1);
@@ -2041,6 +2109,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         // Set system styling defaults.
         set_option('vector_color', '#5033de');
         set_option('stroke_color', '#1e2ee6');
+        set_option('highlight_color', '#000000');
         set_option('vector_opacity', 20);
         set_option('stroke_opacity', 70);
         set_option('stroke_width', 4);
@@ -2051,31 +2120,36 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
             ->setPost(array(
                 'exhibit_id' => $exhibit->id,
                 'vector_color' => '#ffffff',
-                'vector_opacity' => 5,
                 'stroke_color' => '#ffffff',
+                'highlight_color' => '#ffffff',
+                'vector_opacity' => 5,
                 'stroke_opacity' => 5,
                 'stroke_width' => 5,
-                'point_radius' => 5
+                'point_radius' => 5,
+                'base_layer' => 1
             )
         );
 
         // Hit the route, re-get the record.
-        $this->dispatch('neatline-exhibits/editor/mapsettings');
+        $this->dispatch('neatline-exhibits/editor/ajax/mapsettings');
         $exhibit = $this->_exhibitsTable->find($exhibit->id);
 
         // Check.
         $this->assertNotNull($exhibit->default_vector_color);
         $this->assertEquals($exhibit->default_vector_color, '#ffffff');
-        $this->assertNotNull($exhibit->default_vector_opacity);
-        $this->assertEquals($exhibit->default_vector_opacity, 5);
         $this->assertNotNull($exhibit->default_stroke_color);
         $this->assertEquals($exhibit->default_stroke_color, '#ffffff');
+        $this->assertNotNull($exhibit->default_highlight_color);
+        $this->assertEquals($exhibit->default_highlight_color, '#ffffff');
+        $this->assertNotNull($exhibit->default_vector_opacity);
+        $this->assertEquals($exhibit->default_vector_opacity, 5);
         $this->assertNotNull($exhibit->default_stroke_opacity);
         $this->assertEquals($exhibit->default_stroke_opacity, 5);
         $this->assertNotNull($exhibit->default_stroke_width);
         $this->assertEquals($exhibit->default_stroke_width, 5);
         $this->assertNotNull($exhibit->default_point_radius);
         $this->assertEquals($exhibit->default_point_radius, 5);
+        $this->assertEquals($exhibit->default_base_layer, 1);
 
     }
 
@@ -2098,25 +2172,90 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
                 'vector_color' => get_option('vector_color'),
                 'vector_opacity' => get_option('vector_opacity'),
                 'stroke_color' => get_option('stroke_color'),
+                'highlight_color' => get_option('highlight_color'),
                 'stroke_opacity' => get_option('stroke_opacity'),
                 'stroke_width' => get_option('stroke_width'),
-                'point_radius' => get_option('point_radius')
+                'point_radius' => get_option('point_radius'),
+                'base_layer' => 1
             )
         );
 
         // Hit the route, re-get the record.
-        $this->dispatch('neatline-exhibits/editor/mapsettings');
+        $this->dispatch('neatline-exhibits/editor/ajax/mapsettings');
         $exhibit = $this->_exhibitsTable->find($exhibit->id);
 
         // Check.
         $this->assertNull($exhibit->default_vector_color);
-        $this->assertNull($exhibit->default_vector_opacity);
         $this->assertNull($exhibit->default_stroke_color);
+        $this->assertNull($exhibit->default_highlight_color);
+        $this->assertNull($exhibit->default_vector_opacity);
         $this->assertNull($exhibit->default_stroke_opacity);
         $this->assertNull($exhibit->default_stroke_width);
         $this->assertNull($exhibit->default_point_radius);
+        $this->assertEquals($exhibit->default_base_layer, 1);
 
     }
+
+    /**
+     * The /mapsettings route should null out set row-level style defaults on
+     * the exhibit record when new values match the system defaults.
+     *
+     * @return void.
+     */
+    public function testMapSettingsWithNonNovelValuesAndSetRowValues()
+    {
+
+        // Create an exhibit.
+        $exhibit = $this->helper->_createNeatline();
+        $exhibit->default_vector_color = '#000000';
+        $exhibit->default_stroke_color = '#000000';
+        $exhibit->default_vector_opacity = 1;
+        $exhibit->default_stroke_opacity = 1;
+        $exhibit->default_stroke_width = 1;
+        $exhibit->default_point_radius = 1;
+        $exhibit->save();
+
+        // Set system styling defaults.
+        set_option('vector_color', '#5033de');
+        set_option('stroke_color', '#1e2ee6');
+        set_option('highlight_color', '#000000');
+        set_option('vector_opacity', 20);
+        set_option('stroke_opacity', 70);
+        set_option('stroke_width', 4);
+        set_option('point_radius', 6);
+
+        // Form the POST.
+        $this->request->setMethod('POST')
+            ->setPost(array(
+                'exhibit_id' => $exhibit->id,
+                'vector_color' => get_option('vector_color'),
+                'stroke_color' => get_option('stroke_color'),
+                'highlight_color' => get_option('highlight_color'),
+                'vector_opacity' => get_option('vector_opacity'),
+                'stroke_opacity' => get_option('stroke_opacity'),
+                'stroke_width' => get_option('stroke_width'),
+                'point_radius' => get_option('point_radius'),
+                'base_layer' => 1
+            )
+        );
+
+        // Hit the route, re-get the record.
+        $this->dispatch('neatline-exhibits/editor/ajax/mapsettings');
+        $exhibit = $this->_exhibitsTable->find($exhibit->id);
+
+        // Check.
+        $this->assertNull($exhibit->default_vector_color);
+        $this->assertNull($exhibit->default_stroke_color);
+        $this->assertNull($exhibit->default_highlight_color);
+        $this->assertNull($exhibit->default_vector_opacity);
+        $this->assertNull($exhibit->default_stroke_opacity);
+        $this->assertNull($exhibit->default_stroke_width);
+        $this->assertNull($exhibit->default_point_radius);
+        $this->assertEquals($exhibit->default_base_layer, 1);
+
+    }
+
+
 
     /**
      * The /resetstyles action should null all style attributes for a record.
@@ -2132,8 +2271,9 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
 
         // Set styles.
         $record->vector_color = '#ffffff';
-        $record->vector_opacity = 50;
         $record->stroke_color = '#ffffff';
+        $record->highlight_color = '#ffffff';
+        $record->vector_opacity = 50;
         $record->stroke_opacity = 50;
         $record->stroke_width = 50;
         $record->point_radius = 50;
@@ -2147,13 +2287,14 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         );
 
         // Hit the route, re-get the record.
-        $this->dispatch('neatline-exhibits/editor/resetstyles');
+        $this->dispatch('neatline-exhibits/editor/ajax/resetstyles');
         $record = $this->_recordsTable->find($record->id);
 
         // Check.
         $this->assertNull($record->vector_color);
-        $this->assertNull($record->vector_opacity);
         $this->assertNull($record->stroke_color);
+        $this->assertNull($record->highlight_color);
+        $this->assertNull($record->vector_opacity);
         $this->assertNull($record->stroke_opacity);
         $this->assertNull($record->stroke_width);
         $this->assertNull($record->point_radius);

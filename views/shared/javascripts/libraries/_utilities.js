@@ -1,4 +1,4 @@
-/*
+/**
  * Miscellaneous JavaScript workers.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
@@ -24,8 +24,8 @@
 Array.prototype.remove = function(el) {
 
     for (var i = 0; i < this.length; i++) {
-        if (this[i] == el) {
-            this.splice(i,1);
+        if (this[i] === el) {
+            this.splice(i, 1);
             this.remove(el);
             break;
         }
@@ -45,4 +45,14 @@ Array.prototype.contains = function(el) {
 
     return match;
 
+};
+
+// Manually define indexOf (missing in IE8-)
+Array.prototype.indexOf = function(obj) {
+    for (var i=0; i<this.length; i++) {
+        if (this[i]==obj) {
+            return i;
+        }
+    }
+    return -1;
 };

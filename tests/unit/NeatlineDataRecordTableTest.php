@@ -376,6 +376,80 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
     }
 
     /**
+     * When there are records for an exhibit that do not have a parent item,
+     * searchNeatlineRecordsByExhibit() should return the records with title
+     * substrings that match the passed search parameter.
+     *
+     * @return void.
+     */
+    public function testSearchNeatlineRecordsByExhibitWithRecords()
+    {
+
+        // Create an exhibit.
+        $neatline = $this->helper->_createNeatline();
+
+        // Create two records, one with a parent item and one without.
+        $record1 = new NeatlineDataRecord(null, $neatline);
+        $record1->title = 'test title';
+        $record1->save();
+        $record2 = new NeatlineDataRecord(null, $neatline);
+        $record2->title = 'no match';
+        $record2->save();
+
+        // Should get 1 record.
+        $records = $this->_recordsTable->searchNeatlineRecordsByExhibit($neatline, 'test');
+        $this->assertEquals(count($records), 1);
+
+        // Check identity.
+        $this->assertEquals($records[0]->id, $record1->id);
+
+    }
+
+    /**
+     * When there are no item-null records for an exhibit searchNeatlineRecordsByExhibit()
+     * should return false.
+     *
+     * @return void.
+     */
+    public function testSearchNeatlineRecordsByExhibitWithNoRecords()
+    {
+
+        // Create an exhibit.
+        $neatline = $this->helper->_createNeatline();
+
+        // False when no records.
+        $records = $this->_recordsTable->searchNeatlineRecordsByExhibit($neatline, 'test');
+        $this->assertFalse($records);
+
+    }
+
+    /**
+     * When there are no item-null records for an exhibit that match the passed search
+     * string, searchNeatlineRecordsByExhibit() should return false.
+     *
+     * @return void.
+     */
+    public function testSearchNeatlineRecordsByExhibitWithNoMatchingRecords()
+    {
+
+        // Create an exhibit.
+        $neatline = $this->helper->_createNeatline();
+
+        // Create two records, one with a parent item and one without.
+        $record1 = new NeatlineDataRecord(null, $neatline);
+        $record1->title = 'no match';
+        $record1->save();
+        $record2 = new NeatlineDataRecord(null, $neatline);
+        $record2->title = 'another no match';
+        $record2->save();
+
+        // Should return false for no matches.
+        $records = $this->_recordsTable->searchNeatlineRecordsByExhibit($neatline, 'test');
+        $this->assertFalse($records);
+
+    }
+
+    /**
      * getActiveRecordsByExhibit() should return all data records associated
      * with a given Neatline exhibit that have an active space or time record.
      *
@@ -511,12 +585,14 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
         $record2->title = 'Item 2 Title';
         $record1->vector_color = '#ffffff';
         $record2->vector_color = '#000000';
+        $record1->stroke_color = '#ffffff';
+        $record2->stroke_color = '#000000';
+        $record1->highlight_color = '#ffffff';
+        $record2->highlight_color = '#000000';
         $record1->vector_opacity = 60;
         $record2->vector_opacity = 40;
         $record1->stroke_opacity = 60;
         $record2->stroke_opacity = 40;
-        $record1->stroke_color = '#ffffff';
-        $record2->stroke_color = '#000000';
         $record1->stroke_width = 3;
         $record2->stroke_width = 2;
         $record1->point_radius = 3;
@@ -540,9 +616,10 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
         $this->assertContains('"item_id":' . $item1->id, $json);
         $this->assertContains('"title":"Item 1 Title"', $json);
         $this->assertContains('"vector_color":"#ffffff"', $json);
+        $this->assertContains('"stroke_color":"#ffffff"', $json);
+        $this->assertContains('"highlight_color":"#ffffff"', $json);
         $this->assertContains('"vector_opacity":60', $json);
         $this->assertContains('"stroke_opacity":60', $json);
-        $this->assertContains('"stroke_color":"#ffffff"', $json);
         $this->assertContains('"stroke_width":3', $json);
         $this->assertContains('"point_radius":3', $json);
         $this->assertContains('"bounds":"BOUND(1)"', $json);
@@ -552,9 +629,9 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
         $this->assertContains('"item_id":' . $item2->id, $json);
         $this->assertContains('"title":"Item 1 Title"', $json);
         $this->assertContains('"vector_color":"#000000"', $json);
+        $this->assertContains('"highlight_color":"#000000"', $json);
         $this->assertContains('"vector_opacity":40', $json);
         $this->assertContains('"stroke_opacity":40', $json);
-        $this->assertContains('"stroke_color":"#000000"', $json);
         $this->assertContains('"stroke_width":2', $json);
         $this->assertContains('"point_radius":2', $json);
         $this->assertContains('"bounds":"BOUND(2)"', $json);

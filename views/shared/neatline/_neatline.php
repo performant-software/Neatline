@@ -30,16 +30,17 @@
 
     <div id="map" class="neatline-block"></div>
 
-    <div id="timeline" class="neatline-block neatlinetime-timeline"></div>
+    <div id="timeline" class="neatline-block neatlinetime-timeline">
+        <!-- Timeline zoom buttons. -->
+        <?php echo $this->partial('neatline/_timeline_zoom.php'); ?>
+    </div>
 
     <div id="items" class="neatline-block">
         <div id="items-container"></div>
     </div>
 
-    <div id="scroll">
-        <div class="arrow-left">‹</div>
-        <div class="arrow-right">›</div>
-    </div>
+    <!-- Forward/backward scroll arrows. -->
+    <?php echo $this->partial('neatline/_arrows.php'); ?>
 
 </div>
 
@@ -52,7 +53,11 @@
     // Exhibit parameters.
     var Neatline = <?php echo json_encode($neatline); ?>;
         Neatline.dataSources = <?php echo json_encode($dataSources); ?>;
-        Neatline.public = <?php echo json_encode($public); ?>;
+        Neatline.isPublic = <?php echo json_encode($public); ?>;
+        Neatline.baseLayer = <?php echo json_encode($neatline->getBaseLayer()); ?>;
+        Neatline.proportions = <?php echo json_encode($neatline->getViewportProportions()); ?>;
+        Neatline.timelineZoom = <?php echo $neatline->getTimelineZoom(); ?>;
+        Neatline.highlightColor = '<?php echo $neatline->getStyle('highlight_color'); ?>';
 
     // Map parameters.
     <?php if (isset($map)): ?>
@@ -67,13 +72,13 @@
                 'path' =>   $image['path'],
                 'name' =>   $image['name'],
                 'width' =>  (int) $this->fileMetadata(
-                                $image['record'],
-                                'Omeka Image File',
-                                'Width'),
+                    $image['record'],
+                    'Omeka Image File',
+                    'Width'),
                 'height' => (int) $this->fileMetadata(
-                                $image['record'],
-                                'Omeka Image File',
-                                'Height')
+                    $image['record'],
+                    'Omeka Image File',
+                    'Height')
             )
         ); ?>
 

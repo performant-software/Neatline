@@ -71,7 +71,7 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
         // There should be a 'Create Neatline' button.
         $this->assertQueryContentContains(
             'a.add',
-            'Create a Neatline'
+            'Create an Exhibit'
         );
 
     }

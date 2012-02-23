@@ -272,8 +272,10 @@ describe('Span Styler', function() {
 
         it('should retain existing styles and append new gradient styles', function() {
 
-            // Set a non-gradient-related style on the div.
+            // Create a new div, set a non-gradient-related style, run the widget.
+            div = $('<div></div>');
             div.attr('style', 'top: 10px;');
+            div.spanstyler();
 
             // Build the css and get out the value.
             div.spanstyler('constructCss', '724e85');

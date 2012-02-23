@@ -45,11 +45,108 @@ table th, table td {
     padding: 10px 6px 9px;
 }
 
+.neatline-bar {
+  background-color: hsl(280, 29%, 38%);
+  background-repeat: repeat-x;
+  background-image: -khtml-gradient(linear, left top, left bottom, from(hsl(280, 29%, 58%)), to(hsl(280, 29%, 38%)));
+  background-image: -moz-linear-gradient(top, hsl(280, 29%, 58%), hsl(280, 29%, 38%));
+  background-image: -ms-linear-gradient(top, hsl(280, 29%, 58%), hsl(280, 29%, 38%));
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, hsl(280, 29%, 58%)), color-stop(100%, hsl(280, 29%, 38%)));
+  background-image: -webkit-linear-gradient(top, hsl(280, 29%, 58%), hsl(280, 29%, 38%));
+  background-image: -o-linear-gradient(top, hsl(280, 29%, 58%), hsl(280, 29%, 38%));
+  background-image: linear-gradient(top, hsl(280, 29%, 58%), hsl(280, 29%, 38%));
+  border-color: hsl(280, 29%, 38%) hsl(280, 29%, 38%) hsl(280, 29%, 33%);
+  color: #fff;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.33);
+  -webkit-font-smoothing: antialiased;
+}
+
+.h-drag, .v-drag {
+    position: absolute;
+    display: none;
+    z-index: 999;
+}
+
+.h-drag {
+    cursor: col-resize;
+    margin: 0 4px 0 0;
+}
+
+.h-drag:hover {
+    border-left: 1px dashed #7e3434;
+}
+
+.v-drag {
+    cursor: ns-resize;
+}
+
+.v-drag:hover {
+    border-top: 1px dashed #7e3434;
+}
+
+
+/* Filters */
+
+.topbar div > ul, .nav {
+  display: block;
+  float: right;
+  margin: 0 20px 0 20px;
+  position: relative;
+  left: 0;
+  height: 100%;
+}
+
+.topbar div > ul > li, .nav > li {
+  display: block;
+  height: 34px;
+}
+
+.topbar div > ul a, .nav a {
+  font-family: 'Crimson Text', Georgia, serif;
+  font-size: 20px !important;
+  padding: 8px 15px 11px 15px;
+  display: block;
+  float: none;
+  line-height: 19px;
+  text-decoration: none;
+  cursor: pointer;
+  color: #f9f9f9;
+  z-index: -99 !important;
+  margin: 0 0 0 0;
+}
+
+.topbar div > ul a:hover, .nav a:hover {
+  color: #fff;
+  text-decoration: none;
+}
+
+.topbar div > ul a.open, .nav a.open {
+  background: rgba(255, 255, 255, 0.05);
+}
+
 
 /* Map */
 
 .olControlLayerSwitcher .maximizeDiv, .olControlLayerSwitcher .minimizeDiv {
     top: 10px !important;
+}
+
+div.title-tip {
+    display: none;
+    position: absolute;
+    bottom: 30px;
+    right: 20px;
+    z-index: 999;
+    font-size: 24px;
+    color: #fff;
+    background-color: #424242;
+    padding: 8px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+    -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
 }
 
 
@@ -80,12 +177,41 @@ table th, table td {
     text-decoration: none;
 }
 
+#zoom-buttons {
+    display: block;
+    position: absolute;
+    top: 10px;
+    left: 17px;
+    height: 36px;
+    width: 18px;
+    z-index: 999;
+}
+
+#zoom-buttons div {
+    display: block;
+    height: 18px;
+    width: 18px;
+    cursor: pointer;
+}
+
+#zoom-buttons .zoom-in {
+    background-image: url('../images/zoom_in.png');
+}
+
+#zoom-buttons .zoom-out {
+    background-image: url('../images/zoom_out.png');
+}
+
 
 /* Items */
 
 #items {
-    background-color: #FFFEF8;
+    background-color: #f9f9f9;
     overflow-y: scroll;
+    -webkit-box-shadow: 1px 1px 6px 1px #4d4d4d;
+    -moz-box-shadow: 1px 1px 6px 1px #4d4d4d;
+    box-shadow: 1px 1px 6px 1px #4d4d4d;
+    z-index: 10;
 }
 
 #items-container ul {
@@ -93,24 +219,27 @@ table th, table td {
     margin: 0;
 }
 
-#items-container li{
+#items-container li {
     cursor: pointer;
 }
 
 #items-container li.item-title {
-    font-size: 20px;
-    font-weight: bold;
+    font-size: 13px;
     color: #202020;
-    padding: 13px 20px;
-    line-height 180px;
+    padding: 6px 20px;
+    line-height: normal !important;
+    border-bottom: 1px dotted #cdcdcd;
 }
 
 #items-container li.item-description {
-    font-size: 14px;
+    display: none;
+    font-size: 13px;
     margin-bottom: 1em;
-    line-height: 20px;
+    line-height: 1.4em;
     color: #616161;
     padding: 5px 20px 0 20px;
+    height: 0;
+    overflow: hidden;
 }
 
 
@@ -130,5 +259,4 @@ table th, table td {
     cursor: pointer;
     font-family: Trykker;
     padding: 0 15px 0 15px;
-    font-weight: bold;
 }

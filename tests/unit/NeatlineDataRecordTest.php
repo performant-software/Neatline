@@ -37,6 +37,7 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         'end_time' => '6:00 AM',
         'vector_color' => '#ffffff',
         'stroke_color' => '#000000',
+        'highlight_color' => '#ff0000',
         'vector_opacity' => 60,
         'stroke_opacity' => 40,
         'stroke_width' => 5,
@@ -85,9 +86,10 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         $record->end_date =                     'enddate';
         $record->end_time =                     'endtime';
         $record->vector_color =                 '#ffffff';
+        $record->stroke_color =                 '#ffffff';
+        $record->highlight_color =              '#ffffff';
         $record->vector_opacity =               50;
         $record->stroke_opacity =               50;
-        $record->stroke_color =                 '#ffffff';
         $record->stroke_width =                 3;
         $record->point_radius =                 3;
         $record->geocoverage =                  'POINT()';
@@ -111,9 +113,10 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         $this->assertEquals($record->end_date, 'enddate');
         $this->assertEquals($record->end_time, 'endtime');
         $this->assertEquals($record->vector_color, '#ffffff');
+        $this->assertEquals($record->stroke_color, '#ffffff');
+        $this->assertEquals($record->highlight_color, '#ffffff');
         $this->assertEquals($record->vector_opacity, 50);
         $this->assertEquals($record->stroke_opacity, 50);
-        $this->assertEquals($record->stroke_color, '#ffffff');
         $this->assertEquals($record->stroke_width, 3);
         $this->assertEquals($record->point_radius, 3);
         $this->assertEquals($record->geocoverage, 'POINT()');
@@ -575,6 +578,53 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
     }
 
     /**
+     * If a passed style attribute matches the exhibit default and the record
+     * style is not null, null out the value.
+     *
+     * @return void.
+     */
+    public function testSetStyleWithDefaultsWhenValueIsNotNovelWithExistingNonNullValue()
+    {
+
+        // Create a record.
+        $neatline = $this->helper->_createNeatline();
+        $item = $this->helper->_createItem();
+        $record = new NeatlineDataRecord($item, $neatline);
+        $record->vector_color = '#ffffff';
+        $record->vector_opacity = 20;
+        $record->stroke_color = '#ffffff';
+        $record->stroke_opacity = 20;
+        $record->stroke_width = 20;
+        $record->point_radius = 20;
+        $record->save();
+
+        // Set.
+        $this->assertTrue($record->setStyle('vector_color', get_option('vector_color')));
+        $this->assertTrue($record->setStyle('vector_opacity', get_option('vector_opacity')));
+        $this->assertTrue($record->setStyle('stroke_color', get_option('stroke_color')));
+        $this->assertTrue($record->setStyle('stroke_opacity', get_option('stroke_opacity')));
+        $this->assertTrue($record->setStyle('stroke_width', get_option('stroke_width')));
+        $this->assertTrue($record->setStyle('point_radius', get_option('point_radius')));
+
+        // Check.
+        $this->assertNull($record->vector_color);
+        $this->assertNull($record->vector_opacity);
+        $this->assertNull($record->stroke_color);
+        $this->assertNull($record->stroke_opacity);
+        $this->assertNull($record->stroke_width);
+        $this->assertNull($record->point_radius);
+
+        // Check getters.
+        $this->assertEquals($record->getStyle('vector_color'), get_option('vector_color'));
+        $this->assertEquals($record->getStyle('vector_opacity'),get_option('vector_opacity'));
+        $this->assertEquals($record->getStyle('stroke_color'), get_option('stroke_color'));
+        $this->assertEquals($record->getStyle('stroke_opacity'), get_option('stroke_opacity'));
+        $this->assertEquals($record->getStyle('stroke_width'), get_option('stroke_width'));
+        $this->assertEquals($record->getStyle('point_radius'), get_option('point_radius'));
+
+    }
+
+    /**
      * If 'null' is passed to setGeocoverage, do not set.
      *
      * @return void.
@@ -953,6 +1003,7 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         $record->end_time =         self::$__testParams['end_time'];
         $record->vector_color =     self::$__testParams['vector_color'];
         $record->stroke_color =     self::$__testParams['stroke_color'];
+        $record->highlight_color =  self::$__testParams['highlight_color'];
         $record->vector_opacity =   self::$__testParams['vector_opacity'];
         $record->stroke_opacity =   self::$__testParams['stroke_opacity'];
         $record->stroke_width =     self::$__testParams['stroke_width'];
@@ -1014,12 +1065,22 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         );
 
         $this->assertContains(
+            '"stroke_color":"' . self::$__testParams['stroke_color'] . '"',
+            $json
+        );
+
+        $this->assertContains(
+            '"highlight_color":"' . self::$__testParams['highlight_color'] . '"',
+            $json
+        );
+
+        $this->assertContains(
             '"vector_opacity":' . self::$__testParams['vector_opacity'],
             $json
         );
 
         $this->assertContains(
-            '"stroke_color":"' . self::$__testParams['stroke_color'] . '"',
+            '"stroke_opacity":' . self::$__testParams['stroke_opacity'],
             $json
         );
 
@@ -1030,6 +1091,120 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
 
         $this->assertContains(
             '"point_radius":' . self::$__testParams['point_radius'],
+            $json
+        );
+
+    }
+
+    /**
+     * The buildEditFormJson() method should cast integer styles.
+     *
+     * @return void.
+     */
+    public function testBuildEditFormJsonIntTypecasting()
+    {
+
+        // Create an item and exhibit.
+        $neatline = $this->helper->_createNeatline();
+        $record = new NeatlineDataRecord(null, $neatline);
+
+        // Populate fields.
+        $record->title =            self::$__testParams['title'];
+        $record->description =      self::$__testParams['description'];
+        $record->start_date =       self::$__testParams['start_date'];
+        $record->start_time =       self::$__testParams['start_time'];
+        $record->end_date =         self::$__testParams['end_date'];
+        $record->end_time =         self::$__testParams['end_time'];
+        $record->vector_color =     self::$__testParams['vector_color'];
+        $record->stroke_color =     self::$__testParams['stroke_color'];
+        $record->highlight_color =  self::$__testParams['highlight_color'];
+        $record->vector_opacity =   '20';
+        $record->stroke_opacity =   '30';
+        $record->stroke_width =     '5';
+        $record->point_radius =     '6';
+        $record->left_percent =     '0';
+        $record->right_percent =    '100';
+        $record->geocoverage =      self::$__testParams['geocoverage'];
+        $record->space_active =     self::$__testParams['space_active'];
+        $record->time_active =      self::$__testParams['time_active'];
+        $record->save();
+
+        // Ping the method for the json.
+        $json = $record->buildEditFormJson();
+
+        // Check the construction.
+        $this->assertContains(
+            '"title":"' . self::$__testParams['title'] . '"',
+            $json
+        );
+
+        $this->assertContains(
+            '"description":"' . self::$__testParams['description'] . '"',
+            $json
+        );
+
+        $this->assertContains(
+            '"start_date":"' . self::$__testParams['start_date'] . '"',
+            $json
+        );
+
+        $this->assertContains(
+            '"start_time":"' . self::$__testParams['start_time'] . '"',
+            $json
+        );
+
+        $this->assertContains(
+            '"end_date":"' . self::$__testParams['end_date'] . '"',
+            $json
+        );
+
+        $this->assertContains(
+            '"end_time":"' . self::$__testParams['end_time'] . '"',
+            $json
+        );
+
+        $this->assertContains(
+            '"left_percent":0',
+            $json
+        );
+
+        $this->assertContains(
+            '"right_percent":100',
+            $json
+        );
+
+        $this->assertContains(
+            '"vector_color":"' . self::$__testParams['vector_color'] . '"',
+            $json
+        );
+
+        $this->assertContains(
+            '"stroke_color":"' . self::$__testParams['stroke_color'] . '"',
+            $json
+        );
+
+        $this->assertContains(
+            '"highlight_color":"' . self::$__testParams['highlight_color'] . '"',
+            $json
+        );
+
+        $this->assertContains(
+            '"vector_opacity":20',
+            $json
+        );
+
+        $this->assertContains(
+            '"stroke_opacity":30',
+            $json
+        );
+
+        $this->assertContains(
+            '"stroke_width":5',
+            $json
+        );
+
+        $this->assertContains(
+            '"point_radius":6',
             $json
         );
 
@@ -1100,22 +1275,32 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         );
 
         $this->assertContains(
-            '"vector_opacity":' . get_option('vector_opacity'),
-            $json
-        );
-
-        $this->assertContains(
             '"stroke_color":"' . get_option('stroke_color') . '"',
             $json
         );
 
         $this->assertContains(
-            '"stroke_width":' . get_option('stroke_width'),
+            '"highlight_color":"' . get_option('highlight_color') . '"',
             $json
         );
 
         $this->assertContains(
-            '"point_radius":' . get_option('point_radius'),
+            '"vector_opacity":' . (int) get_option('vector_opacity'),
+            $json
+        );
+
+        $this->assertContains(
+            '"stroke_opacity":' . (int) get_option('stroke_opacity'),
+            $json
+        );
+
+        $this->assertContains(
+            '"stroke_width":' . (int) get_option('stroke_width'),
+            $json
+        );
+
+        $this->assertContains(
+            '"point_radius":' . (int) get_option('point_radius'),
             $json
         );
 
@@ -1194,7 +1379,12 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         );
 
         $this->assertContains(
-            '"vector_opacity":' . get_option('vector_opacity'),
+            '"vector_opacity":' . (int) get_option('vector_opacity'),
+            $json
+        );
+
+        $this->assertContains(
+            '"stroke_opacity":' . (int) get_option('stroke_opacity'),
             $json
         );
 
@@ -1204,12 +1394,12 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         );
 
         $this->assertContains(
-            '"stroke_width":' . get_option('stroke_width'),
+            '"stroke_width":' . (int) get_option('stroke_width'),
             $json
         );
 
         $this->assertContains(
-            '"point_radius":' . get_option('point_radius'),
+            '"point_radius":' . (int) get_option('point_radius'),
             $json
         );
 
@@ -1230,8 +1420,9 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
 
         // Set styles.
         $record->vector_color = '#ffffff';
-        $record->vector_opacity = 50;
         $record->stroke_color = '#ffffff';
+        $record->highlight_color = '#ffffff';
+        $record->vector_opacity = 50;
         $record->stroke_opacity = 50;
         $record->stroke_width = 50;
         $record->point_radius = 50;
@@ -1241,11 +1432,42 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
 
         // Check.
         $this->assertNull($record->vector_color);
-        $this->assertNull($record->vector_opacity);
         $this->assertNull($record->stroke_color);
+        $this->assertNull($record->highlight_color);
+        $this->assertNull($record->vector_opacity);
         $this->assertNull($record->stroke_opacity);
         $this->assertNull($record->stroke_width);
         $this->assertNull($record->point_radius);
+
+    }
+
+    /**
+     * save() should update the modified field on the parent exhibit.
+     *
+     * @return void.
+     */
+    public function testUpdateExhibitModifiedOnSave()
+    {
+
+        // Get time.
+        $timestamp = neatline_getTimestamp();
+
+        // Set the modified date back, get delta and check.
+        $exhibit = $this->helper->_createNeatline();
+        $exhibit->modified = '2010-01-01 00:00:00';
+        $delta = strtotime($timestamp) - strtotime($exhibit->modified);
+        $this->assertGreaterThanOrEqual(1, $delta);
+
+        // Create a record and save.
+        $record = new NeatlineDataRecord(null, $exhibit);
+        $record->save();
+
+        // Reget the record.
+        $exhibit = $record->getExhibit();
+
+        // Get delta and check.
+        $delta = strtotime($timestamp) - strtotime($exhibit->modified);
+        $this->assertLessThanOrEqual(1, $delta);
 
     }
 

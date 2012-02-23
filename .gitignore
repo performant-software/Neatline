@@ -5,4 +5,5 @@ build/code-browser/
 build/coverage/
 build/logs/
 build/pdepend/
+build/tmp/
 spec/javascripts/fixtures/

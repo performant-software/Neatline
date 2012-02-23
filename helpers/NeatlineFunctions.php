@@ -52,11 +52,13 @@ function neatline_queueEditorAssets()
     // CSS.
     queue_css('bootstrap.xtra.min');
     queue_css('neatline-editor');
+    queue_css('neatline-fullscreen');
     queue_css('gradient-builder');
-    queue_css('jquery.miniColors');
     queue_css('configure-layout');
     queue_css('configure-map');
     queue_css('configure-items');
+    queue_css('jquery.miniColors');
+    queue_css('jquery.cleditor');
 
     // Application classes and controller script.
     queue_js('editor/item_browser', 'javascripts');
@@ -74,10 +76,12 @@ function neatline_queueEditorAssets()
     queue_js('editor/utilities/_gradient_builder', 'javascripts');
     queue_js('editor/utilities/_dropdown', 'javascripts');
     queue_js('editor/utilities/_integer_dragger', 'javascripts');
+    queue_js('editor/utilities/_fieldset_expander', 'javascripts');
     queue_js('editor/_constructEditor', 'javascripts');
 
     // Extenal libraries.
     queue_js('libraries/jquery.miniColors-0.1/jquery.miniColors.min', 'javascripts');
+    queue_js('libraries/CLEditor-1.3.0/jquery.cleditor.min', 'javascripts');
 
 }
 
@@ -86,22 +90,56 @@ function neatline_queueEditorAssets()
  *
  * @return void.
  */
-function neatline_queuePublicAssets()
+function neatline_queueInThemeAssets()
 {
 
     // Neatline runner.
-    queue_js('_constructNeatline', 'javascripts');
+    queue_js('_constructInThemeNeatline', 'javascripts');
 
     // Public-specific CSS additions.
     queue_css('neatline-public');
 
-    $openlayersSrc = 'http://openlayers.org/api/OpenLayers.js';
-    $simileSrc = 'http://api.simile-widgets.org/timeline/2.3.1/timeline-api.js?bundle=true';
+    $google = 'http://maps.google.com/maps/api/js?v=3.5&sensor=false';
 
     // API calls.
     $headScript = __v()->headScript();
-    $headScript->appendScript('','text/javascript', array('src' => $openlayersSrc));
-    $headScript->appendScript('', 'text/javascript', array('src' => $simileSrc));
+    $headScript->appendScript('', 'text/javascript', array('src' => $google));
+
+}
+
+/**
+ * Include the fullscreen stylesheet.
+ *
+ * @return void.
+ */
+function neatline_queueFullscreenAssets()
+{
+
+    // Neatline runner.
+    queue_js('_constructFullscreenNeatline', 'javascripts');
+    queue_js('utilities/_fullscreen_positioner', 'javascripts');
+
+    // Fullscreen-specific CSS.
+    queue_css('bootstrap.xtra.min');
+    queue_css('neatline-fullscreen');
+
+}
+
+/**
+ * Include the embedded stylesheet.
+ *
+ * @return void.
+ */
+function neatline_queueEmbedAssets()
+{
+
+    // Neatline runner.
+    queue_js('_constructFullscreenNeatline', 'javascripts');
+    queue_js('utilities/_fullscreen_positioner', 'javascripts');
+
+    // Fullscreen-specific CSS.
+    queue_css('bootstrap.xtra.min');
+    queue_css('neatline-embedded');
 
 }
 
@@ -129,7 +167,10 @@ function neatline_queueNeatlineAssets()
     queue_js('jquery.getscrollbarwidth', 'javascripts/libraries');
 
     // 3rd party code.
+    queue_js('libraries/openlayers/OpenLayers', 'javascripts');
+    queue_js('libraries/simile/timeline-api/timeline-api', 'javascripts');
     queue_js('libraries/taffy-min', 'javascripts');
+    queue_js('libraries/underscore-min', 'javascripts');
 
     // Google fonts.
     echo __v()->partial('neatline/_fonts.php');
@@ -566,7 +607,7 @@ function neatline_buildOrderClause($sort_field, $sort_dir)
  *
  * @return string $timestemp The timestamp.
  */
-function neatline_getMysqlDatetime()
+function neatline_getTimestamp()
 {
 
     return date('Y-m-d H:i:s');
@@ -762,5 +803,112 @@ function neatline_getItemMetadata($item, $elementSet, $elementName)
     }
 
     return $text;
+
+}
+
+/**
+ * Install base layers set.
+ *
+ * @return void.
+ */
+function neatline_installBaseLayers()
+{
+
+    $_db = get_db();
+
+    // OpenStreetMaps.
+    $osm = new NeatlineBaseLayer;
+    $osm->name = 'OpenStreetMap';
+    $osm->save();
+
+    // Google physical.
+    $gphy = new NeatlineBaseLayer;
+    $gphy->name = 'Google Physical';
+    $gphy->save();
+
+    // Google streets.
+    $gstr = new NeatlineBaseLayer;
+    $gstr->name = 'Google Streets';
+    $gstr->save();
+
+    // Google hybrid.
+    $ghyb = new NeatlineBaseLayer;
+    $ghyb->name = 'Google Hybrid';
+    $ghyb->save();
+
+    // Google sattelite.
+    $gsat = new NeatlineBaseLayer;
+    $gsat->name = 'Google Satellite';
+    $gsat->save();
+
+}
+
+/**
+ * Set map style options.
+ *
+ * @return void.
+ */
+function neatline_setMapStyleDefaults()
+{
+
+    // Vector color.
+    set_option('vector_color', get_plugin_ini(
+        'Neatline',
+        'default_vector_color'
+    ));
+
+    // Stroke color.
+    set_option('stroke_color', get_plugin_ini(
+        'Neatline',
+        'default_stroke_color'
+    ));
+
+    // Highlight color.
+    set_option('highlight_color', get_plugin_ini(
+        'Neatline',
+        'default_highlight_color'
+    ));
+
+    // Vector opacity.
+    set_option('vector_opacity', (int) get_plugin_ini(
+        'Neatline',
+        'default_vector_opacity'
+    ));
+
+    // Stroke opacity.
+    set_option('stroke_opacity', (int) get_plugin_ini(
+        'Neatline',
+        'default_stroke_opacity'
+    ));
+
+    // Stroke opacity.
+    set_option('stroke_width', (int) get_plugin_ini(
+        'Neatline',
+        'default_stroke_width'
+    ));
+
+    // Stroke opacity.
+    set_option('point_radius', (int) get_plugin_ini(
+        'Neatline',
+        'default_point_radius'
+    ));
+
+    // Horizontal percentage.
+    set_option('h_percent', (int) get_plugin_ini(
+        'Neatline',
+        'default_h_percent'
+    ));
+
+    // Vertical percentage.
+    set_option('v_percent', (int) get_plugin_ini(
+        'Neatline',
+        'default_v_percent'
+    ));
+
+    // Timeline zoom.
+    set_option('timeline_zoom', (int) get_plugin_ini(
+        'Neatline',
+        'default_timeline_zoom'
+    ));
 
 }

@@ -49,8 +49,9 @@ class NeatlineDataRecord extends Omeka_record
 
     // Styles.
     public $vector_color;
-    public $vector_opacity;
     public $stroke_color;
+    public $highlight_color;
+    public $vector_opacity;
     public $stroke_opacity;
     public $stroke_width;
     public $point_radius;
@@ -83,7 +84,8 @@ class NeatlineDataRecord extends Omeka_record
         'stroke_color',
         'stroke_opacity',
         'stroke_width',
-        'point_radius'
+        'point_radius',
+        'highlight_color'
     );
 
 
@@ -144,9 +146,7 @@ class NeatlineDataRecord extends Omeka_record
      */
     public function getExhibit()
     {
-
         return $this->getTable('NeatlineExhibit')->find($this->exhibit_id);
-
     }
 
     /**
@@ -165,17 +165,18 @@ class NeatlineDataRecord extends Omeka_record
         $data['title'] =            $this->getTitle();
         $data['description'] =      $this->getDescription();
         $data['vector_color'] =     $this->getStyle('vector_color');
-        $data['vector_opacity'] =   $this->getStyle('vector_opacity');
         $data['stroke_color'] =     $this->getStyle('stroke_color');
-        $data['stroke_opacity'] =   $this->getStyle('stroke_opacity');
-        $data['stroke_width'] =     $this->getStyle('stroke_width');
-        $data['point_radius'] =     $this->getStyle('point_radius');
+        $data['highlight_color'] =  $this->getStyle('highlight_color');
+        $data['vector_opacity'] =   (int) $this->getStyle('vector_opacity');
+        $data['stroke_opacity'] =   (int) $this->getStyle('stroke_opacity');
+        $data['stroke_width'] =     (int) $this->getStyle('stroke_width');
+        $data['point_radius'] =     (int) $this->getStyle('point_radius');
         $data['start_date'] =       (string) $this->start_date;
         $data['start_time'] =       (string) $this->start_time;
         $data['end_date'] =         (string) $this->end_date;
         $data['end_time'] =         (string) $this->end_time;
-        $data['left_percent'] =     $this->getLeftPercent();
-        $data['right_percent'] =    $this->getRightPercent();
+        $data['left_percent'] =     (int) $this->getLeftPercent();
+        $data['right_percent'] =    (int) $this->getRightPercent();
 
         // JSON-ify the array.
         return json_encode($data);
@@ -197,11 +198,12 @@ class NeatlineDataRecord extends Omeka_record
 
         // Set the array values.
         $data['vector_color'] =     get_option('vector_color');
-        $data['vector_opacity'] =   get_option('vector_opacity');
         $data['stroke_color'] =     get_option('stroke_color');
-        $data['stroke_opacity'] =   get_option('stroke_opacity');
-        $data['stroke_width'] =     get_option('stroke_width');
-        $data['point_radius'] =     get_option('point_radius');
+        $data['highlight_color'] =  get_option('highlight_color');
+        $data['vector_opacity'] =   (int) get_option('vector_opacity');
+        $data['stroke_opacity'] =   (int) get_option('stroke_opacity');
+        $data['stroke_width'] =     (int) get_option('stroke_width');
+        $data['point_radius'] =     (int) get_option('point_radius');
         $data['left_percent'] =     self::$defaults['left_percent'];
         $data['right_percent'] =    self::$defaults['right_percent'];
         $data['start_date'] =       '';
@@ -355,15 +357,32 @@ class NeatlineDataRecord extends Omeka_record
 
         // If there is an exhibit default.
         if (!is_null($exhibit['default_' . $style])) {
+
+            // If the value does not match the default.
             if ($value != $exhibit['default_' . $style]) {
                 $this[$style] = $value;
                 return true;
             }
+
+            // If the value matches the default and there is a non-null
+            // value set on the record, null the record value.
+            else if (!is_null($this[$style])) {
+                $this[$style] = null;
+                return true;
+            }
+
         }
 
         // If the value does not match the system default.
         else if ($value != get_option($style)) {
             $this[$style] = $value;
+            return true;
+        }
+
+        // If the value matches the system default and there is a non-null
+        // value set on the record, null the record value.
+        else if (!is_null($this[$style])) {
+            $this[$style] = null;
             return true;
         }
 
@@ -380,8 +399,9 @@ class NeatlineDataRecord extends Omeka_record
     {
 
         $this->vector_color =   null;
-        $this->vector_opacity = null;
         $this->stroke_color =   null;
+        $this->highlight_color =   null;
+        $this->vector_opacity = null;
         $this->stroke_opacity = null;
         $this->stroke_width =   null;
         $this->point_radius =   null;
@@ -520,6 +540,23 @@ class NeatlineDataRecord extends Omeka_record
         return (!is_null($this->geocoverage) && $this->geocoverage != '') ?
             $this->geocoverage :
             self::$defaults['geocoverage'];
+
+    }
+
+    /**
+     * On save, update the modified column on the parent exhibit.
+     *
+     * @return void.
+     */
+    public function save()
+    {
+
+        if (!is_null($this->exhibit_id)) {
+            $exhibit = $this->getExhibit();
+            $exhibit->save();
+        }
+
+        parent::save();
 
     }
 

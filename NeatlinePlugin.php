@@ -30,6 +30,7 @@ class NeatlinePlugin
     private static $_hooks = array(
         'install',
         'uninstall',
+        'upgrade',
         'define_routes',
         'admin_theme_header',
         'public_theme_header',
@@ -87,27 +88,33 @@ class NeatlinePlugin
 
         // Exhibits table.
         $sql = "CREATE TABLE IF NOT EXISTS `{$this->_db->prefix}neatline_exhibits` (
-                `id`                    int(10) unsigned not null auto_increment,
-                `added`                 TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                `name`                  tinytext collate utf8_unicode_ci,
-                `map_id`                int(10) unsigned NULL,
-                `image_id`              int(10) unsigned NULL,
-                `top_element`           ENUM('map', 'timeline') DEFAULT 'map',
-                `items_h_pos`           ENUM('right', 'left') DEFAULT 'right',
-                `items_v_pos`           ENUM('top', 'bottom') DEFAULT 'bottom',
-                `items_height`          ENUM('full', 'partial') DEFAULT 'partial',
-                `is_map`                tinyint(1) NOT NULL,
-                `is_timeline`           tinyint(1) NOT NULL,
-                `is_items`              tinyint(1) NOT NULL,
-                `default_map_bounds`    varchar(100) NULL,
-                `default_map_zoom`      int(10) unsigned NULL,
-                `default_focus_date`    varchar(100) NULL,
-                `default_vector_color`  tinytext COLLATE utf8_unicode_ci NULL,
-                `default_vector_opacity`int(10) unsigned NULL,
-                `default_stroke_opacity`int(10) unsigned NULL,
-                `default_stroke_color`  tinytext COLLATE utf8_unicode_ci NULL,
-                `default_stroke_width`  int(10) unsigned NULL,
-                `default_point_radius`  int(10) unsigned NULL,
+                `id`                        int(10) unsigned not null auto_increment,
+                `added`                     TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                `modified`                  TIMESTAMP NULL,
+                `name`                      tinytext collate utf8_unicode_ci,
+                `map_id`                    int(10) unsigned NULL,
+                `image_id`                  int(10) unsigned NULL,
+                `top_element`               ENUM('map', 'timeline') DEFAULT 'map',
+                `items_h_pos`               ENUM('right', 'left') DEFAULT 'right',
+                `items_v_pos`               ENUM('top', 'bottom') DEFAULT 'bottom',
+                `items_height`              ENUM('full', 'partial') DEFAULT 'partial',
+                `is_map`                    tinyint(1) NOT NULL,
+                `is_timeline`               tinyint(1) NOT NULL,
+                `is_items`                  tinyint(1) NOT NULL,
+                `h_percent`                 int(10) unsigned NULL,
+                `v_percent`                 int(10) unsigned NULL,
+                `default_map_bounds`        varchar(100) NULL,
+                `default_map_zoom`          int(10) unsigned NULL,
+                `default_focus_date`        varchar(100) NULL,
+                `default_timeline_zoom`     int(10) unsigned NULL,
+                `default_vector_color`      tinytext COLLATE utf8_unicode_ci NULL,
+                `default_stroke_color`      tinytext COLLATE utf8_unicode_ci NULL,
+                `default_highlight_color`   tinytext COLLATE utf8_unicode_ci NULL,
+                `default_vector_opacity`    int(10) unsigned NULL,
+                `default_stroke_opacity`    int(10) unsigned NULL,
+                `default_stroke_width`      int(10) unsigned NULL,
+                `default_point_radius`      int(10) unsigned NULL,
+                `default_base_layer`        int(10) unsigned NULL,
                  PRIMARY KEY (`id`)
                ) ENGINE=innodb DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
 
@@ -115,46 +122,49 @@ class NeatlinePlugin
 
         // Records table.
         $sql = "CREATE TABLE IF NOT EXISTS `{$this->_db->prefix}neatline_data_records` (
-                `id`                    int(10) unsigned not null auto_increment,
-                `item_id`               int(10) unsigned NULL,
-                `exhibit_id`            int(10) unsigned NULL,
-                `title`                 tinytext COLLATE utf8_unicode_ci NULL,
-                `description`           mediumtext COLLATE utf8_unicode_ci NULL,
-                `start_date`            tinytext COLLATE utf8_unicode_ci NULL,
-                `start_time`            tinytext COLLATE utf8_unicode_ci NULL,
-                `end_date`              tinytext COLLATE utf8_unicode_ci NULL,
-                `end_time`              tinytext COLLATE utf8_unicode_ci NULL,
-                `geocoverage`           mediumtext COLLATE utf8_unicode_ci NULL,
-                `left_percent`          int(10) unsigned NULL,
-                `right_percent`         int(10) unsigned NULL,
-                `vector_color`          tinytext COLLATE utf8_unicode_ci NULL,
-                `vector_opacity`        int(10) unsigned NULL,
-                `stroke_opacity`        int(10) unsigned NULL,
-                `stroke_color`          tinytext COLLATE utf8_unicode_ci NULL,
-                `stroke_width`          int(10) unsigned NULL,
-                `point_radius`          int(10) unsigned NULL,
-                `space_active`          tinyint(1) NULL,
-                `time_active`           tinyint(1) NULL,
-                `display_order`         int(10) unsigned NULL,
-                `map_bounds`            varchar(100) NULL,
-                `map_zoom`              int(10) unsigned NULL,
+                `id`                        int(10) unsigned not null auto_increment,
+                `item_id`                   int(10) unsigned NULL,
+                `exhibit_id`                int(10) unsigned NULL,
+                `title`                     tinytext COLLATE utf8_unicode_ci NULL,
+                `description`               mediumtext COLLATE utf8_unicode_ci NULL,
+                `start_date`                tinytext COLLATE utf8_unicode_ci NULL,
+                `start_time`                tinytext COLLATE utf8_unicode_ci NULL,
+                `end_date`                  tinytext COLLATE utf8_unicode_ci NULL,
+                `end_time`                  tinytext COLLATE utf8_unicode_ci NULL,
+                `geocoverage`               mediumtext COLLATE utf8_unicode_ci NULL,
+                `left_percent`              int(10) unsigned NULL,
+                `right_percent`             int(10) unsigned NULL,
+                `vector_color`              tinytext COLLATE utf8_unicode_ci NULL,
+                `stroke_color`              tinytext COLLATE utf8_unicode_ci NULL,
+                `highlight_color`           tinytext COLLATE utf8_unicode_ci NULL,
+                `vector_opacity`            int(10) unsigned NULL,
+                `stroke_opacity`            int(10) unsigned NULL,
+                `stroke_width`              int(10) unsigned NULL,
+                `point_radius`              int(10) unsigned NULL,
+                `space_active`              tinyint(1) NULL,
+                `time_active`               tinyint(1) NULL,
+                `display_order`             int(10) unsigned NULL,
+                `map_bounds`                varchar(100) NULL,
+                `map_zoom`                  int(10) unsigned NULL,
                  PRIMARY KEY (`id`)
                ) ENGINE=innodb DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
 
         $this->_db->query($sql);
 
-        // Set system styling defaults.
-        set_option('vector_color', '#5033de');
-        set_option('stroke_color', '#1e2ee6');
-        set_option('vector_opacity', 20);
-        set_option('stroke_opacity', 70);
-        set_option('stroke_width', 4);
-        set_option('point_radius', 6);
+        // Layers table.
+        $sql = "CREATE TABLE IF NOT EXISTS `{$this->_db->prefix}neatline_base_layers` (
+                `id`                    int(10) unsigned not null auto_increment,
+                `name`                  tinytext COLLATE utf8_unicode_ci NULL,
+                 PRIMARY KEY (`id`)
+               ) ENGINE=innodb DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
 
-        // Create demo exhibit.
-        if (get_plugin_ini('Neatline', 'testing_mode') == 'false') {
-            neatline_createDemoExhibit();
-        }
+        $this->_db->query($sql);
+
+        // Set default map style attributes.
+        neatline_setMapStyleDefaults();
+
+        // Install base layers.
+        neatline_installBaseLayers();
 
     }
 
@@ -173,6 +183,73 @@ class NeatlinePlugin
         // Drop the data table.
         $sql = "DROP TABLE IF EXISTS `{$this->_db->prefix}neatline_data_records`";
         $this->_db->query($sql);
+
+        // Drop the data table.
+        $sql = "DROP TABLE IF EXISTS `{$this->_db->prefix}neatline_base_layers`";
+        $this->_db->query($sql);
+
+    }
+
+    /**
+     * Upgrade.
+     *
+     * @return void.
+     */
+    public function upgrade($oldVersion, $newVersion)
+    {
+
+        if (version_compare($oldVersion, '0.1', '<=')) {
+
+            // `modified` column.
+            $sql = "ALTER TABLE `{$this->_db->prefix}neatline_exhibits`
+                ADD COLUMN `modified` TIMESTAMP NULL";
+            $this->_db->query($sql);
+
+            // `h_percent` column.
+            $sql = "ALTER TABLE `{$this->_db->prefix}neatline_exhibits`
+                ADD COLUMN `h_percent` int(10) unsigned NULL";
+            $this->_db->query($sql);
+
+            // `v_percent` column.
+            $sql = "ALTER TABLE `{$this->_db->prefix}neatline_exhibits`
+                ADD COLUMN `v_percent` int(10) unsigned NULL";
+            $this->_db->query($sql);
+
+            // `default_timeline_zoom` column.
+            $sql = "ALTER TABLE `{$this->_db->prefix}neatline_exhibits`
+                ADD COLUMN `default_timeline_zoom` int(10) unsigned NULL";
+            $this->_db->query($sql);
+
+            // `default_highlight_color` column.
+            $sql = "ALTER TABLE `{$this->_db->prefix}neatline_exhibits`
+                ADD COLUMN `default_highlight_color` tinytext COLLATE utf8_unicode_ci NULL";
+            $this->_db->query($sql);
+
+            // `default_base_layer` column.
+            $sql = "ALTER TABLE `{$this->_db->prefix}neatline_exhibits`
+                ADD COLUMN `default_base_layer` int(10) unsigned NULL";
+            $this->_db->query($sql);
+
+            // `highlight_color` column.
+            $sql = "ALTER TABLE `{$this->_db->prefix}neatline_data_records`
+                ADD COLUMN `highlight_color` tinytext COLLATE utf8_unicode_ci NULL";
+            $this->_db->query($sql);
+
+            // Create layers table.
+            $sql = "CREATE TABLE IF NOT EXISTS `{$this->_db->prefix}neatline_base_layers` (
+                    `id`                    int(10) unsigned not null auto_increment,
+                    `name`                  tinytext COLLATE utf8_unicode_ci NULL,
+                     PRIMARY KEY (`id`)
+                   ) ENGINE=innodb DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
+            $this->_db->query($sql);
+
+            // Set default map style attributes.
+            neatline_setMapStyleDefaults();
+
+            // Install base layers.
+            neatline_installBaseLayers();
+
+        }
 
     }
 
@@ -214,11 +291,24 @@ class NeatlinePlugin
 
         // Queue static assets for public-facing Neatline exhibits.
         if ($request->getModuleName() == 'neatline' &&
-            $request->getControllerName() == 'public' &&
-            $request->getActionName() == 'show') {
+            $request->getControllerName() == 'public') {
 
-              neatline_queueNeatlineAssets();
-              neatline_queuePublicAssets();
+            $actionName = $request->getActionName();
+
+            if ($actionName == 'show') {
+                neatline_queueInThemeAssets();
+                neatline_queueNeatlineAssets();
+            }
+
+            else if ($actionName == 'fullscreen') {
+                neatline_queueFullscreenAssets();
+                neatline_queueNeatlineAssets();
+            }
+
+            else if ($actionName == 'embed') {
+                neatline_queueEmbedAssets();
+                neatline_queueNeatlineAssets();
+            }
 
         }
 

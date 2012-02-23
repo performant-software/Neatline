@@ -1,4 +1,4 @@
-/*
+/**
  * Component widget that controls the timeline. Instantiated by the parent
  * Neatline widget.
  *
@@ -22,42 +22,50 @@
 
 (function($, undefined) {
 
-    'use strict';
-
     $.widget('neatline.neatlinetimeline', {
 
-        options: {
-
-            // CSS constants.
-            css: {
-                tape_height: 8
-            }
-
-        },
-
+        /*
+         * .
+         */
         _create: function() {
 
             // Getters.
             this._window =                  $(window);
-            this.popup =                    $('#timeline-popup');
-            this.popupTitle =               this.popup.find('h3.title-text');
-            this.popupContent =             this.popup.find('div.content');
-            this.popupClose =               this.popup.find('a.close');
+            this.zoomContainer =            $('#zoom-buttons');
+            this.zoomIn =                   this.zoomContainer.find('.zoom-in');
+            this.zoomOut =                  this.zoomContainer.find('.zoom-out');
 
             // Tracker array for tape elements.
-            this._idToTapeElements = {};
+            this._idToTapeElements =    {};
+            this._zoomSteps =           this.getZoomIndexArray();
+            this._currentZoomStep =     Neatline.timelineZoom;
 
             // Start-up.
             this._instantiateSimile();
+            this._constructZoomButtons();
+            this.element.disableSelection();
 
         },
 
+        /*
+         * Construct the timeline.
+         *
+         * - return void.
+         */
         _instantiateSimile: function() {
 
             var self = this;
 
+            // Detach the zoom buttons container.
+            this.zoomContainer.detach();
+
             // Instantiate the event source object.
             this.eventSource = new Timeline.DefaultEventSource();
+
+            // Get the starting intervalUnit and intervalPixels.
+            var startingZoomStep =  this._zoomSteps[this._currentZoomStep];
+            var intervalUnit =      startingZoomStep.unit;
+            var intervalPixels =    startingZoomStep.pixelsPerInterval;
 
             // Define band data.
             this.bandInfos = [
@@ -65,16 +73,18 @@
                 Timeline.createBandInfo({
                     eventSource:    this.eventSource,
                     width:          "80%",
-                    intervalUnit:   Timeline.DateTime.MONTH,
-                    intervalPixels: 100
+                    intervalUnit:   intervalUnit,
+                    intervalPixels: intervalPixels,
+                    zoomIndex:      this._currentZoomStep,
+                    zoomSteps:      this._zoomSteps
                 }),
 
                 Timeline.createBandInfo({
                     overview:       true,
                     eventSource:    this.eventSource,
                     width:          "20%",
-                    intervalUnit:   Timeline.DateTime.YEAR,
-                    intervalPixels: 200
+                    intervalUnit:   Timeline.DateTime.DECADE,
+                    intervalPixels: 70
                 })
 
             ];
@@ -88,8 +98,9 @@
             this.timeline = Timeline.create(container, this.bandInfos);
             this.loadData();
 
-            // Override the default click event callbacks.
-            this._catchClickCallbacks();
+            // Override default click and zom callbacks.
+            this._catchClickCallback();
+            this._catchZoomCallback();
 
             // Reposition on window resize.
             this._window.bind({
@@ -102,7 +113,68 @@
 
         },
 
-        _catchClickCallbacks: function() {
+        /*
+         * Construct and gloss the zoom buttons.
+         *
+         * - return void.
+         */
+        _constructZoomButtons: function() {
+
+            var self = this;
+
+            // Re-inject the container.
+            this.element.append(this.zoomContainer);
+
+            // Listen for zoom in click.
+            this.zoomIn.bind('mousedown', function() {
+
+                // If the zoom track is not at min.
+                if (self._currentZoomStep > 0) {
+
+                    // Compute center coordinate and zoom.
+                    var centerCoords = self._getCenterOffset();
+                    self.timeline.getBand(0).zoom(
+                        true,
+                        centerCoords.x,
+                        centerCoords.y
+                    );
+
+                }
+
+                // Re-render.
+                self.refresh();
+
+            });
+
+            // Listen for zoom out click.
+            this.zoomOut.bind('mousedown', function() {
+
+                // If the zoom track is not at max.
+                if (self._currentZoomStep < self._zoomSteps.length-1) {
+
+                    // Compute center coordinate and zoom.
+                    var centerCoords = self._getCenterOffset();
+                    self.timeline.getBand(0).zoom(
+                        false,
+                        centerCoords.x,
+                        centerCoords.y
+                    );
+
+                }
+
+                // Re-render.
+                self.refresh();
+
+            });
+
+        },
+
+        /*
+         * Listen for event clicks.
+         *
+         * - return void.
+         */
+        _catchClickCallback: function() {
 
             var self = this;
 
@@ -118,17 +190,59 @@
 
         },
 
+        /*
+         * Listen for zoom.
+         *
+         * - return void.
+         */
+        _catchZoomCallback: function() {
+
+            var self = this;
+
+            // Whitewash over the default bubble popup event so as to get event id data.
+            Timeline._Band.prototype.zoom = function(zoomIn, x, y, target) {
+
+                if (!this._zoomSteps) {
+                    return;
+                }
+
+                // Shift the x value by our offset
+                x += this._viewOffset;
+
+                var zoomDate = this._ether.pixelOffsetToDate(x);
+                var netIntervalChange = this._ether.zoom(zoomIn);
+                this._etherPainter.zoom(netIntervalChange);
+
+                // Shift our zoom date to the far left
+                this._moveEther(Math.round(-this._ether.dateToPixelOffset(zoomDate)));
+
+                // Then shift it back to where the mouse was
+                this._moveEther(x);
+
+                // Increment zoom step.
+                if (zoomIn) {
+                    self._incrementZoomStepDown();
+                } else {
+                    self._incrementZoomStepUp();
+                }
+
+            };
+
+        },
+
+        /*
+         * Fetch and render events.
+         *
+         * - return void.
+         */
         loadData: function() {
 
             var self = this;
 
             // Ping the json server and get the events data.
             this.timeline.loadJSON(Neatline.dataSources.timeline, function(json, url) {
-
-                // Render the events.
                 self.eventSource.clear();
                 self.eventSource.loadJSON(json, url);
-
             });
 
             // Set the starting date, if defined.
@@ -153,7 +267,16 @@
 
                     // Instantiate the span styler on the tape.
                     tape.spanstyler();
-                    tape.spanstyler('constructCss', evt._obj.color, evt._obj.left_ambiguity, evt._obj.right_ambiguity);
+
+                    // Build CSS.
+                    tape.spanstyler(
+                        'constructCss',
+                        evt._obj.color,
+                        evt._obj.left_ambiguity,
+                        evt._obj.right_ambiguity
+                    );
+
+                    // Manifest.
                     tape.spanstyler('applyCss');
 
                     // Push the id-element association into the tracker object.
@@ -165,17 +288,37 @@
 
         },
 
+        /*
+         * Calculate the offset of the center point on the timeline.
+         *
+         * - return object:         An object with x and y values.
+         */
+        _getCenterOffset: function() {
+
+            // Get the main band div.
+            var band = this.timeline.getBand(0)._div;
+
+            return {
+                x: -(parseInt($(band).css('left'), 10)) + (this.element.width() / 2),
+                y: -(parseInt($(band).css('top'), 10)) + (this.element.height() / 2)
+            };
+
+        },
+
+        /*
+         * Focus on the listing for the record with the passed id.
+         *
+         * - param integer id:      The id of the record.
+         *
+         * - return void.
+         */
         zoomToEvent: function(id) {
 
             var self = this;
 
-            // Walk the events registry and try to find an event for the item id.
-            // This is inefficient, but Simile does not have a utility to get an event
-            // by a given attribute. If a match is found, scroll the timeline to
-            // the start location of the event.
             $.each(this.timeline._bands[0]._eventSource._events._idToEvent, function(i, event) {
 
-                if (event._eventID === id) {
+                if (event._eventID === parseInt(id, 10)) {
                     self.timeline.getBand(0).setCenterVisibleDate(event._start);
                 }
 
@@ -183,12 +326,34 @@
 
         },
 
+        /*
+         * Get the current center date.
+         *
+         * - return string date             The center date.
+         */
         getCenterForSave: function() {
-
             return this.timeline.getBand(0).getCenterVisibleDate().toString();
-
         },
 
+        /*
+         * Get the current zoom level.
+         *
+         * - return integer zoome           The zoom level.
+         */
+        getZoomForSave: function() {
+            return this._currentZoomStep;
+        },
+
+        /*
+         * Set the date ambiguity for the record with the passed id.
+         *
+         * - param integer id:              The id of the record.
+         * - param string color:            The color to set.
+         * - param integer leftPercent:     The left percentage threshold.
+         * - param integer rightPercent:    The right percentage threshold.
+         *
+         * - return void.
+         */
         setDateAmbiguity: function(id, color, leftPercent, rightPercent) {
 
             var self = this;
@@ -210,6 +375,14 @@
 
         },
 
+        /*
+         * Set the color for the record with the passed id.
+         *
+         * - param integer id:      The id of the record.
+         * - param string color:    The color to set.
+         *
+         * - return void.
+         */
         setDateColor: function(id, color) {
 
             var self = this;
@@ -229,6 +402,78 @@
 
             }
 
+        },
+
+        /*
+         * Get array of zoom indices.
+         *
+         * - return void.
+         */
+        getZoomIndexArray: function() {
+
+            return new Array(
+                {pixelsPerInterval: 280,  unit: Timeline.DateTime.HOUR},
+                {pixelsPerInterval: 140,  unit: Timeline.DateTime.HOUR},
+                {pixelsPerInterval:  70,  unit: Timeline.DateTime.HOUR},
+                {pixelsPerInterval:  35,  unit: Timeline.DateTime.HOUR},
+                {pixelsPerInterval: 400,  unit: Timeline.DateTime.DAY},
+                {pixelsPerInterval: 200,  unit: Timeline.DateTime.DAY},
+                {pixelsPerInterval: 100,  unit: Timeline.DateTime.DAY},
+                {pixelsPerInterval:  50,  unit: Timeline.DateTime.DAY},
+                {pixelsPerInterval: 400,  unit: Timeline.DateTime.MONTH},
+                {pixelsPerInterval: 200,  unit: Timeline.DateTime.MONTH},
+                {pixelsPerInterval: 100,  unit: Timeline.DateTime.MONTH},
+                {pixelsPerInterval:  50,  unit: Timeline.DateTime.MONTH},
+                {pixelsPerInterval: 400,  unit: Timeline.DateTime.YEAR},
+                {pixelsPerInterval: 200,  unit: Timeline.DateTime.YEAR},
+                {pixelsPerInterval: 100,  unit: Timeline.DateTime.YEAR},
+                {pixelsPerInterval:  50,  unit: Timeline.DateTime.YEAR},
+                {pixelsPerInterval: 400,  unit: Timeline.DateTime.DECADE},
+                {pixelsPerInterval: 200,  unit: Timeline.DateTime.DECADE},
+                {pixelsPerInterval: 100,  unit: Timeline.DateTime.DECADE},
+                {pixelsPerInterval:  50,  unit: Timeline.DateTime.DECADE},
+                {pixelsPerInterval: 400,  unit: Timeline.DateTime.CENTURY},
+                {pixelsPerInterval: 200,  unit: Timeline.DateTime.CENTURY},
+                {pixelsPerInterval: 100,  unit: Timeline.DateTime.CENTURY},
+                {pixelsPerInterval:  50,  unit: Timeline.DateTime.CENTURY}
+            );
+
+        },
+
+        /*
+         * Increment zoom step up.
+         */
+        _incrementZoomStepUp: function() {
+            if (this._currentZoomStep < this._zoomSteps.length-1) {
+                this._currentZoomStep++;
+            }
+        },
+
+        /*
+         * Increment zoom step down.
+         */
+        _incrementZoomStepDown: function() {
+            if (this._currentZoomStep > 0) {
+                this._currentZoomStep--;
+            }
+        },
+
+        /*
+         * Rerender the timeline.
+         */
+        refresh: function() {
+            this.timeline.layout();
+        },
+
+        /*
+         * Emit a protected class attribute.
+         *
+         * - param string attr: The name of the attribute.
+         *
+         * - return mixed attr: The value of the attribute.
+         */
+        getAttr: function(attr) {
+            return this[attr];
         }
 
     });

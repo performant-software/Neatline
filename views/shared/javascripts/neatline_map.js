@@ -1,4 +1,4 @@
-/*
+/**
  * Component widget that controls the map. Instantiated by the parent Neatline
  * widget.
  *
@@ -50,6 +50,7 @@
             styles: {
                 vector_color: '#ffb80e',
                 stroke_color: '#ea3a3a',
+                highlight_color: '#ff0000',
                 vector_opacity: 0.4,
                 stroke_opacity: 0.6,
                 stroke_width: 1,
@@ -64,6 +65,9 @@
         _create: function() {
 
             var self = this;
+
+            // Getters.
+            this._window = $(window);
 
             // Trackers and buckets.
             this._db =                      TAFFY();
@@ -86,16 +90,16 @@
 
             // Construct OSM.
             else {
-                this._instantiateOSMMap();
+                this._instantiateRealGeographyMap();
             }
 
             // Construct the editing manager.
-            // TODO: public is a reserved word and should be avoided as a property
-            if (!Neatline.public) {
+            if (!Neatline.isPublic) {
                 this._instantiateEditor();
             }
 
             // Start-up.
+            this._constructTitleTip();
             this.loadData();
 
         },
@@ -140,7 +144,8 @@
                   new OpenLayers.Control.PanZoomBar(),
                   new OpenLayers.Control.MousePosition(),
                   new OpenLayers.Control.Navigation(),
-                  new OpenLayers.Control.ScaleLine()
+                  new OpenLayers.Control.ScaleLine(),
+                  new OpenLayers.Control.LayerSwitcher()
                 ],
                 maxResolution: 'auto',
                 projection: Neatline.map.epsg[0],
@@ -150,22 +155,29 @@
             // Instantiate the map.
             this.map = new OpenLayers.Map('map', options);
 
-            // Build the baselayer.
+            // // Construct the base layers.
+            // var layers = this._getBaseLayers();
+
+            // // Push the base layers onto the map, set default.
+            // this.map.addLayers(layers);
+            // this._setDefaultLayer();
+
+            // Build the WMS layer.
             this.baseLayer = new OpenLayers.Layer.WMS(
                 Neatline.name,
                 Neatline.map.wmsAddress,
                 {
                     LAYERS: Neatline.map.layers,
                     STYLES: '',
-                    format: 'image/jpeg',
+                    format: format,
                     tiled: !pureCoverage,
                     tilesOrigin: this.map.maxExtent.left + ',' + this.map.maxExtent.bottom
                 },
                 {
                     buffer: 0,
                     displayOutsideMaxExtent: true,
-                    isBaseLayer: true,
-                    transparent: true
+                    isBaseLayer: true
+                    // transparent: 'true'
                 }
             );
 
@@ -190,9 +202,9 @@
         },
 
         /*
-         * Initialize an OpenStreetMap-based map.
+         * Initialize a map with real-geography base-layer.
          */
-        _instantiateOSMMap: function() {
+        _instantiateRealGeographyMap: function() {
 
             // Set OL global attributes.
             OpenLayers.IMAGE_RELOAD_ATTEMTPS = 3;
@@ -228,7 +240,8 @@
                   new OpenLayers.Control.PanZoomBar(),
                   new OpenLayers.Control.MousePosition(),
                   new OpenLayers.Control.Navigation(),
-                  new OpenLayers.Control.ScaleLine()
+                  new OpenLayers.Control.ScaleLine(),
+                  new OpenLayers.Control.LayerSwitcher()
                 ],
                 maxResolution: 'auto',
                 units: 'm'
@@ -237,8 +250,19 @@
             // Instantiate the map.
             this.map = new OpenLayers.Map('map', options);
 
-            // Push the base layer onto the map.
-            this.map.addLayers([new OpenLayers.Layer.OSM()]);
+            // Construct the base layers.
+            var layers = this._getBaseLayers();
+
+            // Push the base layers onto the map, set default.
+            this.map.addLayers(layers);
+            this._setDefaultLayer();
+
+            // Google.v3 uses EPSG:900913 as projection, so we have to
+            // transform our coordinates
+            this.map.setCenter(new OpenLayers.LonLat(10.2, 48.9).transform(
+                new OpenLayers.Projection("EPSG:4326"),
+                this.map.getProjectionObject()
+            ), 5);
 
             // If there is a default bounding box set for the exhibit, construct
             // a second Bounds object to use as the starting zoom target.
@@ -501,8 +525,34 @@
             // If there are existing click and highlight controls, destroy them.
             this._removeControls();
 
+            // Highlight controller.
+            this.highlightControl = new OpenLayers.Control.SelectFeature(this._currentVectorLayers, {
+
+                hover: true,
+                highlightOnly: true,
+                renderIntent: 'temporary',
+
+                eventListeners: {
+
+                    featurehighlighted: function(e) {
+                        var record = self._db({ layerid: e.feature.layer.id }).first();
+                        self._showTitleTip(record);
+                    },
+
+                    featureunhighlighted: function(e) {
+                        self._hideTitleTip();
+                    }
+
+                }
+
+            });
+
+            // Click controller.
             this.clickControl = new OpenLayers.Control.SelectFeature(this._currentVectorLayers, {
 
+                clickout: true,
+
+                // When the feature is selected.
                 onSelect: function(feature) {
 
                     // Get the record for the layer.
@@ -514,21 +564,36 @@
                         'recordid': record.recordid
                     });
 
-                    if (self.modifyFeatures !== undefined) {
+                    if (!_.isUndefined(self.modifyFeatures)) {
                         self.modifyFeatures.selectFeature(feature);
                     }
 
                 },
 
+                // When the feature is unselected.
                 onUnselect: function(feature) {
 
-                    if (self.modifyFeatures !== undefined) {
+                    if (!_.isUndefined(self.modifyFeatures)) {
                         self.modifyFeatures.unselectFeature(feature);
                     }
 
+                },
+
+                // Listen for mouseleave.
+                callbacks: {
+                    out: function() {
+                        self._hideTitleTip();
+                    }
                 }
 
             });
+
+            this.highlightControl.handlers.feature.stopDown = false;
+            this.clickControl.handlers.feature.stopDown = false;
+
+            // Add and activate the highlight control.
+            this.map.addControl(this.highlightControl);
+            this.highlightControl.activate();
 
             // Add and activate the click control.
             this.map.addControl(this.clickControl);
@@ -541,22 +606,28 @@
          */
         _removeControls: function() {
 
-            if (this.modifyFeatures !== undefined) {
+            if (!_.isUndefined(this.modifyFeatures)) {
                 this.map.removeControl(this.modifyFeatures);
                 this.modifyFeatures.destroy();
                 delete this.modifyFeatures;
             }
 
-            if (this.editToolbar !== undefined) {
+            if (!_.isUndefined(this.editToolbar)) {
                 this.map.removeControl(this.editToolbar);
                 this.editToolbar.destroy();
                 delete this.editToolbar;
             }
 
-            if (this.clickControl !== undefined) {
+            if (!_.isUndefined(this.clickControl)) {
                 this.map.removeControl(this.clickControl);
                 this.clickControl.destroy();
                 delete this.clickControl;
+            }
+
+            if (!_.isUndefined(this.highlightControl)) {
+                this.map.removeControl(this.highlightControl);
+                this.highlightControl.destroy();
+                delete this.highlightControl;
             }
 
         },
@@ -599,6 +670,9 @@
                 this._currentVectorLayers.push(this._currentEditLayer);
                 this.map.addLayer(this._currentEditLayer);
                 this._currentEditLayer.setMap(this.map);
+
+                // Set default style.
+                this.setDefaultStyle();
 
                 // Add the database record.
                 self._db.insert({
@@ -712,7 +786,18 @@
 
             // Push the wkt's onto the array.
             $.each(this._currentEditLayer.features, function(i, feature) {
-                wkts.push(feature.geometry.toString());
+
+                // Cast the feature to wkt.
+                var wkt = feature.geometry.toString();
+
+                // ** A hack to prevent phantom empty points from getting
+                // saved in the wkt strings. It is not clear why these artifacts
+                // are getting generated and committed, but they cause erratic
+                // bound calculation and zooming bugs. This needs a real fix.
+                if (wkt !== 'POINT(NaN NaN)') {
+                    wkts.push(wkt);
+                }
+
             });
 
             return wkts.join(this.options.wkt_delimiter);
@@ -742,7 +827,7 @@
             var record = this._db({ recordid: parseInt(id, 10) }).first();
 
             // If the record exists and there is a map feature.
-            if (record.layer !== null && record.layer.features.length > 0) {
+            if (record && record.layer.features.length > 0) {
 
                 // If there is item-specific data.
                 if (record.data.bounds !== null && record.data.zoom !== null) {
@@ -768,30 +853,35 @@
             strokeColor,
             strokeOpacity,
             strokeWidth,
-            pointRadius) {
+            pointRadius,
+            highlightColor) {
 
             // Capture fill color.
-            var fillColor = (fillColor !== null) ? fillColor :
+            var fillColor = (!_.isUndefined(fillColor)) ? fillColor :
                 this.options.styles.vector_color;
 
             // Capture fill opacity.
-            var fillOpacity = (fillOpacity !== null) ? fillOpacity :
+            var fillOpacity = (!_.isUndefined(fillOpacity)) ? fillOpacity :
                 this.options.styles.vector_opacity;
 
             // Capture stroke color.
-            var strokeColor = (strokeColor !== null) ? strokeColor :
+            var strokeColor = (!_.isUndefined(strokeColor)) ? strokeColor :
                 this.options.styles.stroke_color;
 
+            // Capture highlight color.
+            var highlightColor = (!_.isUndefined(highlightColor)) ? highlightColor :
+                Neatline.highlightColor;
+
             // Capture stroke opacity.
-            var strokeOpacity = (strokeOpacity !== null) ? strokeOpacity :
+            var strokeOpacity = (!_.isUndefined(strokeOpacity)) ? strokeOpacity :
                 this.options.styles.stroke_opacity;
 
             // Capture stroke width.
-            var strokeWidth = (strokeWidth !== null) ? strokeWidth :
+            var strokeWidth = (!_.isUndefined(strokeWidth)) ? strokeWidth :
                 this.options.styles.stroke_width;
 
             // Capture point radius.
-            var pointRadius = (pointRadius !== null) ? pointRadius :
+            var pointRadius = (!_.isUndefined(pointRadius)) ? pointRadius :
                 this.options.styles.point_radius;
 
             // Construct and return the StyleMaps.
@@ -807,12 +897,88 @@
                 'select': new OpenLayers.Style({
                     fillColor: fillColor,
                     fillOpacity: fillOpacity,
-                    strokeColor: this.options.colors.highlight_red,
+                    strokeColor: strokeColor,
+                    strokeOpacity: strokeOpacity,
+                    pointRadius: pointRadius,
+                    strokeWidth: strokeWidth
+                }),
+                'temporary': new OpenLayers.Style({
+                    fillColor: highlightColor,
+                    fillOpacity: fillOpacity,
+                    strokeColor: highlightColor,
                     strokeOpacity: strokeOpacity,
                     pointRadius: pointRadius,
                     strokeWidth: strokeWidth
                 })
             });
+
+        },
+
+        /*
+         * Construct the base layer objects, set default.
+         */
+        _getBaseLayers: function() {
+
+            // Google physical.
+            this.gphy = new OpenLayers.Layer.Google(
+                "Google Physical",
+                {type: google.maps.MapTypeId.TERRAIN}
+            );
+
+            // Google streets.
+            this.gmap = new OpenLayers.Layer.Google(
+                "Google Streets",
+                {numZoomLevels: 20}
+            );
+
+            // Google hybrid.
+            this.ghyb = new OpenLayers.Layer.Google(
+                "Google Hybrid",
+                {type: google.maps.MapTypeId.HYBRID, numZoomLevels: 20}
+            );
+
+            // Google sattelite.
+            this.gsat = new OpenLayers.Layer.Google(
+                "Google Satellite",
+                {type: google.maps.MapTypeId.SATELLITE, numZoomLevels: 22}
+            );
+
+            // OpenStreetMap.
+            this.osm = new OpenLayers.Layer.OSM();
+
+            return [this.gphy, this.gmap, this.ghyb, this.gsat, this.osm];
+
+        },
+
+        /*
+         * Set the default base layer.
+         */
+        _setDefaultLayer: function() {
+
+            // Set default.
+            switch (Neatline.baseLayer.name) {
+
+                case 'Google Physical':
+                    this.map.setBaseLayer(this.ghpy);
+                break;
+
+                case 'Google Streets':
+                    this.map.setBaseLayer(this.gmap);
+                break;
+
+                case 'Google Hybrid':
+                    this.map.setBaseLayer(this.ghyb);
+                break;
+
+                case 'Google Satellite':
+                    this.map.setBaseLayer(this.gsat);
+                break;
+
+                case 'OpenStreetMap':
+                    this.map.setBaseLayer(this.osm);
+                break;
+
+            }
 
         },
 
@@ -829,8 +995,10 @@
          */
         setCurrentRecordStyle: function(style, value) {
 
+            var self = this;
+
             // If there is no extant data record, abort.
-            if (typeof this.record.data === 'undefined') {
+            if (_.isUndefined(this.record.data)) {
                 return;
             }
 
@@ -844,15 +1012,22 @@
                 this.record.data.stroke_color,
                 this.record.data.stroke_opacity,
                 this.record.data.stroke_width,
-                this.record.data.point_radius);
+                this.record.data.point_radius,
+                this.record.data.highlight_color);
 
             // Rerender the layer to manifest the change.
             this._currentEditLayer.redraw();
 
+            // redraw() (above) is _not_ working. This is a hack to
+            // trigger a rerender on the features.
+            $.each(this._currentEditLayer.features, function(i, feature) {
+                self.highlightControl.unhighlight(feature);
+            });
+
         },
 
         /*
-         * Set default fill color.
+         * Set default style.
          */
         setDefaultStyle: function(style, value) {
 
@@ -862,7 +1037,7 @@
             this._db().each(function(record, id) {
 
                 // Only push the change if the native style is null.
-                if (record.data._native_styles[style] == null) {
+                if (_.isNull(record.data._native_styles[style])) {
 
                     // Update the record tracker object.
                     record.data[style] = value;
@@ -874,14 +1049,101 @@
                         record.data.stroke_color,
                         record.data.stroke_opacity,
                         record.data.stroke_width,
-                        record.data.point_radius);
+                        record.data.point_radius,
+                        record.data.highlight_color);
 
                     // Rerender the layer to manifest the change.
-                    record.layer.redraw();
+                    // record.layer.redraw();
+
+                    // redraw() (above) is _not_ working. This is a hack to
+                    // trigger a rerender on the features.
+                    $.each(record.layer.features, function(i, feature) {
+                        self.highlightControl.unhighlight(feature);
+                    });
 
                 }
 
             });
+
+        },
+
+        /*
+         * Render a highlight on an item's vectors.
+         */
+        highlightVectors: function(recordid) {
+
+            var self = this;
+
+            // Get the item record.
+            var record = this._db({
+                recordid: parseInt(recordid, 10)
+            }).first();
+
+            // If there is no extant data record, abort.
+            if (!record || _.isUndefined(record.data)) {
+                return;
+            }
+
+            // Rebuild the style map.
+            record.layer.styleMap = self._getStyleMap(
+                record.data.highlight_color,
+                record.data.vector_opacity,
+                record.data.highlight_color,
+                record.data.stroke_opacity,
+                record.data.stroke_width,
+                record.data.point_radius,
+                record.data.highlight_color);
+
+            // Rerender the layer to manifest the change.
+            // record.layer.redraw();
+
+            // redraw() (above) is _not_ working. This is a hack to
+            // trigger a rerender on the features.
+            $.each(record.layer.features, function(i, feature) {
+                self.highlightControl.unhighlight(feature);
+            });
+
+            // Show the title tip.
+            this._showTitleTip(record);
+
+        },
+
+        /*
+         * Remove a highlight on an item's vectors.
+         */
+        unhighlightVectors: function(recordid) {
+
+            var self = this;
+
+            // Get the item record.
+            var record = this._db({ recordid: parseInt(recordid, 10) }).first();
+
+            // If there is no extant data record, abort.
+            if (_.isUndefined(record.data)) {
+                return;
+            }
+
+            // Rebuild the style map.
+            record.layer.styleMap = self._getStyleMap(
+                record.data.vector_color,
+                record.data.vector_opacity,
+                record.data.stroke_color,
+                record.data.stroke_opacity,
+                record.data.stroke_width,
+                record.data.point_radius,
+                record.data.highlight_color);
+
+            // Rerender the layer to manifest the change.
+            // record.layer.redraw();
+
+            // redraw() (above) is _not_ working. This is a hack to
+            // trigger a rerender on the features.
+            $.each(record.layer.features, function(i, feature) {
+                self.highlightControl.unhighlight(feature);
+            });
+
+            // Hide the title tip.
+            this._hideTitleTip();
 
         },
 
@@ -971,6 +1233,39 @@
          */
         _popUpEditControls: function() {
             $('.' + this.options.markup.toolbar_class).css('opacity', 1);
+        },
+
+        /*
+         * Build title tooltip.
+         */
+        _constructTitleTip: function(record) {
+
+            // Construct the tip.
+            this.titleTip = $('<div class="title-tip"></div>');
+            this.element.append(this.titleTip);
+
+        },
+
+        /*
+         * Render title tooltip.
+         */
+        _showTitleTip: function(record) {
+
+            // Populate title.
+            this.titleTip.text(
+                $('<span></span>').html(record.data.title).text()
+            );
+
+            // Show.
+            this.titleTip.css('display', 'block');
+
+        },
+
+        /*
+         * Remove title tooltip.
+         */
+        _hideTitleTip: function() {
+            this.titleTip.css('display', 'none');
         }
 
     });

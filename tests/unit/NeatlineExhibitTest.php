@@ -51,11 +51,13 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
     public function testAttributeAccess()
     {
 
-        // Create a record.
+        // Create a record, capture time.
         $exhibit = new NeatlineExhibit();
+        $timestamp = neatline_getTimestamp();
 
         // Set.
         $exhibit->name =                        'name';
+        $exhibit->modified =                    $timestamp;
         $exhibit->map_id =                      1;
         $exhibit->top_element =                 'map';
         $exhibit->items_h_pos =                 'right';
@@ -64,15 +66,20 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
         $exhibit->is_map =                      1;
         $exhibit->is_timeline =                 1;
         $exhibit->is_items =                    1;
+        $exhibit->h_percent =                   50;
+        $exhibit->v_percent =                   50;
         $exhibit->default_map_bounds =          'BOUND()';
         $exhibit->default_map_zoom =            1;
         $exhibit->default_focus_date =          'date';
+        $exhibit->default_timeline_zoom =       10;
         $exhibit->default_vector_color =        '#ffffff';
+        $exhibit->default_stroke_color =        '#ffffff';
+        $exhibit->default_highlight_color =     '#ffffff';
         $exhibit->default_vector_opacity =      50;
         $exhibit->default_stroke_opacity =      50;
-        $exhibit->default_stroke_color =        '#ffffff';
         $exhibit->default_stroke_width =        3;
         $exhibit->default_point_radius =        3;
+        $exhibit->default_base_layer =          1;
         $exhibit->save();
 
         // Re-get the exhibit object.
@@ -80,6 +87,8 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
 
         // Get.
         $this->assertNotNull($exhibit->added);
+        $this->assertNotNull($exhibit->modified);
+        $this->assertEquals($exhibit->modified, $timestamp);
         $this->assertEquals($exhibit->name, 'name');
         $this->assertEquals($exhibit->map_id, 1);
         $this->assertNull($exhibit->image_id, 1);
@@ -90,15 +99,20 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
         $this->assertEquals($exhibit->is_map, 1);
         $this->assertEquals($exhibit->is_timeline, 1);
         $this->assertEquals($exhibit->is_items, 1);
+        $this->assertEquals($exhibit->h_percent, 50);
+        $this->assertEquals($exhibit->v_percent, 50);
         $this->assertEquals($exhibit->default_map_bounds, 'BOUND()');
         $this->assertEquals($exhibit->default_map_zoom, 1);
         $this->assertEquals($exhibit->default_focus_date, 'date');
+        $this->assertEquals($exhibit->default_timeline_zoom, 10);
         $this->assertEquals($exhibit->default_vector_color, '#ffffff');
+        $this->assertEquals($exhibit->default_stroke_color, '#ffffff');
+        $this->assertEquals($exhibit->default_highlight_color, '#ffffff');
         $this->assertEquals($exhibit->default_vector_opacity, 50);
         $this->assertEquals($exhibit->default_stroke_opacity, 50);
-        $this->assertEquals($exhibit->default_stroke_color, '#ffffff');
         $this->assertEquals($exhibit->default_stroke_width, 3);
         $this->assertEquals($exhibit->default_point_radius, 3);
+        $this->assertEquals($exhibit->default_base_layer, 1);
 
     }
 
@@ -286,13 +300,14 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
         $neatline = $this->helper->_createNeatline();
 
         // Save with int zoom and check.
-        $neatline->saveViewportPositions('bounds', 5, 'date');
+        $neatline->saveViewportPositions('bounds', 5, 'date', 10);
         $this->assertEquals($neatline->default_map_bounds, 'bounds');
         $this->assertEquals($neatline->default_map_zoom, 5);
         $this->assertEquals($neatline->default_focus_date, 'date');
+        $this->assertEquals($neatline->default_timeline_zoom, 10);
 
         // Save with str zoom and check.
-        $neatline->saveViewportPositions('bounds', '5', 'date');
+        $neatline->saveViewportPositions('bounds', '5', 'date', 10);
         $this->assertEquals($neatline->default_map_zoom, 5);
 
     }
@@ -309,8 +324,20 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
         // Create an exhibit and map.
         $neatline = $this->helper->_createNeatline();
 
-        // Save and check.
-        $neatline->saveViewportArrangement(1, 1, 1, 'map', 'right', 'top', 'full');
+        // Save.
+        $neatline->saveViewportArrangement(
+            1,
+            1,
+            1,
+            'map',
+            'right',
+            'top',
+            'full',
+            40,
+            60
+        );
+
+        // Check.
         $this->assertEquals($neatline->is_map, 1);
         $this->assertEquals($neatline->is_timeline, 1);
         $this->assertEquals($neatline->is_items, 1);
@@ -318,6 +345,8 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
         $this->assertEquals($neatline->items_h_pos, 'right');
         $this->assertEquals($neatline->items_v_pos, 'top');
         $this->assertEquals($neatline->items_height, 'full');
+        $this->assertEquals($neatline->h_percent, 40);
+        $this->assertEquals($neatline->v_percent, 60);
 
     }
 
@@ -522,11 +551,11 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
 
     /**
      * setStyle() should not save a row value if the passed value is the
-     * same as the system default.
+     * same as the system default and there is not a non-null row value.
      *
      * @return void.
      */
-    public function testSetStyleWithNonNovelDuplicateValues()
+    public function testSetStyleWithNonNovelDuplicateValuesAndUnsetRowValues()
     {
 
         // Create a record.
@@ -544,6 +573,51 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
         $this->assertNull($exhibit->default_vector_color);
         $this->assertNull($exhibit->default_vector_opacity);
         $this->assertNull($exhibit->default_stroke_color);
+        $this->assertNull($exhibit->default_stroke_opacity);
+        $this->assertNull($exhibit->default_stroke_width);
+        $this->assertNull($exhibit->default_point_radius);
+
+    }
+
+    /**
+     * setStyle() should null a row-level value when the passed value is the same
+     * as the system default and there is a non-null existing row value.
+     *
+     * @return void.
+     */
+    public function testSetStyleWithNonNovelDuplicateValuesAndSetRowValues()
+    {
+
+        // Create a record.
+        $exhibit = $this->helper->_createNeatline();
+        $exhibit->default_vector_color = '#000000';
+        $exhibit->default_stroke_color = '#000000';
+        $exhibit->default_vector_opacity = 1;
+        $exhibit->default_stroke_opacity = 1;
+        $exhibit->default_stroke_width = 1;
+        $exhibit->default_point_radius = 1;
+        $exhibit->save();
+
+        // Set system styling defaults.
+        set_option('vector_color', '#5033de');
+        set_option('stroke_color', '#1e2ee6');
+        set_option('vector_opacity', 20);
+        set_option('stroke_opacity', 70);
+        set_option('stroke_width', 4);
+        set_option('point_radius', 6);
+
+        // Set.
+        $this->assertTrue($exhibit->setStyle('vector_color', '#5033de'));
+        $this->assertTrue($exhibit->setStyle('vector_opacity', 20));
+        $this->assertTrue($exhibit->setStyle('stroke_color', '#1e2ee6'));
+        $this->assertTrue($exhibit->setStyle('stroke_opacity', 70));
+        $this->assertTrue($exhibit->setStyle('stroke_width', 4));
+        $this->assertTrue($exhibit->setStyle('point_radius', 6));
+
+        // Check.
+        $this->assertNull($exhibit->default_vector_color);
+        $this->assertNull($exhibit->default_stroke_color);
+        $this->assertNull($exhibit->default_vector_opacity);
         $this->assertNull($exhibit->default_stroke_opacity);
         $this->assertNull($exhibit->default_stroke_width);
         $this->assertNull($exhibit->default_point_radius);
@@ -662,6 +736,198 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
         // Check count.
         $this->assertEquals($neatline1->getNumberOfRecords(), 3);
         $this->assertEquals($neatline2->getNumberOfRecords(), 1);
+
+    }
+
+    /**
+     * getBaseLayer() should return the default exhibit when there is
+     * no local default setting.
+     *
+     * @return void.
+     */
+    public function testGetBaseLayerWithNoLocalSetting()
+    {
+
+        // Create exhibit.
+        $neatline = $this->helper->_createNeatline();
+
+        // Get base layer.
+        $baseLayer = $neatline->getBaseLayer();
+
+        // Check identity.
+        $this->assertEquals($baseLayer->name, 'Google Physical');
+
+    }
+
+    /**
+     * getBaseLayer() should return the locally set default when there
+     * is a non-null value for the base layer key.
+     *
+     * @return void.
+     */
+    public function testGetBaseLayerWithLocalSetting()
+    {
+
+        // Create exhibit and layer.
+        $neatline = $this->helper->_createNeatline();
+        $layer = new NeatlineBaseLayer;
+        $layer->name = 'Test Layer';
+        $layer->save();
+
+        // Set key.
+        $neatline->default_base_layer = $layer->id;
+        $neatline->save();
+
+        // Get base layer.
+        $baseLayer = $neatline->getBaseLayer();
+
+        // Check identity.
+        $this->assertEquals($baseLayer->name, 'Test Layer');
+
+    }
+
+    /**
+     * getViewportProportions() should return system defaults when there are no
+     * set values on the exhibit record.
+     *
+     * @return void.
+     */
+    public function testGetViewportProportionsWithNoLocalSettings()
+    {
+
+        // Set system defaults.
+        set_option('h_percent', 25);
+        set_option('v_percent', 85);
+
+        // Create exhibit.
+        $exhibit = $this->helper->_createNeatline();
+
+        // Test for system defaults.
+        $this->assertEquals(
+            $exhibit->getViewportProportions(),
+            array('horizontal' => 25, 'vertical' => 85)
+        );
+
+    }
+
+    /**
+     * getViewportProportions() should return record specific settings when
+     * there are local values on the row.
+     *
+     * @return void.
+     */
+    public function testGetViewportProportionsWithLocalSettings()
+    {
+
+        // Set system defaults.
+        set_option('h_percent', 25);
+        set_option('v_percent', 85);
+
+        // Create exhibit and set local values.
+        $exhibit = $this->helper->_createNeatline();
+        $exhibit->h_percent = 10;
+        $exhibit->v_percent = 20;
+
+        // Test for system defaults.
+        $this->assertEquals(
+            $exhibit->getViewportProportions(),
+            array('horizontal' => 10, 'vertical' => 20)
+        );
+
+    }
+
+    /**
+     * getTimelineZoom() should return system default when there is no
+     * set value on the exhibit record.
+     *
+     * @return void.
+     */
+    public function testGetTimelineZoomWithNoLocalSettings()
+    {
+
+        // Set system default.
+        set_option('timeline_zoom', 25);
+
+        // Create exhibit.
+        $exhibit = $this->helper->_createNeatline();
+
+        // Test for system default.
+        $this->assertEquals(
+            $exhibit->getTimelineZoom(),
+            25
+        );
+
+    }
+
+    /**
+     * getTimelineZoom() should return the record specific setting when
+     * there are local values on the row.
+     *
+     * @return void.
+     */
+    public function testGetTimelineZoomWithLocalSettings()
+    {
+
+        // Set system default.
+        set_option('timeline_zoom', 25);
+
+        // Create exhibit.
+        $exhibit = $this->helper->_createNeatline();
+        $exhibit->default_timeline_zoom = 3;
+
+        // Test for system default.
+        $this->assertEquals(
+            $exhibit->getTimelineZoom(),
+            3
+        );
+
+    }
+
+    /**
+     * setModified() should update the modified field.
+     *
+     * @return void.
+     */
+    public function testSetModified()
+    {
+
+        // Create exhibit, get time, set.
+        $exhibit = $this->helper->_createNeatline();
+        $timestamp = neatline_getTimestamp();
+        $exhibit->setModified();
+
+        // Get delta and check.
+        $delta = strtotime($timestamp) - strtotime($exhibit->modified);
+        $this->assertLessThanOrEqual(1, $delta);
+
+    }
+
+    /**
+     * save() should trigger an update of the modified field.
+     *
+     * @return void.
+     */
+    public function testUpdateModifiedOnSave()
+    {
+
+        // Get time.
+        $timestamp = neatline_getTimestamp();
+
+        // Create an exhibit.
+        $exhibit = $this->helper->_createNeatline();
+
+        // Check for column set.
+        $this->assertNotNull($exhibit->modified);
+
+        // Set the modified date back, get delta and check.
+        $exhibit->modified = '2010-01-01 00:00:00';
+        $delta = strtotime($timestamp) - strtotime($exhibit->modified);
+        $this->assertGreaterThanOrEqual(1, $delta);
+
+        // Set the modified date back, get delta and check.
+        $exhibit->save();
+        $delta = strtotime($timestamp) - strtotime($exhibit->modified);
+        $this->assertLessThanOrEqual(1, $delta);
 
     }
 

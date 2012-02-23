@@ -1,10 +1,12 @@
 
-<div id="topbar" class="topbar-inner topbar">
+<div id="topbar" class="neatline-bar topbar">
 
-    <img id="neatline-logo" src="http:///Users/davidmcclure/pear/bin/plugins/Neatline/views/admin/images/neatline-logo-white-small.png" />
+    <img id="neatline-logo" src="http:///Users/davidmcclure/pear/bin/plugins/Neatline/views/shared/images/neatline-logo-editor.png" />
     <span class="top-bar-title">Test Exhibit</span>
 
     
+<a class="omeka-logo" href="/neatline-exhibits">Back to Omeka</a>
+
 <ul class="nav">
 
     <li class="dropdown">
@@ -34,6 +36,11 @@
 <input type="text" class="color-picker miniColors" name="default-stroke-color" value="#1e2ee6" />
 <hr />
 
+<!-- Highlight color. -->
+<h5>Default Highlight Color</h5>
+<input type="text" class="color-picker miniColors" name="default-highlight-color" value="#ff0000" />
+<hr />
+
 <!-- Vector opacity. -->
 <h5>Default Shape Opacity</h5>
 <input type="text" class="integer-dragger" name="default-vector-opacity" value="20" />
@@ -55,21 +62,27 @@
 <hr />
 
 <!-- Base layer picker. -->
-<!--
-<h5>Base Layer</h5>
+<h5>Default Base Layer</h5>
 <select name="base-layer">
-    <option>[none]</option>
-    <option>OpenStreetMap</option>
-</select>
+        <option value="1" >
+        OpenStreetMap    </option>
+        <option value="2" selected="selected">
+        Google Physical    </option>
+        <option value="3" >
+        Google Streets    </option>
+        <option value="4" >
+        Google Hybrid    </option>
+        <option value="5" >
+        Google Satellite    </option>
+    </select>
 <hr />
--->
 
 <button class="btn icon approve save">Save</button>
         </div>
     </li>
 
     <li class="dropdown">
-        <a href="" id="configure-layout-button" class="dropdown-toggle">Configure Layout</a>
+        <a href="" id="configure-layout-button" class="dropdown-toggle">Layout Editor</a>
         <div id="configure-layout" class="dropdown-content">
             
 <div id="options">
@@ -91,12 +104,6 @@ to store the current viewport settings as the public defaults.</p>
         </div>
     </li>
 
-    <li class="dropdown">
-        <a class="omeka-logo" href="/neatline-exhibits">
-            <img id="omeka-logo" src="http:///Users/davidmcclure/pear/bin/plugins/Neatline/views/admin/images/back-to-omeka-white.png" />
-        </a>
-    </li>
-
 </ul>
 
 </div>
@@ -115,17 +122,8 @@ to store the current viewport settings as the public defaults.</p>
             </div>
         </div>
 
-        <div class="filter-items-column tags">
-
-            <div class="filter-header">
-                <input type="checkbox" />
-                <h5 class="title">Tags</h5>
-            </div>
-
-            
-        </div>
-
-        <div class="filter-items-column types">
+        
+                <div class="filter-items-column types">
 
             <div class="filter-header">
                 <input type="checkbox" />
@@ -204,8 +202,8 @@ to store the current viewport settings as the public defaults.</p>
                 </div>
             
         </div>
-
-        <div class="filter-items-column collections">
+        
+                <div class="filter-items-column collections">
 
             <div class="filter-header">
                 <input type="checkbox" />
@@ -224,7 +222,7 @@ to store the current viewport settings as the public defaults.</p>
                 </div>
             
         </div>
-
+        
     </div>
 
 </div>
@@ -257,14 +255,15 @@ to store the current viewport settings as the public defaults.</p>
 
     <form class="form-stacked">
 
-        <fieldset>
-
-            <div id="edit-form-inputs" class="inputs">
+        <a class="fieldset title-and-description" href="">
+            <div class="fieldset-arrow"></div>Text Description
+        </a>
+        <div class="fieldset">
 
             <div class="clearfix">
                 <label for="title">Title</label>
                 <div class="input">
-                    <input class="xlarge" name="title" size="30" placeholder="Title" type="text" />
+                    <textarea id="item-title" class="xlarge" name="title" placeholder="Title" rows="1"></textarea>
                     <span class="help-block">The text displayed as the item's icon on the timeline.</span>
                 </div>
             </div>
@@ -277,13 +276,22 @@ to store the current viewport settings as the public defaults.</p>
                 </div>
             </div>
 
+        </div>
+
+        <hr />
+
+        <a class="fieldset date-information" href="">
+            <div class="fieldset-arrow"></div>Start and End Dates
+        </a>
+        <div class="fieldset">
+
             <div class="clearfix">
                 <label>Start Date</label>
                 <div class="input">
                     <div class="inline-inputs">
-                        <input class="medium" name="start-date-date" type="text" placeholder="Date" />
-                        <input class="mini" name="start-date-time" type="text" placeholder="Time" />
-                        <span class="help-inline">Enter the date (or start date) of the item.</span>
+                        <input class="medium" name="start-date-date" type="text" placeholder="Start Date" />
+                        <input class="mini" name="start-date-time" type="text" placeholder="Start Time" />
+                        <span class="help-inline">Enter regular dates: 'April 23, 1616' and '10:15 am'</span>
                     </div>
                 </div>
             </div>
@@ -292,12 +300,21 @@ to store the current viewport settings as the public defaults.</p>
                 <label>End Date</label>
                 <div class="input">
                     <div class="inline-inputs">
-                        <input class="medium" name="end-date-date" type="text" placeholder="Date" />
-                        <input class="mini" name="end-date-time" type="text" placeholder="Time" />
+                        <input class="medium" name="end-date-date" type="text" placeholder="End Date" />
+                        <input class="mini" name="end-date-time" type="text" placeholder="End Time" />
                         <span class="help-inline">Enter an ending date, if applicable.</span>
                     </div>
                 </div>
             </div>
+
+        </div>
+
+        <hr />
+
+        <a class="fieldset date-styles" href="">
+            <div class="fieldset-arrow"></div>Timeline Styles
+        </a>
+        <div class="fieldset">
 
             <div class="clearfix">
                 <label>Date Ambiguity</label>
@@ -317,6 +334,15 @@ to store the current viewport settings as the public defaults.</p>
                 </div>
             </div>
 
+        </div>
+
+        <hr />
+
+        <a class="fieldset map-styles" href="">
+            <div class="fieldset-arrow"></div>Map Styles
+        </a>
+        <div class="fieldset">
+
             <div class="clearfix">
                 <label>Shape Color</label>
                 <div class="input">
@@ -333,6 +359,16 @@ to store the current viewport settings as the public defaults.</p>
                     <div class="inline-inputs">
                         <input type="text" class="color-picker" name="stroke-color" />
                         <span class="help-inline">Select a color for the border lines around shapes.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="clearfix">
+                <label>Highlight Color</label>
+                <div class="input">
+                    <div class="inline-inputs">
+                        <input type="text" class="color-picker" name="highlight-color" />
+                        <span class="help-inline">Select a highlight color.</span>
                     </div>
                 </div>
             </div>
@@ -386,6 +422,12 @@ to store the current viewport settings as the public defaults.</p>
                 </div>
             </div>
 
+        </div>
+
+        <hr />
+
+        <div class="fieldset">
+
             <div class="clearfix">
                 <div class="input">
                     <div class="inline-inputs">
@@ -395,14 +437,12 @@ to store the current viewport settings as the public defaults.</p>
                 </div>
             </div>
 
-            </div>
-
             <div id="edit-form-actions" class="actions">
                 <input type="submit" class="btn primary" value="Save">
                 <button id="record-delete-button" class="btn danger">Delete</button>
             </div>
 
-        </fieldset>
+        </div>
 
     </form>
 
@@ -415,16 +455,25 @@ to store the current viewport settings as the public defaults.</p>
 
     <div id="map" class="neatline-block"></div>
 
-    <div id="timeline" class="neatline-block neatlinetime-timeline"></div>
+    <div id="timeline" class="neatline-block neatlinetime-timeline">
+        <!-- Timeline zoom buttons. -->
+        
+<div id="zoom-buttons">
+    <div class="button zoom-in"></div>
+    <div class="button zoom-out"></div>
+</div>
+    </div>
 
     <div id="items" class="neatline-block">
         <div id="items-container"></div>
     </div>
 
-    <div id="scroll">
-        <div class="arrow-left">‹</div>
-        <div class="arrow-right">›</div>
-    </div>
+    <!-- Forward/backward scroll arrows. -->
+    
+<div id="scroll">
+    <div class="arrow-left">‹</div>
+    <div class="arrow-right">›</div>
+</div>
 
 </div>
 
@@ -445,9 +494,13 @@ to store the current viewport settings as the public defaults.</p>
 <script type="text/javascript">
 
     // Exhibit parameters.
-    var Neatline = {"added":"2012-01-09 12:57:24","name":"Test Exhibit","map_id":null,"image_id":null,"top_element":null,"items_h_pos":null,"items_v_pos":null,"items_height":null,"is_map":1,"is_timeline":1,"is_items":1,"default_map_bounds":null,"default_map_zoom":null,"default_focus_date":null,"default_vector_color":null,"default_vector_opacity":null,"default_stroke_color":null,"default_stroke_opacity":null,"default_stroke_width":null,"default_point_radius":null,"id":1};
+    var Neatline = {"added":"2012-02-20 12:50:42","modified":"2012-02-20 12:50:42","name":"Test Exhibit","map_id":null,"image_id":null,"top_element":"map","items_h_pos":"right","items_v_pos":"top","items_height":"full","h_percent":50,"v_percent":60,"is_map":1,"is_timeline":1,"is_items":1,"default_map_bounds":null,"default_map_zoom":null,"default_focus_date":null,"default_timeline_zoom":null,"default_vector_color":null,"default_stroke_color":null,"default_highlight_color":null,"default_vector_opacity":null,"default_stroke_opacity":null,"default_stroke_width":null,"default_point_radius":null,"default_base_layer":null,"id":1};
         Neatline.dataSources = {"timeline":"http:\/\/\/Users\/davidmcclure\/pear\/bin\/neatline-exhibits\/1\/data\/simile","map":"http:\/\/\/Users\/davidmcclure\/pear\/bin\/neatline-exhibits\/1\/data\/openlayers","undated":"http:\/\/\/Users\/davidmcclure\/pear\/bin\/neatline-exhibits\/1\/data\/udi"};
-        Neatline.public = false;
+        Neatline.isPublic = false;
+        Neatline.baseLayer = {"name":"Google Physical","id":2};
+        Neatline.proportions = {"horizontal":50,"vertical":60};
+        Neatline.timelineZoom = 15;
+        Neatline.highlightColor = '#ff0000';
 
     // Map parameters.
     

@@ -1,4 +1,4 @@
-/*
+/**
  * Component widget that controls the undated items block. Instantiated by the
  * parent Neatline widget.
  *
@@ -31,20 +31,24 @@
             // Hexes.
             colors: {
                 purple: '#724E85',
-                background: '#FFFEF8',
+                background: '#f9f9f9',
                 title: '#202020',
-                highlight: '#f2eff3'
+                highlight: '#f3f6ff'
             },
 
             // CSS constants.
             css: {
-                def_opacity: 0.7
+                def_opacity: 0.7,
+                def_font_size: 13,
+                active_font_size: 18
             }
 
         },
 
         /*
-         * Getters and starting get items call.
+         * .
+         *
+         * - return void.
          */
         _create: function() {
 
@@ -68,16 +72,17 @@
 
         /*
          * Request item markup and gloss the results.
+         *
+         * - return void.
          */
         loadData: function() {
-
-            // Build list.
             this._getItems();
-
         },
 
         /*
          * Populate content.
+         *
+         * - return void.
          */
         _getItems: function() {
 
@@ -92,6 +97,7 @@
                 success: function(data) {
                     self.listContainer.html(data);
                     self._glossItems();
+                    self._trigger('newitems');
                 }
 
             });
@@ -100,6 +106,8 @@
 
         /*
          * On window resize, recompute the top offsets.
+         *
+         * - return void.
          */
         _addResizeListener: function() {
 
@@ -114,6 +122,8 @@
         /*
          * Once the raw markup is from the items ajax query is pushed into the
          * container, build the functionality for each item.
+         *
+         * - return void.
          */
         _glossItems: function() {
 
@@ -132,29 +142,61 @@
 
                 // Populate trackers.
                 self._idToItem[recordid] = item;
-                self._idOrdering.push(recordid);
+                self._idOrdering.push(parseInt(recordid, 10));
+                item.data('expanded', false);
+
+                // Unbind all events.
+                item.add(description).unbind();
+
+                // Disable selection on the titles.
+                item.disableSelection();
 
                 // Listen for events.
-                item.add(description).bind({
+                item.bind({
 
                     'mousedown': function() {
 
-                        // Trigger out to the deployment code.
-                        self._trigger('itemclick', {}, {
-                            'recordid': recordid,
-                            'scrollItems': true
-                        });
+                        // If hidden, expand.
+                        if (!item.data('expanded')) {
+
+                            // Trigger out to the deployment code.
+                            self._trigger('itemclick', {}, {
+                                'recordid': recordid,
+                                'scrollItems': true
+                            });
+
+                        }
+
+                        // If expanded, hide.
+                        else {
+                            self.contractDescription(item);
+                        }
 
                     },
 
                     // Highlight.
                     'mouseenter': function() {
+
+                        // Gloss the title.
                         self.__highlightItem(item);
+
+                        // Trigger out to the deployment code.
+                        self._trigger('itementer', {}, {
+                            'recordid': recordid
+                        });
+
                     },
 
                     // Un-highlight.
                     'mouseleave': function() {
+
+                        // De-gloss the title.
                         self.__unhighlightItem(item);
+
+                        // Trigger out to the deployment code.
+                        self._trigger('itemleave', {}, {
+                            'recordid': recordid
+                        });
                     }
 
                 });
@@ -168,15 +210,17 @@
 
         /*
          * Scroll to the right.
+         *
+         * - return void.
          */
         scrollRight: function() {
 
             // Compute the new id.
-            this._currentItemId = this._getNewScrollId('right');
+            var newId = this.getNewScrollId('right');
 
             // Trigger out to the deployment code.
             this._trigger('itemclick', {}, {
-                'recordid': this._currentItemId,
+                'recordid': newId,
                 'scrollItems': true
             });
 
@@ -184,15 +228,17 @@
 
         /*
          * Scroll to the right.
+         *
+         * - return void.
          */
         scrollLeft: function() {
 
             // Compute the new id.
-            this._currentItemId = this._getNewScrollId('left');
+            var newId = this.getNewScrollId('left');
 
             // Trigger out to the deployment code.
             this._trigger('itemclick', {}, {
-                'recordid': this._currentItemId,
+                'recordid': newId,
                 'scrollItems': true
             });
 
@@ -201,8 +247,12 @@
         /*
          * Figure out the id of the item that should be scrolled to. Direction
          * is 'left' or 'right'.
+         *
+         * - param string direction: 'left' or 'right'.
+         *
+         * - return integer: The id of the new item.
          */
-        _getNewScrollId: function(direction) {
+        getNewScrollId: function(direction) {
 
             switch (direction) {
 
@@ -265,6 +315,8 @@
         /*
          * Once the raw markup is from the items ajax query is pushed into the
          * container, build the functionality for each item.
+         *
+         * - return void.
          */
         _getItemOffsets: function() {
 
@@ -290,26 +342,68 @@
         },
 
         /*
-         * Vertical scroll to item.
+         * Expand the description.
+         *
+         * - param DOM item: The <li> of the item to expand.
+         *
+         * - return void.
          */
-        scrollToItem: function(id) {
+        expandDescription: function(item) {
 
-            // Fetch the markup and get components.
-            var item = this._idToItem[id];
+            var self = this;
 
-            // If the item is present in the squence tray.
-            if (item !== null) {
+            // Capture the id of the new record, get description.
+            var recordId = item.attr('recordid');
+            var description = item.next('li');
 
-                // Set the trackers.
-                this._currentItem = item;
-                this._currentItemId = id;
+            // Mark the title as active.
+            this.__activateTitle(item);
 
-                // Position at the top of the frame.
-                this.element.animate({
-                    'scrollTop': this._idToOffset[id] + 1
-                }, 300);
+            // Only show the description if it has content.
+            if (description.text() !== '') {
+
+                // Show and measure the description.
+                description.css('display', 'list-item');
+                var height = description[0].scrollHeight;
+
+                // Expand.
+                description.animate({ 'height': height }, 200);
 
             }
+
+            // Set trackers.
+            self._currentItem = item;
+            self._currentItemId = parseInt(item.attr('recordid'), 10);
+            item.data('expanded', true);
+
+        },
+
+        /*
+         * Expand the description.
+         *
+         * - param DOM item: The <li> of the item to expand.
+         *
+         * - return void.
+         */
+        contractDescription: function(item) {
+
+            // Get the description.
+            var description = item.next('li');
+
+            // Mark the title as inactive.
+            this.__deactivateTitle(item);
+
+            // Contract and hide.
+            description.animate({
+                'height': 0
+            }, 200, function() {
+                description.css('display', 'none');
+            });
+
+            // Set trackers.
+            this._currentItem = null;
+            this._currentItemId = null;
+            item.data('expanded', false);
 
         },
 
@@ -319,25 +413,164 @@
 
 
         /*
-         * Gloss title and description on mouseenter.
+         * Vertical scroll to item.
+         *
+         * - param integer id: The recordid of the item to scroll to.
+         *
+         * - return void.
          */
-        __highlightItem: function(item) {
+        scrollToItem: function(id) {
 
-            item.stop().animate({
-                'background-color': this.options.colors.highlight
-            }, 100);
+            // Fetch the markup and get components.
+            var item = this._idToItem[id];
+
+            // If the item is present in the squence tray.
+            if (!_.isUndefined(item)) {
+
+                // If another item is expanded, hide.
+                if (this._currentItemId !== null &&
+                    this._currentItemId !== id) {
+                        this.__hideCurrentDescription();
+                        this._currentItem.data('expanded', false);
+                }
+
+                // Get the new scrollTop.
+                var scrollTop = item.position().top + this.element.scrollTop();
+
+                // If the new scroll is greater than the total height,
+                // scroll exactly to the bottom.
+                if (scrollTop > this.element[0].scrollHeight) {
+                    scrollTop = this.element[0].scrollHeight;
+                }
+
+                // Position at the top of the frame.
+                this.element.animate({
+                    'scrollTop': scrollTop + 1
+                }, 200);
+
+                // Expand the description.
+                this.expandDescription(item);
+
+            }
 
         },
 
         /*
+         * Gloss title and description on mouseenter.
+         *
+         * - param DOM item: The <li> of the item to expand.
+         *
+         * - return void.
+         */
+        __highlightItem: function(item) {
+            item.css('background-color', this.options.colors.highlight);
+        },
+
+        /*
          * Push title and description back to default state.
+         *
+         * - param DOM item: The <li> of the item to expand.
+         *
+         * - return void.
          */
         __unhighlightItem: function(item) {
+            item.css('background-color', this.options.colors.background);
+        },
 
-            item.stop().animate({
-                'background-color': this.options.colors.background
-            }, 100);
+        /*
+         * Pop the title as active.
+         *
+         * - param DOM item: The <li> of the item to expand.
+         *
+         * - return void.
+         */
+        __activateTitle: function(item) {
 
+            if (!item.data('expanded')) {
+                item.stop().animate({
+                    'font-size': '+=5px',
+                    'color': this.options.colors.purple
+                }, 100);
+            }
+
+        },
+
+        /*
+         * Return the title to normal.
+         *
+         * - param DOM item: The <li> of the item to expand.
+         * - param boolean immediate: If true, .css() instead of .animate();
+         *
+         * - return void.
+         */
+        __deactivateTitle: function(item, immediate) {
+
+            // Halt if the item is not currently activated.
+            if (item.data('expanded')) {
+
+                // If not immediate, animate down.
+                if (!immediate) {
+                    item.stop().animate({
+                        'font-size': '-=5px',
+                        'color': this.options.colors.title
+                    }, 100);
+                }
+
+                // If immediate, manifest directly.
+                else {
+                    item.css({
+                        'font-size': '-=5px',
+                        'color': this.options.colors.title
+                    });
+                }
+
+            }
+
+        },
+
+        /*
+         * Dissapear the currently-expanded description.
+         *
+         * - return void.
+         */
+        __hideCurrentDescription: function() {
+
+            // Deactivate the title.
+            if (!_.isNull(this._currentItem)) {
+
+                // Deactivate the title.
+                this.__deactivateTitle(this._currentItem, true);
+
+                // Hide the description.
+                this._currentItem.next('li').css({
+                    'height': 0,
+                    'display': 'none'
+                });
+
+            }
+
+        },
+
+        /*
+         * Emit a protected class attribute.
+         *
+         * - param string attr: The name of the attribute.
+         *
+         * - return mixed attr: The value of the attribute.
+         */
+        getAttr: function(attr) {
+            return this[attr];
+        },
+
+        /*
+         * Set a class attribute.
+         *
+         * - param string attr: The name of the attribute.
+         *
+         * - return void.
+         */
+        setAttr: function(attr, value) {
+            return this[attr] = value;
         }
 
     });

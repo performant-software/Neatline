@@ -150,8 +150,36 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
     {
 
         $records = $this->fetchObjects(
-            $this->getSelect()->where('exhibit_id = ' . $neatline->id . 
-                ' AND item_id IS NULL')
+            $this->getSelect()
+                 ->where('exhibit_id = ' . $neatline->id . ' AND item_id IS NULL')
+                 ->order('display_order ASC')
+        );
+
+        return $records ? $records : false;
+
+    }
+
+    /**
+     * Simple title searching for Neatline-native records by exhibit.
+     *
+     * @param Omeka_record $neatline The exhibit record.
+     * @param string $search The search string.
+     *
+     * @return array of Omeka_record The records.
+     */
+    public function searchNeatlineRecordsByExhibit($neatline, $search)
+    {
+
+        // If the search string is empty, get all records.
+        if ($search == '') {
+            return $this->getNeatlineRecordsByExhibit($neatline);
+        }
+
+        $records = $this->fetchObjects(
+            $this->getSelect()->where(
+                'exhibit_id = ' . $neatline->id .
+                ' AND item_id IS NULL' .
+                ' AND title LIKE "%' . $search . '%"')
         );
 
         return $records ? $records : false;
@@ -247,9 +275,10 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
                     'item_id' =>            $record->item_id,
                     'title' =>              $record->getTitle(),
                     'vector_color' =>       $record->getStyle('vector_color'),
+                    'stroke_color' =>       $record->getStyle('stroke_color'),
+                    'highlight_color' =>    $record->getStyle('highlight_color'),
                     'vector_opacity' =>     $record->getStyle('vector_opacity'),
                     'stroke_opacity' =>     $record->getStyle('stroke_opacity'),
-                    'stroke_color' =>       $record->getStyle('stroke_color'),
                     'stroke_width' =>       $record->getStyle('stroke_width'),
                     'point_radius' =>       $record->getStyle('point_radius'),
                     'bounds' =>             $record->map_bounds,

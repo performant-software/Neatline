@@ -33,6 +33,7 @@ class NeatlineExhibit extends Omeka_record
 
 
     public $added;
+    public $modified;
     public $name;
 
     // Foreign keys.
@@ -44,6 +45,8 @@ class NeatlineExhibit extends Omeka_record
     public $items_h_pos;
     public $items_v_pos;
     public $items_height;
+    public $h_percent;
+    public $v_percent;
 
     // Viewport presence.
     public $is_map;
@@ -54,16 +57,19 @@ class NeatlineExhibit extends Omeka_record
     public $default_map_bounds;
     public $default_map_zoom;
 
-    // Default timeline focus.
+    // Timeline position defaults.
     public $default_focus_date;
+    public $default_timeline_zoom;
 
     // Default styles.
     public $default_vector_color;
-    public $default_vector_opacity;
     public $default_stroke_color;
+    public $default_highlight_color;
+    public $default_vector_opacity;
     public $default_stroke_opacity;
     public $default_stroke_width;
     public $default_point_radius;
+    public $default_base_layer;
 
     /**
      * Valid style attribute names.
@@ -74,7 +80,8 @@ class NeatlineExhibit extends Omeka_record
         'default_stroke_color',
         'default_stroke_opacity',
         'default_stroke_width',
-        'default_point_radius'
+        'default_point_radius',
+        'default_highlight_color'
     );
 
 
@@ -177,16 +184,23 @@ class NeatlineExhibit extends Omeka_record
      * @param string $mapExtent The bounding box for the map.
      * @param string $mapZoom The integer zoom value.
      * @param string $timelineCenter The timestamp for the timeline focus.
+     * @param string $timelineZoom The timeline zoom level.
      *
      * @return Omeka_record The map.
      */
-    public function saveViewportPositions($mapExtent, $mapZoom, $timelineCenter)
+    public function saveViewportPositions(
+        $mapExtent,
+        $mapZoom,
+        $timelineCenter,
+        $timelineZoom
+    )
     {
 
         // Set values.
         $this->default_map_bounds = $mapExtent;
         $this->default_map_zoom = intval($mapZoom);
         $this->default_focus_date = $timelineCenter;
+        $this->default_timeline_zoom = $timelineZoom;
         $this->save();
 
     }
@@ -211,7 +225,9 @@ class NeatlineExhibit extends Omeka_record
         $topElement,
         $itemsHorizPos,
         $itemsVertPos,
-        $itemsHeight
+        $itemsHeight,
+        $hPercent,
+        $vPercent
     )
     {
 
@@ -223,6 +239,8 @@ class NeatlineExhibit extends Omeka_record
         $this->items_h_pos =            $itemsHorizPos;
         $this->items_v_pos =            $itemsVertPos;
         $this->items_height =           $itemsHeight;
+        $this->h_percent =      $hPercent;
+        $this->v_percent =      $vPercent;
         $this->save();
 
     }
@@ -248,6 +266,14 @@ class NeatlineExhibit extends Omeka_record
         else if ($value != get_option($style)) {
             $this['default_' . $style] = $value;
             return true;
+        }
+
+        // If the value matches the system default and there is an existing
+        // row-level value on the exhibit.
+        else if ($value == get_option($style) &&
+            !is_null($this['default_' . $style])) {
+                $this['default_' . $style] = null;
+                return true;
         }
 
         return false;
@@ -334,6 +360,77 @@ class NeatlineExhibit extends Omeka_record
     }
 
     /**
+     * Get the base layer record.
+     *
+     * @return Omeka_record The record.
+     */
+    public function getBaseLayer()
+    {
+
+        // Get the data record table and query for active records.
+        $_layersTable = $this->getTable('NeatlineBaseLayer');
+
+        // If exhibit value is null, get and return default.
+        if (is_null($this->default_base_layer)) {
+            return $_layersTable->fetchObject(
+                $_layersTable->getSelect()->where('name = "Google Physical"')
+            );
+        }
+
+        // If exhibit value is set, return the setting.
+        else {
+            return $_layersTable->find($this->default_base_layer);
+        }
+
+    }
+
+    /**
+     * Get the horizontal and vertical viewport percentages.
+     *
+     * @return array $proportions array('horizontal' => integer, 'vertical' => integer).
+     */
+    public function getViewportProportions()
+    {
+
+        // Shell out array with defaults.
+        $proportions = array(
+            'horizontal' =>     get_option('h_percent'),
+            'vertical' =>       get_option('v_percent')
+        );
+
+        // Use row-specifc values if present.
+        if (!is_null($this->h_percent) && !is_null($this->v_percent)) {
+            $proportions['horizontal'] =    $this->h_percent;
+            $proportions['vertical'] =      $this->v_percent;
+        }
+
+        return $proportions;
+
+    }
+
+    /**
+     * Get the starting timeline zoom.
+     *
+     * @return integer $zoom The zoom index.
+     */
+    public function getTimelineZoom()
+    {
+        return !is_null($this->default_timeline_zoom) ?
+            $this->default_timeline_zoom :
+            get_option('timeline_zoom');
+    }
+
+    /**
+     * Set the 'modified' column to the current timestamp.
+     *
+     * @return void.
+     */
+    public function setModified()
+    {
+        $this->modified = neatline_getTimestamp();
+    }
+
+    /**
      * Delete status and element text association records
      * on exhibit delete.
      *
@@ -360,7 +457,11 @@ class NeatlineExhibit extends Omeka_record
     public function save()
     {
 
-        if (!(!is_null($this->map_id) && !is_null($this->image_id))) {
+        // Update the modified field.
+        $this->setModified();
+
+        // If map_id is null or image_id is null.
+        if (is_null($this->map_id) || is_null($this->image_id)) {
             parent::save();
         }
 
@@ -368,6 +469,16 @@ class NeatlineExhibit extends Omeka_record
             return false;
         }
 
+    }
+
+    /**
+     * Call native save.
+     *
+     * @return void.
+     */
+    public function parentSave()
+    {
+        parent::save();
     }
 
 }
