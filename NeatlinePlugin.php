@@ -92,6 +92,8 @@ class NeatlinePlugin
                 `added`                     TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                 `modified`                  TIMESTAMP NULL,
                 `name`                      tinytext collate utf8_unicode_ci,
+                `slug`                      varchar(100) NOT NULL,
+                `public`                    tinyint(1) NOT NULL,
                 `map_id`                    int(10) unsigned NULL,
                 `image_id`                  int(10) unsigned NULL,
                 `top_element`               ENUM('map', 'timeline') DEFAULT 'map',

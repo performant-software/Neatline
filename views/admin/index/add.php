@@ -30,7 +30,7 @@ head(array('content_class' => 'neatline'));
 ?>
 
 <?php echo $this->partial('index/_header.php', array(
-    'tab' => 'neatlines',
+    'subtitle' => 'Create Exhibit',
     'add_button_uri' => 'neatline-exhibits/add',
     'add_button_text' => 'Create a Neatline'
 )); ?>
