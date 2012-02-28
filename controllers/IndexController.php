@@ -97,7 +97,6 @@ class Neatline_IndexController extends Omeka_Controller_Action
         }
 
         // Push Neatline object into view.
-        $this->view->neatline = $neatline;
         $this->view->form = $form;
         $this->view->errors = $errors;
 
