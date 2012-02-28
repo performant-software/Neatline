@@ -417,4 +417,22 @@ class Neatline_FixtureBuilderTest extends Omeka_Test_AppTestCase
 
     }
 
+    /*
+     * Exhibit add/edit form.
+     *
+     * @return void.
+     */
+    public function testBuildExhibitForm()
+    {
+
+        $fixture = fopen(self::$path_to_fixtures . 'add-form.html', 'w');
+
+        $this->dispatch('neatline/fixtures/exhibitform');
+        $response = $this->getResponse()->getBody('default');
+
+        fwrite($fixture, $response);
+        fclose($fixture);
+
+    }
+
 }

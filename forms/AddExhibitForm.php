@@ -43,6 +43,7 @@ class AddExhibitForm extends Omeka_form
         $_maps = $_db->getTable('NeatlineMapsMap');
 
         $this->setMethod('post');
+        $this->setAttrib('id', 'add-exhibit-form');
 
         // Title.
         $this->addElement('text', 'title', array(

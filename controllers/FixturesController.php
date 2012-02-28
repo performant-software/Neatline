@@ -144,4 +144,20 @@ class Neatline_FixturesController extends Omeka_Controller_Action
 
     }
 
+    /**
+     * Exhibit add/edit form.
+     *
+     * @return void
+     */
+    public function exhibitformAction()
+    {
+
+        // Supress the default Zend layout-sniffer functionality.
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        // Render.
+        echo new AddExhibitForm;
+
+    }
+
 }

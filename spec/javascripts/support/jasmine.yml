@@ -17,7 +17,7 @@ src_files:
     - spec/lib/jasmine-jquery.js
     - spec/lib/mock-ajax.js
     - spec/lib/jasmine-ui.js
-    - views/admin/javascripts/**/*.js
+    - views/admin/javascripts/*.js
     - views/public/javascripts/**/*.js
     - views/shared/javascripts/*.js
     - views/shared/javascripts/editor/*.js
