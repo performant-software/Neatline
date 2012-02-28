@@ -83,16 +83,16 @@ class AddExhibitForm extends Omeka_form
 
         // Map.
         $this->addElement('select', 'map', array(
-            'label'         => 'Option 1: Map',
-            'description'   => 'Select a Geoserver map to user as the exhibit foundation.',
+            'label'         => '(Optional): Geoserver Map',
+            'description'   => 'Select a Geoserver map to use as the exhibit foundation. An exhibit can use a Geoserver map or a static image, but not both. To just use a real-geography base layers, leave both fields blank.',
             'multiOptions'   => $_maps->getMapsForSelect()
         ));
 
         // Image.
         $this->addElement('select', 'image', array(
-            'label'         => 'Option 2: Image',
+            'label'         => '(Optional): Static Image',
             'description'   => 'Or, select a static image to use as the exhibit foundation.',
-            'multiOptions'   => array()
+            'multiOptions'   => $this->getImages()
         ));
 
         // Base layer.
@@ -125,6 +125,37 @@ class AddExhibitForm extends Omeka_form
         $this->addDisplayGroup(array(
             'submit'
         ), 'submit_button');
+
+    }
+
+    /**
+     * Get the list of images for the dropdown select.
+     *
+     * @return array $images The images.
+     */
+    public function getImages()
+    {
+
+        $files = array();
+
+        // Get file table.
+        $_db = get_db();
+        $_files = $_db->getTable('File');
+
+        // Build select.
+        $select = $_files->getSelect()->where(
+            'f.has_derivative_image = 1'
+        )->order('original_filename DESC');
+
+        // Fetch and return.
+        $records = $_files->fetchObjects($select);
+
+        // Build the array.
+        foreach($records as $record) {
+            $files[$record->id] = $record->original_filename;
+        };
+
+        return $files;
 
     }
 

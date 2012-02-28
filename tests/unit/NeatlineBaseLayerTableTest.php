@@ -92,11 +92,11 @@ class Neatline_NeatlineBaseLayerTableTest extends Omeka_Test_AppTestCase
 
         // Check length and structure.
         $this->assertEquals(5, count($layers));
-        $this->assertEquals($layers[0], 'OpenStreetMap');
-        $this->assertEquals($layers[1], 'Google Physical');
-        $this->assertEquals($layers[2], 'Google Streets');
-        $this->assertEquals($layers[3], 'Google Hybrid');
-        $this->assertEquals($layers[4], 'Google Satellite');
+        $this->assertEquals($layers['0'], 'OpenStreetMap');
+        $this->assertEquals($layers['1'], 'Google Physical');
+        $this->assertEquals($layers['2'], 'Google Streets');
+        $this->assertEquals($layers['3'], 'Google Hybrid');
+        $this->assertEquals($layers['4'], 'Google Satellite');
 
     }
 
