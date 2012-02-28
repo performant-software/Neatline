@@ -30,66 +30,8 @@ Neatline is an ideal tool for these kinds of use cases:
 
   * **A map of the movements of characters and concepts in _The Tempest_**: _The Tempest_ takes place in a indeterminate space, an island outside of the moving world, an aesthetic throne for Prospero - and yet the literal, spaitla movements of the characters are described in significant detail. You want to use a Renaissance-era map of an island in the Mediterranean (or the West Indies, or the Carribean) to create a speculative mapping of the text - Prospero's lair, the shipwreck, the carousing of Caliban and Trinculo, the journey back to Italy, the shape and reach of Prospero's vision of selfhood.
 
-## Before You Start
-
-Neatline can be used in two ways: As a free, public-facing webservice by way of [webservice.neatline.org][neatline-webservice], or as a plugin for [Omeka][omeka], an open-source web publishing platform similar to Wordpress or Drupal that makes it possible to build and display archival collections with Dublin Core or EAD metadata. Each option - using the webservice or installing Omeka + Neatline in your own hosting environment - has its own pros and cons, and the decision should be guided by the specific requirements of your project.
-
-The version of the Neatline application delivered by the webservice is identical to the self-hosted version, with the one limitation: Webservice users are limited to "real-geography" base layers (Google Maps and OpenStreetMap layers). If you want to use static or georectified images as base layers, you'll need to run your own instance of Omeka and Neatline, as well as the auxilary software that makes it possible to upload and host the images - the [Neatline Maps][neatline-maps-github] plugin and [Geoserver][geoserver], a powerful Java-based geospatial server that houses and delivers the custom map assets.
-
-Some general considerations:
-
-  * **Webservice**: 
-    * _Pros_: Free, easy, and fast to get up and running. As simple as signing up for an email account. No hosting costs, software installation, or server administration overhead. No technical knowledge is necessary. Great for straightforward, GIS-style use cases that require only "real-geography" base layers (satellite imagery, street maps). Neatline excels as a drop-in replacement for the custom map-making application in Google maps.
-    * _Cons_: Can't upload static images or georectified .tiff files to use as base layers. Can't leverage the underlying archive-building capabilities of Omeka.
-
-  * **Self-Hosted**: 
-    * _Pros_: Used in conjunction with the Neatline Maps plugin and Geoserver, it's possible to use static images and georectified historical maps as base layers. Full access to the Omeka installation that sits behind Neatline, which makes it possible to create Neatline exhbits that directly extend and build on existing archives of Dublin Core or EAD metadata. Best for complex scholaraly projects where the portability and structural integrity of data is of a premium.
-    * _Cons_: Requires basic knowledge of web hosting environments, MySQL administration, and web-based software installation. Geoserver, the optional geospatial software that makes it possible to serve .tiff files as base layers, is a complex piece of software that can be comparatively difficult to deploy.
 
 ## Installation and Configuration
-
-### Neatline Web Service
-
-To get started using the webservice, go to [webservice.neatline.org/register][neatline-webservice-register]. Enter a username, email, and password, and click "Sign Up." 
-
-#### Create a New Exhibit
-
-  1. Click the "New Exhibit" button.
-  2. Enter a title for the exhibit. The title will be displayed in large text at the top of the public display page for the exhibit.
-  3. As you type, the form will automatically generate a "URL Slug" in the box below. The slug is a string of hyphenated text that the webservice will use to form the public URL for the exhibit. Below the URL Slug input, the form automatically populates a preview of the final URL for the exhibit. If you want to use a custom URL slug that's different from the title text, just manually edit the form field for the slug and it will stop mirroring the title text.
-  4. Finally, check the "Public" checkbox if you want the exhibit to be publicly accessible. As long as this box is left unchecked, visitors to the public URL for the exhibit will see a "Coming Soon" placeholder. You can come back to this page at any time and toggle this option on and off.  
-  5. Click the "Create" button. You'll be redirected to your "Browse Exhibits" page, where you'll see a listing for the new exhibit.
-
-#### Edit Exhibit Information
-
-After creating an exhibit, you may want to go back and change some of the options that you set at the beginning. 
-
-  1. Find the listing for the exhibit that you want to edit and click the "edit details" link below the exhibit title.
-  2. You'll get an edit form that's identical to the one that you used to create the exhibit. Edit the Title, URL Slug, or Public options, and click "Save" to commit the changes.
-
-#### View the Public Display Page for an Exhibit
-
-Neatline generates a full-screen page for each of your exhibits that serves as the primary publicly-facing "home" for the exhibit. When you share the  exhibit with other people, you'll want to point them to this page.
-
-  1. In the browse exhibits view, click the "public" link under the exhibit title to go to the full-screen view.
-
-If you do not want the exhibit to be publicly-visible, uncheck the "Public" checkbox in the "edit details" form.
-
-#### Embed An Exhibit 
-
-In addition to providing the full-screen view for an exhibit, Neatline also makes it possible to embed exhibits in any context where HTML markup is allowed. For example, you might want to include a small version of an exhibit in a Wordpress blog post. Neatline includes a dynamic application that lets you configure the dimensions of the embedded exhibit and auto-generates the HTML markup.
-
-  1. Find the listing for the exhibit that you want to embed on the "Browse Exhibits" page and click the "embed" link below the title.
-  2. Use the Width and Height inputs to set the dimensions for the embedded exhibit. To increase or decrease the values in the inputs, click on the field and drag the cursor up and down on the page. The value in the input will go up and down, and the preview of the exhibit at the bottom of the page will automaticaly update. If you already know the dimensions that you want for the exhibit, you can also just type directly into the fields.
-  3. Once you've set the dimensions, just copy the contents of the "Embed Code" field and paste the HTML into the destination context - a different website, a blog post, a forum, etc.
-
-#### Delete An Exhibit 
-
-  1. Find the listing for the exhibit that you want to delete on the "Browse Exhibits" page and click the "delete" link below the title.
-  2. You'll be taken to a confirmation page. **Deleting an exhibit permanently removes the exhibit and all record data associated with it. A deleted exhibit cannot be restored.**
-  3. Click "Yes, delete." You'll be taken back to the "Browse Exhibits" page.
-
-### Self-hosted Omeka + Neatline
 
 Neatline is a plugin for [Omeka][omeka], an open-source web publishing platform that makes it possible to create, curate, and display archival collections based on Dublin Core or EAD metadata. While the web service is designed to make it easy to experiment with Neatline and build exhibits based on real-geography base layers, using Neatline _directly_, inside of the Omeka, makes it possible to base Neatline exhibits on an underlying archive of Omeka items that conforms to rigorous and portable metadata standards.
 
@@ -331,7 +273,7 @@ To create a custom ordering:
 [geoserver]: http://geoserver.org
 [geoserver-install-documentation]:http://docs.geoserver.org/stable/en/user/installation/index.html
 [openstreetmap]: http://www.openstreetmap.org
-[neatline-webservice]: http://webservice.neatline.org
-[neatline-webservice-register]: http://webservice.neatline.org/register
+[neatline-webservice]: http://sandbox.neatline.org
+[neatline-webservice-register]: http://sandbox.neatline.org/register
 [filezilla]: http://filezilla-project.org/
 [neatline-download]: http://neatline.org/download
