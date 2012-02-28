@@ -91,9 +91,9 @@ class AddExhibitForm extends Omeka_form
 
         // Group the baselayer fields.
         $this->addDisplayGroup(array(
+            'baselayer',
             'map',
-            'image',
-            'baselayer'
+            'image'
         ), 'baselayer_info');
 
         // Group the submit button sparately.
