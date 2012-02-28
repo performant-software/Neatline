@@ -201,6 +201,7 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
         $map3->name = 'Map3';
         $map3->save();
 
+        // Hit the route.
         $this->dispatch('neatline-exhibits/add');
 
         // Check for fields.
@@ -242,6 +243,9 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
             'select[name="map"] option[value="' . $map3->id . '"]',
             'Map3');
 
+        // TODO: Test the images dropdown. This is complicated by the fact
+        // that the Omeka files table checks for a real file in the archives
+        // folder, so mocking files is difficult.
 
     }
 
@@ -290,6 +294,16 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
      * @return void.
      */
     public function testBothMapAndImageError()
+    {
+
+    }
+
+    /**
+     * If slug is taken, flash error.
+     *
+     * @return void.
+     */
+    public function testDuplicateSlugError()
     {
 
     }
