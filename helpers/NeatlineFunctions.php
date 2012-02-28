@@ -487,7 +487,7 @@ function neatline_imageSelect($id)
  * Query for images, adding data about the parent items
  * to use while constructing the order in the drop-down.
  *
- * @return array of ? $images The images.
+ * @return array of images The images.
  */
 function neatline_getImagesForSelect()
 {

@@ -32,16 +32,14 @@ head(array('content_class' => 'neatline'));
 <?php echo $this->partial('index/_header.php', array(
     'subtitle' => 'Create Exhibit',
     'add_button_uri' => 'neatline-exhibits/add',
-    'add_button_text' => 'Create a Neatline'
+    'add_button_text' => 'Create an Exhibit'
 )); ?>
 
 <div id="primary">
 
-<div id="title-text">
-    <h1 id="neatline-add-header">Create a Neatline Exhibit</h1>
-    <h3 id="neatline-add-subheader">Enter a title and select a base layer</h3>
-</div>
+<?php echo $form; ?>
 
+<!--
 <form method="post" id="create-neatline">
 
     <h2 class="neatline-label">Enter a title:</h2>
@@ -81,6 +79,7 @@ head(array('content_class' => 'neatline'));
         'Create Exhibit', array('class' => 'neatline btn primary'), 'create-neatline', array(), false, 'create-fieldset'); ?>
 
 </form>
+-->
 
 </div>
 
