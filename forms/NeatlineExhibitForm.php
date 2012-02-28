@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
 
 /**
- * Ignition file.
+ * Index controller integration tests.
  *
  * PHP version 5
  *
@@ -24,28 +24,26 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache 2 License
  */
 
+class NeatlineExhibitForm extends Omeka_form
+{
 
-// constants {{{
+    /**
+     * Construct the exhibit add/edit form.
+     *
+     * @return void.
+     */
+    public function init()
+    {
 
-if (!defined('NEATLINE_PLUGIN_VERSION')) {
-    define('NEATLINE_PLUGIN_VERSION', get_plugin_ini('Neatline', 'version'));
+        parent::init();
+        $this->setMethod('post');
+
+        // Title.
+        $this->addElement('text', 'title', array(
+            'label'         => 'Title',
+            'description'   => 'Enter a title for the exhibit.'
+        ));
+
+    }
+
 }
-
-if (!defined('NEATLINE_PLUGIN_DIR')) {
-    define('NEATLINE_PLUGIN_DIR', dirname(__FILE__));
-}
-
-// }}}
-
-
-// requires {{{
-
-require_once NEATLINE_PLUGIN_DIR . '/NeatlinePlugin.php';
-require_once NEATLINE_PLUGIN_DIR . '/helpers/NeatlineFunctions.php';
-require_once NEATLINE_PLUGIN_DIR . '/helpers/NeatlineAjaxFunctions.php';
-require_once NEATLINE_PLUGIN_DIR . '/forms/NeatlineExhibitForm.php';
-
-// }}}
-
-// Instantiate the manager class.
-new NeatlinePlugin;
