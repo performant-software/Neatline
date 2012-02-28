@@ -60,13 +60,14 @@ head(array('content_class' => 'neatline'));
         <?php foreach ($neatlines as $neatline): ?>
         <tr exhibitid="<?php echo $neatline->id; ?>">
             <td class="title"><?php echo neatline_linkToNeatline($neatline); ?>
+                <div class="slug-preview">/<?php echo $neatline->slug; ?></div>
                 <?php echo $this->partial('index/_action_buttons.php', array(
                   'uriSlug' => 'neatline-exhibits',
                   'neatline' => $neatline)); ?>
             </td>
-            <td class="map"><?php echo neatline_linkToMap($neatline); ?></td>
-            <td class="added"><?php echo neatline_formatDate($neatline->added); ?></td>
-            <td></td>
+            <td><?php echo neatline_formatDate($neatline->modified); ?></td>
+            <td><?php echo $neatline->getNumberOfRecords(); ?></td>
+            <td><?php echo $neatline->public == 1 ? 'yes' : 'no'; ?></td>
         </tr>
         <?php endforeach; ?>
     </tbody>

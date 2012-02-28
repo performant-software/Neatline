@@ -45,6 +45,7 @@ class AddExhibitForm extends Omeka_form
 
         $this->setMethod('post');
         $this->setAttrib('id', 'add-exhibit-form');
+        $this->addElementPrefixPath('Neatline', dirname(__FILE__));
 
         // Title.
         $this->addElement('text', 'title', array(
@@ -109,7 +110,16 @@ class AddExhibitForm extends Omeka_form
             'label'         => '(Optional): Geoserver Map',
             'description'   => 'Select a Geoserver map to use as the exhibit foundation. An exhibit can use a Geoserver map or a static image, but not both. To just use a real-geography base layers, leave both fields blank.',
             'attribs'       => array('style' => 'width: 230px'),
-            'multiOptions'  => $_maps->getMapsForSelect()
+            'multiOptions'  => $_maps->getMapsForSelect(),
+            'validators'    => array(
+                array('validator' => 'MapOrImage', 'breakChainOnFailure' => true, 'options' =>
+                    array(
+                        'messages' => array(
+                            Neatline_Validate_MapOrImage::MAP_OR_IMAGE => __('Can\'t use both a map and an image.')
+                        )
+                    )
+                )
+            )
         ));
 
         // Image.
@@ -117,7 +127,16 @@ class AddExhibitForm extends Omeka_form
             'label'         => '(Optional): Static Image',
             'description'   => 'Or, select a static image to use as the exhibit foundation.',
             'attribs'       => array('style' => 'width: 230px'),
-            'multiOptions'  => $this->getImagesForSelect()
+            'multiOptions'  => $this->getImagesForSelect(),
+            'validators'    => array(
+                array('validator' => 'MapOrImage', 'breakChainOnFailure' => true, 'options' =>
+                    array(
+                        'messages' => array(
+                            Neatline_Validate_MapOrImage::MAP_OR_IMAGE => __('Can\'t use both a map and an image.')
+                        )
+                    )
+                )
+            )
         ));
 
         // Base layer.

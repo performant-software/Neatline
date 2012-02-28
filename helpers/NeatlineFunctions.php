@@ -341,8 +341,7 @@ function neatline_formatDate($date)
 {
 
     $date = new DateTime($date);
-
-    return '<span class="neatline-date">' . $date->format('F j, Y') . '</span>';
+    return $date->format('F j, Y \a\t g:i a');
 
 }
 

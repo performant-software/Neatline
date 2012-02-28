@@ -33,3 +33,12 @@ td.title a.neatline-title {
     margin: 0 0 0.3em 0;
     font-weight: bold;
 }
+
+div.slug-preview {
+    margin: 5px 0;
+    color: gray;
+}
+
+a.edit, a.delete {
+    margin: 0 0.4em 0 0;
+}

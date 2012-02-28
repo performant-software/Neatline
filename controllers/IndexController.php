@@ -88,10 +88,31 @@ class Neatline_IndexController extends Omeka_Controller_Action
         // Try to create the Neatline if the form has been submitted.
         if ($this->_request->isPost()) {
 
+            print_r($this->_request->getPost());
+
             // If no errors, save form and redirect.
             if ($form->isValid($this->_request->getPost())) {
-                // Create exhibit.
+
+                // Get values and create new exhibit.
+                $values = $form->getValues();
+                print_r($values);
+
+                // Create exhibit and apply values.
+                $exhibit = new NeatlineExhibit;
+                $exhibit->saveForm(
+                    $values['title'],
+                    $values['slug'],
+                    $values['public'],
+                    $values['baselayer'],
+                    $values['map'],
+                    $values['image']
+                );
+
+                // Commit.
+                $exhibit->save();
+
                 return $this->_redirect('neatline-exhibits');
+
             }
 
         }

@@ -260,7 +260,7 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
         // Missing title.
         $this->request->setMethod('POST')
             ->setPost(array(
-                'title' => '',
+                'title' => ''
             )
         );
 
@@ -297,7 +297,7 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
         // Missing slug.
         $this->request->setMethod('POST')
             ->setPost(array(
-                'slug' => '',
+                'slug' => ''
             )
         );
 
@@ -334,7 +334,7 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
         // Spaces.
         $this->request->setMethod('POST')
             ->setPost(array(
-                'slug' => 'slug with spaces',
+                'slug' => 'slug with spaces'
             )
         );
 
@@ -371,7 +371,7 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
         // Spaces.
         $this->request->setMethod('POST')
             ->setPost(array(
-                'slug' => 'Slug-With-Capitals',
+                'slug' => 'Slug-With-Capitals'
             )
         );
 
@@ -408,7 +408,7 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
         // Spaces.
         $this->request->setMethod('POST')
             ->setPost(array(
-                'slug' => 'slug-with-non-alphas!',
+                'slug' => 'slug-with-non-alphas!'
             )
         );
 
@@ -445,7 +445,7 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
         // Spaces.
         $this->request->setMethod('POST')
             ->setPost(array(
-                'slug' => 'valid-slug',
+                'slug' => 'valid-slug'
             )
         );
 
@@ -485,7 +485,7 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
         // Duplicate slug.
         $this->request->setMethod('POST')
             ->setPost(array(
-                'slug' => 'test-exhibit',
+                'slug' => 'test-exhibit'
             )
         );
 
@@ -519,6 +519,37 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
     public function testBothMapAndImageError()
     {
 
+        // Create an exhibit.
+        $exhibit = $this->helper->_createNeatline();
+
+        // Duplicate slug.
+        $this->request->setMethod('POST')
+            ->setPost(array(
+                'map' => '1',
+                'image' => '1'
+            )
+        );
+
+        // No exhibits at the start.
+        $this->assertEquals($this->_exhibitsTable->count(), 1);
+
+        // Submit the form.
+        $this->dispatch('neatline-exhibits/add');
+
+        // Should redirect to the add view.
+        $this->assertModule('neatline');
+        $this->assertController('index');
+        $this->assertAction('add');
+
+        // Check for the error.
+        $this->assertQueryContentContains(
+            'ul.errors li',
+            'Can\'t use both a map and an image.'
+        );
+
+        // No exhibit should have been created.
+        $this->assertEquals($this->_exhibitsTable->count(), 1);
+
     }
 
     /**
@@ -528,6 +559,35 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
      */
     public function testAddSuccessWithNoMapAndNoImage()
     {
+
+        $this->request->setMethod('POST')
+            ->setPost(array(
+                'title' => 'Test Exhibit',
+                'slug' => 'test-exhibit',
+                'public' => 1,
+                'baselayer' => 5,
+                'map' => 'none',
+                'image' => 'none'
+            )
+        );
+
+        // No exhibits at the start.
+        $this->assertEquals($this->_exhibitsTable->count(), 0);
+
+        // Submit the form.
+        $this->dispatch('neatline-exhibits/add');
+
+        // No exhibit should have been created.
+        $this->assertEquals($this->_exhibitsTable->count(), 1);
+
+        // Get the exhibit and examine.
+        $exhibit = $this->_exhibitsTable->find(1);
+        $this->assertEquals($exhibit->name, 'Test Exhibit');
+        $this->assertEquals($exhibit->slug, 'test-exhibit');
+        $this->assertEquals($exhibit->public, 1);
+        $this->assertEquals($exhibit->default_base_layer, 5);
+        $this->assertNull($exhibit->map_id);
+        $this->assertNull($exhibit->image_id);
 
     }
 
@@ -539,6 +599,35 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
     public function testAddSuccessWithMap()
     {
 
+        $this->request->setMethod('POST')
+            ->setPost(array(
+                'title' => 'Test Exhibit',
+                'slug' => 'test-exhibit',
+                'public' => 1,
+                'baselayer' => 5,
+                'map' => 2,
+                'image' => 'none'
+            )
+        );
+
+        // No exhibits at the start.
+        $this->assertEquals($this->_exhibitsTable->count(), 0);
+
+        // Submit the form.
+        $this->dispatch('neatline-exhibits/add');
+
+        // No exhibit should have been created.
+        $this->assertEquals($this->_exhibitsTable->count(), 1);
+
+        // Get the exhibit and examine.
+        $exhibit = $this->_exhibitsTable->find(1);
+        $this->assertEquals($exhibit->name, 'Test Exhibit');
+        $this->assertEquals($exhibit->slug, 'test-exhibit');
+        $this->assertEquals($exhibit->public, 1);
+        $this->assertEquals($exhibit->default_base_layer, 5);
+        $this->assertEquals($exhibit->map_id, 2);
+        $this->assertNull($exhibit->image_id);
+
     }
 
     /**
@@ -548,6 +637,35 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
      */
     public function testAddSuccessWithImage()
     {
+
+        $this->request->setMethod('POST')
+            ->setPost(array(
+                'title' => 'Test Exhibit',
+                'slug' => 'test-exhibit',
+                'public' => 1,
+                'baselayer' => 5,
+                'map' => 'none',
+                'image' => 2
+            )
+        );
+
+        // No exhibits at the start.
+        $this->assertEquals($this->_exhibitsTable->count(), 0);
+
+        // Submit the form.
+        $this->dispatch('neatline-exhibits/add');
+
+        // No exhibit should have been created.
+        $this->assertEquals($this->_exhibitsTable->count(), 1);
+
+        // Get the exhibit and examine.
+        $exhibit = $this->_exhibitsTable->find(1);
+        $this->assertEquals($exhibit->name, 'Test Exhibit');
+        $this->assertEquals($exhibit->slug, 'test-exhibit');
+        $this->assertEquals($exhibit->public, 1);
+        $this->assertEquals($exhibit->default_base_layer, 5);
+        $this->assertNull($exhibit->map_id);
+        $this->assertEquals($exhibit->image_id, 2);
 
     }
 

@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
 
 /**
- * Ignition file.
+ * Custom validator to block exhibits with a map and an image.
  *
  * PHP version 5
  *
@@ -24,29 +24,32 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache 2 License
  */
 
+class Neatline_Validate_MapOrImage extends Zend_Validate_Abstract
+{
 
-// constants {{{
+    const MAP_OR_IMAGE = 'mapOrImage';
 
-if (!defined('NEATLINE_PLUGIN_VERSION')) {
-    define('NEATLINE_PLUGIN_VERSION', get_plugin_ini('Neatline', 'version'));
+    protected $_messageTemplates = array(
+        self::MAP_OR_IMAGE => 'Choose a map or an image, or neither, but not both.'
+    );
+
+    /**
+     * Block exhibits with a map and an image.
+     *
+     * @return boolean True if the field is valid.
+     */
+    public function isValid($value, $context = null)
+    {
+
+        $this->_setValue($value);
+
+        if ($context['map'] !== 'none' && $context['image'] !== 'none') {
+            $this->_error(self::MAP_OR_IMAGE);
+            return false;
+        }
+
+        return true;
+
+    }
+
 }
-
-if (!defined('NEATLINE_PLUGIN_DIR')) {
-    define('NEATLINE_PLUGIN_DIR', dirname(__FILE__));
-}
-
-// }}}
-
-
-// requires {{{
-
-require_once NEATLINE_PLUGIN_DIR . '/NeatlinePlugin.php';
-require_once NEATLINE_PLUGIN_DIR . '/helpers/NeatlineFunctions.php';
-require_once NEATLINE_PLUGIN_DIR . '/helpers/NeatlineAjaxFunctions.php';
-require_once NEATLINE_PLUGIN_DIR . '/forms/AddExhibitForm.php';
-require_once NEATLINE_PLUGIN_DIR . '/forms/Validate/MapOrImage.php';
-
-// }}}
-
-// Instantiate the manager class.
-new NeatlinePlugin;

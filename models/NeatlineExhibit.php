@@ -117,16 +117,27 @@ class NeatlineExhibit extends Omeka_record
      * Save the add Neatline form.
      *
      * @param string $title The title.
+     * @param string $slug The slug.
      * @param varchar $map The map id.
      * @param varchar $image The image id.
      *
      * @return boolean True if save is successful.
      */
-    public function saveForm($title, $map, $image)
+    public function saveForm(
+        $title,
+        $slug,
+        $public,
+        $baseLayer,
+        $map,
+        $image
+    )
     {
 
         // Set default values.
         $this->name =                   $title;
+        $this->slug =                   $slug;
+        $this->public =                 (int) $public;
+        $this->default_base_layer =     (int) $baseLayer;
         $this->top_element =            'map';
         $this->items_h_pos =            'right';
         $this->items_v_pos =            'bottom';
