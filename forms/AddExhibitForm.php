@@ -35,19 +35,43 @@ class AddExhibitForm extends Omeka_form
     public function init()
     {
 
+        // Get database and tables.
+        $_db = get_db();
+        $_layers = $_db->getTable('NeatlineBaseLayer');
+
         parent::init();
         $this->setMethod('post');
 
         // Title.
         $this->addElement('text', 'title', array(
             'label'         => 'Title',
-            'description'   => 'The title is displayed at the top of the exhibit.'
+            'description'   => 'The title is displayed at the top of the exhibit.',
+            'size'          => 40,
+            'validators'    => array(
+                array('validator' => 'NotEmpty', 'breakChainOnFailure' => true, 'options' =>
+                    array(
+                        'messages' => array(
+                            Zend_Validate_NotEmpty::IS_EMPTY => __('Enter a title.')
+                        )
+                    )
+                )
+            )
         ));
 
         // Slug.
         $this->addElement('text', 'slug', array(
             'label'         => 'URL Slug',
-            'description'   => 'The URL slug is used to form the public URL for the exhibit. Can only contain letters, numbers, and hyphens (no spaces)..'
+            'description'   => 'The URL slug is used to form the public URL for the exhibit. Can only contain letters, numbers, and hyphens (no spaces)..',
+            'size'          => 40,
+            'validators'    => array(
+                array('validator' => 'NotEmpty', 'breakChainOnFailure' => true, 'options' =>
+                    array(
+                        'messages' => array(
+                            Zend_Validate_NotEmpty::IS_EMPTY => __('Enter a slug.')
+                        )
+                    )
+                )
+            )
         ));
 
         // Public.
@@ -60,21 +84,21 @@ class AddExhibitForm extends Omeka_form
         $this->addElement('select', 'map', array(
             'label'         => 'Option 1: Map',
             'description'   => 'Select a Geoserver map to user as the exhibit foundation.',
-            'multiOptons'   => array()
+            'multiOptions'   => array()
         ));
 
         // Image.
         $this->addElement('select', 'image', array(
             'label'         => 'Option 2: Image',
             'description'   => 'Or, select a static image to use as the exhibit foundation.',
-            'multiOptons'   => array()
+            'multiOptions'   => array()
         ));
 
         // Base layer.
         $this->addElement('select', 'baselayer', array(
             'label'         => 'Default Base Layer',
             'description'   => 'Select a default base layer.',
-            'multiOptons'   => array()
+            'multiOptions'   => $_layers->getLayersForSelect()
         ));
 
         // Submit.
