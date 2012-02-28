@@ -41,6 +41,7 @@ class AddExhibitForm extends Omeka_form
         $_db = get_db();
         $_layers = $_db->getTable('NeatlineBaseLayer');
         $_maps = $_db->getTable('NeatlineMapsMap');
+        $_exhibits = $_db->getTable('NeatlineExhibit');
 
         $this->setMethod('post');
         $this->setAttrib('id', 'add-exhibit-form');
@@ -73,6 +74,24 @@ class AddExhibitForm extends Omeka_form
                     array(
                         'messages' => array(
                             Zend_Validate_NotEmpty::IS_EMPTY => __('Enter a slug.')
+                        )
+                    )
+                ),
+                array('validator' => 'Regex', 'breakChainOnFailure' => true, 'options' =>
+                    array(
+                        'pattern' => '/^[0-9a-z\-]+$/',
+                        'messages' => array(
+                            Zend_Validate_Regex::NOT_MATCH => __('Lowercase letters, numbers, and hyphens only.')
+                        )
+                    )
+                ),
+                array('validator' => 'Db_NoRecordExists', 'options' =>
+                    array(
+                        'table'     =>  $_exhbits,
+                        'field'     =>  'slug',
+                        'adapter'   =>  $_db->getAdapter(),
+                        'messages'  =>  array(
+                            'recordFound' => __('Slug taken.')
                         )
                     )
                 )
