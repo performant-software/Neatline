@@ -35,12 +35,13 @@ class AddExhibitForm extends Omeka_form
     public function init()
     {
 
+        parent::init();
+
         // Get database and tables.
         $_db = get_db();
         $_layers = $_db->getTable('NeatlineBaseLayer');
         $_maps = $_db->getTable('NeatlineMapsMap');
 
-        parent::init();
         $this->setMethod('post');
 
         // Title.
@@ -48,6 +49,7 @@ class AddExhibitForm extends Omeka_form
             'label'         => 'Title',
             'description'   => 'The title is displayed at the top of the exhibit.',
             'size'          => 40,
+            'required'      => true,
             'validators'    => array(
                 array('validator' => 'NotEmpty', 'breakChainOnFailure' => true, 'options' =>
                     array(
@@ -62,8 +64,9 @@ class AddExhibitForm extends Omeka_form
         // Slug.
         $this->addElement('text', 'slug', array(
             'label'         => 'URL Slug',
-            'description'   => 'The URL slug is used to form the public URL for the exhibit. Can only contain letters, numbers, and hyphens (no spaces)..',
+            'description'   => 'The URL slug is used to form the public URL for the exhibit. Can only contain letters, numbers, and hyphens (no spaces).',
             'size'          => 40,
+            'required'      => true,
             'validators'    => array(
                 array('validator' => 'NotEmpty', 'breakChainOnFailure' => true, 'options' =>
                     array(
@@ -85,20 +88,23 @@ class AddExhibitForm extends Omeka_form
         $this->addElement('select', 'map', array(
             'label'         => '(Optional): Geoserver Map',
             'description'   => 'Select a Geoserver map to use as the exhibit foundation. An exhibit can use a Geoserver map or a static image, but not both. To just use a real-geography base layers, leave both fields blank.',
-            'multiOptions'   => $_maps->getMapsForSelect()
+            'attribs'       => array('style' => 'width: 230px'),
+            'multiOptions'  => $_maps->getMapsForSelect()
         ));
 
         // Image.
         $this->addElement('select', 'image', array(
             'label'         => '(Optional): Static Image',
             'description'   => 'Or, select a static image to use as the exhibit foundation.',
-            'multiOptions'   => $this->getImages()
+            'attribs'       => array('style' => 'width: 230px'),
+            'multiOptions'  => $this->getImagesForSelect()
         ));
 
         // Base layer.
         $this->addElement('select', 'baselayer', array(
             'label'         => 'Default Base Layer',
             'description'   => 'Select a default base layer.',
+            'attribs'       => array('style' => 'width: 230px'),
             'multiOptions'  => $_layers->getLayersForSelect()
         ));
 
@@ -133,10 +139,10 @@ class AddExhibitForm extends Omeka_form
      *
      * @return array $images The images.
      */
-    public function getImages()
+    public function getImagesForSelect()
     {
 
-        $files = array();
+        $files = array('none' => '-');
 
         // Get file table.
         $_db = get_db();
