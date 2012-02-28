@@ -40,6 +40,7 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
         $this->helper->setUpPlugin();
         $this->db = get_db();
         $this->_exhibitsTable = $this->db->getTable('NeatlineExhibit');
+        $this->_layersTable = $this->db->getTable('NeatlineBaseLayer');
 
     }
 
@@ -147,6 +148,59 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
     public function testAddBaseMarkup()
     {
 
+        /*
+         * Mock base layers.
+         */
+
+        // Get all existing base layer records.
+        $layers = $this->_layersTable->fetchObjects(
+            $this->_layersTable->getSelect()
+        );
+
+        // Delete.
+        foreach($layers as $layer) {
+            $layer->delete();
+        }
+
+        // OpenStreetMaps.
+        $osm = new NeatlineBaseLayer;
+        $osm->name = 'OpenStreetMap';
+        $osm->save();
+
+        // Google physical.
+        $gphy = new NeatlineBaseLayer;
+        $gphy->name = 'Google Physical';
+        $gphy->save();
+
+        // Google streets.
+        $gstr = new NeatlineBaseLayer;
+        $gstr->name = 'Google Streets';
+        $gstr->save();
+
+        // Google hybrid.
+        $ghyb = new NeatlineBaseLayer;
+        $ghyb->name = 'Google Hybrid';
+        $ghyb->save();
+
+        // Google sattelite.
+        $gsat = new NeatlineBaseLayer;
+        $gsat->name = 'Google Satellite';
+        $gsat->save();
+
+        /*
+         * Mock maps.
+         */
+
+        $map1 = new NeatlineMapsMap;
+        $map1->name = 'Map1';
+        $map1->save();
+        $map2 = new NeatlineMapsMap;
+        $map2->name = 'Map2';
+        $map2->save();
+        $map3 = new NeatlineMapsMap;
+        $map3->name = 'Map3';
+        $map3->save();
+
         $this->dispatch('neatline-exhibits/add');
 
         // Check for fields.
@@ -156,6 +210,38 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
         $this->assertQuery('select[name="baselayer"]');
         $this->assertQuery('select[name="map"]');
         $this->assertQuery('select[name="image"]');
+
+        // Check for base layer options.
+        $this->assertQueryContentContains(
+            'select[name="baselayer"] option[value="' . $osm->id . '"]',
+            'OpenStreetMap');
+        $this->assertQueryContentContains(
+            'select[name="baselayer"] option[value="' . $gphy->id . '"]',
+            'Google Physical');
+        $this->assertQueryContentContains(
+            'select[name="baselayer"] option[value="' . $gstr->id . '"]',
+            'Google Streets');
+        $this->assertQueryContentContains(
+            'select[name="baselayer"] option[value="' . $ghyb->id . '"]',
+            'Google Hybrid');
+        $this->assertQueryContentContains(
+            'select[name="baselayer"] option[value="' . $gsat->id . '"]',
+            'Google Satellite');
+
+        // Check for maps.
+        $this->assertQueryContentContains(
+            'select[name="map"] option[value="none"]',
+            '-');
+        $this->assertQueryContentContains(
+            'select[name="map"] option[value="' . $map1->id . '"]',
+            'Map1');
+        $this->assertQueryContentContains(
+            'select[name="map"] option[value="' . $map2->id . '"]',
+            'Map2');
+        $this->assertQueryContentContains(
+            'select[name="map"] option[value="' . $map3->id . '"]',
+            'Map3');
+
 
     }
 
