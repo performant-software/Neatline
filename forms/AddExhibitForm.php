@@ -38,6 +38,7 @@ class AddExhibitForm extends Omeka_form
         // Get database and tables.
         $_db = get_db();
         $_layers = $_db->getTable('NeatlineBaseLayer');
+        $_maps = $_db->getTable('NeatlineMapsMap');
 
         parent::init();
         $this->setMethod('post');
@@ -84,7 +85,7 @@ class AddExhibitForm extends Omeka_form
         $this->addElement('select', 'map', array(
             'label'         => 'Option 1: Map',
             'description'   => 'Select a Geoserver map to user as the exhibit foundation.',
-            'multiOptions'   => array()
+            'multiOptions'   => $_maps->getMapsForSelect()
         ));
 
         // Image.
@@ -98,7 +99,7 @@ class AddExhibitForm extends Omeka_form
         $this->addElement('select', 'baselayer', array(
             'label'         => 'Default Base Layer',
             'description'   => 'Select a default base layer.',
-            'multiOptions'   => $_layers->getLayersForSelect()
+            'multiOptions'  => $_layers->getLayersForSelect()
         ));
 
         // Submit.
