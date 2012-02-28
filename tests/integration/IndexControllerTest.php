@@ -479,6 +479,36 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
     public function testDuplicateSlugError()
     {
 
+        // Create an exhibit.
+        $exhibit = $this->helper->_createNeatline();
+
+        // Duplicate slug.
+        $this->request->setMethod('POST')
+            ->setPost(array(
+                'slug' => 'test-exhibit',
+            )
+        );
+
+        // No exhibits at the start.
+        $this->assertEquals($this->_exhibitsTable->count(), 1);
+
+        // Submit the form.
+        $this->dispatch('neatline-exhibits/add');
+
+        // Should redirect to the add view.
+        $this->assertModule('neatline');
+        $this->assertController('index');
+        $this->assertAction('add');
+
+        // Check for the error.
+        $this->assertQueryContentContains(
+            'ul.errors li',
+            'Slug taken.'
+        );
+
+        // No exhibit should have been created.
+        $this->assertEquals($this->_exhibitsTable->count(), 1);
+
     }
 
     /**

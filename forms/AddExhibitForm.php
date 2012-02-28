@@ -87,7 +87,7 @@ class AddExhibitForm extends Omeka_form
                 ),
                 array('validator' => 'Db_NoRecordExists', 'options' =>
                     array(
-                        'table'     =>  $_exhbits,
+                        'table'     =>  $_exhibits->getTableName(),
                         'field'     =>  'slug',
                         'adapter'   =>  $_db->getAdapter(),
                         'messages'  =>  array(
