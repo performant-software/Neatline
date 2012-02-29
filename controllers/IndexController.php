@@ -127,8 +127,17 @@ class Neatline_IndexController extends Omeka_Controller_Action
     public function editAction()
     {
 
-        // Construct the form.
-        $form = new editExhibitForm;
+        // Get the exhibit.
+        $exhibit = $this->_neatlinesTable->findBySlug($this->_request->slug);
+
+        // Construct and populate the form.
+        $form = new EditExhibitForm;
+        $form->setExhibit($exhibit);
+        $form->populate(array(
+            'title' => $exhibit->name,
+            'slug' => $exhibit->slug,
+            'public' => $exhibit->public
+        ));
 
         // Try to edit if the form has been submitted.
         if ($this->_request->isPost()) {
@@ -139,19 +148,13 @@ class Neatline_IndexController extends Omeka_Controller_Action
                 // Get values and create new exhibit.
                 $values = $form->getValues();
 
-                // // Create exhibit and apply values.
-                // $exhibit = new NeatlineExhibit;
-                // $exhibit->saveForm(
-                //     $values['title'],
-                //     $values['slug'],
-                //     $values['public'],
-                //     $values['baselayer'],
-                //     $values['map'],
-                //     $values['image']
-                // );
+                // Apply values.
+                $exhibit->name = $values['title'];
+                $exhibit->slug = $values['slug'];
+                $exhibit->public = (int) $values['public'];
 
-                // // Commit.
-                // $exhibit->save();
+                // Commit.
+                $exhibit->save();
 
                 return $this->_redirect('neatline-exhibits');
 
@@ -159,7 +162,8 @@ class Neatline_IndexController extends Omeka_Controller_Action
 
         }
 
-        // Push Neatline object into view.
+        // Push exhibit and form into view.
+        $this->view->exhibit = $exhibit;
         $this->view->form = $form;
 
     }

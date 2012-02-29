@@ -167,4 +167,28 @@ class Neatline_NeatlineExhibitTableTest extends Omeka_Test_AppTestCase
 
     }
 
+    /**
+     * findBySlug() should return the exhibit with the passed slug.
+     *
+     * @return void.
+     */
+    public function testFindBySlug()
+    {
+
+        // Create exhibit.
+        $exhibit = $this->helper->_createNeatline(
+            $name = 'Test Exhibit',
+            $slug = 'test-slug',
+            $public = 1,
+            $is_map = 1,
+            $is_timeline = 1,
+            $is_undated_items = 1
+        );
+
+        // Get the exhibit, check.
+        $retrievedExhibit = $this->_exhibitsTable->findBySlug('test-slug');
+        $this->assertEquals($retrievedExhibit->id, $exhibit->id);
+
+    }
+
 }

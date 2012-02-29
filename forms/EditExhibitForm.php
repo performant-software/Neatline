@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
 
 /**
- * Add exhibit form.
+ * Edit exhibit form.
  *
  * PHP version 5
  *
@@ -24,8 +24,22 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache 2 License
  */
 
-class AddExhibitForm extends Omeka_form
+class EditExhibitForm extends Omeka_form
 {
+
+    private $_exhibit;
+
+    /**
+     * Set the exhibit that is being edited.
+     *
+     * @param NeatlineExhibit $exhibit The exhibit.
+     *
+     * @return void.
+     */
+    public function setExhibit(NeatlineExhibit $exhibit)
+    {
+        $this->_exhibit = $exhibit;
+    }
 
     /**
      * Construct the exhibit add/edit form.
@@ -91,6 +105,10 @@ class AddExhibitForm extends Omeka_form
                         'table'     =>  $_exhibits->getTableName(),
                         'field'     =>  'slug',
                         'adapter'   =>  $_db->getAdapter(),
+                        'exclude'   =>  array(
+                            'field' => 'id',
+                            'value' => $this->_exhibit->id
+                        ),
                         'messages'  =>  array(
                             'recordFound' => __('Slug taken.')
                         )
@@ -105,51 +123,9 @@ class AddExhibitForm extends Omeka_form
             'description'   => 'By default, exhibits are only visible to you.'
         ));
 
-        // Map.
-        $this->addElement('select', 'map', array(
-            'label'         => '(Optional): Geoserver Map',
-            'description'   => 'Select a Geoserver map to use as the exhibit foundation. An exhibit can use a Geoserver map or a static image, but not both. To just use a real-geography base layers, leave both fields blank.',
-            'attribs'       => array('style' => 'width: 230px'),
-            'multiOptions'  => $_maps->getMapsForSelect(),
-            'validators'    => array(
-                array('validator' => 'MapOrImage', 'breakChainOnFailure' => true, 'options' =>
-                    array(
-                        'messages' => array(
-                            Neatline_Validate_MapOrImage::MAP_OR_IMAGE => __('Can\'t use both a map and an image.')
-                        )
-                    )
-                )
-            )
-        ));
-
-        // Image.
-        $this->addElement('select', 'image', array(
-            'label'         => '(Optional): Static Image',
-            'description'   => 'Or, select a static image to use as the exhibit foundation.',
-            'attribs'       => array('style' => 'width: 230px'),
-            'multiOptions'  => $this->getImagesForSelect(),
-            'validators'    => array(
-                array('validator' => 'MapOrImage', 'breakChainOnFailure' => true, 'options' =>
-                    array(
-                        'messages' => array(
-                            Neatline_Validate_MapOrImage::MAP_OR_IMAGE => __('Can\'t use both a map and an image.')
-                        )
-                    )
-                )
-            )
-        ));
-
-        // Base layer.
-        $this->addElement('select', 'baselayer', array(
-            'label'         => 'Default Base Layer',
-            'description'   => 'Select a default base layer.',
-            'attribs'       => array('style' => 'width: 230px'),
-            'multiOptions'  => $_layers->getLayersForSelect()
-        ));
-
         // Submit.
         $this->addElement('submit', 'submit', array(
-            'label' => 'Create Exhibit'
+            'label' => 'Save Exhibit'
         ));
 
         // Group the metadata fields.
@@ -159,48 +135,10 @@ class AddExhibitForm extends Omeka_form
             'public'
         ), 'exhibit_info');
 
-        // Group the baselayer fields.
-        $this->addDisplayGroup(array(
-            'baselayer',
-            'map',
-            'image'
-        ), 'baselayer_info');
-
         // Group the submit button sparately.
         $this->addDisplayGroup(array(
             'submit'
         ), 'submit_button');
-
-    }
-
-    /**
-     * Get the list of images for the dropdown select.
-     *
-     * @return array $images The images.
-     */
-    public function getImagesForSelect()
-    {
-
-        $files = array('none' => '-');
-
-        // Get file table.
-        $_db = get_db();
-        $_files = $_db->getTable('File');
-
-        // Build select.
-        $select = $_files->getSelect()->where(
-            'f.has_derivative_image = 1'
-        )->order('original_filename DESC');
-
-        // Fetch and return.
-        $records = $_files->fetchObjects($select);
-
-        // Build the array.
-        foreach($records as $record) {
-            $files[$record->id] = $record->original_filename;
-        };
-
-        return $files;
 
     }
 

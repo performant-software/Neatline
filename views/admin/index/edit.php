@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
 
 /**
- * Partial for "Actions" buttons in Neatline browse views.
+ * Edit an exhibit.
  *
  * PHP version 5
  *
@@ -25,5 +25,25 @@
  */
 ?>
 
-<a href="<?php echo uri($uriSlug . '/edit/' . $neatline->slug); ?>" class="edit">Edit Details</a>
-<a href="<?php echo uri($uriSlug . '/delete/' . $neatline->id); ?>" class="delete">Delete</a>
+<?php
+queue_js('slugBuilder');
+queue_js('_constructAdd');
+?>
+
+<?php
+head(array('content_class' => 'neatline'));
+?>
+
+<?php echo $this->partial('index/_header.php', array(
+    'subtitle' => 'Edit "' . $exhibit->name . '"',
+    'add_button_uri' => 'neatline-exhibits/add',
+    'add_button_text' => 'Create an Exhibit'
+)); ?>
+
+<div id="primary">
+    <?php echo $form; ?>
+</div>
+
+<?php
+foot();
+?>

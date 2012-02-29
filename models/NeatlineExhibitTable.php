@@ -58,6 +58,24 @@ class NeatlineExhibitTable extends Omeka_Db_Table
     }
 
     /**
+     * Find exhibit by slug.
+     *
+     * @param string $slug The slug.
+     *
+     * @return Omeka_record $exhibit The exhibit.
+     */
+    public function findBySlug($slug)
+    {
+
+        $select = $this->getSelect()->where(
+            'slug = ' . $slug
+        );
+
+        return $this->fetchObject($select);
+
+    }
+
+    /**
      * Build array with current_page, per_page, and total_results.
      *
      * @param integer $page The page number.
