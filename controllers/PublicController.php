@@ -49,8 +49,8 @@ class Neatline_PublicController extends Omeka_Controller_Action
     {
 
         // Get records and shell out defaults.
-        $id =                       $this->_request->getParam('id');
-        $neatline =                 $this->_neatlinesTable->find($id);
+        $slug =                     $this->_request->getParam('slug');
+        $neatline =                 $this->_neatlinesTable->findBySlug($slug);
         $map =                      $neatline->getMap();
         $image =                    $neatline->getImage();
 
@@ -112,8 +112,8 @@ class Neatline_PublicController extends Omeka_Controller_Action
     {
 
         // Get records and shell out defaults.
-        $id =                       $this->_request->getParam('id');
-        $neatline =                 $this->_neatlinesTable->find($id);
+        $slug =                     $this->_request->getParam('slug');
+        $neatline =                 $this->_neatlinesTable->findBySlug($slug);
         $map =                      $neatline->getMap();
         $image =                    $neatline->getImage();
 
@@ -175,8 +175,8 @@ class Neatline_PublicController extends Omeka_Controller_Action
     {
 
         // Get records and shell out defaults.
-        $id =                       $this->_request->getParam('id');
-        $neatline =                 $this->_neatlinesTable->find($id);
+        $slug =                     $this->_request->getParam('slug');
+        $neatline =                 $this->_neatlinesTable->findBySlug($slug);
         $map =                      $neatline->getMap();
         $image =                    $neatline->getImage();
 

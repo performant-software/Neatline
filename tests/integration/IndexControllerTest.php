@@ -141,7 +141,7 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
     }
 
     /**
-     * Check for base markup in the browse view.
+     * Check for base markup in the add view.
      *
      * @return void.
      */
@@ -254,7 +254,7 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
      *
      * @return void.
      */
-    public function testNoTitleError()
+    public function testAddNoTitleError()
     {
 
         // Missing title.
@@ -291,7 +291,7 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
      *
      * @return void.
      */
-    public function testNoSlugError()
+    public function testAddNoSlugError()
     {
 
         // Missing slug.
@@ -328,7 +328,7 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
      *
      * @return void.
      */
-    public function testInvalidSlugWithSpacesError()
+    public function testAddInvalidSlugWithSpacesError()
     {
 
         // Spaces.
@@ -365,7 +365,7 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
      *
      * @return void.
      */
-    public function testInvalidSlugWithCapsError()
+    public function testAddInvalidSlugWithCapsError()
     {
 
         // Spaces.
@@ -402,7 +402,7 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
      *
      * @return void.
      */
-    public function testInvalidSlugWithNonAlphasError()
+    public function testAddInvalidSlugWithNonAlphasError()
     {
 
         // Spaces.
@@ -439,7 +439,7 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
      *
      * @return void.
      */
-    public function testNoErrorForValidSlug()
+    public function testAddNoErrorForValidSlug()
     {
 
         // Spaces.
@@ -476,7 +476,7 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
      *
      * @return void.
      */
-    public function testDuplicateSlugError()
+    public function testAddDuplicateSlugError()
     {
 
         // Create an exhibit.
@@ -516,7 +516,7 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
      *
      * @return void.
      */
-    public function testBothMapAndImageError()
+    public function testAddBothMapAndImageError()
     {
 
         // Create an exhibit.
@@ -666,6 +666,284 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
         $this->assertEquals($exhibit->default_base_layer, 5);
         $this->assertNull($exhibit->map_id);
         $this->assertEquals($exhibit->image_id, 2);
+
+    }
+
+    /**
+     * Test for base markup and field population in edit view.
+     *
+     * @return void.
+     */
+    public function testEditBaseMarkup()
+    {
+
+        // Create exhibit.
+        $exhibit = $this->helper->_createNeatline();
+
+        // Hit the edit form.
+        $this->dispatch('neatline-exhibits/edit/test-exhibit');
+
+        // Title.
+        $this->assertXpath('//input[@name="title"][@value="Test Exhibit"]');
+
+        // Slug.
+        $this->assertXpath('//input[@name="slug"][@value="test-exhibit"]');
+
+        // Public.
+        $this->assertXpath('//input[@name="public"][@checked="checked"]');
+
+    }
+
+    /**
+     * If the title field is blank, flash error.
+     *
+     * @return void.
+     */
+    public function testEditNoTitleError()
+    {
+
+        // Create exhibit.
+        $exhibit = $this->helper->_createNeatline();
+
+        // Missing title.
+        $this->request->setMethod('POST')
+            ->setPost(array(
+                'title' => ''
+            )
+        );
+
+        // Submit the form.
+        $this->dispatch('neatline-exhibits/edit/test-exhibit');
+
+        // Should redirect to the add view.
+        $this->assertModule('neatline');
+        $this->assertController('index');
+        $this->assertAction('edit');
+
+        // Check for the error.
+        $this->assertQueryContentContains(
+            'ul.errors li',
+            'Enter a title.'
+        );
+
+    }
+
+    /**
+     * If the slug field is blank, flash error.
+     *
+     * @return void.
+     */
+    public function testEditNoSlugError()
+    {
+
+        // Create exhibit.
+        $exhibit = $this->helper->_createNeatline();
+
+        // Missing slug.
+        $this->request->setMethod('POST')
+            ->setPost(array(
+                'slug' => ''
+            )
+        );
+
+        // Submit the form.
+        $this->dispatch('neatline-exhibits/edit/test-exhibit');
+
+        // Should redirect to the add view.
+        $this->assertModule('neatline');
+        $this->assertController('index');
+        $this->assertAction('edit');
+
+        // Check for the error.
+        $this->assertQueryContentContains(
+            'ul.errors li',
+            'Enter a slug.'
+        );
+
+    }
+
+    /**
+     * If slug has spaces, flash error.
+     *
+     * @return void.
+     */
+    public function testEditInvalidSlugWithSpacesError()
+    {
+
+        // Create exhibit.
+        $exhibit = $this->helper->_createNeatline();
+
+        // Spaces.
+        $this->request->setMethod('POST')
+            ->setPost(array(
+                'slug' => 'slug with spaces'
+            )
+        );
+
+        // Submit the form.
+        $this->dispatch('neatline-exhibits/edit/test-exhibit');
+
+        // Should redirect to the add view.
+        $this->assertModule('neatline');
+        $this->assertController('index');
+        $this->assertAction('edit');
+
+        // Check for the error.
+        $this->assertQueryContentContains(
+            'ul.errors li',
+            'Lowercase letters, numbers, and hyphens only.'
+        );
+
+    }
+
+    /**
+     * If slug has capital letters, flash error.
+     *
+     * @return void.
+     */
+    public function testEditInvalidSlugWithCapsError()
+    {
+
+        // Create exhibit.
+        $exhibit = $this->helper->_createNeatline();
+
+        // Spaces.
+        $this->request->setMethod('POST')
+            ->setPost(array(
+                'slug' => 'Slug-With-Capitals'
+            )
+        );
+
+        // Submit the form.
+        $this->dispatch('neatline-exhibits/edit/test-exhibit');
+
+        // Should redirect to the add view.
+        $this->assertModule('neatline');
+        $this->assertController('index');
+        $this->assertAction('edit');
+
+        // Check for the error.
+        $this->assertQueryContentContains(
+            'ul.errors li',
+            'Lowercase letters, numbers, and hyphens only.'
+        );
+
+    }
+
+    /**
+     * If slug has non-alphanumerics, flash error.
+     *
+     * @return void.
+     */
+    public function testEditInvalidSlugWithNonAlphasError()
+    {
+
+        // Create exhibit.
+        $exhibit = $this->helper->_createNeatline();
+
+        // Spaces.
+        $this->request->setMethod('POST')
+            ->setPost(array(
+                'slug' => 'slug-with-non-alphas!'
+            )
+        );
+
+        // Submit the form.
+        $this->dispatch('neatline-exhibits/edit/test-exhibit');
+
+        // Should redirect to the add view.
+        $this->assertModule('neatline');
+        $this->assertController('index');
+        $this->assertAction('edit');
+
+        // Check for the error.
+        $this->assertQueryContentContains(
+            'ul.errors li',
+            'Lowercase letters, numbers, and hyphens only.'
+        );
+
+    }
+
+    /**
+     * If slug is valid, do not flash error.
+     *
+     * @return void.
+     */
+    public function testEditNoErrorForValidSlug()
+    {
+
+        // Create exhibit.
+        $exhibit = $this->helper->_createNeatline();
+
+        // Spaces.
+        $this->request->setMethod('POST')
+            ->setPost(array(
+                'slug' => 'valid-slug'
+            )
+        );
+
+        // Submit the form.
+        $this->dispatch('neatline-exhibits/edit/test-exhibit');
+
+        // Should redirect to the add view.
+        $this->assertModule('neatline');
+        $this->assertController('index');
+        $this->assertAction('edit');
+
+        // Check for the error.
+        $this->assertNotQueryContentContains(
+            'ul.errors li',
+            'Lowercase letters, numbers, and hyphens only.'
+        );
+
+    }
+
+    /**
+     * If slug is taken, flash error.
+     *
+     * @return void.
+     */
+    public function testEditDuplicateSlugError()
+    {
+
+        // Create exhibits.
+        $exhibit1 = $this->helper->_createNeatline(
+            $name = 'Test Exhibit 1',
+            $slug = 'test-exhibit-1',
+            $public = 1,
+            $is_map = 1,
+            $is_timeline = 1,
+            $is_undated_items = 1
+        );
+        $exhibit2 = $this->helper->_createNeatline(
+            $name = 'Test Exhibit 2',
+            $slug = 'test-exhibit-2',
+            $public = 1,
+            $is_map = 1,
+            $is_timeline = 1,
+            $is_undated_items = 1
+        );
+
+        // Duplicate slug.
+        $this->request->setMethod('POST')
+            ->setPost(array(
+                'slug' => 'test-exhibit-2'
+            )
+        );
+
+        // No exhibits at the start.
+        $this->dispatch('neatline-exhibits/edit/test-exhibit-1');
+
+        // Should redirect to the add view.
+        $this->assertModule('neatline');
+        $this->assertController('index');
+        $this->assertAction('edit');
+
+        // Check for the error.
+        $this->assertQueryContentContains(
+            'ul.errors li',
+            'Slug taken.'
+        );
 
     }
 
