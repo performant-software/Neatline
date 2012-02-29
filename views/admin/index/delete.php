@@ -30,7 +30,7 @@ head(array('content_class' => 'neatline'));
 ?>
 
 <?php echo $this->partial('index/_header.php', array(
-    'tab' => 'maps',
+    'subtitle' => 'Delete Exhibit "' . $neatline->name . '"',
     'add_button_uri' => 'neatline-exhibits/add',
     'add_button_text' => 'Create a Neatline'
 )); ?>
@@ -39,13 +39,11 @@ head(array('content_class' => 'neatline'));
 
     <h1>Are you sure?</h1>
     <p>This will permanently delete the "<?php echo $neatline->name; ?>" exhibit.
-        All spatial and temporal metadata added by way of the Neatline interface
+        All spatial and temporal metadata added by way of the Neatline editor
         will be lost.</p>
 
     <div class="alert-actions">
-
         <?php echo neatline_deleteConfirmForm($neatline->id); ?>
-
     </div>
 
 </div>

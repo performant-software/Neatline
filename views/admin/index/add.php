@@ -26,62 +26,22 @@
 ?>
 
 <?php
+queue_js('slugBuilder');
+queue_js('_constructAdd');
+?>
+
+<?php
 head(array('content_class' => 'neatline'));
 ?>
 
 <?php echo $this->partial('index/_header.php', array(
-    'tab' => 'neatlines',
+    'subtitle' => 'Create Exhibit',
     'add_button_uri' => 'neatline-exhibits/add',
-    'add_button_text' => 'Create a Neatline'
+    'add_button_text' => 'Create an Exhibit'
 )); ?>
 
 <div id="primary">
-
-<div id="title-text">
-    <h1 id="neatline-add-header">Create a Neatline Exhibit</h1>
-    <h3 id="neatline-add-subheader">Enter a title and select a base layer</h3>
-</div>
-
-<form method="post" id="create-neatline">
-
-    <h2 class="neatline-label">Enter a title:</h2>
-    <?php echo neatline_titleInput($neatline->name); ?>
-    <?php if (array_key_exists('title', $errors)) { echo neatline_error($errors['title']); } ?>
-
-    <hr>
-
-    <?php if (plugin_is_active('NeatlineMaps')): ?>
-
-        <div class="neatline-select-container">
-            <h2 class="neatline-label">Choose a map:</h2>
-            <?php echo neatline_mapSelect($neatline->map_id); ?>
-        </div>
-
-        <div class="neatline-select-container">
-            <h2 class="neatline-label">Or, choose an image:</h2>
-            <?php echo neatline_imageSelect($neatline->image_id); ?>
-        </div>
-        <?php if (array_key_exists('map', $errors)) { echo neatline_error($errors['map']); } ?>
-
-    <?php else: ?>
-
-        <div class="neatline-select-container">
-            <h2 class="neatline-label">Choose an image:</h2>
-            <?php echo neatline_imageSelect($neatline->image_id); ?>
-        </div>
-        <?php if (array_key_exists('map', $errors)) { echo neatline_error($errors['map']); } ?>
-
-    <?php endif; ?>
-
-    <h3>Leave blank to use an OpenStreetMap base layer.</h3>
-
-    <hr>
-
-    <?php echo neatline_buttonTo('', 'save_neatline',
-        'Create Exhibit', array('class' => 'neatline btn primary'), 'create-neatline', array(), false, 'create-fieldset'); ?>
-
-</form>
-
+    <?php echo $form; ?>
 </div>
 
 <?php

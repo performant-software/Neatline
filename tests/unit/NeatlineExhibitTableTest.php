@@ -54,6 +54,8 @@ class Neatline_NeatlineExhibitTableTest extends Omeka_Test_AppTestCase
 
         $exhibit1 = new NeatlineExhibit();
         $exhibit1->name = 'B';
+        $exhibit1->slug = 'test-slug';
+        $exhibit1->public = 1;
         $exhibit1->is_map = 1;
         $exhibit1->is_timeline = 1;
         $exhibit1->is_items = 1;
@@ -61,6 +63,8 @@ class Neatline_NeatlineExhibitTableTest extends Omeka_Test_AppTestCase
         $exhibit1->save();
 
         $exhibit2 = new NeatlineExhibit();
+        $exhibit2->slug = 'test-slug';
+        $exhibit2->public = 1;
         $exhibit2->name = 'A';
         $exhibit2->is_map = 1;
         $exhibit2->is_timeline = 1;
@@ -69,6 +73,8 @@ class Neatline_NeatlineExhibitTableTest extends Omeka_Test_AppTestCase
         $exhibit2->save();
 
         $exhibit3 = new NeatlineExhibit();
+        $exhibit3->slug = 'test-slug';
+        $exhibit3->public = 1;
         $exhibit3->name = 'D';
         $exhibit3->is_map = 1;
         $exhibit3->is_timeline = 1;
@@ -77,6 +83,8 @@ class Neatline_NeatlineExhibitTableTest extends Omeka_Test_AppTestCase
         $exhibit3->save();
 
         $exhibit4 = new NeatlineExhibit();
+        $exhibit4->slug = 'test-slug';
+        $exhibit4->public = 1;
         $exhibit4->name = 'C';
         $exhibit4->is_map = 1;
         $exhibit4->is_timeline = 1;
@@ -156,6 +164,30 @@ class Neatline_NeatlineExhibitTableTest extends Omeka_Test_AppTestCase
                 'total_results' => 4
             )
         );
+
+    }
+
+    /**
+     * findBySlug() should return the exhibit with the passed slug.
+     *
+     * @return void.
+     */
+    public function testFindBySlug()
+    {
+
+        // Create exhibit.
+        $exhibit = $this->helper->_createNeatline(
+            $name = 'Test Exhibit',
+            $slug = 'test-slug',
+            $public = 1,
+            $is_map = 1,
+            $is_timeline = 1,
+            $is_undated_items = 1
+        );
+
+        // Get the exhibit, check.
+        $retrievedExhibit = $this->_exhibitsTable->findBySlug('test-slug');
+        $this->assertEquals($retrievedExhibit->id, $exhibit->id);
 
     }
 

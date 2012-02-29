@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
 
 /**
- * Partial for "Actions" buttons in Neatline browse views.
+ * Table class for base layer records.
  *
  * PHP version 5
  *
@@ -23,7 +23,30 @@
  * @copyright   2011 The Board and Visitors of the University of Virginia
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache 2 License
  */
-?>
 
-<a href="<?php echo uri($uriSlug . '/edit/' . $neatline->slug); ?>" class="edit">Edit Details</a>
-<a href="<?php echo uri($uriSlug . '/delete/' . $neatline->id); ?>" class="delete">Delete</a>
+class NeatlineBaseLayerTable extends Omeka_Db_Table
+{
+
+    /**
+     * Build an array of base layers of format [id] => [name].
+     *
+     * @return void.
+     */
+    public function getLayersForSelect()
+    {
+
+        $layers = array();
+
+        // Get the records.
+        $records = $this->fetchObjects($this->getSelect());
+
+        // Build the array.
+        foreach($records as $record) {
+            $layers[$record->id] = $record->name;
+        };
+
+        return $layers;
+
+    }
+
+}

@@ -1,10 +1,7 @@
-<?php
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
 
-/**
- * Partial for "Actions" buttons in Neatline browse views.
- *
- * PHP version 5
+/*
+ * Runner for add form.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -17,13 +14,17 @@
  * @package     omeka
  * @subpackage  neatline
  * @author      Scholars' Lab <>
- * @author      Bethany Nowviskie <bethany@virginia.edu>
- * @author      Adam Soroka <ajs6f@virginia.edu>
  * @author      David McClure <david.mcclure@virginia.edu>
- * @copyright   2011 The Board and Visitors of the University of Virginia
+ * @copyright   2012 The Board and Visitors of the University of Virginia
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache 2 License
  */
-?>
 
-<a href="<?php echo uri($uriSlug . '/edit/' . $neatline->slug); ?>" class="edit">Edit Details</a>
-<a href="<?php echo uri($uriSlug . '/delete/' . $neatline->id); ?>" class="delete">Delete</a>
+jQuery(document).ready(function($) {
+
+    // Get markup.
+    var addForm = $('#add-exhibit-form');
+
+    // Run the slug previewer.
+    addForm.slugBuilder();
+
+});

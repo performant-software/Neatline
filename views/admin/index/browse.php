@@ -30,7 +30,7 @@ head(array('content_class' => 'neatline'));
 ?>
 
 <?php echo $this->partial('index/_header.php', array(
-    'tab' => 'neatlines',
+    'subtitle' => 'Browse Exhibits',
     'add_button_uri' => 'neatline-exhibits/add',
     'add_button_text' => 'Create an Exhibit'
 )); ?>
@@ -47,10 +47,11 @@ head(array('content_class' => 'neatline'));
         <tr>
         <!-- Column headings. -->
         <?php browse_headings(array(
-            'Title' => 'name',
-            'Map' => null,
-            'Created' => 'added',
-            'Actions' => null
+            'Exhibit' => 'name',
+            'View' => null,
+            'Modified' => 'modified',
+            '# Items' => 'added',
+            'Public' => 'public'
         )); ?>
         </tr>
     </thead>
@@ -59,12 +60,21 @@ head(array('content_class' => 'neatline'));
         <!-- Exhibit listings. -->
         <?php foreach ($neatlines as $neatline): ?>
         <tr exhibitid="<?php echo $neatline->id; ?>">
-            <td class="title"><?php echo neatline_linkToNeatline($neatline); ?></td>
-            <td class="map"><?php echo neatline_linkToMap($neatline); ?></td>
-            <td class="added"><?php echo neatline_formatDate($neatline->added); ?></td>
-            <td><?php echo $this->partial('index/_action_buttons.php', array(
-                'uriSlug' => 'neatline-exhibits',
-                'neatline' => $neatline)); ?></td>
+            <td class="title"><?php echo neatline_linkToNeatline($neatline); ?>
+                <div class="slug-preview">/<?php echo $neatline->slug; ?></div>
+                <?php echo $this->partial('index/_action_buttons.php', array(
+                  'uriSlug' => 'neatline-exhibits',
+                  'neatline' => $neatline)); ?>
+            </td>
+            <td>
+                <div class="public-exhibit-links">
+                    <a href="<?php echo public_uri('neatline-exhibits/show/fullscreen/' . $neatline->slug); ?>" target="_blank">Fullscreen</a> |
+                    <a href="<?php echo public_uri('neatline-exhibits/show/embed/' . $neatline->slug); ?>" target="_blank">Embed</a>
+                </div>
+            </td>
+            <td><?php echo neatline_formatDate($neatline->modified); ?></td>
+            <td><?php echo $neatline->getNumberOfRecords(); ?></td>
+            <td><?php echo $neatline->public == 1 ? 'yes' : 'no'; ?></td>
         </tr>
         <?php endforeach; ?>
     </tbody>
@@ -73,10 +83,10 @@ head(array('content_class' => 'neatline'));
 
 <!-- Pagination. -->
 <?php if ($pagination['total_results'] > $pagination['per_page']): ?>
-    <div class="neatline-pagination">
+    <div class="pagination">
         <?php echo pagination_links(array('scrolling_style' => 'All',
         'page_range' => '5',
-        'partial_file' => 'index/_pagination.php',
+        'partial_file' => 'common/pagination_control.php',
         'page' => $pagination['current_page'],
         'per_page' => $pagination['per_page'],
         'total_results' => $pagination['total_results'])); ?>

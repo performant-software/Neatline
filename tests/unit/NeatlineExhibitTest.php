@@ -57,6 +57,8 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
 
         // Set.
         $exhibit->name =                        'name';
+        $exhibit->slug =                        'slug';
+        $exhibit->public =                      1;
         $exhibit->modified =                    $timestamp;
         $exhibit->map_id =                      1;
         $exhibit->top_element =                 'map';
@@ -90,6 +92,8 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
         $this->assertNotNull($exhibit->modified);
         $this->assertEquals($exhibit->modified, $timestamp);
         $this->assertEquals($exhibit->name, 'name');
+        $this->assertEquals($exhibit->slug, 'slug');
+        $this->assertEquals($exhibit->public, 1);
         $this->assertEquals($exhibit->map_id, 1);
         $this->assertNull($exhibit->image_id, 1);
         $this->assertEquals($exhibit->top_element, 'map');
@@ -117,52 +121,6 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
     }
 
     /**
-     * The validateForm() method should enforce title existence.
-     *
-     * @return void.
-     */
-    public function testValidateFormTitle()
-    {
-
-        // Create an exhibit.
-        $neatline = $this->helper->_createNeatline();
-
-        // Call with blank title.
-        $errors = $neatline->validateForm('', null, null);
-        $this->assertEquals($errors['title'], 'Enter a title.');
-
-        // Call with title.
-        $errors = $neatline->validateForm('Title', null, null);
-        $this->assertEquals($errors, array());
-
-    }
-
-    /**
-     * There has to be either a map or an image id, and not both.
-     *
-     * @return void.
-     */
-    public function testValidateFormMap()
-    {
-
-        // Create an exhibit.
-        $neatline = $this->helper->_createNeatline();
-
-        // Call with map id.
-        $errors = $neatline->validateForm('Title', 1, 'none');
-        $this->assertEquals($errors, array());
-
-        // Call with image id.
-        $errors = $neatline->validateForm('Title', 'none', 1);
-        $this->assertEquals($errors, array());
-
-        // Call with both.
-        $errors = $neatline->validateForm('Title', 1, 1);
-        $this->assertEquals($errors['map'], 'Choose a map or an image, not both.');
-
-    }
-
-    /**
      * saveForm() should save a map id if there is no image it.
      *
      * @return void.
@@ -174,9 +132,12 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
         $neatline = $this->helper->_createNeatline();
 
         // Save with valid map id and check.
-        $success = $neatline->saveForm('Title', 1, 'none');
+        $success = $neatline->saveForm('Title', 'slug', 1, 5, 1, 'none');
         $this->assertNull($neatline->image_id);
         $this->assertEquals($neatline->name, 'Title');
+        $this->assertEquals($neatline->slug, 'slug');
+        $this->assertEquals($neatline->default_base_layer, 5);
+        $this->assertEquals($neatline->public, 1);
         $this->assertEquals($neatline->is_map, 1);
         $this->assertEquals($neatline->is_timeline, 1);
         $this->assertEquals($neatline->is_items, 1);
@@ -200,9 +161,12 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
         $neatline = $this->helper->_createNeatline();
 
         // Save with valid map id and check.
-        $success = $neatline->saveForm('Title', 'none', 1);
+        $success = $neatline->saveForm('Title', 'slug', 1, 5, 'none', 1);
         $this->assertNull($neatline->map_id);
         $this->assertEquals($neatline->name, 'Title');
+        $this->assertEquals($neatline->slug, 'slug');
+        $this->assertEquals($neatline->default_base_layer, 5);
+        $this->assertEquals($neatline->public, 1);
         $this->assertEquals($neatline->is_map, 1);
         $this->assertEquals($neatline->is_timeline, 1);
         $this->assertEquals($neatline->is_items, 1);
@@ -226,7 +190,7 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
         $exhibit = $this->helper->_createNeatline();
         $map = new NeatlineMapsMap();
         $map->save();
-        $exhibit->saveForm('Title', $map->id, 'none');
+        $exhibit->saveForm('Title', 'slug', 1, 5, $map->id, 'none');
 
         // Get the map and check.
         $retrievedMap = $exhibit->getMap();
@@ -246,7 +210,7 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
         $exhibit = $this->helper->_createNeatline();
         $map = new NeatlineMapsMap();
         $map->save();
-        $exhibit->saveForm('Title', 'none', 'none');
+        $exhibit->saveForm('Title', 'slug', 1, 5, 'none', 'none');
 
         // Get the map and check.
         $retrievedMap = $exhibit->getMap();
@@ -278,7 +242,7 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
         $exhibit = $this->helper->_createNeatline();
         $map = new NeatlineMapsMap();
         $map->save();
-        $exhibit->saveForm('Title', 'none', 'none');
+        $exhibit->saveForm('Title', 'slug', 1, 5, 'none', 'none');
 
         // Get the map and check.
         $retrievedImage = $exhibit->getMap();

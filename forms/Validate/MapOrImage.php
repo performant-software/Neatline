@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
 
 /**
- * Partial for "Actions" buttons in Neatline browse views.
+ * Custom validator to block exhibits with a map and an image.
  *
  * PHP version 5
  *
@@ -23,7 +23,33 @@
  * @copyright   2011 The Board and Visitors of the University of Virginia
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache 2 License
  */
-?>
 
-<a href="<?php echo uri($uriSlug . '/edit/' . $neatline->slug); ?>" class="edit">Edit Details</a>
-<a href="<?php echo uri($uriSlug . '/delete/' . $neatline->id); ?>" class="delete">Delete</a>
+class Neatline_Validate_MapOrImage extends Zend_Validate_Abstract
+{
+
+    const MAP_OR_IMAGE = 'mapOrImage';
+
+    protected $_messageTemplates = array(
+        self::MAP_OR_IMAGE => 'Choose a map or an image, or neither, but not both.'
+    );
+
+    /**
+     * Block exhibits with a map and an image.
+     *
+     * @return boolean True if the field is valid.
+     */
+    public function isValid($value, $context = null)
+    {
+
+        $this->_setValue($value);
+
+        if ($context['map'] !== 'none' && $context['image'] !== 'none') {
+            $this->_error(self::MAP_OR_IMAGE);
+            return false;
+        }
+
+        return true;
+
+    }
+
+}

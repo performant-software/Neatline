@@ -56,12 +56,7 @@ class Neatline_FixtureBuilderTest extends Omeka_Test_AppTestCase
     {
 
         // Mock exhibit.
-        $exhibit = new NeatlineExhibit;
-        $exhibit->name = 'Test Exhibit';
-        $exhibit->is_map = 1;
-        $exhibit->is_timeline = 1;
-        $exhibit->is_items = 1;
-        $exhibit->save();
+        $exhibit = $this->helper->_createNeatline();
 
         $fixture = fopen(self::$path_to_fixtures . 'neatline-base.html', 'w');
 
@@ -147,11 +142,7 @@ class Neatline_FixtureBuilderTest extends Omeka_Test_AppTestCase
         $this->db->query($sql);
 
         // Mock exhibit.
-        $exhibit = new NeatlineExhibit;
-        $exhibit->name = 'Test Exhibit';
-        $exhibit->is_map = 1;
-        $exhibit->is_timeline = 1;
-        $exhibit->is_items = 1;
+        $exhibit = $this->helper->_createNeatline();
         $exhibit->top_element = 'map';
         $exhibit->items_h_pos = 'right';
         $exhibit->items_v_pos = 'top';
@@ -185,12 +176,7 @@ class Neatline_FixtureBuilderTest extends Omeka_Test_AppTestCase
         $item->save();
 
         // Mock exhibit.
-        $exhibit = new NeatlineExhibit;
-        $exhibit->name = 'Test Exhibit';
-        $exhibit->is_map = 1;
-        $exhibit->is_timeline = 1;
-        $exhibit->is_items = 1;
-        $exhibit->save();
+        $exhibit = $this->helper->_createNeatline();
 
         // Record 1.
         $record1 = new NeatlineDataRecord();
@@ -255,12 +241,7 @@ class Neatline_FixtureBuilderTest extends Omeka_Test_AppTestCase
         $item2->save();
 
         // Mock exhibit.
-        $exhibit = new NeatlineExhibit;
-        $exhibit->name = 'Test Exhibit';
-        $exhibit->is_map = 1;
-        $exhibit->is_timeline = 1;
-        $exhibit->is_items = 1;
-        $exhibit->save();
+        $exhibit = $this->helper->_createNeatline();
 
         // Record 1.
         $record1 = new NeatlineDataRecord();
@@ -322,12 +303,7 @@ class Neatline_FixtureBuilderTest extends Omeka_Test_AppTestCase
         $fixture = fopen(self::$path_to_fixtures . 'editor-form-ajax.html', 'w');
 
         // Mock exhibit.
-        $exhibit = new NeatlineExhibit;
-        $exhibit->name = 'Test Exhibit';
-        $exhibit->is_map = 1;
-        $exhibit->is_timeline = 1;
-        $exhibit->is_items = 1;
-        $exhibit->save();
+        $exhibit = $this->helper->_createNeatline();
 
         // Mock record.
         $record = new NeatlineDataRecord();
@@ -381,12 +357,7 @@ class Neatline_FixtureBuilderTest extends Omeka_Test_AppTestCase
         $item2->save();
 
         // Mock exhibit.
-        $exhibit = new NeatlineExhibit;
-        $exhibit->name = 'Test Exhibit';
-        $exhibit->is_map = 1;
-        $exhibit->is_timeline = 1;
-        $exhibit->is_items = 1;
-        $exhibit->save();
+        $exhibit = $this->helper->_createNeatline();
 
         // Record 1.
         $record1 = new NeatlineDataRecord();
@@ -439,6 +410,24 @@ class Neatline_FixtureBuilderTest extends Omeka_Test_AppTestCase
         );
 
         $this->dispatch('neatline-exhibits/' . $exhibit->id . '/data/simile');
+        $response = $this->getResponse()->getBody('default');
+
+        fwrite($fixture, $response);
+        fclose($fixture);
+
+    }
+
+    /*
+     * Exhibit add/edit form.
+     *
+     * @return void.
+     */
+    public function testBuildExhibitForm()
+    {
+
+        $fixture = fopen(self::$path_to_fixtures . 'add-form.html', 'w');
+
+        $this->dispatch('neatline/fixtures/exhibitform');
         $response = $this->getResponse()->getBody('default');
 
         fwrite($fixture, $response);
