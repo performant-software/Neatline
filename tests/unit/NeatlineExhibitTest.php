@@ -121,52 +121,6 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
     }
 
     /**
-     * The validateForm() method should enforce title existence.
-     *
-     * @return void.
-     */
-    public function testValidateFormTitle()
-    {
-
-        // Create an exhibit.
-        $neatline = $this->helper->_createNeatline();
-
-        // Call with blank title.
-        $errors = $neatline->validateForm('', null, null);
-        $this->assertEquals($errors['title'], 'Enter a title.');
-
-        // Call with title.
-        $errors = $neatline->validateForm('Title', null, null);
-        $this->assertEquals($errors, array());
-
-    }
-
-    /**
-     * There has to be either a map or an image id, and not both.
-     *
-     * @return void.
-     */
-    public function testValidateFormMap()
-    {
-
-        // Create an exhibit.
-        $neatline = $this->helper->_createNeatline();
-
-        // Call with map id.
-        $errors = $neatline->validateForm('Title', 1, 'none');
-        $this->assertEquals($errors, array());
-
-        // Call with image id.
-        $errors = $neatline->validateForm('Title', 'none', 1);
-        $this->assertEquals($errors, array());
-
-        // Call with both.
-        $errors = $neatline->validateForm('Title', 1, 1);
-        $this->assertEquals($errors['map'], 'Choose a map or an image, not both.');
-
-    }
-
-    /**
      * saveForm() should save a map id if there is no image it.
      *
      * @return void.

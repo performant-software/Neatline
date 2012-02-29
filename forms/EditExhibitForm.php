@@ -99,20 +99,6 @@ class EditExhibitForm extends Omeka_form
                             Zend_Validate_Regex::NOT_MATCH => __('Lowercase letters, numbers, and hyphens only.')
                         )
                     )
-                ),
-                array('validator' => 'Db_NoRecordExists', 'options' =>
-                    array(
-                        'table'     =>  $_exhibits->getTableName(),
-                        'field'     =>  'slug',
-                        'adapter'   =>  $_db->getAdapter(),
-                        'exclude'   =>  array(
-                            'field' => 'id',
-                            'value' => $this->_exhibit->id
-                        ),
-                        'messages'  =>  array(
-                            'recordFound' => __('Slug taken.')
-                        )
-                    )
                 )
             )
         ));
@@ -139,6 +125,38 @@ class EditExhibitForm extends Omeka_form
         $this->addDisplayGroup(array(
             'submit'
         ), 'submit_button');
+
+    }
+
+    /**
+     * Validate the form.
+     *
+     * @return void.
+     */
+    public function isValid($data)
+    {
+
+        // Get database and tables.
+        $_db = get_db();
+        $_exhibits = $_db->getTable('NeatlineExhibit');
+
+        // Add the non-self unique validator for the slug.
+        $this->getElement('slug')->addValidator(
+            'Db_NoRecordExists', false, array(
+                'table'     =>  $_exhibits->getTableName(),
+                'field'     =>  'slug',
+                'adapter'   =>  $_db->getAdapter(),
+                'exclude'   =>  array(
+                    'field' => 'slug',
+                    'value' => (string) $this->_exhibit->slug
+                ),
+                'messages'  =>  array(
+                    'recordFound' => __('Slug taken.')
+                )
+            )
+        );
+
+        return parent::isValid($data);
 
     }
 

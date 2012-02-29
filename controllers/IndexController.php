@@ -130,9 +130,11 @@ class Neatline_IndexController extends Omeka_Controller_Action
         // Get the exhibit.
         $exhibit = $this->_neatlinesTable->findBySlug($this->_request->slug);
 
-        // Construct and populate the form.
-        $form = new EditExhibitForm;
+        // Construct the form.
+        $form = new EditExhibitForm();
         $form->setExhibit($exhibit);
+
+        // Populate the form.
         $form->populate(array(
             'title' => $exhibit->name,
             'slug' => $exhibit->slug,
@@ -145,7 +147,7 @@ class Neatline_IndexController extends Omeka_Controller_Action
             // If no errors, save form and redirect.
             if ($form->isValid($this->_request->getPost())) {
 
-                // Get values and create new exhibit.
+                // Capture values.
                 $values = $form->getValues();
 
                 // Apply values.
