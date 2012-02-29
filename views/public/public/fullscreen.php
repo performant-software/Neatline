@@ -25,6 +25,8 @@
  */
 ?>
 
+<?php if ($neatline->public): ?>
+
 <!-- Custom page header. -->
 <?php echo $this->partial('public/_public_header.php', array(
     'titlePrefix' => 'Neatline',
@@ -42,3 +44,7 @@
 
 <!-- Custom footer. -->
 <?php echo $this->partial('editor/_editor_footer.php'); ?>
+
+<?php else: ?>
+    <?php echo $this->partial('neatline/_private.php'); ?>
+<?php endif; ?>

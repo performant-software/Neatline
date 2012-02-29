@@ -25,7 +25,4 @@
  */
 ?>
 
-<div class="private-exhibit">
-    <img src="<?php echo img('neatline-logo-fullsize.png'); ?>" />
-    <p>Coming soon...</p>
-</div>
+<p>Coming soon...</p>

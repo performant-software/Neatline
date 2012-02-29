@@ -30,9 +30,15 @@
     head($head);
 ?>
 
+<?php if ($neatline->public): ?>
+
     <h1><?php echo $neatline->name; ?></h1>
     <div id="primary">
         <?php echo $this->partial('neatline/_neatline.php', $neatlineData); ?>
     </div>
+
+<?php else: ?>
+    <?php echo $this->partial('neatline/_private.php'); ?>
+<?php endif; ?>
 
 <?php foot(); ?>

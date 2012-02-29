@@ -1,8 +1,7 @@
-<?php
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
 
 /**
- * Full-screen Neatline exhibit.
+ * CSS for coming soon splash page.
  *
  * PHP version 5
  *
@@ -23,28 +22,11 @@
  * @copyright   2011 The Board and Visitors of the University of Virginia
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache 2 License
  */
-?>
 
-<?php if ($neatline->public): ?>
 
-<!-- Custom page header. -->
-<?php echo $this->partial('public/_public_header.php', array(
-    'titlePrefix' => 'Neatline',
-    'title' => $neatline->name
-)); ?>
-
-<!-- The top bar. -->
-<?php echo $this->partial('public/_topbar.php', array(
-    'neatline' => $neatline,
-    'layers' => $layers
-)); ?>
-
-<!-- The core Neatline partial. -->
-<?php echo $this->partial('neatline/_neatline.php', $neatlineData); ?>
-
-<!-- Custom footer. -->
-<?php echo $this->partial('editor/_editor_footer.php'); ?>
-
-<?php else: ?>
-    <?php echo $this->partial('neatline/_private.php'); ?>
-<?php endif; ?>
+body {
+    background: #f9f9f9;
+    border-top: 10px solid rgba(90, 60, 110, 1);
+    font-family: 'PT Serif', 'Crimson Text', Georgia, serif !important;
+    font-size: 16px !important;
+}
