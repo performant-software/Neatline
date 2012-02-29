@@ -48,6 +48,7 @@ head(array('content_class' => 'neatline'));
         <!-- Column headings. -->
         <?php browse_headings(array(
             'Exhibit' => 'name',
+            'View' => null,
             'Modified' => 'modified',
             '# Items' => 'added',
             'Public' => 'public'
@@ -64,6 +65,12 @@ head(array('content_class' => 'neatline'));
                 <?php echo $this->partial('index/_action_buttons.php', array(
                   'uriSlug' => 'neatline-exhibits',
                   'neatline' => $neatline)); ?>
+            </td>
+            <td>
+                <div class="public-exhibit-links">
+                    <a href="<?php echo public_uri('neatline-exhibits/show/fullscreen/' . $neatline->slug); ?>" target="_blank">Fullscreen</a> |
+                    <a href="<?php echo public_uri('neatline-exhibits/show/embed/' . $neatline->slug); ?>" target="_blank">Embed</a>
+                </div>
             </td>
             <td><?php echo neatline_formatDate($neatline->modified); ?></td>
             <td><?php echo $neatline->getNumberOfRecords(); ?></td>
