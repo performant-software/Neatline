@@ -233,7 +233,7 @@ function neatline_deleteConfirmForm($id)
     $action = neatline_getDeleteExhibitUrl($id);
     $name = 'delete-neatline';
     $value = 'Delete';
-    $attribs = array('class' => 'neatline btn danger large');
+    $attribs = array('class' => 'neatline btn delete large');
     $formName = 'delete-neatline';
     $formAttribs = array('class' => 'inline', 'action' => $action);
     $fieldsetClass = 'neatline-inline';
