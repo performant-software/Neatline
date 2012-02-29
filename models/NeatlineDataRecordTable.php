@@ -264,35 +264,39 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
         // Get records.
         $records = $this->getRecordsByExhibit($neatline);
 
-        // Walk the records and build out the array.
-        foreach ($records as $record) {
+        if ($records) {
 
-            // If the geocoverage is populated.
-            if ($record->space_active == 1) {
+            // Walk the records and build out the array.
+            foreach ($records as $record) {
 
-                $data[] = array(
-                    'id' =>                 $record->id,
-                    'item_id' =>            $record->item_id,
-                    'title' =>              $record->getTitle(),
-                    'vector_color' =>       $record->getStyle('vector_color'),
-                    'stroke_color' =>       $record->getStyle('stroke_color'),
-                    'highlight_color' =>    $record->getStyle('highlight_color'),
-                    'vector_opacity' =>     $record->getStyle('vector_opacity'),
-                    'stroke_opacity' =>     $record->getStyle('stroke_opacity'),
-                    'stroke_width' =>       $record->getStyle('stroke_width'),
-                    'point_radius' =>       $record->getStyle('point_radius'),
-                    'bounds' =>             $record->map_bounds,
-                    'zoom' =>               $record->map_zoom,
-                    'wkt' =>                $record->getGeocoverage(),
-                    '_native_styles' =>     array(
-                      'vector_color' =>     $record->vector_color,
-                      'vector_opacity' =>   $record->vector_opacity,
-                      'stroke_color' =>     $record->stroke_color,
-                      'stroke_opacity' =>   $record->stroke_opacity,
-                      'stroke_width' =>     $record->stroke_width,
-                      'point_radius' =>     $record->point_radius,
-                    )
-                );
+                // If the geocoverage is populated.
+                if ($record->space_active == 1) {
+
+                    $data[] = array(
+                        'id' =>                 $record->id,
+                        'item_id' =>            $record->item_id,
+                        'title' =>              $record->getTitle(),
+                        'vector_color' =>       $record->getStyle('vector_color'),
+                        'stroke_color' =>       $record->getStyle('stroke_color'),
+                        'highlight_color' =>    $record->getStyle('highlight_color'),
+                        'vector_opacity' =>     $record->getStyle('vector_opacity'),
+                        'stroke_opacity' =>     $record->getStyle('stroke_opacity'),
+                        'stroke_width' =>       $record->getStyle('stroke_width'),
+                        'point_radius' =>       $record->getStyle('point_radius'),
+                        'bounds' =>             $record->map_bounds,
+                        'zoom' =>               $record->map_zoom,
+                        'wkt' =>                $record->getGeocoverage(),
+                        '_native_styles' =>     array(
+                          'vector_color' =>     $record->vector_color,
+                          'vector_opacity' =>   $record->vector_opacity,
+                          'stroke_color' =>     $record->stroke_color,
+                          'stroke_opacity' =>   $record->stroke_opacity,
+                          'stroke_width' =>     $record->stroke_width,
+                          'point_radius' =>     $record->point_radius,
+                        )
+                    );
+
+                }
 
             }
 
@@ -322,39 +326,43 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
         // Get records.
         $records = $this->getRecordsByExhibit($neatline);
 
-        // Walk the records and build out the array.
-        foreach ($records as $record) {
+        if ($records) {
 
-            // Build the timestamps.
-            $timestamps = neatline_generateTimegliderTimestamps(
-                $record->start_date,
-                $record->start_time,
-                $record->end_date,
-                $record->end_time
-            );
+            // Walk the records and build out the array.
+            foreach ($records as $record) {
 
-            $eventArray = array(
-                'eventID' =>                $record->id,
-                'title' =>                  $record->title,
-                'description' =>            $record->description,
-                'color' =>                  $record->getStyle('vector_color'),
-                'textColor' =>              '#4a4a4a',
-                'left_ambiguity' =>         $record->left_percent,
-                'right_ambiguity' =>        $record->right_percent
-            );
+                // Build the timestamps.
+                $timestamps = neatline_generateTimegliderTimestamps(
+                    $record->start_date,
+                    $record->start_time,
+                    $record->end_date,
+                    $record->end_time
+                );
 
-            // If there is a valid start stamp.
-            if (!is_null($timestamps[0]) && $record->time_active == 1) {
+                $eventArray = array(
+                    'eventID' =>                $record->id,
+                    'title' =>                  $record->title,
+                    'description' =>            $record->description,
+                    'color' =>                  $record->getStyle('vector_color'),
+                    'textColor' =>              '#4a4a4a',
+                    'left_ambiguity' =>         $record->left_percent,
+                    'right_ambiguity' =>        $record->right_percent
+                );
 
-                $eventArray['start'] = $timestamps[0];
+                // If there is a valid start stamp.
+                if (!is_null($timestamps[0]) && $record->time_active == 1) {
 
-                // If there is a valid end stamp.
-                if (!is_null($timestamps[1])) {
-                    $eventArray['end'] = $timestamps[1];
+                    $eventArray['start'] = $timestamps[0];
+
+                    // If there is a valid end stamp.
+                    if (!is_null($timestamps[1])) {
+                        $eventArray['end'] = $timestamps[1];
+                    }
+
+                    // Only push if there is at least a start.
+                    $data['events'][] = $eventArray;
+
                 }
-
-                // Only push if there is at least a start.
-                $data['events'][] = $eventArray;
 
             }
 

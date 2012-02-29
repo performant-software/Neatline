@@ -778,7 +778,7 @@
             var self = this;
 
             // First, check for unsaved data.
-            var unsavedData = this._db({recordid: this.recordId}).first();
+            var unsavedData = this._db({ recordid: this.recordId }).first();
 
             // If there is unsaved data, reapply it.
             if (unsavedData) {

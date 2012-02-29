@@ -781,6 +781,29 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
     }
 
     /**
+     * The buildMapJson() method should return an empty object when there are
+     * no data records for an exhibit.
+     *
+     * @return void.
+     */
+    public function testBuildMapJsonWithNoRecords()
+    {
+
+        // Create an exhibit.
+        $neatline = $this->helper->_createNeatline();
+
+        // Build the JSON.
+        $json = $this->_recordsTable->buildMapJson($neatline);
+
+        // Check format.
+        $this->assertEquals(
+            $json,
+            '[]'
+        );
+
+    }
+
+    /**
      * The buildTimelineJson() method should construct well-formed JSON string with
      * the correct attributes populated for each record.
      *
@@ -1044,6 +1067,27 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
             '"color":"#000000"',
             $json
         );
+
+    }
+
+    /**
+     * The buildTimelineJson() method should return an empty object when there are
+     * no data records for an exhibit.
+     *
+     * @return void.
+     */
+    public function testBuildTimelineJsonWithNoRecords()
+    {
+
+        // Create an exhibit.
+        $neatline = $this->helper->_createNeatline();
+
+        // Build the JSON.
+        $json = $this->_recordsTable->buildTimelineJson($neatline);
+
+        // Check format.
+        $this->assertContains('"dateTimeFormat":"iso8601"', $json);
+        $this->assertContains('"events":[]', $json);
 
     }
 
