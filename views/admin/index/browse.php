@@ -76,10 +76,10 @@ head(array('content_class' => 'neatline'));
 
 <!-- Pagination. -->
 <?php if ($pagination['total_results'] > $pagination['per_page']): ?>
-    <div class="neatline-pagination">
+    <div class="pagination">
         <?php echo pagination_links(array('scrolling_style' => 'All',
         'page_range' => '5',
-        'partial_file' => 'index/_pagination.php',
+        'partial_file' => 'common/pagination_control.php',
         'page' => $pagination['current_page'],
         'per_page' => $pagination['per_page'],
         'total_results' => $pagination['total_results'])); ?>
