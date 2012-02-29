@@ -75,27 +75,24 @@ class Neatline_IndexController extends Omeka_Controller_Action
     }
 
     /**
-     * Create a new Neatline.
+     * Create a new exhibit.
      *
      * @return void
      */
     public function addAction()
     {
 
+        // Construct the form.
         $form = new AddExhibitForm;
-        $errors = array();
 
         // Try to create the Neatline if the form has been submitted.
         if ($this->_request->isPost()) {
-
-            print_r($this->_request->getPost());
 
             // If no errors, save form and redirect.
             if ($form->isValid($this->_request->getPost())) {
 
                 // Get values and create new exhibit.
                 $values = $form->getValues();
-                print_r($values);
 
                 // Create exhibit and apply values.
                 $exhibit = new NeatlineExhibit;
@@ -119,7 +116,51 @@ class Neatline_IndexController extends Omeka_Controller_Action
 
         // Push Neatline object into view.
         $this->view->form = $form;
-        $this->view->errors = $errors;
+
+    }
+
+    /**
+     * Edit an exhibit.
+     *
+     * @return void
+     */
+    public function editAction()
+    {
+
+        // Construct the form.
+        $form = new editExhibitForm;
+
+        // Try to edit if the form has been submitted.
+        if ($this->_request->isPost()) {
+
+            // If no errors, save form and redirect.
+            if ($form->isValid($this->_request->getPost())) {
+
+                // Get values and create new exhibit.
+                $values = $form->getValues();
+
+                // // Create exhibit and apply values.
+                // $exhibit = new NeatlineExhibit;
+                // $exhibit->saveForm(
+                //     $values['title'],
+                //     $values['slug'],
+                //     $values['public'],
+                //     $values['baselayer'],
+                //     $values['map'],
+                //     $values['image']
+                // );
+
+                // // Commit.
+                // $exhibit->save();
+
+                return $this->_redirect('neatline-exhibits');
+
+            }
+
+        }
+
+        // Push Neatline object into view.
+        $this->view->form = $form;
 
     }
 
