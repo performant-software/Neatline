@@ -4,8 +4,11 @@
 
 describe('Item Form', function() {
 
-    var browser, form, record, recordId,
-        itemRecord, itemRecordId, formContainer;
+    var browser, form,
+        record, recordId,
+        itemRecord, itemRecordId,
+        noRecordItem, noRecordItemId,
+        formContainer;
 
     // Mock _getItems() response.
     var itemsResponse = {
@@ -45,12 +48,20 @@ describe('Item Form', function() {
         request = mostRecentAjaxRequest();
         request.response(itemsResponse);
 
-        // Get testing records and their form containers.
+        // Get Neatline-native testing record.
         record = browser.find('tr.item-row[recordid="1"]');
-        itemRecord = browser.find('tr.item-row[recordid="4"]');
-        formContainer = record.next('tr').find('td');
         recordId = parseInt(record.attr('recordid'), 10);
+
+        // Get Omeka item testing record with extant recordid.
+        itemRecord = browser.find('tr.item-row[recordid="4"]');
         itemRecordId = parseInt(itemRecord.attr('recordid'), 10);
+
+        // Get Omeka item testing record without extant recordid.
+        noRecordItem = browser.find('tr.item-row[itemid="1"]');
+        noRecordItemId = parseInt(noRecordItem.attr('recordid'), 10);
+
+        // Get the form container.
+        formContainer = record.next('tr').find('td');
 
     });
 
@@ -71,6 +82,32 @@ describe('Item Form', function() {
 
             // Show the form.
             record.find('.item-title').mousedown();
+
+        });
+
+        it('should post proper request parameters for an item without an itemid', function() {
+
+            // Show the form and capture request.
+            record.find('.item-title').mousedown();
+            var request = mostRecentAjaxRequest();
+
+            // Check params.
+            expect(request.url).toContain('item_id=null');
+            expect(request.url).toContain('record_id=1');
+            expect(request.url).toContain('exhibit_id=1');
+
+        });
+
+        it('should post proper request parameters for an item without a recordid', function() {
+
+            // Show the form and capture request.
+            noRecordItem.find('.item-title').mousedown();
+            var request = mostRecentAjaxRequest();
+
+            // Check params.
+            expect(request.url).toContain('item_id=1');
+            expect(request.url).toContain('record_id=null');
+            expect(request.url).toContain('exhibit_id=1');
 
         });
 
