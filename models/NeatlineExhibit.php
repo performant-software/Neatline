@@ -37,6 +37,7 @@ class NeatlineExhibit extends Omeka_record
     public $name;
     public $slug;
     public $public;
+    public $query;
 
     // Foreign keys.
     public $map_id;

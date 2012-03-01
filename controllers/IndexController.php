@@ -178,6 +178,19 @@ class Neatline_IndexController extends Omeka_Controller_Action
     public function queryAction()
     {
 
+        // Get the exhibit.
+        $exhibit = $this->_neatlinesTable->findBySlug($this->_request->slug);
+
+        if(isset($_GET['search'])) {
+            $exhibit->query = serialize($_GET);
+            $exhibit->save();
+            $this->redirect->goto('browse');
+        } else {
+            $queryArray = unserialize($exhibit->query);
+            $_GET = $queryArray;
+            $_REQUEST = $queryArray;
+        }
+
     }
 
     /**
