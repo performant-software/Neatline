@@ -36,18 +36,99 @@ function neatline_getItemsForBrowser($exhibit)
 
     $_db = get_db();
     $itemsTable = $_db->getTable('Item');
-    $query = unserialize($exhibit->query);
-
-    // Construct the params array, excluding blank query fields.
     $params = array();
-    foreach ($query as $key => $val) {
-        if ($val !== '') { $params[$key] = $val; }
+    $items = array();
+
+    // If the query is defined, fetch items.
+    if (!is_null($exhibit->query)) {
+
+        // Get query and select.
+        $select = $itemsTable->getSelect();
+        $query = unserialize($exhibit->query);
+        $isQuery = false;
+
+        foreach($query as $requestParamName => $requestParamValue) {
+            if (is_string($requestParamValue) && trim($requestParamValue) == '') {
+                continue;
+            }
+            switch($requestParamName) {
+                case 'user':
+                    if (is_numeric($requestParamValue)) {
+                        $params['user'] = $requestParamValue;
+                        $isQuery = true;
+                    }
+                break;
+
+                case 'public':
+                    $params['public'] = is_true($requestParamValue);
+                    $isQuery = true;
+                break;
+
+                case 'featured':
+                    $params['featured'] = is_true($requestParamValue);
+                    $isQuery = true;
+                break;
+
+                case 'collection':
+                    $params['collection'] = $requestParamValue;
+                    $isQuery = true;
+                break;
+
+                case 'type':
+                    $params['type'] = $requestParamValue;
+                    $isQuery = true;
+                break;
+
+                case 'tag':
+                case 'tags':
+                    $params['tags'] = $requestParamValue;
+                    $isQuery = true;
+                break;
+
+                case 'excludeTags':
+                    $params['excludeTags'] = $requestParamValue;
+                    $isQuery = true;
+                break;
+
+                case 'recent':
+                    if (!is_true($requestParamValue)) {
+                        $params['recent'] = false;
+                        $isQuery = true;
+                    }
+                break;
+
+                case 'search':
+                    $params['search'] = $requestParamValue;
+                    $isQuery = true;
+                    //Don't order by recent-ness if we're doing a search
+                    unset($params['recent']);
+                break;
+
+                case 'advanced':
+                    //We need to filter out the empty entries if any were provided
+                    foreach ($requestParamValue as $k => $entry) {
+                        if (empty($entry['element_id']) || empty($entry['type'])) {
+                            unset($requestParamValue[$k]);
+                        }
+                    }
+                    if (count($requestParamValue) > 0) {
+                        $params['advanced_search'] = $requestParamValue;
+                        $isQuery = true;
+                    }
+                break;
+
+                case 'range':
+                    $params['range'] = $requestParamValue;
+                    $isQuery = true;
+                break;
+            }
+        }
+
+        if ($isQuery) { $items = $itemsTable->findBy($params); }
+
     }
 
-    // Apply the search string to the table class.
-    $select = $itemsTable->getSelect();
-    $itemsTable->applySearchFilters($select, $params);
-    return $itemsTable->fetchObjects($select);
+    return $items;
 
 }
 
