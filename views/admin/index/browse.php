@@ -49,6 +49,7 @@ head(array('content_class' => 'neatline'));
         <?php browse_headings(array(
             'Exhibit' => 'name',
             'View' => null,
+            'Items Query' => null,
             'Modified' => 'modified',
             '# Items' => 'added',
             'Public' => 'public'
@@ -72,6 +73,7 @@ head(array('content_class' => 'neatline'));
                     <a href="<?php echo public_uri('neatline-exhibits/show/embed/' . $neatline->slug); ?>" target="_blank">Embed</a>
                 </div>
             </td>
+            <td><a href="<?php echo uri('neatline-exhibits/query/' . $neatline->slug); ?>">Edit Query</a></td>
             <td><?php echo neatline_formatDate($neatline->modified); ?></td>
             <td><?php echo $neatline->getNumberOfRecords(); ?></td>
             <td><?php echo $neatline->public == 1 ? 'yes' : 'no'; ?></td>

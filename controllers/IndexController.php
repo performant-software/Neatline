@@ -171,6 +171,16 @@ class Neatline_IndexController extends Omeka_Controller_Action
     }
 
     /**
+     * Edit items query.
+     *
+     * @return void
+     */
+    public function queryAction()
+    {
+
+    }
+
+    /**
      * Delete exhibits.
      *
      * @return void
