@@ -47,6 +47,7 @@ function neatline_getItemsForBrowser($exhibit)
         $query = unserialize($exhibit->query);
         $isQuery = false;
 
+        // ** Adapted directly from Omeka_Controller_Action_Helper_SearchItems.
         foreach($query as $requestParamName => $requestParamValue) {
             if (is_string($requestParamValue) && trim($requestParamValue) == '') {
                 continue;
