@@ -641,6 +641,11 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
     public function testAddSuccessWithImage()
     {
 
+        // TODO: This requires (really) mocking an image, at the data level.
+        // But Omeka doesn't really make it possible to mock an image witout an
+        // actual, no-joke image sitting in /archives (it gets checked for at
+        // the level of the model).
+
     }
 
     /**
