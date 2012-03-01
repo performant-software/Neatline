@@ -232,16 +232,46 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
     public function testItemsWithOmekaRecords()
     {
 
-    }
+        // Create item, exhibit, and records.
+        $item = $this->helper->_createItem();
+        $exhibit = $this->helper->_createNeatline();
+        $record = new NeatlineDataRecord($item, $exhibit);
+        $record->save();
 
-    /**
-     * When Omeka records do not exist but Neatline-endemic records do exist, /items
-     * should return the Neatline records without the Omeka Records heading.
-     *
-     * @return void.
-     */
-    public function testItemsWithNeatlineRecords()
-    {
+        // Save empty query.
+        $exhibit->query = serialize(array(
+            'search' => '',
+            'advanced' => array(
+                array(
+                    'element_id' => '',
+                    'type' => '',
+                    'terms' => ''
+                )
+            ),
+            'range' => $item->id,
+            'collection' => '',
+            'type' => '',
+            'user' => '',
+            'tags' => '',
+            'public' => '',
+            'featured' => ''
+        ));
+
+        // Commit.
+        $exhibit->save();
+
+        // Prepare the request.
+        $this->request->setMethod('GET')
+            ->setParams(array(
+                'exhibit_id' => $exhibit->id
+            )
+        );
+
+        // Hit the route, check the markup.
+        $this->dispatch('neatline-exhibits/editor/ajax/items');
+        $this->assertQueryContentContains('tr.header-row.hidden td', 'Neatline Records');
+        $this->assertQueryContentContains('tr.header-row td', 'Omeka Records');
+        $this->assertQueryCount('tr.item-row', 1);
 
     }
 
@@ -253,6 +283,49 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
      */
     public function testItemsWithNeatlineRecordsAndOmekaRecords()
     {
+
+        // Create item, exhibit, and records.
+        $item = $this->helper->_createItem();
+        $exhibit = $this->helper->_createNeatline();
+        $record1 = new NeatlineDataRecord(null, $exhibit);
+        $record1->save();
+        $record2 = new NeatlineDataRecord($item, $exhibit);
+        $record2->save();
+
+        // Save empty query.
+        $exhibit->query = serialize(array(
+            'search' => '',
+            'advanced' => array(
+                array(
+                    'element_id' => '',
+                    'type' => '',
+                    'terms' => ''
+                )
+            ),
+            'range' => $item->id,
+            'collection' => '',
+            'type' => '',
+            'user' => '',
+            'tags' => '',
+            'public' => '',
+            'featured' => ''
+        ));
+
+        // Commit.
+        $exhibit->save();
+
+        // Prepare the request.
+        $this->request->setMethod('GET')
+            ->setParams(array(
+                'exhibit_id' => $exhibit->id
+            )
+        );
+
+        // Hit the route, check the markup.
+        $this->dispatch('neatline-exhibits/editor/ajax/items');
+        $this->assertQueryContentContains('tr.header-row td', 'Neatline Records');
+        $this->assertQueryContentContains('tr.header-row td', 'Omeka Records');
+        $this->assertQueryCount('tr.item-row', 2);
 
     }
 

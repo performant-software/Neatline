@@ -87,33 +87,6 @@ class NeatlineExhibit extends Omeka_record
         'default_highlight_color'
     );
 
-
-    /**
-     * Validate the add Neatline form.
-     *
-     * @param string $title The title.
-     *
-     * @return array $errors A list of errors to display.
-     */
-    public function validateForm($title, $map, $image)
-    {
-
-        $errors = array();
-
-        // No title.
-        if ($title == '') {
-            $errors['title'] = 'Enter a title.';
-        }
-
-        // Map and image.
-        if (is_numeric($map) && is_numeric($image)) {
-            $errors['map'] = 'Choose a map or an image, not both.';
-        }
-
-        return $errors;
-
-    }
-
     /**
      * Save the add Neatline form.
      *
@@ -147,6 +120,7 @@ class NeatlineExhibit extends Omeka_record
         $this->is_timeline =            1;
         $this->is_items =               1;
         $this->map_id =                 null;
+        $this->image_id =               null;
 
         // Check for map.
         if (is_numeric($map)) {

@@ -599,13 +599,16 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
     public function testAddSuccessWithMap()
     {
 
+        $map = new NeatlineMapsMap;
+        $map->save();
+
         $this->request->setMethod('POST')
             ->setPost(array(
                 'title' => 'Test Exhibit',
                 'slug' => 'test-exhibit',
                 'public' => 1,
                 'baselayer' => 5,
-                'map' => 2,
+                'map' => $map->id,
                 'image' => 'none'
             )
         );
@@ -625,7 +628,7 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
         $this->assertEquals($exhibit->slug, 'test-exhibit');
         $this->assertEquals($exhibit->public, 1);
         $this->assertEquals($exhibit->default_base_layer, 5);
-        $this->assertEquals($exhibit->map_id, 2);
+        $this->assertEquals($exhibit->map_id, $map->id);
         $this->assertNull($exhibit->image_id);
 
     }
@@ -637,35 +640,6 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
      */
     public function testAddSuccessWithImage()
     {
-
-        $this->request->setMethod('POST')
-            ->setPost(array(
-                'title' => 'Test Exhibit',
-                'slug' => 'test-exhibit',
-                'public' => 1,
-                'baselayer' => 5,
-                'map' => 'none',
-                'image' => 2
-            )
-        );
-
-        // No exhibits at the start.
-        $this->assertEquals($this->_exhibitsTable->count(), 0);
-
-        // Submit the form.
-        $this->dispatch('neatline-exhibits/add');
-
-        // No exhibit should have been created.
-        $this->assertEquals($this->_exhibitsTable->count(), 1);
-
-        // Get the exhibit and examine.
-        $exhibit = $this->_exhibitsTable->find(1);
-        $this->assertEquals($exhibit->name, 'Test Exhibit');
-        $this->assertEquals($exhibit->slug, 'test-exhibit');
-        $this->assertEquals($exhibit->public, 1);
-        $this->assertEquals($exhibit->default_base_layer, 5);
-        $this->assertNull($exhibit->map_id);
-        $this->assertEquals($exhibit->image_id, 2);
 
     }
 
