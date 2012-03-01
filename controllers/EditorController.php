@@ -154,13 +154,7 @@ class Neatline_EditorController extends Omeka_Controller_Action
         $this->view->records = $records ? $records : array();
 
         // Get items.
-        $this->view->items = neatline_getItemsForBrowser(
-            $searchString,
-            $tags,
-            $types,
-            $collections,
-            $all
-        );
+        $this->view->items = neatline_getItemsForBrowser($exhibit);
 
     }
 

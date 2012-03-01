@@ -27,75 +27,26 @@
 /**
  * Get items for the browser.
  *
- * @param string $search        The search string.
- * @param array $tags           The array of tag id's.
- * @param array $types          The array of type id's.
- * @param array $collections    The array of collection id's.
- * @param boolean $all          True when the all option is active.
+ * @param NeatlineExhibit $exhibit The exhibit.
  *
  * @return array of Omeka_records $items The items.
  */
-function neatline_getItemsForBrowser(
-    $search = null,
-    $tags = null,
-    $types = null,
-    $collections = null,
-    $all = null
-)
+function neatline_getItemsForBrowser($exhibit)
 {
-
-    // If nothing is selected, return an empty array.
-    if (!$all && $tags == null && $types == null && $collections == null) {
-        return array();
-    }
 
     $_db = get_db();
     $itemsTable = $_db->getTable('Item');
+    $query = unserialize($exhibit->query);
 
-    $select = $itemsTable->getSelect();
+    // Construct the params array, excluding blank query fields.
     $params = array();
-
-    if ($search) {
-        $params['search'] = $search;
+    foreach ($query as $key => $val) {
+        if ($val !== '') { $params[$key] = $val; }
     }
 
     // Apply the search string to the table class.
+    $select = $itemsTable->getSelect();
     $itemsTable->applySearchFilters($select, $params);
-
-    // Construct the final where clause.
-    if (!$all) {
-
-        $whereClause = array();
-
-        // Build types clause.
-        if ($types != null) {
-            $typesString = implode(',', $types);
-            $whereClause[] = 'item_type_id IN (' . $typesString . ')';
-        }
-
-        // Build collections clause.
-        if ($collections != null) {
-            $collectionsString = implode(',', $collections);
-            $whereClause[] = 'collection_id IN (' . $collectionsString . ')';
-        }
-
-        // Build tags clause.
-        if ($tags != null) {
-            foreach ($tags as $id) {
-                $whereClause[] = 'EXISTS (SELECT * FROM omeka_taggings '
-                    . 'WHERE i.id = relation_id AND tag_id = ' . $id . ')';
-            }
-        }
-
-        // Collapse into single string.
-        $whereClause = implode(' OR ', $whereClause);
-
-        if ($whereClause != '') {
-            $select->where($whereClause);
-        }
-
-    }
-
     return $itemsTable->fetchObjects($select);
 
 }
