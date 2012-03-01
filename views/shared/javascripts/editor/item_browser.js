@@ -96,7 +96,6 @@
             this._addWindowResizeListener();
             this._glossSearchBox();
             this._glossColumnHeaders();
-            this._glossItemFilter();
             this._glossNewItemButton();
             this._instantiateFormManager();
 
@@ -492,26 +491,6 @@
                 'mousedown': function() {
                     self.searchBox.val('');
                     self.searchBox.trigger('keyup');
-                }
-
-            });
-
-        },
-
-        /*
-         * Define selection change callback on the item filter widget.
-         */
-        _glossItemFilter: function() {
-
-            var self = this;
-
-            // Instantiate the item filterer.
-            this.itemFilterContainer.itemfilter({
-
-                'selectionchange': function(eventObject, selected) {
-                    if (!self._firstRequest) {
-                        self._getItems();
-                    }
                 }
 
             });

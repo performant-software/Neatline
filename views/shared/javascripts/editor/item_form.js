@@ -398,7 +398,7 @@
 
                 // Grab data out of the form, try to find an existing record.
                 var data = this._getData();
-                var record = this._db({recordid: this.recordId}).first();
+                var record = this._db({ recordid: this.recordId }).first();
 
                 // Check for an existing record.
                 if (record) {
