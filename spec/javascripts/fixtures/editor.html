@@ -255,7 +255,10 @@ to store the current viewport settings as the public defaults.</p>
                 <label for="title">Title</label>
                 <div class="input">
                     <textarea id="item-title" class="xlarge" name="title" placeholder="Title" rows="1"></textarea>
-                    <span class="help-block">The text displayed as the item's icon on the timeline.</span>
+                    <div class="slug-editor">
+                        <span class="record-slug"></span>
+                        <a href="#">[edit slug]</a>
+                    </div>
                 </div>
             </div>
 
@@ -263,7 +266,6 @@ to store the current viewport settings as the public defaults.</p>
                 <label for="map-description">Description</label>
                 <div class="input">
                     <textarea id="item-description" class="xlarge" name="description" placeholder="Description" rows="4"></textarea>
-                    <span class="help-block">Describe or annotate the item.</span>
                 </div>
             </div>
 
@@ -485,7 +487,7 @@ to store the current viewport settings as the public defaults.</p>
 <script type="text/javascript">
 
     // Exhibit parameters.
-    var Neatline = {"added":"2012-03-02 15:44:38","modified":"2012-03-02 15:44:38","name":"Test Exhibit","slug":"test-exhibit","public":1,"query":null,"map_id":null,"image_id":null,"top_element":"map","items_h_pos":"right","items_v_pos":"top","items_height":"full","h_percent":50,"v_percent":60,"is_map":1,"is_timeline":1,"is_items":1,"default_map_bounds":null,"default_map_zoom":null,"default_focus_date":null,"default_timeline_zoom":null,"default_vector_color":null,"default_stroke_color":null,"default_highlight_color":null,"default_vector_opacity":null,"default_stroke_opacity":null,"default_stroke_width":null,"default_point_radius":null,"default_base_layer":null,"id":1};
+    var Neatline = {"added":"2012-03-04 14:40:34","modified":"2012-03-04 14:40:34","name":"Test Exhibit","slug":"test-exhibit","public":1,"query":null,"map_id":null,"image_id":null,"top_element":"map","items_h_pos":"right","items_v_pos":"top","items_height":"full","h_percent":50,"v_percent":60,"is_map":1,"is_timeline":1,"is_items":1,"default_map_bounds":null,"default_map_zoom":null,"default_focus_date":null,"default_timeline_zoom":null,"default_vector_color":null,"default_stroke_color":null,"default_highlight_color":null,"default_vector_opacity":null,"default_stroke_opacity":null,"default_stroke_width":null,"default_point_radius":null,"default_base_layer":null,"id":1};
         Neatline.dataSources = {"timeline":"http:\/\/\/Users\/davidmcclure\/pear\/bin\/neatline-exhibits\/1\/data\/simile","map":"http:\/\/\/Users\/davidmcclure\/pear\/bin\/neatline-exhibits\/1\/data\/openlayers","undated":"http:\/\/\/Users\/davidmcclure\/pear\/bin\/neatline-exhibits\/1\/data\/udi"};
         Neatline.isPublic = false;
         Neatline.baseLayer = {"name":"Google Physical","id":2};

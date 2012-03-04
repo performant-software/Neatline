@@ -38,7 +38,10 @@
                 <label for="title">Title</label>
                 <div class="input">
                     <textarea id="item-title" class="xlarge" name="title" placeholder="Title" rows="1"></textarea>
-                    <span class="help-block">The text displayed as the item's icon on the timeline.</span>
+                    <div class="slug-editor">
+                        <span class="record-slug"></span>
+                        <a href="#">[edit slug]</a>
+                    </div>
                 </div>
             </div>
 
@@ -46,7 +49,6 @@
                 <label for="map-description">Description</label>
                 <div class="input">
                     <textarea id="item-description" class="xlarge" name="description" placeholder="Description" rows="4"></textarea>
-                    <span class="help-block">Describe or annotate the item.</span>
                 </div>
             </div>
 

@@ -129,6 +129,7 @@ class NeatlinePlugin
                 `item_id`                   int(10) unsigned NULL,
                 `exhibit_id`                int(10) unsigned NULL,
                 `title`                     tinytext COLLATE utf8_unicode_ci NULL,
+                `slug`                      varchar(100) NULL,
                 `description`               mediumtext COLLATE utf8_unicode_ci NULL,
                 `start_date`                tinytext COLLATE utf8_unicode_ci NULL,
                 `start_time`                tinytext COLLATE utf8_unicode_ci NULL,

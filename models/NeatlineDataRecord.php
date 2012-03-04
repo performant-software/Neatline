@@ -37,6 +37,7 @@ class NeatlineDataRecord extends Omeka_record
 
     // Text fields.
     public $title;
+    public $slug;
     public $description;
 
     // Dates.
