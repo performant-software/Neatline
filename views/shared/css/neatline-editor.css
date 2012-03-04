@@ -374,27 +374,14 @@ a.fieldset:hover {
     background-position: left center;
 }
 
-/* .fieldset-arrow-down {*/
-/*     position: relative;*/
-/*     float: left;*/
-/*     margin: 4px 5px 0 0;*/
-/*     width: 0;*/
-/*     height: 0;*/
-/*     border-left: 4px solid transparent;*/
-/*     border-right: 4px solid transparent;*/
-/*     border-top: 4px solid #000;*/
-/* }*/
+div.slug-editor {
+    margin: 4px 0;
+    font-size: 11px;
+}
 
-/* .fieldset-arrow-right {*/
-/*     position: relative;*/
-/*     float: left;*/
-/*     margin: 3px 5px 0 0;*/
-/*     width: 0;*/
-/*     height: 0;*/
-/*     border-top: 4px solid transparent;*/
-/*     border-bottom: 4px solid transparent;*/
-/*     border-left: 4px solid #000;*/
-/* }*/
+div.slug-editor a {
+    color: #6A457D;
+}
 
 
 /* Search Cancel */

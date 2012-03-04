@@ -40,7 +40,7 @@
                     <textarea id="item-title" class="xlarge" name="title" placeholder="Title" rows="1"></textarea>
                     <div class="slug-editor">
                         <span class="record-slug"></span>
-                        <a href="#">[edit slug]</a>
+                        <a href="#">edit slug</a>
                     </div>
                 </div>
             </div>
