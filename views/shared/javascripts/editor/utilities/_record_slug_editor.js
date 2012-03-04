@@ -40,6 +40,8 @@
          */
         _create: function() {
 
+            console.log(this.element);
+
             // Get markup.
             this._body =        $('body');
             this._window =      $(window);
@@ -66,6 +68,7 @@
             this.element.bind({
 
                 'keyup': function() {
+                    console.log('up');
                     if (!self._hasTyped) {
                         var slug = self.slugify(self.title.val())
                         self.slug.val(slug);
