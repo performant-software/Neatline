@@ -450,6 +450,7 @@
                 // After a record is deleted, remove its listing.
                 'deletecomplete': function(event, obj) {
                     self._currentFormItem.remove();
+                    self._hideForm(self._currentFormItem, false);
                     self._glossItems();
                     self._trigger('savecomplete');
                 }
