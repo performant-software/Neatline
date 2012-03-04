@@ -794,7 +794,7 @@
                 // saved in the wkt strings. It is not clear why these artifacts
                 // are getting generated and committed, but they cause erratic
                 // bound calculation and zooming bugs. This needs a real fix.
-                if (wkt !== 'POINT(NaN NaN)') {
+                if (!_.include(['POINT(NaN NaN)', 'POINT()'], wkt)) {
                     wkts.push(wkt);
                 }
 
