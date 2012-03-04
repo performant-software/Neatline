@@ -606,7 +606,7 @@
          * on the title to the title text span.
          */
         _updateTitleText: function() {
-            if (_.isNaN(this.itemId) && this.title.val() !== '') {
+            if (_.isNull(this.itemId) && this.title.val() !== '') {
                 this._trigger('settitle', {}, { 'text': this.title.val() });
             }
         },

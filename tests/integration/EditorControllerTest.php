@@ -800,7 +800,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
             ->setParams(array(
                 'item_id' => $item->id,
                 'exhibit_id' => $neatline->id,
-                'record_id' => ''
+                'record_id' => 'null'
             )
         );
 
