@@ -134,10 +134,6 @@ class Neatline_EditorController extends Omeka_Controller_Action
 
         // Get parameters from the ajax request.
         $searchString =             $this->_request->getParam('search');
-        $tags =                     $this->_request->getParam('tags');
-        $types =                    $this->_request->getParam('types');
-        $collections =              $this->_request->getParam('collections');
-        $all =                      json_decode($this->_request->getParam('all'));
         $exhibidId =                $this->_request->getParam('exhibit_id');
 
         // Push in the Neatline exhibit record.
@@ -150,11 +146,12 @@ class Neatline_EditorController extends Omeka_Controller_Action
             $searchString
         );
 
-        // Push the records (empty array if false).
-        $this->view->records = $records ? $records : array();
-
         // Get items.
-        $this->view->items = neatline_getItemsForBrowser($exhibit);
+        $items = neatline_getItemsForBrowser($exhibit);
+
+        // Push the records and items (empty array if false).
+        $this->view->records = $records ? $records : array();
+        $this->view->items = $items;
 
     }
 
