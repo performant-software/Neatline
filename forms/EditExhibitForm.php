@@ -54,7 +54,6 @@ class EditExhibitForm extends Omeka_Form
         // Get database and tables.
         $_db = get_db();
         $_layers = $_db->getTable('NeatlineBaseLayer');
-        $_maps = $_db->getTable('NeatlineMapsMap');
         $_exhibits = $_db->getTable('NeatlineExhibit');
 
         $this->setMethod('post');
