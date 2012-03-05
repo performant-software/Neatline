@@ -109,6 +109,8 @@
          */
         _instantiateGeoserverMap: function() {
 
+            var self = this;
+
             // Set OL global attributes.
             OpenLayers.IMAGE_RELOAD_ATTEMTPS = 3;
             OpenLayers.Util.onImageLoadErrorColor = 'transparent';
@@ -156,34 +158,39 @@
             // Instantiate the map.
             this.map = new OpenLayers.Map('map', options);
 
-            // // Construct the base layers.
-            // var layers = this._getBaseLayers();
+            // Construct the base layers.
+            var layers = this._getBaseLayers();
 
-            // // Push the base layers onto the map, set default.
-            // this.map.addLayers(layers);
-            // this._setDefaultLayer();
+            // Push the base layers onto the map, set default.
+            this.map.addLayers(layers);
+            this._setDefaultLayer();
 
-            // Build the WMS layer.
-            this.baseLayer = new OpenLayers.Layer.WMS(
-                Neatline.name,
-                Neatline.map.wmsAddress,
-                {
-                    LAYERS: Neatline.map.layers,
-                    STYLES: '',
-                    format: format,
-                    tiled: !pureCoverage,
-                    tilesOrigin: this.map.maxExtent.left + ',' + this.map.maxExtent.bottom
-                },
-                {
-                    buffer: 0,
-                    displayOutsideMaxExtent: true,
-                    isBaseLayer: true
-                    // transparent: 'true'
-                }
-            );
+            // Construct the WMS layers.
+            var wmsLayers = [];
+            _.each(Neatline.map.layers.split(','), function(layer) {
 
-            // Push the base layer onto the map.
-            this.map.addLayers([this.baseLayer]);
+                wmsLayers.push(new OpenLayers.Layer.WMS(
+                    layer,
+                    Neatline.map.wmsAddress,
+                    {
+                        layers: layer,
+                        styles: '',
+                        transparent: true,
+                        format: format,
+                        tiled: !pureCoverage,
+                        tilesOrigin: self.map.maxExtent.left + ',' + self.map.maxExtent.bottom
+                    },
+                    {
+                        buffer: 0,
+                        displayOutsideMaxExtent: true,
+                        isBaseLayer: false
+                    }
+                ));
+
+            });
+
+            // Push the wms layers onto the map.
+            this.map.addLayers(wmsLayers);
 
             // If there is a default bounding box set for the exhibit, construct
             // a second Bounds object to use as the starting zoom target.
