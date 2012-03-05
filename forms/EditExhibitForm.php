@@ -24,7 +24,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache 2 License
  */
 
-class EditExhibitForm extends Omeka_form
+class EditExhibitForm extends Omeka_Form
 {
 
     private $_exhibit;
