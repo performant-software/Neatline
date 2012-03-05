@@ -148,6 +148,7 @@
                   new OpenLayers.Control.LayerSwitcher()
                 ],
                 maxResolution: 'auto',
+                maxExtent: bounds,
                 projection: Neatline.map.epsg[0],
                 units: 'm'
             };
@@ -186,7 +187,7 @@
 
             // If there is a default bounding box set for the exhibit, construct
             // a second Bounds object to use as the starting zoom target.
-            if (Neatline.default_map_bounds !== null) {
+            if (!_.isNull(Neatline.default_map_bounds)) {
                 var boundsArray = Neatline.default_map_bounds.split(',');
                 var bounds = new OpenLayers.Bounds(
                     parseFloat(boundsArray[0]),
