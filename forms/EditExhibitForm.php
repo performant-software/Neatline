@@ -71,7 +71,7 @@ class EditExhibitForm extends Omeka_Form
                 array('validator' => 'NotEmpty', 'breakChainOnFailure' => true, 'options' =>
                     array(
                         'messages' => array(
-                            Zend_Validate_NotEmpty::IS_EMPTY => __('Enter a title.')
+                            Zend_Validate_NotEmpty::IS_EMPTY => 'Enter a title.'
                         )
                     )
                 )
@@ -88,7 +88,7 @@ class EditExhibitForm extends Omeka_Form
                 array('validator' => 'NotEmpty', 'breakChainOnFailure' => true, 'options' =>
                     array(
                         'messages' => array(
-                            Zend_Validate_NotEmpty::IS_EMPTY => __('Enter a slug.')
+                            Zend_Validate_NotEmpty::IS_EMPTY => 'Enter a slug.'
                         )
                     )
                 ),
@@ -96,7 +96,7 @@ class EditExhibitForm extends Omeka_Form
                     array(
                         'pattern' => '/^[0-9a-z\-]+$/',
                         'messages' => array(
-                            Zend_Validate_Regex::NOT_MATCH => __('Lowercase letters, numbers, and hyphens only.')
+                            Zend_Validate_Regex::NOT_MATCH => 'Lowercase letters, numbers, and hyphens only.'
                         )
                     )
                 )
