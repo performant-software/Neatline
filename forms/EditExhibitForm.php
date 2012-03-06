@@ -151,7 +151,7 @@ class EditExhibitForm extends Omeka_Form
                     'value' => (string) $this->_exhibit->slug
                 ),
                 'messages'  =>  array(
-                    'recordFound' => __('Slug taken.')
+                    'recordFound' => 'Slug taken.'
                 )
             )
         );

@@ -92,7 +92,7 @@ class AddExhibitForm extends Omeka_Form
                         'field'     =>  'slug',
                         'adapter'   =>  $_db->getAdapter(),
                         'messages'  =>  array(
-                            'recordFound' => __('Slug taken.')
+                            'recordFound' => 'Slug taken.'
                         )
                     )
                 )
