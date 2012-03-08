@@ -45,8 +45,7 @@ class Neatline_PublicControllerTest extends Omeka_Test_AppTestCase
     }
 
     /**
-     * The show view should render the base markup for the editing application.
-     * If the exhibit has no map, then there should not be a map object in the view.
+     * .
      *
      * @return void.
      */
@@ -58,8 +57,7 @@ class Neatline_PublicControllerTest extends Omeka_Test_AppTestCase
     }
 
     /**
-     * The index view should render the base markup for the editing application.
-     * If the exhibit has a Geoserver-based map, then the map object in the view.
+     * .
      *
      * @return void.
      */
@@ -71,12 +69,83 @@ class Neatline_PublicControllerTest extends Omeka_Test_AppTestCase
     }
 
     /**
-     * The index view should render the base markup for the editing application.
-     * If the exhibit has a file-based map, then the map object in the view.
+     * .
      *
      * @return void.
      */
     public function testShowWithFileMap()
+    {
+
+
+
+    }
+
+    /**
+     * .
+     *
+     * @return void.
+     */
+    public function testFullscreenWithoutMap()
+    {
+
+
+
+    }
+
+    /**
+     * .
+     *
+     * @return void.
+     */
+    public function testFullscreenWithGeoserverMap()
+    {
+
+
+
+    }
+
+    /**
+     * .
+     *
+     * @return void.
+     */
+    public function testFullscreenWithFileMap()
+    {
+
+
+
+    }
+
+    /**
+     * .
+     *
+     * @return void.
+     */
+    public function testEmbedWithoutMap()
+    {
+
+
+
+    }
+
+    /**
+     * .
+     *
+     * @return void.
+     */
+    public function testEmbedWithGeoserverMap()
+    {
+
+
+
+    }
+
+    /**
+     * .
+     *
+     * @return void.
+     */
+    public function testEmbedWithFileMap()
     {
 
 

@@ -106,21 +106,23 @@ class AddExhibitForm extends Omeka_Form
         ));
 
         // Map.
-        $this->addElement('select', 'map', array(
-            'label'         => '(Optional): Geoserver Map',
-            'description'   => 'Select a Geoserver map to use as the exhibit foundation. An exhibit can use a Geoserver map or a static image, but not both. To just use a real-geography base layers, leave both fields blank.',
-            'attribs'       => array('style' => 'width: 230px'),
-            'multiOptions'  => $_maps->getMapsForSelect(),
-            'validators'    => array(
-                array('validator' => 'MapOrImage', 'breakChainOnFailure' => true, 'options' =>
-                    array(
-                        'messages' => array(
-                            Neatline_Validate_MapOrImage::MAP_OR_IMAGE => 'Can\'t use both a map and an image.'
+        if (plugin_is_active('NeatlineMaps')) {
+            $this->addElement('select', 'map', array(
+                'label'         => '(Optional): Geoserver Map',
+                'description'   => 'Select a Geoserver map to use as the exhibit foundation. An exhibit can use a Geoserver map or a static image, but not both. To just use a real-geography base layers, leave both fields blank.',
+                'attribs'       => array('style' => 'width: 230px'),
+                'multiOptions'  => $_maps->getMapsForSelect(),
+                'validators'    => array(
+                    array('validator' => 'MapOrImage', 'breakChainOnFailure' => true, 'options' =>
+                        array(
+                            'messages' => array(
+                                Neatline_Validate_MapOrImage::MAP_OR_IMAGE => 'Can\'t use both a map and an image.'
+                            )
                         )
                     )
                 )
-            )
-        ));
+            ));
+        }
 
         // Image.
         $this->addElement('select', 'image', array(
