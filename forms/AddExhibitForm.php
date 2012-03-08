@@ -92,7 +92,7 @@ class AddExhibitForm extends Omeka_Form
                         'field'     =>  'slug',
                         'adapter'   =>  $_db->getAdapter(),
                         'messages'  =>  array(
-                            'recordFound' => __('Slug taken.')
+                            'recordFound' => 'Slug taken.'
                         )
                     )
                 )
@@ -132,7 +132,7 @@ class AddExhibitForm extends Omeka_Form
                 array('validator' => 'MapOrImage', 'breakChainOnFailure' => true, 'options' =>
                     array(
                         'messages' => array(
-                            Neatline_Validate_MapOrImage::MAP_OR_IMAGE => __('Can\'t use both a map and an image.')
+                            Neatline_Validate_MapOrImage::MAP_OR_IMAGE => 'Can\'t use both a map and an image.'
                         )
                     )
                 )
