@@ -380,14 +380,14 @@
             this._expandTitle();
             this._getFormData();
 
-            // If there is no item id, display the delete button and hide
-            // the item metadata fieldset.
+            // If there is no item id, display the delete button.
             if (_.isNull(this.itemId)) {
                 this._showDeleteButton();
-                this._showItemMetadataFieldset();
-            } else {
+            }
+
+            // Otherwise, hide it.
+            else {
                 this._hideDeleteButton();
-                this._hideItemMetadataFieldset();
             }
 
             // Update the tracker.
