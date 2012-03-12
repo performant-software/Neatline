@@ -198,17 +198,6 @@
 
         <hr />
 
-        <a class="fieldset item-metadata" href="">
-            <div class="fieldset-arrow"></div>Item Metadata
-        </a>
-        <div class="fieldset">
-
-            <!-- Show item metadata. -->
-
-        </div>
-
-        <hr />
-
         <div class="fieldset">
 
             <div class="clearfix">
