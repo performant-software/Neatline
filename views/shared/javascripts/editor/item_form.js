@@ -106,6 +106,8 @@
             this.dateInformationFieldset =  this.form.find('a.fieldset.date-information');
             this.dateStylesFieldset =       this.form.find('a.fieldset.date-styles');
             this.mapStylesFieldset =        this.form.find('a.fieldset.map-styles');
+            this.itemMetadataFieldset =     this.form.find('a.fieldset.item-metadata');
+            this.itemMetadata =             this.itemMetadataFieldset.next('div.fieldset');
 
             // Trackers.
             this._db =                      TAFFY();
@@ -324,6 +326,14 @@
 
             // Map styles.
             this.mapStylesFieldset.fieldsetexpander({
+                default_status: false,
+                'change': function() {
+                    self._measureForm();
+                }
+            });
+
+            // Item metadata.
+            this.itemMetadataFieldset.fieldsetexpander({
                 default_status: false,
                 'change': function() {
                     self._measureForm();
@@ -766,6 +776,24 @@
          */
         _getTitleContent: function(coverage) {
             return this.title.next('iframe').contents().find('body').html();
+        },
+
+        /*
+         * Show the item metadata fieldset link and content.
+         */
+        _showItemMetadataFieldset: function() {
+            this.itemMetadataFieldset.include(this.itemMetadata).css(
+                'visibility', 'visible'
+            );
+        },
+
+        /*
+         * Hide the item metadata fieldset link and content.
+         */
+        _hideItemMetadataFieldset: function() {
+            this.itemMetadataFieldset.include(this.itemMetadata).css(
+                'visibility', 'hidden'
+            );
         },
 
 
