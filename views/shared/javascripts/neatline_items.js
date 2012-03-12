@@ -360,7 +360,7 @@
             this.__activateTitle(item);
 
             // Only show the description if it has content.
-            if (description.text() !== '') {
+            if (description.html() !== '') {
 
                 // Show and measure the description.
                 description.css('display', 'list-item');
