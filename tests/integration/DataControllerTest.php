@@ -157,10 +157,10 @@ class Neatline_DataControllerTest extends Omeka_Test_AppTestCase
         $record2->title = 'Item 2 Title';
         $record1->description = 'Item 1 description.';
         $record2->description = 'Item 2 description.';
-        $record1->start_date = 'January 2011';
-        $record2->start_date = 'January 2011';
-        $record1->end_date = 'January 2012';
-        $record2->end_date = 'January 2012';
+        $record1->start_date = '1564-04-26 14:39:22';
+        $record2->start_date = '1564-04-26 14:39:22';
+        $record1->end_date = '1616-04-23 12:45:34';
+        $record2->end_date = '1616-04-23 12:45:34';
         $record1->vector_color = '#ffffff';
         $record2->vector_color = '#000000';
         $record1->left_percent = 0;
@@ -223,12 +223,12 @@ class Neatline_DataControllerTest extends Omeka_Test_AppTestCase
         );
 
         $this->assertContains(
-            '"start":"2011-01-01 00:00:00"',
+            '"start":"1564-04-26 14:39:22"',
             $response
         );
 
         $this->assertContains(
-            '"end":"2012-01-01 00:00:00"',
+            '"end":"1616-04-23 12:45:34"',
             $response
         );
 
@@ -274,16 +274,6 @@ class Neatline_DataControllerTest extends Omeka_Test_AppTestCase
 
         $this->assertContains(
             '"right_ambiguity":' . $record2->right_percent,
-            $response
-        );
-
-        $this->assertContains(
-            '"start":"2011-01-01 00:00:00"',
-            $response
-        );
-
-        $this->assertContains(
-            '"end":"2012-01-01 00:00:00"',
             $response
         );
 

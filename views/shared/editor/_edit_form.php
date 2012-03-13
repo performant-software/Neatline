@@ -61,8 +61,8 @@
                 <label>Start Date</label>
                 <div class="input">
                     <div class="inline-inputs">
-                        <input class="" name="start-date-date" type="text" placeholder="Start Date" />
-                        <span class="help-inline"></span>
+                        <input class="xlarge" name="start-date-date" type="text" placeholder="Start Date" />
+                        <span class="help-inline">Use <a href="http://www.w3.org/TR/NOTE-datetime" target="_blank">ISO 8601</a> format dates.</span>
                     </div>
                 </div>
             </div>
@@ -71,8 +71,7 @@
                 <label>End Date</label>
                 <div class="input">
                     <div class="inline-inputs">
-                        <input class="" name="end-date-date" type="text" placeholder="End Date" />
-                        <span class="help-inline"></span>
+                        <input class="xlarge" name="end-date-date" type="text" placeholder="End Date" />
                     </div>
                 </div>
             </div>

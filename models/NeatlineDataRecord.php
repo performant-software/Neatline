@@ -206,16 +206,35 @@ class NeatlineDataRecord extends Omeka_record
         $data['start_date'] =       '';
         $data['end_date'] =         '';
 
-        // Get DC defaults.
+        // Get DC title default.
         $data['title'] = neatline_getItemMetadata(
             $item,
             'Dublin Core',
             'Title');
 
+        // Get DC description default.
         $data['description'] = neatline_getItemMetadata(
             $item,
             'Dublin Core',
             'Description');
+
+        // Get DC date default.
+        $date = neatline_getItemMetadata(
+            $item,
+            'Dublin Core',
+            'Date');
+
+        // If the date is a range, assign to start_date and end_date.
+        if (preg_match_all('/^([\+-]?\d{4}(?!\d{2}\b))((-?)((0[1-9]|1[0-2])(\3([12]\d|0[1-9]|3[01]))?|W([0-4]\d|5[0-2])(-?[1-7])?|(00[1-9]|0[1-9]\d|[12]\d{2}|3([0-5]\d|6[1-6])))([T\s]((([01]\d|2[0-3])((:?)[0-5]\d)?|24\:?00)([\.,]\d+(?!:))?)?(\17[0-5]\d([\.,]\d+)?)?([zZ]|([\+-])([01]\d|2[0-3]):?([0-5]\d)?)?)?)?\/([\+-]?\d{4}(?!\d{2}\b))((-?)((0[1-9]|1[0-2])(\3([12]\d|0[1-9]|3[01]))?|W([0-4]\d|5[0-2])(-?[1-7])?|(00[1-9]|0[1-9]\d|[12]\d{2}|3([0-5]\d|6[1-6])))([T\s]((([01]\d|2[0-3])((:?)[0-5]\d)?|24\:?00)([\.,]\d+(?!:))?)?(\17[0-5]\d([\.,]\d+)?)?([zZ]|([\+-])([01]\d|2[0-3]):?([0-5]\d)?)?)?)?$/', $date, $matches)) {
+            $datesArray = explode('/', $date);
+            $data['start_date'] = $datesArray[0];
+            $data['end_date'] = $datesArray[1];
+        }
+
+        // If the date is a single date, assign to start_date.
+        else if (preg_match('/^([\+-]?\d{4}(?!\d{2}\b))((-?)((0[1-9]|1[0-2])(\3([12]\d|0[1-9]|3[01]))?|W([0-4]\d|5[0-2])(-?[1-7])?|(00[1-9]|0[1-9]\d|[12]\d{2}|3([0-5]\d|6[1-6])))([T\s]((([01]\d|2[0-3])((:?)[0-5]\d)?|24\:?00)([\.,]\d+(?!:))?)?(\17[0-5]\d([\.,]\d+)?)?([zZ]|([\+-])([01]\d|2[0-3]):?([0-5]\d)?)?)?)?$/', $date, $matches)) {
+            $data['start_date'] = $date;
+        }
 
         // JSON-ify the array.
         return json_encode($data);

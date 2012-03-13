@@ -331,14 +331,6 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
             // Walk the records and build out the array.
             foreach ($records as $record) {
 
-                // Build the timestamps.
-                $timestamps = neatline_generateTimegliderTimestamps(
-                    $record->start_date,
-                    $record->start_time,
-                    $record->end_date,
-                    $record->end_time
-                );
-
                 $eventArray = array(
                     'eventID' =>                $record->id,
                     'title' =>                  $record->title,
@@ -350,13 +342,13 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
                 );
 
                 // If there is a valid start stamp.
-                if (!is_null($timestamps[0]) && $record->time_active == 1) {
+                if (!is_null($record->start_date) && $record->time_active == 1) {
 
-                    $eventArray['start'] = $timestamps[0];
+                    $eventArray['start'] = $record->start_date;
 
                     // If there is a valid end stamp.
-                    if (!is_null($timestamps[1])) {
-                        $eventArray['end'] = $timestamps[1];
+                    if (!is_null($record->end_date)) {
+                        $eventArray['end'] = $record->end_date;
                     }
 
                     // Only push if there is at least a start.

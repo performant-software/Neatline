@@ -80,10 +80,7 @@
             this.title =                    this.form.find('textarea[name="title"]');
             this.description =              this.form.find('textarea[name="description"]');
             this.startDate =                this.form.find('input[name="start-date-date"]');
-            this.startTime =                this.form.find('input[name="start-date-time"]');
             this.endDate =                  this.form.find('input[name="end-date-date"]');
-            this.endTime =                  this.form.find('input[name="end-date-time"]');
-            this.endTime =                  this.form.find('input[name="end-date-time"]');
             this.vectorColor =              this.form.find('input[name="vector-color"]');
             this.strokeColor =              this.form.find('input[name="stroke-color"]');
             this.highlightColor =           this.form.find('input[name="highlight-color"]');
@@ -646,9 +643,7 @@
             this.leftPercent.val(this._data.left_percent);
             this.rightPercent.val(this._data.right_percent);
             this.startDate.val(this._data.start_date);
-            this.startTime.val(this._data.start_time);
             this.endDate.val(this._data.end_date);
-            this.endTime.val(this._data.end_time);
 
             // Reposition the draggers.
             this.ambiguity.gradientbuilder(
@@ -683,9 +678,7 @@
             this.leftPercent.val(0);
             this.rightPercent.val(100);
             this.startDate.val('');
-            this.startTime.val('');
             this.endDate.val('');
-            this.endTime.val('');
             this.description.val('');
             this.descriptionEditor.updateFrame();
 
@@ -719,9 +712,7 @@
             data.left_percent =             parseInt(this.leftPercent.val(), 10);
             data.right_percent =            parseInt(this.rightPercent.val(), 10);
             data.start_date =               this.startDate.val();
-            data.start_time =               this.startTime.val();
             data.end_date =                 this.endDate.val();
-            data.end_time =                 this.endTime.val();
             data.vector_color =             this.vectorColor.val();
             data.stroke_color =             this.strokeColor.val();
             data.highlight_color =          this.highlightColor.val();

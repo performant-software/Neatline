@@ -1273,21 +1273,32 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
      *
      * @return void.
      */
-    public function testBuildEditFormForNewRecordJson()
+    public function testBuildEditFormForNewRecordWithSingleDateJson()
     {
 
-        // Create an item and texts.
+        // Create an item.
         $item = $this->helper->_createItem();
+
+        // Create title element.
         $this->helper->_createElementText(
             $item,
             'Dublin Core',
             'Title',
             'Test Title');
+
+        // Create description element.
         $this->helper->_createElementText(
             $item,
             'Dublin Core',
             'Description',
             'Test description.');
+
+        // Create date element.
+        $this->helper->_createElementText(
+            $item,
+            'Dublin Core',
+            'Date',
+            '1616-04-23 12:45:34');
 
         // Ping the method for the json.
         $json = NeatlineDataRecord::buildEditFormForNewRecordJson($item);
@@ -1304,12 +1315,114 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         );
 
         $this->assertContains(
-            '"start_date":""',
+            '"start_date":"1616-04-23 12:45:34"',
             $json
         );
 
         $this->assertContains(
             '"end_date":""',
+            $json
+        );
+
+        $this->assertContains(
+            '"left_percent":0',
+            $json
+        );
+
+        $this->assertContains(
+            '"right_percent":100',
+            $json
+        );
+
+        $this->assertContains(
+            '"vector_color":"' . get_option('vector_color') . '"',
+            $json
+        );
+
+        $this->assertContains(
+            '"vector_opacity":' . (int) get_option('vector_opacity'),
+            $json
+        );
+
+        $this->assertContains(
+            '"stroke_opacity":' . (int) get_option('stroke_opacity'),
+            $json
+        );
+
+        $this->assertContains(
+            '"stroke_color":"' . get_option('stroke_color') . '"',
+            $json
+        );
+
+        $this->assertContains(
+            '"stroke_width":' . (int) get_option('stroke_width'),
+            $json
+        );
+
+        $this->assertContains(
+            '"point_radius":' . (int) get_option('point_radius'),
+            $json
+        );
+
+    }
+
+    /**
+     * The buildEditFormForNewRecordJson() method should construct a
+     * starting JSON object for a fresh Omeka-item-based record that
+     * defaults in DC values. When there is a DC-specification date range
+     * in the DC date field (two timestamps separated by a slash), the
+     * two dates should be split and assigned to the start and end fields.
+     *
+     * @return void.
+     */
+    public function testBuildEditFormForNewRecordWithDateRangeJson()
+    {
+
+        // Create an item.
+        $item = $this->helper->_createItem();
+
+        // Create title element.
+        $this->helper->_createElementText(
+            $item,
+            'Dublin Core',
+            'Title',
+            'Test Title');
+
+        // Create description element.
+        $this->helper->_createElementText(
+            $item,
+            'Dublin Core',
+            'Description',
+            'Test description.');
+
+        // Create date element.
+        $this->helper->_createElementText(
+            $item,
+            'Dublin Core',
+            'Date',
+            '1564-04-26 14:39:22/1616-04-23 12:45:34');
+
+        // Ping the method for the json.
+        $json = NeatlineDataRecord::buildEditFormForNewRecordJson($item);
+
+        // Check the construction.
+        $this->assertContains(
+            '"title":"Test Title"',
+            $json
+        );
+
+        $this->assertContains(
+            '"description":"Test description."',
+            $json
+        );
+
+        $this->assertContains(
+            '"start_date":"1564-04-26 14:39:22"',
+            $json
+        );
+
+        $this->assertContains(
+            '"end_date":"1616-04-23 12:45:34"',
             $json
         );
 

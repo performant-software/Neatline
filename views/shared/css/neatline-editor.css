@@ -342,11 +342,10 @@ div.item-styles {
 a.fieldset {
     margin: 10px 40px 10px 20px;
     display: block;
-    color: #6A457D;
     font-style: italic;
 }
 
-a.fieldset:hover {
+tr.edit-form a {
     color: #6A457D;
 }
 

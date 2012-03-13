@@ -31,10 +31,8 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
     private static $__testParams = array(
         'title' => 'Test Title',
         'description' => 'Test description.',
-        'start_date' => 'April 26, 1564',
-        'start_time' => '6:00 AM',
-        'end_date' => 'April 23, 1616',
-        'end_time' => '6:00 AM',
+        'start_date' => '1564-04-26 14:39:22',
+        'end_date' => '1616-04-23 12:45:34',
         'vector_color' => '#ffffff',
         'stroke_color' => '#000000',
         'highlight_color' => '#000000',
@@ -566,9 +564,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $record->title =            self::$__testParams['title'];
         $record->description =      self::$__testParams['description'];
         $record->start_date =       self::$__testParams['start_date'];
-        $record->start_time =       self::$__testParams['start_time'];
         $record->end_date =         self::$__testParams['end_date'];
-        $record->end_time =         self::$__testParams['end_time'];
         $record->vector_color =     self::$__testParams['vector_color'];
         $record->stroke_color =     self::$__testParams['stroke_color'];
         $record->highlight_color =  self::$__testParams['highlight_color'];
@@ -703,22 +699,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         );
 
         $this->assertContains(
-            '"start_time":""',
-            $response
-        );
-
-        $this->assertContains(
             '"end_date":""',
-            $response
-        );
-
-        $this->assertContains(
-            '"end_time":""',
-            $response
-        );
-
-        $this->assertContains(
-            '"left_percent":0',
             $response
         );
 
@@ -815,17 +796,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         );
 
         $this->assertContains(
-            '"start_time":""',
-            $response
-        );
-
-        $this->assertContains(
             '"end_date":""',
-            $response
-        );
-
-        $this->assertContains(
-            '"end_time":""',
             $response
         );
 
@@ -899,9 +870,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
                 'title' =>              self::$__testParams['title'],
                 'description' =>        self::$__testParams['description'],
                 'start_date' =>         self::$__testParams['start_date'],
-                'start_time' =>         self::$__testParams['start_time'],
                 'end_date' =>           self::$__testParams['end_date'],
-                'end_time' =>           self::$__testParams['end_time'],
                 'left_percent' =>       self::$__testParams['left_percent'],
                 'right_percent' =>      self::$__testParams['right_percent'],
                 'vector_color' =>       self::$__testParams['vector_color'],
@@ -1040,9 +1009,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
                 'title' =>              self::$__testParams['title'],
                 'description' =>        self::$__testParams['description'],
                 'start_date' =>         self::$__testParams['start_date'],
-                'start_time' =>         self::$__testParams['start_time'],
                 'end_date' =>           self::$__testParams['end_date'],
-                'end_time' =>           self::$__testParams['end_time'],
                 'left_percent' =>       self::$__testParams['left_percent'],
                 'right_percent' =>      self::$__testParams['right_percent'],
                 'vector_color' =>       self::$__testParams['vector_color'],
@@ -1183,9 +1150,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
                 'title' =>              self::$__testParams['title'],
                 'description' =>        self::$__testParams['description'],
                 'start_date' =>         self::$__testParams['start_date'],
-                'start_time' =>         self::$__testParams['start_time'],
                 'end_date' =>           self::$__testParams['end_date'],
-                'end_time' =>           self::$__testParams['end_time'],
                 'left_percent' =>       self::$__testParams['left_percent'],
                 'right_percent' =>      self::$__testParams['right_percent'],
                 'vector_color' =>       self::$__testParams['vector_color'],
@@ -1334,9 +1299,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
                 'title' =>              self::$__testParams['title'],
                 'description' =>        self::$__testParams['description'],
                 'start_date' =>         self::$__testParams['start_date'],
-                'start_time' =>         self::$__testParams['start_time'],
                 'end_date' =>           self::$__testParams['end_date'],
-                'end_time' =>           self::$__testParams['end_time'],
                 'left_percent' =>       self::$__testParams['left_percent'],
                 'right_percent' =>      self::$__testParams['right_percent'],
                 'vector_color' =>       self::$__testParams['vector_color'],
@@ -1390,9 +1353,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
                 'title' =>              self::$__testParams['title'],
                 'description' =>        self::$__testParams['description'],
                 'start_date' =>         self::$__testParams['start_date'],
-                'start_time' =>         self::$__testParams['start_time'],
                 'end_date' =>           self::$__testParams['end_date'],
-                'end_time' =>           self::$__testParams['end_time'],
                 'left_percent' =>       self::$__testParams['left_percent'],
                 'right_percent' =>      self::$__testParams['right_percent'],
                 'vector_color' =>       self::$__testParams['vector_color'],
@@ -1448,9 +1409,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
                 'title' =>              self::$__testParams['title'],
                 'description' =>        self::$__testParams['description'],
                 'start_date' =>         '',
-                'start_time' =>         self::$__testParams['start_time'],
                 'end_date' =>           self::$__testParams['end_date'],
-                'end_time' =>           self::$__testParams['end_time'],
                 'left_percent' =>       self::$__testParams['left_percent'],
                 'right_percent' =>      self::$__testParams['right_percent'],
                 'vector_color' =>       self::$__testParams['vector_color'],
@@ -1498,9 +1457,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
                 'title' =>              self::$__testParams['title'],
                 'description' =>        self::$__testParams['description'],
                 'start_date' =>         '',
-                'start_time' =>         self::$__testParams['start_time'],
                 'end_date' =>           self::$__testParams['end_date'],
-                'end_time' =>           self::$__testParams['end_time'],
                 'left_percent' =>       self::$__testParams['left_percent'],
                 'right_percent' =>      self::$__testParams['right_percent'],
                 'vector_color' =>       self::$__testParams['vector_color'],
@@ -1555,9 +1512,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
                 'title' =>              self::$__testParams['title'],
                 'description' =>        self::$__testParams['description'],
                 'start_date' =>         self::$__testParams['start_date'],
-                'start_time' =>         self::$__testParams['start_time'],
                 'end_date' =>           self::$__testParams['end_date'],
-                'end_time' =>           self::$__testParams['end_time'],
                 'left_percent' =>       self::$__testParams['left_percent'],
                 'right_percent' =>      self::$__testParams['right_percent'],
                 'vector_color' =>       self::$__testParams['vector_color'],
@@ -1605,9 +1560,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
                 'title' =>              self::$__testParams['title'],
                 'description' =>        self::$__testParams['description'],
                 'start_date' =>         self::$__testParams['start_date'],
-                'start_time' =>         self::$__testParams['start_time'],
                 'end_date' =>           self::$__testParams['end_date'],
-                'end_time' =>           self::$__testParams['end_time'],
                 'left_percent' =>       self::$__testParams['left_percent'],
                 'right_percent' =>      self::$__testParams['right_percent'],
                 'vector_color' =>       self::$__testParams['vector_color'],
