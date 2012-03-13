@@ -42,9 +42,7 @@ class NeatlineDataRecord extends Omeka_record
 
     // Dates.
     public $start_date;
-    public $start_time;
     public $end_date;
-    public $end_time;
     public $left_percent;
     public $right_percent;
 
@@ -173,9 +171,7 @@ class NeatlineDataRecord extends Omeka_record
         $data['stroke_width'] =     (int) $this->getStyle('stroke_width');
         $data['point_radius'] =     (int) $this->getStyle('point_radius');
         $data['start_date'] =       (string) $this->start_date;
-        $data['start_time'] =       (string) $this->start_time;
         $data['end_date'] =         (string) $this->end_date;
-        $data['end_time'] =         (string) $this->end_time;
         $data['left_percent'] =     (int) $this->getLeftPercent();
         $data['right_percent'] =    (int) $this->getRightPercent();
 
@@ -208,9 +204,7 @@ class NeatlineDataRecord extends Omeka_record
         $data['left_percent'] =     self::$defaults['left_percent'];
         $data['right_percent'] =    self::$defaults['right_percent'];
         $data['start_date'] =       '';
-        $data['start_time'] =       '';
         $data['end_date'] =         '';
-        $data['end_time'] =         '';
 
         // Get DC defaults.
         $data['title'] = neatline_getItemMetadata(

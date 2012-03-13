@@ -61,9 +61,8 @@
                 <label>Start Date</label>
                 <div class="input">
                     <div class="inline-inputs">
-                        <input class="medium" name="start-date-date" type="text" placeholder="Start Date" />
-                        <input class="mini" name="start-date-time" type="text" placeholder="Start Time" />
-                        <span class="help-inline">Enter regular dates: 'April 23, 1616' and '10:15 am'</span>
+                        <input class="" name="start-date-date" type="text" placeholder="Start Date" />
+                        <span class="help-inline"></span>
                     </div>
                 </div>
             </div>
@@ -72,9 +71,8 @@
                 <label>End Date</label>
                 <div class="input">
                     <div class="inline-inputs">
-                        <input class="medium" name="end-date-date" type="text" placeholder="End Date" />
-                        <input class="mini" name="end-date-time" type="text" placeholder="End Time" />
-                        <span class="help-inline">Enter an ending date, if applicable.</span>
+                        <input class="" name="end-date-date" type="text" placeholder="End Date" />
+                        <span class="help-inline"></span>
                     </div>
                 </div>
             </div>

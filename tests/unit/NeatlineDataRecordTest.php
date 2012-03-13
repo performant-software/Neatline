@@ -32,9 +32,7 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         'title' => 'Test Title',
         'description' => 'Test description.',
         'start_date' => 'April 26, 1564',
-        'start_time' => '6:00 AM',
         'end_date' => 'April 23, 1616',
-        'end_time' => '6:00 AM',
         'vector_color' => '#ffffff',
         'stroke_color' => '#000000',
         'highlight_color' => '#ff0000',
@@ -82,9 +80,7 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         $record->title =                        'title';
         $record->description =                  'description';
         $record->start_date =                   'startdate';
-        $record->start_time =                   'starttime';
         $record->end_date =                     'enddate';
-        $record->end_time =                     'endtime';
         $record->vector_color =                 '#ffffff';
         $record->stroke_color =                 '#ffffff';
         $record->highlight_color =              '#ffffff';
@@ -109,9 +105,7 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         $this->assertEquals($record->title, 'title');
         $this->assertEquals($record->description, 'description');
         $this->assertEquals($record->start_date, 'startdate');
-        $this->assertEquals($record->start_time, 'starttime');
         $this->assertEquals($record->end_date, 'enddate');
-        $this->assertEquals($record->end_time, 'endtime');
         $this->assertEquals($record->vector_color, '#ffffff');
         $this->assertEquals($record->stroke_color, '#ffffff');
         $this->assertEquals($record->highlight_color, '#ffffff');
@@ -998,9 +992,7 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         $record->title =            self::$__testParams['title'];
         $record->description =      self::$__testParams['description'];
         $record->start_date =       self::$__testParams['start_date'];
-        $record->start_time =       self::$__testParams['start_time'];
         $record->end_date =         self::$__testParams['end_date'];
-        $record->end_time =         self::$__testParams['end_time'];
         $record->vector_color =     self::$__testParams['vector_color'];
         $record->stroke_color =     self::$__testParams['stroke_color'];
         $record->highlight_color =  self::$__testParams['highlight_color'];
@@ -1035,17 +1027,7 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         );
 
         $this->assertContains(
-            '"start_time":"' . self::$__testParams['start_time'] . '"',
-            $json
-        );
-
-        $this->assertContains(
             '"end_date":"' . self::$__testParams['end_date'] . '"',
-            $json
-        );
-
-        $this->assertContains(
-            '"end_time":"' . self::$__testParams['end_time'] . '"',
             $json
         );
 
@@ -1112,9 +1094,7 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         $record->title =            self::$__testParams['title'];
         $record->description =      self::$__testParams['description'];
         $record->start_date =       self::$__testParams['start_date'];
-        $record->start_time =       self::$__testParams['start_time'];
         $record->end_date =         self::$__testParams['end_date'];
-        $record->end_time =         self::$__testParams['end_time'];
         $record->vector_color =     self::$__testParams['vector_color'];
         $record->stroke_color =     self::$__testParams['stroke_color'];
         $record->highlight_color =  self::$__testParams['highlight_color'];
@@ -1149,17 +1129,7 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         );
 
         $this->assertContains(
-            '"start_time":"' . self::$__testParams['start_time'] . '"',
-            $json
-        );
-
-        $this->assertContains(
             '"end_date":"' . self::$__testParams['end_date'] . '"',
-            $json
-        );
-
-        $this->assertContains(
-            '"end_time":"' . self::$__testParams['end_time'] . '"',
             $json
         );
 
@@ -1245,17 +1215,7 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         );
 
         $this->assertContains(
-            '"start_time":""',
-            $json
-        );
-
-        $this->assertContains(
             '"end_date":""',
-            $json
-        );
-
-        $this->assertContains(
-            '"end_time":""',
             $json
         );
 
@@ -1349,17 +1309,7 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         );
 
         $this->assertContains(
-            '"start_time":""',
-            $json
-        );
-
-        $this->assertContains(
             '"end_date":""',
-            $json
-        );
-
-        $this->assertContains(
-            '"end_time":""',
             $json
         );
 

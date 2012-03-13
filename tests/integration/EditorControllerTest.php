@@ -613,17 +613,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         );
 
         $this->assertContains(
-            '"start_time":"' . self::$__testParams['start_time'] . '"',
-            $response
-        );
-
-        $this->assertContains(
             '"end_date":"' . self::$__testParams['end_date'] . '"',
-            $response
-        );
-
-        $this->assertContains(
-            '"end_time":"' . self::$__testParams['end_time'] . '"',
             $response
         );
 
@@ -959,18 +949,8 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         );
 
         $this->assertEquals(
-            $record->start_time,
-            self::$__testParams['start_time']
-        );
-
-        $this->assertEquals(
             $record->end_date,
             self::$__testParams['end_date']
-        );
-
-        $this->assertEquals(
-            $record->end_time,
-            self::$__testParams['end_time']
         );
 
         $this->assertEquals(
@@ -1110,18 +1090,8 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         );
 
         $this->assertEquals(
-            $record->start_time,
-            self::$__testParams['start_time']
-        );
-
-        $this->assertEquals(
             $record->end_date,
             self::$__testParams['end_date']
-        );
-
-        $this->assertEquals(
-            $record->end_time,
-            self::$__testParams['end_time']
         );
 
         $this->assertEquals(
@@ -1263,18 +1233,8 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         );
 
         $this->assertEquals(
-            $record->start_time,
-            self::$__testParams['start_time']
-        );
-
-        $this->assertEquals(
             $record->end_date,
             self::$__testParams['end_date']
-        );
-
-        $this->assertEquals(
-            $record->end_time,
-            self::$__testParams['end_time']
         );
 
         $this->assertEquals(
