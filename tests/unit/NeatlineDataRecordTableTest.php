@@ -876,11 +876,6 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
         );
 
         $this->assertContains(
-            '"textColor":"#4a4a4a"',
-            $json
-        );
-
-        $this->assertContains(
             '"left_ambiguity":' . $record1->left_percent,
             $json
         );
@@ -927,11 +922,6 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
 
         $this->assertContains(
             '"color":"' . $record2->vector_color . '"',
-            $json
-        );
-
-        $this->assertContains(
-            '"textColor":"#4a4a4a"',
             $json
         );
 
@@ -1088,6 +1078,58 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
         // Check format.
         $this->assertContains('"dateTimeFormat":"iso8601"', $json);
         $this->assertContains('"events":[]', $json);
+
+    }
+
+    /**
+     * The buildTimelineJson() method should default in default DC values when there
+     * are not record-specific values.
+     *
+     * @return void.
+     */
+    public function testBuildTimelineJsonDcDefaults()
+    {
+
+        // Create an exhibit and item.
+        $exhibit = $this->helper->_createNeatline();
+        $item = $this->helper->_createItem();
+
+        // Create title and date element texts.
+        $this->helper->_createElementText(
+            $item,
+            'Dublin Core',
+            'Title',
+            'Test Title');
+
+        $this->helper->_createElementText(
+            $item,
+            'Dublin Core',
+            'Date',
+            '1564-04-26 14:39:22/1616-04-23 12:45:34');
+
+        // Create record.
+        $record = new NeatlineDataRecord($item, $exhibit);
+        $record->time_active = 1;
+        $record->save();
+
+        // Build the JSON.
+        $json = $this->_recordsTable->buildTimelineJson($exhibit);
+
+        $this->assertContains(
+            '"title":"Test Title"',
+            $json
+        );
+
+        $this->assertContains(
+            '"start":"1564-04-26 14:39:22"',
+            $json
+        );
+
+        $this->assertContains(
+            '"end":"1616-04-23 12:45:34"',
+            $json
+        );
+
 
     }
 

@@ -336,12 +336,11 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
                     'title' =>                  $record->title,
                     'description' =>            $record->description,
                     'color' =>                  $record->getStyle('vector_color'),
-                    'textColor' =>              '#4a4a4a',
                     'left_ambiguity' =>         $record->left_percent,
                     'right_ambiguity' =>        $record->right_percent
                 );
 
-                // If there is a valid start stamp.
+                // If there is a valid start stamp on the record.
                 if (!is_null($record->start_date) && $record->time_active == 1) {
 
                     $eventArray['start'] = $record->start_date;

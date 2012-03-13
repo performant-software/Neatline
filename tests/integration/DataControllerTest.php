@@ -208,11 +208,6 @@ class Neatline_DataControllerTest extends Omeka_Test_AppTestCase
         );
 
         $this->assertContains(
-            '"textColor":"#4a4a4a"',
-            $response
-        );
-
-        $this->assertContains(
             '"left_ambiguity":' . $record1->left_percent,
             $response
         );
@@ -259,11 +254,6 @@ class Neatline_DataControllerTest extends Omeka_Test_AppTestCase
 
         $this->assertContains(
             '"color":"' . $record2->vector_color . '"',
-            $response
-        );
-
-        $this->assertContains(
-            '"textColor":"#4a4a4a"',
             $response
         );
 

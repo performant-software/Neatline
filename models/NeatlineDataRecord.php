@@ -412,13 +412,13 @@ class NeatlineDataRecord extends Omeka_record
     public function resetStyles()
     {
 
-        $this->vector_color =   null;
-        $this->stroke_color =   null;
-        $this->highlight_color =   null;
-        $this->vector_opacity = null;
-        $this->stroke_opacity = null;
-        $this->stroke_width =   null;
-        $this->point_radius =   null;
+        $this->vector_color =       null;
+        $this->stroke_color =       null;
+        $this->highlight_color =    null;
+        $this->vector_opacity =     null;
+        $this->stroke_opacity =     null;
+        $this->stroke_width =       null;
+        $this->point_radius =       null;
 
     }
 
@@ -554,6 +554,85 @@ class NeatlineDataRecord extends Omeka_record
         return (!is_null($this->geocoverage) && $this->geocoverage != '') ?
             $this->geocoverage :
             self::$defaults['geocoverage'];
+
+    }
+
+    /**
+     * Return start date.
+     *
+     * @return string $startDate The record-specific value, if set; if not,
+     * try to fall back on item DC value, if there is a parent item.
+     */
+    public function getStartDate()
+    {
+
+        $startDate = null;
+
+        // Try to apply record-specific date first.
+        if (!is_null($this->start_date)) {
+            $startDate = $this->start_date;
+        }
+
+        // Fall back on item DC value.
+        else if (!is_null($this->item_id)) {
+
+            // Get DC date default.
+            $date = neatline_getItemMetadata(
+                $this->getItem(),
+                'Dublin Core',
+                'Date');
+
+            // If the date is a range, get the first piece.
+            if (preg_match_all('/^([\+-]?\d{4}(?!\d{2}\b))((-?)((0[1-9]|1[0-2])(\3([12]\d|0[1-9]|3[01]))?|W([0-4]\d|5[0-2])(-?[1-7])?|(00[1-9]|0[1-9]\d|[12]\d{2}|3([0-5]\d|6[1-6])))([T\s]((([01]\d|2[0-3])((:?)[0-5]\d)?|24\:?00)([\.,]\d+(?!:))?)?(\17[0-5]\d([\.,]\d+)?)?([zZ]|([\+-])([01]\d|2[0-3]):?([0-5]\d)?)?)?)?\/([\+-]?\d{4}(?!\d{2}\b))((-?)((0[1-9]|1[0-2])(\3([12]\d|0[1-9]|3[01]))?|W([0-4]\d|5[0-2])(-?[1-7])?|(00[1-9]|0[1-9]\d|[12]\d{2}|3([0-5]\d|6[1-6])))([T\s]((([01]\d|2[0-3])((:?)[0-5]\d)?|24\:?00)([\.,]\d+(?!:))?)?(\17[0-5]\d([\.,]\d+)?)?([zZ]|([\+-])([01]\d|2[0-3]):?([0-5]\d)?)?)?)?$/', $date, $matches)) {
+                $datesArray = explode('/', $date);
+                $startDate = $datesArray[0];
+            }
+
+            // If the date is a single date, assign directly.
+            else if (preg_match('/^([\+-]?\d{4}(?!\d{2}\b))((-?)((0[1-9]|1[0-2])(\3([12]\d|0[1-9]|3[01]))?|W([0-4]\d|5[0-2])(-?[1-7])?|(00[1-9]|0[1-9]\d|[12]\d{2}|3([0-5]\d|6[1-6])))([T\s]((([01]\d|2[0-3])((:?)[0-5]\d)?|24\:?00)([\.,]\d+(?!:))?)?(\17[0-5]\d([\.,]\d+)?)?([zZ]|([\+-])([01]\d|2[0-3]):?([0-5]\d)?)?)?)?$/', $date, $matches)) {
+                $startDate = $date;
+            }
+
+        }
+
+        return $startDate;
+
+    }
+
+    /**
+     * Return end date.
+     *
+     * @return string $endDate The record-specific value, if set; if not,
+     * try to fall back on item DC value, if there is a parent item.
+     */
+    public function getEndDate()
+    {
+
+        $endDate = null;
+
+        // Try to apply record-specific date first.
+        if (!is_null($this->end_date)) {
+            $endDate = $this->start_date;
+        }
+
+        // Fall back on item DC value.
+        else if (!is_null($this->item_id)) {
+
+            // Get DC date default.
+            $date = neatline_getItemMetadata(
+                $this->getItem(),
+                'Dublin Core',
+                'Date');
+
+            // If the date is a range, get the first piece.
+            if (preg_match_all('/^([\+-]?\d{4}(?!\d{2}\b))((-?)((0[1-9]|1[0-2])(\3([12]\d|0[1-9]|3[01]))?|W([0-4]\d|5[0-2])(-?[1-7])?|(00[1-9]|0[1-9]\d|[12]\d{2}|3([0-5]\d|6[1-6])))([T\s]((([01]\d|2[0-3])((:?)[0-5]\d)?|24\:?00)([\.,]\d+(?!:))?)?(\17[0-5]\d([\.,]\d+)?)?([zZ]|([\+-])([01]\d|2[0-3]):?([0-5]\d)?)?)?)?\/([\+-]?\d{4}(?!\d{2}\b))((-?)((0[1-9]|1[0-2])(\3([12]\d|0[1-9]|3[01]))?|W([0-4]\d|5[0-2])(-?[1-7])?|(00[1-9]|0[1-9]\d|[12]\d{2}|3([0-5]\d|6[1-6])))([T\s]((([01]\d|2[0-3])((:?)[0-5]\d)?|24\:?00)([\.,]\d+(?!:))?)?(\17[0-5]\d([\.,]\d+)?)?([zZ]|([\+-])([01]\d|2[0-3]):?([0-5]\d)?)?)?)?$/', $date, $matches)) {
+                $datesArray = explode('/', $date);
+                $endDate = $datesArray[1];
+            }
+
+        }
+
+        return $endDate;
 
     }
 

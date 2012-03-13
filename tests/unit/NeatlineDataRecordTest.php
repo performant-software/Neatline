@@ -976,6 +976,16 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
     }
 
     /**
+     * .
+     *
+     * @return void.
+     */
+    public function testGetDates()
+    {
+
+    }
+
+    /**
      * The buildEditFormJson() method should construct a JSON object to populate
      * the record edit form in the editor.
      *

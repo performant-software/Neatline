@@ -168,16 +168,14 @@ class Neatline_EditorController extends Omeka_Controller_Action
         $this->_helper->viewRenderer->setNoRender(true);
 
         // Get parameters from the ajax request.
-        $exhibidId =                json_decode($this->_request->getParam('exhibit_id'));
-        $itemId =                   json_decode($this->_request->getParam('item_id'));
-        $recordId =                 json_decode($this->_request->getParam('record_id'));
+        $exhibidId =        json_decode($this->_request->getParam('exhibit_id'));
+        $itemId =           json_decode($this->_request->getParam('item_id'));
+        $recordId =         json_decode($this->_request->getParam('record_id'));
 
         // If there is a record id, build the form from the record.
         if ($recordId != null) {
-
             $record = $this->_recordsTable->find($recordId);
             echo $record->buildEditFormJson();
-
         }
 
         // Otherwise, build the form from the item and exhibit.
