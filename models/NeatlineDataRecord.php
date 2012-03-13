@@ -69,9 +69,9 @@ class NeatlineDataRecord extends Omeka_record
      * Default attributes.
      */
     private static $defaults = array(
-        'left_percent' =>       0,
-        'right_percent' =>      100,
-        'geocoverage' =>        'POINT()'
+        'left_percent' => 0,
+        'right_percent' => 100,
+        'geocoverage' => 'POINT()'
     );
 
     /**
@@ -86,6 +86,11 @@ class NeatlineDataRecord extends Omeka_record
         'point_radius',
         'highlight_color'
     );
+
+    /**
+     * DC Date regular expression.
+     */
+    private static $dateRegex = '/^([\+-]?\d{4}(?!\d{2}\b))((-?)((0[1-9]|1[0-2])(\3([12]\d|0[1-9]|3[01]))?|W([0-4]\d|5[0-2])(-?[1-7])?|(00[1-9]|0[1-9]\d|[12]\d{2}|3([0-5]\d|6[1-6])))([T\s]((([01]\d|2[0-3])((:?)[0-5]\d)?|24\:?00)([\.,]\d+(?!:))?)?(\17[0-5]\d([\.,]\d+)?)?([zZ]|([\+-])([01]\d|2[0-3]):?([0-5]\d)?)?)?)?(\/([\+-]?\d{4}(?!\d{2}\b))((-?)((0[1-9]|1[0-2])(\3([12]\d|0[1-9]|3[01]))?|W([0-4]\d|5[0-2])(-?[1-7])?|(00[1-9]|0[1-9]\d|[12]\d{2}|3([0-5]\d|6[1-6])))([T\s]((([01]\d|2[0-3])((:?)[0-5]\d)?|24\:?00)([\.,]\d+(?!:))?)?(\17[0-5]\d([\.,]\d+)?)?([zZ]|([\+-])([01]\d|2[0-3]):?([0-5]\d)?)?)?)?)?$/';
 
 
     /**
@@ -558,81 +563,13 @@ class NeatlineDataRecord extends Omeka_record
     }
 
     /**
-     * Return start date.
+     * Return array of start and end dates.
      *
-     * @return string $startDate The record-specific value, if set; if not,
-     * try to fall back on item DC value, if there is a parent item.
+     * @return array $dates An array with 'start' and 'end' keys. Values
+     * are null if no data exists for the piece in question.
      */
-    public function getStartDate()
+    public function getDates()
     {
-
-        $startDate = null;
-
-        // Try to apply record-specific date first.
-        if (!is_null($this->start_date)) {
-            $startDate = $this->start_date;
-        }
-
-        // Fall back on item DC value.
-        else if (!is_null($this->item_id)) {
-
-            // Get DC date default.
-            $date = neatline_getItemMetadata(
-                $this->getItem(),
-                'Dublin Core',
-                'Date');
-
-            // If the date is a range, get the first piece.
-            if (preg_match_all('/^([\+-]?\d{4}(?!\d{2}\b))((-?)((0[1-9]|1[0-2])(\3([12]\d|0[1-9]|3[01]))?|W([0-4]\d|5[0-2])(-?[1-7])?|(00[1-9]|0[1-9]\d|[12]\d{2}|3([0-5]\d|6[1-6])))([T\s]((([01]\d|2[0-3])((:?)[0-5]\d)?|24\:?00)([\.,]\d+(?!:))?)?(\17[0-5]\d([\.,]\d+)?)?([zZ]|([\+-])([01]\d|2[0-3]):?([0-5]\d)?)?)?)?\/([\+-]?\d{4}(?!\d{2}\b))((-?)((0[1-9]|1[0-2])(\3([12]\d|0[1-9]|3[01]))?|W([0-4]\d|5[0-2])(-?[1-7])?|(00[1-9]|0[1-9]\d|[12]\d{2}|3([0-5]\d|6[1-6])))([T\s]((([01]\d|2[0-3])((:?)[0-5]\d)?|24\:?00)([\.,]\d+(?!:))?)?(\17[0-5]\d([\.,]\d+)?)?([zZ]|([\+-])([01]\d|2[0-3]):?([0-5]\d)?)?)?)?$/', $date, $matches)) {
-                $datesArray = explode('/', $date);
-                $startDate = $datesArray[0];
-            }
-
-            // If the date is a single date, assign directly.
-            else if (preg_match('/^([\+-]?\d{4}(?!\d{2}\b))((-?)((0[1-9]|1[0-2])(\3([12]\d|0[1-9]|3[01]))?|W([0-4]\d|5[0-2])(-?[1-7])?|(00[1-9]|0[1-9]\d|[12]\d{2}|3([0-5]\d|6[1-6])))([T\s]((([01]\d|2[0-3])((:?)[0-5]\d)?|24\:?00)([\.,]\d+(?!:))?)?(\17[0-5]\d([\.,]\d+)?)?([zZ]|([\+-])([01]\d|2[0-3]):?([0-5]\d)?)?)?)?$/', $date, $matches)) {
-                $startDate = $date;
-            }
-
-        }
-
-        return $startDate;
-
-    }
-
-    /**
-     * Return end date.
-     *
-     * @return string $endDate The record-specific value, if set; if not,
-     * try to fall back on item DC value, if there is a parent item.
-     */
-    public function getEndDate()
-    {
-
-        $endDate = null;
-
-        // Try to apply record-specific date first.
-        if (!is_null($this->end_date)) {
-            $endDate = $this->start_date;
-        }
-
-        // Fall back on item DC value.
-        else if (!is_null($this->item_id)) {
-
-            // Get DC date default.
-            $date = neatline_getItemMetadata(
-                $this->getItem(),
-                'Dublin Core',
-                'Date');
-
-            // If the date is a range, get the first piece.
-            if (preg_match_all('/^([\+-]?\d{4}(?!\d{2}\b))((-?)((0[1-9]|1[0-2])(\3([12]\d|0[1-9]|3[01]))?|W([0-4]\d|5[0-2])(-?[1-7])?|(00[1-9]|0[1-9]\d|[12]\d{2}|3([0-5]\d|6[1-6])))([T\s]((([01]\d|2[0-3])((:?)[0-5]\d)?|24\:?00)([\.,]\d+(?!:))?)?(\17[0-5]\d([\.,]\d+)?)?([zZ]|([\+-])([01]\d|2[0-3]):?([0-5]\d)?)?)?)?\/([\+-]?\d{4}(?!\d{2}\b))((-?)((0[1-9]|1[0-2])(\3([12]\d|0[1-9]|3[01]))?|W([0-4]\d|5[0-2])(-?[1-7])?|(00[1-9]|0[1-9]\d|[12]\d{2}|3([0-5]\d|6[1-6])))([T\s]((([01]\d|2[0-3])((:?)[0-5]\d)?|24\:?00)([\.,]\d+(?!:))?)?(\17[0-5]\d([\.,]\d+)?)?([zZ]|([\+-])([01]\d|2[0-3]):?([0-5]\d)?)?)?)?$/', $date, $matches)) {
-                $datesArray = explode('/', $date);
-                $endDate = $datesArray[1];
-            }
-
-        }
-
-        return $endDate;
 
     }
 
