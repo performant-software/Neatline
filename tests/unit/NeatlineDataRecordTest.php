@@ -31,8 +31,8 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
     private static $__testParams = array(
         'title' => 'Test Title',
         'description' => 'Test description.',
-        'start_date' => 'April 26, 1564',
-        'end_date' => 'April 23, 1616',
+        'start_date' => '1564-04-26 14:39:22',
+        'end_date' => '1616-04-23 12:45:34',
         'vector_color' => '#ffffff',
         'stroke_color' => '#000000',
         'highlight_color' => '#ff0000',
@@ -976,6 +976,230 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
     }
 
     /**
+     * The getStartDate() method should return the record start date when a
+     * value is set.
+     *
+     * @return void.
+     */
+    public function testGetStartDateWithRecordValue()
+    {
+
+        // Create an exhibit and a record without a parent item.
+        $neatline = $this->helper->_createNeatline();
+        $record = new NeatlineDataRecord(null, $neatline);
+
+        // Set record start date.
+        $record->start_date = '1564-04-26 14:39:22';
+
+        // Should return the local value.
+        $this->assertEquals($record->getStartDate(), '1564-04-26 14:39:22');
+
+        // Create an exhibit and a record with a parent item.
+        $item = $this->helper->_createItem();
+        $neatline = $this->helper->_createNeatline();
+        $record = new NeatlineDataRecord($item, $neatline);
+
+        // Set record start date.
+        $record->start_date = '1564-04-26 14:39:22';
+
+        // Should return the local value.
+        $this->assertEquals($record->getStartDate(), '1564-04-26 14:39:22');
+
+    }
+
+    /**
+     * The getStartDate() method should return an empty sting when there is
+     * no local start date value and the record does not have a parent item.
+     *
+     * @return void.
+     */
+    public function testGetStartDateWithNoRecordValueAndNoParentItem()
+    {
+
+        // Create an exhibit and a record without a parent item.
+        $neatline = $this->helper->_createNeatline();
+        $record = new NeatlineDataRecord(null, $neatline);
+
+        // Should return an empty string.
+        $this->assertEquals($record->getStartDate(), '');
+
+    }
+
+    /**
+     * The getStartDate() method should return the DC date of the parent item
+     * when there is a non-range date value in DC date.
+     *
+     * @return void.
+     */
+    public function testGetStartDateWithNoRecordValueAndParentItemWithStartDate()
+    {
+
+        // Create an exhibit and a record with a parent item.
+        $item = $this->helper->_createItem();
+        $neatline = $this->helper->_createNeatline();
+        $record = new NeatlineDataRecord($item, $neatline);
+
+        // Add a non-range date to the DC date field on the parent item.
+        $this->helper->_createElementText(
+            $item,
+            'Dublin Core',
+            'Date',
+            '1564-04-26 14:39:22');
+
+        // Should return the DC date.
+        $this->assertEquals($record->getStartDate(), '1564-04-26 14:39:22');
+
+        // When there is a local value on the record, the local value should
+        // override the DC value.
+        $record->start_date = '1616-04-23 12:45:34';
+        $this->assertEquals($record->getStartDate(), '1616-04-23 12:45:34');
+
+    }
+
+    /**
+     * The getStartDate() method should return the first piece of the DC date
+     * of the parent item when there is a range date value in DC date.
+     *
+     * @return void.
+     */
+    public function testGetStartDateWithNoRecordValueAndParentItemWithRangeDate()
+    {
+
+        // Create an exhibit and a record with a parent item.
+        $item = $this->helper->_createItem();
+        $neatline = $this->helper->_createNeatline();
+        $record = new NeatlineDataRecord($item, $neatline);
+
+        // Add a non-range date to the DC date field on the parent item.
+        $this->helper->_createElementText(
+            $item,
+            'Dublin Core',
+            'Date',
+            '1564-04-26 14:39:22/1616-04-23 12:45:34');
+
+        // Should return the DC date.
+        $this->assertEquals($record->getStartDate(), '1564-04-26 14:39:22');
+
+        // When there is a local value on the record, the local value should
+        // override the DC value.
+        $record->start_date = '1616-04-23 12:45:34';
+        $this->assertEquals($record->getStartDate(), '1616-04-23 12:45:34');
+
+    }
+
+    /**
+     * The getendDate() method should return the record end date when a
+     * value is set.
+     *
+     * @return void.
+     */
+    public function testGetEndDateWithRecordValue()
+    {
+
+        // Create an exhibit and a record without a parent item.
+        $neatline = $this->helper->_createNeatline();
+        $record = new NeatlineDataRecord(null, $neatline);
+
+        // Set record end date.
+        $record->end_date = '1564-04-26 14:39:22';
+
+        // Should return the local value.
+        $this->assertEquals($record->getEndDate(), '1564-04-26 14:39:22');
+
+        // Create an exhibit and a record with a parent item.
+        $item = $this->helper->_createItem();
+        $neatline = $this->helper->_createNeatline();
+        $record = new NeatlineDataRecord($item, $neatline);
+
+        // Set record start date.
+        $record->end_date = '1564-04-26 14:39:22';
+
+        // Should return the local value.
+        $this->assertEquals($record->getEndDate(), '1564-04-26 14:39:22');
+
+    }
+
+    /**
+     * The getendDate() method should return an empty sting when there is
+     * no local end date value and the record does not have a parent item.
+     *
+     * @return void.
+     */
+    public function testGetEndDateWithNoRecordValueAndNoParentItem()
+    {
+
+        // Create an exhibit and a record without a parent item.
+        $neatline = $this->helper->_createNeatline();
+        $record = new NeatlineDataRecord(null, $neatline);
+
+        // Should return an empty string.
+        $this->assertEquals($record->getEndDate(), '');
+
+    }
+
+    /**
+     * The getEndDate() method should return an empty string when there is a
+     * non-range date value in DC date.
+     *
+     * @return void.
+     */
+    public function testGetEndDateWithNoRecordValueAndParentItemWithStartDate()
+    {
+
+        // Create an exhibit and a record with a parent item.
+        $item = $this->helper->_createItem();
+        $neatline = $this->helper->_createNeatline();
+        $record = new NeatlineDataRecord($item, $neatline);
+
+        // Add a non-range date to the DC date field on the parent item.
+        $this->helper->_createElementText(
+            $item,
+            'Dublin Core',
+            'Date',
+            '1564-04-26 14:39:22');
+
+        // Should return empty string.
+        $this->assertEquals($record->getEndDate(), '');
+
+        // When there is a local value on the record, the local value should
+        // override the DC value.
+        $record->end_date = '1916-04-23 12:45:34';
+        $this->assertEquals($record->getEndDate(), '1916-04-23 12:45:34');
+
+    }
+
+    /**
+     * The getEndDate() method should return the second piece of the DC date
+     * of the parent item when there is a range date value in DC date.
+     *
+     * @return void.
+     */
+    public function testGetEndDateWithNoRecordValueAndParentItemWithRangeDate()
+    {
+
+        // Create an exhibit and a record with a parent item.
+        $item = $this->helper->_createItem();
+        $neatline = $this->helper->_createNeatline();
+        $record = new NeatlineDataRecord($item, $neatline);
+
+        // Add a non-range date to the DC date field on the parent item.
+        $this->helper->_createElementText(
+            $item,
+            'Dublin Core',
+            'Date',
+            '1564-04-26 14:39:22/1616-04-23 12:45:34');
+
+        // Should return the DC date.
+        $this->assertEquals($record->getEndDate(), '1616-04-23 12:45:34');
+
+        // When there is a local value on the record, the local value should
+        // override the DC value.
+        $record->end_date = '1916-04-23 12:45:34';
+        $this->assertEquals($record->getEndDate(), '1916-04-23 12:45:34');
+
+    }
+
+    /**
      * The buildEditFormJson() method should construct a JSON object to populate
      * the record edit form in the editor.
      *
@@ -1324,46 +1548,6 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
             $json
         );
 
-        $this->assertContains(
-            '"left_percent":0',
-            $json
-        );
-
-        $this->assertContains(
-            '"right_percent":100',
-            $json
-        );
-
-        $this->assertContains(
-            '"vector_color":"' . get_option('vector_color') . '"',
-            $json
-        );
-
-        $this->assertContains(
-            '"vector_opacity":' . (int) get_option('vector_opacity'),
-            $json
-        );
-
-        $this->assertContains(
-            '"stroke_opacity":' . (int) get_option('stroke_opacity'),
-            $json
-        );
-
-        $this->assertContains(
-            '"stroke_color":"' . get_option('stroke_color') . '"',
-            $json
-        );
-
-        $this->assertContains(
-            '"stroke_width":' . (int) get_option('stroke_width'),
-            $json
-        );
-
-        $this->assertContains(
-            '"point_radius":' . (int) get_option('point_radius'),
-            $json
-        );
-
     }
 
     /**
@@ -1423,46 +1607,6 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
 
         $this->assertContains(
             '"end_date":"1616-04-23 12:45:34"',
-            $json
-        );
-
-        $this->assertContains(
-            '"left_percent":0',
-            $json
-        );
-
-        $this->assertContains(
-            '"right_percent":100',
-            $json
-        );
-
-        $this->assertContains(
-            '"vector_color":"' . get_option('vector_color') . '"',
-            $json
-        );
-
-        $this->assertContains(
-            '"vector_opacity":' . (int) get_option('vector_opacity'),
-            $json
-        );
-
-        $this->assertContains(
-            '"stroke_opacity":' . (int) get_option('stroke_opacity'),
-            $json
-        );
-
-        $this->assertContains(
-            '"stroke_color":"' . get_option('stroke_color') . '"',
-            $json
-        );
-
-        $this->assertContains(
-            '"stroke_width":' . (int) get_option('stroke_width'),
-            $json
-        );
-
-        $this->assertContains(
-            '"point_radius":' . (int) get_option('point_radius'),
             $json
         );
 

@@ -90,7 +90,8 @@ class NeatlineDataRecord extends Omeka_record
     /**
      * DC Date regular expression.
      */
-    private static $dateRegex = '/^([\+-]?\d{4}(?!\d{2}\b))((-?)((0[1-9]|1[0-2])(\3([12]\d|0[1-9]|3[01]))?|W([0-4]\d|5[0-2])(-?[1-7])?|(00[1-9]|0[1-9]\d|[12]\d{2}|3([0-5]\d|6[1-6])))([T\s]((([01]\d|2[0-3])((:?)[0-5]\d)?|24\:?00)([\.,]\d+(?!:))?)?(\17[0-5]\d([\.,]\d+)?)?([zZ]|([\+-])([01]\d|2[0-3]):?([0-5]\d)?)?)?)?(\/([\+-]?\d{4}(?!\d{2}\b))((-?)((0[1-9]|1[0-2])(\3([12]\d|0[1-9]|3[01]))?|W([0-4]\d|5[0-2])(-?[1-7])?|(00[1-9]|0[1-9]\d|[12]\d{2}|3([0-5]\d|6[1-6])))([T\s]((([01]\d|2[0-3])((:?)[0-5]\d)?|24\:?00)([\.,]\d+(?!:))?)?(\17[0-5]\d([\.,]\d+)?)?([zZ]|([\+-])([01]\d|2[0-3]):?([0-5]\d)?)?)?)?)?$/';
+    private static $dcDateRegex =
+        '/^(?P<start>[0-9:\-\s]+)(\/(?P<end>[0-9:\-\s]+))?/';
 
 
     /**
@@ -175,8 +176,8 @@ class NeatlineDataRecord extends Omeka_record
         $data['stroke_opacity'] =   (int) $this->getStyle('stroke_opacity');
         $data['stroke_width'] =     (int) $this->getStyle('stroke_width');
         $data['point_radius'] =     (int) $this->getStyle('point_radius');
-        $data['start_date'] =       (string) $this->start_date;
-        $data['end_date'] =         (string) $this->end_date;
+        $data['start_date'] =       (string) $this->getStartDate();
+        $data['end_date'] =         (string) $this->getEndDate();
         $data['left_percent'] =     (int) $this->getLeftPercent();
         $data['right_percent'] =    (int) $this->getRightPercent();
 
@@ -229,16 +230,17 @@ class NeatlineDataRecord extends Omeka_record
             'Dublin Core',
             'Date');
 
-        // If the date is a range, assign to start_date and end_date.
-        if (preg_match_all('/^([\+-]?\d{4}(?!\d{2}\b))((-?)((0[1-9]|1[0-2])(\3([12]\d|0[1-9]|3[01]))?|W([0-4]\d|5[0-2])(-?[1-7])?|(00[1-9]|0[1-9]\d|[12]\d{2}|3([0-5]\d|6[1-6])))([T\s]((([01]\d|2[0-3])((:?)[0-5]\d)?|24\:?00)([\.,]\d+(?!:))?)?(\17[0-5]\d([\.,]\d+)?)?([zZ]|([\+-])([01]\d|2[0-3]):?([0-5]\d)?)?)?)?\/([\+-]?\d{4}(?!\d{2}\b))((-?)((0[1-9]|1[0-2])(\3([12]\d|0[1-9]|3[01]))?|W([0-4]\d|5[0-2])(-?[1-7])?|(00[1-9]|0[1-9]\d|[12]\d{2}|3([0-5]\d|6[1-6])))([T\s]((([01]\d|2[0-3])((:?)[0-5]\d)?|24\:?00)([\.,]\d+(?!:))?)?(\17[0-5]\d([\.,]\d+)?)?([zZ]|([\+-])([01]\d|2[0-3]):?([0-5]\d)?)?)?)?$/', $date, $matches)) {
-            $datesArray = explode('/', $date);
-            $data['start_date'] = $datesArray[0];
-            $data['end_date'] = $datesArray[1];
-        }
+        // Check for date format, assign pieces.
+        if (preg_match(self::$dcDateRegex, $date, $matches)) {
 
-        // If the date is a single date, assign to start_date.
-        else if (preg_match('/^([\+-]?\d{4}(?!\d{2}\b))((-?)((0[1-9]|1[0-2])(\3([12]\d|0[1-9]|3[01]))?|W([0-4]\d|5[0-2])(-?[1-7])?|(00[1-9]|0[1-9]\d|[12]\d{2}|3([0-5]\d|6[1-6])))([T\s]((([01]\d|2[0-3])((:?)[0-5]\d)?|24\:?00)([\.,]\d+(?!:))?)?(\17[0-5]\d([\.,]\d+)?)?([zZ]|([\+-])([01]\d|2[0-3]):?([0-5]\d)?)?)?)?$/', $date, $matches)) {
-            $data['start_date'] = $date;
+            // Start.
+            $data['start_date'] = $matches['start'];
+
+            // End.
+            if (array_key_exists('end', $matches)) {
+                $data['end_date'] = $matches['end'];
+            }
+
         }
 
         // JSON-ify the array.
@@ -563,13 +565,80 @@ class NeatlineDataRecord extends Omeka_record
     }
 
     /**
-     * Return array of start and end dates.
+     * Return start date.
      *
-     * @return array $dates An array with 'start' and 'end' keys. Values
-     * are null if no data exists for the piece in question.
+     * @return string $date The date. If there is a record-specific value,
+     * return it. If not, and there is a parent Omeka item, try to get a non-
+     * empty value from the DC date field.
      */
-    public function getDates()
+    public function getStartDate()
     {
+
+        // If there is a record-specific date.
+        if (!is_null($this->start_date)) {
+            return $this->start_date;
+        }
+
+        // If not, try to get a DC date value.
+        else if (!is_null($this->item_id)) {
+
+            // Get the DC date.
+            $date = neatline_getItemMetadata(
+                $this->getItem(),
+                'Dublin Core',
+                'Date'
+            );
+
+            if (preg_match(self::$dcDateRegex, $date, $matches)) {
+                return $matches['start'];
+            }
+
+        }
+
+        // Return '' if no local or parent data.
+        else {
+            return '';
+        }
+
+    }
+
+    /**
+     * Return end date.
+     *
+     * @return string $date The date. If there is a record-specific value,
+     * return it. If not, and there is a parent Omeka item, try to get a non-
+     * empty value from the DC date field.
+     */
+    public function getEndDate()
+    {
+
+        // If there is a record-specific date.
+        if (!is_null($this->end_date)) {
+            return $this->end_date;
+        }
+
+        // If not, try to get a DC date value.
+        else if (!is_null($this->item_id)) {
+
+            // Get the DC date.
+            $date = neatline_getItemMetadata(
+                $this->getItem(),
+                'Dublin Core',
+                'Date'
+            );
+
+            if (preg_match(self::$dcDateRegex, $date, $matches)) {
+                if (array_key_exists('end', $matches)) {
+                    return $matches['end'];
+                }
+            }
+
+        }
+
+        // Return '' if no local or parent data.
+        else {
+            return '';
+        }
 
     }
 

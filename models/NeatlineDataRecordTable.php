@@ -333,21 +333,25 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
 
                 $eventArray = array(
                     'eventID' =>                $record->id,
-                    'title' =>                  $record->title,
-                    'description' =>            $record->description,
+                    'title' =>                  $record->getTitle(),
+                    'description' =>            $record->getDescription(),
                     'color' =>                  $record->getStyle('vector_color'),
                     'left_ambiguity' =>         $record->left_percent,
                     'right_ambiguity' =>        $record->right_percent
                 );
 
-                // If there is a valid start stamp on the record.
-                if (!is_null($record->start_date) && $record->time_active == 1) {
+                // Get start and end dates.
+                $startDate = $record->getStartDate();
+                $endDate = $record->getEndDate();
 
-                    $eventArray['start'] = $record->start_date;
+                // If there is a valid start stamp on the record.
+                if ($startDate !== '' && $record->time_active == 1) {
+
+                    $eventArray['start'] = $startDate;
 
                     // If there is a valid end stamp.
-                    if (!is_null($record->end_date)) {
-                        $eventArray['end'] = $record->end_date;
+                    if ($endDate !== '') {
+                        $eventArray['end'] = $endDate;
                     }
 
                     // Only push if there is at least a start.
