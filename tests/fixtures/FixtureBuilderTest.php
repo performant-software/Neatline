@@ -242,45 +242,41 @@ class Neatline_FixtureBuilderTest extends Omeka_Test_AppTestCase
 
         // Mock exhibit.
         $exhibit = $this->helper->_createNeatline();
+        $exhibit->query = serialize(
+            array('range' => $item1->id . '-' . $item2->id));
+        $exhibit->save();
 
         // Record 1.
-        $record1 = new NeatlineDataRecord();
+        $record1 = new NeatlineDataRecord(null, $exhibit);
         $record1->title = 'Title1';
         $record1->description = 'Description 1.';
-        $record1->exhibit_id = $exhibit->id;
         $record1->space_active = 1;
         $record1->save();
 
         // Record 2.
-        $record2 = new NeatlineDataRecord();
+        $record2 = new NeatlineDataRecord(null, $exhibit);
         $record2->title = 'Title2';
         $record2->description = 'Description 2.';
-        $record2->exhibit_id = $exhibit->id;
         $record2->time_active = 1;
         $record2->save();
 
         // Record 3.
-        $record3 = new NeatlineDataRecord();
+        $record3 = new NeatlineDataRecord($item1, $exhibit);
         $record3->title = 'Title3';
         $record3->description = 'Description 3.';
-        $record3->exhibit_id = $exhibit->id;
-        $record3->item_id = $item1->id;
         $record3->space_active = 1;
         $record3->save();
 
         // Record 4.
-        $record4 = new NeatlineDataRecord();
+        $record4 = new NeatlineDataRecord($item2, $exhibit);
         $record4->title = 'Title4';
-        $record4->exhibit_id = $exhibit->id;
-        $record4->item_id = $item2->id;
         $record4->time_active = 1;
         $record4->save();
 
         // Prepare the request.
         $this->request->setMethod('GET')
             ->setParams(array(
-              'exhibit_id' => $exhibit->id,
-              'all' => true
+              'exhibit_id' => $exhibit->id
             )
         );
 
@@ -310,9 +306,7 @@ class Neatline_FixtureBuilderTest extends Omeka_Test_AppTestCase
         $record->title = 'Test Title';
         $record->description = 'Test description.';
         $record->start_date = 'June 25, 1987';
-        $record->start_time = '6:00 am';
         $record->end_date = 'June 26, 1987';
-        $record->end_time = '6:01 am';
         $record->vector_color = '#ffffff';
         $record->stroke_color = '#000000';
         $record->highlight_color = '#ffff00';
@@ -375,7 +369,6 @@ class Neatline_FixtureBuilderTest extends Omeka_Test_AppTestCase
         $record2->exhibit_id = $exhibit->id;
         $record2->time_active = 1;
         $record1->start_date = 'April 28, 1564';
-        $record1->start_time = '6:00 am';
         $record2->save();
 
         // Record 3.
@@ -386,7 +379,6 @@ class Neatline_FixtureBuilderTest extends Omeka_Test_AppTestCase
         $record3->item_id = $item1->id;
         $record3->time_active = 1;
         $record1->start_date = 'May 28, 1864';
-        $record1->start_time = '6:00 am';
         $record1->end_date = 'May 28, 1865';
         $record3->save();
 
@@ -397,9 +389,7 @@ class Neatline_FixtureBuilderTest extends Omeka_Test_AppTestCase
         $record4->item_id = $item2->id;
         $record4->time_active = 1;
         $record1->start_date = 'May 28, 1864';
-        $record1->start_time = '6:00 am';
         $record1->end_date = 'May 28, 1865';
-        $record1->end_time = '8:00 pm';
         $record4->save();
 
         // Prepare the request.

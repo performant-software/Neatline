@@ -204,9 +204,7 @@ describe('Item Form', function() {
             expect(form.itemform('getAttr', 'title').val()).toEqual('Test Title');
             expect(form.itemform('getAttr', 'description').val()).toEqual('Test description.');
             expect(form.itemform('getAttr', 'startDate').val()).toEqual('June 25, 1987');
-            expect(form.itemform('getAttr', 'startTime').val()).toEqual('6:00 am');
             expect(form.itemform('getAttr', 'endDate').val()).toEqual('June 26, 1987');
-            expect(form.itemform('getAttr', 'endTime').val()).toEqual('6:01 am');
             expect(form.itemform('getAttr', 'leftPercent').val()).toEqual('0');
             expect(form.itemform('getAttr', 'rightPercent').val()).toEqual('100');
             expect(form.itemform('getAttr', 'vectorColor').val()).toEqual('#ffffff');
@@ -229,9 +227,7 @@ describe('Item Form', function() {
             expect(form.itemform('getAttr', 'title').val()).toEqual('Test Title');
             expect(form.itemform('getAttr', 'description').val()).toEqual('Test description.');
             expect(form.itemform('getAttr', 'startDate').val()).toEqual('June 25, 1987');
-            expect(form.itemform('getAttr', 'startTime').val()).toEqual('6:00 am');
             expect(form.itemform('getAttr', 'endDate').val()).toEqual('June 26, 1987');
-            expect(form.itemform('getAttr', 'endTime').val()).toEqual('6:01 am');
             expect(form.itemform('getAttr', 'leftPercent').val()).toEqual('0');
             expect(form.itemform('getAttr', 'rightPercent').val()).toEqual('100');
             expect(form.itemform('getAttr', 'vectorColor').val()).toEqual('#ffffff');
@@ -249,9 +245,7 @@ describe('Item Form', function() {
                     title: 'New Title',
                     description: 'New description.',
                     start_date: 'April 26, 1564',
-                    start_time: '8:00 am',
                     end_date: 'April 23, 1616',
-                    end_time: '8:01 am',
                     left_percent: 20,
                     right_percent: 80,
                     vector_color: '#000000',
@@ -275,9 +269,7 @@ describe('Item Form', function() {
             expect(form.itemform('getAttr', 'title').val()).toEqual('New Title');
             expect(form.itemform('getAttr', 'description').val()).toEqual('New description.');
             expect(form.itemform('getAttr', 'startDate').val()).toEqual('April 26, 1564');
-            expect(form.itemform('getAttr', 'startTime').val()).toEqual('8:00 am');
             expect(form.itemform('getAttr', 'endDate').val()).toEqual('April 23, 1616');
-            expect(form.itemform('getAttr', 'endTime').val()).toEqual('8:01 am');
             expect(form.itemform('getAttr', 'leftPercent').val()).toEqual('20');
             expect(form.itemform('getAttr', 'rightPercent').val()).toEqual('80');
             expect(form.itemform('getAttr', 'vectorColor').val()).toEqual('#000000');
@@ -301,9 +293,7 @@ describe('Item Form', function() {
             expect(form.itemform('getAttr', 'title').val()).toEqual('Test Title');
             expect(form.itemform('getAttr', 'description').val()).toEqual('Test description.');
             expect(form.itemform('getAttr', 'startDate').val()).toEqual('June 25, 1987');
-            expect(form.itemform('getAttr', 'startTime').val()).toEqual('6:00 am');
             expect(form.itemform('getAttr', 'endDate').val()).toEqual('June 26, 1987');
-            expect(form.itemform('getAttr', 'endTime').val()).toEqual('6:01 am');
             expect(form.itemform('getAttr', 'leftPercent').val()).toEqual('0');
             expect(form.itemform('getAttr', 'rightPercent').val()).toEqual('100');
             expect(form.itemform('getAttr', 'vectorColor').val()).toEqual('#ffffff');
@@ -321,9 +311,7 @@ describe('Item Form', function() {
                     title: 'New Title',
                     description: 'New description.',
                     start_date: 'April 26, 1564',
-                    start_time: '8:00 am',
                     end_date: 'April 23, 1616',
-                    end_time: '8:01 am',
                     left_percent: 20,
                     right_percent: 80,
                     vector_color: '#000000',
@@ -359,9 +347,7 @@ describe('Item Form', function() {
             expect(form.itemform('getAttr', 'title').val()).toEqual('Test Title');
             expect(form.itemform('getAttr', 'description').val()).toEqual('Test description.');
             expect(form.itemform('getAttr', 'startDate').val()).toEqual('June 25, 1987');
-            expect(form.itemform('getAttr', 'startTime').val()).toEqual('6:00 am');
             expect(form.itemform('getAttr', 'endDate').val()).toEqual('June 26, 1987');
-            expect(form.itemform('getAttr', 'endTime').val()).toEqual('6:01 am');
             expect(form.itemform('getAttr', 'leftPercent').val()).toEqual('0');
             expect(form.itemform('getAttr', 'rightPercent').val()).toEqual('100');
             expect(form.itemform('getAttr', 'vectorColor').val()).toEqual('#ffffff');
@@ -379,9 +365,7 @@ describe('Item Form', function() {
                     title: 'New Title',
                     description: 'New description.',
                     start_date: 'April 26, 1564',
-                    start_time: '8:00 am',
                     end_date: 'April 23, 1616',
-                    end_time: '8:01 am',
                     left_percent: 20,
                     right_percent: 80,
                     vector_color: '#000000',
@@ -468,19 +452,6 @@ describe('Item Form', function() {
 
             });
 
-            it('should store local data when the start time is changed', function() {
-
-                // Change the title, hide the form.
-                form.itemform('getAttr', 'startTime').val('8:00 am');
-                form.itemform('hideForm', record);
-
-                // Check for the local data record, inspect value.
-                var localRecord = _db({ recordid: recordId }).first();
-                expect(localRecord).not.toBeFalsy();
-                expect(localRecord.data.start_time).toEqual('8:00 am');
-
-            });
-
             it('should store local data when the end date is changed', function() {
 
                 // Change the title, hide the form.
@@ -491,19 +462,6 @@ describe('Item Form', function() {
                 var localRecord = _db({ recordid: recordId }).first();
                 expect(localRecord).not.toBeFalsy();
                 expect(localRecord.data.end_date).toEqual('April 23, 1616');
-
-            });
-
-            it('should store local data when the end time is changed', function() {
-
-                // Change the title, hide the form.
-                form.itemform('getAttr', 'endTime').val('8:01 am');
-                form.itemform('hideForm', record);
-
-                // Check for the local data record, inspect value.
-                var localRecord = _db({ recordid: recordId }).first();
-                expect(localRecord).not.toBeFalsy();
-                expect(localRecord.data.end_time).toEqual('8:01 am');
 
             });
 
@@ -649,9 +607,7 @@ describe('Item Form', function() {
             expect(post.params).toContain('title=Test+Title');
             expect(post.params).toContain('description=Test+description.');
             expect(post.params).toContain('start_date=June+25%2C+1987');
-            expect(post.params).toContain('start_time=6%3A00+am');
             expect(post.params).toContain('end_date=June+26%2C+1987');
-            expect(post.params).toContain('end_time=6%3A01+am');
             expect(post.params).toContain('vector_color=%23ffffff');
             expect(post.params).toContain('stroke_color=%23000000');
             expect(post.params).toContain('highlight_color=%23ffff00');
