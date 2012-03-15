@@ -949,18 +949,18 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
     }
 
     /**
-     * The getGeocoverage() method should return the vector data attribute when it
-     * is not an empty string; if it is null, return null.
+     * The getGeocoverage() method return the default value when there is no locally
+     * set value and no parent record. When there is a local value that is not an
+     * empty string, it should be returned.
      *
      * @return void.
      */
-    public function testGetGeocoverage()
+    public function testGetGeocoverageNoNeatlineFeaturesWithoutParentItem()
     {
 
         // Create an item, exhibit, and record.
-        $item = $this->helper->_createItem();
         $neatline = $this->helper->_createNeatline();
-        $record = new NeatlineDataRecord($item, $neatline);
+        $record = new NeatlineDataRecord(null, $neatline);
 
         // Should return null when the value is null.
         $this->assertEquals($record->getGeocoverage(), 'POINT()');
@@ -972,6 +972,49 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         // Should return the value when the value is set.
         $record->geocoverage = 'POINT(0,1)';
         $this->assertEquals($record->getGeocoverage(), 'POINT(0,1)');
+
+    }
+
+    /**
+     * The getGeocoverage() method return the DC coverage field when there is not a
+     * locally-set value, a parent item exists, and the coverage field is not empty.
+     *
+     * @return void.
+     */
+    public function testGetGeocoverageNoNeatlineFeaturesWithParentItem()
+    {
+
+        // Create an item, exhibit, and record.
+        $item = $this->helper->_createItem();
+        $neatline = $this->helper->_createNeatline();
+        $record = new NeatlineDataRecord($item, $neatline);
+
+        // Should return empty WKT.
+        $this->assertEquals($record->getGeocoverage(), 'POINT()');
+
+        // Add an empty DC coverage field on the parent item.
+        $this->helper->_createElementText(
+            $item,
+            'Dublin Core',
+            'Coverage',
+            '');
+
+        // Should return empty WKT.
+        $this->assertEquals($record->getGeocoverage(), 'POINT()');
+
+        // Add a non-empty DC coverage field on the parent item.
+        $this->helper->_createElementText(
+            $item,
+            'Dublin Core',
+            'Coverage',
+            'POINT(10,11)');
+
+        // Should return the DC value.
+        $this->assertEquals($record->getGeocoverage(), 'POINT(10,11)');
+
+        // When there is a locally set value, override.
+        $record->geocoverage = 'POINT(11, 12)';
+        $this->assertEquals($record->getGeocoverage(), 'POINT(11,12)');
 
     }
 
