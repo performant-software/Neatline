@@ -358,6 +358,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
 
         // Hit the route.
         $this->dispatch('neatline-exhibits/editor/ajax/status');
+        $response = $this->getResponse()->getBody('default');
 
         // Should not create a new record.
         $this->assertEquals($this->_recordsTable->count(), 1);
@@ -368,6 +369,12 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         // Space status should be true, time status unchanged.
         $this->assertEquals($record->space_active, 1);
         $this->assertEquals($record->time_active, 0);
+
+        // Action should return the record id.
+        $this->assertContains(
+            '"record_id":' . $record->id . '',
+            $response
+        );
 
     }
 
@@ -402,6 +409,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
 
         // Hit the route.
         $this->dispatch('neatline-exhibits/editor/ajax/status');
+        $response = $this->getResponse()->getBody('default');
 
         // Should not create a new record.
         $this->assertEquals($this->_recordsTable->count(), 1);
@@ -412,6 +420,12 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         // Time status should be true, space status unchanged.
         $this->assertEquals($record->time_active, 1);
         $this->assertEquals($record->space_active, 0);
+
+        // Action should return the record id.
+        $this->assertContains(
+            '"record_id":' . $record->id . '',
+            $response
+        );
 
     }
 
@@ -445,6 +459,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
 
         // Hit the route.
         $this->dispatch('neatline-exhibits/editor/ajax/status');
+        $response = $this->getResponse()->getBody('default');
 
         // Should create a new record.
         $this->assertEquals($this->_recordsTable->count(), 1);
@@ -455,6 +470,12 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         // Space status should be true, time status unchanged.
         $this->assertEquals($record->space_active, 1);
         $this->assertEquals($record->time_active, 0);
+
+        // Action should return the record id.
+        $this->assertContains(
+            '"record_id":' . $record->id . '',
+            $response
+        );
 
     }
 

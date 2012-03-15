@@ -7,8 +7,7 @@ describe('Item Form', function() {
     var browser, form,
         record, recordId,
         itemRecord, itemRecordId,
-        noRecordItem, noRecordItemId,
-        formContainer;
+        noRecordItem, formContainer;
 
     // Mock _getItems() response.
     var itemsResponse = {
@@ -58,7 +57,6 @@ describe('Item Form', function() {
 
         // Get Omeka item testing record without extant recordid.
         noRecordItem = browser.find('tr.item-row[itemid="1"]');
-        noRecordItemId = parseInt(noRecordItem.attr('recordid'), 10);
 
         // Get the form container.
         formContainer = record.next('tr').find('td');

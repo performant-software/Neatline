@@ -327,7 +327,7 @@ class Neatline_EditorController extends Omeka_Controller_Action
             $item = $this->_itemsTable->find($itemId);
 
             // Save the data.
-            $this->_recordsTable->saveRecordStatus(
+            $record = $this->_recordsTable->saveRecordStatus(
                 $item,
                 $neatline,
                 $spaceOrTime,
@@ -335,6 +335,8 @@ class Neatline_EditorController extends Omeka_Controller_Action
             );
 
         }
+
+        echo json_encode(array('record_id' => $record->id));
 
     }
 

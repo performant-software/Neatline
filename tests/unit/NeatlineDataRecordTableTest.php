@@ -170,13 +170,14 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
         $this->assertEquals($this->_recordsTable->count(), 0);
 
         // Save form data for a non-existent record.
-        $this->_recordsTable->saveRecordStatus($item, $neatline, 'space', true);
+        $record = $this->_recordsTable->saveRecordStatus($item, $neatline, 'space', true);
 
         // After the save, there should be 1 record.
         $this->assertEquals($this->_recordsTable->count(), 1);
 
-        // Check that the parameter was set and that the DC defaults were applied.
-        $record = $this->_recordsTable->getRecordByItemAndExhibit($item, $neatline);
+        // Check that the parameter was set.
+        $this->assertEquals($record->space_active, 1);
+
 
     }
 
@@ -198,13 +199,10 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
         $this->assertEquals($this->_recordsTable->count(), 1);
 
         // Save form data for a non-existent record.
-        $this->_recordsTable->saveRecordStatus($item, $neatline, 'space', true);
+        $record = $this->_recordsTable->saveRecordStatus($item, $neatline, 'space', true);
 
         // After the save, there should be 1 record.
         $this->assertEquals($this->_recordsTable->count(), 1);
-
-        // Re-get the record.
-        $record = $this->_recordsTable->getRecordByItemAndExhibit($item, $neatline);
 
         // Check that the parameter was set.
         $this->assertEquals($record->space_active, 1);

@@ -239,11 +239,14 @@ class Neatline_FixtureBuilderTest extends Omeka_Test_AppTestCase
         $item1->save();
         $item2 = new Item;
         $item2->save();
+        $item3 = new Item;
+        $item3->save();
 
         // Mock exhibit.
         $exhibit = $this->helper->_createNeatline();
         $exhibit->query = serialize(
-            array('range' => $item1->id . '-' . $item2->id));
+            array('range' => $item1->id . '-' . $item3->id)
+        );
         $exhibit->save();
 
         // Record 1.
@@ -262,14 +265,12 @@ class Neatline_FixtureBuilderTest extends Omeka_Test_AppTestCase
 
         // Record 3.
         $record3 = new NeatlineDataRecord($item1, $exhibit);
-        $record3->title = 'Title3';
         $record3->description = 'Description 3.';
         $record3->space_active = 1;
         $record3->save();
 
         // Record 4.
         $record4 = new NeatlineDataRecord($item2, $exhibit);
-        $record4->title = 'Title4';
         $record4->time_active = 1;
         $record4->save();
 

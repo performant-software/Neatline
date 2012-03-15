@@ -993,6 +993,7 @@
 
                 url: 'ajax/status',
                 type: 'POST',
+                dataType: 'json',
 
                 data: {
                     exhibit_id: Neatline.id,
@@ -1002,11 +1003,14 @@
                     value: String(value)
                 },
 
-                success: function() {
+                success: function(data) {
 
-                    if (reload) {
-                        self._trigger('savecomplete');
-                    }
+                    // Update the recordid on the item listing.
+                    item.attr('recordid', data.record_id);
+                    self.idToItem[data.record_id] = item;
+
+                    // Trigger exhibit reload.
+                    if (reload) self._trigger('savecomplete');
 
                 }
 

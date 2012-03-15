@@ -98,6 +98,8 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
         $record->setStatus($spaceOrTime, $value);
         $record->save();
 
+        return $record;
+
     }
 
     /**
