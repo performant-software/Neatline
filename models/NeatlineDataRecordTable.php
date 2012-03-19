@@ -347,7 +347,7 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
                 $endDate = $record->getEndDate();
 
                 // If there is a valid start stamp on the record.
-                if ($startDate !== '' && $record->time_active == 1) {
+                if ($record->time_active == 1 && preg_match('/^([\+-]?\d{4}(?!\d{2}\b))((-?)((0[1-9]|1[0-2])(\3([12]\d|0[1-9]|3[01]))?|W([0-4]\d|5[0-2])(-?[1-7])?|(00[1-9]|0[1-9]\d|[12]\d{2}|3([0-5]\d|6[1-6])))([T\s]((([01]\d|2[0-3])((:?)[0-5]\d)?|24\:?00)([\.,]\d+(?!:))?)?(\17[0-5]\d([\.,]\d+)?)?([zZ]|([\+-])([01]\d|2[0-3]):?([0-5]\d)?)?)?)?$/', $startDate, $matches)) {
 
                     $eventArray['start'] = $startDate;
 
