@@ -981,7 +981,7 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
      *
      * @return void.
      */
-    public function testGetGeocoverageNoNeatlineFeaturesWithParentItem()
+    public function testGetGeocoverageNoNeatlineFeaturesWithParentItemEmptyGeocoverage()
     {
 
         // Create an item, exhibit, and record.
@@ -1002,6 +1002,26 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         // Should return empty WKT.
         $this->assertEquals($record->getGeocoverage(), 'POINT()');
 
+        // When there is a locally set value, override.
+        $record->geocoverage = 'POINT(11,12)';
+        $this->assertEquals($record->getGeocoverage(), 'POINT(11,12)');
+
+    }
+
+    /**
+     * The getGeocoverage() method return the DC coverage field when there is not a
+     * locally-set value, a parent item exists, and the coverage field is not empty.
+     *
+     * @return void.
+     */
+    public function testGetGeocoverageNoNeatlineFeaturesWithParentItemNonEmptyGeocoverage()
+    {
+
+        // Create an item, exhibit, and record.
+        $item = $this->helper->_createItem();
+        $neatline = $this->helper->_createNeatline();
+        $record = new NeatlineDataRecord($item, $neatline);
+
         // Add a non-empty DC coverage field on the parent item.
         $this->helper->_createElementText(
             $item,
@@ -1013,7 +1033,7 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         $this->assertEquals($record->getGeocoverage(), 'POINT(10,11)');
 
         // When there is a locally set value, override.
-        $record->geocoverage = 'POINT(11, 12)';
+        $record->geocoverage = 'POINT(11,12)';
         $this->assertEquals($record->getGeocoverage(), 'POINT(11,12)');
 
     }
