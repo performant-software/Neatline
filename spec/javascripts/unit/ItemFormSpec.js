@@ -56,7 +56,7 @@ describe('Item Form', function() {
         itemRecordId = parseInt(itemRecord.attr('recordid'), 10);
 
         // Get Omeka item testing record without extant recordid.
-        noRecordItem = browser.find('tr.item-row[itemid="1"]');
+        noRecordItem = browser.find('tr.item-row[itemid="4"]');
 
         // Get the form container.
         formContainer = record.next('tr').find('td');
@@ -103,7 +103,7 @@ describe('Item Form', function() {
             var request = mostRecentAjaxRequest();
 
             // Check params.
-            expect(request.url).toContain('item_id=1');
+            expect(request.url).toContain('item_id=4');
             expect(request.url).toContain('record_id=null');
             expect(request.url).toContain('exhibit_id=1');
 
