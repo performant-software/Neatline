@@ -209,19 +209,43 @@
             // ** MAP
             if (this.params.is_map && !this.instantiated_map) {
 
-                this.map.neatlinemap({
+                // If the Neatline is public, instantiate the default map.
+                if (this.params.isPublic) {
 
-                    'featureadded': function() {
-                        self._trigger('mapfeatureadded');
-                    },
+                    this.map.neatlinemap({
 
-                    'featureclick': function(event, obj) {
-                        self._trigger('mapfeatureclick', {}, {
-                            'recordid': obj.recordid
-                        });
-                    }
+                        'featureadded': function() {
+                            self._trigger('mapfeatureadded');
+                        },
 
-                });
+                        'featureclick': function(event, obj) {
+                            self._trigger('mapfeatureclick', {}, {
+                                'recordid': obj.recordid
+                            });
+                        }
+
+                    });
+
+                }
+
+                // Otherwise, construct map editor.
+                else {
+
+                    this.map.mapeditor({
+
+                        'featureadded': function() {
+                            self._trigger('mapfeatureadded');
+                        },
+
+                        'featureclick': function(event, obj) {
+                            self._trigger('mapfeatureclick', {}, {
+                                'recordid': obj.recordid
+                            });
+                        }
+
+                    });
+
+                }
 
                 // Register the presence of the map instantiation.
                 this.instantiated_map = true;
