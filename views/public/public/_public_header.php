@@ -28,19 +28,21 @@
 <!DOCTYPE html>
 <html lang="en-us">
 <head>
+
     <meta charset="utf-8">
-    <title><?php echo $titlePrefix; ?>: <?php echo $title; ?></title>
+    <title><?php echo $titlePrefix; ?>: <?php echo $exhibit->name; ?></title>
 
-<!-- Plugin Stuff -->
-<?php plugin_header(); ?>
+    <!-- Plugin Stuff -->
+    <?php plugin_header(); ?>
 
-<!-- Stylesheets -->
-<?php display_css(); ?>
+    <!-- Stylesheets -->
+    <?php display_css(); ?>
 
-<!-- JavaScripts -->
-<?php display_js(); ?>
+    <!-- JavaScripts -->
+    <?php display_js(); ?>
 
-<script type="text/javascript" src="http://maps.google.com/maps/api/js?v=3.5&amp;sensor=false"></script>
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?v=3.5&amp;sensor=false"></script>
 
 </head>
-<?php echo body_tag(array('id' => @$bodyid, 'class' => @$bodyclass)); ?>
+
+<body class="<?php echo $exhibit->slug; ?>">

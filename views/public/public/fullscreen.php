@@ -30,7 +30,7 @@
 <!-- Custom page header. -->
 <?php echo $this->partial('public/_public_header.php', array(
     'titlePrefix' => 'Neatline',
-    'title' => $neatline->name
+    'exhibit' => $neatline
 )); ?>
 
 <!-- The top bar. -->

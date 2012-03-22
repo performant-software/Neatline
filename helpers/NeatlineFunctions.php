@@ -679,6 +679,21 @@ function neatline_installBaseLayers()
     $gsat->name = 'Google Satellite';
     $gsat->save();
 
+    // Stamen watercolor.
+    $stwc = new NeatlineBaseLayer;
+    $stwc->name = 'Stamen Watercolor';
+    $stwc->save();
+
+    // Stamen toner.
+    $sttn = new NeatlineBaseLayer;
+    $sttn->name = 'Stamen Toner';
+    $sttn->save();
+
+    // Stamen terrain.
+    $sttr = new NeatlineBaseLayer;
+    $sttr->name = 'Stamen Terrain';
+    $sttr->save();
+
 }
 
 /**

@@ -937,6 +937,9 @@
          */
         _getBaseLayers: function() {
 
+            // OpenStreetMap.
+            this.osm = new OpenLayers.Layer.OSM();
+
             // Google physical.
             this.gphy = new OpenLayers.Layer.Google(
                 "Google Physical",
@@ -961,10 +964,37 @@
                 {type: google.maps.MapTypeId.SATELLITE, numZoomLevels: 22}
             );
 
-            // OpenStreetMap.
-            this.osm = new OpenLayers.Layer.OSM();
+            // Stamen watercolor
+            this.stwc = new OpenLayers.Layer.OSM(
+              'Stamen Watercolor',
+              'http://tile.stamen.com/watercolor/${z}/${x}/${y}.jpg',
+              { numZoomLevels: 19 }
+            );
 
-            return [this.gphy, this.gmap, this.ghyb, this.gsat, this.osm];
+            // Stamen toner
+            this.sttn = new OpenLayers.Layer.OSM(
+              'Stamen Toner',
+              'http://tile.stamen.com/toner/${z}/${x}/${y}.jpg',
+              { numZoomLevels: 19 }
+            );
+
+            // Stamen terrain
+            this.sttr = new OpenLayers.Layer.OSM(
+              'Stamen Terrain',
+              'http://tile.stamen.com/terrain/${z}/${x}/${y}.jpg',
+              { numZoomLevels: 19 }
+            );
+
+            return [
+              this.osm,
+              this.gphy,
+              this.gmap,
+              this.ghyb,
+              this.gsat,
+              this.stwc,
+              this.sttn,
+              this.sttr
+            ];
 
         },
 
@@ -975,6 +1005,10 @@
 
             // Set default.
             switch (Neatline.baseLayer.name) {
+
+                case 'OpenStreetMap':
+                    this.map.setBaseLayer(this.osm);
+                break;
 
                 case 'Google Physical':
                     this.map.setBaseLayer(this.ghpy);
@@ -992,8 +1026,16 @@
                     this.map.setBaseLayer(this.gsat);
                 break;
 
-                case 'OpenStreetMap':
-                    this.map.setBaseLayer(this.osm);
+                case 'Stamen Watercolor':
+                    this.map.setBaseLayer(this.stwc);
+                break;
+
+                case 'Stamen Toner':
+                    this.map.setBaseLayer(this.sttn);
+                break;
+
+                case 'Stamen Terrain':
+                    this.map.setBaseLayer(this.sttr);
                 break;
 
             }
