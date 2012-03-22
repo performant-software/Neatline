@@ -24,8 +24,6 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache 2 License
  */
 
-require_once NEATLINE_PLUGIN_DIR . '/helpers/RegularExpressions.php';
-
 class NeatlineDataRecord extends Omeka_record
 {
 
