@@ -81,31 +81,6 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->assertResponseCode(200);
         $v = __v();
 
-        // Check for the template variables.
-        $this->assertNotNull($v->neatline);
-        $this->assertNotNull($v->neatlineData);
-        $this->assertNull($v->map);
-
-        $this->assertEquals(
-            $v->neatlineData['neatline']->id,
-            $exhibit->id
-        );
-
-        $this->assertEquals(
-            $v->neatlineData['dataSources']['timeline'],
-            neatline_getTimelineDataUrl($exhibit->id)
-        );
-
-        $this->assertEquals(
-            $v->neatlineData['dataSources']['map'],
-            neatline_getMapDataUrl($exhibit->id)
-        );
-
-        $this->assertEquals(
-            $v->neatlineData['dataSources']['undated'],
-            neatline_getUndatedItemsDataUrl($exhibit->id)
-        );
-
     }
 
     /**

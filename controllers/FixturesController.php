@@ -59,16 +59,11 @@ class Neatline_FixturesController extends Omeka_Controller_Action
         $this->_helper->viewRenderer->setNoRender(true);
 
         // Get mock exhibit.
-        $neatline = $this->_neatlinesTable->find(1);
+        $exhibit = $this->_neatlinesTable->find(1);
 
         // Render.
         echo $this->view->partial('neatline/_neatline.php', array(
-            'neatline' =>           $neatline,
-            'public' =>             true,
-            'dataSources' =>        array(
-                'map' => 'http://localhost:1337/stub',
-                'timeline' => 'http://localhost:1337/stub',
-                'undated' => 'http://localhost:1337/stub')
+            'exhibit' => $exhibit
         ));
 
     }
@@ -85,26 +80,8 @@ class Neatline_FixturesController extends Omeka_Controller_Action
         $this->_helper->viewRenderer->setNoRender(true);
 
         // Get records.
-        $neatline =                 $this->_neatlinesTable->find(1);
-        $map =                      $neatline->getMap();
-        $image =                    $neatline->getImage();
-
-        // Get Omeka taxonomies and layers.
-        $collections =              $this->getTable('Collection')->findAll();
-        $tags =                     $this->getTable('Tag')->findAll();
-        $types =                    $this->getTable('ItemType')->findAll();
+        $exhibit =                  $this->_neatlinesTable->find(1);
         $layers =                   $this->_layersTable->findAll();
-
-        // Construct the data array for the exhibit.
-        $neatlineData = array(
-            'public' =>             false,
-            'neatline' =>           $neatline,
-            'dataSources' => array(
-                'timeline' =>       neatline_getTimelineDataUrl($neatline->id),
-                'map' =>            neatline_getMapDataUrl($neatline->id),
-                'undated' =>        neatline_getUndatedItemsDataUrl($neatline->id)
-            )
-        );
 
         /**
          * ---------------
@@ -113,17 +90,14 @@ class Neatline_FixturesController extends Omeka_Controller_Action
          */
 
         echo $this->view->partial('editor/_topbar.php', array(
-            'neatline' => $neatline,
+            'neatline' => $exhibit,
             'layers' => $layers
         ));
 
-        echo $this->view->partial('editor/_item_browser.php', array(
-            'tags' => $tags,
-            'collections' => $collections,
-            'types' => $types
+        echo $this->view->partial('neatline/_neatline.php', array(
+            'exhibit' => $exhibit
         ));
 
-        echo $this->view->partial('neatline/_neatline.php', $neatlineData);
         echo $this->view->partial('editor/_tooltips.php');
 
     }
