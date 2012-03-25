@@ -167,7 +167,7 @@
                 type: 'POST',
 
                 data: {
-                    exhibit_id: Neatline.id,
+                    exhibit_id: Neatline.record.id,
                     map_extent: mapExtent,
                     map_zoom: mapZoom,
                     timeline_center: timelineCenter,

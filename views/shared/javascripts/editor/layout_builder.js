@@ -133,13 +133,13 @@
         _setStartingParameters: function() {
 
             // Get starting parameters out of the Neatline global.
-            this._top_element =             Neatline.top_element;
-            this._items_h_pos =             Neatline.items_h_pos;
-            this._items_v_pos =             Neatline.items_v_pos;
-            this._items_height =            Neatline.items_height;
-            this._is_map =                  Boolean(Neatline.is_map);
-            this._is_timeline =             Boolean(Neatline.is_timeline);
-            this._is_items =                Boolean(Neatline.is_items);
+            this._top_element =             Neatline.record.top_element;
+            this._items_h_pos =             Neatline.record.items_h_pos;
+            this._items_v_pos =             Neatline.record.items_v_pos;
+            this._items_height =            Neatline.record.items_height;
+            this._is_map =                  Boolean(Neatline.record.is_map);
+            this._is_timeline =             Boolean(Neatline.record.is_timeline);
+            this._is_items =                Boolean(Neatline.record.is_items);
 
             // Push starting params into positioner and do first position.
             this._computePositions();
@@ -1542,7 +1542,7 @@
 
             // Assemble an object with the position tracker variables.
             return {
-                exhibit_id:     Neatline.id,
+                exhibit_id:     Neatline.record.id,
                 is_map:         is_map,
                 is_timeline:    is_timeline,
                 is_items:       is_items,

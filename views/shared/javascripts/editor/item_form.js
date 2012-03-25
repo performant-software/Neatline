@@ -736,7 +736,7 @@
             // Merge the status and coverage data.
             data.item_id =                  this.itemId;
             data.record_id =                this.recordId;
-            data.exhibit_id =               Neatline.id;
+            data.exhibit_id =               Neatline.record.id;
             data.space_active =             this.space.prop('checked').toString();
             data.time_active =              this.time.prop('checked').toString();
             data.geocoverage =              coverage;
@@ -795,7 +795,7 @@
                     data: {
                         item_id: this.itemId,
                         record_id: this.recordId,
-                        exhibit_id: Neatline.id
+                        exhibit_id: Neatline.record.id
                     },
 
                     success: function(data) {
@@ -878,7 +878,7 @@
                 data: {
                     item_id: this.itemId,
                     record_id: this.recordId,
-                    exhibit_id: Neatline.id,
+                    exhibit_id: Neatline.record.id,
                     extent: extent,
                     zoom: zoom
                 },
@@ -907,7 +907,7 @@
                 url: 'ajax/delete',
                 type: 'POST',
                 data: {
-                    exhibit_id: Neatline.id,
+                    exhibit_id: Neatline.record.id,
                     record_id: this.recordId
                 },
 
@@ -934,7 +934,7 @@
                 url: 'ajax/resetstyles',
                 type: 'POST',
                 data: {
-                    exhibit_id: Neatline.id,
+                    exhibit_id: Neatline.record.id,
                     record_id: this.recordId
                 },
 

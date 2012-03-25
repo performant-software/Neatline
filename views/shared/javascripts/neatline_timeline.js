@@ -247,7 +247,7 @@
 
             // Set the starting date, if defined.
             if (Neatline.default_focus_date !== null) {
-                var startDate = Date.parse(Neatline.default_focus_date);
+                var startDate = Date.parse(Neatline.record.default_focus_date);
                 this.timeline.getBand(0).setCenterVisibleDate(startDate);
             }
 

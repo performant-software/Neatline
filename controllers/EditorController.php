@@ -57,56 +57,11 @@ class Neatline_EditorController extends Omeka_Controller_Action
 
         // Get records and shell out defaults.
         $id =                       $this->_request->getParam('id');
-        $neatline =                 $this->_neatlinesTable->find($id);
-        $map =                      $neatline->getMap();
-        $image =                    $neatline->getImage();
+        $exhibit =                  $this->_neatlinesTable->find($id);
         $layers =                   $this->_layersTable->findAll();
 
-        // Construct the data array for the exhibit.
-        $neatlineData = array(
-            'neatline' =>           $neatline,
-            'dataSources' => array(
-                'timeline' =>       neatline_getTimelineDataUrl($neatline->id),
-                'map' =>            neatline_getMapDataUrl($neatline->id),
-                'undated' =>        neatline_getUndatedItemsDataUrl($neatline->id)
-            )
-        );
-
-        // Push the map into the view.
-        if ($map) {
-
-            // Instantiate the map.
-            $map = new GeoserverMap_Map($map);
-
-            // Add to the parameters array.
-            $neatlineData['map'] = array(
-                'boundingBox' =>    $map->boundingBox,
-                'epsg' =>           $map->epsg,
-                'wmsAddress' =>     $map->wmsAddress,
-                'layers' =>         $map->layers
-            );
-
-        }
-
-        // Push image data into the view.
-        else if ($neatline->is_map == 1 && !is_null($neatline->image_id)) {
-
-            // Get the image and dimensions.
-            $image = $this->_filesTable->find($neatline->image_id);
-
-            // Add the parameters array.
-            $neatlineData['image'] = array(
-                'record' =>         $image,
-                'path' =>           $image->getWebPath('archive'),
-                'name' =>           $image->original_filename
-            );
-
-        }
-
         // Push records.
-        $this->view->neatline =     $neatline;
-        $this->view->neatlineData = $neatlineData;
-        $this->view->map =          $map;
+        $this->view->exhibit =      $exhibit;
         $this->view->layers =       $layers;
 
     }

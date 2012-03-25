@@ -28,18 +28,20 @@
 <!-- Neatline container. -->
 <div id="neatline" class="neatline-container">
 
+    <!-- Map. -->
     <div id="map" class="neatline-block"></div>
 
+    <!-- Timeline. -->
     <div id="timeline" class="neatline-block neatlinetime-timeline">
-        <!-- Timeline zoom buttons. -->
         <?php echo $this->partial('neatline/_timeline_zoom.php'); ?>
     </div>
 
+    <!-- Items. -->
     <div id="items" class="neatline-block">
         <div id="items-container"></div>
     </div>
 
-    <!-- Forward/backward scroll arrows. -->
+    <!-- Scroll arrows. -->
     <?php echo $this->partial('neatline/_arrows.php'); ?>
 
 </div>
@@ -50,36 +52,7 @@
 <!-- JSON globals. -->
 <script type="text/javascript">
 
-    // Exhibit parameters.
-    var Neatline = <?php echo json_encode($neatline); ?>;
-        Neatline.dataSources = <?php echo json_encode($dataSources); ?>;
-        Neatline.baseLayer = <?php echo json_encode($neatline->getBaseLayer()); ?>;
-        Neatline.proportions = <?php echo json_encode($neatline->getViewportProportions()); ?>;
-        Neatline.timelineZoom = <?php echo $neatline->getTimelineZoom(); ?>;
-
-    // Map parameters.
-    <?php if (isset($map)): ?>
-        Neatline.map = <?php echo json_encode($map); ?>;
-    <?php endif; ?>
-
-    // Image parameters.
-    <?php if (isset($image)): ?>
-
-        Neatline.image = <?php echo json_encode(
-            array(
-                'path' =>   $image['path'],
-                'name' =>   $image['name'],
-                'width' =>  (int) $this->fileMetadata(
-                    $image['record'],
-                    'Omeka Image File',
-                    'Width'),
-                'height' => (int) $this->fileMetadata(
-                    $image['record'],
-                    'Omeka Image File',
-                    'Height')
-            )
-        ); ?>
-
-    <?php endif; ?>
+    <?php $renderer = new NeatlineRenderer($exhibit); ?>
+    Neatline = <?php echo json_encode($renderer->render()); ?>
 
 </script>

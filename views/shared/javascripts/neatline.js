@@ -143,15 +143,15 @@
         _getMajorBlock: function() {
 
             // If there is a map and a timeline, take the top div.
-            if (this.params.is_map && this.params.is_timeline) {
-                this.majorBlock = (this.params.top_element === 'map') ?
+            if (this.params.record.is_map && this.params.record.is_timeline) {
+                this.majorBlock = (this.params.record.top_element === 'map') ?
                     this.map :
                     this.timeline;
             }
 
             // Otherwise, take the present block.
             else {
-                this.majorBlock = (this.params.is_map) ?
+                this.majorBlock = (this.params.record.is_map) ?
                     this.map :
                     this.timeline;
             }
@@ -171,13 +171,13 @@
             // Compute the positions.
             this.element.positioner(
                 'compute',
-                this.params.is_map,
-                this.params.is_timeline,
-                this.params.is_items,
-                this.params.top_element,
-                this.params.items_v_pos,
-                this.params.items_h_pos,
-                this.params.items_height
+                this.params.record.is_map,
+                this.params.record.is_timeline,
+                this.params.record.is_items,
+                this.params.record.top_element,
+                this.params.record.items_v_pos,
+                this.params.record.items_h_pos,
+                this.params.record.items_height
             );
 
             // Manifest.
@@ -210,7 +210,7 @@
             var self = this;
 
             // ** MAP
-            if (this.params.is_map && !this.instantiated_map) {
+            if (this.params.record.is_map && !this.instantiated_map) {
 
                 // If the Neatline is public, instantiate the default map.
                 if (this.options.isPublic) {
@@ -256,7 +256,7 @@
             }
 
             // ** TIMELINE
-            if (this.params.is_timeline && !this.instantiated_timeline) {
+            if (this.params.record.is_timeline && !this.instantiated_timeline) {
 
                 this.timeline.neatlinetimeline({
 
@@ -274,7 +274,7 @@
             }
 
             // ** ITEMS
-            if (this.params.is_items && !this.instantiated_undated) {
+            if (this.params.record.is_items && !this.instantiated_undated) {
 
                 // If the Neatline is public, instantiate the default item tray.
                 if (this.options.isPublic) {

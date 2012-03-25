@@ -29,24 +29,22 @@
 <!-- Custom page header. -->
 <?php echo $this->partial('editor/_editor_header.php', array(
     'titlePrefix' => 'Neatline Editor',
-    'title' => $neatline->name
+    'title' => $exhibit->name
 )); ?>
 
 <!-- The top bar. -->
 <?php echo $this->partial('editor/_topbar.php', array(
-    'neatline' => $neatline,
+    'neatline' => $exhibit,
     'layers' => $layers
 )); ?>
 
 <!-- The item browser. -->
-<?php echo $this->partial('editor/_item_browser.php', array(
-    'tags' => $tags,
-    'collections' => $collections,
-    'types' => $types
-)); ?>
+<?php echo $this->partial('editor/_item_browser.php'); ?>
 
 <!-- The core Neatline partial. -->
-<?php echo $this->partial('neatline/_neatline.php', $neatlineData); ?>
+<?php echo $this->partial('neatline/_neatline.php', array(
+    'exhibit' => $exhibit
+)); ?>
 
 <!-- Templates for tooltips and geometry editing. -->
 <?php echo $this->partial('editor/_tooltips.php'); ?>

@@ -189,8 +189,8 @@
 
             // If there is a default bounding box set for the exhibit, construct
             // a second Bounds object to use as the starting zoom target.
-            if (!_.isNull(Neatline.default_map_bounds)) {
-                var boundsArray = Neatline.default_map_bounds.split(',');
+            if (!_.isNull(Neatline.record.default_map_bounds)) {
+                var boundsArray = Neatline.record.default_map_bounds.split(',');
                 var bounds = new OpenLayers.Bounds(
                     parseFloat(boundsArray[0]),
                     parseFloat(boundsArray[1]),
@@ -269,8 +269,8 @@
 
             // If there is a default bounding box set for the exhibit, construct
             // a second Bounds object to use as the starting zoom target.
-            if (Neatline.default_map_bounds !== null) {
-                var boundsArray = Neatline.default_map_bounds.split(',');
+            if (Neatline.record.default_map_bounds !== null) {
+                var boundsArray = Neatline.record.default_map_bounds.split(',');
                 var bounds = new OpenLayers.Bounds(
                     parseFloat(boundsArray[0]),
                     parseFloat(boundsArray[1]),
@@ -326,8 +326,8 @@
 
             // If there is a default bounding box set for the exhibit, construct
             // a second Bounds object to use as the starting zoom target.
-            if (Neatline.default_map_bounds !== null) {
-                var boundsArray = Neatline.default_map_bounds.split(',');
+            if (Neatline.record.default_map_bounds !== null) {
+                var boundsArray = Neatline.record.default_map_bounds.split(',');
                 var bounds = new OpenLayers.Bounds(
                     parseFloat(boundsArray[0]),
                     parseFloat(boundsArray[1]),

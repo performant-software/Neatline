@@ -59,19 +59,22 @@ class NeatlineRenderer
 
             // Data emitters.
             'dataSources' => array(
-                'timeline' => neatline_getTimelineDataUrl($neatline->id),
-                'map' => neatline_getMapDataUrl($neatline->id),
-                'undated' => neatline_getUndatedItemsDataUrl($neatline->id)
+                'timeline' => neatline_getTimelineDataUrl($this->exhibit->id),
+                'map' => neatline_getMapDataUrl($this->exhibit->id),
+                'undated' => neatline_getUndatedItemsDataUrl($this->exhibit->id)
             ),
 
             // Default base layer.
-            'baseLayer' => $exhibit->getBaseLayer(),
+            'baseLayer' => $this->exhibit->getBaseLayer(),
 
             // Default timeline zoom.
-            'timelineZoom' => $exhibit->getTimelineZoom(),
+            'timelineZoom' => $this->exhibit->getTimelineZoom(),
+
+            // Default timeline zoom.
+            'highlightColor' => $this->exhibit->getStyle('highlight_color'),
 
             // Default viewport proportions.
-            'proportions' => $neatline->getViewportProportions()
+            'proportions' => $this->exhibit->getViewportProportions()
 
         );
 
@@ -104,6 +107,8 @@ class NeatlineRenderer
             );
 
         }
+
+        return $params;
 
     }
 

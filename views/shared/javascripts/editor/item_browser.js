@@ -941,7 +941,7 @@
                 dataType: 'html',
 
                 data: {
-                    exhibit_id: Neatline.id,
+                    exhibit_id: Neatline.record.id,
                     search: this._searchString,
                     tags: selected.tags,
                     types: selected.types,
@@ -996,7 +996,7 @@
                 dataType: 'json',
 
                 data: {
-                    exhibit_id: Neatline.id,
+                    exhibit_id: Neatline.record.id,
                     item_id: itemid,
                     record_id: recordid,
                     space_or_time: spaceOrTime,
@@ -1031,7 +1031,7 @@
                 url: 'ajax/add',
                 type: 'GET',
                 dataType: 'html',
-                data: { exhibit_id: Neatline.id },
+                data: { exhibit_id: Neatline.record.id },
 
                 success: function(html) {
                     self._insertNewRecordRow(html);

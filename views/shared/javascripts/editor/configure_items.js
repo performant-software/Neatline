@@ -136,7 +136,7 @@
                 url: 'ajax/order',
                 type: 'POST',
                 data: {
-                    exhibit_id: Neatline.id,
+                    exhibit_id: Neatline.record.id,
                     order: this.order
                 },
 

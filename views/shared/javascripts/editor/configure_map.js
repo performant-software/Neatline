@@ -161,7 +161,7 @@
 
             var data = {};
 
-            data.exhibit_id =               Neatline.id;
+            data.exhibit_id =               Neatline.record.id;
             data.vector_color =             this.vectorColor.val();
             data.stroke_color =             this.strokeColor.val();
             data.highlight_color =          this.highlightColor.val();
