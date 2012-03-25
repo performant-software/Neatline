@@ -158,7 +158,7 @@ class NeatlineExhibit extends Omeka_record
     {
 
         if (!is_null($this->image_id)) {
-            return $this->getTable('NeatlineMapsMap')->find($this->image_id);
+            return $this->getTable('File')->find($this->image_id);
         }
 
         return null;

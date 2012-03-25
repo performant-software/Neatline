@@ -58,7 +58,6 @@ function neatline_queueEditorAssets()
 
     // Application classes and controller script.
     queue_js('editor/item_browser', 'javascripts');
-    queue_js('editor/item_filter', 'javascripts');
     queue_js('editor/item_form', 'javascripts');
     queue_js('editor/edit_geometry', 'javascripts');
     queue_js('editor/layout_builder', 'javascripts');

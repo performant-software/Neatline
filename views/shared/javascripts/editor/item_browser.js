@@ -70,7 +70,6 @@
             this.itemsList =                $('#items-list-container');
             this.itemsListHeader =          $('#items-list-header');
             this.searchCancel =             $('#search-cancel');
-            this.itemFilterContainer =      $('#filter-items');
             this.neatlineContainer =        $('#neatline');
             this.dragTip =                  $('#drag-tip');
             this.spaceTip =                 $('#space-tip');
@@ -931,9 +930,6 @@
 
             var self = this;
 
-            // Get the selection tracker out of the filter widget.
-            var selected = this.itemFilterContainer.itemfilter('getSelected');
-
             // Core ajax call to get items.
             $.ajax({
 
@@ -942,11 +938,7 @@
 
                 data: {
                     exhibit_id: Neatline.record.id,
-                    search: this._searchString,
-                    tags: selected.tags,
-                    types: selected.types,
-                    collections: selected.collections,
-                    all: selected.all
+                    search: this._searchString
                 },
 
                 success: function(data) {

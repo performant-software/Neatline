@@ -101,7 +101,7 @@ class NeatlineRenderer
                 'width' => (int) __v()->fileMetadata(
                     $image,
                     'Omeka Image File',
-                    'Height'
+                    'Width'
                 )
 
             );
