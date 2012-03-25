@@ -26,15 +26,17 @@
 ?>
 
 <?php
-    $head = array('bodyclass' => 'neatline primary', 'title' => $neatline->name);
+    $head = array('bodyclass' => 'neatline primary', 'title' => $exhibit->name);
     head($head);
 ?>
 
-<?php if ($neatline->public): ?>
+<?php if ($exhibit->public): ?>
 
-    <h1><?php echo $neatline->name; ?></h1>
+    <h1><?php echo $exhibit->name; ?></h1>
     <div id="primary">
-        <?php echo $this->partial('neatline/_neatline.php', $neatlineData); ?>
+        <?php echo $this->partial('neatline/_neatline.php', array(
+            'exhibit' => $exhibit
+        )); ?>
     </div>
 
 <?php else: ?>

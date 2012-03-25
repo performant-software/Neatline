@@ -25,22 +25,24 @@
  */
 ?>
 
-<?php if ($neatline->public): ?>
+<?php if ($exhibit->public): ?>
 
 <!-- Custom page header. -->
 <?php echo $this->partial('public/_public_header.php', array(
     'titlePrefix' => 'Neatline',
-    'title' => $neatline->name
+    'exhibit' => $exhibit
 )); ?>
 
 <!-- The top bar. -->
 <?php echo $this->partial('public/_topbar.php', array(
-    'neatline' => $neatline,
+    'neatline' => $exhibit,
     'layers' => $layers
 )); ?>
 
 <!-- The core Neatline partial. -->
-<?php echo $this->partial('neatline/_neatline.php', $neatlineData); ?>
+<?php echo $this->partial('neatline/_neatline.php', array(
+    'exhibit' => $exhibit
+)); ?>
 
 <!-- Custom footer. -->
 <?php echo $this->partial('editor/_editor_footer.php'); ?>
