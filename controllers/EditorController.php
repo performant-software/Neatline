@@ -60,11 +60,6 @@ class Neatline_EditorController extends Omeka_Controller_Action
         $neatline =                 $this->_neatlinesTable->find($id);
         $map =                      $neatline->getMap();
         $image =                    $neatline->getImage();
-
-        // Get Omeka taxonomies and base layers.
-        $collections =              $this->getTable('Collection')->findAll();
-        $tags =                     $this->getTable('Tag')->findAll();
-        $types =                    $this->getTable('ItemType')->findAll();
         $layers =                   $this->_layersTable->findAll();
 
         // Construct the data array for the exhibit.
@@ -112,9 +107,6 @@ class Neatline_EditorController extends Omeka_Controller_Action
         $this->view->neatline =     $neatline;
         $this->view->neatlineData = $neatlineData;
         $this->view->map =          $map;
-        $this->view->collections =  $collections;
-        $this->view->tags =         $tags;
-        $this->view->types =        $types;
         $this->view->layers =       $layers;
 
     }
