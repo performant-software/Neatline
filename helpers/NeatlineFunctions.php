@@ -158,9 +158,9 @@ function neatline_queueNeatlineAssets()
     queue_js('neatline_map', 'javascripts');
     queue_js('neatline_timeline', 'javascripts');
     queue_js('neatline_items', 'javascripts');
-    queue_js('span_styler', 'javascripts');
-    queue_js('positioner', 'javascripts');
-    queue_js('scroller', 'javascripts');
+    queue_js('positioner', 'javascripts/utilities');
+    queue_js('scroller', 'javascripts/utilities');
+    queue_js('span_styler', 'javascripts/utilities');
     queue_js('_utilities', 'javascripts/libraries');
     queue_js('jquery.getscrollbarwidth', 'javascripts/libraries');
 

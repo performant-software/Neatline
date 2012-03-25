@@ -49,6 +49,8 @@ jQuery(document).ready(function($) {
 
             neatlineContainer.neatline({
 
+                'isPublic': false,
+
                 // When the user clicks on an item on the timeline.
                 'timelineeventclick': function(event, obj) {
 

@@ -31,6 +31,9 @@
 
         options: {
 
+            // False in the editor.
+            isPublic: true,
+
             // Markup hooks.
             markup: {
                 map_id:         'map',
@@ -91,9 +94,9 @@
 
                 // Pass viewport markup.
                 markup: {
-                    map:                    '#' + this.options.markup.map_id,
-                    timeline:               '#' + this.options.markup.timeline_id,
-                    items:                  '#' + this.options.markup.items_id
+                    map:            '#' + this.options.markup.map_id,
+                    timeline:       '#' + this.options.markup.timeline_id,
+                    items:          '#' + this.options.markup.items_id
                 },
 
                 // Positioning constants.
@@ -210,7 +213,7 @@
             if (this.params.is_map && !this.instantiated_map) {
 
                 // If the Neatline is public, instantiate the default map.
-                if (this.params.isPublic) {
+                if (this.options.isPublic) {
 
                     this.map.neatlinemap({
 
@@ -274,7 +277,7 @@
             if (this.params.is_items && !this.instantiated_undated) {
 
                 // If the Neatline is public, instantiate the default item tray.
-                if (this.params.isPublic) {
+                if (this.options.isPublic) {
 
                     this.items.neatlineitems({
 
