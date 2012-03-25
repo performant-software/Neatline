@@ -56,7 +56,6 @@ class Neatline_PublicController extends Omeka_Controller_Action
 
         // Construct the data array for the exhibit.
         $neatlineData = array(
-            'public' =>             true,
             'neatline' =>           $neatline,
             'dataSources' => array(
                 'timeline' =>       neatline_getTimelineDataUrl($neatline->id),
@@ -119,7 +118,6 @@ class Neatline_PublicController extends Omeka_Controller_Action
 
         // Construct the data array for the exhibit.
         $neatlineData = array(
-            'public' =>             true,
             'neatline' =>           $neatline,
             'dataSources' => array(
                 'timeline' =>       neatline_getTimelineDataUrl($neatline->id),
@@ -182,7 +180,6 @@ class Neatline_PublicController extends Omeka_Controller_Action
 
         // Construct the data array for the exhibit.
         $neatlineData = array(
-            'public' =>             true,
             'neatline' =>           $neatline,
             'dataSources' => array(
                 'timeline' =>       neatline_getTimelineDataUrl($neatline->id),

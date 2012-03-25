@@ -86,9 +86,6 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->assertNotNull($v->neatlineData);
         $this->assertNull($v->map);
 
-        // Check the construction of the data array.
-        $this->assertFalse($v->neatlineData['public']);
-
         $this->assertEquals(
             $v->neatlineData['neatline']->id,
             $exhibit->id

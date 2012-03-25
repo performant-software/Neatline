@@ -646,6 +646,161 @@ function neatline_getItemMetadata($item, $elementSet, $elementName)
 }
 
 /**
+ * Get items for the browser.
+ *
+ * @param NeatlineExhibit $exhibit The exhibit.
+ *
+ * @return array of Omeka_records $items The items.
+ */
+function neatline_getItemsForBrowser($exhibit)
+{
+
+    $_db = get_db();
+    $itemsTable = $_db->getTable('Item');
+    $params = array();
+    $items = array();
+
+    // If the query is defined, fetch items.
+    if (!is_null($exhibit->query)) {
+
+        // Get query and select.
+        $select = $itemsTable->getSelect();
+        $query = unserialize($exhibit->query);
+        $isQuery = false;
+
+        // ** Adapted directly from Omeka_Controller_Action_Helper_SearchItems.
+        foreach($query as $requestParamName => $requestParamValue) {
+            if (is_string($requestParamValue) && trim($requestParamValue) == '') {
+                continue;
+            }
+            switch($requestParamName) {
+                case 'user':
+                    if (is_numeric($requestParamValue)) {
+                        $params['user'] = $requestParamValue;
+                        $isQuery = true;
+                    }
+                break;
+
+                case 'public':
+                    $params['public'] = is_true($requestParamValue);
+                    $isQuery = true;
+                break;
+
+                case 'featured':
+                    $params['featured'] = is_true($requestParamValue);
+                    $isQuery = true;
+                break;
+
+                case 'collection':
+                    $params['collection'] = $requestParamValue;
+                    $isQuery = true;
+                break;
+
+                case 'type':
+                    $params['type'] = $requestParamValue;
+                    $isQuery = true;
+                break;
+
+                case 'tag':
+                case 'tags':
+                    $params['tags'] = $requestParamValue;
+                    $isQuery = true;
+                break;
+
+                case 'excludeTags':
+                    $params['excludeTags'] = $requestParamValue;
+                    $isQuery = true;
+                break;
+
+                case 'recent':
+                    if (!is_true($requestParamValue)) {
+                        $params['recent'] = false;
+                        $isQuery = true;
+                    }
+                break;
+
+                case 'search':
+                    $params['search'] = $requestParamValue;
+                    $isQuery = true;
+                    //Don't order by recent-ness if we're doing a search
+                    unset($params['recent']);
+                break;
+
+                case 'advanced':
+                    //We need to filter out the empty entries if any were provided
+                    foreach ($requestParamValue as $k => $entry) {
+                        if (empty($entry['element_id']) || empty($entry['type'])) {
+                            unset($requestParamValue[$k]);
+                        }
+                    }
+                    if (count($requestParamValue) > 0) {
+                        $params['advanced_search'] = $requestParamValue;
+                        $isQuery = true;
+                    }
+                break;
+
+                case 'range':
+                    $params['range'] = $requestParamValue;
+                    $isQuery = true;
+                break;
+            }
+        }
+
+        if ($isQuery) { $items = $itemsTable->findBy($params); }
+
+    }
+
+    return $items;
+
+}
+
+/**
+ * Check to see whether an item has an active space or time record for a
+ * given Neatline exhibit. If it does, return the 'checked' property for
+ * the template checkbox; if not, return an empty string.
+ *
+ * @param Omeka_record $neatline The Neatline exhibit.
+ * @param Omeka_record $item The item.
+ * @param string $spaceOrTime 'space' or 'time'.
+ *
+ * @return array of Omeka_records $items The items.
+ */
+function neatline_getRecordStatusForCheckBox($neatline, $item, $spaceOrTime)
+{
+
+    // Get the statuses table.
+    $_db = get_db();
+    $statusesTable = $_db->getTable('NeatlineRecordStatus');
+
+    return $statusesTable
+        ->checkStatus($item, $neatline, $spaceOrTime) ? 'checked' : '';
+
+}
+
+/**
+ * Check to see whether an item has an active space or time record for a
+ * given Neatline exhibit. If it does, return the 'active' class string for
+ * the template checkbox; if not, return an empty string.
+ *
+ * @param Omeka_record $neatline The Neatline exhibit.
+ * @param Omeka_record $item The item.
+ * @param string $spaceOrTime 'space' or 'time'.
+ *
+ * @return array of Omeka_records $items The items.
+ */
+function neatline_getRecordStatusForIcon($neatline, $item, $spaceOrTime)
+{
+
+    // Get the statuses table.
+    $_db = get_db();
+    $statusesTable = $_db->getTable('NeatlineRecordStatus');
+
+    return $statusesTable
+        ->checkStatus($item, $neatline, $spaceOrTime) ? 'active' : 'inactive';
+
+}
+
+/**
  * Install base layers set.
  *
  * @return void.

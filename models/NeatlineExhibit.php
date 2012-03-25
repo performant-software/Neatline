@@ -31,7 +31,6 @@ class NeatlineExhibit extends Omeka_record
      * Record attributes.
      */
 
-
     public $added;
     public $modified;
     public $name;
@@ -220,15 +219,15 @@ class NeatlineExhibit extends Omeka_record
     {
 
         // Set values.
-        $this->is_map =                 $isMap;
-        $this->is_timeline =            $isTimeline;
-        $this->is_items =               $isItems;
-        $this->top_element =            $topElement;
-        $this->items_h_pos =            $itemsHorizPos;
-        $this->items_v_pos =            $itemsVertPos;
-        $this->items_height =           $itemsHeight;
-        $this->h_percent =      $hPercent;
-        $this->v_percent =      $vPercent;
+        $this->is_map =             $isMap;
+        $this->is_timeline =        $isTimeline;
+        $this->is_items =           $isItems;
+        $this->top_element =        $topElement;
+        $this->items_h_pos =        $itemsHorizPos;
+        $this->items_v_pos =        $itemsVertPos;
+        $this->items_height =       $itemsHeight;
+        $this->h_percent =          $hPercent;
+        $this->v_percent =          $vPercent;
         $this->save();
 
     }
@@ -375,7 +374,8 @@ class NeatlineExhibit extends Omeka_record
     /**
      * Get the horizontal and vertical viewport percentages.
      *
-     * @return array $proportions array('horizontal' => integer, 'vertical' => integer).
+     * @return array $proportions array('horizontal' => integer,
+     * 'vertical' => integer).
      */
     public function getViewportProportions()
     {
@@ -419,25 +419,6 @@ class NeatlineExhibit extends Omeka_record
     }
 
     /**
-     * Delete status and element text association records
-     * on exhibit delete.
-     *
-     * @return void.
-     */
-    public function delete()
-    {
-
-        // Get the records table, delete child data.
-        $_recordsTable = $this->getTable('NeatlineDataRecord');
-        $records = $_recordsTable->findBySql('exhibit_id = ?', array($this->id));
-        foreach ($records as $record) { $record->delete(); }
-
-        // Call parent.
-        parent::delete();
-
-    }
-
-    /**
      * The exhibit should not save if map_id or image_id are both non-null.
      *
      * @return void.
@@ -467,6 +448,24 @@ class NeatlineExhibit extends Omeka_record
     public function parentSave()
     {
         parent::save();
+    }
+
+    /**
+     * Delete status and element text association records on exhibit delete.
+     *
+     * @return void.
+     */
+    public function delete()
+    {
+
+        // Get the records table, delete child data.
+        $_recordsTable = $this->getTable('NeatlineDataRecord');
+        $records = $_recordsTable->findBySql('exhibit_id = ?', array($this->id));
+        foreach ($records as $record) { $record->delete(); }
+
+        // Call parent.
+        parent::delete();
+
     }
 
 }
