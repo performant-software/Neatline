@@ -750,7 +750,7 @@
                 break;
 
                 case 'Google Physical':
-                    this.map.setBaseLayer(this.ghpy);
+                    this.map.setBaseLayer(this.gphy);
                 break;
 
                 case 'Google Streets':
