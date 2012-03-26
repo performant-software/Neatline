@@ -154,6 +154,48 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
     }
 
     /**
+     * getRecordByExhibitAndSlug() should return boolean false when there is.
+     * no record for the given exhibit/slug combination.
+     *
+     * @return void.
+     */
+    public function testGetRecordByExhibitAndSlugWithNoRecord()
+    {
+
+        // Create item, exhibit, and record.
+        $item = $this->helper->_createItem();
+        $neatline = $this->helper->_createNeatline();
+        $record = new NeatlineDataRecord($item, $neatline);
+        $record->save();
+
+        // Get the record.
+        $noRecord = $this->_recordsTable->getRecordByExhibitAndSlug($neatline, 'test-slug');
+        $this->assertFalse($noRecord);
+
+    }
+
+    /**
+     * getRecordByExhibitAndSlug() should return the record when one exists.
+     *
+     * @return void.
+     */
+    public function testGetRecordByExhibitAndSlugWithRecord()
+    {
+
+        // Create item, exhibit, and record.
+        $item = $this->helper->_createItem();
+        $neatline = $this->helper->_createNeatline();
+        $record = new NeatlineDataRecord($item, $neatline);
+        $record->slug = 'test-slug';
+        $record->save();
+
+        // Get the record.
+        $retrievedRecord = $this->_recordsTable->getRecordByExhibitAndSlug($neatline, 'test-slug');
+        $this->assertEquals($retrievedRecord->id, $record->id);
+
+    }
+
+    /**
      * saveRecordStatus() should create a new record when there when there
      * is no existing record.
      *

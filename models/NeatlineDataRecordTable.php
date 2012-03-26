@@ -123,6 +123,26 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
     }
 
     /**
+     * Find a record for a given exhibit and slug.
+     *
+     * @param Omeka_record $exhibit The exhibit record.
+     * @param string $slug The slug.
+     *
+     * @return Omeka_record $record if a record exists, else boolean False.
+     */
+    public function getRecordByExhibitAndSlug($exhibit, $slug)
+    {
+
+        $record = $this->fetchObject(
+            $this->getSelect()->where('exhibit_id = ' . $exhibit->id
+                . ' AND slug = "' . $slug . '"')
+        );
+
+        return $record ? $record : false;
+
+    }
+
+    /**
      * Find all records associated with a given exhibit.
      *
      * @param Omeka_record $neatline The exhibit record.
@@ -241,6 +261,20 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
 
         // If no record, return false.
         return false;
+
+    }
+
+    /**
+     * Check whether a given slug is unique for an exhibit.
+     *
+     * @param Omeka_record $exhibit The exhibit record.
+     * @param string $slug The slug.
+     *
+     * @return boolean True if the slug is unique.
+     */
+    public function slugIsUnique($exhibit, $slug)
+    {
+
 
     }
 
