@@ -33,11 +33,9 @@
 <?php if ($exhibit->public): ?>
 
     <h1><?php echo $exhibit->name; ?></h1>
-    <div id="primary">
-        <?php echo $this->partial('neatline/_neatline.php', array(
-            'exhibit' => $exhibit
-        )); ?>
-    </div>
+    <?php echo $this->partial('neatline/_neatline.php', array(
+        'exhibit' => $exhibit
+    )); ?>
 
 <?php else: ?>
     <?php echo $this->partial('neatline/_private.php'); ?>
