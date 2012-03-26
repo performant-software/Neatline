@@ -168,7 +168,7 @@ class NeatlineDataRecord extends Omeka_record
 
         // Set the array values.
         $data['title'] =            $this->getTitle();
-        // $data['slug'] =             $this->getSlug();
+        $data['slug'] =             $this->getSlug();
         $data['description'] =      $this->getDescription();
         $data['vector_color'] =     $this->getStyle('vector_color');
         $data['stroke_color'] =     $this->getStyle('stroke_color');
@@ -212,6 +212,7 @@ class NeatlineDataRecord extends Omeka_record
         $data['right_percent'] =    self::$defaults['right_percent'];
         $data['start_date'] =       '';
         $data['end_date'] =         '';
+        $data['slug'] =             '';
 
         // Get DC title default.
         $data['title'] = neatline_getItemMetadata(

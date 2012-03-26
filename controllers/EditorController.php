@@ -159,6 +159,7 @@ class Neatline_EditorController extends Omeka_Controller_Action
         $recordId =                 json_decode($_post['record_id']);
         $exhibitId =                json_decode($_post['exhibit_id']);
         $title =                    $_post['title'];
+        $slug =                     $_post['slug'];
         $description =              $_post['description'];
         $startDate =                $_post['start_date'];
         $endDate =                  $_post['end_date'];
@@ -195,6 +196,7 @@ class Neatline_EditorController extends Omeka_Controller_Action
 
         // Set text parameters.
         $record->setNotEmpty('title', $title);
+        $record->setNotEmpty('slug', $slug);
         $record->setNotEmpty('description', $description);
         $record->setNotEmpty('start_date', $startDate);
         $record->setNotEmpty('end_date', $endDate);

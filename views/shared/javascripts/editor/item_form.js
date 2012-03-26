@@ -78,7 +78,7 @@
             this.form =                     this.element.find('form');
             this.deleteButton =             this.form.find('#record-delete-button');
             this.title =                    this.form.find('textarea[name="title"]');
-            this.slug =                     this.form.find('textarea[name="slug"]');
+            this.slug =                     this.form.find('input[name="slug"]');
             this.description =              this.form.find('textarea[name="description"]');
             this.startDate =                this.form.find('input[name="start-date-date"]');
             this.endDate =                  this.form.find('input[name="end-date-date"]');
@@ -828,6 +828,7 @@
 
             // Get the data.
             var data = this._getDataForSave(coverage);
+            console.log(data);
 
             // Commit.
             $.ajax({

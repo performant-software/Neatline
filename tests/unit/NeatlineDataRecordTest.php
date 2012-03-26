@@ -30,6 +30,7 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
     // Testing parameters.
     private static $__testParams = array(
         'title' => 'Test Title',
+        'slug' => 'test-slug',
         'description' => 'Test description.',
         'start_date' => '1564-04-26 14:39:22',
         'end_date' => '1616-04-23 12:45:34',
@@ -1300,6 +1301,7 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
 
         // Populate fields.
         $record->title =            self::$__testParams['title'];
+        $record->slug =             self::$__testParams['slug'];
         $record->description =      self::$__testParams['description'];
         $record->start_date =       self::$__testParams['start_date'];
         $record->end_date =         self::$__testParams['end_date'];
@@ -1323,6 +1325,11 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         // Check the construction.
         $this->assertContains(
             '"title":"' . self::$__testParams['title'] . '"',
+            $json
+        );
+
+        $this->assertContains(
+            '"slug":"' . self::$__testParams['slug'] . '"',
             $json
         );
 
@@ -1402,6 +1409,7 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
 
         // Populate fields.
         $record->title =            self::$__testParams['title'];
+        $record->slug =             self::$__testParams['slug'];
         $record->description =      self::$__testParams['description'];
         $record->start_date =       self::$__testParams['start_date'];
         $record->end_date =         self::$__testParams['end_date'];
@@ -1425,6 +1433,11 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         // Check the construction.
         $this->assertContains(
             '"title":"' . self::$__testParams['title'] . '"',
+            $json
+        );
+
+        $this->assertContains(
+            '"slug":"' . self::$__testParams['slug'] . '"',
             $json
         );
 
@@ -1511,6 +1524,11 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         // Check the construction.
         $this->assertContains(
             '"title":""',
+            $json
+        );
+
+        $this->assertContains(
+            '"slug":""',
             $json
         );
 
