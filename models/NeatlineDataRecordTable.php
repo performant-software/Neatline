@@ -339,7 +339,8 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
                     'description' =>            $record->getDescription(),
                     'color' =>                  $record->getStyle('vector_color'),
                     'left_ambiguity' =>         $record->left_percent,
-                    'right_ambiguity' =>        $record->right_percent
+                    'right_ambiguity' =>        $record->right_percent,
+                    'textColor' =>             '#000000'
                 );
 
                 // Get start and end dates.
