@@ -130,7 +130,7 @@
         setParams: function(params) {
 
             // Set the parameters and re-get the major block.
-            this.params = params;
+            this.params.record = params;
             this._getMajorBlock();
 
         },
