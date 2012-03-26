@@ -584,9 +584,7 @@
             var record = this._db({ recordid: parseInt(id, 10) }).first();
 
             // If the record exists and there is a map feature.
-            if (record &&
-                record.layer.features.length > 0 &&
-                record.data.wkt !== 'POINT()') {
+            if (record && record.layer.features.length > 0) {
 
                 // If there is item-specific data.
                 if (record.data.bounds !== null && record.data.zoom !== null) {
