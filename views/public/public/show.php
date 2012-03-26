@@ -26,7 +26,9 @@
 ?>
 
 <?php
-    $head = array('bodyclass' => 'neatline primary', 'title' => $exhibit->name);
+    $head = array(
+      'bodyclass' => 'neatline primary test' . $exhibit->slug,
+      'title' => $exhibit->name);
     head($head);
 ?>
 
