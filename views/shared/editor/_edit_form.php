@@ -42,6 +42,16 @@
             </div>
 
             <div class="clearfix">
+                <label>Slug</label>
+                <div class="input">
+                    <div class="inline-inputs">
+                        <input class="xlarge" name="slug" type="text" placeholder="Slug" />
+                        <span class="help-inline">The record slug is a unique identifier that can be used to externally reference the record.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="clearfix">
                 <label for="description">Description</label>
                 <div class="input">
                     <textarea id="item-description" class="xlarge" name="description" placeholder="Description" rows="4"></textarea>
