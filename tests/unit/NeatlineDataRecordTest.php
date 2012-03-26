@@ -850,6 +850,29 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
     }
 
     /**
+     * getSlug() should return the slug when there is a non-null value and
+     * an empty string with the value is null.
+     *
+     * @return void.
+     */
+    public function testGetSlug()
+    {
+
+        // Create an item, exhibit, and record.
+        $neatline = $this->helper->_createNeatline();
+        $record = new NeatlineDataRecord(null, $neatline);
+
+        // Should return the native value.
+        $record->slug = 'slug';
+        $this->assertEquals($record->getSlug(), 'slug');
+
+        // Should return empty string.
+        $record->slug = null;
+        $this->assertEquals($record->getSlug(), '');
+
+    }
+
+    /**
      * The getDescription() method should return the record description attribute when it
      * is not null; if it is null, try to default in the DC value.
      *
