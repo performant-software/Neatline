@@ -196,11 +196,11 @@ class Neatline_EditorController extends Omeka_Controller_Action
 
         // Set text parameters.
         $record->setNotEmpty('title', $title);
-        $record->setNotEmpty('slug', $slug);
         $record->setNotEmpty('description', $description);
         $record->setNotEmpty('start_date', $startDate);
         $record->setNotEmpty('end_date', $endDate);
         $record->setGeocoverage($geoCoverage);
+        $record->setSlug($slug);
 
         // Set styles and percentages.
         $record->setStyle('vector_color', $vectorColor);

@@ -276,6 +276,37 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
     }
 
     /**
+     * setSlug() should not set value when slug is not unique.
+     *
+     * @return void.
+     */
+    public function testSetSlug()
+    {
+
+        // Create item.
+        $item = $this->helper->_createItem();
+
+        // Create exhibit.
+        $exhibit = $this->helper->_createNeatline();
+
+        // Create two records.
+        $record1 = new NeatlineDataRecord($item, $exhibit);
+        $record1->save();
+        $record2 = new NeatlineDataRecord($item, $exhibit);
+        $record2->slug = 'taken-slug';
+        $record2->save();
+
+        // Set duplicate slug.
+        $record1->setSlug('taken-slug');
+        $this->assertNull($record1->slug);
+
+        // Set unique slug.
+        $record1->setSlug('new-slug');
+        $this->assertEquals($record1->slug, 'new-slug');
+
+    }
+
+    /**
      * The time and space status trackers can only take native boolean
      * values as input parameters. The setStatus() method should check
      * to make sure that the input is boolean and set the integer value.

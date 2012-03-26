@@ -204,10 +204,14 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
     public function testSlugIsUnique()
     {
 
-        // Create item, exhibit, and record.
+        // Create item.
         $item = $this->helper->_createItem();
+
+        // Create two exhibits.
         $exhibit1 = $this->helper->_createNeatline();
         $exhibit2 = $this->helper->_createNeatline();
+
+        // Create two records.
         $record1 = new NeatlineDataRecord($item, $exhibit1);
         $record1->slug = 'test-slug';
         $record1->save();

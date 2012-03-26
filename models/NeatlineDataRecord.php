@@ -278,6 +278,26 @@ class NeatlineDataRecord extends Omeka_record
     }
 
     /**
+     * Set the slug if it is unique.
+     *
+     * @param boolean $slug The slug.
+     *
+     * @return void.
+     */
+    public function setSlug($slug)
+    {
+
+        // Get records table.
+        $_recordsTable = $this->getTable('NeatlineDataRecord');
+
+        // Set the record value if it is unique.
+        if ($_recordsTable->slugIsUnique($this, $slug)) {
+            $this->slug = $slug;
+        }
+
+    }
+
+    /**
      * Set the space_active or time_active attributes. Reject non-
      * boolean parameters.
      *
