@@ -274,8 +274,8 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
      */
     public function slugIsUnique($exhibit, $slug)
     {
-
-
+        return $this->getRecordByExhibitAndSlug($exhibit, $slug) ?
+            false : true;
     }
 
 

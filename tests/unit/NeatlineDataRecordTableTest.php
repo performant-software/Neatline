@@ -196,6 +196,40 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
     }
 
     /**
+     * slugIsUnique() should false when there is another record in the exhibit
+     * with the slug, true when there is not.
+     *
+     * @return void.
+     */
+    public function testSlugIsUnique()
+    {
+
+        // Create item, exhibit, and record.
+        $item = $this->helper->_createItem();
+        $exhibit1 = $this->helper->_createNeatline();
+        $exhibit2 = $this->helper->_createNeatline();
+        $record1 = new NeatlineDataRecord($item, $exhibit1);
+        $record1->slug = 'test-slug';
+        $record1->save();
+        $record2 = new NeatlineDataRecord($item, $exhibit2);
+        $record2->slug = 'another-slug';
+        $record2->save();
+
+        // False when a record already exists.
+        $this->assertFalse(
+            $this->_recordsTable->slugIsUnique($exhibit1, 'test-slug'));
+
+        // False when a record already exists.
+        $this->assertTrue(
+            $this->_recordsTable->slugIsUnique($exhibit2, 'test-slug'));
+
+        // True when the slug is unreserved.
+        $this->assertTrue(
+            $this->_recordsTable->slugIsUnique($exhibit2, 'available-slug'));
+
+    }
+
+    /**
      * saveRecordStatus() should create a new record when there when there
      * is no existing record.
      *
