@@ -699,6 +699,8 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
         // Populate map-relevant attributes.
         $record1->title = 'Item 1 Title';
         $record2->title = 'Item 2 Title';
+        $record1->slug = 'slug-1';
+        $record2->slug = 'slug-2';
         $record1->vector_color = '#ffffff';
         $record2->vector_color = '#000000';
         $record1->stroke_color = '#ffffff';
@@ -731,6 +733,7 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
         $this->assertContains('"id":' . $record1->id, $json);
         $this->assertContains('"item_id":' . $item1->id, $json);
         $this->assertContains('"title":"Item 1 Title"', $json);
+        $this->assertContains('"slug":"slug-1"', $json);
         $this->assertContains('"vector_color":"#ffffff"', $json);
         $this->assertContains('"stroke_color":"#ffffff"', $json);
         $this->assertContains('"highlight_color":"#ffffff"', $json);
@@ -744,6 +747,7 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
         $this->assertContains('"id":' . $record2->id, $json);
         $this->assertContains('"item_id":' . $item2->id, $json);
         $this->assertContains('"title":"Item 1 Title"', $json);
+        $this->assertContains('"slug":"slug-2"', $json);
         $this->assertContains('"vector_color":"#000000"', $json);
         $this->assertContains('"highlight_color":"#000000"', $json);
         $this->assertContains('"vector_opacity":40', $json);
@@ -791,6 +795,7 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
         $this->assertContains('"id":' . $record1->id, $json);
         $this->assertContains('"item_id":' . $item1->id, $json);
         $this->assertContains('"title":"Item 1 Title"', $json);
+        $this->assertContains('"slug":""', $json);
         $this->assertContains('"vector_color":null', $json);
         $this->assertContains('"vector_opacity":null', $json);
         $this->assertContains('"stroke_opacity":null', $json);
@@ -803,6 +808,7 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
         $this->assertContains('"id":' . $record2->id, $json);
         $this->assertContains('"item_id":' . $item2->id, $json);
         $this->assertContains('"title":"Item 1 Title"', $json);
+        $this->assertContains('"slug":""', $json);
         $this->assertContains('"vector_color":null', $json);
         $this->assertContains('"vector_opacity":null', $json);
         $this->assertContains('"stroke_opacity":null', $json);
@@ -849,6 +855,7 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
         $this->assertContains('"id":' . $record->id, $json);
         $this->assertContains('"item_id":' . $item->id, $json);
         $this->assertContains('"title":"Title"', $json);
+        $this->assertContains('"slug":""', $json);
         $this->assertContains('"vector_opacity":null', $json);
         $this->assertContains('"stroke_color":null', $json);
         $this->assertContains('"point_radius":null', $json);
@@ -940,6 +947,8 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
         // Populate map-relevant attributes.
         $record1->title = 'Item 1 Title';
         $record2->title = 'Item 2 Title';
+        $record1->slug = 'slug-1';
+        $record2->slug = 'slug-2';
         $record1->description = 'Item 1 description.';
         $record2->description = 'Item 2 description.';
         $record1->start_date = '1564-04-26 14:39:22';
@@ -978,6 +987,11 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
 
         $this->assertContains(
             '"title":"' . $record1->title . '"',
+            $json
+        );
+
+        $this->assertContains(
+            '"slug":"' . $record1->slug . '"',
             $json
         );
 
@@ -1028,6 +1042,11 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
 
         $this->assertContains(
             '"title":"' . $record2->title . '"',
+            $json
+        );
+
+        $this->assertContains(
+            '"slug":"' . $record2->slug . '"',
             $json
         );
 

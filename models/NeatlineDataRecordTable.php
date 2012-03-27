@@ -133,10 +133,12 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
     public function getRecordByExhibitAndSlug($exhibit, $slug)
     {
 
-        return $this->fetchObject(
+        $record = $this->fetchObject(
             $this->getSelect()->where('exhibit_id = ' . $exhibit->id
                 . ' AND slug = "' . $slug . '"')
         );
+
+        return $record ? $record : false;
 
     }
 
@@ -320,7 +322,7 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
                         'id' =>                 $record->id,
                         'item_id' =>            $record->item_id,
                         'title' =>              $record->getTitle(),
-                        // 'slug' =>                   $record->getSlug(),
+                        'slug' =>                   $record->getSlug(),
                         'vector_color' =>       $record->getStyle('vector_color'),
                         'stroke_color' =>       $record->getStyle('stroke_color'),
                         'highlight_color' =>    $record->getStyle('highlight_color'),
@@ -378,7 +380,7 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
 
                 $eventArray = array(
                     'eventID' =>                $record->id,
-                    // 'slug' =>                   $record->getSlug(),
+                    'slug' =>                   $record->getSlug(),
                     'title' =>                  trim($record->getTitle()),
                     'description' =>            $record->getDescription(),
                     'color' =>                  $record->getStyle('vector_color'),
