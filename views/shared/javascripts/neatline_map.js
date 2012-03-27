@@ -479,8 +479,15 @@
                 eventListeners: {
 
                     featurehighlighted: function(e) {
-                        var record = self._db({ layerid: e.feature.layer.id }).first();
+
+                        // Get record.
+                        var record = self._db({
+                            layerid: e.feature.layer.id
+                        }).first();
+
+                        // Show title tip.
                         self._showTitleTip(record);
+
                     },
 
                     featureunhighlighted: function(e) {
@@ -499,8 +506,12 @@
                 // When the feature is selected.
                 onSelect: function(feature) {
 
-                    // Get the record for the layer.
-                    var record = self._db({ layerid: feature.layer.id }).first();
+                    // Get the record.
+                    var record = self._db({
+                        layerid: feature.layer.id
+                    }).first();
+
+                    // Capture clicked feature.
                     self._clickedFeature = feature;
 
                     // Trigger out to the deployment code.

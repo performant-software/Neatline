@@ -58,6 +58,7 @@
             this.listContainer =            $('#items-container');
 
             // Trackers.
+            this._db =                      TAFFY();
             this._idToItem =                {};
             this._slugToItem =              {};
             this._idToOffset =              {};
@@ -139,14 +140,18 @@
                 // Get item id and description.
                 var item = $(item);
                 var description = item.next('li.item-description');
-                var recordid = item.attr('recordid');
+                var recordid = parseInt(item.attr('recordid'), 10);
                 var slug = item.attr('slug');
 
-                // Populate trackers.
-                self._idToItem[recordid] = item;
-                if (slug !== '') { self._slugToItem[slug] = item; }
-                self._idOrdering.push(parseInt(recordid, 10));
+                // Set expanded tracker.
                 item.data('expanded', false);
+
+                // Populate database.
+                self._db.insert({
+                    recordid: recordid,
+                    slug: slug,
+                    markup: item
+                });
 
                 // Unbind all events.
                 item.add(description).unbind();
@@ -424,8 +429,8 @@
          */
         scrollToItem: function(id) {
 
-            var item = this._idToItem[id];
-            this._showEvent(item);
+            var record = this._db({ recordid: parseInt(id, 10) }).first();
+            this._showRecord(record);
 
         },
 
@@ -438,35 +443,33 @@
          */
         scrollToItemBySlug: function(slug) {
 
-            var item = this._slugToItem[slug];
-            this._showEvent(item);
+            var record = this._db({ slug: slug }).first();
+            this._showRecord(record);
 
         },
 
         /*
-         * Scroll to an event.
+         * Scroll to a record.
          *
          * - param DOM item: The item to scroll to.
          *
          * - return void.
          */
-        _showEvent: function(slug) {
-
-            // Fetch the markup and get components.
-            var item = this._slugToItem[slug];
+        _showRecord: function(record) {
 
             // If the item is present in the squence tray.
-            if (!_.isUndefined(item)) {
+            if (record) {
 
                 // If another item is expanded, hide.
                 if (this._currentItemId !== null &&
-                    this._currentItemId !== id) {
+                    this._currentItemId !== record.recordid) {
                         this.__hideCurrentDescription();
                         this._currentItem.data('expanded', false);
                 }
 
                 // Get the new scrollTop.
-                var scrollTop = item.position().top + this.element.scrollTop();
+                var scrollTop = record.markup.position().top +
+                    this.element.scrollTop();
 
                 // If the new scroll is greater than the total height,
                 // scroll exactly to the bottom.
@@ -480,7 +483,7 @@
                 }, 200);
 
                 // Expand the description.
-                this.expandDescription(item);
+                this.expandDescription(record.markup);
 
             }
 
