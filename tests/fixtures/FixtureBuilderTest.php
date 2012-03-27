@@ -305,6 +305,7 @@ class Neatline_FixtureBuilderTest extends Omeka_Test_AppTestCase
         // Mock record.
         $record = new NeatlineDataRecord();
         $record->title = 'Test Title';
+        $record->slug = 'test-slug';
         $record->description = 'Test description.';
         $record->start_date = 'June 25, 1987';
         $record->end_date = 'June 26, 1987';
