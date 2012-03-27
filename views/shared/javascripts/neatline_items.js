@@ -58,7 +58,6 @@
             this.listContainer =            $('#items-container');
 
             // Trackers.
-            this._db =                      TAFFY();
             this._idToItem =                {};
             this._slugToItem =              {};
             this._idToOffset =              {};
@@ -133,6 +132,9 @@
 
             // Get the new items.
             this.items = this.listContainer.find('.item-title');
+
+            // Initialize the database.
+            this._db = TAFFY();
 
             // Bind events to the item rows.
             $.each(this.items, function(i, item) {
@@ -521,6 +523,8 @@
          * - return void.
          */
         __activateTitle: function(item) {
+
+            console.log(item);
 
             if (!item.data('expanded')) {
                 item.stop().animate({

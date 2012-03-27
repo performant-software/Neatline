@@ -309,7 +309,7 @@
             var self = this;
 
             // If there is no extant data record, abort.
-            if (_.isUndefined(this.record.data)) {
+            if (_.isUndefined(this.record)) {
                 return;
             }
 
