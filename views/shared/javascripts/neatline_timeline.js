@@ -36,7 +36,6 @@
             this.zoomOut =                  this.zoomContainer.find('.zoom-out');
 
             // Tracker array for tape elements.
-            this._db =                  TAFFY();
             this._idToTapeElements =    {};
             this._zoomSteps =           this.getZoomIndexArray();
             this._currentZoomStep =     Neatline.timelineZoom;

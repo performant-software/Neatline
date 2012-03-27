@@ -143,8 +143,10 @@
                 var recordid = parseInt(item.attr('recordid'), 10);
                 var slug = item.attr('slug');
 
-                // Set expanded tracker.
+
+                // Set expanded tracker, push onto ordering.
                 item.data('expanded', false);
+                self._idOrdering.push(recordid);
 
                 // Populate database.
                 self._db.insert({
@@ -267,7 +269,7 @@
                 case 'left':
 
                     // If there is no set current id, scroll to the last item.
-                    if (this._currentItemId === null) {
+                    if (_.isNull(this._currentItemId)) {
                         return this._idOrdering[this._idOrdering.length - 1];
                     }
 
@@ -293,7 +295,7 @@
                 case 'right':
 
                     // If there is no set current id, scroll to the first item.
-                    if (this._currentItemId === null) {
+                    if (_.isNull(this._currentItemId)) {
                         return this._idOrdering[0];
                     }
 
