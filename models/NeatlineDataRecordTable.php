@@ -133,12 +133,10 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
     public function getRecordByExhibitAndSlug($exhibit, $slug)
     {
 
-        $record = $this->fetchObject(
+        return $this->fetchObject(
             $this->getSelect()->where('exhibit_id = ' . $exhibit->id
                 . ' AND slug = "' . $slug . '"')
         );
-
-        return $record ? $record : false;
 
     }
 
@@ -272,10 +270,20 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
      *
      * @return boolean True if the slug is unique.
      */
-    public function slugIsUnique($exhibit, $slug)
+    public function slugIsAvailable($record, $exhibit, $slug)
     {
-        return $this->getRecordByExhibitAndSlug($exhibit, $slug) ?
+
+        // Always allow the empty string.
+        if ($slug === '') { return true; }
+
+        // Try to get out an existing record with the slug.
+        $retrievedRecord = $this->getRecordByExhibitAndSlug($exhibit, $slug);
+
+        // If there is an existing record and the record is not the same
+        // as the passed record, return false; otherwise true.
+        return ($retrievedRecord && $record->id !== $retrievedRecord->id) ?
             false : true;
+
     }
 
 

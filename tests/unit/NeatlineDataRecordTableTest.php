@@ -196,40 +196,80 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
     }
 
     /**
-     * slugIsUnique() should false when there is another record in the exhibit
-     * with the slug, true when there is not.
+     * slugIsAvailable() should always return true when an empty string is passed.
      *
      * @return void.
      */
-    public function testSlugIsUnique()
+    public function testSlugIsAvailableWithEmptyString()
     {
 
-        // Create item.
+        // Create item and exhibit.
         $item = $this->helper->_createItem();
-
-        // Create two exhibits.
-        $exhibit1 = $this->helper->_createNeatline();
-        $exhibit2 = $this->helper->_createNeatline();
+        $exhibit = $this->helper->_createNeatline();
 
         // Create two records.
-        $record1 = new NeatlineDataRecord($item, $exhibit1);
+        $record1 = new NeatlineDataRecord($item, $exhibit);
         $record1->slug = 'test-slug';
         $record1->save();
-        $record2 = new NeatlineDataRecord($item, $exhibit2);
+        $record2 = new NeatlineDataRecord($item, $exhibit);
+        $record2->slug = '';
+        $record2->save();
+
+        $this->assertTrue(
+            $this->_recordsTable->slugIsAvailable($record1, $exhibit, '')
+        );
+
+    }
+
+    /**
+     * slugIsAvailable() should return false when there is a non-self duplicate.
+     *
+     * @return void.
+     */
+    public function testSlugIsAvailableWithNonSelfDuplicate()
+    {
+
+        // Create item and exhibit.
+        $item = $this->helper->_createItem();
+        $exhibit = $this->helper->_createNeatline();
+
+        // Create two records.
+        $record1 = new NeatlineDataRecord($item, $exhibit);
+        $record1->slug = 'test-slug';
+        $record1->save();
+        $record2 = new NeatlineDataRecord($item, $exhibit);
         $record2->slug = 'another-slug';
         $record2->save();
 
-        // False when a record already exists.
         $this->assertFalse(
-            $this->_recordsTable->slugIsUnique($exhibit1, 'test-slug'));
+            $this->_recordsTable->slugIsAvailable($record1, $exhibit, 'another-slug')
+        );
 
-        // False when a record already exists.
-        $this->assertTrue(
-            $this->_recordsTable->slugIsUnique($exhibit2, 'test-slug'));
+    }
 
-        // True when the slug is unreserved.
+    /**
+     * slugIsAvailable() should return true when the duplicate is self.
+     *
+     * @return void.
+     */
+    public function testSlugIsAvailableWithSelfDuplicate()
+    {
+
+        // Create item and exhibit.
+        $item = $this->helper->_createItem();
+        $exhibit = $this->helper->_createNeatline();
+
+        // Create two records.
+        $record1 = new NeatlineDataRecord($item, $exhibit);
+        $record1->slug = 'test-slug';
+        $record1->save();
+        $record2 = new NeatlineDataRecord($item, $exhibit);
+        $record2->slug = 'another-slug';
+        $record2->save();
+
         $this->assertTrue(
-            $this->_recordsTable->slugIsUnique($exhibit2, 'available-slug'));
+            $this->_recordsTable->slugIsAvailable($record1, $exhibit, 'test-slug')
+        );
 
     }
 

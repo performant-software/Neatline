@@ -291,7 +291,7 @@ class NeatlineDataRecord extends Omeka_record
         $_recordsTable = $this->getTable('NeatlineDataRecord');
 
         // Set the record value if it is unique.
-        if ($_recordsTable->slugIsUnique($this, $slug)) {
+        if ($_recordsTable->slugIsAvailable($this, $this->getExhibit(), $slug)) {
             $this->slug = $slug;
         }
 
