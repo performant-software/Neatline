@@ -470,6 +470,17 @@
         },
 
         /*
+         * Focus the map for a given record identified by its slug.
+         *
+         * - param integer slug: The record slug.
+         *
+         * - return void.
+         */
+        zoomMapToItemVectorsBySlug: function(slug) {
+            this.map.neatlinemap('zoomToItemVectorsBySlug', slug);
+        },
+
+        /*
          * Focus the timeline for a given record.
          *
          * - param integer id: The record id.
@@ -481,6 +492,17 @@
         },
 
         /*
+         * Focus the timeline for a given record identified by its slug.
+         *
+         * - param string slug: The record slug.
+         *
+         * - return void.
+         */
+        zoomTimelineToEventBySlug: function(id) {
+            this.timeline.neatlinetimeline('zoomToEventBySlug', id);
+        },
+
+        /*
          * Focus the items tray for a given record.
          *
          * - param integer id: The record id.
@@ -489,6 +511,17 @@
          */
         showItemDescription: function(id) {
             this.items.neatlineitems('scrollToItem', id);
+        },
+
+        /*
+         * Focus the items tray for a given record identified by its slug.
+         *
+         * - param string slug: The record slug.
+         *
+         * - return void.
+         */
+        showItemDescriptionBySlug: function(id) {
+            this.items.neatlineitems('scrollToItemBySlug', id);
         },
 
         /*
