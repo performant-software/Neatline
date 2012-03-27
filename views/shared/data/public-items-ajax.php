@@ -29,7 +29,7 @@
 
     <?php foreach ($records as $record): ?>
 
-        <li class="item-title" recordid="<?php echo $record->id; ?>"><?php echo $record->getTitle(); ?></li>
+        <li class="item-title" recordid="<?php echo $record->id; ?>" slug="<?php echo $record->getSlug(); ?>"><?php echo $record->getTitle(); ?></li>
         <li class="item-description"><?php echo nl2br($record->getDescription()); ?></li>
 
     <?php endforeach; ?>
