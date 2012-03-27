@@ -327,6 +327,27 @@
         },
 
         /*
+         * Focus on the listing for the record with the passed slug.
+         *
+         * - param integer slug:      The slug of the record.
+         *
+         * - return void.
+         */
+        zoomToEventBySlug: function(slug) {
+
+            var self = this;
+
+            $.each(this.timeline._bands[0]._eventSource._events._idToEvent, function(i, event) {
+
+                if (event._obj.slug === slug) {
+                    self.timeline.getBand(0).setCenterVisibleDate(event._start);
+                }
+
+            });
+
+        },
+
+        /*
          * Get the current center date.
          *
          * - return string date             The center date.

@@ -59,6 +59,7 @@
 
             // Trackers.
             this._idToItem =                {};
+            this._slugToItem =              {};
             this._idToOffset =              {};
             this._currentItem =             null;
             this._currentItemId =           null;
@@ -139,9 +140,11 @@
                 var item = $(item);
                 var description = item.next('li.item-description');
                 var recordid = item.attr('recordid');
+                var slug = item.attr('slug');
 
                 // Populate trackers.
                 self._idToItem[recordid] = item;
+                if (slug !== '') { self._slugToItem[slug] = item; }
                 self._idOrdering.push(parseInt(recordid, 10));
                 item.data('expanded', false);
 
@@ -423,6 +426,49 @@
 
             // Fetch the markup and get components.
             var item = this._idToItem[id];
+
+            // If the item is present in the squence tray.
+            if (!_.isUndefined(item)) {
+
+                // If another item is expanded, hide.
+                if (this._currentItemId !== null &&
+                    this._currentItemId !== id) {
+                        this.__hideCurrentDescription();
+                        this._currentItem.data('expanded', false);
+                }
+
+                // Get the new scrollTop.
+                var scrollTop = item.position().top + this.element.scrollTop();
+
+                // If the new scroll is greater than the total height,
+                // scroll exactly to the bottom.
+                if (scrollTop > this.element[0].scrollHeight) {
+                    scrollTop = this.element[0].scrollHeight;
+                }
+
+                // Position at the top of the frame.
+                this.element.animate({
+                    'scrollTop': scrollTop + 1
+                }, 200);
+
+                // Expand the description.
+                this.expandDescription(item);
+
+            }
+
+        },
+
+        /*
+         * Vertical scroll to item by slug.
+         *
+         * - param integer slug: The slug of the item to scroll to.
+         *
+         * - return void.
+         */
+        scrollToItemBySlug: function(slug) {
+
+            // Fetch the markup and get components.
+            var item = this._slugToItem[slug];
 
             // If the item is present in the squence tray.
             if (!_.isUndefined(item)) {
