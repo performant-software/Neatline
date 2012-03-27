@@ -424,37 +424,8 @@
          */
         scrollToItem: function(id) {
 
-            // Fetch the markup and get components.
             var item = this._idToItem[id];
-
-            // If the item is present in the squence tray.
-            if (!_.isUndefined(item)) {
-
-                // If another item is expanded, hide.
-                if (this._currentItemId !== null &&
-                    this._currentItemId !== id) {
-                        this.__hideCurrentDescription();
-                        this._currentItem.data('expanded', false);
-                }
-
-                // Get the new scrollTop.
-                var scrollTop = item.position().top + this.element.scrollTop();
-
-                // If the new scroll is greater than the total height,
-                // scroll exactly to the bottom.
-                if (scrollTop > this.element[0].scrollHeight) {
-                    scrollTop = this.element[0].scrollHeight;
-                }
-
-                // Position at the top of the frame.
-                this.element.animate({
-                    'scrollTop': scrollTop + 1
-                }, 200);
-
-                // Expand the description.
-                this.expandDescription(item);
-
-            }
+            this._showEvent(item);
 
         },
 
@@ -466,6 +437,20 @@
          * - return void.
          */
         scrollToItemBySlug: function(slug) {
+
+            var item = this._slugToItem[slug];
+            this._showEvent(item);
+
+        },
+
+        /*
+         * Scroll to an event.
+         *
+         * - param DOM item: The item to scroll to.
+         *
+         * - return void.
+         */
+        _showEvent: function(slug) {
 
             // Fetch the markup and get components.
             var item = this._slugToItem[slug];

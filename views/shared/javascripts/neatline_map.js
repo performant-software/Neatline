@@ -583,24 +583,7 @@
 
             // Get the record out of the database.
             var record = this._db({ recordid: parseInt(id, 10) }).first();
-
-            console.log(record);
-
-            // If the record exists and there is a map feature.
-            if (record && record.layer.features.length > 0) {
-
-                // If there is item-specific data.
-                if (record.data.bounds !== null && record.data.zoom !== null) {
-                    this.map.zoomToExtent(new OpenLayers.Bounds.fromString(record.data.bounds));
-                    this.map.zoomTo(record.data.zoom);
-                }
-
-                // Otherwise, just fit the vectors in the viewport.
-                else {
-                    this.map.zoomToExtent(record.layer.getDataExtent());
-                }
-
-            }
+            this._showRecord(record);
 
         },
 
@@ -612,6 +595,14 @@
 
             // Get the record out of the database.
             var record = this._db({ slug: slug }).first();
+            this._showRecord(record);
+
+        },
+
+        /*
+         * Focus the map on the feature data for a given record.
+         */
+        _showRecord: function(record) {
 
             // If the record exists and there is a map feature.
             if (record && record.layer.features.length > 0) {
