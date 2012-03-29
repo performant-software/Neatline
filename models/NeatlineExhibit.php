@@ -41,6 +41,7 @@ class NeatlineExhibit extends Omeka_record
     // Foreign keys.
     public $map_id;
     public $image_id;
+    public $wms_id;
 
     // Layout parameters.
     public $top_element;
@@ -429,9 +430,19 @@ class NeatlineExhibit extends Omeka_record
         // Update the modified field.
         $this->setModified();
 
+        $notNull = 0;
+        foreach(array(
+            $this->map_id,
+            $this->image_id,
+            $this->wms_id
+        ) as $base) {
+            if (!is_null($base)) { $notNull++; }
+        }
+
         // If map_id is null or image_id is null.
-        if (is_null($this->map_id) || is_null($this->image_id)) {
+        if ($notNull <= 1) {
             parent::save();
+            return true;
         }
 
         else {

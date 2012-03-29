@@ -62,6 +62,8 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
         $exhibit->modified =                    $timestamp;
         $exhibit->query =                       'query';
         $exhibit->map_id =                      1;
+        $exhibit->image_id =                    1;
+        $exhibit->wms_id =                      1;
         $exhibit->top_element =                 'map';
         $exhibit->items_h_pos =                 'right';
         $exhibit->items_v_pos =                 'top';
@@ -83,7 +85,7 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
         $exhibit->default_stroke_width =        3;
         $exhibit->default_point_radius =        3;
         $exhibit->default_base_layer =          1;
-        $exhibit->save();
+        $exhibit->parentSave();
 
         // Re-get the exhibit object.
         $exhibit = $this->_exhibitsTable->find(1);
@@ -97,7 +99,8 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
         $this->assertEquals($exhibit->slug, 'slug');
         $this->assertEquals($exhibit->public, 1);
         $this->assertEquals($exhibit->map_id, 1);
-        $this->assertNull($exhibit->image_id, 1);
+        $this->assertEquals($exhibit->image_id, 1);
+        $this->assertEquals($exhibit->wms_id, 1);
         $this->assertEquals($exhibit->top_element, 'map');
         $this->assertEquals($exhibit->items_h_pos, 'right');
         $this->assertEquals($exhibit->items_v_pos, 'top');
@@ -429,8 +432,9 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
     }
 
     /**
-     * The save() method should commit the record if there is a map id and not
-     * an image id or an image id and not a map id.
+     * The save() method should commit the record if there is just one of (a)
+     * a map id (b) an image id or (c) a wms id, or if none of the base object
+     * keys are populated.
      *
      * @return void.
      */
@@ -440,27 +444,44 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
         // Create exhibit.
         $exhibit = $this->helper->_createNeatline();
 
-        // Map id, no image id.
+        // No map id, no image id, no wms id.
+        $exhibit->map_id = null;
+        $exhibit->image_id = null;
+        $exhibit->wms_id = null;
+        $this->assertTrue($exhibit->save());
+
+        // Map id, no image id, no wms id.
         $exhibit->map_id = 1;
         $exhibit->image_id = null;
-        $exhibit->save();
+        $exhibit->wms_id = null;
+        $this->assertTrue($exhibit->save());
 
         // Should save.
         $this->assertEquals($exhibit->map_id, 1);
 
-        // Image id, no map id.
+        // Image id, no map id, no wms id.
         $exhibit->map_id = null;
         $exhibit->image_id = 1;
-        $exhibit->save();
+        $exhibit->wms_id = null;
+        $this->assertTrue($exhibit->save());
 
         // Should save.
         $this->assertEquals($exhibit->image_id, 1);
 
+        // Wms id, no map id, no image id.
+        $exhibit->map_id = null;
+        $exhibit->image_id = null;
+        $exhibit->wms_id = 1;
+        $this->assertTrue($exhibit->save());
+
+        // Should save.
+        $this->assertEquals($exhibit->wms_id, 1);
+
     }
 
     /**
-     * The save() method should not commit the record if there is a map id
-     * and an image id set on the row.
+     * The save() method should not commit the record if there is more than one
+     * base object key (map, image, wms) set on the record.
      *
      * @return void.
      */
@@ -469,10 +490,29 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
 
         // Create exhibit.
         $exhibit = $this->helper->_createNeatline();
+
+        // Map and image.
         $exhibit->map_id = 1;
         $exhibit->image_id = 1;
+        $exhibit->wms_id = null;
+        $this->assertFalse($exhibit->save());
 
-        // Should not save.
+        // Map and wms.
+        $exhibit->map_id = 1;
+        $exhibit->image_id = null;
+        $exhibit->wms_id = 1;
+        $this->assertFalse($exhibit->save());
+
+        // Image and wms.
+        $exhibit->map_id = null;
+        $exhibit->image_id = 1;
+        $exhibit->wms_id = 1;
+        $this->assertFalse($exhibit->save());
+
+        // Map, image, and wms.
+        $exhibit->map_id = 1;
+        $exhibit->image_id = 1;
+        $exhibit->wms_id = 1;
         $this->assertFalse($exhibit->save());
 
     }
