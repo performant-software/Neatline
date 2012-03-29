@@ -24,13 +24,13 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache 2 License
  */
 
-class Neatline_Validate_MapOrImage extends Zend_Validate_Abstract
+class Neatline_Validate_ExhibitBase extends Zend_Validate_Abstract
 {
 
-    const MAP_OR_IMAGE = 'mapOrImage';
+    const EXHIBIT_BASE = 'exhibitBase';
 
     protected $_messageTemplates = array(
-        self::MAP_OR_IMAGE => 'Choose a map or an image, or neither, but not both.'
+        self::EXHIBIT_BASE => 'Can\'t select more than one base option.'
     );
 
     /**
