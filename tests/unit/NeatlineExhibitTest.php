@@ -268,6 +268,43 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
     }
 
     /**
+     * The getWms() method should return an exhibit's WMS record.
+     *
+     * @return void.
+     */
+    public function testGetWms()
+    {
+
+        // Create an exhibit and map.
+        $exhibit = $this->helper->_createNeatline();
+        $wms = $this->helper->_createWms();
+        $exhibit->saveForm('Title', 'slug', 1, 5, 'none', 'none', $wms->id);
+
+        // Get the wms and check.
+        $retrievedWms = $exhibit->getWms();
+        $this->assertEquals($wms->id, $retrievedWms->id);
+
+    }
+
+    /**
+     * When there is no wms, getWms() method should return null.
+     *
+     * @return void.
+     */
+    public function testGetWmsWithNullKey()
+    {
+
+        // Create an exhibit and map.
+        $exhibit = $this->helper->_createNeatline();
+        $exhibit->saveForm('Title', 'slug', 1, 5, 'none', 'none', 'none');
+
+        // Get the wms and check.
+        $retrievedWms = $exhibit->getWms();
+        $this->assertNull($retrievedWms);
+
+    }
+
+    /**
      * When there is no map, getMap() method should return null.
      *
      * @return void.

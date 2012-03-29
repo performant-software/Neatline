@@ -47,9 +47,10 @@ class NeatlineRenderer
     public function render()
     {
 
-        // Try to get map and image.
+        // Try to get map, image, and wms.
         $map = $this->exhibit->getMap();
         $image = $this->exhibit->getImage();
+        $wms = $this->exhibit->getWms();
 
         // Shell out the base array.
         $params = array(
@@ -81,6 +82,11 @@ class NeatlineRenderer
         // If there is a Geoserver map, push on attributes.
         if ($map) {
             $params['map'] = new GeoserverMap_Map($map);
+        }
+
+        // If there is a WMS, push on attributes.
+        else if ($wms) {
+            $params['wms'] = new GeoserverMap_WMS($wms);
         }
 
         // If there is a static image, push on attributes.

@@ -151,6 +151,26 @@ class Neatline_Test_AppTestCase extends Omeka_Test_AppTestCase
     }
 
     /**
+     * Create a WMS.
+     *
+     * @return Omeka_record $item The WMS.
+     */
+    public function _createWms($item = null)
+    {
+
+        // Create item, if none is passed.
+        if (is_null($item)) {
+            $item = $this->_createItem();
+        }
+
+        $wms = new NeatlineWms($item);
+        $wms->save();
+
+        return $wms;
+
+    }
+
+    /**
      * Create a data record.
      *
      * @return Omeka_record $item The record.

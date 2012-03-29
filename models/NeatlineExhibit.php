@@ -174,6 +174,22 @@ class NeatlineExhibit extends Omeka_record
     }
 
     /**
+     * Fetch the parent WMS.
+     *
+     * @return Omeka_record The wms.
+     */
+    public function getWms()
+    {
+
+        if (!is_null($this->wms_id)) {
+            return $this->getTable('NeatlineWms')->find($this->wms_id);
+        }
+
+        return null;
+
+    }
+
+    /**
      * Save default viewport positions.
      *
      * @param string $mapExtent The bounding box for the map.
