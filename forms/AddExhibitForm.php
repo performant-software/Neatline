@@ -42,7 +42,6 @@ class AddExhibitForm extends Omeka_Form
         $_layers = $_db->getTable('NeatlineBaseLayer');
         $_maps = $_db->getTable('NeatlineMapsMap');
         $_exhibits = $_db->getTable('NeatlineExhibit');
-        $_wms = $_db->getTable('NeatlineWms');
 
         $this->setMethod('post');
         $this->setAttrib('id', 'add-exhibit-form');
@@ -109,34 +108,15 @@ class AddExhibitForm extends Omeka_Form
         // Map.
         if (plugin_is_active('NeatlineMaps')) {
             $this->addElement('select', 'map', array(
-                'label'         => '(Optional): Neatline Map',
-                'description'   => 'Select a Geoserver map to use as the exhibit foundation. An exhibit can use a Geoserver map created by the Neatline Maps plugin, a Geoserver web map service created by the Neatline WMS plugin, or a static image, but not more than one base option. To just use a real-geography base layers, leave both fields blank.',
+                'label'         => '(Optional): Geoserver Map',
+                'description'   => 'Select a Geoserver map to use as the exhibit foundation. An exhibit can use a Geoserver map or a static image, but not both. To just use a real-geography base layers, leave both fields blank.',
                 'attribs'       => array('style' => 'width: 230px'),
                 'multiOptions'  => $_maps->getMapsForSelect(),
                 'validators'    => array(
-                    array('validator' => 'ExhibitBase', 'breakChainOnFailure' => true, 'options' =>
+                    array('validator' => 'MapOrImage', 'breakChainOnFailure' => true, 'options' =>
                         array(
                             'messages' => array(
-                                Neatline_Validate_ExhibitBase::EXHIBIT_BASE => 'Can\'t use both a map and an image.'
-                            )
-                        )
-                    )
-                )
-            ));
-        }
-
-        // WMS.
-        if (plugin_is_active('NeatlineWms')) {
-            $this->addElement('select', 'wms', array(
-                'label'         => '(Optional): Web Map Service',
-                'description'   => 'Select a web map service.',
-                'attribs'       => array('style' => 'width: 230px'),
-                'multiOptions'  => $_wms->getServicesForSelect(),
-                'validators'    => array(
-                    array('validator' => 'ExhibitBase', 'breakChainOnFailure' => true, 'options' =>
-                        array(
-                            'messages' => array(
-                                Neatline_Validate_ExhibitBase::EXHIBIT_BASE => 'Can\'t use both a map and an image.'
+                                Neatline_Validate_MapOrImage::MAP_OR_IMAGE => 'Can\'t use both a map and an image.'
                             )
                         )
                     )
@@ -151,10 +131,10 @@ class AddExhibitForm extends Omeka_Form
             'attribs'       => array('style' => 'width: 230px'),
             'multiOptions'  => $this->getImagesForSelect(),
             'validators'    => array(
-                array('validator' => 'ExhibitBase', 'breakChainOnFailure' => true, 'options' =>
+                array('validator' => 'MapOrImage', 'breakChainOnFailure' => true, 'options' =>
                     array(
                         'messages' => array(
-                            Neatline_Validate_ExhibitBase::EXHIBIT_BASE => 'Can\'t use both a map and an image.'
+                            Neatline_Validate_MapOrImage::MAP_OR_IMAGE => 'Can\'t use both a map and an image.'
                         )
                     )
                 )
@@ -185,7 +165,6 @@ class AddExhibitForm extends Omeka_Form
         $this->addDisplayGroup(array(
             'baselayer',
             'map',
-            'wms',
             'image'
         ), 'baselayer_info');
 

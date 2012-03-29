@@ -45,7 +45,7 @@ require_once NEATLINE_PLUGIN_DIR . '/helpers/NeatlineFunctions.php';
 require_once NEATLINE_PLUGIN_DIR . '/helpers/NeatlineRenderer.php';
 require_once NEATLINE_PLUGIN_DIR . '/forms/AddExhibitForm.php';
 require_once NEATLINE_PLUGIN_DIR . '/forms/EditExhibitForm.php';
-require_once NEATLINE_PLUGIN_DIR . '/forms/Validate/ExhibitBase.php';
+require_once NEATLINE_PLUGIN_DIR . '/forms/Validate/MapOrImage.php';
 
 // }}}
 
