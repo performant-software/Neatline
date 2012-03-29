@@ -43,7 +43,16 @@ class Neatline_Validate_MapOrImage extends Zend_Validate_Abstract
 
         $this->_setValue($value);
 
-        if ($context['map'] !== 'none' && $context['image'] !== 'none') {
+        $notNone = 0;
+        foreach (array(
+            $context['map'],
+            $context['image'],
+            $context['wms']
+        ) as $key => $base) {
+            if ($base !== 'none') { $notNone++; }
+        }
+
+        if ($notNone > 1) {
             $this->_error(self::MAP_OR_IMAGE);
             return false;
         }

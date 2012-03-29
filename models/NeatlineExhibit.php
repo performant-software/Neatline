@@ -103,7 +103,8 @@ class NeatlineExhibit extends Omeka_record
         $public,
         $baseLayer,
         $map,
-        $image
+        $image,
+        $wms
     )
     {
 
@@ -121,6 +122,7 @@ class NeatlineExhibit extends Omeka_record
         $this->is_items =               1;
         $this->map_id =                 null;
         $this->image_id =               null;
+        $this->wms_id =                 null;
 
         // Check for map.
         if (is_numeric($map)) {
@@ -130,6 +132,11 @@ class NeatlineExhibit extends Omeka_record
         // Check for image.
         if (is_numeric($image)) {
             $this->image_id = $image;
+        }
+
+        // Check for wms.
+        if (is_numeric($wms)) {
+            $this->wms_id = $wms;
         }
 
     }
