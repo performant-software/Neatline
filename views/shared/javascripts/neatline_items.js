@@ -524,8 +524,6 @@
          */
         __activateTitle: function(item) {
 
-            console.log(item);
-
             if (!item.data('expanded')) {
                 item.stop().animate({
                     'font-size': '+=5px',
