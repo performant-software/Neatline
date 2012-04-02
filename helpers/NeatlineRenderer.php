@@ -86,7 +86,7 @@ class NeatlineRenderer
 
         // If there is a WMS, push on attributes.
         else if ($wms) {
-            $params['wms'] = new GeoserverMap_WMS($wms);
+            $params['map'] = new GeoserverMap_WMS($wms);
         }
 
         // If there is a static image, push on attributes.

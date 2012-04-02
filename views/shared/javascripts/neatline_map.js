@@ -79,7 +79,7 @@
             this.requestData =              null;
 
             // Construct WMS-based map.
-            if (Neatline.record.map_id) {
+            if (Neatline.record.map_id || Neatline.record.wms_id) {
                 this._instantiateGeoserverMap();
             }
 
