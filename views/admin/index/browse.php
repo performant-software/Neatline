@@ -69,7 +69,8 @@ head(array('content_class' => 'neatline'));
             </td>
             <td>
                 <div class="public-exhibit-links">
-                    <a href="<?php echo public_uri('neatline-exhibits/show/fullscreen/' . $neatline->slug); ?>" target="_blank">Fullscreen</a> |
+                    <a href="<?php echo public_uri('neatline-exhibits/show/' . $neatline->slug); ?>" target="_blank">In-Theme</a><br />
+                    <a href="<?php echo public_uri('neatline-exhibits/show/fullscreen/' . $neatline->slug); ?>" target="_blank">Fullscreen</a><br />
                     <a href="<?php echo public_uri('neatline-exhibits/show/embed/' . $neatline->slug); ?>" target="_blank">Embed</a>
                 </div>
             </td>
