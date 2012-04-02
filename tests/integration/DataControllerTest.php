@@ -79,6 +79,8 @@ class Neatline_DataControllerTest extends Omeka_Test_AppTestCase
         // Populate map-relevant attributes.
         $record1->title = 'Item 1 Title';
         $record2->title = 'Item 2 Title';
+        $record1->slug = 'slug-1';
+        $record2->slug = 'slug-2';
         $record1->vector_color = '#ffffff';
         $record2->vector_color = '#000000';
         $record1->vector_opacity = 60;
@@ -110,6 +112,7 @@ class Neatline_DataControllerTest extends Omeka_Test_AppTestCase
         $this->assertContains('"id":' . $record1->id, $response);
         $this->assertContains('"item_id":' . $item1->id, $response);
         $this->assertContains('"title":"Item 1 Title"', $response);
+        $this->assertContains('"slug":"slug-1"', $response);
         $this->assertContains('"vector_color":"#ffffff"', $response);
         $this->assertContains('"vector_opacity":60', $response);
         $this->assertContains('"stroke_opacity":60', $response);
@@ -122,6 +125,7 @@ class Neatline_DataControllerTest extends Omeka_Test_AppTestCase
         $this->assertContains('"id":' . $record2->id, $response);
         $this->assertContains('"item_id":' . $item2->id, $response);
         $this->assertContains('"title":"Item 1 Title"', $response);
+        $this->assertContains('"slug":"slug-2"', $response);
         $this->assertContains('"vector_color":"#000000"', $response);
         $this->assertContains('"vector_opacity":40', $response);
         $this->assertContains('"stroke_opacity":40', $response);
@@ -155,6 +159,8 @@ class Neatline_DataControllerTest extends Omeka_Test_AppTestCase
         // Populate map-relevant attributes.
         $record1->title = 'Item 1 Title';
         $record2->title = 'Item 2 Title';
+        $record1->slug = 'slug-1';
+        $record2->slug = 'slug-2';
         $record1->description = 'Item 1 description.';
         $record2->description = 'Item 2 description.';
         $record1->start_date = '1564-04-26 14:39:22';
@@ -194,6 +200,11 @@ class Neatline_DataControllerTest extends Omeka_Test_AppTestCase
 
         $this->assertContains(
             '"title":"' . $record1->title . '"',
+            $response
+        );
+
+        $this->assertContains(
+            '"slug":"' . $record1->slug . '"',
             $response
         );
 
@@ -248,6 +259,11 @@ class Neatline_DataControllerTest extends Omeka_Test_AppTestCase
         );
 
         $this->assertContains(
+            '"slug":"' . $record2->slug . '"',
+            $response
+        );
+
+        $this->assertContains(
             '"description":"' . $record2->description . '"',
             $response
         );
@@ -284,6 +300,7 @@ class Neatline_DataControllerTest extends Omeka_Test_AppTestCase
 
         // Populate items-relevant attributes.
         $record->title = 'Item 1 Title';
+        $record->slug = 'slug-1';
         $record->description = 'Item 1 description.';
         $record->space_active = 1;
         $record->time_active = 1;
@@ -294,6 +311,7 @@ class Neatline_DataControllerTest extends Omeka_Test_AppTestCase
 
         // Check markup.
         $this->assertQuery('li.item-title[recordid="' . $record->id . '"]');
+        $this->assertQuery('li.item-title[slug="' . $record->slug . '"]');
         $this->assertQueryContentContains('li.item-title', 'Item 1 Title');
         $this->assertQueryContentContains('li.item-description', 'Item 1 description.');
 

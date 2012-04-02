@@ -168,6 +168,7 @@ class NeatlineDataRecord extends Omeka_record
 
         // Set the array values.
         $data['title'] =            $this->getTitle();
+        $data['slug'] =             $this->getSlug();
         $data['description'] =      $this->getDescription();
         $data['vector_color'] =     $this->getStyle('vector_color');
         $data['stroke_color'] =     $this->getStyle('stroke_color');
@@ -211,6 +212,7 @@ class NeatlineDataRecord extends Omeka_record
         $data['right_percent'] =    self::$defaults['right_percent'];
         $data['start_date'] =       '';
         $data['end_date'] =         '';
+        $data['slug'] =             '';
 
         // Get DC title default.
         $data['title'] = neatline_getItemMetadata(
@@ -271,6 +273,26 @@ class NeatlineDataRecord extends Omeka_record
 
         else {
             $this[$attribute] = $value;
+        }
+
+    }
+
+    /**
+     * Set the slug if it is unique.
+     *
+     * @param boolean $slug The slug.
+     *
+     * @return void.
+     */
+    public function setSlug($slug)
+    {
+
+        // Get records table.
+        $_recordsTable = $this->getTable('NeatlineDataRecord');
+
+        // Set the record value if it is unique.
+        if ($_recordsTable->slugIsAvailable($this, $this->getExhibit(), $slug)) {
+            $this->slug = $slug;
         }
 
     }
@@ -486,6 +508,24 @@ class NeatlineDataRecord extends Omeka_record
                 'Title'
             );
 
+        }
+
+        else {
+            return '';
+        }
+
+    }
+
+    /**
+     * Return slug.
+     *
+     * @return string $slug The slug.
+     */
+    public function getSlug()
+    {
+
+        if (!is_null($this->slug)) {
+            return $this->slug;
         }
 
         else {

@@ -94,6 +94,8 @@ class Neatline_FixturesController extends Omeka_Controller_Action
             'layers' => $layers
         ));
 
+        echo $this->view->partial('editor/_item_browser.php');
+
         echo $this->view->partial('neatline/_neatline.php', array(
             'exhibit' => $exhibit
         ));

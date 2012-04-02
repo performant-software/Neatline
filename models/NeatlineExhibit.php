@@ -41,6 +41,7 @@ class NeatlineExhibit extends Omeka_record
     // Foreign keys.
     public $map_id;
     public $image_id;
+    public $wms_id;
 
     // Layout parameters.
     public $top_element;
@@ -102,7 +103,8 @@ class NeatlineExhibit extends Omeka_record
         $public,
         $baseLayer,
         $map,
-        $image
+        $image,
+        $wms
     )
     {
 
@@ -120,6 +122,7 @@ class NeatlineExhibit extends Omeka_record
         $this->is_items =               1;
         $this->map_id =                 null;
         $this->image_id =               null;
+        $this->wms_id =                 null;
 
         // Check for map.
         if (is_numeric($map)) {
@@ -129,6 +132,11 @@ class NeatlineExhibit extends Omeka_record
         // Check for image.
         if (is_numeric($image)) {
             $this->image_id = $image;
+        }
+
+        // Check for wms.
+        if (is_numeric($wms)) {
+            $this->wms_id = $wms;
         }
 
     }
@@ -159,6 +167,22 @@ class NeatlineExhibit extends Omeka_record
 
         if (!is_null($this->image_id)) {
             return $this->getTable('File')->find($this->image_id);
+        }
+
+        return null;
+
+    }
+
+    /**
+     * Fetch the parent WMS.
+     *
+     * @return Omeka_record The wms.
+     */
+    public function getWms()
+    {
+
+        if (!is_null($this->wms_id)) {
+            return $this->getTable('NeatlineWms')->find($this->wms_id);
         }
 
         return null;
@@ -429,9 +453,19 @@ class NeatlineExhibit extends Omeka_record
         // Update the modified field.
         $this->setModified();
 
+        $notNull = 0;
+        foreach(array(
+            $this->map_id,
+            $this->image_id,
+            $this->wms_id
+        ) as $base) {
+            if (!is_null($base)) { $notNull++; }
+        }
+
         // If map_id is null or image_id is null.
-        if (is_null($this->map_id) || is_null($this->image_id)) {
+        if ($notNull <= 1) {
             parent::save();
+            return true;
         }
 
         else {

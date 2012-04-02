@@ -78,6 +78,7 @@
             this.form =                     this.element.find('form');
             this.deleteButton =             this.form.find('#record-delete-button');
             this.title =                    this.form.find('textarea[name="title"]');
+            this.slug =                     this.form.find('input[name="slug"]');
             this.description =              this.form.find('textarea[name="description"]');
             this.startDate =                this.form.find('input[name="start-date-date"]');
             this.endDate =                  this.form.find('input[name="end-date-date"]');
@@ -636,6 +637,7 @@
             this.descriptionEditor.updateFrame().refresh();
 
             // Populate inputs.
+            this.slug.val(this._data.slug);
             this.vectorOpacity.val(this._data.vector_opacity);
             this.strokeOpacity.val(this._data.stroke_opacity);
             this.strokeWidth.val(this._data.stroke_width);
@@ -674,6 +676,7 @@
 
             // Populate inputs.
             this.title.val('');
+            this.slug.val('');
             this.vectorColor.val('');
             this.leftPercent.val(0);
             this.rightPercent.val(100);
@@ -707,6 +710,7 @@
             // Get the content of the text editors.
             data.description =              this._getDescriptionContent();
             data.title =                    this._getTitleContent();
+            data.slug =                     this.slug.val();
 
             // Get the form field data.
             data.left_percent =             parseInt(this.leftPercent.val(), 10);

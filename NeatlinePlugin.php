@@ -97,6 +97,7 @@ class NeatlinePlugin
                 `query`                     TEXT COLLATE utf8_unicode_ci NULL,
                 `map_id`                    int(10) unsigned NULL,
                 `image_id`                  int(10) unsigned NULL,
+                `wms_id`                    int(10) unsigned NULL,
                 `top_element`               ENUM('map', 'timeline') DEFAULT 'map',
                 `items_h_pos`               ENUM('right', 'left') DEFAULT 'right',
                 `items_v_pos`               ENUM('top', 'bottom') DEFAULT 'bottom',

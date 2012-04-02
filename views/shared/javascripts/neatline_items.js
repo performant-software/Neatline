@@ -59,6 +59,7 @@
 
             // Trackers.
             this._idToItem =                {};
+            this._slugToItem =              {};
             this._idToOffset =              {};
             this._currentItem =             null;
             this._currentItemId =           null;
@@ -132,18 +133,29 @@
             // Get the new items.
             this.items = this.listContainer.find('.item-title');
 
+            // Initialize the database.
+            this._db = TAFFY();
+
             // Bind events to the item rows.
             $.each(this.items, function(i, item) {
 
                 // Get item id and description.
                 var item = $(item);
                 var description = item.next('li.item-description');
-                var recordid = item.attr('recordid');
+                var recordid = parseInt(item.attr('recordid'), 10);
+                var slug = item.attr('slug');
 
-                // Populate trackers.
-                self._idToItem[recordid] = item;
-                self._idOrdering.push(parseInt(recordid, 10));
+
+                // Set expanded tracker, push onto ordering.
                 item.data('expanded', false);
+                self._idOrdering.push(recordid);
+
+                // Populate database.
+                self._db.insert({
+                    recordid: recordid,
+                    slug: slug,
+                    markup: item
+                });
 
                 // Unbind all events.
                 item.add(description).unbind();
@@ -259,7 +271,7 @@
                 case 'left':
 
                     // If there is no set current id, scroll to the last item.
-                    if (this._currentItemId === null) {
+                    if (_.isNull(this._currentItemId)) {
                         return this._idOrdering[this._idOrdering.length - 1];
                     }
 
@@ -285,7 +297,7 @@
                 case 'right':
 
                     // If there is no set current id, scroll to the first item.
-                    if (this._currentItemId === null) {
+                    if (_.isNull(this._currentItemId)) {
                         return this._idOrdering[0];
                     }
 
@@ -421,21 +433,47 @@
          */
         scrollToItem: function(id) {
 
-            // Fetch the markup and get components.
-            var item = this._idToItem[id];
+            var record = this._db({ recordid: parseInt(id, 10) }).first();
+            this._showRecord(record);
+
+        },
+
+        /*
+         * Vertical scroll to item by slug.
+         *
+         * - param integer slug: The slug of the item to scroll to.
+         *
+         * - return void.
+         */
+        scrollToItemBySlug: function(slug) {
+
+            var record = this._db({ slug: slug }).first();
+            this._showRecord(record);
+
+        },
+
+        /*
+         * Scroll to a record.
+         *
+         * - param DOM item: The item to scroll to.
+         *
+         * - return void.
+         */
+        _showRecord: function(record) {
 
             // If the item is present in the squence tray.
-            if (!_.isUndefined(item)) {
+            if (record) {
 
                 // If another item is expanded, hide.
                 if (this._currentItemId !== null &&
-                    this._currentItemId !== id) {
+                    this._currentItemId !== record.recordid) {
                         this.__hideCurrentDescription();
                         this._currentItem.data('expanded', false);
                 }
 
                 // Get the new scrollTop.
-                var scrollTop = item.position().top + this.element.scrollTop();
+                var scrollTop = record.markup.position().top +
+                    this.element.scrollTop();
 
                 // If the new scroll is greater than the total height,
                 // scroll exactly to the bottom.
@@ -449,7 +487,7 @@
                 }, 200);
 
                 // Expand the description.
-                this.expandDescription(item);
+                this.expandDescription(record.markup);
 
             }
 
@@ -485,6 +523,8 @@
          * - return void.
          */
         __activateTitle: function(item) {
+
+            console.log(item);
 
             if (!item.data('expanded')) {
                 item.stop().animate({

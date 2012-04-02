@@ -154,6 +154,126 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
     }
 
     /**
+     * getRecordByExhibitAndSlug() should return boolean false when there is.
+     * no record for the given exhibit/slug combination.
+     *
+     * @return void.
+     */
+    public function testGetRecordByExhibitAndSlugWithNoRecord()
+    {
+
+        // Create item, exhibit, and record.
+        $item = $this->helper->_createItem();
+        $neatline = $this->helper->_createNeatline();
+        $record = new NeatlineDataRecord($item, $neatline);
+        $record->save();
+
+        // Get the record.
+        $noRecord = $this->_recordsTable->getRecordByExhibitAndSlug($neatline, 'test-slug');
+        $this->assertFalse($noRecord);
+
+    }
+
+    /**
+     * getRecordByExhibitAndSlug() should return the record when one exists.
+     *
+     * @return void.
+     */
+    public function testGetRecordByExhibitAndSlugWithRecord()
+    {
+
+        // Create item, exhibit, and record.
+        $item = $this->helper->_createItem();
+        $neatline = $this->helper->_createNeatline();
+        $record = new NeatlineDataRecord($item, $neatline);
+        $record->slug = 'test-slug';
+        $record->save();
+
+        // Get the record.
+        $retrievedRecord = $this->_recordsTable->getRecordByExhibitAndSlug($neatline, 'test-slug');
+        $this->assertEquals($retrievedRecord->id, $record->id);
+
+    }
+
+    /**
+     * slugIsAvailable() should always return true when an empty string is passed.
+     *
+     * @return void.
+     */
+    public function testSlugIsAvailableWithEmptyString()
+    {
+
+        // Create item and exhibit.
+        $item = $this->helper->_createItem();
+        $exhibit = $this->helper->_createNeatline();
+
+        // Create two records.
+        $record1 = new NeatlineDataRecord($item, $exhibit);
+        $record1->slug = 'test-slug';
+        $record1->save();
+        $record2 = new NeatlineDataRecord($item, $exhibit);
+        $record2->slug = '';
+        $record2->save();
+
+        $this->assertTrue(
+            $this->_recordsTable->slugIsAvailable($record1, $exhibit, '')
+        );
+
+    }
+
+    /**
+     * slugIsAvailable() should return false when there is a non-self duplicate.
+     *
+     * @return void.
+     */
+    public function testSlugIsAvailableWithNonSelfDuplicate()
+    {
+
+        // Create item and exhibit.
+        $item = $this->helper->_createItem();
+        $exhibit = $this->helper->_createNeatline();
+
+        // Create two records.
+        $record1 = new NeatlineDataRecord($item, $exhibit);
+        $record1->slug = 'test-slug';
+        $record1->save();
+        $record2 = new NeatlineDataRecord($item, $exhibit);
+        $record2->slug = 'another-slug';
+        $record2->save();
+
+        $this->assertFalse(
+            $this->_recordsTable->slugIsAvailable($record1, $exhibit, 'another-slug')
+        );
+
+    }
+
+    /**
+     * slugIsAvailable() should return true when the duplicate is self.
+     *
+     * @return void.
+     */
+    public function testSlugIsAvailableWithSelfDuplicate()
+    {
+
+        // Create item and exhibit.
+        $item = $this->helper->_createItem();
+        $exhibit = $this->helper->_createNeatline();
+
+        // Create two records.
+        $record1 = new NeatlineDataRecord($item, $exhibit);
+        $record1->slug = 'test-slug';
+        $record1->save();
+        $record2 = new NeatlineDataRecord($item, $exhibit);
+        $record2->slug = 'another-slug';
+        $record2->save();
+
+        $this->assertTrue(
+            $this->_recordsTable->slugIsAvailable($record1, $exhibit, 'test-slug')
+        );
+
+    }
+
+    /**
      * saveRecordStatus() should create a new record when there when there
      * is no existing record.
      *
@@ -579,6 +699,8 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
         // Populate map-relevant attributes.
         $record1->title = 'Item 1 Title';
         $record2->title = 'Item 2 Title';
+        $record1->slug = 'slug-1';
+        $record2->slug = 'slug-2';
         $record1->vector_color = '#ffffff';
         $record2->vector_color = '#000000';
         $record1->stroke_color = '#ffffff';
@@ -611,6 +733,7 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
         $this->assertContains('"id":' . $record1->id, $json);
         $this->assertContains('"item_id":' . $item1->id, $json);
         $this->assertContains('"title":"Item 1 Title"', $json);
+        $this->assertContains('"slug":"slug-1"', $json);
         $this->assertContains('"vector_color":"#ffffff"', $json);
         $this->assertContains('"stroke_color":"#ffffff"', $json);
         $this->assertContains('"highlight_color":"#ffffff"', $json);
@@ -624,6 +747,7 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
         $this->assertContains('"id":' . $record2->id, $json);
         $this->assertContains('"item_id":' . $item2->id, $json);
         $this->assertContains('"title":"Item 1 Title"', $json);
+        $this->assertContains('"slug":"slug-2"', $json);
         $this->assertContains('"vector_color":"#000000"', $json);
         $this->assertContains('"highlight_color":"#000000"', $json);
         $this->assertContains('"vector_opacity":40', $json);
@@ -671,6 +795,7 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
         $this->assertContains('"id":' . $record1->id, $json);
         $this->assertContains('"item_id":' . $item1->id, $json);
         $this->assertContains('"title":"Item 1 Title"', $json);
+        $this->assertContains('"slug":""', $json);
         $this->assertContains('"vector_color":null', $json);
         $this->assertContains('"vector_opacity":null', $json);
         $this->assertContains('"stroke_opacity":null', $json);
@@ -683,6 +808,7 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
         $this->assertContains('"id":' . $record2->id, $json);
         $this->assertContains('"item_id":' . $item2->id, $json);
         $this->assertContains('"title":"Item 1 Title"', $json);
+        $this->assertContains('"slug":""', $json);
         $this->assertContains('"vector_color":null', $json);
         $this->assertContains('"vector_opacity":null', $json);
         $this->assertContains('"stroke_opacity":null', $json);
@@ -729,6 +855,7 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
         $this->assertContains('"id":' . $record->id, $json);
         $this->assertContains('"item_id":' . $item->id, $json);
         $this->assertContains('"title":"Title"', $json);
+        $this->assertContains('"slug":""', $json);
         $this->assertContains('"vector_opacity":null', $json);
         $this->assertContains('"stroke_color":null', $json);
         $this->assertContains('"point_radius":null', $json);
@@ -820,6 +947,8 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
         // Populate map-relevant attributes.
         $record1->title = 'Item 1 Title';
         $record2->title = 'Item 2 Title';
+        $record1->slug = 'slug-1';
+        $record2->slug = 'slug-2';
         $record1->description = 'Item 1 description.';
         $record2->description = 'Item 2 description.';
         $record1->start_date = '1564-04-26 14:39:22';
@@ -858,6 +987,11 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
 
         $this->assertContains(
             '"title":"' . $record1->title . '"',
+            $json
+        );
+
+        $this->assertContains(
+            '"slug":"' . $record1->slug . '"',
             $json
         );
 
@@ -908,6 +1042,11 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
 
         $this->assertContains(
             '"title":"' . $record2->title . '"',
+            $json
+        );
+
+        $this->assertContains(
+            '"slug":"' . $record2->slug . '"',
             $json
         );
 

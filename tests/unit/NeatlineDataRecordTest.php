@@ -30,6 +30,7 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
     // Testing parameters.
     private static $__testParams = array(
         'title' => 'Test Title',
+        'slug' => 'test-slug',
         'description' => 'Test description.',
         'start_date' => '1564-04-26 14:39:22',
         'end_date' => '1616-04-23 12:45:34',
@@ -271,6 +272,37 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         $record->title = 'Title';
         $record->setNotEmpty('title', null);
         $this->assertNull($record->title);
+
+    }
+
+    /**
+     * setSlug() should not set value when slug is not unique.
+     *
+     * @return void.
+     */
+    public function testSetSlug()
+    {
+
+        // Create item.
+        $item = $this->helper->_createItem();
+
+        // Create exhibit.
+        $exhibit = $this->helper->_createNeatline();
+
+        // Create two records.
+        $record1 = new NeatlineDataRecord($item, $exhibit);
+        $record1->save();
+        $record2 = new NeatlineDataRecord($item, $exhibit);
+        $record2->slug = 'taken-slug';
+        $record2->save();
+
+        // Set duplicate slug.
+        $record1->setSlug('taken-slug');
+        $this->assertNull($record1->slug);
+
+        // Set unique slug.
+        $record1->setSlug('new-slug');
+        $this->assertEquals($record1->slug, 'new-slug');
 
     }
 
@@ -850,6 +882,29 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
     }
 
     /**
+     * getSlug() should return the slug when there is a non-null value and
+     * an empty string with the value is null.
+     *
+     * @return void.
+     */
+    public function testGetSlug()
+    {
+
+        // Create an item, exhibit, and record.
+        $neatline = $this->helper->_createNeatline();
+        $record = new NeatlineDataRecord(null, $neatline);
+
+        // Should return the native value.
+        $record->slug = 'slug';
+        $this->assertEquals($record->getSlug(), 'slug');
+
+        // Should return empty string.
+        $record->slug = null;
+        $this->assertEquals($record->getSlug(), '');
+
+    }
+
+    /**
      * The getDescription() method should return the record description attribute when it
      * is not null; if it is null, try to default in the DC value.
      *
@@ -1277,6 +1332,7 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
 
         // Populate fields.
         $record->title =            self::$__testParams['title'];
+        $record->slug =             self::$__testParams['slug'];
         $record->description =      self::$__testParams['description'];
         $record->start_date =       self::$__testParams['start_date'];
         $record->end_date =         self::$__testParams['end_date'];
@@ -1300,6 +1356,11 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         // Check the construction.
         $this->assertContains(
             '"title":"' . self::$__testParams['title'] . '"',
+            $json
+        );
+
+        $this->assertContains(
+            '"slug":"' . self::$__testParams['slug'] . '"',
             $json
         );
 
@@ -1379,6 +1440,7 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
 
         // Populate fields.
         $record->title =            self::$__testParams['title'];
+        $record->slug =             self::$__testParams['slug'];
         $record->description =      self::$__testParams['description'];
         $record->start_date =       self::$__testParams['start_date'];
         $record->end_date =         self::$__testParams['end_date'];
@@ -1402,6 +1464,11 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         // Check the construction.
         $this->assertContains(
             '"title":"' . self::$__testParams['title'] . '"',
+            $json
+        );
+
+        $this->assertContains(
+            '"slug":"' . self::$__testParams['slug'] . '"',
             $json
         );
 
@@ -1488,6 +1555,11 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         // Check the construction.
         $this->assertContains(
             '"title":""',
+            $json
+        );
+
+        $this->assertContains(
+            '"slug":""',
             $json
         );
 

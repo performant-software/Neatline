@@ -102,7 +102,8 @@ class Neatline_IndexController extends Omeka_Controller_Action
                     $values['public'],
                     $values['baselayer'],
                     $values['map'],
-                    $values['image']
+                    $values['image'],
+                    $values['wms']
                 );
 
                 // Commit.

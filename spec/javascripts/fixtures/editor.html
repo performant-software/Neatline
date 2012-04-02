@@ -114,6 +114,227 @@ to store the current viewport settings as the public defaults.</p>
 
 </div>
 
+<div id="item-browser">
+
+    <div id="items-list-header">
+
+        <input type="text" placeholder="Search items" id="search-box" />
+        <span id="search-cancel">x</span>
+        <button id="new-item-button" class="btn icon add">New Record</button>
+        <div class="columns">
+            <div class="col-1 col-cell col-header"><span class="header"></span></div>
+            <div class="col-2 col-cell col-header"><span class="header"></span></div>
+        </div>
+
+    </div>
+
+    <div id="items-list-container"></div>
+
+    
+<div id="edit-form" class="neatline-record-edit-form">
+
+    <form class="form-stacked">
+
+        <a class="fieldset title-and-description" href="">
+            <div class="fieldset-arrow"></div>Text Description
+        </a>
+        <div class="fieldset">
+
+            <div class="clearfix">
+                <label for="title">Title</label>
+                <div class="input">
+                    <textarea id="item-title" class="xlarge" name="title" placeholder="Title" rows="1"></textarea>
+                </div>
+            </div>
+
+            <div class="clearfix">
+                <label>Slug</label>
+                <div class="input">
+                    <div class="inline-inputs">
+                        <input class="xlarge" name="slug" type="text" placeholder="Slug" />
+                        <span class="help-inline">The record slug is a unique identifier that can be used to externally reference the record.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="clearfix">
+                <label for="description">Description</label>
+                <div class="input">
+                    <textarea id="item-description" class="xlarge" name="description" placeholder="Description" rows="4"></textarea>
+                </div>
+            </div>
+
+        </div>
+
+        <hr />
+
+        <a class="fieldset date-information" href="">
+            <div class="fieldset-arrow"></div>Start and End Dates
+        </a>
+        <div class="fieldset">
+
+            <div class="clearfix">
+                <label>Start Date</label>
+                <div class="input">
+                    <div class="inline-inputs">
+                        <input class="xlarge" name="start-date-date" type="text" placeholder="Start Date" />
+                        <span class="help-inline">Use <a href="http://www.w3.org/TR/NOTE-datetime" target="_blank">ISO 8601</a> format dates.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="clearfix">
+                <label>End Date</label>
+                <div class="input">
+                    <div class="inline-inputs">
+                        <input class="xlarge" name="end-date-date" type="text" placeholder="End Date" />
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <hr />
+
+        <a class="fieldset date-styles" href="">
+            <div class="fieldset-arrow"></div>Timeline Styles
+        </a>
+        <div class="fieldset">
+
+            <div class="clearfix">
+                <label>Date Ambiguity</label>
+                <div class="input">
+                    <div class="inline-inputs">
+                        <div class="date-ambiguity-container">
+                            <div class="date-ambiguity-editor">
+                                <div class="stop-marker left"><div class="color-swatch"></div></div>
+                                <div class="stop-marker right"><div class="color-swatch"></div></div>
+                            </div>
+                            <input name="left-ambiguity-percentage" type="hidden" />
+                            <input name="right-ambiguity-percentage" type="hidden" />
+                        </div>
+                        <span class="help-inline">Drag the beginning and ending sliders inward to capture
+                            uncertainty over the date interval.</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <hr />
+
+        <a class="fieldset map-styles" href="">
+            <div class="fieldset-arrow"></div>Map Styles
+        </a>
+        <div class="fieldset">
+
+            <div class="clearfix">
+                <label>Shape Color</label>
+                <div class="input">
+                    <div class="inline-inputs">
+                        <input type="text" class="color-picker" name="vector-color" />
+                        <span class="help-inline">Select a color for the item's spatial vectors.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="clearfix">
+                <label>Line Color</label>
+                <div class="input">
+                    <div class="inline-inputs">
+                        <input type="text" class="color-picker" name="stroke-color" />
+                        <span class="help-inline">Select a color for the border lines around shapes.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="clearfix">
+                <label>Highlight Color</label>
+                <div class="input">
+                    <div class="inline-inputs">
+                        <input type="text" class="color-picker" name="highlight-color" />
+                        <span class="help-inline">Select a highlight color.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="clearfix">
+                <label>Shape Opacity</label>
+                <div class="input">
+                    <div class="inline-inputs">
+                        <input type="text" class="integer-dragger" name="vector-opacity" />
+                        <span class="help-inline">Set the opacity for the item's vectors on the map.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="clearfix">
+                <label>Line Opacity</label>
+                <div class="input">
+                    <div class="inline-inputs">
+                        <input type="text" class="integer-dragger" name="stroke-opacity" />
+                        <span class="help-inline">Set the opacity for the border lines.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="clearfix">
+                <label>Line Thickness</label>
+                <div class="input">
+                    <div class="inline-inputs">
+                        <input type="text" class="integer-dragger" name="stroke-width" />
+                        <span class="help-inline">Set the width, in pixels, for the border lines.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="clearfix">
+                <label>Point Radius</label>
+                <div class="input">
+                    <div class="inline-inputs">
+                        <input type="text" class="integer-dragger" name="point-radius" />
+                        <span class="help-inline">Set the radius for point on the map.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="clearfix">
+                <div class="input">
+                    <div class="inline-inputs">
+                        <button class="btn icon undo reset-styles">Reset Item Styles</button>
+                        <span class="help-inline">Reset all styles to match the exhibit defaults.</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <hr />
+
+        <div class="fieldset">
+
+            <div class="clearfix">
+                <div class="input">
+                    <div class="inline-inputs">
+                        <button class="btn icon home map-focus">Fix Item-Specific Map Focus</button>
+                        <span class="help-inline">Set a custom map focus for the item.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="edit-form-actions" class="actions">
+                <input type="submit" class="btn primary" value="Save">
+                <button id="record-delete-button" class="btn danger">Delete</button>
+            </div>
+
+        </div>
+
+    </form>
+
+</div>
+
+</div>
+
 <!-- Neatline container. -->
 <div id="neatline" class="neatline-container">
 
@@ -159,7 +380,7 @@ to store the current viewport settings as the public defaults.</p>
 <!-- JSON globals. -->
 <script type="text/javascript">
 
-        Neatline = {"record":{"added":"2012-03-26 10:52:26","modified":"2012-03-26 10:52:26","name":"Test Exhibit","slug":"test-exhibit","public":1,"query":null,"map_id":null,"image_id":null,"top_element":"map","items_h_pos":"right","items_v_pos":"top","items_height":"full","h_percent":50,"v_percent":60,"is_map":1,"is_timeline":1,"is_items":1,"default_map_bounds":null,"default_map_zoom":null,"default_focus_date":null,"default_timeline_zoom":null,"default_vector_color":null,"default_stroke_color":null,"default_highlight_color":null,"default_vector_opacity":null,"default_stroke_opacity":null,"default_stroke_width":null,"default_point_radius":null,"default_base_layer":null,"id":1},"dataSources":{"timeline":"http:\/\/\/Users\/davidmcclure\/pear\/bin\/neatline-exhibits\/1\/data\/simile","map":"http:\/\/\/Users\/davidmcclure\/pear\/bin\/neatline-exhibits\/1\/data\/openlayers","undated":"http:\/\/\/Users\/davidmcclure\/pear\/bin\/neatline-exhibits\/1\/data\/udi"},"baseLayer":{"name":"Google Physical","id":2},"timelineZoom":15,"highlightColor":"#ff0000","proportions":{"horizontal":50,"vertical":60}}
+        Neatline = {"record":{"added":"2012-04-02 11:36:10","modified":"2012-04-02 11:36:10","name":"Test Exhibit","slug":"test-exhibit","public":1,"query":null,"map_id":null,"image_id":null,"wms_id":null,"top_element":"map","items_h_pos":"right","items_v_pos":"top","items_height":"full","h_percent":50,"v_percent":60,"is_map":1,"is_timeline":1,"is_items":1,"default_map_bounds":null,"default_map_zoom":null,"default_focus_date":null,"default_timeline_zoom":null,"default_vector_color":null,"default_stroke_color":null,"default_highlight_color":null,"default_vector_opacity":null,"default_stroke_opacity":null,"default_stroke_width":null,"default_point_radius":null,"default_base_layer":null,"id":1},"dataSources":{"timeline":"http:\/\/\/Users\/davidmcclure\/pear\/bin\/neatline-exhibits\/1\/data\/simile","map":"http:\/\/\/Users\/davidmcclure\/pear\/bin\/neatline-exhibits\/1\/data\/openlayers","undated":"http:\/\/\/Users\/davidmcclure\/pear\/bin\/neatline-exhibits\/1\/data\/udi"},"baseLayer":{"name":"Google Physical","id":2},"timelineZoom":15,"highlightColor":"#ff0000","proportions":{"horizontal":50,"vertical":60}}
 </script>
 
 <div id="drag-tip" class="twipsy fade right in">

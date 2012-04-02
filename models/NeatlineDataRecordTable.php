@@ -123,6 +123,26 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
     }
 
     /**
+     * Find a record for a given exhibit and slug.
+     *
+     * @param Omeka_record $exhibit The exhibit record.
+     * @param string $slug The slug.
+     *
+     * @return Omeka_record $record if a record exists, else boolean False.
+     */
+    public function getRecordByExhibitAndSlug($exhibit, $slug)
+    {
+
+        $record = $this->fetchObject(
+            $this->getSelect()->where('exhibit_id = ' . $exhibit->id
+                . ' AND slug = "' . $slug . '"')
+        );
+
+        return $record ? $record : false;
+
+    }
+
+    /**
      * Find all records associated with a given exhibit.
      *
      * @param Omeka_record $neatline The exhibit record.
@@ -244,6 +264,30 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
 
     }
 
+    /**
+     * Check whether a given slug is unique for an exhibit.
+     *
+     * @param Omeka_record $exhibit The exhibit record.
+     * @param string $slug The slug.
+     *
+     * @return boolean True if the slug is unique.
+     */
+    public function slugIsAvailable($record, $exhibit, $slug)
+    {
+
+        // Always allow the empty string.
+        if ($slug === '') { return true; }
+
+        // Try to get out an existing record with the slug.
+        $retrievedRecord = $this->getRecordByExhibitAndSlug($exhibit, $slug);
+
+        // If there is an existing record and the record is not the same
+        // as the passed record, return false; otherwise true.
+        return ($retrievedRecord && $record->id !== $retrievedRecord->id) ?
+            false : true;
+
+    }
+
 
     /**
      * JSON constructors.
@@ -278,6 +322,7 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
                         'id' =>                 $record->id,
                         'item_id' =>            $record->item_id,
                         'title' =>              $record->getTitle(),
+                        'slug' =>                   $record->getSlug(),
                         'vector_color' =>       $record->getStyle('vector_color'),
                         'stroke_color' =>       $record->getStyle('stroke_color'),
                         'highlight_color' =>    $record->getStyle('highlight_color'),
@@ -335,6 +380,7 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
 
                 $eventArray = array(
                     'eventID' =>                $record->id,
+                    'slug' =>                   $record->getSlug(),
                     'title' =>                  trim($record->getTitle()),
                     'description' =>            $record->getDescription(),
                     'color' =>                  $record->getStyle('vector_color'),

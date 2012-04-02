@@ -40,19 +40,17 @@
          */
         _create: function() {
 
-            console.log(this.element);
-
             // Get markup.
             this._body =        $('body');
             this._window =      $(window);
-            this.slug =         this.element.next('span.record-slug');
+            this.editorBody =   this.element.next('iframe').contents().find('body');
+            this.slug =         this.element.next('input[name="slug"]');
 
             // Trackers.
             this._hasTyped = false;
 
             // Bind listeners, set starting styles and root.
             this.setSlugInputToGray();
-            this._addEvents();
 
         },
 
@@ -61,16 +59,20 @@
          *
          * - return void.
          */
-        _addEvents: function() {
+        addEvents: function() {
 
             var self = this;
 
-            this.element.bind({
+            // Unbind existing events.
+            this.editorBody.unbind();
+            this.slug.unbind();
+
+            this.editorBody.bind({
 
                 'keyup': function() {
                     console.log('up');
                     if (!self._hasTyped) {
-                        var slug = self.slugify(self.title.val())
+                        var slug = self.slugify(self.title.val());
                         self.slug.val(slug);
                     }
                 }

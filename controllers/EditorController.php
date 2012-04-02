@@ -159,6 +159,7 @@ class Neatline_EditorController extends Omeka_Controller_Action
         $recordId =                 json_decode($_post['record_id']);
         $exhibitId =                json_decode($_post['exhibit_id']);
         $title =                    $_post['title'];
+        $slug =                     $_post['slug'];
         $description =              $_post['description'];
         $startDate =                $_post['start_date'];
         $endDate =                  $_post['end_date'];
@@ -199,6 +200,7 @@ class Neatline_EditorController extends Omeka_Controller_Action
         $record->setNotEmpty('start_date', $startDate);
         $record->setNotEmpty('end_date', $endDate);
         $record->setGeocoverage($geoCoverage);
+        $record->setSlug($slug);
 
         // Set styles and percentages.
         $record->setStyle('vector_color', $vectorColor);

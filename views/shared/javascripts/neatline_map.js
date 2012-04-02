@@ -79,7 +79,7 @@
             this.requestData =              null;
 
             // Construct WMS-based map.
-            if (Neatline.record.map_id) {
+            if (Neatline.record.map_id || Neatline.record.wms_id) {
                 this._instantiateGeoserverMap();
             }
 
@@ -446,6 +446,7 @@
                     itemid: item.item_id,
                     layerid: vectorLayer.id,
                     recordid: item.id,
+                    slug: item.slug,
                     data: item,
                     layer: vectorLayer
                 });
@@ -478,8 +479,15 @@
                 eventListeners: {
 
                     featurehighlighted: function(e) {
-                        var record = self._db({ layerid: e.feature.layer.id }).first();
+
+                        // Get record.
+                        var record = self._db({
+                            layerid: e.feature.layer.id
+                        }).first();
+
+                        // Show title tip.
                         self._showTitleTip(record);
+
                     },
 
                     featureunhighlighted: function(e) {
@@ -498,8 +506,12 @@
                 // When the feature is selected.
                 onSelect: function(feature) {
 
-                    // Get the record for the layer.
-                    var record = self._db({ layerid: feature.layer.id }).first();
+                    // Get the record.
+                    var record = self._db({
+                        layerid: feature.layer.id
+                    }).first();
+
+                    // Capture clicked feature.
                     self._clickedFeature = feature;
 
                     // Trigger out to the deployment code.
@@ -582,6 +594,26 @@
 
             // Get the record out of the database.
             var record = this._db({ recordid: parseInt(id, 10) }).first();
+            this._showRecord(record);
+
+        },
+
+        /*
+         * Focus the map on the feature data for a given record identified
+         * by its slug.
+         */
+        zoomToItemVectorsBySlug: function(slug) {
+
+            // Get the record out of the database.
+            var record = this._db({ slug: slug }).first();
+            this._showRecord(record);
+
+        },
+
+        /*
+         * Focus the map on the feature data for a given record.
+         */
+        _showRecord: function(record) {
 
             // If the record exists and there is a map feature.
             if (record && record.layer.features.length > 0) {
