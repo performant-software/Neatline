@@ -210,45 +210,32 @@
 
             var self = this;
 
+            // Define callbacks.
+            var callbacks = {
+
+                'featureadded': function() {
+                    self._trigger('mapfeatureadded');
+                },
+
+                'featureclick': function(event, obj) {
+                    self._trigger('mapfeatureclick', {}, {
+                        'recordid': obj.recordid
+                    });
+                }
+
+            };
+
             // ** MAP
             if (this.params.record.is_map && !this.instantiated_map) {
 
                 // If the Neatline is public, instantiate the default map.
                 if (this.options.isPublic) {
-
-                    this.map.neatlinemap({
-
-                        'featureadded': function() {
-                            self._trigger('mapfeatureadded');
-                        },
-
-                        'featureclick': function(event, obj) {
-                            self._trigger('mapfeatureclick', {}, {
-                                'recordid': obj.recordid
-                            });
-                        }
-
-                    });
-
+                    this.map.neatlinemap(callbacks);
                 }
 
                 // Otherwise, construct map editor.
                 else {
-
-                    this.map.mapeditor({
-
-                        'featureadded': function() {
-                            self._trigger('mapfeatureadded');
-                        },
-
-                        'featureclick': function(event, obj) {
-                            self._trigger('mapfeatureclick', {}, {
-                                'recordid': obj.recordid
-                            });
-                        }
-
-                    });
-
+                    this.map.mapeditor(callbacks);
                 }
 
                 // Register the presence of the map instantiation.
@@ -277,63 +264,49 @@
             // ** ITEMS
             if (this.params.record.is_items && !this.instantiated_undated) {
 
+                // Define items callbacks.
+                var callbacks = {
+
+                    // When the user clicks on an item title.
+                    'itemclick': function(event, obj) {
+
+                        // Trigger out.
+                        self._trigger('itemclick', {}, obj);
+
+                    },
+
+                    // When the cursor enters an item title.
+                    'itementer': function(event, obj) {
+
+                        // Trigger out.
+                        self._trigger('itementer', {}, obj);
+
+                        // Highlight map vectors.
+                        self.map.neatlinemap('highlightVectors', obj.recordid);
+
+                    },
+
+                    // When the cursor leaves an item title.
+                    'itemleave': function(event, obj) {
+
+                        // Trigger out.
+                        self._trigger('itemleave', {}, obj);
+
+                        // Unhilight map vectors.
+                        self.map.neatlinemap('unhighlightVectors', obj.recordid);
+
+                    }
+
+                };
+
                 // If the Neatline is public, instantiate the default item tray.
                 if (this.options.isPublic) {
-
-                    this.items.neatlineitems({
-
-                        // When the user clicks on an item title.
-                        'itemclick': function(event, obj) {
-                            self._trigger('itemclick', {}, {
-                                'recordid': obj.recordid,
-                                'scrollItems': obj.scrollItems
-                            });
-                        },
-
-                        // When the cursor enters an item title.
-                        'itementer': function(event, obj) {
-                            self.map.neatlinemap('highlightVectors', obj.recordid);
-                        },
-
-                        // When the cursor leaves an item title.
-                        'itemleave': function(event, obj) {
-                            self.map.neatlinemap('unhighlightVectors', obj.recordid);
-                        }
-
-                    });
-
+                    this.items.neatlineitems(callbacks);
                 }
 
                 // Otherwise, do the editing-enabled tray.
                 else {
-
-                    this.items.itemorderer({
-
-                        // When the user clicks on an item title.
-                        'itemclick': function(event, obj) {
-                            self._trigger('itemclick', {}, {
-                                'recordid': obj.recordid,
-                                'scrollItems': obj.scrollItems
-                            });
-                        },
-
-                        // When the cursor enters an item title.
-                        'itementer': function(event, obj) {
-                            self.map.neatlinemap('highlightVectors', obj.recordid);
-                        },
-
-                        // When the cursor leaves an item title.
-                        'itemleave': function(event, obj) {
-                            self.map.neatlinemap('unhighlightVectors', obj.recordid);
-                        },
-
-                        // When the item tray is reloaded.
-                        'newitems': function(event, obj) {
-                            self._trigger('newitems');
-                        }
-
-                    });
-
+                    this.items.neatlineitems(callbacks);
                 }
 
                 // Register the presence of the udi instantiation.

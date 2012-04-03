@@ -485,13 +485,33 @@
                             layerid: e.feature.layer.id
                         }).first();
 
+                        // Trigger out to the deployment code.
+                        self._trigger('featureenter', {}, {
+                            'recordid': record.recordid,
+                            'slug': record.data.slug
+                        });
+
                         // Show title tip.
                         self._showTitleTip(record);
 
                     },
 
                     featureunhighlighted: function(e) {
+
+                        // Get record.
+                        var record = self._db({
+                            layerid: e.feature.layer.id
+                        }).first();
+
+                        // Trigger out to the deployment code.
+                        self._trigger('featureleave', {}, {
+                            'recordid': record.recordid,
+                            'slug': record.data.slug
+                        });
+
+                        // Hide the title tip.
                         self._hideTitleTip();
+
                     }
 
                 }
@@ -516,7 +536,8 @@
 
                     // Trigger out to the deployment code.
                     self._trigger('featureclick', {}, {
-                        'recordid': record.recordid
+                        'recordid': record.recordid,
+                        'slug': record.data.slug
                     });
 
                     if (!_.isUndefined(self.modifyFeatures)) {
