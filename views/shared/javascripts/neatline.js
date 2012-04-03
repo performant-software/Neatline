@@ -681,6 +681,28 @@
         },
 
         /*
+         * Highlight map features by slug.
+         *
+         * - param string slug: The slug.
+         *
+         * - return void.
+         */
+        highlightMapBySlug: function(slug) {
+            this.map.neatlinemap('highlightVectorsBySlug', slug);
+        },
+
+        /*
+         * Unhighlight map features by slug.
+         *
+         * - param string slug: The slug.
+         *
+         * - return void.
+         */
+        unhighlightMapBySlug: function(slug) {
+            this.map.neatlinemap('unhighlightVectorsBySlug', slug);
+        },
+
+        /*
          * Get the current focus extent on the map.
          *
          * - return string: The extent.

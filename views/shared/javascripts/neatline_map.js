@@ -843,16 +843,41 @@
 
 
         /*
-         * Render a highlight on an item's vectors.
+         * Render a highlight on an item's vectors by id.
          */
         highlightVectors: function(recordid) {
-
-            var self = this;
 
             // Get the item record.
             var record = this._db({
                 recordid: parseInt(recordid, 10)
             }).first();
+
+            // Render highlight.
+            this._renderVectorHighlight(record);
+
+        },
+
+        /*
+         * Render a highlight on an item's vectors by slug.
+         */
+        highlightVectorsBySlug: function(slug) {
+
+            // Get the record.
+            var record = this._db({
+                slug: slug
+            }).first();
+
+            // Render highlight.
+            this._renderVectorHighlight(record);
+
+        },
+
+        /*
+         * Render a highlight on an item's vectors.
+         */
+        _renderVectorHighlight: function(record) {
+
+            var self = this;
 
             // If there is no extant data record, abort.
             if (!record || _.isUndefined(record.data)) {
@@ -884,14 +909,41 @@
         },
 
         /*
-         * Remove a highlight on an item's vectors.
+         * Remove a highlight on an item's vectors by id.
          */
         unhighlightVectors: function(recordid) {
 
-            var self = this;
-
             // Get the item record.
-            var record = this._db({ recordid: parseInt(recordid, 10) }).first();
+            var record = this._db({
+                recordid: parseInt(recordid, 10)
+            }).first();
+
+            // Remove highlight.
+            this._removeVectorHighlight(record);
+
+        },
+
+        /*
+         * Remove a highlight on an item's vectors by slug.
+         */
+        unhighlightVectorsBySlug: function(slug) {
+
+            // Get the record.
+            var record = this._db({
+                slug: slug
+            }).first();
+
+            // Remove highlight.
+            this._removeVectorHighlight(record);
+
+        },
+
+        /*
+         * Remove a highlight on an item's vectors.
+         */
+        _removeVectorHighlight: function(record) {
+
+            var self = this;
 
             // If there is no extant data record, abort.
             if (_.isUndefined(record.data)) {
