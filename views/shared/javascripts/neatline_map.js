@@ -901,6 +901,14 @@
 
         },
 
+        /*
+         * Re-render the map.
+         */
+        refresh: function(recordid) {
+            console.log('mapresize');
+            this.map.updateSize();
+        },
+
 
         /*
          * =================

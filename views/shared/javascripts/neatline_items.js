@@ -524,11 +524,15 @@
          */
         __activateTitle: function(item) {
 
+            // If the title it not already activated.
             if (!item.data('expanded')) {
+
+                // Fade up and grow title.
                 item.stop().animate({
                     'font-size': '+=5px',
                     'color': this.options.colors.purple
                 }, 100);
+
             }
 
         },

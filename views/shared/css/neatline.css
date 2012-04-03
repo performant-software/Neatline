@@ -132,6 +132,7 @@ table th, table td {
 }
 
 div.title-tip {
+    font-family: 'Crimson Text';
     display: none;
     position: absolute;
     bottom: 30px;
@@ -246,6 +247,7 @@ div.title-tip {
     padding: 5px 20px 0 20px;
     height: 0;
     overflow: hidden;
+    font-family: 'Crimson Text';
 }
 
 

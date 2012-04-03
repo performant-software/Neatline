@@ -183,8 +183,9 @@
             // Manifest.
             this.element.positioner('apply');
 
-            // Rerender timeline.
+            // Rerender map and timeline.
             this.timeline.neatlinetimeline('refresh');
+            this.map.neatlinemap('refresh');
 
         },
 
