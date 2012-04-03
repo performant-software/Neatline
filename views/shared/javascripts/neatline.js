@@ -210,23 +210,29 @@
 
             var self = this;
 
-            // Define callbacks.
-            var callbacks = {
-
-                'featureadded': function() {
-                    self._trigger('mapfeatureadded');
-                },
-
-                'featureclick': function(event, obj) {
-                    self._trigger('mapfeatureclick', {}, {
-                        'recordid': obj.recordid
-                    });
-                }
-
-            };
-
             // ** MAP
             if (this.params.record.is_map && !this.instantiated_map) {
+
+                // Define callbacks.
+                var callbacks = {
+
+                    'featureadded': function() {
+                        self._trigger('mapfeatureadded');
+                    },
+
+                    'featureenter': function(event, obj) {
+                        self._trigger('mapfeatureenter', {}, obj);
+                    },
+
+                    'featureleave': function(event, obj) {
+                        self._trigger('mapfeatureleave', {}, obj);
+                    },
+
+                    'featureclick': function(event, obj) {
+                        self._trigger('mapfeatureclick', {}, obj);
+                    }
+
+                };
 
                 // If the Neatline is public, instantiate the default map.
                 if (this.options.isPublic) {
@@ -295,6 +301,22 @@
                         // Unhilight map vectors.
                         self.map.neatlinemap('unhighlightVectors', obj.recordid);
 
+                    },
+
+                    // When an item is activated.
+                    'itemactivate': function(event, obj) {
+
+                        // Trigger out.
+                        self._trigger('itemactivate', {}, obj);
+
+                    },
+
+                    // When an item is deactivated.
+                    'itemdeactivate': function(event, obj) {
+
+                        // Trigger out.
+                        self._trigger('itemdeactivate', {}, obj);
+
                     }
 
                 };
@@ -306,7 +328,7 @@
 
                 // Otherwise, do the editing-enabled tray.
                 else {
-                    this.items.neatlineitems(callbacks);
+                    this.items.itemorderer(callbacks);
                 }
 
                 // Register the presence of the udi instantiation.

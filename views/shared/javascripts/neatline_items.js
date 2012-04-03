@@ -529,11 +529,22 @@
             // If the title it not already activated.
             if (!item.data('expanded')) {
 
+                // Get data attributes.
+                var recordid = parseInt(item.attr('recordid'), 10);
+                var slug = item.attr('slug');
+
                 // Fade up and grow title.
                 item.stop().animate({
                     'font-size': '+=5px',
                     'color': this.options.colors.purple
                 }, 100);
+
+                // Trigger out to the deployment code.
+                this._trigger('itemactivate', {}, {
+                    'recordid': recordid,
+                    'slug': slug,
+                    'scrollItems': true
+                });
 
             }
 
@@ -552,6 +563,10 @@
             // Halt if the item is not currently activated.
             if (item.data('expanded')) {
 
+                // Get data attributes.
+                var recordid = parseInt(item.attr('recordid'), 10);
+                var slug = item.attr('slug');
+
                 // If not immediate, animate down.
                 if (!immediate) {
                     item.stop().animate({
@@ -567,6 +582,13 @@
                         'color': this.options.colors.title
                     });
                 }
+
+                // Trigger out to the deployment code.
+                this._trigger('itemdeactivate', {}, {
+                    'recordid': recordid,
+                    'slug': slug,
+                    'scrollItems': true
+                });
 
             }
 
