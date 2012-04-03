@@ -145,7 +145,6 @@
                 var recordid = parseInt(item.attr('recordid'), 10);
                 var slug = item.attr('slug');
 
-
                 // Set expanded tracker, push onto ordering.
                 item.data('expanded', false);
                 self._idOrdering.push(recordid);
@@ -174,6 +173,7 @@
                             // Trigger out to the deployment code.
                             self._trigger('itemclick', {}, {
                                 'recordid': recordid,
+                                'slug': slug,
                                 'scrollItems': true
                             });
 
@@ -194,7 +194,8 @@
 
                         // Trigger out to the deployment code.
                         self._trigger('itementer', {}, {
-                            'recordid': recordid
+                            'recordid': recordid,
+                            'slug': slug
                         });
 
                     },
@@ -207,7 +208,8 @@
 
                         // Trigger out to the deployment code.
                         self._trigger('itemleave', {}, {
-                            'recordid': recordid
+                            'recordid': recordid,
+                            'slug': slug
                         });
                     }
 
