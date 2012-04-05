@@ -843,9 +843,19 @@
             var immediate = false;
 
             // If another form is currently expanded, hide it.
-            if (this._currentFormItem != null) {
+            if (!_.isNull(this._currentFormItem)) {
+
+                // Get record ids.
+                var currentId = this._currentFormItem.attr('recordid');
+                var newId = item.attr('recordid');
+
+                // If the new item is the same as the old item, break.
+                if (currentId == newId) { return; }
+
+                // Otherwise, close the current form.
                 this._hideForm(this._currentFormItem, true);
                 immediate = true;
+
             }
 
             // Position at the top of the frame. Bumps up the scroll position by

@@ -272,6 +272,8 @@
 
             });
 
+            console.log(wkts);
+
             return wkts.join(this.options.wkt_delimiter);
 
         },
@@ -403,8 +405,7 @@
                         displayClass: 'olControlDrawFeaturePath',
                         featureAdded: function() {
                             self._trigger('featureadded');
-                            self.clickControl.setLayer(self._currentEditLayer);
-                            self.highlightControl.setLayer(self._currentEditLayer);
+                            self._addClickControls();
                         }
                 }),
 
@@ -415,8 +416,7 @@
                         displayClass: 'olControlDrawFeaturePoint',
                         featureAdded: function() {
                             self._trigger('featureadded');
-                            self.clickControl.setLayer(self._currentEditLayer);
-                            self.highlightControl.setLayer(self._currentEditLayer);
+                            self._addClickControls();
                         }
                 }),
 
@@ -428,8 +428,6 @@
                         featureAdded: function() {
                             self._trigger('featureadded');
                             self._addClickControls();
-                            // self.clickControl.setLayer(self._currentEditLayer);
-                            // self.highlightControl.setLayer(self._currentEditLayer);
                         }
                 })
 

@@ -527,8 +527,6 @@
                 // When the feature is selected.
                 onSelect: function(feature) {
 
-                    console.log('test');
-
                     // Get the record.
                     var record = self._db({
                         layerid: feature.layer.id
@@ -997,9 +995,7 @@
         _showTitleTip: function(record) {
 
             // Populate title.
-            this.titleTip.text(
-                $('<span></span>').html(record.data.title).text()
-            );
+            this.titleTip.text(record.data.title);
 
             // Show.
             this.titleTip.css('display', 'block');
