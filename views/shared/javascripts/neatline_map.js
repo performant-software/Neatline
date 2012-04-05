@@ -522,9 +522,12 @@
             this.clickControl = new OpenLayers.Control.SelectFeature(this._currentVectorLayers, {
 
                 clickout: true,
+                toggle: true,
 
                 // When the feature is selected.
                 onSelect: function(feature) {
+
+                    console.log('test');
 
                     // Get the record.
                     var record = self._db({
@@ -581,18 +584,6 @@
          * Remove all edit/select controls.
          */
         _removeControls: function() {
-
-            if (!_.isUndefined(this.modifyFeatures)) {
-                this.map.removeControl(this.modifyFeatures);
-                this.modifyFeatures.destroy();
-                delete this.modifyFeatures;
-            }
-
-            if (!_.isUndefined(this.editToolbar)) {
-                this.map.removeControl(this.editToolbar);
-                this.editToolbar.destroy();
-                delete this.editToolbar;
-            }
 
             if (!_.isUndefined(this.clickControl)) {
                 this.map.removeControl(this.clickControl);

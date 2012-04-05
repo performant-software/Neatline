@@ -147,9 +147,6 @@
                 this.map.addLayer(this._currentEditLayer);
                 this._currentEditLayer.setMap(this.map);
 
-                // Set default style.
-                this.setDefaultStyle();
-
                 // Add the database record.
                 self._db.insert({
                     itemid: itemid,
@@ -407,6 +404,7 @@
                         featureAdded: function() {
                             self._trigger('featureadded');
                             self.clickControl.setLayer(self._currentEditLayer);
+                            self.highlightControl.setLayer(self._currentEditLayer);
                         }
                 }),
 
@@ -418,6 +416,7 @@
                         featureAdded: function() {
                             self._trigger('featureadded');
                             self.clickControl.setLayer(self._currentEditLayer);
+                            self.highlightControl.setLayer(self._currentEditLayer);
                         }
                 }),
 
@@ -428,7 +427,9 @@
                         displayClass: 'olControlDrawFeaturePolygon',
                         featureAdded: function() {
                             self._trigger('featureadded');
-                            self.clickControl.setLayer(self._currentEditLayer);
+                            self._addClickControls();
+                            // self.clickControl.setLayer(self._currentEditLayer);
+                            // self.highlightControl.setLayer(self._currentEditLayer);
                         }
                 })
 
