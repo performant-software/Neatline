@@ -41,11 +41,19 @@ html {
 /* Top bar */
 
 #topbar {
+    position: fixed;
     height: 38px;
     -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25),inset 0 -1px 0 rgba(0, 0, 0, 0.1);
     -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25),inset 0 -1px 0 rgba(0, 0, 0, 0.1);
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25),inset 0 -1px 0 rgba(0, 0, 0, 0.1);
-    text-shadow: 0 -2px 0 rgba(0, 0, 0, 0.25);
+    text-shadow: 0 -2px 0 rgba(0, 0, 0, 0.25);height: 40px;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10000;
+    overflow: visible;
+    line-height: 18px;
+    font-family: 'Crimson Text', Georgia, serif;
 }
 
 #neatline-logo {
@@ -54,15 +62,18 @@ html {
 }
 
 a.omeka-logo {
-    font-family: 'Crimson Text', Georgia, serif;
     font-size: 19px;
     float: right;
     margin: 8px 20px 0 0;
     color: #e7e7e7;
+    text-decoration: none;
+}
+
+a.omeka-logo:hover {
+    text-decoration: underline;
 }
 
 span.top-bar-title {
-    font-family: 'Crimson Text', Georgia, serif;
     color: #fff;
     font-size: 24px;
     top: 9px;
