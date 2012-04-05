@@ -110,7 +110,7 @@ class AddExhibitForm extends Omeka_Form
         if (plugin_is_active('NeatlineMaps')) {
             $this->addElement('select', 'map', array(
                 'label'         => '(Optional): Neatline Map',
-                'description'   => 'Select a Geoserver map to use as the exhibit foundation. An exhibit can use a Geoserver map created with Neatline Maps, a web map service created by Neatline WMS, or a static image, but not more than one. To just use a real-geography base layers, leave all fields blank.',
+                'description'   => 'Select a Geoserver map to use as the exhibit foundation.',
                 'attribs'       => array('style' => 'width: 230px'),
                 'multiOptions'  => $_maps->getMapsForSelect(),
                 'validators'    => array(

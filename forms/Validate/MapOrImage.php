@@ -49,7 +49,7 @@ class Neatline_Validate_MapOrImage extends Zend_Validate_Abstract
             $context['image'],
             $context['wms']
         ) as $key => $base) {
-            if ($base !== 'none') { $notNone++; }
+            if (isset($base) && $base !== 'none') { $notNone++; }
         }
 
         if ($notNone > 1) {
