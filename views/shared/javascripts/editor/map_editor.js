@@ -272,8 +272,6 @@
 
             });
 
-            console.log(wkts);
-
             return wkts.join(this.options.wkt_delimiter);
 
         },
