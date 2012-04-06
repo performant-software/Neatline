@@ -94,6 +94,7 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         $record->right_percent =                80;
         $record->space_active =                 1;
         $record->time_active =                  1;
+        $record->items_active =                 1;
         $record->display_order =                1;
         $record->map_bounds =                   'BOUND()';
         $record->map_zoom =                     5;
@@ -119,6 +120,7 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         $this->assertEquals($record->right_percent, 80);
         $this->assertEquals($record->space_active, 1);
         $this->assertEquals($record->time_active, 1);
+        $this->assertEquals($record->items_active, 1);
         $this->assertEquals($record->display_order, 1);
         $this->assertEquals($record->map_bounds, 'BOUND()');
         $this->assertEquals($record->map_zoom, 5);

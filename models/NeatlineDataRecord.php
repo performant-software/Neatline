@@ -63,6 +63,7 @@ class NeatlineDataRecord extends Omeka_record
     // Statuses and ordering.
     public $space_active;
     public $time_active;
+    public $items_active;
     public $display_order;
 
     /**

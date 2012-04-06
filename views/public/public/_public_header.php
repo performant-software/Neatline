@@ -36,7 +36,6 @@
     <?php plugin_header(); ?>
 
     <!-- Stylesheets -->
-    <?php queue_css('style'); ?>
     <?php display_css(); ?>
 
     <!-- JavaScripts -->
