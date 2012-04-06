@@ -634,6 +634,10 @@ div.columns div.col-header span.header {
     background-position: center center;
 }
 
+div.columns div.col-header.col-1 span.header {
+    background-image: url('../../shared/images/items_icon.png');
+}
+
 div.columns div.col-header.col-2 span.header {
     background-image: url('../../shared/images/space_icon.png');
 }
