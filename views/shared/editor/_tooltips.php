@@ -30,6 +30,11 @@
     <div class="twipsy-inner">Click to drag.</div>
 </div>
 
+<div id="items-tip" class="twipsy fade above in">
+    <div class="twipsy-arrow"></div>
+    <div class="twipsy-inner">Items</div>
+</div>
+
 <div id="space-tip" class="twipsy fade above in">
     <div class="twipsy-arrow"></div>
     <div class="twipsy-inner">Space</div>

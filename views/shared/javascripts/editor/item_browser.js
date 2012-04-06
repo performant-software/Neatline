@@ -31,16 +31,7 @@
                 default_text_size: 14,
                 top_margin: 40,
                 fader_width: 40,
-                container_min_width: 400,
-                drag_handle_width: 4,
-                tooltips: {
-                    drag_y_offset: 16,
-                    drag_x_offset: 15,
-                    space_y_offset: -38,
-                    space_x_offset: -20,
-                    time_y_offset: -38,
-                    time_x_offset: -16
-                }
+                container_min_width: 400
             },
 
             // Hexes.
@@ -72,6 +63,7 @@
             this.searchCancel =             $('#search-cancel');
             this.neatlineContainer =        $('#neatline');
             this.dragTip =                  $('#drag-tip');
+            this.itemsTip =                 $('#items-tip');
             this.spaceTip =                 $('#space-tip');
             this.timeTip =                  $('#time-tip');
             this.itemsHeader =              $('#items-header');
@@ -83,8 +75,10 @@
             // Trackers.
             this._searchString =            '';
             this._currentFormItem =         null;
+            this._itemsBoxes =              null;
             this._spaceBoxes =              null;
             this._timeBoxes =               null;
+            this._itemsSorted =             false;
             this._spaceSorted =             false;
             this._timeSorted =              false;
             this._firstRequest =            true;
@@ -184,7 +178,6 @@
 
             this._window.bind('resize', function() {
                 self._positionDivs();
-                // self._positionDragHandle();
             });
 
         },
@@ -201,20 +194,6 @@
             });
 
             this._trigger('reposition');
-
-        },
-
-        /*
-         * Position the width dragging container div to the right of the right
-         * boundary of the editor.
-         */
-        _positionDragHandle: function() {
-
-            // Set the height of the drag handle.
-            this.dragHandle.css({
-                'height': this.windowHeight - this.topBarHeight - 1,
-                'top': this.topBarHeight
-            });
 
         },
 
@@ -523,149 +502,10 @@
          */
         _glossColumnHeaders: function() {
 
-            var self = this;
-
-            // Build events on both of the headers.
-            $.each([this.spaceHeader, this.timeHeader], function(i, header) {
-
-                header.bind({
-
-                    'mouseenter': function(e) {
-
-                        // Get header-specific items.
-                        if (header == self.spaceHeader) {
-                            var tip = self.spaceTip;
-                            var boxes = self._spaceBoxes;
-                            var y_offset = self.options.css.tooltips.space_y_offset
-                            var x_offset = self.options.css.tooltips.space_x_offset
-                        } else {
-                            var tip = self.timeTip;
-                            var boxes = self._timeBoxes;
-                            var y_offset = self.options.css.tooltips.time_y_offset
-                            var x_offset = self.options.css.tooltips.time_x_offset
-                        }
-
-                        // Get coordinates of the header.
-                        var offset = header.offset();
-
-                        // Position and show the tooltip.
-                        tip.css({
-                            'display': 'block',
-                            'top': offset.top + y_offset,
-                            'left': offset.left + x_offset
-                        });
-
-                        // Only do the gloss if the markup is loaded and registered.
-                        if (boxes != null) {
-
-                            $.each(boxes, function(i, box) {
-                                $(box).css('background-color', self.options.colors.orange);
-                            });
-
-                        }
-
-                    },
-
-                    'mouseleave': function() {
-
-                        // Get header-specific items.
-                        if (header == self.spaceHeader) {
-                            var tip = self.spaceTip;
-                            var boxes = self._spaceBoxes;
-                        } else {
-                            var tip = self.timeTip;
-                            var boxes = self._timeBoxes;
-                        }
-
-                        tip.css('display', 'none');
-
-                        // Only do the gloss if the markup is loaded and registered.
-                        if (boxes != null) {
-
-                            $.each(boxes, function(i, box) {
-                                $(box).css('background-color', '');
-                            });
-
-                        }
-
-                    },
-
-                    'mousedown': function() {
-
-                        // Get header-specific items.
-                        if (header == self.spaceHeader) {
-                            var sorted = self._spaceSorted;
-                            var otherSorted = self._timeSorted;
-                            var dataKey = 'space';
-                            var otherDataKey = 'time';
-                        } else {
-                            var sorted = self._timeSorted;
-                            var otherSorted = self._spaceSorted;
-                            var dataKey = 'time';
-                            var otherDataKey = 'space';
-                        }
-
-                        // If there is an active form, close it.
-                        if (self._currentFormItem) {
-                            self._hideForm(self._currentFormItem, true);
-                        }
-
-                        // If not sorted, sort.
-                        if (!sorted) {
-
-                            // Hide everything without an active space record.
-                            $.each(self.items, function(i, item) {
-
-                                var item = $(item);
-
-                                if (!item.data(dataKey)) {
-                                    item.css('display', 'none');
-                                    item.next('tr.edit-form').css('display', 'none');
-                                }
-
-                            });
-
-                            // Add active class to header.
-                            header.addClass('active');
-
-                            // Set the tracker.
-                            if (header == self.spaceHeader) { self._spaceSorted = true; }
-                            else { self._timeSorted = true; }
-
-                        }
-
-                        // Else, unsort.
-                        else {
-
-                            $.each(self.items, function(i, item) {
-
-                                var item = $(item);
-
-                                if (!item.data(dataKey)) {
-                                    if (!(otherSorted && !item.data(otherDataKey))) {
-                                        item.css('display', '');
-                                        item.next('tr.edit-form').css('display', '');
-                                    }
-                                }
-
-                            });
-
-                            // Add active class to header.
-                            header.removeClass('active');
-
-                            // Set the tracker.
-                            if (header == self.spaceHeader) { self._spaceSorted = false; }
-                            else { self._timeSorted = false; }
-
-                        }
-
-                        // Recalculate all top offsets.
-                        self._calculateAllTopOffsets();
-
-                    }
-
-                });
-
+            // Tooltips.
+            this.itemsListHeader.find('a.header').twipsy({
+                offset: 4,
+                animate: false
             });
 
         },
@@ -801,6 +641,7 @@
             });
 
             // Fetch the space and time boxes and set the class global buckets.
+            this._itemsBoxes = this.items.find('.items');
             this._spaceBoxes = this.items.find('.space');
             this._timeBoxes = this.items.find('.time');
 

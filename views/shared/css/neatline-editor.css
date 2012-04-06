@@ -618,7 +618,7 @@ div.col-3 {
     right: 6px;
 }
 
-div.columns div.col-header span.header {
+div.columns div.col-header a.header {
     text-transform: uppercase;
     display: inline-block;
     padding: 0 2px 0 2px;
@@ -634,15 +634,15 @@ div.columns div.col-header span.header {
     background-position: center center;
 }
 
-div.columns div.col-header.col-1 span.header {
+div.columns div.col-header.col-1 a.header {
     background-image: url('../../shared/images/items_icon.png');
 }
 
-div.columns div.col-header.col-2 span.header {
+div.columns div.col-header.col-2 a.header {
     background-image: url('../../shared/images/space_icon.png');
 }
 
-div.columns div.col-header.col-3 span.header {
+div.columns div.col-header.col-3 a.header {
     background-image: url('../../shared/images/time_icon.png');
 }
 

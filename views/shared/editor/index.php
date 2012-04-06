@@ -47,7 +47,6 @@
 )); ?>
 
 <!-- Templates for tooltips and geometry editing. -->
-<?php echo $this->partial('editor/_tooltips.php'); ?>
 <?php echo $this->partial('editor/_edit_geometry.php'); ?>
 
 <!-- Custom footer. -->
