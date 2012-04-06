@@ -31,6 +31,7 @@
         <td class="neatline-bar">Neatline Records</td>
         <td class="col-1 neatline-bar"></td>
         <td class="col-2 neatline-bar"></td>
+        <td class="col-3 neatline-bar"></td>
     </tr>
 
     <?php foreach ($records as $record): ?>
@@ -40,15 +41,18 @@
                 <span class="item-title-text"><?php echo ($record->title != null) ? $record->title : '[Untitled]'; ?></span>
                 <span class="item-title-fader"></span>
             </td>
-            <td class="col-1 col-row space">
+            <td class="col-1 col-row items">
+                <input type="checkbox" <?php echo ($record->items_active == 1) ? 'checked' : ''; ?> />
+            </td>
+            <td class="col-2 col-row space">
                 <input type="checkbox" <?php echo ($record->space_active == 1) ? 'checked' : ''; ?> />
             </td>
-            <td class="col-2 col-row time">
+            <td class="col-3 col-row time">
                 <input type="checkbox" <?php echo ($record->time_active == 1) ? 'checked' : ''; ?> />
             </td>
         </tr>
 
-        <tr class="edit-form"><td colspan="3"></td></tr>
+        <tr class="edit-form"><td colspan="4"></td></tr>
 
     <?php endforeach; ?>
 

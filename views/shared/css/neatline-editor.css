@@ -231,7 +231,6 @@ span.item-title-text {
 #new-item-button {
     position: relative;
     top: 7px;
-    left: 10px;
 }
 
 tr.header-row td {
@@ -608,10 +607,14 @@ div.columns div.col-row {
 }
 
 div.col-1 {
-    right: 39px;
+    right: 72px;
 }
 
 div.col-2 {
+    right: 39px;
+}
+
+div.col-3 {
     right: 6px;
 }
 
@@ -631,11 +634,11 @@ div.columns div.col-header span.header {
     background-position: center center;
 }
 
-div.columns div.col-header.col-1 span.header {
+div.columns div.col-header.col-2 span.header {
     background-image: url('../../shared/images/space_icon.png');
 }
 
-div.columns div.col-header.col-2 span.header {
+div.columns div.col-header.col-3 span.header {
     background-image: url('../../shared/images/time_icon.png');
 }
 
@@ -689,11 +692,13 @@ table#items-table td.col-1:hover, table#items td.col-2:hover {
 }
 
 table#items-table td.col-1,
-table#items-table td.col-2 {
+table#items-table td.col-2,
+table#items-table td.col-3 {
     width: 33px;
 }
 .mozilla table#items-table td.col-1,
-.mozilla table#items-table td.col-2 {
+.mozilla table#items-table td.col-2,
+.mozilla table#items-table td.col-3 {
     width: 13px;
 }
 

@@ -74,8 +74,9 @@
             this.dragTip =                  $('#drag-tip');
             this.spaceTip =                 $('#space-tip');
             this.timeTip =                  $('#time-tip');
-            this.spaceHeader =              $('div.col-1.col-header span.header');
-            this.timeHeader =               $('div.col-2.col-header span.header');
+            this.itemsHeader =              $('#items-header');
+            this.spaceHeader =              $('#space-header');
+            this.timeHeader =               $('#time-header');
             this.editForm =                 $('#edit-form');
             this.newItemButton =            $('#new-item-button');
 
