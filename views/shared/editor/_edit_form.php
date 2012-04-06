@@ -120,72 +120,88 @@
         <a class="fieldset map-styles" href="">
             <div class="fieldset-arrow"></div>Map Styles
         </a>
-        <fieldset>
+        <div class="fieldset">
 
-            <div class="control-group">
+            <div class="clearfix">
                 <label>Shape Color</label>
-                <div class="controls">
-                    <input type="text" class="color-picker" name="vector-color" />
-                    <p class="help-block">Select a fill color for the map shapes.</p>
+                <div class="input">
+                    <div class="inline-inputs">
+                        <input type="text" class="color-picker" name="vector-color" />
+                        <span class="help-inline">Select a color for the item's spatial vectors.</span>
+                    </div>
                 </div>
             </div>
 
-            <div class="control-group">
+            <div class="clearfix">
                 <label>Line Color</label>
-                <div class="controls">
-                    <input type="text" class="color-picker" name="stroke-color" />
-                    <p class="help-block">Select a color for the border lines around shapes.</p>
+                <div class="input">
+                    <div class="inline-inputs">
+                        <input type="text" class="color-picker" name="stroke-color" />
+                        <span class="help-inline">Select a color for the border lines around shapes.</span>
+                    </div>
                 </div>
             </div>
 
-            <div class="control-group">
+            <div class="clearfix">
                 <label>Highlight Color</label>
-                <div class="controls">
-                    <input type="text" class="color-picker" name="highlight-color" />
-                    <p class="help-block">Select a highlight color for the map shapes.</p>
+                <div class="input">
+                    <div class="inline-inputs">
+                        <input type="text" class="color-picker" name="highlight-color" />
+                        <span class="help-inline">Select a highlight color.</span>
+                    </div>
                 </div>
             </div>
 
-            <div class="control-group">
+            <div class="clearfix">
                 <label>Shape Opacity</label>
-                <div class="controls">
-                    <input type="text" class="integer-dragger" name="vector-opacity" />
-                    <p class="help-block">Set the opacity for the map shapes.</p>
+                <div class="input">
+                    <div class="inline-inputs">
+                        <input type="text" class="integer-dragger" name="vector-opacity" />
+                        <span class="help-inline">Set the opacity for the item's vectors on the map.</span>
+                    </div>
                 </div>
             </div>
 
-            <div class="control-group">
+            <div class="clearfix">
                 <label>Line Opacity</label>
-                <div class="controls">
-                    <input type="text" class="integer-dragger" name="stroke-opacity" />
-                    <p class="help-block">Set the opacity for the border lines around shapes.</p>
+                <div class="input">
+                    <div class="inline-inputs">
+                        <input type="text" class="integer-dragger" name="stroke-opacity" />
+                        <span class="help-inline">Set the opacity for the border lines.</span>
+                    </div>
                 </div>
             </div>
 
-            <div class="control-group">
+            <div class="clearfix">
                 <label>Line Thickness</label>
-                <div class="controls">
-                    <input type="text" class="integer-dragger" name="stroke-width" />
-                    <p class="help-block">Set the width of the border lines around shapes.</p>
+                <div class="input">
+                    <div class="inline-inputs">
+                        <input type="text" class="integer-dragger" name="stroke-width" />
+                        <span class="help-inline">Set the width, in pixels, for the border lines.</span>
+                    </div>
                 </div>
             </div>
 
-            <div class="control-group">
+            <div class="clearfix">
                 <label>Point Radius</label>
-                <div class="controls">
-                    <input type="text" class="integer-dragger" name="point-radius" />
-                    <p class="help-block">Set the radius of points on the map.</p>
+                <div class="input">
+                    <div class="inline-inputs">
+                        <input type="text" class="integer-dragger" name="point-radius" />
+                        <span class="help-inline">Set the radius for point on the map.</span>
+                    </div>
                 </div>
             </div>
 
-            <div class="control-group">
-                <div class="controls">
-                    <button id="reset-styles-button" class="btn" href="#"><i class="icon-ok-sign"></i> Save</button>
-                    <button class="btn icon undo reset-styles">Reset Item Styles</button>
+            <div class="clearfix">
+                <div class="input">
+                    <div class="inline-inputs">
+                        <button class="btn icon undo reset-styles">Reset Item Styles</button>
+                        <span class="help-inline">Reset all styles to match the exhibit defaults.</span>
+                    </div>
                 </div>
             </div>
 
-        </fieldset>
+        </div>
 
         <hr />
 
@@ -194,7 +210,7 @@
             <div class="clearfix">
                 <div class="input">
                     <div class="inline-inputs">
-                        <button id="map-focus-button" class="btn" href="#"><i class="icon-map-marker"></i> Fix Item-Specific Map Focus</button>
+                        <button class="btn icon home map-focus">Fix Item-Specific Map Focus</button>
                         <span class="help-inline">Set a custom map focus for the item.</span>
                     </div>
                 </div>

@@ -285,7 +285,7 @@ tr.edit-form td {
     margin: 0.3em 0 0 0;
 }
 
-.neatline-record-edit-form fieldset {
+.neatline-record-edit-form div.fieldset {
     overflow-y: hidden;
     overflow-x: visible;
     padding: 0 40px 0 20px;
