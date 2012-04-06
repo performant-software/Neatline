@@ -76,8 +76,6 @@
             // Getters.
             this._window =                  $(window);
             this.form =                     this.element.find('form');
-            this.saveButton =               this.form.find('#record-save-button');
-            this.deleteButton =             this.form.find('#record-delete-button');
             this.title =                    this.form.find('textarea[name="title"]');
             this.slug =                     this.form.find('input[name="slug"]');
             this.description =              this.form.find('textarea[name="description"]');
@@ -97,7 +95,9 @@
             this.actions =                  this.form.find('#edit-form-actions');
             this.inputs =                   this.form.find('#edit-form-inputs');
             this.ambiguity =                this.form.find('.date-ambiguity-container');
-            this.mapFocus =                 this.form.find('.map-focus');
+            this.saveButton =               this.form.find('#record-save-button');
+            this.deleteButton =             this.form.find('#record-delete-button');
+            this.mapFocus =                 this.form.find('#map-focus-button');
             this.resetStyles =              this.form.find('.reset-styles');
             this.titleDescriptionFieldset = this.form.find('a.fieldset.title-and-description');
             this.dateInformationFieldset =  this.form.find('a.fieldset.date-information');
