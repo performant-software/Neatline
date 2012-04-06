@@ -477,43 +477,39 @@
                 highlightOnly: true,
                 renderIntent: 'temporary',
 
-                eventListeners: {
+                overFeature: function(feature) {
 
-                    featurehighlighted: function(e) {
+                    // Get record.
+                    var record = self._db({
+                        layerid: feature.layer.id
+                    }).first();
 
-                        // Get record.
-                        var record = self._db({
-                            layerid: e.feature.layer.id
-                        }).first();
+                    // Trigger out to the deployment code.
+                    self._trigger('featureenter', {}, {
+                        'recordid': record.recordid,
+                        'slug': record.data.slug
+                    });
 
-                        // Trigger out to the deployment code.
-                        self._trigger('featureenter', {}, {
-                            'recordid': record.recordid,
-                            'slug': record.data.slug
-                        });
+                    // Show title tip.
+                    self._showTitleTip(record);
 
-                        // Show title tip.
-                        self._showTitleTip(record);
+                },
 
-                    },
+                outFeature: function(feature) {
 
-                    featureunhighlighted: function(e) {
+                    // Get record.
+                    var record = self._db({
+                        layerid: feature.layer.id
+                    }).first();
 
-                        // Get record.
-                        var record = self._db({
-                            layerid: e.feature.layer.id
-                        }).first();
+                    // Trigger out to the deployment code.
+                    self._trigger('featureleave', {}, {
+                        'recordid': record.recordid,
+                        'slug': record.data.slug
+                    });
 
-                        // Trigger out to the deployment code.
-                        self._trigger('featureleave', {}, {
-                            'recordid': record.recordid,
-                            'slug': record.data.slug
-                        });
-
-                        // Hide the title tip.
-                        self._hideTitleTip();
-
-                    }
+                    // Hide the title tip.
+                    self._hideTitleTip();
 
                 }
 
