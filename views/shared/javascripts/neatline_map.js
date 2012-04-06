@@ -349,7 +349,8 @@
             var self = this;
 
             // If there are existing click and highlight controls, destroy them.
-            this._removeControls();
+            this._removeSelectControls();
+            this._removeEditControls();
 
             // Clear existing vectors.
             $.each(this._currentVectorLayers, function(i, layer) {
@@ -467,7 +468,7 @@
             var self = this;
 
             // If there are existing click and highlight controls, destroy them.
-            this._removeControls();
+            this._removeSelectControls();
 
             // Highlight controller.
             this.highlightControl = new OpenLayers.Control.SelectFeature(this._currentVectorLayers, {
@@ -579,9 +580,9 @@
         },
 
         /*
-         * Remove all edit/select controls.
+         * Remove all click controls.
          */
-        _removeControls: function() {
+        _removeSelectControls: function() {
 
             if (!_.isUndefined(this.clickControl)) {
                 this.map.removeControl(this.clickControl);
@@ -593,6 +594,25 @@
                 this.map.removeControl(this.highlightControl);
                 this.highlightControl.destroy();
                 delete this.highlightControl;
+            }
+
+        },
+
+        /*
+         * Remove all edit controls.
+         */
+        _removeEditControls: function() {
+
+            if (!_.isUndefined(this.editToolbar)) {
+                this.map.removeControl(this.editToolbar);
+                this.editToolbar.destroy();
+                delete this.editToolbar;
+            }
+
+            if (!_.isUndefined(this.modifyFeatures)) {
+                this.map.removeControl(this.modifyFeatures);
+                this.modifyFeatures.destroy();
+                delete this.modifyFeatures;
             }
 
         },

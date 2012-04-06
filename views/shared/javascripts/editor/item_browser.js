@@ -568,7 +568,7 @@
                 else { item.data('time', false); }
 
                 // Disable checkbox behevior for the space/time boxes.
-                $.each([spaceCheckbox, timeCheckbox], function(i, box) {
+                $.each([spaceCheckbox, timeCheckbox, itemsCheckbox], function(i, box) {
                     box.bind('click', function(event) {
                         event.preventDefault();
                     });
