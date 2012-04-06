@@ -560,6 +560,8 @@
                 self._calculateTopOffset(item);
 
                 // Store the space/time status on the DOM.
+                if (itemsCheckbox.prop('checked')) { item.data('items', true); }
+                else { item.data('items', false); }
                 if (spaceCheckbox.prop('checked')) { item.data('space', true); }
                 else { item.data('space', false); }
                 if (timeCheckbox.prop('checked')) { item.data('time', true); }

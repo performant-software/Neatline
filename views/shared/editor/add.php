@@ -30,10 +30,13 @@
         <span class="item-title-text"><?php echo ($record->title != null) ? $record->title : '[Untitled]'; ?></span>
         <span class="item-title-fader"></span>
     </td>
-    <td class="col-1 col-row space">
+    <td class="col-1 col-row items">
         <input type="checkbox" />
     </td>
-    <td class="col-2 col-row time">
+    <td class="col-2 col-row space">
+        <input type="checkbox" />
+    </td>
+    <td class="col-3 col-row time">
         <input type="checkbox" />
     </td>
 </tr>
