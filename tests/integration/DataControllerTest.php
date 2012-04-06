@@ -293,27 +293,46 @@ class Neatline_DataControllerTest extends Omeka_Test_AppTestCase
     public function testUdi()
     {
 
-        // Create an exhibit, item, and record.
+        // Create an exhibit and item.
         $neatline = $this->helper->_createNeatline();
         $item = $this->helper->_createItem();
-        $record = new NeatlineDataRecord($item, $neatline);
 
-        // Populate items-relevant attributes.
-        $record->title = 'Item 1 Title';
-        $record->slug = 'slug-1';
-        $record->description = 'Item 1 description.';
-        $record->space_active = 1;
-        $record->time_active = 1;
-        $record->save();
+        // Create record1.
+        $record1 = new NeatlineDataRecord($item, $neatline);
+        $record1->title = 'Item 1 Title';
+        $record1->slug = 'slug-1';
+        $record1->description = 'Item 1 description.';
+        $record1->items_active = 1;
+        $record1->save();
+
+        // Create record2.
+        $record2 = new NeatlineDataRecord($item, $neatline);
+        $record2->title = 'Item 2 Title';
+        $record2->slug = 'slug-2';
+        $record2->description = 'Item 2 description.';
+        $record2->map_active = 1;
+        $record2->save();
+
+        // Create record2.
+        $record3 = new NeatlineDataRecord($item, $neatline);
+        $record3->title = 'Item 3 Title';
+        $record3->slug = 'slug-3';
+        $record3->description = 'Item 3 description.';
+        $record3->time_active = 1;
+        $record3->save();
 
         // Hit the route.
         $this->dispatch('neatline-exhibits/' . $neatline->id . '/data/udi');
 
-        // Check markup.
-        $this->assertQuery('li.item-title[recordid="' . $record->id . '"]');
-        $this->assertQuery('li.item-title[slug="' . $record->slug . '"]');
+        // Check for record1.
+        $this->assertQuery('li.item-title[recordid="' . $record1->id . '"]');
+        $this->assertQuery('li.item-title[slug="' . $record1->slug . '"]');
         $this->assertQueryContentContains('li.item-title', 'Item 1 Title');
         $this->assertQueryContentContains('li.item-description', 'Item 1 description.');
+
+        // Check for record2 and record3 absent.
+        $this->assertNotQuery('li.item-title[recordid="' . $record2->id . '"]');
+        $this->assertNotQuery('li.item-title[recordid="' . $record3->id . '"]');
 
     }
 
@@ -332,8 +351,8 @@ class Neatline_DataControllerTest extends Omeka_Test_AppTestCase
         $record = new NeatlineDataRecord($item, $neatline);
 
         // Populate items-relevant attributes.
-        $record->space_active = 1;
-        $record->time_active = 1;
+        $record->items_active = 1;
+        $record->items_active = 1;
         $record->save();
 
         // Create element texts.

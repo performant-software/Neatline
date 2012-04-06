@@ -95,7 +95,7 @@ class Neatline_DataController extends Omeka_Controller_Action
         // Get the exhibit and active records.
         $neatlineId = $this->_request->getParam('id');
         $neatline = $this->_neatlinesTable->find($neatlineId);;
-        $records = $this->_recordsTable->getActiveRecordsByExhibit($neatline);
+        $records = $this->_recordsTable->getItemsRecordsByExhibit($neatline);
 
         // If no active records, pass empty array.
         if (!$records) $records = array();
