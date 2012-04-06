@@ -123,6 +123,7 @@ class NeatlineDataRecord extends Omeka_record
         $this->right_percent = 100;
         $this->space_active = 0;
         $this->time_active = 0;
+        $this->items_active = 0;
 
     }
 

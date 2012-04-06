@@ -151,6 +151,7 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         // Status columns should be false.
         $this->assertEquals($record->space_active, 0);
         $this->assertEquals($record->time_active, 0);
+        $this->assertEquals($record->items_active, 0);
 
         // Ambiguity percentages should be 0 and 100.
         $this->assertEquals($record->left_percent, 0);

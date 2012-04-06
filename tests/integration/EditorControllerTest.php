@@ -1633,10 +1633,10 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $record3 = new NeatlineDataRecord($item3, $neatline);
         $record4 = new NeatlineDataRecord($item4, $neatline);
         $record5 = new NeatlineDataRecord($item5, $neatline);
-        $record1->space_active = 1;
-        $record2->space_active = 1;
-        $record3->space_active = 1;
-        $record4->space_active = 1;
+        $record1->items_active = 1;
+        $record2->items_active = 1;
+        $record3->items_active = 1;
+        $record4->items_active = 1;
         $record1->save();
         $record2->save();
         $record3->save();

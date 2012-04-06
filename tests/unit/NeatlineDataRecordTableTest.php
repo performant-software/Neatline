@@ -639,10 +639,10 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
         $record2 = new NeatlineDataRecord($item2, $neatline);
         $record3 = new NeatlineDataRecord($item3, $neatline);
         $record4 = new NeatlineDataRecord($item4, $neatline);
-        $record1->space_active = 1;
-        $record2->space_active = 1;
-        $record3->space_active = 1;
-        $record4->space_active = 1;
+        $record1->items_active = 1;
+        $record2->items_active = 1;
+        $record3->items_active = 1;
+        $record4->items_active = 1;
         $record1->save();
         $record2->save();
         $record3->save();
@@ -669,6 +669,104 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
 
         // Get the items.
         $records = $this->_recordsTable->getActiveRecordsByExhibit($neatline);
+
+        // The records should be reordered.
+        $this->assertEquals($records[0]->item_id, $item4->id);
+        $this->assertEquals($records[1]->item_id, $item3->id);
+        $this->assertEquals($records[2]->item_id, $item2->id);
+        $this->assertEquals($records[3]->item_id, $item1->id);
+
+    }
+
+    /**
+     * getItemsRecordsByExhibit() should return all data records associated
+     * with a given Neatline exhibit that are active in the items viewport.
+     *
+     * @return void.
+     */
+    public function testGetItemsRecordsByExhibit()
+    {
+
+        // Create two items and an exhibit.
+        $item1 = $this->helper->_createItem();
+        $item2 = $this->helper->_createItem();
+        $neatline = $this->helper->_createNeatline();
+
+        // Create two records with inactive status settings.
+        $record1 = new NeatlineDataRecord($item1, $neatline);
+        $record1->save();
+        $record2 = new NeatlineDataRecord($item2, $neatline);
+        $record2->save();
+
+        // Should return false.
+        $records = $this->_recordsTable->getItemsRecordsByExhibit($neatline);
+        $this->assertFalse($records);
+
+        $record1->delete();
+        $record2->delete();
+
+        // Create two records, one with an active time status.
+        $record1 = new NeatlineDataRecord($item1, $neatline);
+        $record1->save();
+        $record2 = new NeatlineDataRecord($item2, $neatline);
+        $record2->items_active = 1;
+        $record2->save();
+
+        // Get the records and check result.
+        $records = $this->_recordsTable->getItemsRecordsByExhibit($neatline);
+        $this->assertEquals(count($records), 1);
+        $this->assertEquals($records[0]->id, $record2->id);
+
+    }
+
+    /**
+     * getItemsRecordsByExhibit() order records by the display_order column.
+     *
+     * @return void.
+     */
+    public function testGetItemsRecordsByExhibitOrdering()
+    {
+
+        // Create an exhibit, items, and records.
+        $neatline = $this->helper->_createNeatline();
+        $item1 = $this->helper->_createItem();
+        $item2 = $this->helper->_createItem();
+        $item3 = $this->helper->_createItem();
+        $item4 = $this->helper->_createItem();
+        $record1 = new NeatlineDataRecord($item1, $neatline);
+        $record2 = new NeatlineDataRecord($item2, $neatline);
+        $record3 = new NeatlineDataRecord($item3, $neatline);
+        $record4 = new NeatlineDataRecord($item4, $neatline);
+        $record1->items_active = 1;
+        $record2->items_active = 1;
+        $record3->items_active = 1;
+        $record4->items_active = 1;
+        $record1->save();
+        $record2->save();
+        $record3->save();
+        $record4->save();
+
+        // Get the items.
+        $records = $this->_recordsTable->getItemsRecordsByExhibit($neatline);
+
+        // By default, the records should be ordered by item id.
+        $this->assertEquals($records[0]->item_id, $item1->id);
+        $this->assertEquals($records[1]->item_id, $item2->id);
+        $this->assertEquals($records[2]->item_id, $item3->id);
+        $this->assertEquals($records[3]->item_id, $item4->id);
+
+        $order = array(
+            $record1->id => 3,
+            $record2->id => 2,
+            $record3->id => 1,
+            $record4->id => 0
+        );
+
+        // Push a new order.
+        $this->_recordsTable->saveOrder($neatline, $order);
+
+        // Get the items.
+        $records = $this->_recordsTable->getItemsRecordsByExhibit($neatline);
 
         // The records should be reordered.
         $this->assertEquals($records[0]->item_id, $item4->id);
@@ -1286,10 +1384,10 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
         $record2 = new NeatlineDataRecord($item2, $neatline);
         $record3 = new NeatlineDataRecord($item3, $neatline);
         $record4 = new NeatlineDataRecord($item4, $neatline);
-        $record1->space_active = 1;
-        $record2->space_active = 1;
-        $record3->space_active = 1;
-        $record4->space_active = 1;
+        $record1->items_active = 1;
+        $record2->items_active = 1;
+        $record3->items_active = 1;
+        $record4->items_active = 1;
         $record1->save();
         $record2->save();
         $record3->save();
