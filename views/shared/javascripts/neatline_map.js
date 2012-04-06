@@ -490,8 +490,8 @@
                         'slug': record.data.slug
                     });
 
-                    // Show title tip.
-                    self._showTitleTip(record);
+                    // Render highlight.
+                    self.highlightControl.highlight(feature);
 
                 },
 
@@ -508,8 +508,8 @@
                         'slug': record.data.slug
                     });
 
-                    // Hide the title tip.
-                    self._hideTitleTip();
+                    // Render default.
+                    self.highlightControl.unhighlight(feature);
 
                 }
 
