@@ -31,7 +31,7 @@
 
         <input type="text" placeholder="Search items" id="search-box" />
         <span id="search-cancel">x</span>
-        <button id="new-item-button" class="btn"><i class="icon-plus"></i> New Record</button>
+        <button id="new-item-button" class="btn icon add">New Record</button>
         <div class="columns">
             <div class="col-1 col-cell col-header"><span class="header"></span></div>
             <div class="col-2 col-cell col-header"><span class="header"></span></div>
