@@ -68,6 +68,7 @@
 
             // Getters.
             this._window = $(window);
+            this.opacitySlider = $('#opacity-slider');
 
             // Trackers and buckets.
             this._db =                      TAFFY();
@@ -161,10 +162,10 @@
             this._setDefaultLayer();
 
             // Construct the WMS layers.
-            var wmsLayers = [];
+            this.wmsLayers = [];
             _.each(Neatline.map.layers.split(','), function(layer) {
 
-                wmsLayers.push(new OpenLayers.Layer.WMS(
+                self.wmsLayers.push(new OpenLayers.Layer.WMS(
                     layer,
                     Neatline.map.wmsAddress,
                     {
@@ -185,7 +186,7 @@
             });
 
             // Push the wms layers onto the map.
-            this.map.addLayers(wmsLayers);
+            this.map.addLayers(this.wmsLayers);
 
             // If there is a default bounding box set for the exhibit, construct
             // a second Bounds object to use as the starting zoom target.
@@ -201,6 +202,9 @@
 
             // Set starting zoom focus.
             this.map.zoomToExtent(bounds);
+
+            // Instantiate opacity slider.
+            this._instantiateOpacitySlider();
 
         },
 
@@ -338,6 +342,33 @@
 
             // Set starting zoom focus.
             this.map.zoomToExtent(bounds);
+
+        },
+
+        /*
+         * Build the map opacity slider.
+         */
+        _instantiateOpacitySlider: function() {
+
+            var self = this;
+
+            this.opacitySlider.slider({
+
+                // Configuration options.
+                orientation: 'vertical',
+                range: 'min',
+                min: 0,
+                max: 100,
+                value: 100,
+
+                // Manifest new opacity.
+                slide: function(event, ui) {
+                    _.each(self.wmsLayers, function(layer) {
+                        layer.setOpacity(ui.value/100);
+                    });
+                }
+
+            });
 
         },
 

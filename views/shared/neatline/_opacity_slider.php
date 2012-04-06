@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
 
 /**
- * Base markup for a Neatline.
+ * Base markup for opacity slider.
  *
  * PHP version 5
  *
@@ -25,36 +25,4 @@
  */
 ?>
 
-<!-- Neatline container. -->
-<div id="neatline" class="neatline-container">
-
-    <!-- Map. -->
-    <div id="map" class="neatline-block">
-        <?php echo $this->partial('neatline/_opacity_slider.php'); ?>
-    </div>
-
-    <!-- Timeline. -->
-    <div id="timeline" class="neatline-block neatlinetime-timeline">
-        <?php echo $this->partial('neatline/_timeline_zoom.php'); ?>
-    </div>
-
-    <!-- Items. -->
-    <div id="items" class="neatline-block">
-        <div id="items-container"></div>
-    </div>
-
-    <!-- Scroll arrows. -->
-    <?php echo $this->partial('neatline/_arrows.php'); ?>
-
-</div>
-
-<!-- Generic markup for the timeline popups. -->
-<?php echo $this->partial('neatline/_popups.php'); ?>
-
-<!-- JSON globals. -->
-<script type="text/javascript">
-
-    <?php $renderer = new NeatlineRenderer($exhibit); ?>
-    Neatline = <?php echo json_encode($renderer->render()); ?>
-
-</script>
+<div id="opacity-slider"></div>

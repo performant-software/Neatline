@@ -150,6 +150,7 @@ function neatline_queueNeatlineAssets()
     // Core Neatline stylesheet.
     queue_css('neatline');
     queue_css('neatline-timeline');
+    queue_css('jquery-ui');
 
     // Application classes.
     queue_js('neatline', 'javascripts');
