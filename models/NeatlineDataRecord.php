@@ -123,7 +123,7 @@ class NeatlineDataRecord extends Omeka_record
         $this->right_percent = 100;
         $this->space_active = 0;
         $this->time_active = 0;
-        $this->items_active = 0;
+        $this->items_active = 1;
 
     }
 
@@ -303,12 +303,12 @@ class NeatlineDataRecord extends Omeka_record
      * Set the space_active or time_active attributes. Reject non-
      * boolean parameters.
      *
-     * @param string $name 'space' or 'time'.
+     * @param string $viewport 'items', 'space', or 'time'.
      * @param boolean $value The value to set.
      *
      * @return boolean True if the set succeeds.
      */
-    public function setStatus($spaceOrTime, $value)
+    public function setStatus($viewport, $value)
     {
 
         if (!is_bool($value)) {
@@ -318,13 +318,18 @@ class NeatlineDataRecord extends Omeka_record
         // Cast the boolean to int.
         $intValue = (int) $value;
 
+        // If items.
+        if ($viewport == 'items') {
+            $this->items_active = $intValue;
+        }
+
         // If space.
-        if ($spaceOrTime == 'space') {
+        else if ($viewport == 'space') {
             $this->space_active = $intValue;
         }
 
         // If time.
-        else {
+        else if ($viewport == 'time') {
             $this->time_active = $intValue;
         }
 

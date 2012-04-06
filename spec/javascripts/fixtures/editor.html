@@ -122,8 +122,9 @@ to store the current viewport settings as the public defaults.</p>
         <span id="search-cancel">x</span>
         <button id="new-item-button" class="btn icon add">New Record</button>
         <div class="columns">
-            <div class="col-1 col-cell col-header"><span class="header"></span></div>
-            <div class="col-2 col-cell col-header"><span class="header"></span></div>
+            <div id="items-header" class="col-1 col-cell col-header"><a class="header" title="Items"></a></div>
+            <div id="space-header" class="col-2 col-cell col-header"><a class="header" title="Map"></a></div>
+            <div id="time-header" class="col-3 col-cell col-header"><a class="header" title="Timeline"></a></div>
         </div>
 
     </div>
@@ -380,12 +381,17 @@ to store the current viewport settings as the public defaults.</p>
 <!-- JSON globals. -->
 <script type="text/javascript">
 
-        Neatline = {"record":{"added":"2012-04-06 11:08:55","modified":"2012-04-06 11:08:55","name":"Test Exhibit","slug":"test-exhibit","public":1,"query":null,"map_id":null,"image_id":null,"wms_id":null,"top_element":"map","items_h_pos":"right","items_v_pos":"top","items_height":"full","h_percent":50,"v_percent":60,"is_map":1,"is_timeline":1,"is_items":1,"default_map_bounds":null,"default_map_zoom":null,"default_focus_date":null,"default_timeline_zoom":null,"default_vector_color":null,"default_stroke_color":null,"default_highlight_color":null,"default_vector_opacity":null,"default_stroke_opacity":null,"default_stroke_width":null,"default_point_radius":null,"default_base_layer":null,"id":1},"dataSources":{"timeline":"http:\/\/\/Users\/davidmcclure\/pear\/bin\/neatline-exhibits\/1\/data\/simile","map":"http:\/\/\/Users\/davidmcclure\/pear\/bin\/neatline-exhibits\/1\/data\/openlayers","undated":"http:\/\/\/Users\/davidmcclure\/pear\/bin\/neatline-exhibits\/1\/data\/udi"},"baseLayer":{"name":"Google Physical","id":2},"timelineZoom":15,"highlightColor":"#ff0000","proportions":{"horizontal":50,"vertical":60}}
+        Neatline = {"record":{"added":"2012-04-06 14:06:11","modified":"2012-04-06 14:06:11","name":"Test Exhibit","slug":"test-exhibit","public":1,"query":null,"map_id":null,"image_id":null,"wms_id":null,"top_element":"map","items_h_pos":"right","items_v_pos":"top","items_height":"full","h_percent":50,"v_percent":60,"is_map":1,"is_timeline":1,"is_items":1,"default_map_bounds":null,"default_map_zoom":null,"default_focus_date":null,"default_timeline_zoom":null,"default_vector_color":null,"default_stroke_color":null,"default_highlight_color":null,"default_vector_opacity":null,"default_stroke_opacity":null,"default_stroke_width":null,"default_point_radius":null,"default_base_layer":null,"id":1},"dataSources":{"timeline":"http:\/\/\/Users\/davidmcclure\/pear\/bin\/neatline-exhibits\/1\/data\/simile","map":"http:\/\/\/Users\/davidmcclure\/pear\/bin\/neatline-exhibits\/1\/data\/openlayers","undated":"http:\/\/\/Users\/davidmcclure\/pear\/bin\/neatline-exhibits\/1\/data\/udi"},"baseLayer":{"name":"Google Physical","id":2},"timelineZoom":15,"highlightColor":"#ff0000","proportions":{"horizontal":50,"vertical":60}}
 </script>
 
 <div id="drag-tip" class="twipsy fade right in">
     <div class="twipsy-arrow"></div>
     <div class="twipsy-inner">Click to drag.</div>
+</div>
+
+<div id="items-tip" class="twipsy fade above in">
+    <div class="twipsy-arrow"></div>
+    <div class="twipsy-inner">Items</div>
 </div>
 
 <div id="space-tip" class="twipsy fade above in">

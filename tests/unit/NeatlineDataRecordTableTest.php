@@ -290,6 +290,19 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
         $this->assertEquals($this->_recordsTable->count(), 0);
 
         // Save form data for a non-existent record.
+        $record = $this->_recordsTable->saveRecordStatus($item, $neatline, 'items', true);
+
+        // After the save, there should be 1 record.
+        $this->assertEquals($this->_recordsTable->count(), 1);
+
+        // Check that the parameter was set.
+        $this->assertEquals($record->items_active, 1);
+        $record->delete();
+
+        // At the start, no records.
+        $this->assertEquals($this->_recordsTable->count(), 0);
+
+        // Save form data for a non-existent record.
         $record = $this->_recordsTable->saveRecordStatus($item, $neatline, 'space', true);
 
         // After the save, there should be 1 record.
@@ -297,6 +310,20 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
 
         // Check that the parameter was set.
         $this->assertEquals($record->space_active, 1);
+        $record->delete();
+
+        // At the start, no records.
+        $this->assertEquals($this->_recordsTable->count(), 0);
+
+        // Save form data for a non-existent record.
+        $record = $this->_recordsTable->saveRecordStatus($item, $neatline, 'time', true);
+
+        // After the save, there should be 1 record.
+        $this->assertEquals($this->_recordsTable->count(), 1);
+
+        // Check that the parameter was set.
+        $this->assertEquals($record->time_active, 1);
+        $record->delete();
 
 
     }
@@ -319,13 +346,31 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
         $this->assertEquals($this->_recordsTable->count(), 1);
 
         // Save form data for a non-existent record.
+        $record = $this->_recordsTable->saveRecordStatus($item, $neatline, 'items', true);
+
+        // After the save, there should be 1 record.
+        $this->assertEquals($this->_recordsTable->count(), 1);
+        $this->assertEquals($record->items_active, 1);
+
+        // At the start, no records.
+        $this->assertEquals($this->_recordsTable->count(), 1);
+
+        // Save form data for a non-existent record.
         $record = $this->_recordsTable->saveRecordStatus($item, $neatline, 'space', true);
 
         // After the save, there should be 1 record.
         $this->assertEquals($this->_recordsTable->count(), 1);
+        $this->assertEquals($record->space_active, 1);
+
+        // At the start, no records.
+        $this->assertEquals($this->_recordsTable->count(), 1);
+
+        // Save form data for a non-existent record.
+        $record = $this->_recordsTable->saveRecordStatus($item, $neatline, 'time', true);
+        $this->assertEquals($this->_recordsTable->count(), 1);
 
         // Check that the parameter was set.
-        $this->assertEquals($record->space_active, 1);
+        $this->assertEquals($record->time_active, 1);
 
     }
 

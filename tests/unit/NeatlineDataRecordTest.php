@@ -310,9 +310,9 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
     }
 
     /**
-     * The time and space status trackers can only take native boolean
-     * values as input parameters. The setStatus() method should check
-     * to make sure that the input is boolean and set the integer value.
+     * The status trackers can only take native boolean values as input
+     * parameters. The setStatus() method should check to make sure that
+     * the input is boolean and set the integer value.
      *
      * @return void.
      */
@@ -321,6 +321,16 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
 
         // Create a record.
         $record = $this->helper->_createRecord();
+
+        // Test true.
+        $success = $record->setStatus('items', true);
+        $this->assertEquals($record->items_active, 1);
+        $this->assertTrue($success);
+
+        // Test false.
+        $success = $record->setStatus('items', false);
+        $this->assertEquals($record->items_active, 0);
+        $this->assertTrue($success);
 
         // Test true.
         $success = $record->setStatus('space', true);
@@ -356,6 +366,11 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
 
         // Create a record.
         $record = $this->helper->_createRecord();
+
+        // Test invalid items.
+        $failure = $record->setStatus('items', 'notBoolean');
+        $this->assertEquals($record->items_active, 0);
+        $this->assertFalse($failure);
 
         // Test invalid space.
         $failure = $record->setStatus('space', 'notBoolean');

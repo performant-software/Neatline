@@ -253,48 +253,48 @@
         /*
          * Check a space or time status box for an item.
          */
-        _checkStatusBlockOn: function(item, spaceOrTime) {
+        _checkStatusBlockOn: function(item, viewport) {
 
             // Get the markup.
-            var block = item.find('.' + spaceOrTime);
+            var block = item.find('.' + viewport);
             var checkbox = block.find('input[type="checkbox"]');
 
             // Check, register.
             checkbox.prop('checked', true);
-            item.data(spaceOrTime, true);
+            item.data(viewport, true);
 
         },
 
         /*
          * Uncheck a space or time status box for an item.
          */
-        _checkStatusBlockOff: function(item, spaceOrTime) {
+        _checkStatusBlockOff: function(item, viewport) {
 
             // Get the markup.
-            var block = item.find('.' + spaceOrTime);
+            var block = item.find('.' + viewport);
             var checkbox = block.find('input[type="checkbox"]');
 
             // Uncheck, register.
             checkbox.prop('checked', false);
-            item.data(spaceOrTime, false);
+            item.data(viewport, false);
 
         },
 
         /*
          * Check or uncheck a space or time status box for an item.
          */
-        _checkStatusBlock: function(item, spaceOrTime) {
+        _checkStatusBlock: function(item, viewport) {
 
-            var block = item.find('.' + spaceOrTime);
+            var block = item.find('.' + viewport);
             var checkbox = block.find('input[type="checkbox"]');
             var newVal = !checkbox.prop('checked');
             checkbox.prop('checked', newVal);
 
             // Register the new status.
             if (newVal) {
-                item.data(spaceOrTime, true);
+                item.data(viewport, true);
             } else {
-                item.data(spaceOrTime, false);
+                item.data(viewport, false);
             }
 
         },
@@ -538,6 +538,8 @@
                 var recordid =              item.attr('recordid');
                 var itemTitleTd =           item.find('.item-title');
                 var itemTitleText =         item.find('.item-title-text');
+                var itemsBlock =            item.find('.items');
+                var itemsCheckbox =         itemsBlock.find('input[type="checkbox"]');
                 var spaceBlock =            item.find('.space');
                 var spaceCheckbox =         spaceBlock.find('input[type="checkbox"]');
                 var timeBlock =             item.find('.time');
@@ -579,6 +581,24 @@
 
                     'mouseleave': function() {
                         item.css('background-color', self.options.colors.light_yellow);
+                    }
+
+                });
+
+                // Bind the checkbox click functionality to the boxes.
+                itemsBlock.bind({
+
+                    'mousedown': function() {
+                        self._checkStatusBlock(item, 'items');
+                        self._saveStatus(item, 'items', true);
+                    },
+
+                    'mouseenter': function() {
+                        itemsBlock.css('background-color', self.options.colors.orange);
+                    },
+
+                    'mouseleave': function() {
+                        itemsBlock.css('background-color', '');
                     }
 
                 });
@@ -819,11 +839,11 @@
          * When a status checkbox is checked or unchecked, dial back and commit
          * the status record.
          */
-        _saveStatus: function(item, spaceOrTime, reload) {
+        _saveStatus: function(item, viewport, reload) {
 
             var self = this;
 
-            var block = item.find('.' + spaceOrTime);
+            var block = item.find('.' + viewport);
             var checkbox = block.find('input[type="checkbox"]');
             var value = checkbox.prop('checked');
 
@@ -843,7 +863,7 @@
                     exhibit_id: Neatline.record.id,
                     item_id: itemid,
                     record_id: recordid,
-                    space_or_time: spaceOrTime,
+                    space_or_time: viewport,
                     value: String(value)
                 },
 
