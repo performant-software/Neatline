@@ -46,7 +46,7 @@ function neatline_queueEditorAssets()
 {
 
     // CSS.
-    queue_css('bootstrap.xtra.min');
+    queue_css('bootstrap/docs/assets/css/bootstrap');
     queue_css('neatline-editor');
     queue_css('neatline-fullscreen');
     queue_css('gradient-builder');
