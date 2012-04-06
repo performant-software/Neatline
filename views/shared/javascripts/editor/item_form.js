@@ -76,6 +76,7 @@
             // Getters.
             this._window =                  $(window);
             this.form =                     this.element.find('form');
+            this.saveButton =               this.form.find('#record-save-button');
             this.deleteButton =             this.form.find('#record-delete-button');
             this.title =                    this.form.find('textarea[name="title"]');
             this.slug =                     this.form.find('input[name="slug"]');
@@ -91,8 +92,6 @@
             this.pointRadius =              this.form.find('input[name="point-radius"]');
             this.leftPercent =              this.form.find('input[name="left-ambiguity-percentage"]');
             this.rightPercent =             this.form.find('input[name="right-ambiguity-percentage"]');
-            this.closeButton =              this.form.find('button[type="reset"]');
-            this.saveButton =               this.form.find('input[type="submit"]');
             this.textInputs =               this.form.find('input[type="text"], textarea');
             this.fieldset =                 this.form.find('fieldset');
             this.actions =                  this.form.find('#edit-form-actions');

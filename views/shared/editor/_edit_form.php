@@ -217,8 +217,8 @@
             </div>
 
             <div id="edit-form-actions" class="actions">
-                <input type="submit" class="btn primary" value="Save">
-                <button id="record-delete-button" class="btn danger">Delete</button>
+                <button id="record-save-button" class="btn btn-primary" href="#"><i class="icon-ok-sign icon-white"></i> Save</button>
+                <button id="record-delete-button" class="btn btn-danger" href="#"><i class="icon-trash icon-white"></i> Delete</button>
             </div>
 
         </div>
