@@ -77,7 +77,7 @@
             </td>
         </tr>
 
-        <tr class="edit-form"><td colspan="3"></td></tr>
+        <tr class="edit-form"><td colspan="4"></td></tr>
 
     <?php endforeach; ?>
 
