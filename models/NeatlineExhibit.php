@@ -318,18 +318,18 @@ class NeatlineExhibit extends Omeka_record
      * Check whether a given record is active on the map or timeline.
      *
      * @param Omeka_record $item The item record.
-     * @param Omeka_record $neatline The exhibit record.
+     * @param Omeka_record $viewport 'space', 'time', 'items'.
      *
      * @return boolean True if the record is active.
      */
-    public function getRecordStatus($item, $spaceOrTime)
+    public function getRecordStatus($item, $viewport)
     {
 
         // Get the data record table.
         $_recordsTable = $this->getTable('NeatlineDataRecord');
 
         // Get the status.
-        return $_recordsTable->getRecordStatus($item, $this, $spaceOrTime);
+        return $_recordsTable->getRecordStatus($item, $this, $viewport);
 
     }
 

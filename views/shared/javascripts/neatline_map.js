@@ -362,7 +362,7 @@
                 value: 100,
 
                 // Manifest new opacity.
-                slide: function(event, ui) {
+                change: function(event, ui) {
                     _.each(self.wmsLayers, function(layer) {
                         layer.setOpacity(ui.value/100);
                     });

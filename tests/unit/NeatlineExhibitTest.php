@@ -407,13 +407,16 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
         // Falses.
         $this->assertFalse($neatline->getRecordStatus($item, 'space'));
         $this->assertFalse($neatline->getRecordStatus($item, 'time'));
+        $this->assertFalse($neatline->getRecordStatus($item, 'items'));
 
         // Trues.
         $record->space_active = 1;
         $record->time_active = 1;
+        $record->items_active = 1;
         $record->save();
         $this->assertTrue($neatline->getRecordStatus($item, 'space'));
         $this->assertTrue($neatline->getRecordStatus($item, 'time'));
+        $this->assertTrue($neatline->getRecordStatus($item, 'items'));
 
     }
 

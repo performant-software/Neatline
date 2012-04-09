@@ -256,10 +256,11 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
      *
      * @param Omeka_record $item The item record.
      * @param Omeka_record $neatline The exhibit record.
+     * @param Omeka_record $viewport 'space', 'time', 'items'.
      *
      * @return boolean True if the record is active.
      */
-    public function getRecordStatus($item, $neatline, $spaceOrTime)
+    public function getRecordStatus($item, $neatline, $viewport)
     {
 
         // Try to get the record.
@@ -269,13 +270,18 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
         if ($record) {
 
             // If space.
-            if ($spaceOrTime == 'space') {
+            if ($viewport == 'space') {
                 return (bool) $record->space_active;
             }
 
             // If time.
-            else {
+            else if ($viewport == 'time') {
                 return (bool) $record->time_active;
+            }
+
+            // If items.
+            else if ($viewport == 'items') {
+                return (bool) $record->items_active;
             }
 
         }

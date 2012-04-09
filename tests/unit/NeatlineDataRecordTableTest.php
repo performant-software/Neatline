@@ -391,28 +391,34 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
         // Populate statuses with trues.
         $record->space_active = 1;
         $record->time_active = 1;
+        $record->items_active = 1;
         $record->save();
 
         // Get.
         $spaceStatus = $this->_recordsTable->getRecordStatus($item, $neatline, 'space');
         $timeStatus = $this->_recordsTable->getRecordStatus($item, $neatline, 'time');
+        $itemsStatus = $this->_recordsTable->getRecordStatus($item, $neatline, 'items');
 
         // Check.
         $this->assertTrue($spaceStatus);
         $this->assertTrue($timeStatus);
+        $this->assertTrue($itemsStatus);
 
         // Populate statuses with falses.
         $record->space_active = 0;
         $record->time_active = 0;
+        $record->items_active = 0;
         $record->save();
 
         // Get.
         $spaceStatus = $this->_recordsTable->getRecordStatus($item, $neatline, 'space');
         $timeStatus = $this->_recordsTable->getRecordStatus($item, $neatline, 'time');
+        $itemsStatus = $this->_recordsTable->getRecordStatus($item, $neatline, 'items');
 
         // Check.
         $this->assertFalse($spaceStatus);
         $this->assertFalse($timeStatus);
+        $this->assertFalse($itemsStatus);
 
     }
 
@@ -431,10 +437,12 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
         // Get.
         $spaceStatus = $this->_recordsTable->getRecordStatus($item, $neatline, 'space');
         $timeStatus = $this->_recordsTable->getRecordStatus($item, $neatline, 'time');
+        $itemsStatus = $this->_recordsTable->getRecordStatus($item, $neatline, 'items');
 
         // Check.
         $this->assertFalse($spaceStatus);
         $this->assertFalse($timeStatus);
+        $this->assertFalse($itemsStatus);
 
     }
 

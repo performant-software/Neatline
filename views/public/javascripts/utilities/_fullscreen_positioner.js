@@ -55,6 +55,7 @@
          */
         _measureWindow: function() {
 
+            // Measure window and topbar.
             this._windowHeight =            this._window.height();
             this._windowWidth =             this._window.width();
             this._topbarHeight =            this.topbar.height();
