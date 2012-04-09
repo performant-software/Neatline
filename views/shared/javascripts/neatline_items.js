@@ -170,6 +170,9 @@
                         // If hidden, expand.
                         if (!item.data('expanded')) {
 
+                            // Expand description.
+                            self.scrollToItem(recordid);
+
                             // Trigger out to the deployment code.
                             self._trigger('itemclick', {}, {
                                 'recordid': recordid,
