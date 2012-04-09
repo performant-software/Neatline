@@ -60,6 +60,7 @@
         <td class="neatline-bar">Omeka Records</td>
         <td class="col-1 neatline-bar"></td>
         <td class="col-2 neatline-bar"></td>
+        <td class="col-3 neatline-bar"></td>
     </tr>
 
     <?php foreach ($items as $item): ?>
@@ -69,10 +70,13 @@
                 <span class="item-title-text"><?php echo item('Dublin Core', 'Title', null, $item); ?></span>
                 <span class="item-title-fader"></span>
             </td>
-            <td class="col-1 col-row space">
+            <td class="col-1 col-row items">
+                <input type="checkbox" <?php echo $neatline->getRecordStatus($item, 'items')? 'checked' : ''; ?> />
+            </td>
+            <td class="col-2 col-row space">
                 <input type="checkbox" <?php echo $neatline->getRecordStatus($item, 'space')? 'checked' : ''; ?> />
             </td>
-            <td class="col-2 col-row time">
+            <td class="col-3 col-row time">
                 <input type="checkbox" <?php echo $neatline->getRecordStatus($item, 'time')? 'checked' : ''; ?> />
             </td>
         </tr>
