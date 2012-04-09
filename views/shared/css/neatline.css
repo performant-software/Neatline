@@ -238,7 +238,7 @@ div.title-tip {
     color: #202020;
     padding: 6px 20px;
     line-height: normal !important;
-    border-bottom: 1px dotted #cdcdcd;
+    border-top: 1px dotted #cdcdcd;
     font-family: 'Crimson Text';
 }
 
