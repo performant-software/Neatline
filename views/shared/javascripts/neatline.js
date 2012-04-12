@@ -255,9 +255,7 @@
                 this.timeline.neatlinetimeline({
 
                     'eventclick': function(event, obj) {
-                        self._trigger('timelineeventclick', {}, {
-                            'recordid': obj.recordid
-                        });
+                        self._trigger('timelineeventclick', {}, obj);
                     }
 
                 });
