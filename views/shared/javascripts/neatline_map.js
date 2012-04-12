@@ -523,6 +523,7 @@
 
                     // Render highlight.
                     self.highlightControl.highlight(feature);
+                    self._showTitleTip(record);
 
                 },
 
@@ -541,6 +542,7 @@
 
                     // Render default.
                     self.highlightControl.unhighlight(feature);
+                    self._hideTitleTip(record);
 
                 }
 
