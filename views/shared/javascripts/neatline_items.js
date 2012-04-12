@@ -235,9 +235,13 @@
             // Compute the new id.
             var newId = this.getNewScrollId('right');
 
+            // Get the record.
+            var record = this._db({ recordid: newId }).first();
+
             // Trigger out to the deployment code.
             this._trigger('itemclick', {}, {
                 'recordid': newId,
+                'slug': record.slug,
                 'scrollItems': true
             });
 
@@ -253,9 +257,13 @@
             // Compute the new id.
             var newId = this.getNewScrollId('left');
 
+            // Get the record.
+            var record = this._db({ recordid: newId }).first();
+
             // Trigger out to the deployment code.
             this._trigger('itemclick', {}, {
                 'recordid': newId,
+                'slug': record.slug,
                 'scrollItems': true
             });
 
