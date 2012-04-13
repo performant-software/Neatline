@@ -80,6 +80,9 @@ documentation][geoserver-install-documentation].
 After creating an exhibit, you'll be taken back to the exhibits browse
 screen, where you'll see a listing for the new exhibit.
 
+  * The "Exhibit"column lists the title of the exhibit, the slug, and links to edit the exhibit metadata and delete the exhibit.
+  * The "View" column lists three links to the public-facing instantiations of the exhibit. The "In-Theme" view shows the exhibit in the context of the currently-activated Omeka theme; "Fullscreen" stretches the exhibit to fill the entire screen space and adds a narrow header bar across the top of the screen with the exhibit title; the "Embed" view is the same as the "Fullscreen" mode without the top bar (this view can be used to embed the exhibit in external environments with an iframe).
+
 ## Building Neatline Exhibits
 
 At the heart of Neatline is the editing application, a web interface that lets you create exhibits, add records, annotate maps and timelines, and construct complex sequences and progressions that make arguments and tell stories about geospatial entities. 
