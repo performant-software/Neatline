@@ -1049,7 +1049,7 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
         // Check format.
         $this->assertEquals(
             $json,
-            '[]'
+            '{"layers":[],"features":[]}'
         );
 
     }
@@ -1072,7 +1072,7 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
         // Check format.
         $this->assertEquals(
             $json,
-            '[]'
+            '{"layers":[],"features":[]}'
         );
 
     }
