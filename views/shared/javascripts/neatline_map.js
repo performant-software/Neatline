@@ -95,6 +95,7 @@
             }
 
             // Start-up.
+            this._instantiateBubbles();
             this._constructTitleTip();
             this.loadData();
 
@@ -346,6 +347,13 @@
         },
 
         /*
+         * Build the bubbles.
+         */
+        _instantiateBubbles: function() {
+            this.element.bubble();
+        },
+
+        /*
          * Build the map opacity slider.
          */
         _instantiateOpacitySlider: function() {
@@ -523,7 +531,12 @@
 
                     // Render highlight.
                     self.highlightControl.highlight(feature);
-                    self._showTitleTip(record);
+
+                    // Show bubble.
+                    self._trigger('showbubble', {}, {
+                        title: record.data.title,
+                        description: record.data.description
+                    });
 
                 },
 
@@ -542,7 +555,9 @@
 
                     // Render default.
                     self.highlightControl.unhighlight(feature);
-                    self._hideTitleTip(record);
+
+                    // Hide bubble.
+                    self._trigger('hidebubble');
 
                 }
 

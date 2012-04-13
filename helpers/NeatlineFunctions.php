@@ -160,6 +160,7 @@ function neatline_queueNeatlineAssets()
     queue_js('positioner', 'javascripts/utilities');
     queue_js('scroller', 'javascripts/utilities');
     queue_js('span_styler', 'javascripts/utilities');
+    queue_js('bubble', 'javascripts/utilities');
     queue_js('_utilities', 'javascripts/libraries');
     queue_js('jquery.getscrollbarwidth', 'javascripts/libraries');
 

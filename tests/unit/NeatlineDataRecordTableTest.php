@@ -850,6 +850,8 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
         // Populate map-relevant attributes.
         $record1->title = 'Item 1 Title';
         $record2->title = 'Item 2 Title';
+        $record1->description = 'Item 1 description.';
+        $record2->description = 'Item 2 description.';
         $record1->slug = 'slug-1';
         $record2->slug = 'slug-2';
         $record1->vector_color = '#ffffff';
@@ -884,6 +886,7 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
         $this->assertContains('"id":' . $record1->id, $json);
         $this->assertContains('"item_id":' . $item1->id, $json);
         $this->assertContains('"title":"Item 1 Title"', $json);
+        $this->assertContains('"description":"Item 1 description."', $json);
         $this->assertContains('"slug":"slug-1"', $json);
         $this->assertContains('"vector_color":"#ffffff"', $json);
         $this->assertContains('"stroke_color":"#ffffff"', $json);
@@ -898,6 +901,7 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
         $this->assertContains('"id":' . $record2->id, $json);
         $this->assertContains('"item_id":' . $item2->id, $json);
         $this->assertContains('"title":"Item 1 Title"', $json);
+        $this->assertContains('"description":"Item 2 description."', $json);
         $this->assertContains('"slug":"slug-2"', $json);
         $this->assertContains('"vector_color":"#000000"', $json);
         $this->assertContains('"highlight_color":"#000000"', $json);
