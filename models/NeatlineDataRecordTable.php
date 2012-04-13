@@ -332,10 +332,7 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
     {
 
         // Shell array.
-        $data = array(
-            'layers' => array(),
-            'features' => array()
-        );
+        $data = array();
 
         // Get records.
         $records = $this->getRecordsByExhibit($neatline);
@@ -348,12 +345,11 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
                 // If the geocoverage is populated.
                 if ($record->space_active == 1) {
 
-                    // Populate features array.
-                    $data['features'][] = array(
+                    $data[] = array(
                         'id' =>                 $record->id,
                         'item_id' =>            $record->item_id,
                         'title' =>              $record->getTitle(),
-                        'slug' =>               $record->getSlug(),
+                        'slug' =>                   $record->getSlug(),
                         'vector_color' =>       $record->getStyle('vector_color'),
                         'stroke_color' =>       $record->getStyle('stroke_color'),
                         'highlight_color' =>    $record->getStyle('highlight_color'),
@@ -373,10 +369,6 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
                           'point_radius' =>     $record->point_radius,
                         )
                     );
-
-                    // Try to find a WMS.
-
-                    // Try fo find Neatline Maps.
 
                 }
 
