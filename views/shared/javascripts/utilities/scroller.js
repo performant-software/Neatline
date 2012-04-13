@@ -55,8 +55,9 @@
             this.leftArrow =    this.container.find('.arrow-left');
             this.rightArrow =   this.container.find('.arrow-right');
 
-            // Inject the container.
+            // Inject and show the container.
             this.element.append(this.container);
+            this._showContainer();
 
             // Bind events.
             this._addEvents();
@@ -126,6 +127,15 @@
          * =================
          */
 
+
+        /*
+         * Show the container.
+         *
+         * - return void.
+         */
+        _showContainer: function() {
+            this.container.css('display', 'block');
+        },
 
         /*
          * Fade up an arrow on mouseenter.

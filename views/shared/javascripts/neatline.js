@@ -332,20 +332,20 @@
                 // Register the presence of the udi instantiation.
                 this.instantiated_undated = true;
 
+                // Instantiate the scroller.
+                this.majorBlock.scroller({
+
+                    'left': function() {
+                        self.items.neatlineitems('scrollLeft');
+                    },
+
+                    'right': function() {
+                        self.items.neatlineitems('scrollRight');
+                    }
+
+                });
+
             }
-
-            // ** SCROLLER
-            this.majorBlock.scroller({
-
-                'left': function() {
-                    self.items.neatlineitems('scrollLeft');
-                },
-
-                'right': function() {
-                    self.items.neatlineitems('scrollRight');
-                }
-
-            });
 
         },
 

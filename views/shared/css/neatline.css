@@ -262,7 +262,7 @@ div.title-tip {
 /* Scroller */
 
 #scroll {
-    display: block;
+    display: none;
     position: absolute;
     top: 15px;
     right: 20px;

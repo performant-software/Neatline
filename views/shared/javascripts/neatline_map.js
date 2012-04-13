@@ -1015,7 +1015,7 @@
         /*
          * Re-render the map.
          */
-        refresh: function(recordid) {
+        refresh: function() {
             this.map.updateSize();
         },
 
