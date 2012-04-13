@@ -183,7 +183,7 @@ class Neatline_FixtureBuilderTest extends Omeka_Test_AppTestCase
         $record1->title = 'Title1';
         $record1->description = 'Description 1.';
         $record1->exhibit_id = $exhibit->id;
-        $record1->space_active = 1;
+        $record1->items_active = 1;
         $record1->save();
 
         // Record 2.
@@ -191,7 +191,7 @@ class Neatline_FixtureBuilderTest extends Omeka_Test_AppTestCase
         $record2->title = 'Title2';
         $record2->description = 'Description 2.';
         $record2->exhibit_id = $exhibit->id;
-        $record2->time_active = 1;
+        $record2->items_active = 1;
         $record2->save();
 
         // Record 3.
@@ -200,7 +200,7 @@ class Neatline_FixtureBuilderTest extends Omeka_Test_AppTestCase
         $record3->description = 'Description 3.';
         $record3->exhibit_id = $exhibit->id;
         $record3->item_id = $item->id;
-        $record3->space_active = 1;
+        $record3->items_active = 1;
         $record3->save();
 
         // Record 4.
@@ -208,7 +208,7 @@ class Neatline_FixtureBuilderTest extends Omeka_Test_AppTestCase
         $record4->title = 'Title4';
         $record4->exhibit_id = $exhibit->id;
         $record4->item_id = $item->id;
-        $record4->time_active = 1;
+        $record4->items_active = 1;
         $record4->save();
 
         // Prepare the request.
