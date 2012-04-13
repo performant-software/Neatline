@@ -70,7 +70,7 @@
             // Create theme.
             var theme = Timeline.ClassicTheme.create();
             theme.event.track.height = 15;
-            theme.event.tape.height = 15;
+            theme.event.tape.height = 5;
 
             // Define band data.
             this.bandInfos = [
@@ -82,8 +82,7 @@
                     intervalPixels: intervalPixels,
                     zoomIndex:      this._currentZoomStep,
                     zoomSteps:      this._zoomSteps,
-                    theme:          theme,
-                    timeZone: -5
+                    theme:          theme
                 }),
 
                 Timeline.createBandInfo({

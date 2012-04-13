@@ -66,17 +66,23 @@ documentation][geoserver-install-documentation].
   1. Click on the "Neatline" tab along the top of the administrative interface.
   2. Click the "Create an Exhibit" button.
   3. Enter a title for the exhibit. The title will be displayed at the top of the full-screen public display view. 
-  4. Choose a base layer:
-    * **Option 1**: If you are using Neatline Maps and Geoserver to serve georectified .tiff images, use the "Choose a Map" dropdown menu to select the map that you want to build the exhibit with.
-    * **Option 2**: You can also use any static image associated with an Omeka item as the base layer. Use the "Choose an Image" dropdown to browse all images in your Omeka archive, grouped by parent item.
-    * **Option 3**: To use a package of real-geography base layers (OpenStreetMaps, Google Physical, Google Streets, Google Hybrid, and Google Sattelite), just leave both of the dropdown fields empty.
-  5. Click "Create Exhibit."
+  4. Enter a slug for the exhibit. The slug is used to form the public-facing URL for the exhibit. By default, a slug will be auto-generated from the text that you typed into the "Title" field. If you want to edit the default slug, click on the input and type a new string. Slugs can only contain letters, numbers, and hyphens (no spaces).
+  5. Check the "Public" box if you want the exhibit to be publicly-accessible. By default, exhibits are only visible to administrators.
+  6. Choose a default real-geography base layer. Neatline supports OpenStreetMap, Google Streets, Google Physical, Google Satellite, Google Hybrid, Stamen Toner, Stamen Terrain, and Stamen Watercolor. This setting can be changed at any point in the Neatline editing interface.
+  7. Choose an exhibit foundation (optional):
+    * **Option 1**: If you are using Neatline Maps and Geoserver to serve georectified .tiff images, use the "Neatline Map" dropdown menu to select the map that you want to build the exhibit with.
+    * **Option 2**: If you are using Neatline WMS to connect items in your Omeka collection to existing, external web map services, use the "Web Map Service" dropdown to select the item that houses the web map service that you want to build the exhibit with.
+    * **Option 3**: You can also use any static image associated with an Omeka item as the base layer. Use the "Choose an Image" dropdown to browse all images in your Omeka archive, grouped by parent item.
+  8. Click "Create Exhibit."
+
+#### Browse Exhibits
+
+After creating an exhibit, you'll be taken back to the exhibits browse
+screen, where you'll see a listing for the new exhibit.
 
 ## Building Neatline Exhibits
 
 At the heart of Neatline is the editing application, a web interface that lets you create exhibits, add records, annotate maps and timelines, and construct complex sequences and progressions that make arguments and tell stories about geospatial entities. 
-
-**Note:** Although the exhibit-building feature set delivered by the Neatline webservice is almost identical to the functionality of the self-hosted version of the software, there are a handful of extra features in the self-hosted version that make it possible to integrate existing archival collections in Omeka with Neatline exhibits. Where there is divergence, the different workflows are prefaced with **Omeka + Neatline:** and **Webservice:** labels.
 
 ### Create a Layout
 
@@ -273,8 +279,6 @@ To create a custom ordering:
 [geoserver]: http://geoserver.org
 [geoserver-install-documentation]:http://docs.geoserver.org/stable/en/user/installation/index.html
 [openstreetmap]: http://www.openstreetmap.org
-[neatline-webservice]: http://sandbox.neatline.org
-[neatline-webservice-register]: http://sandbox.neatline.org/register
 [filezilla]: http://filezilla-project.org/
 [neatline-download]: http://neatline.org/download
 
