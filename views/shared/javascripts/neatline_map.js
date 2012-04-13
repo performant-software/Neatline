@@ -1043,8 +1043,12 @@
          */
         _showTitleTip: function(record) {
 
+            // Strip markup.
+            var span = document.createElement('span');
+            span.innerHTML = record.data.title;
+
             // Populate title.
-            this.titleTip.text(record.data.title);
+            this.titleTip.text(span.innerText);
 
             // Show.
             this.titleTip.css('display', 'block');
