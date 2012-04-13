@@ -70,7 +70,7 @@
             // Create theme.
             var theme = Timeline.ClassicTheme.create();
             theme.event.track.height = 15;
-            theme.event.tape.height = 5;
+            theme.event.tape.height = 10;
 
             // Define band data.
             this.bandInfos = [

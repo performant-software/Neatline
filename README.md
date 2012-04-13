@@ -80,12 +80,34 @@ documentation][geoserver-install-documentation].
 After creating an exhibit, you'll be taken back to the exhibits browse
 screen, where you'll see a listing for the new exhibit.
 
-  * The "Exhibit"column lists the title of the exhibit, the slug, and links to edit the exhibit metadata and delete the exhibit.
-  * The "View" column lists three links to the public-facing instantiations of the exhibit. The "In-Theme" view shows the exhibit in the context of the currently-activated Omeka theme; "Fullscreen" stretches the exhibit to fill the entire screen space and adds a narrow header bar across the top of the screen with the exhibit title; the "Embed" view is the same as the "Fullscreen" mode without the top bar (this view can be used to embed the exhibit in external environments with an iframe).
+  * The "Exhibit"column lists the title of the exhibit, the slug, and links to edit the exhibit metadata and delete the exhibit. To open the Neatline editing environment for the exhibit, click on the title (see below).
+  * The "View" column lists three links to the public-facing instantiations of the exhibit. The "In-Theme" view shows the exhibit in the context of the currently-activated Omeka theme. "Fullscreen" stretches the exhibit to fill the entire screen space and adds a narrow header bar across the top of the screen with the exhibit title. The "Embed" view is the same as the "Fullscreen" mode without the top bar (this view can be used to embed the exhibit in external environments with an iframe).
+  * The "Items Query" columns shows a link to a form where you can specify a subset of your Omeka collection to make avaialble in the Neatline editing environment for the exhibit (see below).
+  * The "Modified" column lists the date and time when the content of the exhibit was last updated.
+  * The "# Items" column lists the number of records that are plotted on at least one of the three available viewports in a Neatline exhibit.
+  * The "Public" column shows whether the exhibit is publicly-accessible.
+
+#### Edit Exhibit Metadata
+
+Click the "Edit Details" link in the "Exhibit" column to edit the exhibit title, slug, and public status. Click "Save Exhibit" to commit the changes.
+
+#### Delete an Exhibit 
+
+Click the "Delete" link in the "Exhibit" column to delete the exhibit. Click "Delete" again on the confirmation page. **This cannot be undone.**
+
+#### Define an Items Query
+
+To make items in your Omeka collection available for manipulation inside the Neatline editing interface, you need to define a "query" on the collection that isolates a subset of items that are relevant to the exhibit. This functionality is in place to make it possible to use the Neatline editor with extremely large Omeka collections (many thousands of items) that would choke up the interface if all of the content were loaded in at once.
+
+To define an items query for an exhibit, click on the "Edit Query" link in the exhibit's listing in the browse view. The query form is identical to the advanced search form in the Omeka items browser. You can search by keyword, specific field values, id ranges, collections, types, users, tags, public/non-public, and featured/non-featured - and any combination thereof.
+
+Once you've created a query, click the "Search" button at the bottom of the page to save the configuration.
 
 ## Building Neatline Exhibits
 
 At the heart of Neatline is the editing application, a web interface that lets you create exhibits, add records, annotate maps and timelines, and construct complex sequences and progressions that make arguments and tell stories about geospatial entities. 
+
+To open the editing interface for an exhibit, click on the title of the exhibit on the exhibits browse page.
 
 ### Create a Layout
 
