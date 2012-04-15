@@ -61,9 +61,7 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
         $exhibit->public =                      1;
         $exhibit->modified =                    $timestamp;
         $exhibit->query =                       'query';
-        $exhibit->map_id =                      1;
         $exhibit->image_id =                    1;
-        $exhibit->wms_id =                      1;
         $exhibit->top_element =                 'map';
         $exhibit->items_h_pos =                 'right';
         $exhibit->items_v_pos =                 'top';
@@ -98,9 +96,7 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
         $this->assertEquals($exhibit->name, 'name');
         $this->assertEquals($exhibit->slug, 'slug');
         $this->assertEquals($exhibit->public, 1);
-        $this->assertEquals($exhibit->map_id, 1);
         $this->assertEquals($exhibit->image_id, 1);
-        $this->assertEquals($exhibit->wms_id, 1);
         $this->assertEquals($exhibit->top_element, 'map');
         $this->assertEquals($exhibit->items_h_pos, 'right');
         $this->assertEquals($exhibit->items_v_pos, 'top');

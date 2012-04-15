@@ -1738,7 +1738,6 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $response = $this->getResponse()->getBody('default');
         $this->assertContains('"added":"2011-12-05 09:16:00"', $response);
         $this->assertContains('"name":"Test Title"', $response);
-        $this->assertContains('"map_id":1', $response);
         $this->assertContains('"image_id":null', $response);
         $this->assertContains('"top_element":"map"', $response);
         $this->assertContains('"items_h_pos":"right"', $response);
@@ -1785,7 +1784,6 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $exhibit->items_v_pos =                 'top';
         $exhibit->items_height =                'partial';
         $exhibit->added =                       '2011-12-05 09:16:00';
-        $exhibit->map_id =                      1;
         $exhibit->save();
 
         // Form the POST for a space change.
@@ -1823,7 +1821,6 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $response = $this->getResponse()->getBody('default');
         $this->assertContains('"added":"2011-12-05 09:16:00"', $response);
         $this->assertContains('"name":"Test Title"', $response);
-        $this->assertContains('"map_id":1', $response);
         $this->assertContains('"image_id":null', $response);
         $this->assertContains('"top_element":"map"', $response);
         $this->assertContains('"items_h_pos":"right"', $response);

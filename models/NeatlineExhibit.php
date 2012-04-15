@@ -39,9 +39,7 @@ class NeatlineExhibit extends Omeka_record
     public $query;
 
     // Foreign keys.
-    public $map_id;
     public $image_id;
-    public $wms_id;
 
     // Layout parameters.
     public $top_element;
