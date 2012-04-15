@@ -878,36 +878,61 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
         $record2->save();
 
         // Build the JSON.
-        $json = $this->_recordsTable->buildMapJson($neatline);
+        $json = json_decode($this->_recordsTable->buildMapJson($neatline));
 
-        // Check format.
-        $this->assertContains('"id":' . $record1->id, $json);
-        $this->assertContains('"item_id":' . $item1->id, $json);
-        $this->assertContains('"title":"Item 1 Title"', $json);
-        $this->assertContains('"slug":"slug-1"', $json);
-        $this->assertContains('"vector_color":"#ffffff"', $json);
-        $this->assertContains('"stroke_color":"#ffffff"', $json);
-        $this->assertContains('"highlight_color":"#ffffff"', $json);
-        $this->assertContains('"vector_opacity":60', $json);
-        $this->assertContains('"stroke_opacity":60', $json);
-        $this->assertContains('"stroke_width":3', $json);
-        $this->assertContains('"point_radius":3', $json);
-        $this->assertContains('"bounds":"BOUND(1)"', $json);
-        $this->assertContains('"zoom":4', $json);
-        $this->assertContains('"wkt":"POINT(1,0)"', $json);
-        $this->assertContains('"id":' . $record2->id, $json);
-        $this->assertContains('"item_id":' . $item2->id, $json);
-        $this->assertContains('"title":"Item 1 Title"', $json);
-        $this->assertContains('"slug":"slug-2"', $json);
-        $this->assertContains('"vector_color":"#000000"', $json);
-        $this->assertContains('"highlight_color":"#000000"', $json);
-        $this->assertContains('"vector_opacity":40', $json);
-        $this->assertContains('"stroke_opacity":40', $json);
-        $this->assertContains('"stroke_width":2', $json);
-        $this->assertContains('"point_radius":2', $json);
-        $this->assertContains('"bounds":"BOUND(2)"', $json);
-        $this->assertContains('"zoom":5', $json);
-        $this->assertContains('"wkt":"POINT(0,1)"', $json);
+        $this->assertEquals(
+            $json,
+            array(
+                (object) array(
+                    'id' => $record1->id,
+                    'item_id' => $item1->id,
+                    'title' => 'Item 1 Title',
+                    'slug' => 'slug-1',
+                    'vector_color' => '#ffffff',
+                    'stroke_color' => '#ffffff',
+                    'highlight_color' => '#ffffff',
+                    'vector_opacity' => '60',
+                    'stroke_opacity' => '60',
+                    'stroke_width' => '3',
+                    'point_radius' => '3',
+                    'bounds' => 'BOUND(1)',
+                    'zoom' => '4',
+                    'wkt' => 'POINT(1,0)',
+                    '_native_styles' => (object) array(
+                        'vector_color' => '#ffffff',
+                        'vector_opacity' => '60',
+                        'stroke_color' => '#ffffff',
+                        'stroke_opacity' => '60',
+                        'stroke_width' => '3',
+                        'point_radius' => '3'
+                    )
+                ),
+                (object) array(
+                    'id' => $record2->id,
+                    'item_id' => $item2->id,
+                    'title' => 'Item 2 Title',
+                    'slug' => 'slug-2',
+                    'vector_color' => '#000000',
+                    'stroke_color' => '#000000',
+                    'highlight_color' => '#000000',
+                    'vector_opacity' => '40',
+                    'stroke_opacity' => '40',
+                    'stroke_width' => '2',
+                    'point_radius' => '2',
+                    'bounds' => 'BOUND(2)',
+                    'zoom' => '5',
+                    'wkt' => 'POINT(0,1)',
+                    '_native_styles' => (object) array(
+                        'vector_color' => '#000000',
+                        'vector_opacity' => '40',
+                        'stroke_color' => '#000000',
+                        'stroke_opacity' => '40',
+                        'stroke_width' => '2',
+                        'point_radius' => '2'
+                    )
+                )
+            )
+        );
 
     }
 
@@ -940,83 +965,11 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
         $record2->save();
 
         // Build the JSON.
-        $json = $this->_recordsTable->buildMapJson($neatline);
-
-        // Check format.
-        $this->assertContains('"id":' . $record1->id, $json);
-        $this->assertContains('"item_id":' . $item1->id, $json);
-        $this->assertContains('"title":"Item 1 Title"', $json);
-        $this->assertContains('"slug":""', $json);
-        $this->assertContains('"vector_color":null', $json);
-        $this->assertContains('"vector_opacity":null', $json);
-        $this->assertContains('"stroke_opacity":null', $json);
-        $this->assertContains('"stroke_color":null', $json);
-        $this->assertContains('"stroke_width":null', $json);
-        $this->assertContains('"point_radius":null', $json);
-        $this->assertContains('"bounds":null', $json);
-        $this->assertContains('"zoom":null', $json);
-        $this->assertContains('"wkt":"POINT(1,0)"', $json);
-        $this->assertContains('"id":' . $record2->id, $json);
-        $this->assertContains('"item_id":' . $item2->id, $json);
-        $this->assertContains('"title":"Item 1 Title"', $json);
-        $this->assertContains('"slug":""', $json);
-        $this->assertContains('"vector_color":null', $json);
-        $this->assertContains('"vector_opacity":null', $json);
-        $this->assertContains('"stroke_opacity":null', $json);
-        $this->assertContains('"stroke_color":null', $json);
-        $this->assertContains('"stroke_width":null', $json);
-        $this->assertContains('"point_radius":null', $json);
-        $this->assertContains('"bounds":null', $json);
-        $this->assertContains('"zoom":null', $json);
-        $this->assertContains('"wkt":"POINT(0,1)"', $json);
-
-    }
-
-    /**
-     * buildMapJson() should include '_native_styles' key that contains
-     * the record-endemic (not iterpolated from system or exhibit
-     * defaults) styling columns.
-     *
-     * @return void.
-     */
-    public function testBuildMapJsonNativeStyles()
-    {
-
-        // Create an exhibit and items.
-        $neatline = $this->helper->_createNeatline();
-        $item = $this->helper->_createItem();
-
-        // Create two records.
-        $record = new NeatlineDataRecord($item, $neatline);
-
-        // Populate map-relevant attributes and some, but not all, style
-        // attributes.
-        $record->title = 'Title';
-        $record->geocoverage = 'POINT(1,0)';
-        $record->space_active = 1;
-        $record->vector_color = '#ffffff';
-        $record->stroke_opacity = 50;
-        $record->stroke_width = 50;
-        $record->save();
-
-        // Build the JSON.
-        $json = $this->_recordsTable->buildMapJson($neatline);
-
-        // Check format.
-        $this->assertContains('"id":' . $record->id, $json);
-        $this->assertContains('"item_id":' . $item->id, $json);
-        $this->assertContains('"title":"Title"', $json);
-        $this->assertContains('"slug":""', $json);
-        $this->assertContains('"vector_opacity":null', $json);
-        $this->assertContains('"stroke_color":null', $json);
-        $this->assertContains('"point_radius":null', $json);
-        $this->assertContains('"bounds":null', $json);
-        $this->assertContains('"zoom":null', $json);
-        $this->assertContains('"wkt":"POINT(1,0)"', $json);
-        $this->assertContains('"_native_styles":', $json);
-        $this->assertContains('"vector_color":"#ffffff"', $json);
-        $this->assertContains('"stroke_opacity":50', $json);
-        $this->assertContains('"stroke_width":50', $json);
+        $json = json_decode($this->_recordsTable->buildMapJson($neatline));
+        $this->assertNull($json[0]->zoom);
+        $this->assertNull($json[0]->bounds);
+        $this->assertNull($json[1]->zoom);
+        $this->assertNull($json[1]->bounds);
 
     }
 
