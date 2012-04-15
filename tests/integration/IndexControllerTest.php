@@ -148,59 +148,6 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
     public function testAddBaseMarkup()
     {
 
-        /*
-         * Mock base layers.
-         */
-
-        // Get all existing base layer records.
-        $layers = $this->_layersTable->fetchObjects(
-            $this->_layersTable->getSelect()
-        );
-
-        // Delete.
-        foreach($layers as $layer) {
-            $layer->delete();
-        }
-
-        // OpenStreetMaps.
-        $osm = new NeatlineBaseLayer;
-        $osm->name = 'OpenStreetMap';
-        $osm->save();
-
-        // Google physical.
-        $gphy = new NeatlineBaseLayer;
-        $gphy->name = 'Google Physical';
-        $gphy->save();
-
-        // Google streets.
-        $gstr = new NeatlineBaseLayer;
-        $gstr->name = 'Google Streets';
-        $gstr->save();
-
-        // Google hybrid.
-        $ghyb = new NeatlineBaseLayer;
-        $ghyb->name = 'Google Hybrid';
-        $ghyb->save();
-
-        // Google sattelite.
-        $gsat = new NeatlineBaseLayer;
-        $gsat->name = 'Google Satellite';
-        $gsat->save();
-
-        /*
-         * Mock maps.
-         */
-
-        $map1 = new NeatlineMapsMap;
-        $map1->name = 'Map1';
-        $map1->save();
-        $map2 = new NeatlineMapsMap;
-        $map2->name = 'Map2';
-        $map2->save();
-        $map3 = new NeatlineMapsMap;
-        $map3->name = 'Map3';
-        $map3->save();
-
         // Hit the route.
         $this->dispatch('neatline-exhibits/add');
 
@@ -208,40 +155,7 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
         $this->assertQuery('input[name="title"]');
         $this->assertQuery('input[name="slug"]');
         $this->assertQuery('input[name="public"]');
-        $this->assertQuery('select[name="baselayer"]');
-        $this->assertQuery('select[name="map"]');
         $this->assertQuery('select[name="image"]');
-
-        // Check for base layer options.
-        $this->assertQueryContentContains(
-            'select[name="baselayer"] option[value="' . $osm->id . '"]',
-            'OpenStreetMap');
-        $this->assertQueryContentContains(
-            'select[name="baselayer"] option[value="' . $gphy->id . '"]',
-            'Google Physical');
-        $this->assertQueryContentContains(
-            'select[name="baselayer"] option[value="' . $gstr->id . '"]',
-            'Google Streets');
-        $this->assertQueryContentContains(
-            'select[name="baselayer"] option[value="' . $ghyb->id . '"]',
-            'Google Hybrid');
-        $this->assertQueryContentContains(
-            'select[name="baselayer"] option[value="' . $gsat->id . '"]',
-            'Google Satellite');
-
-        // Check for maps.
-        $this->assertQueryContentContains(
-            'select[name="map"] option[value="none"]',
-            '-');
-        $this->assertQueryContentContains(
-            'select[name="map"] option[value="' . $map1->id . '"]',
-            'Map1');
-        $this->assertQueryContentContains(
-            'select[name="map"] option[value="' . $map2->id . '"]',
-            'Map2');
-        $this->assertQueryContentContains(
-            'select[name="map"] option[value="' . $map3->id . '"]',
-            'Map3');
 
         // TODO: Test the images dropdown. This is complicated by the fact
         // that the Omeka files table checks for a real file in the archives
@@ -673,50 +587,6 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
      *
      * @return void.
      */
-    public function testAddSuccessWithMap()
-    {
-
-        $map = new NeatlineMapsMap;
-        $map->save();
-
-        $this->request->setMethod('POST')
-            ->setPost(array(
-                'title' => 'Test Exhibit',
-                'slug' => 'test-exhibit',
-                'public' => 1,
-                'baselayer' => 5,
-                'map' => $map->id,
-                'image' => 'none',
-                'wms' => 'none'
-            )
-        );
-
-        // No exhibits at the start.
-        $this->assertEquals($this->_exhibitsTable->count(), 0);
-
-        // Submit the form.
-        $this->dispatch('neatline-exhibits/add');
-
-        // No exhibit should have been created.
-        $this->assertEquals($this->_exhibitsTable->count(), 1);
-
-        // Get the exhibit and examine.
-        $exhibit = $this->_exhibitsTable->find(1);
-        $this->assertEquals($exhibit->name, 'Test Exhibit');
-        $this->assertEquals($exhibit->slug, 'test-exhibit');
-        $this->assertEquals($exhibit->public, 1);
-        $this->assertEquals($exhibit->default_base_layer, 5);
-        $this->assertEquals($exhibit->map_id, $map->id);
-        $this->assertNull($exhibit->image_id);
-        $this->assertNull($exhibit->wms_id);
-
-    }
-
-    /**
-     * Valid form should create new exhibit.
-     *
-     * @return void.
-     */
     public function testAddSuccessWithImage()
     {
 
@@ -724,52 +594,6 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
         // But Omeka doesn't really make it possible to mock an image witout an
         // actual, no-joke image sitting in /archives (it gets checked for at
         // the level of the model).
-
-    }
-
-    /**
-     * Valid form should create new exhibit.
-     *
-     * @return void.
-     */
-    public function testAddSuccessWithWms()
-    {
-
-        // Create item and wms
-        $item = $this->helper->_createItem();
-        $wms = new NeatlineWms($item);
-        $wms->save();
-
-        $this->request->setMethod('POST')
-            ->setPost(array(
-                'title' => 'Test Exhibit',
-                'slug' => 'test-exhibit',
-                'public' => 1,
-                'baselayer' => 5,
-                'map' => 'none',
-                'image' => 'none',
-                'wms' => $wms->id
-            )
-        );
-
-        // No exhibits at the start.
-        $this->assertEquals($this->_exhibitsTable->count(), 0);
-
-        // Submit the form.
-        $this->dispatch('neatline-exhibits/add');
-
-        // No exhibit should have been created.
-        $this->assertEquals($this->_exhibitsTable->count(), 1);
-
-        // Get the exhibit and examine.
-        $exhibit = $this->_exhibitsTable->find(1);
-        $this->assertEquals($exhibit->name, 'Test Exhibit');
-        $this->assertEquals($exhibit->slug, 'test-exhibit');
-        $this->assertEquals($exhibit->public, 1);
-        $this->assertEquals($exhibit->default_base_layer, 5);
-        $this->assertEquals($exhibit->wms_id, 1);
-        $this->assertNull($exhibit->image_id);
-        $this->assertNull($exhibit->map_id);
 
     }
 

@@ -216,46 +216,6 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
     }
 
     /**
-     * The getMap() method should return an exhibit's map record.
-     *
-     * @return void.
-     */
-    public function testGetMap()
-    {
-
-        // Create an exhibit and map.
-        $exhibit = $this->helper->_createNeatline();
-        $map = new NeatlineMapsMap();
-        $map->save();
-        $exhibit->saveForm('Title', 'slug', 1, 5, $map->id, 'none', 'none');
-
-        // Get the map and check.
-        $retrievedMap = $exhibit->getMap();
-        $this->assertEquals($map->id, $retrievedMap->id);
-
-    }
-
-    /**
-     * When there is no map, getMap() method should return null.
-     *
-     * @return void.
-     */
-    public function testGetMapWithNullKey()
-    {
-
-        // Create an exhibit and map.
-        $exhibit = $this->helper->_createNeatline();
-        $map = new NeatlineMapsMap();
-        $map->save();
-        $exhibit->saveForm('Title', 'slug', 1, 5, 'none', 'none', 'none');
-
-        // Get the map and check.
-        $retrievedMap = $exhibit->getMap();
-        $this->assertNull($retrievedMap);
-
-    }
-
-    /**
      * The getImage() method should return an exhibit's image record.
      *
      * @return void.
@@ -264,43 +224,6 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
     {
 
         // TODO: How to mock a file?
-
-    }
-
-    /**
-     * The getWms() method should return an exhibit's WMS record.
-     *
-     * @return void.
-     */
-    public function testGetWms()
-    {
-
-        // Create an exhibit and map.
-        $exhibit = $this->helper->_createNeatline();
-        $wms = $this->helper->_createWms();
-        $exhibit->saveForm('Title', 'slug', 1, 5, 'none', 'none', $wms->id);
-
-        // Get the wms and check.
-        $retrievedWms = $exhibit->getWms();
-        $this->assertEquals($wms->id, $retrievedWms->id);
-
-    }
-
-    /**
-     * When there is no wms, getWms() method should return null.
-     *
-     * @return void.
-     */
-    public function testGetWmsWithNullKey()
-    {
-
-        // Create an exhibit and map.
-        $exhibit = $this->helper->_createNeatline();
-        $exhibit->saveForm('Title', 'slug', 1, 5, 'none', 'none', 'none');
-
-        // Get the wms and check.
-        $retrievedWms = $exhibit->getWms();
-        $this->assertNull($retrievedWms);
 
     }
 
@@ -314,12 +237,10 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
 
         // Create an exhibit and map.
         $exhibit = $this->helper->_createNeatline();
-        $map = new NeatlineMapsMap();
-        $map->save();
         $exhibit->saveForm('Title', 'slug', 1, 5, 'none', 'none', 'none');
 
         // Get the map and check.
-        $retrievedImage = $exhibit->getMap();
+        $retrievedImage = $exhibit->getImage();
         $this->assertNull($retrievedImage);
 
     }

@@ -142,22 +142,6 @@ class NeatlineExhibit extends Omeka_record
     }
 
     /**
-     * Fetch the parent map.
-     *
-     * @return Omeka_record The map.
-     */
-    public function getMap()
-    {
-
-        if (!is_null($this->map_id)) {
-            return $this->getTable('NeatlineMapsMap')->find($this->map_id);
-        }
-
-        return null;
-
-    }
-
-    /**
      * Fetch the parent image.
      *
      * @return Omeka_record The map.
@@ -167,22 +151,6 @@ class NeatlineExhibit extends Omeka_record
 
         if (!is_null($this->image_id)) {
             return $this->getTable('File')->find($this->image_id);
-        }
-
-        return null;
-
-    }
-
-    /**
-     * Fetch the parent WMS.
-     *
-     * @return Omeka_record The wms.
-     */
-    public function getWms()
-    {
-
-        if (!is_null($this->wms_id)) {
-            return $this->getTable('NeatlineWms')->find($this->wms_id);
         }
 
         return null;

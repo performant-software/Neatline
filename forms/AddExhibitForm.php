@@ -39,10 +39,7 @@ class AddExhibitForm extends Omeka_Form
 
         // Get database and tables.
         $_db = get_db();
-        $_layers = $_db->getTable('NeatlineBaseLayer');
-        $_maps = $_db->getTable('NeatlineMapsMap');
         $_exhibits = $_db->getTable('NeatlineExhibit');
-        $_wms = $_db->getTable('NeatlineWms');
 
         $this->setMethod('post');
         $this->setAttrib('id', 'add-exhibit-form');
@@ -106,44 +103,6 @@ class AddExhibitForm extends Omeka_Form
             'description'   => 'By default, exhibits are only visible to you.'
         ));
 
-        // Map.
-        if (plugin_is_active('NeatlineMaps')) {
-            $this->addElement('select', 'map', array(
-                'label'         => '(Optional): Neatline Map',
-                'description'   => 'Select a Geoserver map to use as the exhibit foundation.',
-                'attribs'       => array('style' => 'width: 230px'),
-                'multiOptions'  => $_maps->getMapsForSelect(),
-                'validators'    => array(
-                    array('validator' => 'MapOrImage', 'breakChainOnFailure' => true, 'options' =>
-                        array(
-                            'messages' => array(
-                                Neatline_Validate_MapOrImage::MAP_OR_IMAGE => 'Can\'t use more than one exhibit foundation.'
-                            )
-                        )
-                    )
-                )
-            ));
-        }
-
-        // WMS.
-        if (plugin_is_active('NeatlineWms')) {
-            $this->addElement('select', 'wms', array(
-                'label'         => '(Optional): Web Map Service',
-                'description'   => 'Or, select a web map service to use as the exhibit foundation.',
-                'attribs'       => array('style' => 'width: 230px'),
-                'multiOptions'  => $_wms->getServicesForSelect(),
-                'validators'    => array(
-                    array('validator' => 'MapOrImage', 'breakChainOnFailure' => true, 'options' =>
-                        array(
-                            'messages' => array(
-                                Neatline_Validate_MapOrImage::MAP_OR_IMAGE => 'Can\'t use more than one exhibit foundation.'
-                            )
-                        )
-                    )
-                )
-            ));
-        }
-
         // Image.
         $this->addElement('select', 'image', array(
             'label'         => '(Optional): Static Image',
@@ -161,14 +120,6 @@ class AddExhibitForm extends Omeka_Form
             )
         ));
 
-        // Base layer.
-        $this->addElement('select', 'baselayer', array(
-            'label'         => 'Default Base Layer',
-            'description'   => 'Select a default base layer.',
-            'attribs'       => array('style' => 'width: 230px'),
-            'multiOptions'  => $_layers->getLayersForSelect()
-        ));
-
         // Submit.
         $this->addElement('submit', 'submit', array(
             'label' => 'Create Exhibit'
@@ -183,9 +134,6 @@ class AddExhibitForm extends Omeka_Form
 
         // Group the baselayer fields.
         $this->addDisplayGroup(array(
-            'baselayer',
-            'map',
-            'wms',
             'image'
         ), 'baselayer_info');
 
