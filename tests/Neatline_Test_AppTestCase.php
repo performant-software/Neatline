@@ -26,7 +26,6 @@
 
 require_once '../NeatlinePlugin.php';
 require_once '../../NeatlineMaps/NeatlineMapsPlugin.php';
-require_once '../../NeatlineWms/NeatlineWmsPlugin.php';
 
 class Neatline_Test_AppTestCase extends Omeka_Test_AppTestCase
 {
@@ -52,12 +51,6 @@ class Neatline_Test_AppTestCase extends Omeka_Test_AppTestCase
         $neatline_maps_plugin_helper = new Omeka_Test_Helper_Plugin;
         $neatline_maps_plugin_helper->setUp('NeatlineMaps');
 
-        // Set up Neatline WMS.
-        $neatline_wms_plugin_broker = get_plugin_broker();
-        $this->_addNeatlineWmsPluginHooksAndFilters($neatline_wms_plugin_broker, 'NeatlineWms');
-        $neatline_wms_plugin_broker = new Omeka_Test_Helper_Plugin;
-        $neatline_wms_plugin_broker->setUp('NeatlineWms');
-
         // Set up Neatline.
         $neatline_plugin_broker = get_plugin_broker();
         $this->_addNeatlinePluginHooksAndFilters($neatline_plugin_broker, 'Neatline');
@@ -77,17 +70,6 @@ class Neatline_Test_AppTestCase extends Omeka_Test_AppTestCase
     {
         $plugin_broker->setCurrentPluginDirName($plugin_name);
         new NeatlineMapsPlugin;
-    }
-
-    /**
-     * Install Neatline WMS.
-     *
-     * @return void.
-     */
-    public function _addNeatlineWmsPluginHooksAndFilters($plugin_broker, $plugin_name)
-    {
-        $plugin_broker->setCurrentPluginDirName($plugin_name);
-        new NeatlineWmsPlugin;
     }
 
     /**
