@@ -96,114 +96,6 @@
         },
 
         /*
-         * Initialize a Geoserver-based map with a WMS base layer.
-         */
-        // _instantiateGeoserverMap: function() {
-
-        //     var self = this;
-
-        //     // Set OL global attributes.
-        //     OpenLayers.IMAGE_RELOAD_ATTEMTPS = 3;
-        //     OpenLayers.Util.onImageLoadErrorColor = 'transparent';
-        //     OpenLayers.ImgPath = 'http://js.mapbox.com/theme/dark/';
-
-        //     var tiled;
-        //     var pureCoverage = true;
-
-        //     // Pink tile avoidance.
-        //     OpenLayers.IMAGE_RELOAD_ATTEMPTS = 5;
-
-        //     // Make OL compute scale according to WMS spec.
-        //     OpenLayers.DOTS_PER_INCH = 25.4 / 0.28;
-
-        //     // Set tile image format.
-        //     var format = 'image/png';
-        //     if (pureCoverage) {
-        //         format = 'image/png8';
-        //     }
-
-        //     // Build the default bounds array.
-        //     var boundsArray = Neatline.map.boundingBox.split(',');
-        //     var bounds = new OpenLayers.Bounds(
-        //         parseFloat(boundsArray[0]),
-        //         parseFloat(boundsArray[1]),
-        //         parseFloat(boundsArray[2]),
-        //         parseFloat(boundsArray[3])
-        //     );
-
-        //     // Starting options.
-        //     var options = {
-        //         controls: [
-        //           new OpenLayers.Control.PanZoomBar(),
-        //           new OpenLayers.Control.MousePosition(),
-        //           new OpenLayers.Control.Navigation(),
-        //           new OpenLayers.Control.ScaleLine(),
-        //           new OpenLayers.Control.LayerSwitcher()
-        //         ],
-        //         maxResolution: 'auto',
-        //         maxExtent: bounds,
-        //         projection: Neatline.map.epsg[0],
-        //         units: 'm'
-        //     };
-
-        //     // Instantiate the map.
-        //     this.map = new OpenLayers.Map('map', options);
-
-        //     // Construct the base layers.
-        //     var layers = this._getBaseLayers();
-
-        //     // Push the base layers onto the map, set default.
-        //     this.map.addLayers(layers);
-        //     this._setDefaultLayer();
-
-        //     // Construct the WMS layers.
-        //     this.wmsLayers = [];
-        //     _.each(Neatline.map.layers.split(','), function(layer) {
-
-        //         self.wmsLayers.push(new OpenLayers.Layer.WMS(
-        //             layer,
-        //             Neatline.map.wmsAddress,
-        //             {
-        //                 layers: layer,
-        //                 styles: '',
-        //                 transparent: true,
-        //                 format: format,
-        //                 tiled: !pureCoverage,
-        //                 tilesOrigin: self.map.maxExtent.left + ',' + self.map.maxExtent.bottom
-        //             },
-        //             {
-        //                 buffer: 0,
-        //                 displayOutsideMaxExtent: true,
-        //                 isBaseLayer: false
-        //             }
-        //         ));
-
-        //     });
-
-        //     // Push the wms layers onto the map.
-        //     this.map.addLayers(this.wmsLayers);
-
-        //     // If there is a default bounding box set for the exhibit, construct
-        //     // a second Bounds object to use as the starting zoom target.
-        //     if (!_.isNull(Neatline.record.default_map_bounds)) {
-        //         var boundsArray = Neatline.record.default_map_bounds.split(',');
-        //         var bounds = new OpenLayers.Bounds(
-        //             parseFloat(boundsArray[0]),
-        //             parseFloat(boundsArray[1]),
-        //             parseFloat(boundsArray[2]),
-        //             parseFloat(boundsArray[3])
-        //         );
-        //     }
-
-        //     // Set starting zoom focus.
-        //     this.map.zoomToExtent(bounds);
-
-        //     // Instantiate opacity slider.
-        //     this._instantiateOpacitySlider();
-
-        // },
-
-        /*
          * Initialize a map with real-geography base-layer.
          */
         _instantiateRealGeographyMap: function() {
@@ -401,7 +293,8 @@
                 success: function(data) {
 
                     // Build the new layers and add default click controls.
-                    self._buildVectorLayers(data);
+                    self._buildLayers(data.layers);
+                    self._buildFeatures(data.features);
                     self._addClickControls();
 
                     // If a layer was being edited before the save,
@@ -417,16 +310,55 @@
         },
 
         /*
+         * Construct WMS map layers.
+         */
+        _buildLayers: function(layers) {
+
+            var self = this;
+
+            // Remove existing WMS layers.
+            _.each(this.wmsLayers, function(layer) {
+                self.map.removeLayer(layer);
+            });
+
+            // Construct the WMS layers.
+            this.wmsLayers = [];
+            _.each(layers, function(layer) {
+
+                self.wmsLayers.push(new OpenLayers.Layer.WMS(
+                    layer.title,
+                    layer.wmsAddress,
+                    {
+                        layers: layer.layers,
+                        styles: '',
+                        transparent: true,
+                        format: 'image/png8',
+                        tiled: false
+                    },
+                    {
+                        buffer: 0,
+                        displayOutsideMaxExtent: true,
+                        isBaseLayer: false
+                    }
+                ));
+
+            });
+
+            this.map.addLayers(this.wmsLayers);
+
+        },
+
+        /*
          * Construct the features from the source JSON.
          */
-        _buildVectorLayers: function(data) {
+        _buildFeatures: function(features) {
 
             var self = this;
 
             // Instantiate database and associations objects.
             this._db = TAFFY();
 
-            _.each(data.features, function(item) {
+            _.each(features, function(item) {
 
                 // Get float values for opacities.
                 item.vector_opacity = item.vector_opacity / 100;

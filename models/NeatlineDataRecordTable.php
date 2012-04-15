@@ -373,13 +373,33 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
                         )
                     );
 
-                    // // If the record has a parent item.
-                    // if (!is_null($record->item_id)) {
+                    // If the record has a parent item and Neatline Maps
+                    // is present.
+                    if (plugin_is_active('NeatlineMaps') &&
+                        !is_null($record->item_id)) {
 
-                    //     // Get item, try to get WMS.
-                    //     $item = $record->getItem();
+                        // Get the parent item, try to get WMS.
+                        $item = $record->getItem();
+                        $wms = $this->getTable('NeatlineWms')->findByItem($item);
 
-                    // }
+                        // If there is a WMS, push to layers.
+                        if ($wms) {
+
+                            // Get item title.
+                            $title = neatline_getItemMetadata(
+                                $item, 'Dublin Core', 'Title'
+                            );
+
+                            // Push to array.
+                            $data['layers'][] = array(
+                                'title' => $title,
+                                'wmsAddress' => $wms->address,
+                                'layers' => $wms->layers
+                            );
+
+                        }
+
+                    }
 
                 }
 
