@@ -882,53 +882,56 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
 
         $this->assertEquals(
             $json,
-            array(
-                (object) array(
-                    'id' => $record1->id,
-                    'item_id' => $item1->id,
-                    'title' => 'Item 1 Title',
-                    'slug' => 'slug-1',
-                    'vector_color' => '#ffffff',
-                    'stroke_color' => '#ffffff',
-                    'highlight_color' => '#ffffff',
-                    'vector_opacity' => '60',
-                    'stroke_opacity' => '60',
-                    'stroke_width' => '3',
-                    'point_radius' => '3',
-                    'bounds' => 'BOUND(1)',
-                    'zoom' => '4',
-                    'wkt' => 'POINT(1,0)',
-                    '_native_styles' => (object) array(
+            (object) array(
+                'layers' => array(),
+                'features' => array(
+                    (object) array(
+                        'id' => $record1->id,
+                        'item_id' => $item1->id,
+                        'title' => 'Item 1 Title',
+                        'slug' => 'slug-1',
                         'vector_color' => '#ffffff',
-                        'vector_opacity' => '60',
                         'stroke_color' => '#ffffff',
+                        'highlight_color' => '#ffffff',
+                        'vector_opacity' => '60',
                         'stroke_opacity' => '60',
                         'stroke_width' => '3',
-                        'point_radius' => '3'
-                    )
-                ),
-                (object) array(
-                    'id' => $record2->id,
-                    'item_id' => $item2->id,
-                    'title' => 'Item 2 Title',
-                    'slug' => 'slug-2',
-                    'vector_color' => '#000000',
-                    'stroke_color' => '#000000',
-                    'highlight_color' => '#000000',
-                    'vector_opacity' => '40',
-                    'stroke_opacity' => '40',
-                    'stroke_width' => '2',
-                    'point_radius' => '2',
-                    'bounds' => 'BOUND(2)',
-                    'zoom' => '5',
-                    'wkt' => 'POINT(0,1)',
-                    '_native_styles' => (object) array(
+                        'point_radius' => '3',
+                        'bounds' => 'BOUND(1)',
+                        'zoom' => '4',
+                        'wkt' => 'POINT(1,0)',
+                        '_native_styles' => (object) array(
+                            'vector_color' => '#ffffff',
+                            'vector_opacity' => '60',
+                            'stroke_color' => '#ffffff',
+                            'stroke_opacity' => '60',
+                            'stroke_width' => '3',
+                            'point_radius' => '3'
+                        )
+                    ),
+                    (object) array(
+                        'id' => $record2->id,
+                        'item_id' => $item2->id,
+                        'title' => 'Item 2 Title',
+                        'slug' => 'slug-2',
                         'vector_color' => '#000000',
-                        'vector_opacity' => '40',
                         'stroke_color' => '#000000',
+                        'highlight_color' => '#000000',
+                        'vector_opacity' => '40',
                         'stroke_opacity' => '40',
                         'stroke_width' => '2',
-                        'point_radius' => '2'
+                        'point_radius' => '2',
+                        'bounds' => 'BOUND(2)',
+                        'zoom' => '5',
+                        'wkt' => 'POINT(0,1)',
+                        '_native_styles' => (object) array(
+                            'vector_color' => '#000000',
+                            'vector_opacity' => '40',
+                            'stroke_color' => '#000000',
+                            'stroke_opacity' => '40',
+                            'stroke_width' => '2',
+                            'point_radius' => '2'
+                        )
                     )
                 )
             )
@@ -966,10 +969,10 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
 
         // Build the JSON.
         $json = json_decode($this->_recordsTable->buildMapJson($neatline));
-        $this->assertNull($json[0]->zoom);
-        $this->assertNull($json[0]->bounds);
-        $this->assertNull($json[1]->zoom);
-        $this->assertNull($json[1]->bounds);
+        $this->assertNull($json->features[0]->zoom);
+        $this->assertNull($json->features[0]->bounds);
+        $this->assertNull($json->features[1]->zoom);
+        $this->assertNull($json->features[1]->bounds);
 
     }
 
@@ -1002,7 +1005,7 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
         // Check format.
         $this->assertEquals(
             $json,
-            '[]'
+            '{"layers":[],"features":[]}'
         );
 
     }
@@ -1025,7 +1028,7 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
         // Check format.
         $this->assertEquals(
             $json,
-            '[]'
+            '{"layers":[],"features":[]}'
         );
 
     }
