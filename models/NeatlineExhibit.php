@@ -101,10 +101,7 @@ class NeatlineExhibit extends Omeka_record
         $title,
         $slug,
         $public,
-        $baseLayer,
-        $map,
-        $image,
-        $wms
+        $image
     )
     {
 
@@ -112,7 +109,7 @@ class NeatlineExhibit extends Omeka_record
         $this->name =                   $title;
         $this->slug =                   $slug;
         $this->public =                 (int) $public;
-        $this->default_base_layer =     (int) $baseLayer;
+        $this->default_base_layer =     2;
         $this->top_element =            'map';
         $this->items_h_pos =            'right';
         $this->items_v_pos =            'bottom';
@@ -120,23 +117,11 @@ class NeatlineExhibit extends Omeka_record
         $this->is_map =                 1;
         $this->is_timeline =            1;
         $this->is_items =               1;
-        $this->map_id =                 null;
         $this->image_id =               null;
-        $this->wms_id =                 null;
-
-        // Check for map.
-        if (is_numeric($map)) {
-            $this->map_id = $map;
-        }
 
         // Check for image.
         if (is_numeric($image)) {
             $this->image_id = $image;
-        }
-
-        // Check for wms.
-        if (is_numeric($wms)) {
-            $this->wms_id = $wms;
         }
 
     }

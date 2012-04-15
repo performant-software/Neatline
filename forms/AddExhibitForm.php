@@ -106,18 +106,9 @@ class AddExhibitForm extends Omeka_Form
         // Image.
         $this->addElement('select', 'image', array(
             'label'         => '(Optional): Static Image',
-            'description'   => 'Or, select a static image to use as the exhibit foundation.',
+            'description'   => 'Select a file to build the exhibit on a static image.',
             'attribs'       => array('style' => 'width: 230px'),
-            'multiOptions'  => $this->getImagesForSelect(),
-            'validators'    => array(
-                array('validator' => 'MapOrImage', 'breakChainOnFailure' => true, 'options' =>
-                    array(
-                        'messages' => array(
-                            Neatline_Validate_MapOrImage::MAP_OR_IMAGE => 'Can\'t use more than one exhibit foundation.'
-                        )
-                    )
-                )
-            )
+            'multiOptions'  => $this->getImagesForSelect()
         ));
 
         // Submit.

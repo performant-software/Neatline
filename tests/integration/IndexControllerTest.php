@@ -426,128 +426,11 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
     }
 
     /**
-     * If a map and an image is selected, flash error.
-     *
-     * @return void.
-     */
-    public function testAddBothMapAndImageError()
-    {
-
-        // Duplicate slug.
-        $this->request->setMethod('POST')
-            ->setPost(array(
-                'map' => '1',
-                'image' => '1',
-                'wms' => 'none'
-            )
-        );
-
-        // No exhibits at the start.
-        $this->assertEquals($this->_exhibitsTable->count(), 0);
-
-        // Submit the form.
-        $this->dispatch('neatline-exhibits/add');
-
-        // Should redirect to the add view.
-        $this->assertModule('neatline');
-        $this->assertController('index');
-        $this->assertAction('add');
-
-        // Check for the error.
-        $this->assertQueryContentContains(
-            'ul.errors li',
-            'Can\'t use more than one exhibit foundation.'
-        );
-
-        // No exhibit should have been created.
-        $this->assertEquals($this->_exhibitsTable->count(), 0);
-
-    }
-
-    /**
-     * If a map and a WMS are selected, flash error.
-     *
-     * @return void.
-     */
-    public function testAddBothMapAndWmsError()
-    {
-
-        // Duplicate slug.
-        $this->request->setMethod('POST')
-            ->setPost(array(
-                'map' => '1',
-                'image' => 'none',
-                'wms' => '1'
-            )
-        );
-
-        // No exhibits at the start.
-        $this->assertEquals($this->_exhibitsTable->count(), 0);
-
-        // Submit the form.
-        $this->dispatch('neatline-exhibits/add');
-
-        // Should redirect to the add view.
-        $this->assertModule('neatline');
-        $this->assertController('index');
-        $this->assertAction('add');
-
-        // Check for the error.
-        $this->assertQueryContentContains(
-            'ul.errors li',
-            'Can\'t use more than one exhibit foundation.'
-        );
-
-        // No exhibit should have been created.
-        $this->assertEquals($this->_exhibitsTable->count(), 0);
-
-    }
-
-    /**
-     * If a map and a WMS are selected, flash error.
-     *
-     * @return void.
-     */
-    public function testAddBothImageAndWmsError()
-    {
-
-        // Duplicate slug.
-        $this->request->setMethod('POST')
-            ->setPost(array(
-                'map' => 'none',
-                'image' => '1',
-                'wms' => '1'
-            )
-        );
-
-        // No exhibits at the start.
-        $this->assertEquals($this->_exhibitsTable->count(), 0);
-
-        // Submit the form.
-        $this->dispatch('neatline-exhibits/add');
-
-        // Should redirect to the add view.
-        $this->assertModule('neatline');
-        $this->assertController('index');
-        $this->assertAction('add');
-
-        // Check for the error.
-        $this->assertQueryContentContains(
-            'ul.errors li',
-            'Can\'t use more than one exhibit foundation.'
-        );
-
-        // No exhibit should have been created.
-        $this->assertEquals($this->_exhibitsTable->count(), 0);
-
-    }
-
-    /**
      * Valid form should create new exhibit.
      *
      * @return void.
      */
-    public function testAddSuccessWithNoMapAndNoImageAndNoWms()
+    public function testAddSuccess()
     {
 
         $this->request->setMethod('POST')
@@ -555,10 +438,7 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
                 'title' => 'Test Exhibit',
                 'slug' => 'test-exhibit',
                 'public' => 1,
-                'baselayer' => 5,
-                'map' => 'none',
-                'image' => 'none',
-                'wms' => 'none'
+                'image' => 'none'
             )
         );
 
@@ -576,8 +456,6 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
         $this->assertEquals($exhibit->name, 'Test Exhibit');
         $this->assertEquals($exhibit->slug, 'test-exhibit');
         $this->assertEquals($exhibit->public, 1);
-        $this->assertEquals($exhibit->default_base_layer, 5);
-        $this->assertNull($exhibit->map_id);
         $this->assertNull($exhibit->image_id);
 
     }
