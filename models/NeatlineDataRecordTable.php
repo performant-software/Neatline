@@ -345,7 +345,7 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
             // Walk the records and build out the array.
             foreach ($records as $record) {
 
-                // If the geocoverage is populated.
+                // If the record is active on the map.
                 if ($record->space_active == 1) {
 
                     $data['features'][] = array(
@@ -372,6 +372,14 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
                           'point_radius' =>     $record->point_radius,
                         )
                     );
+
+                    // // If the record has a parent item.
+                    // if (!is_null($record->item_id)) {
+
+                    //     // Get item, try to get WMS.
+                    //     $item = $record->getItem();
+
+                    // }
 
                 }
 
