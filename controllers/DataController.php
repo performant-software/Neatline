@@ -34,10 +34,8 @@ class Neatline_DataController extends Omeka_Controller_Action
      */
     public function init()
     {
-
         $this->_neatlinesTable = $this->getTable('NeatlineExhibit');
         $this->_recordsTable = $this->getTable('NeatlineDataRecord');
-
     }
 
     /**

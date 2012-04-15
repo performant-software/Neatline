@@ -375,8 +375,7 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
 
                     // If the record has a parent item and Neatline Maps
                     // is present.
-                    if (plugin_is_active('NeatlineMaps') &&
-                        !is_null($record->item_id)) {
+                    if (plugin_is_active('NeatlineMaps') && !is_null($record->item_id)) {
 
                         // Get the parent item, try to get WMS.
                         $item = $record->getItem();

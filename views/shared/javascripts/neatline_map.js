@@ -78,6 +78,7 @@
             this._clickedFeature =          null;
             this.record =                   null;
             this.requestData =              null;
+            this.isOpacitySlider =          false;
 
             // Construct image-based map.
             if (Neatline.record.image_id) {
@@ -239,23 +240,30 @@
 
             var self = this;
 
-            this.opacitySlider.slider({
+            if (!this.isOpacitySlider) {
 
-                // Configuration options.
-                orientation: 'vertical',
-                range: 'min',
-                min: 0,
-                max: 100,
-                value: 100,
+                this.opacitySlider.slider({
 
-                // Manifest new opacity.
-                change: function(event, ui) {
-                    _.each(self.wmsLayers, function(layer) {
-                        layer.setOpacity(ui.value/100);
-                    });
-                }
+                    // Configuration options.
+                    orientation: 'vertical',
+                    range: 'min',
+                    min: 0,
+                    max: 100,
+                    value: 100,
 
-            });
+                    // Manifest new opacity.
+                    change: function(event, ui) {
+                        _.each(self.wmsLayers, function(layer) {
+                            layer.setOpacity(ui.value/100);
+                        });
+                    }
+
+                });
+
+                // Set tracker.
+                this.isOpacitySlider = true;
+
+            }
 
         },
 
@@ -344,7 +352,11 @@
 
             });
 
-            this.map.addLayers(this.wmsLayers);
+            // Add layers to map and instantiate opacity slider.
+            if (this.wmsLayers.length > 0) {
+                this.map.addLayers(this.wmsLayers);
+                this._instantiateOpacitySlider();
+            }
 
         },
 
