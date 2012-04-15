@@ -340,6 +340,9 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
         // Get records.
         $records = $this->getRecordsByExhibit($neatline);
 
+        // Get WMS table.
+        $_wmsTable = $this->getTable('NeatlineWms');
+
         if ($records) {
 
             // Walk the records and build out the array.
@@ -379,7 +382,7 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
 
                         // Get the parent item, try to get WMS.
                         $item = $record->getItem();
-                        $wms = $this->getTable('NeatlineWms')->findByItem($item);
+                        $wms = $_wmsTable->findByItem($item);
 
                         // If there is a WMS, push to layers.
                         if ($wms) {
