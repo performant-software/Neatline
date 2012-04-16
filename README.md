@@ -163,18 +163,9 @@ Records have these fields:
 
   * Start and End Dates
 
-    * **Start Date**: The start date of the object, event, or concept represented by the record. This is the only field that is required in order for the record to be displayed on the timeline. Neatline understands dates in any of these formats:
-      * 2012
-      * June, 2012
-      * June 5, 2012
+    * **Start Date**: The start date of the object, event, or concept represented by the record. This is the only field that is required in order for the record to be displayed on the timeline. Dates must be entered in standard ISO8601 format.
 
-    * **Start Time**: The time of day of the start date. Neatline understands times in any of these formats:
-      * 10:15
-      * 10:15 am
-      * 10:15 AM
-      * 10:15 pm
-      * 10:15 PM
-      * 15:15
+    * **Start Time**: The time of day of the start date.
 
     * **End Date**: Same as start date. If an end date is entered, the record will be represented as a span (as opposed to a single point).
 
