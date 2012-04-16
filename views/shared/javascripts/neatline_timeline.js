@@ -77,7 +77,7 @@
 
                 Timeline.createBandInfo({
                     eventSource:    this.eventSource,
-                    width:          "80%",
+                    width:          "70%",
                     intervalUnit:   intervalUnit,
                     intervalPixels: intervalPixels,
                     zoomIndex:      this._currentZoomStep,
@@ -88,9 +88,9 @@
                 Timeline.createBandInfo({
                     overview:       true,
                     eventSource:    this.eventSource,
-                    width:          "20%",
+                    width:          "30%",
                     intervalUnit:   Timeline.DateTime.DECADE,
-                    intervalPixels: 70
+                    intervalPixels: 300
                 })
 
             ];
@@ -107,15 +107,6 @@
             // Override default click and zom callbacks.
             this._catchClickCallback();
             this._catchZoomCallback();
-
-            // Reposition on window resize.
-            this._window.bind({
-
-                'resize': function() {
-                    self.timeline.layout();
-                }
-
-            });
 
         },
 
