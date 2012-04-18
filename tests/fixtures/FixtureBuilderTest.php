@@ -26,11 +26,19 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache 2 License
  */
 
+if (!defined('NEATLINE_PLUGIN_DIR')) {
+    define('NEATLINE_PLUGIN_DIR', dirname(__FILE__) . '/../..');
+}
+
+require_once APP_DIR . '/models/Plugin.php';
+require_once NEATLINE_PLUGIN_DIR . '/NeatlinePlugin.php';
+require_once NEATLINE_PLUGIN_DIR . '/tests/Neatline_Test_AppTestCase.php';
+
 class Neatline_FixtureBuilderTest extends Omeka_Test_AppTestCase
 {
 
     protected $_isAdminTest = false;
-    private static $path_to_fixtures = '../spec/javascripts/fixtures/';
+    private $path_to_fixtures = null;
 
     /**
      * Instantiate the helper class, install the plugins, get the database.
@@ -41,6 +49,9 @@ class Neatline_FixtureBuilderTest extends Omeka_Test_AppTestCase
     {
 
         parent::setUp();
+
+        $this->path_to_fixtures = NEATLINE_PLUGIN_DIR . '/spec/javascripts/fixtures/';
+
         $this->helper = new Neatline_Test_AppTestCase;
         $this->helper->setUpPlugin();
         $this->db = get_db();
@@ -58,7 +69,7 @@ class Neatline_FixtureBuilderTest extends Omeka_Test_AppTestCase
         // Mock exhibit.
         $exhibit = $this->helper->_createNeatline();
 
-        $fixture = fopen(self::$path_to_fixtures . 'neatline-base.html', 'w');
+        $fixture = fopen($this->path_to_fixtures . 'neatline-base.html', 'w');
 
         $this->dispatch('neatline/fixtures/neatlinebase');
         $response = $this->getResponse()->getBody('default');
@@ -76,7 +87,7 @@ class Neatline_FixtureBuilderTest extends Omeka_Test_AppTestCase
     public function testBuildScrollArrowsMarkup()
     {
 
-        $fixture = fopen(self::$path_to_fixtures . 'scroll-arrows.html', 'w');
+        $fixture = fopen($this->path_to_fixtures . 'scroll-arrows.html', 'w');
 
         $this->dispatch('neatline/fixtures/scrollarrows');
         $response = $this->getResponse()->getBody('default');
@@ -151,7 +162,7 @@ class Neatline_FixtureBuilderTest extends Omeka_Test_AppTestCase
         $exhibit->v_percent = 60;
         $exhibit->save();
 
-        $fixture = fopen(self::$path_to_fixtures . 'editor.html', 'w');
+        $fixture = fopen($this->path_to_fixtures . 'editor.html', 'w');
 
         $this->dispatch('neatline/fixtures/editor');
         $response = $this->getResponse()->getBody('default');
@@ -169,7 +180,7 @@ class Neatline_FixtureBuilderTest extends Omeka_Test_AppTestCase
     public function testBuildPublicItemsList()
     {
 
-        $fixture = fopen(self::$path_to_fixtures . 'public-items-ajax.html', 'w');
+        $fixture = fopen($this->path_to_fixtures . 'public-items-ajax.html', 'w');
 
         // Mock item.
         $item = new Item;
@@ -232,7 +243,7 @@ class Neatline_FixtureBuilderTest extends Omeka_Test_AppTestCase
     public function testBuildEditorItemsList()
     {
 
-        $fixture = fopen(self::$path_to_fixtures . 'editor-items-ajax.html', 'w');
+        $fixture = fopen($this->path_to_fixtures . 'editor-items-ajax.html', 'w');
 
         // Mock items.
         $item1 = new Item;
@@ -297,7 +308,7 @@ class Neatline_FixtureBuilderTest extends Omeka_Test_AppTestCase
     public function testBuildFormData()
     {
 
-        $fixture = fopen(self::$path_to_fixtures . 'editor-form-ajax.html', 'w');
+        $fixture = fopen($this->path_to_fixtures . 'editor-form-ajax.html', 'w');
 
         // Mock exhibit.
         $exhibit = $this->helper->_createNeatline();
@@ -344,7 +355,7 @@ class Neatline_FixtureBuilderTest extends Omeka_Test_AppTestCase
     public function testBuildTimelineData()
     {
 
-        $fixture = fopen(self::$path_to_fixtures . 'timeline-data-ajax.html', 'w');
+        $fixture = fopen($this->path_to_fixtures . 'timeline-data-ajax.html', 'w');
 
         // Mock items.
         $item1 = new Item;
@@ -417,7 +428,7 @@ class Neatline_FixtureBuilderTest extends Omeka_Test_AppTestCase
     public function testBuildExhibitForm()
     {
 
-        $fixture = fopen(self::$path_to_fixtures . 'add-form.html', 'w');
+        $fixture = fopen($this->path_to_fixtures . 'add-form.html', 'w');
 
         $this->dispatch('neatline/fixtures/exhibitform');
         $response = $this->getResponse()->getBody('default');
