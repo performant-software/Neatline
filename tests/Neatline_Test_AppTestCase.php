@@ -145,7 +145,7 @@ class Neatline_Test_AppTestCase extends Omeka_Test_AppTestCase
             $item = $this->_createItem();
         }
 
-        $wms = new NeatlineWms($item);
+        $wms = new NeatlineMapsService($item);
         $wms->save();
 
         return $wms;

@@ -337,11 +337,13 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
             'features' => array()
         );
 
+        // If Neatline Maps is installed, get services table.
+        if (plugin_is_active('NeatlineMaps')) {
+            $_servicesTable = $this->getTable('NeatlineMapsService');
+        }
+
         // Get records.
         $records = $this->getRecordsByExhibit($neatline);
-
-        // Get WMS table.
-        $_wmsTable = $this->getTable('NeatlineWms');
 
         if ($records) {
 
@@ -382,7 +384,7 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
 
                         // Get the parent item, try to get WMS.
                         $item = $record->getItem();
-                        $wms = $_wmsTable->findByItem($item);
+                        $wms = $_servicesTable->findByItem($item);
 
                         // If there is a WMS, push to layers.
                         if ($wms) {
