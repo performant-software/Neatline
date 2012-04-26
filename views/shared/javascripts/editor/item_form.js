@@ -325,7 +325,7 @@
             var itemRaw =                   item.attr('itemid');
             var recordRaw =                 item.attr('recordid');
             this.itemTitleText =            item.find('.item-title-text');
-            this.container =                this.item.next('tr').find('td');
+            this.container =                this.item.next('tr').find('td.edit-form-container');
             this.textSpan =                 this.item.find('.item-title-text');
             this.time =                     this.item.find('.time input');
             this.space =                    this.item.find('.space input');
@@ -335,6 +335,8 @@
                 null : parseInt(itemRaw, 10);
             this.recordId = recordRaw === '' ?
                 null : parseInt(recordRaw, 10);
+
+            console.log(this.container);
 
             // Inject the form markup.
             this.container.append(this.element);

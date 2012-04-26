@@ -168,7 +168,9 @@
                         'mouseup': function() {
                             self.isDragging = false;
                             self._window.unbind('mousemove');
-                            self._hideToolTip();
+                            if (self.options.tip.show) {
+                                self._hideToolTip();
+                            }
                         }
 
                     });
