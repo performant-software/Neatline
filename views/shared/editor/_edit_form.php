@@ -109,107 +109,66 @@
 
         <hr />
 
-        <a class="fieldset date-styles" href="">
-            <div class="fieldset-arrow"></div>Timeline Styles
-        </a>
-        <div class="fieldset">
-
-            <div class="clearfix">
-                <label>Date Ambiguity</label>
-                <div class="input">
-                    <div class="inline-inputs">
-                        <div class="date-ambiguity-container">
-                            <div class="date-ambiguity-editor">
-                                <div class="stop-marker left"><div class="color-swatch"></div></div>
-                                <div class="stop-marker right"><div class="color-swatch"></div></div>
-                            </div>
-                            <input name="left-ambiguity-percentage" type="hidden" />
-                            <input name="right-ambiguity-percentage" type="hidden" />
-                        </div>
-                        <span class="help-inline">Drag the beginning and ending sliders inward to capture
-                            uncertainty over the date interval.</span>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-        <hr />
-
         <a class="fieldset map-styles" href="">
             <div class="fieldset-arrow"></div>Map Styles
         </a>
         <div class="fieldset">
 
-            <div class="clearfix">
-                <label>Shape Color</label>
-                <div class="input">
-                    <div class="inline-inputs">
-                        <input type="text" class="color-picker" name="vector-color" />
-                        <span class="help-inline">Select a color for the item's spatial vectors.</span>
-                    </div>
-                </div>
-            </div>
+            <table class="map-styles">
+                <tr>
+                    <td>
+                        <label>Shape Color</label>
+                        <div class="input">
+                            <div class="inline-inputs">
+                                <input type="text" class="color-picker" name="vector-color" />
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <label>Line Color</label>
+                        <div class="input">
+                            <div class="inline-inputs">
+                                <input type="text" class="color-picker" name="stroke-color" />
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <label>Highlight Color</label>
+                        <div class="input">
+                            <div class="inline-inputs">
+                                <input type="text" class="color-picker" name="highlight-color" />
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Shape Opacity</label>
+                        <div class="input">
+                            <div class="inline-inputs">
+                                <input type="text" class="integer-dragger" name="vector-opacity" />
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <label>Line Thickness</label>
+                        <div class="input">
+                            <div class="inline-inputs">
+                                <input type="text" class="integer-dragger" name="stroke-width" />
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <label>Point Radius</label>
+                        <div class="input">
+                            <div class="inline-inputs">
+                                <input type="text" class="integer-dragger" name="point-radius" />
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
 
-            <div class="clearfix">
-                <label>Line Color</label>
-                <div class="input">
-                    <div class="inline-inputs">
-                        <input type="text" class="color-picker" name="stroke-color" />
-                        <span class="help-inline">Select a color for the border lines around shapes.</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="clearfix">
-                <label>Highlight Color</label>
-                <div class="input">
-                    <div class="inline-inputs">
-                        <input type="text" class="color-picker" name="highlight-color" />
-                        <span class="help-inline">Select a highlight color.</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="clearfix">
-                <label>Shape Opacity</label>
-                <div class="input">
-                    <div class="inline-inputs">
-                        <input type="text" class="integer-dragger" name="vector-opacity" />
-                        <span class="help-inline">Set the opacity for the item's vectors on the map.</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="clearfix">
-                <label>Line Opacity</label>
-                <div class="input">
-                    <div class="inline-inputs">
-                        <input type="text" class="integer-dragger" name="stroke-opacity" />
-                        <span class="help-inline">Set the opacity for the border lines.</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="clearfix">
-                <label>Line Thickness</label>
-                <div class="input">
-                    <div class="inline-inputs">
-                        <input type="text" class="integer-dragger" name="stroke-width" />
-                        <span class="help-inline">Set the width, in pixels, for the border lines.</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="clearfix">
-                <label>Point Radius</label>
-                <div class="input">
-                    <div class="inline-inputs">
-                        <input type="text" class="integer-dragger" name="point-radius" />
-                        <span class="help-inline">Set the radius for point on the map.</span>
-                    </div>
-                </div>
-            </div>
 
             <div class="clearfix">
                 <div class="input">
@@ -220,12 +179,6 @@
                 </div>
             </div>
 
-        </div>
-
-        <hr />
-
-        <div class="fieldset">
-
             <div class="clearfix">
                 <div class="input">
                     <div class="inline-inputs">
@@ -234,6 +187,12 @@
                     </div>
                 </div>
             </div>
+
+        </div>
+
+        <hr />
+
+        <div class="fieldset">
 
             <div id="edit-form-actions" class="actions">
                 <input type="submit" class="btn primary" value="Save">

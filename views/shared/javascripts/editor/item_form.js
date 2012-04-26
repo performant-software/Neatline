@@ -86,11 +86,8 @@
             this.strokeColor =              this.form.find('input[name="stroke-color"]');
             this.highlightColor =           this.form.find('input[name="highlight-color"]');
             this.vectorOpacity =            this.form.find('input[name="vector-opacity"]');
-            this.strokeOpacity =            this.form.find('input[name="stroke-opacity"]');
             this.strokeWidth =              this.form.find('input[name="stroke-width"]');
             this.pointRadius =              this.form.find('input[name="point-radius"]');
-            this.leftPercent =              this.form.find('input[name="left-ambiguity-percentage"]');
-            this.rightPercent =             this.form.find('input[name="right-ambiguity-percentage"]');
             this.closeButton =              this.form.find('button[type="reset"]');
             this.saveButton =               this.form.find('input[type="submit"]');
             this.textInputs =               this.form.find('input[type="text"], textarea');
@@ -102,7 +99,6 @@
             this.resetStyles =              this.form.find('.reset-styles');
             this.titleDescriptionFieldset = this.form.find('a.fieldset.title-and-description');
             this.dateInformationFieldset =  this.form.find('a.fieldset.date-information');
-            this.dateStylesFieldset =       this.form.find('a.fieldset.date-styles');
             this.mapStylesFieldset =        this.form.find('a.fieldset.map-styles');
 
             // Trackers.
@@ -187,18 +183,9 @@
                 min: 0,
                 max: 100,
                 px_per_unit: 1,
+                tip: { show: false },
                 change: function(evt, obj) {
                     self._trigger('vectorOpacityEdit', {}, { 'value': obj.value });
-                }
-            });
-
-            // ** LINE OPACITY.
-            this.strokeOpacity.integerdragger({
-                min: 0,
-                max: 100,
-                px_per_unit: 1,
-                change: function(evt, obj) {
-                    self._trigger('strokeOpacityEdit', {}, { 'value': obj.value });
                 }
             });
 
@@ -207,6 +194,7 @@
                 min: 0,
                 def: 1,
                 px_per_unit: 8,
+                tip: { show: false },
                 change: function(evt, obj) {
                     self._trigger('strokeWidthEdit', {}, { 'value': obj.value });
                 }
@@ -217,6 +205,7 @@
                 min: 1,
                 def: 6,
                 px_per_unit: 8,
+                tip: { show: false },
                 change: function(evt, obj) {
                     self._trigger('pointRadiusEdit', {}, { 'value': obj.value });
                 }
@@ -306,14 +295,6 @@
 
             // Date information.
             this.dateInformationFieldset.fieldsetexpander({
-                default_status: false,
-                'change': function() {
-                    self._measureForm();
-                }
-            });
-
-            // Date styles.
-            this.dateStylesFieldset.fieldsetexpander({
                 default_status: false,
                 'change': function() {
                     self._measureForm();
@@ -639,24 +620,10 @@
             // Populate inputs.
             this.slug.val(this._data.slug);
             this.vectorOpacity.val(this._data.vector_opacity);
-            this.strokeOpacity.val(this._data.stroke_opacity);
             this.strokeWidth.val(this._data.stroke_width);
             this.pointRadius.val(this._data.point_radius);
-            this.leftPercent.val(this._data.left_percent);
-            this.rightPercent.val(this._data.right_percent);
             this.startDate.val(this._data.start_date);
             this.endDate.val(this._data.end_date);
-
-            // Reposition the draggers.
-            this.ambiguity.gradientbuilder(
-                'positionMarkers',
-                this._data.left_percent,
-                this._data.right_percent);
-
-            // Set the gradient builder color.
-            this.ambiguity.gradientbuilder(
-                'setColor',
-                this._data.vector_color);
 
             // Push the new colors onto the pickers. Need to set the global
             // _opened tracker to circumvent miniColors' automatic firing of
@@ -684,12 +651,6 @@
             this.endDate.val('');
             this.description.val('');
             this.descriptionEditor.updateFrame();
-
-            // Reposition the draggers.
-            this.ambiguity.gradientbuilder('positionMarkers', 0, 100);
-
-            // Set the gradient builder color.
-            this.ambiguity.gradientbuilder('setColor', this.options.colors.purple);
 
             // Push the new color onto the picker. Need to set the global
             // _opened tracker to circumvent miniColors' automatic firing of
@@ -721,7 +682,6 @@
             data.stroke_color =             this.strokeColor.val();
             data.highlight_color =          this.highlightColor.val();
             data.vector_opacity =           parseInt(this.vectorOpacity.val(), 10);
-            data.stroke_opacity =           parseInt(this.strokeOpacity.val(), 10);
             data.stroke_width =             parseInt(this.strokeWidth.val(), 10);
             data.point_radius =             parseInt(this.pointRadius.val(), 10);
 

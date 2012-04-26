@@ -177,6 +177,46 @@
         },
 
         /*
+         * Listen for zoom.
+         *
+         * - return void.
+         */
+        _catchZoomCallback: function() {
+
+            var self = this;
+
+            // Whitewash over the default bubble popup event so as to get event id data.
+            Timeline._Band.prototype.zoom = function(zoomIn, x, y, target) {
+
+                if (!this._zoomSteps) {
+                    return;
+                }
+
+                // Shift the x value by our offset
+                x += this._viewOffset;
+
+                var zoomDate = this._ether.pixelOffsetToDate(x);
+                var netIntervalChange = this._ether.zoom(zoomIn);
+                this._etherPainter.zoom(netIntervalChange);
+
+                // Shift our zoom date to the far left
+                this._moveEther(Math.round(-this._ether.dateToPixelOffset(zoomDate)));
+
+                // Then shift it back to where the mouse was
+                this._moveEther(x);
+
+                // Increment zoom step.
+                if (zoomIn) {
+                    self._incrementZoomStepDown();
+                } else {
+                    self._incrementZoomStepUp();
+                }
+
+            };
+
+        },
+
+        /*
          * Fetch and render events.
          *
          * - return void.

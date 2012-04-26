@@ -248,7 +248,6 @@ tr.edit-form {
 
 tr.edit-form td {
     padding: 0;
-    display: none;
 }
 
 #edit-form {
@@ -321,11 +320,11 @@ tr.edit-form td {
 }
 
 input.integer-dragger {
-    width: 50px;
+    width: 60px;
 }
 
 input.color-picker {
-    width: 100px;
+    width: 60px;
 }
 
 span.intdragger-tooltip {
@@ -379,6 +378,10 @@ div.slug-editor {
 
 div.slug-editor a {
     color: #6A457D;
+}
+
+table.map-styles td {
+    border: none !important;
 }
 
 

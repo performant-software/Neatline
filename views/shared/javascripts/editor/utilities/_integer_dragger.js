@@ -133,7 +133,17 @@
 
                 // Listen for keystroke.
                 'keyup': function() {
-                    self._setInputValue(parseInt(self.element.val()));
+
+                    // Get element value.
+                    var value = self.element.val();
+
+                    // Apply value.
+                    if (value !== '') {
+                        self._setInputValue(
+                            parseInt(self.element.val(), 10)
+                        );
+                    }
+
                 },
 
                 // Listen for drag.
@@ -144,7 +154,7 @@
 
                     // Capture starting y-offset and value.
                     var startY = e.pageY;
-                    var startVal = parseInt(self.element.val());
+                    var startVal = parseInt(self.element.val(), 10);
 
                     self._window.bind({
 
