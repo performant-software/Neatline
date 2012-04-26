@@ -624,7 +624,15 @@
 
                 // Otherwise, just fit the vectors in the viewport.
                 else {
-                    this.map.zoomToExtent(record.layer.getDataExtent());
+
+                    // Get data extent.
+                    var extent = record.layer.getDataExtent();
+
+                    // If the extent is defined, focus on it.
+                    if (!_.isNaN(extent.top)) {
+                        this.map.zoomToExtent(record.layer.getDataExtent());
+                    }
+
                 }
 
             }
