@@ -34,6 +34,7 @@ class NeatlineDataRecord extends Omeka_record
     // Foreign keys.
     public $item_id;
     public $exhibit_id;
+    public $parent_record_id;
 
     // Text fields.
     public $title;
@@ -43,6 +44,8 @@ class NeatlineDataRecord extends Omeka_record
     // Dates.
     public $start_date;
     public $end_date;
+    public $start_visible_date;
+    public $end_visible_date;
     public $left_percent;
     public $right_percent;
 

@@ -78,9 +78,13 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         $record = new NeatlineDataRecord($item, $neatline);
 
         // Set.
+        $record->parent_record_id =             1;
         $record->title =                        'title';
         $record->description =                  'description';
         $record->start_date =                   'startdate';
+        $record->end_date =                     'enddate';
+        $record->start_visible_date =           'startvisibledate';
+        $record->end_visible_date =             'endvisibledate';
         $record->end_date =                     'enddate';
         $record->vector_color =                 '#ffffff';
         $record->stroke_color =                 '#ffffff';
@@ -104,10 +108,13 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         $record = $this->_recordsTable->find(1);
 
         // Get.
+        $this->assertEquals($record->parent_record_id, 1);
         $this->assertEquals($record->title, 'title');
         $this->assertEquals($record->description, 'description');
         $this->assertEquals($record->start_date, 'startdate');
         $this->assertEquals($record->end_date, 'enddate');
+        $this->assertEquals($record->start_visible_date, 'startvisibledate');
+        $this->assertEquals($record->end_visible_date, 'endvisibledate');
         $this->assertEquals($record->vector_color, '#ffffff');
         $this->assertEquals($record->stroke_color, '#ffffff');
         $this->assertEquals($record->highlight_color, '#ffffff');
