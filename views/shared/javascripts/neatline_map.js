@@ -613,8 +613,6 @@
          */
         _showRecord: function(record) {
 
-            console.log(record);
-
             // If the record exists and there is a map feature.
             if (record && record.layer.features.length > 0) {
 
