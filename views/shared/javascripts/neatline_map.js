@@ -613,6 +613,8 @@
          */
         _showRecord: function(record) {
 
+            console.log(record);
+
             // If the record exists and there is a map feature.
             if (record && record.layer.features.length > 0) {
 
@@ -624,7 +626,15 @@
 
                 // Otherwise, just fit the vectors in the viewport.
                 else {
-                    this.map.zoomToExtent(record.layer.getDataExtent());
+
+                    // Get data extent.
+                    var extent = record.layer.getDataExtent();
+
+                    // If the extent is defined, focus on it.
+                    if (!_.isNaN(extent.top)) {
+                        this.map.zoomToExtent(record.layer.getDataExtent());
+                    }
+
                 }
 
             }
