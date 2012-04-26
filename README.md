@@ -135,7 +135,8 @@ Click the "Save Arrangement" button to save the changes to the server.
 
 ### Create Records
 
-Fundamentally, a Neatline exhibit is just a collection of records that are plotted on the map, on the timeline, or on both.
+Fundamentally, a Neatline exhibit is just a collection of records that are plotted on the map, on the timeline, or on both. Records in an exhibit can either be based on items in the background Omeka collection or created on a one-off basis inside of the Neatline editor.
+
 
 To create a new record:
 
@@ -146,8 +147,6 @@ To create a new record:
   3. As you make changes to the form, the title will become red, indicating that there are un-saved changes in the form. At any point, click the blue "Save" button at the bottom of the form to save the changes. The viewports in the exhibit will automatically reload and display the newly-updated record. 
 
   4. When you're done with the record, click on its title to contract the form. Click again on the title to reopen it. 
-
-**Omeka + Neatline**: In addition to the ability to create altogether new records that exist just in the context of the current exhibit, Neatline automatically populates the item browser list with all of the items in your Omeka collection. These work just like the native Neatline records described above, except that they can be reused across exhibits - the same Omeka record can be used, with completely different data, in as many exhibits as you want.
 
 Data entered by way of the Neatline editor does not affect the item's archival metadata in any way. Neatline tracks the associations that tie together an Omeka item, an Neatline exhibit, and the exhibit-specific representation of the item, but doesn't make any changes to the original Dublin Core or EAD metadata.
 
@@ -259,7 +258,13 @@ When you're done editing the default styles, click the "Save" button at the bott
 
 ### Activate and Deactivate Records
 
-After you've created records, you can toggle the representations of the records on the map and timeline on and off at any point. In the record browser tray on the left side of the screen, there are two columns of checkboxes on the left side of the panel, two checkboxes for each record. The left column, headed by the pin-marker icon, indicates whether a given record is active on the map; the right column, headed by the clock icon, shows whether the record is active on the timeline.
+After you've created records, you can toggle the representations of the records on the map, timeline, and record browser on and off at any point.
+
+In the record browser tray on the left side of the screen, there are three columns of checkboxes on the left side of the panel, three for each record:
+
+    * The left column controls the record description panel;
+    * The middle column controls the map;
+    * The right column controls the timeline.
 
 Just check or uncheck any of the blocks at any point, and the status setting will immediately be saved and applied on the exhibit.
 
