@@ -86,6 +86,7 @@
             this.strokeColor =              this.form.find('input[name="stroke-color"]');
             this.highlightColor =           this.form.find('input[name="highlight-color"]');
             this.vectorOpacity =            this.form.find('input[name="vector-opacity"]');
+            this.strokeOpacity =            this.form.find('input[name="stroke-opacity"]');
             this.strokeWidth =              this.form.find('input[name="stroke-width"]');
             this.pointRadius =              this.form.find('input[name="point-radius"]');
             this.closeButton =              this.form.find('button[type="reset"]');
@@ -170,6 +171,17 @@
                 tip: { show: false },
                 change: function(evt, obj) {
                     self._trigger('vectorOpacityEdit', {}, { 'value': obj.value });
+                }
+            });
+
+            // ** LINE OPACITY.
+            this.strokeOpacity.integerdragger({
+                min: 0,
+                max: 100,
+                px_per_unit: 1,
+                tip: { show: false },
+                change: function(evt, obj) {
+                    self._trigger('strokeOpacityEdit', {}, { 'value': obj.value });
                 }
             });
 
@@ -604,6 +616,7 @@
             // Populate inputs.
             this.slug.val(this._data.slug);
             this.vectorOpacity.val(this._data.vector_opacity);
+            this.strokeOpacity.val(this._data.stroke_opacity);
             this.strokeWidth.val(this._data.stroke_width);
             this.pointRadius.val(this._data.point_radius);
             this.startDate.val(this._data.start_date);
@@ -662,6 +675,7 @@
             data.stroke_color =             this.strokeColor.val();
             data.highlight_color =          this.highlightColor.val();
             data.vector_opacity =           parseInt(this.vectorOpacity.val(), 10);
+            data.stroke_opacity =           parseInt(this.strokeOpacity.val(), 10);
             data.stroke_width =             parseInt(this.strokeWidth.val(), 10);
             data.point_radius =             parseInt(this.pointRadius.val(), 10);
 

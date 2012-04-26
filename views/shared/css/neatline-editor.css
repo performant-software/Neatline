@@ -270,6 +270,10 @@ tr.edit-form td {
     background-color: transparent;
 }
 
+.neatline-record-edit-form button {
+    margin-bottom: 5px;
+}
+
 .neatline-record-edit-form .help-inline {
     display: block;
 }
@@ -380,8 +384,17 @@ div.slug-editor a {
     color: #6A457D;
 }
 
+table.map-styles {
+    margin: 10px 0;
+}
+
 table.map-styles td {
     border: none !important;
+}
+
+table.map-styles label {
+    font-weight: normal;
+    font-size: 12px;
 }
 
 

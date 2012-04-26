@@ -141,12 +141,23 @@
                         </div>
                     </td>
                 </tr>
+            </table>
+
+            <table class="map-styles">
                 <tr>
                     <td>
                         <label>Shape Opacity</label>
                         <div class="input">
                             <div class="inline-inputs">
                                 <input type="text" class="integer-dragger" name="vector-opacity" />
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <label>Line Opacity</label>
+                        <div class="input">
+                            <div class="inline-inputs">
+                                <input type="text" class="integer-dragger" name="stroke-opacity" />
                             </div>
                         </div>
                     </td>
@@ -179,6 +190,12 @@
                 </div>
             </div>
 
+        </div>
+
+        <hr />
+
+        <div class="fieldset">
+
             <div class="clearfix">
                 <div class="input">
                     <div class="inline-inputs">
@@ -187,12 +204,6 @@
                     </div>
                 </div>
             </div>
-
-        </div>
-
-        <hr />
-
-        <div class="fieldset">
 
             <div id="edit-form-actions" class="actions">
                 <input type="submit" class="btn primary" value="Save">
