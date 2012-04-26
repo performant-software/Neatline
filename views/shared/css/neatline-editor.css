@@ -338,7 +338,7 @@ div.item-styles {
 }
 
 a.fieldset {
-    margin: 10px 40px 10px 20px;
+    margin: 10px 40px 10px 10px;
     display: block;
     font-style: italic;
 }
@@ -364,7 +364,7 @@ tr.edit-form a {
     position: relative;
     float: left;
     margin: 2px 5px 0 0;
-    width: 5px;
+    width: 8px;
     height: 8px;
     background-image: url('../images/expander_contracted.png');
     background-repeat: no-repeat;

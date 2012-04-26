@@ -131,22 +131,6 @@
                 this.options.cleditor.description
             )[0];
 
-            // ** DATE AMBIGUITY.
-            this.ambiguity.gradientbuilder({
-
-                'stopHandleDrag': function(event, obj) {
-
-                    self._trigger('ambiguityChange', {}, {
-                        'itemId': obj.itemId,
-                        'color': obj.color,
-                        'leftPercent': obj.leftPercent,
-                        'rightPercent': obj.rightPercent
-                    });
-
-                }
-
-            });
-
             // ** SHAPE COLOR.
             this.vectorColor.miniColors({
 
@@ -645,8 +629,6 @@
             this.title.val('');
             this.slug.val('');
             this.vectorColor.val('');
-            this.leftPercent.val(0);
-            this.rightPercent.val(100);
             this.startDate.val('');
             this.endDate.val('');
             this.description.val('');
@@ -674,8 +656,6 @@
             data.slug =                     this.slug.val();
 
             // Get the form field data.
-            data.left_percent =             parseInt(this.leftPercent.val(), 10);
-            data.right_percent =            parseInt(this.rightPercent.val(), 10);
             data.start_date =               this.startDate.val();
             data.end_date =                 this.endDate.val();
             data.vector_color =             this.vectorColor.val();
