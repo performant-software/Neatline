@@ -380,7 +380,7 @@ class NeatlineExhibit extends Omeka_record
     {
         return !is_null($this->default_timeline_zoom) ?
             $this->default_timeline_zoom :
-            get_option('timeline_zoom');
+            (int) get_option('timeline_zoom');
     }
 
     /**
