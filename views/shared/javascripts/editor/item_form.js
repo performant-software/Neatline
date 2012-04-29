@@ -336,8 +336,6 @@
             this.recordId = recordRaw === '' ?
                 null : parseInt(recordRaw, 10);
 
-            console.log(this.container);
-
             // Inject the form markup.
             this.container.append(this.element);
 

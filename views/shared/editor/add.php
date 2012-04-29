@@ -41,4 +41,4 @@
     </td>
 </tr>
 
-<tr class="edit-form"><td colspan="4"></td></tr>
+<tr class="edit-form"><td class="edit-form-container" colspan="4"></td></tr>
