@@ -172,20 +172,22 @@ class NeatlineDataRecord extends Omeka_record
         $data = array();
 
         // Set the array values.
-        $data['title'] =            $this->getTitle();
-        $data['slug'] =             $this->getSlug();
-        $data['description'] =      $this->getDescription();
-        $data['vector_color'] =     $this->getStyle('vector_color');
-        $data['stroke_color'] =     $this->getStyle('stroke_color');
-        $data['highlight_color'] =  $this->getStyle('highlight_color');
-        $data['vector_opacity'] =   (int) $this->getStyle('vector_opacity');
-        $data['stroke_opacity'] =   (int) $this->getStyle('stroke_opacity');
-        $data['stroke_width'] =     (int) $this->getStyle('stroke_width');
-        $data['point_radius'] =     (int) $this->getStyle('point_radius');
-        $data['start_date'] =       (string) $this->getStartDate();
-        $data['end_date'] =         (string) $this->getEndDate();
-        $data['left_percent'] =     (int) $this->getLeftPercent();
-        $data['right_percent'] =    (int) $this->getRightPercent();
+        $data['title'] =                $this->getTitle();
+        $data['slug'] =                 $this->getSlug();
+        $data['description'] =          $this->getDescription();
+        $data['vector_color'] =         $this->getStyle('vector_color');
+        $data['stroke_color'] =         $this->getStyle('stroke_color');
+        $data['highlight_color'] =      $this->getStyle('highlight_color');
+        $data['vector_opacity'] =       (int) $this->getStyle('vector_opacity');
+        $data['stroke_opacity'] =       (int) $this->getStyle('stroke_opacity');
+        $data['stroke_width'] =         (int) $this->getStyle('stroke_width');
+        $data['point_radius'] =         (int) $this->getStyle('point_radius');
+        $data['start_date'] =           (string) $this->getStartDate();
+        $data['end_date'] =             (string) $this->getEndDate();
+        $data['start_visible_date'] =   (string) $this->start_visible_date;
+        $data['end_visible_date'] =     (string) $this->end_visible_date;
+        $data['left_percent'] =         (int) $this->getLeftPercent();
+        $data['right_percent'] =        (int) $this->getRightPercent();
 
         // JSON-ify the array.
         return json_encode($data);
@@ -206,18 +208,20 @@ class NeatlineDataRecord extends Omeka_record
         $data = array();
 
         // Set the array values.
-        $data['vector_color'] =     get_option('vector_color');
-        $data['stroke_color'] =     get_option('stroke_color');
-        $data['highlight_color'] =  get_option('highlight_color');
-        $data['vector_opacity'] =   (int) get_option('vector_opacity');
-        $data['stroke_opacity'] =   (int) get_option('stroke_opacity');
-        $data['stroke_width'] =     (int) get_option('stroke_width');
-        $data['point_radius'] =     (int) get_option('point_radius');
-        $data['left_percent'] =     self::$defaults['left_percent'];
-        $data['right_percent'] =    self::$defaults['right_percent'];
-        $data['start_date'] =       '';
-        $data['end_date'] =         '';
-        $data['slug'] =             '';
+        $data['vector_color'] =         get_option('vector_color');
+        $data['stroke_color'] =         get_option('stroke_color');
+        $data['highlight_color'] =      get_option('highlight_color');
+        $data['vector_opacity'] =       (int) get_option('vector_opacity');
+        $data['stroke_opacity'] =       (int) get_option('stroke_opacity');
+        $data['stroke_width'] =         (int) get_option('stroke_width');
+        $data['point_radius'] =         (int) get_option('point_radius');
+        $data['left_percent'] =         self::$defaults['left_percent'];
+        $data['right_percent'] =        self::$defaults['right_percent'];
+        $data['start_date'] =           '';
+        $data['end_date'] =             '';
+        $data['start_visible_date'] =   '';
+        $data['end_visible_date'] =     '';
+        $data['slug'] =                 '';
 
         // Get DC title default.
         $data['title'] = neatline_getItemMetadata(

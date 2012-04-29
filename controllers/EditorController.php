@@ -163,6 +163,8 @@ class Neatline_EditorController extends Omeka_Controller_Action
         $description =              $_post['description'];
         $startDate =                $_post['start_date'];
         $endDate =                  $_post['end_date'];
+        $startVisibleDate =         $_post['start_visible_date'];
+        $endVisibleDate =           $_post['end_visible_date'];
         $geoCoverage =              $_post['geocoverage'];
         $vectorColor =              $_post['vector_color'];
         $strokeColor =              $_post['stroke_color'];
@@ -199,6 +201,8 @@ class Neatline_EditorController extends Omeka_Controller_Action
         $record->setNotEmpty('description', $description);
         $record->setNotEmpty('start_date', $startDate);
         $record->setNotEmpty('end_date', $endDate);
+        $record->setNotEmpty('start_visible_date', $startVisibleDate);
+        $record->setNotEmpty('end_visible_date', $endVisibleDate);
         $record->setGeocoverage($geoCoverage);
         $record->setSlug($slug);
 

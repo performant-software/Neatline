@@ -82,6 +82,8 @@
             this.description =              this.form.find('textarea[name="description"]');
             this.startDate =                this.form.find('input[name="start-date-date"]');
             this.endDate =                  this.form.find('input[name="end-date-date"]');
+            this.startVisibleDate =         this.form.find('input[name="start-visible-date"]');
+            this.endVisibleDate =           this.form.find('input[name="end-visible-date"]');
             this.vectorColor =              this.form.find('input[name="vector-color"]');
             this.strokeColor =              this.form.find('input[name="stroke-color"]');
             this.highlightColor =           this.form.find('input[name="highlight-color"]');
@@ -621,6 +623,8 @@
             this.pointRadius.val(this._data.point_radius);
             this.startDate.val(this._data.start_date);
             this.endDate.val(this._data.end_date);
+            this.startVisibleDate.val(this._data.start_visible_date);
+            this.endVisibleDate.val(this._data.end_visible_date);
 
             // Push the new colors onto the pickers. Need to set the global
             // _opened tracker to circumvent miniColors' automatic firing of
@@ -644,6 +648,8 @@
             this.vectorColor.val('');
             this.startDate.val('');
             this.endDate.val('');
+            this.startVisibleDate.val('');
+            this.endVisibleDate.val('');
             this.description.val('');
             this.descriptionEditor.updateFrame();
 
@@ -671,6 +677,8 @@
             // Get the form field data.
             data.start_date =               this.startDate.val();
             data.end_date =                 this.endDate.val();
+            data.start_visible_date =       this.startVisibleDate.val();
+            data.end_visible_date =         this.endVisibleDate.val();
             data.vector_color =             this.vectorColor.val();
             data.stroke_color =             this.strokeColor.val();
             data.highlight_color =          this.highlightColor.val();
