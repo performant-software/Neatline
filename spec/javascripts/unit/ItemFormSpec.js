@@ -204,8 +204,6 @@ describe('Item Form', function() {
             expect(form.itemform('getAttr', 'description').val()).toEqual('Test description.');
             expect(form.itemform('getAttr', 'startDate').val()).toEqual('June 25, 1987');
             expect(form.itemform('getAttr', 'endDate').val()).toEqual('June 26, 1987');
-            expect(form.itemform('getAttr', 'leftPercent').val()).toEqual('0');
-            expect(form.itemform('getAttr', 'rightPercent').val()).toEqual('100');
             expect(form.itemform('getAttr', 'vectorColor').val()).toEqual('#ffffff');
             expect(form.itemform('getAttr', 'strokeColor').val()).toEqual('#000000');
             expect(form.itemform('getAttr', 'highlightColor').val()).toEqual('#ffff00');
@@ -228,8 +226,6 @@ describe('Item Form', function() {
             expect(form.itemform('getAttr', 'description').val()).toEqual('Test description.');
             expect(form.itemform('getAttr', 'startDate').val()).toEqual('June 25, 1987');
             expect(form.itemform('getAttr', 'endDate').val()).toEqual('June 26, 1987');
-            expect(form.itemform('getAttr', 'leftPercent').val()).toEqual('0');
-            expect(form.itemform('getAttr', 'rightPercent').val()).toEqual('100');
             expect(form.itemform('getAttr', 'vectorColor').val()).toEqual('#ffffff');
             expect(form.itemform('getAttr', 'strokeColor').val()).toEqual('#000000');
             expect(form.itemform('getAttr', 'highlightColor').val()).toEqual('#ffff00');
@@ -272,8 +268,6 @@ describe('Item Form', function() {
             expect(form.itemform('getAttr', 'description').val()).toEqual('New description.');
             expect(form.itemform('getAttr', 'startDate').val()).toEqual('April 26, 1564');
             expect(form.itemform('getAttr', 'endDate').val()).toEqual('April 23, 1616');
-            expect(form.itemform('getAttr', 'leftPercent').val()).toEqual('20');
-            expect(form.itemform('getAttr', 'rightPercent').val()).toEqual('80');
             expect(form.itemform('getAttr', 'vectorColor').val()).toEqual('#000000');
             expect(form.itemform('getAttr', 'strokeColor').val()).toEqual('#ffffff');
             expect(form.itemform('getAttr', 'highlightColor').val()).toEqual('#000000');
@@ -297,8 +291,6 @@ describe('Item Form', function() {
             expect(form.itemform('getAttr', 'description').val()).toEqual('Test description.');
             expect(form.itemform('getAttr', 'startDate').val()).toEqual('June 25, 1987');
             expect(form.itemform('getAttr', 'endDate').val()).toEqual('June 26, 1987');
-            expect(form.itemform('getAttr', 'leftPercent').val()).toEqual('0');
-            expect(form.itemform('getAttr', 'rightPercent').val()).toEqual('100');
             expect(form.itemform('getAttr', 'vectorColor').val()).toEqual('#ffffff');
             expect(form.itemform('getAttr', 'strokeColor').val()).toEqual('#000000');
             expect(form.itemform('getAttr', 'highlightColor').val()).toEqual('#ffff00');
@@ -353,8 +345,6 @@ describe('Item Form', function() {
             expect(form.itemform('getAttr', 'description').val()).toEqual('Test description.');
             expect(form.itemform('getAttr', 'startDate').val()).toEqual('June 25, 1987');
             expect(form.itemform('getAttr', 'endDate').val()).toEqual('June 26, 1987');
-            expect(form.itemform('getAttr', 'leftPercent').val()).toEqual('0');
-            expect(form.itemform('getAttr', 'rightPercent').val()).toEqual('100');
             expect(form.itemform('getAttr', 'vectorColor').val()).toEqual('#ffffff');
             expect(form.itemform('getAttr', 'strokeColor').val()).toEqual('#000000');
             expect(form.itemform('getAttr', 'highlightColor').val()).toEqual('#ffff00');
@@ -482,32 +472,6 @@ describe('Item Form', function() {
                 var localRecord = _db({ recordid: recordId }).first();
                 expect(localRecord).not.toBeFalsy();
                 expect(localRecord.data.end_date).toEqual('April 23, 1616');
-
-            });
-
-            it('should store local data when the left percentage is changed', function() {
-
-                // Change the title, hide the form.
-                form.itemform('getAttr', 'leftPercent').val(20);
-                form.itemform('hideForm', record);
-
-                // Check for the local data record, inspect value.
-                var localRecord = _db({ recordid: recordId }).first();
-                expect(localRecord).not.toBeFalsy();
-                expect(localRecord.data.left_percent).toEqual(20);
-
-            });
-
-            it('should store local data when the right percentage is changed', function() {
-
-                // Change the title, hide the form.
-                form.itemform('getAttr', 'rightPercent').val(80);
-                form.itemform('hideForm', record);
-
-                // Check for the local data record, inspect value.
-                var localRecord = _db({ recordid: recordId }).first();
-                expect(localRecord).not.toBeFalsy();
-                expect(localRecord.data.right_percent).toEqual(80);
 
             });
 
