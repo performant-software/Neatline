@@ -248,8 +248,6 @@
                     // Get the tape element.
                     var tape = $(els[0]);
 
-                    /*
-
                     // Store the Simile positioning styles.
                     tape.data('positioningStyles', tape.attr('style'));
 
@@ -266,8 +264,6 @@
 
                     // Manifest.
                     tape.spanstyler('applyCss');
-
-                    */
 
                     // Push the id-element association into the tracker object.
                     self._idToTapeElements[evt._eventID] = [tape];

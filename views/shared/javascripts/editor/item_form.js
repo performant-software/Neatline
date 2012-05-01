@@ -91,6 +91,8 @@
             this.strokeOpacity =            this.form.find('input[name="stroke-opacity"]');
             this.strokeWidth =              this.form.find('input[name="stroke-width"]');
             this.pointRadius =              this.form.find('input[name="point-radius"]');
+            this.leftPercent =              this.form.find('input[name="left-ambiguity-percentage"]');
+            this.rightPercent =             this.form.find('input[name="right-ambiguity-percentage"]');
             this.closeButton =              this.form.find('button[type="reset"]');
             this.saveButton =               this.form.find('input[type="submit"]');
             this.textInputs =               this.form.find('input[type="text"], textarea');
@@ -133,6 +135,22 @@
             this.descriptionEditor = this.description.cleditor(
                 this.options.cleditor.description
             )[0];
+
+            // ** DATE AMBIGUITY.
+            this.ambiguity.gradientbuilder({
+
+                'stopHandleDrag': function(event, obj) {
+
+                    self._trigger('ambiguityChange', {}, {
+                        'itemId': obj.itemId,
+                        'color': obj.color,
+                        'leftPercent': obj.leftPercent,
+                        'rightPercent': obj.rightPercent
+                    });
+
+                }
+
+            });
 
             // ** SHAPE COLOR.
             this.vectorColor.miniColors({
@@ -621,10 +639,23 @@
             this.strokeOpacity.val(this._data.stroke_opacity);
             this.strokeWidth.val(this._data.stroke_width);
             this.pointRadius.val(this._data.point_radius);
+            this.leftPercent.val(this._data.left_percent);
+            this.rightPercent.val(this._data.right_percent);
             this.startDate.val(this._data.start_date);
             this.endDate.val(this._data.end_date);
             this.startVisibleDate.val(this._data.start_visible_date);
             this.endVisibleDate.val(this._data.end_visible_date);
+
+            // Reposition the draggers.
+            this.ambiguity.gradientbuilder(
+                'positionMarkers',
+                this._data.left_percent,
+                this._data.right_percent);
+
+            // Set the gradient builder color.
+            this.ambiguity.gradientbuilder(
+                'setColor',
+                this._data.vector_color);
 
             // Push the new colors onto the pickers. Need to set the global
             // _opened tracker to circumvent miniColors' automatic firing of
@@ -646,6 +677,8 @@
             this.title.val('');
             this.slug.val('');
             this.vectorColor.val('');
+            this.leftPercent.val(0);
+            this.rightPercent.val(100);
             this.startDate.val('');
             this.endDate.val('');
             this.startVisibleDate.val('');
@@ -675,6 +708,8 @@
             data.slug =                     this.slug.val();
 
             // Get the form field data.
+            data.left_percent =             parseInt(this.leftPercent.val(), 10);
+            data.right_percent =            parseInt(this.rightPercent.val(), 10);
             data.start_date =               this.startDate.val();
             data.end_date =                 this.endDate.val();
             data.start_visible_date =       this.startVisibleDate.val();

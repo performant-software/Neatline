@@ -109,6 +109,22 @@
 
             -->
 
+            <div class="clearfix">
+                <label>Date Ambiguity</label>
+                <div class="input">
+                    <div class="inline-inputs">
+                        <div class="date-ambiguity-container">
+                            <div class="date-ambiguity-editor">
+                                <div class="stop-marker left"><div class="color-swatch"></div></div>
+                                <div class="stop-marker right"><div class="color-swatch"></div></div>
+                            </div>
+                            <input name="left-ambiguity-percentage" type="hidden" />
+                            <input name="right-ambiguity-percentage" type="hidden" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
         <hr />
