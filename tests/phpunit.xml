@@ -7,6 +7,8 @@
       <includePath>../../..</includePath>
     </php>
     <testsuite name="Neatline Tests">
-        <file>AllTests.php</file>
+        <directory>unit</directory>
+        <directory>integration</directory>
+        <directory>fixtures</directory>
     </testsuite>
 </phpunit>

@@ -24,6 +24,16 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache 2 License
  */
 
+
+if (!defined('NEATLINE_PLUGIN_DIR')) {
+    define('NEATLINE_PLUGIN_DIR', dirname(__FILE__) . '/../..');
+}
+
+require_once APP_DIR . '/models/Plugin.php';
+require_once NEATLINE_PLUGIN_DIR . '/NeatlinePlugin.php';
+require_once NEATLINE_PLUGIN_DIR . '/tests/Neatline_Test_AppTestCase.php';
+
+
 class Neatline_HelpersTest extends Omeka_Test_AppTestCase
 {
 

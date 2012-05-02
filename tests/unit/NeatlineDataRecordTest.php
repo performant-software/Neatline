@@ -243,6 +243,31 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
     }
 
     /**
+     * getParentRecord() should return the parent record when one exists.
+     *
+     * @return void.
+     */
+    public function testGetParentRecordWithRecord()
+    {
+
+        // Create exhibit and record.
+        $exhibit = $this->helper->_createNeatline();
+        $record1 = new NeatlineDataRecord(null, $exhibit);
+        $record1->save();
+
+        // Create record with parent record.
+        $record2 = new NeatlineDataRecord(null, $exhibit);
+        $record2->parent_record_id = $record1->id;
+        $record1->save();
+        $record2->save();
+
+        // Get the parent record.
+        $retrievedRecord = $record2->getParentRecord();
+        $this->assertEquals($retrievedRecord->id, $record1->id);
+
+    }
+
+    /**
      * setNotEmpty() should set value when value is not null or ''.
      *
      * @return void.

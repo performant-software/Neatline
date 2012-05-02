@@ -160,6 +160,26 @@ class NeatlineDataRecord extends Omeka_record
     }
 
     /**
+     * Get the parent data record.
+     *
+     * @return Omeka_record $record The parent record.
+     */
+    public function getParentRecord()
+    {
+
+        $record = null;
+
+        // If record id is defined, get item.
+        if (!is_null($this->parent_record_id)) {
+            $record = $this->getTable('NeatlineDataRecord')
+                ->find($this->parent_record_id);
+        }
+
+        return $record;
+
+    }
+
+    /**
      * Construct a JSON representation of the attributes to be used in the
      * item edit form.
      *
@@ -771,13 +791,9 @@ class NeatlineDataRecord extends Omeka_record
         else if (!is_null($this->parent_record_id)) {
 
             // Try to get the parent date.
-            // ** dev.
+            $parentRecord = $this->getParentRecord();
+            return $parentRecord->getStartDate();
 
-        }
-
-        // Return '' if no local or parent data.
-        else {
-            return '';
         }
 
     }
@@ -801,13 +817,9 @@ class NeatlineDataRecord extends Omeka_record
         else if (!is_null($this->parent_record_id)) {
 
             // Try to get the parent date.
-            // ** dev.
+            $parentRecord = $this->getParentRecord();
+            return $parentRecord->getEndDate();
 
-        }
-
-        // Return '' if no local or parent data.
-        else {
-            return '';
         }
 
     }
