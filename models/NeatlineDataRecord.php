@@ -779,12 +779,12 @@ class NeatlineDataRecord extends Omeka_record
      * return it. If not, and there is a parent data record, try to get a non-
      * empty value from the parent.
      */
-    public function getStartVisibilityDate()
+    public function getStartVisibleDate()
     {
 
         // If there is a record-specific date.
-        if (!is_null($this->start_visibile_date)) {
-            return $this->start_visibile_date;
+        if (!is_null($this->start_visible_date)) {
+            return $this->start_visible_date;
         }
 
         // If not, try to get a DC date value.
@@ -792,8 +792,13 @@ class NeatlineDataRecord extends Omeka_record
 
             // Try to get the parent date.
             $parentRecord = $this->getParentRecord();
-            return $parentRecord->getStartDate();
+            return $parentRecord->getStartVisibleDate();
 
+        }
+
+        // Return '' if no local or parent data.
+        else {
+            return '';
         }
 
     }
@@ -805,12 +810,12 @@ class NeatlineDataRecord extends Omeka_record
      * return it. If not, and there is a parent data record, try to get a non-
      * empty value from the parent.
      */
-    public function getEndVisibilityDate()
+    public function getEndVisibleDate()
     {
 
         // If there is a record-specific date.
-        if (!is_null($this->end_visibile_date)) {
-            return $this->end_visibile_date;
+        if (!is_null($this->end_visible_date)) {
+            return $this->end_visible_date;
         }
 
         // If not, try to get a DC date value.
@@ -818,8 +823,13 @@ class NeatlineDataRecord extends Omeka_record
 
             // Try to get the parent date.
             $parentRecord = $this->getParentRecord();
-            return $parentRecord->getEndDate();
+            return $parentRecord->getEndVisibleDate();
 
+        }
+
+        // Return '' if no local or parent data.
+        else {
+            return '';
         }
 
     }

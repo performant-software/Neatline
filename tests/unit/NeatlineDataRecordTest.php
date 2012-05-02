@@ -258,12 +258,30 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         // Create record with parent record.
         $record2 = new NeatlineDataRecord(null, $exhibit);
         $record2->parent_record_id = $record1->id;
-        $record1->save();
         $record2->save();
 
         // Get the parent record.
         $retrievedRecord = $record2->getParentRecord();
         $this->assertEquals($retrievedRecord->id, $record1->id);
+
+    }
+
+    /**
+     * getParentRecord() should return null when there is not a parent
+     * record.
+     *
+     * @return void.
+     */
+    public function testGetParentRecordWithNoRecord()
+    {
+
+        // Create exhibit and record.
+        $exhibit = $this->helper->_createNeatline();
+        $record = new NeatlineDataRecord(null, $exhibit);
+        $record->save();
+
+        // Try to get the parent record.
+        $this->assertNull($record->getParentRecord());
 
     }
 
@@ -1366,6 +1384,146 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         // override the DC value.
         $record->end_date = '1916-04-23 12:45:34';
         $this->assertEquals($record->getEndDate(), '1916-04-23 12:45:34');
+
+    }
+
+    /**
+     * The getStartVisibleDate() method should return the record start visible
+     * date when a value is set.
+     *
+     * @return void.
+     */
+    public function testGetStartVisibleDateWithRecordValue()
+    {
+
+        // Create an exhibit and a record.
+        $exhibit = $this->helper->_createNeatline();
+        $record1 = new NeatlineDataRecord(null, $exhibit);
+        $record1->save();
+
+        // Create record with parent record.
+        $record2 = new NeatlineDataRecord(null, $exhibit);
+        $record2->parent_record_id = $record1->id;
+        $record2->start_visible_date = '1564-04-26 14:39:22';
+        $record2->save();
+
+        // Should return the local value.
+        $this->assertEquals($record2->getStartVisibleDate(), '1564-04-26 14:39:22');
+
+    }
+
+    /**
+     * The getStartVisibleDate() method should return an empty string when
+     * no record-level value is set.
+     *
+     * @return void.
+     */
+    public function testGetStartVisibleDateWithNoRecordValue()
+    {
+
+        // Create an exhibit and a record.
+        $exhibit = $this->helper->_createNeatline();
+        $record = new NeatlineDataRecord(null, $exhibit);
+        $record->save();
+
+        // Should return the local value.
+        $this->assertEquals($record->getStartVisibleDate(), '');
+
+    }
+
+    /**
+     * The getStartVisibleDate() method should return the start visible date
+     * of the parent record when a parent record exists and the local record
+     * value is not set.
+     *
+     * @return void.
+     */
+    public function testGetStartVisibleDateWithParentRecordValue()
+    {
+
+        // Create an exhibit and a record.
+        $exhibit = $this->helper->_createNeatline();
+        $record1 = new NeatlineDataRecord(null, $exhibit);
+        $record1->start_visible_date = '1564-04-26 14:39:22';
+        $record1->save();
+
+        // Create record with parent record.
+        $record2 = new NeatlineDataRecord(null, $exhibit);
+        $record2->parent_record_id = $record1->id;
+        $record2->save();
+
+        // Should return the local value.
+        $this->assertEquals($record2->getStartVisibleDate(), '1564-04-26 14:39:22');
+
+    }
+
+    /**
+     * The getEndVisibleDate() method should return the record start visible
+     * date when a value is set.
+     *
+     * @return void.
+     */
+    public function testGetEndVisibleDateWithRecordValue()
+    {
+
+        // Create an exhibit and a record.
+        $exhibit = $this->helper->_createNeatline();
+        $record1 = new NeatlineDataRecord(null, $exhibit);
+        $record1->save();
+
+        // Create record with parent record.
+        $record2 = new NeatlineDataRecord(null, $exhibit);
+        $record2->parent_record_id = $record1->id;
+        $record2->end_visible_date = '1564-04-26 14:39:22';
+        $record2->save();
+
+        // Should return the local value.
+        $this->assertEquals($record2->getEndVisibleDate(), '1564-04-26 14:39:22');
+
+    }
+
+    /**
+     * The getEndVisibleDate() method should return an empty string when
+     * no record-level value is set.
+     *
+     * @return void.
+     */
+    public function testGetEndVisibleDateWithNoRecordValue()
+    {
+
+        // Create an exhibit and a record.
+        $exhibit = $this->helper->_createNeatline();
+        $record = new NeatlineDataRecord(null, $exhibit);
+        $record->save();
+
+        // Should return the local value.
+        $this->assertEquals($record->getEndVisibleDate(), '');
+
+    }
+
+    /**
+     * The getEndVisibleDate() method should return the start visible date
+     * of the parent record when a parent record exists and the local record
+     * value is not set.
+     *
+     * @return void.
+     */
+    public function testGetEndVisibleDateWithParentRecordValue()
+    {
+
+        // Create an exhibit and a record.
+        $exhibit = $this->helper->_createNeatline();
+        $record1 = new NeatlineDataRecord(null, $exhibit);
+        $record1->end_visible_date = '1564-04-26 14:39:22';
+        $record1->save();
+
+        // Create record with parent record.
+        $record2 = new NeatlineDataRecord(null, $exhibit);
+        $record2->parent_record_id = $record1->id;
+        $record2->save();
+
+        // Should return the local value.
+        $this->assertEquals($record2->getEndVisibleDate(), '1564-04-26 14:39:22');
 
     }
 
