@@ -487,6 +487,32 @@ describe('Item Form', function() {
 
             });
 
+            it('should store local data when the start visible date is changed', function() {
+
+                // Change the title, hide the form.
+                form.itemform('getAttr', 'startVisibleDate').val('June 27, 1887');
+                form.itemform('hideForm', record);
+
+                // Check for the local data record, inspect value.
+                var localRecord = _db({ recordid: recordId }).first();
+                expect(localRecord).not.toBeFalsy();
+                expect(localRecord.data.start_visible_date).toEqual('June 27, 1887');
+
+            });
+
+            it('should store local data when the end visible date is changed', function() {
+
+                // Change the title, hide the form.
+                form.itemform('getAttr', 'endVisibleDate').val('June 28, 1887');
+                form.itemform('hideForm', record);
+
+                // Check for the local data record, inspect value.
+                var localRecord = _db({ recordid: recordId }).first();
+                expect(localRecord).not.toBeFalsy();
+                expect(localRecord.data.end_visible_date).toEqual('June 28, 1887');
+
+            });
+
             it('should store local data when the vector color is changed', function() {
 
                 // Change the title, hide the form.
