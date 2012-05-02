@@ -96,6 +96,13 @@
             this._catchClickCallback();
             this._catchZoomCallback();
 
+
+            // ** dev.
+            this.timeline.getBand(0).addOnScrollListener(function() {
+                console.log(self.timeline.getBand(0).getCenterVisibleDate());
+            });
+
+
         },
 
         /*

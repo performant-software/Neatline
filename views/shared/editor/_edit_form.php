@@ -72,7 +72,6 @@
                 <div class="input">
                     <div class="inline-inputs">
                         <input class="xlarge" name="start-date-date" type="text" placeholder="Start Date" />
-                        <span class="help-inline">Use <a href="http://www.w3.org/TR/NOTE-datetime" target="_blank">ISO 8601</a> format dates.</span>
                     </div>
                 </div>
             </div>
@@ -91,7 +90,6 @@
                 <div class="input">
                     <div class="inline-inputs">
                         <input class="xlarge" name="start-visible-date" type="text" placeholder="Start Date" />
-                        <span class="help-inline">Use <a href="http://www.w3.org/TR/NOTE-datetime" target="_blank">ISO 8601</a> format dates.</span>
                     </div>
                 </div>
             </div>
