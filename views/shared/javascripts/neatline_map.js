@@ -609,6 +609,13 @@
         },
 
         /*
+         * Filter feature visibility by date.
+         */
+        renderVisibility: function(date) {
+
+        },
+
+        /*
          * Focus the map on the feature data for a given record.
          */
         _showRecord: function(record) {

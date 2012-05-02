@@ -96,12 +96,12 @@
             this._catchClickCallback();
             this._catchZoomCallback();
 
-
-            // ** dev.
+            // Emit current date.
             this.timeline.getBand(0).addOnScrollListener(function() {
-                console.log(self.timeline.getBand(0).getCenterVisibleDate());
+                self._trigger('dave', {}, {
+                    'date': self.timeline.getBand(0).getCenterVisibleDate()
+                });
             });
-
 
         },
 

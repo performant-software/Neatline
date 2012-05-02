@@ -254,6 +254,11 @@
 
                 this.timeline.neatlinetimeline({
 
+                    'dave': function(event, obj) {
+                        self.map.neatlinemap('renderVisibility', obj.date);
+                        // self.items.neatlineitems('renderVisibility', obj.date);
+                    },
+
                     'eventclick': function(event, obj) {
                         self._trigger('timelineeventclick', {}, obj);
                     }
