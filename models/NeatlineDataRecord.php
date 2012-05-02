@@ -753,6 +753,66 @@ class NeatlineDataRecord extends Omeka_record
     }
 
     /**
+     * Return start visibility date.
+     *
+     * @return string $date The date. If there is a record-specific value,
+     * return it. If not, and there is a parent data record, try to get a non-
+     * empty value from the parent.
+     */
+    public function getStartVisibilityDate()
+    {
+
+        // If there is a record-specific date.
+        if (!is_null($this->start_visibile_date)) {
+            return $this->start_visibile_date;
+        }
+
+        // If not, try to get a DC date value.
+        else if (!is_null($this->parent_record_id)) {
+
+            // Try to get the parent date.
+            // ** dev.
+
+        }
+
+        // Return '' if no local or parent data.
+        else {
+            return '';
+        }
+
+    }
+
+    /**
+     * Return end visibility date.
+     *
+     * @return string $date The date. If there is a record-specific value,
+     * return it. If not, and there is a parent data record, try to get a non-
+     * empty value from the parent.
+     */
+    public function getEndVisibilityDate()
+    {
+
+        // If there is a record-specific date.
+        if (!is_null($this->end_visibile_date)) {
+            return $this->end_visibile_date;
+        }
+
+        // If not, try to get a DC date value.
+        else if (!is_null($this->parent_record_id)) {
+
+            // Try to get the parent date.
+            // ** dev.
+
+        }
+
+        // Return '' if no local or parent data.
+        else {
+            return '';
+        }
+
+    }
+
+    /**
      * On save, update the modified column on the parent exhibit.
      *
      * @return void.
