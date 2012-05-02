@@ -309,6 +309,8 @@ class Neatline_FixtureBuilderTest extends Omeka_Test_AppTestCase
         $record->description = 'Test description.';
         $record->start_date = 'June 25, 1987';
         $record->end_date = 'June 26, 1987';
+        $record->start_visible_date = 'June 27, 1987';
+        $record->end_visible_date = 'June 28, 1987';
         $record->vector_color = '#ffffff';
         $record->stroke_color = '#000000';
         $record->highlight_color = '#ffff00';

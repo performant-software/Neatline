@@ -204,6 +204,8 @@ describe('Item Form', function() {
             expect(form.itemform('getAttr', 'description').val()).toEqual('Test description.');
             expect(form.itemform('getAttr', 'startDate').val()).toEqual('June 25, 1987');
             expect(form.itemform('getAttr', 'endDate').val()).toEqual('June 26, 1987');
+            expect(form.itemform('getAttr', 'startVisibleDate').val()).toEqual('June 27, 1987');
+            expect(form.itemform('getAttr', 'endVisibleDate').val()).toEqual('June 28, 1987');
             expect(form.itemform('getAttr', 'vectorColor').val()).toEqual('#ffffff');
             expect(form.itemform('getAttr', 'strokeColor').val()).toEqual('#000000');
             expect(form.itemform('getAttr', 'highlightColor').val()).toEqual('#ffff00');
@@ -226,6 +228,8 @@ describe('Item Form', function() {
             expect(form.itemform('getAttr', 'description').val()).toEqual('Test description.');
             expect(form.itemform('getAttr', 'startDate').val()).toEqual('June 25, 1987');
             expect(form.itemform('getAttr', 'endDate').val()).toEqual('June 26, 1987');
+            expect(form.itemform('getAttr', 'startVisibleDate').val()).toEqual('June 27, 1987');
+            expect(form.itemform('getAttr', 'endVisibleDate').val()).toEqual('June 28, 1987');
             expect(form.itemform('getAttr', 'vectorColor').val()).toEqual('#ffffff');
             expect(form.itemform('getAttr', 'strokeColor').val()).toEqual('#000000');
             expect(form.itemform('getAttr', 'highlightColor').val()).toEqual('#ffff00');
@@ -243,6 +247,8 @@ describe('Item Form', function() {
                     description: 'New description.',
                     start_date: 'April 26, 1564',
                     end_date: 'April 23, 1616',
+                    start_visible_date: 'April 27, 1564',
+                    end_visible_date: 'April 27, 1616',
                     left_percent: 20,
                     right_percent: 80,
                     vector_color: '#000000',
@@ -268,6 +274,8 @@ describe('Item Form', function() {
             expect(form.itemform('getAttr', 'description').val()).toEqual('New description.');
             expect(form.itemform('getAttr', 'startDate').val()).toEqual('April 26, 1564');
             expect(form.itemform('getAttr', 'endDate').val()).toEqual('April 23, 1616');
+            expect(form.itemform('getAttr', 'startVisibleDate').val()).toEqual('April 27, 1564');
+            expect(form.itemform('getAttr', 'endVisibleDate').val()).toEqual('April 27, 1616');
             expect(form.itemform('getAttr', 'vectorColor').val()).toEqual('#000000');
             expect(form.itemform('getAttr', 'strokeColor').val()).toEqual('#ffffff');
             expect(form.itemform('getAttr', 'highlightColor').val()).toEqual('#000000');
@@ -291,6 +299,8 @@ describe('Item Form', function() {
             expect(form.itemform('getAttr', 'description').val()).toEqual('Test description.');
             expect(form.itemform('getAttr', 'startDate').val()).toEqual('June 25, 1987');
             expect(form.itemform('getAttr', 'endDate').val()).toEqual('June 26, 1987');
+            expect(form.itemform('getAttr', 'startVisibleDate').val()).toEqual('June 27, 1987');
+            expect(form.itemform('getAttr', 'endVisibleDate').val()).toEqual('June 28, 1987');
             expect(form.itemform('getAttr', 'vectorColor').val()).toEqual('#ffffff');
             expect(form.itemform('getAttr', 'strokeColor').val()).toEqual('#000000');
             expect(form.itemform('getAttr', 'highlightColor').val()).toEqual('#ffff00');
@@ -345,6 +355,8 @@ describe('Item Form', function() {
             expect(form.itemform('getAttr', 'description').val()).toEqual('Test description.');
             expect(form.itemform('getAttr', 'startDate').val()).toEqual('June 25, 1987');
             expect(form.itemform('getAttr', 'endDate').val()).toEqual('June 26, 1987');
+            expect(form.itemform('getAttr', 'startVisibleDate').val()).toEqual('June 27, 1987');
+            expect(form.itemform('getAttr', 'endVisibleDate').val()).toEqual('June 28, 1987');
             expect(form.itemform('getAttr', 'vectorColor').val()).toEqual('#ffffff');
             expect(form.itemform('getAttr', 'strokeColor').val()).toEqual('#000000');
             expect(form.itemform('getAttr', 'highlightColor').val()).toEqual('#ffff00');

@@ -86,8 +86,6 @@
                 </div>
             </div>
 
-            <!--
-
             <div class="clearfix">
                 <label>Start Visible Date</label>
                 <div class="input">
@@ -106,8 +104,6 @@
                     </div>
                 </div>
             </div>
-
-            -->
 
             <div class="clearfix">
                 <label>Date Ambiguity</label>
