@@ -613,11 +613,34 @@
          */
         renderVisibility: function(date) {
 
+            // Moment-ify the date.
+            var now = moment(date);
+
             // Walk records.
             this._db().each(function(record) {
-                console.log(moment(date));
-                console.log(record);
-                record.layer.display(false);
+
+                // Get record dates.
+                var start = moment(record.data.start_visible_date);
+                var end = moment(record.data.end_visible_date);
+
+                // If both are defined.
+                if (!_.isNull(start) && !_.isNull(end)) {
+                    var display = now > start && now < end;
+                    record.layer.display(display);
+                }
+
+                // If just the start is defined.
+                else if (!_.isNull(start) && _.isNull(end)) {
+                    var display = now > start;
+                    record.layer.display(display);
+                }
+
+                // If just the end is defined.
+                else if (_.isNull(start) && !_.isNull(end)) {
+                    var display = now < end;
+                    record.layer.display(display);
+                }
+
             });
 
         },
