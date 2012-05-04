@@ -256,7 +256,7 @@
 
                     'dave': function(event, obj) {
                         self.map.neatlinemap('renderVisibility', obj.date);
-                        // self.items.neatlineitems('renderVisibility', obj.date);
+                        self.items.neatlineitems('renderVisibility', obj.date);
                     },
 
                     'eventclick': function(event, obj) {

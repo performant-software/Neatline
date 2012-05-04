@@ -61,8 +61,8 @@
             this._idToItem =                {};
             this._slugToItem =              {};
             this._idToOffset =              {};
-            this._currentRecord =             null;
-            this._currentRecordId =           null;
+            this._currentRecord =           null;
+            this._currentRecordId =         null;
             this._idOrdering =              [];
 
             // Build list.
@@ -157,7 +157,9 @@
                     recordid: record.id,
                     slug: record.slug,
                     title: title,
-                    description: description
+                    description: description,
+                    start_visible_date: record.start_visible_date,
+                    end_visible_date: record.end_visible_date
                 };
 
                 // Insert record.
@@ -395,7 +397,7 @@
 
             // Set trackers.
             this._currentRecord = record;
-            this._currentRecordId = parseInt(record.title.attr('recordid'), 10);
+            this._currentRecordId = record.recordid;
             record.title.data('expanded', true);
 
         },
@@ -423,6 +425,47 @@
             this._currentRecord = null;
             this._currentRecordId = null;
             record.title.data('expanded', false);
+
+        },
+
+        /*
+         * Filter feature visibility by date.
+         *
+         * - param string date: The current timeline date.
+         *
+         * - return void.
+         */
+        renderVisibility: function(date) {
+
+            // Moment-ify the date.
+            var now = moment(date);
+
+            // Walk records.
+            this._db().each(_.bind(function(record) {
+
+                // Get record dates.
+                var start = moment(record.start_visible_date);
+                var end = moment(record.end_visible_date);
+
+                // If both are defined.
+                if (!_.isNull(start) && !_.isNull(end)) {
+                    var display = now > start && now < end;
+                    this._displayRecord(record, display);
+                }
+
+                // If just the start is defined.
+                else if (!_.isNull(start) && _.isNull(end)) {
+                    var display = now > start;
+                    this._displayRecord(record, display);
+                }
+
+                // If just the end is defined.
+                else if (_.isNull(start) && !_.isNull(end)) {
+                    var display = now < end;
+                    this._displayRecord(record, display);
+                }
+
+            }, this));
 
         },
 
@@ -456,6 +499,26 @@
 
             var record = this._db({ slug: slug }).first();
             this._showRecord(record);
+
+        },
+
+        /*
+         * Show or hide a record.
+         *
+         * - param object record: The TaffyDB record.
+         * - param boolean display: True to show, false to hide.
+         *
+         * - return void.
+         */
+        _displayRecord: function(record, display) {
+
+            if (display) {
+                record.title.css('display', 'list-item');
+            }
+
+            else {
+                record.title.css('display', 'none');
+            }
 
         },
 
