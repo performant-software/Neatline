@@ -61,8 +61,8 @@
             this._idToItem =                {};
             this._slugToItem =              {};
             this._idToOffset =              {};
-            this._currentItem =             null;
-            this._currentItemId =           null;
+            this._currentRecord =             null;
+            this._currentRecordId =           null;
             this._idOrdering =              [];
 
             // Build list.
@@ -97,7 +97,6 @@
 
                 success: function(data) {
                     self._renderItems(data);
-                    self._glossItems();
                     self._trigger('newitems');
                 }
 
@@ -129,65 +128,57 @@
          */
         _renderItems: function(json) {
 
-        },
-
-        /*
-         * Once the raw markup is from the items ajax query is pushed into the
-         * container, build the functionality for each item.
-         *
-         * - return void.
-         */
-        _glossItems: function() {
-
-            var self = this;
-
-            // Get the new items.
-            this.items = this.listContainer.find('.item-title');
-
             // Initialize the database.
             this._db = TAFFY();
 
-            // Bind events to the item rows.
-            $.each(this.items, function(i, item) {
+            // Clear list.
+            this.listContainer.empty();
 
-                // Get item id and description.
-                var item = $(item);
-                var description = item.next('li.item-description');
-                var recordid = parseInt(item.attr('recordid'), 10);
-                var slug = item.attr('slug');
+            // Walk items.
+            _.each(json, _.bind(function(record) {
+
+                // Build markup.
+                var title = $('<li class="item-title" />');
+                var description = $('<li class="item-description" />');
+
+                // Populate.
+                title.html(record.title);
+                description.html(record.description);
+
+                // Ineject markup.
+                this.listContainer.append(title, description);
 
                 // Set expanded tracker, push onto ordering.
-                item.data('expanded', false);
-                self._idOrdering.push(recordid);
+                title.data('expanded', false);
+                this._idOrdering.push(record.id);
 
-                // Populate database.
-                self._db.insert({
-                    recordid: recordid,
-                    slug: slug,
-                    markup: item
-                });
+                // Database record.
+                var taffyRecord = {
+                    recordid: record.id,
+                    slug: record.slug,
+                    title: title,
+                    description: description
+                };
 
-                // Unbind all events.
-                item.add(description).unbind();
+                // Insert record.
+                this._db.insert(taffyRecord);
 
-                // Disable selection on the titles.
-                item.disableSelection();
+                // Bind events to the title.
+                title.bind({
 
-                // Listen for events.
-                item.bind({
-
-                    'mousedown': function() {
+                    // Open description.
+                    'mousedown': _.bind(function() {
 
                         // If hidden, expand.
-                        if (!item.data('expanded')) {
+                        if (!title.data('expanded')) {
 
                             // Expand description.
-                            self.scrollToItem(recordid);
+                            this.scrollToItem(record.id);
 
                             // Trigger out to the deployment code.
-                            self._trigger('itemclick', {}, {
-                                'recordid': recordid,
-                                'slug': slug,
+                            this._trigger('itemclick', {}, {
+                                'recordid': record.id,
+                                'slug': record.slug,
                                 'scrollItems': true
                             });
 
@@ -195,41 +186,42 @@
 
                         // If expanded, hide.
                         else {
-                            self.contractDescription(item);
+                            this.contractDescription(taffyRecord);
                         }
 
-                    },
+                    }, this),
 
                     // Highlight.
-                    'mouseenter': function() {
+                    'mouseenter': _.bind(function() {
 
                         // Gloss the title.
-                        self.__highlightItem(item);
+                        this.__highlightItem(title);
 
                         // Trigger out to the deployment code.
-                        self._trigger('itementer', {}, {
-                            'recordid': recordid,
-                            'slug': slug
+                        this._trigger('itementer', {}, {
+                            'recordid': record.id,
+                            'slug': record.slug
                         });
 
-                    },
+                    }, this),
 
                     // Un-highlight.
-                    'mouseleave': function() {
+                    'mouseleave': _.bind(function() {
 
                         // De-gloss the title.
-                        self.__unhighlightItem(item);
+                        this.__unhighlightItem(title);
 
                         // Trigger out to the deployment code.
-                        self._trigger('itemleave', {}, {
-                            'recordid': recordid,
-                            'slug': slug
+                        this._trigger('itemleave', {}, {
+                            'recordid': record.id,
+                            'slug': record.slug
                         });
-                    }
+
+                    }, this)
 
                 });
 
-            });
+            }, this));
 
             // Register the native top offsets.
             this._getItemOffsets();
@@ -295,7 +287,7 @@
                 case 'left':
 
                     // If there is no set current id, scroll to the last item.
-                    if (_.isNull(this._currentItemId)) {
+                    if (_.isNull(this._currentRecordId)) {
                         return this._idOrdering[this._idOrdering.length - 1];
                     }
 
@@ -303,7 +295,7 @@
                     else {
 
                         // Get the current id.
-                        var currentIndex = this._idOrdering.indexOf(this._currentItemId);
+                        var currentIndex = this._idOrdering.indexOf(this._currentRecordId);
 
                         // If the current item is the first item, loop to the last.
                         if (currentIndex === 0) {
@@ -321,7 +313,7 @@
                 case 'right':
 
                     // If there is no set current id, scroll to the first item.
-                    if (_.isNull(this._currentItemId)) {
+                    if (_.isNull(this._currentRecordId)) {
                         return this._idOrdering[0];
                     }
 
@@ -329,7 +321,7 @@
                     else {
 
                         // Get the current id.
-                        var currentIndex = this._idOrdering.indexOf(this._currentItemId);
+                        var currentIndex = this._idOrdering.indexOf(this._currentRecordId);
 
                         // If the current item is the last item, loop to the first.
                         if (currentIndex === this._idOrdering.length - 1) {
@@ -380,66 +372,57 @@
         /*
          * Expand the description.
          *
-         * - param DOM item: The <li> of the item to expand.
+         * - param object record: The TaffyDB record for the item.
          *
          * - return void.
          */
-        expandDescription: function(item) {
-
-            var self = this;
-
-            // Capture the id of the new record, get description.
-            var recordId = item.attr('recordid');
-            var description = item.next('li');
+        expandDescription: function(record) {
 
             // Mark the title as active.
-            this.__activateTitle(item);
+            this.__activateTitle(record);
 
             // Only show the description if it has content.
-            if (description.html() !== '') {
+            if (record.description.html() !== '') {
 
                 // Show and measure the description.
-                description.css('display', 'list-item');
-                var height = description[0].scrollHeight;
+                record.description.css('display', 'list-item');
+                var height = record.description[0].scrollHeight;
 
                 // Expand.
-                description.animate({ 'height': height }, 200);
+                record.description.animate({ 'height': height }, 200);
 
             }
 
             // Set trackers.
-            self._currentItem = item;
-            self._currentItemId = parseInt(item.attr('recordid'), 10);
-            item.data('expanded', true);
+            this._currentRecord = record;
+            this._currentRecordId = parseInt(record.title.attr('recordid'), 10);
+            record.title.data('expanded', true);
 
         },
 
         /*
          * Expand the description.
          *
-         * - param DOM item: The <li> of the item to expand.
+         * - param object record: The TaffyDB record for the item.
          *
          * - return void.
          */
-        contractDescription: function(item) {
-
-            // Get the description.
-            var description = item.next('li');
+        contractDescription: function(record) {
 
             // Mark the title as inactive.
-            this.__deactivateTitle(item);
+            this.__deactivateTitle(record);
 
             // Contract and hide.
-            description.animate({
+            record.description.animate({
                 'height': 0
             }, 200, function() {
-                description.css('display', 'none');
+                record.description.css('display', 'none');
             });
 
             // Set trackers.
-            this._currentItem = null;
-            this._currentItemId = null;
-            item.data('expanded', false);
+            this._currentRecord = null;
+            this._currentRecordId = null;
+            record.title.data('expanded', false);
 
         },
 
@@ -489,14 +472,14 @@
             if (record) {
 
                 // If another item is expanded, hide.
-                if (this._currentItemId !== null &&
-                    this._currentItemId !== record.recordid) {
+                if (this._currentRecordId !== null &&
+                    this._currentRecordId !== record.recordid) {
                         this.__hideCurrentDescription();
-                        this._currentItem.data('expanded', false);
+                        this._currentRecord.title.data('expanded', false);
                 }
 
                 // Get the new scrollTop.
-                var scrollTop = record.markup.position().top +
+                var scrollTop = record.title.position().top +
                     this.element.scrollTop();
 
                 // If the new scroll is greater than the total height,
@@ -511,7 +494,7 @@
                 }, 200);
 
                 // Expand the description.
-                this.expandDescription(record.markup);
+                this.expandDescription(record);
 
             }
 
@@ -542,29 +525,25 @@
         /*
          * Pop the title as active.
          *
-         * - param DOM item: The <li> of the item to expand.
+         * - param object record: TaffyDB record.
          *
          * - return void.
          */
-        __activateTitle: function(item) {
+        __activateTitle: function(record) {
 
             // If the title it not already activated.
-            if (!item.data('expanded')) {
-
-                // Get data attributes.
-                var recordid = parseInt(item.attr('recordid'), 10);
-                var slug = item.attr('slug');
+            if (!record.title.data('expanded')) {
 
                 // Fade up and grow title.
-                item.stop().animate({
+                record.title.stop().animate({
                     'font-size': '+=5px',
                     'color': this.options.colors.purple
                 }, 100);
 
                 // Trigger out to the deployment code.
                 this._trigger('itemactivate', {}, {
-                    'recordid': recordid,
-                    'slug': slug,
+                    'recordid': record.id,
+                    'slug': record.slug,
                     'scrollItems': true
                 });
 
@@ -575,23 +554,19 @@
         /*
          * Return the title to normal.
          *
-         * - param DOM item: The <li> of the item to expand.
+         * - param object record: TaffyDB record.
          * - param boolean immediate: If true, .css() instead of .animate();
          *
          * - return void.
          */
-        __deactivateTitle: function(item, immediate) {
+        __deactivateTitle: function(record, immediate) {
 
             // Halt if the item is not currently activated.
-            if (item.data('expanded')) {
-
-                // Get data attributes.
-                var recordid = parseInt(item.attr('recordid'), 10);
-                var slug = item.attr('slug');
+            if (record.title.data('expanded')) {
 
                 // If not immediate, animate down.
                 if (!immediate) {
-                    item.stop().animate({
+                    record.title.stop().animate({
                         'font-size': '-=5px',
                         'color': this.options.colors.title
                     }, 100);
@@ -599,7 +574,7 @@
 
                 // If immediate, manifest directly.
                 else {
-                    item.css({
+                    record.title.css({
                         'font-size': '-=5px',
                         'color': this.options.colors.title
                     });
@@ -607,8 +582,8 @@
 
                 // Trigger out to the deployment code.
                 this._trigger('itemdeactivate', {}, {
-                    'recordid': recordid,
-                    'slug': slug,
+                    'recordid': record.id,
+                    'slug': record.slug,
                     'scrollItems': true
                 });
 
@@ -624,13 +599,13 @@
         __hideCurrentDescription: function() {
 
             // Deactivate the title.
-            if (!_.isNull(this._currentItem)) {
+            if (!_.isNull(this._currentRecord)) {
 
                 // Deactivate the title.
-                this.__deactivateTitle(this._currentItem, true);
+                this.__deactivateTitle(this._currentRecord);
 
                 // Hide the description.
-                this._currentItem.next('li').css({
+                this._currentRecord.description.css({
                     'height': 0,
                     'display': 'none'
                 });

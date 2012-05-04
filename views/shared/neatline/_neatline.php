@@ -40,7 +40,7 @@
 
     <!-- Items. -->
     <div id="items" class="neatline-block">
-        <div id="items-container"></div>
+        <ul id="items-container"></ul>
     </div>
 
     <!-- Scroll arrows. -->
