@@ -316,6 +316,9 @@
                         self.edit(self._currentEditItem, true);
                     }
 
+                    // Set starting visibility.
+                    self._setStartingVisibility();
+
                 }
 
             });
@@ -578,6 +581,23 @@
                 this.map.removeControl(this.modifyFeatures);
                 this.modifyFeatures.destroy();
                 delete this.modifyFeatures;
+            }
+
+        },
+
+        /*
+         * Set starting visibility.
+         */
+        _setStartingVisibility: function() {
+
+            // Use default focus if present.
+            if (Neatline.record.default_focus_date) {
+                this.renderVisibility(Neatline.record.default_focus_date);
+            }
+
+            // Otherwise, use the current time.
+            else {
+                this.renderVisibility(Date.now());
             }
 
         },

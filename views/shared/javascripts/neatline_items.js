@@ -96,8 +96,14 @@
                 dataType: 'json',
 
                 success: function(data) {
+
+                    // Render records.
                     self._renderItems(data);
                     self._trigger('newitems');
+
+                    // Set starting visibility.
+                    self._setStartingVisibility();
+
                 }
 
             });
@@ -467,6 +473,23 @@
                 }
 
             }, this));
+
+        },
+
+        /*
+         * Set starting visibility.
+         */
+        _setStartingVisibility: function() {
+
+            // Use default focus if present.
+            if (Neatline.record.default_focus_date) {
+                this.renderVisibility(Neatline.record.default_focus_date);
+            }
+
+            // Otherwise, use the current time.
+            else {
+                this.renderVisibility(Date.now());
+            }
 
         },
 
