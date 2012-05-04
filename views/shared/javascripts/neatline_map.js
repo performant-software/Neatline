@@ -401,8 +401,6 @@
                     self._wmsLayers.push(wmsLayer);
                     self.map.addLayer(wmsLayer);
 
-                    console.log(wmsLayer);
-
                 }
 
                 // Add the database record.

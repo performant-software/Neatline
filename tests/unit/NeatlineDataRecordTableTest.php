@@ -1387,6 +1387,67 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
     }
 
     /**
+     * The buildItemsJson() method should construct well-formed JSON string with
+     * the id, title, slug, description, and visibility dates.
+     *
+     * @return void.
+     */
+    public function testBuildItemsJson()
+    {
+
+        // Create an exhibit and items.
+        $neatline = $this->helper->_createNeatline();
+        $item1 = $this->helper->_createItem();
+        $item2 = $this->helper->_createItem();
+
+        // Create two records.
+        $record1 = new NeatlineDataRecord($item1, $neatline);
+        $record2 = new NeatlineDataRecord($item2, $neatline);
+
+        // Populate map-relevant attributes.
+        $record1->title = 'Item 1 Title';
+        $record2->title = 'Item 2 Title';
+        $record1->slug = 'slug-1';
+        $record2->slug = 'slug-2';
+        $record1->description = 'Item 1 description.';
+        $record2->description = 'Item 2 description.';
+        $record1->start_visible_date = '1864-04-26 14:39:22';
+        $record2->start_visible_date = '1964-04-26 14:39:22';
+        $record1->end_visible_date = '1916-04-23 12:45:34';
+        $record2->end_visible_date = '2016-04-23 12:45:34';
+        $record1->items_active = 1;
+        $record2->items_active = 1;
+        $record1->save();
+        $record2->save();
+
+        // Build the JSON.
+        $json = json_decode($this->_recordsTable->buildItemsJson($neatline));
+
+        $this->assertEquals(
+            $json,
+            array(
+                (object) array(
+                    'id' => $record1->id,
+                    'title' => 'Item 1 Title',
+                    'slug' => 'slug-1',
+                    'description' => 'Item 1 description.',
+                    'start_visible_date' => '1864-04-26 14:39:22',
+                    'end_visible_date' => '1916-04-23 12:45:34'
+                ),
+                (object) array(
+                    'id' => $record2->id,
+                    'title' => 'Item 2 Title',
+                    'slug' => 'slug-2',
+                    'description' => 'Item 2 description.',
+                    'start_visible_date' => '1964-04-26 14:39:22',
+                    'end_visible_date' => '2016-04-23 12:45:34'
+                )
+            )
+        );
+
+    }
+
+    /**
      * The saveOrder() method should commit a new record ordering.
      *
      * @return void.

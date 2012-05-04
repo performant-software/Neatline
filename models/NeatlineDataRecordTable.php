@@ -472,4 +472,39 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
 
     }
 
+    /**
+     * Construct items JSON.
+     *
+     * @param Omeka_record $neatline The exhibit record.
+     *
+     * @return JSON The data.
+     */
+    public function buildItemsJson($neatline)
+    {
+
+        // Shell array.
+        $data = array();
+
+        // Get records.
+        $records = $this->getItemsRecordsByExhibit($neatline);
+
+        // Walk the records and build out the array.
+        foreach ($records as $record) {
+
+            $data[] = array(
+                'id' =>                     $record->id,
+                'title' =>                  trim($record->getTitle()),
+                'slug' =>                   $record->getSlug(),
+                'description' =>            $record->getDescription(),
+                'start_visible_date' =>     $record->getStartVisibleDate(),
+                'end_visible_date' =>       $record->getEndVisibleDate()
+            );
+
+        }
+
+        // JSON-ify the array.
+        return json_encode($data);
+
+    }
+
 }
