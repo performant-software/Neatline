@@ -101,6 +101,10 @@ class Neatline_DataControllerTest extends Omeka_Test_AppTestCase
         $record2->map_bounds = 'BOUND(2)';
         $record1->map_zoom = 4;
         $record2->map_zoom = 5;
+        $record1->start_visible_date = '1864-04-26 14:39:22';
+        $record2->start_visible_date = '1964-04-26 14:39:22';
+        $record1->end_visible_date = '1916-04-23 12:45:34';
+        $record2->end_visible_date = '2016-04-23 12:45:34';
         $record1->save();
         $record2->save();
 
@@ -122,6 +126,8 @@ class Neatline_DataControllerTest extends Omeka_Test_AppTestCase
         $this->assertContains('"bounds":"BOUND(1)"', $response);
         $this->assertContains('"zoom":4', $response);
         $this->assertContains('"wkt":"POINT(1,0)"', $response);
+        $this->assertContains('"start_visible_date":"1864-04-26 14:39:22"', $response);
+        $this->assertContains('"end_visible_date":"1916-04-23 12:45:34"', $response);
         $this->assertContains('"id":' . $record2->id, $response);
         $this->assertContains('"item_id":' . $item2->id, $response);
         $this->assertContains('"title":"Item 1 Title"', $response);
@@ -135,6 +141,8 @@ class Neatline_DataControllerTest extends Omeka_Test_AppTestCase
         $this->assertContains('"bounds":"BOUND(2)"', $response);
         $this->assertContains('"zoom":5', $response);
         $this->assertContains('"wkt":"POINT(0,1)"', $response);
+        $this->assertContains('"start_visible_date":"1964-04-26 14:39:22"', $response);
+        $this->assertContains('"end_visible_date":"2016-04-23 12:45:34"', $response);
 
     }
 

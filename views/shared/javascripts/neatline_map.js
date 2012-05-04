@@ -613,6 +613,13 @@
          */
         renderVisibility: function(date) {
 
+            // Walk records.
+            this._db().each(function(record) {
+                console.log(moment(date));
+                console.log(record);
+                record.layer.display(false);
+            });
+
         },
 
         /*

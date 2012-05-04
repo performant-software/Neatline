@@ -368,6 +368,8 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
                         'bounds' =>             $record->map_bounds,
                         'zoom' =>               $record->map_zoom,
                         'wkt' =>                $record->getGeocoverage(),
+                        'start_visible_date' => $record->getStartVisibleDate(),
+                        'end_visible_date' =>   $record->getEndVisibleDate(),
                         '_native_styles' =>     array(
                           'vector_color' =>     $record->vector_color,
                           'vector_opacity' =>   $record->vector_opacity,

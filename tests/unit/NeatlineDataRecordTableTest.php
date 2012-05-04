@@ -33,6 +33,8 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
         'description' => 'Test description.',
         'start_date' => '1564-04-26 14:39:22',
         'end_date' => '1616-04-23 12:45:34',
+        'start_visible_date' => '1864-04-26 14:39:22',
+        'end_visible_date' => '1916-04-23 12:45:34',
         'vector_color' => '#ffffff',
         'stroke_color' => '#000000',
         'vector_opacity' => 60,
@@ -874,6 +876,10 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
         $record2->map_bounds = 'BOUND(2)';
         $record1->map_zoom = 4;
         $record2->map_zoom = 5;
+        $record1->start_visible_date = '1864-04-26 14:39:22';
+        $record2->start_visible_date = '1964-04-26 14:39:22';
+        $record1->end_visible_date = '1916-04-23 12:45:34';
+        $record2->end_visible_date = '2016-04-23 12:45:34';
         $record1->save();
         $record2->save();
 
@@ -900,6 +906,8 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
                         'bounds' => 'BOUND(1)',
                         'zoom' => '4',
                         'wkt' => 'POINT(1,0)',
+                        'start_visible_date' => '1864-04-26 14:39:22',
+                        'end_visible_date' => '1916-04-23 12:45:34',
                         '_native_styles' => (object) array(
                             'vector_color' => '#ffffff',
                             'vector_opacity' => '60',
@@ -924,6 +932,8 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
                         'bounds' => 'BOUND(2)',
                         'zoom' => '5',
                         'wkt' => 'POINT(0,1)',
+                        'start_visible_date' => '1964-04-26 14:39:22',
+                        'end_visible_date' => '2016-04-23 12:45:34',
                         '_native_styles' => (object) array(
                             'vector_color' => '#000000',
                             'vector_opacity' => '40',
