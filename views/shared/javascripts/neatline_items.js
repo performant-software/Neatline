@@ -93,10 +93,10 @@
             $.ajax({
 
                 url: Neatline.dataSources.undated,
-                dataType: 'html',
+                dataType: 'json',
 
                 success: function(data) {
-                    self.listContainer.html(data);
+                    self._renderItems(data);
                     self._glossItems();
                     self._trigger('newitems');
                 }
@@ -117,6 +117,17 @@
             this._window.bind('resize', function() {
                 self._getItemOffsets();
             });
+
+        },
+
+        /*
+         * Render item listings from JSON.
+         *
+         * - param object json: The items json.
+         *
+         * - return void.
+         */
+        _renderItems: function(json) {
 
         },
 

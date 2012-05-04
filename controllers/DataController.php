@@ -87,20 +87,14 @@ class Neatline_DataController extends Omeka_Controller_Action
     public function udiAction()
     {
 
-        // Set the layout.
-        $this->_helper->viewRenderer('public-items-ajax');
+        // Supress the default Zend layout-sniffer functionality.
+        $this->_helper->viewRenderer->setNoRender(true);
 
-        // Get the exhibit and active records.
-        $neatlineId = $this->_request->getParam('id');
-        $neatline = $this->_neatlinesTable->find($neatlineId);;
-        $records = $this->_recordsTable->getItemsRecordsByExhibit($neatline);
+        // Get id and exhibit.
+        $exhibit = $this->_neatlinesTable->find($this->_request->getParam('id'));
 
-        // If no active records, pass empty array.
-        if (!$records) $records = array();
-
-        // Get items, push items and Neatline record into view.
-        $this->view->records = $records;
-        $this->view->neatline = $neatline;
+        // Output the JSON string.
+        echo $this->_recordsTable->buildItemsJson($exhibit);
 
     }
 
