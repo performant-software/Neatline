@@ -303,86 +303,56 @@ class Neatline_DataControllerTest extends Omeka_Test_AppTestCase
 
         // Create an exhibit and item.
         $neatline = $this->helper->_createNeatline();
-        $item = $this->helper->_createItem();
 
         // Create record1.
-        $record1 = new NeatlineDataRecord($item, $neatline);
+        $record1 = new NeatlineDataRecord(null, $neatline);
         $record1->title = 'Item 1 Title';
         $record1->slug = 'slug-1';
         $record1->description = 'Item 1 description.';
         $record1->items_active = 1;
+        $record1->start_visible_date = '1864-04-26 14:39:22';
+        $record1->end_visible_date = '1916-04-23 12:45:34';
         $record1->save();
 
         // Create record2.
-        $record2 = new NeatlineDataRecord($item, $neatline);
+        $record2 = new NeatlineDataRecord(null, $neatline);
         $record2->title = 'Item 2 Title';
         $record2->slug = 'slug-2';
         $record2->description = 'Item 2 description.';
-        $record2->map_active = 1;
+        $record2->items_active = 1;
+        $record2->start_visible_date = '1964-04-26 14:39:22';
+        $record2->end_visible_date = '2016-04-23 12:45:34';
         $record2->save();
 
-        // Create record2.
-        $record3 = new NeatlineDataRecord($item, $neatline);
-        $record3->title = 'Item 3 Title';
-        $record3->slug = 'slug-3';
-        $record3->description = 'Item 3 description.';
-        $record3->time_active = 1;
-        $record3->save();
-
         // Hit the route.
         $this->dispatch('neatline-exhibits/' . $neatline->id . '/data/udi');
+        $response = $this->getResponse()->getBody('default');
 
-        // Check for record1.
-        $this->assertQuery('li.item-title[recordid="' . $record1->id . '"]');
-        $this->assertQuery('li.item-title[slug="' . $record1->slug . '"]');
-        $this->assertQueryContentContains('li.item-title', 'Item 1 Title');
-        $this->assertQueryContentContains('li.item-description', 'Item 1 description.');
+        // JSON -> array.
+        $json = json_decode($response);
 
-        // Check for record2 and record3 absent.
-        $this->assertNotQuery('li.item-title[recordid="' . $record2->id . '"]');
-        $this->assertNotQuery('li.item-title[recordid="' . $record3->id . '"]');
-
-    }
-
-    /**
-     * When there are null values for title and description on a record, the /udi
-     * templating should default in DC values.
-     *
-     * @return void.
-     */
-    public function testUdiDcDefaulting()
-    {
-
-        // Create an exhibit, item, and record.
-        $neatline = $this->helper->_createNeatline();
-        $item = $this->helper->_createItem();
-        $record = new NeatlineDataRecord($item, $neatline);
-
-        // Populate items-relevant attributes.
-        $record->items_active = 1;
-        $record->items_active = 1;
-        $record->save();
-
-        // Create element texts.
-        $this->helper->_createElementText(
-            $item,
-            'Dublin Core',
-            'Title',
-            'Test Title');
-
-        $this->helper->_createElementText(
-            $item,
-            'Dublin Core',
-            'Description',
-            'Test description.');
-
-        // Hit the route.
-        $this->dispatch('neatline-exhibits/' . $neatline->id . '/data/udi');
-
-        // Check markup.
-        $this->assertQuery('li.item-title[recordid="' . $record->id . '"]');
-        $this->assertQueryContentContains('li.item-title', 'Test Title');
-        $this->assertQueryContentContains('li.item-description', 'Test description.');
+        // Check.
+        $this->assertEquals(
+            $json,
+            array(
+                (object) array(
+                    'id' => $record1->id,
+                    'title' => 'Item 1 Title',
+                    'slug' => 'slug-1',
+                    'description' => 'Item 1 description.',
+                    'start_visible_date' => '1864-04-26 14:39:22',
+                    'end_visible_date' => '1916-04-23 12:45:34'
+                ),
+                (object) array(
+                    'id' => $record2->id,
+                    'title' => 'Item 2 Title',
+                    'slug' => 'slug-2',
+                    'description' => 'Item 2 description.',
+                    'start_visible_date' => '1964-04-26 14:39:22',
+                    'end_visible_date' => '2016-04-23 12:45:34'
+                )
+            )
+        );
 
     }
 
