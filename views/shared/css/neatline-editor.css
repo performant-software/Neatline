@@ -250,6 +250,10 @@ tr.edit-form td {
     padding: 0;
 }
 
+tr.edit-form td.edit-form-container {
+    display: none;
+}
+
 #edit-form {
     visibility: hidden;
 }
