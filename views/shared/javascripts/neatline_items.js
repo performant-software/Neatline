@@ -143,6 +143,7 @@
 
                 // Populate.
                 title.html(record.title);
+                title.attr('recordid', record.id);
                 description.html(record.description);
 
                 // Ineject markup.

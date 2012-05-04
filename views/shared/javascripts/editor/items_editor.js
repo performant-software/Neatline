@@ -69,8 +69,8 @@
         reorder: function() {
 
             // If there is an expanded description, close it.
-            if (!_.isNull(this._currentItem)) {
-                this.contractDescription(this._currentItem);
+            if (!_.isNull(this._currentRecord)) {
+                this.contractDescription(this._currentRecord);
             }
 
             // Disable selection.
@@ -146,7 +146,7 @@
             });
 
             // Regloss the items as normal.
-            this._glossItems();
+            this.loadData();
 
         },
 

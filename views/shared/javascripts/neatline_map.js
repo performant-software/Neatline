@@ -623,22 +623,22 @@
                 // If both are defined.
                 if (!_.isNull(start) && !_.isNull(end)) {
                     var display = now > start && now < end;
-                    record.layer.display(display);
-                    if (record.wms) record.wms.display(display);
+                    record.layer.setVisibility(display);
+                    if (record.wms) record.wms.setVisibility(display);
                 }
 
                 // If just the start is defined.
                 else if (!_.isNull(start) && _.isNull(end)) {
                     var display = now > start;
-                    record.layer.display(display);
-                    if (record.wms) record.wms.display(display);
+                    record.layer.setVisibility(display);
+                    if (record.wms) record.wms.setVisibility(display);
                 }
 
                 // If just the end is defined.
                 else if (_.isNull(start) && !_.isNull(end)) {
                     var display = now < end;
-                    record.layer.display(display);
-                    if (record.wms) record.wms.display(display);
+                    record.layer.setVisibility(display);
+                    if (record.wms) record.wms.setVisibility(display);
                 }
 
             });
