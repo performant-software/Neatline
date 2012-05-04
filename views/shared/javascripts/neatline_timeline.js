@@ -77,15 +77,27 @@
 
                 Timeline.createBandInfo({
                     eventSource:    this.eventSource,
-                    width:          "100%",
+                    width:          "65%",
                     intervalUnit:   intervalUnit,
                     intervalPixels: intervalPixels,
                     zoomIndex:      this._currentZoomStep,
                     zoomSteps:      this._zoomSteps,
                     theme:          theme
+                }),
+
+                Timeline.createBandInfo({
+                    overview:       true,
+                    eventSource:    this.eventSource,
+                    width:          "35%",
+                    intervalUnit:   Timeline.DateTime.DECADE,
+                    intervalPixels: 300
                 })
 
             ];
+
+            // Sync bands.
+            this.bandInfos[1].syncWith = 0;
+            this.bandInfos[1].highlight = true;
 
             // Instantiate and load JSON.
             var container = document.getElementById('timeline');

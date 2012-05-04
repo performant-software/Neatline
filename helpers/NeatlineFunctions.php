@@ -67,7 +67,6 @@ function neatline_queueEditorAssets()
     queue_js('editor/configure_map', 'javascripts');
     queue_js('editor/configure_items', 'javascripts');
 
-    queue_js('editor/utilities/_small_scroll', 'javascripts');
     queue_js('editor/utilities/_toggle_button', 'javascripts');
     queue_js('editor/utilities/_gradient_builder', 'javascripts');
     queue_js('editor/utilities/_dropdown', 'javascripts');
