@@ -105,6 +105,7 @@
             this.titleDescriptionFieldset = this.form.find('a.fieldset.title-and-description');
             this.dateInformationFieldset =  this.form.find('a.fieldset.date-information');
             this.mapStylesFieldset =        this.form.find('a.fieldset.map-styles');
+            this.relationshipsFieldset =    this.form.find('a.fieldset.relationships');
 
             // Trackers.
             this._db =                      TAFFY();
@@ -319,6 +320,14 @@
 
             // Map styles.
             this.mapStylesFieldset.fieldsetexpander({
+                default_status: false,
+                'change': function() {
+                    self._measureForm();
+                }
+            });
+
+            // Relationships.
+            this.relationshipsFieldset.fieldsetexpander({
                 default_status: false,
                 'change': function() {
                     self._measureForm();

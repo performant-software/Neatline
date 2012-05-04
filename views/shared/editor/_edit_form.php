@@ -194,7 +194,6 @@
                 </tr>
             </table>
 
-
             <div class="clearfix">
                 <div class="input">
                     <div class="inline-inputs">
@@ -204,20 +203,41 @@
                 </div>
             </div>
 
+            <div class="clearfix">
+                <div class="input">
+                    <div class="inline-inputs">
+                        <button class="btn icon home map-focus">Set Map Focus</button>
+                        <span class="help-inline">Set a custom map focus for the item.</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <hr />
+
+        <a class="fieldset relationships" href="">
+            <div class="fieldset-arrow"></div>Relationships
+        </a>
+        <div class="fieldset">
+
+            <div class="clearfix">
+                <label>Parent Item</label>
+                <div class="input">
+                    <div class="inline-inputs">
+                        <select name="base-layer">
+                            <option value="test">-</option>
+                        </select>
+                        <span class="help-inline">Set a custom map focus for the item.</span>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
         <hr />
 
         <div class="fieldset">
-
-            <div class="clearfix">
-                <div class="input">
-                    <div class="inline-inputs">
-                        <button class="btn icon home map-focus">Fix Item-Specific Map Focus</button>
-                        <span class="help-inline">Set a custom map focus for the item.</span>
-                    </div>
-                </div>
-            </div>
 
             <div id="edit-form-actions" class="actions">
                 <input type="submit" class="btn primary" value="Save">
