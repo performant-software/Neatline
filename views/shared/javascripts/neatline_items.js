@@ -514,11 +514,20 @@
         _displayRecord: function(record, display) {
 
             if (display) {
+
+                // Show the title.
                 record.title.css('display', 'list-item');
+
+                // If the title is expanded, show description.
+                if (record.title.data('expanded')) {
+                    record.description.css('display', 'list-item');
+                }
+
             }
 
             else {
                 record.title.css('display', 'none');
+                record.description.css('display', 'none');
             }
 
         },
