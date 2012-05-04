@@ -332,10 +332,7 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
     {
 
         // Shell array.
-        $data = array(
-            'layers' => array(),
-            'features' => array()
-        );
+        $data = array();
 
         // If Neatline Maps is installed, get services table.
         if (plugin_is_active('NeatlineMaps')) {
@@ -353,7 +350,7 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
                 // If the record is active on the map.
                 if ($record->space_active == 1) {
 
-                    $data['features'][] = array(
+                    $layer = array(
                         'id' =>                 $record->id,
                         'item_id' =>            $record->item_id,
                         'title' =>              $record->getTitle(),
@@ -370,6 +367,8 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
                         'wkt' =>                $record->getGeocoverage(),
                         'start_visible_date' => $record->getStartVisibleDate(),
                         'end_visible_date' =>   $record->getEndVisibleDate(),
+                        'wmsAddress' =>         null,
+                        'layers' =>             null,
                         '_native_styles' =>     array(
                           'vector_color' =>     $record->vector_color,
                           'vector_opacity' =>   $record->vector_opacity,
@@ -390,22 +389,14 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
 
                         // If there is a WMS, push to layers.
                         if ($wms) {
-
-                            // Get item title.
-                            $title = neatline_getItemMetadata(
-                                $item, 'Dublin Core', 'Title'
-                            );
-
-                            // Push to array.
-                            $data['layers'][] = array(
-                                'title' => $title,
-                                'wmsAddress' => $wms->address,
-                                'layers' => $wms->layers
-                            );
-
+                            $layer['wmsAddress'] = $wms->address;
+                            $layer['layers'] = $wms->layers;
                         }
 
                     }
+
+                    // Push layer.
+                    $data[] = $layer;
 
                 }
 

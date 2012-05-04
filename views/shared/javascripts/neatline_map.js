@@ -253,7 +253,7 @@
 
                     // Manifest new opacity.
                     change: function(event, ui) {
-                        _.each(self.wmsLayers, function(layer) {
+                        _.each(self._wmsLayers, function(layer) {
                             layer.setOpacity(ui.value/100);
                         });
                     }
@@ -279,13 +279,19 @@
             this._removeEditControls();
 
             // Clear existing vectors.
-            $.each(this._currentVectorLayers, function(i, layer) {
+            _.each(this._currentVectorLayers, function(layer) {
                 self.map.removeLayer(layer);
                 layer.destroy();
             });
 
+            // Remove existing WMS layers.
+            _.each(this._wmsLayers, function(layer) {
+                self.map.removeLayer(layer);
+            });
+
             // Empty out the layers database.
             this._currentVectorLayers = [];
+            this._wmsLayers = [];
 
             // Abort the request if it is running.
             if (this.requestData !== null) {
@@ -301,8 +307,7 @@
                 success: function(data) {
 
                     // Build the new layers and add default click controls.
-                    self._buildLayers(data.layers);
-                    self._buildFeatures(data.features);
+                    self._buildLayers(data);
                     self._addClickControls();
 
                     // If a layer was being edited before the save,
@@ -324,53 +329,10 @@
 
             var self = this;
 
-            // Remove existing WMS layers.
-            _.each(this.wmsLayers, function(layer) {
-                self.map.removeLayer(layer);
-            });
-
-            // Construct the WMS layers.
-            this.wmsLayers = [];
-            _.each(layers, function(layer) {
-
-                self.wmsLayers.push(new OpenLayers.Layer.WMS(
-                    layer.title,
-                    layer.wmsAddress,
-                    {
-                        layers: layer.layers,
-                        styles: '',
-                        transparent: true,
-                        format: 'image/png8',
-                        tiled: false
-                    },
-                    {
-                        buffer: 0,
-                        displayOutsideMaxExtent: true,
-                        isBaseLayer: false
-                    }
-                ));
-
-            });
-
-            // Add layers to map and instantiate opacity slider.
-            if (this.wmsLayers.length > 0) {
-                this.map.addLayers(this.wmsLayers);
-                this._instantiateOpacitySlider();
-            }
-
-        },
-
-        /*
-         * Construct the features from the source JSON.
-         */
-        _buildFeatures: function(features) {
-
-            var self = this;
-
             // Instantiate database and associations objects.
             this._db = TAFFY();
 
-            _.each(features, function(item) {
+            _.each(layers, function(item) {
 
                 // Get float values for opacities.
                 item.vector_opacity = item.vector_opacity / 100;
@@ -412,6 +374,37 @@
                 vectorLayer.addFeatures(features);
                 vectorLayer.setMap(self.map);
 
+                var wmsLayer = null;
+
+                // If a WMS address is defined.
+                if (!_.isNull(item.wmsAddress) && !_.isNull(item.layers)) {
+
+                    // Build layer.
+                    wmsLayer = new OpenLayers.Layer.WMS(
+                        item.title,
+                        item.wmsAddress,
+                        {
+                            layers: item.layers,
+                            styles: '',
+                            transparent: true,
+                            format: 'image/png8',
+                            tiled: false
+                        },
+                        {
+                            buffer: 0,
+                            displayOutsideMaxExtent: true,
+                            isBaseLayer: false
+                        }
+                    );
+
+                    // Track and add.
+                    self._wmsLayers.push(wmsLayer);
+                    self.map.addLayer(wmsLayer);
+
+                    console.log(wmsLayer);
+
+                }
+
                 // Add the database record.
                 self._db.insert({
                     itemid: item.item_id,
@@ -419,7 +412,8 @@
                     recordid: item.id,
                     slug: item.slug,
                     data: item,
-                    layer: vectorLayer
+                    layer: vectorLayer,
+                    wms: wmsLayer
                 });
 
                 // Add to the layers array and add to map.
@@ -427,6 +421,11 @@
                 self.map.addLayer(vectorLayer);
 
             });
+
+            // Add layers to map and instantiate opacity slider.
+            if (this._wmsLayers.length > 0) {
+                this._instantiateOpacitySlider();
+            }
 
         },
 
@@ -627,18 +626,21 @@
                 if (!_.isNull(start) && !_.isNull(end)) {
                     var display = now > start && now < end;
                     record.layer.display(display);
+                    if (record.wms) record.wms.display(display);
                 }
 
                 // If just the start is defined.
                 else if (!_.isNull(start) && _.isNull(end)) {
                     var display = now > start;
                     record.layer.display(display);
+                    if (record.wms) record.wms.display(display);
                 }
 
                 // If just the end is defined.
                 else if (_.isNull(start) && !_.isNull(end)) {
                     var display = now < end;
                     record.layer.display(display);
+                    if (record.wms) record.wms.display(display);
                 }
 
             });
