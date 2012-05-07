@@ -191,6 +191,10 @@ class NeatlineDataRecord extends Omeka_record
         // Shell out the array.
         $data = array();
 
+        // Get parent record select list.
+        $_recordsTable = $this->getTable('NeatlineDataRecord');
+        $records = $_recordsTable->getRecordsForSelect($this->getExhibit());
+
         // Set the array values.
         $data['title'] =                $this->getTitle();
         $data['slug'] =                 $this->getSlug();
@@ -208,6 +212,7 @@ class NeatlineDataRecord extends Omeka_record
         $data['end_visible_date'] =     (string) $this->end_visible_date;
         $data['left_percent'] =         (int) $this->getLeftPercent();
         $data['right_percent'] =        (int) $this->getRightPercent();
+        $data['records'] =              $records;
 
         // JSON-ify the array.
         return json_encode($data);

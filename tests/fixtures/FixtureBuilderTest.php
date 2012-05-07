@@ -306,30 +306,40 @@ class Neatline_FixtureBuilderTest extends Omeka_Test_AppTestCase
         $exhibit = $this->helper->_createNeatline();
 
         // Mock record.
-        $record = new NeatlineDataRecord();
-        $record->title = 'Test Title';
-        $record->slug = 'test-slug';
-        $record->description = 'Test description.';
-        $record->start_date = 'June 25, 1987';
-        $record->end_date = 'June 26, 1987';
-        $record->start_visible_date = 'June 27, 1987';
-        $record->end_visible_date = 'June 28, 1987';
-        $record->vector_color = '#ffffff';
-        $record->stroke_color = '#000000';
-        $record->highlight_color = '#ffff00';
-        $record->vector_opacity = 20;
-        $record->stroke_opacity = 80;
-        $record->stroke_width = 3;
-        $record->point_radius = 5;
-        $record->exhibit_id = $exhibit->id;
-        $record->space_active = 1;
-        $record->save();
+        $record1 = new NeatlineDataRecord();
+        $record1->title = 'Test Title 1';
+        $record1->slug = 'test-slug';
+        $record1->description = 'Test description.';
+        $record1->start_date = 'June 25, 1987';
+        $record1->end_date = 'June 26, 1987';
+        $record1->start_visible_date = 'June 27, 1987';
+        $record1->end_visible_date = 'June 28, 1987';
+        $record1->vector_color = '#ffffff';
+        $record1->stroke_color = '#000000';
+        $record1->highlight_color = '#ffff00';
+        $record1->vector_opacity = 20;
+        $record1->stroke_opacity = 80;
+        $record1->stroke_width = 3;
+        $record1->point_radius = 5;
+        $record1->exhibit_id = $exhibit->id;
+        $record1->space_active = 1;
+        $record1->save();
+
+        // Mock records for parent record select.
+        $record2 = new NeatlineDataRecord();
+        $record2->exhibit_id = $exhibit->id;
+        $record2->title = 'Test Title 2';
+        $record2->save();
+        $record3 = new NeatlineDataRecord();
+        $record3->exhibit_id = $exhibit->id;
+        $record3->title = 'Test Title 3';
+        $record3->save();
 
         // Prepare the request.
         $this->request->setMethod('GET')
             ->setParams(array(
               'exhibit_id' => $exhibit->id,
-              'record_id' => $record->id,
+              'record_id' => $record1->id,
             )
         );
 

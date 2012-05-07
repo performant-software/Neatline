@@ -199,7 +199,7 @@ describe('Item Form', function() {
             request.response(formResponse);
 
             // Check the inputs for the correct values.
-            expect(form.itemform('getAttr', 'title').val()).toEqual('Test Title');
+            expect(form.itemform('getAttr', 'title').val()).toEqual('Test Title 1');
             expect(form.itemform('getAttr', 'slug').val()).toEqual('test-slug');
             expect(form.itemform('getAttr', 'description').val()).toEqual('Test description.');
             expect(form.itemform('getAttr', 'startDate').val()).toEqual('June 25, 1987');
@@ -214,6 +214,19 @@ describe('Item Form', function() {
             expect(form.itemform('getAttr', 'strokeWidth').val()).toEqual('3');
             expect(form.itemform('getAttr', 'pointRadius').val()).toEqual('5');
 
+            // Check parent item select.
+            var parentRecord = form.itemform('getAttr', 'parentRecord');
+            var options = parentRecord.find('option');
+            expect(options.length).toEqual(4);
+            expect($(options[0]).val()).toEqual('none');
+            expect($(options[0]).text()).toEqual('-');
+            expect($(options[1]).val()).toEqual('1');
+            expect($(options[1]).text()).toEqual('Test Title 1');
+            expect($(options[2]).val()).toEqual('2');
+            expect($(options[2]).text()).toEqual('Test Title 2');
+            expect($(options[3]).val()).toEqual('3');
+            expect($(options[3]).text()).toEqual('Test Title 3');
+
         });
 
         it('should reload saved local data when it exists', function() {
@@ -223,7 +236,7 @@ describe('Item Form', function() {
             request.response(formResponse);
 
             // Check the inputs for the correct values.
-            expect(form.itemform('getAttr', 'title').val()).toEqual('Test Title');
+            expect(form.itemform('getAttr', 'title').val()).toEqual('Test Title 1');
             expect(form.itemform('getAttr', 'slug').val()).toEqual('test-slug');
             expect(form.itemform('getAttr', 'description').val()).toEqual('Test description.');
             expect(form.itemform('getAttr', 'startDate').val()).toEqual('June 25, 1987');
@@ -294,7 +307,7 @@ describe('Item Form', function() {
             request.response(formResponse);
 
             // Check the inputs for the correct values.
-            expect(form.itemform('getAttr', 'title').val()).toEqual('Test Title');
+            expect(form.itemform('getAttr', 'title').val()).toEqual('Test Title 1');
             expect(form.itemform('getAttr', 'slug').val()).toEqual('test-slug');
             expect(form.itemform('getAttr', 'description').val()).toEqual('Test description.');
             expect(form.itemform('getAttr', 'startDate').val()).toEqual('June 25, 1987');
@@ -350,7 +363,7 @@ describe('Item Form', function() {
             request.response(formResponse);
 
             // Check the inputs for the correct values.
-            expect(form.itemform('getAttr', 'title').val()).toEqual('Test Title');
+            expect(form.itemform('getAttr', 'title').val()).toEqual('Test Title 1');
             expect(form.itemform('getAttr', 'slug').val()).toEqual('test-slug');
             expect(form.itemform('getAttr', 'description').val()).toEqual('Test description.');
             expect(form.itemform('getAttr', 'startDate').val()).toEqual('June 25, 1987');

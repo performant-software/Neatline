@@ -102,6 +102,7 @@
             this.ambiguity =                this.form.find('.date-ambiguity-container');
             this.mapFocus =                 this.form.find('.map-focus');
             this.resetStyles =              this.form.find('.reset-styles');
+            this.parentRecord =             this.form.find('select[name="parent-record"]');
             this.titleDescriptionFieldset = this.form.find('a.fieldset.title-and-description');
             this.dateInformationFieldset =  this.form.find('a.fieldset.date-information');
             this.mapStylesFieldset =        this.form.find('a.fieldset.map-styles');
@@ -675,6 +676,16 @@
             this.highlightColor.miniColors('value', this._data.highlight_color);
             this._opened = false;
 
+            // Populate the non parent record option.
+            var noneOption = $('<option />').val('none').text('-');
+            this.parentRecord.append(noneOption);
+
+            // Populate the rest of the list.
+            _.each(this._data.records, _.bind(function(val, key) {
+                var option = $('<option />').val(key).text(val);
+                this.parentRecord.append(option);
+            }, this));
+
         },
 
         /*
@@ -682,7 +693,7 @@
          */
         _clearData: function() {
 
-            // Populate inputs.
+            // Clear inputs.
             this.title.val('');
             this.slug.val('');
             this.vectorColor.val('');
@@ -694,6 +705,7 @@
             this.endVisibleDate.val('');
             this.description.val('');
             this.descriptionEditor.updateFrame();
+            this.parentRecord.empty();
 
             // Push the new color onto the picker. Need to set the global
             // _opened tracker to circumvent miniColors' automatic firing of
@@ -730,6 +742,7 @@
             data.stroke_opacity =           parseInt(this.strokeOpacity.val(), 10);
             data.stroke_width =             parseInt(this.strokeWidth.val(), 10);
             data.point_radius =             parseInt(this.pointRadius.val(), 10);
+            data.parent_record =            parseInt(this.parentRecord.val(), 10);
 
             return data;
 

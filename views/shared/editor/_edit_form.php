@@ -222,13 +222,12 @@
         <div class="fieldset">
 
             <div class="clearfix">
-                <label>Parent Item</label>
+                <label>Parent Record</label>
                 <div class="input">
                     <div class="inline-inputs">
-                        <select name="base-layer">
-                            <option value="test">-</option>
+                        <select name="parent-record">
                         </select>
-                        <span class="help-inline">Set a custom map focus for the item.</span>
+                        <span class="help-inline">If a parent record is set, this record will inherit the visibility dates and map styles of the parent.</span>
                     </div>
                 </div>
             </div>

@@ -1563,87 +1563,31 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         $record->save();
 
         // Ping the method for the json.
-        $json = $record->buildEditFormJson();
+        $json = json_decode($record->buildEditFormJson());
 
-        // Check the construction.
-        $this->assertContains(
-            '"title":"' . self::$__testParams['title'] . '"',
-            $json
-        );
-
-        $this->assertContains(
-            '"slug":"' . self::$__testParams['slug'] . '"',
-            $json
-        );
-
-        $this->assertContains(
-            '"description":"' . self::$__testParams['description'] . '"',
-            $json
-        );
-
-        $this->assertContains(
-            '"start_date":"' . self::$__testParams['start_date'] . '"',
-            $json
-        );
-
-        $this->assertContains(
-            '"end_date":"' . self::$__testParams['end_date'] . '"',
-            $json
-        );
-
-        $this->assertContains(
-            '"start_visible_date":"' . self::$__testParams['start_visible_date'] . '"',
-            $json
-        );
-
-        $this->assertContains(
-            '"end_visible_date":"' . self::$__testParams['end_visible_date'] . '"',
-            $json
-        );
-
-        $this->assertContains(
-            '"left_percent":' . self::$__testParams['left_percent'],
-            $json
-        );
-
-        $this->assertContains(
-            '"right_percent":' . self::$__testParams['right_percent'],
-            $json
-        );
-
-        $this->assertContains(
-            '"vector_color":"' . self::$__testParams['vector_color'] . '"',
-            $json
-        );
-
-        $this->assertContains(
-            '"stroke_color":"' . self::$__testParams['stroke_color'] . '"',
-            $json
-        );
-
-        $this->assertContains(
-            '"highlight_color":"' . self::$__testParams['highlight_color'] . '"',
-            $json
-        );
-
-        $this->assertContains(
-            '"vector_opacity":' . self::$__testParams['vector_opacity'],
-            $json
-        );
-
-        $this->assertContains(
-            '"stroke_opacity":' . self::$__testParams['stroke_opacity'],
-            $json
-        );
-
-        $this->assertContains(
-            '"stroke_width":' . self::$__testParams['stroke_width'],
-            $json
-        );
-
-        $this->assertContains(
-            '"point_radius":' . self::$__testParams['point_radius'],
-            $json
+        $this->assertEquals(
+            $json,
+            (object) array(
+                'title' => self::$__testParams['title'],
+                'slug' => self::$__testParams['slug'],
+                'description' => self::$__testParams['description'],
+                'vector_color' => self::$__testParams['vector_color'],
+                'stroke_color' => self::$__testParams['stroke_color'],
+                'highlight_color' => self::$__testParams['highlight_color'],
+                'vector_opacity' => self::$__testParams['vector_opacity'],
+                'stroke_opacity' => self::$__testParams['stroke_opacity'],
+                'stroke_width' => self::$__testParams['stroke_width'],
+                'point_radius' => self::$__testParams['point_radius'],
+                'start_date' => self::$__testParams['start_date'],
+                'end_date' => self::$__testParams['end_date'],
+                'start_visible_date' => self::$__testParams['start_visible_date'],
+                'end_visible_date' => self::$__testParams['end_visible_date'],
+                'left_percent' => self::$__testParams['left_percent'],
+                'right_percent' => self::$__testParams['right_percent'],
+                'records' => (object) array(
+                    $record->id => self::$__testParams['title']
+                )
+            )
         );
 
     }
