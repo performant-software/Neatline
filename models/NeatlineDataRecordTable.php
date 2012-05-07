@@ -315,6 +315,31 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
 
     }
 
+    /**
+     * Get all records associated with a given exhibit and return
+     * an array of id => title associations.
+     *
+     * @param Omeka_record $exhibit The exhibit record.
+     *
+     * @return array The id => title array.
+     */
+    public function getRecordsForSelect($exhibit)
+    {
+
+        $idToTitle = array();
+
+        // Get all records in the exhibit.
+        $records = $this->getRecordsByExhibit($exhibit);
+
+        // Build array.
+        foreach ($records as $record) {
+            $idToTitle[$record->id] = $record->title;
+        }
+
+        return $idToTitle;
+
+    }
+
 
     /**
      * JSON constructors.

@@ -276,6 +276,38 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
     }
 
     /**
+     * getRecordsForSelect() should return an array of id => title with each
+     * of the records in the exhibit.
+     *
+     * @return void.
+     */
+    public function testGetRecordsForSelect()
+    {
+
+        // Create exhibit.
+        $exhibit = $this->helper->_createNeatline();
+        $record1 = new NeatlineDataRecord(null, $exhibit);
+        $record1->title = 'Title 1';
+        $record1->save();
+        $record2 = new NeatlineDataRecord(null, $exhibit);
+        $record2->title = 'Title 2';
+        $record2->save();
+
+        // Build array.
+        $idToTitle = $this->_recordsTable->getRecordsForSelect($exhibit);
+
+        // Check structure.
+        $this->assertEquals(
+            $idToTitle,
+            array(
+                $record1->id => 'Title 1',
+                $record2->id => 'Title 2',
+            )
+        );
+
+    }
+
+    /**
      * saveRecordStatus() should create a new record when there when there
      * is no existing record.
      *
