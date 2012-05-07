@@ -47,7 +47,8 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         'right_percent' => 100,
         'geocoverage' => '[POINT(-1.0, 1.0)]',
         'space_active' => true,
-        'time_active' => true
+        'time_active' => true,
+        'parent_record_id' => 1
     );
 
     /**
@@ -1564,6 +1565,39 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
     }
 
     /**
+     * The getParentRecordId() method should return 'none' when the parent record
+     * id key is null.
+     *
+     * @return void.
+     */
+    public function testGetParentRecordIdWhenKeyIsNull()
+    {
+
+        // Create an exhibit and a record.
+        $exhibit = $this->helper->_createNeatline();
+        $record = new NeatlineDataRecord(null, $exhibit);
+        $this->assertEquals($record->getParentRecordId(), 'none');
+
+    }
+
+    /**
+     * The getParentRecordId() method should return the parent record id key
+     * when the key is non-null.
+     *
+     * @return void.
+     */
+    public function testGetParentRecordIdWhenKeyIsNotNull()
+    {
+
+        // Create an exhibit and a record.
+        $exhibit = $this->helper->_createNeatline();
+        $record = new NeatlineDataRecord(null, $exhibit);
+        $record->parent_record_id = 1;
+        $this->assertEquals($record->getParentRecordId(), 1);
+
+    }
+
+    /**
      * The buildEditFormJson() method should construct a JSON object to populate
      * the record edit form in the editor.
      *
@@ -1580,6 +1614,7 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         $record->title =                self::$__testParams['title'];
         $record->slug =                 self::$__testParams['slug'];
         $record->description =          self::$__testParams['description'];
+        $record->parent_record_id =     self::$__testParams['parent_record_id'];
         $record->start_date =           self::$__testParams['start_date'];
         $record->end_date =             self::$__testParams['end_date'];
         $record->start_visible_date =   self::$__testParams['start_visible_date'];
@@ -1620,6 +1655,7 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
                 'end_visible_date' =>   self::$__testParams['end_visible_date'],
                 'left_percent' =>       self::$__testParams['left_percent'],
                 'right_percent' =>      self::$__testParams['right_percent'],
+                'parent_record_id' =>   self::$__testParams['parent_record_id'],
                 'records' => (object) array(
                     $record->id =>      self::$__testParams['title']
                 )
@@ -1644,6 +1680,7 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         $record->title =                self::$__testParams['title'];
         $record->slug =                 self::$__testParams['slug'];
         $record->description =          self::$__testParams['description'];
+        $record->parent_record_id =     self::$__testParams['parent_record_id'];
         $record->start_date =           self::$__testParams['start_date'];
         $record->end_date =             self::$__testParams['end_date'];
         $record->start_visible_date =   self::$__testParams['start_visible_date'];
@@ -1684,6 +1721,7 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
                 'end_visible_date' =>   self::$__testParams['end_visible_date'],
                 'left_percent' =>       self::$__testParams['left_percent'],
                 'right_percent' =>      self::$__testParams['right_percent'],
+                'parent_record_id' =>   self::$__testParams['parent_record_id'],
                 'records' => (object) array(
                     $record->id =>      self::$__testParams['title']
                 )
@@ -1790,6 +1828,13 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
             '"point_radius":' . (int) get_option('point_radius'),
             $json
         );
+
+        $this->assertContains(
+            '"parent_record_id":"none"',
+            $json
+        );
+
+
 
     }
 

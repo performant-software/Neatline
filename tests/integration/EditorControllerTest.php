@@ -561,6 +561,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $record->title =                self::$__testParams['title'];
         $record->slug =                 self::$__testParams['slug'];
         $record->description =          self::$__testParams['description'];
+        $record->parent_record_id =     self::$__testParams['parent_record_id'];
         $record->start_date =           self::$__testParams['start_date'];
         $record->end_date =             self::$__testParams['end_date'];
         $record->start_visible_date =   self::$__testParams['start_visible_date'];
@@ -614,6 +615,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
                 'end_visible_date' => self::$__testParams['end_visible_date'],
                 'left_percent' => self::$__testParams['left_percent'],
                 'right_percent' => self::$__testParams['right_percent'],
+                'parent_record_id' => self::$__testParams['parent_record_id'],
                 'records' => (object) array(
                     $record->id => self::$__testParams['title']
                 )
@@ -670,6 +672,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
                 'start_visible_date' => '',
                 'end_visible_date' => '',
                 'slug' => '',
+                'parent_record_id' => 'none',
                 'records' => (object) array(
                     $record->id => ''
                 ),
@@ -739,6 +742,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
                 'start_visible_date' => '',
                 'end_visible_date' => '',
                 'slug' => '',
+                'parent_record_id' => 'none',
                 'records' => array(),
                 'title' => 'Test Title',
                 'description' => 'Test description.'

@@ -686,6 +686,9 @@
                 this.parentRecord.append(option);
             }, this));
 
+            // Set the value.
+            this.parentRecord.val(this._data.parent_record_id);
+
         },
 
         /*

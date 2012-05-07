@@ -212,6 +212,7 @@ class NeatlineDataRecord extends Omeka_record
         $data['end_visible_date'] =     (string) $this->end_visible_date;
         $data['left_percent'] =         (int) $this->getLeftPercent();
         $data['right_percent'] =        (int) $this->getRightPercent();
+        $data['parent_record_id'] =     $this->getParentRecordId();
         $data['records'] =              $records;
 
         // JSON-ify the array.
@@ -253,6 +254,7 @@ class NeatlineDataRecord extends Omeka_record
         $data['start_visible_date'] =   '';
         $data['end_visible_date'] =     '';
         $data['slug'] =                 '';
+        $data['parent_record_id'] =     'none';
         $data['records'] =              $records;
 
         // Get DC title default.
@@ -864,6 +866,28 @@ class NeatlineDataRecord extends Omeka_record
         // Return '' if no local or parent data.
         else {
             return '';
+        }
+
+    }
+
+    /**
+     * Get the parent record id.
+     *
+     * @param integer $id The id.
+     *
+     * @return mixed 'none' if the id is null, otherwise the id.
+     */
+    public function getParentRecordId()
+    {
+
+        // If 'none' is passed, null out the key.
+        if (is_null($this->parent_record_id)) {
+            return 'none';
+        }
+
+        // Otherwise, set integer key.
+        else {
+            return $this->parent_record_id;
         }
 
     }
