@@ -19,7 +19,6 @@ describe('Item Browser', function() {
 
         // Get container and set dimensions.
         browser = $('#item-browser');
-        console.log(browser);
 
         // Install AJAX mock.
         jasmine.Ajax.useMock();

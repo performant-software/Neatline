@@ -49,13 +49,12 @@ describe('Neatline Items', function() {
 
         it('should load items', function() {
 
+            console.log(container);
+
             // Check for markup presence.
             expect(container).not.toBeEmpty();
-            expect(container).toContain($('ul'));
-            expect(container).toContain($('ul li.item-title[recordid="1"]'));
-            expect(container).toContain($('ul li.item-title[recordid="2"]'));
-            expect(container).toContain($('ul li.item-title[recordid="3"]'));
-            expect(container).toContain($('ul li.item-title[recordid="4"]'));
+            expect(container.find('li.item-title').length).toEqual(4);
+            expect(container.find('li.item-description').length).toEqual(4);
 
         });
 
