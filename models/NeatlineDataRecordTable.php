@@ -332,8 +332,10 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
         $records = $this->getRecordsByExhibit($exhibit);
 
         // Build array.
-        foreach ($records as $record) {
-            $idToTitle[$record->id] = $record->title;
+        if ($records) {
+            foreach ($records as $record) {
+                $idToTitle[$record->id] = $record->title;
+            }
         }
 
         return $idToTitle;

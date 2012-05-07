@@ -591,80 +591,32 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->dispatch('neatline-exhibits/editor/ajax/form');
         $response = $this->getResponse()->getBody('default');
 
-        // Test the construction.
-        $this->assertContains(
-            '"title":"' . self::$__testParams['title'] . '"',
-            $response
-        );
+        // Ping the method for the json.
+        $json = json_decode($response);
 
-        $this->assertContains(
-            '"slug":"' . self::$__testParams['slug'] . '"',
-            $response
-        );
-
-        $this->assertContains(
-            '"description":"' . self::$__testParams['description'] . '"',
-            $response
-        );
-
-        $this->assertContains(
-            '"start_date":"' . self::$__testParams['start_date'] . '"',
-            $response
-        );
-
-        $this->assertContains(
-            '"end_date":"' . self::$__testParams['end_date'] . '"',
-            $response
-        );
-
-        $this->assertContains(
-            '"start_visible_date":"' . self::$__testParams['start_visible_date'] . '"',
-            $response
-        );
-
-        $this->assertContains(
-            '"end_visible_date":"' . self::$__testParams['end_visible_date'] . '"',
-            $response
-        );
-
-        $this->assertContains(
-            '"left_percent":' . self::$__testParams['left_percent'],
-            $response
-        );
-
-        $this->assertContains(
-            '"right_percent":' . self::$__testParams['right_percent'],
-            $response
-        );
-
-        $this->assertContains(
-            '"vector_color":"' . self::$__testParams['vector_color'] . '"',
-            $response
-        );
-
-        $this->assertContains(
-            '"stroke_color":"' . self::$__testParams['stroke_color'] . '"',
-            $response
-        );
-
-        $this->assertContains(
-            '"highlight_color":"' . self::$__testParams['highlight_color'] . '"',
-            $response
-        );
-
-        $this->assertContains(
-            '"vector_opacity":' . self::$__testParams['vector_opacity'],
-            $response
-        );
-
-        $this->assertContains(
-            '"stroke_width":' . self::$__testParams['stroke_width'],
-            $response
-        );
-
-        $this->assertContains(
-            '"point_radius":' . self::$__testParams['point_radius'],
-            $response
+        $this->assertEquals(
+            $json,
+            (object) array(
+                'title' => self::$__testParams['title'],
+                'slug' => self::$__testParams['slug'],
+                'description' => self::$__testParams['description'],
+                'vector_color' => self::$__testParams['vector_color'],
+                'stroke_color' => self::$__testParams['stroke_color'],
+                'highlight_color' => self::$__testParams['highlight_color'],
+                'vector_opacity' => self::$__testParams['vector_opacity'],
+                'stroke_opacity' => self::$__testParams['stroke_opacity'],
+                'stroke_width' => self::$__testParams['stroke_width'],
+                'point_radius' => self::$__testParams['point_radius'],
+                'start_date' => self::$__testParams['start_date'],
+                'end_date' => self::$__testParams['end_date'],
+                'start_visible_date' => self::$__testParams['start_visible_date'],
+                'end_visible_date' => self::$__testParams['end_visible_date'],
+                'left_percent' => self::$__testParams['left_percent'],
+                'right_percent' => self::$__testParams['right_percent'],
+                'records' => (object) array(
+                    $record->id => self::$__testParams['title']
+                )
+            )
         );
 
     }
@@ -682,6 +634,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $item = $this->helper->_createItem();
         $neatline = $this->helper->_createNeatline();
         $record = new NeatlineDataRecord($item, $neatline);
+        $record->save();
 
         // Form the POST for a space change.
         $this->request->setMethod('GET')
@@ -696,75 +649,32 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->dispatch('neatline-exhibits/editor/ajax/form');
         $response = $this->getResponse()->getBody('default');
 
-        // Test the construction.
-        $this->assertContains(
-            '"title":""',
-            $response
-        );
+        // Ping the method for the json.
+        $json = json_decode($response);
 
-        $this->assertContains(
-            '"slug":""',
-            $response
-        );
-
-        $this->assertContains(
-            '"description":""',
-            $response
-        );
-
-        $this->assertContains(
-            '"start_date":""',
-            $response
-        );
-
-        $this->assertContains(
-            '"end_date":""',
-            $response
-        );
-
-        $this->assertContains(
-            '"start_visible_date":""',
-            $response
-        );
-
-        $this->assertContains(
-            '"end_visible_date":""',
-            $response
-        );
-
-        $this->assertContains(
-            '"right_percent":100',
-            $response
-        );
-
-        $this->assertContains(
-            '"vector_color":"' . get_option('vector_color') . '"',
-            $response
-        );
-
-        $this->assertContains(
-            '"stroke_color":"' . get_option('stroke_color') . '"',
-            $response
-        );
-
-        $this->assertContains(
-            '"highlight_color":"' . get_option('highlight_color') . '"',
-            $response
-        );
-
-        $this->assertContains(
-            '"vector_opacity":' . get_option('vector_opacity'),
-            $response
-        );
-
-        $this->assertContains(
-            '"stroke_width":' . get_option('stroke_width'),
-            $response
-        );
-
-        $this->assertContains(
-            '"point_radius":' . get_option('point_radius'),
-            $response
+        $this->assertEquals(
+            $json,
+            (object) array(
+                'vector_color' => get_option('vector_color'),
+                'stroke_color' => get_option('stroke_color'),
+                'highlight_color' => get_option('highlight_color'),
+                'vector_opacity' => get_option('vector_opacity'),
+                'stroke_opacity' => get_option('stroke_opacity'),
+                'stroke_width' => get_option('stroke_width'),
+                'point_radius' => get_option('point_radius'),
+                'left_percent' => 0,
+                'right_percent' => 100,
+                'start_date' =>'',
+                'end_date' => '',
+                'start_visible_date' => '',
+                'end_visible_date' => '',
+                'slug' => '',
+                'records' => (object) array(
+                    $record->id => ''
+                ),
+                'title' => '',
+                'description' => ''
+            )
         );
 
     }
@@ -808,75 +718,30 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->dispatch('neatline-exhibits/editor/ajax/form');
         $response = $this->getResponse()->getBody('default');
 
-        // Check for proper construction.
-        $this->assertContains(
-            '"title":"Test Title"',
-            $response
-        );
+        // Ping the method for the json.
+        $json = json_decode($response);
 
-        $this->assertContains(
-            '"description":"Test description."',
-            $response
-        );
-
-        $this->assertContains(
-            '"start_date":""',
-            $response
-        );
-
-        $this->assertContains(
-            '"end_date":""',
-            $response
-        );
-
-        $this->assertContains(
-            '"start_visible_date":""',
-            $response
-        );
-
-        $this->assertContains(
-            '"end_visible_date":""',
-            $response
-        );
-
-        $this->assertContains(
-            '"left_percent":0',
-            $response
-        );
-
-        $this->assertContains(
-            '"right_percent":100',
-            $response
-        );
-
-        $this->assertContains(
-            '"vector_color":"' . get_option('vector_color') . '"',
-            $response
-        );
-
-        $this->assertContains(
-            '"stroke_color":"' . get_option('stroke_color') . '"',
-            $response
-        );
-
-        $this->assertContains(
-            '"highlight_color":"' . get_option('highlight_color') . '"',
-            $response
-        );
-
-        $this->assertContains(
-            '"vector_opacity":' . get_option('vector_opacity'),
-            $response
-        );
-
-        $this->assertContains(
-            '"stroke_width":' . get_option('stroke_width'),
-            $response
-        );
-
-        $this->assertContains(
-            '"point_radius":' . get_option('point_radius'),
-            $response
+        $this->assertEquals(
+            $json,
+            (object) array(
+                'vector_color' => get_option('vector_color'),
+                'stroke_color' => get_option('stroke_color'),
+                'highlight_color' => get_option('highlight_color'),
+                'vector_opacity' => get_option('vector_opacity'),
+                'stroke_opacity' => get_option('stroke_opacity'),
+                'stroke_width' => get_option('stroke_width'),
+                'point_radius' => get_option('point_radius'),
+                'left_percent' => 0,
+                'right_percent' => 100,
+                'start_date' =>'',
+                'end_date' => '',
+                'start_visible_date' => '',
+                'end_visible_date' => '',
+                'slug' => '',
+                'records' => array(),
+                'title' => 'Test Title',
+                'description' => 'Test description.'
+            )
         );
 
     }

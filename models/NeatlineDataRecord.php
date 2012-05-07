@@ -223,14 +223,20 @@ class NeatlineDataRecord extends Omeka_record
      * Construct a starting attribute set for an Omeka-item-based record.
      *
      * @param Omeka_record $item The item record.
+     * @param Omeka_record $exhibit The exhibit record.
      *
      * @return JSON The data.
      */
-    public static function buildEditFormForNewRecordJson($item)
+    public static function buildEditFormForNewRecordJson($item, $exhibit)
     {
 
         // Shell out the array.
         $data = array();
+
+        // Get parent record select list.
+        $_db = get_db();
+        $_recordsTable = $_db->getTable('NeatlineDataRecord');
+        $records = $_recordsTable->getRecordsForSelect($exhibit);
 
         // Set the array values.
         $data['vector_color'] =         get_option('vector_color');
@@ -247,6 +253,7 @@ class NeatlineDataRecord extends Omeka_record
         $data['start_visible_date'] =   '';
         $data['end_visible_date'] =     '';
         $data['slug'] =                 '';
+        $data['records'] =              $records;
 
         // Get DC title default.
         $data['title'] = neatline_getItemMetadata(

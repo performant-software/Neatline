@@ -132,7 +132,7 @@ class Neatline_EditorController extends Omeka_Controller_Action
             $item = $this->_itemsTable->find($itemId);
 
             // Output the JSON string.
-            echo NeatlineDataRecord::buildEditFormForNewRecordJson($item);
+            echo NeatlineDataRecord::buildEditFormForNewRecordJson($item, $neatline);
 
         }
 

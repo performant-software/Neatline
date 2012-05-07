@@ -270,7 +270,8 @@ describe('Item Form', function() {
                     vector_opacity: 40,
                     stroke_opacity: 40,
                     stroke_width: 5,
-                    point_radius: 6
+                    point_radius: 6,
+                    parent_record: 2
                 }
             });
 
@@ -296,7 +297,7 @@ describe('Item Form', function() {
             expect(form.itemform('getAttr', 'strokeOpacity').val()).toEqual('40');
             expect(form.itemform('getAttr', 'strokeWidth').val()).toEqual('5');
             expect(form.itemform('getAttr', 'pointRadius').val()).toEqual('6');
-
+            expect(form.itemform('getAttr', 'parentRecord').val()).toEqual('2');
 
         });
 
@@ -339,7 +340,8 @@ describe('Item Form', function() {
                     vector_opacity: 40,
                     stroke_opacity: 40,
                     stroke_width: 5,
-                    point_radius: 6
+                    point_radius: 6,
+                    parent_record: 2
                 }
             });
 
@@ -395,7 +397,8 @@ describe('Item Form', function() {
                     vector_opacity: 40,
                     stroke_opacity: 40,
                     stroke_width: 5,
-                    point_radius: 6
+                    point_radius: 6,
+                    parent_record: 2
                 }
             });
 
