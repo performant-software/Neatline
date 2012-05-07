@@ -771,6 +771,42 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
     }
 
     /**
+     * If 'none' is passed to setParentRecordId, set the id as null.
+     *
+     * @return void.
+     */
+    public function testSetParentRecordIdWithNullId()
+    {
+
+        // Create a record.
+        $exhibit = $this->helper->_createNeatline();
+        $record = new NeatlineDataRecord(null, $exhibit);
+
+        // Set.
+        $record->setParentRecordId('none');
+        $this->assertNull($record->parent_record_id);
+
+    }
+
+    /**
+     * If an integer is passed to setParentRecordId, set the id.
+     *
+     * @return void.
+     */
+    public function testSetParentRecordIdWithNonNullId()
+    {
+
+        // Create a record.
+        $exhibit = $this->helper->_createNeatline();
+        $record = new NeatlineDataRecord(null, $exhibit);
+
+        // Set.
+        $record->setParentRecordId(1);
+        $this->assertEquals($record->parent_record_id, 1);
+
+    }
+
+    /**
      * getStyle() should return a set row value when one exists and
      * there is not an exhibit default.
      *
