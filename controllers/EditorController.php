@@ -158,6 +158,7 @@ class Neatline_EditorController extends Omeka_Controller_Action
         $itemId =                   json_decode($_post['item_id']);
         $recordId =                 json_decode($_post['record_id']);
         $exhibitId =                json_decode($_post['exhibit_id']);
+        $parentRecordId =           (int) $_post['parent_record_id'];
         $title =                    $_post['title'];
         $slug =                     $_post['slug'];
         $description =              $_post['description'];
@@ -215,6 +216,9 @@ class Neatline_EditorController extends Omeka_Controller_Action
         $record->setStyle('stroke_width', $strokeWidth);
         $record->setStyle('point_radius', $pointRadius);
         $record->setPercentages($leftPercent, $rightPercent);
+
+        // Set parent record id.
+        $record->setParentRecordId($parentRecordId);
 
         // If there is novel coverage data, flip on the status.
         if (is_null($originalCoverage) && !is_null($record->geocoverage)) {

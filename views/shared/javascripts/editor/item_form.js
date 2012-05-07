@@ -742,7 +742,7 @@
             data.stroke_opacity =           parseInt(this.strokeOpacity.val(), 10);
             data.stroke_width =             parseInt(this.strokeWidth.val(), 10);
             data.point_radius =             parseInt(this.pointRadius.val(), 10);
-            data.parent_record =            parseInt(this.parentRecord.val(), 10);
+            data.parent_record_id =         parseInt(this.parentRecord.val(), 10);
 
             return data;
 

@@ -480,6 +480,28 @@ class NeatlineDataRecord extends Omeka_record
     }
 
     /**
+     * Set the parent record id.
+     *
+     * @param integer $id The id.
+     *
+     * @return void.
+     */
+    public function setParentRecordId($id)
+    {
+
+        // If 'none' is passed, null out the key.
+        if ($id == 'none') {
+            $this->parent_record_id = null;
+        }
+
+        // Otherwise, set integer key.
+        else {
+            $this->parent_record_id = $id;
+        }
+
+    }
+
+    /**
      * Set all style attributes to null.
      *
      * @return void.
