@@ -546,6 +546,11 @@ class NeatlineDataRecord extends Omeka_record
             return $this[$style];
         }
 
+        // If there is a parent record value.
+        else if (!is_null($this->parent_record_id)) {
+            return $this->getParentRecord()->getStyle($style);
+        }
+
         // If there is an exhibit default
         else if (!is_null($exhibit['default_' . $style])) {
             return $exhibit['default_' . $style];

@@ -677,11 +677,12 @@
             this._opened = false;
 
             // Populate the non parent record option.
+            this.parentRecord.empty();
             var noneOption = $('<option />').val('none').text('-');
             this.parentRecord.append(noneOption);
 
             // Populate the rest of the list.
-            _.each(this._data.records, _.bind(function(val, key) {
+            _.each(this._records, _.bind(function(val, key) {
                 var option = $('<option />').val(key).text(val);
                 this.parentRecord.append(option);
             }, this));
@@ -805,6 +806,7 @@
 
             // If there is unsaved data, reapply it.
             if (unsavedData) {
+                console.log(unsavedData);
                 this._data = unsavedData.data;
                 this._applyData();
                 this._enableButtons();
@@ -828,6 +830,7 @@
 
                         // Push the data into the form.
                         self._data = data;
+                        self._records = data.records;
                         self._applyData();
 
                         // Enable the save and delete buttons.

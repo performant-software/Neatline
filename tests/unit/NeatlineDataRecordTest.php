@@ -940,6 +940,42 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
     }
 
     /**
+     * getStyle() should return the parent record value when there is no
+     * row value.
+     *
+     * @return void.
+     */
+    public function testGetStyleWithNoRowValueAndParentRecordValue()
+    {
+
+        // Create parent record.
+        $exhibit = $this->helper->_createNeatline();
+        $record1 = new NeatlineDataRecord(null, $exhibit);
+        $record1->vector_color = '#ffffff';
+        $record1->vector_opacity = 20;
+        $record1->stroke_color = '#000000';
+        $record1->stroke_opacity = 20;
+        $record1->stroke_width = 20;
+        $record1->point_radius = 20;
+        $record1->highlight_color = '#f0f0f0';
+        $record1->save();
+
+        $record2 = new NeatlineDataRecord(null, $exhibit);
+        $record2->parent_record_id = $record1->id;
+        $record2->save();
+
+        // Get and check.
+        $this->assertEquals($record2->getStyle('vector_color'), '#ffffff');
+        $this->assertEquals($record2->getStyle('vector_opacity'), 20);
+        $this->assertEquals($record2->getStyle('stroke_color'), '#000000');
+        $this->assertEquals($record2->getStyle('stroke_opacity'), 20);
+        $this->assertEquals($record2->getStyle('stroke_width'), 20);
+        $this->assertEquals($record2->getStyle('point_radius'), 20);
+        $this->assertEquals($record2->getStyle('highlight_color'), '#f0f0f0');
+
+    }
+
+    /**
      * The getTitle() method should return the record title attribute when it
      * is not null; if it is null, try to default in the DC value.
      *
