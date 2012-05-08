@@ -150,8 +150,7 @@
 }
 
 #items-list-container td.item-title {
-    padding-left: 20px;
-    padding-right: 0;
+    padding: 7px 0 7px 20px;
     white-space: nowrap;
     overflow: hidden;
 }
