@@ -213,6 +213,7 @@ describe('Item Form', function() {
             expect(form.itemform('getAttr', 'strokeOpacity').val()).toEqual('80');
             expect(form.itemform('getAttr', 'strokeWidth').val()).toEqual('3');
             expect(form.itemform('getAttr', 'pointRadius').val()).toEqual('5');
+            expect(form.itemform('getAttr', 'parentRecord').val()).toEqual('2');
 
             // Check parent item select.
             var parentRecord = form.itemform('getAttr', 'parentRecord');
@@ -250,6 +251,7 @@ describe('Item Form', function() {
             expect(form.itemform('getAttr', 'strokeOpacity').val()).toEqual('80');
             expect(form.itemform('getAttr', 'strokeWidth').val()).toEqual('3');
             expect(form.itemform('getAttr', 'pointRadius').val()).toEqual('5');
+            expect(form.itemform('getAttr', 'parentRecord').val()).toEqual('2');
 
             // Insert local data record for the item record.
             form.itemform('insertLocalData', {
@@ -271,7 +273,7 @@ describe('Item Form', function() {
                     stroke_opacity: 40,
                     stroke_width: 5,
                     point_radius: 6,
-                    parent_record: 2
+                    parent_record_id: 3
                 }
             });
 
@@ -297,7 +299,7 @@ describe('Item Form', function() {
             expect(form.itemform('getAttr', 'strokeOpacity').val()).toEqual('40');
             expect(form.itemform('getAttr', 'strokeWidth').val()).toEqual('5');
             expect(form.itemform('getAttr', 'pointRadius').val()).toEqual('6');
-            expect(form.itemform('getAttr', 'parentRecord').val()).toEqual('2');
+            expect(form.itemform('getAttr', 'parentRecord').val()).toEqual('3');
 
         });
 
@@ -322,6 +324,7 @@ describe('Item Form', function() {
             expect(form.itemform('getAttr', 'strokeOpacity').val()).toEqual('80');
             expect(form.itemform('getAttr', 'strokeWidth').val()).toEqual('3');
             expect(form.itemform('getAttr', 'pointRadius').val()).toEqual('5');
+            expect(form.itemform('getAttr', 'parentRecord').val()).toEqual('2');
 
             // Insert local data record for the item record.
             form.itemform('insertLocalData', {
@@ -341,7 +344,7 @@ describe('Item Form', function() {
                     stroke_opacity: 40,
                     stroke_width: 5,
                     point_radius: 6,
-                    parent_record: 2
+                    parent_record_id: 3
                 }
             });
 
@@ -379,6 +382,7 @@ describe('Item Form', function() {
             expect(form.itemform('getAttr', 'strokeOpacity').val()).toEqual('80');
             expect(form.itemform('getAttr', 'strokeWidth').val()).toEqual('3');
             expect(form.itemform('getAttr', 'pointRadius').val()).toEqual('5');
+            expect(form.itemform('getAttr', 'parentRecord').val()).toEqual('2');
 
             // Insert local data record for the item record.
             form.itemform('insertLocalData', {
@@ -398,7 +402,7 @@ describe('Item Form', function() {
                     stroke_opacity: 40,
                     stroke_width: 5,
                     point_radius: 6,
-                    parent_record: 2
+                    parent_record_id: 3
                 }
             });
 

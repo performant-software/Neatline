@@ -323,6 +323,7 @@ class Neatline_FixtureBuilderTest extends Omeka_Test_AppTestCase
         $record1->point_radius = 5;
         $record1->exhibit_id = $exhibit->id;
         $record1->space_active = 1;
+        $record1->parent_record_id = 2;
         $record1->save();
 
         // Mock records for parent record select.
