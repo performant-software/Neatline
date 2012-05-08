@@ -806,7 +806,6 @@
 
             // If there is unsaved data, reapply it.
             if (unsavedData) {
-                console.log(unsavedData);
                 this._data = unsavedData.data;
                 this._applyData();
                 this._enableButtons();
