@@ -223,11 +223,11 @@ When you're done annotating the item, click the blue "Save" button at the bottom
 
 You can edit the map annotation for a record at any point.
 
-  1. Open the edit form the record that you want to change. This can be done either by clicking directly on on the title of the record in the browser tray or by clicking on any of the record's representations on the map or timeline.
+  * Open the edit form the record that you want to change. This can be done either by clicking directly on on the title of the record in the browser tray or by clicking on any of the record's representations on the map or timeline.
 
-  2. To edit a point, line, or polygon on the map, click on the shape. The vector will be outlined in red and all points associated with it will expand to indicate that it is ready for editing. 
+  * To edit a point, line, or polygon on the map, click on the shape. The vector will be outlined in red and all points associated with it will expand to indicate that it is ready for editing. 
 
-  3. Once the shape is selected, you can toggle on and off any of the three editing modes - Drag, Rotate, and Scale.
+  * Once the shape is selected, you can toggle on and off any of the three editing modes - Drag, Rotate, and Scale.
 
     * **Drag**: When Drag is active, an extra point will appear at the geometric center of the shape. Click and drag on the point to drag the postion of the entire shape.
 
