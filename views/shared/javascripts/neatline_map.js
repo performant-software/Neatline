@@ -692,7 +692,24 @@
 
                 }
 
+                // If the record has a WMS layer.
+                if (_.has(record, 'wms')) {
+                    this._resetWmsZIndices();
+                    record.wms.setZIndex(1);
+                }
+
             }
+
+        },
+
+        /*
+         * Reset all of the z-indices on the WMS layers to 0.
+         */
+        _resetWmsZIndices: function() {
+
+            _.each(this.wmsLayers, function(layer) {
+                layer.setZIndex(0);
+            });
 
         },
 
