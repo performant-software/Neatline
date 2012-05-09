@@ -162,17 +162,15 @@ Records have these fields:
 
   * Start and End Dates
 
-    * **Start Date**: The start date of the object, event, or concept represented by the record. This is the only field that is required in order for the record to be displayed on the timeline. Dates must be entered in standard ISO8601 format.
-
-    * **Start Time**: The time of day of the start date.
+    * **Start Date**: The start date of the object, event, or concept represented by the record. This is the only field that is required in order for the record to be displayed on the timeline. Dates must be entered in standard [ISO 8601][iso8601] format.
 
     * **End Date**: Same as start date. If an end date is entered, the record will be represented as a span (as opposed to a single point).
 
-    * **End Time**: Same as start time.
+    * **Start Visible Date**: If set, the representations of the record on the map and record description panel will only be displayed when the timeline is scrolled to a center position _after_ this date.
 
-  * Timeline Styles
+    * **End Visible Date**: If set, the representations of the record on the map and record description panel will only be displayed when the timeline is scrolled to a center position _before_ this date.
 
-    * **Date Ambiguity**: Especially in a humanistic context, the concept of time is often slippery and imprecise. Although Neatline does not aspire to do full justice to the nuance of the subject, the Date Ambiguity widget lets you drag out a gradient of uncertainty or fuzziness across a time interval. Drag the two controls handles inward to create an "ascent" and "descent" of intensity or certainty over the span; create a continuous increase or decrease by dragging both handles all the way to one side or the other. This is a simple control that just scratches the surface of temporal modeling, but it does allow you to avoid inadvertently making the incorrect impression that a period of time is fixed or definite when it in fact is not.
+    * **Date Ambiguity**: The date ambiguity widget lets you drag out a gradient of uncertainty or fuzziness across a time interval. Drag the two controls handles inward to fuzziness around the edges, or create a continuous increase or decrease by dragging both handles all the way to one side or the other.
 
   * Map Styles
 
@@ -197,6 +195,15 @@ Records have these fields:
       * To set a focus, adjust the map position and zoom to the exact configuration that you want to use as the default for the record, and then click the "Fix Item-Specific Map Focus" button to save the position.
 
       * **Note:** Neatline also makes it possible _just_ to set a focus position for a record, even if you haven't added any geometry for the record on the map. So, if there's a location on the map that's self-evident and doesn't need any interpretive shapes, lines, or points, you can use the item-specific focus to just "pin" the map to a particular viewport location and zoom level, which will then be retrieved and recreated whenver the user clicks on or scrolls to the record. 
+
+  * Relationships
+
+    * **Parent Record**: Any record can be assigned a parent record, which can be any other exhibit-specific or Omeka item-backed record present in the exhibit. When a parent record is defined, the child record will automatically inherit all of the styling and visibility settings of the parent. This makes it possible to create nested hierarcies of records that can be manipulated as a single batch in the exhibit. 
+
+    This makes it possible to group large collections of records into "batches" than can be manipulated as a group. For example, imagine that you have two subsets of 50 records and each of the two categories needs to be assigned a separate visual style on the map. It's possible to set exhibit-wide styling defaults in the "Map Settings" dropdown menu, but that's not helpful in this case, since you essentially need to model two "defaults," one for each of the categories. Instead of manually setting the styles individually on each of the records, you can just create two category records for each of the subsets, set the styling options on the master records, and then associate each of the child records with the appropriate parent record.
+
+    Likewise, parent-child relationships can be used to create
+temporal "contexts" inside a single exhibit. For example, if you're working with a collection of five historical maps of the same geographic region, it's important to be able to restrict map vectors and descriptive annotations to just one of the maps to avoid a confusing soup of overlapping shapes and annotations. Instead of manually setting the same the visiblity dates of each interpretive records, you can just set visiblity dates for each of the five map records and then point each of the descriptive records at one of the maps. This way, the maps will phase on and off of the exhibit in unison with the set of interpretive records that describe them.
 
 ### Plot Records on the Map
 
@@ -302,4 +309,4 @@ To create a custom ordering:
 [openstreetmap]: http://www.openstreetmap.org
 [filezilla]: http://filezilla-project.org/
 [neatline-download]: http://neatline.org/download
-
+[iso8601]: http://en.wikipedia.org/wiki/ISO_8601
