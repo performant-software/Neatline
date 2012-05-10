@@ -451,8 +451,8 @@
             this._db().each(_.bind(function(record) {
 
                 // Get record dates.
-                var start = moment(Date.parse(record.start_visible_date));
-                var end = moment(Date.parse(record.end_visible_date));
+                var start = moment(record.start_visible_date);
+                var end = moment(record.end_visible_date);
 
                 // If both are defined.
                 if (!_.isNull(start) && !_.isNull(end)) {

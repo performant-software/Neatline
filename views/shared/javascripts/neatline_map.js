@@ -637,8 +637,8 @@
             this._db().each(function(record) {
 
                 // Get record dates.
-                var start = moment(Date.parse(record.data.start_visible_date));
-                var end = moment(Date.parse(record.data.end_visible_date));
+                var start = moment(record.data.start_visible_date);
+                var end = moment(record.data.end_visible_date);
 
                 // If both are defined.
                 if (!_.isNull(start) && !_.isNull(end)) {

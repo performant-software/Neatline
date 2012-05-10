@@ -129,11 +129,13 @@
             // Set the starting width of the container.
             this.element.css('width', this.options.css.container_min_width);
 
+            // Update dimensions and set new height.
+            this._getDimensions();
+
             // Set static CSS parameters for the Neatline.
             this.neatlineContainer.css('top', this.topBarHeight);
 
-            // Update dimensions and set new height.
-            this._getDimensions();
+            console.log(this.topBarHeight);
 
             // Set the height of the main container.
             this.element.css({

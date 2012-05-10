@@ -548,11 +548,13 @@
                 textColor = this.options.colors.red;
             }
 
-            // Highlight the item title.
+            // Bold the title.
+            this.textSpan.css('font-weight', 'bold');
+
+            // Expand the title.
             this.textSpan.stop().animate({
                 'color': textColor,
-                'font-size': 14,
-                'font-weight': 'bold'
+                'font-size': 14
             }, 100);
 
         },
@@ -573,11 +575,13 @@
                 textWeight = 'bold';
             }
 
+            // Set text weight.
+            this.textSpan.css('font-weight', textWeight);
+
             // Highlight the item title.
             this.textSpan.stop().animate({
                 'color': textColor,
-                'font-size': this.options.css.default_text_size,
-                'font-weight': textWeight
+                'font-size': this.options.css.default_text_size
             }, 100);
 
         },
