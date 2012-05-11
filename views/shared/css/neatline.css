@@ -46,16 +46,16 @@ table th, table td {
 }
 
 .neatline-bar {
-  background-color: hsl(280, 29%, 38%);
+  background-color: #584561;
   background-repeat: repeat-x;
-  background-image: -khtml-gradient(linear, left top, left bottom, from(hsl(280, 29%, 58%)), to(hsl(280, 29%, 38%)));
-  background-image: -moz-linear-gradient(top, hsl(280, 29%, 58%), hsl(280, 29%, 38%));
-  background-image: -ms-linear-gradient(top, hsl(280, 29%, 58%), hsl(280, 29%, 38%));
-  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, hsl(280, 29%, 58%)), color-stop(100%, hsl(280, 29%, 38%)));
-  background-image: -webkit-linear-gradient(top, hsl(280, 29%, 58%), hsl(280, 29%, 38%));
-  background-image: -o-linear-gradient(top, hsl(280, 29%, 58%), hsl(280, 29%, 38%));
-  background-image: linear-gradient(top, hsl(280, 29%, 58%), hsl(280, 29%, 38%));
-  border-color: hsl(280, 29%, 38%) hsl(280, 29%, 38%) hsl(280, 29%, 33%);
+  background-image: -khtml-gradient(linear, left top, left bottom, from(#866994), to(#584561));
+  background-image: -moz-linear-gradient(top, #866994, #584561);
+  background-image: -ms-linear-gradient(top, #866994, #584561);
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #866994), color-stop(100%, #584561));
+  background-image: -webkit-linear-gradient(top, #866994, #584561);
+  background-image: -o-linear-gradient(top, #866994, #584561);
+  background-image: linear-gradient(top, #866994, #584561);
+  border-color: #584561 #584561 #4c3c54;
   color: #fff;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.33);
   -webkit-font-smoothing: antialiased;

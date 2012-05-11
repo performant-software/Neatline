@@ -29,6 +29,10 @@ html {
     overflow: hidden;
 }
 
+body {
+    margin: 0;
+}
+
 /* Neatline container. */
 
 #neatline {

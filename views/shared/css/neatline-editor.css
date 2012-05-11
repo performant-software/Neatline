@@ -88,7 +88,8 @@
 }
 
 .topbar div > ul > li, .nav > li {
-    display: inline;
+    float: right;
+    display: block;
     height: 34px;
 }
 
