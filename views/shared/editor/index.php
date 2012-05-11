@@ -26,7 +26,6 @@
  */
 ?>
 
-<!-- Custom page header. -->
 <?php echo $this->partial('editor/_editor_header.php', array(
     'titlePrefix' => 'Neatline Editor',
     'title' => $exhibit->name

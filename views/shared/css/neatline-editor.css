@@ -45,6 +45,7 @@
     text-shadow: 0 -2px 0 rgba(0, 0, 0, 0.25);
 }
 
+
 #search-box {
     float: left;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -89,7 +90,7 @@
 
 .topbar div > ul > li, .nav > li {
     float: right;
-    display: block;
+    display: inline;
     height: 34px;
 }
 

@@ -27,7 +27,6 @@
 
 <?php if ($exhibit->public): ?>
 
-<!-- Custom page header. -->
 <?php echo $this->partial('public/_public_header.php', array(
     'titlePrefix' => 'Neatline',
     'exhibit' => $exhibit
