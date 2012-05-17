@@ -27,6 +27,7 @@ jQuery(document).ready(function($) {
     var editorContainer =           $('#item-browser');
     var configureLayoutButton =     $('#configure-layout-button');
     var configureMapButton =        $('#configure-map-button');
+    var configureTimelineButton =   $('#configure-timeline-button');
     var configureItemsButton =      $('#configure-items-button');
 
 
@@ -355,6 +356,11 @@ jQuery(document).ready(function($) {
             neatlineContainer.neatline('saveSuccess');
             editorContainer.itembrowser('reloadItemForm');
         }
+
+    });
+
+    // Configure timeline.
+    configureTimelineButton.configuretimeline({
 
     });
 

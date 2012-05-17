@@ -47,6 +47,13 @@
     </li>
 
     <li class="dropdown">
+        <a href="" id="configure-timeline-button" class="dropdown-toggle">Timeline Settings</a>
+        <div id="configure-timeline" class="dropdown-content">
+            <?php echo $this->partial('editor/_configure_timeline.php'); ?>
+        </div>
+    </li>
+
+    <li class="dropdown">
         <a href="" id="configure-layout-button" class="dropdown-toggle">Layout Editor</a>
         <div id="configure-layout" class="dropdown-content">
             <?php echo $this->partial('editor/_configure_layout.php'); ?>

@@ -52,6 +52,7 @@ function neatline_queueEditorAssets()
     queue_css('gradient-builder');
     queue_css('configure-layout');
     queue_css('configure-map');
+    queue_css('configure-timeline');
     queue_css('configure-items');
     queue_css('jquery.miniColors');
     queue_css('jquery.cleditor');
@@ -65,6 +66,7 @@ function neatline_queueEditorAssets()
     queue_js('editor/map_editor', 'javascripts');
     queue_js('editor/configure_layout', 'javascripts');
     queue_js('editor/configure_map', 'javascripts');
+    queue_js('editor/configure_timeline', 'javascripts');
     queue_js('editor/configure_items', 'javascripts');
 
     queue_js('editor/utilities/_toggle_button', 'javascripts');
