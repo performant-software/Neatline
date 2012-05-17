@@ -63,6 +63,11 @@ class NeatlineExhibit extends Omeka_record
     public $default_focus_date;
     public $default_timeline_zoom;
 
+    // Timeline layout parameters.
+    public $is_context_band;
+    public $context_band_unit;
+    public $context_band_percent;
+
     // Default styles.
     public $default_vector_color;
     public $default_stroke_color;
@@ -119,6 +124,7 @@ class NeatlineExhibit extends Omeka_record
         $this->is_map =                 1;
         $this->is_timeline =            1;
         $this->is_items =               1;
+        $this->is_context_band =        1;
         $this->image_id =               null;
 
         // Check for image.

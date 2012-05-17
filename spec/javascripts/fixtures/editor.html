@@ -88,6 +88,37 @@
     </li>
 
     <li class="dropdown">
+        <a href="" id="configure-timeline-button" class="dropdown-toggle">Timeline Settings</a>
+        <div id="configure-timeline" class="dropdown-content">
+            
+<!-- Toggle context band. -->
+<h5 class="inline">Enable Context Band</h5>
+<input type="checkbox" name="enable-band" />
+<hr />
+
+<!-- Context band unit. -->
+<h5>Context Band Unit</h5>
+<select name="band-unit">
+  <option value="hour">Hour</option>
+  <option value="day">Day</option>
+  <option value="week">Week</option>
+  <option value="month">Month</option>
+  <option value="year">Year</option>
+  <option value="decade">Decade</option>
+  <option value="century">Century</option>
+</select>
+<hr />
+
+<!-- Context band height percentage. -->
+<h5>Context Band Height %</h5>
+<input type="text" class="integer-dragger" name="band-height" value="" />
+<hr />
+
+<button class="btn icon approve save">Save</button>
+        </div>
+    </li>
+
+    <li class="dropdown">
         <a href="" id="configure-layout-button" class="dropdown-toggle">Layout Editor</a>
         <div id="configure-layout" class="dropdown-content">
             
@@ -406,7 +437,7 @@ to store the current viewport settings as the public defaults.</p>
 <!-- JSON globals. -->
 <script type="text/javascript">
 
-        Neatline = {"record":{"added":"2012-05-17 15:05:41","modified":"2012-05-17 15:05:41","name":"Test Exhibit","description":"Test description.","slug":"test-exhibit","public":1,"query":null,"image_id":null,"top_element":"map","items_h_pos":"right","items_v_pos":"top","items_height":"full","h_percent":50,"v_percent":60,"is_map":1,"is_timeline":1,"is_items":1,"default_map_bounds":null,"default_map_zoom":null,"default_focus_date":null,"default_timeline_zoom":null,"default_vector_color":null,"default_stroke_color":null,"default_highlight_color":null,"default_vector_opacity":null,"default_stroke_opacity":null,"default_stroke_width":null,"default_point_radius":null,"default_base_layer":null,"id":1},"dataSources":{"timeline":"http:\/\/\/Users\/davidmcclure\/pear\/bin\/neatline-exhibits\/1\/data\/simile","map":"http:\/\/\/Users\/davidmcclure\/pear\/bin\/neatline-exhibits\/1\/data\/openlayers","undated":"http:\/\/\/Users\/davidmcclure\/pear\/bin\/neatline-exhibits\/1\/data\/udi"},"baseLayer":{"name":"Google Physical","id":2},"timelineZoom":15,"highlightColor":"#ff0000","proportions":{"horizontal":50,"vertical":60}}
+        Neatline = {"record":{"added":"2012-05-17 16:10:07","modified":"2012-05-17 16:10:07","name":"Test Exhibit","description":"Test description.","slug":"test-exhibit","public":1,"query":null,"image_id":null,"top_element":"map","items_h_pos":"right","items_v_pos":"top","items_height":"full","h_percent":50,"v_percent":60,"is_map":1,"is_timeline":1,"is_items":1,"default_map_bounds":null,"default_map_zoom":null,"default_focus_date":null,"default_timeline_zoom":null,"is_context_band":1,"context_band_unit":null,"context_band_percent":null,"default_vector_color":null,"default_stroke_color":null,"default_highlight_color":null,"default_vector_opacity":null,"default_stroke_opacity":null,"default_stroke_width":null,"default_point_radius":null,"default_base_layer":null,"id":1},"dataSources":{"timeline":"http:\/\/\/Users\/davidmcclure\/pear\/bin\/neatline-exhibits\/1\/data\/simile","map":"http:\/\/\/Users\/davidmcclure\/pear\/bin\/neatline-exhibits\/1\/data\/openlayers","undated":"http:\/\/\/Users\/davidmcclure\/pear\/bin\/neatline-exhibits\/1\/data\/udi"},"baseLayer":{"name":"Google Physical","id":2},"timelineZoom":15,"highlightColor":"#ff0000","proportions":{"horizontal":50,"vertical":60}}
 </script>
 
 <div id="drag-tip" class="twipsy fade right in">

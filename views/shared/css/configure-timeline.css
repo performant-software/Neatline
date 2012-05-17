@@ -37,6 +37,7 @@
 
 #configure-timeline h5.inline {
     display: inline;
+    margin-left: 0.3em;
 }
 
 #configure-timeline select {

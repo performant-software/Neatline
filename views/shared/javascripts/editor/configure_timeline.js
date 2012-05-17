@@ -31,6 +31,10 @@
          */
         _create: function() {
 
+            // Get markup.
+            this.content = $('#configure-timeline');
+            this.bandHeight = this.content.find('input[name="band-height"]');
+
             // Construct the dropdown manager and form widgets.
             this._constructDropdown();
             this._constructFormWidgets();
@@ -47,11 +51,18 @@
         },
 
         /*
-         * .
+         * Build integer dragger on height input.
          *
          * - return void.
          */
         _constructFormWidgets: function() {
+
+            // ** BAND HEIGHT.
+            this.bandHeight.integerdragger({
+                min: 0,
+                max: 100,
+                px_per_unit: 2
+            });
 
         }
 

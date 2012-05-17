@@ -26,8 +26,8 @@
 ?>
 
 <!-- Toggle context band. -->
+<input type="checkbox" name="enable-band" <?php if ($exhibit->is_context_band) { echo 'checked="checked"'; } ?>/>
 <h5 class="inline">Enable Context Band</h5>
-<input type="checkbox" name="enable-band" />
 <hr />
 
 <!-- Context band unit. -->
@@ -45,7 +45,7 @@
 
 <!-- Context band height percentage. -->
 <h5>Context Band Height %</h5>
-<input type="text" class="integer-dragger" name="band-height" value="" />
+<input type="text" class="integer-dragger" name="band-height" value="<?php echo $exhibit->context_band_percent; ?>" />
 <hr />
 
 <button class="btn icon approve save">Save</button>

@@ -1669,6 +1669,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $exhibit->is_map =                      0;
         $exhibit->is_timeline =                 0;
         $exhibit->is_items =                    0;
+        $exhibit->is_context_band =             0;
         $exhibit->top_element =                 'timeline';
         $exhibit->items_h_pos =                 'left';
         $exhibit->items_v_pos =                 'top';
@@ -1755,6 +1756,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $exhibit->is_map =                      0;
         $exhibit->is_timeline =                 0;
         $exhibit->is_items =                    0;
+        $exhibit->is_context_band =             0;
         $exhibit->top_element =                 'timeline';
         $exhibit->items_h_pos =                 'left';
         $exhibit->items_v_pos =                 'top';
