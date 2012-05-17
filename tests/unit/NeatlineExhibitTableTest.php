@@ -178,6 +178,7 @@ class Neatline_NeatlineExhibitTableTest extends Omeka_Test_AppTestCase
         // Create exhibit.
         $exhibit = $this->helper->_createNeatline(
             $name = 'Test Exhibit',
+            $description = 'Test description.',
             $slug = 'test-slug',
             $public = 1,
             $is_map = 1,

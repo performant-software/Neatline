@@ -153,6 +153,7 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
 
         // Check for fields.
         $this->assertQuery('input[name="title"]');
+        $this->assertQuery('textarea[name="description"]');
         $this->assertQuery('input[name="slug"]');
         $this->assertQuery('input[name="public"]');
         $this->assertQuery('select[name="image"]');
@@ -436,6 +437,7 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
         $this->request->setMethod('POST')
             ->setPost(array(
                 'title' => 'Test Exhibit',
+                'description' => 'Test description.',
                 'slug' => 'test-exhibit',
                 'public' => 1,
                 'image' => 'none'
@@ -454,6 +456,7 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
         // Get the exhibit and examine.
         $exhibit = $this->_exhibitsTable->find(1);
         $this->assertEquals($exhibit->name, 'Test Exhibit');
+        $this->assertEquals($exhibit->description, 'Test description.');
         $this->assertEquals($exhibit->slug, 'test-exhibit');
         $this->assertEquals($exhibit->public, 1);
         $this->assertNull($exhibit->image_id);
@@ -491,6 +494,12 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
 
         // Title.
         $this->assertXpath('//input[@name="title"][@value="Test Exhibit"]');
+
+        // Description.
+        $this->assertXpathContentContains(
+            '//textarea[@name="description"]',
+            'Test description.'
+        );
 
         // Slug.
         $this->assertXpath('//input[@name="slug"][@value="test-exhibit"]');
@@ -715,6 +724,7 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
         // Create exhibits.
         $exhibit1 = $this->helper->_createNeatline(
             $name = 'Test Exhibit 1',
+            $description = 'Test description 1.',
             $slug = 'test-exhibit-1',
             $public = 1,
             $is_map = 1,
@@ -723,6 +733,7 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
         );
         $exhibit2 = $this->helper->_createNeatline(
             $name = 'Test Exhibit 2',
+            $description = 'Test description 2.',
             $slug = 'test-exhibit-2',
             $public = 1,
             $is_map = 1,
@@ -750,6 +761,41 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
             'ul.errors li',
             'Slug taken.'
         );
+
+    }
+
+    /**
+     * Valid form should edit exhibit.
+     *
+     * @return void.
+     */
+    public function testEditSuccess()
+    {
+
+        // Create exhibit.
+        $exhibit = $this->helper->_createNeatline();
+
+        // Valid form.
+        $this->request->setMethod('POST')
+            ->setPost(array(
+                'title' => 'New Exhibit',
+                'description' => 'New description.',
+                'slug' => 'new-exhibit',
+                'public' => 0,
+                'image' => 'none'
+            )
+        );
+
+        // Submit the form.
+        $this->dispatch('neatline-exhibits/edit/test-exhibit');
+
+        // Get the exhibit and examine.
+        $exhibit = $this->_exhibitsTable->find(1);
+        $this->assertEquals($exhibit->name, 'New Exhibit');
+        $this->assertEquals($exhibit->description, 'New description.');
+        $this->assertEquals($exhibit->slug, 'new-exhibit');
+        $this->assertEquals($exhibit->public, 0);
+        $this->assertNull($exhibit->image_id);
 
     }
 

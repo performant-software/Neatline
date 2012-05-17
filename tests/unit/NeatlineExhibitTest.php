@@ -135,9 +135,10 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
         $neatline = $this->helper->_createNeatline();
 
         // Save with valid map id and check.
-        $success = $neatline->saveForm('Title', 'slug', 1, 'none');
+        $success = $neatline->saveForm('Title', 'Test description.', 'slug', 1, 'none');
         $this->assertNull($neatline->image_id);
         $this->assertEquals($neatline->name, 'Title');
+        $this->assertEquals($neatline->description, 'Test description.');
         $this->assertEquals($neatline->slug, 'slug');
         $this->assertEquals($neatline->public, 1);
         $this->assertEquals($neatline->is_map, 1);
@@ -162,7 +163,7 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
         $neatline = $this->helper->_createNeatline();
 
         // Save with valid map id and check.
-        $success = $neatline->saveForm('Title', 'slug', 1, 1);
+        $success = $neatline->saveForm('Title', 'Test description.', 'slug', 1, 1);
         $this->assertEquals($neatline->image_id, 1);
 
     }
@@ -187,7 +188,7 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
 
         // Create an exhibit and map.
         $exhibit = $this->helper->_createNeatline();
-        $exhibit->saveForm('Title', 'slug', 1, 'none');
+        $exhibit->saveForm('Title', 'Test description.', 'slug', 1, 'none');
 
         // Get the map and check.
         $retrievedImage = $exhibit->getImage();

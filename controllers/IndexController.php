@@ -98,6 +98,7 @@ class Neatline_IndexController extends Omeka_Controller_Action
                 $exhibit = new NeatlineExhibit;
                 $exhibit->saveForm(
                     $values['title'],
+                    $values['description'],
                     $values['slug'],
                     $values['public'],
                     $values['image']
@@ -135,6 +136,7 @@ class Neatline_IndexController extends Omeka_Controller_Action
         // Populate the form.
         $form->populate(array(
             'title' => $exhibit->name,
+            'description' => $exhibit->description,
             'slug' => $exhibit->slug,
             'public' => $exhibit->public
         ));
@@ -150,6 +152,7 @@ class Neatline_IndexController extends Omeka_Controller_Action
 
                 // Apply values.
                 $exhibit->name = $values['title'];
+                $exhibit->description = $values['description'];
                 $exhibit->slug = $values['slug'];
                 $exhibit->public = (int) $values['public'];
 
