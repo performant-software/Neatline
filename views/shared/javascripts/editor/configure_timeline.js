@@ -33,7 +33,10 @@
 
             // Get markup.
             this.content = $('#configure-timeline');
+            this.bandActive = this.content.find('input[name="band-active"]');
+            this.bandUnit = this.content.find('select[name="band-unit"]');
             this.bandHeight = this.content.find('input[name="band-height"]');
+            this.saveButton = this.content.find('button.save');
 
             // Construct the dropdown manager and form widgets.
             this._constructDropdown();
@@ -64,6 +67,75 @@
                 px_per_unit: 2
             });
 
+            // ** SAVE.
+            this.saveButton.bind({
+
+                'mousedown': _.bind(function() {
+                    this.postSettings();
+                }, this),
+
+                'click': function(event) {
+                    event.preventDefault();
+                }
+
+            });
+
+        },
+
+        /*
+         * Get values out of inputs.
+         *
+         * - return object: The data.
+         */
+        _getData: function() {
+
+            var data = {};
+
+            data.exhibit_id =               Neatline.record.id;
+            data.band_active =              this.bandActive.is(':checked');
+            data.band_unit =                this.bandUnit.val();
+            data.band_height =              parseInt(this.bandHeight.val(), 10);
+
+            return data;
+
+        },
+
+        /*
+         * Commit the settings.
+         *
+         * - return void.
+         */
+        postSettings: function() {
+
+            var self = this;
+
+            // Get the settings.
+            var data = this._getData();
+
+            // Commit.
+            $.ajax({
+
+                url: 'ajax/timelinesettings',
+                type: 'POST',
+                data: data,
+
+                success: function() {
+                    self._trigger('newdefaults');
+                }
+
+            });
+
+        },
+
+        /*
+         * Emit a protected class attribute.
+         *
+         * - param string attr: The name of the attribute.
+         *
+         * - return mixed: The attribute.
+         */
+        getAttr: function(attr) {
+            return this[attr];
         }
 
     });

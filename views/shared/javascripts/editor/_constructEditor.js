@@ -362,6 +362,12 @@ jQuery(document).ready(function($) {
     // Configure timeline.
     configureTimelineButton.configuretimeline({
 
+        // When new defaults have been successfully committed.
+        'newdefaults': function(event, obj) {
+            neatlineContainer.neatline('saveSuccess');
+            editorContainer.itembrowser('reloadItemForm');
+        }
+
     });
 
     // Configure items.
