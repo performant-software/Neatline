@@ -77,6 +77,13 @@ class EditExhibitForm extends Omeka_Form
             )
         ));
 
+        // Description.
+        $this->addElement('textarea', 'description', array(
+            'label'         => 'Description',
+            'description'   => 'Supporting prose to describe the exhibit.',
+            'attribs'       => array('class' => 'html-editor', 'rows' => '20')
+        ));
+
         // Slug.
         $this->addElement('text', 'slug', array(
             'label'         => 'URL Slug',
@@ -116,6 +123,7 @@ class EditExhibitForm extends Omeka_Form
         // Group the metadata fields.
         $this->addDisplayGroup(array(
             'title',
+            'description',
             'slug',
             'public'
         ), 'exhibit_info');

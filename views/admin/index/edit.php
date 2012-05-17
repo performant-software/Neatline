@@ -28,6 +28,7 @@
 <?php
 queue_js('slugBuilder');
 queue_js('_constructAdd');
+queue_js('tiny_mce/tiny_mce');
 ?>
 
 <?php
@@ -43,6 +44,12 @@ head(array('content_class' => 'neatline'));
 <div id="primary">
     <?php echo $form; ?>
 </div>
+
+<script>
+jQuery(document).ready(function($){
+    Omeka.wysiwyg();
+});
+</script>
 
 <?php
 foot();

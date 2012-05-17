@@ -128,13 +128,9 @@ class AddExhibitForm extends Omeka_Form
             'title',
             'description',
             'slug',
+            'image',
             'public'
         ), 'exhibit_info');
-
-        // Group the baselayer fields.
-        $this->addDisplayGroup(array(
-            'image'
-        ), 'baselayer_info');
 
         // Group the submit button sparately.
         $this->addDisplayGroup(array(
