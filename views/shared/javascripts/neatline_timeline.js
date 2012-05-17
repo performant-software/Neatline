@@ -82,14 +82,15 @@
                     intervalPixels: intervalPixels,
                     zoomIndex:      this._currentZoomStep,
                     zoomSteps:      this._zoomSteps,
-                    theme:          theme
+                    theme:          theme,
+                    timeZone:       -4
                 }),
 
                 Timeline.createBandInfo({
                     overview:       true,
                     eventSource:    this.eventSource,
                     width:          "35%",
-                    intervalUnit:   Timeline.DateTime.DECADE,
+                    intervalUnit:   Timeline.DateTime.MONTH,
                     intervalPixels: 300
                 })
 

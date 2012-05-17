@@ -34,6 +34,7 @@ class NeatlineExhibit extends Omeka_record
     public $added;
     public $modified;
     public $name;
+    public $description;
     public $slug;
     public $public;
     public $query;

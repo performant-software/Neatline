@@ -92,6 +92,7 @@ class NeatlinePlugin
                 `added`                     TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                 `modified`                  TIMESTAMP NULL,
                 `name`                      tinytext collate utf8_unicode_ci,
+                `description`               TEXT COLLATE utf8_unicode_ci DEFAULT NULL,
                 `slug`                      varchar(100) NOT NULL,
                 `public`                    tinyint(1) NOT NULL,
                 `query`                     TEXT COLLATE utf8_unicode_ci NULL,

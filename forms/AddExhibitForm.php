@@ -62,10 +62,17 @@ class AddExhibitForm extends Omeka_Form
             )
         ));
 
+        // Description.
+        $this->addElement('textarea', 'description', array(
+            'label'         => 'Description',
+            'description'   => 'Supporting prose to describe the exhibit.',
+            'attribs'       => array('class' => 'html-editor', 'rows' => '20')
+        ));
+
         // Slug.
         $this->addElement('text', 'slug', array(
             'label'         => 'URL Slug',
-            'description'   => 'The URL slug is used to form the public URL for the exhibit. Can only contain letters, numbers, and hyphens (no spaces).',
+            'description'   => 'The URL slug is used to form the public URL for the exhibit. Can contain letters, numbers, and hyphens.',
             'size'          => 40,
             'required'      => true,
             'validators'    => array(
@@ -119,6 +126,7 @@ class AddExhibitForm extends Omeka_Form
         // Group the metadata fields.
         $this->addDisplayGroup(array(
             'title',
+            'description',
             'slug',
             'public'
         ), 'exhibit_info');
