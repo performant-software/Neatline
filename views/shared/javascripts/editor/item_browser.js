@@ -135,8 +135,6 @@
             // Set static CSS parameters for the Neatline.
             this.neatlineContainer.css('top', this.topBarHeight);
 
-            console.log(this.topBarHeight);
-
             // Set the height of the main container.
             this.element.css({
                 'width': this.containerWidth,
