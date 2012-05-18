@@ -515,7 +515,7 @@ class Neatline_EditorController extends Omeka_Controller_Action
 
         // Do save.
         $exhibit = $this->_neatlinesTable->find($exhibitId);
-        $exhibit->is_context_band = (int) $bandUnit;
+        $exhibit->is_context_band = (int) $bandActive;
         $exhibit->context_band_unit = $bandUnit;
         $exhibit->context_band_percent = $bandHeight;
         $exhibit->save();

@@ -326,7 +326,7 @@
         },
 
         /*
-         * Construct WMS map layers.
+         * Construct geometry and WMS map layers.
          */
         _buildLayers: function(layers) {
 
@@ -348,7 +348,9 @@
                     item.stroke_color,
                     item.stroke_opacity,
                     item.stroke_width,
-                    item.point_radius);
+                    item.point_radius,
+                    item.highlight_color
+                );
 
                 // Build the layers.
                 var vectorLayer = new OpenLayers.Layer.Vector(item.title, {

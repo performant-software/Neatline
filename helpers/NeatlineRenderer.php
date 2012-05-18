@@ -69,7 +69,7 @@ class NeatlineRenderer
             // Default timeline zoom.
             'timelineZoom' => $this->exhibit->getTimelineZoom(),
 
-            // Default timeline zoom.
+            // Default highlight color.
             'highlightColor' => $this->exhibit->getStyle('highlight_color'),
 
             // Default viewport proportions.
