@@ -66,7 +66,7 @@ class NeatlineExhibit extends Omeka_record
     // Timeline layout parameters.
     public $is_context_band;
     public $context_band_unit;
-    public $context_band_percent;
+    public $context_band_height;
 
     // Default styles.
     public $default_vector_color;

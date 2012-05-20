@@ -509,15 +509,15 @@ class Neatline_EditorController extends Omeka_Controller_Action
 
         // Get parameters from the ajax request.
         $exhibitId =                (int) $_post['exhibit_id'];
-        $bandActive =               (boolean) $_post['band_active'];
-        $bandHeight =               (int) $_post['band_height'];
-        $bandUnit =                 $_post['band_unit'];
+        $bandActive =               (boolean) $_post['is_context_band'];
+        $bandHeight =               (int) $_post['context_band_height'];
+        $bandUnit =                 $_post['context_band_unit'];
 
         // Do save.
         $exhibit = $this->_neatlinesTable->find($exhibitId);
         $exhibit->is_context_band = (int) $bandActive;
         $exhibit->context_band_unit = $bandUnit;
-        $exhibit->context_band_percent = $bandHeight;
+        $exhibit->context_band_height = $bandHeight;
         $exhibit->save();
 
     }

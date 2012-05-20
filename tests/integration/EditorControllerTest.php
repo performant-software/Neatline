@@ -2263,7 +2263,46 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
 
     }
 
+    /**
+     * The /timelinesettings route should commit row-level style defaults on
+     * the exhibit record when they do not match the system defaults.
+     *
+     * @return void.
+     */
+    public function testTimelineSettingsWithNovelValues()
+    {
 
+        // Create an exhibit, set is_context_band.
+        $exhibit = $this->helper->_createNeatline();
+        $exhibit->is_context_band = 0;
+
+        // Set system styling defaults.
+        set_option('context_band_unit', 'decade');
+        set_option('context_band_height', '35');
+
+        // Form the POST.
+        $this->request->setMethod('POST')
+            ->setPost(array(
+                'exhibit_id' => $exhibit->id,
+                'is_context_band' => 'true',
+                'context_band_unit' => 'month',
+                'context_band_height' => '45'
+            )
+        );
+
+        // Hit the route, re-get the record.
+        $this->dispatch('neatline-exhibits/editor/ajax/timelinesettings');
+        $exhibit = $this->_exhibitsTable->find($exhibit->id);
+
+        // Check.
+        $this->assertNotNull($exhibit->is_context_band);
+        $this->assertEquals($exhibit->is_context_band, 1);
+        $this->assertNotNull($exhibit->context_band_unit);
+        $this->assertEquals($exhibit->context_band_unit, 'month');
+        $this->assertNotNull($exhibit->context_band_height);
+        $this->assertEquals($exhibit->context_band_height, 45);
+
+    }
 
     /**
      * The /resetstyles action should null all style attributes for a record.

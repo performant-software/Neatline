@@ -106,7 +106,7 @@ class NeatlinePlugin
                 `is_items`                  tinyint(1) NOT NULL,
                 `is_context_band`           tinyint(1) NOT NULL,
                 `context_band_unit`         ENUM('hour', 'day', 'week', 'month', 'year', 'decade', 'century') DEFAULT 'decade',
-                `context_band_percent`      int(10) unsigned NULL,
+                `context_band_height`       int(10) unsigned NULL,
                 `h_percent`                 int(10) unsigned NULL,
                 `v_percent`                 int(10) unsigned NULL,
                 `default_map_bounds`        varchar(100) NULL,

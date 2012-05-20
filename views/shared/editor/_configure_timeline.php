@@ -45,7 +45,7 @@
 
 <!-- Context band height percentage. -->
 <h5>Context Band Height %</h5>
-<input type="text" class="integer-dragger" name="band-height" value="<?php echo $exhibit->context_band_percent; ?>" />
+<input type="text" class="integer-dragger" name="band-height" value="<?php echo $exhibit->context_band_height; ?>" />
 <hr />
 
 <button class="btn icon approve save">Save</button>
