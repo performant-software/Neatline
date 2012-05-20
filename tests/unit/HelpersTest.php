@@ -53,16 +53,16 @@ class Neatline_HelpersTest extends Omeka_Test_AppTestCase
     }
 
     /**
-     * setMapStyleDefaults should set system defaults for all style parameters,
+     * setStyleDefaults should set system defaults for all style parameters,
      * typecasting where necessary.
      *
      * @return void.
      */
-    public function testSetMapStyleDefaults()
+    public function testSetStyleDefaults()
     {
 
         // Call.
-        neatline_setMapStyleDefaults();
+        neatline_setStyleDefaults();
 
         // Check for option presence.
         $this->assertNotNull(get_option('vector_color'));
@@ -75,6 +75,8 @@ class Neatline_HelpersTest extends Omeka_Test_AppTestCase
         $this->assertNotNull(get_option('h_percent'));
         $this->assertNotNull(get_option('v_percent'));
         $this->assertNotNull(get_option('timeline_zoom'));
+        $this->assertNotNull(get_option('context_band_unit'));
+        $this->assertNotNull(get_option('context_band_height'));
 
         // Check for integer typecasting.
         $this->assertTrue(is_int(get_option('vector_opacity')));

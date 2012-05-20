@@ -859,7 +859,7 @@ function neatline_installBaseLayers()
  *
  * @return void.
  */
-function neatline_setMapStyleDefaults()
+function neatline_setStyleDefaults()
 {
 
     // Vector color.
@@ -920,6 +920,18 @@ function neatline_setMapStyleDefaults()
     set_option('timeline_zoom', (int) get_plugin_ini(
         'Neatline',
         'default_timeline_zoom'
+    ));
+
+    // Context band unit.
+    set_option('context_band_unit', get_plugin_ini(
+        'Neatline',
+        'default_context_band_unit'
+    ));
+
+    // Context band unit.
+    set_option('context_band_height', get_plugin_ini(
+        'Neatline',
+        'default_context_band_height'
     ));
 
 }

@@ -170,7 +170,7 @@ class NeatlinePlugin
         $this->_db->query($sql);
 
         // Set default map style attributes.
-        neatline_setMapStyleDefaults();
+        neatline_setStyleDefaults();
 
         // Install base layers.
         neatline_installBaseLayers();
