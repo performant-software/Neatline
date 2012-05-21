@@ -884,6 +884,8 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
         // Populate map-relevant attributes.
         $record1->title = 'Item 1 Title';
         $record2->title = 'Item 2 Title';
+        $record1->description = 'Item 1 description.';
+        $record2->description = 'Item 2 description.';
         $record1->slug = 'slug-1';
         $record2->slug = 'slug-2';
         $record1->vector_color = '#ffffff';
@@ -925,6 +927,7 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
                     'id' => $record1->id,
                     'item_id' => $item1->id,
                     'title' => 'Item 1 Title',
+                    'description' => 'Item 1 description.',
                     'slug' => 'slug-1',
                     'vector_color' => '#ffffff',
                     'stroke_color' => '#ffffff',
@@ -953,6 +956,7 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
                     'id' => $record2->id,
                     'item_id' => $item2->id,
                     'title' => 'Item 2 Title',
+                    'description' => 'Item 2 description.',
                     'slug' => 'slug-2',
                     'vector_color' => '#000000',
                     'stroke_color' => '#000000',

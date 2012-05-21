@@ -381,6 +381,7 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
                         'id' =>                 $record->id,
                         'item_id' =>            $record->item_id,
                         'title' =>              $record->getTitle(),
+                        'description' =>        $record->getDescription(),
                         'slug' =>               $record->getSlug(),
                         'vector_color' =>       $record->getStyle('vector_color'),
                         'stroke_color' =>       $record->getStyle('stroke_color'),
