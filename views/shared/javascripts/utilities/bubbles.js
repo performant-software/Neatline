@@ -63,7 +63,6 @@
 
             // Get native dimensions of bubble.
             this._measureBubble();
-            console.log(this.bubbleWidth, this.bubbleHeight);
 
             // Inject.
             this.element.append(this.bubble);
@@ -96,15 +95,45 @@
          */
         position: function(event) {
 
+            // Get container size.
+            var containerWidth = this.element.outerWidth();
+            var containerHeight = this.element.outerHeight();
+
             // Get container offset.
             var offset = this.element.offset();
             var containerX = event.clientX - offset.left;
             var containerY = event.clientY - offset.top;
 
+            // Build starting bubble offsets.
+            var bubbleY = containerY - (this.bubbleHeight/3);
+            var bubbleX = containerX + 100;
+
+            // If necessary, switch to left side.
+            if (bubbleX + this.bubbleWidth > containerWidth) {
+                bubbleX = containerX - this.bubbleWidth - 100;
+            }
+
+            // Block top cropping.
+            if (bubbleY < 0) {
+                bubbleY = 0;
+            }
+
+            // Block bottom cropping.
+            if (bubbleY + this.bubbleHeight > containerHeight) {
+                bubbleY = containerHeight-this.bubbleHeight;
+            }
+
+            // Catch full-height.
+            if (this.bubbleHeight > containerHeight) {
+                bubbleY = 0;
+                this.bubble.css('overflow-y', 'scroll');
+                this.bubble.outerHeight(containerHeight);
+            }
+
             // Render position.
             this.bubble.css({
-                left: containerX,
-                top: containerY
+                left: bubbleX,
+                top: bubbleY
             });
 
         },
@@ -123,8 +152,8 @@
             }).appendTo(this._body);
 
             // Get dimensions.
-            this.bubbleHeight = clone.height();
-            this.bubbleWidth = clone.width();
+            this.bubbleHeight = clone.outerHeight();
+            this.bubbleWidth = clone.outerWidth();
 
             // Remove clone.
             clone.remove();

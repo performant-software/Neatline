@@ -285,13 +285,13 @@ div.bubble-container {
     position: absolute;
     background-color: black;
     color: white;
-    max-width: 400px;
+    max-width: 300px;
     opacity: 0.7;
-    padding: 10px;
+    padding: 30px;
 }
 
 div.bubble-container div.title {
     font-weight: bold;
     font-size: 2em;
-    line-height: 2em;
+    margin-bottom: 0.7em;
 }
