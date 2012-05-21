@@ -286,4 +286,12 @@ div.bubble-container {
     background-color: black;
     color: white;
     max-width: 400px;
+    opacity: 0.7;
+    padding: 10px;
+}
+
+div.bubble-container div.title {
+    font-weight: bold;
+    font-size: 2em;
+    line-height: 2em;
 }
