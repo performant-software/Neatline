@@ -33,6 +33,8 @@
          * @return void.
          */
         _create: function() {
+            this._body = $('body');
+            this._window = $(window);
             this.template = _.template($('#bubble-template').html());
         },
 
@@ -47,13 +49,20 @@
         show: function(title, body) {
 
             // Render template.
-            var bubble = this.template({
+            this.bubble = $(this.template({
                 title: title,
                 body: body
-            });
+            }));
 
             // Inject.
-            this.element.append(bubble);
+            this.element.append(this.bubble);
+
+            // Listen for mousemove.
+            this._window.bind({
+                'mousemove.bubbles': _.bind(function(e) {
+                    this.position(e);
+                }, this)
+            });
 
         },
 
@@ -63,6 +72,29 @@
          * @return void.
          */
         hide: function() {
+            this.bubble.remove();
+            this._window.unbind('mousemove.bubbles');
+        },
+
+        /*
+         * Position bubble.
+         *
+         * @param {Object} event: The mousemove event.
+         *
+         * @return void.
+         */
+        position: function(event) {
+
+            // Get container offset.
+            var offset = this.element.offset();
+            var containerX = event.clientX - offset.left;
+            var containerY = event.clientY - offset.top;
+
+            // Render position.
+            this.bubble.css({
+                left: containerX,
+                top: containerY
+            });
 
         }
 

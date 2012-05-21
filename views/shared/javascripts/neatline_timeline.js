@@ -125,7 +125,7 @@
 
             // Emit current date.
             this.timeline.getBand(0).addOnScrollListener(function() {
-                self._trigger('dave', {}, {
+                self._trigger('scroll', {}, {
                     'date': self.timeline.getBand(0).getCenterVisibleDate()
                 });
             });

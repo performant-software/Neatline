@@ -218,19 +218,40 @@
                 var callbacks = {
 
                     'featureadded': function() {
+
+                        // Trigger out.
                         self._trigger('mapfeatureadded');
+
                     },
 
                     'featureenter': function(event, obj) {
+
+                        // Trigger out.
                         self._trigger('mapfeatureenter', {}, obj);
+
+                        // Render bubble.
+                        self.element.bubbles('show',
+                             obj.record.data.title,
+                             obj.record.data.description
+                        );
+
                     },
 
                     'featureleave': function(event, obj) {
+
+                        // Trigger out.
                         self._trigger('mapfeatureleave', {}, obj);
+
+                        // Remove bubble.
+                        self.element.bubbles('hide');
+
                     },
 
                     'featureclick': function(event, obj) {
+
+                        // Trigger out.
                         self._trigger('mapfeatureclick', {}, obj);
+
                     }
 
                 };
@@ -255,7 +276,7 @@
 
                 this.timeline.neatlinetimeline({
 
-                    'dave': function(event, obj) {
+                    'scroll': function(event, obj) {
                         self.map.neatlinemap('renderVisibility', obj.date);
                         self.items.neatlineitems('renderVisibility', obj.date);
                     },

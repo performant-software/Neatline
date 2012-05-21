@@ -276,3 +276,14 @@ div.title-tip {
     font-family: Trykker;
     padding: 0 15px 0 15px;
 }
+
+
+/* Bubbles */
+
+div.bubble-container {
+    z-index: 999;
+    position: absolute;
+    background-color: black;
+    color: white;
+    max-width: 400px;
+}

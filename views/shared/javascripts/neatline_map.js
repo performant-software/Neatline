@@ -457,8 +457,7 @@
 
                     // Trigger out to the deployment code.
                     self._trigger('featureenter', {}, {
-                        'recordid': record.recordid,
-                        'slug': record.data.slug
+                        'record': record
                     });
 
                     // Render highlight.
@@ -476,8 +475,7 @@
 
                     // Trigger out to the deployment code.
                     self._trigger('featureleave', {}, {
-                        'recordid': record.recordid,
-                        'slug': record.data.slug
+                        'record': record
                     });
 
                     // Render default.
