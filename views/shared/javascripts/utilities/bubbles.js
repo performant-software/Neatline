@@ -33,9 +33,16 @@
          * @return void.
          */
         _create: function() {
+
+            // Getters.
             this._body = $('body');
             this._window = $(window);
-            this.template = _.template($('#bubble-template').html());
+
+            // Build template.
+            this.template = _.template(
+                $('#bubble-template').html()
+            );
+
         },
 
         /*
@@ -53,6 +60,10 @@
                 title: title,
                 body: body
             }));
+
+            // Get native dimensions of bubble.
+            this._measureBubble();
+            console.log(this.bubbleWidth, this.bubbleHeight);
 
             // Inject.
             this.element.append(this.bubble);
@@ -95,6 +106,28 @@
                 left: containerX,
                 top: containerY
             });
+
+        },
+
+        /*
+         * Compute the native dimensions of the bubble.
+         *
+         * @return void.
+         */
+        _measureBubble: function() {
+
+            // Clone and append the bubble.
+            var clone = this.bubble.clone().css({
+                top: -1000,
+                left: -1000
+            }).appendTo(this._body);
+
+            // Get dimensions.
+            this.bubbleHeight = clone.height();
+            this.bubbleWidth = clone.width();
+
+            // Remove clone.
+            clone.remove();
 
         }
 
