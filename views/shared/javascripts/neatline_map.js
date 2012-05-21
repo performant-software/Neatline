@@ -91,7 +91,6 @@
             }
 
             // Start-up.
-            this._constructTitleTip();
             this.loadData();
 
         },
@@ -464,7 +463,7 @@
 
                     // Render highlight.
                     self.highlightControl.highlight(feature);
-                    self._showTitleTip(record);
+                    // self._showTitleTip(record);
 
                 },
 
@@ -483,7 +482,7 @@
 
                     // Render default.
                     self.highlightControl.unhighlight(feature);
-                    self._hideTitleTip(record);
+                    // self._hideTitleTip(record);
 
                 }
 
@@ -530,7 +529,7 @@
                 // Listen for mouseleave.
                 callbacks: {
                     out: function() {
-                        self._hideTitleTip();
+                        // self._hideTitleTip();
                     }
                 }
 
@@ -965,7 +964,7 @@
             });
 
             // Show the title tip.
-            this._showTitleTip(record);
+            // this._showTitleTip(record);
 
         },
 
@@ -1031,7 +1030,7 @@
             });
 
             // Hide the title tip.
-            this._hideTitleTip();
+            // this._hideTitleTip();
 
         },
 
@@ -1040,49 +1039,6 @@
          */
         refresh: function() {
             this.map.updateSize();
-        },
-
-
-        /*
-         * =================
-         * DOM touches.
-         * =================
-         */
-
-
-        /*
-         * Build title tooltip.
-         */
-        _constructTitleTip: function(record) {
-
-            // Construct the tip.
-            this.titleTip = $('<div class="title-tip"></div>');
-            this.element.append(this.titleTip);
-
-        },
-
-        /*
-         * Render title tooltip.
-         */
-        _showTitleTip: function(record) {
-
-            // Strip markup.
-            var span = document.createElement('span');
-            span.innerHTML = record.data.title;
-
-            // Populate title.
-            this.titleTip.text(span.innerText);
-
-            // Show.
-            this.titleTip.css('display', 'block');
-
-        },
-
-        /*
-         * Remove title tooltip.
-         */
-        _hideTitleTip: function() {
-            this.titleTip.css('display', 'none');
         }
 
     });
