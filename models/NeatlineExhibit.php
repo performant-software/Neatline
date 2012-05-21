@@ -404,35 +404,14 @@ class NeatlineExhibit extends Omeka_record
     }
 
     /**
-     * The exhibit should not save if map_id or image_id are both non-null.
+     * Update the `modified` field on save.
      *
      * @return void.
      */
     public function save()
     {
-
-        // Update the modified field.
         $this->setModified();
-
-        $notNull = 0;
-        foreach(array(
-            $this->map_id,
-            $this->image_id,
-            $this->wms_id
-        ) as $base) {
-            if (!is_null($base)) { $notNull++; }
-        }
-
-        // If map_id is null or image_id is null.
-        if ($notNull <= 1) {
-            parent::save();
-            return true;
-        }
-
-        else {
-            return false;
-        }
-
+        parent::save();
     }
 
     /**
