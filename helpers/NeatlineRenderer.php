@@ -73,7 +73,14 @@ class NeatlineRenderer
             'highlightColor' => $this->exhibit->getStyle('highlight_color'),
 
             // Default viewport proportions.
-            'proportions' => $this->exhibit->getViewportProportions()
+            'proportions' => $this->exhibit->getViewportProportions(),
+
+            // Timeline settings.
+            'timeline' => array(
+                'isContextBand' => $this->exhibit->is_context_band,
+                'contextBandUnit' => strtoupper($this->exhibit->getStyle('context_band_unit')),
+                'contextBandHeight' => $this->exhibit->getStyle('context_band_height')
+            )
 
         );
 

@@ -92,7 +92,7 @@
             var data = {};
 
             data.exhibit_id =           Neatline.record.id;
-            data.is_context_band =      this.bandActive.is(':checked');
+            data.is_context_band =      this.bandActive.is(':checked') ? 1 : 0;
             data.context_band_unit =    this.bandUnit.val();
             data.context_band_height =  parseInt(this.bandHeight.val(), 10);
 
@@ -111,7 +111,6 @@
 
             // Get the settings.
             var data = this._getData();
-            console.log(data);
 
             // Commit.
             $.ajax({

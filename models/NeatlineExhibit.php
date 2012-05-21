@@ -65,8 +65,8 @@ class NeatlineExhibit extends Omeka_record
 
     // Timeline layout parameters.
     public $is_context_band;
-    public $context_band_unit;
-    public $context_band_height;
+    public $default_context_band_unit;
+    public $default_context_band_height;
 
     // Default styles.
     public $default_vector_color;
@@ -88,7 +88,9 @@ class NeatlineExhibit extends Omeka_record
         'default_stroke_opacity',
         'default_stroke_width',
         'default_point_radius',
-        'default_highlight_color'
+        'default_highlight_color',
+        'default_context_band_unit',
+        'default_context_band_height'
     );
 
     /**

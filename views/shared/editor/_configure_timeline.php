@@ -26,26 +26,27 @@
 ?>
 
 <!-- Toggle context band. -->
-<input type="checkbox" name="band-active" <?php if ($exhibit->is_context_band) { echo 'checked="checked"'; } ?>/>
+<input type="checkbox" name="band-active" <?php if ($exhibit->is_context_band === 1) { echo 'checked="checked"'; } ?>/>
 <h5 class="inline">Enable Context Band</h5>
 <hr />
 
 <!-- Context band unit. -->
 <h5>Context Band Unit</h5>
 <select name="band-unit">
-  <option value="hour" <?php if ($exhibit->context_band_unit == 'hour') { echo 'selected'; } ?>>Hour</option>
-  <option value="day" <?php if ($exhibit->context_band_unit == 'day') { echo 'selected'; } ?>>Day</option>
-  <option value="week" <?php if ($exhibit->context_band_unit == 'week') { echo 'selected'; } ?>>Week</option>
-  <option value="month" <?php if ($exhibit->context_band_unit == 'month') { echo 'selected'; } ?>>Month</option>
-  <option value="year" <?php if ($exhibit->context_band_unit == 'year') { echo 'selected'; } ?>>Year</option>
-  <option value="decade" <?php if ($exhibit->context_band_unit == 'decade') { echo 'selected'; } ?>>Decade</option>
-  <option value="century" <?php if ($exhibit->context_band_unit == 'century') { echo 'selected'; } ?>>Century</option>
+  <?php $unit = $exhibit->getStyle('context_band_unit'); ?>
+  <option value="hour" <?php if ($unit == 'hour') { echo 'selected'; } ?>>Hour</option>
+  <option value="day" <?php if ($unit == 'day') { echo 'selected'; } ?>>Day</option>
+  <option value="week" <?php if ($unit == 'week') { echo 'selected'; } ?>>Week</option>
+  <option value="month" <?php if ($unit == 'month') { echo 'selected'; } ?>>Month</option>
+  <option value="year" <?php if ($unit == 'year') { echo 'selected'; } ?>>Year</option>
+  <option value="decade" <?php if ($unit == 'decade') { echo 'selected'; } ?>>Decade</option>
+  <option value="century" <?php if ($unit == 'century') { echo 'selected'; } ?>>Century</option>
 </select>
 <hr />
 
 <!-- Context band height percentage. -->
 <h5>Context Band Height %</h5>
-<input type="text" class="integer-dragger" name="band-height" value="<?php echo $exhibit->context_band_height; ?>" />
+<input type="text" class="integer-dragger" name="band-height" value="<?php echo $exhibit->getStyle('context_band_height'); ?>" />
 <hr />
 
 <button class="btn icon approve save">Save</button>

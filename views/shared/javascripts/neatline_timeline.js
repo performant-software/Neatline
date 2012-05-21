@@ -72,33 +72,47 @@
             theme.event.track.height = 15;
             theme.event.tape.height = 10;
 
+            // Get band heights.
+            var mainHeight = 100;
+            if (Neatline.timeline.isContextBand === 1) {
+                mainHeight -= Neatline.timeline.contextBandHeight;
+            }
+
             // Define band data.
             this.bandInfos = [
 
                 Timeline.createBandInfo({
                     eventSource:    this.eventSource,
-                    width:          "65%",
+                    width:          mainHeight+"%",
                     intervalUnit:   intervalUnit,
                     intervalPixels: intervalPixels,
                     zoomIndex:      this._currentZoomStep,
                     zoomSteps:      this._zoomSteps,
                     theme:          theme,
                     timeZone:       -4
-                }),
-
-                Timeline.createBandInfo({
-                    overview:       true,
-                    eventSource:    this.eventSource,
-                    width:          "35%",
-                    intervalUnit:   Timeline.DateTime.MONTH,
-                    intervalPixels: 300
                 })
 
             ];
 
-            // Sync bands.
-            this.bandInfos[1].syncWith = 0;
-            this.bandInfos[1].highlight = true;
+            // Build context band.
+            if (Neatline.timeline.isContextBand === 1) {
+
+                // Push on the band.
+                this.bandInfos.push(
+                    Timeline.createBandInfo({
+                        overview:       true,
+                        eventSource:    this.eventSource,
+                        width:          Neatline.timeline.contextBandHeight+"%",
+                        intervalUnit:   Timeline.DateTime[Neatline.timeline.contextBandUnit],
+                        intervalPixels: 300
+                    })
+                );
+
+                // Sync bands.
+                this.bandInfos[1].syncWith = 0;
+                this.bandInfos[1].highlight = true;
+
+            }
 
             // Instantiate and load JSON.
             var container = document.getElementById('timeline');

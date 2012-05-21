@@ -71,8 +71,8 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
         $exhibit->is_timeline =                 1;
         $exhibit->is_items =                    1;
         $exhibit->is_context_band =             1;
-        $exhibit->context_band_unit =           'hour';
-        $exhibit->context_band_height =         30;
+        $exhibit->default_context_band_unit =   'hour';
+        $exhibit->default_context_band_height = 30;
         $exhibit->h_percent =                   50;
         $exhibit->v_percent =                   50;
         $exhibit->default_map_bounds =          'BOUND()';
@@ -110,8 +110,8 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
         $this->assertEquals($exhibit->is_timeline, 1);
         $this->assertEquals($exhibit->is_items, 1);
         $this->assertEquals($exhibit->is_context_band, 1);
-        $this->assertEquals($exhibit->context_band_unit, 'hour');
-        $this->assertEquals($exhibit->context_band_height, 30);
+        $this->assertEquals($exhibit->default_context_band_unit, 'hour');
+        $this->assertEquals($exhibit->default_context_band_height, 30);
         $this->assertEquals($exhibit->h_percent, 50);
         $this->assertEquals($exhibit->v_percent, 50);
         $this->assertEquals($exhibit->default_map_bounds, 'BOUND()');

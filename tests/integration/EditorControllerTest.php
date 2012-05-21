@@ -2284,7 +2284,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->request->setMethod('POST')
             ->setPost(array(
                 'exhibit_id' => $exhibit->id,
-                'is_context_band' => 'true',
+                'is_context_band' => '1',
                 'context_band_unit' => 'month',
                 'context_band_height' => '45'
             )
@@ -2297,10 +2297,10 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         // Check.
         $this->assertNotNull($exhibit->is_context_band);
         $this->assertEquals($exhibit->is_context_band, 1);
-        $this->assertNotNull($exhibit->context_band_unit);
-        $this->assertEquals($exhibit->context_band_unit, 'month');
-        $this->assertNotNull($exhibit->context_band_height);
-        $this->assertEquals($exhibit->context_band_height, 45);
+        $this->assertNotNull($exhibit->default_context_band_unit);
+        $this->assertEquals($exhibit->default_context_band_unit, 'month');
+        $this->assertNotNull($exhibit->default_context_band_height);
+        $this->assertEquals($exhibit->default_context_band_height, 45);
 
     }
 
