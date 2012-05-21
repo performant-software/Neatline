@@ -1,7 +1,10 @@
+<?php
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
 
 /**
- * Detail bubbles.
+ * Bubbles template.
+ *
+ * PHP version 5
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -20,53 +23,11 @@
  * @copyright   2011 The Board and Visitors of the University of Virginia
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache 2 License
  */
+?>
 
-(function($, undefined) {
-
-    'use strict';
-
-    $.widget('neatline.bubbles', {
-
-        /*
-         * Construct template.
-         *
-         * @return void.
-         */
-        _create: function() {
-            this.template = _.template($('#bubble-template').html());
-        },
-
-        /*
-         * Show bubble.
-         *
-         * @param {String} title: The title.
-         * @param {String} body: The body.
-         *
-         * @return void.
-         */
-        show: function(title, body) {
-
-            // Render template.
-            var bubble = this.template({
-                title: title,
-                body: body
-            });
-
-            // Inject.
-            this.element.append(bubble);
-
-        },
-
-        /*
-         * Hide bubble.
-         *
-         * @return void.
-         */
-        hide: function() {
-
-        }
-
-    });
-
-
-})(jQuery);
+<script type="text/template" id="bubble-template">
+    <div class="bubble-container">
+        <div class="title"><%= title %></div>
+        <div class="body"><%= body %></div>
+    </div>
+</script>

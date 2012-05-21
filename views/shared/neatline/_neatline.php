@@ -46,6 +46,9 @@
     <!-- Scroll arrows. -->
     <?php echo $this->partial('neatline/_arrows.php'); ?>
 
+    <!-- Bubbles. -->
+    <?php echo $this->partial('neatline/_bubbles.php'); ?>
+
 </div>
 
 <!-- Generic markup for the timeline popups. -->

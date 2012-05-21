@@ -963,7 +963,7 @@
                 self.highlightControl.unhighlight(feature);
             });
 
-            // Show the title tip.
+            // Show the bubble.
             // this._showTitleTip(record);
 
         },

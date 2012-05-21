@@ -78,6 +78,7 @@
             this._instantiatePositioner();
             this.positionDivs();
             this.instantiateBlocks();
+            this.instantiateBubbles();
 
         },
 
@@ -352,6 +353,15 @@
 
             }
 
+        },
+
+        /*
+         * Construct the bubbles manager.
+         *
+         * - return void.
+         */
+        instantiateBubbles: function() {
+            this.element.bubbles();
         },
 
 
