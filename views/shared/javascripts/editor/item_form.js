@@ -59,7 +59,7 @@
 
                 title: {
                     width: 340,
-                    height: 100,
+                    height: 80,
                     controls: "bold italic underline | font size color | " +
                         "bullets outdent indent | source removeformat"
                 }
@@ -80,6 +80,7 @@
             this.title =                    this.form.find('textarea[name="title"]');
             this.slug =                     this.form.find('input[name="slug"]');
             this.description =              this.form.find('textarea[name="description"]');
+            this.useDcData =                this.form.find('input[name="use-dc-data"]');
             this.startDate =                this.form.find('input[name="start-date-date"]');
             this.endDate =                  this.form.find('input[name="end-date-date"]');
             this.startVisibleDate =         this.form.find('input[name="start-visible-date"]');
@@ -377,12 +378,12 @@
 
             // If there is no item id, display the delete button.
             if (_.isNull(this.itemId)) {
-                this._showDeleteButton();
+                this._hideItemRecordElements();
             }
 
             // Otherwise, hide it.
             else {
-                this._hideDeleteButton();
+                this._showItemRecordElements();
             }
 
             // Update the tracker.
@@ -623,15 +624,17 @@
         /*
          * Display the delete record button.
          */
-        _showDeleteButton: function() {
+        _showItemRecordElements: function() {
             this.deleteButton.css('visibility', 'visible');
+            this.useDcData.removeAttr('disabled');
         },
 
         /*
          * Hide the delete record button.
          */
-        _hideDeleteButton: function() {
+        _hideItemRecordElements: function() {
             this.deleteButton.css('visibility', 'hidden');
+            this.useDcData.attr('disabled', true);
         },
 
         /*

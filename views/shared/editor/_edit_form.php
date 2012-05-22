@@ -58,6 +58,13 @@
                 </div>
             </div>
 
+            <div id="use-dc-data-container" class="clearfix">
+                <label>
+                    <input type="checkbox" name="use-dc-data">
+                    <span>Use default item metadata.</span>
+                </label>
+            </div>
+
         </div>
 
         <hr />

@@ -80,7 +80,6 @@
             // Get components.
             this.freezeLink = this.bubble.find('a.freeze-bubble');
             this.closeLink = this.bubble.find('a.close-bubble');
-            this.container = this.bubble.find('#bubble-connector');
 
             // Inject.
             this.element.append(this.bubble);
