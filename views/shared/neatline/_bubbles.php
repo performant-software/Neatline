@@ -27,6 +27,8 @@
 
 <script type="text/template" id="bubble-template">
     <div class="bubble-container">
+        <a href="#" class="freeze-bubble">Click to freeze</a>
+        <a href="#" class="close-bubble">Close <span class="close-x">X</span></a>
         <div class="title"><%= title %></div>
         <div class="body"><%= body %></div>
     </div>

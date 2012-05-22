@@ -252,6 +252,9 @@
                         // Trigger out.
                         self._trigger('mapfeatureclick', {}, obj);
 
+                        // Freeze bubble.
+                        self.element.bubbles('freeze');
+
                     }
 
                 };

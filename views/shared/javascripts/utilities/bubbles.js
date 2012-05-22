@@ -43,6 +43,11 @@
                 $('#bubble-template').html()
             );
 
+            // Trackers.
+            this.bubble = null;
+            this.frozen = false;
+            this.connector = false;
+
         },
 
         /*
@@ -55,6 +60,14 @@
          */
         show: function(title, body) {
 
+            // If bubble is frozen, break.
+            if (this.frozen) return;
+
+            // If bubble exists, remove.
+            if (!_.isNull(this.bubble)) {
+                this.bubble.remove();
+            }
+
             // Render template.
             this.bubble = $(this.template({
                 title: title,
@@ -63,6 +76,11 @@
 
             // Get native dimensions of bubble.
             this._measureBubble();
+
+            // Get components.
+            this.freezeLink = this.bubble.find('a.freeze-bubble');
+            this.closeLink = this.bubble.find('a.close-bubble');
+            this.container = this.bubble.find('#bubble-connector');
 
             // Inject.
             this.element.append(this.bubble);
@@ -82,8 +100,47 @@
          * @return void.
          */
         hide: function() {
+
+            // If bubble is frozen, break.
+            if (this.frozen) return;
+
+            // Remove bubble.
             this.bubble.remove();
+            this.connector.remove();
+            this.bubble = null;
+
+            // Strip move listener.
             this._window.unbind('mousemove.bubbles');
+
+        },
+
+        /*
+         * Freeze bubble.
+         *
+         * @return void.
+         */
+        freeze: function() {
+
+            // Set tracker.
+            this.frozen = true;
+
+            // Strip mousemove listener.
+            this._window.unbind('mousemove.bubbles');
+
+            // Toggle link.
+            this.freezeLink.css('display', 'none');
+            this.closeLink.css('display', 'block');
+
+            // Increase opacity.
+            this.bubble.animate({ 'opacity': 0.8 }, 60);
+            this.triangle.animate({ 'opacity': 0.8 }, 60);
+
+            // Listen for close.
+            this.closeLink.mousedown(_.bind(function() {
+                this.frozen = false;
+                this.hide();
+            }, this));
+
         },
 
         /*
@@ -134,6 +191,51 @@
             this.bubble.css({
                 left: bubbleX,
                 top: bubbleY
+            });
+
+            // Remove existing connector.
+            if (this.connector) this.connector.remove();
+
+            // If the bubble is on the right.
+            if (bubbleX > containerX) {
+
+                // Build connector.
+                var offsetX = event.clientX+20;
+                var width = bubbleX-event.clientX-20;
+                this.connector = Raphael(
+                    offsetX, bubbleY, width, this.bubbleHeight
+                );
+
+                // Render connector.
+                var cursorOffset = containerY - bubbleY;
+                this.triangle = this.connector.path(
+                    'M1,' + cursorOffset + 'L99,30 400,170Z'
+                );
+
+            }
+
+            // If the bubble is on the left.
+            else {
+
+                // Build connector.
+                var offsetX = bubbleX+this.bubbleWidth;
+                var width = event.clientX-(bubbleX+this.bubbleWidth)-20;
+                this.connector = Raphael(
+                    offsetX, bubbleY, width, this.bubbleHeight
+                );
+
+                // Render connector.
+                var cursorOffset = containerY - bubbleY;
+                this.triangle = this.connector.path(
+                    'M'+width+',' + cursorOffset + 'L1,30 -400,170Z'
+                );
+
+            }
+
+            // Set conncetor styles.
+            this.triangle.attr({
+                fill: '#000',
+                opacity: 0.7
             });
 
         },

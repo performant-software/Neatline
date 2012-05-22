@@ -172,6 +172,8 @@ function neatline_queueNeatlineAssets()
     queue_js('libraries/underscore-min', 'javascripts');
     queue_js('libraries/moment.min', 'javascripts');
     queue_js('libraries/iso8601.min', 'javascripts');
+    // queue_js('libraries/d3.v2.min', 'javascripts');
+    queue_js('libraries/raphael', 'javascripts');
 
     // Google fonts.
     echo __v()->partial('neatline/_fonts.php');

@@ -287,11 +287,39 @@ div.bubble-container {
     color: white;
     max-width: 300px;
     opacity: 0.7;
-    padding: 30px;
+    padding: 10px 30px 30px 30px;
 }
 
 div.bubble-container div.title {
     font-weight: bold;
     font-size: 2em;
     margin-bottom: 0.7em;
+}
+
+div.bubble-container a.close-bubble,
+div.bubble-container a.freeze-bubble
+{
+    display: block;
+    color: white;
+    margin: 0 0 10px 0;
+    text-decoration: none;
+    font-style: italic;
+}
+
+div.bubble-container a.close-bubble:hover,
+div.bubble-container a.freeze-bubble:hover
+{
+    text-decoration: underline;
+}
+
+div.bubble-container a.freeze-bubble {
+    opacity: 0.3;
+}
+
+div.bubble-container a.close-bubble {
+    display: none;
+}
+
+div.bubble-container span.close-x {
+    font-style: normal;
 }
