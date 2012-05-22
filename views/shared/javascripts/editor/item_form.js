@@ -791,6 +791,11 @@
             data.point_radius =             parseInt(this.pointRadius.val(), 10);
             data.parent_record_id =         parseInt(this.parentRecord.val(), 10);
 
+            // If use-dc is checked, empty description.
+            if (data.use_dc_metadata) {
+                data.description = '';
+            }
+
             return data;
 
         },
