@@ -81,6 +81,7 @@
             this.slug =                     this.form.find('input[name="slug"]');
             this.description =              this.form.find('textarea[name="description"]');
             this.useDcData =                this.form.find('input[name="use-dc-data"]');
+            this.useDcDataLabel =           this.useDcData.next('span');
             this.startDate =                this.form.find('input[name="start-date-date"]');
             this.endDate =                  this.form.find('input[name="end-date-date"]');
             this.startVisibleDate =         this.form.find('input[name="start-visible-date"]');
@@ -629,6 +630,11 @@
             // Hide delete button, enable use-DC button.
             this.deleteButton.css('visibility', 'hidden');
             this.useDcData.removeAttr('disabled');
+
+            // Un-gray-out the checkbox label.
+            this.useDcDataLabel.css('opacity', 1);
+            console.log(this.useDcDataLabel);
+
         },
 
         /*
@@ -639,6 +645,10 @@
             // Show delete button, disable use-DC button.
             this.deleteButton.css('visibility', 'visible');
             this.useDcData.attr('disabled', true);
+
+            // Gray out the checkbox label.
+            this.useDcDataLabel.css('opacity', 0.3);
+
         },
 
         /*
@@ -658,9 +668,8 @@
             this.descriptionEditor.updateFrame().refresh();
 
             // If use-DC is activated, disable text editors.
-            if (useDc) {
-                this._disableTextEditors();
-            }
+            if (useDc) this._disableTextEditors();
+            else this._enableTextEditors();
 
             // Populate inputs.
             this.slug.val(this._data.slug);
@@ -819,6 +828,21 @@
             // Gray out.
             $(this.titleEditor.doc.body).css('opacity', 0.3);
             $(this.descriptionEditor.doc.body).css('opacity', 0.3);
+
+        },
+
+        /*
+         * Enable the text editors.
+         */
+        _enableTextEditors: function() {
+
+            // Disable.
+            this.titleEditor.disable(false);
+            this.descriptionEditor.disable(false);
+
+            // Gray out.
+            $(this.titleEditor.doc.body).css('opacity', 1);
+            $(this.descriptionEditor.doc.body).css('opacity', 1);
 
         },
 
