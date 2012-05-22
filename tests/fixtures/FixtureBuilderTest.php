@@ -302,11 +302,12 @@ class Neatline_FixtureBuilderTest extends Omeka_Test_AppTestCase
 
         $fixture = fopen($this->path_to_fixtures . 'editor-form-ajax.html', 'w');
 
-        // Mock exhibit.
+        // Mock exhibit and item.
         $exhibit = $this->helper->_createNeatline();
+        $item = $this->helper->_createItem();
 
         // Mock record.
-        $record1 = new NeatlineDataRecord();
+        $record1 = new NeatlineDataRecord($item, $exhibit);
         $record1->title = 'Test Title 1';
         $record1->slug = 'test-slug';
         $record1->description = 'Test description.';
@@ -324,6 +325,7 @@ class Neatline_FixtureBuilderTest extends Omeka_Test_AppTestCase
         $record1->exhibit_id = $exhibit->id;
         $record1->space_active = 1;
         $record1->parent_record_id = 2;
+        $record1->use_dc_metadata = 1;
         $record1->save();
 
         // Mock records for parent record select.

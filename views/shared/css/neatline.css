@@ -290,10 +290,20 @@ div.bubble-container {
     padding: 10px 30px 30px 30px;
 }
 
+div.bubble-container h2,
+div.bubble-container h3 {
+    color: #e1e1e1;
+}
+
+div.bubble-container div.element-text {
+    margin-bottom: 1em;
+}
+
 div.bubble-container div.title {
     font-weight: bold;
     font-size: 2em;
     margin-bottom: 0.7em;
+    line-height: 1em;
 }
 
 div.bubble-container a.close-bubble,

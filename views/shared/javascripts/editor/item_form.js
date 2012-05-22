@@ -622,18 +622,18 @@
         },
 
         /*
-         * Display the delete record button.
+         * Show form elements for item-backed record.
          */
         _showItemRecordElements: function() {
-            this.deleteButton.css('visibility', 'visible');
+            this.deleteButton.css('visibility', 'hidden');
             this.useDcData.removeAttr('disabled');
         },
 
         /*
-         * Hide the delete record button.
+         * Show form elements for Neatline-endemic record.
          */
         _hideItemRecordElements: function() {
-            this.deleteButton.css('visibility', 'hidden');
+            this.deleteButton.css('visibility', 'visible');
             this.useDcData.attr('disabled', true);
         },
 

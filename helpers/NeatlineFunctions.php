@@ -602,9 +602,9 @@ function neatline_getUndatedItemsDataUrl($neatline_id)
 }
 
 /**
- * Since item() is broken.
+ * Get an element text for an item by element set and element.
  *
- * @param Omeka_record $item The item to work on.
+ * @param Omeka_record $item The item.
  * @param string $elementSet The element set.
  * @param string $elementName The element name.
  *

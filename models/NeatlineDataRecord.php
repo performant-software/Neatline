@@ -24,6 +24,8 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache 2 License
  */
 
+require_once HELPERS;
+
 class NeatlineDataRecord extends Omeka_record
 {
 
@@ -643,9 +645,9 @@ class NeatlineDataRecord extends Omeka_record
     {
 
         // Build item metadata.
-        // if ($this->use_dc_metadata === 1) {
-
-        // }
+        if ($this->use_dc_metadata === 1) {
+            return show_item_metadata(array(), $this->getItem());
+        }
 
         // Return row-level value.
         if (!is_null($this->description)) {
