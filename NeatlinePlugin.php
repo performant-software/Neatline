@@ -130,6 +130,7 @@ class NeatlinePlugin
         $sql = "CREATE TABLE IF NOT EXISTS `{$this->_db->prefix}neatline_data_records` (
                 `id`                          int(10) unsigned not null auto_increment,
                 `item_id`                     int(10) unsigned NULL,
+                `use_dc_metadata`             tinyint(1) NULL,
                 `exhibit_id`                  int(10) unsigned NULL,
                 `parent_record_id`            int(10) unsigned NULL,
                 `title`                       tinytext COLLATE utf8_unicode_ci NULL,

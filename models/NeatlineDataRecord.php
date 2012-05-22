@@ -36,6 +36,9 @@ class NeatlineDataRecord extends Omeka_record
     public $exhibit_id;
     public $parent_record_id;
 
+    // Statuses.
+    public $use_dc_metadata;
+
     // Text fields.
     public $title;
     public $slug;
@@ -499,6 +502,23 @@ class NeatlineDataRecord extends Omeka_record
         // Otherwise, set integer key.
         else {
             $this->parent_record_id = $id;
+        }
+
+    }
+
+    /**
+     * Set the use_dc_metadata parameter.
+     *
+     * @param integer $useDcMetadata 0/1.
+     *
+     * @return void.
+     */
+    public function setUseDcMetadata($useDcMetadata)
+    {
+
+        // If there is a parent item.
+        if (!is_null($this->item_id)) {
+            $this->use_dc_metadata = $useDcMetadata;
         }
 
     }

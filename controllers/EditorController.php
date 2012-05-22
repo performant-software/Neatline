@@ -162,6 +162,7 @@ class Neatline_EditorController extends Omeka_Controller_Action
         $title =                    $_post['title'];
         $slug =                     $_post['slug'];
         $description =              $_post['description'];
+        $useDcMetadata =            $_post['use_dc_metadata'];
         $startDate =                $_post['start_date'];
         $endDate =                  $_post['end_date'];
         $startVisibleDate =         $_post['start_visible_date'];
@@ -204,6 +205,7 @@ class Neatline_EditorController extends Omeka_Controller_Action
         $record->setNotEmpty('end_date', $endDate);
         $record->setNotEmpty('start_visible_date', $startVisibleDate);
         $record->setNotEmpty('end_visible_date', $endVisibleDate);
+        $record->setUseDcMetadata($useDcMetadata);
         $record->setGeocoverage($geoCoverage);
         $record->setSlug($slug);
 

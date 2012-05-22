@@ -82,6 +82,7 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
 
         // Set.
         $record->parent_record_id =             1;
+        $record->use_dc_metadata =              1;
         $record->title =                        'title';
         $record->description =                  'description';
         $record->start_date =                   'startdate';
@@ -112,6 +113,7 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
 
         // Get.
         $this->assertEquals($record->parent_record_id, 1);
+        $this->assertEquals($record->use_dc_metadata, 1);
         $this->assertEquals($record->title, 'title');
         $this->assertEquals($record->description, 'description');
         $this->assertEquals($record->start_date, 'startdate');
@@ -804,6 +806,49 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         // Set.
         $record->setParentRecordId(1);
         $this->assertEquals($record->parent_record_id, 1);
+
+    }
+
+    /**
+     * When a value is passed to setUseDcMetadata on a record that
+     * does not have a parent item, use_dc_metadat should not be set.
+     *
+     * @return void.
+     */
+    public function testSetUseDcMetadataWithRecordWithNoParentItem()
+    {
+
+        // Create a record.
+        $exhibit = $this->helper->_createNeatline();
+        $record = new NeatlineDataRecord(null, $exhibit);
+
+        // Set.
+        $record->setUseDcMetadata(1);
+        $this->assertNull($record->use_dc_metadata);
+        $record->setUseDcMetadata(0);
+        $this->assertNull($record->use_dc_metadata);
+
+    }
+
+    /**
+     * When a value is passed to setUseDcMetadata on a record that
+     * has a parent item, use_dc_metadat should be set.
+     *
+     * @return void.
+     */
+    public function testSetUseDcMetadataWithRecordWithParentItem()
+    {
+
+        // Create a record.
+        $exhibit = $this->helper->_createNeatline();
+        $item = $this->helper->_createItem();
+        $record = new NeatlineDataRecord($item, $exhibit);
+
+        // Set.
+        $record->setUseDcMetadata(1);
+        $this->assertEquals($record->use_dc_metadata, 1);
+        $record->setUseDcMetadata(0);
+        $this->assertEquals($record->use_dc_metadata, 0);
 
     }
 

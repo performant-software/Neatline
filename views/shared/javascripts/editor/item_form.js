@@ -740,6 +740,7 @@
             data.slug =                     this.slug.val();
 
             // Get the form field data.
+            data.use_dc_metadata =          this.useDcData.is(':checked') ? 1 : 0;
             data.left_percent =             parseInt(this.leftPercent.val(), 10);
             data.right_percent =            parseInt(this.rightPercent.val(), 10);
             data.start_date =               this.startDate.val();

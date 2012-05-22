@@ -793,6 +793,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
                 'stroke_width' =>       self::$__testParams['stroke_width'],
                 'point_radius' =>       self::$__testParams['point_radius'],
                 'parent_record_id' =>   self::$__testParams['parent_record_id'],
+                'use_dc_metadata' =>    0
             )
         );
 
@@ -905,6 +906,8 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
             self::$__testParams['parent_record_id']
         );
 
+        $this->assertNull($record->use_dc_metadata);
+
         $this->assertEquals(
             $record->space_active,
             1
@@ -955,7 +958,8 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
                 'stroke_opacity' =>     self::$__testParams['stroke_opacity'],
                 'stroke_width' =>       self::$__testParams['stroke_width'],
                 'point_radius' =>       self::$__testParams['point_radius'],
-                'parent_record_id' =>   self::$__testParams['parent_record_id']
+                'parent_record_id' =>   self::$__testParams['parent_record_id'],
+                'use_dc_metadata' =>    1
             )
         );
 
@@ -1069,6 +1073,11 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         );
 
         $this->assertEquals(
+            $record->use_dc_metadata,
+            1
+        );
+
+        $this->assertEquals(
             $record->space_active,
             1
         );
@@ -1120,7 +1129,8 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
                 'stroke_opacity' =>     self::$__testParams['stroke_opacity'],
                 'stroke_width' =>       self::$__testParams['stroke_width'],
                 'point_radius' =>       self::$__testParams['point_radius'],
-                'parent_record_id' =>   self::$__testParams['parent_record_id']
+                'parent_record_id' =>   self::$__testParams['parent_record_id'],
+                'use_dc_metadata' =>    1
             )
         );
 
@@ -1238,6 +1248,11 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         );
 
         $this->assertEquals(
+            $record->use_dc_metadata,
+            1
+        );
+
+        $this->assertEquals(
             $record->space_active,
             1
         );
@@ -1271,7 +1286,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         // Form the POST for a space change.
         $this->request->setMethod('POST')
             ->setPost(array(
-                'item_id' =>        '',
+                'item_id' =>            '',
                 'record_id' =>          $record->id,
                 'exhibit_id' =>         $neatline->id,
                 'space_active' =>       (string) self::$__testParams['space_active'],
@@ -1293,7 +1308,8 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
                 'stroke_opacity' =>     self::$__testParams['stroke_opacity'],
                 'stroke_width' =>       self::$__testParams['stroke_width'],
                 'point_radius' =>       self::$__testParams['point_radius'],
-                'parent_record_id' =>   self::$__testParams['parent_record_id']
+                'parent_record_id' =>   self::$__testParams['parent_record_id'],
+                'use_dc_metadata' =>    0
             )
         );
 
@@ -1351,7 +1367,8 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
                 'stroke_opacity' =>     self::$__testParams['stroke_opacity'],
                 'stroke_width' =>       self::$__testParams['stroke_width'],
                 'point_radius' =>       self::$__testParams['point_radius'],
-                'parent_record_id' =>   self::$__testParams['parent_record_id']
+                'parent_record_id' =>   self::$__testParams['parent_record_id'],
+                'use_dc_metadata' =>    1
             )
         );
 
@@ -1411,7 +1428,8 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
                 'stroke_opacity' =>     self::$__testParams['stroke_opacity'],
                 'stroke_width' =>       self::$__testParams['stroke_width'],
                 'point_radius' =>       self::$__testParams['point_radius'],
-                'parent_record_id' =>   self::$__testParams['parent_record_id']
+                'parent_record_id' =>   self::$__testParams['parent_record_id'],
+                'use_dc_metadata' =>    1
             )
         );
 
@@ -1463,7 +1481,8 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
                 'stroke_opacity' =>     self::$__testParams['stroke_opacity'],
                 'stroke_width' =>       self::$__testParams['stroke_width'],
                 'point_radius' =>       self::$__testParams['point_radius'],
-                'parent_record_id' =>   self::$__testParams['parent_record_id']
+                'parent_record_id' =>   self::$__testParams['parent_record_id'],
+                'use_dc_metadata' =>    1
             )
         );
 
@@ -1522,7 +1541,8 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
                 'stroke_opacity' =>     self::$__testParams['stroke_opacity'],
                 'stroke_width' =>       self::$__testParams['stroke_width'],
                 'point_radius' =>       self::$__testParams['point_radius'],
-                'parent_record_id' =>   self::$__testParams['parent_record_id']
+                'parent_record_id' =>   self::$__testParams['parent_record_id'],
+                'use_dc_metadata' =>    1
             )
         );
 
@@ -1574,7 +1594,8 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
                 'stroke_opacity' =>     self::$__testParams['stroke_opacity'],
                 'stroke_width' =>       self::$__testParams['stroke_width'],
                 'point_radius' =>       self::$__testParams['point_radius'],
-                'parent_record_id' =>   self::$__testParams['parent_record_id']
+                'parent_record_id' =>   self::$__testParams['parent_record_id'],
+                'use_dc_metadata' =>    1
             )
         );
 
