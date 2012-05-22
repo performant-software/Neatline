@@ -573,6 +573,35 @@ class Neatline_EditorController extends Omeka_Controller_Action
 
     /**
      * ~ AJAX ~
+     * Update the "Use default item metadata" settings.
+     *
+     * @return void
+     */
+    public function dcdefaultAction()
+    {
+
+        // Supress the default Zend layout-sniffer functionality.
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        // Get the post.
+        $_post = $this->_request->getPost();
+
+        // Get the record.
+        $recordId = (int) $_post['record_id'];
+        $status = $_post['status'];
+
+        // Set status.
+        $record = $this->_recordsTable->find($recordId);
+        $record->setUseDcMetadata($status);
+        $record->save();
+
+        // Return the new description field.
+        echo $record->getDescription();
+
+    }
+
+    /**
+     * ~ AJAX ~
      * Delete a Neatline-endemic data record.
      *
      * @return void

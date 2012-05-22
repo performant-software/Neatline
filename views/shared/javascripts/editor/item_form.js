@@ -140,6 +140,23 @@
                 this.options.cleditor.description
             )[0];
 
+            // ** USE DC DATA.
+            this.useDcData.bind('change', _.bind(function() {
+
+                // If the box is checked, disable text editors.
+                if (this.useDcData.prop('checked')) {
+                    this._disableTextEditors();
+                    this._postDcDefaultStatus(true);
+                }
+
+                // If the box is unchecked, enable text editors.
+                else {
+                    this._enableTextEditors();
+                    this._postDcDefaultStatus(false);
+                }
+
+            }, this));
+
             // ** DATE AMBIGUITY.
             this.ambiguity.gradientbuilder({
 
@@ -509,12 +526,9 @@
          */
         _showContainer: function() {
 
-            var self = this;
-
             // Display the form and zero the height.
             this.container.css('display', 'table-cell');
             this.element.css('visibility', 'visible');
-
             this.form.css('height', 'auto');
 
         },
@@ -633,7 +647,6 @@
 
             // Un-gray-out the checkbox label.
             this.useDcDataLabel.css('opacity', 1);
-            console.log(this.useDcDataLabel);
 
         },
 
@@ -820,30 +833,16 @@
          * Disable and gray out the text editors.
          */
         _disableTextEditors: function() {
-
-            // Disable.
-            this.titleEditor.disable(true);
             this.descriptionEditor.disable(true);
-
-            // Gray out.
-            $(this.titleEditor.doc.body).css('opacity', 0.3);
-            $(this.descriptionEditor.doc.body).css('opacity', 0.3);
-
+            $(this.descriptionEditor.$main[0]).css('opacity', 0.3);
         },
 
         /*
          * Enable the text editors.
          */
         _enableTextEditors: function() {
-
-            // Disable.
-            this.titleEditor.disable(false);
             this.descriptionEditor.disable(false);
-
-            // Gray out.
-            $(this.titleEditor.doc.body).css('opacity', 1);
-            $(this.descriptionEditor.doc.body).css('opacity', 1);
-
+            $(this.descriptionEditor.$main[0]).css('opacity', 1);
         },
 
 
@@ -1031,6 +1030,34 @@
                     self._trigger('savecomplete');
                     self._getFormData();
                 }
+
+            });
+
+        },
+
+        /*
+         * Reset DC default status.
+         */
+        _postDcDefaultStatus: function(status) {
+
+            var self = this;
+
+            // Commit.
+            $.ajax({
+
+                url: 'ajax/dcdefault',
+                type: 'POST',
+                dataType: 'html',
+                data: {
+                    record_id: this.recordId,
+                    status: status ? 1 : 0
+                },
+
+                success: _.bind(function(newDescription) {
+                    this.description.val(newDescription);
+                    this.descriptionEditor.updateFrame().refresh();
+                    self._trigger('savecomplete');
+                }, this)
 
             });
 
