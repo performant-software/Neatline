@@ -593,12 +593,15 @@ class NeatlineDataRecord extends Omeka_record
     public function getTitle()
     {
 
+        // Return row-level value.
         if (!is_null($this->title)) {
             return $this->title;
         }
 
+        // If there is a parent item.
         else if (!is_null($this->item_id)) {
 
+            // Try to get DC title.
             return neatline_getItemMetadata(
                 $this->getItem(),
                 'Dublin Core',
@@ -639,12 +642,20 @@ class NeatlineDataRecord extends Omeka_record
     public function getDescription()
     {
 
+        // Build item metadata.
+        // if ($this->use_dc_metadata === 1) {
+
+        // }
+
+        // Return row-level value.
         if (!is_null($this->description)) {
             return $this->description;
         }
 
+        // If there is a parent item.
         else if (!is_null($this->item_id)) {
 
+            // Try to get a DC description.
             return neatline_getItemMetadata(
                 $this->getItem(),
                 'Dublin Core',
