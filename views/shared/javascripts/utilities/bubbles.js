@@ -201,9 +201,10 @@
 
                 // Build connector.
                 var offsetX = event.clientX+20;
-                var width = bubbleX-event.clientX-20;
+                var offsetY = offset.top+bubbleY;
+                var width = bubbleX-containerX-20;
                 this.connector = Raphael(
-                    offsetX, bubbleY, width, this.bubbleHeight
+                    offsetX, offsetY, width, this.bubbleHeight
                 );
 
                 // Render connector.
@@ -218,10 +219,11 @@
             else {
 
                 // Build connector.
-                var offsetX = bubbleX+this.bubbleWidth;
-                var width = event.clientX-(bubbleX+this.bubbleWidth)-20;
+                var offsetX = bubbleX+this.bubbleWidth+offset.left;
+                var offsetY = offset.top+bubbleY;
+                var width = containerX-(bubbleX+this.bubbleWidth)-20;
                 this.connector = Raphael(
-                    offsetX, bubbleY, width, this.bubbleHeight
+                    offsetX, offsetY, width, this.bubbleHeight
                 );
 
                 // Render connector.
