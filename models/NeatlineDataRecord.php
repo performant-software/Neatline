@@ -646,7 +646,9 @@ class NeatlineDataRecord extends Omeka_record
 
         // Build item metadata.
         if ($this->use_dc_metadata == 1) {
-            return show_item_metadata(array(), $this->getItem());
+            return __v()->partial('neatline/_dc_metadata.php', array(
+                'item' => $this->getItem()
+            ));
         }
 
         // Return row-level value.
