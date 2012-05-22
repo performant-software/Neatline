@@ -625,6 +625,8 @@
          * Show form elements for item-backed record.
          */
         _showItemRecordElements: function() {
+
+            // Hide delete button, enable use-DC button.
             this.deleteButton.css('visibility', 'hidden');
             this.useDcData.removeAttr('disabled');
         },
@@ -633,6 +635,8 @@
          * Show form elements for Neatline-endemic record.
          */
         _hideItemRecordElements: function() {
+
+            // Show delete button, disable use-DC button.
             this.deleteButton.css('visibility', 'visible');
             this.useDcData.attr('disabled', true);
         },
@@ -642,6 +646,9 @@
          */
         _applyData: function() {
 
+            // Get use-DC as boolean.
+            var useDc = Boolean(this._data.use_dc_metadata);
+
             // Update title.
             this.title.val(this._data.title);
             this.titleEditor.updateFrame().refresh();
@@ -650,9 +657,14 @@
             this.description.val(this._data.description);
             this.descriptionEditor.updateFrame().refresh();
 
+            // If use-DC is activated, disable text editors.
+            if (useDc) {
+                this._disableTextEditors();
+            }
+
             // Populate inputs.
             this.slug.val(this._data.slug);
-            this.useDcData.prop('checked', Boolean(this._data.use_dc_metadata));
+            this.useDcData.prop('checked', useDc);
             this.vectorOpacity.val(this._data.vector_opacity);
             this.strokeOpacity.val(this._data.stroke_opacity);
             this.strokeWidth.val(this._data.stroke_width);
@@ -793,6 +805,21 @@
          */
         _getTitleContent: function(coverage) {
             return this.title.next('iframe').contents().find('body').html();
+        },
+
+        /*
+         * Disable and gray out the text editors.
+         */
+        _disableTextEditors: function() {
+
+            // Disable.
+            this.titleEditor.disable(true);
+            this.descriptionEditor.disable(true);
+
+            // Gray out.
+            $(this.titleEditor.doc.body).css('opacity', 0.3);
+            $(this.descriptionEditor.doc.body).css('opacity', 0.3);
+
         },
 
 
