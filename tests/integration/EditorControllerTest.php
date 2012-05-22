@@ -48,7 +48,8 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         'geocoverage' => '[POINT(-1.0, 1.0)]',
         'space_active' => true,
         'time_active' => true,
-        'parent_record_id' => 1
+        'parent_record_id' => 1,
+        'use_dc_metadata' => 1
     );
 
     /**
@@ -562,6 +563,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $record->slug =                 self::$__testParams['slug'];
         $record->description =          self::$__testParams['description'];
         $record->parent_record_id =     self::$__testParams['parent_record_id'];
+        $record->use_dc_metadata =      self::$__testParams['use_dc_metadata'];
         $record->start_date =           self::$__testParams['start_date'];
         $record->end_date =             self::$__testParams['end_date'];
         $record->start_visible_date =   self::$__testParams['start_visible_date'];
@@ -599,25 +601,26 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->assertEquals(
             $json,
             (object) array(
-                'title' => self::$__testParams['title'],
-                'slug' => self::$__testParams['slug'],
-                'description' => self::$__testParams['description'],
-                'vector_color' => self::$__testParams['vector_color'],
-                'stroke_color' => self::$__testParams['stroke_color'],
-                'highlight_color' => self::$__testParams['highlight_color'],
-                'vector_opacity' => self::$__testParams['vector_opacity'],
-                'stroke_opacity' => self::$__testParams['stroke_opacity'],
-                'stroke_width' => self::$__testParams['stroke_width'],
-                'point_radius' => self::$__testParams['point_radius'],
-                'start_date' => self::$__testParams['start_date'],
-                'end_date' => self::$__testParams['end_date'],
+                'title' =>              self::$__testParams['title'],
+                'slug' =>               self::$__testParams['slug'],
+                'description' =>        self::$__testParams['description'],
+                'vector_color' =>       self::$__testParams['vector_color'],
+                'stroke_color' =>       self::$__testParams['stroke_color'],
+                'highlight_color' =>    self::$__testParams['highlight_color'],
+                'vector_opacity' =>     self::$__testParams['vector_opacity'],
+                'stroke_opacity' =>     self::$__testParams['stroke_opacity'],
+                'stroke_width' =>       self::$__testParams['stroke_width'],
+                'point_radius' =>       self::$__testParams['point_radius'],
+                'start_date' =>         self::$__testParams['start_date'],
+                'end_date' =>           self::$__testParams['end_date'],
                 'start_visible_date' => self::$__testParams['start_visible_date'],
-                'end_visible_date' => self::$__testParams['end_visible_date'],
-                'left_percent' => self::$__testParams['left_percent'],
-                'right_percent' => self::$__testParams['right_percent'],
-                'parent_record_id' => self::$__testParams['parent_record_id'],
+                'end_visible_date' =>   self::$__testParams['end_visible_date'],
+                'left_percent' =>       self::$__testParams['left_percent'],
+                'right_percent' =>      self::$__testParams['right_percent'],
+                'parent_record_id' =>   self::$__testParams['parent_record_id'],
+                'use_dc_metadata' =>    self::$__testParams['use_dc_metadata'],
                 'records' => (object) array(
-                    $record->id => self::$__testParams['title']
+                    $record->id =>      self::$__testParams['title']
                 )
             )
         );
@@ -673,6 +676,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
                 'end_visible_date' => '',
                 'slug' => '',
                 'parent_record_id' => 'none',
+                'use_dc_metadata' => null,
                 'records' => (object) array(
                     $record->id => ''
                 ),
@@ -743,6 +747,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
                 'end_visible_date' => '',
                 'slug' => '',
                 'parent_record_id' => 'none',
+                'use_dc_metadata' => 0,
                 'records' => array(),
                 'title' => 'Test Title',
                 'description' => 'Test description.'

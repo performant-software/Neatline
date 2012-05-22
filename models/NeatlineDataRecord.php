@@ -216,6 +216,7 @@ class NeatlineDataRecord extends Omeka_record
         $data['left_percent'] =         (int) $this->getLeftPercent();
         $data['right_percent'] =        (int) $this->getRightPercent();
         $data['parent_record_id'] =     $this->getParentRecordId();
+        $data['use_dc_metadata'] =      $this->use_dc_metadata;
         $data['records'] =              $records;
 
         // JSON-ify the array.
@@ -259,6 +260,7 @@ class NeatlineDataRecord extends Omeka_record
         $data['slug'] =                 '';
         $data['parent_record_id'] =     'none';
         $data['records'] =              $records;
+        $data['use_dc_metadata'] =      0;
 
         // Get DC title default.
         $data['title'] = neatline_getItemMetadata(

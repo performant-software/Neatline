@@ -652,6 +652,7 @@
 
             // Populate inputs.
             this.slug.val(this._data.slug);
+            this.useDcData.prop('checked', Boolean(this._data.use_dc_metadata));
             this.vectorOpacity.val(this._data.vector_opacity);
             this.strokeOpacity.val(this._data.stroke_opacity);
             this.strokeWidth.val(this._data.stroke_width);

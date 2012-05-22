@@ -48,7 +48,8 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         'geocoverage' => '[POINT(-1.0, 1.0)]',
         'space_active' => true,
         'time_active' => true,
-        'parent_record_id' => 1
+        'parent_record_id' => 1,
+        'use_dc_metadata' => 1
     );
 
     /**
@@ -1696,6 +1697,7 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         $record->slug =                 self::$__testParams['slug'];
         $record->description =          self::$__testParams['description'];
         $record->parent_record_id =     self::$__testParams['parent_record_id'];
+        $record->use_dc_metadata =      self::$__testParams['use_dc_metadata'];
         $record->start_date =           self::$__testParams['start_date'];
         $record->end_date =             self::$__testParams['end_date'];
         $record->start_visible_date =   self::$__testParams['start_visible_date'];
@@ -1737,6 +1739,7 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
                 'left_percent' =>       self::$__testParams['left_percent'],
                 'right_percent' =>      self::$__testParams['right_percent'],
                 'parent_record_id' =>   self::$__testParams['parent_record_id'],
+                'use_dc_metadata' =>    self::$__testParams['use_dc_metadata'],
                 'records' => (object) array(
                     $record->id =>      self::$__testParams['title']
                 )
@@ -1762,6 +1765,7 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         $record->slug =                 self::$__testParams['slug'];
         $record->description =          self::$__testParams['description'];
         $record->parent_record_id =     self::$__testParams['parent_record_id'];
+        $record->use_dc_metadata =      self::$__testParams['use_dc_metadata'];
         $record->start_date =           self::$__testParams['start_date'];
         $record->end_date =             self::$__testParams['end_date'];
         $record->start_visible_date =   self::$__testParams['start_visible_date'];
@@ -1803,6 +1807,7 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
                 'left_percent' =>       self::$__testParams['left_percent'],
                 'right_percent' =>      self::$__testParams['right_percent'],
                 'parent_record_id' =>   self::$__testParams['parent_record_id'],
+                'use_dc_metadata' =>    self::$__testParams['use_dc_metadata'],
                 'records' => (object) array(
                     $record->id =>      self::$__testParams['title']
                 )
@@ -1915,7 +1920,10 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
             $json
         );
 
-
+        $this->assertContains(
+            '"use_dc_metadata":null',
+            $json
+        );
 
     }
 
