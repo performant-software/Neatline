@@ -587,11 +587,22 @@ class Neatline_EditorController extends Omeka_Controller_Action
         $_post = $this->_request->getPost();
 
         // Get the record.
+        $exhibitId = (int) $_post['exhibit_id'];
+        $itemId = (int) $_post['item_id'];
         $recordId = (int) $_post['record_id'];
         $status = $_post['status'];
 
-        // Set status.
+        // Get record.
         $record = $this->_recordsTable->find($recordId);
+
+        // If no record exists, create one.
+        if (is_null($record)) {
+            $item = $this->_itemsTable->find($itemId);
+            $exhibit = $this->_neatlinesTable->find($exhibitId);
+            $record = new NeatlineDataRecord($item, $exhibit);
+        }
+
+        // Set status.
         $record->setUseDcMetadata($status);
         $record->save();
 

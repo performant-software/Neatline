@@ -2373,4 +2373,134 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
 
     }
 
+    /**
+     * The /dcdefault action should set the use_dc_default field when
+     * there is an existing record id.
+     *
+     * @return void.
+     */
+    public function testDcDefaultOnWithExistingRecordId()
+    {
+
+        // Create an exhibit, item, and record.
+        $exhibit = $this->helper->_createNeatline();
+        $item = $this->helper->_createItem();
+        $record = new NeatlineDataRecord($item, $exhibit);
+
+        // Set description and use_dc_metadata.
+        $record->use_dc_metadata = 0;
+        $record->description = 'Description.';
+        $record->save();
+
+        // Form the POST.
+        $this->request->setMethod('POST')
+            ->setPost(array(
+                'exhibit_id' => $exhibit->id,
+                'item_id' => $item->id,
+                'record_id' => $record->id,
+                'status' => 1
+            )
+        );
+
+        // Hit the route, re-get the record.
+        $this->dispatch('neatline-exhibits/editor/ajax/dcdefault');
+        $record = $this->_recordsTable->find($record->id);
+
+        // Capture the response as a HTML document.
+        $response = $this->getResponse()->getBody('default');
+        $doc = new DomDocument;
+        $doc->loadHTML($response);
+
+        // Check that the status was changed and that the method
+        // returns the DC show for the item.
+        $this->assertEquals($record->use_dc_metadata, 1);
+        $this->assertSelectCount('div.element-set', true, $doc);
+
+    }
+
+    /**
+     * The /dcdefault action should set the use_dc_default field when
+     * there is an existing record id and return the row-level description.
+     *
+     * @return void.
+     */
+    public function testDcDefaultOffWithExistingRecordId()
+    {
+
+        // Create an exhibit, item, and record.
+        $exhibit = $this->helper->_createNeatline();
+        $item = $this->helper->_createItem();
+        $record = new NeatlineDataRecord($item, $exhibit);
+
+        // Set description and use_dc_metadata.
+        $record->use_dc_metadata = 1;
+        $record->description = 'Description.';
+        $record->save();
+
+        // Form the POST.
+        $this->request->setMethod('POST')
+            ->setPost(array(
+                'exhibit_id' => $exhibit->id,
+                'item_id' => $item->id,
+                'record_id' => $record->id,
+                'status' => 0
+            )
+        );
+
+        // Hit the route, re-get the record.
+        $this->dispatch('neatline-exhibits/editor/ajax/dcdefault');
+        $record = $this->_recordsTable->find($record->id);
+
+        // Capture the response as a HTML document.
+        $response = $this->getResponse()->getBody('default');
+        $this->assertEquals($record->use_dc_metadata, 0);
+        $this->assertEquals($response, 'Description.');
+
+    }
+
+    /**
+     * The /dcdefault action should create a new data record and set
+     * the use_dc_default field when there is not an existing record id.
+     *
+     * @return void.
+     */
+    public function testDcDefaultOnWithoutExistingRecordId()
+    {
+
+        // Create an exhibit, item, and record.
+        $exhibit = $this->helper->_createNeatline();
+        $item = $this->helper->_createItem();
+
+        // Form the POST.
+        $this->request->setMethod('POST')
+            ->setPost(array(
+                'exhibit_id' => $exhibit->id,
+                'item_id' => $item->id,
+                'record_id' => 'null',
+                'status' => 1
+            )
+        );
+
+        // Capture starting count.
+        $count = $this->_recordsTable->count();
+
+        // Hit the route, re-get the record.
+        $this->dispatch('neatline-exhibits/editor/ajax/dcdefault');
+
+        // +1 records.
+        $this->assertEquals($this->_recordsTable->count(), $count+1);
+
+        // Capture the response as a HTML document.
+        $response = $this->getResponse()->getBody('default');
+        $doc = new DomDocument;
+        $doc->loadHTML($response);
+
+        // Check that the status was changed and that the method
+        // returns the DC show for the item.
+        $record = $this->_recordsTable->find(1);
+        $this->assertEquals($record->use_dc_metadata, 1);
+        $this->assertSelectCount('div.element-set', true, $doc);
+
+    }
+
 }

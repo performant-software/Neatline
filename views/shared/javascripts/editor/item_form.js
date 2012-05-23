@@ -1054,6 +1054,8 @@
                 type: 'POST',
                 dataType: 'html',
                 data: {
+                    exhibit_id: Neatline.record.id,
+                    item_id: this.itemId,
                     record_id: this.recordId,
                     status: status ? 1 : 0
                 },
