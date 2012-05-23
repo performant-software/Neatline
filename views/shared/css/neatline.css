@@ -287,7 +287,17 @@ div.bubble-container {
     color: white;
     max-width: 300px;
     opacity: 0.7;
-    padding: 10px 30px 30px 30px;
+    padding: 10px 20px 20px 20px;
+}
+
+div.bubble-container::-webkit-scrollbar {
+    width: 7px;
+    height: 9px;
+    background-color: #3a3a3a;
+}
+
+div.bubble-container::-webkit-scrollbar-thumb {
+    background: white;
 }
 
 div.bubble-container h2,
