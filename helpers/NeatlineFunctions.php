@@ -166,13 +166,12 @@ function neatline_queueNeatlineAssets()
     queue_js('jquery.getscrollbarwidth', 'javascripts/libraries');
 
     // Vendor.
-    queue_js('libraries/openlayers/OpenLayers', 'javascripts');
+    queue_js('libraries/openlayers/OpenLayers.min', 'javascripts');
     queue_js('libraries/simile/timeline-api/timeline-api', 'javascripts');
     queue_js('libraries/taffy-min', 'javascripts');
     queue_js('libraries/underscore-min', 'javascripts');
     queue_js('libraries/moment.min', 'javascripts');
     queue_js('libraries/iso8601.min', 'javascripts');
-    // queue_js('libraries/d3.v2.min', 'javascripts');
     queue_js('libraries/raphael', 'javascripts');
 
     // Google fonts.
