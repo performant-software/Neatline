@@ -210,6 +210,13 @@
         instantiateBlocks: function() {
 
             var self = this;
+            var hideBubbles = function(ev, obj) {
+                var bubbles = jQuery(self.element).data('bubbles');
+                if (bubbles.bubble != null) {
+                    self._trigger('mapfeatureleave', {}, obj);
+                    bubbles.hide();
+                }
+            };
 
             // ** MAP
             if (this.params.record.is_map && !this.instantiated_map) {
@@ -237,15 +244,7 @@
 
                     },
 
-                    'featureleave': function(event, obj) {
-
-                        // Trigger out.
-                        self._trigger('mapfeatureleave', {}, obj);
-
-                        // Remove bubble.
-                        self.element.bubbles('hide');
-
-                    },
+                    'featureleave': hideBubbles,
 
                     'featureclick': function(event, obj) {
 
@@ -268,6 +267,8 @@
                 else {
                     this.map.mapeditor(callbacks);
                 }
+
+                this.map.on('mouseout', hideBubbles);
 
                 // Register the presence of the map instantiation.
                 this.instantiated_map = true;
