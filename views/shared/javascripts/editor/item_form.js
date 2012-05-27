@@ -49,7 +49,7 @@
 
                 description: {
                     width: 340,
-                    height: 240,
+                    height: 200,
                     controls:
                         "bold italic underline | font size " +
                         "| color removeformat | bullets numbering | outdent " +
@@ -118,7 +118,7 @@
 
             // Preparatory routines.
             this._buildFormFunctionality();
-            this._buildFieldsets();
+            // this._buildFieldsets();
             this._measureForm();
 
         },
@@ -569,8 +569,7 @@
 
             // Expand the title.
             this.textSpan.stop().animate({
-                'color': textColor,
-                'font-size': 14
+                'color': textColor
             }, 100);
 
         },

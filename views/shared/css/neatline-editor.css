@@ -344,10 +344,9 @@ div.item-styles {
     height: 0;
 }
 
-a.fieldset {
-    margin: 10px 40px 10px 20px;
-    display: block;
-    font-style: italic;
+h4.fieldset-header {
+    margin: 0 20px;
+    color: #4b4b4b;
 }
 
 tr.edit-form a {
@@ -395,9 +394,13 @@ table.map-styles td {
     border: none !important;
 }
 
-table.map-styles label {
+tr.edit-form label {
     font-weight: normal;
     font-size: 12px;
+}
+
+table.map-buttons {
+    width: 310px;
 }
 
 

@@ -29,9 +29,7 @@
 
     <form class="form-stacked">
 
-        <a class="fieldset title-and-description" href="">
-            <div class="fieldset-arrow"></div>Text Description
-        </a>
+        <h4 class="fieldset-header">Text Metadata</h4>
         <div class="fieldset">
 
             <div class="clearfix">
@@ -71,9 +69,7 @@
 
         <hr />
 
-        <a class="fieldset date-information" href="">
-            <div class="fieldset-arrow"></div>Start and End Dates
-        </a>
+        <h4 class="fieldset-header">Temporal Metadata</h4>
         <div class="fieldset">
 
             <div class="clearfix">
@@ -132,9 +128,7 @@
 
         <hr />
 
-        <a class="fieldset map-styles" href="">
-            <div class="fieldset-arrow"></div>Map Styles
-        </a>
+        <h4 class="fieldset-header">Styling Metadata</h4>
         <div class="fieldset">
 
             <table class="map-styles">
@@ -203,31 +197,30 @@
                 </tr>
             </table>
 
-            <div class="clearfix">
-                <div class="input">
-                    <div class="inline-inputs">
-                        <button class="btn icon undo reset-styles">Reset Item Styles</button>
-                        <span class="help-inline">Reset all styles to match the exhibit defaults.</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="clearfix">
-                <div class="input">
-                    <div class="inline-inputs">
-                        <button class="btn icon home map-focus">Set Map Focus</button>
-                        <span class="help-inline">Set a custom map focus for the item.</span>
-                    </div>
-                </div>
-            </div>
+            <table class="map-styles map-buttons">
+                <tr>
+                    <td>
+                        <div class="input">
+                            <div class="inline-inputs">
+                                <button class="btn icon undo reset-styles">Reset Item Styles</button>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="input">
+                            <div class="inline-inputs">
+                                <button class="btn icon home map-focus">Set Map Focus</button>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
 
         </div>
 
         <hr />
 
-        <a class="fieldset relationships" href="">
-            <div class="fieldset-arrow"></div>Relationships
-        </a>
+        <h4 class="fieldset-header">Relations Metadata</h4>
         <div class="fieldset">
 
             <div class="clearfix">
@@ -236,7 +229,6 @@
                     <div class="inline-inputs">
                         <select name="parent-record">
                         </select>
-                        <span class="help-inline">If a parent record is set, this record will inherit the visibility dates and map styles of the parent.</span>
                     </div>
                 </div>
             </div>
