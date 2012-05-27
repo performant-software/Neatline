@@ -59,7 +59,7 @@
 
                 title: {
                     width: 340,
-                    height: 80,
+                    height: 50,
                     controls: "bold italic underline | font size color | " +
                         "bullets outdent indent | source removeformat"
                 }
@@ -930,6 +930,9 @@
                     // Fade up and trigger out.
                     self._fadeUp();
                     self._trigger('savecomplete');
+
+                    // Reload the form.
+                    self._getFormData();
 
                     // Update space tracker.
                     if (data.statuses.space) {

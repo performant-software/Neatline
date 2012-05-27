@@ -41,6 +41,7 @@
                 </div>
             </div>
 
+            <!--
             <div class="clearfix">
                 <label>Slug</label>
                 <div class="input">
@@ -50,6 +51,7 @@
                     </div>
                 </div>
             </div>
+            -->
 
             <div class="clearfix">
                 <label for="description">Description</label>
