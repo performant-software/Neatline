@@ -106,7 +106,7 @@
         hide: function() {
 
             // If bubble is frozen, break.
-            if (this.frozen) return;
+            if (this.frozen || _.isNull(this.bubble)) return;
 
             // Remove bubble.
             this.bubble.remove();

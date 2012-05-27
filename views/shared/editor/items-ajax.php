@@ -40,6 +40,11 @@
             <td class="item-title">
                 <span class="item-title-text"><?php echo ($record->title != null) ? $record->title : '[Untitled]'; ?></span>
                 <span class="item-title-fader"></span>
+                <div class="form-actions">
+                    <a href="#" class="save">Save</a>
+                    <a href="#" class="delete">Delete</a>
+                    <a href="#" class="return">Close</a>
+                </div>
             </td>
             <td class="col-1 col-row items">
                 <input type="checkbox" <?php echo ($record->items_active == 1) ? 'checked' : ''; ?> />
@@ -69,6 +74,11 @@
             <td class="item-title">
                 <span class="item-title-text"><?php echo item('Dublin Core', 'Title', null, $item); ?></span>
                 <span class="item-title-fader"></span>
+                <div class="form-actions">
+                    <a href="#" class="save">Save</a>
+                    <a href="#" class="delete">Delete</a>
+                    <a href="#" class="return">Close</a>
+                </div>
             </td>
             <td class="col-1 col-row items">
                 <input type="checkbox" <?php echo $neatline->getRecordStatus($item, 'items')? 'checked' : ''; ?> />

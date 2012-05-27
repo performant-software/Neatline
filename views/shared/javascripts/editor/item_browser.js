@@ -71,6 +71,7 @@
             this.timeHeader =               $('#time-header');
             this.editForm =                 $('#edit-form');
             this.newItemButton =            $('#new-item-button');
+            this.headerRow =                $('#header-row');
 
             // Trackers.
             this._searchString =            '';
@@ -722,12 +723,6 @@
 
             }
 
-            // Position at the top of the frame. Bumps up the scroll position by
-            // 1px to get rid of unattractive border doubling at the top of the frame.
-            this.element.animate({
-                'scrollTop': item.data('topOffset') - this.options.css.top_margin + 1
-            }, 300);
-
             // Display the form.
             this.editForm.itemform('showForm', item);
 
@@ -749,6 +744,18 @@
             item.data('expanded', true);
             this._currentFormItem = item;
             this._currentRecordTitle = item.find('span.item-title-text');
+
+            // Remove record header rows.
+            this.neatlineRecordsHeader.remove();
+            this.omekaRecordsHeader.remove();
+
+            // Remove item rows.
+            _.each(this.element.find('tr.item-row'), function(row) {
+                if (!$(row).data('expanded')) {
+                    var form = $(row).next('tr.edit-form');
+                    $(row).add(form).remove();
+                }
+            });
 
          },
 

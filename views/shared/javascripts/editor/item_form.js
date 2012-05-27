@@ -76,7 +76,6 @@
             // Getters.
             this._window =                  $(window);
             this.form =                     this.element.find('form');
-            this.deleteButton =             this.form.find('#record-delete-button');
             this.title =                    this.form.find('textarea[name="title"]');
             this.slug =                     this.form.find('input[name="slug"]');
             this.description =              this.form.find('textarea[name="description"]');
@@ -95,8 +94,6 @@
             this.pointRadius =              this.form.find('input[name="point-radius"]');
             this.leftPercent =              this.form.find('input[name="left-ambiguity-percentage"]');
             this.rightPercent =             this.form.find('input[name="right-ambiguity-percentage"]');
-            this.closeButton =              this.form.find('button[type="reset"]');
-            this.saveButton =               this.form.find('input[type="submit"]');
             this.textInputs =               this.form.find('input[type="text"], textarea');
             this.fieldset =                 this.form.find('fieldset');
             this.actions =                  this.form.find('#edit-form-actions');
@@ -118,7 +115,6 @@
 
             // Preparatory routines.
             this._buildFormFunctionality();
-            // this._buildFieldsets();
             this._measureForm();
 
         },
@@ -248,38 +244,6 @@
                 }
             });
 
-            // ** SAVE.
-            this.saveButton.bind({
-
-                'mousedown': function() {
-                    self._trigger('save');
-                },
-
-                'click': function(event) {
-                    event.preventDefault();
-                }
-
-            });
-
-            // ** DELETE.
-            this.deleteButton.bind({
-
-                'mousedown': function() {
-
-                    // Only do the delete if the record is Neatline-endemic.
-                    if (typeof this.itemId === 'undefined') {
-                        self._fadeDown();
-                        self.postRecordDelete();
-                    }
-
-                },
-
-                'click': function(event) {
-                    event.preventDefault();
-                }
-
-            });
-
             // ** FIX ITEM-SPECIFIC MAP FOCUS
             this.mapFocus.bind({
 
@@ -374,6 +338,9 @@
             var itemRaw =                   item.attr('itemid');
             var recordRaw =                 item.attr('recordid');
             this.itemTitleText =            item.find('.item-title-text');
+            this.deleteButton =             this.item.find('a.delete');
+            this.closeButton =              this.item.find('a.return');
+            this.saveButton =               this.item.find('a.save');
             this.container =                this.item.next('tr').find('td.edit-form-container');
             this.textSpan =                 this.item.find('.item-title-text');
             this.time =                     this.item.find('.time input');
@@ -406,6 +373,38 @@
 
             // Update the tracker.
             this._isForm = true;
+
+            // ** SAVE.
+            this.saveButton.bind({
+
+                'mousedown': _.bind(function() {
+                    this._trigger('save');
+                }, this),
+
+                'click': function(event) {
+                    event.preventDefault();
+                }
+
+            });
+
+            // ** DELETE.
+            this.deleteButton.bind({
+
+                'mousedown': _.bind(function() {
+
+                    // Only do the delete if the record is Neatline-endemic.
+                    if (typeof this.itemId === 'undefined') {
+                        this._fadeDown();
+                        this.postRecordDelete();
+                    }
+
+                }, this),
+
+                'click': function(event) {
+                    event.preventDefault();
+                }
+
+            });
 
         },
 
@@ -565,12 +564,10 @@
             }
 
             // Bold the title.
-            this.textSpan.css('font-weight', 'bold');
-
-            // Expand the title.
-            this.textSpan.stop().animate({
-                'color': textColor
-            }, 100);
+            this.textSpan.css({
+                'font-weight': 'bold',
+                'color': textColor,
+            });
 
         },
 

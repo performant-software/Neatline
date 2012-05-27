@@ -238,6 +238,24 @@ tr.header-row td {
     border: none;
 }
 
+div.form-actions {
+    /* display: none;*/
+    clear: both;
+}
+
+div.form-actions a {
+    font-style: italic;
+    margin: 0 0.6em 0 0;
+}
+
+div.form-actions a.return {
+    color: gray;
+}
+
+div.form-actions a.delete {
+    color: #C43C35;
+}
+
 
 /* Edit form */
 
@@ -720,7 +738,7 @@ table#items-table td.col-1:hover, table#items td.col-2:hover {
 table#items-table td.col-1,
 table#items-table td.col-2,
 table#items-table td.col-3 {
-    width: 13px;
+    width: 32px;
 }
 .mozilla table#items-table td.col-1,
 .mozilla table#items-table td.col-2,
@@ -734,6 +752,11 @@ table#items-table th, table#items td {
 
 table#items-table tr.hidden {
     display: none;
+}
+
+table#header-row {
+    position: fixed;
+    top: 80px;
 }
 
 
