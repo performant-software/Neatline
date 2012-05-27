@@ -230,10 +230,12 @@
                         self._trigger('mapfeatureenter', {}, obj);
 
                         // Render bubble.
-                        self.element.bubbles('show',
-                             obj.record.data.title,
-                             obj.record.data.description
-                        );
+                        if (self.options.isPublic) {
+                            self.element.bubbles('show',
+                                 obj.record.data.title,
+                                 obj.record.data.description
+                            );
+                        }
 
                     },
 
@@ -243,7 +245,9 @@
                         self._trigger('mapfeatureleave', {}, obj);
 
                         // Remove bubble.
-                        self.element.bubbles('hide');
+                        if (self.options.isPublic) {
+                            self.element.bubbles('hide');
+                        }
 
                     },
 
@@ -253,7 +257,9 @@
                         self._trigger('mapfeatureclick', {}, obj);
 
                         // Freeze bubble.
-                        self.element.bubbles('freeze');
+                        if (self.options.isPublic) {
+                            self.element.bubbles('freeze');
+                        }
 
                     }
 
