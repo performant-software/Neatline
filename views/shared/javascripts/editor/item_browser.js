@@ -652,11 +652,6 @@
                             self._showForm(item, true, true, true);
                         }
 
-                        // If the form is expanded, hide.
-                        else {
-                            self._hideForm(item, false);
-                        }
-
                     }
 
                 });
@@ -746,14 +741,14 @@
             this._currentRecordTitle = item.find('span.item-title-text');
 
             // Remove record header rows.
-            this.neatlineRecordsHeader.remove();
-            this.omekaRecordsHeader.remove();
+            this.neatlineRecordsHeader.hide();
+            this.omekaRecordsHeader.hide();
 
             // Remove item rows.
             _.each(this.element.find('tr.item-row'), function(row) {
                 if (!$(row).data('expanded')) {
                     var form = $(row).next('tr.edit-form');
-                    $(row).add(form).remove();
+                    $(row).add(form).hide();
                 }
             });
 
@@ -773,6 +768,15 @@
             // Fire the end edit without save callback.
             this._trigger('endmapedit', {}, {
                 'immediate': immediate
+            });
+
+            // Expand record header rows.
+            this.neatlineRecordsHeader.css('display', 'table-row');
+            this.omekaRecordsHeader.css('display', 'table-row');
+
+            // Show item rows.
+            _.each(this.element.find('tr.item-row'), function(row) {
+                $(row).css('display', 'table-row');
             });
 
             // Update trackers.

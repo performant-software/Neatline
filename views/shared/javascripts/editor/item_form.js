@@ -115,7 +115,6 @@
 
             // Preparatory routines.
             this._buildFormFunctionality();
-            this._measureForm();
 
         },
 
@@ -379,6 +378,19 @@
 
                 'mousedown': _.bind(function() {
                     this._trigger('save');
+                }, this),
+
+                'click': function(event) {
+                    event.preventDefault();
+                }
+
+            });
+
+            // ** CLOSE.
+            this.closeButton.bind({
+
+                'mousedown': _.bind(function() {
+                    this._trigger('hide');
                 }, this),
 
                 'click': function(event) {

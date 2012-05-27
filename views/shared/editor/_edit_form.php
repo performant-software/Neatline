@@ -235,18 +235,6 @@
 
         </div>
 
-        <hr />
-
-        <div class="fieldset">
-
-            <div id="edit-form-actions" class="actions">
-                <input type="submit" class="btn primary" value="Save">
-                <button id="record-delete-button" class="btn danger">Delete</button>
-                <button id="record-close-button" class="btn">Close</button>
-            </div>
-
-        </div>
-
     </form>
 
 </div>
