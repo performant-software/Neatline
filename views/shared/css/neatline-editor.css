@@ -239,7 +239,7 @@ tr.header-row td {
 }
 
 div.form-actions {
-    /* display: none;*/
+    display: none;
     clear: both;
 }
 

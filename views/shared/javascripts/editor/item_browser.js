@@ -718,8 +718,9 @@
 
             }
 
-            // Display the form.
+            // Display the form and action links.
             this.editForm.itemform('showForm', item);
+            item.find('div.form-actions').show();
 
             // Fire events to focus the Neatline blocks.
             this._trigger('itemedit', {}, {
@@ -741,14 +742,14 @@
             this._currentRecordTitle = item.find('span.item-title-text');
 
             // Remove record header rows.
-            this.neatlineRecordsHeader.hide();
-            this.omekaRecordsHeader.hide();
+            this.neatlineRecordsHeader.css('display', 'none');
+            this.omekaRecordsHeader.css('display', 'none');
 
             // Remove item rows.
             _.each(this.element.find('tr.item-row'), function(row) {
                 if (!$(row).data('expanded')) {
                     var form = $(row).next('tr.edit-form');
-                    $(row).add(form).hide();
+                    $(row).add(form).css('display', 'none');
                 }
             });
 
@@ -770,13 +771,14 @@
                 'immediate': immediate
             });
 
-            // Expand record header rows.
-            this.neatlineRecordsHeader.css('display', 'table-row');
-            this.omekaRecordsHeader.css('display', 'table-row');
+            // Show record header rows.
+            this.neatlineRecordsHeader.css('display', '');
+            this.omekaRecordsHeader.css('display', '');
 
-            // Show item rows.
+            // Remove item rows.
             _.each(this.element.find('tr.item-row'), function(row) {
-                $(row).css('display', 'table-row');
+                var form = $(row).next('tr.edit-form');
+                $(row).add(form).css('display', '');
             });
 
             // Update trackers.
