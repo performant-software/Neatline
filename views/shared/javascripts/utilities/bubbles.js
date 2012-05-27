@@ -48,6 +48,11 @@
             this.frozen = false;
             this.connector = false;
 
+            // Listen for container mouseleave.
+            this.element.mouseleave(_.bind(function() {
+                this.hide();
+            }, this));
+
         },
 
         /*
@@ -198,7 +203,7 @@
             // If the bubble is on the right.
             if (bubbleX > containerX) {
 
-                // Build connector.
+                // Build connector paper.
                 var offsetX = event.clientX+20;
                 var offsetY = offset.top+bubbleY;
                 var width = bubbleX-containerX-20;
@@ -206,10 +211,14 @@
                     offsetX, offsetY, width, this.bubbleHeight
                 );
 
-                // Render connector.
-                var cursorOffset = containerY - bubbleY;
+                // Get connector coordinates.
+                var cursorY = containerY - bubbleY;
+                var bubbleY1 = this.bubbleHeight*0.2;
+                var bubbleY2 = this.bubbleHeight*0.6;
+
+                // Render coordinates.
                 this.triangle = this.connector.path(
-                    'M1,' + cursorOffset + 'L99,30 400,170Z'
+                    'M1,'+cursorY+'L99,'+bubbleY1+' 99,'+bubbleY2+'Z'
                 );
 
             }
@@ -225,10 +234,14 @@
                     offsetX, offsetY, width, this.bubbleHeight
                 );
 
-                // Render connector.
-                var cursorOffset = containerY - bubbleY;
+                // Get connector coordinates.
+                var cursorY = containerY - bubbleY;
+                var bubbleY1 = this.bubbleHeight*0.2;
+                var bubbleY2 = this.bubbleHeight*0.6;
+
+                // Render coordinates.
                 this.triangle = this.connector.path(
-                    'M'+width+',' + cursorOffset + 'L1,30 -400,170Z'
+                    'M0,'+bubbleY1+'L'+width+','+cursorY+' 0,'+bubbleY2+'Z'
                 );
 
             }
