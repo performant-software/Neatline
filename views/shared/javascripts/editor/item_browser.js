@@ -652,6 +652,11 @@
                             self._showForm(item, true, true, true);
                         }
 
+                        // If the form is not expanded, do expand.
+                        else {
+                            self._hideForm(item, false);
+                        }
+
                     }
 
                 });
@@ -718,9 +723,14 @@
 
             }
 
+            // Position at the top of the frame. Bumps up the scroll position by
+            // 1px to get rid of unattractive border doubling at the top of the frame.
+            this.element.animate({
+                'scrollTop': item.data('topOffset') - this.options.css.top_margin + 1
+            }, 300);
+
             // Display the form and action links.
             this.editForm.itemform('showForm', item);
-            item.find('div.form-actions').show();
 
             // Fire events to focus the Neatline blocks.
             this._trigger('itemedit', {}, {
@@ -741,18 +751,6 @@
             this._currentFormItem = item;
             this._currentRecordTitle = item.find('span.item-title-text');
 
-            // Remove record header rows.
-            this.neatlineRecordsHeader.css('display', 'none');
-            this.omekaRecordsHeader.css('display', 'none');
-
-            // Remove item rows.
-            _.each(this.element.find('tr.item-row'), function(row) {
-                if (!$(row).data('expanded')) {
-                    var form = $(row).next('tr.edit-form');
-                    $(row).add(form).css('display', 'none');
-                }
-            });
-
          },
 
         /*
@@ -769,16 +767,6 @@
             // Fire the end edit without save callback.
             this._trigger('endmapedit', {}, {
                 'immediate': immediate
-            });
-
-            // Show record header rows.
-            this.neatlineRecordsHeader.css('display', '');
-            this.omekaRecordsHeader.css('display', '');
-
-            // Remove item rows.
-            _.each(this.element.find('tr.item-row'), function(row) {
-                var form = $(row).next('tr.edit-form');
-                $(row).add(form).css('display', '');
             });
 
             // Update trackers.

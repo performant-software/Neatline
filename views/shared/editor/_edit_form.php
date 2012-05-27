@@ -29,7 +29,9 @@
 
     <form class="form-stacked">
 
-        <h4 class="fieldset-header">Text Metadata</h4>
+        <a class="fieldset text" href="">
+            <div class="fieldset-arrow"></div>Text Metadata
+        </a>
         <div class="fieldset">
 
             <div class="clearfix">
@@ -69,7 +71,9 @@
 
         <hr />
 
-        <h4 class="fieldset-header">Temporal Metadata</h4>
+        <a class="fieldset temporal" href="">
+            <div class="fieldset-arrow"></div>Temporal Metadata
+        </a>
         <div class="fieldset">
 
             <div class="clearfix">
@@ -128,7 +132,9 @@
 
         <hr />
 
-        <h4 class="fieldset-header">Styling Metadata</h4>
+        <a class="fieldset styles" href="">
+            <div class="fieldset-arrow"></div>Styling Metadata
+        </a>
         <div class="fieldset">
 
             <table class="map-styles">
@@ -220,7 +226,9 @@
 
         <hr />
 
-        <h4 class="fieldset-header">Relations Metadata</h4>
+        <a class="fieldset relationships" href="">
+            <div class="fieldset-arrow"></div>Relations Metadata
+        </a>
         <div class="fieldset">
 
             <div class="clearfix">
@@ -231,6 +239,17 @@
                         </select>
                     </div>
                 </div>
+            </div>
+
+        </div>
+
+        <hr />
+
+        <div class="fieldset">
+
+            <div id="edit-form-actions" class="actions">
+                <input type="submit" class="btn primary" value="Save">
+                <button id="record-delete-button" class="btn danger">Delete</button>
             </div>
 
         </div>

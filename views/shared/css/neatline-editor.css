@@ -362,9 +362,10 @@ div.item-styles {
     height: 0;
 }
 
-h4.fieldset-header {
-    margin: 0 20px;
-    color: #4b4b4b;
+a.fieldset {
+    margin: 10px 40px 10px 20px;
+    display: block;
+    font-style: italic;
 }
 
 tr.edit-form a {
@@ -738,7 +739,7 @@ table#items-table td.col-1:hover, table#items td.col-2:hover {
 table#items-table td.col-1,
 table#items-table td.col-2,
 table#items-table td.col-3 {
-    width: 32px;
+    width: 13px;
 }
 .mozilla table#items-table td.col-1,
 .mozilla table#items-table td.col-2,
