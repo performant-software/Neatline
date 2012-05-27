@@ -931,9 +931,6 @@
                     self._fadeUp();
                     self._trigger('savecomplete');
 
-                    // Reload the form.
-                    self._getFormData();
-
                     // Update space tracker.
                     if (data.statuses.space) {
                         self._trigger('spaceactive');
