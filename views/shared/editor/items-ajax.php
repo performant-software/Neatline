@@ -27,6 +27,16 @@
 
 <table id="items-table" cellspacing="0" cellpadding="0">
 
+    <thead>
+        <tr>
+            <td></td>
+            <td class="col-1"></td>
+            <td class="col-2"></td>
+            <td class="col-3"></td>
+        </tr>
+    </thead>
+
+    <tbody>
     <tr id="neatline-header" class="header-row <?php if (!$records) { echo 'hidden'; } ?>">
         <td class="neatline-bar">Neatline Records</td>
         <td class="col-1 neatline-bar"></td>
@@ -94,5 +104,6 @@
         <tr class="edit-form"><td class="edit-form-container" colspan="4"></td></tr>
 
     <?php endforeach; ?>
+    </tbody>
 
 </table>

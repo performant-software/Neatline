@@ -49,7 +49,7 @@
 
                 description: {
                     width: 340,
-                    height: 200,
+                    height: 400,
                     controls:
                         "bold italic underline | font size " +
                         "| color removeformat | bullets numbering | outdent " +

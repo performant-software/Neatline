@@ -654,7 +654,7 @@
 
                         // If the form is not expanded, do expand.
                         else {
-                            self._hideForm(item, false);
+                            self._hideForm(item, true);
                         }
 
                     }
@@ -693,9 +693,9 @@
 
 
         /*
-         * =================
+         * =======================
          * Form interface methods.
-         * =================
+         * =======================
          */
 
 
@@ -723,12 +723,6 @@
 
             }
 
-            // Position at the top of the frame. Bumps up the scroll position by
-            // 1px to get rid of unattractive border doubling at the top of the frame.
-            this.element.animate({
-                'scrollTop': item.data('topOffset') - this.options.css.top_margin + 1
-            }, 300);
-
             // Display the form and action links.
             this.editForm.itemform('showForm', item);
 
@@ -751,6 +745,9 @@
             this._currentFormItem = item;
             this._currentRecordTitle = item.find('span.item-title-text');
 
+            // Show item rows.
+            this._hideItemRows();
+
          },
 
         /*
@@ -772,6 +769,46 @@
             // Update trackers.
             item.data('expanded', false);
             this._currentFormItem = null;
+
+            // Show item rows.
+            this._showItemRows();
+
+         },
+
+        /*
+         * Hide all non-expanded item rows.
+         */
+         _hideItemRows: function() {
+
+            // Hide items.
+            _.each(this.items, function(row) {
+                if (!$(row).data('expanded')) {
+                    $(row).hide();
+                }
+            });
+
+             // Hide row headers.
+            this.omekaRecordsHeader.hide();
+            this.neatlineRecordsHeader.hide();
+
+            // Scroll container to top.
+            this.element.scrollTop(0);
+
+         },
+
+        /*
+         * Show all non-expanded item rows.
+         */
+         _showItemRows: function() {
+
+            // Show items.
+            _.each(this.items, function(row) {
+                $(row).show();
+            });
+
+             // Show row headers.
+            this.omekaRecordsHeader.show();
+            this.neatlineRecordsHeader.show();
 
          },
 

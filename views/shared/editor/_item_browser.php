@@ -40,8 +40,6 @@
 
     </div>
 
-    <table id="header-row"></table>
-
     <div id="items-list-container"></div>
     <?php echo $this->partial('editor/_edit_form.php'); ?>
 
