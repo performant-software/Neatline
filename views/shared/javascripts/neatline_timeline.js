@@ -275,36 +275,78 @@
             var band0 = this.timeline.getBand(0);
             var painter0 = band0.getEventPainter();
 
-            painter0.addEventPaintListener(function(band, op, evt, els) {
-
+            // Apply span stylers and hover listeners.
+            painter0.addEventPaintListener(_.bind(function(band, op, evt, els) {
                 if (els !== null) {
-
-                    // Get the tape element.
-                    var tape = $(els[0]);
-
-                    // Store the Simile positioning styles.
-                    tape.data('positioningStyles', tape.attr('style'));
-
-                    // Instantiate the span styler on the tape.
-                    tape.spanstyler();
-
-                    // Build CSS.
-                    tape.spanstyler(
-                        'constructCss',
-                        evt._obj.color,
-                        evt._obj.left_ambiguity,
-                        evt._obj.right_ambiguity
-                    );
-
-                    // Manifest.
-                    tape.spanstyler('applyCss');
-
-                    // Push the id-element association into the tracker object.
-                    self._idToTapeElements[evt._eventID] = [tape];
-
+                    this._buildSpanStyler(evt, els);
+                    this._listenForHover(evt, els);
                 }
+            }, this));
 
-            });
+        },
+
+        /*
+         * Instantiate a gradient span styler on a tape.
+         *
+         * @param {Object} evt: The event object.
+         * @param {Array} els: An array of DOM elements.
+         *
+         * @return void.
+         */
+        _buildSpanStyler: function(evt, els) {
+
+            // Instantiate span styler.
+            var tape = $(els[0]);
+            tape.data('positioningStyles', tape.attr('style'));
+            tape.spanstyler();
+
+            // Build CSS.
+            tape.spanstyler(
+                'constructCss',
+                evt._obj.color,
+                evt._obj.left_ambiguity,
+                evt._obj.right_ambiguity
+            );
+
+            // Manifest.
+            tape.spanstyler('applyCss');
+
+            // Push the id-element association into the tracker object.
+            this._idToTapeElements[evt._eventID] = [tape];
+
+        },
+
+        /*
+         * Listen for mouseenter and mouseleave on a tape.
+         *
+         * @param {Object} evt: The event object.
+         * @param {Array} els: An array of DOM elements.
+         *
+         * @return void.
+         */
+        _listenForHover: function(evt, els) {
+
+            _.each(els, _.bind(function(el) {
+                $(el).bind({
+
+                    'mouseenter': _.bind(function() {
+                        this._trigger('evententer', {}, {
+                            id: evt._eventID,
+                            title: evt._text,
+                            description: evt._description
+                        });
+                    }, this),
+
+                    'mouseleave': _.bind(function() {
+                        this._trigger('eventleave', {}, {
+                            id: evt._eventID,
+                            title: evt._text,
+                            description: evt._description
+                        });
+                    }, this)
+
+                });
+            }, this));
 
         },
 

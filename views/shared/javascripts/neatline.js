@@ -290,8 +290,37 @@
                         self.items.neatlineitems('renderVisibility', obj.date);
                     },
 
+                    'evententer': function(event, obj) {
+
+                        // Render bubble.
+                        if (self.options.isPublic) {
+                            self.element.bubbles('show',
+                                 obj.title,
+                                 obj.description
+                            );
+                        }
+
+                    },
+
+                    'eventleave': function(event, obj) {
+
+                        // Remove bubble.
+                        if (self.options.isPublic) {
+                            self.element.bubbles('hide');
+                        }
+
+                    },
+
                     'eventclick': function(event, obj) {
+
+                        // Trigger out.
                         self._trigger('timelineeventclick', {}, obj);
+
+                        // Freeze bubble.
+                        if (self.options.isPublic) {
+                            self.element.bubbles('freeze');
+                        }
+
                     }
 
                 });

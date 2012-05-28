@@ -1071,6 +1071,62 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
     }
 
     /**
+     * When there is a local title, getTitleForEditor() should return the
+     * record title, value.
+     *
+     * @return void.
+     */
+    public function testGetTitleForEditorWithLocalTitle()
+    {
+
+        // Create an item, exhibit, and record.
+        $neatline = $this->helper->_createNeatline();
+        $record = new NeatlineDataRecord(null, $neatline);
+
+        // Should return the native value.
+        $record->title = 'Native Title';
+        $this->assertEquals($record->getTitleForEditor(), 'Native Title');
+
+    }
+
+    /**
+     * When there is not a local title but there is a local description,
+     * getTitleForEditor() should return the description.
+     *
+     * @return void.
+     */
+    public function testGetTitleForEditorWithNoLocalTitleWithDescription()
+    {
+
+        // Create an item, exhibit, and record.
+        $neatline = $this->helper->_createNeatline();
+        $record = new NeatlineDataRecord(null, $neatline);
+
+        // Should return the native value.
+        $record->description = 'Native description.';
+        $this->assertEquals($record->getTitleForEditor(), 'Native description.');
+
+    }
+
+    /**
+     * When there is not a local title or a local description,
+     * getTitleForEditor() should return '[Untitled]'.
+     *
+     * @return void.
+     */
+    public function testGetTitleForEditorWithNoLocalTitleWithNoDescription()
+    {
+
+        // Create an item, exhibit, and record.
+        $neatline = $this->helper->_createNeatline();
+        $record = new NeatlineDataRecord(null, $neatline);
+
+        // Should return the native value.
+        $this->assertEquals($record->getTitleForEditor(), '[Untitled]');
+
+    }
+
+    /**
      * getSlug() should return the slug when there is a non-null value and
      * an empty string with the value is null.
      *

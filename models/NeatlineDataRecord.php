@@ -619,6 +619,37 @@ class NeatlineDataRecord extends Omeka_record
     }
 
     /**
+     * Return a title for the editor. If there is a title return it;
+     * if not, try to return the first portion of the description.
+     *
+     * @return string $title The title.
+     */
+    public function getTitleForEditor()
+    {
+
+        // Return row-level value.
+        $title = $this->getTitle();
+        if ($title !== '') {
+            return $title;
+        }
+
+        else {
+
+            // Try to get a description.
+            $description = $this->getDescription();
+            if ($description !== '') {
+                return substr($description, 0, 200);
+            }
+
+            else {
+                return '[Untitled]';
+            }
+
+        }
+
+    }
+
+    /**
      * Return slug.
      *
      * @return string $slug The slug.

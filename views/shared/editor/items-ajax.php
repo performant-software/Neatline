@@ -48,7 +48,7 @@
 
         <tr class="item-row" recordid="<?php echo $record->id; ?>" itemid="">
             <td class="item-title">
-                <span class="item-title-text"><?php echo ($record->title != null) ? $record->title : '[Untitled]'; ?></span>
+                <span class="item-title-text"><?php echo $record->getTitleForEditor(); ?></span>
                 <span class="item-title-fader"></span>
                 <div class="form-actions">
                     <a href="#" class="save">Save</a>
