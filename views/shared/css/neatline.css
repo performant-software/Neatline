@@ -161,6 +161,10 @@ div.title-tip {
 
 /* Timeline */
 
+.timeline-container {
+    z-index: 0;
+}
+
 .popover {
     opacity: 0;
 }

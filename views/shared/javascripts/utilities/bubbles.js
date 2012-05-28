@@ -246,7 +246,7 @@
 
             }
 
-            // Set conncetor styles.
+            // Set connector styles.
             this.triangle.attr({
                 fill: '#000',
                 opacity: 0.7
