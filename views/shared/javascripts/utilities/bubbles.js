@@ -68,6 +68,9 @@
             // If bubble is frozen, break.
             if (this.frozen) return;
 
+            // If both fields are empty, break.
+            if (title == '' && body == '') return;
+
             // If bubble exists, remove.
             if (!_.isNull(this.bubble)) {
                 this.bubble.remove();

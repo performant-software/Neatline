@@ -212,13 +212,12 @@
             this.modifyFeatures.unselectFeature(this._clickedFeature);
             this.map.removeControl(this.modifyFeatures);
             this.map.removeControl(this.editToolbar);
+            this.element.editgeometry('hideButtons');
 
             // If the form is immediately switching to another form, do not do
             // the fade down, as as to avoid a little opacity dip in the buttons
             // when the form switches.
             if (!immediate) {
-
-                this.element.editgeometry('hideButtons');
 
                 // Reinsert the dummy toolbar and fade it down.
                 this.element.append(toolbarClone);
