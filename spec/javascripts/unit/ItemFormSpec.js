@@ -200,7 +200,7 @@ describe('Item Form', function() {
 
             // Check the inputs for the correct values.
             expect(form.itemform('getAttr', 'title').val()).toEqual('Test Title 1');
-            expect(form.itemform('getAttr', 'slug').val()).toEqual('test-slug');
+            // expect(form.itemform('getAttr', 'slug').val()).toEqual('test-slug');
             expect(form.itemform('getAttr', 'description').val()).toEqual('Test description.');
             expect(form.itemform('getAttr', 'startDate').val()).toEqual('June 25, 1987');
             expect(form.itemform('getAttr', 'endDate').val()).toEqual('June 26, 1987');
@@ -238,7 +238,7 @@ describe('Item Form', function() {
 
             // Check the inputs for the correct values.
             expect(form.itemform('getAttr', 'title').val()).toEqual('Test Title 1');
-            expect(form.itemform('getAttr', 'slug').val()).toEqual('test-slug');
+            // expect(form.itemform('getAttr', 'slug').val()).toEqual('test-slug');
             expect(form.itemform('getAttr', 'description').val()).toEqual('Test description.');
             expect(form.itemform('getAttr', 'startDate').val()).toEqual('June 25, 1987');
             expect(form.itemform('getAttr', 'endDate').val()).toEqual('June 26, 1987');
@@ -286,7 +286,7 @@ describe('Item Form', function() {
 
             // Check the inputs for the correct values.
             expect(form.itemform('getAttr', 'title').val()).toEqual('New Title');
-            expect(form.itemform('getAttr', 'slug').val()).toEqual('new-slug');
+            // expect(form.itemform('getAttr', 'slug').val()).toEqual('new-slug');
             expect(form.itemform('getAttr', 'description').val()).toEqual('New description.');
             expect(form.itemform('getAttr', 'startDate').val()).toEqual('April 26, 1564');
             expect(form.itemform('getAttr', 'endDate').val()).toEqual('April 23, 1616');
@@ -311,7 +311,7 @@ describe('Item Form', function() {
 
             // Check the inputs for the correct values.
             expect(form.itemform('getAttr', 'title').val()).toEqual('Test Title 1');
-            expect(form.itemform('getAttr', 'slug').val()).toEqual('test-slug');
+            // expect(form.itemform('getAttr', 'slug').val()).toEqual('test-slug');
             expect(form.itemform('getAttr', 'description').val()).toEqual('Test description.');
             expect(form.itemform('getAttr', 'startDate').val()).toEqual('June 25, 1987');
             expect(form.itemform('getAttr', 'endDate').val()).toEqual('June 26, 1987');
@@ -369,7 +369,7 @@ describe('Item Form', function() {
 
             // Check the inputs for the correct values.
             expect(form.itemform('getAttr', 'title').val()).toEqual('Test Title 1');
-            expect(form.itemform('getAttr', 'slug').val()).toEqual('test-slug');
+            // expect(form.itemform('getAttr', 'slug').val()).toEqual('test-slug');
             expect(form.itemform('getAttr', 'description').val()).toEqual('Test description.');
             expect(form.itemform('getAttr', 'startDate').val()).toEqual('June 25, 1987');
             expect(form.itemform('getAttr', 'endDate').val()).toEqual('June 26, 1987');
@@ -453,19 +453,19 @@ describe('Item Form', function() {
 
             });
 
-            it('should store local data when the slug is changed', function() {
+            // it('should store local data when the slug is changed', function() {
 
-                // Change the title, hide the form.
-                form.itemform('getAttr', 'slug').val('new-slug');
-                form.itemform('getAttr', 'titleEditor').updateFrame().refresh();
-                form.itemform('hideForm', record);
+            //     // Change the title, hide the form.
+            //     form.itemform('getAttr', 'slug').val('new-slug');
+            //     form.itemform('getAttr', 'titleEditor').updateFrame().refresh();
+            //     form.itemform('hideForm', record);
 
-                // Check for the local data record, inspect value.
-                var localRecord = _db({ recordid: recordId }).first();
-                expect(localRecord).not.toBeFalsy();
-                expect(localRecord.data.slug).toEqual('new-slug');
+            //     // Check for the local data record, inspect value.
+            //     var localRecord = _db({ recordid: recordId }).first();
+            //     expect(localRecord).not.toBeFalsy();
+            //     expect(localRecord.data.slug).toEqual('new-slug');
 
-            });
+            // });
 
             it('should store local data when the description is changed', function() {
 
@@ -647,7 +647,7 @@ describe('Item Form', function() {
 
             // Check params.
             expect(post.params).toContain('title=Test+Title');
-            expect(post.params).toContain('slug=test-slug');
+            // expect(post.params).toContain('slug=test-slug');
             expect(post.params).toContain('description=Test+description.');
             expect(post.params).toContain('start_date=June+25%2C+1987');
             expect(post.params).toContain('end_date=June+26%2C+1987');
