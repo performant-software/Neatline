@@ -1071,12 +1071,12 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
     }
 
     /**
-     * When there is a local title, getTitleForEditor() should return the
+     * When there is a local title, getTitleOrDescription() should return the
      * record title, value.
      *
      * @return void.
      */
-    public function testGetTitleForEditorWithLocalTitle()
+    public function testGetTitleOrDescriptionWithLocalTitle()
     {
 
         // Create an item, exhibit, and record.
@@ -1085,7 +1085,7 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
 
         // Should return the native value.
         $record->title = 'Native Title';
-        $this->assertEquals($record->getTitleForEditor(), 'Native Title');
+        $this->assertEquals($record->getTitleOrDescription(), 'Native Title');
 
     }
 
@@ -1095,7 +1095,7 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
      *
      * @return void.
      */
-    public function testGetTitleForEditorWithNoLocalTitleWithDescription()
+    public function testGetTitleOrDescriptionWithNoLocalTitleWithDescription()
     {
 
         // Create an item, exhibit, and record.
@@ -1104,7 +1104,7 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
 
         // Should return the native value.
         $record->description = 'Native description.';
-        $this->assertEquals($record->getTitleForEditor(), 'Native description.');
+        $this->assertEquals($record->getTitleOrDescription(), 'Native description.');
 
     }
 
@@ -1114,7 +1114,7 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
      *
      * @return void.
      */
-    public function testGetTitleForEditorWithNoLocalTitleWithNoDescription()
+    public function testGetTitleOrDescriptionWithNoLocalTitleWithNoDescription()
     {
 
         // Create an item, exhibit, and record.
@@ -1122,7 +1122,7 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         $record = new NeatlineDataRecord(null, $neatline);
 
         // Should return the native value.
-        $this->assertEquals($record->getTitleForEditor(), '[Untitled]');
+        $this->assertEquals($record->getTitleOrDescription(), '[Untitled]');
 
     }
 

@@ -239,15 +239,17 @@ div.title-tip {
 
 #items-container li.item-title {
     font-size: 15px;
-    color: #202020;
+    color: gray;
     padding: 6px 20px;
     line-height: normal !important;
     border-top: 1px dotted #cdcdcd;
     font-family: 'Crimson Text';
 }
 
-#items-container li.item-title:hover {
-    text-decoration: underline;
+#items-container li.item-title:hover,
+#items-container li.item-title.selected {
+    background-color: #f3f6ff;
+    color: black;
 }
 
 #items-container li.item-description {
