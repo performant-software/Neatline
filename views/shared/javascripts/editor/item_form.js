@@ -78,6 +78,7 @@
             this.item =                     this.element.prev('item-row');
             this.form =                     this.element.find('form');
             this.deleteButton =             this.form.find('#record-delete-button');
+            this.closeButton =              this.form.find('#record-close-button');
             this.saveButton =               this.form.find('input[type="submit"]');
             this.title =                    this.form.find('textarea[name="title"]');
             this.slug =                     this.form.find('input[name="slug"]');
@@ -253,6 +254,20 @@
 
                 'mousedown': function() {
                     self._trigger('save');
+                },
+
+                'click': function(event) {
+                    event.preventDefault();
+                }
+
+            });
+
+            // ** CLOSE.
+            this.closeButton.bind({
+
+                'mousedown': function() {
+                    console.log('test');
+                    self._trigger('hide');
                 },
 
                 'click': function(event) {
