@@ -347,3 +347,8 @@ div.bubble-container a.close-bubble {
 div.bubble-container span.close-x {
     font-style: normal;
 }
+
+a.item-dc-link {
+    color: white;
+    font-style: italic;
+}
