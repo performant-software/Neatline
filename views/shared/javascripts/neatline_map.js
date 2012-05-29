@@ -668,7 +668,7 @@
         _showRecord: function(record) {
 
             // If the record exists and there is a map feature.
-            if (record && record.layer.features.length > 0) {
+            if (record && record.layer.features.length > 0 && _.isNull(record.wms)) {
 
                 // If there is item-specific data.
                 if (record.data.bounds !== null && record.data.zoom !== null) {
