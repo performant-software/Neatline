@@ -75,6 +75,7 @@
             this._currentVectorLayers =     [];
             this._currentEditItem =         null;
             this._currentEditLayer =        null;
+            this._hoveredFeature =          null;
             this._clickedFeature =          null;
             this.record =                   null;
             this.requestData =              null;
@@ -464,6 +465,7 @@
                     self.highlightControl.highlight(feature);
                     // self._showTitleTip(record);
 
+                    self._hoveredFeature = feature;
                 },
 
                 outFeature: function(feature) {
@@ -482,6 +484,7 @@
                     self.highlightControl.unhighlight(feature);
                     // self._hideTitleTip(record);
 
+                    self._hoveredFeature = null;
                 }
 
             });
