@@ -210,13 +210,6 @@
         instantiateBlocks: function() {
 
             var self = this;
-            var hideBubbles = function(ev, obj) {
-                var bubbles = jQuery(self.element).data('bubbles');
-                if (bubbles.bubble != null) {
-                    self._trigger('mapfeatureleave', {}, obj);
-                    bubbles.hide();
-                }
-            };
 
             // ** MAP
             if (this.params.record.is_map && !this.instantiated_map) {
@@ -244,7 +237,15 @@
 
                     },
 
-                    'featureleave': hideBubbles,
+                    'featureleave': function(event, obj) {
+                        var bubbles = jQuery(self.element).data('bubbles');
+
+                        if (bubbles != null && bubbles.bubble != null) {
+                            bubbles.hide();
+                        }
+
+                        self._trigger('mapfeatureleave', {}, obj);
+                    },
 
                     'featureclick': function(event, obj) {
 
@@ -268,7 +269,12 @@
                     this.map.mapeditor(callbacks);
                 }
 
-                this.map.on('mouseout', hideBubbles);
+                var nlmap = this.map.data('neatlinemap');
+                nlmap.map.events.register('mouseout', {}, function(ev, obj) {
+                    if (nlmap._hoveredFeature != null) {
+                        nlmap.highlightControl.outFeature(nlmap._hoveredFeature);
+                    }
+                });
 
                 // Register the presence of the map instantiation.
                 this.instantiated_map = true;
