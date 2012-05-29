@@ -216,7 +216,7 @@
                         this.positions = {
 
                             map: {
-                                height: this.majorHeight,
+                                height: this.height,
                                 width:  this.width,
                                 top:    0,
                                 left:   0
@@ -263,10 +263,10 @@
                         this.positions = {
 
                             map: {
-                                height: this.majorHeight,
-                                width:  this.majorWidth,
+                                height: this.height,
+                                width:  this.width,
                                 top:    0,
-                                left:   this.minorWidth
+                                left:   0
                             },
 
                             timeline: {
@@ -309,10 +309,10 @@
                         this.positions = {
 
                             map: {
-                                height: this.majorHeight,
-                                width:  this.majorWidth,
+                                height: this.height,
+                                width:  this.width,
                                 top:    0,
-                                left:   this.minorWidth
+                                left:   0
                             },
 
                             timeline: {
@@ -356,7 +356,7 @@
                         this.positions = {
 
                             map: {
-                                height: this.majorHeight,
+                                height: this.height,
                                 width:  this.width,
                                 top:    0,
                                 left:   0
@@ -403,8 +403,8 @@
                         this.positions = {
 
                             map: {
-                                height: this.majorHeight,
-                                width:  this.majorWidth,
+                                height: this.height,
+                                width:  this.width,
                                 top:    0,
                                 left:   0
                             },
@@ -449,8 +449,8 @@
                         this.positions = {
 
                             map: {
-                                height: this.majorHeight,
-                                width:  this.majorWidth,
+                                height: this.height,
+                                width:  this.width,
                                 top:    0,
                                 left:   0
                             },
@@ -501,10 +501,10 @@
                         this.positions = {
 
                             map: {
-                                height: this.minorHeight,
-                                width:  this.majorWidth,
-                                top:    this.majorHeight,
-                                left:   this.minorWidth
+                                height: this.height,
+                                width:  this.width,
+                                top:    0,
+                                left:   0
                             },
 
                             timeline: {
@@ -548,9 +548,9 @@
                         this.positions = {
 
                             map: {
-                                height: this.minorHeight,
+                                height: this.height,
                                 width:  this.width,
-                                top:    this.majorHeight,
+                                top:    0,
                                 left:   0
                             },
 
@@ -594,10 +594,10 @@
                         this.positions = {
 
                             map: {
-                                height: this.minorHeight,
-                                width:  this.majorWidth,
-                                top:    this.majorHeight,
-                                left:   this.minorWidth
+                                height: this.height,
+                                width:  this.width,
+                                top:    0,
+                                left:   0
                             },
 
                             timeline: {
@@ -641,9 +641,9 @@
                         this.positions = {
 
                             map: {
-                                height: this.minorHeight,
-                                width:  this.majorWidth,
-                                top:    this.majorHeight,
+                                height: this.height,
+                                width:  this.width,
+                                top:    0,
                                 left:   0
                             },
 
@@ -688,9 +688,9 @@
                         this.positions = {
 
                             map: {
-                                height: this.minorHeight,
+                                height: this.height,
                                 width:  this.width,
-                                top:    this.majorHeight,
+                                top:    0,
                                 left:   0
                             },
 
@@ -734,9 +734,9 @@
                         this.positions = {
 
                             map: {
-                                height: this.minorHeight,
-                                width:  this.majorWidth,
-                                top:    this.majorHeight,
+                                height: this.height,
+                                width:  this.width,
+                                top:    0,
                                 left:   0
                             },
 
@@ -789,7 +789,7 @@
 
                         map: {
                             height: this.height,
-                            width:  this.majorWidth,
+                            width:  this.width,
                             top:    0,
                             left:   0
                         },
@@ -834,9 +834,9 @@
 
                         map: {
                             height: this.height,
-                            width:  this.majorWidth,
+                            width:  this.width,
                             top:    0,
-                            left:   this.minorWidth
+                            left:   0
                         },
 
                         timeline: {
@@ -982,7 +982,7 @@
                     this.positions = {
 
                         map: {
-                            height: this.majorHeight,
+                            height: this.height,
                             width:  this.width,
                             top:    0,
                             left:   0
@@ -1027,9 +1027,9 @@
                     this.positions = {
 
                         map: {
-                            height: this.minorHeight,
+                            height: this.height,
                             width:  this.width,
-                            top:    this.majorHeight,
+                            top:    0,
                             left:   0
                         },
 
