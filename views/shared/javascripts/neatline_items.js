@@ -32,8 +32,7 @@
             colors: {
                 purple: '#724E85',
                 background: '#f9f9f9',
-                title: '#202020',
-                highlight: '#f3f6ff'
+                title: '#202020'
             },
 
             // CSS constants.
@@ -203,9 +202,6 @@
                     // Highlight.
                     'mouseenter': _.bind(function() {
 
-                        // Gloss the title.
-                        this.__highlightItem(title);
-
                         // Trigger out to the deployment code.
                         this._trigger('itementer', {}, {
                             'recordid': record.id,
@@ -216,9 +212,6 @@
 
                     // Un-highlight.
                     'mouseleave': _.bind(function() {
-
-                        // De-gloss the title.
-                        this.__unhighlightItem(title);
 
                         // Trigger out to the deployment code.
                         this._trigger('itemleave', {}, {
@@ -597,28 +590,6 @@
         },
 
         /*
-         * Gloss title and description on mouseenter.
-         *
-         * - param DOM item: The <li> of the item to expand.
-         *
-         * - return void.
-         */
-        __highlightItem: function(item) {
-            item.css('background-color', this.options.colors.highlight);
-        },
-
-        /*
-         * Push title and description back to default state.
-         *
-         * - param DOM item: The <li> of the item to expand.
-         *
-         * - return void.
-         */
-        __unhighlightItem: function(item) {
-            item.css('background-color', this.options.colors.background);
-        },
-
-        /*
          * Pop the title as active.
          *
          * - param object record: TaffyDB record.
@@ -630,11 +601,8 @@
             // If the title it not already activated.
             if (!record.title.data('expanded')) {
 
-                // Fade up and grow title.
-                record.title.stop().animate({
-                    'font-size': '+=5px',
-                    'color': this.options.colors.purple
-                }, 100);
+                // Add selected class.
+                record.title.addClass('selected');
 
                 // Trigger out to the deployment code.
                 this._trigger('itemactivate', {}, {
@@ -651,30 +619,16 @@
          * Return the title to normal.
          *
          * - param object record: TaffyDB record.
-         * - param boolean immediate: If true, .css() instead of .animate();
          *
          * - return void.
          */
-        __deactivateTitle: function(record, immediate) {
+        __deactivateTitle: function(record) {
 
             // Halt if the item is not currently activated.
             if (record.title.data('expanded')) {
 
-                // If not immediate, animate down.
-                if (!immediate) {
-                    record.title.stop().animate({
-                        'font-size': '-=5px',
-                        'color': this.options.colors.title
-                    }, 100);
-                }
-
-                // If immediate, manifest directly.
-                else {
-                    record.title.css({
-                        'font-size': '-=5px',
-                        'color': this.options.colors.title
-                    });
-                }
+                // Remove selected class.
+                record.title.removeClass('selected');
 
                 // Trigger out to the deployment code.
                 this._trigger('itemdeactivate', {}, {

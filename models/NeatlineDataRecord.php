@@ -24,8 +24,6 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache 2 License
  */
 
-require_once HELPERS;
-
 class NeatlineDataRecord extends Omeka_record
 {
 
@@ -619,12 +617,12 @@ class NeatlineDataRecord extends Omeka_record
     }
 
     /**
-     * Return a title for the editor. If there is a title return it;
-     * if not, try to return the first portion of the description.
+     * If there is a title return it; if not, try to return
+     * the first portion of the description.
      *
      * @return string $title The title.
      */
-    public function getTitleForEditor()
+    public function getTitleOrDescription()
     {
 
         // Return row-level value.
@@ -638,7 +636,7 @@ class NeatlineDataRecord extends Omeka_record
             // Try to get a description.
             $description = $this->getDescription();
             if ($description !== '') {
-                return substr($description, 0, 200);
+                return $description;
             }
 
             else {

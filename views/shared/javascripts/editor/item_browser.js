@@ -654,7 +654,7 @@
 
                         // If the form is not expanded, do expand.
                         else {
-                            self._hideForm(item, true);
+                            self._hideForm(item, false);
                         }
 
                     }

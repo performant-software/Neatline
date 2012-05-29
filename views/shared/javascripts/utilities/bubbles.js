@@ -128,6 +128,9 @@
          */
         freeze: function() {
 
+            // If no bubble, break.
+            if (_.isNull(this.bubble)) return;
+
             // Set tracker.
             this.frozen = true;
 
