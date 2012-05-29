@@ -240,15 +240,18 @@
                     },
 
                     'featureleave': function(event, obj) {
+                        var bubbles = jQuery(self.element).data('bubbles');
 
                         // Trigger out.
                         self._trigger('mapfeatureleave', {}, obj);
 
                         // Remove bubble.
-                        if (self.options.isPublic) {
-                            self.element.bubbles('hide');
+                        if (self.options.isPublic &&
+                            bubbles != null && bubbles.bubble != null) {
+                            bubbles.hide();
                         }
 
+                        self._trigger('mapfeatureleave', {}, obj);
                     },
 
                     'featureclick': function(event, obj) {
@@ -274,6 +277,13 @@
                 else {
                     this.map.mapeditor(callbacks);
                 }
+
+                var nlmap = this.map.data('neatlinemap');
+                nlmap.map.events.register('mouseout', {}, function(ev, obj) {
+                    if (nlmap._hoveredFeature != null) {
+                        nlmap.highlightControl.outFeature(nlmap._hoveredFeature);
+                    }
+                });
 
                 // Register the presence of the map instantiation.
                 this.instantiated_map = true;

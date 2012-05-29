@@ -352,3 +352,14 @@ a.item-dc-link {
     color: white;
     font-style: italic;
 }
+
+#neatline .timeline-container:after {
+  content: "";
+  position:absolute;
+  top:0;
+  left: 50%;
+  width: 0;
+  height: 100%;
+  border-left: 1px dotted rgb(190, 160, 10);
+  z-index:1000;
+}
