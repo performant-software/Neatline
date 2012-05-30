@@ -612,8 +612,13 @@ function neatline_getUndatedItemsDataUrl($neatline_id)
 function neatline_getItemMetadata($item, $elementSet, $elementName)
 {
     $text  = '';
+
+    if (!is_string($elementSet)) {
+        $elementSet = $elementSet->name;
+    }
+
     $texts = $item->getElementTextsByElementNameAndSetName(
-        $elementName, $elementSet->Name
+        $elementName, $elementSet
     );
 
     if (!empty($texts)) {
