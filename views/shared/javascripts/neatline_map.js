@@ -135,7 +135,6 @@
                   new OpenLayers.Control.PanZoomBar(),
                   new OpenLayers.Control.MousePosition(),
                   new OpenLayers.Control.Navigation(),
-                  new OpenLayers.Control.ScaleLine(),
                   new OpenLayers.Control.LayerSwitcher()
                 ],
                 maxResolution: 'auto',

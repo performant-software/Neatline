@@ -163,7 +163,7 @@ div.title-tip {
 
 #timeline {
     z-index: 0;
-    opacity: 0.7;
+    opacity: 0.85;
 }
 
 #timeline:hover {
@@ -224,14 +224,24 @@ div.title-tip {
 /* Items */
 
 #items {
-    background-color: #f9f9f9;
-    overflow-y: scroll;
+    background-color: #fff;
     z-index: 10;
-    opacity: 0.7;
+    opacity: 0.85;
+    overflow-y: scroll;
 }
 
 #items:hover {
     opacity: 1;
+}
+
+#items::-webkit-scrollbar {
+    width: 7px;
+    height: 9px;
+    background-color: #fff;
+}
+
+#items::-webkit-scrollbar-thumb {
+    background: #584561;
 }
 
 #items-container {
@@ -245,18 +255,21 @@ div.title-tip {
 }
 
 #items-container li.item-title {
+    pointer: cursor;
     font-size: 15px;
-    color: gray;
     padding: 6px 20px;
     line-height: normal !important;
-    border-top: 1px dotted #cdcdcd;
+    border-top: 1px solid #cdcdcd;
     font-family: 'Crimson Text';
 }
 
-#items-container li.item-title:hover,
+#items-container li.item-title:hover {
+    background-color: #eaeaf7;
+}
+
 #items-container li.item-title.selected {
-    background-color: #f3f6ff;
-    color: black;
+    background-color: #2828a7;
+    color: white;
 }
 
 #items-container li.item-description {
