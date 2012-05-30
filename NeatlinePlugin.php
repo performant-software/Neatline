@@ -34,7 +34,8 @@ class NeatlinePlugin
         'define_routes',
         'admin_theme_header',
         'public_theme_header',
-        'admin_append_to_plugin_uninstall_message'
+        'admin_append_to_plugin_uninstall_message',
+        'before_delete_item'
     );
 
     private static $_filters = array(
@@ -317,6 +318,22 @@ class NeatlinePlugin
 
         return $tabs;
 
+    }
+
+    /**
+     * This deletes data records associated with items that are deleted.
+     *
+     * @param Omeka_Item $item The item being deleted.
+     *
+     * @return void
+     * @author Eric Rochester <erochest@virginia.edu>
+     **/
+    public function beforeDeleteItem($item)
+    {
+        $table   = $this->_db->getTable('NeatlineDataRecord');
+        $adapter = $table->getAdapter();
+        $where   = $adapter->quoteInto('item_id=?', $item->id);
+        $adapter->delete($table->getTableName(), $where);
     }
 
 }
