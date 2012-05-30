@@ -105,7 +105,7 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         $record->time_active =                  1;
         $record->items_active =                 1;
         $record->display_order =                1;
-        $record->map_center =                   'CENTER()';
+        $record->map_bounds =                   'CENTER()';
         $record->map_zoom =                     5;
         $record->save();
 
@@ -135,7 +135,7 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         $this->assertEquals($record->time_active, 1);
         $this->assertEquals($record->items_active, 1);
         $this->assertEquals($record->display_order, 1);
-        $this->assertEquals($record->map_center, 'CENTER()');
+        $this->assertEquals($record->map_bounds, 'CENTER()');
         $this->assertEquals($record->map_zoom, 5);
 
     }

@@ -906,8 +906,8 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
         $record2->geocoverage = 'POINT(0,1)';
         $record1->space_active = 1;
         $record2->space_active = 1;
-        $record1->map_center = 'CENTER(1)';
-        $record2->map_center = 'CENTER(2)';
+        $record1->map_bounds = 'CENTER(1)';
+        $record2->map_bounds = 'CENTER(2)';
         $record1->map_zoom = 4;
         $record2->map_zoom = 5;
         $record1->start_visible_date = '1864-04-26 14:39:22';
@@ -1017,9 +1017,9 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
         // Build the JSON.
         $json = json_decode($this->_recordsTable->buildMapJson($neatline));
         $this->assertNull($json[0]->zoom);
-        $this->assertNull($json[0]->bounds);
+        $this->assertNull($json[0]->center);
         $this->assertNull($json[1]->zoom);
-        $this->assertNull($json[1]->bounds);
+        $this->assertNull($json[1]->center);
 
     }
 
