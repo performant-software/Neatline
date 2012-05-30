@@ -1864,7 +1864,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->request->setMethod('POST')
             ->setPost(array(
                 'exhibit_id' => $exhibit->id,
-                'map_extent' => 'extent',
+                'map_center' => 'center',
                 'map_zoom' => 1,
                 'timeline_center' => 'center',
                 'timeline_zoom' => 10
@@ -1876,7 +1876,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $exhibit = $this->_exhibitsTable->find($exhibit->id);
 
         // Check the attributes.
-        $this->assertEquals($exhibit->default_map_bounds, 'extent');
+        $this->assertEquals($exhibit->default_map_bounds, 'center');
         $this->assertEquals($exhibit->default_map_zoom, 1);
         $this->assertEquals($exhibit->default_focus_date, 'center');
         $this->assertEquals($exhibit->default_timeline_zoom, 10);
@@ -1904,7 +1904,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
                 'exhibit_id' => $exhibit->id,
                 'item_id' => $item->id,
                 'record_id' => $record->id,
-                'extent' => 'BOUNDS()',
+                'center' => 'CENTER()',
                 'zoom' => 5
             )
         );
@@ -1946,7 +1946,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
                 'exhibit_id' => $exhibit->id,
                 'item_id' => $item->id,
                 'record_id' => '',
-                'extent' => 'BOUNDS()',
+                'center' => 'CENTER()',
                 'zoom' => 5
             )
         );
@@ -1989,7 +1989,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
                 'exhibit_id' => $exhibit->id,
                 'item_id' => '',
                 'record_id' => $record->id,
-                'extent' => 'BOUNDS()',
+                'center' => 'CENTER()',
                 'zoom' => 5
             )
         );
@@ -2033,7 +2033,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
                 'exhibit_id' => $exhibit->id,
                 'item_id' => $item->id,
                 'record_id' => '',
-                'extent' => 'BOUNDS()',
+                'center' => 'CENTER()',
                 'zoom' => 5
             )
         );

@@ -226,11 +226,11 @@ jQuery(document).ready(function($) {
         },
 
         // When the fix item-specific map focus button is pressed, get
-        // the map bounds and pass to the ajax interface in the form.
+        // the map center and pass to the ajax interface in the form.
         'savemapfocus': function() {
 
             // Get the map extent and zoom.
-            var mapExtent = neatlineContainer.neatline('getMapExtent');
+            var mapCenter = neatlineContainer.neatline('getMapCenter');
             var mapZoom = neatlineContainer.neatline('getMapZoom');
 
             // Set.
