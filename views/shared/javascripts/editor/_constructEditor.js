@@ -234,7 +234,7 @@ jQuery(document).ready(function($) {
             var mapZoom = neatlineContainer.neatline('getMapZoom');
 
             // Set.
-            editorContainer.itembrowser('saveMapFocus', mapExtent, mapZoom);
+            editorContainer.itembrowser('saveMapFocus', mapCenter, mapZoom);
 
         },
 
