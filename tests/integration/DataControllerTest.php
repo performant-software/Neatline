@@ -97,8 +97,8 @@ class Neatline_DataControllerTest extends Omeka_Test_AppTestCase
         $record2->geocoverage = 'POINT(0,1)';
         $record1->space_active = 1;
         $record2->space_active = 1;
-        $record1->map_bounds = 'BOUND(1)';
-        $record2->map_bounds = 'BOUND(2)';
+        $record1->map_center = 'CENTER(1)';
+        $record2->map_center = 'CENTER(2)';
         $record1->map_zoom = 4;
         $record2->map_zoom = 5;
         $record1->start_visible_date = '1864-04-26 14:39:22';
@@ -123,7 +123,7 @@ class Neatline_DataControllerTest extends Omeka_Test_AppTestCase
         $this->assertContains('"stroke_color":"#ffffff"', $response);
         $this->assertContains('"stroke_width":3', $response);
         $this->assertContains('"point_radius":3', $response);
-        $this->assertContains('"bounds":"BOUND(1)"', $response);
+        $this->assertContains('"center":"CENTER(1)"', $response);
         $this->assertContains('"zoom":4', $response);
         $this->assertContains('"wkt":"POINT(1,0)"', $response);
         $this->assertContains('"start_visible_date":"1864-04-26 14:39:22"', $response);
@@ -138,7 +138,7 @@ class Neatline_DataControllerTest extends Omeka_Test_AppTestCase
         $this->assertContains('"stroke_color":"#000000"', $response);
         $this->assertContains('"stroke_width":2', $response);
         $this->assertContains('"point_radius":2', $response);
-        $this->assertContains('"bounds":"BOUND(2)"', $response);
+        $this->assertContains('"center":"CENTER(2)"', $response);
         $this->assertContains('"zoom":5', $response);
         $this->assertContains('"wkt":"POINT(0,1)"', $response);
         $this->assertContains('"start_visible_date":"1964-04-26 14:39:22"', $response);

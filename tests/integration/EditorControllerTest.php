@@ -1920,7 +1920,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->assertEquals($this->_recordsTable->count(), 1);
 
         // Check the attributes.
-        $this->assertEquals($record->map_bounds, 'BOUNDS()');
+        $this->assertEquals($record->map_center, 'CENTER()');
         $this->assertEquals($record->map_zoom, 5);
         $this->assertEquals($record->space_active, 1);
 
@@ -1962,7 +1962,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->assertEquals($this->_recordsTable->count(), 1);
 
         // Check the attributes.
-        $this->assertEquals($record->map_bounds, 'BOUNDS()');
+        $this->assertEquals($record->map_center, 'CENTER()');
         $this->assertEquals($record->map_zoom, 5);
         $this->assertEquals($record->space_active, 1);
 
@@ -2005,7 +2005,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->assertEquals($this->_recordsTable->count(), 1);
 
         // Check the attributes.
-        $this->assertEquals($record->map_bounds, 'BOUNDS()');
+        $this->assertEquals($record->map_center, 'CENTER()');
         $this->assertEquals($record->map_zoom, 5);
         $this->assertEquals($record->space_active, 1);
 
@@ -2049,7 +2049,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->assertEquals($this->_recordsTable->count(), 1);
 
         // Check the attributes.
-        $this->assertEquals($record->map_bounds, 'BOUNDS()');
+        $this->assertEquals($record->map_center, 'CENTER()');
         $this->assertEquals($record->map_zoom, 5);
         $this->assertEquals($record->space_active, 1);
 
