@@ -79,6 +79,8 @@
             this._itemsBoxes =              null;
             this._spaceBoxes =              null;
             this._timeBoxes =               null;
+            this._neatlineRecords =         [];
+            this._omekaRecords =            [];
             this._itemsSorted =             false;
             this._spaceSorted =             false;
             this._timeSorted =              false;
@@ -430,7 +432,7 @@
                 // After a record is deleted, remove its listing.
                 'deletecomplete': function(event, obj) {
                     self._currentFormItem.remove();
-                    self._hideForm(self._currentFormItem, false);
+                    self._hideForm(self._currentFormItem, true);
                     self._glossItems();
                     self._trigger('savecomplete');
                 }
@@ -526,9 +528,12 @@
 
             // Position the faders.
             this._positionTitleFaders();
-
-            // Instantiate id-itemDOM association object.
             this.idToItem = {};
+            this._neatlineRecords = [];
+            this._omekaRecords = [];
+
+            // Hide header rows.
+            this._hideHeaderRows();
 
             // Add the edit form functionality.
             $.each(this.items, function(i, item) {
@@ -545,6 +550,10 @@
                 var spaceCheckbox =         spaceBlock.find('input[type="checkbox"]');
                 var timeBlock =             item.find('.time');
                 var timeCheckbox =          timeBlock.find('input[type="checkbox"]');
+
+                // Populate record header trackers.
+                if (item.attr('itemid')) self._omekaRecords.push(item);
+                else if (item.attr('recordid')) self._neatlineRecords.push(item);
 
                 // Unbind all existing events.
                 $.map([item,
@@ -671,23 +680,28 @@
             // Re-perform the offset calculations.
             this._calculateAllTopOffsets();
 
+             // Show row headers.
+            this._showHeaderRows();
+
         },
 
         /*
          * Add a new record row to the list and expand it.
          */
-         _insertNewRecordRow: function(html) {
+        _insertNewRecordRow: function(html) {
 
-             // Show the Neatline header, append the new markup.
-             this.neatlineRecordsHeader.css('display', 'table-row');
-             this.neatlineRecordsHeader.after(html);
+            // If there is no record header row, prepend to list.
+            if (this.neatlineRecordsHeader.length === 0) {
+                this.itemsList.prepend(html);
+            }
 
-             // Re-gloss.
-             this._glossItems();
+            // If there is a record header, append after it.
+            else {
+                this.neatlineRecordsHeader.after(html);
+            }
 
-             // Expand the form.
-             var newRecord = this.neatlineRecordsHeader.next('tr');
-             this._showForm(newRecord, false, false, false);
+            // Re-gloss, show new form.
+            this._glossItems();
 
          },
 
@@ -788,8 +802,7 @@
             });
 
              // Hide row headers.
-            this.omekaRecordsHeader.hide();
-            this.neatlineRecordsHeader.hide();
+            this._hideHeaderRows();
 
             // Scroll container to top.
             this.element.scrollTop(0);
@@ -799,7 +812,7 @@
         /*
          * Show all non-expanded item rows.
          */
-         _showItemRows: function() {
+        _showItemRows: function() {
 
             // Show items.
             _.each(this.items, function(row) {
@@ -807,8 +820,35 @@
             });
 
              // Show row headers.
-            this.omekaRecordsHeader.show();
-            this.neatlineRecordsHeader.show();
+            this._showHeaderRows();
+
+         },
+
+        /*
+         * Hide all non-expanded item rows.
+         */
+        _hideHeaderRows: function() {
+
+             // Hide row headers.
+            this.omekaRecordsHeader.hide();
+            this.neatlineRecordsHeader.hide();
+
+         },
+
+        /*
+         * Show the record header rows if records exist.
+         */
+        _showHeaderRows: function() {
+
+            // Omeka records.
+            if (!_.isEmpty(this._omekaRecords)) {
+                this.omekaRecordsHeader.show();
+            }
+
+            // Neatline records.
+            if (!_.isEmpty(this._neatlineRecords)) {
+                this.neatlineRecordsHeader.show();
+            }
 
          },
 

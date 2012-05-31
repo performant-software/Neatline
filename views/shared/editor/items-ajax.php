@@ -37,6 +37,7 @@
     </thead>
 
     <tbody>
+
     <tr id="neatline-header" class="header-row <?php if (!$records) { echo 'hidden'; } ?>">
         <td class="neatline-bar">Neatline Records</td>
         <td class="col-1 neatline-bar"></td>
