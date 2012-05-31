@@ -794,6 +794,15 @@
         },
 
         /*
+         * Get the current focus center on the map.
+         *
+         * - return string: The center.
+         */
+        getMapCenter: function() {
+            return this.map.neatlinemap('getCenterForSave');
+        },
+
+        /*
          * Get the current zoom level on the map.
          *
          * - return integer: The level.

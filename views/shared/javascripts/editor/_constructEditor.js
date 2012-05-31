@@ -226,15 +226,15 @@ jQuery(document).ready(function($) {
         },
 
         // When the fix item-specific map focus button is pressed, get
-        // the map bounds and pass to the ajax interface in the form.
+        // the map center and pass to the ajax interface in the form.
         'savemapfocus': function() {
 
             // Get the map extent and zoom.
-            var mapExtent = neatlineContainer.neatline('getMapExtent');
+            var mapCenter = neatlineContainer.neatline('getMapCenter');
             var mapZoom = neatlineContainer.neatline('getMapZoom');
 
             // Set.
-            editorContainer.itembrowser('saveMapFocus', mapExtent, mapZoom);
+            editorContainer.itembrowser('saveMapFocus', mapCenter, mapZoom);
 
         },
 
@@ -266,7 +266,7 @@ jQuery(document).ready(function($) {
         'savepositions': function() {
 
             // Get the map extent and zoom.
-            var mapExtent = neatlineContainer.neatline('getMapExtent');
+            var mapCenter = neatlineContainer.neatline('getMapCenter');
             var mapZoom = neatlineContainer.neatline('getMapZoom');
 
             // Get the timeline center date and zoom.
@@ -276,7 +276,7 @@ jQuery(document).ready(function($) {
             // Save.
             configureLayoutButton.configurelayout(
                 'savePositions',
-                mapExtent,
+                mapCenter,
                 mapZoom,
                 timelineCenter,
                 timelineZoom

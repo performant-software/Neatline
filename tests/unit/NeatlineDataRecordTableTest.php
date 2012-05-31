@@ -906,8 +906,8 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
         $record2->geocoverage = 'POINT(0,1)';
         $record1->space_active = 1;
         $record2->space_active = 1;
-        $record1->map_bounds = 'BOUND(1)';
-        $record2->map_bounds = 'BOUND(2)';
+        $record1->map_bounds = 'CENTER(1)';
+        $record2->map_bounds = 'CENTER(2)';
         $record1->map_zoom = 4;
         $record2->map_zoom = 5;
         $record1->start_visible_date = '1864-04-26 14:39:22';
@@ -932,12 +932,12 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
                     'vector_color' => '#ffffff',
                     'stroke_color' => '#ffffff',
                     'highlight_color' => '#ffffff',
-                    'vector_opacity' => '60',
-                    'stroke_opacity' => '60',
-                    'stroke_width' => '3',
-                    'point_radius' => '3',
-                    'bounds' => 'BOUND(1)',
-                    'zoom' => '4',
+                    'vector_opacity' => 60,
+                    'stroke_opacity' => 60,
+                    'stroke_width' => 3,
+                    'point_radius' => 3,
+                    'center' => 'CENTER(1)',
+                    'zoom' => 4,
                     'wkt' => 'POINT(1,0)',
                     'start_visible_date' => '1864-04-26 14:39:22',
                     'end_visible_date' => '1916-04-23 12:45:34',
@@ -961,12 +961,12 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
                     'vector_color' => '#000000',
                     'stroke_color' => '#000000',
                     'highlight_color' => '#000000',
-                    'vector_opacity' => '40',
-                    'stroke_opacity' => '40',
-                    'stroke_width' => '2',
-                    'point_radius' => '2',
-                    'bounds' => 'BOUND(2)',
-                    'zoom' => '5',
+                    'vector_opacity' => 40,
+                    'stroke_opacity' => 40,
+                    'stroke_width' => 2,
+                    'point_radius' => 2,
+                    'center' => 'CENTER(2)',
+                    'zoom' => 5,
                     'wkt' => 'POINT(0,1)',
                     'start_visible_date' => '1964-04-26 14:39:22',
                     'end_visible_date' => '2016-04-23 12:45:34',
@@ -1017,9 +1017,9 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
         // Build the JSON.
         $json = json_decode($this->_recordsTable->buildMapJson($neatline));
         $this->assertNull($json[0]->zoom);
-        $this->assertNull($json[0]->bounds);
+        $this->assertNull($json[0]->center);
         $this->assertNull($json[1]->zoom);
-        $this->assertNull($json[1]->bounds);
+        $this->assertNull($json[1]->center);
 
     }
 

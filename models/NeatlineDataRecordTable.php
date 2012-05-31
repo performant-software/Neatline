@@ -390,7 +390,7 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
                         'stroke_opacity' =>     $record->getStyle('stroke_opacity'),
                         'stroke_width' =>       $record->getStyle('stroke_width'),
                         'point_radius' =>       $record->getStyle('point_radius'),
-                        'bounds' =>             $record->map_bounds,
+                        'center' =>             $record->map_bounds,
                         'zoom' =>               $record->map_zoom,
                         'wkt' =>                $record->getGeocoverage(),
                         'start_visible_date' => $record->getStartVisibleDate(),

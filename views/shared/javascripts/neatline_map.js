@@ -151,27 +151,16 @@
             this.map.addLayers(layers);
             this._setDefaultLayer();
 
-            // Google.v3 uses EPSG:900913 as projection, so we have to
-            // transform our coordinates
-            this.map.setCenter(new OpenLayers.LonLat(10.2, 48.9).transform(
-                new OpenLayers.Projection("EPSG:4326"),
-                this.map.getProjectionObject()
-            ), 5);
-
-            // If there is a default bounding box set for the exhibit, construct
-            // a second Bounds object to use as the starting zoom target.
-            if (Neatline.record.default_map_bounds !== null) {
-                var boundsArray = Neatline.record.default_map_bounds.split(',');
-                var bounds = new OpenLayers.Bounds(
-                    parseFloat(boundsArray[0]),
-                    parseFloat(boundsArray[1]),
-                    parseFloat(boundsArray[2]),
-                    parseFloat(boundsArray[3])
-                );
+            if (! this.setViewport(
+                Neatline.record.default_map_bounds, Neatline.record.default_map_zoom
+            )) {
+                // Google.v3 uses EPSG:900913 as projection, so we have to
+                // transform our coordinates
+                this.map.setCenter(new OpenLayers.LonLat(10.2, 48.9).transform(
+                    new OpenLayers.Projection("EPSG:4326"),
+                    this.map.getProjectionObject()
+                ), 5);
             }
-
-            // Set starting zoom focus.
-            this.map.zoomToExtent(bounds);
 
         },
 
@@ -215,20 +204,12 @@
             // Push the base layer onto the map.
             this.map.addLayers([this.baseLayer]);
 
-            // If there is a default bounding box set for the exhibit, construct
-            // a second Bounds object to use as the starting zoom target.
-            if (Neatline.record.default_map_bounds !== null) {
-                var boundsArray = Neatline.record.default_map_bounds.split(',');
-                var bounds = new OpenLayers.Bounds(
-                    parseFloat(boundsArray[0]),
-                    parseFloat(boundsArray[1]),
-                    parseFloat(boundsArray[2]),
-                    parseFloat(boundsArray[3])
-                );
+            if (! this.setViewport(
+                Neatline.record.default_map_bounds,
+                Neatline.record.default_map_zoom
+            )) {
+                this.map.zoomToExtent(bounds);
             }
-
-            // Set starting zoom focus.
-            this.map.zoomToExtent(bounds);
 
         },
 
@@ -360,19 +341,21 @@
                 var features = [];
 
                 // Build the features.
-                $.each(item.wkt.split(self.options.wkt_delimiter), function(i, wkt) {
+                if (item.wtk != null) {
+                    $.each(item.wkt.split(self.options.wkt_delimiter), function(i, wkt) {
 
-                    // Construct WKT format reader.
-                    var reader = new OpenLayers.Format.WKT();
+                        // Construct WKT format reader.
+                        var reader = new OpenLayers.Format.WKT();
 
-                    // Try to read valid wkt. If valid, build geometry.
-                    if (!_.isUndefined(reader.read(wkt))) {
-                        var geometry = new OpenLayers.Geometry.fromWKT(wkt);
-                        var feature = new OpenLayers.Feature.Vector(geometry);
-                        features.push(feature);
-                    }
+                        // Try to read valid wkt. If valid, build geometry.
+                        if (!_.isUndefined(reader.read(wkt))) {
+                            var geometry = new OpenLayers.Geometry.fromWKT(wkt);
+                            var feature = new OpenLayers.Feature.Vector(geometry);
+                            features.push(feature);
+                        }
 
-                });
+                    });
+                }
 
                 // Add the vectors to the layer.
                 vectorLayer.addFeatures(features);
@@ -671,15 +654,10 @@
 
             // If the record exists and there is a map feature.
             if (record && record.layer.features.length > 0 && _.isNull(record.wms)) {
-
-                // If there is item-specific data.
-                if (record.data.bounds !== null && record.data.zoom !== null) {
-                    this.map.zoomToExtent(new OpenLayers.Bounds.fromString(record.data.bounds));
-                    this.map.zoomTo(record.data.zoom);
-                }
+                var bounds = record.data.bounds || record.data.center;
 
                 // Otherwise, just fit the vectors in the viewport.
-                else {
+                if (! this.setViewport(bounds, record.data.zoom)) {
 
                     // Get data extent.
                     var extent = record.layer.getDataExtent();
@@ -1037,6 +1015,38 @@
          */
         refresh: function() {
             this.map.updateSize();
+        },
+
+        /*
+         * Set the viewport from the defaults given or from the settings, which
+         * will need to be parsed. This returns a bool indicating whether it
+         * was successful.
+         */
+        setViewport: function(centerBounds, zoom) {
+            var success = false;
+
+            if (centerBounds != null) {
+                var bounds = centerBounds.split(',');
+
+                if (bounds.length === 4) {
+                    this.map.zoomToExtent(new OpenLayers.Bounds(
+                        parseFloat(bounds[0]),
+                        parseFloat(bounds[1]),
+                        parseFloat(bounds[2]),
+                        parseFloat(bounds[3])
+                    ));
+                    success = true;
+                } else if (bounds.length === 2) {
+                    var zoom   = zoom == null ? 5 : parseInt(zoom);
+                    var latlon = new OpenLayers.LonLat(
+                        parseFloat(bounds[0].trim()), parseFloat(bounds[1].trim())
+                    );
+                    this.map.setCenter(latlon, zoom);
+                    success = true;
+                }
+            }
+
+            return success;
         }
 
     });
