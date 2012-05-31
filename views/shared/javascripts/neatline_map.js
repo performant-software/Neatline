@@ -342,19 +342,21 @@
                 var features = [];
 
                 // Build the features.
-                $.each(item.wkt.split(self.options.wkt_delimiter), function(i, wkt) {
+                if (item.wtk != null) {
+                    $.each(item.wkt.split(self.options.wkt_delimiter), function(i, wkt) {
 
-                    // Construct WKT format reader.
-                    var reader = new OpenLayers.Format.WKT();
+                        // Construct WKT format reader.
+                        var reader = new OpenLayers.Format.WKT();
 
-                    // Try to read valid wkt. If valid, build geometry.
-                    if (!_.isUndefined(reader.read(wkt))) {
-                        var geometry = new OpenLayers.Geometry.fromWKT(wkt);
-                        var feature = new OpenLayers.Feature.Vector(geometry);
-                        features.push(feature);
-                    }
+                        // Try to read valid wkt. If valid, build geometry.
+                        if (!_.isUndefined(reader.read(wkt))) {
+                            var geometry = new OpenLayers.Geometry.fromWKT(wkt);
+                            var feature = new OpenLayers.Feature.Vector(geometry);
+                            features.push(feature);
+                        }
 
-                });
+                    });
+                }
 
                 // Add the vectors to the layer.
                 vectorLayer.addFeatures(features);
