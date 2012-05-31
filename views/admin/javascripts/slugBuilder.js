@@ -46,7 +46,7 @@
             // Get markup.
             this._body =        $('body');
             this._window =      $(window);
-            this.title =        $('input[name="title"]');
+            this.title =        $('input[name="name"]');
             this.slug =         $('input[name="slug"]');
 
             // Trackers.

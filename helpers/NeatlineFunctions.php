@@ -563,7 +563,7 @@ function neatline_getDeleteExhibitUrl($neatline_id)
  */
 function neatline_getTimelineDataUrl($neatline_id)
 {
-    return WEB_ROOT . '/neatline-exhibits/' . $neatline_id . '/data/simile';
+    return WEB_ROOT . '/neatline-exhibits/simile/' . $neatline_id;
 }
 
 /**
@@ -575,7 +575,7 @@ function neatline_getTimelineDataUrl($neatline_id)
  */
 function neatline_getMapDataUrl($neatline_id)
 {
-    return WEB_ROOT . '/neatline-exhibits/' . $neatline_id . '/data/openlayers';
+    return WEB_ROOT . '/neatline-exhibits/openlayers/' . $neatline_id;
 }
 
 /**
@@ -587,7 +587,7 @@ function neatline_getMapDataUrl($neatline_id)
  */
 function neatline_getUndatedItemsDataUrl($neatline_id)
 {
-    return WEB_ROOT . '/neatline-exhibits/' . $neatline_id . '/data/udi';
+    return WEB_ROOT . '/neatline-exhibits/udi/' . $neatline_id;
 }
 
 /**
@@ -912,3 +912,4 @@ function neatline_setStyleDefaults()
     ));
 
 }
+

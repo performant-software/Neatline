@@ -6,10 +6,10 @@ head(array('content_class' => 'neatline', 'title' => $title));
 <?php echo flash(); ?>
 <h1><?php echo $title; ?></h1>
 
-<?php if($neatlines): foreach ($neatlines as $neatline): ?>
+<?php if($neatlineexhibits): foreach ($neatlineexhibits as $neatline): ?>
 <div id="neatline-<?php echo $neatline->id; ?>">
     <h2 class="title">
-        <a href="<?php echo public_uri('neatline-exhibits/show/fullscreen/' . $neatline->slug); ?>">
+        <a href="<?php echo public_uri('neatline-exhibits/show/' . $neatline->slug); ?>">
             <?php echo $neatline->name; ?>
         </a>
     </h2>
@@ -18,15 +18,7 @@ head(array('content_class' => 'neatline', 'title' => $title));
 <?php endforeach; ?>
 
 <!-- Pagination. -->
-<?php if ($pagination['total_results'] > $pagination['per_page']): ?>
-<div class="pagination">
-    <?php echo pagination_links(array('scrolling_style' => 'All',
-    'page_range' => '5',
-    'page' => $pagination['current_page'],
-    'per_page' => $pagination['per_page'],
-    'total_results' => $pagination['total_results'])); ?>
-</div>
-<?php endif; ?>
+<div class="pagination"><?php echo pagination_links(); ?></div>
 <?php endif; ?>
 </div>
 

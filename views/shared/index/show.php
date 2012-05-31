@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
 
 /**
- * Public-facing Neatline exhibit.
+ * Full-screen Neatline exhibit.
  *
  * PHP version 5
  *
@@ -24,24 +24,48 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache 2 License
  */
 ?>
+<!DOCTYPE html>
+<!--[if IE 6]>
+<html id="ie6" dir="ltr" lang="en-US">
+<![endif]-->
+<!--[if IE 7]>
+<html id="ie7" dir="ltr" lang="en-US">
+<![endif]-->
+<!--[if IE 8]>
+<html id="ie8" dir="ltr" lang="en-US">
+<![endif]-->
+<!--[if IE 9]>
+<html id="ie9" dir="ltr" lang="en-US">
+<![endif]-->
+<!--[if !(IE 6) | !(IE 7) | !(IE 8)  ]><!-->
+<html dir="ltr" lang="en-US">
+<!--<![endif]-->
+<head>
 
-<?php
-    $head = array(
-      'bodyclass' => 'neatline primary test' . $exhibit->slug,
-      'title' => $exhibit->name);
-    neatline_queueExhibitCss($exhibit);
-    head($head);
-?>
+    <meta charset="utf-8">
+    <title><?php echo $neatlineexhibit->name; ?></title>
 
-<?php if ($exhibit->public): ?>
+    <?php neatline_queueExhibitCss($exhibit); ?>
 
-    <h1><?php echo $exhibit->name; ?></h1>
-    <?php echo $this->partial('neatline/_neatline.php', array(
-        'exhibit' => $exhibit
-    )); ?>
+    <!-- Stylesheets -->
+    <?php display_css(); ?>
 
-<?php else: ?>
-    <?php echo $this->partial('neatline/_private.php'); ?>
-<?php endif; ?>
+    <!-- JavaScripts -->
+    <?php display_js(); ?>
 
-<?php foot(); ?>
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?v=3.5&amp;sensor=false"></script>
+
+    <!-- Plugin Stuff -->
+    <?php plugin_header(); ?>
+
+</head>
+
+<body class="neatline <?php echo $neatlineexhibit->slug; ?>">
+
+<!-- The core Neatline partial. -->
+<?php echo $this->partial('neatline/_neatline.php', array(
+    'exhibit' => $neatlineexhibit
+)); ?>
+
+</body>
+</html>
