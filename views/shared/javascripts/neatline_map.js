@@ -1036,9 +1036,9 @@
                     ));
                     success = true;
                 } else if (bounds.length === 2) {
-                    var zoom   = zoom === null ? 5 : parseInt(5);
+                    var zoom   = zoom == null ? 5 : parseInt(zoom);
                     var latlon = new OpenLayers.LonLat(
-                        parseFloat(bounds[0]), parseFloat(bounds[1])
+                        parseFloat(bounds[0].trim()), parseFloat(bounds[1].trim())
                     );
                     this.map.setCenter(latlon, zoom);
                     success = true;
