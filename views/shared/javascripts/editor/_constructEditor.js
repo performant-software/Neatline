@@ -266,7 +266,7 @@ jQuery(document).ready(function($) {
         'savepositions': function() {
 
             // Get the map extent and zoom.
-            var mapExtent = neatlineContainer.neatline('getMapExtent');
+            var mapCenter = neatlineContainer.neatline('getMapCenter');
             var mapZoom = neatlineContainer.neatline('getMapZoom');
 
             // Get the timeline center date and zoom.
@@ -276,7 +276,7 @@ jQuery(document).ready(function($) {
             // Save.
             configureLayoutButton.configurelayout(
                 'savePositions',
-                mapExtent,
+                mapCenter,
                 mapZoom,
                 timelineCenter,
                 timelineZoom
