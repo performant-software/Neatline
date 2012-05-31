@@ -1036,7 +1036,7 @@
                     ));
                     success = true;
                 } else if (bounds.length === 2) {
-                    var zoom   = zoom === null : 5 ? parseInt(5);
+                    var zoom   = zoom === null ? 5 : parseInt(5);
                     var latlon = new OpenLayers.LonLat(
                         parseFloat(bounds[0]), parseFloat(bounds[1])
                     );
