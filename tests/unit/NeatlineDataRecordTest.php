@@ -600,6 +600,50 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
     }
 
     /**
+     * If a passed style attribute does not match the parent record value,
+     * set the value.
+     *
+     * @return void.
+     */
+    public function testSetStyleWithParentRecordWhenValueIsNovel()
+    {
+
+        // Create a record.
+        $neatline = $this->helper->_createNeatline();
+        $item = $this->helper->_createItem();
+        $record1 = new NeatlineDataRecord($item, $neatline);
+        $record1->setStyle('vector_color', '#000000');
+        $record1->setStyle('vector_opacity', 100);
+        $record1->setStyle('stroke_color', '#000000');
+        $record1->setStyle('stroke_opacity', 100);
+        $record1->setStyle('stroke_width', 100);
+        $record1->setStyle('point_radius', 100);
+        $record1->save();
+
+        // Create a child record of record1.
+        $record2 = new NeatlineDataRecord($item, $neatline);
+        $record2->parent_record_id = $record1->id;
+        $record2->save();
+
+        // Set.
+        $this->assertTrue($record2->setStyle('vector_color', '#ffffff'));
+        $this->assertTrue($record2->setStyle('vector_opacity', 99));
+        $this->assertTrue($record2->setStyle('stroke_color', '#ffffff'));
+        $this->assertTrue($record2->setStyle('stroke_opacity', 99));
+        $this->assertTrue($record2->setStyle('stroke_width', 99));
+        $this->assertTrue($record2->setStyle('point_radius', 99));
+
+        // Check.
+        $this->assertEquals($record2->vector_color, '#ffffff');
+        $this->assertEquals($record2->vector_opacity, 99);
+        $this->assertEquals($record2->stroke_color, '#ffffff');
+        $this->assertEquals($record2->stroke_opacity, 99);
+        $this->assertEquals($record2->stroke_width, 99);
+        $this->assertEquals($record2->point_radius, 99);
+
+    }
+
+    /**
      * If a passed style attribute does not match the exhibit default,
      * set the value.
      *
