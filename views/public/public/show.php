@@ -29,6 +29,7 @@
     $head = array(
       'bodyclass' => 'neatline primary test' . $exhibit->slug,
       'title' => $exhibit->name);
+    neatline_queueExhibitCss($exhibit);
     head($head);
 ?>
 

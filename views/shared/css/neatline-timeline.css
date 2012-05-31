@@ -47,9 +47,8 @@
 
 /* Text label for events on the top band. */
 .neatlinetime-timeline .timeline-event-label {
-    background: rgba(0,0,0, 0.05);
     font-family: 'Crimson Text', serif;
-    font-size: 1.1em;
+    font-size: 1.2em;
     color: rgba(0,0,0,0.6);
     padding: 0;
 }

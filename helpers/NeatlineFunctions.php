@@ -180,6 +180,18 @@ function neatline_queueNeatlineAssets()
 }
 
 /**
+ * Try to find a CSS file that matches the exhibit slug.
+ *
+ * @return void.
+ */
+function neatline_queueExhibitCss($exhibit)
+{
+    try {
+        queue_css($exhibit->slug);
+    } catch (Exception $e) {}
+}
+
+/**
  * Create a form containing a single button.
  *
  * @param string $action Form action URI.
@@ -528,23 +540,6 @@ function neatline_deleteSucceed($title)
 }
 
 /**
- * Construct an error message in a form.
- *
- * @param string $text The error text.
- *
- * @return string The error markup.
- */
-function neatline_error($text)
-{
-
-    return '<div class="neatline-error">'
-         . $text
-         . '</div>';
-
-
-}
-
-/**
  * Construct the delete exhibit action route.
  *
  * @param integer $neatline_id The id of the exhibit.
@@ -553,9 +548,7 @@ function neatline_error($text)
  */
 function neatline_getDeleteExhibitUrl($neatline_id)
 {
-
     return WEB_ROOT . '/admin/neatline-exhibits/delete/' . $neatline_id;
-
 }
 
 /**
@@ -567,9 +560,7 @@ function neatline_getDeleteExhibitUrl($neatline_id)
  */
 function neatline_getTimelineDataUrl($neatline_id)
 {
-
     return WEB_ROOT . '/neatline-exhibits/' . $neatline_id . '/data/simile';
-
 }
 
 /**
@@ -581,9 +572,7 @@ function neatline_getTimelineDataUrl($neatline_id)
  */
 function neatline_getMapDataUrl($neatline_id)
 {
-
     return WEB_ROOT . '/neatline-exhibits/' . $neatline_id . '/data/openlayers';
-
 }
 
 /**
@@ -595,9 +584,7 @@ function neatline_getMapDataUrl($neatline_id)
  */
 function neatline_getUndatedItemsDataUrl($neatline_id)
 {
-
     return WEB_ROOT . '/neatline-exhibits/' . $neatline_id . '/data/udi';
-
 }
 
 /**

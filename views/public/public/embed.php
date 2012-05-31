@@ -27,6 +27,7 @@
 
 <?php if ($exhibit->public): ?>
 
+<?php neatline_queueExhibitCss($exhibit); ?>
 <?php echo $this->partial('public/_public_header.php', array(
     'titlePrefix' => 'Neatline',
     'exhibit' => $exhibit
