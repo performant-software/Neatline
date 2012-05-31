@@ -155,7 +155,7 @@ class NeatlineExhibit extends Omeka_record
     /**
      * Save default viewport positions.
      *
-     * @param string $mapExtent The bounding box for the map.
+     * @param string $mapCenter The center for the map.
      * @param string $mapZoom The integer zoom value.
      * @param string $timelineCenter The timestamp for the timeline focus.
      * @param string $timelineZoom The timeline zoom level.
@@ -163,7 +163,7 @@ class NeatlineExhibit extends Omeka_record
      * @return Omeka_record The map.
      */
     public function saveViewportPositions(
-        $mapExtent,
+        $mapCenter,
         $mapZoom,
         $timelineCenter,
         $timelineZoom
@@ -171,7 +171,7 @@ class NeatlineExhibit extends Omeka_record
     {
 
         // Set values.
-        $this->default_map_bounds = $mapExtent;
+        $this->default_map_bounds = $mapCenter;
         $this->default_map_zoom = intval($mapZoom);
         $this->default_focus_date = $timelineCenter;
         $this->default_timeline_zoom = $timelineZoom;

@@ -283,6 +283,13 @@
         },
 
         /*
+         * Get the current center of the viewport.
+         */
+         getCenterForSave: function() {
+             return this.map.getCenter().toShortString();
+         },
+
+        /*
          * Get the current zoom of the viewport.
          */
         getZoomForSave: function() {

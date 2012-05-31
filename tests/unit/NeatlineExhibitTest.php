@@ -75,7 +75,7 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
         $exhibit->default_context_band_height = 30;
         $exhibit->h_percent =                   50;
         $exhibit->v_percent =                   50;
-        $exhibit->default_map_bounds =          'BOUND()';
+        $exhibit->default_map_bounds =          'CENTER()';
         $exhibit->default_map_zoom =            1;
         $exhibit->default_focus_date =          'date';
         $exhibit->default_timeline_zoom =       10;
@@ -114,7 +114,7 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
         $this->assertEquals($exhibit->default_context_band_height, 30);
         $this->assertEquals($exhibit->h_percent, 50);
         $this->assertEquals($exhibit->v_percent, 50);
-        $this->assertEquals($exhibit->default_map_bounds, 'BOUND()');
+        $this->assertEquals($exhibit->default_map_bounds, 'CENTER()');
         $this->assertEquals($exhibit->default_map_zoom, 1);
         $this->assertEquals($exhibit->default_focus_date, 'date');
         $this->assertEquals($exhibit->default_timeline_zoom, 10);
@@ -217,14 +217,14 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
         $neatline = $this->helper->_createNeatline();
 
         // Save with int zoom and check.
-        $neatline->saveViewportPositions('bounds', 5, 'date', 10);
-        $this->assertEquals($neatline->default_map_bounds, 'bounds');
+        $neatline->saveViewportPositions('center', 5, 'date', 10);
+        $this->assertEquals($neatline->default_map_bounds, 'center');
         $this->assertEquals($neatline->default_map_zoom, 5);
         $this->assertEquals($neatline->default_focus_date, 'date');
         $this->assertEquals($neatline->default_timeline_zoom, 10);
 
         // Save with str zoom and check.
-        $neatline->saveViewportPositions('bounds', '5', 'date', 10);
+        $neatline->saveViewportPositions('center', '5', 'date', 10);
         $this->assertEquals($neatline->default_map_zoom, 5);
 
     }

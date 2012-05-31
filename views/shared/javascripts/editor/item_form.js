@@ -983,7 +983,7 @@
                     item_id: this.itemId,
                     record_id: this.recordId,
                     exhibit_id: Neatline.record.id,
-                    extent: extent,
+                    center: extent,
                     zoom: zoom
                 },
 
