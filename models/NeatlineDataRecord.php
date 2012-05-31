@@ -451,6 +451,18 @@ class NeatlineDataRecord extends Omeka_record
         // Get the exhibit.
         $exhibit = $this->getExhibit();
 
+        // If there is a parent record.
+        if (!is_null($this->parent_record_id)) {
+
+            // If the value does not match the parent style, set.
+            $parent = $this->getParentRecord();
+            if ($value != $parent->getStyle($style)) {
+                $this[$style] = $value;
+                return true;
+            }
+
+        }
+
         // If there is an exhibit default.
         if (!is_null($exhibit['default_' . $style])) {
 
