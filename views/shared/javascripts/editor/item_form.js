@@ -266,7 +266,6 @@
             this.closeButton.bind({
 
                 'mousedown': function() {
-                    console.log('test');
                     self._trigger('hide');
                 },
 
