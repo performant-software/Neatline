@@ -259,10 +259,6 @@ div.form-actions a.delete {
 
 /* Edit form */
 
-tr.edit-form {
-    background-color: #faf8fc;
-}
-
 tr.edit-form td {
     padding: 0;
 }
