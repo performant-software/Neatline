@@ -52,11 +52,6 @@ body {
 
 /* Exhibit overrides */
 
-#items-container li.item-description {
-    font-size: 12px;
-    line-height: 17px;
-}
-
 #items-container li.item-title {
     padding: 6px 15px;
 }

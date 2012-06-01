@@ -63,6 +63,7 @@
             this._currentRecord =           null;
             this._currentRecordId =         null;
             this._idOrdering =              [];
+            this._db =                      TAFFY();
 
             // Build list.
             this._getItems();

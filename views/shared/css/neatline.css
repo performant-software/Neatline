@@ -256,7 +256,7 @@ div.title-tip {
 
 #items-container li.item-title {
     pointer: cursor;
-    font-size: 15px;
+    font-size: 17px;
     padding: 6px 20px;
     line-height: normal !important;
     border-top: 1px solid #cdcdcd;
@@ -274,7 +274,7 @@ div.title-tip {
 
 #items-container li.item-description {
     display: none;
-    font-size: 13px;
+    font-size: 15px;
     margin-bottom: 1em;
     line-height: 1.4em;
     color: #616161;

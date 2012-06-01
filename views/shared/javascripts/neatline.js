@@ -40,12 +40,6 @@
                 timeline_id:    'timeline',
                 items_id:       'items',
                 scroller:       'scroll'
-            },
-
-            // Positioning constants.
-            constants: {
-                h_percent:      24,
-                v_percent:      84
             }
 
         },
@@ -79,6 +73,7 @@
             this.positionDivs();
             this.instantiateBlocks();
             this.instantiateBubbles();
+            this.refreshDivs();
 
         },
 
@@ -145,16 +140,36 @@
 
             // If there is a map and a timeline, take the top div.
             if (this.params.record.is_map && this.params.record.is_timeline) {
-                this.majorBlock = (this.params.record.top_element === 'map') ?
-                    this.map :
-                    this.timeline;
+
+                // If map.
+                if (this.params.record.top_element === 'map') {
+                    this.majorBlock = this.map;
+                    this.majorBlockId = 'map';
+                }
+
+                // If timeline.
+                else if (this.params.record.top_element === 'timeline') {
+                    this.majorBlock = this.timeline;
+                    this.majorBlockId = 'timeline';
+                }
+
             }
 
             // Otherwise, take the present block.
             else {
-                this.majorBlock = (this.params.record.is_map) ?
-                    this.map :
-                    this.timeline;
+
+                // If map.
+                if (this.params.record.is_map) {
+                    this.majorBlock = this.map;
+                    this.majorBlockId = 'map';
+                }
+
+                // If timeline.
+                else if (this.params.record.is_timeline) {
+                    this.majorBlock = this.timeline;
+                    this.majorBlockId = 'timeline';
+                }
+
             }
 
         },
@@ -170,7 +185,7 @@
             this.element.positioner('measure');
 
             // Compute the positions.
-            this.element.positioner(
+            this.positions = this.element.positioner(
                 'compute',
                 this.params.record.is_map,
                 this.params.record.is_timeline,
@@ -183,10 +198,27 @@
 
             // Manifest.
             this.element.positioner('apply');
+            this.refreshDivs();
+
+        },
+
+        /*
+         * Position the exhibit controls.
+         *
+         * - return void.
+         */
+        refreshDivs: function() {
+
+            console.log('refresh');
 
             // Rerender map and timeline.
             this.timeline.neatlinetimeline('refresh');
-            this.map.neatlinemap('refresh');
+            this.map.neatlinemap('refresh', this.positions.map);
+
+            // Reposition the scroller.
+            var scrollerPos = (this.majorBlockId === 'map') ?
+                this.positions.map : this.positions.timeline;
+            this.element.scroller('position', scrollerPos);
 
         },
 
@@ -196,10 +228,8 @@
          * - return void.
          */
         _getContainerDimensions: function() {
-
             this.containerWidth = this.element.width();
             this.containerHeight = this.element.height();
-
         },
 
         /*
@@ -408,7 +438,7 @@
                 this.instantiated_undated = true;
 
                 // Instantiate the scroller.
-                this.majorBlock.scroller({
+                this.element.scroller({
 
                     'left': function() {
                         self.items.neatlineitems('scrollLeft');

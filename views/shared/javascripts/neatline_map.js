@@ -248,6 +248,37 @@
         },
 
         /*
+         * Position the opacity slider, layer switcher, and zoom bar.
+         */
+        positionControls: function(top, left, width, height) {
+
+            // Get containers, measure element.
+            this.panZoomBar = this.element.find('.olControlPanZoomBar');
+            this.layerSwitcher = this.element.find('.olControlLayerSwitcher');
+            var containerWidth = this.element.width();
+            var containerHeight = this.element.height();
+
+            // Layer switcher.
+            this.layerSwitcher.css({
+                top: top+25,
+                right: containerWidth-(left+width)
+            });
+
+            // Opacity slider.
+            this.opacitySlider.css({
+                bottom: containerHeight-(top+height)+20,
+                right: containerWidth-(left+width)+20
+            });
+
+            // Zoom bar.
+            this.panZoomBar.css({
+                top: top+10,
+                left: left+10
+            });
+
+        },
+
+        /*
          * Load the feature data.
          */
         loadData: function() {
@@ -1014,8 +1045,14 @@
         /*
          * Re-render the map.
          */
-        refresh: function() {
+        refresh: function(pos) {
             this.map.updateSize();
+            this.positionControls(
+                pos.top,
+                pos.left,
+                pos.width,
+                pos.height
+            );
         },
 
         /*

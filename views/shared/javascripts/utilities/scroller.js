@@ -129,6 +129,27 @@
 
 
         /*
+         * Positions the container.
+         *
+         * - param Object positions: The container dimensions.
+         *
+         * - return void.
+         */
+        position: function(positions) {
+
+            // Get conatiner dimensions.
+            var containerWidth = this.element.width();
+            var containerHeight = this.element.height();
+
+            // Position.
+            this.container.css({
+                top: positions.top+20,
+                right: containerWidth-(positions.left+positions.width)+20
+            });
+
+        },
+
+        /*
          * Show the container.
          *
          * - return void.
