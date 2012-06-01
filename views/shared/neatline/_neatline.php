@@ -29,9 +29,7 @@
 <div id="neatline" class="neatline-container">
 
     <!-- Map. -->
-    <div id="map" class="neatline-block">
-        <?php echo $this->partial('neatline/_opacity_slider.php'); ?>
-    </div>
+    <div id="map" class="neatline-block"></div>
 
     <!-- Timeline. -->
     <div id="timeline" class="neatline-block neatlinetime-timeline">
