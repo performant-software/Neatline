@@ -831,7 +831,7 @@ table#header-row {
     border-left: 1px solid #745982;
     border-right: 1px solid #745982;
     border-bottom: 1px solid #745982;
-    z-index: 99;
+    z-index: 1000;
 }
 
 .dropdown-content button {
