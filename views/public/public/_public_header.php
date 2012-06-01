@@ -17,7 +17,10 @@
 <head>
 
     <meta charset="utf-8">
-    <title><?php echo $titlePrefix; ?>: <?php echo $exhibit->name; ?></title>
+<?php
+    $titleString = get_option('site_title') . ' | ' . $titlePrefix . ':' . $exhibit->name;
+?>
+    <title><?php echo $titleString; ?></title>
 
     <!-- Plugin Stuff -->
     <?php plugin_header(); ?>
