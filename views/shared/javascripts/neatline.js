@@ -209,8 +209,6 @@
          */
         refreshDivs: function() {
 
-            console.log('refresh');
-
             // Rerender map and timeline.
             this.timeline.neatlinetimeline('refresh');
             this.map.neatlinemap('refresh', this.positions.map);

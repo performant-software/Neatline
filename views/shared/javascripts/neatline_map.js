@@ -68,7 +68,6 @@
 
             // Getters.
             this._window = $(window);
-            this.opacitySlider = $('#opacity-slider');
 
             // Trackers and buckets.
             this._db =                      TAFFY();
@@ -79,7 +78,6 @@
             this._clickedFeature =          null;
             this.record =                   null;
             this.requestData =              null;
-            this.isOpacitySlider =          false;
 
             // Construct image-based map.
             if (Neatline.record.image_id) {
@@ -214,40 +212,6 @@
         },
 
         /*
-         * Build the map opacity slider.
-         */
-        _instantiateOpacitySlider: function() {
-
-            var self = this;
-
-            if (!this.isOpacitySlider) {
-
-                this.opacitySlider.slider({
-
-                    // Configuration options.
-                    orientation: 'vertical',
-                    range: 'min',
-                    min: 0,
-                    max: 100,
-                    value: 100,
-
-                    // Manifest new opacity.
-                    change: function(event, ui) {
-                        _.each(self._wmsLayers, function(layer) {
-                            layer.setOpacity(ui.value/100);
-                        });
-                    }
-
-                });
-
-                // Set tracker.
-                this.isOpacitySlider = true;
-
-            }
-
-        },
-
-        /*
          * Position the opacity slider, layer switcher, and zoom bar.
          */
         positionControls: function(top, left, width, height) {
@@ -262,12 +226,6 @@
             this.layerSwitcher.css({
                 top: top+25,
                 right: containerWidth-(left+width)
-            });
-
-            // Opacity slider.
-            this.opacitySlider.css({
-                bottom: containerHeight-(top+height)+20,
-                right: containerWidth-(left+width)+20
             });
 
             // Zoom bar.
@@ -438,11 +396,6 @@
                 self.map.addLayer(vectorLayer);
 
             });
-
-            // Add layers to map and instantiate opacity slider.
-            if (this._wmsLayers.length > 0) {
-                this._instantiateOpacitySlider();
-            }
 
         },
 
@@ -701,12 +654,12 @@
 
                 }
 
-                // If the record has a WMS layer.
-                if (!_.isNull(record.wms)) {
-                    this._resetWmsZIndices();
-                    record.wms.setZIndex(1);
-                }
+            }
 
+            // If the record has a WMS layer.
+            if (!_.isNull(record.wms)) {
+                this._resetWmsZIndices();
+                record.wms.setZIndex(1);
             }
 
         },
