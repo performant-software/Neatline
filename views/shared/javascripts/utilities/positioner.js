@@ -1175,17 +1175,26 @@
         /*
          * Apply computed positions to the markup.
          */
-        apply: function() {
+        apply: function(mapFullscreen) {
+
+            if (_.isUndefined(mapFullscreen)) {
+                mapFullscreen = true;
+            }
 
             // Map.
             if (this._is_map) {
                 this.map.css('display', 'block');
-                this.map.css({
-                    height: this.height,
-                    width: this.width,
-                    top: 0,
-                    left: 0
-                });
+                if (mapFullscreen) {
+                    this.map.css({
+                        height: this.height,
+                        width: this.width,
+                        top: 0,
+                        left: 0
+                    });
+                }
+                else {
+                    this.map.css(this.positions.map);
+                }
             } else {
                 this.map.css('display', 'none');
             }

@@ -391,7 +391,7 @@
         _reposition: function() {
 
             // Manifest the parameters.
-            this.dragbox.positioner('apply');
+            this.dragbox.positioner('apply', false);
 
             // Center tags.
             this.centerAllTags();
