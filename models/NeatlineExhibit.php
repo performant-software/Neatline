@@ -99,7 +99,7 @@ class NeatlineExhibit extends Omeka_record
      * @param string $title The title.
      * @param string $description The description.
      * @param string $slug The slug.
-     * @param varchar $map The map id.
+     * @param boolean $public True if public.
      * @param varchar $image The image id.
      *
      * @return boolean True if save is successful.

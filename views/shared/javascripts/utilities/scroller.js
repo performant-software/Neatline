@@ -144,7 +144,7 @@
             // Position.
             this.container.css({
                 top: positions.top+20,
-                right: containerWidth-(positions.left+positions.width)+20
+                left: containerWidth-(positions.left+positions.width)+50
             });
 
         },

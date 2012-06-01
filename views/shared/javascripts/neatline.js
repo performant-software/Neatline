@@ -213,10 +213,10 @@
             this.timeline.neatlinetimeline('refresh');
             this.map.neatlinemap('refresh', this.positions.map);
 
-            // Reposition the scroller.
-            var scrollerPos = (this.majorBlockId === 'map') ?
-                this.positions.map : this.positions.timeline;
-            this.element.scroller('position', scrollerPos);
+            // // Reposition the scroller.
+            // var scrollerPos = (this.majorBlockId === 'map') ?
+            //     this.positions.map : this.positions.timeline;
+            // this.element.scroller('position', scrollerPos);
 
         },
 
@@ -435,18 +435,18 @@
                 // Register the presence of the udi instantiation.
                 this.instantiated_undated = true;
 
-                // Instantiate the scroller.
-                this.element.scroller({
+                // // Instantiate the scroller.
+                // this.element.scroller({
 
-                    'left': function() {
-                        self.items.neatlineitems('scrollLeft');
-                    },
+                //     'left': function() {
+                //         self.items.neatlineitems('scrollLeft');
+                //     },
 
-                    'right': function() {
-                        self.items.neatlineitems('scrollRight');
-                    }
+                //     'right': function() {
+                //         self.items.neatlineitems('scrollRight');
+                //     }
 
-                });
+                // });
 
             }
 
