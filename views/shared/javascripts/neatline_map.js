@@ -332,9 +332,10 @@
                     item.highlight_color
                 );
 
-                // Build the layers.
+                // Build the layer.
                 var vectorLayer = new OpenLayers.Layer.Vector(item.title, {
-                    styleMap: style
+                    styleMap: style,
+                    displayInLayerSwitcher: false
                 });
 
                 // Empty array to hold features objects.

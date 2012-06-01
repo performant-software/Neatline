@@ -216,7 +216,7 @@
                         this.positions = {
 
                             map: {
-                                height: this.height,
+                                height: this.majorHeight,
                                 width:  this.width,
                                 top:    0,
                                 left:   0
@@ -263,10 +263,10 @@
                         this.positions = {
 
                             map: {
-                                height: this.height,
-                                width:  this.width,
+                                height: this.majorHeight,
+                                width:  this.majorWidth,
                                 top:    0,
-                                left:   0
+                                left:   this.minorWidth
                             },
 
                             timeline: {
@@ -309,10 +309,10 @@
                         this.positions = {
 
                             map: {
-                                height: this.height,
-                                width:  this.width,
+                                height: this.majorHeight,
+                                width:  this.majorWidth,
                                 top:    0,
-                                left:   0
+                                left:   this.minorWidth
                             },
 
                             timeline: {
@@ -356,7 +356,7 @@
                         this.positions = {
 
                             map: {
-                                height: this.height,
+                                height: this.majorHeight,
                                 width:  this.width,
                                 top:    0,
                                 left:   0
@@ -403,8 +403,8 @@
                         this.positions = {
 
                             map: {
-                                height: this.height,
-                                width:  this.width,
+                                height: this.majorHeight,
+                                width:  this.majorWidth,
                                 top:    0,
                                 left:   0
                             },
@@ -449,8 +449,8 @@
                         this.positions = {
 
                             map: {
-                                height: this.height,
-                                width:  this.width,
+                                height: this.majorHeight,
+                                width:  this.majorWidth,
                                 top:    0,
                                 left:   0
                             },
@@ -501,10 +501,10 @@
                         this.positions = {
 
                             map: {
-                                height: this.height,
-                                width:  this.width,
-                                top:    0,
-                                left:   0
+                                height: this.minorHeight,
+                                width:  this.majorWidth,
+                                top:    this.majorHeight,
+                                left:   this.minorWidth
                             },
 
                             timeline: {
@@ -548,9 +548,9 @@
                         this.positions = {
 
                             map: {
-                                height: this.height,
+                                height: this.minorHeight,
                                 width:  this.width,
-                                top:    0,
+                                top:    this.majorHeight,
                                 left:   0
                             },
 
@@ -594,10 +594,10 @@
                         this.positions = {
 
                             map: {
-                                height: this.height,
-                                width:  this.width,
-                                top:    0,
-                                left:   0
+                                height: this.minorHeight,
+                                width:  this.majorWidth,
+                                top:    this.majorHeight,
+                                left:   this.minorWidth
                             },
 
                             timeline: {
@@ -641,9 +641,9 @@
                         this.positions = {
 
                             map: {
-                                height: this.height,
-                                width:  this.width,
-                                top:    0,
+                                height: this.minorHeight,
+                                width:  this.majorWidth,
+                                top:    this.majorHeight,
                                 left:   0
                             },
 
@@ -688,9 +688,9 @@
                         this.positions = {
 
                             map: {
-                                height: this.height,
+                                height: this.minorHeight,
                                 width:  this.width,
-                                top:    0,
+                                top:    this.majorHeight,
                                 left:   0
                             },
 
@@ -734,9 +734,9 @@
                         this.positions = {
 
                             map: {
-                                height: this.height,
-                                width:  this.width,
-                                top:    0,
+                                height: this.minorHeight,
+                                width:  this.majorWidth,
+                                top:    this.majorHeight,
                                 left:   0
                             },
 
@@ -789,7 +789,7 @@
 
                         map: {
                             height: this.height,
-                            width:  this.width,
+                            width:  this.majorWidth,
                             top:    0,
                             left:   0
                         },
@@ -834,9 +834,9 @@
 
                         map: {
                             height: this.height,
-                            width:  this.width,
+                            width:  this.majorWidth,
                             top:    0,
-                            left:   0
+                            left:   this.minorWidth
                         },
 
                         timeline: {
@@ -885,10 +885,10 @@
                     this.positions = {
 
                         map: {
-                            height: null,
-                            width:  null,
-                            top:    null,
-                            left:   null
+                            height: this.height,
+                            width:  this.majorWidth,
+                            top:    0,
+                            left:   this.minorWidth
                         },
 
                         timeline: {
@@ -982,7 +982,7 @@
                     this.positions = {
 
                         map: {
-                            height: this.height,
+                            height: this.majorHeight,
                             width:  this.width,
                             top:    0,
                             left:   0
@@ -1027,9 +1027,9 @@
                     this.positions = {
 
                         map: {
-                            height: this.height,
+                            height: this.minorHeight,
                             width:  this.width,
-                            top:    0,
+                            top:    this.majorHeight,
                             left:   0
                         },
 
@@ -1180,7 +1180,12 @@
             // Map.
             if (this._is_map) {
                 this.map.css('display', 'block');
-                this.map.css(this.positions.map);
+                this.map.css({
+                    height: this.height,
+                    width: this.width,
+                    top: 0,
+                    left: 0
+                });
             } else {
                 this.map.css('display', 'none');
             }
