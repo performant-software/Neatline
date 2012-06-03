@@ -143,15 +143,18 @@ function neatline_queueEmbedAssets()
 /**
  * Include the static files for the Neatline.
  *
+ * @param Omeka_record $exhibit The exhibit.
+ *
  * @return void.
  */
-function neatline_queueNeatlineAssets()
+function neatline_queueNeatlineAssets($exhibit)
 {
 
     // Core Neatline stylesheet.
     queue_css('neatline');
     queue_css('neatline-timeline');
     queue_css('jquery-ui');
+    neatline_queueExhibitCss($exhibit);
 
     // Application classes.
     queue_js('neatline', 'javascripts');
@@ -187,7 +190,7 @@ function neatline_queueNeatlineAssets()
 function neatline_queueExhibitCss($exhibit)
 {
     try {
-        queue_css($exhibit->slug);
+        queue_css('exhibits/' . $exhibit->slug);
     } catch (Exception $e) {}
 }
 

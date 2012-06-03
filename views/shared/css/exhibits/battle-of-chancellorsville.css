@@ -1,0 +1,18 @@
+/* Battle of Chancellorsville */
+
+/* Text label for events on the top band. */
+.neatlinetime-timeline .timeline-event-label {
+    font-size: 1.8em !important;
+    padding: 0.2em 1em !important;
+}
+
+#neatline .timeline-container:after {
+  content: "";
+  position: absolute;
+  top:0;
+  left: 50%;
+  width: 0;
+  height: 100%;
+  border-left: 1px solid rgb(190, 160, 10) !important;
+  z-index: 1000;
+}

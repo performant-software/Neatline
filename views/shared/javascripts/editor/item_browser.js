@@ -376,6 +376,11 @@
                     });
                 },
 
+                // When a form is closed.
+                'hide': function() {
+                    self._hideForm(self._currentFormItem, true);
+                },
+
                 // When a form is saved.
                 'save': function() {
                     self._trigger('saveform');

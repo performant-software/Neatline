@@ -225,19 +225,16 @@ class NeatlinePlugin
         // Queue CSS.
         if ($request->getModuleName() == 'neatline' &&
             $request->getControllerName() == 'index') {
-
               neatline_queueAdminCss();
-
         }
 
         // Queue static assets for the Neatline editor.
         if ($request->getModuleName() == 'neatline' &&
             $request->getControllerName() == 'editor' &&
             $request->getActionName() == 'index') {
-
-              neatline_queueNeatlineAssets();
+              $exhibit = __v()->exhibit;
+              neatline_queueNeatlineAssets($exhibit);
               neatline_queueEditorAssets();
-
         }
 
     }
@@ -254,20 +251,19 @@ class NeatlinePlugin
         if ($request->getModuleName() == 'neatline' &&
             $request->getControllerName() == 'public') {
 
+            $exhibit = __v()->exhibit;
             $actionName = $request->getActionName();
+            neatline_queueNeatlineAssets($exhibit);
 
             if ($actionName == 'show') {
-                neatline_queueNeatlineAssets();
                 neatline_queueInThemeAssets();
             }
 
             else if ($actionName == 'fullscreen') {
-                neatline_queueNeatlineAssets();
                 neatline_queueFullscreenAssets();
             }
 
             else if ($actionName == 'embed') {
-                neatline_queueNeatlineAssets();
                 neatline_queueEmbedAssets();
             }
 
