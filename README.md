@@ -67,12 +67,9 @@ documentation][geoserver-install-documentation].
   2. Click the "Create an Exhibit" button.
   3. Enter a title for the exhibit. The title will be displayed at the top of the full-screen public display view. 
   4. Enter a slug for the exhibit. The slug is used to form the public-facing URL for the exhibit. By default, a slug will be auto-generated from the text that you typed into the "Title" field. If you want to edit the default slug, click on the input and type a new string. Slugs can only contain letters, numbers, and hyphens (no spaces).
+  5. (Optional): In addition to the default option of using georeferenced layers as the foundation for the exhibit (OpenStreetMap/Google tiles, rectified geotiff files, etc.), you can also use any static image associated with an Omeka item as the base layer for the exhibit. Use the "Choose an Image" dropdown to browse all images in your Omeka archive, grouped by parent item.
+    * **Note:** You can't mix static images and geographic layers. If you select a static image to build the exhibit on, you won't be able to add georeferenced elements down the line, since the "spatial" annotation data will be relative to the dimensions of the image, not a geographic coordinate set.
   5. Check the "Public" box if you want the exhibit to be publicly-accessible. By default, exhibits are only visible to administrators.
-  6. Choose a default real-geography base layer. Neatline supports OpenStreetMap, Google Streets, Google Physical, Google Satellite, Google Hybrid, Stamen Toner, Stamen Terrain, and Stamen Watercolor. This setting can be changed at any point in the Neatline editing interface.
-  7. Choose an exhibit foundation (optional):
-    * **Option 1**: If you are using Neatline Maps and Geoserver to serve georectified .tiff images, use the "Neatline Map" dropdown menu to select the map that you want to build the exhibit with.
-    * **Option 2**: If you are using Neatline WMS to connect items in your Omeka collection to existing, external web map services, use the "Web Map Service" dropdown to select the item that houses the web map service that you want to build the exhibit with.
-    * **Option 3**: You can also use any static image associated with an Omeka item as the base layer. Use the "Choose an Image" dropdown to browse all images in your Omeka archive, grouped by parent item.
   8. Click "Create Exhibit."
 
 #### Browse Exhibits
