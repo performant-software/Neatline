@@ -85,6 +85,7 @@
             this._spaceSorted =             false;
             this._timeSorted =              false;
             this._firstRequest =            true;
+            this._scrollTop =               0;
 
             // Prepare the document, position elements, listen for resize.
             this._scrollbarWidth = $.getScrollbarWidth();
@@ -375,11 +376,6 @@
                     });
                 },
 
-                // When a form is closed.
-                'hide': function() {
-                    self._hideForm(self._currentFormItem, false);
-                },
-
                 // When a form is saved.
                 'save': function() {
                     self._trigger('saveform');
@@ -481,7 +477,7 @@
         },
 
         /*
-         * Listen for mousedown on teh "New" button.
+         * Listen for mousedown on the "New" button.
          */
         _glossNewItemButton: function() {
 
@@ -511,6 +507,14 @@
                 animate: false
             });
 
+        },
+
+        /*
+         * Recreate the scrollTop offset that was active before the user
+         * opened a form.
+         */
+        _recuperateScrollTop: function() {
+            this.element.scrollTop(this._scrollTop);
         },
 
         /*
@@ -663,7 +667,7 @@
 
                         // If the form is not expanded, do expand.
                         else {
-                            self._hideForm(item, false);
+                            self._hideForm(item, true);
                         }
 
                     }
@@ -721,21 +725,8 @@
             var self = this;
             var immediate = false;
 
-            // If another form is currently expanded, hide it.
-            if (!_.isNull(this._currentFormItem)) {
-
-                // Get record ids.
-                var currentId = this._currentFormItem.attr('recordid');
-                var newId = item.attr('recordid');
-
-                // If the new item is the same as the old item, break.
-                if (currentId == newId) { return; }
-
-                // Otherwise, close the current form.
-                this._hideForm(this._currentFormItem, true);
-                immediate = true;
-
-            }
+            // Capture the current scrollTop of the container.
+            this._scrollTop = this.element.scrollTop();
 
             // Display the form and action links.
             this.editForm.itemform('showForm', item);
@@ -784,8 +775,9 @@
             item.data('expanded', false);
             this._currentFormItem = null;
 
-            // Show item rows.
+            // Show item rows, recuperate scrollTop.
             this._showItemRows();
+            this._recuperateScrollTop();
 
          },
 
