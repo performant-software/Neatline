@@ -203,24 +203,26 @@ class Neatline_EditorController extends Omeka_Controller_Action
         $record->setNotEmpty('description', $description);
         $record->setNotEmpty('start_date', $startDate);
         $record->setNotEmpty('end_date', $endDate);
-        $record->setNotEmpty('start_visible_date', $startVisibleDate);
-        $record->setNotEmpty('end_visible_date', $endVisibleDate);
+        $record->setPercentages($leftPercent, $rightPercent);
         $record->setUseDcMetadata($useDcMetadata);
         $record->setGeocoverage($geoCoverage);
         $record->setSlug($slug);
 
-        // Set styles and percentages.
-        $record->setStyle('vector_color', $vectorColor);
-        $record->setStyle('stroke_color', $strokeColor);
-        $record->setStyle('highlight_color', $highlightColor);
-        $record->setStyle('vector_opacity', $vectorOpacity);
-        $record->setStyle('stroke_opacity', $strokeOpacity);
-        $record->setStyle('stroke_width', $strokeWidth);
-        $record->setStyle('point_radius', $pointRadius);
-        $record->setPercentages($leftPercent, $rightPercent);
-
         // Set parent record id.
-        $record->setParentRecordId($parentRecordId);
+        $newParent = $record->setParentRecordId($parentRecordId);
+
+        // Set heritable values.
+        if (!$newParent) {
+            $record->setNotEmpty('start_visible_date', $startVisibleDate);
+            $record->setNotEmpty('end_visible_date', $endVisibleDate);
+            $record->setStyle('vector_color', $vectorColor);
+            $record->setStyle('stroke_color', $strokeColor);
+            $record->setStyle('highlight_color', $highlightColor);
+            $record->setStyle('vector_opacity', $vectorOpacity);
+            $record->setStyle('stroke_opacity', $strokeOpacity);
+            $record->setStyle('stroke_width', $strokeWidth);
+            $record->setStyle('point_radius', $pointRadius);
+        }
 
         // If there is novel coverage data, flip on the status.
         if (is_null($originalCoverage) && !is_null($record->geocoverage)) {

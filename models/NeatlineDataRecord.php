@@ -503,10 +503,13 @@ class NeatlineDataRecord extends Omeka_record
      *
      * @param integer $id The id.
      *
-     * @return void.
+     * @return boolean True if a new value is set.
      */
     public function setParentRecordId($id)
     {
+
+        // Capture original value.
+        $original = $this->parent_record_id;
 
         // If 'none' is passed, null out the key.
         if ($id == 'none') {
@@ -517,6 +520,9 @@ class NeatlineDataRecord extends Omeka_record
         else {
             $this->parent_record_id = $id;
         }
+
+        // Check for new value.
+        return $original != $this->parent_record_id;
 
     }
 

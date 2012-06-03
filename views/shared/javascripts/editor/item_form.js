@@ -918,6 +918,9 @@
                     // Update the title text, if necessary.
                     self._updateTitleText();
 
+                    // Reload form.
+                    self._getFormData();
+
                 }
 
             });
