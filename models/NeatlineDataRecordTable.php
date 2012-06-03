@@ -317,13 +317,16 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
 
     /**
      * Get all records associated with a given exhibit and return
-     * an array of id => title associations.
+     * an array of id => title associations. If a data record is passed,
+     * exclude that record from the list, since a record cannot be the
+     * child record of itself.
      *
      * @param Omeka_record $exhibit The exhibit record.
+     * @param Omeka_record $record A self record to exclude.
      *
      * @return array The id => title array.
      */
-    public function getRecordsForSelect($exhibit)
+    public function getRecordsForSelect($exhibit, $selfRecord=null)
     {
 
         $idToTitle = array();
@@ -333,9 +336,23 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
 
         // Build array.
         if ($records) {
-            foreach ($records as $record) {
-                $idToTitle[$record->id] = $record->title;
+
+            // If a self record has been passed.
+            if (!is_null($selfRecord)) {
+                foreach ($records as $record) {
+                    if ($record->id != $selfRecord->id) {
+                        $idToTitle[$record->id] = $record->title;
+                    }
+                }
             }
+
+            // If there is no self record.
+            else {
+                foreach ($records as $record) {
+                    $idToTitle[$record->id] = $record->title;
+                }
+            }
+
         }
 
         return $idToTitle;

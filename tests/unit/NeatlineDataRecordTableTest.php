@@ -281,7 +281,7 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
      *
      * @return void.
      */
-    public function testGetRecordsForSelect()
+    public function testGetRecordsForSelectWithNoSelfRecord()
     {
 
         // Create exhibit.
@@ -302,6 +302,42 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
             array(
                 $record1->id => 'Title 1',
                 $record2->id => 'Title 2',
+            )
+        );
+
+    }
+
+    /**
+     * When a self record is passed, getRecordsForSelect() should return an
+     * array of id => title with each of the records in the exhibit not including
+     * the self record.
+     *
+     * @return void.
+     */
+    public function testGetRecordsForSelectWithSelfRecord()
+    {
+
+        // Create exhibit.
+        $exhibit = $this->helper->_createNeatline();
+        $record1 = new NeatlineDataRecord(null, $exhibit);
+        $record1->title = 'Title 1';
+        $record1->save();
+        $record2 = new NeatlineDataRecord(null, $exhibit);
+        $record2->title = 'Title 2';
+        $record2->save();
+        $record3 = new NeatlineDataRecord(null, $exhibit);
+        $record3->title = 'Title 3';
+        $record3->save();
+
+        // Build array.
+        $idToTitle = $this->_recordsTable->getRecordsForSelect($exhibit, $record2);
+
+        // Check structure.
+        $this->assertEquals(
+            $idToTitle,
+            array(
+                $record1->id => 'Title 1',
+                $record3->id => 'Title 3'
             )
         );
 

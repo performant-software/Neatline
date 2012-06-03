@@ -196,7 +196,7 @@ class NeatlineDataRecord extends Omeka_record
 
         // Get parent record select list.
         $_recordsTable = $this->getTable('NeatlineDataRecord');
-        $records = $_recordsTable->getRecordsForSelect($this->getExhibit());
+        $records = $_recordsTable->getRecordsForSelect($this->getExhibit(), $this);
 
         // Set the array values.
         $data['title'] =                $this->getTitle();

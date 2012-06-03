@@ -1877,9 +1877,7 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
                 'right_percent' =>      self::$__testParams['right_percent'],
                 'parent_record_id' =>   self::$__testParams['parent_record_id'],
                 'use_dc_metadata' =>    null,
-                'records' => (object) array(
-                    $record->id =>      self::$__testParams['title']
-                )
+                'records' => array()
             )
         );
 
@@ -1944,9 +1942,7 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
                 'right_percent' =>      self::$__testParams['right_percent'],
                 'parent_record_id' =>   self::$__testParams['parent_record_id'],
                 'use_dc_metadata' =>    null,
-                'records' => (object) array(
-                    $record->id =>      self::$__testParams['title']
-                )
+                'records' => array()
             )
         );
 
