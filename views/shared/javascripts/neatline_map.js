@@ -149,7 +149,7 @@
             this.map.addLayers(layers);
             this._setDefaultLayer();
 
-            if (! this.setViewport(
+            if (!this.setViewport(
                 Neatline.record.default_map_bounds, Neatline.record.default_map_zoom
             )) {
                 // Google.v3 uses EPSG:900913 as projection, so we have to
@@ -1016,7 +1016,7 @@
         setViewport: function(centerBounds, zoom) {
             var success = false;
 
-            if (centerBounds != null) {
+            if (!_.isNull(centerBounds)) {
                 var bounds = centerBounds.split(',');
 
                 if (bounds.length === 4) {
@@ -1028,7 +1028,7 @@
                     ));
                     success = true;
                 } else if (bounds.length === 2) {
-                    var zoom   = zoom == null ? 5 : parseInt(zoom);
+                    var zoom = _.isNull(zoom) ? 5 : parseInt(zoom, 10);
                     var latlon = new OpenLayers.LonLat(
                         parseFloat(bounds[0].trim()), parseFloat(bounds[1].trim())
                     );
