@@ -186,12 +186,14 @@ class Neatline_EditorController extends Omeka_Controller_Action
         // If there is a record id in the post, get the record.
         if ($recordId != null) {
             $record = $this->_recordsTable->find($recordId);
+            $newRecord = false;
         }
 
         // Otherwise, create a new record.
         else {
             $item = $this->_itemsTable->find($itemId);
             $record = $this->_recordsTable->createOrGetRecord($item, $neatline);
+            $newRecord = true;
         }
 
         // Capture starting time and space parameters.
@@ -212,7 +214,7 @@ class Neatline_EditorController extends Omeka_Controller_Action
         $newParent = $record->setParentRecordId($parentRecordId);
 
         // Set heritable values.
-        if (!$newParent) {
+        if (!$newParent || $newRecord) {
             $record->setNotEmpty('start_visible_date', $startVisibleDate);
             $record->setNotEmpty('end_visible_date', $endVisibleDate);
             $record->setStyle('vector_color', $vectorColor);

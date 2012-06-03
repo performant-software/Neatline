@@ -766,16 +766,20 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
     public function testSaveWithRecordIdAndNoItemId()
     {
 
-        // Create exhibit and record.
+        // Create exhibit and records.
         $neatline = $this->helper->_createNeatline();
-        $record = new NeatlineDataRecord(null, $neatline);
-        $record->save();
+        $record1 = new NeatlineDataRecord(null, $neatline);
+        $record1->save();
+
+        $record2 = new NeatlineDataRecord(null, $neatline);
+        $record2->parent_record_id = $record1->id;
+        $record2->save();
 
         // Form the POST for a space change.
         $this->request->setMethod('POST')
             ->setPost(array(
                 'item_id' =>            '',
-                'record_id' =>          $record->id,
+                'record_id' =>          $record2->id,
                 'exhibit_id' =>         $neatline->id,
                 'space_active' =>       (string) self::$__testParams['space_active'],
                 'time_active' =>        (string) self::$__testParams['time_active'],
@@ -802,23 +806,23 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         );
 
         // 1 record.
-        $this->assertEquals($this->_recordsTable->count(), 1);
+        $this->assertEquals($this->_recordsTable->count(), 2);
 
         // Hit the route and capture the response.
         $this->dispatch('neatline-exhibits/editor/ajax/save');
         $response = $this->getResponse()->getBody('default');
 
         // 1 record.
-        $this->assertEquals($this->_recordsTable->count(), 1);
+        $this->assertEquals($this->_recordsTable->count(), 2);
 
         // Test the raw construction with no available DC values.
         $this->assertContains('"statuses":', $response);
         $this->assertContains('"space":true', $response);
         $this->assertContains('"time":true', $response);
-        $this->assertContains('"recordid":' . $record->id, $response);
+        $this->assertContains('"recordid":' . $record2->id, $response);
 
         // Get the record and check the attributes.
-        $record = $this->_recordsTable->find($record->id);
+        $record = $this->_recordsTable->find($record2->id);
 
         $this->assertEquals(
             $record->title,
@@ -1102,17 +1106,21 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
     public function testSaveWithItemIdAndRecordId()
     {
 
-        // Create exhibit and item.
+        // Create exhibit and records.
         $neatline = $this->helper->_createNeatline();
+        $record1 = new NeatlineDataRecord(null, $neatline);
+        $record1->save();
+
         $item = $this->helper->_createItem();
-        $record = new NeatlineDataRecord($item, $neatline);
-        $record->save();
+        $record2 = new NeatlineDataRecord($item, $neatline);
+        $record2->parent_record_id = $record1->id;
+        $record2->save();
 
         // Form the POST for a space change.
         $this->request->setMethod('POST')
             ->setPost(array(
                 'item_id' =>            $item->id,
-                'record_id' =>          $record->id,
+                'record_id' =>          $record2->id,
                 'exhibit_id' =>         $neatline->id,
                 'space_active' =>       (string) self::$__testParams['space_active'],
                 'time_active' =>        (string) self::$__testParams['time_active'],
@@ -1139,20 +1147,20 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         );
 
         // 1 record.
-        $this->assertEquals($this->_recordsTable->count(), 1);
+        $this->assertEquals($this->_recordsTable->count(), 2);
 
         // Hit the route and capture the response.
         $this->dispatch('neatline-exhibits/editor/ajax/save');
         $response = $this->getResponse()->getBody('default');
 
         // 1 record.
-        $this->assertEquals($this->_recordsTable->count(), 1);
+        $this->assertEquals($this->_recordsTable->count(), 2);
 
         // Test the raw construction with 
         $this->assertContains('"statuses":', $response);
         $this->assertContains('"space":true', $response);
         $this->assertContains('"time":true', $response);
-        $this->assertContains('"recordid":' . $record->id, $response);
+        $this->assertContains('"recordid":' . $record2->id, $response);
 
         // Get the record and check the attributes.
         $record = $this->_recordsTable->getRecordByItemAndExhibit($item, $neatline);

@@ -855,6 +855,44 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
     }
 
     /**
+     * If the parent_record_id value is not changed on the record
+     * setParentRecord() should return false.
+     *
+     * @return void.
+     */
+    public function testSetParentRecordReturnFalseWhenNoChange()
+    {
+
+        // Create a record.
+        $exhibit = $this->helper->_createNeatline();
+        $record = new NeatlineDataRecord(null, $exhibit);
+        $record->parent_record_id = 1;
+
+        // Set.
+        $this->assertFalse($record->setParentRecordId(1));
+
+    }
+
+    /**
+     * If the parent_record_id value is changed on the record
+     * setParentRecord() should return true.
+     *
+     * @return void.
+     */
+    public function testSetParentRecordReturnTrueWhenChange()
+    {
+
+        // Create a record.
+        $exhibit = $this->helper->_createNeatline();
+        $record = new NeatlineDataRecord(null, $exhibit);
+        $record->parent_record_id = 1;
+
+        // Set.
+        $this->assertTrue($record->setParentRecordId(2));
+
+    }
+
+    /**
      * When a value is passed to setUseDcMetadata on a record that
      * does not have a parent item, use_dc_metadat should not be set.
      *
