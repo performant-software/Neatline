@@ -813,6 +813,18 @@ table#header-row {
     -webkit-transition: 0.0s linear all !important;
 }
 
+.olControlLayerSwitcher label {
+    float: none;
+    color: white;
+    font-weight: bold;
+    font-size: 11px;
+    font-family: sans-serif;
+}
+
+.olControlLayerSwitcher input {
+    margin: 3px 0.5ex;
+}
+
 
 /* Dropdown menus */
 
