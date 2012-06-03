@@ -168,7 +168,7 @@
 
                 data: {
                     exhibit_id: Neatline.record.id,
-                    map_extent: mapExtent,
+                    map_center: mapExtent,
                     map_zoom: mapZoom,
                     timeline_center: timelineCenter,
                     timeline_zoom: timelineZoom
