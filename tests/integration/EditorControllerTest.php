@@ -1277,6 +1277,177 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
     }
 
     /**
+     * When an unchanged parent_record_id is posted to /save, all styling and
+     * visibility information should be saved.
+     *
+     * @return void.
+     */
+    public function testSaveWithUnchangedParentRecordId()
+    {
+
+        // Create exhibit and records.
+        $neatline = $this->helper->_createNeatline();
+        $record1 = new NeatlineDataRecord(null, $neatline);
+        $record1->save();
+
+        $item = $this->helper->_createItem();
+        $record2 = new NeatlineDataRecord($item, $neatline);
+        $record2->parent_record_id = $record1->id;
+        $record2->save();
+
+        // Form the POST for a space change.
+        $this->request->setMethod('POST')
+            ->setPost(array(
+                'item_id' =>            '',
+                'record_id' =>          $record2->id,
+                'exhibit_id' =>         $neatline->id,
+                'space_active' =>       (string) self::$__testParams['space_active'],
+                'time_active' =>        (string) self::$__testParams['time_active'],
+                'geocoverage' =>        'null',
+                'title' =>              self::$__testParams['title'],
+                'slug' =>               self::$__testParams['slug'],
+                'description' =>        self::$__testParams['description'],
+                'start_date' =>         self::$__testParams['start_date'],
+                'end_date' =>           self::$__testParams['end_date'],
+                'start_visible_date' => self::$__testParams['start_visible_date'],
+                'end_visible_date' =>   self::$__testParams['end_visible_date'],
+                'left_percent' =>       self::$__testParams['left_percent'],
+                'right_percent' =>      self::$__testParams['right_percent'],
+                'vector_color' =>       self::$__testParams['vector_color'],
+                'stroke_color' =>       self::$__testParams['stroke_color'],
+                'highlight_color' =>    self::$__testParams['highlight_color'],
+                'vector_opacity' =>     self::$__testParams['vector_opacity'],
+                'stroke_opacity' =>     self::$__testParams['stroke_opacity'],
+                'stroke_width' =>       self::$__testParams['stroke_width'],
+                'point_radius' =>       self::$__testParams['point_radius'],
+                'parent_record_id' =>   $record1->id,
+                'use_dc_metadata' =>    0
+            )
+        );
+
+        // Hit the route and capture the response.
+        $this->dispatch('neatline-exhibits/editor/ajax/save');
+
+        // Get the record and check the attributes.
+        $record = $this->_recordsTable->find($record2->id);
+
+        $this->assertEquals(
+            $record->start_visible_date,
+            self::$__testParams['start_visible_date']
+        );
+
+        $this->assertEquals(
+            $record->end_visible_date,
+            self::$__testParams['end_visible_date']
+        );
+
+        $this->assertEquals(
+            $record->vector_color,
+            self::$__testParams['vector_color']
+        );
+
+        $this->assertEquals(
+            $record->stroke_color,
+            self::$__testParams['stroke_color']
+        );
+
+        $this->assertEquals(
+            $record->highlight_color,
+            self::$__testParams['highlight_color']
+        );
+
+        $this->assertEquals(
+            $record->vector_opacity,
+            self::$__testParams['vector_opacity']
+        );
+
+        $this->assertEquals(
+            $record->stroke_opacity,
+            self::$__testParams['stroke_opacity']
+        );
+
+        $this->assertEquals(
+            $record->stroke_width,
+            self::$__testParams['stroke_width']
+        );
+
+        $this->assertEquals(
+            $record->point_radius,
+            self::$__testParams['point_radius']
+        );
+
+    }
+
+    /**
+     * When an changed parent_record_id is posted to /save, all styling and
+     * visibility information should not be saved.
+     *
+     * @return void.
+     */
+    public function testSaveWithChangedParentRecordId()
+    {
+
+        // Create exhibit and records.
+        $neatline = $this->helper->_createNeatline();
+        $record1 = new NeatlineDataRecord(null, $neatline);
+        $record1->save();
+
+        $item = $this->helper->_createItem();
+        $record2 = new NeatlineDataRecord($item, $neatline);
+        $record2->parent_record_id = $record1->id;
+        $record2->save();
+
+        $record3 = new NeatlineDataRecord(null, $neatline);
+        $record3->save();
+
+        // Form the POST for a space change.
+        $this->request->setMethod('POST')
+            ->setPost(array(
+                'item_id' =>            '',
+                'record_id' =>          $record2->id,
+                'exhibit_id' =>         $neatline->id,
+                'space_active' =>       (string) self::$__testParams['space_active'],
+                'time_active' =>        (string) self::$__testParams['time_active'],
+                'geocoverage' =>        'null',
+                'title' =>              self::$__testParams['title'],
+                'slug' =>               self::$__testParams['slug'],
+                'description' =>        self::$__testParams['description'],
+                'start_date' =>         self::$__testParams['start_date'],
+                'end_date' =>           self::$__testParams['end_date'],
+                'start_visible_date' => self::$__testParams['start_visible_date'],
+                'end_visible_date' =>   self::$__testParams['end_visible_date'],
+                'left_percent' =>       self::$__testParams['left_percent'],
+                'right_percent' =>      self::$__testParams['right_percent'],
+                'vector_color' =>       self::$__testParams['vector_color'],
+                'stroke_color' =>       self::$__testParams['stroke_color'],
+                'highlight_color' =>    self::$__testParams['highlight_color'],
+                'vector_opacity' =>     self::$__testParams['vector_opacity'],
+                'stroke_opacity' =>     self::$__testParams['stroke_opacity'],
+                'stroke_width' =>       self::$__testParams['stroke_width'],
+                'point_radius' =>       self::$__testParams['point_radius'],
+                'parent_record_id' =>   $record3->id,
+                'use_dc_metadata' =>    0
+            )
+        );
+
+        // Hit the route and capture the response.
+        $this->dispatch('neatline-exhibits/editor/ajax/save');
+
+        // Get the record and check the attributes.
+        $record = $this->_recordsTable->find($record2->id);
+        $this->assertNull($record->start_visible_date);
+        $this->assertNull($record->end_visible_date);
+        $this->assertNull($record->vector_color);
+        $this->assertNull($record->stroke_color);
+        $this->assertNull($record->highlight_color);
+        $this->assertNull($record->vector_opacity);
+        $this->assertNull($record->stroke_opacity);
+        $this->assertNull($record->stroke_width);
+        $this->assertNull($record->point_radius);
+
+    }
+
+    /**
      * When geocoverage => 'null' is posted to /save, the geocoverage  field
      * should not be set. This is the case when a user saves a form and there
      * is not an instantiated map in the exhibit. If there was a  map in the
