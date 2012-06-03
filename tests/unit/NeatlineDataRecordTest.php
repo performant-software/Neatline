@@ -855,6 +855,24 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
     }
 
     /**
+     * If the self id is passed to setParentRecordId, do not set.
+     *
+     * @return void.
+     */
+    public function testSetParentRecordIdWithSelfId()
+    {
+
+        // Create a record.
+        $exhibit = $this->helper->_createNeatline();
+        $record = new NeatlineDataRecord(null, $exhibit);
+
+        // Set.
+        $record->setParentRecordId($record->id);
+        $this->assertNull($record->parent_record_id);
+
+    }
+
+    /**
      * If the parent_record_id value is not changed on the record
      * setParentRecord() should return false.
      *

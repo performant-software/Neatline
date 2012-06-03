@@ -516,8 +516,8 @@ class NeatlineDataRecord extends Omeka_record
             $this->parent_record_id = null;
         }
 
-        // Otherwise, set integer key.
-        else {
+        // If the id is not the self id, set.
+        else if ($id != $this->id) {
             $this->parent_record_id = $id;
         }
 

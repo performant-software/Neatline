@@ -936,6 +936,8 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         // Create exhibit and item.
         $neatline = $this->helper->_createNeatline();
         $item = $this->helper->_createItem();
+        $record1 = new NeatlineDataRecord(null, $neatline);
+        $record1->save();
 
         // Form the POST for a space change.
         $this->request->setMethod('POST')
@@ -962,26 +964,26 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
                 'stroke_opacity' =>     self::$__testParams['stroke_opacity'],
                 'stroke_width' =>       self::$__testParams['stroke_width'],
                 'point_radius' =>       self::$__testParams['point_radius'],
-                'parent_record_id' =>   self::$__testParams['parent_record_id'],
+                'parent_record_id' =>   $record1->id,
                 'use_dc_metadata' =>    1
             )
         );
 
-        // 0 records.
-        $this->assertEquals($this->_recordsTable->count(), 0);
+        // 1 records.
+        $this->assertEquals($this->_recordsTable->count(), 1);
 
         // Hit the route and capture the response.
         $this->dispatch('neatline-exhibits/editor/ajax/save');
         $response = $this->getResponse()->getBody('default');
 
-        // 1 record.
-        $this->assertEquals($this->_recordsTable->count(), 1);
+        // 2 record.
+        $this->assertEquals($this->_recordsTable->count(), 2);
 
         // Test the raw construction with no available DC values.
         $this->assertContains('"statuses":', $response);
         $this->assertContains('"space":true', $response);
         $this->assertContains('"time":true', $response);
-        $this->assertContains('"recordid":1', $response);
+        $this->assertContains('"recordid":2', $response);
 
         // Get the record and check the attributes.
         $record = $this->_recordsTable->getRecordByItemAndExhibit($item, $neatline);
@@ -1073,7 +1075,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
 
         $this->assertEquals(
             $record->parent_record_id,
-            self::$__testParams['parent_record_id']
+            $record1->id
         );
 
         $this->assertEquals(
