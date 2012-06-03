@@ -428,31 +428,6 @@
          */
         hideForm: function(item, immediate) {
 
-            // Capture current form data.
-            var currentData = this._getData();
-
-            // If the form is unsaved, store the changed data.
-            if (!_.isEqual(this._data, currentData)) {
-
-                // Grab data out of the form, try to find an existing record.
-                var data = this._getData();
-                var record = this._db({ recordid: this.recordId }).first();
-
-                // Check for an existing record.
-                if (record) {
-                    record.data = currentData;
-                }
-
-                // If no record, create one.
-                else {
-                    this._db.insert({
-                        recordid: this.recordId,
-                        data: currentData
-                    });
-                }
-
-            }
-
             // DOM touches.
             this._hideContainer(immediate);
             this._contractTitle();
@@ -874,47 +849,30 @@
          */
         _getFormData: function() {
 
-            var self = this;
+            $.ajax({
 
-            // First, check for unsaved data.
-            var unsavedData = this._db({ recordid: this.recordId }).first();
+                url: 'ajax/form',
+                dataType: 'json',
 
-            // If there is unsaved data, reapply it.
-            if (unsavedData) {
-                this._data = unsavedData.data;
-                this._applyData();
-                this._enableButtons();
-            }
+                data: {
+                    item_id: this.itemId,
+                    record_id: this.recordId,
+                    exhibit_id: Neatline.record.id
+                },
 
-            // Otherwise, hit the server for data.
-            else {
+                success: _.bind(function(data) {
 
-                $.ajax({
+                    // Push the data into the form.
+                    this._data = data;
+                    this._records = data.records;
+                    this._applyData();
 
-                    url: 'ajax/form',
-                    dataType: 'json',
+                    // Enable the save and delete buttons.
+                    this._enableButtons();
 
-                    data: {
-                        item_id: this.itemId,
-                        record_id: this.recordId,
-                        exhibit_id: Neatline.record.id
-                    },
+                }, this)
 
-                    success: function(data) {
-
-                        // Push the data into the form.
-                        self._data = data;
-                        self._records = data.records;
-                        self._applyData();
-
-                        // Enable the save and delete buttons.
-                        self._enableButtons();
-
-                    }
-
-                });
-
-            }
+            });
 
         },
 
