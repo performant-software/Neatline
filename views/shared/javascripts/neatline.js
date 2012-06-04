@@ -75,6 +75,9 @@
             this.instantiateBubbles();
             this.refreshDivs();
 
+            // Disable selection on the container.
+            this.element.disableSelection();
+
         },
 
         /*

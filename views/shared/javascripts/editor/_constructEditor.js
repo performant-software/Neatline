@@ -365,7 +365,7 @@ jQuery(document).ready(function($) {
         // When new defaults have been successfully committed.
         'newdefaults': function(event, obj) {
             neatlineContainer.neatline('saveSuccess');
-            editorContainer.itembrowser('reloadItemForm');
+            neatlineContainer.neatline('reloadTimeline');
         }
 
     });

@@ -546,6 +546,13 @@
         },
 
         /*
+         * Reinstantiate the timeline.
+         */
+        reinstantiate: function() {
+            this._instantiateSimile();
+        },
+
+        /*
          * Rerender the timeline.
          */
         refresh: function() {
