@@ -433,7 +433,6 @@
 
                     // Render highlight.
                     self.highlightControl.highlight(feature);
-
                     self._hoveredFeature = feature;
                 },
 
@@ -451,7 +450,6 @@
 
                     // Render default.
                     self.highlightControl.unhighlight(feature);
-
                     self._hoveredFeature = null;
                 }
 
@@ -493,13 +491,6 @@
                         self.modifyFeatures.unselectFeature(feature);
                     }
 
-                },
-
-                // Listen for mouseleave.
-                callbacks: {
-                    out: function() {
-                        // self._hideTitleTip();
-                    }
                 }
 
             });

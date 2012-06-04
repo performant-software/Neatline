@@ -261,7 +261,7 @@
                         self._trigger('mapfeatureenter', {}, obj);
 
                         // Render bubble.
-                        if (self.options.isPublic) {
+                        if (self.options.isPublic && obj.record.data.show_bubble == 1) {
                             self.element.bubbles('show',
                                  obj.record.data.title,
                                  obj.record.data.description
@@ -334,7 +334,7 @@
                     'evententer': function(event, obj) {
 
                         // Render bubble.
-                        if (self.options.isPublic) {
+                        if (self.options.isPublic && obj.show_bubble == 1) {
                             self.element.bubbles('show',
                                  obj.title,
                                  obj.description

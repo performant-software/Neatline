@@ -412,6 +412,7 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
                         'wkt' =>                $record->getGeocoverage(),
                         'start_visible_date' => $record->getStartVisibleDate(),
                         'end_visible_date' =>   $record->getEndVisibleDate(),
+                        'show_bubble' =>        $record->show_bubble,
                         'wmsAddress' =>         null,
                         'layers' =>             null,
                         '_native_styles' =>     array(
@@ -486,6 +487,7 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
                     'color' =>                  $record->getStyle('vector_color'),
                     'left_ambiguity' =>         $record->left_percent,
                     'right_ambiguity' =>        $record->right_percent,
+                    'show_bubble' =>            $record->show_bubble,
                     'textColor' =>             '#000000'
                 );
 

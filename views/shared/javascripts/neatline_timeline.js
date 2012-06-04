@@ -330,10 +330,12 @@
                 $(el).bind({
 
                     'mouseenter': _.bind(function() {
+                        console.log(evt);
                         this._trigger('evententer', {}, {
                             id: evt._eventID,
                             title: evt._text,
-                            description: evt._description
+                            description: evt._description,
+                            show_bubble: evt._obj.show_bubble
                         });
                     }, this),
 
@@ -341,7 +343,8 @@
                         this._trigger('eventleave', {}, {
                             id: evt._eventID,
                             title: evt._text,
-                            description: evt._description
+                            description: evt._description,
+                            show_bubble: evt._obj.show_bubble
                         });
                     }, this)
 
