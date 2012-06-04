@@ -537,7 +537,9 @@
 
                 // If the title is expanded, show description.
                 if (record.title.data('expanded')) {
-                    record.description.css('display', 'list-item');
+                    if (record.description.html() !== '') {
+                        record.description.css('display', 'list-item');
+                    }
                 }
 
             }
