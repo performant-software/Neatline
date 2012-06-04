@@ -60,14 +60,14 @@
                 </div>
             </div>
 
-            <div class="clearfix">
+            <div class="clearfix checkbox">
                 <label>
                     <input type="checkbox" name="show-bubble">
                     <span>Show pop-up bubble.</span>
                 </label>
             </div>
 
-            <div id="use-dc-data-container" class="clearfix">
+            <div id="use-dc-data-container" class="clearfix checkbox">
                 <label>
                     <input type="checkbox" name="use-dc-data">
                     <span>Use default item metadata.</span>

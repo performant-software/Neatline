@@ -126,6 +126,7 @@ class NeatlineDataRecord extends Omeka_record
         }
 
         // Set defaults.
+        $this->show_bubble = 1;
         $this->left_percent = 0;
         $this->right_percent = 100;
         $this->space_active = 0;

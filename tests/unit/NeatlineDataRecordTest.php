@@ -163,6 +163,9 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         $this->assertEquals($record->exhibit_id, $neatline->id);
         $this->assertEquals($record->item_id, $item->id);
 
+        // Show bubble should be true.
+        $this->assertEquals($record->show_bubble, 1);
+
         // Status columns should be false.
         $this->assertEquals($record->space_active, 0);
         $this->assertEquals($record->time_active, 0);

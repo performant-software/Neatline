@@ -418,6 +418,10 @@ table.map-buttons {
     width: 310px;
 }
 
+div.clearfix.checkbox {
+    margin-bottom: 3px;
+}
+
 
 /* Search Cancel */
 
