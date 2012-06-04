@@ -219,6 +219,7 @@ class NeatlineDataRecord extends Omeka_record
         $data['right_percent'] =        (int) $this->getRightPercent();
         $data['parent_record_id'] =     $this->getParentRecordId();
         $data['use_dc_metadata'] =      $this->use_dc_metadata;
+        $data['show_bubble'] =          $this->show_bubble;
         $data['records'] =              $records;
 
         // JSON-ify the array.

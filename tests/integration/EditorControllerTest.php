@@ -49,7 +49,8 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         'space_active' => true,
         'time_active' => true,
         'parent_record_id' => 1,
-        'use_dc_metadata' => 1
+        'use_dc_metadata' => 1,
+        'show_bubble' => 1
     );
 
     /**
@@ -563,6 +564,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $record->slug =                 self::$__testParams['slug'];
         $record->description =          self::$__testParams['description'];
         $record->parent_record_id =     self::$__testParams['parent_record_id'];
+        $record->show_bubble =          self::$__testParams['show_bubble'];
         $record->start_date =           self::$__testParams['start_date'];
         $record->end_date =             self::$__testParams['end_date'];
         $record->start_visible_date =   self::$__testParams['start_visible_date'];
@@ -618,6 +620,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
                 'right_percent' =>      self::$__testParams['right_percent'],
                 'parent_record_id' =>   self::$__testParams['parent_record_id'],
                 'use_dc_metadata' =>    null,
+                'show_bubble' =>        self::$__testParams['show_bubble'],
                 'records' => array()
             )
         );
@@ -674,6 +677,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
                 'slug' => '',
                 'parent_record_id' => 'none',
                 'use_dc_metadata' => null,
+                'show_bubble' => 1,
                 'records' => array(),
                 'title' => '',
                 'description' => ''
