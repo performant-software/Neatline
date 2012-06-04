@@ -163,6 +163,7 @@ class Neatline_EditorController extends Omeka_Controller_Action
         $slug =                     $_post['slug'];
         $description =              $_post['description'];
         $useDcMetadata =            $_post['use_dc_metadata'];
+        $showBubble =               $_post['show_bubble'];
         $startDate =                $_post['start_date'];
         $endDate =                  $_post['end_date'];
         $startVisibleDate =         $_post['start_visible_date'];
@@ -206,9 +207,12 @@ class Neatline_EditorController extends Omeka_Controller_Action
         $record->setNotEmpty('start_date', $startDate);
         $record->setNotEmpty('end_date', $endDate);
         $record->setPercentages($leftPercent, $rightPercent);
-        $record->setUseDcMetadata($useDcMetadata);
         $record->setGeocoverage($geoCoverage);
         $record->setSlug($slug);
+
+        // Set statuses.
+        $record->setUseDcMetadata($useDcMetadata);
+        $record->show_bubble = $showBubble;
 
         // Set parent record id.
         $newParent = $record->setParentRecordId($parentRecordId);

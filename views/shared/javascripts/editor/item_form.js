@@ -83,6 +83,7 @@
             this.title =                    this.form.find('textarea[name="title"]');
             this.slug =                     this.form.find('input[name="slug"]');
             this.description =              this.form.find('textarea[name="description"]');
+            this.showBubble =               this.form.find('input[name="show-bubble"]');
             this.useDcData =                this.form.find('input[name="use-dc-data"]');
             this.useDcDataLabel =           this.useDcData.next('span');
             this.startDate =                this.form.find('input[name="start-date-date"]');
@@ -657,6 +658,7 @@
 
             // Get use-DC as boolean.
             var useDc = Boolean(this._data.use_dc_metadata);
+            var showBubble = Boolean(this._data.show_bubble);
 
             // Update title.
             this.title.val(this._data.title);
@@ -673,6 +675,7 @@
             // Populate inputs.
             this.slug.val(this._data.slug);
             this.useDcData.prop('checked', useDc);
+            this.showBubble.prop('checked', showBubble);
             this.vectorOpacity.val(this._data.vector_opacity);
             this.strokeOpacity.val(this._data.stroke_opacity);
             this.strokeWidth.val(this._data.stroke_width);
@@ -762,6 +765,7 @@
 
             // Get the form field data.
             data.use_dc_metadata =          this.useDcData.is(':checked') ? 1 : 0;
+            data.show_bubble =              this.showBubble.is(':checked') ? 1 : 0;
             data.left_percent =             parseInt(this.leftPercent.val(), 10);
             data.right_percent =            parseInt(this.rightPercent.val(), 10);
             data.start_date =               this.startDate.val();

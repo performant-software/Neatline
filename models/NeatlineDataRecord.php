@@ -264,6 +264,7 @@ class NeatlineDataRecord extends Omeka_record
         $data['parent_record_id'] =     'none';
         $data['records'] =              $records;
         $data['use_dc_metadata'] =      0;
+        $data['show_bubble'] =          1;
 
         // Get DC title default.
         $data['title'] = neatline_getItemMetadata(
