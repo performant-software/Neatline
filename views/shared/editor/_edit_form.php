@@ -176,7 +176,7 @@
             <table class="map-styles">
                 <tr>
                     <td>
-                        <label>Shape Opacity</label>
+                        <label>Fill Opacity</label>
                         <div class="input">
                             <div class="inline-inputs">
                                 <input type="text" class="integer-dragger" name="vector-opacity" />
@@ -192,7 +192,7 @@
                         </div>
                     </td>
                     <td>
-                        <label>Line Thickness</label>
+                        <label>Line Width</label>
                         <div class="input">
                             <div class="inline-inputs">
                                 <input type="text" class="integer-dragger" name="stroke-width" />
