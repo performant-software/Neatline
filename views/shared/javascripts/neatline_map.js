@@ -374,6 +374,9 @@
                         }
                     );
 
+                    // Set starting opacity.
+                    wmsLayer.opacity = item.vector_opacity;
+
                     // Track and add.
                     self._wmsLayers.push(wmsLayer);
                     self.map.addLayer(wmsLayer);

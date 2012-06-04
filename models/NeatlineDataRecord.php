@@ -38,6 +38,7 @@ class NeatlineDataRecord extends Omeka_record
 
     // Statuses.
     public $use_dc_metadata;
+    public $show_bubble;
 
     // Text fields.
     public $title;

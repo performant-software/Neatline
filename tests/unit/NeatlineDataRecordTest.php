@@ -84,6 +84,7 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         // Set.
         $record->parent_record_id =             1;
         $record->use_dc_metadata =              1;
+        $record->show_bubble =                  1;
         $record->title =                        'title';
         $record->description =                  'description';
         $record->start_date =                   'startdate';
@@ -115,6 +116,7 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         // Get.
         $this->assertEquals($record->parent_record_id, 1);
         $this->assertEquals($record->use_dc_metadata, 1);
+        $this->assertEquals($record->show_bubble, 1);
         $this->assertEquals($record->title, 'title');
         $this->assertEquals($record->description, 'description');
         $this->assertEquals($record->start_date, 'startdate');
