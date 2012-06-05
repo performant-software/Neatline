@@ -73,6 +73,7 @@ class NeatlineExhibit extends Omeka_record
     public $default_stroke_color;
     public $default_highlight_color;
     public $default_vector_opacity;
+    public $default_select_opacity;
     public $default_stroke_opacity;
     public $default_stroke_width;
     public $default_point_radius;

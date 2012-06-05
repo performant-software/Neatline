@@ -58,6 +58,7 @@ class NeatlineDataRecord extends Omeka_record
     public $stroke_color;
     public $highlight_color;
     public $vector_opacity;
+    public $select_opacity;
     public $stroke_opacity;
     public $stroke_width;
     public $point_radius;
