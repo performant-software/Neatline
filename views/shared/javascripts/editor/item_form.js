@@ -94,6 +94,7 @@
             this.strokeColor =              this.form.find('input[name="stroke-color"]');
             this.highlightColor =           this.form.find('input[name="highlight-color"]');
             this.vectorOpacity =            this.form.find('input[name="vector-opacity"]');
+            this.selectOpacity =            this.form.find('input[name="select-opacity"]');
             this.strokeOpacity =            this.form.find('input[name="stroke-opacity"]');
             this.strokeWidth =              this.form.find('input[name="stroke-width"]');
             this.pointRadius =              this.form.find('input[name="point-radius"]');
