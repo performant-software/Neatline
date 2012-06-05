@@ -29,9 +29,14 @@
 }
 
 #configure-map h5 {
-    font-size: 1.1em;
+    font-weight: normal;
+    font-size: 0.9em;
     color: #4E4950;
     line-height: 24px;
+}
+
+#configure-map hr {
+    margin: 5px 0;
 }
 
 #configure-map select {
