@@ -889,6 +889,11 @@
                 self.highlightControl.select(feature);
             });
 
+            // If there is a WMS, change the opacity.
+            if (!_.isNull(record.wms)) {
+                record.wms.setOpacity(record.data.select_opacity);
+            }
+
         },
 
         /*
@@ -922,6 +927,11 @@
             $.each(record.layer.features, function(i, feature) {
                 self.highlightControl.unselect(feature);
             });
+
+            // If there is a WMS, change the opacity.
+            if (!_.isNull(record.wms)) {
+                record.wms.setOpacity(record.data.vector_opacity);
+            }
 
             // Register deselection.
             record.selected = false;
