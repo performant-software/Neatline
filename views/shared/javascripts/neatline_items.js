@@ -609,7 +609,7 @@
 
                 // Trigger out to the deployment code.
                 this._trigger('itemactivate', {}, {
-                    'recordid': record.id,
+                    'recordid': record.recordid,
                     'slug': record.slug,
                     'scrollItems': true
                 });
@@ -635,7 +635,7 @@
 
                 // Trigger out to the deployment code.
                 this._trigger('itemdeactivate', {}, {
-                    'recordid': record.id,
+                    'recordid': record.recordid,
                     'slug': record.slug,
                     'scrollItems': true
                 });

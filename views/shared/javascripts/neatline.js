@@ -412,6 +412,7 @@
 
                         // Trigger out.
                         self._trigger('itemactivate', {}, obj);
+                        self.map.neatlinemap('selectVectors', obj.recordid);
 
                     },
 
@@ -420,6 +421,7 @@
 
                         // Trigger out.
                         self._trigger('itemdeactivate', {}, obj);
+                        self.map.neatlinemap('unselectVectors', obj.recordid);
 
                     }
 

@@ -420,7 +420,7 @@
 
                 hover: true,
                 highlightOnly: true,
-                renderIntent: 'temporary',
+                renderIntent: 'select',
 
                 overFeature: function(feature) {
 
@@ -499,6 +499,17 @@
                 // When the feature is unselected.
                 onUnselect: function(feature) {
 
+                    // Get the record.
+                    var record = self._db({
+                        layerid: feature.layer.id
+                    }).first();
+
+                    // Unregister the feature.
+                    self._clickedFeature = null;
+                    record.selected = false;
+
+                    // Unselect.
+                    self.unselectVectors(record.id);
                     if (!_.isUndefined(self.modifyFeatures)) {
                         self.modifyFeatures.unselectFeature(feature);
                     }
@@ -847,6 +858,77 @@
 
 
         /*
+         * Render a selection on an item's vectors by id.
+         */
+        selectVectors: function(recordid) {
+
+            // Get the item record.
+            var record = this._db({
+                recordid: parseInt(recordid, 10)
+            }).first();
+
+            // Render select.
+            this._renderVectorSelect(record);
+
+        },
+
+        /*
+         * Render a selection on an item's vectors.
+         */
+        _renderVectorSelect: function(record) {
+
+            var self = this;
+
+            // If there is no extant data record, abort.
+            if (!record || _.isUndefined(record.data)) {
+                return;
+            }
+
+            // Trigger a rerender on the features.
+            $.each(record.layer.features, function(i, feature) {
+                self.highlightControl.select(feature);
+            });
+
+        },
+
+        /*
+         * Remove a selection on an item's vectors by id.
+         */
+        unselectVectors: function(recordid) {
+
+            // Get the item record.
+            var record = this._db({
+                recordid: parseInt(recordid, 10)
+            }).first();
+
+            // Render highlight.
+            this._removeVectorSelect(record);
+
+        },
+
+        /*
+         * Render a selection on an item's vectors.
+         */
+        _removeVectorSelect: function(record) {
+
+            var self = this;
+
+            // If there is no extant data record, abort.
+            if (!record || _.isUndefined(record.data)) {
+                return;
+            }
+
+            // Trigger a rerender on the features.
+            $.each(record.layer.features, function(i, feature) {
+                self.highlightControl.unselect(feature);
+            });
+
+            // Register deselection.
+            record.selected = false;
+
+        },
+
+        /*
          * Render a highlight on an item's vectors by id.
          */
         highlightVectors: function(recordid) {
@@ -888,24 +970,9 @@
                 return;
             }
 
-            // Rebuild the style map.
-            record.layer.styleMap = self._getStyleMap(
-                record.data.highlight_color,
-                record.data.vector_opacity,
-                record.data.highlight_color,
-                record.data.stroke_opacity,
-                record.data.stroke_width,
-                record.data.point_radius,
-                record.data.highlight_color,
-                record.data.select_opacity);
-
-            // Rerender the layer to manifest the change.
-            // record.layer.redraw();
-
-            // redraw() (above) is _not_ working. This is a hack to
-            // trigger a rerender on the features.
+            // Trigger a rerender on the features.
             $.each(record.layer.features, function(i, feature) {
-                self.highlightControl.unhighlight(feature);
+                self.highlightControl.highlight(feature);
             });
 
         },
@@ -951,18 +1018,6 @@
             if (_.isUndefined(record.data) || record.selected) {
                 return;
             }
-
-            // Rebuild the style map.
-            record.layer.styleMap = self._getStyleMap(
-                record.data.vector_color,
-                record.data.vector_opacity,
-                record.data.stroke_color,
-                record.data.stroke_opacity,
-                record.data.stroke_width,
-                record.data.point_radius,
-                record.data.highlight_color,
-                record.data.select_opacity
-            );
 
             // Trigger a rerender on the features.
             $.each(record.layer.features, function(i, feature) {
