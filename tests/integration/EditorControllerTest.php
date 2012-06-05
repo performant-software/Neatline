@@ -2390,6 +2390,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         set_option('stroke_color', '#1e2ee6');
         set_option('highlight_color', '#000000');
         set_option('vector_opacity', 20);
+        set_option('select_opacity', 40);
         set_option('stroke_opacity', 70);
         set_option('stroke_width', 4);
         set_option('point_radius', 6);
@@ -2402,6 +2403,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
                 'stroke_color' => '#ffffff',
                 'highlight_color' => '#ffffff',
                 'vector_opacity' => 5,
+                'select_opacity' => 5,
                 'stroke_opacity' => 5,
                 'stroke_width' => 5,
                 'point_radius' => 5,
@@ -2422,6 +2424,8 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->assertEquals($exhibit->default_highlight_color, '#ffffff');
         $this->assertNotNull($exhibit->default_vector_opacity);
         $this->assertEquals($exhibit->default_vector_opacity, 5);
+        $this->assertNotNull($exhibit->default_select_opacity);
+        $this->assertEquals($exhibit->default_select_opacity, 5);
         $this->assertNotNull($exhibit->default_stroke_opacity);
         $this->assertEquals($exhibit->default_stroke_opacity, 5);
         $this->assertNotNull($exhibit->default_stroke_width);
@@ -2450,6 +2454,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
                 'exhibit_id' => $exhibit->id,
                 'vector_color' => get_option('vector_color'),
                 'vector_opacity' => get_option('vector_opacity'),
+                'select_opacity' => get_option('select_opacity'),
                 'stroke_color' => get_option('stroke_color'),
                 'highlight_color' => get_option('highlight_color'),
                 'stroke_opacity' => get_option('stroke_opacity'),
@@ -2468,6 +2473,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->assertNull($exhibit->default_stroke_color);
         $this->assertNull($exhibit->default_highlight_color);
         $this->assertNull($exhibit->default_vector_opacity);
+        $this->assertNull($exhibit->default_select_opacity);
         $this->assertNull($exhibit->default_stroke_opacity);
         $this->assertNull($exhibit->default_stroke_width);
         $this->assertNull($exhibit->default_point_radius);
@@ -2489,6 +2495,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $exhibit->default_vector_color = '#000000';
         $exhibit->default_stroke_color = '#000000';
         $exhibit->default_vector_opacity = 1;
+        $exhibit->default_select_opacity = 1;
         $exhibit->default_stroke_opacity = 1;
         $exhibit->default_stroke_width = 1;
         $exhibit->default_point_radius = 1;
@@ -2499,6 +2506,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         set_option('stroke_color', '#1e2ee6');
         set_option('highlight_color', '#000000');
         set_option('vector_opacity', 20);
+        set_option('select_opacity', 40);
         set_option('stroke_opacity', 70);
         set_option('stroke_width', 4);
         set_option('point_radius', 6);
@@ -2511,6 +2519,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
                 'stroke_color' => get_option('stroke_color'),
                 'highlight_color' => get_option('highlight_color'),
                 'vector_opacity' => get_option('vector_opacity'),
+                'select_opacity' => get_option('select_opacity'),
                 'stroke_opacity' => get_option('stroke_opacity'),
                 'stroke_width' => get_option('stroke_width'),
                 'point_radius' => get_option('point_radius'),
@@ -2527,6 +2536,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->assertNull($exhibit->default_stroke_color);
         $this->assertNull($exhibit->default_highlight_color);
         $this->assertNull($exhibit->default_vector_opacity);
+        $this->assertNull($exhibit->default_select_opacity);
         $this->assertNull($exhibit->default_stroke_opacity);
         $this->assertNull($exhibit->default_stroke_width);
         $this->assertNull($exhibit->default_point_radius);

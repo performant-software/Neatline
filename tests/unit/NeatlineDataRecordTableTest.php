@@ -934,6 +934,8 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
         $record2->highlight_color = '#000000';
         $record1->vector_opacity = 60;
         $record2->vector_opacity = 40;
+        $record1->select_opacity = 60;
+        $record2->select_opacity = 40;
         $record1->stroke_opacity = 60;
         $record2->stroke_opacity = 40;
         $record1->stroke_width = 3;
@@ -971,6 +973,7 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
                     'stroke_color' => '#ffffff',
                     'highlight_color' => '#ffffff',
                     'vector_opacity' => 60,
+                    'select_opacity' => 60,
                     'stroke_opacity' => 60,
                     'stroke_width' => 3,
                     'point_radius' => 3,
@@ -1001,6 +1004,7 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
                     'stroke_color' => '#000000',
                     'highlight_color' => '#000000',
                     'vector_opacity' => 40,
+                    'select_opacity' => 40,
                     'stroke_opacity' => 40,
                     'stroke_width' => 2,
                     'point_radius' => 2,

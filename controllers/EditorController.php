@@ -485,6 +485,7 @@ class Neatline_EditorController extends Omeka_Controller_Action
         $strokeColor =              $_post['stroke_color'];
         $highlightColor =           $_post['highlight_color'];
         $vectorOpacity =            (int) $_post['vector_opacity'];
+        $selectOpacity =            (int) $_post['select_opacity'];
         $strokeOpacity =            (int) $_post['stroke_opacity'];
         $strokeWidth =              (int) $_post['stroke_width'];
         $pointRadius =              (int) $_post['point_radius'];
@@ -496,6 +497,7 @@ class Neatline_EditorController extends Omeka_Controller_Action
         $exhibit->setStyle('stroke_color', $strokeColor);
         $exhibit->setStyle('highlight_color', $highlightColor);
         $exhibit->setStyle('vector_opacity', $vectorOpacity);
+        $exhibit->setStyle('select_opacity', $selectOpacity);
         $exhibit->setStyle('stroke_opacity', $strokeOpacity);
         $exhibit->setStyle('stroke_width', $strokeWidth);
         $exhibit->setStyle('point_radius', $pointRadius);

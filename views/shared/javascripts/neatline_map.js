@@ -309,6 +309,7 @@
                 // Get float values for opacities.
                 item.vector_opacity = item.vector_opacity / 100;
                 item.stroke_opacity = item.stroke_opacity / 100;
+                item.select_opacity = item.select_opacity / 100;
 
                 // Construct the style.
                 var style = self._getStyleMap(
@@ -318,7 +319,8 @@
                     item.stroke_opacity,
                     item.stroke_width,
                     item.point_radius,
-                    item.highlight_color
+                    item.highlight_color,
+                    item.select_opacity
                 );
 
                 // Build the layer.
@@ -391,7 +393,8 @@
                     slug: item.slug,
                     data: item,
                     layer: vectorLayer,
-                    wms: wmsLayer
+                    wms: wmsLayer,
+                    selected: false
                 });
 
                 // Add to the layers array and add to map.
@@ -432,8 +435,12 @@
                     });
 
                     // Render highlight.
-                    self.highlightControl.highlight(feature);
+                    if (!record.selected) {
+                        self.highlightControl.highlight(feature);
+                    }
+
                     self._hoveredFeature = feature;
+
                 },
 
                 outFeature: function(feature) {
@@ -449,8 +456,12 @@
                     });
 
                     // Render default.
-                    self.highlightControl.unhighlight(feature);
+                    if (!record.selected) {
+                        self.highlightControl.unhighlight(feature);
+                    }
+
                     self._hoveredFeature = null;
+
                 }
 
             });
@@ -471,6 +482,7 @@
 
                     // Capture clicked feature.
                     self._clickedFeature = feature;
+                    record.selected = true;
 
                     // Trigger out to the deployment code.
                     self._trigger('featureclick', {}, {
@@ -570,7 +582,7 @@
 
             // Get the record out of the database.
             var record = this._db({ recordid: parseInt(id, 10) }).first();
-            this._showRecord(record);
+            this._selectRecord(record);
 
         },
 
@@ -582,7 +594,7 @@
 
             // Get the record out of the database.
             var record = this._db({ slug: slug }).first();
-            this._showRecord(record);
+            this._selectRecord(record);
 
         },
 
@@ -629,7 +641,7 @@
         /*
          * Focus the map on the feature data for a given record.
          */
-        _showRecord: function(record) {
+        _selectRecord: function(record) {
 
             // If the record exists and there is a map feature.
             if (record && record.layer.features.length > 0 && _.isNull(record.wms)) {
@@ -656,6 +668,9 @@
                 record.wms.setZIndex(1);
             }
 
+            // Set tracker.
+            record.selected = true;
+
         },
 
         /*
@@ -679,7 +694,9 @@
             strokeOpacity,
             strokeWidth,
             pointRadius,
-            highlightColor) {
+            highlightColor,
+            selectOpacity
+        ) {
 
             // Construct and return the StyleMaps.
             return new OpenLayers.StyleMap({
@@ -693,7 +710,7 @@
                 }),
                 'select': new OpenLayers.Style({
                     fillColor: highlightColor,
-                    fillOpacity: fillOpacity,
+                    fillOpacity: selectOpacity,
                     strokeColor: strokeColor,
                     strokeOpacity: strokeOpacity,
                     pointRadius: pointRadius,
@@ -702,7 +719,7 @@
                 'temporary': new OpenLayers.Style({
                     fillColor: highlightColor,
                     fillOpacity: fillOpacity,
-                    strokeColor: highlightColor,
+                    strokeColor: strokeColor,
                     strokeOpacity: strokeOpacity,
                     pointRadius: pointRadius,
                     strokeWidth: strokeWidth
@@ -879,7 +896,8 @@
                 record.data.stroke_opacity,
                 record.data.stroke_width,
                 record.data.point_radius,
-                record.data.highlight_color);
+                record.data.highlight_color,
+                record.data.select_opacity);
 
             // Rerender the layer to manifest the change.
             // record.layer.redraw();
@@ -889,9 +907,6 @@
             $.each(record.layer.features, function(i, feature) {
                 self.highlightControl.unhighlight(feature);
             });
-
-            // Show the bubble.
-            // this._showTitleTip(record);
 
         },
 
@@ -933,7 +948,7 @@
             var self = this;
 
             // If there is no extant data record, abort.
-            if (_.isUndefined(record.data)) {
+            if (_.isUndefined(record.data) || record.selected) {
                 return;
             }
 
@@ -945,19 +960,15 @@
                 record.data.stroke_opacity,
                 record.data.stroke_width,
                 record.data.point_radius,
-                record.data.highlight_color);
+                record.data.highlight_color,
+                record.data.select_opacity
+            );
 
-            // Rerender the layer to manifest the change.
-            // record.layer.redraw();
-
-            // redraw() (above) is _not_ working. This is a hack to
-            // trigger a rerender on the features.
+            // Trigger a rerender on the features.
             $.each(record.layer.features, function(i, feature) {
                 self.highlightControl.unhighlight(feature);
             });
 
-            // Hide the title tip.
-            // this._hideTitleTip();
 
         },
 

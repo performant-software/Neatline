@@ -45,6 +45,11 @@
 <input type="text" class="integer-dragger" name="default-vector-opacity" value="<?php echo $neatline->getStyle('vector_opacity'); ?>" />
 <hr />
 
+<!-- Select opacity. -->
+<h5>Default Select Opacity</h5>
+<input type="text" class="integer-dragger" name="default-select-opacity" value="<?php echo $neatline->getStyle('select_opacity'); ?>" />
+<hr />
+
 <!-- Stroke opacity. -->
 <h5>Default Line Opacity</h5>
 <input type="text" class="integer-dragger" name="default-stroke-opacity" value="<?php echo $neatline->getStyle('stroke_opacity'); ?>" />

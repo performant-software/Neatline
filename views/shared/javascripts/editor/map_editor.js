@@ -308,7 +308,9 @@
                 this.record.data.stroke_opacity,
                 this.record.data.stroke_width,
                 this.record.data.point_radius,
-                this.record.data.highlight_color);
+                this.record.data.highlight_color,
+                this.record.data.select_opacity
+            );
 
             // Rerender the layer to manifest the change.
             this._currentEditLayer.redraw();
@@ -345,7 +347,9 @@
                         record.data.stroke_opacity,
                         record.data.stroke_width,
                         record.data.point_radius,
-                        record.data.highlight_color);
+                        record.data.highlight_color,
+                        record.data.select_opacity
+                    );
 
                     // Rerender the layer to manifest the change.
                     // record.layer.redraw();

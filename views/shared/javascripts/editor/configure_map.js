@@ -37,6 +37,7 @@
             this.strokeColor =          this.content.find('input[name="default-stroke-color"]');
             this.highlightColor =       this.content.find('input[name="default-highlight-color"]');
             this.vectorOpacity =        this.content.find('input[name="default-vector-opacity"]');
+            this.selectOpacity =        this.content.find('input[name="default-select-opacity"]');
             this.strokeOpacity =        this.content.find('input[name="default-stroke-opacity"]');
             this.strokeWidth =          this.content.find('input[name="default-stroke-width"]');
             this.pointRadius =          this.content.find('input[name="default-point-radius"]');
@@ -107,6 +108,16 @@
                 }
             });
 
+            // ** SELECT OPACITY.
+            this.selectOpacity.integerdragger({
+                min: 0,
+                max: 100,
+                px_per_unit: 1,
+                change: function(evt, obj) {
+                    self._trigger('selectopacityedit', {}, { 'value': obj.value });
+                }
+            });
+
             // ** STROKE OPACITY.
             this.strokeOpacity.integerdragger({
                 min: 0,
@@ -166,6 +177,7 @@
             data.stroke_color =             this.strokeColor.val();
             data.highlight_color =          this.highlightColor.val();
             data.vector_opacity =           parseInt(this.vectorOpacity.val(), 10);
+            data.select_opacity =           parseInt(this.selectOpacity.val(), 10);
             data.stroke_opacity =           parseInt(this.strokeOpacity.val(), 10);
             data.stroke_width =             parseInt(this.strokeWidth.val(), 10);
             data.point_radius =             parseInt(this.pointRadius.val(), 10);
