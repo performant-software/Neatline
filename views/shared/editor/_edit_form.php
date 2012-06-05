@@ -171,15 +171,20 @@
                         </div>
                     </td>
                 </tr>
-            </table>
-
-            <table class="map-styles">
                 <tr>
                     <td>
                         <label>Fill Opacity</label>
                         <div class="input">
                             <div class="inline-inputs">
                                 <input type="text" class="integer-dragger" name="vector-opacity" />
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <label>Select Opacity</label>
+                        <div class="input">
+                            <div class="inline-inputs">
+                                <input type="text" class="integer-dragger" name="select-opacity" />
                             </div>
                         </div>
                     </td>
@@ -191,6 +196,8 @@
                             </div>
                         </div>
                     </td>
+                </tr>
+                <tr>
                     <td>
                         <label>Line Width</label>
                         <div class="input">
