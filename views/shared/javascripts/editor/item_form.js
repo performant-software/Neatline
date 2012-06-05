@@ -204,7 +204,14 @@
             });
 
             // ** HIGHLIGHT COLOR.
-            this.highlightColor.miniColors();
+            this.highlightColor.miniColors({
+
+                // Change the color.
+                change: function(hex, rgb) {
+                    self._trigger('highlightColorEdit', {}, { 'color': hex });
+                }
+
+            });
 
             // ** SHAPE OPACITY.
             this.vectorOpacity.integerdragger({

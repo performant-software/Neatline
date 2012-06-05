@@ -189,6 +189,12 @@ jQuery(document).ready(function($) {
             neatlineContainer.neatline('setItemStrokeColor', obj.color);
         },
 
+        // When the stroke color picker value is changed, push the new color onto
+        // the item's vectors.
+        'highlightcoloredit': function(event, obj) {
+            neatlineContainer.neatline('setItemHighlightColor', obj.color);
+        },
+
         // When the vector opacity dragger is changed, push the value onto the
         // item's vectors.
         'vectoropacityedit': function(event, obj) {

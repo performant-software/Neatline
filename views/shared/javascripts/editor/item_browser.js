@@ -348,6 +348,13 @@
                     });
                 },
 
+                // When the highlight color is changed.
+                'highlightColorEdit': function(event, obj) {
+                    self._trigger('highlightcoloredit', {}, {
+                        'color': obj.color
+                    });
+                },
+
                 // When the vector opacity is changed.
                 'vectorOpacityEdit': function(event, obj) {
                     self._trigger('vectoropacityedit', {}, {

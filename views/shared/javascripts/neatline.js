@@ -658,6 +658,17 @@
         },
 
         /*
+         * Set the highlight color for the current item.
+         *
+         * - param string color: The color for the span.
+         *
+         * - return void.
+         */
+        setItemHighlightColor: function(color) {
+            this.map.neatlinemap('setCurrentRecordStyle', 'highlight_color', color);
+        },
+
+        /*
          * Set the vector opacity for the current item.
          *
          * - param integer value: The opacity, 0-100.
