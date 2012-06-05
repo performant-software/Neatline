@@ -225,6 +225,17 @@
                 }
             });
 
+            // ** SELECT OPACITY.
+            this.selectOpacity.integerdragger({
+                min: 0,
+                max: 100,
+                px_per_unit: 1,
+                tip: { show: false },
+                change: function(evt, obj) {
+                    self._trigger('selectOpacityEdit', {}, { 'value': obj.value });
+                }
+            });
+
             // ** LINE OPACITY.
             this.strokeOpacity.integerdragger({
                 min: 0,
@@ -685,6 +696,7 @@
             this.useDcData.prop('checked', useDc);
             this.showBubble.prop('checked', showBubble);
             this.vectorOpacity.val(this._data.vector_opacity);
+            this.selectOpacity.val(this._data.select_opacity);
             this.strokeOpacity.val(this._data.stroke_opacity);
             this.strokeWidth.val(this._data.stroke_width);
             this.pointRadius.val(this._data.point_radius);
@@ -784,6 +796,7 @@
             data.stroke_color =             this.strokeColor.val();
             data.highlight_color =          this.highlightColor.val();
             data.vector_opacity =           parseInt(this.vectorOpacity.val(), 10);
+            data.select_opacity =           parseInt(this.selectOpacity.val(), 10);
             data.stroke_opacity =           parseInt(this.strokeOpacity.val(), 10);
             data.stroke_width =             parseInt(this.strokeWidth.val(), 10);
             data.point_radius =             parseInt(this.pointRadius.val(), 10);
@@ -897,6 +910,7 @@
 
             // Get the data.
             var data = this._getDataForSave(coverage);
+            console.log(data);
 
             // Commit.
             $.ajax({

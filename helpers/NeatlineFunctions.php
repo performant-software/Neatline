@@ -857,6 +857,12 @@ function neatline_setStyleDefaults()
         'default_vector_opacity'
     ));
 
+    // Vector opacity.
+    set_option('select_opacity', (int) get_plugin_ini(
+        'Neatline',
+        'default_select_opacity'
+    ));
+
     // Stroke opacity.
     set_option('stroke_opacity', (int) get_plugin_ini(
         'Neatline',

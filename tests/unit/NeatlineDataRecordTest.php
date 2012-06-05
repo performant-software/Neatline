@@ -40,6 +40,7 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         'stroke_color' => '#000000',
         'highlight_color' => '#ff0000',
         'vector_opacity' => 60,
+        'select_opacity' => 50,
         'stroke_opacity' => 40,
         'stroke_width' => 5,
         'point_radius' => 7,
@@ -1854,13 +1855,14 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
 
         // Create an item and exhibit.
         $neatline = $this->helper->_createNeatline();
+        $parent = $this->helper->_createRecord();
         $record = new NeatlineDataRecord(null, $neatline);
 
         // Populate fields.
         $record->title =                self::$__testParams['title'];
         $record->slug =                 self::$__testParams['slug'];
         $record->description =          self::$__testParams['description'];
-        $record->parent_record_id =     self::$__testParams['parent_record_id'];
+        $record->parent_record_id =     $parent->id;
         $record->show_bubble =          self::$__testParams['show_bubble'];
         $record->start_date =           self::$__testParams['start_date'];
         $record->end_date =             self::$__testParams['end_date'];
@@ -1870,6 +1872,7 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         $record->stroke_color =         self::$__testParams['stroke_color'];
         $record->highlight_color =      self::$__testParams['highlight_color'];
         $record->vector_opacity =       self::$__testParams['vector_opacity'];
+        $record->select_opacity =       self::$__testParams['select_opacity'];
         $record->stroke_opacity =       self::$__testParams['stroke_opacity'];
         $record->stroke_width =         self::$__testParams['stroke_width'];
         $record->point_radius =         self::$__testParams['point_radius'];
@@ -1893,6 +1896,7 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
                 'stroke_color' =>       self::$__testParams['stroke_color'],
                 'highlight_color' =>    self::$__testParams['highlight_color'],
                 'vector_opacity' =>     self::$__testParams['vector_opacity'],
+                'select_opacity' =>     self::$__testParams['select_opacity'],
                 'stroke_opacity' =>     self::$__testParams['stroke_opacity'],
                 'stroke_width' =>       self::$__testParams['stroke_width'],
                 'point_radius' =>       self::$__testParams['point_radius'],
@@ -1902,7 +1906,7 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
                 'end_visible_date' =>   self::$__testParams['end_visible_date'],
                 'left_percent' =>       self::$__testParams['left_percent'],
                 'right_percent' =>      self::$__testParams['right_percent'],
-                'parent_record_id' =>   self::$__testParams['parent_record_id'],
+                'parent_record_id' =>   $parent->id,
                 'use_dc_metadata' =>    null,
                 'show_bubble' =>        self::$__testParams['show_bubble'],
                 'records' => array()
@@ -1921,13 +1925,14 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
 
         // Create an item and exhibit.
         $neatline = $this->helper->_createNeatline();
+        $parent = $this->helper->_createRecord();
         $record = new NeatlineDataRecord(null, $neatline);
 
         // Populate fields.
         $record->title =                self::$__testParams['title'];
         $record->slug =                 self::$__testParams['slug'];
         $record->description =          self::$__testParams['description'];
-        $record->parent_record_id =     self::$__testParams['parent_record_id'];
+        $record->parent_record_id =     $parent->id;
         $record->show_bubble =          self::$__testParams['show_bubble'];
         $record->start_date =           self::$__testParams['start_date'];
         $record->end_date =             self::$__testParams['end_date'];
@@ -1937,6 +1942,7 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         $record->stroke_color =         self::$__testParams['stroke_color'];
         $record->highlight_color =      self::$__testParams['highlight_color'];
         $record->vector_opacity =       '20';
+        $record->select_opacity =       '40';
         $record->stroke_opacity =       '30';
         $record->stroke_width =         '5';
         $record->point_radius =         '6';
@@ -1960,6 +1966,7 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
                 'stroke_color' =>       self::$__testParams['stroke_color'],
                 'highlight_color' =>    self::$__testParams['highlight_color'],
                 'vector_opacity' =>     20,
+                'select_opacity' =>     40,
                 'stroke_opacity' =>     30,
                 'stroke_width' =>       5,
                 'point_radius' =>       6,
@@ -1969,7 +1976,7 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
                 'end_visible_date' =>   self::$__testParams['end_visible_date'],
                 'left_percent' =>       self::$__testParams['left_percent'],
                 'right_percent' =>      self::$__testParams['right_percent'],
-                'parent_record_id' =>   self::$__testParams['parent_record_id'],
+                'parent_record_id' =>   $parent->id,
                 'use_dc_metadata' =>    null,
                 'show_bubble' =>        self::$__testParams['show_bubble'],
                 'records' => array()
@@ -2059,6 +2066,11 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
 
         $this->assertContains(
             '"vector_opacity":' . (int) get_option('vector_opacity'),
+            $json
+        );
+
+        $this->assertContains(
+            '"select_opacity":' . (int) get_option('select_opacity'),
             $json
         );
 

@@ -40,6 +40,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         'stroke_color' => '#000000',
         'highlight_color' => '#000000',
         'vector_opacity' => 60,
+        'select_opacity' => 50,
         'stroke_opacity' => 40,
         'stroke_width' => 5,
         'point_radius' => 7,
@@ -557,13 +558,14 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         // Create item, exhibit, and record.
         $item = $this->helper->_createItem();
         $neatline = $this->helper->_createNeatline();
+        $parent = $this->helper->_createRecord();
         $record = new NeatlineDataRecord($item, $neatline);
 
         // Populate fields.
         $record->title =                self::$__testParams['title'];
         $record->slug =                 self::$__testParams['slug'];
         $record->description =          self::$__testParams['description'];
-        $record->parent_record_id =     self::$__testParams['parent_record_id'];
+        $record->parent_record_id =     $parent->id;
         $record->show_bubble =          self::$__testParams['show_bubble'];
         $record->start_date =           self::$__testParams['start_date'];
         $record->end_date =             self::$__testParams['end_date'];
@@ -573,6 +575,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $record->stroke_color =         self::$__testParams['stroke_color'];
         $record->highlight_color =      self::$__testParams['highlight_color'];
         $record->vector_opacity =       self::$__testParams['vector_opacity'];
+        $record->select_opacity =       self::$__testParams['select_opacity'];
         $record->stroke_opacity =       self::$__testParams['stroke_opacity'];
         $record->stroke_width =         self::$__testParams['stroke_width'];
         $record->point_radius =         self::$__testParams['point_radius'];
@@ -609,6 +612,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
                 'stroke_color' =>       self::$__testParams['stroke_color'],
                 'highlight_color' =>    self::$__testParams['highlight_color'],
                 'vector_opacity' =>     self::$__testParams['vector_opacity'],
+                'select_opacity' =>     self::$__testParams['select_opacity'],
                 'stroke_opacity' =>     self::$__testParams['stroke_opacity'],
                 'stroke_width' =>       self::$__testParams['stroke_width'],
                 'point_radius' =>       self::$__testParams['point_radius'],
@@ -618,7 +622,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
                 'end_visible_date' =>   self::$__testParams['end_visible_date'],
                 'left_percent' =>       self::$__testParams['left_percent'],
                 'right_percent' =>      self::$__testParams['right_percent'],
-                'parent_record_id' =>   self::$__testParams['parent_record_id'],
+                'parent_record_id' =>   $parent->id,
                 'use_dc_metadata' =>    null,
                 'show_bubble' =>        self::$__testParams['show_bubble'],
                 'records' => array()
@@ -665,6 +669,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
                 'stroke_color' => get_option('stroke_color'),
                 'highlight_color' => get_option('highlight_color'),
                 'vector_opacity' => get_option('vector_opacity'),
+                'select_opacity' => get_option('select_opacity'),
                 'stroke_opacity' => get_option('stroke_opacity'),
                 'stroke_width' => get_option('stroke_width'),
                 'point_radius' => get_option('point_radius'),
@@ -735,6 +740,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
                 'stroke_color' => get_option('stroke_color'),
                 'highlight_color' => get_option('highlight_color'),
                 'vector_opacity' => get_option('vector_opacity'),
+                'select_opacity' => get_option('select_opacity'),
                 'stroke_opacity' => get_option('stroke_opacity'),
                 'stroke_width' => get_option('stroke_width'),
                 'point_radius' => get_option('point_radius'),
@@ -798,6 +804,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
                 'stroke_color' =>       self::$__testParams['stroke_color'],
                 'highlight_color' =>    self::$__testParams['highlight_color'],
                 'vector_opacity' =>     self::$__testParams['vector_opacity'],
+                'select_opacity' =>     self::$__testParams['select_opacity'],
                 'stroke_opacity' =>     self::$__testParams['stroke_opacity'],
                 'stroke_width' =>       self::$__testParams['stroke_width'],
                 'point_radius' =>       self::$__testParams['point_radius'],
@@ -879,6 +886,11 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->assertEquals(
             $record->vector_opacity,
             self::$__testParams['vector_opacity']
+        );
+
+        $this->assertEquals(
+            $record->select_opacity,
+            self::$__testParams['select_opacity']
         );
 
         $this->assertEquals(
@@ -972,6 +984,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
                 'stroke_color' =>       self::$__testParams['stroke_color'],
                 'highlight_color' =>    self::$__testParams['highlight_color'],
                 'vector_opacity' =>     self::$__testParams['vector_opacity'],
+                'select_opacity' =>     self::$__testParams['select_opacity'],
                 'stroke_opacity' =>     self::$__testParams['stroke_opacity'],
                 'stroke_width' =>       self::$__testParams['stroke_width'],
                 'point_radius' =>       self::$__testParams['point_radius'],
@@ -1053,6 +1066,11 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->assertEquals(
             $record->vector_opacity,
             self::$__testParams['vector_opacity']
+        );
+
+        $this->assertEquals(
+            $record->select_opacity,
+            self::$__testParams['select_opacity']
         );
 
         $this->assertEquals(
@@ -1153,6 +1171,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
                 'stroke_color' =>       self::$__testParams['stroke_color'],
                 'highlight_color' =>    self::$__testParams['highlight_color'],
                 'vector_opacity' =>     self::$__testParams['vector_opacity'],
+                'select_opacity' =>     self::$__testParams['select_opacity'],
                 'stroke_opacity' =>     self::$__testParams['stroke_opacity'],
                 'stroke_width' =>       self::$__testParams['stroke_width'],
                 'point_radius' =>       self::$__testParams['point_radius'],
@@ -1234,6 +1253,11 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->assertEquals(
             $record->vector_opacity,
             self::$__testParams['vector_opacity']
+        );
+
+        $this->assertEquals(
+            $record->select_opacity,
+            self::$__testParams['select_opacity']
         );
 
         $this->assertEquals(
@@ -1338,6 +1362,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
                 'stroke_color' =>       self::$__testParams['stroke_color'],
                 'highlight_color' =>    self::$__testParams['highlight_color'],
                 'vector_opacity' =>     self::$__testParams['vector_opacity'],
+                'select_opacity' =>     self::$__testParams['select_opacity'],
                 'stroke_opacity' =>     self::$__testParams['stroke_opacity'],
                 'stroke_width' =>       self::$__testParams['stroke_width'],
                 'point_radius' =>       self::$__testParams['point_radius'],
@@ -1381,6 +1406,11 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->assertEquals(
             $record->vector_opacity,
             self::$__testParams['vector_opacity']
+        );
+
+        $this->assertEquals(
+            $record->select_opacity,
+            self::$__testParams['select_opacity']
         );
 
         $this->assertEquals(
@@ -1444,6 +1474,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
                 'stroke_color' =>       self::$__testParams['stroke_color'],
                 'highlight_color' =>    self::$__testParams['highlight_color'],
                 'vector_opacity' =>     self::$__testParams['vector_opacity'],
+                'select_opacity' =>     self::$__testParams['select_opacity'],
                 'stroke_opacity' =>     self::$__testParams['stroke_opacity'],
                 'stroke_width' =>       self::$__testParams['stroke_width'],
                 'point_radius' =>       self::$__testParams['point_radius'],
@@ -1464,6 +1495,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $this->assertNull($record->stroke_color);
         $this->assertNull($record->highlight_color);
         $this->assertNull($record->vector_opacity);
+        $this->assertNull($record->select_opacity);
         $this->assertNull($record->stroke_opacity);
         $this->assertNull($record->stroke_width);
         $this->assertNull($record->point_radius);
@@ -1511,6 +1543,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
                 'stroke_color' =>       self::$__testParams['stroke_color'],
                 'highlight_color' =>    self::$__testParams['highlight_color'],
                 'vector_opacity' =>     self::$__testParams['vector_opacity'],
+                'select_opacity' =>     self::$__testParams['select_opacity'],
                 'stroke_opacity' =>     self::$__testParams['stroke_opacity'],
                 'stroke_width' =>       self::$__testParams['stroke_width'],
                 'point_radius' =>       self::$__testParams['point_radius'],
@@ -1571,6 +1604,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
                 'stroke_color' =>       self::$__testParams['stroke_color'],
                 'highlight_color' =>    self::$__testParams['highlight_color'],
                 'vector_opacity' =>     self::$__testParams['vector_opacity'],
+                'select_opacity' =>     self::$__testParams['select_opacity'],
                 'stroke_opacity' =>     self::$__testParams['stroke_opacity'],
                 'stroke_width' =>       self::$__testParams['stroke_width'],
                 'point_radius' =>       self::$__testParams['point_radius'],
@@ -1633,6 +1667,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
                 'stroke_color' =>       self::$__testParams['stroke_color'],
                 'highlight_color' =>    self::$__testParams['stroke_color'],
                 'vector_opacity' =>     self::$__testParams['vector_opacity'],
+                'select_opacity' =>     self::$__testParams['select_opacity'],
                 'stroke_opacity' =>     self::$__testParams['stroke_opacity'],
                 'stroke_width' =>       self::$__testParams['stroke_width'],
                 'point_radius' =>       self::$__testParams['point_radius'],
@@ -1687,6 +1722,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
                 'stroke_color' =>       self::$__testParams['stroke_color'],
                 'highlight_color' =>    self::$__testParams['stroke_color'],
                 'vector_opacity' =>     self::$__testParams['vector_opacity'],
+                'select_opacity' =>     self::$__testParams['select_opacity'],
                 'stroke_opacity' =>     self::$__testParams['stroke_opacity'],
                 'stroke_width' =>       self::$__testParams['stroke_width'],
                 'point_radius' =>       self::$__testParams['point_radius'],
@@ -1748,6 +1784,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
                 'stroke_color' =>       self::$__testParams['stroke_color'],
                 'highlight_color' =>    self::$__testParams['stroke_color'],
                 'vector_opacity' =>     self::$__testParams['vector_opacity'],
+                'select_opacity' =>     self::$__testParams['select_opacity'],
                 'stroke_opacity' =>     self::$__testParams['stroke_opacity'],
                 'stroke_width' =>       self::$__testParams['stroke_width'],
                 'point_radius' =>       self::$__testParams['point_radius'],
@@ -1802,6 +1839,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
                 'stroke_color' =>       self::$__testParams['stroke_color'],
                 'highlight_color' =>    self::$__testParams['stroke_color'],
                 'vector_opacity' =>     self::$__testParams['vector_opacity'],
+                'select_opacity' =>     self::$__testParams['select_opacity'],
                 'stroke_opacity' =>     self::$__testParams['stroke_opacity'],
                 'stroke_width' =>       self::$__testParams['stroke_width'],
                 'point_radius' =>       self::$__testParams['point_radius'],
