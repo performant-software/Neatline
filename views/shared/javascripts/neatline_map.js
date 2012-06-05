@@ -681,34 +681,6 @@
             pointRadius,
             highlightColor) {
 
-            // Capture fill color.
-            var fillColor = (!_.isUndefined(fillColor)) ? fillColor :
-                this.options.styles.vector_color;
-
-            // Capture fill opacity.
-            var fillOpacity = (!_.isUndefined(fillOpacity)) ? fillOpacity :
-                this.options.styles.vector_opacity;
-
-            // Capture stroke color.
-            var strokeColor = (!_.isUndefined(strokeColor)) ? strokeColor :
-                this.options.styles.stroke_color;
-
-            // Capture highlight color.
-            var highlightColor = (!_.isUndefined(highlightColor)) ? highlightColor :
-                Neatline.highlightColor;
-
-            // Capture stroke opacity.
-            var strokeOpacity = (!_.isUndefined(strokeOpacity)) ? strokeOpacity :
-                this.options.styles.stroke_opacity;
-
-            // Capture stroke width.
-            var strokeWidth = (!_.isUndefined(strokeWidth)) ? strokeWidth :
-                this.options.styles.stroke_width;
-
-            // Capture point radius.
-            var pointRadius = (!_.isUndefined(pointRadius)) ? pointRadius :
-                this.options.styles.point_radius;
-
             // Construct and return the StyleMaps.
             return new OpenLayers.StyleMap({
                 'default': new OpenLayers.Style({
@@ -720,7 +692,7 @@
                     strokeWidth: strokeWidth
                 }),
                 'select': new OpenLayers.Style({
-                    fillColor: fillColor,
+                    fillColor: highlightColor,
                     fillOpacity: fillOpacity,
                     strokeColor: strokeColor,
                     strokeOpacity: strokeOpacity,

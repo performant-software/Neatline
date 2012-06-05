@@ -922,6 +922,8 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
         $record2->title = 'Item 2 Title';
         $record1->description = 'Item 1 description.';
         $record2->description = 'Item 2 description.';
+        $record1->show_bubble = 1;
+        $record2->show_bubble = 1;
         $record1->slug = 'slug-1';
         $record2->slug = 'slug-2';
         $record1->vector_color = '#ffffff';
@@ -977,6 +979,7 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
                     'wkt' => 'POINT(1,0)',
                     'start_visible_date' => '1864-04-26 14:39:22',
                     'end_visible_date' => '1916-04-23 12:45:34',
+                    'show_bubble' => 1,
                     'wmsAddress' => null,
                     'layers' => null,
                     '_native_styles' => (object) array(
@@ -1006,6 +1009,7 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
                     'wkt' => 'POINT(0,1)',
                     'start_visible_date' => '1964-04-26 14:39:22',
                     'end_visible_date' => '2016-04-23 12:45:34',
+                    'show_bubble' => 1,
                     'wmsAddress' => null,
                     'layers' => null,
                     '_native_styles' => (object) array(

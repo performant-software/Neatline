@@ -204,30 +204,11 @@
          */
         endEditWithoutSave: function(immediate) {
 
-            // Before OpenLayers axes the toolbar controls, clone the div so
-            // that it can be faded down in unison with the buttons.
-            var toolbarClone = $('.' + this.options.markup.toolbar_class).clone();
-
             // Remove controls.
             this.modifyFeatures.unselectFeature(this._clickedFeature);
             this.map.removeControl(this.modifyFeatures);
             this.map.removeControl(this.editToolbar);
             this.element.editgeometry('hideButtons');
-
-            // If the form is immediately switching to another form, do not do
-            // the fade down, as as to avoid a little opacity dip in the buttons
-            // when the form switches.
-            if (!immediate) {
-
-                // Reinsert the dummy toolbar and fade it down.
-                this.element.append(toolbarClone);
-                toolbarClone.animate({
-                    'opacity': 0
-                }, this.options.animation.fade_duration, function() {
-                    toolbarClone.remove();
-                });
-
-            }
 
             if (this._currentEditLayer.features.length === 0) {
 
