@@ -311,15 +311,9 @@
             // Instantiate the widget and define callbacks.
             this.editForm.itemform({
 
-                // When form data is changed.
-                'formEdit': function() {
-                    self.markItemTitleAsUnsaved();
-                },
-
                 // When the ambiguity sliders are changed.
                 'ambiguityChange': function(event, obj) {
                     var recordid = self._currentFormItem.attr('recordid');
-                    self.markItemTitleAsUnsaved();
                     self._trigger('ambiguityChange', {}, {
                         'recordid': recordid,
                         'color': obj.color,
@@ -394,7 +388,6 @@
                 // When a save finishes.
                 'savecomplete': function() {
                     self._trigger('savecomplete');
-                    self.markItemTitleAsSaved();
                 },
 
                 // Mark space active on current item.
@@ -1012,46 +1005,6 @@
          */
         setCoverageData: function(data) {
             this.editForm.itemform('setCoverageData', data);
-        },
-
-        /*
-         * Make the item title fade to red to indicate that a change has been
-         * made to the item's Neatline record but that the new data has not been
-         * committed to the server.
-         */
-        markItemTitleAsUnsaved: function() {
-
-            var itemTitleText = this._currentFormItem.find('.item-title-text');
-
-            if (!itemTitleText.data('changed')) {
-
-                // Tween the title color.
-                itemTitleText.animate({
-                    'color': this.options.colors.red
-                }, 200);
-
-                // Store the new status.
-                itemTitleText.data('changed', true);
-
-            }
-
-        },
-
-        /*
-         * Make the item title fade to black to indicate that it has been saved.
-         */
-        markItemTitleAsSaved: function() {
-
-            var itemTitleText = this._currentFormItem.find('.item-title-text');
-
-            // Tween the title color.
-            itemTitleText.animate({
-                'color': this.options.colors.text
-            }, 200);
-
-            // Store the new status.
-            itemTitleText.data('changed', false);
-
         },
 
         /*
