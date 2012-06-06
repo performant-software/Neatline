@@ -677,7 +677,6 @@
             if (record && !_.isNull(record.wms)) {
                 this._resetWmsZIndices();
                 record.wms.setZIndex(1);
-                console.log('pop');
             }
 
             // Set tracker.
@@ -689,11 +688,9 @@
          * Reset all of the z-indices on the WMS layers to 0.
          */
         _resetWmsZIndices: function() {
-
-            _.each(this.wmsLayers, function(layer) {
+            _.each(this._wmsLayers, function(layer) {
                 layer.setZIndex(0);
             });
-
         },
 
         /*
