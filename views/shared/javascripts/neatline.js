@@ -214,7 +214,12 @@
 
             // Rerender map and timeline.
             this.timeline.neatlinetimeline('refresh');
-            this.map.neatlinemap('refresh', this.positions.map);
+
+            if (this.options.isPublic) {
+                this.map.neatlinemap('refresh', this.positions.map);
+            } else {
+                this.map.mapeditor('refresh', this.positions.map);
+            }
 
             // // Reposition the scroller.
             // var scrollerPos = (this.majorBlockId === 'map') ?

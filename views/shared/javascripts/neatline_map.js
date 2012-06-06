@@ -31,11 +31,6 @@
             mode: 'edit',
             wkt_delimiter: '|',
 
-            // Markup hooks.
-            markup: {
-                toolbar_class: 'olControlEditingToolbar'
-            },
-
             // Animation constants.
             animation: {
                 fade_duration: 500

@@ -184,6 +184,19 @@
 
         },
 
+        /*
+         * Position the opacity slider, layer switcher, and zoom bar.
+         */
+        positionControls: function(top, left, width, height) {
+
+            // Container.
+            this.editContainer.css({
+                top: top+55,
+                left: left+65
+            });
+
+        },
+
         showButtons: function() {
 
             // Display the edit controls.

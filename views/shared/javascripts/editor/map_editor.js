@@ -32,6 +32,7 @@
 
             // Construct the editing manager.
             this._instantiateEditor();
+            this.toolbar = null;
 
             return $.neatline.neatlinemap.prototype._create.apply(
                 this,
@@ -186,14 +187,14 @@
             this.modifyFeatures.activate();
 
             // Show the edit control markup.
-            if (!immediate) { this._fadeUpEditControls(); }
-            else { this._popUpEditControls(); }
+            this.toolbar = $('.olControlEditingToolbar');
+            this._popUpEditControls();
+            this._positionToolbar();
 
             // If necessary, reselect a clicked feature.
             $.each(this._currentEditLayer.features, function(i, feature) {
                 if (feature === self._clickedFeature) {
                     self.modifyFeatures.selectFeature(self._clickedFeature);
-                    return;
                 }
             });
 
@@ -433,25 +434,54 @@
 
 
         /*
-         * Fade up the geometry add and edit buttons.
+         * Pop up the geometry add and edit buttons.
          */
-        _fadeUpEditControls: function() {
+        _popUpEditControls: function() {
 
             // Insert the edit geometry button.
             this.element.editgeometry('showButtons', false);
+            this.toolbar.css('opacity', 1);
+        },
 
-            // Fade up the toolbar.
-            $('.' + this.options.markup.toolbar_class).animate({
-                'opacity': 1
-            }, this.options.animation.fade_duration);
+        /*
+         * Position the geometry toolbar.
+         */
+        _positionToolbar: function() {
+
+            if (_.isNull(this.toolbar)) { return; }
+
+            // Container.
+            this.toolbar.css({
+                top: this.pos.top+17,
+                left: this.pos.left+60
+            });
 
         },
 
         /*
-         * Pop up the geometry add and edit buttons.
+         * Re-render the map and reposition the edit controls.
          */
-        _popUpEditControls: function() {
-            $('.' + this.options.markup.toolbar_class).css('opacity', 1);
+        refresh: function(pos) {
+
+            this.pos = pos;
+
+            // Rerender map.
+            this.map.updateSize();
+            this.positionControls(
+                pos.top,
+                pos.left,
+                pos.width,
+                pos.height
+            );
+
+            // Position the controls.
+            this.element.editgeometry('positionControls',
+                pos.top,
+                pos.left,
+                pos.width,
+                pos.height
+            );
+
         }
 
     }));
