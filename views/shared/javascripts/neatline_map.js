@@ -677,6 +677,7 @@
             if (record && !_.isNull(record.wms)) {
                 this._resetWmsZIndices();
                 record.wms.setZIndex(1);
+                console.log('pop');
             }
 
             // Set tracker.
