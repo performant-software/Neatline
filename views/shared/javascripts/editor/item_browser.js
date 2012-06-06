@@ -738,6 +738,11 @@
             var self = this;
             var immediate = false;
 
+            // Mark current form item as contracted.
+            if (!_.isNull(this._currentFormItem)) {
+                this._hideForm(this._currentFormItem, true);
+            }
+
             // Capture the current scrollTop of the container.
             this._scrollTop = this.element.scrollTop();
 
@@ -803,6 +808,8 @@
             _.each(this.items, function(row) {
                 if (!$(row).data('expanded')) {
                     $(row).hide();
+                } else {
+                    $(row).show();
                 }
             });
 
