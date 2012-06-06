@@ -715,7 +715,7 @@
                 'select': new OpenLayers.Style({
                     fillColor: highlightColor,
                     fillOpacity: selectOpacity,
-                    strokeColor: strokeColor,
+                    strokeColor: highlightColor,
                     strokeOpacity: strokeOpacity,
                     pointRadius: pointRadius,
                     strokeWidth: strokeWidth
@@ -723,7 +723,7 @@
                 'temporary': new OpenLayers.Style({
                     fillColor: highlightColor,
                     fillOpacity: fillOpacity,
-                    strokeColor: strokeColor,
+                    strokeColor: highlightColor,
                     strokeOpacity: strokeOpacity,
                     pointRadius: pointRadius,
                     strokeWidth: strokeWidth

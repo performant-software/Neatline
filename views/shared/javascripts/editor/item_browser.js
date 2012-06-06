@@ -235,9 +235,7 @@
          * relative to the container.
          */
         _calculateTopOffset: function(item) {
-
             item.data('topOffset', item.position().top);
-
         },
 
         /*
@@ -566,6 +564,9 @@
                 var spaceCheckbox =         spaceBlock.find('input[type="checkbox"]');
                 var timeBlock =             item.find('.time');
                 var timeCheckbox =          timeBlock.find('input[type="checkbox"]');
+
+                // Set expanded false by default.
+                item.data('expanded', false);
 
                 // Populate record header trackers.
                 if (item.attr('itemid')) self._omekaRecords.push(item);

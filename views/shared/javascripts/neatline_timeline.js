@@ -330,7 +330,6 @@
                 $(el).bind({
 
                     'mouseenter': _.bind(function() {
-                        console.log(evt);
                         this._trigger('evententer', {}, {
                             id: evt._eventID,
                             title: evt._text,
