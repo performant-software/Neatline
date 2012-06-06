@@ -674,7 +674,7 @@
             }
 
             // If the record has a WMS layer.
-            else if (record && !_.isNull(record.wms)) {
+            if (record && !_.isNull(record.wms)) {
                 this._resetWmsZIndices();
                 record.wms.setZIndex(1);
             }
