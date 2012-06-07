@@ -205,8 +205,12 @@
          */
         endEditWithoutSave: function(immediate) {
 
+            // Unselect a selected feature.
+            if (!_.isUndefined(this.modifyFeatures)) {
+                this.modifyFeatures.unselectFeature(this._clickedFeature);
+            }
+
             // Remove controls.
-            this.modifyFeatures.unselectFeature(this._clickedFeature);
             this.map.removeControl(this.modifyFeatures);
             this.map.removeControl(this.editToolbar);
             this.element.editgeometry('hideButtons');
