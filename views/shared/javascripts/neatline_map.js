@@ -670,8 +670,8 @@
 
             // If the record has a WMS layer.
             if (record && !_.isNull(record.wms)) {
-                this._resetWmsZIndices();
-                record.wms.setZIndex(1);
+                // this._resetWmsZIndices();
+                // record.wms.setZIndex(1);
             }
 
             // Set tracker.
