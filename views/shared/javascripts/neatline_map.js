@@ -650,11 +650,13 @@
         _selectRecord: function(record) {
 
             // If the record exists and there is a map feature.
-            if (record && record.layer.features.length > 0 && _.isNull(record.wms)) {
+            if (record && record.layer.features.length > 0) {
+
+                // Get bounds.
                 var bounds = record.data.bounds || record.data.center;
 
                 // Otherwise, just fit the vectors in the viewport.
-                if (! this.setViewport(bounds, record.data.zoom)) {
+                if (!this.setViewport(bounds, record.data.zoom)) {
 
                     // Get data extent.
                     var extent = record.layer.getDataExtent();
