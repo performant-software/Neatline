@@ -215,16 +215,6 @@
             this.map.removeControl(this.editToolbar);
             this.element.editgeometry('hideButtons');
 
-            if (this._currentEditLayer.features.length === 0) {
-
-                // Pop off the layer, remove from database, null the tracker..
-                this.map.removeLayer(this._currentEditLayer);
-                this._currentVectorLayers.remove(this._currentEditLayer);
-                this._db({ layerid: this._currentEditLayer.id }).remove();
-                this._currentEditLayer = null;
-
-            }
-
             // Clear the item tracker, re-add the click controls.
             this._currentEditItem = null;
             this.record = null;
