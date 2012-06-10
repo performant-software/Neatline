@@ -297,6 +297,7 @@ To create a custom ordering:
 [omeka-install-documentation]: http://omeka.org/codex/Installation 
 [omeka-download]: http://omeka.org/download 
 [omeka-github]: https://github.com/omeka/Omeka
+[neatline-download]: http://neatline.scholarslab.org/plugins/neatline
 [neatline-github]: https://github.com/scholarslab/Neatline
 [neatline-maps-github]: https://github.com/scholarslab/NeatlineMaps
 [geoserver]: http://geoserver.org
