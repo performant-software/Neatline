@@ -218,7 +218,7 @@
             this.vectorOpacity.integerdragger({
                 min: 0,
                 max: 100,
-                px_per_unit: 1,
+                px_per_unit: 3,
                 tip: { show: false },
                 change: function(evt, obj) {
                     self._trigger('vectorOpacityEdit', {}, { 'value': obj.value });
@@ -229,7 +229,7 @@
             this.selectOpacity.integerdragger({
                 min: 0,
                 max: 100,
-                px_per_unit: 1,
+                px_per_unit: 3,
                 tip: { show: false },
                 change: function(evt, obj) {
                     self._trigger('selectOpacityEdit', {}, { 'value': obj.value });
@@ -240,7 +240,7 @@
             this.strokeOpacity.integerdragger({
                 min: 0,
                 max: 100,
-                px_per_unit: 1,
+                px_per_unit: 3,
                 tip: { show: false },
                 change: function(evt, obj) {
                     self._trigger('strokeOpacityEdit', {}, { 'value': obj.value });
