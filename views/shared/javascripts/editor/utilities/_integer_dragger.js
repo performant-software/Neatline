@@ -231,9 +231,16 @@
             }
 
             // If a max is set, and the passed val is too large.
-            if (this.options.max != null && val > this.options.max) {
+            else if (this.options.max != null && val > this.options.max) {
                 this.element.val(this.options.max);
                 this.currentVal = this.options.max;
+                return false;
+            }
+
+            // If the passed value is NaN, set default.
+            else if (_.isNaN(val)) {
+                this.element.val(this.options.def);
+                this.currentVal = this.options.def;
                 return false;
             }
 
