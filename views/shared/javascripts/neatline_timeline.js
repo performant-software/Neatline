@@ -35,10 +35,11 @@
             this.zoomIn =                   this.zoomContainer.find('.zoom-in');
             this.zoomOut =                  this.zoomContainer.find('.zoom-out');
 
-            // Tracker array for tape elements.
-            this._idToTapeElements =    {};
-            this._zoomSteps =           this.getZoomIndexArray();
-            this._currentZoomStep =     Neatline.timelineZoom;
+            // Tracker2.
+            this._idToTapeElements = {};
+            this._zoomSteps = this.getZoomIndexArray();
+            this._currentZoomStep = Neatline.timelineZoom;
+            this._currentDate = null;
 
             // Start-up.
             this._instantiateSimile();
@@ -123,12 +124,20 @@
             this._catchClickCallback();
             this._catchZoomCallback();
 
-            // Emit current date.
-            this.timeline.getBand(0).addOnScrollListener(function() {
-                self._trigger('scroll', {}, {
-                    'date': self.timeline.getBand(0).getCenterVisibleDate()
+            // Scroll callback.
+            this.timeline.getBand(0).addOnScrollListener(_.bind(function() {
+
+                var date = this.timeline.getBand(0).getCenterVisibleDate();
+
+                // Emit current date.
+                this._trigger('scroll', {}, {
+                    'date': date
                 });
-            });
+
+                // Set tracker.
+                this._currentDate = date;
+
+            }, this));
 
         },
 
@@ -259,14 +268,22 @@
 
             var self = this;
 
-            // Ping the json server and get the events data.
-            this.timeline.loadJSON(Neatline.dataSources.timeline, function(json, url) {
-                self.eventSource.clear();
-                self.eventSource.loadJSON(json, url);
-            });
+            // Get event data.
+            this.timeline.loadJSON(Neatline.dataSources.timeline, _.bind(function(json, url) {
+
+                // Apply data.
+                this.eventSource.clear();
+                this.eventSource.loadJSON(json, url);
+
+            }, this));
+
+            // Reapply date.
+            if (!_.isNull(this._currentDate)) {
+                this.timeline.getBand(0).setCenterVisibleDate(this._currentDate);
+            }
 
             // Set the starting date, if defined.
-            if (Neatline.default_focus_date !== null) {
+            else if (Neatline.default_focus_date !== null) {
                 var startDate = Date.parse(Neatline.record.default_focus_date);
                 this.timeline.getBand(0).setCenterVisibleDate(startDate);
             }
