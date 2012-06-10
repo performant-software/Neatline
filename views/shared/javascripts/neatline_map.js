@@ -226,7 +226,7 @@
             // Zoom bar.
             this.panZoomBar.css({
                 top: top+10,
-                left: left+10
+                left: left+5
             });
 
         },
