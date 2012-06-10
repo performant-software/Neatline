@@ -90,7 +90,7 @@
                     zoomIndex:      this._currentZoomStep,
                     zoomSteps:      this._zoomSteps,
                     theme:          theme,
-                    timeZone:       -4
+                    timeZone:       SimileAjax.DateTime.getTimezone()
                 })
 
             ];
