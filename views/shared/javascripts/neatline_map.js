@@ -328,7 +328,7 @@
                 var features = [];
 
                 // Build the features.
-                if (!_.isNull(item.wtk)) {
+                if (!_.isNull(item.wkt)) {
                     $.each(item.wkt.split(self.options.wkt_delimiter), function(i, wkt) {
 
                         // Construct WKT format reader.
