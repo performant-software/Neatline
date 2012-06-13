@@ -49,9 +49,6 @@
 
 </div>
 
-<!-- Generic markup for the timeline popups. -->
-<?php echo $this->partial('neatline/_popups.php'); ?>
-
 <!-- JSON globals. -->
 <script type="text/javascript">
 

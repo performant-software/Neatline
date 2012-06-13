@@ -279,13 +279,14 @@
 
             // Reapply date.
             if (!_.isNull(this._currentDate)) {
-                this.timeline.getBand(0).setCenterVisibleDate(this._currentDate);
+                var date = this._currentDate;
+                this.timeline.getBand(0).setCenterVisibleDate(date);
             }
 
             // Set the starting date, if defined.
             else if (Neatline.default_focus_date !== null) {
-                var startDate = Date.parse(Neatline.record.default_focus_date);
-                this.timeline.getBand(0).setCenterVisibleDate(startDate);
+                var date = Date.parse(Neatline.record.default_focus_date);
+                this.timeline.getBand(0).setCenterVisibleDate(date);
             }
 
             // Apply the ambiguity gradients.

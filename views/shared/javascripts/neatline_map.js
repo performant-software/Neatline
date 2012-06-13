@@ -424,6 +424,8 @@
                         layerid: feature.layer.id
                     }).first();
 
+                    console.log(record);
+
                     // Trigger out to the deployment code.
                     self._trigger('featureenter', {}, {
                         'record': record
@@ -431,7 +433,9 @@
 
                     // Render highlight.
                     if (!record.selected) {
-                        self.highlightControl.highlight(feature);
+                        _.each(record.layer.features, function(feature){
+                            self.highlightControl.highlight(feature);
+                        });
                     }
 
                     self._hoveredFeature = feature;
@@ -452,7 +456,9 @@
 
                     // Render default.
                     if (!record.selected) {
-                        self.highlightControl.unhighlight(feature);
+                        _.each(record.layer.features, function(feature){
+                            self.highlightControl.unhighlight(feature);
+                        });
                     }
 
                     self._hoveredFeature = null;
@@ -486,7 +492,9 @@
                     });
 
                     if (!_.isUndefined(self.modifyFeatures)) {
-                        self.modifyFeatures.selectFeature(feature);
+                        _.each(record.layer.features, function(feature){
+                            self.modifyFeatures.selectFeature(feature);
+                        });
                     }
 
                 },
