@@ -424,8 +424,6 @@
                         layerid: feature.layer.id
                     }).first();
 
-                    console.log(record);
-
                     // Trigger out to the deployment code.
                     self._trigger('featureenter', {}, {
                         'record': record
