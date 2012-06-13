@@ -329,10 +329,26 @@ class NeatlinePlugin
      **/
     public function beforeDeleteItem($item)
     {
-        $table   = $this->_db->getTable('NeatlineDataRecord');
+        $db      = get_db();
+        $table   = $db->getTable('NeatlineDataRecord');
+        $alias   = $table->getTableAlias();
         $adapter = $table->getAdapter();
-        $where   = $adapter->quoteInto('item_id=?', $item->id);
-        $adapter->delete($table->getTableName(), $where);
+        $select  = $table->getSelect();
+        $where   = $adapter->quoteInto("$alias.item_id=?", $item->id);
+
+        $select->where($where);
+
+        $db->beginTransaction();
+        try {
+            $datarecs = $table->fetchObjects($select);
+            foreach ($datarecs as $data) {
+                $data->delete();
+            }
+            $db->commit();
+        } catch (Exception $e) {
+            $db->rollback();
+            throw $e;
+        }
     }
 
 }

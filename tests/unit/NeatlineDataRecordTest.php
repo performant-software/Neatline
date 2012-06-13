@@ -2291,4 +2291,42 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
 
     }
 
+    /**
+     * delete() should remove itself from all parental relationships.
+     *
+     * @return void
+     * @author Eric Rochester <erochest@virginia.edu>
+     **/
+    public function testDeleteCascade()
+    {
+        $neatline = $this->helper->_createNeatline();
+
+        $pitem    = $this->helper->_createItem();
+        $parent   = new NeatlineDataRecord($pitem, $neatline);
+        $parent->use_dc_metadata = 1;
+        $parent->title           = 'parent title';
+        $parent->description     = 'parent description';
+        $parent->save();
+
+        $citem = $this->helper->_createItem();
+        $child = new NeatlineDataRecord($citem, $neatline);
+        $child->use_dc_metadata  = 1;
+        $child->title            = 'child title';
+        $child->description      = 'child description';
+        $child->parent_record_id = $parent->id;
+        $child->save();
+
+        $cid = $child->id;
+        $child = $this->_recordsTable->find($child->id);
+        $this->assertEquals($parent->id, $child->parent_record_id);
+
+        $pitem->delete();
+
+        $parent = $this->_recordsTable->find($parent->id);
+        $this->assertNull($parent);
+
+        $child = $this->_recordsTable->find($child->id);
+        $this->assertNull($child->parent_record_id);
+    }
+
 }
