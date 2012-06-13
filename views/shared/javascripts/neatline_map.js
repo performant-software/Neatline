@@ -492,9 +492,7 @@
                     });
 
                     if (!_.isUndefined(self.modifyFeatures)) {
-                        _.each(record.layer.features, function(feature){
-                            self.modifyFeatures.selectFeature(feature);
-                        });
+                        self.modifyFeatures.selectFeature(feature);
                     }
 
                 },
