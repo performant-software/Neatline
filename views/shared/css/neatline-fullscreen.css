@@ -55,7 +55,7 @@ body {
     top: 0;
     left: 0;
     right: 0;
-    z-index: 1001;
+    z-index: 500;
     overflow: visible;
     line-height: 18px;
     font-family: 'Crimson Text', Georgia, serif;
