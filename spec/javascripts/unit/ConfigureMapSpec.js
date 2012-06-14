@@ -25,7 +25,7 @@ describe('Configure Map', function() {
     afterEach(function() {
 
         // Purge markup outside of the fixtures container by the .js.
-        $('#configure-layout').remove();
+        $('#configure-map').remove();
 
     });
 

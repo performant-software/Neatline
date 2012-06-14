@@ -31,12 +31,12 @@ describe('Configure Timeline', function() {
 
     describe('postSettings', function() {
 
-        it('should post a well-formed request with the timeline styles', function() {
+        it('should post a well-formed request with the map styles', function() {
 
             // Set form values.
             tab.configuretimeline('getAttr', 'bandActive').prop('checked', true);
-            tab.configuretimeline('getAttr', 'bandUnit').val('week');
-            tab.configuretimeline('getAttr', 'bandHeight').val('50');
+            tab.configuretimeline('getAttr', 'bandHeight').val(50);
+            tab.configuretimeline('getAttr', 'bandUnit').val('century');
 
             // Call saveItemForm, capture outgoing request.
             tab.configuretimeline('postSettings');
@@ -45,8 +45,8 @@ describe('Configure Timeline', function() {
             // Check params.
             expect(post.params).toContain('exhibit_id=1');
             expect(post.params).toContain('is_context_band=1');
-            expect(post.params).toContain('context_band_unit=week');
             expect(post.params).toContain('context_band_height=50');
+            expect(post.params).toContain('context_band_unit=century');
 
         });
 
@@ -54,8 +54,8 @@ describe('Configure Timeline', function() {
 
             // Set form values.
             tab.configuretimeline('getAttr', 'bandActive').prop('checked', true);
-            tab.configuretimeline('getAttr', 'bandUnit').val('week');
-            tab.configuretimeline('getAttr', 'bandHeight').val('50');
+            tab.configuretimeline('getAttr', 'bandHeight').val(50);
+            tab.configuretimeline('getAttr', 'bandUnit').val('century');
 
             // Trigger click on "Save" button.
             tab.configuretimeline('getAttr', 'saveButton').mousedown();
@@ -64,8 +64,8 @@ describe('Configure Timeline', function() {
             // Check params.
             expect(post.params).toContain('exhibit_id=1');
             expect(post.params).toContain('is_context_band=1');
-            expect(post.params).toContain('context_band_unit=week');
             expect(post.params).toContain('context_band_height=50');
+            expect(post.params).toContain('context_band_unit=century');
 
         });
 
