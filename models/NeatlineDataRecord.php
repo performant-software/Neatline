@@ -1006,4 +1006,49 @@ class NeatlineDataRecord extends Omeka_record
 
     }
 
+    /**
+     * This deletes this record and removes itself from all parent 
+     * relationships.
+     *
+     * This assumes that the caller is wrapping this in a transaction somewhere 
+     * up the callstack. To do this inside a transaction that this manages, use 
+     * `deleteTransaction`.
+     *
+     * @return void
+     * @author Eric Rochester <erochest@virginia.edu>
+     **/
+    public function delete()
+    {
+        if (!is_null($this->id)) {
+            $db = get_db();
+            $tname = $this->getTable()->getTableName();
+            $query = "
+                UPDATE `$tname`
+                SET parent_record_id=NULL
+                WHERE parent_record_id={$this->id};";
+            $db->query($query);
+
+            parent::delete();
+        }
+    }
+
+    /**
+     * This calls `delete` in a transaction.
+     *
+     * @return void
+     * @author Eric Rochester <erochest@virginia.edu>
+     **/
+    public function deleteTransaction()
+    {
+        $db = get_db();
+        $db->beginTransaction();
+        try {
+            $this->delete();
+            $db->commit();
+        } catch (Exception $e) {
+            $db->rollback();
+            throw $e;
+        }
+    }
+
 }
