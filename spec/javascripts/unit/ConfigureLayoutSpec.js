@@ -82,7 +82,7 @@ describe('Configure Layout', function() {
 
             // Check params.
             expect(post.params).toContain('exhibit_id=1');
-            expect(post.params).toContain('map_extent=mExtent');
+            expect(post.params).toContain('map_center=mExtent');
             expect(post.params).toContain('map_zoom=5');
             expect(post.params).toContain('timeline_center=tlCenter');
             expect(post.params).toContain('timeline_zoom=6');
@@ -96,7 +96,7 @@ describe('Configure Layout', function() {
 
             // Check params.
             expect(post.params).toContain('exhibit_id=1');
-            expect(post.params).toContain('map_extent=mExtent');
+            expect(post.params).toContain('map_center=mExtent');
             expect(post.params).toContain('map_zoom=5');
             expect(post.params).toContain('timeline_center=tlCenter');
             expect(post.params).toContain('timeline_zoom=6');
