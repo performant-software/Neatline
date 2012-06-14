@@ -126,7 +126,7 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
         $this->dispatch('neatline-exhibits');
 
         // Title.
-        $this->assertQueryCount('td.name', 2);
+        $this->assertQueryCount('td.title', 2);
         $this->assertQuery('div.pagination');
 
     }

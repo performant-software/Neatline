@@ -55,7 +55,8 @@ head(array('content_class' => 'neatline', 'title' => $title));
             'Items Query' => null,
             'Modified' => 'modified',
             '# Items' => 'added',
-            'Public' => 'public'
+            'Public' => 'public',
+            'Edit' => null
         )); ?>
         </tr>
     </thead>
@@ -73,6 +74,7 @@ head(array('content_class' => 'neatline', 'title' => $title));
             <td><?php echo neatline_formatDate($neatline->modified); ?></td>
             <td><?php echo $neatline->getNumberOfRecords(); ?></td>
             <td><?php echo $neatline->public ? 'yes' : 'no'; ?></td>
+            <td><?php echo button_to(uri('neatline-exhibits/editor/' . $neatline->id), null, 'Edit', array()); ?></td>
         </tr>
         <?php endforeach; ?>
     </tbody>
