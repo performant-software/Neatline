@@ -190,7 +190,7 @@ function neatline_queueNeatlineAssets($exhibit)
 function neatline_queueExhibitCss($exhibit)
 {
     try {
-        queue_css('exhibits/' . $exhibit->slug);
+        queue_css($exhibit->slug);
     } catch (Exception $e) {}
 }
 

@@ -329,6 +329,7 @@ class NeatlinePlugin
      **/
     public function beforeDeleteItem($item)
     {
+
         $db      = get_db();
         $table   = $db->getTable('NeatlineDataRecord');
         $alias   = $table->getTableAlias();
@@ -349,6 +350,7 @@ class NeatlinePlugin
             $db->rollback();
             throw $e;
         }
+
     }
 
 }
