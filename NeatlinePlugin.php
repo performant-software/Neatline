@@ -136,7 +136,7 @@ class NeatlinePlugin
                 `exhibit_id`                  int(10) unsigned NULL,
                 `parent_record_id`            int(10) unsigned NULL,
                 `show_bubble`                 tinyint(1) NULL,
-                `title`                       tinytext COLLATE utf8_unicode_ci NULL,
+                `title`                       mediumtext COLLATE utf8_unicode_ci NULL,
                 `slug`                        varchar(100) NULL,
                 `description`                 mediumtext COLLATE utf8_unicode_ci NULL,
                 `start_date`                  tinytext COLLATE utf8_unicode_ci NULL,
