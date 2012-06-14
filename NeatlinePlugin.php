@@ -33,7 +33,6 @@ class NeatlinePlugin
         'upgrade',
         'define_routes',
         'admin_theme_header',
-        'public_theme_header',
         'admin_append_to_plugin_uninstall_message',
         'before_delete_item'
     );
@@ -229,36 +228,6 @@ class NeatlinePlugin
         if ($request->getModuleName() == 'neatline' &&
             $request->getControllerName() == 'index') {
               neatline_queueAdminCss();
-        }
-
-        // Queue static assets for the Neatline editor.
-        if ($request->getModuleName() == 'neatline' &&
-            $request->getControllerName() == 'editor' &&
-            $request->getActionName() == 'index') {
-              $exhibit = __v()->exhibit;
-              neatline_queueNeatlineAssets($exhibit);
-              neatline_queueEditorAssets();
-        }
-
-    }
-
-    /**
-     * Push public-facing Neatline assets.
-     *
-     * @return void
-     */
-    public function publicThemeHeader($request)
-    {
-
-        // Queue static assets for public-facing Neatline exhibits.
-        if ($request->getModuleName() == 'neatline' &&
-            $request->getControllerName() == 'index' &&
-            $request->getActionName() == 'show') {
-
-            $exhibit = __v()->exhibit;
-            neatline_queueNeatlineAssets($exhibit);
-            neatline_queueFullscreenAssets();
-
         }
 
     }

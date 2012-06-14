@@ -45,7 +45,11 @@
     <meta charset="utf-8">
     <title><?php echo $neatlineexhibit->name; ?></title>
 
-    <?php neatline_queueExhibitCss($exhibit); ?>
+    <?php
+    neatline_queueNeatlineAssets($neatlineexhibit);
+    neatline_queueFullscreenAssets();
+    neatline_queueExhibitCss($neatlineexhibit);
+    ?>
 
     <!-- Stylesheets -->
     <?php display_css(); ?>

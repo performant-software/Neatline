@@ -34,6 +34,11 @@
 <!-- Plugin Stuff -->
 <?php admin_plugin_header(); ?>
 
+<?php
+neatline_queueNeatlineAssets($exhibit);
+neatline_queueEditorAssets();
+?>
+
 <!-- Stylesheets -->
 <?php display_css(); ?>
 
