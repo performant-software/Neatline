@@ -64,7 +64,7 @@ head(array('content_class' => 'neatline', 'title' => $title));
         <!-- Exhibit listings. -->
         <?php foreach ($neatlineexhibits as $neatline): ?>
         <tr id="<?php echo $neatline->id; ?>">
-            <td class="name"><?php echo neatline_linkToNeatline($neatline); ?>
+            <td class="title"><?php echo neatline_linkToNeatline($neatline); ?>
                 <div class="slug-preview">/<?php echo $neatline->slug; ?></div>
                 <a href="<?php echo uri('neatline-exhibits/edit/' . $neatline->id); ?>" class="edit">Edit Details</a>
                 <a href="<?php echo uri('neatline-exhibits/delete-confirm/' . $neatline->id); ?>" class="delete delete-confirm">Delete</a>
