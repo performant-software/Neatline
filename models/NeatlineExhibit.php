@@ -24,8 +24,10 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache 2 License
  */
 
-class NeatlineExhibit extends Omeka_record
+class NeatlineExhibit extends Omeka_Record implements Zend_Acl_Resource_Interface
 {
+
+    CONST RESOURCE_ID = 'Neatline_Exhibits';
 
     /**
      * Record attributes.
@@ -36,24 +38,24 @@ class NeatlineExhibit extends Omeka_record
     public $name;
     public $description;
     public $slug;
-    public $public;
+    public $public = 0;
     public $query;
 
     // Foreign keys.
     public $image_id;
 
     // Layout parameters.
-    public $top_element;
-    public $items_h_pos;
-    public $items_v_pos;
-    public $items_height;
+    public $top_element = 'map';
+    public $items_h_pos = 'right';
+    public $items_v_pos = 'bottom';
+    public $items_height = 'full';
     public $h_percent;
     public $v_percent;
 
     // Viewport presence.
-    public $is_map;
-    public $is_timeline;
-    public $is_items;
+    public $is_map = 1;
+    public $is_timeline = 1;
+    public $is_items = 1;
 
     // Map position defaults.
     public $default_map_bounds;
@@ -64,7 +66,7 @@ class NeatlineExhibit extends Omeka_record
     public $default_timeline_zoom;
 
     // Timeline layout parameters.
-    public $is_context_band;
+    public $is_context_band = 1;
     public $default_context_band_unit;
     public $default_context_band_height;
 
@@ -77,7 +79,7 @@ class NeatlineExhibit extends Omeka_record
     public $default_stroke_opacity;
     public $default_stroke_width;
     public $default_point_radius;
-    public $default_base_layer;
+    public $default_base_layer = 2;
 
     /**
      * Valid style attribute names.
@@ -96,45 +98,49 @@ class NeatlineExhibit extends Omeka_record
     );
 
     /**
-     * Save the add Neatline form.
+     * Mixin initializer.
      *
-     * @param string $title The title.
-     * @param string $description The description.
-     * @param string $slug The slug.
-     * @param boolean $public True if public.
-     * @param varchar $image The image id.
-     *
-     * @return boolean True if save is successful.
+     * Adds the PublicFeatured mixin.
      */
-    public function saveForm(
-        $title,
-        $description,
-        $slug,
-        $public,
-        $image
-    )
+    protected function _initializeMixins()
     {
 
-        // Set default values.
-        $this->name =                   $title;
-        $this->description =            $description;
-        $this->slug =                   $slug;
-        $this->public =                 (int) $public;
-        $this->default_base_layer =     2;
-        $this->top_element =            'map';
-        $this->items_h_pos =            'right';
-        $this->items_v_pos =            'bottom';
-        $this->items_height =           'full';
-        $this->is_map =                 1;
-        $this->is_timeline =            1;
-        $this->is_items =               1;
-        $this->is_context_band =        1;
-        $this->image_id =               null;
+        $this->_mixins[] = new PublicFeatured($this);
 
-        // Check for image.
-        if (is_numeric($image)) {
-            $this->image_id = $image;
-        }
+    }
+
+    /**
+     * Things to do in the beforeInsert() hook:
+     *
+     * Use the current datetime for 'added' and 'modified'.
+     *
+     * @since 1.0
+     * @return void
+     */
+    protected function beforeInsert()
+    {
+
+        $now = Zend_Date::now()->toString(self::DATE_FORMAT);
+        $this->added = $now;
+        $this->modified = $now;
+        // if (!$this->creator_id && ($user = Omeka_Context::getInstance()->getCurrentUser())) {
+        //     $this->setAddedBy($user);
+        // }
+
+    }
+
+    /**
+     * Things to do in the beforeSave() hook:
+     *
+     * Explicitly set the modified timestamp.
+     *
+     * @since 1.0
+     * @return void
+     */
+    protected function beforeSave()
+    {
+
+        $this->modified = Zend_Date::now()->toString(self::DATE_FORMAT);
 
     }
 
@@ -398,37 +404,6 @@ class NeatlineExhibit extends Omeka_record
     }
 
     /**
-     * Set the 'modified' column to the current timestamp.
-     *
-     * @return void.
-     */
-    public function setModified()
-    {
-        $this->modified = neatline_getTimestamp();
-    }
-
-    /**
-     * Update the `modified` field on save.
-     *
-     * @return void.
-     */
-    public function save()
-    {
-        $this->setModified();
-        parent::save();
-    }
-
-    /**
-     * Call native save.
-     *
-     * @return void.
-     */
-    public function parentSave()
-    {
-        parent::save();
-    }
-
-    /**
      * Delete status and element text association records on exhibit delete.
      *
      * @return void.
@@ -444,6 +419,43 @@ class NeatlineExhibit extends Omeka_record
         // Call parent.
         parent::delete();
 
+    }
+
+    protected function beforeValidate()
+    {
+        $this->name = trim($this->name);
+        $this->slug = generate_slug($this->slug);
+        if (empty($this->slug)) {
+            $this->slug = generate_slug($this->name);
+        }
+    }
+
+    protected function _validate()
+    {
+
+        if (trim($this->slug) == '') {
+            $this->addError('slug', __('The slug cannot be empty.'));
+        }
+
+        if (!preg_match('/^[0-9a-z\-]+$/', $this->slug)) {
+            $this->addError('slug', __('The slug can only contain lowercase letters, numbers, and hyphens.'));
+        }
+
+        if (!$this->fieldIsUnique('slug')) {
+            $this->addError('slug', __('The slug is already in use.'));
+        }
+
+    }
+
+    /**
+     * Required by Zend_Acl_Resource_Interface.
+     *
+     * @since 1.0
+     * @return string
+     */
+    public function getResourceId()
+    {
+        return self::RESOURCE_ID;
     }
 
 }

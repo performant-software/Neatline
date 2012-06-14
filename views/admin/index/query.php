@@ -26,14 +26,10 @@
 ?>
 
 <?php
-head(array('content_class' => 'neatline'));
+$title = 'Neatline | Edit Items Query';
+head(array('content_class' => 'neatline', 'title' => $title));
 ?>
-
-<?php echo $this->partial('index/_header.php', array(
-    'subtitle' => 'Edit Items Query',
-    'add_button_uri' => 'neatline-exhibits/add',
-    'add_button_text' => 'Create a Neatline'
-)); ?>
+<h1><?php echo $title; ?></h1>
 
 <div id="primary">
     <?php echo items_search_form(array(), current_uri()); ?>

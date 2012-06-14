@@ -27,6 +27,7 @@
 ?>
 
 <?php echo $this->partial('editor/_editor_header.php', array(
+    'exhibit' => $exhibit,
     'titlePrefix' => 'Neatline Editor',
     'title' => $exhibit->name
 )); ?>

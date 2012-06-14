@@ -24,28 +24,52 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache 2 License
  */
 ?>
+<!DOCTYPE html>
+<!--[if IE 6]>
+<html id="ie6" dir="ltr" lang="en-US">
+<![endif]-->
+<!--[if IE 7]>
+<html id="ie7" dir="ltr" lang="en-US">
+<![endif]-->
+<!--[if IE 8]>
+<html id="ie8" dir="ltr" lang="en-US">
+<![endif]-->
+<!--[if IE 9]>
+<html id="ie9" dir="ltr" lang="en-US">
+<![endif]-->
+<!--[if !(IE 6) | !(IE 7) | !(IE 8)  ]><!-->
+<html dir="ltr" lang="en-US">
+<!--<![endif]-->
+<head>
 
-<?php if ($exhibit->public): ?>
+    <meta charset="utf-8">
+    <title><?php echo $neatlineexhibit->name; ?></title>
 
-<?php echo $this->partial('public/_public_header.php', array(
-    'titlePrefix' => 'Neatline',
-    'exhibit' => $exhibit
-)); ?>
+    <?php
+    neatline_queueNeatlineAssets($neatlineexhibit);
+    neatline_queueFullscreenAssets();
+    neatline_queueExhibitCss($neatlineexhibit);
+    ?>
 
-<!-- The top bar. -->
-<?php echo $this->partial('public/_topbar.php', array(
-    'neatline' => $exhibit,
-    'layers' => $layers
-)); ?>
+    <!-- Stylesheets -->
+    <?php display_css(); ?>
+
+    <!-- JavaScripts -->
+    <?php display_js(); ?>
+
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?v=3.5&amp;sensor=false"></script>
+
+    <!-- Plugin Stuff -->
+    <?php plugin_header(); ?>
+
+</head>
+
+<body class="neatline <?php echo $neatlineexhibit->slug; ?>">
 
 <!-- The core Neatline partial. -->
 <?php echo $this->partial('neatline/_neatline.php', array(
-    'exhibit' => $exhibit
+    'exhibit' => $neatlineexhibit
 )); ?>
 
-<!-- Custom footer. -->
-<?php echo $this->partial('editor/_editor_footer.php'); ?>
-
-<?php else: ?>
-    <?php echo $this->partial('neatline/_private.php'); ?>
-<?php endif; ?>
+</body>
+</html>

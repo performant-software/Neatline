@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
 
 /**
- * Edit exhibit form.
+ * Add exhibit form.
  *
  * PHP version 5
  *
@@ -24,22 +24,10 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache 2 License
  */
 
-class EditExhibitForm extends Omeka_Form
+class Neatline_Form_NeatlineDetails extends Omeka_Form
 {
 
-    private $_exhibit;
-
-    /**
-     * Set the exhibit that is being edited.
-     *
-     * @param NeatlineExhibit $exhibit The exhibit.
-     *
-     * @return void.
-     */
-    public function setExhibit(NeatlineExhibit $exhibit)
-    {
-        $this->_exhibit = $exhibit;
-    }
+    private $_neatline;
 
     /**
      * Construct the exhibit add/edit form.
@@ -51,20 +39,16 @@ class EditExhibitForm extends Omeka_Form
 
         parent::init();
 
-        // Get database and tables.
-        $_db = get_db();
-        $_layers = $_db->getTable('NeatlineBaseLayer');
-        $_exhibits = $_db->getTable('NeatlineExhibit');
-
         $this->setMethod('post');
         $this->setAttrib('id', 'add-exhibit-form');
         $this->addElementPrefixPath('Neatline', dirname(__FILE__));
 
         // Title.
-        $this->addElement('text', 'title', array(
+        $this->addElement('text', 'name', array(
             'label'         => 'Title',
             'description'   => 'The title is displayed at the top of the exhibit.',
             'size'          => 40,
+            'value'         => $this->_neatline->name,
             'required'      => true,
             'validators'    => array(
                 array('validator' => 'NotEmpty', 'breakChainOnFailure' => true, 'options' =>
@@ -81,20 +65,23 @@ class EditExhibitForm extends Omeka_Form
         $this->addElement('textarea', 'description', array(
             'label'         => 'Description',
             'description'   => 'Supporting prose to describe the exhibit.',
+            'value'         => $this->_neatline->description,
             'attribs'       => array('class' => 'html-editor', 'rows' => '20')
         ));
 
         // Slug.
         $this->addElement('text', 'slug', array(
             'label'         => 'URL Slug',
-            'description'   => 'The URL slug is used to form the public URL for the exhibit. Can only contain letters, numbers, and hyphens (no spaces).',
+            'description'   => 'The URL slug is used to form the public URL for the exhibit. Can contain letters, numbers, and hyphens.',
             'size'          => 40,
             'required'      => true,
+            'value'         => $this->_neatline->slug,
+            'filters'       => array('StringTrim'),
             'validators'    => array(
                 array('validator' => 'NotEmpty', 'breakChainOnFailure' => true, 'options' =>
                     array(
                         'messages' => array(
-                            Zend_Validate_NotEmpty::IS_EMPTY => 'Enter a slug.'
+                            Zend_Validate_NotEmpty::IS_EMPTY => 'The slug cannot be empty.'
                         )
                     )
                 ),
@@ -102,7 +89,21 @@ class EditExhibitForm extends Omeka_Form
                     array(
                         'pattern' => '/^[0-9a-z\-]+$/',
                         'messages' => array(
-                            Zend_Validate_Regex::NOT_MATCH => 'Lowercase letters, numbers, and hyphens only.'
+                            Zend_Validate_Regex::NOT_MATCH => 'The slug can only contain lowercase letters, numbers, and hyphens..'
+                        )
+                    )
+                ),
+                array('validator' => 'Db_NoRecordExists', 'options' =>
+                    array(
+                        'table'     =>  $this->_neatline->getTable()->getTableName(),
+                        'field'     =>  'slug',
+                        'adapter'   =>  $this->_neatline->getDb()->getAdapter(),
+                        'exclude'   => array(
+                            'field' => 'id',
+                            'value' => (int)$this->_neatline->id
+                        ),
+                        'messages'  =>  array(
+                            'recordFound' => 'The slug is already in use.'
                         )
                     )
                 )
@@ -112,19 +113,30 @@ class EditExhibitForm extends Omeka_Form
         // Public.
         $this->addElement('checkbox', 'public', array(
             'label'         => 'Public?',
-            'description'   => 'By default, exhibits are only visible to you.'
+            'description'   => 'By default, exhibits are only visible to you.',
+            'value'         => $this->_neatline->public
+        ));
+
+        // Image.
+        $this->addElement('select', 'image_id', array(
+            'label'         => '(Optional): Static Image',
+            'description'   => 'Select a file to build the exhibit on a static image.',
+            'attribs'       => array('style' => 'width: 230px'),
+            'multiOptions'  => $this->getImagesForSelect(),
+            'value'         => $this->_neatline->image_id,
         ));
 
         // Submit.
         $this->addElement('submit', 'submit', array(
-            'label' => 'Save Exhibit'
+            'label' => 'Save Neatline'
         ));
 
         // Group the metadata fields.
         $this->addDisplayGroup(array(
-            'title',
+            'name',
             'description',
             'slug',
+            'image_id',
             'public'
         ), 'exhibit_info');
 
@@ -136,35 +148,38 @@ class EditExhibitForm extends Omeka_Form
     }
 
     /**
-     * Validate the form.
+     * Get the list of images for the dropdown select.
      *
-     * @return void.
+     * @return array $images The images.
      */
-    public function isValid($data)
+    public function getImagesForSelect()
     {
 
-        // Get database and tables.
+        $files = array('none' => '-');
+
+        // Get file table.
         $_db = get_db();
-        $_exhibits = $_db->getTable('NeatlineExhibit');
+        $_files = $_db->getTable('File');
 
-        // Add the non-self unique validator for the slug.
-        $this->getElement('slug')->addValidator(
-            'Db_NoRecordExists', false, array(
-                'table'     =>  $_exhibits->getTableName(),
-                'field'     =>  'slug',
-                'adapter'   =>  $_db->getAdapter(),
-                'exclude'   =>  array(
-                    'field' => 'slug',
-                    'value' => (string) $this->_exhibit->slug
-                ),
-                'messages'  =>  array(
-                    'recordFound' => 'Slug taken.'
-                )
-            )
-        );
+        // Build select.
+        $select = $_files->getSelect()->where(
+            'f.has_derivative_image = 1'
+        )->order('original_filename DESC');
 
-        return parent::isValid($data);
+        // Fetch and return.
+        $records = $_files->fetchObjects($select);
+
+        // Build the array.
+        foreach($records as $record) {
+            $files[$record->id] = $record->original_filename;
+        };
+
+        return $files;
 
     }
 
+    public function setNeatline(NeatlineExhibit $neatline)
+    {
+        $this->_neatline = $neatline;
+    }
 }
