@@ -26,20 +26,24 @@
 ?>
 
 <?php
-head(array('content_class' => 'neatline'));
+$title = 'Neatline | Browse';
+head(array('content_class' => 'neatline', 'title' => $title));
 ?>
 
-<?php echo $this->partial('index/_header.php', array(
-    'subtitle' => 'Browse Exhibits',
-    'add_button_uri' => 'neatline-exhibits/add',
-    'add_button_text' => 'Create an Exhibit'
-)); ?>
+<h1><?php echo $title; ?></h1>
+
+<p class="add-button">
+    <a class="add" href="<?php echo html_escape(uri('neatline-exhibits/add')); ?>">
+        Create an Exhibit
+    </a>
+</p>
 
 <div id="primary">
 
 <?php echo flash(); ?>
 
-<?php if(count($neatlines) > 0): ?>
+<?php if(count($neatlineexhibits) > 0): ?>
+<div class="pagination"><?php echo pagination_links(); ?></div>
 
 <table class="neatline">
 
@@ -48,7 +52,6 @@ head(array('content_class' => 'neatline'));
         <!-- Column headings. -->
         <?php browse_headings(array(
             'Exhibit' => 'name',
-            'View' => null,
             'Items Query' => null,
             'Modified' => 'modified',
             '# Items' => 'added',
@@ -59,42 +62,30 @@ head(array('content_class' => 'neatline'));
 
     <tbody>
         <!-- Exhibit listings. -->
-        <?php foreach ($neatlines as $neatline): ?>
-        <tr exhibitid="<?php echo $neatline->id; ?>">
-            <td class="title"><?php echo neatline_linkToNeatline($neatline); ?>
+        <?php foreach ($neatlineexhibits as $neatline): ?>
+        <tr id="<?php echo $neatline->id; ?>">
+            <td class="name"><?php echo neatline_linkToNeatline($neatline); ?>
                 <div class="slug-preview">/<?php echo $neatline->slug; ?></div>
-                <?php echo $this->partial('index/_action_buttons.php', array(
-                  'uriSlug' => 'neatline-exhibits',
-                  'neatline' => $neatline)); ?>
+                <a href="<?php echo uri('neatline-exhibits/edit/' . $neatline->id); ?>" class="edit">Edit Details</a>
+                <?php echo button_to(
+                            uri('neatline-exhibits/delete-confirm/' . $neatline->id),
+                            null,
+                            'Delete',
+                            array('class' => 'delete-confirm')
+                            );
+                ?>
             </td>
-            <td>
-                <div class="public-exhibit-links">
-                    <a href="<?php echo public_uri('neatline-exhibits/show/' . $neatline->slug); ?>" target="_blank">In-Theme</a><br />
-                    <a href="<?php echo public_uri('neatline-exhibits/show/fullscreen/' . $neatline->slug); ?>" target="_blank">Fullscreen</a><br />
-                    <a href="<?php echo public_uri('neatline-exhibits/show/embed/' . $neatline->slug); ?>" target="_blank">Embed</a>
-                </div>
-            </td>
-            <td><a href="<?php echo uri('neatline-exhibits/query/' . $neatline->slug); ?>">Edit Query</a></td>
+            <td><a href="<?php echo uri('neatline-exhibits/query/' . $neatline->id); ?>">Edit Query</a></td>
             <td><?php echo neatline_formatDate($neatline->modified); ?></td>
             <td><?php echo $neatline->getNumberOfRecords(); ?></td>
-            <td><?php echo $neatline->public == 1 ? 'yes' : 'no'; ?></td>
+            <td><?php echo $neatline->public ? 'yes' : 'no'; ?></td>
         </tr>
         <?php endforeach; ?>
     </tbody>
 
 </table>
 
-<!-- Pagination. -->
-<?php if ($pagination['total_results'] > $pagination['per_page']): ?>
-    <div class="pagination">
-        <?php echo pagination_links(array('scrolling_style' => 'All',
-        'page_range' => '5',
-        'partial_file' => 'common/pagination_control.php',
-        'page' => $pagination['current_page'],
-        'per_page' => $pagination['per_page'],
-        'total_results' => $pagination['total_results'])); ?>
-    </div>
-<?php endif; ?>
+<div class="pagination"><?php echo pagination_links(); ?></div>
 
 <?php else: ?>
 
