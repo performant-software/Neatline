@@ -140,7 +140,7 @@ class Neatline_EditorController extends Omeka_Controller_Action
 
     /**
      * ~ AJAX ~
-     * Fetch items for the browser.
+     * Save record form data.
      *
      * @return JSON $statuses An array with the final space and time statuses
      * that result from the data commit.
