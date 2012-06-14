@@ -26,7 +26,7 @@
 ?>
 
 <?php
-$title = 'Neatline | Browse';
+$title = 'Neatline | Browse Exhibits';
 head(array('content_class' => 'neatline', 'title' => $title));
 ?>
 
@@ -67,13 +67,7 @@ head(array('content_class' => 'neatline', 'title' => $title));
             <td class="name"><?php echo neatline_linkToNeatline($neatline); ?>
                 <div class="slug-preview">/<?php echo $neatline->slug; ?></div>
                 <a href="<?php echo uri('neatline-exhibits/edit/' . $neatline->id); ?>" class="edit">Edit Details</a>
-                <?php echo button_to(
-                            uri('neatline-exhibits/delete-confirm/' . $neatline->id),
-                            null,
-                            'Delete',
-                            array('class' => 'delete-confirm')
-                            );
-                ?>
+                <a href="<?php echo uri('neatline-exhibits/delete-confirm/' . $neatline->id); ?>" class="delete delete-confirm">Delete</a>
             </td>
             <td><a href="<?php echo uri('neatline-exhibits/query/' . $neatline->id); ?>">Edit Query</a></td>
             <td><?php echo neatline_formatDate($neatline->modified); ?></td>

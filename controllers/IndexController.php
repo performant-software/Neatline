@@ -242,7 +242,7 @@ class Neatline_IndexController extends Omeka_Controller_Action
      */
     protected function _getDeleteConfirmMessage($neatline)
     {
-        return 'This will delete the Neatline "'. $neatline->name .'"'
+        return 'This will delete the Neatline "'. $neatline->name .'" '
              . 'and its associated metadata.';
     }
 
