@@ -232,6 +232,9 @@ class Neatline_EditorController extends Omeka_Controller_Action
             $record->setStyle('point_radius', $pointRadius);
         }
 
+        $record->setStatus('space', $spaceStatus);
+        $record->setStatus('time',  $timeStatus);
+
         // If there is novel coverage data, flip on the status.
         if (is_null($originalCoverage) && !is_null($record->geocoverage)) {
             $record->setStatus('space', true);
