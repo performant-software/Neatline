@@ -66,10 +66,16 @@
 
 <body class="neatline <?php echo $neatlineexhibit->slug; ?>">
 
-<!-- The core Neatline partial. -->
-<?php echo $this->partial('neatline/_neatline.php', array(
-    'exhibit' => $neatlineexhibit
-)); ?>
+<?php if ((bool) $neatlineexhibit->public): ?>
+
+    <!-- The core Neatline partial. -->
+    <?php echo $this->partial('neatline/_neatline.php', array(
+        'exhibit' => $neatlineexhibit
+    )); ?>
+
+<?php else: ?>
+    <?php echo $this->partial('neatline/_private.php'); ?>
+<?php endif; ?>
 
 </body>
 </html>
