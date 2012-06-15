@@ -112,6 +112,7 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
         for ($i = 1; $i < 5; $i++) {
             $exhibit = new NeatlineExhibit();
             $exhibit->name = 'Exhibit '.$i;
+            $exhibit->slug = 'slug'.$i;
             $exhibit->public = 1;
             $exhibit->is_map = 1;
             $exhibit->is_timeline = 1;

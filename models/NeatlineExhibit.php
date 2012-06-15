@@ -419,15 +419,11 @@ class NeatlineExhibit extends Omeka_Record implements Zend_Acl_Resource_Interfac
 
     }
 
-    protected function beforeValidate()
-    {
-        $this->name = trim($this->name);
-        $this->slug = generate_slug($this->slug);
-        if (empty($this->slug)) {
-            $this->slug = generate_slug($this->name);
-        }
-    }
-
+    /**
+     * Validate slug format.
+     *
+     * @return void.
+     */
     protected function _validate()
     {
 
