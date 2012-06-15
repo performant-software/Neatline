@@ -303,7 +303,7 @@ function neatline_hiddenElement($name, $value)
 function neatline_linkToNeatline($neatline)
 {
 
-    $uri = uri('neatline-exhibits/show/' . $neatline->slug);
+    $uri = public_uri('neatline-exhibits/show/' . $neatline->slug);
 
     return '<a class="neatline-title" href="' . $uri . '">' . $neatline->name . '</a>';
 
