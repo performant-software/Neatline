@@ -62,6 +62,7 @@ class NeatlineDataRecord extends Omeka_record
     public $stroke_opacity;
     public $stroke_width;
     public $point_radius;
+    public $point_image;
 
     // Coverage.
     public $geocoverage;
@@ -204,7 +205,7 @@ class NeatlineDataRecord extends Omeka_record
 
         // Set the array values.
         $data['title'] =                $this->getTitle();
-        $data['slug'] =                 $this->getSlug();
+        $data['slug'] =                 $this->getNotEmpty('slug');
         $data['description'] =          $this->getDescription();
         $data['vector_color'] =         $this->getStyle('vector_color');
         $data['stroke_color'] =         $this->getStyle('stroke_color');
@@ -214,6 +215,7 @@ class NeatlineDataRecord extends Omeka_record
         $data['stroke_opacity'] =       (int) $this->getStyle('stroke_opacity');
         $data['stroke_width'] =         (int) $this->getStyle('stroke_width');
         $data['point_radius'] =         (int) $this->getStyle('point_radius');
+        $data['point_image'] =          $this->getNotEmpty('point_image');
         $data['start_date'] =           (string) $this->getStartDate();
         $data['end_date'] =             (string) $this->getEndDate();
         $data['start_visible_date'] =   (string) $this->start_visible_date;
@@ -258,6 +260,7 @@ class NeatlineDataRecord extends Omeka_record
         $data['stroke_opacity'] =       (int) get_option('stroke_opacity');
         $data['stroke_width'] =         (int) get_option('stroke_width');
         $data['point_radius'] =         (int) get_option('point_radius');
+        $data['point_image'] =          '';
         $data['left_percent'] =         self::$defaults['left_percent'];
         $data['right_percent'] =        self::$defaults['right_percent'];
         $data['start_date'] =           '';
@@ -574,6 +577,28 @@ class NeatlineDataRecord extends Omeka_record
      * Getters.
      */
 
+
+
+    /**
+     * Set the an attribute if the passed value is not null or ''.
+     *
+     * @param string $attribute The name of the attribute.
+     * @param boolean $value The value to set.
+     *
+     * @return void.
+     */
+    public function getNotEmpty($attribute)
+    {
+
+        if (is_null($this[$attribute])) {
+            return '';
+        }
+
+        else {
+            return $this[$attribute];
+        }
+
+    }
 
     /**
      * Get a style attribute. In order or priority, return the row

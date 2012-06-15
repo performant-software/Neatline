@@ -942,6 +942,8 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
         $record2->stroke_width = 2;
         $record1->point_radius = 3;
         $record2->point_radius = 2;
+        $record1->point_image = 'http://test1.org';
+        $record2->point_image = 'http://test2.org';
         $record1->geocoverage = 'POINT(1,0)';
         $record2->geocoverage = 'POINT(0,1)';
         $record1->space_active = 1;
@@ -977,6 +979,7 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
                     'stroke_opacity' => 60,
                     'stroke_width' => 3,
                     'point_radius' => 3,
+                    'point_image' => 'http://test1.org',
                     'center' => 'CENTER(1)',
                     'zoom' => 4,
                     'wkt' => 'POINT(1,0)',
@@ -1008,6 +1011,7 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
                     'stroke_opacity' => 40,
                     'stroke_width' => 2,
                     'point_radius' => 2,
+                    'point_image' => 'http://test2.org',
                     'center' => 'CENTER(2)',
                     'zoom' => 5,
                     'wkt' => 'POINT(0,1)',

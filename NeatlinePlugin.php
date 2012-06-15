@@ -153,6 +153,7 @@ class NeatlinePlugin
                 `stroke_opacity`              int(10) unsigned NULL,
                 `stroke_width`                int(10) unsigned NULL,
                 `point_radius`                int(10) unsigned NULL,
+                `point_image`                 tinytext COLLATE utf8_unicode_ci NULL,
                 `space_active`                tinyint(1) NULL,
                 `time_active`                 tinyint(1) NULL,
                 `items_active`                tinyint(1) NULL,

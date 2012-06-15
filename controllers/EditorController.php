@@ -177,6 +177,7 @@ class Neatline_EditorController extends Omeka_Controller_Action
         $strokeOpacity =            $_post['stroke_opacity'];
         $strokeWidth =              $_post['stroke_width'];
         $pointRadius =              $_post['point_radius'];
+        $pointImage =               $_post['point_image'];
         $spaceStatus =              (boolean) json_decode($_post['space_active']);
         $timeStatus =               (boolean) json_decode($_post['time_active']);
         $leftPercent =              (int) $_post['left_percent'];
@@ -207,6 +208,7 @@ class Neatline_EditorController extends Omeka_Controller_Action
         $record->setNotEmpty('description', $description);
         $record->setNotEmpty('start_date', $startDate);
         $record->setNotEmpty('end_date', $endDate);
+        $record->setNotEmpty('point_image', $pointImage);
         $record->setPercentages($leftPercent, $rightPercent);
         $record->setGeocoverage($geoCoverage);
         $record->setSlug($slug);

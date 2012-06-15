@@ -98,6 +98,7 @@
             this.strokeOpacity =            this.form.find('input[name="stroke-opacity"]');
             this.strokeWidth =              this.form.find('input[name="stroke-width"]');
             this.pointRadius =              this.form.find('input[name="point-radius"]');
+            this.pointImage =               this.form.find('input[name="point-image"]');
             this.leftPercent =              this.form.find('input[name="left-ambiguity-percentage"]');
             this.rightPercent =             this.form.find('input[name="right-ambiguity-percentage"]');
             this.textInputs =               this.form.find('input[type="text"], textarea');
@@ -700,6 +701,7 @@
             this.strokeOpacity.val(this._data.stroke_opacity);
             this.strokeWidth.val(this._data.stroke_width);
             this.pointRadius.val(this._data.point_radius);
+            this.pointImage.val(this._data.point_image);
             this.leftPercent.val(this._data.left_percent);
             this.rightPercent.val(this._data.right_percent);
             this.startDate.val(this._data.start_date);
@@ -744,34 +746,6 @@
         },
 
         /*
-         * Empty out the form data.
-         */
-        _clearData: function() {
-
-            // Clear inputs.
-            this.title.val('');
-            this.slug.val('');
-            this.vectorColor.val('');
-            this.leftPercent.val(0);
-            this.rightPercent.val(100);
-            this.startDate.val('');
-            this.endDate.val('');
-            this.startVisibleDate.val('');
-            this.endVisibleDate.val('');
-            this.description.val('');
-            this.descriptionEditor.updateFrame();
-            this.parentRecord.empty();
-
-            // Push the new color onto the picker. Need to set the global
-            // _opened tracker to circumvent miniColors' automatic firing of
-            // the change callback on value set.
-            this._opened = true;
-            this.vectorColor.miniColors('value', this.options.colors.purple);
-            this._opened = false;
-
-        },
-
-        /*
          * Get form data.
          */
         _getData: function() {
@@ -800,6 +774,7 @@
             data.stroke_opacity =           parseInt(this.strokeOpacity.val(), 10);
             data.stroke_width =             parseInt(this.strokeWidth.val(), 10);
             data.point_radius =             parseInt(this.pointRadius.val(), 10);
+            data.point_image =              this.pointImage.val();
             data.parent_record_id =         parseInt(this.parentRecord.val(), 10);
 
             // If use-dc is checked, empty description.

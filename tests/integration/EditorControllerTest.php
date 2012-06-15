@@ -44,6 +44,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         'stroke_opacity' => 40,
         'stroke_width' => 5,
         'point_radius' => 7,
+        'point_image' => 'http://test.org',
         'left_percent' => 0,
         'right_percent' => 100,
         'geocoverage' => '[POINT(-1.0, 1.0)]',
@@ -579,6 +580,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         $record->stroke_opacity =       self::$__testParams['stroke_opacity'];
         $record->stroke_width =         self::$__testParams['stroke_width'];
         $record->point_radius =         self::$__testParams['point_radius'];
+        $record->point_image =          self::$__testParams['point_image'];
         $record->left_percent =         self::$__testParams['left_percent'];
         $record->right_percent =        self::$__testParams['right_percent'];
         $record->geocoverage =          self::$__testParams['geocoverage'];
@@ -616,6 +618,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
                 'stroke_opacity' =>     self::$__testParams['stroke_opacity'],
                 'stroke_width' =>       self::$__testParams['stroke_width'],
                 'point_radius' =>       self::$__testParams['point_radius'],
+                'point_image' =>        self::$__testParams['point_image'],
                 'start_date' =>         self::$__testParams['start_date'],
                 'end_date' =>           self::$__testParams['end_date'],
                 'start_visible_date' => self::$__testParams['start_visible_date'],
@@ -673,6 +676,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
                 'stroke_opacity' => get_option('stroke_opacity'),
                 'stroke_width' => get_option('stroke_width'),
                 'point_radius' => get_option('point_radius'),
+                'point_image' => '',
                 'left_percent' => 0,
                 'right_percent' => 100,
                 'start_date' =>'',
@@ -744,6 +748,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
                 'stroke_opacity' => get_option('stroke_opacity'),
                 'stroke_width' => get_option('stroke_width'),
                 'point_radius' => get_option('point_radius'),
+                'point_image' => '',
                 'left_percent' => 0,
                 'right_percent' => 100,
                 'start_date' =>'',
@@ -808,6 +813,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
                 'stroke_opacity' =>     self::$__testParams['stroke_opacity'],
                 'stroke_width' =>       self::$__testParams['stroke_width'],
                 'point_radius' =>       self::$__testParams['point_radius'],
+                'point_image' =>        self::$__testParams['point_image'],
                 'parent_record_id' =>   self::$__testParams['parent_record_id'],
                 'show_bubble' =>        0,
                 'use_dc_metadata' =>    0
@@ -909,6 +915,11 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         );
 
         $this->assertEquals(
+            $record->point_image,
+            self::$__testParams['point_image']
+        );
+
+        $this->assertEquals(
             $record->geocoverage,
             self::$__testParams['geocoverage']
         );
@@ -988,6 +999,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
                 'stroke_opacity' =>     self::$__testParams['stroke_opacity'],
                 'stroke_width' =>       self::$__testParams['stroke_width'],
                 'point_radius' =>       self::$__testParams['point_radius'],
+                'point_image' =>        self::$__testParams['point_image'],
                 'parent_record_id' =>   $record1->id,
                 'show_bubble' =>        0,
                 'use_dc_metadata' =>    1
@@ -1089,6 +1101,11 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         );
 
         $this->assertEquals(
+            $record->point_image,
+            self::$__testParams['point_image']
+        );
+
+        $this->assertEquals(
             $record->geocoverage,
             self::$__testParams['geocoverage']
         );
@@ -1175,6 +1192,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
                 'stroke_opacity' =>     self::$__testParams['stroke_opacity'],
                 'stroke_width' =>       self::$__testParams['stroke_width'],
                 'point_radius' =>       self::$__testParams['point_radius'],
+                'point_image' =>        self::$__testParams['point_image'],
                 'parent_record_id' =>   self::$__testParams['parent_record_id'],
                 'show_bubble' =>        0,
                 'use_dc_metadata' =>    1
@@ -1276,6 +1294,11 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
         );
 
         $this->assertEquals(
+            $record->point_image,
+            self::$__testParams['point_image']
+        );
+
+        $this->assertEquals(
             $record->geocoverage,
             self::$__testParams['geocoverage']
         );
@@ -1366,6 +1389,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
                 'stroke_opacity' =>     self::$__testParams['stroke_opacity'],
                 'stroke_width' =>       self::$__testParams['stroke_width'],
                 'point_radius' =>       self::$__testParams['point_radius'],
+                'point_image' =>        self::$__testParams['point_image'],
                 'parent_record_id' =>   $record1->id,
                 'show_bubble' =>        0,
                 'use_dc_metadata' =>    0
@@ -1428,6 +1452,11 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
             self::$__testParams['point_radius']
         );
 
+        $this->assertEquals(
+            $record->point_image,
+            self::$__testParams['point_image']
+        );
+
     }
 
     /**
@@ -1478,6 +1507,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
                 'stroke_opacity' =>     self::$__testParams['stroke_opacity'],
                 'stroke_width' =>       self::$__testParams['stroke_width'],
                 'point_radius' =>       self::$__testParams['point_radius'],
+                'point_image' =>        self::$__testParams['point_image'],
                 'parent_record_id' =>   $record3->id,
                 'show_bubble' =>        0,
                 'use_dc_metadata' =>    0
@@ -1547,6 +1577,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
                 'stroke_opacity' =>     self::$__testParams['stroke_opacity'],
                 'stroke_width' =>       self::$__testParams['stroke_width'],
                 'point_radius' =>       self::$__testParams['point_radius'],
+                'point_image' =>        self::$__testParams['point_image'],
                 'parent_record_id' =>   self::$__testParams['parent_record_id'],
                 'show_bubble' =>        0,
                 'use_dc_metadata' =>    0
@@ -1608,6 +1639,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
                 'stroke_opacity' =>     self::$__testParams['stroke_opacity'],
                 'stroke_width' =>       self::$__testParams['stroke_width'],
                 'point_radius' =>       self::$__testParams['point_radius'],
+                'point_image' =>        self::$__testParams['point_image'],
                 'parent_record_id' =>   self::$__testParams['parent_record_id'],
                 'show_bubble' =>        0,
                 'use_dc_metadata' =>    1
@@ -1671,6 +1703,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
                 'stroke_opacity' =>     self::$__testParams['stroke_opacity'],
                 'stroke_width' =>       self::$__testParams['stroke_width'],
                 'point_radius' =>       self::$__testParams['point_radius'],
+                'point_image' =>        self::$__testParams['point_image'],
                 'parent_record_id' =>   self::$__testParams['parent_record_id'],
                 'show_bubble' =>        0,
                 'use_dc_metadata' =>    1
@@ -1726,6 +1759,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
                 'stroke_opacity' =>     self::$__testParams['stroke_opacity'],
                 'stroke_width' =>       self::$__testParams['stroke_width'],
                 'point_radius' =>       self::$__testParams['point_radius'],
+                'point_image' =>        self::$__testParams['point_image'],
                 'parent_record_id' =>   self::$__testParams['parent_record_id'],
                 'show_bubble' =>        0,
                 'use_dc_metadata' =>    1
@@ -1788,6 +1822,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
                 'stroke_opacity' =>     self::$__testParams['stroke_opacity'],
                 'stroke_width' =>       self::$__testParams['stroke_width'],
                 'point_radius' =>       self::$__testParams['point_radius'],
+                'point_image' =>        self::$__testParams['point_image'],
                 'parent_record_id' =>   self::$__testParams['parent_record_id'],
                 'show_bubble' =>        0,
                 'use_dc_metadata' =>    1
@@ -1843,6 +1878,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
                 'stroke_opacity' =>     self::$__testParams['stroke_opacity'],
                 'stroke_width' =>       self::$__testParams['stroke_width'],
                 'point_radius' =>       self::$__testParams['point_radius'],
+                'point_image' =>        self::$__testParams['point_image'],
                 'parent_record_id' =>   self::$__testParams['parent_record_id'],
                 'show_bubble' =>        0,
                 'use_dc_metadata' =>    1

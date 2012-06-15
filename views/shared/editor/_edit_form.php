@@ -221,7 +221,7 @@
                 <label>Point Image</label>
                 <div class="input">
                     <div class="inline-inputs">
-                        <input class="xlarge" name="slug" type="text" placeholder="An external graphic to represent a point" />
+                        <input class="xlarge" name="point-image" type="text" placeholder="An external graphic to represent a point" />
                     </div>
                 </div>
             </div>
