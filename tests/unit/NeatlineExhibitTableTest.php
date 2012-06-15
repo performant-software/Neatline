@@ -52,95 +52,29 @@ class Neatline_NeatlineExhibitTableTest extends Omeka_Test_AppTestCase
     public function testGetNeatlinesForBrowser()
     {
 
-        $exhibit1 = new NeatlineExhibit();
-        $exhibit1->name = 'B';
-        $exhibit1->slug = 'test-slug';
-        $exhibit1->public = 1;
-        $exhibit1->is_map = 1;
-        $exhibit1->is_timeline = 1;
-        $exhibit1->is_items = 1;
-        $exhibit1->is_context_band = 1;
-        $exhibit1->added = '2011-12-05 09:16:00';
-        $exhibit1->save();
-
-        $exhibit2 = new NeatlineExhibit();
-        $exhibit2->slug = 'test-slug';
-        $exhibit2->public = 1;
-        $exhibit2->name = 'A';
-        $exhibit2->is_map = 1;
-        $exhibit2->is_timeline = 1;
-        $exhibit2->is_items = 1;
-        $exhibit2->is_context_band = 1;
-        $exhibit2->added = '2011-12-05 09:16:01';
-        $exhibit2->save();
-
-        $exhibit3 = new NeatlineExhibit();
-        $exhibit3->slug = 'test-slug';
-        $exhibit3->public = 1;
-        $exhibit3->name = 'D';
-        $exhibit3->is_map = 1;
-        $exhibit3->is_timeline = 1;
-        $exhibit3->is_items = 1;
-        $exhibit3->is_context_band = 1;
-        $exhibit3->added = '2011-12-05 09:16:02';
-        $exhibit3->save();
-
-        $exhibit4 = new NeatlineExhibit();
-        $exhibit4->slug = 'test-slug';
-        $exhibit4->public = 1;
-        $exhibit4->name = 'C';
-        $exhibit4->is_map = 1;
-        $exhibit4->is_timeline = 1;
-        $exhibit4->is_items = 1;
-        $exhibit4->is_context_band = 1;
-        $exhibit4->added = '2011-12-05 09:16:03';
-        $exhibit4->save();
+        for ($i = 1; $i < 5; $i++) {
+            $exhibit = new NeatlineExhibit();
+            $exhibit->name = 'Exhibit '.$i;
+            $exhibit->public = 1;
+            $exhibit->is_map = 1;
+            $exhibit->is_timeline = 1;
+            $exhibit->is_items = 1;
+            $exhibit->is_context_band = 1;
+            $exhibit->save();
+        }
 
         // By default, order by date descending.
         $exhibits = $this->_exhibitsTable->getNeatlinesForBrowse('added', 'd', 1);
         $this->assertEquals(count($exhibits), 4);
-        $this->assertEquals($exhibits[0]->id, $exhibit4->id);
-        $this->assertEquals($exhibits[1]->id, $exhibit3->id);
-        $this->assertEquals($exhibits[2]->id, $exhibit2->id);
-        $this->assertEquals($exhibits[3]->id, $exhibit1->id);
-
-        // Date ascending.
-        $exhibits = $this->_exhibitsTable->getNeatlinesForBrowse('added', 'a', 1);
-        $this->assertEquals(count($exhibits), 4);
-        $this->assertEquals($exhibits[0]->id, $exhibit1->id);
-        $this->assertEquals($exhibits[1]->id, $exhibit2->id);
-        $this->assertEquals($exhibits[2]->id, $exhibit3->id);
-        $this->assertEquals($exhibits[3]->id, $exhibit4->id);
-
-        // Title descending.
-        $exhibits = $this->_exhibitsTable->getNeatlinesForBrowse('name', 'd', 1);
-        $this->assertEquals(count($exhibits), 4);
-        $this->assertEquals($exhibits[0]->id, $exhibit3->id);
-        $this->assertEquals($exhibits[1]->id, $exhibit4->id);
-        $this->assertEquals($exhibits[2]->id, $exhibit1->id);
-        $this->assertEquals($exhibits[3]->id, $exhibit2->id);
-
-        // Title descending.
-        $exhibits = $this->_exhibitsTable->getNeatlinesForBrowse('name', 'a', 1);
-        $this->assertEquals(count($exhibits), 4);
-        $this->assertEquals($exhibits[0]->id, $exhibit2->id);
-        $this->assertEquals($exhibits[1]->id, $exhibit1->id);
-        $this->assertEquals($exhibits[2]->id, $exhibit4->id);
-        $this->assertEquals($exhibits[3]->id, $exhibit3->id);
 
         // Paging (1).
         set_option('per_page_admin', 2);
         $exhibits = $this->_exhibitsTable->getNeatlinesForBrowse('name', 'a', 1);
         $this->assertEquals(count($exhibits), 2);
-        $this->assertEquals($exhibits[0]->id, $exhibit2->id);
-        $this->assertEquals($exhibits[1]->id, $exhibit1->id);
 
         // Paging (2).
         $exhibits = $this->_exhibitsTable->getNeatlinesForBrowse('name', 'a', 2);
         $this->assertEquals(count($exhibits), 2);
-        $this->assertEquals($exhibits[0]->id, $exhibit4->id);
-        $this->assertEquals($exhibits[1]->id, $exhibit3->id);
-
     }
 
     /**
@@ -152,11 +86,16 @@ class Neatline_NeatlineExhibitTableTest extends Omeka_Test_AppTestCase
     public function testGetPaginationSettings()
     {
 
-        // Create exhibits.
-        $exhibit1 = $this->helper->_createNeatline();
-        $exhibit2 = $this->helper->_createNeatline();
-        $exhibit3 = $this->helper->_createNeatline();
-        $exhibit4 = $this->helper->_createNeatline();
+        for ($i = 1; $i < 5; $i++) {
+            $exhibit = new NeatlineExhibit();
+            $exhibit->name = 'Exhibit '.$i;
+            $exhibit->public = 1;
+            $exhibit->is_map = 1;
+            $exhibit->is_timeline = 1;
+            $exhibit->is_items = 1;
+            $exhibit->is_context_band = 1;
+            $exhibit->save();
+        }
 
         // Check.
         set_option('per_page_admin', 2);

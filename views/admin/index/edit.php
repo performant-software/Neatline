@@ -32,16 +32,14 @@ queue_js('tiny_mce/tiny_mce');
 ?>
 
 <?php
-head(array('content_class' => 'neatline'));
+$title = 'Neatline | Edit "'.$neatlineexhibit->name.'"';
+head(array('content_class' => 'neatline', 'title' => $title));
 ?>
 
-<?php echo $this->partial('index/_header.php', array(
-    'subtitle' => 'Edit "' . $exhibit->name . '"',
-    'add_button_uri' => 'neatline-exhibits/add',
-    'add_button_text' => 'Create an Exhibit'
-)); ?>
+<h1><?php echo $title; ?></h1>
 
 <div id="primary">
+    <?php echo flash(); ?>
     <?php echo $form; ?>
 </div>
 

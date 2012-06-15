@@ -306,6 +306,8 @@
                 item.stroke_opacity = item.stroke_opacity / 100;
                 item.select_opacity = item.select_opacity / 100;
 
+                console.log(item);
+
                 // Construct the style.
                 var style = self._getStyleMap(
                     item.vector_color,
@@ -314,6 +316,7 @@
                     item.stroke_opacity,
                     item.stroke_width,
                     item.point_radius,
+                    item.point_image,
                     item.highlight_color,
                     item.select_opacity
                 );
@@ -704,6 +707,7 @@
             strokeOpacity,
             strokeWidth,
             pointRadius,
+            pointImage,
             highlightColor,
             selectOpacity
         ) {
@@ -716,6 +720,7 @@
                     strokeColor: strokeColor,
                     strokeOpacity: strokeOpacity,
                     pointRadius: pointRadius,
+                    externalGraphic: pointImage,
                     strokeWidth: strokeWidth
                 }),
                 'select': new OpenLayers.Style({
@@ -724,6 +729,7 @@
                     strokeColor: highlightColor,
                     strokeOpacity: strokeOpacity,
                     pointRadius: pointRadius,
+                    externalGraphic: pointImage,
                     strokeWidth: strokeWidth
                 }),
                 'temporary': new OpenLayers.Style({
@@ -732,6 +738,7 @@
                     strokeColor: highlightColor,
                     strokeOpacity: strokeOpacity,
                     pointRadius: pointRadius,
+                    externalGraphic: pointImage,
                     strokeWidth: strokeWidth
                 })
             });

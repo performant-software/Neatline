@@ -44,6 +44,7 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         'stroke_opacity' => 40,
         'stroke_width' => 5,
         'point_radius' => 7,
+        'point_image' => 'http://test.org',
         'left_percent' => 0,
         'right_percent' => 100,
         'geocoverage' => '[POINT(-1.0, 1.0)]',
@@ -102,6 +103,7 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         $record->stroke_opacity =               50;
         $record->stroke_width =                 3;
         $record->point_radius =                 3;
+        $record->point_image =                  'http://test.org';
         $record->geocoverage =                  'POINT()';
         $record->left_percent =                 30;
         $record->right_percent =                80;
@@ -134,6 +136,7 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         $this->assertEquals($record->stroke_opacity, 50);
         $this->assertEquals($record->stroke_width, 3);
         $this->assertEquals($record->point_radius, 3);
+        $this->assertEquals($record->point_image, 'http://test.org');
         $this->assertEquals($record->geocoverage, 'POINT()');
         $this->assertEquals($record->left_percent, 30);
         $this->assertEquals($record->right_percent, 80);
@@ -959,6 +962,39 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         $this->assertEquals($record->use_dc_metadata, 1);
         $record->setUseDcMetadata(0);
         $this->assertEquals($record->use_dc_metadata, 0);
+
+    }
+
+    /**
+     * getNotEmpty() should return '' when the attribute is null.
+     *
+     * @return void.
+     */
+    public function testGetNotEmptyWithEmptyValue()
+    {
+
+        // Create a record.
+        $record = $this->helper->_createRecord();
+
+        // Test with empty value, check for set.
+        $this->assertEquals($record->getNotEmpty('slug'), '');
+
+    }
+
+    /**
+     * getNotEmpty() should return the value when the attribute is not null.
+     *
+     * @return void.
+     */
+    public function testGetNotEmptyWithNotEmptyValue()
+    {
+
+        // Create a record.
+        $record = $this->helper->_createRecord();
+        $record->slug = 'slug';
+
+        // Test with empty value, check for set.
+        $this->assertEquals($record->getNotEmpty('slug'), 'slug');
 
     }
 
@@ -1876,6 +1912,7 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         $record->stroke_opacity =       self::$__testParams['stroke_opacity'];
         $record->stroke_width =         self::$__testParams['stroke_width'];
         $record->point_radius =         self::$__testParams['point_radius'];
+        $record->point_image =          self::$__testParams['point_image'];
         $record->left_percent =         self::$__testParams['left_percent'];
         $record->right_percent =        self::$__testParams['right_percent'];
         $record->geocoverage =          self::$__testParams['geocoverage'];
@@ -1900,6 +1937,7 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
                 'stroke_opacity' =>     self::$__testParams['stroke_opacity'],
                 'stroke_width' =>       self::$__testParams['stroke_width'],
                 'point_radius' =>       self::$__testParams['point_radius'],
+                'point_image' =>        self::$__testParams['point_image'],
                 'start_date' =>         self::$__testParams['start_date'],
                 'end_date' =>           self::$__testParams['end_date'],
                 'start_visible_date' => self::$__testParams['start_visible_date'],
@@ -1946,6 +1984,7 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         $record->stroke_opacity =       '30';
         $record->stroke_width =         '5';
         $record->point_radius =         '6';
+        $record->point_image =          self::$__testParams['point_image'];
         $record->left_percent =         '0';
         $record->right_percent =        '100';
         $record->geocoverage =          self::$__testParams['geocoverage'];
@@ -1970,6 +2009,7 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
                 'stroke_opacity' =>     30,
                 'stroke_width' =>       5,
                 'point_radius' =>       6,
+                'point_image' =>        self::$__testParams['point_image'],
                 'start_date' =>         self::$__testParams['start_date'],
                 'end_date' =>           self::$__testParams['end_date'],
                 'start_visible_date' => self::$__testParams['start_visible_date'],
@@ -2086,6 +2126,11 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
 
         $this->assertContains(
             '"point_radius":' . (int) get_option('point_radius'),
+            $json
+        );
+
+        $this->assertContains(
+            '"point_image":""',
             $json
         );
 

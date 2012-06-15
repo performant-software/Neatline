@@ -128,11 +128,13 @@ class Neatline_FixturesController extends Omeka_Controller_Action
     public function exhibitformAction()
     {
 
+        $exhibit = new NeatlineExhibit;
+        
         // Supress the default Zend layout-sniffer functionality.
         $this->_helper->viewRenderer->setNoRender(true);
-
+        
         // Render.
-        echo new AddExhibitForm;
+        echo new Neatline_Form_NeatlineDetails(array('neatline' => $exhibit));
 
     }
 

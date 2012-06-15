@@ -219,7 +219,7 @@ class Neatline_FixtureBuilderTest extends Omeka_Test_AppTestCase
             ->setParams(array('id' => $exhibit->id)
         );
 
-        $this->dispatch('neatline-exhibits/' . $exhibit->id . '/data/udi');
+        $this->dispatch('neatline-exhibits/udi/' . $exhibit->id);
         $response = $this->getResponse()->getBody('default');
 
         fwrite($fixture, $response);
@@ -326,6 +326,7 @@ class Neatline_FixtureBuilderTest extends Omeka_Test_AppTestCase
         $record1->space_active = 1;
         $record1->parent_record_id = 2;
         $record1->use_dc_metadata = 0;
+        $record1->show_bubble = 1;
         $record1->save();
 
         // Mock records for parent record select.
@@ -419,7 +420,7 @@ class Neatline_FixtureBuilderTest extends Omeka_Test_AppTestCase
             )
         );
 
-        $this->dispatch('neatline-exhibits/' . $exhibit->id . '/data/simile');
+        $this->dispatch('neatline-exhibits/simile/' . $exhibit->id);
         $response = $this->getResponse()->getBody('default');
 
         fwrite($fixture, $response);

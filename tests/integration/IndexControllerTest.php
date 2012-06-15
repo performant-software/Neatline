@@ -101,16 +101,6 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
     }
 
     /**
-     * When there are exhibits, the browse view should list them.
-     *
-     * @return void.
-     */
-    public function testBrowseWithExhibits()
-    {
-
-    }
-
-    /**
      * When there are more exhibits than can fit on the page, show
      * pagination.
      *
@@ -119,15 +109,16 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
     public function testBrowsePagination()
     {
 
-        // Create entities.
-        $exhibit1 = $this->helper->_createNeatline();
-        $exhibit2 = $this->helper->_createNeatline();
-        $exhibit3 = $this->helper->_createNeatline();
-        $exhibit4 = $this->helper->_createNeatline();
-        $exhibit1->save();
-        $exhibit2->save();
-        $exhibit3->save();
-        $exhibit4->save();
+        for ($i = 1; $i < 5; $i++) {
+            $exhibit = new NeatlineExhibit();
+            $exhibit->name = 'Exhibit '.$i;
+            $exhibit->public = 1;
+            $exhibit->is_map = 1;
+            $exhibit->is_timeline = 1;
+            $exhibit->is_items = 1;
+            $exhibit->is_context_band = 1;
+            $exhibit->save();
+        }
 
         // Set the paging limit.
         set_option('per_page_admin', 2);
@@ -135,7 +126,7 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
         $this->dispatch('neatline-exhibits');
 
         // Title.
-        $this->assertQueryCount('table.neatline tr td.title', 2);
+        $this->assertQueryCount('td.title', 2);
         $this->assertQuery('div.pagination');
 
     }
@@ -152,11 +143,11 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
         $this->dispatch('neatline-exhibits/add');
 
         // Check for fields.
-        $this->assertQuery('input[name="title"]');
+        $this->assertQuery('input[name="name"]');
         $this->assertQuery('textarea[name="description"]');
         $this->assertQuery('input[name="slug"]');
         $this->assertQuery('input[name="public"]');
-        $this->assertQuery('select[name="image"]');
+        $this->assertQuery('select[name="image_id"]');
 
         // TODO: Test the images dropdown. This is complicated by the fact
         // that the Omeka files table checks for a real file in the archives
@@ -230,7 +221,7 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
         // Check for the error.
         $this->assertQueryContentContains(
             'ul.errors li',
-            'Enter a slug.'
+            'The slug cannot be empty.'
         );
 
         // No exhibit should have been created.
@@ -267,7 +258,7 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
         // Check for the error.
         $this->assertQueryContentContains(
             'ul.errors li',
-            'Lowercase letters, numbers, and hyphens only.'
+            'The slug can only contain lowercase letters, numbers, and hyphens..'
         );
 
         // No exhibit should have been created.
@@ -304,7 +295,7 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
         // Check for the error.
         $this->assertQueryContentContains(
             'ul.errors li',
-            'Lowercase letters, numbers, and hyphens only.'
+            'The slug can only contain lowercase letters, numbers, and hyphens..'
         );
 
         // No exhibit should have been created.
@@ -341,7 +332,7 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
         // Check for the error.
         $this->assertQueryContentContains(
             'ul.errors li',
-            'Lowercase letters, numbers, and hyphens only.'
+            'The slug can only contain lowercase letters, numbers, and hyphens..'
         );
 
         // No exhibit should have been created.
@@ -378,7 +369,7 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
         // Check for the error.
         $this->assertNotQueryContentContains(
             'ul.errors li',
-            'Lowercase letters, numbers, and hyphens only.'
+            'The slug can only contain lowercase letters, numbers, and hyphens..'
         );
 
         // No exhibit should have been created.
@@ -418,7 +409,7 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
         // Check for the error.
         $this->assertQueryContentContains(
             'ul.errors li',
-            'Slug taken.'
+            'The slug is already in use.'
         );
 
         // No exhibit should have been created.
@@ -436,11 +427,10 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
 
         $this->request->setMethod('POST')
             ->setPost(array(
-                'title' => 'Test Exhibit',
+                'name' => 'Test Exhibit',
                 'description' => 'Test description.',
                 'slug' => 'test-exhibit',
-                'public' => 1,
-                'image' => 'none'
+                'public' => 1
             )
         );
 
@@ -490,10 +480,10 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
         $exhibit = $this->helper->_createNeatline();
 
         // Hit the edit form.
-        $this->dispatch('neatline-exhibits/edit/test-exhibit');
+        $this->dispatch('neatline-exhibits/edit/'.$exhibit->id);
 
         // Title.
-        $this->assertXpath('//input[@name="title"][@value="Test Exhibit"]');
+        $this->assertXpath('//input[@name="name"][@value="Test Exhibit"]');
 
         // Description.
         $this->assertXpathContentContains(
@@ -528,7 +518,7 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
         );
 
         // Submit the form.
-        $this->dispatch('neatline-exhibits/edit/test-exhibit');
+        $this->dispatch('neatline-exhibits/edit/'.$exhibit->id);
 
         // Should redirect to the add view.
         $this->assertModule('neatline');
@@ -562,7 +552,7 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
         );
 
         // Submit the form.
-        $this->dispatch('neatline-exhibits/edit/test-exhibit');
+        $this->dispatch('neatline-exhibits/edit/'.$exhibit->id);
 
         // Should redirect to the add view.
         $this->assertModule('neatline');
@@ -572,7 +562,7 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
         // Check for the error.
         $this->assertQueryContentContains(
             'ul.errors li',
-            'Enter a slug.'
+            'The slug cannot be empty.'
         );
 
     }
@@ -596,7 +586,7 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
         );
 
         // Submit the form.
-        $this->dispatch('neatline-exhibits/edit/test-exhibit');
+        $this->dispatch('neatline-exhibits/edit/'.$exhibit->id);
 
         // Should redirect to the add view.
         $this->assertModule('neatline');
@@ -606,7 +596,7 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
         // Check for the error.
         $this->assertQueryContentContains(
             'ul.errors li',
-            'Lowercase letters, numbers, and hyphens only.'
+            'The slug can only contain lowercase letters, numbers, and hyphens..'
         );
 
     }
@@ -630,7 +620,7 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
         );
 
         // Submit the form.
-        $this->dispatch('neatline-exhibits/edit/test-exhibit');
+        $this->dispatch('neatline-exhibits/edit/'.$exhibit->id);
 
         // Should redirect to the add view.
         $this->assertModule('neatline');
@@ -640,7 +630,7 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
         // Check for the error.
         $this->assertQueryContentContains(
             'ul.errors li',
-            'Lowercase letters, numbers, and hyphens only.'
+            'The slug can only contain lowercase letters, numbers, and hyphens..'
         );
 
     }
@@ -664,7 +654,7 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
         );
 
         // Submit the form.
-        $this->dispatch('neatline-exhibits/edit/test-exhibit');
+        $this->dispatch('neatline-exhibits/edit/'.$exhibit->id);
 
         // Should redirect to the add view.
         $this->assertModule('neatline');
@@ -674,7 +664,7 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
         // Check for the error.
         $this->assertQueryContentContains(
             'ul.errors li',
-            'Lowercase letters, numbers, and hyphens only.'
+            'The slug can only contain lowercase letters, numbers, and hyphens..'
         );
 
     }
@@ -698,7 +688,7 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
         );
 
         // Submit the form.
-        $this->dispatch('neatline-exhibits/edit/test-exhibit');
+        $this->dispatch('neatline-exhibits/edit/'.$exhibit->id);
 
         // Should redirect to the add view.
         $this->assertModule('neatline');
@@ -708,7 +698,7 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
         // Check for the error.
         $this->assertNotQueryContentContains(
             'ul.errors li',
-            'Lowercase letters, numbers, and hyphens only.'
+            'The slug can only contain lowercase letters, numbers, and hyphens..'
         );
 
     }
@@ -731,6 +721,7 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
             $is_timeline = 1,
             $is_undated_items = 1
         );
+
         $exhibit2 = $this->helper->_createNeatline(
             $name = 'Test Exhibit 2',
             $description = 'Test description 2.',
@@ -749,7 +740,7 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
         );
 
         // No exhibits at the start.
-        $this->dispatch('neatline-exhibits/edit/test-exhibit-1');
+        $this->dispatch('neatline-exhibits/edit/'.$exhibit1->id);
 
         // Should redirect to the add view.
         $this->assertModule('neatline');
@@ -759,7 +750,7 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
         // Check for the error.
         $this->assertQueryContentContains(
             'ul.errors li',
-            'Slug taken.'
+            'The slug is already in use.'
         );
 
     }
@@ -778,16 +769,15 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
         // Valid form.
         $this->request->setMethod('POST')
             ->setPost(array(
-                'title' => 'New Exhibit',
+                'name' => 'New Exhibit',
                 'description' => 'New description.',
                 'slug' => 'new-exhibit',
-                'public' => 0,
-                'image' => 'none'
+                'public' => 0
             )
         );
 
         // Submit the form.
-        $this->dispatch('neatline-exhibits/edit/test-exhibit');
+        $this->dispatch('neatline-exhibits/edit/'.$exhibit->id);
 
         // Get the exhibit and examine.
         $exhibit = $this->_exhibitsTable->find(1);
@@ -800,55 +790,302 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
     }
 
     /**
-     * Test delete confirm page.
+     * The /openlayers route should return a well-formed JSON string for
+     * the map block.
      *
      * @return void.
      */
-    public function testDeleteConfirm()
+    public function testOpenlayers()
     {
 
-        // Create exhibit.
-        $exhibit = $this->helper->_createNeatline();
+        // Create an exhibit and items.
+        $neatline = $this->helper->_createNeatline();
+        $item1 = $this->helper->_createItem();
+        $item2 = $this->helper->_createItem();
 
-        // Hit the route.
-        $this->dispatch('neatline-exhibits/delete/' . $exhibit->id);
-        $this->assertResponseCode(200);
+        // Create two records.
+        $record1 = new NeatlineDataRecord($item1, $neatline);
+        $record2 = new NeatlineDataRecord($item2, $neatline);
 
-        // Check the form and action.
-        $action = neatline_getDeleteExhibitUrl($exhibit->id);
-        $this->assertQuery('form#delete-neatline[action="' . $action . '"]');
+        // Populate map-relevant attributes.
+        $record1->title = 'Item 1 Title';
+        $record2->title = 'Item 2 Title';
+        $record1->slug = 'slug-1';
+        $record2->slug = 'slug-2';
+        $record1->vector_color = '#ffffff';
+        $record2->vector_color = '#000000';
+        $record1->vector_opacity = 60;
+        $record2->vector_opacity = 40;
+        $record1->stroke_opacity = 60;
+        $record2->stroke_opacity = 40;
+        $record1->stroke_color = '#ffffff';
+        $record2->stroke_color = '#000000';
+        $record1->stroke_width = 3;
+        $record2->stroke_width = 2;
+        $record1->point_radius = 3;
+        $record2->point_radius = 2;
+        $record1->geocoverage = 'POINT(1,0)';
+        $record2->geocoverage = 'POINT(0,1)';
+        $record1->space_active = 1;
+        $record2->space_active = 1;
+        $record1->map_bounds = 'CENTER(1)';
+        $record2->map_bounds = 'CENTER(2)';
+        $record1->map_zoom = 4;
+        $record2->map_zoom = 5;
+        $record1->start_visible_date = '1864-04-26 14:39:22';
+        $record2->start_visible_date = '1964-04-26 14:39:22';
+        $record1->end_visible_date = '1916-04-23 12:45:34';
+        $record2->end_visible_date = '2016-04-23 12:45:34';
+        $record1->save();
+        $record2->save();
+
+        // Hit the route and capture the response.
+        $this->dispatch('neatline-exhibits/openlayers/' . $neatline->id);
+        $response = $this->getResponse()->getBody('default');
+
+        // Test the raw construction with no available DC values.
+        $this->assertContains('"id":' . $record1->id, $response);
+        $this->assertContains('"item_id":' . $item1->id, $response);
+        $this->assertContains('"title":"Item 1 Title"', $response);
+        $this->assertContains('"slug":"slug-1"', $response);
+        $this->assertContains('"vector_color":"#ffffff"', $response);
+        $this->assertContains('"vector_opacity":60', $response);
+        $this->assertContains('"stroke_opacity":60', $response);
+        $this->assertContains('"stroke_color":"#ffffff"', $response);
+        $this->assertContains('"stroke_width":3', $response);
+        $this->assertContains('"point_radius":3', $response);
+        $this->assertContains('"center":"CENTER(1)"', $response);
+        $this->assertContains('"zoom":4', $response);
+        $this->assertContains('"wkt":"POINT(1,0)"', $response);
+        $this->assertContains('"start_visible_date":"1864-04-26 14:39:22"', $response);
+        $this->assertContains('"end_visible_date":"1916-04-23 12:45:34"', $response);
+        $this->assertContains('"id":' . $record2->id, $response);
+        $this->assertContains('"item_id":' . $item2->id, $response);
+        $this->assertContains('"title":"Item 1 Title"', $response);
+        $this->assertContains('"slug":"slug-2"', $response);
+        $this->assertContains('"vector_color":"#000000"', $response);
+        $this->assertContains('"vector_opacity":40', $response);
+        $this->assertContains('"stroke_opacity":40', $response);
+        $this->assertContains('"stroke_color":"#000000"', $response);
+        $this->assertContains('"stroke_width":2', $response);
+        $this->assertContains('"point_radius":2', $response);
+        $this->assertContains('"center":"CENTER(2)"', $response);
+        $this->assertContains('"zoom":5', $response);
+        $this->assertContains('"wkt":"POINT(0,1)"', $response);
+        $this->assertContains('"start_visible_date":"1964-04-26 14:39:22"', $response);
+        $this->assertContains('"end_visible_date":"2016-04-23 12:45:34"', $response);
 
     }
 
     /**
-     * Test delete.
+     * The /simile route should return a well-formed JSON string for the
+     * timeline block.
      *
      * @return void.
      */
-    public function testDeleteSuccess()
+    public function testSimile()
     {
 
-        // Create exhibits.
-        $exhibit1 = $this->helper->_createNeatline();
-        $exhibit2 = $this->helper->_createNeatline();
+        // Create an exhibit and items.
+        $neatline = $this->helper->_createNeatline();
+        $item1 = $this->helper->_createItem();
+        $item2 = $this->helper->_createItem();
 
-        // 2 exhibits.
-        $this->assertEquals($this->_exhibitsTable->count(), 2);
+        // Create two records.
+        $record1 = new NeatlineDataRecord($item1, $neatline);
+        $record2 = new NeatlineDataRecord($item2, $neatline);
 
-        // Confirm delete.
-        $this->request->setMethod('POST')
-            ->setPost(array(
-                'confirmed' => 'confirmed'
+        // Populate map-relevant attributes.
+        $record1->title = 'Item 1 Title';
+        $record2->title = 'Item 2 Title';
+        $record1->slug = 'slug-1';
+        $record2->slug = 'slug-2';
+        $record1->description = 'Item 1 description.';
+        $record2->description = 'Item 2 description.';
+        $record1->start_date = '1564-04-26 14:39:22';
+        $record2->start_date = '1564-04-26 14:39:22';
+        $record1->end_date = '1616-04-23 12:45:34';
+        $record2->end_date = '1616-04-23 12:45:34';
+        $record1->vector_color = '#ffffff';
+        $record2->vector_color = '#000000';
+        $record1->left_percent = 0;
+        $record2->left_percent = 0;
+        $record1->right_percent = 100;
+        $record1->right_percent = 100;
+        $record1->time_active = 1;
+        $record2->time_active = 1;
+        $record1->save();
+        $record2->save();
+
+        // Hit the route and capture the response.
+        $this->dispatch('neatline-exhibits/simile/' . $neatline->id);
+        $response = $this->getResponse()->getBody('default');
+
+        // Check format.
+        $this->assertContains(
+            '"dateTimeFormat":"iso8601"',
+            $response
+        );
+
+        $this->assertContains(
+            '"events":',
+            $response
+        );
+
+        $this->assertContains(
+            '"eventID":' . $record1->id,
+            $response
+        );
+
+        $this->assertContains(
+            '"title":"' . $record1->title . '"',
+            $response
+        );
+
+        $this->assertContains(
+            '"slug":"' . $record1->slug . '"',
+            $response
+        );
+
+        $this->assertContains(
+            '"description":"' . $record1->description . '"',
+            $response
+        );
+
+        $this->assertContains(
+            '"color":"' . $record1->vector_color . '"',
+            $response
+        );
+
+        $this->assertContains(
+            '"left_ambiguity":' . $record1->left_percent,
+            $response
+        );
+
+        $this->assertContains(
+            '"right_ambiguity":' . $record1->right_percent,
+            $response
+        );
+
+        $this->assertContains(
+            '"start":"1564-04-26 14:39:22"',
+            $response
+        );
+
+        $this->assertContains(
+            '"end":"1616-04-23 12:45:34"',
+            $response
+        );
+
+        $this->assertContains(
+            '"dateTimeFormat":"iso8601"',
+            $response
+        );
+
+        $this->assertContains(
+            '"events":',
+            $response
+        );
+
+        $this->assertContains(
+            '"eventID":' . $record2->id,
+            $response
+        );
+
+        $this->assertContains(
+            '"title":"' . $record2->title . '"',
+            $response
+        );
+
+        $this->assertContains(
+            '"slug":"' . $record2->slug . '"',
+            $response
+        );
+
+        $this->assertContains(
+            '"description":"' . $record2->description . '"',
+            $response
+        );
+
+        $this->assertContains(
+            '"color":"' . $record2->vector_color . '"',
+            $response
+        );
+
+        $this->assertContains(
+            '"left_ambiguity":' . $record2->left_percent,
+            $response
+        );
+
+        $this->assertContains(
+            '"right_ambiguity":' . $record2->right_percent,
+            $response
+        );
+
+    }
+
+    /**
+     * The /udi route should return well-formed markup for the items pane.
+     *
+     * @return void.
+     */
+    public function testUdi()
+    {
+
+        // Create an exhibit and item.
+        $neatline = $this->helper->_createNeatline();
+
+        // Create record1.
+        $record1 = new NeatlineDataRecord(null, $neatline);
+        $record1->title = 'Item 1 Title';
+        $record1->slug = 'slug-1';
+        $record1->description = 'Item 1 description.';
+        $record1->items_active = 1;
+        $record1->start_visible_date = '1864-04-26 14:39:22';
+        $record1->end_visible_date = '1916-04-23 12:45:34';
+        $record1->save();
+
+        // Create record2.
+        $record2 = new NeatlineDataRecord(null, $neatline);
+        $record2->title = 'Item 2 Title';
+        $record2->slug = 'slug-2';
+        $record2->description = 'Item 2 description.';
+        $record2->items_active = 1;
+        $record2->start_visible_date = '1964-04-26 14:39:22';
+        $record2->end_visible_date = '2016-04-23 12:45:34';
+        $record2->save();
+
+        // Hit the route.
+        $this->dispatch('neatline-exhibits/udi/' . $neatline->id);
+        $response = $this->getResponse()->getBody('default');
+
+        // JSON -> array.
+        $json = json_decode($response);
+
+        // Check.
+        $this->assertEquals(
+            $json,
+            array(
+                (object) array(
+                    'id' => $record1->id,
+                    'title' => 'Item 1 Title',
+                    'slug' => 'slug-1',
+                    'description' => 'Item 1 description.',
+                    'start_visible_date' => '1864-04-26 14:39:22',
+                    'end_visible_date' => '1916-04-23 12:45:34'
+                ),
+                (object) array(
+                    'id' => $record2->id,
+                    'title' => 'Item 2 Title',
+                    'slug' => 'slug-2',
+                    'description' => 'Item 2 description.',
+                    'start_visible_date' => '1964-04-26 14:39:22',
+                    'end_visible_date' => '2016-04-23 12:45:34'
+                )
             )
         );
 
-        // Hit the route.
-        $this->dispatch('neatline-exhibits/delete/' . $exhibit1->id);
-
-        // 1 exhibit, check identity.
-        $this->assertEquals($this->_exhibitsTable->count(), 1);
-        $this->assertNotNull($this->_exhibitsTable->find($exhibit2->id));
-
     }
+    
 
 }

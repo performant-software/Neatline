@@ -33,7 +33,6 @@ class NeatlinePlugin
         'upgrade',
         'define_routes',
         'admin_theme_header',
-        'public_theme_header',
         'admin_append_to_plugin_uninstall_message',
         'before_delete_item'
     );
@@ -136,7 +135,7 @@ class NeatlinePlugin
                 `exhibit_id`                  int(10) unsigned NULL,
                 `parent_record_id`            int(10) unsigned NULL,
                 `show_bubble`                 tinyint(1) NULL,
-                `title`                       tinytext COLLATE utf8_unicode_ci NULL,
+                `title`                       mediumtext COLLATE utf8_unicode_ci NULL,
                 `slug`                        varchar(100) NULL,
                 `description`                 mediumtext COLLATE utf8_unicode_ci NULL,
                 `start_date`                  tinytext COLLATE utf8_unicode_ci NULL,
@@ -154,6 +153,7 @@ class NeatlinePlugin
                 `stroke_opacity`              int(10) unsigned NULL,
                 `stroke_width`                int(10) unsigned NULL,
                 `point_radius`                int(10) unsigned NULL,
+                `point_image`                 tinytext COLLATE utf8_unicode_ci NULL,
                 `space_active`                tinyint(1) NULL,
                 `time_active`                 tinyint(1) NULL,
                 `items_active`                tinyint(1) NULL,
@@ -231,47 +231,6 @@ class NeatlinePlugin
               neatline_queueAdminCss();
         }
 
-        // Queue static assets for the Neatline editor.
-        if ($request->getModuleName() == 'neatline' &&
-            $request->getControllerName() == 'editor' &&
-            $request->getActionName() == 'index') {
-              $exhibit = __v()->exhibit;
-              neatline_queueNeatlineAssets($exhibit);
-              neatline_queueEditorAssets();
-        }
-
-    }
-
-    /**
-     * Push public-facing Neatline assets.
-     *
-     * @return void
-     */
-    public function publicThemeHeader($request)
-    {
-
-        // Queue static assets for public-facing Neatline exhibits.
-        if ($request->getModuleName() == 'neatline' &&
-            $request->getControllerName() == 'public') {
-
-            $exhibit = __v()->exhibit;
-            $actionName = $request->getActionName();
-            neatline_queueNeatlineAssets($exhibit);
-
-            if ($actionName == 'show') {
-                neatline_queueInThemeAssets();
-            }
-
-            else if ($actionName == 'fullscreen') {
-                neatline_queueFullscreenAssets();
-            }
-
-            else if ($actionName == 'embed') {
-                neatline_queueEmbedAssets();
-            }
-
-        }
-
     }
 
     /**
@@ -329,6 +288,7 @@ class NeatlinePlugin
      **/
     public function beforeDeleteItem($item)
     {
+
         $db      = get_db();
         $table   = $db->getTable('NeatlineDataRecord');
         $alias   = $table->getTableAlias();
@@ -349,6 +309,7 @@ class NeatlinePlugin
             $db->rollback();
             throw $e;
         }
+
     }
 
 }

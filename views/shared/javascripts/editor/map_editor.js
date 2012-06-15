@@ -303,6 +303,7 @@
                 this.record.data.stroke_opacity,
                 this.record.data.stroke_width,
                 this.record.data.point_radius,
+                this.record.data.point_image,
                 this.record.data.highlight_color,
                 this.record.data.select_opacity
             );
@@ -342,6 +343,7 @@
                         record.data.stroke_opacity,
                         record.data.stroke_width,
                         record.data.point_radius,
+                        record.data.point_image,
                         record.data.highlight_color,
                         record.data.select_opacity
                     );

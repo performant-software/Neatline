@@ -402,7 +402,7 @@ div.slug-editor a {
 }
 
 table.map-styles {
-    margin: 10px 0;
+    margin-bottom: 5px;
 }
 
 table.map-styles td {
@@ -847,7 +847,7 @@ table#header-row {
     border-left: 1px solid #745982;
     border-right: 1px solid #745982;
     border-bottom: 1px solid #745982;
-    z-index: 1000;
+    z-index: 400;
 }
 
 .dropdown-content button {

@@ -163,7 +163,7 @@ div.title-tip {
 
 #timeline {
     z-index: 0;
-    opacity: 0.85;
+    opacity: 0.9;
 }
 
 #timeline:hover {
@@ -226,7 +226,7 @@ div.title-tip {
 #items {
     background-color: #fff;
     z-index: 10;
-    opacity: 0.85;
+    opacity: 0.9;
     overflow-y: scroll;
 }
 

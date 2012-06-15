@@ -885,10 +885,10 @@
                     this.positions = {
 
                         map: {
-                            height: this.height,
-                            width:  this.majorWidth,
-                            top:    0,
-                            left:   this.minorWidth
+                            height: null,
+                            width:  null,
+                            top:    null,
+                            left:   null
                         },
 
                         timeline: {

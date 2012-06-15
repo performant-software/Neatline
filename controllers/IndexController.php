@@ -35,42 +35,21 @@ class Neatline_IndexController extends Omeka_Controller_Action
     public function init()
     {
 
-        $this->_neatlinesTable = $this->getTable('NeatlineExhibit');
-        $this->_mapsTable = $this->getTable('NeatlineMapsMap');
+        $modelName = 'NeatlineExhibit';
+        if (version_compare(OMEKA_VERSION, '2.0-dev', '>=')) {
+            $this->_helper->db->setDefaultModelName($modelName);
+        } else {
+            $this->_modelClass = $modelName;
+        }
 
-    }
+        $this->_browseRecordsPerPage = get_option('per_page_admin');
 
-    /**
-     * Redirect index route to browse.
-     *
-     * @return void
-     */
-    public function indexAction()
-    {
+        try {
+            $this->_table = $this->getTable($modelName);
+            $this->aclResource = $this->findById();
+        } catch (Omeka_Controller_Exception_404 $e) {}
 
-        $this->_redirect('neatline-exhibits/browse');
-
-    }
-
-    /**
-     * Show list of existing Neatlines.
-     *
-     * @return void
-     */
-    public function browseAction()
-    {
-
-        $sortField =    $this->_request->getParam('sort_field');
-        $sortDir =      $this->_request->getParam('sort_dir');
-        $page =         $this->_request->page;
-
-        // Push pagination variables.
-        $this->view->pagination = $this->_neatlinesTable
-            ->getPaginationSettings($page);
-
-        // Push Neatlines.
-        $this->view->neatlines = $this->_neatlinesTable
-            ->getNeatlinesForBrowse($sortField, $sortDir, $page);
+        $this->_recordsTable = $this->getTable('NeatlineDataRecord');
 
     }
 
@@ -81,40 +60,29 @@ class Neatline_IndexController extends Omeka_Controller_Action
      */
     public function addAction()
     {
+        $neatline = new NeatlineExhibit;
 
-        // Construct the form.
-        $form = new AddExhibitForm;
+        $form = $this->_getNeatlineDetailsForm($neatline);
 
-        // Try to create the Neatline if the form has been submitted.
+        $this->view->form = $form;
+
         if ($this->_request->isPost()) {
 
-            // If no errors, save form and redirect.
-            if ($form->isValid($this->_request->getPost())) {
+            if ($form->isValid($_POST)) {
 
-                // Get values and create new exhibit.
-                $values = $form->getValues();
+                $neatline->saveForm($form->getValues());
 
-                // Create exhibit and apply values.
-                $exhibit = new NeatlineExhibit;
-                $exhibit->saveForm(
-                    $values['title'],
-                    $values['description'],
-                    $values['slug'],
-                    $values['public'],
-                    $values['image']
-                );
+                $successMessage = $this->_getAddSuccessMessage($neatline);
+                $this->flashSuccess($successMessage);
 
-                // Commit.
-                $exhibit->save();
+                $this->_redirect('neatline-exhibits');
 
-                return $this->_redirect('neatline-exhibits');
+            } else {
+
+                $this->flashError('There were problems with your form.');
 
             }
-
         }
-
-        // Push Neatline object into view.
-        $this->view->form = $form;
 
     }
 
@@ -127,46 +95,29 @@ class Neatline_IndexController extends Omeka_Controller_Action
     {
 
         // Get the exhibit.
-        $exhibit = $this->_neatlinesTable->findBySlug($this->_request->slug);
+        $neatline = $this->findById();
+        $form = $this->_getNeatlineDetailsForm($neatline);
 
-        // Construct the form.
-        $form = new EditExhibitForm();
-        $form->setExhibit($exhibit);
-
-        // Populate the form.
-        $form->populate(array(
-            'title' => $exhibit->name,
-            'description' => $exhibit->description,
-            'slug' => $exhibit->slug,
-            'public' => $exhibit->public
-        ));
-
-        // Try to edit if the form has been submitted.
         if ($this->_request->isPost()) {
 
-            // If no errors, save form and redirect.
             if ($form->isValid($this->_request->getPost())) {
 
-                // Capture values.
-                $values = $form->getValues();
+                $neatline->saveForm($form->getValues());
 
-                // Apply values.
-                $exhibit->name = $values['title'];
-                $exhibit->description = $values['description'];
-                $exhibit->slug = $values['slug'];
-                $exhibit->public = (int) $values['public'];
+                $successMessage = $this->_getEditSuccessMessage($neatline);
+                $this->flashSuccess($successMessage);
 
-                // Commit.
-                $exhibit->save();
+                $this->_redirect('neatline-exhibits');
 
-                return $this->_redirect('neatline-exhibits');
+            } else {
+
+                $this->flashError('There were problems with your form.');
 
             }
-
         }
 
         // Push exhibit and form into view.
-        $this->view->exhibit = $exhibit;
+        $this->view->neatlineexhibit = $neatline;
         $this->view->form = $form;
 
     }
@@ -180,43 +131,129 @@ class Neatline_IndexController extends Omeka_Controller_Action
     {
 
         // Get the exhibit.
-        $exhibit = $this->_neatlinesTable->findBySlug($this->_request->slug);
+        $neatline = $this->findById();
 
         if(isset($_GET['search'])) {
-            $exhibit->query = serialize($_GET);
-            $exhibit->save();
+            $neatline->query = serialize($_GET);
+            $neatline->save();
             $this->redirect->goto('browse');
         } else {
-            $queryArray = unserialize($exhibit->query);
+            $queryArray = unserialize($neatline->query);
             $_GET = $queryArray;
             $_REQUEST = $queryArray;
         }
 
+        $this->view->neatlineexhibit = $neatline;
+
+    }
+
+    public function showAction()
+    {
+        $neatline = $this->getTable('NeatlineExhibit')->findBySlug($this->_request->getParam('slug'));
+        $this->view->neatlineexhibit = $neatline;
     }
 
     /**
-     * Delete exhibits.
+     * ~ AJAX ~
+     * Get events JSON for the timeline.
      *
-     * @return void
+     * @return JSON The events array.
      */
-    public function deleteAction()
+    public function simileAction()
     {
 
-        $_post = $this->_request->getPost();
-        $id = $this->_request->getParam('id');
-        $neatline = $this->_neatlinesTable->find($id);
-        $this->view->neatline = $neatline;
+        // Supress the default Zend layout-sniffer functionality.
+        $this->_helper->viewRenderer->setNoRender(true);
 
-        // If the delete is confirmed.
-        if (isset($_post['confirmed'])) {
+        // Get the exhibit.
+        $neatline = $this->findById();
 
-            // Delete and redirect.
-            $neatline->delete();
-            $this->flashSuccess(neatline_deleteSucceed($neatline->name));
-            $this->_redirect('neatline-exhibits');
+        // Output the JSON string.
+        echo $this->_recordsTable->buildTimelineJson($neatline);
 
-        }
+    }
 
+    /**
+     * ~ AJAX ~
+     * Get item-wkt JSON for the map.
+     *
+     * @return JSON The vector data.
+     */
+    public function openlayersAction()
+    {
+
+        // Supress the default Zend layout-sniffer functionality.
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        // Get the exhibit.
+        $neatline = $this->findById();
+
+        // Output the JSON string.
+        echo $this->_recordsTable->buildMapJson($neatline);
+
+    }
+
+    /**
+     * ~ AJAX ~
+     * Get item list markup for the undated items block.
+     *
+     * @return HTML The items.
+     */
+    public function udiAction()
+    {
+
+        // Supress the default Zend layout-sniffer functionality.
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        // Get the exhibit.
+        $neatline = $this->findById();
+
+        // Output the JSON string.
+        echo $this->_recordsTable->buildItemsJson($neatline);
+
+    }
+
+    /**
+     * Sets the add success message
+     */
+    protected function _getAddSuccessMessage($neatline)
+    {
+        return 'The Neatline "' . $neatline->name . '" was successfully added!';
+    }
+
+    /**
+     * Sets the edit success message.
+     */
+    protected function _getEditSuccessMessage($neatline)
+    {
+        return 'The Neatline "' . $neatline->name . '" was successfully changed!';
+    }
+
+    /**
+     * Sets the delete success message
+     */
+    protected function _getDeleteSuccessMessage($neatline)
+    {
+        return 'The Neatline "' . $neatline->name . '" was successfully deleted!';
+    }
+
+    /**
+     * Sets the delete confirm message
+     */
+    protected function _getDeleteConfirmMessage($neatline)
+    {
+        return 'This will delete the Neatline "'. $neatline->name .'" '
+             . 'and its associated metadata.';
+    }
+
+    private function _getNeatlineDetailsForm(NeatlineExhibit $neatline)
+    {
+
+        $form = new Neatline_Form_NeatlineDetails(array(
+            'neatline' => $neatline
+        ));
+
+        return $form;
     }
 
 }

@@ -53,14 +53,12 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
 
         // Create a record, capture time.
         $exhibit = new NeatlineExhibit();
-        $timestamp = neatline_getTimestamp();
 
         // Set.
         $exhibit->name =                        'name';
         $exhibit->description =                 'Description.';
         $exhibit->slug =                        'slug';
         $exhibit->public =                      1;
-        $exhibit->modified =                    $timestamp;
         $exhibit->query =                       'query';
         $exhibit->image_id =                    1;
         $exhibit->top_element =                 'map';
@@ -88,7 +86,7 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
         $exhibit->default_stroke_width =        3;
         $exhibit->default_point_radius =        3;
         $exhibit->default_base_layer =          1;
-        $exhibit->parentSave();
+        $exhibit->save();
 
         // Re-get the exhibit object.
         $exhibit = $this->_exhibitsTable->find(1);
@@ -96,7 +94,6 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
         // Get.
         $this->assertNotNull($exhibit->added);
         $this->assertNotNull($exhibit->modified);
-        $this->assertEquals($exhibit->modified, $timestamp);
         $this->assertEquals($exhibit->query, 'query');
         $this->assertEquals($exhibit->name, 'name');
         $this->assertEquals($exhibit->description, 'Description.');
@@ -132,48 +129,15 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
     }
 
     /**
-     * saveForm() should save an image id.
+     * save() should set image_id to null if one is not passed.
      *
      * @return void.
      */
-    public function testSaveForm()
+    public function testSaveFormWithoutImage()
     {
 
-        // Create an exhibit.
         $neatline = $this->helper->_createNeatline();
-
-        // Save with valid map id and check.
-        $success = $neatline->saveForm('Title', 'Test description.', 'slug', 1, 'none');
         $this->assertNull($neatline->image_id);
-        $this->assertEquals($neatline->name, 'Title');
-        $this->assertEquals($neatline->description, 'Test description.');
-        $this->assertEquals($neatline->slug, 'slug');
-        $this->assertEquals($neatline->public, 1);
-        $this->assertEquals($neatline->is_map, 1);
-        $this->assertEquals($neatline->is_timeline, 1);
-        $this->assertEquals($neatline->is_items, 1);
-        $this->assertEquals($neatline->is_context_band, 1);
-        $this->assertEquals($neatline->top_element, 'map');
-        $this->assertEquals($neatline->items_h_pos, 'right');
-        $this->assertEquals($neatline->items_v_pos, 'bottom');
-        $this->assertEquals($neatline->items_height, 'full');
-
-    }
-
-    /**
-     * saveForm() should save an image id.
-     *
-     * @return void.
-     */
-    public function testSaveFormWithImage()
-    {
-
-        // Create an exhibit.
-        $neatline = $this->helper->_createNeatline();
-
-        // Save with valid map id and check.
-        $success = $neatline->saveForm('Title', 'Test description.', 'slug', 1, 1);
-        $this->assertEquals($neatline->image_id, 1);
 
     }
 
@@ -197,7 +161,6 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
 
         // Create an exhibit and map.
         $exhibit = $this->helper->_createNeatline();
-        $exhibit->saveForm('Title', 'Test description.', 'slug', 1, 'none');
 
         // Get the map and check.
         $retrievedImage = $exhibit->getImage();
@@ -354,8 +317,8 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
     {
 
         // Create exhibits and items.
-        $neatline1 = $this->helper->_createNeatline();
-        $neatline2 = $this->helper->_createNeatline();
+        $neatline1 = $this->helper->_createNeatline('Test Exhibit 1', '', 'test-exhibit-1');
+        $neatline2 = $this->helper->_createNeatline('Test Exhibit 2', '', 'test-exhibit-2');
         $item1 = $this->helper->_createItem();
         $item2 = $this->helper->_createItem();
 
@@ -589,8 +552,8 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
     {
 
         // Create exhibits.
-        $neatline1 = $this->helper->_createNeatline();
-        $neatline2 = $this->helper->_createNeatline();
+        $neatline1 = $this->helper->_createNeatline('Test Exhibit 1', '', 'test-exhibit-1');
+        $neatline2 = $this->helper->_createNeatline('Test Exhibit 2', '', 'test-exhibit-2');
 
         // Create records.
         $record1 = new NeatlineDataRecord(null, $neatline1);
@@ -753,54 +716,6 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
             $exhibit->getTimelineZoom(),
             3
         );
-
-    }
-
-    /**
-     * setModified() should update the modified field.
-     *
-     * @return void.
-     */
-    public function testSetModified()
-    {
-
-        // Create exhibit, get time, set.
-        $exhibit = $this->helper->_createNeatline();
-        $timestamp = neatline_getTimestamp();
-        $exhibit->setModified();
-
-        // Get delta and check.
-        $delta = strtotime($timestamp) - strtotime($exhibit->modified);
-        $this->assertLessThanOrEqual(1, $delta);
-
-    }
-
-    /**
-     * save() should trigger an update of the modified field.
-     *
-     * @return void.
-     */
-    public function testUpdateModifiedOnSave()
-    {
-
-        // Get time.
-        $timestamp = neatline_getTimestamp();
-
-        // Create an exhibit.
-        $exhibit = $this->helper->_createNeatline();
-
-        // Check for column set.
-        $this->assertNotNull($exhibit->modified);
-
-        // Set the modified date back, get delta and check.
-        $exhibit->modified = '2010-01-01 00:00:00';
-        $delta = strtotime($timestamp) - strtotime($exhibit->modified);
-        $this->assertGreaterThanOrEqual(1, $delta);
-
-        // Set the modified date back, get delta and check.
-        $exhibit->save();
-        $delta = strtotime($timestamp) - strtotime($exhibit->modified);
-        $this->assertLessThanOrEqual(1, $delta);
 
     }
 

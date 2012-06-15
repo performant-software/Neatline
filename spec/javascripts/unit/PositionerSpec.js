@@ -1537,7 +1537,7 @@ describe('Positioner', function() {
                 neatline.positioner('apply');
                 var mapStyle = neatline.positioner('getAttr', 'map').attr('style');
 
-                expect(mapStyle).toContain('height: 60px');
+                expect(mapStyle).toContain('height: 100px');
                 expect(mapStyle).toContain('width: 100px');
                 expect(mapStyle).toContain('top: 0px');
                 expect(mapStyle).toContain('left: 0px');
