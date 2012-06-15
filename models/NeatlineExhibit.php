@@ -139,9 +139,7 @@ class NeatlineExhibit extends Omeka_Record implements Zend_Acl_Resource_Interfac
      */
     protected function beforeSave()
     {
-
         $this->modified = Zend_Date::now()->toString(self::DATE_FORMAT);
-
     }
 
     /**
@@ -439,10 +437,6 @@ class NeatlineExhibit extends Omeka_Record implements Zend_Acl_Resource_Interfac
 
         if (!preg_match('/^[0-9a-z\-]+$/', $this->slug)) {
             $this->addError('slug', __('The slug can only contain lowercase letters, numbers, and hyphens.'));
-        }
-
-        if (!$this->fieldIsUnique('slug')) {
-            $this->addError('slug', __('The slug is already in use.'));
         }
 
     }
