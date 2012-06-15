@@ -34,7 +34,7 @@
         <input type="checkbox" />
     </td>
     <td class="col-2 col-row space">
-        <input type="checkbox" />
+        <input type="checkbox" checked />
     </td>
     <td class="col-3 col-row time">
         <input type="checkbox" />
