@@ -27,7 +27,7 @@
 class NeatlineExhibit extends Omeka_Record implements Zend_Acl_Resource_Interface
 {
 
-    CONST RESOURCE_ID = 'Neatline_Exhibits';
+    CONST RESOURCE_ID = 'Neatline_Index';
 
     /**
      * Record attributes.

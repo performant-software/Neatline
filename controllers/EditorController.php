@@ -35,8 +35,21 @@ class Neatline_EditorController extends Omeka_Controller_Action
     public function init()
     {
 
+        $modelName = 'NeatlineExhibit';
+
+        if (version_compare(OMEKA_VERSION, '2.0-dev', '>=')) {
+            $this->_helper->db->setDefaultModelName($modelName);
+        } else {
+            $this->_modelClass = $modelName;
+        }
+
+        try {
+            $this->_table = $this->getTable($modelName);
+            $this->aclResource = $this->findById();
+        } catch (Omeka_Controller_Exception_404 $e) {}
+
         // Get tables.
-        $this->_neatlinesTable =    $this->getTable('NeatlineExhibit');
+        $this->_neatlinesTable =    $this->_table;
         $this->_recordsTable =      $this->getTable('NeatlineDataRecord');
         $this->_layersTable =       $this->getTable('NeatlineBaseLayer');
         $this->_mapsTable =         $this->getTable('NeatlineMapsMap');
