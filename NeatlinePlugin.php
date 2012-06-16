@@ -229,8 +229,11 @@ class NeatlinePlugin
                 ADD COLUMN `graphic_opacity` int(10) unsigned NULL";
             $this->_db->query($sql);
 
-            // Reinstall system style defaults.
-            neatline_setMapStyleDefaults();
+            // Set default option.
+            set_option('graphic_opacity', (int) get_plugin_ini(
+                'Neatline',
+                'default_graphic_opacity'
+            ));
 
         }
 
