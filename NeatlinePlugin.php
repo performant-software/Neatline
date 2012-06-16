@@ -217,6 +217,23 @@ class NeatlinePlugin
     public function upgrade($oldVersion, $newVersion)
     {
 
+        if (version_compare($oldVersion, '1.0.6', '<=')) {
+
+            // `default_graphic_opacity` column.
+            $sql = "ALTER TABLE `{$this->_db->prefix}neatline_exhibits`
+                ADD COLUMN `default_graphic_opacity` int(10) unsigned NULL";
+            $this->_db->query($sql);
+
+            // `graphic_opacity` column.
+            $sql = "ALTER TABLE `{$this->_db->prefix}neatline_data_records`
+                ADD COLUMN `graphic_opacity` int(10) unsigned NULL";
+            $this->_db->query($sql);
+
+            // Reinstall system style defaults.
+            neatline_setMapStyleDefaults();
+
+        }
+
     }
 
     /**
