@@ -869,6 +869,12 @@ function neatline_setStyleDefaults()
         'default_stroke_opacity'
     ));
 
+    // Graphic opacity.
+    set_option('graphic_opacity', (int) get_plugin_ini(
+        'Neatline',
+        'default_graphic_opacity'
+    ));
+
     // Stroke opacity.
     set_option('stroke_width', (int) get_plugin_ini(
         'Neatline',
