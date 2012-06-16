@@ -199,6 +199,14 @@
                 </tr>
                 <tr>
                     <td>
+                        <label>Graphic Opacity</label>
+                        <div class="input">
+                            <div class="inline-inputs">
+                                <input type="text" class="integer-dragger" name="graphic-opacity" />
+                            </div>
+                        </div>
+                    </td>
+                    <td>
                         <label>Line Width</label>
                         <div class="input">
                             <div class="inline-inputs">

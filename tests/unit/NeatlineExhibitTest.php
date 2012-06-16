@@ -83,6 +83,7 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
         $exhibit->default_vector_opacity =      50;
         $exhibit->default_select_opacity =      50;
         $exhibit->default_stroke_opacity =      50;
+        $exhibit->default_graphic_opacity =     50;
         $exhibit->default_stroke_width =        3;
         $exhibit->default_point_radius =        3;
         $exhibit->default_base_layer =          1;
@@ -122,6 +123,7 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
         $this->assertEquals($exhibit->default_vector_opacity, 50);
         $this->assertEquals($exhibit->default_select_opacity, 50);
         $this->assertEquals($exhibit->default_stroke_opacity, 50);
+        $this->assertEquals($exhibit->default_graphic_opacity, 50);
         $this->assertEquals($exhibit->default_stroke_width, 3);
         $this->assertEquals($exhibit->default_point_radius, 3);
         $this->assertEquals($exhibit->default_base_layer, 1);

@@ -101,6 +101,7 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         $record->vector_opacity =               50;
         $record->select_opacity =               50;
         $record->stroke_opacity =               50;
+        $record->graphic_opacity =              50;
         $record->stroke_width =                 3;
         $record->point_radius =                 3;
         $record->point_image =                  'http://test.org';
@@ -134,6 +135,7 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         $this->assertEquals($record->vector_opacity, 50);
         $this->assertEquals($record->select_opacity, 50);
         $this->assertEquals($record->stroke_opacity, 50);
+        $this->assertEquals($record->graphic_opacity, 50);
         $this->assertEquals($record->stroke_width, 3);
         $this->assertEquals($record->point_radius, 3);
         $this->assertEquals($record->point_image, 'http://test.org');

@@ -77,6 +77,7 @@ class NeatlineExhibit extends Omeka_Record implements Zend_Acl_Resource_Interfac
     public $default_vector_opacity;
     public $default_select_opacity;
     public $default_stroke_opacity;
+    public $default_graphic_opacity;
     public $default_stroke_width;
     public $default_point_radius;
     public $default_base_layer = 2;
@@ -104,9 +105,7 @@ class NeatlineExhibit extends Omeka_Record implements Zend_Acl_Resource_Interfac
      */
     protected function _initializeMixins()
     {
-
         $this->_mixins[] = new PublicFeatured($this);
-
     }
 
     /**
@@ -119,14 +118,9 @@ class NeatlineExhibit extends Omeka_Record implements Zend_Acl_Resource_Interfac
      */
     protected function beforeInsert()
     {
-
         $now = Zend_Date::now()->toString(self::DATE_FORMAT);
         $this->added = $now;
         $this->modified = $now;
-        // if (!$this->creator_id && ($user = Omeka_Context::getInstance()->getCurrentUser())) {
-        //     $this->setAddedBy($user);
-        // }
-
     }
 
     /**
