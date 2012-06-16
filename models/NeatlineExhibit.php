@@ -92,6 +92,7 @@ class NeatlineExhibit extends Omeka_Record implements Zend_Acl_Resource_Interfac
         'default_stroke_opacity',
         'default_stroke_width',
         'default_select_opacity',
+        'default_graphic_opacity',
         'default_point_radius',
         'default_highlight_color',
         'default_context_band_unit',

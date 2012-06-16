@@ -55,6 +55,11 @@
 <input type="text" class="integer-dragger" name="default-stroke-opacity" value="<?php echo $neatline->getStyle('stroke_opacity'); ?>" />
 <hr />
 
+<!-- Graphic opacity. -->
+<h5>Default Graphic Opacity</h5>
+<input type="text" class="integer-dragger" name="default-graphic-opacity" value="<?php echo $neatline->getStyle('graphic_opacity'); ?>" />
+<hr />
+
 <!-- Stroke width. -->
 <h5>Default Line Thickness</h5>
 <input type="text" class="integer-dragger" name="default-stroke-width" value="<?php echo $neatline->getStyle('stroke_width'); ?>" />

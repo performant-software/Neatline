@@ -422,6 +422,10 @@ div.clearfix.checkbox {
     margin-bottom: 3px;
 }
 
+input[name="point-image"] {
+    width: 315px;
+}
+
 
 /* Search Cancel */
 

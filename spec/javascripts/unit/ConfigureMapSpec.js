@@ -39,6 +39,7 @@ describe('Configure Map', function() {
             tab.configuremap('getAttr', 'highlightColor').val('#ffffff');
             tab.configuremap('getAttr', 'vectorOpacity').val(50);
             tab.configuremap('getAttr', 'strokeOpacity').val(60);
+            tab.configuremap('getAttr', 'graphicOpacity').val(60);
             tab.configuremap('getAttr', 'strokeWidth').val(10);
             tab.configuremap('getAttr', 'pointRadius').val(11);
             tab.configuremap('getAttr', 'baseLayer').val(2);
@@ -54,6 +55,7 @@ describe('Configure Map', function() {
             expect(post.params).toContain('highlight_color=%23ffffff');
             expect(post.params).toContain('vector_opacity=50');
             expect(post.params).toContain('stroke_opacity=60');
+            expect(post.params).toContain('graphic_opacity=60');
             expect(post.params).toContain('stroke_width=10');
             expect(post.params).toContain('point_radius=11');
             expect(post.params).toContain('base_layer=2');
@@ -68,6 +70,7 @@ describe('Configure Map', function() {
             tab.configuremap('getAttr', 'highlightColor').val('#ffffff');
             tab.configuremap('getAttr', 'vectorOpacity').val(50);
             tab.configuremap('getAttr', 'strokeOpacity').val(60);
+            tab.configuremap('getAttr', 'graphicOpacity').val(60);
             tab.configuremap('getAttr', 'strokeWidth').val(10);
             tab.configuremap('getAttr', 'pointRadius').val(11);
             tab.configuremap('getAttr', 'baseLayer').val(2);
@@ -83,6 +86,7 @@ describe('Configure Map', function() {
             expect(post.params).toContain('highlight_color=%23ffffff');
             expect(post.params).toContain('vector_opacity=50');
             expect(post.params).toContain('stroke_opacity=60');
+            expect(post.params).toContain('graphic_opacity=60');
             expect(post.params).toContain('stroke_width=10');
             expect(post.params).toContain('point_radius=11');
             expect(post.params).toContain('base_layer=2');

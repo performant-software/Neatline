@@ -96,6 +96,7 @@
             this.vectorOpacity =            this.form.find('input[name="vector-opacity"]');
             this.selectOpacity =            this.form.find('input[name="select-opacity"]');
             this.strokeOpacity =            this.form.find('input[name="stroke-opacity"]');
+            this.graphicOpacity =           this.form.find('input[name="graphic-opacity"]');
             this.strokeWidth =              this.form.find('input[name="stroke-width"]');
             this.pointRadius =              this.form.find('input[name="point-radius"]');
             this.pointImage =               this.form.find('input[name="point-image"]');
@@ -245,6 +246,17 @@
                 tip: { show: false },
                 change: function(evt, obj) {
                     self._trigger('strokeOpacityEdit', {}, { 'value': obj.value });
+                }
+            });
+
+            // ** GRAPHIC OPACITY.
+            this.graphicOpacity.integerdragger({
+                min: 0,
+                max: 100,
+                px_per_unit: 3,
+                tip: { show: false },
+                change: function(evt, obj) {
+                    self._trigger('graphicOpacityEdit', {}, { 'value': obj.value });
                 }
             });
 
@@ -699,6 +711,7 @@
             this.vectorOpacity.val(this._data.vector_opacity);
             this.selectOpacity.val(this._data.select_opacity);
             this.strokeOpacity.val(this._data.stroke_opacity);
+            this.graphicOpacity.val(this._data.graphic_opacity);
             this.strokeWidth.val(this._data.stroke_width);
             this.pointRadius.val(this._data.point_radius);
             this.pointImage.val(this._data.point_image);
@@ -772,6 +785,7 @@
             data.vector_opacity =           parseInt(this.vectorOpacity.val(), 10);
             data.select_opacity =           parseInt(this.selectOpacity.val(), 10);
             data.stroke_opacity =           parseInt(this.strokeOpacity.val(), 10);
+            data.graphic_opacity =          parseInt(this.graphicOpacity.val(), 10);
             data.stroke_width =             parseInt(this.strokeWidth.val(), 10);
             data.point_radius =             parseInt(this.pointRadius.val(), 10);
             data.point_image =              this.pointImage.val();

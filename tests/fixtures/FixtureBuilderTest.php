@@ -320,6 +320,7 @@ class Neatline_FixtureBuilderTest extends Omeka_Test_AppTestCase
         $record1->highlight_color = '#ffff00';
         $record1->vector_opacity = 20;
         $record1->stroke_opacity = 80;
+        $record1->graphic_opacity = 100;
         $record1->stroke_width = 3;
         $record1->point_radius = 5;
         $record1->exhibit_id = $exhibit->id;

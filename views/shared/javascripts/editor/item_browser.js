@@ -361,6 +361,13 @@
                     });
                 },
 
+                // When the graphic opacity is changed.
+                'graphicOpacityEdit': function(event, obj) {
+                    self._trigger('graphicopacityedit', {}, {
+                        'value': obj.value
+                    });
+                },
+
                 // When the stroke width is changed.
                 'strokeWidthEdit': function(event, obj) {
                     self._trigger('strokewidthedit', {}, {

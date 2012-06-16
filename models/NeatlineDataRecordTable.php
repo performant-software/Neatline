@@ -406,6 +406,7 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
                         'vector_opacity' =>     $record->getStyle('vector_opacity'),
                         'select_opacity' =>     $record->getStyle('select_opacity'),
                         'stroke_opacity' =>     $record->getStyle('stroke_opacity'),
+                        'graphic_opacity' =>    $record->getStyle('graphic_opacity'),
                         'stroke_width' =>       $record->getStyle('stroke_width'),
                         'point_radius' =>       $record->getStyle('point_radius'),
                         'point_image' =>        $record->getNotEmpty('point_image'),
@@ -423,6 +424,7 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
                           'stroke_color' =>     $record->stroke_color,
                           'stroke_opacity' =>   $record->stroke_opacity,
                           'stroke_width' =>     $record->stroke_width,
+                          'graphic_opacity' =>  $record->graphic_opacity,
                           'point_radius' =>     $record->point_radius,
                         )
                     );

@@ -819,6 +819,8 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
         $record2->vector_opacity = 40;
         $record1->stroke_opacity = 60;
         $record2->stroke_opacity = 40;
+        $record1->graphic_opacity = 60;
+        $record2->graphic_opacity = 40;
         $record1->stroke_color = '#ffffff';
         $record2->stroke_color = '#000000';
         $record1->stroke_width = 3;
@@ -852,6 +854,7 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
         $this->assertContains('"vector_color":"#ffffff"', $response);
         $this->assertContains('"vector_opacity":60', $response);
         $this->assertContains('"stroke_opacity":60', $response);
+        $this->assertContains('"graphic_opacity":60', $response);
         $this->assertContains('"stroke_color":"#ffffff"', $response);
         $this->assertContains('"stroke_width":3', $response);
         $this->assertContains('"point_radius":3', $response);
@@ -867,6 +870,7 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
         $this->assertContains('"vector_color":"#000000"', $response);
         $this->assertContains('"vector_opacity":40', $response);
         $this->assertContains('"stroke_opacity":40', $response);
+        $this->assertContains('"graphic_opacity":40', $response);
         $this->assertContains('"stroke_color":"#000000"', $response);
         $this->assertContains('"stroke_width":2', $response);
         $this->assertContains('"point_radius":2', $response);

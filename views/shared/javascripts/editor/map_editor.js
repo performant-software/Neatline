@@ -285,6 +285,8 @@
          */
         setCurrentRecordStyle: function(style, value) {
 
+            // console.log(value);
+
             var self = this;
 
             // If there is no extant data record, abort.
@@ -305,7 +307,8 @@
                 this.record.data.point_radius,
                 this.record.data.point_image,
                 this.record.data.highlight_color,
-                this.record.data.select_opacity
+                this.record.data.select_opacity,
+                this.record.data.graphic_opacity
             );
 
             // Rerender the layer to manifest the change.
@@ -345,7 +348,8 @@
                         record.data.point_radius,
                         record.data.point_image,
                         record.data.highlight_color,
-                        record.data.select_opacity
+                        record.data.select_opacity,
+                        record.data.graphic_opacity
                     );
 
                     // Rerender the layer to manifest the change.

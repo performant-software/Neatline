@@ -207,6 +207,12 @@ jQuery(document).ready(function($) {
             neatlineContainer.neatline('setItemStrokeOpacity', obj.value);
         },
 
+        // When the stroke opacity dragger is changed, push the value onto the
+        // item's vectors.
+        'graphicopacityedit': function(event, obj) {
+            neatlineContainer.neatline('setItemGraphicOpacity', obj.value);
+        },
+
         // When the stroke width dragger is changed, push the value onto the
         // item's vectors.
         'strokewidthedit': function(event, obj) {
@@ -345,6 +351,11 @@ jQuery(document).ready(function($) {
         // Manifest new default stroke opacity.
         'strokeopacityedit': function(event, obj) {
             neatlineContainer.neatline('setDefaultStrokeOpacity', obj.value);
+        },
+
+        // Manifest new default graphic opacity.
+        'graphicopacityedit': function(event, obj) {
+            neatlineContainer.neatline('setItemGraphicOpacity', obj.value);
         },
 
         // Manifest new default stroke width.

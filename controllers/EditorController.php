@@ -175,6 +175,7 @@ class Neatline_EditorController extends Omeka_Controller_Action
         $vectorOpacity =            $_post['vector_opacity'];
         $selectOpacity =            $_post['select_opacity'];
         $strokeOpacity =            $_post['stroke_opacity'];
+        $graphicOpacity =           $_post['graphic_opacity'];
         $strokeWidth =              $_post['stroke_width'];
         $pointRadius =              $_post['point_radius'];
         $pointImage =               $_post['point_image'];
@@ -230,6 +231,7 @@ class Neatline_EditorController extends Omeka_Controller_Action
             $record->setStyle('vector_opacity', $vectorOpacity);
             $record->setStyle('select_opacity', $selectOpacity);
             $record->setStyle('stroke_opacity', $strokeOpacity);
+            $record->setStyle('graphic_opacity', $graphicOpacity);
             $record->setStyle('stroke_width', $strokeWidth);
             $record->setStyle('point_radius', $pointRadius);
         }
@@ -492,6 +494,7 @@ class Neatline_EditorController extends Omeka_Controller_Action
         $vectorOpacity =            (int) $_post['vector_opacity'];
         $selectOpacity =            (int) $_post['select_opacity'];
         $strokeOpacity =            (int) $_post['stroke_opacity'];
+        $graphicOpacity =           (int) $_post['graphic_opacity'];
         $strokeWidth =              (int) $_post['stroke_width'];
         $pointRadius =              (int) $_post['point_radius'];
         $baseLayer =                (int) $_post['base_layer'];
@@ -504,6 +507,7 @@ class Neatline_EditorController extends Omeka_Controller_Action
         $exhibit->setStyle('vector_opacity', $vectorOpacity);
         $exhibit->setStyle('select_opacity', $selectOpacity);
         $exhibit->setStyle('stroke_opacity', $strokeOpacity);
+        $exhibit->setStyle('graphic_opacity', $graphicOpacity);
         $exhibit->setStyle('stroke_width', $strokeWidth);
         $exhibit->setStyle('point_radius', $pointRadius);
         $exhibit->default_base_layer = $baseLayer;

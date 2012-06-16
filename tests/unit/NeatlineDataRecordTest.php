@@ -42,6 +42,7 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         'vector_opacity' => 60,
         'select_opacity' => 50,
         'stroke_opacity' => 40,
+        'graphic_opacity' => 90,
         'stroke_width' => 5,
         'point_radius' => 7,
         'point_image' => 'http://test.org',
@@ -1912,6 +1913,7 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         $record->vector_opacity =       self::$__testParams['vector_opacity'];
         $record->select_opacity =       self::$__testParams['select_opacity'];
         $record->stroke_opacity =       self::$__testParams['stroke_opacity'];
+        $record->graphic_opacity =      self::$__testParams['graphic_opacity'];
         $record->stroke_width =         self::$__testParams['stroke_width'];
         $record->point_radius =         self::$__testParams['point_radius'];
         $record->point_image =          self::$__testParams['point_image'];
@@ -1937,6 +1939,7 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
                 'vector_opacity' =>     self::$__testParams['vector_opacity'],
                 'select_opacity' =>     self::$__testParams['select_opacity'],
                 'stroke_opacity' =>     self::$__testParams['stroke_opacity'],
+                'graphic_opacity' =>    self::$__testParams['graphic_opacity'],
                 'stroke_width' =>       self::$__testParams['stroke_width'],
                 'point_radius' =>       self::$__testParams['point_radius'],
                 'point_image' =>        self::$__testParams['point_image'],
@@ -1984,6 +1987,7 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         $record->vector_opacity =       '20';
         $record->select_opacity =       '40';
         $record->stroke_opacity =       '30';
+        $record->graphic_opacity =      '90';
         $record->stroke_width =         '5';
         $record->point_radius =         '6';
         $record->point_image =          self::$__testParams['point_image'];
@@ -2009,6 +2013,7 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
                 'vector_opacity' =>     20,
                 'select_opacity' =>     40,
                 'stroke_opacity' =>     30,
+                'graphic_opacity' =>    90,
                 'stroke_width' =>       5,
                 'point_radius' =>       6,
                 'point_image' =>        self::$__testParams['point_image'],
@@ -2118,6 +2123,11 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
 
         $this->assertContains(
             '"stroke_opacity":' . (int) get_option('stroke_opacity'),
+            $json
+        );
+
+        $this->assertContains(
+            '"graphic_opacity":' . (int) get_option('graphic_opacity'),
             $json
         );
 
@@ -2291,6 +2301,7 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         $record->highlight_color = '#ffffff';
         $record->vector_opacity = 50;
         $record->stroke_opacity = 50;
+        $record->graphic_opacity = 50;
         $record->stroke_width = 50;
         $record->point_radius = 50;
 
@@ -2303,6 +2314,7 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
         $this->assertNull($record->highlight_color);
         $this->assertNull($record->vector_opacity);
         $this->assertNull($record->stroke_opacity);
+        $this->assertNull($record->graphic_opacity);
         $this->assertNull($record->stroke_width);
         $this->assertNull($record->point_radius);
 

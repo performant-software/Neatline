@@ -698,6 +698,17 @@
         },
 
         /*
+         * Set the graphic opacity for the current item.
+         *
+         * - param integer value: The opacity, 0-100.
+         *
+         * - return void.
+         */
+        setItemGraphicOpacity: function(value) {
+            this.map.neatlinemap('setCurrentRecordStyle', 'graphic_opacity', value/100);
+        },
+
+        /*
          * Set the stroke width for the current item.
          *
          * - param integer value: The width, 0-+inf.

@@ -305,8 +305,7 @@
                 item.vector_opacity = item.vector_opacity / 100;
                 item.stroke_opacity = item.stroke_opacity / 100;
                 item.select_opacity = item.select_opacity / 100;
-
-                console.log(item);
+                item.graphic_opacity = item.graphic_opacity / 100;
 
                 // Construct the style.
                 var style = self._getStyleMap(
@@ -318,7 +317,8 @@
                     item.point_radius,
                     item.point_image,
                     item.highlight_color,
-                    item.select_opacity
+                    item.select_opacity,
+                    item.graphic_opacity
                 );
 
                 // Build the layer.
@@ -709,7 +709,8 @@
             pointRadius,
             pointImage,
             highlightColor,
-            selectOpacity
+            selectOpacity,
+            graphicOpacity
         ) {
 
             // Construct and return the StyleMaps.
@@ -721,7 +722,8 @@
                     strokeOpacity: strokeOpacity,
                     pointRadius: pointRadius,
                     externalGraphic: pointImage,
-                    strokeWidth: strokeWidth
+                    strokeWidth: strokeWidth,
+                    graphicOpacity: graphicOpacity
                 }),
                 'select': new OpenLayers.Style({
                     fillColor: highlightColor,
@@ -730,7 +732,8 @@
                     strokeOpacity: strokeOpacity,
                     pointRadius: pointRadius,
                     externalGraphic: pointImage,
-                    strokeWidth: strokeWidth
+                    strokeWidth: strokeWidth,
+                    graphicOpacity: graphicOpacity
                 }),
                 'temporary': new OpenLayers.Style({
                     fillColor: highlightColor,
@@ -739,7 +742,8 @@
                     strokeOpacity: strokeOpacity,
                     pointRadius: pointRadius,
                     externalGraphic: pointImage,
-                    strokeWidth: strokeWidth
+                    strokeWidth: strokeWidth,
+                    graphicOpacity: graphicOpacity
                 })
             });
 

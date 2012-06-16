@@ -39,6 +39,7 @@
             this.vectorOpacity =        this.content.find('input[name="default-vector-opacity"]');
             this.selectOpacity =        this.content.find('input[name="default-select-opacity"]');
             this.strokeOpacity =        this.content.find('input[name="default-stroke-opacity"]');
+            this.graphicOpacity =       this.content.find('input[name="default-graphic-opacity"]');
             this.strokeWidth =          this.content.find('input[name="default-stroke-width"]');
             this.pointRadius =          this.content.find('input[name="default-point-radius"]');
             this.baseLayer =            this.content.find('select[name="base-layer"]');
@@ -128,6 +129,16 @@
                 }
             });
 
+            // ** GRAPHIC OPACITY.
+            this.graphicOpacity.integerdragger({
+                min: 0,
+                max: 100,
+                px_per_unit: 1,
+                change: function(evt, obj) {
+                    self._trigger('graphicopacityedit', {}, { 'value': obj.value });
+                }
+            });
+
             // ** STROKE WIDTH.
             this.strokeWidth.integerdragger({
                 min: 0,
@@ -179,6 +190,7 @@
             data.vector_opacity =           parseInt(this.vectorOpacity.val(), 10);
             data.select_opacity =           parseInt(this.selectOpacity.val(), 10);
             data.stroke_opacity =           parseInt(this.strokeOpacity.val(), 10);
+            data.graphic_opacity =          parseInt(this.graphicOpacity.val(), 10);
             data.stroke_width =             parseInt(this.strokeWidth.val(), 10);
             data.point_radius =             parseInt(this.pointRadius.val(), 10);
             data.base_layer =               parseInt(this.baseLayer.val(), 10);

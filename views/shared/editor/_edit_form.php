@@ -226,7 +226,7 @@
             </table>
 
             <div class="clearfix">
-                <label>Point Image</label>
+                <label>Point Graphic</label>
                 <div class="input">
                     <div class="inline-inputs">
                         <input class="xlarge" name="point-image" type="text" placeholder="An external graphic to represent a point" />

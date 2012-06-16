@@ -211,6 +211,7 @@ describe('Item Form', function() {
             expect(form.itemform('getAttr', 'highlightColor').val()).toEqual('#ffff00');
             expect(form.itemform('getAttr', 'vectorOpacity').val()).toEqual('20');
             expect(form.itemform('getAttr', 'strokeOpacity').val()).toEqual('80');
+            expect(form.itemform('getAttr', 'graphicOpacity').val()).toEqual('100');
             expect(form.itemform('getAttr', 'strokeWidth').val()).toEqual('3');
             expect(form.itemform('getAttr', 'pointRadius').val()).toEqual('5');
             expect(form.itemform('getAttr', 'parentRecord').val()).toEqual('2');
@@ -276,6 +277,7 @@ describe('Item Form', function() {
             expect(post.params).toContain('highlight_color=%23ffff00');
             expect(post.params).toContain('vector_opacity=20');
             expect(post.params).toContain('stroke_opacity=80');
+            expect(post.params).toContain('graphic_opacity=100');
             expect(post.params).toContain('stroke_width=3');
             expect(post.params).toContain('point_radius=5');
 
