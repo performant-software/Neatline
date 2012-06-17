@@ -316,6 +316,10 @@ div.bubble-container {
     padding: 10px 20px 20px 20px;
 }
 
+div.bubble-container a, div.bubble-container a:visited {
+    color: white;
+}
+
 div.bubble-container::-webkit-scrollbar {
     width: 7px;
     height: 9px;
