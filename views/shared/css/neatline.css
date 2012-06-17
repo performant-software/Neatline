@@ -310,14 +310,14 @@ div.bubble-container {
     z-index: 999;
     position: absolute;
     background-color: black;
-    color: white;
+    color: white !important;
     max-width: 300px;
     opacity: 0.7;
     padding: 10px 20px 20px 20px;
 }
 
 div.bubble-container a, div.bubble-container a:visited {
-    color: white;
+    color: white !important;
 }
 
 div.bubble-container::-webkit-scrollbar {
