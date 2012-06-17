@@ -229,6 +229,11 @@ class NeatlinePlugin
                 ADD COLUMN `graphic_opacity` int(10) unsigned NULL";
             $this->_db->query($sql);
 
+            // `point_image` column.
+            $sql = "ALTER TABLE `{$this->_db->prefix}neatline_data_records`
+                ADD COLUMN `point_image` tinytext COLLATE utf8_unicode_ci NULL";
+            $this->_db->query($sql);
+
             // Set default option.
             set_option('graphic_opacity', (int) get_plugin_ini(
                 'Neatline',
