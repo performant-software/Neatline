@@ -2329,7 +2329,7 @@ class Neatline_NeatlineDataRecordTest extends Omeka_Test_AppTestCase
     {
 
         // Get time.
-        $timestamp = neatline_getTimestamp();
+        $timestamp = date('Y-m-d H:i:s');
 
         // Set the modified date back, get delta and check.
         $exhibit = $this->helper->_createNeatline();
