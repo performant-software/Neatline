@@ -734,7 +734,7 @@
          * Expand an item form.
          */
          _showForm: function(item, scrollMap, scrollTimeline, focusItems) {
-             if (this.editForm.itemform != null && this.editForm.itemform('isLocked')) {
+             if (this._isEditFormLocked()) {
                  return;
              }
 
@@ -780,7 +780,7 @@
          * Contract an expended item form.
          */
          _hideForm: function(item, immediate) {
-             if (this.editForm.itemform != null && this.editForm.itemform('isLocked')) {
+             if (this._isEditFormLocked()) {
                  return;
              }
 
@@ -1060,6 +1060,16 @@
          */
         getAttr: function(attr) {
             return this[attr];
+        },
+
+        /*
+         * Is the edit form created and locked?
+         */
+        _isEditFormLocked: function() {
+            var locked = false;
+            locked =  this.editForm.itemform != null
+                   && this.editForm.itemform('isLocked');
+            return locked;
         }
 
     });
