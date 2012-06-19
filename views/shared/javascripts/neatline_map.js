@@ -130,7 +130,7 @@
                 controls: [
                   this.mousePosition,
                   new OpenLayers.Control.PanZoomBar(),
-                  new OpenLayers.Control.Navigation(),
+                  new OpenLayers.Control.Navigation({documentDrag: true}),
                   new OpenLayers.Control.LayerSwitcher()
                 ],
                 maxResolution: 'auto',
