@@ -120,6 +120,7 @@
             this._isForm =                  false;
             this._data =                    null;
             this.coverage =                 null;
+            this.isLocked =                 false;
 
             // Preparatory routines.
             this._buildFormFunctionality();
@@ -415,6 +416,9 @@
          * Expand and gloss an item edit form.
          */
         showForm: function(item) {
+            if (this.isLocked) {
+                return;
+            }
 
             // Getters and setters.
             this.item =                     item;
@@ -1097,6 +1101,17 @@
          */
         getAttr: function(attr) {
             return this[attr];
+        },
+
+        /*
+         * Handle locking the form so it can't change.
+         */
+        lockForm: function() {
+            this.isLocked = true;
+        },
+
+        unlockForm: function() {
+            this.isLocked = false;
         }
 
     });
