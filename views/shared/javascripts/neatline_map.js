@@ -423,87 +423,101 @@
                 highlightOnly: true,
                 renderIntent: 'select',
 
-                eventListeners: {
+                // eventListeners: {
 
-                    featurehighlighted: function(obj) {
+                //     featurehighlighted: function(obj) {
 
-                        // Get record.
-                        var record = self._db({
-                            layerid: obj.feature.layer.id
-                        }).first();
+                //         // Get record.
+                //         var record = self._db({
+                //             layerid: obj.feature.layer.id
+                //         }).first();
 
-                        // Trigger out to the deployment code.
-                        self._trigger('featureenter', {}, {
-                            'record': record
+                //         // Trigger out to the deployment code.
+                //         self._trigger('featureenter', {}, {
+                //             'record': record
+                //         });
+
+                //         // Render highlight.
+                //         if (!record.selected) {
+                //             _.each(record.layer.features, function(feature){
+                //                 self.highlightControl.highlight(feature);
+                //             });
+                //         }
+
+                //         self._hoveredFeature = obj.feature;
+
+                //     },
+
+                //     featureunhighlighted: function(obj) {
+
+                //         // Get record.
+                //         var record = self._db({
+                //             layerid: obj.feature.layer.id
+                //         }).first();
+
+                //         // Trigger out to the deployment code.
+                //         self._trigger('featureleave', {}, {
+                //             'record': record
+                //         });
+
+                //         // Render default.
+                //         if (!record.selected) {
+                //             _.each(record.layer.features, function(feature){
+                //                 self.highlightControl.unhighlight(feature);
+                //             });
+                //         }
+
+                //         self._hoveredFeature = null;
+
+                //     }
+
+                // }
+
+                overFeature: function(feature) {
+
+                    // Get record.
+                    var record = self._db({
+                        layerid: feature.layer.id
+                    }).first();
+
+                    // Trigger out to the deployment code.
+                    self._trigger('featureenter', {}, {
+                        'record': record
+                    });
+
+                    // Render highlight.
+                    if (!record.selected) {
+                        _.each(record.layer.features, function(feature){
+                            self.highlightControl.highlight(feature);
                         });
-
-                        self._hoveredFeature = obj.feature;
-
-                    },
-
-                    featureunhighlighted: function(obj) {
-
-                        // Get record.
-                        var record = self._db({
-                            layerid: obj.feature.layer.id
-                        }).first();
-
-                        // Trigger out to the deployment code.
-                        self._trigger('featureleave', {}, {
-                            'record': record
-                        });
-
-                        self._hoveredFeature = null;
-
                     }
+
+                    self._hoveredFeature = feature;
 
                 },
 
-                // overFeature: function(feature) {
+                outFeature: function(feature) {
 
-                //     // Get record.
-                //     var record = self._db({
-                //         layerid: feature.layer.id
-                //     }).first();
+                    // Get record.
+                    var record = self._db({
+                        layerid: feature.layer.id
+                    }).first();
 
-                //     // Trigger out to the deployment code.
-                //     self._trigger('featureenter', {}, {
-                //         'record': record
-                //     });
+                    // Trigger out to the deployment code.
+                    self._trigger('featureleave', {}, {
+                        'record': record
+                    });
 
-                //     // Render highlight.
-                //     if (!record.selected) {
-                //         _.each(record.layer.features, function(feature){
-                //             self.highlightControl.highlight(feature);
-                //         });
-                //     }
+                    // Render default.
+                    if (!record.selected) {
+                        _.each(record.layer.features, function(feature){
+                            self.highlightControl.unhighlight(feature);
+                        });
+                    }
 
-                //     self._hoveredFeature = feature;
+                    self._hoveredFeature = null;
 
-                // },
-
-                // outFeature: function(feature) {
-
-                //     // Get record.
-                //     var record = self._db({
-                //         layerid: feature.layer.id
-                //     }).first();
-
-                //     // Trigger out to the deployment code.
-                //     self._trigger('featureleave', {}, {
-                //         'record': record
-                //     });
-
-                //     // Render default.
-                //     if (!record.selected) {
-                //         _.each(record.layer.features, function(feature){
-                //             self.highlightControl.unhighlight(feature);
-                //         });
-                //     }
-
-                //     self._hoveredFeature = null;
-
-                // }
+                }
 
             });
 
