@@ -120,7 +120,7 @@
             this._isForm =                  false;
             this._data =                    null;
             this.coverage =                 null;
-            this.isLocked =                 false;
+            this._isLocked =                false;
 
             // Preparatory routines.
             this._buildFormFunctionality();
@@ -416,7 +416,7 @@
          * Expand and gloss an item edit form.
          */
         showForm: function(item) {
-            if (this.isLocked) {
+            if (this._isLocked) {
                 return;
             }
 
@@ -464,6 +464,9 @@
          * Collapse an item edit form and unbind all events.
          */
         hideForm: function(item, immediate) {
+            if (this._isLocked) {
+                return;
+            }
 
             // DOM touches.
             this._hideContainer(immediate);
@@ -1107,11 +1110,15 @@
          * Handle locking the form so it can't change.
          */
         lockForm: function() {
-            this.isLocked = true;
+            this._isLocked = true;
         },
 
         unlockForm: function() {
-            this.isLocked = false;
+            this._isLocked = false;
+        },
+
+        isLocked: function() {
+            return this._isLocked;
         }
 
     });

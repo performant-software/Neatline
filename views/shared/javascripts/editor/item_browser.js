@@ -734,6 +734,9 @@
          * Expand an item form.
          */
          _showForm: function(item, scrollMap, scrollTimeline, focusItems) {
+             if (this.editForm.itemform != null && this.editForm.itemform('isLocked')) {
+                 return;
+             }
 
             var self = this;
             var immediate = false;
@@ -777,6 +780,9 @@
          * Contract an expended item form.
          */
          _hideForm: function(item, immediate) {
+             if (this.editForm.itemform != null && this.editForm.itemform('isLocked')) {
+                 return;
+             }
 
             // Hide the form.
             this.editForm.itemform(
