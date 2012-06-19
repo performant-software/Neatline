@@ -317,7 +317,7 @@
                 var nlmap = this.map.data('neatlinemap');
                 nlmap.map.events.register('mouseout', {}, function(ev, obj) {
                     if (nlmap._hoveredFeature != null) {
-                        nlmap.highlightControl.outFeature(nlmap._hoveredFeature);
+                        // nlmap.highlightControl.outFeature(nlmap._hoveredFeature);
                     }
                 });
 

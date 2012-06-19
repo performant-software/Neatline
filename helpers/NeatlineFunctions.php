@@ -169,7 +169,7 @@ function neatline_queueNeatlineAssets($exhibit)
     queue_js('jquery.getscrollbarwidth', 'javascripts/libraries');
 
     // Vendor.
-    queue_js('libraries/openlayers/lib/OpenLayers', 'javascripts');
+    queue_js('libraries/_openlayers/OpenLayers.min', 'javascripts');
     queue_js('libraries/simile/timeline-api/timeline-api', 'javascripts');
     queue_js('libraries/taffy-min', 'javascripts');
     queue_js('libraries/underscore-min', 'javascripts');
