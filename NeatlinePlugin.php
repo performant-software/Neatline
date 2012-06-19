@@ -34,7 +34,8 @@ class NeatlinePlugin
         'define_routes',
         'admin_theme_header',
         'admin_append_to_plugin_uninstall_message',
-        'before_delete_item'
+        'before_delete_item',
+        'define_acl'
     );
 
     private static $_filters = array(
@@ -297,7 +298,7 @@ class NeatlinePlugin
     public function adminNavigationMain($tabs)
     {
 
-        if (get_plugin_ini('Neatline', 'saas') == 'false') {
+        if (get_plugin_ini('Neatline', 'saas') == 'false' && has_permission('Neatline_Index', 'showNotPublic')) {
             $tabs['Neatline'] = uri('neatline-exhibits');
         }
 
@@ -339,4 +340,50 @@ class NeatlinePlugin
 
     }
 
+    /**
+     * Define the ACL
+     */
+    public function defineAcl($acl)
+    {
+        $resourceList = array(
+            'Neatline_Index' => array(
+                'add',
+                'browse',
+                'edit',
+                'query',
+                'delete',
+                'show',
+                'showNotPublic',
+                'udi',
+                'simile',
+                'openlayers'
+              ),
+            'Neatline_Editor' => array(
+                'index',
+                'items',
+                'form',
+                'save',
+                'status',
+                'order',
+                'positions',
+                'arrangement',
+                'focus',
+                'mapsettings',
+                'timelinesettings',
+                'resetstyles',
+                'dcdefault'
+            )
+        );
+
+        $acl->loadResourceList($resourceList);
+        foreach ($resourceList as $resource => $privileges) {
+            $acl->deny(null, $resource);
+            $acl->allow('super', $resource);
+            $acl->allow('admin', $resource);
+        }
+
+        // Give every access to browse, show, simile, openlayers, and udi.
+        $acl->allow(null, 'Neatline_Index', array('browse', 'show','simile','openlayers','udi'));
+
+    }
 }

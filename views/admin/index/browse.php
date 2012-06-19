@@ -31,12 +31,13 @@ head(array('content_class' => 'neatline', 'title' => $title));
 ?>
 
 <h1><?php echo $title; ?></h1>
-
+<?php if (has_permission('Neatline_Index', 'add')): ?>
 <p class="add-button">
     <a class="add" href="<?php echo html_escape(uri('neatline-exhibits/add')); ?>">
         Create an Exhibit
     </a>
 </p>
+<?php endif; ?>
 
 <div id="primary">
 
@@ -65,16 +66,36 @@ head(array('content_class' => 'neatline', 'title' => $title));
         <!-- Exhibit listings. -->
         <?php foreach ($neatlineexhibits as $neatline): ?>
         <tr id="<?php echo $neatline->id; ?>">
-            <td class="title"><?php echo neatline_linkToNeatline($neatline); ?>
+            <td class="title">
+                <?php
+                if (has_permission('Neatline_Editor', 'index')) {
+                  echo neatline_linkToNeatline($neatline);
+                } else {
+                  echo $neatline->name;
+                }
+                ?>
                 <div class="slug-preview">/<?php echo $neatline->slug; ?></div>
+                <?php if (has_permission('Neatline_Index', 'edit')): ?>
                 <a href="<?php echo uri('neatline-exhibits/edit/' . $neatline->id); ?>" class="edit">Edit Details</a>
+                <?php endif; ?>
+
+                <?php if (has_permission('Neatline_Index', 'delete')): ?>
                 <a href="<?php echo uri('neatline-exhibits/delete-confirm/' . $neatline->id); ?>" class="delete delete-confirm">Delete</a>
+                <?php endif; ?>
             </td>
-            <td><a href="<?php echo uri('neatline-exhibits/query/' . $neatline->id); ?>">Edit Query</a></td>
+            <td>
+            <?php if (has_permission('Neatline_Index', 'query')): ?>
+                <a href="<?php echo uri('neatline-exhibits/query/' . $neatline->id); ?>">Edit Query</a>
+            <?php endif; ?>
+            </td>
             <td><?php echo neatline_formatDate($neatline->modified); ?></td>
             <td><?php echo $neatline->getNumberOfRecords(); ?></td>
             <td><?php echo $neatline->public ? 'yes' : 'no'; ?></td>
-            <td><?php echo button_to(uri('neatline-exhibits/editor/' . $neatline->id), null, 'Edit', array()); ?></td>
+            <td>
+            <?php if (has_permission('Neatline_Index', 'edit')): ?>
+            <?php echo button_to(uri('neatline-exhibits/editor/' . $neatline->id), null, 'Edit', array()); ?>
+            <?php endif; ?>
+            </td>
         </tr>
         <?php endforeach; ?>
     </tbody>
@@ -86,7 +107,10 @@ head(array('content_class' => 'neatline', 'title' => $title));
 <?php else: ?>
 
     <p class="neatline-alert">There are no Neatline exhibits yet.
-    <a href="<?php echo uri('neatline-exhibits/add'); ?>">Create one!</a></p>
+    <?php if (has_permission('Neatline_Index', 'add')): ?>
+    <a href="<?php echo uri('neatline-exhibits/add'); ?>">Create one!</a>
+    <?php endif; ?>
+    </p>
 
 <?php endif; ?>
 
