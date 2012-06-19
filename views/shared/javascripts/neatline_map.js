@@ -122,11 +122,14 @@
                 5104888.1376502
             );
 
+            // Instantiate MousePosition separately.
+            this.mousePosition = new OpenLayers.Control.MousePosition();
+
             // Starting options.
             var options = {
                 controls: [
+                  this.mousePosition,
                   new OpenLayers.Control.PanZoomBar(),
-                  new OpenLayers.Control.MousePosition(),
                   new OpenLayers.Control.Navigation(),
                   new OpenLayers.Control.LayerSwitcher()
                 ],
@@ -419,6 +422,42 @@
                 hover: true,
                 highlightOnly: true,
                 renderIntent: 'select',
+
+                // eventListeners: {
+
+                //     featurehighlighted: function(obj) {
+
+                //         // Get record.
+                //         var record = self._db({
+                //             layerid: obj.feature.layer.id
+                //         }).first();
+
+                //         // Trigger out to the deployment code.
+                //         self._trigger('featureenter', {}, {
+                //             'record': record
+                //         });
+
+                //         self._hoveredFeature = obj.feature;
+
+                //     },
+
+                //     featureunhighlighted: function(obj) {
+                //
+                //         // Get record.
+                //         var record = self._db({
+                //             layerid: obj.feature.layer.id
+                //         }).first();
+
+                //         // Trigger out to the deployment code.
+                //         self._trigger('featureleave', {}, {
+                //             'record': record
+                //         });
+
+                //         self._hoveredFeature = null;
+
+                //     }
+
+                // },
 
                 overFeature: function(feature) {
 

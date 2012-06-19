@@ -45,13 +45,10 @@
 
             // Trackers.
             this.bubble = null;
+            this.title = null;
+            this.body = null;
             this.frozen = false;
             this.connector = false;
-
-            // Listen for container mouseleave.
-            this.element.mouseleave(_.bind(function() {
-                this.hide();
-            }, this));
 
         },
 
@@ -70,6 +67,10 @@
 
             // If both fields are empty, break.
             if (title == '' && body == '') return;
+
+            // Store title and body.
+            this.title = title;
+            this.body = body;
 
             // If bubble exists, remove.
             if (!_.isNull(this.bubble)) {
