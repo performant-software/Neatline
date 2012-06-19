@@ -178,10 +178,44 @@ class NeatlinePlugin
         $this->_db->query($sql);
 
         // Set default map style attributes.
-        neatline_setStyleDefaults();
+        $mapStyles = array(
+            'vector_color',
+            'stroke_color',
+            'highlight_color',
+            'vector_opacity',
+            'select_opacity',
+            'stroke_opacity',
+            'graphic_opacity',
+            'stroke_width',
+            'point_radius',
+            'h_precent',
+            'v_percent',
+            'timeline_zoom',
+            'context_band_unit',
+            'context_band_height'
+        );
+
+        foreach ($mapStyles as $style) {
+          set_option($style, get_plugin_ini('Neatline', 'default_'.$style));
+        }
 
         // Install base layers.
-        neatline_installBaseLayers();
+        $baseLayers = array(
+            'OpenStreetMap',
+            'Google Physical',
+            'Google Streets',
+            'Google Hybrid',
+            'Google Satellite',
+            'Stamen Watercolor',
+            'Stamen Toner',
+            'Stamen Terrain'
+        );
+
+        foreach ($baseLayers as $baseLayer) {
+            $layer = new NeatlineBaseLayer;
+            $layer->name = $baseLayer;
+            $layer->save();
+        }
 
     }
 
