@@ -195,37 +195,6 @@ function neatline_queueExhibitCss($exhibit)
 }
 
 /**
- * Build link to Neatline exhibit.
- *
- * @param Omeka_record $neatline The Neatline.
- *
- * @return string The link.
- */
-function neatline_linkToNeatline($neatline)
-{
-
-    $uri = public_uri('neatline-exhibits/show/' . $neatline->slug);
-
-    return '<a class="neatline-title" href="' . $uri . '">' . $neatline->name . '</a>';
-
-}
-
-/**
- * Format datetime.
- *
- * @param string $date The date in datetime.
- *
- * @return string $date The formatted date.
- */
-function neatline_formatDate($date)
-{
-
-    $date = new DateTime($date);
-    return $date->format('F j, Y \a\t g:i a');
-
-}
-
-/**
  * Build order clause for SQL queries.
  *
  * @param string $sort_field The column to sort on.
@@ -415,6 +384,176 @@ function neatline_getItemsForBrowser($exhibit)
     }
 
     return $items;
+
+}
+
+/**
+ * Return specific field for a neatline record.
+ *
+ * @param string
+ * @param array $options
+ * @param neatlines|null
+ * @return string
+ */
+function neatline($fieldname, $options = array(), $neatline = null)
+{
+
+    $neatline = $neatline ? $neatline : get_current_neatline();
+
+    $fieldname = strtolower($fieldname);
+    $text = $neatline->$fieldname;
+
+    if(isset($options['snippet'])) {
+        $text = nls2p(snippet($text, 0, (int)$options['snippet']));
+    }
+
+    return $text;
+
+}
+
+/**
+ * Returns the current neatline.
+ *
+ * @return NeatlineExhibit|null
+ */
+function get_current_neatline()
+{
+
+    return __v()->neatlineexhibit;
+
+}
+
+/**
+ * Sets the current neatline.
+ *
+ * @param NeatlineExhibit|null
+ * @return void
+ */
+function set_current_neatline($neatline = null)
+{
+
+    __v()->neatlineexhibit = $neatline;
+
+}
+
+/**
+ * Sets the neatlines for loop
+ *
+ * @param array $neatlines
+ * @return void
+ */
+function set_neatlines_for_loop($neatlines)
+{
+
+    __v()->neatlineexhibits = $neatlines;
+
+}
+
+/**
+ * Get the set of neatlines for the current loop.
+ *
+ * @return array
+ */
+function get_neatlines_for_loop()
+{
+
+    return __v()->neatlineexhibits;
+
+}
+
+/**
+ * Loops through neatlines assigned to the view.
+ *
+ * @return mixed
+ */
+function loop_neatlines()
+{
+
+    return loop_records('neatlines', get_neatlines_for_loop(), 'set_current_neatline');
+
+}
+
+/**
+ * Determines whether there are any neatlines in the database.
+ *
+ * @return boolean
+ */
+function has_neatlines()
+{
+
+    return (total_neatlines() > 0);
+
+}
+
+/**
+ * Determines whether there are any neatlines to loop on the view.
+ *
+ * @return boolean
+ */
+function has_neatlines_for_loop()
+{
+
+    $view = __v();
+    return ($view->neatlineexhibits and count($view->neatlineexhibits));
+
+}
+
+/**
+ * Returns the total number of neatlines in the database.
+ *
+ * @return integer
+ */
+function total_neatlines()
+{
+
+    return get_db()->getTable('NeatlineExhibits')->count();
+
+}
+
+/**
+ * Returns a link to a Neatline exhibit.
+ *
+ * @param string HTML for the text of the link.
+ * @param array Attributes for the link tag. (optional)
+ * @param string The action for the link. Default is 'show'. 
+ * @param NeatlineExhibit|null
+ * @return string The HTML link.
+ */
+function link_to_neatline($text = null, $props = array(), $action = 'show', $neatline = null)
+{
+    
+    $neatline = $neatline ? $neatline : get_current_neatline();
+
+    $text = $text ? $text : strip_formatting(neatline('name', $neatline));
+
+    if ($action == 'show') {
+        $slug = $neatline->slug;
+    } else {
+        $slug = $neatline->id;
+    }
+
+    $route = 'neatline-exhibits/'.$action.'/'.$slug;
+    $uri = uri($route);
+    $props['href'] = $uri;
+
+    $html = '<a ' . _tag_attributes($props) . '>' . $text . '</a>';
+
+    return apply_filters('link_to_neatline', $html, $text, $props, $action, $neatline);
+
+}
+
+/**
+ * Returns the number of records used in a given Neatline.
+ *
+ * @param NeatlineExhibit|null
+ * @return integer
+ */
+function total_records_for_neatline($neatline = null)
+{
+
+    $neatline = $neatline ? $neatline : get_current_neatline();
+    
+    return (int)$neatline->getNumberOfRecords();
 
 }
 

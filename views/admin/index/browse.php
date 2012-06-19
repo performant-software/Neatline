@@ -43,7 +43,7 @@ head(array('content_class' => 'neatline', 'title' => $title));
 
 <?php echo flash(); ?>
 
-<?php if(count($neatlineexhibits) > 0): ?>
+<?php if(has_neatlines_for_loop()): ?>
 <div class="pagination"><?php echo pagination_links(); ?></div>
 
 <table class="neatline">
@@ -64,40 +64,45 @@ head(array('content_class' => 'neatline', 'title' => $title));
 
     <tbody>
         <!-- Exhibit listings. -->
-        <?php foreach ($neatlineexhibits as $neatline): ?>
-        <tr id="<?php echo $neatline->id; ?>">
+        <?php while (loop_neatlines()): ?>
+        <tr id="neatline-<?php echo neatline('id'); ?>">
             <td class="title">
                 <?php
-                if (has_permission('Neatline_Editor', 'index')) {
-                  echo neatline_linkToNeatline($neatline);
+                if (has_permission('Neatline_Index', 'show')) {
+                  echo link_to_neatline();
                 } else {
-                  echo $neatline->name;
+                  echo neatline('name');
                 }
                 ?>
-                <div class="slug-preview">/<?php echo $neatline->slug; ?></div>
-                <?php if (has_permission('Neatline_Index', 'edit')): ?>
-                <a href="<?php echo uri('neatline-exhibits/edit/' . $neatline->id); ?>" class="edit">Edit Details</a>
-                <?php endif; ?>
+                <div class="slug-preview">/<?php echo neatline('slug'); ?></div>
 
-                <?php if (has_permission('Neatline_Index', 'delete')): ?>
-                <a href="<?php echo uri('neatline-exhibits/delete-confirm/' . $neatline->id); ?>" class="delete delete-confirm">Delete</a>
-                <?php endif; ?>
+                <?php
+                if (has_permission('Neatline_Index', 'edit')) {
+                    echo link_to_neatline('Edit Details', array('class' => 'edit'), 'edit');
+                }
+
+                if (has_permission('Neatline_Index', 'delete')) {
+                    echo link_to_neatline('delete', array('class' => 'delete delete-confirm'), 'delete-confirm');
+                }
+                ?>
             </td>
             <td>
-            <?php if (has_permission('Neatline_Index', 'query')): ?>
-                <a href="<?php echo uri('neatline-exhibits/query/' . $neatline->id); ?>">Edit Query</a>
-            <?php endif; ?>
+              <?php
+              if (has_permission('Neatline_Index', 'query')) {
+                  echo link_to_neatline('Edit Query', array('class' => 'query'), 'query');
+              }
+              ?>
             </td>
-            <td><?php echo neatline_formatDate($neatline->modified); ?></td>
-            <td><?php echo $neatline->getNumberOfRecords(); ?></td>
-            <td><?php echo $neatline->public ? 'yes' : 'no'; ?></td>
+            <td><?php echo format_date(neatline('modified')); ?></td>
+            <td><?php echo total_records_for_neatline(); ?></td>
+            <td><?php echo neatline('public') ? 'yes' : 'no'; ?></td>
             <td>
             <?php if (has_permission('Neatline_Index', 'edit')): ?>
-            <?php echo button_to(uri('neatline-exhibits/editor/' . $neatline->id), null, 'Edit', array()); ?>
+            <?php echo button_to(uri('neatline-exhibits/editor/' . neatline('id')), null, 'Edit', array()); ?>
             <?php endif; ?>
             </td>
         </tr>
-        <?php endforeach; ?>
+        <?php endwhile; ?>
     </tbody>
 
 </table>

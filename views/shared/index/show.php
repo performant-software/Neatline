@@ -43,7 +43,7 @@
 <head>
 
     <meta charset="utf-8">
-    <title><?php echo $neatlineexhibit->name; ?></title>
+    <title><?php echo neatline('name'); ?></title>
 
     <?php
     neatline_queueNeatlineAssets($neatlineexhibit);
@@ -64,7 +64,7 @@
 
 </head>
 
-<body class="neatline <?php echo $neatlineexhibit->slug; ?>">
+<body class="neatline <?php echo neatline('slug'); ?>">
 
 <?php if ((bool) $neatlineexhibit->public): ?>
 
