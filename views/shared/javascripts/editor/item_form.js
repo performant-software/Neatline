@@ -542,12 +542,20 @@
             this.deleteButton.attr('disabled', 'disabled');
         },
 
+        _disableCloseButton: function() {
+            this.closeButton.attr('disabled', 'disabled');
+        },
+
         /*
          * Enable the save and delete buttons.
          */
         _enableButtons: function() {
             this.saveButton.removeAttr('disabled');
             this.deleteButton.removeAttr('disabled');
+        },
+
+        _enableCloseButton: function() {
+            this.closeButton.removeAttr('disabled');
         },
 
         /*
@@ -1111,10 +1119,12 @@
          */
         lockForm: function() {
             this._isLocked = true;
+            this._disableCloseButton();
         },
 
         unlockForm: function() {
             this._isLocked = false;
+            this._enableCloseButton();
         },
 
         isLocked: function() {
