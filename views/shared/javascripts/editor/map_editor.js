@@ -162,6 +162,21 @@
             // Create the controls and toolbar.
             var panelControls = this._buildPanelControls();
 
+            panelControls[0].events.register('activate', this, function(ev) {
+                self.element.trigger('drawingmodeoff');
+            });
+
+            var i, pclen = panelControls.length;
+            for (i=1; i<pclen; i++) {
+                var pc = panelControls[i];
+                pc.events.register('activate', this, function(ev) {
+                    self.element.trigger('drawingmodeon');
+                });
+                pc.events.register('deactivate', this, function(ev) {
+                    self.element.trigger('drawingmodeoff');
+                });
+            }
+
             // Instantiate the modify feature control.
             this.modifyFeatures = new OpenLayers.Control.ModifyFeature(
                 this._currentEditLayer, {

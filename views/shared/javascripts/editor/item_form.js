@@ -120,6 +120,7 @@
             this._isForm =                  false;
             this._data =                    null;
             this.coverage =                 null;
+            this._isLocked =                false;
 
             // Preparatory routines.
             this._buildFormFunctionality();
@@ -415,6 +416,9 @@
          * Expand and gloss an item edit form.
          */
         showForm: function(item) {
+            if (this._isLocked) {
+                return;
+            }
 
             // Getters and setters.
             this.item =                     item;
@@ -460,6 +464,9 @@
          * Collapse an item edit form and unbind all events.
          */
         hideForm: function(item, immediate) {
+            if (this._isLocked) {
+                return;
+            }
 
             // DOM touches.
             this._hideContainer(immediate);
@@ -535,12 +542,20 @@
             this.deleteButton.attr('disabled', 'disabled');
         },
 
+        _disableCloseButton: function() {
+            this.closeButton.attr('disabled', 'disabled');
+        },
+
         /*
          * Enable the save and delete buttons.
          */
         _enableButtons: function() {
             this.saveButton.removeAttr('disabled');
             this.deleteButton.removeAttr('disabled');
+        },
+
+        _enableCloseButton: function() {
+            this.closeButton.removeAttr('disabled');
         },
 
         /*
@@ -1097,6 +1112,23 @@
          */
         getAttr: function(attr) {
             return this[attr];
+        },
+
+        /*
+         * Handle locking the form so it can't change.
+         */
+        lockForm: function() {
+            this._isLocked = true;
+            this._disableCloseButton();
+        },
+
+        unlockForm: function() {
+            this._isLocked = false;
+            this._enableCloseButton();
+        },
+
+        isLocked: function() {
+            return this._isLocked;
         }
 
     });

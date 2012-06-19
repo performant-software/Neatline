@@ -122,6 +122,20 @@ jQuery(document).ready(function($) {
                 }
 
             });
+            neatlineContainer.on({
+                'drawingmodeon': function() {
+                    var ec = editorContainer.data('itembrowser');
+                    if (ec.editForm != null) {
+                        ec.editForm.itemform('lockForm');
+                    }
+                },
+                'drawingmodeoff': function() {
+                    var ec = editorContainer.data('itembrowser');
+                    if (ec.editForm != null) {
+                        ec.editForm.itemform('unlockForm');
+                    }
+                }
+            });
 
         },
 
