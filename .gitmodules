@@ -1,0 +1,3 @@
+[submodule "views/shared/javascripts/libraries/openlayers"]
+	path = views/shared/javascripts/libraries/openlayers
+	url = http://github.com/davidmcclure/openlayers.git
