@@ -42,6 +42,36 @@ body {
 div.exhibit-title {
     padding: 9px 0 0 5em;
     font-size: 2em;
+    float: left;
+}
+
+div.exhibit-fullscreen {
+    padding: 15px 10em 0 0;
+    float: right;
+}
+
+div.exhibit-fullscreen span.icon {
+    display: inline-block;
+    background-image: url('../images/fullscreen.png');
+    width: 35px;
+    height: 34px;
+}
+
+div.exhibit-fullscreen span.text {
+    display: inline-block;
+    position: relative;
+    bottom: 8px;
+    left: 10px;
+}
+
+div.exhibit-fullscreen span.text:hover {
+    color: #584561;
+}
+
+div.exhibit-fullscreen a {
+    text-decoration: none;
+    font-size: 1.3em;
+    color: #9e9e9e;
 }
 
 div.exhibit-description {

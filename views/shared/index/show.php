@@ -67,6 +67,11 @@
 
 <div id="topbar">
     <div class="exhibit-title"><?php echo $exhibit->name; ?></div>
+    <div class="exhibit-fullscreen">
+        <a href="<?php echo public_uri('neatline-exhibits/show/' . $exhibit->slug); ?>/fullscreen">
+            <span class="icon"></span> <span class="text">View Fullscreen</span>
+        </a>
+    </div>
 </div>
 
 <?php if ((bool) $exhibit->public): ?>
