@@ -278,13 +278,6 @@
             this.bubbleHeight = clone.outerHeight();
             this.bubbleWidth = clone.outerWidth();
 
-            // If content height is taller than window,
-            // constrain to window height.
-            var windowHeight = this._window.height();
-            if (this.bubbleHeight > windowHeight) {
-                this.bubbleHeight = windowHeight;
-            }
-
             // Remove clone.
             clone.remove();
 
