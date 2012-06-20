@@ -471,7 +471,16 @@
          * - return void.
          */
         instantiateBubbles: function() {
-            this.element.bubbles();
+
+            this.element.bubbles({
+
+                // When the cursor leaves the exhibit container.
+                'cursorleave': _.bind(function() {
+                    this.map.neatlinemap('unhighlightHoveredRecord');
+                }, this)
+
+            });
+
         },
 
 

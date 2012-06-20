@@ -177,6 +177,7 @@
                 event.clientX > offset.left + containerWidth ||
                 event.clientY < offset.top ||
                 event.clientY > offset.top + containerHeight) {
+                  this._trigger('cursorleave');
                   this.hide();
                   return;
             }

@@ -69,6 +69,7 @@
             this._currentVectorLayers =     [];
             this._currentEditItem =         null;
             this._currentEditLayer =        null;
+            this._hoveredRecord =           null;
             this._hoveredFeature =          null;
             this._clickedFeature =          null;
             this.record =                   null;
@@ -442,6 +443,7 @@
                         });
                     }
 
+                    self._hoveredRecord = record;
                     self._hoveredFeature = feature;
 
                 },
@@ -465,6 +467,7 @@
                         });
                     }
 
+                    self._hoveredRecord = null;
                     self._hoveredFeature = null;
 
                 }
@@ -998,6 +1001,16 @@
                 self.highlightControl.highlight(feature);
             });
 
+        },
+
+        /*
+         * Remove a highlight on the currently hovered record. Used
+         * to force un-hovering when the cursor leaves the exhibit container
+         * while it is inside of a vector that is occluded by the edge of
+         * the exhibit.
+         */
+        unhighlightHoveredRecord: function() {
+            this._removeVectorHighlight(this._hoveredRecord);
         },
 
         /*
