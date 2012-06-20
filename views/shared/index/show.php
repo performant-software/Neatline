@@ -43,10 +43,10 @@
 <head>
 
     <meta charset="utf-8">
-    <title><?php echo $neatlineexhibit->name; ?></title>
+    <title><?php echo $exhibit->name; ?></title>
 
     <?php
-    neatline_queueNeatlineAssets($neatlineexhibit);
+    neatline_queueNeatlineAssets($exhibit);
     neatline_queuePublicAssets();
     ?>
 
@@ -63,22 +63,26 @@
 
 </head>
 
-<body class="neatline <?php echo $neatlineexhibit->slug; ?>">
+<body class="neatline <?php echo $exhibit->slug; ?>">
 
-<div id="topbar"></div>
+<div id="topbar">
+    <div class="exhibit-title"><?php echo $exhibit->name; ?></div>
+</div>
 
-<?php if ((bool) $neatlineexhibit->public): ?>
+<?php if ((bool) $exhibit->public): ?>
 
     <!-- The core Neatline partial. -->
     <?php echo $this->partial('neatline/_neatline.php', array(
-        'exhibit' => $neatlineexhibit
+        'exhibit' => $exhibit
     )); ?>
 
 <?php else: ?>
     <?php echo $this->partial('neatline/_private.php'); ?>
 <?php endif; ?>
 
-<div id="footer"></div>
+<div id="footer">
+    <div class="exhibit-description"><?php echo $exhibit->description; ?></div>
+</div>
 
 </body>
 </html>

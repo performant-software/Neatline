@@ -23,18 +23,35 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache 2 License
  */
 
+@import url(http://fonts.googleapis.com/css?family=Cabin+Condensed);
 
 /* Layout */
 
 body {
     margin: 0;
     padding: 0;
+    background-color: #fafafa;
+    font-family: 'Cabin Condensed';
+}
+
+#topbar {
+    height: 60px;
+}
+
+div.exhibit-title {
+    padding: 9px 0 0 5em;
+    font-size: 2em;
+}
+
+div.exhibit-description {
+    padding: 0 10em;
 }
 
 #neatline {
+    border-top: 7px solid #584561;
+    border-bottom: 7px solid #584561;
     position: relative;
     height: 600px;
-    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
     font-size: 13px;
     font-weight: normal;
     line-height: 18px;

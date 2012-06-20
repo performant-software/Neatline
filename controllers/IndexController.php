@@ -151,7 +151,7 @@ class Neatline_IndexController extends Omeka_Controller_Action
     public function showAction()
     {
         $neatline = $this->getTable('NeatlineExhibit')->findBySlug($this->_request->getParam('slug'));
-        $this->view->neatlineexhibit = $neatline;
+        $this->view->exhibit = $neatline;
     }
 
     /**
