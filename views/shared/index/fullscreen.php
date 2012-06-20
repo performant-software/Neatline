@@ -43,11 +43,12 @@
 <head>
 
     <meta charset="utf-8">
-    <title><?php echo neatline('name'); ?></title>
+    <title><?php echo $exhibit->name; ?></title>
 
     <?php
     neatline_queueNeatlineAssets($exhibit);
-    neatline_queuePublicAssets();
+    neatline_queueFullscreenAssets();
+    neatline_queueExhibitCss($exhibit);
     ?>
 
     <!-- Stylesheets -->
@@ -63,16 +64,7 @@
 
 </head>
 
-<body class="neatline <?php echo neatline('slug'); ?>">
-
-<div id="topbar">
-    <div class="exhibit-title"><?php echo $exhibit->name; ?></div>
-    <div class="exhibit-fullscreen">
-        <a href="<?php echo public_uri('neatline-exhibits/show/' . $exhibit->slug); ?>/fullscreen">
-            <span class="icon"></span> <span class="text">View Fullscreen</span>
-        </a>
-    </div>
-</div>
+<body class="neatline <?php echo $exhibit->slug; ?>">
 
 <?php if ((bool) $exhibit->public): ?>
 
@@ -84,10 +76,6 @@
 <?php else: ?>
     <?php echo $this->partial('neatline/_private.php'); ?>
 <?php endif; ?>
-
-<div id="footer">
-    <div class="exhibit-description"><?php echo $exhibit->description; ?></div>
-</div>
 
 </body>
 </html>

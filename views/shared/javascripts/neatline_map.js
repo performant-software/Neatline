@@ -69,6 +69,7 @@
             this._currentVectorLayers =     [];
             this._currentEditItem =         null;
             this._currentEditLayer =        null;
+            this._hoveredRecord =           null;
             this._hoveredFeature =          null;
             this._clickedFeature =          null;
             this.record =                   null;
@@ -423,56 +424,6 @@
                 highlightOnly: true,
                 renderIntent: 'select',
 
-                // eventListeners: {
-
-                //     featurehighlighted: function(obj) {
-
-                //         // Get record.
-                //         var record = self._db({
-                //             layerid: obj.feature.layer.id
-                //         }).first();
-
-                //         // Trigger out to the deployment code.
-                //         self._trigger('featureenter', {}, {
-                //             'record': record
-                //         });
-
-                //         // Render highlight.
-                //         if (!record.selected) {
-                //             _.each(record.layer.features, function(feature){
-                //                 self.highlightControl.highlight(feature);
-                //             });
-                //         }
-
-                //         self._hoveredFeature = obj.feature;
-
-                //     },
-
-                //     featureunhighlighted: function(obj) {
-
-                //         // Get record.
-                //         var record = self._db({
-                //             layerid: obj.feature.layer.id
-                //         }).first();
-
-                //         // Trigger out to the deployment code.
-                //         self._trigger('featureleave', {}, {
-                //             'record': record
-                //         });
-
-                //         // Render default.
-                //         if (!record.selected) {
-                //             _.each(record.layer.features, function(feature){
-                //                 self.highlightControl.unhighlight(feature);
-                //             });
-                //         }
-
-                //         self._hoveredFeature = null;
-
-                //     }
-
-                // }
-
                 overFeature: function(feature) {
 
                     // Get record.
@@ -492,6 +443,7 @@
                         });
                     }
 
+                    self._hoveredRecord = record;
                     self._hoveredFeature = feature;
 
                 },
@@ -515,6 +467,7 @@
                         });
                     }
 
+                    self._hoveredRecord = null;
                     self._hoveredFeature = null;
 
                 }
@@ -1048,6 +1001,16 @@
                 self.highlightControl.highlight(feature);
             });
 
+        },
+
+        /*
+         * Remove a highlight on the currently hovered record. Used
+         * to force un-hovering when the cursor leaves the exhibit container
+         * while it is inside of a vector that is occluded by the edge of
+         * the exhibit.
+         */
+        unhighlightHoveredRecord: function() {
+            this._removeVectorHighlight(this._hoveredRecord);
         },
 
         /*

@@ -172,6 +172,16 @@
             var containerX = event.clientX - offset.left;
             var containerY = event.clientY - offset.top;
 
+            // If the cursor leaves the container, hide.
+            if (event.clientX < offset.left ||
+                event.clientX > offset.left + containerWidth ||
+                event.clientY < offset.top ||
+                event.clientY > offset.top + containerHeight) {
+                  this._trigger('cursorleave');
+                  this.hide();
+                  return;
+            }
+
             // Build starting bubble offsets.
             var bubbleY = containerY - (this.bubbleHeight/3);
             var bubbleX = containerX + 100;
@@ -194,8 +204,9 @@
             // Catch full-height.
             if (this.bubbleHeight > containerHeight) {
                 bubbleY = 0;
+                this.bubbleHeight = containerHeight;
                 this.bubble.css('overflow-y', 'scroll');
-                this.bubble.outerHeight(containerHeight);
+                this.bubble.outerHeight(this.bubbleHeight);
             }
 
             // Render position.
@@ -277,13 +288,6 @@
             // Get dimensions.
             this.bubbleHeight = clone.outerHeight();
             this.bubbleWidth = clone.outerWidth();
-
-            // If content height is taller than window,
-            // constrain to window height.
-            var windowHeight = this._window.height();
-            if (this.bubbleHeight > windowHeight) {
-                this.bubbleHeight = windowHeight;
-            }
 
             // Remove clone.
             clone.remove();

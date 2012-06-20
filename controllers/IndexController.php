@@ -61,27 +61,26 @@ class Neatline_IndexController extends Omeka_Controller_Action
     public function addAction()
     {
         $neatline = new NeatlineExhibit;
-
         $form = $this->_getNeatlineDetailsForm($neatline);
-
         $this->view->form = $form;
 
         if ($this->_request->isPost()) {
 
+            // Validate form.
             if ($form->isValid($_POST)) {
 
+                // Save and redirect.
                 $neatline->saveForm($form->getValues());
-
                 $successMessage = $this->_getAddSuccessMessage($neatline);
                 $this->flashSuccess($successMessage);
-
                 $this->_redirect('neatline-exhibits');
 
-            } else {
-
-                $this->flashError('There were problems with your form.');
-
             }
+
+            else {
+                $this->flashError('There were problems with your form.');
+            }
+
         }
 
     }
@@ -100,23 +99,24 @@ class Neatline_IndexController extends Omeka_Controller_Action
 
         if ($this->_request->isPost()) {
 
+            // Validate the form.
             if ($form->isValid($this->_request->getPost())) {
 
+                // Save and redirect.
                 $neatline->saveForm($form->getValues());
-
                 $successMessage = $this->_getEditSuccessMessage($neatline);
                 $this->flashSuccess($successMessage);
-
                 $this->_redirect('neatline-exhibits');
 
-            } else {
-
-                $this->flashError('There were problems with your form.');
-
             }
+
+            else {
+                $this->flashError('There were problems with your form.');
+            }
+
         }
 
-        // Push exhibit and form into view.
+        // Push exhibit and form.
         $this->view->neatlineexhibit = $neatline;
         $this->view->form = $form;
 
@@ -133,6 +133,7 @@ class Neatline_IndexController extends Omeka_Controller_Action
         // Get the exhibit.
         $neatline = $this->findById();
 
+        // Save query.
         if(isset($_GET['search'])) {
             $neatline->query = serialize($_GET);
             $neatline->save();
@@ -150,7 +151,13 @@ class Neatline_IndexController extends Omeka_Controller_Action
     public function showAction()
     {
         $neatline = $this->getTable('NeatlineExhibit')->findBySlug($this->_request->getParam('slug'));
-        $this->view->neatlineexhibit = $neatline;
+        $this->view->exhibit = $neatline;
+    }
+
+    public function fullscreenAction()
+    {
+        $neatline = $this->getTable('NeatlineExhibit')->findBySlug($this->_request->getParam('slug'));
+        $this->view->exhibit = $neatline;
     }
 
     /**
@@ -214,7 +221,7 @@ class Neatline_IndexController extends Omeka_Controller_Action
     }
 
     /**
-     * Sets the add success message
+     * Sets the add success message.
      */
     protected function _getAddSuccessMessage($neatline)
     {
@@ -230,7 +237,7 @@ class Neatline_IndexController extends Omeka_Controller_Action
     }
 
     /**
-     * Sets the delete success message
+     * Sets the delete success message.
      */
     protected function _getDeleteSuccessMessage($neatline)
     {
@@ -238,7 +245,7 @@ class Neatline_IndexController extends Omeka_Controller_Action
     }
 
     /**
-     * Sets the delete confirm message
+     * Sets the delete confirm message.
      */
     protected function _getDeleteConfirmMessage($neatline)
     {
@@ -246,6 +253,9 @@ class Neatline_IndexController extends Omeka_Controller_Action
              . 'and its associated metadata.';
     }
 
+    /**
+     * Construct the details form.
+     */
     private function _getNeatlineDetailsForm(NeatlineExhibit $neatline)
     {
 
@@ -254,6 +264,7 @@ class Neatline_IndexController extends Omeka_Controller_Action
         ));
 
         return $form;
+
     }
 
 }
