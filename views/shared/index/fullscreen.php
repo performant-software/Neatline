@@ -47,7 +47,8 @@
 
     <?php
     neatline_queueNeatlineAssets($neatlineexhibit);
-    neatline_queuePublicAssets();
+    neatline_queueFullscreenAssets();
+    neatline_queueExhibitCss($neatlineexhibit);
     ?>
 
     <!-- Stylesheets -->
@@ -65,8 +66,6 @@
 
 <body class="neatline <?php echo $neatlineexhibit->slug; ?>">
 
-<div id="topbar"></div>
-
 <?php if ((bool) $neatlineexhibit->public): ?>
 
     <!-- The core Neatline partial. -->
@@ -77,8 +76,6 @@
 <?php else: ?>
     <?php echo $this->partial('neatline/_private.php'); ?>
 <?php endif; ?>
-
-<div id="footer"></div>
 
 </body>
 </html>

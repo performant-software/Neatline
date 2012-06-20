@@ -247,6 +247,9 @@ class Neatline_IndexController extends Omeka_Controller_Action
              . 'and its associated metadata.';
     }
 
+    /**
+     * Construct the details form.
+     */
     private function _getNeatlineDetailsForm(NeatlineExhibit $neatline)
     {
 

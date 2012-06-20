@@ -89,6 +89,17 @@ function neatline_queueEditorAssets()
  *
  * @return void.
  */
+function neatline_queuePublicAssets()
+{
+    queue_js('_constructInThemeNeatline', 'javascripts');
+    queue_css('neatline-public');
+}
+
+/**
+ * Include the static files for a public-facing exhibit.
+ *
+ * @return void.
+ */
 function neatline_queueInThemeAssets()
 {
 

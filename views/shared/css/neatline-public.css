@@ -26,6 +26,11 @@
 
 /* Layout */
 
+body {
+    margin: 0;
+    padding: 0;
+}
+
 #neatline {
     position: relative;
     height: 600px;

@@ -194,8 +194,9 @@
             // Catch full-height.
             if (this.bubbleHeight > containerHeight) {
                 bubbleY = 0;
+                this.bubbleHeight = containerHeight;
                 this.bubble.css('overflow-y', 'scroll');
-                this.bubble.outerHeight(containerHeight);
+                this.bubble.outerHeight(this.bubbleHeight);
             }
 
             // Render position.
