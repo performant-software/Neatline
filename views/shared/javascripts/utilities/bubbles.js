@@ -172,6 +172,15 @@
             var containerX = event.clientX - offset.left;
             var containerY = event.clientY - offset.top;
 
+            // If the cursor leaves the container, hide.
+            if (event.clientX < offset.left ||
+                event.clientX > offset.left + containerWidth ||
+                event.clientY < offset.top ||
+                event.clientY > offset.top + containerHeight) {
+                  this.hide();
+                  return;
+            }
+
             // Build starting bubble offsets.
             var bubbleY = containerY - (this.bubbleHeight/3);
             var bubbleX = containerX + 100;
