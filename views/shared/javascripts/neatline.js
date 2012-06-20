@@ -75,8 +75,11 @@
             this.instantiateBubbles();
             this.refreshDivs();
 
-            // Disable selection on the container.
+            // Disable selection, listen for resize.
             this.element.disableSelection();
+            this._window.resize(_.bind(function() {
+                this.positionDivs();
+            }, this));
 
         },
 

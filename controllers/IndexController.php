@@ -154,6 +154,12 @@ class Neatline_IndexController extends Omeka_Controller_Action
         $this->view->exhibit = $neatline;
     }
 
+    public function fullscreenAction()
+    {
+        $neatline = $this->getTable('NeatlineExhibit')->findBySlug($this->_request->getParam('slug'));
+        $this->view->exhibit = $neatline;
+    }
+
     /**
      * ~ AJAX ~
      * Get events JSON for the timeline.

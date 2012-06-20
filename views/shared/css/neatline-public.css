@@ -24,6 +24,7 @@
  */
 
 @import url(http://fonts.googleapis.com/css?family=Cabin+Condensed);
+@import url(http://fonts.googleapis.com/css?family=Dosis);
 
 /* Layout */
 
@@ -31,7 +32,7 @@ body {
     margin: 0;
     padding: 0;
     background-color: #fafafa;
-    font-family: 'Cabin Condensed';
+    font-family: Dosis, 'Cabin Condensed';
 }
 
 #topbar {
@@ -51,7 +52,7 @@ div.exhibit-description {
     border-top: 7px solid #584561;
     border-bottom: 7px solid #584561;
     position: relative;
-    height: 600px;
+    height: 500px;
     font-size: 13px;
     font-weight: normal;
     line-height: 18px;
