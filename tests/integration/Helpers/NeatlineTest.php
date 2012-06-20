@@ -2,18 +2,9 @@
 /**
  * Tests for neatline function
  */
-class NeatlineTest extends Omeka_Test_AppTestCase
+class NeatlineTest extends Neatline_Test_AppTestCase
 {
     protected $_isAdminTest = false;
-
-    public function setUp()
-    {
-
-        parent::setUp();
-        $this->helper = new Neatline_Test_AppTestCase;
-        $this->helper->setUpPlugin();
-
-    }
 
     /**
      * Tests whether neatline() returns the correct value.
@@ -23,7 +14,7 @@ class NeatlineTest extends Omeka_Test_AppTestCase
     public function testNeatlineValue() 
     {
 
-        $neatline = $this->helper->_createNeatline();
+        $neatline = $this->_createNeatline();
 
         $this->dispatch('neatline-exhibits/show/test-exhibit');
 

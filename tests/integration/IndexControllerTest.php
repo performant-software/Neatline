@@ -24,7 +24,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache 2 License
  */
 
-class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
+class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
 {
 
     /**
@@ -36,8 +36,7 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
     {
 
         parent::setUp();
-        $this->helper = new Neatline_Test_AppTestCase;
-        $this->helper->setUpPlugin();
+
         $this->db = get_db();
         $this->_exhibitsTable = $this->db->getTable('NeatlineExhibit');
         $this->_layersTable = $this->db->getTable('NeatlineBaseLayer');
@@ -389,7 +388,7 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
     {
 
         // Create an exhibit.
-        $exhibit = $this->helper->_createNeatline();
+        $exhibit = $this->_createNeatline();
 
         // Duplicate slug.
         $this->request->setMethod('POST')
@@ -480,7 +479,7 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
     {
 
         // Create exhibit.
-        $exhibit = $this->helper->_createNeatline();
+        $exhibit = $this->_createNeatline();
 
         // Hit the edit form.
         $this->dispatch('neatline-exhibits/edit/'.$exhibit->id);
@@ -511,7 +510,7 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
     {
 
         // Create exhibit.
-        $exhibit = $this->helper->_createNeatline();
+        $exhibit = $this->_createNeatline();
 
         // Missing title.
         $this->request->setMethod('POST')
@@ -545,7 +544,7 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
     {
 
         // Create exhibit.
-        $exhibit = $this->helper->_createNeatline();
+        $exhibit = $this->_createNeatline();
 
         // Missing slug.
         $this->request->setMethod('POST')
@@ -579,7 +578,7 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
     {
 
         // Create exhibit.
-        $exhibit = $this->helper->_createNeatline();
+        $exhibit = $this->_createNeatline();
 
         // Spaces.
         $this->request->setMethod('POST')
@@ -613,7 +612,7 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
     {
 
         // Create exhibit.
-        $exhibit = $this->helper->_createNeatline();
+        $exhibit = $this->_createNeatline();
 
         // Spaces.
         $this->request->setMethod('POST')
@@ -647,7 +646,7 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
     {
 
         // Create exhibit.
-        $exhibit = $this->helper->_createNeatline();
+        $exhibit = $this->_createNeatline();
 
         // Spaces.
         $this->request->setMethod('POST')
@@ -681,7 +680,7 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
     {
 
         // Create exhibit.
-        $exhibit = $this->helper->_createNeatline();
+        $exhibit = $this->_createNeatline();
 
         // Spaces.
         $this->request->setMethod('POST')
@@ -715,7 +714,7 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
     {
 
         // Create exhibits.
-        $exhibit1 = $this->helper->_createNeatline(
+        $exhibit1 = $this->_createNeatline(
             $name = 'Test Exhibit 1',
             $description = 'Test description 1.',
             $slug = 'test-exhibit-1',
@@ -725,7 +724,7 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
             $is_undated_items = 1
         );
 
-        $exhibit2 = $this->helper->_createNeatline(
+        $exhibit2 = $this->_createNeatline(
             $name = 'Test Exhibit 2',
             $description = 'Test description 2.',
             $slug = 'test-exhibit-2',
@@ -767,7 +766,7 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
     {
 
         // Create exhibit.
-        $exhibit = $this->helper->_createNeatline();
+        $exhibit = $this->_createNeatline();
 
         // Valid form.
         $this->request->setMethod('POST')
@@ -802,9 +801,9 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
     {
 
         // Create an exhibit and items.
-        $neatline = $this->helper->_createNeatline();
-        $item1 = $this->helper->_createItem();
-        $item2 = $this->helper->_createItem();
+        $neatline = $this->_createNeatline();
+        $item1 = $this->_createItem();
+        $item2 = $this->_createItem();
 
         // Create two records.
         $record1 = new NeatlineDataRecord($item1, $neatline);
@@ -894,9 +893,9 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
     {
 
         // Create an exhibit and items.
-        $neatline = $this->helper->_createNeatline();
-        $item1 = $this->helper->_createItem();
-        $item2 = $this->helper->_createItem();
+        $neatline = $this->_createNeatline();
+        $item1 = $this->_createItem();
+        $item2 = $this->_createItem();
 
         // Create two records.
         $record1 = new NeatlineDataRecord($item1, $neatline);
@@ -1040,7 +1039,7 @@ class Neatline_IndexControllerTest extends Omeka_Test_AppTestCase
     {
 
         // Create an exhibit and item.
-        $neatline = $this->helper->_createNeatline();
+        $neatline = $this->_createNeatline();
 
         // Create record1.
         $record1 = new NeatlineDataRecord(null, $neatline);

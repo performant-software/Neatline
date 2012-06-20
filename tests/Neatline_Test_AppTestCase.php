@@ -41,7 +41,7 @@ class Neatline_Test_AppTestCase extends Omeka_Test_AppTestCase
      *
      * @return void.
      */
-    public function setUpPlugin()
+    public function setUp()
     {
 
         parent::setUp();

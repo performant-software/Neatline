@@ -24,7 +24,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache 2 License
  */
 
-class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
+class Neatline_NeatlineExhibitTest extends Neatline_Test_AppTestCase
 {
 
     /**
@@ -36,8 +36,7 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
     {
 
         parent::setUp();
-        $this->helper = new Neatline_Test_AppTestCase;
-        $this->helper->setUpPlugin();
+
         $this->db = get_db();
         $this->_exhibitsTable = $this->db->getTable('NeatlineExhibit');
 
@@ -138,7 +137,7 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
     public function testSaveFormWithoutImage()
     {
 
-        $neatline = $this->helper->_createNeatline();
+        $neatline = $this->_createNeatline();
         $this->assertNull($neatline->image_id);
 
     }
@@ -162,7 +161,7 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
     {
 
         // Create an exhibit and map.
-        $exhibit = $this->helper->_createNeatline();
+        $exhibit = $this->_createNeatline();
 
         // Get the map and check.
         $retrievedImage = $exhibit->getImage();
@@ -181,7 +180,7 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
     {
 
         // Create an exhibit and map.
-        $neatline = $this->helper->_createNeatline();
+        $neatline = $this->_createNeatline();
 
         // Save with int zoom and check.
         $neatline->saveViewportPositions('center', 5, 'date', 10);
@@ -206,7 +205,7 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
     {
 
         // Create an exhibit and map.
-        $neatline = $this->helper->_createNeatline();
+        $neatline = $this->_createNeatline();
 
         // Save.
         $neatline->saveViewportArrangement(
@@ -244,8 +243,8 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
     {
 
         // Create an exhibit and item.
-        $neatline = $this->helper->_createNeatline();
-        $item = $this->helper->_createItem();
+        $neatline = $this->_createNeatline();
+        $item = $this->_createItem();
 
         // Create a record.
         $record = new NeatlineDataRecord($item, $neatline);
@@ -276,8 +275,8 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
     {
 
         // Create an exhibit and item.
-        $neatline = $this->helper->_createNeatline();
-        $item = $this->helper->_createItem();
+        $neatline = $this->_createNeatline();
+        $item = $this->_createItem();
 
         // Create a record.
         $record = new NeatlineDataRecord($item, $neatline);
@@ -300,8 +299,8 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
     {
 
         // Create an exhibit and item.
-        $neatline = $this->helper->_createNeatline();
-        $item = $this->helper->_createItem();
+        $neatline = $this->_createNeatline();
+        $item = $this->_createItem();
 
         // Check for null.
         $retrievedId = $neatline->getRecordIdByItem($item);
@@ -319,10 +318,10 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
     {
 
         // Create exhibits and items.
-        $neatline1 = $this->helper->_createNeatline('Test Exhibit 1', '', 'test-exhibit-1');
-        $neatline2 = $this->helper->_createNeatline('Test Exhibit 2', '', 'test-exhibit-2');
-        $item1 = $this->helper->_createItem();
-        $item2 = $this->helper->_createItem();
+        $neatline1 = $this->_createNeatline('Test Exhibit 1', '', 'test-exhibit-1');
+        $neatline2 = $this->_createNeatline('Test Exhibit 2', '', 'test-exhibit-2');
+        $item1 = $this->_createItem();
+        $item2 = $this->_createItem();
 
         // Create records.
         $record1 = new NeatlineDataRecord($item1, $neatline1);
@@ -359,7 +358,7 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
     {
 
         // Create a record.
-        $exhibit = $this->helper->_createNeatline();
+        $exhibit = $this->_createNeatline();
 
         // Set system styling defaults.
         set_option('vector_color', '#5033de');
@@ -397,7 +396,7 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
     {
 
         // Create a record.
-        $exhibit = $this->helper->_createNeatline();
+        $exhibit = $this->_createNeatline();
 
         // Set.
         $this->assertFalse($exhibit->setStyle('vector_color', get_option('vector_color')));
@@ -427,7 +426,7 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
     {
 
         // Create a record.
-        $exhibit = $this->helper->_createNeatline();
+        $exhibit = $this->_createNeatline();
         $exhibit->default_vector_color = '#000000';
         $exhibit->default_stroke_color = '#000000';
         $exhibit->default_vector_opacity = 1;
@@ -471,7 +470,7 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
     {
 
         // Create a record.
-        $exhibit = $this->helper->_createNeatline();
+        $exhibit = $this->_createNeatline();
 
         // Set system styling defaults.
         set_option('vector_color', '#5033de');
@@ -509,7 +508,7 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
     {
 
         // Create a record.
-        $exhibit = $this->helper->_createNeatline();
+        $exhibit = $this->_createNeatline();
 
         // Set system styling defaults.
         set_option('vector_color', '#5033de');
@@ -538,7 +537,7 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
     {
 
         // Create exhibits.
-        $neatline = $this->helper->_createNeatline();
+        $neatline = $this->_createNeatline();
 
         // Check count.
         $this->assertEquals($neatline->getNumberOfRecords(), 0);
@@ -554,8 +553,8 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
     {
 
         // Create exhibits.
-        $neatline1 = $this->helper->_createNeatline('Test Exhibit 1', '', 'test-exhibit-1');
-        $neatline2 = $this->helper->_createNeatline('Test Exhibit 2', '', 'test-exhibit-2');
+        $neatline1 = $this->_createNeatline('Test Exhibit 1', '', 'test-exhibit-1');
+        $neatline2 = $this->_createNeatline('Test Exhibit 2', '', 'test-exhibit-2');
 
         // Create records.
         $record1 = new NeatlineDataRecord(null, $neatline1);
@@ -587,7 +586,7 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
     {
 
         // Create exhibit.
-        $neatline = $this->helper->_createNeatline();
+        $neatline = $this->_createNeatline();
 
         // Get base layer.
         $baseLayer = $neatline->getBaseLayer();
@@ -607,7 +606,7 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
     {
 
         // Create exhibit and layer.
-        $neatline = $this->helper->_createNeatline();
+        $neatline = $this->_createNeatline();
         $layer = new NeatlineBaseLayer;
         $layer->name = 'Test Layer';
         $layer->save();
@@ -638,7 +637,7 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
         set_option('v_percent', 85);
 
         // Create exhibit.
-        $exhibit = $this->helper->_createNeatline();
+        $exhibit = $this->_createNeatline();
 
         // Test for system defaults.
         $this->assertEquals(
@@ -662,7 +661,7 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
         set_option('v_percent', 85);
 
         // Create exhibit and set local values.
-        $exhibit = $this->helper->_createNeatline();
+        $exhibit = $this->_createNeatline();
         $exhibit->h_percent = 10;
         $exhibit->v_percent = 20;
 
@@ -687,7 +686,7 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
         set_option('timeline_zoom', 25);
 
         // Create exhibit.
-        $exhibit = $this->helper->_createNeatline();
+        $exhibit = $this->_createNeatline();
 
         // Test for system default.
         $this->assertEquals(
@@ -710,7 +709,7 @@ class Neatline_NeatlineExhibitTest extends Omeka_Test_AppTestCase
         set_option('timeline_zoom', 25);
 
         // Create exhibit.
-        $exhibit = $this->helper->_createNeatline();
+        $exhibit = $this->_createNeatline();
         $exhibit->default_timeline_zoom = 3;
 
         // Test for system default.

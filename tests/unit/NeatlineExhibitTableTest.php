@@ -24,7 +24,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache 2 License
  */
 
-class Neatline_NeatlineExhibitTableTest extends Omeka_Test_AppTestCase
+class Neatline_NeatlineExhibitTableTest extends Neatline_Test_AppTestCase
 {
 
     /**
@@ -36,8 +36,7 @@ class Neatline_NeatlineExhibitTableTest extends Omeka_Test_AppTestCase
     {
 
         parent::setUp();
-        $this->helper = new Neatline_Test_AppTestCase;
-        $this->helper->setUpPlugin();
+
         $this->db = get_db();
         $this->_exhibitsTable = $this->db->getTable('NeatlineExhibit');
 
@@ -121,7 +120,7 @@ class Neatline_NeatlineExhibitTableTest extends Omeka_Test_AppTestCase
     {
 
         // Create exhibit.
-        $exhibit = $this->helper->_createNeatline(
+        $exhibit = $this->_createNeatline(
             $name = 'Test Exhibit',
             $description = 'Test description.',
             $slug = 'test-slug',
@@ -149,7 +148,7 @@ class Neatline_NeatlineExhibitTableTest extends Omeka_Test_AppTestCase
     {
 
         // Create exhibit.
-        $exhibit = $this->helper->_createNeatline(
+        $exhibit = $this->_createNeatline(
             $name = 'Test Exhibit',
             $description = 'Test description.',
             $slug = '---select-1-',

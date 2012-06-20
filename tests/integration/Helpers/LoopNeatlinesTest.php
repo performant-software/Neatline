@@ -2,16 +2,7 @@
 /**
  * Tests for the loop_neatlines helper.
  */
-class LoopNeatlinesTest extends Omeka_Test_AppTestCase {
-
-    public function setUp()
-    {
-
-        parent::setUp();
-        $this->helper = new Neatline_Test_AppTestCase;
-        $this->helper->setUpPlugin();
-
-    }
+class LoopNeatlinesTest extends Neatline_Test_AppTestCase {
 
     public function testNoLoopNeatlines()
     {
@@ -25,7 +16,7 @@ class LoopNeatlinesTest extends Omeka_Test_AppTestCase {
     {
 
         for ($i=1; $i<=5; $i++) {
-          $this->helper->_createNeatline('Neatline '.$i, 'Neatline', 'neatline-'.$i);
+          $this->_createNeatline('Neatline '.$i, 'Neatline', 'neatline-'.$i);
         }
 
         $this->dispatch('neatline-exhibits');

@@ -27,7 +27,7 @@
 /**
  * This tests for functionality in the Plugin object itself.
  **/
-class NeatlinePluginTest extends Omeka_Test_AppTestCase
+class NeatlinePluginTest extends Neatline_Test_AppTestCase
 {
 
     /**
@@ -39,8 +39,7 @@ class NeatlinePluginTest extends Omeka_Test_AppTestCase
     public function setUp()
     {
         parent::setUp();
-        $this->helper = new Neatline_Test_AppTestCase;
-        $this->helper->setUpPlugin();
+
         $this->db = get_db();
         $this->_dataTable = $this->db->getTable('NeatlineDataRecord');
     }
@@ -53,8 +52,8 @@ class NeatlinePluginTest extends Omeka_Test_AppTestCase
      **/
     public function testBeforeDeleteRecord()
     {
-        $item     = $this->helper->_createItem();
-        $neatline = $this->helper->_createNeatline();
+        $item     = $this->_createItem();
+        $neatline = $this->_createNeatline();
         $record   = new NeatlineDataRecord($item, $neatline);
         $record->save();
 

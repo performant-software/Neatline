@@ -26,7 +26,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache 2 License
  */
 
-class Neatline_FixtureBuilderTest extends Omeka_Test_AppTestCase
+class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
 {
 
     protected $_isAdminTest = false;
@@ -44,10 +44,6 @@ class Neatline_FixtureBuilderTest extends Omeka_Test_AppTestCase
 
         $this->path_to_fixtures = NEATLINE_PLUGIN_DIR . '/spec/javascripts/fixtures/';
 
-        $this->helper = new Neatline_Test_AppTestCase;
-        $this->helper->setUpPlugin();
-        $this->db = get_db();
-
     }
 
     /**
@@ -59,7 +55,7 @@ class Neatline_FixtureBuilderTest extends Omeka_Test_AppTestCase
     {
 
         // Mock exhibit.
-        $exhibit = $this->helper->_createNeatline();
+        $exhibit = $this->_createNeatline();
 
         $fixture = fopen($this->path_to_fixtures . 'neatline-base.html', 'w');
 
@@ -145,7 +141,7 @@ class Neatline_FixtureBuilderTest extends Omeka_Test_AppTestCase
         $this->db->query($sql);
 
         // Mock exhibit.
-        $exhibit = $this->helper->_createNeatline();
+        $exhibit = $this->_createNeatline();
         $exhibit->top_element = 'map';
         $exhibit->items_h_pos = 'right';
         $exhibit->items_v_pos = 'top';
@@ -179,7 +175,7 @@ class Neatline_FixtureBuilderTest extends Omeka_Test_AppTestCase
         $item->save();
 
         // Mock exhibit.
-        $exhibit = $this->helper->_createNeatline();
+        $exhibit = $this->_createNeatline();
 
         // Record 1.
         $record1 = new NeatlineDataRecord();
@@ -246,7 +242,7 @@ class Neatline_FixtureBuilderTest extends Omeka_Test_AppTestCase
         $item3->save();
 
         // Mock exhibit.
-        $exhibit = $this->helper->_createNeatline();
+        $exhibit = $this->_createNeatline();
         $exhibit->query = serialize(
             array('range' => $item1->id . '-' . $item3->id)
         );
@@ -303,8 +299,8 @@ class Neatline_FixtureBuilderTest extends Omeka_Test_AppTestCase
         $fixture = fopen($this->path_to_fixtures . 'editor-form-ajax.html', 'w');
 
         // Mock exhibit and item.
-        $exhibit = $this->helper->_createNeatline();
-        $item = $this->helper->_createItem();
+        $exhibit = $this->_createNeatline();
+        $item = $this->_createItem();
 
         // Mock record.
         $record1 = new NeatlineDataRecord($item, $exhibit);
@@ -373,7 +369,7 @@ class Neatline_FixtureBuilderTest extends Omeka_Test_AppTestCase
         $item2->save();
 
         // Mock exhibit.
-        $exhibit = $this->helper->_createNeatline();
+        $exhibit = $this->_createNeatline();
 
         // Record 1.
         $record1 = new NeatlineDataRecord();

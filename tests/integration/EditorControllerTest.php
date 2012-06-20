@@ -24,7 +24,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache 2 License
  */
 
-class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
+class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
 {
 
     // Testing parameters.
@@ -65,8 +65,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
     {
 
         parent::setUp();
-        $this->helper = new Neatline_Test_AppTestCase;
-        $this->helper->setUpPlugin();
+
         $this->db = get_db();
         $this->_recordsTable = $this->db->getTable('NeatlineDataRecord');
         $this->_exhibitsTable = $this->db->getTable('NeatlineExhibit');
@@ -83,7 +82,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
     {
 
         // Create entities.
-        $exhibit = $this->helper->_createNeatline();
+        $exhibit = $this->_createNeatline();
 
         // Hit the route and capture the view.
         $this->dispatch('neatline-exhibits/editor/' . $exhibit->id);
@@ -101,8 +100,8 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
     {
 
         // Create item, exhibit, and records.
-        $item = $this->helper->_createItem();
-        $neatline = $this->helper->_createNeatline();
+        $item = $this->_createItem();
+        $neatline = $this->_createNeatline();
         $record1 = new NeatlineDataRecord(null, $neatline);
         $record1->save();
         $record2 = new NeatlineDataRecord($item, $neatline);
@@ -132,8 +131,8 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
     {
 
         // Create item, exhibit, and records.
-        $item = $this->helper->_createItem();
-        $exhibit = $this->helper->_createNeatline();
+        $item = $this->_createItem();
+        $exhibit = $this->_createNeatline();
         $record1 = new NeatlineDataRecord(null, $exhibit);
         $record1->save();
         $record2 = new NeatlineDataRecord($item, $exhibit);
@@ -186,8 +185,8 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
     {
 
         // Create item, exhibit, and records.
-        $item = $this->helper->_createItem();
-        $exhibit = $this->helper->_createNeatline();
+        $item = $this->_createItem();
+        $exhibit = $this->_createNeatline();
         $record = new NeatlineDataRecord($item, $exhibit);
         $record->save();
 
@@ -238,8 +237,8 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
     {
 
         // Create item, exhibit, and records.
-        $item = $this->helper->_createItem();
-        $exhibit = $this->helper->_createNeatline();
+        $item = $this->_createItem();
+        $exhibit = $this->_createNeatline();
         $record1 = new NeatlineDataRecord(null, $exhibit);
         $record1->save();
         $record2 = new NeatlineDataRecord($item, $exhibit);
@@ -292,8 +291,8 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
     {
 
         // Create item, exhibit, and record.
-        $item = $this->helper->_createItem();
-        $neatline = $this->helper->_createNeatline();
+        $item = $this->_createItem();
+        $neatline = $this->_createNeatline();
         $record = new NeatlineDataRecord($item, $neatline);
         $record->save();
 
@@ -343,8 +342,8 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
     {
 
         // Create item, exhibit, and record.
-        $item = $this->helper->_createItem();
-        $neatline = $this->helper->_createNeatline();
+        $item = $this->_createItem();
+        $neatline = $this->_createNeatline();
         $record = new NeatlineDataRecord($item, $neatline);
         $record->save();
 
@@ -395,8 +394,8 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
     {
 
         // Create item, exhibit, and record.
-        $item = $this->helper->_createItem();
-        $neatline = $this->helper->_createNeatline();
+        $item = $this->_createItem();
+        $neatline = $this->_createNeatline();
 
         // Form the POST for a space change.
         $this->request->setMethod('POST')
@@ -445,8 +444,8 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
     {
 
         // Create item, exhibit, and record.
-        $item = $this->helper->_createItem();
-        $neatline = $this->helper->_createNeatline();
+        $item = $this->_createItem();
+        $neatline = $this->_createNeatline();
         $record = new NeatlineDataRecord($item, $neatline);
         $record->save();
 
@@ -490,8 +489,8 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
     {
 
         // Create item, exhibit, and record.
-        $item = $this->helper->_createItem();
-        $neatline = $this->helper->_createNeatline();
+        $item = $this->_createItem();
+        $neatline = $this->_createNeatline();
 
         // Form the POST for a space change.
         $this->request->setMethod('POST')
@@ -532,9 +531,9 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
     {
 
         // Create item, exhibit, and record.
-        $item = $this->helper->_createItem();
-        $neatline = $this->helper->_createNeatline();
-        $parent = $this->helper->_createRecord();
+        $item = $this->_createItem();
+        $neatline = $this->_createNeatline();
+        $parent = $this->_createRecord();
         $record = new NeatlineDataRecord($item, $neatline);
 
         // Populate fields.
@@ -621,8 +620,8 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
     {
 
         // Create item, exhibit, and record.
-        $item = $this->helper->_createItem();
-        $neatline = $this->helper->_createNeatline();
+        $item = $this->_createItem();
+        $neatline = $this->_createNeatline();
         $record = new NeatlineDataRecord($item, $neatline);
         $record->save();
 
@@ -683,17 +682,17 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
     {
 
         // Create item and exhibit.
-        $item = $this->helper->_createItem();
-        $neatline = $this->helper->_createNeatline();
+        $item = $this->_createItem();
+        $neatline = $this->_createNeatline();
 
         // Create element texts.
-        $this->helper->_createElementText(
+        $this->_createElementText(
             $item,
             'Dublin Core',
             'Title',
             'Test Title');
 
-        $this->helper->_createElementText(
+        $this->_createElementText(
             $item,
             'Dublin Core',
             'Description',
@@ -758,7 +757,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
     {
 
         // Create exhibit and records.
-        $neatline = $this->helper->_createNeatline();
+        $neatline = $this->_createNeatline();
         $record1 = new NeatlineDataRecord(null, $neatline);
         $record1->save();
 
@@ -953,8 +952,8 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
     {
 
         // Create exhibit and item.
-        $neatline = $this->helper->_createNeatline();
-        $item = $this->helper->_createItem();
+        $neatline = $this->_createNeatline();
+        $item = $this->_createItem();
         $record1 = new NeatlineDataRecord(null, $neatline);
         $record1->save();
 
@@ -1148,11 +1147,11 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
     {
 
         // Create exhibit and records.
-        $neatline = $this->helper->_createNeatline();
+        $neatline = $this->_createNeatline();
         $record1 = new NeatlineDataRecord(null, $neatline);
         $record1->save();
 
-        $item = $this->helper->_createItem();
+        $item = $this->_createItem();
         $record2 = new NeatlineDataRecord($item, $neatline);
         $record2->parent_record_id = $record1->id;
         $record2->save();
@@ -1351,11 +1350,11 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
     {
 
         // Create exhibit and records.
-        $neatline = $this->helper->_createNeatline();
+        $neatline = $this->_createNeatline();
         $record1 = new NeatlineDataRecord(null, $neatline);
         $record1->save();
 
-        $item = $this->helper->_createItem();
+        $item = $this->_createItem();
         $record2 = new NeatlineDataRecord($item, $neatline);
         $record2->parent_record_id = $record1->id;
         $record2->save();
@@ -1472,11 +1471,11 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
     {
 
         // Create exhibit and records.
-        $neatline = $this->helper->_createNeatline();
+        $neatline = $this->_createNeatline();
         $record1 = new NeatlineDataRecord(null, $neatline);
         $record1->save();
 
-        $item = $this->helper->_createItem();
+        $item = $this->_createItem();
         $record2 = new NeatlineDataRecord($item, $neatline);
         $record2->parent_record_id = $record1->id;
         $record2->save();
@@ -1551,7 +1550,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
     {
 
         // Create exhibit and record.
-        $neatline = $this->helper->_createNeatline();
+        $neatline = $this->_createNeatline();
         $record = new NeatlineDataRecord(null, $neatline);
         $record->geocoverage = 'POINT(1,0)';
         $record->save();
@@ -1614,8 +1613,8 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
     {
 
         // Create exhibit and item.
-        $neatline = $this->helper->_createNeatline();
-        $item = $this->helper->_createItem();
+        $neatline = $this->_createNeatline();
+        $item = $this->_createItem();
         $record = new NeatlineDataRecord($item, $neatline);
         $record->save();
 
@@ -1675,8 +1674,8 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
     {
 
         // Create exhibit and item.
-        $neatline = $this->helper->_createNeatline();
-        $item = $this->helper->_createItem();
+        $neatline = $this->_createNeatline();
+        $item = $this->_createItem();
         $record = new NeatlineDataRecord($item, $neatline);
         $record->save();
 
@@ -1738,8 +1737,8 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
     {
 
         // Create exhibit and item.
-        $neatline = $this->helper->_createNeatline();
-        $item = $this->helper->_createItem();
+        $neatline = $this->_createNeatline();
+        $item = $this->_createItem();
 
         // Form the POST with new geocoverage data.
         $this->request->setMethod('POST')
@@ -1796,8 +1795,8 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
     {
 
         // Create exhibit and item.
-        $neatline = $this->helper->_createNeatline();
-        $item = $this->helper->_createItem();
+        $neatline = $this->_createNeatline();
+        $item = $this->_createItem();
         $record = new NeatlineDataRecord($item, $neatline);
         $record->save();
 
@@ -1859,8 +1858,8 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
     {
 
         // Create exhibit and item.
-        $neatline = $this->helper->_createNeatline();
-        $item = $this->helper->_createItem();
+        $neatline = $this->_createNeatline();
+        $item = $this->_createItem();
 
         // Form the POST with new geocoverage data.
         $this->request->setMethod('POST')
@@ -1916,12 +1915,12 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
     {
 
         // Create an exhibit, items, and records.
-        $neatline = $this->helper->_createNeatline();
-        $item1 = $this->helper->_createItem();
-        $item2 = $this->helper->_createItem();
-        $item3 = $this->helper->_createItem();
-        $item4 = $this->helper->_createItem();
-        $item5 = $this->helper->_createItem();
+        $neatline = $this->_createNeatline();
+        $item1 = $this->_createItem();
+        $item2 = $this->_createItem();
+        $item3 = $this->_createItem();
+        $item4 = $this->_createItem();
+        $item5 = $this->_createItem();
         $record1 = new NeatlineDataRecord($item1, $neatline);
         $record2 = new NeatlineDataRecord($item2, $neatline);
         $record3 = new NeatlineDataRecord($item3, $neatline);
@@ -2147,7 +2146,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
     {
 
         // Create an exhibit.
-        $exhibit = $this->helper->_createNeatline();
+        $exhibit = $this->_createNeatline();
 
         // Form the POST.
         $this->request->setMethod('POST')
@@ -2182,8 +2181,8 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
     {
 
         // Create entities.
-        $exhibit = $this->helper->_createNeatline();
-        $item = $this->helper->_createItem();
+        $exhibit = $this->_createNeatline();
+        $item = $this->_createItem();
         $record = new NeatlineDataRecord($item, $exhibit);
         $record->save();
 
@@ -2226,8 +2225,8 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
     {
 
         // Create entities.
-        $exhibit = $this->helper->_createNeatline();
-        $item = $this->helper->_createItem();
+        $exhibit = $this->_createNeatline();
+        $item = $this->_createItem();
 
         // Form the POST.
         $this->request->setMethod('POST')
@@ -2268,7 +2267,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
     {
 
         // Create entities.
-        $exhibit = $this->helper->_createNeatline();
+        $exhibit = $this->_createNeatline();
         $record = new NeatlineDataRecord(null, $exhibit);
         $record->save();
 
@@ -2311,8 +2310,8 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
     {
 
         // Create entities.
-        $exhibit = $this->helper->_createNeatline();
-        $item = $this->helper->_createItem();
+        $exhibit = $this->_createNeatline();
+        $item = $this->_createItem();
         $record = new NeatlineDataRecord($item, $exhibit);
         $record->save();
 
@@ -2353,8 +2352,8 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
     {
 
         // Create an exhibit, item, and record.
-        $neatline = $this->helper->_createNeatline();
-        $item = $this->helper->_createItem();
+        $neatline = $this->_createNeatline();
+        $item = $this->_createItem();
 
         // Prepare the request.
         $this->request->setMethod('GET')
@@ -2387,7 +2386,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
     {
 
         // Create an exhibit and records.
-        $neatline = $this->helper->_createNeatline();
+        $neatline = $this->_createNeatline();
         $record1 = new NeatlineDataRecord(null, $neatline);
         $record1->save();
         $record2 = new NeatlineDataRecord(null, $neatline);
@@ -2426,7 +2425,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
     {
 
         // Create an exhibit.
-        $exhibit = $this->helper->_createNeatline();
+        $exhibit = $this->_createNeatline();
 
         // Set system styling defaults.
         set_option('vector_color', '#5033de');
@@ -2493,7 +2492,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
     {
 
         // Create an exhibit.
-        $exhibit = $this->helper->_createNeatline();
+        $exhibit = $this->_createNeatline();
 
         // Form the POST.
         $this->request->setMethod('POST')
@@ -2540,7 +2539,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
     {
 
         // Create an exhibit.
-        $exhibit = $this->helper->_createNeatline();
+        $exhibit = $this->_createNeatline();
         $exhibit->default_vector_color = '#000000';
         $exhibit->default_stroke_color = '#000000';
         $exhibit->default_vector_opacity = 1;
@@ -2607,7 +2606,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
     {
 
         // Create an exhibit, set is_context_band.
-        $exhibit = $this->helper->_createNeatline();
+        $exhibit = $this->_createNeatline();
         $exhibit->is_context_band = 0;
 
         // Set system styling defaults.
@@ -2647,7 +2646,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
     {
 
         // Create an exhibit.
-        $exhibit = $this->helper->_createNeatline();
+        $exhibit = $this->_createNeatline();
         $record = new NeatlineDataRecord(null, $exhibit);
 
         // Set styles.
@@ -2692,8 +2691,8 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
     {
 
         // Create an exhibit, item, and record.
-        $exhibit = $this->helper->_createNeatline();
-        $item = $this->helper->_createItem();
+        $exhibit = $this->_createNeatline();
+        $item = $this->_createItem();
         $record = new NeatlineDataRecord($item, $exhibit);
 
         // Set description and use_dc_metadata.
@@ -2737,8 +2736,8 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
     {
 
         // Create an exhibit, item, and record.
-        $exhibit = $this->helper->_createNeatline();
-        $item = $this->helper->_createItem();
+        $exhibit = $this->_createNeatline();
+        $item = $this->_createItem();
         $record = new NeatlineDataRecord($item, $exhibit);
 
         // Set description and use_dc_metadata.
@@ -2777,8 +2776,8 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
     {
 
         // Create an exhibit, item, and record.
-        $exhibit = $this->helper->_createNeatline();
-        $item = $this->helper->_createItem();
+        $exhibit = $this->_createNeatline();
+        $item = $this->_createItem();
 
         // Form the POST.
         $this->request->setMethod('POST')

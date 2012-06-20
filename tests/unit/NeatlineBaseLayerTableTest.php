@@ -24,7 +24,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache 2 License
  */
 
-class Neatline_NeatlineBaseLayerTableTest extends Omeka_Test_AppTestCase
+class Neatline_NeatlineBaseLayerTableTest extends Neatline_Test_AppTestCase
 {
 
     /**
@@ -36,8 +36,7 @@ class Neatline_NeatlineBaseLayerTableTest extends Omeka_Test_AppTestCase
     {
 
         parent::setUp();
-        $this->helper = new Neatline_Test_AppTestCase;
-        $this->helper->setUpPlugin();
+
         $this->db = get_db();
         $this->_layersTable = $this->db->getTable('NeatlineBaseLayer');
 

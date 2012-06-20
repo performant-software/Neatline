@@ -2,16 +2,7 @@
 /**
  * Tests for has_neatlines_for_loop helper.
  */
-class HasNeatlinesForLoopTest extends Omeka_Test_AppTestCase {
-
-    public function setUp()
-    {
-
-        parent::setUp();
-        $this->helper = new Neatline_Test_AppTestCase;
-        $this->helper->setUpPlugin();
-
-    }
+class HasNeatlinesForLoopTest extends Neatline_Test_AppTestCase {
 
     /**
      * Shouldn't have neatlines for loop, since we haven't created any.
@@ -30,7 +21,7 @@ class HasNeatlinesForLoopTest extends Omeka_Test_AppTestCase {
     public function testHasNeatlinesForLoop()
     {
 
-        $this->helper->_createNeatline();
+        $this->_createNeatline();
         $this->dispatch('neatline-exhibits');
         $this->assertTrue(has_neatlines_for_loop());
 
@@ -42,7 +33,7 @@ class HasNeatlinesForLoopTest extends Omeka_Test_AppTestCase {
     public function testHasNoNeatlinesForLoopAfterReset()
     {
 
-        $this->helper->_createNeatline();
+        $this->_createNeatline();
         $this->dispatch('neatline-exhibits');
         $this->assertTrue(has_neatlines_for_loop());
 

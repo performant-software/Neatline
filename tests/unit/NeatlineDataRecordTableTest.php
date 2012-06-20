@@ -24,7 +24,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache 2 License
  */
 
-class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
+class Neatline_NeatlineDataRecordTableTest extends Neatline_Test_AppTestCase
 {
 
     // Testing parameters.
@@ -57,8 +57,7 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
     {
 
         parent::setUp();
-        $this->helper = new Neatline_Test_AppTestCase;
-        $this->helper->setUpPlugin();
+
         $this->db = get_db();
         $this->_recordsTable = $this->db->getTable('NeatlineDataRecord');
 
@@ -73,8 +72,8 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
     {
 
         // Create item, exhibit, and record.
-        $item = $this->helper->_createItem();
-        $neatline = $this->helper->_createNeatline();
+        $item = $this->_createItem();
+        $neatline = $this->_createNeatline();
         $record1 = new NeatlineDataRecord($item, $neatline);
         $record1->save();
         $record2 = new NeatlineDataRecord(null, $neatline);
@@ -101,8 +100,8 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
     {
 
         // Create item, exhibit, and record.
-        $item = $this->helper->_createItem();
-        $neatline = $this->helper->_createNeatline();
+        $item = $this->_createItem();
+        $neatline = $this->_createNeatline();
 
         // 0 records.
         $this->assertEquals($this->_recordsTable->count(), 0);
@@ -126,8 +125,8 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
     {
 
         // Create item and exhibit.
-        $item = $this->helper->_createItem();
-        $neatline = $this->helper->_createNeatline();
+        $item = $this->_createItem();
+        $neatline = $this->_createNeatline();
 
         // Try to get a non-existent record.
         $noRecord = $this->_recordsTable->getRecordByItemAndExhibit($item, $neatline);
@@ -144,8 +143,8 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
     {
 
         // Create item, exhibit, and record.
-        $item = $this->helper->_createItem();
-        $neatline = $this->helper->_createNeatline();
+        $item = $this->_createItem();
+        $neatline = $this->_createNeatline();
         $record = new NeatlineDataRecord($item, $neatline);
         $record->save();
 
@@ -180,8 +179,8 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
     {
 
         // Create item, exhibit, and record.
-        $item = $this->helper->_createItem();
-        $neatline = $this->helper->_createNeatline();
+        $item = $this->_createItem();
+        $neatline = $this->_createNeatline();
         $record = new NeatlineDataRecord($item, $neatline);
         $record->save();
 
@@ -200,8 +199,8 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
     {
 
         // Create item, exhibit, and record.
-        $item = $this->helper->_createItem();
-        $neatline = $this->helper->_createNeatline();
+        $item = $this->_createItem();
+        $neatline = $this->_createNeatline();
         $record = new NeatlineDataRecord($item, $neatline);
         $record->slug = 'test-slug';
         $record->save();
@@ -248,8 +247,8 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
     {
 
         // Create item and exhibit.
-        $item = $this->helper->_createItem();
-        $exhibit = $this->helper->_createNeatline();
+        $item = $this->_createItem();
+        $exhibit = $this->_createNeatline();
 
         // Create two records.
         $record1 = new NeatlineDataRecord($item, $exhibit);
@@ -274,8 +273,8 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
     {
 
         // Create item and exhibit.
-        $item = $this->helper->_createItem();
-        $exhibit = $this->helper->_createNeatline();
+        $item = $this->_createItem();
+        $exhibit = $this->_createNeatline();
 
         // Create two records.
         $record1 = new NeatlineDataRecord($item, $exhibit);
@@ -300,8 +299,8 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
     {
 
         // Create item and exhibit.
-        $item = $this->helper->_createItem();
-        $exhibit = $this->helper->_createNeatline();
+        $item = $this->_createItem();
+        $exhibit = $this->_createNeatline();
 
         // Create two records.
         $record1 = new NeatlineDataRecord($item, $exhibit);
@@ -327,7 +326,7 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
     {
 
         // Create exhibit.
-        $exhibit = $this->helper->_createNeatline();
+        $exhibit = $this->_createNeatline();
         $record1 = new NeatlineDataRecord(null, $exhibit);
         $record1->title = 'Title 1';
         $record1->save();
@@ -360,7 +359,7 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
     {
 
         // Create exhibit.
-        $exhibit = $this->helper->_createNeatline();
+        $exhibit = $this->_createNeatline();
         $record1 = new NeatlineDataRecord(null, $exhibit);
         $record1->title = 'Title 1';
         $record1->save();
@@ -395,8 +394,8 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
     {
 
         // Create item, exhibit, and record.
-        $item = $this->helper->_createItem();
-        $neatline = $this->helper->_createNeatline();
+        $item = $this->_createItem();
+        $neatline = $this->_createNeatline();
 
         // At the start, no records.
         $this->assertEquals($this->_recordsTable->count(), 0);
@@ -449,8 +448,8 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
     {
 
         // Create item, exhibit, and record.
-        $item = $this->helper->_createItem();
-        $neatline = $this->helper->_createNeatline();
+        $item = $this->_createItem();
+        $neatline = $this->_createNeatline();
         $record = new NeatlineDataRecord($item, $neatline);
         $record->save();
 
@@ -496,8 +495,8 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
     {
 
         // Create item, exhibit, and record.
-        $item = $this->helper->_createItem();
-        $neatline = $this->helper->_createNeatline();
+        $item = $this->_createItem();
+        $neatline = $this->_createNeatline();
         $record = new NeatlineDataRecord($item, $neatline);
 
         // Populate statuses with trues.
@@ -543,8 +542,8 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
     {
 
         // Create item, exhibit, and record.
-        $item = $this->helper->_createItem();
-        $neatline = $this->helper->_createNeatline();
+        $item = $this->_createItem();
+        $neatline = $this->_createNeatline();
 
         // Get.
         $spaceStatus = $this->_recordsTable->getRecordStatus($item, $neatline, 'space');
@@ -568,9 +567,9 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
     {
 
         // Create two items and an exhibit.
-        $item1 = $this->helper->_createItem();
-        $item2 = $this->helper->_createItem();
-        $neatline = $this->helper->_createNeatline();
+        $item1 = $this->_createItem();
+        $item2 = $this->_createItem();
+        $neatline = $this->_createNeatline();
 
         // Create two records.
         $record1 = new NeatlineDataRecord($item1, $neatline);
@@ -599,7 +598,7 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
     {
 
         // Create two items and an exhibit.
-        $neatline = $this->helper->_createNeatline();
+        $neatline = $this->_createNeatline();
 
         // Get the records and check result.
         $records = $this->_recordsTable->getRecordsByExhibit($neatline);
@@ -629,8 +628,8 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
     {
 
         // Create an exhibit.
-        $neatline = $this->helper->_createNeatline();
-        $item = $this->helper->_createItem();
+        $neatline = $this->_createNeatline();
+        $item = $this->_createItem();
 
         // Create two records, one with a parent item and one without.
         $record1 = new NeatlineDataRecord(null, $neatline);
@@ -655,8 +654,8 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
     {
 
         // Create two items and an exhibit.
-        $neatline = $this->helper->_createNeatline();
-        $item = $this->helper->_createItem();
+        $neatline = $this->_createNeatline();
+        $item = $this->_createItem();
 
         // Create two records, one with a parent item and one without.
         $record = new NeatlineDataRecord($item, $neatline);
@@ -691,7 +690,7 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
     {
 
         // Create an exhibit.
-        $neatline = $this->helper->_createNeatline();
+        $neatline = $this->_createNeatline();
 
         // Create two records, one with a parent item and one without.
         $record1 = new NeatlineDataRecord(null, $neatline);
@@ -720,7 +719,7 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
     {
 
         // Create an exhibit.
-        $neatline = $this->helper->_createNeatline();
+        $neatline = $this->_createNeatline();
 
         // False when no records.
         $records = $this->_recordsTable->searchNeatlineRecordsByExhibit($neatline, 'test');
@@ -738,7 +737,7 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
     {
 
         // Create an exhibit.
-        $neatline = $this->helper->_createNeatline();
+        $neatline = $this->_createNeatline();
 
         // Create two records, one with a parent item and one without.
         $record1 = new NeatlineDataRecord(null, $neatline);
@@ -791,9 +790,9 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
     {
 
         // Create two items and an exhibit.
-        $item1 = $this->helper->_createItem();
-        $item2 = $this->helper->_createItem();
-        $neatline = $this->helper->_createNeatline();
+        $item1 = $this->_createItem();
+        $item2 = $this->_createItem();
+        $neatline = $this->_createNeatline();
 
         // Create two records with inactive status settings.
         $record1 = new NeatlineDataRecord($item1, $neatline);
@@ -846,11 +845,11 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
     {
 
         // Create an exhibit, items, and records.
-        $neatline = $this->helper->_createNeatline();
-        $item1 = $this->helper->_createItem();
-        $item2 = $this->helper->_createItem();
-        $item3 = $this->helper->_createItem();
-        $item4 = $this->helper->_createItem();
+        $neatline = $this->_createNeatline();
+        $item1 = $this->_createItem();
+        $item2 = $this->_createItem();
+        $item3 = $this->_createItem();
+        $item4 = $this->_createItem();
         $record1 = new NeatlineDataRecord($item1, $neatline);
         $record2 = new NeatlineDataRecord($item2, $neatline);
         $record3 = new NeatlineDataRecord($item3, $neatline);
@@ -918,9 +917,9 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
     {
 
         // Create two items and an exhibit.
-        $item1 = $this->helper->_createItem();
-        $item2 = $this->helper->_createItem();
-        $neatline = $this->helper->_createNeatline();
+        $item1 = $this->_createItem();
+        $item2 = $this->_createItem();
+        $neatline = $this->_createNeatline();
 
         // Create two records with inactive status settings.
         $record1 = new NeatlineDataRecord($item1, $neatline);
@@ -958,11 +957,11 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
     {
 
         // Create an exhibit, items, and records.
-        $neatline = $this->helper->_createNeatline();
-        $item1 = $this->helper->_createItem();
-        $item2 = $this->helper->_createItem();
-        $item3 = $this->helper->_createItem();
-        $item4 = $this->helper->_createItem();
+        $neatline = $this->_createNeatline();
+        $item1 = $this->_createItem();
+        $item2 = $this->_createItem();
+        $item3 = $this->_createItem();
+        $item4 = $this->_createItem();
         $record1 = new NeatlineDataRecord($item1, $neatline);
         $record2 = new NeatlineDataRecord($item2, $neatline);
         $record3 = new NeatlineDataRecord($item3, $neatline);
@@ -1030,9 +1029,9 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
     {
 
         // Create an exhibit and items.
-        $neatline = $this->helper->_createNeatline();
-        $item1 = $this->helper->_createItem();
-        $item2 = $this->helper->_createItem();
+        $neatline = $this->_createNeatline();
+        $item1 = $this->_createItem();
+        $item2 = $this->_createItem();
 
         // Create two records.
         $record1 = new NeatlineDataRecord($item1, $neatline);
@@ -1171,9 +1170,9 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
     {
 
         // Create an exhibit and items.
-        $neatline = $this->helper->_createNeatline();
-        $item1 = $this->helper->_createItem();
-        $item2 = $this->helper->_createItem();
+        $neatline = $this->_createNeatline();
+        $item1 = $this->_createItem();
+        $item2 = $this->_createItem();
 
         // Create two records.
         $record1 = new NeatlineDataRecord($item1, $neatline);
@@ -1208,8 +1207,8 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
     {
 
         // Create an exhibit and items.
-        $neatline = $this->helper->_createNeatline();
-        $item = $this->helper->_createItem();
+        $neatline = $this->_createNeatline();
+        $item = $this->_createItem();
 
         // Create record.
         $record = new NeatlineDataRecord($item, $neatline);
@@ -1242,7 +1241,7 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
     {
 
         // Create an exhibit.
-        $neatline = $this->helper->_createNeatline();
+        $neatline = $this->_createNeatline();
 
         // Build the JSON.
         $json = $this->_recordsTable->buildMapJson($neatline);
@@ -1265,9 +1264,9 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
     {
 
         // Create an exhibit and items.
-        $neatline = $this->helper->_createNeatline();
-        $item1 = $this->helper->_createItem();
-        $item2 = $this->helper->_createItem();
+        $neatline = $this->_createNeatline();
+        $item1 = $this->_createItem();
+        $item2 = $this->_createItem();
 
         // Create two records.
         $record1 = new NeatlineDataRecord($item1, $neatline);
@@ -1421,8 +1420,8 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
     {
 
         // Create an exhibit and items.
-        $neatline = $this->helper->_createNeatline();
-        $item = $this->helper->_createItem();
+        $neatline = $this->_createNeatline();
+        $item = $this->_createItem();
 
         // Create two records.
         $record = new NeatlineDataRecord($item, $neatline);
@@ -1457,8 +1456,8 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
     {
 
         // Create an exhibit and items.
-        $neatline = $this->helper->_createNeatline();
-        $item = $this->helper->_createItem();
+        $neatline = $this->_createNeatline();
+        $item = $this->_createItem();
 
         // Set an exhibit default.
         $neatline->default_vector_color = '#ffffff';
@@ -1496,8 +1495,8 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
     {
 
         // Create an exhibit and items.
-        $neatline = $this->helper->_createNeatline();
-        $item = $this->helper->_createItem();
+        $neatline = $this->_createNeatline();
+        $item = $this->_createItem();
 
         // Set a system default.
         set_option('vector_color', '#000000');
@@ -1534,7 +1533,7 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
     {
 
         // Create an exhibit.
-        $neatline = $this->helper->_createNeatline();
+        $neatline = $this->_createNeatline();
 
         // Build the JSON.
         $json = $this->_recordsTable->buildTimelineJson($neatline);
@@ -1555,17 +1554,17 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
     {
 
         // Create an exhibit and item.
-        $exhibit = $this->helper->_createNeatline();
-        $item = $this->helper->_createItem();
+        $exhibit = $this->_createNeatline();
+        $item = $this->_createItem();
 
         // Create title and date element texts.
-        $this->helper->_createElementText(
+        $this->_createElementText(
             $item,
             'Dublin Core',
             'Title',
             'Test Title');
 
-        $this->helper->_createElementText(
+        $this->_createElementText(
             $item,
             'Dublin Core',
             'Date',
@@ -1607,9 +1606,9 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
     {
 
         // Create an exhibit and items.
-        $neatline = $this->helper->_createNeatline();
-        $item1 = $this->helper->_createItem();
-        $item2 = $this->helper->_createItem();
+        $neatline = $this->_createNeatline();
+        $item1 = $this->_createItem();
+        $item2 = $this->_createItem();
 
         // Create two records.
         $record1 = new NeatlineDataRecord($item1, $neatline);
@@ -1667,11 +1666,11 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
     {
 
         // Create an exhibit, items, and records.
-        $neatline = $this->helper->_createNeatline();
-        $item1 = $this->helper->_createItem();
-        $item2 = $this->helper->_createItem();
-        $item3 = $this->helper->_createItem();
-        $item4 = $this->helper->_createItem();
+        $neatline = $this->_createNeatline();
+        $item1 = $this->_createItem();
+        $item2 = $this->_createItem();
+        $item3 = $this->_createItem();
+        $item4 = $this->_createItem();
         $record1 = new NeatlineDataRecord($item1, $neatline);
         $record2 = new NeatlineDataRecord($item2, $neatline);
         $record3 = new NeatlineDataRecord($item3, $neatline);
