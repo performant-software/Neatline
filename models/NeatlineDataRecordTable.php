@@ -114,8 +114,9 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
     {
 
         $record = $this->fetchObject(
-            $this->getSelect()->where('item_id = ' . $item->id
-                . ' AND exhibit_id = ' . $neatline->id)
+            $this->getSelect()
+                 ->where('item_id=?', $item->id)
+                 ->where('exhibit_id=?', $neatline->id)
         );
 
         return $record ? $record : false;
@@ -134,8 +135,9 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
     {
 
         $record = $this->fetchObject(
-            $this->getSelect()->where('exhibit_id = ' . $exhibit->id
-                . ' AND slug = "' . $slug . '"')
+            $this->getSelect()
+                 ->where('exhibit_id=?', $exhibit->id)
+                 ->where('slug=?', $slug)
         );
 
         return $record ? $record : false;
@@ -153,7 +155,7 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
     {
 
         $records = $this->fetchObjects(
-            $this->getSelect()->where('exhibit_id = ' . $neatline->id)
+            $this->getSelect()->where('exhibit_id=?', $neatline->id)
         );
 
         return $records ? $records : false;
@@ -173,7 +175,8 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
 
         $records = $this->fetchObjects(
             $this->getSelect()
-                 ->where('exhibit_id = ' . $neatline->id . ' AND item_id IS NULL')
+                 ->where('exhibit_id=?', $neatline->id)
+                 ->where('item_id IS NULL')
                  ->order('display_order ASC')
         );
 
@@ -198,10 +201,10 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
         }
 
         $records = $this->fetchObjects(
-            $this->getSelect()->where(
-                'exhibit_id = ' . $neatline->id .
-                ' AND item_id IS NULL' .
-                ' AND title LIKE "%' . $search . '%"')
+            $this->getSelect()
+                 ->where('exhibit_id=?', $neatline->id)
+                 ->where('item_id IS NULL')
+                 ->where('title LIKE ?', "%$search%")
         );
 
         return $records ? $records : false;
@@ -220,10 +223,10 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
     {
 
         $records = $this->fetchObjects(
-            $this->getSelect()->where(
-                'exhibit_id = ' . $exhibit->id .
-                ' AND (space_active = 1 OR time_active = 1 OR items_active = 1)'
-            )->order('display_order ASC')
+            $this->getSelect()
+                 ->where('exhibit_id=?', $exhibit->id)
+                 ->where('(space_active=1 OR time_active=1 OR items_active=1)')
+                 ->order('display_order ASC')
         );
 
         return $records ? $records : false;
@@ -242,9 +245,10 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
     {
 
         $records = $this->fetchObjects(
-            $this->getSelect()->where(
-                'exhibit_id = ' . $exhibit->id . ' AND items_active = 1'
-            )->order('display_order ASC')
+            $this->getSelect()
+                 ->where('exhibit_id=?', $exhibit->id)
+                 ->where('items_active=1')
+                 ->order('display_order ASC')
         );
 
         return $records ? $records : false;

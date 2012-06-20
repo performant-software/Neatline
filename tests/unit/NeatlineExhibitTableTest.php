@@ -138,4 +138,32 @@ class Neatline_NeatlineExhibitTableTest extends Omeka_Test_AppTestCase
 
     }
 
+    /**
+     * This checks that findBySlug appropriately escapes all input before 
+     * passing it to SQL.
+     *
+     * @return void
+     * @author Eric Rochester <erochest@virginia.edu>
+     **/
+    public function testFindBySlugHole()
+    {
+
+        // Create exhibit.
+        $exhibit = $this->helper->_createNeatline(
+            $name = 'Test Exhibit',
+            $description = 'Test description.',
+            $slug = '---select-1-',
+            $public = 1,
+            $is_map = 1,
+            $is_timeline = 1,
+            $is_undated_items = 1,
+            $is_context_band = 1
+        );
+
+        // Get the exhibit, check.
+        $retrievedExhibit = $this->_exhibitsTable->findBySlug('"; syntax error 1;');
+        $this->assertNull($retrievedExhibit);
+
+    }
+
 }

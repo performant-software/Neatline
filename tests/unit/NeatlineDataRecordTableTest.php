@@ -156,6 +156,21 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
     }
 
     /**
+     * getRecordByItemAndExhibit() should escape it's parameters, just in case.
+     *
+     * @return void
+     * @author Eric Rochester <erochest@virginia.edu>
+     **/
+    public function testGetRecordByItemAndExhibitEscape()
+    {
+        $object = (object) array( 'id' => '0; syntax error;' );
+        $record = $this->_recordsTable->getRecordByItemAndExhibit(
+            $object, $object
+        );
+        $this->assertFalse($record);
+    }
+
+    /**
      * getRecordByExhibitAndSlug() should return boolean false when there is.
      * no record for the given exhibit/slug combination.
      *
@@ -195,6 +210,33 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
         $retrievedRecord = $this->_recordsTable->getRecordByExhibitAndSlug($neatline, 'test-slug');
         $this->assertEquals($retrievedRecord->id, $record->id);
 
+    }
+
+    /**
+     * getRecordByExhibitAndSlug() should escape the parameters.
+     *
+     * @return void
+     * @author Eric Rochester <erochest@virginia.edu>
+     **/
+    public function testGetRecordByExhibitAndSlugEscape()
+    {
+        $obj1  = (object) array( 'id' => 1 );
+        $obj2  = (object) array( 'id' => '0; syntax error;' );
+        $slug1 = 'slug-1';
+        $slug2 = '"; syntax error;';
+
+        $this->assertFalse(
+            $this->_recordsTable->getRecordByExhibitAndSlug($obj1, $slug1)
+        );
+        $this->assertFalse(
+            $this->_recordsTable->getRecordByExhibitAndSlug($obj2, $slug1)
+        );
+        $this->assertFalse(
+            $this->_recordsTable->getRecordByExhibitAndSlug($obj1, $slug2)
+        );
+        $this->assertFalse(
+            $this->_recordsTable->getRecordByExhibitAndSlug($obj2, $slug2)
+        );
     }
 
     /**
@@ -566,6 +608,18 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
     }
 
     /**
+     * getRecordsByExhibit() should escape SQL parameters.
+     *
+     * @return void
+     * @author Eric Rochester <erochest@virginia.edu>
+     **/
+    public function testGetRecordsByExhibitEscape()
+    {
+        $nl = (object) array( 'id' => '; syntax error;' );
+        $this->assertFalse($this->_recordsTable->getRecordsByExhibit($nl));
+    }
+
+    /**
      * When there are records for an exhibit that do not have a parent item,
      * getNeatlineRecordsByExhibit() should return the records.
      *
@@ -612,6 +666,18 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
         $records = $this->_recordsTable->getNeatlineRecordsByExhibit($neatline);
         $this->assertFalse($records);
 
+    }
+
+    /**
+     * getNeatlineRecordsByExhibit() should escape SQL parameters.
+     *
+     * @return void
+     * @author Eric Rochester <erochest@virginia.edu>
+     **/
+    public function testGetNeatlineRecordsByExhibitEscape()
+    {
+        $nl = (object) array( 'id' => '; syntax error;' );
+        $this->assertFalse($this->_recordsTable->getNeatlineRecordsByExhibit($nl));
     }
 
     /**
@@ -686,6 +752,33 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
         $records = $this->_recordsTable->searchNeatlineRecordsByExhibit($neatline, 'test');
         $this->assertFalse($records);
 
+    }
+
+    /**
+     * searchNeatlineRecordsByExhibit() should escape SQL parameters.
+     *
+     * @return void
+     * @author Eric Rochester <erochest@virginia.edu>
+     **/
+    public function testSearchNeatlineRecordsByExhibitEscape()
+    {
+        $obj1    = (object) array( 'id' => 1 );
+        $obj2    = (object) array( 'id' => '; syntax error;');
+        $search1 = 'target';
+        $search2 = '"; syntax error;';
+
+        $this->assertFalse(
+            $this->_recordsTable->searchNeatlineRecordsByExhibit($obj1, $search1)
+        );
+        $this->assertFalse(
+            $this->_recordsTable->searchNeatlineRecordsByExhibit($obj2, $search1)
+        );
+        $this->assertFalse(
+            $this->_recordsTable->searchNeatlineRecordsByExhibit($obj1, $search2)
+        );
+        $this->assertFalse(
+            $this->_recordsTable->searchNeatlineRecordsByExhibit($obj2, $search2)
+        );
     }
 
     /**
@@ -802,6 +895,20 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
     }
 
     /**
+     * getActiveRecordsByExhibit() should escape SQL parameters.
+     *
+     * @return void
+     * @author Eric Rochester <erochest@virginia.edu>
+     **/
+    public function testGetActiveRecordsByExhibitEscape()
+    {
+        $exhibit = (object) array( 'id' => '; syntax error;' );
+        $this->assertFalse(
+            $this->_recordsTable->getActiveRecordsByExhibit($exhibit)
+        );
+    }
+
+    /**
      * getItemsRecordsByExhibit() should return all data records associated
      * with a given Neatline exhibit that are active in the items viewport.
      *
@@ -897,6 +1004,20 @@ class Neatline_NeatlineDataRecordTableTest extends Omeka_Test_AppTestCase
         $this->assertEquals($records[2]->item_id, $item2->id);
         $this->assertEquals($records[3]->item_id, $item1->id);
 
+    }
+
+    /**
+     * getItemsRecordsByExhibit() should escape SQL parameters.
+     *
+     * @return void
+     * @author Eric Rochester <erochest@virginia.edu>
+     **/
+    public function testGetItemsRecordsByExhibitEscape()
+    {
+        $exhibit = (object) array( 'id' => '; syntax error;' );
+        $this->assertFalse(
+            $this->_recordsTable->getItemsRecordsByExhibit($exhibit)
+        );
     }
 
     /**
