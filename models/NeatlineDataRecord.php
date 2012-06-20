@@ -1055,8 +1055,8 @@ class NeatlineDataRecord extends Omeka_record
             $query = "
                 UPDATE `$tname`
                 SET parent_record_id=NULL
-                WHERE parent_record_id={$this->id};";
-            $db->query($query);
+                WHERE parent_record_id=?;";
+            $db->query($query, $this->id);
 
             parent::delete();
         }

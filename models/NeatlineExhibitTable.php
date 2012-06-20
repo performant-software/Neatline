@@ -68,9 +68,7 @@ class NeatlineExhibitTable extends Omeka_Db_Table
     {
 
         // Form the select.
-        $select = $this->getSelect()->where(
-            'slug = "' . $slug . '"'
-        );
+        $select = $this->getSelect()->where('slug=?', $slug);
 
         return $this->fetchObject($select);
 
