@@ -40,6 +40,7 @@ class NeatlineExhibit extends Omeka_Record implements Zend_Acl_Resource_Interfac
     public $slug;
     public $public = 0;
     public $query;
+    public $creator_id = 0;
 
     // Foreign keys.
     public $image_id;
@@ -122,6 +123,9 @@ class NeatlineExhibit extends Omeka_Record implements Zend_Acl_Resource_Interfac
         $now = Zend_Date::now()->toString(self::DATE_FORMAT);
         $this->added = $now;
         $this->modified = $now;
+        if (!$this->creator_id && ($user = Omeka_Context::getInstance()->getCurrentUser())) {
+            $this->setAddedBy($user);
+        }
     }
 
     /**
@@ -443,4 +447,27 @@ class NeatlineExhibit extends Omeka_Record implements Zend_Acl_Resource_Interfac
         return self::RESOURCE_ID;
     }
 
+    /**
+     * Checks whether a Neatline was created by a given user
+     *
+     * @param User
+     * @return boolean
+     */
+    public function addedBy($user)
+    {
+        return ($user->id == $this->creator_id);
+    }
+
+    /**
+     * Set the user who added the Neatline.
+     *
+     * @param User $user
+     */
+    public function setAddedBy(User $user)
+    {
+        if (!$user->exists()) {
+            throw new RuntimeException(__("Cannot associate a Neatline with a user who doesn't exist."));
+        }
+        $this->creator_id = $user->id;
+    }
 }
