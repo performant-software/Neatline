@@ -105,7 +105,7 @@ class NeatlineExhibitTable extends Omeka_Db_Table
 
         if ($acl && $acl->has('Neatline_Index')) {
             $has_permission = $acl->isAllowed(current_user(), 'Neatline_Index', 'showNotPublic');
-            if (!$has_permission) {
+            if (!$has_permission && !plugin_is_active('NeatlineWebService')) {
                 $select->where('public = 1');
             }
         }

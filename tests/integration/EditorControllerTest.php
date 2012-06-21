@@ -776,7 +776,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
                 'time_active' =>        (string) self::$__testParams['time_active'],
                 'geocoverage' =>        self::$__testParams['geocoverage'],
                 'title' =>              self::$__testParams['title'],
-                'slug' =>               self::$__testParams['slug'],
+                // 'slug' =>               self::$__testParams['slug'],
                 'description' =>        self::$__testParams['description'],
                 'start_date' =>         self::$__testParams['start_date'],
                 'end_date' =>           self::$__testParams['end_date'],
@@ -824,10 +824,10 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
             self::$__testParams['title']
         );
 
-        $this->assertEquals(
-            $record->slug,
-            self::$__testParams['slug']
-        );
+        // $this->assertEquals(
+        //     $record->slug,
+        //     self::$__testParams['slug']
+        // );
 
         $this->assertEquals(
             $record->description,
@@ -968,7 +968,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
                 'time_active' =>        (string) self::$__testParams['time_active'],
                 'geocoverage' =>        self::$__testParams['geocoverage'],
                 'title' =>              self::$__testParams['title'],
-                'slug' =>               self::$__testParams['slug'],
+                // 'slug' =>               self::$__testParams['slug'],
                 'description' =>        self::$__testParams['description'],
                 'start_date' =>         self::$__testParams['start_date'],
                 'end_date' =>           self::$__testParams['end_date'],
@@ -1016,10 +1016,10 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
             self::$__testParams['title']
         );
 
-        $this->assertEquals(
-            $record->slug,
-            self::$__testParams['slug']
-        );
+        // $this->assertEquals(
+        //     $record->slug,
+        //     self::$__testParams['slug']
+        // );
 
         $this->assertEquals(
             $record->description,
@@ -1167,7 +1167,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
                 'time_active' =>        (string) self::$__testParams['time_active'],
                 'geocoverage' =>        self::$__testParams['geocoverage'],
                 'title' =>              self::$__testParams['title'],
-                'slug' =>               self::$__testParams['slug'],
+                // 'slug' =>               self::$__testParams['slug'],
                 'description' =>        self::$__testParams['description'],
                 'start_date' =>         self::$__testParams['start_date'],
                 'end_date' =>           self::$__testParams['end_date'],
@@ -1215,10 +1215,10 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
             self::$__testParams['title']
         );
 
-        $this->assertEquals(
-            $record->slug,
-            self::$__testParams['slug']
-        );
+        // $this->assertEquals(
+        //     $record->slug,
+        //     self::$__testParams['slug']
+        // );
 
         $this->assertEquals(
             $record->description,
@@ -1370,7 +1370,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
                 'time_active' =>        (string) self::$__testParams['time_active'],
                 'geocoverage' =>        'null',
                 'title' =>              self::$__testParams['title'],
-                'slug' =>               self::$__testParams['slug'],
+                // 'slug' =>               self::$__testParams['slug'],
                 'description' =>        self::$__testParams['description'],
                 'start_date' =>         self::$__testParams['start_date'],
                 'end_date' =>           self::$__testParams['end_date'],
@@ -1494,7 +1494,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
                 'time_active' =>        (string) self::$__testParams['time_active'],
                 'geocoverage' =>        'null',
                 'title' =>              self::$__testParams['title'],
-                'slug' =>               self::$__testParams['slug'],
+                // 'slug' =>               self::$__testParams['slug'],
                 'description' =>        self::$__testParams['description'],
                 'start_date' =>         self::$__testParams['start_date'],
                 'end_date' =>           self::$__testParams['end_date'],
@@ -1566,7 +1566,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
                 'time_active' =>        (string) self::$__testParams['time_active'],
                 'geocoverage' =>        'null',
                 'title' =>              self::$__testParams['title'],
-                'slug' =>               self::$__testParams['slug'],
+                // 'slug' =>               self::$__testParams['slug'],
                 'description' =>        self::$__testParams['description'],
                 'start_date' =>         self::$__testParams['start_date'],
                 'end_date' =>           self::$__testParams['end_date'],
@@ -1629,7 +1629,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
                 'time_active' =>        (string) self::$__testParams['time_active'],
                 'geocoverage' =>        self::$__testParams['geocoverage'],
                 'title' =>              self::$__testParams['title'],
-                'slug' =>               self::$__testParams['slug'],
+                // 'slug' =>               self::$__testParams['slug'],
                 'description' =>        self::$__testParams['description'],
                 'start_date' =>         self::$__testParams['start_date'],
                 'end_date' =>           self::$__testParams['end_date'],
@@ -1694,7 +1694,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
                 'time_active' =>        'false',
                 'geocoverage' =>        self::$__testParams['geocoverage'],
                 'title' =>              self::$__testParams['title'],
-                'slug' =>               self::$__testParams['slug'],
+                // 'slug' =>               self::$__testParams['slug'],
                 'description' =>        self::$__testParams['description'],
                 'start_date' =>         '',
                 'end_date' =>           self::$__testParams['end_date'],
@@ -1751,7 +1751,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
                 'time_active' =>        'false',
                 'geocoverage' =>        self::$__testParams['geocoverage'],
                 'title' =>              self::$__testParams['title'],
-                'slug' =>               self::$__testParams['slug'],
+                // 'slug' =>               self::$__testParams['slug'],
                 'description' =>        self::$__testParams['description'],
                 'start_date' =>         '',
                 'end_date' =>           self::$__testParams['end_date'],
@@ -1815,7 +1815,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
                 'time_active' =>        (string) self::$__testParams['time_active'],
                 'geocoverage' =>        '',
                 'title' =>              self::$__testParams['title'],
-                'slug' =>               self::$__testParams['slug'],
+                // 'slug' =>               self::$__testParams['slug'],
                 'description' =>        self::$__testParams['description'],
                 'start_date' =>         self::$__testParams['start_date'],
                 'end_date' =>           self::$__testParams['end_date'],
@@ -1872,7 +1872,7 @@ class Neatline_EditorControllerTest extends Omeka_Test_AppTestCase
                 'time_active' =>        (string) self::$__testParams['time_active'],
                 'geocoverage' =>        '',
                 'title' =>              self::$__testParams['title'],
-                'slug' =>               self::$__testParams['slug'],
+                // 'slug' =>               self::$__testParams['slug'],
                 'description' =>        self::$__testParams['description'],
                 'start_date' =>         self::$__testParams['start_date'],
                 'end_date' =>           self::$__testParams['end_date'],

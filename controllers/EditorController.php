@@ -173,7 +173,7 @@ class Neatline_EditorController extends Omeka_Controller_Action
         $exhibitId =                json_decode($_post['exhibit_id']);
         $parentRecordId =           (int) $_post['parent_record_id'];
         $title =                    $_post['title'];
-        $slug =                     $_post['slug'];
+        // $slug =                     $_post['slug'];
         $description =              $_post['description'];
         $useDcMetadata =            $_post['use_dc_metadata'];
         $showBubble =               $_post['show_bubble'];
@@ -225,7 +225,7 @@ class Neatline_EditorController extends Omeka_Controller_Action
         $record->setNotEmpty('point_image', $pointImage);
         $record->setPercentages($leftPercent, $rightPercent);
         $record->setGeocoverage($geoCoverage);
-        $record->setSlug($slug);
+        // $record->setSlug($slug);
 
         // Set statuses.
         $record->setUseDcMetadata($useDcMetadata);
