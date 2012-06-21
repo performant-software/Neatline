@@ -92,4 +92,26 @@ class NeatlineExhibitTable extends Omeka_Db_Table
 
     }
 
+    /**
+     * Check that the current user has permission to see non-public items.
+     *
+     * @return Omeka_Db_Select
+     */
+    public function getSelect()
+    {
+
+        $select = parent::getSelect();
+        $acl = Omeka_Context::getInstance()->acl;
+
+        if ($acl && $acl->has('Neatline_Index')) {
+            $has_permission = $acl->isAllowed(current_user(), 'Neatline_Index', 'showNotPublic');
+            if (!$has_permission) {
+                $select->where('public = 1');
+            }
+        }
+
+        return $select;
+
+    }
+
 }
