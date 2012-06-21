@@ -170,7 +170,8 @@
             // Get container offset.
             var offset = this.element.offset();
             var containerX = event.clientX - offset.left;
-            var containerY = event.clientY - offset.top;
+            var containerY = event.clientY - offset.top +
+              this._window.scrollTop();
 
             // If the cursor leaves the container, hide.
             if (event.clientX < offset.left ||
