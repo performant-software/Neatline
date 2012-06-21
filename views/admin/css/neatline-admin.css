@@ -27,7 +27,7 @@ p.add-button {
     margin-top: 0.5em;
 }
 
-td.title a.neatline-title {
+td.title a:first-child {
     font-size: 1.2em;
     display: block;
     margin: 0 0 0.3em 0;
