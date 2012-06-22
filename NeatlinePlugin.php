@@ -409,15 +409,17 @@ class NeatlinePlugin
             )
         );
 
-        $acl->loadResourceList($resourceList);
-        foreach ($resourceList as $resource => $privileges) {
-            $acl->deny(null, $resource);
-            $acl->allow('super', $resource);
-            $acl->allow('admin', $resource);
-        }
+        if (!$acl->has('Neatline_Index')) {
+            $acl->loadResourceList($resourceList);
+            foreach ($resourceList as $resource => $privileges) {
+                $acl->deny(null, $resource);
+                $acl->allow('super', $resource);
+                $acl->allow('admin', $resource);
+            }
 
-        // Give every access to browse, show, simile, openlayers, and udi.
-        $acl->allow(null, 'Neatline_Index', array('browse', 'show','simile','openlayers','udi'));
+            // Give every access to browse, show, simile, openlayers, and udi.
+            $acl->allow(null, 'Neatline_Index', array('browse', 'show','simile','openlayers','udi'));
+        }
 
     }
 }
