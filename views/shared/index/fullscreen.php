@@ -43,12 +43,12 @@
 <head>
 
     <meta charset="utf-8">
-    <title><?php echo $exhibit->name; ?></title>
+    <title><?php echo neatline('name'); ?></title>
 
     <?php
-    neatline_queueNeatlineAssets($exhibit);
+    neatline_queueNeatlineAssets(get_current_neatline());
     neatline_queueFullscreenAssets();
-    neatline_queueExhibitCss($exhibit);
+    neatline_queueExhibitCss(get_current_neatline());
     ?>
 
     <!-- Stylesheets -->
@@ -64,13 +64,13 @@
 
 </head>
 
-<body class="neatline <?php echo $exhibit->slug; ?>">
+<body class="neatline <?php echo neatline('slug'); ?>">
 
-<?php if ((bool) $exhibit->public): ?>
+<?php if ((bool) neatline('public')): ?>
 
     <!-- The core Neatline partial. -->
     <?php echo $this->partial('neatline/_neatline.php', array(
-        'exhibit' => $exhibit
+        'exhibit' => get_current_neatline()
     )); ?>
 
 <?php else: ?>

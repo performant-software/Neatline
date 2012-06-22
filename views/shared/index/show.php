@@ -46,7 +46,7 @@
     <title><?php echo neatline('name'); ?></title>
 
     <?php
-    neatline_queueNeatlineAssets($exhibit);
+    neatline_queueNeatlineAssets(get_current_neatline());
     neatline_queuePublicAssets();
     ?>
 
@@ -66,19 +66,19 @@
 <body class="neatline <?php echo neatline('slug'); ?>">
 
 <div id="topbar">
-    <div class="exhibit-title"><?php echo $exhibit->name; ?></div>
+    <div class="exhibit-title"><?php echo neatline('name'); ?></div>
     <div class="exhibit-fullscreen">
-        <a href="<?php echo public_uri('neatline-exhibits/show/' . $exhibit->slug); ?>/fullscreen">
+        <a href="<?php echo public_uri('neatline-exhibits/show/'. neatline('slug')); ?>/fullscreen">
             <span class="icon"></span> <span class="text">View Fullscreen</span>
         </a>
     </div>
 </div>
 
-<?php if ((bool) $exhibit->public): ?>
+<?php if ((bool) neatline('public')): ?>
 
     <!-- The core Neatline partial. -->
     <?php echo $this->partial('neatline/_neatline.php', array(
-        'exhibit' => $exhibit
+        'exhibit' => get_current_neatline()
     )); ?>
 
 <?php else: ?>
@@ -86,7 +86,7 @@
 <?php endif; ?>
 
 <div id="footer">
-    <div class="exhibit-description"><?php echo $exhibit->description; ?></div>
+    <div class="exhibit-description"><?php echo neatline('description'); ?></div>
 </div>
 
 </body>
