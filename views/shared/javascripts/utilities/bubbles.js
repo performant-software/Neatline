@@ -50,6 +50,10 @@
             this.frozen = false;
             this.connector = false;
 
+            this._window.bind('mouseleave', _.bind(function() {
+                this.hide();
+            }, this));
+
         },
 
         /*
