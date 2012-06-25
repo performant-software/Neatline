@@ -6,7 +6,7 @@ head(array('content_class' => 'neatline', 'title' => $title));
 <?php echo flash(); ?>
 <h1><?php echo $title; ?></h1>
 
-<?php if(has_neatlines_for_loop()): while (loop_neatlines(): ?>
+<?php if(has_neatlines_for_loop()): while (loop_neatlines()): ?>
 <div id="neatline-<?php echo neatline('id'); ?>">
     <h2 class="title"><?php echo link_to_neatline(); ?></h2>
     <?php echo neatline('description'); ?>
