@@ -49,7 +49,7 @@
 
         <tr class="item-row" recordid="<?php echo $record->id; ?>" itemid="">
             <td class="item-title">
-                <span class="item-title-text"><?php echo $record->getTitleOrDescription(); ?></span>
+                <span class="item-title-text"><?php echo substr($record->getTitleOrDescription(), 0, 200); ?></span>
                 <span class="item-title-fader"></span>
                 <div class="form-actions">
                     <a href="#" class="save">Save</a>
