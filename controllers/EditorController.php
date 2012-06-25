@@ -125,6 +125,7 @@ class Neatline_EditorController extends Omeka_Controller_Action
 
         // Supress the default Zend layout-sniffer functionality.
         $this->_helper->viewRenderer->setNoRender(true);
+        $this->getResponse()->setHeader('Content-type', 'application/json');
 
         // Get parameters from the ajax request.
         $exhibidId =        json_decode($this->_request->getParam('exhibit_id'));
@@ -163,6 +164,7 @@ class Neatline_EditorController extends Omeka_Controller_Action
 
         // Supress the default Zend layout-sniffer functionality.
         $this->_helper->viewRenderer->setNoRender(true);
+        $this->getResponse()->setHeader('Content-type', 'application/json');
 
         // Get the post.
         $_post = $this->_request->getPost();
@@ -288,6 +290,7 @@ class Neatline_EditorController extends Omeka_Controller_Action
 
         // Supress the default Zend layout-sniffer functionality.
         $this->_helper->viewRenderer->setNoRender(true);
+        $this->getResponse()->setHeader('Content-type', 'application/json');
 
         // Get the post.
         $_post = $this->_request->getPost();
@@ -399,6 +402,7 @@ class Neatline_EditorController extends Omeka_Controller_Action
 
         // Supress the default Zend layout-sniffer functionality.
         $this->_helper->viewRenderer->setNoRender(true);
+        $this->getResponse()->setHeader('Content-type', 'application/json');
 
         // Get the post.
         $_post = $this->_request->getPost();
@@ -616,6 +620,7 @@ class Neatline_EditorController extends Omeka_Controller_Action
 
         // Supress the default Zend layout-sniffer functionality.
         $this->_helper->viewRenderer->setNoRender(true);
+        $this->getResponse()->setHeader('Content-type', 'application/json');
 
         // Get the post.
         $_post = $this->_request->getPost();

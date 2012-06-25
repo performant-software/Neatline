@@ -171,6 +171,7 @@ class Neatline_IndexController extends Omeka_Controller_Action
 
         // Supress the default Zend layout-sniffer functionality.
         $this->_helper->viewRenderer->setNoRender(true);
+        $this->getResponse()->setHeader('Content-type', 'application/json');
 
         // Get the exhibit.
         $neatline = $this->findById();
@@ -191,6 +192,7 @@ class Neatline_IndexController extends Omeka_Controller_Action
 
         // Supress the default Zend layout-sniffer functionality.
         $this->_helper->viewRenderer->setNoRender(true);
+        $this->getResponse()->setHeader('Content-type', 'application/json');
 
         // Get the exhibit.
         $neatline = $this->findById();
@@ -211,6 +213,7 @@ class Neatline_IndexController extends Omeka_Controller_Action
 
         // Supress the default Zend layout-sniffer functionality.
         $this->_helper->viewRenderer->setNoRender(true);
+        $this->getResponse()->setHeader('Content-type', 'application/json');
 
         // Get the exhibit.
         $neatline = $this->findById();
