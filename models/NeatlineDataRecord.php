@@ -181,7 +181,7 @@ class NeatlineDataRecord extends Omeka_record
      */
     public function getParentRecord()
     {
-        if (is_null($this->_parent) && !is_null($this->parent_record_id)) {
+        if (!is_null($this->parent_record_id) && is_null($this->_parent)) {
             $this->_parent = $this
                 ->getTable('NeatlineDataRecord')
                 ->find($this->parent_record_id);
@@ -1084,15 +1084,19 @@ class NeatlineDataRecord extends Omeka_record
     /**
      * This sets and caches the parent record.
      *
-     * @param Omeka_Record $parent The parent record.
+     * @param array $index An index of records.
      *
      * @return void
      * @author Eric Rochester <erochest@virginia.edu>
      **/
-    public function setParent($parent)
+    protected function _setParent($index)
     {
-        if ($parent->id === $this->parent_record_id) {
+        if (!is_null($this->parent_record_id)
+            && array_key_exists($this->parent_record_id, $index)
+        ) {
+            $parent = $index[$this->parent_record_id];
             $this->_parent = $parent;
+            $parent->_setParent($index);
         }
     }
 
@@ -1114,11 +1118,7 @@ class NeatlineDataRecord extends Omeka_record
         if ($this->space_active != 1) {
             return $data;
         }
-        if (!is_null($this->parent_record_id)
-            && array_key_exists($this->parent_record_id, $index)
-        ) {
-            $this->setParent($index[$this->parent_record_id]);
-        }
+        $this->_setParent($index);
 
         $data = array(
             'id'                  => $this->id,
