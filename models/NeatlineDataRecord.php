@@ -76,6 +76,9 @@ class NeatlineDataRecord extends Omeka_record
     public $items_active;
     public $display_order;
 
+    // For caching.
+    protected $_parent;
+
     /**
      * Default attributes.
      */
@@ -138,6 +141,8 @@ class NeatlineDataRecord extends Omeka_record
         $this->time_active = 0;
         $this->items_active = 0;
 
+        $this->_parent = null;
+
     }
 
     /**
@@ -176,17 +181,12 @@ class NeatlineDataRecord extends Omeka_record
      */
     public function getParentRecord()
     {
-
-        $record = null;
-
-        // If record id is defined, get item.
-        if (!is_null($this->parent_record_id)) {
-            $record = $this->getTable('NeatlineDataRecord')
+        if (is_null($this->_parent) && !is_null($this->parent_record_id)) {
+            $this->_parent = $this
+                ->getTable('NeatlineDataRecord')
                 ->find($this->parent_record_id);
         }
-
-        return $record;
-
+        return $this->_parent;
     }
 
     /**
