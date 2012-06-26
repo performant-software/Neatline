@@ -379,9 +379,9 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
     public function buildMapJson($neatline)
     {
 
-        // Shell array, check for Neatline Maps.
-        $data = array();
+        $data           = array();
         $isNeatlineMaps = plugin_is_active('NeatlineMaps');
+        $_servicesTable = null;
 
         // If Neatline Maps is installed, get services table.
         if ($isNeatlineMaps) {
@@ -389,74 +389,14 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
         }
 
         // Get records.
-        $records = $this->getRecordsByExhibit($neatline);
-
-        if ($records) {
-
-            // Walk the records and build out the array.
+        if ($records = $this->getRecordsByExhibit($neatline)) {
+            $index   = $this->_indexRecords($records);
             foreach ($records as $record) {
-
-                // If the record is active on the map.
-                if ($record->space_active == 1) {
-
-                    $layer = array(
-                        'id' =>                 $record->id,
-                        'item_id' =>            $record->item_id,
-                        'title' =>              $record->getTitle(),
-                        'description' =>        $record->getDescription(),
-                        'slug' =>               $record->getSlug(),
-                        'vector_color' =>       $record->getStyle('vector_color'),
-                        'stroke_color' =>       $record->getStyle('stroke_color'),
-                        'highlight_color' =>    $record->getStyle('highlight_color'),
-                        'vector_opacity' =>     $record->getStyle('vector_opacity'),
-                        'select_opacity' =>     $record->getStyle('select_opacity'),
-                        'stroke_opacity' =>     $record->getStyle('stroke_opacity'),
-                        'graphic_opacity' =>    $record->getStyle('graphic_opacity'),
-                        'stroke_width' =>       $record->getStyle('stroke_width'),
-                        'point_radius' =>       $record->getStyle('point_radius'),
-                        'point_image' =>        $record->getNotEmpty('point_image'),
-                        'center' =>             $record->map_bounds,
-                        'zoom' =>               $record->map_zoom,
-                        'wkt' =>                $record->getGeocoverage(),
-                        'start_visible_date' => $record->getStartVisibleDate(),
-                        'end_visible_date' =>   $record->getEndVisibleDate(),
-                        'show_bubble' =>        $record->show_bubble,
-                        'wmsAddress' =>         null,
-                        'layers' =>             null,
-                        '_native_styles' =>     array(
-                          'vector_color' =>     $record->vector_color,
-                          'vector_opacity' =>   $record->vector_opacity,
-                          'stroke_color' =>     $record->stroke_color,
-                          'stroke_opacity' =>   $record->stroke_opacity,
-                          'stroke_width' =>     $record->stroke_width,
-                          'graphic_opacity' =>  $record->graphic_opacity,
-                          'point_radius' =>     $record->point_radius,
-                        )
-                    );
-
-                    // If the record has a parent item and Neatline Maps
-                    // is present.
-                    if ($isNeatlineMaps && !is_null($record->item_id)) {
-
-                        // Get the parent item, try to get WMS.
-                        $item = $record->getItem();
-                        $wms = $_servicesTable->findByItem($item);
-
-                        // If there is a WMS, push to layers.
-                        if ($wms) {
-                            $layer['wmsAddress'] = $wms->address;
-                            $layer['layers'] = $wms->layers;
-                        }
-
-                    }
-
-                    // Push layer.
+                $layer = $record->buildMapDataArray($index, $_servicesTable);
+                if (!is_null($layer)) {
                     $data[] = $layer;
-
                 }
-
             }
-
         }
 
         // JSON-ify the array.
@@ -561,6 +501,25 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
         // JSON-ify the array.
         return json_encode($data);
 
+    }
+
+    /**
+     * This indexes the array of records by their ID.
+     *
+     * @param array $records Array of data records.
+     *
+     * @return array $index Indexes associative array of data records.
+     * @author Eric Rochester <erochest@virginia.edu>
+     **/
+    protected function _indexRecords($records)
+    {
+        $index = array();
+
+        foreach ($records as $record) {
+            $index[$record->id] = $record;
+        }
+
+        return $index;
     }
 
 }
