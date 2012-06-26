@@ -368,39 +368,41 @@
          */
         _buildFieldsets: function() {
 
-            var self = this;
+            this.form.tabs();
 
-            // Title and description.
-            this.titleDescriptionFieldset.fieldsetexpander({
-                default_status: true,
-                'change': function() {
-                    self._measureForm();
-                }
-            });
+            // var self = this;
 
-            // Date information.
-            this.dateInformationFieldset.fieldsetexpander({
-                default_status: false,
-                'change': function() {
-                    self._measureForm();
-                }
-            });
+            // // Title and description.
+            // this.titleDescriptionFieldset.fieldsetexpander({
+            //     default_status: true,
+            //     'change': function() {
+            //         self._measureForm();
+            //     }
+            // });
 
-            // Map styles.
-            this.mapStylesFieldset.fieldsetexpander({
-                default_status: false,
-                'change': function() {
-                    self._measureForm();
-                }
-            });
+            // // Date information.
+            // this.dateInformationFieldset.fieldsetexpander({
+            //     default_status: false,
+            //     'change': function() {
+            //         self._measureForm();
+            //     }
+            // });
 
-            // Relationships.
-            this.relationshipsFieldset.fieldsetexpander({
-                default_status: false,
-                'change': function() {
-                    self._measureForm();
-                }
-            });
+            // // Map styles.
+            // this.mapStylesFieldset.fieldsetexpander({
+            //     default_status: false,
+            //     'change': function() {
+            //         self._measureForm();
+            //     }
+            // });
+
+            // // Relationships.
+            // this.relationshipsFieldset.fieldsetexpander({
+            //     default_status: false,
+            //     'change': function() {
+            //         self._measureForm();
+            //     }
+            // });
 
         },
 

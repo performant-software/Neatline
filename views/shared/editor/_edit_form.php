@@ -29,10 +29,14 @@
 
     <form class="form-stacked">
 
-        <a class="fieldset text" href="">
-            <div class="fieldset-arrow"></div>Text Metadata
-        </a>
-        <div class="fieldset">
+        <ul class="tabs-header">
+            <li><a href="#tabs-1">Text</a></li>
+            <li><a href="#tabs-2">Temporal</a></li>
+            <li><a href="#tabs-3">Styling</a></li>
+            <li><a href="#tabs-4">Relations</a></li>
+        </ul>
+
+        <div id="tabs-1" class="fieldset">
 
             <div class="clearfix">
                 <label for="title">Title</label>
@@ -40,18 +44,6 @@
                     <textarea id="item-title" class="xlarge" name="title" placeholder="Title" rows="1"></textarea>
                 </div>
             </div>
-
-            <!--
-            <div class="clearfix">
-                <label>Slug</label>
-                <div class="input">
-                    <div class="inline-inputs">
-                        <input class="xlarge" name="slug" type="text" placeholder="Slug" />
-                        <span class="help-inline">The record slug is a unique identifier that can be used to externally reference the record.</span>
-                    </div>
-                </div>
-            </div>
-            -->
 
             <div class="clearfix">
                 <label for="description">Description</label>
@@ -76,12 +68,7 @@
 
         </div>
 
-        <hr />
-
-        <a class="fieldset temporal" href="">
-            <div class="fieldset-arrow"></div>Temporal Metadata
-        </a>
-        <div class="fieldset">
+        <div id="tabs-2" class="fieldset">
 
             <div class="clearfix">
                 <label>Start Date</label>
@@ -137,12 +124,7 @@
 
         </div>
 
-        <hr />
-
-        <a class="fieldset styles" href="">
-            <div class="fieldset-arrow"></div>Styling Metadata
-        </a>
-        <div class="fieldset">
+        <div id="tabs-3" class="fieldset">
 
             <table class="map-styles">
                 <tr>
@@ -255,12 +237,7 @@
 
         </div>
 
-        <hr />
-
-        <a class="fieldset relationships" href="">
-            <div class="fieldset-arrow"></div>Relations Metadata
-        </a>
-        <div class="fieldset">
+        <div id="tabs-4" class="fieldset">
 
             <div class="clearfix">
                 <label>Parent Record</label>
@@ -273,8 +250,6 @@
             </div>
 
         </div>
-
-        <hr />
 
         <div class="fieldset">
 
