@@ -230,8 +230,7 @@ class NeatlineDataRecord extends Omeka_record
         $data['show_bubble'] =          $this->show_bubble;
         $data['records'] =              $records;
 
-        // JSON-ify the array.
-        return json_encode($data);
+        return $data;
 
     }
 
@@ -308,8 +307,7 @@ class NeatlineDataRecord extends Omeka_record
 
         }
 
-        // JSON-ify the array.
-        return json_encode($data);
+        return $data;
 
     }
 

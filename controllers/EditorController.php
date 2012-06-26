@@ -135,7 +135,7 @@ class Neatline_EditorController extends Omeka_Controller_Action
         // If there is a record id, build the form from the record.
         if ($recordId != null) {
             $record = $this->_recordsTable->find($recordId);
-            echo $record->buildEditFormJson();
+            echo json_encode($record->buildEditFormJson());
         }
 
         // Otherwise, build the form from the item and exhibit.
@@ -146,7 +146,9 @@ class Neatline_EditorController extends Omeka_Controller_Action
             $item = $this->_itemsTable->find($itemId);
 
             // Output the JSON string.
-            echo NeatlineDataRecord::buildEditFormForNewRecordJson($item, $neatline);
+            echo json_encode(NeatlineDataRecord::buildEditFormForNewRecordJson(
+                $item, $neatline)
+            );
 
         }
 
@@ -175,7 +177,6 @@ class Neatline_EditorController extends Omeka_Controller_Action
         $exhibitId =                json_decode($_post['exhibit_id']);
         $parentRecordId =           (int) $_post['parent_record_id'];
         $title =                    $_post['title'];
-        // $slug =                     $_post['slug'];
         $description =              $_post['description'];
         $useDcMetadata =            $_post['use_dc_metadata'];
         $showBubble =               $_post['show_bubble'];
@@ -227,7 +228,6 @@ class Neatline_EditorController extends Omeka_Controller_Action
         $record->setNotEmpty('point_image', $pointImage);
         $record->setPercentages($leftPercent, $rightPercent);
         $record->setGeocoverage($geoCoverage);
-        // $record->setSlug($slug);
 
         // Set statuses.
         $record->setUseDcMetadata($useDcMetadata);
@@ -271,6 +271,7 @@ class Neatline_EditorController extends Omeka_Controller_Action
         // and the updated space and time status trackers.
         echo json_encode(array(
             'recordid' =>   $record->id,
+            'form' =>       $record->buildEditFormJson(),
             'statuses' =>   array(
                 'space' =>  (bool) $record->space_active,
                 'time' =>   (bool) $record->time_active

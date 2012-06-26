@@ -699,6 +699,21 @@
         },
 
         /*
+         * Process and apply new form data.
+         */
+        _ingestData: function(data) {
+
+            // Push the data into the form.
+            this._data = data;
+            this._records = data.records;
+            this._applyData();
+
+            // Enable the save and delete buttons.
+            this._enableButtons();
+
+        },
+
+        /*
          * Push the form data into the input fields.
          */
         _applyData: function() {
@@ -890,15 +905,7 @@
                 },
 
                 success: _.bind(function(data) {
-
-                    // Push the data into the form.
-                    this._data = data;
-                    this._records = data.records;
-                    this._applyData();
-
-                    // Enable the save and delete buttons.
-                    this._enableButtons();
-
+                    this._ingestData(data);
                 }, this)
 
             });
@@ -947,8 +954,8 @@
                     // Update the title text, if necessary.
                     self._updateTitleText();
 
-                    // Reload form.
-                    self._getFormData();
+                    // Apply new form data.
+                    self._ingestData(data.form);
 
                 }
 
