@@ -1081,4 +1081,19 @@ class NeatlineDataRecord extends Omeka_record
         }
     }
 
+    /**
+     * This sets and caches the parent record.
+     *
+     * @param Omeka_Record $parent The parent record.
+     *
+     * @return void
+     * @author Eric Rochester <erochest@virginia.edu>
+     **/
+    public function setParent($parent)
+    {
+        if ($parent->id === $this->parent_record_id) {
+            $this->_parent = $parent;
+        }
+    }
+
 }

@@ -389,6 +389,7 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
 
         // Get records.
         $records = $this->getRecordsByExhibit($neatline);
+        $index   = $this->_indexRecords($records);
 
         if ($records) {
 
@@ -397,6 +398,9 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
 
                 // If the record is active on the map.
                 if ($record->space_active == 1) {
+                    if (!is_null($record->parent_record_id)) {
+                        $record->setParent($index[$record->parent_record_id]);
+                    }
 
                     $layer = array(
                         'id' =>                 $record->id,
@@ -560,6 +564,25 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
         // JSON-ify the array.
         return json_encode($data);
 
+    }
+
+    /**
+     * This indexes the array of records by their ID.
+     *
+     * @param array $records Array of data records.
+     *
+     * @return array $index Indexes associative array of data records.
+     * @author Eric Rochester <erochest@virginia.edu>
+     **/
+    protected function _indexRecords($records)
+    {
+        $index = array();
+
+        foreach ($records as $record) {
+            $index[$record->id] = $record;
+        }
+
+        return $index;
     }
 
 }
