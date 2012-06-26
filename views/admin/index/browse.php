@@ -98,7 +98,7 @@ head(array('content_class' => 'neatline', 'title' => $title));
             <td><?php echo neatline('public') ? 'yes' : 'no'; ?></td>
             <td>
             <?php if (has_permission('Neatline_Index', 'edit')): ?>
-            <?php echo button_to(uri('neatline-exhibits/editor/' . neatline('id')), null, 'Edit', array()); ?>
+                <a href="<?php echo uri('neatline-exhibits/editor/' . neatline('id')); ?>" class="edit">Edit</a>
             <?php endif; ?>
             </td>
         </tr>

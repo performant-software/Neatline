@@ -74,6 +74,7 @@
             this._clickedFeature =          null;
             this.record =                   null;
             this.requestData =              null;
+            this.now =                      Date.now();
 
             // Construct image-based map.
             if (Neatline.record.image_id) {
@@ -405,6 +406,9 @@
 
             });
 
+            // (Re)Render visibility.
+            this.renderVisibility(this.now);
+
         },
 
         /*
@@ -623,7 +627,7 @@
         renderVisibility: function(date) {
 
             // Moment-ify the date.
-            var now = moment(date);
+            this.now = moment(date);
 
             // Walk records.
             this._db().each(function(record) {
@@ -634,21 +638,21 @@
 
                 // If both are defined.
                 if (!_.isNull(start) && !_.isNull(end)) {
-                    var display = now > start && now < end;
+                    var display = this.now > start && this.now < end;
                     record.layer.setVisibility(display);
                     if (record.wms) record.wms.setVisibility(display);
                 }
 
                 // If just the start is defined.
                 else if (!_.isNull(start) && _.isNull(end)) {
-                    var display = now > start;
+                    var display = this.now > start;
                     record.layer.setVisibility(display);
                     if (record.wms) record.wms.setVisibility(display);
                 }
 
                 // If just the end is defined.
                 else if (_.isNull(start) && !_.isNull(end)) {
-                    var display = now < end;
+                    var display = this.now < end;
                     record.layer.setVisibility(display);
                     if (record.wms) record.wms.setVisibility(display);
                 }

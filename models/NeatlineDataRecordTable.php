@@ -379,11 +379,12 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
     public function buildMapJson($neatline)
     {
 
-        // Shell array.
+        // Shell array, check for Neatline Maps.
         $data = array();
+        $isNeatlineMaps = plugin_is_active('NeatlineMaps');
 
         // If Neatline Maps is installed, get services table.
-        if (plugin_is_active('NeatlineMaps')) {
+        if ($isNeatlineMaps) {
             $_servicesTable = $this->getTable('NeatlineMapsService');
         }
 
@@ -435,7 +436,7 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
 
                     // If the record has a parent item and Neatline Maps
                     // is present.
-                    if (plugin_is_active('NeatlineMaps') && !is_null($record->item_id)) {
+                    if ($isNeatlineMaps && !is_null($record->item_id)) {
 
                         // Get the parent item, try to get WMS.
                         $item = $record->getItem();
