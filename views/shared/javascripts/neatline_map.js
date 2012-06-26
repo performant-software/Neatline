@@ -285,9 +285,6 @@
                         self.edit(self._currentEditItem, true);
                     }
 
-                    // Set starting visibility.
-                    self._setStartingVisibility();
-
                 }
 
             });
@@ -630,7 +627,7 @@
             this.now = moment(date);
 
             // Walk records.
-            this._db().each(function(record) {
+            this._db().each(_.bind(function(record) {
 
                 // Get record dates.
                 var start = moment(record.data.start_visible_date);
@@ -657,7 +654,7 @@
                     if (record.wms) record.wms.setVisibility(display);
                 }
 
-            });
+            }, this));
 
         },
 
