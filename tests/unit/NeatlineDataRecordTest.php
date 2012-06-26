@@ -1924,11 +1924,11 @@ class Neatline_NeatlineDataRecordTest extends Neatline_Test_AppTestCase
         $record->save();
 
         // Ping the method for the json.
-        $json = json_decode($record->buildEditFormJson());
+        $json = $record->buildEditFormJson();
 
         $this->assertEquals(
             $json,
-            (object) array(
+            array(
                 'title' =>              self::$__testParams['title'],
                 'slug' =>               self::$__testParams['slug'],
                 'description' =>        self::$__testParams['description'],
@@ -1998,11 +1998,11 @@ class Neatline_NeatlineDataRecordTest extends Neatline_Test_AppTestCase
         $record->save();
 
         // Ping the method for the json.
-        $json = json_decode($record->buildEditFormJson());
+        $json = $record->buildEditFormJson();
 
         $this->assertEquals(
             $json,
-            (object) array(
+            array(
                 'title' =>              self::$__testParams['title'],
                 'slug' =>               self::$__testParams['slug'],
                 'description' =>        self::$__testParams['description'],
