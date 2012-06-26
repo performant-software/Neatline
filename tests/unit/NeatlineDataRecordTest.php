@@ -1950,8 +1950,7 @@ class Neatline_NeatlineDataRecordTest extends Neatline_Test_AppTestCase
                 'right_percent' =>      self::$__testParams['right_percent'],
                 'parent_record_id' =>   $parent->id,
                 'use_dc_metadata' =>    null,
-                'show_bubble' =>        self::$__testParams['show_bubble'],
-                'records' => array()
+                'show_bubble' =>        self::$__testParams['show_bubble']
             )
         );
 
@@ -2024,8 +2023,7 @@ class Neatline_NeatlineDataRecordTest extends Neatline_Test_AppTestCase
                 'right_percent' =>      self::$__testParams['right_percent'],
                 'parent_record_id' =>   $parent->id,
                 'use_dc_metadata' =>    null,
-                'show_bubble' =>        self::$__testParams['show_bubble'],
-                'records' => array()
+                'show_bubble' =>        self::$__testParams['show_bubble']
             )
         );
 

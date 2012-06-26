@@ -201,10 +201,6 @@ class NeatlineDataRecord extends Omeka_record
         // Shell out the array.
         $data = array();
 
-        // Get parent record select list.
-        $_recordsTable = $this->getTable('NeatlineDataRecord');
-        $records = $_recordsTable->getRecordsForSelect($this->getExhibit(), $this);
-
         // Set the array values.
         $data['title'] =                $this->getTitle();
         $data['slug'] =                 $this->getNotEmpty('slug');
@@ -228,7 +224,6 @@ class NeatlineDataRecord extends Omeka_record
         $data['parent_record_id'] =     $this->getParentRecordId();
         $data['use_dc_metadata'] =      $this->use_dc_metadata;
         $data['show_bubble'] =          $this->show_bubble;
-        $data['records'] =              $records;
 
         return $data;
 
@@ -247,11 +242,6 @@ class NeatlineDataRecord extends Omeka_record
 
         // Shell out the array.
         $data = array();
-
-        // Get parent record select list.
-        $_db = get_db();
-        $_recordsTable = $_db->getTable('NeatlineDataRecord');
-        $records = $_recordsTable->getRecordsForSelect($exhibit);
 
         // Set the array values.
         $data['vector_color'] =         get_option('vector_color');
@@ -272,7 +262,6 @@ class NeatlineDataRecord extends Omeka_record
         $data['end_visible_date'] =     '';
         $data['slug'] =                 '';
         $data['parent_record_id'] =     'none';
-        $data['records'] =              $records;
         $data['use_dc_metadata'] =      0;
         $data['show_bubble'] =          1;
 

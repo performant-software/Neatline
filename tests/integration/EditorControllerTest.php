@@ -603,8 +603,7 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
                 'right_percent' =>      self::$__testParams['right_percent'],
                 'parent_record_id' =>   $parent->id,
                 'use_dc_metadata' =>    null,
-                'show_bubble' =>        self::$__testParams['show_bubble'],
-                'records' => array()
+                'show_bubble' =>        self::$__testParams['show_bubble']
             )
         );
 
@@ -664,7 +663,6 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
                 'parent_record_id' => 'none',
                 'use_dc_metadata' => null,
                 'show_bubble' => 1,
-                'records' => array(),
                 'title' => '',
                 'description' => ''
             )
@@ -737,7 +735,6 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
                 'parent_record_id' => 'none',
                 'use_dc_metadata' => 0,
                 'show_bubble' => 1,
-                'records' => array(),
                 'title' => 'Test Title',
                 'description' => 'Test description.'
             )
@@ -775,7 +772,6 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
                 'time_active' =>        (string) self::$__testParams['time_active'],
                 'geocoverage' =>        self::$__testParams['geocoverage'],
                 'title' =>              self::$__testParams['title'],
-                // 'slug' =>               self::$__testParams['slug'],
                 'description' =>        self::$__testParams['description'],
                 'start_date' =>         self::$__testParams['start_date'],
                 'end_date' =>           self::$__testParams['end_date'],
@@ -822,11 +818,6 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
             $record->title,
             self::$__testParams['title']
         );
-
-        // $this->assertEquals(
-        //     $record->slug,
-        //     self::$__testParams['slug']
-        // );
 
         $this->assertEquals(
             $record->description,
@@ -967,7 +958,6 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
                 'time_active' =>        (string) self::$__testParams['time_active'],
                 'geocoverage' =>        self::$__testParams['geocoverage'],
                 'title' =>              self::$__testParams['title'],
-                // 'slug' =>               self::$__testParams['slug'],
                 'description' =>        self::$__testParams['description'],
                 'start_date' =>         self::$__testParams['start_date'],
                 'end_date' =>           self::$__testParams['end_date'],
@@ -1014,11 +1004,6 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
             $record->title,
             self::$__testParams['title']
         );
-
-        // $this->assertEquals(
-        //     $record->slug,
-        //     self::$__testParams['slug']
-        // );
 
         $this->assertEquals(
             $record->description,
@@ -1166,7 +1151,6 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
                 'time_active' =>        (string) self::$__testParams['time_active'],
                 'geocoverage' =>        self::$__testParams['geocoverage'],
                 'title' =>              self::$__testParams['title'],
-                // 'slug' =>               self::$__testParams['slug'],
                 'description' =>        self::$__testParams['description'],
                 'start_date' =>         self::$__testParams['start_date'],
                 'end_date' =>           self::$__testParams['end_date'],
@@ -1213,11 +1197,6 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
             $record->title,
             self::$__testParams['title']
         );
-
-        // $this->assertEquals(
-        //     $record->slug,
-        //     self::$__testParams['slug']
-        // );
 
         $this->assertEquals(
             $record->description,
@@ -1369,7 +1348,6 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
                 'time_active' =>        (string) self::$__testParams['time_active'],
                 'geocoverage' =>        'null',
                 'title' =>              self::$__testParams['title'],
-                // 'slug' =>               self::$__testParams['slug'],
                 'description' =>        self::$__testParams['description'],
                 'start_date' =>         self::$__testParams['start_date'],
                 'end_date' =>           self::$__testParams['end_date'],
@@ -1493,7 +1471,6 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
                 'time_active' =>        (string) self::$__testParams['time_active'],
                 'geocoverage' =>        'null',
                 'title' =>              self::$__testParams['title'],
-                // 'slug' =>               self::$__testParams['slug'],
                 'description' =>        self::$__testParams['description'],
                 'start_date' =>         self::$__testParams['start_date'],
                 'end_date' =>           self::$__testParams['end_date'],
@@ -1565,7 +1542,6 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
                 'time_active' =>        (string) self::$__testParams['time_active'],
                 'geocoverage' =>        'null',
                 'title' =>              self::$__testParams['title'],
-                // 'slug' =>               self::$__testParams['slug'],
                 'description' =>        self::$__testParams['description'],
                 'start_date' =>         self::$__testParams['start_date'],
                 'end_date' =>           self::$__testParams['end_date'],
@@ -1628,7 +1604,6 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
                 'time_active' =>        (string) self::$__testParams['time_active'],
                 'geocoverage' =>        self::$__testParams['geocoverage'],
                 'title' =>              self::$__testParams['title'],
-                // 'slug' =>               self::$__testParams['slug'],
                 'description' =>        self::$__testParams['description'],
                 'start_date' =>         self::$__testParams['start_date'],
                 'end_date' =>           self::$__testParams['end_date'],
@@ -1693,7 +1668,6 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
                 'time_active' =>        'false',
                 'geocoverage' =>        self::$__testParams['geocoverage'],
                 'title' =>              self::$__testParams['title'],
-                // 'slug' =>               self::$__testParams['slug'],
                 'description' =>        self::$__testParams['description'],
                 'start_date' =>         '',
                 'end_date' =>           self::$__testParams['end_date'],
@@ -1750,7 +1724,6 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
                 'time_active' =>        'false',
                 'geocoverage' =>        self::$__testParams['geocoverage'],
                 'title' =>              self::$__testParams['title'],
-                // 'slug' =>               self::$__testParams['slug'],
                 'description' =>        self::$__testParams['description'],
                 'start_date' =>         '',
                 'end_date' =>           self::$__testParams['end_date'],
@@ -1814,7 +1787,6 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
                 'time_active' =>        (string) self::$__testParams['time_active'],
                 'geocoverage' =>        '',
                 'title' =>              self::$__testParams['title'],
-                // 'slug' =>               self::$__testParams['slug'],
                 'description' =>        self::$__testParams['description'],
                 'start_date' =>         self::$__testParams['start_date'],
                 'end_date' =>           self::$__testParams['end_date'],
@@ -1871,7 +1843,6 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
                 'time_active' =>        (string) self::$__testParams['time_active'],
                 'geocoverage' =>        '',
                 'title' =>              self::$__testParams['title'],
-                // 'slug' =>               self::$__testParams['slug'],
                 'description' =>        self::$__testParams['description'],
                 'start_date' =>         self::$__testParams['start_date'],
                 'end_date' =>           self::$__testParams['end_date'],
