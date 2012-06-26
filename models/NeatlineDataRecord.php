@@ -690,7 +690,7 @@ class NeatlineDataRecord extends Omeka_record
             // Try to get a description.
             $description = $this->getDescription();
             if ($description !== '') {
-                return $description;
+                return substr($description, 0, 200);
             }
 
             else {

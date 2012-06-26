@@ -951,11 +951,11 @@
                         'recordid': data.recordid
                     });
 
-                    // Update the title text, if necessary.
-                    self._updateTitleText();
-
                     // Apply new form data.
                     self._ingestData(data.form);
+
+                    // Update the title text, if necessary.
+                    self._updateTitleText();
 
                 }
 
