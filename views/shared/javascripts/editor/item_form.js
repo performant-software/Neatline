@@ -665,9 +665,26 @@
          * on the title to the title text span.
          */
         _updateTitleText: function() {
-            if (_.isNull(this.itemId) && this.title.val() !== '') {
-                this._trigger('settitle', {}, { 'text': this.title.val() });
+
+            // If the record is Neatline endemic.
+            if (_.isNull(this.itemId)) {
+
+                // If there is a title present.
+                if (this._data.title !== '') {
+                    this._trigger('settitle', {}, {
+                        'text': this._data.title
+                    });
+                }
+
+                // If there is a description present.
+                else if (this._data.description !== '') {
+                    this._trigger('settitle', {}, {
+                        'text': this._data.description.substring(0, 200)
+                    });
+                }
+
             }
+
         },
 
         /*
