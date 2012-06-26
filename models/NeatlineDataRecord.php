@@ -1096,4 +1096,81 @@ class NeatlineDataRecord extends Omeka_record
         }
     }
 
+    /**
+     * This creates the data array for the map data.
+     *
+     * @param array $index This is the index of NeatlineDataRecord objects for 
+     * caching. Optional.
+     * @param Omeka_Db_Table $services This is the NeatlineMapsService. If not 
+     * provided, it will be gotten.
+     *
+     * @return array
+     * @author Me
+     **/
+    public function buildMapDataArray($index=array(), $services=null)
+    {
+        $data = null;
+
+        if ($this->space_active != 1) {
+            return $data;
+        }
+        if (!is_null($this->parent_record_id)
+            && array_key_exists($this->parent_record_id, $index)
+        ) {
+            $this->setParent($index[$this->parent_record_id]);
+        }
+
+        $data = array(
+            'id'                  => $this->id,
+            'item_id'             => $this->item_id,
+            'title'               => $this->getTitle(),
+            'description'         => $this->getDescription(),
+            'slug'                => $this->getSlug(),
+            'vector_color'        => $this->getStyle('vector_color'),
+            'stroke_color'        => $this->getStyle('stroke_color'),
+            'highlight_color'     => $this->getStyle('highlight_color'),
+            'vector_opacity'      => $this->getStyle('vector_opacity'),
+            'select_opacity'      => $this->getStyle('select_opacity'),
+            'stroke_opacity'      => $this->getStyle('stroke_opacity'),
+            'graphic_opacity'     => $this->getStyle('graphic_opacity'),
+            'stroke_width'        => $this->getStyle('stroke_width'),
+            'point_radius'        => $this->getStyle('point_radius'),
+            'point_image'         => $this->getNotEmpty('point_image'),
+            'center'              => $this->map_bounds,
+            'zoom'                => $this->map_zoom,
+            'wkt'                 => $this->getGeocoverage(),
+            'start_visible_date'  => $this->getStartVisibleDate(),
+            'end_visible_date'    => $this->getEndVisibleDate(),
+            'show_bubble'         => $this->show_bubble,
+            'wmsAddress'          => null,
+            'layers'              => null,
+            '_native_styles'      => array(
+                'vector_color'    => $this->vector_color,
+                'vector_opacity'  => $this->vector_opacity,
+                'stroke_color'    => $this->stroke_color,
+                'stroke_opacity'  => $this->stroke_opacity,
+                'stroke_width'    => $this->stroke_width,
+                'graphic_opacity' => $this->graphic_opacity,
+                'point_radius'    => $this->point_radius,
+            )
+        );
+
+        // If the record has a parent item and Neatline Maps
+        // is present.
+        if (plugin_is_active('NeatlineMaps') && !is_null($this->item_id)) {
+            if (is_null($services)) {
+                $services = $this->getTable('NeatlineMapsService');
+            }
+            $item = $this->getItem();
+            $wms  = $services->findByItem($item);
+
+            // If there is a WMS, push to layers.
+            if ($wms) {
+                $data['wmsAddress'] = $wms->address;
+                $data['layers']     = $wms->layers;
+            }
+        }
+
+        return $data;
+    }
 }
