@@ -138,6 +138,7 @@ class NeatlineExhibit extends Omeka_Record implements Zend_Acl_Resource_Interfac
      */
     protected function beforeSave()
     {
+        $this->_checkDefaultFocusDate();
         $this->modified = Zend_Date::now()->toString(self::DATE_FORMAT);
     }
 
@@ -469,5 +470,21 @@ class NeatlineExhibit extends Omeka_Record implements Zend_Acl_Resource_Interfac
             throw new RuntimeException(__("Cannot associate a Neatline with a user who doesn't exist."));
         }
         $this->creator_id = $user->id;
+    }
+
+    /**
+     * This makes sure that the default_focus_date isn't set to the string 
+     * 'null'.
+     *
+     * @return void
+     * @author Eric Rochester <erochest@virginia.edu>
+     **/
+    protected function _checkDefaultFocusDate()
+    {
+        if (is_string($this->default_focus_date)
+            && strcasecmp($this->default_focus_date, 'null') === 0
+        ) {
+            $this->default_focus_date = null;
+        }
     }
 }
