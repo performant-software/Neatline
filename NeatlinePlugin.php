@@ -169,9 +169,17 @@ class NeatlinePlugin
 
         $this->_db->query($sql);
 
-        $sql = "CREATE INDEX `{$this->_db->prefix}neatline_data_records_exhibit_idx`
-            ON `{$this->_db->prefix}neatline_data_records` (`exhibit_id`);";
-        $this->_db->query($sql);
+        // Check for existing index.
+        $sql = "SHOW INDEX FROM `{$this->_db->prefix}neatline_data_records`
+            WHERE KEY_NAME='`{$this->_db->prefix}neatline_data_records_exhibit_idx`';";
+        if (!$this->_db->query($sql)) {
+
+            // Create new index.
+            $sql = "CREATE INDEX `{$this->_db->prefix}neatline_data_records_exhibit_idx`
+                ON `{$this->_db->prefix}neatline_data_records` (`exhibit_id`);";
+            $this->_db->query($sql);
+
+        }
 
         // Layers table.
         $sql = "CREATE TABLE IF NOT EXISTS `{$this->_db->prefix}neatline_base_layers` (
