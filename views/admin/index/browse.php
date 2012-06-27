@@ -82,7 +82,7 @@ head(array('content_class' => 'neatline', 'title' => $title));
                 }
 
                 if (has_permission('Neatline_Index', 'delete')) {
-                    echo link_to_neatline('delete', array('class' => 'delete delete-confirm'), 'delete-confirm');
+                    echo link_to_neatline('Delete', array('class' => 'delete delete-confirm'), 'delete-confirm');
                 }
                 ?>
             </td>

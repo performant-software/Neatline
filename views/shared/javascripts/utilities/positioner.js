@@ -35,6 +35,9 @@
             // and height dragging.
             draggable: true,
 
+            // True if the map should occupy the full screen height and width.
+            mapFullscreen: true,
+
             colors: {
                 drag_active: '#1e1e1e'
             },
@@ -1175,16 +1178,12 @@
         /*
          * Apply computed positions to the markup.
          */
-        apply: function(mapFullscreen) {
-
-            if (_.isUndefined(mapFullscreen)) {
-                mapFullscreen = true;
-            }
+        apply: function() {
 
             // Map.
             if (this._is_map) {
                 this.map.css('display', 'block');
-                if (mapFullscreen) {
+                if (this.mapFullscreen) {
                     this.map.css({
                         height: this.height,
                         width: this.width,
