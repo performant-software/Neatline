@@ -243,8 +243,8 @@
                 <label>Parent Record</label>
                 <div class="input">
                     <div class="inline-inputs">
-                        <input class="xlarge" name="parent-record-title" type="text" placeholder="Record Title" />
-                        <input name="parent-record" type="hidden" />
+                        <select name="parent-record">
+                        </select>
                     </div>
                 </div>
             </div>
