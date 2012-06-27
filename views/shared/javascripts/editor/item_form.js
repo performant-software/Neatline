@@ -109,7 +109,7 @@
             this.ambiguity =                this.form.find('.date-ambiguity-container');
             this.mapFocus =                 this.form.find('.map-focus');
             this.resetStyles =              this.form.find('.reset-styles');
-            this.parentRecord =             this.form.find('input[name="parent-record-title"]');
+            this.parentRecord =             this.form.find('select[name="parent-record"]');
             this.titleDescriptionFieldset = this.form.find('a.fieldset.text');
             this.dateInformationFieldset =  this.form.find('a.fieldset.temporal');
             this.mapStylesFieldset =        this.form.find('a.fieldset.styles');
@@ -280,13 +280,6 @@
                 tip: { show: false },
                 change: function(evt, obj) {
                     self._trigger('pointRadiusEdit', {}, { 'value': obj.value });
-                }
-            });
-
-            // ** PARENT RECORD.
-            this.parentRecord.autocomplete({
-                source: function(i, j) {
-                    j(['david', 'kara']);
                 }
             });
 
