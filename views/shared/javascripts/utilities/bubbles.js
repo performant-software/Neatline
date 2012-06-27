@@ -47,9 +47,11 @@
             this.bubble = null;
             this.title = null;
             this.body = null;
+            this.background = null;
             this.frozen = false;
             this.connector = false;
 
+            // When the cursor leaves the window, hide.
             this._window.bind('mouseleave', _.bind(function() {
                 this.hide();
             }, this));
@@ -87,7 +89,7 @@
                 body: body
             }));
 
-            // Get native dimensions of bubble.
+            // Get native dimensions.
             this._measureBubble();
 
             // Get components.
@@ -96,8 +98,9 @@
             this.titleDiv = this.bubble.find('div.title');
             this.bodyDiv = this.bubble.find('div.body');
 
-            // Inject.
+            // Inject, get color.
             this.element.append(this.bubble);
+            this.background = this.bubble.css('background-color');
 
             // Listen for mousemove.
             this._window.bind({
@@ -278,7 +281,8 @@
 
             // Set connector styles.
             this.triangle.attr({
-                fill: '#000',
+                fill: this.background,
+                stroke: this.background,
                 opacity: 0.7
             });
 
