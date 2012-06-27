@@ -27,14 +27,14 @@
 ?>
 
 <?php echo $this->partial('editor/_editor_header.php', array(
-    'exhibit' => $exhibit,
+    'exhibit' => $neatlineexhibit,
     'titlePrefix' => 'Neatline Editor',
-    'title' => $exhibit->name
+    'title' => $neatlineexhibit->name
 )); ?>
 
 <!-- The top bar. -->
 <?php echo $this->partial('editor/_topbar.php', array(
-    'neatline' => $exhibit,
+    'neatline' => $neatlineexhibit,
     'layers' => $layers
 )); ?>
 
@@ -43,7 +43,7 @@
 
 <!-- The core Neatline partial. -->
 <?php echo $this->partial('neatline/_neatline.php', array(
-    'exhibit' => $exhibit
+    'exhibit' => $neatlineexhibit
 )); ?>
 
 <!-- Templates for tooltips and geometry editing. -->
