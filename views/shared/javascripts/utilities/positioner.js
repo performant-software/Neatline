@@ -1183,7 +1183,7 @@
             // Map.
             if (this._is_map) {
                 this.map.css('display', 'block');
-                if (this.mapFullscreen) {
+                if (this.options.mapFullscreen) {
                     this.map.css({
                         height: this.height,
                         width: this.width,
