@@ -107,6 +107,9 @@
                     v_percent:  Neatline.proportions.vertical
                 },
 
+                // Map not fullscreen.
+                mapFullscreen: false,
+
                 // On width drag.
                 drag: function(event, obj) {
                     self._trigger('widthDrag', {}, obj);
@@ -391,7 +394,7 @@
         _reposition: function() {
 
             // Manifest the parameters.
-            this.dragbox.positioner('apply', false);
+            this.dragbox.positioner('apply');
 
             // Center tags.
             this.centerAllTags();
