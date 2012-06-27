@@ -95,8 +95,14 @@
             // Get components.
             this.freezeLink = this.bubble.find('a.freeze-bubble');
             this.closeLink = this.bubble.find('a.close-bubble');
+            this.moreInfoDiv = this.bubble.find('div.click-for-info');
             this.titleDiv = this.bubble.find('div.title');
             this.bodyDiv = this.bubble.find('div.body');
+
+            // If there is no body, hide click for more info.
+            if (this.body === '') {
+                this.moreInfoDiv.hide();
+            }
 
             // Inject, get color.
             this.element.append(this.bubble);

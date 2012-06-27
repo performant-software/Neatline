@@ -351,6 +351,12 @@ div.bubble-container div.body {
     display: none;
 }
 
+div.bubble-container div.click-for-info
+{
+    font-style: italic;
+    font-size: 0.9em;
+}
+
 div.bubble-container a.close-bubble,
 div.bubble-container a.freeze-bubble
 {
@@ -384,7 +390,8 @@ a.item-dc-link {
     font-style: italic;
 }
 
-div.bubble-container.frozen a.freeze-bubble {
+div.bubble-container.frozen a.freeze-bubble,
+div.bubble-container.frozen div.click-for-info {
     display: none;
 }
 
