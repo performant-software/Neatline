@@ -282,28 +282,6 @@ class Neatline_EditorController extends Omeka_Controller_Action
 
     /**
      * ~ AJAX ~
-     * Parent record search.
-     *
-     * @return void
-     */
-    public function parentrecordAction()
-    {
-
-        // Supress the default Zend layout-sniffer functionality.
-        $this->_helper->viewRenderer->setNoRender(true);
-        $this->getResponse()->setHeader('Content-type', 'application/json');
-
-        // Get the post.
-        $_post = $this->_request->getPost();
-
-        // Get parameters from the ajax request.
-        $exhibitId =                $_post['exhibit_id'];
-        $term =                     $_post['term'];
-
-    }
-
-    /**
-     * ~ AJAX ~
      * Save changes made to record statuses.
      *
      * @return void
