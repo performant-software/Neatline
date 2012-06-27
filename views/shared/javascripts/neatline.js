@@ -477,6 +477,11 @@
                 // When the cursor leaves the exhibit container.
                 'cursorleave': _.bind(function() {
                     this.map.neatlinemap('unhighlightHoveredRecord');
+                }, this),
+
+                // When the bubble is closed.
+                'close': _.bind(function() {
+                    this.map.neatlinemap('unselectSelectedRecord');
                 }, this)
 
             });

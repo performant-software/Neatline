@@ -70,6 +70,7 @@
             this._currentEditItem =         null;
             this._currentEditLayer =        null;
             this._hoveredRecord =           null;
+            this._selectedRecord =          null;
             this._hoveredFeature =          null;
             this._clickedFeature =          null;
             this.record =                   null;
@@ -491,6 +492,7 @@
 
                     // Capture clicked feature.
                     self._clickedFeature = feature;
+                    self._selectedRecord = record;
                     record.selected = true;
 
                     // Trigger out to the deployment code.
@@ -911,6 +913,13 @@
                 record.wms.setOpacity(record.data.select_opacity);
             }
 
+        },
+
+        /*
+         * Remove a selection on the currently selected record.
+         */
+        unselectSelectedRecord: function() {
+            this._removeVectorSelect(this._selectedRecord);
         },
 
         /*

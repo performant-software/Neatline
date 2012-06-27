@@ -123,7 +123,7 @@
             this.connector.remove();
             this.bubble = null;
 
-            // Strip move listener.
+            // Strip move listener, trigger out.
             this._window.unbind('mousemove.bubbles');
 
         },
@@ -143,8 +143,6 @@
 
             // Strip mousemove listener.
             this._window.unbind('mousemove.bubbles');
-
-            // Toggle link, show body.
             this.bubble.addClass('frozen');
 
             // Get native dimensions, position.
@@ -157,6 +155,7 @@
 
             // Listen for close.
             this.closeLink.mousedown(_.bind(function() {
+                this._trigger('close');
                 this.frozen = false;
                 this.hide();
             }, this));
