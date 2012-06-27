@@ -313,7 +313,11 @@ div.bubble-container {
     color: white !important;
     max-width: 300px;
     opacity: 0.7;
-    padding: 10px 20px 20px 20px;
+    padding: 10px 20px 10px 20px;
+}
+
+div.bubble-container.frozen {
+    padding-bottom: 20px;
 }
 
 div.bubble-container a, div.bubble-container a:visited {
@@ -341,15 +345,16 @@ div.bubble-container div.element-text {
 
 div.bubble-container div.title {
     font-weight: bold;
-    font-size: 1.4em;
-    margin-bottom: 0.4em;
-    line-height: 1.2em;
+}
+
+div.bubble-container div.body {
+    display: none;
 }
 
 div.bubble-container a.close-bubble,
 div.bubble-container a.freeze-bubble
 {
-    display: block;
+    display: none;
     color: white;
     margin: 0 0 5px 0;
     text-decoration: none;
@@ -377,6 +382,21 @@ div.bubble-container span.close-x {
 a.item-dc-link {
     color: white;
     font-style: italic;
+}
+
+div.bubble-container.frozen a.freeze-bubble {
+    display: none;
+}
+
+div.bubble-container.frozen a.close-bubble,
+div.bubble-container.frozen div.body {
+    display: block;
+}
+
+div.bubble-container.frozen div.title {
+    font-size: 1.4em;
+    margin-bottom: 0.4em;
+    line-height: 1.2em;
 }
 
 #neatline .timeline-container:after {

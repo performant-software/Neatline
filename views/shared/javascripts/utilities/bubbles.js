@@ -93,6 +93,8 @@
             // Get components.
             this.freezeLink = this.bubble.find('a.freeze-bubble');
             this.closeLink = this.bubble.find('a.close-bubble');
+            this.titleDiv = this.bubble.find('div.title');
+            this.bodyDiv = this.bubble.find('div.body');
 
             // Inject.
             this.element.append(this.bubble);
@@ -142,9 +144,12 @@
             // Strip mousemove listener.
             this._window.unbind('mousemove.bubbles');
 
-            // Toggle link.
-            this.freezeLink.css('display', 'none');
-            this.closeLink.css('display', 'block');
+            // Toggle link, show body.
+            this.bubble.addClass('frozen');
+
+            // Get native dimensions, position.
+            this._measureBubble();
+            this.position(this.event);
 
             // Increase opacity.
             this.bubble.animate({ 'opacity': 0.8 }, 60);
@@ -166,6 +171,9 @@
          * @return void.
          */
         position: function(event) {
+
+            // Store last event.
+            this.event = event;
 
             // Get container size.
             var containerWidth = this.element.outerWidth();
