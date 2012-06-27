@@ -89,9 +89,6 @@
                 body: body
             }));
 
-            // Get native dimensions.
-            this._measureBubble();
-
             // Get components.
             this.freezeLink = this.bubble.find('a.freeze-bubble');
             this.closeLink = this.bubble.find('a.close-bubble');
@@ -102,7 +99,11 @@
             // If there is no body, hide click for more info.
             if (this.body === '') {
                 this.moreInfoDiv.hide();
+                this.bubble.addClass('no-body');
             }
+
+            // Get native dimensions.
+            this._measureBubble();
 
             // Inject, get color.
             this.element.append(this.bubble);

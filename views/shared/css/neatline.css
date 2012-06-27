@@ -406,6 +406,12 @@ div.bubble-container.frozen div.title {
     line-height: 1.2em;
 }
 
+div.bubble-container.frozen.no-body div.title {
+    font-size: 1em;
+    line-height: 1em;
+    margin: 0;
+}
+
 #neatline .timeline-container:after {
   content: "";
   position:absolute;
