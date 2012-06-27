@@ -25,6 +25,13 @@
  */
 ?>
 
+<div id="neatline-header">
+<h1><?php echo neatline('name'); ?></h1>
+<a class="exhibit-fullscreen" href="<?php echo public_uri('neatline-exhibits/show/'. neatline('slug')); ?>/fullscreen">
+<span class="icon"></span> <span class="text">View Fullscreen</span>
+</a>
+</div>
+
 <!-- Neatline container. -->
 <div id="neatline" class="neatline-container">
 
