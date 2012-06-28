@@ -745,6 +745,14 @@ class NeatlineDataRecord extends Omeka_record
 
         // Build item metadata.
         if ($this->use_dc_metadata == 1) {
+            /*
+             * This is the biggest performance killer when calling buildMapDataArray 
+             * below. If this becomes too big of an issue, we can inline the 
+             * partial and use more targetted SQL queries, instead of loading 
+             * the whole item and pulling the data we want out. Otherwise, 
+             * we're stuck.
+             * -- ERR
+             */
             return __v()->partial('neatline/_dc_metadata.php', array(
                 'item' => $this->getItem()
             ));
