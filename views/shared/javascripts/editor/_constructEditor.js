@@ -396,7 +396,11 @@ jQuery(document).ready(function($) {
         // When new defaults have been successfully committed.
         'newdefaults': function(event, obj) {
             neatlineContainer.neatline('saveSuccess');
-            neatlineContainer.neatline('reloadTimeline');
+            neatlineContainer.neatline('renderTimelineDefaults', 
+                obj.context_band_height,
+                obj.context_band_unit,
+                obj.is_context_band
+            );
         }
 
     });

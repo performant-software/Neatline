@@ -508,6 +508,27 @@
         },
 
         /*
+         * Render new defaults.
+         *
+         * - param integer height: The height of the context band, as %.
+         * - param string unit: The context band unit.
+         * - param integer isContext: 1 if the context band is active.
+         *
+         * - return void.
+         */
+        renderDefaults: function(height, unit, isContext) {
+
+            // Update exhibit defaults.
+            Neatline.record.is_context_band = isContext;
+            Neatline.record.default_context_band_height = height;
+            Neatline.record.default_context_band_unit = unit;
+
+            // Reinstantiate.
+            this.reinstantiate();
+
+        },
+
+        /*
          * Get array of zoom indices.
          *
          * - return void.
@@ -569,7 +590,7 @@
          * Reinstantiate the timeline.
          */
         reinstantiate: function() {
-            this._instantiateSimile();
+
         },
 
         /*
