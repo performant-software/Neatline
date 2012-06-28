@@ -1099,19 +1099,26 @@ class NeatlineDataRecord extends Omeka_record
      * This sets and caches the parent record.
      *
      * @param array $index An index of records.
+     * @param Omeka_record $exhibit The parent exhibit.
      *
      * @return void
      * @author Eric Rochester <erochest@virginia.edu>
      **/
-    protected function _setParent($index)
+    protected function _setParent($index, $exhibit)
     {
+
+        // Set parent, recurse up the inheritance chain.
         if (!is_null($this->parent_record_id)
             && array_key_exists($this->parent_record_id, $index)
         ) {
             $parent = $index[$this->parent_record_id];
             $this->_parent = $parent;
-            $parent->_setParent($index);
+            $parent->_setParent($index, $exhibit);
         }
+
+        // Set parent exhibit.
+        $this->_exhibit = $exhibit;
+
     }
 
     /**
@@ -1125,7 +1132,7 @@ class NeatlineDataRecord extends Omeka_record
      * @return array
      * @author Me
      **/
-    public function buildMapDataArray($index=array(), $services=null)
+    public function buildMapDataArray($index=array(), $services=null, $exhibit)
     {
         $data = null;
 
@@ -1133,7 +1140,7 @@ class NeatlineDataRecord extends Omeka_record
             return $data;
         }
 
-        $this->_setParent($index);
+        $this->_setParent($index, $exhibit);
 
         $data = array(
             'id'                  => $this->id,
