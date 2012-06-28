@@ -318,7 +318,7 @@ div.bubble-container {
 
 div.bubble-container.frozen {
     padding-bottom: 20px;
-    opacity: 0.9;
+    opacity: 0.8;
 }
 
 div.bubble-container a, div.bubble-container a:visited {
