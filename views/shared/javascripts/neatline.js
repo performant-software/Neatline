@@ -942,6 +942,24 @@
         },
 
         /*
+         * Manifest new timeline defaults.
+         *
+         * - param integer height: The height of the context band, as %.
+         * - param string unit: The context band unit.
+         * - param integer isContext: 1 if the context band is active.
+         *
+         * - return void.
+         */
+        renderTimelineDefaults: function(height, unit, isContext) {
+
+            // Reinstantiate Simile.
+            this.timeline.neatlinetimeline('renderDefaults',
+                height, unit, isContext
+            );
+
+        },
+
+        /*
          * Render a new h_percent and v_percent loadout.
          *
          * - param float h_percent: The new h_percent.

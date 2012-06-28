@@ -74,8 +74,8 @@ class Neatline_EditorController extends Omeka_Controller_Action
         $layers =                   $this->_layersTable->findAll();
 
         // Push records.
-        $this->view->exhibit =      $exhibit;
-        $this->view->layers =       $layers;
+        $this->view->neatlineexhibit =      $exhibit;
+        $this->view->layers =               $layers;
 
     }
 

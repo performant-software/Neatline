@@ -120,7 +120,7 @@
                 data: data,
 
                 success: function() {
-                    self._trigger('newdefaults');
+                    self._trigger('newdefaults', {}, data);
                 }
 
             });
