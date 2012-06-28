@@ -78,6 +78,7 @@ class NeatlineDataRecord extends Omeka_record
 
     // For caching.
     protected $_parent;
+    protected $_exhibit;
 
     /**
      * Default attributes.
@@ -142,6 +143,7 @@ class NeatlineDataRecord extends Omeka_record
         $this->items_active = 0;
 
         $this->_parent = null;
+        $this->_exhibit = null;
 
     }
 
@@ -171,7 +173,15 @@ class NeatlineDataRecord extends Omeka_record
      */
     public function getExhibit()
     {
-        return $this->getTable('NeatlineExhibit')->find($this->exhibit_id);
+
+        if (is_null($this->_exhibit)) {
+            $this->_exhibit = $this
+                ->getTable('NeatlineExhibit')
+                ->find($this->exhibit_id);
+        }
+
+        return $this->_exhibit;
+
     }
 
     /**
@@ -631,6 +641,7 @@ class NeatlineDataRecord extends Omeka_record
         else {
 
             $exhibit = $this->getExhibit();
+            // var_dump($exhibit->default_vector_color);
             if (!is_null($exhibit['default_' . $style])) {
                 return $exhibit['default_' . $style];
             }
@@ -1121,6 +1132,7 @@ class NeatlineDataRecord extends Omeka_record
         if ($this->space_active != 1) {
             return $data;
         }
+
         $this->_setParent($index);
 
         $data = array(
