@@ -1108,13 +1108,13 @@ class NeatlineDataRecord extends Omeka_record
      *
      * @param array $index This is the index of NeatlineDataRecord objects for 
      * caching. Optional.
-     * @param Omeka_Db_Table $services This is the NeatlineMapsService. If not 
-     * provided, it will be gotten.
+     * @param array $wmss This is an index mapping item IDs to rows from the 
+     * NeatlineMapsService WMS data.
      *
      * @return array
      * @author Me
      **/
-    public function buildMapDataArray($index=array(), $services=null)
+    public function buildMapDataArray($index=array(), $wmss=array())
     {
         $data = null;
 
@@ -1160,20 +1160,10 @@ class NeatlineDataRecord extends Omeka_record
 
         // If the record has a parent item and Neatline Maps
         // is present.
-        if (!is_null($this->item_id)) {
-            if (is_null($services) && plugin_is_active('NeatlineMaps')) {
-                $services = $this->getTable('NeatlineMapsService');
-            }
-            if (!is_null($services)) {
-                $item = $this->getItem();
-                $wms  = $services->findByItem($item);
-
-                // If there is a WMS, push to layers.
-                if ($wms) {
-                    $data['wmsAddress'] = $wms->address;
-                    $data['layers']     = $wms->layers;
-                }
-            }
+        if (!is_null($this->item_id) && array_key_exists($this->item_id, $wmss)) {
+            $wms = $wmss[$this->item_id];
+            $data['wmsAddress'] = $wms['address'];
+            $data['layers']     = $wms['layers'];
         }
 
         return $data;
