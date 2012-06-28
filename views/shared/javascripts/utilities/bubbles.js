@@ -159,10 +159,6 @@
             this._measureBubble();
             this.position(this.event);
 
-            // Increase opacity.
-            this.bubble.animate({ 'opacity': 0.8 }, 60);
-            this.triangle.animate({ 'opacity': 0.8 }, 60);
-
             // Listen for close.
             this.closeLink.mousedown(_.bind(function() {
                 this._trigger('close');
