@@ -181,12 +181,15 @@ class NeatlineDataRecord extends Omeka_record
      */
     public function getParentRecord()
     {
+
         if (!is_null($this->parent_record_id) && is_null($this->_parent)) {
             $this->_parent = $this
                 ->getTable('NeatlineDataRecord')
                 ->find($this->parent_record_id);
         }
+
         return $this->_parent;
+
     }
 
     /**
@@ -614,9 +617,6 @@ class NeatlineDataRecord extends Omeka_record
     public function getStyle($style)
     {
 
-        // Get the exhibit.
-        $exhibit = $this->getExhibit();
-
         // If there is a row value.
         if (!is_null($this[$style])) {
             return $this[$style];
@@ -628,13 +628,18 @@ class NeatlineDataRecord extends Omeka_record
         }
 
         // If there is an exhibit default
-        else if (!is_null($exhibit['default_' . $style])) {
-            return $exhibit['default_' . $style];
-        }
-
-        // Fall back to system default.
         else {
-            return get_option($style);
+
+            $exhibit = $this->getExhibit();
+            if (!is_null($exhibit['default_' . $style])) {
+                return $exhibit['default_' . $style];
+            }
+
+            // Fall back to system default.
+            else {
+                return get_option($style);
+            }
+
         }
 
     }
@@ -1170,5 +1175,7 @@ class NeatlineDataRecord extends Omeka_record
         }
 
         return $data;
+
     }
+
 }
