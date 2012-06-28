@@ -78,6 +78,7 @@ class NeatlineDataRecord extends Omeka_record
 
     // For caching.
     protected $_parent;
+    protected $_exhibit;
 
     /**
      * Default attributes.
@@ -142,6 +143,7 @@ class NeatlineDataRecord extends Omeka_record
         $this->items_active = 0;
 
         $this->_parent = null;
+        $this->_exhibit = null;
 
     }
 
@@ -171,7 +173,15 @@ class NeatlineDataRecord extends Omeka_record
      */
     public function getExhibit()
     {
-        return $this->getTable('NeatlineExhibit')->find($this->exhibit_id);
+
+        if (is_null($this->_exhibit)) {
+            $this->_exhibit = $this
+                ->getTable('NeatlineExhibit')
+                ->find($this->exhibit_id);
+        }
+
+        return $this->_exhibit;
+
     }
 
     /**
@@ -631,6 +641,7 @@ class NeatlineDataRecord extends Omeka_record
         else {
 
             $exhibit = $this->getExhibit();
+            // var_dump($exhibit->default_vector_color);
             if (!is_null($exhibit['default_' . $style])) {
                 return $exhibit['default_' . $style];
             }
@@ -1088,19 +1099,26 @@ class NeatlineDataRecord extends Omeka_record
      * This sets and caches the parent record.
      *
      * @param array $index An index of records.
+     * @param Omeka_record $exhibit The parent exhibit.
      *
      * @return void
      * @author Eric Rochester <erochest@virginia.edu>
      **/
-    protected function _setParent($index)
+    protected function _setParent($index, $exhibit)
     {
+
+        // Set parent, recurse up the inheritance chain.
         if (!is_null($this->parent_record_id)
             && array_key_exists($this->parent_record_id, $index)
         ) {
             $parent = $index[$this->parent_record_id];
             $this->_parent = $parent;
-            $parent->_setParent($index);
+            $parent->_setParent($index, $exhibit);
         }
+
+        // Set parent exhibit.
+        $this->_exhibit = $exhibit;
+
     }
 
     /**
@@ -1110,18 +1128,21 @@ class NeatlineDataRecord extends Omeka_record
      * caching. Optional.
      * @param array $wmss This is an index mapping item IDs to rows from the 
      * NeatlineMapsService WMS data.
+     * @param Omeka_Record $exhibit The exhibit this record belongs to.
      *
      * @return array
      * @author Me
      **/
-    public function buildMapDataArray($index=array(), $wmss=array())
-    {
+    public function buildMapDataArray(
+        $index=array(), $wmss=array(), $exhibit=null
+    ) {
         $data = null;
 
         if ($this->space_active != 1) {
             return $data;
         }
-        $this->_setParent($index);
+
+        $this->_setParent($index, $exhibit);
 
         $data = array(
             'id'                  => $this->id,

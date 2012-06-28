@@ -379,7 +379,7 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
     public function buildMapJson($neatline)
     {
 
-        $data           = array();
+        $data = array();
         $isNeatlineMaps = plugin_is_active('NeatlineMaps');
         $wmsIndex       = array();
 
@@ -399,13 +399,21 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
 
         // Get records.
         if ($records = $this->getRecordsByExhibit($neatline)) {
-            $index   = $this->_indexRecords($records);
+
+            // Build out record index.
+            $index = $this->_indexRecords($records);
             foreach ($records as $record) {
-                $layer = $record->buildMapDataArray($index, $wmsIndex);
+                $layer = $record->buildMapDataArray(
+                    $index,
+                    $wmsIndex,
+                    $neatline
+                );
                 if (!is_null($layer)) {
                     $data[] = $layer;
                 }
+
             }
+
         }
 
         // JSON-ify the array.
