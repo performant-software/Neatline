@@ -1160,22 +1160,23 @@ class NeatlineDataRecord extends Omeka_record
 
         // If the record has a parent item and Neatline Maps
         // is present.
-        if (plugin_is_active('NeatlineMaps') && !is_null($this->item_id)) {
-            if (is_null($services)) {
+        if (!is_null($this->item_id)) {
+            if (is_null($services) && plugin_is_active('NeatlineMaps')) {
                 $services = $this->getTable('NeatlineMapsService');
             }
-            $item = $this->getItem();
-            $wms  = $services->findByItem($item);
+            if (!is_null($services)) {
+                $item = $this->getItem();
+                $wms  = $services->findByItem($item);
 
-            // If there is a WMS, push to layers.
-            if ($wms) {
-                $data['wmsAddress'] = $wms->address;
-                $data['layers']     = $wms->layers;
+                // If there is a WMS, push to layers.
+                if ($wms) {
+                    $data['wmsAddress'] = $wms->address;
+                    $data['layers']     = $wms->layers;
+                }
             }
         }
 
         return $data;
-
     }
 
 }
