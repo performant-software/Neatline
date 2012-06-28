@@ -169,17 +169,19 @@ class NeatlinePlugin
 
         $this->_db->query($sql);
 
-        // Check for existing index.
-        $sql = "SHOW INDEX FROM `{$this->_db->prefix}neatline_data_records`
-            WHERE KEY_NAME='`{$this->_db->prefix}neatline_data_records_exhibit_idx`';";
-        if (!$this->_db->query($sql)) {
-
-            // Create new index.
-            $sql = "CREATE INDEX `{$this->_db->prefix}neatline_data_records_exhibit_idx`
-                ON `{$this->_db->prefix}neatline_data_records` (`exhibit_id`);";
-            $this->_db->query($sql);
-
-        }
+        $this->_addIndex(
+            $this->_db->prefix . 'neatline_data_records',
+            $this->_db->prefix . 'neatline_data_records_exhibit_idx',
+            'exhibit_id'
+        );
+        /** This doesn't seem to help, but I'm leaving it here as a record that 
+         * we tried it.
+         * $this->_addIndex(
+         *     $this->_db->prefix . 'neatline_data_records',
+         *     $this->_db->prefix . 'neatline_data_records_exhibit_item_idx',
+         *     'exhibit_id, item_id'
+         * );
+         */
 
         // Layers table.
         $sql = "CREATE TABLE IF NOT EXISTS `{$this->_db->prefix}neatline_base_layers` (
@@ -434,5 +436,24 @@ class NeatlinePlugin
             $acl->allow(null, 'Neatline_Index', array('browse', 'show','simile','openlayers','udi'));
         }
 
+    }
+
+    /**
+     * This adds an index, if it doesn't exist.
+     *
+     * @param $table  string The name of the table the index is based on.
+     * @param $name   string The name of the index to check for.
+     * @param $fields string The SQL field list defining the index.
+     *
+     * @return void
+     * @author Eric Rochester <erochest@virginia.edu>
+     **/
+    protected function _addIndex($table, $name, $fields)
+    {
+        $check = "SHOW INDEX FROM `$table` WHERE key_name=?;";
+        if (!$this->_db->query($check, $name)) {
+            $sql = "CREATE INDEX $name ON $table ($fields);";
+            $this->_db->query($sql);
+        }
     }
 }
