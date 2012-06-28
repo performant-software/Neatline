@@ -93,28 +93,11 @@ function neatline_queuePublicAssets()
 {
     queue_js('_constructInThemeNeatline', 'javascripts');
     queue_css('neatline-public');
-}
-
-/**
- * Include the static files for a public-facing exhibit.
- *
- * @return void.
- */
-function neatline_queueInThemeAssets()
-{
-
-    // Neatline runner.
-    queue_js('_constructInThemeNeatline', 'javascripts');
-
-    // Public-specific CSS additions.
-    queue_css('neatline-public');
-
     $google = 'http://maps.google.com/maps/api/js?v=3.5&sensor=false';
 
     // API calls.
     $headScript = __v()->headScript();
     $headScript->appendScript('', 'text/javascript', array('src' => $google));
-
 }
 
 /**

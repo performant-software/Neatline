@@ -23,68 +23,9 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache 2 License
  */
 
-@import url(http://fonts.googleapis.com/css?family=Cabin+Condensed);
-@import url(http://fonts.googleapis.com/css?family=Dosis);
-
-/* Layout */
-
-body {
-    margin: 0;
-    padding: 0;
-    background-color: #fafafa;
-    font-family: Dosis, 'Cabin Condensed';
-}
-
-#topbar {
-    height: 60px;
-}
-
-div.exhibit-title {
-    padding: 9px 0 0 5em;
-    font-size: 2em;
-    float: left;
-}
-
-div.exhibit-fullscreen {
-    padding: 15px 10em 0 0;
-    float: right;
-}
-
-div.exhibit-fullscreen span.icon {
-    display: inline-block;
-    background-image: url('../images/fullscreen.png');
-    width: 35px;
-    height: 34px;
-}
-
-div.exhibit-fullscreen span.text {
-    display: inline-block;
-    position: relative;
-    bottom: 8px;
-    left: 10px;
-}
-
-div.exhibit-fullscreen span.text:hover {
-    color: #584561;
-}
-
-div.exhibit-fullscreen a {
-    text-decoration: none;
-    font-size: 1.3em;
-    color: #9e9e9e;
-}
-
-div.exhibit-description {
-    padding: 0 10em;
-}
-
 #neatline {
-    border-top: 7px solid #584561;
-    border-bottom: 7px solid #584561;
     position: relative;
     height: 500px;
-    font-size: 13px;
-    font-weight: normal;
-    line-height: 18px;
-    color: #404040;
+    border: 10px solid rgba(0,0,0,0.1);
+    border-width: 10px 0;
 }
