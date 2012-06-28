@@ -708,6 +708,11 @@
          */
         _insertNewRecordRow: function(html) {
 
+            // If there is an open form, close it.
+            if (!_.isNull(this._currentFormItem)) {
+                this._hideForm(this._currentFormItem, true);
+            }
+
             // If there is no record header row, prepend to list.
             if (this.neatlineRecordsHeader.length === 0) {
                 this.itemsList.prepend(html);
@@ -784,6 +789,7 @@
          * Contract an expended item form.
          */
          _hideForm: function(item, immediate) {
+
              if (this._isEditFormLocked()) {
                  return;
              }
