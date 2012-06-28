@@ -745,6 +745,14 @@ class NeatlineDataRecord extends Omeka_record
 
         // Build item metadata.
         if ($this->use_dc_metadata == 1) {
+            /*
+             * This is the biggest performance killer when calling buildMapDataArray 
+             * below. If this becomes too big of an issue, we can inline the 
+             * partial and use more targetted SQL queries, instead of loading 
+             * the whole item and pulling the data we want out. Otherwise, 
+             * we're stuck.
+             * -- ERR
+             */
             return __v()->partial('neatline/_dc_metadata.php', array(
                 'item' => $this->getItem()
             ));
@@ -1126,14 +1134,16 @@ class NeatlineDataRecord extends Omeka_record
      *
      * @param array $index This is the index of NeatlineDataRecord objects for 
      * caching. Optional.
-     * @param Omeka_Db_Table $services This is the NeatlineMapsService. If not 
-     * provided, it will be gotten.
+     * @param array $wmss This is an index mapping item IDs to rows from the 
+     * NeatlineMapsService WMS data.
+     * @param Omeka_Record $exhibit The exhibit this record belongs to.
      *
      * @return array
      * @author Me
      **/
-    public function buildMapDataArray($index=array(), $services=null, $exhibit)
-    {
+    public function buildMapDataArray(
+        $index=array(), $wmss=array(), $exhibit=null
+    ) {
         $data = null;
 
         if ($this->space_active != 1) {
@@ -1179,22 +1189,13 @@ class NeatlineDataRecord extends Omeka_record
 
         // If the record has a parent item and Neatline Maps
         // is present.
-        if (plugin_is_active('NeatlineMaps') && !is_null($this->item_id)) {
-            if (is_null($services)) {
-                $services = $this->getTable('NeatlineMapsService');
-            }
-            $item = $this->getItem();
-            $wms  = $services->findByItem($item);
-
-            // If there is a WMS, push to layers.
-            if ($wms) {
-                $data['wmsAddress'] = $wms->address;
-                $data['layers']     = $wms->layers;
-            }
+        if (!is_null($this->item_id) && array_key_exists($this->item_id, $wmss)) {
+            $wms = $wmss[$this->item_id];
+            $data['wmsAddress'] = $wms['address'];
+            $data['layers']     = $wms['layers'];
         }
 
         return $data;
-
     }
 
 }

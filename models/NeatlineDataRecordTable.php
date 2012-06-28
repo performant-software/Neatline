@@ -381,11 +381,20 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
 
         $data = array();
         $isNeatlineMaps = plugin_is_active('NeatlineMaps');
-        $_servicesTable = null;
+        $wmsIndex       = array();
 
         // If Neatline Maps is installed, get services table.
         if ($isNeatlineMaps) {
-            $_servicesTable = $this->getTable('NeatlineMapsService');
+            $servicesTable = $this->getTable('NeatlineMapsService');
+            $sql = "
+                SELECT m.item_id AS item_id, m.address AS address, m.layers AS layers
+                FROM `{$servicesTable->getTableName()}` m
+                JOIN `{$this->getTableName()}` r ON m.item_id=r.item_id
+                WHERE r.exhibit_id=?;";
+            $results = $this->getDb()->fetchAll($sql, $neatline->id);
+            foreach ($results as $wms) {
+                $wmsIndex[$wms['item_id']] = $wms;
+            }
         }
 
         // Get records.
@@ -394,14 +403,11 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
             // Build out record index.
             $index = $this->_indexRecords($records);
             foreach ($records as $record) {
-
-                // Construct record data.
                 $layer = $record->buildMapDataArray(
                     $index,
-                    $_servicesTable,
+                    $wmsIndex,
                     $neatline
                 );
-
                 if (!is_null($layer)) {
                     $data[] = $layer;
                 }

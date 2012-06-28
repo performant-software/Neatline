@@ -48,6 +48,7 @@
             this.title = null;
             this.body = null;
             this.background = null;
+            this.opacity = null;
             this.frozen = false;
             this.connector = false;
 
@@ -105,9 +106,10 @@
             // Get native dimensions.
             this._measureBubble();
 
-            // Inject, get color.
+            // Inject, get styles.
             this.element.append(this.bubble);
             this.background = this.bubble.css('background-color');
+            this.opacity = this.bubble.css('opacity');
 
             // Listen for mousemove.
             this._window.bind({
@@ -154,6 +156,9 @@
             // Strip mousemove listener.
             this._window.unbind('mousemove.bubbles');
             this.bubble.addClass('frozen');
+
+            // Get bubble opacity.
+            this.opacity = this.bubble.css('opacity');
 
             // Get native dimensions, position.
             this._measureBubble();
@@ -286,7 +291,7 @@
             this.triangle.attr({
                 fill: this.background,
                 stroke: this.background,
-                opacity: 0.7
+                opacity: this.opacity
             });
 
         },
