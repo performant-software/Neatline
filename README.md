@@ -156,13 +156,13 @@ Click the "Save Arrangement" button to save the changes to the server.
 
 As you move your mouse over borders between the blocks in the preview layout, a dotted line will appear along the border and the pointer will change to a resize cursor. Click and drag to adjust the height and width of any of the blocks in the layout.
 
-![editor](http://23.21.98.97/wp-content/uploads/2012/06/layout-editor-proportions.png)
+![editor](http://23.21.98.97/wp-content/uploads/2012/06/layout-editor-proportions1.png)
 
 Click the "Save Arrangement" button to save the changes to the server.
 
 ### Create Records
 
-Fundamentally, a Neatline exhibit is just a collection of records that are plotted on some combination of the map, on the timeline, or in the content-browser panel.
+Fundamentally, a Neatline exhibit is just a collection of records that are plotted on some combination of the map, the timeline, and the record-browser panel.
 
 There are two kinds of records:
 
@@ -173,14 +173,18 @@ There are two kinds of records:
 
   2. **Exhibit-specific records**: Alternatively, you can also create records on a one-off basis inside a specific exhibit. This is useful in situations where you want to represent some sort of entity in your exhibit that doesn't necessarily warrant its own long-format metadata record.
 
-    For example, if you're creating an interactive edition of a Civil War battle map and want to make note of a specific troop movement, it might not make sense to include an Omeka item called "Jackson's flanking movement" in a collection of maps. In this case, it would make more sense to create "Jackson's flanking movement" as an exhibit-specific record that does not have a representation outside of the exhibit in which it is displayed.
+    For example, if you're creating an interactive edition of a Civil War battle map and want to mark a specific troop movement, it might not make sense to include an Omeka item devoted to "Jackson's flanking movement" in a collection of maps. In this case, it would make more sense to create "Jackson's flanking movement" as an exhibit-specific record that does not have a representation outside of the exhibit in which it is displayed.
 
 
 To add a new record to the exhibit:
 
-  1. To plot a record that corresponds to an Omeka item, just click the listing for the record in the record browser on the left side of the screen. To crete a new exhibit-specific record, click the "New Item" button at the top of the left pane in the editor. A new listing for the "[Untitled]" record will appear at the top of the stack under the "Neatline Records" heading. Click the title to open the record.
+  1. To plot a record that corresponds to an Omeka item, click the listing for the record in the record browser on the left side of the screen. To crete a new exhibit-specific record, click the "New Item" button at the top of the left pane in the editor. A new listing for the "[Untitled]" record will appear at the top of the stack under the "Neatline Records" heading. Click the title to open the record.
+
+  ![editor](http://23.21.98.97/wp-content/uploads/2012/06/item-browser.png)
 
   2. When you click on a record title, a form appears with four fieldsets labeled with tabs at the top of the form: "Text," "Temporal," "Styling", and "Relations." Work through the four fieldsets and fill out all the information necessary to describe the record in the context of the exhibit (see below for detailed information about each fieldset).
+
+  ![editor](http://23.21.98.97/wp-content/uploads/2012/06/edit-form-text.png)
 
   4. When you're done adding or editing information, click the "Save" button at the bottom of the form to commit the changes. Click on the title or on the "Close Record" button to contract the form. **Note:** If you add or edit data, be sure to click "Save" before closing the form. Otherwise, your changes will be lost.
 
