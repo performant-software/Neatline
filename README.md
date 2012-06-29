@@ -204,45 +204,83 @@ Records have these fieldsets:
 
     * **Show pop-up bubble**: Check this box if you want the title and description to be displayed in a popup bubble when the user hovers the cursor over the representation of the record on the map or timeline.
 
+      ![editor](http://23.21.98.97/wp-content/uploads/2012/06/bubble-metadata-fields.png)
+
     * **Use default item metadata**: Check this box to import the complete Dublin Core metadata output for the Omeka item that the record corresponds to into the description field on the record. When the box is checked, Neatline will immediately load the metadata into the description field and disable the text editor. This box is grayed out for exhibit-specific records, since they do not correspond to an item in the Omeka collection.
+
+      ![editor](http://23.21.98.97/wp-content/uploads/2012/06/bubble-metadata-fields.png)
 
   * Temporal 
 
     * **Start Date**: The start date of the object, event, or concept represented by the record. This is the only field that is required in order for the record to be displayed on the timeline. Dates must be entered in standard [ISO 8601][iso8601] format.
 
+      ![editor](http://23.21.98.97/wp-content/uploads/2012/06/start-date-field.png)
+
     * **End Date**: Same as start date. If an end date is entered, the record will be represented as a span (as opposed to a single point).
+
+      ![editor](http://23.21.98.97/wp-content/uploads/2012/06/end-date-field.png)
 
     * **Start Visible Date**: If set, the representations of the record on the map and record description panel will only be displayed when the timeline is scrolled to a center position _after_ this date.
 
+      ![editor](http://23.21.98.97/wp-content/uploads/2012/06/start-visible-date-field.png)
+
     * **End Visible Date**: If set, the representations of the record on the map and record description panel will only be displayed when the timeline is scrolled to a center position _before_ this date.
 
+      ![editor](http://23.21.98.97/wp-content/uploads/2012/06/end-visible-date-field.png)
+
     * **Date Ambiguity**: The date ambiguity widget lets you drag out a gradient of uncertainty or fuzziness across a time interval. Drag the two controls handles inward to fuzziness around the edges, or create a continuous increase or decrease by dragging both handles all the way to one side or the other.
+
+      ![editor](http://23.21.98.97/wp-content/uploads/2012/06/date-ambiguity-field.png)
 
   * Styling 
 
     * **Shape Color**: The fill color of the polygons (everything inside of the border lines, not including the lines). Click on the  swatch to the right of the input to open a color picker.
 
+      ![editor](http://23.21.98.97/wp-content/uploads/2012/06/shape-color-field.png)
+
     * **Line Color**: The color of the border lines. Click on the  swatch to the right of the input to open a color picker.
+
+      ![editor](http://23.21.98.97/wp-content/uploads/2012/06/line-color-field.png)
 
     * **Highlight Color**: The color of the lines, polygons, and points when the record is highlighted or selected. Click on the swatch to the right of the input to open a color picker.
 
+      ![editor](http://23.21.98.97/wp-content/uploads/2012/06/highlight-color-field.png)
+
     * **Fill Opacity**: The opacity of the polygons and/or WMS layer (not including the border lines). Enter a number between 0 and 100 (0 being transparent, 100 completely opaque) in the input, or click and drag up and down to gradually modulate the value.
+
+      ![editor](http://23.21.98.97/wp-content/uploads/2012/06/fill-color-field.png)
 
     * **Select Opacity**: The opacity of the polygons and/or WMS layer when the record is selected (not including the border lines). Enter a number between 0 and 100 (0 being transparent, 100 completely opaque) in the input, or click and drag up and down to gradually modulate the value.
 
+      ![editor](http://23.21.98.97/wp-content/uploads/2012/06/select-opacity-field.png)
+
     * **Line Opacity**: The opacity of the border lines. Enter a number between 0 and 100 (0 being transparent, 100 completely opaque) in the input, or click and drag up and down to gradually modulate the value.
+
+      ![editor](http://23.21.98.97/wp-content/uploads/2012/06/line-opacity-field.png)
 
     * **Graphic Opacity**: If an external image URL is entered in the "Point Graphic" field (see below), this controls the opacity of image on the map. Enter a number between 0 and 100 (0 being transparent, 100 completely opaque) in the input, or click and drag up and down to gradually modulate the value.
 
+      ![editor](http://23.21.98.97/wp-content/uploads/2012/06/graphic-opacity-field.png)
+
     * **Line Width**: The thickness of the border lines in pixels. Enter a positive integer in the input, or click and drag up and down to gradually modulate the value. Although there's no theoretical limit on how thick the lines can be, in practice you'll probably want to keep them between about 1-10 pixels.
+
+      ![editor](http://23.21.98.97/wp-content/uploads/2012/06/line-width-field.png)
 
     * **Point Radius**: The radius of standalone points and verties on lines and polygons. Enter a positive integer in the input, or click and drag up and down to gradually modulate the value. Like with the line thickness parameter, there's no limit to how large points can be, but keep in mind that the radius of points on the map is _fixed_, in that it is not affected by the zoom level - a 5-pixel point will be 5 pixels when the map is zoomed to 100 meters or 1000 miles.
 
+      ![editor](http://23.21.98.97/wp-content/uploads/2012/06/point-radius-field.png)
+
     * **Point Graphic**: Enter a URL to an external image to use the image as the graphical representation of a point on the map. This makes it possible to layer images on to of the map. Since the images are the same as geometric points in the underlying implementation, they share the property of remaining the same absolute dimension no matter what the zoom level of the map. To change the size of the image(s), just edit the "Point Radius" value.
+
+      ![editor](http://23.21.98.97/wp-content/uploads/2012/06/point-graphic-field.png)
 
     * **Reset Item Styles**: Click this button to void any item-specific styles set for the record with any of the 6 previous controls. This will cause the record to fall back to the exhibit-wide defaults, which are configured by way of the "Map Settings" dropdown in the top bar.
 
+      ![editor](http://23.21.98.97/wp-content/uploads/2012/06/reset-item-styles-field.png)
+
     * **Set Map Focus**: The map focus for a record is the position and zoom that the map viewport is set to when the record is activated by any action elsewhere in the exhibit. For example, if a user clicks on a listing for the record in the description tray or scrolls to the item using the next and previous arrows, the map will automatically refocus at the latitude/longitude and zoom level defined by the map focus for the item. 
+
+      ![editor](http://23.21.98.97/wp-content/uploads/2012/06/set-map-focus-field.png)
 
         By default, if a custom focus has not been set, Neatline approximates a map focus for the record based on the dimensions of the shapes, lines, and points associated with the record on the map. Sometimes, this is sufficient, but in many cases you'll want to configure the default focus - you might want to zoom out to get more context on the screen when the user arrives at the item, or nudge over the focus position to contetualize the record relative to some other specific entity nearby on the map.
 
@@ -258,6 +296,8 @@ Records have these fieldsets:
 
       Likewise, parent-child relationships can be used to create
 temporal "contexts" inside a single exhibit. For example, if you're working with a collection of five historical maps of the same geographic region, it's important to be able to restrict map vectors and descriptive annotations to just one of the maps to avoid a confusing soup of overlapping shapes and annotations. Instead of manually setting the same the visiblity dates of each interpretive records, you can just set visiblity dates for each of the five map records and then point each of the descriptive records at one of the maps. This way, the maps will phase on and off of the exhibit in unison with the set of interpretive records that describe them.
+
+      ![editor](http://23.21.98.97/wp-content/uploads/2012/06/parent-record-field.png)
 
 ### Plot Records on the Map
 
