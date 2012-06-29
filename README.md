@@ -248,23 +248,23 @@ Records have these fieldsets:
 
     * **Fill Opacity**: The opacity of the polygons and/or WMS layer (not including the border lines). Enter a number between 0 and 100 (0 being transparent, 100 completely opaque) in the input, or click and drag up and down to gradually modulate the value.
 
-      ![editor](http://23.21.98.97/wp-content/uploads/2012/06/fill-color-field.png)
+      ![editor](http://23.21.98.97/wp-content/uploads/2012/06/fill-opacity-field.png)
 
     * **Select Opacity**: The opacity of the polygons and/or WMS layer when the record is selected (not including the border lines). Enter a number between 0 and 100 (0 being transparent, 100 completely opaque) in the input, or click and drag up and down to gradually modulate the value.
 
-      ![editor](http://23.21.98.97/wp-content/uploads/2012/06/select-opacity-field.png)
+      ![editor](http://23.21.98.97/wp-content/uploads/2012/06/select-opacity.png)
 
     * **Line Opacity**: The opacity of the border lines. Enter a number between 0 and 100 (0 being transparent, 100 completely opaque) in the input, or click and drag up and down to gradually modulate the value.
 
-      ![editor](http://23.21.98.97/wp-content/uploads/2012/06/line-opacity-field.png)
+      ![editor](http://23.21.98.97/wp-content/uploads/2012/06/line-opacity.png)
 
     * **Graphic Opacity**: If an external image URL is entered in the "Point Graphic" field (see below), this controls the opacity of image on the map. Enter a number between 0 and 100 (0 being transparent, 100 completely opaque) in the input, or click and drag up and down to gradually modulate the value.
 
-      ![editor](http://23.21.98.97/wp-content/uploads/2012/06/graphic-opacity-field.png)
+      ![editor](http://23.21.98.97/wp-content/uploads/2012/06/graphic-opacity.png)
 
     * **Line Width**: The thickness of the border lines in pixels. Enter a positive integer in the input, or click and drag up and down to gradually modulate the value. Although there's no theoretical limit on how thick the lines can be, in practice you'll probably want to keep them between about 1-10 pixels.
 
-      ![editor](http://23.21.98.97/wp-content/uploads/2012/06/line-width-field.png)
+      ![editor](http://23.21.98.97/wp-content/uploads/2012/06/line-width.png)
 
     * **Point Radius**: The radius of standalone points and verties on lines and polygons. Enter a positive integer in the input, or click and drag up and down to gradually modulate the value. Like with the line thickness parameter, there's no limit to how large points can be, but keep in mind that the radius of points on the map is _fixed_, in that it is not affected by the zoom level - a 5-pixel point will be 5 pixels when the map is zoomed to 100 meters or 1000 miles.
 
