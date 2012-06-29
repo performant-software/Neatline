@@ -1,6 +1,6 @@
 # Neatline
 
-Neatline is a geotemporal exhibit-buiding framework that makes it possible to create rich, interactive representations of places, objects, events, stories, and archival collections on interlinked maps and timelines. Neatline is built as a suite of plugins for the Omeka digital collection framework, which provides powerful platform for content management and web publication.
+Neatline is a geotemporal exhibit-buiding framework that makes it possible to create rich representations of places, objects, events, stories, and archival collections on maps and timelines. Neatline is built as a suite of plugins for the Omeka digital collection framework, which provides powerful platform for content management and web publication.
 
 The basic workflow looks like this:
 
@@ -8,50 +8,29 @@ The basic workflow looks like this:
 
   * Import or create records for your exhibit. Records represent anything at all - buildings, letters, people, events, physical objects, or interpretive sketchwork. If you already have an Omeka collection, Neatline integrates deeply with your existing content.
 
+  * Create custom layouts by toggling viewports on and off, changing their proportions, and dragging them into different arrangements.
+
   * Plot records on maps and timelines with complex vector drawings, points, and spans. Set colors, opacities, line thicknesses, point radii, and uncertainty gradients.
 
   * Add popup bubbles and define interactions among the map, timeline, and a content-browser pane, which can house everything from short captions to long-format interpretive prose.
 
-  * Connect your exhibits with web map services delivered by Geoserver, which makes it possible to create interactive editions of historical maps.
+  * Set visibility intervals on a per-record basis, making it possible to create complex time-servies animations. Define hierarchical relationships among items, making it possible to curate "batches" of related elements in an exhibit that can be manipulated as a group.
 
-  * Create custom layouts by toggling viewports on and off, changing their relative proportions, and dragging them into different arrangements.
+  * Drag records into specific orderings or set numbered waypoints to build complex narratives that unfold content in a controlled sequence. 
 
-  * Set visibility intervals on a per-record basis, making it possible to create complex time-servies animations.
+Once a collection of records is plotted in an exhibit, the viewports are tightly coupled. As the user interacts with the map or the timeline, all of the other viewports in the exhibit automatically update to reflect the focus of the viewport that is being directly manipulated. For example, clicking on an object on the map will automatically scroll the timeline to an associated date and display a supporting prose description.
 
-  * Define hierarchical relationships among items, making it possible to curate "batches" of related elements in an exhibit that can be manipulated as a group.
-
-  * Set record orderings or numbered waypoints to construct complex narratives that unfold content in a controlled sequence. 
-
-
-
-
-
-Neatline is completely agnostic about the original structure of the data that is being represented and the structure of final interpretive representations of the data in the exhibit. The geographic footprint of an object can be depicted by any arbitrary shape or collection of shapes on the map, and the temporal footprint can be rendered as a point, a span, or a rising and falling gradient that captures uncertainty or inherent ambiguity across a time interval.
-
-Once data is plotted in space and time, the representations of a given object on the three "axes" are tightly coupled. As a user interacts with the map or the timeline, the other viewports in the exhibit automatically update to reflect the current focus of the block that is being directly manipulated. 
-
-This combination of maps, timelines, and long-format interpretive text makes it possible to represent complex ideas, narratives, arguments, archives, and interpretations that would otherwise be difficult box into the limiting confines of simple x-y geographic coordinates and hyper-granular timestamps. Neatline is designed to make is possible to capture the interpretive freeplay and fuzz that form the bedrock of humanistic narrative and argument.
-
-Neatline is an ideal tool for these kinds of use cases:
-
-  * **An geographic and institutional map of 20th century literary theory**: We tend to identify clusters of conversant literary criticism with with universities, cities, and countries - the Yale school, Russian formalism, Marxism and the Frankfurt School, etc. You want to plot the institutional affiliations and career arcs of ~100 prominent 20th century literary critics, grouped by critical school, to explore to what extent the real-world locations and temporal overlaps of various critics do or do not correspond with the conceptual connections that emerge in the criticism itself.
-
-  * **Biographies of the signatories on the Declaration of Independence**: You want to create an interactive exhibit that "attaches" biographic information about the signatories on the Declaration of Independence to a high-resolution image of the actual document. The map annotation tools make it possible to draw precise, translucent outlines around the signatures on the document, and the WYSWYG text editor can interactively display long-format biographies and pictures as the user interacts with the outlines on the image.
-
-  * **A narrative map of the 1924 British Mount Everest expedition**: Did George Mallory and Andrew Irvine make it to the summit on June 8? You want to create a map showing the climing lines that the parties followed on the summit attempts, the conjectured routes that Mallory may have followed after possibly summiting the mountain, and the location of his body when it was recovered in 1999. The phases of the climb can be plotted as time spans, and the minute-by-minute accounts from the Odell diaries can be captured as individual points.
-
-  * **A map of the movements of characters and concepts in _The Tempest_**: _The Tempest_ takes place in a indeterminate space, an island outside of the moving world, an aesthetic throne for Prospero - and yet the literal, spaitla movements of the characters are described in significant detail. You want to use a Renaissance-era map of an island in the Mediterranean (or the West Indies, or the Carribean) to create a speculative mapping of the text - Prospero's lair, the shipwreck, the carousing of Caliban and Trinculo, the journey back to Italy, the shape and reach of Prospero's vision of selfhood.
-
+Neatline is not designed to generate automatic visualizations of large geospatial datasets. Instead, Neatline provides an open-ended interpretive environment that makes it possible to mount humanistic ideas, narratives, and arguments on maps and timelines. If conventional GIS tools are like a sheet of graph paper, Neatline is a sketchbook or a canvas.
 
 ## Installation and Configuration
 
-Neatline is a plugin for [Omeka][omeka], an open-source web publishing platform that makes it possible to create, curate, and display archival collections based on Dublin Core or EAD metadata. While the web service is designed to make it easy to experiment with Neatline and build exhibits based on real-geography base layers, using Neatline _directly_, inside of the Omeka, makes it possible to base Neatline exhibits on an underlying archive of Omeka items that conforms to rigorous and portable metadata standards.
+Neatline is a plugin for [Omeka][omeka], an open-source web publishing platform that makes it possible to create, curate, and publish archival collections based on Dublin Core or EAD metadata. Neatline is installed on top of Omeka, similar to a plugin for Wordpress or a Drupal module.
 
-Installing Omeka + Neatline is a two-step process: Omeka first, then the Neatline plugin. Omeka is a PHP/MySQL application that will run on almost any commercial hosting provider. Before you start, you'll need:
+Omeka and Neatline are PHP/MySQL applications that will run on almost any commercial hosting provider. Before you start, you'll need:
 
   1. A hosting environment that supports PHP and MySQL;
   2. A way to transfer files onto your server space and make simple text edits. In most cases, a simple FTP client like [FileZilla][filezilla] works well. 
-  3. Credentials for a MySQL database user on your server and the name of a fresh, production database for the Omeka installation. If you don't already have a database user account, most commercial hosting providers provide access to a point-and-click database administration tool like phpMyAdmin where you can create databases and users.
+  3. Credentials for a MySQL user on your server and the name of a fresh, production database for the Omeka installation. If you don't already have a database user account, most commercial hosting providers provide access to a point-and-click database administration tool like phpMyAdmin that allows you to create databases and users.
 
 #### Install Omeka
 
@@ -59,10 +38,9 @@ For detailed instructions on installing Omeka, refer to [Omeka's official docume
 
 #### Install Neatline
 
-  1. Go to the [Neatline download][neatline-download] page and download the Neatline plugin.
+  1. Go to the [Neatline download][neatline-download] page and download the plugin.
   2. Once the file is finished downloading, uncompress the .zip file and place the "Neatline" directory in the plugins/ folder in your Omeka installation.
-  3. Open a web browser and go to _your-omeka-site.org/admin_, enter your administrative credentials, and click on the "Settings" button
-     at the top right of the screen.
+  3. Open a web browser and go to _your-omeka-site.org/admin_, enter your administrative credentials, and click on the "Settings" button at the top right of the screen.
   4. Click on the "Plugins" tab in the vertical column on the left and find the listing for the Neatline plugin.
   5. Click the "Install" button.
 
@@ -70,39 +48,45 @@ Once the installation is finished, you'll see a new tab along the top of the adm
 
 #### Install Geoserver
 
-For detailed instructions on installing Geoserver, refer to [Geoserver's official
-documentation][geoserver-install-documentation].
+If you want to use Neatline in conjunction with the Neatline Maps plugin to incorporate web map services (WMS) into your exhibits (for example, to create editions of georeferenced historical maps), you'll need to have access to an installation of [Geoserver][geoserver], a powerful open-source geospatial server that generates and delivers the WMS layers.
+
+If you have experience administering Java applications, you can download and install your own instance of Geoserver. Compared with LAMP stack applications like Omeka, Neatline, Wordpress, or Drupal, Geoserver is relatively difficult to install, deploy, and maintain.
+
+If you don't have the resources to manage your own installation, there are two ways to get up and running: If you have access to institutional IT services, ask if they can provide Geoserver hosting. If not, there are also commercial hosting available from companies like [AcuGIS][acugis], although we don't have experience with these services and can't vouch for them.
+
+For detailed instructions on installing Geoserver, refer to [Geoserver's official documentation][geoserver-install-documentation].
 
 #### Create a New Exhibit
 
-  1. Click on the "Neatline" tab along the top of the administrative interface.
+  1. Click on the "Neatline" tab at he top of the administrative interface.
   2. Click the "Create an Exhibit" button.
-  3. Enter a title for the exhibit. The title will be displayed at the top of the full-screen public display view. 
-  4. Enter a slug for the exhibit. The slug is used to form the public-facing URL for the exhibit. By default, a slug will be auto-generated from the text that you typed into the "Title" field. If you want to edit the default slug, click on the input and type a new string. Slugs can only contain letters, numbers, and hyphens (no spaces).
-  5. (Optional): In addition to the default option of using georeferenced layers as the foundation for the exhibit (OpenStreetMap/Google tiles, rectified geotiff files, etc.), you can also use any static image associated with an Omeka item as the base layer for the exhibit. Use the "Choose an Image" dropdown to browse all images in your Omeka archive, grouped by parent item.
+  3. Enter a title for the exhibit. The title will be displayed at the top of the public display view. 
+  4. Optionally, enter a description for the exhibit. The description is something of a catch-all category designed to house introductory text for the exhibit. This could just be 2-3 sentences to set the stage, but it could also be used to present long-format prose to go with the exhibit.
+  5. Enter a slug for the exhibit. The slug is used to form the public-facing URL for the exhibit. By default, a slug will be auto-generated from the text that you typed into the "Title" field. If you want to edit the default slug, click on the input and type a new string. Slugs can only contain letters, numbers, and hyphens (no spaces).
+  6. (Optional): In addition to the default option of using georeferenced layers as the foundation for the exhibit (OpenStreetMap/Google tiles, rectified geotiff files, etc.), you can also use any static image associated with an Omeka item as the base layer for the exhibit. Use the "Choose an Image" dropdown to browse all images in your Omeka archive, grouped by parent item.
     * **Note:** You can't mix static images and geographic layers. If you select a static image to build the exhibit on, you won't be able to add georeferenced elements down the line, since the "spatial" annotation data will be relative to the dimensions of the image, not a geographic coordinate set.
-  5. Check the "Public" box if you want the exhibit to be publicly-accessible. By default, exhibits are only visible to administrators.
-  8. Click "Create Exhibit."
+  5. Check the "Public" box if you want the exhibit to be publishes on your site and visible to anonymous users. By default, exhibits are only visible to administrators.
+  8. Click "Save Neatline."
 
 #### Browse Exhibits
 
 After creating an exhibit, you'll be taken back to the exhibits browse
 screen, where you'll see a listing for the new exhibit.
 
-  * The "Exhibit"column lists the title of the exhibit, the slug, and links to edit the exhibit metadata and delete the exhibit. To open the Neatline editing environment for the exhibit, click on the title (see below).
-  * The "View" column lists three links to the public-facing instantiations of the exhibit. The "In-Theme" view shows the exhibit in the context of the currently-activated Omeka theme. "Fullscreen" stretches the exhibit to fill the entire screen space and adds a narrow header bar across the top of the screen with the exhibit title. The "Embed" view is the same as the "Fullscreen" mode without the top bar (this view can be used to embed the exhibit in external environments with an iframe).
-  * The "Items Query" columns shows a link to a form where you can specify a subset of your Omeka collection to make avaialble in the Neatline editing environment for the exhibit (see below).
+  * The "Exhibit" column lists the title of the exhibit, the slug, and links to edit the exhibit details and delete the exhibit. Click on the title to go to the public-facing view of the exhibit.
+  * The link in the "Items Query" column links to a form where you can specify a subset of your Omeka collection to make avaialble in the Neatline editing environment for the exhibit (see below).
   * The "Modified" column lists the date and time when the content of the exhibit was last updated.
   * The "# Items" column lists the number of records that are plotted on at least one of the three available viewports in a Neatline exhibit.
   * The "Public" column shows whether the exhibit is publicly-accessible.
+  * The link in the "Edit" column links to the Neatline exhibit-building application.
 
 #### Edit Exhibit Metadata
 
-Click the "Edit Details" link in the "Exhibit" column to edit the exhibit title, slug, and public status. Click "Save Exhibit" to commit the changes.
+Click the "Edit Details" link in the "Exhibit" column to edit the exhibit title, description, slug, and public status. Click "Save Exhibit" to commit the changes.
 
 #### Delete an Exhibit 
 
-Click the "Delete" link in the "Exhibit" column to delete the exhibit. Click "Delete" again on the confirmation page. **This cannot be undone.**
+Click the "Delete" link in the "Exhibit" column to delete the exhibit. Click "Delete" again on the confirmation popup. **This cannot be undone.**
 
 #### Define an Items Query
 
@@ -110,7 +94,7 @@ To make items in your Omeka collection available for manipulation inside the Nea
 
 To define an items query for an exhibit, click on the "Edit Query" link in the exhibit's listing in the browse view. The query form is identical to the advanced search form in the Omeka items browser. You can search by keyword, specific field values, id ranges, collections, types, users, tags, public/non-public, and featured/non-featured - and any combination thereof.
 
-Once you've created a query, click the "Search" button at the bottom of the page to save the configuration.
+Once you've created a query, click the "Search" button at the bottom of the page to save the configuration. Now, when you go into the editing environment for that exhibit, the content management bar on the left of the screen will be pre-populated with a list of all the items in your collection that match the query.
 
 ## Building Neatline Exhibits
 
@@ -144,10 +128,24 @@ Click the "Save Arrangement" button to save the changes to the server.
 
 ### Create Records
 
-Fundamentally, a Neatline exhibit is just a collection of records that are plotted on the map, on the timeline, or on both. Records in an exhibit can either be based on items in the background Omeka collection or created on a one-off basis inside of the Neatline editor.
+Fundamentally, a Neatline exhibit is just a collection of records that are plotted on some combination of the map, on the timeline, or in the content-browser panel.
+
+There are two kinds of records:
+
+  1. **Records backed by Omeka items**: Records can correspond to items in your Omeka collection. If you've defined a query on your Omeka collection by way of the "Edit Query" form (see above), all items that match the query will be listed in the record browser pane on the left side of the screen. These records will be pre-populated with the Dublin Core Title and Description fields of the corresponding Omeka items, and you have the option of directly importing the entire item metadata output as the description content for the record.
+
+    The same Omeka item can have completely different instantiations in different exhibits - although Neatline pulls _in_ data from the Omeka collection, all data added or changed by way of the Neatline editor is totally endemic to that particular exhibit, and does not get pushed back onto the original Dublin Core record. This means that the same item (or group of items) can be represented in completely different ways in different exhibits, making it possible to thread items into specific contexts and narratives.
 
 
-To create a new record:
+  2. **Exhibit-specific records**: Alternatively, you can also create records on a one-off basis inside a specific exhibit. This is useful in situations where you want to represent some sort of entity in your exhibit that doesn't necessarily warrant its own long-format metadata record.
+
+    For example, if you're creating an interactive edition of a Civil War battle map and want to make note of a specific troop movement, it might not make sense to include an Omeka item called "Jackson's flanking movement" in a collection of maps. In this case, it would make more sense to create "Jackson's flanking movement" as an exhibit-specific record that does not have a representation outside of the exhibit in which it is displayed.
+
+
+EDITPOINT
+
+
+To add a new record to the exhibit:
 
   1. Click the "New Item" button at the top of the left pane in the editor. A new listing for the "[Untitled]" record will appear in the record browser tray, and the editing form will be expanded below the new entry.
 
@@ -315,3 +313,4 @@ To create a custom ordering:
 [filezilla]: http://filezilla-project.org/
 [neatline-download]: http://neatline.org/download
 [iso8601]: http://en.wikipedia.org/wiki/ISO_8601
+[acugis]: http://www.acugis.com/geoserver-hosting.htm
