@@ -1,18 +1,30 @@
 # Neatline
 
-Neatline is a geo-temporal mapping application that makes it possible to plot any collection of things - objects, events, places, people, concepts, or imaginative topologies - on maps and timelines.
+Neatline is a geotemporal exhibit-buiding framework that makes it possible to create rich, interactive representations of places, objects, events, stories, and archival collections on interlinked maps and timelines. Neatline is built as a suite of plugins for the Omeka digital collection framework, which provides powerful platform for content management and web publication.
 
-The basic workflow is simple:
+The basic workflow looks like this:
 
-  * Create a starting environment for your exhibit using georectified historical maps, static images, or real-geography base layers (Google Maps or OpenStreetMap).
+  * Create a starting environment for your exhibit using georeferenced historical maps, modern-geography tile sets, or static images.
 
-  * Create records for the exhibit. Records can represent anything at all - letters, stanzas, people, events, or a completely heterogeneous mix of things.
+  * Import or create records for your exhibit. Records represent anything at all - buildings, letters, people, events, physical objects, or interpretive sketchwork. If you already have an Omeka collection, Neatline integrates deeply with your existing content.
 
-  * Each individual record can be plotted on any of three "axes" in the exhibit - the map, the timeline, and a pane that houses long-format descriptive text, images, and other supporting information about the record.
+  * Plot records on maps and timelines with complex vector drawings, points, and spans. Set colors, opacities, line thicknesses, point radii, and uncertainty gradients.
 
-  * As the editor of the exhibit, you can toggle on and off any of the three viewport and configure the arrangements and default sizes of the various blocks.
+  * Add popup bubbles and define interactions among the map, timeline, and a content-browser pane, which can house everything from short captions to long-format interpretive prose.
 
-  * As you create records and draw representations of the material on the map and timeline, you have full control over the ordering of the content in the exhibit. This makes it possible to construct complex narratives that convey information and arguments in a controlled sequence.
+  * Connect your exhibits with web map services delivered by Geoserver, which makes it possible to create interactive editions of historical maps.
+
+  * Create custom layouts by toggling viewports on and off, changing their relative proportions, and dragging them into different arrangements.
+
+  * Set visibility intervals on a per-record basis, making it possible to create complex time-servies animations.
+
+  * Define hierarchical relationships among items, making it possible to curate "batches" of related elements in an exhibit that can be manipulated as a group.
+
+  * Set record orderings or numbered waypoints to construct complex narratives that unfold content in a controlled sequence. 
+
+
+
+
 
 Neatline is completely agnostic about the original structure of the data that is being represented and the structure of final interpretive representations of the data in the exhibit. The geographic footprint of an object can be depicted by any arbitrary shape or collection of shapes on the map, and the temporal footprint can be rendered as a point, a span, or a rising and falling gradient that captures uncertainty or inherent ambiguity across a time interval.
 
@@ -287,9 +299,6 @@ To create a custom ordering:
   3. Click on record listings in the description tray and drag them up and down to reorder the exhibit.
 
   4. When you're finished, click the "Save" button on the "Item Settings" dropdown. Click the "Edit Item Order" button again to return the description tray to its normal mode.
-
-
-
 
 
 
