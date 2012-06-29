@@ -156,15 +156,13 @@ Records have these fieldsets:
 
   * Text
 
-    * **Title**: The title is used to label the record on the timeline and in the prose description tray. The form field includes a simple rich-text editor, which can be used to apply different colors, font-sizes, and emphases to the text.
+    1. **Title**: The title is used to label the record on the timeline and in the prose description tray. The form field includes a simple rich-text editor, which can be used to apply different colors, font-sizes, and emphases to the text.
 
+    2. **Description**: The description is a catch-all field that can be used in a number of different ways - it can accomodate anything from short little snippets of annotation to long-format interpretive prose. This field includes a more complex rich-text editor, which makes it possible to use apply advanced formatting options like bullets, numbered lists, indentations, text alignments, links, and images. If you need complete control over the markup and styling, click the "\< \>" button at the bottom right of the control bar to view and edit the raw HTML for the field.
 
-    * **Description**: The description is a catch-all field that can be used in a number of different ways - it can accomodate anything from short little snippets of annotation to long-format interpretive prose. This field includes a more complex rich-text editor, which makes it possible to use apply advanced formatting options like bullets, numbered lists, indentations, text alignments, links, and images. If you need complete control over the markup and styling, click the "\< \>" button at the bottom right of the control bar to view and edit the raw HTML for the field.
+    3. **Show pop-up bubble**: Check this box if you want the title and description to be displayed in a popup bubble when the user hovers the cursor over the representation of the record on the map or timeline.
 
-
-  * **Show pop-up bubble**: Check this box if you want the title and description to be displayed in a popup bubble when the user hovers the cursor over the representation of the record on the map or timeline.
-
-  * **Use default item metadata**: Check this box to import the complete Dublin Core metadata output for the Omeka item that the record corresponds to into the description field on the record. When the box is checked, Neatline will immediately load the metadata into the description field and disable the text editor. This box is grayed out for exhibit-specific records, since they do not correspond to an item in the Omeka collection.
+    4. **Use default item metadata**: Check this box to import the complete Dublin Core metadata output for the Omeka item that the record corresponds to into the description field on the record. When the box is checked, Neatline will immediately load the metadata into the description field and disable the text editor. This box is grayed out for exhibit-specific records, since they do not correspond to an item in the Omeka collection.
 
   * Temporal 
 
