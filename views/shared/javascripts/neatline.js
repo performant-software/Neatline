@@ -257,10 +257,7 @@
                 var callbacks = {
 
                     'featureadded': function() {
-
-                        // Trigger out.
                         self._trigger('mapfeatureadded');
-
                     },
 
                     'featureenter': function(event, obj) {
@@ -279,6 +276,7 @@
                     },
 
                     'featureleave': function(event, obj) {
+
                         var bubbles = jQuery(self.element).data('bubbles');
 
                         // Trigger out.
@@ -291,6 +289,7 @@
                         }
 
                         self._trigger('mapfeatureleave', {}, obj);
+
                     },
 
                     'featureclick': function(event, obj) {
@@ -301,6 +300,15 @@
                         // Freeze bubble.
                         if (self.options.isPublic) {
                             self.element.bubbles('freeze');
+                        }
+
+                    },
+
+                    'featureunselect': function(event, obj) {
+
+                        // Close bubble.
+                        if (self.options.isPublic) {
+                            self.element.bubbles('close');
                         }
 
                     }

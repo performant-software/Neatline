@@ -26,8 +26,8 @@
 ?>
 
 <?php
-    neatline_queueNeatlineAssets(get_current_neatline());
     neatline_queuePublicAssets();
+    neatline_queueNeatlineAssets(get_current_neatline());
 ?>
 
 <?php
