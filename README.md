@@ -18,8 +18,6 @@ The basic workflow looks like this:
 
   * **Create narratives and arguments**: Drag elements into specific orderings or lay down numbered waypoints to build complex stories that unfold content in a controlled sequence. 
 
-Once a collection of records is plotted in an exhibit, the viewports are tightly coupled. As the user interacts with the map or the timeline, all of the other viewports in the exhibit automatically update to reflect the focus of the viewport that is being directly manipulated. For example, clicking on an object on the map will automatically scroll the timeline to an associated date and display a supporting prose description.
-
 Neatline is not designed to generate automatic visualizations of large geospatial datasets. Instead, Neatline provides an open-ended interpretive environment that makes it possible to mount humanistic ideas, narratives, and arguments on maps and timelines. If conventional GIS tools are like a sheet of graph paper, Neatline is a sketchbook or a canvas.
 
 ## Installation and Configuration
