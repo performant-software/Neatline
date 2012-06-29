@@ -286,7 +286,7 @@ Records have these fieldsets:
 
       * To set a focus, adjust the map position and zoom to the exact configuration that you want to use as the default for the record, and then click the "Fix Item-Specific Map Focus" button to save the position.
 
-      * **Note:** Neatline also makes it possible _just_ to set a focus position for a record, even if you haven't added any geometry for the record on the map. So, if there's a location on the map that's self-evident and doesn't need any interpretive shapes, lines, or points, you can use the item-specific focus to just "pin" the map to a particular viewport location and zoom level, which will then be retrieved and recreated whenver the user clicks on or scrolls to the record. 
+        **Note:** Neatline also makes it possible _just_ to set a focus position for a record, even if you haven't added any geometry for the record on the map. So, if there's a location on the map that's self-evident and doesn't need any interpretive shapes, lines, or points, you can use the item-specific focus to just "pin" the map to a particular viewport location and zoom level, which will then be retrieved and recreated whenver the user clicks on or scrolls to the record. 
 
   * Relationships
 
