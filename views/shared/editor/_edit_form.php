@@ -145,7 +145,7 @@
                         </div>
                     </td>
                     <td>
-                        <label>Highlight Color</label>
+                        <label>Selected Color</label>
                         <div class="input">
                             <div class="inline-inputs">
                                 <input type="text" class="color-picker" name="highlight-color" />
@@ -155,7 +155,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <label>Fill Opacity</label>
+                        <label>Shape Opacity</label>
                         <div class="input">
                             <div class="inline-inputs">
                                 <input type="text" class="integer-dragger" name="vector-opacity" />
@@ -163,7 +163,7 @@
                         </div>
                     </td>
                     <td>
-                        <label>Select Opacity</label>
+                        <label>Selected Opacity</label>
                         <div class="input">
                             <div class="inline-inputs">
                                 <input type="text" class="integer-dragger" name="select-opacity" />

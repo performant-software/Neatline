@@ -142,32 +142,30 @@ There are two kinds of records:
     For example, if you're creating an interactive edition of a Civil War battle map and want to make note of a specific troop movement, it might not make sense to include an Omeka item called "Jackson's flanking movement" in a collection of maps. In this case, it would make more sense to create "Jackson's flanking movement" as an exhibit-specific record that does not have a representation outside of the exhibit in which it is displayed.
 
 
-EDITPOINT
-
-
 To add a new record to the exhibit:
 
-  1. Click the "New Item" button at the top of the left pane in the editor. A new listing for the "[Untitled]" record will appear in the record browser tray, and the editing form will be expanded below the new entry.
+  1. To plot a record that corresponds to an Omeka item, just click the listing for the record in the record browser on the left side of the screen. To crete a new exhibit-specific record, click the "New Item" button at the top of the left pane in the editor. A new listing for the "[Untitled]" record will appear at the top of the stack under the "Neatline Records" heading. Click the title to open the record.
 
-  2. Fill out the form fields that are necessary to describe the object or concept that the record represents. By default, the "Text Description" and "Start and End Dates" field sets are expanded, but you can manually expand and contract each of the four field sets by clicking on the blue titles. The state of the form - which of the fieldsets are visible - will persist even when you move to the form for a different record, making it easy to make a batch of similar changes on a number of records.
+  2. When you click on a record title, a form appears with four fieldsets labeled with tabs at the top of the form: "Text," "Temporal," "Styling", and "Relations." Work through the four fieldsets and fill out all the information necessary to describe the record in the context of the exhibit (see below for detailed information about each fieldset).
 
-  3. As you make changes to the form, the title will become red, indicating that there are un-saved changes in the form. At any point, click the blue "Save" button at the bottom of the form to save the changes. The viewports in the exhibit will automatically reload and display the newly-updated record. 
-
-  4. When you're done with the record, click on its title to contract the form. Click again on the title to reopen it. 
-
-Data entered by way of the Neatline editor does not affect the item's archival metadata in any way. Neatline tracks the associations that tie together an Omeka item, an Neatline exhibit, and the exhibit-specific representation of the item, but doesn't make any changes to the original Dublin Core or EAD metadata.
+  4. When you're done adding or editing information, click the "Save" button at the bottom of the form to commit the changes. Click on the title or on the "Close Record" button to contract the form. **Note:** If you add or edit data, be sure to click "Save" before closing the form. Otherwise, your changes will be lost.
 
 #### Record Fields
 
-Records have these fields:
+Records have these fieldsets:
 
-  * Text Description
+  * Text
 
     * **Title**: The title is used to label the record on the timeline and in the prose description tray. The form field includes a simple rich-text editor, which can be used to apply different colors, font-sizes, and emphases to the text.
 
     * **Description**: The description is a catch-all field that can be used in a number of different ways - it can accomodate anything from short little snippets of annotation to long-format interpretive prose. This field includes a more complex rich-text editor, which makes it possible to use apply advanced formatting options like bullets, numbered lists, indentations, text alignments, links, and images. If you need complete control over the markup and styling, click the "\< \>" button at the bottom right of the control bar to view and edit the raw HTML for the field.
 
-  * Start and End Dates
+
+  * **Show pop-up bubble**: Check this box if you want the title and description to be displayed in a popup bubble when the user hovers the cursor over the representation of the record on the map or timeline.
+
+  * **Use default item metadata**: Check this box to import the complete Dublin Core metadata output for the Omeka item that the record corresponds to into the description field on the record. When the box is checked, Neatline will immediately load the metadata into the description field and disable the text editor. This box is grayed out for exhibit-specific records, since they do not correspond to an item in the Omeka collection.
+
+  * Temporal 
 
     * **Start Date**: The start date of the object, event, or concept represented by the record. This is the only field that is required in order for the record to be displayed on the timeline. Dates must be entered in standard [ISO 8601][iso8601] format.
 
@@ -179,23 +177,31 @@ Records have these fields:
 
     * **Date Ambiguity**: The date ambiguity widget lets you drag out a gradient of uncertainty or fuzziness across a time interval. Drag the two controls handles inward to fuzziness around the edges, or create a continuous increase or decrease by dragging both handles all the way to one side or the other.
 
-  * Map Styles
+  * Styling 
 
     * **Shape Color**: The fill color of the polygons (everything inside of the border lines, not including the lines). Click on the  swatch to the right of the input to open a color picker.
 
     * **Line Color**: The color of the border lines. Click on the  swatch to the right of the input to open a color picker.
 
-    * **Shape Opacity**: The opacity of the polygons (not including the border lines). Enter a number between 0 and 100 (0 being transparent, 100 completely opaque) in the input, or click and drag up and down to gradually modulate the value.
+    * **Highlight Color**: The color of the lines, polygons, and points when the record is highlighted or selected. Click on the swatch to the right of the input to open a color picker.
+
+    * **Fill Opacity**: The opacity of the polygons and/or WMS layer (not including the border lines). Enter a number between 0 and 100 (0 being transparent, 100 completely opaque) in the input, or click and drag up and down to gradually modulate the value.
+
+    * **Select Opacity**: The opacity of the polygons and/or WMS layer when the record is selected (not including the border lines). Enter a number between 0 and 100 (0 being transparent, 100 completely opaque) in the input, or click and drag up and down to gradually modulate the value.
 
     * **Line Opacity**: The opacity of the border lines. Enter a number between 0 and 100 (0 being transparent, 100 completely opaque) in the input, or click and drag up and down to gradually modulate the value.
 
-    * **Line Thickness**: The thickness of the border lines in pixels. Enter a positive integer in the input, or click and drag up and down to gradually modulate the value. Although there's no theoretical limit on how thick the lines can be, in practice you'll probably want to keep them between about 1-10 pixels.
+    * **Graphic Opacity**: If an external image URL is entered in the "Point Graphic" field (see below), this controls the opacity of image on the map. Enter a number between 0 and 100 (0 being transparent, 100 completely opaque) in the input, or click and drag up and down to gradually modulate the value.
+
+    * **Line Width**: The thickness of the border lines in pixels. Enter a positive integer in the input, or click and drag up and down to gradually modulate the value. Although there's no theoretical limit on how thick the lines can be, in practice you'll probably want to keep them between about 1-10 pixels.
 
     * **Point Radius**: The radius of standalone points and verties on lines and polygons. Enter a positive integer in the input, or click and drag up and down to gradually modulate the value. Like with the line thickness parameter, there's no limit to how large points can be, but keep in mind that the radius of points on the map is _fixed_, in that it is not affected by the zoom level - a 5-pixel point will be 5 pixels when the map is zoomed to 100 meters or 1000 miles.
 
+    * **Point Graphic**: Enter a URL to an external image to use the image as the graphical representation of a point on the map. This makes it possible to layer images on to of the map. Since the images are the same as geometric points in the underlying implementation, they share the property of remaining the same absolute dimension no matter what the zoom level of the map. To change the size of the image(s), just edit the "Point Radius" value.
+
     * **Reset Item Styles**: Click this button to void any item-specific styles set for the record with any of the 6 previous controls. This will cause the record to fall back to the exhibit-wide defaults, which are configured by way of the "Map Settings" dropdown in the top bar.
 
-    * **Fix Item-Specific Map Focus**: The map focus for a record is the position and zoom that the map viewport is set to when the record is activated by any action elsewhere in the exhibit. For example, if a user clicks on a listing for the record in the description tray or scrolls to the item using the next and previous arrows, the map will automatically refocus at the latitude/longitude and zoom level defined by the map focus for the item. 
+    * **Set Map Focus**: The map focus for a record is the position and zoom that the map viewport is set to when the record is activated by any action elsewhere in the exhibit. For example, if a user clicks on a listing for the record in the description tray or scrolls to the item using the next and previous arrows, the map will automatically refocus at the latitude/longitude and zoom level defined by the map focus for the item. 
 
         By default, if a custom focus has not been set, Neatline approximates a map focus for the record based on the dimensions of the shapes, lines, and points associated with the record on the map. Sometimes, this is sufficient, but in many cases you'll want to configure the default focus - you might want to zoom out to get more context on the screen when the user arrives at the item, or nudge over the focus position to contetualize the record relative to some other specific entity nearby on the map.
 
@@ -256,11 +262,17 @@ To edit exhibit-wide style defaults:
 
     * **Default Line Color**: The color of the border lines. Click on the  swatch to the right of the input to open a color picker.
 
+    * **Default Selected Color**: The color of the lines, shapes, and points when the record is highlighted or selected. Click on the  swatch to the right of the input to open a color picker.
+
     * **Default Shape Opacity**: The opacity of the polygons (not including the border lines). Enter a number between 0 and 100 (0 being transparent, 100 completely opaque) in the input, or click and drag up and down to gradually modulate the value. 
+
+    * **Default Selected Opacity**: The opacity of the polygons (not including the border lines) when the record is highlighted or selected. Enter a number between 0 and 100 (0 being transparent, 100 completely opaque) in the input, or click and drag up and down to gradually modulate the value. 
 
     * **Default Line Opacity**: The opacity of the border lines. Enter a number between 0 and 100 (0 being transparent, 100 completely opaque) in the input, or click and drag up and down to gradually modulate the value.
 
-    * **Default Line Thickness**: The thickness of the border lines in pixels. Enter a positive integer in the input, or click and drag up and down to gradually modulate the value. Although there's no theoretical limit on how thick the lines can be, in practice you'll probably want to keep them between about 1-10 pixels.
+    * **Default Graphic Opacity**: The opacity of points that are represented on the map with external image graphics set on the record edit forms (see above). Enter a number between 0 and 100 (0 being transparent, 100 completely opaque) in the input, or click and drag up and down to gradually modulate the value.
+
+    * **Default Line Width**: The thickness of the border lines in pixels. Enter a positive integer in the input, or click and drag up and down to gradually modulate the value. Although there's no theoretical limit on how thick the lines can be, in practice you'll probably want to keep them between about 1-10 pixels.
 
     * **Default Point Radius**: The radius of standalone points and verties on lines and polygons. Enter a positive integer in the input, or click and drag up and down to gradually modulate the value. Like with the line thickness parameter, there's no limit to how large points can be, but keep in mind that the radius of points on the map is _fixed_, in that it is not affected by the zoom level - a 5-pixel point will be 5 pixels when the map is zoomed to 100 meters or 1000 miles.
 
@@ -279,8 +291,6 @@ After you've created records, you can toggle the representations of the records 
   * The right column controls the timeline.
 
 Just check or uncheck any of the blocks at any point, and the status setting will immediately be saved and applied on the exhibit.
-
-**Note:** You can click on the map-pin and clock header icons to filter the records list to just display the records that are activated for the map, the timeline, or both. Click on the headers again to unset the filter and return the list to the full display.
 
 ### Edit Record Order
 
