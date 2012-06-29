@@ -1,6 +1,6 @@
 # Neatline
 
-Neatline is a geotemporal exhibit-buiding framework that makes it possible to create rich representations of places, objects, events, stories, and archival collections using maps and timelines. Neatline is built as a suite of plugins for the Omeka digital collection framework, which provides powerful platform for content management and web publication.
+Neatline is a geotemporal exhibit-buiding framework that makes it possible to create beautiful, complex maps and connect them with timelines. Neatline is built as a suite of plugins for the Omeka, a digital archive-building framework that supplies a powerful platform for content management and web publication.
 
 ![editor](http://23.21.98.97/wp-content/uploads/2012/06/editor.png)
 
@@ -10,15 +10,13 @@ The basic workflow looks like this:
 
   * **Create a collection of records**: Records represent anything at all - buildings, letters, people, events, physical objects, or interpretive sketchwork. If you already have an Omeka collection, Neatline integrates deeply with your existing content.
 
-  * **Create a custom layout**: Toggle viewports on and off, change their proportions, and drag them into different arrangements.
+  * **Configure a custom layout**: Toggle viewports on and off, change their proportions, and drag them into different arrangements.
 
-  * **Plot records on maps and timelines**: Create complex vector drawings, points, and spans. Set colors, opacities, line thicknesses, point radii, and uncertainty gradients.
+  * **Plot records on maps and timelines**: Create complex vector drawings, points, and spans. Set colors, opacities, line thicknesses, point radii, and uncertainty gradients. Add popup bubbles and define interactions among the map, timeline, and a content-browser pane.
 
-  * Add popup bubbles and define interactions among the map, timeline, and a content-browser pane, which can house everything from short captions to long-format interpretive prose.
+  * **Model change over time**: Set visibility intervals on a per-record basis, making it possible to create complex time-servies animations. Define hierarchical relationships among items, making it possible to curate "batches" of related elements in an exhibit that phase in and out of view as a group.
 
-  * Set visibility intervals on a per-record basis, making it possible to create complex time-servies animations. Define hierarchical relationships among items, making it possible to curate "batches" of related elements in an exhibit that can be manipulated as a group.
-
-  * Drag records into specific orderings or set numbered waypoints to build complex narratives that unfold content in a controlled sequence. 
+  * **Create narratives and arguments**: Drag elements into specific orderings or lay down numbered waypoints to build complex stories that unfold content in a controlled sequence. 
 
 Once a collection of records is plotted in an exhibit, the viewports are tightly coupled. As the user interacts with the map or the timeline, all of the other viewports in the exhibit automatically update to reflect the focus of the viewport that is being directly manipulated. For example, clicking on an object on the map will automatically scroll the timeline to an associated date and display a supporting prose description.
 
