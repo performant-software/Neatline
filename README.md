@@ -435,6 +435,8 @@ To create a custom ordering:
 
   4. When you're finished, click the "Save" button on the "Item Settings" dropdown. Click the "Edit Item Order" button again to return the description tray to its normal mode.
 
+    ![editor](http://23.21.98.97/wp-content/uploads/2012/06/edit-record-order.png)
+
 
 
 [omeka]: http://omeka.org
