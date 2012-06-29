@@ -58,7 +58,7 @@ For detailed instructions on installing Geoserver, refer to [Geoserver's officia
 
   1. Click on the "Neatline" tab at he top of the administrative interface.
 
-  ![editor](http://23.21.98.97/wp-content/uploads/2012/06/browse.png)
+  ![editor](http://23.21.98.97/wp-content/uploads/2012/06/browse1.png)
 
   2. Click the "Create an Exhibit" button.
 
@@ -92,6 +92,8 @@ For detailed instructions on installing Geoserver, refer to [Geoserver's officia
 
 After creating an exhibit, you'll be taken back to the exhibits browse
 screen, where you'll see a listing for the new exhibit.
+
+![editor](http://23.21.98.97/wp-content/uploads/2012/06/exhibit-added.png)
 
   * The "Exhibit" column lists the title of the exhibit, the slug, and links to edit the exhibit details and delete the exhibit. Click on the title to go to the public-facing view of the exhibit.
   * The link in the "Items Query" column links to a form where you can specify a subset of your Omeka collection to make avaialble in the Neatline editing environment for the exhibit (see below).
