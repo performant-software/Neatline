@@ -357,25 +357,45 @@ To edit exhibit-wide style defaults:
   
   * Click on the "Map Settings" tab in the top bar of the browser. A dropdown menu will appear with editing inputs for the 7 exhibit-wide style defaults:
   
-    * **Default Shape Color**: The fill color of the polygons (everything inside of the border lines, not including the lines). Click on the  swatch to the right of the input to open a color picker.
+    * **Default Shape Color**: The fill color of the polygons (everything inside of the border lines, not including the lines). Click on the swatch to the right of the input to open a color picker.
 
-    * **Default Line Color**: The color of the border lines. Click on the  swatch to the right of the input to open a color picker.
+    ![editor](http://23.21.98.97/wp-content/uploads/2012/06/default-shape-color-field.png)
+
+    * **Default Line Color**: The color of the border lines. Click on the swatch to the right of the input to open a color picker.
+
+    ![editor](http://23.21.98.97/wp-content/uploads/2012/06/default-line-color-field.png)
 
     * **Default Selected Color**: The color of the lines, shapes, and points when the record is highlighted or selected. Click on the  swatch to the right of the input to open a color picker.
 
-    * **Default Shape Opacity**: The opacity of the polygons (not including the border lines). Enter a number between 0 and 100 (0 being transparent, 100 completely opaque) in the input, or click and drag up and down to gradually modulate the value. 
+    ![editor](http://23.21.98.97/wp-content/uploads/2012/06/default-selected-color-field.png)
+
+    * **Default Shape Opacity**: The opacity of the polygons (not including the border lines). Enter a number between 0 and 100 (0 being transparent, 100 completely opaque) in the input, or click and drag up and down to gradually modulate the value.
+
+    ![editor](http://23.21.98.97/wp-content/uploads/2012/06/default-shape-opacity-field.png)
 
     * **Default Selected Opacity**: The opacity of the polygons (not including the border lines) when the record is highlighted or selected. Enter a number between 0 and 100 (0 being transparent, 100 completely opaque) in the input, or click and drag up and down to gradually modulate the value. 
 
+    ![editor](http://23.21.98.97/wp-content/uploads/2012/06/default-selected-opacity-field.png)
+
     * **Default Line Opacity**: The opacity of the border lines. Enter a number between 0 and 100 (0 being transparent, 100 completely opaque) in the input, or click and drag up and down to gradually modulate the value.
+
+    ![editor](http://23.21.98.97/wp-content/uploads/2012/06/default-line-opacity-field.png)
 
     * **Default Graphic Opacity**: The opacity of points that are represented on the map with external image graphics set on the record edit forms (see above). Enter a number between 0 and 100 (0 being transparent, 100 completely opaque) in the input, or click and drag up and down to gradually modulate the value.
 
+    ![editor](http://23.21.98.97/wp-content/uploads/2012/06/default-graphic-opacity-field.png)
+
     * **Default Line Width**: The thickness of the border lines in pixels. Enter a positive integer in the input, or click and drag up and down to gradually modulate the value. Although there's no theoretical limit on how thick the lines can be, in practice you'll probably want to keep them between about 1-10 pixels.
+
+    ![editor](http://23.21.98.97/wp-content/uploads/2012/06/default-line-width-field.png)
 
     * **Default Point Radius**: The radius of standalone points and verties on lines and polygons. Enter a positive integer in the input, or click and drag up and down to gradually modulate the value. Like with the line thickness parameter, there's no limit to how large points can be, but keep in mind that the radius of points on the map is _fixed_, in that it is not affected by the zoom level - a 5-pixel point will be 5 pixels when the map is zoomed to 100 meters or 1000 miles.
 
+    ![editor](http://23.21.98.97/wp-content/uploads/2012/06/default-point-radius-field.png)
+
     * **Default Base Layer**: Select the default starting base layer for the exhibit. Users can manually change the base layer with the layer switcher widget at the top right of the map.
+
+    ![editor](http://23.21.98.97/wp-content/uploads/2012/06/default-base-layer-field.png)
 
 As you make changes to the color, radius, and width styles, only the shapes on the map _that do not have an item-specific setting for the style in question_ will automatically update the reflect the new settings. If you want to unset item-specific styling settings for a given item, open its editing form and click the "Reset Item Styles" button.
 
