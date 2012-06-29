@@ -407,11 +407,11 @@ After you've created records, you can toggle the representations of the records 
 
   * The left column controls the record description panel;
 
-      ![editor](http://23.21.98.97/wp-content/uploads/2012/06/items-activate.png)
+      ![editor](http://23.21.98.97/wp-content/uploads/2012/06/items-activate1.png)
 
   * The middle column controls the map;
 
-      ![editor](http://23.21.98.97/wp-content/uploads/2012/06/map-activate.png)
+      ![editor](http://23.21.98.97/wp-content/uploads/2012/06/map-activate1.png)
 
   * The right column controls the timeline.
 
