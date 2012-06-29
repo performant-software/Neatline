@@ -406,8 +406,16 @@ When you're done editing the default styles, click the "Save" button at the bott
 After you've created records, you can toggle the representations of the records on the map, timeline, and record browser on and off at any point. In the record browser tray on the left side of the screen, there are three columns of checkboxes on the left side of the panel, three for each record:
 
   * The left column controls the record description panel;
+
+      ![editor](http://23.21.98.97/wp-content/uploads/2012/06/items-activate.png)
+
   * The middle column controls the map;
+
+      ![editor](http://23.21.98.97/wp-content/uploads/2012/06/map-activate.png)
+
   * The right column controls the timeline.
+
+      ![editor](http://23.21.98.97/wp-content/uploads/2012/06/timeline-activate.png)
 
 Just check or uncheck any of the blocks at any point, and the status setting will immediately be saved and applied on the exhibit.
 
