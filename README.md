@@ -18,7 +18,7 @@ The workflow is simple:
 
   * **Create narratives and arguments**: Drag elements into specific orderings or lay down numbered waypoints to build complex stories that unfold content in a controlled sequence. 
 
-Neatline is not designed to generate automatic visualizations of large geospatial datasets. Instead, Neatline provides an open-ended interpretive environment that makes it possible to mount humanistic ideas, narratives, and arguments on maps and timelines. If conventional GIS tools are like a sheet of graph paper, Neatline is a sketchbook or a canvas.
+Neatline is not designed to generate automatic visualizations of large geospatial datasets. Instead, Neatline provides an open-ended, interpretive environment designed to make it possible to represent humanistic ideas, narratives, and arguments on maps and timelines. If conventional GIS tools are like sheets graph paper, Neatline is like a sketchbook or a canvas.
 
 ## Installation and Configuration
 
