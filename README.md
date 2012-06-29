@@ -58,33 +58,33 @@ For detailed instructions on installing Geoserver, refer to [Geoserver's officia
 
   1. Click on the "Neatline" tab at he top of the administrative interface.
 
-![editor](http://23.21.98.97/wp-content/uploads/2012/06/browse.png)
+  ![editor](http://23.21.98.97/wp-content/uploads/2012/06/browse.png)
 
   2. Click the "Create an Exhibit" button.
 
-![editor](http://23.21.98.97/wp-content/uploads/2012/06/create.png)
+  ![editor](http://23.21.98.97/wp-content/uploads/2012/06/create.png)
 
   3. Enter a title for the exhibit. The title will be displayed at the top of the public display view. 
 
-![editor](http://23.21.98.97/wp-content/uploads/2012/06/title.png)
+  ![editor](http://23.21.98.97/wp-content/uploads/2012/06/title.png)
 
   4. Optionally, enter a description for the exhibit. The description is something of a catch-all category designed to house introductory text for the exhibit. This could just be 2-3 sentences to set the stage, but it could also be used to present long-format prose to go with the exhibit.
 
-![editor](http://23.21.98.97/wp-content/uploads/2012/06/description.png)
+  ![editor](http://23.21.98.97/wp-content/uploads/2012/06/description.png)
 
   5. Enter a slug for the exhibit. The slug is used to form the public-facing URL for the exhibit. By default, a slug will be auto-generated from the text that you typed into the "Title" field. If you want to edit the default slug, click on the input and type a new string. Slugs can only contain letters, numbers, and hyphens (no spaces).
 
-![editor](http://23.21.98.97/wp-content/uploads/2012/06/slug.png)
+  ![editor](http://23.21.98.97/wp-content/uploads/2012/06/slug.png)
 
   6. (Optional): In addition to the default option of using georeferenced layers as the foundation for the exhibit (OpenStreetMap/Google tiles, rectified geotiff files, etc.), you can also use any static image associated with an Omeka item as the base layer for the exhibit. Use the "Choose an Image" dropdown to browse all images in your Omeka archive.
 
-![editor](http://23.21.98.97/wp-content/uploads/2012/06/image.png)
+  ![editor](http://23.21.98.97/wp-content/uploads/2012/06/image.png)
 
     * **Note:** You can't mix static images and geographic layers. If you select a static image to build the exhibit on, you won't be able to add georeferenced elements down the line, since the "spatial" annotation data will be relative to the dimensions of the image, not a geographic coordinate set.
 
   5. Check the "Public" box if you want the exhibit to be published on your site and visible to anonymous users. By default, exhibits are only visible to administrators.
 
-![editor](http://23.21.98.97/wp-content/uploads/2012/06/public.png)
+  ![editor](http://23.21.98.97/wp-content/uploads/2012/06/public.png)
 
   8. Click "Save Neatline."
 
