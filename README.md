@@ -196,7 +196,11 @@ Records have these fieldsets:
 
     * **Title**: The title is used to label the record on the timeline and in the prose description tray. The form field includes a simple rich-text editor, which can be used to apply different colors, font-sizes, and emphases to the text.
 
+    ![editor](http://23.21.98.97/wp-content/uploads/2012/06/title-field.png)
+
     * **Description**: The description is a catch-all field that can be used in a number of different ways - it can accomodate anything from short little snippets of annotation to long-format interpretive prose. This field includes a more complex rich-text editor, which makes it possible to use apply advanced formatting options like bullets, numbered lists, indentations, text alignments, links, and images. If you need complete control over the markup and styling, click the "\< \>" button at the bottom right of the control bar to view and edit the raw HTML for the field.
+
+    ![editor](http://23.21.98.97/wp-content/uploads/2012/06/description-field.png)
 
     * **Show pop-up bubble**: Check this box if you want the title and description to be displayed in a popup bubble when the user hovers the cursor over the representation of the record on the map or timeline.
 
