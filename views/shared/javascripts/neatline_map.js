@@ -794,24 +794,30 @@
             );
 
             // Stamen watercolor
-            this.stwc = new OpenLayers.Layer.OSM(
-              'Stamen Watercolor',
-              'http://tile.stamen.com/watercolor/${z}/${x}/${y}.jpg',
-              { numZoomLevels: 19 }
+            this.stwc = new OpenLayers.Layer.Stamen(
+                'Stamen Watercolor',
+                {
+                    provider: 'watercolor',
+                    tileOptions: { crossOriginKeyword: null }
+                }
             );
 
             // Stamen toner
-            this.sttn = new OpenLayers.Layer.OSM(
-              'Stamen Toner',
-              'http://tile.stamen.com/toner/${z}/${x}/${y}.jpg',
-              { numZoomLevels: 19 }
+            this.sttn = new OpenLayers.Layer.Stamen(
+                'Stamen Toner',
+                {
+                    provider: 'toner',
+                    tileOptions: { crossOriginKeyword: null }
+                }
             );
 
             // Stamen terrain
-            this.sttr = new OpenLayers.Layer.OSM(
-              'Stamen Terrain',
-              'http://tile.stamen.com/terrain/${z}/${x}/${y}.jpg',
-              { numZoomLevels: 19 }
+            this.sttr = new OpenLayers.Layer.Stamen(
+                'Stamen Terrain',
+                {
+                    provider: 'terrain',
+                    tileOptions: { crossOriginKeyword: null }
+                }
             );
 
             return [
