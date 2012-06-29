@@ -80,7 +80,7 @@ For detailed instructions on installing Geoserver, refer to [Geoserver's officia
 
   ![editor](http://23.21.98.97/wp-content/uploads/2012/06/image.png)
 
-  * **Note:** You can't mix static images and geographic layers. If you select a static image to build the exhibit on, you won't be able to add georeferenced elements down the line, since the "spatial" annotation data will be relative to the dimensions of the image, not a geographic coordinate set.
+  **Note:** You can't mix static images and geographic layers. If you select a static image to build the exhibit on, you won't be able to add georeferenced elements down the line, since the "spatial" annotation data will be relative to the dimensions of the image, not a geographic coordinate set.
 
   5. Check the "Public" box if you want the exhibit to be published on your site and visible to anonymous users. By default, exhibits are only visible to administrators.
 
