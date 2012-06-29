@@ -12,7 +12,7 @@ The basic workflow looks like this:
 
   * **Configure a custom layout**: Toggle viewports on and off, change their proportions, and drag them into different arrangements.
 
-  * **Plot records on maps and timelines**: Create complex vector drawings, points, and spans. Set colors, opacities, line thicknesses, point radii, and uncertainty gradients. Add popup bubbles and define interactions among the map, timeline, and a content-browser pane.
+  * **Plot records on maps and timelines**: Create complex vector drawings, points, and spans. Set colors, opacities, line widths, point radii, and uncertainty gradients. Add popup bubbles and define interactions among the map, timeline, and a content-browser pane.
 
   * **Model change over time**: Set visibility intervals on a per-record basis, making it possible to create complex time-servies animations. Define hierarchical relationships among items, making it possible to curate "batches" of related elements in an exhibit that phase in and out of view as a group.
 
