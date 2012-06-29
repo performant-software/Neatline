@@ -1,6 +1,6 @@
 # Neatline
 
-Neatline is a geotemporal exhibit-buiding framework that makes it possible to create rich representations of places, objects, events, stories, and archival collections on maps and timelines. Neatline is built as a suite of plugins for the Omeka digital collection framework, which provides powerful platform for content management and web publication.
+Neatline is a geotemporal exhibit-buiding framework that makes it possible to create rich representations of places, objects, events, stories, and archival collections using maps and timelines. Neatline is built as a suite of plugins for the Omeka digital collection framework, which provides powerful platform for content management and web publication.
 
 The basic workflow looks like this:
 
