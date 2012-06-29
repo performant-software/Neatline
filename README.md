@@ -4,7 +4,7 @@ Neatline is a geotemporal exhibit-buiding framework that makes it possible to cr
 
 ![editor](http://23.21.98.97/wp-content/uploads/2012/06/editor.png)
 
-The basic workflow looks like this:
+The workflow is simple:
 
   * **Create an environment for your exhibit**: Use georeferenced historical maps, modern-geography tile sets, or static images.
 
