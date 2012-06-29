@@ -148,10 +148,7 @@
             this.bubble = null;
 
             // Strip move listener, trigger out.
-            this._window.unbind(
-                'mousemove.bubbles',
-                'mousedown.bubbles'
-            );
+            this._window.unbind('mousemove.bubbles mousedown.bubbles');
 
         },
 
