@@ -272,7 +272,7 @@ Records have these fieldsets:
 
     * **Point Graphic**: Enter a URL to an external image to use the image as the graphical representation of a point on the map. This makes it possible to layer images on to of the map. Since the images are the same as geometric points in the underlying implementation, they share the property of remaining the same absolute dimension no matter what the zoom level of the map. To change the size of the image(s), just edit the "Point Radius" value.
 
-      ![editor](http://23.21.98.97/wp-content/uploads/2012/06/point-graphic-field.png)
+      ![editor](http://23.21.98.97/wp-content/uploads/2012/06/point-graphic.png)
 
     * **Reset Item Styles**: Click this button to void any item-specific styles set for the record with any of the 6 previous controls. This will cause the record to fall back to the exhibit-wide defaults, which are configured by way of the "Map Settings" dropdown in the top bar.
 
