@@ -78,6 +78,7 @@ function neatline_queueEditorAssets()
     queue_js('editor/_constructEditor', 'javascripts');
 
     // Extenal libraries.
+    queue_js('libraries/tile.stamen', 'javascripts');
     queue_js('libraries/jquery.miniColors-0.1/jquery.miniColors.min', 'javascripts');
     queue_js('libraries/CLEditor-1.3.0/jquery.cleditor.min', 'javascripts');
     queue_js('libraries/bootstrap-twipsy', 'javascripts');
@@ -92,6 +93,7 @@ function neatline_queueEditorAssets()
 function neatline_queuePublicAssets()
 {
     queue_js('_constructInThemeNeatline', 'javascripts');
+    queue_js('libraries/tile.stamen', 'javascripts');
     queue_css('neatline-public');
     $google = 'http://maps.google.com/maps/api/js?v=3.5&sensor=false';
 
@@ -111,6 +113,7 @@ function neatline_queueFullscreenAssets()
     // Neatline runner.
     queue_js('_constructFullscreenNeatline', 'javascripts');
     queue_js('utilities/_fullscreen_positioner', 'javascripts');
+    queue_js('libraries/tile.stamen', 'javascripts');
 
     // Fullscreen-specific CSS.
     queue_css('neatline-fullscreen');
@@ -128,6 +131,7 @@ function neatline_queueEmbedAssets()
     // Neatline runner.
     queue_js('_constructFullscreenNeatline', 'javascripts');
     queue_js('utilities/_fullscreen_positioner', 'javascripts');
+    queue_js('libraries/tile.stamen', 'javascripts');
 
     // Fullscreen-specific CSS.
     queue_css('neatline-embedded');
@@ -163,6 +167,7 @@ function neatline_queueNeatlineAssets($exhibit)
     queue_js('jquery.getscrollbarwidth', 'javascripts/libraries');
 
     // Vendor.
+    queue_js('libraries/tile.stamen', 'javascripts');
     queue_js('libraries/openlayers/OpenLayers.min', 'javascripts');
     queue_js('libraries/simile/timeline-api/timeline-api', 'javascripts');
     queue_js('libraries/taffy-min', 'javascripts');
