@@ -47,3 +47,7 @@ p.explanation {
     margin-left: 216px;
     clear: right;
 }
+
+.ui-dialog {
+    background: white;
+}

@@ -110,11 +110,15 @@ Click the "Edit Details" link in the "Exhibit" column to edit the exhibit title,
 
 Click the "Delete" link in the "Exhibit" column to delete the exhibit. Click "Delete" again on the confirmation popup. **This cannot be undone.**
 
+![editor](http://23.21.98.97/wp-content/uploads/2012/06/delete-modal.png)
+
 #### Define an Items Query
 
 To make items in your Omeka collection available for manipulation inside the Neatline editing interface, you need to define a "query" on the collection that isolates a subset of items that are relevant to the exhibit. This functionality is in place to make it possible to use the Neatline editor with extremely large Omeka collections (many thousands of items) that would choke up the interface if all of the content were loaded in at once.
 
 To define an items query for an exhibit, click on the "Edit Query" link in the exhibit's listing in the browse view. The query form is identical to the advanced search form in the Omeka items browser. You can search by keyword, specific field values, id ranges, collections, types, users, tags, public/non-public, and featured/non-featured - and any combination thereof.
+
+![editor](http://23.21.98.97/wp-content/uploads/2012/06/edit-query.png)
 
 Once you've created a query, click the "Search" button at the bottom of the page to save the configuration. Now, when you go into the editing environment for that exhibit, the content management bar on the left of the screen will be pre-populated with a list of all the items in your collection that match the query.
 
@@ -122,7 +126,7 @@ Once you've created a query, click the "Search" button at the bottom of the page
 
 At the heart of Neatline is the editing application, a web interface that lets you create exhibits, add records, annotate maps and timelines, and construct complex sequences and progressions that make arguments and tell stories about geospatial entities. 
 
-To open the editing interface for an exhibit, click on the title of the exhibit on the exhibits browse page.
+To open the editing interface for an exhibit, click on the "Edit" link in the leftmost column of the exhibit listing on the browse page.
 
 ### Create a Layout
 
@@ -130,9 +134,13 @@ Neatline includes a flexible layout builder that lets you choose exactly which e
 
 To open the layout configuration menu, click on the "Layout Editor" link at the top right of the editing interface.
 
+![editor](http://23.21.98.97/wp-content/uploads/2012/06/layout-editor.png)
+
 #### Toggle Viewports On and Off
 
 By default, all three viewports - Map, Timeline, and Items - are activated for new exhibits. To toggle viewports, click on the the buttons along the top of the "Layout Editor" dropdown. The preview layout will automatically update and display the new viewport configuration. Once a viewport has been disabled, click on its toggle button again to re-enable it.
+
+![editor](http://23.21.98.97/wp-content/uploads/2012/06/layout-editor-toggle.png)
 
 Click the "Save Arrangement" button to save the changes to the server.
 
@@ -140,11 +148,15 @@ Click the "Save Arrangement" button to save the changes to the server.
 
 Click and drag the viewports in the preview layout to reconfigure the arrangement of the blocks. You can switch the vertical positions of the Map and Timeline and change the height and horizontal alignment of the Items block.
 
+![editor](http://23.21.98.97/wp-content/uploads/2012/06/layout-editor-arrangements.png)
+
 Click the "Save Arrangement" button to save the changes to the server.
 
 #### Set Default Viewport Heights and Widths
 
 As you move your mouse over borders between the blocks in the preview layout, a dotted line will appear along the border and the pointer will change to a resize cursor. Click and drag to adjust the height and width of any of the blocks in the layout.
+
+![editor](http://23.21.98.97/wp-content/uploads/2012/06/layout-editor-proportions.png)
 
 Click the "Save Arrangement" button to save the changes to the server.
 
