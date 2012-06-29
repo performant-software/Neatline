@@ -278,7 +278,7 @@ Records have these fieldsets:
 
       ![editor](http://23.21.98.97/wp-content/uploads/2012/06/reset-item-styles-field.png)
 
-    * **Set Map Focus**: The map focus for a record is the position and zoom that the map viewport is set to when the record is activated by any action elsewhere in the exhibit. For example, if a user clicks on a listing for the record in the description tray or scrolls to the item using the next and previous arrows, the map will automatically refocus at the latitude/longitude and zoom level defined by the map focus for the item. 
+    * **Set Map Focus**: The map focus for a record is the position and zoom that the map viewport is set to when the record is activated by any action elsewhere in the exhibit. For example, if a user clicks on a listing for the record in the description tray or scrolls to the item using the next and previous arrows, the map will automatically refocus at the latitude/longitude and zoom level defined by the map focus for the item.
 
       ![editor](http://23.21.98.97/wp-content/uploads/2012/06/set-map-focus-field.png)
 
@@ -305,11 +305,19 @@ When you open a record's edit form in the browser tray, four editing controls ap
 
   * Pan (hand icon): The default editing state, this lets you click and drag to pan the focus position of the map.
 
+    ![editor](http://23.21.98.97/wp-content/uploads/2012/06/pan.png)
+
   * Point (pencil icon): Plot individual points. Click where you want the point. When you're finished, click the hand icon to reactivate the default panning mode.
+
+    ![editor](http://23.21.98.97/wp-content/uploads/2012/04/add_point_off.png)
 
   * Line (line icon): Plot individual points. To create a straight line that connects a series of points, click where you want the points. When you're finished, double click to lock the final line segment. To draw a free-form, curved line, hold down the SHIFT key, click, and then drag out the line.
 
+    ![editor](http://23.21.98.97/wp-content/uploads/2012/04/draw_line_off.png)
+
   * Polygon (rectangle icon): Create shapes. This works similarly to the line tool - click out a series of points to make flat-edge shapes, or press the SHIFT key and drag out irregular shapes.
+
+    ![editor](http://23.21.98.97/wp-content/uploads/2012/04/draw_polygon_off.png)
 
 When you're done annotating the item, click the blue "Save" button at the bottom of the edit form in the browser tray. 
 
@@ -321,15 +329,25 @@ You can edit the map annotation for a record at any point.
 
   * To edit a point, line, or polygon on the map, click on the shape. The vector will be outlined in red and all points associated with it will expand to indicate that it is ready for editing. 
 
+    ![editor](http://23.21.98.97/wp-content/uploads/2012/06/selected-vector.png)
+
   * Once the shape is selected, you can toggle on and off any of the three editing modes - Drag, Rotate, and Scale.
 
     * **Drag**: When Drag is active, an extra point will appear at the geometric center of the shape. Click and drag on the point to drag the postion of the entire shape.
 
+    ![editor](http://23.21.98.97/wp-content/uploads/2012/06/drag.png)
+
     * **Rotate**: When Rotate is active, an extra point will appear below and to the left of the shape. Click and drag on the point to rotate the shape.
+
+    ![editor](http://23.21.98.97/wp-content/uploads/2012/06/rotate.png)
 
     * **Scale**: When Scale is active, an extra point will appear below and to the left of the shape. Click and drag on the point to skew the vertical and horizontal dimensions of the shape.
 
+    ![editor](http://23.21.98.97/wp-content/uploads/2012/06/scale.png)
+
   * Click the red "Delete" button to delete the record. **This cannot be undone.**
+
+    ![editor](http://23.21.98.97/wp-content/uploads/2012/06/delete.png)
 
 ### Edit Map Styles
 
