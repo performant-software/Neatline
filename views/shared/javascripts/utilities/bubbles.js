@@ -51,6 +51,7 @@
             this.opacity = null;
             this.frozen = false;
             this.connector = false;
+            this.onBubble = false;
 
             // When the cursor leaves the window, hide.
             this._window.bind('mouseleave', _.bind(function() {
@@ -121,6 +122,17 @@
         },
 
         /*
+         * Force hide the bubble.
+         *
+         * @return void.
+         */
+        close: function() {
+            this._trigger('close');
+            this.frozen = false;
+            this.hide();
+        },
+
+        /*
          * Hide bubble.
          *
          * @return void.
@@ -136,7 +148,10 @@
             this.bubble = null;
 
             // Strip move listener, trigger out.
-            this._window.unbind('mousemove.bubbles');
+            this._window.unbind(
+                'mousemove.bubbles',
+                'mousedown.bubbles'
+            );
 
         },
 
@@ -164,11 +179,26 @@
             this._measureBubble();
             this.position(this.event);
 
+            // Track cursor on bubble.
+            this.bubble.bind({
+                'mouseenter': _.bind(function() {
+                    this.onBubble = true;
+                }, this),
+                'mouseleave': _.bind(function() {
+                    this.onBubble = false;
+                }, this),
+            });
+
             // Listen for close.
+            this._window.bind('mousedown.bubbles', _.bind(function() {
+                if (!this.onBubble) {
+                    this.close();
+                }
+            }, this));
+
+            // Listen for close link click.
             this.closeLink.mousedown(_.bind(function() {
-                this._trigger('close');
-                this.frozen = false;
-                this.hide();
+                this.close();
             }, this));
 
         },

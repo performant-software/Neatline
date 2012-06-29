@@ -495,7 +495,7 @@
                     self._selectedRecord = record;
                     record.selected = true;
 
-                    // Trigger out to the deployment code.
+                    // Trigger out to controller.
                     self._trigger('featureclick', {}, {
                         'recordid': record.recordid,
                         'slug': record.data.slug
@@ -524,6 +524,9 @@
                     if (!_.isUndefined(self.modifyFeatures)) {
                         self.modifyFeatures.unselectFeature(feature);
                     }
+
+                    // Trigger out to controller.
+                    self._trigger('featureunselect');
 
                 }
 
