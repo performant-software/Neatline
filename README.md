@@ -6,13 +6,13 @@ Neatline is a geotemporal exhibit-buiding framework that makes it possible to cr
 
 The basic workflow looks like this:
 
-  * Create a starting environment for your exhibit using georeferenced historical maps, modern-geography tile sets, or static images.
+  * **Create an environment for your exhibit**: Use georeferenced historical maps, modern-geography tile sets, or static images.
 
-  * Import or create records for your exhibit. Records represent anything at all - buildings, letters, people, events, physical objects, or interpretive sketchwork. If you already have an Omeka collection, Neatline integrates deeply with your existing content.
+  * **Create a collection of records**: Records represent anything at all - buildings, letters, people, events, physical objects, or interpretive sketchwork. If you already have an Omeka collection, Neatline integrates deeply with your existing content.
 
-  * Create custom layouts by toggling viewports on and off, changing their proportions, and dragging them into different arrangements.
+  * **Create a custom layout**: Toggle viewports on and off, change their proportions, and drag them into different arrangements.
 
-  * Plot records on maps and timelines with complex vector drawings, points, and spans. Set colors, opacities, line thicknesses, point radii, and uncertainty gradients.
+  * **Plot records on maps and timelines**: Create complex vector drawings, points, and spans. Set colors, opacities, line thicknesses, point radii, and uncertainty gradients.
 
   * Add popup bubbles and define interactions among the map, timeline, and a content-browser pane, which can house everything from short captions to long-format interpretive prose.
 
