@@ -2,7 +2,7 @@
 
 Neatline is a geotemporal exhibit-buiding framework that makes it possible to create beautiful, complex maps and connect them with timelines. Neatline is built as a suite of plugins for the Omeka, a digital archive-building framework that supplies a powerful platform for content management and web publication.
 
-![editor](http://23.21.98.97/wp-content/uploads/2012/06/editor.png)
+![Editor](http://23.21.98.97/wp-content/uploads/2012/06/editor.png)
 
 The workflow is simple:
 
@@ -58,33 +58,33 @@ For detailed instructions on installing Geoserver, refer to [Geoserver's officia
 
   1. Click on the "Neatline" tab at he top of the administrative interface.
 
-  ![editor](http://23.21.98.97/wp-content/uploads/2012/06/browse1.png)
+  ![Browse](http://23.21.98.97/wp-content/uploads/2012/06/browse1.png)
 
   2. Click the "Create an Exhibit" button.
 
-  ![editor](http://23.21.98.97/wp-content/uploads/2012/06/create.png)
+  ![Add Neatline](http://23.21.98.97/wp-content/uploads/2012/06/create.png)
 
   3. Enter a title for the exhibit. The title will be displayed at the top of the public display view. 
 
-  ![editor](http://23.21.98.97/wp-content/uploads/2012/06/title.png)
+  ![Exhibit Title](http://23.21.98.97/wp-content/uploads/2012/06/title.png)
 
   4. Optionally, enter a description for the exhibit. The description is something of a catch-all category designed to house introductory text for the exhibit. This could just be 2-3 sentences to set the stage, but it could also be used to present long-format prose to go with the exhibit.
 
-  ![editor](http://23.21.98.97/wp-content/uploads/2012/06/description.png)
+  ![Exhibit Description](http://23.21.98.97/wp-content/uploads/2012/06/description.png)
 
   5. Enter a slug for the exhibit. The slug is used to form the public-facing URL for the exhibit. By default, a slug will be auto-generated from the text that you typed into the "Title" field. If you want to edit the default slug, click on the input and type a new string. Slugs can only contain letters, numbers, and hyphens (no spaces).
 
-  ![editor](http://23.21.98.97/wp-content/uploads/2012/06/slug.png)
+  ![Exhibit Slug](http://23.21.98.97/wp-content/uploads/2012/06/slug.png)
 
   6. (Optional): In addition to the default option of using georeferenced layers as the foundation for the exhibit (OpenStreetMap/Google tiles, rectified geotiff files, etc.), you can also use any static image associated with an Omeka item as the base layer for the exhibit. Use the "Choose an Image" dropdown to browse all images in your Omeka archive.
 
-  ![editor](http://23.21.98.97/wp-content/uploads/2012/06/image.png)
+  ![Exhibit Image](http://23.21.98.97/wp-content/uploads/2012/06/image.png)
 
   **Note:** You can't mix static images and geographic layers. If you select a static image to build the exhibit on, you won't be able to add georeferenced elements down the line, since the "spatial" annotation data will be relative to the dimensions of the image, not a geographic coordinate set.
 
   5. Check the "Public" box if you want the exhibit to be published on your site and visible to anonymous users. By default, exhibits are only visible to administrators.
 
-  ![editor](http://23.21.98.97/wp-content/uploads/2012/06/public.png)
+  ![Exhibit Public](http://23.21.98.97/wp-content/uploads/2012/06/public.png)
 
   8. Click "Save Neatline."
 
@@ -93,7 +93,7 @@ For detailed instructions on installing Geoserver, refer to [Geoserver's officia
 After creating an exhibit, you'll be taken back to the exhibits browse
 screen, where you'll see a listing for the new exhibit.
 
-![editor](http://23.21.98.97/wp-content/uploads/2012/06/exhibit-added.png)
+![Exhibit Added](http://23.21.98.97/wp-content/uploads/2012/06/exhibit-added.png)
 
   * The "Exhibit" column lists the title of the exhibit, the slug, and links to edit the exhibit details and delete the exhibit. Click on the title to go to the public-facing view of the exhibit.
   * The link in the "Items Query" column links to a form where you can specify a subset of your Omeka collection to make avaialble in the Neatline editing environment for the exhibit (see below).
@@ -110,7 +110,7 @@ Click the "Edit Details" link in the "Exhibit" column to edit the exhibit title,
 
 Click the "Delete" link in the "Exhibit" column to delete the exhibit. Click "Delete" again on the confirmation popup. **This cannot be undone.**
 
-![editor](http://23.21.98.97/wp-content/uploads/2012/06/delete-modal.png)
+![Delete Modal](http://23.21.98.97/wp-content/uploads/2012/06/delete-modal.png)
 
 #### Define an Items Query
 
@@ -118,7 +118,7 @@ To make items in your Omeka collection available for manipulation inside the Nea
 
 To define an items query for an exhibit, click on the "Edit Query" link in the exhibit's listing in the browse view. The query form is identical to the advanced search form in the Omeka items browser. You can search by keyword, specific field values, id ranges, collections, types, users, tags, public/non-public, and featured/non-featured - and any combination thereof.
 
-![editor](http://23.21.98.97/wp-content/uploads/2012/06/edit-query.png)
+![Edit Query](http://23.21.98.97/wp-content/uploads/2012/06/edit-query.png)
 
 Once you've created a query, click the "Search" button at the bottom of the page to save the configuration. Now, when you go into the editing environment for that exhibit, the content management bar on the left of the screen will be pre-populated with a list of all the items in your collection that match the query.
 
@@ -134,13 +134,13 @@ Neatline includes a flexible layout builder that lets you choose exactly which e
 
 To open the layout configuration menu, click on the "Layout Editor" link at the top right of the editing interface.
 
-![editor](http://23.21.98.97/wp-content/uploads/2012/06/layout-editor.png)
+![Layout Editor](http://23.21.98.97/wp-content/uploads/2012/06/layout-editor.png)
 
 #### Toggle Viewports On and Off
 
 By default, all three viewports - Map, Timeline, and Items - are activated for new exhibits. To toggle viewports, click on the the buttons along the top of the "Layout Editor" dropdown. The preview layout will automatically update and display the new viewport configuration. Once a viewport has been disabled, click on its toggle button again to re-enable it.
 
-![editor](http://23.21.98.97/wp-content/uploads/2012/06/layout-editor-toggle.png)
+![Layout Editor Toggle](http://23.21.98.97/wp-content/uploads/2012/06/layout-editor-toggle.png)
 
 Click the "Save Arrangement" button to save the changes to the server.
 
@@ -148,7 +148,7 @@ Click the "Save Arrangement" button to save the changes to the server.
 
 Click and drag the viewports in the preview layout to reconfigure the arrangement of the blocks. You can switch the vertical positions of the Map and Timeline and change the height and horizontal alignment of the Items block.
 
-![editor](http://23.21.98.97/wp-content/uploads/2012/06/layout-editor-arrangements.png)
+![Layout Editor Arrangements](http://23.21.98.97/wp-content/uploads/2012/06/layout-editor-arrangements.png)
 
 Click the "Save Arrangement" button to save the changes to the server.
 
@@ -156,7 +156,7 @@ Click the "Save Arrangement" button to save the changes to the server.
 
 As you move your mouse over borders between the blocks in the preview layout, a dotted line will appear along the border and the pointer will change to a resize cursor. Click and drag to adjust the height and width of any of the blocks in the layout.
 
-![editor](http://23.21.98.97/wp-content/uploads/2012/06/layout-editor-proportions1.png)
+![Layout Editor Proportions](http://23.21.98.97/wp-content/uploads/2012/06/layout-editor-proportions1.png)
 
 Click the "Save Arrangement" button to save the changes to the server.
 
@@ -180,11 +180,11 @@ To add a new record to the exhibit:
 
   1. To plot a record that corresponds to an Omeka item, click the listing for the record in the record browser on the left side of the screen. To crete a new exhibit-specific record, click the "New Item" button at the top of the left pane in the editor. A new listing for the "[Untitled]" record will appear at the top of the stack under the "Neatline Records" heading. Click the title to open the record.
 
-  ![editor](http://23.21.98.97/wp-content/uploads/2012/06/item-browser.png)
+  ![Item Browser](http://23.21.98.97/wp-content/uploads/2012/06/item-browser.png)
 
   2. When you click on a record title, a form appears with four fieldsets labeled with tabs at the top of the form: "Text," "Temporal," "Styling", and "Relations." Work through the four fieldsets and fill out all the information necessary to describe the record in the context of the exhibit (see below for detailed information about each fieldset).
 
-  ![editor](http://23.21.98.97/wp-content/uploads/2012/06/edit-form-text.png)
+  ![Edit Form](http://23.21.98.97/wp-content/uploads/2012/06/edit-form-text.png)
 
   4. When you're done adding or editing information, click the "Save" button at the bottom of the form to commit the changes. Click on the title or on the "Close Record" button to contract the form. **Note:** If you add or edit data, be sure to click "Save" before closing the form. Otherwise, your changes will be lost.
 
@@ -196,91 +196,91 @@ Records have these fieldsets:
 
     * **Title**: The title is used to label the record on the timeline and in the prose description tray. The form field includes a simple rich-text editor, which can be used to apply different colors, font-sizes, and emphases to the text.
 
-      ![editor](http://23.21.98.97/wp-content/uploads/2012/06/title-field.png)
+      ![Title](http://23.21.98.97/wp-content/uploads/2012/06/title-field.png)
 
     * **Description**: The description is a catch-all field that can be used in a number of different ways - it can accomodate anything from short little snippets of annotation to long-format interpretive prose. This field includes a more complex rich-text editor, which makes it possible to use apply advanced formatting options like bullets, numbered lists, indentations, text alignments, links, and images. If you need complete control over the markup and styling, click the "\< \>" button at the bottom right of the control bar to view and edit the raw HTML for the field.
 
-      ![editor](http://23.21.98.97/wp-content/uploads/2012/06/description-field.png)
+      ![Description](http://23.21.98.97/wp-content/uploads/2012/06/description-field.png)
 
     * **Show pop-up bubble**: Check this box if you want the title and description to be displayed in a popup bubble when the user hovers the cursor over the representation of the record on the map or timeline.
 
-      ![editor](http://23.21.98.97/wp-content/uploads/2012/06/bubble-metadata-fields.png)
+      ![Show Popup Bubble](http://23.21.98.97/wp-content/uploads/2012/06/bubble-metadata-fields.png)
 
     * **Use default item metadata**: Check this box to import the complete Dublin Core metadata output for the Omeka item that the record corresponds to into the description field on the record. When the box is checked, Neatline will immediately load the metadata into the description field and disable the text editor. This box is grayed out for exhibit-specific records, since they do not correspond to an item in the Omeka collection.
 
-      ![editor](http://23.21.98.97/wp-content/uploads/2012/06/bubble-metadata-fields.png)
+      ![Use Default DC Metadata](http://23.21.98.97/wp-content/uploads/2012/06/bubble-metadata-fields.png)
 
   * Temporal 
 
     * **Start Date**: The start date of the object, event, or concept represented by the record. This is the only field that is required in order for the record to be displayed on the timeline. Dates must be entered in standard [ISO 8601][iso8601] format.
 
-      ![editor](http://23.21.98.97/wp-content/uploads/2012/06/start-date-field.png)
+      ![Start Date](http://23.21.98.97/wp-content/uploads/2012/06/start-date-field.png)
 
     * **End Date**: Same as start date. If an end date is entered, the record will be represented as a span (as opposed to a single point).
 
-      ![editor](http://23.21.98.97/wp-content/uploads/2012/06/end-date-field.png)
+      ![End Date](http://23.21.98.97/wp-content/uploads/2012/06/end-date-field.png)
 
     * **Start Visible Date**: If set, the representations of the record on the map and record description panel will only be displayed when the timeline is scrolled to a center position _after_ this date.
 
-      ![editor](http://23.21.98.97/wp-content/uploads/2012/06/start-visible-date-field.png)
+      ![Start Visible Date](http://23.21.98.97/wp-content/uploads/2012/06/start-visible-date-field.png)
 
     * **End Visible Date**: If set, the representations of the record on the map and record description panel will only be displayed when the timeline is scrolled to a center position _before_ this date.
 
-      ![editor](http://23.21.98.97/wp-content/uploads/2012/06/end-visible-date-field.png)
+      ![End Visible Date](http://23.21.98.97/wp-content/uploads/2012/06/end-visible-date-field.png)
 
     * **Date Ambiguity**: The date ambiguity widget lets you drag out a gradient of uncertainty or fuzziness across a time interval. Drag the two controls handles inward to fuzziness around the edges, or create a continuous increase or decrease by dragging both handles all the way to one side or the other.
 
-      ![editor](http://23.21.98.97/wp-content/uploads/2012/06/date-ambiguity-field.png)
+      ![Date Ambiguity](http://23.21.98.97/wp-content/uploads/2012/06/date-ambiguity-field.png)
 
   * Styling 
 
     * **Shape Color**: The fill color of the polygons (everything inside of the border lines, not including the lines). Click on the  swatch to the right of the input to open a color picker.
 
-      ![editor](http://23.21.98.97/wp-content/uploads/2012/06/shape-color-field.png)
+      ![Shape Color](http://23.21.98.97/wp-content/uploads/2012/06/shape-color-field.png)
 
     * **Line Color**: The color of the border lines. Click on the  swatch to the right of the input to open a color picker.
 
-      ![editor](http://23.21.98.97/wp-content/uploads/2012/06/line-color-field.png)
+      ![Line Color](http://23.21.98.97/wp-content/uploads/2012/06/line-color-field.png)
 
     * **Highlight Color**: The color of the lines, polygons, and points when the record is highlighted or selected. Click on the swatch to the right of the input to open a color picker.
 
-      ![editor](http://23.21.98.97/wp-content/uploads/2012/06/highlight-color-field.png)
+      ![Highlight Color](http://23.21.98.97/wp-content/uploads/2012/06/highlight-color-field.png)
 
     * **Fill Opacity**: The opacity of the polygons and/or WMS layer (not including the border lines). Enter a number between 0 and 100 (0 being transparent, 100 completely opaque) in the input, or click and drag up and down to gradually modulate the value.
 
-      ![editor](http://23.21.98.97/wp-content/uploads/2012/06/fill-opacity-field.png)
+      ![Fill Opacity](http://23.21.98.97/wp-content/uploads/2012/06/fill-opacity-field.png)
 
     * **Select Opacity**: The opacity of the polygons and/or WMS layer when the record is selected (not including the border lines). Enter a number between 0 and 100 (0 being transparent, 100 completely opaque) in the input, or click and drag up and down to gradually modulate the value.
 
-      ![editor](http://23.21.98.97/wp-content/uploads/2012/06/select-opacity.png)
+      ![Select Opacity](http://23.21.98.97/wp-content/uploads/2012/06/select-opacity.png)
 
     * **Line Opacity**: The opacity of the border lines. Enter a number between 0 and 100 (0 being transparent, 100 completely opaque) in the input, or click and drag up and down to gradually modulate the value.
 
-      ![editor](http://23.21.98.97/wp-content/uploads/2012/06/line-opacity.png)
+      ![Line Opacity](http://23.21.98.97/wp-content/uploads/2012/06/line-opacity.png)
 
     * **Graphic Opacity**: If an external image URL is entered in the "Point Graphic" field (see below), this controls the opacity of image on the map. Enter a number between 0 and 100 (0 being transparent, 100 completely opaque) in the input, or click and drag up and down to gradually modulate the value.
 
-      ![editor](http://23.21.98.97/wp-content/uploads/2012/06/graphic-opacity.png)
+      ![Graphic Opacity](http://23.21.98.97/wp-content/uploads/2012/06/graphic-opacity.png)
 
     * **Line Width**: The thickness of the border lines in pixels. Enter a positive integer in the input, or click and drag up and down to gradually modulate the value. Although there's no theoretical limit on how thick the lines can be, in practice you'll probably want to keep them between about 1-10 pixels.
 
-      ![editor](http://23.21.98.97/wp-content/uploads/2012/06/line-width.png)
+      ![Line Width](http://23.21.98.97/wp-content/uploads/2012/06/line-width.png)
 
     * **Point Radius**: The radius of standalone points and verties on lines and polygons. Enter a positive integer in the input, or click and drag up and down to gradually modulate the value. Like with the line thickness parameter, there's no limit to how large points can be, but keep in mind that the radius of points on the map is _fixed_, in that it is not affected by the zoom level - a 5-pixel point will be 5 pixels when the map is zoomed to 100 meters or 1000 miles.
 
-      ![editor](http://23.21.98.97/wp-content/uploads/2012/06/point-radius-field.png)
+      ![Point Radius](http://23.21.98.97/wp-content/uploads/2012/06/point-radius-field.png)
 
     * **Point Graphic**: Enter a URL to an external image to use the image as the graphical representation of a point on the map. This makes it possible to layer images on to of the map. Since the images are the same as geometric points in the underlying implementation, they share the property of remaining the same absolute dimension no matter what the zoom level of the map. To change the size of the image(s), just edit the "Point Radius" value.
 
-      ![editor](http://23.21.98.97/wp-content/uploads/2012/06/point-graphic.png)
+      ![Point Graphic](http://23.21.98.97/wp-content/uploads/2012/06/point-graphic.png)
 
     * **Reset Item Styles**: Click this button to void any item-specific styles set for the record with any of the 6 previous controls. This will cause the record to fall back to the exhibit-wide defaults, which are configured by way of the "Map Settings" dropdown in the top bar.
 
-      ![editor](http://23.21.98.97/wp-content/uploads/2012/06/reset-item-styles-field.png)
+      ![Reset Item Styles](http://23.21.98.97/wp-content/uploads/2012/06/reset-item-styles-field.png)
 
     * **Set Map Focus**: The map focus for a record is the position and zoom that the map viewport is set to when the record is activated by any action elsewhere in the exhibit. For example, if a user clicks on a listing for the record in the description tray or scrolls to the item using the next and previous arrows, the map will automatically refocus at the latitude/longitude and zoom level defined by the map focus for the item.
 
-      ![editor](http://23.21.98.97/wp-content/uploads/2012/06/set-map-focus-field.png)
+      ![Set Map Focus](http://23.21.98.97/wp-content/uploads/2012/06/set-map-focus-field.png)
 
       By default, if a custom focus has not been set, Neatline approximates a map focus for the record based on the dimensions of the shapes, lines, and points associated with the record on the map. Sometimes, this is sufficient, but in many cases you'll want to configure the default focus - you might want to zoom out to get more context on the screen when the user arrives at the item, or nudge over the focus position to contetualize the record relative to some other specific entity nearby on the map.
 
@@ -297,7 +297,7 @@ Records have these fieldsets:
       Likewise, parent-child relationships can be used to create
 temporal "contexts" inside a single exhibit. For example, if you're working with a collection of five historical maps of the same geographic region, it's important to be able to restrict map vectors and descriptive annotations to just one of the maps to avoid a confusing soup of overlapping shapes and annotations. Instead of manually setting the same the visiblity dates of each interpretive records, you can just set visiblity dates for each of the five map records and then point each of the descriptive records at one of the maps. This way, the maps will phase on and off of the exhibit in unison with the set of interpretive records that describe them.
 
-      ![editor](http://23.21.98.97/wp-content/uploads/2012/06/parent-record-field.png)
+      ![Parent Record](http://23.21.98.97/wp-content/uploads/2012/06/parent-record-field.png)
 
 ### Plot Records on the Map
 
@@ -305,19 +305,19 @@ When you open a record's edit form in the browser tray, four editing controls ap
 
   * Pan (hand icon): The default editing state, this lets you click and drag to pan the focus position of the map.
 
-    ![editor](http://23.21.98.97/wp-content/uploads/2012/06/pan.png)
+    ![Pan](http://23.21.98.97/wp-content/uploads/2012/06/pan.png)
 
   * Point (pencil icon): Plot individual points. Click where you want the point. When you're finished, click the hand icon to reactivate the default panning mode.
 
-    ![editor](http://23.21.98.97/wp-content/uploads/2012/04/add_point_off.png)
+    ![Point](http://23.21.98.97/wp-content/uploads/2012/04/add_point_off.png)
 
   * Line (line icon): Plot individual points. To create a straight line that connects a series of points, click where you want the points. When you're finished, double click to lock the final line segment. To draw a free-form, curved line, hold down the SHIFT key, click, and then drag out the line.
 
-    ![editor](http://23.21.98.97/wp-content/uploads/2012/04/draw_line_off.png)
+    ![Line](http://23.21.98.97/wp-content/uploads/2012/04/draw_line_off.png)
 
   * Polygon (rectangle icon): Create shapes. This works similarly to the line tool - click out a series of points to make flat-edge shapes, or press the SHIFT key and drag out irregular shapes.
 
-    ![editor](http://23.21.98.97/wp-content/uploads/2012/04/draw_polygon_off.png)
+    ![Polygon](http://23.21.98.97/wp-content/uploads/2012/04/draw_polygon_off.png)
 
 When you're done annotating the item, click the blue "Save" button at the bottom of the edit form in the browser tray. 
 
@@ -329,25 +329,25 @@ You can edit the map annotation for a record at any point.
 
   * To edit a point, line, or polygon on the map, click on the shape. All points associated with it will become visible to indicate that it is ready for editing. 
 
-    ![editor](http://23.21.98.97/wp-content/uploads/2012/06/selected-vector.png)
+    ![Selected Vector](http://23.21.98.97/wp-content/uploads/2012/06/selected-vector.png)
 
   * Once the shape is selected, you can toggle on and off any of the three editing modes - Drag, Rotate, and Scale.
 
     * **Drag**: When Drag is active, an extra point will appear at the geometric center of the shape. Click and drag on the point to drag the postion of the entire shape.
 
-    ![editor](http://23.21.98.97/wp-content/uploads/2012/06/drag.png)
+    ![Drag](http://23.21.98.97/wp-content/uploads/2012/06/drag.png)
 
     * **Rotate**: When Rotate is active, an extra point will appear below and to the left of the shape. Click and drag on the point to rotate the shape.
 
-    ![editor](http://23.21.98.97/wp-content/uploads/2012/06/rotate.png)
+    ![Rotate](http://23.21.98.97/wp-content/uploads/2012/06/rotate.png)
 
     * **Scale**: When Scale is active, an extra point will appear below and to the left of the shape. Click and drag on the point to skew the vertical and horizontal dimensions of the shape.
 
-    ![editor](http://23.21.98.97/wp-content/uploads/2012/06/scale.png)
+    ![Scale](http://23.21.98.97/wp-content/uploads/2012/06/scale.png)
 
   * Click the red "Delete" button to delete the record. **This cannot be undone.**
 
-    ![editor](http://23.21.98.97/wp-content/uploads/2012/06/delete.png)
+    ![Delete](http://23.21.98.97/wp-content/uploads/2012/06/delete.png)
 
 ### Edit Map Styles
 
@@ -359,43 +359,43 @@ To edit exhibit-wide style defaults:
   
     * **Default Shape Color**: The fill color of the polygons (everything inside of the border lines, not including the lines). Click on the swatch to the right of the input to open a color picker.
 
-      ![editor](http://23.21.98.97/wp-content/uploads/2012/06/default-shape-color-field.png)
+      ![Default Shape Color](http://23.21.98.97/wp-content/uploads/2012/06/default-shape-color-field.png)
 
     * **Default Line Color**: The color of the border lines. Click on the swatch to the right of the input to open a color picker.
 
-      ![editor](http://23.21.98.97/wp-content/uploads/2012/06/default-line-color-field.png)
+      ![Default Line Color](http://23.21.98.97/wp-content/uploads/2012/06/default-line-color-field.png)
 
     * **Default Selected Color**: The color of the lines, shapes, and points when the record is highlighted or selected. Click on the  swatch to the right of the input to open a color picker.
 
-      ![editor](http://23.21.98.97/wp-content/uploads/2012/06/default-selected-color-field.png)
+      ![Default Selected Color](http://23.21.98.97/wp-content/uploads/2012/06/default-selected-color-field.png)
 
     * **Default Shape Opacity**: The opacity of the polygons (not including the border lines). Enter a number between 0 and 100 (0 being transparent, 100 completely opaque) in the input, or click and drag up and down to gradually modulate the value.
 
-      ![editor](http://23.21.98.97/wp-content/uploads/2012/06/default-shape-opacity-field.png)
+      ![Default Shape Opacity](http://23.21.98.97/wp-content/uploads/2012/06/default-shape-opacity-field.png)
 
     * **Default Selected Opacity**: The opacity of the polygons (not including the border lines) when the record is highlighted or selected. Enter a number between 0 and 100 (0 being transparent, 100 completely opaque) in the input, or click and drag up and down to gradually modulate the value. 
 
-      ![editor](http://23.21.98.97/wp-content/uploads/2012/06/default-selected-opacity-field.png)
+      ![Default Selected Opacity](http://23.21.98.97/wp-content/uploads/2012/06/default-selected-opacity-field.png)
 
     * **Default Line Opacity**: The opacity of the border lines. Enter a number between 0 and 100 (0 being transparent, 100 completely opaque) in the input, or click and drag up and down to gradually modulate the value.
 
-      ![editor](http://23.21.98.97/wp-content/uploads/2012/06/default-line-opacity-field.png)
+      ![Default Line Opacity](http://23.21.98.97/wp-content/uploads/2012/06/default-line-opacity-field.png)
 
     * **Default Graphic Opacity**: The opacity of points that are represented on the map with external image graphics set on the record edit forms (see above). Enter a number between 0 and 100 (0 being transparent, 100 completely opaque) in the input, or click and drag up and down to gradually modulate the value.
 
-      ![editor](http://23.21.98.97/wp-content/uploads/2012/06/default-graphic-opacity-field.png)
+      ![Default Graphic Opacity](http://23.21.98.97/wp-content/uploads/2012/06/default-graphic-opacity-field.png)
 
     * **Default Line Width**: The thickness of the border lines in pixels. Enter a positive integer in the input, or click and drag up and down to gradually modulate the value. Although there's no theoretical limit on how thick the lines can be, in practice you'll probably want to keep them between about 1-10 pixels.
 
-      ![editor](http://23.21.98.97/wp-content/uploads/2012/06/default-line-width-field.png)
+      ![Default Line Width](http://23.21.98.97/wp-content/uploads/2012/06/default-line-width-field.png)
 
     * **Default Point Radius**: The radius of standalone points and verties on lines and polygons. Enter a positive integer in the input, or click and drag up and down to gradually modulate the value. Like with the line thickness parameter, there's no limit to how large points can be, but keep in mind that the radius of points on the map is _fixed_, in that it is not affected by the zoom level - a 5-pixel point will be 5 pixels when the map is zoomed to 100 meters or 1000 miles.
 
-      ![editor](http://23.21.98.97/wp-content/uploads/2012/06/default-point-radius-field.png)
+      ![Default Point Radius](http://23.21.98.97/wp-content/uploads/2012/06/default-point-radius-field.png)
 
     * **Default Base Layer**: Select the default starting base layer for the exhibit. Users can manually change the base layer with the layer switcher widget at the top right of the map.
 
-      ![editor](http://23.21.98.97/wp-content/uploads/2012/06/default-base-layer-field.png)
+      ![Default Base Layer](http://23.21.98.97/wp-content/uploads/2012/06/default-base-layer-field.png)
 
 As you make changes to the color, radius, and width styles, only the shapes on the map _that do not have an item-specific setting for the style in question_ will automatically update the reflect the new settings. If you want to unset item-specific styling settings for a given item, open its editing form and click the "Reset Item Styles" button.
 
@@ -409,17 +409,17 @@ Neatline makes it possible to configure the default layout of the timeline. To e
 
     * **Enable Context Band**: The context band is a secondary strip at the bottom of the timeline that provides a zoomed-out, bird's eye view of the content of the timeline. Check or uncheck this box to toggle the context band on and off.
 
-      ![editor](http://23.21.98.97/wp-content/uploads/2012/06/enable-context-band-field.png)
+      ![Enable Context Band](http://23.21.98.97/wp-content/uploads/2012/06/enable-context-band-field.png)
       
     * **Context Band Unit**: Use this select to set the default unit on the context band. Generally, you'll want to configure a default that is more "general" than the units that are displayed by the default zoom level on the main timeline band, but not _vastly_ different. For example, if the timeline default to a zoom level that shows a unit of days, it might make sense to set the context band to be "Week" or "Month."
 
       Anthing higher, though, and there will be such a large difference between the scales of the two bands that dragging the context band will result in an excessively rapid movement on the main timeline.
 
-      ![editor](http://23.21.98.97/wp-content/uploads/2012/06/context-band-unit-field.png)
+      ![Context Band Unit](http://23.21.98.97/wp-content/uploads/2012/06/context-band-unit-field.png)
 
     * **Context Band Height**: This option controls the height of the context band as a percentage of the total height of the timeline.
 
-      ![editor](http://23.21.98.97/wp-content/uploads/2012/06/context-band-height-percent.png)
+      ![Context Band Height](http://23.21.98.97/wp-content/uploads/2012/06/context-band-height-percent.png)
 
 ### Activate and Deactivate Records
 
@@ -427,17 +427,17 @@ After you've created records, you can toggle the representations of the records 
 
   * The left column controls the record description panel;
 
-      ![editor](http://23.21.98.97/wp-content/uploads/2012/06/items-activate1.png)
+      ![Items Activate](http://23.21.98.97/wp-content/uploads/2012/06/items-activate1.png)
 
   * The middle column controls the map;
 
-      ![editor](http://23.21.98.97/wp-content/uploads/2012/06/map-activate1.png)
+      ![Map Activate](http://23.21.98.97/wp-content/uploads/2012/06/map-activate1.png)
 
   * The right column controls the timeline.
 
-      ![editor](http://23.21.98.97/wp-content/uploads/2012/06/timeline-activate.png)
+      ![Timeline Activate](http://23.21.98.97/wp-content/uploads/2012/06/timeline-activate.png)
 
-Just check or uncheck any of the blocks at any point, and the status setting will immediately be saved and applied on the exhibit.
+Check or uncheck any of the blocks at any point, and the status setting will immediately be saved and applied on the exhibit.
 
 ### Edit Record Order
 
@@ -455,7 +455,7 @@ To create a custom ordering:
 
   4. When you're finished, click the "Save" button on the "Item Settings" dropdown. Click the "Edit Item Order" button again to return the description tray to its normal mode.
 
-    ![editor](http://23.21.98.97/wp-content/uploads/2012/06/edit-record-order.png)
+    ![Item Ordering](http://23.21.98.97/wp-content/uploads/2012/06/edit-record-order.png)
 
 
 
