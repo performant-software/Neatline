@@ -401,6 +401,26 @@ As you make changes to the color, radius, and width styles, only the shapes on t
 
 When you're done editing the default styles, click the "Save" button at the bottom of the dropdown to lock the changes.
 
+### Edit Timeline Styles
+
+Neatline makes it possible to configure the default layout of the timeline. To edit the defaults:
+  
+  * Click on the "Timeline Settings" tab in the top bar of the browser. A dropdown menu will appear with editing inputs for the 3 layout defaults:
+
+    * **Enable Context Band**: The context band is a secondary strip at the bottom of the timeline that provides a zoomed-out, bird's eye view of the content of the timeline. Check or uncheck this box to toggle the context band on and off.
+
+      ![editor](http://23.21.98.97/wp-content/uploads/2012/06/enable-context-band-field.png)
+      
+    * **Context Band Unit**: Use this select to set the default unit on the context band. Generally, you'll want to configure a default that is more "general" than the units that are displayed by the default zoom level on the main timeline band, but not _vastly_ different. For example, if the timeline default to a zoom level that shows a unit of days, it might make sense to set the context band to be "Week" or "Month."
+
+      Anthing higher, though, and there will be such a large difference between the scales of the two bands that dragging the context band will result in an excessively rapid movement on the main timeline.
+
+      ![editor](http://23.21.98.97/wp-content/uploads/2012/06/context-band-unit-field.png)
+
+    * **Context Band Height**: This option controls the height of the context band as a percentage of the total height of the timeline.
+
+      ![editor](http://23.21.98.97/wp-content/uploads/2012/06/context-band-height-field.png)
+
 ### Activate and Deactivate Records
 
 After you've created records, you can toggle the representations of the records on the map, timeline, and record browser on and off at any point. In the record browser tray on the left side of the screen, there are three columns of checkboxes on the left side of the panel, three for each record:
