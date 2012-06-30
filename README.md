@@ -327,7 +327,7 @@ You can edit the map annotation for a record at any point.
 
   * Open the edit form the record that you want to change. This can be done either by clicking directly on on the title of the record in the browser tray or by clicking on any of the record's representations on the map or timeline.
 
-  * To edit a point, line, or polygon on the map, click on the shape. The vector will be outlined in red and all points associated with it will expand to indicate that it is ready for editing. 
+  * To edit a point, line, or polygon on the map, click on the shape. All points associated with it will become visible to indicate that it is ready for editing. 
 
     ![editor](http://23.21.98.97/wp-content/uploads/2012/06/selected-vector.png)
 
