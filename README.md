@@ -419,7 +419,7 @@ Neatline makes it possible to configure the default layout of the timeline. To e
 
     * **Context Band Height**: This option controls the height of the context band as a percentage of the total height of the timeline.
 
-      ![editor](http://23.21.98.97/wp-content/uploads/2012/06/context-band-height-field.png)
+      ![editor](http://23.21.98.97/wp-content/uploads/2012/06/context-band-height-percent.png)
 
 ### Activate and Deactivate Records
 
