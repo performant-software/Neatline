@@ -526,7 +526,11 @@
                     }
 
                     // Trigger out to controller.
-                    self._trigger('featureunselect');
+                    self._trigger(
+                        'featureunselect',
+                        undefined,
+                        { feature: feature, record: record }
+                    );
 
                 }
 

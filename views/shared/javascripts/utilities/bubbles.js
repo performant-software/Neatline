@@ -348,6 +348,24 @@
             // Remove clone.
             clone.remove();
 
+        },
+
+        /*
+         * Get the current title of the bubble.
+         *
+         * @return string.
+         */
+        getTitle: function() {
+            return this.title;
+        },
+
+        /*
+         * Is this bubble frozen?
+         *
+         * @return bool.
+         */
+        isFrozen: function() {
+            return this.frozen;
         }
 
     });
