@@ -260,6 +260,16 @@ function neatline_getUndatedItemsDataUrl($neatline_id)
 {
     return WEB_ROOT . '/neatline-exhibits/udi/' . $neatline_id;
 }
+/**
+ * Message that displays before uninstall confirm.
+ *
+ * @return string The message.
+ */
+function neatline_uninstallWarningMessage()
+{
+    return '<p><strong>Warning</strong>: Uninstalling the Neatline plugin '
+        . 'will permanently delete all Neatline exhibits.';
+}
 
 /**
  * Get an element text for an item by element set and element.
