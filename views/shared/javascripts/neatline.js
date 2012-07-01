@@ -267,7 +267,10 @@
                         self._trigger('mapfeatureenter', {}, obj);
 
                         // Render bubble.
-                        if (self.options.isPublic && obj.record.data.show_bubble == 1) {
+                        if (self.options.isPublic &&
+                            obj.record.data.show_bubble == 1 &&
+                            (!obj.record.selected || self.items.length === 0)
+                        ) {
                             self.freezeOut(obj.record.data);
                             self.element.bubbles('show',
                                  obj.record.data.title,
@@ -311,7 +314,9 @@
                     'featureunselect': function(event, obj) {
 
                         // Close bubble.
-                        if (self.options.isPublic) {
+                        if (self.options.isPublic &&
+                            self.element.bubbles('getTitle') === obj.record.data.title
+                        ) {
                             self.element.bubbles('close');
                         }
                         self.thawOut();
