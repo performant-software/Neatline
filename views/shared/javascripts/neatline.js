@@ -66,6 +66,7 @@
             this.instantiated_map =         false;
             this.instantiated_timeline =    false;
             this.instantiated_undated =     false;
+            this.frozenOut =                null;
             this._getMajorBlock();
 
             // Position divs and run viewport managers.
@@ -267,6 +268,7 @@
 
                         // Render bubble.
                         if (self.options.isPublic && obj.record.data.show_bubble == 1) {
+                            self.freezeOut(obj.record.data);
                             self.element.bubbles('show',
                                  obj.record.data.title,
                                  obj.record.data.description
@@ -288,6 +290,7 @@
                             bubbles.hide();
                         }
 
+                        self.thawOut(true);
                         self._trigger('mapfeatureleave', {}, obj);
 
                     },
@@ -299,6 +302,7 @@
 
                         // Freeze bubble.
                         if (self.options.isPublic) {
+                            self.useFrozen();
                             self.element.bubbles('freeze');
                         }
 
@@ -310,6 +314,7 @@
                         if (self.options.isPublic) {
                             self.element.bubbles('close');
                         }
+                        self.thawOut();
 
                     }
 
@@ -496,6 +501,57 @@
 
         },
 
+        /*
+         * This keeps track of the state that needs to be restored when a
+         * feature has been frozen out.
+         */
+        freezeOut: function(data) {
+            if (this.element.bubbles('isFrozen')) {
+                var _window = $(window);
+                var _this   = this;
+
+                this.frozenOut = {
+                    data  : data,
+                    event : null
+                };
+                _window.on('mousemove.frozen', function(event) {
+                    if (_.isNull(_this.frozenOut)) {
+                        _window.off('mousemove.frozen');
+                    } else {
+                        _this.frozenOut.event = event;
+                    }
+                });
+            }
+        },
+
+        /*
+         * This frees the state when the frozen state is thawed.
+         */
+        thawOut: function(force) {
+            if (! _.isNull(this.frozenOut) &&
+                (force ||
+                 this.frozenOut.data.title == this.element.bubbles('getTitle')
+            )) {
+                $(window).off('mousemove.frozen');
+                this.frozenOut = null;
+            }
+        },
+
+        /*
+         * This creates the bubble for the frozen feature.
+         */
+        useFrozen: function() {
+            if (! _.isNull(this.frozenOut)) {
+                var el = this.element;
+                el.bubbles(
+                    'show',
+                    this.frozenOut.data.title,
+                    this.frozenOut.data.description
+                );
+                el.bubbles('position', this.frozenOut.event);
+                this.thawOut(true);
+            }
+        },
 
         /*
          * =================
