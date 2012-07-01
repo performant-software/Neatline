@@ -1097,13 +1097,14 @@ class Neatline_NeatlineDataRecordTest extends Neatline_Test_AppTestCase
         $neatline->default_point_radius = 1;
         $neatline->save();
 
-        // Get and check.
-        // $this->assertEquals($record->getStyle('vector_color'), '#ffffff');
-        $this->assertEquals($record->getStyle('vector_opacity'), 20);
+        // Re-get and check.
+        $record = $this->_recordsTable->find($record->id);
+        $this->assertEquals($record->getStyle('vector_color'), '#ffffff');
+        $this->assertEquals($record->getStyle('vector_opacity'), 1);
         $this->assertEquals($record->getStyle('stroke_color'), '#ffffff');
-        $this->assertEquals($record->getStyle('stroke_opacity'), 20);
-        $this->assertEquals($record->getStyle('stroke_width'), 20);
-        $this->assertEquals($record->getStyle('point_radius'), 20);
+        $this->assertEquals($record->getStyle('stroke_opacity'), 1);
+        $this->assertEquals($record->getStyle('stroke_width'), 1);
+        $this->assertEquals($record->getStyle('point_radius'), 1);
 
     }
 

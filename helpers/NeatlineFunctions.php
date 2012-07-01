@@ -528,7 +528,7 @@ function link_to_neatline($text = null, $props = array(), $action = 'show', $nea
     }
 
     $route = 'neatline-exhibits/'.$action.'/'.$slug;
-    $uri = uri($route);
+    $uri = public_uri($route);
     $props['href'] = $uri;
 
     $html = '<a ' . _tag_attributes($props) . '>' . $text . '</a>';
