@@ -195,6 +195,11 @@
       <targetfile />
     </apply>
 
+    <!-- Need to separately copy the already minified css. -->
+    <copy todir="${staging.dir}/${dir.views}/">
+      <fileset dir="${basedir}/${dir.views}/" includes="**/*.min.css" />
+    </copy>
+
   </target>
 
   <target name="optimize-png" depends="_copy" description="Optimizes .png images">
