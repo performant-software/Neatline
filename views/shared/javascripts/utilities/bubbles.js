@@ -216,8 +216,13 @@
             var containerWidth = this.element.outerWidth();
             var containerHeight = this.element.outerHeight();
 
-            // Get container offset.
+            // Get container offset, compensate for borders.
             var offset = this.element.offset();
+            var borderTop = parseInt(this.element.css('border-top-width'), 10);
+            var borderLeft = parseInt(this.element.css('border-left-width'), 10);
+            offset.top += borderTop;
+            offset.left += borderLeft;
+
             var containerX = event.clientX - offset.left;
             var containerY = event.clientY - offset.top +
               this._window.scrollTop();
