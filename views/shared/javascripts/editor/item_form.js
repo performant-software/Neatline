@@ -606,7 +606,7 @@
             // Bold the title.
             this.textSpan.css({
                 'font-weight': 'bold',
-                'color': textColor,
+                'color': textColor
             });
 
         },

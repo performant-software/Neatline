@@ -183,7 +183,7 @@
                 }, this),
                 'mouseleave': _.bind(function() {
                     this.onBubble = false;
-                }, this),
+                }, this)
             });
 
             // Listen for close.
