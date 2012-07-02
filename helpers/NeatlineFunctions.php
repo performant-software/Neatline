@@ -524,7 +524,12 @@ function total_neatlines()
  * @param NeatlineExhibit|null
  * @return string The HTML link.
  */
-function link_to_neatline($text = null, $props = array(), $action = 'show', $neatline = null, $public = true)
+function link_to_neatline(
+    $text = null,
+    $props = array(),
+    $action = 'show',
+    $neatline = null,
+    $public = true)
 {
 
     $neatline = $neatline ? $neatline : get_current_neatline();

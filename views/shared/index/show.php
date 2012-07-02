@@ -45,4 +45,3 @@ head(array('title' => $title, 'bodyclass' => 'neatline neatline-'.neatline('id')
 <div class="exhibit-description"><?php echo neatline('description'); ?></div>
 
 <?php foot(); ?>
-
