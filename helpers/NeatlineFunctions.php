@@ -520,13 +520,13 @@ function total_neatlines()
  *
  * @param string HTML for the text of the link.
  * @param array Attributes for the link tag. (optional)
- * @param string The action for the link. Default is 'show'. 
+ * @param string The action for the link. Default is 'show'.
  * @param NeatlineExhibit|null
  * @return string The HTML link.
  */
-function link_to_neatline($text = null, $props = array(), $action = 'show', $neatline = null)
+function link_to_neatline($text = null, $props = array(), $action = 'show', $neatline = null, $public = true)
 {
-    
+
     $neatline = $neatline ? $neatline : get_current_neatline();
 
     $text = $text ? $text : strip_formatting(neatline('name', $neatline));
@@ -538,7 +538,7 @@ function link_to_neatline($text = null, $props = array(), $action = 'show', $nea
     }
 
     $route = 'neatline-exhibits/'.$action.'/'.$slug;
-    $uri = public_uri($route);
+    $uri = $public? public_uri($route) : uri($route);
     $props['href'] = $uri;
 
     $html = '<a ' . _tag_attributes($props) . '>' . $text . '</a>';

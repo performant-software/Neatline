@@ -78,18 +78,18 @@ head(array('content_class' => 'neatline', 'title' => $title));
 
                 <?php
                 if (has_permission('Neatline_Index', 'edit')) {
-                    echo link_to_neatline('Edit Details', array('class' => 'edit'), 'edit');
+                    echo link_to_neatline('Edit Details', array('class' => 'edit'), 'edit', null, false);
                 }
 
                 if (has_permission('Neatline_Index', 'delete')) {
-                    echo link_to_neatline('Delete', array('class' => 'delete delete-confirm'), 'delete-confirm');
+                    echo link_to_neatline('Delete', array('class' => 'delete delete-confirm'), 'delete-confirm', null, false);
                 }
                 ?>
             </td>
             <td>
               <?php
               if (has_permission('Neatline_Index', 'query')) {
-                  echo link_to_neatline('Edit Query', array('class' => 'query'), 'query');
+                  echo link_to_neatline('Edit Query', array('class' => 'query'), 'query', null, false);
               }
               ?>
             </td>
