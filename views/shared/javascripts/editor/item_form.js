@@ -368,39 +368,41 @@
          */
         _buildFieldsets: function() {
 
-            var self = this;
+            this.form.tabs();
 
-            // Title and description.
-            this.titleDescriptionFieldset.fieldsetexpander({
-                default_status: true,
-                'change': function() {
-                    self._measureForm();
-                }
-            });
+            // var self = this;
 
-            // Date information.
-            this.dateInformationFieldset.fieldsetexpander({
-                default_status: false,
-                'change': function() {
-                    self._measureForm();
-                }
-            });
+            // // Title and description.
+            // this.titleDescriptionFieldset.fieldsetexpander({
+            //     default_status: true,
+            //     'change': function() {
+            //         self._measureForm();
+            //     }
+            // });
 
-            // Map styles.
-            this.mapStylesFieldset.fieldsetexpander({
-                default_status: false,
-                'change': function() {
-                    self._measureForm();
-                }
-            });
+            // // Date information.
+            // this.dateInformationFieldset.fieldsetexpander({
+            //     default_status: false,
+            //     'change': function() {
+            //         self._measureForm();
+            //     }
+            // });
 
-            // Relationships.
-            this.relationshipsFieldset.fieldsetexpander({
-                default_status: false,
-                'change': function() {
-                    self._measureForm();
-                }
-            });
+            // // Map styles.
+            // this.mapStylesFieldset.fieldsetexpander({
+            //     default_status: false,
+            //     'change': function() {
+            //         self._measureForm();
+            //     }
+            // });
+
+            // // Relationships.
+            // this.relationshipsFieldset.fieldsetexpander({
+            //     default_status: false,
+            //     'change': function() {
+            //         self._measureForm();
+            //     }
+            // });
 
         },
 
@@ -604,7 +606,7 @@
             // Bold the title.
             this.textSpan.css({
                 'font-weight': 'bold',
-                'color': textColor,
+                'color': textColor
             });
 
         },
@@ -665,9 +667,26 @@
          * on the title to the title text span.
          */
         _updateTitleText: function() {
-            if (_.isNull(this.itemId) && this.title.val() !== '') {
-                this._trigger('settitle', {}, { 'text': this.title.val() });
+
+            // If the record is Neatline endemic.
+            if (_.isNull(this.itemId)) {
+
+                // If there is a title present.
+                if (this._data.title !== '') {
+                    this._trigger('settitle', {}, {
+                        'text': this._data.title
+                    });
+                }
+
+                // If there is a description present.
+                else if (this._data.description !== '') {
+                    this._trigger('settitle', {}, {
+                        'text': this._data.description.substring(0, 200)
+                    });
+                }
+
             }
+
         },
 
         /*
@@ -695,6 +714,21 @@
 
             // Gray out the checkbox label.
             this.useDcDataLabel.css('opacity', 0.3);
+
+        },
+
+        /*
+         * Process and apply new form data.
+         */
+        _ingestData: function(data) {
+
+            // Push the data into the form.
+            this._data = data;
+            this._records = data.records;
+            this._applyData();
+
+            // Enable the save and delete buttons.
+            this._enableButtons();
 
         },
 
@@ -890,15 +924,7 @@
                 },
 
                 success: _.bind(function(data) {
-
-                    // Push the data into the form.
-                    this._data = data;
-                    this._records = data.records;
-                    this._applyData();
-
-                    // Enable the save and delete buttons.
-                    this._enableButtons();
-
+                    this._ingestData(data);
                 }, this)
 
             });
@@ -944,11 +970,11 @@
                         'recordid': data.recordid
                     });
 
+                    // Apply new form data.
+                    self._ingestData(data.form);
+
                     // Update the title text, if necessary.
                     self._updateTitleText();
-
-                    // Reload form.
-                    self._getFormData();
 
                 }
 

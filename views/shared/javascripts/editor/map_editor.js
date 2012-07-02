@@ -160,15 +160,15 @@
             }
 
             // Create the controls and toolbar.
-            var panelControls = this._buildPanelControls();
+            this.panelControls = this._buildPanelControls();
 
-            panelControls[0].events.register('activate', this, function(ev) {
+            this.panelControls[0].events.register('activate', this, function(ev) {
                 self.element.trigger('drawingmodeoff');
             });
 
-            var i, pclen = panelControls.length;
+            var i, pclen = this.panelControls.length;
             for (i=1; i<pclen; i++) {
-                var pc = panelControls[i];
+                var pc = this.panelControls[i];
                 pc.events.register('activate', this, function(ev) {
                     self.element.trigger('drawingmodeon');
                 });
@@ -189,12 +189,12 @@
 
             // Instantiate the edit toolbar.
             this.editToolbar = new OpenLayers.Control.Panel({
-                defaultControl: panelControls[0],
+                defaultControl: this.panelControls[0],
                 displayClass: 'olControlEditingToolbar'
             });
 
             // Add the controls.
-            this.editToolbar.addControls(panelControls);
+            this.editToolbar.addControls(this.panelControls);
 
             // Show the toolbar, add and activate the other controls.
             this.map.addControl(this.editToolbar);
@@ -245,6 +245,7 @@
             var wkts = [];
 
             this.modifyFeatures.unselectFeature(this._clickedFeature);
+            this.cancelSketch();
 
             // Push the wkt's onto the array.
             $.each(this._currentEditLayer.features, function(i, feature) {
@@ -264,6 +265,15 @@
 
             return wkts.join(this.options.wkt_delimiter);
 
+        },
+
+        /*
+         * Cancel the current sketch.
+         */
+        cancelSketch: function() {
+            _.each(this.panelControls.slice(1,4), function(control) {
+                control.cancel();
+            });
         },
 
         /*

@@ -47,9 +47,13 @@
             this.bubble = null;
             this.title = null;
             this.body = null;
+            this.background = null;
+            this.opacity = null;
             this.frozen = false;
             this.connector = false;
+            this.onBubble = false;
 
+            // When the cursor leaves the window, hide.
             this._window.bind('mouseleave', _.bind(function() {
                 this.hide();
             }, this));
@@ -87,15 +91,26 @@
                 body: body
             }));
 
-            // Get native dimensions of bubble.
-            this._measureBubble();
-
             // Get components.
             this.freezeLink = this.bubble.find('a.freeze-bubble');
             this.closeLink = this.bubble.find('a.close-bubble');
+            this.moreInfoDiv = this.bubble.find('div.click-for-info');
+            this.titleDiv = this.bubble.find('div.title');
+            this.bodyDiv = this.bubble.find('div.body');
 
-            // Inject.
+            // If there is no body, hide click for more info.
+            if (this.body === '') {
+                this.moreInfoDiv.hide();
+                this.bubble.addClass('no-body');
+            }
+
+            // Get native dimensions.
+            this._measureBubble();
+
+            // Inject, get styles.
             this.element.append(this.bubble);
+            this.background = this.bubble.css('background-color');
+            this.opacity = this.bubble.css('opacity');
 
             // Listen for mousemove.
             this._window.bind({
@@ -104,6 +119,17 @@
                 }, this)
             });
 
+        },
+
+        /*
+         * Force hide the bubble.
+         *
+         * @return void.
+         */
+        close: function() {
+            this._trigger('close');
+            this.frozen = false;
+            this.hide();
         },
 
         /*
@@ -121,8 +147,8 @@
             this.connector.remove();
             this.bubble = null;
 
-            // Strip move listener.
-            this._window.unbind('mousemove.bubbles');
+            // Strip move listener, trigger out.
+            this._window.unbind('mousemove.bubbles mousedown.bubbles');
 
         },
 
@@ -141,19 +167,35 @@
 
             // Strip mousemove listener.
             this._window.unbind('mousemove.bubbles');
+            this.bubble.addClass('frozen');
 
-            // Toggle link.
-            this.freezeLink.css('display', 'none');
-            this.closeLink.css('display', 'block');
+            // Get bubble opacity.
+            this.opacity = this.bubble.css('opacity');
 
-            // Increase opacity.
-            this.bubble.animate({ 'opacity': 0.8 }, 60);
-            this.triangle.animate({ 'opacity': 0.8 }, 60);
+            // Get native dimensions, position.
+            this._measureBubble();
+            this.position(this.event);
+
+            // Track cursor on bubble.
+            this.bubble.bind({
+                'mouseenter': _.bind(function() {
+                    this.onBubble = true;
+                }, this),
+                'mouseleave': _.bind(function() {
+                    this.onBubble = false;
+                }, this)
+            });
 
             // Listen for close.
+            this._window.bind('mousedown.bubbles', _.bind(function() {
+                if (!this.onBubble) {
+                    this.close();
+                }
+            }, this));
+
+            // Listen for close link click.
             this.closeLink.mousedown(_.bind(function() {
-                this.frozen = false;
-                this.hide();
+                this.close();
             }, this));
 
         },
@@ -167,12 +209,20 @@
          */
         position: function(event) {
 
+            // Store last event.
+            this.event = event;
+
             // Get container size.
             var containerWidth = this.element.outerWidth();
             var containerHeight = this.element.outerHeight();
 
-            // Get container offset.
+            // Get container offset, compensate for borders.
             var offset = this.element.offset();
+            var borderTop = parseInt(this.element.css('border-top-width'), 10);
+            var borderLeft = parseInt(this.element.css('border-left-width'), 10);
+            offset.top += borderTop;
+            offset.left += borderLeft;
+
             var containerX = event.clientX - offset.left;
             var containerY = event.clientY - offset.top +
               this._window.scrollTop();
@@ -271,8 +321,9 @@
 
             // Set connector styles.
             this.triangle.attr({
-                fill: '#000',
-                opacity: 0.7
+                fill: this.background,
+                stroke: this.background,
+                opacity: this.opacity
             });
 
         },
@@ -297,6 +348,24 @@
             // Remove clone.
             clone.remove();
 
+        },
+
+        /*
+         * Get the current title of the bubble.
+         *
+         * @return string.
+         */
+        getTitle: function() {
+            return this.title;
+        },
+
+        /*
+         * Is this bubble frozen?
+         *
+         * @return bool.
+         */
+        isFrozen: function() {
+            return this.frozen;
         }
 
     });

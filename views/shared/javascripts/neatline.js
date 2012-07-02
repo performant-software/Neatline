@@ -66,6 +66,7 @@
             this.instantiated_map =         false;
             this.instantiated_timeline =    false;
             this.instantiated_undated =     false;
+            this.frozenOut =                null;
             this._getMajorBlock();
 
             // Position divs and run viewport managers.
@@ -257,10 +258,7 @@
                 var callbacks = {
 
                     'featureadded': function() {
-
-                        // Trigger out.
                         self._trigger('mapfeatureadded');
-
                     },
 
                     'featureenter': function(event, obj) {
@@ -269,7 +267,11 @@
                         self._trigger('mapfeatureenter', {}, obj);
 
                         // Render bubble.
-                        if (self.options.isPublic && obj.record.data.show_bubble == 1) {
+                        if (self.options.isPublic &&
+                            obj.record.data.show_bubble == 1 &&
+                            (!obj.record.selected || self.items.length === 0)
+                        ) {
+                            self.freezeOut(obj.record.data);
                             self.element.bubbles('show',
                                  obj.record.data.title,
                                  obj.record.data.description
@@ -279,6 +281,7 @@
                     },
 
                     'featureleave': function(event, obj) {
+
                         var bubbles = jQuery(self.element).data('bubbles');
 
                         // Trigger out.
@@ -290,7 +293,9 @@
                             bubbles.hide();
                         }
 
+                        self.thawOut(true);
                         self._trigger('mapfeatureleave', {}, obj);
+
                     },
 
                     'featureclick': function(event, obj) {
@@ -300,8 +305,21 @@
 
                         // Freeze bubble.
                         if (self.options.isPublic) {
+                            self.useFrozen();
                             self.element.bubbles('freeze');
                         }
+
+                    },
+
+                    'featureunselect': function(event, obj) {
+
+                        // Close bubble.
+                        if (self.options.isPublic &&
+                            self.element.bubbles('getTitle') === obj.record.data.title
+                        ) {
+                            self.element.bubbles('close');
+                        }
+                        self.thawOut();
 
                     }
 
@@ -477,12 +495,68 @@
                 // When the cursor leaves the exhibit container.
                 'cursorleave': _.bind(function() {
                     this.map.neatlinemap('unhighlightHoveredRecord');
+                }, this),
+
+                // When the bubble is closed.
+                'close': _.bind(function() {
+                    this.map.neatlinemap('unselectSelectedRecord');
                 }, this)
 
             });
 
         },
 
+        /*
+         * This keeps track of the state that needs to be restored when a
+         * feature has been frozen out.
+         */
+        freezeOut: function(data) {
+            if (this.element.bubbles('isFrozen')) {
+                var _window = $(window);
+                var _this   = this;
+
+                this.frozenOut = {
+                    data  : data,
+                    event : null
+                };
+                _window.on('mousemove.frozen', function(event) {
+                    if (_.isNull(_this.frozenOut)) {
+                        _window.off('mousemove.frozen');
+                    } else {
+                        _this.frozenOut.event = event;
+                    }
+                });
+            }
+        },
+
+        /*
+         * This frees the state when the frozen state is thawed.
+         */
+        thawOut: function(force) {
+            if (! _.isNull(this.frozenOut) &&
+                (force ||
+                 this.frozenOut.data.title == this.element.bubbles('getTitle')
+            )) {
+                $(window).off('mousemove.frozen');
+                this.frozenOut = null;
+            }
+        },
+
+        /*
+         * This creates the bubble for the frozen feature.
+         */
+        useFrozen: function() {
+            if (! _.isNull(this.frozenOut)) {
+                var el = this.element;
+                el.bubbles(
+                    'show',
+                    this.frozenOut.data.title,
+                    this.frozenOut.data.description
+                );
+                el.bubbles('position', this.frozenOut.event);
+                this.thawOut(true);
+            }
+        },
 
         /*
          * =================
@@ -934,6 +1008,24 @@
          */
         endReorderItems: function() {
             return this.items.neatlineitems('endreorder');
+        },
+
+        /*
+         * Manifest new timeline defaults.
+         *
+         * - param integer height: The height of the context band, as %.
+         * - param string unit: The context band unit.
+         * - param integer isContext: 1 if the context band is active.
+         *
+         * - return void.
+         */
+        renderTimelineDefaults: function(height, unit, isContext) {
+
+            // Reinstantiate Simile.
+            this.timeline.neatlinetimeline('renderDefaults',
+                height, unit, isContext
+            );
+
         },
 
         /*

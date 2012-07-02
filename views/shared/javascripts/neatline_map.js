@@ -70,6 +70,7 @@
             this._currentEditItem =         null;
             this._currentEditLayer =        null;
             this._hoveredRecord =           null;
+            this._selectedRecord =          null;
             this._hoveredFeature =          null;
             this._clickedFeature =          null;
             this.record =                   null;
@@ -285,9 +286,6 @@
                         self.edit(self._currentEditItem, true);
                     }
 
-                    // Set starting visibility.
-                    self._setStartingVisibility();
-
                 }
 
             });
@@ -494,9 +492,10 @@
 
                     // Capture clicked feature.
                     self._clickedFeature = feature;
+                    self._selectedRecord = record;
                     record.selected = true;
 
-                    // Trigger out to the deployment code.
+                    // Trigger out to controller.
                     self._trigger('featureclick', {}, {
                         'recordid': record.recordid,
                         'slug': record.data.slug
@@ -525,6 +524,13 @@
                     if (!_.isUndefined(self.modifyFeatures)) {
                         self.modifyFeatures.unselectFeature(feature);
                     }
+
+                    // Trigger out to controller.
+                    self._trigger(
+                        'featureunselect',
+                        undefined,
+                        { feature: feature, record: record }
+                    );
 
                 }
 
@@ -630,7 +636,7 @@
             this.now = moment(date);
 
             // Walk records.
-            this._db().each(function(record) {
+            this._db().each(_.bind(function(record) {
 
                 // Get record dates.
                 var start = moment(record.data.start_visible_date);
@@ -657,7 +663,7 @@
                     if (record.wms) record.wms.setVisibility(display);
                 }
 
-            });
+            }, this));
 
         },
 
@@ -792,24 +798,30 @@
             );
 
             // Stamen watercolor
-            this.stwc = new OpenLayers.Layer.OSM(
-              'Stamen Watercolor',
-              'http://tile.stamen.com/watercolor/${z}/${x}/${y}.jpg',
-              { numZoomLevels: 19 }
+            this.stwc = new OpenLayers.Layer.Stamen(
+                'Stamen Watercolor',
+                {
+                    provider: 'watercolor',
+                    tileOptions: { crossOriginKeyword: null }
+                }
             );
 
             // Stamen toner
-            this.sttn = new OpenLayers.Layer.OSM(
-              'Stamen Toner',
-              'http://tile.stamen.com/toner/${z}/${x}/${y}.jpg',
-              { numZoomLevels: 19 }
+            this.sttn = new OpenLayers.Layer.Stamen(
+                'Stamen Toner',
+                {
+                    provider: 'toner',
+                    tileOptions: { crossOriginKeyword: null }
+                }
             );
 
             // Stamen terrain
-            this.sttr = new OpenLayers.Layer.OSM(
-              'Stamen Terrain',
-              'http://tile.stamen.com/terrain/${z}/${x}/${y}.jpg',
-              { numZoomLevels: 19 }
+            this.sttr = new OpenLayers.Layer.Stamen(
+                'Stamen Terrain',
+                {
+                    provider: 'terrain',
+                    tileOptions: { crossOriginKeyword: null }
+                }
             );
 
             return [
@@ -914,6 +926,13 @@
                 record.wms.setOpacity(record.data.select_opacity);
             }
 
+        },
+
+        /*
+         * Remove a selection on the currently selected record.
+         */
+        unselectSelectedRecord: function() {
+            this._removeVectorSelect(this._selectedRecord);
         },
 
         /*

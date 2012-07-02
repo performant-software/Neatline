@@ -143,6 +143,10 @@
     padding: 0;
 }
 
+#items-list-container ul.tabs-header {
+    margin: 1em 0 1em 21px;
+}
+
 #items-list-container tr.item-row {
     font-size: 12px;
     color: #515151;
@@ -279,7 +283,7 @@ tr.edit-form td.edit-form-container {
 }
 
 .neatline-record-edit-form div.actions {
-    margin: 0 0 5px 0;
+    margin: 10px 0 5px 0;
     padding-top: 0;
     padding-bottom: 8px;
     padding-left: 0;

@@ -76,6 +76,7 @@
             // Trackers.
             this._searchString =            '';
             this._currentFormItem =         null;
+            this._currentFormItemId =       null;
             this._itemsBoxes =              null;
             this._spaceBoxes =              null;
             this._timeBoxes =               null;
@@ -707,6 +708,11 @@
          */
         _insertNewRecordRow: function(html) {
 
+            // If there is an open form, close it.
+            if (!_.isNull(this._currentFormItem)) {
+                this._hideForm(this._currentFormItem, true);
+            }
+
             // If there is no record header row, prepend to list.
             if (this.neatlineRecordsHeader.length === 0) {
                 this.itemsList.prepend(html);
@@ -734,12 +740,14 @@
          * Expand an item form.
          */
          _showForm: function(item, scrollMap, scrollTimeline, focusItems) {
-             if (this._isEditFormLocked()) {
-                 return;
-             }
+
+            if (this._isEditFormLocked()) {
+               return;
+            }
 
             var self = this;
             var immediate = false;
+            var recordId = item.attr('recordid');
 
             // Mark current form item as contracted.
             if (!_.isNull(this._currentFormItem)) {
@@ -754,7 +762,7 @@
 
             // Fire events to focus the Neatline blocks.
             this._trigger('itemedit', {}, {
-                'recordid': item.attr('recordid'),
+                'recordid': recordId,
                 'scrollMap': scrollMap,
                 'scrollTimeline': scrollTimeline,
                 'focusItems': focusItems
@@ -769,6 +777,7 @@
             // Update trackers.
             item.data('expanded', true);
             this._currentFormItem = item;
+            this._currentFormItemId = recordId;
             this._currentRecordTitle = item.find('span.item-title-text');
 
             // Show item rows.
@@ -780,6 +789,7 @@
          * Contract an expended item form.
          */
          _hideForm: function(item, immediate) {
+
              if (this._isEditFormLocked()) {
                  return;
              }
@@ -874,10 +884,7 @@
          * Ping the form manager to save the current form data.
          */
          saveForm: function(coverage) {
-
-            // Post the data.
             this.editForm.itemform('saveItemForm', coverage);
-
          },
 
 
@@ -1025,10 +1032,11 @@
          */
         showFormByRecordId: function(id, scrollMap, scrollTimeline, focusItems) {
 
+            // If the form is already open, break.
+            if (id == this._currentFormItemId) return;
+
             // Get the item from the id hash.
             var item = this.idToItem[id];
-
-            // If the item is not already visible, show the form.
             this._showForm(item, scrollMap, scrollTimeline, focusItems);
 
         },

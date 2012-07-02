@@ -36,7 +36,7 @@
 <hr />
 
 <!-- Highlight color. -->
-<h5>Default Highlight Color</h5>
+<h5>Default Selected Color</h5>
 <input type="text" class="color-picker miniColors" name="default-highlight-color" value="<?php echo $neatline->getStyle('highlight_color'); ?>" />
 <hr />
 
@@ -46,7 +46,7 @@
 <hr />
 
 <!-- Select opacity. -->
-<h5>Default Select Opacity</h5>
+<h5>Default Selected Opacity</h5>
 <input type="text" class="integer-dragger" name="default-select-opacity" value="<?php echo $neatline->getStyle('select_opacity'); ?>" />
 <hr />
 
@@ -61,7 +61,7 @@
 <hr />
 
 <!-- Stroke width. -->
-<h5>Default Line Thickness</h5>
+<h5>Default Line Width</h5>
 <input type="text" class="integer-dragger" name="default-stroke-width" value="<?php echo $neatline->getStyle('stroke_width'); ?>" />
 <hr />
 

@@ -1090,20 +1090,21 @@ class Neatline_NeatlineDataRecordTest extends Neatline_Test_AppTestCase
 
         // Set values.
         $neatline->default_vector_color = '#ffffff';
-        $neatline->default_vector_opacity = 20;
+        $neatline->default_vector_opacity = 1;
         $neatline->default_stroke_color = '#ffffff';
-        $neatline->default_stroke_opacity = 20;
-        $neatline->default_stroke_width = 20;
-        $neatline->default_point_radius = 20;
+        $neatline->default_stroke_opacity = 1;
+        $neatline->default_stroke_width = 1;
+        $neatline->default_point_radius = 1;
         $neatline->save();
 
-        // Get and check.
+        // Re-get and check.
+        $record = $this->_recordsTable->find($record->id);
         $this->assertEquals($record->getStyle('vector_color'), '#ffffff');
-        $this->assertEquals($record->getStyle('vector_opacity'), 20);
+        $this->assertEquals($record->getStyle('vector_opacity'), 1);
         $this->assertEquals($record->getStyle('stroke_color'), '#ffffff');
-        $this->assertEquals($record->getStyle('stroke_opacity'), 20);
-        $this->assertEquals($record->getStyle('stroke_width'), 20);
-        $this->assertEquals($record->getStyle('point_radius'), 20);
+        $this->assertEquals($record->getStyle('stroke_opacity'), 1);
+        $this->assertEquals($record->getStyle('stroke_width'), 1);
+        $this->assertEquals($record->getStyle('point_radius'), 1);
 
     }
 
@@ -1924,11 +1925,11 @@ class Neatline_NeatlineDataRecordTest extends Neatline_Test_AppTestCase
         $record->save();
 
         // Ping the method for the json.
-        $json = json_decode($record->buildEditFormJson());
+        $json = $record->buildEditFormJson();
 
         $this->assertEquals(
             $json,
-            (object) array(
+            array(
                 'title' =>              self::$__testParams['title'],
                 'slug' =>               self::$__testParams['slug'],
                 'description' =>        self::$__testParams['description'],
@@ -1998,11 +1999,11 @@ class Neatline_NeatlineDataRecordTest extends Neatline_Test_AppTestCase
         $record->save();
 
         // Ping the method for the json.
-        $json = json_decode($record->buildEditFormJson());
+        $json = $record->buildEditFormJson();
 
         $this->assertEquals(
             $json,
-            (object) array(
+            array(
                 'title' =>              self::$__testParams['title'],
                 'slug' =>               self::$__testParams['slug'],
                 'description' =>        self::$__testParams['description'],

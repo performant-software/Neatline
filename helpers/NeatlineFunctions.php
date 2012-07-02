@@ -93,28 +93,11 @@ function neatline_queuePublicAssets()
 {
     queue_js('_constructInThemeNeatline', 'javascripts');
     queue_css('neatline-public');
-}
-
-/**
- * Include the static files for a public-facing exhibit.
- *
- * @return void.
- */
-function neatline_queueInThemeAssets()
-{
-
-    // Neatline runner.
-    queue_js('_constructInThemeNeatline', 'javascripts');
-
-    // Public-specific CSS additions.
-    queue_css('neatline-public');
-
     $google = 'http://maps.google.com/maps/api/js?v=3.5&sensor=false';
 
     // API calls.
     $headScript = __v()->headScript();
     $headScript->appendScript('', 'text/javascript', array('src' => $google));
-
 }
 
 /**
@@ -181,6 +164,7 @@ function neatline_queueNeatlineAssets($exhibit)
 
     // Vendor.
     queue_js('libraries/openlayers/OpenLayers.min', 'javascripts');
+    queue_js('libraries/tile.stamen', 'javascripts');
     queue_js('libraries/simile/timeline-api/timeline-api', 'javascripts');
     queue_js('libraries/taffy-min', 'javascripts');
     queue_js('libraries/underscore-min', 'javascripts');
@@ -536,13 +520,18 @@ function total_neatlines()
  *
  * @param string HTML for the text of the link.
  * @param array Attributes for the link tag. (optional)
- * @param string The action for the link. Default is 'show'. 
+ * @param string The action for the link. Default is 'show'.
  * @param NeatlineExhibit|null
  * @return string The HTML link.
  */
-function link_to_neatline($text = null, $props = array(), $action = 'show', $neatline = null)
+function link_to_neatline(
+    $text = null,
+    $props = array(),
+    $action = 'show',
+    $neatline = null,
+    $public = true)
 {
-    
+
     $neatline = $neatline ? $neatline : get_current_neatline();
 
     $text = $text ? $text : strip_formatting(neatline('name', $neatline));
@@ -554,7 +543,7 @@ function link_to_neatline($text = null, $props = array(), $action = 'show', $nea
     }
 
     $route = 'neatline-exhibits/'.$action.'/'.$slug;
-    $uri = uri($route);
+    $uri = $public? public_uri($route) : uri($route);
     $props['href'] = $uri;
 
     $html = '<a ' . _tag_attributes($props) . '>' . $text . '</a>';

@@ -46,9 +46,8 @@
     <title><?php echo neatline('name'); ?></title>
 
     <?php
-    neatline_queueNeatlineAssets(get_current_neatline());
     neatline_queueFullscreenAssets();
-    neatline_queueExhibitCss(get_current_neatline());
+    neatline_queueNeatlineAssets(get_current_neatline());
     ?>
 
     <!-- Stylesheets -->

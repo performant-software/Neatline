@@ -76,6 +76,10 @@ class NeatlineDataRecord extends Omeka_record
     public $items_active;
     public $display_order;
 
+    // For caching.
+    protected $_parent;
+    protected $_exhibit;
+
     /**
      * Default attributes.
      */
@@ -138,6 +142,9 @@ class NeatlineDataRecord extends Omeka_record
         $this->time_active = 0;
         $this->items_active = 0;
 
+        $this->_parent = null;
+        $this->_exhibit = null;
+
     }
 
     /**
@@ -166,7 +173,15 @@ class NeatlineDataRecord extends Omeka_record
      */
     public function getExhibit()
     {
-        return $this->getTable('NeatlineExhibit')->find($this->exhibit_id);
+
+        if (is_null($this->_exhibit)) {
+            $this->_exhibit = $this
+                ->getTable('NeatlineExhibit')
+                ->find($this->exhibit_id);
+        }
+
+        return $this->_exhibit;
+
     }
 
     /**
@@ -177,15 +192,13 @@ class NeatlineDataRecord extends Omeka_record
     public function getParentRecord()
     {
 
-        $record = null;
-
-        // If record id is defined, get item.
-        if (!is_null($this->parent_record_id)) {
-            $record = $this->getTable('NeatlineDataRecord')
+        if (!is_null($this->parent_record_id) && is_null($this->_parent)) {
+            $this->_parent = $this
+                ->getTable('NeatlineDataRecord')
                 ->find($this->parent_record_id);
         }
 
-        return $record;
+        return $this->_parent;
 
     }
 
@@ -230,8 +243,7 @@ class NeatlineDataRecord extends Omeka_record
         $data['show_bubble'] =          $this->show_bubble;
         $data['records'] =              $records;
 
-        // JSON-ify the array.
-        return json_encode($data);
+        return $data;
 
     }
 
@@ -308,8 +320,7 @@ class NeatlineDataRecord extends Omeka_record
 
         }
 
-        // JSON-ify the array.
-        return json_encode($data);
+        return $data;
 
     }
 
@@ -616,9 +627,6 @@ class NeatlineDataRecord extends Omeka_record
     public function getStyle($style)
     {
 
-        // Get the exhibit.
-        $exhibit = $this->getExhibit();
-
         // If there is a row value.
         if (!is_null($this[$style])) {
             return $this[$style];
@@ -630,13 +638,19 @@ class NeatlineDataRecord extends Omeka_record
         }
 
         // If there is an exhibit default
-        else if (!is_null($exhibit['default_' . $style])) {
-            return $exhibit['default_' . $style];
-        }
-
-        // Fall back to system default.
         else {
-            return get_option($style);
+
+            $exhibit = $this->getExhibit();
+            // var_dump($exhibit->default_vector_color);
+            if (!is_null($exhibit['default_' . $style])) {
+                return $exhibit['default_' . $style];
+            }
+
+            // Fall back to system default.
+            else {
+                return get_option($style);
+            }
+
         }
 
     }
@@ -692,7 +706,7 @@ class NeatlineDataRecord extends Omeka_record
             // Try to get a description.
             $description = $this->getDescription();
             if ($description !== '') {
-                return $description;
+                return substr($description, 0, 200);
             }
 
             else {
@@ -731,6 +745,14 @@ class NeatlineDataRecord extends Omeka_record
 
         // Build item metadata.
         if ($this->use_dc_metadata == 1) {
+            /*
+             * This is the biggest performance killer when calling buildMapDataArray 
+             * below. If this becomes too big of an issue, we can inline the 
+             * partial and use more targetted SQL queries, instead of loading 
+             * the whole item and pulling the data we want out. Otherwise, 
+             * we're stuck.
+             * -- ERR
+             */
             return __v()->partial('neatline/_dc_metadata.php', array(
                 'item' => $this->getItem()
             ));
@@ -1079,6 +1101,101 @@ class NeatlineDataRecord extends Omeka_record
             $db->rollback();
             throw $e;
         }
+    }
+
+    /**
+     * This sets and caches the parent record.
+     *
+     * @param array $index An index of records.
+     * @param Omeka_record $exhibit The parent exhibit.
+     *
+     * @return void
+     * @author Eric Rochester <erochest@virginia.edu>
+     **/
+    protected function _setParent($index, $exhibit)
+    {
+
+        // Set parent, recurse up the inheritance chain.
+        if (!is_null($this->parent_record_id)
+            && array_key_exists($this->parent_record_id, $index)
+        ) {
+            $parent = $index[$this->parent_record_id];
+            $this->_parent = $parent;
+            $parent->_setParent($index, $exhibit);
+        }
+
+        // Set parent exhibit.
+        $this->_exhibit = $exhibit;
+
+    }
+
+    /**
+     * This creates the data array for the map data.
+     *
+     * @param array $index This is the index of NeatlineDataRecord objects for 
+     * caching. Optional.
+     * @param array $wmss This is an index mapping item IDs to rows from the 
+     * NeatlineMapsService WMS data.
+     * @param Omeka_Record $exhibit The exhibit this record belongs to.
+     *
+     * @return array
+     * @author Me
+     **/
+    public function buildMapDataArray(
+        $index=array(), $wmss=array(), $exhibit=null
+    ) {
+        $data = null;
+
+        if ($this->space_active != 1) {
+            return $data;
+        }
+
+        $this->_setParent($index, $exhibit);
+
+        $data = array(
+            'id'                  => $this->id,
+            'item_id'             => $this->item_id,
+            'title'               => $this->getTitle(),
+            'description'         => $this->getDescription(),
+            'slug'                => $this->getSlug(),
+            'vector_color'        => $this->getStyle('vector_color'),
+            'stroke_color'        => $this->getStyle('stroke_color'),
+            'highlight_color'     => $this->getStyle('highlight_color'),
+            'vector_opacity'      => $this->getStyle('vector_opacity'),
+            'select_opacity'      => $this->getStyle('select_opacity'),
+            'stroke_opacity'      => $this->getStyle('stroke_opacity'),
+            'graphic_opacity'     => $this->getStyle('graphic_opacity'),
+            'stroke_width'        => $this->getStyle('stroke_width'),
+            'point_radius'        => $this->getStyle('point_radius'),
+            'point_image'         => $this->getNotEmpty('point_image'),
+            'center'              => $this->map_bounds,
+            'zoom'                => $this->map_zoom,
+            'wkt'                 => $this->getGeocoverage(),
+            'start_visible_date'  => $this->getStartVisibleDate(),
+            'end_visible_date'    => $this->getEndVisibleDate(),
+            'show_bubble'         => $this->show_bubble,
+            'wmsAddress'          => null,
+            'layers'              => null,
+            '_native_styles'      => array(
+                'vector_color'    => $this->vector_color,
+                'vector_opacity'  => $this->vector_opacity,
+                'stroke_color'    => $this->stroke_color,
+                'stroke_opacity'  => $this->stroke_opacity,
+                'stroke_width'    => $this->stroke_width,
+                'graphic_opacity' => $this->graphic_opacity,
+                'point_radius'    => $this->point_radius,
+            )
+        );
+
+        // If the record has a parent item and Neatline Maps
+        // is present.
+        if (!is_null($this->item_id) && array_key_exists($this->item_id, $wmss)) {
+            $wms = $wmss[$this->item_id];
+            $data['wmsAddress'] = $wms['address'];
+            $data['layers']     = $wms['layers'];
+        }
+
+        return $data;
     }
 
 }

@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
 
 /**
- * The exhibit show view.
+ * Exhibit header for show views.
  *
  * PHP version 5
  *
@@ -25,23 +25,9 @@
  */
 ?>
 
-<?php
-    neatline_queuePublicAssets();
-    neatline_queueNeatlineAssets(get_current_neatline());
-?>
-
-<?php
-$title = neatline('name');
-head(array('title' => $title, 'bodyclass' => 'neatline neatline-'.neatline('id'))); ?>
-
-<!-- The core exhibit header. -->
-<?php echo $this->partial('index/_neatline_header.php'); ?>
-
-<!-- The core Neatline partial. -->
-<?php echo $this->partial('neatline/_neatline.php', array(
-    'exhibit' => get_current_neatline()
-)); ?>
-
-<div class="exhibit-description"><?php echo neatline('description'); ?></div>
-
-<?php foot(); ?>
+<div id="neatline-header">
+<h1><?php echo neatline('name'); ?></h1>
+<a class="exhibit-fullscreen" href="<?php echo public_uri('neatline-exhibits/show/' . neatline('slug')); ?>/fullscreen">
+<span class="icon"></span> <span class="text">View Fullscreen</span>
+</a>
+</div>
