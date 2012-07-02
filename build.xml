@@ -330,7 +330,7 @@
     <mkdir dir="${staging.dir}" />
 
     <copy todir="${staging.dir}">
-      <fileset dir="${basedir}/" excludes="**/build/**" />
+      <fileset dir="${basedir}/" excludes="**/build/**,build.xml,tmp/**,spec/**,tests/**" />
     </copy>
   </target>
 
