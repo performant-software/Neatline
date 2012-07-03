@@ -36,7 +36,7 @@
 }
 
 #configure-map hr {
-    margin: 5px 0;
+    margin: 14px 0 2px;
 }
 
 #configure-map select {
@@ -62,8 +62,4 @@ table.map-styles-defaults {
 
 .map-styles-defaults div.input {
     width: 100px;
-}
-
-.configure-maps hr {
-    margin:14px 0 2px;
 }
