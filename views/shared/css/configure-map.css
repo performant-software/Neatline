@@ -25,7 +25,7 @@
 
 #configure-map {
     padding-top: 1.4em;
-    width: 156px;
+    width: 380px;
 }
 
 #configure-map h5 {
@@ -41,4 +41,29 @@
 
 #configure-map select {
     width: 150px;
+}
+
+table.map-styles-defaults {
+    width: 300px;
+}
+
+.map-styles-defaults td {
+    padding: 0;
+}
+
+.map-styles-defaults label {
+    width: 140px;
+    font-weight: normal;
+}
+
+.map-styles-defaults div.inline-inputs {
+    margin: 0.3em 0 0 0;
+}
+
+.map-styles-defaults div.input {
+    width: 100px;
+}
+
+.configure-maps hr {
+    margin:14px 0 2px;
 }

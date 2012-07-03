@@ -25,50 +25,86 @@
  */
 ?>
 
-<!-- Vector color. -->
-<h5>Default Shape Color</h5>
-<input type="text" class="color-picker miniColors" name="default-vector-color" value="<?php echo $neatline->getStyle('vector_color'); ?>" />
-<hr />
-
-<!-- Stroke color. -->
-<h5>Default Line Color</h5>
-<input type="text" class="color-picker miniColors" name="default-stroke-color" value="<?php echo $neatline->getStyle('stroke_color'); ?>" />
-<hr />
-
-<!-- Highlight color. -->
-<h5>Default Selected Color</h5>
-<input type="text" class="color-picker miniColors" name="default-highlight-color" value="<?php echo $neatline->getStyle('highlight_color'); ?>" />
-<hr />
-
-<!-- Vector opacity. -->
-<h5>Default Shape Opacity</h5>
-<input type="text" class="integer-dragger" name="default-vector-opacity" value="<?php echo $neatline->getStyle('vector_opacity'); ?>" />
-<hr />
-
-<!-- Select opacity. -->
-<h5>Default Selected Opacity</h5>
-<input type="text" class="integer-dragger" name="default-select-opacity" value="<?php echo $neatline->getStyle('select_opacity'); ?>" />
-<hr />
-
-<!-- Stroke opacity. -->
-<h5>Default Line Opacity</h5>
-<input type="text" class="integer-dragger" name="default-stroke-opacity" value="<?php echo $neatline->getStyle('stroke_opacity'); ?>" />
-<hr />
-
-<!-- Graphic opacity. -->
-<h5>Default Graphic Opacity</h5>
-<input type="text" class="integer-dragger" name="default-graphic-opacity" value="<?php echo $neatline->getStyle('graphic_opacity'); ?>" />
-<hr />
-
-<!-- Stroke width. -->
-<h5>Default Line Width</h5>
-<input type="text" class="integer-dragger" name="default-stroke-width" value="<?php echo $neatline->getStyle('stroke_width'); ?>" />
-<hr />
-
-<!-- Point radius. -->
-<h5>Default Point Radius</h5>
-<input type="text" class="integer-dragger" name="default-point-radius" value="<?php echo $neatline->getStyle('point_radius'); ?>" />
-<hr />
+<table class="map-styles map-styles-defaults form-stacked">
+    <tr>
+        <td>
+            <label>Shape Color</label>
+            <div class="input">
+                <div class="inline-inputs">
+                    <input type="text" class="color-picker miniColors" name="default-vector-color" value="<?php echo $neatline->getStyle('vector_color'); ?>" />
+                </div>
+            </div>
+        </td>
+        <td>
+            <label>Line Color</label>
+            <div class="input">
+                <div class="inline-inputs">
+                    <input type="text" class="color-picker miniColors" name="default-stroke-color"  value="<?php echo $neatline->getStyle('stroke_color'); ?>" />
+                </div>
+            </div>
+        </td>
+        <td>
+            <label>Selected Color</label>
+            <div class="input">
+                <div class="inline-inputs">
+                    <input type="text" class="color-picker miniColors" name="default-highlight-color" value="<?php echo $neatline->getStyle('highlight_color'); ?>" />
+                </div>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label>Shape Opacity</label>
+            <div class="input">
+                <div class="inline-inputs">
+                    <input type="text" class="integer-dragger" name="default-vector-opacity" value="<?php echo $neatline->getStyle('vector_opacity'); ?>" />
+                </div>
+            </div>
+        </td>
+        <td>
+            <label>Selected Opacity</label>
+            <div class="input">
+                <div class="inline-inputs">
+                    <input type="text" class="integer-dragger" name="default-select-opacity" value="<?php echo $neatline->getStyle('select_opacity'); ?>" />
+                </div>
+            </div>
+        </td>
+        <td>
+            <label>Line Opacity</label>
+            <div class="input">
+                <div class="inline-inputs">
+                    <input type="text" class="integer-dragger" name="default-stroke-opacity" value="<?php echo $neatline->getStyle('stroke_opacity'); ?>" />
+                </div>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label>Graphic Opacity</label>
+            <div class="input">
+                <div class="inline-inputs">
+                    <input type="text" class="integer-dragger" name="default-graphic-opacity" value="<?php echo $neatline->getStyle('graphic_opacity'); ?>" />
+                </div>
+            </div>
+        </td>
+        <td>
+            <label>Line Width</label>
+            <div class="input">
+                <div class="inline-inputs">
+                    <input type="text" class="integer-dragger" name="default-stroke-width" value="<?php echo $neatline->getStyle('stroke_width'); ?>" />
+                </div>
+            </div>
+        </td>
+        <td>
+            <label>Point Radius</label>
+            <div class="input">
+                <div class="inline-inputs">
+                    <input type="text" class="integer-dragger" name="default-point-radius" value="<?php echo $neatline->getStyle('point_radius'); ?>" />
+                </div>
+            </div>
+        </td>
+    </tr>
+</table>
 
 <!-- Base layer picker. -->
 <h5>Default Base Layer</h5>
