@@ -738,8 +738,8 @@
         _applyData: function() {
 
             // Get use-DC as boolean.
-            var useDc = Boolean(this._data.use_dc_metadata);
-            var showBubble = Boolean(this._data.show_bubble);
+            var useDc = Boolean(parseInt(this._data.use_dc_metadata, 10));
+            var showBubble = Boolean(parseInt(this._data.show_bubble, 10));
 
             // Update title.
             this.title.val(this._data.title);

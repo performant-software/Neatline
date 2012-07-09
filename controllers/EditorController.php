@@ -178,8 +178,8 @@ class Neatline_EditorController extends Omeka_Controller_Action
         $parentRecordId =           (int) $_post['parent_record_id'];
         $title =                    $_post['title'];
         $description =              $_post['description'];
-        $useDcMetadata =            $_post['use_dc_metadata'];
-        $showBubble =               $_post['show_bubble'];
+        $useDcMetadata =            (int) $_post['use_dc_metadata'];
+        $showBubble =               (int) $_post['show_bubble'];
         $startDate =                $_post['start_date'];
         $endDate =                  $_post['end_date'];
         $startVisibleDate =         $_post['start_visible_date'];

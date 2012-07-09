@@ -564,7 +564,7 @@ class NeatlineDataRecord extends Omeka_record
 
         // If there is a parent item.
         if (!is_null($this->item_id)) {
-            $this->use_dc_metadata = $useDcMetadata;
+            $this->use_dc_metadata = (int) $useDcMetadata;
         }
 
     }

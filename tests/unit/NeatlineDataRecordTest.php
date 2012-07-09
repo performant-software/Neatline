@@ -968,6 +968,27 @@ class Neatline_NeatlineDataRecordTest extends Neatline_Test_AppTestCase
     }
 
     /**
+     * setUseDcMetadata should cast to integer.
+     *
+     * @return void.
+     */
+    public function testSetUseDcMetadataTypecasting()
+    {
+
+        // Create a record.
+        $exhibit = $this->_createNeatline();
+        $item = $this->_createItem();
+        $record = new NeatlineDataRecord($item, $exhibit);
+
+        // Set.
+        $record->setUseDcMetadata('1');
+        $this->assertEquals($record->use_dc_metadata, 1);
+        $record->setUseDcMetadata('0');
+        $this->assertEquals($record->use_dc_metadata, 0);
+
+    }
+
+    /**
      * getNotEmpty() should return '' when the attribute is null.
      *
      * @return void.

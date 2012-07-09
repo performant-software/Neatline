@@ -27,50 +27,86 @@
         <a href="" id="configure-map-button" class="dropdown-toggle">Map Settings</a>
         <div id="configure-map" class="dropdown-content">
             
-<!-- Vector color. -->
-<h5>Default Shape Color</h5>
-<input type="text" class="color-picker miniColors" name="default-vector-color" value="#005aff" />
-<hr />
-
-<!-- Stroke color. -->
-<h5>Default Line Color</h5>
-<input type="text" class="color-picker miniColors" name="default-stroke-color" value="#005aff" />
-<hr />
-
-<!-- Highlight color. -->
-<h5>Default Selected Color</h5>
-<input type="text" class="color-picker miniColors" name="default-highlight-color" value="#ff9600" />
-<hr />
-
-<!-- Vector opacity. -->
-<h5>Default Shape Opacity</h5>
-<input type="text" class="integer-dragger" name="default-vector-opacity" value="20" />
-<hr />
-
-<!-- Select opacity. -->
-<h5>Default Selected Opacity</h5>
-<input type="text" class="integer-dragger" name="default-select-opacity" value="40" />
-<hr />
-
-<!-- Stroke opacity. -->
-<h5>Default Line Opacity</h5>
-<input type="text" class="integer-dragger" name="default-stroke-opacity" value="70" />
-<hr />
-
-<!-- Graphic opacity. -->
-<h5>Default Graphic Opacity</h5>
-<input type="text" class="integer-dragger" name="default-graphic-opacity" value="80" />
-<hr />
-
-<!-- Stroke width. -->
-<h5>Default Line Width</h5>
-<input type="text" class="integer-dragger" name="default-stroke-width" value="4" />
-<hr />
-
-<!-- Point radius. -->
-<h5>Default Point Radius</h5>
-<input type="text" class="integer-dragger" name="default-point-radius" value="6" />
-<hr />
+<table class="map-styles map-styles-defaults form-stacked">
+    <tr>
+        <td>
+            <label>Shape Color</label>
+            <div class="input">
+                <div class="inline-inputs">
+                    <input type="text" class="color-picker miniColors" name="default-vector-color" value="#005aff" />
+                </div>
+            </div>
+        </td>
+        <td>
+            <label>Line Color</label>
+            <div class="input">
+                <div class="inline-inputs">
+                    <input type="text" class="color-picker miniColors" name="default-stroke-color"  value="#005aff" />
+                </div>
+            </div>
+        </td>
+        <td>
+            <label>Selected Color</label>
+            <div class="input">
+                <div class="inline-inputs">
+                    <input type="text" class="color-picker miniColors" name="default-highlight-color" value="#ff9600" />
+                </div>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label>Shape Opacity</label>
+            <div class="input">
+                <div class="inline-inputs">
+                    <input type="text" class="integer-dragger" name="default-vector-opacity" value="20" />
+                </div>
+            </div>
+        </td>
+        <td>
+            <label>Selected Opacity</label>
+            <div class="input">
+                <div class="inline-inputs">
+                    <input type="text" class="integer-dragger" name="default-select-opacity" value="40" />
+                </div>
+            </div>
+        </td>
+        <td>
+            <label>Line Opacity</label>
+            <div class="input">
+                <div class="inline-inputs">
+                    <input type="text" class="integer-dragger" name="default-stroke-opacity" value="70" />
+                </div>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label>Graphic Opacity</label>
+            <div class="input">
+                <div class="inline-inputs">
+                    <input type="text" class="integer-dragger" name="default-graphic-opacity" value="80" />
+                </div>
+            </div>
+        </td>
+        <td>
+            <label>Line Width</label>
+            <div class="input">
+                <div class="inline-inputs">
+                    <input type="text" class="integer-dragger" name="default-stroke-width" value="4" />
+                </div>
+            </div>
+        </td>
+        <td>
+            <label>Point Radius</label>
+            <div class="input">
+                <div class="inline-inputs">
+                    <input type="text" class="integer-dragger" name="default-point-radius" value="6" />
+                </div>
+            </div>
+        </td>
+    </tr>
+</table>
 
 <!-- Base layer picker. -->
 <h5>Default Base Layer</h5>
@@ -459,7 +495,7 @@ to store the current viewport settings as the public defaults.</p>
 <!-- JSON globals. -->
 <script type="text/javascript">
 
-        Neatline = {"record":{"added":"2012-07-02 08:11:39","modified":"2012-07-02 08:11:39","name":"Test Exhibit","description":"Test description.","slug":"test-exhibit","public":1,"query":null,"creator_id":1,"image_id":null,"top_element":"map","items_h_pos":"right","items_v_pos":"top","items_height":"full","h_percent":50,"v_percent":60,"is_map":1,"is_timeline":1,"is_items":1,"default_map_bounds":null,"default_map_zoom":null,"default_focus_date":null,"default_timeline_zoom":null,"is_context_band":1,"default_context_band_unit":null,"default_context_band_height":null,"default_vector_color":null,"default_stroke_color":null,"default_highlight_color":null,"default_vector_opacity":null,"default_select_opacity":null,"default_stroke_opacity":null,"default_graphic_opacity":null,"default_stroke_width":null,"default_point_radius":null,"default_base_layer":2,"id":1},"dataSources":{"timeline":"http:\/\/\/Users\/davidmcclure\/pear\/bin\/neatline-exhibits\/simile\/1","map":"http:\/\/\/Users\/davidmcclure\/pear\/bin\/neatline-exhibits\/openlayers\/1","undated":"http:\/\/\/Users\/davidmcclure\/pear\/bin\/neatline-exhibits\/udi\/1"},"baseLayer":{"name":"Google Physical","id":2},"timelineZoom":15,"highlightColor":"#ff9600","proportions":{"horizontal":50,"vertical":60},"timeline":{"isContextBand":1,"contextBandUnit":"DECADE","contextBandHeight":"35"}}
+        Neatline = {"record":{"added":"2012-07-09 11:45:44","modified":"2012-07-09 11:45:44","name":"Test Exhibit","description":"Test description.","slug":"test-exhibit","public":1,"query":null,"creator_id":1,"image_id":null,"top_element":"map","items_h_pos":"right","items_v_pos":"top","items_height":"full","h_percent":50,"v_percent":60,"is_map":1,"is_timeline":1,"is_items":1,"default_map_bounds":null,"default_map_zoom":null,"default_focus_date":null,"default_timeline_zoom":null,"is_context_band":1,"default_context_band_unit":null,"default_context_band_height":null,"default_vector_color":null,"default_stroke_color":null,"default_highlight_color":null,"default_vector_opacity":null,"default_select_opacity":null,"default_stroke_opacity":null,"default_graphic_opacity":null,"default_stroke_width":null,"default_point_radius":null,"default_base_layer":2,"id":1},"dataSources":{"timeline":"http:\/\/\/Users\/davidmcclure\/pear\/bin\/neatline-exhibits\/simile\/1","map":"http:\/\/\/Users\/davidmcclure\/pear\/bin\/neatline-exhibits\/openlayers\/1","undated":"http:\/\/\/Users\/davidmcclure\/pear\/bin\/neatline-exhibits\/udi\/1"},"baseLayer":{"name":"Google Physical","id":2},"timelineZoom":15,"highlightColor":"#ff9600","proportions":{"horizontal":50,"vertical":60},"timeline":{"isContextBand":1,"contextBandUnit":"DECADE","contextBandHeight":"35"}}
 </script>
 
 <div id="drag-tip" class="twipsy fade right in">
