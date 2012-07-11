@@ -297,6 +297,13 @@
             return this.map.getZoom();
         },
 
+        /*
+         * Get the current base layer for save.
+         */
+        getBaseLayerForSave: function() {
+
+        },
+
 
         /*
          * ======================

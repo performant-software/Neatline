@@ -798,8 +798,11 @@
 
             // Populate the rest of the list.
             _.each(this._records, _.bind(function(val, key) {
-                var option = $('<option />').val(key).text(val);
-                this.parentRecord.append(option);
+                if (!_.isNull(val)) {
+                    val = val.replace(/<\/?[br|li|ol|ul]+\/?>/igm,'');
+                    var option = $('<option />').val(key).text(val);
+                    this.parentRecord.append(option);
+                }
             }, this));
 
             // Set the value.
