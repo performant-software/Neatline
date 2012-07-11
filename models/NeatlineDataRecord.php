@@ -687,6 +687,30 @@ class NeatlineDataRecord extends Omeka_record
     }
 
     /**
+     * For dropdown selects, strip HTML and truncate.
+     *
+     * @param integer length The max length.
+     *
+     * @return string $title The title.
+     */
+    public function getTitleForSelect($length=60)
+    {
+
+        // Get title, strip tags, truncate.
+        $title = strip_tags($this->getTitle());
+        $fixed = substr($title, 0, $length);
+
+        // If the original title was longer than the max
+        // length, add an elipsis to the end.
+        if (strlen($title) > $length) {
+            $fixed .= ' ...';
+        }
+
+        return $fixed;
+
+    }
+
+    /**
      * If there is a title return it; if not, try to return
      * the first portion of the description.
      *

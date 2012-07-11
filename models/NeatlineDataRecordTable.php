@@ -345,7 +345,7 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
             if (!is_null($selfRecord)) {
                 foreach ($records as $record) {
                     if ($record->id != $selfRecord->id) {
-                        $idToTitle[$record->id] = $record->title;
+                        $idToTitle[$record->id] = $record->getTitleForSelect();
                     }
                 }
             }
@@ -353,7 +353,7 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
             // If there is no self record.
             else {
                 foreach ($records as $record) {
-                    $idToTitle[$record->id] = $record->title;
+                    $idToTitle[$record->id] = $record->getTitleForSelect();
                 }
             }
 
