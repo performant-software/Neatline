@@ -375,9 +375,10 @@ class Neatline_EditorController extends Omeka_Controller_Action
         // Get parameters from the ajax request.
         $exhibitId =                $_post['exhibit_id'];
         $mapCenter =                $_post['map_center'];
-        $mapZoom =                  $_post['map_zoom'];
+        $mapZoom =                  (int) $_post['map_zoom'];
+        $baseLayer =                $_post['map_base_layer'];
         $timelineCenter =           $_post['timeline_center'];
-        $timelineZoom =             $_post['timeline_zoom'];
+        $timelineZoom =             (int) $_post['timeline_zoom'];
 
         // Fetch the Neatline exhibit record and item record.
         $neatline = $this->_neatlinesTable->find($exhibitId);
@@ -386,6 +387,7 @@ class Neatline_EditorController extends Omeka_Controller_Action
         $neatline->saveViewportPositions(
             $mapCenter,
             $mapZoom,
+            $baseLayer,
             $timelineCenter,
             $timelineZoom
         );

@@ -156,7 +156,12 @@
         /*
          * Post a new positioning defaults.
          */
-        savePositions: function(mapExtent, mapZoom, timelineCenter, timelineZoom) {
+        savePositions: function(
+            mapExtent,
+            mapZoom,
+            baseLayer,
+            timelineCenter,
+            timelineZoom) {
 
             var self = this;
 
@@ -170,6 +175,7 @@
                     exhibit_id: Neatline.record.id,
                     map_center: mapExtent,
                     map_zoom: mapZoom,
+                    map_base_layer: baseLayer,
                     timeline_center: timelineCenter,
                     timeline_zoom: timelineZoom
                 },

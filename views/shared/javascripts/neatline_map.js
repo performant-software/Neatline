@@ -1105,6 +1105,7 @@
          * was successful.
          */
         setViewport: function(centerBounds, zoom) {
+
             var success = false;
 
             if (!_.isNull(centerBounds)) {
@@ -1129,6 +1130,7 @@
             }
 
             return success;
+
         }
 
     });

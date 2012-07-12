@@ -99,4 +99,23 @@ class Neatline_NeatlineBaseLayerTableTest extends Neatline_Test_AppTestCase
 
     }
 
+    /**
+     * getLayerByName() should retrieve the layer record with the passed
+     * name.
+     *
+     * @return void.
+     */
+    public function testGetLayerByName()
+    {
+
+        // Create a base layer.
+        $layer = new NeatlineBaseLayer();
+        $layer->name = 'Test Layer';
+        $layer->save();
+
+        $retrievedLayer = $this->_layersTable->getLayerByName('Test Layer');
+        $this->assertEquals($retrievedLayer->id, $layer->id);
+
+    }
+
 }

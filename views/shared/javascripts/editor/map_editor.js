@@ -286,9 +286,9 @@
         /*
          * Get the current center of the viewport.
          */
-         getCenterForSave: function() {
-             return this.map.getCenter().toShortString();
-         },
+        getCenterForSave: function() {
+            return this.map.getCenter().toShortString();
+        },
 
         /*
          * Get the current zoom of the viewport.
@@ -385,10 +385,6 @@
                     );
 
                     // Rerender the layer to manifest the change.
-                    // record.layer.redraw();
-
-                    // redraw() (above) is _not_ working. This is a hack to
-                    // trigger a rerender on the features.
                     $.each(record.layer.features, function(i, feature) {
                         self.highlightControl.unhighlight(feature);
                     });

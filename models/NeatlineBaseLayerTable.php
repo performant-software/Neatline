@@ -49,4 +49,22 @@ class NeatlineBaseLayerTable extends Omeka_Db_Table
 
     }
 
+    /**
+     * Get layer by name.
+     *
+     * @param string name The name.
+     *
+     * @return void.
+     */
+    public function getLayerByName($name)
+    {
+
+        $record = $this->fetchObject(
+            $this->getSelect()->where('name = ?', $name)
+        );
+
+        return $record ? $record : false;
+
+    }
+
 }

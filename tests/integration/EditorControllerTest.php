@@ -2148,12 +2148,18 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
         // Create an exhibit.
         $exhibit = $this->_createNeatline();
 
+        // Create a base layer.
+        $layer = new NeatlineBaseLayer();
+        $layer->name = 'Test Layer';
+        $layer->save();
+
         // Form the POST.
         $this->request->setMethod('POST')
             ->setPost(array(
                 'exhibit_id' => $exhibit->id,
                 'map_center' => 'center',
                 'map_zoom' => 1,
+                'map_base_layer' => 'Test Layer',
                 'timeline_center' => 'center',
                 'timeline_zoom' => 10
             )
@@ -2166,6 +2172,7 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
         // Check the attributes.
         $this->assertEquals($exhibit->default_map_bounds, 'center');
         $this->assertEquals($exhibit->default_map_zoom, 1);
+        $this->assertEquals($exhibit->default_base_layer, $layer->id);
         $this->assertEquals($exhibit->default_focus_date, 'center');
         $this->assertEquals($exhibit->default_timeline_zoom, 10);
 

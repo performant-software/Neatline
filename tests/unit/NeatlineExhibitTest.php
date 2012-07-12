@@ -179,18 +179,24 @@ class Neatline_NeatlineExhibitTest extends Neatline_Test_AppTestCase
     public function testSaveViewportPositions()
     {
 
-        // Create an exhibit and map.
+        // Create an exhibit.
         $neatline = $this->_createNeatline();
 
+        // Create a base layer.
+        $layer = new NeatlineBaseLayer();
+        $layer->name = 'Test Layer';
+        $layer->save();
+
         // Save with int zoom and check.
-        $neatline->saveViewportPositions('center', 5, 'date', 10);
+        $neatline->saveViewportPositions('center', 5, 'Test Layer', 'date', 10);
         $this->assertEquals($neatline->default_map_bounds, 'center');
         $this->assertEquals($neatline->default_map_zoom, 5);
+        $this->assertEquals($neatline->default_base_layer, $layer->id);
         $this->assertEquals($neatline->default_focus_date, 'date');
         $this->assertEquals($neatline->default_timeline_zoom, 10);
 
         // Save with str zoom and check.
-        $neatline->saveViewportPositions('center', '5', 'date', 10);
+        $neatline->saveViewportPositions('center', '5', 'Test Layer', 'date', 10);
         $this->assertEquals($neatline->default_map_zoom, 5);
 
     }
@@ -458,6 +464,48 @@ class Neatline_NeatlineExhibitTest extends Neatline_Test_AppTestCase
         $this->assertNull($exhibit->default_stroke_opacity);
         $this->assertNull($exhibit->default_stroke_width);
         $this->assertNull($exhibit->default_point_radius);
+
+    }
+
+    /**
+     * setBaseLayerByName() should set the default_base_layer column with the
+     * id of the base layer record with the passed name when there is a layer
+     * with the passed name.
+     *
+     * @return void.
+     */
+    public function testSetBaseLayerByNameWithLayer()
+    {
+
+        // Create a record.
+        $exhibit = $this->_createNeatline();
+
+        // Create a base layer.
+        $layer = new NeatlineBaseLayer();
+        $layer->name = 'Test Layer';
+        $layer->save();
+
+        $exhibit->setBaseLayerByName('Test Layer');
+        $this->assertEquals($exhibit->default_base_layer, $layer->id);
+
+    }
+
+    /**
+     * When there is no layer with the passed name, setBaseLayerByName() should
+     * not change default_base_layer.
+     *
+     * @return void.
+     */
+    public function testSetBaseLayerByNameWithNoLayer()
+    {
+
+        // Create a record.
+        $exhibit = $this->_createNeatline();
+
+        // Capture staring layer, try to se non-existent.
+        $originalBaseLayer = $exhibit->default_base_layer;
+        $exhibit->setBaseLayerByName('Test Layer');
+        $this->assertEquals($originalBaseLayer, $exhibit->default_base_layer);
 
     }
 
