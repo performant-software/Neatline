@@ -707,7 +707,6 @@ div.columns span.header:hover, div.columns span.header.active {
 }
 
 table#items-table {
-    table-layout: fixed;
     overflow: hidden;
     white-space: nowrap;
     margin-bottom: 0;
