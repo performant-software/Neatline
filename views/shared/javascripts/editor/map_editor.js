@@ -301,7 +301,7 @@
          * Get the current base layer for save.
          */
         getBaseLayerForSave: function() {
-
+            return this.map.baseLayer.name;
         },
 
 

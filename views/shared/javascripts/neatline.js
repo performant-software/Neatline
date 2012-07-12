@@ -958,6 +958,15 @@
         },
 
         /*
+         * Get the name of the current base layer.
+         *
+         * - return string: The layer name.
+         */
+        getMapBaseLayer: function() {
+            return this.map.neatlinemap('getBaseLayerForSave');
+        },
+
+        /*
          * Get the current focus date on the timeline.
          *
          * - return string: The date.

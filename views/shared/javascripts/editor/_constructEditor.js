@@ -291,9 +291,10 @@ jQuery(document).ready(function($) {
         // When the 'Fix starting viewport positions' button is pushed.
         'savepositions': function() {
 
-            // Get the map extent and zoom.
+            // Get the map extent, zoom, and layer.
             var mapCenter = neatlineContainer.neatline('getMapCenter');
             var mapZoom = neatlineContainer.neatline('getMapZoom');
+            var mapLayer = neatlineContainer.neatline('getMapBaseLayer');
 
             // Get the timeline center date and zoom.
             var timelineCenter =    neatlineContainer.neatline('getTimelineCenter');
@@ -304,6 +305,7 @@ jQuery(document).ready(function($) {
                 'savePositions',
                 mapCenter,
                 mapZoom,
+                mapLayer,
                 timelineCenter,
                 timelineZoom
             );
