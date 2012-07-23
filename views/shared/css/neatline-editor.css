@@ -95,8 +95,8 @@
 
 .topbar div > ul a, .nav a {
     font-family: 'Crimson Text', Georgia, serif;
-    font-size: 20px !important;
-    padding: 8px 15px 10px 15px;
+    font-size: 18px !important;
+    padding: 6px 15px 10px 15px;
     display: block;
     float: none;
     line-height: 19px;
