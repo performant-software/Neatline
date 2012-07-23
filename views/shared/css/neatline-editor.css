@@ -312,7 +312,7 @@ tr.edit-form td.edit-form-container {
 .neatline-record-edit-form div.fieldset {
     overflow-y: hidden;
     overflow-x: visible;
-    padding: 0 40px 0 20px;
+    padding: 0  0 0 20px;
     width: 90%;
     white-space: normal;
 }
