@@ -90,6 +90,7 @@
             this.endDate =                  this.form.find('input[name="end-date-date"]');
             this.startVisibleDate =         this.form.find('input[name="start-visible-date"]');
             this.endVisibleDate =           this.form.find('input[name="end-visible-date"]');
+            this.geocoverage =              this.form.find('textarea[name="geocoverage"]');
             this.vectorColor =              this.form.find('input[name="vector-color"]');
             this.strokeColor =              this.form.find('input[name="stroke-color"]');
             this.highlightColor =           this.form.find('input[name="highlight-color"]');
@@ -367,43 +368,7 @@
          * Instantiate the fieldset expanders.
          */
         _buildFieldsets: function() {
-
             this.form.tabs();
-
-            // var self = this;
-
-            // // Title and description.
-            // this.titleDescriptionFieldset.fieldsetexpander({
-            //     default_status: true,
-            //     'change': function() {
-            //         self._measureForm();
-            //     }
-            // });
-
-            // // Date information.
-            // this.dateInformationFieldset.fieldsetexpander({
-            //     default_status: false,
-            //     'change': function() {
-            //         self._measureForm();
-            //     }
-            // });
-
-            // // Map styles.
-            // this.mapStylesFieldset.fieldsetexpander({
-            //     default_status: false,
-            //     'change': function() {
-            //         self._measureForm();
-            //     }
-            // });
-
-            // // Relationships.
-            // this.relationshipsFieldset.fieldsetexpander({
-            //     default_status: false,
-            //     'change': function() {
-            //         self._measureForm();
-            //     }
-            // });
-
         },
 
 
@@ -761,6 +726,7 @@
             this.endDate.val(this._data.end_date);
             this.startVisibleDate.val(this._data.start_visible_date);
             this.endVisibleDate.val(this._data.end_visible_date);
+            this.geocoverage.val(this._data.geocoverage);
 
             // Reposition the draggers.
             this.ambiguity.gradientbuilder(

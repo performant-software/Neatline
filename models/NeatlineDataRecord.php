@@ -241,6 +241,7 @@ class NeatlineDataRecord extends Omeka_record
         $data['parent_record_id'] =     $this->getParentRecordId();
         $data['use_dc_metadata'] =      $this->use_dc_metadata;
         $data['show_bubble'] =          $this->show_bubble;
+        $data['geocoverage'] =          $this->getGeocoverage();
         $data['records'] =              $records;
 
         return $data;
