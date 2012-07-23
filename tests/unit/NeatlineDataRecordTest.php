@@ -566,16 +566,16 @@ class Neatline_NeatlineDataRecordTest extends Neatline_Test_AppTestCase
         // Set.
         $this->assertTrue($record->setStyle('vector_color', '#000000'));
         $this->assertTrue($record->setStyle('vector_opacity', 100));
-        $this->assertTrue($record->setStyle('stroke_color', '#000000'));
-        $this->assertTrue($record->setStyle('stroke_opacity', 100));
+        $this->assertTrue($record->setStyle('stroke_color', '#f0f0f0'));
+        $this->assertTrue($record->setStyle('stroke_opacity', 90));
         $this->assertTrue($record->setStyle('stroke_width', 100));
         $this->assertTrue($record->setStyle('point_radius', 100));
 
         // Check.
         $this->assertEquals($record->vector_color, '#000000');
         $this->assertEquals($record->vector_opacity, 100);
-        $this->assertEquals($record->stroke_color, '#000000');
-        $this->assertEquals($record->stroke_opacity, 100);
+        $this->assertEquals($record->stroke_color, '#f0f0f0');
+        $this->assertEquals($record->stroke_opacity, 90);
         $this->assertEquals($record->stroke_width, 100);
         $this->assertEquals($record->point_radius, 100);
 
@@ -1973,6 +1973,7 @@ class Neatline_NeatlineDataRecordTest extends Neatline_Test_AppTestCase
                 'parent_record_id' =>   $parent->id,
                 'use_dc_metadata' =>    null,
                 'show_bubble' =>        self::$__testParams['show_bubble'],
+                'geocoverage' =>        self::$__testParams['geocoverage'],
                 'records' => array()
             )
         );
@@ -2047,6 +2048,7 @@ class Neatline_NeatlineDataRecordTest extends Neatline_Test_AppTestCase
                 'parent_record_id' =>   $parent->id,
                 'use_dc_metadata' =>    null,
                 'show_bubble' =>        self::$__testParams['show_bubble'],
+                'geocoverage' =>        self::$__testParams['geocoverage'],
                 'records' => array()
             )
         );

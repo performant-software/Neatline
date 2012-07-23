@@ -33,7 +33,7 @@
             <label>Shape Color</label>
             <div class="input">
                 <div class="inline-inputs">
-                    <input type="text" class="color-picker miniColors" name="default-vector-color" value="#005aff" />
+                    <input type="text" class="color-picker miniColors" name="default-vector-color" value="#196aff" />
                 </div>
             </div>
         </td>
@@ -41,7 +41,7 @@
             <label>Line Color</label>
             <div class="input">
                 <div class="inline-inputs">
-                    <input type="text" class="color-picker miniColors" name="default-stroke-color"  value="#005aff" />
+                    <input type="text" class="color-picker miniColors" name="default-stroke-color"  value="#000000" />
                 </div>
             </div>
         </td>
@@ -59,7 +59,7 @@
             <label>Shape Opacity</label>
             <div class="input">
                 <div class="inline-inputs">
-                    <input type="text" class="integer-dragger" name="default-vector-opacity" value="20" />
+                    <input type="text" class="integer-dragger" name="default-vector-opacity" value="30" />
                 </div>
             </div>
         </td>
@@ -75,7 +75,7 @@
             <label>Line Opacity</label>
             <div class="input">
                 <div class="inline-inputs">
-                    <input type="text" class="integer-dragger" name="default-stroke-opacity" value="70" />
+                    <input type="text" class="integer-dragger" name="default-stroke-opacity" value="100" />
                 </div>
             </div>
         </td>
@@ -93,7 +93,7 @@
             <label>Line Width</label>
             <div class="input">
                 <div class="inline-inputs">
-                    <input type="text" class="integer-dragger" name="default-stroke-width" value="4" />
+                    <input type="text" class="integer-dragger" name="default-stroke-width" value="3" />
                 </div>
             </div>
         </td>
@@ -216,8 +216,9 @@ to store the current viewport settings as the public defaults.</p>
         <ul class="tabs-header">
             <li><a href="#tabs-1">Text</a></li>
             <li><a href="#tabs-2">Temporal</a></li>
-            <li><a href="#tabs-3">Styling</a></li>
-            <li><a href="#tabs-4">Relations</a></li>
+            <li><a href="#tabs-3">Spatial</a></li>
+            <li><a href="#tabs-4">Styling</a></li>
+            <li><a href="#tabs-5">Relations</a></li>
         </ul>
 
         <div id="tabs-1" class="fieldset">
@@ -309,6 +310,17 @@ to store the current viewport settings as the public defaults.</p>
         </div>
 
         <div id="tabs-3" class="fieldset">
+
+            <div class="clearfix">
+                <label>Geocoverage</label>
+                <div class="input">
+                    <textarea class="xlarge" name="geocoverage" rows="16"></textarea>
+                </div>
+            </div>
+
+        </div>
+
+        <div id="tabs-4" class="fieldset">
 
             <table class="map-styles">
                 <tr>
@@ -421,7 +433,7 @@ to store the current viewport settings as the public defaults.</p>
 
         </div>
 
-        <div id="tabs-4" class="fieldset">
+        <div id="tabs-5" class="fieldset">
 
             <div class="clearfix">
                 <label>Parent Record</label>
@@ -495,7 +507,7 @@ to store the current viewport settings as the public defaults.</p>
 <!-- JSON globals. -->
 <script type="text/javascript">
 
-        Neatline = {"record":{"added":"2012-07-23 09:10:07","modified":"2012-07-23 09:10:07","name":"Test Exhibit","description":"Test description.","slug":"test-exhibit","public":1,"query":null,"creator_id":1,"image_id":null,"top_element":"map","items_h_pos":"right","items_v_pos":"top","items_height":"full","h_percent":50,"v_percent":60,"is_map":1,"is_timeline":1,"is_items":1,"default_map_bounds":null,"default_map_zoom":null,"default_focus_date":null,"default_timeline_zoom":null,"is_context_band":1,"default_context_band_unit":null,"default_context_band_height":null,"default_vector_color":null,"default_stroke_color":null,"default_highlight_color":null,"default_vector_opacity":null,"default_select_opacity":null,"default_stroke_opacity":null,"default_graphic_opacity":null,"default_stroke_width":null,"default_point_radius":null,"default_base_layer":2,"id":1},"dataSources":{"timeline":"http:\/\/\/Users\/davidmcclure\/pear\/bin\/neatline-exhibits\/simile\/1","map":"http:\/\/\/Users\/davidmcclure\/pear\/bin\/neatline-exhibits\/openlayers\/1","undated":"http:\/\/\/Users\/davidmcclure\/pear\/bin\/neatline-exhibits\/udi\/1"},"baseLayer":{"name":"Google Physical","id":2},"timelineZoom":15,"highlightColor":"#ff9600","proportions":{"horizontal":50,"vertical":60},"timeline":{"isContextBand":1,"contextBandUnit":"DECADE","contextBandHeight":"35"}}
+        Neatline = {"record":{"added":"2012-07-23 17:02:43","modified":"2012-07-23 17:02:43","name":"Test Exhibit","description":"Test description.","slug":"test-exhibit","public":1,"query":null,"creator_id":1,"image_id":null,"top_element":"map","items_h_pos":"right","items_v_pos":"top","items_height":"full","h_percent":50,"v_percent":60,"is_map":1,"is_timeline":1,"is_items":1,"default_map_bounds":null,"default_map_zoom":null,"default_focus_date":null,"default_timeline_zoom":null,"is_context_band":1,"default_context_band_unit":null,"default_context_band_height":null,"default_vector_color":null,"default_stroke_color":null,"default_highlight_color":null,"default_vector_opacity":null,"default_select_opacity":null,"default_stroke_opacity":null,"default_graphic_opacity":null,"default_stroke_width":null,"default_point_radius":null,"default_base_layer":2,"id":1},"dataSources":{"timeline":"http:\/\/\/Users\/davidmcclure\/pear\/bin\/neatline-exhibits\/simile\/1","map":"http:\/\/\/Users\/davidmcclure\/pear\/bin\/neatline-exhibits\/openlayers\/1","undated":"http:\/\/\/Users\/davidmcclure\/pear\/bin\/neatline-exhibits\/udi\/1"},"baseLayer":{"name":"Google Physical","id":2},"timelineZoom":15,"highlightColor":"#ff9600","proportions":{"horizontal":50,"vertical":60},"timeline":{"isContextBand":1,"contextBandUnit":"DECADE","contextBandHeight":"35"}}
 </script>
 
 <div id="drag-tip" class="twipsy fade right in">
