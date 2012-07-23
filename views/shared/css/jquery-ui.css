@@ -60,10 +60,10 @@
 /* Interaction states
 ----------------------------------*/
 .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default { border: 1px solid #cccccc; background: #eeeeee url(images/ui-bg_glass_60_eeeeee_1x400.png) 50% 50% repeat-x; font-weight: bold; color: #3383bb; }
-.ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited { color: #6A457D; text-decoration: none; }
+.ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited { color: #594e62; text-decoration: none; }
 .ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus { border: 1px solid #bbbbbb; background: #f8f8f8 url(images/ui-bg_glass_100_f8f8f8_1x400.png) 50% 50% repeat-x; font-weight: bold; color: #599fcf; }
-.ui-state-hover a, .ui-state-hover a:hover { color: #6A457D; text-decoration: none; }
-.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active { border: 1px solid #6A457D; background: #6A457D; font-weight: bold; color: #ffffff; }
+.ui-state-hover a, .ui-state-hover a:hover { color: #594e62; text-decoration: none; }
+.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active { border: 1px solid #594e62; background: #594e62; font-weight: bold; color: #ffffff; }
 .ui-state-active a, .ui-state-active a:link, .ui-state-active a:visited { color: #ffffff; text-decoration: none; }
 .ui-widget :active { outline: none; }
 

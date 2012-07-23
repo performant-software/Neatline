@@ -38,7 +38,7 @@
             colors: {
                 light_blue: '#FFFEF8',
                 light_yellow: '#f9f9f9',
-                dark_purple: '#4f1d6a',
+                dark_purple: '#594e62',
                 purple: '#724e85',
                 text: '#515151',
                 gray: '#8d8d8d',
@@ -741,9 +741,7 @@
          */
          _showForm: function(item, scrollMap, scrollTimeline, focusItems) {
 
-            if (this._isEditFormLocked()) {
-               return;
-            }
+            if (this._isEditFormLocked()) return;
 
             var self = this;
             var immediate = false;
@@ -790,9 +788,7 @@
          */
          _hideForm: function(item, immediate) {
 
-             if (this._isEditFormLocked()) {
-                 return;
-             }
+            if (this._isEditFormLocked()) return;
 
             // Hide the form.
             this.editForm.itemform(
@@ -808,6 +804,7 @@
             // Update trackers.
             item.data('expanded', false);
             this._currentFormItem = null;
+            this._currentFormItemId = null;
 
             // Show item rows, recuperate scrollTop.
             this._showItemRows();

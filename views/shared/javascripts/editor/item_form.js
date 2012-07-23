@@ -36,7 +36,7 @@
             colors: {
                 light_blue: '#f3f6ff',
                 light_yellow: '#fffef8',
-                dark_purple: '#4f1d6a',
+                dark_purple: '#594e62',
                 purple: '#724e85',
                 text: '#515151',
                 gray: '#8d8d8d',
@@ -418,9 +418,8 @@
          * Expand and gloss an item edit form.
          */
         showForm: function(item) {
-            if (this._isLocked) {
-                return;
-            }
+
+            if (this._isLocked) return;
 
             // Getters and setters.
             this.item =                     item;
@@ -595,18 +594,10 @@
          */
         _expandTitle: function() {
 
-            // By default, fade to the default text color and weight.
-            var textColor = this.options.colors.dark_purple;
-
-            // Keep the title bold red if the form was not saved.
-            if (this.textSpan.data('changed')) {
-                textColor = this.options.colors.red;
-            }
-
             // Bold the title.
             this.textSpan.css({
                 'font-weight': 'bold',
-                'color': textColor
+                'color': this.options.colors.dark_purple
             });
 
         },
