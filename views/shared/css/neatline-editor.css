@@ -310,8 +310,7 @@ tr.edit-form td.edit-form-container {
 }
 
 .neatline-record-edit-form div.fieldset {
-    overflow-y: hidden;
-    overflow-x: visible;
+    overflow: hidden;
     padding: 0  0 0 20px;
     width: 90%;
     white-space: normal;
@@ -337,7 +336,7 @@ tr.edit-form td.edit-form-container {
 }
 
 .input-xlarge, input.xlarge, textarea.xlarge, select.xlarge {
-    width: 336px;
+    width: 332px;
 }
 
 #record-delete-button {

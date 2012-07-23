@@ -32,8 +32,9 @@
         <ul class="tabs-header">
             <li><a href="#tabs-1">Text</a></li>
             <li><a href="#tabs-2">Temporal</a></li>
-            <li><a href="#tabs-3">Styling</a></li>
-            <li><a href="#tabs-4">Relations</a></li>
+            <li><a href="#tabs-3">Spatial</a></li>
+            <li><a href="#tabs-4">Styling</a></li>
+            <li><a href="#tabs-5">Relations</a></li>
         </ul>
 
         <div id="tabs-1" class="fieldset">
@@ -125,6 +126,17 @@
         </div>
 
         <div id="tabs-3" class="fieldset">
+
+            <div class="clearfix">
+                <label>Geocoverage</label>
+                <div class="input">
+                    <textarea class="xlarge" name="geocoverage" rows="16"></textarea>
+                </div>
+            </div>
+
+        </div>
+
+        <div id="tabs-4" class="fieldset">
 
             <table class="map-styles">
                 <tr>
@@ -237,7 +249,7 @@
 
         </div>
 
-        <div id="tabs-4" class="fieldset">
+        <div id="tabs-5" class="fieldset">
 
             <div class="clearfix">
                 <label>Parent Record</label>
