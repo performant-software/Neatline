@@ -260,7 +260,10 @@
             var kml = formatter.write(this._currentEditLayer.features);
 
             // Re-select the feature.
-            this.modifyFeatures.selectFeature(this._clickedFeature);
+            if (!_.isNull(this._clickedFeature)) {
+                this.modifyFeatures.selectFeature(this._clickedFeature);
+            }
+
             return kml;
 
         },
