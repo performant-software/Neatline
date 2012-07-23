@@ -182,7 +182,15 @@
                 this._currentEditLayer, {
                     standalone: true,
                     onModification: function() {
-                        self._trigger('featureadded');
+
+                        // Emit new geocoverage.
+                        self._trigger('featureadded', {}, {
+                            geocoverage: self.getWktForSave()
+                        });
+
+                        // Add click controls.
+                        self._addClickControls();
+
                     }
                 }
             );
@@ -244,26 +252,16 @@
 
             var wkts = [];
 
+            // Unselect feature, cancel sketch.
             this.modifyFeatures.unselectFeature(this._clickedFeature);
             this.cancelSketch();
 
-            // Push the wkt's onto the array.
-            $.each(this._currentEditLayer.features, function(i, feature) {
+            var formatter = new OpenLayers.Format.KML();
+            var kml = formatter.write(this._currentEditLayer.features);
 
-                // Cast the feature to wkt.
-                var wkt = feature.geometry.toString();
-
-                // ** A hack to prevent phantom empty points from getting
-                // saved in the wkt strings. It is not clear why these artifacts
-                // are getting generated and committed, but they cause erratic
-                // bound calculation and zooming bugs. This needs a real fix.
-                if (!_.include(['POINT(NaN NaN)', 'POINT()'], wkt)) {
-                    wkts.push(wkt);
-                }
-
-            });
-
-            return wkts.join(this.options.wkt_delimiter);
+            // Re-select the feature.
+            this.modifyFeatures.selectFeature(this._clickedFeature);
+            return kml;
 
         },
 
@@ -422,10 +420,18 @@
                     OpenLayers.Handler.Path, {
                         displayClass: 'olControlDrawFeaturePath',
                         featureAdded: function() {
-                            self._trigger('featureadded');
+
+                            // Emit new geocoverage.
+                            self._trigger('featureadded', {}, {
+                                geocoverage: self.getWktForSave()
+                            });
+
+                            // Add click controls.
                             self._addClickControls();
+
                         }
-                }),
+                    }
+                ),
 
                 // Draw points.
                 new OpenLayers.Control.DrawFeature(
@@ -433,10 +439,18 @@
                     OpenLayers.Handler.Point, {
                         displayClass: 'olControlDrawFeaturePoint',
                         featureAdded: function() {
-                            self._trigger('featureadded');
+
+                            // Emit new geocoverage.
+                            self._trigger('featureadded', {}, {
+                                geocoverage: self.getWktForSave()
+                            });
+
+                            // Add click controls.
                             self._addClickControls();
+
                         }
-                }),
+                    }
+                ),
 
                 // Draw polygons.
                 new OpenLayers.Control.DrawFeature(
@@ -444,10 +458,18 @@
                     OpenLayers.Handler.Polygon, {
                         displayClass: 'olControlDrawFeaturePolygon',
                         featureAdded: function() {
-                            self._trigger('featureadded');
+
+                            // Emit new geocoverage.
+                            self._trigger('featureadded', {}, {
+                                geocoverage: self.getWktForSave()
+                            });
+
+                            // Add click controls.
                             self._addClickControls();
+
                         }
-                })
+                    }
+                )
 
             ];
 

@@ -302,53 +302,57 @@
             // Instantiate database and associations objects.
             this._db = TAFFY();
 
-            _.each(layers, function(item) {
+            _.each(layers, function(record) {
+
+                // Construct formatter, get features.
+                var formatter = new OpenLayers.Format.KML();
+                var features = formatter.read(record.wkt);
 
                 // Get float values for opacities.
-                item.vector_opacity = item.vector_opacity / 100;
-                item.stroke_opacity = item.stroke_opacity / 100;
-                item.select_opacity = item.select_opacity / 100;
-                item.graphic_opacity = item.graphic_opacity / 100;
+                record.vector_opacity = record.vector_opacity / 100;
+                record.stroke_opacity = record.stroke_opacity / 100;
+                record.select_opacity = record.select_opacity / 100;
+                record.graphic_opacity = record.graphic_opacity / 100;
 
                 // Construct the style.
                 var style = self._getStyleMap(
-                    item.vector_color,
-                    item.vector_opacity,
-                    item.stroke_color,
-                    item.stroke_opacity,
-                    item.stroke_width,
-                    item.point_radius,
-                    item.point_image,
-                    item.highlight_color,
-                    item.select_opacity,
-                    item.graphic_opacity
+                    record.vector_color,
+                    record.vector_opacity,
+                    record.stroke_color,
+                    record.stroke_opacity,
+                    record.stroke_width,
+                    record.point_radius,
+                    record.point_image,
+                    record.highlight_color,
+                    record.select_opacity,
+                    record.graphic_opacity
                 );
 
                 // Build the layer.
-                var vectorLayer = new OpenLayers.Layer.Vector(item.title, {
+                var vectorLayer = new OpenLayers.Layer.Vector(record.title, {
                     styleMap: style,
                     displayInLayerSwitcher: false
                 });
 
-                // Empty array to hold features objects.
-                var features = [];
+            //     // Empty array to hold features objects.
+            //     var features = [];
 
-                // Build the features.
-                if (!_.isNull(item.wkt)) {
-                    $.each(item.wkt.split(self.options.wkt_delimiter), function(i, wkt) {
+            //     // Build the features.
+            //     if (!_.isNull(item.wkt)) {
+            //         $.each(item.wkt.split(self.options.wkt_delimiter), function(i, wkt) {
 
-                        // Construct WKT format reader.
-                        var reader = new OpenLayers.Format.WKT();
+            //             // Construct WKT format reader.
+            //             var reader = new OpenLayers.Format.WKT();
 
-                        // Try to read valid wkt. If valid, build geometry.
-                        if (!_.isUndefined(reader.read(wkt))) {
-                            var geometry = new OpenLayers.Geometry.fromWKT(wkt);
-                            var feature = new OpenLayers.Feature.Vector(geometry);
-                            features.push(feature);
-                        }
+            //             // Try to read valid wkt. If valid, build geometry.
+            //             if (!_.isUndefined(reader.read(wkt))) {
+            //                 var geometry = new OpenLayers.Geometry.fromWKT(wkt);
+            //                 var feature = new OpenLayers.Feature.Vector(geometry);
+            //                 features.push(feature);
+            //             }
 
-                    });
-                }
+            //         });
+            //     }
 
                 // Add the vectors to the layer.
                 vectorLayer.addFeatures(features);
@@ -357,14 +361,14 @@
                 var wmsLayer = null;
 
                 // If a WMS address is defined.
-                if (!_.isNull(item.wmsAddress) && !_.isNull(item.layers)) {
+                if (!_.isNull(record.wmsAddress) && !_.isNull(record.layers)) {
 
                     // Build layer.
                     wmsLayer = new OpenLayers.Layer.WMS(
-                        item.title,
-                        item.wmsAddress,
+                        record.title,
+                        record.wmsAddress,
                         {
-                            layers: item.layers,
+                            layers: record.layers,
                             styles: '',
                             transparent: true,
                             format: 'image/png8',
@@ -378,7 +382,7 @@
                     );
 
                     // Set starting opacity.
-                    wmsLayer.opacity = item.vector_opacity;
+                    wmsLayer.opacity = record.vector_opacity;
 
                     // Track and add.
                     self._wmsLayers.push(wmsLayer);
@@ -388,11 +392,11 @@
 
                 // Add the database record.
                 self._db.insert({
-                    itemid: item.item_id,
+                    itemid: record.item_id,
                     layerid: vectorLayer.id,
-                    recordid: item.id,
-                    slug: item.slug,
-                    data: item,
+                    recordid: record.id,
+                    slug: record.slug,
+                    data: record,
                     layer: vectorLayer,
                     wms: wmsLayer,
                     selected: false

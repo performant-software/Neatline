@@ -1053,6 +1053,13 @@
         },
 
         /*
+         * Update geocoverage on current form.
+         */
+        updateGeocoverage: function(geocoverage) {
+            this.editForm.itemform('updateGeocoverage', geocoverage);
+        },
+
+        /*
          * Retrieve the recordid of the current edit form. If there is not an active
          * edit form, return false.
          */

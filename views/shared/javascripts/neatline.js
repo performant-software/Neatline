@@ -257,8 +257,8 @@
                 // Define callbacks.
                 var callbacks = {
 
-                    'featureadded': function() {
-                        self._trigger('mapfeatureadded');
+                    'featureadded': function(event, obj) {
+                        self._trigger('mapfeatureadded', {}, obj);
                     },
 
                     'featureenter': function(event, obj) {

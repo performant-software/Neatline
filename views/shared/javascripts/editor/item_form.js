@@ -288,7 +288,7 @@
             this.saveButton.bind({
 
                 'mousedown': function() {
-                    self._trigger('save');
+                    self.saveItemForm();
                 },
 
                 'click': function(event) {
@@ -444,14 +444,13 @@
         },
 
         /*
-         * Get form data, get geocoverage data, build ajax request and send
-         * data for save.
+         * Post form data.
          */
-        saveItemForm: function(coverage) {
+        saveItemForm: function() {
 
             // Fade the form, post the data.
             this._fadeDown();
-            this._postFormData(coverage);
+            this._postFormData();
 
         },
 
@@ -811,7 +810,7 @@
         /*
          * Get form data and merge with status and coverage data.
          */
-        _getDataForSave: function(coverage) {
+        _getDataForSave: function() {
 
             // Build the base form data.
             var data = this._getData();
@@ -822,7 +821,7 @@
             data.exhibit_id =               Neatline.record.id;
             data.space_active =             this.space.prop('checked').toString();
             data.time_active =              this.time.prop('checked').toString();
-            data.geocoverage =              coverage;
+            data.geocoverage =              this.geocoverage.val();
 
             return data;
 
@@ -856,6 +855,13 @@
         _enableTextEditors: function() {
             this.descriptionEditor.disable(false);
             $(this.descriptionEditor.$main[0]).css('opacity', 1);
+        },
+
+        /*
+         * Update the geocoverage textarea.
+         */
+        updateGeocoverage: function(geocoverage) {
+            this.geocoverage.val(geocoverage);
         },
 
 
@@ -898,7 +904,7 @@
             var self = this;
 
             // Get the data.
-            var data = this._getDataForSave(coverage);
+            var data = this._getDataForSave();
 
             // Commit.
             $.ajax({

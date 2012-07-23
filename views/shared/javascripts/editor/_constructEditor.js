@@ -92,10 +92,10 @@ jQuery(document).ready(function($) {
                 },
 
                 // When a geometry vector is added to the map.
-                'mapfeatureadded': function() {
+                'mapfeatureadded': function(event, obj) {
 
-                    // Make the item title red.
-                    editorContainer.itembrowser('markItemTitleAsUnsaved');
+                    // Update the geocoverage textarea.
+                    editorContainer.itembrowser('updateGeocoverage', obj.geocoverage);
 
                 },
 
