@@ -28,7 +28,8 @@
   <property name="staging.dir" value="${build.dir}/tmp/Neatline" />
 
   <property name="dir.views" value="views" />
-
+  <property name="lang.dir" location="languages" />
+  <property name="core.pot" location="../../application/languages/Omeka.pot" />
 
   <!-- Load the Ant-contrib to give us access to some very useful tasks! -->
   <!-- the .jar file is located in the tools directory -->
@@ -452,6 +453,57 @@
       <arg value="--output" />
       <arg path="${build.dir}/code-browser" />
     </exec>
+  </target>
+
+  <target name="update-pot" description="Update the translation template.">
+    <property name="pot.file" location="${lang.dir}/${ant.project.name}.pot"/>
+    <property name="pot.base" location="${lang.dir}/${ant.project.name}.base.pot"/>
+    <tempfile property="pot.temp" suffix=".pot"/>
+    <tempfile property="pot.duplicates" suffix="-duplicates.pot" />
+    <apply executable="xgettext" relative="true" parallel="true" verbose="true">
+      <arg value="-L"/>
+      <arg value="php"/>
+      <arg value="--from-code=utf-8"/>
+      <arg value="-k__"/>
+      <arg value="--flag=__:1:pass-php-format"/>
+      <arg value="--omit-header"/>
+      <arg value="-F"/>
+      <arg value="-o"/>
+      <arg file="${pot.temp}"/>
+      <fileset dir="." includes="**/*.php **/*.phtml" excludes="tests/"/>
+    </apply>
+    <exec executable="msgcomm">
+      <arg value="--omit-header" />
+      <arg value="-o" />
+      <arg file="${pot.duplicates}" />
+      <arg file="${pot.temp}" />
+      <arg file="${core.pot}" />
+    </exec>
+    <exec executable="msgcomm">
+      <arg value="-u" />
+      <arg value="-o" />
+      <arg file="${pot.temp}" />
+      <arg file="${pot.temp}" />
+      <arg file="${pot.duplicates}" />
+    </exec>
+    <exec executable="msgcat">
+      <arg value="-o"/>
+      <arg file="${pot.file}"/>
+      <arg file="${pot.base}"/>
+      <arg file="${pot.temp}"/>
+    </exec>
+    <delete file="${pot.temp}" quiet="true" />
+    <delete file="${pot.duplicates}" quiet="true" />
+  </target>
+
+  <target name="build-mo" description="Build the MO translation files.">
+    <apply executable="msgfmt" dest="${lang.dir}" verbose="true">
+      <arg value="-o"/>
+      <targetfile />
+      <srcfile />
+      <fileset dir="${lang.dir}" includes="*.po"/>
+      <mapper type="glob" from="*.po" to="*.mo"/>
+    </apply>
   </target>
 
   <target name="usage">
