@@ -30,11 +30,11 @@
     <form class="form-stacked">
 
         <ul class="tabs-header">
-            <li><a href="#tabs-1">Text</a></li>
-            <li><a href="#tabs-2">Spatial</a></li>
-            <li><a href="#tabs-3">Temporal</a></li>
-            <li><a href="#tabs-4">Styling</a></li>
-            <li><a href="#tabs-5">Relations</a></li>
+            <li><a href="#tabs-1" class="btn">Text</a></li>
+            <li><a href="#tabs-2" class="btn">Spatial</a></li>
+            <li><a href="#tabs-3" class="btn">Temporal</a></li>
+            <li><a href="#tabs-4" class="btn">Styling</a></li>
+            <li><a href="#tabs-5" class="btn">Relations</a></li>
         </ul>
 
         <div id="tabs-1">
@@ -263,9 +263,9 @@
         <div class="fieldset">
 
             <div id="edit-form-actions" class="form-actions">
-                <button id="record-save-button" class="btn btn-large btn-primary"><i class="icon-ok-circle icon-white"></i> Save</button>
+                <button id="record-save-button" class="btn btn-large btn-neatline"><i class="icon-ok-circle icon-white"></i> Save</button>
                 <button id="record-close-button" class="btn btn-large"><i class="icon-download"></i> Close</button>
-                <button id="record-delete-button" class="btn btn-large"><i class="icon-remove-circle"></i> Delete</button>
+                <button id="record-delete-button" class="btn btn-large btn-neatline-delete"><i class="icon-remove-circle icon-white"></i> Delete</button>
             </div>
 
         </div>

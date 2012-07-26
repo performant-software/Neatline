@@ -147,6 +147,24 @@
     margin: 1em 0 1em 21px;
 }
 
+#items-list-container ul.tabs-header a {
+    border: none;
+}
+
+#items-list-container ul.tabs-header li.ui-state-active a {
+    background-color: #403947 !important;
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#73667f", endColorstr="#403846");
+    background-image: -khtml-gradient(linear, left top, left bottom, from(#73667F), to(#403846));
+    background-image: -moz-linear-gradient(top, #73667F, #403846);
+    background-image: -ms-linear-gradient(top, #73667F, #403846);
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #73667F), color-stop(100%, #403846));
+    background-image: -webkit-linear-gradient(top, #73667F, #403846);
+    background-image: -o-linear-gradient(top, #73667F, #403846);
+    background-image: linear-gradient(#73667F, #403846);
+    text-shadow: none;
+}
+
 #items-list-container tr.item-row {
     font-size: 12px;
     color: #515151;
@@ -158,10 +176,6 @@
     padding: 7px 0 7px 20px;
     white-space: nowrap;
     overflow: hidden;
-}
-
-#items-list-container tr.item-row:hover {
-    /* background-color: #f3f6ff;*/
 }
 
 #items-list-header {
@@ -419,6 +433,40 @@ div.form-actions {
     margin-top: 0;
     padding-left: 0;
     background-color: transparent;
+}
+
+.btn-neatline {
+  background-color: hsl(290, 11%, 23%) !important;
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#756179", endColorstr="#3e3441");
+  background-image: -khtml-gradient(linear, left top, left bottom, from(#756179), to(#3e3441));
+  background-image: -moz-linear-gradient(top, #756179, #3e3441);
+  background-image: -ms-linear-gradient(top, #756179, #3e3441);
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #756179), color-stop(100%, #3e3441));
+  background-image: -webkit-linear-gradient(top, #756179, #3e3441);
+  background-image: -o-linear-gradient(top, #756179, #3e3441);
+  background-image: linear-gradient(#756179, #3e3441);
+  border-color: #3e3441 #3e3441 hsl(290, 11%, 18%);
+  color: #fff !important;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.33);
+  -webkit-font-smoothing: antialiased;
+}
+
+.btn-neatline-delete {
+  background-color: hsl(8, 42%, 29%) !important;
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#b15648", endColorstr="#69332a");
+  background-image: -khtml-gradient(linear, left top, left bottom, from(#b15648), to(#69332a));
+  background-image: -moz-linear-gradient(top, #b15648, #69332a);
+  background-image: -ms-linear-gradient(top, #b15648, #69332a);
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #b15648), color-stop(100%, #69332a));
+  background-image: -webkit-linear-gradient(top, #b15648, #69332a);
+  background-image: -o-linear-gradient(top, #b15648, #69332a);
+  background-image: linear-gradient(#b15648, #69332a);
+  border-color: #69332a #69332a hsl(8, 42%, 24%);
+  color: #fff !important;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.33);
+  -webkit-font-smoothing: antialiased;
 }
 
 
@@ -691,10 +739,6 @@ div.columns span.row-marker {
     text-align: center;
     cursor: pointer;
     position: relative;
-}
-
-div.columns span.header:hover, div.columns span.header.active {
-    /* background-color: #f0b925 !important;*/
 }
 
 table#items-table {
