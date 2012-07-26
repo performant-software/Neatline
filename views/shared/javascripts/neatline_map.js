@@ -329,26 +329,6 @@
                     displayInLayerSwitcher: false
                 });
 
-            //     // Empty array to hold features objects.
-            //     var features = [];
-
-            //     // Build the features.
-            //     if (!_.isNull(item.wkt)) {
-            //         $.each(item.wkt.split(self.options.wkt_delimiter), function(i, wkt) {
-
-            //             // Construct WKT format reader.
-            //             var reader = new OpenLayers.Format.WKT();
-
-            //             // Try to read valid wkt. If valid, build geometry.
-            //             if (!_.isUndefined(reader.read(wkt))) {
-            //                 var geometry = new OpenLayers.Geometry.fromWKT(wkt);
-            //                 var feature = new OpenLayers.Feature.Vector(geometry);
-            //                 features.push(feature);
-            //             }
-
-            //         });
-            //     }
-
                 // Add the vectors to the layer.
                 vectorLayer.addFeatures(features);
                 vectorLayer.setMap(self.map);
