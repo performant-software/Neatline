@@ -151,10 +151,33 @@
             this._setDefaultLayer();
 
             // Set the default focus.
-            this.setViewport(
+            if (!this.setViewport(
                 Neatline.record.default_map_bounds,
                 Neatline.record.default_map_zoom
-            );
+            )) {
+
+                // If no focus is defined, try to geolocate.
+                var geolocate = new OpenLayers.Control.Geolocate({
+                    bind: true,
+                    watch: false
+                });
+
+                geolocate.events.on({
+                    locationfailed: function() {
+                        self.map.setCenter(
+                            new OpenLayers.LonLat(-8738850.21367, 4584105.47978),
+                            3,
+                            false,
+                            false
+                        );
+                    }
+                });
+
+                this.map.addControl(geolocate);
+                this.map.zoomTo(6);
+                geolocate.activate();
+
+            }
 
         },
 
@@ -1113,31 +1136,6 @@
                     this.map.setCenter(latlon, zoom);
                     success = true;
                 }
-
-            }
-
-            // If no focus is defined, try to geolocate.
-            else {
-
-                var geolocate = new OpenLayers.Control.Geolocate({
-                    bind: true,
-                    watch: false
-                });
-
-                geolocate.events.on({
-                    locationfailed: function() {
-                        self.map.setCenter(
-                            new OpenLayers.LonLat(-8738850.21367, 4584105.47978),
-                            3,
-                            false,
-                            false
-                        );
-                    }
-                });
-
-                this.map.addControl(geolocate);
-                this.map.zoomTo(6);
-                geolocate.activate();
 
             }
 
