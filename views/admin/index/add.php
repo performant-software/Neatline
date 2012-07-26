@@ -32,7 +32,7 @@ queue_js('tiny_mce/tiny_mce');
 ?>
 
 <?php
-$title = 'Neatline | Create an Exhibit';
+$title = __('Neatline | Create an Exhibit');
 head(array('content_class' => 'neatline', 'title' => $title));
 ?>
 

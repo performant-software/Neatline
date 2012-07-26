@@ -260,7 +260,7 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
         // Check for the error.
         $this->assertQueryContentContains(
             'ul.errors li',
-            'The slug can only contain lowercase letters, numbers, and hyphens..'
+            'The slug can only contain lowercase letters, numbers, and hyphens.'
         );
 
         // No exhibit should have been created.
@@ -297,7 +297,7 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
         // Check for the error.
         $this->assertQueryContentContains(
             'ul.errors li',
-            'The slug can only contain lowercase letters, numbers, and hyphens..'
+            'The slug can only contain lowercase letters, numbers, and hyphens.'
         );
 
         // No exhibit should have been created.
@@ -334,7 +334,7 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
         // Check for the error.
         $this->assertQueryContentContains(
             'ul.errors li',
-            'The slug can only contain lowercase letters, numbers, and hyphens..'
+            'The slug can only contain lowercase letters, numbers, and hyphens.'
         );
 
         // No exhibit should have been created.
@@ -371,7 +371,7 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
         // Check for the error.
         $this->assertNotQueryContentContains(
             'ul.errors li',
-            'The slug can only contain lowercase letters, numbers, and hyphens..'
+            'The slug can only contain lowercase letters, numbers, and hyphens.'
         );
 
         // No exhibit should have been created.
@@ -598,7 +598,7 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
         // Check for the error.
         $this->assertQueryContentContains(
             'ul.errors li',
-            'The slug can only contain lowercase letters, numbers, and hyphens..'
+            'The slug can only contain lowercase letters, numbers, and hyphens.'
         );
 
     }
@@ -632,7 +632,7 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
         // Check for the error.
         $this->assertQueryContentContains(
             'ul.errors li',
-            'The slug can only contain lowercase letters, numbers, and hyphens..'
+            'The slug can only contain lowercase letters, numbers, and hyphens.'
         );
 
     }
@@ -666,7 +666,7 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
         // Check for the error.
         $this->assertQueryContentContains(
             'ul.errors li',
-            'The slug can only contain lowercase letters, numbers, and hyphens..'
+            'The slug can only contain lowercase letters, numbers, and hyphens.'
         );
 
     }
@@ -700,7 +700,7 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
         // Check for the error.
         $this->assertNotQueryContentContains(
             'ul.errors li',
-            'The slug can only contain lowercase letters, numbers, and hyphens..'
+            'The slug can only contain lowercase letters, numbers, and hyphens.'
         );
 
     }

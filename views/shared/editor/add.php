@@ -27,7 +27,7 @@
 
 <tr class="item-row" recordid="<?php echo $record->id; ?>" itemid="">
     <td class="item-title">
-        <span class="item-title-text"><?php echo ($record->title != null) ? $record->title : '[Untitled]'; ?></span>
+        <span class="item-title-text"><?php echo ($record->title != null) ? $record->title : __('[Untitled]'); ?></span>
         <span class="item-title-fader"></span>
     </td>
     <td class="col-1 col-row items">

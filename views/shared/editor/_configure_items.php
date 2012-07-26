@@ -26,8 +26,8 @@
 ?>
 
 <!-- Edit order. -->
-<button class="btn icon loop">Edit Item Order</button>
-<p>Click to edit the ordering of the items in the description tray.</p>
+<button class="btn icon loop"><?php echo __('Edit Item Order'); ?></button>
+<p><?php echo __('Click to edit the ordering of the items in the description tray.'); ?></p>
 <hr />
 
-<button class="btn icon approve save">Save</button>
+<button class="btn icon approve save"><?php echo __('Save'); ?></button>

@@ -26,18 +26,18 @@
 ?>
 
 <div id="options">
-    <span id="toggle-map">Map</span>
-    <span id="toggle-timeline">Timeline</span>
-    <span id="toggle-items">Items</span>
+    <span id="toggle-map"><?php echo __('Map'); ?></span>
+    <span id="toggle-timeline"><?php echo __('Timeline'); ?></span>
+    <span id="toggle-items"><?php echo __('Items'); ?></span>
 </div>
 
 <div id="drag-box"></div>
 
-<button id="save-arrangement" class="btn icon approve save">Save arrangement</button>
-<button id="fix-positions" class="btn icon pin save">Fix starting viewport positions</button>
+<button id="save-arrangement" class="btn icon approve save"><?php echo __('Save arrangement'); ?></button>
+<button id="fix-positions" class="btn icon pin save"><?php echo __('Fix starting viewport positions'); ?></button>
 
 <hr />
 
-<p>Use the toggle buttons to activate and deactivate blocks; drag the
+<p><?php echo __('Use the toggle buttons to activate and deactivate blocks; drag the
 blocks to rearrange them. Click the "Fix starting viewport positions" button
-to store the current viewport settings as the public defaults.</p>
+to store the current viewport settings as the public defaults.'); ?></p>

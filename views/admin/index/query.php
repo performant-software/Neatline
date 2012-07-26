@@ -26,7 +26,7 @@
 ?>
 
 <?php
-$title = 'Neatline | Edit Items Query';
+$title = __('Neatline | Edit Items Query');
 head(array('content_class' => 'neatline', 'title' => $title));
 ?>
 <h1><?php echo $title; ?></h1>

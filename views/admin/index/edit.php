@@ -32,7 +32,7 @@ queue_js('tiny_mce/tiny_mce');
 ?>
 
 <?php
-$title = 'Neatline | Edit "'.neatline('name').'"';
+$title = __('Neatline | Edit "%s"', neatline('name'));
 head(array('content_class' => 'neatline', 'title' => $title));
 ?>
 

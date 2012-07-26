@@ -32,8 +32,7 @@
 
 <?php echo $this->partial('editor/_editor_header.php', array(
     'exhibit' => $neatlineexhibit,
-    'titlePrefix' => 'Neatline Editor',
-    'title' => $neatlineexhibit->name
+    'title' => __('Neatline Editor: %s', $neatlineexhibit->name)
 )); ?>
 
 <!-- The top bar. -->

@@ -251,8 +251,8 @@ function neatline_getUndatedItemsDataUrl($neatline_id)
  */
 function neatline_uninstallWarningMessage()
 {
-    return '<p><strong>Warning</strong>: Uninstalling the Neatline plugin '
-        . 'will permanently delete all Neatline exhibits.';
+    return '<p><strong>'.__('Warning').'</strong>: '
+         . __('Uninstalling the Neatline plugin will permanently delete all Neatline exhibits.');
 }
 
 /**
