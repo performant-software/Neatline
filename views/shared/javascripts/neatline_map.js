@@ -150,16 +150,11 @@
             this.map.addLayers(layers);
             this._setDefaultLayer();
 
-            if (!this.setViewport(
-                Neatline.record.default_map_bounds, Neatline.record.default_map_zoom
-            )) {
-                // Google.v3 uses EPSG:900913 as projection, so we have to
-                // transform our coordinates
-                this.map.setCenter(new OpenLayers.LonLat(10.2, 48.9).transform(
-                    new OpenLayers.Projection("EPSG:4326"),
-                    this.map.getProjectionObject()
-                ), 5);
-            }
+            // Set the default focus.
+            this.setViewport(
+                Neatline.record.default_map_bounds,
+                Neatline.record.default_map_zoom
+            );
 
         },
 
@@ -1112,9 +1107,13 @@
 
             var success = false;
 
+            // If a default focus is defined.
             if (!_.isNull(centerBounds)) {
+
+                // Get default bounds.
                 var bounds = centerBounds.split(',');
 
+                // If the bounds is an extent.
                 if (bounds.length === 4) {
                     this.map.zoomToExtent(new OpenLayers.Bounds(
                         parseFloat(bounds[0]),
@@ -1123,7 +1122,10 @@
                         parseFloat(bounds[3])
                     ));
                     success = true;
-                } else if (bounds.length === 2) {
+                }
+
+                // If the bounds is a lat/lon.
+                else if (bounds.length === 2) {
                     var zoom = _.isNull(zoom) ? 5 : parseInt(zoom, 10);
                     var latlon = new OpenLayers.LonLat(
                         parseFloat(bounds[0].trim()), parseFloat(bounds[1].trim())
@@ -1131,6 +1133,32 @@
                     this.map.setCenter(latlon, zoom);
                     success = true;
                 }
+
+            }
+
+            // If no focus is defined, try to geolocate.
+            else {
+
+                var geolocate = new OpenLayers.Control.Geolocate({
+                    bind: true,
+                    watch: false
+                });
+
+                geolocate.events.on({
+                    locationfailed: function() {
+                        self.map.setCenter(
+                            new OpenLayers.LonLat(-8738850.21367, 4584105.47978),
+                            3,
+                            false,
+                            false
+                        );
+                    }
+                });
+
+                this.map.addControl(geolocate);
+                this.map.zoomTo(6);
+                geolocate.activate();
+
             }
 
             return success;
