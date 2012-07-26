@@ -27,10 +27,10 @@
 
 <script type="text/template" id="bubble-template">
     <div class="bubble-container">
-        <a href="#" class="freeze-bubble">Click to freeze</a>
-        <a href="#" class="close-bubble">Close <span class="close-x">X</span></a>
+        <a href="#" class="freeze-bubble"><?php echo __('Click to freeze'); ?></a>
+        <a href="#" class="close-bubble"><?php echo __('Close'); ?> <span class="close-x">X</span></a>
         <div class="title"><%= title %></div>
-        <div class="click-for-info">Click for more information.</div>
+        <div class="click-for-info"><?php echo __('Click for more information.'); ?></div>
         <div class="body"><%= body %></div>
     </div>
 </script>

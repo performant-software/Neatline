@@ -30,14 +30,14 @@
 <ul class="nav">
 
     <li class="dropdown">
-        <a href="" id="configure-items-button" class="dropdown-toggle">Item Settings</a>
+        <a href="" id="configure-items-button" class="dropdown-toggle"><?php echo __('Item Settings'); ?></a>
         <div id="configure-items" class="dropdown-content">
             <?php echo $this->partial('editor/_configure_items.php'); ?>
         </div>
     </li>
 
     <li class="dropdown">
-        <a href="" id="configure-map-button" class="dropdown-toggle">Map Settings</a>
+        <a href="" id="configure-map-button" class="dropdown-toggle"><?php echo __('Map Settings'); ?></a>
         <div id="configure-map" class="dropdown-content">
             <?php echo $this->partial('editor/_configure_map.php', array(
                 'neatline' => $neatline,
@@ -47,7 +47,7 @@
     </li>
 
     <li class="dropdown">
-        <a href="" id="configure-timeline-button" class="dropdown-toggle">Timeline Settings</a>
+        <a href="" id="configure-timeline-button" class="dropdown-toggle"><?php echo __('Timeline Settings'); ?></a>
         <div id="configure-timeline" class="dropdown-content">
             <?php echo $this->partial('editor/_configure_timeline.php', array(
               'exhibit' => $neatline
@@ -56,7 +56,7 @@
     </li>
 
     <li class="dropdown">
-        <a href="" id="configure-layout-button" class="dropdown-toggle">Layout Editor</a>
+        <a href="" id="configure-layout-button" class="dropdown-toggle"><?php echo __('Layout Editor'); ?></a>
         <div id="configure-layout" class="dropdown-content">
             <?php echo $this->partial('editor/_configure_layout.php'); ?>
         </div>

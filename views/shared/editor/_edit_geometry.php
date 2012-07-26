@@ -26,15 +26,15 @@
 ?>
 
 <div id="geo-edit">
-    <button class="btn geo-edit" id="drag-button">Drag</button>
-    <button class="btn geo-edit" id="rotate-button">Rotate</button>
-    <button class="btn geo-edit" id="scale-button">Scale</button>
-    <button class="btn geo-edit danger" id="delete-button">Delete</button>
+    <button class="btn geo-edit" id="drag-button"><?php echo __('Drag'); ?></button>
+    <button class="btn geo-edit" id="rotate-button"><?php echo __('Rotate'); ?></button>
+    <button class="btn geo-edit" id="scale-button"><?php echo __('Scale'); ?></button>
+    <button class="btn geo-edit danger" id="delete-button"><?php echo __('Delete'); ?></button>
 </div>
 
 <div id="regular-shapes">
     <select id="regular-shapes-select" name="regular-shapes">
-        <option value="rectangle">rectangle</option>
-        <option value="elipse">elipse</option>
+        <option value="rectangle"><?php echo __('rectangle'); ?></option>
+        <option value="elipse"><?php echo __('elipse'); ?></option>
     </select>
 </div>

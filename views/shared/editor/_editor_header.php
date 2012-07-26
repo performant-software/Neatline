@@ -29,7 +29,7 @@
 <html lang="en-us">
 <head>
     <meta charset="utf-8">
-    <title><?php echo $titlePrefix; ?>: <?php echo $title; ?></title>
+    <title><?php echo $title; ?></title>
 
 <!-- Plugin Stuff -->
 <?php admin_plugin_header(); ?>

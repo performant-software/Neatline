@@ -27,20 +27,20 @@
 
 <div id="drag-tip" class="twipsy fade right in">
     <div class="twipsy-arrow"></div>
-    <div class="twipsy-inner">Click to drag.</div>
+    <div class="twipsy-inner"><?php echo __('Click to drag.'); ?></div>
 </div>
 
 <div id="items-tip" class="twipsy fade above in">
     <div class="twipsy-arrow"></div>
-    <div class="twipsy-inner">Items</div>
+    <div class="twipsy-inner"><?php echo __('Items'); ?></div>
 </div>
 
 <div id="space-tip" class="twipsy fade above in">
     <div class="twipsy-arrow"></div>
-    <div class="twipsy-inner">Space</div>
+    <div class="twipsy-inner"><?php echo __('Space'); ?></div>
 </div>
 
 <div id="time-tip" class="twipsy fade above in">
     <div class="twipsy-arrow"></div>
-    <div class="twipsy-inner">Time</div>
+    <div class="twipsy-inner"><?php echo __('Time'); ?></div>
 </div>

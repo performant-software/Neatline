@@ -28,7 +28,7 @@
 <table class="map-styles map-styles-defaults form-stacked">
     <tr>
         <td>
-            <label>Shape Color</label>
+            <label><?php echo __('Shape Color'); ?></label>
             <div class="input">
                 <div class="inline-inputs">
                     <input type="text" class="color-picker miniColors" name="default-vector-color" value="<?php echo $neatline->getStyle('vector_color'); ?>" />
@@ -36,7 +36,7 @@
             </div>
         </td>
         <td>
-            <label>Line Color</label>
+            <label><?php echo __('Line Color'); ?></label>
             <div class="input">
                 <div class="inline-inputs">
                     <input type="text" class="color-picker miniColors" name="default-stroke-color"  value="<?php echo $neatline->getStyle('stroke_color'); ?>" />
@@ -44,7 +44,7 @@
             </div>
         </td>
         <td>
-            <label>Selected Color</label>
+            <label><?php echo __('Selected Color'); ?></label>
             <div class="input">
                 <div class="inline-inputs">
                     <input type="text" class="color-picker miniColors" name="default-highlight-color" value="<?php echo $neatline->getStyle('highlight_color'); ?>" />
@@ -54,7 +54,7 @@
     </tr>
     <tr>
         <td>
-            <label>Shape Opacity</label>
+            <label><?php echo __('Shape Opacity'); ?></label>
             <div class="input">
                 <div class="inline-inputs">
                     <input type="text" class="integer-dragger" name="default-vector-opacity" value="<?php echo $neatline->getStyle('vector_opacity'); ?>" />
@@ -62,7 +62,7 @@
             </div>
         </td>
         <td>
-            <label>Selected Opacity</label>
+            <label><?php echo __('Selected Opacity'); ?></label>
             <div class="input">
                 <div class="inline-inputs">
                     <input type="text" class="integer-dragger" name="default-select-opacity" value="<?php echo $neatline->getStyle('select_opacity'); ?>" />
@@ -70,7 +70,7 @@
             </div>
         </td>
         <td>
-            <label>Line Opacity</label>
+            <label><?php echo __('Line Opacity'); ?></label>
             <div class="input">
                 <div class="inline-inputs">
                     <input type="text" class="integer-dragger" name="default-stroke-opacity" value="<?php echo $neatline->getStyle('stroke_opacity'); ?>" />
@@ -80,7 +80,7 @@
     </tr>
     <tr>
         <td>
-            <label>Graphic Opacity</label>
+            <label><?php echo __('Graphic Opacity'); ?></label>
             <div class="input">
                 <div class="inline-inputs">
                     <input type="text" class="integer-dragger" name="default-graphic-opacity" value="<?php echo $neatline->getStyle('graphic_opacity'); ?>" />
@@ -88,7 +88,7 @@
             </div>
         </td>
         <td>
-            <label>Line Width</label>
+            <label><?php echo __('Line Width'); ?></label>
             <div class="input">
                 <div class="inline-inputs">
                     <input type="text" class="integer-dragger" name="default-stroke-width" value="<?php echo $neatline->getStyle('stroke_width'); ?>" />
@@ -96,7 +96,7 @@
             </div>
         </td>
         <td>
-            <label>Point Radius</label>
+            <label><?php echo __('Point Radius'); ?></label>
             <div class="input">
                 <div class="inline-inputs">
                     <input type="text" class="integer-dragger" name="default-point-radius" value="<?php echo $neatline->getStyle('point_radius'); ?>" />
@@ -107,7 +107,7 @@
 </table>
 
 <!-- Base layer picker. -->
-<h5>Default Base Layer</h5>
+<h5><?php echo __('Default Base Layer'); ?></h5>
 <select name="base-layer">
     <?php foreach ($layers as $layer): ?>
     <option value="<?php echo $layer->id; ?>" <?php if ($neatline->getBaseLayer()->id == $layer->id) { echo 'selected="selected"'; } ?>>
@@ -117,4 +117,4 @@
 </select>
 <hr />
 
-<button class="btn icon approve save">Save</button>
+<button class="btn icon approve save"><?php echo __('Save'); ?></button>

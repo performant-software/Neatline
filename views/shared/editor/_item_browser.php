@@ -31,11 +31,11 @@
 
         <input type="text" placeholder="Search items" id="search-box" />
         <span id="search-cancel">x</span>
-        <button id="new-item-button" class="btn icon add">New Record</button>
+        <button id="new-item-button" class="btn icon add"><?php echo __('New Record'); ?></button>
         <div class="columns">
-            <div id="items-header" class="col-1 col-cell col-header"><a class="header" title="Items"></a></div>
-            <div id="space-header" class="col-2 col-cell col-header"><a class="header" title="Map"></a></div>
-            <div id="time-header" class="col-3 col-cell col-header"><a class="header" title="Timeline"></a></div>
+            <div id="items-header" class="col-1 col-cell col-header"><a class="header" title="<?php echo __('Items'); ?>"></a></div>
+            <div id="space-header" class="col-2 col-cell col-header"><a class="header" title="<?php echo __('Map'); ?>"></a></div>
+            <div id="time-header" class="col-3 col-cell col-header"><a class="header" title="<?php echo __('Timeline'); ?>"></a></div>
         </div>
 
     </div>

@@ -25,4 +25,4 @@
  */
 ?>
 
-<p>Coming soon...</p>
+<p><?php echo __('Coming soon.'); ?></p>
