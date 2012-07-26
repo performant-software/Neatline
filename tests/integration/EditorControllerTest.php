@@ -667,7 +667,7 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
                 'parent_record_id' =>   'none',
                 'use_dc_metadata' =>    null,
                 'show_bubble' =>        1,
-                'geocoverage' =>        'POINT()',
+                'geocoverage' =>        '',
                 'records' =>            array()
             )
         );

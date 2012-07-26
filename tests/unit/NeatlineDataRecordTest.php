@@ -1432,11 +1432,11 @@ class Neatline_NeatlineDataRecordTest extends Neatline_Test_AppTestCase
         $record = new NeatlineDataRecord(null, $neatline);
 
         // Should return null when the value is null.
-        $this->assertEquals($record->getGeocoverage(), 'POINT()');
+        $this->assertEquals($record->getGeocoverage(), '');
 
         // Should return empty WKT for empty string.
         $record->geocoverage = '';
-        $this->assertEquals($record->getGeocoverage(), 'POINT()');
+        $this->assertEquals($record->getGeocoverage(), '');
 
         // Should return the value when the value is set.
         $record->geocoverage = 'POINT(0,1)';
@@ -1458,8 +1458,8 @@ class Neatline_NeatlineDataRecordTest extends Neatline_Test_AppTestCase
         $neatline = $this->_createNeatline();
         $record = new NeatlineDataRecord($item, $neatline);
 
-        // Should return empty WKT.
-        $this->assertEquals($record->getGeocoverage(), 'POINT()');
+        // Should return empty string.
+        $this->assertEquals($record->getGeocoverage(), '');
 
         // Add an empty DC coverage field on the parent item.
         $this->_createElementText(
@@ -1469,7 +1469,7 @@ class Neatline_NeatlineDataRecordTest extends Neatline_Test_AppTestCase
             '');
 
         // Should return empty WKT.
-        $this->assertEquals($record->getGeocoverage(), 'POINT()');
+        $this->assertEquals($record->getGeocoverage(), '');
 
         // When there is a locally set value, override.
         $record->geocoverage = 'POINT(11,12)';
