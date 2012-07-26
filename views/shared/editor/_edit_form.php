@@ -31,8 +31,8 @@
 
         <ul class="tabs-header">
             <li><a href="#tabs-1">Text</a></li>
-            <li><a href="#tabs-2">Temporal</a></li>
-            <li><a href="#tabs-3">Spatial</a></li>
+            <li><a href="#tabs-2">Spatial</a></li>
+            <li><a href="#tabs-3">Temporal</a></li>
             <li><a href="#tabs-4">Styling</a></li>
             <li><a href="#tabs-5">Relations</a></li>
         </ul>
@@ -70,6 +70,17 @@
         </div>
 
         <div id="tabs-2" class="fieldset">
+
+            <div class="clearfix">
+                <label>Geocoverage</label>
+                <div class="input">
+                    <textarea class="xlarge" name="geocoverage" rows="16"></textarea>
+                </div>
+            </div>
+
+        </div>
+
+        <div id="tabs-3" class="fieldset">
 
             <div class="clearfix">
                 <label>Start Date</label>
@@ -120,17 +131,6 @@
                             <input name="right-ambiguity-percentage" type="hidden" />
                         </div>
                     </div>
-                </div>
-            </div>
-
-        </div>
-
-        <div id="tabs-3" class="fieldset">
-
-            <div class="clearfix">
-                <label>Geocoverage</label>
-                <div class="input">
-                    <textarea class="xlarge" name="geocoverage" rows="16"></textarea>
                 </div>
             </div>
 
