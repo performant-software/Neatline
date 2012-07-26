@@ -242,24 +242,6 @@ tr.header-row td {
     border: none;
 }
 
-div.form-actions {
-    display: none;
-    clear: both;
-}
-
-div.form-actions a {
-    font-style: italic;
-    margin: 0 0.6em 0 0;
-}
-
-div.form-actions a.return {
-    color: gray;
-}
-
-div.form-actions a.delete {
-    color: #C43C35;
-}
-
 
 /* Edit form */
 
@@ -421,8 +403,8 @@ table.map-buttons {
     width: 310px;
 }
 
-div.clearfix.checkbox {
-    margin-bottom: 3px;
+div.clearfix {
+    margin-bottom: 5px;
 }
 
 input[name="point-image"] {
@@ -431,6 +413,12 @@ input[name="point-image"] {
 
 #edit-form-actions button {
     margin-right: 0.4em;
+}
+
+div.form-actions {
+    margin-top: 0;
+    padding-left: 0;
+    background-color: transparent;
 }
 
 
