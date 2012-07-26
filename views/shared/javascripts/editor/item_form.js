@@ -79,7 +79,7 @@
             this.form =                     this.element.find('form');
             this.deleteButton =             this.form.find('#record-delete-button');
             this.closeButton =              this.form.find('#record-close-button');
-            this.saveButton =               this.form.find('input[type="submit"]');
+            this.saveButton =               this.form.find('#record-save-button');
             this.title =                    this.form.find('textarea[name="title"]');
             this.slug =                     this.form.find('input[name="slug"]');
             this.description =              this.form.find('textarea[name="description"]');

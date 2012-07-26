@@ -266,9 +266,9 @@
         <div class="fieldset">
 
             <div id="edit-form-actions" class="actions">
-                <input type="submit" class="btn primary" value="Save">
-                <button id="record-close-button" class="btn">Close Record</button>
-                <button id="record-delete-button" class="btn danger">Delete</button>
+                <button id="record-save-button" class="btn btn-primary"><i class="icon-ok-circle icon-white"></i> Save</button>
+                <button id="record-close-button" class="btn"><i class="icon-download"></i> Close</button>
+                <button id="record-delete-button" class="btn"><i class="icon-remove-circle"></i> Delete</button>
             </div>
 
         </div>

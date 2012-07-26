@@ -429,6 +429,10 @@ input[name="point-image"] {
     width: 315px;
 }
 
+#edit-form-actions button {
+    margin-right: 0.4em;
+}
+
 
 /* Search Cancel */
 
@@ -709,6 +713,7 @@ table#items-table {
     overflow: hidden;
     white-space: nowrap;
     margin-bottom: 0;
+    width: 100%;
 }
 
 table#items-table tr {
