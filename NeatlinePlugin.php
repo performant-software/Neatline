@@ -204,7 +204,7 @@ class NeatlinePlugin
             'graphic_opacity',
             'stroke_width',
             'point_radius',
-            'h_precent',
+            'h_percent',
             'v_percent',
             'timeline_zoom',
             'context_band_unit',
@@ -271,24 +271,47 @@ class NeatlinePlugin
         if (version_compare($oldVersion, '1.0.6', '<=')) {
 
             // `default_graphic_opacity` column.
-            $sql = "ALTER TABLE `{$this->_db->prefix}neatline_exhibits`
-                ADD COLUMN `default_graphic_opacity` int(10) unsigned NULL";
-            $this->_db->query($sql);
+            if (!$this->_db->getTable('NeatlineExhibit')->hasColumn('default_graphic_opacity')) {
+
+                $sql = "ALTER TABLE `{$this->_db->prefix}neatline_exhibits`
+                    ADD COLUMN `default_graphic_opacity` int(10) unsigned NULL";
+                $this->_db->query($sql);
+
+            }
 
             // `graphic_opacity` column.
-            $sql = "ALTER TABLE `{$this->_db->prefix}neatline_data_records`
-                ADD COLUMN `graphic_opacity` int(10) unsigned NULL";
-            $this->_db->query($sql);
+            if (!$this->_db->getTable('NeatlineDataRecord')->hasColumn('graphic_opacity')) {
+
+                $sql = "ALTER TABLE `{$this->_db->prefix}neatline_data_records`
+                    ADD COLUMN `graphic_opacity` int(10) unsigned NULL";
+                $this->_db->query($sql);
+
+            }
 
             // `point_image` column.
-            $sql = "ALTER TABLE `{$this->_db->prefix}neatline_data_records`
-                ADD COLUMN `point_image` tinytext COLLATE utf8_unicode_ci NULL";
-            $this->_db->query($sql);
+            if (!$this->_db->getTable('NeatlineDataRecord')->hasColumn('point_image')) {
+
+                $sql = "ALTER TABLE `{$this->_db->prefix}neatline_data_records`
+                    ADD COLUMN `point_image` tinytext COLLATE utf8_unicode_ci NULL";
+                $this->_db->query($sql);
+
+            }
 
             // Set default option.
             set_option('graphic_opacity', (int) get_plugin_ini(
                 'Neatline',
                 'default_graphic_opacity'
+            ));
+
+        }
+
+        if (version_compare($oldVersion, '1.0.1', '<=')) {
+
+            delete_option('h_precent');
+
+            set_option('h_percent', get_plugin_ini(
+                'Neatline',
+                'default_h_percent'
             ));
 
         }
