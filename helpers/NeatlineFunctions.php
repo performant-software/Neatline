@@ -172,8 +172,10 @@ function neatline_queueNeatlineAssets($exhibit)
     queue_js('libraries/iso8601.min', 'javascripts');
     queue_js('libraries/raphael', 'javascripts');
 
-    // Google fonts.
-    echo __v()->partial('neatline/_fonts.php');
+    // Google fonts. Use prependStylesheet so it gets inserted before other
+    // queued Neatline CSS files.
+    $headLink = __v()->headLink();
+    $headLink->prependStylesheet('http://fonts.googleapis.com/css?family=Crimson+Text:400,400italic,600,600italic,700,700italic');
 
 }
 
