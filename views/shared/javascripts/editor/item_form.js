@@ -48,7 +48,7 @@
             cleditor: {
 
                 description: {
-                    width: 340,
+                    width: 336,
                     height: 300,
                     controls:
                         "bold italic underline | font size " +
@@ -58,7 +58,7 @@
                 },
 
                 title: {
-                    width: 340,
+                    width: 336,
                     height: 100,
                     controls: "bold italic underline | font size color | " +
                         "bullets outdent indent | source removeformat"

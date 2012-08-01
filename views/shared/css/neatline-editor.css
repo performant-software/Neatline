@@ -97,7 +97,7 @@
     font-family: 'Crimson Text', Georgia, serif;
     font-size: 18px !important;
     padding: 6px 15px 10px 15px;
-    display: block;
+    display: inline !important;
     float: none;
     line-height: 19px;
     text-decoration: none;
@@ -260,7 +260,7 @@ tr.header-row td {
 /* Edit form */
 
 tr.edit-form td {
-    padding: 0;
+    padding: 0px;
 }
 
 tr.edit-form td.edit-form-container {
@@ -332,7 +332,7 @@ tr.edit-form td.edit-form-container {
 }
 
 .input-xlarge, input.xlarge, textarea.xlarge, select.xlarge {
-    width: 332px;
+    width: 328px;
 }
 
 #record-delete-button {
@@ -406,6 +406,7 @@ table.map-styles {
 
 table.map-styles td {
     border: none !important;
+    padding-right: 23px;
 }
 
 tr.edit-form label {
@@ -419,10 +420,6 @@ table.map-buttons {
 
 div.clearfix {
     margin-bottom: 5px;
-}
-
-input[name="point-image"] {
-    width: 315px;
 }
 
 #edit-form-actions button {
@@ -745,7 +742,7 @@ table#items-table {
     overflow: hidden;
     white-space: nowrap;
     margin-bottom: 0;
-    width: 100%;
+    width: 385px;
 }
 
 table#items-table tr {
@@ -769,7 +766,7 @@ table#items-table td.col-row {
 }
 
 table#items-table td.col-row input {
-    margin-top: 12px;
+    margin-top: 6px;
 }
 
 table#items-table td.col-1:hover, table#items td.col-2:hover {

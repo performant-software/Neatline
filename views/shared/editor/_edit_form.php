@@ -225,24 +225,13 @@
                 </div>
             </div>
 
-            <table class="map-styles map-buttons">
-                <tr>
-                    <td>
-                        <div class="controls">
-                            <div class="inline-inputs">
-                                <button class="btn icon undo reset-styles">Reset Item Styles</button>
-                            </div>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="controls">
-                            <div class="inline-inputs">
-                                <button class="btn icon home map-focus">Set Map Focus</button>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-            </table>
+            <div class="control-group">
+                <div class="controls">
+                    <div class="inline-inputs">
+                        <button class="btn icon undo reset-styles">Reset Item Styles</button>
+                    </div>
+                </div>
+            </div>
 
         </div>
 
@@ -263,9 +252,9 @@
         <div class="fieldset">
 
             <div id="edit-form-actions" class="form-actions">
-                <button id="record-save-button" class="btn btn-large btn-neatline"><i class="icon-ok-circle icon-white"></i> Save</button>
-                <button id="record-close-button" class="btn btn-large"><i class="icon-download"></i> Close</button>
-                <button id="record-delete-button" class="btn btn-large btn-neatline-delete"><i class="icon-remove-circle icon-white"></i> Delete</button>
+                <button id="record-save-button" class="btn btn-large btn-neatline"><i class="icon-ok icon-white"></i> Save</button>
+                <button id="record-close-button" class="btn btn-large"><i class="icon-remove"></i> Close</button>
+                <button id="record-delete-button" class="btn btn-large btn-neatline-delete"><i class="icon-trash icon-white"></i> Delete</button>
             </div>
 
         </div>
