@@ -82,7 +82,7 @@
 .topbar div > ul, .nav {
     display: block;
     float: right;
-    margin: 0 20px 0 20px;
+    margin: 5px 20px 0 20px;
     position: relative;
     left: 0;
     height: 100%;
@@ -112,8 +112,8 @@
     text-decoration: none;
 }
 
-.topbar div > ul a.open, .nav a.open {
-    background: rgba(255, 255, 255, 0.05);
+.topbar div > ul a.open, .nav a.open, .topbar div > ul a:hover, .nav a:hover {
+    background: rgba(255, 255, 255, 0.05) !important;
 }
 
 /* Item browser */
