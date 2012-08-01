@@ -3,6 +3,7 @@ plugin.ini
 build/api/
 build/code-browser/
 build/coverage/
+build/dist/
 build/logs/
 build/pdepend/
 build/tmp/
