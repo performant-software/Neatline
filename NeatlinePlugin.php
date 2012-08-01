@@ -27,6 +27,23 @@
 class NeatlinePlugin
 {
 
+    private static $_mapStyles = array(
+        'vector_color',
+        'stroke_color',
+        'highlight_color',
+        'vector_opacity',
+        'select_opacity',
+        'stroke_opacity',
+        'graphic_opacity',
+        'stroke_width',
+        'point_radius',
+        'h_percent',
+        'v_percent',
+        'timeline_zoom',
+        'context_band_unit',
+        'context_band_height'
+    );
+
     private static $_hooks = array(
         'install',
         'uninstall',
@@ -194,24 +211,7 @@ class NeatlinePlugin
         $this->_db->query($sql);
 
         // Set default map style attributes.
-        $mapStyles = array(
-            'vector_color',
-            'stroke_color',
-            'highlight_color',
-            'vector_opacity',
-            'select_opacity',
-            'stroke_opacity',
-            'graphic_opacity',
-            'stroke_width',
-            'point_radius',
-            'h_percent',
-            'v_percent',
-            'timeline_zoom',
-            'context_band_unit',
-            'context_band_height'
-        );
-
-        foreach ($mapStyles as $style) {
+        foreach (self::$_mapStyles as $style) {
           set_option($style, get_plugin_ini('Neatline', 'default_'.$style));
         }
 
@@ -254,6 +254,11 @@ class NeatlinePlugin
         // Drop the data table.
         $sql = "DROP TABLE IF EXISTS `{$this->_db->prefix}neatline_base_layers`";
         $this->_db->query($sql);
+
+        // Remove default map style attributes.
+        foreach (self::$_mapStyles as $style) {
+          delete_option($style);
+        }
 
     }
 
