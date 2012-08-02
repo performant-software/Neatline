@@ -505,19 +505,10 @@
         },
 
         /*
-         * Build functionality on the Space/Time column headers. On mouseover,
-         * highlight the column to show that it is filterable by a click; on
-         * mousedown, hide all items that do not have an active record in the
-         * clicked column.
+         * Add tooltips to column headers.
          */
         _glossColumnHeaders: function() {
-
-            // Tooltips.
-            this.itemsListHeader.find('a.header').twipsy({
-                offset: 4,
-                animate: false
-            });
-
+            this.itemsListHeader.find('a.header').tooltip();
         },
 
         /*

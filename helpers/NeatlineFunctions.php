@@ -80,7 +80,7 @@ function neatline_queueEditorAssets()
     queue_js('libraries/jquery.miniColors-0.1/jquery.miniColors.min', 'javascripts');
     queue_js('libraries/CLEditor-1.3.0/jquery.cleditor.min', 'javascripts');
     queue_js('libraries/redactor/redactor/redactor.min', 'javascripts');
-    queue_js('libraries/bootstrap-twipsy', 'javascripts');
+    queue_js('libraries/bootstrap.min', 'javascripts');
 
 }
 
