@@ -67,7 +67,7 @@
                     if (!self.dragButton.data('activated')) {
 
                         // Do the color change.
-                        self.dragButton.addClass('primary');
+                        self.dragButton.addClass('btn-neatline');
 
                         // Change the trackers.
                         self.dragButton.data('activated', true);
@@ -78,7 +78,7 @@
                     else {
 
                         // Do the color change.
-                        self.dragButton.removeClass('primary');
+                        self.dragButton.removeClass('btn-neatline');
 
                         // Change the tracker.
                         self.dragButton.data('activated', false);
@@ -105,7 +105,7 @@
                     if (!self.scaleButton.data('activated')) {
 
                         // Do the color change.
-                        self.scaleButton.addClass('primary');
+                        self.scaleButton.addClass('btn-neatline');
 
                         // Change the trackers.
                         self.scaleButton.data('activated', true);
@@ -116,7 +116,7 @@
                     else {
 
                         // Do the color change.
-                        self.scaleButton.removeClass('primary');
+                        self.scaleButton.removeClass('btn-neatline');
 
                         // Change the tracker.
                         self.scaleButton.data('activated', false);
@@ -143,7 +143,7 @@
                     if (!self.rotateButton.data('activated')) {
 
                         // Do the color change.
-                        self.rotateButton.addClass('primary');
+                        self.rotateButton.addClass('btn-neatline');
 
                         // Change the tracker.
                         self.rotateButton.data('activated', true);
@@ -154,7 +154,7 @@
                     else {
 
                         // Do the color change.
-                        self.rotateButton.removeClass('primary');
+                        self.rotateButton.removeClass('btn-neatline');
 
                         // Change the tracker.
                         self.rotateButton.data('activated', false);

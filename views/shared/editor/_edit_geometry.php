@@ -29,7 +29,7 @@
     <button class="btn geo-edit" id="drag-button"><?php echo __('Drag'); ?></button>
     <button class="btn geo-edit" id="rotate-button"><?php echo __('Rotate'); ?></button>
     <button class="btn geo-edit" id="scale-button"><?php echo __('Scale'); ?></button>
-    <button class="btn geo-edit danger" id="delete-button"><?php echo __('Delete'); ?></button>
+    <button class="btn geo-edit btn-danger" id="delete-button"><?php echo __('Delete'); ?></button>
 </div>
 
 <div id="regular-shapes">
