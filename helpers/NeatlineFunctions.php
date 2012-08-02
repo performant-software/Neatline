@@ -46,7 +46,7 @@ function neatline_queueEditorAssets()
 {
 
     // CSS.
-    queue_css('bootstrap.xtra.min');
+    queue_css('bootstrap/css/bootstrap.min');
     queue_css('neatline-editor');
     queue_css('neatline-fullscreen');
     queue_css('gradient-builder');
@@ -56,6 +56,7 @@ function neatline_queueEditorAssets()
     queue_css('configure-items');
     queue_css('jquery.miniColors');
     queue_css('jquery.cleditor');
+    queue_css('redactor');
 
     // Application classes and controller script.
     queue_js('editor/item_browser', 'javascripts');
@@ -73,13 +74,12 @@ function neatline_queueEditorAssets()
     queue_js('editor/utilities/_gradient_builder', 'javascripts');
     queue_js('editor/utilities/_dropdown', 'javascripts');
     queue_js('editor/utilities/_integer_dragger', 'javascripts');
-    queue_js('editor/utilities/_fieldset_expander', 'javascripts');
-    queue_js('editor/utilities/_record_slug_builder', 'javascripts');
     queue_js('editor/_constructEditor', 'javascripts');
 
     // Extenal libraries.
     queue_js('libraries/jquery.miniColors-0.1/jquery.miniColors.min', 'javascripts');
     queue_js('libraries/CLEditor-1.3.0/jquery.cleditor.min', 'javascripts');
+    queue_js('libraries/redactor/redactor/redactor.min', 'javascripts');
     queue_js('libraries/bootstrap-twipsy', 'javascripts');
 
 }
@@ -156,7 +156,6 @@ function neatline_queueNeatlineAssets($exhibit)
     queue_js('neatline_timeline', 'javascripts');
     queue_js('neatline_items', 'javascripts');
     queue_js('positioner', 'javascripts/utilities');
-    queue_js('scroller', 'javascripts/utilities');
     queue_js('bubbles', 'javascripts/utilities');
     queue_js('span_styler', 'javascripts/utilities');
     queue_js('_utilities', 'javascripts/libraries');

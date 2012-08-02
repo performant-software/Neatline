@@ -19,7 +19,7 @@
 <p>Click to edit the ordering of the items in the description tray.</p>
 <hr />
 
-<button class="btn icon approve save">Save</button>
+<button class="btn btn-neatline save"><i class="icon-ok icon-white"></i> Save</button>
         </div>
     </li>
 
@@ -33,7 +33,7 @@
             <label>Shape Color</label>
             <div class="input">
                 <div class="inline-inputs">
-                    <input type="text" class="color-picker miniColors" name="default-vector-color" value="#005aff" />
+                    <input type="text" class="color-picker miniColors" name="default-vector-color" value="#196aff" />
                 </div>
             </div>
         </td>
@@ -41,7 +41,7 @@
             <label>Line Color</label>
             <div class="input">
                 <div class="inline-inputs">
-                    <input type="text" class="color-picker miniColors" name="default-stroke-color"  value="#005aff" />
+                    <input type="text" class="color-picker miniColors" name="default-stroke-color"  value="#000000" />
                 </div>
             </div>
         </td>
@@ -59,7 +59,7 @@
             <label>Shape Opacity</label>
             <div class="input">
                 <div class="inline-inputs">
-                    <input type="text" class="integer-dragger" name="default-vector-opacity" value="20" />
+                    <input type="text" class="integer-dragger" name="default-vector-opacity" value="30" />
                 </div>
             </div>
         </td>
@@ -75,7 +75,7 @@
             <label>Line Opacity</label>
             <div class="input">
                 <div class="inline-inputs">
-                    <input type="text" class="integer-dragger" name="default-stroke-opacity" value="70" />
+                    <input type="text" class="integer-dragger" name="default-stroke-opacity" value="100" />
                 </div>
             </div>
         </td>
@@ -93,7 +93,7 @@
             <label>Line Width</label>
             <div class="input">
                 <div class="inline-inputs">
-                    <input type="text" class="integer-dragger" name="default-stroke-width" value="4" />
+                    <input type="text" class="integer-dragger" name="default-stroke-width" value="3" />
                 </div>
             </div>
         </td>
@@ -130,7 +130,7 @@
     </select>
 <hr />
 
-<button class="btn icon approve save">Save</button>
+<button class="btn btn-neatline"><i class="icon-ok icon-white"></i> Save</button>
         </div>
     </li>
 
@@ -161,7 +161,7 @@
 <input type="text" class="integer-dragger" name="band-height" value="35" />
 <hr />
 
-<button class="btn icon approve save">Save</button>
+<button class="btn btn-neatline"><i class="icon-ok icon-white"></i> Save</button>
         </div>
     </li>
 
@@ -177,8 +177,8 @@
 
 <div id="drag-box"></div>
 
-<button id="save-arrangement" class="btn icon approve save">Save arrangement</button>
-<button id="fix-positions" class="btn icon pin save">Fix starting viewport positions</button>
+<button id="save-arrangement" class="btn btn-neatline"><i class="icon-ok icon-white"></i> Save arrangement</button>
+<button id="fix-positions" class="btn btn-neatline"><i class="icon-screenshot icon-white"></i> Fix starting viewport positions</button>
 
 <hr />
 
@@ -198,7 +198,7 @@ to store the current viewport settings as the public defaults.</p>
 
         <input type="text" placeholder="Search items" id="search-box" />
         <span id="search-cancel">x</span>
-        <button id="new-item-button" class="btn icon add">New Record</button>
+        <button id="new-item-button" class="btn"><i class="icon-plus-sign"></i> New Record</button>
         <div class="columns">
             <div id="items-header" class="col-1 col-cell col-header"><a class="header" title="Items"></a></div>
             <div id="space-header" class="col-2 col-cell col-header"><a class="header" title="Map"></a></div>
@@ -215,24 +215,25 @@ to store the current viewport settings as the public defaults.</p>
 
         <ul class="tabs-header">
             <li><a href="#tabs-1">Text</a></li>
-            <li><a href="#tabs-2">Temporal</a></li>
-            <li><a href="#tabs-3">Styling</a></li>
-            <li><a href="#tabs-4">Relations</a></li>
+            <li><a href="#tabs-2">Spatial</a></li>
+            <li><a href="#tabs-3">Temporal</a></li>
+            <li><a href="#tabs-4">Styling</a></li>
+            <li><a href="#tabs-5">Relations</a></li>
         </ul>
 
-        <div id="tabs-1" class="fieldset">
+        <div id="tabs-1">
 
-            <div class="clearfix">
+            <div class="control-group">
                 <label for="title">Title</label>
-                <div class="input">
-                    <textarea id="item-title" class="xlarge" name="title" placeholder="Title" rows="1"></textarea>
+                <div class="controls">
+                    <textarea id="item-title" class="xlarge" name="title" placeholder="Title" rows="6"></textarea>
                 </div>
             </div>
 
-            <div class="clearfix">
+            <div class="control-group">
                 <label for="description">Description</label>
-                <div class="input">
-                    <textarea id="item-description" class="xlarge" name="description" placeholder="Description" rows="4"></textarea>
+                <div class="controls">
+                    <textarea id="item-description" class="xlarge" name="description" placeholder="Description" rows="12"></textarea>
                 </div>
             </div>
 
@@ -241,9 +242,6 @@ to store the current viewport settings as the public defaults.</p>
                     <input type="checkbox" name="show-bubble">
                     <span>Show pop-up bubble.</span>
                 </label>
-            </div>
-
-            <div id="use-dc-data-container" class="clearfix checkbox">
                 <label>
                     <input type="checkbox" name="use-dc-data">
                     <span>Use default item metadata.</span>
@@ -252,47 +250,59 @@ to store the current viewport settings as the public defaults.</p>
 
         </div>
 
-        <div id="tabs-2" class="fieldset">
+        <div id="tabs-2">
 
-            <div class="clearfix">
+            <div class="control-group">
+                <label>Geocoverage</label>
+                <div class="controls">
+                    <textarea class="xlarge" name="geocoverage" rows="16"></textarea>
+                </div>
+            </div>
+
+        </div>
+
+        <div id="tabs-3">
+
+
+            <div class="control-group">
                 <label>Start Date</label>
-                <div class="input">
+                <div class="controls">
                     <div class="inline-inputs">
                         <input class="xlarge" name="start-date-date" type="text" placeholder="Start Date" />
                     </div>
                 </div>
             </div>
 
-            <div class="clearfix">
+            <div class="control-group">
                 <label>End Date</label>
-                <div class="input">
+                <div class="controls">
                     <div class="inline-inputs">
                         <input class="xlarge" name="end-date-date" type="text" placeholder="End Date" />
                     </div>
                 </div>
             </div>
 
-            <div class="clearfix">
+            <div class="control-group">
                 <label>Start Visible Date</label>
-                <div class="input">
+                <div class="controls">
                     <div class="inline-inputs">
                         <input class="xlarge" name="start-visible-date" type="text" placeholder="Start Date" />
                     </div>
                 </div>
             </div>
 
-            <div class="clearfix">
+            <div class="control-group">
                 <label>End Visible Date</label>
-                <div class="input">
+                <div class="controls">
                     <div class="inline-inputs">
                         <input class="xlarge" name="end-visible-date" type="text" placeholder="End Date" />
                     </div>
                 </div>
             </div>
 
-            <div class="clearfix">
+            <div class="control-group">
                 <label>Date Ambiguity</label>
-                <div class="input">
+                <div class="controls">
                     <div class="inline-inputs">
                         <div class="date-ambiguity-container">
                             <div class="date-ambiguity-editor">
@@ -308,13 +318,14 @@ to store the current viewport settings as the public defaults.</p>
 
         </div>
 
-        <div id="tabs-3" class="fieldset">
+
+        <div id="tabs-4">
 
             <table class="map-styles">
                 <tr>
                     <td>
                         <label>Shape Color</label>
-                        <div class="input">
+                        <div class="controls">
                             <div class="inline-inputs">
                                 <input type="text" class="color-picker" name="vector-color" />
                             </div>
@@ -322,7 +333,7 @@ to store the current viewport settings as the public defaults.</p>
                     </td>
                     <td>
                         <label>Line Color</label>
-                        <div class="input">
+                        <div class="controls">
                             <div class="inline-inputs">
                                 <input type="text" class="color-picker" name="stroke-color" />
                             </div>
@@ -330,7 +341,7 @@ to store the current viewport settings as the public defaults.</p>
                     </td>
                     <td>
                         <label>Selected Color</label>
-                        <div class="input">
+                        <div class="controls">
                             <div class="inline-inputs">
                                 <input type="text" class="color-picker" name="highlight-color" />
                             </div>
@@ -340,7 +351,7 @@ to store the current viewport settings as the public defaults.</p>
                 <tr>
                     <td>
                         <label>Shape Opacity</label>
-                        <div class="input">
+                        <div class="controls">
                             <div class="inline-inputs">
                                 <input type="text" class="integer-dragger" name="vector-opacity" />
                             </div>
@@ -348,7 +359,7 @@ to store the current viewport settings as the public defaults.</p>
                     </td>
                     <td>
                         <label>Selected Opacity</label>
-                        <div class="input">
+                        <div class="controls">
                             <div class="inline-inputs">
                                 <input type="text" class="integer-dragger" name="select-opacity" />
                             </div>
@@ -356,7 +367,7 @@ to store the current viewport settings as the public defaults.</p>
                     </td>
                     <td>
                         <label>Line Opacity</label>
-                        <div class="input">
+                        <div class="controls">
                             <div class="inline-inputs">
                                 <input type="text" class="integer-dragger" name="stroke-opacity" />
                             </div>
@@ -366,7 +377,7 @@ to store the current viewport settings as the public defaults.</p>
                 <tr>
                     <td>
                         <label>Graphic Opacity</label>
-                        <div class="input">
+                        <div class="controls">
                             <div class="inline-inputs">
                                 <input type="text" class="integer-dragger" name="graphic-opacity" />
                             </div>
@@ -374,7 +385,7 @@ to store the current viewport settings as the public defaults.</p>
                     </td>
                     <td>
                         <label>Line Width</label>
-                        <div class="input">
+                        <div class="controls">
                             <div class="inline-inputs">
                                 <input type="text" class="integer-dragger" name="stroke-width" />
                             </div>
@@ -382,7 +393,7 @@ to store the current viewport settings as the public defaults.</p>
                     </td>
                     <td>
                         <label>Point Radius</label>
-                        <div class="input">
+                        <div class="controls">
                             <div class="inline-inputs">
                                 <input type="text" class="integer-dragger" name="point-radius" />
                             </div>
@@ -391,41 +402,30 @@ to store the current viewport settings as the public defaults.</p>
                 </tr>
             </table>
 
-            <div class="clearfix">
+            <div class="control-group">
                 <label>Point Graphic</label>
-                <div class="input">
+                <div class="controls">
                     <div class="inline-inputs">
                         <input class="xlarge" name="point-image" type="text" placeholder="An external graphic to represent a point" />
                     </div>
                 </div>
             </div>
 
-            <table class="map-styles map-buttons">
-                <tr>
-                    <td>
-                        <div class="input">
-                            <div class="inline-inputs">
-                                <button class="btn icon undo reset-styles">Reset Item Styles</button>
-                            </div>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="input">
-                            <div class="inline-inputs">
-                                <button class="btn icon home map-focus">Set Map Focus</button>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-            </table>
+            <div class="control-group">
+                <div class="controls">
+                    <div class="inline-inputs">
+                        <button class="btn icon undo reset-styles">Reset Item Styles</button>
+                    </div>
+                </div>
+            </div>
 
         </div>
 
-        <div id="tabs-4" class="fieldset">
+        <div id="tabs-5">
 
-            <div class="clearfix">
+            <div class="control-group">
                 <label>Parent Record</label>
-                <div class="input">
+                <div class="controls">
                     <div class="inline-inputs">
                         <select name="parent-record">
                         </select>
@@ -437,10 +437,10 @@ to store the current viewport settings as the public defaults.</p>
 
         <div class="fieldset">
 
-            <div id="edit-form-actions" class="actions">
-                <input type="submit" class="btn primary" value="Save">
-                <button id="record-close-button" class="btn">Close Record</button>
-                <button id="record-delete-button" class="btn danger">Delete</button>
+            <div id="edit-form-actions" class="form-actions">
+                <button id="record-save-button" class="btn btn-large btn-neatline"><i class="icon-ok icon-white"></i> Save</button>
+                <button id="record-close-button" class="btn btn-large"><i class="icon-remove"></i> Close</button>
+                <button id="record-delete-button" class="btn btn-large btn-neatline-delete"><i class="icon-trash icon-white"></i> Delete</button>
             </div>
 
         </div>
@@ -495,7 +495,7 @@ to store the current viewport settings as the public defaults.</p>
 <!-- JSON globals. -->
 <script type="text/javascript">
 
-        Neatline = {"record":{"added":"2012-07-23 09:10:07","modified":"2012-07-23 09:10:07","name":"Test Exhibit","description":"Test description.","slug":"test-exhibit","public":1,"query":null,"creator_id":1,"image_id":null,"top_element":"map","items_h_pos":"right","items_v_pos":"top","items_height":"full","h_percent":50,"v_percent":60,"is_map":1,"is_timeline":1,"is_items":1,"default_map_bounds":null,"default_map_zoom":null,"default_focus_date":null,"default_timeline_zoom":null,"is_context_band":1,"default_context_band_unit":null,"default_context_band_height":null,"default_vector_color":null,"default_stroke_color":null,"default_highlight_color":null,"default_vector_opacity":null,"default_select_opacity":null,"default_stroke_opacity":null,"default_graphic_opacity":null,"default_stroke_width":null,"default_point_radius":null,"default_base_layer":2,"id":1},"dataSources":{"timeline":"http:\/\/\/Users\/davidmcclure\/pear\/bin\/neatline-exhibits\/simile\/1","map":"http:\/\/\/Users\/davidmcclure\/pear\/bin\/neatline-exhibits\/openlayers\/1","undated":"http:\/\/\/Users\/davidmcclure\/pear\/bin\/neatline-exhibits\/udi\/1"},"baseLayer":{"name":"Google Physical","id":2},"timelineZoom":15,"highlightColor":"#ff9600","proportions":{"horizontal":50,"vertical":60},"timeline":{"isContextBand":1,"contextBandUnit":"DECADE","contextBandHeight":"35"}}
+        Neatline = {"record":{"added":"2012-08-02 14:28:20","modified":"2012-08-02 14:28:20","name":"Test Exhibit","description":"Test description.","slug":"test-exhibit","public":1,"query":null,"creator_id":1,"image_id":null,"top_element":"map","items_h_pos":"right","items_v_pos":"top","items_height":"full","h_percent":50,"v_percent":60,"is_map":1,"is_timeline":1,"is_items":1,"default_map_bounds":null,"default_map_zoom":null,"default_focus_date":null,"default_timeline_zoom":null,"is_context_band":1,"default_context_band_unit":null,"default_context_band_height":null,"default_vector_color":null,"default_stroke_color":null,"default_highlight_color":null,"default_vector_opacity":null,"default_select_opacity":null,"default_stroke_opacity":null,"default_graphic_opacity":null,"default_stroke_width":null,"default_point_radius":null,"default_base_layer":2,"id":1},"dataSources":{"timeline":"http:\/\/\/Users\/davidmcclure\/pear\/bin\/neatline-exhibits\/simile\/1","map":"http:\/\/\/Users\/davidmcclure\/pear\/bin\/neatline-exhibits\/openlayers\/1","undated":"http:\/\/\/Users\/davidmcclure\/pear\/bin\/neatline-exhibits\/udi\/1"},"baseLayer":{"name":"Google Physical","id":2},"timelineZoom":15,"highlightColor":"#ff9600","proportions":{"horizontal":50,"vertical":60},"timeline":{"isContextBand":1,"contextBandUnit":"DECADE","contextBandHeight":"35"}}
 </script>
 
 <div id="drag-tip" class="twipsy fade right in">

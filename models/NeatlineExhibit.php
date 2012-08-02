@@ -55,7 +55,7 @@ class NeatlineExhibit extends Omeka_Record implements Zend_Acl_Resource_Interfac
 
     // Viewport presence.
     public $is_map = 1;
-    public $is_timeline = 1;
+    public $is_timeline = 0;
     public $is_items = 0;
 
     // Map position defaults.

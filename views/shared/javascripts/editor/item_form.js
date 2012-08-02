@@ -44,27 +44,14 @@
                 orange: '#ffda82'
             },
 
-            // CLEditor.
-            cleditor: {
-
-                description: {
-                    width: 340,
-                    height: 300,
-                    controls:
-                        "bold italic underline | font size " +
-                        "| color removeformat | bullets numbering | outdent " +
-                        "indent | alignleft center alignright justify | " +
-                        "rule image link unlink | source"
-                },
-
-                title: {
-                    width: 340,
-                    height: 100,
-                    controls: "bold italic underline | font size color | " +
-                        "bullets outdent indent | source removeformat"
-                }
-
-            }
+            // Redactor options.
+            redactor: [
+                'html', 'bold', 'italic', 'underline', '|',
+                'image', 'link', '|',
+                'fontcolor', 'backcolor', '|',
+                'alignleft', 'aligncenter', 'alignright', '|',
+                'fullscreen'
+            ]
 
         },
 
@@ -79,7 +66,7 @@
             this.form =                     this.element.find('form');
             this.deleteButton =             this.form.find('#record-delete-button');
             this.closeButton =              this.form.find('#record-close-button');
-            this.saveButton =               this.form.find('input[type="submit"]');
+            this.saveButton =               this.form.find('#record-save-button');
             this.title =                    this.form.find('textarea[name="title"]');
             this.slug =                     this.form.find('input[name="slug"]');
             this.description =              this.form.find('textarea[name="description"]');
@@ -136,16 +123,6 @@
         _buildFormFunctionality: function() {
 
             var self = this;
-
-            // ** TITLE.
-            this.titleEditor = this.title.cleditor(
-                this.options.cleditor.title
-            )[0];
-
-            // ** DESCRIPTION.
-            this.descriptionEditor = this.description.cleditor(
-                this.options.cleditor.description
-            )[0];
 
             // ** USE DC DATA.
             this.useDcData.bind('change', _.bind(function() {
@@ -371,6 +348,22 @@
             this.form.tabs();
         },
 
+        /*
+         * Instantiate the editors on title and description.
+         */
+        _buildEditors: function() {
+            this.title.redactor({ buttons: this.options.redactor, focus: false });
+            this.description.redactor({ buttons: this.options.redactor, focus: false });
+        },
+
+        /*
+         * Destroy editors on title and description.
+         */
+        _destroyEditors: function() {
+            this.title.destroyEditor();
+            this.description.destroyEditor();
+        },
+
 
         /*
          * =================
@@ -408,6 +401,7 @@
             // DOM touches.
             this._disableButtons();
             this._showContainer();
+            this._buildEditors();
             this._expandTitle();
             this._getFormData();
 
@@ -430,13 +424,13 @@
          * Collapse an item edit form and unbind all events.
          */
         hideForm: function(item, immediate) {
-            if (this._isLocked) {
-                return;
-            }
+
+            if (this._isLocked) return;
 
             // DOM touches.
             this._hideContainer(immediate);
             this._contractTitle();
+            this._destroyEditors();
 
             // Update the tracker.
             this._isForm = false;
@@ -697,12 +691,10 @@
             var showBubble = Boolean(parseInt(this._data.show_bubble, 10));
 
             // Update title.
-            this.title.val(this._data.title);
-            this.titleEditor.updateFrame().refresh();
+            this.title.setCode(this._data.title);
 
             // Update description.
-            this.description.val(this._data.description);
-            this.descriptionEditor.updateFrame().refresh();
+            this.description.setCode(this._data.description);
 
             // If use-DC is activated, disable text editors.
             if (useDc) this._disableTextEditors();
@@ -773,8 +765,8 @@
             var data = {};
 
             // Get the content of the text editors.
-            data.description =              this._getDescriptionContent();
-            data.title =                    this._getTitleContent();
+            data.description =              this.description.getCode();
+            data.title =                    this.title.getCode();
             data.slug =                     this.slug.val();
 
             // Get the form field data.
@@ -828,33 +820,19 @@
         },
 
         /*
-         * Get the <body> content out of the description cleditor.
-         */
-        _getDescriptionContent: function(coverage) {
-            return this.description.next('iframe').contents().find('body').html();
-        },
-
-        /*
-         * Get the <body> content out of the description cleditor.
-         */
-        _getTitleContent: function(coverage) {
-            return this.title.next('iframe').contents().find('body').html();
-        },
-
-        /*
          * Disable and gray out the text editors.
          */
         _disableTextEditors: function() {
-            this.descriptionEditor.disable(true);
-            $(this.descriptionEditor.$main[0]).css('opacity', 0.3);
+            // this.descriptionEditor.disable(true);
+            // $(this.descriptionEditor.$main[0]).css('opacity', 0.3);
         },
 
         /*
          * Enable the text editors.
          */
         _enableTextEditors: function() {
-            this.descriptionEditor.disable(false);
-            $(this.descriptionEditor.$main[0]).css('opacity', 1);
+            // this.descriptionEditor.disable(false);
+            // $(this.descriptionEditor.$main[0]).css('opacity', 1);
         },
 
         /*
@@ -1053,8 +1031,7 @@
                 },
 
                 success: _.bind(function(newDescription) {
-                    this.description.val(newDescription);
-                    this.descriptionEditor.updateFrame().refresh();
+                    this.description.setCode(newDescription);
                     self._trigger('savecomplete');
                 }, this)
 

@@ -33,8 +33,8 @@
 
 <div id="drag-box"></div>
 
-<button id="save-arrangement" class="btn icon approve save"><?php echo __('Save arrangement'); ?></button>
-<button id="fix-positions" class="btn icon pin save"><?php echo __('Fix starting viewport positions'); ?></button>
+<button id="save-arrangement" class="btn btn-neatline"><i class="icon-ok icon-white"></i> <?php echo __('Save arrangement'); ?></button>
+<button id="fix-positions" class="btn btn-neatline"><i class="icon-screenshot icon-white"></i> <?php echo __('Fix starting viewport positions'); ?></button>
 
 <hr />
 

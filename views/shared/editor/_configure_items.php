@@ -30,4 +30,4 @@
 <p><?php echo __('Click to edit the ordering of the items in the description tray.'); ?></p>
 <hr />
 
-<button class="btn icon approve save"><?php echo __('Save'); ?></button>
+<button class="btn btn-neatline save"><i class="icon-ok icon-white"></i> <?php echo __('Save'); ?></button>

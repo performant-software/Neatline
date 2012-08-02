@@ -74,8 +74,8 @@ span.neatline-toggle-button {
 }
 
 span.neatline-pressed {
-    color: #835A98;
-    border-color: #b49ac2;
+    color: #594E62;
+    border-color: #594E62;
 }
 
 span.neatline-highlighted {
@@ -101,7 +101,7 @@ div.draggable {
 span.drag-tag {
     position: relative;
     display: block;
-    color: #835a98;
+    color: #594E62;
 }
 
 #drag-map {

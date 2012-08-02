@@ -72,14 +72,14 @@
                     if (self._isOrdering) {
                         self._trigger('endreorder');
                         self._isOrdering = false;
-                        self.reorderButton.removeClass('primary');
+                        self.reorderButton.removeClass('btn-neatline');
                     }
 
                     // Start reorder.
                     else {
                         self._trigger('reorder');
                         self._isOrdering = true;
-                        self.reorderButton.addClass('primary');
+                        self.reorderButton.addClass('btn-neatline');
                     }
 
                 },
@@ -129,6 +129,7 @@
 
             // Get ordering.
             this._trigger('getorder');
+            console.log('test');
 
             // Commit.
             $.ajax({

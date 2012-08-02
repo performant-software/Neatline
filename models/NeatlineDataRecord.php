@@ -86,7 +86,7 @@ class NeatlineDataRecord extends Omeka_record
     private static $defaults = array(
         'left_percent' => 0,
         'right_percent' => 100,
-        'geocoverage' => 'POINT()'
+        'geocoverage' => ''
     );
 
     /**

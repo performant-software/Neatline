@@ -150,15 +150,33 @@
             this.map.addLayers(layers);
             this._setDefaultLayer();
 
+            // Set the default focus.
             if (!this.setViewport(
-                Neatline.record.default_map_bounds, Neatline.record.default_map_zoom
+                Neatline.record.default_map_bounds,
+                Neatline.record.default_map_zoom
             )) {
-                // Google.v3 uses EPSG:900913 as projection, so we have to
-                // transform our coordinates
-                this.map.setCenter(new OpenLayers.LonLat(10.2, 48.9).transform(
-                    new OpenLayers.Projection("EPSG:4326"),
-                    this.map.getProjectionObject()
-                ), 5);
+
+                // If no focus is defined, try to geolocate.
+                var geolocate = new OpenLayers.Control.Geolocate({
+                    bind: true,
+                    watch: false
+                });
+
+                geolocate.events.on({
+                    locationfailed: function() {
+                        self.map.setCenter(
+                            new OpenLayers.LonLat(-8738850.21367, 4584105.47978),
+                            3,
+                            false,
+                            false
+                        );
+                    }
+                });
+
+                this.map.addControl(geolocate);
+                this.map.zoomTo(6);
+                geolocate.activate();
+
             }
 
         },
@@ -333,26 +351,6 @@
                     styleMap: style,
                     displayInLayerSwitcher: false
                 });
-
-            //     // Empty array to hold features objects.
-            //     var features = [];
-
-            //     // Build the features.
-            //     if (!_.isNull(item.wkt)) {
-            //         $.each(item.wkt.split(self.options.wkt_delimiter), function(i, wkt) {
-
-            //             // Construct WKT format reader.
-            //             var reader = new OpenLayers.Format.WKT();
-
-            //             // Try to read valid wkt. If valid, build geometry.
-            //             if (!_.isUndefined(reader.read(wkt))) {
-            //                 var geometry = new OpenLayers.Geometry.fromWKT(wkt);
-            //                 var feature = new OpenLayers.Feature.Vector(geometry);
-            //                 features.push(feature);
-            //             }
-
-            //         });
-            //     }
 
                 // Add the vectors to the layer.
                 vectorLayer.addFeatures(features);
@@ -1112,9 +1110,13 @@
 
             var success = false;
 
+            // If a default focus is defined.
             if (!_.isNull(centerBounds)) {
+
+                // Get default bounds.
                 var bounds = centerBounds.split(',');
 
+                // If the bounds is an extent.
                 if (bounds.length === 4) {
                     this.map.zoomToExtent(new OpenLayers.Bounds(
                         parseFloat(bounds[0]),
@@ -1123,7 +1125,10 @@
                         parseFloat(bounds[3])
                     ));
                     success = true;
-                } else if (bounds.length === 2) {
+                }
+
+                // If the bounds is a lat/lon.
+                else if (bounds.length === 2) {
                     var zoom = _.isNull(zoom) ? 5 : parseInt(zoom, 10);
                     var latlon = new OpenLayers.LonLat(
                         parseFloat(bounds[0].trim()), parseFloat(bounds[1].trim())
@@ -1131,6 +1136,7 @@
                     this.map.setCenter(latlon, zoom);
                     success = true;
                 }
+
             }
 
             return success;
