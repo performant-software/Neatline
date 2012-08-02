@@ -693,15 +693,15 @@ div.columns div.col-row {
 }
 
 div.col-1 {
-    right: 74px;
+    right: 75px;
 }
 
 div.col-2 {
-    right: 40px;
+    right: 41px;
 }
 
 div.col-3 {
-    right: 6px;
+    right: 7px;
 }
 
 div.columns div.col-header a.header {
@@ -743,6 +743,7 @@ div.columns span.row-marker {
 }
 
 table#items-table {
+    table-layout: fixed;
     overflow: hidden;
     white-space: nowrap;
     margin-bottom: 0;
@@ -783,12 +784,7 @@ table#items-table td.col-1:hover, table#items td.col-2:hover {
 table#items-table td.col-1,
 table#items-table td.col-2,
 table#items-table td.col-3 {
-    width: 13px;
-}
-.mozilla table#items-table td.col-1,
-.mozilla table#items-table td.col-2,
-.mozilla table#items-table td.col-3 {
-    width: 13px;
+    width: 22px;
 }
 
 table#items-table th, table#items td {
