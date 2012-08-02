@@ -44,27 +44,14 @@
                 orange: '#ffda82'
             },
 
-            // CLEditor.
-            cleditor: {
-
-                description: {
-                    width: 336,
-                    height: 300,
-                    controls:
-                        "bold italic underline | font size " +
-                        "| color removeformat | bullets numbering | outdent " +
-                        "indent | alignleft center alignright justify | " +
-                        "rule image link unlink | source"
-                },
-
-                title: {
-                    width: 336,
-                    height: 100,
-                    controls: "bold italic underline | font size color | " +
-                        "bullets outdent indent | source removeformat"
-                }
-
-            }
+            // Redactor options.
+            redactor: [
+                'html', 'bold', 'italic', 'underline', '|',
+                'image', 'link', '|',
+                'fontcolor', 'backcolor', '|',
+                'alignleft', 'aligncenter', 'alignright', '|',
+                'fullscreen'
+            ]
 
         },
 
@@ -136,12 +123,6 @@
         _buildFormFunctionality: function() {
 
             var self = this;
-
-            // ** TITLE.
-            this.titleEditor = this.title.redactor();
-
-            // ** DESCRIPTION.
-            this.descriptionEditor = this.description.redactor();
 
             // ** USE DC DATA.
             this.useDcData.bind('change', _.bind(function() {
@@ -367,6 +348,22 @@
             this.form.tabs();
         },
 
+        /*
+         * Instantiate the editors on title and description.
+         */
+        _buildEditors: function() {
+            this.title.redactor({ buttons: this.options.redactor, focus: false });
+            this.description.redactor({ buttons: this.options.redactor, focus: false });
+        },
+
+        /*
+         * Destroy editors on title and description.
+         */
+        _destroyEditors: function() {
+            this.title.destroyEditor();
+            this.description.destroyEditor();
+        },
+
 
         /*
          * =================
@@ -404,6 +401,7 @@
             // DOM touches.
             this._disableButtons();
             this._showContainer();
+            this._buildEditors();
             this._expandTitle();
             this._getFormData();
 
@@ -426,13 +424,13 @@
          * Collapse an item edit form and unbind all events.
          */
         hideForm: function(item, immediate) {
-            if (this._isLocked) {
-                return;
-            }
+
+            if (this._isLocked) return;
 
             // DOM touches.
             this._hideContainer(immediate);
             this._contractTitle();
+            this._destroyEditors();
 
             // Update the tracker.
             this._isForm = false;
@@ -693,12 +691,10 @@
             var showBubble = Boolean(parseInt(this._data.show_bubble, 10));
 
             // Update title.
-            this.title.val(this._data.title);
-            // this.titleEditor.updateFrame().refresh();
+            this.title.setCode(this._data.title);
 
             // Update description.
-            this.description.val(this._data.description);
-            // this.descriptionEditor.updateFrame().refresh();
+            this.description.setCode(this._data.description);
 
             // If use-DC is activated, disable text editors.
             if (useDc) this._disableTextEditors();
@@ -769,8 +765,8 @@
             var data = {};
 
             // Get the content of the text editors.
-            data.description =              this._getDescriptionContent();
-            data.title =                    this._getTitleContent();
+            data.description =              this.description.getCode();
+            data.title =                    this.title.getCode();
             data.slug =                     this.slug.val();
 
             // Get the form field data.
@@ -821,20 +817,6 @@
 
             return data;
 
-        },
-
-        /*
-         * Get the <body> content out of the description cleditor.
-         */
-        _getDescriptionContent: function(coverage) {
-            return this.description.next('iframe').contents().find('body').html();
-        },
-
-        /*
-         * Get the <body> content out of the description cleditor.
-         */
-        _getTitleContent: function(coverage) {
-            return this.title.next('iframe').contents().find('body').html();
         },
 
         /*

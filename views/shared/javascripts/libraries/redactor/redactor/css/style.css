@@ -4,14 +4,14 @@ html {
 }
 body {
 	font-family: Helvetica, Arial, Verdana, Tahoma, sans-serif;      
-	font-size: 15px;
+	font-size: 13px;
 	margin: 0;
 	padding: 0;
 	overflow-x: hidden;
 	background: #fff;
 }
 #page {
-	margin: 20px;	
+	margin: 10px;	
 	background: #fff;
 }
 #page:focus {
@@ -51,8 +51,7 @@ pre,
 iframe, 
 object,
 hr {
-	margin-bottom: 15px;	
-	line-height: 1.5em;		
+	line-height: 1.2em;		
 }
 blockquote {
 	margin-left: 3em;
