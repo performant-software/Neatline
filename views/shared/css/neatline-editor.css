@@ -409,6 +409,10 @@ table.map-styles td {
     padding-right: 23px;
 }
 
+table.map-styles-defaults td {
+    padding-right: 0;
+}
+
 tr.edit-form label {
     font-weight: normal;
     font-size: 12px;

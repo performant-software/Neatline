@@ -30,4 +30,4 @@
 <p>Click to edit the ordering of the items in the description tray.</p>
 <hr />
 
-<button class="btn icon approve save">Save</button>
+<button class="btn btn-neatline save"><i class="icon-ok icon-white"></i> Save</button>

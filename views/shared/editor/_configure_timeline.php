@@ -49,4 +49,4 @@
 <input type="text" class="integer-dragger" name="band-height" value="<?php echo $exhibit->getStyle('context_band_height'); ?>" />
 <hr />
 
-<button class="btn icon approve save">Save</button>
+<button class="btn btn-neatline"><i class="icon-ok icon-white"></i> Save</button>
