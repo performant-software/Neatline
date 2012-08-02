@@ -138,14 +138,10 @@
             var self = this;
 
             // ** TITLE.
-            this.titleEditor = this.title.cleditor(
-                this.options.cleditor.title
-            )[0];
+            this.titleEditor = this.title.redactor();
 
             // ** DESCRIPTION.
-            this.descriptionEditor = this.description.cleditor(
-                this.options.cleditor.description
-            )[0];
+            this.descriptionEditor = this.description.redactor();
 
             // ** USE DC DATA.
             this.useDcData.bind('change', _.bind(function() {
@@ -698,11 +694,11 @@
 
             // Update title.
             this.title.val(this._data.title);
-            this.titleEditor.updateFrame().refresh();
+            // this.titleEditor.updateFrame().refresh();
 
             // Update description.
             this.description.val(this._data.description);
-            this.descriptionEditor.updateFrame().refresh();
+            // this.descriptionEditor.updateFrame().refresh();
 
             // If use-DC is activated, disable text editors.
             if (useDc) this._disableTextEditors();
@@ -845,16 +841,16 @@
          * Disable and gray out the text editors.
          */
         _disableTextEditors: function() {
-            this.descriptionEditor.disable(true);
-            $(this.descriptionEditor.$main[0]).css('opacity', 0.3);
+            // this.descriptionEditor.disable(true);
+            // $(this.descriptionEditor.$main[0]).css('opacity', 0.3);
         },
 
         /*
          * Enable the text editors.
          */
         _enableTextEditors: function() {
-            this.descriptionEditor.disable(false);
-            $(this.descriptionEditor.$main[0]).css('opacity', 1);
+            // this.descriptionEditor.disable(false);
+            // $(this.descriptionEditor.$main[0]).css('opacity', 1);
         },
 
         /*

@@ -42,14 +42,14 @@
             <div class="control-group">
                 <label for="title">Title</label>
                 <div class="controls">
-                    <textarea id="item-title" class="xlarge" name="title" placeholder="Title" rows="1"></textarea>
+                    <textarea id="item-title" class="xlarge" name="title" placeholder="Title" rows="4"></textarea>
                 </div>
             </div>
 
             <div class="control-group">
                 <label for="description">Description</label>
                 <div class="controls">
-                    <textarea id="item-description" class="xlarge" name="description" placeholder="Description" rows="4"></textarea>
+                    <textarea id="item-description" class="xlarge" name="description" placeholder="Description" rows="8"></textarea>
                 </div>
             </div>
 
