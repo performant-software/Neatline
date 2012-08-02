@@ -693,11 +693,11 @@ div.columns div.col-row {
 }
 
 div.col-1 {
-    right: 72px;
+    right: 74px;
 }
 
 div.col-2 {
-    right: 39px;
+    right: 40px;
 }
 
 div.col-3 {
@@ -749,6 +749,10 @@ table#items-table {
     width: 385px;
 }
 
+table#items-table td.col-row {
+    padding: 0 10px !important;
+}
+
 table#items-table tr {
     display: table-row;
 }
@@ -764,7 +768,6 @@ table#items-table tr:first-child td {
 
 table#items-table td.col-row {
     margin: 0;
-    padding: 0;
     border-left: 1px solid #f0f0f0;
     text-align: center;
 }
