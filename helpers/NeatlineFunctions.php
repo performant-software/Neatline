@@ -55,7 +55,6 @@ function neatline_queueEditorAssets()
     queue_css('configure-timeline');
     queue_css('configure-items');
     queue_css('jquery.miniColors');
-    queue_css('jquery.cleditor');
     queue_css('redactor');
 
     // Application classes and controller script.

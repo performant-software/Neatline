@@ -129,7 +129,6 @@
 
             // Get ordering.
             this._trigger('getorder');
-            console.log('test');
 
             // Commit.
             $.ajax({

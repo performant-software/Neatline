@@ -292,8 +292,8 @@
 
                 'mousedown': function() {
 
-                    // Only do the delete if the record is Neatline-endemic.
-                    if (typeof this.itemId === 'undefined') {
+                    // Only delete if record is Neatline-endemic.
+                    if (_.isUndefined(this.itemId)) {
                         self._fadeDown();
                         self.postRecordDelete();
                     }
@@ -591,24 +591,14 @@
          * Drop down the opacity during data commit.
          */
         _fadeDown: function() {
-
-            // Highlight the item title.
-            this.element.animate({
-                'opacity': 0.3
-            }, 200);
-
+            this.element.animate({ 'opacity': 0.3 }, 200);
         },
 
         /*
          * Push up the opacity after data commit.
          */
         _fadeUp: function() {
-
-            // Highlight the item title.
-            this.element.animate({
-                'opacity': 1
-            }, 200);
-
+            this.element.animate({ 'opacity': 1 }, 200);
         },
 
         /*
@@ -975,7 +965,6 @@
 
                 success: function() {
                     self._fadeUp();
-                    self.hideForm(self.item, true);
                     self._trigger('deletecomplete');
                 }
 

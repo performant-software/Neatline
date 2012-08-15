@@ -508,7 +508,7 @@
          * Add tooltips to column headers.
          */
         _glossColumnHeaders: function() {
-            this.itemsListHeader.find('a.header').tooltip();
+            // this.itemsListHeader.find('a.header').tooltip();
         },
 
         /*

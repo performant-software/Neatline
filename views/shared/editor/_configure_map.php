@@ -117,4 +117,4 @@
 </select>
 <hr />
 
-<button class="btn btn-neatline"><i class="icon-ok icon-white"></i> <?php echo __('Save'); ?></button>
+<button class="btn btn-neatline save"><i class="icon-ok icon-white"></i> <?php echo __('Save'); ?></button>

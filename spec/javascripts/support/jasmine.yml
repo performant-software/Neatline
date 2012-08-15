@@ -25,6 +25,7 @@ src_files:
     - views/shared/javascripts/libraries/jquery.miniColors-0.1/*.js
     - views/shared/javascripts/libraries/simile/timeline-api/timeline-api.js
     - views/shared/javascripts/libraries/openlayers/Openlayers.js
+    - views/shared/javascripts/libraries/redactor/redactor/redactor.min.js
     - views/shared/javascripts/editor/utilities/*.js
     - views/shared/javascripts/libraries/*.js
     - views/shared/javascripts/utilities/*.js
