@@ -86,25 +86,23 @@
          */
         _constructDropdown: function() {
 
-            var self = this;
-
-            this.element.dropdown({
+            this.element.nlDropdown({
 
                 // On resize, update the layout builder markup.
-                'resize': function() {
-                    self.layoutBuilder.layoutbuilder('getPxConstants');
-                    self.layoutBuilder.layoutbuilder('centerAllTags');
-                },
+                'resize': _.bind(function() {
+                    this.layoutBuilder.layoutbuilder('getPxConstants');
+                    this.layoutBuilder.layoutbuilder('centerAllTags');
+                }, this),
 
-                'showstart': function() {
-                    self.layoutBuilder.layoutbuilder('getPxConstants');
-                    self.layoutBuilder.layoutbuilder('centerAllTags');
-                },
+                'showstart': _.bind(function() {
+                    this.layoutBuilder.layoutbuilder('getPxConstants');
+                    this.layoutBuilder.layoutbuilder('centerAllTags');
+                }, this),
 
-                'show': function() {
-                    self.layoutBuilder.layoutbuilder('getPxConstants');
-                    self.layoutBuilder.layoutbuilder('centerAllTags');
-                }
+                'show': _.bind(function() {
+                    this.layoutBuilder.layoutbuilder('getPxConstants');
+                    this.layoutBuilder.layoutbuilder('centerAllTags');
+                }, this)
 
             });
 

@@ -23,7 +23,7 @@
 (function($, undefined) {
 
 
-    $.widget('neatline.dropdown', {
+    $.widget('neatline.nlDropdown', {
 
         options: {
 

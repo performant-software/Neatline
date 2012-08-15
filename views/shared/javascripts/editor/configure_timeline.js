@@ -50,7 +50,7 @@
          * - return void.
          */
         _constructDropdown: function() {
-            this.element.dropdown();
+            this.element.nlDropdown();
         },
 
         /*
