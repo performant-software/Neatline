@@ -39,7 +39,7 @@
     <tbody>
 
     <tr id="neatline-header" class="header-row <?php if (!$records) { echo 'hidden'; } ?>">
-        <td class="neatline-bar">Neatline Records</td>
+    <td class="neatline-bar"><?php echo __('Neatline Records'); ?></td>
         <td class="col-1 neatline-bar"></td>
         <td class="col-2 neatline-bar"></td>
         <td class="col-3 neatline-bar"></td>
@@ -68,7 +68,7 @@
     <?php endforeach; ?>
 
     <tr id="omeka-header" class="header-row <?php if (count($items) == 0) { echo 'hidden'; } ?>">
-        <td class="neatline-bar">Omeka Records</td>
+      <td class="neatline-bar"><?php echo __('Omeka Records'); ?></td>
         <td class="col-1 neatline-bar"></td>
         <td class="col-2 neatline-bar"></td>
         <td class="col-3 neatline-bar"></td>

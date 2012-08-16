@@ -179,7 +179,7 @@ msgstr ""
 #: views/shared/editor/_configure_items.php:33
 #: views/shared/editor/_configure_map.php:120
 #: views/shared/editor/_configure_timeline.php:52
-#: views/shared/editor/_edit_form.php:269
+#: views/shared/editor/_edit_form.php:257
 msgid "Save"
 msgstr ""
 
@@ -210,47 +210,47 @@ msgid ""
 msgstr ""
 
 #: views/shared/editor/_configure_map.php:31
-#: views/shared/editor/_edit_form.php:144
+#: views/shared/editor/_edit_form.php:143
 msgid "Shape Color"
 msgstr ""
 
 #: views/shared/editor/_configure_map.php:39
-#: views/shared/editor/_edit_form.php:152
+#: views/shared/editor/_edit_form.php:151
 msgid "Line Color"
 msgstr ""
 
 #: views/shared/editor/_configure_map.php:47
-#: views/shared/editor/_edit_form.php:160
+#: views/shared/editor/_edit_form.php:159
 msgid "Selected Color"
 msgstr ""
 
 #: views/shared/editor/_configure_map.php:57
-#: views/shared/editor/_edit_form.php:170
+#: views/shared/editor/_edit_form.php:169
 msgid "Shape Opacity"
 msgstr ""
 
 #: views/shared/editor/_configure_map.php:65
-#: views/shared/editor/_edit_form.php:178
+#: views/shared/editor/_edit_form.php:177
 msgid "Selected Opacity"
 msgstr ""
 
 #: views/shared/editor/_configure_map.php:73
-#: views/shared/editor/_edit_form.php:186
+#: views/shared/editor/_edit_form.php:185
 msgid "Line Opacity"
 msgstr ""
 
 #: views/shared/editor/_configure_map.php:83
-#: views/shared/editor/_edit_form.php:196
+#: views/shared/editor/_edit_form.php:195
 msgid "Graphic Opacity"
 msgstr ""
 
 #: views/shared/editor/_configure_map.php:91
-#: views/shared/editor/_edit_form.php:204
+#: views/shared/editor/_edit_form.php:203
 msgid "Line Width"
 msgstr ""
 
 #: views/shared/editor/_configure_map.php:99
-#: views/shared/editor/_edit_form.php:212
+#: views/shared/editor/_edit_form.php:211
 msgid "Point Radius"
 msgstr ""
 
@@ -303,11 +303,11 @@ msgid "Text"
 msgstr ""
 
 #: views/shared/editor/_edit_form.php:34
-msgid "Temporal"
+msgid "Spatial"
 msgstr ""
 
 #: views/shared/editor/_edit_form.php:35
-msgid "Spatial"
+msgid "Temporal"
 msgstr ""
 
 #: views/shared/editor/_edit_form.php:36
@@ -322,58 +322,55 @@ msgstr ""
 msgid "Show pop-up bubble."
 msgstr ""
 
-#: views/shared/editor/_edit_form.php:66
+#: views/shared/editor/_edit_form.php:63
 msgid "Use default item metadata."
 msgstr ""
 
-#: views/shared/editor/_edit_form.php:75 views/shared/editor/_edit_form.php:78
-#: views/shared/editor/_edit_form.php:96
-msgid "Start Date"
+#: views/shared/editor/_edit_form.php:72
+msgid "Geocoverage"
 msgstr ""
 
 #: views/shared/editor/_edit_form.php:84 views/shared/editor/_edit_form.php:87
 #: views/shared/editor/_edit_form.php:105
+msgid "Start Date"
+msgstr ""
+
+#: views/shared/editor/_edit_form.php:93 views/shared/editor/_edit_form.php:96
+#: views/shared/editor/_edit_form.php:114
 msgid "End Date"
 msgstr ""
 
-#: views/shared/editor/_edit_form.php:93
+#: views/shared/editor/_edit_form.php:102
 msgid "Start Visible Date"
 msgstr ""
 
-#: views/shared/editor/_edit_form.php:102
+#: views/shared/editor/_edit_form.php:111
 msgid "End Visible Date"
 msgstr ""
 
-#: views/shared/editor/_edit_form.php:111
+#: views/shared/editor/_edit_form.php:120
 msgid "Date Ambiguity"
 msgstr ""
 
-#: views/shared/editor/_edit_form.php:131
-msgid "Geocoverage"
-msgstr ""
-
-#: views/shared/editor/_edit_form.php:223
+#: views/shared/editor/_edit_form.php:222
 msgid "Point Graphic"
 msgstr ""
 
-#: views/shared/editor/_edit_form.php:226
+#: views/shared/editor/_edit_form.php:225
 msgid "An external graphic to represent a point"
 msgstr ""
 
-#: views/shared/editor/_edit_form.php:236
+#: views/shared/editor/_edit_form.php:233
 msgid "Reset Item Styles"
 msgstr ""
 
 #: views/shared/editor/_edit_form.php:243
-msgid "Set Map Focus"
-msgstr ""
-
-#: views/shared/editor/_edit_form.php:255
 msgid "Parent Record"
 msgstr ""
 
-#: views/shared/editor/_edit_form.php:270
-msgid "Close Record"
+#: views/shared/editor/_edit_form.php:258
+#: views/shared/neatline/_bubbles.php:31
+msgid "Close"
 msgstr ""
 
 #: views/shared/editor/_edit_geometry.php:29
@@ -433,16 +430,20 @@ msgstr ""
 msgid "Neatline Editor: %s"
 msgstr ""
 
+#: views/shared/editor/items-ajax.php:42
+msgid "Neatline Records"
+msgstr ""
+
+#: views/shared/editor/items-ajax.php:71
+msgid "Omeka Records"
+msgstr ""
+
 #: views/shared/index/_neatline_header.php:31
 msgid "View Fullscreen"
 msgstr ""
 
 #: views/shared/neatline/_bubbles.php:30
 msgid "Click to freeze"
-msgstr ""
-
-#: views/shared/neatline/_bubbles.php:31
-msgid "Close"
 msgstr ""
 
 #: views/shared/neatline/_bubbles.php:33
