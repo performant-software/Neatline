@@ -857,12 +857,22 @@ table#header-row {
     -webkit-transition: 0.0s linear all !important;
 }
 
+.olControlLayerSwitcher {
+    width: 15em !important;
+}
+
 .olControlLayerSwitcher label {
     float: none;
     color: white;
     font-weight: bold;
     font-size: 11px;
     font-family: sans-serif;
+    display: inline;
+}
+
+.olControlLayerSwitcher .layersDiv .baseLayersDiv,
+.olControlLayerSwitcher .layersDiv .dataLayersDiv {
+    padding-left: 0 !important;
 }
 
 .olControlLayerSwitcher input {
