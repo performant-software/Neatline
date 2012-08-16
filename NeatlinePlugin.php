@@ -52,7 +52,8 @@ class NeatlinePlugin
         'admin_theme_header',
         'admin_append_to_plugin_uninstall_message',
         'before_delete_item',
-        'define_acl'
+        'define_acl',
+        'initialize'
     );
 
     private static $_filters = array(
@@ -465,6 +466,18 @@ class NeatlinePlugin
             $acl->allow(null, 'Neatline_Index', array('browse', 'show','simile','openlayers','udi'));
         }
 
+    }
+
+    /**
+     * Initialization.
+     *
+     * Adds translation source.
+     *
+     * @return void.
+     */
+    public function initialize()
+    {
+        add_translation_source(dirname(__FILE__) . '/languages');
     }
 
     /**
