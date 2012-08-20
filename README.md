@@ -461,6 +461,7 @@ To create a custom ordering:
 
 ### Translations
 
+* Gillian Price (Spanish)
 * Katina Rogers (French)
 
 [omeka]: http://omeka.org
