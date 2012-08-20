@@ -146,7 +146,7 @@ function neatline_queueNeatlineAssets($exhibit)
     // Core Neatline stylesheet.
     queue_css('neatline');
     queue_css('neatline-timeline');
-    queue_css('jquery-ui');
+    queue_css('neatline-jquery-ui');
     neatline_queueExhibitCss($exhibit);
 
     // Application classes.
