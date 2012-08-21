@@ -211,4 +211,18 @@ class Neatline_Test_AppTestCase extends Omeka_Test_AppTestCase
 
     }
 
+    /**
+     * Sets current user to null, essentially logging out any authenticated
+     * users for the tests.
+     */
+    protected function _logoutUser()
+    {
+        $user = null;
+        $bs = $this->core->getBootstrap();
+        $bs->currentUser = $user;
+        $bs->getContainer()->currentuser = $user;
+        $aclHelper = Zend_Controller_Action_HelperBroker::getHelper('Acl');
+        $aclHelper->setCurrentUser($user);
+    }
+
 }

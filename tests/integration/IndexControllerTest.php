@@ -1092,6 +1092,93 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
         );
 
     }
-    
+
+    /**
+     * Test the show action.
+     */
+    public function testShow()
+    {
+        $neatline = $this->_createNeatline();
+
+        $this->_logoutUser();
+
+        $this->dispatch('neatline-exhibits/show/'.$neatline->slug);
+        $this->assertModule('neatline');
+        $this->assertController('index');
+        $this->assertAction('show');
+    }
+
+    /**
+     * Test the show action with a made-up Neatline slug. Should 404.
+     */
+    public function testShowWithNoNeatline()
+    {
+        $this->setExpectedException('Omeka_Controller_Exception_404');
+        $this->dispatch('neatline-exhibits/show/foobar');
+    }
+
+    /**
+     * Return a 404 for a non-public Neatline if no one is logged in.
+     */
+    public function testShowWithPrivateNeatline()
+    {
+        $neatline = new NeatlineExhibit;
+        $neatline->title = 'Private Neatline';
+        $neatline->slug = 'private-neatline';
+        $neatline->save();
+
+        $this->_logoutUser();
+
+        $this->setExpectedException('Omeka_Controller_Exception_404');
+
+        $this->dispatch('neatline-exhibits/show/'.$neatline->slug);
+    }
+
+    /**
+     * Test the fullscreen action.
+     */
+    public function testFullScreen()
+    {
+        $neatline = new NeatlineExhibit;
+        $neatline->title = 'Neatline';
+        $neatline->slug = 'neatline';
+        $neatline->public = 1;
+        $neatline->save();
+
+        $this->_logoutUser();
+
+        $this->dispatch('neatline-exhibits/show/'.$neatline->slug.'/fullscreen');
+
+        $this->assertRoute('neatlineFullscreen');
+        $this->assertModule('neatline');
+        $this->assertController('index');
+        $this->assertAction('fullscreen');
+    }
+
+    /**
+     * Test the fullscreen action with a made-up Neatline slug. Should 404.
+     */
+    public function testFullscreenWithNoNeatline()
+    {
+        $this->setExpectedException('Omeka_Controller_Exception_404');
+        $this->dispatch('neatline-exhibits/show/foobar/fullscreen');
+    }
+
+    /**
+     * Return a 404 for a non-public Neatline if no one is logged in.
+     */
+    public function testFullscreenWithPrivateNeatline()
+    {
+        $neatline = new NeatlineExhibit;
+        $neatline->title = 'Private Neatline';
+        $neatline->slug = 'private-neatline';
+        $neatline->save();
+
+        $this->_logoutUser();
+
+        $this->setExpectedException('Omeka_Controller_Exception_404');
+
+        $this->dispatch('neatline-exhibits/show/'.$neatline->slug.'/fullscreen');
+    }
 
 }

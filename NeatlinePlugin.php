@@ -433,6 +433,8 @@ class NeatlinePlugin
                 'delete',
                 'show',
                 'showNotPublic',
+                'fullscreen',
+                'fullscreenNotPublic',
                 'udi',
                 'simile',
                 'openlayers'
@@ -463,7 +465,7 @@ class NeatlinePlugin
             }
 
             // Give every access to browse, show, simile, openlayers, and udi.
-            $acl->allow(null, 'Neatline_Index', array('browse', 'show','simile','openlayers','udi'));
+            $acl->allow(null, 'Neatline_Index', array('browse', 'show','fullscreen','simile','openlayers','udi'));
         }
 
     }
