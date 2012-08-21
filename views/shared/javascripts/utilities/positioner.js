@@ -1374,6 +1374,7 @@
                             self.__unhighlightVerticalHandle();
                             self.__enableSelection();
                             self._window.unbind('mousemove');
+                            self._window.unbind('mouseup');
 
                             // Trigger new layout.
                             self._trigger('layoutChange');
