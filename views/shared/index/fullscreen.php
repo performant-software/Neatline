@@ -65,16 +65,9 @@
 
 <body class="neatline <?php echo neatline('slug'); ?>">
 
-<?php if ((bool) neatline('public')): ?>
-
-    <!-- The core Neatline partial. -->
-    <?php echo $this->partial('neatline/_neatline.php', array(
-        'exhibit' => get_current_neatline()
-    )); ?>
-
-<?php else: ?>
-    <?php echo $this->partial('neatline/_private.php'); ?>
-<?php endif; ?>
+<?php echo $this->partial('neatline/_neatline.php', array(
+    'exhibit' => get_current_neatline()
+)); ?>
 
 </body>
 </html>
