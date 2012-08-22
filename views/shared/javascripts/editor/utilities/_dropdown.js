@@ -172,11 +172,44 @@
          */
         show: function() {
 
+            if (_.isArray(this.radios) && this.radios.length > 0) {
+                var showing = _.filter(this.radios, function(d) {
+                    return d._expanded;
+                });
+                var cont = this._createRadioSetHideCont(showing, showing.length, 0);
+                cont();
+            } else {
+                this._show();
+            }
+
+        },
+
+        /*
+         * This creates a continuation callback that hides a radio set sibling
+         * or, if it's already hidden all of them, shows this dropdown.
+         */
+        _createRadioSetHideCont: function(showing, stop, i) {
+
             var self = this;
 
-            _.each(this.radios, function(r) {
-                r.hide();
-            });
+            return function() {
+                var next = i + 1;
+                if (i >= stop) {
+                    self._show();
+                } else {
+                    showing[i].hide(self._createRadioSetHideCont(showing, stop, next));
+                }
+            };
+
+        },
+
+        /*
+         * This actually shows this dropdown, without hiding the radio set
+         * siblings.
+         */
+        _show: function() {
+
+            var self = this;
 
             // Position and display.
             this.position();
@@ -200,7 +233,7 @@
         /*
          * Hide the dropdown.
          */
-        hide: function() {
+        hide: function(continuation) {
 
             var self = this;
 
@@ -210,6 +243,9 @@
             }, this.options.css.duration, function() {
                 self.content.css('display', 'none');
                 self._trigger('hide');
+                if (_.isFunction(continuation)) {
+                    continuation();
+                }
             });
 
             // Add class to button.
