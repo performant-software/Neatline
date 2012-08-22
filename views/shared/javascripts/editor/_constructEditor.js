@@ -434,4 +434,16 @@ jQuery(document).ready(function($) {
 
     });
 
+    var radioSet = [
+        configureLayoutButton.data('configurelayout').element.data('nlDropdown'),
+        configureMapButton.data('configuremap').element.data('nlDropdown'),
+        configureTimelineButton.data('configuretimeline').element.data('nlDropdown'),
+        configureItemsButton.data('configureitems').element.data('nlDropdown')
+    ];
+    var i, rslen;
+
+    _.each(radioSet, function(r) {
+        r.setRadioDropdowns(radioSet);
+    });
+
 });
