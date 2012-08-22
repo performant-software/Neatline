@@ -53,7 +53,7 @@
          *
          * - return void.
          */
-        _instantiateSimile: function() {
+        _instantiateSimile: function(skipClobber) {
 
             var self = this;
 
@@ -97,6 +97,7 @@
 
             // Build context band.
             if (Neatline.timeline.isContextBand === 1) {
+                var bandUnit = Neatline.timeline.contextBandUnit.toUpperCase();
 
                 // Push on the band.
                 this.bandInfos.push(
@@ -104,7 +105,7 @@
                         overview:       true,
                         eventSource:    this.eventSource,
                         width:          Neatline.timeline.contextBandHeight+"%",
-                        intervalUnit:   Timeline.DateTime[Neatline.timeline.contextBandUnit],
+                        intervalUnit:   Timeline.DateTime[bandUnit],
                         intervalPixels: 300
                     })
                 );
@@ -121,8 +122,10 @@
             this.loadData();
 
             // Override default click and zom callbacks.
-            this._catchClickCallback();
-            this._catchZoomCallback();
+            if (!skipClobber) {
+                this._catchClickCallback();
+                this._catchZoomCallback();
+            }
 
             // Scroll callback.
             this.timeline.getBand(0).addOnScrollListener(_.bind(function() {
@@ -267,6 +270,7 @@
         loadData: function() {
 
             var self = this;
+            var date;
 
             // Get event data.
             this.timeline.loadJSON(Neatline.dataSources.timeline, _.bind(function(json, url) {
@@ -279,13 +283,13 @@
 
             // Reapply date.
             if (!_.isNull(this._currentDate)) {
-                var date = this._currentDate;
+                date = this._currentDate;
                 this.timeline.getBand(0).setCenterVisibleDate(date);
             }
 
             // Set the starting date, if defined.
             else if (Neatline.default_focus_date !== null) {
-                var date = Date.parse(Neatline.record.default_focus_date);
+                date = Date.parse(Neatline.record.default_focus_date);
                 this.timeline.getBand(0).setCenterVisibleDate(date);
             }
 
@@ -519,9 +523,12 @@
         renderDefaults: function(height, unit, isContext) {
 
             // Update exhibit defaults.
-            Neatline.record.is_context_band = isContext;
+            Neatline.record.is_context_band             = isContext;
             Neatline.record.default_context_band_height = height;
-            Neatline.record.default_context_band_unit = unit;
+            Neatline.record.default_context_band_unit   = unit;
+            Neatline.timeline.isContextBand             = isContext;
+            Neatline.timeline.contextBandUnit           = unit;
+            Neatline.timeline.contextBandHeight         = height;
 
             // Reinstantiate.
             this.reinstantiate();
@@ -590,7 +597,12 @@
          * Reinstantiate the timeline.
          */
         reinstantiate: function() {
+            this.timeline.dispose();
+            this.timeline = undefined;
 
+            this._instantiateSimile();
+            this._constructZoomButtons();
+            this.element.disableSelection();
         },
 
         /*
