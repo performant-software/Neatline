@@ -95,7 +95,8 @@
 
                 'delete': function() {
 
-                    if (self.modifyFeatures.feature) {
+                    if (!_.isUndefined(self.modifyFeatures) &&
+                        self.modifyFeatures.feature) {
 
                         var feature = self.modifyFeatures.feature;
                         self.modifyFeatures.unselectFeature(feature);
@@ -231,10 +232,11 @@
             // Unselect a selected feature.
             if (!_.isUndefined(this.modifyFeatures)) {
                 this.modifyFeatures.unselectFeature(this._clickedFeature);
+                // Remove control.
+                this.map.removeControl(this.modifyFeatures);
             }
 
-            // Remove controls.
-            this.map.removeControl(this.modifyFeatures);
+            // Remove control.
             this.map.removeControl(this.editToolbar);
             this.element.editgeometry('hideButtons');
 
@@ -253,14 +255,17 @@
             var wkts = [];
 
             // Unselect feature, cancel sketch.
-            this.modifyFeatures.unselectFeature(this._clickedFeature);
+            if (!_.isUndefined(this.modifyFeatures)) {
+                this.modifyFeatures.unselectFeature(this._clickedFeature);
+            }
             this.cancelSketch();
 
             var formatter = new OpenLayers.Format.KML();
             var kml = formatter.write(this._currentEditLayer.features);
 
             // Re-select the feature.
-            if (!_.isNull(this._clickedFeature)) {
+            if (!_.isUndefined(this.modifyFeatures) &&
+                !_.isNull(this._clickedFeature)) {
                 this.modifyFeatures.selectFeature(this._clickedFeature);
             }
 
