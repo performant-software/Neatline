@@ -25,8 +25,7 @@
  */
 ?>
 
-<?php echo $this->partial('editor/_back_button.php'); ?>
-
+<div id='topnav' class='neatline-bar clearfix'>
 <ul class="nav">
 
     <li class="dropdown">
@@ -63,3 +62,4 @@
     </li>
 
 </ul>
+</div>

@@ -25,10 +25,13 @@
  */
 ?>
 
-<div id="topbar" class="neatline-bar topbar">
+<div id='topbar'>
 
+<div id="toptitle" class='neatline-bar topbar'>
     <img id="neatline-logo" src="<?php echo img('neatline-logo-editor.png'); ?>" />
     <span class="top-bar-title"><?php echo $neatline->name; ?></span>
+<?php echo $this->partial('editor/_back_button.php'); ?>
+</div>
 
     <?php echo $this->partial('editor/_topbar_navigation.php', array(
         'neatline' => $neatline,
