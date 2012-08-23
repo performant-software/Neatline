@@ -87,6 +87,7 @@
         _getOffsets: function() {
 
             this.buttonOffset = this.element.offset();
+            this.topbarHeight = this.topbar.height();
 
         },
 
