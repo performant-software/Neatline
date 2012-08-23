@@ -38,13 +38,12 @@
 /* Top bar */
 
 #topbar {
-    height: 38px;
+    min-height: 32px;
     -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25),inset 0 -1px 0 rgba(0, 0, 0, 0.1);
     -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25),inset 0 -1px 0 rgba(0, 0, 0, 0.1);
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25),inset 0 -1px 0 rgba(0, 0, 0, 0.1);
     text-shadow: 0 -2px 0 rgba(0, 0, 0, 0.25);
 }
-
 
 #search-box {
     float: left;
@@ -90,12 +89,11 @@
 
 .topbar div > ul > li, .nav > li {
     display: inline;
-    height: 34px;
 }
 
 .topbar div > ul a, .nav a {
     font-family: 'Crimson Text', Georgia, serif;
-    font-size: 18px !important;
+    font-size: 15px !important;
     padding: 6px 15px 10px 15px;
     display: inline !important;
     float: none;

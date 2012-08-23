@@ -99,7 +99,6 @@ table th, table td {
 
 .topbar div > ul > li, .nav > li {
   display: block;
-  height: 34px;
 }
 
 .topbar div > ul a, .nav a {
