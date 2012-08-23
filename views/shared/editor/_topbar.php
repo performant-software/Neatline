@@ -25,7 +25,7 @@
  */
 ?>
 
-<div id='topbar' class='neatline-bar topbar'>
+<div id="topbar" class="neatline-bar topbar">
 
     <img id="neatline-logo" src="<?php echo img('neatline-logo-editor.png'); ?>" />
     <span class="top-bar-title"><?php echo $neatline->name; ?></span>

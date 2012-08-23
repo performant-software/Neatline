@@ -38,40 +38,11 @@
 /* Top bar */
 
 #topbar {
-    /* height: 62px; */
     min-height: 32px;
     -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25),inset 0 -1px 0 rgba(0, 0, 0, 0.1);
     -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25),inset 0 -1px 0 rgba(0, 0, 0, 0.1);
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25),inset 0 -1px 0 rgba(0, 0, 0, 0.1);
     text-shadow: 0 -2px 0 rgba(0, 0, 0, 0.25);
-}
-
-#toptitle {
-    /* height: 32px; */
-    min-height: 32px;
-}
-
-/*
- * @media screen and (min-width: 960px) {
- *     #topnav {
- *         float: left;
- *     }
- * }
- */
-
-#topnav {
-    top: 34px;
-    min-height: 29px;
-    /* height: 30px; */
-    line-height: 12px;
-    margin-bottom: 0px;
-    background-image: -khtml-gradient(linear, left top, left bottom, from(#403846), to(#1a171c));
-    background-image: -moz-linear-gradient(top, #403846, #1a171c);
-    background-image: -ms-linear-gradient(top, #403846, #1a171c);
-    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #403846), color-stop(100%, #1a171c));
-    background-image: -webkit-linear-gradient(top, #403846, #1a171c);
-    background-image: -o-linear-gradient(top, #403846, #1a171c);
-    background-image: linear-gradient(#403846, #1a171c);
 }
 
 #search-box {
@@ -118,7 +89,6 @@
 
 .topbar div > ul > li, .nav > li {
     display: inline;
-    /* height: 34px; */
 }
 
 .topbar div > ul a, .nav a {
