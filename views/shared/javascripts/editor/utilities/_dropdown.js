@@ -146,7 +146,7 @@
 
                 // Manifest new position.
                 this.content.css({
-                    'left': this.buttonOffset.left + this.buttonWidth - this.contentWidth,
+                    'left': Math.max(0, this.buttonOffset.left + this.buttonWidth - this.contentWidth),
                     'top': -(topOffset)
                 });
 
@@ -160,7 +160,7 @@
 
                 // Manifest new position.
                 this.content.css({
-                    'left': this.buttonOffset.left + this.buttonWidth - this.contentWidth,
+                    'left': Math.max(0, this.buttonOffset.left + this.buttonWidth - this.contentWidth),
                     'top': topOffset
                 });
 
