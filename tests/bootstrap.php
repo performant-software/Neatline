@@ -6,3 +6,4 @@ if (!($omekaDir = getenv('OMEKA_DIR'))) {
 
 require_once $omekaDir . '/application/tests/bootstrap.php';
 require_once 'Neatline_Test_AppTestCase.php';
+
