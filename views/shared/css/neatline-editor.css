@@ -877,6 +877,10 @@ table#header-row {
     margin: 3px 0.5ex;
 }
 
+img {
+    max-width: none;
+}
+
 
 /* Dropdown menus */
 
