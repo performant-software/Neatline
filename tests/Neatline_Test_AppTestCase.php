@@ -20,7 +20,7 @@
  * @author      Bethany Nowviskie <bethany@virginia.edu>
  * @author      Adam Soroka <ajs6f@virginia.edu>
  * @author      David McClure <david.mcclure@virginia.edu>
- * @copyright   2011 The Board and Visitors of the University of Virginia
+ * @copyright   2011 Rector and Board of Visitors, University of Virginia
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache 2 License
  */
 
@@ -209,6 +209,20 @@ class Neatline_Test_AppTestCase extends Omeka_Test_AppTestCase
 
         return $text;
 
+    }
+
+    /**
+     * Sets current user to null, essentially logging out any authenticated
+     * users for the tests.
+     */
+    protected function _logoutUser()
+    {
+        $user = null;
+        $bs = $this->core->getBootstrap();
+        $bs->currentUser = $user;
+        $bs->getContainer()->currentuser = $user;
+        $aclHelper = Zend_Controller_Action_HelperBroker::getHelper('Acl');
+        $aclHelper->setCurrentUser($user);
     }
 
 }

@@ -15,7 +15,7 @@
  * @author      Bethany Nowviskie <bethany@virginia.edu>
  * @author      Adam Soroka <ajs6f@virginia.edu>
  * @author      David McClure <david.mcclure@virginia.edu>
- * @copyright   2011 The Board and Visitors of the University of Virginia
+ * @copyright   2011 Rector and Board of Visitors, University of Virginia
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache 2 License
  */
 
@@ -95,7 +95,8 @@
 
                 'delete': function() {
 
-                    if (self.modifyFeatures.feature) {
+                    if (!_.isUndefined(self.modifyFeatures) &&
+                        self.modifyFeatures.feature) {
 
                         var feature = self.modifyFeatures.feature;
                         self.modifyFeatures.unselectFeature(feature);
@@ -231,10 +232,11 @@
             // Unselect a selected feature.
             if (!_.isUndefined(this.modifyFeatures)) {
                 this.modifyFeatures.unselectFeature(this._clickedFeature);
+                // Remove control.
+                this.map.removeControl(this.modifyFeatures);
             }
 
-            // Remove controls.
-            this.map.removeControl(this.modifyFeatures);
+            // Remove control.
             this.map.removeControl(this.editToolbar);
             this.element.editgeometry('hideButtons');
 
@@ -253,14 +255,17 @@
             var wkts = [];
 
             // Unselect feature, cancel sketch.
-            this.modifyFeatures.unselectFeature(this._clickedFeature);
+            if (!_.isUndefined(this.modifyFeatures)) {
+                this.modifyFeatures.unselectFeature(this._clickedFeature);
+            }
             this.cancelSketch();
 
             var formatter = new OpenLayers.Format.KML();
             var kml = formatter.write(this._currentEditLayer.features);
 
             // Re-select the feature.
-            if (!_.isNull(this._clickedFeature)) {
+            if (!_.isUndefined(this.modifyFeatures) &&
+                !_.isNull(this._clickedFeature)) {
                 this.modifyFeatures.selectFeature(this._clickedFeature);
             }
 

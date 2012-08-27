@@ -461,6 +461,8 @@ To create a custom ordering:
 
 ### Translations
 
+* Gillian Price (Spanish)
+* Oguljan Reyimbaeva (Russian)
 * Katina Rogers (French)
 
 [omeka]: http://omeka.org

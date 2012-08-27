@@ -20,7 +20,7 @@
  * @author      Bethany Nowviskie <bethany@virginia.edu>
  * @author      Adam Soroka <ajs6f@virginia.edu>
  * @author      David McClure <david.mcclure@virginia.edu>
- * @copyright   2011 The Board and Visitors of the University of Virginia
+ * @copyright   2011 Rector and Board of Visitors, University of Virginia
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache 2 License
  */
 
@@ -433,6 +433,8 @@ class NeatlinePlugin
                 'delete',
                 'show',
                 'showNotPublic',
+                'fullscreen',
+                'fullscreenNotPublic',
                 'udi',
                 'simile',
                 'openlayers'
@@ -463,7 +465,7 @@ class NeatlinePlugin
             }
 
             // Give every access to browse, show, simile, openlayers, and udi.
-            $acl->allow(null, 'Neatline_Index', array('browse', 'show','simile','openlayers','udi'));
+            $acl->allow(null, 'Neatline_Index', array('browse', 'show','fullscreen','simile','openlayers','udi'));
         }
 
     }

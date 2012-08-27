@@ -20,7 +20,7 @@
  * @author      Bethany Nowviskie <bethany@virginia.edu>
  * @author      Adam Soroka <ajs6f@virginia.edu>
  * @author      David McClure <david.mcclure@virginia.edu>
- * @copyright   2011 The Board and Visitors of the University of Virginia
+ * @copyright   2011 Rector and Board of Visitors, University of Virginia
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache 2 License
  */
 
@@ -46,7 +46,7 @@ class Neatline_IndexController extends Omeka_Controller_Action
 
         try {
             $this->_table = $this->getTable($modelName);
-            $this->aclResource = $this->findById();
+            $this->aclResource = $this->findNeatline();
         } catch (Omeka_Controller_Exception_404 $e) {}
 
         $this->_recordsTable = $this->getTable('NeatlineDataRecord');
@@ -150,13 +150,13 @@ class Neatline_IndexController extends Omeka_Controller_Action
 
     public function showAction()
     {
-        $neatline = $this->getTable('NeatlineExhibit')->findBySlug($this->_request->getParam('slug'));
+        $neatline = $this->findNeatline();
         $this->view->neatlineexhibit = $neatline;
     }
 
     public function fullscreenAction()
     {
-        $neatline = $this->getTable('NeatlineExhibit')->findBySlug($this->_request->getParam('slug'));
+        $neatline = $this->findNeatline();
         $this->view->neatlineexhibit = $neatline;
     }
 
@@ -269,4 +269,30 @@ class Neatline_IndexController extends Omeka_Controller_Action
 
     }
 
+    /**
+     * Checks for existence of 'slug' in URL, then tries to find a Neatline
+     * record with that slug. If there is no 'slug' parameter, it falls back
+     * to Omeka_Controller_Action::findById()
+     *
+     * @throws Omeka_Controller_Exception_404
+     * @return NeatlineExhibit
+     */
+    public function findNeatline()
+    {
+        if ($slug = $this->getRequest()->getParam('slug')) {
+
+            $record = $this->_table->findBySlug($slug);
+
+            if (!$record) {
+                throw new Omeka_Controller_Exception_404(get_class($this) . ": No record with Slug '$slug' exists" );
+            }
+
+        } else {
+
+            $record = parent::findById();
+
+        }
+
+        return $record;
+    }
 }

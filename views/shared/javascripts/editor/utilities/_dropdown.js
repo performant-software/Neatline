@@ -16,7 +16,7 @@
  * @author      Bethany Nowviskie <bethany@virginia.edu>
  * @author      Adam Soroka <ajs6f@virginia.edu>
  * @author      David McClure <david.mcclure@virginia.edu>
- * @copyright   2011 The Board and Visitors of the University of Virginia
+ * @copyright   2011 Rector and Board of Visitors, University of Virginia
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache 2 License
  */
 
@@ -36,7 +36,11 @@
             // CSS constants.
             css: {
                 duration: 400
-            }
+            },
+
+            // These are a set of dropdowns which together act like a set of
+            // radiobuttons, hence the name.
+            radios: []
 
         },
 
@@ -49,6 +53,7 @@
             this._body =            $('body');
             this._window =          $(window);
             this.topbar =           $(this.options.markup.topbar);
+            this.radios =           this.options.radios;
 
             // Get, detach, and re-append the content div.
             this.content = this.element.next(this.options.markup.content);
@@ -82,6 +87,7 @@
         _getOffsets: function() {
 
             this.buttonOffset = this.element.offset();
+            this.topbarHeight = this.topbar.height();
 
         },
 
@@ -117,9 +123,17 @@
         },
 
         /*
+         * Set the sibling radio dropdowns.
+         */
+        setRadioDropdowns: function(rs) {
+            this.radios = rs;
+        },
+
+        /*
          * Position the dropdown relative to the button.
          */
         position: function() {
+            var topOffset;
 
             // Update offsets.
             this._getOffsets();
@@ -128,11 +142,11 @@
             if (!this._expanded) {
 
                 // Calculate the new top offset.
-                var topOffset = this.contentHeight - this.topbarHeight;
+                topOffset = this.contentHeight - this.topbarHeight;
 
                 // Manifest new position.
                 this.content.css({
-                    'left': this.buttonOffset.left + this.buttonWidth - this.contentWidth,
+                    'left': Math.max(0, this.buttonOffset.left + this.buttonWidth - this.contentWidth),
                     'top': -(topOffset)
                 });
 
@@ -142,11 +156,11 @@
             else {
 
                 // Calculate the new top offset.
-                var topOffset = this.topbarHeight;
+                topOffset = this.topbarHeight;
 
                 // Manifest new position.
                 this.content.css({
-                    'left': this.buttonOffset.left + this.buttonWidth - this.contentWidth,
+                    'left': Math.max(0, this.buttonOffset.left + this.buttonWidth - this.contentWidth),
                     'top': topOffset
                 });
 
@@ -158,6 +172,43 @@
          * Display the dropdown.
          */
         show: function() {
+
+            if (_.isArray(this.radios) && this.radios.length > 0) {
+                var showing = _.filter(this.radios, function(d) {
+                    return d._expanded;
+                });
+                var cont = this._createRadioSetHideCont(showing, showing.length, 0);
+                cont();
+            } else {
+                this._show();
+            }
+
+        },
+
+        /*
+         * This creates a continuation callback that hides a radio set sibling
+         * or, if it's already hidden all of them, shows this dropdown.
+         */
+        _createRadioSetHideCont: function(showing, stop, i) {
+
+            var self = this;
+
+            return function() {
+                var next = i + 1;
+                if (i >= stop) {
+                    self._show();
+                } else {
+                    showing[i].hide(self._createRadioSetHideCont(showing, stop, next));
+                }
+            };
+
+        },
+
+        /*
+         * This actually shows this dropdown, without hiding the radio set
+         * siblings.
+         */
+        _show: function() {
 
             var self = this;
 
@@ -183,7 +234,7 @@
         /*
          * Hide the dropdown.
          */
-        hide: function() {
+        hide: function(continuation) {
 
             var self = this;
 
@@ -193,6 +244,9 @@
             }, this.options.css.duration, function() {
                 self.content.css('display', 'none');
                 self._trigger('hide');
+                if (_.isFunction(continuation)) {
+                    continuation();
+                }
             });
 
             // Add class to button.

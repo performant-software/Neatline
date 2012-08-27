@@ -15,7 +15,7 @@
  * @author      Bethany Nowviskie <bethany@virginia.edu>
  * @author      Adam Soroka <ajs6f@virginia.edu>
  * @author      David McClure <david.mcclure@virginia.edu>
- * @copyright   2011 The Board and Visitors of the University of Virginia
+ * @copyright   2011 Rector and Board of Visitors, University of Virginia
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache 2 License
  */
 
@@ -432,6 +432,18 @@ jQuery(document).ready(function($) {
             neatlineContainer.neatline('saveSuccess');
         }
 
+    });
+
+    var radioSet = [
+        configureLayoutButton.data('configurelayout').element.data('nlDropdown'),
+        configureMapButton.data('configuremap').element.data('nlDropdown'),
+        configureTimelineButton.data('configuretimeline').element.data('nlDropdown'),
+        configureItemsButton.data('configureitems').element.data('nlDropdown')
+    ];
+    var i, rslen;
+
+    _.each(radioSet, function(r) {
+        r.setRadioDropdowns(radioSet);
     });
 
 });
