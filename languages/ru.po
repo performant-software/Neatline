@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Neatline\n"
 "Report-Msgid-Bugs-To: http://github.com/scholarslab/\n"
 "POT-Creation-Date: 2012-07-26 11:45-0500\n"
-"PO-Revision-Date: 2012-08-25 22:29+0000\n"
+"PO-Revision-Date: 2012-08-30 20:17+0000\n"
 "Last-Translator: Oguljan <or8r@virginia.edu>\n"
 "Language-Team: Russian (http://www.transifex.com/projects/p/neatline/language/ru/)\n"
 "MIME-Version: 1.0\n"
@@ -42,7 +42,7 @@ msgstr "Это приведет к удалению рамки \"%s\" и свя�
 
 #: forms/NeatlineDetails.php:49
 msgid "The title is displayed at the top of the exhibit."
-msgstr "Название отображается в верхней части наглядного представления."
+msgstr "Название появляется в верхней части экспоната."
 
 #: forms/NeatlineDetails.php:57
 msgid "Enter a title."
@@ -50,7 +50,7 @@ msgstr "Введите название."
 
 #: forms/NeatlineDetails.php:67
 msgid "Supporting prose to describe the exhibit."
-msgstr "Дополнительный текст, описывающий иллюстрацию."
+msgstr "Дополнительный текст, описывающий экспонат."
 
 #: forms/NeatlineDetails.php:74
 msgid "URL Slug"
@@ -60,7 +60,7 @@ msgstr "Литая строка URL"
 msgid ""
 "The URL slug is used to form the public URL for the exhibit. Can contain "
 "letters, numbers, and hyphens."
-msgstr "Литая строка URL используется для того, чтобы создать общедоступный URL для данного наглядного представления. Строка может содержать в себе буквы, цифры и дефисы."
+msgstr "Литая строка URL используется для того, чтобы создать общедоступный URL для данного экспоната. Строка может содержать в себе буквы, цифры и дефисы."
 
 #: forms/NeatlineDetails.php:84 models/NeatlineExhibit.php:455
 msgid "The slug cannot be empty."
@@ -72,11 +72,11 @@ msgstr "Литая строка может содержать в себе тол
 
 #: forms/NeatlineDetails.php:106
 msgid "The slug is already in use."
-msgstr "Литая строка уже находится в использовании."
+msgstr "Литая строка уже находится в употреблении."
 
 #: forms/NeatlineDetails.php:116
 msgid "By default, exhibits are only visible to you."
-msgstr "По умолчанию наглядные представления видны только вам."
+msgstr "По умолчанию экспонаты видны только вам."
 
 #: forms/NeatlineDetails.php:122
 msgid "(Optional): Static Image"
@@ -84,7 +84,7 @@ msgstr "(Факультативно): Статическое изображен�
 
 #: forms/NeatlineDetails.php:123
 msgid "Select a file to build the exhibit on a static image."
-msgstr "Выберите файл для построения наглядного представления по статическому изображению."
+msgstr "Выберите файл для построения экспоната по статическому изображению."
 
 #: forms/NeatlineDetails.php:131
 msgid "Save Neatline"
@@ -98,7 +98,7 @@ msgstr "Предупреждение"
 msgid ""
 "Uninstalling the Neatline plugin will permanently delete all Neatline "
 "exhibits."
-msgstr "Деинсталляция программной вставки Neatline приведет к безвозвратному удалению всех наглядных представлений Neatline."
+msgstr "Деинсталляция программной вставки Neatline приведет к безвозвратному удалению всех экспонатов Neatline."
 
 #: models/NeatlineExhibit.php:494
 msgid "Cannot associate a Neatline with a user who doesn't exist."
@@ -106,19 +106,19 @@ msgstr "Невозможно связать рамку с несуществую
 
 #: views/admin/index/add.php:35
 msgid "Neatline | Create an Exhibit"
-msgstr "Neatline | Создать наглядное представление"
+msgstr "Neatline | Создать экспонат"
 
 #: views/admin/index/browse.php:29 views/public/index/browse.php:2
 msgid "Neatline | Browse Exhibits"
-msgstr "Neatline | Просмотреть наглядное представление"
+msgstr "Neatline | Просмотреть экспонат"
 
 #: views/admin/index/browse.php:37
 msgid "Create an Exhibit"
-msgstr "Создать наглядное представление"
+msgstr "Создать экспонат"
 
 #: views/admin/index/browse.php:55
 msgid "Exhibit"
-msgstr "Наглядное представление"
+msgstr "Экспонат"
 
 #: views/admin/index/browse.php:56
 msgid "Items Query"
@@ -150,7 +150,7 @@ msgstr "Да"
 
 #: views/admin/index/browse.php:114
 msgid "There are no Neatline exhibits yet."
-msgstr "Никаких наглядных представлений Neatline пока не имеется."
+msgstr "Никаких экспонатов Neatline пока не имеется."
 
 #: views/admin/index/browse.php:116
 msgid "Create one!"
@@ -192,7 +192,7 @@ msgstr "Карта"
 #: views/shared/editor/_configure_layout.php:30
 #: views/shared/editor/_item_browser.php:38
 msgid "Timeline"
-msgstr "График"
+msgstr "Временной график"
 
 #: views/shared/editor/_configure_layout.php:36
 msgid "Save arrangement"
@@ -252,7 +252,7 @@ msgstr "Толщина линии"
 #: views/shared/editor/_configure_map.php:99
 #: views/shared/editor/_edit_form.php:211
 msgid "Point Radius"
-msgstr "Точечный радиус"
+msgstr "Радиус точки"
 
 #: views/shared/editor/_configure_map.php:110
 msgid "Default Base Layer"
@@ -312,7 +312,7 @@ msgstr "Временные измерения"
 
 #: views/shared/editor/_edit_form.php:36
 msgid "Styling"
-msgstr "Выбор стиля"
+msgstr "Стили"
 
 #: views/shared/editor/_edit_form.php:37
 msgid "Relations"
@@ -338,7 +338,7 @@ msgstr "Дата начала"
 #: views/shared/editor/_edit_form.php:93 views/shared/editor/_edit_form.php:96
 #: views/shared/editor/_edit_form.php:114
 msgid "End Date"
-msgstr "Дата окончания"
+msgstr "Дата конца"
 
 #: views/shared/editor/_edit_form.php:102
 msgid "Start Visible Date"
@@ -346,19 +346,19 @@ msgstr "Дата начала отображения"
 
 #: views/shared/editor/_edit_form.php:111
 msgid "End Visible Date"
-msgstr "Дата окончания отображения"
+msgstr "Дата конца отображения"
 
 #: views/shared/editor/_edit_form.php:120
 msgid "Date Ambiguity"
-msgstr "Датирование неоднозначности"
+msgstr "Неопределенность датирования"
 
 #: views/shared/editor/_edit_form.php:222
 msgid "Point Graphic"
-msgstr "Точечная графика"
+msgstr "Графический образ точки"
 
 #: views/shared/editor/_edit_form.php:225
 msgid "An external graphic to represent a point"
-msgstr "Внешняя графика для представления точки отсчета"
+msgstr "Внешний графический образ для представления точки "
 
 #: views/shared/editor/_edit_form.php:233
 msgid "Reset Item Styles"
@@ -432,11 +432,11 @@ msgstr "Редактор рамки: %s"
 
 #: views/shared/editor/items-ajax.php:42
 msgid "Neatline Records"
-msgstr "Архив Neatline"
+msgstr "Записи Neatline"
 
 #: views/shared/editor/items-ajax.php:71
 msgid "Omeka Records"
-msgstr "Архив Omeka"
+msgstr "Записи Omeka"
 
 #: views/shared/index/_neatline_header.php:31
 msgid "View Fullscreen"
