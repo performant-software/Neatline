@@ -461,6 +461,7 @@ To create a custom ordering:
 
 ### Translations
 
+* Martin Liebeskind (German)
 * Gillian Price (Spanish)
 * Oguljan Reyimbaeva (Russian)
 * Katina Rogers (French)
