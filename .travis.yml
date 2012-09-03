@@ -1,0 +1,17 @@
+language: php
+
+php:
+  - 5.2
+  - 5.3
+  #- 5.4
+
+env:
+  - OMEKA_BRANCH=stable-1.5
+  #- OMEKA_BRANCH=master
+
+before_script: ./.travis.setup.sh
+
+script: ./.travis.tests.sh
+
+notifications:
+  irc: "irc.freenode.org#slab"
