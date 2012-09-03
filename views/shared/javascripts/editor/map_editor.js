@@ -102,6 +102,11 @@
                         self.modifyFeatures.unselectFeature(feature);
                         self._currentEditLayer.destroyFeatures([feature]);
 
+                        // Emit new geocoverage.
+                        self._trigger('featureadded', {}, {
+                            geocoverage: self.getWktForSave()
+                        });
+
                     }
 
                 }
@@ -261,15 +266,7 @@
             this.cancelSketch();
 
             var formatter = new OpenLayers.Format.KML();
-            var kml = formatter.write(this._currentEditLayer.features);
-
-            // Re-select the feature.
-            if (!_.isUndefined(this.modifyFeatures) &&
-                !_.isNull(this._clickedFeature)) {
-                this.modifyFeatures.selectFeature(this._clickedFeature);
-            }
-
-            return kml;
+            return formatter.write(this._currentEditLayer.features);
 
         },
 
