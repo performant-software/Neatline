@@ -322,9 +322,31 @@
 
             _.each(layers, function(record) {
 
-                // Construct formatter, get features.
+                // Construct formatter.
                 var formatter = new OpenLayers.Format.KML();
-                var features = formatter.read(record.wkt);
+                var features = [];
+
+                // ** TEMPORARY: Handle WKT data from 1.0 release.
+                features = formatter.read(record.wkt);
+                if (_.isEmpty(features)) {
+
+                    if (!_.isNull(record.wkt)) {
+                        $.each(record.wkt.split(self.options.wkt_delimiter), function(i, wkt) {
+
+                            // Construct WKT format reader.
+                            var reader = new OpenLayers.Format.WKT();
+
+                            // Try to read valid wkt. If valid, build geometry.
+                            if (!_.isUndefined(reader.read(wkt))) {
+                                var geometry = new OpenLayers.Geometry.fromWKT(wkt);
+                                var feature = new OpenLayers.Feature.Vector(geometry);
+                                features.push(feature);
+                            }
+
+                        });
+                    }
+
+                }
 
                 // Get float values for opacities.
                 record.vector_opacity = record.vector_opacity / 100;
