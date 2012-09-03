@@ -526,7 +526,7 @@
                     });
 
                     if (!_.isUndefined(self.modifyFeatures)) {
-                        self.modifyFeatures.selectFeature(feature);
+                        self.modifyFeatures.selectFeature(self._clickedFeature);
                     }
 
                 },

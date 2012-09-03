@@ -259,14 +259,26 @@
 
             var wkts = [];
 
-            // Unselect feature, cancel sketch.
+            // Unselect feature.
             if (!_.isUndefined(this.modifyFeatures)) {
                 this.modifyFeatures.unselectFeature(this._clickedFeature);
             }
+
+            // Cancel running sketch.
             this.cancelSketch();
 
+            // Features -> KML.
             var formatter = new OpenLayers.Format.KML();
-            return formatter.write(this._currentEditLayer.features);
+            var kml = formatter.write(this._currentEditLayer.features);
+
+            // Re-select the feature.
+            if (!_.isUndefined(this.modifyFeatures) &&
+                !_.isNull(this._clickedFeature)) {
+                try { this.modifyFeatures.selectFeature(this._clickedFeature); }
+                catch (err) {}
+            }
+
+            return kml;
 
         },
 
@@ -319,8 +331,6 @@
          * Update the feature color for the current editing layer.
          */
         setCurrentRecordStyle: function(style, value) {
-
-            // console.log(value);
 
             var self = this;
 

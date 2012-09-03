@@ -1,0 +1,14 @@
+<phpunit bootstrap="bootstrap.php"
+  verbose="true"
+  convertErrorsToExceptions="true"
+  convertWarningsToExceptions="true"
+  colors="true">
+
+  <testsuites>
+    <testsuite name="SolrSearchTests">
+      <directory>integration</directory>
+      <directory>unit</directory>
+    </testsuite>
+  </testsuites>
+
+</phpunit>
