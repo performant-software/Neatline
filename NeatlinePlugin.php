@@ -192,15 +192,6 @@ class NeatlinePlugin
             $this->_db->prefix . 'neatline_data_records_exhibit_idx',
             'exhibit_id'
         );
-        /**
-         * This doesn't seem to help, but I'm leaving it here as a record that
-         * we tried it.
-         * $this->_addIndex(
-         *     $this->_db->prefix . 'neatline_data_records',
-         *     $this->_db->prefix . 'neatline_data_records_exhibit_item_idx',
-         *     'exhibit_id, item_id'
-         * );
-         */
 
         // Layers table.
         $sql = "CREATE TABLE IF NOT EXISTS `{$this->_db->prefix}neatline_base_layers` (
