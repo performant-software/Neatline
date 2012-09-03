@@ -220,13 +220,6 @@
             this._popUpEditControls();
             this._positionToolbar();
 
-            // If necessary, reselect a clicked feature.
-            $.each(this._currentEditLayer.features, function(i, feature) {
-                if (feature === self._clickedFeature) {
-                    self.modifyFeatures.selectFeature(self._clickedFeature);
-                }
-            });
-
         },
 
         /*
