@@ -24,7 +24,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache 2 License
  */
 
-class Neatline_FixturesController extends Omeka_Controller_Action
+class Neatline_FixturesController extends Omeka_Controller_AbstractActionController
 {
 
     /**

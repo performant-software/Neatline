@@ -24,7 +24,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache 2 License
  */
 
-class NeatlineExhibit extends Omeka_Record implements Zend_Acl_Resource_Interface
+class NeatlineExhibit extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Interface
 {
 
     CONST RESOURCE_ID = 'Neatline_Index';

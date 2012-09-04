@@ -26,6 +26,24 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
         'admin_navigation_main'
     );
 
+    // Styles.
+    protected $_mapStyles = array(
+        'vector_color',
+        'stroke_color',
+        'highlight_color',
+        'vector_opacity',
+        'select_opacity',
+        'stroke_opacity',
+        'graphic_opacity',
+        'stroke_width',
+        'point_radius',
+        'h_percent',
+        'v_percent',
+        'timeline_zoom',
+        'context_band_unit',
+        'context_band_height'
+    );
+
 
     // ------
     // Hooks.
@@ -40,6 +58,126 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
     public function hookInstall()
     {
 
+        // Exhibits table.
+        $sql = "CREATE TABLE IF NOT EXISTS `{$this->_db->prefix}neatline_exhibits` (
+                `id`                          int(10) unsigned not null auto_increment,
+                `added`                       TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                `modified`                    TIMESTAMP NULL,
+                `name`                        tinytext collate utf8_unicode_ci,
+                `description`                 TEXT COLLATE utf8_unicode_ci DEFAULT NULL,
+                `slug`                        varchar(100) NOT NULL,
+                `public`                      tinyint(1) NOT NULL,
+                `query`                       TEXT COLLATE utf8_unicode_ci NULL,
+                `image_id`                    int(10) unsigned NULL,
+                `top_element`                 ENUM('map', 'timeline') DEFAULT 'map',
+                `items_h_pos`                 ENUM('right', 'left') DEFAULT 'right',
+                `items_v_pos`                 ENUM('top', 'bottom') DEFAULT 'bottom',
+                `items_height`                ENUM('full', 'partial') DEFAULT 'partial',
+                `is_map`                      tinyint(1) NOT NULL,
+                `is_timeline`                 tinyint(1) NOT NULL,
+                `is_items`                    tinyint(1) NOT NULL,
+                `is_context_band`             tinyint(1) NOT NULL,
+                `h_percent`                   int(10) unsigned NULL,
+                `v_percent`                   int(10) unsigned NULL,
+                `default_map_bounds`          varchar(100) NULL,
+                `default_map_zoom`            int(10) unsigned NULL,
+                `default_focus_date`          varchar(100) NULL,
+                `default_timeline_zoom`       int(10) unsigned NULL,
+                `default_vector_color`        tinytext COLLATE utf8_unicode_ci NULL,
+                `default_stroke_color`        tinytext COLLATE utf8_unicode_ci NULL,
+                `default_highlight_color`     tinytext COLLATE utf8_unicode_ci NULL,
+                `default_vector_opacity`      int(10) unsigned NULL,
+                `default_select_opacity`      int(10) unsigned NULL,
+                `default_stroke_opacity`      int(10) unsigned NULL,
+                `default_graphic_opacity`     int(10) unsigned NULL,
+                `default_stroke_width`        int(10) unsigned NULL,
+                `default_point_radius`        int(10) unsigned NULL,
+                `default_base_layer`          int(10) unsigned NULL,
+                `default_context_band_unit`   ENUM('hour', 'day', 'week', 'month', 'year', 'decade', 'century') DEFAULT 'decade',
+                `default_context_band_height` int(10) unsigned NULL,
+                `creator_id`                  int(10) unsigned NOT NULL,
+                 PRIMARY KEY (`id`)
+               ) ENGINE=innodb DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
+
+        $this->_db->query($sql);
+
+        // Records table.
+        $sql = "CREATE TABLE IF NOT EXISTS `{$this->_db->prefix}neatline_data_records` (
+                `id`                          int(10) unsigned not null auto_increment,
+                `item_id`                     int(10) unsigned NULL,
+                `use_dc_metadata`             tinyint(1) NULL,
+                `exhibit_id`                  int(10) unsigned NULL,
+                `parent_record_id`            int(10) unsigned NULL,
+                `show_bubble`                 tinyint(1) NULL,
+                `title`                       mediumtext COLLATE utf8_unicode_ci NULL,
+                `slug`                        varchar(100) NULL,
+                `description`                 mediumtext COLLATE utf8_unicode_ci NULL,
+                `start_date`                  tinytext COLLATE utf8_unicode_ci NULL,
+                `end_date`                    tinytext COLLATE utf8_unicode_ci NULL,
+                `start_visible_date`          tinytext COLLATE utf8_unicode_ci NULL,
+                `end_visible_date`            tinytext COLLATE utf8_unicode_ci NULL,
+                `geocoverage`                 mediumtext COLLATE utf8_unicode_ci NULL,
+                `left_percent`                int(10) unsigned NULL,
+                `right_percent`               int(10) unsigned NULL,
+                `vector_color`                tinytext COLLATE utf8_unicode_ci NULL,
+                `stroke_color`                tinytext COLLATE utf8_unicode_ci NULL,
+                `highlight_color`             tinytext COLLATE utf8_unicode_ci NULL,
+                `vector_opacity`              int(10) unsigned NULL,
+                `select_opacity`              int(10) unsigned NULL,
+                `stroke_opacity`              int(10) unsigned NULL,
+                `graphic_opacity`             int(10) unsigned NULL,
+                `stroke_width`                int(10) unsigned NULL,
+                `point_radius`                int(10) unsigned NULL,
+                `point_image`                 tinytext COLLATE utf8_unicode_ci NULL,
+                `space_active`                tinyint(1) NULL,
+                `time_active`                 tinyint(1) NULL,
+                `items_active`                tinyint(1) NULL,
+                `display_order`               int(10) unsigned NULL,
+                `map_bounds`                  varchar(100) NULL,
+                `map_zoom`                    int(10) unsigned NULL,
+                 PRIMARY KEY (`id`)
+               ) ENGINE=innodb DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
+
+        $this->_db->query($sql);
+
+        $this->_addIndex(
+            $this->_db->prefix . 'neatline_data_records',
+            $this->_db->prefix . 'neatline_data_records_exhibit_idx',
+            'exhibit_id'
+        );
+
+        // Layers table.
+        $sql = "CREATE TABLE IF NOT EXISTS `{$this->_db->prefix}neatline_base_layers` (
+                `id`                        int(10) unsigned not null auto_increment,
+                `name`                      tinytext COLLATE utf8_unicode_ci NULL,
+                 PRIMARY KEY (`id`)
+               ) ENGINE=innodb DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
+
+        $this->_db->query($sql);
+
+        // Set default map style attributes.
+        foreach ($this->_mapStyles as $style) {
+          set_option($style, get_plugin_ini('Neatline', 'default_'.$style));
+        }
+
+        // Install base layers.
+        $baseLayers = array(
+            'OpenStreetMap',
+            'Google Physical',
+            'Google Streets',
+            'Google Hybrid',
+            'Google Satellite',
+            'Stamen Watercolor',
+            'Stamen Toner',
+            'Stamen Terrain'
+        );
+
+        foreach ($baseLayers as $baseLayer) {
+            $layer = new NeatlineBaseLayer;
+            $layer->name = $baseLayer;
+            $layer->save();
+        }
+
     }
 
     /**
@@ -49,6 +187,23 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
      */
     public function hookUninstall()
     {
+
+        // Drop the exhibits table.
+        $sql = "DROP TABLE IF EXISTS `{$this->_db->prefix}neatline_exhibits`";
+        $this->_db->query($sql);
+
+        // Drop the data table.
+        $sql = "DROP TABLE IF EXISTS `{$this->_db->prefix}neatline_data_records`";
+        $this->_db->query($sql);
+
+        // Drop the data table.
+        $sql = "DROP TABLE IF EXISTS `{$this->_db->prefix}neatline_base_layers`";
+        $this->_db->query($sql);
+
+        // Remove default map style attributes.
+        foreach ($this->_mapStyles as $style) {
+          delete_option($style);
+        }
 
     }
 
@@ -92,6 +247,30 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
     {
         $tabs['Neatline'] = uri('neatline');
         return $tabs;
+    }
+
+
+    // --------
+    // Helpers.
+    // --------
+
+
+    /**
+     * Add an index if one doesn't already exist.
+     *
+     * @param $table  string The name of the table the index is based on.
+     * @param $name   string The name of the index to check for.
+     * @param $fields string The SQL field list defining the index.
+     *
+     * @return void
+     */
+    protected function _addIndex($table, $name, $fields)
+    {
+        $check = "SHOW INDEX FROM `$table` WHERE key_name=?;";
+        if (!$this->_db->query($check, $name)) {
+            $sql = "CREATE INDEX $name ON $table ($fields);";
+            $this->_db->query($sql);
+        }
     }
 
 }
