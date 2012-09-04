@@ -161,7 +161,7 @@ class Neatline_IndexController extends Omeka_Controller_AbstractActionController
         $this->getResponse()->setHeader('Content-type', 'application/json');
 
         // Get the exhibit.
-        $neatline = $this->findById();
+        $neatline = $this->_helper->db->findById();
 
         // Output the JSON string.
         echo $this->_recordsTable->buildTimelineJson($neatline);
@@ -182,7 +182,7 @@ class Neatline_IndexController extends Omeka_Controller_AbstractActionController
         $this->getResponse()->setHeader('Content-type', 'application/json');
 
         // Get the exhibit.
-        $neatline = $this->findById();
+        $neatline = $this->_helper->db->findById();
 
         // Output the JSON string.
         echo $this->_recordsTable->buildMapJson($neatline);
@@ -203,7 +203,7 @@ class Neatline_IndexController extends Omeka_Controller_AbstractActionController
         $this->getResponse()->setHeader('Content-type', 'application/json');
 
         // Get the exhibit.
-        $neatline = $this->findById();
+        $neatline = $this->_helper->db->findById();
 
         // Output the JSON string.
         echo $this->_recordsTable->buildItemsJson($neatline);

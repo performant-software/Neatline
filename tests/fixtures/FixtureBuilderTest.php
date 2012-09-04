@@ -39,11 +39,8 @@ class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
      */
     public function setUp()
     {
-
         parent::setUp();
-
         $this->path_to_fixtures = NEATLINE_PLUGIN_DIR . '/spec/javascripts/fixtures/';
-
     }
 
     /**

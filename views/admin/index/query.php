@@ -29,7 +29,6 @@
 $title = __('Neatline | Edit Items Query');
 head(array('content_class' => 'neatline', 'title' => $title));
 ?>
-<h1><?php echo $title; ?></h1>
 
 <div id="primary">
     <?php echo items_search_form(array(), current_uri()); ?>
