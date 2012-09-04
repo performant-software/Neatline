@@ -22,6 +22,9 @@ if (!defined('NEATLINE_PLUGIN_DIR')) {
 
 // requires {{{
 require_once NEATLINE_PLUGIN_DIR . '/NeatlinePlugin.php';
+require_once NEATLINE_PLUGIN_DIR . '/helpers/NeatlineFunctions.php';
+require_once NEATLINE_PLUGIN_DIR . '/helpers/NeatlineRenderer.php';
+require_once NEATLINE_PLUGIN_DIR . '/forms/NeatlineDetails.php';
 require_once HELPERS;
 // // }}}
 

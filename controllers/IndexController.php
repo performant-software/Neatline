@@ -45,11 +45,10 @@ class Neatline_IndexController extends Omeka_Controller_AbstractActionController
         $this->_browseRecordsPerPage = get_option('per_page_admin');
 
         try {
-            $this->_table = $this->getTable($modelName);
-            $this->aclResource = $this->findNeatline();
+            $this->_table = $this->_helper->db->getTable($modelName);
         } catch (Omeka_Controller_Exception_404 $e) {}
 
-        $this->_recordsTable = $this->getTable('NeatlineDataRecord');
+        $this->_recordsTable = $this->_helper->db->getTable('NeatlineDataRecord');
 
     }
 
@@ -279,20 +278,19 @@ class Neatline_IndexController extends Omeka_Controller_AbstractActionController
      */
     public function findNeatline()
     {
-        if ($slug = $this->getRequest()->getParam('slug')) {
 
-            $record = $this->_table->findBySlug($slug);
+        // Get the exhibit.
+        $record = $this->_table->findBySlug($slug);
 
-            if (!$record) {
-                throw new Omeka_Controller_Exception_404(get_class($this) . ": No record with Slug '$slug' exists" );
-            }
-
-        } else {
-
-            $record = parent::findById();
-
+        // Catch invalid slug.
+        if (!$record) {
+            throw new Omeka_Controller_Exception_404(
+                get_class($this) . ": No record with Slug '$slug' exists"
+            );
         }
 
         return $record;
+
     }
+
 }

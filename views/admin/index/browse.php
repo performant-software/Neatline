@@ -31,13 +31,11 @@ head(array('content_class' => 'neatline', 'title' => $title));
 ?>
 
 <h1><?php echo $title; ?></h1>
-<?php if (has_permission('Neatline_Index', 'add')): ?>
 <p class="add-button">
     <a class="add" href="<?php echo html_escape(uri('neatline-exhibits/add')); ?>">
-<?php echo __('Create an Exhibit'); ?>
+        <?php echo __('Create an Exhibit'); ?>
     </a>
 </p>
-<?php endif; ?>
 
 <div id="primary">
 
@@ -67,40 +65,18 @@ head(array('content_class' => 'neatline', 'title' => $title));
         <?php while (loop_neatlines()): ?>
         <tr id="neatline-<?php echo neatline('id'); ?>">
             <td class="title">
-                <?php
-                if (has_permission('Neatline_Index', 'show')) {
-                  echo link_to_neatline();
-                } else {
-                  echo neatline('name');
-                }
-                ?>
+                <?php echo link_to_neatline(); ?>
                 <div class="slug-preview">/<?php echo neatline('slug'); ?></div>
-
                 <?php
-                if (has_permission('Neatline_Index', 'edit')) {
                     echo link_to_neatline(__('Edit Details'), array('class' => 'edit'), 'edit', null, false);
-                }
-
-                if (has_permission('Neatline_Index', 'delete')) {
                     echo link_to_neatline(__('Delete'), array('class' => 'delete delete-confirm'), 'delete-confirm', null, false);
-                }
                 ?>
             </td>
-            <td>
-              <?php
-              if (has_permission('Neatline_Index', 'query')) {
-                  echo link_to_neatline(__('Edit Query'), array('class' => 'query'), 'query', null, false);
-              }
-              ?>
-            </td>
+            <td><?php echo link_to_neatline(__('Edit Query'), array('class' => 'query'), 'query', null, false);?></td>
             <td><?php echo format_date(neatline('modified')); ?></td>
             <td><?php echo total_records_for_neatline(); ?></td>
             <td><?php echo neatline('public') ? __('Yes') : __('No'); ?></td>
-            <td>
-            <?php if (has_permission('Neatline_Index', 'edit')): ?>
-                <a href="<?php echo uri('neatline-exhibits/editor/' . neatline('id')); ?>" class="edit"><?php echo __('Edit'); ?></a>
-            <?php endif; ?>
-            </td>
+            <td><a href="<?php echo uri('neatline-exhibits/editor/' . neatline('id')); ?>" class="edit"><?php echo __('Edit'); ?></a></td>
         </tr>
         <?php endwhile; ?>
     </tbody>
@@ -111,16 +87,13 @@ head(array('content_class' => 'neatline', 'title' => $title));
 
 <?php else: ?>
 
-    <p class="neatline-alert"><?php echo __('There are no Neatline exhibits yet.'); ?>
-    <?php if (has_permission('Neatline_Index', 'add')): ?>
-      <a href="<?php echo uri('neatline-exhibits/add'); ?>"><?php echo __('Create one!'); ?></a>
-    <?php endif; ?>
+    <p class="neatline-alert">
+        <?php echo __('There are no Neatline exhibits yet.'); ?>
+        <a href="<?php echo uri('neatline-exhibits/add'); ?>"><?php echo __('Create one!'); ?></a>
     </p>
 
 <?php endif; ?>
 
 </div>
 
-<?php
-foot();
-?>
+<?php foot(); ?>
