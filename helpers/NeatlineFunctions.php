@@ -528,10 +528,9 @@ function link_to_neatline(
     $route = 'neatline-exhibits/'.$action.'/'.$slug;
     $uri = $public? public_uri($route) : uri($route);
     $props['href'] = $uri;
-
     $html = '<a ' . _tag_attributes($props) . '>' . $text . '</a>';
 
-    return apply_filters('link_to_neatline', $html, $text, $props, $action, $neatline);
+    return $html;
 
 }
 
