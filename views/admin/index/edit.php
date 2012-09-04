@@ -36,8 +36,6 @@ $title = __('Neatline | Edit "%s"', neatline('name'));
 head(array('content_class' => 'neatline', 'title' => $title));
 ?>
 
-<h1><?php echo $title; ?></h1>
-
 <div id="primary">
     <?php echo flash(); ?>
     <?php echo $form; ?>

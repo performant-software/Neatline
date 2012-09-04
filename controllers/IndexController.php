@@ -87,7 +87,7 @@ class Neatline_IndexController extends Omeka_Controller_AbstractActionController
     {
 
         // Get the exhibit.
-        $neatline = $this->findById();
+        $neatline = $this->_helper->db->findById();
         $form = $this->_getNeatlineDetailsForm($neatline);
 
         if ($this->_request->isPost()) {
@@ -118,7 +118,7 @@ class Neatline_IndexController extends Omeka_Controller_AbstractActionController
     {
 
         // Get the exhibit.
-        $neatline = $this->findById();
+        $neatline = $this->_helper->db->findById();
 
         // Save query.
         if(isset($_GET['search'])) {

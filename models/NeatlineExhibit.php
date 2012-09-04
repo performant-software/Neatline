@@ -8,7 +8,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class NeatlineExhibit extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Interface
+class NeatlineExhibit extends Omeka_Record_AbstractRecord
 {
 
     /**
@@ -431,17 +431,6 @@ class NeatlineExhibit extends Omeka_Record_AbstractRecord implements Zend_Acl_Re
             $this->addError('slug', __('The slug can only contain lowercase letters, numbers, and hyphens.'));
         }
 
-    }
-
-    /**
-     * Required by Zend_Acl_Resource_Interface.
-     *
-     * @since 1.0
-     * @return string
-     */
-    public function getResourceId()
-    {
-        return self::RESOURCE_ID;
     }
 
     /**

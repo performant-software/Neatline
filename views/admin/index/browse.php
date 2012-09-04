@@ -65,11 +65,9 @@ head(array('content_class' => 'neatline', 'title' => $title));
         <tr id="neatline-<?php echo neatline('id'); ?>">
             <td class="title">
                 <?php echo link_to_neatline(); ?>
-                <div class="slug-preview">/<?php echo neatline('slug'); ?></div>
-                <?php
-                    echo link_to_neatline(__('Edit Details'), array('class' => 'edit'), 'edit', null, false);
-                    echo link_to_neatline(__('Delete'), array('class' => 'delete delete-confirm'), 'delete-confirm', null, false);
-                ?>
+                <ul class="action-links group">
+                    <li><?php echo link_to_neatline(__('Edit Details'), array('class' => 'edit'), 'edit', null, false); ?></li>
+                    <li><?php echo link_to_neatline(__('Delete'), array('class' => 'delete delete-confirm'), 'delete-confirm', null, false); ?></li>
             </td>
             <td><?php echo link_to_neatline(__('Edit Query'), array('class' => 'query'), 'query', null, false);?></td>
             <td><?php echo format_date(neatline('modified')); ?></td>
