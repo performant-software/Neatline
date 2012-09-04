@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: Neatline\n"
 "Report-Msgid-Bugs-To: http://github.com/scholarslab/\n"
 "POT-Creation-Date: 2012-07-26 11:45-0500\n"
-"PO-Revision-Date: 2012-08-28 18:58+0000\n"
+"PO-Revision-Date: 2012-09-02 19:27+0000\n"
 "Last-Translator: Martin Liebeskind <martin.liebeskind@live.de>\n"
 "Language-Team: German (Germany) (http://www.transifex.com/projects/p/neatline/language/de_DE/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: de_DE\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: controllers/IndexController.php:81 controllers/IndexController.php:114
 msgid "There were problems with your form."
@@ -176,7 +176,7 @@ msgstr "Bearbeite Objekt Reihenfolge"
 
 #: views/shared/editor/_configure_items.php:30
 msgid "Click to edit the ordering of the items in the description tray."
-msgstr "Klicken Sie um die Reihenfolge der Objekte in der Beschreibung ..."
+msgstr "Klicken Sie um die Reihenfolge der Objekte in der Beschreibungsleiste."
 
 #: views/shared/editor/_configure_items.php:33
 #: views/shared/editor/_configure_map.php:120
