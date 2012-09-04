@@ -28,36 +28,6 @@ class NeatlineExhibitTable extends Omeka_Db_Table
 {
 
     /**
-     * Fetch Neatlines for the main browse view.
-     *
-     * @param string $sortField The column to sort by.
-     * @param string $sortDir 'a' or 'd' for ASC and DESC.
-     * @param integer $page The page number.
-     *
-     * @return array of Omeka_record $neatlines The Neatlines.
-     */
-    public function getNeatlinesForBrowse(
-        $sortField = 'added',
-        $sortDir = 'd',
-        $page = 1)
-    {
-
-        $orderClause = neatline_buildOrderClause($sortField, $sortDir);
-        $select = $this->getSelect();
-
-        if (isset($page)) {
-            $select->limitPage($page, get_option('per_page_admin'));
-        }
-
-        if (isset($orderClause)) {
-            $select->order($orderClause);
-        }
-
-        return $this->fetchObjects($select);
-
-    }
-
-    /**
      * Find exhibit by slug.
      *
      * @param string $slug The slug.
@@ -66,30 +36,8 @@ class NeatlineExhibitTable extends Omeka_Db_Table
      */
     public function findBySlug($slug)
     {
-
-        // Form the select.
         $select = $this->getSelect()->where('slug=?', $slug);
-
         return $this->fetchObject($select);
-
-    }
-
-    /**
-     * Build array with current_page, per_page, and total_results.
-     *
-     * @param integer $page The page number.
-     *
-     * @return array $pagination The settings.
-     */
-    public function getPaginationSettings($page)
-    {
-
-        return array(
-            'current_page' => $page,
-            'per_page' => get_option('per_page_admin'),
-            'total_results' => $this->count()
-        );
-
     }
 
 }
