@@ -69,7 +69,7 @@ class Neatline_NeatlineExhibitTableTest extends Neatline_Test_AppTestCase
     }
 
     /**
-     * This checks that findBySlug appropriately escapes all input before 
+     * This checks that findBySlug appropriately escapes all input before
      * passing it to SQL.
      *
      * @return void

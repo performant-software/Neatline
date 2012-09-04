@@ -30,9 +30,8 @@ $title = __('Neatline | Browse Exhibits');
 head(array('content_class' => 'neatline', 'title' => $title));
 ?>
 
-<h1><?php echo $title; ?></h1>
 <p class="add-button">
-    <a class="add" href="<?php echo html_escape(uri('neatline-exhibits/add')); ?>">
+    <a class="add green button" href="<?php echo html_escape(uri('neatline-exhibits/add')); ?>">
         <?php echo __('Create an Exhibit'); ?>
     </a>
 </p>
