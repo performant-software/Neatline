@@ -1,33 +1,15 @@
 <?php
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
-
 /**
  * Record class for exhibits.
  *
- * PHP version 5
- *
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not
- * use this file except in compliance with the License. You may obtain a copy of
- * the License at http://www.apache.org/licenses/LICENSE-2.0 Unless required by
- * applicable law or agreed to in writing, software distributed under the
- * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS
- * OF ANY KIND, either express or implied. See the License for the specific
- * language governing permissions and limitations under the License.
- *
  * @package     omeka
  * @subpackage  neatline
- * @author      Scholars' Lab <>
- * @author      Bethany Nowviskie <bethany@virginia.edu>
- * @author      Adam Soroka <ajs6f@virginia.edu>
- * @author      David McClure <david.mcclure@virginia.edu>
- * @copyright   2011 Rector and Board of Visitors, University of Virginia
- * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache 2 License
+ * @copyright   2012 Rector and Board of Visitors, University of Virginia
+ * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
 class NeatlineExhibit extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Interface
 {
-
-    CONST RESOURCE_ID = 'Neatline_Index';
 
     /**
      * Record attributes.
@@ -101,16 +83,6 @@ class NeatlineExhibit extends Omeka_Record_AbstractRecord implements Zend_Acl_Re
     );
 
     /**
-     * Mixin initializer.
-     *
-     * Adds the PublicFeatured mixin.
-     */
-    protected function _initializeMixins()
-    {
-        $this->_mixins[] = new PublicFeatured($this);
-    }
-
-    /**
      * Things to do in the beforeInsert() hook:
      *
      * Use the current datetime for 'added' and 'modified'.
@@ -118,15 +90,15 @@ class NeatlineExhibit extends Omeka_Record_AbstractRecord implements Zend_Acl_Re
      * @since 1.0
      * @return void
      */
-    protected function beforeInsert()
-    {
-        $now = Zend_Date::now()->toString(self::DATE_FORMAT);
-        $this->added = $now;
-        $this->modified = $now;
-        if (!$this->creator_id && ($user = Omeka_Context::getInstance()->getCurrentUser())) {
-            $this->setAddedBy($user);
-        }
-    }
+    // protected function beforeInsert()
+    // {
+    //     $now = Zend_Date::now()->toString(self::DATE_FORMAT);
+    //     $this->added = $now;
+    //     $this->modified = $now;
+    //     if (!$this->creator_id && ($user = Omeka_Context::getInstance()->getCurrentUser())) {
+    //         $this->setAddedBy($user);
+    //     }
+    // }
 
     /**
      * Things to do in the beforeSave() hook:
@@ -136,11 +108,11 @@ class NeatlineExhibit extends Omeka_Record_AbstractRecord implements Zend_Acl_Re
      * @since 1.0
      * @return void
      */
-    protected function beforeSave()
-    {
-        $this->_checkDefaultFocusDate();
-        $this->modified = Zend_Date::now()->toString(self::DATE_FORMAT);
-    }
+    // protected function beforeSave()
+    // {
+    //     $this->_checkDefaultFocusDate();
+    //     $this->modified = Zend_Date::now()->toString(self::DATE_FORMAT);
+    // }
 
     /**
      * Fetch the parent image.
@@ -497,7 +469,7 @@ class NeatlineExhibit extends Omeka_Record_AbstractRecord implements Zend_Acl_Re
     }
 
     /**
-     * This makes sure that the default_focus_date isn't set to the string 
+     * This makes sure that the default_focus_date isn't set to the string
      * 'null'.
      *
      * @return void
@@ -511,4 +483,5 @@ class NeatlineExhibit extends Omeka_Record_AbstractRecord implements Zend_Acl_Re
             $this->default_focus_date = null;
         }
     }
+
 }

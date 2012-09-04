@@ -66,7 +66,7 @@ class Neatline_Form_NeatlineDetails extends Omeka_Form
             'label'         => __('Description'),
             'description'   => __('Supporting prose to describe the exhibit.'),
             'value'         => $this->_neatline->description,
-            'attribs'       => array('class' => 'html-editor', 'rows' => '20')
+            'attribs'       => array('class' => 'html-editor', 'rows' => '10')
         ));
 
         // Slug.
@@ -117,18 +117,9 @@ class Neatline_Form_NeatlineDetails extends Omeka_Form
             'value'         => $this->_neatline->public
         ));
 
-        // Image.
-        $this->addElement('select', 'image_id', array(
-            'label'         => __('(Optional): Static Image'),
-            'description'   => __('Select a file to build the exhibit on a static image.'),
-            'attribs'       => array('style' => 'width: 230px'),
-            'multiOptions'  => $this->getImagesForSelect(),
-            'value'         => $this->_neatline->image_id,
-        ));
-
         // Submit.
         $this->addElement('submit', 'submit', array(
-            'label' => __('Save Neatline')
+            'label' => __('Save Exhibit')
         ));
 
         // Group the metadata fields.
@@ -136,7 +127,6 @@ class Neatline_Form_NeatlineDetails extends Omeka_Form
             'name',
             'description',
             'slug',
-            'image_id',
             'public'
         ), 'exhibit_info');
 
@@ -147,39 +137,9 @@ class Neatline_Form_NeatlineDetails extends Omeka_Form
 
     }
 
-    /**
-     * Get the list of images for the dropdown select.
-     *
-     * @return array $images The images.
-     */
-    public function getImagesForSelect()
-    {
-
-        $files = array('none' => '-');
-
-        // Get file table.
-        $_db = get_db();
-        $_files = $_db->getTable('File');
-
-        // Build select.
-        $select = $_files->getSelect()->where(
-            'f.has_derivative_image = 1'
-        )->order('original_filename DESC');
-
-        // Fetch and return.
-        $records = $_files->fetchObjects($select);
-
-        // Build the array.
-        foreach($records as $record) {
-            $files[$record->id] = $record->original_filename;
-        };
-
-        return $files;
-
-    }
-
     public function setNeatline(NeatlineExhibit $neatline)
     {
         $this->_neatline = $neatline;
     }
+
 }

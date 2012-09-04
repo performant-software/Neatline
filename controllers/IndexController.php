@@ -70,14 +70,8 @@ class Neatline_IndexController extends Omeka_Controller_AbstractActionController
 
                 // Save and redirect.
                 $neatline->saveForm($form->getValues());
-                $successMessage = $this->_getAddSuccessMessage($neatline);
-                $this->flashSuccess($successMessage);
                 $this->_redirect('neatline-exhibits');
 
-            }
-
-            else {
-                $this->flashError(__('There were problems with your form.'));
             }
 
         }
@@ -103,14 +97,8 @@ class Neatline_IndexController extends Omeka_Controller_AbstractActionController
 
                 // Save and redirect.
                 $neatline->saveForm($form->getValues());
-                $successMessage = $this->_getEditSuccessMessage($neatline);
-                $this->flashSuccess($successMessage);
                 $this->_redirect('neatline-exhibits');
 
-            }
-
-            else {
-                $this->flashError(__('There were problems with your form.'));
             }
 
         }
@@ -149,13 +137,13 @@ class Neatline_IndexController extends Omeka_Controller_AbstractActionController
 
     public function showAction()
     {
-        $neatline = $this->findNeatline();
+        $neatline = $this->_findNeatline();
         $this->view->neatlineexhibit = $neatline;
     }
 
     public function fullscreenAction()
     {
-        $neatline = $this->findNeatline();
+        $neatline = $this->_findNeatline();
         $this->view->neatlineexhibit = $neatline;
     }
 
@@ -223,49 +211,12 @@ class Neatline_IndexController extends Omeka_Controller_AbstractActionController
     }
 
     /**
-     * Sets the add success message.
-     */
-    protected function _getAddSuccessMessage($neatline)
-    {
-        return __('The Neatline "%s" was successfully added!', $neatline->name);
-    }
-
-    /**
-     * Sets the edit success message.
-     */
-    protected function _getEditSuccessMessage($neatline)
-    {
-        return __('The Neatline "%s" was successfully changed!', $neatline->name);
-    }
-
-    /**
-     * Sets the delete success message.
-     */
-    protected function _getDeleteSuccessMessage($neatline)
-    {
-        return __('The Neatline "%s" was successfully deleted!', $neatline->name);
-    }
-
-    /**
-     * Sets the delete confirm message.
-     */
-    protected function _getDeleteConfirmMessage($neatline)
-    {
-        return __('This will delete the Neatline "%s" and its associated metadata.', $neatline->name);
-    }
-
-    /**
      * Construct the details form.
      */
     private function _getNeatlineDetailsForm(NeatlineExhibit $neatline)
     {
-
-        $form = new Neatline_Form_NeatlineDetails(array(
-            'neatline' => $neatline
-        ));
-
+        $form = new Neatline_Form_NeatlineDetails(array('neatline' => $neatline));
         return $form;
-
     }
 
     /**
@@ -276,7 +227,7 @@ class Neatline_IndexController extends Omeka_Controller_AbstractActionController
      * @throws Omeka_Controller_Exception_404
      * @return NeatlineExhibit
      */
-    public function findNeatline()
+    private function _findNeatline()
     {
 
         // Get the exhibit.

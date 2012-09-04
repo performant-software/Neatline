@@ -31,10 +31,7 @@
  */
 function neatline_queueAdminCss()
 {
-
-    // Custom CSS.
     queue_css('neatline-admin');
-
 }
 
 /**
@@ -90,6 +87,7 @@ function neatline_queueEditorAssets()
  */
 function neatline_queuePublicAssets()
 {
+
     queue_js('_constructInThemeNeatline', 'javascripts');
     queue_css('neatline-public');
     $google = 'http://maps.google.com/maps/api/js?v=3.5&sensor=false';
@@ -97,6 +95,7 @@ function neatline_queuePublicAssets()
     // API calls.
     $headScript = __v()->headScript();
     $headScript->appendScript('', 'text/javascript', array('src' => $google));
+
 }
 
 /**
@@ -423,9 +422,7 @@ function neatline($fieldname, $options = array(), $neatline = null)
  */
 function get_current_neatline()
 {
-
     return __v()->neatlineexhibit;
-
 }
 
 /**
@@ -436,9 +433,7 @@ function get_current_neatline()
  */
 function set_current_neatline($neatline = null)
 {
-
     __v()->neatlineexhibit = $neatline;
-
 }
 
 /**
@@ -449,9 +444,7 @@ function set_current_neatline($neatline = null)
  */
 function set_neatlines_for_loop($neatlines)
 {
-
     __v()->neatlineexhibits = $neatlines;
-
 }
 
 /**
@@ -461,9 +454,7 @@ function set_neatlines_for_loop($neatlines)
  */
 function get_neatlines_for_loop()
 {
-
     return __v()->neatlineexhibits;
-
 }
 
 /**
@@ -473,9 +464,7 @@ function get_neatlines_for_loop()
  */
 function loop_neatlines()
 {
-
     return loop_records('neatlines', get_neatlines_for_loop(), 'set_current_neatline');
-
 }
 
 /**
@@ -485,9 +474,7 @@ function loop_neatlines()
  */
 function has_neatlines()
 {
-
     return (total_neatlines() > 0);
-
 }
 
 /**
@@ -497,10 +484,8 @@ function has_neatlines()
  */
 function has_neatlines_for_loop()
 {
-
     $view = __v();
     return ($view->neatlineexhibits and count($view->neatlineexhibits));
-
 }
 
 /**
@@ -510,9 +495,7 @@ function has_neatlines_for_loop()
  */
 function total_neatlines()
 {
-
     return get_db()->getTable('NeatlineExhibits')->count();
-
 }
 
 /**
@@ -560,10 +543,7 @@ function link_to_neatline(
  */
 function total_records_for_neatline($neatline = null)
 {
-
     $neatline = $neatline ? $neatline : get_current_neatline();
-    
     return (int)$neatline->getNumberOfRecords();
-
 }
 
