@@ -124,7 +124,7 @@ class Neatline_IndexController extends Omeka_Controller_AbstractActionController
         if(isset($_GET['search'])) {
             $neatline->query = serialize($_GET);
             $neatline->save();
-            $this->redirect->goto('browse');
+            $this->_helper->redirector('browse');
         } else {
             $queryArray = unserialize($neatline->query);
             $_GET = $queryArray;
