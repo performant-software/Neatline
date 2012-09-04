@@ -153,15 +153,13 @@ class Neatline_Test_AppTestCase extends Omeka_Test_AppTestCase
         $_db = get_db();
         $elementTable = $_db->getTable('Element');
         $elementTextTable = $_db->getTable('ElementText');
-        $recordTypeTable = $_db->getTable('RecordType');
 
         // Fetch element record and the item type id.
         $element = $elementTable->findByElementSetNameAndElementName($elementSet, $elementName);
-        $itemTypeId = $recordTypeTable->findIdFromName('Item');
 
         $text = new ElementText;
         $text->record_id = $item->id;
-        $text->record_type_id = $itemTypeId;
+        $text->record_type = 'Item';
         $text->element_id = $element->id;
         $text->text = $value;
         $text->save();

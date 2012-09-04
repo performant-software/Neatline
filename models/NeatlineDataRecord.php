@@ -291,22 +291,16 @@ class NeatlineDataRecord extends Omeka_Record_AbstractRecord
         $data['show_bubble'] =          1;
 
         // Get DC title default.
-        $data['title'] = neatline_getItemMetadata(
-            $item,
-            'Dublin Core',
-            'Title');
+        $data['title'] = metadata(
+            $item, array('Dublin Core', 'Title'));
 
         // Get DC description default.
-        $data['description'] = neatline_getItemMetadata(
-            $item,
-            'Dublin Core',
-            'Description');
+        $data['description'] = metadata(
+            $item, array('Dublin Core', 'Description'));
 
         // Get DC date default.
-        $date = neatline_getItemMetadata(
-            $item,
-            'Dublin Core',
-            'Date');
+        $date = metadata(
+            $item, array('Dublin Core', 'Date'));
 
         // Check for date format, assign pieces.
         if (preg_match(self::$dcDateRegex, $date, $matches)) {
@@ -673,11 +667,8 @@ class NeatlineDataRecord extends Omeka_Record_AbstractRecord
         else if (!is_null($this->item_id)) {
 
             // Try to get DC title.
-            return neatline_getItemMetadata(
-                $this->getItem(),
-                'Dublin Core',
-                'Title'
-            );
+            return metadata(
+                $this->getItem(), array('Dublin Core', 'Title'));
 
         }
 
@@ -792,11 +783,8 @@ class NeatlineDataRecord extends Omeka_Record_AbstractRecord
         else if (!is_null($this->item_id)) {
 
             // Try to get a DC description.
-            return neatline_getItemMetadata(
-                $this->getItem(),
-                'Dublin Core',
-                'Description'
-            );
+            return metadata(
+                $this->getItem(), array('Dublin Core', 'Description'));
 
         }
 
@@ -856,11 +844,8 @@ class NeatlineDataRecord extends Omeka_Record_AbstractRecord
             if (!plugin_is_active('NeatlineFeatures')) {
 
                 // Get the DC coverage.
-                $coverage = neatline_getItemMetadata(
-                    $this->getItem(),
-                    'Dublin Core',
-                    'Coverage'
-                );
+                $coverage = metadata(
+                    $this->getItem(), array('Dublin Core', 'Coverage'));
 
                 // Return if not empty, otherwise return default.
                 return ($coverage !== '') ?
@@ -923,11 +908,8 @@ class NeatlineDataRecord extends Omeka_Record_AbstractRecord
         else if (!is_null($this->item_id)) {
 
             // Get the DC date.
-            $date = neatline_getItemMetadata(
-                $this->getItem(),
-                'Dublin Core',
-                'Date'
-            );
+            $date = metadata(
+                $this->getItem(), array('Dublin Core', 'Date'));
 
             if (preg_match(self::$dcDateRegex, $date, $matches)) {
                 return $matches['start'];
@@ -961,11 +943,8 @@ class NeatlineDataRecord extends Omeka_Record_AbstractRecord
         else if (!is_null($this->item_id)) {
 
             // Get the DC date.
-            $date = neatline_getItemMetadata(
-                $this->getItem(),
-                'Dublin Core',
-                'Date'
-            );
+            $date = metadata(
+                $this->getItem(), array('Dublin Core', 'Date'));
 
             if (preg_match(self::$dcDateRegex, $date, $matches)) {
                 if (array_key_exists('end', $matches)) {

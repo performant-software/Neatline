@@ -240,34 +240,6 @@ function neatline_uninstallWarningMessage()
 }
 
 /**
- * Get an element text for an item by element set and element.
- *
- * @param Omeka_record $item The item.
- * @param string $elementSet The element set.
- * @param string $elementName The element name.
- *
- * @return string $text The element text content.
- */
-function neatline_getItemMetadata($item, $elementSet, $elementName)
-{
-    $text  = '';
-
-    if (!is_string($elementSet)) {
-        $elementSet = $elementSet->name;
-    }
-
-    $texts = $item->getElementTextsByElementNameAndSetName(
-        $elementName, $elementSet
-    );
-
-    if (!empty($texts)) {
-        $text = $texts[0]->text;
-    }
-
-    return $text;
-}
-
-/**
  * Get items for the browser.
  *
  * @param NeatlineExhibit $exhibit The exhibit.

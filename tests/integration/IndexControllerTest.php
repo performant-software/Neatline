@@ -123,12 +123,12 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
         // Set the paging limit.
         set_option('per_page_admin', 2);
 
+        // Hit the route.
         $this->dispatch('neatline-exhibits');
 
+        // Check for paging.
         $neatlinesInView = __v()->neatlineexhibits;
-
         $this->assertEquals(count($neatlinesInView), 2);
-
         $this->assertQuery('div.pagination');
 
     }
@@ -149,11 +149,6 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
         $this->assertQuery('textarea[name="description"]');
         $this->assertQuery('input[name="slug"]');
         $this->assertQuery('input[name="public"]');
-        $this->assertQuery('select[name="image_id"]');
-
-        // TODO: Test the images dropdown. This is complicated by the fact
-        // that the Omeka files table checks for a real file in the archives
-        // folder, so mocking files is difficult.
 
     }
 

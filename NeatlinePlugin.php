@@ -18,6 +18,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
         'install',
         'uninstall',
         'define_routes',
+        'before_delete_item',
         'initialize'
     );
 
@@ -228,6 +229,39 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
     public function hookInitialize()
     {
         add_translation_source(dirname(__FILE__) . '/languages');
+    }
+
+    /**
+     * Delete data records associated with items that are deleted.
+     *
+     * @param Omeka_Item $item The item being deleted.
+     *
+     * @return void
+     * @author Eric Rochester <erochest@virginia.edu>
+     **/
+    public function hookBeforeDeleteItem($item)
+    {
+
+        $table   = $this->_db->getTable('NeatlineDataRecord');
+        $alias   = $table->getTableAlias();
+        $adapter = $table->getAdapter();
+        $select  = $table->getSelect();
+        $where   = $adapter->quoteInto("$alias.item_id=?", $item->id);
+
+        $select->where($where);
+
+        $db->beginTransaction();
+        try {
+            $datarecs = $table->fetchObjects($select);
+            foreach ($datarecs as $data) {
+                $data->delete();
+            }
+            $db->commit();
+        } catch (Exception $e) {
+            $db->rollback();
+            throw $e;
+        }
+
     }
 
 
