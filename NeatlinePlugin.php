@@ -45,6 +45,24 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
         'context_band_height'
     );
 
+    // Layers.
+    protected $_baseLayers = array(
+        'vector_color',
+        'stroke_color',
+        'highlight_color',
+        'vector_opacity',
+        'select_opacity',
+        'stroke_opacity',
+        'graphic_opacity',
+        'stroke_width',
+        'point_radius',
+        'h_percent',
+        'v_percent',
+        'timeline_zoom',
+        'context_band_unit',
+        'context_band_height'
+    );
+
 
     // ------
     // Hooks.
@@ -141,6 +159,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
 
         $this->_db->query($sql);
 
+        // Add index on exhibit_id.
         $this->_addIndex(
             $this->_db->prefix . 'neatline_data_records',
             $this->_db->prefix . 'neatline_data_records_exhibit_idx',
@@ -162,18 +181,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
         }
 
         // Install base layers.
-        $baseLayers = array(
-            'OpenStreetMap',
-            'Google Physical',
-            'Google Streets',
-            'Google Hybrid',
-            'Google Satellite',
-            'Stamen Watercolor',
-            'Stamen Toner',
-            'Stamen Terrain'
-        );
-
-        foreach ($baseLayers as $baseLayer) {
+        foreach ($this->_baseLayers as $baseLayer) {
             $layer = new NeatlineBaseLayer;
             $layer->name = $baseLayer;
             $layer->save();
