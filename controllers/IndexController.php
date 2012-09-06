@@ -211,6 +211,38 @@ class Neatline_IndexController extends Omeka_Controller_AbstractActionController
     }
 
     /**
+     * Sets the add success message.
+     */
+    protected function _getAddSuccessMessage($neatline)
+    {
+        return __('The Neatline "%s" was successfully added!', $neatline->name);
+    }
+
+    /**
+     * Sets the edit success message.
+     */
+    protected function _getEditSuccessMessage($neatline)
+    {
+        return __('The Neatline "%s" was successfully changed!', $neatline->name);
+    }
+
+    /**
+     * Sets the delete success message.
+     */
+    protected function _getDeleteSuccessMessage($neatline)
+    {
+        return __('The Neatline "%s" was successfully deleted!', $neatline->name);
+    }
+
+    /**
+     * Sets the delete confirm message.
+     */
+    protected function _getDeleteConfirmMessage($neatline)
+    {
+        return __('This will delete the Neatline "%s" and its associated metadata.', $neatline->name);
+    }
+
+    /**
      * Construct the details form.
      */
     private function _getNeatlineDetailsForm(NeatlineExhibit $neatline)
