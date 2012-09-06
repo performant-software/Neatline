@@ -442,12 +442,12 @@ class Neatline_NeatlineExhibitTest extends Neatline_Test_AppTestCase
         $exhibit->save();
 
         // Set.
-        $this->assertTrue($exhibit->setStyle('vector_color', '#5033de'));
-        $this->assertTrue($exhibit->setStyle('vector_opacity', 20));
-        $this->assertTrue($exhibit->setStyle('stroke_color', '#1e2ee6'));
-        $this->assertTrue($exhibit->setStyle('stroke_opacity', 70));
-        $this->assertTrue($exhibit->setStyle('stroke_width', 4));
-        $this->assertTrue($exhibit->setStyle('point_radius', 6));
+        $this->assertTrue($exhibit->setStyle('vector_color', get_plugin_ini('Neatline', 'vector_color')));
+        $this->assertTrue($exhibit->setStyle('vector_opacity', get_plugin_ini('Neatline', 'vector_opacity')));
+        $this->assertTrue($exhibit->setStyle('stroke_color', get_plugin_ini('Neatline', 'stroke_color')));
+        $this->assertTrue($exhibit->setStyle('stroke_opacity', get_plugin_ini('Neatline', 'stroke_opacity')));
+        $this->assertTrue($exhibit->setStyle('stroke_width', get_plugin_ini('Neatline', 'stroke_width')));
+        $this->assertTrue($exhibit->setStyle('point_radius', get_plugin_ini('Neatline', 'point_radius')));
 
         // Check.
         $this->assertNull($exhibit->default_vector_color);
