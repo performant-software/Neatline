@@ -32,7 +32,7 @@
     <title><?php echo $title; ?></title>
 
 <!-- Plugin Stuff -->
-<?php admin_plugin_header(); ?>
+<?php fire_plugin_hook('admin_theme_header'); ?>
 
 <?php
 neatline_queueNeatlineAssets($exhibit);
