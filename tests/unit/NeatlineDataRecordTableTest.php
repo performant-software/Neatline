@@ -1498,9 +1498,6 @@ class Neatline_NeatlineDataRecordTableTest extends Neatline_Test_AppTestCase
         $neatline = $this->_createNeatline();
         $item = $this->_createItem();
 
-        // Set a system default.
-        set_option('vector_color', '#000000');
-
         // Create record.
         $record = new NeatlineDataRecord($item, $neatline);
 
@@ -1517,7 +1514,7 @@ class Neatline_NeatlineDataRecordTableTest extends Neatline_Test_AppTestCase
         $json = $this->_recordsTable->buildTimelineJson($neatline);
 
         $this->assertContains(
-            '"color":"#000000"',
+            '"color":"' . get_plugin_ini('Neatline', 'vector_color') . '"',
             $json
         );
 

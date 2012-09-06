@@ -49,7 +49,8 @@ class Neatline_Test_AppTestCase extends Omeka_Test_AppTestCase
     public function _addNeatlinePluginHooksAndFilters($plugin_broker, $plugin_name)
     {
         $plugin_broker->setCurrentPluginDirName($plugin_name);
-        new NeatlinePlugin;
+        $neatline = new NeatlinePlugin;
+        $neatline->setUp();
     }
 
 

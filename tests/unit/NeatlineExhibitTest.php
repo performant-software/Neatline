@@ -559,12 +559,24 @@ class Neatline_NeatlineExhibitTest extends Neatline_Test_AppTestCase
         set_option('point_radius', 6);
 
         // Check.
-        $this->assertEquals($exhibit->getStyle('vector_color'), '#5033de');
-        $this->assertEquals($exhibit->getStyle('vector_opacity'), 20);
-        $this->assertEquals($exhibit->getStyle('stroke_color'), '#1e2ee6');
-        $this->assertEquals($exhibit->getStyle('stroke_opacity'), 70);
-        $this->assertEquals($exhibit->getStyle('stroke_width'), 4);
-        $this->assertEquals($exhibit->getStyle('point_radius'), 6);
+        $this->assertEquals(
+            $exhibit->getStyle('vector_color'),
+            get_plugin_ini('Neatline', 'vector_color'));
+        $this->assertEquals(
+            $exhibit->getStyle('vector_opacity'),
+            get_plugin_ini('Neatline', 'vector_opacity'));
+        $this->assertEquals(
+            $exhibit->getStyle('stroke_color'),
+            get_plugin_ini('Neatline', 'stroke_color'));
+        $this->assertEquals(
+            $exhibit->getStyle('stroke_opacity'),
+            get_plugin_ini('Neatline', 'stroke_opacity'));
+        $this->assertEquals(
+            $exhibit->getStyle('stroke_width'),
+            get_plugin_ini('Neatline', 'stroke_width'));
+        $this->assertEquals(
+            $exhibit->getStyle('point_radius'),
+            get_plugin_ini('Neatline', 'point_radius'));
 
     }
 
@@ -672,17 +684,16 @@ class Neatline_NeatlineExhibitTest extends Neatline_Test_AppTestCase
     public function testGetViewportProportionsWithNoLocalSettings()
     {
 
-        // Set system defaults.
-        set_option('h_percent', 25);
-        set_option('v_percent', 85);
-
         // Create exhibit.
         $exhibit = $this->_createNeatline();
 
         // Test for system defaults.
         $this->assertEquals(
             $exhibit->getViewportProportions(),
-            array('horizontal' => 25, 'vertical' => 85)
+            array(
+                'horizontal' => get_plugin_ini('Neatline', 'h_percent'),
+                'vertical' => get_plugin_ini('Neatline', 'v_percent')
+            )
         );
 
     }
@@ -695,10 +706,6 @@ class Neatline_NeatlineExhibitTest extends Neatline_Test_AppTestCase
      */
     public function testGetViewportProportionsWithLocalSettings()
     {
-
-        // Set system defaults.
-        set_option('h_percent', 25);
-        set_option('v_percent', 85);
 
         // Create exhibit and set local values.
         $exhibit = $this->_createNeatline();
