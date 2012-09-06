@@ -72,53 +72,6 @@ class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
     public function testBuildEditorMarkup()
     {
 
-        // Mock tags.
-        $tag1 = new Tag;
-        $tag1->name = 'tag1';
-        $tag1->save();
-        $tag2 = new Tag;
-        $tag2->name = 'tag2';
-        $tag2->save();
-
-        // Mock types.
-        $type1 = new ItemType;
-        $type1->name = 'type1';
-        $type1->save();
-        $type2 = new ItemType;
-        $type2->name = 'type2';
-        $type2->save();
-
-        // Mock collections.
-        $col1 = new Collection;
-        $col1->name = 'col1';
-        $col1->description = 'desc';
-        $col1->collectors = 'col';
-        $col1->save();
-        $col2 = new Collection;
-        $col2->name = 'col2';
-        $col2->description = 'desc';
-        $col2->collectors = 'col';
-        $col2->save();
-
-        // Mock item.
-        $item = new Item;
-        $item->save();
-
-        // Mock file.
-        $sql = "INSERT INTO omeka_files (" .
-               "item_id," .
-               "size," .
-               "has_derivative_image," .
-               "archive_filename," .
-               "original_filename) " .
-               "VALUES (" .
-               $item->id . ',' .
-               "1000," .
-               "0," .
-               "'test.jpg'," .
-               "'hex.jpg')";
-        $this->db->query($sql);
-
         // Mock exhibit.
         $exhibit = $this->_createNeatline();
         $exhibit->top_element = 'map';

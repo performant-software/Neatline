@@ -11,7 +11,7 @@ class NeatlineTest extends Neatline_Test_AppTestCase
      *
      * @uses neatline()
      **/
-    public function testNeatlineValue() 
+    public function testNeatlineValue()
     {
 
         $neatline = $this->_createNeatline();

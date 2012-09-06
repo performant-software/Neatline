@@ -43,13 +43,9 @@ class Neatline_EditorController extends Omeka_Controller_AbstractActionControlle
             $this->_modelClass = $modelName;
         }
 
-        try {
-            $this->_table = $this->_helper->db->getTable($modelName);
-            $this->aclResource = $this->_helper->db->findById();
-        } catch (Omeka_Controller_Exception_404 $e) {}
 
         // Get tables.
-        $this->_neatlinesTable =    $this->_table;
+        $this->_neatlinesTable =    $this->_helper->db->getTable($modelName);
         $this->_recordsTable =      $this->_helper->db->getTable('NeatlineDataRecord');
         $this->_layersTable =       $this->_helper->db->getTable('NeatlineBaseLayer');
         $this->_mapsTable =         $this->_helper->db->getTable('NeatlineMapsMap');

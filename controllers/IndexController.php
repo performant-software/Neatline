@@ -231,7 +231,7 @@ class Neatline_IndexController extends Omeka_Controller_AbstractActionController
     {
 
         // Get the exhibit.
-        $record = $this->_table->findBySlug($slug);
+        $record = $this->_table->findBySlug($this->_request->slug);
 
         // Catch invalid slug.
         if (!$record) {

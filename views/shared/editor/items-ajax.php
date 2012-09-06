@@ -78,7 +78,7 @@
 
         <tr class="item-row" recordid="<?php echo $neatline->getRecordIdByItem($item); ?>" itemid="<?php echo $item->id; ?>">
             <td class="item-title">
-                <span class="item-title-text"><?php echo item('Dublin Core', 'Title', null, $item); ?></span>
+                <span class="item-title-text"><?php echo metadata($item, array('Dublin Core', 'Title')); ?></span>
                 <span class="item-title-fader"></span>
             </td>
             <td class="col-1 col-row items">

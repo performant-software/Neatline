@@ -2529,17 +2529,6 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
         $exhibit->default_point_radius = 1;
         $exhibit->save();
 
-        // Set system styling defaults.
-        set_option('vector_color', '#5033de');
-        set_option('stroke_color', '#1e2ee6');
-        set_option('highlight_color', '#000000');
-        set_option('vector_opacity', 20);
-        set_option('select_opacity', 40);
-        set_option('stroke_opacity', 70);
-        set_option('graphic_opacity', 70);
-        set_option('stroke_width', 4);
-        set_option('point_radius', 6);
-
         // Form the POST.
         $this->request->setMethod('POST')
             ->setPost(array(
