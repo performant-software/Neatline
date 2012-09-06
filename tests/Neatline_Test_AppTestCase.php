@@ -1,34 +1,14 @@
 <?php
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
-
 /**
- * Testing helper class.
- *
- * PHP version 5
- *
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not
- * use this file except in compliance with the License. You may obtain a copy of
- * the License at http://www.apache.org/licenses/LICENSE-2.0 Unless required by
- * applicable law or agreed to in writing, software distributed under the
- * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS
- * OF ANY KIND, either express or implied. See the License for the specific
- * language governing permissions and limitations under the License.
+ * Test suite parent class.
  *
  * @package     omeka
  * @subpackage  neatline
- * @author      Scholars' Lab <>
- * @author      Bethany Nowviskie <bethany@virginia.edu>
- * @author      Adam Soroka <ajs6f@virginia.edu>
- * @author      David McClure <david.mcclure@virginia.edu>
- * @copyright   2011 Rector and Board of Visitors, University of Virginia
- * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache 2 License
+ * @copyright   2012 Rector and Board of Visitors, University of Virginia
+ * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
 require_once dirname(__FILE__) . '/../NeatlinePlugin.php';
-
-if (!defined('NEATLINE_PLUGIN_DIR')) {
-    define('NEATLINE_PLUGIN_DIR', './..');
-}
 
 class Neatline_Test_AppTestCase extends Omeka_Test_AppTestCase
 {
@@ -52,6 +32,12 @@ class Neatline_Test_AppTestCase extends Omeka_Test_AppTestCase
         $this->_addNeatlinePluginHooksAndFilters($neatline_plugin_broker, 'Neatline');
         $neatline_plugin_helper = new Omeka_Test_Helper_Plugin;
         $neatline_plugin_helper->setUp('Neatline');
+
+        // Get table managers.
+        $this->_exhibitsTable = $this->db->getTable('NeatlineExhibit');
+        $this->_layersTable = $this->db->getTable('NeatlineBaseLayer');
+        $this->_exhibitsTable = $this->db->getTable('NeatlineExhibit');
+        $this->_recordsTable = $this->db->getTable('NeatlineDataRecord');
 
     }
 

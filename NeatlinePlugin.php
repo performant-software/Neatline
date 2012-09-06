@@ -27,40 +27,16 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
         'admin_navigation_main'
     );
 
-    // Styles.
-    protected $_mapStyles = array(
-        'vector_color',
-        'stroke_color',
-        'highlight_color',
-        'vector_opacity',
-        'select_opacity',
-        'stroke_opacity',
-        'graphic_opacity',
-        'stroke_width',
-        'point_radius',
-        'h_percent',
-        'v_percent',
-        'timeline_zoom',
-        'context_band_unit',
-        'context_band_height'
-    );
-
     // Layers.
-    protected $_baseLayers = array(
-        'vector_color',
-        'stroke_color',
-        'highlight_color',
-        'vector_opacity',
-        'select_opacity',
-        'stroke_opacity',
-        'graphic_opacity',
-        'stroke_width',
-        'point_radius',
-        'h_percent',
-        'v_percent',
-        'timeline_zoom',
-        'context_band_unit',
-        'context_band_height'
+    public static $_baseLayers = array(
+        'OpenStreetMap',
+        'Google Physical',
+        'Google Streets',
+        'Google Hybrid',
+        'Google Satellite',
+        'Stamen Watercolor',
+        'Stamen Toner',
+        'Stamen Terrain'
     );
 
 
@@ -175,13 +151,8 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
 
         $this->_db->query($sql);
 
-        // Set default map style attributes.
-        foreach ($this->_mapStyles as $style) {
-          set_option($style, get_plugin_ini('Neatline', 'default_'.$style));
-        }
-
         // Install base layers.
-        foreach ($this->_baseLayers as $baseLayer) {
+        foreach (self::$_baseLayers as $baseLayer) {
             $layer = new NeatlineBaseLayer;
             $layer->name = $baseLayer;
             $layer->save();

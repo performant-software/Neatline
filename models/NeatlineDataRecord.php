@@ -268,15 +268,15 @@ class NeatlineDataRecord extends Omeka_Record_AbstractRecord
         $records = $_recordsTable->getRecordsForSelect($exhibit);
 
         // Set the array values.
-        $data['vector_color'] =         get_option('vector_color');
-        $data['stroke_color'] =         get_option('stroke_color');
-        $data['highlight_color'] =      get_option('highlight_color');
-        $data['vector_opacity'] =       (int) get_option('vector_opacity');
-        $data['select_opacity'] =       (int) get_option('select_opacity');
-        $data['stroke_opacity'] =       (int) get_option('stroke_opacity');
-        $data['graphic_opacity'] =      (int) get_option('graphic_opacity');
-        $data['stroke_width'] =         (int) get_option('stroke_width');
-        $data['point_radius'] =         (int) get_option('point_radius');
+        $data['vector_color'] =         get_plugin_ini('Neatline', 'vector_color');
+        $data['stroke_color'] =         get_plugin_ini('Neatline', 'stroke_color');
+        $data['highlight_color'] =      get_plugin_ini('Neatline', 'highlight_color');
+        $data['vector_opacity'] =       (int) get_plugin_ini('Neatline', 'vector_opacity');
+        $data['select_opacity'] =       (int) get_plugin_ini('Neatline', 'select_opacity');
+        $data['stroke_opacity'] =       (int) get_plugin_ini('Neatline', 'stroke_opacity');
+        $data['graphic_opacity'] =      (int) get_plugin_ini('Neatline', 'graphic_opacity');
+        $data['stroke_width'] =         (int) get_plugin_ini('Neatline', 'stroke_width');
+        $data['point_radius'] =         (int) get_plugin_ini('Neatline', 'point_radius');
         $data['point_image'] =          '';
         $data['left_percent'] =         self::$defaults['left_percent'];
         $data['right_percent'] =        self::$defaults['right_percent'];
@@ -503,7 +503,7 @@ class NeatlineDataRecord extends Omeka_Record_AbstractRecord
         }
 
         // If the value does not match the system default.
-        else if ($value != get_option($style)) {
+        else if ($value != get_plugin_ini('Neatline', $style)) {
             $this[$style] = $value;
             return true;
         }
@@ -643,7 +643,7 @@ class NeatlineDataRecord extends Omeka_Record_AbstractRecord
 
             // Fall back to system default.
             else {
-                return get_option($style);
+                return get_plugin_ini('Neatline', $style);
             }
 
         }

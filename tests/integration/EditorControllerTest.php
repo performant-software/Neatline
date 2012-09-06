@@ -1,31 +1,17 @@
 <?php
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
-
 /**
  * Editor controller integration tests.
  *
- * PHP version 5
- *
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not
- * use this file except in compliance with the License. You may obtain a copy of
- * the License at http://www.apache.org/licenses/LICENSE-2.0 Unless required by
- * applicable law or agreed to in writing, software distributed under the
- * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS
- * OF ANY KIND, either express or implied. See the License for the specific
- * language governing permissions and limitations under the License.
- *
  * @package     omeka
  * @subpackage  neatline
- * @author      Scholars' Lab <>
- * @author      Bethany Nowviskie <bethany@virginia.edu>
- * @author      Adam Soroka <ajs6f@virginia.edu>
- * @author      David McClure <david.mcclure@virginia.edu>
- * @copyright   2011 Rector and Board of Visitors, University of Virginia
- * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache 2 License
+ * @copyright   2012 Rector and Board of Visitors, University of Virginia
+ * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
 class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
 {
+
+    protected $_isAdminTest = true;
 
     // Testing parameters.
     private static $__testParams = array(
@@ -55,22 +41,6 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
         'use_dc_metadata' => 1,
         'show_bubble' => 1
     );
-
-    /**
-     * Instantiate the helper class, install the plugins, get the database.
-     *
-     * @return void.
-     */
-    public function setUp()
-    {
-
-        parent::setUp();
-
-        $this->db = get_db();
-        $this->_recordsTable = $this->db->getTable('NeatlineDataRecord');
-        $this->_exhibitsTable = $this->db->getTable('NeatlineExhibit');
-
-    }
 
     /**
      * The index view should render the base markup for the editing application.
@@ -647,15 +617,15 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
             (object) array(
                 'title' =>              '',
                 'description' =>        '',
-                'vector_color' =>       get_option('vector_color'),
-                'stroke_color' =>       get_option('stroke_color'),
-                'highlight_color' =>    get_option('highlight_color'),
-                'vector_opacity' =>     (int) get_option('vector_opacity'),
-                'select_opacity' =>     (int) get_option('select_opacity'),
-                'stroke_opacity' =>     (int) get_option('stroke_opacity'),
-                'graphic_opacity' =>    (int) get_option('graphic_opacity'),
-                'stroke_width' =>       (int) get_option('stroke_width'), 
-                'point_radius' =>       (int) get_option('point_radius'), 
+                'vector_color' =>       get_plugin_ini('Neatline', 'vector_color'),
+                'stroke_color' =>       get_plugin_ini('Neatline', 'stroke_color'),
+                'highlight_color' =>    get_plugin_ini('Neatline', 'highlight_color'),
+                'vector_opacity' =>     (int) get_plugin_ini('Neatline', 'vector_opacity'),
+                'select_opacity' =>     (int) get_plugin_ini('Neatline', 'select_opacity'),
+                'stroke_opacity' =>     (int) get_plugin_ini('Neatline', 'stroke_opacity'),
+                'graphic_opacity' =>    (int) get_plugin_ini('Neatline', 'graphic_opacity'),
+                'stroke_width' =>       (int) get_plugin_ini('Neatline', 'stroke_width'), 
+                'point_radius' =>       (int) get_plugin_ini('Neatline', 'point_radius'), 
                 'point_image' =>        '',
                 'left_percent' =>       0,
                 'right_percent' =>      100,
@@ -719,15 +689,15 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
         $this->assertEquals(
             $json,
             (object) array(
-                'vector_color' => get_option('vector_color'),
-                'stroke_color' => get_option('stroke_color'),
-                'highlight_color' => get_option('highlight_color'),
-                'vector_opacity' => get_option('vector_opacity'),
-                'select_opacity' => get_option('select_opacity'),
-                'stroke_opacity' => get_option('stroke_opacity'),
-                'graphic_opacity' => get_option('graphic_opacity'),
-                'stroke_width' => get_option('stroke_width'),
-                'point_radius' => get_option('point_radius'),
+                'vector_color' => get_plugin_ini('Neatline', 'vector_color'),
+                'stroke_color' => get_plugin_ini('Neatline', 'stroke_color'),
+                'highlight_color' => get_plugin_ini('Neatline', 'highlight_color'),
+                'vector_opacity' => get_plugin_ini('Neatline', 'vector_opacity'),
+                'select_opacity' => get_plugin_ini('Neatline', 'select_opacity'),
+                'stroke_opacity' => get_plugin_ini('Neatline', 'stroke_opacity'),
+                'graphic_opacity' => get_plugin_ini('Neatline', 'graphic_opacity'),
+                'stroke_width' => get_plugin_ini('Neatline', 'stroke_width'),
+                'point_radius' => get_plugin_ini('Neatline', 'point_radius'),
                 'point_image' => '',
                 'left_percent' => 0,
                 'right_percent' => 100,
@@ -2507,15 +2477,15 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
         $this->request->setMethod('POST')
             ->setPost(array(
                 'exhibit_id' => $exhibit->id,
-                'vector_color' => get_option('vector_color'),
-                'vector_opacity' => get_option('vector_opacity'),
-                'select_opacity' => get_option('select_opacity'),
-                'stroke_color' => get_option('stroke_color'),
-                'highlight_color' => get_option('highlight_color'),
-                'stroke_opacity' => get_option('stroke_opacity'),
-                'graphic_opacity' => get_option('graphic_opacity'),
-                'stroke_width' => get_option('stroke_width'),
-                'point_radius' => get_option('point_radius'),
+                'vector_color' => get_plugin_ini('Neatline', 'vector_color'),
+                'vector_opacity' => get_plugin_ini('Neatline', 'vector_opacity'),
+                'select_opacity' => get_plugin_ini('Neatline', 'select_opacity'),
+                'stroke_color' => get_plugin_ini('Neatline', 'stroke_color'),
+                'highlight_color' => get_plugin_ini('Neatline', 'highlight_color'),
+                'stroke_opacity' => get_plugin_ini('Neatline', 'stroke_opacity'),
+                'graphic_opacity' => get_plugin_ini('Neatline', 'graphic_opacity'),
+                'stroke_width' => get_plugin_ini('Neatline', 'stroke_width'),
+                'point_radius' => get_plugin_ini('Neatline', 'point_radius'),
                 'base_layer' => 1
             )
         );
@@ -2574,15 +2544,15 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
         $this->request->setMethod('POST')
             ->setPost(array(
                 'exhibit_id' => $exhibit->id,
-                'vector_color' => get_option('vector_color'),
-                'stroke_color' => get_option('stroke_color'),
-                'highlight_color' => get_option('highlight_color'),
-                'vector_opacity' => get_option('vector_opacity'),
-                'select_opacity' => get_option('select_opacity'),
-                'stroke_opacity' => get_option('stroke_opacity'),
-                'graphic_opacity' => get_option('graphic_opacity'),
-                'stroke_width' => get_option('stroke_width'),
-                'point_radius' => get_option('point_radius'),
+                'vector_color' => get_plugin_ini('Neatline', 'vector_color'),
+                'stroke_color' => get_plugin_ini('Neatline', 'stroke_color'),
+                'highlight_color' => get_plugin_ini('Neatline', 'highlight_color'),
+                'vector_opacity' => get_plugin_ini('Neatline', 'vector_opacity'),
+                'select_opacity' => get_plugin_ini('Neatline', 'select_opacity'),
+                'stroke_opacity' => get_plugin_ini('Neatline', 'stroke_opacity'),
+                'graphic_opacity' => get_plugin_ini('Neatline', 'graphic_opacity'),
+                'stroke_width' => get_plugin_ini('Neatline', 'stroke_width'),
+                'point_radius' => get_plugin_ini('Neatline', 'point_radius'),
                 'base_layer' => 1
             )
         );

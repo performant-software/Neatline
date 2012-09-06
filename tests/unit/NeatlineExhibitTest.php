@@ -405,12 +405,12 @@ class Neatline_NeatlineExhibitTest extends Neatline_Test_AppTestCase
         $exhibit = $this->_createNeatline();
 
         // Set.
-        $this->assertFalse($exhibit->setStyle('vector_color', get_option('vector_color')));
-        $this->assertFalse($exhibit->setStyle('vector_opacity', get_option('vector_opacity')));
-        $this->assertFalse($exhibit->setStyle('stroke_color', get_option('stroke_color')));
-        $this->assertFalse($exhibit->setStyle('stroke_opacity', get_option('stroke_opacity')));
-        $this->assertFalse($exhibit->setStyle('stroke_width', get_option('stroke_width')));
-        $this->assertFalse($exhibit->setStyle('point_radius', get_option('point_radius')));
+        $this->assertFalse($exhibit->setStyle('vector_color', get_plugin_ini('Neatline', 'vector_color')));
+        $this->assertFalse($exhibit->setStyle('vector_opacity', get_plugin_ini('Neatline', 'vector_opacity')));
+        $this->assertFalse($exhibit->setStyle('stroke_color', get_plugin_ini('Neatline', 'stroke_color')));
+        $this->assertFalse($exhibit->setStyle('stroke_opacity', get_plugin_ini('Neatline', 'stroke_opacity')));
+        $this->assertFalse($exhibit->setStyle('stroke_width', get_plugin_ini('Neatline', 'stroke_width')));
+        $this->assertFalse($exhibit->setStyle('point_radius', get_plugin_ini('Neatline', 'point_radius')));
 
         // Check.
         $this->assertNull($exhibit->default_vector_color);
@@ -440,14 +440,6 @@ class Neatline_NeatlineExhibitTest extends Neatline_Test_AppTestCase
         $exhibit->default_stroke_width = 1;
         $exhibit->default_point_radius = 1;
         $exhibit->save();
-
-        // Set system styling defaults.
-        set_option('vector_color', '#5033de');
-        set_option('stroke_color', '#1e2ee6');
-        set_option('vector_opacity', 20);
-        set_option('stroke_opacity', 70);
-        set_option('stroke_width', 4);
-        set_option('point_radius', 6);
 
         // Set.
         $this->assertTrue($exhibit->setStyle('vector_color', '#5033de'));

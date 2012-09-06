@@ -596,12 +596,12 @@ class Neatline_NeatlineDataRecordTest extends Neatline_Test_AppTestCase
         $record = new NeatlineDataRecord($item, $neatline);
 
         // Set.
-        $this->assertFalse($record->setStyle('vector_color', get_option('vector_color')));
-        $this->assertFalse($record->setStyle('vector_opacity', get_option('vector_opacity')));
-        $this->assertFalse($record->setStyle('stroke_color', get_option('stroke_color')));
-        $this->assertFalse($record->setStyle('stroke_opacity', get_option('stroke_opacity')));
-        $this->assertFalse($record->setStyle('stroke_width', get_option('stroke_width')));
-        $this->assertFalse($record->setStyle('point_radius', get_option('point_radius')));
+        $this->assertFalse($record->setStyle('vector_color', get_plugin_ini('Neatline', 'vector_color')));
+        $this->assertFalse($record->setStyle('vector_opacity', get_plugin_ini('Neatline', 'vector_opacity')));
+        $this->assertFalse($record->setStyle('stroke_color', get_plugin_ini('Neatline', 'stroke_color')));
+        $this->assertFalse($record->setStyle('stroke_opacity', get_plugin_ini('Neatline', 'stroke_opacity')));
+        $this->assertFalse($record->setStyle('stroke_width', get_plugin_ini('Neatline', 'stroke_width')));
+        $this->assertFalse($record->setStyle('point_radius', get_plugin_ini('Neatline', 'point_radius')));
 
         // Check.
         $this->assertNull($record->vector_color);
@@ -757,12 +757,12 @@ class Neatline_NeatlineDataRecordTest extends Neatline_Test_AppTestCase
         $record->save();
 
         // Set.
-        $this->assertTrue($record->setStyle('vector_color', get_option('vector_color')));
-        $this->assertTrue($record->setStyle('vector_opacity', get_option('vector_opacity')));
-        $this->assertTrue($record->setStyle('stroke_color', get_option('stroke_color')));
-        $this->assertTrue($record->setStyle('stroke_opacity', get_option('stroke_opacity')));
-        $this->assertTrue($record->setStyle('stroke_width', get_option('stroke_width')));
-        $this->assertTrue($record->setStyle('point_radius', get_option('point_radius')));
+        $this->assertTrue($record->setStyle('vector_color', get_plugin_ini('Neatline', 'vector_color')));
+        $this->assertTrue($record->setStyle('vector_opacity', get_plugin_ini('Neatline', 'vector_opacity')));
+        $this->assertTrue($record->setStyle('stroke_color', get_plugin_ini('Neatline', 'stroke_color')));
+        $this->assertTrue($record->setStyle('stroke_opacity', get_plugin_ini('Neatline', 'stroke_opacity')));
+        $this->assertTrue($record->setStyle('stroke_width', get_plugin_ini('Neatline', 'stroke_width')));
+        $this->assertTrue($record->setStyle('point_radius', get_plugin_ini('Neatline', 'point_radius')));
 
         // Check.
         $this->assertNull($record->vector_color);
@@ -773,12 +773,12 @@ class Neatline_NeatlineDataRecordTest extends Neatline_Test_AppTestCase
         $this->assertNull($record->point_radius);
 
         // Check getters.
-        $this->assertEquals($record->getStyle('vector_color'), get_option('vector_color'));
-        $this->assertEquals($record->getStyle('vector_opacity'),get_option('vector_opacity'));
-        $this->assertEquals($record->getStyle('stroke_color'), get_option('stroke_color'));
-        $this->assertEquals($record->getStyle('stroke_opacity'), get_option('stroke_opacity'));
-        $this->assertEquals($record->getStyle('stroke_width'), get_option('stroke_width'));
-        $this->assertEquals($record->getStyle('point_radius'), get_option('point_radius'));
+        $this->assertEquals($record->getStyle('vector_color'), get_plugin_ini('Neatline', 'vector_color'));
+        $this->assertEquals($record->getStyle('vector_opacity'),get_plugin_ini('Neatline', 'vector_opacity'));
+        $this->assertEquals($record->getStyle('stroke_color'), get_plugin_ini('Neatline', 'stroke_color'));
+        $this->assertEquals($record->getStyle('stroke_opacity'), get_plugin_ini('Neatline', 'stroke_opacity'));
+        $this->assertEquals($record->getStyle('stroke_width'), get_plugin_ini('Neatline', 'stroke_width'));
+        $this->assertEquals($record->getStyle('point_radius'), get_plugin_ini('Neatline', 'point_radius'));
 
     }
 
@@ -1145,12 +1145,12 @@ class Neatline_NeatlineDataRecordTest extends Neatline_Test_AppTestCase
         $record->save();
 
         // Get and check.
-        $this->assertEquals($record->getStyle('vector_color'), get_option('vector_color'));
-        $this->assertEquals($record->getStyle('vector_opacity'), get_option('vector_opacity'));
-        $this->assertEquals($record->getStyle('stroke_color'), get_option('stroke_color'));
-        $this->assertEquals($record->getStyle('stroke_opacity'), get_option('stroke_opacity'));
-        $this->assertEquals($record->getStyle('stroke_width'), get_option('stroke_width'));
-        $this->assertEquals($record->getStyle('point_radius'), get_option('point_radius'));
+        $this->assertEquals($record->getStyle('vector_color'), get_plugin_ini('Neatline', 'vector_color'));
+        $this->assertEquals($record->getStyle('vector_opacity'), get_plugin_ini('Neatline', 'vector_opacity'));
+        $this->assertEquals($record->getStyle('stroke_color'), get_plugin_ini('Neatline', 'stroke_color'));
+        $this->assertEquals($record->getStyle('stroke_opacity'), get_plugin_ini('Neatline', 'stroke_opacity'));
+        $this->assertEquals($record->getStyle('stroke_width'), get_plugin_ini('Neatline', 'stroke_width'));
+        $this->assertEquals($record->getStyle('point_radius'), get_plugin_ini('Neatline', 'point_radius'));
 
     }
 
@@ -2120,47 +2120,47 @@ class Neatline_NeatlineDataRecordTest extends Neatline_Test_AppTestCase
         );
 
         $this->assertContains(
-            '"vector_color":"' . get_option('vector_color') . '"',
+            '"vector_color":"' . get_plugin_ini('Neatline', 'vector_color') . '"',
             $json
         );
 
         $this->assertContains(
-            '"stroke_color":"' . get_option('stroke_color') . '"',
+            '"stroke_color":"' . get_plugin_ini('Neatline', 'stroke_color') . '"',
             $json
         );
 
         $this->assertContains(
-            '"highlight_color":"' . get_option('highlight_color') . '"',
+            '"highlight_color":"' . get_plugin_ini('Neatline', 'highlight_color') . '"',
             $json
         );
 
         $this->assertContains(
-            '"vector_opacity":' . (int) get_option('vector_opacity'),
+            '"vector_opacity":' . (int) get_plugin_ini('Neatline', 'vector_opacity'),
             $json
         );
 
         $this->assertContains(
-            '"select_opacity":' . (int) get_option('select_opacity'),
+            '"select_opacity":' . (int) get_plugin_ini('Neatline', 'select_opacity'),
             $json
         );
 
         $this->assertContains(
-            '"stroke_opacity":' . (int) get_option('stroke_opacity'),
+            '"stroke_opacity":' . (int) get_plugin_ini('Neatline', 'stroke_opacity'),
             $json
         );
 
         $this->assertContains(
-            '"graphic_opacity":' . (int) get_option('graphic_opacity'),
+            '"graphic_opacity":' . (int) get_plugin_ini('Neatline', 'graphic_opacity'),
             $json
         );
 
         $this->assertContains(
-            '"stroke_width":' . (int) get_option('stroke_width'),
+            '"stroke_width":' . (int) get_plugin_ini('Neatline', 'stroke_width'),
             $json
         );
 
         $this->assertContains(
-            '"point_radius":' . (int) get_option('point_radius'),
+            '"point_radius":' . (int) get_plugin_ini('Neatline', 'point_radius'),
             $json
         );
 

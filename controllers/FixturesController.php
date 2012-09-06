@@ -36,14 +36,14 @@ class Neatline_FixturesController extends Omeka_Controller_AbstractActionControl
     {
 
         // Get tables.
-        $this->_itemsTable =        $this->getTable('Item');
-        $this->_filesTable =        $this->getTable('File');
-        $this->_neatlinesTable =    $this->getTable('NeatlineExhibit');
-        $this->_recordsTable =      $this->getTable('NeatlineDataRecord');
-        $this->_mapsTable =         $this->getTable('NeatlineMapsMap');
-        $this->_timelinesTable =    $this->getTable('NeatlineTimeTimeline');
-        $this->_statusesTable =     $this->getTable('NeatlineRecordStatus');
-        $this->_layersTable =       $this->getTable('NeatlineBaseLayer');
+        $this->_itemsTable =        $this->_helper->db->getTable('Item');
+        $this->_filesTable =        $this->_helper->db->getTable('File');
+        $this->_neatlinesTable =    $this->_helper->db->getTable('NeatlineExhibit');
+        $this->_recordsTable =      $this->_helper->db->getTable('NeatlineDataRecord');
+        $this->_mapsTable =         $this->_helper->db->getTable('NeatlineMapsMap');
+        $this->_timelinesTable =    $this->_helper->db->getTable('NeatlineTimeTimeline');
+        $this->_statusesTable =     $this->_helper->db->getTable('NeatlineRecordStatus');
+        $this->_layersTable =       $this->_helper->db->getTable('NeatlineBaseLayer');
 
     }
 
@@ -80,8 +80,8 @@ class Neatline_FixturesController extends Omeka_Controller_AbstractActionControl
         $this->_helper->viewRenderer->setNoRender(true);
 
         // Get records.
-        $exhibit =                  $this->_neatlinesTable->find(1);
-        $layers =                   $this->_layersTable->findAll();
+        $exhibit = $this->_neatlinesTable->find(1);
+        $layers = $this->_layersTable->findAll();
 
         /**
          * ---------------
@@ -129,10 +129,10 @@ class Neatline_FixturesController extends Omeka_Controller_AbstractActionControl
     {
 
         $exhibit = new NeatlineExhibit;
-        
+
         // Supress the default Zend layout-sniffer functionality.
         $this->_helper->viewRenderer->setNoRender(true);
-        
+
         // Render.
         echo new Neatline_Form_NeatlineDetails(array('neatline' => $exhibit));
 

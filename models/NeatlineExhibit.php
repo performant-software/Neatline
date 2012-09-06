@@ -83,6 +83,11 @@ class NeatlineExhibit extends Omeka_Record_AbstractRecord
     );
 
     /**
+     * Zend_Date format for saving to the database.
+     */
+    const DATE_FORMAT = 'yyyy-MM-dd HH:mm:ss';
+
+    /**
      * Things to do in the beforeInsert() hook:
      *
      * Use the current datetime for 'added' and 'modified'.
@@ -92,7 +97,7 @@ class NeatlineExhibit extends Omeka_Record_AbstractRecord
      */
     // protected function beforeInsert()
     // {
-    //     $now = Zend_Date::now()->toString(self::DATE_FORMAT);
+    //     $now = Zend_Date::now()->toString();
     //     $this->added = $now;
     //     $this->modified = $now;
     //     if (!$this->creator_id && ($user = Omeka_Context::getInstance()->getCurrentUser())) {
@@ -108,11 +113,11 @@ class NeatlineExhibit extends Omeka_Record_AbstractRecord
      * @since 1.0
      * @return void
      */
-    // protected function beforeSave()
-    // {
-    //     $this->_checkDefaultFocusDate();
-    //     $this->modified = Zend_Date::now()->toString(self::DATE_FORMAT);
-    // }
+    protected function beforeSave()
+    {
+        $this->_checkDefaultFocusDate();
+        $this->modified = Zend_Date::now()->toString(self::DATE_FORMAT);
+    }
 
     /**
      * Fetch the parent image.
@@ -218,14 +223,14 @@ class NeatlineExhibit extends Omeka_Record_AbstractRecord
         }
 
         // If the value does not match the system default.
-        else if ($value != get_option($style)) {
+        else if ($value != get_plugin_ini('Neatline', $style)) {
             $this['default_' . $style] = $value;
             return true;
         }
 
         // If the value matches the system default and there is an existing
         // row-level value on the exhibit.
-        else if ($value == get_option($style) &&
+        else if ($value == get_plugin_ini('Neatline', $style) &&
             !is_null($this['default_' . $style])) {
                 $this['default_' . $style] = null;
                 return true;
@@ -274,7 +279,7 @@ class NeatlineExhibit extends Omeka_Record_AbstractRecord
 
         // Fall back to system default.
         else {
-            return get_option($style);
+            return get_plugin_ini('Neatline', $style);
         }
 
     }
@@ -371,8 +376,8 @@ class NeatlineExhibit extends Omeka_Record_AbstractRecord
 
         // Shell out array with defaults.
         $proportions = array(
-            'horizontal' =>     get_option('h_percent'),
-            'vertical' =>       get_option('v_percent')
+            'horizontal' =>     get_plugin_ini('Neatline', 'h_percent'),
+            'vertical' =>       get_plugin_ini('Neatline', 'v_percent')
         );
 
         // Use row-specifc values if present.
@@ -394,7 +399,7 @@ class NeatlineExhibit extends Omeka_Record_AbstractRecord
     {
         return !is_null($this->default_timeline_zoom) ?
             $this->default_timeline_zoom :
-            (int) get_option('timeline_zoom');
+            (int) get_plugin_ini('Neatline', 'timeline_zoom');
     }
 
     /**

@@ -63,32 +63,4 @@ class NeatlinePluginTest extends Neatline_Test_AppTestCase
         $this->assertNull($r2);
     }
 
-    /**
-     * Tests for default Neatline options on installation.
-     */
-    public function testSetOptions()
-    {
-        $mapStyles = array(
-            'vector_color',
-            'stroke_color',
-            'highlight_color',
-            'vector_opacity',
-            'select_opacity',
-            'stroke_opacity',
-            'graphic_opacity',
-            'stroke_width',
-            'point_radius',
-            'h_percent',
-            'v_percent',
-            'timeline_zoom',
-            'context_band_unit',
-            'context_band_height'
-          );
-
-        // Check for option presence, and that it's equal to relevant value in INI.
-        foreach ($mapStyles as $style) {
-            $this->assertEquals(get_plugin_ini('Neatline', 'default_'.$style), get_option($style));
-        }
-    }
 }
-
