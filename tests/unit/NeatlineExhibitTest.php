@@ -722,16 +722,13 @@ class Neatline_NeatlineExhibitTest extends Neatline_Test_AppTestCase
     public function testGetTimelineZoomWithNoLocalSettings()
     {
 
-        // Set system default.
-        set_option('timeline_zoom', 25);
-
         // Create exhibit.
         $exhibit = $this->_createNeatline();
 
         // Test for system default.
         $this->assertEquals(
             $exhibit->getTimelineZoom(),
-            25
+            get_plugin_ini('Neatline', 'timeline_zoom')
         );
 
     }
