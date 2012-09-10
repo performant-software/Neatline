@@ -12,4 +12,4 @@ echo "Plugin Directory: $PLUGIN_DIR"
 echo "Omeka Directory: $OMEKA_DIR"
 
 cd tests && phpunit
-rake jasmine:ci
+cd $PLUGIN_DIR && rake jasmine:ci
