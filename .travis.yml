@@ -5,7 +5,7 @@ php:
   - 5.3
 
 env:
-  - OMEKA_BRANCH=stable-1.5
+  - OMEKA_BRANCH=master
 
 before_script: ./.travis.setup.sh
 
