@@ -370,6 +370,18 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
 
 
     /**
+     * Construct records JSON for exhibit.
+     *
+     * @param Omeka_Record_AbstractRecord $exhibit The exhibit record.
+     *
+     * @return JSON The data.
+     */
+    public function buildRecordsJson($exhibit)
+    {
+
+    }
+
+    /**
      * Construct OpenLayers JSON.
      *
      * @param Omeka_record $neatline The exhibit record.

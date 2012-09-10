@@ -12,7 +12,7 @@ class Neatline_IndexController extends Omeka_Controller_AbstractActionController
 {
 
     /**
-     * Get table objects.
+     * Get tables.
      *
      * @return void
      */
@@ -26,13 +26,12 @@ class Neatline_IndexController extends Omeka_Controller_AbstractActionController
             $this->_modelClass = $modelName;
         }
 
-        $this->_browseRecordsPerPage = get_option('per_page_admin');
-
         try {
             $this->_table = $this->_helper->db->getTable($modelName);
         } catch (Omeka_Controller_Exception_404 $e) {}
 
         $this->_recordsTable = $this->_helper->db->getTable('NeatlineDataRecord');
+        $this->_browseRecordsPerPage = get_option('per_page_admin');
 
     }
 
