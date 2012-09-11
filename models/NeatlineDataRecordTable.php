@@ -393,7 +393,7 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
 
         $data = array();
         $isNeatlineMaps = plugin_is_active('NeatlineMaps');
-        $wmsIndex       = array();
+        $wmsIndex = array();
 
         // If Neatline Maps is installed, get services table.
         if ($isNeatlineMaps) {

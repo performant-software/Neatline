@@ -2001,7 +2001,7 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
 
         // Check the JSON representation of the updated exhibit.
         $response = $this->getResponse()->getBody('default');
-        $this->assertContains('"name":"Test Title"', $response);
+        $this->assertContains('"title":"Test Title"', $response);
         $this->assertContains('"image_id":null', $response);
         $this->assertContains('"top_element":"map"', $response);
         $this->assertContains('"items_h_pos":"right"', $response);
@@ -2083,7 +2083,7 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
 
         // Check the JSON representation of the updated exhibit.
         $response = $this->getResponse()->getBody('default');
-        $this->assertContains('"name":"Test Title"', $response);
+        $this->assertContains('"title":"Test Title"', $response);
         $this->assertContains('"image_id":null', $response);
         $this->assertContains('"top_element":"map"', $response);
         $this->assertContains('"items_h_pos":"right"', $response);

@@ -58,7 +58,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
             `id`                    int(10) unsigned not null auto_increment,
             `added`                 TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             `modified`              TIMESTAMP NULL,
-            `name`                  tinytext collate utf8_unicode_ci,
+            `title`                 tinytext collate utf8_unicode_ci,
             `description`           TEXT COLLATE utf8_unicode_ci DEFAULT NULL,
             `slug`                  varchar(100) NOT NULL,
             `public`                tinyint(1) NOT NULL,

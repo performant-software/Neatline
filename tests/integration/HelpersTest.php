@@ -122,8 +122,8 @@ class Neatline_HelpersTest extends Neatline_Test_AppTestCase
         $this->dispatch('neatline-exhibits/show/test-exhibit');
 
         // Neatline Name
-        $this->assertEquals('Test Exhibit', neatline('name'));
-        $this->assertEquals('Test Exhibit', neatline('Name'));
+        $this->assertEquals('Test Exhibit', neatline('title'));
+        $this->assertEquals('Test Exhibit', neatline('Title'));
 
         // Neatline Description
         $this->assertEquals('Test description.', neatline('description'));

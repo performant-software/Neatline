@@ -27,7 +27,7 @@ class NeatlineExhibit extends Omeka_Record_AbstractRecord
      * The title of the exhibit.
      * tinytext collate utf8_unicode_ci
      */
-    public $name;
+    public $title;
 
     /**
      * A text descriptiption for the exhibit.
