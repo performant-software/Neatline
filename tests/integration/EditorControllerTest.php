@@ -43,24 +43,6 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
     );
 
     /**
-     * The index view should render the base markup for the editing application.
-     * If the exhibit has no map, then there should not be a map object in the view.
-     *
-     * @return void.
-     */
-    public function testIndexWithoutMap()
-    {
-
-        // Create entities.
-        $exhibit = $this->_createNeatline();
-
-        // Hit the route and capture the view.
-        $this->dispatch('neatline-exhibits/editor/' . $exhibit->id);
-        $this->assertResponseCode(200);
-
-    }
-
-    /**
      * When there is no saved query, /items should return no Omeka items.
      *
      * @return void.
