@@ -1164,12 +1164,12 @@ class NeatlineDataRecord extends Omeka_Record_AbstractRecord
     }
 
     /**
-     * This deletes this record and removes itself from all parent 
+     * This deletes this record and removes itself from all parent
      * relationships.
      *
-     * This assumes that the caller is wrapping this in a transaction somewhere 
-     * up the callstack. To do this inside a transaction that this manages, use 
-     * `deleteTransaction`.
+     * This assumes that the caller is wrapping this in a transaction
+     * somewhere up the callstack. To do this inside a transaction that
+     * this manages, use `deleteTransaction`.
      *
      * @return void
      * @author Eric Rochester <erochest@virginia.edu>
@@ -1235,24 +1235,22 @@ class NeatlineDataRecord extends Omeka_Record_AbstractRecord
     }
 
     /**
-     * This creates the data array for the map data.
+     * Construct map data.
      *
-     * @param array $index This is the index of NeatlineDataRecord objects for 
+     * @param array $index This is the index of NeatlineDataRecord objects for
      * caching. Optional.
-     * @param array $wmss This is an index mapping item IDs to rows from the 
+     * @param array $wmss This is an index mapping item IDs to rows from the
      * NeatlineMapsService WMS data.
      * @param Omeka_Record $exhibit The exhibit this record belongs to.
      *
-     * @return array
-     * @author Me
+     * @return array The map JSON.
      **/
     public function buildMapDataArray($index=array(), $wmss=array(), $exhibit=null) {
 
-        $data = null;
-        if ($this->space_active != 1) {
-            return $data;
-        }
+        // If not active on map, return null.
+        if ($this->space_active != 1) { return null; }
 
+        // Cache the parent record for upcoming calls to getStyle().
         $this->_setParent($index, $exhibit);
 
         $data = array(
@@ -1290,8 +1288,7 @@ class NeatlineDataRecord extends Omeka_Record_AbstractRecord
             )
         );
 
-        // If the record has a parent item and Neatline Maps
-        // is present.
+        // If the record has a parent item and Neatline Maps is present.
         if (!is_null($this->item_id) && array_key_exists($this->item_id, $wmss)) {
             $wms = $wmss[$this->item_id];
             $data['wmsAddress'] = $wms['address'];
@@ -1299,6 +1296,38 @@ class NeatlineDataRecord extends Omeka_Record_AbstractRecord
         }
 
         return $data;
+
+    }
+
+    /**
+     * Construct timeline data.
+     *
+     * @return array The timeline JSON.
+     **/
+    public function buildTimelineDataArray() {
+
+        $eventArray = array(
+            'eventID'           => $record->id,
+            'slug'              => $record->getSlug(),
+            'title'             => trim($record->getTitle()),
+            'description'       => $record->getDescription(),
+            'color'             => $record->getStyle('vector_color'),
+            'left_ambiguity'    => $record->left_percent,
+            'right_ambiguity'   => $record->right_percent,
+            'show_bubble'       => $record->show_bubble,
+            'textColor'         => '#000000'
+        );
+
+        // Get start and end dates.
+        $startDate = $record->getStartDate();
+
+        // If there is a start date.
+        if ($startDate !== '') {
+            $eventArray['start'] = $startDate;
+            $endDate = $record->getEndDate();
+            if ($endDate !== '') { $eventArray['end'] = $endDate; }
+        }
+
     }
 
 }
