@@ -169,38 +169,6 @@ class Neatline_NeatlineExhibitTest extends Neatline_Test_AppTestCase
 
     }
 
-
-    /**
-     * The saveViewportPositions() method should commit viewport
-     * centering data.
-     *
-     * @return void.
-     */
-    public function testSaveViewportPositions()
-    {
-
-        // Create an exhibit.
-        $neatline = $this->_createNeatline();
-
-        // Create a base layer.
-        $layer = new NeatlineBaseLayer();
-        $layer->name = 'Test Layer';
-        $layer->save();
-
-        // Save with int zoom and check.
-        $neatline->saveViewportPositions('center', 5, 'Test Layer', 'date', 10);
-        $this->assertEquals($neatline->map_bounds, 'center');
-        $this->assertEquals($neatline->map_zoom, 5);
-        $this->assertEquals($neatline->base_layer, $layer->id);
-        $this->assertEquals($neatline->focus_date, 'date');
-        $this->assertEquals($neatline->timeline_zoom, 10);
-
-        // Save with str zoom and check.
-        $neatline->saveViewportPositions('center', '5', 'Test Layer', 'date', 10);
-        $this->assertEquals($neatline->map_zoom, 5);
-
-    }
-
     /**
      * The saveViewportArrangement() method should commit viewport
      * arrangement data.

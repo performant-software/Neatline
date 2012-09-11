@@ -377,16 +377,15 @@ class Neatline_EditorController extends Omeka_Controller_AbstractActionControlle
         $timelineZoom =             (int) $_post['timeline_zoom'];
 
         // Fetch the Neatline exhibit record and item record.
-        $neatline = $this->_neatlinesTable->find($exhibitId);
+        $exhibit = $this->_neatlinesTable->find($exhibitId);
 
-        // Save.
-        $neatline->saveViewportPositions(
-            $mapCenter,
-            $mapZoom,
-            $baseLayer,
-            $timelineCenter,
-            $timelineZoom
-        );
+        // Set values.
+        $exhibit->map_bounds = $mapCenter;
+        $exhibit->map_zoom = intval($mapZoom);
+        $exhibit->focus_date = $timelineCenter;
+        $exhibit->timeline_zoom = $timelineZoom;
+        $exhibit->setBaseLayerByName($baseLayer);
+        $exhibit->save();
 
     }
 
