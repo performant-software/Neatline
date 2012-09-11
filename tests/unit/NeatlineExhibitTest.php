@@ -170,44 +170,6 @@ class Neatline_NeatlineExhibitTest extends Neatline_Test_AppTestCase
     }
 
     /**
-     * The saveViewportArrangement() method should commit viewport
-     * arrangement data.
-     *
-     * @return void.
-     */
-    public function testSaveViewportArrangement()
-    {
-
-        // Create an exhibit and map.
-        $neatline = $this->_createNeatline();
-
-        // Save.
-        $neatline->saveViewportArrangement(
-            1,
-            1,
-            1,
-            'map',
-            'right',
-            'top',
-            'full',
-            40,
-            60
-        );
-
-        // Check.
-        $this->assertEquals($neatline->is_map, 1);
-        $this->assertEquals($neatline->is_timeline, 1);
-        $this->assertEquals($neatline->is_items, 1);
-        $this->assertEquals($neatline->top_element, 'map');
-        $this->assertEquals($neatline->items_h_pos, 'right');
-        $this->assertEquals($neatline->items_v_pos, 'top');
-        $this->assertEquals($neatline->items_height, 'full');
-        $this->assertEquals($neatline->h_percent, 40);
-        $this->assertEquals($neatline->v_percent, 60);
-
-    }
-
-    /**
      * The getRecordStatus() method should check to see whether a given
      * record is space- or time-active.
      *

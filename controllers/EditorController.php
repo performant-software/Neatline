@@ -418,23 +418,22 @@ class Neatline_EditorController extends Omeka_Controller_AbstractActionControlle
         $itemsHeight =              $_post['items_height'];
 
         // Fetch the Neatline exhibit record and item record.
-        $neatline = $this->_neatlinesTable->find($exhibitId);
+        $exhibit = $this->_neatlinesTable->find($exhibitId);
 
-        // Save.
-        $neatline->saveViewportArrangement(
-            $isMap,
-            $isTimeline,
-            $isItems,
-            $topElement,
-            $itemsHorizPos,
-            $itemsVertPos,
-            $itemsHeight,
-            $hPercent,
-            $vPercent
-        );
+        // Set values.
+        $exhibit->is_map =             $isMap;
+        $exhibit->is_timeline =        $isTimeline;
+        $exhibit->is_items =           $isItems;
+        $exhibit->top_element =        $topElement;
+        $exhibit->items_h_pos =        $itemsHorizPos;
+        $exhibit->items_v_pos =        $itemsVertPos;
+        $exhibit->items_height =       $itemsHeight;
+        $exhibit->h_percent =          $hPercent;
+        $exhibit->v_percent =          $vPercent;
+        $exhibit->save();
 
         // Return the updated exhibit object.
-        echo json_encode($neatline);
+        echo json_encode($exhibit);
 
     }
 

@@ -291,46 +291,6 @@ class NeatlineExhibit extends Omeka_Record_AbstractRecord
     }
 
     /**
-     * Save viewport arrangement.
-     *
-     * @param boolean $isMap True if map is present.
-     * @param boolean $isTimeline True if timeline is present.
-     * @param boolean $isItems True if items is present.
-     * @param string $topElement 'map' or 'timeline'.
-     * @param string $itemsHorizPos 'left' or 'right'.
-     * @param string $itemsVertPos 'top' or 'bottom'.
-     * @param string $itemsHeight 'full' or 'partial'.
-     *
-     * @return Omeka_record The map.
-     */
-    public function saveViewportArrangement(
-        $isMap,
-        $isTimeline,
-        $isItems,
-        $topElement,
-        $itemsHorizPos,
-        $itemsVertPos,
-        $itemsHeight,
-        $hPercent,
-        $vPercent
-    )
-    {
-
-        // Set values.
-        $this->is_map =             $isMap;
-        $this->is_timeline =        $isTimeline;
-        $this->is_items =           $isItems;
-        $this->top_element =        $topElement;
-        $this->items_h_pos =        $itemsHorizPos;
-        $this->items_v_pos =        $itemsVertPos;
-        $this->items_height =       $itemsHeight;
-        $this->h_percent =          $hPercent;
-        $this->v_percent =          $vPercent;
-        $this->save();
-
-    }
-
-    /**
      * Set a style attribute. Only set a value if it is different from
      * the system default. Return true if a row value is set.
      *
