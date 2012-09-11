@@ -41,45 +41,45 @@ class NeatlineExhibit extends Omeka_Record_AbstractRecord
     public $is_items = 0;
 
     // Map position defaults.
-    public $default_map_bounds;
-    public $default_map_zoom;
+    public $map_bounds;
+    public $map_zoom;
 
     // Timeline position defaults.
-    public $default_focus_date;
-    public $default_timeline_zoom;
+    public $focus_date;
+    public $timeline_zoom;
 
     // Timeline layout parameters.
     public $is_context_band = 1;
-    public $default_context_band_unit;
-    public $default_context_band_height;
+    public $context_band_unit;
+    public $context_band_height;
 
     // Default styles.
-    public $default_vector_color;
-    public $default_stroke_color;
-    public $default_highlight_color;
-    public $default_vector_opacity;
-    public $default_select_opacity;
-    public $default_stroke_opacity;
-    public $default_graphic_opacity;
-    public $default_stroke_width;
-    public $default_point_radius;
-    public $default_base_layer = 2;
+    public $vector_color;
+    public $stroke_color;
+    public $highlight_color;
+    public $vector_opacity;
+    public $select_opacity;
+    public $stroke_opacity;
+    public $graphic_opacity;
+    public $stroke_width;
+    public $point_radius;
+    public $base_layer = 2;
 
     /**
      * Valid style attribute names.
      */
     private static $styles = array(
-        'default_vector_color',
-        'default_vector_opacity',
-        'default_stroke_color',
-        'default_stroke_opacity',
-        'default_stroke_width',
-        'default_select_opacity',
-        'default_graphic_opacity',
-        'default_point_radius',
-        'default_highlight_color',
-        'default_context_band_unit',
-        'default_context_band_height'
+        'vector_color',
+        'vector_opacity',
+        'stroke_color',
+        'stroke_opacity',
+        'stroke_width',
+        'select_opacity',
+        'graphic_opacity',
+        'point_radius',
+        'highlight_color',
+        'context_band_unit',
+        'context_band_height'
     );
 
     /**
@@ -95,15 +95,12 @@ class NeatlineExhibit extends Omeka_Record_AbstractRecord
      * @since 1.0
      * @return void
      */
-    // protected function beforeInsert()
-    // {
-    //     $now = Zend_Date::now()->toString();
-    //     $this->added = $now;
-    //     $this->modified = $now;
-    //     if (!$this->creator_id && ($user = Omeka_Context::getInstance()->getCurrentUser())) {
-    //         $this->setAddedBy($user);
-    //     }
-    // }
+    protected function beforeInsert()
+    {
+        $now = Zend_Date::now()->toString();
+        $this->added = $now;
+        $this->modified = $now;
+    }
 
     /**
      * Things to do in the beforeSave() hook:
