@@ -480,15 +480,8 @@ class NeatlineDataRecord extends Omeka_Record_AbstractRecord
      */
     public function setNotEmpty($attribute, $value)
     {
-
-        if ($value == '') {
-            $this[$attribute] = null;
-        }
-
-        else {
-            $this[$attribute] = $value;
-        }
-
+        if ($value == '') { $this[$attribute] = null; }
+        else { $this[$attribute] = $value; }
     }
 
     /**
@@ -523,9 +516,7 @@ class NeatlineDataRecord extends Omeka_Record_AbstractRecord
     public function setStatus($viewport, $value)
     {
 
-        if (!is_bool($value)) {
-            return false;
-        }
+        if (!is_bool($value)) { return false; }
 
         // Cast the boolean to int.
         $intValue = (int) $value;
@@ -586,13 +577,8 @@ class NeatlineDataRecord extends Omeka_Record_AbstractRecord
      */
     public function setGeocoverage($value)
     {
-
-        if ($value == 'null') {
-            return false;
-        }
-
+        if ($value == 'null') { return false; }
         return $this->setNotEmpty('geocoverage', $value);
-
     }
 
     /**
@@ -716,7 +702,6 @@ class NeatlineDataRecord extends Omeka_Record_AbstractRecord
      */
     public function resetStyles()
     {
-
         $this->vector_color =       null;
         $this->stroke_color =       null;
         $this->highlight_color =    null;
@@ -725,14 +710,12 @@ class NeatlineDataRecord extends Omeka_Record_AbstractRecord
         $this->graphic_opacity =    null;
         $this->stroke_width =       null;
         $this->point_radius =       null;
-
     }
 
 
     /**
      * Getters.
      */
-
 
 
     /**
@@ -745,15 +728,8 @@ class NeatlineDataRecord extends Omeka_Record_AbstractRecord
      */
     public function getNotEmpty($attribute)
     {
-
-        if (is_null($this[$attribute])) {
-            return '';
-        }
-
-        else {
-            return $this[$attribute];
-        }
-
+        if (is_null($this[$attribute])) { return ''; }
+        else { return $this[$attribute]; }
     }
 
     /**
@@ -811,14 +787,12 @@ class NeatlineDataRecord extends Omeka_Record_AbstractRecord
         else if (!is_null($this->item_id)) {
 
             // Try to get DC title.
-            return metadata(
-                $this->getItem(), array('Dublin Core', 'Title'));
+            return metadata($this->getItem(),
+                array('Dublin Core', 'Title'));
 
         }
 
-        else {
-            return '';
-        }
+        else { return ''; }
 
     }
 
@@ -869,9 +843,7 @@ class NeatlineDataRecord extends Omeka_Record_AbstractRecord
                 return substr($description, 0, 200);
             }
 
-            else {
-                return __('[Untitled]');
-            }
+            else { return __('[Untitled]'); }
 
         }
 
@@ -884,15 +856,8 @@ class NeatlineDataRecord extends Omeka_Record_AbstractRecord
      */
     public function getSlug()
     {
-
-        if (!is_null($this->slug)) {
-            return $this->slug;
-        }
-
-        else {
-            return '';
-        }
-
+        if (!is_null($this->slug)) { return $this->slug; }
+        else { return ''; }
     }
 
     /**
@@ -905,14 +870,16 @@ class NeatlineDataRecord extends Omeka_Record_AbstractRecord
 
         // Build item metadata.
         if ($this->use_dc_metadata == 1) {
+
             /*
-             * This is the biggest performance killer when calling buildMapDataArray 
-             * below. If this becomes too big of an issue, we can inline the 
-             * partial and use more targetted SQL queries, instead of loading 
-             * the whole item and pulling the data we want out. Otherwise, 
-             * we're stuck.
-             * -- ERR
+             * This is the biggest performance killer when calling
+             * buildMapDataArray below. If this becomes too big of
+             * an issue, we can inline the partial and use more
+             * targetted SQL queries, instead of loading the whole
+             * item and pulling the data we want out. Otherwise,
+             * we're stuck. -- ERR
              */
+
             return __v()->partial('neatline/_dc_metadata.php', array(
                 'item' => $this->getItem()
             ));
@@ -927,14 +894,12 @@ class NeatlineDataRecord extends Omeka_Record_AbstractRecord
         else if (!is_null($this->item_id)) {
 
             // Try to get a DC description.
-            return metadata(
-                $this->getItem(), array('Dublin Core', 'Description'));
+            return metadata($this->getItem(),
+                array('Dublin Core', 'Description'));
 
         }
 
-        else {
-            return '';
-        }
+        else { return ''; }
 
     }
 
@@ -1062,9 +1027,7 @@ class NeatlineDataRecord extends Omeka_Record_AbstractRecord
         }
 
         // Return '' if no local or parent data.
-        else {
-            return '';
-        }
+        else { return ''; }
 
     }
 
@@ -1099,9 +1062,7 @@ class NeatlineDataRecord extends Omeka_Record_AbstractRecord
         }
 
         // Return '' if no local or parent data.
-        else {
-            return '';
-        }
+        else { return ''; }
 
     }
 
@@ -1130,9 +1091,7 @@ class NeatlineDataRecord extends Omeka_Record_AbstractRecord
         }
 
         // Return '' if no local or parent data.
-        else {
-            return '';
-        }
+        else { return ''; }
 
     }
 
@@ -1161,9 +1120,7 @@ class NeatlineDataRecord extends Omeka_Record_AbstractRecord
         }
 
         // Return '' if no local or parent data.
-        else {
-            return '';
-        }
+        else { return ''; }
 
     }
 
