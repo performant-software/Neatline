@@ -28,56 +28,201 @@ class NeatlineDataRecord extends Omeka_Record_AbstractRecord
 {
 
     /**
-     * Record attributes.
+     * The id of the parent item.
+     * int(10) unsigned NULL
      */
-
-    // Foreign keys.
     public $item_id;
+
+    /**
+     * The id of the parent exhibit.
+     * int(10) unsigned NULL
+     */
     public $exhibit_id;
+
+    /**
+     * The id of the parent record.
+     * int(10) unsigned NULL
+     */
     public $parent_record_id;
 
-    // Statuses.
+    /**
+     * Boolean for whether to use DC output as description.
+     * tinyint(1) NULL
+     */
     public $use_dc_metadata;
+
+    /**
+     * Boolean for whether to show popup bubble.
+     * tinyint(1) NULL
+     */
     public $show_bubble;
 
-    // Text fields.
+    /**
+     * The title for the record.
+     * mediumtext COLLATE utf8_unicode_ci NULL
+     */
     public $title;
+
+    /**
+     * An exhibit-unique plaintext identifier for the record.
+     * varchar(100) NULL
+     */
     public $slug;
+
+    /**
+     * A plaintext description for the record.
+     * mediumtext COLLATE utf8_unicode_ci NULL
+     */
     public $description;
 
-    // Dates.
+    /**
+     * A ISO8601 start date.
+     * tinytext COLLATE utf8_unicode_ci NULL
+     */
     public $start_date;
+
+    /**
+     * A ISO8601 end date.
+     * tinytext COLLATE utf8_unicode_ci NULL
+     */
     public $end_date;
+
+    /**
+     * A ISO8601 date for when the record should start to appear.
+     * tinytext COLLATE utf8_unicode_ci NULL
+     */
     public $start_visible_date;
+
+    /**
+     * A ISO8601 date for when the record should start to disappear.
+     * tinytext COLLATE utf8_unicode_ci NULL
+     */
     public $end_visible_date;
+
+    /**
+     * The left percent for the ambiguity gradient.
+     * int(10) unsigned NULL
+     */
     public $left_percent;
+
+    /**
+     * The right percent for the ambiguity gradient.
+     * int(10) unsigned NULL
+     */
     public $right_percent;
 
-    // Styles.
+    /**
+     * The fill color for geometries.
+     * int(10) unsigned NULL
+     */
     public $vector_color;
+
+    /**
+     * The line color for geometries.
+     * int(10) unsigned NULL
+     */
     public $stroke_color;
+
+    /**
+     * The highlight color for geometries.
+     * int(10) unsigned NULL
+     */
     public $highlight_color;
+
+    /**
+     * The fill opacity for geometries.
+     * int(10) unsigned NULL
+     */
     public $vector_opacity;
+
+    /**
+     * The selected opacity for geometries.
+     * int(10) unsigned NULL
+     */
     public $select_opacity;
+
+    /**
+     * The line opacity for geometries.
+     * int(10) unsigned NULL
+     */
     public $stroke_opacity;
+
+    /**
+     * The opacity of points rendered as images.
+     * int(10) unsigned NULL
+     */
     public $graphic_opacity;
+
+    /**
+     * The width of lines on geometries.
+     * int(10) unsigned NULL
+     */
     public $stroke_width;
+
+    /**
+     * The radius of points on geometries.
+     * int(10) unsigned NULL
+     */
     public $point_radius;
+
+    /**
+     * The URL for a static to represent points.
+     * tinytext COLLATE utf8_unicode_ci NULL
+     */
     public $point_image;
 
-    // Coverage.
+    /**
+     * KML for geometries.
+     * mediumtext COLLATE utf8_unicode_ci NULL
+     */
     public $geocoverage;
+
+    /**
+     * Default map focus position
+     * varchar(100) NULL
+     */
     public $map_bounds;
+
+    /**
+     * Default map zoom level.
+     * int(10) unsigned NULL
+     */
     public $map_zoom;
 
-    // Statuses and ordering.
+    /**
+     * Boolean for whether the record is present on the map.
+     * tinyint(1) NULL
+     */
     public $space_active;
+
+    /**
+     * Boolean for whether the record is present on the timeline.
+     * tinyint(1) NULL
+     */
     public $time_active;
+
+    /**
+     * Boolean for whether the record is present on the item panel.
+     * tinyint(1) NULL
+     */
     public $items_active;
+
+    /**
+     * Display order for record in items panel.
+     * int(10) unsigned NULL
+     */
     public $display_order;
 
-    // For caching.
+    /**
+     * The record's parent record (used for caching).
+     * Omeka_Record_AbstractRecord
+     */
     protected $_parent;
+
+    /**
+     * The record's parent exhibit (used for caching).
+     * Omeka_Record_AbstractRecord
+     */
     protected $_exhibit;
 
     /**
@@ -1144,11 +1289,9 @@ class NeatlineDataRecord extends Omeka_Record_AbstractRecord
      * @return array
      * @author Me
      **/
-    public function buildMapDataArray(
-        $index=array(), $wmss=array(), $exhibit=null
-    ) {
-        $data = null;
+    public function buildMapDataArray($index=array(), $wmss=array(), $exhibit=null) {
 
+        $data = null;
         if ($this->space_active != 1) {
             return $data;
         }
