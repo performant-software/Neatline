@@ -57,7 +57,6 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
         // Hit the route and capture the view.
         $this->dispatch('neatline-exhibits/editor/' . $exhibit->id);
         $this->assertResponseCode(200);
-        $v = __v();
 
     }
 
