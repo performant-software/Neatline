@@ -670,12 +670,12 @@ class Neatline_NeatlineDataRecordTest extends Neatline_Test_AppTestCase
         $neatline = $this->_createNeatline();
         $item = $this->_createItem();
         $record = new NeatlineDataRecord($item, $neatline);
-        $neatline->default_vector_color = '#ffffff';
-        $neatline->default_vector_opacity = 20;
-        $neatline->default_stroke_color = '#ffffff';
-        $neatline->default_stroke_opacity = 20;
-        $neatline->default_stroke_width = 20;
-        $neatline->default_point_radius = 20;
+        $neatline->vector_color = '#ffffff';
+        $neatline->vector_opacity = 20;
+        $neatline->stroke_color = '#ffffff';
+        $neatline->stroke_opacity = 20;
+        $neatline->stroke_width = 20;
+        $neatline->point_radius = 20;
         $neatline->save();
 
         // Set.
@@ -709,12 +709,12 @@ class Neatline_NeatlineDataRecordTest extends Neatline_Test_AppTestCase
         $neatline = $this->_createNeatline();
         $item = $this->_createItem();
         $record = new NeatlineDataRecord($item, $neatline);
-        $neatline->default_vector_color = '#ffffff';
-        $neatline->default_vector_opacity = 20;
-        $neatline->default_stroke_color = '#ffffff';
-        $neatline->default_stroke_opacity = 20;
-        $neatline->default_stroke_width = 20;
-        $neatline->default_point_radius = 20;
+        $neatline->vector_color = '#ffffff';
+        $neatline->vector_opacity = 20;
+        $neatline->stroke_color = '#ffffff';
+        $neatline->stroke_opacity = 20;
+        $neatline->stroke_width = 20;
+        $neatline->point_radius = 20;
         $neatline->save();
 
         // Set.
@@ -1076,12 +1076,12 @@ class Neatline_NeatlineDataRecordTest extends Neatline_Test_AppTestCase
         $record->stroke_width = 20;
         $record->point_radius = 20;
         $record->save();
-        $neatline->default_vector_color = '#fffffg';
-        $neatline->default_vector_opacity = 21;
-        $neatline->default_stroke_color = '#fffffg';
-        $neatline->default_stroke_opacity = 21;
-        $neatline->default_stroke_width = 21;
-        $neatline->default_point_radius = 21;
+        $neatline->vector_color = '#fffffg';
+        $neatline->vector_opacity = 21;
+        $neatline->stroke_color = '#fffffg';
+        $neatline->stroke_opacity = 21;
+        $neatline->stroke_width = 21;
+        $neatline->point_radius = 21;
         $neatline->save();
 
         // Get and check.
@@ -1110,12 +1110,12 @@ class Neatline_NeatlineDataRecordTest extends Neatline_Test_AppTestCase
         $record->save();
 
         // Set values.
-        $neatline->default_vector_color = '#ffffff';
-        $neatline->default_vector_opacity = 1;
-        $neatline->default_stroke_color = '#ffffff';
-        $neatline->default_stroke_opacity = 1;
-        $neatline->default_stroke_width = 1;
-        $neatline->default_point_radius = 1;
+        $neatline->vector_color = '#ffffff';
+        $neatline->vector_opacity = 1;
+        $neatline->stroke_color = '#ffffff';
+        $neatline->stroke_opacity = 1;
+        $neatline->stroke_width = 1;
+        $neatline->point_radius = 1;
         $neatline->save();
 
         // Re-get and check.

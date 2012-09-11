@@ -526,7 +526,7 @@ class Neatline_EditorController extends Omeka_Controller_AbstractActionControlle
         $exhibit->setStyle('graphic_opacity', $graphicOpacity);
         $exhibit->setStyle('stroke_width', $strokeWidth);
         $exhibit->setStyle('point_radius', $pointRadius);
-        $exhibit->default_base_layer = $baseLayer;
+        $exhibit->base_layer = $baseLayer;
         $exhibit->save();
 
     }

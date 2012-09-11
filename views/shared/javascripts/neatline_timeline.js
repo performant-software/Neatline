@@ -288,8 +288,8 @@
             }
 
             // Set the starting date, if defined.
-            else if (Neatline.default_focus_date !== null) {
-                date = Date.parse(Neatline.record.default_focus_date);
+            else if (Neatline.focus_date !== null) {
+                date = Date.parse(Neatline.record.focus_date);
                 this.timeline.getBand(0).setCenterVisibleDate(date);
             }
 
@@ -524,8 +524,8 @@
 
             // Update exhibit defaults.
             Neatline.record.is_context_band             = isContext;
-            Neatline.record.default_context_band_height = height;
-            Neatline.record.default_context_band_unit   = unit;
+            Neatline.record.context_band_height = height;
+            Neatline.record.context_band_unit   = unit;
             Neatline.timeline.isContextBand             = isContext;
             Neatline.timeline.contextBandUnit           = unit;
             Neatline.timeline.contextBandHeight         = height;

@@ -485,10 +485,10 @@ class NeatlineDataRecord extends Omeka_Record_AbstractRecord
         }
 
         // If there is an exhibit default.
-        if (!is_null($exhibit['default_' . $style])) {
+        if (!is_null($exhibit[$style])) {
 
             // If the value does not match the default.
-            if ($value != $exhibit['default_' . $style]) {
+            if ($value != $exhibit[$style]) {
                 $this[$style] = $value;
                 return true;
             }
@@ -636,9 +636,8 @@ class NeatlineDataRecord extends Omeka_Record_AbstractRecord
         else {
 
             $exhibit = $this->getExhibit();
-            // var_dump($exhibit->default_vector_color);
-            if (!is_null($exhibit['default_' . $style])) {
-                return $exhibit['default_' . $style];
+            if (!is_null($exhibit[$style])) {
+                return $exhibit[$style];
             }
 
             // Fall back to system default.

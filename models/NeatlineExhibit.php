@@ -97,7 +97,7 @@ class NeatlineExhibit extends Omeka_Record_AbstractRecord
      */
     protected function beforeInsert()
     {
-        $now = Zend_Date::now()->toString();
+        $now = Zend_Date::now()->toString(self::DATE_FORMAT);
         $this->added = $now;
         $this->modified = $now;
     }
@@ -153,10 +153,10 @@ class NeatlineExhibit extends Omeka_Record_AbstractRecord
     {
 
         // Set values.
-        $this->default_map_bounds = $mapCenter;
-        $this->default_map_zoom = intval($mapZoom);
-        $this->default_focus_date = $timelineCenter;
-        $this->default_timeline_zoom = $timelineZoom;
+        $this->map_bounds = $mapCenter;
+        $this->map_zoom = intval($mapZoom);
+        $this->focus_date = $timelineCenter;
+        $this->timeline_zoom = $timelineZoom;
         $this->setBaseLayerByName($baseLayer);
         $this->save();
 
@@ -215,21 +215,21 @@ class NeatlineExhibit extends Omeka_Record_AbstractRecord
     {
 
         // If a non-style property is passed, return false.
-        if (!in_array('default_' . $style, self::$styles)) {
+        if (!in_array('' . $style, self::$styles)) {
             return false;
         }
 
         // If the value does not match the system default.
         else if ($value != get_plugin_ini('Neatline', $style)) {
-            $this['default_' . $style] = $value;
+            $this['' . $style] = $value;
             return true;
         }
 
         // If the value matches the system default and there is an existing
         // row-level value on the exhibit.
         else if ($value == get_plugin_ini('Neatline', $style) &&
-            !is_null($this['default_' . $style])) {
-                $this['default_' . $style] = null;
+            !is_null($this['' . $style])) {
+                $this['' . $style] = null;
                 return true;
         }
 
@@ -253,7 +253,7 @@ class NeatlineExhibit extends Omeka_Record_AbstractRecord
 
         // Set key.
         if ($baseLayer) {
-            $this->default_base_layer = $baseLayer->id;
+            $this->base_layer = $baseLayer->id;
         }
 
     }
@@ -270,8 +270,8 @@ class NeatlineExhibit extends Omeka_Record_AbstractRecord
     {
 
         // If there is a row value.
-        if (!is_null($this['default_' . $style])) {
-            return $this['default_' . $style];
+        if (!is_null($this['' . $style])) {
+            return $this['' . $style];
         }
 
         // Fall back to system default.
@@ -349,7 +349,7 @@ class NeatlineExhibit extends Omeka_Record_AbstractRecord
         $_layersTable = $this->getTable('NeatlineBaseLayer');
 
         // If exhibit value is null, get and return default.
-        if (is_null($this->default_base_layer)) {
+        if (is_null($this->base_layer)) {
             return $_layersTable->fetchObject(
                 $_layersTable->getSelect()->where('name = "Google Physical"')
             );
@@ -357,7 +357,7 @@ class NeatlineExhibit extends Omeka_Record_AbstractRecord
 
         // If exhibit value is set, return the setting.
         else {
-            return $_layersTable->find($this->default_base_layer);
+            return $_layersTable->find($this->base_layer);
         }
 
     }
@@ -373,14 +373,14 @@ class NeatlineExhibit extends Omeka_Record_AbstractRecord
 
         // Shell out array with defaults.
         $proportions = array(
-            'horizontal' =>     get_plugin_ini('Neatline', 'h_percent'),
-            'vertical' =>       get_plugin_ini('Neatline', 'v_percent')
+            'horizontal' => get_plugin_ini('Neatline', 'h_percent'),
+            'vertical' => get_plugin_ini('Neatline', 'v_percent')
         );
 
         // Use row-specifc values if present.
         if (!is_null($this->h_percent) && !is_null($this->v_percent)) {
-            $proportions['horizontal'] =    $this->h_percent;
-            $proportions['vertical'] =      $this->v_percent;
+            $proportions['horizontal'] = $this->h_percent;
+            $proportions['vertical'] = $this->v_percent;
         }
 
         return $proportions;
@@ -394,8 +394,8 @@ class NeatlineExhibit extends Omeka_Record_AbstractRecord
      */
     public function getTimelineZoom()
     {
-        return !is_null($this->default_timeline_zoom) ?
-            $this->default_timeline_zoom :
+        return !is_null($this->timeline_zoom) ?
+            $this->timeline_zoom :
             (int) get_plugin_ini('Neatline', 'timeline_zoom');
     }
 
@@ -430,7 +430,8 @@ class NeatlineExhibit extends Omeka_Record_AbstractRecord
         }
 
         if (!preg_match('/^[0-9a-z\-]+$/', $this->slug)) {
-            $this->addError('slug', __('The slug can only contain lowercase letters, numbers, and hyphens.'));
+            $this->addError('slug', __('The slug can only contain lowercase \
+                letters, numbers, and hyphens.'));
         }
 
     }
@@ -454,13 +455,14 @@ class NeatlineExhibit extends Omeka_Record_AbstractRecord
     public function setAddedBy(User $user)
     {
         if (!$user->exists()) {
-            throw new RuntimeException(__("Cannot associate a Neatline with a user who doesn't exist."));
+            throw new RuntimeException(__("Cannot associate a Neatline with \
+                a user who doesn't exist."));
         }
         $this->creator_id = $user->id;
     }
 
     /**
-     * This makes sure that the default_focus_date isn't set to the string
+     * This makes sure that the focus_date isn't set to the string
      * 'null'.
      *
      * @return void
@@ -468,10 +470,10 @@ class NeatlineExhibit extends Omeka_Record_AbstractRecord
      **/
     protected function _checkDefaultFocusDate()
     {
-        if (is_string($this->default_focus_date)
-            && strcasecmp($this->default_focus_date, 'null') === 0
+        if (is_string($this->focus_date)
+            && strcasecmp($this->focus_date, 'null') === 0
         ) {
-            $this->default_focus_date = null;
+            $this->focus_date = null;
         }
     }
 

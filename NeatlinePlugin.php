@@ -236,7 +236,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
 
             // Delete the records.
             $records = $table->fetchObjects($select);
-            foreach ($records as $record) { $data->delete(); }
+            foreach ($records as $record) { $record->delete(); }
             $this->_db->commit();
 
         } catch (Exception $e) {

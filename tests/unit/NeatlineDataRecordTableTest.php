@@ -1460,7 +1460,7 @@ class Neatline_NeatlineDataRecordTableTest extends Neatline_Test_AppTestCase
         $item = $this->_createItem();
 
         // Set an exhibit default.
-        $neatline->default_vector_color = '#ffffff';
+        $neatline->vector_color = '#ffffff';
         $neatline->save();
 
         // Create record.

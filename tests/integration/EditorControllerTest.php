@@ -2012,16 +2012,16 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
         $this->assertContains('"is_items":1', $response);
         $this->assertContains('"h_percent":30', $response);
         $this->assertContains('"v_percent":70', $response);
-        $this->assertContains('"default_map_bounds":null', $response);
-        $this->assertContains('"default_map_zoom":null', $response);
-        $this->assertContains('"default_focus_date":null', $response);
-        $this->assertContains('"default_vector_color":null', $response);
-        $this->assertContains('"default_vector_opacity":null', $response);
-        $this->assertContains('"default_stroke_color":null', $response);
-        $this->assertContains('"default_stroke_opacity":null', $response);
-        $this->assertContains('"default_stroke_width":null', $response);
-        $this->assertContains('"default_point_radius":null', $response);
-        $this->assertContains('"default_point_radius":null', $response);
+        $this->assertContains('"map_bounds":null', $response);
+        $this->assertContains('"map_zoom":null', $response);
+        $this->assertContains('"focus_date":null', $response);
+        $this->assertContains('"vector_color":null', $response);
+        $this->assertContains('"vector_opacity":null', $response);
+        $this->assertContains('"stroke_color":null', $response);
+        $this->assertContains('"stroke_opacity":null', $response);
+        $this->assertContains('"stroke_width":null', $response);
+        $this->assertContains('"point_radius":null', $response);
+        $this->assertContains('"point_radius":null', $response);
         $this->assertContains('"id":1', $response);
 
     }
@@ -2094,16 +2094,16 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
         $this->assertContains('"is_items":1', $response);
         $this->assertContains('"h_percent":30', $response);
         $this->assertContains('"v_percent":70', $response);
-        $this->assertContains('"default_map_bounds":null', $response);
-        $this->assertContains('"default_map_zoom":null', $response);
-        $this->assertContains('"default_focus_date":null', $response);
-        $this->assertContains('"default_vector_color":null', $response);
-        $this->assertContains('"default_vector_opacity":null', $response);
-        $this->assertContains('"default_stroke_color":null', $response);
-        $this->assertContains('"default_stroke_opacity":null', $response);
-        $this->assertContains('"default_stroke_width":null', $response);
-        $this->assertContains('"default_point_radius":null', $response);
-        $this->assertContains('"default_point_radius":null', $response);
+        $this->assertContains('"map_bounds":null', $response);
+        $this->assertContains('"map_zoom":null', $response);
+        $this->assertContains('"focus_date":null', $response);
+        $this->assertContains('"vector_color":null', $response);
+        $this->assertContains('"vector_opacity":null', $response);
+        $this->assertContains('"stroke_color":null', $response);
+        $this->assertContains('"stroke_opacity":null', $response);
+        $this->assertContains('"stroke_width":null', $response);
+        $this->assertContains('"point_radius":null', $response);
+        $this->assertContains('"point_radius":null', $response);
         $this->assertContains('"id":1', $response);
 
     }
@@ -2142,11 +2142,11 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
         $exhibit = $this->_exhibitsTable->find($exhibit->id);
 
         // Check the attributes.
-        $this->assertEquals($exhibit->default_map_bounds, 'center');
-        $this->assertEquals($exhibit->default_map_zoom, 1);
-        $this->assertEquals($exhibit->default_base_layer, $layer->id);
-        $this->assertEquals($exhibit->default_focus_date, 'center');
-        $this->assertEquals($exhibit->default_timeline_zoom, 10);
+        $this->assertEquals($exhibit->map_bounds, 'center');
+        $this->assertEquals($exhibit->map_zoom, 1);
+        $this->assertEquals($exhibit->base_layer, $layer->id);
+        $this->assertEquals($exhibit->focus_date, 'center');
+        $this->assertEquals($exhibit->timeline_zoom, 10);
 
     }
 
@@ -2439,25 +2439,25 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
         $exhibit = $this->_exhibitsTable->find($exhibit->id);
 
         // Check.
-        $this->assertNotNull($exhibit->default_vector_color);
-        $this->assertEquals($exhibit->default_vector_color, '#ffffff');
-        $this->assertNotNull($exhibit->default_stroke_color);
-        $this->assertEquals($exhibit->default_stroke_color, '#ffffff');
-        $this->assertNotNull($exhibit->default_highlight_color);
-        $this->assertEquals($exhibit->default_highlight_color, '#ffffff');
-        $this->assertNotNull($exhibit->default_vector_opacity);
-        $this->assertEquals($exhibit->default_vector_opacity, 5);
-        $this->assertNotNull($exhibit->default_select_opacity);
-        $this->assertEquals($exhibit->default_select_opacity, 5);
-        $this->assertNotNull($exhibit->default_stroke_opacity);
-        $this->assertEquals($exhibit->default_stroke_opacity, 5);
-        $this->assertNotNull($exhibit->default_graphic_opacity);
-        $this->assertEquals($exhibit->default_graphic_opacity, 5);
-        $this->assertNotNull($exhibit->default_stroke_width);
-        $this->assertEquals($exhibit->default_stroke_width, 5);
-        $this->assertNotNull($exhibit->default_point_radius);
-        $this->assertEquals($exhibit->default_point_radius, 5);
-        $this->assertEquals($exhibit->default_base_layer, 1);
+        $this->assertNotNull($exhibit->vector_color);
+        $this->assertEquals($exhibit->vector_color, '#ffffff');
+        $this->assertNotNull($exhibit->stroke_color);
+        $this->assertEquals($exhibit->stroke_color, '#ffffff');
+        $this->assertNotNull($exhibit->highlight_color);
+        $this->assertEquals($exhibit->highlight_color, '#ffffff');
+        $this->assertNotNull($exhibit->vector_opacity);
+        $this->assertEquals($exhibit->vector_opacity, 5);
+        $this->assertNotNull($exhibit->select_opacity);
+        $this->assertEquals($exhibit->select_opacity, 5);
+        $this->assertNotNull($exhibit->stroke_opacity);
+        $this->assertEquals($exhibit->stroke_opacity, 5);
+        $this->assertNotNull($exhibit->graphic_opacity);
+        $this->assertEquals($exhibit->graphic_opacity, 5);
+        $this->assertNotNull($exhibit->stroke_width);
+        $this->assertEquals($exhibit->stroke_width, 5);
+        $this->assertNotNull($exhibit->point_radius);
+        $this->assertEquals($exhibit->point_radius, 5);
+        $this->assertEquals($exhibit->base_layer, 1);
 
     }
 
@@ -2495,16 +2495,16 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
         $exhibit = $this->_exhibitsTable->find($exhibit->id);
 
         // Check.
-        $this->assertNull($exhibit->default_vector_color);
-        $this->assertNull($exhibit->default_stroke_color);
-        $this->assertNull($exhibit->default_highlight_color);
-        $this->assertNull($exhibit->default_vector_opacity);
-        $this->assertNull($exhibit->default_select_opacity);
-        $this->assertNull($exhibit->default_stroke_opacity);
-        $this->assertNull($exhibit->default_graphic_opacity);
-        $this->assertNull($exhibit->default_stroke_width);
-        $this->assertNull($exhibit->default_point_radius);
-        $this->assertEquals($exhibit->default_base_layer, 1);
+        $this->assertNull($exhibit->vector_color);
+        $this->assertNull($exhibit->stroke_color);
+        $this->assertNull($exhibit->highlight_color);
+        $this->assertNull($exhibit->vector_opacity);
+        $this->assertNull($exhibit->select_opacity);
+        $this->assertNull($exhibit->stroke_opacity);
+        $this->assertNull($exhibit->graphic_opacity);
+        $this->assertNull($exhibit->stroke_width);
+        $this->assertNull($exhibit->point_radius);
+        $this->assertEquals($exhibit->base_layer, 1);
 
     }
 
@@ -2519,14 +2519,14 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
 
         // Create an exhibit.
         $exhibit = $this->_createNeatline();
-        $exhibit->default_vector_color = '#000000';
-        $exhibit->default_stroke_color = '#000000';
-        $exhibit->default_vector_opacity = 1;
-        $exhibit->default_select_opacity = 1;
-        $exhibit->default_stroke_opacity = 1;
-        $exhibit->default_graphic_opacity = 1;
-        $exhibit->default_stroke_width = 1;
-        $exhibit->default_point_radius = 1;
+        $exhibit->vector_color = '#000000';
+        $exhibit->stroke_color = '#000000';
+        $exhibit->vector_opacity = 1;
+        $exhibit->select_opacity = 1;
+        $exhibit->stroke_opacity = 1;
+        $exhibit->graphic_opacity = 1;
+        $exhibit->stroke_width = 1;
+        $exhibit->point_radius = 1;
         $exhibit->save();
 
         // Form the POST.
@@ -2551,16 +2551,16 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
         $exhibit = $this->_exhibitsTable->find($exhibit->id);
 
         // Check.
-        $this->assertNull($exhibit->default_vector_color);
-        $this->assertNull($exhibit->default_stroke_color);
-        $this->assertNull($exhibit->default_highlight_color);
-        $this->assertNull($exhibit->default_vector_opacity);
-        $this->assertNull($exhibit->default_select_opacity);
-        $this->assertNull($exhibit->default_stroke_opacity);
-        $this->assertNull($exhibit->default_graphic_opacity);
-        $this->assertNull($exhibit->default_stroke_width);
-        $this->assertNull($exhibit->default_point_radius);
-        $this->assertEquals($exhibit->default_base_layer, 1);
+        $this->assertNull($exhibit->vector_color);
+        $this->assertNull($exhibit->stroke_color);
+        $this->assertNull($exhibit->highlight_color);
+        $this->assertNull($exhibit->vector_opacity);
+        $this->assertNull($exhibit->select_opacity);
+        $this->assertNull($exhibit->stroke_opacity);
+        $this->assertNull($exhibit->graphic_opacity);
+        $this->assertNull($exhibit->stroke_width);
+        $this->assertNull($exhibit->point_radius);
+        $this->assertEquals($exhibit->base_layer, 1);
 
     }
 
@@ -2598,10 +2598,10 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
         // Check.
         $this->assertNotNull($exhibit->is_context_band);
         $this->assertEquals($exhibit->is_context_band, 1);
-        $this->assertNotNull($exhibit->default_context_band_unit);
-        $this->assertEquals($exhibit->default_context_band_unit, 'month');
-        $this->assertNotNull($exhibit->default_context_band_height);
-        $this->assertEquals($exhibit->default_context_band_height, 45);
+        $this->assertNotNull($exhibit->context_band_unit);
+        $this->assertEquals($exhibit->context_band_unit, 'month');
+        $this->assertNotNull($exhibit->context_band_height);
+        $this->assertEquals($exhibit->context_band_height, 45);
 
     }
 

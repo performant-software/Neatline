@@ -152,8 +152,8 @@
 
             // Set the default focus.
             if (!this.setViewport(
-                Neatline.record.default_map_bounds,
-                Neatline.record.default_map_zoom
+                Neatline.record.map_bounds,
+                Neatline.record.map_zoom
             )) {
 
                 // If no focus is defined, try to geolocate.
@@ -222,8 +222,8 @@
             this.map.addLayers([this.baseLayer]);
 
             if (! this.setViewport(
-                Neatline.record.default_map_bounds,
-                Neatline.record.default_map_zoom
+                Neatline.record.map_bounds,
+                Neatline.record.map_zoom
             )) {
                 this.map.zoomToExtent(bounds);
             }
@@ -617,8 +617,8 @@
         _setStartingVisibility: function() {
 
             // Use default focus if present.
-            if (Neatline.record.default_focus_date) {
-                this.renderVisibility(Neatline.record.default_focus_date);
+            if (Neatline.record.focus_date) {
+                this.renderVisibility(Neatline.record.focus_date);
             }
 
             // Otherwise, use the current time.

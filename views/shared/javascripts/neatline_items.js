@@ -476,8 +476,8 @@
         _setStartingVisibility: function() {
 
             // Use default focus if present.
-            if (Neatline.record.default_focus_date) {
-                this.renderVisibility(Neatline.record.default_focus_date);
+            if (Neatline.record.focus_date) {
+                this.renderVisibility(Neatline.record.focus_date);
             }
 
             // Otherwise, use the current time.
