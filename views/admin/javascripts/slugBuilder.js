@@ -46,7 +46,7 @@
             // Get markup.
             this._body =        $('body');
             this._window =      $(window);
-            this.title =        $('input[name="name"]');
+            this.title =        $('input[name="title"]');
             this.slug =         $('input[name="slug"]');
 
             // Trackers.
@@ -71,7 +71,7 @@
 
                 'keyup': function() {
                     if (!self._hasTyped) {
-                        var slug = self.slugify(self.title.val())
+                        var slug = self.slugify(self.title.val());
                         self.slug.val(slug);
                     }
                 }
