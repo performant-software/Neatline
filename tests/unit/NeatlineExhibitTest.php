@@ -95,7 +95,7 @@ class Neatline_NeatlineExhibitTest extends Neatline_Test_AppTestCase
         $this->assertNotNull($exhibit->added);
         $this->assertNotNull($exhibit->modified);
         $this->assertEquals($exhibit->query, 'query');
-        $this->assertEquals($exhibit->title, 'name');
+        $this->assertEquals($exhibit->title, 'title');
         $this->assertEquals($exhibit->description, 'Description.');
         $this->assertEquals($exhibit->slug, 'slug');
         $this->assertEquals($exhibit->public, 1);

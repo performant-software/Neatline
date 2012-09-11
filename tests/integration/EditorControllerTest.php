@@ -1952,7 +1952,7 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
 
         // Create an exhibit.
         $exhibit =                              new NeatlineExhibit();
-        $exhibit->name =                        'Test Title';
+        $exhibit->title =                       'Test Title';
         $exhibit->slug =                        'test-slug';
         $exhibit->public =                      1;
         $exhibit->is_map =                      0;
@@ -2037,7 +2037,7 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
 
         // Create an exhibit.
         $exhibit =                              new NeatlineExhibit();
-        $exhibit->name =                        'Test Title';
+        $exhibit->title =                       'Test Title';
         $exhibit->slug =                        'test-slug';
         $exhibit->public =                      1;
         $exhibit->is_map =                      0;

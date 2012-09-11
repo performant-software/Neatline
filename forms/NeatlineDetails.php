@@ -44,11 +44,11 @@ class Neatline_Form_NeatlineDetails extends Omeka_Form
         $this->addElementPrefixPath('Neatline', dirname(__FILE__));
 
         // Title.
-        $this->addElement('text', 'name', array(
+        $this->addElement('text', 'title', array(
             'label'         => __('Title'),
             'description'   => __('The title is displayed at the top of the exhibit.'),
             'size'          => 40,
-            'value'         => $this->_neatline->name,
+            'value'         => $this->_neatline->title,
             'required'      => true,
             'validators'    => array(
                 array('validator' => 'NotEmpty', 'breakChainOnFailure' => true, 'options' =>

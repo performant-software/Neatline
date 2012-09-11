@@ -113,7 +113,7 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
         $this->dispatch('neatline-exhibits/add');
 
         // Check for fields.
-        $this->assertQuery('input[name="name"]');
+        $this->assertQuery('input[name="title"]');
         $this->assertQuery('textarea[name="description"]');
         $this->assertQuery('input[name="slug"]');
         $this->assertQuery('input[name="public"]');
@@ -392,7 +392,7 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
 
         $this->request->setMethod('POST')
             ->setPost(array(
-                'name' => 'Test Exhibit',
+                'title' => 'Test Exhibit',
                 'description' => 'Test description.',
                 'slug' => 'test-exhibit',
                 'public' => 1
@@ -448,7 +448,7 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
         $this->dispatch('neatline-exhibits/edit/'.$exhibit->id);
 
         // Title.
-        $this->assertXpath('//input[@name="name"][@value="Test Exhibit"]');
+        $this->assertXpath('//input[@name="title"][@value="Test Exhibit"]');
 
         // Description.
         $this->assertXpathContentContains(
@@ -734,7 +734,7 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
         // Valid form.
         $this->request->setMethod('POST')
             ->setPost(array(
-                'name' => 'New Exhibit',
+                'title' => 'New Exhibit',
                 'description' => 'New description.',
                 'slug' => 'new-exhibit',
                 'public' => 0

@@ -77,7 +77,7 @@ class Neatline_Test_AppTestCase extends Omeka_Test_AppTestCase
     {
 
         $neatline = new NeatlineExhibit();
-        $neatline->name = $name;
+        $neatline->title = $name;
         $neatline->description = $description;
         $neatline->slug = $slug;
         $neatline->public = $public;
