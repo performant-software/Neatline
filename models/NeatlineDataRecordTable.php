@@ -234,6 +234,48 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
     }
 
     /**
+     * Find all records in an exhibit that are active on the map.
+     *
+     * @param Omeka_record $exhibit The exhibit record.
+     *
+     * @return array of Omeka_record The records.
+     */
+    public function getMapRecordsByExhibit($exhibit)
+    {
+
+        $records = $this->fetchObjects(
+            $this->getSelect()
+                 ->where('exhibit_id=?', $exhibit->id)
+                 ->where('map_active=1')
+                 ->order('display_order ASC')
+        );
+
+        return $records ? $records : false;
+
+    }
+
+    /**
+     * Find all records in an exhibit that are active on the timeline.
+     *
+     * @param Omeka_record $exhibit The exhibit record.
+     *
+     * @return array of Omeka_record The records.
+     */
+    public function getTimelineRecordsByExhibit($exhibit)
+    {
+
+        $records = $this->fetchObjects(
+            $this->getSelect()
+                 ->where('exhibit_id=?', $exhibit->id)
+                 ->where('time_active=1')
+                 ->order('display_order ASC')
+        );
+
+        return $records ? $records : false;
+
+    }
+
+    /**
      * Find all records associated with a given exhibit that are active in
      * the items pane.
      *
@@ -445,51 +487,16 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
 
         // Shell array.
         $data = array(
-            'dateTimeFormat' => 'iso8601',
-            'events' => array()
+            'dateTimeFormat' => 'iso8601', 'events' => array()
         );
 
         // Get records.
-        $records = $this->getRecordsByExhibit($neatline);
+        $records = $this->getTimelineRecordsByExhibit($neatline);
 
         if ($records) {
-
-            // Walk the records and build out the array.
             foreach ($records as $record) {
-
-                $eventArray = array(
-                    'eventID' =>                $record->id,
-                    'slug' =>                   $record->getSlug(),
-                    'title' =>                  trim($record->getTitle()),
-                    'description' =>            $record->getDescription(),
-                    'color' =>                  $record->getStyle('vector_color'),
-                    'left_ambiguity' =>         $record->left_percent,
-                    'right_ambiguity' =>        $record->right_percent,
-                    'show_bubble' =>            $record->show_bubble,
-                    'textColor' =>             '#000000'
-                );
-
-                // Get start and end dates.
-                $startDate = $record->getStartDate();
-
-                // If there is a valid start stamp on the record.
-                if ($record->time_active == 1 && preg_match('/^([\+-]?\d{4}(?!\d{2}\b))((-?)((0[1-9]|1[0-2])(\3([12]\d|0[1-9]|3[01]))?|W([0-4]\d|5[0-2])(-?[1-7])?|(00[1-9]|0[1-9]\d|[12]\d{2}|3([0-5]\d|6[1-6])))([T\s]((([01]\d|2[0-3])((:?)[0-5]\d)?|24\:?00)([\.,]\d+(?!:))?)?(\17[0-5]\d([\.,]\d+)?)?([zZ]|([\+-])([01]\d|2[0-3]):?([0-5]\d)?)?)?)?$/', $startDate, $matches)) {
-
-                    $eventArray['start'] = $startDate;
-
-                    // If there is a valid end stamp.
-                    $endDate = $record->getEndDate();
-                    if ($endDate !== '') {
-                        $eventArray['end'] = $endDate;
-                    }
-
-                    // Only push if there is at least a start.
-                    $data['events'][] = $eventArray;
-
-                }
-
+              $data['events'][] = $record->buildTimelineDataArray();
             }
-
         }
 
         // JSON-ify the array.

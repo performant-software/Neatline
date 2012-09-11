@@ -28,10 +28,9 @@ class NeatlineBaseLayer extends Omeka_Record_AbstractRecord
 {
 
     /**
-     * Record attributes.
+     * The name of the layer.
+     * tinytext COLLATE utf8_unicode_ci NULL
      */
-
-    // Text fields.
     public $name;
 
 }

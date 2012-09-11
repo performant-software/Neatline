@@ -912,11 +912,6 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
         );
 
         $this->assertContains(
-            '"slug":"' . $record1->slug . '"',
-            $response
-        );
-
-        $this->assertContains(
             '"description":"' . $record1->description . '"',
             $response
         );
@@ -963,11 +958,6 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
 
         $this->assertContains(
             '"title":"' . $record2->title . '"',
-            $response
-        );
-
-        $this->assertContains(
-            '"slug":"' . $record2->slug . '"',
             $response
         );
 

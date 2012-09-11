@@ -1275,8 +1275,6 @@ class Neatline_NeatlineDataRecordTableTest extends Neatline_Test_AppTestCase
         // Populate map-relevant attributes.
         $record1->title = 'Item 1 Title';
         $record2->title = 'Item 2 Title';
-        $record1->slug = 'slug-1';
-        $record2->slug = 'slug-2';
         $record1->description = 'Item 1 description.';
         $record2->description = 'Item 2 description.';
         $record1->start_date = '1564-04-26 14:39:22';
@@ -1315,11 +1313,6 @@ class Neatline_NeatlineDataRecordTableTest extends Neatline_Test_AppTestCase
 
         $this->assertContains(
             '"title":"' . $record1->title . '"',
-            $json
-        );
-
-        $this->assertContains(
-            '"slug":"' . $record1->slug . '"',
             $json
         );
 
@@ -1370,11 +1363,6 @@ class Neatline_NeatlineDataRecordTableTest extends Neatline_Test_AppTestCase
 
         $this->assertContains(
             '"title":"' . $record2->title . '"',
-            $json
-        );
-
-        $this->assertContains(
-            '"slug":"' . $record2->slug . '"',
             $json
         );
 

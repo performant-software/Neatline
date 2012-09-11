@@ -474,7 +474,7 @@ function link_to_neatline(
 
     $neatline = $neatline ? $neatline : get_current_neatline();
 
-    $text = $text ? $text : strip_formatting(neatline('name', $neatline));
+    $text = $text ? $text : strip_formatting(neatline('title', $neatline));
 
     if ($action == 'show') {
         $slug = $neatline->slug;
