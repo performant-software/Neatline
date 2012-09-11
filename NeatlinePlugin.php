@@ -221,21 +221,24 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
     public function hookBeforeDeleteItem($args)
     {
 
-        $table   = $this->_db->getTable('NeatlineDataRecord');
-        $alias   = $table->getTableAlias();
+        // Prepare the select.
+        $table = $this->_db->getTable('NeatlineDataRecord');
+        $alias = $table->getTableAlias();
         $adapter = $table->getAdapter();
-        $select  = $table->getSelect();
-        $where   = $adapter->quoteInto("$alias.item_id=?", $args['record']->id);
-
+        $select = $table->getSelect();
+        $where = $adapter->quoteInto("$alias.item_id=?", $args['record']->id);
         $select->where($where);
 
+        // Start transaction.
         $this->_db->beginTransaction();
+
         try {
-            $datarecs = $table->fetchObjects($select);
-            foreach ($datarecs as $data) {
-                $data->delete();
-            }
+
+            // Delete the records.
+            $records = $table->fetchObjects($select);
+            foreach ($records as $record) { $data->delete(); }
             $this->_db->commit();
+
         } catch (Exception $e) {
             $this->_db->rollback();
             throw $e;
