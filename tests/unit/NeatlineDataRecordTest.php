@@ -2381,6 +2381,7 @@ class Neatline_NeatlineDataRecordTest extends Neatline_Test_AppTestCase
      **/
     public function testDeleteCascade()
     {
+
         $neatline = $this->_createNeatline();
 
         $pitem    = $this->_createItem();
@@ -2409,6 +2410,81 @@ class Neatline_NeatlineDataRecordTest extends Neatline_Test_AppTestCase
 
         $child = $this->_recordsTable->find($child->id);
         $this->assertNull($child->parent_record_id);
+
+    }
+
+    /**
+     * buildTimelineDataArray() should construct a well-formed array
+     * for the timeline.
+     *
+     * @return void.
+     */
+    public function testBuildTimelineDataArrayResetStylesWithStartDate()
+    {
+
+        // Create an item, exhibit, and record.
+        $item = $this->_createItem();
+        $neatline = $this->_createNeatline();
+        $record = new NeatlineDataRecord($item, $neatline);
+
+        // Set styles.
+        $record->title = 'Test Title';
+        $record->description = 'Test description.';
+        $record->vector_color = '#000';
+        $record->left_percent = 30;
+        $record->right_percent = 70;
+        $record->show_bubble = 1;
+        $record->start_date = '2010';
+        $record->end_date = '2012';
+
+        // Get array.
+        $data = $record->buildTimelineDataArray();
+        $this->assertEquals($data['eventID'], $record->id);
+        $this->assertEquals($data['title'], 'Test Title');
+        $this->assertEquals($data['description'], 'Test description.');
+        $this->assertEquals($data['color'], '#000');
+        $this->assertEquals($data['left_ambiguity'], 30);
+        $this->assertEquals($data['right_ambiguity'], 70);
+        $this->assertEquals($data['show_bubble'], 1);
+        $this->assertEquals($data['textColor'], '#000000');
+        $this->assertEquals($data['start'], '2010');
+        $this->assertEquals($data['end'], '2012');
+
+    }
+
+    /**
+     * buildTimelineDataArray() should construct a well-formed array
+     * for the timeline.
+     *
+     * @return void.
+     */
+    public function testBuildTimelineDataArrayResetStylesWithoutStartDate()
+    {
+
+        // Create an item, exhibit, and record.
+        $item = $this->_createItem();
+        $neatline = $this->_createNeatline();
+        $record = new NeatlineDataRecord($item, $neatline);
+
+        // Set styles.
+        $record->title = 'Test Title';
+        $record->description = 'Test description.';
+        $record->vector_color = '#000';
+        $record->left_percent = 30;
+        $record->right_percent = 70;
+        $record->show_bubble = 1;
+
+        // Get array.
+        $data = $record->buildTimelineDataArray();
+        $this->assertEquals($data['eventID'], $record->id);
+        $this->assertEquals($data['title'], 'Test Title');
+        $this->assertEquals($data['description'], 'Test description.');
+        $this->assertEquals($data['color'], '#000');
+        $this->assertEquals($data['left_ambiguity'], 30);
+        $this->assertEquals($data['right_ambiguity'], 70);
+        $this->assertEquals($data['show_bubble'], 1);
+        $this->assertEquals($data['textColor'], '#000000');
+
     }
 
 }

@@ -374,7 +374,7 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
      *
      * @param Omeka_Record_AbstractRecord $exhibit The exhibit record.
      *
-     * @return JSON The data.
+     * @return JSON Array of format array('space' => array(), 'time' => array()).
      */
     public function buildRecordsJson($exhibit)
     {

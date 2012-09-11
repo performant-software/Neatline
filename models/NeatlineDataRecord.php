@@ -1306,27 +1306,28 @@ class NeatlineDataRecord extends Omeka_Record_AbstractRecord
      **/
     public function buildTimelineDataArray() {
 
-        $eventArray = array(
-            'eventID'           => $record->id,
-            'slug'              => $record->getSlug(),
-            'title'             => trim($record->getTitle()),
-            'description'       => $record->getDescription(),
-            'color'             => $record->getStyle('vector_color'),
-            'left_ambiguity'    => $record->left_percent,
-            'right_ambiguity'   => $record->right_percent,
-            'show_bubble'       => $record->show_bubble,
+        $event = array(
+            'eventID'           => $this->id,
+            'title'             => trim($this->getTitle()),
+            'description'       => $this->getDescription(),
+            'color'             => $this->getStyle('vector_color'),
+            'left_ambiguity'    => $this->left_percent,
+            'right_ambiguity'   => $this->right_percent,
+            'show_bubble'       => $this->show_bubble,
             'textColor'         => '#000000'
         );
 
         // Get start and end dates.
-        $startDate = $record->getStartDate();
+        $startDate = $this->getStartDate();
 
         // If there is a start date.
         if ($startDate !== '') {
-            $eventArray['start'] = $startDate;
-            $endDate = $record->getEndDate();
-            if ($endDate !== '') { $eventArray['end'] = $endDate; }
+            $event['start'] = $startDate;
+            $endDate = $this->getEndDate();
+            if ($endDate !== '') { $event['end'] = $endDate; }
         }
+
+        return $event;
 
     }
 
