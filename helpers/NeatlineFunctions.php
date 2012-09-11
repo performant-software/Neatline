@@ -421,7 +421,7 @@ function get_neatlines_for_loop()
  */
 function loop_neatlines()
 {
-    return loop_records('neatlines', get_neatlines_for_loop(), 'set_current_neatline');
+    return get_loop_records('neatlines', get_neatlines_for_loop(), 'set_current_neatline');
 }
 
 /**
@@ -483,7 +483,7 @@ function link_to_neatline(
     }
 
     $route = 'neatline-exhibits/'.$action.'/'.$slug;
-    $uri = $public? public_uri($route) : uri($route);
+    $uri = $public? public_url($route) : url($route);
     $props['href'] = $uri;
     $html = '<a ' . _tag_attributes($props) . '>' . $text . '</a>';
 

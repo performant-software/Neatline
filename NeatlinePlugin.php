@@ -261,7 +261,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
      */
     public function filterAdminNavigationMain($tabs)
     {
-        $tabs['Neatline'] = uri('neatline');
+        $tabs['Neatline'] = url('neatline');
         return $tabs;
     }
 
