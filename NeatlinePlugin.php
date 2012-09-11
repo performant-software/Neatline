@@ -63,6 +63,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
             `slug`                  varchar(100) NOT NULL,
             `public`                tinyint(1) NOT NULL,
             `query`                 TEXT COLLATE utf8_unicode_ci NULL,
+            `creator_id`            int(10) unsigned NOT NULL,
             `image_id`              int(10) unsigned NULL,
             `top_element`           ENUM('map', 'timeline') DEFAULT 'map',
             `items_h_pos`           ENUM('right', 'left') DEFAULT 'right',
@@ -90,7 +91,6 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
             `base_layer`            int(10) unsigned NULL,
             `context_band_unit`     ENUM('hour', 'day', 'week', 'month', 'year', 'decade', 'century') DEFAULT 'decade',
             `context_band_height`   int(10) unsigned NULL,
-            `creator_id`            int(10) unsigned NOT NULL,
              PRIMARY KEY (`id`)
         ) ENGINE=innodb DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
 

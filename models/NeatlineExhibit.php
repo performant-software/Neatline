@@ -12,63 +12,223 @@ class NeatlineExhibit extends Omeka_Record_AbstractRecord
 {
 
     /**
-     * Record attributes.
+     * The date the exhibit was created.
+     * TIMESTAMP DEFAULT CURRENT_TIMESTAMP
      */
-
     public $added;
+
+    /**
+     * The date the exhibit was last modified.
+     * TIMESTAMP NULL
+     */
     public $modified;
+
+    /**
+     * The title of the exhibit.
+     * tinytext collate utf8_unicode_ci
+     */
     public $name;
+
+    /**
+     * A text descriptiption for the exhibit.
+     * TEXT COLLATE utf8_unicode_ci DEFAULT NULL
+     */
     public $description;
+
+    /**
+     * The URL slug for the exhibit.
+     * varchar(100) NOT NULL
+     */
     public $slug;
+
+    /**
+     * Public/private setting.
+     * tinyint(1) NOT NULL
+     */
     public $public = 0;
+
+    /**
+     * Omeka items query for the editor.
+     * TEXT COLLATE utf8_unicode_ci NULL
+     */
     public $query;
+
+    /**
+     * The id of the user who created the exhibit.
+     * int(10) unsigned NOT NULL
+     */
     public $creator_id = 0;
 
-    // Foreign keys.
+    /**
+     * The id of the user who created the exhibit.
+     * int(10) unsigned NOT NULL
+     */
     public $image_id;
 
-    // Layout parameters.
+    /**
+     * The top viewport in the exhibit.
+     * ENUM('map', 'timeline') DEFAULT 'map'
+     */
     public $top_element = 'map';
+
+    /**
+     * The horizontal position of the items panel.
+     * ENUM('right', 'left') DEFAULT 'right'
+     */
     public $items_h_pos = 'right';
+
+    /**
+     * The vertical position of the items panel.
+     * ENUM('top', 'bottom') DEFAULT 'bottom'
+     */
     public $items_v_pos = 'bottom';
+
+    /**
+     * The height of the items panel.
+     * ENUM('full', 'partial') DEFAULT 'partial'
+     */
     public $items_height = 'full';
+
+    /**
+     * The horizontal offset of the map/timeline border.
+     * int(10) unsigned NULL
+     */
     public $h_percent;
+
+    /**
+     * The vertical offset of the map/timeline border.
+     * int(10) unsigned NULL
+     */
     public $v_percent;
 
-    // Viewport presence.
+    /**
+     * Boolean for map presence.
+     * tinyint(1) NOT NULL
+     */
     public $is_map = 1;
+
+    /**
+     * Boolean for timeline presence.
+     * tinyint(1) NOT NULL
+     */
     public $is_timeline = 0;
+
+    /**
+     * Boolean for items presence.
+     * tinyint(1) NOT NULL
+     */
     public $is_items = 0;
 
-    // Map position defaults.
+    /**
+     * Default map focus position.
+     * varchar(100) NULL
+     */
     public $map_bounds;
+
+    /**
+     * Default map zoom.
+     * varchar(100) NULL
+     */
     public $map_zoom;
 
-    // Timeline position defaults.
+    /**
+     * Default timeline focus date.
+     * int(10) unsigned NULL
+     */
     public $focus_date;
+
+    /**
+     * Default timeline zoom.
+     * int(10) unsigned NULL
+     */
     public $timeline_zoom;
 
-    // Timeline layout parameters.
+    /**
+     * Boolean for context band presence.
+     * tinyint(1) NOT NULL
+     */
     public $is_context_band = 1;
+
+    /**
+     * The default unit for the context band.
+     * ENUM('hour', 'day', 'week', 'month', 'year', 'decade', 'century')
+     * DEFAULT 'decade'
+     */
     public $context_band_unit;
+
+    /**
+     * The percentage height of the context band.
+     * int(10) unsigned NULL
+     */
     public $context_band_height;
 
-    // Default styles.
+    /**
+     * The default fill color for new geometries.
+     * int(10) unsigned NULL
+     */
     public $vector_color;
+
+    /**
+     * The default stroke color for new geometries.
+     * tinytext COLLATE utf8_unicode_ci NULL
+     */
     public $stroke_color;
+
+    /**
+     * The default highlight color for new geometries.
+     * tinytext COLLATE utf8_unicode_ci NULL
+     */
     public $highlight_color;
+
+    /**
+     * The default fill opacity for new geometries.
+     * int(10) unsigned NULL
+     */
     public $vector_opacity;
+
+    /**
+     * The default selected fill opacity for new geometries.
+     * int(10) unsigned NULL
+     */
     public $select_opacity;
+
+    /**
+     * The default line opacity for new geometries.
+     * int(10) unsigned NULL
+     */
     public $stroke_opacity;
+
+    /**
+     * The default graphic opacity for new geometries.
+     * int(10) unsigned NULL
+     */
     public $graphic_opacity;
+
+    /**
+     * The default line width for new geometries.
+     * int(10) unsigned NULL
+     */
     public $stroke_width;
+
+    /**
+     * The default point radius for new geometries.
+     * int(10) unsigned NULL
+     */
     public $point_radius;
+
+    /**
+     * The id of the default base layer.
+     * int(10) unsigned NULL
+     */
     public $base_layer = 2;
+
 
     /**
      * Valid style attribute names.
      */
     private static $styles = array(
+        'context_band_unit',
+        'context_band_height',
         'vector_color',
         'vector_opacity',
         'stroke_color',
@@ -77,9 +237,7 @@ class NeatlineExhibit extends Omeka_Record_AbstractRecord
         'select_opacity',
         'graphic_opacity',
         'point_radius',
-        'highlight_color',
-        'context_band_unit',
-        'context_band_height'
+        'highlight_color'
     );
 
     /**
