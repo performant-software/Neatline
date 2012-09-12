@@ -61,7 +61,7 @@ head(array('content_class' => 'neatline', 'title' => $title));
 
     <tbody>
         <!-- Exhibit listings. -->
-        <?php while (loop_neatlines()): ?>
+        <?php foreach(loop('NeatlineExhibit') as $exhibit): ?>
         <tr id="neatline-<?php echo neatline('id'); ?>">
             <td class="title">
                 <?php echo link_to_neatline(); ?>
@@ -75,7 +75,7 @@ head(array('content_class' => 'neatline', 'title' => $title));
             <td><?php echo neatline('public') ? __('Yes') : __('No'); ?></td>
             <td><a href="<?php echo url('neatline-exhibits/editor/' . neatline('id')); ?>" class="edit"><?php echo __('Edit'); ?></a></td>
         </tr>
-        <?php endwhile; ?>
+        <?php endforeach; ?>
     </tbody>
 
 </table>

@@ -87,7 +87,7 @@ class Neatline_IndexController extends Omeka_Controller_AbstractActionController
         }
 
         // Push exhibit and form.
-        $this->view->neatlineexhibit = $neatline;
+        $this->view->neatline_exhibit = $neatline;
         $this->view->form = $form;
 
     }
@@ -114,7 +114,7 @@ class Neatline_IndexController extends Omeka_Controller_AbstractActionController
             $_REQUEST = $queryArray;
         }
 
-        $this->view->neatlineexhibit = $neatline;
+        $this->view->neatline_exhibit = $neatline;
 
     }
 

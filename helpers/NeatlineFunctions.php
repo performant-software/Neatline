@@ -174,26 +174,6 @@ function neatline_queueExhibitCss($exhibit)
 }
 
 /**
- * Build order clause for SQL queries.
- *
- * @param string $sort_field The column to sort on.
- * @param string $sort_dir The direction to sort.
- *
- * @return string $order The sort parameter for the query.
- */
-function neatline_buildOrderClause($sort_field, $sort_dir)
-{
-
-    if (isset($sort_dir)) {
-        $sort_dir = ($sort_dir == 'a') ? 'ASC' : 'DESC';
-    }
-
-    return ($sort_field != '') ?
-        trim(implode(' ', array($sort_field, $sort_dir))) : '';
-
-}
-
-/**
  * Construct the JSON data source url for Simile.
  *
  * @param integer $neatline_id The id of the exhibit.
@@ -227,16 +207,6 @@ function neatline_getMapDataUrl($neatline_id)
 function neatline_getUndatedItemsDataUrl($neatline_id)
 {
     return WEB_ROOT . '/neatline-exhibits/udi/' . $neatline_id;
-}
-/**
- * Message that displays before uninstall confirm.
- *
- * @return string The message.
- */
-function neatline_uninstallWarningMessage()
-{
-    return '<p><strong>'.__('Warning').'</strong>: '
-         . __('Uninstalling the Neatline plugin will permanently delete all Neatline exhibits.');
 }
 
 /**
@@ -379,7 +349,7 @@ function neatline($fieldname, $options = array(), $neatline = null)
  */
 function get_current_neatline()
 {
-    return __v()->neatlineexhibit;
+    return __v()->neatline_exhibit;
 }
 
 /**
@@ -390,7 +360,7 @@ function get_current_neatline()
  */
 function set_current_neatline($neatline = null)
 {
-    __v()->neatlineexhibit = $neatline;
+    __v()->neatline_exhibit = $neatline;
 }
 
 /**
@@ -401,7 +371,7 @@ function set_current_neatline($neatline = null)
  */
 function set_neatlines_for_loop($neatlines)
 {
-    __v()->neatlineexhibits = $neatlines;
+    __v()->neatline_exhibits = $neatlines;
 }
 
 /**
@@ -411,7 +381,7 @@ function set_neatlines_for_loop($neatlines)
  */
 function get_neatlines_for_loop()
 {
-    return __v()->neatlineexhibits;
+    return __v()->neatline_exhibits;
 }
 
 /**
@@ -421,7 +391,9 @@ function get_neatlines_for_loop()
  */
 function loop_neatlines()
 {
-    return get_loop_records('neatlines', get_neatlines_for_loop(), 'set_current_neatline');
+    return get_loop_records(
+        'neatline_exhibits', get_neatlines_for_loop(), 'set_current_neatline'
+    );
 }
 
 /**
@@ -442,7 +414,7 @@ function has_neatlines()
 function has_neatlines_for_loop()
 {
     $view = __v();
-    return ($view->neatlineexhibits and count($view->neatlineexhibits));
+    return ($view->neatline_exhibits and count($view->neatline_exhibits));
 }
 
 /**
@@ -473,21 +445,15 @@ function link_to_neatline(
 {
 
     $neatline = $neatline ? $neatline : get_current_neatline();
-
     $text = $text ? $text : strip_formatting(neatline('title', $neatline));
 
-    if ($action == 'show') {
-        $slug = $neatline->slug;
-    } else {
-        $slug = $neatline->id;
-    }
+    if ($action == 'show') { $slug = $neatline->slug; }
+    else { $slug = $neatline->id; }
 
-    $route = 'neatline-exhibits/'.$action.'/'.$slug;
-    $uri = $public? public_url($route) : url($route);
+    $route = 'neatline-exhibits/' . $action . '/' . $slug;
+    $uri = $public ? public_url($route) : url($route);
     $props['href'] = $uri;
-    $html = '<a ' . _tag_attributes($props) . '>' . $text . '</a>';
-
-    return $html;
+    return '<a ' . _tag_attributes($props) . '>' . $text . '</a>';
 
 }
 
@@ -502,4 +468,3 @@ function total_records_for_neatline($neatline = null)
     $neatline = $neatline ? $neatline : get_current_neatline();
     return (int)$neatline->getNumberOfRecords();
 }
-
