@@ -126,7 +126,7 @@ class Neatline_IndexController extends Omeka_Controller_AbstractActionController
     public function showAction()
     {
         $neatline = $this->_findNeatline();
-        $this->view->neatlineexhibit = $neatline;
+        $this->view->neatline_exhibit = $neatline;
     }
 
     /**
@@ -137,7 +137,7 @@ class Neatline_IndexController extends Omeka_Controller_AbstractActionController
     public function fullscreenAction()
     {
         $neatline = $this->_findNeatline();
-        $this->view->neatlineexhibit = $neatline;
+        $this->view->neatline_exhibit = $neatline;
     }
 
     /**
