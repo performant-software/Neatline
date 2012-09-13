@@ -933,6 +933,47 @@ class Neatline_NeatlineDataRecordTableTest extends Neatline_Test_AppTestCase
     }
 
     /**
+     * getTimelineRecordsByExhibit() should return all data records associated
+     * with a given Neatline exhibit that are active on the timeline.
+     *
+     * @return void.
+     */
+    public function testGetTimelineRecordsByExhibit()
+    {
+
+        // Create two items and an exhibit.
+        $item1 = $this->_createItem();
+        $item2 = $this->_createItem();
+        $neatline = $this->_createNeatline();
+
+        // Create two records with inactive timeline status settings.
+        $record1 = new NeatlineDataRecord($item1, $neatline);
+        $record1->save();
+        $record2 = new NeatlineDataRecord($item2, $neatline);
+        $record2->save();
+
+        // Should return false.
+        $records = $this->_recordsTable->getMapRecordsByExhibit($neatline);
+        $this->assertFalse($records);
+
+        $record1->delete();
+        $record2->delete();
+
+        // Create two records, one with an active map status.
+        $record1 = new NeatlineDataRecord($item1, $neatline);
+        $record1->save();
+        $record2 = new NeatlineDataRecord($item2, $neatline);
+        $record2->time_active = 1;
+        $record2->save();
+
+        // Get the records and check result.
+        $records = $this->_recordsTable->getTimelineRecordsByExhibit($neatline);
+        $this->assertEquals(count($records), 1);
+        $this->assertEquals($records[0]->id, $record2->id);
+
+    }
+
+    /**
      * getItemsRecordsByExhibit() should return all data records associated
      * with a given Neatline exhibit that are active in the items viewport.
      *
