@@ -409,8 +409,8 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
     public function buildRecordsJson($exhibit)
     {
         return array(
-            'map' => $this->buidMapJson($exhibit),
-            'timeline' => $this->buidTimelineJson($exhibit),
+            'map' => $this->buildMapJson($exhibit),
+            'timeline' => $this->buildTimelineJson($exhibit),
         );
     }
 

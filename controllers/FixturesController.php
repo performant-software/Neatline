@@ -82,6 +82,7 @@ class Neatline_FixturesController extends Omeka_Controller_AbstractActionControl
         // Get records.
         $exhibit = $this->_neatlinesTable->find(1);
         $layers = $this->_layersTable->findAll();
+        set_current_neatline($exhibit);
 
         /**
          * ---------------
@@ -90,7 +91,7 @@ class Neatline_FixturesController extends Omeka_Controller_AbstractActionControl
          */
 
         echo $this->view->partial('editor/_topbar.php', array(
-            'neatline' => $exhibit,
+            'exhibit' => $exhibit,
             'layers' => $layers
         ));
 
@@ -99,8 +100,6 @@ class Neatline_FixturesController extends Omeka_Controller_AbstractActionControl
         echo $this->view->partial('neatline/_neatline.php', array(
             'exhibit' => $exhibit
         ));
-
-        echo $this->view->partial('editor/_tooltips.php');
 
     }
 
