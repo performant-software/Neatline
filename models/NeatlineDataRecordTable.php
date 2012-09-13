@@ -436,20 +436,12 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
         }
 
         // Get records.
-        if ($records = $this->getRecordsByExhibit($neatline)) {
+        if ($records = $this->getMapRecordsByExhibit($neatline)) {
 
             // Build out record index.
             $index = $this->_indexRecords($records);
             foreach ($records as $record) {
-                $layer = $record->buildMapDataArray(
-                    $index,
-                    $wmsIndex,
-                    $neatline
-                );
-                if (!is_null($layer)) {
-                    $data[] = $layer;
-                }
-
+              $data[] = $record->buildMapDataArray($index, $wmsIndex, $neatline);
             }
 
         }
