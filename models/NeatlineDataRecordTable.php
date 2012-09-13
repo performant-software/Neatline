@@ -1,4 +1,7 @@
 <?php
+
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
+
 /**
  * Table class for Neatline data records.
  *
@@ -400,34 +403,38 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
      *
      * @param Omeka_Record_AbstractRecord $exhibit The exhibit record.
      *
-     * @return JSON Array of format array('space' => array(), 'time' => array()).
+     * @return JSON Array of format:
+     * array('map' => array(), 'timeline' => array()).
      */
     public function buildRecordsJson($exhibit)
     {
-
+        return array(
+            'map' => $this->buidMapJson($exhibit),
+            'timeline' => $this->buidTimelineJson($exhibit),
+        );
     }
 
     /**
      * Construct OpenLayers JSON.
      *
-     * @param Omeka_record $neatline The exhibit record.
+     * @param Omeka_Record_AbstractRecord $exhibit The exhibit record.
      *
      * @return JSON The data.
      */
-    public function buildMapJson($neatline)
+    public function buildMapJson($exhibit)
     {
 
         $data = array();
         $wmsIndex = array();
 
         // Get records.
-        if ($records = $this->getMapRecordsByExhibit($neatline)) {
+        if ($records = $this->getMapRecordsByExhibit($exhibit)) {
 
             // Build out record index.
             $index = $this->_indexRecords($records);
             foreach ($records as $record) {
                 $data[] = $record->buildMapDataArray(
-                    $index, $wmsIndex, $neatline
+                    $index, $wmsIndex, $exhibit
                 );
             }
 
@@ -441,24 +448,25 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
     /**
      * Construct Simile JSON.
      *
-     * @param Omeka_record $neatline The exhibit record.
+     * @param Omeka_Record_AbstractRecord $exhibit The exhibit record.
      *
      * @return JSON The data.
      */
-    public function buildTimelineJson($neatline)
+    public function buildTimelineJson($exhibit)
     {
 
         // Shell array.
         $data = array(
-            'dateTimeFormat' => 'iso8601', 'events' => array()
+            'dateTimeFormat' => 'iso8601',
+            'events' => array()
         );
 
         // Get records.
-        $records = $this->getTimelineRecordsByExhibit($neatline);
+        $records = $this->getTimelineRecordsByExhibit($exhibit);
 
         if ($records) {
             foreach ($records as $record) {
-              $data['events'][] = $record->buildTimelineDataArray();
+                $data['events'][] = $record->buildTimelineDataArray();
             }
         }
 
