@@ -9,24 +9,17 @@
  */
 
 
-// constants {{{
-if (!defined('NEATLINE_PLUGIN_VERSION')) {
+if (!defined('NEATLINE_PLUGIN_VERSION'))
     define('NEATLINE_PLUGIN_VERSION', get_plugin_ini('Neatline', 'version'));
-}
 
-if (!defined('NEATLINE_PLUGIN_DIR')) {
+if (!defined('NEATLINE_PLUGIN_DIR'))
     define('NEATLINE_PLUGIN_DIR', dirname(__FILE__));
-}
-// }}}
 
-
-// requires {{{
 require_once NEATLINE_PLUGIN_DIR . '/NeatlinePlugin.php';
 require_once NEATLINE_PLUGIN_DIR . '/helpers/NeatlineFunctions.php';
 require_once NEATLINE_PLUGIN_DIR . '/helpers/NeatlineRenderer.php';
 require_once NEATLINE_PLUGIN_DIR . '/forms/NeatlineDetails.php';
 require_once HELPERS;
-// // }}}
 
 $neatline = new NeatlinePlugin();
 $neatline->setUp();

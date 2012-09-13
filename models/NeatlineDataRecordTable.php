@@ -230,7 +230,7 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
         $records = $this->fetchObjects(
             $this->getSelect()
                  ->where('exhibit_id=?', $exhibit->id)
-                 ->where('map_active=1')
+                 ->where('space_active=1')
                  ->order('display_order ASC')
         );
 
