@@ -28,10 +28,10 @@
 <div id="topbar" class="neatline-bar topbar">
 
     <img id="neatline-logo" src="<?php echo img('neatline-logo-editor.png'); ?>" />
-    <span class="top-bar-title"><?php echo $neatline->name; ?></span>
+    <span class="top-bar-title"><?php echo neatline('title'); ?></span>
 
     <?php echo $this->partial('editor/_topbar_navigation.php', array(
-        'neatline' => $neatline,
+        'exhibit' => $exhibit,
         'layers' => $layers
     )); ?>
 

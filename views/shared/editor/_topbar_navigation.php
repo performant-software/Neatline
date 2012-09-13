@@ -40,7 +40,7 @@
         <a href="" id="configure-map-button" class="dropdown-toggle"><?php echo __('Map Settings'); ?></a>
         <div id="configure-map" class="dropdown-content">
             <?php echo $this->partial('editor/_configure_map.php', array(
-                'neatline' => $neatline,
+                'neatline' => $exhibit,
                 'layers' => $layers
             )); ?>
         </div>
@@ -50,7 +50,7 @@
         <a href="" id="configure-timeline-button" class="dropdown-toggle"><?php echo __('Timeline Settings'); ?></a>
         <div id="configure-timeline" class="dropdown-content">
             <?php echo $this->partial('editor/_configure_timeline.php', array(
-              'exhibit' => $neatline
+              'exhibit' => $exhibit
             )); ?>
         </div>
     </li>

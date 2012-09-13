@@ -37,7 +37,7 @@
 
 <!-- The top bar. -->
 <?php echo $this->partial('editor/_topbar.php', array(
-    'neatline' => $neatline_exhibit,
+    'exhibit' => $neatline_exhibit,
     'layers' => $layers
 )); ?>
 
