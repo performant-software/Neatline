@@ -1,4 +1,7 @@
 <?php
+
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
+
 /**
  * Record class for exhibits.
  *
@@ -288,6 +291,19 @@ class NeatlineExhibit extends Omeka_Record_AbstractRecord
 
         return null;
 
+    }
+
+    /**
+     * Commit add/edit form data.
+     *
+     * @param array $formValues: The form values.
+     *
+     * @return void.
+     */
+    public function saveForm($formValues)
+    {
+        foreach ($formValues as $key => $value) { $this->$key = $value; }
+        $this->save();
     }
 
     /**
