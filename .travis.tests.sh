@@ -8,5 +8,5 @@ if [ -z $OMEKA_DIR ]; then
   export OMEKA_DIR=`pwd`/omeka
 fi
 
-cd tests && phpunit --debug
+cd tests && phpunit
 cd $PLUGIN_DIR && rake jasmine:ci

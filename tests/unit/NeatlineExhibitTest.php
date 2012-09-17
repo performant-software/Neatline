@@ -136,20 +136,8 @@ class Neatline_NeatlineExhibitTest extends Neatline_Test_AppTestCase
      */
     public function testSaveFormWithoutImage()
     {
-
         $neatline = $this->_createNeatline();
         $this->assertNull($neatline->image_id);
-
-    }
-
-    /**
-     * The getImage() method should return an exhibit's image record.
-     *
-     * @return void.
-     */
-    public function testGetImage()
-    {
-        // TODO: How to mock a file?
     }
 
     /**
@@ -166,6 +154,33 @@ class Neatline_NeatlineExhibitTest extends Neatline_Test_AppTestCase
         // Get the map and check.
         $retrievedImage = $exhibit->getImage();
         $this->assertNull($retrievedImage);
+
+    }
+
+    /**
+     * saveForm() should save all key=>value pairs in the form data.
+     *
+     * @return void.
+     */
+    public function testSaveForm()
+    {
+
+        // Create an exhibit and map.
+        $exhibit = $this->_createNeatline();
+
+        // Save form data.
+        $exhibit->saveForm(array(
+            'title' => 'Form Title',
+            'description' => 'Form description.',
+            'slug' => 'form-slug',
+            'public' => 1
+        ));
+
+        // Check values.
+        $this->assertEquals($exhibit->title, 'Form Title');
+        $this->assertEquals($exhibit->description, 'Form description.');
+        $this->assertEquals($exhibit->slug, 'form-slug');
+        $this->assertEquals($exhibit->public, 1);
 
     }
 
