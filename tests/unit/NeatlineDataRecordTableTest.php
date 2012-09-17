@@ -1097,6 +1097,190 @@ class Neatline_NeatlineDataRecordTableTest extends Neatline_Test_AppTestCase
     public function testBuildRecordsJson()
     {
 
+        // Create an exhibit and items.
+        $exhibit = $this->_createNeatline();
+        $item1 = $this->_createItem();
+        $item2 = $this->_createItem();
+
+        // Create two records.
+        $record1 = new NeatlineDataRecord($item1, $exhibit);
+        $record2 = new NeatlineDataRecord($item2, $exhibit);
+
+        // Map attributes.
+        $record1->title = 'Item 1 Title';
+        $record2->title = 'Item 2 Title';
+        $record1->description = 'Item 1 description.';
+        $record2->description = 'Item 2 description.';
+        $record1->show_bubble = 1;
+        $record2->show_bubble = 1;
+        $record1->slug = 'slug-1';
+        $record2->slug = 'slug-2';
+        $record1->vector_color = '#ffffff';
+        $record2->vector_color = '#000000';
+        $record1->stroke_color = '#ffffff';
+        $record2->stroke_color = '#000000';
+        $record1->highlight_color = '#ffffff';
+        $record2->highlight_color = '#000000';
+        $record1->vector_opacity = 60;
+        $record2->vector_opacity = 40;
+        $record1->select_opacity = 60;
+        $record2->select_opacity = 40;
+        $record1->stroke_opacity = 60;
+        $record2->stroke_opacity = 40;
+        $record1->graphic_opacity = 60;
+        $record2->graphic_opacity = 40;
+        $record1->stroke_width = 3;
+        $record2->stroke_width = 2;
+        $record1->point_radius = 3;
+        $record2->point_radius = 2;
+        $record1->point_image = 'http://test1.org';
+        $record2->point_image = 'http://test2.org';
+        $record1->geocoverage = 'POINT(1,0)';
+        $record2->geocoverage = 'POINT(0,1)';
+        $record1->space_active = 1;
+        $record2->space_active = 1;
+        $record1->map_bounds = 'CENTER(1)';
+        $record2->map_bounds = 'CENTER(2)';
+        $record1->map_zoom = 4;
+        $record2->map_zoom = 5;
+        $record1->start_visible_date = '1864-04-26 14:39:22';
+        $record2->start_visible_date = '1964-04-26 14:39:22';
+        $record1->end_visible_date = '1916-04-23 12:45:34';
+        $record2->end_visible_date = '2016-04-23 12:45:34';
+
+        // Timeline attributes.
+        $record1->title = 'Item 1 Title';
+        $record2->title = 'Item 2 Title';
+        $record1->description = 'Item 1 description.';
+        $record2->description = 'Item 2 description.';
+        $record1->start_date = '1564-04-26 14:39:22';
+        $record2->start_date = '1565-04-26 14:39:22';
+        $record1->end_date = '1616-04-23 12:45:34';
+        $record2->end_date = '1617-04-23 12:45:34';
+        $record1->vector_color = '#ffffff';
+        $record2->vector_color = '#000000';
+        $record1->left_percent = 0;
+        $record2->left_percent = 20;
+        $record1->right_percent = 100;
+        $record2->right_percent = 80;
+        $record1->time_active = 1;
+        $record2->time_active = 1;
+        $record1->show_bubble = 0;
+        $record2->time_active = 1;
+
+        // Save.
+        $record1->save();
+        $record2->save();
+
+        // Build the record array.
+        $records = $this->_recordsTable->buildRecordsJson($exhibit);
+
+        // Check result.
+        $this->assertEquals(
+            $records,
+            array(
+                'map' => array(
+                    array(
+                        'id' => $record1->id,
+                        'item_id' => $item1->id,
+                        'title' => 'Item 1 Title',
+                        'description' => 'Item 1 description.',
+                        'slug' => 'slug-1',
+                        'vector_color' => '#ffffff',
+                        'stroke_color' => '#ffffff',
+                        'highlight_color' => '#ffffff',
+                        'vector_opacity' => 60,
+                        'select_opacity' => 60,
+                        'stroke_opacity' => 60,
+                        'graphic_opacity' => 60,
+                        'stroke_width' => 3,
+                        'point_radius' => 3,
+                        'point_image' => 'http://test1.org',
+                        'center' => 'CENTER(1)',
+                        'zoom' => 4,
+                        'wkt' => 'POINT(1,0)',
+                        'start_visible_date' => '1864-04-26 14:39:22',
+                        'end_visible_date' => '1916-04-23 12:45:34',
+                        'show_bubble' => 1,
+                        'wmsAddress' => null,
+                        'layers' => null,
+                        '_native_styles' => array(
+                            'vector_color' => '#ffffff',
+                            'vector_opacity' => 60,
+                            'stroke_color' => '#ffffff',
+                            'stroke_opacity' => 60,
+                            'stroke_width' => 3,
+                            'graphic_opacity' => 60,
+                            'point_radius' => 3
+                        )
+                    ),
+                    array(
+                        'id' => $record2->id,
+                        'item_id' => $item2->id,
+                        'title' => 'Item 2 Title',
+                        'description' => 'Item 2 description.',
+                        'slug' => 'slug-2',
+                        'vector_color' => '#000000',
+                        'stroke_color' => '#000000',
+                        'highlight_color' => '#000000',
+                        'vector_opacity' => 40,
+                        'select_opacity' => 40,
+                        'stroke_opacity' => 40,
+                        'graphic_opacity' => 40,
+                        'stroke_width' => 2,
+                        'point_radius' => 2,
+                        'point_image' => 'http://test2.org',
+                        'center' => 'CENTER(2)',
+                        'zoom' => 5,
+                        'wkt' => 'POINT(0,1)',
+                        'start_visible_date' => '1964-04-26 14:39:22',
+                        'end_visible_date' => '2016-04-23 12:45:34',
+                        'show_bubble' => 1,
+                        'wmsAddress' => null,
+                        'layers' => null,
+                        '_native_styles' => array(
+                            'vector_color' => '#000000',
+                            'vector_opacity' => 40,
+                            'stroke_color' => '#000000',
+                            'stroke_opacity' => 40,
+                            'stroke_width' => 2,
+                            'graphic_opacity' => 40,
+                            'point_radius' => 2
+                        )
+                    )
+                ),
+                'timeline' => array(
+                    'dateTimeFormat' => 'iso8601',
+                    'events' => array(
+                        array(
+                            'eventID' => $record1->id,
+                            'title' => 'Item 1 Title',
+                            'description' => 'Item 1 description.',
+                            'color' => '#ffffff',
+                            'left_ambiguity' => 0,
+                            'right_ambiguity' => 100,
+                            'show_bubble' => 0,
+                            'textColor' => '#000000',
+                            'start' => '1564-04-26 14:39:22',
+                            'end' => '1616-04-23 12:45:34'
+                        ),
+                        array(
+                            'eventID' => $record2->id,
+                            'title' => 'Item 2 Title',
+                            'description' => 'Item 2 description.',
+                            'color' => '#000000',
+                            'left_ambiguity' => 20,
+                            'right_ambiguity' => 80,
+                            'show_bubble' => 1,
+                            'textColor' => '#000000',
+                            'start' => '1565-04-26 14:39:22',
+                            'end' => '1617-04-23 12:45:34'
+                        )
+                    )
+                )
+            )
+        );
+
     }
 
     /**
@@ -1162,12 +1346,12 @@ class Neatline_NeatlineDataRecordTableTest extends Neatline_Test_AppTestCase
         $record2->save();
 
         // Build the JSON.
-        $json = json_decode($this->_recordsTable->buildMapJson($neatline));
+        $json = $this->_recordsTable->buildMapJson($neatline);
 
         $this->assertEquals(
             $json,
             array(
-                (object) array(
+                array(
                     'id' => $record1->id,
                     'item_id' => $item1->id,
                     'title' => 'Item 1 Title',
@@ -1191,7 +1375,7 @@ class Neatline_NeatlineDataRecordTableTest extends Neatline_Test_AppTestCase
                     'show_bubble' => 1,
                     'wmsAddress' => null,
                     'layers' => null,
-                    '_native_styles' => (object) array(
+                    '_native_styles' => array(
                         'vector_color' => '#ffffff',
                         'vector_opacity' => 60,
                         'stroke_color' => '#ffffff',
@@ -1201,7 +1385,7 @@ class Neatline_NeatlineDataRecordTableTest extends Neatline_Test_AppTestCase
                         'point_radius' => 3
                     )
                 ),
-                (object) array(
+                array(
                     'id' => $record2->id,
                     'item_id' => $item2->id,
                     'title' => 'Item 2 Title',
@@ -1225,7 +1409,7 @@ class Neatline_NeatlineDataRecordTableTest extends Neatline_Test_AppTestCase
                     'show_bubble' => 1,
                     'wmsAddress' => null,
                     'layers' => null,
-                    '_native_styles' => (object) array(
+                    '_native_styles' => array(
                         'vector_color' => '#000000',
                         'vector_opacity' => 40,
                         'stroke_color' => '#000000',
@@ -1269,7 +1453,7 @@ class Neatline_NeatlineDataRecordTableTest extends Neatline_Test_AppTestCase
         $record2->save();
 
         // Build the JSON.
-        $json = json_decode($this->_recordsTable->buildMapJson($neatline));
+        $json = $this->_recordsTable->buildMapJson($neatline);
         $this->assertNull($json[0]->zoom);
         $this->assertNull($json[0]->center);
         $this->assertNull($json[1]->zoom);
@@ -1304,10 +1488,7 @@ class Neatline_NeatlineDataRecordTableTest extends Neatline_Test_AppTestCase
         $json = $this->_recordsTable->buildMapJson($neatline);
 
         // Check format.
-        $this->assertEquals(
-            $json,
-            '[]'
-        );
+        $this->assertEquals($json, array());
 
     }
 
@@ -1327,10 +1508,7 @@ class Neatline_NeatlineDataRecordTableTest extends Neatline_Test_AppTestCase
         $json = $this->_recordsTable->buildMapJson($neatline);
 
         // Check format.
-        $this->assertEquals(
-            $json,
-            '[]'
-        );
+        $this->assertEquals($json, array());
 
     }
 
@@ -1352,7 +1530,7 @@ class Neatline_NeatlineDataRecordTableTest extends Neatline_Test_AppTestCase
         $record1 = new NeatlineDataRecord($item1, $neatline);
         $record2 = new NeatlineDataRecord($item2, $neatline);
 
-        // Populate map-relevant attributes.
+        // Populate timeline attributes.
         $record1->title = 'Item 1 Title';
         $record2->title = 'Item 2 Title';
         $record1->description = 'Item 1 description.';
@@ -1375,14 +1553,14 @@ class Neatline_NeatlineDataRecordTableTest extends Neatline_Test_AppTestCase
         $record2->save();
 
         // Build the JSON.
-        $json = json_decode($this->_recordsTable->buildTimelineJson($neatline));
+        $json = $this->_recordsTable->buildTimelineJson($neatline);
 
         $this->assertEquals(
             $json,
-            (object) array(
+            array(
                 'dateTimeFormat' => 'iso8601',
                 'events' => array(
-                    (object) array(
+                    array(
                         'eventID' => $record1->id,
                         'title' => 'Item 1 Title',
                         'description' => 'Item 1 description.',
@@ -1394,7 +1572,7 @@ class Neatline_NeatlineDataRecordTableTest extends Neatline_Test_AppTestCase
                         'start' => '1564-04-26 14:39:22',
                         'end' => '1616-04-23 12:45:34'
                     ),
-                    (object) array(
+                    array(
                         'eventID' => $record2->id,
                         'title' => 'Item 2 Title',
                         'description' => 'Item 2 description.',
@@ -1443,8 +1621,10 @@ class Neatline_NeatlineDataRecordTableTest extends Neatline_Test_AppTestCase
         $json = $this->_recordsTable->buildTimelineJson($neatline);
 
         // Check format.
-        $this->assertContains('"dateTimeFormat":"iso8601"', $json);
-        $this->assertContains('"events":[]', $json);
+        $this->assertEquals($json, array(
+            'dateTimeFormat' => 'iso8601',
+            'events' => array()
+        ));
 
     }
 
