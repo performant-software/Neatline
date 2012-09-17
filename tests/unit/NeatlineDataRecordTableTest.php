@@ -1089,6 +1089,17 @@ class Neatline_NeatlineDataRecordTableTest extends Neatline_Test_AppTestCase
     }
 
     /**
+     * The buildRecordsJson() method should construct well-formed JSON string
+     * with the map and timeline records.
+     *
+     * @return void.
+     */
+    public function testBuildRecordsJson()
+    {
+
+    }
+
+    /**
      * The buildMapJson() method should construct well-formed JSON string with
      * the correct attributes and geocoverage fields populated for each record.
      *
@@ -1347,122 +1358,56 @@ class Neatline_NeatlineDataRecordTableTest extends Neatline_Test_AppTestCase
         $record1->description = 'Item 1 description.';
         $record2->description = 'Item 2 description.';
         $record1->start_date = '1564-04-26 14:39:22';
-        $record2->start_date = '1564-04-26 14:39:22';
+        $record2->start_date = '1565-04-26 14:39:22';
         $record1->end_date = '1616-04-23 12:45:34';
-        $record2->end_date = '1616-04-23 12:45:34';
+        $record2->end_date = '1617-04-23 12:45:34';
         $record1->vector_color = '#ffffff';
         $record2->vector_color = '#000000';
         $record1->left_percent = 0;
-        $record2->left_percent = 0;
+        $record2->left_percent = 20;
         $record1->right_percent = 100;
-        $record1->right_percent = 100;
+        $record2->right_percent = 80;
         $record1->time_active = 1;
+        $record2->time_active = 1;
+        $record1->show_bubble = 0;
         $record2->time_active = 1;
         $record1->save();
         $record2->save();
 
         // Build the JSON.
-        $json = $this->_recordsTable->buildTimelineJson($neatline);
+        $json = json_decode($this->_recordsTable->buildTimelineJson($neatline));
 
-        // Check format.
-        $this->assertContains(
-            '"dateTimeFormat":"iso8601"',
-            $json
-        );
-
-        $this->assertContains(
-            '"events":',
-            $json
-        );
-
-        $this->assertContains(
-            '"eventID":' . $record1->id,
-            $json
-        );
-
-        $this->assertContains(
-            '"title":"' . $record1->title . '"',
-            $json
-        );
-
-        $this->assertContains(
-            '"description":"' . $record1->description . '"',
-            $json
-        );
-
-        $this->assertContains(
-            '"color":"' . $record1->vector_color . '"',
-            $json
-        );
-
-        $this->assertContains(
-            '"left_ambiguity":' . $record1->left_percent,
-            $json
-        );
-
-        $this->assertContains(
-            '"right_ambiguity":' . $record1->right_percent,
-            $json
-        );
-
-        $this->assertContains(
-            '"start":"1564-04-26 14:39:22"',
-            $json
-        );
-
-        $this->assertContains(
-            '"end":"1616-04-23 12:45:34"',
-            $json
-        );
-
-        $this->assertContains(
-            '"dateTimeFormat":"iso8601"',
-            $json
-        );
-
-        $this->assertContains(
-            '"events":',
-            $json
-        );
-
-        $this->assertContains(
-            '"eventID":' . $record2->id,
-            $json
-        );
-
-        $this->assertContains(
-            '"title":"' . $record2->title . '"',
-            $json
-        );
-
-        $this->assertContains(
-            '"description":"' . $record2->description . '"',
-            $json
-        );
-
-        $this->assertContains(
-            '"color":"' . $record2->vector_color . '"',
-            $json
-        );
-
-        $this->assertContains(
-            '"left_ambiguity":' . $record2->left_percent,
-            $json
-        );
-
-        $this->assertContains(
-            '"right_ambiguity":' . $record2->right_percent,
-            $json
-        );
-
-        $this->assertContains(
-            '"start":"1564-04-26 14:39:22"',
-            $json
-        );
-
-        $this->assertContains(
-            '"end":"1616-04-23 12:45:34"',
-            $json
+        $this->assertEquals(
+            $json,
+            (object) array(
+                'dateTimeFormat' => 'iso8601',
+                'events' => array(
+                    (object) array(
+                        'eventID' => $record1->id,
+                        'title' => 'Item 1 Title',
+                        'description' => 'Item 1 description.',
+                        'color' => '#ffffff',
+                        'left_ambiguity' => 0,
+                        'right_ambiguity' => 100,
+                        'show_bubble' => 0,
+                        'textColor' => '#000000',
+                        'start' => '1564-04-26 14:39:22',
+                        'end' => '1616-04-23 12:45:34'
+                    ),
+                    (object) array(
+                        'eventID' => $record2->id,
+                        'title' => 'Item 2 Title',
+                        'description' => 'Item 2 description.',
+                        'color' => '#000000',
+                        'left_ambiguity' => 20,
+                        'right_ambiguity' => 80,
+                        'show_bubble' => 1,
+                        'textColor' => '#000000',
+                        'start' => '1565-04-26 14:39:22',
+                        'end' => '1617-04-23 12:45:34'
+                    )
+                )
+            )
         );
 
     }
