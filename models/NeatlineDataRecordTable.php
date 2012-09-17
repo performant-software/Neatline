@@ -440,8 +440,7 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
 
         }
 
-        // JSON-ify the array.
-        return json_encode($data);
+        return $data;
 
     }
 
@@ -470,8 +469,7 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
             }
         }
 
-        // JSON-ify the array.
-        return json_encode($data);
+        return $data;
 
     }
 
@@ -505,8 +503,7 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
 
         }
 
-        // JSON-ify the array.
-        return json_encode($data);
+        return $data;
 
     }
 
