@@ -1111,8 +1111,6 @@ class Neatline_NeatlineDataRecordTableTest extends Neatline_Test_AppTestCase
         $record2->title = 'Item 2 Title';
         $record1->description = 'Item 1 description.';
         $record2->description = 'Item 2 description.';
-        $record1->show_bubble = 1;
-        $record2->show_bubble = 1;
         $record1->slug = 'slug-1';
         $record2->slug = 'slug-2';
         $record1->vector_color = '#ffffff';
@@ -1166,7 +1164,7 @@ class Neatline_NeatlineDataRecordTableTest extends Neatline_Test_AppTestCase
         $record1->time_active = 1;
         $record2->time_active = 1;
         $record1->show_bubble = 0;
-        $record2->time_active = 1;
+        $record2->show_bubble = 1;
 
         // Save.
         $record1->save();
@@ -1201,7 +1199,7 @@ class Neatline_NeatlineDataRecordTableTest extends Neatline_Test_AppTestCase
                         'wkt' => 'POINT(1,0)',
                         'start_visible_date' => '1864-04-26 14:39:22',
                         'end_visible_date' => '1916-04-23 12:45:34',
-                        'show_bubble' => 1,
+                        'show_bubble' => 0,
                         'wmsAddress' => null,
                         'layers' => null,
                         '_native_styles' => array(
@@ -1452,12 +1450,12 @@ class Neatline_NeatlineDataRecordTableTest extends Neatline_Test_AppTestCase
         $record1->save();
         $record2->save();
 
-        // Build the JSON.
-        $json = $this->_recordsTable->buildMapJson($neatline);
-        $this->assertNull($json[0]->zoom);
-        $this->assertNull($json[0]->center);
-        $this->assertNull($json[1]->zoom);
-        $this->assertNull($json[1]->center);
+        // Build the array.
+        $records = $this->_recordsTable->buildMapJson($neatline);
+        $this->assertNull($records[0]['zoom']);
+        $this->assertNull($records[0]['center']);
+        $this->assertNull($records[1]['zoom']);
+        $this->assertNull($records[1]['center']);
 
     }
 
@@ -1548,7 +1546,7 @@ class Neatline_NeatlineDataRecordTableTest extends Neatline_Test_AppTestCase
         $record1->time_active = 1;
         $record2->time_active = 1;
         $record1->show_bubble = 0;
-        $record2->time_active = 1;
+        $record2->show_bubble = 1;
         $record1->save();
         $record2->save();
 
@@ -1657,13 +1655,9 @@ class Neatline_NeatlineDataRecordTableTest extends Neatline_Test_AppTestCase
         $record->time_active = 1;
         $record->save();
 
-        // Build the JSON.
-        $json = $this->_recordsTable->buildTimelineJson($neatline);
-
-        $this->assertContains(
-            '"color":"#ffffff"',
-            $json
-        );
+        // Build the records.
+        $records = $this->_recordsTable->buildTimelineJson($neatline);
+        $this->assertEquals($records['events'][0]['color'], '#ffffff');
 
     }
 
@@ -1692,12 +1686,11 @@ class Neatline_NeatlineDataRecordTableTest extends Neatline_Test_AppTestCase
         $record->time_active = 1;
         $record->save();
 
-        // Build the JSON.
-        $json = $this->_recordsTable->buildTimelineJson($neatline);
-
-        $this->assertContains(
-            '"color":"' . get_plugin_ini('Neatline', 'vector_color') . '"',
-            $json
+        // Build the records.
+        $records = $this->_recordsTable->buildTimelineJson($neatline);
+        $this->assertEquals(
+            $records['events'][0]['color'],
+            get_plugin_ini('Neatline', 'vector_color')
         );
 
     }
@@ -1714,12 +1707,14 @@ class Neatline_NeatlineDataRecordTableTest extends Neatline_Test_AppTestCase
         // Create an exhibit.
         $neatline = $this->_createNeatline();
 
-        // Build the JSON.
-        $json = $this->_recordsTable->buildTimelineJson($neatline);
+        // Build the records.
+        $records = $this->_recordsTable->buildTimelineJson($neatline);
 
         // Check format.
-        $this->assertContains('"dateTimeFormat":"iso8601"', $json);
-        $this->assertContains('"events":[]', $json);
+        $this->assertEquals($records, array(
+            'dateTimeFormat' => 'iso8601',
+            'events' => array()
+        ));
 
     }
 
@@ -1754,24 +1749,11 @@ class Neatline_NeatlineDataRecordTableTest extends Neatline_Test_AppTestCase
         $record->time_active = 1;
         $record->save();
 
-        // Build the JSON.
-        $json = $this->_recordsTable->buildTimelineJson($exhibit);
-
-        $this->assertContains(
-            '"title":"Test Title"',
-            $json
-        );
-
-        $this->assertContains(
-            '"start":"1564-04-26 14:39:22"',
-            $json
-        );
-
-        $this->assertContains(
-            '"end":"1616-04-23 12:45:34"',
-            $json
-        );
-
+        // Build the records.
+        $records = $this->_recordsTable->buildTimelineJson($exhibit);
+        $this->assertEquals($records['events'][0]['title'], 'Test Title');
+        $this->assertEquals($records['events'][0]['start'], '1564-04-26 14:39:22');
+        $this->assertEquals($records['events'][0]['end'], '1616-04-23 12:45:34');
 
     }
 
@@ -1809,13 +1791,13 @@ class Neatline_NeatlineDataRecordTableTest extends Neatline_Test_AppTestCase
         $record1->save();
         $record2->save();
 
-        // Build the JSON.
-        $json = json_decode($this->_recordsTable->buildItemsJson($neatline));
+        // Build the records.
+        $records = $this->_recordsTable->buildItemsJson($neatline);
 
         $this->assertEquals(
-            $json,
+            $records,
             array(
-                (object) array(
+                array(
                     'id' => $record1->id,
                     'title' => 'Item 1 Title',
                     'slug' => 'slug-1',
@@ -1823,7 +1805,7 @@ class Neatline_NeatlineDataRecordTableTest extends Neatline_Test_AppTestCase
                     'start_visible_date' => '1864-04-26 14:39:22',
                     'end_visible_date' => '1916-04-23 12:45:34'
                 ),
-                (object) array(
+                array(
                     'id' => $record2->id,
                     'title' => 'Item 2 Title',
                     'slug' => 'slug-2',
