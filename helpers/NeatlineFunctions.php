@@ -151,8 +151,8 @@ function neatline_queueNeatlineAssets($exhibit)
     queue_js('libraries/openlayers/OpenLayers.min', 'javascripts');
     queue_js('libraries/tile.stamen', 'javascripts');
     queue_js('libraries/simile/timeline-api/timeline-api', 'javascripts');
-    queue_js('libraries/taffy-min', 'javascripts');
-    queue_js('libraries/underscore-min', 'javascripts');
+    queue_js('libraries/taffy.min', 'javascripts');
+    queue_js('libraries/underscore.min', 'javascripts');
     queue_js('libraries/moment.min', 'javascripts');
     queue_js('libraries/iso8601.min', 'javascripts');
     queue_js('libraries/raphael', 'javascripts');
