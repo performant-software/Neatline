@@ -8,3 +8,4 @@ build/pdepend/
 build/tmp/
 spec/javascripts/fixtures/
 views/shared/css/exhibits/
+node_modules/
