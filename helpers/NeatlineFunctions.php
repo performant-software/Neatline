@@ -61,8 +61,7 @@ function neatline_queueEditorAssets()
     queue_js('editor/_constructEditor', 'javascripts');
 
     // Extenal libraries.
-    queue_js('libraries/jquery.miniColors-0.1/jquery.miniColors.min', 'javascripts');
-    queue_js('libraries/CLEditor-1.3.0/jquery.cleditor.min', 'javascripts');
+    queue_js('libraries/miniColors/jquery.miniColors.min', 'javascripts');
     queue_js('libraries/redactor/redactor/redactor.min', 'javascripts');
     queue_js('libraries/bootstrap.min', 'javascripts');
 
@@ -130,13 +129,32 @@ function neatline_queueEmbedAssets()
 function neatline_queueNeatlineAssets($exhibit)
 {
 
+    // Core Neatline stylesheet.
     queue_css('neatline');
     queue_css('neatline-timeline');
     queue_css('neatline-jquery-ui');
     neatline_queueExhibitCss($exhibit);
 
-    queue_js('neatline', 'javascripts/payloads');
+    // Application classes.
+    queue_js('neatline', 'javascripts');
+    queue_js('neatline_map', 'javascripts');
+    queue_js('neatline_timeline', 'javascripts');
+    queue_js('neatline_items', 'javascripts');
+    queue_js('positioner', 'javascripts/utilities');
+    queue_js('bubbles', 'javascripts/utilities');
+    queue_js('span_styler', 'javascripts/utilities');
+    queue_js('utilities', 'javascripts/libraries');
+    queue_js('jquery.getscrollbarwidth', 'javascripts/libraries');
+
+    // Vendor.
+    queue_js('libraries/openlayers/OpenLayers.min', 'javascripts');
+    queue_js('libraries/tile.stamen', 'javascripts');
     queue_js('libraries/simile/timeline-api/timeline-api', 'javascripts');
+    queue_js('libraries/taffy.min', 'javascripts');
+    queue_js('libraries/underscore.min', 'javascripts');
+    queue_js('libraries/moment.min', 'javascripts');
+    queue_js('libraries/iso8601.min', 'javascripts');
+    queue_js('libraries/raphael', 'javascripts');
 
 }
 

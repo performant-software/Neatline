@@ -4,18 +4,18 @@
 
 module.exports = function(grunt) {
 
-  // File prefixes.
-  var app = 'views/shared/javascripts/';
-  var util = 'views/shared/javascripts/utilities/';
-  var lib = 'views/shared/javascripts/libraries/';
-  var build = 'views/shared/javascripts/payloads/';
-  var edit = 'views/shared/javascripts/editor/';
+  var app =     'views/shared/javascripts/';
+  var util =    'views/shared/javascripts/utilities/';
+  var lib =     'views/shared/javascripts/libraries/';
+  var build =   'views/shared/javascripts/payloads/';
+  var edit =    'views/shared/javascripts/editor/';
+  var eutil =   edit+'utilities/';
 
   grunt.initConfig({
 
     concat: {
 
-      'public': {
+      neatline: {
         src: [
           lib+'utilities.js',
           lib+'jquery.getscrollbarwidth.js',
@@ -40,31 +40,49 @@ module.exports = function(grunt) {
 
       editor: {
         src: [
-          
+          edit+'item_browser.js',
+          edit+'item_form.js',
+          edit+'edit_geometry.js',
+          edit+'layout_builder.js',
+          edit+'items_editor.js',
+          edit+'map_editor.js',
+          edit+'configure_layout.js',
+          edit+'configure_map.js',
+          edit+'configure_timeline.js',
+          edit+'configure_items.js',
+          eutil+'_toggle_button.js',
+          eutil+'_gradient_builder.js',
+          eutil+'_dropdown.js',
+          eutil+'_integer_dragger.js',
+          edit+'_constructEditor.js',
+          lib+'minicolors/jquery.miniColors.min.js',
+          lib+'redactor/redactor/redactor.min.js',
+          lib+'bootstrap.min.js'
         ],
-        dest: ''
+        dest: build+'editor.js'
       }
 
     },
 
     min: {
 
-      'public': {
-        src: ['<config:concat.public.src>'],
+      neatline: {
+        src: ['<config:concat.neatline.src>'],
         dest: build+'neatline.js',
         separator: ';'
       },
 
       editor: {
-        src: [],
-        dest: ''
+        src: ['<config:concat.editor.src>'],
+        dest: build+'editor.js',
+        separator: ';'
       }
 
     },
 
     watch: {
-      'public': {
-        files: ['<config:concat.public.src>'],
+      neatline: {
+        files: ['<config:concat.neatline.src>'],
         tasks: ['concat:poem']
       },
       editor: {
