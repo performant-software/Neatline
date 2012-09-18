@@ -9,6 +9,7 @@ module.exports = function(grunt) {
   var util = 'views/shared/javascripts/utilities/';
   var lib = 'views/shared/javascripts/libraries/';
   var build = 'views/shared/javascripts/payloads/';
+  var edit = 'views/shared/javascripts/editor/';
 
   grunt.initConfig({
 
@@ -18,7 +19,7 @@ module.exports = function(grunt) {
         src: [
           lib+'utilities.js',
           lib+'jquery.getscrollbarwidth.js',
-          lib+'openlayers/Openlayers.min.js',
+          lib+'openlayers/OpenLayers.min.js',
           lib+'tile.stamen.js',
           lib+'simile/timeline-api/timeline-api.js',
           lib+'taffy.min.js',
@@ -38,7 +39,9 @@ module.exports = function(grunt) {
       },
 
       editor: {
-        src: [],
+        src: [
+          
+        ],
         dest: ''
       }
 
@@ -48,7 +51,8 @@ module.exports = function(grunt) {
 
       'public': {
         src: ['<config:concat.public.src>'],
-        dest: build+'neatline.js'
+        dest: build+'neatline.js',
+        separator: ';'
       },
 
       editor: {
