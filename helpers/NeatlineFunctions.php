@@ -92,7 +92,7 @@ function neatline_queuePublicAssets()
 {
     queue_js('_constructInThemeNeatline', 'javascripts');
     queue_css('neatline-public');
-    $google = 'http://maps.google.com/maps/api/js?v=3.5&sensor=false';
+    $google = 'http://maps.google.com/maps/api/js?v=3.8&sensor=false';
 
     // API calls.
     $headScript = __v()->headScript();
