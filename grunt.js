@@ -16,14 +16,7 @@ module.exports = function(grunt) {
 
       'public': {
         src: [
-          app+'neatline.js',
-          app+'neatline_map.js',
-          app+'neatline_timeline.js',
-          app+'neatline_items.js',
-          util+'positioner.js',
-          util+'bubbles.js',
-          util+'span_styler.js',
-          lib+'_utilities.js',
+          lib+'utilities.js',
           lib+'jquery.getscrollbarwidth.js',
           lib+'openlayers/Openlayers.min.js',
           lib+'tile.stamen.js',
@@ -32,7 +25,14 @@ module.exports = function(grunt) {
           lib+'underscore.min.js',
           lib+'moment.min.js',
           lib+'iso8601.min.js',
-          lib+'raphael.js'
+          lib+'raphael.js',
+          app+'neatline.js',
+          app+'neatline_map.js',
+          app+'neatline_timeline.js',
+          app+'neatline_items.js',
+          util+'positioner.js',
+          util+'bubbles.js',
+          util+'span_styler.js'
         ],
         dest: build+'neatline.js'
       },

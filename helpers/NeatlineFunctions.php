@@ -130,19 +130,11 @@ function neatline_queueEmbedAssets()
 function neatline_queueNeatlineAssets($exhibit)
 {
 
-    // Core Neatline stylesheet.
     queue_css('neatline');
     queue_css('neatline-timeline');
     queue_css('neatline-jquery-ui');
     neatline_queueExhibitCss($exhibit);
-
-    // Application classes.
     queue_js('neatline', 'javascripts/payloads');
-
-    // Google fonts. Use prependStylesheet so it gets inserted before other
-    // queued Neatline CSS files.
-    $headLink = __v()->headLink();
-    $headLink->prependStylesheet('http://fonts.googleapis.com/css?family=Crimson+Text:400,400italic,600,600italic,700,700italic');
 
 }
 

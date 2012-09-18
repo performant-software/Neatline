@@ -26,10 +26,6 @@
  */
 ?>
 
-<?php
-    neatline_queueExhibitCss($neatline_exhibit);
-?>
-
 <?php echo $this->partial('editor/_editor_header.php', array(
     'exhibit' => $neatline_exhibit,
     'title' => __('Neatline Editor: %s', $neatline_exhibit->title)
