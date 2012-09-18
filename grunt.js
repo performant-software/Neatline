@@ -34,7 +34,7 @@ module.exports = function(grunt) {
           lib+'iso8601.min.js',
           lib+'raphael.js'
         ],
-        dest: build+'public.js'
+        dest: build+'neatline.js'
       },
 
       editor: {
@@ -48,7 +48,7 @@ module.exports = function(grunt) {
 
       'public': {
         src: ['<config:concat.public.src>'],
-        dest: build+'public.js'
+        dest: build+'neatline.js'
       },
 
       editor: {
