@@ -42,6 +42,7 @@
             <div class="control-group">
                 <label for="title"><?php echo __('Title'); ?></label>
                 <div class="controls">
+                    <?php echo $this->partial('editor/_rte_toolbar.php', array('id' => 'title-toolbar')); ?>
                     <textarea id="item-title" class="xlarge" name="title" placeholder="<?php echo __('Title'); ?>" rows="6"></textarea>
                 </div>
             </div>
@@ -49,6 +50,7 @@
             <div class="control-group">
                 <label for="description"><?php echo __('Description'); ?></label>
                 <div class="controls">
+                    <?php echo $this->partial('editor/_rte_toolbar.php', array('id' => 'description-toolbar')); ?>
                     <textarea id="item-description" class="xlarge" name="description" placeholder="<?php echo __('Description'); ?>" rows="12"></textarea>
                 </div>
             </div>

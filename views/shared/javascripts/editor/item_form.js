@@ -352,16 +352,28 @@
          * Instantiate the editors on title and description.
          */
         _buildEditors: function() {
-            this.title.redactor({ buttons: this.options.redactor, focus: false });
-            this.description.redactor({ buttons: this.options.redactor, focus: false });
+
+            // Title.
+            this.titleEditor = new wysihtml5.Editor('item-title', {
+                toolbar: 'title-toolbar',
+                parserRules: wysihtml5ParserRules
+            });
+
+            // Description.
+            this.descriptionEditor = new wysihtml5.Editor('item-description', {
+                toolbar: 'description-toolbar',
+                parserRules: wysihtml5ParserRules
+            });
+
         },
 
         /*
          * Destroy editors on title and description.
          */
         _destroyEditors: function() {
-            this.title.destroyEditor();
-            this.description.destroyEditor();
+            $('iframe.wysihtml5-sandbox').remove();
+            this.title.show();
+            this.description.show();
         },
 
 
@@ -680,17 +692,13 @@
             var useDc = Boolean(parseInt(this._data.use_dc_metadata, 10));
             var showBubble = Boolean(parseInt(this._data.show_bubble, 10));
 
-            // Update title.
-            this.title.setCode(this._data.title);
-
-            // Update description.
-            this.description.setCode(this._data.description);
-
             // If use-DC is activated, disable text editors.
-            if (useDc) this._disableTextEditors();
-            else this._enableTextEditors();
+            // if (useDc) this._disableTextEditors();
+            // else this._enableTextEditors();
 
             // Populate inputs.
+            this.titleEditor.setValue(this._data.title);
+            this.descriptionEditor.setValue(this._data.description);
             this.slug.val(this._data.slug);
             this.useDcData.prop('checked', useDc);
             this.showBubble.prop('checked', showBubble);
@@ -754,12 +762,10 @@
 
             var data = {};
 
-            // Get the content of the text editors.
-            data.description =              this.description.getCode();
-            data.title =                    this.title.getCode();
-            data.slug =                     this.slug.val();
-
             // Get the form field data.
+            data.description =              this.descriptionEditor.getValue();
+            data.title =                    this.titleEditor.getValue();
+            data.slug =                     this.slug.val();
             data.use_dc_metadata =          this.useDcData.is(':checked') ? 1 : 0;
             data.show_bubble =              this.showBubble.is(':checked') ? 1 : 0;
             data.left_percent =             parseInt(this.leftPercent.val(), 10);
