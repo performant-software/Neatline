@@ -25,7 +25,7 @@
     $.widget('neatline.neatlinetimeline', {
 
         /*
-         * .
+         * Get components, initialize trackers.
          */
         _create: function() {
 
@@ -35,7 +35,7 @@
             this.zoomIn =                   this.zoomContainer.find('.zoom-in');
             this.zoomOut =                  this.zoomContainer.find('.zoom-out');
 
-            // Tracker2.
+            // Trackers.
             this._idToTapeElements = {};
             this._zoomSteps = this.getZoomIndexArray();
             this._currentZoomStep = Neatline.timelineZoom;

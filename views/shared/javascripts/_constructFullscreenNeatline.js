@@ -22,6 +22,9 @@
 jQuery(document).ready(function($) {
 
 
+    // Disable Simile history.
+    SimileAjax.History.enabled = false;
+
     // Get markup.
     var neatlineContainer = $('.neatline-container');
 
