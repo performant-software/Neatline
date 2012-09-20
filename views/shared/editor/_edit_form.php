@@ -230,7 +230,7 @@
             <div class="control-group">
                 <div class="controls">
                     <div class="inline-inputs">
-                        <button class="btn icon undo reset-styles"><?php echo __('Reset Item Styles'); ?></button>
+                        <button class="btn icon undo reset-styles"><i class="icon-refresh"></i> <?php echo __('Reset Item Styles'); ?></button>
                     </div>
                 </div>
             </div>
