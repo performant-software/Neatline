@@ -25,7 +25,6 @@
  */
 
 require_once dirname(__FILE__) . '/../NeatlinePlugin.php';
-require_once dirname(__FILE__) . '/../../NeatlineMaps/NeatlineMapsPlugin.php';
 
 if (!defined('NEATLINE_PLUGIN_DIR')) {
     define('NEATLINE_PLUGIN_DIR', './..');
@@ -49,12 +48,6 @@ class Neatline_Test_AppTestCase extends Omeka_Test_AppTestCase
         $this->user = $this->db->getTable('User')->find(1);
         $this->_authenticateUser($this->user);
 
-        // Set up Neatline Maps.
-        $neatline_maps_plugin_broker = get_plugin_broker();
-        $this->_addNeatlineMapsPluginHooksAndFilters($neatline_maps_plugin_broker, 'NeatlineMaps');
-        $neatline_maps_plugin_helper = new Omeka_Test_Helper_Plugin;
-        $neatline_maps_plugin_helper->setUp('NeatlineMaps');
-
         // Set up Neatline.
         $neatline_plugin_broker = get_plugin_broker();
         $this->_addNeatlinePluginHooksAndFilters($neatline_plugin_broker, 'Neatline');
@@ -63,17 +56,6 @@ class Neatline_Test_AppTestCase extends Omeka_Test_AppTestCase
 
         $this->_dbHelper = Omeka_Test_Helper_Db::factory($this->core);
 
-    }
-
-    /**
-     * Install Neatline Maps.
-     *
-     * @return void.
-     */
-    public function _addNeatlineMapsPluginHooksAndFilters($plugin_broker, $plugin_name)
-    {
-        $plugin_broker->setCurrentPluginDirName($plugin_name);
-        new NeatlineMapsPlugin;
     }
 
     /**
@@ -132,32 +114,9 @@ class Neatline_Test_AppTestCase extends Omeka_Test_AppTestCase
      */
     public function _createItem()
     {
-
         $item = new Item;
         $item->save();
-
         return $item;
-
-    }
-
-    /**
-     * Create a WMS.
-     *
-     * @return Omeka_record $item The WMS.
-     */
-    public function _createWms($item = null)
-    {
-
-        // Create item, if none is passed.
-        if (is_null($item)) {
-            $item = $this->_createItem();
-        }
-
-        $wms = new NeatlineMapsService($item);
-        $wms->save();
-
-        return $wms;
-
     }
 
     /**
