@@ -230,11 +230,10 @@ to store the current viewport settings as the public defaults.</p>
 <div id="title-toolbar" style="display: none;">
 
   <a data-wysihtml5-command="bold">bold</a>
+
   <a data-wysihtml5-command="italic">italic</a>
 
-  <!-- Some wysihtml5 commands like 'createLink' require extra paramaters specified by the user (eg. href) -->
-<!--
-  <a data-wysihtml5-command="createLink">insert link</a>
+  <a data-wysihtml5-command="createLink">link</a>
   <div data-wysihtml5-dialog="createLink" style="display: none;">
     <label>
       Link:
@@ -242,7 +241,8 @@ to store the current viewport settings as the public defaults.</p>
     </label>
     <a data-wysihtml5-dialog-action="save">OK</a> <a data-wysihtml5-dialog-action="cancel">Cancel</a>
   </div>
--->
+
+  <a data-wysihtml5-command="insertImage">image</a>
 
 </div>
                     <textarea id="item-title" class="xlarge" name="title" placeholder="Title" rows="6"></textarea>
@@ -256,11 +256,10 @@ to store the current viewport settings as the public defaults.</p>
 <div id="description-toolbar" style="display: none;">
 
   <a data-wysihtml5-command="bold">bold</a>
+
   <a data-wysihtml5-command="italic">italic</a>
 
-  <!-- Some wysihtml5 commands like 'createLink' require extra paramaters specified by the user (eg. href) -->
-<!--
-  <a data-wysihtml5-command="createLink">insert link</a>
+  <a data-wysihtml5-command="createLink">link</a>
   <div data-wysihtml5-dialog="createLink" style="display: none;">
     <label>
       Link:
@@ -268,7 +267,8 @@ to store the current viewport settings as the public defaults.</p>
     </label>
     <a data-wysihtml5-dialog-action="save">OK</a> <a data-wysihtml5-dialog-action="cancel">Cancel</a>
   </div>
--->
+
+  <a data-wysihtml5-command="insertImage">image</a>
 
 </div>
                     <textarea id="item-description" class="xlarge" name="description" placeholder="Description" rows="12"></textarea>
@@ -533,7 +533,7 @@ to store the current viewport settings as the public defaults.</p>
 <!-- JSON globals. -->
 <script type="text/javascript">
 
-        Neatline = {"record":{"added":"2012-09-20 17:41:13","modified":"2012-09-20 17:41:13","name":"Test Exhibit","description":"Test description.","slug":"test-exhibit","public":1,"query":null,"creator_id":1,"image_id":null,"top_element":"map","items_h_pos":"right","items_v_pos":"top","items_height":"full","h_percent":50,"v_percent":60,"is_map":1,"is_timeline":1,"is_items":1,"default_map_bounds":null,"default_map_zoom":null,"default_focus_date":null,"default_timeline_zoom":null,"is_context_band":1,"default_context_band_unit":null,"default_context_band_height":null,"default_vector_color":null,"default_stroke_color":null,"default_highlight_color":null,"default_vector_opacity":null,"default_select_opacity":null,"default_stroke_opacity":null,"default_graphic_opacity":null,"default_stroke_width":null,"default_point_radius":null,"default_base_layer":2,"id":1},"dataSources":{"timeline":"http:\/\/\/Users\/davidmcclure\/pear\/bin\/neatline-exhibits\/simile\/1","map":"http:\/\/\/Users\/davidmcclure\/pear\/bin\/neatline-exhibits\/openlayers\/1","undated":"http:\/\/\/Users\/davidmcclure\/pear\/bin\/neatline-exhibits\/udi\/1"},"baseLayer":{"name":"Google Physical","id":2},"timelineZoom":15,"highlightColor":"#ff9600","proportions":{"horizontal":50,"vertical":60},"timeline":{"isContextBand":1,"contextBandUnit":"DECADE","contextBandHeight":"35"}}
+        Neatline = {"record":{"added":"2012-09-24 15:30:36","modified":"2012-09-24 15:30:36","name":"Test Exhibit","description":"Test description.","slug":"test-exhibit","public":1,"query":null,"creator_id":1,"image_id":null,"top_element":"map","items_h_pos":"right","items_v_pos":"top","items_height":"full","h_percent":50,"v_percent":60,"is_map":1,"is_timeline":1,"is_items":1,"default_map_bounds":null,"default_map_zoom":null,"default_focus_date":null,"default_timeline_zoom":null,"is_context_band":1,"default_context_band_unit":null,"default_context_band_height":null,"default_vector_color":null,"default_stroke_color":null,"default_highlight_color":null,"default_vector_opacity":null,"default_select_opacity":null,"default_stroke_opacity":null,"default_graphic_opacity":null,"default_stroke_width":null,"default_point_radius":null,"default_base_layer":2,"id":1},"dataSources":{"timeline":"http:\/\/\/Users\/davidmcclure\/pear\/bin\/neatline-exhibits\/simile\/1","map":"http:\/\/\/Users\/davidmcclure\/pear\/bin\/neatline-exhibits\/openlayers\/1","undated":"http:\/\/\/Users\/davidmcclure\/pear\/bin\/neatline-exhibits\/udi\/1"},"baseLayer":{"name":"Google Physical","id":2},"timelineZoom":15,"highlightColor":"#ff9600","proportions":{"horizontal":50,"vertical":60},"timeline":{"isContextBand":1,"contextBandUnit":"DECADE","contextBandHeight":"35"}}
 </script>
 
 <div id="drag-tip" class="twipsy fade right in">

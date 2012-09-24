@@ -44,14 +44,27 @@
                 orange: '#ffda82'
             },
 
-            // Redactor options.
-            redactor: [
-                'html', 'bold', 'italic', 'underline', '|',
-                'image', 'link', '|',
-                'fontcolor', 'backcolor', '|',
-                'alignleft', 'aligncenter', 'alignright', '|',
-                'fullscreen'
-            ]
+            // CLEditor.
+            cleditor: {
+
+                description: {
+                    width: 340,
+                    height: 300,
+                    controls:
+                        "bold italic underline | font size " +
+                        "| color removeformat | bullets numbering | outdent " +
+                        "indent | alignleft center alignright justify | " +
+                        "rule image link unlink | source"
+                },
+
+                title: {
+                    width: 340,
+                    height: 100,
+                    controls: "bold italic underline | font size color | " +
+                        "bullets outdent indent | source removeformat"
+                }
+
+            }
 
         },
 
@@ -123,6 +136,16 @@
         _buildFormFunctionality: function() {
 
             var self = this;
+
+            // ** TITLE.
+            this.titleEditor = this.title.cleditor(
+                this.options.cleditor.title
+            )[0];
+
+            // ** DESCRIPTION.
+            this.descriptionEditor = this.description.cleditor(
+                this.options.cleditor.description
+            )[0];
 
             // ** USE DC DATA.
             this.useDcData.bind('change', _.bind(function() {
@@ -348,34 +371,6 @@
             this.form.tabs();
         },
 
-        /*
-         * Instantiate the editors on title and description.
-         */
-        _buildEditors: function() {
-
-            // Title.
-            this.titleEditor = new wysihtml5.Editor('item-title', {
-                toolbar: 'title-toolbar',
-                parserRules: wysihtml5ParserRules
-            });
-
-            // Description.
-            this.descriptionEditor = new wysihtml5.Editor('item-description', {
-                toolbar: 'description-toolbar',
-                parserRules: wysihtml5ParserRules
-            });
-
-        },
-
-        /*
-         * Destroy editors on title and description.
-         */
-        _destroyEditors: function() {
-            $('iframe.wysihtml5-sandbox').remove();
-            this.title.show();
-            this.description.show();
-        },
-
 
         /*
          * =================
@@ -413,7 +408,6 @@
             // DOM touches.
             this._disableButtons();
             this._showContainer();
-            this._buildEditors();
             this._expandTitle();
             this._getFormData();
 
@@ -442,7 +436,6 @@
             // DOM touches.
             this._hideContainer(immediate);
             this._contractTitle();
-            this._destroyEditors();
 
             // Update the tracker.
             this._isForm = false;
@@ -692,13 +685,19 @@
             var useDc = Boolean(parseInt(this._data.use_dc_metadata, 10));
             var showBubble = Boolean(parseInt(this._data.show_bubble, 10));
 
+            // Update title.
+            this.title.val(this._data.title);
+            this.titleEditor.updateFrame().refresh();
+
+            // Update description.
+            this.description.val(this._data.description);
+            this.descriptionEditor.updateFrame().refresh();
+
             // If use-DC is activated, disable text editors.
-            // if (useDc) this._disableTextEditors();
-            // else this._enableTextEditors();
+            if (useDc) this._disableTextEditors();
+            else this._enableTextEditors();
 
             // Populate inputs.
-            this.titleEditor.setValue(this._data.title);
-            this.descriptionEditor.setValue(this._data.description);
             this.slug.val(this._data.slug);
             this.useDcData.prop('checked', useDc);
             this.showBubble.prop('checked', showBubble);
@@ -762,9 +761,11 @@
 
             var data = {};
 
+            // Get the content of the text editors.
+            data.description =              this._getDescriptionContent();
+            data.title =                    this._getTitleContent();
+
             // Get the form field data.
-            data.description =              this.descriptionEditor.getValue();
-            data.title =                    this.titleEditor.getValue();
             data.slug =                     this.slug.val();
             data.use_dc_metadata =          this.useDcData.is(':checked') ? 1 : 0;
             data.show_bubble =              this.showBubble.is(':checked') ? 1 : 0;
@@ -816,19 +817,33 @@
         },
 
         /*
+         * Get the <body> content out of the description cleditor.
+         */
+        _getDescriptionContent: function(coverage) {
+            return this.description.next('iframe').contents().find('body').html();
+        },
+
+        /*
+         * Get the <body> content out of the description cleditor.
+         */
+        _getTitleContent: function(coverage) {
+            return this.title.next('iframe').contents().find('body').html();
+        },
+
+        /*
          * Disable and gray out the text editors.
          */
         _disableTextEditors: function() {
-            // this.descriptionEditor.disable(true);
-            // $(this.descriptionEditor.$main[0]).css('opacity', 0.3);
+            this.descriptionEditor.disable(true);
+            $(this.descriptionEditor.$main[0]).css('opacity', 0.3);
         },
 
         /*
          * Enable the text editors.
          */
         _enableTextEditors: function() {
-            // this.descriptionEditor.disable(false);
-            // $(this.descriptionEditor.$main[0]).css('opacity', 1);
+            this.descriptionEditor.disable(false);
+            $(this.descriptionEditor.$main[0]).css('opacity', 1);
         },
 
         /*

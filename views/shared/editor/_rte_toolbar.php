@@ -28,11 +28,10 @@
 <div id="<?php echo $id; ?>" style="display: none;">
 
   <a data-wysihtml5-command="bold">bold</a>
+
   <a data-wysihtml5-command="italic">italic</a>
 
-  <!-- Some wysihtml5 commands like 'createLink' require extra paramaters specified by the user (eg. href) -->
-<!--
-  <a data-wysihtml5-command="createLink">insert link</a>
+  <a data-wysihtml5-command="createLink">link</a>
   <div data-wysihtml5-dialog="createLink" style="display: none;">
     <label>
       Link:
@@ -40,6 +39,7 @@
     </label>
     <a data-wysihtml5-dialog-action="save">OK</a> <a data-wysihtml5-dialog-action="cancel">Cancel</a>
   </div>
--->
+
+  <a data-wysihtml5-command="insertImage">image</a>
 
 </div>

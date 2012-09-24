@@ -31,10 +31,7 @@
  */
 function neatline_queueAdminCss()
 {
-
-    // Custom CSS.
     queue_css('neatline-admin');
-
 }
 
 /**
@@ -55,7 +52,7 @@ function neatline_queueEditorAssets()
     queue_css('configure-timeline');
     queue_css('configure-items');
     queue_css('jquery.miniColors');
-    queue_css('redactor');
+    queue_css('jquery.cleditor');
 
     // Application classes and controller script.
     queue_js('editor/item_browser', 'javascripts');
@@ -78,10 +75,6 @@ function neatline_queueEditorAssets()
     // Extenal libraries.
     queue_js('libraries/jquery.miniColors-0.1/jquery.miniColors.min', 'javascripts');
     queue_js('libraries/CLEditor-1.3.0/jquery.cleditor.min', 'javascripts');
-    queue_js('libraries/redactor/redactor/redactor.min', 'javascripts');
-    queue_js('libraries/wysihtml5/parser_rules/advanced', 'javascripts');
-    queue_js('libraries/wysihtml5/dist/wysihtml5-0.3.0.min', 'javascripts');
-    queue_js('libraries/bootstrap.min', 'javascripts');
 
 }
 
