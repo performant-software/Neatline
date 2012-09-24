@@ -33,5 +33,5 @@ cd $OMEKA_DIR/plugins && ln -s $PLUGIN_DIR
 bundle install
 
 # Boot virtual display.
-export DISPLAY=99.0
+export DISPLAY=:99.0
 sh -e /etc/init.d/xvfb start
