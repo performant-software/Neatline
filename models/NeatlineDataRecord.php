@@ -852,48 +852,16 @@ class NeatlineDataRecord extends Omeka_record
         // Try to get DC value.
         else if (!is_null($this->item_id)) {
 
-            // If Neatline Features is not installed.
-            if (!plugin_is_active('NeatlineFeatures')) {
+            // Get the DC coverage.
+            $coverage = neatline_getItemMetadata(
+                $this->getItem(),
+                'Dublin Core',
+                'Coverage'
+            );
 
-                // Get the DC coverage.
-                $coverage = neatline_getItemMetadata(
-                    $this->getItem(),
-                    'Dublin Core',
-                    'Coverage'
-                );
-
-                // Return if not empty, otherwise return default.
-                return ($coverage !== '') ?
-                    $coverage : self::$defaults['geocoverage'];
-
-            }
-
-            // If Neatline Features is installed.
-            else {
-
-                // Get feature records.
-                $features = $this->getTable('NeatlineFeature')
-                    ->getItemFeatures($this->getItem());
-
-                // Walk features and build array.
-                $wkt = array();
-                foreach ($features as $feature) {
-
-                    // Push wkt if not null or empty.
-                    if (!is_null($feature->wkt) && $feature->wkt !== '') {
-                        $wkt[] = $feature->wkt;
-                    }
-
-                    // If at least one feature exists, implode and return.
-                    if (count($wkt)) {
-                        return implode('|', $wkt);
-                    } else {
-                        return self::$defaults['geocoverage'];
-                    }
-
-                }
-
-            }
+            // Return if not empty, otherwise return default.
+            return ($coverage !== '') ?
+                $coverage : self::$defaults['geocoverage'];
 
         }
 
