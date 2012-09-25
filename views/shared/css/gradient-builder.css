@@ -34,7 +34,7 @@
 }
 
 .stop-marker {
-    background-image: url('../images/stop-marker.png');
+    background-image: url('../../images/stop-marker.png');
     background-position: right;
     position: relative;
     height: 17px;

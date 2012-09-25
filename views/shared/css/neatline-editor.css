@@ -719,15 +719,15 @@ div.columns div.col-header a.header {
 }
 
 div.columns div.col-header.col-1 a.header {
-    background-image: url('../../shared/images/items_icon.png');
+    background-image: url('../../../shared/images/items_icon.png');
 }
 
 div.columns div.col-header.col-2 a.header {
-    background-image: url('../../shared/images/space_icon.png');
+    background-image: url('../../../shared/images/space_icon.png');
 }
 
 div.columns div.col-header.col-3 a.header {
-    background-image: url('../../shared/images/time_icon.png');
+    background-image: url('../../../shared/images/time_icon.png');
 }
 
 div.columns span.row-marker {
@@ -926,7 +926,7 @@ img {
     z-index: 100;
     opacity: 0.7;
     margin: 0 1em 0 0;
-    background-image: url('../../shared/images/reorder_items_icon.png');
+    background-image: url('../../../shared/images/reorder_items_icon.png');
 }
 
 #order-save-button {

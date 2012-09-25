@@ -32,14 +32,7 @@ function neatline_queueEditorAssets()
 
     // CSS.
     queue_css('bootstrap/css/bootstrap.min');
-    queue_css('neatline-editor');
-    queue_css('neatline-fullscreen');
-    queue_css('gradient-builder');
-    queue_css('configure-layout');
-    queue_css('configure-map');
-    queue_css('configure-timeline');
-    queue_css('configure-items');
-    queue_css('jquery.miniColors');
+    queue_css('payloads/editor');
 
     queue_js('payloads/editor', 'javascripts');
 

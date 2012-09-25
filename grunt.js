@@ -93,7 +93,16 @@ module.exports = function(grunt) {
       },
 
       editor: {
-        src: [],
+        src: [
+          css+'neatline-editor.css',
+          css+'neatline-fullscreen.css',
+          css+'gradient-builder.css',
+          css+'configure-layout.css',
+          css+'configure-map.css',
+          css+'configure-timeline.css',
+          css+'configure-items.css',
+          css+'jquery.miniColors.css'
+        ],
         dest: buildcss+'editor.css'
       }
 
