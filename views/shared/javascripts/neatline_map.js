@@ -137,7 +137,8 @@
                   new OpenLayers.Control.LayerSwitcher()
                 ],
                 maxResolution: 'auto',
-                units: 'm'
+                units: 'm',
+                theme: null
             };
 
             // Instantiate the map.

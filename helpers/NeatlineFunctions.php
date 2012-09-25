@@ -130,28 +130,31 @@ function neatline_queueNeatlineAssets($exhibit)
     queue_css('neatline');
     queue_css('neatline-timeline');
     queue_css('neatline-jquery-ui');
+    queue_css('openlayers/theme/default/style');
     neatline_queueExhibitCss($exhibit);
 
-    // Application classes.
-    queue_js('neatline', 'javascripts');
-    queue_js('neatline_map', 'javascripts');
-    queue_js('neatline_timeline', 'javascripts');
-    queue_js('neatline_items', 'javascripts');
-    queue_js('positioner', 'javascripts/utilities');
-    queue_js('bubbles', 'javascripts/utilities');
-    queue_js('span_styler', 'javascripts/utilities');
-    queue_js('utilities', 'javascripts/libraries');
-    queue_js('jquery.getscrollbarwidth', 'javascripts/libraries');
+    // // Application classes.
+    // queue_js('neatline', 'javascripts');
+    // queue_js('neatline_map', 'javascripts');
+    // queue_js('neatline_timeline', 'javascripts');
+    // queue_js('neatline_items', 'javascripts');
+    // queue_js('positioner', 'javascripts/utilities');
+    // queue_js('bubbles', 'javascripts/utilities');
+    // queue_js('span_styler', 'javascripts/utilities');
+    // queue_js('utilities', 'javascripts/libraries');
+    // queue_js('jquery.getscrollbarwidth', 'javascripts/libraries');
 
-    // Vendor.
-    queue_js('libraries/openlayers/OpenLayers.min', 'javascripts');
-    queue_js('libraries/tile.stamen', 'javascripts');
+    // // Vendor.
+    // queue_js('libraries/openlayers/OpenLayers.min', 'javascripts');
+    // queue_js('libraries/tile.stamen', 'javascripts');
     queue_js('libraries/simile/timeline-api/timeline-api', 'javascripts');
-    queue_js('libraries/taffy.min', 'javascripts');
-    queue_js('libraries/underscore.min', 'javascripts');
-    queue_js('libraries/moment.min', 'javascripts');
-    queue_js('libraries/iso8601.min', 'javascripts');
-    queue_js('libraries/raphael', 'javascripts');
+    // queue_js('libraries/taffy.min', 'javascripts');
+    // queue_js('libraries/underscore.min', 'javascripts');
+    // queue_js('libraries/moment.min', 'javascripts');
+    // queue_js('libraries/iso8601.min', 'javascripts');
+    // queue_js('libraries/raphael', 'javascripts');
+
+    queue_js('payloads/neatline', 'javascripts');
 
 }
 

@@ -21,7 +21,7 @@ module.exports = function(grunt) {
           lib+'jquery.getscrollbarwidth.js',
           lib+'openlayers/OpenLayers.min.js',
           lib+'tile.stamen.js',
-          lib+'simile/timeline-api/timeline-api.js',
+          // lib+'simile/timeline-api/timeline-api.js',
           lib+'taffy.min.js',
           lib+'underscore.min.js',
           lib+'moment.min.js',
