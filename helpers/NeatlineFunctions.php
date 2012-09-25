@@ -40,7 +40,6 @@ function neatline_queueEditorAssets()
     queue_css('configure-timeline');
     queue_css('configure-items');
     queue_css('jquery.miniColors');
-    queue_css('redactor');
 
     // Application classes and controller script.
     queue_js('editor/item_browser', 'javascripts');
@@ -62,8 +61,6 @@ function neatline_queueEditorAssets()
 
     // Extenal libraries.
     queue_js('libraries/miniColors/jquery.miniColors.min', 'javascripts');
-    queue_js('libraries/redactor/redactor/redactor.min', 'javascripts');
-    queue_js('libraries/bootstrap.min', 'javascripts');
 
 }
 

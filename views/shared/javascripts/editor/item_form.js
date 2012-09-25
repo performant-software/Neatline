@@ -352,16 +352,14 @@
          * Instantiate the editors on title and description.
          */
         _buildEditors: function() {
-            this.title.redactor({ buttons: this.options.redactor, focus: false });
-            this.description.redactor({ buttons: this.options.redactor, focus: false });
+
         },
 
         /*
          * Destroy editors on title and description.
          */
         _destroyEditors: function() {
-            this.title.destroyEditor();
-            this.description.destroyEditor();
+
         },
 
 
@@ -680,11 +678,9 @@
             var useDc = Boolean(parseInt(this._data.use_dc_metadata, 10));
             var showBubble = Boolean(parseInt(this._data.show_bubble, 10));
 
-            // Update title.
-            this.title.setCode(this._data.title);
-
-            // Update description.
-            this.description.setCode(this._data.description);
+            // Update editors.
+            this.title.val(this._data.title);
+            this.description.val(this._data.description);
 
             // If use-DC is activated, disable text editors.
             if (useDc) this._disableTextEditors();
@@ -755,8 +751,8 @@
             var data = {};
 
             // Get the content of the text editors.
-            data.description =              this.description.getCode();
-            data.title =                    this.title.getCode();
+            data.description =              this.description.val();
+            data.title =                    this.title.val();
             data.slug =                     this.slug.val();
 
             // Get the form field data.
