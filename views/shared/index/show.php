@@ -32,7 +32,7 @@
 
 <?php
 $title = neatline('name');
-head(array('title' => $title, 'bodyclass' => 'neatline neatline-'.neatline('id'))); ?>
+echo head(array('title' => $title, 'bodyclass' => 'neatline neatline-'.neatline('id'))); ?>
 
 <!-- The core exhibit header. -->
 <?php echo $this->partial('index/_neatline_header.php'); ?>
@@ -44,4 +44,4 @@ head(array('title' => $title, 'bodyclass' => 'neatline neatline-'.neatline('id')
 
 <div class="exhibit-description"><?php echo neatline('description'); ?></div>
 
-<?php foot(); ?>
+<?php echo foot(); ?>

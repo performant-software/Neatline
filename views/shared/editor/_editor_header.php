@@ -40,10 +40,10 @@ neatline_queueEditorAssets();
 ?>
 
 <!-- Stylesheets -->
-<?php head_css(); ?>
+<?php echo head_css(); ?>
 
 <!-- JavaScripts -->
-<?php head_js(); ?>
+<?php echo head_js(); ?>
 
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?v=3.5&sensor=false"></script>
 

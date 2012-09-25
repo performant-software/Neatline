@@ -17,7 +17,7 @@ queue_js_file('tiny_mce/tiny_mce');
 
 <?php
 $title = __('Neatline | Create an Exhibit');
-head(array('content_class' => 'neatline', 'title' => $title));
+echo head(array('content_class' => 'neatline', 'title' => $title));
 ?>
 
 <div id="primary">
@@ -31,6 +31,4 @@ jQuery(document).ready(function($){
 });
 </script>
 
-<?php
-foot();
-?>
+<?php echo foot(); ?>

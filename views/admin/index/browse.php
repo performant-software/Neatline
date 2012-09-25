@@ -27,7 +27,7 @@
 
 <?php
 $title = __('Neatline | Browse Exhibits');
-head(array('content_class' => 'neatline', 'title' => $title));
+echo head(array('content_class' => 'neatline', 'title' => $title));
 ?>
 
 <p class="add-button">
@@ -93,4 +93,4 @@ head(array('content_class' => 'neatline', 'title' => $title));
 
 </div>
 
-<?php foot(); ?>
+<?php echo foot(); ?>

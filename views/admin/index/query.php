@@ -27,13 +27,11 @@
 
 <?php
 $title = __('Neatline | Edit Items Query');
-head(array('content_class' => 'neatline', 'title' => $title));
+echo head(array('content_class' => 'neatline', 'title' => $title));
 ?>
 
 <div id="primary">
     <?php echo items_search_form(array(), current_url()); ?>
 </div>
 
-<?php
-foot();
-?>
+<?php echo foot(); ?>
