@@ -4,12 +4,17 @@
 
 module.exports = function(grunt) {
 
-  var app =     'views/shared/javascripts/';
-  var util =    'views/shared/javascripts/utilities/';
-  var lib =     'views/shared/javascripts/libraries/';
-  var build =   'views/shared/javascripts/payloads/';
-  var edit =    'views/shared/javascripts/editor/';
-  var eutil =   edit+'utilities/';
+  // Load tasks.
+  grunt.loadNpmTasks('grunt-css');
+
+  var app =       'views/shared/javascripts/';
+  var util =      'views/shared/javascripts/utilities/';
+  var lib =       'views/shared/javascripts/libraries/';
+  var buildjs =   'views/shared/javascripts/payloads/';
+  var buildcss =  'views/shared/css/payloads/';
+  var edit =      'views/shared/javascripts/editor/';
+  var css =       'views/shared/css/';
+  var eutil =     edit+'utilities/';
 
   grunt.initConfig({
 
@@ -21,7 +26,6 @@ module.exports = function(grunt) {
           lib+'jquery.getscrollbarwidth.js',
           lib+'openlayers/OpenLayers.min.js',
           lib+'tile.stamen.js',
-          // lib+'simile/timeline-api/timeline-api.js',
           lib+'taffy.min.js',
           lib+'underscore.min.js',
           lib+'moment.min.js',
@@ -35,7 +39,7 @@ module.exports = function(grunt) {
           util+'bubbles.js',
           util+'span_styler.js'
         ],
-        dest: build+'neatline.js'
+        dest: buildjs+'neatline.js'
       },
 
       editor: {
@@ -57,7 +61,7 @@ module.exports = function(grunt) {
           edit+'_constructEditor.js',
           lib+'minicolors/jquery.miniColors.min.js'
         ],
-        dest: build+'editor.js'
+        dest: buildjs+'editor.js'
       }
 
     },
@@ -66,14 +70,31 @@ module.exports = function(grunt) {
 
       neatline: {
         src: ['<config:concat.neatline.src>'],
-        dest: build+'neatline.js',
+        dest: buildjs+'neatline.js',
         separator: ';'
       },
 
       editor: {
         src: ['<config:concat.editor.src>'],
-        dest: build+'editor.js',
+        dest: buildjs+'editor.js',
         separator: ';'
+      }
+
+    },
+
+    cssmin: {
+
+      neatline: {
+        src: [
+          css+'neatline.css',
+          css+'neatline-timeline.css'
+        ],
+        dest: buildcss+'neatline.css'
+      },
+
+      editor: {
+        src: [],
+        dest: buildcss+'editor.css'
       }
 
     },

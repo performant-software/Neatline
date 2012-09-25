@@ -10,3 +10,4 @@ spec/javascripts/fixtures/
 views/shared/css/exhibits/
 node_modules/
 views/shared/javascripts/payloads/
+views/shared/css/payloads/

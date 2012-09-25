@@ -107,9 +107,7 @@ function neatline_queueEmbedAssets()
 function neatline_queueNeatlineAssets($exhibit)
 {
 
-    // Core Neatline stylesheet.
-    queue_css('neatline');
-    queue_css('neatline-timeline');
+    queue_css('payloads/neatline');
     queue_css('neatline-jquery-ui');
     queue_css('openlayers/theme/default/style');
     neatline_queueExhibitCss($exhibit);
