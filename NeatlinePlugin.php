@@ -1,4 +1,7 @@
 <?php
+
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
+
 /**
  * Plugin manager class.
  *
@@ -55,6 +58,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
 
         // Exhibits table.
         $sql = "CREATE TABLE IF NOT EXISTS `{$this->_db->prefix}neatline_exhibits` (
+
             `id`                    int(10) unsigned not null auto_increment,
             `added`                 TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             `modified`              TIMESTAMP NULL,
@@ -91,13 +95,16 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
             `base_layer`            int(10) unsigned NULL,
             `context_band_unit`     ENUM('hour', 'day', 'week', 'month', 'year', 'decade', 'century') DEFAULT 'decade',
             `context_band_height`   int(10) unsigned NULL,
+
              PRIMARY KEY (`id`)
+
         ) ENGINE=innodb DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
 
         $this->_db->query($sql);
 
         // Records table.
         $sql = "CREATE TABLE IF NOT EXISTS `{$this->_db->prefix}neatline_data_records` (
+
             `id`                    int(10) unsigned not null auto_increment,
             `item_id`               int(10) unsigned NULL,
             `parent_record_id`      int(10) unsigned NULL,
@@ -130,7 +137,9 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
             `display_order`         int(10) unsigned NULL,
             `map_bounds`            varchar(100) NULL,
             `map_zoom`              int(10) unsigned NULL,
+
              PRIMARY KEY (`id`)
+
         ) ENGINE=innodb DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
 
         $this->_db->query($sql);
