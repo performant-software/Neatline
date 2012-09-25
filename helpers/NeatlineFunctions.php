@@ -41,26 +41,7 @@ function neatline_queueEditorAssets()
     queue_css('configure-items');
     queue_css('jquery.miniColors');
 
-    // Application classes and controller script.
-    queue_js('editor/item_browser', 'javascripts');
-    queue_js('editor/item_form', 'javascripts');
-    queue_js('editor/edit_geometry', 'javascripts');
-    queue_js('editor/layout_builder', 'javascripts');
-    queue_js('editor/items_editor', 'javascripts');
-    queue_js('editor/map_editor', 'javascripts');
-    queue_js('editor/configure_layout', 'javascripts');
-    queue_js('editor/configure_map', 'javascripts');
-    queue_js('editor/configure_timeline', 'javascripts');
-    queue_js('editor/configure_items', 'javascripts');
-
-    queue_js('editor/utilities/_toggle_button', 'javascripts');
-    queue_js('editor/utilities/_gradient_builder', 'javascripts');
-    queue_js('editor/utilities/_dropdown', 'javascripts');
-    queue_js('editor/utilities/_integer_dragger', 'javascripts');
-    queue_js('editor/_constructEditor', 'javascripts');
-
-    // Extenal libraries.
-    queue_js('libraries/miniColors/jquery.miniColors.min', 'javascripts');
+    queue_js('payloads/editor', 'javascripts');
 
 }
 
@@ -133,27 +114,7 @@ function neatline_queueNeatlineAssets($exhibit)
     queue_css('openlayers/theme/default/style');
     neatline_queueExhibitCss($exhibit);
 
-    // // Application classes.
-    // queue_js('neatline', 'javascripts');
-    // queue_js('neatline_map', 'javascripts');
-    // queue_js('neatline_timeline', 'javascripts');
-    // queue_js('neatline_items', 'javascripts');
-    // queue_js('positioner', 'javascripts/utilities');
-    // queue_js('bubbles', 'javascripts/utilities');
-    // queue_js('span_styler', 'javascripts/utilities');
-    // queue_js('utilities', 'javascripts/libraries');
-    // queue_js('jquery.getscrollbarwidth', 'javascripts/libraries');
-
-    // // Vendor.
-    // queue_js('libraries/openlayers/OpenLayers.min', 'javascripts');
-    // queue_js('libraries/tile.stamen', 'javascripts');
     queue_js('libraries/simile/timeline-api/timeline-api', 'javascripts');
-    // queue_js('libraries/taffy.min', 'javascripts');
-    // queue_js('libraries/underscore.min', 'javascripts');
-    // queue_js('libraries/moment.min', 'javascripts');
-    // queue_js('libraries/iso8601.min', 'javascripts');
-    // queue_js('libraries/raphael', 'javascripts');
-
     queue_js('payloads/neatline', 'javascripts');
 
 }

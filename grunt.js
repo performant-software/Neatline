@@ -55,9 +55,7 @@ module.exports = function(grunt) {
           eutil+'_dropdown.js',
           eutil+'_integer_dragger.js',
           edit+'_constructEditor.js',
-          lib+'minicolors/jquery.miniColors.min.js',
-          lib+'redactor/redactor/redactor.min.js',
-          lib+'bootstrap.min.js'
+          lib+'minicolors/jquery.miniColors.min.js'
         ],
         dest: build+'editor.js'
       }
