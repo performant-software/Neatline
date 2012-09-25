@@ -1041,7 +1041,8 @@
                 },
 
                 success: _.bind(function(newDescription) {
-                    this.description.setCode(newDescription);
+                    this.description.val(newDescription);
+                    this.descriptionEditor.updateFrame();
                     self._trigger('savecomplete');
                 }, this)
 
