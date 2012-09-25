@@ -19,7 +19,7 @@
  */
 function neatline_queueAdminCss()
 {
-    queue_css('neatline-admin');
+    queue_css_file('neatline-admin');
 }
 
 /**
@@ -31,10 +31,10 @@ function neatline_queueEditorAssets()
 {
 
     // CSS.
-    queue_css('bootstrap/css/bootstrap.min');
-    queue_css('payloads/editor');
+    queue_css_file('bootstrap/css/bootstrap.min');
+    queue_css_file('payloads/editor');
 
-    queue_js('payloads/editor', 'javascripts');
+    queue_js_file('payloads/editor', 'javascripts');
 
 }
 
@@ -46,12 +46,12 @@ function neatline_queueEditorAssets()
 function neatline_queuePublicAssets()
 {
 
-    queue_js('_constructInThemeNeatline', 'javascripts');
-    queue_css('neatline-public');
+    queue_js_file('_constructInThemeNeatline', 'javascripts');
+    queue_css_file('neatline-public');
     $google = 'http://maps.google.com/maps/api/js?v=3.5&sensor=false';
 
     // API calls.
-    $headScript = __v()->headScript();
+    $headScript = get_view()->headScript();
     $headScript->appendScript('', 'text/javascript', array('src' => $google));
 
 }
@@ -65,11 +65,11 @@ function neatline_queueFullscreenAssets()
 {
 
     // Neatline runner.
-    queue_js('_constructFullscreenNeatline', 'javascripts');
-    queue_js('utilities/_fullscreen_positioner', 'javascripts');
+    queue_js_file('_constructFullscreenNeatline', 'javascripts');
+    queue_js_file('utilities/_fullscreen_positioner', 'javascripts');
 
     // Fullscreen-specific CSS.
-    queue_css('neatline-fullscreen');
+    queue_css_file('neatline-fullscreen');
 
 }
 
@@ -82,11 +82,11 @@ function neatline_queueEmbedAssets()
 {
 
     // Neatline runner.
-    queue_js('_constructFullscreenNeatline', 'javascripts');
-    queue_js('utilities/_fullscreen_positioner', 'javascripts');
+    queue_js_file('_constructFullscreenNeatline', 'javascripts');
+    queue_js_file('utilities/_fullscreen_positioner', 'javascripts');
 
     // Fullscreen-specific CSS.
-    queue_css('neatline-embedded');
+    queue_css_file('neatline-embedded');
 
 }
 
@@ -100,13 +100,13 @@ function neatline_queueEmbedAssets()
 function neatline_queueNeatlineAssets($exhibit)
 {
 
-    queue_css('payloads/neatline');
-    queue_css('neatline-jquery-ui');
-    queue_css('openlayers/theme/default/style');
+    queue_css_file('payloads/neatline');
+    queue_css_file('neatline-jquery-ui');
+    queue_css_file('openlayers/theme/default/style');
     neatline_queueExhibitCss($exhibit);
 
-    queue_js('libraries/simile/timeline-api/timeline-api', 'javascripts');
-    queue_js('payloads/neatline', 'javascripts');
+    queue_js_file('libraries/simile/timeline-api/timeline-api', 'javascripts');
+    queue_js_file('payloads/neatline', 'javascripts');
 
 }
 
@@ -118,7 +118,7 @@ function neatline_queueNeatlineAssets($exhibit)
 function neatline_queueExhibitCss($exhibit)
 {
     try {
-        queue_css($exhibit->slug);
+        queue_css_file($exhibit->slug);
     } catch (Exception $e) {}
 }
 
@@ -298,7 +298,7 @@ function neatline($fieldname, $options = array(), $neatline = null)
  */
 function get_current_neatline()
 {
-    return __v()->neatline_exhibit;
+    return get_view()->neatline_exhibit;
 }
 
 /**
@@ -309,7 +309,7 @@ function get_current_neatline()
  */
 function set_current_neatline($neatline = null)
 {
-    __v()->neatline_exhibit = $neatline;
+    get_view()->neatline_exhibit = $neatline;
 }
 
 /**
@@ -320,7 +320,7 @@ function set_current_neatline($neatline = null)
  */
 function set_neatlines_for_loop($neatlines)
 {
-    __v()->neatline_exhibits = $neatlines;
+    get_view()->neatline_exhibits = $neatlines;
 }
 
 /**
@@ -330,7 +330,7 @@ function set_neatlines_for_loop($neatlines)
  */
 function get_neatlines_for_loop()
 {
-    return __v()->neatline_exhibits;
+    return get_view()->neatline_exhibits;
 }
 
 /**
@@ -362,7 +362,7 @@ function has_neatlines()
  */
 function has_neatlines_for_loop()
 {
-    $view = __v();
+    $view = get_view();
     return ($view->neatline_exhibits and count($view->neatline_exhibits));
 }
 
@@ -402,7 +402,7 @@ function link_to_neatline(
     $route = 'neatline-exhibits/' . $action . '/' . $slug;
     $uri = $public ? public_url($route) : url($route);
     $props['href'] = $uri;
-    return '<a ' . _tag_attributes($props) . '>' . $text . '</a>';
+    return '<a ' . tag_attributes($props) . '>' . $text . '</a>';
 
 }
 

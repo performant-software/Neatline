@@ -867,7 +867,7 @@ class NeatlineDataRecord extends Omeka_Record_AbstractRecord
              * we're stuck. -- ERR
              */
 
-            return __v()->partial('neatline/_dc_metadata.php', array(
+            return get_view()->partial('neatline/_dc_metadata.php', array(
                 'item' => $this->getItem()
             ));
         }

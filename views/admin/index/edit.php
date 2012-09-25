@@ -26,9 +26,9 @@
 ?>
 
 <?php
-queue_js('slugBuilder');
-queue_js('_constructAdd');
-queue_js('tiny_mce/tiny_mce');
+queue_js_file('slugBuilder');
+queue_js_file('_constructAdd');
+queue_js_file('tiny_mce/tiny_mce');
 ?>
 
 <?php

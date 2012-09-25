@@ -98,7 +98,7 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
         $this->dispatch('neatline-exhibits');
 
         // Check for paging.
-        $neatlinesInView = __v()->neatline_exhibits;
+        $neatlinesInView = get_view()->neatline_exhibits;
         $this->assertEquals(count($neatlinesInView), 2);
         $this->assertQuery('div.pagination');
 

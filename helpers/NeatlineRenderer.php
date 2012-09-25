@@ -94,12 +94,12 @@ class NeatlineRenderer
                 'name' => $image->original_filename,
 
                 // Dimensions
-                'height' => (int) __v()->fileMetadata(
+                'height' => (int) get_view()->fileMetadata(
                     $image,
                     'Omeka Image File',
                     'Height'
                 ),
-                'width' => (int) __v()->fileMetadata(
+                'width' => (int) get_view()->fileMetadata(
                     $image,
                     'Omeka Image File',
                     'Width'
