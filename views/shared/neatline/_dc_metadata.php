@@ -3,7 +3,14 @@
     'target' => '_blank'
 ), 'show', $item); ?>
 
-<?php echo show_item_metadata(array(), $item); ?>
+<?php
+$buffer = preg_replace(
+    '/<script .*? <\/script>/msx',
+    '',
+    show_item_metadata(array(), $item)
+);
+echo $buffer;
+?>
 
 <!-- The following returns all of the files associated with an item. -->
 <div id="itemfiles" class="element">

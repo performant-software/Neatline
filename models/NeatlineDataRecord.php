@@ -851,13 +851,27 @@ class NeatlineDataRecord extends Omeka_record
 
         // Try to get DC value.
         else if (!is_null($this->item_id)) {
+            $coverage = '';
 
-            // Get the DC coverage.
-            $coverage = neatline_getItemMetadata(
-                $this->getItem(),
-                'Dublin Core',
-                'Coverage'
-            );
+            if (plugin_is_active('NeatlineFeatures')) {
+                $features = $this
+                    ->getTable('NeatlineFeature')
+                    ->getItemFeatures($this->getItem());
+
+                foreach ($features as $feature) {
+                    if ($feature->geo !== null && $feature->geo !== '') {
+                        $coverage = $feature->geo;
+                        break;
+                    }
+                }
+            } else {
+                $coverage = neatline_getItemMetadata(
+                    $this->getItem(),
+                    'Dublin Core',
+                    'Coverage'
+                );
+            }
+
 
             // Return if not empty, otherwise return default.
             return ($coverage !== '') ?
