@@ -20,7 +20,7 @@
  * @author      Bethany Nowviskie <bethany@virginia.edu>
  * @author      Adam Soroka <ajs6f@virginia.edu>
  * @author      David McClure <david.mcclure@virginia.edu>
- * @copyright   2011 The Board and Visitors of the University of Virginia
+ * @copyright   2011 Rector and Board of Visitors, University of Virginia
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache 2 License
  */
 ?>
@@ -29,7 +29,7 @@
 <html lang="en-us">
 <head>
     <meta charset="utf-8">
-    <title><?php echo $titlePrefix; ?>: <?php echo $title; ?></title>
+    <title><?php echo $title; ?></title>
 
 <!-- Plugin Stuff -->
 <?php admin_plugin_header(); ?>
@@ -46,7 +46,7 @@ neatline_queueEditorAssets();
 <?php display_js(); ?>
 
 <link href='http://fonts.googleapis.com/css?family=Crimson+Text:400,400italic,600,600italic,700,700italic' rel='stylesheet' type='text/css'>
-<script type="text/javascript" src="http://maps.google.com/maps/api/js?v=3.5&sensor=false"></script>
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?v=3.8&sensor=false"></script>
 
 </head>
 <?php echo body_tag(array('id' => @$bodyid, 'class' => @$bodyclass)); ?>

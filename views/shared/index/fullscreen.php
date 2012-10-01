@@ -20,7 +20,7 @@
  * @author      Bethany Nowviskie <bethany@virginia.edu>
  * @author      Adam Soroka <ajs6f@virginia.edu>
  * @author      David McClure <david.mcclure@virginia.edu>
- * @copyright   2011 The Board and Visitors of the University of Virginia
+ * @copyright   2011 Rector and Board of Visitors, University of Virginia
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache 2 License
  */
 ?>
@@ -56,7 +56,7 @@
     <!-- JavaScripts -->
     <?php display_js(); ?>
 
-    <script type="text/javascript" src="http://maps.google.com/maps/api/js?v=3.5&amp;sensor=false"></script>
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?v=3.8&amp;sensor=false"></script>
 
     <!-- Plugin Stuff -->
     <?php plugin_header(); ?>
@@ -65,16 +65,9 @@
 
 <body class="neatline <?php echo neatline('slug'); ?>">
 
-<?php if ((bool) neatline('public')): ?>
-
-    <!-- The core Neatline partial. -->
-    <?php echo $this->partial('neatline/_neatline.php', array(
-        'exhibit' => get_current_neatline()
-    )); ?>
-
-<?php else: ?>
-    <?php echo $this->partial('neatline/_private.php'); ?>
-<?php endif; ?>
+<?php echo $this->partial('neatline/_neatline.php', array(
+    'exhibit' => get_current_neatline()
+)); ?>
 
 </body>
 </html>

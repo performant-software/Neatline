@@ -15,7 +15,7 @@
  * @author      Bethany Nowviskie <bethany@virginia.edu>
  * @author      Adam Soroka <ajs6f@virginia.edu>
  * @author      David McClure <david.mcclure@virginia.edu>
- * @copyright   2011 The Board and Visitors of the University of Virginia
+ * @copyright   2011 Rector and Board of Visitors, University of Virginia
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache 2 License
  */
 
@@ -51,7 +51,7 @@
          * - return void.
          */
         _constructDropdown: function() {
-            this.element.dropdown();
+            this.element.nlDropdown();
         },
 
         /*
@@ -72,14 +72,14 @@
                     if (self._isOrdering) {
                         self._trigger('endreorder');
                         self._isOrdering = false;
-                        self.reorderButton.removeClass('primary');
+                        self.reorderButton.removeClass('btn-neatline');
                     }
 
                     // Start reorder.
                     else {
                         self._trigger('reorder');
                         self._isOrdering = true;
-                        self.reorderButton.addClass('primary');
+                        self.reorderButton.addClass('btn-neatline');
                     }
 
                 },

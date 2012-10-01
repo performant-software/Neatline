@@ -20,12 +20,29 @@
  * @author      Bethany Nowviskie <bethany@virginia.edu>
  * @author      Adam Soroka <ajs6f@virginia.edu>
  * @author      David McClure <david.mcclure@virginia.edu>
- * @copyright   2011 The Board and Visitors of the University of Virginia
+ * @copyright   2011 Rector and Board of Visitors, University of Virginia
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache 2 License
  */
 
 class NeatlinePlugin
 {
+
+    private static $_mapStyles = array(
+        'vector_color',
+        'stroke_color',
+        'highlight_color',
+        'vector_opacity',
+        'select_opacity',
+        'stroke_opacity',
+        'graphic_opacity',
+        'stroke_width',
+        'point_radius',
+        'h_percent',
+        'v_percent',
+        'timeline_zoom',
+        'context_band_unit',
+        'context_band_height'
+    );
 
     private static $_hooks = array(
         'install',
@@ -35,7 +52,8 @@ class NeatlinePlugin
         'admin_theme_header',
         'admin_append_to_plugin_uninstall_message',
         'before_delete_item',
-        'define_acl'
+        'define_acl',
+        'initialize'
     );
 
     private static $_filters = array(
@@ -174,15 +192,6 @@ class NeatlinePlugin
             $this->_db->prefix . 'neatline_data_records_exhibit_idx',
             'exhibit_id'
         );
-        /**
-         * This doesn't seem to help, but I'm leaving it here as a record that
-         * we tried it.
-         * $this->_addIndex(
-         *     $this->_db->prefix . 'neatline_data_records',
-         *     $this->_db->prefix . 'neatline_data_records_exhibit_item_idx',
-         *     'exhibit_id, item_id'
-         * );
-         */
 
         // Layers table.
         $sql = "CREATE TABLE IF NOT EXISTS `{$this->_db->prefix}neatline_base_layers` (
@@ -194,24 +203,7 @@ class NeatlinePlugin
         $this->_db->query($sql);
 
         // Set default map style attributes.
-        $mapStyles = array(
-            'vector_color',
-            'stroke_color',
-            'highlight_color',
-            'vector_opacity',
-            'select_opacity',
-            'stroke_opacity',
-            'graphic_opacity',
-            'stroke_width',
-            'point_radius',
-            'h_percent',
-            'v_percent',
-            'timeline_zoom',
-            'context_band_unit',
-            'context_band_height'
-        );
-
-        foreach ($mapStyles as $style) {
+        foreach (self::$_mapStyles as $style) {
           set_option($style, get_plugin_ini('Neatline', 'default_'.$style));
         }
 
@@ -254,6 +246,11 @@ class NeatlinePlugin
         // Drop the data table.
         $sql = "DROP TABLE IF EXISTS `{$this->_db->prefix}neatline_base_layers`";
         $this->_db->query($sql);
+
+        // Remove default map style attributes.
+        foreach (self::$_mapStyles as $style) {
+          delete_option($style);
+        }
 
     }
 
@@ -427,6 +424,8 @@ class NeatlinePlugin
                 'delete',
                 'show',
                 'showNotPublic',
+                'fullscreen',
+                'fullscreenNotPublic',
                 'udi',
                 'simile',
                 'openlayers'
@@ -457,9 +456,21 @@ class NeatlinePlugin
             }
 
             // Give every access to browse, show, simile, openlayers, and udi.
-            $acl->allow(null, 'Neatline_Index', array('browse', 'show','simile','openlayers','udi'));
+            $acl->allow(null, 'Neatline_Index', array('browse', 'show','fullscreen','simile','openlayers','udi'));
         }
 
+    }
+
+    /**
+     * Initialization.
+     *
+     * Adds translation source.
+     *
+     * @return void.
+     */
+    public function initialize()
+    {
+        add_translation_source(dirname(__FILE__) . '/languages');
     }
 
     /**

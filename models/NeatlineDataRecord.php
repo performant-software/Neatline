@@ -20,7 +20,7 @@
  * @author      Bethany Nowviskie <bethany@virginia.edu>
  * @author      Adam Soroka <ajs6f@virginia.edu>
  * @author      David McClure <david.mcclure@virginia.edu>
- * @copyright   2011 The Board and Visitors of the University of Virginia
+ * @copyright   2011 Rector and Board of Visitors, University of Virginia
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache 2 License
  */
 
@@ -86,7 +86,7 @@ class NeatlineDataRecord extends Omeka_record
     private static $defaults = array(
         'left_percent' => 0,
         'right_percent' => 100,
-        'geocoverage' => 'POINT()'
+        'geocoverage' => ''
     );
 
     /**
@@ -241,6 +241,7 @@ class NeatlineDataRecord extends Omeka_record
         $data['parent_record_id'] =     $this->getParentRecordId();
         $data['use_dc_metadata'] =      $this->use_dc_metadata;
         $data['show_bubble'] =          $this->show_bubble;
+        $data['geocoverage'] =          $this->getGeocoverage();
         $data['records'] =              $records;
 
         return $data;
@@ -564,7 +565,7 @@ class NeatlineDataRecord extends Omeka_record
 
         // If there is a parent item.
         if (!is_null($this->item_id)) {
-            $this->use_dc_metadata = $useDcMetadata;
+            $this->use_dc_metadata = (int) $useDcMetadata;
         }
 
     }
@@ -687,6 +688,30 @@ class NeatlineDataRecord extends Omeka_record
     }
 
     /**
+     * For dropdown selects, strip HTML and truncate.
+     *
+     * @param integer length The max length.
+     *
+     * @return string $title The title.
+     */
+    public function getTitleForSelect($length=60)
+    {
+
+        // Get title, strip tags, truncate.
+        $title = strip_tags($this->getTitle());
+        $fixed = substr($title, 0, $length);
+
+        // If the original title was longer than the max
+        // length, add an elipsis to the end.
+        if (strlen($title) > $length) {
+            $fixed .= ' ...';
+        }
+
+        return $fixed;
+
+    }
+
+    /**
      * If there is a title return it; if not, try to return
      * the first portion of the description.
      *
@@ -710,7 +735,7 @@ class NeatlineDataRecord extends Omeka_record
             }
 
             else {
-                return '[Untitled]';
+                return __('[Untitled]');
             }
 
         }
@@ -826,49 +851,31 @@ class NeatlineDataRecord extends Omeka_record
 
         // Try to get DC value.
         else if (!is_null($this->item_id)) {
+            $coverage = '';
 
-            // If Neatline Features is not installed.
-            if (!plugin_is_active('NeatlineFeatures')) {
+            if (plugin_is_active('NeatlineFeatures')) {
+                $features = $this
+                    ->getTable('NeatlineFeature')
+                    ->getItemFeatures($this->getItem());
 
-                // Get the DC coverage.
+                foreach ($features as $feature) {
+                    if ($feature->geo !== null && $feature->geo !== '') {
+                        $coverage = $feature->geo;
+                        break;
+                    }
+                }
+            } else {
                 $coverage = neatline_getItemMetadata(
                     $this->getItem(),
                     'Dublin Core',
                     'Coverage'
                 );
-
-                // Return if not empty, otherwise return default.
-                return ($coverage !== '') ?
-                    $coverage : self::$defaults['geocoverage'];
-
             }
 
-            // If Neatline Features is installed.
-            else {
 
-                // Get feature records.
-                $features = $this->getTable('NeatlineFeature')
-                    ->getItemFeatures($this->getItem());
-
-                // Walk features and build array.
-                $wkt = array();
-                foreach ($features as $feature) {
-
-                    // Push wkt if not null or empty.
-                    if (!is_null($feature->wkt) && $feature->wkt !== '') {
-                        $wkt[] = $feature->wkt;
-                    }
-
-                    // If at least one feature exists, implode and return.
-                    if (count($wkt)) {
-                        return implode('|', $wkt);
-                    } else {
-                        return self::$defaults['geocoverage'];
-                    }
-
-                }
-
-            }
+            // Return if not empty, otherwise return default.
+            return ($coverage !== '') ?
+                $coverage : self::$defaults['geocoverage'];
 
         }
 

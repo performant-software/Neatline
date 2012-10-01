@@ -20,7 +20,7 @@
  * @author      Bethany Nowviskie <bethany@virginia.edu>
  * @author      Adam Soroka <ajs6f@virginia.edu>
  * @author      David McClure <david.mcclure@virginia.edu>
- * @copyright   2011 The Board and Visitors of the University of Virginia
+ * @copyright   2011 Rector and Board of Visitors, University of Virginia
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache 2 License
  */
 
@@ -178,8 +178,8 @@ class Neatline_EditorController extends Omeka_Controller_Action
         $parentRecordId =           (int) $_post['parent_record_id'];
         $title =                    $_post['title'];
         $description =              $_post['description'];
-        $useDcMetadata =            $_post['use_dc_metadata'];
-        $showBubble =               $_post['show_bubble'];
+        $useDcMetadata =            (int) $_post['use_dc_metadata'];
+        $showBubble =               (int) $_post['show_bubble'];
         $startDate =                $_post['start_date'];
         $endDate =                  $_post['end_date'];
         $startVisibleDate =         $_post['start_visible_date'];
@@ -375,9 +375,10 @@ class Neatline_EditorController extends Omeka_Controller_Action
         // Get parameters from the ajax request.
         $exhibitId =                $_post['exhibit_id'];
         $mapCenter =                $_post['map_center'];
-        $mapZoom =                  $_post['map_zoom'];
+        $mapZoom =                  (int) $_post['map_zoom'];
+        $baseLayer =                $_post['map_base_layer'];
         $timelineCenter =           $_post['timeline_center'];
-        $timelineZoom =             $_post['timeline_zoom'];
+        $timelineZoom =             (int) $_post['timeline_zoom'];
 
         // Fetch the Neatline exhibit record and item record.
         $neatline = $this->_neatlinesTable->find($exhibitId);
@@ -386,6 +387,7 @@ class Neatline_EditorController extends Omeka_Controller_Action
         $neatline->saveViewportPositions(
             $mapCenter,
             $mapZoom,
+            $baseLayer,
             $timelineCenter,
             $timelineZoom
         );

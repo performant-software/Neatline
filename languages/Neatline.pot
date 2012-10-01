@@ -1,0 +1,455 @@
+# Translation for the Neatline plugin for Omeka.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Neatline\n"
+"Report-Msgid-Bugs-To: http://github.com/scholarslab/Neatline/issues\n"
+"POT-Creation-Date: 2012-07-26 11:45-0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: controllers/IndexController.php:81 controllers/IndexController.php:114
+msgid "There were problems with your form."
+msgstr ""
+
+#: controllers/IndexController.php:231
+#, php-format
+msgid "The Neatline \"%s\" was successfully added!"
+msgstr ""
+
+#: controllers/IndexController.php:239
+#, php-format
+msgid "The Neatline \"%s\" was successfully changed!"
+msgstr ""
+
+#: controllers/IndexController.php:247
+#, php-format
+msgid "The Neatline \"%s\" was successfully deleted!"
+msgstr ""
+
+#: controllers/IndexController.php:255
+#, php-format
+msgid "This will delete the Neatline \"%s\" and its associated metadata."
+msgstr ""
+
+#: forms/NeatlineDetails.php:49
+msgid "The title is displayed at the top of the exhibit."
+msgstr ""
+
+#: forms/NeatlineDetails.php:57
+msgid "Enter a title."
+msgstr ""
+
+#: forms/NeatlineDetails.php:67
+msgid "Supporting prose to describe the exhibit."
+msgstr ""
+
+#: forms/NeatlineDetails.php:74
+msgid "URL Slug"
+msgstr ""
+
+#: forms/NeatlineDetails.php:75
+msgid ""
+"The URL slug is used to form the public URL for the exhibit. Can contain "
+"letters, numbers, and hyphens."
+msgstr ""
+
+#: forms/NeatlineDetails.php:84 models/NeatlineExhibit.php:455
+msgid "The slug cannot be empty."
+msgstr ""
+
+#: forms/NeatlineDetails.php:92 models/NeatlineExhibit.php:459
+msgid "The slug can only contain lowercase letters, numbers, and hyphens."
+msgstr ""
+
+#: forms/NeatlineDetails.php:106
+msgid "The slug is already in use."
+msgstr ""
+
+#: forms/NeatlineDetails.php:116
+msgid "By default, exhibits are only visible to you."
+msgstr ""
+
+#: forms/NeatlineDetails.php:122
+msgid "(Optional): Static Image"
+msgstr ""
+
+#: forms/NeatlineDetails.php:123
+msgid "Select a file to build the exhibit on a static image."
+msgstr ""
+
+#: forms/NeatlineDetails.php:131
+msgid "Save Neatline"
+msgstr ""
+
+#: helpers/NeatlineFunctions.php:254
+msgid "Warning"
+msgstr ""
+
+#: helpers/NeatlineFunctions.php:255
+msgid ""
+"Uninstalling the Neatline plugin will permanently delete all Neatline "
+"exhibits."
+msgstr ""
+
+#: models/NeatlineExhibit.php:494
+msgid "Cannot associate a Neatline with a user who doesn't exist."
+msgstr ""
+
+#: views/admin/index/add.php:35
+msgid "Neatline | Create an Exhibit"
+msgstr ""
+
+#: views/admin/index/browse.php:29 views/public/index/browse.php:2
+msgid "Neatline | Browse Exhibits"
+msgstr ""
+
+#: views/admin/index/browse.php:37
+msgid "Create an Exhibit"
+msgstr ""
+
+#: views/admin/index/browse.php:55
+msgid "Exhibit"
+msgstr ""
+
+#: views/admin/index/browse.php:56
+msgid "Items Query"
+msgstr ""
+
+#: views/admin/index/browse.php:57
+msgid "Modified"
+msgstr ""
+
+#: views/admin/index/browse.php:58
+msgid "# Items"
+msgstr ""
+
+#: views/admin/index/browse.php:81
+msgid "Edit Details"
+msgstr ""
+
+#: views/admin/index/browse.php:92
+msgid "Edit Query"
+msgstr ""
+
+#: views/admin/index/browse.php:98
+msgid "No"
+msgstr ""
+
+#: views/admin/index/browse.php:98
+msgid "Yes"
+msgstr ""
+
+#: views/admin/index/browse.php:114
+msgid "There are no Neatline exhibits yet."
+msgstr ""
+
+#: views/admin/index/browse.php:116
+msgid "Create one!"
+msgstr ""
+
+#: views/admin/index/edit.php:35
+#, php-format
+msgid "Neatline | Edit \"%s\""
+msgstr ""
+
+#: views/admin/index/query.php:29
+msgid "Neatline | Edit Items Query"
+msgstr ""
+
+#: views/shared/editor/_back_button.php:30
+msgid "Back to Omeka"
+msgstr ""
+
+#: views/shared/editor/_configure_items.php:29
+msgid "Edit Item Order"
+msgstr ""
+
+#: views/shared/editor/_configure_items.php:30
+msgid "Click to edit the ordering of the items in the description tray."
+msgstr ""
+
+#: views/shared/editor/_configure_items.php:33
+#: views/shared/editor/_configure_map.php:120
+#: views/shared/editor/_configure_timeline.php:52
+#: views/shared/editor/_edit_form.php:257
+msgid "Save"
+msgstr ""
+
+#: views/shared/editor/_configure_layout.php:29
+#: views/shared/editor/_item_browser.php:37
+msgid "Map"
+msgstr ""
+
+#: views/shared/editor/_configure_layout.php:30
+#: views/shared/editor/_item_browser.php:38
+msgid "Timeline"
+msgstr ""
+
+#: views/shared/editor/_configure_layout.php:36
+msgid "Save arrangement"
+msgstr ""
+
+#: views/shared/editor/_configure_layout.php:37
+msgid "Fix starting viewport positions"
+msgstr ""
+
+#: views/shared/editor/_configure_layout.php:41
+msgid ""
+"Use the toggle buttons to activate and deactivate blocks; drag the\n"
+"blocks to rearrange them. Click the \"Fix starting viewport positions\" "
+"button\n"
+"to store the current viewport settings as the public defaults."
+msgstr ""
+
+#: views/shared/editor/_configure_map.php:31
+#: views/shared/editor/_edit_form.php:143
+msgid "Shape Color"
+msgstr ""
+
+#: views/shared/editor/_configure_map.php:39
+#: views/shared/editor/_edit_form.php:151
+msgid "Line Color"
+msgstr ""
+
+#: views/shared/editor/_configure_map.php:47
+#: views/shared/editor/_edit_form.php:159
+msgid "Selected Color"
+msgstr ""
+
+#: views/shared/editor/_configure_map.php:57
+#: views/shared/editor/_edit_form.php:169
+msgid "Shape Opacity"
+msgstr ""
+
+#: views/shared/editor/_configure_map.php:65
+#: views/shared/editor/_edit_form.php:177
+msgid "Selected Opacity"
+msgstr ""
+
+#: views/shared/editor/_configure_map.php:73
+#: views/shared/editor/_edit_form.php:185
+msgid "Line Opacity"
+msgstr ""
+
+#: views/shared/editor/_configure_map.php:83
+#: views/shared/editor/_edit_form.php:195
+msgid "Graphic Opacity"
+msgstr ""
+
+#: views/shared/editor/_configure_map.php:91
+#: views/shared/editor/_edit_form.php:203
+msgid "Line Width"
+msgstr ""
+
+#: views/shared/editor/_configure_map.php:99
+#: views/shared/editor/_edit_form.php:211
+msgid "Point Radius"
+msgstr ""
+
+#: views/shared/editor/_configure_map.php:110
+msgid "Default Base Layer"
+msgstr ""
+
+#: views/shared/editor/_configure_timeline.php:30
+msgid "Enable Context Band"
+msgstr ""
+
+#: views/shared/editor/_configure_timeline.php:34
+msgid "Context Band Unit"
+msgstr ""
+
+#: views/shared/editor/_configure_timeline.php:37
+msgid "Hour"
+msgstr ""
+
+#: views/shared/editor/_configure_timeline.php:38
+msgid "Day"
+msgstr ""
+
+#: views/shared/editor/_configure_timeline.php:39
+msgid "Week"
+msgstr ""
+
+#: views/shared/editor/_configure_timeline.php:40
+msgid "Month"
+msgstr ""
+
+#: views/shared/editor/_configure_timeline.php:41
+msgid "Year"
+msgstr ""
+
+#: views/shared/editor/_configure_timeline.php:42
+msgid "Decade"
+msgstr ""
+
+#: views/shared/editor/_configure_timeline.php:43
+msgid "Century"
+msgstr ""
+
+#: views/shared/editor/_configure_timeline.php:48
+msgid "Context Band Height %"
+msgstr ""
+
+#: views/shared/editor/_edit_form.php:33
+msgid "Text"
+msgstr ""
+
+#: views/shared/editor/_edit_form.php:34
+msgid "Spatial"
+msgstr ""
+
+#: views/shared/editor/_edit_form.php:35
+msgid "Temporal"
+msgstr ""
+
+#: views/shared/editor/_edit_form.php:36
+msgid "Styling"
+msgstr ""
+
+#: views/shared/editor/_edit_form.php:37
+msgid "Relations"
+msgstr ""
+
+#: views/shared/editor/_edit_form.php:59
+msgid "Show pop-up bubble."
+msgstr ""
+
+#: views/shared/editor/_edit_form.php:63
+msgid "Use default item metadata."
+msgstr ""
+
+#: views/shared/editor/_edit_form.php:72
+msgid "Geocoverage"
+msgstr ""
+
+#: views/shared/editor/_edit_form.php:84 views/shared/editor/_edit_form.php:87
+#: views/shared/editor/_edit_form.php:105
+msgid "Start Date"
+msgstr ""
+
+#: views/shared/editor/_edit_form.php:93 views/shared/editor/_edit_form.php:96
+#: views/shared/editor/_edit_form.php:114
+msgid "End Date"
+msgstr ""
+
+#: views/shared/editor/_edit_form.php:102
+msgid "Start Visible Date"
+msgstr ""
+
+#: views/shared/editor/_edit_form.php:111
+msgid "End Visible Date"
+msgstr ""
+
+#: views/shared/editor/_edit_form.php:120
+msgid "Date Ambiguity"
+msgstr ""
+
+#: views/shared/editor/_edit_form.php:222
+msgid "Point Graphic"
+msgstr ""
+
+#: views/shared/editor/_edit_form.php:225
+msgid "An external graphic to represent a point"
+msgstr ""
+
+#: views/shared/editor/_edit_form.php:233
+msgid "Reset Item Styles"
+msgstr ""
+
+#: views/shared/editor/_edit_form.php:243
+msgid "Parent Record"
+msgstr ""
+
+#: views/shared/editor/_edit_form.php:258
+#: views/shared/neatline/_bubbles.php:31
+msgid "Close"
+msgstr ""
+
+#: views/shared/editor/_edit_geometry.php:29
+msgid "Drag"
+msgstr ""
+
+#: views/shared/editor/_edit_geometry.php:30
+msgid "Rotate"
+msgstr ""
+
+#: views/shared/editor/_edit_geometry.php:31
+msgid "Scale"
+msgstr ""
+
+#: views/shared/editor/_edit_geometry.php:37
+msgid "rectangle"
+msgstr ""
+
+#: views/shared/editor/_edit_geometry.php:38
+msgid "elipse"
+msgstr ""
+
+#: views/shared/editor/_item_browser.php:34
+msgid "New Record"
+msgstr ""
+
+#: views/shared/editor/_tooltips.php:30
+msgid "Click to drag."
+msgstr ""
+
+#: views/shared/editor/_tooltips.php:40
+msgid "Space"
+msgstr ""
+
+#: views/shared/editor/_tooltips.php:45
+msgid "Time"
+msgstr ""
+
+#: views/shared/editor/_topbar_navigation.php:33
+msgid "Item Settings"
+msgstr ""
+
+#: views/shared/editor/_topbar_navigation.php:40
+msgid "Map Settings"
+msgstr ""
+
+#: views/shared/editor/_topbar_navigation.php:50
+msgid "Timeline Settings"
+msgstr ""
+
+#: views/shared/editor/_topbar_navigation.php:59
+msgid "Layout Editor"
+msgstr ""
+
+#: views/shared/editor/index.php:35
+#, php-format
+msgid "Neatline Editor: %s"
+msgstr ""
+
+#: views/shared/editor/items-ajax.php:42
+msgid "Neatline Records"
+msgstr ""
+
+#: views/shared/editor/items-ajax.php:71
+msgid "Omeka Records"
+msgstr ""
+
+#: views/shared/index/_neatline_header.php:31
+msgid "View Fullscreen"
+msgstr ""
+
+#: views/shared/neatline/_bubbles.php:30
+msgid "Click to freeze"
+msgstr ""
+
+#: views/shared/neatline/_bubbles.php:33
+msgid "Click for more information."
+msgstr ""
+
+#: views/shared/neatline/_private.php:28
+msgid "Coming soon."
+msgstr ""

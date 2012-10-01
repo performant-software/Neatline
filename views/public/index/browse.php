@@ -1,5 +1,5 @@
 <?php
-$title = 'Browse Neatline Exhibits';
+$title = __('Neatline | Browse Exhibits');
 head(array('content_class' => 'neatline', 'title' => $title));
 ?>
 <div id="primary">

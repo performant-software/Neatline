@@ -20,7 +20,7 @@
  * @author      Bethany Nowviskie <bethany@virginia.edu>
  * @author      Adam Soroka <ajs6f@virginia.edu>
  * @author      David McClure <david.mcclure@virginia.edu>
- * @copyright   2011 The Board and Visitors of the University of Virginia
+ * @copyright   2011 Rector and Board of Visitors, University of Virginia
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache 2 License
  */
 
@@ -45,8 +45,8 @@ class Neatline_Form_NeatlineDetails extends Omeka_Form
 
         // Title.
         $this->addElement('text', 'name', array(
-            'label'         => 'Title',
-            'description'   => 'The title is displayed at the top of the exhibit.',
+            'label'         => __('Title'),
+            'description'   => __('The title is displayed at the top of the exhibit.'),
             'size'          => 40,
             'value'         => $this->_neatline->name,
             'required'      => true,
@@ -54,7 +54,7 @@ class Neatline_Form_NeatlineDetails extends Omeka_Form
                 array('validator' => 'NotEmpty', 'breakChainOnFailure' => true, 'options' =>
                     array(
                         'messages' => array(
-                            Zend_Validate_NotEmpty::IS_EMPTY => 'Enter a title.'
+                            Zend_Validate_NotEmpty::IS_EMPTY => __('Enter a title.')
                         )
                     )
                 )
@@ -63,16 +63,16 @@ class Neatline_Form_NeatlineDetails extends Omeka_Form
 
         // Description.
         $this->addElement('textarea', 'description', array(
-            'label'         => 'Description',
-            'description'   => 'Supporting prose to describe the exhibit.',
+            'label'         => __('Description'),
+            'description'   => __('Supporting prose to describe the exhibit.'),
             'value'         => $this->_neatline->description,
             'attribs'       => array('class' => 'html-editor', 'rows' => '20')
         ));
 
         // Slug.
         $this->addElement('text', 'slug', array(
-            'label'         => 'URL Slug',
-            'description'   => 'The URL slug is used to form the public URL for the exhibit. Can contain letters, numbers, and hyphens.',
+            'label'         => __('URL Slug'),
+            'description'   => __('The URL slug is used to form the public URL for the exhibit. Can contain letters, numbers, and hyphens.'),
             'size'          => 40,
             'required'      => true,
             'value'         => $this->_neatline->slug,
@@ -81,7 +81,7 @@ class Neatline_Form_NeatlineDetails extends Omeka_Form
                 array('validator' => 'NotEmpty', 'breakChainOnFailure' => true, 'options' =>
                     array(
                         'messages' => array(
-                            Zend_Validate_NotEmpty::IS_EMPTY => 'The slug cannot be empty.'
+                            Zend_Validate_NotEmpty::IS_EMPTY => __('The slug cannot be empty.')
                         )
                     )
                 ),
@@ -89,7 +89,7 @@ class Neatline_Form_NeatlineDetails extends Omeka_Form
                     array(
                         'pattern' => '/^[0-9a-z\-]+$/',
                         'messages' => array(
-                            Zend_Validate_Regex::NOT_MATCH => 'The slug can only contain lowercase letters, numbers, and hyphens..'
+                            Zend_Validate_Regex::NOT_MATCH => __('The slug can only contain lowercase letters, numbers, and hyphens.')
                         )
                     )
                 ),
@@ -103,7 +103,7 @@ class Neatline_Form_NeatlineDetails extends Omeka_Form
                             'value' => (int)$this->_neatline->id
                         ),
                         'messages'  =>  array(
-                            'recordFound' => 'The slug is already in use.'
+                            'recordFound' => __('The slug is already in use.')
                         )
                     )
                 )
@@ -112,15 +112,15 @@ class Neatline_Form_NeatlineDetails extends Omeka_Form
 
         // Public.
         $this->addElement('checkbox', 'public', array(
-            'label'         => 'Public?',
-            'description'   => 'By default, exhibits are only visible to you.',
+            'label'         => __('Public'),
+            'description'   => __('By default, exhibits are only visible to you.'),
             'value'         => $this->_neatline->public
         ));
 
         // Image.
         $this->addElement('select', 'image_id', array(
-            'label'         => '(Optional): Static Image',
-            'description'   => 'Select a file to build the exhibit on a static image.',
+            'label'         => __('(Optional): Static Image'),
+            'description'   => __('Select a file to build the exhibit on a static image.'),
             'attribs'       => array('style' => 'width: 230px'),
             'multiOptions'  => $this->getImagesForSelect(),
             'value'         => $this->_neatline->image_id,
@@ -128,7 +128,7 @@ class Neatline_Form_NeatlineDetails extends Omeka_Form
 
         // Submit.
         $this->addElement('submit', 'submit', array(
-            'label' => 'Save Neatline'
+            'label' => __('Save Neatline')
         ));
 
         // Group the metadata fields.

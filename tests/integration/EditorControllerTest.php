@@ -20,7 +20,7 @@
  * @author      Bethany Nowviskie <bethany@virginia.edu>
  * @author      Adam Soroka <ajs6f@virginia.edu>
  * @author      David McClure <david.mcclure@virginia.edu>
- * @copyright   2011 The Board and Visitors of the University of Virginia
+ * @copyright   2011 Rector and Board of Visitors, University of Virginia
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache 2 License
  */
 
@@ -37,7 +37,7 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
         'start_visible_date' => '1864-04-26 14:39:22',
         'end_visible_date' => '1916-04-23 12:45:34',
         'vector_color' => '#ffffff',
-        'stroke_color' => '#000000',
+        'stroke_color' => '#f0f0f0',
         'highlight_color' => '#000000',
         'vector_opacity' => 60,
         'select_opacity' => 50,
@@ -604,6 +604,7 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
                 'parent_record_id' =>   $parent->id,
                 'use_dc_metadata' =>    null,
                 'show_bubble' =>        self::$__testParams['show_bubble'],
+                'geocoverage' =>        self::$__testParams['geocoverage'],
                 'records' => array()
             )
         );
@@ -644,29 +645,30 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
         $this->assertEquals(
             $json,
             (object) array(
-                'vector_color' => get_option('vector_color'),
-                'stroke_color' => get_option('stroke_color'),
-                'highlight_color' => get_option('highlight_color'),
-                'vector_opacity' => get_option('vector_opacity'),
-                'select_opacity' => get_option('select_opacity'),
-                'stroke_opacity' => get_option('stroke_opacity'),
-                'graphic_opacity' => get_option('graphic_opacity'),
-                'stroke_width' => get_option('stroke_width'),
-                'point_radius' => get_option('point_radius'),
-                'point_image' => '',
-                'left_percent' => 0,
-                'right_percent' => 100,
-                'start_date' =>'',
-                'end_date' => '',
+                'title' =>              '',
+                'description' =>        '',
+                'vector_color' =>       get_option('vector_color'),
+                'stroke_color' =>       get_option('stroke_color'),
+                'highlight_color' =>    get_option('highlight_color'),
+                'vector_opacity' =>     (int) get_option('vector_opacity'),
+                'select_opacity' =>     (int) get_option('select_opacity'),
+                'stroke_opacity' =>     (int) get_option('stroke_opacity'),
+                'graphic_opacity' =>    (int) get_option('graphic_opacity'),
+                'stroke_width' =>       (int) get_option('stroke_width'), 
+                'point_radius' =>       (int) get_option('point_radius'), 
+                'point_image' =>        '',
+                'left_percent' =>       0,
+                'right_percent' =>      100,
+                'start_date' =>         '',
+                'end_date' =>           '',
                 'start_visible_date' => '',
-                'end_visible_date' => '',
-                'slug' => '',
-                'parent_record_id' => 'none',
-                'use_dc_metadata' => null,
-                'show_bubble' => 1,
-                'records' => array(),
-                'title' => '',
-                'description' => ''
+                'end_visible_date' =>   '',
+                'slug' =>               '',
+                'parent_record_id' =>   'none',
+                'use_dc_metadata' =>    null,
+                'show_bubble' =>        1,
+                'geocoverage' =>        '',
+                'records' =>            array()
             )
         );
 
@@ -2148,12 +2150,18 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
         // Create an exhibit.
         $exhibit = $this->_createNeatline();
 
+        // Create a base layer.
+        $layer = new NeatlineBaseLayer();
+        $layer->name = 'Test Layer';
+        $layer->save();
+
         // Form the POST.
         $this->request->setMethod('POST')
             ->setPost(array(
                 'exhibit_id' => $exhibit->id,
                 'map_center' => 'center',
                 'map_zoom' => 1,
+                'map_base_layer' => 'Test Layer',
                 'timeline_center' => 'center',
                 'timeline_zoom' => 10
             )
@@ -2166,6 +2174,7 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
         // Check the attributes.
         $this->assertEquals($exhibit->default_map_bounds, 'center');
         $this->assertEquals($exhibit->default_map_zoom, 1);
+        $this->assertEquals($exhibit->default_base_layer, $layer->id);
         $this->assertEquals($exhibit->default_focus_date, 'center');
         $this->assertEquals($exhibit->default_timeline_zoom, 10);
 

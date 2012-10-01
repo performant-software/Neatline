@@ -457,7 +457,14 @@ To create a custom ordering:
 
     ![Item Ordering](http://23.21.98.97/wp-content/uploads/2012/06/edit-record-order.png)
 
+## Credits
 
+### Translations
+
+* Martin Liebeskind (German)
+* Gillian Price (Spanish)
+* Oguljan Reyimbaeva (Russian)
+* Katina Rogers (French)
 
 [omeka]: http://omeka.org
 [omeka-install-documentation]: http://omeka.org/codex/Installation 

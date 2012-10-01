@@ -15,7 +15,7 @@
  * @author      Bethany Nowviskie <bethany@virginia.edu>
  * @author      Adam Soroka <ajs6f@virginia.edu>
  * @author      David McClure <david.mcclure@virginia.edu>
- * @copyright   2011 The Board and Visitors of the University of Virginia
+ * @copyright   2011 Rector and Board of Visitors, University of Virginia
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache 2 License
  */
 
@@ -36,7 +36,7 @@
             colors: {
                 light_blue: '#f3f6ff',
                 light_yellow: '#fffef8',
-                dark_purple: '#4f1d6a',
+                dark_purple: '#594e62',
                 purple: '#724e85',
                 text: '#515151',
                 gray: '#8d8d8d',
@@ -79,7 +79,7 @@
             this.form =                     this.element.find('form');
             this.deleteButton =             this.form.find('#record-delete-button');
             this.closeButton =              this.form.find('#record-close-button');
-            this.saveButton =               this.form.find('input[type="submit"]');
+            this.saveButton =               this.form.find('#record-save-button');
             this.title =                    this.form.find('textarea[name="title"]');
             this.slug =                     this.form.find('input[name="slug"]');
             this.description =              this.form.find('textarea[name="description"]');
@@ -90,6 +90,7 @@
             this.endDate =                  this.form.find('input[name="end-date-date"]');
             this.startVisibleDate =         this.form.find('input[name="start-visible-date"]');
             this.endVisibleDate =           this.form.find('input[name="end-visible-date"]');
+            this.geocoverage =              this.form.find('textarea[name="geocoverage"]');
             this.vectorColor =              this.form.find('input[name="vector-color"]');
             this.strokeColor =              this.form.find('input[name="stroke-color"]');
             this.highlightColor =           this.form.find('input[name="highlight-color"]');
@@ -287,7 +288,7 @@
             this.saveButton.bind({
 
                 'mousedown': function() {
-                    self._trigger('save');
+                    self.saveItemForm();
                 },
 
                 'click': function(event) {
@@ -314,8 +315,8 @@
 
                 'mousedown': function() {
 
-                    // Only do the delete if the record is Neatline-endemic.
-                    if (typeof this.itemId === 'undefined') {
+                    // Only delete if record is Neatline-endemic.
+                    if (_.isUndefined(this.itemId)) {
                         self._fadeDown();
                         self.postRecordDelete();
                     }
@@ -367,43 +368,7 @@
          * Instantiate the fieldset expanders.
          */
         _buildFieldsets: function() {
-
             this.form.tabs();
-
-            // var self = this;
-
-            // // Title and description.
-            // this.titleDescriptionFieldset.fieldsetexpander({
-            //     default_status: true,
-            //     'change': function() {
-            //         self._measureForm();
-            //     }
-            // });
-
-            // // Date information.
-            // this.dateInformationFieldset.fieldsetexpander({
-            //     default_status: false,
-            //     'change': function() {
-            //         self._measureForm();
-            //     }
-            // });
-
-            // // Map styles.
-            // this.mapStylesFieldset.fieldsetexpander({
-            //     default_status: false,
-            //     'change': function() {
-            //         self._measureForm();
-            //     }
-            // });
-
-            // // Relationships.
-            // this.relationshipsFieldset.fieldsetexpander({
-            //     default_status: false,
-            //     'change': function() {
-            //         self._measureForm();
-            //     }
-            // });
-
         },
 
 
@@ -418,9 +383,8 @@
          * Expand and gloss an item edit form.
          */
         showForm: function(item) {
-            if (this._isLocked) {
-                return;
-            }
+
+            if (this._isLocked) return;
 
             // Getters and setters.
             this.item =                     item;
@@ -466,9 +430,8 @@
          * Collapse an item edit form and unbind all events.
          */
         hideForm: function(item, immediate) {
-            if (this._isLocked) {
-                return;
-            }
+
+            if (this._isLocked) return;
 
             // DOM touches.
             this._hideContainer(immediate);
@@ -480,14 +443,13 @@
         },
 
         /*
-         * Get form data, get geocoverage data, build ajax request and send
-         * data for save.
+         * Post form data.
          */
-        saveItemForm: function(coverage) {
+        saveItemForm: function() {
 
             // Fade the form, post the data.
             this._fadeDown();
-            this._postFormData(coverage);
+            this._postFormData();
 
         },
 
@@ -595,18 +557,10 @@
          */
         _expandTitle: function() {
 
-            // By default, fade to the default text color and weight.
-            var textColor = this.options.colors.dark_purple;
-
-            // Keep the title bold red if the form was not saved.
-            if (this.textSpan.data('changed')) {
-                textColor = this.options.colors.red;
-            }
-
             // Bold the title.
             this.textSpan.css({
                 'font-weight': 'bold',
-                'color': textColor
+                'color': this.options.colors.dark_purple
             });
 
         },
@@ -642,24 +596,14 @@
          * Drop down the opacity during data commit.
          */
         _fadeDown: function() {
-
-            // Highlight the item title.
-            this.element.animate({
-                'opacity': 0.3
-            }, 200);
-
+            this.element.animate({ 'opacity': 0.3 }, 200);
         },
 
         /*
          * Push up the opacity after data commit.
          */
         _fadeUp: function() {
-
-            // Highlight the item title.
-            this.element.animate({
-                'opacity': 1
-            }, 200);
-
+            this.element.animate({ 'opacity': 1 }, 200);
         },
 
         /*
@@ -738,8 +682,8 @@
         _applyData: function() {
 
             // Get use-DC as boolean.
-            var useDc = Boolean(this._data.use_dc_metadata);
-            var showBubble = Boolean(this._data.show_bubble);
+            var useDc = Boolean(parseInt(this._data.use_dc_metadata, 10));
+            var showBubble = Boolean(parseInt(this._data.show_bubble, 10));
 
             // Update title.
             this.title.val(this._data.title);
@@ -770,6 +714,7 @@
             this.endDate.val(this._data.end_date);
             this.startVisibleDate.val(this._data.start_visible_date);
             this.endVisibleDate.val(this._data.end_visible_date);
+            this.geocoverage.val(this._data.geocoverage);
 
             // Reposition the draggers.
             this.ambiguity.gradientbuilder(
@@ -798,8 +743,10 @@
 
             // Populate the rest of the list.
             _.each(this._records, _.bind(function(val, key) {
-                var option = $('<option />').val(key).text(val);
-                this.parentRecord.append(option);
+                if (!_.isNull(val)) {
+                    var option = $('<option />').val(key).text(val);
+                    this.parentRecord.append(option);
+                }
             }, this));
 
             // Set the value.
@@ -817,9 +764,9 @@
             // Get the content of the text editors.
             data.description =              this._getDescriptionContent();
             data.title =                    this._getTitleContent();
-            data.slug =                     this.slug.val();
 
             // Get the form field data.
+            data.slug =                     this.slug.val();
             data.use_dc_metadata =          this.useDcData.is(':checked') ? 1 : 0;
             data.show_bubble =              this.showBubble.is(':checked') ? 1 : 0;
             data.left_percent =             parseInt(this.leftPercent.val(), 10);
@@ -852,7 +799,7 @@
         /*
          * Get form data and merge with status and coverage data.
          */
-        _getDataForSave: function(coverage) {
+        _getDataForSave: function() {
 
             // Build the base form data.
             var data = this._getData();
@@ -863,7 +810,7 @@
             data.exhibit_id =               Neatline.record.id;
             data.space_active =             this.space.prop('checked').toString();
             data.time_active =              this.time.prop('checked').toString();
-            data.geocoverage =              coverage;
+            data.geocoverage =              this.geocoverage.val();
 
             return data;
 
@@ -897,6 +844,13 @@
         _enableTextEditors: function() {
             this.descriptionEditor.disable(false);
             $(this.descriptionEditor.$main[0]).css('opacity', 1);
+        },
+
+        /*
+         * Update the geocoverage textarea.
+         */
+        updateGeocoverage: function(geocoverage) {
+            this.geocoverage.val(geocoverage);
         },
 
 
@@ -939,7 +893,7 @@
             var self = this;
 
             // Get the data.
-            var data = this._getDataForSave(coverage);
+            var data = this._getDataForSave();
 
             // Commit.
             $.ajax({
@@ -1032,7 +986,6 @@
 
                 success: function() {
                     self._fadeUp();
-                    self.hideForm(self.item, true);
                     self._trigger('deletecomplete');
                 }
 
@@ -1089,7 +1042,7 @@
 
                 success: _.bind(function(newDescription) {
                     this.description.val(newDescription);
-                    this.descriptionEditor.updateFrame().refresh();
+                    this.descriptionEditor.updateFrame();
                     self._trigger('savecomplete');
                 }, this)
 

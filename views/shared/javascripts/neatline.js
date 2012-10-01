@@ -19,7 +19,7 @@
  * @author      Bethany Nowviskie <bethany@virginia.edu>
  * @author      Adam Soroka <ajs6f@virginia.edu>
  * @author      David McClure <david.mcclure@virginia.edu>
- * @copyright   2011 The Board and Visitors of the University of Virginia
+ * @copyright   2011 Rector and Board of Visitors, University of Virginia
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache 2 License
  */
 
@@ -257,8 +257,8 @@
                 // Define callbacks.
                 var callbacks = {
 
-                    'featureadded': function() {
-                        self._trigger('mapfeatureadded');
+                    'featureadded': function(event, obj) {
+                        self._trigger('mapfeatureadded', {}, obj);
                     },
 
                     'featureenter': function(event, obj) {
@@ -955,6 +955,15 @@
          */
         getMapZoom: function() {
             return this.map.neatlinemap('getZoomForSave');
+        },
+
+        /*
+         * Get the name of the current base layer.
+         *
+         * - return string: The layer name.
+         */
+        getMapBaseLayer: function() {
+            return this.map.neatlinemap('getBaseLayerForSave');
         },
 
         /*

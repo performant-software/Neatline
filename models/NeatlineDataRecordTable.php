@@ -20,7 +20,7 @@
  * @author      Bethany Nowviskie <bethany@virginia.edu>
  * @author      Adam Soroka <ajs6f@virginia.edu>
  * @author      David McClure <david.mcclure@virginia.edu>
- * @copyright   2011 The Board and Visitors of the University of Virginia
+ * @copyright   2011 Rector and Board of Visitors, University of Virginia
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache 2 License
  */
 
@@ -345,7 +345,7 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
             if (!is_null($selfRecord)) {
                 foreach ($records as $record) {
                     if ($record->id != $selfRecord->id) {
-                        $idToTitle[$record->id] = $record->title;
+                        $idToTitle[$record->id] = $record->getTitleForSelect();
                     }
                 }
             }
@@ -353,7 +353,7 @@ class NeatlineDataRecordTable extends Omeka_Db_Table
             // If there is no self record.
             else {
                 foreach ($records as $record) {
-                    $idToTitle[$record->id] = $record->title;
+                    $idToTitle[$record->id] = $record->getTitleForSelect();
                 }
             }
 

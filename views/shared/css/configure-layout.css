@@ -19,7 +19,7 @@
  * @author      Bethany Nowviskie <bethany@virginia.edu>
  * @author      Adam Soroka <ajs6f@virginia.edu>
  * @author      David McClure <david.mcclure@virginia.edu>
- * @copyright   2011 The Board and Visitors of the University of Virginia
+ * @copyright   2011 Rector and Board of Visitors, University of Virginia
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache 2 License
  */
 
@@ -74,8 +74,8 @@ span.neatline-toggle-button {
 }
 
 span.neatline-pressed {
-    color: #835A98;
-    border-color: #b49ac2;
+    color: #594E62;
+    border-color: #594E62;
 }
 
 span.neatline-highlighted {
@@ -101,7 +101,7 @@ div.draggable {
 span.drag-tag {
     position: relative;
     display: block;
-    color: #835a98;
+    color: #594E62;
 }
 
 #drag-map {

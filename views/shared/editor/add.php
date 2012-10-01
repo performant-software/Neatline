@@ -20,14 +20,14 @@
  * @author      Bethany Nowviskie <bethany@virginia.edu>
  * @author      Adam Soroka <ajs6f@virginia.edu>
  * @author      David McClure <david.mcclure@virginia.edu>
- * @copyright   2011 The Board and Visitors of the University of Virginia
+ * @copyright   2011 Rector and Board of Visitors, University of Virginia
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache 2 License
  */
 ?>
 
 <tr class="item-row" recordid="<?php echo $record->id; ?>" itemid="">
     <td class="item-title">
-        <span class="item-title-text"><?php echo ($record->title != null) ? $record->title : '[Untitled]'; ?></span>
+        <span class="item-title-text"><?php echo ($record->title != null) ? $record->title : __('[Untitled]'); ?></span>
         <span class="item-title-fader"></span>
     </td>
     <td class="col-1 col-row items">

@@ -15,7 +15,7 @@
  * @author      Bethany Nowviskie <bethany@virginia.edu>
  * @author      Adam Soroka <ajs6f@virginia.edu>
  * @author      David McClure <david.mcclure@virginia.edu>
- * @copyright   2011 The Board and Visitors of the University of Virginia
+ * @copyright   2011 Rector and Board of Visitors, University of Virginia
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache 2 License
  */
 
@@ -95,11 +95,17 @@
 
                 'delete': function() {
 
-                    if (self.modifyFeatures.feature) {
+                    if (!_.isUndefined(self.modifyFeatures) &&
+                        self.modifyFeatures.feature) {
 
                         var feature = self.modifyFeatures.feature;
                         self.modifyFeatures.unselectFeature(feature);
                         self._currentEditLayer.destroyFeatures([feature]);
+
+                        // Emit new geocoverage.
+                        self._trigger('featureadded', {}, {
+                            geocoverage: self.getWktForSave()
+                        });
 
                     }
 
@@ -182,7 +188,15 @@
                 this._currentEditLayer, {
                     standalone: true,
                     onModification: function() {
-                        self._trigger('featureadded');
+
+                        // Emit new geocoverage.
+                        self._trigger('featureadded', {}, {
+                            geocoverage: self.getWktForSave()
+                        });
+
+                        // Add click controls.
+                        self._addClickControls();
+
                     }
                 }
             );
@@ -206,13 +220,6 @@
             this._popUpEditControls();
             this._positionToolbar();
 
-            // If necessary, reselect a clicked feature.
-            $.each(this._currentEditLayer.features, function(i, feature) {
-                if (feature === self._clickedFeature) {
-                    self.modifyFeatures.selectFeature(self._clickedFeature);
-                }
-            });
-
         },
 
         /*
@@ -223,10 +230,11 @@
             // Unselect a selected feature.
             if (!_.isUndefined(this.modifyFeatures)) {
                 this.modifyFeatures.unselectFeature(this._clickedFeature);
+                // Remove control.
+                this.map.removeControl(this.modifyFeatures);
             }
 
-            // Remove controls.
-            this.map.removeControl(this.modifyFeatures);
+            // Remove control.
             this.map.removeControl(this.editToolbar);
             this.element.editgeometry('hideButtons');
 
@@ -244,26 +252,26 @@
 
             var wkts = [];
 
-            this.modifyFeatures.unselectFeature(this._clickedFeature);
+            // Unselect feature.
+            if (!_.isUndefined(this.modifyFeatures)) {
+                this.modifyFeatures.unselectFeature(this._clickedFeature);
+            }
+
+            // Cancel running sketch.
             this.cancelSketch();
 
-            // Push the wkt's onto the array.
-            $.each(this._currentEditLayer.features, function(i, feature) {
+            // Features -> KML.
+            var formatter = new OpenLayers.Format.KML();
+            var kml = formatter.write(this._currentEditLayer.features);
 
-                // Cast the feature to wkt.
-                var wkt = feature.geometry.toString();
+            // Re-select the feature.
+            if (!_.isUndefined(this.modifyFeatures) &&
+                !_.isNull(this._clickedFeature)) {
+                try { this.modifyFeatures.selectFeature(this._clickedFeature); }
+                catch (err) {}
+            }
 
-                // ** A hack to prevent phantom empty points from getting
-                // saved in the wkt strings. It is not clear why these artifacts
-                // are getting generated and committed, but they cause erratic
-                // bound calculation and zooming bugs. This needs a real fix.
-                if (!_.include(['POINT(NaN NaN)', 'POINT()'], wkt)) {
-                    wkts.push(wkt);
-                }
-
-            });
-
-            return wkts.join(this.options.wkt_delimiter);
+            return kml;
 
         },
 
@@ -286,15 +294,22 @@
         /*
          * Get the current center of the viewport.
          */
-         getCenterForSave: function() {
-             return this.map.getCenter().toShortString();
-         },
+        getCenterForSave: function() {
+            return this.map.getCenter().toShortString();
+        },
 
         /*
          * Get the current zoom of the viewport.
          */
         getZoomForSave: function() {
             return this.map.getZoom();
+        },
+
+        /*
+         * Get the current base layer for save.
+         */
+        getBaseLayerForSave: function() {
+            return this.map.baseLayer.name;
         },
 
 
@@ -309,8 +324,6 @@
          * Update the feature color for the current editing layer.
          */
         setCurrentRecordStyle: function(style, value) {
-
-            // console.log(value);
 
             var self = this;
 
@@ -378,10 +391,6 @@
                     );
 
                     // Rerender the layer to manifest the change.
-                    // record.layer.redraw();
-
-                    // redraw() (above) is _not_ working. This is a hack to
-                    // trigger a rerender on the features.
                     $.each(record.layer.features, function(i, feature) {
                         self.highlightControl.unhighlight(feature);
                     });
@@ -419,10 +428,18 @@
                     OpenLayers.Handler.Path, {
                         displayClass: 'olControlDrawFeaturePath',
                         featureAdded: function() {
-                            self._trigger('featureadded');
+
+                            // Emit new geocoverage.
+                            self._trigger('featureadded', {}, {
+                                geocoverage: self.getWktForSave()
+                            });
+
+                            // Add click controls.
                             self._addClickControls();
+
                         }
-                }),
+                    }
+                ),
 
                 // Draw points.
                 new OpenLayers.Control.DrawFeature(
@@ -430,10 +447,18 @@
                     OpenLayers.Handler.Point, {
                         displayClass: 'olControlDrawFeaturePoint',
                         featureAdded: function() {
-                            self._trigger('featureadded');
+
+                            // Emit new geocoverage.
+                            self._trigger('featureadded', {}, {
+                                geocoverage: self.getWktForSave()
+                            });
+
+                            // Add click controls.
                             self._addClickControls();
+
                         }
-                }),
+                    }
+                ),
 
                 // Draw polygons.
                 new OpenLayers.Control.DrawFeature(
@@ -441,10 +466,18 @@
                     OpenLayers.Handler.Polygon, {
                         displayClass: 'olControlDrawFeaturePolygon',
                         featureAdded: function() {
-                            self._trigger('featureadded');
+
+                            // Emit new geocoverage.
+                            self._trigger('featureadded', {}, {
+                                geocoverage: self.getWktForSave()
+                            });
+
+                            // Add click controls.
                             self._addClickControls();
+
                         }
-                })
+                    }
+                )
 
             ];
 

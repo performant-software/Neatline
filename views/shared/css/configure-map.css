@@ -19,13 +19,13 @@
  * @author      Bethany Nowviskie <bethany@virginia.edu>
  * @author      Adam Soroka <ajs6f@virginia.edu>
  * @author      David McClure <david.mcclure@virginia.edu>
- * @copyright   2011 The Board and Visitors of the University of Virginia
+ * @copyright   2011 Rector and Board of Visitors, University of Virginia
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache 2 License
  */
 
 #configure-map {
     padding-top: 1.4em;
-    width: 156px;
+    width: 380px;
 }
 
 #configure-map h5 {
@@ -36,9 +36,30 @@
 }
 
 #configure-map hr {
-    margin: 5px 0;
+    margin: 7px 0 2px;
 }
 
 #configure-map select {
     width: 150px;
+}
+
+table.map-styles-defaults {
+    width: 300px;
+}
+
+.map-styles-defaults td {
+    padding: 0;
+}
+
+.map-styles-defaults label {
+    width: 140px;
+    font-weight: normal;
+}
+
+.map-styles-defaults div.inline-inputs {
+    margin: 0.3em 0 0 0;
+}
+
+.map-styles-defaults div.input {
+    width: 100px;
 }

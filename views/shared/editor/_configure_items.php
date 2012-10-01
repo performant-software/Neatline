@@ -20,14 +20,14 @@
  * @author      Bethany Nowviskie <bethany@virginia.edu>
  * @author      Adam Soroka <ajs6f@virginia.edu>
  * @author      David McClure <david.mcclure@virginia.edu>
- * @copyright   2011 The Board and Visitors of the University of Virginia
+ * @copyright   2011 Rector and Board of Visitors, University of Virginia
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache 2 License
  */
 ?>
 
 <!-- Edit order. -->
-<button class="btn icon loop">Edit Item Order</button>
-<p>Click to edit the ordering of the items in the description tray.</p>
+<button class="btn icon loop"><?php echo __('Edit Item Order'); ?></button>
+<p><?php echo __('Click to edit the ordering of the items in the description tray.'); ?></p>
 <hr />
 
-<button class="btn icon approve save">Save</button>
+<button class="btn btn-neatline save"><i class="icon-ok icon-white"></i> <?php echo __('Save'); ?></button>

@@ -15,7 +15,7 @@
  * @author      Bethany Nowviskie <bethany@virginia.edu>
  * @author      Adam Soroka <ajs6f@virginia.edu>
  * @author      David McClure <david.mcclure@virginia.edu>
- * @copyright   2011 The Board and Visitors of the University of Virginia
+ * @copyright   2011 Rector and Board of Visitors, University of Virginia
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache 2 License
  */
 
@@ -38,7 +38,7 @@
             colors: {
                 light_blue: '#FFFEF8',
                 light_yellow: '#f9f9f9',
-                dark_purple: '#4f1d6a',
+                dark_purple: '#594e62',
                 purple: '#724e85',
                 text: '#515151',
                 gray: '#8d8d8d',
@@ -505,19 +505,10 @@
         },
 
         /*
-         * Build functionality on the Space/Time column headers. On mouseover,
-         * highlight the column to show that it is filterable by a click; on
-         * mousedown, hide all items that do not have an active record in the
-         * clicked column.
+         * Add tooltips to column headers.
          */
         _glossColumnHeaders: function() {
-
-            // Tooltips.
-            this.itemsListHeader.find('a.header').twipsy({
-                offset: 4,
-                animate: false
-            });
-
+            // this.itemsListHeader.find('a.header').tooltip();
         },
 
         /*
@@ -741,9 +732,7 @@
          */
          _showForm: function(item, scrollMap, scrollTimeline, focusItems) {
 
-            if (this._isEditFormLocked()) {
-               return;
-            }
+            if (this._isEditFormLocked()) return;
 
             var self = this;
             var immediate = false;
@@ -790,9 +779,7 @@
          */
          _hideForm: function(item, immediate) {
 
-             if (this._isEditFormLocked()) {
-                 return;
-             }
+            if (this._isEditFormLocked()) return;
 
             // Hide the form.
             this.editForm.itemform(
@@ -808,6 +795,7 @@
             // Update trackers.
             item.data('expanded', false);
             this._currentFormItem = null;
+            this._currentFormItemId = null;
 
             // Show item rows, recuperate scrollTop.
             this._showItemRows();
@@ -1053,6 +1041,13 @@
          */
         reloadItemForm: function(extent, zoom) {
             this.editForm.itemform('reloadForm');
+        },
+
+        /*
+         * Update geocoverage on current form.
+         */
+        updateGeocoverage: function(geocoverage) {
+            this.editForm.itemform('updateGeocoverage', geocoverage);
         },
 
         /*

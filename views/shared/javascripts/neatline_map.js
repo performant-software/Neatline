@@ -16,7 +16,7 @@
  * @author      Bethany Nowviskie <bethany@virginia.edu>
  * @author      Adam Soroka <ajs6f@virginia.edu>
  * @author      David McClure <david.mcclure@virginia.edu>
- * @copyright   2011 The Board and Visitors of the University of Virginia
+ * @copyright   2011 Rector and Board of Visitors, University of Virginia
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache 2 License
  */
 
@@ -150,15 +150,33 @@
             this.map.addLayers(layers);
             this._setDefaultLayer();
 
+            // Set the default focus.
             if (!this.setViewport(
-                Neatline.record.default_map_bounds, Neatline.record.default_map_zoom
+                Neatline.record.default_map_bounds,
+                Neatline.record.default_map_zoom
             )) {
-                // Google.v3 uses EPSG:900913 as projection, so we have to
-                // transform our coordinates
-                this.map.setCenter(new OpenLayers.LonLat(10.2, 48.9).transform(
-                    new OpenLayers.Projection("EPSG:4326"),
-                    this.map.getProjectionObject()
-                ), 5);
+
+                // If no focus is defined, try to geolocate.
+                var geolocate = new OpenLayers.Control.Geolocate({
+                    bind: true,
+                    watch: false
+                });
+
+                geolocate.events.on({
+                    locationfailed: function() {
+                        self.map.setCenter(
+                            new OpenLayers.LonLat(-8738850.21367, 4584105.47978),
+                            3,
+                            false,
+                            false
+                        );
+                    }
+                });
+
+                this.map.addControl(geolocate);
+                this.map.zoomTo(6);
+                geolocate.activate();
+
             }
 
         },
@@ -302,53 +320,59 @@
             // Instantiate database and associations objects.
             this._db = TAFFY();
 
-            _.each(layers, function(item) {
+            _.each(layers, function(record) {
+
+                // Construct formatter.
+                var formatter = new OpenLayers.Format.KML();
+                var features = [];
+
+                // ** TEMPORARY: Handle WKT data from 1.0 release.
+                features = formatter.read(record.wkt);
+                if (_.isEmpty(features)) {
+
+                    if (!_.isNull(record.wkt)) {
+                        $.each(record.wkt.split(self.options.wkt_delimiter), function(i, wkt) {
+
+                            // Construct WKT format reader.
+                            var reader = new OpenLayers.Format.WKT();
+
+                            // Try to read valid wkt. If valid, build geometry.
+                            if (!_.isUndefined(reader.read(wkt))) {
+                                var geometry = new OpenLayers.Geometry.fromWKT(wkt);
+                                var feature = new OpenLayers.Feature.Vector(geometry);
+                                features.push(feature);
+                            }
+
+                        });
+                    }
+
+                }
 
                 // Get float values for opacities.
-                item.vector_opacity = item.vector_opacity / 100;
-                item.stroke_opacity = item.stroke_opacity / 100;
-                item.select_opacity = item.select_opacity / 100;
-                item.graphic_opacity = item.graphic_opacity / 100;
+                record.vector_opacity = record.vector_opacity / 100;
+                record.stroke_opacity = record.stroke_opacity / 100;
+                record.select_opacity = record.select_opacity / 100;
+                record.graphic_opacity = record.graphic_opacity / 100;
 
                 // Construct the style.
                 var style = self._getStyleMap(
-                    item.vector_color,
-                    item.vector_opacity,
-                    item.stroke_color,
-                    item.stroke_opacity,
-                    item.stroke_width,
-                    item.point_radius,
-                    item.point_image,
-                    item.highlight_color,
-                    item.select_opacity,
-                    item.graphic_opacity
+                    record.vector_color,
+                    record.vector_opacity,
+                    record.stroke_color,
+                    record.stroke_opacity,
+                    record.stroke_width,
+                    record.point_radius,
+                    record.point_image,
+                    record.highlight_color,
+                    record.select_opacity,
+                    record.graphic_opacity
                 );
 
                 // Build the layer.
-                var vectorLayer = new OpenLayers.Layer.Vector(item.title, {
+                var vectorLayer = new OpenLayers.Layer.Vector(record.title, {
                     styleMap: style,
                     displayInLayerSwitcher: false
                 });
-
-                // Empty array to hold features objects.
-                var features = [];
-
-                // Build the features.
-                if (!_.isNull(item.wkt)) {
-                    $.each(item.wkt.split(self.options.wkt_delimiter), function(i, wkt) {
-
-                        // Construct WKT format reader.
-                        var reader = new OpenLayers.Format.WKT();
-
-                        // Try to read valid wkt. If valid, build geometry.
-                        if (!_.isUndefined(reader.read(wkt))) {
-                            var geometry = new OpenLayers.Geometry.fromWKT(wkt);
-                            var feature = new OpenLayers.Feature.Vector(geometry);
-                            features.push(feature);
-                        }
-
-                    });
-                }
 
                 // Add the vectors to the layer.
                 vectorLayer.addFeatures(features);
@@ -357,14 +381,14 @@
                 var wmsLayer = null;
 
                 // If a WMS address is defined.
-                if (!_.isNull(item.wmsAddress) && !_.isNull(item.layers)) {
+                if (!_.isNull(record.wmsAddress) && !_.isNull(record.layers)) {
 
                     // Build layer.
                     wmsLayer = new OpenLayers.Layer.WMS(
-                        item.title,
-                        item.wmsAddress,
+                        record.title,
+                        record.wmsAddress,
                         {
-                            layers: item.layers,
+                            layers: record.layers,
                             styles: '',
                             transparent: true,
                             format: 'image/png8',
@@ -378,7 +402,7 @@
                     );
 
                     // Set starting opacity.
-                    wmsLayer.opacity = item.vector_opacity;
+                    wmsLayer.opacity = record.vector_opacity;
 
                     // Track and add.
                     self._wmsLayers.push(wmsLayer);
@@ -388,11 +412,11 @@
 
                 // Add the database record.
                 self._db.insert({
-                    itemid: item.item_id,
+                    itemid: record.item_id,
                     layerid: vectorLayer.id,
-                    recordid: item.id,
-                    slug: item.slug,
-                    data: item,
+                    recordid: record.id,
+                    slug: record.slug,
+                    data: record,
                     layer: vectorLayer,
                     wms: wmsLayer,
                     selected: false
@@ -502,7 +526,7 @@
                     });
 
                     if (!_.isUndefined(self.modifyFeatures)) {
-                        self.modifyFeatures.selectFeature(feature);
+                        self.modifyFeatures.selectFeature(self._clickedFeature);
                     }
 
                 },
@@ -1105,11 +1129,16 @@
          * was successful.
          */
         setViewport: function(centerBounds, zoom) {
+
             var success = false;
 
+            // If a default focus is defined.
             if (!_.isNull(centerBounds)) {
+
+                // Get default bounds.
                 var bounds = centerBounds.split(',');
 
+                // If the bounds is an extent.
                 if (bounds.length === 4) {
                     this.map.zoomToExtent(new OpenLayers.Bounds(
                         parseFloat(bounds[0]),
@@ -1118,7 +1147,10 @@
                         parseFloat(bounds[3])
                     ));
                     success = true;
-                } else if (bounds.length === 2) {
+                }
+
+                // If the bounds is a lat/lon.
+                else if (bounds.length === 2) {
                     var zoom = _.isNull(zoom) ? 5 : parseInt(zoom, 10);
                     var latlon = new OpenLayers.LonLat(
                         parseFloat(bounds[0].trim()), parseFloat(bounds[1].trim())
@@ -1126,9 +1158,11 @@
                     this.map.setCenter(latlon, zoom);
                     success = true;
                 }
+
             }
 
             return success;
+
         }
 
     });

@@ -20,7 +20,7 @@
  * @author      Bethany Nowviskie <bethany@virginia.edu>
  * @author      Adam Soroka <ajs6f@virginia.edu>
  * @author      David McClure <david.mcclure@virginia.edu>
- * @copyright   2011 The Board and Visitors of the University of Virginia
+ * @copyright   2011 Rector and Board of Visitors, University of Virginia
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache 2 License
  */
 
@@ -31,10 +31,7 @@
  */
 function neatline_queueAdminCss()
 {
-
-    // Custom CSS.
     queue_css('neatline-admin');
-
 }
 
 /**
@@ -46,7 +43,7 @@ function neatline_queueEditorAssets()
 {
 
     // CSS.
-    queue_css('bootstrap.xtra.min');
+    queue_css('bootstrap/css/bootstrap.min');
     queue_css('neatline-editor');
     queue_css('neatline-fullscreen');
     queue_css('gradient-builder');
@@ -73,14 +70,11 @@ function neatline_queueEditorAssets()
     queue_js('editor/utilities/_gradient_builder', 'javascripts');
     queue_js('editor/utilities/_dropdown', 'javascripts');
     queue_js('editor/utilities/_integer_dragger', 'javascripts');
-    queue_js('editor/utilities/_fieldset_expander', 'javascripts');
-    queue_js('editor/utilities/_record_slug_builder', 'javascripts');
     queue_js('editor/_constructEditor', 'javascripts');
 
     // Extenal libraries.
     queue_js('libraries/jquery.miniColors-0.1/jquery.miniColors.min', 'javascripts');
     queue_js('libraries/CLEditor-1.3.0/jquery.cleditor.min', 'javascripts');
-    queue_js('libraries/bootstrap-twipsy', 'javascripts');
 
 }
 
@@ -93,7 +87,7 @@ function neatline_queuePublicAssets()
 {
     queue_js('_constructInThemeNeatline', 'javascripts');
     queue_css('neatline-public');
-    $google = 'http://maps.google.com/maps/api/js?v=3.5&sensor=false';
+    $google = 'http://maps.google.com/maps/api/js?v=3.8&sensor=false';
 
     // API calls.
     $headScript = __v()->headScript();
@@ -147,7 +141,7 @@ function neatline_queueNeatlineAssets($exhibit)
     // Core Neatline stylesheet.
     queue_css('neatline');
     queue_css('neatline-timeline');
-    queue_css('jquery-ui');
+    queue_css('neatline-jquery-ui');
     neatline_queueExhibitCss($exhibit);
 
     // Application classes.
@@ -156,7 +150,6 @@ function neatline_queueNeatlineAssets($exhibit)
     queue_js('neatline_timeline', 'javascripts');
     queue_js('neatline_items', 'javascripts');
     queue_js('positioner', 'javascripts/utilities');
-    queue_js('scroller', 'javascripts/utilities');
     queue_js('bubbles', 'javascripts/utilities');
     queue_js('span_styler', 'javascripts/utilities');
     queue_js('_utilities', 'javascripts/libraries');
@@ -172,8 +165,10 @@ function neatline_queueNeatlineAssets($exhibit)
     queue_js('libraries/iso8601.min', 'javascripts');
     queue_js('libraries/raphael', 'javascripts');
 
-    // Google fonts.
-    echo __v()->partial('neatline/_fonts.php');
+    // Google fonts. Use prependStylesheet so it gets inserted before other
+    // queued Neatline CSS files.
+    $headLink = __v()->headLink();
+    $headLink->prependStylesheet('http://fonts.googleapis.com/css?family=Crimson+Text:400,400italic,600,600italic,700,700italic');
 
 }
 
@@ -251,8 +246,8 @@ function neatline_getUndatedItemsDataUrl($neatline_id)
  */
 function neatline_uninstallWarningMessage()
 {
-    return '<p><strong>Warning</strong>: Uninstalling the Neatline plugin '
-        . 'will permanently delete all Neatline exhibits.';
+    return '<p><strong>'.__('Warning').'</strong>: '
+         . __('Uninstalling the Neatline plugin will permanently delete all Neatline exhibits.');
 }
 
 /**

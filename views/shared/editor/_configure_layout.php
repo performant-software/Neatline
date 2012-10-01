@@ -20,24 +20,24 @@
  * @author      Bethany Nowviskie <bethany@virginia.edu>
  * @author      Adam Soroka <ajs6f@virginia.edu>
  * @author      David McClure <david.mcclure@virginia.edu>
- * @copyright   2011 The Board and Visitors of the University of Virginia
+ * @copyright   2011 Rector and Board of Visitors, University of Virginia
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache 2 License
  */
 ?>
 
 <div id="options">
-    <span id="toggle-map">Map</span>
-    <span id="toggle-timeline">Timeline</span>
-    <span id="toggle-items">Items</span>
+    <span id="toggle-map"><?php echo __('Map'); ?></span>
+    <span id="toggle-timeline"><?php echo __('Timeline'); ?></span>
+    <span id="toggle-items"><?php echo __('Items'); ?></span>
 </div>
 
 <div id="drag-box"></div>
 
-<button id="save-arrangement" class="btn icon approve save">Save arrangement</button>
-<button id="fix-positions" class="btn icon pin save">Fix starting viewport positions</button>
+<button id="save-arrangement" class="btn btn-neatline"><i class="icon-ok icon-white"></i> <?php echo __('Save arrangement'); ?></button>
+<button id="fix-positions" class="btn btn-neatline"><i class="icon-screenshot icon-white"></i> <?php echo __('Fix starting viewport positions'); ?></button>
 
 <hr />
 
-<p>Use the toggle buttons to activate and deactivate blocks; drag the
+<p><?php echo __('Use the toggle buttons to activate and deactivate blocks; drag the
 blocks to rearrange them. Click the "Fix starting viewport positions" button
-to store the current viewport settings as the public defaults.</p>
+to store the current viewport settings as the public defaults.'); ?></p>

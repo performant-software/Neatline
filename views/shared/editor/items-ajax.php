@@ -20,7 +20,7 @@
  * @author      Bethany Nowviskie <bethany@virginia.edu>
  * @author      Adam Soroka <ajs6f@virginia.edu>
  * @author      David McClure <david.mcclure@virginia.edu>
- * @copyright   2011 The Board and Visitors of the University of Virginia
+ * @copyright   2011 Rector and Board of Visitors, University of Virginia
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache 2 License
  */
 ?>
@@ -39,7 +39,7 @@
     <tbody>
 
     <tr id="neatline-header" class="header-row <?php if (!$records) { echo 'hidden'; } ?>">
-        <td class="neatline-bar">Neatline Records</td>
+    <td class="neatline-bar"><?php echo __('Neatline Records'); ?></td>
         <td class="col-1 neatline-bar"></td>
         <td class="col-2 neatline-bar"></td>
         <td class="col-3 neatline-bar"></td>
@@ -51,11 +51,6 @@
             <td class="item-title">
                 <span class="item-title-text"><?php echo $record->getTitleOrDescription(); ?></span>
                 <span class="item-title-fader"></span>
-                <div class="form-actions">
-                    <a href="#" class="save">Save</a>
-                    <a href="#" class="delete">Delete</a>
-                    <a href="#" class="return">Close</a>
-                </div>
             </td>
             <td class="col-1 col-row items">
                 <input type="checkbox" <?php echo ($record->items_active == 1) ? 'checked' : ''; ?> />
@@ -73,7 +68,7 @@
     <?php endforeach; ?>
 
     <tr id="omeka-header" class="header-row <?php if (count($items) == 0) { echo 'hidden'; } ?>">
-        <td class="neatline-bar">Omeka Records</td>
+      <td class="neatline-bar"><?php echo __('Omeka Records'); ?></td>
         <td class="col-1 neatline-bar"></td>
         <td class="col-2 neatline-bar"></td>
         <td class="col-3 neatline-bar"></td>
@@ -85,11 +80,6 @@
             <td class="item-title">
                 <span class="item-title-text"><?php echo item('Dublin Core', 'Title', null, $item); ?></span>
                 <span class="item-title-fader"></span>
-                <div class="form-actions">
-                    <a href="#" class="save">Save</a>
-                    <a href="#" class="delete">Delete</a>
-                    <a href="#" class="return">Close</a>
-                </div>
             </td>
             <td class="col-1 col-row items">
                 <input type="checkbox" <?php echo $neatline->getRecordStatus($item, 'items')? 'checked' : ''; ?> />

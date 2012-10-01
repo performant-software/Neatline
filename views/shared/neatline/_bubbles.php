@@ -20,17 +20,17 @@
  * @author      Bethany Nowviskie <bethany@virginia.edu>
  * @author      Adam Soroka <ajs6f@virginia.edu>
  * @author      David McClure <david.mcclure@virginia.edu>
- * @copyright   2011 The Board and Visitors of the University of Virginia
+ * @copyright   2011 Rector and Board of Visitors, University of Virginia
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache 2 License
  */
 ?>
 
 <script type="text/template" id="bubble-template">
     <div class="bubble-container">
-        <a href="#" class="freeze-bubble">Click to freeze</a>
-        <a href="#" class="close-bubble">Close <span class="close-x">X</span></a>
+        <a href="#" class="freeze-bubble"><?php echo __('Click to freeze'); ?></a>
+        <a href="#" class="close-bubble"><?php echo __('Close'); ?> <span class="close-x">X</span></a>
         <div class="title"><%= title %></div>
-        <div class="click-for-info">Click for more information.</div>
+        <div class="click-for-info"><?php echo __('Click for more information.'); ?></div>
         <div class="body"><%= body %></div>
     </div>
 </script>

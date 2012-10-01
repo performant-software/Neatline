@@ -20,33 +20,33 @@
  * @author      Bethany Nowviskie <bethany@virginia.edu>
  * @author      Adam Soroka <ajs6f@virginia.edu>
  * @author      David McClure <david.mcclure@virginia.edu>
- * @copyright   2011 The Board and Visitors of the University of Virginia
+ * @copyright   2011 Rector and Board of Visitors, University of Virginia
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache 2 License
  */
 ?>
 
 <!-- Toggle context band. -->
 <input type="checkbox" name="band-active" <?php if ($exhibit->is_context_band === 1) { echo 'checked="checked"'; } ?>/>
-<h5 class="inline">Enable Context Band</h5>
+<h5 class="inline"><?php echo __('Enable Context Band'); ?></h5>
 <hr />
 
 <!-- Context band unit. -->
-<h5>Context Band Unit</h5>
+<h5><?php echo __('Context Band Unit'); ?></h5>
 <select name="band-unit">
   <?php $unit = $exhibit->getStyle('context_band_unit'); ?>
-  <option value="hour" <?php if ($unit == 'hour') { echo 'selected'; } ?>>Hour</option>
-  <option value="day" <?php if ($unit == 'day') { echo 'selected'; } ?>>Day</option>
-  <option value="week" <?php if ($unit == 'week') { echo 'selected'; } ?>>Week</option>
-  <option value="month" <?php if ($unit == 'month') { echo 'selected'; } ?>>Month</option>
-  <option value="year" <?php if ($unit == 'year') { echo 'selected'; } ?>>Year</option>
-  <option value="decade" <?php if ($unit == 'decade') { echo 'selected'; } ?>>Decade</option>
-  <option value="century" <?php if ($unit == 'century') { echo 'selected'; } ?>>Century</option>
+  <option value="hour" <?php if ($unit == 'hour') { echo 'selected'; } ?>><?php echo __('Hour'); ?></option>
+  <option value="day" <?php if ($unit == 'day') { echo 'selected'; } ?>><?php echo __('Day'); ?></option>
+  <option value="week" <?php if ($unit == 'week') { echo 'selected'; } ?>><?php echo __('Week'); ?></option>
+  <option value="month" <?php if ($unit == 'month') { echo 'selected'; } ?>><?php echo __('Month'); ?></option>
+  <option value="year" <?php if ($unit == 'year') { echo 'selected'; } ?>><?php echo __('Year'); ?></option>
+  <option value="decade" <?php if ($unit == 'decade') { echo 'selected'; } ?>><?php echo __('Decade'); ?></option>
+  <option value="century" <?php if ($unit == 'century') { echo 'selected'; } ?>><?php echo __('Century'); ?></option>
 </select>
 <hr />
 
 <!-- Context band height percentage. -->
-<h5>Context Band Height %</h5>
+<h5><?php echo __('Context Band Height %'); ?></h5>
 <input type="text" class="integer-dragger" name="band-height" value="<?php echo $exhibit->getStyle('context_band_height'); ?>" />
 <hr />
 
-<button class="btn icon approve save">Save</button>
+<button class="btn btn-neatline save"><i class="icon-ok icon-white"></i> <?php echo __('Save'); ?></button>

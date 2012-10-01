@@ -20,7 +20,7 @@
  * @author      Bethany Nowviskie <bethany@virginia.edu>
  * @author      Adam Soroka <ajs6f@virginia.edu>
  * @author      David McClure <david.mcclure@virginia.edu>
- * @copyright   2011 The Board and Visitors of the University of Virginia
+ * @copyright   2011 Rector and Board of Visitors, University of Virginia
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache 2 License
  */
 
@@ -96,6 +96,25 @@ class Neatline_NeatlineBaseLayerTableTest extends Neatline_Test_AppTestCase
         $this->assertEquals($layers[$gstr->id], 'Google Streets');
         $this->assertEquals($layers[$ghyb->id], 'Google Hybrid');
         $this->assertEquals($layers[$gsat->id], 'Google Satellite');
+
+    }
+
+    /**
+     * getLayerByName() should retrieve the layer record with the passed
+     * name.
+     *
+     * @return void.
+     */
+    public function testGetLayerByName()
+    {
+
+        // Create a base layer.
+        $layer = new NeatlineBaseLayer();
+        $layer->name = 'Test Layer';
+        $layer->save();
+
+        $retrievedLayer = $this->_layersTable->getLayerByName('Test Layer');
+        $this->assertEquals($retrievedLayer->id, $layer->id);
 
     }
 

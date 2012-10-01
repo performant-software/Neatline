@@ -20,7 +20,7 @@
  * @author      Bethany Nowviskie <bethany@virginia.edu>
  * @author      Adam Soroka <ajs6f@virginia.edu>
  * @author      David McClure <david.mcclure@virginia.edu>
- * @copyright   2011 The Board and Visitors of the University of Virginia
+ * @copyright   2011 Rector and Board of Visitors, University of Virginia
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache 2 License
  */
 
@@ -55,7 +55,7 @@ class NeatlineExhibit extends Omeka_Record implements Zend_Acl_Resource_Interfac
 
     // Viewport presence.
     public $is_map = 1;
-    public $is_timeline = 1;
+    public $is_timeline = 0;
     public $is_items = 0;
 
     // Map position defaults.
@@ -162,7 +162,8 @@ class NeatlineExhibit extends Omeka_Record implements Zend_Acl_Resource_Interfac
      * Save default viewport positions.
      *
      * @param string $mapCenter The center for the map.
-     * @param string $mapZoom The integer zoom value.
+     * @param integer $mapZoom The integer zoom value.
+     * @param string $baseLayer The name of the base layer.
      * @param string $timelineCenter The timestamp for the timeline focus.
      * @param string $timelineZoom The timeline zoom level.
      *
@@ -171,6 +172,7 @@ class NeatlineExhibit extends Omeka_Record implements Zend_Acl_Resource_Interfac
     public function saveViewportPositions(
         $mapCenter,
         $mapZoom,
+        $baseLayer,
         $timelineCenter,
         $timelineZoom
     )
@@ -181,6 +183,7 @@ class NeatlineExhibit extends Omeka_Record implements Zend_Acl_Resource_Interfac
         $this->default_map_zoom = intval($mapZoom);
         $this->default_focus_date = $timelineCenter;
         $this->default_timeline_zoom = $timelineZoom;
+        $this->setBaseLayerByName($baseLayer);
         $this->save();
 
     }
@@ -257,6 +260,27 @@ class NeatlineExhibit extends Omeka_Record implements Zend_Acl_Resource_Interfac
         }
 
         return false;
+
+    }
+
+    /**
+     * Set the current baselayer by name.
+     *
+     * @param string name The name.
+     *
+     * @param User $user
+     */
+    public function setBaseLayerByName($name)
+    {
+
+        // Get the base layers table, get the record.
+        $_layersTable = $this->getTable('NeatlineBaseLayer');
+        $baseLayer = $_layersTable->getLayerByName($name);
+
+        // Set key.
+        if ($baseLayer) {
+            $this->default_base_layer = $baseLayer->id;
+        }
 
     }
 
