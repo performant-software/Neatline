@@ -211,7 +211,7 @@ class Neatline_IndexController extends Omeka_Controller_AbstractActionController
      */
     protected function _getAddSuccessMessage($neatline)
     {
-        return __('The Neatline "%s" was successfully added!', $neatline->name);
+        return __('The Neatline "%s" was successfully added!', $neatline->title);
     }
 
     /**
@@ -219,7 +219,7 @@ class Neatline_IndexController extends Omeka_Controller_AbstractActionController
      */
     protected function _getEditSuccessMessage($neatline)
     {
-        return __('The Neatline "%s" was successfully changed!', $neatline->name);
+        return __('The Neatline "%s" was successfully changed!', $neatline->title);
     }
 
     /**
@@ -227,7 +227,7 @@ class Neatline_IndexController extends Omeka_Controller_AbstractActionController
      */
     protected function _getDeleteSuccessMessage($neatline)
     {
-        return __('The Neatline "%s" was successfully deleted!', $neatline->name);
+        return __('The Neatline "%s" was successfully deleted!', $neatline->title);
     }
 
     /**
@@ -235,7 +235,7 @@ class Neatline_IndexController extends Omeka_Controller_AbstractActionController
      */
     protected function _getDeleteConfirmMessage($neatline)
     {
-        return __('This will delete the Neatline "%s" and its associated metadata.', $neatline->name);
+        return __('This will delete the Neatline "%s" and its associated metadata.', $neatline->title);
     }
 
     /**
