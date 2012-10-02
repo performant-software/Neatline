@@ -48,7 +48,7 @@ echo head(array('content_class' => 'neatline', 'title' => $title));
     <thead>
         <tr>
         <!-- Column headings. -->
-        <?php browse_headings(array(
+        <?php echo browse_headings(array(
             __('Exhibit') => 'name',
             __('Items Query') => null,
             __('Modified') => 'modified',
