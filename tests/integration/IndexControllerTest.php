@@ -151,7 +151,7 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
 
         // Check for the error.
         $this->assertQueryContentContains(
-            'ul.errors li',
+            'ul.error li',
             'Enter a title.'
         );
 
@@ -188,7 +188,7 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
 
         // Check for the error.
         $this->assertQueryContentContains(
-            'ul.errors li',
+            'ul.error li',
             'The slug cannot be empty.'
         );
 
@@ -225,7 +225,7 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
 
         // Check for the error.
         $this->assertQueryContentContains(
-            'ul.errors li',
+            'ul.error li',
             'The slug can only contain lowercase letters, numbers, and hyphens.'
         );
 
@@ -262,7 +262,7 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
 
         // Check for the error.
         $this->assertQueryContentContains(
-            'ul.errors li',
+            'ul.error li',
             'The slug can only contain lowercase letters, numbers, and hyphens.'
         );
 
@@ -299,7 +299,7 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
 
         // Check for the error.
         $this->assertQueryContentContains(
-            'ul.errors li',
+            'ul.error li',
             'The slug can only contain lowercase letters, numbers, and hyphens.'
         );
 
@@ -336,7 +336,7 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
 
         // Check for the error.
         $this->assertNotQueryContentContains(
-            'ul.errors li',
+            'ul.error li',
             'The slug can only contain lowercase letters, numbers, and hyphens.'
         );
 
@@ -376,7 +376,7 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
 
         // Check for the error.
         $this->assertQueryContentContains(
-            'ul.errors li',
+            'ul.error li',
             'The slug is already in use.'
         );
 
@@ -495,7 +495,7 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
 
         // Check for the error.
         $this->assertQueryContentContains(
-            'ul.errors li',
+            'ul.error li',
             'Enter a title.'
         );
 
@@ -529,7 +529,7 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
 
         // Check for the error.
         $this->assertQueryContentContains(
-            'ul.errors li',
+            'ul.error li',
             'The slug cannot be empty.'
         );
 
@@ -563,7 +563,7 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
 
         // Check for the error.
         $this->assertQueryContentContains(
-            'ul.errors li',
+            'ul.error li',
             'The slug can only contain lowercase letters, numbers, and hyphens.'
         );
 
@@ -597,7 +597,7 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
 
         // Check for the error.
         $this->assertQueryContentContains(
-            'ul.errors li',
+            'ul.error li',
             'The slug can only contain lowercase letters, numbers, and hyphens.'
         );
 
@@ -631,7 +631,7 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
 
         // Check for the error.
         $this->assertQueryContentContains(
-            'ul.errors li',
+            'ul.error li',
             'The slug can only contain lowercase letters, numbers, and hyphens.'
         );
 
@@ -665,7 +665,7 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
 
         // Check for the error.
         $this->assertNotQueryContentContains(
-            'ul.errors li',
+            'ul.error li',
             'The slug can only contain lowercase letters, numbers, and hyphens.'
         );
 
@@ -717,7 +717,7 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
 
         // Check for the error.
         $this->assertQueryContentContains(
-            'ul.errors li',
+            'ul.error li',
             'The slug is already in use.'
         );
 

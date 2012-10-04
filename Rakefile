@@ -29,3 +29,16 @@ namespace :test do
   end
 
 end
+
+desc 'Build the application'
+task :build do
+  sh %{npm install}
+  sh %{grunt cssmin}
+  sh %{grunt min}
+end
+
+desc 'Clean pacakges'
+task :clean do
+  sh %{rm -rf views/shared/javascripts/payloads}
+  sh %{rm -rf views/shared/css/payloads}
+end
