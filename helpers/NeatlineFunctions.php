@@ -23,6 +23,31 @@ function neatline_queueAdminCss()
 }
 
 /**
+ * Include the static files for the Neatline.
+ *
+ * @param Omeka_record $exhibit The exhibit.
+ *
+ * @return void.
+ */
+function neatline_queueNeatlineAssets($exhibit)
+{
+
+    // Google maps API.
+    $google = 'http://maps.google.com/maps/api/js?v=3.8&sensor=false';
+    $headScript = get_view()->headScript();
+    $headScript->appendScript('', 'text/javascript', array('src' => $google));
+
+    queue_css_file('payloads/neatline');
+    queue_css_file('neatline-jquery-ui');
+    queue_css_file('openlayers/theme/default/style');
+    neatline_queueExhibitCss($exhibit);
+
+    queue_js_file('libraries/simile/timeline-api/timeline-api', 'javascripts');
+    queue_js_file('v2/payloads/neatline', 'javascripts');
+
+}
+
+/**
  * Include the static files for the editor.
  *
  * @return void.
@@ -45,15 +70,8 @@ function neatline_queueEditorAssets()
  */
 function neatline_queuePublicAssets()
 {
-
-    queue_js_file('_constructInThemeNeatline', 'javascripts');
-    queue_css_file('neatline-public');
-    $google = 'http://maps.google.com/maps/api/js?v=3.5&sensor=false';
-
-    // API calls.
-    $headScript = get_view()->headScript();
-    $headScript->appendScript('', 'text/javascript', array('src' => $google));
-
+    // queue_js_file('_constructInThemeNeatline', 'javascripts');
+    // queue_css_file('neatline-public');
 }
 
 /**
@@ -87,26 +105,6 @@ function neatline_queueEmbedAssets()
 
     // Fullscreen-specific CSS.
     queue_css_file('neatline-embedded');
-
-}
-
-/**
- * Include the static files for the Neatline.
- *
- * @param Omeka_record $exhibit The exhibit.
- *
- * @return void.
- */
-function neatline_queueNeatlineAssets($exhibit)
-{
-
-    // queue_css_file('payloads/neatline');
-    // queue_css_file('neatline-jquery-ui');
-    queue_css_file('openlayers/theme/default/style');
-    neatline_queueExhibitCss($exhibit);
-
-    queue_js_file('libraries/simile/timeline-api/timeline-api', 'javascripts');
-    queue_js_file('v2/payloads/neatline', 'javascripts');
 
 }
 

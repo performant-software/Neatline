@@ -45,7 +45,8 @@ neatline_queueEditorAssets();
 <!-- JavaScripts -->
 <?php echo head_js(); ?>
 
-<script type="text/javascript" src="http://maps.google.com/maps/api/js?v=3.5&sensor=false"></script>
-
 </head>
-<?php echo body_tag(array('id' => @$bodyid, 'class' => @$bodyclass)); ?>
+
+<?php echo body_tag(array(
+    'id' => @$bodyid, 'class' => @$bodyclass
+)); ?>

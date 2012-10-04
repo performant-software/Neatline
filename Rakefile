@@ -44,7 +44,10 @@ namespace :build do
   desc 'Build the 1.2.x application'
   task :new do
     sh %{npm install}
+    sh %{grunt cssmin:neatline}
+    sh %{grunt cssmin:editor}
     sh %{grunt min:v2neatline}
+    sh %{grunt min:editor}
   end
 
   desc 'Clean pacakges'

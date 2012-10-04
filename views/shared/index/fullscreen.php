@@ -56,8 +56,6 @@
     <!-- JavaScripts -->
     <?php echo head_js(); ?>
 
-    <script type="text/javascript" src="http://maps.google.com/maps/api/js?v=3.5&amp;sensor=false"></script>
-
     <!-- Plugin Stuff -->
     <?php plugin_header(); ?>
 
