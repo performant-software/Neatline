@@ -30,15 +30,28 @@ namespace :test do
 
 end
 
-desc 'Build the application'
-task :build do
-  sh %{npm install}
-  sh %{grunt cssmin}
-  sh %{grunt min}
-end
+namespace :build do
 
-desc 'Clean pacakges'
-task :clean do
-  sh %{rm -rf views/shared/javascripts/payloads}
-  sh %{rm -rf views/shared/css/payloads}
+  desc 'Build the 1.0.x application'
+  task :old do
+    sh %{npm install}
+    sh %{grunt cssmin:neatline}
+    sh %{grunt cssmin:editor}
+    sh %{grunt min:neatline}
+    sh %{grunt min:editor}
+  end
+
+  desc 'Build the 1.2.x application'
+  task :new do
+    sh %{npm install}
+    sh %{grunt min:v2neatline}
+  end
+
+  desc 'Clean pacakges'
+  task :clean do
+    sh %{rm -rf views/shared/javascripts/payloads}
+    sh %{rm -rf views/shared/css/payloads}
+    sh %{rm -rf views/shared/javascripts/v2/payloads}
+  end
+
 end

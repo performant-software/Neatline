@@ -2,10 +2,22 @@
  * Grunt file.
  */
 
+// Get package configuration.
+var config = require('yaml-config');
+var c = config.readConfig('views/shared/javascripts/v2/config.yaml');
+
 module.exports = function(grunt) {
 
   // Load tasks.
   grunt.loadNpmTasks('grunt-css');
+
+  var vendor = [
+    c.components+c.vendor.jquery,
+    c.components+c.vendor.underscore,
+    c.components+c.vendor.backbone,
+    c.components+c.vendor.marionette,
+    c.components+c.vendor.d3
+  ];
 
   var app =       'views/shared/javascripts/';
   var util =      'views/shared/javascripts/utilities/';
@@ -64,15 +76,15 @@ module.exports = function(grunt) {
         dest: buildjs+'editor.js'
       },
 
-      v2: {
+      v2neatline: {
+        src: vendor.concat([
+          c.apps.neatline+'**/*.js'
+        ]),
+        dest: c.payload+'neatline.js',
+        separator: ';'
+      },
 
-        neatline: {
-
-        },
-
-        editor: {
-
-        }
+      v2editor: {
 
       }
 
@@ -92,15 +104,13 @@ module.exports = function(grunt) {
         separator: ';'
       },
 
-      v2: {
+      v2neatline: {
+        src: ['<config:concat.v2neatline.src>'],
+        dest: c.payload+'neatline.js',
+        separator: ';'
+      },
 
-        neatline: {
-
-        },
-
-        editor: {
-
-        }
+      v2editor: {
 
       }
 
@@ -128,18 +138,6 @@ module.exports = function(grunt) {
           css+'jquery.miniColors.css'
         ],
         dest: buildcss+'editor.css'
-      },
-
-      v2: {
-
-        neatline: {
-
-        },
-
-        editor: {
-
-        }
-
       }
 
     },
