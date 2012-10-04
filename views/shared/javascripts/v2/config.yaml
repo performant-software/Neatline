@@ -1,0 +1,17 @@
+default:
+
+  components: "public/javascripts/components/"
+  payload: "public/javascripts/payloads/"
+
+  apps:
+    poem: "public/javascripts/applications/poem/"
+    add: "public/javascripts/applications/add/"
+
+  vendor:
+    jquery: "jquery/jquery.js"
+    underscore: "underscore/underscore-min.js"
+    backbone: "backbone/backbone-min.js"
+    marionette: "backbone.marionette/lib/backbone.marionette.min.js"
+    localstorage: "Backbone.localStorage/backbone.localStorage-min.js"
+    bootstrap: "bootstrap/bootstrap/js/bootstrap.min.js"
+    d3: "d3/d3.v2.min.js"

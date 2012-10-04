@@ -62,6 +62,18 @@ module.exports = function(grunt) {
           lib+'minicolors/jquery.miniColors.min.js'
         ],
         dest: buildjs+'editor.js'
+      },
+
+      v2: {
+
+        neatline: {
+
+        },
+
+        editor: {
+
+        }
+
       }
 
     },
@@ -78,6 +90,18 @@ module.exports = function(grunt) {
         src: ['<config:concat.editor.src>'],
         dest: buildjs+'editor.js',
         separator: ';'
+      },
+
+      v2: {
+
+        neatline: {
+
+        },
+
+        editor: {
+
+        }
+
       }
 
     },
@@ -104,6 +128,18 @@ module.exports = function(grunt) {
           css+'jquery.miniColors.css'
         ],
         dest: buildcss+'editor.css'
+      },
+
+      v2: {
+
+        neatline: {
+
+        },
+
+        editor: {
+
+        }
+
       }
 
     },
