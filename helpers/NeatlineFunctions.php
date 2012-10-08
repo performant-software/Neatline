@@ -42,7 +42,7 @@ function neatline_queueNeatlineAssets($exhibit)
     queue_css_file('openlayers/theme/default/style');
     neatline_queueExhibitCss($exhibit);
 
-    queue_js_file('libraries/simile/timeline-api/timeline-api', 'javascripts');
+    // queue_js_file('libraries/simile/timeline-api/timeline-api', 'javascripts');
     queue_js_file('v2/payloads/neatline', 'javascripts');
 
 }
@@ -59,7 +59,7 @@ function neatline_queueEditorAssets()
     queue_css_file('bootstrap/css/bootstrap.min');
     queue_css_file('payloads/editor');
 
-    queue_js_file('payloads/editor', 'javascripts');
+    queue_js_file('v2/payloads/editor', 'javascripts');
 
 }
 

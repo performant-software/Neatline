@@ -144,12 +144,8 @@ module.exports = function(grunt) {
 
     watch: {
       neatline: {
-        files: ['<config:concat.neatline.src>'],
-        tasks: ['concat:poem']
-      },
-      editor: {
-        files: ['<config:concat.editor.src>'],
-        tasks: ['concat:admin']
+        files: ['<config:concat.v2neatline.src>'],
+        tasks: ['concat:v2neatline']
       }
     }
 
