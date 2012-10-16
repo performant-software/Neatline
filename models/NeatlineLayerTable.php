@@ -24,7 +24,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache 2 License
  */
 
-class NeatlineBaseLayerTable extends Omeka_Db_Table
+class NeatlineLayerTable extends Omeka_Db_Table
 {
 
     /**

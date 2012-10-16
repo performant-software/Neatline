@@ -11,7 +11,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class NeatlineDataRecordTable extends Omeka_Db_Table
+class NeatlineRecordTable extends Omeka_Db_Table
 {
 
     /**
