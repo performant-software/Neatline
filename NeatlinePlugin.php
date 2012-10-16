@@ -103,7 +103,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
         $this->_db->query($sql);
 
         // Records table.
-        $sql = "CREATE TABLE IF NOT EXISTS `{$this->_db->prefix}neatline_data_records` (
+        $sql = "CREATE TABLE IF NOT EXISTS `{$this->_db->prefix}neatline_records` (
 
             `id`                    int(10) unsigned not null auto_increment,
             `item_id`               int(10) unsigned NULL,
@@ -146,13 +146,13 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
 
         // Add index on exhibit_id.
         $this->_addIndex(
-            $this->_db->prefix . 'neatline_data_records',
-            $this->_db->prefix . 'neatline_data_records_exhibit_idx',
+            $this->_db->prefix . 'neatline_records',
+            $this->_db->prefix . 'neatline_records_exhibit_idx',
             'exhibit_id'
         );
 
         // Layers table.
-        $sql = "CREATE TABLE IF NOT EXISTS `{$this->_db->prefix}neatline_base_layers` (
+        $sql = "CREATE TABLE IF NOT EXISTS `{$this->_db->prefix}neatline_layers` (
                 `id`                int(10) unsigned not null auto_increment,
                 `name`              tinytext COLLATE utf8_unicode_ci NULL,
                  PRIMARY KEY (`id`)
@@ -182,11 +182,11 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
         $this->_db->query($sql);
 
         // Drop the data table.
-        $sql = "DROP TABLE IF EXISTS `{$this->_db->prefix}neatline_data_records`";
+        $sql = "DROP TABLE IF EXISTS `{$this->_db->prefix}neatline_records`";
         $this->_db->query($sql);
 
         // Drop the data table.
-        $sql = "DROP TABLE IF EXISTS `{$this->_db->prefix}neatline_base_layers`";
+        $sql = "DROP TABLE IF EXISTS `{$this->_db->prefix}neatline_layers`";
         $this->_db->query($sql);
 
         // Remove default map style attributes.
