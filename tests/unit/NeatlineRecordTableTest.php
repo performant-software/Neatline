@@ -11,7 +11,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class Neatline_NeatlineDataRecordTableTest extends Neatline_Test_AppTestCase
+class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
 {
 
     // Testing parameters.
@@ -46,7 +46,7 @@ class Neatline_NeatlineDataRecordTableTest extends Neatline_Test_AppTestCase
         parent::setUp();
 
         $this->db = get_db();
-        $this->_recordsTable = $this->db->getTable('NeatlineDataRecord');
+        $this->_recordsTable = $this->db->getTable('NeatlineRecord');
 
     }
 
@@ -61,9 +61,9 @@ class Neatline_NeatlineDataRecordTableTest extends Neatline_Test_AppTestCase
         // Create item, exhibit, and record.
         $item = $this->_createItem();
         $neatline = $this->_createNeatline();
-        $record1 = new NeatlineDataRecord($item, $neatline);
+        $record1 = new NeatlineRecord($item, $neatline);
         $record1->save();
-        $record2 = new NeatlineDataRecord(null, $neatline);
+        $record2 = new NeatlineRecord(null, $neatline);
         $record2->save();
 
         // 2 records.
@@ -132,7 +132,7 @@ class Neatline_NeatlineDataRecordTableTest extends Neatline_Test_AppTestCase
         // Create item, exhibit, and record.
         $item = $this->_createItem();
         $neatline = $this->_createNeatline();
-        $record = new NeatlineDataRecord($item, $neatline);
+        $record = new NeatlineRecord($item, $neatline);
         $record->save();
 
         // Get the record.
@@ -168,7 +168,7 @@ class Neatline_NeatlineDataRecordTableTest extends Neatline_Test_AppTestCase
         // Create item, exhibit, and record.
         $item = $this->_createItem();
         $neatline = $this->_createNeatline();
-        $record = new NeatlineDataRecord($item, $neatline);
+        $record = new NeatlineRecord($item, $neatline);
         $record->save();
 
         // Get the record.
@@ -188,7 +188,7 @@ class Neatline_NeatlineDataRecordTableTest extends Neatline_Test_AppTestCase
         // Create item, exhibit, and record.
         $item = $this->_createItem();
         $neatline = $this->_createNeatline();
-        $record = new NeatlineDataRecord($item, $neatline);
+        $record = new NeatlineRecord($item, $neatline);
         $record->slug = 'test-slug';
         $record->save();
 
@@ -238,10 +238,10 @@ class Neatline_NeatlineDataRecordTableTest extends Neatline_Test_AppTestCase
         $exhibit = $this->_createNeatline();
 
         // Create two records.
-        $record1 = new NeatlineDataRecord($item, $exhibit);
+        $record1 = new NeatlineRecord($item, $exhibit);
         $record1->slug = 'test-slug';
         $record1->save();
-        $record2 = new NeatlineDataRecord($item, $exhibit);
+        $record2 = new NeatlineRecord($item, $exhibit);
         $record2->slug = '';
         $record2->save();
 
@@ -264,10 +264,10 @@ class Neatline_NeatlineDataRecordTableTest extends Neatline_Test_AppTestCase
         $exhibit = $this->_createNeatline();
 
         // Create two records.
-        $record1 = new NeatlineDataRecord($item, $exhibit);
+        $record1 = new NeatlineRecord($item, $exhibit);
         $record1->slug = 'test-slug';
         $record1->save();
-        $record2 = new NeatlineDataRecord($item, $exhibit);
+        $record2 = new NeatlineRecord($item, $exhibit);
         $record2->slug = 'another-slug';
         $record2->save();
 
@@ -290,10 +290,10 @@ class Neatline_NeatlineDataRecordTableTest extends Neatline_Test_AppTestCase
         $exhibit = $this->_createNeatline();
 
         // Create two records.
-        $record1 = new NeatlineDataRecord($item, $exhibit);
+        $record1 = new NeatlineRecord($item, $exhibit);
         $record1->slug = 'test-slug';
         $record1->save();
-        $record2 = new NeatlineDataRecord($item, $exhibit);
+        $record2 = new NeatlineRecord($item, $exhibit);
         $record2->slug = 'another-slug';
         $record2->save();
 
@@ -314,10 +314,10 @@ class Neatline_NeatlineDataRecordTableTest extends Neatline_Test_AppTestCase
 
         // Create exhibit.
         $exhibit = $this->_createNeatline();
-        $record1 = new NeatlineDataRecord(null, $exhibit);
+        $record1 = new NeatlineRecord(null, $exhibit);
         $record1->title = 'Title 1';
         $record1->save();
-        $record2 = new NeatlineDataRecord(null, $exhibit);
+        $record2 = new NeatlineRecord(null, $exhibit);
         $record2->title = 'Title 2';
         $record2->save();
 
@@ -347,13 +347,13 @@ class Neatline_NeatlineDataRecordTableTest extends Neatline_Test_AppTestCase
 
         // Create exhibit.
         $exhibit = $this->_createNeatline();
-        $record1 = new NeatlineDataRecord(null, $exhibit);
+        $record1 = new NeatlineRecord(null, $exhibit);
         $record1->title = 'Title 1';
         $record1->save();
-        $record2 = new NeatlineDataRecord(null, $exhibit);
+        $record2 = new NeatlineRecord(null, $exhibit);
         $record2->title = 'Title 2';
         $record2->save();
-        $record3 = new NeatlineDataRecord(null, $exhibit);
+        $record3 = new NeatlineRecord(null, $exhibit);
         $record3->title = 'Title 3';
         $record3->save();
 
@@ -437,7 +437,7 @@ class Neatline_NeatlineDataRecordTableTest extends Neatline_Test_AppTestCase
         // Create item, exhibit, and record.
         $item = $this->_createItem();
         $neatline = $this->_createNeatline();
-        $record = new NeatlineDataRecord($item, $neatline);
+        $record = new NeatlineRecord($item, $neatline);
         $record->save();
 
         // At the start, no records.
@@ -484,7 +484,7 @@ class Neatline_NeatlineDataRecordTableTest extends Neatline_Test_AppTestCase
         // Create item, exhibit, and record.
         $item = $this->_createItem();
         $neatline = $this->_createNeatline();
-        $record = new NeatlineDataRecord($item, $neatline);
+        $record = new NeatlineRecord($item, $neatline);
 
         // Populate statuses with trues.
         $record->space_active = 1;
@@ -559,11 +559,11 @@ class Neatline_NeatlineDataRecordTableTest extends Neatline_Test_AppTestCase
         $neatline = $this->_createNeatline();
 
         // Create two records.
-        $record1 = new NeatlineDataRecord($item1, $neatline);
+        $record1 = new NeatlineRecord($item1, $neatline);
         $record1->save();
-        $record2 = new NeatlineDataRecord($item2, $neatline);
+        $record2 = new NeatlineRecord($item2, $neatline);
         $record2->save();
-        $record3 = new NeatlineDataRecord(null, $neatline);
+        $record3 = new NeatlineRecord(null, $neatline);
         $record3->save();
 
         // Get the records and check result.
@@ -619,9 +619,9 @@ class Neatline_NeatlineDataRecordTableTest extends Neatline_Test_AppTestCase
         $item = $this->_createItem();
 
         // Create two records, one with a parent item and one without.
-        $record1 = new NeatlineDataRecord(null, $neatline);
+        $record1 = new NeatlineRecord(null, $neatline);
         $record1->save();
-        $record2 = new NeatlineDataRecord($item, $neatline);
+        $record2 = new NeatlineRecord($item, $neatline);
         $record2->save();
 
         // Get the records and check result.
@@ -645,7 +645,7 @@ class Neatline_NeatlineDataRecordTableTest extends Neatline_Test_AppTestCase
         $item = $this->_createItem();
 
         // Create two records, one with a parent item and one without.
-        $record = new NeatlineDataRecord($item, $neatline);
+        $record = new NeatlineRecord($item, $neatline);
         $record->save();
 
         // Get the records and check result.
@@ -680,10 +680,10 @@ class Neatline_NeatlineDataRecordTableTest extends Neatline_Test_AppTestCase
         $neatline = $this->_createNeatline();
 
         // Create two records, one with a parent item and one without.
-        $record1 = new NeatlineDataRecord(null, $neatline);
+        $record1 = new NeatlineRecord(null, $neatline);
         $record1->title = 'test title';
         $record1->save();
-        $record2 = new NeatlineDataRecord(null, $neatline);
+        $record2 = new NeatlineRecord(null, $neatline);
         $record2->title = 'no match';
         $record2->save();
 
@@ -727,10 +727,10 @@ class Neatline_NeatlineDataRecordTableTest extends Neatline_Test_AppTestCase
         $neatline = $this->_createNeatline();
 
         // Create two records, one with a parent item and one without.
-        $record1 = new NeatlineDataRecord(null, $neatline);
+        $record1 = new NeatlineRecord(null, $neatline);
         $record1->title = 'no match';
         $record1->save();
-        $record2 = new NeatlineDataRecord(null, $neatline);
+        $record2 = new NeatlineRecord(null, $neatline);
         $record2->title = 'another no match';
         $record2->save();
 
@@ -782,9 +782,9 @@ class Neatline_NeatlineDataRecordTableTest extends Neatline_Test_AppTestCase
         $neatline = $this->_createNeatline();
 
         // Create two records with inactive status settings.
-        $record1 = new NeatlineDataRecord($item1, $neatline);
+        $record1 = new NeatlineRecord($item1, $neatline);
         $record1->save();
-        $record2 = new NeatlineDataRecord($item2, $neatline);
+        $record2 = new NeatlineRecord($item2, $neatline);
         $record2->save();
 
         // Should return false.
@@ -795,9 +795,9 @@ class Neatline_NeatlineDataRecordTableTest extends Neatline_Test_AppTestCase
         $record2->delete();
 
         // Create two records, one with an active space status.
-        $record1 = new NeatlineDataRecord($item1, $neatline);
+        $record1 = new NeatlineRecord($item1, $neatline);
         $record1->save();
-        $record2 = new NeatlineDataRecord($item2, $neatline);
+        $record2 = new NeatlineRecord($item2, $neatline);
         $record2->space_active = 1;
         $record2->save();
 
@@ -810,9 +810,9 @@ class Neatline_NeatlineDataRecordTableTest extends Neatline_Test_AppTestCase
         $record2->delete();
 
         // Create two records, one with an active space status.
-        $record1 = new NeatlineDataRecord($item1, $neatline);
+        $record1 = new NeatlineRecord($item1, $neatline);
         $record1->save();
-        $record2 = new NeatlineDataRecord($item2, $neatline);
+        $record2 = new NeatlineRecord($item2, $neatline);
         $record2->time_active = 1;
         $record2->save();
 
@@ -837,10 +837,10 @@ class Neatline_NeatlineDataRecordTableTest extends Neatline_Test_AppTestCase
         $item2 = $this->_createItem();
         $item3 = $this->_createItem();
         $item4 = $this->_createItem();
-        $record1 = new NeatlineDataRecord($item1, $neatline);
-        $record2 = new NeatlineDataRecord($item2, $neatline);
-        $record3 = new NeatlineDataRecord($item3, $neatline);
-        $record4 = new NeatlineDataRecord($item4, $neatline);
+        $record1 = new NeatlineRecord($item1, $neatline);
+        $record2 = new NeatlineRecord($item2, $neatline);
+        $record3 = new NeatlineRecord($item3, $neatline);
+        $record4 = new NeatlineRecord($item4, $neatline);
         $record1->items_active = 1;
         $record2->items_active = 1;
         $record3->items_active = 1;
@@ -909,9 +909,9 @@ class Neatline_NeatlineDataRecordTableTest extends Neatline_Test_AppTestCase
         $neatline = $this->_createNeatline();
 
         // Create two records with inactive map status settings.
-        $record1 = new NeatlineDataRecord($item1, $neatline);
+        $record1 = new NeatlineRecord($item1, $neatline);
         $record1->save();
-        $record2 = new NeatlineDataRecord($item2, $neatline);
+        $record2 = new NeatlineRecord($item2, $neatline);
         $record2->save();
 
         // Should return false.
@@ -922,9 +922,9 @@ class Neatline_NeatlineDataRecordTableTest extends Neatline_Test_AppTestCase
         $record2->delete();
 
         // Create two records, one with an active map status.
-        $record1 = new NeatlineDataRecord($item1, $neatline);
+        $record1 = new NeatlineRecord($item1, $neatline);
         $record1->save();
-        $record2 = new NeatlineDataRecord($item2, $neatline);
+        $record2 = new NeatlineRecord($item2, $neatline);
         $record2->space_active = 1;
         $record2->save();
 
@@ -950,9 +950,9 @@ class Neatline_NeatlineDataRecordTableTest extends Neatline_Test_AppTestCase
         $neatline = $this->_createNeatline();
 
         // Create two records with inactive timeline status settings.
-        $record1 = new NeatlineDataRecord($item1, $neatline);
+        $record1 = new NeatlineRecord($item1, $neatline);
         $record1->save();
-        $record2 = new NeatlineDataRecord($item2, $neatline);
+        $record2 = new NeatlineRecord($item2, $neatline);
         $record2->save();
 
         // Should return false.
@@ -963,9 +963,9 @@ class Neatline_NeatlineDataRecordTableTest extends Neatline_Test_AppTestCase
         $record2->delete();
 
         // Create two records, one with an active map status.
-        $record1 = new NeatlineDataRecord($item1, $neatline);
+        $record1 = new NeatlineRecord($item1, $neatline);
         $record1->save();
-        $record2 = new NeatlineDataRecord($item2, $neatline);
+        $record2 = new NeatlineRecord($item2, $neatline);
         $record2->time_active = 1;
         $record2->save();
 
@@ -991,9 +991,9 @@ class Neatline_NeatlineDataRecordTableTest extends Neatline_Test_AppTestCase
         $neatline = $this->_createNeatline();
 
         // Create two records with inactive status settings.
-        $record1 = new NeatlineDataRecord($item1, $neatline);
+        $record1 = new NeatlineRecord($item1, $neatline);
         $record1->save();
-        $record2 = new NeatlineDataRecord($item2, $neatline);
+        $record2 = new NeatlineRecord($item2, $neatline);
         $record2->save();
 
         // Should return false.
@@ -1004,9 +1004,9 @@ class Neatline_NeatlineDataRecordTableTest extends Neatline_Test_AppTestCase
         $record2->delete();
 
         // Create two records, one with an active time status.
-        $record1 = new NeatlineDataRecord($item1, $neatline);
+        $record1 = new NeatlineRecord($item1, $neatline);
         $record1->save();
-        $record2 = new NeatlineDataRecord($item2, $neatline);
+        $record2 = new NeatlineRecord($item2, $neatline);
         $record2->items_active = 1;
         $record2->save();
 
@@ -1031,10 +1031,10 @@ class Neatline_NeatlineDataRecordTableTest extends Neatline_Test_AppTestCase
         $item2 = $this->_createItem();
         $item3 = $this->_createItem();
         $item4 = $this->_createItem();
-        $record1 = new NeatlineDataRecord($item1, $neatline);
-        $record2 = new NeatlineDataRecord($item2, $neatline);
-        $record3 = new NeatlineDataRecord($item3, $neatline);
-        $record4 = new NeatlineDataRecord($item4, $neatline);
+        $record1 = new NeatlineRecord($item1, $neatline);
+        $record2 = new NeatlineRecord($item2, $neatline);
+        $record3 = new NeatlineRecord($item3, $neatline);
+        $record4 = new NeatlineRecord($item4, $neatline);
         $record1->items_active = 1;
         $record2->items_active = 1;
         $record3->items_active = 1;
@@ -1103,8 +1103,8 @@ class Neatline_NeatlineDataRecordTableTest extends Neatline_Test_AppTestCase
         $item2 = $this->_createItem();
 
         // Create two records.
-        $record1 = new NeatlineDataRecord($item1, $exhibit);
-        $record2 = new NeatlineDataRecord($item2, $exhibit);
+        $record1 = new NeatlineRecord($item1, $exhibit);
+        $record2 = new NeatlineRecord($item2, $exhibit);
 
         // Map attributes.
         $record1->title = 'Item 1 Title';
@@ -1296,8 +1296,8 @@ class Neatline_NeatlineDataRecordTableTest extends Neatline_Test_AppTestCase
         $item2 = $this->_createItem();
 
         // Create two records.
-        $record1 = new NeatlineDataRecord($item1, $neatline);
-        $record2 = new NeatlineDataRecord($item2, $neatline);
+        $record1 = new NeatlineRecord($item1, $neatline);
+        $record2 = new NeatlineRecord($item2, $neatline);
 
         // Populate map-relevant attributes.
         $record1->title = 'Item 1 Title';
@@ -1437,8 +1437,8 @@ class Neatline_NeatlineDataRecordTableTest extends Neatline_Test_AppTestCase
         $item2 = $this->_createItem();
 
         // Create two records.
-        $record1 = new NeatlineDataRecord($item1, $neatline);
-        $record2 = new NeatlineDataRecord($item2, $neatline);
+        $record1 = new NeatlineRecord($item1, $neatline);
+        $record2 = new NeatlineRecord($item2, $neatline);
 
         // Populate map-relevant attributes.
         $record1->title = 'Item 1 Title';
@@ -1473,7 +1473,7 @@ class Neatline_NeatlineDataRecordTableTest extends Neatline_Test_AppTestCase
         $item = $this->_createItem();
 
         // Create record.
-        $record = new NeatlineDataRecord($item, $neatline);
+        $record = new NeatlineRecord($item, $neatline);
 
         // Populate map-relevant attributes.
         $record->title = 'Title';
@@ -1525,8 +1525,8 @@ class Neatline_NeatlineDataRecordTableTest extends Neatline_Test_AppTestCase
         $item2 = $this->_createItem();
 
         // Create two records.
-        $record1 = new NeatlineDataRecord($item1, $neatline);
-        $record2 = new NeatlineDataRecord($item2, $neatline);
+        $record1 = new NeatlineRecord($item1, $neatline);
+        $record2 = new NeatlineRecord($item2, $neatline);
 
         // Populate timeline attributes.
         $record1->title = 'Item 1 Title';
@@ -1602,7 +1602,7 @@ class Neatline_NeatlineDataRecordTableTest extends Neatline_Test_AppTestCase
         $item = $this->_createItem();
 
         // Create two records.
-        $record = new NeatlineDataRecord($item, $neatline);
+        $record = new NeatlineRecord($item, $neatline);
 
         // Populate map-relevant attributes.
         $record->title = 'Item Title';
@@ -1644,7 +1644,7 @@ class Neatline_NeatlineDataRecordTableTest extends Neatline_Test_AppTestCase
         $neatline->save();
 
         // Create record.
-        $record = new NeatlineDataRecord($item, $neatline);
+        $record = new NeatlineRecord($item, $neatline);
 
         // Populate map-relevant attributes.
         $record->title = 'Item Title';
@@ -1675,7 +1675,7 @@ class Neatline_NeatlineDataRecordTableTest extends Neatline_Test_AppTestCase
         $item = $this->_createItem();
 
         // Create record.
-        $record = new NeatlineDataRecord($item, $neatline);
+        $record = new NeatlineRecord($item, $neatline);
 
         // Populate map-relevant attributes.
         $record->title = 'Item Title';
@@ -1745,7 +1745,7 @@ class Neatline_NeatlineDataRecordTableTest extends Neatline_Test_AppTestCase
             '1564-04-26 14:39:22/1616-04-23 12:45:34');
 
         // Create record.
-        $record = new NeatlineDataRecord($item, $exhibit);
+        $record = new NeatlineRecord($item, $exhibit);
         $record->time_active = 1;
         $record->save();
 
@@ -1772,8 +1772,8 @@ class Neatline_NeatlineDataRecordTableTest extends Neatline_Test_AppTestCase
         $item2 = $this->_createItem();
 
         // Create two records.
-        $record1 = new NeatlineDataRecord($item1, $neatline);
-        $record2 = new NeatlineDataRecord($item2, $neatline);
+        $record1 = new NeatlineRecord($item1, $neatline);
+        $record2 = new NeatlineRecord($item2, $neatline);
 
         // Populate map-relevant attributes.
         $record1->title = 'Item 1 Title';
@@ -1832,10 +1832,10 @@ class Neatline_NeatlineDataRecordTableTest extends Neatline_Test_AppTestCase
         $item2 = $this->_createItem();
         $item3 = $this->_createItem();
         $item4 = $this->_createItem();
-        $record1 = new NeatlineDataRecord($item1, $neatline);
-        $record2 = new NeatlineDataRecord($item2, $neatline);
-        $record3 = new NeatlineDataRecord($item3, $neatline);
-        $record4 = new NeatlineDataRecord($item4, $neatline);
+        $record1 = new NeatlineRecord($item1, $neatline);
+        $record2 = new NeatlineRecord($item2, $neatline);
+        $record3 = new NeatlineRecord($item3, $neatline);
+        $record4 = new NeatlineRecord($item4, $neatline);
         $record1->items_active = 1;
         $record2->items_active = 1;
         $record3->items_active = 1;

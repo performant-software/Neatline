@@ -352,7 +352,7 @@ class NeatlineExhibit extends Omeka_Record_AbstractRecord
     {
 
         // Get the base layers table, get the record.
-        $_layersTable = $this->getTable('NeatlineBaseLayer');
+        $_layersTable = $this->getTable('NeatlineLayer');
         $baseLayer = $_layersTable->getLayerByName($name);
 
         // Set key.
@@ -397,7 +397,7 @@ class NeatlineExhibit extends Omeka_Record_AbstractRecord
     {
 
         // Get the data record table.
-        $_recordsTable = $this->getTable('NeatlineDataRecord');
+        $_recordsTable = $this->getTable('NeatlineRecord');
 
         // Get the status.
         return $_recordsTable->getRecordStatus($item, $this, $viewport);
@@ -416,7 +416,7 @@ class NeatlineExhibit extends Omeka_Record_AbstractRecord
     {
 
         // Get the data record table.
-        $_recordsTable = $this->getTable('NeatlineDataRecord');
+        $_recordsTable = $this->getTable('NeatlineRecord');
 
         // Try to get a record.
         $record = $_recordsTable->getRecordByItemAndExhibit($item, $this);
@@ -434,7 +434,7 @@ class NeatlineExhibit extends Omeka_Record_AbstractRecord
     {
 
         // Get the data record table and query for active records.
-        $_recordsTable = $this->getTable('NeatlineDataRecord');
+        $_recordsTable = $this->getTable('NeatlineRecord');
         $records = $_recordsTable->getActiveRecordsByExhibit($this);
 
         return ($records) ? count($records) : 0;
@@ -450,7 +450,7 @@ class NeatlineExhibit extends Omeka_Record_AbstractRecord
     {
 
         // Get the data record table and query for active records.
-        $_layersTable = $this->getTable('NeatlineBaseLayer');
+        $_layersTable = $this->getTable('NeatlineLayer');
 
         // If exhibit value is null, get and return default.
         if (is_null($this->base_layer)) {
@@ -512,7 +512,7 @@ class NeatlineExhibit extends Omeka_Record_AbstractRecord
     {
 
         // Get the records table, delete child data.
-        $_recordsTable = $this->getTable('NeatlineDataRecord');
+        $_recordsTable = $this->getTable('NeatlineRecord');
         $records = $_recordsTable->findBySql('exhibit_id = ?', array($this->id));
         foreach ($records as $record) { $record->delete(); }
 

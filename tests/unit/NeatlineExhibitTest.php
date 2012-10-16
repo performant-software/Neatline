@@ -198,7 +198,7 @@ class Neatline_NeatlineExhibitTest extends Neatline_Test_AppTestCase
         $item = $this->_createItem();
 
         // Create a record.
-        $record = new NeatlineDataRecord($item, $neatline);
+        $record = new NeatlineRecord($item, $neatline);
 
         // Falses.
         $this->assertFalse($neatline->getRecordStatus($item, 'space'));
@@ -230,7 +230,7 @@ class Neatline_NeatlineExhibitTest extends Neatline_Test_AppTestCase
         $item = $this->_createItem();
 
         // Create a record.
-        $record = new NeatlineDataRecord($item, $neatline);
+        $record = new NeatlineRecord($item, $neatline);
         $record->save();
 
         // Check for the correct id.
@@ -275,10 +275,10 @@ class Neatline_NeatlineExhibitTest extends Neatline_Test_AppTestCase
         $item2 = $this->_createItem();
 
         // Create records.
-        $record1 = new NeatlineDataRecord($item1, $neatline1);
-        $record2 = new NeatlineDataRecord($item2, $neatline1);
-        $record3 = new NeatlineDataRecord($item1, $neatline2);
-        $record4 = new NeatlineDataRecord($item2, $neatline2);
+        $record1 = new NeatlineRecord($item1, $neatline1);
+        $record2 = new NeatlineRecord($item2, $neatline1);
+        $record3 = new NeatlineRecord($item1, $neatline2);
+        $record4 = new NeatlineRecord($item2, $neatline2);
         $record1->save();
         $record2->save();
         $record3->save();
@@ -286,7 +286,7 @@ class Neatline_NeatlineExhibitTest extends Neatline_Test_AppTestCase
 
         // 2 exhibits, 4 data records.
         $_exhibitsTable = $this->db->getTable('NeatlineExhibit');
-        $_recordsTable = $this->db->getTable('NeatlineDataRecord');
+        $_recordsTable = $this->db->getTable('NeatlineRecord');
         $this->assertEquals($_exhibitsTable->count(), 2);
         $this->assertEquals($_recordsTable->count(), 4);
 
@@ -418,7 +418,7 @@ class Neatline_NeatlineExhibitTest extends Neatline_Test_AppTestCase
         $exhibit = $this->_createNeatline();
 
         // Create a base layer.
-        $layer = new NeatlineBaseLayer();
+        $layer = new NeatlineLayer();
         $layer->name = 'Test Layer';
         $layer->save();
 
@@ -554,10 +554,10 @@ class Neatline_NeatlineExhibitTest extends Neatline_Test_AppTestCase
         $neatline2 = $this->_createNeatline('Test Exhibit 2', '', 'test-exhibit-2');
 
         // Create records.
-        $record1 = new NeatlineDataRecord(null, $neatline1);
-        $record2 = new NeatlineDataRecord(null, $neatline1);
-        $record3 = new NeatlineDataRecord(null, $neatline1);
-        $record4 = new NeatlineDataRecord(null, $neatline2);
+        $record1 = new NeatlineRecord(null, $neatline1);
+        $record2 = new NeatlineRecord(null, $neatline1);
+        $record3 = new NeatlineRecord(null, $neatline1);
+        $record4 = new NeatlineRecord(null, $neatline2);
         $record1->space_active = 1;
         $record2->space_active = 1;
         $record3->space_active = 1;
@@ -604,7 +604,7 @@ class Neatline_NeatlineExhibitTest extends Neatline_Test_AppTestCase
 
         // Create exhibit and layer.
         $neatline = $this->_createNeatline();
-        $layer = new NeatlineBaseLayer;
+        $layer = new NeatlineLayer;
         $layer->name = 'Test Layer';
         $layer->save();
 

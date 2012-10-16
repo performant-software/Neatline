@@ -162,7 +162,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
 
         // Install base layers.
         foreach (self::$_baseLayers as $baseLayer) {
-            $layer = new NeatlineBaseLayer;
+            $layer = new NeatlineLayer;
             $layer->name = $baseLayer;
             $layer->save();
         }
@@ -231,7 +231,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
     {
 
         // Prepare the select.
-        $table =    $this->_db->getTable('NeatlineDataRecord');
+        $table =    $this->_db->getTable('NeatlineRecord');
         $alias =    $table->getTableAlias();
         $adapter =  $table->getAdapter();
         $select =   $table->getSelect();

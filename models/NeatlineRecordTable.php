@@ -31,7 +31,7 @@ class NeatlineRecordTable extends Omeka_Db_Table
 
         // If no record, create.
         if (!$record) {
-            $record = new NeatlineDataRecord($item, $exhibit);
+            $record = new NeatlineRecord($item, $exhibit);
             $record->save();
         }
 
@@ -78,7 +78,7 @@ class NeatlineRecordTable extends Omeka_Db_Table
 
         // If there is not an existing record, create one.
         if (!$record) {
-            $record = new NeatlineDataRecord($item, $neatline);
+            $record = new NeatlineRecord($item, $neatline);
         }
 
         // Update.

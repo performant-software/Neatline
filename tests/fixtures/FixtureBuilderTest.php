@@ -110,7 +110,7 @@ class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
         $exhibit = $this->_createNeatline();
 
         // Record 1.
-        $record1 = new NeatlineDataRecord();
+        $record1 = new NeatlineRecord();
         $record1->title = 'Title1';
         $record1->description = 'Description 1.';
         $record1->exhibit_id = $exhibit->id;
@@ -118,7 +118,7 @@ class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
         $record1->save();
 
         // Record 2.
-        $record2 = new NeatlineDataRecord();
+        $record2 = new NeatlineRecord();
         $record2->title = 'Title2';
         $record2->description = 'Description 2.';
         $record2->exhibit_id = $exhibit->id;
@@ -126,7 +126,7 @@ class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
         $record2->save();
 
         // Record 3.
-        $record3 = new NeatlineDataRecord();
+        $record3 = new NeatlineRecord();
         $record3->title = 'Title3';
         $record3->description = 'Description 3.';
         $record3->exhibit_id = $exhibit->id;
@@ -135,7 +135,7 @@ class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
         $record3->save();
 
         // Record 4.
-        $record4 = new NeatlineDataRecord();
+        $record4 = new NeatlineRecord();
         $record4->title = 'Title4';
         $record4->exhibit_id = $exhibit->id;
         $record4->item_id = $item->id;
@@ -181,27 +181,27 @@ class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
         $exhibit->save();
 
         // Record 1.
-        $record1 = new NeatlineDataRecord(null, $exhibit);
+        $record1 = new NeatlineRecord(null, $exhibit);
         $record1->title = 'Title1';
         $record1->description = 'Description 1.';
         $record1->space_active = 1;
         $record1->save();
 
         // Record 2.
-        $record2 = new NeatlineDataRecord(null, $exhibit);
+        $record2 = new NeatlineRecord(null, $exhibit);
         $record2->title = 'Title2';
         $record2->description = 'Description 2.';
         $record2->time_active = 1;
         $record2->save();
 
         // Record 3.
-        $record3 = new NeatlineDataRecord($item1, $exhibit);
+        $record3 = new NeatlineRecord($item1, $exhibit);
         $record3->description = 'Description 3.';
         $record3->space_active = 1;
         $record3->save();
 
         // Record 4.
-        $record4 = new NeatlineDataRecord($item2, $exhibit);
+        $record4 = new NeatlineRecord($item2, $exhibit);
         $record4->time_active = 1;
         $record4->save();
 
@@ -235,7 +235,7 @@ class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
         $item = $this->_createItem();
 
         // Mock record.
-        $record1 = new NeatlineDataRecord($item, $exhibit);
+        $record1 = new NeatlineRecord($item, $exhibit);
         $record1->title = 'Test Title 1';
         $record1->slug = 'test-slug';
         $record1->description = 'Test description.';
@@ -259,11 +259,11 @@ class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
         $record1->save();
 
         // Mock records for parent record select.
-        $record2 = new NeatlineDataRecord();
+        $record2 = new NeatlineRecord();
         $record2->exhibit_id = $exhibit->id;
         $record2->title = 'Test Title 2';
         $record2->save();
-        $record3 = new NeatlineDataRecord();
+        $record3 = new NeatlineRecord();
         $record3->exhibit_id = $exhibit->id;
         $record3->title = 'Test Title 3';
         $record3->save();
@@ -304,7 +304,7 @@ class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
         $exhibit = $this->_createNeatline();
 
         // Record 1.
-        $record1 = new NeatlineDataRecord();
+        $record1 = new NeatlineRecord();
         $record1->title = 'Title1';
         $record1->description = 'Description 1.';
         $record1->exhibit_id = $exhibit->id;
@@ -313,7 +313,7 @@ class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
         $record1->save();
 
         // Record 2.
-        $record2 = new NeatlineDataRecord();
+        $record2 = new NeatlineRecord();
         $record2->title = 'Title2';
         $record2->description = 'Description 2.';
         $record2->exhibit_id = $exhibit->id;
@@ -322,7 +322,7 @@ class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
         $record2->save();
 
         // Record 3.
-        $record3 = new NeatlineDataRecord();
+        $record3 = new NeatlineRecord();
         $record3->title = 'Title3';
         $record3->description = 'Description 3.';
         $record3->exhibit_id = $exhibit->id;
@@ -333,7 +333,7 @@ class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
         $record3->save();
 
         // Record 4.
-        $record4 = new NeatlineDataRecord();
+        $record4 = new NeatlineRecord();
         $record4->title = 'Title4';
         $record4->exhibit_id = $exhibit->id;
         $record4->item_id = $item2->id;

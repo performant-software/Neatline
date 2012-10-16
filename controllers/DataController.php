@@ -19,7 +19,7 @@ class Neatline_DataController extends Omeka_Controller_AbstractActionController
     public function init()
     {
         $this->_exhibits = $this->_helper->db->getTable('NeatlineExhibit');
-        $this->_records = $this->_helper->db->getTable('NeatlineDataRecord');
+        $this->_records = $this->_helper->db->getTable('NeatlineRecord');
     }
 
     /**

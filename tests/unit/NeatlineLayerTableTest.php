@@ -8,7 +8,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class Neatline_NeatlineBaseLayerTableTest extends Neatline_Test_AppTestCase
+class Neatline_NeatlineLayerTableTest extends Neatline_Test_AppTestCase
 {
 
     /**
@@ -22,7 +22,7 @@ class Neatline_NeatlineBaseLayerTableTest extends Neatline_Test_AppTestCase
         parent::setUp();
 
         $this->db = get_db();
-        $this->_layersTable = $this->db->getTable('NeatlineBaseLayer');
+        $this->_layersTable = $this->db->getTable('NeatlineLayer');
 
     }
 
@@ -46,27 +46,27 @@ class Neatline_NeatlineBaseLayerTableTest extends Neatline_Test_AppTestCase
         }
 
         // OpenStreetMaps.
-        $osm = new NeatlineBaseLayer;
+        $osm = new NeatlineLayer;
         $osm->name = 'OpenStreetMap';
         $osm->save();
 
         // Google physical.
-        $gphy = new NeatlineBaseLayer;
+        $gphy = new NeatlineLayer;
         $gphy->name = 'Google Physical';
         $gphy->save();
 
         // Google streets.
-        $gstr = new NeatlineBaseLayer;
+        $gstr = new NeatlineLayer;
         $gstr->name = 'Google Streets';
         $gstr->save();
 
         // Google hybrid.
-        $ghyb = new NeatlineBaseLayer;
+        $ghyb = new NeatlineLayer;
         $ghyb->name = 'Google Hybrid';
         $ghyb->save();
 
         // Google sattelite.
-        $gsat = new NeatlineBaseLayer;
+        $gsat = new NeatlineLayer;
         $gsat->name = 'Google Satellite';
         $gsat->save();
 
@@ -93,7 +93,7 @@ class Neatline_NeatlineBaseLayerTableTest extends Neatline_Test_AppTestCase
     {
 
         // Create a base layer.
-        $layer = new NeatlineBaseLayer();
+        $layer = new NeatlineLayer();
         $layer->name = 'Test Layer';
         $layer->save();
 

@@ -772,8 +772,8 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
         $item2 = $this->_createItem();
 
         // Create two records.
-        $record1 = new NeatlineDataRecord($item1, $neatline);
-        $record2 = new NeatlineDataRecord($item2, $neatline);
+        $record1 = new NeatlineRecord($item1, $neatline);
+        $record2 = new NeatlineRecord($item2, $neatline);
 
         // Populate map-relevant attributes.
         $record1->title = 'Item 1 Title';
@@ -864,8 +864,8 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
         $item2 = $this->_createItem();
 
         // Create two records.
-        $record1 = new NeatlineDataRecord($item1, $neatline);
-        $record2 = new NeatlineDataRecord($item2, $neatline);
+        $record1 = new NeatlineRecord($item1, $neatline);
+        $record2 = new NeatlineRecord($item2, $neatline);
 
         // Populate map-relevant attributes.
         $record1->title = 'Item 1 Title';
@@ -998,7 +998,7 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
         $neatline = $this->_createNeatline();
 
         // Create record1.
-        $record1 = new NeatlineDataRecord(null, $neatline);
+        $record1 = new NeatlineRecord(null, $neatline);
         $record1->title = 'Item 1 Title';
         $record1->slug = 'slug-1';
         $record1->description = 'Item 1 description.';
@@ -1008,7 +1008,7 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
         $record1->save();
 
         // Create record2.
-        $record2 = new NeatlineDataRecord(null, $neatline);
+        $record2 = new NeatlineRecord(null, $neatline);
         $record2->title = 'Item 2 Title';
         $record2->slug = 'slug-2';
         $record2->description = 'Item 2 description.';

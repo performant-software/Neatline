@@ -35,9 +35,9 @@ class Neatline_Test_AppTestCase extends Omeka_Test_AppTestCase
 
         // Get table managers.
         $this->_exhibitsTable = $this->db->getTable('NeatlineExhibit');
-        $this->_layersTable = $this->db->getTable('NeatlineBaseLayer');
+        $this->_layersTable = $this->db->getTable('NeatlineLayer');
         $this->_exhibitsTable = $this->db->getTable('NeatlineExhibit');
-        $this->_recordsTable = $this->db->getTable('NeatlineDataRecord');
+        $this->_recordsTable = $this->db->getTable('NeatlineRecord');
 
     }
 
@@ -116,7 +116,7 @@ class Neatline_Test_AppTestCase extends Omeka_Test_AppTestCase
 
         $item = $this->_createItem();
         $neatline = $this->_createNeatline();
-        $record = new NeatlineDataRecord($item, $neatline);
+        $record = new NeatlineRecord($item, $neatline);
         $record->save();
 
         return $record;

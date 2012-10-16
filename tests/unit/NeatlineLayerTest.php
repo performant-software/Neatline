@@ -24,7 +24,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache 2 License
  */
 
-class Neatline_NeatlineBaseLayerTest extends Neatline_Test_AppTestCase
+class Neatline_NeatlineLayerTest extends Neatline_Test_AppTestCase
 {
 
     /**
@@ -38,7 +38,7 @@ class Neatline_NeatlineBaseLayerTest extends Neatline_Test_AppTestCase
         parent::setUp();
 
         $this->db = get_db();
-        $this->_layersTable = $this->db->getTable('NeatlineBaseLayer');
+        $this->_layersTable = $this->db->getTable('NeatlineLayer');
 
     }
 
@@ -51,7 +51,7 @@ class Neatline_NeatlineBaseLayerTest extends Neatline_Test_AppTestCase
     {
 
         // Create a record.
-        $layer = new NeatlineBaseLayer();
+        $layer = new NeatlineLayer();
 
         // Set.
         $layer->name = 'name';

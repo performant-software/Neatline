@@ -30,11 +30,8 @@ class Neatline_EditorController extends Omeka_Controller_AbstractActionControlle
 
         // Get tables.
         $this->_neatlinesTable =    $this->_helper->db->getTable($modelName);
-        $this->_recordsTable =      $this->_helper->db->getTable('NeatlineDataRecord');
-        $this->_layersTable =       $this->_helper->db->getTable('NeatlineBaseLayer');
-        $this->_mapsTable =         $this->_helper->db->getTable('NeatlineMapsMap');
-        $this->_timelinesTable =    $this->_helper->db->getTable('NeatlineTimeTimeline');
-        $this->_statusesTable =     $this->_helper->db->getTable('NeatlineRecordStatus');
+        $this->_recordsTable =      $this->_helper->db->getTable('NeatlineRecord');
+        $this->_layersTable =       $this->_helper->db->getTable('NeatlineLayer');
         $this->_itemsTable =        $this->_helper->db->getTable('Item');
         $this->_filesTable =        $this->_helper->db->getTable('File');
 
@@ -126,7 +123,7 @@ class Neatline_EditorController extends Omeka_Controller_AbstractActionControlle
             $item = $this->_itemsTable->find($itemId);
 
             // Output the JSON string.
-            echo json_encode(NeatlineDataRecord::buildEditFormForNewRecordJson(
+            echo json_encode(NeatlineRecord::buildEditFormForNewRecordJson(
                 $item, $neatline)
             );
 
@@ -457,7 +454,7 @@ class Neatline_EditorController extends Omeka_Controller_AbstractActionControlle
 
             // If no existing record, create a record and default in DC values.
             if (!$record) {
-                $record = new NeatlineDataRecord($item, $neatline);
+                $record = new NeatlineRecord($item, $neatline);
             }
 
         }
@@ -557,7 +554,7 @@ class Neatline_EditorController extends Omeka_Controller_AbstractActionControlle
         $neatline = $this->_neatlinesTable->find($exhibitId);
 
         // Create the new record.
-        $record = new NeatlineDataRecord(null, $neatline);
+        $record = new NeatlineRecord(null, $neatline);
         $record->save();
 
         // Push into the view.
@@ -619,7 +616,7 @@ class Neatline_EditorController extends Omeka_Controller_AbstractActionControlle
         if (is_null($record)) {
             $item = $this->_itemsTable->find($itemId);
             $exhibit = $this->_neatlinesTable->find($exhibitId);
-            $record = new NeatlineDataRecord($item, $exhibit);
+            $record = new NeatlineRecord($item, $exhibit);
         }
 
         // Set status.

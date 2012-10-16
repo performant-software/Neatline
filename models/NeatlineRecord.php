@@ -326,7 +326,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
 
         if (!is_null($this->parent_record_id) && is_null($this->_parent)) {
             $this->_parent = $this
-                ->getTable('NeatlineDataRecord')
+                ->getTable('NeatlineRecord')
                 ->find($this->parent_record_id);
         }
 
@@ -347,7 +347,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
         $data = array();
 
         // Get parent record select list.
-        $_recordsTable = $this->getTable('NeatlineDataRecord');
+        $_recordsTable = $this->getTable('NeatlineRecord');
         $records = $_recordsTable->getRecordsForSelect($this->getExhibit(), $this);
 
         // Set the array values.
@@ -396,7 +396,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
 
         // Get parent record select list.
         $_db = get_db();
-        $_recordsTable = $_db->getTable('NeatlineDataRecord');
+        $_recordsTable = $_db->getTable('NeatlineRecord');
         $records = $_recordsTable->getRecordsForSelect($exhibit);
 
         // Set the array values.
@@ -482,7 +482,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
     {
 
         // Get records table.
-        $_recordsTable = $this->getTable('NeatlineDataRecord');
+        $_recordsTable = $this->getTable('NeatlineRecord');
 
         // Set the record value if it is unique.
         if ($_recordsTable->slugIsAvailable($this, $this->getExhibit(), $slug)) {
@@ -1224,7 +1224,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
     /**
      * Construct map data.
      *
-     * @param array $index This is the index of NeatlineDataRecord objects for
+     * @param array $index This is the index of NeatlineRecord objects for
      * caching. Optional.
      * @param array $wmss This is an index mapping item IDs to rows from the
      * NeatlineMapsService WMS data.

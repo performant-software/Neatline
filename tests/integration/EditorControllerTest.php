@@ -53,9 +53,9 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
         // Create item, exhibit, and records.
         $item = $this->_createItem();
         $neatline = $this->_createNeatline();
-        $record1 = new NeatlineDataRecord(null, $neatline);
+        $record1 = new NeatlineRecord(null, $neatline);
         $record1->save();
-        $record2 = new NeatlineDataRecord($item, $neatline);
+        $record2 = new NeatlineRecord($item, $neatline);
         $record2->save();
 
         // Prepare the request.
@@ -84,9 +84,9 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
         // Create item, exhibit, and records.
         $item = $this->_createItem();
         $exhibit = $this->_createNeatline();
-        $record1 = new NeatlineDataRecord(null, $exhibit);
+        $record1 = new NeatlineRecord(null, $exhibit);
         $record1->save();
-        $record2 = new NeatlineDataRecord($item, $exhibit);
+        $record2 = new NeatlineRecord($item, $exhibit);
         $record2->save();
 
         // Save empty query.
@@ -138,7 +138,7 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
         // Create item, exhibit, and records.
         $item = $this->_createItem();
         $exhibit = $this->_createNeatline();
-        $record = new NeatlineDataRecord($item, $exhibit);
+        $record = new NeatlineRecord($item, $exhibit);
         $record->save();
 
         // Save empty query.
@@ -190,9 +190,9 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
         // Create item, exhibit, and records.
         $item = $this->_createItem();
         $exhibit = $this->_createNeatline();
-        $record1 = new NeatlineDataRecord(null, $exhibit);
+        $record1 = new NeatlineRecord(null, $exhibit);
         $record1->save();
-        $record2 = new NeatlineDataRecord($item, $exhibit);
+        $record2 = new NeatlineRecord($item, $exhibit);
         $record2->save();
 
         // Save empty query.
@@ -244,7 +244,7 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
         // Create item, exhibit, and record.
         $item = $this->_createItem();
         $neatline = $this->_createNeatline();
-        $record = new NeatlineDataRecord($item, $neatline);
+        $record = new NeatlineRecord($item, $neatline);
         $record->save();
 
         // Form the POST for a space change.
@@ -295,7 +295,7 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
         // Create item, exhibit, and record.
         $item = $this->_createItem();
         $neatline = $this->_createNeatline();
-        $record = new NeatlineDataRecord($item, $neatline);
+        $record = new NeatlineRecord($item, $neatline);
         $record->save();
 
         // Form the POST for a space change.
@@ -397,7 +397,7 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
         // Create item, exhibit, and record.
         $item = $this->_createItem();
         $neatline = $this->_createNeatline();
-        $record = new NeatlineDataRecord($item, $neatline);
+        $record = new NeatlineRecord($item, $neatline);
         $record->save();
 
         // Form the POST for a space change.
@@ -485,7 +485,7 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
         $item = $this->_createItem();
         $neatline = $this->_createNeatline();
         $parent = $this->_createRecord();
-        $record = new NeatlineDataRecord($item, $neatline);
+        $record = new NeatlineRecord($item, $neatline);
 
         // Populate fields.
         $record->title =                self::$__testParams['title'];
@@ -574,7 +574,7 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
         // Create item, exhibit, and record.
         $item = $this->_createItem();
         $neatline = $this->_createNeatline();
-        $record = new NeatlineDataRecord($item, $neatline);
+        $record = new NeatlineRecord($item, $neatline);
         $record->save();
 
         // Form the POST for a space change.
@@ -711,10 +711,10 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
 
         // Create exhibit and records.
         $neatline = $this->_createNeatline();
-        $record1 = new NeatlineDataRecord(null, $neatline);
+        $record1 = new NeatlineRecord(null, $neatline);
         $record1->save();
 
-        $record2 = new NeatlineDataRecord(null, $neatline);
+        $record2 = new NeatlineRecord(null, $neatline);
         $record2->parent_record_id = $record1->id;
         $record2->save();
 
@@ -907,7 +907,7 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
         // Create exhibit and item.
         $neatline = $this->_createNeatline();
         $item = $this->_createItem();
-        $record1 = new NeatlineDataRecord(null, $neatline);
+        $record1 = new NeatlineRecord(null, $neatline);
         $record1->save();
 
         // Form the POST for a space change.
@@ -1101,11 +1101,11 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
 
         // Create exhibit and records.
         $neatline = $this->_createNeatline();
-        $record1 = new NeatlineDataRecord(null, $neatline);
+        $record1 = new NeatlineRecord(null, $neatline);
         $record1->save();
 
         $item = $this->_createItem();
-        $record2 = new NeatlineDataRecord($item, $neatline);
+        $record2 = new NeatlineRecord($item, $neatline);
         $record2->parent_record_id = $record1->id;
         $record2->save();
 
@@ -1304,11 +1304,11 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
 
         // Create exhibit and records.
         $neatline = $this->_createNeatline();
-        $record1 = new NeatlineDataRecord(null, $neatline);
+        $record1 = new NeatlineRecord(null, $neatline);
         $record1->save();
 
         $item = $this->_createItem();
-        $record2 = new NeatlineDataRecord($item, $neatline);
+        $record2 = new NeatlineRecord($item, $neatline);
         $record2->parent_record_id = $record1->id;
         $record2->save();
 
@@ -1425,15 +1425,15 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
 
         // Create exhibit and records.
         $neatline = $this->_createNeatline();
-        $record1 = new NeatlineDataRecord(null, $neatline);
+        $record1 = new NeatlineRecord(null, $neatline);
         $record1->save();
 
         $item = $this->_createItem();
-        $record2 = new NeatlineDataRecord($item, $neatline);
+        $record2 = new NeatlineRecord($item, $neatline);
         $record2->parent_record_id = $record1->id;
         $record2->save();
 
-        $record3 = new NeatlineDataRecord(null, $neatline);
+        $record3 = new NeatlineRecord(null, $neatline);
         $record3->save();
 
         // Form the POST for a space change.
@@ -1504,7 +1504,7 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
 
         // Create exhibit and record.
         $neatline = $this->_createNeatline();
-        $record = new NeatlineDataRecord(null, $neatline);
+        $record = new NeatlineRecord(null, $neatline);
         $record->geocoverage = 'POINT(1,0)';
         $record->save();
 
@@ -1568,7 +1568,7 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
         // Create exhibit and item.
         $neatline = $this->_createNeatline();
         $item = $this->_createItem();
-        $record = new NeatlineDataRecord($item, $neatline);
+        $record = new NeatlineRecord($item, $neatline);
         $record->save();
 
         // Form the POST for a space change.
@@ -1629,7 +1629,7 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
         // Create exhibit and item.
         $neatline = $this->_createNeatline();
         $item = $this->_createItem();
-        $record = new NeatlineDataRecord($item, $neatline);
+        $record = new NeatlineRecord($item, $neatline);
         $record->save();
 
         // At the start, both trackers false.
@@ -1750,7 +1750,7 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
         // Create exhibit and item.
         $neatline = $this->_createNeatline();
         $item = $this->_createItem();
-        $record = new NeatlineDataRecord($item, $neatline);
+        $record = new NeatlineRecord($item, $neatline);
         $record->save();
 
         // At the start, both trackers false.
@@ -1874,11 +1874,11 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
         $item3 = $this->_createItem();
         $item4 = $this->_createItem();
         $item5 = $this->_createItem();
-        $record1 = new NeatlineDataRecord($item1, $neatline);
-        $record2 = new NeatlineDataRecord($item2, $neatline);
-        $record3 = new NeatlineDataRecord($item3, $neatline);
-        $record4 = new NeatlineDataRecord($item4, $neatline);
-        $record5 = new NeatlineDataRecord($item5, $neatline);
+        $record1 = new NeatlineRecord($item1, $neatline);
+        $record2 = new NeatlineRecord($item2, $neatline);
+        $record3 = new NeatlineRecord($item3, $neatline);
+        $record4 = new NeatlineRecord($item4, $neatline);
+        $record5 = new NeatlineRecord($item5, $neatline);
         $record1->items_active = 1;
         $record2->items_active = 1;
         $record3->items_active = 1;
@@ -2102,7 +2102,7 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
         $exhibit = $this->_createNeatline();
 
         // Create a base layer.
-        $layer = new NeatlineBaseLayer();
+        $layer = new NeatlineLayer();
         $layer->name = 'Test Layer';
         $layer->save();
 
@@ -2143,7 +2143,7 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
         // Create entities.
         $exhibit = $this->_createNeatline();
         $item = $this->_createItem();
-        $record = new NeatlineDataRecord($item, $exhibit);
+        $record = new NeatlineRecord($item, $exhibit);
         $record->save();
 
         // Form the POST.
@@ -2228,7 +2228,7 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
 
         // Create entities.
         $exhibit = $this->_createNeatline();
-        $record = new NeatlineDataRecord(null, $exhibit);
+        $record = new NeatlineRecord(null, $exhibit);
         $record->save();
 
         // Form the POST.
@@ -2272,7 +2272,7 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
         // Create entities.
         $exhibit = $this->_createNeatline();
         $item = $this->_createItem();
-        $record = new NeatlineDataRecord($item, $exhibit);
+        $record = new NeatlineRecord($item, $exhibit);
         $record->save();
 
         // Form the POST.
@@ -2347,9 +2347,9 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
 
         // Create an exhibit and records.
         $neatline = $this->_createNeatline();
-        $record1 = new NeatlineDataRecord(null, $neatline);
+        $record1 = new NeatlineRecord(null, $neatline);
         $record1->save();
-        $record2 = new NeatlineDataRecord(null, $neatline);
+        $record2 = new NeatlineRecord(null, $neatline);
         $record2->save();
 
         // Form the POST.
@@ -2596,7 +2596,7 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
 
         // Create an exhibit.
         $exhibit = $this->_createNeatline();
-        $record = new NeatlineDataRecord(null, $exhibit);
+        $record = new NeatlineRecord(null, $exhibit);
 
         // Set styles.
         $record->vector_color = '#ffffff';
@@ -2642,7 +2642,7 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
         // Create an exhibit, item, and record.
         $exhibit = $this->_createNeatline();
         $item = $this->_createItem();
-        $record = new NeatlineDataRecord($item, $exhibit);
+        $record = new NeatlineRecord($item, $exhibit);
 
         // Set description and use_dc_metadata.
         $record->use_dc_metadata = 0;
@@ -2687,7 +2687,7 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
         // Create an exhibit, item, and record.
         $exhibit = $this->_createNeatline();
         $item = $this->_createItem();
-        $record = new NeatlineDataRecord($item, $exhibit);
+        $record = new NeatlineRecord($item, $exhibit);
 
         // Set description and use_dc_metadata.
         $record->use_dc_metadata = 1;

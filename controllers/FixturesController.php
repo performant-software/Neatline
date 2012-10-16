@@ -36,14 +36,8 @@ class Neatline_FixturesController extends Omeka_Controller_AbstractActionControl
     {
 
         // Get tables.
-        $this->_itemsTable =        $this->_helper->db->getTable('Item');
-        $this->_filesTable =        $this->_helper->db->getTable('File');
         $this->_neatlinesTable =    $this->_helper->db->getTable('NeatlineExhibit');
-        $this->_recordsTable =      $this->_helper->db->getTable('NeatlineDataRecord');
-        $this->_mapsTable =         $this->_helper->db->getTable('NeatlineMapsMap');
-        $this->_timelinesTable =    $this->_helper->db->getTable('NeatlineTimeTimeline');
-        $this->_statusesTable =     $this->_helper->db->getTable('NeatlineRecordStatus');
-        $this->_layersTable =       $this->_helper->db->getTable('NeatlineBaseLayer');
+        $this->_layersTable =       $this->_helper->db->getTable('NeatlineLayer');
 
     }
 
