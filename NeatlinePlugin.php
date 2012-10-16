@@ -231,11 +231,11 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
     {
 
         // Prepare the select.
-        $table = $this->_db->getTable('NeatlineDataRecord');
-        $alias = $table->getTableAlias();
-        $adapter = $table->getAdapter();
-        $select = $table->getSelect();
-        $where = $adapter->quoteInto("$alias.item_id=?", $args['record']->id);
+        $table =    $this->_db->getTable('NeatlineDataRecord');
+        $alias =    $table->getTableAlias();
+        $adapter =  $table->getAdapter();
+        $select =   $table->getSelect();
+        $where =    $adapter->quoteInto("$alias.item_id=?", $args['record']->id);
         $select->where($where);
 
         // Start transaction.
@@ -270,7 +270,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
      */
     public function filterAdminNavigationMain($tabs)
     {
-        $tabs['Neatline'] = url('neatline');
+        $tabs[] = array('label' => 'Neatline', 'uri' => url('neatline'));
         return $tabs;
     }
 
