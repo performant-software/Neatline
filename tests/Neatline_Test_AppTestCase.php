@@ -1,4 +1,7 @@
 <?php
+
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
+
 /**
  * Test suite parent class.
  *
@@ -28,29 +31,23 @@ class Neatline_Test_AppTestCase extends Omeka_Test_AppTestCase
         $this->_authenticateUser($this->user);
 
         // Set up Neatline.
-        $neatline_plugin_broker = get_plugin_broker();
-        $this->_addNeatlinePluginHooksAndFilters($neatline_plugin_broker, 'Neatline');
-        $neatline_plugin_helper = new Omeka_Test_Helper_Plugin;
-        $neatline_plugin_helper->setUp('Neatline');
+        $pluginBroker = get_plugin_broker();
+        $pluginBroker->setCurrentPluginDirName('TeiDisplay');
 
-        // Get table managers.
+        // Run plugin.
+        $neatline = new NeatlinePlugin;
+        $neatline->setUp();
+
+        // Configure helper.
+        $pluginHelper = new Omeka_Test_Helper_Plugin;
+        $pluginHelper->setUp('Neatline');
+
+        // Get plugin tables.
         $this->_exhibitsTable = $this->db->getTable('NeatlineExhibit');
         $this->_layersTable = $this->db->getTable('NeatlineLayer');
         $this->_exhibitsTable = $this->db->getTable('NeatlineExhibit');
         $this->_recordsTable = $this->db->getTable('NeatlineRecord');
 
-    }
-
-    /**
-     * Install Neatline.
-     *
-     * @return void.
-     */
-    public function _addNeatlinePluginHooksAndFilters($plugin_broker, $plugin_name)
-    {
-        $plugin_broker->setCurrentPluginDirName($plugin_name);
-        $neatline = new NeatlinePlugin;
-        $neatline->setUp();
     }
 
 
@@ -98,12 +95,9 @@ class Neatline_Test_AppTestCase extends Omeka_Test_AppTestCase
      */
     public function _createItem()
     {
-
         $item = new Item;
         $item->save();
-
         return $item;
-
     }
 
     /**
@@ -133,16 +127,17 @@ class Neatline_Test_AppTestCase extends Omeka_Test_AppTestCase
      *
      * @return Omeka_record $text The new text.
      */
-    public function _createElementText($item, $elementSet, $elementName, $value)
+    public function _createElementText(
+        $item, $elementSet, $elementName, $value)
     {
 
         // Get tables.
-        $_db = get_db();
-        $elementTable = $_db->getTable('Element');
-        $elementTextTable = $_db->getTable('ElementText');
+        $elementTable = $this->db->getTable('Element');
+        $elementTextTable = $this->db->getTable('ElementText');
 
         // Fetch element record and the item type id.
-        $element = $elementTable->findByElementSetNameAndElementName($elementSet, $elementName);
+        $element = $elementTable->findByElementSetNameAndElementName(
+            $elementSet, $elementName);
 
         $text = new ElementText;
         $text->record_id = $item->id;
