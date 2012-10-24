@@ -227,12 +227,16 @@
                 </div>
             </div>
 
-            <div class="control-group">
-                <div class="controls">
-                    <div class="inline-inputs">
-                        <button class="btn icon undo reset-styles"><i class="icon-refresh"></i> <?php echo __('Reset Item Styles'); ?></button>
-                    </div>
+            <div class="control-group styling-buttons">
+
+                <div class="inline-inputs">
+                    <button class="btn reset-styles"><i class="icon-refresh"></i> <?php echo __('Reset Item Styles'); ?></button>
                 </div>
+
+                <div class="inline-inputs">
+                    <button class="btn map-focus"><i class="icon-screenshot"></i> <?php echo __('Set Map Focus'); ?></button>
+                </div>
+
             </div>
 
         </div>
