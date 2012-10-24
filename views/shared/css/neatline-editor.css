@@ -468,6 +468,11 @@ div.form-actions {
   -webkit-font-smoothing: antialiased;
 }
 
+.styling-buttons .inline-inputs {
+    display: inline;
+    margin-right: 1em;
+}
+
 
 /* Search Cancel */
 
