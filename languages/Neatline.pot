@@ -89,11 +89,11 @@ msgstr ""
 msgid "Save Neatline"
 msgstr ""
 
-#: helpers/NeatlineFunctions.php:254
+#: helpers/NeatlineFunctions.php:249
 msgid "Warning"
 msgstr ""
 
-#: helpers/NeatlineFunctions.php:255
+#: helpers/NeatlineFunctions.php:250
 msgid ""
 "Uninstalling the Neatline plugin will permanently delete all Neatline "
 "exhibits."
@@ -448,8 +448,4 @@ msgstr ""
 
 #: views/shared/neatline/_bubbles.php:33
 msgid "Click for more information."
-msgstr ""
-
-#: views/shared/neatline/_private.php:28
-msgid "Coming soon."
 msgstr ""
