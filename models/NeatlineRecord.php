@@ -325,8 +325,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
     {
 
         if (!is_null($this->parent_record_id) && is_null($this->_parent)) {
-            $this->_parent = $this
-                ->getTable('NeatlineRecord')
+            $this->_parent = $this->getTable('NeatlineRecord')
                 ->find($this->parent_record_id);
         }
 
@@ -731,9 +730,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
     {
 
         // If there is a row value.
-        if (!is_null($this[$style])) {
-            return $this[$style];
-        }
+        if (!is_null($this[$style])) return $this[$style];
 
         // If there is a parent record value.
         else if (!is_null($this->parent_record_id)) {
@@ -766,9 +763,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
     {
 
         // Return row-level value.
-        if (!is_null($this->title)) {
-            return $this->title;
-        }
+        if (!is_null($this->title)) return $this->title;
 
         // If there is a parent item.
         else if (!is_null($this->item_id)) {
@@ -818,9 +813,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
 
         // Return row-level value.
         $title = $this->getTitle();
-        if ($title !== '') {
-            return $title;
-        }
+        if ($title !== '') return $title;
 
         else {
 
