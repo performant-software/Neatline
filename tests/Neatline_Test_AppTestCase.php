@@ -143,18 +143,6 @@ class Neatline_Test_AppTestCase extends Omeka_Test_AppTestCase
     }
 
     /**
-     * Get the first data record.
-     *
-     * @return NeatlineRecord The record.
-     */
-    public function getFirstRecord()
-    {
-        $records = $this->_recordsTable->fetchObjects(
-            $this->_recordsTable->getSelect());
-        return $records[0];
-    }
-
-    /**
      * Get the first exhibit.
      *
      * @return NeatlineExhibit The record.

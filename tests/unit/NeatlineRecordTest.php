@@ -86,7 +86,7 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
         $record->save();
 
         // Re-get the record object.
-        $record = $this->getFirstRecord();
+        $record = $this->_recordsTable->find($record->id);
 
         // Get.
         $this->assertEquals($record->parent_record_id, 1);

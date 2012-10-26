@@ -74,7 +74,7 @@ class Neatline_NeatlineExhibitTest extends Neatline_Test_AppTestCase
         $exhibit->save();
 
         // Re-get the exhibit object.
-        $exhibit = $this->getFirstExhibit();
+        $exhibit = $this->_exhibitsTable->find($exhibit->id);
 
         // Get.
         $this->assertNotNull($exhibit->added);

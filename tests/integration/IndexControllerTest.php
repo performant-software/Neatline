@@ -417,22 +417,6 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
         $this->assertEquals($exhibit->description, 'Test description.');
         $this->assertEquals($exhibit->slug, 'test-exhibit');
         $this->assertEquals($exhibit->public, 1);
-        $this->assertNull($exhibit->image_id);
-
-    }
-
-    /**
-     * Valid form should create new exhibit.
-     *
-     * @return void.
-     */
-    public function testAddSuccessWithImage()
-    {
-
-        // TODO: This requires (really) mocking an image, at the data level.
-        // But Omeka doesn't really make it possible to mock an image witout an
-        // actual, no-joke image sitting in /archives (it gets checked for at
-        // the level of the model).
 
     }
 
@@ -454,10 +438,8 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
         $this->assertXpath('//input[@name="title"][@value="Test Exhibit"]');
 
         // Description.
-        $this->assertXpathContentContains(
-            '//textarea[@name="description"]',
-            'Test description.'
-        );
+        $this->assertXpathContentContains('//textarea[@name="description"]',
+            'Test description.');
 
         // Slug.
         $this->assertXpath('//input[@name="slug"][@value="test-exhibit"]');
@@ -748,7 +730,7 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
         $this->dispatch('neatline-exhibits/edit/'.$exhibit->id);
 
         // Get the exhibit and examine.
-        $exhibit = $this->getFirstExhibit();
+        $exhibit = $this->_exhibitsTable->find($exhibit->id);
         $this->assertEquals($exhibit->title, 'New Exhibit');
         $this->assertEquals($exhibit->description, 'New description.');
         $this->assertEquals($exhibit->slug, 'new-exhibit');
