@@ -28,21 +28,6 @@ class Neatline_NeatlineExhibitTest extends Neatline_Test_AppTestCase
 {
 
     /**
-     * Instantiate the helper class, install the plugins, get the database.
-     *
-     * @return void.
-     */
-    public function setUp()
-    {
-
-        parent::setUp();
-
-        $this->db = get_db();
-        $this->_exhibitsTable = $this->db->getTable('NeatlineExhibit');
-
-    }
-
-    /**
      * Test get and set on columns.
      *
      * @return void.
@@ -89,7 +74,7 @@ class Neatline_NeatlineExhibitTest extends Neatline_Test_AppTestCase
         $exhibit->save();
 
         // Re-get the exhibit object.
-        $exhibit = $this->_exhibitsTable->find(1);
+        $exhibit = $this->getFirstExhibit();
 
         // Get.
         $this->assertNotNull($exhibit->added);
@@ -574,8 +559,8 @@ class Neatline_NeatlineExhibitTest extends Neatline_Test_AppTestCase
     }
 
     /**
-     * getBaseLayer() should return the default exhibit when there is
-     * no local default setting.
+     * getBaseLayer() should return the default layer when there is no
+     * local default setting.
      *
      * @return void.
      */

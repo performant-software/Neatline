@@ -38,9 +38,8 @@ class Neatline_HelpersTest extends Neatline_Test_AppTestCase
     public function testGetNeatlinesForLoop()
     {
 
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 10; $i++)
             $this->_createNeatline('Neatline '.$i, '', 'neatline-'.$i);
-        }
 
         $this->dispatch('neatline-exhibits');
 
@@ -69,11 +68,9 @@ class Neatline_HelpersTest extends Neatline_Test_AppTestCase
      */
     public function testHasNeatlinesForLoop()
     {
-
         $this->_createNeatline();
         $this->dispatch('neatline-exhibits');
         $this->assertTrue(has_neatlines_for_loop());
-
     }
 
     /**
@@ -107,10 +104,8 @@ class Neatline_HelpersTest extends Neatline_Test_AppTestCase
      */
     public function testNoLoopNeatlines()
     {
-
         $this->dispatch('neatline-exhibits');
         $this->assertEmpty(loop_neatlines());
-
     }
 
     /**
@@ -140,8 +135,8 @@ class Neatline_HelpersTest extends Neatline_Test_AppTestCase
     public function testNeatlineValue()
     {
 
+        // Create exhibit, hit /show.
         $neatline = $this->_createNeatline();
-
         $this->dispatch('neatline-exhibits/show/test-exhibit');
 
         // Neatline Name
@@ -153,8 +148,8 @@ class Neatline_HelpersTest extends Neatline_Test_AppTestCase
         $this->assertEquals('Test description.', neatline('Description'));
 
         // Neatline ID
-        $this->assertEquals('1', neatline('id'));
-        $this->assertEquals('1', neatline('ID'));
+        $this->assertEquals($neatline->id, neatline('id'));
+        $this->assertEquals($neatline->id, neatline('ID'));
 
         $this->assertEquals('test-exhibit', neatline('slug'));
         $this->assertEquals('test-exhibit', neatline('Slug'));
@@ -168,12 +163,15 @@ class Neatline_HelpersTest extends Neatline_Test_AppTestCase
      */
     public function testSetCurrentNeatlineTest()
     {
+
+        // Create exhibit, hit /show.
         $neatline = $this->_createNeatline();
         $this->dispatch('neatline-exhibits/show/test-exhibit');
 
         $newNeatline = $this->_createNeatline('new', 'new', 'new');
         set_current_neatline($newNeatline);
         $this->assertEquals($newNeatline, get_current_neatline());
+
     }
 
     /**
@@ -185,8 +183,10 @@ class Neatline_HelpersTest extends Neatline_Test_AppTestCase
     public function testSetNeatlinesForLoop()
     {
 
+        // Create exhibit, hit item browse.
         $neatline = $this->_createNeatline();
         $this->dispatch('items/browse');
+
         set_neatlines_for_loop(array($neatline));
         $this->assertTrue(in_array($neatline, get_neatlines_for_loop()));
 

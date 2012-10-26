@@ -412,7 +412,7 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
         $this->assertEquals($this->_exhibitsTable->count(), 1);
 
         // Get the exhibit and examine.
-        $exhibit = $this->_exhibitsTable->find(1);
+        $exhibit = $this->getFirstExhibit();
         $this->assertEquals($exhibit->title, 'Test Exhibit');
         $this->assertEquals($exhibit->description, 'Test description.');
         $this->assertEquals($exhibit->slug, 'test-exhibit');
@@ -748,7 +748,7 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
         $this->dispatch('neatline-exhibits/edit/'.$exhibit->id);
 
         // Get the exhibit and examine.
-        $exhibit = $this->_exhibitsTable->find(1);
+        $exhibit = $this->getFirstExhibit();
         $this->assertEquals($exhibit->title, 'New Exhibit');
         $this->assertEquals($exhibit->description, 'New description.');
         $this->assertEquals($exhibit->slug, 'new-exhibit');

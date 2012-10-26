@@ -223,7 +223,7 @@ class NeatlineExhibit extends Omeka_Record_AbstractRecord
      * The id of the default base layer.
      * int(10) unsigned NULL
      */
-    public $base_layer = 2;
+    public $base_layer;
 
 
     /**
@@ -247,6 +247,11 @@ class NeatlineExhibit extends Omeka_Record_AbstractRecord
      * Zend_Date format for saving to the database.
      */
     const DATE_FORMAT = 'yyyy-MM-dd HH:mm:ss';
+
+    /**
+     * Name of default base layer.
+     */
+    const DEFAULT_LAYER = 'Google Physical';
 
     /**
      * Things to do in the beforeInsert() hook:
@@ -285,9 +290,8 @@ class NeatlineExhibit extends Omeka_Record_AbstractRecord
     public function getImage()
     {
 
-        if (!is_null($this->image_id)) {
+        if (!is_null($this->image_id))
             return $this->getTable('File')->find($this->image_id);
-        }
 
         return null;
 
@@ -452,17 +456,14 @@ class NeatlineExhibit extends Omeka_Record_AbstractRecord
         // Get the data record table and query for active records.
         $_layersTable = $this->getTable('NeatlineLayer');
 
-        // If exhibit value is null, get and return default.
+        // Get default if no local setting.
         if (is_null($this->base_layer)) {
-            return $_layersTable->fetchObject(
-                $_layersTable->getSelect()->where('name = "Google Physical"')
-            );
+            return $_layersTable->fetchObject($_layersTable->getSelect()->
+                where('name = "' . self::DEFAULT_LAYER . '"'));
         }
 
         // If exhibit value is set, return the setting.
-        else {
-            return $_layersTable->find($this->base_layer);
-        }
+        else return $_layersTable->find($this->base_layer);
 
     }
 

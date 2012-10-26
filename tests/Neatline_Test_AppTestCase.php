@@ -30,15 +30,7 @@ class Neatline_Test_AppTestCase extends Omeka_Test_AppTestCase
         $this->user = $this->db->getTable('User')->find(1);
         $this->_authenticateUser($this->user);
 
-        // Set up Neatline.
-        $pluginBroker = get_plugin_broker();
-        $pluginBroker->setCurrentPluginDirName('TeiDisplay');
-
-        // Run plugin.
-        $neatline = new NeatlinePlugin;
-        $neatline->setUp();
-
-        // Configure helper.
+        // Install the plugin.
         $pluginHelper = new Omeka_Test_Helper_Plugin;
         $pluginHelper->setUp('Neatline');
 
@@ -148,6 +140,30 @@ class Neatline_Test_AppTestCase extends Omeka_Test_AppTestCase
 
         return $text;
 
+    }
+
+    /**
+     * Get the first data record.
+     *
+     * @return NeatlineRecord The record.
+     */
+    public function getFirstRecord()
+    {
+        $records = $this->_recordsTable->fetchObjects(
+            $this->_recordsTable->getSelect());
+        return $records[0];
+    }
+
+    /**
+     * Get the first exhibit.
+     *
+     * @return NeatlineExhibit The record.
+     */
+    public function getFirstExhibit()
+    {
+        $exhibits = $this->_exhibitsTable->fetchObjects(
+            $this->_exhibitsTable->getSelect());
+        return $exhibits[0];
     }
 
 }
