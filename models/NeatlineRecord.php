@@ -307,8 +307,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
     {
 
         if (is_null($this->_exhibit)) {
-            $this->_exhibit = $this
-                ->getTable('NeatlineExhibit')
+            $this->_exhibit = $this->getTable('NeatlineExhibit')
                 ->find($this->exhibit_id);
         }
 
@@ -466,8 +465,8 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
      */
     public function setNotEmpty($attribute, $value)
     {
-        if ($value == '') { $this[$attribute] = null; }
-        else { $this[$attribute] = $value; }
+        if ($value == '') $this[$attribute] = null;
+        else $this[$attribute] = $value;
     }
 
     /**
@@ -563,7 +562,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
      */
     public function setGeocoverage($value)
     {
-        if ($value == 'null') { return false; }
+        if ($value == 'null') return false;
         return $this->setNotEmpty('geocoverage', $value);
     }
 
@@ -665,7 +664,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
     }
 
     /**
-     * Set the use_dc_metadata parameter.
+     * Set the use_dc_metadata parameter if there is a parent item.
      *
      * @param integer $useDcMetadata 0/1.
      *
@@ -673,12 +672,8 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
      */
     public function setUseDcMetadata($useDcMetadata)
     {
-
-        // If there is a parent item.
-        if (!is_null($this->item_id)) {
+        if (!is_null($this->item_id))
             $this->use_dc_metadata = (int) $useDcMetadata;
-        }
-
     }
 
     /**
@@ -714,8 +709,8 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
      */
     public function getNotEmpty($attribute)
     {
-        if (is_null($this[$attribute])) { return ''; }
-        else { return $this[$attribute]; }
+        if (is_null($this[$attribute])) return '';
+        else return $this[$attribute];
     }
 
     /**
@@ -746,9 +741,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
             }
 
             // Fall back to system default.
-            else {
-                return get_plugin_ini('Neatline', $style);
-            }
+            else return get_plugin_ini('Neatline', $style);
 
         }
 
@@ -774,7 +767,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
 
         }
 
-        else { return ''; }
+        else return '';
 
     }
 
@@ -819,11 +812,10 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
 
             // Try to get a description.
             $description = $this->getDescription();
-            if ($description !== '') {
+            if ($description !== '')
                 return substr($description, 0, 200);
-            }
 
-            else { return __('[Untitled]'); }
+            else return __('[Untitled]');
 
         }
 
@@ -837,7 +829,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
     public function getSlug()
     {
         if (!is_null($this->slug)) { return $this->slug; }
-        else { return ''; }
+        else return '';
     }
 
     /**
@@ -863,6 +855,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
             return get_view()->partial('neatline/_dc_metadata.php', array(
                 'item' => $this->getItem()
             ));
+
         }
 
         // Return row-level value.
@@ -879,7 +872,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
 
         }
 
-        else { return ''; }
+        else return '';
 
     }
 
@@ -959,11 +952,8 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
                     }
 
                     // If at least one feature exists, implode and return.
-                    if (count($wkt)) {
-                        return implode('|', $wkt);
-                    } else {
-                        return self::$defaults['geocoverage'];
-                    }
+                    if (count($wkt)) return implode('|', $wkt);
+                    else return self::$defaults['geocoverage'];
 
                 }
 
@@ -972,9 +962,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
         }
 
         // Fall back on default string.
-        else {
-            return self::$defaults['geocoverage'];
-        }
+        else return self::$defaults['geocoverage'];
 
     }
 
@@ -1007,7 +995,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
         }
 
         // Return '' if no local or parent data.
-        else { return ''; }
+        else return '';
 
     }
 
@@ -1042,7 +1030,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
         }
 
         // Return '' if no local or parent data.
-        else { return ''; }
+        else return '';
 
     }
 
@@ -1071,7 +1059,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
         }
 
         // Return '' if no local or parent data.
-        else { return ''; }
+        else return '';
 
     }
 
@@ -1100,7 +1088,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
         }
 
         // Return '' if no local or parent data.
-        else { return ''; }
+        else return '';
 
     }
 
@@ -1120,9 +1108,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
         }
 
         // Otherwise, set integer key.
-        else {
-            return $this->parent_record_id;
-        }
+        else return $this->parent_record_id;
 
     }
 
@@ -1166,6 +1152,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
             $db->query($query, $this->id);
 
             parent::delete();
+
         }
     }
 
