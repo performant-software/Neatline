@@ -1732,13 +1732,13 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
         $item = $this->_createItem();
 
         // Create title and date element texts.
-        $this->_createElementText(
+        $this->__text(
             $item,
             'Dublin Core',
             'Title',
             'Test Title');
 
-        $this->_createElementText(
+        $this->__text(
             $item,
             'Dublin Core',
             'Date',

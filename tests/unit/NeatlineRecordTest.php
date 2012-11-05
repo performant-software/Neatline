@@ -1174,7 +1174,7 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
         $record = new NeatlineRecord($item, $neatline);
 
         // Create title and description element texts.
-        $this->_createElementText($item, 'Dublin Core', 'Title', 'Test Title');
+        $this->__text($item, 'Dublin Core', 'Title', 'Test Title');
 
         // Should return the DC value.
         $this->assertEquals($record->getTitle(), 'Test Title');
@@ -1302,7 +1302,7 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
         $record = new NeatlineRecord($item, $neatline);
 
         // Create title and description element texts.
-        $this->_createElementText(
+        $this->__text(
             $item,
             'Dublin Core',
             'Description',
@@ -1431,7 +1431,7 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
         $this->assertEquals($record->getGeocoverage(), '');
 
         // Add an empty DC coverage field on the parent item.
-        $this->_createElementText(
+        $this->__text(
             $item,
             'Dublin Core',
             'Coverage',
@@ -1461,7 +1461,7 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
         $record = new NeatlineRecord($item, $neatline);
 
         // Add a non-empty DC coverage field on the parent item.
-        $this->_createElementText(
+        $this->__text(
             $item,
             'Dublin Core',
             'Coverage',
@@ -1541,7 +1541,7 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
         $record = new NeatlineRecord($item, $neatline);
 
         // Add a non-range date to the DC date field on the parent item.
-        $this->_createElementText(
+        $this->__text(
             $item,
             'Dublin Core',
             'Date',
@@ -1572,7 +1572,7 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
         $record = new NeatlineRecord($item, $neatline);
 
         // Add a non-range date to the DC date field on the parent item.
-        $this->_createElementText(
+        $this->__text(
             $item,
             'Dublin Core',
             'Date',
@@ -1653,7 +1653,7 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
         $record = new NeatlineRecord($item, $neatline);
 
         // Add a non-range date to the DC date field on the parent item.
-        $this->_createElementText(
+        $this->__text(
             $item,
             'Dublin Core',
             'Date',
@@ -1684,7 +1684,7 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
         $record = new NeatlineRecord($item, $neatline);
 
         // Add a non-range date to the DC date field on the parent item.
-        $this->_createElementText(
+        $this->__text(
             $item,
             'Dublin Core',
             'Date',
@@ -2165,21 +2165,21 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
         $exhibit = $this->_createNeatline();
 
         // Create title element.
-        $this->_createElementText(
+        $this->__text(
             $item,
             'Dublin Core',
             'Title',
             'Test Title');
 
         // Create description element.
-        $this->_createElementText(
+        $this->__text(
             $item,
             'Dublin Core',
             'Description',
             'Test description.');
 
         // Create date element.
-        $this->_createElementText(
+        $this->__text(
             $item,
             'Dublin Core',
             'Date',
@@ -2228,21 +2228,21 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
         $exhibit = $this->_createNeatline();
 
         // Create title element.
-        $this->_createElementText(
+        $this->__text(
             $item,
             'Dublin Core',
             'Title',
             'Test Title');
 
         // Create description element.
-        $this->_createElementText(
+        $this->__text(
             $item,
             'Dublin Core',
             'Description',
             'Test description.');
 
         // Create date element.
-        $this->_createElementText(
+        $this->__text(
             $item,
             'Dublin Core',
             'Date',
@@ -2453,6 +2453,17 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
         $this->assertEquals($data['right_ambiguity'], 70);
         $this->assertEquals($data['show_bubble'], 1);
         $this->assertEquals($data['textColor'], '#000000');
+
+    }
+
+    /**
+     * buildJsonData() should construct a well-formed array object with
+     * all attributes necessary for the front-end application.
+     *
+     * @return void.
+     */
+    public function testBuildJsonData()
+    {
 
     }
 

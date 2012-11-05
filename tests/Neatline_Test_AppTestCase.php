@@ -119,8 +119,7 @@ class Neatline_Test_AppTestCase extends Omeka_Test_AppTestCase
      *
      * @return Omeka_record $text The new text.
      */
-    public function _createElementText(
-        $item, $elementSet, $elementName, $value)
+    public function __text($item, $elementSet, $elementName, $value)
     {
 
         // Get tables.

@@ -639,13 +639,13 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
         $neatline = $this->_createNeatline();
 
         // Create element texts.
-        $this->_createElementText(
+        $this->__text(
             $item,
             'Dublin Core',
             'Title',
             'Test Title');
 
-        $this->_createElementText(
+        $this->__text(
             $item,
             'Dublin Core',
             'Description',
