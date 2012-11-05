@@ -51,33 +51,16 @@ class Neatline_Test_AppTestCase extends Omeka_Test_AppTestCase
     /**
      * Create a Neatline exhibit.
      *
+     * @param string $slug The exhibit slug.
+     *
      * @return Omeka_record $neatline The exhibit.
      */
-    public function _createNeatline(
-        $name = 'Test Exhibit',
-        $description = 'Test description.',
-        $slug = 'test-exhibit',
-        $public = 1,
-        $is_map = 1,
-        $is_timeline = 1,
-        $is_undated_items = 1,
-        $is_context_band = 1
-    )
+    public function __exhibit($slug='test-slug')
     {
-
-        $neatline = new NeatlineExhibit();
-        $neatline->title = $name;
-        $neatline->description = $description;
-        $neatline->slug = $slug;
-        $neatline->public = $public;
-        $neatline->is_map = $is_map;
-        $neatline->is_timeline = $is_timeline;
-        $neatline->is_items = $is_undated_items;
-        $neatline->is_context_band = $is_context_band;
-        $neatline->save();
-
-        return $neatline;
-
+        $exhibit = new NeatlineExhibit;
+        $exhibit->slug = $slug;
+        $exhibit->save();
+        return $exhibit;
     }
 
     /**
@@ -85,7 +68,7 @@ class Neatline_Test_AppTestCase extends Omeka_Test_AppTestCase
      *
      * @return Omeka_record $item The item.
      */
-    public function _createItem()
+    public function __item()
     {
         $item = new Item;
         $item->save();
@@ -95,14 +78,21 @@ class Neatline_Test_AppTestCase extends Omeka_Test_AppTestCase
     /**
      * Create a data record.
      *
-     * @return Omeka_record $item The record.
+     * @param Item $item The parent item.
+     * @param NeatlineExhibit $exhibit The parent exhibit.
+     *
+     * @return NeatlineRecord $record The record.
      */
-    public function _createRecord()
+    public function __record($item=null, $exhibit=null)
     {
 
-        $item = $this->_createItem();
-        $neatline = $this->_createNeatline();
-        $record = new NeatlineRecord($item, $neatline);
+        // Create item.
+        if (is_null($item)) $item = $this->__item();
+
+        // Create exhibit.
+        if (is_null($exhibit)) $exhibit = $this->__exhibit();
+
+        $record = new NeatlineRecord($item, $exhibit);
         $record->save();
 
         return $record;
@@ -122,9 +112,8 @@ class Neatline_Test_AppTestCase extends Omeka_Test_AppTestCase
     public function __text($item, $elementSet, $elementName, $value)
     {
 
-        // Get tables.
+        // Get element table.
         $elementTable = $this->db->getTable('Element');
-        $elementTextTable = $this->db->getTable('ElementText');
 
         // Fetch element record and the item type id.
         $element = $elementTable->findByElementSetNameAndElementName(

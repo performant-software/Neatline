@@ -59,8 +59,8 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
     {
 
         // Create item, exhibit, and record.
-        $item = $this->_createItem();
-        $neatline = $this->_createNeatline();
+        $item = $this->__item();
+        $neatline = $this->__exhibit();
         $record1 = new NeatlineRecord($item, $neatline);
         $record1->save();
         $record2 = new NeatlineRecord(null, $neatline);
@@ -87,8 +87,8 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
     {
 
         // Create item, exhibit, and record.
-        $item = $this->_createItem();
-        $neatline = $this->_createNeatline();
+        $item = $this->__item();
+        $neatline = $this->__exhibit();
 
         // 0 records.
         $this->assertEquals($this->_recordsTable->count(), 0);
@@ -112,8 +112,8 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
     {
 
         // Create item and exhibit.
-        $item = $this->_createItem();
-        $neatline = $this->_createNeatline();
+        $item = $this->__item();
+        $neatline = $this->__exhibit();
 
         // Try to get a non-existent record.
         $noRecord = $this->_recordsTable->getRecordByItemAndExhibit($item, $neatline);
@@ -130,8 +130,8 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
     {
 
         // Create item, exhibit, and record.
-        $item = $this->_createItem();
-        $neatline = $this->_createNeatline();
+        $item = $this->__item();
+        $neatline = $this->__exhibit();
         $record = new NeatlineRecord($item, $neatline);
         $record->save();
 
@@ -166,8 +166,8 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
     {
 
         // Create item, exhibit, and record.
-        $item = $this->_createItem();
-        $neatline = $this->_createNeatline();
+        $item = $this->__item();
+        $neatline = $this->__exhibit();
         $record = new NeatlineRecord($item, $neatline);
         $record->save();
 
@@ -186,8 +186,8 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
     {
 
         // Create item, exhibit, and record.
-        $item = $this->_createItem();
-        $neatline = $this->_createNeatline();
+        $item = $this->__item();
+        $neatline = $this->__exhibit();
         $record = new NeatlineRecord($item, $neatline);
         $record->slug = 'test-slug';
         $record->save();
@@ -234,8 +234,8 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
     {
 
         // Create item and exhibit.
-        $item = $this->_createItem();
-        $exhibit = $this->_createNeatline();
+        $item = $this->__item();
+        $exhibit = $this->__exhibit();
 
         // Create two records.
         $record1 = new NeatlineRecord($item, $exhibit);
@@ -260,8 +260,8 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
     {
 
         // Create item and exhibit.
-        $item = $this->_createItem();
-        $exhibit = $this->_createNeatline();
+        $item = $this->__item();
+        $exhibit = $this->__exhibit();
 
         // Create two records.
         $record1 = new NeatlineRecord($item, $exhibit);
@@ -286,8 +286,8 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
     {
 
         // Create item and exhibit.
-        $item = $this->_createItem();
-        $exhibit = $this->_createNeatline();
+        $item = $this->__item();
+        $exhibit = $this->__exhibit();
 
         // Create two records.
         $record1 = new NeatlineRecord($item, $exhibit);
@@ -313,7 +313,7 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
     {
 
         // Create exhibit.
-        $exhibit = $this->_createNeatline();
+        $exhibit = $this->__exhibit();
         $record1 = new NeatlineRecord(null, $exhibit);
         $record1->title = 'Title 1';
         $record1->save();
@@ -346,7 +346,7 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
     {
 
         // Create exhibit.
-        $exhibit = $this->_createNeatline();
+        $exhibit = $this->__exhibit();
         $record1 = new NeatlineRecord(null, $exhibit);
         $record1->title = 'Title 1';
         $record1->save();
@@ -381,8 +381,8 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
     {
 
         // Create item, exhibit, and record.
-        $item = $this->_createItem();
-        $neatline = $this->_createNeatline();
+        $item = $this->__item();
+        $neatline = $this->__exhibit();
 
         // At the start, no records.
         $this->assertEquals($this->_recordsTable->count(), 0);
@@ -435,8 +435,8 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
     {
 
         // Create item, exhibit, and record.
-        $item = $this->_createItem();
-        $neatline = $this->_createNeatline();
+        $item = $this->__item();
+        $neatline = $this->__exhibit();
         $record = new NeatlineRecord($item, $neatline);
         $record->save();
 
@@ -482,8 +482,8 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
     {
 
         // Create item, exhibit, and record.
-        $item = $this->_createItem();
-        $neatline = $this->_createNeatline();
+        $item = $this->__item();
+        $neatline = $this->__exhibit();
         $record = new NeatlineRecord($item, $neatline);
 
         // Populate statuses with trues.
@@ -529,8 +529,8 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
     {
 
         // Create item, exhibit, and record.
-        $item = $this->_createItem();
-        $neatline = $this->_createNeatline();
+        $item = $this->__item();
+        $neatline = $this->__exhibit();
 
         // Get.
         $spaceStatus = $this->_recordsTable->getRecordStatus($item, $neatline, 'space');
@@ -554,9 +554,9 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
     {
 
         // Create two items and an exhibit.
-        $item1 = $this->_createItem();
-        $item2 = $this->_createItem();
-        $neatline = $this->_createNeatline();
+        $item1 = $this->__item();
+        $item2 = $this->__item();
+        $neatline = $this->__exhibit();
 
         // Create two records.
         $record1 = new NeatlineRecord($item1, $neatline);
@@ -585,7 +585,7 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
     {
 
         // Create two items and an exhibit.
-        $neatline = $this->_createNeatline();
+        $neatline = $this->__exhibit();
 
         // Get the records and check result.
         $records = $this->_recordsTable->getRecordsByExhibit($neatline);
@@ -615,8 +615,8 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
     {
 
         // Create an exhibit.
-        $neatline = $this->_createNeatline();
-        $item = $this->_createItem();
+        $neatline = $this->__exhibit();
+        $item = $this->__item();
 
         // Create two records, one with a parent item and one without.
         $record1 = new NeatlineRecord(null, $neatline);
@@ -641,8 +641,8 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
     {
 
         // Create two items and an exhibit.
-        $neatline = $this->_createNeatline();
-        $item = $this->_createItem();
+        $neatline = $this->__exhibit();
+        $item = $this->__item();
 
         // Create two records, one with a parent item and one without.
         $record = new NeatlineRecord($item, $neatline);
@@ -677,7 +677,7 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
     {
 
         // Create an exhibit.
-        $neatline = $this->_createNeatline();
+        $neatline = $this->__exhibit();
 
         // Create two records, one with a parent item and one without.
         $record1 = new NeatlineRecord(null, $neatline);
@@ -706,7 +706,7 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
     {
 
         // Create an exhibit.
-        $neatline = $this->_createNeatline();
+        $neatline = $this->__exhibit();
 
         // False when no records.
         $records = $this->_recordsTable->searchNeatlineRecordsByExhibit($neatline, 'test');
@@ -724,7 +724,7 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
     {
 
         // Create an exhibit.
-        $neatline = $this->_createNeatline();
+        $neatline = $this->__exhibit();
 
         // Create two records, one with a parent item and one without.
         $record1 = new NeatlineRecord(null, $neatline);
@@ -777,9 +777,9 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
     {
 
         // Create two items and an exhibit.
-        $item1 = $this->_createItem();
-        $item2 = $this->_createItem();
-        $neatline = $this->_createNeatline();
+        $item1 = $this->__item();
+        $item2 = $this->__item();
+        $neatline = $this->__exhibit();
 
         // Create two records with inactive status settings.
         $record1 = new NeatlineRecord($item1, $neatline);
@@ -832,11 +832,11 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
     {
 
         // Create an exhibit, items, and records.
-        $neatline = $this->_createNeatline();
-        $item1 = $this->_createItem();
-        $item2 = $this->_createItem();
-        $item3 = $this->_createItem();
-        $item4 = $this->_createItem();
+        $neatline = $this->__exhibit();
+        $item1 = $this->__item();
+        $item2 = $this->__item();
+        $item3 = $this->__item();
+        $item4 = $this->__item();
         $record1 = new NeatlineRecord($item1, $neatline);
         $record2 = new NeatlineRecord($item2, $neatline);
         $record3 = new NeatlineRecord($item3, $neatline);
@@ -904,9 +904,9 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
     {
 
         // Create two items and an exhibit.
-        $item1 = $this->_createItem();
-        $item2 = $this->_createItem();
-        $neatline = $this->_createNeatline();
+        $item1 = $this->__item();
+        $item2 = $this->__item();
+        $neatline = $this->__exhibit();
 
         // Create two records with inactive map status settings.
         $record1 = new NeatlineRecord($item1, $neatline);
@@ -945,9 +945,9 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
     {
 
         // Create two items and an exhibit.
-        $item1 = $this->_createItem();
-        $item2 = $this->_createItem();
-        $neatline = $this->_createNeatline();
+        $item1 = $this->__item();
+        $item2 = $this->__item();
+        $neatline = $this->__exhibit();
 
         // Create two records with inactive timeline status settings.
         $record1 = new NeatlineRecord($item1, $neatline);
@@ -986,9 +986,9 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
     {
 
         // Create two items and an exhibit.
-        $item1 = $this->_createItem();
-        $item2 = $this->_createItem();
-        $neatline = $this->_createNeatline();
+        $item1 = $this->__item();
+        $item2 = $this->__item();
+        $neatline = $this->__exhibit();
 
         // Create two records with inactive status settings.
         $record1 = new NeatlineRecord($item1, $neatline);
@@ -1026,11 +1026,11 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
     {
 
         // Create an exhibit, items, and records.
-        $neatline = $this->_createNeatline();
-        $item1 = $this->_createItem();
-        $item2 = $this->_createItem();
-        $item3 = $this->_createItem();
-        $item4 = $this->_createItem();
+        $neatline = $this->__exhibit();
+        $item1 = $this->__item();
+        $item2 = $this->__item();
+        $item3 = $this->__item();
+        $item4 = $this->__item();
         $record1 = new NeatlineRecord($item1, $neatline);
         $record2 = new NeatlineRecord($item2, $neatline);
         $record3 = new NeatlineRecord($item3, $neatline);
@@ -1089,28 +1089,28 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
     }
 
     /**
-     * The buildRecordsJson() method should construct well-formed JSON string
-     * with the map and timeline records.
+     * buildJsonForExhibit() should construct a well-formed array of records
+     * with all attributes needed for the front-end application.
      *
      * @return void.
      */
-    public function testBuildRecordsJson()
+    public function testBuildJsonForExhibit()
     {
 
         // Create an exhibit and items.
-        $exhibit = $this->_createNeatline();
-        $item1 = $this->_createItem();
-        $item2 = $this->_createItem();
+        $exhibit = $this->__exhibit();
+        $item1 = $this->__item();
+        $item2 = $this->__item();
 
         // Create two records.
         $record1 = new NeatlineRecord($item1, $exhibit);
         $record2 = new NeatlineRecord($item2, $exhibit);
 
         // Map attributes.
-        $record1->title = 'Item 1 Title';
-        $record2->title = 'Item 2 Title';
-        $record1->description = 'Item 1 description.';
-        $record2->description = 'Item 2 description.';
+        $record1->title = 'Record 1 Title';
+        $record2->title = 'Record 2 Title';
+        $record1->description = 'Record 1 description.';
+        $record2->description = 'Record 2 description.';
         $record1->slug = 'slug-1';
         $record2->slug = 'slug-2';
         $record1->vector_color = '#ffffff';
@@ -1133,36 +1133,28 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
         $record2->point_radius = 2;
         $record1->point_image = 'http://test1.org';
         $record2->point_image = 'http://test2.org';
-        $record1->geocoverage = 'POINT(1,0)';
-        $record2->geocoverage = 'POINT(0,1)';
+        $record1->geocoverage = 'kml1';
+        $record2->geocoverage = 'kml2';
         $record1->space_active = 1;
         $record2->space_active = 1;
-        $record1->map_bounds = 'CENTER(1)';
-        $record2->map_bounds = 'CENTER(2)';
+        $record1->time_active = 1;
+        $record2->time_active = 1;
+        $record1->map_bounds = 'center1';
+        $record2->map_bounds = 'center2';
         $record1->map_zoom = 4;
         $record2->map_zoom = 5;
-        $record1->start_visible_date = '1864-04-26 14:39:22';
-        $record2->start_visible_date = '1964-04-26 14:39:22';
-        $record1->end_visible_date = '1916-04-23 12:45:34';
-        $record2->end_visible_date = '2016-04-23 12:45:34';
-
-        // Timeline attributes.
-        $record1->title = 'Item 1 Title';
-        $record2->title = 'Item 2 Title';
-        $record1->description = 'Item 1 description.';
-        $record2->description = 'Item 2 description.';
         $record1->start_date = '1564-04-26 14:39:22';
         $record2->start_date = '1565-04-26 14:39:22';
         $record1->end_date = '1616-04-23 12:45:34';
         $record2->end_date = '1617-04-23 12:45:34';
-        $record1->vector_color = '#ffffff';
-        $record2->vector_color = '#000000';
+        $record1->start_visible_date = '1864-04-26 14:39:22';
+        $record2->start_visible_date = '1964-04-26 14:39:22';
+        $record1->end_visible_date = '1916-04-23 12:45:34';
+        $record2->end_visible_date = '2016-04-23 12:45:34';
         $record1->left_percent = 0;
         $record2->left_percent = 20;
         $record1->right_percent = 100;
         $record2->right_percent = 80;
-        $record1->time_active = 1;
-        $record2->time_active = 1;
         $record1->show_bubble = 0;
         $record2->show_bubble = 1;
 
@@ -1171,110 +1163,64 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
         $record2->save();
 
         // Build the record array.
-        $records = $this->_recordsTable->buildRecordsJson($exhibit);
+        $records = $this->_recordsTable->buildJsonForExhibit($exhibit);
 
         // Check result.
         $this->assertEquals(
-            $records,
-            array(
-                'map' => array(
-                    array(
-                        'id' => $record1->id,
-                        'item_id' => $item1->id,
-                        'title' => 'Item 1 Title',
-                        'description' => 'Item 1 description.',
-                        'slug' => 'slug-1',
-                        'vector_color' => '#ffffff',
-                        'stroke_color' => '#ffffff',
-                        'highlight_color' => '#ffffff',
-                        'vector_opacity' => 60,
-                        'select_opacity' => 60,
-                        'stroke_opacity' => 60,
-                        'graphic_opacity' => 60,
-                        'stroke_width' => 3,
-                        'point_radius' => 3,
-                        'point_image' => 'http://test1.org',
-                        'center' => 'CENTER(1)',
-                        'zoom' => 4,
-                        'wkt' => 'POINT(1,0)',
-                        'start_visible_date' => '1864-04-26 14:39:22',
-                        'end_visible_date' => '1916-04-23 12:45:34',
-                        'show_bubble' => 0,
-                        'wmsAddress' => null,
-                        'layers' => null,
-                        '_native_styles' => array(
-                            'vector_color' => '#ffffff',
-                            'vector_opacity' => 60,
-                            'stroke_color' => '#ffffff',
-                            'stroke_opacity' => 60,
-                            'stroke_width' => 3,
-                            'graphic_opacity' => 60,
-                            'point_radius' => 3
-                        )
-                    ),
-                    array(
-                        'id' => $record2->id,
-                        'item_id' => $item2->id,
-                        'title' => 'Item 2 Title',
-                        'description' => 'Item 2 description.',
-                        'slug' => 'slug-2',
-                        'vector_color' => '#000000',
-                        'stroke_color' => '#000000',
-                        'highlight_color' => '#000000',
-                        'vector_opacity' => 40,
-                        'select_opacity' => 40,
-                        'stroke_opacity' => 40,
-                        'graphic_opacity' => 40,
-                        'stroke_width' => 2,
-                        'point_radius' => 2,
-                        'point_image' => 'http://test2.org',
-                        'center' => 'CENTER(2)',
-                        'zoom' => 5,
-                        'wkt' => 'POINT(0,1)',
-                        'start_visible_date' => '1964-04-26 14:39:22',
-                        'end_visible_date' => '2016-04-23 12:45:34',
-                        'show_bubble' => 1,
-                        'wmsAddress' => null,
-                        'layers' => null,
-                        '_native_styles' => array(
-                            'vector_color' => '#000000',
-                            'vector_opacity' => 40,
-                            'stroke_color' => '#000000',
-                            'stroke_opacity' => 40,
-                            'stroke_width' => 2,
-                            'graphic_opacity' => 40,
-                            'point_radius' => 2
-                        )
-                    )
+            $records, array(
+                array(
+                    'id' => $record1->id,
+                    'item_id' => $item1->id,
+                    'title' => 'Record 1 Title',
+                    'description' => 'Record 1 description.',
+                    'slug' => 'slug-1',
+                    'vector_color' => '#ffffff',
+                    'stroke_color' => '#ffffff',
+                    'highlight_color' => '#ffffff',
+                    'vector_opacity' => 60,
+                    'select_opacity' => 60,
+                    'stroke_opacity' => 60,
+                    'graphic_opacity' => 60,
+                    'stroke_width' => 3,
+                    'point_radius' => 3,
+                    'point_image' => 'http://test1.org',
+                    'show_bubble' => 0,
+                    'center' => 'center1',
+                    'zoom' => 4,
+                    'wkt' => 'kml1',
+                    'wmsAddress' => null,
+                    'layers' => null,
+                    'start_date' => '1564-04-26 14:39:22',
+                    'end_date' => '1616-04-23 12:45:34',
+                    'start_visible_date' => '1864-04-26 14:39:22',
+                    'end_visible_date' => '1916-04-23 12:45:34'
                 ),
-                'timeline' => array(
-                    'dateTimeFormat' => 'iso8601',
-                    'events' => array(
-                        array(
-                            'eventID' => $record1->id,
-                            'title' => 'Item 1 Title',
-                            'description' => 'Item 1 description.',
-                            'color' => '#ffffff',
-                            'left_ambiguity' => 0,
-                            'right_ambiguity' => 100,
-                            'show_bubble' => 0,
-                            'textColor' => '#000000',
-                            'start' => '1564-04-26 14:39:22',
-                            'end' => '1616-04-23 12:45:34'
-                        ),
-                        array(
-                            'eventID' => $record2->id,
-                            'title' => 'Item 2 Title',
-                            'description' => 'Item 2 description.',
-                            'color' => '#000000',
-                            'left_ambiguity' => 20,
-                            'right_ambiguity' => 80,
-                            'show_bubble' => 1,
-                            'textColor' => '#000000',
-                            'start' => '1565-04-26 14:39:22',
-                            'end' => '1617-04-23 12:45:34'
-                        )
-                    )
+                array(
+                    'id' => $record2->id,
+                    'item_id' => $item2->id,
+                    'title' => 'Record 2 Title',
+                    'description' => 'Record 2 description.',
+                    'slug' => 'slug-2',
+                    'vector_color' => '#000000',
+                    'stroke_color' => '#000000',
+                    'highlight_color' => '#000000',
+                    'vector_opacity' => 40,
+                    'select_opacity' => 40,
+                    'stroke_opacity' => 40,
+                    'graphic_opacity' => 40,
+                    'stroke_width' => 2,
+                    'point_radius' => 2,
+                    'point_image' => 'http://test2.org',
+                    'show_bubble' => 1,
+                    'center' => 'center2',
+                    'zoom' => 5,
+                    'wkt' => 'kml2',
+                    'wmsAddress' => null,
+                    'layers' => null,
+                    'start_date' => '1565-04-26 14:39:22',
+                    'end_date' => '1617-04-23 12:45:34',
+                    'start_visible_date' => '1964-04-26 14:39:22',
+                    'end_visible_date' => '2016-04-23 12:45:34'
                 )
             )
         );
@@ -1291,9 +1237,9 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
     {
 
         // Create an exhibit and items.
-        $neatline = $this->_createNeatline();
-        $item1 = $this->_createItem();
-        $item2 = $this->_createItem();
+        $neatline = $this->__exhibit();
+        $item1 = $this->__item();
+        $item2 = $this->__item();
 
         // Create two records.
         $record1 = new NeatlineRecord($item1, $neatline);
@@ -1432,9 +1378,9 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
     {
 
         // Create an exhibit and items.
-        $neatline = $this->_createNeatline();
-        $item1 = $this->_createItem();
-        $item2 = $this->_createItem();
+        $neatline = $this->__exhibit();
+        $item1 = $this->__item();
+        $item2 = $this->__item();
 
         // Create two records.
         $record1 = new NeatlineRecord($item1, $neatline);
@@ -1469,8 +1415,8 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
     {
 
         // Create an exhibit and items.
-        $neatline = $this->_createNeatline();
-        $item = $this->_createItem();
+        $neatline = $this->__exhibit();
+        $item = $this->__item();
 
         // Create record.
         $record = new NeatlineRecord($item, $neatline);
@@ -1500,7 +1446,7 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
     {
 
         // Create an exhibit.
-        $neatline = $this->_createNeatline();
+        $neatline = $this->__exhibit();
 
         // Build the JSON.
         $json = $this->_recordsTable->buildMapJson($neatline);
@@ -1520,9 +1466,9 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
     {
 
         // Create an exhibit and items.
-        $neatline = $this->_createNeatline();
-        $item1 = $this->_createItem();
-        $item2 = $this->_createItem();
+        $neatline = $this->__exhibit();
+        $item1 = $this->__item();
+        $item2 = $this->__item();
 
         // Create two records.
         $record1 = new NeatlineRecord($item1, $neatline);
@@ -1598,8 +1544,8 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
     {
 
         // Create an exhibit and items.
-        $neatline = $this->_createNeatline();
-        $item = $this->_createItem();
+        $neatline = $this->__exhibit();
+        $item = $this->__item();
 
         // Create two records.
         $record = new NeatlineRecord($item, $neatline);
@@ -1636,8 +1582,8 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
     {
 
         // Create an exhibit and items.
-        $neatline = $this->_createNeatline();
-        $item = $this->_createItem();
+        $neatline = $this->__exhibit();
+        $item = $this->__item();
 
         // Set an exhibit default.
         $neatline->vector_color = '#ffffff';
@@ -1671,8 +1617,8 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
     {
 
         // Create an exhibit and items.
-        $neatline = $this->_createNeatline();
-        $item = $this->_createItem();
+        $neatline = $this->__exhibit();
+        $item = $this->__item();
 
         // Create record.
         $record = new NeatlineRecord($item, $neatline);
@@ -1705,7 +1651,7 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
     {
 
         // Create an exhibit.
-        $neatline = $this->_createNeatline();
+        $neatline = $this->__exhibit();
 
         // Build the records.
         $records = $this->_recordsTable->buildTimelineJson($neatline);
@@ -1728,8 +1674,8 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
     {
 
         // Create an exhibit and item.
-        $exhibit = $this->_createNeatline();
-        $item = $this->_createItem();
+        $exhibit = $this->__exhibit();
+        $item = $this->__item();
 
         // Create title and date element texts.
         $this->__text(
@@ -1767,9 +1713,9 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
     {
 
         // Create an exhibit and items.
-        $neatline = $this->_createNeatline();
-        $item1 = $this->_createItem();
-        $item2 = $this->_createItem();
+        $neatline = $this->__exhibit();
+        $item1 = $this->__item();
+        $item2 = $this->__item();
 
         // Create two records.
         $record1 = new NeatlineRecord($item1, $neatline);
@@ -1827,11 +1773,11 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
     {
 
         // Create an exhibit, items, and records.
-        $neatline = $this->_createNeatline();
-        $item1 = $this->_createItem();
-        $item2 = $this->_createItem();
-        $item3 = $this->_createItem();
-        $item4 = $this->_createItem();
+        $neatline = $this->__exhibit();
+        $item1 = $this->__item();
+        $item2 = $this->__item();
+        $item3 = $this->__item();
+        $item4 = $this->__item();
         $record1 = new NeatlineRecord($item1, $neatline);
         $record2 = new NeatlineRecord($item2, $neatline);
         $record3 = new NeatlineRecord($item3, $neatline);

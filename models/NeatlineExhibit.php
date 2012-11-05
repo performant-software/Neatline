@@ -40,7 +40,7 @@ class NeatlineExhibit extends Omeka_Record_AbstractRecord
 
     /**
      * The URL slug for the exhibit.
-     * varchar(100) NOT NULL
+     * varchar(100) NULL
      */
     public $slug;
 

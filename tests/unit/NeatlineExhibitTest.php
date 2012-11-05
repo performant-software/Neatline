@@ -121,7 +121,7 @@ class Neatline_NeatlineExhibitTest extends Neatline_Test_AppTestCase
      */
     public function testSaveFormWithoutImage()
     {
-        $neatline = $this->_createNeatline();
+        $neatline = $this->__exhibit();
         $this->assertNull($neatline->image_id);
     }
 
@@ -134,7 +134,7 @@ class Neatline_NeatlineExhibitTest extends Neatline_Test_AppTestCase
     {
 
         // Create an exhibit and map.
-        $exhibit = $this->_createNeatline();
+        $exhibit = $this->__exhibit();
 
         // Get the map and check.
         $retrievedImage = $exhibit->getImage();
@@ -151,7 +151,7 @@ class Neatline_NeatlineExhibitTest extends Neatline_Test_AppTestCase
     {
 
         // Create an exhibit and map.
-        $exhibit = $this->_createNeatline();
+        $exhibit = $this->__exhibit();
 
         // Save form data.
         $exhibit->saveForm(array(
@@ -179,8 +179,8 @@ class Neatline_NeatlineExhibitTest extends Neatline_Test_AppTestCase
     {
 
         // Create an exhibit and item.
-        $neatline = $this->_createNeatline();
-        $item = $this->_createItem();
+        $neatline = $this->__exhibit();
+        $item = $this->__item();
 
         // Create a record.
         $record = new NeatlineRecord($item, $neatline);
@@ -211,8 +211,8 @@ class Neatline_NeatlineExhibitTest extends Neatline_Test_AppTestCase
     {
 
         // Create an exhibit and item.
-        $neatline = $this->_createNeatline();
-        $item = $this->_createItem();
+        $neatline = $this->__exhibit();
+        $item = $this->__item();
 
         // Create a record.
         $record = new NeatlineRecord($item, $neatline);
@@ -235,8 +235,8 @@ class Neatline_NeatlineExhibitTest extends Neatline_Test_AppTestCase
     {
 
         // Create an exhibit and item.
-        $neatline = $this->_createNeatline();
-        $item = $this->_createItem();
+        $neatline = $this->__exhibit();
+        $item = $this->__item();
 
         // Check for null.
         $retrievedId = $neatline->getRecordIdByItem($item);
@@ -254,10 +254,10 @@ class Neatline_NeatlineExhibitTest extends Neatline_Test_AppTestCase
     {
 
         // Create exhibits and items.
-        $neatline1 = $this->_createNeatline('Test Exhibit 1', '', 'test-exhibit-1');
-        $neatline2 = $this->_createNeatline('Test Exhibit 2', '', 'test-exhibit-2');
-        $item1 = $this->_createItem();
-        $item2 = $this->_createItem();
+        $neatline1 = $this->__exhibit('test-exhibit-1');
+        $neatline2 = $this->__exhibit('test-exhibit-2');
+        $item1 = $this->__item();
+        $item2 = $this->__item();
 
         // Create records.
         $record1 = new NeatlineRecord($item1, $neatline1);
@@ -294,7 +294,7 @@ class Neatline_NeatlineExhibitTest extends Neatline_Test_AppTestCase
     {
 
         // Create a record.
-        $exhibit = $this->_createNeatline();
+        $exhibit = $this->__exhibit();
 
         // Set system styling defaults.
         set_option('vector_color', '#5033de');
@@ -332,7 +332,7 @@ class Neatline_NeatlineExhibitTest extends Neatline_Test_AppTestCase
     {
 
         // Create a record.
-        $exhibit = $this->_createNeatline();
+        $exhibit = $this->__exhibit();
 
         // Set.
         $this->assertFalse($exhibit->setStyle('vector_color', get_plugin_ini('Neatline', 'vector_color')));
@@ -362,7 +362,7 @@ class Neatline_NeatlineExhibitTest extends Neatline_Test_AppTestCase
     {
 
         // Create a record.
-        $exhibit = $this->_createNeatline();
+        $exhibit = $this->__exhibit();
         $exhibit->vector_color = '#000000';
         $exhibit->stroke_color = '#000000';
         $exhibit->vector_opacity = 1;
@@ -400,7 +400,7 @@ class Neatline_NeatlineExhibitTest extends Neatline_Test_AppTestCase
     {
 
         // Create a record.
-        $exhibit = $this->_createNeatline();
+        $exhibit = $this->__exhibit();
 
         // Create a base layer.
         $layer = new NeatlineLayer();
@@ -422,7 +422,7 @@ class Neatline_NeatlineExhibitTest extends Neatline_Test_AppTestCase
     {
 
         // Create a record.
-        $exhibit = $this->_createNeatline();
+        $exhibit = $this->__exhibit();
 
         // Capture staring layer, try to se non-existent.
         $originalBaseLayer = $exhibit->base_layer;
@@ -440,7 +440,7 @@ class Neatline_NeatlineExhibitTest extends Neatline_Test_AppTestCase
     {
 
         // Create a record.
-        $exhibit = $this->_createNeatline();
+        $exhibit = $this->__exhibit();
 
         // Set system styling defaults.
         set_option('vector_color', '#5033de');
@@ -478,7 +478,7 @@ class Neatline_NeatlineExhibitTest extends Neatline_Test_AppTestCase
     {
 
         // Create a record.
-        $exhibit = $this->_createNeatline();
+        $exhibit = $this->__exhibit();
 
         // Set system styling defaults.
         set_option('vector_color', '#5033de');
@@ -519,7 +519,7 @@ class Neatline_NeatlineExhibitTest extends Neatline_Test_AppTestCase
     {
 
         // Create exhibits.
-        $neatline = $this->_createNeatline();
+        $neatline = $this->__exhibit();
 
         // Check count.
         $this->assertEquals($neatline->getNumberOfRecords(), 0);
@@ -535,8 +535,8 @@ class Neatline_NeatlineExhibitTest extends Neatline_Test_AppTestCase
     {
 
         // Create exhibits.
-        $neatline1 = $this->_createNeatline('Test Exhibit 1', '', 'test-exhibit-1');
-        $neatline2 = $this->_createNeatline('Test Exhibit 2', '', 'test-exhibit-2');
+        $neatline1 = $this->__exhibit('test-exhibit-1');
+        $neatline2 = $this->__exhibit('test-exhibit-2');
 
         // Create records.
         $record1 = new NeatlineRecord(null, $neatline1);
@@ -568,7 +568,7 @@ class Neatline_NeatlineExhibitTest extends Neatline_Test_AppTestCase
     {
 
         // Create exhibit.
-        $neatline = $this->_createNeatline();
+        $neatline = $this->__exhibit();
 
         // Get base layer.
         $baseLayer = $neatline->getBaseLayer();
@@ -588,7 +588,7 @@ class Neatline_NeatlineExhibitTest extends Neatline_Test_AppTestCase
     {
 
         // Create exhibit and layer.
-        $neatline = $this->_createNeatline();
+        $neatline = $this->__exhibit();
         $layer = new NeatlineLayer;
         $layer->name = 'Test Layer';
         $layer->save();
@@ -615,7 +615,7 @@ class Neatline_NeatlineExhibitTest extends Neatline_Test_AppTestCase
     {
 
         // Create exhibit.
-        $exhibit = $this->_createNeatline();
+        $exhibit = $this->__exhibit();
 
         // Test for system defaults.
         $this->assertEquals(
@@ -638,7 +638,7 @@ class Neatline_NeatlineExhibitTest extends Neatline_Test_AppTestCase
     {
 
         // Create exhibit and set local values.
-        $exhibit = $this->_createNeatline();
+        $exhibit = $this->__exhibit();
         $exhibit->h_percent = 10;
         $exhibit->v_percent = 20;
 
@@ -660,7 +660,7 @@ class Neatline_NeatlineExhibitTest extends Neatline_Test_AppTestCase
     {
 
         // Create exhibit.
-        $exhibit = $this->_createNeatline();
+        $exhibit = $this->__exhibit();
 
         // Test for system default.
         $this->assertEquals(
@@ -683,7 +683,7 @@ class Neatline_NeatlineExhibitTest extends Neatline_Test_AppTestCase
         set_option('timeline_zoom', 25);
 
         // Create exhibit.
-        $exhibit = $this->_createNeatline();
+        $exhibit = $this->__exhibit();
         $exhibit->timeline_zoom = 3;
 
         // Test for system default.

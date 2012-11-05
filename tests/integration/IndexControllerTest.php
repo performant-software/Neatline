@@ -354,7 +354,7 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
     {
 
         // Create an exhibit.
-        $exhibit = $this->_createNeatline();
+        $exhibit = $this->__exhibit('test-exhibit');
 
         // Duplicate slug.
         $this->request->setMethod('POST')
@@ -429,7 +429,11 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
     {
 
         // Create exhibit.
-        $exhibit = $this->_createNeatline();
+        $exhibit = $this->__exhibit('test-exhibit');
+        $exhibit->title = 'Test Exhibit';
+        $exhibit->description = 'Test description.';
+        $exhibit->public = 1;
+        $exhibit->save();
 
         // Hit the edit form.
         $this->dispatch('neatline-exhibits/edit/'.$exhibit->id);
@@ -458,7 +462,7 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
     {
 
         // Create exhibit.
-        $exhibit = $this->_createNeatline();
+        $exhibit = $this->__exhibit();
 
         // Missing title.
         $this->request->setMethod('POST')
@@ -492,7 +496,7 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
     {
 
         // Create exhibit.
-        $exhibit = $this->_createNeatline();
+        $exhibit = $this->__exhibit();
 
         // Missing slug.
         $this->request->setMethod('POST')
@@ -526,7 +530,7 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
     {
 
         // Create exhibit.
-        $exhibit = $this->_createNeatline();
+        $exhibit = $this->__exhibit();
 
         // Spaces.
         $this->request->setMethod('POST')
@@ -560,7 +564,7 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
     {
 
         // Create exhibit.
-        $exhibit = $this->_createNeatline();
+        $exhibit = $this->__exhibit();
 
         // Spaces.
         $this->request->setMethod('POST')
@@ -594,7 +598,7 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
     {
 
         // Create exhibit.
-        $exhibit = $this->_createNeatline();
+        $exhibit = $this->__exhibit();
 
         // Spaces.
         $this->request->setMethod('POST')
@@ -628,7 +632,7 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
     {
 
         // Create exhibit.
-        $exhibit = $this->_createNeatline();
+        $exhibit = $this->__exhibit();
 
         // Spaces.
         $this->request->setMethod('POST')
@@ -662,25 +666,8 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
     {
 
         // Create exhibits.
-        $exhibit1 = $this->_createNeatline(
-            $name = 'Test Exhibit 1',
-            $description = 'Test description 1.',
-            $slug = 'test-exhibit-1',
-            $public = 1,
-            $is_map = 1,
-            $is_timeline = 1,
-            $is_undated_items = 1
-        );
-
-        $exhibit2 = $this->_createNeatline(
-            $name = 'Test Exhibit 2',
-            $description = 'Test description 2.',
-            $slug = 'test-exhibit-2',
-            $public = 1,
-            $is_map = 1,
-            $is_timeline = 1,
-            $is_undated_items = 1
-        );
+        $exhibit1 = $this->__exhibit('test-exhibit-1');
+        $exhibit2 = $this->__exhibit('test-exhibit-2');
 
         // Duplicate slug.
         $this->request->setMethod('POST')
@@ -714,7 +701,7 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
     {
 
         // Create exhibit.
-        $exhibit = $this->_createNeatline();
+        $exhibit = $this->__exhibit();
 
         // Valid form.
         $this->request->setMethod('POST')
@@ -749,9 +736,9 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
     {
 
         // Create an exhibit and items.
-        $neatline = $this->_createNeatline();
-        $item1 = $this->_createItem();
-        $item2 = $this->_createItem();
+        $neatline = $this->__exhibit();
+        $item1 = $this->__item();
+        $item2 = $this->__item();
 
         // Create two records.
         $record1 = new NeatlineRecord($item1, $neatline);
@@ -841,9 +828,9 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
     {
 
         // Create an exhibit and items.
-        $neatline = $this->_createNeatline();
-        $item1 = $this->_createItem();
-        $item2 = $this->_createItem();
+        $neatline = $this->__exhibit();
+        $item1 = $this->__item();
+        $item2 = $this->__item();
 
         // Create two records.
         $record1 = new NeatlineRecord($item1, $neatline);
@@ -977,7 +964,7 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
     {
 
         // Create an exhibit and item.
-        $neatline = $this->_createNeatline();
+        $neatline = $this->__exhibit();
 
         // Create record1.
         $record1 = new NeatlineRecord(null, $neatline);

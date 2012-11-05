@@ -59,7 +59,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
         // Exhibits table.
         $sql = "CREATE TABLE IF NOT EXISTS `{$this->_db->prefix}neatline_exhibits` (
 
-            `id`                    int(10) unsigned not null auto_increment,
+            `id`                    int(10) unsigned NOT NULL auto_increment,
             `added`                 TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             `modified`              TIMESTAMP NULL,
             `title`                 tinytext collate utf8_unicode_ci,
@@ -105,7 +105,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
         // Records table.
         $sql = "CREATE TABLE IF NOT EXISTS `{$this->_db->prefix}neatline_records` (
 
-            `id`                    int(10) unsigned not null auto_increment,
+            `id`                    int(10) unsigned NOT NULL auto_increment,
             `item_id`               int(10) unsigned NULL,
             `parent_record_id`      int(10) unsigned NULL,
             `use_dc_metadata`       tinyint(1) NULL,
@@ -190,9 +190,8 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
         $this->_db->query($sql);
 
         // Remove default map style attributes.
-        foreach ($this->_mapStyles as $style) {
-          delete_option($style);
-        }
+        foreach ($this->_mapStyles as $style)
+            delete_option($style);
 
     }
 

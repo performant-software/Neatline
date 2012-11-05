@@ -37,8 +37,8 @@ class NeatlinePluginTest extends Neatline_Test_AppTestCase
      **/
     public function testBeforeDeleteRecord()
     {
-        $item     = $this->_createItem();
-        $neatline = $this->_createNeatline();
+        $item     = $this->__item();
+        $neatline = $this->__exhibit();
         $record   = new NeatlineRecord($item, $neatline);
         $record->save();
 

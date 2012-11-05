@@ -49,8 +49,8 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
     {
 
         // Create a record.
-        $item = $this->_createItem();
-        $neatline = $this->_createNeatline();
+        $item = $this->__item();
+        $neatline = $this->__exhibit();
         $record = new NeatlineRecord($item, $neatline);
 
         // Set.
@@ -133,8 +133,8 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
     {
 
         // Create a record.
-        $item = $this->_createItem();
-        $neatline = $this->_createNeatline();
+        $item = $this->__item();
+        $neatline = $this->__exhibit();
         $record = new NeatlineRecord($item, $neatline);
 
         // Item and exhibit keys should be set.
@@ -165,7 +165,7 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
     {
 
         // Create a record.
-        $neatline = $this->_createNeatline();
+        $neatline = $this->__exhibit();
         $record = new NeatlineRecord(null, $neatline);
 
         // Item and exhibit keys should be set.
@@ -183,8 +183,8 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
     {
 
         // Create a record.
-        $neatline = $this->_createNeatline();
-        $item = $this->_createItem();
+        $neatline = $this->__exhibit();
+        $item = $this->__item();
         $record = new NeatlineRecord($item, $neatline);
 
         // Get the item.
@@ -202,7 +202,7 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
     {
 
         // Create a record.
-        $neatline = $this->_createNeatline();
+        $neatline = $this->__exhibit();
         $record = new NeatlineRecord(null, $neatline);
 
         // Get the item.
@@ -220,7 +220,7 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
     {
 
         // Create a record.
-        $neatline = $this->_createNeatline();
+        $neatline = $this->__exhibit();
         $record = new NeatlineRecord(null, $neatline);
 
         // Get the exhibit.
@@ -238,7 +238,7 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
     {
 
         // Create exhibit and record.
-        $exhibit = $this->_createNeatline();
+        $exhibit = $this->__exhibit();
         $record1 = new NeatlineRecord(null, $exhibit);
         $record1->save();
 
@@ -263,7 +263,7 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
     {
 
         // Create exhibit and record.
-        $exhibit = $this->_createNeatline();
+        $exhibit = $this->__exhibit();
         $record = new NeatlineRecord(null, $exhibit);
         $record->save();
 
@@ -281,7 +281,7 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
     {
 
         // Create a record.
-        $record = $this->_createRecord();
+        $record = $this->__record();
 
         // Test with empty value, check for set.
         $record->setNotEmpty('title', 'Title');
@@ -299,7 +299,7 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
     {
 
         // Create a record.
-        $record = $this->_createRecord();
+        $record = $this->__record();
 
         // Test with empty value, check for set.
         $record->setNotEmpty('title', '');
@@ -326,10 +326,10 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
     {
 
         // Create item.
-        $item = $this->_createItem();
+        $item = $this->__item();
 
         // Create exhibit.
-        $exhibit = $this->_createNeatline();
+        $exhibit = $this->__exhibit();
 
         // Create two records.
         $record1 = new NeatlineRecord($item, $exhibit);
@@ -359,7 +359,7 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
     {
 
         // Create a record.
-        $record = $this->_createRecord();
+        $record = $this->__record();
 
         // Test true.
         $success = $record->setStatus('items', true);
@@ -404,7 +404,7 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
     {
 
         // Create a record.
-        $record = $this->_createRecord();
+        $record = $this->__record();
 
         // Test invalid items.
         $failure = $record->setStatus('items', 'notBoolean');
@@ -422,7 +422,7 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
         $this->assertFalse($failure);
 
         // Create a record and set values to true.
-        $record = $this->_createRecord();
+        $record = $this->__record();
         $record->space_active = 1;
         $record->time_active = 1;
 
@@ -448,7 +448,7 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
     {
 
         // Create a record.
-        $record = $this->_createRecord();
+        $record = $this->__record();
 
         // Set int values.
         $success = $record->setPercentages(50, 60);
@@ -468,7 +468,7 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
     {
 
         // Create a record.
-        $record = $this->_createRecord();
+        $record = $this->__record();
 
         // Try to make the left greater than the right.
         $failure = $record->setPercentages(90, 70);
@@ -506,8 +506,8 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
     {
 
         // Create a record.
-        $neatline = $this->_createNeatline();
-        $item = $this->_createItem();
+        $neatline = $this->__exhibit();
+        $item = $this->__item();
         $record = new NeatlineRecord($item, $neatline);
 
         // Set.
@@ -528,8 +528,8 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
     {
 
         // Create a record.
-        $neatline = $this->_createNeatline();
-        $item = $this->_createItem();
+        $neatline = $this->__exhibit();
+        $item = $this->__item();
         $record = new NeatlineRecord($item, $neatline);
 
         // Set.
@@ -560,8 +560,8 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
     {
 
         // Create a record.
-        $neatline = $this->_createNeatline();
-        $item = $this->_createItem();
+        $neatline = $this->__exhibit();
+        $item = $this->__item();
         $record = new NeatlineRecord($item, $neatline);
 
         // Set.
@@ -592,8 +592,8 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
     {
 
         // Create a record.
-        $neatline = $this->_createNeatline();
-        $item = $this->_createItem();
+        $neatline = $this->__exhibit();
+        $item = $this->__item();
         $record1 = new NeatlineRecord($item, $neatline);
         $record1->setStyle('vector_color', '#000000');
         $record1->setStyle('vector_opacity', 100);
@@ -636,8 +636,8 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
     {
 
         // Create a record, set exhibit defaults.
-        $neatline = $this->_createNeatline();
-        $item = $this->_createItem();
+        $neatline = $this->__exhibit();
+        $item = $this->__item();
         $record = new NeatlineRecord($item, $neatline);
         $neatline->vector_color = '#ffffff';
         $neatline->vector_opacity = 20;
@@ -675,8 +675,8 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
     {
 
         // Create a record.
-        $neatline = $this->_createNeatline();
-        $item = $this->_createItem();
+        $neatline = $this->__exhibit();
+        $item = $this->__item();
         $record = new NeatlineRecord($item, $neatline);
         $neatline->vector_color = '#ffffff';
         $neatline->vector_opacity = 20;
@@ -714,8 +714,8 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
     {
 
         // Create a record.
-        $neatline = $this->_createNeatline();
-        $item = $this->_createItem();
+        $neatline = $this->__exhibit();
+        $item = $this->__item();
         $record = new NeatlineRecord($item, $neatline);
         $record->vector_color = '#ffffff';
         $record->vector_opacity = 20;
@@ -760,8 +760,8 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
     {
 
         // Create a record.
-        $neatline = $this->_createNeatline();
-        $item = $this->_createItem();
+        $neatline = $this->__exhibit();
+        $item = $this->__item();
         $record = new NeatlineRecord($item, $neatline);
         $neatline->save();
 
@@ -785,8 +785,8 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
     {
 
         // Create a record.
-        $neatline = $this->_createNeatline();
-        $item = $this->_createItem();
+        $neatline = $this->__exhibit();
+        $item = $this->__item();
         $record = new NeatlineRecord($item, $neatline);
         $neatline->save();
 
@@ -810,7 +810,7 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
     {
 
         // Create a record.
-        $exhibit = $this->_createNeatline();
+        $exhibit = $this->__exhibit();
         $record = new NeatlineRecord(null, $exhibit);
 
         // Set.
@@ -828,7 +828,7 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
     {
 
         // Create a record.
-        $exhibit = $this->_createNeatline();
+        $exhibit = $this->__exhibit();
         $record = new NeatlineRecord(null, $exhibit);
 
         // Set.
@@ -846,7 +846,7 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
     {
 
         // Create a record.
-        $exhibit = $this->_createNeatline();
+        $exhibit = $this->__exhibit();
         $record = new NeatlineRecord(null, $exhibit);
 
         // Set.
@@ -865,7 +865,7 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
     {
 
         // Create a record.
-        $exhibit = $this->_createNeatline();
+        $exhibit = $this->__exhibit();
         $record = new NeatlineRecord(null, $exhibit);
         $record->parent_record_id = 1;
 
@@ -884,7 +884,7 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
     {
 
         // Create a record.
-        $exhibit = $this->_createNeatline();
+        $exhibit = $this->__exhibit();
         $record = new NeatlineRecord(null, $exhibit);
         $record->parent_record_id = 1;
 
@@ -903,7 +903,7 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
     {
 
         // Create a record.
-        $exhibit = $this->_createNeatline();
+        $exhibit = $this->__exhibit();
         $record = new NeatlineRecord(null, $exhibit);
 
         // Set.
@@ -924,8 +924,8 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
     {
 
         // Create a record.
-        $exhibit = $this->_createNeatline();
-        $item = $this->_createItem();
+        $exhibit = $this->__exhibit();
+        $item = $this->__item();
         $record = new NeatlineRecord($item, $exhibit);
 
         // Set.
@@ -945,8 +945,8 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
     {
 
         // Create a record.
-        $exhibit = $this->_createNeatline();
-        $item = $this->_createItem();
+        $exhibit = $this->__exhibit();
+        $item = $this->__item();
         $record = new NeatlineRecord($item, $exhibit);
 
         // Set.
@@ -966,7 +966,7 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
     {
 
         // Create a record.
-        $record = $this->_createRecord();
+        $record = $this->__record();
 
         // Test with empty value, check for set.
         $this->assertEquals($record->getNotEmpty('slug'), '');
@@ -982,7 +982,7 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
     {
 
         // Create a record.
-        $record = $this->_createRecord();
+        $record = $this->__record();
         $record->slug = 'slug';
 
         // Test with empty value, check for set.
@@ -1000,8 +1000,8 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
     {
 
         // Create a record.
-        $neatline = $this->_createNeatline();
-        $item = $this->_createItem();
+        $neatline = $this->__exhibit();
+        $item = $this->__item();
         $record = new NeatlineRecord($item, $neatline);
 
         // Set values.
@@ -1033,8 +1033,8 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
     {
 
         // Create a record.
-        $neatline = $this->_createNeatline();
-        $item = $this->_createItem();
+        $neatline = $this->__exhibit();
+        $item = $this->__item();
         $record = new NeatlineRecord($item, $neatline);
 
         // Set values.
@@ -1073,8 +1073,8 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
     {
 
         // Create a record.
-        $neatline = $this->_createNeatline();
-        $item = $this->_createItem();
+        $neatline = $this->__exhibit();
+        $item = $this->__item();
         $record = new NeatlineRecord($item, $neatline);
         $record->save();
 
@@ -1108,8 +1108,8 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
     {
 
         // Create a record.
-        $neatline = $this->_createNeatline();
-        $item = $this->_createItem();
+        $neatline = $this->__exhibit();
+        $item = $this->__item();
         $record = new NeatlineRecord($item, $neatline);
         $record->save();
 
@@ -1133,7 +1133,7 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
     {
 
         // Create parent record.
-        $exhibit = $this->_createNeatline();
+        $exhibit = $this->__exhibit();
         $record1 = new NeatlineRecord(null, $exhibit);
         $record1->vector_color = '#ffffff';
         $record1->vector_opacity = 20;
@@ -1169,8 +1169,8 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
     {
 
         // Create an item, exhibit, and record.
-        $item = $this->_createItem();
-        $neatline = $this->_createNeatline();
+        $item = $this->__item();
+        $neatline = $this->__exhibit();
         $record = new NeatlineRecord($item, $neatline);
 
         // Create title and description element texts.
@@ -1195,7 +1195,7 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
     {
 
         // Create an item, exhibit, and record.
-        $neatline = $this->_createNeatline();
+        $neatline = $this->__exhibit();
         $record = new NeatlineRecord(null, $neatline);
 
         // Should return the native value.
@@ -1218,7 +1218,7 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
     {
 
         // Create an item, exhibit, and record.
-        $neatline = $this->_createNeatline();
+        $neatline = $this->__exhibit();
         $record = new NeatlineRecord(null, $neatline);
 
         // Should return the native value.
@@ -1237,7 +1237,7 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
     {
 
         // Create an item, exhibit, and record.
-        $neatline = $this->_createNeatline();
+        $neatline = $this->__exhibit();
         $record = new NeatlineRecord(null, $neatline);
 
         // Should return the native value.
@@ -1256,7 +1256,7 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
     {
 
         // Create an item, exhibit, and record.
-        $neatline = $this->_createNeatline();
+        $neatline = $this->__exhibit();
         $record = new NeatlineRecord(null, $neatline);
 
         // Should return the native value.
@@ -1274,7 +1274,7 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
     {
 
         // Create an item, exhibit, and record.
-        $neatline = $this->_createNeatline();
+        $neatline = $this->__exhibit();
         $record = new NeatlineRecord(null, $neatline);
 
         // Should return the native value.
@@ -1297,8 +1297,8 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
     {
 
         // Create an item, exhibit, and record.
-        $item = $this->_createItem();
-        $neatline = $this->_createNeatline();
+        $item = $this->__item();
+        $neatline = $this->__exhibit();
         $record = new NeatlineRecord($item, $neatline);
 
         // Create title and description element texts.
@@ -1327,7 +1327,7 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
     {
 
         // Create an item, exhibit, and record.
-        $neatline = $this->_createNeatline();
+        $neatline = $this->__exhibit();
         $record = new NeatlineRecord(null, $neatline);
 
         // Should return the native value.
@@ -1350,8 +1350,8 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
     {
 
         // Create an item, exhibit, and record.
-        $item = $this->_createItem();
-        $neatline = $this->_createNeatline();
+        $item = $this->__item();
+        $neatline = $this->__exhibit();
         $record = new NeatlineRecord($item, $neatline);
 
         // Should return default.
@@ -1373,8 +1373,8 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
     {
 
         // Create an item, exhibit, and record.
-        $item = $this->_createItem();
-        $neatline = $this->_createNeatline();
+        $item = $this->__item();
+        $neatline = $this->__exhibit();
         $record = new NeatlineRecord($item, $neatline);
 
         // Should return default.
@@ -1397,7 +1397,7 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
     {
 
         // Create an item, exhibit, and record.
-        $neatline = $this->_createNeatline();
+        $neatline = $this->__exhibit();
         $record = new NeatlineRecord(null, $neatline);
 
         // Should return null when the value is null.
@@ -1423,8 +1423,8 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
     {
 
         // Create an item, exhibit, and record.
-        $item = $this->_createItem();
-        $neatline = $this->_createNeatline();
+        $item = $this->__item();
+        $neatline = $this->__exhibit();
         $record = new NeatlineRecord($item, $neatline);
 
         // Should return empty string.
@@ -1456,8 +1456,8 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
     {
 
         // Create an item, exhibit, and record.
-        $item = $this->_createItem();
-        $neatline = $this->_createNeatline();
+        $item = $this->__item();
+        $neatline = $this->__exhibit();
         $record = new NeatlineRecord($item, $neatline);
 
         // Add a non-empty DC coverage field on the parent item.
@@ -1486,7 +1486,7 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
     {
 
         // Create an exhibit and a record without a parent item.
-        $neatline = $this->_createNeatline();
+        $neatline = $this->__exhibit();
         $record = new NeatlineRecord(null, $neatline);
 
         // Set record start date.
@@ -1496,8 +1496,8 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
         $this->assertEquals($record->getStartDate(), '1564-04-26 14:39:22');
 
         // Create an exhibit and a record with a parent item.
-        $item = $this->_createItem();
-        $neatline = $this->_createNeatline();
+        $item = $this->__item();
+        $neatline = $this->__exhibit();
         $record = new NeatlineRecord($item, $neatline);
 
         // Set record start date.
@@ -1518,7 +1518,7 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
     {
 
         // Create an exhibit and a record without a parent item.
-        $neatline = $this->_createNeatline();
+        $neatline = $this->__exhibit();
         $record = new NeatlineRecord(null, $neatline);
 
         // Should return an empty string.
@@ -1536,8 +1536,8 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
     {
 
         // Create an exhibit and a record with a parent item.
-        $item = $this->_createItem();
-        $neatline = $this->_createNeatline();
+        $item = $this->__item();
+        $neatline = $this->__exhibit();
         $record = new NeatlineRecord($item, $neatline);
 
         // Add a non-range date to the DC date field on the parent item.
@@ -1567,8 +1567,8 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
     {
 
         // Create an exhibit and a record with a parent item.
-        $item = $this->_createItem();
-        $neatline = $this->_createNeatline();
+        $item = $this->__item();
+        $neatline = $this->__exhibit();
         $record = new NeatlineRecord($item, $neatline);
 
         // Add a non-range date to the DC date field on the parent item.
@@ -1598,7 +1598,7 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
     {
 
         // Create an exhibit and a record without a parent item.
-        $neatline = $this->_createNeatline();
+        $neatline = $this->__exhibit();
         $record = new NeatlineRecord(null, $neatline);
 
         // Set record end date.
@@ -1608,8 +1608,8 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
         $this->assertEquals($record->getEndDate(), '1564-04-26 14:39:22');
 
         // Create an exhibit and a record with a parent item.
-        $item = $this->_createItem();
-        $neatline = $this->_createNeatline();
+        $item = $this->__item();
+        $neatline = $this->__exhibit();
         $record = new NeatlineRecord($item, $neatline);
 
         // Set record start date.
@@ -1630,7 +1630,7 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
     {
 
         // Create an exhibit and a record without a parent item.
-        $neatline = $this->_createNeatline();
+        $neatline = $this->__exhibit();
         $record = new NeatlineRecord(null, $neatline);
 
         // Should return an empty string.
@@ -1648,8 +1648,8 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
     {
 
         // Create an exhibit and a record with a parent item.
-        $item = $this->_createItem();
-        $neatline = $this->_createNeatline();
+        $item = $this->__item();
+        $neatline = $this->__exhibit();
         $record = new NeatlineRecord($item, $neatline);
 
         // Add a non-range date to the DC date field on the parent item.
@@ -1679,8 +1679,8 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
     {
 
         // Create an exhibit and a record with a parent item.
-        $item = $this->_createItem();
-        $neatline = $this->_createNeatline();
+        $item = $this->__item();
+        $neatline = $this->__exhibit();
         $record = new NeatlineRecord($item, $neatline);
 
         // Add a non-range date to the DC date field on the parent item.
@@ -1710,7 +1710,7 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
     {
 
         // Create an exhibit and a record.
-        $exhibit = $this->_createNeatline();
+        $exhibit = $this->__exhibit();
         $record1 = new NeatlineRecord(null, $exhibit);
         $record1->save();
 
@@ -1735,7 +1735,7 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
     {
 
         // Create an exhibit and a record.
-        $exhibit = $this->_createNeatline();
+        $exhibit = $this->__exhibit();
         $record = new NeatlineRecord(null, $exhibit);
         $record->save();
 
@@ -1755,7 +1755,7 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
     {
 
         // Create an exhibit and a record.
-        $exhibit = $this->_createNeatline();
+        $exhibit = $this->__exhibit();
         $record1 = new NeatlineRecord(null, $exhibit);
         $record1->start_visible_date = '1564-04-26 14:39:22';
         $record1->save();
@@ -1780,7 +1780,7 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
     {
 
         // Create an exhibit and a record.
-        $exhibit = $this->_createNeatline();
+        $exhibit = $this->__exhibit();
         $record1 = new NeatlineRecord(null, $exhibit);
         $record1->save();
 
@@ -1805,7 +1805,7 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
     {
 
         // Create an exhibit and a record.
-        $exhibit = $this->_createNeatline();
+        $exhibit = $this->__exhibit();
         $record = new NeatlineRecord(null, $exhibit);
         $record->save();
 
@@ -1825,7 +1825,7 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
     {
 
         // Create an exhibit and a record.
-        $exhibit = $this->_createNeatline();
+        $exhibit = $this->__exhibit();
         $record1 = new NeatlineRecord(null, $exhibit);
         $record1->end_visible_date = '1564-04-26 14:39:22';
         $record1->save();
@@ -1850,7 +1850,7 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
     {
 
         // Create an exhibit and a record.
-        $exhibit = $this->_createNeatline();
+        $exhibit = $this->__exhibit();
         $record = new NeatlineRecord(null, $exhibit);
         $this->assertEquals($record->getParentRecordId(), 'none');
 
@@ -1866,7 +1866,7 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
     {
 
         // Create an exhibit and a record.
-        $exhibit = $this->_createNeatline();
+        $exhibit = $this->__exhibit();
         $record = new NeatlineRecord(null, $exhibit);
         $record->parent_record_id = 1;
         $this->assertEquals($record->getParentRecordId(), 1);
@@ -1883,8 +1883,8 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
     {
 
         // Create an item and exhibit.
-        $neatline = $this->_createNeatline();
-        $parent = $this->_createRecord();
+        $neatline = $this->__exhibit();
+        $parent = $this->__record();
         $record = new NeatlineRecord(null, $neatline);
 
         // Populate fields.
@@ -1958,8 +1958,8 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
     {
 
         // Create an item and exhibit.
-        $neatline = $this->_createNeatline();
-        $parent = $this->_createRecord();
+        $neatline = $this->__exhibit();
+        $parent = $this->__record();
         $record = new NeatlineRecord(null, $neatline);
 
         // Populate fields.
@@ -2035,7 +2035,7 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
     {
 
         // Create an item and exhibit.
-        $neatline = $this->_createNeatline();
+        $neatline = $this->__exhibit();
         $record = new NeatlineRecord(null, $neatline);
         $record->save();
 
@@ -2161,8 +2161,8 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
     {
 
         // Create an item.
-        $item = $this->_createItem();
-        $exhibit = $this->_createNeatline();
+        $item = $this->__item();
+        $exhibit = $this->__exhibit();
 
         // Create title element.
         $this->__text(
@@ -2224,8 +2224,8 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
     {
 
         // Create an item.
-        $item = $this->_createItem();
-        $exhibit = $this->_createNeatline();
+        $item = $this->__item();
+        $exhibit = $this->__exhibit();
 
         // Create title element.
         $this->__text(
@@ -2283,8 +2283,8 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
     {
 
         // Create an item, exhibit, and record.
-        $item = $this->_createItem();
-        $neatline = $this->_createNeatline();
+        $item = $this->__item();
+        $neatline = $this->__exhibit();
         $record = new NeatlineRecord($item, $neatline);
 
         // Set styles.
@@ -2324,7 +2324,7 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
         $timestamp = date('Y-m-d H:i:s');
 
         // Set the modified date back, get delta and check.
-        $exhibit = $this->_createNeatline();
+        $exhibit = $this->__exhibit();
         $exhibit->modified = '2010-01-01 00:00:00';
         $delta = strtotime($timestamp) - strtotime($exhibit->modified);
         $this->assertGreaterThanOrEqual(1, $delta);
@@ -2351,16 +2351,16 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
     public function testDeleteCascade()
     {
 
-        // $neatline = $this->_createNeatline();
+        // $neatline = $this->__exhibit();
 
-        // $pitem    = $this->_createItem();
+        // $pitem    = $this->__item();
         // $parent   = new NeatlineRecord($pitem, $neatline);
         // $parent->use_dc_metadata = 1;
         // $parent->title           = 'parent title';
         // $parent->description     = 'parent description';
         // $parent->save();
 
-        // $citem = $this->_createItem();
+        // $citem = $this->__item();
         // $child = new NeatlineRecord($citem, $neatline);
         // $child->use_dc_metadata  = 1;
         // $child->title            = 'child title';
@@ -2392,8 +2392,8 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
     {
 
         // Create an item, exhibit, and record.
-        $item = $this->_createItem();
-        $neatline = $this->_createNeatline();
+        $item = $this->__item();
+        $neatline = $this->__exhibit();
         $record = new NeatlineRecord($item, $neatline);
 
         // Set styles.
@@ -2431,8 +2431,8 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
     {
 
         // Create an item, exhibit, and record.
-        $item = $this->_createItem();
-        $neatline = $this->_createNeatline();
+        $item = $this->__item();
+        $neatline = $this->__exhibit();
         $record = new NeatlineRecord($item, $neatline);
 
         // Set styles.

@@ -51,16 +51,7 @@ class Neatline_NeatlineExhibitTableTest extends Neatline_Test_AppTestCase
     {
 
         // Create exhibit.
-        $exhibit = $this->_createNeatline(
-            $name = 'Test Exhibit',
-            $description = 'Test description.',
-            $slug = 'test-slug',
-            $public = 1,
-            $is_map = 1,
-            $is_timeline = 1,
-            $is_undated_items = 1,
-            $is_context_band = 1
-        );
+        $exhibit = $this->__exhibit('test-slug');
 
         // Get the exhibit, check.
         $retrievedExhibit = $this->_exhibitsTable->findBySlug('test-slug');
@@ -79,16 +70,7 @@ class Neatline_NeatlineExhibitTableTest extends Neatline_Test_AppTestCase
     {
 
         // Create exhibit.
-        $exhibit = $this->_createNeatline(
-            $name = 'Test Exhibit',
-            $description = 'Test description.',
-            $slug = '---select-1-',
-            $public = 1,
-            $is_map = 1,
-            $is_timeline = 1,
-            $is_undated_items = 1,
-            $is_context_band = 1
-        );
+        $exhibit = $this->__exhibit('---slug-1-');
 
         // Get the exhibit, check.
         $retrievedExhibit = $this->_exhibitsTable->findBySlug('"; syntax error 1;');

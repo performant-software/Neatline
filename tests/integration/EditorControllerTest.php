@@ -51,8 +51,8 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
     {
 
         // Create item, exhibit, and records.
-        $item = $this->_createItem();
-        $neatline = $this->_createNeatline();
+        $item = $this->__item();
+        $neatline = $this->__exhibit();
         $record1 = new NeatlineRecord(null, $neatline);
         $record1->save();
         $record2 = new NeatlineRecord($item, $neatline);
@@ -82,8 +82,8 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
     {
 
         // Create item, exhibit, and records.
-        $item = $this->_createItem();
-        $exhibit = $this->_createNeatline();
+        $item = $this->__item();
+        $exhibit = $this->__exhibit();
         $record1 = new NeatlineRecord(null, $exhibit);
         $record1->save();
         $record2 = new NeatlineRecord($item, $exhibit);
@@ -136,8 +136,8 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
     {
 
         // Create item, exhibit, and records.
-        $item = $this->_createItem();
-        $exhibit = $this->_createNeatline();
+        $item = $this->__item();
+        $exhibit = $this->__exhibit();
         $record = new NeatlineRecord($item, $exhibit);
         $record->save();
 
@@ -188,8 +188,8 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
     {
 
         // Create item, exhibit, and records.
-        $item = $this->_createItem();
-        $exhibit = $this->_createNeatline();
+        $item = $this->__item();
+        $exhibit = $this->__exhibit();
         $record1 = new NeatlineRecord(null, $exhibit);
         $record1->save();
         $record2 = new NeatlineRecord($item, $exhibit);
@@ -242,8 +242,8 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
     {
 
         // Create item, exhibit, and record.
-        $item = $this->_createItem();
-        $neatline = $this->_createNeatline();
+        $item = $this->__item();
+        $neatline = $this->__exhibit();
         $record = new NeatlineRecord($item, $neatline);
         $record->save();
 
@@ -293,8 +293,8 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
     {
 
         // Create item, exhibit, and record.
-        $item = $this->_createItem();
-        $neatline = $this->_createNeatline();
+        $item = $this->__item();
+        $neatline = $this->__exhibit();
         $record = new NeatlineRecord($item, $neatline);
         $record->save();
 
@@ -345,8 +345,8 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
     {
 
         // Create item, exhibit, and record.
-        $item = $this->_createItem();
-        $neatline = $this->_createNeatline();
+        $item = $this->__item();
+        $neatline = $this->__exhibit();
 
         // Form the POST for a space change.
         $this->request->setMethod('POST')
@@ -395,8 +395,8 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
     {
 
         // Create item, exhibit, and record.
-        $item = $this->_createItem();
-        $neatline = $this->_createNeatline();
+        $item = $this->__item();
+        $neatline = $this->__exhibit();
         $record = new NeatlineRecord($item, $neatline);
         $record->save();
 
@@ -440,8 +440,8 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
     {
 
         // Create item, exhibit, and record.
-        $item = $this->_createItem();
-        $neatline = $this->_createNeatline();
+        $item = $this->__item();
+        $neatline = $this->__exhibit();
 
         // Form the POST for a space change.
         $this->request->setMethod('POST')
@@ -482,9 +482,9 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
     {
 
         // Create item, exhibit, and record.
-        $item = $this->_createItem();
-        $neatline = $this->_createNeatline();
-        $parent = $this->_createRecord();
+        $item = $this->__item();
+        $neatline = $this->__exhibit();
+        $parent = $this->__record();
         $record = new NeatlineRecord($item, $neatline);
 
         // Populate fields.
@@ -572,8 +572,8 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
     {
 
         // Create item, exhibit, and record.
-        $item = $this->_createItem();
-        $neatline = $this->_createNeatline();
+        $item = $this->__item();
+        $neatline = $this->__exhibit();
         $record = new NeatlineRecord($item, $neatline);
         $record->save();
 
@@ -635,8 +635,8 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
     {
 
         // Create item and exhibit.
-        $item = $this->_createItem();
-        $neatline = $this->_createNeatline();
+        $item = $this->__item();
+        $neatline = $this->__exhibit();
 
         // Create element texts.
         $this->__text(
@@ -710,7 +710,7 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
     // {
 
     //     // Create exhibit and records.
-    //     $neatline = $this->_createNeatline();
+    //     $neatline = $this->__exhibit();
     //     $record1 = new NeatlineRecord(null, $neatline);
     //     $record1->save();
 
@@ -905,8 +905,8 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
     // {
 
     //     // Create exhibit and item.
-    //     $neatline = $this->_createNeatline();
-    //     $item = $this->_createItem();
+    //     $neatline = $this->__exhibit();
+    //     $item = $this->__item();
     //     $record1 = new NeatlineRecord(null, $neatline);
     //     $record1->save();
 
@@ -1100,11 +1100,11 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
     // {
 
     //     // Create exhibit and records.
-    //     $neatline = $this->_createNeatline();
+    //     $neatline = $this->__exhibit();
     //     $record1 = new NeatlineRecord(null, $neatline);
     //     $record1->save();
 
-    //     $item = $this->_createItem();
+    //     $item = $this->__item();
     //     $record2 = new NeatlineRecord($item, $neatline);
     //     $record2->parent_record_id = $record1->id;
     //     $record2->save();
@@ -1303,11 +1303,11 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
     // {
 
     //     // Create exhibit and records.
-    //     $neatline = $this->_createNeatline();
+    //     $neatline = $this->__exhibit();
     //     $record1 = new NeatlineRecord(null, $neatline);
     //     $record1->save();
 
-    //     $item = $this->_createItem();
+    //     $item = $this->__item();
     //     $record2 = new NeatlineRecord($item, $neatline);
     //     $record2->parent_record_id = $record1->id;
     //     $record2->save();
@@ -1424,11 +1424,11 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
     // {
 
     //     // Create exhibit and records.
-    //     $neatline = $this->_createNeatline();
+    //     $neatline = $this->__exhibit();
     //     $record1 = new NeatlineRecord(null, $neatline);
     //     $record1->save();
 
-    //     $item = $this->_createItem();
+    //     $item = $this->__item();
     //     $record2 = new NeatlineRecord($item, $neatline);
     //     $record2->parent_record_id = $record1->id;
     //     $record2->save();
@@ -1503,7 +1503,7 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
     // {
 
     //     // Create exhibit and record.
-    //     $neatline = $this->_createNeatline();
+    //     $neatline = $this->__exhibit();
     //     $record = new NeatlineRecord(null, $neatline);
     //     $record->geocoverage = 'POINT(1,0)';
     //     $record->save();
@@ -1566,8 +1566,8 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
     // {
 
     //     // Create exhibit and item.
-    //     $neatline = $this->_createNeatline();
-    //     $item = $this->_createItem();
+    //     $neatline = $this->__exhibit();
+    //     $item = $this->__item();
     //     $record = new NeatlineRecord($item, $neatline);
     //     $record->save();
 
@@ -1627,8 +1627,8 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
     // {
 
     //     // Create exhibit and item.
-    //     $neatline = $this->_createNeatline();
-    //     $item = $this->_createItem();
+    //     $neatline = $this->__exhibit();
+    //     $item = $this->__item();
     //     $record = new NeatlineRecord($item, $neatline);
     //     $record->save();
 
@@ -1690,8 +1690,8 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
     // {
 
     //     // Create exhibit and item.
-    //     $neatline = $this->_createNeatline();
-    //     $item = $this->_createItem();
+    //     $neatline = $this->__exhibit();
+    //     $item = $this->__item();
 
     //     // Form the POST with new geocoverage data.
     //     $this->request->setMethod('POST')
@@ -1748,8 +1748,8 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
     // {
 
     //     // Create exhibit and item.
-    //     $neatline = $this->_createNeatline();
-    //     $item = $this->_createItem();
+    //     $neatline = $this->__exhibit();
+    //     $item = $this->__item();
     //     $record = new NeatlineRecord($item, $neatline);
     //     $record->save();
 
@@ -1811,8 +1811,8 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
     // {
 
     //     // Create exhibit and item.
-    //     $neatline = $this->_createNeatline();
-    //     $item = $this->_createItem();
+    //     $neatline = $this->__exhibit();
+    //     $item = $this->__item();
 
     //     // Form the POST with new geocoverage data.
     //     $this->request->setMethod('POST')
@@ -1868,12 +1868,12 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
     {
 
         // Create an exhibit, items, and records.
-        $neatline = $this->_createNeatline();
-        $item1 = $this->_createItem();
-        $item2 = $this->_createItem();
-        $item3 = $this->_createItem();
-        $item4 = $this->_createItem();
-        $item5 = $this->_createItem();
+        $neatline = $this->__exhibit();
+        $item1 = $this->__item();
+        $item2 = $this->__item();
+        $item3 = $this->__item();
+        $item4 = $this->__item();
+        $item5 = $this->__item();
         $record1 = new NeatlineRecord($item1, $neatline);
         $record2 = new NeatlineRecord($item2, $neatline);
         $record3 = new NeatlineRecord($item3, $neatline);
@@ -2099,7 +2099,7 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
     {
 
         // Create an exhibit.
-        $exhibit = $this->_createNeatline();
+        $exhibit = $this->__exhibit();
 
         // Create a base layer.
         $layer = new NeatlineLayer();
@@ -2141,8 +2141,8 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
     {
 
         // Create entities.
-        $exhibit = $this->_createNeatline();
-        $item = $this->_createItem();
+        $exhibit = $this->__exhibit();
+        $item = $this->__item();
         $record = new NeatlineRecord($item, $exhibit);
         $record->save();
 
@@ -2185,8 +2185,8 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
     {
 
         // Create entities.
-        $exhibit = $this->_createNeatline();
-        $item = $this->_createItem();
+        $exhibit = $this->__exhibit();
+        $item = $this->__item();
 
         // Form the POST.
         $this->request->setMethod('POST')
@@ -2227,7 +2227,7 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
     {
 
         // Create entities.
-        $exhibit = $this->_createNeatline();
+        $exhibit = $this->__exhibit();
         $record = new NeatlineRecord(null, $exhibit);
         $record->save();
 
@@ -2270,8 +2270,8 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
     {
 
         // Create entities.
-        $exhibit = $this->_createNeatline();
-        $item = $this->_createItem();
+        $exhibit = $this->__exhibit();
+        $item = $this->__item();
         $record = new NeatlineRecord($item, $exhibit);
         $record->save();
 
@@ -2312,8 +2312,8 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
     {
 
         // Create an exhibit, item, and record.
-        $neatline = $this->_createNeatline();
-        $item = $this->_createItem();
+        $neatline = $this->__exhibit();
+        $item = $this->__item();
 
         // Prepare the request.
         $this->request->setMethod('GET')
@@ -2346,7 +2346,7 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
     {
 
         // Create an exhibit and records.
-        $neatline = $this->_createNeatline();
+        $neatline = $this->__exhibit();
         $record1 = new NeatlineRecord(null, $neatline);
         $record1->save();
         $record2 = new NeatlineRecord(null, $neatline);
@@ -2385,7 +2385,7 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
     {
 
         // Create an exhibit.
-        $exhibit = $this->_createNeatline();
+        $exhibit = $this->__exhibit();
 
         // Set system styling defaults.
         set_option('vector_color', '#5033de');
@@ -2452,7 +2452,7 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
     {
 
         // Create an exhibit.
-        $exhibit = $this->_createNeatline();
+        $exhibit = $this->__exhibit();
 
         // Form the POST.
         $this->request->setMethod('POST')
@@ -2499,7 +2499,7 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
     {
 
         // Create an exhibit.
-        $exhibit = $this->_createNeatline();
+        $exhibit = $this->__exhibit();
         $exhibit->vector_color = '#000000';
         $exhibit->stroke_color = '#000000';
         $exhibit->vector_opacity = 1;
@@ -2555,7 +2555,7 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
     {
 
         // Create an exhibit, set is_context_band.
-        $exhibit = $this->_createNeatline();
+        $exhibit = $this->__exhibit();
         $exhibit->is_context_band = 0;
 
         // Set system styling defaults.
@@ -2595,7 +2595,7 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
     {
 
         // Create an exhibit.
-        $exhibit = $this->_createNeatline();
+        $exhibit = $this->__exhibit();
         $record = new NeatlineRecord(null, $exhibit);
 
         // Set styles.
@@ -2640,8 +2640,8 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
     {
 
         // Create an exhibit, item, and record.
-        $exhibit = $this->_createNeatline();
-        $item = $this->_createItem();
+        $exhibit = $this->__exhibit();
+        $item = $this->__item();
         $record = new NeatlineRecord($item, $exhibit);
 
         // Set description and use_dc_metadata.
@@ -2685,8 +2685,8 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
     {
 
         // Create an exhibit, item, and record.
-        $exhibit = $this->_createNeatline();
-        $item = $this->_createItem();
+        $exhibit = $this->__exhibit();
+        $item = $this->__item();
         $record = new NeatlineRecord($item, $exhibit);
 
         // Set description and use_dc_metadata.
@@ -2725,8 +2725,8 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
     {
 
         // Create an exhibit, item, and record.
-        $exhibit = $this->_createNeatline();
-        $item = $this->_createItem();
+        $exhibit = $this->__exhibit();
+        $item = $this->__item();
 
         // Form the POST.
         $this->request->setMethod('POST')

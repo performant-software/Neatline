@@ -52,7 +52,7 @@ class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
     {
 
         // Mock exhibit.
-        $exhibit = $this->_createNeatline();
+        $exhibit = $this->__exhibit();
 
         $fixture = fopen($this->path_to_fixtures . 'neatline-base.html', 'w');
 
@@ -73,7 +73,7 @@ class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
     {
 
         // Mock exhibit.
-        $exhibit = $this->_createNeatline();
+        $exhibit = $this->__exhibit();
         $exhibit->top_element = 'map';
         $exhibit->items_h_pos = 'right';
         $exhibit->items_v_pos = 'top';
@@ -107,7 +107,7 @@ class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
         $item->save();
 
         // Mock exhibit.
-        $exhibit = $this->_createNeatline();
+        $exhibit = $this->__exhibit();
 
         // Record 1.
         $record1 = new NeatlineRecord();
@@ -174,7 +174,7 @@ class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
         $item3->save();
 
         // Mock exhibit.
-        $exhibit = $this->_createNeatline();
+        $exhibit = $this->__exhibit();
         $exhibit->query = serialize(
             array('range' => $item1->id . '-' . $item3->id)
         );
@@ -231,8 +231,8 @@ class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
         $fixture = fopen($this->path_to_fixtures . 'editor-form-ajax.html', 'w');
 
         // Mock exhibit and item.
-        $exhibit = $this->_createNeatline();
-        $item = $this->_createItem();
+        $exhibit = $this->__exhibit();
+        $item = $this->__item();
 
         // Mocks for parent record select.
         $record1 = new NeatlineRecord();
@@ -301,7 +301,7 @@ class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
         $item2->save();
 
         // Mock exhibit.
-        $exhibit = $this->_createNeatline();
+        $exhibit = $this->__exhibit();
 
         // Record 1.
         $record1 = new NeatlineRecord();

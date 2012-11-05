@@ -409,7 +409,7 @@ class NeatlineRecordTable extends Omeka_Db_Table
     public function buildJsonForExhibit($exhibit)
     {
 
-        $records = array();
+        $data = array();
         $wmsIndex = array();
 
         // Get records.
@@ -424,7 +424,7 @@ class NeatlineRecordTable extends Omeka_Db_Table
 
         }
 
-        return $records;
+        return $data;
 
     }
 
