@@ -44,20 +44,20 @@ jQuery(document).ready(function($) {
 
             /*
              * =================
-             * Neatline.
+             * neatline.
              * =================
              */
 
-            neatlineContainer.neatline({
+            neatlinecontainer.neatline({
 
-                'isPublic': false,
+                'ispublic': false,
 
-                // When the user clicks on an item on the timeline.
+                // when the user clicks on an item on the timeline.
                 'timelineeventclick': function(event, obj) {
 
-                    // Show the edit form.
-                    editorContainer.itembrowser(
-                        'showFormByRecordId',
+                    // show the edit form.
+                    editorcontainer.itembrowser(
+                        'showformbyrecordid',
                         obj.recordid,
                         true,
                         false,
@@ -65,12 +65,12 @@ jQuery(document).ready(function($) {
 
                 },
 
-                // When the user clicks on a feature on the map.
+                // when the user clicks on a feature on the map.
                 'mapfeatureclick': function(event, obj) {
 
-                    // Show the edit form.
-                    editorContainer.itembrowser(
-                        'showFormByRecordId',
+                    // show the edit form.
+                    editorcontainer.itembrowser(
+                        'showformbyrecordid',
                         obj.recordid,
                         false,
                         true,
@@ -78,61 +78,62 @@ jQuery(document).ready(function($) {
 
                 },
 
-                // When the user clicks on an item in the sequencing tray.
+                // when the user clicks on an item in the sequencing tray.
                 'itemclick': function(event, obj) {
 
-                    // Show the edit form.
-                    editorContainer.itembrowser(
-                        'showFormByRecordId',
+                    // show the edit form.
+                    editorcontainer.itembrowser(
+                        'showformbyrecordid',
                         obj.recordid,
                         true,
                         true,
-                        obj.scrollItems);
+                        obj.scrollitems);
 
                 },
 
-                // When a geometry vector is added to the map.
+                // when a geometry vector is added to the map.
                 'mapfeatureadded': function(event, obj) {
 
-                    // Update the geocoverage textarea.
-                    editorContainer.itembrowser('updateGeocoverage', obj.geocoverage);
+                    // update the geocoverage textarea.
+                    editorcontainer.itembrowser('updategeocoverage', obj.geocoverage);
 
                 },
 
-                // When the item tray is reloaded.
+                // when the item tray is reloaded.
                 'newitems': function() {
 
-                    // Get the current edit item on the browser.
-                    var editId = editorContainer.itembrowser('getCurrentEditId');
+                    // get the current edit item on the browser.
+                    var editid = editorcontainer.itembrowser('getcurrenteditid');
 
-                    // If there is an active edit form.
-                    if (editId) {
-                        neatlineContainer.neatline('showItemDescription', editId);
+                    // if there is an active edit form.
+                    if (editid) {
+                        neatlinecontainer.neatline('showitemdescription', editid);
                     }
 
                 },
 
-                // When the viewport dimensions are dragged.
+                // when the viewport dimensions are dragged.
                 'widthdrag': function(event, obj) {
-                    configureLayoutButton.configurelayout(
-                        'setViewportProportions',
+                    configurelayoutbutton.configurelayout(
+                        'setviewportproportions',
                         obj.h_percent,
                         obj.v_percent
                     );
                 }
 
             });
-            neatlineContainer.on({
+
+            neatlinecontainer.on({
                 'drawingmodeon': function() {
-                    var ec = editorContainer.data('itembrowser');
-                    if (ec.editForm != null) {
-                        ec.editForm.itemform('lockForm');
+                    var ec = editorcontainer.data('itembrowser');
+                    if (ec.editform != null) {
+                        ec.editform.itemform('lockform');
                     }
                 },
                 'drawingmodeoff': function() {
-                    var ec = editorContainer.data('itembrowser');
-                    if (ec.editForm != null) {
-                        ec.editForm.itemform('unlockForm');
+                    var ec = editorcontainer.data('itembrowser');
+                    if (ec.editform != null) {
+                        ec.editform.itemform('unlockform');
                     }
                 }
             });
@@ -149,9 +150,7 @@ jQuery(document).ready(function($) {
         // When an item form is opened and the item's vector becomes
         // available for editing.
         'mapedit': function(event, obj) {
-
             neatlineContainer.neatline('editMap', obj.item, obj.immediate);
-
         },
 
         // When vector data is added to the map, and then the item
@@ -162,12 +161,9 @@ jQuery(document).ready(function($) {
 
         // After an edit form save, reload viewport data.
         'savecomplete': function() {
-
-            // Reload data for all blocks.
             neatlineContainer.neatline('reloadTimeline');
             neatlineContainer.neatline('reloadMap');
             neatlineContainer.neatline('reloadItems');
-
         },
 
         // When an item edit form is opened, focus the map and timeline

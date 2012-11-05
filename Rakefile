@@ -37,8 +37,8 @@ namespace :build do
     sh %{npm install}
     sh %{grunt cssmin:neatline}
     sh %{grunt cssmin:editor}
-    sh %{grunt min:neatline}
-    sh %{grunt min:editor}
+    sh %{grunt concat:neatline}
+    sh %{grunt concat:editor}
   end
 
   desc 'Build the 1.2.x application'

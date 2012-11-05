@@ -15,6 +15,8 @@ module.exports = function(grunt) {
     c.components+c.vendor.jquery,
     c.components+c.vendor.underscore,
     c.components+c.vendor.backbone,
+    c.components+c.vendor.eventbinder,
+    c.components+c.vendor.wreqr,
     c.components+c.vendor.marionette,
     c.components+c.vendor.d3
   ];
@@ -51,7 +53,8 @@ module.exports = function(grunt) {
           util+'bubbles.js',
           util+'span_styler.js'
         ],
-        dest: buildjs+'neatline.js'
+        dest: buildjs+'neatline.js',
+        separator: ';'
       },
 
       editor: {
@@ -73,12 +76,16 @@ module.exports = function(grunt) {
           edit+'_constructEditor.js',
           lib+'minicolors/jquery.miniColors.min.js'
         ],
-        dest: buildjs+'editor.js'
+        dest: buildjs+'editor.js',
+        separator: ';'
       },
 
       v2neatline: {
         src: vendor.concat([
-          c.apps.neatline+'**/*.js'
+          c.apps.neatline+'app.js',
+          c.apps.neatline+'collections/*.js',
+          c.apps.neatline+'views/*.js',
+          c.apps.neatline+'controllers/*.js'
         ]),
         dest: c.payload+'neatline.js',
         separator: ';'
@@ -143,7 +150,11 @@ module.exports = function(grunt) {
     },
 
     watch: {
-      neatline: {
+      v1: {
+        files: ['<config:concat.neatline.src>'],
+        tasks: ['concat:neatline']
+      },
+      v2: {
         files: ['<config:concat.v2neatline.src>'],
         tasks: ['concat:v2neatline']
       }
