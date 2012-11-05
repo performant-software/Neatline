@@ -1,15 +1,17 @@
 default:
 
-  components: "views/shared/javascripts/v2/vendor/"
+  components: "views/shared/javascripts/v2/components/"
   payload: "views/shared/javascripts/v2/payloads/"
 
   apps:
     neatline: "views/shared/javascripts/v2/applications/neatline/"
-    editor: "views/shared/javascripts/v2/applications/editor/"
 
   vendor:
     jquery: "jquery/jquery.js"
     underscore: "underscore/underscore.js"
     backbone: "backbone/backbone.js"
-    marionette: "backbone/marionette.js"
-    d3: "d3/d3.js"
+    eventbinder: "Backbone.EventBinder/lib/backbone.eventbinder.js"
+    wreqr: "Backbone.Wreqr/lib/backbone.wreqr.js"
+    marionette: "backbone.marionette/lib/backbone.marionette.js"
+    bootstrap: "bootstrap/bootstrap/js/bootstrap.js"
+    d3: "d3/d3.v2.js"

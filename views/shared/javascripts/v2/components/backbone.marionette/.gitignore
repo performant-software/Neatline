@@ -1,0 +1,9 @@
+.DS_Store
+*.swp
+*.swo
+*.orig
+tmp/
+ext/
+node_modules/
+npm-debug.log
+_SpecRunner.html

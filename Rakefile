@@ -1,13 +1,8 @@
 task :default => 'test:all'
 
 begin
-
   require 'jasmine'
   load 'jasmine/tasks/jasmine.rake'
-rescue LoadError
-  task :jasmine do
-    abort "Jasmine is not available. In order to run jasmine, you must: (sudo) gem install jasmine"
-  end
 end
 
 namespace :test do
@@ -30,31 +25,25 @@ namespace :test do
 
 end
 
-namespace :build do
+desc 'Build the application'
+task :build do
+  js = 'views/shared/javascripts/v2'
+  sh %{npm install}
+  sh %{cd #{js} && bower install}
+  sh %{cd #{js}/components/bootstrap && make bootstrap}
+  sh %{grunt min:neatline}
+end
 
-  desc 'Build the 1.0.x application'
-  task :old do
-    sh %{npm install}
-    sh %{grunt cssmin:neatline}
-    sh %{grunt cssmin:editor}
-    sh %{grunt concat:neatline}
-    sh %{grunt concat:editor}
-  end
+desc 'Clean pacakges'
+task :clean do
+  sh %{rm -rf node_modules}
+  sh %{rm -rf views/shared/css/payloads}
+  sh %{rm -rf views/shared/javascripts/v2/payloads}
+  sh %{rm -rf views/shared/javascripts/v2/components}
+end
 
-  desc 'Build the 1.2.x application'
-  task :new do
-    sh %{npm install}
-    sh %{grunt cssmin:neatline}
-    sh %{grunt cssmin:editor}
-    sh %{grunt min:v2neatline}
-    sh %{grunt min:editor}
-  end
-
-  desc 'Clean pacakges'
-  task :clean do
-    sh %{rm -rf views/shared/javascripts/payloads}
-    sh %{rm -rf views/shared/css/payloads}
-    sh %{rm -rf views/shared/javascripts/v2/payloads}
-  end
-
+desc 'Rebuild the application'
+task :rebuild do
+  Rake::Task['clean'].invoke
+  Rake::Task['build'].invoke
 end

@@ -1,0 +1,45 @@
+{
+  "name": "Backbone.Wreqr",
+  "description": "A Simple Service Bus For Backbone and Backbone.Marionette",
+  "version": "0.0.0",
+  "homepage": "https://github.com/marionettejs/backbone.wreqr",
+  "keywords": [
+    "backbone",
+    "plugin",
+    "computed",
+    "field",
+    "model",
+    "client",
+    "browser"
+  ],
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/marionettejs/backbone.wreqr/blob/master/LICENSE.md"
+    }
+  ],
+  "scripts": {
+    "test": "grunt jasmine",
+    "start": "grunt jasmine-server"
+  },
+  "author": {
+    "name": "Derick Bailey",
+    "email": "marionettejs@gmail.com",
+    "url": "http://derickbailey.lostechies.com"
+  },
+  "bugs": {
+    "url": "https://github.com/marionettejs/backbone.wreqr/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/marionettejs/backbone.wreqr.git"
+  },
+  "github": "https://github.com/marionettejs/backbone.wreqr",
+  "devDependencies": {
+    "grunt": "*",
+    "grunt-jasmine-runner": "latest",
+    "grunt-rigger": "*"
+  },
+  "readme": "# Backbone.Wreqr\n\nA simple infrastructure based on [messaging patterns](http://www.eaipatterns.com/)\nand service bus implementations for decoupling [Backbone](http://backbonejs.org) \nand [Backbone.Marionette](http://marionettejs.com) applications.\n\n## Downloads And Source\n\nGrab the source from the `src` folder above. Grab the most recent builds\nfrom the links below.\n\n### Standard Builds\n\n* Development: [backbone.wreqr.js](https://raw.github.com/marionettejs/backbone.wreqr/master/lib/backbone.wreqr.js)\n\n* Production: [backbone.wreqr.min.js](https://raw.github.com/marionettejs/backbone.wreqr/master/lib/backbone.wreqr.min.js)\n\n### RequireJS (AMD) Builds\n\n* Development: [backbone.wreqr.js](https://raw.github.com/marionettejs/backbone.wreqr/master/lib/amd/backbone.wreqr.js)\n\n* Production: [backbone.wreqr.min.js](https://raw.github.com/marionettejs/backbone.wreqr/master/lib/amd/backbone.wreqr.min.js)\n\n## Basic Use\n\n### Event Aggregator\n\nAn event aggregator implementation. It extends from `Backbone.Events` to\nprovide the core event handling code in an object that can itself be\nextended and instantiated as needed.\n\n```js\nvar vent = new Backbone.Wreqr.EventAggregator();\n\nvent.on(\"foo\", function(){\n  console.log(\"foo event\");\n});\n\nvent.trigger(\"foo\");\n```\n\n### Commands And Request / Response\n\nWreqr can be used by instantiating a `Backbone.Wreqr.Commands`\nor `Backbone.Wreqr.RequestResponse` object. These objects provide an\n`addHandler` method to add a handler for a named request or command.\nCommands can then be executed with the `execute` method, and \nrequest/response can be done through the `request` method.\n\n### Commands\n\n```js\nvar commands = new Backbone.Wreqr.Commands();\n\ncommands.addHandler(\"foo\", function(){\n  console.log(\"the foo command was executed\");\n});\n\ncommands.execute(\"foo\");\n```\n\n### Request/Response\n\n```js\nvar reqres = new Backbone.Wreqr.RequestResponse();\n\nreqres.addHandler(\"foo\", function(){\n  return \"foo requested. this is the response\";\n});\n\nvar result = reqres.request(\"foo\");\nconsole.log(result);\n```\n\n### Removing Handlers\n\nRemoving handlers for commands or requests is done the\nsame way, with the `removeHandler` or `removeAllHandlers`\nfunctions.\n\n```js\nreqres.removeHandler(\"foo\");\n\ncommands.removeAllHandlers();\n```\n\n### Extending Wreqr Objects\n\nThe EventAggregator, Commands and RequestResponse objects can all be\nextended using Backbone's standard `extend` method.\n\n```js\nvar MyEventAgg = Backbone.Wreqr.EventAggregator.extend({\n  foo: function(){...}\n});\n\nvar MyCommands = Backbone.Wreqr.Commands.extend({\n  foo: function(){...}\n});\n\nvar MyReqRes = Backbone.Wreqr.RequestResponse.extend({\n  foo: function(){...}\n});\n```\n\n## License\n\nMIT - see [LICENSE.md](https://raw.github.com/marionettejs/backbone.wreqr/master/LICENSE.md)\n",
+  "_id": "Backbone.Wreqr@0.0.0"
+}
