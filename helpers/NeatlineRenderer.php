@@ -47,9 +47,6 @@ class NeatlineRenderer
     public function render()
     {
 
-        // Try to get image.
-        $image = $this->exhibit->getImage();
-
         // Shell out the base array.
         $params = array(
 
@@ -83,31 +80,6 @@ class NeatlineRenderer
             )
 
         );
-
-        // If there is a static image, push on attributes.
-        if ($image) {
-
-            $params['image'] = array(
-
-                // Filepath and filename.
-                'path' => $image->getWebPath('archive'),
-                'name' => $image->original_filename,
-
-                // Dimensions
-                'height' => (int) get_view()->fileMetadata(
-                    $image,
-                    'Omeka Image File',
-                    'Height'
-                ),
-                'width' => (int) get_view()->fileMetadata(
-                    $image,
-                    'Omeka Image File',
-                    'Width'
-                )
-
-            );
-
-        }
 
         return $params;
 

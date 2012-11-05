@@ -154,4 +154,16 @@ class Neatline_Test_AppTestCase extends Omeka_Test_AppTestCase
         return $exhibits[0];
     }
 
+    /**
+     * Get the last item record.
+     *
+     * @return Item The record.
+     */
+    public function getLastRecord()
+    {
+        $records = $this->_recordsTable->fetchObjects(
+            $this->_recordsTable->getSelect());
+        return end($records);
+    }
+
 }

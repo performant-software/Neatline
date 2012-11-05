@@ -234,38 +234,38 @@ class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
         $exhibit = $this->_createNeatline();
         $item = $this->_createItem();
 
-        // Mock record.
-        $record1 = new NeatlineRecord($item, $exhibit);
-        $record1->title = 'Test Title 1';
-        $record1->slug = 'test-slug';
-        $record1->description = 'Test description.';
-        $record1->start_date = 'June 25, 1987';
-        $record1->end_date = 'June 26, 1987';
-        $record1->start_visible_date = 'June 27, 1987';
-        $record1->end_visible_date = 'June 28, 1987';
-        $record1->vector_color = '#ffffff';
-        $record1->stroke_color = '#000000';
-        $record1->highlight_color = '#ffff00';
-        $record1->vector_opacity = 20;
-        $record1->stroke_opacity = 80;
-        $record1->graphic_opacity = 100;
-        $record1->stroke_width = 3;
-        $record1->point_radius = 5;
+        // Mocks for parent record select.
+        $record1 = new NeatlineRecord();
         $record1->exhibit_id = $exhibit->id;
-        $record1->space_active = 1;
-        $record1->parent_record_id = 2;
-        $record1->use_dc_metadata = 0;
-        $record1->show_bubble = 1;
+        $record1->title = 'Test Title 1';
         $record1->save();
-
-        // Mock records for parent record select.
         $record2 = new NeatlineRecord();
         $record2->exhibit_id = $exhibit->id;
-        $record2->title = 'Test Title 2';
+        $record2->title = 'Test Title 1';
         $record2->save();
-        $record3 = new NeatlineRecord();
+
+        // Mock record.
+        $record3 = new NeatlineRecord($item, $exhibit);
+        $record3->title = 'Test Title 1';
+        $record3->slug = 'test-slug';
+        $record3->description = 'Test description.';
+        $record3->start_date = 'June 25, 1987';
+        $record3->end_date = 'June 26, 1987';
+        $record3->start_visible_date = 'June 27, 1987';
+        $record3->end_visible_date = 'June 28, 1987';
+        $record3->vector_color = '#ffffff';
+        $record3->stroke_color = '#000000';
+        $record3->highlight_color = '#ffff00';
+        $record3->vector_opacity = 20;
+        $record3->stroke_opacity = 80;
+        $record3->graphic_opacity = 100;
+        $record3->stroke_width = 3;
+        $record3->point_radius = 5;
         $record3->exhibit_id = $exhibit->id;
-        $record3->title = 'Test Title 3';
+        $record3->space_active = 1;
+        $record3->parent_record_id = $record1->id;
+        $record3->use_dc_metadata = 0;
+        $record3->show_bubble = 1;
         $record3->save();
 
         // Prepare the request.

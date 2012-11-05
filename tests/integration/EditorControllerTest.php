@@ -2332,7 +2332,7 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
         $this->assertEquals($this->_recordsTable->count(), 1);
 
         // Check identity.
-        $newRecord = $this->_recordsTable->find(1);
+        $newRecord = $this->getLastRecord();
         $this->assertEquals($newRecord->exhibit_id, $neatline->id);
 
     }
@@ -2754,7 +2754,7 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
 
         // Check that the status was changed and that the method
         // returns the DC show for the item.
-        $record = $this->_recordsTable->find(1);
+        $record = $this->getLastRecord();
         $this->assertEquals($record->use_dc_metadata, 1);
         $this->assertSelectCount('div.element-set', true, $doc);
 

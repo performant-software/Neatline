@@ -36,8 +36,8 @@ class Neatline_FixturesController extends Omeka_Controller_AbstractActionControl
     {
 
         // Get tables.
-        $this->_neatlinesTable =    $this->_helper->db->getTable('NeatlineExhibit');
-        $this->_layersTable =       $this->_helper->db->getTable('NeatlineLayer');
+        $this->_exhibitsTable = $this->_helper->db->getTable('NeatlineExhibit');
+        $this->_layersTable =   $this->_helper->db->getTable('NeatlineLayer');
 
     }
 
@@ -52,8 +52,10 @@ class Neatline_FixturesController extends Omeka_Controller_AbstractActionControl
         // Supress the default Zend layout-sniffer functionality.
         $this->_helper->viewRenderer->setNoRender(true);
 
-        // Get mock exhibit.
-        $exhibit = $this->_neatlinesTable->find(1);
+        // Get mock exhibit
+        $exhibits = $this->_exhibitsTable->fetchObjects(
+            $this->_exhibitsTable->getSelect());
+        $exhibit = $exhibits[0];
 
         // Render.
         echo $this->view->partial('neatline/_neatline.php', array(
@@ -73,8 +75,12 @@ class Neatline_FixturesController extends Omeka_Controller_AbstractActionControl
         // Supress the default Zend layout-sniffer functionality.
         $this->_helper->viewRenderer->setNoRender(true);
 
+        // Get mock exhibit
+        $exhibits = $this->_exhibitsTable->fetchObjects(
+            $this->_exhibitsTable->getSelect());
+        $exhibit = $exhibits[0];
+
         // Get records.
-        $exhibit = $this->_neatlinesTable->find(1);
         $layers = $this->_layersTable->findAll();
         set_current_neatline($exhibit);
 
