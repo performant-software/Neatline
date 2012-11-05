@@ -1,1 +1,0 @@
-window.Wreqr = Backbone.Wreqr;
