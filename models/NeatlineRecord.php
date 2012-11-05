@@ -1212,6 +1212,75 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
      *
      * @return array The map JSON.
      **/
+    public function buildJsonData($index=array(), $wmss=array(), $exhibit=null) {
+
+        // If not active on map, return null.
+        if ($this->space_active != 1) { return null; }
+
+        // Cache the parent record for upcoming calls to getStyle().
+        $this->_setParent($index, $exhibit);
+
+        $data = array(
+
+            // Relations:
+            'id'                  => $this->id,
+            'item_id'             => $this->item_id,
+
+            // Text:
+            'title'               => $this->getTitle(),
+            'description'         => $this->getDescription(),
+            'slug'                => $this->getSlug(),
+
+            // Styles:
+            'vector_color'        => $this->getStyle('vector_color'),
+            'stroke_color'        => $this->getStyle('stroke_color'),
+            'highlight_color'     => $this->getStyle('highlight_color'),
+            'vector_opacity'      => $this->getStyle('vector_opacity'),
+            'select_opacity'      => $this->getStyle('select_opacity'),
+            'stroke_opacity'      => $this->getStyle('stroke_opacity'),
+            'graphic_opacity'     => $this->getStyle('graphic_opacity'),
+            'stroke_width'        => $this->getStyle('stroke_width'),
+            'point_radius'        => $this->getStyle('point_radius'),
+            'point_image'         => $this->getNotEmpty('point_image'),
+            'show_bubble'         => $this->show_bubble,
+
+            // Map:
+            'center'              => $this->map_bounds,
+            'zoom'                => $this->map_zoom,
+            'wkt'                 => $this->getGeocoverage(),
+            'wmsAddress'          => null,
+            'layers'              => null,
+
+            // Timeline:
+            'start_date'          => $this->getStartDate(),
+            'end_date'            => $this->getEndDate(),
+            'start_visible_date'  => $this->getStartVisibleDate(),
+            'end_visible_date'    => $this->getEndVisibleDate()
+
+        );
+
+        // If the record has a parent item and Neatline Maps is present.
+        if (!is_null($this->item_id) && array_key_exists($this->item_id, $wmss)) {
+            $wms = $wmss[$this->item_id];
+            $data['wmsAddress'] = $wms['address'];
+            $data['layers']     = $wms['layers'];
+        }
+
+        return $data;
+
+    }
+
+    /**
+     * Construct map data.
+     *
+     * @param array $index This is the index of NeatlineRecord objects for
+     * caching. Optional.
+     * @param array $wmss This is an index mapping item IDs to rows from the
+     * NeatlineMapsService WMS data.
+     * @param Omeka_Record $exhibit The exhibit this record belongs to.
+     *
+     * @return array The map JSON.
+     **/
     public function buildMapDataArray($index=array(), $wmss=array(), $exhibit=null) {
 
         // If not active on map, return null.
@@ -1278,8 +1347,8 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
             'title'             => trim($this->getTitle()),
             'description'       => $this->getDescription(),
             'color'             => $this->getStyle('vector_color'),
-            'left_ambiguity'    => $this->left_percent,
-            'right_ambiguity'   => $this->right_percent,
+            'left_ambiguity'    => $this->getLeftPercent(),
+            'right_ambiguity'   => $this->getRightPercent(),
             'show_bubble'       => $this->show_bubble,
             'textColor'         => '#000000'
         );

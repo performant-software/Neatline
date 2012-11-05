@@ -18,8 +18,8 @@ class Neatline_DataController extends Omeka_Controller_AbstractActionController
      */
     public function init()
     {
-        $this->_exhibits = $this->_helper->db->getTable('NeatlineExhibit');
-        $this->_records = $this->_helper->db->getTable('NeatlineRecord');
+        $this->exhibitsTable =  $this->_helper->db->getTable('NeatlineExhibit');
+        $this->recordsTable =   $this->_helper->db->getTable('NeatlineRecord');
     }
 
     /**
@@ -36,10 +36,10 @@ class Neatline_DataController extends Omeka_Controller_AbstractActionController
         $this->getResponse()->setHeader('Content-type', 'application/json');
 
         // Get the exhibit.
-        $exhibit = $this->_exhibits->find($this->_request->id);
+        $exhibit = $this->exhibitsTable->find($this->_request->id);
 
         // Output the JSON string.
-        echo json_encode($this->_records->buildRecordsJson($exhibit));
+        echo json_encode($this->recordsTable->buildJsonForExhibit($exhibit));
 
     }
 

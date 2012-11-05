@@ -406,12 +406,26 @@ class NeatlineRecordTable extends Omeka_Db_Table
      * @return JSON Array of format:
      * array('map' => array(), 'timeline' => array()).
      */
-    public function buildRecordsJson($exhibit)
+    public function buildJsonForExhibit($exhibit)
     {
-        return array(
-            'map' => $this->buildMapJson($exhibit),
-            'timeline' => $this->buildTimelineJson($exhibit),
-        );
+
+        $records = array();
+        $wmsIndex = array();
+
+        // Get records.
+        if ($records = $this->getRecordsByExhibit($exhibit)) {
+
+            // Cache records.
+            $index = $this->_indexRecords($records);
+
+            // Construct record objects.
+            foreach ($records as $record)
+                $data[] = $record->buildJsonData($index, $exhibit);
+
+        }
+
+        return $records;
+
     }
 
     /**
