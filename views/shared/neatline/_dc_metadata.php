@@ -10,9 +10,3 @@
     <h3><?php echo __('Files'); ?></h3>
     <div class="element-text"><?php echo files_for_item(array(), array(), $item); ?></div>
 </div>
-
-<!-- The following prints a citation for this item. -->
-<div id="item-citation" class="element">
-    <h3><?php echo __('Citation'); ?></h3>
-    <div class="element-text"><?php echo item_citation($item); ?></div>
-</div>

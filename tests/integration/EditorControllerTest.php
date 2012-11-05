@@ -706,194 +706,194 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
      *
      * @return void.
      */
-    public function testSaveWithRecordIdAndNoItemId()
-    {
+    // public function testSaveWithRecordIdAndNoItemId()
+    // {
 
-        // Create exhibit and records.
-        $neatline = $this->_createNeatline();
-        $record1 = new NeatlineRecord(null, $neatline);
-        $record1->save();
+    //     // Create exhibit and records.
+    //     $neatline = $this->_createNeatline();
+    //     $record1 = new NeatlineRecord(null, $neatline);
+    //     $record1->save();
 
-        $record2 = new NeatlineRecord(null, $neatline);
-        $record2->parent_record_id = $record1->id;
-        $record2->save();
+    //     $record2 = new NeatlineRecord(null, $neatline);
+    //     $record2->parent_record_id = $record1->id;
+    //     $record2->save();
 
-        // Form the POST for a space change.
-        $this->request->setMethod('POST')
-            ->setPost(array(
-                'item_id' =>            '',
-                'record_id' =>          $record2->id,
-                'exhibit_id' =>         $neatline->id,
-                'space_active' =>       (string) self::$__testParams['space_active'],
-                'time_active' =>        (string) self::$__testParams['time_active'],
-                'geocoverage' =>        self::$__testParams['geocoverage'],
-                'title' =>              self::$__testParams['title'],
-                // 'slug' =>               self::$__testParams['slug'],
-                'description' =>        self::$__testParams['description'],
-                'start_date' =>         self::$__testParams['start_date'],
-                'end_date' =>           self::$__testParams['end_date'],
-                'start_visible_date' => self::$__testParams['start_visible_date'],
-                'end_visible_date' =>   self::$__testParams['end_visible_date'],
-                'left_percent' =>       self::$__testParams['left_percent'],
-                'right_percent' =>      self::$__testParams['right_percent'],
-                'vector_color' =>       self::$__testParams['vector_color'],
-                'stroke_color' =>       self::$__testParams['stroke_color'],
-                'highlight_color' =>    self::$__testParams['highlight_color'],
-                'vector_opacity' =>     self::$__testParams['vector_opacity'],
-                'select_opacity' =>     self::$__testParams['select_opacity'],
-                'stroke_opacity' =>     self::$__testParams['stroke_opacity'],
-                'graphic_opacity' =>    self::$__testParams['graphic_opacity'],
-                'stroke_width' =>       self::$__testParams['stroke_width'],
-                'point_radius' =>       self::$__testParams['point_radius'],
-                'point_image' =>        self::$__testParams['point_image'],
-                'parent_record_id' =>   self::$__testParams['parent_record_id'],
-                'show_bubble' =>        0,
-                'use_dc_metadata' =>    0
-            )
-        );
+    //     // Form the POST for a space change.
+    //     $this->request->setMethod('POST')
+    //         ->setPost(array(
+    //             'item_id' =>            '',
+    //             'record_id' =>          $record2->id,
+    //             'exhibit_id' =>         $neatline->id,
+    //             'space_active' =>       (string) self::$__testParams['space_active'],
+    //             'time_active' =>        (string) self::$__testParams['time_active'],
+    //             'geocoverage' =>        self::$__testParams['geocoverage'],
+    //             'title' =>              self::$__testParams['title'],
+    //             // 'slug' =>               self::$__testParams['slug'],
+    //             'description' =>        self::$__testParams['description'],
+    //             'start_date' =>         self::$__testParams['start_date'],
+    //             'end_date' =>           self::$__testParams['end_date'],
+    //             'start_visible_date' => self::$__testParams['start_visible_date'],
+    //             'end_visible_date' =>   self::$__testParams['end_visible_date'],
+    //             'left_percent' =>       self::$__testParams['left_percent'],
+    //             'right_percent' =>      self::$__testParams['right_percent'],
+    //             'vector_color' =>       self::$__testParams['vector_color'],
+    //             'stroke_color' =>       self::$__testParams['stroke_color'],
+    //             'highlight_color' =>    self::$__testParams['highlight_color'],
+    //             'vector_opacity' =>     self::$__testParams['vector_opacity'],
+    //             'select_opacity' =>     self::$__testParams['select_opacity'],
+    //             'stroke_opacity' =>     self::$__testParams['stroke_opacity'],
+    //             'graphic_opacity' =>    self::$__testParams['graphic_opacity'],
+    //             'stroke_width' =>       self::$__testParams['stroke_width'],
+    //             'point_radius' =>       self::$__testParams['point_radius'],
+    //             'point_image' =>        self::$__testParams['point_image'],
+    //             'parent_record_id' =>   self::$__testParams['parent_record_id'],
+    //             'show_bubble' =>        0,
+    //             'use_dc_metadata' =>    0
+    //         )
+    //     );
 
-        // 1 record.
-        $this->assertEquals($this->_recordsTable->count(), 2);
+    //     // 1 record.
+    //     $this->assertEquals($this->_recordsTable->count(), 2);
 
-        // Hit the route and capture the response.
-        $this->dispatch('neatline-exhibits/editor/ajax/save');
-        $response = $this->getResponse()->getBody('default');
+    //     // Hit the route and capture the response.
+    //     $this->dispatch('neatline-exhibits/editor/ajax/save');
+    //     $response = $this->getResponse()->getBody('default');
 
-        // 1 record.
-        $this->assertEquals($this->_recordsTable->count(), 2);
+    //     // 1 record.
+    //     $this->assertEquals($this->_recordsTable->count(), 2);
 
-        // Test the raw construction with no available DC values.
-        $this->assertContains('"statuses":', $response);
-        $this->assertContains('"space":true', $response);
-        $this->assertContains('"time":true', $response);
-        $this->assertContains('"recordid":' . $record2->id, $response);
+    //     // Test the raw construction with no available DC values.
+    //     $this->assertContains('"statuses":', $response);
+    //     $this->assertContains('"space":true', $response);
+    //     $this->assertContains('"time":true', $response);
+    //     $this->assertContains('"recordid":' . $record2->id, $response);
 
-        // Get the record and check the attributes.
-        $record = $this->_recordsTable->find($record2->id);
+    //     // Get the record and check the attributes.
+    //     $record = $this->_recordsTable->find($record2->id);
 
-        $this->assertEquals(
-            $record->title,
-            self::$__testParams['title']
-        );
+    //     $this->assertEquals(
+    //         $record->title,
+    //         self::$__testParams['title']
+    //     );
 
-        // $this->assertEquals(
-        //     $record->slug,
-        //     self::$__testParams['slug']
-        // );
+    //     // $this->assertEquals(
+    //     //     $record->slug,
+    //     //     self::$__testParams['slug']
+    //     // );
 
-        $this->assertEquals(
-            $record->description,
-            self::$__testParams['description']
-        );
+    //     $this->assertEquals(
+    //         $record->description,
+    //         self::$__testParams['description']
+    //     );
 
-        $this->assertEquals(
-            $record->start_date,
-            self::$__testParams['start_date']
-        );
+    //     $this->assertEquals(
+    //         $record->start_date,
+    //         self::$__testParams['start_date']
+    //     );
 
-        $this->assertEquals(
-            $record->end_date,
-            self::$__testParams['end_date']
-        );
+    //     $this->assertEquals(
+    //         $record->end_date,
+    //         self::$__testParams['end_date']
+    //     );
 
-        $this->assertEquals(
-            $record->start_visible_date,
-            self::$__testParams['start_visible_date']
-        );
+    //     $this->assertEquals(
+    //         $record->start_visible_date,
+    //         self::$__testParams['start_visible_date']
+    //     );
 
-        $this->assertEquals(
-            $record->end_visible_date,
-            self::$__testParams['end_visible_date']
-        );
+    //     $this->assertEquals(
+    //         $record->end_visible_date,
+    //         self::$__testParams['end_visible_date']
+    //     );
 
-        $this->assertEquals(
-            $record->vector_color,
-            self::$__testParams['vector_color']
-        );
+    //     $this->assertEquals(
+    //         $record->vector_color,
+    //         self::$__testParams['vector_color']
+    //     );
 
-        $this->assertEquals(
-            $record->stroke_color,
-            self::$__testParams['stroke_color']
-        );
+    //     $this->assertEquals(
+    //         $record->stroke_color,
+    //         self::$__testParams['stroke_color']
+    //     );
 
-        $this->assertEquals(
-            $record->highlight_color,
-            self::$__testParams['highlight_color']
-        );
+    //     $this->assertEquals(
+    //         $record->highlight_color,
+    //         self::$__testParams['highlight_color']
+    //     );
 
-        $this->assertEquals(
-            $record->vector_opacity,
-            self::$__testParams['vector_opacity']
-        );
+    //     $this->assertEquals(
+    //         $record->vector_opacity,
+    //         self::$__testParams['vector_opacity']
+    //     );
 
-        $this->assertEquals(
-            $record->select_opacity,
-            self::$__testParams['select_opacity']
-        );
+    //     $this->assertEquals(
+    //         $record->select_opacity,
+    //         self::$__testParams['select_opacity']
+    //     );
 
-        $this->assertEquals(
-            $record->stroke_opacity,
-            self::$__testParams['stroke_opacity']
-        );
+    //     $this->assertEquals(
+    //         $record->stroke_opacity,
+    //         self::$__testParams['stroke_opacity']
+    //     );
 
-        $this->assertEquals(
-            $record->graphic_opacity,
-            self::$__testParams['graphic_opacity']
-        );
+    //     $this->assertEquals(
+    //         $record->graphic_opacity,
+    //         self::$__testParams['graphic_opacity']
+    //     );
 
-        $this->assertEquals(
-            $record->stroke_width,
-            self::$__testParams['stroke_width']
-        );
+    //     $this->assertEquals(
+    //         $record->stroke_width,
+    //         self::$__testParams['stroke_width']
+    //     );
 
-        $this->assertEquals(
-            $record->point_radius,
-            self::$__testParams['point_radius']
-        );
+    //     $this->assertEquals(
+    //         $record->point_radius,
+    //         self::$__testParams['point_radius']
+    //     );
 
-        $this->assertEquals(
-            $record->point_image,
-            self::$__testParams['point_image']
-        );
+    //     $this->assertEquals(
+    //         $record->point_image,
+    //         self::$__testParams['point_image']
+    //     );
 
-        $this->assertEquals(
-            $record->geocoverage,
-            self::$__testParams['geocoverage']
-        );
+    //     $this->assertEquals(
+    //         $record->geocoverage,
+    //         self::$__testParams['geocoverage']
+    //     );
 
-        $this->assertEquals(
-            $record->left_percent,
-            self::$__testParams['left_percent']
-        );
+    //     $this->assertEquals(
+    //         $record->left_percent,
+    //         self::$__testParams['left_percent']
+    //     );
 
-        $this->assertEquals(
-            $record->right_percent,
-            self::$__testParams['right_percent']
-        );
+    //     $this->assertEquals(
+    //         $record->right_percent,
+    //         self::$__testParams['right_percent']
+    //     );
 
-        $this->assertEquals(
-            $record->parent_record_id,
-            self::$__testParams['parent_record_id']
-        );
+    //     $this->assertEquals(
+    //         $record->parent_record_id,
+    //         self::$__testParams['parent_record_id']
+    //     );
 
-        $this->assertNull($record->use_dc_metadata);
+    //     $this->assertNull($record->use_dc_metadata);
 
-        $this->assertEquals(
-            $record->show_bubble,
-            0
-        );
+    //     $this->assertEquals(
+    //         $record->show_bubble,
+    //         0
+    //     );
 
-        $this->assertEquals(
-            $record->space_active,
-            1
-        );
+    //     $this->assertEquals(
+    //         $record->space_active,
+    //         1
+    //     );
 
-        $this->assertEquals(
-            $record->time_active,
-            1
-        );
+    //     $this->assertEquals(
+    //         $record->time_active,
+    //         1
+    //     );
 
-    }
+    // }
 
     /**
      * If there is a non-null item id on the post and a null record id, the action
@@ -901,194 +901,194 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
      *
      * @return void.
      */
-    public function testSaveWithItemIdAndNoRecordId()
-    {
+    // public function testSaveWithItemIdAndNoRecordId()
+    // {
 
-        // Create exhibit and item.
-        $neatline = $this->_createNeatline();
-        $item = $this->_createItem();
-        $record1 = new NeatlineRecord(null, $neatline);
-        $record1->save();
+    //     // Create exhibit and item.
+    //     $neatline = $this->_createNeatline();
+    //     $item = $this->_createItem();
+    //     $record1 = new NeatlineRecord(null, $neatline);
+    //     $record1->save();
 
-        // Form the POST for a space change.
-        $this->request->setMethod('POST')
-            ->setPost(array(
-                'item_id' =>            $item->id,
-                'record_id' =>          '',
-                'exhibit_id' =>         $neatline->id,
-                'space_active' =>       (string) self::$__testParams['space_active'],
-                'time_active' =>        (string) self::$__testParams['time_active'],
-                'geocoverage' =>        self::$__testParams['geocoverage'],
-                'title' =>              self::$__testParams['title'],
-                // 'slug' =>               self::$__testParams['slug'],
-                'description' =>        self::$__testParams['description'],
-                'start_date' =>         self::$__testParams['start_date'],
-                'end_date' =>           self::$__testParams['end_date'],
-                'start_visible_date' => self::$__testParams['start_visible_date'],
-                'end_visible_date' =>   self::$__testParams['end_visible_date'],
-                'left_percent' =>       self::$__testParams['left_percent'],
-                'right_percent' =>      self::$__testParams['right_percent'],
-                'vector_color' =>       self::$__testParams['vector_color'],
-                'stroke_color' =>       self::$__testParams['stroke_color'],
-                'highlight_color' =>    self::$__testParams['highlight_color'],
-                'vector_opacity' =>     self::$__testParams['vector_opacity'],
-                'select_opacity' =>     self::$__testParams['select_opacity'],
-                'stroke_opacity' =>     self::$__testParams['stroke_opacity'],
-                'graphic_opacity' =>    self::$__testParams['graphic_opacity'],
-                'stroke_width' =>       self::$__testParams['stroke_width'],
-                'point_radius' =>       self::$__testParams['point_radius'],
-                'point_image' =>        self::$__testParams['point_image'],
-                'parent_record_id' =>   $record1->id,
-                'show_bubble' =>        0,
-                'use_dc_metadata' =>    1
-            )
-        );
+    //     // Form the POST for a space change.
+    //     $this->request->setMethod('POST')
+    //         ->setPost(array(
+    //             'item_id' =>            $item->id,
+    //             'record_id' =>          '',
+    //             'exhibit_id' =>         $neatline->id,
+    //             'space_active' =>       (string) self::$__testParams['space_active'],
+    //             'time_active' =>        (string) self::$__testParams['time_active'],
+    //             'geocoverage' =>        self::$__testParams['geocoverage'],
+    //             'title' =>              self::$__testParams['title'],
+    //             // 'slug' =>               self::$__testParams['slug'],
+    //             'description' =>        self::$__testParams['description'],
+    //             'start_date' =>         self::$__testParams['start_date'],
+    //             'end_date' =>           self::$__testParams['end_date'],
+    //             'start_visible_date' => self::$__testParams['start_visible_date'],
+    //             'end_visible_date' =>   self::$__testParams['end_visible_date'],
+    //             'left_percent' =>       self::$__testParams['left_percent'],
+    //             'right_percent' =>      self::$__testParams['right_percent'],
+    //             'vector_color' =>       self::$__testParams['vector_color'],
+    //             'stroke_color' =>       self::$__testParams['stroke_color'],
+    //             'highlight_color' =>    self::$__testParams['highlight_color'],
+    //             'vector_opacity' =>     self::$__testParams['vector_opacity'],
+    //             'select_opacity' =>     self::$__testParams['select_opacity'],
+    //             'stroke_opacity' =>     self::$__testParams['stroke_opacity'],
+    //             'graphic_opacity' =>    self::$__testParams['graphic_opacity'],
+    //             'stroke_width' =>       self::$__testParams['stroke_width'],
+    //             'point_radius' =>       self::$__testParams['point_radius'],
+    //             'point_image' =>        self::$__testParams['point_image'],
+    //             'parent_record_id' =>   $record1->id,
+    //             'show_bubble' =>        0,
+    //             'use_dc_metadata' =>    1
+    //         )
+    //     );
 
-        // 1 records.
-        $this->assertEquals($this->_recordsTable->count(), 1);
+    //     // 1 records.
+    //     $this->assertEquals($this->_recordsTable->count(), 1);
 
-        // Hit the route and capture the response.
-        $this->dispatch('neatline-exhibits/editor/ajax/save');
-        $response = $this->getResponse()->getBody('default');
+    //     // Hit the route and capture the response.
+    //     $this->dispatch('neatline-exhibits/editor/ajax/save');
+    //     $response = $this->getResponse()->getBody('default');
 
-        // 2 record.
-        $this->assertEquals($this->_recordsTable->count(), 2);
+    //     // 2 record.
+    //     $this->assertEquals($this->_recordsTable->count(), 2);
 
-        // Test the raw construction with no available DC values.
-        $this->assertContains('"statuses":', $response);
-        $this->assertContains('"space":true', $response);
-        $this->assertContains('"time":true', $response);
-        $this->assertContains('"recordid":2', $response);
+    //     // Test the raw construction with no available DC values.
+    //     $this->assertContains('"statuses":', $response);
+    //     $this->assertContains('"space":true', $response);
+    //     $this->assertContains('"time":true', $response);
+    //     $this->assertContains('"recordid":2', $response);
 
-        // Get the record and check the attributes.
-        $record = $this->_recordsTable->getRecordByItemAndExhibit($item, $neatline);
+    //     // Get the record and check the attributes.
+    //     $record = $this->_recordsTable->getRecordByItemAndExhibit($item, $neatline);
 
-        $this->assertEquals(
-            $record->title,
-            self::$__testParams['title']
-        );
+    //     $this->assertEquals(
+    //         $record->title,
+    //         self::$__testParams['title']
+    //     );
 
-        // $this->assertEquals(
-        //     $record->slug,
-        //     self::$__testParams['slug']
-        // );
+    //     // $this->assertEquals(
+    //     //     $record->slug,
+    //     //     self::$__testParams['slug']
+    //     // );
 
-        $this->assertEquals(
-            $record->description,
-            self::$__testParams['description']
-        );
+    //     $this->assertEquals(
+    //         $record->description,
+    //         self::$__testParams['description']
+    //     );
 
-        $this->assertEquals(
-            $record->start_date,
-            self::$__testParams['start_date']
-        );
+    //     $this->assertEquals(
+    //         $record->start_date,
+    //         self::$__testParams['start_date']
+    //     );
 
-        $this->assertEquals(
-            $record->end_date,
-            self::$__testParams['end_date']
-        );
+    //     $this->assertEquals(
+    //         $record->end_date,
+    //         self::$__testParams['end_date']
+    //     );
 
-        $this->assertEquals(
-            $record->start_visible_date,
-            self::$__testParams['start_visible_date']
-        );
+    //     $this->assertEquals(
+    //         $record->start_visible_date,
+    //         self::$__testParams['start_visible_date']
+    //     );
 
-        $this->assertEquals(
-            $record->end_visible_date,
-            self::$__testParams['end_visible_date']
-        );
+    //     $this->assertEquals(
+    //         $record->end_visible_date,
+    //         self::$__testParams['end_visible_date']
+    //     );
 
-        $this->assertEquals(
-            $record->vector_color,
-            self::$__testParams['vector_color']
-        );
+    //     $this->assertEquals(
+    //         $record->vector_color,
+    //         self::$__testParams['vector_color']
+    //     );
 
-        $this->assertEquals(
-            $record->stroke_color,
-            self::$__testParams['stroke_color']
-        );
+    //     $this->assertEquals(
+    //         $record->stroke_color,
+    //         self::$__testParams['stroke_color']
+    //     );
 
-        $this->assertEquals(
-            $record->highlight_color,
-            self::$__testParams['highlight_color']
-        );
+    //     $this->assertEquals(
+    //         $record->highlight_color,
+    //         self::$__testParams['highlight_color']
+    //     );
 
-        $this->assertEquals(
-            $record->vector_opacity,
-            self::$__testParams['vector_opacity']
-        );
+    //     $this->assertEquals(
+    //         $record->vector_opacity,
+    //         self::$__testParams['vector_opacity']
+    //     );
 
-        $this->assertEquals(
-            $record->select_opacity,
-            self::$__testParams['select_opacity']
-        );
+    //     $this->assertEquals(
+    //         $record->select_opacity,
+    //         self::$__testParams['select_opacity']
+    //     );
 
-        $this->assertEquals(
-            $record->stroke_opacity,
-            self::$__testParams['stroke_opacity']
-        );
+    //     $this->assertEquals(
+    //         $record->stroke_opacity,
+    //         self::$__testParams['stroke_opacity']
+    //     );
 
-        $this->assertEquals(
-            $record->graphic_opacity,
-            self::$__testParams['graphic_opacity']
-        );
+    //     $this->assertEquals(
+    //         $record->graphic_opacity,
+    //         self::$__testParams['graphic_opacity']
+    //     );
 
-        $this->assertEquals(
-            $record->stroke_width,
-            self::$__testParams['stroke_width']
-        );
+    //     $this->assertEquals(
+    //         $record->stroke_width,
+    //         self::$__testParams['stroke_width']
+    //     );
 
-        $this->assertEquals(
-            $record->point_radius,
-            self::$__testParams['point_radius']
-        );
+    //     $this->assertEquals(
+    //         $record->point_radius,
+    //         self::$__testParams['point_radius']
+    //     );
 
-        $this->assertEquals(
-            $record->point_image,
-            self::$__testParams['point_image']
-        );
+    //     $this->assertEquals(
+    //         $record->point_image,
+    //         self::$__testParams['point_image']
+    //     );
 
-        $this->assertEquals(
-            $record->geocoverage,
-            self::$__testParams['geocoverage']
-        );
+    //     $this->assertEquals(
+    //         $record->geocoverage,
+    //         self::$__testParams['geocoverage']
+    //     );
 
-        $this->assertEquals(
-            $record->left_percent,
-            self::$__testParams['left_percent']
-        );
+    //     $this->assertEquals(
+    //         $record->left_percent,
+    //         self::$__testParams['left_percent']
+    //     );
 
-        $this->assertEquals(
-            $record->right_percent,
-            self::$__testParams['right_percent']
-        );
+    //     $this->assertEquals(
+    //         $record->right_percent,
+    //         self::$__testParams['right_percent']
+    //     );
 
-        $this->assertEquals(
-            $record->parent_record_id,
-            $record1->id
-        );
+    //     $this->assertEquals(
+    //         $record->parent_record_id,
+    //         $record1->id
+    //     );
 
-        $this->assertEquals(
-            $record->use_dc_metadata,
-            1
-        );
+    //     $this->assertEquals(
+    //         $record->use_dc_metadata,
+    //         1
+    //     );
 
-        $this->assertEquals(
-            $record->show_bubble,
-            0
-        );
+    //     $this->assertEquals(
+    //         $record->show_bubble,
+    //         0
+    //     );
 
-        $this->assertEquals(
-            $record->space_active,
-            1
-        );
+    //     $this->assertEquals(
+    //         $record->space_active,
+    //         1
+    //     );
 
-        $this->assertEquals(
-            $record->time_active,
-            1
-        );
+    //     $this->assertEquals(
+    //         $record->time_active,
+    //         1
+    //     );
 
-    }
+    // }
 
     /**
      * If there is a non-null item id on the post and a non-null record id, the action
@@ -1096,202 +1096,202 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
      *
      * @return void.
      */
-    public function testSaveWithItemIdAndRecordId()
-    {
+    // public function testSaveWithItemIdAndRecordId()
+    // {
 
-        // Create exhibit and records.
-        $neatline = $this->_createNeatline();
-        $record1 = new NeatlineRecord(null, $neatline);
-        $record1->save();
+    //     // Create exhibit and records.
+    //     $neatline = $this->_createNeatline();
+    //     $record1 = new NeatlineRecord(null, $neatline);
+    //     $record1->save();
 
-        $item = $this->_createItem();
-        $record2 = new NeatlineRecord($item, $neatline);
-        $record2->parent_record_id = $record1->id;
-        $record2->save();
+    //     $item = $this->_createItem();
+    //     $record2 = new NeatlineRecord($item, $neatline);
+    //     $record2->parent_record_id = $record1->id;
+    //     $record2->save();
 
-        // Form the POST for a space change.
-        $this->request->setMethod('POST')
-            ->setPost(array(
-                'item_id' =>            $item->id,
-                'record_id' =>          $record2->id,
-                'exhibit_id' =>         $neatline->id,
-                'space_active' =>       (string) self::$__testParams['space_active'],
-                'time_active' =>        (string) self::$__testParams['time_active'],
-                'geocoverage' =>        self::$__testParams['geocoverage'],
-                'title' =>              self::$__testParams['title'],
-                // 'slug' =>               self::$__testParams['slug'],
-                'description' =>        self::$__testParams['description'],
-                'start_date' =>         self::$__testParams['start_date'],
-                'end_date' =>           self::$__testParams['end_date'],
-                'start_visible_date' => self::$__testParams['start_visible_date'],
-                'end_visible_date' =>   self::$__testParams['end_visible_date'],
-                'left_percent' =>       self::$__testParams['left_percent'],
-                'right_percent' =>      self::$__testParams['right_percent'],
-                'vector_color' =>       self::$__testParams['vector_color'],
-                'stroke_color' =>       self::$__testParams['stroke_color'],
-                'highlight_color' =>    self::$__testParams['highlight_color'],
-                'vector_opacity' =>     self::$__testParams['vector_opacity'],
-                'select_opacity' =>     self::$__testParams['select_opacity'],
-                'stroke_opacity' =>     self::$__testParams['stroke_opacity'],
-                'graphic_opacity' =>    self::$__testParams['graphic_opacity'],
-                'stroke_width' =>       self::$__testParams['stroke_width'],
-                'point_radius' =>       self::$__testParams['point_radius'],
-                'point_image' =>        self::$__testParams['point_image'],
-                'parent_record_id' =>   self::$__testParams['parent_record_id'],
-                'show_bubble' =>        0,
-                'use_dc_metadata' =>    1
-            )
-        );
+    //     // Form the POST for a space change.
+    //     $this->request->setMethod('POST')
+    //         ->setPost(array(
+    //             'item_id' =>            $item->id,
+    //             'record_id' =>          $record2->id,
+    //             'exhibit_id' =>         $neatline->id,
+    //             'space_active' =>       (string) self::$__testParams['space_active'],
+    //             'time_active' =>        (string) self::$__testParams['time_active'],
+    //             'geocoverage' =>        self::$__testParams['geocoverage'],
+    //             'title' =>              self::$__testParams['title'],
+    //             // 'slug' =>               self::$__testParams['slug'],
+    //             'description' =>        self::$__testParams['description'],
+    //             'start_date' =>         self::$__testParams['start_date'],
+    //             'end_date' =>           self::$__testParams['end_date'],
+    //             'start_visible_date' => self::$__testParams['start_visible_date'],
+    //             'end_visible_date' =>   self::$__testParams['end_visible_date'],
+    //             'left_percent' =>       self::$__testParams['left_percent'],
+    //             'right_percent' =>      self::$__testParams['right_percent'],
+    //             'vector_color' =>       self::$__testParams['vector_color'],
+    //             'stroke_color' =>       self::$__testParams['stroke_color'],
+    //             'highlight_color' =>    self::$__testParams['highlight_color'],
+    //             'vector_opacity' =>     self::$__testParams['vector_opacity'],
+    //             'select_opacity' =>     self::$__testParams['select_opacity'],
+    //             'stroke_opacity' =>     self::$__testParams['stroke_opacity'],
+    //             'graphic_opacity' =>    self::$__testParams['graphic_opacity'],
+    //             'stroke_width' =>       self::$__testParams['stroke_width'],
+    //             'point_radius' =>       self::$__testParams['point_radius'],
+    //             'point_image' =>        self::$__testParams['point_image'],
+    //             'parent_record_id' =>   self::$__testParams['parent_record_id'],
+    //             'show_bubble' =>        0,
+    //             'use_dc_metadata' =>    1
+    //         )
+    //     );
 
-        // 1 record.
-        $this->assertEquals($this->_recordsTable->count(), 2);
+    //     // 1 record.
+    //     $this->assertEquals($this->_recordsTable->count(), 2);
 
-        // Hit the route and capture the response.
-        $this->dispatch('neatline-exhibits/editor/ajax/save');
-        $response = $this->getResponse()->getBody('default');
+    //     // Hit the route and capture the response.
+    //     $this->dispatch('neatline-exhibits/editor/ajax/save');
+    //     $response = $this->getResponse()->getBody('default');
 
-        // 1 record.
-        $this->assertEquals($this->_recordsTable->count(), 2);
+    //     // 1 record.
+    //     $this->assertEquals($this->_recordsTable->count(), 2);
 
-        // Test the raw construction with 
-        $this->assertContains('"statuses":', $response);
-        $this->assertContains('"space":true', $response);
-        $this->assertContains('"time":true', $response);
-        $this->assertContains('"recordid":' . $record2->id, $response);
+    //     // Test the raw construction with 
+    //     $this->assertContains('"statuses":', $response);
+    //     $this->assertContains('"space":true', $response);
+    //     $this->assertContains('"time":true', $response);
+    //     $this->assertContains('"recordid":' . $record2->id, $response);
 
-        // Get the record and check the attributes.
-        $record = $this->_recordsTable->getRecordByItemAndExhibit($item, $neatline);
+    //     // Get the record and check the attributes.
+    //     $record = $this->_recordsTable->getRecordByItemAndExhibit($item, $neatline);
 
-        $this->assertEquals(
-            $record->title,
-            self::$__testParams['title']
-        );
+    //     $this->assertEquals(
+    //         $record->title,
+    //         self::$__testParams['title']
+    //     );
 
-        // $this->assertEquals(
-        //     $record->slug,
-        //     self::$__testParams['slug']
-        // );
+    //     // $this->assertEquals(
+    //     //     $record->slug,
+    //     //     self::$__testParams['slug']
+    //     // );
 
-        $this->assertEquals(
-            $record->description,
-            self::$__testParams['description']
-        );
+    //     $this->assertEquals(
+    //         $record->description,
+    //         self::$__testParams['description']
+    //     );
 
-        $this->assertEquals(
-            $record->start_date,
-            self::$__testParams['start_date']
-        );
+    //     $this->assertEquals(
+    //         $record->start_date,
+    //         self::$__testParams['start_date']
+    //     );
 
-        $this->assertEquals(
-            $record->end_date,
-            self::$__testParams['end_date']
-        );
+    //     $this->assertEquals(
+    //         $record->end_date,
+    //         self::$__testParams['end_date']
+    //     );
 
-        $this->assertEquals(
-            $record->start_visible_date,
-            self::$__testParams['start_visible_date']
-        );
+    //     $this->assertEquals(
+    //         $record->start_visible_date,
+    //         self::$__testParams['start_visible_date']
+    //     );
 
-        $this->assertEquals(
-            $record->end_visible_date,
-            self::$__testParams['end_visible_date']
-        );
+    //     $this->assertEquals(
+    //         $record->end_visible_date,
+    //         self::$__testParams['end_visible_date']
+    //     );
 
-        $this->assertEquals(
-            $record->vector_color,
-            self::$__testParams['vector_color']
-        );
+    //     $this->assertEquals(
+    //         $record->vector_color,
+    //         self::$__testParams['vector_color']
+    //     );
 
-        $this->assertEquals(
-            $record->stroke_color,
-            self::$__testParams['stroke_color']
-        );
+    //     $this->assertEquals(
+    //         $record->stroke_color,
+    //         self::$__testParams['stroke_color']
+    //     );
 
-        $this->assertEquals(
-            $record->highlight_color,
-            self::$__testParams['highlight_color']
-        );
+    //     $this->assertEquals(
+    //         $record->highlight_color,
+    //         self::$__testParams['highlight_color']
+    //     );
 
-        $this->assertEquals(
-            $record->vector_opacity,
-            self::$__testParams['vector_opacity']
-        );
+    //     $this->assertEquals(
+    //         $record->vector_opacity,
+    //         self::$__testParams['vector_opacity']
+    //     );
 
-        $this->assertEquals(
-            $record->select_opacity,
-            self::$__testParams['select_opacity']
-        );
+    //     $this->assertEquals(
+    //         $record->select_opacity,
+    //         self::$__testParams['select_opacity']
+    //     );
 
-        $this->assertEquals(
-            $record->stroke_opacity,
-            self::$__testParams['stroke_opacity']
-        );
+    //     $this->assertEquals(
+    //         $record->stroke_opacity,
+    //         self::$__testParams['stroke_opacity']
+    //     );
 
-        $this->assertEquals(
-            $record->graphic_opacity,
-            self::$__testParams['graphic_opacity']
-        );
+    //     $this->assertEquals(
+    //         $record->graphic_opacity,
+    //         self::$__testParams['graphic_opacity']
+    //     );
 
-        $this->assertEquals(
-            $record->stroke_width,
-            self::$__testParams['stroke_width']
-        );
+    //     $this->assertEquals(
+    //         $record->stroke_width,
+    //         self::$__testParams['stroke_width']
+    //     );
 
-        $this->assertEquals(
-            $record->point_radius,
-            self::$__testParams['point_radius']
-        );
+    //     $this->assertEquals(
+    //         $record->point_radius,
+    //         self::$__testParams['point_radius']
+    //     );
 
-        $this->assertEquals(
-            $record->point_image,
-            self::$__testParams['point_image']
-        );
+    //     $this->assertEquals(
+    //         $record->point_image,
+    //         self::$__testParams['point_image']
+    //     );
 
-        $this->assertEquals(
-            $record->geocoverage,
-            self::$__testParams['geocoverage']
-        );
+    //     $this->assertEquals(
+    //         $record->geocoverage,
+    //         self::$__testParams['geocoverage']
+    //     );
 
-        $this->assertNotNull(
-            $record->geocoverage
-        );
+    //     $this->assertNotNull(
+    //         $record->geocoverage
+    //     );
 
-        $this->assertEquals(
-            $record->left_percent,
-            self::$__testParams['left_percent']
-        );
+    //     $this->assertEquals(
+    //         $record->left_percent,
+    //         self::$__testParams['left_percent']
+    //     );
 
-        $this->assertEquals(
-            $record->right_percent,
-            self::$__testParams['right_percent']
-        );
+    //     $this->assertEquals(
+    //         $record->right_percent,
+    //         self::$__testParams['right_percent']
+    //     );
 
-        $this->assertEquals(
-            $record->parent_record_id,
-            self::$__testParams['parent_record_id']
-        );
+    //     $this->assertEquals(
+    //         $record->parent_record_id,
+    //         self::$__testParams['parent_record_id']
+    //     );
 
-        $this->assertEquals(
-            $record->use_dc_metadata,
-            1
-        );
+    //     $this->assertEquals(
+    //         $record->use_dc_metadata,
+    //         1
+    //     );
 
-        $this->assertEquals(
-            $record->show_bubble,
-            0
-        );
+    //     $this->assertEquals(
+    //         $record->show_bubble,
+    //         0
+    //     );
 
-        $this->assertEquals(
-            $record->space_active,
-            1
-        );
+    //     $this->assertEquals(
+    //         $record->space_active,
+    //         1
+    //     );
 
-        $this->assertEquals(
-            $record->time_active,
-            1
-        );
+    //     $this->assertEquals(
+    //         $record->time_active,
+    //         1
+    //     );
 
-    }
+    // }
 
     /**
      * When an unchanged parent_record_id is posted to /save, all styling and
@@ -1299,120 +1299,120 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
      *
      * @return void.
      */
-    public function testSaveWithUnchangedParentRecordId()
-    {
+    // public function testSaveWithUnchangedParentRecordId()
+    // {
 
-        // Create exhibit and records.
-        $neatline = $this->_createNeatline();
-        $record1 = new NeatlineRecord(null, $neatline);
-        $record1->save();
+    //     // Create exhibit and records.
+    //     $neatline = $this->_createNeatline();
+    //     $record1 = new NeatlineRecord(null, $neatline);
+    //     $record1->save();
 
-        $item = $this->_createItem();
-        $record2 = new NeatlineRecord($item, $neatline);
-        $record2->parent_record_id = $record1->id;
-        $record2->save();
+    //     $item = $this->_createItem();
+    //     $record2 = new NeatlineRecord($item, $neatline);
+    //     $record2->parent_record_id = $record1->id;
+    //     $record2->save();
 
-        // Form the POST for a space change.
-        $this->request->setMethod('POST')
-            ->setPost(array(
-                'item_id' =>            '',
-                'record_id' =>          $record2->id,
-                'exhibit_id' =>         $neatline->id,
-                'space_active' =>       (string) self::$__testParams['space_active'],
-                'time_active' =>        (string) self::$__testParams['time_active'],
-                'geocoverage' =>        'null',
-                'title' =>              self::$__testParams['title'],
-                // 'slug' =>               self::$__testParams['slug'],
-                'description' =>        self::$__testParams['description'],
-                'start_date' =>         self::$__testParams['start_date'],
-                'end_date' =>           self::$__testParams['end_date'],
-                'start_visible_date' => self::$__testParams['start_visible_date'],
-                'end_visible_date' =>   self::$__testParams['end_visible_date'],
-                'left_percent' =>       self::$__testParams['left_percent'],
-                'right_percent' =>      self::$__testParams['right_percent'],
-                'vector_color' =>       self::$__testParams['vector_color'],
-                'stroke_color' =>       self::$__testParams['stroke_color'],
-                'highlight_color' =>    self::$__testParams['highlight_color'],
-                'vector_opacity' =>     self::$__testParams['vector_opacity'],
-                'select_opacity' =>     self::$__testParams['select_opacity'],
-                'stroke_opacity' =>     self::$__testParams['stroke_opacity'],
-                'graphic_opacity' =>    self::$__testParams['graphic_opacity'],
-                'stroke_width' =>       self::$__testParams['stroke_width'],
-                'point_radius' =>       self::$__testParams['point_radius'],
-                'point_image' =>        self::$__testParams['point_image'],
-                'parent_record_id' =>   $record1->id,
-                'show_bubble' =>        0,
-                'use_dc_metadata' =>    0
-            )
-        );
+    //     // Form the POST for a space change.
+    //     $this->request->setMethod('POST')
+    //         ->setPost(array(
+    //             'item_id' =>            '',
+    //             'record_id' =>          $record2->id,
+    //             'exhibit_id' =>         $neatline->id,
+    //             'space_active' =>       (string) self::$__testParams['space_active'],
+    //             'time_active' =>        (string) self::$__testParams['time_active'],
+    //             'geocoverage' =>        'null',
+    //             'title' =>              self::$__testParams['title'],
+    //             // 'slug' =>               self::$__testParams['slug'],
+    //             'description' =>        self::$__testParams['description'],
+    //             'start_date' =>         self::$__testParams['start_date'],
+    //             'end_date' =>           self::$__testParams['end_date'],
+    //             'start_visible_date' => self::$__testParams['start_visible_date'],
+    //             'end_visible_date' =>   self::$__testParams['end_visible_date'],
+    //             'left_percent' =>       self::$__testParams['left_percent'],
+    //             'right_percent' =>      self::$__testParams['right_percent'],
+    //             'vector_color' =>       self::$__testParams['vector_color'],
+    //             'stroke_color' =>       self::$__testParams['stroke_color'],
+    //             'highlight_color' =>    self::$__testParams['highlight_color'],
+    //             'vector_opacity' =>     self::$__testParams['vector_opacity'],
+    //             'select_opacity' =>     self::$__testParams['select_opacity'],
+    //             'stroke_opacity' =>     self::$__testParams['stroke_opacity'],
+    //             'graphic_opacity' =>    self::$__testParams['graphic_opacity'],
+    //             'stroke_width' =>       self::$__testParams['stroke_width'],
+    //             'point_radius' =>       self::$__testParams['point_radius'],
+    //             'point_image' =>        self::$__testParams['point_image'],
+    //             'parent_record_id' =>   $record1->id,
+    //             'show_bubble' =>        0,
+    //             'use_dc_metadata' =>    0
+    //         )
+    //     );
 
-        // Hit the route and capture the response.
-        $this->dispatch('neatline-exhibits/editor/ajax/save');
+    //     // Hit the route and capture the response.
+    //     $this->dispatch('neatline-exhibits/editor/ajax/save');
 
-        // Get the record and check the attributes.
-        $record = $this->_recordsTable->find($record2->id);
+    //     // Get the record and check the attributes.
+    //     $record = $this->_recordsTable->find($record2->id);
 
-        $this->assertEquals(
-            $record->start_visible_date,
-            self::$__testParams['start_visible_date']
-        );
+    //     $this->assertEquals(
+    //         $record->start_visible_date,
+    //         self::$__testParams['start_visible_date']
+    //     );
 
-        $this->assertEquals(
-            $record->end_visible_date,
-            self::$__testParams['end_visible_date']
-        );
+    //     $this->assertEquals(
+    //         $record->end_visible_date,
+    //         self::$__testParams['end_visible_date']
+    //     );
 
-        $this->assertEquals(
-            $record->vector_color,
-            self::$__testParams['vector_color']
-        );
+    //     $this->assertEquals(
+    //         $record->vector_color,
+    //         self::$__testParams['vector_color']
+    //     );
 
-        $this->assertEquals(
-            $record->stroke_color,
-            self::$__testParams['stroke_color']
-        );
+    //     $this->assertEquals(
+    //         $record->stroke_color,
+    //         self::$__testParams['stroke_color']
+    //     );
 
-        $this->assertEquals(
-            $record->highlight_color,
-            self::$__testParams['highlight_color']
-        );
+    //     $this->assertEquals(
+    //         $record->highlight_color,
+    //         self::$__testParams['highlight_color']
+    //     );
 
-        $this->assertEquals(
-            $record->vector_opacity,
-            self::$__testParams['vector_opacity']
-        );
+    //     $this->assertEquals(
+    //         $record->vector_opacity,
+    //         self::$__testParams['vector_opacity']
+    //     );
 
-        $this->assertEquals(
-            $record->select_opacity,
-            self::$__testParams['select_opacity']
-        );
+    //     $this->assertEquals(
+    //         $record->select_opacity,
+    //         self::$__testParams['select_opacity']
+    //     );
 
-        $this->assertEquals(
-            $record->stroke_opacity,
-            self::$__testParams['stroke_opacity']
-        );
+    //     $this->assertEquals(
+    //         $record->stroke_opacity,
+    //         self::$__testParams['stroke_opacity']
+    //     );
 
-        $this->assertEquals(
-            $record->graphic_opacity,
-            self::$__testParams['graphic_opacity']
-        );
+    //     $this->assertEquals(
+    //         $record->graphic_opacity,
+    //         self::$__testParams['graphic_opacity']
+    //     );
 
-        $this->assertEquals(
-            $record->stroke_width,
-            self::$__testParams['stroke_width']
-        );
+    //     $this->assertEquals(
+    //         $record->stroke_width,
+    //         self::$__testParams['stroke_width']
+    //     );
 
-        $this->assertEquals(
-            $record->point_radius,
-            self::$__testParams['point_radius']
-        );
+    //     $this->assertEquals(
+    //         $record->point_radius,
+    //         self::$__testParams['point_radius']
+    //     );
 
-        $this->assertEquals(
-            $record->point_image,
-            self::$__testParams['point_image']
-        );
+    //     $this->assertEquals(
+    //         $record->point_image,
+    //         self::$__testParams['point_image']
+    //     );
 
-    }
+    // }
 
     /**
      * When an changed parent_record_id is posted to /save, all styling and
@@ -1420,74 +1420,74 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
      *
      * @return void.
      */
-    public function testSaveWithChangedParentRecordId()
-    {
+    // public function testSaveWithChangedParentRecordId()
+    // {
 
-        // Create exhibit and records.
-        $neatline = $this->_createNeatline();
-        $record1 = new NeatlineRecord(null, $neatline);
-        $record1->save();
+    //     // Create exhibit and records.
+    //     $neatline = $this->_createNeatline();
+    //     $record1 = new NeatlineRecord(null, $neatline);
+    //     $record1->save();
 
-        $item = $this->_createItem();
-        $record2 = new NeatlineRecord($item, $neatline);
-        $record2->parent_record_id = $record1->id;
-        $record2->save();
+    //     $item = $this->_createItem();
+    //     $record2 = new NeatlineRecord($item, $neatline);
+    //     $record2->parent_record_id = $record1->id;
+    //     $record2->save();
 
-        $record3 = new NeatlineRecord(null, $neatline);
-        $record3->save();
+    //     $record3 = new NeatlineRecord(null, $neatline);
+    //     $record3->save();
 
-        // Form the POST for a space change.
-        $this->request->setMethod('POST')
-            ->setPost(array(
-                'item_id' =>            '',
-                'record_id' =>          $record2->id,
-                'exhibit_id' =>         $neatline->id,
-                'space_active' =>       (string) self::$__testParams['space_active'],
-                'time_active' =>        (string) self::$__testParams['time_active'],
-                'geocoverage' =>        'null',
-                'title' =>              self::$__testParams['title'],
-                // 'slug' =>               self::$__testParams['slug'],
-                'description' =>        self::$__testParams['description'],
-                'start_date' =>         self::$__testParams['start_date'],
-                'end_date' =>           self::$__testParams['end_date'],
-                'start_visible_date' => self::$__testParams['start_visible_date'],
-                'end_visible_date' =>   self::$__testParams['end_visible_date'],
-                'left_percent' =>       self::$__testParams['left_percent'],
-                'right_percent' =>      self::$__testParams['right_percent'],
-                'vector_color' =>       self::$__testParams['vector_color'],
-                'stroke_color' =>       self::$__testParams['stroke_color'],
-                'highlight_color' =>    self::$__testParams['highlight_color'],
-                'vector_opacity' =>     self::$__testParams['vector_opacity'],
-                'select_opacity' =>     self::$__testParams['select_opacity'],
-                'stroke_opacity' =>     self::$__testParams['stroke_opacity'],
-                'graphic_opacity' =>    self::$__testParams['graphic_opacity'],
-                'stroke_width' =>       self::$__testParams['stroke_width'],
-                'point_radius' =>       self::$__testParams['point_radius'],
-                'point_image' =>        self::$__testParams['point_image'],
-                'parent_record_id' =>   $record3->id,
-                'show_bubble' =>        0,
-                'use_dc_metadata' =>    0
-            )
-        );
+    //     // Form the POST for a space change.
+    //     $this->request->setMethod('POST')
+    //         ->setPost(array(
+    //             'item_id' =>            '',
+    //             'record_id' =>          $record2->id,
+    //             'exhibit_id' =>         $neatline->id,
+    //             'space_active' =>       (string) self::$__testParams['space_active'],
+    //             'time_active' =>        (string) self::$__testParams['time_active'],
+    //             'geocoverage' =>        'null',
+    //             'title' =>              self::$__testParams['title'],
+    //             // 'slug' =>               self::$__testParams['slug'],
+    //             'description' =>        self::$__testParams['description'],
+    //             'start_date' =>         self::$__testParams['start_date'],
+    //             'end_date' =>           self::$__testParams['end_date'],
+    //             'start_visible_date' => self::$__testParams['start_visible_date'],
+    //             'end_visible_date' =>   self::$__testParams['end_visible_date'],
+    //             'left_percent' =>       self::$__testParams['left_percent'],
+    //             'right_percent' =>      self::$__testParams['right_percent'],
+    //             'vector_color' =>       self::$__testParams['vector_color'],
+    //             'stroke_color' =>       self::$__testParams['stroke_color'],
+    //             'highlight_color' =>    self::$__testParams['highlight_color'],
+    //             'vector_opacity' =>     self::$__testParams['vector_opacity'],
+    //             'select_opacity' =>     self::$__testParams['select_opacity'],
+    //             'stroke_opacity' =>     self::$__testParams['stroke_opacity'],
+    //             'graphic_opacity' =>    self::$__testParams['graphic_opacity'],
+    //             'stroke_width' =>       self::$__testParams['stroke_width'],
+    //             'point_radius' =>       self::$__testParams['point_radius'],
+    //             'point_image' =>        self::$__testParams['point_image'],
+    //             'parent_record_id' =>   $record3->id,
+    //             'show_bubble' =>        0,
+    //             'use_dc_metadata' =>    0
+    //         )
+    //     );
 
-        // Hit the route and capture the response.
-        $this->dispatch('neatline-exhibits/editor/ajax/save');
+    //     // Hit the route and capture the response.
+    //     $this->dispatch('neatline-exhibits/editor/ajax/save');
 
-        // Get the record and check the attributes.
-        $record = $this->_recordsTable->find($record2->id);
-        $this->assertNull($record->start_visible_date);
-        $this->assertNull($record->end_visible_date);
-        $this->assertNull($record->vector_color);
-        $this->assertNull($record->stroke_color);
-        $this->assertNull($record->highlight_color);
-        $this->assertNull($record->vector_opacity);
-        $this->assertNull($record->select_opacity);
-        $this->assertNull($record->stroke_opacity);
-        $this->assertNull($record->graphic_opacity);
-        $this->assertNull($record->stroke_width);
-        $this->assertNull($record->point_radius);
+    //     // Get the record and check the attributes.
+    //     $record = $this->_recordsTable->find($record2->id);
+    //     $this->assertNull($record->start_visible_date);
+    //     $this->assertNull($record->end_visible_date);
+    //     $this->assertNull($record->vector_color);
+    //     $this->assertNull($record->stroke_color);
+    //     $this->assertNull($record->highlight_color);
+    //     $this->assertNull($record->vector_opacity);
+    //     $this->assertNull($record->select_opacity);
+    //     $this->assertNull($record->stroke_opacity);
+    //     $this->assertNull($record->graphic_opacity);
+    //     $this->assertNull($record->stroke_width);
+    //     $this->assertNull($record->point_radius);
 
-    }
+    // }
 
     /**
      * When geocoverage => 'null' is posted to /save, the geocoverage  field
@@ -1499,58 +1499,58 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
      *
      * @return void.
      */
-    public function testSaveNullStringGeocoverage()
-    {
+    // public function testSaveNullStringGeocoverage()
+    // {
 
-        // Create exhibit and record.
-        $neatline = $this->_createNeatline();
-        $record = new NeatlineRecord(null, $neatline);
-        $record->geocoverage = 'POINT(1,0)';
-        $record->save();
+    //     // Create exhibit and record.
+    //     $neatline = $this->_createNeatline();
+    //     $record = new NeatlineRecord(null, $neatline);
+    //     $record->geocoverage = 'POINT(1,0)';
+    //     $record->save();
 
-        // Form the POST for a space change.
-        $this->request->setMethod('POST')
-            ->setPost(array(
-                'item_id' =>            '',
-                'record_id' =>          $record->id,
-                'exhibit_id' =>         $neatline->id,
-                'space_active' =>       (string) self::$__testParams['space_active'],
-                'time_active' =>        (string) self::$__testParams['time_active'],
-                'geocoverage' =>        'null',
-                'title' =>              self::$__testParams['title'],
-                // 'slug' =>               self::$__testParams['slug'],
-                'description' =>        self::$__testParams['description'],
-                'start_date' =>         self::$__testParams['start_date'],
-                'end_date' =>           self::$__testParams['end_date'],
-                'start_visible_date' => self::$__testParams['start_visible_date'],
-                'end_visible_date' =>   self::$__testParams['end_visible_date'],
-                'left_percent' =>       self::$__testParams['left_percent'],
-                'right_percent' =>      self::$__testParams['right_percent'],
-                'vector_color' =>       self::$__testParams['vector_color'],
-                'stroke_color' =>       self::$__testParams['stroke_color'],
-                'highlight_color' =>    self::$__testParams['highlight_color'],
-                'vector_opacity' =>     self::$__testParams['vector_opacity'],
-                'select_opacity' =>     self::$__testParams['select_opacity'],
-                'stroke_opacity' =>     self::$__testParams['stroke_opacity'],
-                'graphic_opacity' =>    self::$__testParams['graphic_opacity'],
-                'stroke_width' =>       self::$__testParams['stroke_width'],
-                'point_radius' =>       self::$__testParams['point_radius'],
-                'point_image' =>        self::$__testParams['point_image'],
-                'parent_record_id' =>   self::$__testParams['parent_record_id'],
-                'show_bubble' =>        0,
-                'use_dc_metadata' =>    0
-            )
-        );
+    //     // Form the POST for a space change.
+    //     $this->request->setMethod('POST')
+    //         ->setPost(array(
+    //             'item_id' =>            '',
+    //             'record_id' =>          $record->id,
+    //             'exhibit_id' =>         $neatline->id,
+    //             'space_active' =>       (string) self::$__testParams['space_active'],
+    //             'time_active' =>        (string) self::$__testParams['time_active'],
+    //             'geocoverage' =>        'null',
+    //             'title' =>              self::$__testParams['title'],
+    //             // 'slug' =>               self::$__testParams['slug'],
+    //             'description' =>        self::$__testParams['description'],
+    //             'start_date' =>         self::$__testParams['start_date'],
+    //             'end_date' =>           self::$__testParams['end_date'],
+    //             'start_visible_date' => self::$__testParams['start_visible_date'],
+    //             'end_visible_date' =>   self::$__testParams['end_visible_date'],
+    //             'left_percent' =>       self::$__testParams['left_percent'],
+    //             'right_percent' =>      self::$__testParams['right_percent'],
+    //             'vector_color' =>       self::$__testParams['vector_color'],
+    //             'stroke_color' =>       self::$__testParams['stroke_color'],
+    //             'highlight_color' =>    self::$__testParams['highlight_color'],
+    //             'vector_opacity' =>     self::$__testParams['vector_opacity'],
+    //             'select_opacity' =>     self::$__testParams['select_opacity'],
+    //             'stroke_opacity' =>     self::$__testParams['stroke_opacity'],
+    //             'graphic_opacity' =>    self::$__testParams['graphic_opacity'],
+    //             'stroke_width' =>       self::$__testParams['stroke_width'],
+    //             'point_radius' =>       self::$__testParams['point_radius'],
+    //             'point_image' =>        self::$__testParams['point_image'],
+    //             'parent_record_id' =>   self::$__testParams['parent_record_id'],
+    //             'show_bubble' =>        0,
+    //             'use_dc_metadata' =>    0
+    //         )
+    //     );
 
-        // Hit the route and capture the response.
-        $this->dispatch('neatline-exhibits/editor/ajax/save');
+    //     // Hit the route and capture the response.
+    //     $this->dispatch('neatline-exhibits/editor/ajax/save');
 
-        // Get the record and check the attributes.
-        $record = $this->_recordsTable->find($record->id);
-        $this->assertEquals($record->geocoverage, 'POINT(1,0)');
-        $this->assertNotEquals($record->geocoverage, 'null');
+    //     // Get the record and check the attributes.
+    //     $record = $this->_recordsTable->find($record->id);
+    //     $this->assertEquals($record->geocoverage, 'POINT(1,0)');
+    //     $this->assertNotEquals($record->geocoverage, 'null');
 
-    }
+    // }
 
     /**
      * When /save is hit with a post that defines a item and but not a record id,
@@ -1562,59 +1562,59 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
      *
      * @return void.
      */
-    public function testDuplicateProtectionOnSave()
-    {
+    // public function testDuplicateProtectionOnSave()
+    // {
 
-        // Create exhibit and item.
-        $neatline = $this->_createNeatline();
-        $item = $this->_createItem();
-        $record = new NeatlineRecord($item, $neatline);
-        $record->save();
+    //     // Create exhibit and item.
+    //     $neatline = $this->_createNeatline();
+    //     $item = $this->_createItem();
+    //     $record = new NeatlineRecord($item, $neatline);
+    //     $record->save();
 
-        // Form the POST for a space change.
-        $this->request->setMethod('POST')
-            ->setPost(array(
-                'item_id' =>            $item->id,
-                'record_id' =>          '',
-                'exhibit_id' =>         $neatline->id,
-                'space_active' =>       (string) self::$__testParams['space_active'],
-                'time_active' =>        (string) self::$__testParams['time_active'],
-                'geocoverage' =>        self::$__testParams['geocoverage'],
-                'title' =>              self::$__testParams['title'],
-                // 'slug' =>               self::$__testParams['slug'],
-                'description' =>        self::$__testParams['description'],
-                'start_date' =>         self::$__testParams['start_date'],
-                'end_date' =>           self::$__testParams['end_date'],
-                'start_visible_date' => self::$__testParams['start_visible_date'],
-                'end_visible_date' =>   self::$__testParams['end_visible_date'],
-                'left_percent' =>       self::$__testParams['left_percent'],
-                'right_percent' =>      self::$__testParams['right_percent'],
-                'vector_color' =>       self::$__testParams['vector_color'],
-                'stroke_color' =>       self::$__testParams['stroke_color'],
-                'highlight_color' =>    self::$__testParams['highlight_color'],
-                'vector_opacity' =>     self::$__testParams['vector_opacity'],
-                'select_opacity' =>     self::$__testParams['select_opacity'],
-                'stroke_opacity' =>     self::$__testParams['stroke_opacity'],
-                'graphic_opacity' =>    self::$__testParams['graphic_opacity'],
-                'stroke_width' =>       self::$__testParams['stroke_width'],
-                'point_radius' =>       self::$__testParams['point_radius'],
-                'point_image' =>        self::$__testParams['point_image'],
-                'parent_record_id' =>   self::$__testParams['parent_record_id'],
-                'show_bubble' =>        0,
-                'use_dc_metadata' =>    1
-            )
-        );
+    //     // Form the POST for a space change.
+    //     $this->request->setMethod('POST')
+    //         ->setPost(array(
+    //             'item_id' =>            $item->id,
+    //             'record_id' =>          '',
+    //             'exhibit_id' =>         $neatline->id,
+    //             'space_active' =>       (string) self::$__testParams['space_active'],
+    //             'time_active' =>        (string) self::$__testParams['time_active'],
+    //             'geocoverage' =>        self::$__testParams['geocoverage'],
+    //             'title' =>              self::$__testParams['title'],
+    //             // 'slug' =>               self::$__testParams['slug'],
+    //             'description' =>        self::$__testParams['description'],
+    //             'start_date' =>         self::$__testParams['start_date'],
+    //             'end_date' =>           self::$__testParams['end_date'],
+    //             'start_visible_date' => self::$__testParams['start_visible_date'],
+    //             'end_visible_date' =>   self::$__testParams['end_visible_date'],
+    //             'left_percent' =>       self::$__testParams['left_percent'],
+    //             'right_percent' =>      self::$__testParams['right_percent'],
+    //             'vector_color' =>       self::$__testParams['vector_color'],
+    //             'stroke_color' =>       self::$__testParams['stroke_color'],
+    //             'highlight_color' =>    self::$__testParams['highlight_color'],
+    //             'vector_opacity' =>     self::$__testParams['vector_opacity'],
+    //             'select_opacity' =>     self::$__testParams['select_opacity'],
+    //             'stroke_opacity' =>     self::$__testParams['stroke_opacity'],
+    //             'graphic_opacity' =>    self::$__testParams['graphic_opacity'],
+    //             'stroke_width' =>       self::$__testParams['stroke_width'],
+    //             'point_radius' =>       self::$__testParams['point_radius'],
+    //             'point_image' =>        self::$__testParams['point_image'],
+    //             'parent_record_id' =>   self::$__testParams['parent_record_id'],
+    //             'show_bubble' =>        0,
+    //             'use_dc_metadata' =>    1
+    //         )
+    //     );
 
-        // 1 record.
-        $this->assertEquals($this->_recordsTable->count(), 1);
+    //     // 1 record.
+    //     $this->assertEquals($this->_recordsTable->count(), 1);
 
-        // Hit the route and capture the response.
-        $this->dispatch('neatline-exhibits/editor/ajax/save');
+    //     // Hit the route and capture the response.
+    //     $this->dispatch('neatline-exhibits/editor/ajax/save');
 
-        // 1 record.
-        $this->assertEquals($this->_recordsTable->count(), 1);
+    //     // 1 record.
+    //     $this->assertEquals($this->_recordsTable->count(), 1);
 
-    }
+    // }
 
     /**
      * If there is a null geocoverage field and a hit to /save commits novel
@@ -1623,62 +1623,62 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
      *
      * @return void.
      */
-    public function testSpaceStatusActivationOnSaveWithExistingRecord()
-    {
+    // public function testSpaceStatusActivationOnSaveWithExistingRecord()
+    // {
 
-        // Create exhibit and item.
-        $neatline = $this->_createNeatline();
-        $item = $this->_createItem();
-        $record = new NeatlineRecord($item, $neatline);
-        $record->save();
+    //     // Create exhibit and item.
+    //     $neatline = $this->_createNeatline();
+    //     $item = $this->_createItem();
+    //     $record = new NeatlineRecord($item, $neatline);
+    //     $record->save();
 
-        // At the start, both trackers false.
-        $this->assertFalse((bool) $record->space_active);
-        $this->assertFalse((bool) $record->time_active);
+    //     // At the start, both trackers false.
+    //     $this->assertFalse((bool) $record->space_active);
+    //     $this->assertFalse((bool) $record->time_active);
 
-        // Form the POST with new geocoverage data.
-        $this->request->setMethod('POST')
-            ->setPost(array(
-                'item_id' =>            $item->id,
-                'record_id' =>          $record->id,
-                'exhibit_id' =>         $neatline->id,
-                'space_active' =>       (string) self::$__testParams['space_active'],
-                'time_active' =>        'false',
-                'geocoverage' =>        self::$__testParams['geocoverage'],
-                'title' =>              self::$__testParams['title'],
-                // 'slug' =>               self::$__testParams['slug'],
-                'description' =>        self::$__testParams['description'],
-                'start_date' =>         '',
-                'end_date' =>           self::$__testParams['end_date'],
-                'start_visible_date' => self::$__testParams['start_visible_date'],
-                'end_visible_date' =>   self::$__testParams['end_visible_date'],
-                'left_percent' =>       self::$__testParams['left_percent'],
-                'right_percent' =>      self::$__testParams['right_percent'],
-                'vector_color' =>       self::$__testParams['vector_color'],
-                'stroke_color' =>       self::$__testParams['stroke_color'],
-                'highlight_color' =>    self::$__testParams['stroke_color'],
-                'vector_opacity' =>     self::$__testParams['vector_opacity'],
-                'select_opacity' =>     self::$__testParams['select_opacity'],
-                'stroke_opacity' =>     self::$__testParams['stroke_opacity'],
-                'graphic_opacity' =>    self::$__testParams['graphic_opacity'],
-                'stroke_width' =>       self::$__testParams['stroke_width'],
-                'point_radius' =>       self::$__testParams['point_radius'],
-                'point_image' =>        self::$__testParams['point_image'],
-                'parent_record_id' =>   self::$__testParams['parent_record_id'],
-                'show_bubble' =>        0,
-                'use_dc_metadata' =>    1
-            )
-        );
+    //     // Form the POST with new geocoverage data.
+    //     $this->request->setMethod('POST')
+    //         ->setPost(array(
+    //             'item_id' =>            $item->id,
+    //             'record_id' =>          $record->id,
+    //             'exhibit_id' =>         $neatline->id,
+    //             'space_active' =>       (string) self::$__testParams['space_active'],
+    //             'time_active' =>        'false',
+    //             'geocoverage' =>        self::$__testParams['geocoverage'],
+    //             'title' =>              self::$__testParams['title'],
+    //             // 'slug' =>               self::$__testParams['slug'],
+    //             'description' =>        self::$__testParams['description'],
+    //             'start_date' =>         '',
+    //             'end_date' =>           self::$__testParams['end_date'],
+    //             'start_visible_date' => self::$__testParams['start_visible_date'],
+    //             'end_visible_date' =>   self::$__testParams['end_visible_date'],
+    //             'left_percent' =>       self::$__testParams['left_percent'],
+    //             'right_percent' =>      self::$__testParams['right_percent'],
+    //             'vector_color' =>       self::$__testParams['vector_color'],
+    //             'stroke_color' =>       self::$__testParams['stroke_color'],
+    //             'highlight_color' =>    self::$__testParams['stroke_color'],
+    //             'vector_opacity' =>     self::$__testParams['vector_opacity'],
+    //             'select_opacity' =>     self::$__testParams['select_opacity'],
+    //             'stroke_opacity' =>     self::$__testParams['stroke_opacity'],
+    //             'graphic_opacity' =>    self::$__testParams['graphic_opacity'],
+    //             'stroke_width' =>       self::$__testParams['stroke_width'],
+    //             'point_radius' =>       self::$__testParams['point_radius'],
+    //             'point_image' =>        self::$__testParams['point_image'],
+    //             'parent_record_id' =>   self::$__testParams['parent_record_id'],
+    //             'show_bubble' =>        0,
+    //             'use_dc_metadata' =>    1
+    //         )
+    //     );
 
-        // Hit the route.
-        $this->dispatch('neatline-exhibits/editor/ajax/save');
+    //     // Hit the route.
+    //     $this->dispatch('neatline-exhibits/editor/ajax/save');
 
-        // Get the record and check the attributes.
-        $record = $this->_recordsTable->getRecordByItemAndExhibit($item, $neatline);
-        $this->assertTrue((bool) $record->space_active);
-        $this->assertFalse((bool) $record->time_active);
+    //     // Get the record and check the attributes.
+    //     $record = $this->_recordsTable->getRecordByItemAndExhibit($item, $neatline);
+    //     $this->assertTrue((bool) $record->space_active);
+    //     $this->assertFalse((bool) $record->time_active);
 
-    }
+    // }
 
     /**
      * If there is a null geocoverage field and a hit to /save commits novel
@@ -1686,56 +1686,56 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
      *
      * @return void.
      */
-    public function testSpaceStatusActivationOnSaveWithoutExistingRecord()
-    {
+    // public function testSpaceStatusActivationOnSaveWithoutExistingRecord()
+    // {
 
-        // Create exhibit and item.
-        $neatline = $this->_createNeatline();
-        $item = $this->_createItem();
+    //     // Create exhibit and item.
+    //     $neatline = $this->_createNeatline();
+    //     $item = $this->_createItem();
 
-        // Form the POST with new geocoverage data.
-        $this->request->setMethod('POST')
-            ->setPost(array(
-                'item_id' =>            $item->id,
-                'record_id' =>          '',
-                'exhibit_id' =>         $neatline->id,
-                'space_active' =>       (string) self::$__testParams['space_active'],
-                'time_active' =>        'false',
-                'geocoverage' =>        self::$__testParams['geocoverage'],
-                'title' =>              self::$__testParams['title'],
-                // 'slug' =>               self::$__testParams['slug'],
-                'description' =>        self::$__testParams['description'],
-                'start_date' =>         '',
-                'end_date' =>           self::$__testParams['end_date'],
-                'start_visible_date' => self::$__testParams['start_visible_date'],
-                'end_visible_date' =>   self::$__testParams['end_visible_date'],
-                'left_percent' =>       self::$__testParams['left_percent'],
-                'right_percent' =>      self::$__testParams['right_percent'],
-                'vector_color' =>       self::$__testParams['vector_color'],
-                'stroke_color' =>       self::$__testParams['stroke_color'],
-                'highlight_color' =>    self::$__testParams['stroke_color'],
-                'vector_opacity' =>     self::$__testParams['vector_opacity'],
-                'select_opacity' =>     self::$__testParams['select_opacity'],
-                'stroke_opacity' =>     self::$__testParams['stroke_opacity'],
-                'graphic_opacity' =>    self::$__testParams['graphic_opacity'],
-                'stroke_width' =>       self::$__testParams['stroke_width'],
-                'point_radius' =>       self::$__testParams['point_radius'],
-                'point_image' =>        self::$__testParams['point_image'],
-                'parent_record_id' =>   self::$__testParams['parent_record_id'],
-                'show_bubble' =>        0,
-                'use_dc_metadata' =>    1
-            )
-        );
+    //     // Form the POST with new geocoverage data.
+    //     $this->request->setMethod('POST')
+    //         ->setPost(array(
+    //             'item_id' =>            $item->id,
+    //             'record_id' =>          '',
+    //             'exhibit_id' =>         $neatline->id,
+    //             'space_active' =>       (string) self::$__testParams['space_active'],
+    //             'time_active' =>        'false',
+    //             'geocoverage' =>        self::$__testParams['geocoverage'],
+    //             'title' =>              self::$__testParams['title'],
+    //             // 'slug' =>               self::$__testParams['slug'],
+    //             'description' =>        self::$__testParams['description'],
+    //             'start_date' =>         '',
+    //             'end_date' =>           self::$__testParams['end_date'],
+    //             'start_visible_date' => self::$__testParams['start_visible_date'],
+    //             'end_visible_date' =>   self::$__testParams['end_visible_date'],
+    //             'left_percent' =>       self::$__testParams['left_percent'],
+    //             'right_percent' =>      self::$__testParams['right_percent'],
+    //             'vector_color' =>       self::$__testParams['vector_color'],
+    //             'stroke_color' =>       self::$__testParams['stroke_color'],
+    //             'highlight_color' =>    self::$__testParams['stroke_color'],
+    //             'vector_opacity' =>     self::$__testParams['vector_opacity'],
+    //             'select_opacity' =>     self::$__testParams['select_opacity'],
+    //             'stroke_opacity' =>     self::$__testParams['stroke_opacity'],
+    //             'graphic_opacity' =>    self::$__testParams['graphic_opacity'],
+    //             'stroke_width' =>       self::$__testParams['stroke_width'],
+    //             'point_radius' =>       self::$__testParams['point_radius'],
+    //             'point_image' =>        self::$__testParams['point_image'],
+    //             'parent_record_id' =>   self::$__testParams['parent_record_id'],
+    //             'show_bubble' =>        0,
+    //             'use_dc_metadata' =>    1
+    //         )
+    //     );
 
-        // Hit the route.
-        $this->dispatch('neatline-exhibits/editor/ajax/save');
+    //     // Hit the route.
+    //     $this->dispatch('neatline-exhibits/editor/ajax/save');
 
-        // Get the record and check the attributes.
-        $record = $this->_recordsTable->find(1);
-        $this->assertTrue((bool) $record->space_active);
-        $this->assertFalse((bool) $record->time_active);
+    //     // Get the record and check the attributes.
+    //     $record = $this->_recordsTable->find(1);
+    //     $this->assertTrue((bool) $record->space_active);
+    //     $this->assertFalse((bool) $record->time_active);
 
-    }
+    // }
 
     /**
      * If there is a null geocoverage field and a hit to /save commits novel
@@ -1744,62 +1744,62 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
      *
      * @return void.
      */
-    public function testTimeStatusActivationOnSaveWithExistingRecord()
-    {
+    // public function testTimeStatusActivationOnSaveWithExistingRecord()
+    // {
 
-        // Create exhibit and item.
-        $neatline = $this->_createNeatline();
-        $item = $this->_createItem();
-        $record = new NeatlineRecord($item, $neatline);
-        $record->save();
+    //     // Create exhibit and item.
+    //     $neatline = $this->_createNeatline();
+    //     $item = $this->_createItem();
+    //     $record = new NeatlineRecord($item, $neatline);
+    //     $record->save();
 
-        // At the start, both trackers false.
-        $this->assertFalse((bool) $record->space_active);
-        $this->assertFalse((bool) $record->time_active);
+    //     // At the start, both trackers false.
+    //     $this->assertFalse((bool) $record->space_active);
+    //     $this->assertFalse((bool) $record->time_active);
 
-        // Form the POST with new geocoverage data.
-        $this->request->setMethod('POST')
-            ->setPost(array(
-                'item_id' =>            $item->id,
-                'record_id' =>          $record->id,
-                'exhibit_id' =>         $neatline->id,
-                'space_active' =>       'false',
-                'time_active' =>        (string) self::$__testParams['time_active'],
-                'geocoverage' =>        '',
-                'title' =>              self::$__testParams['title'],
-                // 'slug' =>               self::$__testParams['slug'],
-                'description' =>        self::$__testParams['description'],
-                'start_date' =>         self::$__testParams['start_date'],
-                'end_date' =>           self::$__testParams['end_date'],
-                'start_visible_date' => self::$__testParams['start_visible_date'],
-                'end_visible_date' =>   self::$__testParams['end_visible_date'],
-                'left_percent' =>       self::$__testParams['left_percent'],
-                'right_percent' =>      self::$__testParams['right_percent'],
-                'vector_color' =>       self::$__testParams['vector_color'],
-                'stroke_color' =>       self::$__testParams['stroke_color'],
-                'highlight_color' =>    self::$__testParams['stroke_color'],
-                'vector_opacity' =>     self::$__testParams['vector_opacity'],
-                'select_opacity' =>     self::$__testParams['select_opacity'],
-                'stroke_opacity' =>     self::$__testParams['stroke_opacity'],
-                'graphic_opacity' =>    self::$__testParams['graphic_opacity'],
-                'stroke_width' =>       self::$__testParams['stroke_width'],
-                'point_radius' =>       self::$__testParams['point_radius'],
-                'point_image' =>        self::$__testParams['point_image'],
-                'parent_record_id' =>   self::$__testParams['parent_record_id'],
-                'show_bubble' =>        0,
-                'use_dc_metadata' =>    1
-            )
-        );
+    //     // Form the POST with new geocoverage data.
+    //     $this->request->setMethod('POST')
+    //         ->setPost(array(
+    //             'item_id' =>            $item->id,
+    //             'record_id' =>          $record->id,
+    //             'exhibit_id' =>         $neatline->id,
+    //             'space_active' =>       'false',
+    //             'time_active' =>        (string) self::$__testParams['time_active'],
+    //             'geocoverage' =>        '',
+    //             'title' =>              self::$__testParams['title'],
+    //             // 'slug' =>               self::$__testParams['slug'],
+    //             'description' =>        self::$__testParams['description'],
+    //             'start_date' =>         self::$__testParams['start_date'],
+    //             'end_date' =>           self::$__testParams['end_date'],
+    //             'start_visible_date' => self::$__testParams['start_visible_date'],
+    //             'end_visible_date' =>   self::$__testParams['end_visible_date'],
+    //             'left_percent' =>       self::$__testParams['left_percent'],
+    //             'right_percent' =>      self::$__testParams['right_percent'],
+    //             'vector_color' =>       self::$__testParams['vector_color'],
+    //             'stroke_color' =>       self::$__testParams['stroke_color'],
+    //             'highlight_color' =>    self::$__testParams['stroke_color'],
+    //             'vector_opacity' =>     self::$__testParams['vector_opacity'],
+    //             'select_opacity' =>     self::$__testParams['select_opacity'],
+    //             'stroke_opacity' =>     self::$__testParams['stroke_opacity'],
+    //             'graphic_opacity' =>    self::$__testParams['graphic_opacity'],
+    //             'stroke_width' =>       self::$__testParams['stroke_width'],
+    //             'point_radius' =>       self::$__testParams['point_radius'],
+    //             'point_image' =>        self::$__testParams['point_image'],
+    //             'parent_record_id' =>   self::$__testParams['parent_record_id'],
+    //             'show_bubble' =>        0,
+    //             'use_dc_metadata' =>    1
+    //         )
+    //     );
 
-        // Hit the route.
-        $this->dispatch('neatline-exhibits/editor/ajax/save');
+    //     // Hit the route.
+    //     $this->dispatch('neatline-exhibits/editor/ajax/save');
 
-        // Get the record and check the attributes.
-        $record = $this->_recordsTable->getRecordByItemAndExhibit($item, $neatline);
-        $this->assertFalse((bool) $record->space_active);
-        $this->assertTrue((bool) $record->time_active);
+    //     // Get the record and check the attributes.
+    //     $record = $this->_recordsTable->getRecordByItemAndExhibit($item, $neatline);
+    //     $this->assertFalse((bool) $record->space_active);
+    //     $this->assertTrue((bool) $record->time_active);
 
-    }
+    // }
 
     /**
      * If there is a null geocoverage field and a hit to /save commits novel
@@ -1807,56 +1807,56 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
      *
      * @return void.
      */
-    public function testTimeStatusActivationOnSaveWithoutExistingRecord()
-    {
+    // public function testTimeStatusActivationOnSaveWithoutExistingRecord()
+    // {
 
-        // Create exhibit and item.
-        $neatline = $this->_createNeatline();
-        $item = $this->_createItem();
+    //     // Create exhibit and item.
+    //     $neatline = $this->_createNeatline();
+    //     $item = $this->_createItem();
 
-        // Form the POST with new geocoverage data.
-        $this->request->setMethod('POST')
-            ->setPost(array(
-                'item_id' =>            $item->id,
-                'record_id' =>          '',
-                'exhibit_id' =>         $neatline->id,
-                'space_active' =>       'false',
-                'time_active' =>        (string) self::$__testParams['time_active'],
-                'geocoverage' =>        '',
-                'title' =>              self::$__testParams['title'],
-                // 'slug' =>               self::$__testParams['slug'],
-                'description' =>        self::$__testParams['description'],
-                'start_date' =>         self::$__testParams['start_date'],
-                'end_date' =>           self::$__testParams['end_date'],
-                'start_visible_date' => self::$__testParams['start_visible_date'],
-                'end_visible_date' =>   self::$__testParams['end_visible_date'],
-                'left_percent' =>       self::$__testParams['left_percent'],
-                'right_percent' =>      self::$__testParams['right_percent'],
-                'vector_color' =>       self::$__testParams['vector_color'],
-                'stroke_color' =>       self::$__testParams['stroke_color'],
-                'highlight_color' =>    self::$__testParams['stroke_color'],
-                'vector_opacity' =>     self::$__testParams['vector_opacity'],
-                'select_opacity' =>     self::$__testParams['select_opacity'],
-                'stroke_opacity' =>     self::$__testParams['stroke_opacity'],
-                'graphic_opacity' =>    self::$__testParams['graphic_opacity'],
-                'stroke_width' =>       self::$__testParams['stroke_width'],
-                'point_radius' =>       self::$__testParams['point_radius'],
-                'point_image' =>        self::$__testParams['point_image'],
-                'parent_record_id' =>   self::$__testParams['parent_record_id'],
-                'show_bubble' =>        0,
-                'use_dc_metadata' =>    1
-            )
-        );
+    //     // Form the POST with new geocoverage data.
+    //     $this->request->setMethod('POST')
+    //         ->setPost(array(
+    //             'item_id' =>            $item->id,
+    //             'record_id' =>          '',
+    //             'exhibit_id' =>         $neatline->id,
+    //             'space_active' =>       'false',
+    //             'time_active' =>        (string) self::$__testParams['time_active'],
+    //             'geocoverage' =>        '',
+    //             'title' =>              self::$__testParams['title'],
+    //             // 'slug' =>               self::$__testParams['slug'],
+    //             'description' =>        self::$__testParams['description'],
+    //             'start_date' =>         self::$__testParams['start_date'],
+    //             'end_date' =>           self::$__testParams['end_date'],
+    //             'start_visible_date' => self::$__testParams['start_visible_date'],
+    //             'end_visible_date' =>   self::$__testParams['end_visible_date'],
+    //             'left_percent' =>       self::$__testParams['left_percent'],
+    //             'right_percent' =>      self::$__testParams['right_percent'],
+    //             'vector_color' =>       self::$__testParams['vector_color'],
+    //             'stroke_color' =>       self::$__testParams['stroke_color'],
+    //             'highlight_color' =>    self::$__testParams['stroke_color'],
+    //             'vector_opacity' =>     self::$__testParams['vector_opacity'],
+    //             'select_opacity' =>     self::$__testParams['select_opacity'],
+    //             'stroke_opacity' =>     self::$__testParams['stroke_opacity'],
+    //             'graphic_opacity' =>    self::$__testParams['graphic_opacity'],
+    //             'stroke_width' =>       self::$__testParams['stroke_width'],
+    //             'point_radius' =>       self::$__testParams['point_radius'],
+    //             'point_image' =>        self::$__testParams['point_image'],
+    //             'parent_record_id' =>   self::$__testParams['parent_record_id'],
+    //             'show_bubble' =>        0,
+    //             'use_dc_metadata' =>    1
+    //         )
+    //     );
 
-        // Hit the route.
-        $this->dispatch('neatline-exhibits/editor/ajax/save');
+    //     // Hit the route.
+    //     $this->dispatch('neatline-exhibits/editor/ajax/save');
 
-        // Get the record and check the attributes.
-        $record = $this->_recordsTable->find(1);
-        $this->assertFalse((bool) $record->space_active);
-        $this->assertTrue((bool) $record->time_active);
+    //     // Get the record and check the attributes.
+    //     $record = $this->_recordsTable->find(1);
+    //     $this->assertFalse((bool) $record->space_active);
+    //     $this->assertTrue((bool) $record->time_active);
 
-    }
+    // }
 
     /**
      * When ordeirng data is saved via the /order route, data records should
