@@ -48,3 +48,17 @@ task :rebuild do
   Rake::Task['clean'].invoke
   Rake::Task['build'].invoke
 end
+
+namespace :dev do
+
+  desc 'Insert exhibit'
+  task :exhibit do
+    sh %{bash sql/insert_exhibit.sh}
+  end
+
+  desc 'Clear exhibits'
+  task :clear do
+    sh %{bash sql/clear_exhibit.sh}
+  end
+
+end
