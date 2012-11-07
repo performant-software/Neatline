@@ -1242,9 +1242,9 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
             'show_bubble'         => $this->show_bubble,
 
             // Map:
-            'center'              => $this->map_bounds,
-            'zoom'                => $this->map_zoom,
-            'wkt'                 => $this->getGeocoverage(),
+            'map_focus'           => $this->map_bounds,
+            'map_zoom'            => $this->map_zoom,
+            'coverage'            => $this->getGeocoverage(),
             'wmsAddress'          => null,
             'layers'              => null,
 
