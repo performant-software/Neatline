@@ -34,9 +34,6 @@
 $title = neatline('name');
 echo head(array('title' => $title, 'bodyclass' => 'neatline neatline-'.neatline('id'))); ?>
 
-<!-- The core exhibit header. -->
-<?php echo $this->partial('index/_neatline_header.php'); ?>
-
 <!-- The core Neatline partial. -->
 <?php echo $this->partial('neatline/_neatline.php', array(
     'exhibit' => get_current_neatline()
