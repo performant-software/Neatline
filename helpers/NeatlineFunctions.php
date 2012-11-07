@@ -37,7 +37,7 @@ function neatline_queueNeatlineAssets($exhibit)
     $headScript = get_view()->headScript();
     $headScript->appendScript('', 'text/javascript', array('src' => $google));
 
-    queue_css_file('payloads/neatline');
+    queue_css_file('v2/payloads/neatline');
     queue_css_file('neatline-jquery-ui');
     queue_css_file('openlayers/theme/default/style');
     neatline_queueExhibitCss($exhibit);

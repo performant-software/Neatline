@@ -39,7 +39,7 @@ class Neatline_HelpersTest extends Neatline_Test_AppTestCase
     {
 
         // Create exhibits, hit route.
-        for ($i = 0; $i < 10; $i++)$this->__exhibit();
+        for ($i = 0; $i < 10; $i++) $this->__exhibit();
         $this->dispatch('neatline-exhibits');
 
         // Check for 10 exhibits.
@@ -131,7 +131,12 @@ class Neatline_HelpersTest extends Neatline_Test_AppTestCase
     {
 
         // Create exhibit, hit /show.
-        $neatline = $this->__exhibit('test-exhibit');
+        $exhibit = $this->__exhibit('test-exhibit');
+        $exhibit->title = 'Test Exhibit';
+        $exhibit->description = 'Test description.';
+        $exhibit->save();
+
+        // Hit /show.
         $this->dispatch('neatline-exhibits/show/test-exhibit');
 
         // Neatline Name
@@ -143,8 +148,8 @@ class Neatline_HelpersTest extends Neatline_Test_AppTestCase
         $this->assertEquals('Test description.', neatline('Description'));
 
         // Neatline ID
-        $this->assertEquals($neatline->id, neatline('id'));
-        $this->assertEquals($neatline->id, neatline('ID'));
+        $this->assertEquals($exhibit->id, neatline('id'));
+        $this->assertEquals($exhibit->id, neatline('ID'));
 
         $this->assertEquals('test-exhibit', neatline('slug'));
         $this->assertEquals('test-exhibit', neatline('Slug'));

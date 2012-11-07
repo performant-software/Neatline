@@ -11,4 +11,4 @@ views/shared/css/exhibits/
 node_modules/
 views/shared/javascripts/v2/payloads/
 views/shared/javascripts/v2/components/
-views/shared/css/payloads/
+views/shared/css/v2/payloads/

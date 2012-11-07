@@ -32,14 +32,15 @@ task :build do
   sh %{cd #{js} && bower install}
   sh %{cd #{js}/components/bootstrap && make bootstrap}
   sh %{grunt min:neatline}
+  sh %{grunt stylus}
 end
 
 desc 'Clean pacakges'
 task :clean do
   sh %{rm -rf node_modules}
-  sh %{rm -rf views/shared/css/payloads}
   sh %{rm -rf views/shared/javascripts/v2/payloads}
   sh %{rm -rf views/shared/javascripts/v2/components}
+  sh %{rm -rf views/shared/css/v2/payloads}
 end
 
 desc 'Rebuild the application'

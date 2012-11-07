@@ -11,8 +11,14 @@ module.exports = function(grunt) {
 
   // Load tasks.
   grunt.loadNpmTasks('grunt-css');
+  grunt.loadNpmTasks('grunt-stylus');
 
-  var vendor = [
+  // Paths.
+  var js = 'views/shared/javascripts/v2/payloads/';
+  var stylus = 'views/shared/css/v2/stylus/';
+  var css = 'views/shared/css/v2/payloads/';
+
+  var vendorFiles = [
     c.components+c.vendor.jquery,
     c.components+c.vendor.underscore,
     c.components+c.vendor.backbone,
@@ -22,15 +28,15 @@ module.exports = function(grunt) {
     c.components+c.vendor.d3
   ];
 
-  var js = 'views/shared/javascripts/v2/payloads/';
-  var css = 'views/shared/css/payloads/';
+  var neatlineStylus = {};
+  neatlineStylus[css+'neatline.css'] = stylus+'neatline.styl';
 
   grunt.initConfig({
 
     concat: {
 
       neatline: {
-        src: vendor.concat([
+        src: vendorFiles.concat([
           c.apps.neatline+'app.js',
           c.apps.neatline+'collections/*.js',
           c.apps.neatline+'views/*.js',
@@ -52,19 +58,17 @@ module.exports = function(grunt) {
 
     },
 
-    cssmin: {
-
-      neatline: {
-        src: [],
-        dest: css+'neatline.css'
+    stylus: {
+      compile: {
+        options: {},
+        files: neatlineStylus
       }
-
     },
 
     watch: {
       neatline: {
         files: ['<config:concat.neatline.src>'],
-        tasks: ['concat:neatline']
+        tasks: ['concat:neatline', 'stylus']
       }
     }
 
