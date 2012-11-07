@@ -57,7 +57,7 @@ class Neatline_NeatlineExhibitTest extends Neatline_Test_AppTestCase
         $exhibit->context_band_height =     30;
         $exhibit->h_percent =               50;
         $exhibit->v_percent =               50;
-        $exhibit->map_bounds =              'CENTER()';
+        $exhibit->map_focus =              'CENTER()';
         $exhibit->map_zoom =                1;
         $exhibit->focus_date =              'date';
         $exhibit->timeline_zoom =           10;
@@ -97,7 +97,7 @@ class Neatline_NeatlineExhibitTest extends Neatline_Test_AppTestCase
         $this->assertEquals($exhibit->context_band_height, 30);
         $this->assertEquals($exhibit->h_percent, 50);
         $this->assertEquals($exhibit->v_percent, 50);
-        $this->assertEquals($exhibit->map_bounds, 'CENTER()');
+        $this->assertEquals($exhibit->map_focus, 'CENTER()');
         $this->assertEquals($exhibit->map_zoom, 1);
         $this->assertEquals($exhibit->focus_date, 'date');
         $this->assertEquals($exhibit->timeline_zoom, 10);

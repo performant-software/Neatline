@@ -361,7 +361,7 @@ class Neatline_EditorController extends Omeka_Controller_AbstractActionControlle
         $exhibit = $this->_neatlinesTable->find($exhibitId);
 
         // Set values.
-        $exhibit->map_bounds = $mapCenter;
+        $exhibit->map_focus = $mapCenter;
         $exhibit->map_zoom = intval($mapZoom);
         $exhibit->focus_date = $timelineCenter;
         $exhibit->timeline_zoom = $timelineZoom;
@@ -459,7 +459,7 @@ class Neatline_EditorController extends Omeka_Controller_AbstractActionControlle
 
         }
 
-        $record->map_bounds =       $center;
+        $record->map_focus =       $center;
         $record->map_zoom =         $zoom;
         $record->space_active =     1;
         $record->save();

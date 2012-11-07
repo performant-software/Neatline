@@ -767,8 +767,8 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
         $record2->geocoverage = 'POINT(0,1)';
         $record1->space_active = 1;
         $record2->space_active = 1;
-        $record1->map_bounds = 'CENTER(1)';
-        $record2->map_bounds = 'CENTER(2)';
+        $record1->map_focus = 'CENTER(1)';
+        $record2->map_focus = 'CENTER(2)';
         $record1->map_zoom = 4;
         $record2->map_zoom = 5;
         $record1->start_visible_date = '1864-04-26 14:39:22';

@@ -33,7 +33,7 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
         'left_percent' => 0,
         'right_percent' => 100,
         'geocoverage' => '[POINT(-1.0, 1.0)]',
-        'map_bounds' => '[POINT(-1.0, 1.0)]',
+        'map_focus' => '[POINT(-1.0, 1.0)]',
         'map_zoom' => 5,
         'space_active' => true,
         'time_active' => true,
@@ -83,7 +83,7 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
         $record->time_active =                  1;
         $record->items_active =                 1;
         $record->display_order =                1;
-        $record->map_bounds =                   'CENTER()';
+        $record->map_focus =                   'CENTER()';
         $record->map_zoom =                     5;
         $record->save();
 
@@ -117,7 +117,7 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
         $this->assertEquals($record->time_active, 1);
         $this->assertEquals($record->items_active, 1);
         $this->assertEquals($record->display_order, 1);
-        $this->assertEquals($record->map_bounds, 'CENTER()');
+        $this->assertEquals($record->map_focus, 'CENTER()');
         $this->assertEquals($record->map_zoom, 5);
 
     }
@@ -2414,7 +2414,7 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
         $record->show_bubble =          self::$__testParams['show_bubble'];
 
         // Map.
-        $record->map_bounds =           self::$__testParams['map_bounds'];
+        $record->map_focus =           self::$__testParams['map_focus'];
         $record->map_zoom =             self::$__testParams['map_zoom'];
         $record->geocoverage =          self::$__testParams['geocoverage'];
 
@@ -2458,7 +2458,7 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
                 'show_bubble'           => 1,
 
                 // Map.
-                'map_focus'             => self::$__testParams['map_bounds'],
+                'map_focus'             => self::$__testParams['map_focus'],
                 'map_zoom'              => self::$__testParams['map_zoom'],
                 'coverage'              => self::$__testParams['geocoverage'],
                 'wmsAddress'            => null,

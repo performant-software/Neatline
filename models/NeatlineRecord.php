@@ -168,7 +168,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
      * Default map focus position
      * varchar(100) NULL
      */
-    public $map_bounds;
+    public $map_focus;
 
     /**
      * Default map zoom level.
@@ -1234,7 +1234,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
             'show_bubble'         => $this->show_bubble,
 
             // Map:
-            'map_focus'           => $this->map_bounds,
+            'map_focus'           => $this->map_focus,
             'map_zoom'            => $this->map_zoom,
             'coverage'            => $this->getGeocoverage(),
             'wmsAddress'          => null,
@@ -1296,7 +1296,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
             'stroke_width'        => $this->getStyle('stroke_width'),
             'point_radius'        => $this->getStyle('point_radius'),
             'point_image'         => $this->getNotEmpty('point_image'),
-            'center'              => $this->map_bounds,
+            'center'              => $this->map_focus,
             'zoom'                => $this->map_zoom,
             'wkt'                 => $this->getGeocoverage(),
             'start_visible_date'  => $this->getStartVisibleDate(),

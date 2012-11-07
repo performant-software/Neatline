@@ -1993,7 +1993,7 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
         $this->assertContains('"is_items":1', $response);
         $this->assertContains('"h_percent":30', $response);
         $this->assertContains('"v_percent":70', $response);
-        $this->assertContains('"map_bounds":null', $response);
+        $this->assertContains('"map_focus":null', $response);
         $this->assertContains('"map_zoom":null', $response);
         $this->assertContains('"focus_date":null', $response);
         $this->assertContains('"vector_color":null', $response);
@@ -2075,7 +2075,7 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
         $this->assertContains('"is_items":1', $response);
         $this->assertContains('"h_percent":30', $response);
         $this->assertContains('"v_percent":70', $response);
-        $this->assertContains('"map_bounds":null', $response);
+        $this->assertContains('"map_focus":null', $response);
         $this->assertContains('"map_zoom":null', $response);
         $this->assertContains('"focus_date":null', $response);
         $this->assertContains('"vector_color":null', $response);
@@ -2123,7 +2123,7 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
         $exhibit = $this->_exhibitsTable->find($exhibit->id);
 
         // Check the attributes.
-        $this->assertEquals($exhibit->map_bounds, 'center');
+        $this->assertEquals($exhibit->map_focus, 'center');
         $this->assertEquals($exhibit->map_zoom, 1);
         $this->assertEquals($exhibit->base_layer, $layer->id);
         $this->assertEquals($exhibit->focus_date, 'center');
@@ -2168,7 +2168,7 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
         $this->assertEquals($this->_recordsTable->count(), 1);
 
         // Check the attributes.
-        $this->assertEquals($record->map_bounds, 'CENTER()');
+        $this->assertEquals($record->map_focus, 'CENTER()');
         $this->assertEquals($record->map_zoom, 5);
         $this->assertEquals($record->space_active, 1);
 
@@ -2210,7 +2210,7 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
         $this->assertEquals($this->_recordsTable->count(), 1);
 
         // Check the attributes.
-        $this->assertEquals($record->map_bounds, 'CENTER()');
+        $this->assertEquals($record->map_focus, 'CENTER()');
         $this->assertEquals($record->map_zoom, 5);
         $this->assertEquals($record->space_active, 1);
 
@@ -2253,7 +2253,7 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
         $this->assertEquals($this->_recordsTable->count(), 1);
 
         // Check the attributes.
-        $this->assertEquals($record->map_bounds, 'CENTER()');
+        $this->assertEquals($record->map_focus, 'CENTER()');
         $this->assertEquals($record->map_zoom, 5);
         $this->assertEquals($record->space_active, 1);
 
@@ -2297,7 +2297,7 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
         $this->assertEquals($this->_recordsTable->count(), 1);
 
         // Check the attributes.
-        $this->assertEquals($record->map_bounds, 'CENTER()');
+        $this->assertEquals($record->map_focus, 'CENTER()');
         $this->assertEquals($record->map_zoom, 5);
         $this->assertEquals($record->space_active, 1);
 

@@ -79,7 +79,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
             `is_context_band`       tinyint(1) NOT NULL,
             `h_percent`             int(10) unsigned NULL,
             `v_percent`             int(10) unsigned NULL,
-            `map_bounds`            varchar(100) NULL,
+            `map_focus`             varchar(100) NULL,
             `map_zoom`              int(10) unsigned NULL,
             `focus_date`            varchar(100) NULL,
             `timeline_zoom`         int(10) unsigned NULL,
@@ -135,7 +135,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
             `time_active`           tinyint(1) NULL,
             `items_active`          tinyint(1) NULL,
             `display_order`         int(10) unsigned NULL,
-            `map_bounds`            varchar(100) NULL,
+            `map_focus`             varchar(100) NULL,
             `map_zoom`              int(10) unsigned NULL,
 
              PRIMARY KEY (`id`)

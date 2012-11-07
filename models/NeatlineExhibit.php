@@ -126,7 +126,7 @@ class NeatlineExhibit extends Omeka_Record_AbstractRecord
      * Default map focus position.
      * varchar(100) NULL
      */
-    public $map_bounds;
+    public $map_focus;
 
     /**
      * Default map zoom.
