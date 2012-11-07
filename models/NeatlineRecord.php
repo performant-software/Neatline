@@ -42,7 +42,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
      * Boolean for whether to show popup bubble.
      * tinyint(1) NULL
      */
-    public $show_bubble;
+    public $show_bubble = 1;
 
     /**
      * The title for the record.
@@ -90,13 +90,13 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
      * The left percent for the ambiguity gradient.
      * int(10) unsigned NULL
      */
-    public $left_percent;
+    public $left_percent = 0;
 
     /**
      * The right percent for the ambiguity gradient.
      * int(10) unsigned NULL
      */
-    public $right_percent;
+    public $right_percent = 100;
 
     /**
      * The fill color for geometries.
@@ -180,19 +180,19 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
      * Boolean for whether the record is present on the map.
      * tinyint(1) NULL
      */
-    public $space_active;
+    public $space_active = 0;
 
     /**
      * Boolean for whether the record is present on the timeline.
      * tinyint(1) NULL
      */
-    public $time_active;
+    public $time_active = 0;
 
     /**
      * Boolean for whether the record is present on the item panel.
      * tinyint(1) NULL
      */
-    public $items_active;
+    public $items_active = 0;
 
     /**
      * Display order for record in items panel.
@@ -265,14 +265,6 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
         if (!is_null($neatline)) {
             $this->exhibit_id = $neatline->id;
         }
-
-        // Set defaults.
-        $this->show_bubble = 1;
-        $this->left_percent = 0;
-        $this->right_percent = 100;
-        $this->space_active = 0;
-        $this->time_active = 0;
-        $this->items_active = 0;
 
         $this->_parent = null;
         $this->_exhibit = null;
