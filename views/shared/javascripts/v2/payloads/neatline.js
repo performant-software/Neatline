@@ -21180,7 +21180,7 @@ $(function() { Neatline.start(); });
  */
 
 Neatline.Collections.Records = Backbone.Collection.extend({
-
+  url: (function() { return __exhibit.data; })
 });
 ;/**
  * Exhibit controller.
@@ -21209,11 +21209,14 @@ Neatline.Controllers.Exhibit = (function(Backbone, Neatline) {
 
     // Get records.
     Exhibit.Records = new Neatline.Collections.Records();
-    Exhibit.Records.url = __exhibit.data;
-    Exhibit.Records.fetch();
 
     // Emit to widgets.
-    Neatline.vent.trigger('exhibit:newRecords');
+    Exhibit.Records.on('reset', function() {
+      Neatline.vent.trigger('exhibit:newRecords');
+    });
+
+    // Fetch.
+    Exhibit.Records.fetch();
 
   };
 
@@ -21221,5 +21224,54 @@ Neatline.Controllers.Exhibit = (function(Backbone, Neatline) {
   // Export.
   Neatline.addInitializer(function() { Exhibit.init(); });
   return Exhibit;
+
+})(Backbone, Neatline);
+;/**
+ * Map controller.
+ *
+ * @package     omeka
+ * @subpackage  neatline
+ * @copyright   2012 Rector and Board of Visitors, University of Virginia
+ * @license     http://www.apache.org/licenses/LICENSE-2.0.html
+ */
+
+Neatline.Controllers.Map = (function(Backbone, Neatline) {
+
+  var Map = {};
+
+
+  // ---------------
+  // Initialization.
+  // ---------------
+
+  /*
+   * Instantiate map.
+   *
+   * @return void.
+   */
+  Map.init = function() {
+
+  };
+
+
+  // -------
+  // Events.
+  // -------
+
+  /*
+   * Consume records.
+   *
+   * @param {Object} records: The records collection.
+   *
+   * @return void.
+   */
+  Neatline.vent.on('exhibit:newRecords', function(records) {
+    /* TODO */ console.log(Neatline.Controllers.Exhibit.Records.models);
+  });
+
+
+  // Export.
+  Neatline.addInitializer(function() { Map.init(); });
+  return Map;
 
 })(Backbone, Neatline);

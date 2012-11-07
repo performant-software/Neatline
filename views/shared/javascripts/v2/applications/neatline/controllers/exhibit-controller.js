@@ -25,11 +25,14 @@ Neatline.Controllers.Exhibit = (function(Backbone, Neatline) {
 
     // Get records.
     Exhibit.Records = new Neatline.Collections.Records();
-    Exhibit.Records.url = __exhibit.data;
-    Exhibit.Records.fetch();
 
     // Emit to widgets.
-    Neatline.vent.trigger('exhibit:newRecords');
+    Exhibit.Records.on('reset', function() {
+      Neatline.vent.trigger('exhibit:newRecords');
+    });
+
+    // Fetch.
+    Exhibit.Records.fetch();
 
   };
 
