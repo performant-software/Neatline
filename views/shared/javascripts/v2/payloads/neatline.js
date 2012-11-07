@@ -21161,7 +21161,7 @@ Neatline.Controllers = {};
 Neatline.Collections = {};
 Neatline.Views = {};
 ;/**
- * Start Neatline application.
+ * Start the Neatline application.
  *
  * @package     omeka
  * @subpackage  neatline

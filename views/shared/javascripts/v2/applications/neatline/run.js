@@ -1,5 +1,5 @@
 /**
- * Start Neatline application.
+ * Start the Neatline application.
  *
  * @package     omeka
  * @subpackage  neatline
