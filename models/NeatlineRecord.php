@@ -1267,6 +1267,8 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
 
     }
 
+    // TODO: Old data constructor methods. Remove.
+
     /**
      * Construct map data.
      *

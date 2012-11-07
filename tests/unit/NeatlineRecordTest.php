@@ -2391,10 +2391,9 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
     public function testBuildJsonData()
     {
 
-        // Create an item and exhibit.
-        $neatline = $this->__exhibit();
-        $parent = $this->__record();
-        $record = new NeatlineRecord(null, $neatline);
+        // Create exhibit and record.
+        $exhibit = $this->__exhibit();
+        $record = new NeatlineRecord(null, $exhibit);
 
         // Text.
         $record->title =                self::$__testParams['title'];
