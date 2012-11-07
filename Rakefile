@@ -53,12 +53,12 @@ namespace :dev do
 
   desc 'Insert exhibit'
   task :insert do
-    sh %{bash sql/insert_exhibit.sh}
+    sh %{bash .sql/insert_exhibit.sh}
   end
 
-  desc 'Clear exhibits'
+  desc 'Clear exhibit'
   task :truncate do
-    sh %{bash sql/clear_exhibit.sh}
+    sh %{bash .sql/clear_exhibit.sh}
   end
 
 end
