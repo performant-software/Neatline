@@ -87,7 +87,22 @@ function neatline_queueExhibitCss($exhibit)
 }
 
 /**
- * Construct the HTML data source url for the undated items block.
+ * Prepare the starting data array for the front-end application.
+ *
+ * @param NeatlineExhibit $exhibit The exhibit.
+ *
+ * @return array The exhibit data.
+ */
+function neatline_renderExhibit($exhibit)
+{
+    return json_encode(array(
+        'id' => $exhibit->id,
+        'dataSource' => neatline_getDataSource($exhibit)
+    ));
+}
+
+/**
+ * Get the data emitter URL for an exhibit.
  *
  * @param NeatlineExhibit $exhibit The exhibit.
  *

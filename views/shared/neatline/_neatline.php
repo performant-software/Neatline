@@ -12,16 +12,11 @@
  */
 ?>
 
-<!-- Neatline container. -->
 <div id="neatline">
-
-    <!-- Map. -->
     <div id="neatline-map" class="neatline-block"></div>
-
 </div>
 
 <!-- JSON globals. -->
 <script type="text/javascript">
-    <?php $renderer = new NeatlineRenderer($exhibit); ?>
-    Neatline = <?php echo json_encode($renderer->render()); ?>
+    Neatline = <?php echo neatline_renderExhibit($exhibit); ?>
 </script>
