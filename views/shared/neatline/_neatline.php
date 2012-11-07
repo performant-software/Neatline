@@ -18,5 +18,5 @@
 
 <!-- JSON globals. -->
 <script type="text/javascript">
-    Neatline = <?php echo neatline_renderExhibit($exhibit); ?>
+    __exhibit = <?php echo neatline_renderExhibit($exhibit); ?>
 </script>

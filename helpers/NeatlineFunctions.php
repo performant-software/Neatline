@@ -31,20 +31,8 @@ function neatline_queueAdminCss()
  */
 function neatline_queueNeatlineAssets($exhibit)
 {
-
-    // Google maps API.
-    $google = 'http://maps.google.com/maps/api/js?v=3.8&sensor=false';
-    $headScript = get_view()->headScript();
-    $headScript->appendScript('', 'text/javascript', array('src' => $google));
-
-    queue_css_file('v2/payloads/neatline');
-    queue_css_file('neatline-jquery-ui');
-    queue_css_file('openlayers/theme/default/style');
-    neatline_queueExhibitCss($exhibit);
-
-    // queue_js_file('libraries/simile/timeline-api/timeline-api', 'javascripts');
+    neatline_queueGoogleMapsApi();
     queue_js_file('v2/payloads/neatline', 'javascripts');
-
 }
 
 /**
@@ -54,24 +42,9 @@ function neatline_queueNeatlineAssets($exhibit)
  */
 function neatline_queueEditorAssets()
 {
-
-    // CSS.
     queue_css_file('bootstrap/css/bootstrap.min');
     queue_css_file('payloads/editor');
-
     queue_js_file('v2/payloads/editor', 'javascripts');
-
-}
-
-/**
- * Include the static files for a public-facing exhibit.
- *
- * @return void.
- */
-function neatline_queuePublicAssets()
-{
-    // queue_js_file('_constructInThemeNeatline', 'javascripts');
-    // queue_css_file('neatline-public');
 }
 
 /**
@@ -81,9 +54,19 @@ function neatline_queuePublicAssets()
  */
 function neatline_queueExhibitCss($exhibit)
 {
-    try {
-        queue_css_file($exhibit->slug);
-    } catch (Exception $e) {}
+    try { queue_css_file($exhibit->slug); } catch (Exception $e) {}
+}
+
+/**
+ * Include the Google Maps API.
+ *
+ * @return void.
+ */
+function neatline_queueGoogleMapsApi()
+{
+    $url = 'http://maps.google.com/maps/api/js?v=3.8&sensor=false';
+    $headScript = get_view()->headScript();
+    $headScript->appendScript('', 'text/javascript', array('src' => $url));
 }
 
 /**
@@ -96,9 +79,7 @@ function neatline_queueExhibitCss($exhibit)
 function neatline_renderExhibit($exhibit)
 {
     return json_encode(array(
-        'id' => $exhibit->id,
-        'dataSource' => neatline_getDataSource($exhibit)
-    ));
+        'id' => $exhibit->id, 'data' => neatline_getDataSource($exhibit)));
 }
 
 /**
@@ -112,42 +93,6 @@ function neatline_getDataSource($exhibit)
 {
     return public_url('neatline-exhibits/data/' . $exhibit->id);
 }
-
-/**
- * Construct the JSON data source url for Simile.
- *
- * @param integer $neatline_id The id of the exhibit.
- *
- * @return string The url.
- */
-// function neatline_getTimelineDataUrl($neatline_id)
-// {
-//     return WEB_ROOT . '/neatline-exhibits/simile/' . $neatline_id;
-// }
-
-/**
- * Construct the JSON data source url for OpenLayers.
- *
- * @param integer $neatline_id The id of the exhibit.
- *
- * @return string The url.
- */
-// function neatline_getMapDataUrl($neatline_id)
-// {
-//     return WEB_ROOT . '/neatline-exhibits/openlayers/' . $neatline_id;
-// }
-
-/**
- * Construct the HTML data source url for the undated items block.
- *
- * @param integer $neatline_id The id of the exhibit.
- *
- * @return string The url.
- */
-// function neatline_getUndatedItemsDataUrl($neatline_id)
-// {
-//     return WEB_ROOT . '/neatline-exhibits/udi/' . $neatline_id;
-// }
 
 /**
  * Get items for the browser.

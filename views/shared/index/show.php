@@ -12,19 +12,16 @@
  */
 ?>
 
-<?php
-    neatline_queuePublicAssets();
-    neatline_queueNeatlineAssets(get_current_neatline());
-?>
-
-<?php
-echo head(array('title' => neatline('title'))); ?>
+<?php neatline_queueNeatlineAssets(get_current_neatline()); ?>
+<?php echo head(array('title' => neatline('title'))); ?>
 
 <!-- The core Neatline partial. -->
 <?php echo $this->partial('neatline/_neatline.php', array(
     'exhibit' => get_current_neatline()
 )); ?>
 
-<div class="exhibit-description"><?php echo neatline('description'); ?></div>
+<div class="exhibit-description">
+    <?php echo neatline('description'); ?>
+</div>
 
 <?php echo foot(); ?>
