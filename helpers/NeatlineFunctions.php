@@ -75,40 +75,6 @@ function neatline_queuePublicAssets()
 }
 
 /**
- * Include the fullscreen stylesheet.
- *
- * @return void.
- */
-function neatline_queueFullscreenAssets()
-{
-
-    // Neatline runner.
-    queue_js_file('_constructFullscreenNeatline', 'javascripts');
-    queue_js_file('utilities/_fullscreen_positioner', 'javascripts');
-
-    // Fullscreen-specific CSS.
-    queue_css_file('neatline-fullscreen');
-
-}
-
-/**
- * Include the embedded stylesheet.
- *
- * @return void.
- */
-function neatline_queueEmbedAssets()
-{
-
-    // Neatline runner.
-    queue_js_file('_constructFullscreenNeatline', 'javascripts');
-    queue_js_file('utilities/_fullscreen_positioner', 'javascripts');
-
-    // Fullscreen-specific CSS.
-    queue_css_file('neatline-embedded');
-
-}
-
-/**
  * Try to find a CSS file that matches the exhibit slug.
  *
  * @return void.
@@ -121,16 +87,28 @@ function neatline_queueExhibitCss($exhibit)
 }
 
 /**
+ * Construct the HTML data source url for the undated items block.
+ *
+ * @param NeatlineExhibit $exhibit The exhibit.
+ *
+ * @return string The url.
+ */
+function neatline_getDataSource($exhibit)
+{
+    return public_url('neatline-exhibits/data/' . $exhibit->id);
+}
+
+/**
  * Construct the JSON data source url for Simile.
  *
  * @param integer $neatline_id The id of the exhibit.
  *
  * @return string The url.
  */
-function neatline_getTimelineDataUrl($neatline_id)
-{
-    return WEB_ROOT . '/neatline-exhibits/simile/' . $neatline_id;
-}
+// function neatline_getTimelineDataUrl($neatline_id)
+// {
+//     return WEB_ROOT . '/neatline-exhibits/simile/' . $neatline_id;
+// }
 
 /**
  * Construct the JSON data source url for OpenLayers.
@@ -139,10 +117,10 @@ function neatline_getTimelineDataUrl($neatline_id)
  *
  * @return string The url.
  */
-function neatline_getMapDataUrl($neatline_id)
-{
-    return WEB_ROOT . '/neatline-exhibits/openlayers/' . $neatline_id;
-}
+// function neatline_getMapDataUrl($neatline_id)
+// {
+//     return WEB_ROOT . '/neatline-exhibits/openlayers/' . $neatline_id;
+// }
 
 /**
  * Construct the HTML data source url for the undated items block.
@@ -151,10 +129,10 @@ function neatline_getMapDataUrl($neatline_id)
  *
  * @return string The url.
  */
-function neatline_getUndatedItemsDataUrl($neatline_id)
-{
-    return WEB_ROOT . '/neatline-exhibits/udi/' . $neatline_id;
-}
+// function neatline_getUndatedItemsDataUrl($neatline_id)
+// {
+//     return WEB_ROOT . '/neatline-exhibits/udi/' . $neatline_id;
+// }
 
 /**
  * Get items for the browser.
@@ -277,13 +255,11 @@ function neatline($fieldname, $options = array(), $neatline = null)
 {
 
     $neatline = $neatline ? $neatline : get_current_neatline();
-
     $fieldname = strtolower($fieldname);
     $text = $neatline->$fieldname;
 
-    if(isset($options['snippet'])) {
+    if(isset($options['snippet']))
         $text = nls2p(snippet($text, 0, (int)$options['snippet']));
-    }
 
     return $text;
 
