@@ -1214,10 +1214,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
      **/
     public function buildJsonData($index=array(), $wmss=array(), $exhibit=null) {
 
-        // If not active on map, return null.
-        if ($this->space_active != 1) { return null; }
-
-        // Cache the parent record for upcoming calls to getStyle().
+        // Cache the parent record.
         $this->_setParent($index, $exhibit);
 
         $data = array(

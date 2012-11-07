@@ -2042,110 +2042,34 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
         // Ping the method for the json.
         $json = $record->buildEditFormJson();
 
-        // Check the construction.
-        $this->assertContains(
-            '"title":""',
-            $json
-        );
-
-        $this->assertContains(
-            '"slug":""',
-            $json
-        );
-
-        $this->assertContains(
-            '"description":""',
-            $json
-        );
-
-        $this->assertContains(
-            '"start_date":""',
-            $json
-        );
-
-        $this->assertContains(
-            '"end_date":""',
-            $json
-        );
-
-        $this->assertContains(
-            '"start_visible_date":""',
-            $json
-        );
-
-        $this->assertContains(
-            '"end_visible_date":""',
-            $json
-        );
-
-        $this->assertContains(
-            '"left_percent":0',
-            $json
-        );
-
-        $this->assertContains(
-            '"right_percent":100',
-            $json
-        );
-
-        $this->assertContains(
-            '"vector_color":"' . get_plugin_ini('Neatline', 'vector_color') . '"',
-            $json
-        );
-
-        $this->assertContains(
-            '"stroke_color":"' . get_plugin_ini('Neatline', 'stroke_color') . '"',
-            $json
-        );
-
-        $this->assertContains(
-            '"highlight_color":"' . get_plugin_ini('Neatline', 'highlight_color') . '"',
-            $json
-        );
-
-        $this->assertContains(
-            '"vector_opacity":' . (int) get_plugin_ini('Neatline', 'vector_opacity'),
-            $json
-        );
-
-        $this->assertContains(
-            '"select_opacity":' . (int) get_plugin_ini('Neatline', 'select_opacity'),
-            $json
-        );
-
-        $this->assertContains(
-            '"stroke_opacity":' . (int) get_plugin_ini('Neatline', 'stroke_opacity'),
-            $json
-        );
-
-        $this->assertContains(
-            '"graphic_opacity":' . (int) get_plugin_ini('Neatline', 'graphic_opacity'),
-            $json
-        );
-
-        $this->assertContains(
-            '"stroke_width":' . (int) get_plugin_ini('Neatline', 'stroke_width'),
-            $json
-        );
-
-        $this->assertContains(
-            '"point_radius":' . (int) get_plugin_ini('Neatline', 'point_radius'),
-            $json
-        );
-
-        $this->assertContains(
-            '"point_image":""',
-            $json
-        );
-
-        $this->assertContains(
-            '"parent_record_id":"none"',
-            $json
-        );
-
-        $this->assertContains(
-            '"use_dc_metadata":null',
-            $json
+        $this->assertEquals(
+            $json,
+            array(
+                'title' =>              '',
+                'slug' =>               '',
+                'description' =>        '',
+                'vector_color' =>       get_plugin_ini('Neatline', 'vector_color'),
+                'stroke_color' =>       get_plugin_ini('Neatline', 'stroke_color'),
+                'highlight_color' =>    get_plugin_ini('Neatline', 'highlight_color'),
+                'vector_opacity' =>     (int) get_plugin_ini('Neatline', 'vector_opacity'),
+                'select_opacity' =>     (int) get_plugin_ini('Neatline', 'select_opacity'),
+                'stroke_opacity' =>     (int) get_plugin_ini('Neatline', 'stroke_opacity'),
+                'graphic_opacity' =>    (int) get_plugin_ini('Neatline', 'graphic_opacity'),
+                'stroke_width' =>       (int) get_plugin_ini('Neatline', 'stroke_width'),
+                'point_radius' =>       (int) get_plugin_ini('Neatline', 'point_radius'),
+                'point_image' =>        '',
+                'start_date' =>         '',
+                'end_date' =>           '',
+                'start_visible_date' => '',
+                'end_visible_date' =>   '',
+                'left_percent' =>       0,
+                'right_percent' =>      100,
+                'parent_record_id' =>   'none',
+                'use_dc_metadata' =>    null,
+                'show_bubble' =>        1,
+                'geocoverage' =>        '',
+                'records' => array()
+            )
         );
 
     }
