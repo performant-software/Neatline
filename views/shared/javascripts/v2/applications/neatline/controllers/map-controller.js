@@ -33,10 +33,12 @@ Neatline.Controllers.Map = (function(Backbone, Neatline) {
   /*
    * Consume records.
    *
+   * @param {Object} records: The records collection.
+   *
    * @return void.
    */
-  Neatline.vent.on('exhibit:newRecords', function() {
-    Map.Map.ingest();
+  Neatline.vent.on('exhibit:newRecords', function(records) {
+    Map.Map.ingest(records);
   });
 
 

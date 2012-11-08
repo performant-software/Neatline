@@ -35,7 +35,8 @@ Neatline.Views.Map = Backbone.View.extend({
         new OpenLayers.Control.PanZoomBar(),
         new OpenLayers.Control.Navigation({ documentDrag: true }),
         new OpenLayers.Control.LayerSwitcher()
-      ]
+      ],
+      theme: null
     };
 
     // Instantiate map.
@@ -77,13 +78,31 @@ Neatline.Views.Map = Backbone.View.extend({
   /*
    * Ingest records.
    *
+   * @param {Object} records: The records collection.
+   *
    * @return void.
    */
-  ingest: function() {
+  ingest: function(records) {
 
-    Neatline.Controllers.Exhibit.Records.each(function(record) {
-      console.log(record);
-    });
+    records.each(_.bind(function(record) {
+
+      // If active on the map.
+      if (record.get('map_active') == 1) {
+
+        // Build geometry.
+        var formatter = new OpenLayers.Format.KML();
+        var geometry = formatter.read(record.get('coverage'));
+
+        // Build the layer.
+        var layer = new OpenLayers.Layer.Vector(record.get('title'));
+        layer.addFeatures(geometry);
+
+        // Add to map.
+        this.map.addLayer(layer);
+
+      }
+
+    }, this));
 
   }
 

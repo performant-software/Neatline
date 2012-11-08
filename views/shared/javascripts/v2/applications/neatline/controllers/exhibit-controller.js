@@ -24,15 +24,15 @@ Neatline.Controllers.Exhibit = (function(Backbone, Neatline) {
   Exhibit.init = function() {
 
     // Create records collection.
-    Exhibit.Records = new Neatline.Collections.Records();
+    var records = new Neatline.Collections.Records();
 
     // Listen for new records.
-    Exhibit.Records.on('reset', function() {
-      Neatline.vent.trigger('exhibit:newRecords');
+    records.on('reset', function() {
+      Neatline.vent.trigger('exhibit:newRecords', records);
     });
 
     // Fetch.
-    Exhibit.Records.fetch();
+    records.fetch();
 
   };
 
