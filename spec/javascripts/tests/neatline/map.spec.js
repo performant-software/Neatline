@@ -59,9 +59,182 @@ describe('Map', function() {
 
   });
 
-  it('should render features');
+  it('should render features', function() {
 
-  it('should render styles');
+    // Run Neatline.
+    _t.loadNeatline();
+    var request = mostRecentAjaxRequest();
+    request.response(json);
+
+    // Get vector layers.
+    var layers = _t.map.map.getLayersBy('features', {
+      test: function(prop) {
+        return !_.isUndefined(prop) && prop.length > 0;
+      }
+    });
+
+    // Check geometry.
+    expect(layers.length).toEqual(2);
+    expect(layers[0].features[0].geometry.x).toEqual(-8233185.189506843);
+    expect(layers[0].features[0].geometry.y).toEqual(4978802.273690212);
+    expect(layers[1].features[0].geometry.x).toEqual(-7910926.6783014);
+    expect(layers[1].features[0].geometry.y).toEqual(5214839.817002);
+
+  });
+
+  it('should render styles', function() {
+
+    // Run Neatline.
+    _t.loadNeatline();
+    var request = mostRecentAjaxRequest();
+    request.response(json);
+
+    // Get vector layers.
+    var layers = _t.map.map.getLayersBy('features', {
+      test: function(prop) {
+        return !_.isUndefined(prop) && prop.length > 0;
+      }
+    });
+
+    /*
+     * Default:
+     */
+
+    // Fill color.
+    expect(layers[0].styleMap.styles.default.defaultStyle.fillColor).
+      toEqual('#111111');
+    expect(layers[1].styleMap.styles.default.defaultStyle.fillColor).
+      toEqual('#222222');
+
+    // Stroke color.
+    expect(layers[0].styleMap.styles.default.defaultStyle.strokeColor).
+      toEqual('#333333');
+    expect(layers[1].styleMap.styles.default.defaultStyle.strokeColor).
+      toEqual('#444444');
+
+    // Fill opacity
+    expect(layers[0].styleMap.styles.default.defaultStyle.fillOpacity).
+      toEqual(0.01);
+    expect(layers[1].styleMap.styles.default.defaultStyle.fillOpacity).
+      toEqual(0.02);
+
+    // Stroke opacity
+    expect(layers[0].styleMap.styles.default.defaultStyle.strokeOpacity).
+      toEqual(0.05);
+    expect(layers[1].styleMap.styles.default.defaultStyle.strokeOpacity).
+      toEqual(0.06);
+
+    // Graphic opacity
+    expect(layers[0].styleMap.styles.default.defaultStyle.graphicOpacity).
+      toEqual(0.07);
+    expect(layers[1].styleMap.styles.default.defaultStyle.graphicOpacity).
+      toEqual(0.08);
+
+    // Stroke width.
+    expect(layers[0].styleMap.styles.default.defaultStyle.strokeWidth).
+      toEqual(9);
+    expect(layers[1].styleMap.styles.default.defaultStyle.strokeWidth).
+      toEqual(10);
+
+    // Point radius.
+    expect(layers[0].styleMap.styles.default.defaultStyle.pointRadius).
+      toEqual(11);
+    expect(layers[1].styleMap.styles.default.defaultStyle.pointRadius).
+      toEqual(12);
+
+    /*
+     * Select:
+     */
+
+    // Fill color.
+    expect(layers[0].styleMap.styles.select.defaultStyle.fillColor).
+      toEqual('#555555');
+    expect(layers[1].styleMap.styles.select.defaultStyle.fillColor).
+      toEqual('#666666');
+
+    // Stroke color.
+    expect(layers[0].styleMap.styles.select.defaultStyle.strokeColor).
+      toEqual('#333333');
+    expect(layers[1].styleMap.styles.select.defaultStyle.strokeColor).
+      toEqual('#444444');
+
+    // Fill opacity
+    expect(layers[0].styleMap.styles.select.defaultStyle.fillOpacity).
+      toEqual(0.03);
+    expect(layers[1].styleMap.styles.select.defaultStyle.fillOpacity).
+      toEqual(0.04);
+
+    // Stroke opacity
+    expect(layers[0].styleMap.styles.select.defaultStyle.strokeOpacity).
+      toEqual(0.05);
+    expect(layers[1].styleMap.styles.select.defaultStyle.strokeOpacity).
+      toEqual(0.06);
+
+    // Graphic opacity
+    expect(layers[0].styleMap.styles.select.defaultStyle.graphicOpacity).
+      toEqual(0.07);
+    expect(layers[1].styleMap.styles.select.defaultStyle.graphicOpacity).
+      toEqual(0.08);
+
+    // Stroke width.
+    expect(layers[0].styleMap.styles.select.defaultStyle.strokeWidth).
+      toEqual(9);
+    expect(layers[1].styleMap.styles.select.defaultStyle.strokeWidth).
+      toEqual(10);
+
+    // Point radius.
+    expect(layers[0].styleMap.styles.select.defaultStyle.pointRadius).
+      toEqual(11);
+    expect(layers[1].styleMap.styles.select.defaultStyle.pointRadius).
+      toEqual(12);
+
+    /*
+     * Temporary:
+     */
+
+    // Fill color.
+    expect(layers[0].styleMap.styles.temporary.defaultStyle.fillColor).
+      toEqual('#555555');
+    expect(layers[1].styleMap.styles.temporary.defaultStyle.fillColor).
+      toEqual('#666666');
+
+    // Stroke color.
+    expect(layers[0].styleMap.styles.temporary.defaultStyle.strokeColor).
+      toEqual('#333333');
+    expect(layers[1].styleMap.styles.temporary.defaultStyle.strokeColor).
+      toEqual('#444444');
+
+    // Fill opacity
+    expect(layers[0].styleMap.styles.temporary.defaultStyle.fillOpacity).
+      toEqual(0.01);
+    expect(layers[1].styleMap.styles.temporary.defaultStyle.fillOpacity).
+      toEqual(0.02);
+
+    // Stroke opacity
+    expect(layers[0].styleMap.styles.temporary.defaultStyle.strokeOpacity).
+      toEqual(0.05);
+    expect(layers[1].styleMap.styles.temporary.defaultStyle.strokeOpacity).
+      toEqual(0.06);
+
+    // Graphic opacity
+    expect(layers[0].styleMap.styles.temporary.defaultStyle.graphicOpacity).
+      toEqual(0.07);
+    expect(layers[1].styleMap.styles.temporary.defaultStyle.graphicOpacity).
+      toEqual(0.08);
+
+    // Stroke width.
+    expect(layers[0].styleMap.styles.temporary.defaultStyle.strokeWidth).
+      toEqual(9);
+    expect(layers[1].styleMap.styles.temporary.defaultStyle.strokeWidth).
+      toEqual(10);
+
+    // Point radius.
+    expect(layers[0].styleMap.styles.temporary.defaultStyle.pointRadius).
+      toEqual(11);
+    expect(layers[1].styleMap.styles.temporary.defaultStyle.pointRadius).
+      toEqual(12);
+
+  });
 
   it('should render and publish feature hover');
 
