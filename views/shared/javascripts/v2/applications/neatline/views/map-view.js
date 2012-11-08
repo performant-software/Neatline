@@ -24,7 +24,29 @@ Neatline.Views.Map = Backbone.View.extend({
    * @return void.
    */
   initializeOpenLayers: function() {
-    this.map = new OpenLayers.Map(this.el);
+
+    // Global attributes.
+    OpenLayers.ImgPath = 'http://js.mapbox.com/theme/dark/';
+
+    // widgets.
+    var options = {
+      controls: [
+        new OpenLayers.Control.MousePosition(),
+        new OpenLayers.Control.PanZoomBar(),
+        new OpenLayers.Control.Navigation({ documentDrag: true }),
+        new OpenLayers.Control.LayerSwitcher()
+      ]
+    };
+
+    // Instantiate map.
+    this.map = new OpenLayers.Map(this.el, options);
+
+    // Get OSM base layer.
+    // TODO: Manage multiple base layers.
+    this.osm = new OpenLayers.Layer.OSM();
+    this.map.addLayer(this.osm);
+    this.map.setBaseLayer(this.osm);
+
   }
 
 });
