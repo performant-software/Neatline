@@ -18,23 +18,11 @@ class Neatline_EditorController extends Omeka_Controller_AbstractActionControlle
      */
     public function init()
     {
-
-        $modelName = 'NeatlineExhibit';
-
-        if (version_compare(OMEKA_VERSION, '2.0-dev', '>=')) {
-            $this->_helper->db->setDefaultModelName($modelName);
-        } else {
-            $this->_modelClass = $modelName;
-        }
-
-
-        // Get tables.
-        $this->_neatlinesTable =    $this->_helper->db->getTable($modelName);
-        $this->_recordsTable =      $this->_helper->db->getTable('NeatlineRecord');
-        $this->_layersTable =       $this->_helper->db->getTable('NeatlineLayer');
-        $this->_itemsTable =        $this->_helper->db->getTable('Item');
-        $this->_filesTable =        $this->_helper->db->getTable('File');
-
+        $this->exhibitsTable = $this->_helper->db->getTable('NeatlineExhibit');
+        $this->recordsTable = $this->_helper->db->getTable('NeatlineRecord');
+        $this->layersTable = $this->_helper->db->getTable('NeatlineLayer');
+        $this->itemsTable = $this->_helper->db->getTable('Item');
+        $this->filesTable = $this->_helper->db->getTable('File');
     }
 
     /**
@@ -45,14 +33,10 @@ class Neatline_EditorController extends Omeka_Controller_AbstractActionControlle
     public function indexAction()
     {
 
-        // Get records and shell out defaults.
-        $id =                       $this->_request->getParam('id');
-        $exhibit =                  $this->_neatlinesTable->find($id);
-        $layers =                   $this->_layersTable->findAll();
-
-        // Push records.
-        $this->view->neatline_exhibit = $exhibit;
-        $this->view->layers = $layers;
+        // Get records, push to view.
+        $id = $this->_request->getParam('id');
+        $this->view->exhibit = $this->exhibitsTable->find($id);
+        $this->view->layers = $this->layersTable->findAll();
 
     }
 
@@ -73,11 +57,11 @@ class Neatline_EditorController extends Omeka_Controller_AbstractActionControlle
         $exhibidId =                $this->_request->getParam('exhibit_id');
 
         // Push in the Neatline exhibit record.
-        $exhibit = $this->_neatlinesTable->find($exhibidId);
+        $exhibit = $this->exhibitsTable->find($exhibidId);
         $this->view->neatline = $exhibit;
 
         // Get records.
-        $records = $this->_recordsTable->searchNeatlineRecordsByExhibit(
+        $records = $this->recordsTable->searchNeatlineRecordsByExhibit(
             $exhibit,
             $searchString
         );
@@ -111,7 +95,7 @@ class Neatline_EditorController extends Omeka_Controller_AbstractActionControlle
 
         // If there is a record id, build the form from the record.
         if ($recordId != null) {
-            $record = $this->_recordsTable->find($recordId);
+            $record = $this->recordsTable->find($recordId);
             echo json_encode($record->buildEditFormJson());
         }
 
@@ -119,8 +103,8 @@ class Neatline_EditorController extends Omeka_Controller_AbstractActionControlle
         else {
 
             // Fetch the Neatline exhibit record and item record.
-            $neatline = $this->_neatlinesTable->find($exhibidId);
-            $item = $this->_itemsTable->find($itemId);
+            $neatline = $this->exhibitsTable->find($exhibidId);
+            $item = $this->itemsTable->find($itemId);
 
             // Output the JSON string.
             echo json_encode(NeatlineRecord::buildEditFormForNewRecordJson(
@@ -178,18 +162,18 @@ class Neatline_EditorController extends Omeka_Controller_AbstractActionControlle
         $rightPercent =             (int) $_post['right_percent'];
 
         // Fetch the exhibit, item, and record objects.
-        $neatline = $this->_neatlinesTable->find($exhibitId);
+        $neatline = $this->exhibitsTable->find($exhibitId);
 
         // If there is a record id in the post, get the record.
         if ($recordId != null) {
-            $record = $this->_recordsTable->find($recordId);
+            $record = $this->recordsTable->find($recordId);
             $newRecord = false;
         }
 
         // Otherwise, create a new record.
         else {
-            $item = $this->_itemsTable->find($itemId);
-            $record = $this->_recordsTable->createOrGetRecord($item, $neatline);
+            $item = $this->itemsTable->find($itemId);
+            $record = $this->recordsTable->createOrGetRecord($item, $neatline);
             $newRecord = true;
         }
 
@@ -283,7 +267,7 @@ class Neatline_EditorController extends Omeka_Controller_AbstractActionControlle
         // If there is a record id, get the record and update.
         if ($recordId != null) {
 
-            $record = $this->_recordsTable->find($recordId);
+            $record = $this->recordsTable->find($recordId);
             $record->setStatus($spaceOrTime, $value);
             $record->save();
 
@@ -292,11 +276,11 @@ class Neatline_EditorController extends Omeka_Controller_AbstractActionControlle
         // Otherwise, create a new record.
         else {
 
-            $neatline = $this->_neatlinesTable->find($exhibitId);
-            $item = $this->_itemsTable->find($itemId);
+            $neatline = $this->exhibitsTable->find($exhibitId);
+            $item = $this->itemsTable->find($itemId);
 
             // Save the data.
-            $record = $this->_recordsTable->saveRecordStatus(
+            $record = $this->recordsTable->saveRecordStatus(
                 $item,
                 $neatline,
                 $spaceOrTime,
@@ -329,8 +313,8 @@ class Neatline_EditorController extends Omeka_Controller_AbstractActionControlle
         $order =                    $_post['order'];
 
         // Fetch the Neatline exhibit and save the ordering.
-        $neatline = $this->_neatlinesTable->find($exhibitId);
-        $this->_recordsTable->saveOrder($neatline, $order);
+        $neatline = $this->exhibitsTable->find($exhibitId);
+        $this->recordsTable->saveOrder($neatline, $order);
 
     }
 
@@ -358,7 +342,7 @@ class Neatline_EditorController extends Omeka_Controller_AbstractActionControlle
         $timelineZoom =             (int) $_post['timeline_zoom'];
 
         // Fetch the Neatline exhibit record and item record.
-        $exhibit = $this->_neatlinesTable->find($exhibitId);
+        $exhibit = $this->exhibitsTable->find($exhibitId);
 
         // Set values.
         $exhibit->map_focus = $mapCenter;
@@ -399,7 +383,7 @@ class Neatline_EditorController extends Omeka_Controller_AbstractActionControlle
         $itemsHeight =              $_post['items_height'];
 
         // Fetch the Neatline exhibit record and item record.
-        $exhibit = $this->_neatlinesTable->find($exhibitId);
+        $exhibit = $this->exhibitsTable->find($exhibitId);
 
         // Set values.
         $exhibit->is_map =             $isMap;
@@ -442,15 +426,15 @@ class Neatline_EditorController extends Omeka_Controller_AbstractActionControlle
 
         // If there is a record id, get the record and update.
         if ($recordId != null) {
-            $record = $this->_recordsTable->find($recordId);
+            $record = $this->recordsTable->find($recordId);
         }
 
         // Otherwise, create a new record.
         else {
 
-            $neatline =     $this->_neatlinesTable->find($exhibitId);
-            $item =         $this->_itemsTable->find($itemId);
-            $record =       $this->_recordsTable->getRecordByItemAndExhibit($item, $neatline);
+            $neatline =     $this->exhibitsTable->find($exhibitId);
+            $item =         $this->itemsTable->find($itemId);
+            $record =       $this->recordsTable->getRecordByItemAndExhibit($item, $neatline);
 
             // If no existing record, create a record and default in DC values.
             if (!$record) {
@@ -495,7 +479,7 @@ class Neatline_EditorController extends Omeka_Controller_AbstractActionControlle
         $baseLayer =                (int) $_post['base_layer'];
 
         // Do save.
-        $exhibit = $this->_neatlinesTable->find($exhibitId);
+        $exhibit = $this->exhibitsTable->find($exhibitId);
         $exhibit->setStyle('vector_color', $vectorColor);
         $exhibit->setStyle('stroke_color', $strokeColor);
         $exhibit->setStyle('highlight_color', $highlightColor);
@@ -532,7 +516,7 @@ class Neatline_EditorController extends Omeka_Controller_AbstractActionControlle
         $bandUnit =                 $_post['context_band_unit'];
 
         // Do save.
-        $exhibit = $this->_neatlinesTable->find($exhibitId);
+        $exhibit = $this->exhibitsTable->find($exhibitId);
         $exhibit->is_context_band = $bandActive;
         $exhibit->setStyle('context_band_unit', $bandUnit);
         $exhibit->setStyle('context_band_height', $bandHeight);
@@ -551,7 +535,7 @@ class Neatline_EditorController extends Omeka_Controller_AbstractActionControlle
 
         // Fetch the exhibit record.
         $exhibitId = (int) $this->_request->exhibit_id;
-        $neatline = $this->_neatlinesTable->find($exhibitId);
+        $neatline = $this->exhibitsTable->find($exhibitId);
 
         // Create the new record.
         $record = new NeatlineRecord(null, $neatline);
@@ -579,7 +563,7 @@ class Neatline_EditorController extends Omeka_Controller_AbstractActionControlle
 
         // Get the record.
         $recordId = (int) $_post['record_id'];
-        $record = $this->_recordsTable->find($recordId);
+        $record = $this->recordsTable->find($recordId);
 
         // Reset.
         $record->resetStyles();
@@ -610,12 +594,12 @@ class Neatline_EditorController extends Omeka_Controller_AbstractActionControlle
         $status = $_post['status'];
 
         // Get record.
-        $record = $this->_recordsTable->find($recordId);
+        $record = $this->recordsTable->find($recordId);
 
         // If no record exists, create one.
         if (is_null($record)) {
-            $item = $this->_itemsTable->find($itemId);
-            $exhibit = $this->_neatlinesTable->find($exhibitId);
+            $item = $this->itemsTable->find($itemId);
+            $exhibit = $this->exhibitsTable->find($exhibitId);
             $record = new NeatlineRecord($item, $exhibit);
         }
 
@@ -645,7 +629,7 @@ class Neatline_EditorController extends Omeka_Controller_AbstractActionControlle
 
         // Get the record and delete.
         $recordId = $_post['record_id'];
-        $record = $this->_recordsTable->find($recordId);
+        $record = $this->recordsTable->find($recordId);
         $record->delete();
 
     }
