@@ -139,36 +139,43 @@ Neatline.Views.Map = Backbone.View.extend({
    * @return void.
    */
   getStyleMap: function(record) {
+
+    // Compute decimal opacities.
+    var fillOpacity = record.get('vector_opacity')/100;
+    var graphicOpacity = record.get('graphic_opacity')/100;
+    var selectOpacity = record.get('select_opacity')/100;
+    var strokeOpacity = record.get('stroke_opacity')/100;
+
     return new OpenLayers.StyleMap({
       'default': new OpenLayers.Style({
         fillColor:        record.get('vector_color'),
-        fillOpacity:      record.get('vector_opacity'),
         strokeColor:      record.get('stroke_color'),
-        strokeOpacity:    record.get('stroke_opacity'),
         pointRadius:      record.get('point_radius'),
         externalGraphic:  record.get('point_image'),
-        graphicOpacity:   record.get('graphic_opacity'),
-        strokeWidth:      record.get('stroke_width')
+        strokeWidth:      record.get('stroke_width'),
+        fillOpacity:      fillOpacity,
+        graphicOpacity:   graphicOpacity,
+        strokeOpacity:    strokeOpacity
       }),
       'select': new OpenLayers.Style({
         fillColor:        record.get('highlight_color'),
-        fillOpacity:      record.get('select_opacity'),
         strokeColor:      record.get('stroke_color'),
-        strokeOpacity:    record.get('stroke_opacity'),
         pointRadius:      record.get('point_radius'),
         externalGraphic:  record.get('point_image'),
-        graphicOpacity:   record.get('graphic_opacity'),
-        strokeWidth:      record.get('stroke_width')
+        strokeWidth:      record.get('stroke_width'),
+        fillOpacity:      selectOpacity,
+        graphicOpacity:   graphicOpacity,
+        strokeOpacity:    strokeOpacity
       }),
       'temporary': new OpenLayers.Style({
         fillColor:        record.get('highlight_color'),
-        fillOpacity:      record.get('vector_opacity'),
         strokeColor:      record.get('stroke_color'),
-        strokeOpacity:    record.get('stroke_opacity'),
         pointRadius:      record.get('point_radius'),
         externalGraphic:  record.get('point_image'),
-        graphicOpacity:   record.get('graphic_opacity'),
-        strokeWidth:      record.get('stroke_width')
+        strokeWidth:      record.get('stroke_width'),
+        fillOpacity:      fillOpacity,
+        graphicOpacity:   graphicOpacity,
+        strokeOpacity:    strokeOpacity
       })
     });
   },
