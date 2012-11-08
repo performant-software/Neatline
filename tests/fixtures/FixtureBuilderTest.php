@@ -60,4 +60,18 @@ class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
 
     }
 
+    /**
+     * Core Neatline partial markup.
+     *
+     * @return void.
+     */
+    public function testNeatlinePartial()
+    {
+
+        // Generate the fixture.
+        $this->writeFixture('neatline/fixtures/neatline',
+            'neatline-partial.html');
+
+    }
+
 }

@@ -18,9 +18,7 @@ describe('Map', function() {
     console.log(json);
   });
 
-  it('should set exhibit default focus and zoom', function() {
-
-  });
+  it('should set exhibit default focus and zoom');
 
   it('should set a focus and zoom when no exhibit defaults');
 
