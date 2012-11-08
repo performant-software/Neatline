@@ -20,6 +20,11 @@ describe('Map', function() {
     loadFixtures('neatline-partial.html');
     jasmine.Ajax.useMock();
 
+    // Run Neatline.
+    _t.loadNeatline();
+    var request = mostRecentAjaxRequest();
+    request.response(json);
+
   });
 
   it('should set exhibit default focus and zoom', function() {
@@ -28,7 +33,7 @@ describe('Map', function() {
     __exhibit.mapZoom = 10;
     __exhibit.mapFocus = '-8031391.4348622, 5085508.3651615';
 
-    // Run Neatline.
+    // Restart.
     _t.loadNeatline();
     var request = mostRecentAjaxRequest();
     request.response(json);
@@ -47,7 +52,7 @@ describe('Map', function() {
     __exhibit.mapZoom = null;
     __exhibit.mapFocus = null;
 
-    // Run Neatline.
+    // Restart.
     _t.loadNeatline();
     var request = mostRecentAjaxRequest();
     request.response(json);
@@ -61,17 +66,7 @@ describe('Map', function() {
 
   it('should render features', function() {
 
-    // Run Neatline.
-    _t.loadNeatline();
-    var request = mostRecentAjaxRequest();
-    request.response(json);
-
-    // Get vector layers.
-    var layers = _t.map.map.getLayersBy('features', {
-      test: function(prop) {
-        return !_.isUndefined(prop) && prop.length > 0;
-      }
-    });
+    var layers = _t.getVectorLayers();
 
     // Check geometry.
     expect(layers.length).toEqual(2);
@@ -84,17 +79,7 @@ describe('Map', function() {
 
   it('should render styles', function() {
 
-    // Run Neatline.
-    _t.loadNeatline();
-    var request = mostRecentAjaxRequest();
-    request.response(json);
-
-    // Get vector layers.
-    var layers = _t.map.map.getLayersBy('features', {
-      test: function(prop) {
-        return !_.isUndefined(prop) && prop.length > 0;
-      }
-    });
+    var layers = _t.getVectorLayers();
 
     /*
      * Default:
@@ -236,7 +221,32 @@ describe('Map', function() {
 
   });
 
-  it('should render and publish feature hover');
+  it('should render and publish feature hover', function() {
+
+    // Get layer.
+    var layers = _t.getVectorLayers();
+    var layer = layers[0];
+
+    // Get feature, trigger hover.
+    var feature = layer.features[0];
+    $(layer.div.firstChild).trigger($.Event('mouseenter'));
+
+    // Clobber getFeaturesFromEvent().
+    layer.getFeatureFromEvent = function(evt) { return feature; };
+
+    // Mock cursor event.
+    var evt = {
+      xy: new OpenLayers.Pixel(Math.random(), Math.random()),
+      type: 'mousemove'
+    };
+
+    // Trigger move.
+    _t.map.map.events.triggerEvent('mousemove', evt);
+
+    // Check render intent and styles.
+    expect(feature.renderIntent).toEqual('temporary');
+
+  });
 
   it('should render and publish feature unhover');
 

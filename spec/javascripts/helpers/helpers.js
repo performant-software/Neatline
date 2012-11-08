@@ -28,3 +28,22 @@ _t.loadNeatline = function() {
   _t.map = Neatline.Controllers.Map.Map;
 
 };
+
+
+// --------
+// Helpers.
+// --------
+
+/*
+ * Get vector layers on the map.
+ */
+_t.getVectorLayers = function() {
+
+  // Filter for features.length > 0.
+  return _t.map.map.getLayersBy('features', {
+    test: function(prop) {
+      return !_.isUndefined(prop) && prop.length > 0;
+    }
+  });
+
+};
