@@ -61,6 +61,7 @@ class Neatline_DataControllerTest extends Neatline_Test_AppTestCase
         $this->assertObjectHasAttribute('end_date',           $response[0]);
         $this->assertObjectHasAttribute('start_visible_date', $response[0]);
         $this->assertObjectHasAttribute('end_visible_date',   $response[0]);
+        $this->assertObjectHasAttribute('map_active',         $response[0]);
 
     }
 

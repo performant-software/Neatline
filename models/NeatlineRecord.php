@@ -1244,7 +1244,10 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
             'start_date'          => $this->getStartDate(),
             'end_date'            => $this->getEndDate(),
             'start_visible_date'  => $this->getStartVisibleDate(),
-            'end_visible_date'    => $this->getEndVisibleDate()
+            'end_visible_date'    => $this->getEndVisibleDate(),
+
+            // Statuses:
+            'map_active'          => $this->map_active
 
         );
 

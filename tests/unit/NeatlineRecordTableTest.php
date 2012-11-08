@@ -1137,8 +1137,6 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
         $record2->geocoverage = 'kml2';
         $record1->map_active = 1;
         $record2->map_active = 1;
-        $record1->time_active = 1;
-        $record2->time_active = 1;
         $record1->map_focus = 'center1';
         $record2->map_focus = 'center2';
         $record1->map_zoom = 4;
@@ -1193,7 +1191,8 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
                     'start_date' => '1564-04-26 14:39:22',
                     'end_date' => '1616-04-23 12:45:34',
                     'start_visible_date' => '1864-04-26 14:39:22',
-                    'end_visible_date' => '1916-04-23 12:45:34'
+                    'end_visible_date' => '1916-04-23 12:45:34',
+                    'map_active' => 1
                 ),
                 array(
                     'id' => $record2->id,
@@ -1220,7 +1219,8 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
                     'start_date' => '1565-04-26 14:39:22',
                     'end_date' => '1617-04-23 12:45:34',
                     'start_visible_date' => '1964-04-26 14:39:22',
-                    'end_visible_date' => '2016-04-23 12:45:34'
+                    'end_visible_date' => '2016-04-23 12:45:34',
+                    'map_active' => 1
                 )
             )
         );

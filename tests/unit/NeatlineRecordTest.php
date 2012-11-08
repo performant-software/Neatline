@@ -2470,6 +2470,9 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
                 'start_visible_date'    => self::$__testParams['start_visible_date'],
                 'end_visible_date'      => self::$__testParams['end_visible_date'],
 
+                // Statuses.
+                'map_active'            => self::$__testParams['map_active']
+
             )
         );
 
