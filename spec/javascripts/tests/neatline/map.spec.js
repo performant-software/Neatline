@@ -15,7 +15,16 @@ describe('Map', function() {
 
   // Get fixtures.
   beforeEach(function() {
-    console.log(json);
+
+    // Load partial, install ajax mock.
+    loadFixtures('neatline-partial.html');
+    jasmine.Ajax.useMock();
+
+    // Run Neatline.
+    _t.loadNeatline();
+    var request = mostRecentAjaxRequest();
+    request.response(json);
+
   });
 
   it('should set exhibit default focus and zoom');

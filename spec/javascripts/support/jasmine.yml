@@ -38,6 +38,8 @@ stylesheets:
 #
 helpers:
     - helpers/*.js
+    - helpers/components/jasmine-jquery/lib/jasmine-jquery.js
+    - helpers/components/jasmine-ajax/lib/mock-ajax.js
 
 # spec_files
 #

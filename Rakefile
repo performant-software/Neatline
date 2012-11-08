@@ -27,15 +27,32 @@ end
 
 desc 'Build the application'
 task :build do
+
+  # Paths.
   js = 'views/shared/javascripts/v2'
   cmp = js+'/components'
+
+  # NPM/bower install.
   sh %{npm install}
   sh %{cd #{js} && bower install}
+
+  # Build Boostrap and OpenLayers.
   sh %{cd #{cmp}/bootstrap && make bootstrap}
   sh %{cd #{cmp}/openlayers/build && python build.py full OpenLayers.js}
+
+  # Application JavaScript.
   sh %{grunt min:neatline}
+
+  # Application CSS.
   sh %{grunt stylus}
+
+  # Append OpenLayers theme.
   sh %{grunt concat:openlayers}
+
+  # Jasmine packages and payload.
+  sh %{cd spec/javascripts/helpers && bower install}
+  sh %{grunt concat:test}
+
 end
 
 desc 'Clean pacakges'
@@ -44,6 +61,7 @@ task :clean do
   sh %{rm -rf views/shared/javascripts/v2/payloads}
   sh %{rm -rf views/shared/javascripts/v2/components}
   sh %{rm -rf views/shared/css/v2/payloads}
+  sh %{rm -rf spec/javascripts/helpers/components}
 end
 
 desc 'Rebuild the application'
