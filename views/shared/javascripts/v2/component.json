@@ -8,6 +8,7 @@
     , "marionette": ">= 0.10.2"
     , "marionette.eventbinder": "https://github.com/marionettejs/backbone.eventbinder.git"
     , "marionette.wreqr": "https://github.com/marionettejs/backbone.wreqr.git"
+    , "openlayers": "https://github.com/openlayers/openlayers.git"
     , "bootstrap": ">= 2.2.0"
     , "d3": ">= 2.10.3"
   }

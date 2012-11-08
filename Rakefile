@@ -28,9 +28,11 @@ end
 desc 'Build the application'
 task :build do
   js = 'views/shared/javascripts/v2'
+  cmp = js+'/components'
   sh %{npm install}
   sh %{cd #{js} && bower install}
-  sh %{cd #{js}/components/bootstrap && make bootstrap}
+  sh %{cd #{cmp}/bootstrap && make bootstrap}
+  sh %{cd #{cmp}/openlayers/build && python build.py full OpenLayers.js}
   sh %{grunt min:neatline}
   sh %{grunt stylus}
 end

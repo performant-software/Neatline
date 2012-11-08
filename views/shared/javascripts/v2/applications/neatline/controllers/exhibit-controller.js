@@ -23,10 +23,10 @@ Neatline.Controllers.Exhibit = (function(Backbone, Neatline) {
    */
   Exhibit.init = function() {
 
-    // Get records.
+    // Create records collection.
     Exhibit.Records = new Neatline.Collections.Records();
 
-    // Emit to widgets.
+    // Listen for new records.
     Exhibit.Records.on('reset', function() {
       Neatline.vent.trigger('exhibit:newRecords');
     });

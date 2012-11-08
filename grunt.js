@@ -25,6 +25,7 @@ module.exports = function(grunt) {
     c.components+c.vendor.eventbinder,
     c.components+c.vendor.wreqr,
     c.components+c.vendor.marionette,
+    c.components+c.vendor.openlayers,
     c.components+c.vendor.d3
   ];
 
