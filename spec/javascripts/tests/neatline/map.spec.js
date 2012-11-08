@@ -223,13 +223,13 @@ describe('Map', function() {
 
   it('should render and publish feature hover', function() {
 
-    // Get layer.
+    // Get layer and feature.
     var layers = _t.getVectorLayers();
     var layer = layers[0];
-
-    // Get feature, trigger hover.
     var feature = layer.features[0];
-    $(layer.div.firstChild).trigger($.Event('mouseenter'));
+
+    // Spy on map:highlight.
+    spyOn(Neatline.vent, 'trigger');
 
     // Clobber getFeaturesFromEvent().
     layer.getFeatureFromEvent = function(evt) { return feature; };
@@ -243,14 +243,51 @@ describe('Map', function() {
     // Trigger move.
     _t.map.map.events.triggerEvent('mousemove', evt);
 
-    // Check render intent and styles.
+    // Check render intent.
     expect(feature.renderIntent).toEqual('temporary');
+
+    // Check styles.
+    // TODO
+
+    // Check for event publication.
+    expect(Neatline.vent.trigger).toHaveBeenCalledWith('map:highlight');
 
   });
 
   it('should render and publish feature unhover');
 
-  it('should render and publish feature select');
+  it('should render and publish feature select', function() {
+
+    // Get layer and feature.
+    var layers = _t.getVectorLayers();
+    var layer = layers[0];
+    var feature = layer.features[0];
+
+    // Spy on map:highlight.
+    spyOn(Neatline.vent, 'trigger');
+
+    // Clobber getFeaturesFromEvent().
+    layer.getFeatureFromEvent = function(evt) { return feature; };
+
+    // Mock cursor event.
+    var evt = {
+      xy: new OpenLayers.Pixel(Math.random(), Math.random()),
+      type: 'click'
+    };
+
+    // Trigger move.
+    _t.map.map.events.triggerEvent('click', evt);
+
+    // Check render intent.
+    expect(feature.renderIntent).toEqual('select');
+
+    // Check styles.
+    // TODO
+
+    // Check for event publication.
+    expect(Neatline.vent.trigger).toHaveBeenCalledWith('map:select');
+
+  });
 
   it('should render and publish feature unselect');
 
