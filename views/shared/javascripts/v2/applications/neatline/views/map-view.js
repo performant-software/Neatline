@@ -108,15 +108,20 @@ Neatline.Views.Map = Backbone.View.extend({
       // If active on the map.
       if (record.get('map_active') == 1) {
 
-        // Build geometry.
+        // Build geometry and style.
         var formatter = new OpenLayers.Format.KML();
         var geometry = formatter.read(record.get('coverage'));
+        var style = this.getStyleMap(record);
 
         // Build the layer.
-        var layer = new OpenLayers.Layer.Vector(record.get('title'));
-        layer.addFeatures(geometry);
+        var layer = new OpenLayers.Layer.Vector(
+          record.get('title'), {
+            styleMap: style, displayInLayerSwitcher: false
+          }
+        );
 
         // Add to map, track.
+        layer.addFeatures(geometry);
         this.map.addLayer(layer);
         this.layers.push(layer);
 
@@ -124,6 +129,48 @@ Neatline.Views.Map = Backbone.View.extend({
 
     }, this));
 
+  },
+
+  /*
+   * Construct style map for a record.
+   *
+   * @param {Object} record: The record.
+   *
+   * @return void.
+   */
+  getStyleMap: function(record) {
+    return new OpenLayers.StyleMap({
+      'default': new OpenLayers.Style({
+        fillColor:        record.get('vector_color'),
+        fillOpacity:      record.get('vector_opacity'),
+        strokeColor:      record.get('stroke_color'),
+        strokeOpacity:    record.get('stroke_opacity'),
+        pointRadius:      record.get('point_radius'),
+        externalGraphic:  record.get('point_image'),
+        graphicOpacity:   record.get('graphic_opacity'),
+        strokeWidth:      record.get('stroke_width')
+      }),
+      'select': new OpenLayers.Style({
+        fillColor:        record.get('highlight_color'),
+        fillOpacity:      record.get('select_opacity'),
+        strokeColor:      record.get('stroke_color'),
+        strokeOpacity:    record.get('stroke_opacity'),
+        pointRadius:      record.get('point_radius'),
+        externalGraphic:  record.get('point_image'),
+        graphicOpacity:   record.get('graphic_opacity'),
+        strokeWidth:      record.get('stroke_width')
+      }),
+      'temporary': new OpenLayers.Style({
+        fillColor:        record.get('highlight_color'),
+        fillOpacity:      record.get('vector_opacity'),
+        strokeColor:      record.get('stroke_color'),
+        strokeOpacity:    record.get('stroke_opacity'),
+        pointRadius:      record.get('point_radius'),
+        externalGraphic:  record.get('point_image'),
+        graphicOpacity:   record.get('graphic_opacity'),
+        strokeWidth:      record.get('stroke_width')
+      })
+    });
   },
 
   /*
@@ -137,8 +184,12 @@ Neatline.Views.Map = Backbone.View.extend({
     this.hoverControl = new OpenLayers.Control.SelectFeature(
       this.layers, {
         hover: true,
-        overFeature: this.onFeatureHighlight,
-        outFeature: this.onFeatureUnhighlight
+        highlightOnly: true,
+        renderIntent: 'temporary',
+        eventListeners: {
+          featurehighlighted: this.onFeatureHighlight,
+          featureunhighlighted: this.onFeatureUnhighlight
+        }
       }
     );
 
