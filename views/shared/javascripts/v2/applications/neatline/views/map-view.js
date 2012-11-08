@@ -67,10 +67,23 @@ Neatline.Views.Map = Backbone.View.extend({
     // Construct the control.
     var geolocate = new OpenLayers.Control.Geolocate({
       bind: true, watch: false });
-    this.map.addControl(geolocate);
 
     // Focus.
+    this.map.addControl(geolocate);
     geolocate.activate();
+
+  },
+
+  /*
+   * Ingest records.
+   *
+   * @return void.
+   */
+  ingest: function() {
+
+    Neatline.Controllers.Exhibit.Records.each(function(record) {
+      console.log(record);
+    });
 
   }
 
