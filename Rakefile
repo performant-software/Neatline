@@ -35,6 +35,7 @@ task :build do
   sh %{cd #{cmp}/openlayers/build && python build.py full OpenLayers.js}
   sh %{grunt min:neatline}
   sh %{grunt stylus}
+  sh %{grunt concat:openlayers}
 end
 
 desc 'Clean pacakges'
