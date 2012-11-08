@@ -30,7 +30,15 @@ class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
         $record1 = $this->__record(null, $exhibit);
         $record2 = $this->__record(null, $exhibit);
 
+        // Read KML files.
+        $nyc = file_get_contents(NEATLINE_PLUGIN_DIR .
+            '/tests/mocks/nyc.kml');
+        $boston = file_get_contents(NEATLINE_PLUGIN_DIR .
+            '/tests/mocks/boston.kml');
+
         // Populate parameters.
+        $record1->geocoverage = $nyc;
+        $record2->geocoverage = $boston;
         $record1->map_active = 1;
         $record2->map_active = 1;
         $record1->vector_color = '#111111';
