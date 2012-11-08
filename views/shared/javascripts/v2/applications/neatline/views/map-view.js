@@ -15,13 +15,8 @@ Neatline.Views.Map = Backbone.View.extend({
    * @return void.
    */
   initialize: function() {
-
-    // Trackers.
     this.layers = [];
-
-    // Instantiate OpenLayers.
     this.initializeOpenLayers();
-
   },
 
   /*
