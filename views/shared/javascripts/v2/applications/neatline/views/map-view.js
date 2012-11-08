@@ -47,6 +47,10 @@ Neatline.Views.Map = Backbone.View.extend({
     this.map.addLayer(this.osm);
     this.map.setBaseLayer(this.osm);
 
+    // Set default zoom.
+    // TODO: Apply default exhibit zoom.
+    this.map.zoomTo(6);
+
   }
 
 });
