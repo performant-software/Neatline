@@ -69,7 +69,11 @@ function neatline_queueGoogleMapsApi()
 function neatline_renderExhibit($exhibit)
 {
     return json_encode(array(
-        'id' => $exhibit->id, 'data' => neatline_getDataSource($exhibit)));
+        'id' => $exhibit->id,
+        'dataSource' => neatline_getDataSource($exhibit),
+        'mapFocus' => $exhibit->map_focus,
+        'mapZoom' => $exhibit->map_zoom
+    ));
 }
 
 /**

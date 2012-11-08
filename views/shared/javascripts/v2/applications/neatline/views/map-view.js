@@ -54,13 +54,33 @@ Neatline.Views.Map = Backbone.View.extend({
     this.map.addLayer(this.osm);
     this.map.setBaseLayer(this.osm);
 
-    // Set default focus.
-    // TODO: Apply default exhibit focus.
-    this.geolocate();
+    this.setViewport();
 
-    // Set default zoom.
-    // TODO: Apply default exhibit zoom.
-    this.map.zoomTo(6);
+  },
+
+  /*
+   * Set default focus and zoom.
+   *
+   * @return void.
+   */
+  setViewport: function() {
+
+    // If defaults are defined.
+    if (!_.isNull(__exhibit.mapFocus)) {
+
+      // Get focus lat/lon.
+      var focus = __exhibit.mapFocus.split(',');
+      var latlon = new OpenLayers.LonLat(focus[0], focus[1]);
+
+      // Set center.
+      this.map.setCenter(latlon, __exhibit.mapZoom);
+
+    }
+
+    else {
+      this.map.zoomTo(6);
+      this.geolocate();
+    }
 
   },
 

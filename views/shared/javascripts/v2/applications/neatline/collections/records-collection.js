@@ -8,5 +8,5 @@
  */
 
 Neatline.Collections.Records = Backbone.Collection.extend({
-  url: (function() { return __exhibit.data; })
+  url: (function() { return __exhibit.dataSource; })
 });
