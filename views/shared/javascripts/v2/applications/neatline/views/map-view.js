@@ -9,6 +9,10 @@
 
 Neatline.Views.Map = Backbone.View.extend({
 
+  options: {
+    defaultZoom: 6
+  },
+
   /*
    * Start OpenLayers.
    *
@@ -73,7 +77,7 @@ Neatline.Views.Map = Backbone.View.extend({
     }
 
     else {
-      this.map.zoomTo(6);
+      this.map.zoomTo(this.options.defaultZoom);
       this.geolocate();
     }
 

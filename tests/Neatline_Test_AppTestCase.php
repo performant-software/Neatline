@@ -131,6 +131,31 @@ class Neatline_Test_AppTestCase extends Omeka_Test_AppTestCase
     }
 
     /**
+     * Write the response body from a route to a fixture file.
+     *
+     * @param string $route The resource location.
+     * @param string $file The name of the fixture file.
+     *
+     * @return void.
+     */
+    public function writeFixture($route, $file)
+    {
+
+        // Open fixture file.
+        $fixturePath = NEATLINE_PLUGIN_DIR . '/spec/javascripts/fixtures/';
+        $fixture = fopen($fixturePath . $file, 'w');
+
+        // Hit route, get response.
+        $this->dispatch($route);
+        $response = $this->getResponse()->getBody('default');
+
+        // Write fixture.
+        fwrite($fixture, $response);
+        fclose($fixture);
+
+    }
+
+    /**
      * Get the first exhibit.
      *
      * @return NeatlineExhibit The record.

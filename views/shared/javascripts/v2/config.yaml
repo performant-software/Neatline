@@ -5,6 +5,7 @@ default:
 
   apps:
     neatline: "views/shared/javascripts/v2/applications/neatline/"
+    editor: "views/shared/javascripts/v2/applications/editor/"
 
   vendor:
     jquery: "jquery/jquery.js"

@@ -54,6 +54,21 @@ module.exports = function(grunt) {
           c.components+c.vendor.openlayers_css
         ],
         dest: css+'neatline.css'
+      },
+
+      test: {
+        src: vendorFiles.concat([
+          c.apps.neatline+'app.js',
+          c.apps.neatline+'collections/*.js',
+          c.apps.neatline+'controllers/*.js',
+          c.apps.neatline+'views/*.js',
+          c.apps.editor+'app.js',
+          c.apps.editor+'collections/*.js',
+          c.apps.editor+'controllers/*.js',
+          c.apps.editor+'views/*.js'
+        ]),
+        dest: c.payload+'test.js',
+        separator: ';'
       }
 
     },

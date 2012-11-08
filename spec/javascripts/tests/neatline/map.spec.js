@@ -9,12 +9,18 @@
 
 describe('Map', function() {
 
+  var json = {
+    status: 200, responseText: readFixtures('map-records.json')
+  };
+
   // Get fixtures.
   beforeEach(function() {
-
+    console.log(json);
   });
 
-  it('should set exhibit default focus and zoom');
+  it('should set exhibit default focus and zoom', function() {
+
+  });
 
   it('should set a focus and zoom when no exhibit defaults');
 
