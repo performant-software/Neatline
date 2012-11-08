@@ -131,7 +131,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
             `stroke_width`          int(10) unsigned NULL,
             `point_radius`          int(10) unsigned NULL,
             `point_image`           tinytext COLLATE utf8_unicode_ci NULL,
-            `space_active`          tinyint(1) NULL,
+            `map_active`            tinyint(1) NULL,
             `time_active`           tinyint(1) NULL,
             `items_active`          tinyint(1) NULL,
             `display_order`         int(10) unsigned NULL,

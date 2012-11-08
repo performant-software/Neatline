@@ -35,7 +35,7 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
         'left_percent' => 0,
         'right_percent' => 100,
         'geocoverage' => '[POINT(-1.0, 1.0)]',
-        'space_active' => true,
+        'map_active' => true,
         'time_active' => true,
         'parent_record_id' => 1,
         'use_dc_metadata' => 1,
@@ -234,7 +234,7 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
 
     /**
      * Hitting the /status route with a well-formed POST should result in the
-     * correct data commits to the space_active field in the correct record.
+     * correct data commits to the map_active field in the correct record.
      *
      * @return void.
      */
@@ -272,7 +272,7 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
         $record = $this->_recordsTable->getRecordByItemAndExhibit($item, $neatline);
 
         // Space status should be true, time status unchanged.
-        $this->assertEquals($record->space_active, 1);
+        $this->assertEquals($record->map_active, 1);
         $this->assertEquals($record->time_active, 0);
 
         // Action should return the record id.
@@ -324,7 +324,7 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
 
         // Time status should be true, space status unchanged.
         $this->assertEquals($record->time_active, 1);
-        $this->assertEquals($record->space_active, 0);
+        $this->assertEquals($record->map_active, 0);
 
         // Action should return the record id.
         $this->assertContains(
@@ -373,7 +373,7 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
         $record = $this->_recordsTable->getRecordByItemAndExhibit($item, $neatline);
 
         // Space status should be true, time status unchanged.
-        $this->assertEquals($record->space_active, 1);
+        $this->assertEquals($record->map_active, 1);
         $this->assertEquals($record->time_active, 0);
 
         // Action should return the record id.
@@ -424,7 +424,7 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
         $record = $this->_recordsTable->getRecordByItemAndExhibit($item, $neatline);
 
         // Space status should be true, time status unchanged.
-        $this->assertEquals($record->space_active, 0);
+        $this->assertEquals($record->map_active, 0);
         $this->assertEquals($record->time_active, 1);
 
     }
@@ -467,7 +467,7 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
         $record = $this->_recordsTable->getRecordByItemAndExhibit($item, $neatline);
 
         // Space status should be true, time status unchanged.
-        $this->assertEquals($record->space_active, 0);
+        $this->assertEquals($record->map_active, 0);
         $this->assertEquals($record->time_active, 1);
 
     }
@@ -510,7 +510,7 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
         $record->left_percent =         self::$__testParams['left_percent'];
         $record->right_percent =        self::$__testParams['right_percent'];
         $record->geocoverage =          self::$__testParams['geocoverage'];
-        $record->space_active =         self::$__testParams['space_active'];
+        $record->map_active =         self::$__testParams['map_active'];
         $record->time_active =          self::$__testParams['time_active'];
         $record->save();
 
@@ -724,7 +724,7 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
     //             'item_id' =>            '',
     //             'record_id' =>          $record2->id,
     //             'exhibit_id' =>         $neatline->id,
-    //             'space_active' =>       (string) self::$__testParams['space_active'],
+    //             'map_active' =>       (string) self::$__testParams['map_active'],
     //             'time_active' =>        (string) self::$__testParams['time_active'],
     //             'geocoverage' =>        self::$__testParams['geocoverage'],
     //             'title' =>              self::$__testParams['title'],
@@ -884,7 +884,7 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
     //     );
 
     //     $this->assertEquals(
-    //         $record->space_active,
+    //         $record->map_active,
     //         1
     //     );
 
@@ -916,7 +916,7 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
     //             'item_id' =>            $item->id,
     //             'record_id' =>          '',
     //             'exhibit_id' =>         $neatline->id,
-    //             'space_active' =>       (string) self::$__testParams['space_active'],
+    //             'map_active' =>       (string) self::$__testParams['map_active'],
     //             'time_active' =>        (string) self::$__testParams['time_active'],
     //             'geocoverage' =>        self::$__testParams['geocoverage'],
     //             'title' =>              self::$__testParams['title'],
@@ -1079,7 +1079,7 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
     //     );
 
     //     $this->assertEquals(
-    //         $record->space_active,
+    //         $record->map_active,
     //         1
     //     );
 
@@ -1115,7 +1115,7 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
     //             'item_id' =>            $item->id,
     //             'record_id' =>          $record2->id,
     //             'exhibit_id' =>         $neatline->id,
-    //             'space_active' =>       (string) self::$__testParams['space_active'],
+    //             'map_active' =>       (string) self::$__testParams['map_active'],
     //             'time_active' =>        (string) self::$__testParams['time_active'],
     //             'geocoverage' =>        self::$__testParams['geocoverage'],
     //             'title' =>              self::$__testParams['title'],
@@ -1282,7 +1282,7 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
     //     );
 
     //     $this->assertEquals(
-    //         $record->space_active,
+    //         $record->map_active,
     //         1
     //     );
 
@@ -1318,7 +1318,7 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
     //             'item_id' =>            '',
     //             'record_id' =>          $record2->id,
     //             'exhibit_id' =>         $neatline->id,
-    //             'space_active' =>       (string) self::$__testParams['space_active'],
+    //             'map_active' =>       (string) self::$__testParams['map_active'],
     //             'time_active' =>        (string) self::$__testParams['time_active'],
     //             'geocoverage' =>        'null',
     //             'title' =>              self::$__testParams['title'],
@@ -1442,7 +1442,7 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
     //             'item_id' =>            '',
     //             'record_id' =>          $record2->id,
     //             'exhibit_id' =>         $neatline->id,
-    //             'space_active' =>       (string) self::$__testParams['space_active'],
+    //             'map_active' =>       (string) self::$__testParams['map_active'],
     //             'time_active' =>        (string) self::$__testParams['time_active'],
     //             'geocoverage' =>        'null',
     //             'title' =>              self::$__testParams['title'],
@@ -1514,7 +1514,7 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
     //             'item_id' =>            '',
     //             'record_id' =>          $record->id,
     //             'exhibit_id' =>         $neatline->id,
-    //             'space_active' =>       (string) self::$__testParams['space_active'],
+    //             'map_active' =>       (string) self::$__testParams['map_active'],
     //             'time_active' =>        (string) self::$__testParams['time_active'],
     //             'geocoverage' =>        'null',
     //             'title' =>              self::$__testParams['title'],
@@ -1577,7 +1577,7 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
     //             'item_id' =>            $item->id,
     //             'record_id' =>          '',
     //             'exhibit_id' =>         $neatline->id,
-    //             'space_active' =>       (string) self::$__testParams['space_active'],
+    //             'map_active' =>       (string) self::$__testParams['map_active'],
     //             'time_active' =>        (string) self::$__testParams['time_active'],
     //             'geocoverage' =>        self::$__testParams['geocoverage'],
     //             'title' =>              self::$__testParams['title'],
@@ -1618,7 +1618,7 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
 
     /**
      * If there is a null geocoverage field and a hit to /save commits novel
-     * coverage data, the space_active tracker on an existing record should
+     * coverage data, the map_active tracker on an existing record should
      * be flipped on.
      *
      * @return void.
@@ -1633,7 +1633,7 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
     //     $record->save();
 
     //     // At the start, both trackers false.
-    //     $this->assertFalse((bool) $record->space_active);
+    //     $this->assertFalse((bool) $record->map_active);
     //     $this->assertFalse((bool) $record->time_active);
 
     //     // Form the POST with new geocoverage data.
@@ -1642,7 +1642,7 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
     //             'item_id' =>            $item->id,
     //             'record_id' =>          $record->id,
     //             'exhibit_id' =>         $neatline->id,
-    //             'space_active' =>       (string) self::$__testParams['space_active'],
+    //             'map_active' =>       (string) self::$__testParams['map_active'],
     //             'time_active' =>        'false',
     //             'geocoverage' =>        self::$__testParams['geocoverage'],
     //             'title' =>              self::$__testParams['title'],
@@ -1675,14 +1675,14 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
 
     //     // Get the record and check the attributes.
     //     $record = $this->_recordsTable->getRecordByItemAndExhibit($item, $neatline);
-    //     $this->assertTrue((bool) $record->space_active);
+    //     $this->assertTrue((bool) $record->map_active);
     //     $this->assertFalse((bool) $record->time_active);
 
     // }
 
     /**
      * If there is a null geocoverage field and a hit to /save commits novel
-     * coverage data, the space_active tracker on a new record should be flipped on.
+     * coverage data, the map_active tracker on a new record should be flipped on.
      *
      * @return void.
      */
@@ -1699,7 +1699,7 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
     //             'item_id' =>            $item->id,
     //             'record_id' =>          '',
     //             'exhibit_id' =>         $neatline->id,
-    //             'space_active' =>       (string) self::$__testParams['space_active'],
+    //             'map_active' =>       (string) self::$__testParams['map_active'],
     //             'time_active' =>        'false',
     //             'geocoverage' =>        self::$__testParams['geocoverage'],
     //             'title' =>              self::$__testParams['title'],
@@ -1732,7 +1732,7 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
 
     //     // Get the record and check the attributes.
     //     $record = $this->_recordsTable->find(1);
-    //     $this->assertTrue((bool) $record->space_active);
+    //     $this->assertTrue((bool) $record->map_active);
     //     $this->assertFalse((bool) $record->time_active);
 
     // }
@@ -1754,7 +1754,7 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
     //     $record->save();
 
     //     // At the start, both trackers false.
-    //     $this->assertFalse((bool) $record->space_active);
+    //     $this->assertFalse((bool) $record->map_active);
     //     $this->assertFalse((bool) $record->time_active);
 
     //     // Form the POST with new geocoverage data.
@@ -1763,7 +1763,7 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
     //             'item_id' =>            $item->id,
     //             'record_id' =>          $record->id,
     //             'exhibit_id' =>         $neatline->id,
-    //             'space_active' =>       'false',
+    //             'map_active' =>       'false',
     //             'time_active' =>        (string) self::$__testParams['time_active'],
     //             'geocoverage' =>        '',
     //             'title' =>              self::$__testParams['title'],
@@ -1796,7 +1796,7 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
 
     //     // Get the record and check the attributes.
     //     $record = $this->_recordsTable->getRecordByItemAndExhibit($item, $neatline);
-    //     $this->assertFalse((bool) $record->space_active);
+    //     $this->assertFalse((bool) $record->map_active);
     //     $this->assertTrue((bool) $record->time_active);
 
     // }
@@ -1820,7 +1820,7 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
     //             'item_id' =>            $item->id,
     //             'record_id' =>          '',
     //             'exhibit_id' =>         $neatline->id,
-    //             'space_active' =>       'false',
+    //             'map_active' =>       'false',
     //             'time_active' =>        (string) self::$__testParams['time_active'],
     //             'geocoverage' =>        '',
     //             'title' =>              self::$__testParams['title'],
@@ -1853,7 +1853,7 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
 
     //     // Get the record and check the attributes.
     //     $record = $this->_recordsTable->find(1);
-    //     $this->assertFalse((bool) $record->space_active);
+    //     $this->assertFalse((bool) $record->map_active);
     //     $this->assertTrue((bool) $record->time_active);
 
     // }
@@ -2170,7 +2170,7 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
         // Check the attributes.
         $this->assertEquals($record->map_focus, 'CENTER()');
         $this->assertEquals($record->map_zoom, 5);
-        $this->assertEquals($record->space_active, 1);
+        $this->assertEquals($record->map_active, 1);
 
     }
 
@@ -2212,7 +2212,7 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
         // Check the attributes.
         $this->assertEquals($record->map_focus, 'CENTER()');
         $this->assertEquals($record->map_zoom, 5);
-        $this->assertEquals($record->space_active, 1);
+        $this->assertEquals($record->map_active, 1);
 
     }
 
@@ -2255,7 +2255,7 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
         // Check the attributes.
         $this->assertEquals($record->map_focus, 'CENTER()');
         $this->assertEquals($record->map_zoom, 5);
-        $this->assertEquals($record->space_active, 1);
+        $this->assertEquals($record->map_active, 1);
 
     }
 
@@ -2299,7 +2299,7 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
         // Check the attributes.
         $this->assertEquals($record->map_focus, 'CENTER()');
         $this->assertEquals($record->map_zoom, 5);
-        $this->assertEquals($record->space_active, 1);
+        $this->assertEquals($record->map_active, 1);
 
     }
 

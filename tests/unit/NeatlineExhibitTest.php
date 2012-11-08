@@ -191,7 +191,7 @@ class Neatline_NeatlineExhibitTest extends Neatline_Test_AppTestCase
         $this->assertFalse($neatline->getRecordStatus($item, 'items'));
 
         // Trues.
-        $record->space_active = 1;
+        $record->map_active = 1;
         $record->time_active = 1;
         $record->items_active = 1;
         $record->save();
@@ -543,10 +543,10 @@ class Neatline_NeatlineExhibitTest extends Neatline_Test_AppTestCase
         $record2 = new NeatlineRecord(null, $neatline1);
         $record3 = new NeatlineRecord(null, $neatline1);
         $record4 = new NeatlineRecord(null, $neatline2);
-        $record1->space_active = 1;
-        $record2->space_active = 1;
-        $record3->space_active = 1;
-        $record4->space_active = 1;
+        $record1->map_active = 1;
+        $record2->map_active = 1;
+        $record3->map_active = 1;
+        $record4->map_active = 1;
         $record1->save();
         $record2->save();
         $record3->save();

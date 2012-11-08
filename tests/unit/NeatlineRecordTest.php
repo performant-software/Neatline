@@ -35,7 +35,7 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
         'geocoverage' => '[POINT(-1.0, 1.0)]',
         'map_focus' => '[POINT(-1.0, 1.0)]',
         'map_zoom' => 5,
-        'space_active' => true,
+        'map_active' => true,
         'time_active' => true,
         'parent_record_id' => 1,
         'use_dc_metadata' => 1,
@@ -79,7 +79,7 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
         $record->geocoverage =                  'POINT()';
         $record->left_percent =                 30;
         $record->right_percent =                80;
-        $record->space_active =                 1;
+        $record->map_active =                 1;
         $record->time_active =                  1;
         $record->items_active =                 1;
         $record->display_order =                1;
@@ -113,7 +113,7 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
         $this->assertEquals($record->geocoverage, 'POINT()');
         $this->assertEquals($record->left_percent, 30);
         $this->assertEquals($record->right_percent, 80);
-        $this->assertEquals($record->space_active, 1);
+        $this->assertEquals($record->map_active, 1);
         $this->assertEquals($record->time_active, 1);
         $this->assertEquals($record->items_active, 1);
         $this->assertEquals($record->display_order, 1);
@@ -147,7 +147,7 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
         $this->assertEquals($record->show_bubble, 1);
 
         // Status columns should be false.
-        $this->assertEquals($record->space_active, 0);
+        $this->assertEquals($record->map_active, 0);
         $this->assertEquals($record->time_active, 0);
         $this->assertEquals($record->items_active, 0);
 
@@ -375,12 +375,12 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
 
         // Test true.
         $success = $record->setStatus('space', true);
-        $this->assertEquals($record->space_active, 1);
+        $this->assertEquals($record->map_active, 1);
         $this->assertTrue($success);
 
         // Test false.
         $success = $record->setStatus('space', false);
-        $this->assertEquals($record->space_active, 0);
+        $this->assertEquals($record->map_active, 0);
         $this->assertTrue($success);
 
         // Test true.
@@ -415,7 +415,7 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
 
         // Test invalid space.
         $failure = $record->setStatus('space', 'notBoolean');
-        $this->assertEquals($record->space_active, 0);
+        $this->assertEquals($record->map_active, 0);
         $this->assertFalse($failure);
 
         // Test invalid time.
@@ -425,12 +425,12 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
 
         // Create a record and set values to true.
         $record = $this->__record();
-        $record->space_active = 1;
+        $record->map_active = 1;
         $record->time_active = 1;
 
         // Test invalid space reverts to already-set true.
         $failure = $record->setStatus('space', 'notBoolean');
-        $this->assertEquals($record->space_active, 1);
+        $this->assertEquals($record->map_active, 1);
         $this->assertFalse($failure);
 
         // Test invalid time reverts to already-set true.
@@ -1912,7 +1912,7 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
         $record->left_percent =         self::$__testParams['left_percent'];
         $record->right_percent =        self::$__testParams['right_percent'];
         $record->geocoverage =          self::$__testParams['geocoverage'];
-        $record->space_active =         self::$__testParams['space_active'];
+        $record->map_active =           self::$__testParams['map_active'];
         $record->time_active =          self::$__testParams['time_active'];
         $record->save();
 
@@ -1987,7 +1987,7 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
         $record->left_percent =         '0';
         $record->right_percent =        '100';
         $record->geocoverage =          self::$__testParams['geocoverage'];
-        $record->space_active =         self::$__testParams['space_active'];
+        $record->map_active =           self::$__testParams['map_active'];
         $record->time_active =          self::$__testParams['time_active'];
         $record->save();
 
@@ -2414,7 +2414,7 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
         $record->show_bubble =          self::$__testParams['show_bubble'];
 
         // Map.
-        $record->map_focus =           self::$__testParams['map_focus'];
+        $record->map_focus =            self::$__testParams['map_focus'];
         $record->map_zoom =             self::$__testParams['map_zoom'];
         $record->geocoverage =          self::$__testParams['geocoverage'];
 
@@ -2425,7 +2425,7 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
         $record->end_visible_date =     self::$__testParams['end_visible_date'];
 
         // Statuses.
-        $record->space_active =         self::$__testParams['space_active'];
+        $record->map_active =           self::$__testParams['map_active'];
 
         $record->save();
 

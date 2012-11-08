@@ -180,7 +180,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
      * Boolean for whether the record is present on the map.
      * tinyint(1) NULL
      */
-    public $space_active = 0;
+    public $map_active = 0;
 
     /**
      * Boolean for whether the record is present on the timeline.
@@ -482,7 +482,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
     }
 
     /**
-     * Set the space_active or time_active attributes. Reject non-
+     * Set the map_active or time_active attributes. Reject non-
      * boolean parameters.
      *
      * @param string $viewport 'items', 'space', or 'time'.
@@ -505,7 +505,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
 
         // If space.
         else if ($viewport == 'space') {
-            $this->space_active = $intValue;
+            $this->map_active = $intValue;
         }
 
         // If time.
@@ -1275,7 +1275,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
     public function buildMapDataArray($index=array(), $wmss=array(), $exhibit=null) {
 
         // If not active on map, return null.
-        if ($this->space_active != 1) { return null; }
+        if ($this->map_active != 1) { return null; }
 
         // Cache the parent record for upcoming calls to getStyle().
         $this->_setParent($index, $exhibit);

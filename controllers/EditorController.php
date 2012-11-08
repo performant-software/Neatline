@@ -172,7 +172,7 @@ class Neatline_EditorController extends Omeka_Controller_AbstractActionControlle
         $strokeWidth =              $_post['stroke_width'];
         $pointRadius =              $_post['point_radius'];
         $pointImage =               $_post['point_image'];
-        $spaceStatus =              (boolean) json_decode($_post['space_active']);
+        $spaceStatus =              (boolean) json_decode($_post['map_active']);
         $timeStatus =               (boolean) json_decode($_post['time_active']);
         $leftPercent =              (int) $_post['left_percent'];
         $rightPercent =             (int) $_post['right_percent'];
@@ -250,7 +250,7 @@ class Neatline_EditorController extends Omeka_Controller_AbstractActionControlle
             'recordid' =>   $record->id,
             'form' =>       $record->buildEditFormJson(),
             'statuses' =>   array(
-                'space' =>  (bool) $record->space_active,
+                'space' =>  (bool) $record->map_active,
                 'time' =>   (bool) $record->time_active
             )
         ));
@@ -459,9 +459,9 @@ class Neatline_EditorController extends Omeka_Controller_AbstractActionControlle
 
         }
 
-        $record->map_focus =       $center;
-        $record->map_zoom =         $zoom;
-        $record->space_active =     1;
+        $record->map_focus =    $center;
+        $record->map_zoom =     $zoom;
+        $record->map_active =   1;
         $record->save();
 
     }

@@ -184,7 +184,7 @@ class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
         $record1 = new NeatlineRecord(null, $exhibit);
         $record1->title = 'Title1';
         $record1->description = 'Description 1.';
-        $record1->space_active = 1;
+        $record1->map_active = 1;
         $record1->save();
 
         // Record 2.
@@ -197,7 +197,7 @@ class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
         // Record 3.
         $record3 = new NeatlineRecord($item1, $exhibit);
         $record3->description = 'Description 3.';
-        $record3->space_active = 1;
+        $record3->map_active = 1;
         $record3->save();
 
         // Record 4.
@@ -262,7 +262,7 @@ class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
         $record3->stroke_width = 3;
         $record3->point_radius = 5;
         $record3->exhibit_id = $exhibit->id;
-        $record3->space_active = 1;
+        $record3->map_active = 1;
         $record3->parent_record_id = $record1->id;
         $record3->use_dc_metadata = 0;
         $record3->show_bubble = 1;

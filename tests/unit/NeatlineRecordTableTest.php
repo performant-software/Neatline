@@ -31,7 +31,7 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
         'left_percent' => 0,
         'right_percent' => 100,
         'geocoverage' => '[POINT(-1.0, 1.0)]',
-        'space_active' => true,
+        'map_active' => true,
         'time_active' => true
     );
 
@@ -407,7 +407,7 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
         $this->assertEquals($this->_recordsTable->count(), 1);
 
         // Check that the parameter was set.
-        $this->assertEquals($record->space_active, 1);
+        $this->assertEquals($record->map_active, 1);
         $record->delete();
 
         // At the start, no records.
@@ -458,7 +458,7 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
 
         // After the save, there should be 1 record.
         $this->assertEquals($this->_recordsTable->count(), 1);
-        $this->assertEquals($record->space_active, 1);
+        $this->assertEquals($record->map_active, 1);
 
         // At the start, no records.
         $this->assertEquals($this->_recordsTable->count(), 1);
@@ -487,7 +487,7 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
         $record = new NeatlineRecord($item, $neatline);
 
         // Populate statuses with trues.
-        $record->space_active = 1;
+        $record->map_active = 1;
         $record->time_active = 1;
         $record->items_active = 1;
         $record->save();
@@ -503,7 +503,7 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
         $this->assertTrue($itemsStatus);
 
         // Populate statuses with falses.
-        $record->space_active = 0;
+        $record->map_active = 0;
         $record->time_active = 0;
         $record->items_active = 0;
         $record->save();
@@ -798,7 +798,7 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
         $record1 = new NeatlineRecord($item1, $neatline);
         $record1->save();
         $record2 = new NeatlineRecord($item2, $neatline);
-        $record2->space_active = 1;
+        $record2->map_active = 1;
         $record2->save();
 
         // Get the records and check result.
@@ -925,7 +925,7 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
         $record1 = new NeatlineRecord($item1, $neatline);
         $record1->save();
         $record2 = new NeatlineRecord($item2, $neatline);
-        $record2->space_active = 1;
+        $record2->map_active = 1;
         $record2->save();
 
         // Get the records and check result.
@@ -1135,8 +1135,8 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
         $record2->point_image = 'http://test2.org';
         $record1->geocoverage = 'kml1';
         $record2->geocoverage = 'kml2';
-        $record1->space_active = 1;
-        $record2->space_active = 1;
+        $record1->map_active = 1;
+        $record2->map_active = 1;
         $record1->time_active = 1;
         $record2->time_active = 1;
         $record1->map_focus = 'center1';
@@ -1276,8 +1276,8 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
         $record2->point_image = 'http://test2.org';
         $record1->geocoverage = 'POINT(1,0)';
         $record2->geocoverage = 'POINT(0,1)';
-        $record1->space_active = 1;
-        $record2->space_active = 1;
+        $record1->map_active = 1;
+        $record2->map_active = 1;
         $record1->map_focus = 'CENTER(1)';
         $record2->map_focus = 'CENTER(2)';
         $record1->map_zoom = 4;
@@ -1391,8 +1391,8 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
         $record2->title = 'Item 2 Title';
         $record1->geocoverage = 'POINT(1,0)';
         $record2->geocoverage = 'POINT(0,1)';
-        $record1->space_active = 1;
-        $record2->space_active = 1;
+        $record1->map_active = 1;
+        $record2->map_active = 1;
         $record1->save();
         $record2->save();
 
@@ -1425,7 +1425,7 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
         $record->title = 'Title';
         $record->vector_color = '#ffffff';
         $record->geocoverage = 'POINT(1,0)';
-        $record->space_active = 0;
+        $record->map_active = 0;
         $record->save();
 
         // Build the JSON.

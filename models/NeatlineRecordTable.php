@@ -212,7 +212,7 @@ class NeatlineRecordTable extends Omeka_Db_Table
         $records = $this->fetchObjects(
             $this->getSelect()
                  ->where('exhibit_id=?', $exhibit->id)
-                 ->where('(space_active=1 OR time_active=1 OR items_active=1)')
+                 ->where('(map_active=1 OR time_active=1 OR items_active=1)')
                  ->order('display_order ASC')
         );
 
@@ -233,7 +233,7 @@ class NeatlineRecordTable extends Omeka_Db_Table
         $records = $this->fetchObjects(
             $this->getSelect()
                  ->where('exhibit_id=?', $exhibit->id)
-                 ->where('space_active=1')
+                 ->where('map_active=1')
                  ->order('display_order ASC')
         );
 
@@ -304,7 +304,7 @@ class NeatlineRecordTable extends Omeka_Db_Table
 
             // If space.
             if ($viewport == 'space') {
-                return (bool) $record->space_active;
+                return (bool) $record->map_active;
             }
 
             // If time.
