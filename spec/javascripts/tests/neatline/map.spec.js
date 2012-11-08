@@ -20,16 +20,44 @@ describe('Map', function() {
     loadFixtures('neatline-partial.html');
     jasmine.Ajax.useMock();
 
+  });
+
+  it('should set exhibit default focus and zoom', function() {
+
+    // Set exhibit defaults.
+    __exhibit.mapZoom = 10;
+    __exhibit.mapFocus = '-8031391.4348622, 5085508.3651615';
+
     // Run Neatline.
     _t.loadNeatline();
     var request = mostRecentAjaxRequest();
     request.response(json);
 
+    // Check viewport.
+    var center = _t.map.map.getCenter();
+    expect(_t.map.map.zoom).toEqual(10);
+    expect(center.lon).toEqual(-8031391.4348622);
+    expect(center.lat).toEqual(5085508.3651615);
+
   });
 
-  it('should set exhibit default focus and zoom');
+  it('should set a focus and zoom when no exhibit defaults', function() {
 
-  it('should set a focus and zoom when no exhibit defaults');
+    // Set exhibit defaults.
+    __exhibit.mapZoom = null;
+    __exhibit.mapFocus = null;
+
+    // Run Neatline.
+    _t.loadNeatline();
+    var request = mostRecentAjaxRequest();
+    request.response(json);
+
+    // Check viewport.
+    expect(_t.map.map.zoom).toEqual(_t.map.options.defaultZoom);
+
+    // TODO: How to check for geolocation?
+
+  });
 
   it('should render features');
 
