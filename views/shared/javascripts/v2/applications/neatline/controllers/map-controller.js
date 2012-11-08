@@ -22,7 +22,7 @@ Neatline.Controllers.Map = (function(Backbone, Neatline) {
    * @return void.
    */
   Map.init = function() {
-
+    Map.Map = new Neatline.Views.Map({ el: '#neatline-map' });
   };
 
 
@@ -38,7 +38,7 @@ Neatline.Controllers.Map = (function(Backbone, Neatline) {
    * @return void.
    */
   Neatline.vent.on('exhibit:newRecords', function(records) {
-    /* TODO */ console.log(Neatline.Controllers.Exhibit.Records.models);
+
   });
 
 

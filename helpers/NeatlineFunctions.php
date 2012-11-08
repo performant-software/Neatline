@@ -13,16 +13,6 @@
 
 
 /**
- * Include the neatline-admin.css stylesheet and the Google Fonts include.
- *
- * @return void.
- */
-function neatline_queueAdminCss()
-{
-    queue_css_file('neatline-admin');
-}
-
-/**
  * Include the static files for the Neatline.
  *
  * @param Omeka_record $exhibit The exhibit.
@@ -32,6 +22,7 @@ function neatline_queueAdminCss()
 function neatline_queueNeatlineAssets($exhibit)
 {
     neatline_queueGoogleMapsApi();
+    queue_css_file('v2/payloads/neatline');
     queue_js_file('v2/payloads/neatline', 'javascripts');
 }
 
@@ -43,7 +34,6 @@ function neatline_queueNeatlineAssets($exhibit)
 function neatline_queueEditorAssets()
 {
     queue_css_file('bootstrap/css/bootstrap.min');
-    queue_css_file('payloads/editor');
     queue_js_file('v2/payloads/editor', 'javascripts');
 }
 

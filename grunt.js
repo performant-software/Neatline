@@ -69,7 +69,7 @@ module.exports = function(grunt) {
 
     watch: {
       neatline: {
-        files: ['<config:concat.neatline.src>'],
+        files: ['<config:concat.neatline.src>', stylus+'/*.styl'],
         tasks: ['concat:neatline', 'stylus']
       }
     }
