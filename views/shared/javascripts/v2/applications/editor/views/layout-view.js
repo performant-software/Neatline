@@ -44,9 +44,10 @@ NeatlineEditor.Views.Layout = Backbone.View.extend({
     var width = this.window.width();
 
     // Render positions.
-    this.editor.css({ height: height, width: width*0.2 });
-    this.map.css({ height: height, width: width*0.8 });
-    this.exhibit.css({ left: width*0.2 });
+    this.editor.css({ height: height, width: 300 });
+    this.map.css({ height: height, width: width-300 });
+    this.exhibit.css({ left: 300 });
+    this.handle.css({ height: height, left: 300 });
 
   }
 

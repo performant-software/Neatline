@@ -9,8 +9,22 @@
 
 body
   margin 0
+  text-rendering optimizeLegibility
 
 #editor
+#drag-handle
 #neatline
   position absolute
   box-sizing border-box
+
+#neatline
+  -webkit-user-select none
+  -moz-user-select none
+
+#drag-handle
+  z-index 999
+  width 10px
+  cursor col-resize
+
+  &:hover
+    border-left 2px dashed gray
