@@ -21,7 +21,7 @@
 )); ?>
 
 <!-- Editor. -->
-<?php echo $this->partial('editor/_item_browser.php'); ?>
+<?php echo $this->partial('editor/_editor.php'); ?>
 
 <!-- Exhibit. -->
 <?php echo $this->partial('neatline/_neatline.php', array(

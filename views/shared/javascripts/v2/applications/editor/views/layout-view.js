@@ -9,6 +9,8 @@
 
 NeatlineEditor.Views.Layout = Backbone.View.extend({
 
+  widths: [],
+
   /*
    * Get markup.
    *
