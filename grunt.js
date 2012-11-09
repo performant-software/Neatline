@@ -48,12 +48,16 @@ module.exports = function(grunt) {
         separator: ';'
       },
 
-      openlayers: {
-        src: [
-          css+'neatline.css',
-          c.components+c.vendor.openlayers_css
-        ],
-        dest: css+'neatline.css'
+      editor: {
+        src: vendorFiles.concat([
+          c.apps.editor+'app.js',
+          c.apps.editor+'run.js',
+          c.apps.editor+'collections/*.js',
+          c.apps.editor+'controllers/*.js',
+          c.apps.editor+'views/*.js'
+        ]),
+        dest: c.payload+'neatline.js',
+        separator: ';'
       },
 
       test: {
@@ -69,6 +73,14 @@ module.exports = function(grunt) {
         ]),
         dest: c.payload+'test.js',
         separator: ';'
+      },
+
+      openlayers: {
+        src: [
+          css+'neatline.css',
+          c.components+c.vendor.openlayers_css
+        ],
+        dest: css+'neatline.css'
       }
 
     },
@@ -78,6 +90,12 @@ module.exports = function(grunt) {
       neatline: {
         src: ['<config:concat.neatline.src>'],
         dest: js+'neatline.js',
+        separator: ';'
+      },
+
+      editor: {
+        src: ['<config:concat.editor.src>'],
+        dest: js+'editor.js',
         separator: ';'
       }
 

@@ -39,10 +39,11 @@ task :build do
 
   # Build Boostrap and OpenLayers.
   sh %{cd #{bootstrap} && make bootstrap}
-  sh %{cd #{openlayers} && python build.py full OpenLayers.js -c none}
+  sh %{cd #{openlayers} && python build.py full OpenLayers.js}
 
   # Application JavaScript.
   sh %{grunt min:neatline}
+  sh %{grunt min:editor}
 
   # Application CSS.
   sh %{grunt stylus}
