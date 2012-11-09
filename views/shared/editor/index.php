@@ -1,4 +1,7 @@
 <?php
+
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
+
 /**
  * The top-level Neatline editor view. Wraps the markup for the editing
  * interface and then calls the central _neatline.php partial, which is
@@ -9,6 +12,7 @@
  * @copyright   2012 Rector and Board of Visitors, University of Virginia
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
+
 ?>
 
 <?php echo $this->partial('editor/_editor_header.php', array(
