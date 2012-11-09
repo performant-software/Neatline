@@ -1,6 +1,6 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2; */
 
 /**
  * Top-level Neatline partial.
@@ -14,10 +14,10 @@
 ?>
 
 <div id="neatline">
-    <div id="neatline-map" class="neatline-block"></div>
+  <div id="neatline-map" class="neatline-block"></div>
 </div>
 
 <!-- JSON globals. -->
 <script type="text/javascript">
-    __exhibit = <?php echo neatline_renderExhibit($exhibit); ?>
+  __exhibit = <?php echo neatline_renderExhibit($exhibit); ?>
 </script>

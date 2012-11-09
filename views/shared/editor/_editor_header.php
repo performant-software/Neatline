@@ -1,6 +1,6 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2; */
 
 /**
  * Document header for editor.
@@ -16,18 +16,19 @@
 <!DOCTYPE html>
 <html lang="en-us">
 <head>
-    <meta charset="utf-8">
-    <title><?php echo $title; ?></title>
 
-    <?php
-    fire_plugin_hook('admin_theme_header');
-    neatline_queueEditorAssets();
-    echo head_css();
-    echo head_js();
-    ?>
+  <meta charset="utf-8">
+  <title><?php echo $title; ?></title>
+
+  <?php
+  fire_plugin_hook('admin_theme_header');
+  neatline_queueEditorAssets();
+  echo head_css();
+  echo head_js();
+  ?>
 
 </head>
 
 <?php echo body_tag(array(
-    'id' => @$bodyid, 'class' => @$bodyclass
+  'id' => @$bodyid, 'class' => @$bodyclass
 )); ?>

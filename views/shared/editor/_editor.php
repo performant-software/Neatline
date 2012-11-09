@@ -1,6 +1,6 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2; */
 
 /**
  * Content management shell in editor.
@@ -14,5 +14,5 @@
 ?>
 
 <div id="editor">
-    <div id="drag-handle"></div>
+  <div id="drag-handle"></div>
 </div>

@@ -26,6 +26,7 @@ module.exports = function(grunt) {
     c.components+c.vendor.wreqr,
     c.components+c.vendor.marionette,
     c.components+c.vendor.openlayers_js,
+    c.components+c.vendor.bootstrap_js,
     c.components+c.vendor.d3
   ];
 
@@ -80,18 +81,20 @@ module.exports = function(grunt) {
         separator: ';'
       },
 
-      openlayersNeatline: {
+      neatlineCss: {
         src: [
           css+'neatline.css',
-          c.components+c.vendor.openlayers_css
+          c.components+c.vendor.openlayers_css,
+          c.components+c.vendor.bootstrap_css
         ],
         dest: css+'neatline.css'
       },
 
-      openlayersEditor: {
+      editorCss: {
         src: [
           css+'editor.css',
-          c.components+c.vendor.openlayers_css
+          c.components+c.vendor.openlayers_css,
+          c.components+c.vendor.bootstrap_css
         ],
         dest: css+'editor.css'
       }
@@ -132,8 +135,8 @@ module.exports = function(grunt) {
         'concat:editor',
         'concat:test',
         'stylus',
-        'concat:openlayersNeatline',
-        'concat:openlayersEditor'
+        'concat:neatlineCss',
+        'concat:editorCss'
       ]
     }
 
