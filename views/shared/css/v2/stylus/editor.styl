@@ -27,4 +27,28 @@ body
   cursor col-resize
 
   &:hover
-    border-left 2px dashed gray
+    border-left 2px dashed orange
+
+svg
+  display none
+  z-index 1000
+
+  line
+    shape-rendering crispEdges
+    stroke gray
+    stroke-width 10
+    opacity 0.2
+
+    &.highlighted
+      stroke orange
+
+.dragging
+
+  #neatline
+    z-index -1
+
+  #drag-handle
+    border-style-left solid
+
+  svg
+    display block

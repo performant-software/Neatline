@@ -37,7 +37,7 @@ Neatline.Views.Map = Backbone.View.extend({
     var options = {
       controls: [
         new OpenLayers.Control.MousePosition(),
-        new OpenLayers.Control.Zoom(),
+        new OpenLayers.Control.PanZoomBar(),
         new OpenLayers.Control.Navigation({ documentDrag: true }),
         new OpenLayers.Control.LayerSwitcher()
       ],
