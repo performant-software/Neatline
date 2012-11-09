@@ -30,15 +30,16 @@ task :build do
 
   # Paths.
   js = 'views/shared/javascripts/v2'
-  cmp = js+'/components'
+  bootstrap = js+'/components/bootstrap'
+  openlayers = js+'/components/openlayers/build'
 
   # NPM/bower install.
   sh %{npm install}
   sh %{cd #{js} && bower install}
 
   # Build Boostrap and OpenLayers.
-  sh %{cd #{cmp}/bootstrap && make bootstrap}
-  sh %{cd #{cmp}/openlayers/build && python build.py full OpenLayers.js}
+  sh %{cd #{bootstrap} && make bootstrap}
+  sh %{cd #{openlayers} && python build.py full OpenLayers.js -c none}
 
   # Application JavaScript.
   sh %{grunt min:neatline}

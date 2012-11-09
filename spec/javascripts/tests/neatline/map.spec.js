@@ -9,6 +9,8 @@
 
 describe('Map', function() {
 
+  var layers, layer, feature;
+
   var json = {
     status: 200, responseText: readFixtures('map-records.json')
   };
@@ -24,6 +26,11 @@ describe('Map', function() {
     _t.loadNeatline();
     var request = mostRecentAjaxRequest();
     request.response(json);
+
+    // Get layer and feature.
+    layers = _t.getVectorLayers();
+    layer = layers[0];
+    feature = layer.features[0];
 
   });
 
@@ -66,8 +73,6 @@ describe('Map', function() {
 
   it('should render features', function() {
 
-    var layers = _t.getVectorLayers();
-
     // Check geometry.
     expect(layers.length).toEqual(2);
     expect(layers[0].features[0].geometry.x).toEqual(-8233185.189506843);
@@ -78,8 +83,6 @@ describe('Map', function() {
   });
 
   it('should render styles', function() {
-
-    var layers = _t.getVectorLayers();
 
     /*
      * Default:
@@ -223,11 +226,6 @@ describe('Map', function() {
 
   it('should render and publish feature hover', function() {
 
-    // Get layer and feature.
-    var layers = _t.getVectorLayers();
-    var layer = layers[0];
-    var feature = layer.features[0];
-
     // Spy on map:highlight.
     spyOn(Neatline.vent, 'trigger');
 
@@ -243,25 +241,50 @@ describe('Map', function() {
     // Trigger move.
     _t.map.map.events.triggerEvent('mousemove', evt);
 
-    // Check render intent.
+    // Check render intent and publication.
     expect(feature.renderIntent).toEqual('temporary');
-
-    // Check styles.
-    // TODO
-
-    // Check for event publication.
     expect(Neatline.vent.trigger).toHaveBeenCalledWith('map:highlight');
 
   });
 
-  it('should render and publish feature unhover');
+  it('should render and publish feature unhover', function() {
+
+    // Spy on map:highlight.
+    spyOn(Neatline.vent, 'trigger');
+
+    // Mock cursor event.
+    var evt = {
+      xy: new OpenLayers.Pixel(Math.random(), Math.random()),
+      type: 'mousemove'
+    };
+
+    // Highlight the feature.
+    // ----------------------
+
+    // getFeaturesFromEvent() returns the mock feature.
+    layer.getFeatureFromEvent = function(evt) { return feature; };
+
+    // Trigger move.
+    _t.map.map.events.triggerEvent('mousemove', evt);
+
+    // Unhighlight the feature.
+    // ------------------------
+
+    // getFeaturesFromEvent() returns null.
+    _.each(layers, function(layer) {
+      layer.getFeatureFromEvent = function(evt) { return null; };
+    });
+
+    // Trigger move.
+    _t.map.map.events.triggerEvent('mousemove', evt);
+
+    // Check render intent and publication.
+    expect(feature.renderIntent).toEqual('default');
+    expect(Neatline.vent.trigger).toHaveBeenCalledWith('map:unhighlight');
+
+  });
 
   it('should render and publish feature select', function() {
-
-    // Get layer and feature.
-    var layers = _t.getVectorLayers();
-    var layer = layers[0];
-    var feature = layer.features[0];
 
     // Spy on map:highlight.
     spyOn(Neatline.vent, 'trigger');
@@ -278,17 +301,47 @@ describe('Map', function() {
     // Trigger move.
     _t.map.map.events.triggerEvent('click', evt);
 
-    // Check render intent.
+    // Check render intent and publication.
     expect(feature.renderIntent).toEqual('select');
-
-    // Check styles.
-    // TODO
-
-    // Check for event publication.
     expect(Neatline.vent.trigger).toHaveBeenCalledWith('map:select');
 
   });
 
-  it('should render and publish feature unselect');
+  it('should render and publish feature unselect', function() {
+
+    // Spy on map:highlight.
+    spyOn(Neatline.vent, 'trigger');
+
+    // Mock cursor event.
+    var evt = {
+      xy: new OpenLayers.Pixel(Math.random(), Math.random()),
+      type: 'click'
+    };
+
+    // Highlight the feature.
+    // ----------------------
+
+    // getFeaturesFromEvent() returns the mock feature.
+    layer.getFeatureFromEvent = function(evt) { return feature; };
+
+    // Trigger move.
+    _t.map.map.events.triggerEvent('click', evt);
+
+    // Unhighlight the feature.
+    // ------------------------
+
+    // getFeaturesFromEvent() returns null.
+    _.each(layers, function(layer) {
+      layer.getFeatureFromEvent = function(evt) { return null; };
+    });
+
+    // Trigger move.
+    _t.map.map.events.triggerEvent('click', evt);
+
+    // Check render intent and publication.
+    expect(feature.renderIntent).toEqual('default');
+    expect(Neatline.vent.trigger).toHaveBeenCalledWith('map:unselect');
+
+  });
 
 });
