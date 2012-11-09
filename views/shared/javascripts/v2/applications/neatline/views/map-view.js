@@ -243,7 +243,6 @@ Neatline.Views.Map = Backbone.View.extend({
    */
   onFeatureSelect: function(feature) {
     Neatline.vent.trigger('map:select');
-    console.log('select');
   },
 
   /*
@@ -255,7 +254,6 @@ Neatline.Views.Map = Backbone.View.extend({
    */
   onFeatureUnselect: function(feature) {
     Neatline.vent.trigger('map:unselect');
-    console.log('unselect');
   },
 
   /*
@@ -267,7 +265,6 @@ Neatline.Views.Map = Backbone.View.extend({
    */
   onFeatureHighlight: function(feature) {
     Neatline.vent.trigger('map:highlight');
-    console.log('highlight');
   },
 
   /*
@@ -279,7 +276,6 @@ Neatline.Views.Map = Backbone.View.extend({
    */
   onFeatureUnhighlight: function(feature) {
     Neatline.vent.trigger('map:unhighlight');
-    console.log('unhighlight');
   }
 
 });
