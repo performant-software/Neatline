@@ -33,6 +33,7 @@ function neatline_queueNeatlineAssets($exhibit)
  */
 function neatline_queueEditorAssets()
 {
+    queue_css_file('v2/payloads/editor');
     queue_js_file('v2/payloads/editor', 'javascripts');
 }
 

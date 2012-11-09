@@ -29,8 +29,9 @@ module.exports = function(grunt) {
     c.components+c.vendor.d3
   ];
 
-  var neatlineStylus = {};
-  neatlineStylus[css+'neatline.css'] = stylus+'neatline.styl';
+  var stylusFiles = {};
+  stylusFiles[css+'neatline.css'] = stylus+'neatline.styl';
+  stylusFiles[css+'editor.css'] = stylus+'editor.styl';
 
   grunt.initConfig({
 
@@ -104,7 +105,7 @@ module.exports = function(grunt) {
     stylus: {
       compile: {
         options: {},
-        files: neatlineStylus
+        files: stylusFiles
       }
     },
 
