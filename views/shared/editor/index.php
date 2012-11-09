@@ -20,13 +20,12 @@
     'title' => __('Neatline Editor: %s', $exhibit->title)
 )); ?>
 
-<!-- The item browser. -->
+<!-- Editor. -->
 <?php echo $this->partial('editor/_item_browser.php'); ?>
 
-<!-- The core Neatline partial. -->
+<!-- Exhibit. -->
 <?php echo $this->partial('neatline/_neatline.php', array(
     'exhibit' => $exhibit
 )); ?>
 
-<!-- Custom footer. -->
 <?php echo $this->partial('editor/_editor_footer.php'); ?>

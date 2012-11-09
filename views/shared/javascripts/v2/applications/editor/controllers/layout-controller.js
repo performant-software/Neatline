@@ -17,12 +17,12 @@ NeatlineEditor.Controllers.Layout = (function(Backbone, Neatline) {
   // ---------------
 
   /*
-   * .
+   * Instantiate the layout manager.
    *
    * @return void.
    */
   Layout.init = function() {
-    console.log('layout init');
+    Layout.Layout = new NeatlineEditor.Views.Layout();
   };
 
 
