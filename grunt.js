@@ -51,6 +51,10 @@ module.exports = function(grunt) {
 
       editor: {
         src: vendorFiles.concat([
+          c.apps.neatline+'app.js',
+          c.apps.neatline+'collections/*.js',
+          c.apps.neatline+'views/*.js',
+          c.apps.neatline+'controllers/*.js',
           c.apps.editor+'app.js',
           c.apps.editor+'run.js',
           c.apps.editor+'collections/*.js',
@@ -76,12 +80,20 @@ module.exports = function(grunt) {
         separator: ';'
       },
 
-      openlayers: {
+      openlayersNeatline: {
         src: [
           css+'neatline.css',
           c.components+c.vendor.openlayers_css
         ],
         dest: css+'neatline.css'
+      },
+
+      openlayersEditor: {
+        src: [
+          css+'editor.css',
+          c.components+c.vendor.openlayers_css
+        ],
+        dest: css+'editor.css'
       }
 
     },
@@ -120,7 +132,9 @@ module.exports = function(grunt) {
         'concat:editor',
         'concat:test',
         'stylus',
-        'concat:openlayers']
+        'concat:openlayersNeatline',
+        'concat:openlayersEditor'
+      ]
     }
 
   });

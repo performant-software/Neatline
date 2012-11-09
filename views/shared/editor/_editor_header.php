@@ -19,19 +19,12 @@
     <meta charset="utf-8">
     <title><?php echo $title; ?></title>
 
-<!-- Plugin Stuff -->
-<?php fire_plugin_hook('admin_theme_header'); ?>
-
-<?php
-neatline_queueNeatlineAssets($exhibit);
-neatline_queueEditorAssets();
-?>
-
-<!-- Stylesheets -->
-<?php echo head_css(); ?>
-
-<!-- JavaScripts -->
-<?php echo head_js(); ?>
+    <?php
+    fire_plugin_hook('admin_theme_header');
+    neatline_queueEditorAssets();
+    echo head_css();
+    echo head_js();
+    ?>
 
 </head>
 

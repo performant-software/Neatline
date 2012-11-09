@@ -19,7 +19,7 @@
  *
  * @return void.
  */
-function neatline_queueNeatlineAssets($exhibit)
+function neatline_queueNeatlineAssets()
 {
     neatline_queueGoogleMapsApi();
     queue_css_file('v2/payloads/neatline');

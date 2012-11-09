@@ -9,8 +9,6 @@
 
 NeatlineEditor.Views.Layout = Backbone.View.extend({
 
-  widths: [],
-
   /*
    * Get markup.
    *
@@ -18,15 +16,19 @@ NeatlineEditor.Views.Layout = Backbone.View.extend({
    */
   initialize: function() {
 
-    // Get viewports.
-    this.window = $(window);
-    this.neatline = $('#neatline');
-    this.map = $('#neatline-map');
-    this.editor = $('#editor');
+    // Getters.
+    this.window =   $(window);
+    this.exhibit =  $('#neatline');
+    this.map =      $('#neatline-map');
+    this.editor =   $('#editor');
+    this.handle =   $('#drag-handle');
 
-    // Listen for resize.
+    // Render position.
     this.window.resize(_.bind(this.position, this));
     this.position();
+
+    // Start.
+    Neatline.start();
 
   },
 
@@ -44,7 +46,7 @@ NeatlineEditor.Views.Layout = Backbone.View.extend({
     // Render positions.
     this.editor.css({ height: height, width: width*0.2 });
     this.map.css({ height: height, width: width*0.8 });
-    this.neatline.css({ left: width*0.2 });
+    this.exhibit.css({ left: width*0.2 });
 
   }
 
