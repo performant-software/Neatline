@@ -56,7 +56,7 @@ module.exports = function(grunt) {
           c.apps.editor+'controllers/*.js',
           c.apps.editor+'views/*.js'
         ]),
-        dest: c.payload+'neatline.js',
+        dest: c.payload+'editor.js',
         separator: ';'
       },
 
@@ -111,13 +111,15 @@ module.exports = function(grunt) {
     watch: {
       files: [
         '<config:concat.neatline.src>',
+        '<config:concat.editor.src>',
         stylus+'/*.styl'
       ],
       tasks: [
         'concat:neatline',
+        'concat:editor',
         'concat:test',
-        'concat:openlayers',
-        'stylus']
+        'stylus',
+        'concat:openlayers']
     }
 
   });
