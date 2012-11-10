@@ -14,5 +14,6 @@
 ?>
 
 <div id="editor">
-  <div id="drag-handle"></div>
+  <div class="title"></div>
+  <div class="header"></div>
 </div>
