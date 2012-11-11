@@ -1,5 +1,7 @@
 begin
   require 'jasmine'
+  require 'net/http'
+  require 'uri'
   load 'jasmine/tasks/jasmine.rake'
 end
 
@@ -70,4 +72,20 @@ desc 'Rebuild the application'
 task :rebuild do
   Rake::Task['clean'].invoke
   Rake::Task['build'].invoke
+end
+
+namespace :dev do
+
+  desc 'Install exhibit'
+  task :install do
+    uri = URI.parse('http://localhost:8888/tei/neatline/dev/install')
+    Net::HTTP.get_response(uri)
+  end
+
+  desc 'Uninstall exhibit'
+  task :uninstall do
+    uri = URI.parse('http://localhost:8888/tei/neatline/dev/uninstall')
+    Net::HTTP.get_response(uri)
+  end
+
 end
