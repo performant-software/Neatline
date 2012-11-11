@@ -71,16 +71,6 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
             `image_id`              int(10) unsigned NULL,
             `map_focus`             varchar(100) NULL,
             `map_zoom`              int(10) unsigned NULL,
-            `vector_color`          tinytext COLLATE utf8_unicode_ci NULL,
-            `stroke_color`          tinytext COLLATE utf8_unicode_ci NULL,
-            `highlight_color`       tinytext COLLATE utf8_unicode_ci NULL,
-            `vector_opacity`        int(10) unsigned NULL,
-            `select_opacity`        int(10) unsigned NULL,
-            `stroke_opacity`        int(10) unsigned NULL,
-            `graphic_opacity`       int(10) unsigned NULL,
-            `stroke_width`          int(10) unsigned NULL,
-            `point_radius`          int(10) unsigned NULL,
-            `base_layer`            int(10) unsigned NULL,
 
              PRIMARY KEY (`id`)
 
@@ -93,20 +83,14 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
 
             `id`                    int(10) unsigned NOT NULL auto_increment,
             `item_id`               int(10) unsigned NULL,
-            `parent_record_id`      int(10) unsigned NULL,
-            `use_dc_metadata`       tinyint(1) NULL,
             `exhibit_id`            int(10) unsigned NULL,
-            `show_bubble`           tinyint(1) NULL,
             `title`                 mediumtext COLLATE utf8_unicode_ci NULL,
             `slug`                  varchar(100) NULL,
             `description`           mediumtext COLLATE utf8_unicode_ci NULL,
-            `start_date`            tinytext COLLATE utf8_unicode_ci NULL,
-            `end_date`              tinytext COLLATE utf8_unicode_ci NULL,
-            `start_visible_date`    tinytext COLLATE utf8_unicode_ci NULL,
-            `end_visible_date`      tinytext COLLATE utf8_unicode_ci NULL,
             `geocoverage`           mediumtext COLLATE utf8_unicode_ci NULL,
-            `left_percent`          int(10) unsigned NULL,
-            `right_percent`         int(10) unsigned NULL,
+            `map_active`            tinyint(1) NULL,
+            `map_focus`             varchar(100) NULL,
+            `map_zoom`              int(10) unsigned NULL,
             `vector_color`          tinytext COLLATE utf8_unicode_ci NULL,
             `stroke_color`          tinytext COLLATE utf8_unicode_ci NULL,
             `highlight_color`       tinytext COLLATE utf8_unicode_ci NULL,
@@ -117,12 +101,29 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
             `stroke_width`          int(10) unsigned NULL,
             `point_radius`          int(10) unsigned NULL,
             `point_image`           tinytext COLLATE utf8_unicode_ci NULL,
-            `map_active`            tinyint(1) NULL,
-            `time_active`           tinyint(1) NULL,
-            `items_active`          tinyint(1) NULL,
-            `display_order`         int(10) unsigned NULL,
-            `map_focus`             varchar(100) NULL,
-            `map_zoom`              int(10) unsigned NULL,
+
+             PRIMARY KEY (`id`)
+
+        ) ENGINE=innodb DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
+
+        $this->_db->query($sql);
+
+        // Tags table.
+        $sql = "CREATE TABLE IF NOT EXISTS `{$this->_db->prefix}neatline_tags` (
+
+            `id`                    int(10) unsigned NOT NULL auto_increment,
+            `exhibit_id`            int(10) unsigned NULL,
+            `tag`                   tinytext COLLATE utf8_unicode_ci NULL,
+            `vector_color`          tinytext COLLATE utf8_unicode_ci NULL,
+            `stroke_color`          tinytext COLLATE utf8_unicode_ci NULL,
+            `highlight_color`       tinytext COLLATE utf8_unicode_ci NULL,
+            `vector_opacity`        int(10) unsigned NULL,
+            `select_opacity`        int(10) unsigned NULL,
+            `stroke_opacity`        int(10) unsigned NULL,
+            `graphic_opacity`       int(10) unsigned NULL,
+            `stroke_width`          int(10) unsigned NULL,
+            `point_radius`          int(10) unsigned NULL,
+            `point_image`           tinytext COLLATE utf8_unicode_ci NULL,
 
              PRIMARY KEY (`id`)
 

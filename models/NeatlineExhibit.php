@@ -74,66 +74,6 @@ class NeatlineExhibit extends Omeka_Record_AbstractRecord
      */
     public $map_zoom;
 
-    /**
-     * The default fill color for new geometries.
-     * int(10) unsigned NULL
-     */
-    public $vector_color;
-
-    /**
-     * The default stroke color for new geometries.
-     * tinytext COLLATE utf8_unicode_ci NULL
-     */
-    public $stroke_color;
-
-    /**
-     * The default highlight color for new geometries.
-     * tinytext COLLATE utf8_unicode_ci NULL
-     */
-    public $highlight_color;
-
-    /**
-     * The default fill opacity for new geometries.
-     * int(10) unsigned NULL
-     */
-    public $vector_opacity;
-
-    /**
-     * The default selected fill opacity for new geometries.
-     * int(10) unsigned NULL
-     */
-    public $select_opacity;
-
-    /**
-     * The default line opacity for new geometries.
-     * int(10) unsigned NULL
-     */
-    public $stroke_opacity;
-
-    /**
-     * The default graphic opacity for new geometries.
-     * int(10) unsigned NULL
-     */
-    public $graphic_opacity;
-
-    /**
-     * The default line width for new geometries.
-     * int(10) unsigned NULL
-     */
-    public $stroke_width;
-
-    /**
-     * The default point radius for new geometries.
-     * int(10) unsigned NULL
-     */
-    public $point_radius;
-
-    /**
-     * The id of the default base layer.
-     * int(10) unsigned NULL
-     */
-    public $base_layer;
-
 
     /**
      * Valid style attribute names.

@@ -46,16 +46,6 @@ class Neatline_NeatlineExhibitTest extends Neatline_Test_AppTestCase
         $exhibit->query =                   'query';
         $exhibit->map_focus =              'CENTER()';
         $exhibit->map_zoom =                1;
-        $exhibit->vector_color =            '#ffffff';
-        $exhibit->stroke_color =            '#ffffff';
-        $exhibit->highlight_color =         '#ffffff';
-        $exhibit->vector_opacity =          50;
-        $exhibit->select_opacity =          50;
-        $exhibit->stroke_opacity =          50;
-        $exhibit->graphic_opacity =         50;
-        $exhibit->stroke_width =            3;
-        $exhibit->point_radius =            3;
-        $exhibit->base_layer =              1;
         $exhibit->save();
 
         // Re-get the exhibit object.
@@ -71,16 +61,6 @@ class Neatline_NeatlineExhibitTest extends Neatline_Test_AppTestCase
         $this->assertEquals($exhibit->public, 1);
         $this->assertEquals($exhibit->map_focus, 'CENTER()');
         $this->assertEquals($exhibit->map_zoom, 1);
-        $this->assertEquals($exhibit->vector_color, '#ffffff');
-        $this->assertEquals($exhibit->stroke_color, '#ffffff');
-        $this->assertEquals($exhibit->highlight_color, '#ffffff');
-        $this->assertEquals($exhibit->vector_opacity, 50);
-        $this->assertEquals($exhibit->select_opacity, 50);
-        $this->assertEquals($exhibit->stroke_opacity, 50);
-        $this->assertEquals($exhibit->graphic_opacity, 50);
-        $this->assertEquals($exhibit->stroke_width, 3);
-        $this->assertEquals($exhibit->point_radius, 3);
-        $this->assertEquals($exhibit->base_layer, 1);
 
     }
 

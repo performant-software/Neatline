@@ -56,16 +56,8 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
         $record = new NeatlineRecord($item, $neatline);
 
         // Set.
-        $record->parent_record_id =             1;
-        $record->use_dc_metadata =              1;
-        $record->show_bubble =                  1;
         $record->title =                        'title';
         $record->description =                  'description';
-        $record->start_date =                   'startdate';
-        $record->end_date =                     'enddate';
-        $record->start_visible_date =           'startvisibledate';
-        $record->end_visible_date =             'endvisibledate';
-        $record->end_date =                     'enddate';
         $record->vector_color =                 '#ffffff';
         $record->stroke_color =                 '#ffffff';
         $record->highlight_color =              '#ffffff';
@@ -77,12 +69,7 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
         $record->point_radius =                 3;
         $record->point_image =                  'http://test.org';
         $record->geocoverage =                  'POINT()';
-        $record->left_percent =                 30;
-        $record->right_percent =                80;
-        $record->map_active =                 1;
-        $record->time_active =                  1;
-        $record->items_active =                 1;
-        $record->display_order =                1;
+        $record->map_active =                   1;
         $record->map_focus =                   'CENTER()';
         $record->map_zoom =                     5;
         $record->save();
@@ -91,15 +78,8 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
         $record = $this->_recordsTable->find($record->id);
 
         // Get.
-        $this->assertEquals($record->parent_record_id, 1);
-        $this->assertEquals($record->use_dc_metadata, 1);
-        $this->assertEquals($record->show_bubble, 1);
         $this->assertEquals($record->title, 'title');
         $this->assertEquals($record->description, 'description');
-        $this->assertEquals($record->start_date, 'startdate');
-        $this->assertEquals($record->end_date, 'enddate');
-        $this->assertEquals($record->start_visible_date, 'startvisibledate');
-        $this->assertEquals($record->end_visible_date, 'endvisibledate');
         $this->assertEquals($record->vector_color, '#ffffff');
         $this->assertEquals($record->stroke_color, '#ffffff');
         $this->assertEquals($record->highlight_color, '#ffffff');
@@ -111,12 +91,7 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
         $this->assertEquals($record->point_radius, 3);
         $this->assertEquals($record->point_image, 'http://test.org');
         $this->assertEquals($record->geocoverage, 'POINT()');
-        $this->assertEquals($record->left_percent, 30);
-        $this->assertEquals($record->right_percent, 80);
         $this->assertEquals($record->map_active, 1);
-        $this->assertEquals($record->time_active, 1);
-        $this->assertEquals($record->items_active, 1);
-        $this->assertEquals($record->display_order, 1);
         $this->assertEquals($record->map_focus, 'CENTER()');
         $this->assertEquals($record->map_zoom, 5);
 

@@ -27,24 +27,6 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
     public $exhibit_id;
 
     /**
-     * The id of the parent record.
-     * int(10) unsigned NULL
-     */
-    public $parent_record_id;
-
-    /**
-     * Boolean for whether to use DC output as description.
-     * tinyint(1) NULL
-     */
-    public $use_dc_metadata;
-
-    /**
-     * Boolean for whether to show popup bubble.
-     * tinyint(1) NULL
-     */
-    public $show_bubble = 1;
-
-    /**
      * The title for the record.
      * mediumtext COLLATE utf8_unicode_ci NULL
      */
@@ -61,42 +43,6 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
      * mediumtext COLLATE utf8_unicode_ci NULL
      */
     public $description;
-
-    /**
-     * A ISO8601 start date.
-     * tinytext COLLATE utf8_unicode_ci NULL
-     */
-    public $start_date;
-
-    /**
-     * A ISO8601 end date.
-     * tinytext COLLATE utf8_unicode_ci NULL
-     */
-    public $end_date;
-
-    /**
-     * A ISO8601 date for when the record should start to appear.
-     * tinytext COLLATE utf8_unicode_ci NULL
-     */
-    public $start_visible_date;
-
-    /**
-     * A ISO8601 date for when the record should start to disappear.
-     * tinytext COLLATE utf8_unicode_ci NULL
-     */
-    public $end_visible_date;
-
-    /**
-     * The left percent for the ambiguity gradient.
-     * int(10) unsigned NULL
-     */
-    public $left_percent = 0;
-
-    /**
-     * The right percent for the ambiguity gradient.
-     * int(10) unsigned NULL
-     */
-    public $right_percent = 100;
 
     /**
      * The fill color for geometries.
@@ -181,24 +127,6 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
      * tinyint(1) NULL
      */
     public $map_active = 0;
-
-    /**
-     * Boolean for whether the record is present on the timeline.
-     * tinyint(1) NULL
-     */
-    public $time_active = 0;
-
-    /**
-     * Boolean for whether the record is present on the item panel.
-     * tinyint(1) NULL
-     */
-    public $items_active = 0;
-
-    /**
-     * Display order for record in items panel.
-     * int(10) unsigned NULL
-     */
-    public $display_order;
 
     /**
      * The record's parent record (used for caching).
