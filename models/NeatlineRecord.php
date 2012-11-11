@@ -236,137 +236,13 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
     }
 
     /**
-     * Get the parent data record.
-     *
-     * @return Omeka_record $record The parent record.
-     */
-    public function getParentRecord()
-    {
-
-        if (!is_null($this->parent_record_id) && is_null($this->_parent)) {
-            $this->_parent = $this->getTable('NeatlineRecord')
-                ->find($this->parent_record_id);
-        }
-
-        return $this->_parent;
-
-    }
-
-    /**
-     * Construct a JSON representation of the attributes to be used in the
-     * item edit form.
+     * Construct array with data for editor form.
      *
      * @return JSON The data.
      */
-    public function buildEditFormJson()
+    public function buildEditFormData()
     {
-
-        // Shell out the array.
-        $data = array();
-
-        // Get parent record select list.
-        $_recordsTable = $this->getTable('NeatlineRecord');
-        $records = $_recordsTable->getRecordsForSelect($this->getExhibit(), $this);
-
-        // Set the array values.
-        $data['title'] =                $this->getTitle();
-        $data['slug'] =                 $this->getNotEmpty('slug');
-        $data['description'] =          $this->getDescription();
-        $data['vector_color'] =         $this->getStyle('vector_color');
-        $data['stroke_color'] =         $this->getStyle('stroke_color');
-        $data['highlight_color'] =      $this->getStyle('highlight_color');
-        $data['vector_opacity'] =       (int) $this->getStyle('vector_opacity');
-        $data['select_opacity'] =       (int) $this->getStyle('select_opacity');
-        $data['stroke_opacity'] =       (int) $this->getStyle('stroke_opacity');
-        $data['graphic_opacity'] =      (int) $this->getStyle('graphic_opacity');
-        $data['stroke_width'] =         (int) $this->getStyle('stroke_width');
-        $data['point_radius'] =         (int) $this->getStyle('point_radius');
-        $data['point_image'] =          $this->getNotEmpty('point_image');
-        $data['start_date'] =           (string) $this->getStartDate();
-        $data['end_date'] =             (string) $this->getEndDate();
-        $data['start_visible_date'] =   (string) $this->start_visible_date;
-        $data['end_visible_date'] =     (string) $this->end_visible_date;
-        $data['left_percent'] =         (int) $this->getLeftPercent();
-        $data['right_percent'] =        (int) $this->getRightPercent();
-        $data['parent_record_id'] =     $this->getParentRecordId();
-        $data['use_dc_metadata'] =      $this->use_dc_metadata;
-        $data['show_bubble'] =          $this->show_bubble;
-        $data['geocoverage'] =          $this->getGeocoverage();
-        $data['records'] =              $records;
-
-        return $data;
-
-    }
-
-    /**
-     * Construct a starting attribute set for an Omeka-item-based record.
-     *
-     * @param Omeka_record $item The item record.
-     * @param Omeka_record $exhibit The exhibit record.
-     *
-     * @return JSON The data.
-     */
-    public static function buildEditFormForNewRecordJson($item, $exhibit)
-    {
-
-        // Shell out the array.
-        $data = array();
-
-        // Get parent record select list.
-        $_db = get_db();
-        $_recordsTable = $_db->getTable('NeatlineRecord');
-        $records = $_recordsTable->getRecordsForSelect($exhibit);
-
-        // Set the array values.
-        $data['vector_color'] =         get_plugin_ini('Neatline', 'vector_color');
-        $data['stroke_color'] =         get_plugin_ini('Neatline', 'stroke_color');
-        $data['highlight_color'] =      get_plugin_ini('Neatline', 'highlight_color');
-        $data['vector_opacity'] =       (int) get_plugin_ini('Neatline', 'vector_opacity');
-        $data['select_opacity'] =       (int) get_plugin_ini('Neatline', 'select_opacity');
-        $data['stroke_opacity'] =       (int) get_plugin_ini('Neatline', 'stroke_opacity');
-        $data['graphic_opacity'] =      (int) get_plugin_ini('Neatline', 'graphic_opacity');
-        $data['stroke_width'] =         (int) get_plugin_ini('Neatline', 'stroke_width');
-        $data['point_radius'] =         (int) get_plugin_ini('Neatline', 'point_radius');
-        $data['point_image'] =          '';
-        $data['left_percent'] =         self::$defaults['left_percent'];
-        $data['right_percent'] =        self::$defaults['right_percent'];
-        $data['start_date'] =           '';
-        $data['end_date'] =             '';
-        $data['start_visible_date'] =   '';
-        $data['end_visible_date'] =     '';
-        $data['slug'] =                 '';
-        $data['parent_record_id'] =     'none';
-        $data['records'] =              $records;
-        $data['use_dc_metadata'] =      0;
-        $data['show_bubble'] =          1;
-
-        // Get DC title default.
-        $data['title'] = metadata(
-            $item, array('Dublin Core', 'Title'));
-
-        // Get DC description default.
-        $data['description'] = metadata(
-            $item, array('Dublin Core', 'Description'));
-
-        // Get DC date default.
-        $date = metadata(
-            $item, array('Dublin Core', 'Date'));
-
-        // Check for date format, assign pieces.
-        if (preg_match(self::$dcDateRegex, $date, $matches)) {
-
-            // Start.
-            $data['start_date'] = $matches['start'];
-
-            // End.
-            if (array_key_exists('end', $matches)) {
-                $data['end_date'] = $matches['end'];
-            }
-
-        }
-
-        return $data;
-
+        return array();
     }
 
 
@@ -410,68 +286,6 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
     }
 
     /**
-     * Set the map_active or time_active attributes. Reject non-
-     * boolean parameters.
-     *
-     * @param string $viewport 'items', 'space', or 'time'.
-     * @param boolean $value The value to set.
-     *
-     * @return boolean True if the set succeeds.
-     */
-    public function setStatus($viewport, $value)
-    {
-
-        if (!is_bool($value)) { return false; }
-
-        // Cast the boolean to int.
-        $intValue = (int) $value;
-
-        // If items.
-        if ($viewport == 'items') {
-            $this->items_active = $intValue;
-        }
-
-        // If space.
-        else if ($viewport == 'space') {
-            $this->map_active = $intValue;
-        }
-
-        // If time.
-        else if ($viewport == 'time') {
-            $this->time_active = $intValue;
-        }
-
-        return true;
-
-    }
-
-    /**
-     * Set the left_percent or right_percent attributes. Only accept integers
-     * between 0 and 100, and require that the right value always be greater
-     * than or equal to the left.
-     *
-     * @param integer $left The left-hand value.
-     * @param integer $right The right-hand value.
-     *
-     * @return boolean True if the set succeeds.
-     */
-    public function setPercentages($left, $right)
-    {
-
-        if (!is_int($left) ||
-            !is_int($right) ||
-            !(0 <= $left && $left <= $right && $right <= 100)) {
-            return false;
-        }
-
-        $this->left_percent = $left;
-        $this->right_percent = $right;
-
-        return true;
-
-    }
-
-    /**
      * Set the geocoverage field if the passed value is not <string>'null', which
      * is true when there was not an instantiated map when the  triggering save
      * action was performed in the editor.
@@ -499,101 +313,8 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
      */
     public function setStyle($style, $value)
     {
-
-        // If a non-style property is passed, return false.
-        if (!in_array($style, self::$styles)) {
-            return false;
-        }
-
-        // Get the exhibit.
-        $exhibit = $this->getExhibit();
-
-        // If there is a parent record.
-        if (!is_null($this->parent_record_id)) {
-
-            // If the value does not match the parent style, set.
-            $parent = $this->getParentRecord();
-            if ($value != $parent->getStyle($style)) {
-                $this[$style] = $value;
-                return true;
-            }
-
-        }
-
-        // If there is an exhibit default.
-        if (!is_null($exhibit[$style])) {
-
-            // If the value does not match the default.
-            if ($value != $exhibit[$style]) {
-                $this[$style] = $value;
-                return true;
-            }
-
-            // If the value matches the default and there is a non-null
-            // value set on the record, null the record value.
-            else if (!is_null($this[$style])) {
-                $this[$style] = null;
-                return true;
-            }
-
-        }
-
-        // If the value does not match the system default.
-        else if ($value != get_plugin_ini('Neatline', $style)) {
-            $this[$style] = $value;
-            return true;
-        }
-
-        // If the value matches the system default and there is a non-null
-        // value set on the record, null the record value.
-        else if (!is_null($this[$style])) {
-            $this[$style] = null;
-            return true;
-        }
-
-        return false;
-
-    }
-
-    /**
-     * Set the parent record id.
-     *
-     * @param integer $id The id.
-     *
-     * @return boolean True if a new value is set.
-     */
-    public function setParentRecordId($id)
-    {
-
-        // Capture original value.
-        $original = $this->parent_record_id;
-
-        // If 'none' is passed, null out the key.
-        if ($id == 'none') {
-            $this->parent_record_id = null;
-        }
-
-        // If the id is not the self id, set.
-        else if ($id != $this->id) {
-            $this->parent_record_id = $id;
-        }
-
-        // Check for new value.
-        return $original != $this->parent_record_id;
-
-    }
-
-    /**
-     * Set the use_dc_metadata parameter if there is a parent item.
-     *
-     * @param integer $useDcMetadata 0/1.
-     *
-     * @return void.
-     */
-    public function setUseDcMetadata($useDcMetadata)
-    {
-        if (!is_null($this->item_id))
-            $this->use_dc_metadata = (int) $useDcMetadata;
+        $this[$style] = $value;
+        return true;
     }
 
     /**
@@ -611,6 +332,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
         $this->graphic_opacity =    null;
         $this->stroke_width =       null;
         $this->point_radius =       null;
+        $this->point_image =        null;
     }
 
 
@@ -643,28 +365,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
      */
     public function getStyle($style)
     {
-
-        // If there is a row value.
         if (!is_null($this[$style])) return $this[$style];
-
-        // If there is a parent record value.
-        else if (!is_null($this->parent_record_id)) {
-            return $this->getParentRecord()->getStyle($style);
-        }
-
-        // If there is an exhibit default
-        else {
-
-            $exhibit = $this->getExhibit();
-            if (!is_null($exhibit[$style])) {
-                return $exhibit[$style];
-            }
-
-            // Fall back to system default.
-            else return get_plugin_ini('Neatline', $style);
-
-        }
-
     }
 
     /**
@@ -705,11 +406,8 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
         $title = strip_tags($this->getTitle());
         $fixed = substr($title, 0, $length);
 
-        // If the original title was longer than the max
-        // length, add an elipsis to the end.
-        if (strlen($title) > $length) {
-            $fixed .= ' ...';
-        }
+        // Trim title.
+        if (strlen($title) > $length) $fixed .= ' ...';
 
         return $fixed;
 
@@ -732,9 +430,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
 
             // Try to get a description.
             $description = $this->getDescription();
-            if ($description !== '')
-                return substr($description, 0, 200);
-
+            if ($description !== '') return substr($description, 0, 200);
             else return __('[Untitled]');
 
         }
@@ -748,8 +444,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
      */
     public function getSlug()
     {
-        if (!is_null($this->slug)) { return $this->slug; }
-        else return '';
+        return (!is_null($this->slug)) ? $this->slug : '';
     }
 
     /**
@@ -760,28 +455,8 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
     public function getDescription()
     {
 
-        // Build item metadata.
-        if ($this->use_dc_metadata == 1) {
-
-            /*
-             * This is the biggest performance killer when calling
-             * buildMapDataArray below. If this becomes too big of
-             * an issue, we can inline the partial and use more
-             * targetted SQL queries, instead of loading the whole
-             * item and pulling the data we want out. Otherwise,
-             * we're stuck. -- ERR
-             */
-
-            return get_view()->partial('neatline/_dc_metadata.php', array(
-                'item' => $this->getItem()
-            ));
-
-        }
-
         // Return row-level value.
-        if (!is_null($this->description)) {
-            return $this->description;
-        }
+        if (!is_null($this->description)) return $this->description;
 
         // If there is a parent item.
         else if (!is_null($this->item_id)) {
@@ -793,34 +468,6 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
         }
 
         else return '';
-
-    }
-
-    /**
-     * Return left percent.
-     *
-     * @return integer $percent The percent.
-     */
-    public function getLeftPercent()
-    {
-
-        return !is_null($this->left_percent) ?
-            $this->left_percent :
-            self::$defaults['left_percent'];
-
-    }
-
-    /**
-     * Return right percent.
-     *
-     * @return integer $percent The percent.
-     */
-    public function getRightPercent()
-    {
-
-        return !is_null($this->right_percent) ?
-            $this->right_percent :
-            self::$defaults['right_percent'];
 
     }
 
@@ -887,152 +534,6 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
     }
 
     /**
-     * Return start date.
-     *
-     * @return string $date The date. If there is a record-specific value,
-     * return it. If not, and there is a parent Omeka item, try to get a non-
-     * empty value from the DC date field.
-     */
-    public function getStartDate()
-    {
-
-        // If there is a record-specific date.
-        if (!is_null($this->start_date)) {
-            return $this->start_date;
-        }
-
-        // If not, try to get a DC date value.
-        else if (!is_null($this->item_id)) {
-
-            // Get the DC date.
-            $date = metadata(
-                $this->getItem(), array('Dublin Core', 'Date'));
-
-            if (preg_match(self::$dcDateRegex, $date, $matches)) {
-                return $matches['start'];
-            }
-
-        }
-
-        // Return '' if no local or parent data.
-        else return '';
-
-    }
-
-    /**
-     * Return end date.
-     *
-     * @return string $date The date. If there is a record-specific value,
-     * return it. If not, and there is a parent Omeka item, try to get a non-
-     * empty value from the DC date field.
-     */
-    public function getEndDate()
-    {
-
-        // If there is a record-specific date.
-        if (!is_null($this->end_date)) {
-            return $this->end_date;
-        }
-
-        // If not, try to get a DC date value.
-        else if (!is_null($this->item_id)) {
-
-            // Get the DC date.
-            $date = metadata(
-                $this->getItem(), array('Dublin Core', 'Date'));
-
-            if (preg_match(self::$dcDateRegex, $date, $matches)) {
-                if (array_key_exists('end', $matches)) {
-                    return $matches['end'];
-                }
-            }
-
-        }
-
-        // Return '' if no local or parent data.
-        else return '';
-
-    }
-
-    /**
-     * Return start visibility date.
-     *
-     * @return string $date The date. If there is a record-specific value,
-     * return it. If not, and there is a parent data record, try to get a non-
-     * empty value from the parent.
-     */
-    public function getStartVisibleDate()
-    {
-
-        // If there is a record-specific date.
-        if (!is_null($this->start_visible_date)) {
-            return $this->start_visible_date;
-        }
-
-        // If not, try to get a DC date value.
-        else if (!is_null($this->parent_record_id)) {
-
-            // Try to get the parent date.
-            $parentRecord = $this->getParentRecord();
-            return $parentRecord->getStartVisibleDate();
-
-        }
-
-        // Return '' if no local or parent data.
-        else return '';
-
-    }
-
-    /**
-     * Return end visibility date.
-     *
-     * @return string $date The date. If there is a record-specific value,
-     * return it. If not, and there is a parent data record, try to get a non-
-     * empty value from the parent.
-     */
-    public function getEndVisibleDate()
-    {
-
-        // If there is a record-specific date.
-        if (!is_null($this->end_visible_date)) {
-            return $this->end_visible_date;
-        }
-
-        // If not, try to get a DC date value.
-        else if (!is_null($this->parent_record_id)) {
-
-            // Try to get the parent date.
-            $parentRecord = $this->getParentRecord();
-            return $parentRecord->getEndVisibleDate();
-
-        }
-
-        // Return '' if no local or parent data.
-        else return '';
-
-    }
-
-    /**
-     * Get the parent record id.
-     *
-     * @param integer $id The id.
-     *
-     * @return mixed 'none' if the id is null, otherwise the id.
-     */
-    public function getParentRecordId()
-    {
-
-        // If 'none' is passed, null out the key.
-        if (is_null($this->parent_record_id)) {
-            return 'none';
-        }
-
-        // Otherwise, set integer key.
-        else return $this->parent_record_id;
-
-    }
-
-    /**
      * On save, update the modified column on the parent exhibit.
      *
      * @return void.
@@ -1047,33 +548,6 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
 
         parent::save();
 
-    }
-
-    /**
-     * This deletes this record and removes itself from all parent
-     * relationships.
-     *
-     * This assumes that the caller is wrapping this in a transaction
-     * somewhere up the callstack. To do this inside a transaction that
-     * this manages, use `deleteTransaction`.
-     *
-     * @return void
-     * @author Eric Rochester <erochest@virginia.edu>
-     **/
-    public function delete()
-    {
-        if (!is_null($this->id)) {
-            $db = get_db();
-            $tname = $this->getTable()->getTableName();
-            $query = "
-                UPDATE `$tname`
-                SET parent_record_id=NULL
-                WHERE parent_record_id=?;";
-            $db->query($query, $this->id);
-
-            parent::delete();
-
-        }
     }
 
     /**
@@ -1096,46 +570,16 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
     }
 
     /**
-     * This sets and caches the parent record.
-     *
-     * @param array $index An index of records.
-     * @param Omeka_record $exhibit The parent exhibit.
-     *
-     * @return void
-     * @author Eric Rochester <erochest@virginia.edu>
-     **/
-    protected function _setParent($index, $exhibit)
-    {
-
-        // Set parent, recurse up the inheritance chain.
-        if (!is_null($this->parent_record_id)
-            && array_key_exists($this->parent_record_id, $index)
-        ) {
-            $parent = $index[$this->parent_record_id];
-            $this->_parent = $parent;
-            $parent->_setParent($index, $exhibit);
-        }
-
-        // Set parent exhibit.
-        $this->_exhibit = $exhibit;
-
-    }
-
-    /**
      * Construct map data.
      *
      * @param array $index This is the index of NeatlineRecord objects for
      * caching. Optional.
      * @param array $wmss This is an index mapping item IDs to rows from the
      * NeatlineMapsService WMS data.
-     * @param Omeka_Record $exhibit The exhibit this record belongs to.
      *
      * @return array The map JSON.
      **/
-    public function buildJsonData($index=array(), $wmss=array(), $exhibit=null) {
-
-        // Cache the parent record.
-        $this->_setParent($index, $exhibit);
+    public function buildJsonData($index=array(), $wmss=array()) {
 
         $data = array(
 
