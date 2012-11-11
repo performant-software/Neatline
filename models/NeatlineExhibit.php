@@ -63,66 +63,6 @@ class NeatlineExhibit extends Omeka_Record_AbstractRecord
     public $creator_id = 0;
 
     /**
-     * The id of the user who created the exhibit.
-     * int(10) unsigned NOT NULL
-     */
-    public $image_id;
-
-    /**
-     * The top viewport in the exhibit.
-     * ENUM('map', 'timeline') DEFAULT 'map'
-     */
-    public $top_element = 'map';
-
-    /**
-     * The horizontal position of the items panel.
-     * ENUM('right', 'left') DEFAULT 'right'
-     */
-    public $items_h_pos = 'right';
-
-    /**
-     * The vertical position of the items panel.
-     * ENUM('top', 'bottom') DEFAULT 'bottom'
-     */
-    public $items_v_pos = 'bottom';
-
-    /**
-     * The height of the items panel.
-     * ENUM('full', 'partial') DEFAULT 'partial'
-     */
-    public $items_height = 'full';
-
-    /**
-     * The horizontal offset of the map/timeline border.
-     * int(10) unsigned NULL
-     */
-    public $h_percent;
-
-    /**
-     * The vertical offset of the map/timeline border.
-     * int(10) unsigned NULL
-     */
-    public $v_percent;
-
-    /**
-     * Boolean for map presence.
-     * tinyint(1) NOT NULL
-     */
-    public $is_map = 1;
-
-    /**
-     * Boolean for timeline presence.
-     * tinyint(1) NOT NULL
-     */
-    public $is_timeline = 0;
-
-    /**
-     * Boolean for items presence.
-     * tinyint(1) NOT NULL
-     */
-    public $is_items = 0;
-
-    /**
      * Default map focus position.
      * varchar(100) NULL
      */
@@ -133,37 +73,6 @@ class NeatlineExhibit extends Omeka_Record_AbstractRecord
      * varchar(100) NULL
      */
     public $map_zoom;
-
-    /**
-     * Default timeline focus date.
-     * int(10) unsigned NULL
-     */
-    public $focus_date;
-
-    /**
-     * Default timeline zoom.
-     * int(10) unsigned NULL
-     */
-    public $timeline_zoom;
-
-    /**
-     * Boolean for context band presence.
-     * tinyint(1) NOT NULL
-     */
-    public $is_context_band = 1;
-
-    /**
-     * The default unit for the context band.
-     * ENUM('hour', 'day', 'week', 'month', 'year', 'decade', 'century')
-     * DEFAULT 'decade'
-     */
-    public $context_band_unit;
-
-    /**
-     * The percentage height of the context band.
-     * int(10) unsigned NULL
-     */
-    public $context_band_height;
 
     /**
      * The default fill color for new geometries.
