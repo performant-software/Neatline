@@ -100,7 +100,7 @@ function neatline_renderEditor($exhibit)
  */
 function neatline_getExhibitDataSource($exhibit)
 {
-    return public_url('neatline-exhibits/data/' . $exhibit->id);
+    return public_url('neatline/data/' . $exhibit->id);
 }
 
 /**
@@ -112,7 +112,7 @@ function neatline_getExhibitDataSource($exhibit)
  */
 function neatline_getEditorDataSource($exhibit)
 {
-    return public_url('neatline-exhibits/editor/records/' . $exhibit->id);
+    return public_url('neatline/editor/records/' . $exhibit->id);
 }
 
 /**
@@ -354,7 +354,7 @@ function link_to_neatline(
     if ($action == 'show') { $slug = $neatline->slug; }
     else { $slug = $neatline->id; }
 
-    $route = 'neatline-exhibits/' . $action . '/' . $slug;
+    $route = 'neatline/' . $action . '/' . $slug;
     $uri = $public ? public_url($route) : url($route);
     $props['href'] = $uri;
     return '<a ' . tag_attributes($props) . '>' . $text . '</a>';

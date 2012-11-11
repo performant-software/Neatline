@@ -56,7 +56,7 @@ class Neatline_IndexController extends Omeka_Controller_AbstractActionController
 
                 // Save and redirect.
                 $neatline->saveForm($form->getValues());
-                $this->_redirect('neatline-exhibits');
+                $this->_redirect('neatline');
 
             }
 
@@ -83,7 +83,7 @@ class Neatline_IndexController extends Omeka_Controller_AbstractActionController
 
                 // Save and redirect.
                 $neatline->saveForm($form->getValues());
-                $this->_redirect('neatline-exhibits');
+                $this->_redirect('neatline');
 
             }
 

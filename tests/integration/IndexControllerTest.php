@@ -22,7 +22,7 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
     public function testIndexRedirect()
     {
 
-        $this->dispatch('neatline-exhibits');
+        $this->dispatch('neatline');
         $this->assertModule('neatline');
         $this->assertController('index');
         $this->assertAction('browse');
@@ -36,7 +36,7 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
      */
     public function testBrowseBaseMarkup()
     {
-        $this->dispatch('neatline-exhibits');
+        $this->dispatch('neatline');
         $this->assertQueryContentContains('a.add', 'Create an Exhibit');
     }
 
@@ -49,7 +49,7 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
     public function testBrowseWithNoExhibits()
     {
 
-        $this->dispatch('neatline-exhibits');
+        $this->dispatch('neatline');
 
         $this->assertQueryContentContains(
             'p.neatline-alert',
@@ -78,7 +78,7 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
         set_option('per_page_admin', 2);
 
         // Hit the route.
-        $this->dispatch('neatline-exhibits');
+        $this->dispatch('neatline');
 
         // Check for paging.
         $neatlinesInView = get_view()->neatline_exhibits;
@@ -96,7 +96,7 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
     {
 
         // Hit the route.
-        $this->dispatch('neatline-exhibits/add');
+        $this->dispatch('neatline/add');
 
         // Check for fields.
         $this->assertQuery('input[name="title"]');
@@ -125,7 +125,7 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
         $this->assertEquals($this->_exhibitsTable->count(), 0);
 
         // Submit the form.
-        $this->dispatch('neatline-exhibits/add');
+        $this->dispatch('neatline/add');
 
         // Should redirect to the add view.
         $this->assertModule('neatline');
@@ -162,7 +162,7 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
         $this->assertEquals($this->_exhibitsTable->count(), 0);
 
         // Submit the form.
-        $this->dispatch('neatline-exhibits/add');
+        $this->dispatch('neatline/add');
 
         // Should redirect to the add view.
         $this->assertModule('neatline');
@@ -199,7 +199,7 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
         $this->assertEquals($this->_exhibitsTable->count(), 0);
 
         // Submit the form.
-        $this->dispatch('neatline-exhibits/add');
+        $this->dispatch('neatline/add');
 
         // Should redirect to the add view.
         $this->assertModule('neatline');
@@ -236,7 +236,7 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
         $this->assertEquals($this->_exhibitsTable->count(), 0);
 
         // Submit the form.
-        $this->dispatch('neatline-exhibits/add');
+        $this->dispatch('neatline/add');
 
         // Should redirect to the add view.
         $this->assertModule('neatline');
@@ -273,7 +273,7 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
         $this->assertEquals($this->_exhibitsTable->count(), 0);
 
         // Submit the form.
-        $this->dispatch('neatline-exhibits/add');
+        $this->dispatch('neatline/add');
 
         // Should redirect to the add view.
         $this->assertModule('neatline');
@@ -310,7 +310,7 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
         $this->assertEquals($this->_exhibitsTable->count(), 0);
 
         // Submit the form.
-        $this->dispatch('neatline-exhibits/add');
+        $this->dispatch('neatline/add');
 
         // Should redirect to the add view.
         $this->assertModule('neatline');
@@ -350,7 +350,7 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
         $this->assertEquals($this->_exhibitsTable->count(), 1);
 
         // Submit the form.
-        $this->dispatch('neatline-exhibits/add');
+        $this->dispatch('neatline/add');
 
         // Should redirect to the add view.
         $this->assertModule('neatline');
@@ -389,7 +389,7 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
         $this->assertEquals($this->_exhibitsTable->count(), 0);
 
         // Submit the form.
-        $this->dispatch('neatline-exhibits/add');
+        $this->dispatch('neatline/add');
 
         // No exhibit should have been created.
         $this->assertEquals($this->_exhibitsTable->count(), 1);
@@ -419,7 +419,7 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
         $exhibit->save();
 
         // Hit the edit form.
-        $this->dispatch('neatline-exhibits/edit/'.$exhibit->id);
+        $this->dispatch('neatline/edit/'.$exhibit->id);
 
         // Title.
         $this->assertXpath('//input[@name="title"][@value="Test Exhibit"]');
@@ -455,7 +455,7 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
         );
 
         // Submit the form.
-        $this->dispatch('neatline-exhibits/edit/'.$exhibit->id);
+        $this->dispatch('neatline/edit/'.$exhibit->id);
 
         // Should redirect to the add view.
         $this->assertModule('neatline');
@@ -489,7 +489,7 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
         );
 
         // Submit the form.
-        $this->dispatch('neatline-exhibits/edit/'.$exhibit->id);
+        $this->dispatch('neatline/edit/'.$exhibit->id);
 
         // Should redirect to the add view.
         $this->assertModule('neatline');
@@ -523,7 +523,7 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
         );
 
         // Submit the form.
-        $this->dispatch('neatline-exhibits/edit/'.$exhibit->id);
+        $this->dispatch('neatline/edit/'.$exhibit->id);
 
         // Should redirect to the add view.
         $this->assertModule('neatline');
@@ -557,7 +557,7 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
         );
 
         // Submit the form.
-        $this->dispatch('neatline-exhibits/edit/'.$exhibit->id);
+        $this->dispatch('neatline/edit/'.$exhibit->id);
 
         // Should redirect to the add view.
         $this->assertModule('neatline');
@@ -591,7 +591,7 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
         );
 
         // Submit the form.
-        $this->dispatch('neatline-exhibits/edit/'.$exhibit->id);
+        $this->dispatch('neatline/edit/'.$exhibit->id);
 
         // Should redirect to the add view.
         $this->assertModule('neatline');
@@ -625,7 +625,7 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
         );
 
         // Submit the form.
-        $this->dispatch('neatline-exhibits/edit/'.$exhibit->id);
+        $this->dispatch('neatline/edit/'.$exhibit->id);
 
         // Should redirect to the add view.
         $this->assertModule('neatline');
@@ -660,7 +660,7 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
         );
 
         // No exhibits at the start.
-        $this->dispatch('neatline-exhibits/edit/'.$exhibit1->id);
+        $this->dispatch('neatline/edit/'.$exhibit1->id);
 
         // Should redirect to the add view.
         $this->assertModule('neatline');
@@ -697,7 +697,7 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
         );
 
         // Submit the form.
-        $this->dispatch('neatline-exhibits/edit/'.$exhibit->id);
+        $this->dispatch('neatline/edit/'.$exhibit->id);
 
         // Get the exhibit and examine.
         $exhibit = $this->_exhibitsTable->find($exhibit->id);

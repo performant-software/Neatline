@@ -29,7 +29,7 @@ class Neatline_DataControllerTest extends Neatline_Test_AppTestCase
         $record2 = $this->__record(null, $exhibit);
 
         // Hit data route.
-        $this->dispatch('neatline-exhibits/data/'.$exhibit->id);
+        $this->dispatch('neatline/data/'.$exhibit->id);
         $response = json_decode($this->getResponse()->getBody('default'));
 
         // Check code and length.

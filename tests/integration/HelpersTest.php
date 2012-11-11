@@ -22,7 +22,7 @@ class Neatline_HelpersTest extends Neatline_Test_AppTestCase
 
         // Create exhibit, hit route.
         $exhibit = $this->__exhibit('test-exhibit');
-        $this->dispatch('neatline-exhibits/show/test-exhibit');
+        $this->dispatch('neatline/show/test-exhibit');
 
         // Get out view exhibit.
         $retrievedExhibit = get_current_neatline();
@@ -40,7 +40,7 @@ class Neatline_HelpersTest extends Neatline_Test_AppTestCase
 
         // Create exhibits, hit route.
         for ($i = 0; $i < 10; $i++) $this->__exhibit();
-        $this->dispatch('neatline-exhibits');
+        $this->dispatch('neatline');
 
         // Check for 10 exhibits.
         $exhibits = get_neatlines_for_loop();
@@ -56,7 +56,7 @@ class Neatline_HelpersTest extends Neatline_Test_AppTestCase
      */
     public function testHasNoNeatlinesForLoop()
     {
-        $this->dispatch('neatline-exhibits');
+        $this->dispatch('neatline');
         $this->assertFalse(has_neatlines_for_loop());
     }
 
@@ -69,7 +69,7 @@ class Neatline_HelpersTest extends Neatline_Test_AppTestCase
     public function testHasNeatlinesForLoop()
     {
         $this->__exhibit();
-        $this->dispatch('neatline-exhibits');
+        $this->dispatch('neatline');
         $this->assertTrue(has_neatlines_for_loop());
     }
 
@@ -80,7 +80,7 @@ class Neatline_HelpersTest extends Neatline_Test_AppTestCase
      */
     public function testHasNoNeatlines()
     {
-        $this->dispatch('neatline-exhibits');
+        $this->dispatch('neatline');
         $this->assertFalse(has_neatlines());
     }
 
@@ -92,7 +92,7 @@ class Neatline_HelpersTest extends Neatline_Test_AppTestCase
     public function testHasNeatlines()
     {
         $this->__exhibit();
-        $this->dispatch('neatline-exhibits');
+        $this->dispatch('neatline');
         $this->assertTrue(has_neatlines());
     }
 
@@ -104,7 +104,7 @@ class Neatline_HelpersTest extends Neatline_Test_AppTestCase
      */
     public function testNoLoopNeatlines()
     {
-        $this->dispatch('neatline-exhibits');
+        $this->dispatch('neatline');
         $this->assertEmpty(loop_neatlines());
     }
 
@@ -117,7 +117,7 @@ class Neatline_HelpersTest extends Neatline_Test_AppTestCase
     public function testLoopNeatlines()
     {
         for ($i=1; $i<=5; $i++) $this->__exhibit();
-        $this->dispatch('neatline-exhibits');
+        $this->dispatch('neatline');
         $this->assertNotEmpty(loop_neatlines());
     }
 
@@ -137,7 +137,7 @@ class Neatline_HelpersTest extends Neatline_Test_AppTestCase
         $exhibit->save();
 
         // Hit /show.
-        $this->dispatch('neatline-exhibits/show/test-exhibit');
+        $this->dispatch('neatline/show/test-exhibit');
 
         // Neatline Name
         $this->assertEquals('Test Exhibit', neatline('title'));
@@ -166,7 +166,7 @@ class Neatline_HelpersTest extends Neatline_Test_AppTestCase
 
         // Create exhibit, hit /show.
         $exhibit = $this->__exhibit('test-exhibit');
-        $this->dispatch('neatline-exhibits/show/test-exhibit');
+        $this->dispatch('neatline/show/test-exhibit');
 
         $newExhibit = $this->__exhibit();
         set_current_neatline($newExhibit);
@@ -200,7 +200,7 @@ class Neatline_HelpersTest extends Neatline_Test_AppTestCase
     public function testTotalNeatlines()
     {
 
-        $this->dispatch('neatline-exhibits');
+        $this->dispatch('neatline');
         $this->assertEquals(0, total_neatlines());
 
         $neatlineOne = $this->__exhibit();
