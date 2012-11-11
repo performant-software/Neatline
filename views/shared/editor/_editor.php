@@ -14,6 +14,4 @@
 ?>
 
 <div id="editor">
-  <div class="title"></div>
-  <div class="header"></div>
 </div>

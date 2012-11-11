@@ -144,69 +144,6 @@ class Neatline_IndexController extends Omeka_Controller_AbstractActionController
     }
 
     /**
-     * ~ AJAX ~
-     * Get events JSON for the timeline.
-     *
-     * @return JSON The events array.
-     */
-    public function simileAction()
-    {
-
-        // Supress the default Zend layout-sniffer functionality.
-        $this->_helper->viewRenderer->setNoRender(true);
-        $this->getResponse()->setHeader('Content-type', 'application/json');
-
-        // Get the exhibit.
-        $neatline = $this->_helper->db->findById();
-
-        // Output the JSON string.
-        echo json_encode($this->_recordsTable->buildTimelineJson($neatline));
-
-    }
-
-    /**
-     * ~ AJAX ~
-     * Get item-wkt JSON for the map.
-     *
-     * @return JSON The vector data.
-     */
-    public function openlayersAction()
-    {
-
-        // Supress the default Zend layout-sniffer functionality.
-        $this->_helper->viewRenderer->setNoRender(true);
-        $this->getResponse()->setHeader('Content-type', 'application/json');
-
-        // Get the exhibit.
-        $neatline = $this->_helper->db->findById();
-
-        // Output the JSON string.
-        echo json_encode($this->_recordsTable->buildMapJson($neatline));
-
-    }
-
-    /**
-     * ~ AJAX ~
-     * Get item list markup for the undated items block.
-     *
-     * @return HTML The items.
-     */
-    public function udiAction()
-    {
-
-        // Supress the default Zend layout-sniffer functionality.
-        $this->_helper->viewRenderer->setNoRender(true);
-        $this->getResponse()->setHeader('Content-type', 'application/json');
-
-        // Get the exhibit.
-        $neatline = $this->_helper->db->findById();
-
-        // Output the JSON string.
-        echo json_encode($this->_recordsTable->buildItemsJson($neatline));
-
-    }
-
-    /**
      * Sets the add success message.
      */
     protected function _getAddSuccessMessage($neatline)
