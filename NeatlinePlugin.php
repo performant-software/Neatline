@@ -57,6 +57,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
     {
 
         // Exhibits table.
+        // ---------------
         $sql = "CREATE TABLE IF NOT EXISTS `{$this->_db->prefix}neatline_exhibits` (
 
             `id`                    int(10) unsigned NOT NULL auto_increment,
@@ -78,7 +79,9 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
 
         $this->_db->query($sql);
 
+
         // Records table.
+        // --------------
         $sql = "CREATE TABLE IF NOT EXISTS `{$this->_db->prefix}neatline_records` (
 
             `id`                    int(10) unsigned NOT NULL auto_increment,
@@ -108,11 +111,14 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
 
         $this->_db->query($sql);
 
+
         // Tags table.
+        // -----------
         $sql = "CREATE TABLE IF NOT EXISTS `{$this->_db->prefix}neatline_tags` (
 
             `id`                    int(10) unsigned NOT NULL auto_increment,
             `exhibit_id`            int(10) unsigned NULL,
+            `is_default`            tinyint(1) NULL,
             `tag`                   tinytext COLLATE utf8_unicode_ci NULL,
             `vector_color`          tinytext COLLATE utf8_unicode_ci NULL,
             `stroke_color`          tinytext COLLATE utf8_unicode_ci NULL,
@@ -130,6 +136,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
         ) ENGINE=innodb DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
 
         $this->_db->query($sql);
+
 
         // Add index on exhibit_id.
         $this->_addIndex(

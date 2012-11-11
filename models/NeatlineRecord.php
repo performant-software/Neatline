@@ -46,19 +46,19 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
 
     /**
      * The fill color for geometries.
-     * int(10) unsigned NULL
+     * tinytext COLLATE utf8_unicode_ci NULL
      */
     public $vector_color;
 
     /**
      * The line color for geometries.
-     * int(10) unsigned NULL
+     * tinytext COLLATE utf8_unicode_ci NULLL
      */
     public $stroke_color;
 
     /**
      * The highlight color for geometries.
-     * int(10) unsigned NULL
+     * tinytext COLLATE utf8_unicode_ci NULL
      */
     public $highlight_color;
 
