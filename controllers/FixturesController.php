@@ -45,4 +45,25 @@ class Neatline_FixturesController extends Omeka_Controller_AbstractActionControl
 
     }
 
+    /**
+     * Editor markup.
+     *
+     * @return void
+     */
+    public function editorAction()
+    {
+
+        // Supress default layout.
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        // Create exhibit.
+        $exhibit = new NeatlineExhibit;
+
+        // Render.
+        echo $this->view->partial('editor/_editor.php', array(
+            'exhibit' => $exhibit
+        ));
+
+    }
+
 }

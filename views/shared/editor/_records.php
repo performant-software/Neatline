@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2; */
 
 /**
- * Editor container partial.
+ * Content management shell in editor.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -13,12 +13,5 @@
 
 ?>
 
-<!-- Records. -->
-<?php echo $this->partial('editor/_records.php', array(
-  'exhibit' => $exhibit
-)); ?>
-
-<!-- Exhibit. -->
-<?php echo $this->partial('neatline/_neatline.php', array(
-  'exhibit' => $exhibit
-)); ?>
+<div id="editor">
+</div>

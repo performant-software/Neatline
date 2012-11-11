@@ -29,6 +29,16 @@ _t.loadNeatline = function() {
 
 };
 
+/*
+ * Load editor application.
+ */
+_t.loadEditor = function() {
+
+  // Restart components.
+  NeatlineEditor.Controllers.Layout.init();
+
+};
+
 
 // --------
 // Helpers.

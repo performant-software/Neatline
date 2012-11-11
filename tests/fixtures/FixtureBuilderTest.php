@@ -82,4 +82,18 @@ class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
 
     }
 
+    /**
+     * Editor partial markup.
+     *
+     * @return void.
+     */
+    public function testEditorPartial()
+    {
+
+        // Generate the fixture.
+        $this->writeFixture('neatline/fixtures/editor',
+            'editor-partial.html');
+
+    }
+
 }

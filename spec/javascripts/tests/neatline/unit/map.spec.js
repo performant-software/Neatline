@@ -1,5 +1,5 @@
 /**
- * Integration tests for map viewport.
+ * Unit tests for map viewport.
  *
  * @package     omeka
  * @subpackage  neatline

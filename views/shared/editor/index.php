@@ -25,9 +25,4 @@
   'exhibit' => $exhibit
 )); ?>
 
-<!-- Exhibit. -->
-<?php echo $this->partial('neatline/_neatline.php', array(
-  'exhibit' => $exhibit
-)); ?>
-
 <?php echo $this->partial('editor/_editor_footer.php'); ?>
