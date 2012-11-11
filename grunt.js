@@ -92,9 +92,8 @@ module.exports = function(grunt) {
 
       editorCss: {
         src: [
-          css+'editor.css',
-          c.components+c.vendor.openlayers_css,
-          c.components+c.vendor.bootstrap_css
+          '<config:concat.neatlineCss.src>',
+          css+'editor.css'
         ],
         dest: css+'editor.css'
       }

@@ -183,6 +183,10 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
         $sql = "DROP TABLE IF EXISTS `{$this->_db->prefix}neatline_layers`";
         $this->_db->query($sql);
 
+        // Drop the tags table.
+        $sql = "DROP TABLE IF EXISTS `{$this->_db->prefix}neatline_tags`";
+        $this->_db->query($sql);
+
         // Remove default map style attributes.
         foreach ($this->_mapStyles as $style)
             delete_option($style);

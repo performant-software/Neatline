@@ -1,9 +1,6 @@
 <?php
-
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
-
 /**
- * TODO: Development controller to mock out exhibits, records, and tags.
+ * Development tasks.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -15,45 +12,25 @@ class Neatline_DevController extends Omeka_Controller_AbstractActionController
 {
 
     /**
-     * Get tables.
-     *
-     * @return void
-     */
-    public function init()
-    {
-        $this->exhibitsTable =  $this->_helper->db->getTable('NeatlineExhibit');
-        $this->recordsTable =   $this->_helper->db->getTable('NeatlineRecord');
-    }
-
-    /**
-     * Create exhibit with 1000 records and 10 tags.
+     * Install development exhibit.
      *
      * @return void.
      */
-    public function insertAction()
-    {
-
-        // Create exhibit.
-        $exhibit = new NeatlineExhibit();
-        $exhibit->slug = 'dev';
-        $exhibit->save();
-
-        // Create records.
-        for ($i=0; $i<1000; $i++) {
-            $record = new NeatlineRecord(null, $exhibit);
-            $record->save();
-        }
-
+    public function installAction() {
+        $this->_helper->viewRenderer->setNoRender(true);
+        __devInstall();
+        $this->_redirect('neatline');
     }
 
     /**
-     * Clear tables.
+     * Uninstall development exhibit.
      *
      * @return void.
      */
-    public function truncateAction()
-    {
-
+    public function uninstallAction() {
+        $this->_helper->viewRenderer->setNoRender(true);
+        __devUninstall();
+        $this->_redirect('neatline');
     }
 
 }

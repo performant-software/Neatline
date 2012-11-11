@@ -1,9 +1,9 @@
-task :default => 'test:all'
-
 begin
   require 'jasmine'
   load 'jasmine/tasks/jasmine.rake'
 end
+
+task :default => 'test:all'
 
 namespace :test do
 
@@ -70,18 +70,4 @@ desc 'Rebuild the application'
 task :rebuild do
   Rake::Task['clean'].invoke
   Rake::Task['build'].invoke
-end
-
-namespace :dev do
-
-  desc 'Insert exhibit'
-  task :insert do
-    sh %{bash .sql/insert_exhibit.sh}
-  end
-
-  desc 'Clear exhibit'
-  task :truncate do
-    sh %{bash .sql/clear_exhibit.sh}
-  end
-
 end

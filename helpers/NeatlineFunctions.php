@@ -372,3 +372,76 @@ function total_records_for_neatline($neatline = null)
     $neatline = $neatline ? $neatline : get_current_neatline();
     return (int)$neatline->getNumberOfRecords();
 }
+
+
+
+// TODO|DEV: Development helpers.
+// ------------------------------
+
+/**
+ * Install development exhibit.
+ * @return void.
+ */
+function __devInstall()
+{
+
+    // Create exhibit.
+    $exhibit = new NeatlineExhibit();
+    $exhibit->title = 'dev';
+    $exhibit->slug = 'dev';
+    $exhibit->save();
+
+    // Create records.
+    for ($i=0; $i<1000; $i++) {
+
+        // Random coordianates.
+        $lat = rand(-20000000,20000000);
+        $lon = rand(-20000000,20000000);
+
+        // Create the record.
+        $record = new NeatlineRecord(null, $exhibit);
+        $record->title = 'Record'.$i;
+        $record->map_active = 1;
+
+        // Set coverage.
+        $record->geocoverage = '
+          <kml xmlns="http://earth.google.com/kml/2.0">
+            <Folder>
+              <Placemark>
+                <name>Record'.$i.'</name>
+                <Point>
+                  <coordinates>'
+                    .$lat.','.$lon.
+                  '</coordinates>
+                </Point>
+              </Placemark>
+            </Folder>
+          </kml>';
+
+        // Styles.
+        $record->vector_color =     '#ff0000';
+        $record->stroke_color =     '#000000';
+        $record->highlight_color =  '#0000ff';
+        $record->point_radius =     rand(10,50);
+        $record->stroke_opacity =   100;
+        $record->vector_opacity =   30;
+        $record->select_opacity =   70;
+        $record->stroke_width =     2;
+
+        $record->save();
+
+    }
+
+}
+
+/**
+ * Uninstall development exhibit.
+ * @return void.
+ */
+function __devUninstall()
+{
+    $db = get_db();
+    $exhibitsTable = $db->getTable('NeatlineExhibit');
+    $exhibits = $exhibitsTable->findAll();
+    foreach ($exhibits as $exhibit) $exhibit->delete();
+}
