@@ -17,22 +17,33 @@ Neatline.Controllers.Exhibit = (function(Backbone, Neatline) {
   // ---------------
 
   /*
-   * Populate records collection.
+   * Create records collection, starting query.
    *
    * @return void.
    */
   Exhibit.init = function() {
+    this.records = new Neatline.Collections.Records();
+    this.fetch();
+  };
 
-    // Create records collection.
-    var records = new Neatline.Collections.Records();
+  /*
+   * Query for records.
+   *
+   * @param {Object} params: Query parameters.
+   *
+   * @return void.
+   */
+  Exhibit.fetch = function(params) {
 
-    // Listen for new records.
-    records.on('reset', function() {
-      Neatline.vent.trigger('exhibit:newRecords', records);
+    params = params || {};
+
+    // Get records.
+    this.records.fetch({
+      data: $.param(params),
+      success: function(collection) {
+        Neatline.vent.trigger('exhibit:newRecords', collection);
+      }
     });
-
-    // Fetch.
-    records.fetch();
 
   };
 
