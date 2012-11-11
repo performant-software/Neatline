@@ -101,11 +101,7 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
     }
 
     /**
-     * When a new data record is created, four of the attributes should
-     * automatically be set to non-null values. The space and time status
-     * trackers should be set to 0/false, and the two date ambiguity
-     * settings should be fully expanded - the left should be at 0 and
-     * the right at 100.
+     * __construct() should set foreign keys.
      *
      * @return void.
      */
@@ -120,9 +116,6 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
         // Item and exhibit keys should be set.
         $this->assertEquals($record->exhibit_id, $neatline->id);
         $this->assertEquals($record->item_id, $item->id);
-
-        // Status columns.
-        $this->assertEquals($record->map_active, 1);
 
     }
 
@@ -747,12 +740,6 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
         $record->map_zoom =             self::$__testParams['map_zoom'];
         $record->geocoverage =          self::$__testParams['geocoverage'];
 
-        // Timeline.
-        $record->start_date =           self::$__testParams['start_date'];
-        $record->end_date =             self::$__testParams['end_date'];
-        $record->start_visible_date =   self::$__testParams['start_visible_date'];
-        $record->end_visible_date =     self::$__testParams['end_visible_date'];
-
         // Statuses.
         $record->map_active =           self::$__testParams['map_active'];
 
@@ -784,7 +771,6 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
                 'stroke_width'          => self::$__testParams['stroke_width'],
                 'point_radius'          => self::$__testParams['point_radius'],
                 'point_image'           => self::$__testParams['point_image'],
-                'show_bubble'           => 1,
 
                 // Map.
                 'map_focus'             => self::$__testParams['map_focus'],
@@ -792,12 +778,6 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
                 'coverage'              => self::$__testParams['geocoverage'],
                 'wmsAddress'            => null,
                 'layers'                => null,
-
-                // Timeline:
-                'start_date'            => self::$__testParams['start_date'],
-                'end_date'              => self::$__testParams['end_date'],
-                'start_visible_date'    => self::$__testParams['start_visible_date'],
-                'end_visible_date'      => self::$__testParams['end_visible_date'],
 
                 // Statuses.
                 'map_active'            => self::$__testParams['map_active']

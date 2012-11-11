@@ -52,16 +52,10 @@ class Neatline_DataControllerTest extends Neatline_Test_AppTestCase
         $this->assertObjectHasAttribute('stroke_width',       $response[0]);
         $this->assertObjectHasAttribute('point_radius',       $response[0]);
         $this->assertObjectHasAttribute('point_image',        $response[0]);
-        $this->assertObjectHasAttribute('show_bubble',        $response[0]);
         $this->assertObjectHasAttribute('map_focus',          $response[0]);
         $this->assertObjectHasAttribute('coverage',           $response[0]);
         $this->assertObjectHasAttribute('wmsAddress',         $response[0]);
         $this->assertObjectHasAttribute('layers',             $response[0]);
-        $this->assertObjectHasAttribute('start_date',         $response[0]);
-        $this->assertObjectHasAttribute('end_date',           $response[0]);
-        $this->assertObjectHasAttribute('start_visible_date', $response[0]);
-        $this->assertObjectHasAttribute('end_visible_date',   $response[0]);
-        $this->assertObjectHasAttribute('map_active',         $response[0]);
 
     }
 

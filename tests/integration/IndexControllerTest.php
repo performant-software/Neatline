@@ -36,15 +36,8 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
      */
     public function testBrowseBaseMarkup()
     {
-
         $this->dispatch('neatline-exhibits');
-
-        // There should be a 'Create Neatline' button.
-        $this->assertQueryContentContains(
-            'a.add',
-            'Create an Exhibit'
-        );
-
+        $this->assertQueryContentContains('a.add', 'Create an Exhibit');
     }
 
     /**
@@ -71,25 +64,15 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
     }
 
     /**
-     * When there are more exhibits than can fit on the page, show
-     * pagination.
+     * Show pagination when exhibits can't fit on a single page.
      *
      * @return void.
      */
     public function testBrowsePagination()
     {
 
-        for ($i = 1; $i < 5; $i++) {
-            $exhibit = new NeatlineExhibit();
-            $exhibit->name = 'Exhibit '.$i;
-            $exhibit->slug = 'slug'.$i;
-            $exhibit->public = 1;
-            $exhibit->is_map = 1;
-            $exhibit->is_timeline = 1;
-            $exhibit->is_items = 1;
-            $exhibit->is_context_band = 1;
-            $exhibit->save();
-        }
+        // Create 5 exhibits.
+        for ($i = 0; $i < 5; $i++) $this->__exhibit('slug'.$i);
 
         // Set the paging limit.
         set_option('per_page_admin', 2);

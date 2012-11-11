@@ -132,21 +132,6 @@ class NeatlineExhibit extends Omeka_Record_AbstractRecord
     }
 
     /**
-     * Fetch the parent image.
-     *
-     * @return Omeka_record The map.
-     */
-    public function getImage()
-    {
-
-        if (!is_null($this->image_id))
-            return $this->getTable('File')->find($this->image_id);
-
-        return null;
-
-    }
-
-    /**
      * Commit add/edit form data.
      *
      * @param array $formValues: The form values.
@@ -157,41 +142,6 @@ class NeatlineExhibit extends Omeka_Record_AbstractRecord
     {
         foreach ($formValues as $key => $value) { $this->$key = $value; }
         $this->save();
-    }
-
-    /**
-     * Set a style attribute. Only set a value if it is different from
-     * the system default. Return true if a row value is set.
-     *
-     * @param string style The name of the style.
-     * @param mixed $value The value to set.
-     *
-     * @return boolean True if the set succeeds.
-     */
-    public function setStyle($style, $value)
-    {
-
-        // If a non-style property is passed, return false.
-        if (!in_array('' . $style, self::$styles)) {
-            return false;
-        }
-
-        // If the value does not match the system default.
-        else if ($value != get_plugin_ini('Neatline', $style)) {
-            $this['' . $style] = $value;
-            return true;
-        }
-
-        // If the value matches the system default and there is an existing
-        // row-level value on the exhibit.
-        else if ($value == get_plugin_ini('Neatline', $style) &&
-            !is_null($this['' . $style])) {
-                $this['' . $style] = null;
-                return true;
-        }
-
-        return false;
-
     }
 
     /**
@@ -212,48 +162,6 @@ class NeatlineExhibit extends Omeka_Record_AbstractRecord
         if ($baseLayer) {
             $this->base_layer = $baseLayer->id;
         }
-
-    }
-
-    /**
-     * Get a style attribute. Look for exhibit-specific default, and
-     * fall back on system defaults when local value is unset.
-     *
-     * @param string style The name of the style.
-     *
-     * @return mixed The style.
-     */
-    public function getStyle($style)
-    {
-
-        // If there is a row value.
-        if (!is_null($this['' . $style])) {
-            return $this['' . $style];
-        }
-
-        // Fall back to system default.
-        else {
-            return get_plugin_ini('Neatline', $style);
-        }
-
-    }
-
-    /**
-     * Check whether a given record is active on the map or timeline.
-     *
-     * @param Omeka_record $item The item record.
-     * @param Omeka_record $viewport 'space', 'time', 'items'.
-     *
-     * @return boolean True if the record is active.
-     */
-    public function getRecordStatus($item, $viewport)
-    {
-
-        // Get the data record table.
-        $_recordsTable = $this->getTable('NeatlineRecord');
-
-        // Get the status.
-        return $_recordsTable->getRecordStatus($item, $this, $viewport);
 
     }
 
@@ -314,43 +222,6 @@ class NeatlineExhibit extends Omeka_Record_AbstractRecord
         // If exhibit value is set, return the setting.
         else return $_layersTable->find($this->base_layer);
 
-    }
-
-    /**
-     * Get the horizontal and vertical viewport percentages.
-     *
-     * @return array $proportions array('horizontal' => integer,
-     * 'vertical' => integer).
-     */
-    public function getViewportProportions()
-    {
-
-        // Shell out array with defaults.
-        $proportions = array(
-            'horizontal' => get_plugin_ini('Neatline', 'h_percent'),
-            'vertical' => get_plugin_ini('Neatline', 'v_percent')
-        );
-
-        // Use row-specifc values if present.
-        if (!is_null($this->h_percent) && !is_null($this->v_percent)) {
-            $proportions['horizontal'] = $this->h_percent;
-            $proportions['vertical'] = $this->v_percent;
-        }
-
-        return $proportions;
-
-    }
-
-    /**
-     * Get the starting timeline zoom.
-     *
-     * @return integer $zoom The zoom index.
-     */
-    public function getTimelineZoom()
-    {
-        return !is_null($this->timeline_zoom) ?
-            $this->timeline_zoom :
-            (int) get_plugin_ini('Neatline', 'timeline_zoom');
     }
 
     /**

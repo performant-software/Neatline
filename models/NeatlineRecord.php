@@ -126,7 +126,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
      * Boolean for whether the record is present on the map.
      * tinyint(1) NULL
      */
-    public $map_active = 0;
+    public $map_active;
 
     /**
      * The record's parent record (used for caching).
@@ -603,7 +603,6 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
             'stroke_width'        => $this->getStyle('stroke_width'),
             'point_radius'        => $this->getStyle('point_radius'),
             'point_image'         => $this->getNotEmpty('point_image'),
-            'show_bubble'         => $this->show_bubble,
 
             // Map:
             'map_focus'           => $this->map_focus,
@@ -611,12 +610,6 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
             'coverage'            => $this->getGeocoverage(),
             'wmsAddress'          => null,
             'layers'              => null,
-
-            // Timeline:
-            'start_date'          => $this->getStartDate(),
-            'end_date'            => $this->getEndDate(),
-            'start_visible_date'  => $this->getStartVisibleDate(),
-            'end_visible_date'    => $this->getEndVisibleDate(),
 
             // Statuses:
             'map_active'          => $this->map_active

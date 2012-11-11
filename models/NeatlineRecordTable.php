@@ -40,56 +40,6 @@ class NeatlineRecordTable extends Omeka_Db_Table
     }
 
     /**
-     * Save a new record ordering.
-     *
-     * @param Omeka_record $exhibit The exhibit record.
-     * @param array $order The ordering.
-     *
-     * @return void.
-     */
-    public function saveOrder($exhibit, $order)
-    {
-
-        // Get all records for the exhibit, flip the order.
-        $records = $this->getItemsRecordsByExhibit($exhibit);
-
-        foreach ($records as $record) {
-            $record->display_order = $order[$record->id];
-            $record->save();
-        }
-
-    }
-
-    /**
-     * Save a record status change.
-     *
-     * @param Omeka_record $item The item record.
-     * @param Omeka_record $neatline The exhibit record.
-     * @param string $spaceOrTime 'space' or 'time'.
-     * @param boolean $value Boolean value of new status.
-     *
-     * @return void.
-     */
-    public function saveRecordStatus($item, $neatline, $spaceOrTime, $value)
-    {
-
-        // Get the record.
-        $record = $this->getRecordByItemAndExhibit($item, $neatline);
-
-        // If there is not an existing record, create one.
-        if (!$record) {
-            $record = new NeatlineRecord($item, $neatline);
-        }
-
-        // Update.
-        $record->setStatus($spaceOrTime, $value);
-        $record->save();
-
-        return $record;
-
-    }
-
-    /**
      * Find a record for a given item and exhibit.
      *
      * @param Omeka_record $item The item record.
@@ -164,7 +114,6 @@ class NeatlineRecordTable extends Omeka_Db_Table
             $this->getSelect()
                  ->where('exhibit_id=?', $neatline->id)
                  ->where('item_id IS NULL')
-                 ->order('display_order ASC')
         );
 
         return $records ? $records : false;
@@ -212,115 +161,10 @@ class NeatlineRecordTable extends Omeka_Db_Table
         $records = $this->fetchObjects(
             $this->getSelect()
                  ->where('exhibit_id=?', $exhibit->id)
-                 ->where('(map_active=1 OR time_active=1 OR items_active=1)')
-                 ->order('display_order ASC')
+                 ->where('(map_active=1)')
         );
 
         return $records ? $records : false;
-
-    }
-
-    /**
-     * Find all records in an exhibit that are active on the map.
-     *
-     * @param Omeka_record $exhibit The exhibit record.
-     *
-     * @return array of Omeka_record The records.
-     */
-    public function getMapRecordsByExhibit($exhibit)
-    {
-
-        $records = $this->fetchObjects(
-            $this->getSelect()
-                 ->where('exhibit_id=?', $exhibit->id)
-                 ->where('map_active=1')
-                 ->order('display_order ASC')
-        );
-
-        return $records ? $records : false;
-
-    }
-
-    /**
-     * Find all records in an exhibit that are active on the timeline.
-     *
-     * @param Omeka_record $exhibit The exhibit record.
-     *
-     * @return array of Omeka_record The records.
-     */
-    public function getTimelineRecordsByExhibit($exhibit)
-    {
-
-        $records = $this->fetchObjects(
-            $this->getSelect()
-                 ->where('exhibit_id=?', $exhibit->id)
-                 ->where('time_active=1')
-                 ->order('display_order ASC')
-        );
-
-        return $records ? $records : false;
-
-    }
-
-    /**
-     * Find all records associated with a given exhibit that are active in
-     * the items pane.
-     *
-     * @param Omeka_record $exhibit The exhibit record.
-     *
-     * @return array of Omeka_record The records.
-     */
-    public function getItemsRecordsByExhibit($exhibit)
-    {
-
-        $records = $this->fetchObjects(
-            $this->getSelect()
-                 ->where('exhibit_id=?', $exhibit->id)
-                 ->where('items_active=1')
-                 ->order('display_order ASC')
-        );
-
-        return $records ? $records : false;
-
-    }
-
-    /**
-     * Check whether a given record is active on the map or timeline.
-     *
-     * @param Omeka_record $item The item record.
-     * @param Omeka_record $neatline The exhibit record.
-     * @param Omeka_record $viewport 'space', 'time', 'items'.
-     *
-     * @return boolean True if the record is active.
-     */
-    public function getRecordStatus($item, $neatline, $viewport)
-    {
-
-        // Try to get the record.
-        $record = $this->getRecordByItemAndExhibit($item, $neatline);
-
-        // If there is a record.
-        if ($record) {
-
-            // If space.
-            if ($viewport == 'space') {
-                return (bool) $record->map_active;
-            }
-
-            // If time.
-            else if ($viewport == 'time') {
-                return (bool) $record->time_active;
-            }
-
-            // If items.
-            else if ($viewport == 'items') {
-                return (bool) $record->items_active;
-            }
-
-        }
-
-        // If no record, return false.
-        return false;
 
     }
 
