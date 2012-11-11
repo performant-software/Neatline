@@ -403,8 +403,7 @@ class NeatlineRecordTable extends Omeka_Db_Table
      *
      * @param Omeka_Record_AbstractRecord $exhibit The exhibit record.
      *
-     * @return JSON Array of format:
-     * array('map' => array(), 'timeline' => array()).
+     * @return JSON Array of records.
      */
     public function buildJsonForExhibit($exhibit)
     {
@@ -429,6 +428,38 @@ class NeatlineRecordTable extends Omeka_Db_Table
     }
 
     /**
+     * Construct records JSON for editor.
+     *
+     * @param Omeka_Record_AbstractRecord $exhibit The exhibit record.
+     * @param string $query The search query.
+     * @param int $page The page.
+     *
+     * @return JSON Array of records.
+     */
+    public function buildJsonForEditor($exhibit, $query=null, $page=null)
+    {
+
+        $data = array();
+
+        // Get records.
+        if ($records = $this->getRecordsByExhibit($exhibit)) {
+
+            // Construct record objects.
+            foreach ($records as $record) {
+                $data[] = array(
+                    'id' =>         $record->id,
+                    'item_id' =>    $record->item_id,
+                    'title' =>      $record->title
+                );
+            }
+
+        }
+
+        return $data;
+
+    }
+
+    /**
      * This indexes the array of records by their ID.
      *
      * @param array $records Array of data records.
@@ -439,11 +470,7 @@ class NeatlineRecordTable extends Omeka_Db_Table
     protected function _indexRecords($records)
     {
         $index = array();
-
-        foreach ($records as $record) {
-            $index[$record->id] = $record;
-        }
-
+        foreach ($records as $record) $index[$record->id] = $record;
         return $index;
     }
 

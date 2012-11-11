@@ -1,4 +1,7 @@
 <?php
+
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
+
 /**
  * Editor controller.
  *
@@ -48,11 +51,13 @@ class Neatline_EditorController extends Omeka_Controller_AbstractActionControlle
         $this->_helper->viewRenderer->setNoRender(true);
         $this->getResponse()->setHeader('Content-type', 'application/json');
 
-        // Get the exhibit.
+        // Get exhibit.
         $exhibit = $this->exhibitsTable->find($this->_request->id);
 
-        // Output the JSON string.
-        echo json_encode(array('test'=>5));
+        // Get records.
+        echo json_encode($this->recordsTable->buildJsonForEditor(
+            $exhibit, $this->_request->query, (int) $this->_request->page
+        ));
 
     }
 
