@@ -12,10 +12,6 @@ Neatline.Controllers.Map = (function(Backbone, Neatline) {
   var Map = {};
 
 
-  // ---------------
-  // Initialization.
-  // ---------------
-
   /*
    * Instantiate map.
    *

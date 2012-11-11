@@ -1,5 +1,5 @@
 /**
- * Exhibit controller.
+ * Editor controller.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -7,9 +7,9 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.Controllers.Exhibit = (function(Backbone, Neatline) {
+Neatline.Controllers.Editor = (function(Backbone, NeatlineEditor) {
 
-  var Exhibit = {};
+  var Editor = {};
 
 
   /*
@@ -17,8 +17,8 @@ Neatline.Controllers.Exhibit = (function(Backbone, Neatline) {
    *
    * @return void.
    */
-  Exhibit.init = function() {
-    this.records = new Neatline.Collections.Records();
+  Editor.init = function() {
+    this.records = new NeatlineEditor.Collections.Records();
     this.fetch();
   };
 
@@ -29,7 +29,7 @@ Neatline.Controllers.Exhibit = (function(Backbone, Neatline) {
    *
    * @return void.
    */
-  Exhibit.fetch = function(params) {
+  Editor.fetch = function(params) {
 
     params = params || {};
 
@@ -37,7 +37,7 @@ Neatline.Controllers.Exhibit = (function(Backbone, Neatline) {
     this.records.fetch({
       data: $.param(params),
       success: function(collection) {
-        Neatline.vent.trigger('exhibit:newRecords', collection);
+        NeatlineEditor.vent.trigger('exhibit:newRecords', collection);
       }
     });
 
@@ -45,7 +45,7 @@ Neatline.Controllers.Exhibit = (function(Backbone, Neatline) {
 
 
   // Export.
-  Neatline.addInitializer(function() { Exhibit.init(); });
-  return Exhibit;
+  NeatlineEditor.addInitializer(function() { Editor.init(); });
+  return Editor;
 
-})(Backbone, Neatline);
+})(Backbone, NeatlineEditor);

@@ -12,10 +12,6 @@ NeatlineEditor.Controllers.Layout = (function(Backbone, NeatlineEditor) {
   var Layout = {};
 
 
-  // ---------------
-  // Initialization.
-  // ---------------
-
   /*
    * Instantiate the layout manager.
    *
