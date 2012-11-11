@@ -60,7 +60,7 @@ function neatline_queueGoogleMapsApi()
 }
 
 /**
- * Prepare the starting data array for the front-end application.
+ * Construct exhibit globals.
  *
  * @param NeatlineExhibit $exhibit The exhibit.
  *
@@ -70,9 +70,24 @@ function neatline_renderExhibit($exhibit)
 {
     return json_encode(array(
         'id' => $exhibit->id,
-        'dataSource' => neatline_getDataSource($exhibit),
+        'dataSource' => neatline_getExhibitDataSource($exhibit),
         'mapFocus' => $exhibit->map_focus,
         'mapZoom' => $exhibit->map_zoom
+    ));
+}
+
+/**
+ * Construct editor globals.
+ *
+ * @param NeatlineExhibit $exhibit The exhibit.
+ *
+ * @return array The exhibit data.
+ */
+function neatline_renderEditor($exhibit)
+{
+    return json_encode(array(
+        'id' => $exhibit->id,
+        'dataSource' => neatline_getEditorDataSource($exhibit)
     ));
 }
 
@@ -83,9 +98,21 @@ function neatline_renderExhibit($exhibit)
  *
  * @return string The url.
  */
-function neatline_getDataSource($exhibit)
+function neatline_getExhibitDataSource($exhibit)
 {
     return public_url('neatline-exhibits/data/' . $exhibit->id);
+}
+
+/**
+ * Get the editor data emitter URL for an exhibit.
+ *
+ * @param NeatlineExhibit $exhibit The exhibit.
+ *
+ * @return string The url.
+ */
+function neatline_getEditorDataSource($exhibit)
+{
+    return public_url('neatline-exhibits/editor/records/' . $exhibit->id);
 }
 
 /**

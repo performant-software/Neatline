@@ -22,3 +22,8 @@
 <?php echo $this->partial('neatline/_neatline.php', array(
   'exhibit' => $exhibit
 )); ?>
+
+<!-- JSON globals. -->
+<script type="text/javascript">
+  __editor = <?php echo neatline_renderEditor($exhibit); ?>
+</script>

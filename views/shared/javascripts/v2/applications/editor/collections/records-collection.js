@@ -7,6 +7,6 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.Collections.Records = Backbone.Collection.extend({
-  url: (function() { return __exhibit.dataSource; })
+NeatlineEditor.Collections.Records = Backbone.Collection.extend({
+  url: (function() { return __editor.dataSource; })
 });
