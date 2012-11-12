@@ -27,6 +27,12 @@ NeatlineEditor.Views.Records = Backbone.View.extend({
    */
   ingest: function(records) {
 
+    // Walk the incoming records.
+    records.each(_.bind(function(r) {
+      var record = new NeatlineEditor.Views.RecordRow({ model: r });
+      this.$el.append(record.$el);
+    }, this));
+
   }
 
 });

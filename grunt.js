@@ -54,8 +54,8 @@ module.exports = function(grunt) {
         src: vendorFiles.concat([
           c.apps.neatline+'app.js',
           c.apps.neatline+'collections/*.js',
-          c.apps.neatline+'views/*.js',
           c.apps.neatline+'controllers/*.js',
+          c.apps.neatline+'views/*.js',
           c.apps.editor+'app.js',
           c.apps.editor+'run.js',
           c.apps.editor+'collections/*.js',

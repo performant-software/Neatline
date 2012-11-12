@@ -14,5 +14,5 @@
 ?>
 
 <script id="record-listing" type="text/templates">
-  <li class="record-listing"><%= title %></li>
+  <span class="record-title"><%= title %></span>
 </script>

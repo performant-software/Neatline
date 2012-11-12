@@ -37,7 +37,7 @@ Neatline.Controllers.Editor = (function(Backbone, NeatlineEditor) {
     this.records.fetch({
       data: $.param(params),
       success: function(collection) {
-        NeatlineEditor.vent.trigger('exhibit:newRecords', collection);
+        NeatlineEditor.vent.trigger('editor:newRecords', collection);
       }
     });
 

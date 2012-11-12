@@ -18,8 +18,24 @@ NeatlineEditor.Controllers.Records = (function(Backbone, NeatlineEditor) {
    * @return void.
    */
   Records.init = function() {
-    Records.Records = new NeatlineEditor.Views.Records();
+    Records.Records = new NeatlineEditor.Views.Records({ el: '#records' });
   };
+
+
+  // -------
+  // Events.
+  // -------
+
+  /*
+   * Consume records.
+   *
+   * @param {Object} records: The records collection.
+   *
+   * @return void.
+   */
+  NeatlineEditor.vent.on('editor:newRecords', function(records) {
+    Records.Records.ingest(records);
+  });
 
 
   // Export.
