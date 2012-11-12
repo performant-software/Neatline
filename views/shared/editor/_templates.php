@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2; */
 
 /**
- * Content management shell in editor.
+ * Javascript templates.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -13,8 +13,6 @@
 
 ?>
 
-<div id="editor">
-</div>
-
-<!-- Templates. -->
-<?php echo $this->partial('editor/_templates.php'); ?>
+<script id="record-listing" type="text/templates">
+  <li class="record-listing"><%= title %></li>
+</script>
