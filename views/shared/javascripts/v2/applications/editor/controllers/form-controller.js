@@ -22,6 +22,22 @@ Editor.Controllers.Form = (function(Backbone, Editor) {
   };
 
 
+  // -------
+  // Events.
+  // -------
+
+  /*
+   * Show form.
+   *
+   * @param {Object} model: The record model.
+   *
+   * @return void.
+   */
+  Editor.vent.on('records:openForm', function(model) {
+    model.fetch(); // TODO|dev
+  });
+
+
   // Export.
   Editor.addInitializer(function() { Form.init(); });
   return Form;
