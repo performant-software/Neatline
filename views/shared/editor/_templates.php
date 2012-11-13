@@ -13,8 +13,13 @@
 
 ?>
 
+<!-- Records container. -->
+<script id="record-list" type="text/templates">
+  <ul class="records"></ul>
+</script>
+
 <!-- Listing for individual record. -->
-<script id="record-listing" type="text/templates">
+<script id="record-row" type="text/templates">
   <span class="record-title"><%= title %></span>
 </script>
 

@@ -9,6 +9,24 @@
 
 Editor.Views.Records = Backbone.View.extend({
 
+  getListTemplate: function() {
+    return _.template($('#record-list').html());
+  },
+
+  getRowTemplate: function() {
+    return _.template($('#record-row').html());
+  },
+
+  /*
+   * Compile templates.
+   *
+   * @return void.
+   */
+  initialize: function() {
+    this.listTemplate = this.getListTemplate();
+    this.rowTemplate = this.getRowTemplate();
+  },
+
   /*
    * Render record listings.
    *
@@ -16,12 +34,23 @@ Editor.Views.Records = Backbone.View.extend({
    *
    * @return void.
    */
-  ingest: function(records) {
+  show: function(records) {
+
+    // Append container.
+    this.ul = $(this.listTemplate());
+    this.$el.html(this.ul);
 
     // Walk the incoming records.
     records.each(_.bind(function(r) {
-      var record = new Editor.Views.RecordRow({ model: r });
-      this.$el.append(record.$el);
+
+      // Create record.
+      var record = new Editor.Views.RecordRow({
+        model: r, template: this.rowTemplate
+      });
+
+      // Append.
+      this.ul.append(record.$el);
+
     }, this));
 
   }

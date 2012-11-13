@@ -12,10 +12,6 @@ Editor.Views.RecordRow = Backbone.View.extend({
   tagName: 'li',
   className: 'record-row',
 
-  template: function() {
-    return _.template($('#record-listing').html());
-  },
-
   events: {
     'mousedown': 'openForm'
   },
@@ -25,13 +21,13 @@ Editor.Views.RecordRow = Backbone.View.extend({
    *
    * @return void.
    */
-  initialize: function() {
+  initialize: function(template) {
 
     // Store model.
     this.model = this.options.model;
 
     // Render template.
-    this.$el.append($(this.template()({
+    this.$el.append($(this.options.template({
       title: this.model.get('title')
     })));
 

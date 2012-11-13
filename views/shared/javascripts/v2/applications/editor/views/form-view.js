@@ -9,10 +9,7 @@
 
 Editor.Views.Form = Backbone.View.extend({
 
-  tagName: 'div',
-  className: 'form',
-
-  template: function() {
+  getTemplate: function() {
     return _.template($('#edit-form').html());
   },
 
@@ -24,7 +21,7 @@ Editor.Views.Form = Backbone.View.extend({
   initialize: function() {
 
     // Render template.
-    this.form = $(this.template()());
+    this.form = $(this.getTemplate()());
 
     // Text.
     this.title =          this.form.find('textarea[name="title"]');
@@ -47,6 +44,33 @@ Editor.Views.Form = Backbone.View.extend({
     this.closeButton =    this.form.find('button[name="close"]');
     this.delButton =      this.form.find('button[name="delete"]');
 
+    // Bind form listeners.
+    this.bindEvents();
+
+  },
+
+  /*
+   * Bind event listeners to form elements.
+   *
+   * @return void.
+   */
+  bindEvents: function() {
+
+    // Buttons.
+    // --------
+
+    this.closeButton.bind({
+
+      mousedown: _.bind(function() {
+        this.close();
+      }, this),
+
+      click: _.bind(function(e) {
+        e.preventDefault();
+      }, this)
+
+    });
+
   },
 
   /*
@@ -67,6 +91,16 @@ Editor.Views.Form = Backbone.View.extend({
       success: _.bind(function() { this.renderData(); }, this)
     });
 
+  },
+
+  /*
+   * Close the form.
+   *
+   * @return void.
+   */
+  close: function(model) {
+    this.form.detach();
+    Editor.vent.trigger('form:close');
   },
 
   /*

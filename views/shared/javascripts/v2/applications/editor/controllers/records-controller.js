@@ -13,19 +13,14 @@ Editor.Controllers.Records = (function(Backbone, Editor) {
 
 
   /*
-   * Instantiate the records view, fetch records.
+   * Instantiate the records collection and view.
    *
    * @return void.
    */
   Records.init = function() {
-
-    // Construct view.
-    Records.Records = new Editor.Views.Records({ el: '#records' });
-
-    // Get records.
+    this.Records = new Editor.Views.Records({ el: '#editor' });
     this.records = new Editor.Collections.Records();
     this.fetch();
-
   };
 
   /*
@@ -42,12 +37,26 @@ Editor.Controllers.Records = (function(Backbone, Editor) {
     // Get records.
     this.records.fetch({
       data: $.param(params),
-      success: function(records) {
-        Records.Records.ingest(records);
-      }
+      success: _.bind(function() {
+        Records.Records.show(this.records);
+      }, this)
     });
 
   };
+
+
+  // -------
+  // Events.
+  // -------
+
+  /*
+   * Show form.
+   *
+   * @return void.
+   */
+  Editor.vent.on('form:close', function() {
+    Records.Records.show(Records.records);
+  });
 
 
   // Export.
