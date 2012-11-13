@@ -24,12 +24,6 @@
 
   <form class="form-stacked">
 
-    <ul class="tabs-header">
-      <li><a href="#tabs-1"><?php echo __('Text'); ?></a></li>
-      <li><a href="#tabs-2"><?php echo __('Spatial'); ?></a></li>
-      <li><a href="#tabs-3"><?php echo __('Styling'); ?></a></li>
-    </ul>
-
     <div id="tabs-1">
 
       <div class="control-group">
@@ -42,7 +36,7 @@
       <div class="control-group">
         <label for="description"><?php echo __('Body'); ?></label>
         <div class="controls">
-          <textarea name="description"></textarea>
+          <textarea name="body"></textarea>
         </div>
       </div>
 
@@ -67,7 +61,7 @@
       <label><?php echo __('Selected Color'); ?></label>
       <div class="controls">
         <div class="inline-inputs">
-          <input type="text" name="highlight-color" />
+          <input type="text" name="select-color" />
         </div>
       </div>
 

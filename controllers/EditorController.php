@@ -40,7 +40,7 @@ class Neatline_EditorController extends Omeka_Controller_AbstractActionControlle
 
     /**
      * ~ AJAX ~
-     * Fetch records for the browser.
+     * Get list of records for the browser.
      *
      * @return void
      */
@@ -60,5 +60,23 @@ class Neatline_EditorController extends Omeka_Controller_AbstractActionControlle
         ));
 
     }
+
+    /**
+     * ~ AJAX ~
+     * Get form data.
+     *
+     * @return void
+     */
+    public function formAction()
+    {
+
+        // Supress the default layout.
+        $this->_helper->viewRenderer->setNoRender(true);
+        $this->getResponse()->setHeader('Content-type', 'application/json');
+
+        echo json_encode(array('title' => 'test'));
+
+    }
+
 
 }
