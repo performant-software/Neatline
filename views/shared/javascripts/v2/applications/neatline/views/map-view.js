@@ -177,7 +177,7 @@ Neatline.Views.Map = Backbone.View.extend({
         strokeOpacity:    strokeOpacity
       }),
       'select': new OpenLayers.Style({
-        fillColor:        record.get('highlight_color'),
+        fillColor:        record.get('select_color'),
         strokeColor:      record.get('stroke_color'),
         pointRadius:      record.get('point_radius'),
         externalGraphic:  record.get('point_image'),
@@ -187,7 +187,7 @@ Neatline.Views.Map = Backbone.View.extend({
         strokeOpacity:    strokeOpacity
       }),
       'temporary': new OpenLayers.Style({
-        fillColor:        record.get('highlight_color'),
+        fillColor:        record.get('select_color'),
         strokeColor:      record.get('stroke_color'),
         pointRadius:      record.get('point_radius'),
         externalGraphic:  record.get('point_image'),

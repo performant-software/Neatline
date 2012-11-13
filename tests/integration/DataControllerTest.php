@@ -44,7 +44,7 @@ class Neatline_DataControllerTest extends Neatline_Test_AppTestCase
         $this->assertObjectHasAttribute('slug',               $response[0]);
         $this->assertObjectHasAttribute('vector_color',       $response[0]);
         $this->assertObjectHasAttribute('stroke_color',       $response[0]);
-        $this->assertObjectHasAttribute('highlight_color',    $response[0]);
+        $this->assertObjectHasAttribute('select_color',       $response[0]);
         $this->assertObjectHasAttribute('vector_opacity',     $response[0]);
         $this->assertObjectHasAttribute('select_opacity',     $response[0]);
         $this->assertObjectHasAttribute('stroke_opacity',     $response[0]);

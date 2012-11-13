@@ -25,7 +25,7 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
         'end_visible_date' => '1916-04-23 12:45:34',
         'vector_color' => '#ffffff',
         'stroke_color' => '#000000',
-        'highlight_color' => '#ff0000',
+        'select_color' => '#ff0000',
         'vector_opacity' => 60,
         'select_opacity' => 50,
         'stroke_opacity' => 40,
@@ -63,7 +63,7 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
         $record->description =                  'description';
         $record->vector_color =                 '#ffffff';
         $record->stroke_color =                 '#ffffff';
-        $record->highlight_color =              '#ffffff';
+        $record->select_color =              '#ffffff';
         $record->vector_opacity =               50;
         $record->select_opacity =               50;
         $record->stroke_opacity =               50;
@@ -85,7 +85,7 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
         $this->assertEquals($record->description, 'description');
         $this->assertEquals($record->vector_color, '#ffffff');
         $this->assertEquals($record->stroke_color, '#ffffff');
-        $this->assertEquals($record->highlight_color, '#ffffff');
+        $this->assertEquals($record->select_color, '#ffffff');
         $this->assertEquals($record->vector_opacity, 50);
         $this->assertEquals($record->select_opacity, 50);
         $this->assertEquals($record->stroke_opacity, 50);
@@ -650,7 +650,7 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
         // Set styles.
         $record->vector_color = '#ffffff';
         $record->stroke_color = '#ffffff';
-        $record->highlight_color = '#ffffff';
+        $record->select_color = '#ffffff';
         $record->vector_opacity = 50;
         $record->stroke_opacity = 50;
         $record->graphic_opacity = 50;
@@ -664,7 +664,7 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
         // Check.
         $this->assertNull($record->vector_color);
         $this->assertNull($record->stroke_color);
-        $this->assertNull($record->highlight_color);
+        $this->assertNull($record->select_color);
         $this->assertNull($record->vector_opacity);
         $this->assertNull($record->stroke_opacity);
         $this->assertNull($record->graphic_opacity);
@@ -718,30 +718,30 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
         $record = new NeatlineRecord(null, $exhibit);
 
         // Text.
-        $record->title =                self::$__testParams['title'];
-        $record->description =          self::$__testParams['description'];
-        $record->slug =                 self::$__testParams['slug'];
+        $record->title                  = self::$__testParams['title'];
+        $record->description            = self::$__testParams['description'];
+        $record->slug                   = self::$__testParams['slug'];
 
         // Styles.
-        $record->vector_color =         self::$__testParams['vector_color'];
-        $record->stroke_color =         self::$__testParams['stroke_color'];
-        $record->highlight_color =      self::$__testParams['highlight_color'];
-        $record->vector_opacity =       self::$__testParams['vector_opacity'];
-        $record->select_opacity =       self::$__testParams['select_opacity'];
-        $record->stroke_opacity =       self::$__testParams['stroke_opacity'];
-        $record->graphic_opacity =      self::$__testParams['graphic_opacity'];
-        $record->stroke_width =         self::$__testParams['stroke_width'];
-        $record->point_radius =         self::$__testParams['point_radius'];
-        $record->point_image =          self::$__testParams['point_image'];
-        $record->show_bubble =          self::$__testParams['show_bubble'];
+        $record->vector_color           = self::$__testParams['vector_color'];
+        $record->stroke_color           = self::$__testParams['stroke_color'];
+        $record->select_color           = self::$__testParams['select_color'];
+        $record->vector_opacity         = self::$__testParams['vector_opacity'];
+        $record->select_opacity         = self::$__testParams['select_opacity'];
+        $record->stroke_opacity         = self::$__testParams['stroke_opacity'];
+        $record->graphic_opacity        = self::$__testParams['graphic_opacity'];
+        $record->stroke_width           = self::$__testParams['stroke_width'];
+        $record->point_radius           = self::$__testParams['point_radius'];
+        $record->point_image            = self::$__testParams['point_image'];
+        $record->show_bubble            = self::$__testParams['show_bubble'];
 
         // Map.
-        $record->map_focus =            self::$__testParams['map_focus'];
-        $record->map_zoom =             self::$__testParams['map_zoom'];
-        $record->geocoverage =          self::$__testParams['geocoverage'];
+        $record->map_focus              = self::$__testParams['map_focus'];
+        $record->map_zoom               = self::$__testParams['map_zoom'];
+        $record->geocoverage            = self::$__testParams['geocoverage'];
 
         // Statuses.
-        $record->map_active =           self::$__testParams['map_active'];
+        $record->map_active             = self::$__testParams['map_active'];
 
         $record->save();
 
@@ -763,7 +763,7 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
                 // Styles.
                 'vector_color'          => self::$__testParams['vector_color'],
                 'stroke_color'          => self::$__testParams['stroke_color'],
-                'highlight_color'       => self::$__testParams['highlight_color'],
+                'select_color'          => self::$__testParams['select_color'],
                 'vector_opacity'        => self::$__testParams['vector_opacity'],
                 'select_opacity'        => self::$__testParams['select_opacity'],
                 'stroke_opacity'        => self::$__testParams['stroke_opacity'],

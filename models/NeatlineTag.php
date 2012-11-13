@@ -48,7 +48,7 @@ class NeatlineTag extends Omeka_Record_AbstractRecord
      * The highlight color for geometries.
      * tinytext COLLATE utf8_unicode_ci NULL
      */
-    public $highlight_color;
+    public $select_color;
 
     /**
      * The fill opacity for geometries.

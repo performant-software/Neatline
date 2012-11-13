@@ -45,8 +45,8 @@ class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
         $record2->vector_color = '#222222';
         $record1->stroke_color = '#333333';
         $record2->stroke_color = '#444444';
-        $record1->highlight_color = '#555555';
-        $record2->highlight_color = '#666666';
+        $record1->select_color = '#555555';
+        $record2->select_color = '#666666';
         $record1->vector_opacity = 1;
         $record2->vector_opacity = 2;
         $record1->select_opacity = 3;

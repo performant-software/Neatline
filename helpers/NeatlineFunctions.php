@@ -434,9 +434,10 @@ function __devInstall()
         // Styles.
         $record->vector_color =     '#ff0000';
         $record->stroke_color =     '#000000';
-        $record->highlight_color =  '#0000ff';
+        $record->select_color =     '#0000ff';
         $record->point_radius =     rand(10,50);
         $record->stroke_opacity =   100;
+        $record->graphic_opacity =  100;
         $record->vector_opacity =   30;
         $record->select_opacity =   70;
         $record->stroke_width =     2;

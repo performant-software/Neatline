@@ -60,7 +60,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
      * The highlight color for geometries.
      * tinytext COLLATE utf8_unicode_ci NULL
      */
-    public $highlight_color;
+    public $select_color;
 
     /**
      * The fill opacity for geometries.
@@ -161,7 +161,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
         'select_opacity',
         'graphic_opacity',
         'point_radius',
-        'highlight_color'
+        'select_color'
     );
 
     /**
@@ -316,7 +316,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
     {
         $this->vector_color =       null;
         $this->stroke_color =       null;
-        $this->highlight_color =    null;
+        $this->select_color =    null;
         $this->vector_opacity =     null;
         $this->stroke_opacity =     null;
         $this->graphic_opacity =    null;
@@ -585,7 +585,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
             // Styles:
             'vector_color'        => $this->getStyle('vector_color'),
             'stroke_color'        => $this->getStyle('stroke_color'),
-            'highlight_color'     => $this->getStyle('highlight_color'),
+            'select_color'        => $this->getStyle('select_color'),
             'vector_opacity'      => $this->getStyle('vector_opacity'),
             'select_opacity'      => $this->getStyle('select_opacity'),
             'stroke_opacity'      => $this->getStyle('stroke_opacity'),

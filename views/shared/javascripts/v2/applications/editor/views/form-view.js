@@ -34,6 +34,7 @@ Editor.Views.Form = Backbone.View.extend({
     this.selectColor =    this.form.find('input[name="select-color"]');
     this.vectorOpacity =  this.form.find('input[name="vector-opacity"]');
     this.strokeOpacity =  this.form.find('input[name="stroke-opacity"]');
+    this.selectOpacity =  this.form.find('input[name="select-opacity"]');
     this.graphicOpacity = this.form.find('input[name="graphic-opacity"]');
     this.strokeWidth =    this.form.find('input[name="stroke-width"]');
     this.pointRadius =    this.form.find('input[name="point-radius"]');
@@ -115,6 +116,7 @@ Editor.Views.Form = Backbone.View.extend({
     this.selectColor.     val(this.model.get('select_color'));
     this.vectorOpacity.   val(this.model.get('vector_opacity'));
     this.strokeOpacity.   val(this.model.get('stroke_opacity'));
+    this.selectOpacity.   val(this.model.get('select_opacity'));
     this.graphicOpacity.  val(this.model.get('graphic_opacity'));
     this.strokeWidth.     val(this.model.get('stroke_width'));
     this.pointRadius.     val(this.model.get('point_radius'));

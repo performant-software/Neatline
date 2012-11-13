@@ -610,8 +610,8 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
         $record2->vector_color = '#000000';
         $record1->stroke_color = '#ffffff';
         $record2->stroke_color = '#000000';
-        $record1->highlight_color = '#ffffff';
-        $record2->highlight_color = '#000000';
+        $record1->select_color = '#ffffff';
+        $record2->select_color = '#000000';
         $record1->vector_opacity = 60;
         $record2->vector_opacity = 40;
         $record1->select_opacity = 60;
@@ -653,7 +653,7 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
                     'slug' => 'slug-1',
                     'vector_color' => '#ffffff',
                     'stroke_color' => '#ffffff',
-                    'highlight_color' => '#ffffff',
+                    'select_color' => '#ffffff',
                     'vector_opacity' => 60,
                     'select_opacity' => 60,
                     'stroke_opacity' => 60,
@@ -676,7 +676,7 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
                     'slug' => 'slug-2',
                     'vector_color' => '#000000',
                     'stroke_color' => '#000000',
-                    'highlight_color' => '#000000',
+                    'select_color' => '#000000',
                     'vector_opacity' => 40,
                     'select_opacity' => 40,
                     'stroke_opacity' => 40,
