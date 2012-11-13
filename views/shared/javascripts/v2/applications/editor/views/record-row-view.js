@@ -7,7 +7,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-NeatlineEditor.Views.RecordRow = Backbone.View.extend({
+Editor.Views.RecordRow = Backbone.View.extend({
 
   tagName: 'li',
   className: 'record-row',
@@ -43,9 +43,7 @@ NeatlineEditor.Views.RecordRow = Backbone.View.extend({
    * @return void.
    */
   openForm: function() {
-    NeatlineEditor.vent.trigger(
-      'records:openForm', this.model.get('id')
-    );
+    Editor.vent.trigger('records:openForm', this.model);
   }
 
 });

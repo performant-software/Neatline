@@ -7,7 +7,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-NeatlineEditor.Controllers.Form = (function(Backbone, NeatlineEditor) {
+Editor.Controllers.Form = (function(Backbone, Editor) {
 
   var Form = {};
 
@@ -18,12 +18,12 @@ NeatlineEditor.Controllers.Form = (function(Backbone, NeatlineEditor) {
    * @return void.
    */
   Form.init = function() {
-    Form.Form = new NeatlineEditor.Views.Form();
+    Form.Form = new Editor.Views.Form({ el: '#records' });
   };
 
 
   // Export.
-  NeatlineEditor.addInitializer(function() { Form.init(); });
+  Editor.addInitializer(function() { Form.init(); });
   return Form;
 
-})(Backbone, NeatlineEditor);
+})(Backbone, Editor);

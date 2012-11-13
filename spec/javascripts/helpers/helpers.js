@@ -35,13 +35,14 @@ _t.loadNeatline = function() {
 _t.loadEditor = function() {
 
   // Restart components.
-  NeatlineEditor.Controllers.Layout.init();
-  NeatlineEditor.Controllers.Editor.init();
-  NeatlineEditor.Controllers.Records.init();
+  Editor.Controllers.Layout.init();
+  Editor.Controllers.Records.init();
+  Editor.Controllers.Form.init();
 
   // Shortcut components
-  _t.layout = NeatlineEditor.Controllers.Layout.Layout;
-  _t.records = NeatlineEditor.Controllers.Records.Records;
+  _t.layout = Editor.Controllers.Layout.Layout;
+  _t.records = Editor.Controllers.Records.Records;
+  _t.form = Editor.Controllers.Records.Form;
 
 };
 

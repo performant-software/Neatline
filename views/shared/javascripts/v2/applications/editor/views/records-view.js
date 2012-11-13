@@ -7,7 +7,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-NeatlineEditor.Views.Records = Backbone.View.extend({
+Editor.Views.Records = Backbone.View.extend({
 
   /*
    * Render record listings.
@@ -20,7 +20,7 @@ NeatlineEditor.Views.Records = Backbone.View.extend({
 
     // Walk the incoming records.
     records.each(_.bind(function(r) {
-      var record = new NeatlineEditor.Views.RecordRow({ model: r });
+      var record = new Editor.Views.RecordRow({ model: r });
       this.$el.append(record.$el);
     }, this));
 

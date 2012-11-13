@@ -87,7 +87,8 @@ function neatline_renderEditor($exhibit)
 {
     return json_encode(array(
         'id' => $exhibit->id,
-        'dataSource' => neatline_getEditorDataSource($exhibit)
+        'recordsSource' => neatline_getRecordsDataSource($exhibit),
+        'formSource' => neatline_getFormDataSource($exhibit)
     ));
 }
 
@@ -104,15 +105,27 @@ function neatline_getExhibitDataSource($exhibit)
 }
 
 /**
- * Get the editor data emitter URL for an exhibit.
+ * Get the data emitter URL for editor records list.
  *
  * @param NeatlineExhibit $exhibit The exhibit.
  *
  * @return string The url.
  */
-function neatline_getEditorDataSource($exhibit)
+function neatline_getRecordsDataSource($exhibit)
 {
     return public_url('neatline/editor/records/' . $exhibit->id);
+}
+
+/**
+ * Get the data emitter URL for editor record form.
+ *
+ * @param NeatlineExhibit $exhibit The exhibit.
+ *
+ * @return string The url.
+ */
+function neatline_getFormDataSource($exhibit)
+{
+    return public_url('neatline/editor/form/' . $exhibit->id);
 }
 
 /**

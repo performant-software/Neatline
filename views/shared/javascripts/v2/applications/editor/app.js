@@ -7,11 +7,12 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-NeatlineEditor = new Backbone.Marionette.Application();
+Editor = new Backbone.Marionette.Application();
 
 // --------------------
 // Instance namespaces.
 // --------------------
-NeatlineEditor.Controllers = {};
-NeatlineEditor.Collections = {};
-NeatlineEditor.Views = {};
+Editor.Models = {};
+Editor.Controllers = {};
+Editor.Collections = {};
+Editor.Views = {};

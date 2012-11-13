@@ -7,39 +7,51 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-NeatlineEditor.Controllers.Records = (function(Backbone, NeatlineEditor) {
+Editor.Controllers.Records = (function(Backbone, Editor) {
 
   var Records = {};
 
 
   /*
-   * Instantiate the records manager.
+   * Instantiate the records view, fetch records.
    *
    * @return void.
    */
   Records.init = function() {
-    Records.Records = new NeatlineEditor.Views.Records({ el: '#records' });
+
+    // Construct view.
+    Records.Records = new Editor.Views.Records({ el: '#records' });
+
+    // Get records.
+    this.records = new Editor.Collections.Records();
+    this.fetch();
+
   };
 
-
-  // -------
-  // Events.
-  // -------
-
   /*
-   * Consume records.
+   * Query for records.
    *
-   * @param {Object} records: The records collection.
+   * @param {Object} params: Query parameters.
    *
    * @return void.
    */
-  NeatlineEditor.vent.on('editor:newRecords', function(records) {
-    Records.Records.ingest(records);
-  });
+  Records.fetch = function(params) {
+
+    params = params || {};
+
+    // Get records.
+    this.records.fetch({
+      data: $.param(params),
+      success: function(records) {
+        Records.Records.ingest(records);
+      }
+    });
+
+  };
 
 
   // Export.
-  NeatlineEditor.addInitializer(function() { Records.init(); });
+  Editor.addInitializer(function() { Records.init(); });
   return Records;
 
-})(Backbone, NeatlineEditor);
+})(Backbone, Editor);

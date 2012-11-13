@@ -1,5 +1,5 @@
 /**
- * Start the Neatline application.
+ * Record model.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -7,4 +7,6 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-$(function() { Editor.start(); });
+Editor.Models.Record = Backbone.Model.extend({
+  url: (function() { return __editor.formSource+this.id; })
+});

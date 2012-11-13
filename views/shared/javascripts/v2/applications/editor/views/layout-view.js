@@ -7,7 +7,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-NeatlineEditor.Views.Layout = Backbone.View.extend({
+Editor.Views.Layout = Backbone.View.extend({
 
   /*
    * Get markup.

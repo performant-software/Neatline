@@ -7,7 +7,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-NeatlineEditor.Controllers.Layout = (function(Backbone, NeatlineEditor) {
+Editor.Controllers.Layout = (function(Backbone, Editor) {
 
   var Layout = {};
 
@@ -18,12 +18,12 @@ NeatlineEditor.Controllers.Layout = (function(Backbone, NeatlineEditor) {
    * @return void.
    */
   Layout.init = function() {
-    Layout.Layout = new NeatlineEditor.Views.Layout();
+    Layout.Layout = new Editor.Views.Layout();
   };
 
 
   // Export.
-  NeatlineEditor.addInitializer(function() { Layout.init(); });
+  Editor.addInitializer(function() { Layout.init(); });
   return Layout;
 
-})(Backbone, NeatlineEditor);
+})(Backbone, Editor);
