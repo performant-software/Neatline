@@ -246,11 +246,7 @@ class NeatlineRecordTable extends Omeka_Db_Table
 
             // Construct record objects.
             foreach ($records as $record) {
-                $data[] = array(
-                    'id' =>         $record->id,
-                    'item_id' =>    $record->item_id,
-                    'title' =>      $record->title
-                );
+                $data[] = $record->buildJsonData();
             }
 
         }

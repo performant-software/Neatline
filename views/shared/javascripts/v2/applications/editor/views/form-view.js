@@ -51,6 +51,29 @@ Editor.Views.Form = Backbone.View.extend({
   },
 
   /*
+   * Show the form.
+   *
+   * @param {Object} model: The record model.
+   *
+   * @return void.
+   */
+  show: function(model) {
+    this.model = model;
+    this.$el.html(this.form);
+    this.renderData();
+  },
+
+  /*
+   * Close the form.
+   *
+   * @return void.
+   */
+  close: function(model) {
+    this.form.detach();
+    Editor.vent.trigger('form:close');
+  },
+
+  /*
    * Bind event listeners to form elements.
    *
    * @return void.
@@ -75,36 +98,6 @@ Editor.Views.Form = Backbone.View.extend({
   },
 
   /*
-   * Show the form.
-   *
-   * @param {Object} model: The record model.
-   *
-   * @return void.
-   */
-  show: function(model) {
-
-    // Render the form.
-    this.model = model;
-    this.$el.html(this.form);
-
-    // Fetch attributes.
-    this.model.fetch({
-      success: _.bind(function() { this.renderData(); }, this)
-    });
-
-  },
-
-  /*
-   * Close the form.
-   *
-   * @return void.
-   */
-  close: function(model) {
-    this.form.detach();
-    Editor.vent.trigger('form:close');
-  },
-
-  /*
    * Render form values.
    *
    * @return void.
@@ -123,9 +116,9 @@ Editor.Views.Form = Backbone.View.extend({
     this.vectorOpacity.   val(this.model.get('vector_opacity'));
     this.strokeOpacity.   val(this.model.get('stroke_opacity'));
     this.graphicOpacity.  val(this.model.get('graphic_opacity'));
-    this.strokeWidth.     val(this.model.get('graphic_opacity'));
-    this.pointRadius.     val(this.model.get('graphic_opacity'));
-    this.pointGraphic.    val(this.model.get('graphic_opacity'));
+    this.strokeWidth.     val(this.model.get('stroke_width'));
+    this.pointRadius.     val(this.model.get('point_radius'));
+    this.pointGraphic.    val(this.model.get('point_graphic'));
 
   }
 

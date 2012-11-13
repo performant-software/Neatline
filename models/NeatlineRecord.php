@@ -235,16 +235,6 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
 
     }
 
-    /**
-     * Construct array with data for editor form.
-     *
-     * @return JSON The data.
-     */
-    public function buildEditFormData()
-    {
-        return array();
-    }
-
 
     /**
      * Setters.
