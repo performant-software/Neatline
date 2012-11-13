@@ -392,7 +392,7 @@ function __devInstall()
     $exhibit->save();
 
     // Create records.
-    for ($i=0; $i<1000; $i++) {
+    for ($i=0; $i<100; $i++) {
 
         // Random coordianates.
         $lat = rand(-20000000,20000000);
