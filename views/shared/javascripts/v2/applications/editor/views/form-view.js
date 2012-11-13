@@ -17,14 +17,23 @@ Editor.Views.Form = Backbone.View.extend({
   },
 
   /*
-   * Render record data.
+   * Construct the form template.
+   *
+   * @return void.
+   */
+  initialize: function() {
+    this.form = $(this.template()());
+  },
+
+  /*
+   * Show the form.
    *
    * @param {Object} model: The record model.
    *
    * @return void.
    */
-  ingest: function(model) {
-
+  show: function(model) {
+    this.$el.html(this.form);
   }
 
 });

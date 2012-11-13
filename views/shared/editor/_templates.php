@@ -35,14 +35,14 @@
       <div class="control-group">
         <label for="title"><?php echo __('Title'); ?></label>
         <div class="controls">
-          <textarea name="title"><%= title %></textarea>
+          <textarea name="title"></textarea>
         </div>
       </div>
 
       <div class="control-group">
         <label for="description"><?php echo __('Body'); ?></label>
         <div class="controls">
-          <textarea name="description"><%= description %></textarea>
+          <textarea name="description"></textarea>
         </div>
       </div>
 
@@ -50,100 +50,74 @@
 
     <div id="tabs-2">
 
-      <table class="map-styles">
-        <tr>
-          <td>
-            <label><?php echo __('Shape Color'); ?></label>
-            <div class="controls">
-              <div class="inline-inputs">
-                <input type="text" name="vector-color" value="<%= vectorColor %>" />
-              </div>
-            </div>
-          </td>
-          <td>
-            <label><?php echo __('Line Color'); ?></label>
-            <div class="controls">
-              <div class="inline-inputs">
-                <input type="text" name="stroke-color" />
-              </div>
-            </div>
-          </td>
-          <td>
-            <label><?php echo __('Selected Color'); ?></label>
-            <div class="controls">
-              <div class="inline-inputs">
-                <input type="text" name="highlight-color" value="<%= highlightColor %>" />
-              </div>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <label><?php echo __('Shape Opacity'); ?></label>
-            <div class="controls">
-              <div class="inline-inputs">
-                <input type="text" name="vector-opacity" value="<%= vectorOpacity %>" />
-              </div>
-            </div>
-          </td>
-          <td>
-            <label><?php echo __('Selected Opacity'); ?></label>
-            <div class="controls">
-              <div class="inline-inputs">
-                <input type="text" name="select-opacity" value="<%= selectOpacity %>" />
-              </div>
-            </div>
-          </td>
-          <td>
-            <label><?php echo __('Line Opacity'); ?></label>
-            <div class="controls">
-              <div class="inline-inputs">
-                <input type="text" name="stroke-opacity" value="<%= strokeOpacity %>" />
-              </div>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <label><?php echo __('Graphic Opacity'); ?></label>
-            <div class="controls">
-              <div class="inline-inputs">
-                <input type="text" name="graphic-opacity" value="<%= graphicOpacity %>" />
-              </div>
-            </div>
-          </td>
-          <td>
-            <label><?php echo __('Line Width'); ?></label>
-            <div class="controls">
-              <div class="inline-inputs">
-                <input type="text" name="stroke-width" value="<%= strokeWidth %>" />
-              </div>
-            </div>
-          </td>
-          <td>
-            <label><?php echo __('Point Radius'); ?></label>
-            <div class="controls">
-              <div class="inline-inputs">
-                <input type="text" name="point-radius" value="<%= pointRadius %>" />
-              </div>
-            </div>
-          </td>
-        </tr>
-      </table>
+      <label><?php echo __('Shape Color'); ?></label>
+      <div class="controls">
+        <div class="inline-inputs">
+          <input type="text" name="vector-color" />
+        </div>
+      </div>
+
+      <label><?php echo __('Line Color'); ?></label>
+      <div class="controls">
+        <div class="inline-inputs">
+          <input type="text" name="stroke-color" />
+        </div>
+      </div>
+
+      <label><?php echo __('Selected Color'); ?></label>
+      <div class="controls">
+        <div class="inline-inputs">
+          <input type="text" name="highlight-color" />
+        </div>
+      </div>
+
+      <label><?php echo __('Shape Opacity'); ?></label>
+      <div class="controls">
+        <div class="inline-inputs">
+          <input type="text" name="vector-opacity" />
+        </div>
+      </div>
+
+      <label><?php echo __('Selected Opacity'); ?></label>
+      <div class="controls">
+        <div class="inline-inputs">
+          <input type="text" name="select-opacity" />
+        </div>
+      </div>
+
+      <label><?php echo __('Line Opacity'); ?></label>
+      <div class="controls">
+        <div class="inline-inputs">
+          <input type="text" name="stroke-opacity" />
+        </div>
+      </div>
+
+      <label><?php echo __('Graphic Opacity'); ?></label>
+      <div class="controls">
+        <div class="inline-inputs">
+          <input type="text" name="graphic-opacity" />
+        </div>
+      </div>
+
+      <label><?php echo __('Line Width'); ?></label>
+      <div class="controls">
+        <div class="inline-inputs">
+          <input type="text" name="stroke-width" />
+        </div>
+      </div>
+
+      <label><?php echo __('Point Radius'); ?></label>
+      <div class="controls">
+        <div class="inline-inputs">
+          <input type="text" name="point-radius" />
+        </div>
+      </div>
 
       <div class="control-group">
         <label><?php echo __('Point Graphic'); ?></label>
         <div class="controls">
           <div class="inline-inputs">
-            <input name="point-image" type="text" value="<%= pointImage %>" />
-          </div>
-        </div>
-      </div>
-
-      <div class="control-group">
-        <div class="controls">
-          <div class="inline-inputs">
-            <button name="reset-styles"><?php echo __('Reset Item Styles'); ?></button>
+            <input name="point-image" type="text" />
           </div>
         </div>
       </div>
