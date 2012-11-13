@@ -12,6 +12,6 @@ Neatline = new Backbone.Marionette.Application();
 // --------------------
 // Instance namespaces.
 // --------------------
-Neatline.Controllers = {};
+Neatline.Modules = {};
 Neatline.Collections = {};
 Neatline.Views = {};

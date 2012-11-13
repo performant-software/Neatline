@@ -14,7 +14,6 @@
 ?>
 
 <div id="editor">
-  <ul id="records"></ul>
 </div>
 
 <!-- Templates. -->

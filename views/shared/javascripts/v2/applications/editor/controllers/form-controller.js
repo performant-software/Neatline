@@ -34,7 +34,7 @@ Editor.Controllers.Form = (function(Backbone, Editor) {
    * @return void.
    */
   Editor.vent.on('records:openForm', function(model) {
-    this.view.show(model);
+    Form.view.show(model);
   });
 
 

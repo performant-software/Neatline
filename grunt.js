@@ -43,8 +43,8 @@ module.exports = function(grunt) {
           c.apps.neatline+'app.js',
           c.apps.neatline+'run.js',
           c.apps.neatline+'collections/*.js',
-          c.apps.neatline+'views/*.js',
-          c.apps.neatline+'controllers/*.js'
+          c.apps.neatline+'modules/*.js',
+          c.apps.neatline+'views/*.js'
         ]),
         dest: c.payload+'neatline.js',
         separator: ';'
@@ -54,7 +54,7 @@ module.exports = function(grunt) {
         src: vendorFiles.concat([
           c.apps.neatline+'app.js',
           c.apps.neatline+'collections/*.js',
-          c.apps.neatline+'controllers/*.js',
+          c.apps.neatline+'modules/*.js',
           c.apps.neatline+'views/*.js',
           c.apps.editor+'app.js',
           c.apps.editor+'run.js',
@@ -71,7 +71,7 @@ module.exports = function(grunt) {
         src: vendorFiles.concat([
           c.apps.neatline+'app.js',
           c.apps.neatline+'collections/*.js',
-          c.apps.neatline+'controllers/*.js',
+          c.apps.neatline+'modules/*.js',
           c.apps.neatline+'views/*.js',
           c.apps.editor+'app.js',
           c.apps.editor+'models/*.js',

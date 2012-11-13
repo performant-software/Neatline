@@ -1,5 +1,5 @@
 /**
- * Map controller.
+ * Map module.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -7,7 +7,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.Controllers.Map = (function(Backbone, Neatline) {
+Neatline.Modules.Map = (function(Backbone, Neatline) {
 
   var Map = {};
 
@@ -18,7 +18,7 @@ Neatline.Controllers.Map = (function(Backbone, Neatline) {
    * @return void.
    */
   Map.init = function() {
-    Map.Map = new Neatline.Views.Map({ el: '#neatline-map' });
+    this.view = new Neatline.Views.Map({ el: '#neatline-map' });
   };
 
 
@@ -34,7 +34,7 @@ Neatline.Controllers.Map = (function(Backbone, Neatline) {
    * @return void.
    */
   Neatline.vent.on('exhibit:newRecords', function(records) {
-    Map.Map.ingest(records);
+    Map.view.ingest(records);
   });
 
 

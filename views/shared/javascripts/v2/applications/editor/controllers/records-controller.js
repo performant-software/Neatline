@@ -55,7 +55,7 @@ Editor.Controllers.Records = (function(Backbone, Editor) {
    * @return void.
    */
   Editor.vent.on('form:close', function() {
-    this.view.show(this.collection);
+    Records.view.show(Records.collection);
   });
 
 

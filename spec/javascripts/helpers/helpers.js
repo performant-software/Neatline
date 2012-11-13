@@ -21,11 +21,11 @@ _t = {};
 _t.loadNeatline = function() {
 
   // Restart components.
-  Neatline.Controllers.Exhibit.init();
-  Neatline.Controllers.Map.init();
+  Neatline.Modules.Exhibit.init();
+  Neatline.Modules.Map.init();
 
   // Shortcut components
-  _t.map = Neatline.Controllers.Map.Map;
+  _t.map = Neatline.Modules.Map.view;
 
 };
 

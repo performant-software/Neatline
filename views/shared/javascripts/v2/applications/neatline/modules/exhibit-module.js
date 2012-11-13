@@ -1,5 +1,5 @@
 /**
- * Exhibit controller.
+ * Exhibit module.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -7,7 +7,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.Controllers.Exhibit = (function(Backbone, Neatline) {
+Neatline.Modules.Exhibit = (function(Backbone, Neatline) {
 
   var Exhibit = {};
 
@@ -18,7 +18,7 @@ Neatline.Controllers.Exhibit = (function(Backbone, Neatline) {
    * @return void.
    */
   Exhibit.init = function() {
-    this.records = new Neatline.Collections.Records();
+    this.collection = new Neatline.Collections.Records();
     this.fetch();
   };
 
@@ -34,7 +34,7 @@ Neatline.Controllers.Exhibit = (function(Backbone, Neatline) {
     params = params || {};
 
     // Get records.
-    this.records.fetch({
+    this.collection.fetch({
       data: $.param(params),
       success: function(collection) {
         Neatline.vent.trigger('exhibit:newRecords', collection);

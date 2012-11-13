@@ -49,9 +49,8 @@ task :build do
 
   # Application CSS.
   sh %{grunt stylus}
-
-  # Append OpenLayers theme.
-  sh %{grunt concat:openlayers}
+  sh %{grunt concat:neatlineCss}
+  sh %{grunt concat:editorCss}
 
   # Jasmine packages and payload.
   sh %{cd spec/javascripts/helpers && bower install}
