@@ -414,6 +414,7 @@ function __devInstall()
         // Create the record.
         $record = new NeatlineRecord(null, $exhibit);
         $record->title = 'Record'.$i;
+        $record->description = 'Record'.$i.' body.';
         $record->map_active = 1;
 
         // Set coverage.

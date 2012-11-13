@@ -87,4 +87,10 @@ namespace :dev do
     Net::HTTP.get_response(uri)
   end
 
+  desc 'Reinstall exhibit'
+  task :reinstall do
+    Rake::Task['dev:uninstall'].invoke
+    Rake::Task['dev:install'].invoke
+  end
+
 end

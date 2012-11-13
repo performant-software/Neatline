@@ -23,6 +23,9 @@ Editor.Views.Form = Backbone.View.extend({
     // Render template.
     this.form = $(this.getTemplate()());
 
+    // UX.
+    this.tabs =           this.form.find('ul.nav a');
+
     // Text.
     this.head =           this.form.find('h3.head');
     this.title =          this.form.find('textarea[name="title"]');
@@ -105,10 +108,13 @@ Editor.Views.Form = Backbone.View.extend({
    */
   renderData: function() {
 
+    // Activate "Text".
+    $(this.tabs[0]).tab('show');
+
     // Text.
     this.head.            text(this.model.get('title'));
     this.title.           val(this.model.get('title'));
-    this.body.            val(this.model.get('body'));
+    this.body.            val(this.model.get('description'));
 
     // Styles.
     this.vectorColor.     val(this.model.get('vector_color'));

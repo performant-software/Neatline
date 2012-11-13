@@ -36,19 +36,31 @@ body
     li
       list-style none
       cursor pointer
-      font-size 12px
-      padding 0 1em
+      font-size 14px
+      font-weight 300
+      padding 0.2em 1em
       border-bottom 1px solid #f0f0f0
 
       &:hover
         background #3f3f3f
         color white
 
+    // TODO|dev
+    // --------
+
   form
     margin 1.6em
 
-    // TODO|dev
-    // --------
+    ul.nav
+      margin-top 20px
+
+      li
+        margin-right 8px
+
+      a
+        font-size 18px
+        font-weight 300
+        padding 0.7em 0.7em
 
     h3.head
       font-size 3em
@@ -62,3 +74,11 @@ body
 
       &[name="body"]
         height 300px
+
+    .form-actions
+      border none
+      background transparent
+      padding 0
+
+      button
+        margin-right 5px
