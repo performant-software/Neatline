@@ -7,7 +7,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.Controllers.Editor = (function(Backbone, NeatlineEditor) {
+NeatlineEditor.Controllers.Editor = (function(Backbone, NeatlineEditor) {
 
   var Editor = {};
 

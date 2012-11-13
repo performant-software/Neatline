@@ -145,9 +145,7 @@
         <div class="control-group">
           <div class="controls">
             <div class="inline-inputs">
-              <button name="reset-styles">
-                <?php echo __('Reset Item Styles'); ?>
-              </button>
+              <button name="reset-styles"><?php echo __('Reset Item Styles'); ?></button>
             </div>
           </div>
         </div>
@@ -155,9 +153,7 @@
         <div class="control-group">
           <div class="controls">
             <div class="inline-inputs">
-              <button name="map-focus">
-                <?php echo __('Set Map Focus'); ?>
-              </button>
+              <button name="map-focus"><?php echo __('Set Map Focus'); ?></button>
             </div>
           </div>
         </div>

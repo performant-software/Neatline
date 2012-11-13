@@ -36,9 +36,12 @@ _t.loadEditor = function() {
 
   // Restart components.
   NeatlineEditor.Controllers.Layout.init();
+  NeatlineEditor.Controllers.Editor.init();
+  NeatlineEditor.Controllers.Records.init();
 
   // Shortcut components
   _t.layout = NeatlineEditor.Controllers.Layout.Layout;
+  _t.records = NeatlineEditor.Controllers.Records.Records;
 
 };
 
