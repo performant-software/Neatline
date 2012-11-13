@@ -18,7 +18,7 @@ Editor.Controllers.Layout = (function(Backbone, Editor) {
    * @return void.
    */
   Layout.init = function() {
-    Layout.Layout = new Editor.Views.Layout();
+    this.view = new Editor.Views.Layout();
   };
 
 

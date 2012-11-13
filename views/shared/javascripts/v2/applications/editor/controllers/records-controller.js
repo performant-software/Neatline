@@ -18,8 +18,8 @@ Editor.Controllers.Records = (function(Backbone, Editor) {
    * @return void.
    */
   Records.init = function() {
-    this.Records = new Editor.Views.Records({ el: '#editor' });
-    this.records = new Editor.Collections.Records();
+    this.view = new Editor.Views.Records({ el: '#editor' });
+    this.collection = new Editor.Collections.Records();
     this.fetch();
   };
 
@@ -35,10 +35,10 @@ Editor.Controllers.Records = (function(Backbone, Editor) {
     params = params || {};
 
     // Get records.
-    this.records.fetch({
+    this.collection.fetch({
       data: $.param(params),
       success: _.bind(function() {
-        Records.Records.show(this.records);
+        this.view.show(this.collection);
       }, this)
     });
 
@@ -55,7 +55,7 @@ Editor.Controllers.Records = (function(Backbone, Editor) {
    * @return void.
    */
   Editor.vent.on('form:close', function() {
-    Records.Records.show(Records.records);
+    this.view.show(this.collection);
   });
 
 

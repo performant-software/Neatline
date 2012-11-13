@@ -40,9 +40,9 @@ _t.loadEditor = function() {
   Editor.Controllers.Form.init();
 
   // Shortcut components
-  _t.layout = Editor.Controllers.Layout.Layout;
-  _t.records = Editor.Controllers.Records.Records;
-  _t.form = Editor.Controllers.Records.Form;
+  _t.layout = Editor.Controllers.Layout.view;
+  _t.records = Editor.Controllers.Records.view;
+  _t.form = Editor.Controllers.Records.view;
 
 };
 
