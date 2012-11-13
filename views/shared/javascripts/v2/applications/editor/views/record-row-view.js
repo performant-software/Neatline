@@ -16,6 +16,10 @@ NeatlineEditor.Views.RecordRow = Backbone.View.extend({
     return _.template($('#record-listing').html());
   },
 
+  events: {
+    'mousedown': 'openForm'
+  },
+
   /*
    * Set instance model.
    *
@@ -31,6 +35,17 @@ NeatlineEditor.Views.RecordRow = Backbone.View.extend({
       title: this.model.get('title')
     })));
 
+  },
+
+  /*
+   * Open the edit form for the record.
+   *
+   * @return void.
+   */
+  openForm: function() {
+    NeatlineEditor.vent.trigger(
+      'records:openForm', this.model.get('id')
+    );
   }
 
 });

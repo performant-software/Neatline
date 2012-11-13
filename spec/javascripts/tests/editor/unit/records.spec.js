@@ -1,5 +1,5 @@
 /**
- * Unit tests for editor layout manager.
+ * Unit tests for editor records list.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -7,7 +7,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Layout', function() {
+describe('Records', function() {
 
   // Get fixtures.
   beforeEach(function() {
@@ -20,6 +20,6 @@ describe('Layout', function() {
 
   });
 
-  it('should position the editor on the left, exhibit on right');
+  it('should ');
 
 });

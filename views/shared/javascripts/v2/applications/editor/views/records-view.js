@@ -10,15 +10,6 @@
 NeatlineEditor.Views.Records = Backbone.View.extend({
 
   /*
-   * .
-   *
-   * @return void.
-   */
-  initialize: function() {
-
-  },
-
-  /*
    * Render record listings.
    *
    * @param {Object} records: The records collection.

@@ -69,6 +69,31 @@ class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
     }
 
     /**
+     * Records JSON for editor.
+     *
+     * @return void.
+     */
+    public function testEditorRecordsJson()
+    {
+
+        // Exhibit and records.
+        $exhibit = $this->__exhibit();
+        $record1 = $this->__record(null, $exhibit);
+        $record2 = $this->__record(null, $exhibit);
+
+        // Set titles.
+        $record1->title = 'Record 1';
+        $record2->title = 'Record 2';
+        $record1->save();
+        $record2->save();
+
+        // Generate the fixture.
+        $this->writeFixture('neatline/editor/records/'.$exhibit->id,
+            'editor-records.json');
+
+    }
+
+    /**
      * Core Neatline partial markup.
      *
      * @return void.
