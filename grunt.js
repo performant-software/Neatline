@@ -60,7 +60,7 @@ module.exports = function(grunt) {
           c.apps.editor+'run.js',
           c.apps.editor+'models/*.js',
           c.apps.editor+'collections/*.js',
-          c.apps.editor+'controllers/*.js',
+          c.apps.editor+'modules/*.js',
           c.apps.editor+'views/*.js'
         ]),
         dest: c.payload+'editor.js',
@@ -76,7 +76,7 @@ module.exports = function(grunt) {
           c.apps.editor+'app.js',
           c.apps.editor+'models/*.js',
           c.apps.editor+'collections/*.js',
-          c.apps.editor+'controllers/*.js',
+          c.apps.editor+'modules/*.js',
           c.apps.editor+'views/*.js'
         ]),
         dest: c.payload+'test.js',

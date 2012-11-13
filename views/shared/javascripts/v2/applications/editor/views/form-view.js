@@ -24,6 +24,7 @@ Editor.Views.Form = Backbone.View.extend({
     this.form = $(this.getTemplate()());
 
     // Text.
+    this.head =           this.form.find('h3.head');
     this.title =          this.form.find('textarea[name="title"]');
     this.body =           this.form.find('textarea[name="body"]');
 
@@ -42,7 +43,7 @@ Editor.Views.Form = Backbone.View.extend({
     // Buttons.
     this.saveButton =     this.form.find('button[name="save"]');
     this.closeButton =    this.form.find('button[name="close"]');
-    this.delButton =      this.form.find('button[name="delete"]');
+    this.delButton =      this.form.find('button[name="del"]');
 
     // Bind form listeners.
     this.bindEvents();
@@ -111,6 +112,7 @@ Editor.Views.Form = Backbone.View.extend({
   renderData: function() {
 
     // Text.
+    this.head.            text(this.model.get('title'));
     this.title.           val(this.model.get('title'));
     this.body.            val(this.model.get('body'));
 

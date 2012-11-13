@@ -12,7 +12,7 @@ Editor = new Backbone.Marionette.Application();
 // --------------------
 // Instance namespaces.
 // --------------------
+Editor.Modules = {};
 Editor.Models = {};
-Editor.Controllers = {};
 Editor.Collections = {};
 Editor.Views = {};

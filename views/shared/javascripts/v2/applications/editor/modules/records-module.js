@@ -7,7 +7,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Editor.Controllers.Records = (function(Backbone, Editor) {
+Editor.Modules.Records = (function(Backbone, Editor) {
 
   var Records = {};
 

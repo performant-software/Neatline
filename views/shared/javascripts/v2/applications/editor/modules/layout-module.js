@@ -7,7 +7,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Editor.Controllers.Layout = (function(Backbone, Editor) {
+Editor.Modules.Layout = (function(Backbone, Editor) {
 
   var Layout = {};
 

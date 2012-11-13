@@ -29,6 +29,8 @@
 
   <form class="form-stacked">
 
+    <h3 class="head"></h3>
+
     <div id="tabs-1">
 
       <div class="control-group">
@@ -124,7 +126,7 @@
       <div class="control-group">
         <div class="controls">
           <div class="inline-inputs">
-            <button name="map-focus"><?php echo __('Set Map Focus'); ?></button>
+            <button name="map-focus" class="btn"><?php echo __('Set Map Focus'); ?></button>
           </div>
         </div>
       </div>
@@ -133,9 +135,9 @@
 
     <div class="fieldset">
         <div class="form-actions">
-            <button name="save"><?php echo __('Save'); ?></button>
-            <button name="close"><?php echo __('Close'); ?></button>
-            <button name="delete"><?php echo __('Delete'); ?></button>
+            <button name="save" class="btn"><?php echo __('Save'); ?></button>
+            <button name="close" class="btn"><?php echo __('Close'); ?></button>
+            <button name="del" class="btn"><?php echo __('Delete'); ?></button>
         </div>
     </div>
 

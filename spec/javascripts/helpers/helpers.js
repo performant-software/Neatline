@@ -35,14 +35,14 @@ _t.loadNeatline = function() {
 _t.loadEditor = function() {
 
   // Restart components.
-  Editor.Controllers.Layout.init();
-  Editor.Controllers.Records.init();
-  Editor.Controllers.Form.init();
+  Editor.Modules.Layout.init();
+  Editor.Modules.Records.init();
+  Editor.Modules.Form.init();
 
   // Shortcut components
-  _t.layout = Editor.Controllers.Layout.view;
-  _t.records = Editor.Controllers.Records.view;
-  _t.form = Editor.Controllers.Records.view;
+  _t.layout = Editor.Modules.Layout.view;
+  _t.records = Editor.Modules.Records.view;
+  _t.form = Editor.Modules.Records.view;
 
 };
 

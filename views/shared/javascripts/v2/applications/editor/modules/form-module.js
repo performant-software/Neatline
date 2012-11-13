@@ -7,7 +7,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Editor.Controllers.Form = (function(Backbone, Editor) {
+Editor.Modules.Form = (function(Backbone, Editor) {
 
   var Form = {};
 
