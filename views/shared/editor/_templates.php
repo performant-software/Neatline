@@ -62,7 +62,7 @@
         <legend>Edit Controls</legend>
 
         <label class="radio">
-          <input type="radio" name="mapControls" value="pan">
+          <input type="radio" name="mapControls" value="pan" checked>
           Navigate
         </label>
 
