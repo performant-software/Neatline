@@ -101,7 +101,7 @@ function neatline_renderEditor($exhibit)
  */
 function neatline_getExhibitDataSource($exhibit)
 {
-    return public_url('neatline/data/' . $exhibit->id);
+    return public_url('neatline/records/' . $exhibit->id);
 }
 
 /**

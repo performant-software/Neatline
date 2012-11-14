@@ -31,7 +31,7 @@
 
     <h3 class="head"></h3>
 
-    <ul class="nav nav-pills">
+    <ul class="nav nav-tabs">
       <li><a href="#form-text" data-toggle="tab">Text</a></li>
       <li><a href="#form-spatial" data-toggle="tab">Spatial</a></li>
       <li><a href="#form-style" data-toggle="tab">Style</a></li>
@@ -137,7 +137,9 @@
         <div class="control-group">
           <div class="controls">
             <div class="inline-inputs">
-              <button name="map-focus" class="btn"><?php echo __('Set Map Focus'); ?></button>
+              <button name="map-focus" class="btn">
+                <?php echo __('Set Map Focus'); ?>
+              </button>
             </div>
           </div>
         </div>
@@ -147,11 +149,11 @@
     </div>
 
     <div class="fieldset">
-        <div class="form-actions">
-            <button name="save" class="btn"><?php echo __('Save'); ?></button>
-            <button name="close" class="btn"><?php echo __('Close'); ?></button>
-            <button name="del" class="btn"><?php echo __('Delete'); ?></button>
-        </div>
+      <div class="form-actions">
+        <button name="close" class="btn btn-large">
+          <?php echo __('Close'); ?>
+        </button>
+      </div>
     </div>
 
   </form>

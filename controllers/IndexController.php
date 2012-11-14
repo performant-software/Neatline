@@ -21,21 +21,10 @@ class Neatline_IndexController extends Omeka_Controller_AbstractActionController
      */
     public function init()
     {
-
-        $modelName = 'NeatlineExhibit';
-        if (version_compare(OMEKA_VERSION, '2.0-dev', '>=')) {
-            $this->_helper->db->setDefaultModelName($modelName);
-        } else {
-            $this->_modelClass = $modelName;
-        }
-
-        try {
-            $this->_table = $this->_helper->db->getTable($modelName);
-        } catch (Omeka_Controller_Exception_404 $e) {}
-
-        $this->_recordsTable = $this->_helper->db->getTable('NeatlineRecord');
+        $this->_helper->db->setDefaultModelName('NeatlineExhibit');
         $this->_browseRecordsPerPage = get_option('per_page_admin');
-
+        $this->recordsTable = $this->_helper->db->getTable('NeatlineRecord');
+        $this->exhibitsTable = $this->_helper->db->getTable('NeatlineExhibit');
     }
 
     /**
@@ -128,19 +117,29 @@ class Neatline_IndexController extends Omeka_Controller_AbstractActionController
      */
     public function showAction()
     {
-        $neatline = $this->_findNeatline();
+        $neatline = $this->_findExhibit();
         $this->view->neatline_exhibit = $neatline;
     }
 
     /**
-     * Fullscreen exhibit show view.
+     * ~ AJAX ~
+     * Get data records for an exhibit.
      *
-     * @return void
+     * @return JSON The vector data.
      */
-    public function fullscreenAction()
+    public function recordsAction()
     {
-        $neatline = $this->_findNeatline();
-        $this->view->neatline_exhibit = $neatline;
+
+        // Supress the default layout.
+        $this->_helper->viewRenderer->setNoRender(true);
+        $this->getResponse()->setHeader('Content-type', 'application/json');
+
+        // Get the exhibit.
+        $exhibit = $this->exhibitsTable->find($this->_request->id);
+
+        // Output the JSON string.
+        echo json_encode($this->recordsTable->buildJsonForExhibit($exhibit));
+
     }
 
     /**
@@ -148,7 +147,8 @@ class Neatline_IndexController extends Omeka_Controller_AbstractActionController
      */
     protected function _getAddSuccessMessage($neatline)
     {
-        return __('The Neatline "%s" was successfully added!', $neatline->title);
+        return __('The Neatline "%s" was successfully added!',
+            $neatline->title);
     }
 
     /**
@@ -156,7 +156,8 @@ class Neatline_IndexController extends Omeka_Controller_AbstractActionController
      */
     protected function _getEditSuccessMessage($neatline)
     {
-        return __('The Neatline "%s" was successfully changed!', $neatline->title);
+        return __('The Neatline "%s" was successfully changed!',
+            $neatline->title);
     }
 
     /**
@@ -164,7 +165,8 @@ class Neatline_IndexController extends Omeka_Controller_AbstractActionController
      */
     protected function _getDeleteSuccessMessage($neatline)
     {
-        return __('The Neatline "%s" was successfully deleted!', $neatline->title);
+        return __('The Neatline "%s" was successfully deleted!',
+            $neatline->title);
     }
 
     /**
@@ -172,7 +174,8 @@ class Neatline_IndexController extends Omeka_Controller_AbstractActionController
      */
     protected function _getDeleteConfirmMessage($neatline)
     {
-        return __('This will delete the Neatline "%s" and its associated metadata.', $neatline->title);
+      return __('This will delete "%s" and its associated metadata.',
+        $neatline->title);
     }
 
     /**
@@ -192,18 +195,16 @@ class Neatline_IndexController extends Omeka_Controller_AbstractActionController
      * @throws Omeka_Controller_Exception_404
      * @return NeatlineExhibit
      */
-    private function _findNeatline()
+    private function _findExhibit()
     {
 
         // Get the exhibit.
-        $record = $this->_table->findBySlug($this->_request->slug);
+        $record = $this->exhibitsTable->findBySlug($this->_request->slug);
 
         // Catch invalid slug.
-        if (!$record) {
-            throw new Omeka_Controller_Exception_404(
-                get_class($this) . ": No record with Slug '$slug' exists"
-            );
-        }
+        if (!$record) { throw new Omeka_Controller_Exception_404(
+            get_class($this) . ": No record with Slug '$slug' exists"
+        );}
 
         return $record;
 

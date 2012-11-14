@@ -63,7 +63,7 @@ class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
         $record2->save();
 
         // Generate the fixture.
-        $this->writeFixture('neatline/data/'.$exhibit->id,
+        $this->writeFixture('neatline/records/'.$exhibit->id,
             'map-records.json');
 
     }

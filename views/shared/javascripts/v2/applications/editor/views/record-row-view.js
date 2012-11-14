@@ -13,7 +13,7 @@ Editor.Views.RecordRow = Backbone.View.extend({
   className: 'record-row',
 
   events: {
-    'mousedown': 'openForm'
+    'click': 'openForm'
   },
 
   /*
@@ -21,7 +21,7 @@ Editor.Views.RecordRow = Backbone.View.extend({
    *
    * @return void.
    */
-  initialize: function(template) {
+  initialize: function() {
 
     // Store model.
     this.model = this.options.model;
