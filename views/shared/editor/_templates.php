@@ -150,7 +150,8 @@
 
     <div class="fieldset">
       <div class="form-actions">
-        <button name="save" class="btn btn-large btn-primary">
+        <button name="save" class="btn btn-large btn-primary" \
+          data-loading-text="Saving..">
           <?php echo __('Save'); ?>
         </button>
         <button name="close" class="btn btn-large">

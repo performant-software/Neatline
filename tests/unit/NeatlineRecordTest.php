@@ -35,7 +35,7 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
         'point_image' => 'http://test.org',
         'left_percent' => 0,
         'right_percent' => 100,
-        'geocoverage' => '[POINT(-1.0, 1.0)]',
+        'coverage' => '[POINT(-1.0, 1.0)]',
         'map_focus' => '[POINT(-1.0, 1.0)]',
         'map_zoom' => 5,
         'map_active' => true,
@@ -63,7 +63,7 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
         $record->description =                  'description';
         $record->vector_color =                 '#ffffff';
         $record->stroke_color =                 '#ffffff';
-        $record->select_color =              '#ffffff';
+        $record->select_color =                 '#ffffff';
         $record->vector_opacity =               50;
         $record->select_opacity =               50;
         $record->stroke_opacity =               50;
@@ -71,7 +71,7 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
         $record->stroke_width =                 3;
         $record->point_radius =                 3;
         $record->point_image =                  'http://test.org';
-        $record->geocoverage =                  'POINT()';
+        $record->coverage =                     'POINT()';
         $record->map_active =                   1;
         $record->map_focus =                   'CENTER()';
         $record->map_zoom =                     5;
@@ -93,7 +93,7 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
         $this->assertEquals($record->stroke_width, 3);
         $this->assertEquals($record->point_radius, 3);
         $this->assertEquals($record->point_image, 'http://test.org');
-        $this->assertEquals($record->geocoverage, 'POINT()');
+        $this->assertEquals($record->coverage, 'POINT()');
         $this->assertEquals($record->map_active, 1);
         $this->assertEquals($record->map_focus, 'CENTER()');
         $this->assertEquals($record->map_zoom, 5);
@@ -288,9 +288,9 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
         $this->assertNull($record->vector_color);
 
         // Set record that has coverage.
-        $record->geocoverage = 'POINT(1,0)';
+        $record->coverage = 'POINT(1,0)';
         $this->assertFalse($record->setGeocoverage('null'));
-        $this->assertEquals($record->geocoverage, 'POINT(1,0)');
+        $this->assertEquals($record->coverage, 'POINT(1,0)');
 
     }
 
@@ -313,9 +313,9 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
         $this->assertNull($record->vector_color);
 
         // Set record that has coverage.
-        $record->geocoverage = 'POINT(1,0)';
+        $record->coverage = 'POINT(1,0)';
         $record->setGeocoverage('POINT(2,0)');
-        $this->assertEquals($record->geocoverage, 'POINT(2,0)');
+        $this->assertEquals($record->coverage, 'POINT(2,0)');
 
     }
 
@@ -552,11 +552,11 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
         $this->assertEquals($record->getGeocoverage(), '');
 
         // Should return empty WKT for empty string.
-        $record->geocoverage = '';
+        $record->coverage = '';
         $this->assertEquals($record->getGeocoverage(), '');
 
         // Should return the value when the value is set.
-        $record->geocoverage = 'POINT(0,1)';
+        $record->coverage = 'POINT(0,1)';
         $this->assertEquals($record->getGeocoverage(), 'POINT(0,1)');
 
     }
@@ -589,7 +589,7 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
         $this->assertEquals($record->getGeocoverage(), '');
 
         // When there is a locally set value, override.
-        $record->geocoverage = 'POINT(11,12)';
+        $record->coverage = 'POINT(11,12)';
         $this->assertEquals($record->getGeocoverage(), 'POINT(11,12)');
 
     }
@@ -619,7 +619,7 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
         $this->assertEquals($record->getGeocoverage(), 'POINT(10,11)');
 
         // When there is a locally set value, override.
-        $record->geocoverage = 'POINT(11,12)';
+        $record->coverage = 'POINT(11,12)';
         $this->assertEquals($record->getGeocoverage(), 'POINT(11,12)');
 
     }
@@ -738,7 +738,7 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
         // Map.
         $record->map_focus              = self::$__testParams['map_focus'];
         $record->map_zoom               = self::$__testParams['map_zoom'];
-        $record->geocoverage            = self::$__testParams['geocoverage'];
+        $record->coverage               = self::$__testParams['coverage'];
 
         // Statuses.
         $record->map_active             = self::$__testParams['map_active'];
@@ -775,7 +775,7 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
                 // Map.
                 'map_focus'             => self::$__testParams['map_focus'],
                 'map_zoom'              => self::$__testParams['map_zoom'],
-                'coverage'              => self::$__testParams['geocoverage'],
+                'coverage'              => self::$__testParams['coverage'],
                 'wmsAddress'            => null,
                 'layers'                => null,
 

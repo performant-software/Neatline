@@ -573,7 +573,7 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
         $record->point_image      = 'file.png';
         $record->map_focus        = 'lat/lon';
         $record->map_zoom         = 7;
-        $record->geocoverage      = 'kml';
+        $record->coverage      = 'kml';
         $record->map_active       = 1;
 
         // Mock values.
@@ -595,7 +595,7 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
             'point_image'         => 'file2.png',
             'map_focus'           => 'lat2/lon2',
             'map_zoom'            => '70',
-            'geocoverage'         => 'kml2',
+            'coverage'         => 'kml2',
             'map_active'          => '0',
         );
 
@@ -619,7 +619,7 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
         $this->assertEquals($record->point_image, 'file2.png');
         $this->assertEquals($record->map_focus, 'lat2/lon2');
         $this->assertEquals($record->map_zoom, 70);
-        $this->assertEquals($record->geocoverage, 'kml2');
+        $this->assertEquals($record->coverage, 'kml2');
         $this->assertEquals($record->map_active, 0);
 
     }
@@ -669,8 +669,8 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
         $record2->point_radius = 2;
         $record1->point_image = 'http://test1.org';
         $record2->point_image = 'http://test2.org';
-        $record1->geocoverage = 'kml1';
-        $record2->geocoverage = 'kml2';
+        $record1->coverage = 'kml1';
+        $record2->coverage = 'kml2';
         $record1->map_active = 1;
         $record2->map_active = 1;
         $record1->map_focus = 'center1';

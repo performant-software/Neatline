@@ -162,12 +162,20 @@ Editor.Views.Form = Backbone.View.extend({
 
       // Update head.
       success: _.bind(function() {
-        this.head.text(this.model.get('title'));
+        this.updateHead();
       }, this)
 
     });
 
+  },
 
+  /*
+   * Update the text in the form header.
+   *
+   * @return void.
+   */
+  updateHead: function() {
+    this.head.text(this.model.get('title'));
   }
 
 });

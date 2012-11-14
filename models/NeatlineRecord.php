@@ -108,7 +108,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
      * KML for geometries.
      * mediumtext COLLATE utf8_unicode_ci NULL
      */
-    public $geocoverage;
+    public $coverage;
 
     /**
      * Default map focus position
@@ -146,7 +146,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
     private static $defaults = array(
         'left_percent' => 0,
         'right_percent' => 100,
-        'geocoverage' => ''
+        'coverage' => ''
     );
 
     /**
@@ -240,7 +240,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
     }
 
     /**
-     * Set the geocoverage field if the passed value is not <string>'null', which
+     * Set the coverage field if the passed value is not <string>'null', which
      * is true when there was not an instantiated map when the  triggering save
      * action was performed in the editor.
      *
@@ -251,7 +251,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
     public function setGeocoverage($value)
     {
         if ($value == 'null') return false;
-        return $this->setNotEmpty('geocoverage', $value);
+        return $this->setNotEmpty('coverage', $value);
     }
 
     /**
@@ -472,8 +472,8 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
     {
 
         // Return local value if one exists.
-        if (!is_null($this->geocoverage) && $this->geocoverage !== '') {
-            return $this->geocoverage;
+        if (!is_null($this->coverage) && $this->coverage !== '') {
+            return $this->coverage;
         }
 
         // Try to get DC value.
@@ -488,7 +488,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
 
                 // Return if not empty, otherwise return default.
                 return ($coverage !== '') ?
-                    $coverage : self::$defaults['geocoverage'];
+                    $coverage : self::$defaults['coverage'];
 
             }
 
@@ -510,7 +510,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
 
                     // If at least one feature exists, implode and return.
                     if (count($wkt)) return implode('|', $wkt);
-                    else return self::$defaults['geocoverage'];
+                    else return self::$defaults['coverage'];
 
                 }
 
@@ -519,7 +519,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
         }
 
         // Fall back on default string.
-        else return self::$defaults['geocoverage'];
+        else return self::$defaults['coverage'];
 
     }
 

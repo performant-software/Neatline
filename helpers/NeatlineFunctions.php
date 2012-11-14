@@ -418,7 +418,7 @@ function __devInstall()
         $record->map_active = 1;
 
         // Set coverage.
-        $record->geocoverage = '
+        $record->coverage = '
           <kml xmlns="http://earth.google.com/kml/2.0">
             <Folder>
               <Placemark>
