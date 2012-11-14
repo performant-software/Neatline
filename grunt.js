@@ -18,7 +18,7 @@ module.exports = function(grunt) {
   var stylus = 'views/shared/css/v2/stylus/';
   var css = 'views/shared/css/v2/payloads/';
 
-  var vendorFiles = [
+  var neatlineFiles = [
     c.components+c.vendor.jquery,
     c.components+c.vendor.underscore,
     c.components+c.vendor.backbone,
@@ -30,6 +30,10 @@ module.exports = function(grunt) {
     c.components+c.vendor.d3
   ];
 
+  var editorFiles = [
+    c.components+c.vendor.minicolors_js
+  ];
+
   var stylusFiles = {};
   stylusFiles[css+'neatline.css'] = stylus+'neatline.styl';
   stylusFiles[css+'editor.css'] = stylus+'editor.styl';
@@ -39,7 +43,7 @@ module.exports = function(grunt) {
     concat: {
 
       neatline: {
-        src: vendorFiles.concat([
+        src: neatlineFiles.concat([
           c.apps.neatline+'app.js',
           c.apps.neatline+'run.js',
           c.apps.neatline+'collections/*.js',
@@ -51,7 +55,8 @@ module.exports = function(grunt) {
       },
 
       editor: {
-        src: vendorFiles.concat([
+        src: neatlineFiles.concat(
+          editorFiles).concat([
           c.apps.neatline+'app.js',
           c.apps.neatline+'collections/*.js',
           c.apps.neatline+'modules/*.js',
@@ -68,7 +73,8 @@ module.exports = function(grunt) {
       },
 
       test: {
-        src: vendorFiles.concat([
+        src: neatlineFiles.concat(
+          editorFiles).concat([
           c.apps.neatline+'app.js',
           c.apps.neatline+'collections/*.js',
           c.apps.neatline+'modules/*.js',
@@ -95,6 +101,7 @@ module.exports = function(grunt) {
       editorCss: {
         src: [
           '<config:concat.neatlineCss.src>',
+          c.components+c.vendor.minicolors_css,
           css+'editor.css'
         ],
         dest: css+'editor.css'

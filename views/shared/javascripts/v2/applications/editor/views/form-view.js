@@ -89,7 +89,6 @@ Editor.Views.Form = Backbone.View.extend({
 
     // Buttons.
     // --------
-
     this.closeButton.click(_.bind(function(e) {
       e.preventDefault();
       this.close();

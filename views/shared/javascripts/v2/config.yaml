@@ -18,4 +18,6 @@ default:
     openlayers_css: openlayers/theme/default/style.css
     bootstrap_js: bootstrap/bootstrap/js/bootstrap.js
     bootstrap_css: bootstrap/bootstrap/css/bootstrap.min.css
+    minicolors_js: minicolors/jquery.miniColors.js
+    minicolors_css: minicolors/jquery.miniColors.css
     d3: d3/d3.v2.js
