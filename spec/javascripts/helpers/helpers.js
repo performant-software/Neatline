@@ -42,7 +42,7 @@ _t.loadEditor = function() {
   // Shortcut components
   _t.layout = Editor.Modules.Layout.view;
   _t.records = Editor.Modules.Records.view;
-  _t.form = Editor.Modules.Records.view;
+  _t.form = Editor.Modules.Form.view;
 
 };
 

@@ -81,9 +81,31 @@ class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
         $record1 = $this->__record(null, $exhibit);
         $record2 = $this->__record(null, $exhibit);
 
-        // Set titles.
+        // Populate parameters.
         $record1->title = 'Record 1';
         $record2->title = 'Record 2';
+        $record1->description = 'Record 1 desc.';
+        $record2->description = 'Record 2 desc.';
+        $record1->vector_color = '#111111';
+        $record2->vector_color = '#222222';
+        $record1->stroke_color = '#333333';
+        $record2->stroke_color = '#444444';
+        $record1->select_color = '#555555';
+        $record2->select_color = '#666666';
+        $record1->vector_opacity = 1;
+        $record2->vector_opacity = 2;
+        $record1->select_opacity = 3;
+        $record2->select_opacity = 4;
+        $record1->stroke_opacity = 5;
+        $record2->stroke_opacity = 6;
+        $record1->graphic_opacity = 7;
+        $record2->graphic_opacity = 8;
+        $record1->stroke_width = 9;
+        $record2->stroke_width = 10;
+        $record1->point_radius = 11;
+        $record2->point_radius = 12;
+        $record1->point_image = 'file1.png';
+        $record2->point_image = 'file2.png';
         $record1->save();
         $record2->save();
 

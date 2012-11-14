@@ -1,3 +1,6 @@
+
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2; */
+
 /**
  * Form view.
  *
@@ -41,7 +44,7 @@ Editor.Views.Form = Backbone.View.extend({
     this.graphicOpacity = this.form.find('input[name="graphic-opacity"]');
     this.strokeWidth =    this.form.find('input[name="stroke-width"]');
     this.pointRadius =    this.form.find('input[name="point-radius"]');
-    this.pointGraphic =   this.form.find('input[name="point-graphic"]');
+    this.pointGraphic =   this.form.find('input[name="point-image"]');
     this.mapFocus =       this.form.find('button[name="map-focus"]');
 
     // Buttons.
@@ -87,17 +90,10 @@ Editor.Views.Form = Backbone.View.extend({
     // Buttons.
     // --------
 
-    this.closeButton.bind({
-
-      mousedown: _.bind(function() {
-        this.close();
-      }, this),
-
-      click: _.bind(function(e) {
-        e.preventDefault();
-      }, this)
-
-    });
+    this.closeButton.click(_.bind(function(e) {
+      e.preventDefault();
+      this.close();
+    }, this));
 
   },
 
@@ -126,7 +122,7 @@ Editor.Views.Form = Backbone.View.extend({
     this.graphicOpacity.  val(this.model.get('graphic_opacity'));
     this.strokeWidth.     val(this.model.get('stroke_width'));
     this.pointRadius.     val(this.model.get('point_radius'));
-    this.pointGraphic.    val(this.model.get('point_graphic'));
+    this.pointGraphic.    val(this.model.get('point_image'));
 
   }
 
