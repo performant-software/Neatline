@@ -160,6 +160,9 @@ Editor.Views.Form = Backbone.View.extend({
 
     });
 
+    // Update head.
+    this.head.text(this.model.get('title'));
+
   }
 
 });
