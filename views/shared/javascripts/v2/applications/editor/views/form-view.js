@@ -139,24 +139,26 @@ Editor.Views.Form = Backbone.View.extend({
    */
   save: function() {
 
-    // Text.
-    this.model.set('title',           this.title.val());
-    this.model.set('description',     this.body.val());
+    // Commit model.
+    this.model.save({
 
-    // Styles.
-    this.model.set('vector_color',    this.vectorColor.val());
-    this.model.set('stroke_color',    this.strokeColor.val());
-    this.model.set('select_color',    this.selectColor.val());
-    this.model.set('vector_opacity',  this.vectorOpacity.val());
-    this.model.set('stroke_opacity',  this.strokeOpacity.val());
-    this.model.set('select_opacity',  this.selectOpacity.val());
-    this.model.set('graphic_opacity', this.graphicOpacity.val());
-    this.model.set('stroke_width',    this.strokeWidth.val());
-    this.model.set('point_radius',    this.pointRadius.val());
-    this.model.set('point_image',     this.pointGraphic.val());
+      // Text.
+      title:              this.title.val(),
+      description:        this.body.val(),
 
-    // Commit.
-    this.model.save();
+      // Styles.
+      vector_color:       this.vectorColor.val(),
+      stroke_color:       this.strokeColor.val(),
+      select_color:       this.selectColor.val(),
+      vector_opacity:     this.vectorOpacity.val(),
+      stroke_opacity:     this.strokeOpacity.val(),
+      select_opacity:     this.selectOpacity.val(),
+      graphic_opacity:    this.graphicOpacity.val(),
+      stroke_width:       this.strokeWidth.val(),
+      point_radius:       this.pointRadius.val(),
+      point_image:        this.pointGraphic.val()
+
+    });
 
   }
 

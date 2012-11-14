@@ -18,10 +18,6 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
     private static $__testParams = array(
         'title' => 'Test Title',
         'description' => 'Test description.',
-        'start_date' => '1564-04-26 14:39:22',
-        'end_date' => '1616-04-23 12:45:34',
-        'start_visible_date' => '1864-04-26 14:39:22',
-        'end_visible_date' => '1916-04-23 12:45:34',
         'vector_color' => '#ffffff',
         'stroke_color' => '#000000',
         'vector_opacity' => 60,
@@ -30,25 +26,8 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
         'point_radius' => 7,
         'left_percent' => 0,
         'right_percent' => 100,
-        'geocoverage' => '[POINT(-1.0, 1.0)]',
-        'map_active' => true,
-        'time_active' => true
+        'geocoverage' => 'kml'
     );
-
-    /**
-     * Instantiate the helper class, install the plugins, get the database.
-     *
-     * @return void.
-     */
-    public function setUp()
-    {
-
-        parent::setUp();
-
-        $this->db = get_db();
-        $this->_recordsTable = $this->db->getTable('NeatlineRecord');
-
-    }
 
     /**
      * createOrGetRecord() should return an existing record when one exists.
@@ -579,6 +558,16 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
         $this->assertFalse(
             $this->_recordsTable->getActiveRecordsByExhibit($exhibit)
         );
+    }
+
+    /**
+     * updateRecord() should update all non-empty properties.
+     *
+     * @return void
+     **/
+    public function testUpdateRecord()
+    {
+
     }
 
     /**

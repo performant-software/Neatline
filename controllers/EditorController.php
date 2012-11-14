@@ -21,9 +21,12 @@ class Neatline_EditorController extends Omeka_Controller_AbstractActionControlle
      */
     public function init()
     {
+
+        // Get tables.
         $this->layersTable = $this->_helper->db->getTable('NeatlineLayer');
         $this->exhibitsTable = $this->_helper->db->getTable('NeatlineExhibit');
         $this->recordsTable = $this->_helper->db->getTable('NeatlineRecord');
+
     }
 
     /**
@@ -61,5 +64,37 @@ class Neatline_EditorController extends Omeka_Controller_AbstractActionControlle
 
     }
 
+    /**
+     * ~ AJAX ~
+     * .
+     *
+     * @return void
+     */
+    public function formAction()
+    {
+
+        // Supress the default layout.
+        $this->_helper->viewRenderer->setNoRender(true);
+        $this->getResponse()->setHeader('Content-type', 'application/json');
+
+        switch ($this->_request->getMethod()) {
+
+            case 'GET':
+                break;
+
+            case 'POST':
+                break;
+
+            case 'PUT':
+                $values = json_decode(file_get_contents('php://input'), true);
+                $this->recordsTable->updateRecord($values);
+                break;
+
+            case 'DELETE':
+                break;
+
+        }
+
+    }
 
 }

@@ -192,6 +192,20 @@ class NeatlineRecordTable extends Omeka_Db_Table
 
     }
 
+    /**
+     * Update a record.
+     *
+     * @param array $values The PUT values.
+     *
+     * @return void.
+     */
+    public function updateRecord($values)
+    {
+        $record = $this->find((int) $values['id']);
+        foreach ($values as $key => $val) $record->setNotEmpty($key, $val);
+        $record->save();
+    }
+
 
     /**
      * JSON constructors.
