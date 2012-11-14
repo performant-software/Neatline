@@ -69,6 +69,7 @@ describe('Records', function() {
     expect(_t.form.strokeWidth.val()).toEqual('9');
     expect(_t.form.pointRadius.val()).toEqual('11');
     expect(_t.form.pointGraphic.val()).toEqual('file1.png');
+    expect(_t.form.coverage.val()).toEqual('kml1');
 
     // Close Record 1, open Record 2.
     _t.form.closeButton.trigger('click');
@@ -90,6 +91,7 @@ describe('Records', function() {
     expect(_t.form.strokeWidth.val()).toEqual('10');
     expect(_t.form.pointRadius.val()).toEqual('12');
     expect(_t.form.pointGraphic.val()).toEqual('file2.png');
+    expect(_t.form.coverage.val()).toEqual('kml2');
 
   });
 

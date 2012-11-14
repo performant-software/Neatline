@@ -418,19 +418,7 @@ function __devInstall()
         $record->map_active = 1;
 
         // Set coverage.
-        $record->coverage = '
-          <kml xmlns="http://earth.google.com/kml/2.0">
-            <Folder>
-              <Placemark>
-                <name>Record'.$i.'</name>
-                <Point>
-                  <coordinates>'
-                    .$lat.','.$lon.
-                  '</coordinates>
-                </Point>
-              </Placemark>
-            </Folder>
-          </kml>';
+        $record->coverage = '<kml xmlns="http://earth.google.com/kml/2.0"><Folder><Placemark><name>Record'.$i.'</name><Point><coordinates>'.$lat.','.$lon.'</coordinates></Point></Placemark></Folder></kml>';
 
         // Styles.
         $record->vector_color =     '#ff0000';

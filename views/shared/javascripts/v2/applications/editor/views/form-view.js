@@ -34,6 +34,9 @@ Editor.Views.Form = Backbone.View.extend({
     this.title =          this.form.find('textarea[name="title"]');
     this.body =           this.form.find('textarea[name="body"]');
 
+    // Spatial.
+    this.coverage =       this.form.find('textarea[name="coverage"]');
+
     // Styles.
     this.vectorColor =    this.form.find('input[name="vector-color"]');
     this.strokeColor =    this.form.find('input[name="stroke-color"]');
@@ -117,6 +120,9 @@ Editor.Views.Form = Backbone.View.extend({
     this.head.            text(this.model.get('title'));
     this.title.           val(this.model.get('title'));
     this.body.            val(this.model.get('description'));
+
+    // Spatial.
+    this.coverage.        val(this.model.get('coverage'));
 
     // Styles.
     this.vectorColor.     val(this.model.get('vector_color'));

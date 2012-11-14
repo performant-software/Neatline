@@ -58,6 +58,73 @@
       </div>
 
       <div class="tab-pane" id="form-spatial">
+
+        <legend>Edit Controls</legend>
+
+        <label class="radio">
+          <input type="radio" name="mapControls" value="pan">
+          Navigate
+        </label>
+
+        <label class="radio">
+          <input type="radio" name="mapControls" value="point">
+          Draw Point
+        </label>
+
+        <label class="radio">
+          <input type="radio" name="mapControls" value="line">
+          Draw Line
+        </label>
+
+        <label class="radio">
+          <input type="radio" name="mapControls" value="poly">
+          Draw Polygon
+        </label>
+
+        <label class="radio">
+          <input type="radio" name="mapControls" value="regPoly">
+          Draw Regular Polygon |
+          <input type="text" class="input-small" name="sides" value="3" />
+          sides
+        </label>
+
+        <label class="radio">
+          <input type="radio" name="mapControls" value="modify">
+          Modify Shape
+        </label>
+
+        <div class="control-group indent">
+
+          <label class="checkbox">
+            <input type="checkbox" name="modifySettings" value="vertices">
+            Allow Vertex Creation
+          </label>
+
+          <label class="checkbox">
+            <input type="checkbox" name="modifySettings" value="rotate">
+            Allow Rotation
+          </label>
+
+          <label class="checkbox">
+            <input type="checkbox" name="modifySettings" value="resize">
+            Allow Resizing
+          </label>
+
+          <label class="checkbox">
+            <input type="checkbox" name="modifySettings" value="drag">
+            Allow Dragging
+          </label>
+
+        </div>
+
+        <legend>Spatial Data</legend>
+
+        <div class="control-group">
+          <div class="controls">
+            <textarea name="coverage"></textarea>
+          </div>
+        </div>
+
       </div>
 
       <div class="tab-pane" id="form-style">

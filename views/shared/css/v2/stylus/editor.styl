@@ -68,7 +68,7 @@ body
       font-weight 300
 
     textarea
-    input
+    input[type="text"]
       width 95%
 
       &[name="title"]
@@ -76,6 +76,24 @@ body
 
       &[name="body"]
         height 300px
+
+    #form-spatial
+
+      label.radio
+        margin-left 0.5em
+
+      input[name="sides"]
+        line-height 1em
+        height 1.2em
+        width 30px
+        padding 0 5px
+        margin 0
+
+      div.control-group.indent
+        margin-left 1.2em
+
+      textarea[name="coverage"]
+        height 150px
 
     .form-actions
       background transparent

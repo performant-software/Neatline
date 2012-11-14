@@ -106,6 +106,8 @@ class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
         $record2->point_radius = 12;
         $record1->point_image = 'file1.png';
         $record2->point_image = 'file2.png';
+        $record1->coverage = 'kml1';
+        $record2->coverage = 'kml2';
         $record1->save();
         $record2->save();
 
