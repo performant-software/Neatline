@@ -58,6 +58,29 @@ Editor.Views.Form = Backbone.View.extend({
   },
 
   /*
+   * Bind event listeners to form elements.
+   *
+   * @return void.
+   */
+  bindEvents: function() {
+
+    // Close button.
+    // -------------
+    this.closeButton.click(_.bind(function(e) {
+      e.preventDefault();
+      this.close();
+    }, this));
+
+    // Save button.
+    // -------------
+    this.saveButton.click(_.bind(function(e) {
+      e.preventDefault();
+      this.save();
+    }, this));
+
+  },
+
+  /*
    * Show the form.
    *
    * @param {Object} model: The record model.
@@ -67,7 +90,7 @@ Editor.Views.Form = Backbone.View.extend({
   show: function(model) {
     this.model = model;
     this.$el.html(this.form);
-    this.renderData();
+    this.render();
   },
 
   /*
@@ -81,27 +104,11 @@ Editor.Views.Form = Backbone.View.extend({
   },
 
   /*
-   * Bind event listeners to form elements.
-   *
-   * @return void.
-   */
-  bindEvents: function() {
-
-    // Buttons.
-    // --------
-    this.closeButton.click(_.bind(function(e) {
-      e.preventDefault();
-      this.close();
-    }, this));
-
-  },
-
-  /*
    * Render form values.
    *
    * @return void.
    */
-  renderData: function() {
+  render: function() {
 
     // Activate "Text".
     $(this.tabs[0]).tab('show');
@@ -122,6 +129,34 @@ Editor.Views.Form = Backbone.View.extend({
     this.strokeWidth.     val(this.model.get('stroke_width'));
     this.pointRadius.     val(this.model.get('point_radius'));
     this.pointGraphic.    val(this.model.get('point_image'));
+
+  },
+
+  /*
+   * Save form to record model.
+   *
+   * @return void.
+   */
+  save: function() {
+
+    // Text.
+    this.model.set('title',           this.title.val());
+    this.model.set('description',     this.body.val());
+
+    // Styles.
+    this.model.set('vector_color',    this.vectorColor.val());
+    this.model.set('stroke_color',    this.strokeColor.val());
+    this.model.set('select_color',    this.selectColor.val());
+    this.model.set('vector_opacity',  this.vectorOpacity.val());
+    this.model.set('stroke_opacity',  this.strokeOpacity.val());
+    this.model.set('select_opacity',  this.selectOpacity.val());
+    this.model.set('graphic_opacity', this.graphicOpacity.val());
+    this.model.set('stroke_width',    this.strokeWidth.val());
+    this.model.set('point_radius',    this.pointRadius.val());
+    this.model.set('point_image',     this.pointGraphic.val());
+
+    // Commit.
+    this.model.save();
 
   }
 

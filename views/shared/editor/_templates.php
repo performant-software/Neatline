@@ -150,6 +150,9 @@
 
     <div class="fieldset">
       <div class="form-actions">
+        <button name="save" class="btn btn-large btn-primary">
+          <?php echo __('Save'); ?>
+        </button>
         <button name="close" class="btn btn-large">
           <?php echo __('Close'); ?>
         </button>
