@@ -199,42 +199,6 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
 
     }
 
-    /**
-     * Get the parent item record.
-     *
-     * @return Omeka_record $item The parent item.
-     */
-    public function getItem()
-    {
-
-        $item = null;
-
-        // If record id is defined, get item.
-        if (!is_null($this->item_id)) {
-           $item = $this->getTable('Item')->find($this->item_id);
-        }
-
-        return $item;
-
-    }
-
-    /**
-     * Get the parent exhibit record.
-     *
-     * @return Omeka_record $exhibit The parent exhibit.
-     */
-    public function getExhibit()
-    {
-
-        if (is_null($this->_exhibit)) {
-            $this->_exhibit = $this->getTable('NeatlineExhibit')
-                ->find($this->exhibit_id);
-        }
-
-        return $this->_exhibit;
-
-    }
-
 
     /**
      * Setters.
@@ -316,7 +280,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
     {
         $this->vector_color =       null;
         $this->stroke_color =       null;
-        $this->select_color =    null;
+        $this->select_color =       null;
         $this->vector_opacity =     null;
         $this->stroke_opacity =     null;
         $this->graphic_opacity =    null;
@@ -330,6 +294,42 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
      * Getters.
      */
 
+
+    /**
+     * Get the parent item record.
+     *
+     * @return Omeka_record $item The parent item.
+     */
+    public function getItem()
+    {
+
+        $item = null;
+
+        // If record id is defined, get item.
+        if (!is_null($this->item_id)) {
+           $item = $this->getTable('Item')->find($this->item_id);
+        }
+
+        return $item;
+
+    }
+
+    /**
+     * Get the parent exhibit record.
+     *
+     * @return Omeka_record $exhibit The parent exhibit.
+     */
+    public function getExhibit()
+    {
+
+        if (is_null($this->_exhibit)) {
+            $this->_exhibit = $this->getTable('NeatlineExhibit')
+                ->find($this->exhibit_id);
+        }
+
+        return $this->_exhibit;
+
+    }
 
     /**
      * Set the an attribute if the passed value is not null or ''.

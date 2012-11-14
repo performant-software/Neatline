@@ -156,6 +156,29 @@ class Neatline_Test_AppTestCase extends Omeka_Test_AppTestCase
     }
 
     /**
+     * Mock out PUT data before a request.
+     *
+     * @param array $data Key value pairs.
+     *
+     * @return void.
+     */
+    public function writePut($data)
+    {
+
+        // Open the file.
+        $mockPath = NEATLINE_PLUGIN_DIR . '/tests/mocks/put.txt';
+        $fileIn = fopen($mockPath, 'w');
+
+        // Write data.
+        fwrite($fileIn, json_encode($data));
+        fclose($fileIn);
+
+        // Set global fileIn.
+        Zend_Registry::set('fileIn', $mockPath);
+
+    }
+
+    /**
      * Get the first exhibit.
      *
      * @return NeatlineExhibit The record.

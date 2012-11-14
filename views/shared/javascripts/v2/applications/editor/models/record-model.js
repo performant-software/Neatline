@@ -8,5 +8,5 @@
  */
 
 Editor.Models.Record = Backbone.Model.extend({
-  url: (function() { return __editor.formSource+this.id; })
+  url: (function() { return __editor.formSource; })
 });

@@ -599,7 +599,7 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
             'map_active'          => '0',
         );
 
-        // Update, reget recordj.
+        // Update, reget record.
         $this->_recordsTable->updateRecord($values);
         $record = $this->_recordsTable->find($record->id);
 

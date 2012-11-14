@@ -158,10 +158,15 @@ Editor.Views.Form = Backbone.View.extend({
       point_radius:       this.pointRadius.val(),
       point_image:        this.pointGraphic.val()
 
+    }, {
+
+      // Update head.
+      success: _.bind(function() {
+        this.head.text(this.model.get('title'));
+      }, this)
+
     });
 
-    // Update head.
-    this.head.text(this.model.get('title'));
 
   }
 

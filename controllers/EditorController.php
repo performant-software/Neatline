@@ -86,8 +86,8 @@ class Neatline_EditorController extends Omeka_Controller_AbstractActionControlle
                 break;
 
             case 'PUT':
-                $values = json_decode(file_get_contents('php://input'), true);
-                $this->recordsTable->updateRecord($values);
+                $put = file_get_contents(Zend_Registry::get('fileIn'));
+                $this->recordsTable->updateRecord(json_decode($put, true));
                 break;
 
             case 'DELETE':
