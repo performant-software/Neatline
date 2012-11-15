@@ -7,6 +7,6 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Editor.Models.Record = Backbone.Model.extend({
+Neatline.Models.Record = Backbone.Model.extend({
   url: (function() { return __editor.formSource; })
 });

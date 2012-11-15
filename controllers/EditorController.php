@@ -41,37 +41,4 @@ class Neatline_EditorController extends Omeka_Controller_AbstractActionControlle
         $this->view->layers = $this->layersTable->findAll();
     }
 
-    /**
-     * ~ AJAX ~
-     * Rest interface for individual record.
-     *
-     * @return void
-     */
-    public function formAction()
-    {
-
-        // Supress the default layout.
-        $this->_helper->viewRenderer->setNoRender(true);
-        $this->getResponse()->setHeader('Content-type', 'application/json');
-
-        switch ($this->_request->getMethod()) {
-
-            case 'GET':
-                break;
-
-            case 'POST':
-                break;
-
-            case 'PUT':
-                $put = file_get_contents(Zend_Registry::get('fileIn'));
-                $this->recordsTable->updateRecord(json_decode($put, true));
-                break;
-
-            case 'DELETE':
-                break;
-
-        }
-
-    }
-
 }

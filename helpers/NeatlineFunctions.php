@@ -113,7 +113,7 @@ function neatline_getExhibitDataSource($exhibit)
  */
 function neatline_getRecordsDataSource($exhibit)
 {
-    return public_url('neatline/editor/records/' . $exhibit->id);
+    return public_url('neatline/records/' . $exhibit->id);
 }
 
 /**
@@ -125,7 +125,7 @@ function neatline_getRecordsDataSource($exhibit)
  */
 function neatline_getFormDataSource($exhibit)
 {
-    return public_url('neatline/editor/form/' . $exhibit->id);
+    return public_url('neatline/record/' . $exhibit->id);
 }
 
 /**
