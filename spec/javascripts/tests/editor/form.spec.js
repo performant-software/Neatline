@@ -27,7 +27,7 @@ describe('Form', function() {
 
     // Intercept requests.
     _.each(server.requests, function(r) {
-      r.respond(200, {'Content-Type':'application/json'}, json);
+      _t.respond200(r, json);
     });
 
     // Open record form.
@@ -53,7 +53,8 @@ describe('Form', function() {
     expect(_t.form.strokeWidth.val()).toEqual('9');
     expect(_t.form.pointRadius.val()).toEqual('11');
     expect(_t.form.pointGraphic.val()).toEqual('file1.png');
-    // expect(_t.form.coverage.val()).toEqual('kml1');
+    expect(_t.form.coverage.val().indexOf('Vector_147')).
+      not.toEqual(-1);
 
   });
 

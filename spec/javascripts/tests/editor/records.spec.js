@@ -27,7 +27,7 @@ describe('Records', function() {
 
     // Intercept requests.
     _.each(server.requests, function(r) {
-      r.respond(200, {'Content-Type':'application/json'}, json);
+      _t.respond200(r, json);
     });
 
     // Get records and editor.

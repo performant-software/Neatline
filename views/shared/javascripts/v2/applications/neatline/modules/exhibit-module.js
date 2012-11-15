@@ -38,7 +38,6 @@ Neatline.Modules.Exhibit = (function(Backbone, Neatline) {
       data: $.param(params),
       success: function(collection) {
         Neatline.vent.trigger('exhibit:newRecords', collection);
-        console.log('neatline fetch');
       }
     });
 

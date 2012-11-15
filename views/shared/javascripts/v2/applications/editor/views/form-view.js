@@ -35,6 +35,8 @@ Editor.Views.Form = Backbone.View.extend({
     this.body =           this.form.find('textarea[name="body"]');
 
     // Spatial.
+    this.sides =          this.form.find('input[name="sides"]');
+    this.spatial =        this.form.find('div.geometry-controls input');
     this.coverage =       this.form.find('textarea[name="coverage"]');
 
     // Styles.
@@ -79,6 +81,13 @@ Editor.Views.Form = Backbone.View.extend({
     this.saveButton.click(_.bind(function(e) {
       e.preventDefault();
       this.save();
+    }, this));
+
+    // Spatial controls.
+    // -----------------
+    this.spatial.on('change keyup',
+      _.bind(function(e) {
+        this.updateMap();
     }, this));
 
   },
@@ -183,6 +192,45 @@ Editor.Views.Form = Backbone.View.extend({
    */
   updateHead: function() {
     this.head.text(this.model.get('title'));
+  },
+
+  /*
+   * Get current edit geometry settings.
+   *
+   * @unittest
+   * @return void.
+   */
+  updateMap: function() {
+
+    // Get values.
+    var control = this.getMapControl();
+    var modify = this.getModifySettings();
+    var sides = this.sides.val();
+
+    // Publish.
+    Editor.vent.trigger('form:updateMap', {
+      control: control, modify: modify, sides: sides
+    });
+
+  },
+
+  /*
+   * Get the value of the current map control mode.
+   *
+   * @return string: The input value.
+   */
+  getMapControl: function() {
+    return $('input[name="mapControls"]:checked').val();
+  },
+
+  /*
+   * Get an array of the values of all checked modify settings.
+   *
+   * @return
+   */
+  getModifySettings: function() {
+    var inputs = $('input[name="modifySettings"]:checked');
+    return _.map(inputs, function(i) { return $(i).val(); });
   }
 
 });

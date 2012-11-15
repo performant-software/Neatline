@@ -39,7 +39,6 @@ Editor.Modules.Records = (function(Backbone, Editor, Neatline) {
       data: $.param(params),
       success: _.bind(function() {
         this.view.show(this.collection);
-        console.log('editor fetch');
       }, this)
     });
 

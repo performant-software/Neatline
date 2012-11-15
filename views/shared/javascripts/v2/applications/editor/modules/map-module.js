@@ -37,6 +37,17 @@ Editor.Modules.Map = (function(Backbone, Editor, Neatline) {
     Map.view.edit(model);
   });
 
+  /*
+   * Update map settings.
+   *
+   * @param {Object} settings: Settings hash.
+   *
+   * @return void.
+   */
+  Editor.vent.on('form:updateMap', function(settings) {
+    Map.view.update(settings);
+  });
+
 
   // Export.
   Editor.addInitializer(function() { Map.init(); });

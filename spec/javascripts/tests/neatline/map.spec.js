@@ -24,7 +24,7 @@ describe('Map', function() {
 
     // Intercept requests.
     _.each(server.requests, function(r) {
-      r.respond(200, {'Content-Type':'application/json'}, json);
+      _t.respond200(r, json);
     });
 
     // Get layer and feature.
@@ -42,7 +42,7 @@ describe('Map', function() {
     // Restart.
     _t.loadNeatline();
     var request = _.last(server.requests);
-    request.respond(200, {'Content-Type':'application/json'}, json);
+    _t.respond200(request, json);
 
     // Check viewport.
     var center = _t.map.map.getCenter();
@@ -61,7 +61,7 @@ describe('Map', function() {
     // Restart.
     _t.loadNeatline();
     var request = _.last(server.requests);
-    request.respond(200, {'Content-Type':'application/json'}, json);
+    _t.respond200(request, json);
 
     // Check viewport.
     expect(_t.map.map.zoom).toEqual(_t.map.options.defaultZoom);

@@ -54,6 +54,8 @@ _t.loadEditor = function() {
 
 /*
  * Get vector layers on the map.
+ *
+ * @return void.
  */
 _t.getVectorLayers = function() {
 
@@ -64,4 +66,16 @@ _t.getVectorLayers = function() {
     }
   });
 
+};
+
+/*
+ * Inject mock into ajax request.
+ *
+ * @param {Object} request: The mocked sinon request.
+ * @param {Object} response: The response body.
+ *
+ * @return void.
+ */
+_t.respond200 = function(request, response) {
+  request.respond(200, {'Content-Type':'application/json'},response);
 };
