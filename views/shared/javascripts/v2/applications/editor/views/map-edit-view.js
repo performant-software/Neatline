@@ -1,5 +1,5 @@
 /**
- * Monkey patches to Neatline map view.
+ * Injects editor-endemic methods into Neatline map view.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -41,10 +41,10 @@ Neatline.Views.Map.prototype.edit = function(model, settings) {
   var edit =  new OpenLayers.Control.ModifyFeature(layer);
 
   // Add controls.
-  // this.map.addControls([layer, point, line, poly, reg, edit]);
+  this.map.addControls([point, line, poly, reg, edit]);
 
   // Apply starting settings.
-  this.editControls(settings);
+  this.modifyControls(settings);
 
 };
 
@@ -55,6 +55,6 @@ Neatline.Views.Map.prototype.edit = function(model, settings) {
  *
  * @return void.
  */
-Neatline.Views.Map.prototype.editControls = function(settings) {
+Neatline.Views.Map.prototype.modifyControls = function(settings) {
 
 };

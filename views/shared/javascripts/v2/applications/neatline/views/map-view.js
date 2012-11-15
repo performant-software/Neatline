@@ -1,3 +1,6 @@
+
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2; */
+
 /**
  * Map view.
  *
@@ -53,7 +56,8 @@ Neatline.Views.Map = Backbone.View.extend({
     this.map.addLayer(this.osm);
     this.map.setBaseLayer(this.osm);
 
-    this.setViewport();
+    // Starting focus/zoom.
+    this.setDefaultViewport();
 
   },
 
@@ -62,24 +66,36 @@ Neatline.Views.Map = Backbone.View.extend({
    *
    * @return void.
    */
-  setViewport: function() {
+  setDefaultViewport: function() {
 
     // If defaults are defined.
     if (!_.isNull(__exhibit.mapFocus)) {
-
-      // Get focus lat/lon.
-      var focus = __exhibit.mapFocus.split(',');
-      var latlon = new OpenLayers.LonLat(focus[0], focus[1]);
-
-      // Set center.
-      this.map.setCenter(latlon, __exhibit.mapZoom);
-
+      this.setViewport(__exhibit.mapFocus, __exhibit.mapZoom);
     }
 
     else {
       this.map.zoomTo(this.options.defaultZoom);
       this.geolocate();
     }
+
+  },
+
+  /*
+   * Set custom focus and zoom.
+   *
+   * @param {String} focus: Comma-delimited lat/lon.
+   * @param {Number} zoom: The zoom value.
+   *
+   * @return void.
+   */
+  setViewport: function(focus, zoom) {
+
+    // Get focus lat/lon.
+    focus = focus.split(',');
+    var latlon = new OpenLayers.LonLat(focus[0], focus[1]);
+
+    // Set center.
+    this.map.setCenter(latlon, zoom);
 
   },
 
@@ -108,48 +124,43 @@ Neatline.Views.Map = Backbone.View.extend({
    * @return void.
    */
   ingest: function(records) {
-    this.buildLayers(records);
+    records.each(_.bind(function(r) { this.buildLayer(r); }, this));
     this.addCursorControls();
   },
 
   /*
    * Ingest records.
    *
-   * @param {Object} records: The records collection.
+   * @param {Object} record: The record model.
    *
    * @return void.
    */
-  buildLayers: function(records) {
+  buildLayer: function(record) {
 
-    // Add records to map.
-    records.each(_.bind(function(record) {
+    // If active on the map.
+    if (record.get('map_active') == 1) {
 
-      // If active on the map.
-      if (record.get('map_active') == 1) {
+      // Build geometry and style.
+      var formatter = new OpenLayers.Format.KML();
+      var geometry = formatter.read(record.get('coverage'));
+      var style = this.getStyleMap(record);
 
-        // Build geometry and style.
-        var formatter = new OpenLayers.Format.KML();
-        var geometry = formatter.read(record.get('coverage'));
-        var style = this.getStyleMap(record);
+      // Build the layer.
+      var layer = new OpenLayers.Layer.Vector(
+        record.get('title'), {
+          styleMap: style, displayInLayerSwitcher: false
+        }
+      );
 
-        // Build the layer.
-        var layer = new OpenLayers.Layer.Vector(
-          record.get('title'), {
-            styleMap: style, displayInLayerSwitcher: false
-          }
-        );
+      // Add to map, track.
+      layer.addFeatures(geometry);
+      this.map.addLayer(layer);
 
-        // Add to map, track.
-        layer.addFeatures(geometry);
-        this.map.addLayer(layer);
+      // Store id, add to tracker.
+      layer.nId = record.get('id');
+      this.layers.push(layer);
 
-        // Store id, add to tracker.
-        layer.nId = record.get('id');
-        this.layers.push(layer);
-
-      }
-
-    }, this));
+    }
 
   },
 
@@ -235,6 +246,17 @@ Neatline.Views.Map = Backbone.View.extend({
     this.hoverControl.activate();
     this.clickControl.activate();
 
+  },
+
+  /*
+   * Focus on a record model.
+   *
+   * @param {Object} model: The record model.
+   *
+   * @return void.
+   */
+  focusByModel: function(model) {
+    console.log(model);
   },
 
   /*
