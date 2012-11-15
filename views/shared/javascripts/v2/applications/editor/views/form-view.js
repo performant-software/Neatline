@@ -16,6 +16,8 @@ Editor.Views.Form = Backbone.View.extend({
     return _.template($('#edit-form').html());
   },
 
+  timer: null,
+
   /*
    * Render form template, get components.
    *
@@ -28,6 +30,7 @@ Editor.Views.Form = Backbone.View.extend({
 
     // UX.
     this.tabs =           this.form.find('ul.nav a');
+    this.inputs =         this.form.find('input[type="text"], textarea');
 
     // Text.
     this.head =           this.form.find('h3.head');
@@ -67,6 +70,12 @@ Editor.Views.Form = Backbone.View.extend({
    */
   bindEvents: function() {
 
+    // All inputs.
+    // -----------
+    this.inputs.on('change keyup', _.bind(function(e) {
+      this.change();
+    }, this));
+
     // Close button.
     // -------------
     this.closeButton.click(_.bind(function(e) {
@@ -75,7 +84,7 @@ Editor.Views.Form = Backbone.View.extend({
     }, this));
 
     // Save button.
-    // -------------
+    // ------------
     this.saveButton.click(_.bind(function(e) {
       e.preventDefault();
       this.save();
@@ -113,8 +122,9 @@ Editor.Views.Form = Backbone.View.extend({
    */
   render: function() {
 
-    // Activate "Text".
+    // Starting states.
     $(this.tabs[0]).tab('show');
+    this.setSaved();
 
     // Text.
     this.head.            text(this.model.get('title'));
@@ -145,6 +155,9 @@ Editor.Views.Form = Backbone.View.extend({
    */
   save: function() {
 
+    // Set button.
+    this.setSaving();
+
     // Commit model.
     this.model.save({
 
@@ -166,12 +179,31 @@ Editor.Views.Form = Backbone.View.extend({
 
     }, {
 
-      // Update head.
+      // Update head and button.
       success: _.bind(function() {
         this.updateHead();
+        this.setSaved();
       }, this)
 
     });
+
+  },
+
+  /*
+   * Register a content change.
+   *
+   * @return void.
+   */
+  change: function() {
+
+    // Clear running timer.
+    clearTimeout(this.timer);
+    this.setUnsaved();
+
+    // Save after 3s.
+    this.timer = setTimeout(_.bind(function() {
+      this.save();
+    }, this), 3000);
 
   },
 
@@ -182,6 +214,33 @@ Editor.Views.Form = Backbone.View.extend({
    */
   updateHead: function() {
     this.head.text(this.model.get('title'));
+  },
+
+  /*
+   * Set the saved button to "Saved" mode.
+   *
+   * @return void.
+   */
+  setSaved: function() {
+    this.saveButton.text('Saved');
+  },
+
+  /*
+   * Set the saved button to "Saved" mode.
+   *
+   * @return void.
+   */
+  setUnsaved: function() {
+    this.saveButton.text('Save');
+  },
+
+  /*
+   * Set the saved button to "Saving.." mode.
+   *
+   * @return void.
+   */
+  setSaving: function() {
+    this.saveButton.text('Saving..');
   }
 
 });

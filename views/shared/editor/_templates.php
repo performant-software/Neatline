@@ -35,6 +35,7 @@
       <li><a href="#form-text" data-toggle="tab">Text</a></li>
       <li><a href="#form-spatial" data-toggle="tab">Spatial</a></li>
       <li><a href="#form-style" data-toggle="tab">Style</a></li>
+      <li><a href="#form-tags" data-toggle="tab">Tags</a></li>
     </ul>
 
     <div class="tab-content">
@@ -59,7 +60,7 @@
 
       <div class="tab-pane" id="form-spatial">
 
-        <legend>Edit Controls</legend>
+        <legend>Edit Geometry</legend>
 
         <label class="radio">
           <input type="radio" name="mapControls" value="pan" checked>
@@ -210,6 +211,10 @@
             </div>
           </div>
         </div>
+
+      </div>
+
+      <div class="tab-pane" id="form-tags">
 
       </div>
 
