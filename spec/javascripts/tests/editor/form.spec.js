@@ -55,4 +55,44 @@ describe('Form', function() {
 
   });
 
+  it('should PUT well-formed data on save', function() {
+
+    // Enter new data.
+    _t.form.title.val('Record 2');
+    _t.form.body.val('Record 2 desc.');
+    _t.form.vectorColor.val('#222222');
+    _t.form.strokeColor.val('#444444');
+    _t.form.selectColor.val('#666666');
+    _t.form.vectorOpacity.val('2');
+    _t.form.selectOpacity.val('4');
+    _t.form.strokeOpacity.val('6');
+    _t.form.graphicOpacity.val('8');
+    _t.form.strokeWidth.val('10');
+    _t.form.pointRadius.val('12');
+    _t.form.pointGraphic.val('file2.png');
+    _t.form.coverage.val('kml2');
+
+    // Click save, capture request.
+    _t.form.saveButton.trigger('click');
+    var request = mostRecentAjaxRequest();
+    var params = $.parseJSON(request.params);
+
+    // Check query string.
+    expect(request.url).toEqual('/neatline/record/');
+    expect(params.title).toEqual('Record 2');
+    expect(params.description).toEqual('Record 2 desc.');
+    expect(params.vector_color).toEqual('#222222');
+    expect(params.stroke_color).toEqual('#444444');
+    expect(params.select_color).toEqual('#666666');
+    expect(params.vector_opacity).toEqual('2');
+    expect(params.select_opacity).toEqual('4');
+    expect(params.stroke_opacity).toEqual('6');
+    expect(params.graphic_opacity).toEqual('8');
+    expect(params.stroke_width).toEqual('10');
+    expect(params.point_radius).toEqual('12');
+    expect(params.point_image).toEqual('file2.png');
+    expect(params.coverage).toEqual('kml2');
+
+  });
+
 });

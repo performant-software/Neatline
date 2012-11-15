@@ -162,7 +162,8 @@ Editor.Views.Form = Backbone.View.extend({
       graphic_opacity:    this.graphicOpacity.val(),
       stroke_width:       this.strokeWidth.val(),
       point_radius:       this.pointRadius.val(),
-      point_image:        this.pointGraphic.val()
+      point_image:        this.pointGraphic.val(),
+      coverage:           this.coverage.val()
 
     }, {
 
