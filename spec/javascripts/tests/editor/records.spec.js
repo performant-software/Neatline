@@ -12,23 +12,23 @@
 
 describe('Records', function() {
 
-  var editor, records;
-
-  var json = {
-    status: 200, responseText: readFixtures('editor-records.json')
-  };
+  var editor, records, server;
+  var json = readFixtures('records.json');
 
   // Get fixtures.
   beforeEach(function() {
 
-    // Load partial.
+    // Load partial, mock server.
     loadFixtures('editor-partial.html');
-    jasmine.Ajax.useMock();
+    server = sinon.fakeServer.create();
 
     // Run Editor.
     _t.loadEditor();
-    var request = mostRecentAjaxRequest();
-    request.response(json);
+
+    // Intercept requests.
+    _.each(server.requests, function(r) {
+      r.respond(200, {'Content-Type':'application/json'}, json);
+    });
 
     // Get records and editor.
     records = _t.records.$el.find('.record-row');

@@ -9,27 +9,26 @@
 
 describe('Map', function() {
 
-  var layers, layer, feature;
-
-  var json = {
-    status: 200, responseText: readFixtures('map-records.json')
-  };
+  var layers, layer, feature, server;
+  var json = readFixtures('records.json');
 
   // Get fixtures.
   beforeEach(function() {
 
-    // Load partial, install ajax mock.
+    // Load partial, mock server.
     loadFixtures('neatline-partial.html');
-    jasmine.Ajax.useMock();
+    server = sinon.fakeServer.create();
 
     // Run Neatline.
     _t.loadNeatline();
-    var request = mostRecentAjaxRequest();
-    request.response(json);
+
+    // Intercept requests.
+    _.each(server.requests, function(r) {
+      r.respond(200, {'Content-Type':'application/json'}, json);
+    });
 
     // Get layer and feature.
-    layers = _t.getVectorLayers();
-    layer = layers[0];
+    layers = _t.getVectorLayers(); layer = layers[0];
     feature = layer.features[0];
 
   });
@@ -42,8 +41,8 @@ describe('Map', function() {
 
     // Restart.
     _t.loadNeatline();
-    var request = mostRecentAjaxRequest();
-    request.response(json);
+    var request = _.last(server.requests);
+    request.respond(200, {'Content-Type':'application/json'}, json);
 
     // Check viewport.
     var center = _t.map.map.getCenter();
@@ -61,8 +60,8 @@ describe('Map', function() {
 
     // Restart.
     _t.loadNeatline();
-    var request = mostRecentAjaxRequest();
-    request.response(json);
+    var request = _.last(server.requests);
+    request.respond(200, {'Content-Type':'application/json'}, json);
 
     // Check viewport.
     expect(_t.map.map.zoom).toEqual(_t.map.options.defaultZoom);

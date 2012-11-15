@@ -3,6 +3,6 @@
   , "version": "2.0"
   , "dependencies": {
       "jasmine-jquery": ">= 1.4.2"
-    , "jasmine-ajax": "https://github.com/pivotal/jasmine-ajax.git"
+    , "sinon.js": "*"
   }
 }
