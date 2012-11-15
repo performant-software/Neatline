@@ -15,51 +15,6 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
 {
 
     /**
-     * /records should emit a JSON object containing all record data
-     * needed by the editor.
-     *
-     * @return void.
-     */
-    public function testRecords()
-    {
-
-        // Create exhibit and record.
-        $exhibit = $this->__exhibit();
-        $record1 = $this->__record(null, $exhibit);
-        $record2 = $this->__record(null, $exhibit);
-
-        // Hit data route.
-        $this->dispatch('neatline/editor/records/'.$exhibit->id);
-        $response = json_decode($this->getResponse()->getBody('default'));
-
-        // Check code and length.
-        $this->assertResponseCode(200);
-        $this->assertEquals(count($response), 2);
-
-        // Check for keys.
-        $this->assertObjectHasAttribute('id',                 $response[0]);
-        $this->assertObjectHasAttribute('item_id',            $response[0]);
-        $this->assertObjectHasAttribute('title',              $response[0]);
-        $this->assertObjectHasAttribute('description',        $response[0]);
-        $this->assertObjectHasAttribute('slug',               $response[0]);
-        $this->assertObjectHasAttribute('vector_color',       $response[0]);
-        $this->assertObjectHasAttribute('stroke_color',       $response[0]);
-        $this->assertObjectHasAttribute('select_color',       $response[0]);
-        $this->assertObjectHasAttribute('vector_opacity',     $response[0]);
-        $this->assertObjectHasAttribute('select_opacity',     $response[0]);
-        $this->assertObjectHasAttribute('stroke_opacity',     $response[0]);
-        $this->assertObjectHasAttribute('graphic_opacity',    $response[0]);
-        $this->assertObjectHasAttribute('stroke_width',       $response[0]);
-        $this->assertObjectHasAttribute('point_radius',       $response[0]);
-        $this->assertObjectHasAttribute('point_image',        $response[0]);
-        $this->assertObjectHasAttribute('map_focus',          $response[0]);
-        $this->assertObjectHasAttribute('coverage',           $response[0]);
-        $this->assertObjectHasAttribute('wmsAddress',         $response[0]);
-        $this->assertObjectHasAttribute('layers',             $response[0]);
-
-    }
-
-    /**
      * /form should update a record on PUT.
      *
      * @return void.
@@ -87,7 +42,7 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
         $record->point_image      = 'file.png';
         $record->map_focus        = 'lat/lon';
         $record->map_zoom         = 7;
-        $record->coverage      = 'kml';
+        $record->coverage         = 'kml';
         $record->map_active       = 1;
         $record->save();
 
@@ -110,7 +65,7 @@ class Neatline_EditorControllerTest extends Neatline_Test_AppTestCase
             'point_image'         => 'file2.png',
             'map_focus'           => 'lat2/lon2',
             'map_zoom'            => '70',
-            'coverage'         => 'kml2',
+            'coverage'            => 'kml2',
             'map_active'          => '0'
         );
 

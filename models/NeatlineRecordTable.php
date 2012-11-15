@@ -213,36 +213,7 @@ class NeatlineRecordTable extends Omeka_Db_Table
 
 
     /**
-     * Construct records JSON for exhibit.
-     *
-     * @param Omeka_Record_AbstractRecord $exhibit The exhibit record.
-     *
-     * @return JSON Array of records.
-     */
-    public function buildJsonForExhibit($exhibit)
-    {
-
-        $data = array();
-        $wmsIndex = array();
-
-        // Get records.
-        if ($records = $this->getRecordsByExhibit($exhibit)) {
-
-            // Cache records.
-            $index = $this->_indexRecords($records);
-
-            // Construct record objects.
-            foreach ($records as $record)
-                $data[] = $record->buildJsonData($index, $exhibit);
-
-        }
-
-        return $data;
-
-    }
-
-    /**
-     * Construct records JSON for editor.
+     * Construct records JSON for exhibit and editor.
      *
      * @param Omeka_Record_AbstractRecord $exhibit The exhibit record.
      * @param string $query The search query.
@@ -250,7 +221,7 @@ class NeatlineRecordTable extends Omeka_Db_Table
      *
      * @return JSON Array of records.
      */
-    public function buildJsonForEditor($exhibit, $query=null, $page=null)
+    public function buildRecordCollection($exhibit, $query=null, $page=null)
     {
 
         $data = array();
@@ -267,21 +238,6 @@ class NeatlineRecordTable extends Omeka_Db_Table
 
         return $data;
 
-    }
-
-    /**
-     * This indexes the array of records by their ID.
-     *
-     * @param array $records Array of data records.
-     *
-     * @return array $index Indexes associative array of data records.
-     * @author Eric Rochester <erochest@virginia.edu>
-     **/
-    protected function _indexRecords($records)
-    {
-        $index = array();
-        foreach ($records as $record) $index[$record->id] = $record;
-        return $index;
     }
 
 }

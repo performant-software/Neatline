@@ -7,7 +7,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Editor.Modules.Records = (function(Backbone, Editor) {
+Editor.Modules.Records = (function(Backbone, Editor, Neatline) {
 
   var Records = {};
 
@@ -19,7 +19,7 @@ Editor.Modules.Records = (function(Backbone, Editor) {
    */
   Records.init = function() {
     this.view = new Editor.Views.Records({ el: '#editor' });
-    this.collection = new Editor.Collections.Records();
+    this.collection = new Neatline.Collections.Records();
     this.fetch();
   };
 
@@ -63,4 +63,4 @@ Editor.Modules.Records = (function(Backbone, Editor) {
   Editor.addInitializer(function() { Records.init(); });
   return Records;
 
-})(Backbone, Editor);
+})(Backbone, Editor, Neatline);

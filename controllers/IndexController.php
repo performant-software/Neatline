@@ -138,7 +138,9 @@ class Neatline_IndexController extends Omeka_Controller_AbstractActionController
         $exhibit = $this->exhibitsTable->find($this->_request->id);
 
         // Output the JSON string.
-        echo json_encode($this->recordsTable->buildJsonForExhibit($exhibit));
+        echo json_encode($this->recordsTable->buildRecordCollection(
+            $exhibit, $this->_request->query, (int) $this->_request->page
+        ));
 
     }
 

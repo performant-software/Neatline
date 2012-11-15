@@ -625,12 +625,12 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
     }
 
     /**
-     * buildJsonForExhibit() should construct a well-formed array of records
+     * buildRecordCollection() should construct a well-formed array of records
      * with all attributes needed for the front-end application.
      *
      * @return void.
      */
-    public function testBuildJsonForExhibit()
+    public function testBuildRecordCollection()
     {
 
         // Create an exhibit and items.
@@ -683,7 +683,7 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
         $record2->save();
 
         // Build the record array.
-        $records = $this->_recordsTable->buildJsonForExhibit($exhibit);
+        $records = $this->_recordsTable->buildRecordCollection($exhibit);
 
         // Check result.
         $this->assertEquals(

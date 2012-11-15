@@ -43,30 +43,7 @@ class Neatline_EditorController extends Omeka_Controller_AbstractActionControlle
 
     /**
      * ~ AJAX ~
-     * Get list of records for the browser.
-     *
-     * @return void
-     */
-    public function recordsAction()
-    {
-
-        // Supress the default layout.
-        $this->_helper->viewRenderer->setNoRender(true);
-        $this->getResponse()->setHeader('Content-type', 'application/json');
-
-        // Get exhibit.
-        $exhibit = $this->exhibitsTable->find($this->_request->id);
-
-        // Get records.
-        echo json_encode($this->recordsTable->buildJsonForEditor(
-            $exhibit, $this->_request->query, (int) $this->_request->page
-        ));
-
-    }
-
-    /**
-     * ~ AJAX ~
-     * .
+     * Rest interface for individual record.
      *
      * @return void
      */
