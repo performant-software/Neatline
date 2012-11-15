@@ -69,10 +69,11 @@ function neatline_queueGoogleMapsApi()
 function neatline_renderExhibit($exhibit)
 {
     return json_encode(array(
-        'id' => $exhibit->id,
-        'dataSource' => neatline_getExhibitDataSource($exhibit),
-        'mapFocus' => $exhibit->map_focus,
-        'mapZoom' => $exhibit->map_zoom
+        'id'              => $exhibit->id,
+        'recordsSource'   => neatline_getRecordsDataSource($exhibit),
+        'recordSource'    => neatline_getRecordDataSource($exhibit),
+        'mapFocus'        => $exhibit->map_focus,
+        'mapZoom'         => $exhibit->map_zoom
     ));
 }
 
@@ -85,23 +86,7 @@ function neatline_renderExhibit($exhibit)
  */
 function neatline_renderEditor($exhibit)
 {
-    return json_encode(array(
-        'id' => $exhibit->id,
-        'recordsSource' => neatline_getRecordsDataSource($exhibit),
-        'formSource' => neatline_getFormDataSource($exhibit)
-    ));
-}
-
-/**
- * Get the data emitter URL for an exhibit.
- *
- * @param NeatlineExhibit $exhibit The exhibit.
- *
- * @return string The url.
- */
-function neatline_getExhibitDataSource($exhibit)
-{
-    return public_url('neatline/records/' . $exhibit->id);
+    return json_encode(array('id' => $exhibit->id));
 }
 
 /**
@@ -123,7 +108,7 @@ function neatline_getRecordsDataSource($exhibit)
  *
  * @return string The url.
  */
-function neatline_getFormDataSource($exhibit)
+function neatline_getRecordDataSource($exhibit)
 {
     return public_url('neatline/record/' . $exhibit->id);
 }

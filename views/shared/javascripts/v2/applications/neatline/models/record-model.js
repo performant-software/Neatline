@@ -8,5 +8,5 @@
  */
 
 Neatline.Models.Record = Backbone.Model.extend({
-  url: (function() { return __editor.formSource; })
+  url: (function() { return __exhibit.recordSource; })
 });
