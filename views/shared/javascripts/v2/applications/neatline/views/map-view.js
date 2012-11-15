@@ -142,6 +142,9 @@ Neatline.Views.Map = Backbone.View.extend({
         // Add to map, track.
         layer.addFeatures(geometry);
         this.map.addLayer(layer);
+
+        // Store id, add to tracker.
+        layer.nId = record.get('id');
         this.layers.push(layer);
 
       }
@@ -232,6 +235,17 @@ Neatline.Views.Map = Backbone.View.extend({
     this.hoverControl.activate();
     this.clickControl.activate();
 
+  },
+
+  /*
+   * Get the map vector layer for the passed record model.
+   *
+   * @param {Object} model: The record model.
+   *
+   * @return {Object|OpenLayers.Layer.Vector} The vector layer.
+   */
+  getLayerByModel: function(model) {
+    return _.first(this.map.getLayersBy('nId', model.get('id')));
   },
 
   /*

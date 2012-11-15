@@ -19,8 +19,23 @@ Editor.Modules.Map = (function(Backbone, Editor, Neatline) {
    */
   Map.init = function() {
     this.view = Neatline.Modules.Map.view;
-    this.view.test();
   };
+
+
+  // -------
+  // Events.
+  // -------
+
+  /*
+   * Show form.
+   *
+   * @param {Object} model: The record model.
+   *
+   * @return void.
+   */
+  Editor.vent.on('records:openForm', function(model) {
+    Map.view.edit(model);
+  });
 
 
   // Export.
