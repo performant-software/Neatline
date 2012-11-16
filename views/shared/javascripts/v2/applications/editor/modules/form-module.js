@@ -10,7 +10,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Editor.Modules.Form = (function(Backbone, Editor) {
+Editor.Modules.Form = (function(Backbone, Editor, Neatline) {
 
   var Form = {};
 
@@ -30,13 +30,24 @@ Editor.Modules.Form = (function(Backbone, Editor) {
   // -------
 
   /*
-   * Show form.
+   * Show form on record row click.
    *
    * @param {Object} model: The record model.
    *
    * @return void.
    */
   Editor.vent.on('records:openForm', function(model) {
+    Form.view.show(model);
+  });
+
+  /*
+   * Show form on map feature click.
+   *
+   * @param {Object} model: The record model.
+   *
+   * @return void.
+   */
+  Neatline.vent.on('map:select', function(model) {
     Form.view.show(model);
   });
 
@@ -56,4 +67,4 @@ Editor.Modules.Form = (function(Backbone, Editor) {
   Editor.addInitializer(function() { Form.init(); });
   return Form;
 
-})(Backbone, Editor);
+})(Backbone, Editor, Neatline);

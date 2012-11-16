@@ -245,7 +245,8 @@ describe('Map', function() {
 
     // Check render intent and publication.
     expect(feature.renderIntent).toEqual('temporary');
-    expect(Neatline.vent.trigger).toHaveBeenCalledWith('map:highlight');
+    expect(Neatline.vent.trigger).toHaveBeenCalledWith(
+      'map:highlight', layer.nModel);
 
   });
 
@@ -282,7 +283,8 @@ describe('Map', function() {
 
     // Check render intent and publication.
     expect(feature.renderIntent).toEqual('default');
-    expect(Neatline.vent.trigger).toHaveBeenCalledWith('map:unhighlight');
+    expect(Neatline.vent.trigger).toHaveBeenCalledWith(
+      'map:unhighlight', layer.nModel);
 
   });
 
@@ -305,7 +307,8 @@ describe('Map', function() {
 
     // Check render intent and publication.
     expect(feature.renderIntent).toEqual('select');
-    expect(Neatline.vent.trigger).toHaveBeenCalledWith('map:select');
+    expect(Neatline.vent.trigger).toHaveBeenCalledWith(
+      'map:select', layer.nModel);
 
   });
 
@@ -342,7 +345,8 @@ describe('Map', function() {
 
     // Check render intent and publication.
     expect(feature.renderIntent).toEqual('default');
-    expect(Neatline.vent.trigger).toHaveBeenCalledWith('map:unselect');
+    expect(Neatline.vent.trigger).toHaveBeenCalledWith(
+      'map:unselect', layer.nModel);
 
   });
 

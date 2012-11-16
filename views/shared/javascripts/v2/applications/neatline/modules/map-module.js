@@ -40,6 +40,17 @@ Neatline.Modules.Map = (function(Backbone, Neatline) {
     Map.view.ingest(records);
   });
 
+  /*
+   * Focus the map for a record.
+   *
+   * @param {Object} model: The record model.
+   *
+   * @return void.
+   */
+  Neatline.vent.on('map:focus', function(model) {
+    Map.view.focusByModel(model);
+  });
+
 
   // Export.
   Neatline.addInitializer(function() { Map.init(); });

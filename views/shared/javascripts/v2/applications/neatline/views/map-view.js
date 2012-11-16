@@ -180,8 +180,11 @@ Neatline.Views.Map = Backbone.View.extend({
       layer.addFeatures(geometry);
       this.map.addLayer(layer);
 
-      // Store id, add to tracker.
+      // Store model, id.
+      layer.nModel = record;
       layer.nId = record.get('id');
+
+      // Track layer.
       this.layers.push(layer);
 
     }
@@ -291,7 +294,7 @@ Neatline.Views.Map = Backbone.View.extend({
    * @return void.
    */
   onFeatureSelect: function(feature) {
-    Neatline.vent.trigger('map:select');
+    Neatline.vent.trigger('map:select', feature.layer.nModel);
   },
 
   /*
@@ -302,29 +305,29 @@ Neatline.Views.Map = Backbone.View.extend({
    * @return void.
    */
   onFeatureUnselect: function(feature) {
-    Neatline.vent.trigger('map:unselect');
+    Neatline.vent.trigger('map:unselect', feature.layer.nModel);
   },
 
   /*
    * When a feature is highlighted.
    *
-   * @param {Object|OpenLayers.Feature} feature: The feature.
+   * @param {Object} evt: The highlight event.
    *
    * @return void.
    */
-  onFeatureHighlight: function(feature) {
-    Neatline.vent.trigger('map:highlight');
+  onFeatureHighlight: function(evt) {
+    Neatline.vent.trigger('map:highlight', evt.feature.layer.nModel);
   },
 
   /*
    * When a feature is un-highlighted.
    *
-   * @param {Object|OpenLayers.Feature} feature: The feature.
+   * @param {Object} evt: The unhighlight event.
    *
    * @return void.
    */
-  onFeatureUnhighlight: function(feature) {
-    Neatline.vent.trigger('map:unhighlight');
+  onFeatureUnhighlight: function(evt) {
+    Neatline.vent.trigger('map:unhighlight', evt.feature.layer.nModel);
   }
 
 });
