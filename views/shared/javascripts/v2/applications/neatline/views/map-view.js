@@ -22,7 +22,6 @@ Neatline.Views.Map = Backbone.View.extend({
    * @return void.
    */
   initialize: function() {
-    this.layers = [];
     this.initializeOpenLayers();
   },
 
@@ -124,7 +123,8 @@ Neatline.Views.Map = Backbone.View.extend({
    * @return void.
    */
   ingest: function(records) {
-    records.each(_.bind(function(r) { this.buildLayer(r); }, this));
+    this.layers = [];
+    records.each(_.bind(this.buildLayer, this));
     this.addCursorControls();
   },
 

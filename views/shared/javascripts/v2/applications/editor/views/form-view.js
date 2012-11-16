@@ -231,6 +231,17 @@ Editor.Views.Form = Backbone.View.extend({
   getModifySettings: function() {
     var inputs = $('input[name="modifySettings"]:checked');
     return _.map(inputs, function(i) { return $(i).val(); });
+  },
+
+  /*
+   * Update the coverage textarea.
+   *
+   * @param {String} coverage: The new KML.
+   *
+   * @return void.
+   */
+  setCoverage: function(coverage) {
+    this.coverage.val(coverage);
   }
 
 });

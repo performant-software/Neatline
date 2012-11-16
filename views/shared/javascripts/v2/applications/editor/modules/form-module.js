@@ -37,6 +37,17 @@ Editor.Modules.Form = (function(Backbone, Editor) {
     Form.view.show(model);
   });
 
+  /*
+   * Push updated KML back into the form.
+   *
+   * @param {String} coverage: The new KML.
+   *
+   * @return void.
+   */
+  Editor.vent.on('map:newCoverage', function(coverage) {
+    Form.view.setCoverage(coverage);
+  });
+
 
   // Export.
   Editor.addInitializer(function() { Form.init(); });
