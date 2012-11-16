@@ -36,8 +36,10 @@ Editor.Views.Form = Backbone.View.extend({
 
     // Spatial.
     this.sides =          this.form.find('input[name="sides"]');
-    this.spatial =        this.form.find('div.geometry-controls input');
+    this.snap =           this.form.find('input[name="snap"]');
+    this.irregular =      this.form.find('input[name="irregular"]');
     this.coverage =       this.form.find('textarea[name="coverage"]');
+    this.spatial =        this.form.find('div.geometry input');
 
     // Styles.
     this.vectorColor =    this.form.find('input[name="vector-color"]');
@@ -203,14 +205,16 @@ Editor.Views.Form = Backbone.View.extend({
   updateMap: function() {
 
     // Get values.
-    var control = this.getMapControl();
-    var modify = this.getModifySettings();
-    var sides = this.sides.val();
+    var settings = {
+      modify:   this.getModifySettings(),
+      sides:    this.sides.val(),
+      irreg:    this.irregular.is(':checked'),
+      control:  this.getMapControl(),
+      snap:     this.snap.val()
+    };
 
     // Publish.
-    Editor.vent.trigger('form:updateMap', {
-      control: control, modify: modify, sides: sides
-    });
+    Editor.vent.trigger('form:updateMap', settings);
 
   },
 

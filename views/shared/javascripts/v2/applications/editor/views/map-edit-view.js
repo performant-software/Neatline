@@ -105,9 +105,21 @@ Neatline.Views.Map.prototype.update = function(settings) {
 
   }
 
-  // Set sides.
+
+  // -----------------------------
+  // Set regular polygon settings.
+  // -----------------------------
+
+  // Sides.
   var sides = _.isNaN(settings.sides) ? 0 : settings.sides;
   this.controls.reg.handler.sides = Math.max(3, sides);
+
+  // Snap angle.
+  var snap = _.isNaN(settings.snap) ? 0 : settings.snap;
+  this.controls.reg.handler.snapAngle = parseFloat(snap);
+
+  // Irregular.
+  this.controls.reg.handler.irregular = settings.irreg;
 
 
   // ----------------------------
@@ -126,6 +138,7 @@ Neatline.Views.Map.prototype.update = function(settings) {
   if (_.contains(settings.modify, 'drag'))
     this.controls.edit.mode |= OpenLayers.Control.ModifyFeature.DRAG;
 
+  console.log('test');
 
 };
 

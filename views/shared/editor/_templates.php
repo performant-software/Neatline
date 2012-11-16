@@ -61,7 +61,7 @@
 
         <legend>Edit Geometry</legend>
 
-        <div class="geometry-controls">
+        <div class="geometry">
 
           <label class="radio">
             <input type="radio" name="mapControls" value="pan" checked>
@@ -130,6 +130,11 @@
             </label>
 
           </div>
+
+          <label class="radio">
+            <input type="radio" name="mapControls" value="delete">
+            Delete Shape
+          </label>
 
         </div>
 
