@@ -103,7 +103,8 @@ Neatline.Views.Map.prototype.update = function(settings) {
   }
 
   // Set sides.
-  // this.controls.reg.handler.sides = settings.sides;
+  var sides = _.isNaN(settings.sides) ? 0 : settings.sides;
+  this.controls.reg.handler.sides = Math.max(3, sides);
 
 
   // ----------------------------
