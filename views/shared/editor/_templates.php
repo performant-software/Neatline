@@ -85,10 +85,27 @@
 
           <label class="radio">
             <input type="radio" name="mapControls" value="regPoly">
-            Draw Regular Polygon |
-            <input type="text" class="input-small" name="sides" value="3" />
-            sides
+            Draw Regular Polygon
           </label>
+
+          <div class="control-group indent regular-polygon">
+
+            <div class="inline-inputs">
+              <input type="text" name="sides" value="3" />
+              Sides
+            </div>
+
+            <div class="inline-inputs">
+              <input type="text" name="snap" value="5" />
+              Snap Angle (degrees)
+            </div>
+
+            <label class="checkbox">
+              <input type="checkbox" name="irregular">
+              Irregular?
+            </label>
+
+          </div>
 
           <label class="radio">
             <input type="radio" name="mapControls" value="modify">

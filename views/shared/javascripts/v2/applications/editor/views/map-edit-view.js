@@ -42,7 +42,10 @@ Neatline.Views.Map.prototype.edit = function(model) {
 
     reg:    new OpenLayers.Control.DrawFeature(this.editLayer,
                 OpenLayers.Handler.RegularPolygon, {
-                  featureAdded: _.bind(this.publish,this)
+                  featureAdded: _.bind(this.publish,this),
+                  handlerOptions: {
+                    snapAngle: 5
+                  }
                 }),
 
     edit:   new OpenLayers.Control.ModifyFeature(this.editLayer,
