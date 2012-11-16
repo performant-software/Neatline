@@ -35,7 +35,6 @@
       <li><a href="#form-text" data-toggle="tab">Text</a></li>
       <li><a href="#form-spatial" data-toggle="tab">Spatial</a></li>
       <li><a href="#form-style" data-toggle="tab">Style</a></li>
-      <li><a href="#form-tags" data-toggle="tab">Tags</a></li>
     </ul>
 
     <div class="tab-content">

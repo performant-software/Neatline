@@ -70,7 +70,7 @@ Neatline.Views.Map.prototype.update = function(settings) {
 
 
   // Deactivate all controls, reset modify mode.
-  _.each(this.controls, function(k,v) { v.deactivate(); });
+  _.each(this.controls, function(val,key) { val.deactivate(); });
   this.controls.edit.mode = OpenLayers.Control.ModifyFeature.RESHAPE;
 
 
@@ -103,7 +103,7 @@ Neatline.Views.Map.prototype.update = function(settings) {
   }
 
   // Set sides.
-  this.controls.reg.handler.sides = settings.sides;
+  // this.controls.reg.handler.sides = settings.sides;
 
 
   // ----------------------------
