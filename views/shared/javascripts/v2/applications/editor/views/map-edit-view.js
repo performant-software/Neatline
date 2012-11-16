@@ -1,3 +1,6 @@
+
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2; */
+
 /**
  * Injects editor-endemic methods into Neatline map view.
  *
