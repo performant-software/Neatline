@@ -1,1 +1,11 @@
-<kml xmlns="http://earth.google.com/kml/2.0"><Folder><name>OpenLayers export</name><description>Exported on Wed Nov 07 2012 14:46:28 GMT-0500 (EST)</description><Placemark><name>OpenLayers.Feature.Vector_147</name><description>No description available</description><Point><coordinates>-8233185.189506843,4978802.273690212</coordinates></Point></Placemark><Placemark><name>OpenLayers.Feature.Vector_4440</name><description>No description available</description><Polygon><outerBoundaryIs><LinearRing><coordinates>-9911323.1210892,5236723.4993313 -9911070.5205973,5236830.3917381 -9911062.7574616,5236638.1048388 -9911210.2570396,5236678.7120101 -9911371.4913962,5236628.5502103 -9911422.8475245,5236691.25246 -9911323.1210892,5236723.4993313</coordinates></LinearRing></outerBoundaryIs></Polygon></Placemark></Folder></kml>
+<kml xmlns="http://earth.google.com/kml/2.0">
+  <Folder>
+    <name>New York</name>
+    <Placemark>
+      <name>New York</name>
+      <Point>
+        <coordinates>-8233185.189506843,4978802.273690212</coordinates>
+      </Point>
+    </Placemark>
+  </Folder>
+</kml>

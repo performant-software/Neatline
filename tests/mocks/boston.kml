@@ -1,1 +1,11 @@
-<kml xmlns="http://earth.google.com/kml/2.0"><Folder><name>OpenLayers export</name><description>Exported on Thu Nov 08 2012 13:25:56 GMT-0500 (EST)</description><Placemark><name>OpenLayers.Feature.Vector_800</name><description>No description available</description><Point><coordinates>-7910926.6783014,5214839.817002</coordinates></Point></Placemark></Folder></kml>
+<kml xmlns="http://earth.google.com/kml/2.0">
+  <Folder>
+    <name>Boston</name>
+    <Placemark>
+      <name>Boston</name>
+      <Point>
+        <coordinates>-7910926.6783014,5214839.817002</coordinates>
+      </Point>
+    </Placemark>
+  </Folder>
+</kml>

@@ -53,7 +53,7 @@ describe('Form', function() {
     expect(_t.form.strokeWidth.val()).toEqual('9');
     expect(_t.form.pointRadius.val()).toEqual('11');
     expect(_t.form.pointGraphic.val()).toEqual('file1.png');
-    expect(_t.form.coverage.val().indexOf('Vector_147')).
+    expect(_t.form.coverage.val().indexOf('New York')).
       not.toEqual(-1);
 
   });

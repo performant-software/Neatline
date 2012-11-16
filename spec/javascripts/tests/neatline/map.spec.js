@@ -350,4 +350,12 @@ describe('Map', function() {
 
   });
 
+  it('should focus on model features on map:focus', function() {
+
+    // Trigger map:focus.
+    Neatline.vent.trigger('map:focus', layer.nModel);
+    // TODO|dev.
+
+  });
+
 });
