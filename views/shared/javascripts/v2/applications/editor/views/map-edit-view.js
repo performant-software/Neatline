@@ -22,35 +22,38 @@ Neatline.Views.Map.prototype.edit = function(model) {
 
   // Get the vector layer for the model.
   this.editLayer = this.getLayerByModel(model);
-  this.editFeature = null;
 
-  // Point.
-  var point = new OpenLayers.Control.DrawFeature(
-                  this.editLayer, OpenLayers.Handler.Point, {
-                  featureAdded: _.bind(this.publish,this) });
+  this.controls = {
 
-  // Line.
-  var line =  new OpenLayers.Control.DrawFeature(
-                  this.editLayer, OpenLayers.Handler.Path, {
-                  featureAdded: _.bind(this.publish,this) });
+    point:  new OpenLayers.Control.DrawFeature(this.editLayer,
+                OpenLayers.Handler.Point, {
+                  featureAdded: _.bind(this.publish,this)
+                }),
 
-  // Polygon.
-  var poly =  new OpenLayers.Control.DrawFeature(
-                  this.editLayer, OpenLayers.Handler.Polygon, {
-                  featureAdded: _.bind(this.publish,this) });
+    line:   new OpenLayers.Control.DrawFeature(this.editLayer,
+                OpenLayers.Handler.Path, {
+                  featureAdded: _.bind(this.publish,this)
+                }),
 
-  // Regular.
-  var reg =   new OpenLayers.Control.DrawFeature(
-                  this.editLayer, OpenLayers.Handler.RegularPolygon, {
-                  featureAdded: _.bind(this.publish,this) });
+    poly:   new OpenLayers.Control.DrawFeature(this.editLayer,
+                OpenLayers.Handler.Polygon, {
+                  featureAdded: _.bind(this.publish,this)
+                }),
 
-  // Modify.
-  var edit =  new OpenLayers.Control.ModifyFeature(this.editLayer, {
-                  onModification: _.bind(this.publish,this)});
+    reg:    new OpenLayers.Control.DrawFeature(this.editLayer,
+                OpenLayers.Handler.RegularPolygon, {
+                  featureAdded: _.bind(this.publish,this)
+                }),
 
-  // Store and add controls.
-  this.controls = [point, line, poly, reg, edit];
-  this.map.addControls(this.controls);
+    edit:   new OpenLayers.Control.ModifyFeature(this.editLayer,
+                { onModification: _.bind(this.publish,this) })
+
+  };
+
+  // Add controls.
+  _.each(this.controls, _.bind(function(val,key) {
+    this.map.addControl(val);
+  }, this));
 
 };
 
@@ -67,8 +70,8 @@ Neatline.Views.Map.prototype.update = function(settings) {
 
 
   // Deactivate all controls, reset modify mode.
-  _.each(this.controls, function(c) { c.deactivate(); });
-  this.controls[4].mode = OpenLayers.Control.ModifyFeature.RESHAPE;
+  _.each(this.controls, function(k,v) { v.deactivate(); });
+  this.controls.edit.mode = OpenLayers.Control.ModifyFeature.RESHAPE;
 
 
   // -----------------
@@ -78,29 +81,29 @@ Neatline.Views.Map.prototype.update = function(settings) {
   switch (settings.control) {
 
     case 'point':
-      this.controls[0].activate();
+      this.controls.point.activate();
       break;
 
     case 'line':
-      this.controls[1].activate();
+      this.controls.line.activate();
       break;
 
     case 'poly':
-      this.controls[2].activate();
+      this.controls.poly.activate();
       break;
 
     case 'regPoly':
-      this.controls[3].activate();
+      this.controls.reg.activate();
       break;
 
     case 'modify':
-      this.controls[4].activate();
+      this.controls.edit.activate();
       break;
 
   }
 
   // Set sides.
-  this.controls[3].handler.sides = settings.sides;
+  this.controls.reg.handler.sides = settings.sides;
 
 
   // ----------------------------
@@ -109,15 +112,15 @@ Neatline.Views.Map.prototype.update = function(settings) {
 
   // Rotate.
   if (_.contains(settings.modify, 'rotate'))
-    this.controls[4].mode |= OpenLayers.Control.ModifyFeature.ROTATE;
+    this.controls.edit.mode |= OpenLayers.Control.ModifyFeature.ROTATE;
 
   // Resize.
   if (_.contains(settings.modify, 'resize'))
-    this.controls[4].mode |= OpenLayers.Control.ModifyFeature.RESIZE;
+    this.controls.edit.mode |= OpenLayers.Control.ModifyFeature.RESIZE;
 
   // Drag.
   if (_.contains(settings.modify, 'drag'))
-    this.controls[4].mode |= OpenLayers.Control.ModifyFeature.DRAG;
+    this.controls.edit.mode |= OpenLayers.Control.ModifyFeature.DRAG;
 
 
 };
