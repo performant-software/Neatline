@@ -42,14 +42,14 @@ Neatline.Views.Map.prototype.edit = function(model) {
 
     reg:    new OpenLayers.Control.DrawFeature(this.editLayer,
                 OpenLayers.Handler.RegularPolygon, {
-                  featureAdded: _.bind(this.publish,this),
-                  handlerOptions: {
-                    snapAngle: 5
-                  }
+                  featureAdded: _.bind(this.publish,this)
                 }),
 
     edit:   new OpenLayers.Control.ModifyFeature(this.editLayer,
-                { onModification: _.bind(this.publish,this) })
+                { onModification: _.bind(this.publish,this)}),
+
+    del:    new OpenLayers.Control.ModifyFeature(this.editLayer,
+                { onModificationStart: _.bind(this.remove,this)})
 
   };
 
@@ -103,6 +103,10 @@ Neatline.Views.Map.prototype.update = function(settings) {
       this.controls.edit.activate();
       break;
 
+    case 'delete':
+      this.controls.del.activate();
+      break;
+
   }
 
 
@@ -138,8 +142,6 @@ Neatline.Views.Map.prototype.update = function(settings) {
   if (_.contains(settings.modify, 'drag'))
     this.controls.edit.mode |= OpenLayers.Control.ModifyFeature.DRAG;
 
-  console.log('test');
-
 };
 
 
@@ -160,4 +162,18 @@ Neatline.Views.Map.prototype.publish = function() {
   var kml = formatter.write(features);
   Editor.vent.trigger('map:newCoverage', kml);
 
+};
+
+
+/*
+ * Publish updated KML.
+ *
+ * @param {Object|} feature: The selected feature.
+ *
+ * @return void.
+ */
+Neatline.Views.Map.prototype.remove = function(feature) {
+  this.controls.del.unselectFeature(feature);
+  this.editLayer.destroyFeatures([feature]);
+  this.publish();
 };
