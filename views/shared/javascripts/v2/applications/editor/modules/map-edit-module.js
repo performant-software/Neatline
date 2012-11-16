@@ -37,7 +37,17 @@ Editor.Modules.Map = (function(Backbone, Editor, Neatline) {
    * @return void.
    */
   Editor.vent.on('records:openForm', function(model) {
-    Map.view.edit(model);
+    Map.view.focusByModel(model);
+    Map.view.startEdit(model);
+  });
+
+  /*
+   * Close form.
+   *
+   * @return void.
+   */
+  Editor.vent.on('form:close', function() {
+    Map.view.endEdit();
   });
 
   /*

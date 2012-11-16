@@ -18,7 +18,7 @@
  *
  * @return void.
  */
-Neatline.Views.Map.prototype.edit = function(model) {
+Neatline.Views.Map.prototype.startEdit = function(model) {
 
   // Get the vector layer for the model.
   this.editLayer = this.getLayerByModel(model);
@@ -58,6 +58,18 @@ Neatline.Views.Map.prototype.edit = function(model) {
     this.map.addControl(val);
   }, this));
 
+};
+
+
+/*
+ * Strip editing controls.
+ *
+ * @return void.
+ */
+Neatline.Views.Map.prototype.endEdit = function() {
+  _.each(this.controls, _.bind(function(val,key) {
+    this.map.removeControl(val);
+  }, this));
 };
 
 

@@ -80,6 +80,30 @@ Neatline.Views.Map = Backbone.View.extend({
   },
 
   /*
+   * Focus on a record model.
+   *
+   * @param {Object} model: The record model.
+   *
+   * @return void.
+   */
+  focusByModel: function(model) {
+
+    // Try to get a map focus..
+    var mapFocus = model.get('map_focus');
+
+    // If defined, apply.
+    if (!_.isNull(mapFocus)) {
+      this.setViewport(mapFocus, model.get('map_zoom'));
+    }
+
+    else {
+      var layer = this.getLayerByModel(model);
+      this.map.zoomToExtent(layer.getDataExtent());
+    }
+
+  },
+
+  /*
    * Set custom focus and zoom.
    *
    * @param {String} focus: Comma-delimited lat/lon.
@@ -246,17 +270,6 @@ Neatline.Views.Map = Backbone.View.extend({
     this.hoverControl.activate();
     this.clickControl.activate();
 
-  },
-
-  /*
-   * Focus on a record model.
-   *
-   * @param {Object} model: The record model.
-   *
-   * @return void.
-   */
-  focusByModel: function(model) {
-    console.log(model);
   },
 
   /*
