@@ -22,6 +22,7 @@ Neatline.Modules.Exhibit = (function(Backbone, Neatline) {
    */
   Exhibit.init = function() {
     this.collection = new Neatline.Collections.Records();
+    this.fetch();
   };
 
   /*
