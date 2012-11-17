@@ -45,6 +45,66 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
     public $description;
 
     /**
+     * KML for geometries.
+     * mediumtext COLLATE utf8_unicode_ci NULL
+     */
+    public $coverage;
+
+    /**
+     * Boolean for whether the record is present on the map.
+     * tinyint(1) NULL
+     */
+    public $map_active;
+
+    /**
+     * Default map focus position
+     * varchar(100) NULL
+     */
+    public $map_focus;
+
+    /**
+     * Default map zoom level.
+     * int(10) unsigned NULL
+     */
+    public $map_zoom;
+
+    /**
+     * Maximum map zoom level.
+     * int(10) unsigned NULL
+     */
+    public $max_zoom;
+
+    /**
+     * Minimum map zoom level.
+     * int(10) unsigned NULL
+     */
+    public $min_zoom;
+
+    /**
+     * The start date.
+     * tinytext COLLATE utf8_unicode_ci NULL
+     */
+    public $start_date;
+
+    /**
+     * The end date.
+     * tinytext COLLATE utf8_unicode_ci NULL
+     */
+    public $end_date;
+
+    /**
+     * The date after which the record is visible.
+     * tinytext COLLATE utf8_unicode_ci NULL
+     */
+    public $start_visible_date;
+
+    /**
+     * The date before which the record is visible.
+     * tinytext COLLATE utf8_unicode_ci NULL
+     */
+    public $end_visible_date;
+
+    /**
      * The fill color for geometries.
      * tinytext COLLATE utf8_unicode_ci NULL
      */
@@ -103,42 +163,6 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
      * tinytext COLLATE utf8_unicode_ci NULL
      */
     public $point_image;
-
-    /**
-     * KML for geometries.
-     * mediumtext COLLATE utf8_unicode_ci NULL
-     */
-    public $coverage;
-
-    /**
-     * Default map focus position
-     * varchar(100) NULL
-     */
-    public $map_focus;
-
-    /**
-     * Default map zoom level.
-     * int(10) unsigned NULL
-     */
-    public $map_zoom;
-
-    /**
-     * Boolean for whether the record is present on the map.
-     * tinyint(1) NULL
-     */
-    public $map_active;
-
-    /**
-     * The record's parent record (used for caching).
-     * Omeka_Record_AbstractRecord
-     */
-    protected $_parent;
-
-    /**
-     * The record's parent exhibit (used for caching).
-     * Omeka_Record_AbstractRecord
-     */
-    protected $_exhibit;
 
     /**
      * Default attributes.

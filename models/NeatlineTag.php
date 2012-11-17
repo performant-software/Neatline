@@ -33,6 +33,30 @@ class NeatlineTag extends Omeka_Record_AbstractRecord
     public $tag;
 
     /**
+     * Maximum map zoom level.
+     * int(10) unsigned NULL
+     */
+    public $max_zoom;
+
+    /**
+     * Minimum map zoom level.
+     * int(10) unsigned NULL
+     */
+    public $min_zoom;
+
+    /**
+     * The date after which the record is visible.
+     * tinytext COLLATE utf8_unicode_ci NULL
+     */
+    public $start_visible_date;
+
+    /**
+     * The date before which the record is visible.
+     * tinytext COLLATE utf8_unicode_ci NULL
+     */
+    public $end_visible_date;
+
+    /**
      * The fill color for geometries.
      * tinytext COLLATE utf8_unicode_ci NULL
      */
