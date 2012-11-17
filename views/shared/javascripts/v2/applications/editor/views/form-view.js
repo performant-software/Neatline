@@ -25,6 +25,7 @@ Editor.Views.Form = Backbone.View.extend({
 
     // Trackers.
     this.started = false;
+    this.open = false;
 
     // Render template.
     this.form = $(this.getTemplate()());
@@ -105,9 +106,11 @@ Editor.Views.Form = Backbone.View.extend({
    * @return void.
    */
   show: function(model) {
+    if (this.open) return;
     this.model = model;
     this.$el.html(this.form);
     this.render();
+    this.open = true;
   },
 
   /*
@@ -118,6 +121,7 @@ Editor.Views.Form = Backbone.View.extend({
   close: function(model) {
     this.form.detach();
     Editor.vent.trigger('form:close');
+    this.open = false;
   },
 
   /*

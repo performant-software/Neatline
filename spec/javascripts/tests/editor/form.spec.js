@@ -35,6 +35,102 @@ describe('Form', function() {
 
   });
 
+  describe('Open/Close', function() {
+
+    var layers, feature1, feature2;
+
+    beforeEach(function() {
+
+      // Get layers.
+      layers = _t.getVectorLayers();
+
+      // Get features.
+      feature1 = layers[0].features[0];
+      feature2 = layers[1].features[0];
+      console.log(layers);
+      console.log(feature1, feature2);
+
+    });
+
+    it('should open the form when a record row is clicked', function() {
+      $(records[0]).trigger('click');
+      expect(_t.records.$el).toContain(_t.form.form);
+      expect(_t.records.$el).not.toContain(_t.records.ul);
+    });
+
+    it('should close the form when "Close" is clicked', function() {
+      $(_t.form.closeButton).trigger('click');
+      expect(_t.records.$el).not.toContain(_t.form.form);
+      expect(_t.records.$el).toContain(_t.records.ul);
+    });
+
+    it('should show the "Text" tab on first form open', function() {
+
+      // Open form.
+      $(records[0]).trigger('click');
+
+      // Check for visible "Text."
+      expect($('#form-text')).toHaveClass('active');
+
+      // Invisible "Spatial" and "Style."
+      expect($('#form-spatial')).not.toHaveClass('active');
+      expect($('#form-style')).not.toHaveClass('active');
+
+    });
+
+    it('should show form when a map feature is clicked', function() {
+
+      // Clobber getFeaturesFromEvent().
+      layers[0].getFeatureFromEvent = function(evt) { return feature1; };
+
+      // Mock cursor event.
+      var evt = {
+        xy: new OpenLayers.Pixel(Math.random(), Math.random()),
+        type: 'click'
+      };
+
+      // Trigger click.
+      _t.map.map.events.triggerEvent('click', evt);
+
+      // Check for form.
+      expect(_t.records.$el).toContain(_t.form.form);
+      expect(_t.records.$el).not.toContain(_t.records.ul);
+      expect(_t.form.model.get('title')).toEqual('Record 1');
+
+    });
+
+    it('should not change form records in response to map click', function() {
+
+      // Mock feature1 click.
+      layers[0].getFeatureFromEvent = function(evt) { return feature1; };
+
+      // Mock cursor event.
+      var evt = {
+        xy: new OpenLayers.Pixel(Math.random(), Math.random()),
+        type: 'click'
+      };
+
+      // Trigger click.
+      _t.map.map.events.triggerEvent('click', evt);
+
+      // Check for form.
+      expect(_t.records.$el).toContain(_t.form.form);
+      expect(_t.records.$el).not.toContain(_t.records.ul);
+      expect(_t.form.model.get('title')).toEqual('Record 1');
+
+      // Mock feature2 click.
+      layers[0].getFeatureFromEvent = function(evt) { return feature2; };
+
+      // Trigger click.
+      _t.map.map.events.triggerEvent('click', evt);
+
+      // Check for unchanged.
+      expect(_t.form.model.get('title')).toEqual('Record 1');
+
+    });
+
+  });
+
   describe('Data I/O', function() {
 
     // Open form.
@@ -45,7 +141,6 @@ describe('Form', function() {
     it('should populate form values', function() {
 
       // Check for form and values.
-      expect(_t.records.$el).toContain(_t.form.form);
       expect(_t.form.head.text()).toEqual('Record 1');
       expect(_t.form.title.val()).toEqual('Record 1');
       expect(_t.form.body.val()).toEqual('Record 1 desc.');
@@ -111,28 +206,6 @@ describe('Form', function() {
       '))');
 
     });
-
-  });
-
-  describe('Open/Close', function() {
-
-    it('should show the "Text" tab on first form open', function() {
-
-      // Open form.
-      $(records[0]).trigger('click');
-
-      // Check for visible "Text."
-      expect($('#form-text')).toHaveClass('active');
-
-      // Invisible "Spatial" and "Style."
-      expect($('#form-spatial')).not.toHaveClass('active');
-      expect($('#form-style')).not.toHaveClass('active');
-
-    });
-
-    it('should show form when a map feature is clicked');
-
-    it('should reset edit geometry controls on show');
 
   });
 

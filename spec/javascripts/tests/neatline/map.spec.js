@@ -304,7 +304,7 @@ describe('Map', function() {
         type: 'click'
       };
 
-      // Trigger move.
+      // Trigger click.
       _t.map.map.events.triggerEvent('click', evt);
 
       // Check render intent and publication.
@@ -331,7 +331,7 @@ describe('Map', function() {
       // getFeaturesFromEvent() returns the mock feature.
       layer.getFeatureFromEvent = function(evt) { return feature; };
 
-      // Trigger move.
+      // Trigger click.
       _t.map.map.events.triggerEvent('click', evt);
 
       // Unhighlight the feature.
