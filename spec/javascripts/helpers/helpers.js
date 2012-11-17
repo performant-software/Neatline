@@ -37,6 +37,9 @@ _t.loadNeatline = function() {
  */
 _t.loadEditor = function() {
 
+  // Clobber Marionette startup.
+  Neatline.start = this.loadNeatline;
+
   // Restart components.
   Editor.Modules.Layout.init();
   Editor.Modules.Records.init();
@@ -47,7 +50,6 @@ _t.loadEditor = function() {
   _t.layout = Editor.Modules.Layout.view;
   _t.records = Editor.Modules.Records.view;
   _t.form = Editor.Modules.Form.view;
-  _t.map = Neatline.Modules.Map.view;
 
 };
 

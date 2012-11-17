@@ -327,14 +327,13 @@ describe('Form', function() {
       });
 
       it('should update "Spatial Data" on feature delete', function() {
-        console.log(_t.map.editLayer.features);
 
         // Edit feature, set new point coords.
         var feature = _t.map.editLayer.features[0];
 
         // Trigger modification.
         _t.map.controls.del.selectFeature(feature);
-        console.log(_t.form.coverage.val());
+        expect(_t.form.coverage.val().indexOf('<Point>')).toEqual(-1);
 
       });
 
