@@ -16,6 +16,8 @@ Neatline.Views.Map = Backbone.View.extend({
     defaultZoom: 6
   },
 
+  layers: [],
+
   /*
    * Start OpenLayers.
    *
@@ -55,8 +57,45 @@ Neatline.Views.Map = Backbone.View.extend({
     this.map.addLayer(this.osm);
     this.map.setBaseLayer(this.osm);
 
-    // Starting focus/zoom.
+    // Startup routines.
+    this.addCursorControls();
     this.setDefaultViewport();
+    this.registerMapEvents();
+
+  },
+
+  /*
+   * Listen for hover and click on geometries.
+   *
+   * @return void.
+   */
+  addCursorControls: function() {
+
+    // Build the hover control, bind callbacks.
+    this.hoverControl = new OpenLayers.Control.SelectFeature(
+      this.layers, {
+        hover: true,
+        highlightOnly: true,
+        renderIntent: 'temporary',
+        eventListeners: {
+          featurehighlighted: this.onFeatureHighlight,
+          featureunhighlighted: this.onFeatureUnhighlight
+        }
+      }
+    );
+
+    // Build the click control, bind callbacks.
+    this.clickControl = new OpenLayers.Control.SelectFeature(
+      this.layers, {
+        onSelect: this.onFeatureSelect,
+        onUnselect: this.onFeatureUnselect
+      }
+    );
+
+    // Add to map, activate.
+    this.map.addControls([this.hoverControl, this.clickControl]);
+    this.hoverControl.activate();
+    this.clickControl.activate();
 
   },
 
@@ -77,6 +116,25 @@ Neatline.Views.Map = Backbone.View.extend({
       this.geolocate();
     }
 
+  },
+
+  /*
+   * Listen for move and zoom.
+   *
+   * @return void.
+   */
+  registerMapEvents: function() {
+
+    // Register for `moveend`.
+    this.map.events.register('moveend', this.map, _.bind(function() {
+
+      // Publish.
+      Neatline.vent.trigger('map:move', {
+        extent: this.getExtentAsWKT(),
+        zoom: this.getZoom()
+      });
+
+    }, this));
   },
 
   /*
@@ -147,9 +205,20 @@ Neatline.Views.Map = Backbone.View.extend({
    * @return void.
    */
   ingest: function(records) {
+
+    // Clear existing layers.
+    _.each(this.layers, _.bind(function(l) {
+      this.map.removeLayer(l);
+    }, this));
+
+    // Add new layers.
     this.layers = [];
     records.each(_.bind(this.buildLayer, this));
-    this.addCursorControls();
+
+    // Update controls.
+    this.hoverControl.setLayer(this.layers);
+    this.clickControl.setLayer(this.layers);
+
   },
 
   /*
@@ -241,41 +310,6 @@ Neatline.Views.Map = Backbone.View.extend({
   },
 
   /*
-   * Listen for hover and click on geometries.
-   *
-   * @return void.
-   */
-  addCursorControls: function() {
-
-    // Build the hover control, bind callbacks.
-    this.hoverControl = new OpenLayers.Control.SelectFeature(
-      this.layers, {
-        hover: true,
-        highlightOnly: true,
-        renderIntent: 'temporary',
-        eventListeners: {
-          featurehighlighted: this.onFeatureHighlight,
-          featureunhighlighted: this.onFeatureUnhighlight
-        }
-      }
-    );
-
-    // Build the click control, bind callbacks.
-    this.clickControl = new OpenLayers.Control.SelectFeature(
-      this.layers, {
-        onSelect: this.onFeatureSelect,
-        onUnselect: this.onFeatureUnselect
-      }
-    );
-
-    // Add to map, activate.
-    this.map.addControls([this.hoverControl, this.clickControl]);
-    this.hoverControl.activate();
-    this.clickControl.activate();
-
-  },
-
-  /*
    * Get the map vector layer for the passed record model.
    *
    * @param {Object} model: The record model.
@@ -284,6 +318,27 @@ Neatline.Views.Map = Backbone.View.extend({
    */
   getLayerByModel: function(model) {
     return _.first(this.map.getLayersBy('nId', model.get('id')));
+  },
+
+  /*
+   * Get the current zoom level.
+   *
+   * @return {Number}: The zoom level.
+   */
+  getZoom: function(model) {
+    return this.map.getZoom();
+  },
+
+  /*
+   * Get the current map viewport as a WKT polygon string.
+   *
+   * @return {String}: The WKT string.
+   */
+  getExtentAsWKT: function() {
+    var formatWKT = new OpenLayers.Format.WKT();
+    var extent = this.map.getExtent().toGeometry();
+    var feature = new OpenLayers.Feature.Vector(extent);
+    return formatWKT.write(feature);
   },
 
   /*

@@ -47,8 +47,6 @@ describe('Form', function() {
       // Get features.
       feature1 = layers[0].features[0];
       feature2 = layers[1].features[0];
-      console.log(layers);
-      console.log(feature1, feature2);
 
     });
 

@@ -22,7 +22,6 @@ Neatline.Modules.Exhibit = (function(Backbone, Neatline) {
    */
   Exhibit.init = function() {
     this.collection = new Neatline.Collections.Records();
-    this.fetch();
   };
 
   /*
@@ -45,6 +44,22 @@ Neatline.Modules.Exhibit = (function(Backbone, Neatline) {
     });
 
   };
+
+
+  // -------
+  // Events.
+  // -------
+
+  /*
+   * Get new map data on pan/zoom.
+   *
+   * @param {Object} params: Hash with `extent` and `zoom`.
+   *
+   * @return void.
+   */
+  Neatline.vent.on('map:move', function(params) {
+    Exhibit.fetch(params);
+  });
 
 
   // Export.
