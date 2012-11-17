@@ -12,7 +12,7 @@
 
 describe('Form', function() {
 
-  var server;
+  var server, records;
   var json = readFixtures('records.json');
 
   // Get fixtures.
@@ -30,13 +30,17 @@ describe('Form', function() {
       _t.respond200(r, json);
     });
 
-    // Open record form.
-    var records = _t.records.$el.find('.record-row');
-    $(records[0]).trigger('click');
+    // Get record listings.
+    records = _t.records.$el.find('.record-row');
 
   });
 
   describe('Data I/O', function() {
+
+    // Open form.
+    beforeEach(function() {
+      $(records[0]).trigger('click');
+    });
 
     it('should populate form values', function() {
 
@@ -110,7 +114,34 @@ describe('Form', function() {
 
   });
 
+  describe('Open/Close', function() {
+
+    it('should show the "Text" tab on first form open', function() {
+
+      // Open form.
+      $(records[0]).trigger('click');
+
+      // Check for visible "Text."
+      expect($('#form-text')).toHaveClass('active');
+
+      // Invisible "Spatial" and "Style."
+      expect($('#form-spatial')).not.toHaveClass('active');
+      expect($('#form-style')).not.toHaveClass('active');
+
+    });
+
+    it('should show form when a map feature is clicked');
+
+    it('should reset edit geometry controls on show');
+
+  });
+
   describe('Tabs', function() {
+
+    // Open form.
+    beforeEach(function() {
+      $(records[0]).trigger('click');
+    });
 
     describe('Spatial', function() {
 

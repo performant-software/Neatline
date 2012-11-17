@@ -23,6 +23,9 @@ Editor.Views.Form = Backbone.View.extend({
    */
   initialize: function() {
 
+    // Trackers.
+    this.started = false;
+
     // Render template.
     this.form = $(this.getTemplate()());
 
@@ -124,8 +127,10 @@ Editor.Views.Form = Backbone.View.extend({
    */
   render: function() {
 
-    // Starting states.
-    $(this.tabs[0]).tab('show');
+    // Render "Text".
+    if (!this.started) {
+      $(this.tabs[0]).tab('show'); this.started = true;
+    }
 
     // Text.
     this.head.            text(this.model.get('title'));
