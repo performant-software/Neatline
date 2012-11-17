@@ -75,7 +75,6 @@ describe('Form', function() {
       _t.form.strokeWidth.val('10');
       _t.form.pointRadius.val('12');
       _t.form.pointGraphic.val('file2.png');
-      _t.form.coverage.val('kml2');
 
       // Click save, capture request.
       _t.form.saveButton.trigger('click');
@@ -96,7 +95,6 @@ describe('Form', function() {
       expect(params.stroke_width).toEqual('10');
       expect(params.point_radius).toEqual('12');
       expect(params.point_image).toEqual('file2.png');
-      expect(params.coverage).toEqual('kml2');
 
     });
 

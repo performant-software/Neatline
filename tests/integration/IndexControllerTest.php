@@ -767,46 +767,47 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
         $record = $this->__record();
 
         // Set parameters.
-        $record->title            = 'title';
-        $record->description      = 'desc';
-        $record->slug             = 'slug';
-        $record->vector_color     = '#vector';
-        $record->stroke_color     = '#stroke';
-        $record->select_color     = '#select';
-        $record->vector_opacity   = 1;
-        $record->select_opacity   = 2;
-        $record->stroke_opacity   = 3;
-        $record->graphic_opacity  = 4;
-        $record->stroke_width     = 5;
-        $record->point_radius     = 6;
-        $record->point_image      = 'file.png';
-        $record->map_focus        = 'lat/lon';
-        $record->map_zoom         = 7;
-        $record->coverage         = 'kml';
-        $record->map_active       = 1;
+        $record->title              = 'title';
+        $record->description        = 'desc';
+        $record->slug               = 'slug';
+        $record->vector_color       = '#vector';
+        $record->stroke_color       = '#stroke';
+        $record->select_color       = '#select';
+        $record->vector_opacity     = 1;
+        $record->select_opacity     = 2;
+        $record->stroke_opacity     = 3;
+        $record->graphic_opacity    = 4;
+        $record->stroke_width       = 5;
+        $record->point_radius       = 6;
+        $record->point_image        = 'file.png';
+        $record->map_focus          = 'lat/lon';
+        $record->map_zoom           = 7;
+        $record->coverage           = 'kml';
+        $record->map_active         = 1;
         $record->save();
 
         // Mock values.
         $values = array(
-            'id'                  => $record->id,
-            'item_id'             => null,
-            'title'               => 'title2',
-            'description'         => 'desc2',
-            'slug'                => 'slug2',
-            'vector_color'        => '#vector2',
-            'stroke_color'        => '#stroke2',
-            'select_color'        => '#select2',
-            'vector_opacity'      => '10',
-            'select_opacity'      => '20',
-            'stroke_opacity'      => '30',
-            'graphic_opacity'     => '40',
-            'stroke_width'        => '50',
-            'point_radius'        => '60',
-            'point_image'         => 'file2.png',
-            'map_focus'           => 'lat2/lon2',
-            'map_zoom'            => '70',
-            'coverage'            => 'kml2',
-            'map_active'          => '0'
+            'id'                    => $record->id,
+            'item_id'               => null,
+            'title'                 => 'title2',
+            'description'           => 'desc2',
+            'slug'                  => 'slug2',
+            'vector_color'          => '#vector2',
+            'stroke_color'          => '#stroke2',
+            'select_color'          => '#select2',
+            'vector_opacity'        => '10',
+            'select_opacity'        => '20',
+            'stroke_opacity'        => '30',
+            'graphic_opacity'       => '40',
+            'stroke_width'          => '50',
+            'point_radius'          => '60',
+            'point_image'           => 'file2.png',
+            'map_focus'             => 'lat2/lon2',
+            'map_zoom'              => '70',
+            'coverage'              => 'kml2',
+            'bounds'                => 'POLYGON((0 0,0 1,1 1,1 0))',
+            'map_active'            => '0'
         );
 
         // Mock PUT.

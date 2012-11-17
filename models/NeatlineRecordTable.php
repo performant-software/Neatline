@@ -154,13 +154,13 @@ class NeatlineRecordTable extends Omeka_Db_Table
     public function updateRecord($values)
     {
 
-        // Get record.
+        // Get record and bounds.
         $record = $this->find((int) $values['id']);
-
-        // Set bounds field.
-        $function = 'PolyFromText('.$values['bounds'].')';
-        $record->bounds = new Zend_Db_Expr($function);
+        $bounds = $values['bounds'];
         unset($values['bounds']);
+
+        // Update bounds.
+        $this->bounds = new Zend_Db_Expr("(PolyFromText('$bounds'))");
 
         // Set remaining fields.
         foreach ($values as $key => $val) $record->setNotEmpty($key, $val);

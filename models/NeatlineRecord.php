@@ -52,7 +52,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
 
     /**
      * Minimum coverage extent.
-     * POLYGON NULL
+     * POLYGON NOT NULL
      */
     public $bounds;
 
@@ -554,42 +554,6 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
     }
 
     /**
-     * On save, update the modified column on the parent exhibit.
-     *
-     * @return void.
-     */
-    public function save()
-    {
-
-        if (!is_null($this->exhibit_id)) {
-            $exhibit = $this->getExhibit();
-            $exhibit->save();
-        }
-
-        parent::save();
-
-    }
-
-    /**
-     * This calls `delete` in a transaction.
-     *
-     * @return void
-     * @author Eric Rochester <erochest@virginia.edu>
-     **/
-    public function deleteTransaction()
-    {
-        $db = get_db();
-        $db->beginTransaction();
-        try {
-            $this->delete();
-            $db->commit();
-        } catch (Exception $e) {
-            $db->rollback();
-            throw $e;
-        }
-    }
-
-    /**
      * Construct map data.
      *
      * @param array $index This is the index of NeatlineRecord objects for
@@ -645,6 +609,51 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
 
         return $data;
 
+    }
+
+    /**
+     * On save, update the modified column on the parent exhibit and set
+     * a default bounds value if one does not exist.
+     *
+     * @return void.
+     */
+    public function save()
+    {
+
+        // Set `modified` on parent.
+        if (!is_null($this->exhibit_id)) {
+            $exhibit = $this->getExhibit();
+            $exhibit->save();
+        }
+
+        // Update bounds.
+        // if (is_null($this->bounds)) {
+            // $this->bounds = new Zend_Db_Expr(
+                // "PolyFromText(POLYGON((0 0,0 1,1 1,1 0)))"
+            // );
+        // }
+
+        parent::save();
+
+    }
+
+    /**
+     * This calls `delete` in a transaction.
+     *
+     * @return void
+     * @author Eric Rochester <erochest@virginia.edu>
+     **/
+    public function deleteTransaction()
+    {
+        $db = get_db();
+        $db->beginTransaction();
+        try {
+            $this->delete();
+            $db->commit();
+        } catch (Exception $e) {
+            $db->rollback();
+            throw $e;
+        }
     }
 
 }
