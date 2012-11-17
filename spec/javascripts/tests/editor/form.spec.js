@@ -62,6 +62,10 @@ describe('Form', function() {
 
     it('should PUT well-formed data on save', function() {
 
+      // Get Boston record.
+      var boston = Editor.Modules.Records.collection.models[1];
+      var coverage = boston.get('coverage');
+
       // Enter new data.
       _t.form.title.val('Record 2');
       _t.form.body.val('Record 2 desc.');
@@ -75,6 +79,7 @@ describe('Form', function() {
       _t.form.strokeWidth.val('10');
       _t.form.pointRadius.val('12');
       _t.form.pointGraphic.val('file2.png');
+      _t.form.coverage.val(coverage);
 
       // Click save, capture request.
       _t.form.saveButton.trigger('click');
@@ -95,6 +100,11 @@ describe('Form', function() {
       expect(params.stroke_width).toEqual('10');
       expect(params.point_radius).toEqual('12');
       expect(params.point_image).toEqual('file2.png');
+      expect(params.coverage.indexOf('Boston')).not.toEqual(-1);
+      expect(params.bounds).toEqual('POLYGON(('+
+        '-7910926.6783014 5214839.817002,'+
+        '-7910926.6783014 5214839.817002'+
+      '))');
 
     });
 
