@@ -165,8 +165,8 @@ Neatline.Views.Map = Backbone.View.extend({
     if (record.get('map_active') == 1) {
 
       // Build geometry and style.
-      var formatter = new OpenLayers.Format.KML();
-      var geometry = formatter.read(record.get('coverage'));
+      var formatKML = new OpenLayers.Format.KML();
+      var geometry = formatKML.read(record.get('coverage'));
       var style = this.getStyleMap(record);
 
       // Build the layer.

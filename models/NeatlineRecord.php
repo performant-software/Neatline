@@ -51,6 +51,12 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
     public $coverage;
 
     /**
+     * Minimum coverage extent.
+     * POLYGON NULL
+     */
+    public $bounds;
+
+    /**
      * Boolean for whether the record is present on the map.
      * tinyint(1) NULL
      */

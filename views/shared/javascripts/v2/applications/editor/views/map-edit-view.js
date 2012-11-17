@@ -169,9 +169,11 @@ Neatline.Views.Map.prototype.publish = function() {
     return !f._sketch;
   });
 
-  // Write KML, publish.
-  var formatter = new OpenLayers.Format.KML();
-  var kml = formatter.write(features);
+  // Write KML.
+  var formatKML = new OpenLayers.Format.KML();
+  var kml = formatKML.write(features);
+
+  // Publish.
   Editor.vent.trigger('map:newCoverage', kml);
 
 };

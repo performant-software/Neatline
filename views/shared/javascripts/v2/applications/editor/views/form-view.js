@@ -174,7 +174,8 @@ Editor.Views.Form = Backbone.View.extend({
       stroke_width:       this.strokeWidth.val(),
       point_radius:       this.pointRadius.val(),
       point_image:        this.pointGraphic.val(),
-      coverage:           this.coverage.val()
+      coverage:           this.coverage.val(),
+      bounds:             this.getBounds()
 
     }, {
 
@@ -246,6 +247,29 @@ Editor.Views.Form = Backbone.View.extend({
    */
   setCoverage: function(coverage) {
     this.coverage.val(coverage);
+  },
+
+  /*
+   * Compute data extent from curent coverage KML.
+   *
+   * @return {String}: The bounds, as a WKT polygon.
+   */
+  getBounds: function() {
+
+    // Get formatters.
+    var formatKML = new OpenLayers.Format.KML();
+    var formatWKT = new OpenLayers.Format.WKT();
+
+    // KML -> features, add to layer.
+    var features = formatKML.read(this.coverage.val());
+    var layer = new OpenLayers.Layer.Vector();
+    layer.addFeatures(features);
+
+    // Get max extent, convert to WKT.
+    var extent = layer.getDataExtent().toGeometry();
+    var feature = new OpenLayers.Feature.Vector(extent);
+    return formatWKT.write(feature);
+
   }
 
 });

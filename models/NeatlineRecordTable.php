@@ -100,54 +100,6 @@ class NeatlineRecordTable extends Omeka_Db_Table
     }
 
     /**
-     * Find all records associated with a given exhibit that do not have a
-     * parent item.
-     *
-     * @param Omeka_record $neatline The exhibit record.
-     *
-     * @return array of Omeka_record The records.
-     */
-    public function getNeatlineRecordsByExhibit($neatline)
-    {
-
-        $records = $this->fetchObjects(
-            $this->getSelect()
-                 ->where('exhibit_id=?', $neatline->id)
-                 ->where('item_id IS NULL')
-        );
-
-        return $records ? $records : false;
-
-    }
-
-    /**
-     * Simple title searching for Neatline-native records by exhibit.
-     *
-     * @param Omeka_record $neatline The exhibit record.
-     * @param string $search The search string.
-     *
-     * @return array of Omeka_record The records.
-     */
-    public function searchNeatlineRecordsByExhibit($neatline, $search)
-    {
-
-        // If the search string is empty, get all records.
-        if ($search == '') {
-            return $this->getNeatlineRecordsByExhibit($neatline);
-        }
-
-        $records = $this->fetchObjects(
-            $this->getSelect()
-                 ->where('exhibit_id=?', $neatline->id)
-                 ->where('item_id IS NULL')
-                 ->where('title LIKE ?', "%$search%")
-        );
-
-        return $records ? $records : false;
-
-    }
-
-    /**
      * Find all records associated with a given exhibit that have either
      * an active space, time, or items status.
      *
@@ -201,9 +153,19 @@ class NeatlineRecordTable extends Omeka_Db_Table
      */
     public function updateRecord($values)
     {
+
+        // Get record.
         $record = $this->find((int) $values['id']);
+
+        // Set bounds field.
+        $function = 'PolyFromText('.$values['bounds'].')';
+        $record->bounds = new Zend_Db_Expr($function);
+        unset($values['bounds']);
+
+        // Set remaining fields.
         foreach ($values as $key => $val) $record->setNotEmpty($key, $val);
         $record->save();
+
     }
 
 
