@@ -26,31 +26,33 @@ Neatline.Views.Map.prototype.startEdit = function(model) {
 
   this.controls = {
 
-    point:  new OpenLayers.Control.DrawFeature(this.editLayer,
-                OpenLayers.Handler.Point, {
-                  featureAdded: _.bind(this.publish,this)
-                }),
+    point: new OpenLayers.Control.DrawFeature(this.editLayer,
+      OpenLayers.Handler.Point, {
+        featureAdded: _.bind(this.publish,this)
+    }),
 
-    line:   new OpenLayers.Control.DrawFeature(this.editLayer,
-                OpenLayers.Handler.Path, {
-                  featureAdded: _.bind(this.publish,this)
-                }),
+    line: new OpenLayers.Control.DrawFeature(this.editLayer,
+      OpenLayers.Handler.Path, {
+        featureAdded: _.bind(this.publish,this)
+    }),
 
-    poly:   new OpenLayers.Control.DrawFeature(this.editLayer,
-                OpenLayers.Handler.Polygon, {
-                  featureAdded: _.bind(this.publish,this)
-                }),
+    poly: new OpenLayers.Control.DrawFeature(this.editLayer,
+      OpenLayers.Handler.Polygon, {
+        featureAdded: _.bind(this.publish,this)
+    }),
 
-    reg:    new OpenLayers.Control.DrawFeature(this.editLayer,
-                OpenLayers.Handler.RegularPolygon, {
-                  featureAdded: _.bind(this.publish,this)
-                }),
+    reg: new OpenLayers.Control.DrawFeature(this.editLayer,
+      OpenLayers.Handler.RegularPolygon, {
+        featureAdded: _.bind(this.publish,this)
+    }),
 
-    edit:   new OpenLayers.Control.ModifyFeature(this.editLayer,
-                { onModification: _.bind(this.publish,this)}),
+    edit: new OpenLayers.Control.ModifyFeature(this.editLayer, {
+        onModification: _.bind(this.publish,this)
+    }),
 
-    del:    new OpenLayers.Control.ModifyFeature(this.editLayer,
-                { onModificationStart: _.bind(this.remove,this)})
+    del: new OpenLayers.Control.ModifyFeature(this.editLayer, {
+        onModificationStart: _.bind(this.remove,this)
+    })
 
   };
 

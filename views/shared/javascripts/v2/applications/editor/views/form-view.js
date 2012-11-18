@@ -24,9 +24,9 @@ Editor.Views.Form = Backbone.View.extend({
   initialize: function() {
 
     // Trackers.
-    this.model = null;
-    this.started = false;
-    this.open = false;
+    this.model =    null;
+    this.started =  false;
+    this.open =     false;
 
     // Render template.
     this.form = $(this.getTemplate()());
@@ -100,18 +100,19 @@ Editor.Views.Form = Backbone.View.extend({
   },
 
   /*
-   * Show the form.
+   * Show the form; block if the form is already open.
    *
    * @param {Object} model: The record model.
    *
    * @return void.
    */
   show: function(model) {
-    if (this.open) return;
-    this.model = model;
-    this.$el.html(this.form);
-    this.render();
-    this.open = true;
+    if (!this.open) {
+      this.model = model;
+      this.$el.html(this.form);
+      this.render();
+      this.open = true;
+    }
   },
 
   /*
@@ -134,9 +135,7 @@ Editor.Views.Form = Backbone.View.extend({
   render: function() {
 
     // Render "Text".
-    if (!this.started) {
-      $(this.tabs[0]).tab('show'); this.started = true;
-    }
+    if (!this.started) this.setStarted();
 
     // Text.
     this.head.            text(this.model.get('title'));
@@ -197,6 +196,16 @@ Editor.Views.Form = Backbone.View.extend({
 
     });
 
+  },
+
+  /*
+   * Initialize the starting tab state.
+   *
+   * @return void.
+   */
+  setStarted: function() {
+    $(this.tabs[0]).tab('show');
+    this.started = true;
   },
 
   /*

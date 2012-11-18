@@ -75,7 +75,7 @@ describe('Map', function() {
 
     });
 
-    it('should render features', function() {
+    it('should render features for map-active models', function() {
 
       // Check geometry.
       expect(layers.length).toEqual(2);
@@ -83,6 +83,10 @@ describe('Map', function() {
       expect(layers[0].features[0].geometry.y).toEqual(4978802.273690212);
       expect(layers[1].features[0].geometry.x).toEqual(-7910926.6783014);
       expect(layers[1].features[0].geometry.y).toEqual(5214839.817002);
+
+    });
+
+    it('should not render features for map-inactive models', function() {
 
     });
 

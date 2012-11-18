@@ -43,7 +43,6 @@ describe('Form', function() {
 
       // Get layers.
       layers = _t.getVectorLayers();
-      console.log(layers);
 
       // Get features.
       feature1 = layers[0].features[0];

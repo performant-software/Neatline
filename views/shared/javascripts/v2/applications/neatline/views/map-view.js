@@ -233,8 +233,7 @@ Neatline.Views.Map = Backbone.View.extend({
     records.each(_.bind(function(record) {
 
       // Build if map active and unfrozen.
-      if (!_.contains(this.frozen, record.get('id')) &&
-         record.get('map_active') == 1) {
+      if (!_.contains(this.frozen, record.get('id'))) {
           this.buildLayer(record);
       }
 
@@ -256,28 +255,32 @@ Neatline.Views.Map = Backbone.View.extend({
    */
   buildLayer: function(record) {
 
-    // Build geometry and style.
-    var formatKML = new OpenLayers.Format.KML();
-    var geometry = formatKML.read(record.get('coverage'));
-    var style = this.getStyleMap(record);
+    if (record.get('map_active') == 1) {
 
-    // Build the layer.
-    var layer = new OpenLayers.Layer.Vector(
-      record.get('title'), {
-        styleMap: style, displayInLayerSwitcher: false
-      }
-    );
+      // Build geometry and style.
+      var formatKML = new OpenLayers.Format.KML();
+      var geometry = formatKML.read(record.get('coverage'));
+      var style = this.getStyleMap(record);
 
-    // Add to map, track.
-    layer.addFeatures(geometry);
-    this.map.addLayer(layer);
+      // Build the layer.
+      var layer = new OpenLayers.Layer.Vector(
+        record.get('title'), {
+          styleMap: style, displayInLayerSwitcher: false
+        }
+      );
 
-    // Store model, id.
-    layer.nModel = record;
-    layer.nId = record.get('id');
+      // Add to map, track.
+      layer.addFeatures(geometry);
+      this.map.addLayer(layer);
 
-    // Track layer.
-    this.layers.push(layer);
+      // Store model, id.
+      layer.nModel = record;
+      layer.nId = record.get('id');
+
+      // Track layer.
+      this.layers.push(layer);
+
+    }
 
   },
 
