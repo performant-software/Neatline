@@ -57,6 +57,7 @@ describe('Form', function() {
     });
 
     it('should close the form when "Close" is clicked', function() {
+      $(records[0]).trigger('click');
       $(_t.form.closeButton).trigger('click');
       expect(_t.records.$el).not.toContain(_t.form.form);
       expect(_t.records.$el).toContain(_t.records.ul);
@@ -124,6 +125,23 @@ describe('Form', function() {
 
       // Check for unchanged.
       expect(_t.form.model.get('title')).toEqual('Record 1');
+
+    });
+
+    it('should freeze the form model on the map on form open', function() {
+
+      // Get Record 1 layer.
+      var layers = _t.getVectorLayers();
+      var record1Layer = _.find(layers, function(layer) {
+        return layer.name == 'Record 1';
+      });
+
+      // By default, no frozen layers.
+      expect(_t.map.frozen).toEqual([]);
+
+      // Open form, check for frozen.
+      $(records[0]).trigger('click');
+      expect(_t.map.frozen).toEqual([record1Layer.nId]);
 
     });
 
