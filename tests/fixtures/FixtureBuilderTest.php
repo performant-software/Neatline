@@ -122,6 +122,7 @@ class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
         $record2->save();
 
         // Generate the fixture.
+        $this->resetResponse();
         $this->writeFixture('neatline/records/'.$exhibit->id,
             'records-changed-data.json');
 
@@ -132,6 +133,7 @@ class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
         $record2->delete();
 
         // Generate the fixture.
+        $this->resetResponse();
         $this->writeFixture('neatline/records/'.$exhibit->id,
             'records-removed-record.json');
 

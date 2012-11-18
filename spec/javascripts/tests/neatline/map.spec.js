@@ -13,7 +13,11 @@
 describe('Map', function() {
 
   var layers, layer, feature, server;
+
+  // Load AJAX fixtures.
   var json = readFixtures('records.json');
+  var jsonChangedData = readFixtures('records-changed-data.json');
+  var jsonRemovedData = readFixtures('records-removed-data.json');
 
   // Get fixtures.
   beforeEach(function() {
@@ -38,51 +42,80 @@ describe('Map', function() {
 
   describe('Data Rendering', function() {
 
-    it('should set exhibit default focus and zoom', function() {
+    describe('Exhibit Defaults', function() {
 
-      // Set exhibit defaults.
-      __exhibit.mapZoom = 10;
-      __exhibit.mapFocus = '-8031391.4348622, 5085508.3651615';
+      it('should set exhibit default focus and zoom', function() {
 
-      // Restart.
-      _t.loadNeatline();
-      var request = _.last(server.requests);
-      _t.respond200(request, json);
+        // Set exhibit defaults.
+        __exhibit.mapZoom = 10;
+        __exhibit.mapFocus = '-8031391.4348622, 5085508.3651615';
 
-      // Check viewport.
-      var center = _t.map.map.getCenter();
-      expect(_t.map.map.zoom).toEqual(10);
-      expect(center.lon).toEqual(-8031391.4348622);
-      expect(center.lat).toEqual(5085508.3651615);
+        // Restart.
+        _t.loadNeatline();
+        var request = _.last(server.requests);
+        _t.respond200(request, json);
+
+        // Check viewport.
+        var center = _t.map.map.getCenter();
+        expect(_t.map.map.zoom).toEqual(10);
+        expect(center.lon).toEqual(-8031391.4348622);
+        expect(center.lat).toEqual(5085508.3651615);
+
+      });
+
+      it('should set a focus and zoom when no exhibit defaults', function() {
+
+        // Set exhibit defaults.
+        __exhibit.mapZoom = null;
+        __exhibit.mapFocus = null;
+
+        // Restart.
+        _t.loadNeatline();
+        var request = _.last(server.requests);
+        _t.respond200(request, json);
+
+        // Check viewport.
+        expect(_t.map.map.zoom).toEqual(_t.map.options.defaultZoom);
+
+        // TODO: How to check for geolocation?
+
+      });
 
     });
 
-    it('should set a focus and zoom when no exhibit defaults', function() {
+    describe('Record Data', function() {
 
-      // Set exhibit defaults.
-      __exhibit.mapZoom = null;
-      __exhibit.mapFocus = null;
+      it('should render features for map-active models', function() {
 
-      // Restart.
-      _t.loadNeatline();
-      var request = _.last(server.requests);
-      _t.respond200(request, json);
+        // Check geometry.
+        expect(layers.length).toEqual(2);
+        expect(layers[0].features[0].geometry.x).toEqual(-8233185.189506843);
+        expect(layers[0].features[0].geometry.y).toEqual(4978802.273690212);
+        expect(layers[1].features[0].geometry.x).toEqual(-7910926.6783014);
+        expect(layers[1].features[0].geometry.y).toEqual(5214839.817002);
 
-      // Check viewport.
-      expect(_t.map.map.zoom).toEqual(_t.map.options.defaultZoom);
+      });
 
-      // TODO: How to check for geolocation?
+      it('should not change data for frozen record', function() {
 
-    });
+        console.log('before');
+        // Trigger a map move, inject fixture.
+        _t.map.map.events.triggerEvent('moveend');
+        var request = _.last(server.requests);
+        _t.respond200(request, jsonChangedData);
+        console.log('after');
 
-    it('should render features for map-active models', function() {
+        // Check geometry.
+        layers = _t.getVectorLayers();
+        expect(layers.length).toEqual(2);
+        expect(layers[1].features[0].geometry.x).toEqual(-7910926.6783014);
+        expect(layers[1].features[0].geometry.y).toEqual(5214839.817002);
 
-      // Check geometry.
-      expect(layers.length).toEqual(2);
-      expect(layers[0].features[0].geometry.x).toEqual(-8233185.189506843);
-      expect(layers[0].features[0].geometry.y).toEqual(4978802.273690212);
-      expect(layers[1].features[0].geometry.x).toEqual(-7910926.6783014);
-      expect(layers[1].features[0].geometry.y).toEqual(5214839.817002);
+      });
+
+      it('should not remove data for frozen record', function() {
+
+      });
 
     });
 
