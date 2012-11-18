@@ -25,11 +25,16 @@ class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
     public function testRecordsJson()
     {
 
+
         // Exhibit and records.
         $exhibit = $this->__exhibit();
         $record1 = $this->__record(null, $exhibit);
         $record2 = $this->__record(null, $exhibit);
         $record3 = $this->__record(null, $exhibit);
+
+
+        // Case 1: 3 records, 1 and 2 map-active, 3 map-inactive.
+        // ------------------------------------------------------
 
         $nyc = file_get_contents(NEATLINE_PLUGIN_DIR .
             '/tests/mocks/nyc.kml');
@@ -108,6 +113,28 @@ class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
         // Generate the fixture.
         $this->writeFixture('neatline/records/'.$exhibit->id,
             'records.json');
+
+
+        // Case 2: Data for record 2 has changed.
+        // --------------------------------------
+
+        $record2->coverage = $dc;
+        $record2->save();
+
+        // Generate the fixture.
+        $this->writeFixture('neatline/records/'.$exhibit->id,
+            'records-changed-data.json');
+
+
+        // Case 2: Record 2 is absent from the set.
+        // ----------------------------------------
+
+        $record2->delete();
+
+        // Generate the fixture.
+        $this->writeFixture('neatline/records/'.$exhibit->id,
+            'records-removed-record.json');
+
 
     }
 

@@ -86,10 +86,6 @@ describe('Map', function() {
 
     });
 
-    it('should not render features for map-inactive models', function() {
-
-    });
-
     it('should render styles', function() {
 
       /*
@@ -232,159 +228,167 @@ describe('Map', function() {
 
     });
 
-    it('should render and publish feature hover', function() {
-
-      // Spy on map:highlight.
-      spyOn(Neatline.vent, 'trigger');
-
-      // Clobber getFeaturesFromEvent().
-      layer.getFeatureFromEvent = function(evt) { return feature; };
-
-      // Mock cursor event.
-      var evt = {
-        xy: new OpenLayers.Pixel(Math.random(), Math.random()),
-        type: 'mousemove'
-      };
-
-      // Trigger move.
-      _t.map.map.events.triggerEvent('mousemove', evt);
-
-      // Check render intent and publication.
-      expect(feature.renderIntent).toEqual('temporary');
-      expect(Neatline.vent.trigger).toHaveBeenCalledWith(
-        'map:highlight', layer.nModel);
-
-    });
-
-    it('should render and publish feature unhover', function() {
-
-      // Spy on map:highlight.
-      spyOn(Neatline.vent, 'trigger');
-
-      // Mock cursor event.
-      var evt = {
-        xy: new OpenLayers.Pixel(Math.random(), Math.random()),
-        type: 'mousemove'
-      };
-
-      // Highlight the feature.
-      // ----------------------
-
-      // getFeaturesFromEvent() returns the mock feature.
-      layer.getFeatureFromEvent = function(evt) { return feature; };
-
-      // Trigger move.
-      _t.map.map.events.triggerEvent('mousemove', evt);
-
-      // Unhighlight the feature.
-      // ------------------------
-
-      // getFeaturesFromEvent() returns null.
-      _.each(layers, function(layer) {
-        layer.getFeatureFromEvent = function(evt) { return null; };
-      });
-
-      // Trigger move.
-      _t.map.map.events.triggerEvent('mousemove', evt);
-
-      // Check render intent and publication.
-      expect(feature.renderIntent).toEqual('default');
-      expect(Neatline.vent.trigger).toHaveBeenCalledWith(
-        'map:unhighlight', layer.nModel);
-
-    });
-
-    it('should render and publish feature select', function() {
-
-      // Spy on map:highlight.
-      spyOn(Neatline.vent, 'trigger');
-
-      // Clobber getFeaturesFromEvent().
-      layer.getFeatureFromEvent = function(evt) { return feature; };
-
-      // Mock cursor event.
-      var evt = {
-        xy: new OpenLayers.Pixel(Math.random(), Math.random()),
-        type: 'click'
-      };
-
-      // Trigger click.
-      _t.map.map.events.triggerEvent('click', evt);
-
-      // Check render intent and publication.
-      expect(feature.renderIntent).toEqual('select');
-      expect(Neatline.vent.trigger).toHaveBeenCalledWith(
-        'map:select', layer.nModel);
-
-    });
-
-    it('should render and publish feature unselect', function() {
-
-      // Spy on map:highlight.
-      spyOn(Neatline.vent, 'trigger');
-
-      // Mock cursor event.
-      var evt = {
-        xy: new OpenLayers.Pixel(Math.random(), Math.random()),
-        type: 'click'
-      };
-
-      // Highlight the feature.
-      // ----------------------
-
-      // getFeaturesFromEvent() returns the mock feature.
-      layer.getFeatureFromEvent = function(evt) { return feature; };
-
-      // Trigger click.
-      _t.map.map.events.triggerEvent('click', evt);
-
-      // Unhighlight the feature.
-      // ------------------------
-
-      // getFeaturesFromEvent() returns null.
-      _.each(layers, function(layer) {
-        layer.getFeatureFromEvent = function(evt) { return null; };
-      });
-
-      // Trigger move.
-      _t.map.map.events.triggerEvent('click', evt);
-
-      // Check render intent and publication.
-      expect(feature.renderIntent).toEqual('default');
-      expect(Neatline.vent.trigger).toHaveBeenCalledWith(
-        'map:unselect', layer.nModel);
-
-    });
-
   });
 
   describe('Events', function() {
 
-    it('should focus on model features on map:focus', function() {
+    describe('Outgoing', function() {
 
-      // Trigger map:focus on model with set focus/zoom.
-      Neatline.vent.trigger('map:focus', layers[0].nModel);
+      it('should render and publish feature hover', function() {
 
-      // Get focus and zoom.
-      var center = _t.map.map.getCenter();
-      var zoom = _t.map.map.getZoom();
+        // Spy on map:highlight.
+        spyOn(Neatline.vent, 'trigger');
 
-      // Check focus and zoom.
-      expect(Math.round(center.lat)).toEqual(4978802);
-      expect(Math.round(center.lon)).toEqual(-8233185);
-      expect(zoom).toEqual(10);
+        // Clobber getFeaturesFromEvent().
+        layer.getFeatureFromEvent = function(evt) { return feature; };
 
-      // Trigger map:focus on model with no defaults.
-      Neatline.vent.trigger('map:focus', layers[1].nModel);
+        // Mock cursor event.
+        var evt = {
+          xy: new OpenLayers.Pixel(Math.random(), Math.random()),
+          type: 'mousemove'
+        };
 
-      // Get focus and zoom.
-      center = _t.map.map.getCenter();
-      zoom = _t.map.map.getZoom();
+        // Trigger move.
+        _t.map.map.events.triggerEvent('mousemove', evt);
 
-      // Check focus and zoom.
-      expect(Math.round(center.lat)).toEqual(5214840);
-      expect(Math.round(center.lon)).toEqual(-7910927);
-      expect(zoom).toEqual(18);
+        // Check render intent and publication.
+        expect(feature.renderIntent).toEqual('temporary');
+        expect(Neatline.vent.trigger).toHaveBeenCalledWith(
+          'map:highlight', layer.nModel);
+
+      });
+
+      it('should render and publish feature unhover', function() {
+
+        // Spy on map:highlight.
+        spyOn(Neatline.vent, 'trigger');
+
+        // Mock cursor event.
+        var evt = {
+          xy: new OpenLayers.Pixel(Math.random(), Math.random()),
+          type: 'mousemove'
+        };
+
+        // Highlight the feature.
+        // ----------------------
+
+        // getFeaturesFromEvent() returns the mock feature.
+        layer.getFeatureFromEvent = function(evt) { return feature; };
+
+        // Trigger move.
+        _t.map.map.events.triggerEvent('mousemove', evt);
+
+        // Unhighlight the feature.
+        // ------------------------
+
+        // getFeaturesFromEvent() returns null.
+        _.each(layers, function(layer) {
+          layer.getFeatureFromEvent = function(evt) { return null; };
+        });
+
+        // Trigger move.
+        _t.map.map.events.triggerEvent('mousemove', evt);
+
+        // Check render intent and publication.
+        expect(feature.renderIntent).toEqual('default');
+        expect(Neatline.vent.trigger).toHaveBeenCalledWith(
+          'map:unhighlight', layer.nModel);
+
+      });
+
+      it('should render and publish feature select', function() {
+
+        // Spy on map:highlight.
+        spyOn(Neatline.vent, 'trigger');
+
+        // Clobber getFeaturesFromEvent().
+        layer.getFeatureFromEvent = function(evt) { return feature; };
+
+        // Mock cursor event.
+        var evt = {
+          xy: new OpenLayers.Pixel(Math.random(), Math.random()),
+          type: 'click'
+        };
+
+        // Trigger click.
+        _t.map.map.events.triggerEvent('click', evt);
+
+        // Check render intent and publication.
+        expect(feature.renderIntent).toEqual('select');
+        expect(Neatline.vent.trigger).toHaveBeenCalledWith(
+          'map:select', layer.nModel);
+
+      });
+
+      it('should render and publish feature unselect', function() {
+
+        // Spy on map:highlight.
+        spyOn(Neatline.vent, 'trigger');
+
+        // Mock cursor event.
+        var evt = {
+          xy: new OpenLayers.Pixel(Math.random(), Math.random()),
+          type: 'click'
+        };
+
+        // Highlight the feature.
+        // ----------------------
+
+        // getFeaturesFromEvent() returns the mock feature.
+        layer.getFeatureFromEvent = function(evt) { return feature; };
+
+        // Trigger click.
+        _t.map.map.events.triggerEvent('click', evt);
+
+        // Unhighlight the feature.
+        // ------------------------
+
+        // getFeaturesFromEvent() returns null.
+        _.each(layers, function(layer) {
+          layer.getFeatureFromEvent = function(evt) { return null; };
+        });
+
+        // Trigger move.
+        _t.map.map.events.triggerEvent('click', evt);
+
+        // Check render intent and publication.
+        expect(feature.renderIntent).toEqual('default');
+        expect(Neatline.vent.trigger).toHaveBeenCalledWith(
+          'map:unselect', layer.nModel);
+
+      });
+
+    });
+
+    describe('Incoming', function() {
+
+      it('should focus on model features on map:focus', function() {
+
+        // Trigger map:focus on model with set focus/zoom.
+        Neatline.vent.trigger('map:focus', layers[0].nModel);
+
+        // Get focus and zoom.
+        var center = _t.map.map.getCenter();
+        var zoom = _t.map.map.getZoom();
+
+        // Check focus and zoom.
+        expect(Math.round(center.lat)).toEqual(4978802);
+        expect(Math.round(center.lon)).toEqual(-8233185);
+        expect(zoom).toEqual(10);
+
+        // Trigger map:focus on model with no defaults.
+        Neatline.vent.trigger('map:focus', layers[1].nModel);
+
+        // Get focus and zoom.
+        center = _t.map.map.getCenter();
+        zoom = _t.map.map.getZoom();
+
+        // Check focus and zoom.
+        expect(Math.round(center.lat)).toEqual(5214840);
+        expect(Math.round(center.lon)).toEqual(-7910927);
+        expect(zoom).toEqual(18);
+
+      });
 
     });
 
