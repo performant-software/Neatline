@@ -1,0 +1,11 @@
+<kml xmlns="http://earth.google.com/kml/2.0">
+  <Folder>
+    <name>Washington, D.C.</name>
+    <Placemark>
+      <name>Washington, D.C.</name>
+      <Point>
+        <coordinates>-8575597.889921868,4705631.73705383</coordinates>
+      </Point>
+    </Placemark>
+  </Folder>
+</kml>

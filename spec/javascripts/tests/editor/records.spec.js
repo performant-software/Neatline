@@ -38,10 +38,11 @@ describe('Records', function() {
 
   it('should list records', function() {
 
-    // 2 records in browser pane.
-    expect(records.length).toEqual(2);
+    // 3 records in browser pane.
+    expect(records.length).toEqual(3);
     expect($(records[0]).text()).toEqual('Record 1');
     expect($(records[1]).text()).toEqual('Record 2');
+    expect($(records[2]).text()).toEqual('Record 3');
 
   });
 
@@ -59,10 +60,8 @@ describe('Records', function() {
     // Close Record 1.
     _t.form.closeButton.trigger('click');
 
-    // 2 records in browser pane.
-    expect(records.length).toEqual(2);
-    expect($(records[0]).text()).toEqual('Record 1');
-    expect($(records[1]).text()).toEqual('Record 2');
+    // 3 records in browser pane.
+    expect(records.length).toEqual(3);
 
     // Open Record 2.
     records = _t.records.$el.find('.record-row');

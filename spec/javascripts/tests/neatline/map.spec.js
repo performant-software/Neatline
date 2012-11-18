@@ -104,9 +104,9 @@ describe('Map', function() {
 
       // Stroke color.
       expect(layers[0].styleMap.styles.default.defaultStyle.strokeColor).
-        toEqual('#333333');
-      expect(layers[1].styleMap.styles.default.defaultStyle.strokeColor).
         toEqual('#444444');
+      expect(layers[1].styleMap.styles.default.defaultStyle.strokeColor).
+        toEqual('#555555');
 
       // Fill opacity
       expect(layers[0].styleMap.styles.default.defaultStyle.fillOpacity).
@@ -116,27 +116,27 @@ describe('Map', function() {
 
       // Stroke opacity
       expect(layers[0].styleMap.styles.default.defaultStyle.strokeOpacity).
-        toEqual(0.05);
+        toEqual(0.07);
       expect(layers[1].styleMap.styles.default.defaultStyle.strokeOpacity).
-        toEqual(0.06);
+        toEqual(0.08);
 
       // Graphic opacity
       expect(layers[0].styleMap.styles.default.defaultStyle.graphicOpacity).
-        toEqual(0.07);
+        toEqual(0.1);
       expect(layers[1].styleMap.styles.default.defaultStyle.graphicOpacity).
-        toEqual(0.08);
+        toEqual(0.11);
 
       // Stroke width.
       expect(layers[0].styleMap.styles.default.defaultStyle.strokeWidth).
-        toEqual(9);
+        toEqual(13);
       expect(layers[1].styleMap.styles.default.defaultStyle.strokeWidth).
-        toEqual(10);
+        toEqual(14);
 
       // Point radius.
       expect(layers[0].styleMap.styles.default.defaultStyle.pointRadius).
-        toEqual(11);
+        toEqual(16);
       expect(layers[1].styleMap.styles.default.defaultStyle.pointRadius).
-        toEqual(12);
+        toEqual(17);
 
       /*
        * Select:
@@ -144,45 +144,45 @@ describe('Map', function() {
 
       // Fill color.
       expect(layers[0].styleMap.styles.select.defaultStyle.fillColor).
-        toEqual('#555555');
+        toEqual('#777777');
       expect(layers[1].styleMap.styles.select.defaultStyle.fillColor).
-        toEqual('#666666');
+        toEqual('#888888');
 
       // Stroke color.
       expect(layers[0].styleMap.styles.select.defaultStyle.strokeColor).
-        toEqual('#333333');
-      expect(layers[1].styleMap.styles.select.defaultStyle.strokeColor).
         toEqual('#444444');
+      expect(layers[1].styleMap.styles.select.defaultStyle.strokeColor).
+        toEqual('#555555');
 
       // Fill opacity
       expect(layers[0].styleMap.styles.select.defaultStyle.fillOpacity).
-        toEqual(0.03);
-      expect(layers[1].styleMap.styles.select.defaultStyle.fillOpacity).
         toEqual(0.04);
+      expect(layers[1].styleMap.styles.select.defaultStyle.fillOpacity).
+        toEqual(0.05);
 
       // Stroke opacity
       expect(layers[0].styleMap.styles.select.defaultStyle.strokeOpacity).
-        toEqual(0.05);
+        toEqual(0.07);
       expect(layers[1].styleMap.styles.select.defaultStyle.strokeOpacity).
-        toEqual(0.06);
+        toEqual(0.08);
 
       // Graphic opacity
       expect(layers[0].styleMap.styles.select.defaultStyle.graphicOpacity).
-        toEqual(0.07);
+        toEqual(0.1);
       expect(layers[1].styleMap.styles.select.defaultStyle.graphicOpacity).
-        toEqual(0.08);
+        toEqual(0.11);
 
       // Stroke width.
       expect(layers[0].styleMap.styles.select.defaultStyle.strokeWidth).
-        toEqual(9);
+        toEqual(13);
       expect(layers[1].styleMap.styles.select.defaultStyle.strokeWidth).
-        toEqual(10);
+        toEqual(14);
 
       // Point radius.
       expect(layers[0].styleMap.styles.select.defaultStyle.pointRadius).
-        toEqual(11);
+        toEqual(16);
       expect(layers[1].styleMap.styles.select.defaultStyle.pointRadius).
-        toEqual(12);
+        toEqual(17);
 
       /*
        * Temporary:
@@ -190,15 +190,15 @@ describe('Map', function() {
 
       // Fill color.
       expect(layers[0].styleMap.styles.temporary.defaultStyle.fillColor).
-        toEqual('#555555');
+        toEqual('#777777');
       expect(layers[1].styleMap.styles.temporary.defaultStyle.fillColor).
-        toEqual('#666666');
+        toEqual('#888888');
 
       // Stroke color.
       expect(layers[0].styleMap.styles.temporary.defaultStyle.strokeColor).
-        toEqual('#333333');
-      expect(layers[1].styleMap.styles.temporary.defaultStyle.strokeColor).
         toEqual('#444444');
+      expect(layers[1].styleMap.styles.temporary.defaultStyle.strokeColor).
+        toEqual('#555555');
 
       // Fill opacity
       expect(layers[0].styleMap.styles.temporary.defaultStyle.fillOpacity).
@@ -208,27 +208,27 @@ describe('Map', function() {
 
       // Stroke opacity
       expect(layers[0].styleMap.styles.temporary.defaultStyle.strokeOpacity).
-        toEqual(0.05);
+        toEqual(0.07);
       expect(layers[1].styleMap.styles.temporary.defaultStyle.strokeOpacity).
-        toEqual(0.06);
+        toEqual(0.08);
 
       // Graphic opacity
       expect(layers[0].styleMap.styles.temporary.defaultStyle.graphicOpacity).
-        toEqual(0.07);
+        toEqual(0.1);
       expect(layers[1].styleMap.styles.temporary.defaultStyle.graphicOpacity).
-        toEqual(0.08);
+        toEqual(0.11);
 
       // Stroke width.
       expect(layers[0].styleMap.styles.temporary.defaultStyle.strokeWidth).
-        toEqual(9);
+        toEqual(13);
       expect(layers[1].styleMap.styles.temporary.defaultStyle.strokeWidth).
-        toEqual(10);
+        toEqual(14);
 
       // Point radius.
       expect(layers[0].styleMap.styles.temporary.defaultStyle.pointRadius).
-        toEqual(11);
+        toEqual(16);
       expect(layers[1].styleMap.styles.temporary.defaultStyle.pointRadius).
-        toEqual(12);
+        toEqual(17);
 
     });
 

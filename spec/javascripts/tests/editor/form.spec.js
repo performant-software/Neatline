@@ -143,14 +143,14 @@ describe('Form', function() {
       expect(_t.form.title.val()).toEqual('Record 1');
       expect(_t.form.body.val()).toEqual('Record 1 desc.');
       expect(_t.form.vectorColor.val()).toEqual('#111111');
-      expect(_t.form.strokeColor.val()).toEqual('#333333');
-      expect(_t.form.selectColor.val()).toEqual('#555555');
+      expect(_t.form.strokeColor.val()).toEqual('#444444');
+      expect(_t.form.selectColor.val()).toEqual('#777777');
       expect(_t.form.vectorOpacity.val()).toEqual('1');
-      expect(_t.form.selectOpacity.val()).toEqual('3');
-      expect(_t.form.strokeOpacity.val()).toEqual('5');
-      expect(_t.form.graphicOpacity.val()).toEqual('7');
-      expect(_t.form.strokeWidth.val()).toEqual('9');
-      expect(_t.form.pointRadius.val()).toEqual('11');
+      expect(_t.form.selectOpacity.val()).toEqual('4');
+      expect(_t.form.strokeOpacity.val()).toEqual('7');
+      expect(_t.form.graphicOpacity.val()).toEqual('10');
+      expect(_t.form.strokeWidth.val()).toEqual('13');
+      expect(_t.form.pointRadius.val()).toEqual('16');
       expect(_t.form.pointGraphic.val()).toEqual('file1.png');
       expect(_t.form.coverage.val().indexOf('New York')).
         not.toEqual(-1);
@@ -167,14 +167,14 @@ describe('Form', function() {
       _t.form.title.val('Record 2');
       _t.form.body.val('Record 2 desc.');
       _t.form.vectorColor.val('#222222');
-      _t.form.strokeColor.val('#444444');
-      _t.form.selectColor.val('#666666');
+      _t.form.strokeColor.val('#555555');
+      _t.form.selectColor.val('#888888');
       _t.form.vectorOpacity.val('2');
-      _t.form.selectOpacity.val('4');
-      _t.form.strokeOpacity.val('6');
-      _t.form.graphicOpacity.val('8');
-      _t.form.strokeWidth.val('10');
-      _t.form.pointRadius.val('12');
+      _t.form.selectOpacity.val('5');
+      _t.form.strokeOpacity.val('8');
+      _t.form.graphicOpacity.val('11');
+      _t.form.strokeWidth.val('14');
+      _t.form.pointRadius.val('17');
       _t.form.pointGraphic.val('file2.png');
       _t.form.coverage.val(coverage);
 
@@ -188,14 +188,14 @@ describe('Form', function() {
       expect(params.title).toEqual('Record 2');
       expect(params.description).toEqual('Record 2 desc.');
       expect(params.vector_color).toEqual('#222222');
-      expect(params.stroke_color).toEqual('#444444');
-      expect(params.select_color).toEqual('#666666');
+      expect(params.stroke_color).toEqual('#555555');
+      expect(params.select_color).toEqual('#888888');
       expect(params.vector_opacity).toEqual('2');
-      expect(params.select_opacity).toEqual('4');
-      expect(params.stroke_opacity).toEqual('6');
-      expect(params.graphic_opacity).toEqual('8');
-      expect(params.stroke_width).toEqual('10');
-      expect(params.point_radius).toEqual('12');
+      expect(params.select_opacity).toEqual('5');
+      expect(params.stroke_opacity).toEqual('8');
+      expect(params.graphic_opacity).toEqual('11');
+      expect(params.stroke_width).toEqual('14');
+      expect(params.point_radius).toEqual('17');
       expect(params.point_image).toEqual('file2.png');
       expect(params.coverage.indexOf('Boston')).not.toEqual(-1);
       expect(params.bounds).toEqual('POLYGON(('+

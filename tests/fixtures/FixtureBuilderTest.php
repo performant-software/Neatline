@@ -29,46 +29,81 @@ class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
         $exhibit = $this->__exhibit();
         $record1 = $this->__record(null, $exhibit);
         $record2 = $this->__record(null, $exhibit);
+        $record3 = $this->__record(null, $exhibit);
 
-        // Read KML files.
         $nyc = file_get_contents(NEATLINE_PLUGIN_DIR .
             '/tests/mocks/nyc.kml');
+
         $boston = file_get_contents(NEATLINE_PLUGIN_DIR .
             '/tests/mocks/boston.kml');
 
-        // Populate parameters.
-        $record1->title           = 'Record 1';
-        $record2->title           = 'Record 2';
-        $record1->description     = 'Record 1 desc.';
-        $record2->description     = 'Record 2 desc.';
-        $record1->coverage        = $nyc;
-        $record2->coverage        = $boston;
-        $record1->map_focus       = '-8233185.189506843,4978802.273690212';
-        $record1->map_zoom        = 10;
-        $record1->map_active      = 1;
-        $record2->map_active      = 1;
-        $record1->vector_color    = '#111111';
-        $record2->vector_color    = '#222222';
-        $record1->stroke_color    = '#333333';
-        $record2->stroke_color    = '#444444';
-        $record1->select_color    = '#555555';
-        $record2->select_color    = '#666666';
-        $record1->vector_opacity  = 1;
-        $record2->vector_opacity  = 2;
-        $record1->select_opacity  = 3;
-        $record2->select_opacity  = 4;
-        $record1->stroke_opacity  = 5;
-        $record2->stroke_opacity  = 6;
-        $record1->graphic_opacity = 7;
-        $record2->graphic_opacity = 8;
-        $record1->stroke_width    = 9;
-        $record2->stroke_width    = 10;
-        $record1->point_radius    = 11;
-        $record2->point_radius    = 12;
-        $record1->point_image     = 'file1.png';
-        $record2->point_image     = 'file2.png';
+        $dc = file_get_contents(NEATLINE_PLUGIN_DIR .
+            '/tests/mocks/dc.kml');
+
+        $record1->title = 'Record 1';
+        $record2->title = 'Record 2';
+        $record3->title = 'Record 3';
+
+        $record1->description = 'Record 1 desc.';
+        $record2->description = 'Record 2 desc.';
+        $record3->description = 'Record 3 desc.';
+
+        $record1->coverage = $nyc;
+        $record2->coverage = $boston;
+        $record3->coverage = $dc;
+
+        // No default focus/zoom for records 2 and 3.
+        $record1->map_focus = '-8233185.189506843,4978802.273690212';
+        $record1->map_zoom = 10;
+
+        // Record 3 inactive.
+        $record1->map_active = 1;
+        $record2->map_active = 1;
+        $record3->map_active = 0;
+
+        $record1->vector_color = '#111111';
+        $record2->vector_color = '#222222';
+        $record3->vector_color = '#333333';
+
+        $record1->stroke_color = '#444444';
+        $record2->stroke_color = '#555555';
+        $record3->stroke_color = '#666666';
+
+        $record1->select_color = '#777777';
+        $record2->select_color = '#888888';
+        $record3->select_color = '#999999';
+
+        $record1->vector_opacity = 1;
+        $record2->vector_opacity = 2;
+        $record3->vector_opacity = 3;
+
+        $record1->select_opacity = 4;
+        $record2->select_opacity = 5;
+        $record3->select_opacity = 6;
+
+        $record1->stroke_opacity = 7;
+        $record2->stroke_opacity = 8;
+        $record3->stroke_opacity = 9;
+
+        $record1->graphic_opacity = 10;
+        $record2->graphic_opacity = 11;
+        $record3->graphic_opacity = 12;
+
+        $record1->stroke_width = 13;
+        $record2->stroke_width = 14;
+        $record3->stroke_width = 15;
+
+        $record1->point_radius = 16;
+        $record2->point_radius = 17;
+        $record3->point_radius = 18;
+
+        $record1->point_image = 'file1.png';
+        $record2->point_image = 'file2.png';
+        $record3->point_image = 'file3.png';
+
         $record1->save();
         $record2->save();
+        $record3->save();
 
         // Generate the fixture.
         $this->writeFixture('neatline/records/'.$exhibit->id,
