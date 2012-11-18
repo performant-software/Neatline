@@ -17,7 +17,7 @@ describe('Map', function() {
   // Load AJAX fixtures.
   var json = readFixtures('records.json');
   var jsonChangedData = readFixtures('records-changed-data.json');
-  var jsonRemovedData = readFixtures('records-removed-data.json');
+  var jsonRemovedData = readFixtures('records-removed-record.json');
 
   // Get fixtures.
   beforeEach(function() {
@@ -98,22 +98,55 @@ describe('Map', function() {
 
       it('should not change data for frozen record', function() {
 
-        console.log('before');
+        // Get Record 2 layer.
+        var record2Layer = _.find(layers, function(layer) {
+          return layer.name == 'Record 2';
+        });
+
+        // Set frozen.
+        _t.map.frozen.push(record2Layer.nId);
+
         // Trigger a map move, inject fixture.
         _t.map.map.events.triggerEvent('moveend');
         var request = _.last(server.requests);
         _t.respond200(request, jsonChangedData);
-        console.log('after');
+
+        // Get the new layer for record 2
+        var newLayers = _t.getVectorLayers();
+        record2Layer = _.find(newLayers, function(layer) {
+          return layer.name == 'Record 2';
+        });
 
         // Check geometry.
-        layers = _t.getVectorLayers();
-        expect(layers.length).toEqual(2);
-        expect(layers[1].features[0].geometry.x).toEqual(-7910926.6783014);
-        expect(layers[1].features[0].geometry.y).toEqual(5214839.817002);
+        expect(record2Layer.features[0].geometry.x).toEqual(-7910926.6783014);
+        expect(record2Layer.features[0].geometry.y).toEqual(5214839.817002);
 
       });
 
       it('should not remove data for frozen record', function() {
+
+        // Get Record 2 layer.
+        var record2Layer = _.find(layers, function(layer) {
+          return layer.name == 'Record 2';
+        });
+
+        // Set frozen.
+        _t.map.frozen.push(record2Layer.nId);
+
+        // Trigger a map move, inject fixture.
+        _t.map.map.events.triggerEvent('moveend');
+        var request = _.last(server.requests);
+        _t.respond200(request, jsonRemovedData);
+
+        // Get the new layer for record 2
+        var newLayers = _t.getVectorLayers();
+        record2Layer = _.find(newLayers, function(layer) {
+          return layer.name == 'Record 2';
+        });
+
+        // Check geometry.
+        expect(record2Layer.features[0].geometry.x).toEqual(-7910926.6783014);
+        expect(record2Layer.features[0].geometry.y).toEqual(5214839.817002);
 
       });
 
