@@ -217,50 +217,29 @@ class Neatline_NeatlineExhibitTest extends Neatline_Test_AppTestCase
     }
 
     /**
-     * getNumberOfRecords() should return 0 when there are no records.
-     *
-     * @return void.
-     */
-    public function testGetNumberOfRecordsWhenNoRecordsExist()
-    {
-
-        // Create exhibits.
-        $neatline = $this->__exhibit();
-
-        // Check count.
-        $this->assertEquals($neatline->getNumberOfRecords(), 0);
-
-    }
-
-    /**
      * getNumberOfRecords() should return the exhibit record count.
      *
      * @return void.
      */
-    public function testGetNumberOfRecordsWhenRecordsExist()
+    public function testGetNumberOfRecords()
     {
 
-        // Create exhibits.
-        $neatline1 = $this->__exhibit('test-exhibit-1');
-        $neatline2 = $this->__exhibit('test-exhibit-2');
+        // Create exhibit.
+        $exhibit = $this->__exhibit();
 
         // Create records.
-        $record1 = new NeatlineRecord(null, $neatline1);
-        $record2 = new NeatlineRecord(null, $neatline1);
-        $record3 = new NeatlineRecord(null, $neatline1);
-        $record4 = new NeatlineRecord(null, $neatline2);
+        $record1 = new NeatlineRecord(null, $exhibit);
+        $record2 = new NeatlineRecord(null, $exhibit);
+        $record3 = new NeatlineRecord(null, $exhibit);
         $record1->map_active = 1;
         $record2->map_active = 1;
         $record3->map_active = 1;
-        $record4->map_active = 1;
         $record1->save();
         $record2->save();
         $record3->save();
-        $record4->save();
 
         // Check count.
-        $this->assertEquals($neatline1->getNumberOfRecords(), 3);
-        $this->assertEquals($neatline2->getNumberOfRecords(), 1);
+        $this->assertEquals($exhibit->getNumberOfRecords(), 3);
 
     }
 

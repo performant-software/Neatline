@@ -187,19 +187,14 @@ class NeatlineExhibit extends Omeka_Record_AbstractRecord
     }
 
     /**
-     * Return the total number of data records.
+     * Get the number of active records in the exhibit.
      *
      * @return integer $id The record count.
      */
     public function getNumberOfRecords()
     {
-
-        // Get the data record table and query for active records.
-        $_recordsTable = $this->getTable('NeatlineRecord');
-        $records = $_recordsTable->getActiveRecordsByExhibit($this);
-
-        return ($records) ? count($records) : 0;
-
+        $recordsTable = $this->getTable('NeatlineRecord');
+        return $recordsTable->countActiveRecordsByExhibit($this);
     }
 
     /**

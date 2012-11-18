@@ -626,13 +626,6 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
             $exhibit->save();
         }
 
-        // Update bounds.
-        // if (is_null($this->bounds)) {
-            // $this->bounds = new Zend_Db_Expr(
-                // "PolyFromText(POLYGON((0 0,0 1,1 1,1 0)))"
-            // );
-        // }
-
         parent::save();
 
     }

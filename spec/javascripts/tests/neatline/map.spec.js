@@ -424,6 +424,26 @@ describe('Map', function() {
 
       });
 
+      it('should fetch new data on zoom/pan', function() {
+
+        // Spy on map:highlight.
+        spyOn(Neatline.vent, 'trigger');
+
+        // Trigger pan, inject changed data.
+        _t.map.map.events.triggerEvent('moveend');
+        var request = _.last(server.requests);
+        _t.respond200(request, jsonChangedData);
+
+        // Check publication.
+        expect(Neatline.vent.trigger).toHaveBeenCalledWith('map:move', {
+          extent: _t.map.getExtentAsWKT(),
+          zoom: _t.map.getZoom()
+        });
+
+        // TODO: Test for new geometry.
+
+      });
+
     });
 
     describe('Incoming', function() {

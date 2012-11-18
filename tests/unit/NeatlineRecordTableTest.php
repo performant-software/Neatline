@@ -400,6 +400,41 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
     }
 
     /**
+     * countActiveRecordsByExhibit() should return the exhibit record count.
+     *
+     * @return void.
+     */
+    public function testCountActiveRecordsByExhibit()
+    {
+
+        // Create exhibits.
+        $exhibit1 = $this->__exhibit('test-1');
+        $exhibit2 = $this->__exhibit('test-2');
+
+        // Create records.
+        $record1 = new NeatlineRecord(null, $exhibit1);
+        $record2 = new NeatlineRecord(null, $exhibit1);
+        $record3 = new NeatlineRecord(null, $exhibit1);
+        $record4 = new NeatlineRecord(null, $exhibit2);
+        $record5 = new NeatlineRecord(null, $exhibit2);
+        $record1->map_active = 1;
+        $record2->map_active = 1;
+        $record3->map_active = 1;
+        $record4->map_active = 1;
+        $record5->map_active = 0;
+        $record1->save();
+        $record2->save();
+        $record3->save();
+        $record4->save();
+        $record5->save();
+
+        // Check count.
+        $this->assertEquals($exhibit1->getNumberOfRecords(), 3);
+        $this->assertEquals($exhibit2->getNumberOfRecords(), 1);
+
+    }
+
+    /**
      * updateRecord() should update all non-empty properties.
      *
      * @return void
@@ -480,12 +515,12 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
     }
 
     /**
-     * buildRecordCollection() should construct a well-formed array of records
+     * queryRecords() should construct a well-formed array of records
      * with all attributes needed for the front-end application.
      *
      * @return void.
      */
-    public function testBuildRecordCollection()
+    public function testQueryRecords()
     {
 
         // Create an exhibit and items.
@@ -538,7 +573,7 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
         $record2->save();
 
         // Build the record array.
-        $records = $this->_recordsTable->buildRecordCollection($exhibit);
+        $records = $this->_recordsTable->queryRecords($exhibit);
 
         // Check result.
         $this->assertEquals(

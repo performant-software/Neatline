@@ -100,8 +100,7 @@ class NeatlineRecordTable extends Omeka_Db_Table
     }
 
     /**
-     * Find all records associated with a given exhibit that have either
-     * an active space, time, or items status.
+     * Find all active records in an exhibit.
      *
      * @param Omeka_record $exhibit The exhibit record.
      *
@@ -118,6 +117,21 @@ class NeatlineRecordTable extends Omeka_Db_Table
 
         return $records ? $records : false;
 
+    }
+
+    /**
+     * Count all active records in an exhibit.
+     *
+     * @param Omeka_record $exhibit The exhibit record.
+     *
+     * @return integer $count The number of active records.
+     */
+    public function countActiveRecordsByExhibit($exhibit)
+    {
+        return $this->count(array(
+            'exhibit_id' => $exhibit->id,
+            'map_active' => 1
+        ));
     }
 
     /**
@@ -178,12 +192,12 @@ class NeatlineRecordTable extends Omeka_Db_Table
      * Construct records JSON for exhibit and editor.
      *
      * @param Omeka_Record_AbstractRecord $exhibit The exhibit record.
-     * @param string $query The search query.
-     * @param int $page The page.
+     * @param string $extent The current map viewport extent.
+     * @param int $zoom The zoom level.
      *
-     * @return JSON Array of records.
+     * @return array Array of matching records.
      */
-    public function buildRecordCollection($exhibit, $query=null, $page=null)
+    public function queryRecords($exhibit, $extent=null, $zoom=null)
     {
 
         $data = array();

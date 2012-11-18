@@ -127,6 +127,7 @@ Neatline.Views.Map = Backbone.View.extend({
 
     // Register for `moveend`.
     this.map.events.register('moveend', this.map, _.bind(function() {
+      console.log(this.getZoom());
 
       // Publish.
       Neatline.vent.trigger('map:move', {
