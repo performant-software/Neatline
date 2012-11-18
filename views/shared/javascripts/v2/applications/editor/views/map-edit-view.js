@@ -20,8 +20,9 @@
  */
 Neatline.Views.Map.prototype.startEdit = function(model) {
 
-  // Get the vector layer for the model.
+  // Get the layer, freeze model.
   this.editLayer = this.getLayerByModel(model);
+  this.frozen.push(model.get('id'));
 
   this.controls = {
 
@@ -64,12 +65,22 @@ Neatline.Views.Map.prototype.startEdit = function(model) {
 /*
  * Strip editing controls.
  *
+ * @param {Object} model: The record model.
+ *
  * @return void.
  */
-Neatline.Views.Map.prototype.endEdit = function() {
+Neatline.Views.Map.prototype.endEdit = function(model) {
+
+  // Remove controls.
   _.each(this.controls, _.bind(function(val,key) {
     this.map.removeControl(val);
   }, this));
+
+  // Remove model id from frozen tracker.
+  this.frozen = _.reject(this.frozen, function(id) {
+    return id == model.get('id');
+  });
+
 };
 
 

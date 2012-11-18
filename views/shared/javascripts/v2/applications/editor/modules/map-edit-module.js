@@ -55,10 +55,12 @@ Editor.Modules.Map = (function(Backbone, Editor, Neatline) {
   /*
    * Close form.
    *
+   * @param {Object} model: The record model.
+   *
    * @return void.
    */
-  Editor.vent.on('form:close', function() {
-    Map.view.endEdit();
+  Editor.vent.on('form:close', function(model) {
+    Map.view.endEdit(model);
   });
 
   /*

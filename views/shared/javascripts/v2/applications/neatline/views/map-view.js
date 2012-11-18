@@ -16,14 +16,14 @@ Neatline.Views.Map = Backbone.View.extend({
     defaultZoom: 6
   },
 
-  layers: [],
-
   /*
    * Start OpenLayers.
    *
    * @return void.
    */
   initialize: function() {
+    this.layers = [];
+    this.frozen = [];
     this.initializeOpenLayers();
   },
 
@@ -206,18 +206,44 @@ Neatline.Views.Map = Backbone.View.extend({
    */
   ingest: function(records) {
 
-    // Clear existing layers.
-    _.each(this.layers, _.bind(function(l) {
-      this.map.removeLayer(l);
+    var layers = [];
+
+
+    // Clear layers.
+    // -------------
+
+    _.each(this.layers, _.bind(function(layer) {
+
+      // If unfrozen, remove from map.
+      if (!_.contains(this.frozen, layer.nId)) {
+        this.map.removeLayer(layer);
+      }
+
+      // Else, add to new tracker.
+      else layers.push(layer);
+
     }, this));
 
-    // Add new layers.
-    this.layers = [];
-    records.each(_.bind(this.buildLayer, this));
+    this.layers = layers;
 
-    // Update controls.
+
+    // Add layers.
+    // -----------
+
+    records.each(_.bind(function(record) {
+
+      // Build if map active and unfrozen.
+      if (!_.contains(this.frozen, record.get('id')) &&
+         record.get('map_active') == 1) {
+          this.buildLayer(record);
+      }
+
+    }, this));
+
+    // Update controls with new layers.
     this.hoverControl.setLayer(this.layers);
     this.clickControl.setLayer(this.layers);
+
 
   },
 
@@ -230,33 +256,28 @@ Neatline.Views.Map = Backbone.View.extend({
    */
   buildLayer: function(record) {
 
-    // If active on the map.
-    if (record.get('map_active') == 1) {
+    // Build geometry and style.
+    var formatKML = new OpenLayers.Format.KML();
+    var geometry = formatKML.read(record.get('coverage'));
+    var style = this.getStyleMap(record);
 
-      // Build geometry and style.
-      var formatKML = new OpenLayers.Format.KML();
-      var geometry = formatKML.read(record.get('coverage'));
-      var style = this.getStyleMap(record);
+    // Build the layer.
+    var layer = new OpenLayers.Layer.Vector(
+      record.get('title'), {
+        styleMap: style, displayInLayerSwitcher: false
+      }
+    );
 
-      // Build the layer.
-      var layer = new OpenLayers.Layer.Vector(
-        record.get('title'), {
-          styleMap: style, displayInLayerSwitcher: false
-        }
-      );
+    // Add to map, track.
+    layer.addFeatures(geometry);
+    this.map.addLayer(layer);
 
-      // Add to map, track.
-      layer.addFeatures(geometry);
-      this.map.addLayer(layer);
+    // Store model, id.
+    layer.nModel = record;
+    layer.nId = record.get('id');
 
-      // Store model, id.
-      layer.nModel = record;
-      layer.nId = record.get('id');
-
-      // Track layer.
-      this.layers.push(layer);
-
-    }
+    // Track layer.
+    this.layers.push(layer);
 
   },
 

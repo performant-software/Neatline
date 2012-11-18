@@ -24,6 +24,7 @@ Editor.Views.Form = Backbone.View.extend({
   initialize: function() {
 
     // Trackers.
+    this.model = null;
     this.started = false;
     this.open = false;
 
@@ -118,9 +119,10 @@ Editor.Views.Form = Backbone.View.extend({
    *
    * @return void.
    */
-  close: function(model) {
+  close: function() {
     this.form.detach();
-    Editor.vent.trigger('form:close');
+    Editor.vent.trigger('form:close', this.model);
+    this.model = null;
     this.open = false;
   },
 
