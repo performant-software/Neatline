@@ -77,7 +77,7 @@ Neatline.Views.Map.prototype.endEdit = function() {
  * Apply a settings combination to the controls. Based on:
  * http://openlayers.org/dev/examples/modify-feature.html
  *
- * @param {Object} setttings: Settings for the controls.
+ * @param {Object} settings: Settings for the controls.
  *
  * @return void.
  */

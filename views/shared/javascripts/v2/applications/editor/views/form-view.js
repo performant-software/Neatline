@@ -209,7 +209,6 @@ Editor.Views.Form = Backbone.View.extend({
   /*
    * Get current edit geometry settings.
    *
-   * @unittest
    * @return void.
    */
   updateMap: function() {
