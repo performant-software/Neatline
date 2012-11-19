@@ -201,9 +201,14 @@ class NeatlineRecordTable extends Omeka_Db_Table
     {
 
         $data = array();
+        $select = $this->getSelect();
+
+        // Exhibit.
+        // --------
+        $select = $this->filterByExhibit($select, $exhibit);
 
         // Get records.
-        if ($records = $this->getRecordsByExhibit($exhibit)) {
+        if ($records = $this->fetchObjects($select)) {
 
             // Construct record objects.
             foreach ($records as $record) {
@@ -214,6 +219,16 @@ class NeatlineRecordTable extends Omeka_Db_Table
 
         return $data;
 
+    }
+
+    /**
+     * Filter by exhibit.
+     *
+     * @return $select The filtered select.
+     */
+    protected function filterByExhibit($select, $exhibit)
+    {
+        return $select->where('exhibit_id=?', $exhibit->id);
     }
 
 }
