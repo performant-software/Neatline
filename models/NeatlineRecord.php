@@ -270,38 +270,6 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
     }
 
     /**
-     * Set the coverage field if the passed value is not <string>'null', which
-     * is true when there was not an instantiated map when the  triggering save
-     * action was performed in the editor.
-     *
-     * @param integer $value The value.
-     *
-     * @return boolean True if the set succeeds.
-     */
-    public function setGeocoverage($value)
-    {
-        if ($value == 'null') return false;
-        return $this->setNotEmpty('coverage', $value);
-    }
-
-    /**
-     * Set a style attribute. If there is an exhibit default, only set
-     * if the passed value is different. If there is no exhibit default,
-     * only set if the passed value is different from the system
-     * default. If a non-style column name is passed, return false.
-     *
-     * @param string style The name of the style.
-     * @param mixed $value The value to set.
-     *
-     * @return boolean True if the set succeeds.
-     */
-    public function setStyle($style, $value)
-    {
-        $this[$style] = $value;
-        return true;
-    }
-
-    /**
      * Set all style attributes to null.
      *
      * @return void.
@@ -362,22 +330,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
     }
 
     /**
-     * Set the an attribute if the passed value is not null or ''.
-     *
-     * @param string $attribute The name of the attribute.
-     * @param boolean $value The value to set.
-     *
-     * @return void.
-     */
-    public function getNotEmpty($attribute)
-    {
-        if (is_null($this[$attribute])) return '';
-        else return $this[$attribute];
-    }
-
-    /**
-     * Get a style attribute. In order or priority, return the row
-     * value, exhibit default, or system default.
+     * Get a style attribute.
      *
      * @param string style The name of the style.
      *
@@ -385,111 +338,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
      */
     public function getStyle($style)
     {
-        if (!is_null($this[$style])) return $this[$style];
-    }
-
-    /**
-     * Return title.
-     *
-     * @return string $title The title.
-     */
-    public function getTitle()
-    {
-
-        // Return row-level value.
-        if (!is_null($this->title)) return $this->title;
-
-        // If there is a parent item.
-        else if (!is_null($this->item_id)) {
-
-            // Try to get DC title.
-            return metadata($this->getItem(),
-                array('Dublin Core', 'Title'));
-
-        }
-
-        else return '';
-
-    }
-
-    /**
-     * For dropdown selects, strip HTML and truncate.
-     *
-     * @param integer length The max length.
-     *
-     * @return string $title The title.
-     */
-    public function getTitleForSelect($length=60)
-    {
-
-        // Get title, strip tags, truncate.
-        $title = strip_tags($this->getTitle());
-        $fixed = substr($title, 0, $length);
-
-        // Trim title.
-        if (strlen($title) > $length) $fixed .= ' ...';
-
-        return $fixed;
-
-    }
-
-    /**
-     * If there is a title return it; if not, try to return
-     * the first portion of the description.
-     *
-     * @return string $title The title.
-     */
-    public function getTitleOrDescription()
-    {
-
-        // Return row-level value.
-        $title = $this->getTitle();
-        if ($title !== '') return $title;
-
-        else {
-
-            // Try to get a description.
-            $description = $this->getDescription();
-            if ($description !== '') return substr($description, 0, 200);
-            else return __('[Untitled]');
-
-        }
-
-    }
-
-    /**
-     * Return slug.
-     *
-     * @return string $slug The slug.
-     */
-    public function getSlug()
-    {
-        return (!is_null($this->slug)) ? $this->slug : '';
-    }
-
-    /**
-     * Return description.
-     *
-     * @return string $description The description.
-     */
-    public function getDescription()
-    {
-
-        // Return row-level value.
-        if (!is_null($this->description)) return $this->description;
-
-        // If there is a parent item.
-        else if (!is_null($this->item_id)) {
-
-            // Try to get a DC description.
-            return metadata($this->getItem(),
-                array('Dublin Core', 'Description')
-            );
-
-        }
-
-        else return '';
-
+        return $this[$style];
     }
 
     /**
@@ -555,7 +404,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
     }
 
     /**
-     * Construct map data.
+     * Assemble record data for the front-end application.
      *
      * @param array $index This is the index of NeatlineRecord objects for
      * caching. Optional.
@@ -573,9 +422,9 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
             'item_id'             => $this->item_id,
 
             // Text:
-            'title'               => $this->getTitle(),
-            'description'         => $this->getDescription(),
-            'slug'                => $this->getSlug(),
+            'title'               => $this->title,
+            'description'         => $this->description,
+            'slug'                => $this->slug,
 
             // Styles:
             'vector_color'        => $this->getStyle('vector_color'),
@@ -587,7 +436,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
             'graphic_opacity'     => $this->getStyle('graphic_opacity'),
             'stroke_width'        => $this->getStyle('stroke_width'),
             'point_radius'        => $this->getStyle('point_radius'),
-            'point_image'         => $this->getNotEmpty('point_image'),
+            'point_image'         => $this->getStyle('point_image'),
 
             // Map:
             'map_focus'           => $this->map_focus,
