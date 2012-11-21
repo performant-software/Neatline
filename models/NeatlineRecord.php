@@ -270,6 +270,18 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
     }
 
     /**
+     * Set the `bounds` attribute with PolyFromText().
+     *
+     * @param string $bounds The bounds, as a WKT polygon.
+     *
+     * @return void.
+     */
+    public function setBounds($bounds)
+    {
+        $this->bounds = new Zend_Db_Expr("PolyFromText('$bounds')");
+    }
+
+    /**
      * Set all style attributes to null.
      *
      * @return void.
@@ -481,10 +493,9 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
     }
 
     /**
-     * This calls `delete` in a transaction.
+     * Call `delete` in a transaction.
      *
      * @return void
-     * @author Eric Rochester <erochest@virginia.edu>
      **/
     public function deleteTransaction()
     {
