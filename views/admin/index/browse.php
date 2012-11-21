@@ -44,7 +44,10 @@ echo head(array('content_class' => 'neatline', 'title' => $title));
             __('# Items') => 'added',
             __('Public') => 'public',
             __('Edit') => null
-        ), array('link_tag' => 'th scope="col"', 'list_tag' => '')); ?>
+        ), array(
+            'link_tag' => 'th scope="col"',
+            'list_tag' => ''
+        )); ?>
 
         </tr>
     </thead>

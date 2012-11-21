@@ -629,4 +629,135 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
 
     }
 
+    /**
+     * queryRecords() should filter on exhibit.
+     *
+     * @return void.
+     */
+    public function testQueryRecordsExhibitFilter()
+    {
+
+        // Create exhibits.
+        $exhibit1 = $this->__exhibit();
+        $exhibit2 = $this->__exhibit();
+
+        // Create 3 records.
+        $record1 = new NeatlineRecord(null, $exhibit1);
+        $record2 = new NeatlineRecord(null, $exhibit1);
+        $record3 = new NeatlineRecord(null, $exhibit2);
+
+        // Save.
+        $record1->save();
+        $record2->save();
+        $record3->save();
+
+        // Build array for exhibit 1.
+        $records = $this->_recordsTable->queryRecords($exhibit1);
+
+        // Check count and identities.
+        $this->assertCount(2, $records);
+        $this->assertEquals($records[0]['id'], $record1->id);
+        $this->assertEquals($records[1]['id'], $record2->id);
+
+    }
+
+    /**
+     * queryRecords() should filter on zoom.
+     *
+     * @return void.
+     */
+    public function testQueryRecordsZoomFilter()
+    {
+
+        // Create exhibit.
+        $exhibit = $this->__exhibit();
+
+        // Create 4 records.
+        $record1 = new NeatlineRecord(null, $exhibit);
+        $record2 = new NeatlineRecord(null, $exhibit);
+        $record3 = new NeatlineRecord(null, $exhibit);
+        $record4 = new NeatlineRecord(null, $exhibit);
+
+        // Both null.
+        $record1->min_zoom = null;
+        $record1->max_zoom = null;
+
+        // Min set, max null.
+        $record2->min_zoom = 10;
+        $record2->max_zoom = null;
+
+        // Min null, max set.
+        $record3->min_zoom = null;
+        $record3->max_zoom = 15;
+
+        // Both set.
+        $record4->min_zoom = 20;
+        $record4->max_zoom = 30;
+
+        // Save.
+        $record1->save();
+        $record2->save();
+        $record3->save();
+        $record4->save();
+
+        // When zoom=null, get all records.
+        $records = $this->_recordsTable->queryRecords($exhibit);
+        $this->assertCount(4, $records);
+        $this->assertEquals($records[0]['id'], $record1->id);
+        $this->assertEquals($records[1]['id'], $record2->id);
+        $this->assertEquals($records[2]['id'], $record3->id);
+        $this->assertEquals($records[3]['id'], $record4->id);
+
+        // Zoom < min_zoom.
+        $records = $this->_recordsTable->queryRecords($exhibit, null, $zoom=9);
+        $this->assertCount(2, $records);
+        $this->assertEquals($records[0]['id'], $record1->id);
+        $this->assertEquals($records[1]['id'], $record3->id);
+
+        // Zoom > min_zoom.
+        $records = $this->_recordsTable->queryRecords($exhibit, null, $zoom=16);
+        $this->assertCount(2, $records);
+        $this->assertEquals($records[0]['id'], $record1->id);
+        $this->assertEquals($records[1]['id'], $record2->id);
+
+        // min_zoom < Zoom < max_zoom.
+        $records = $this->_recordsTable->queryRecords($exhibit, null, $zoom=25);
+        $this->assertCount(3, $records);
+        $this->assertEquals($records[0]['id'], $record1->id);
+        $this->assertEquals($records[1]['id'], $record2->id);
+        $this->assertEquals($records[2]['id'], $record4->id);
+
+    }
+
+    /**
+     * queryRecords() should filter on extent.
+     *
+     * @return void.
+     */
+    public function testQueryRecordsExtentFilter()
+    {
+
+        // Create exhibit.
+        $exhibit = $this->__exhibit();
+
+        // Create 2 records.
+        $record1 = new NeatlineRecord(null, $exhibit);
+        $record2 = new NeatlineRecord(null, $exhibit);
+
+        // Set bounds.
+        // $record1->bounds = 'POLYGON((0 0,0 5,5 5,5 0))';
+        // $record2->bounds = null;
+
+        // Save.
+        $record1->save();
+        $record2->save();
+
+        // When extent=null, get all records.
+        $records = $this->_recordsTable->queryRecords($exhibit);
+        $this->assertCount(2, $records);
+        $this->assertEquals($records[0]['id'], $record1->id);
+        $this->assertEquals($records[1]['id'], $record2->id);
+
+    }
+
 }

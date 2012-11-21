@@ -483,7 +483,8 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
 
             // Try to get a DC description.
             return metadata($this->getItem(),
-                array('Dublin Core', 'Description'));
+                array('Dublin Core', 'Description')
+            );
 
         }
 

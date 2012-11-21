@@ -201,11 +201,22 @@ class NeatlineRecordTable extends Omeka_Db_Table
     {
 
         $data = array();
-        $select = $this->getSelect();
+        $select = $this->getSelect()->where('exhibit_id=?', $exhibit->id);
 
-        // Exhibit.
-        // --------
-        $select = $this->filterByExhibit($select, $exhibit);
+
+        // Extent.
+        // -------
+        if (!is_null($extent)) {
+            $select = $this->filterByExtent($select, $extent);
+        }
+
+
+        // Zoom.
+        // -----
+        if (!is_null($zoom)) {
+            $select = $this->filterByZoom($select, $zoom);
+        }
+
 
         // Get records.
         if ($records = $this->fetchObjects($select)) {
@@ -222,13 +233,32 @@ class NeatlineRecordTable extends Omeka_Db_Table
     }
 
     /**
-     * Filter by exhibit.
+     * Filter by zoom.
      *
-     * @return $select The filtered select.
+     * @param Omeka_Db_Select $select The starting select.
+     * @param integer $zoom The zoom level.
+     *
+     * @return Omeka_Db_Select $select The filtered select.
      */
-    protected function filterByExhibit($select, $exhibit)
+    protected function filterByZoom($select, $zoom)
     {
-        return $select->where('exhibit_id=?', $exhibit->id);
+        $select->where('min_zoom IS NULL OR min_zoom<=?', $zoom);
+        $select->where('max_zoom IS NULL OR max_zoom>=?', $zoom);
+        return $select;
+    }
+
+    /**
+     * Filter by extent.
+     *
+     * @param Omeka_Db_Select $select The starting select.
+     * @param string $extent The extent, as a WKT polygon.
+     *
+     * @return Omeka_Db_Select $select The filtered select.
+     */
+    protected function filterByExtent($select, $extent)
+    {
+
+        return $select;
     }
 
 }
