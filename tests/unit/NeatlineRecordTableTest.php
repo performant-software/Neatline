@@ -557,8 +557,8 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
         $record2->stroke_width      = 10;
         $record1->point_radius      = 11;
         $record2->point_radius      = 12;
-        $record1->point_image       = 'http://test1.org';
-        $record2->point_image       = 'http://test2.org';
+        $record1->point_image       = 'file1.png';
+        $record2->point_image       = 'file2.png';
         $record1->coverage          = 'kml1';
         $record2->coverage          = 'kml2';
         $record1->map_active        = 1;
@@ -593,7 +593,7 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
                 'graphic_opacity'   => 7,
                 'stroke_width'      => 9,
                 'point_radius'      => 11,
-                'point_image'       => 'http://test1.org',
+                'point_image'       => 'file1.png',
                 'map_focus'         => 'center1',
                 'map_zoom'          => 13,
                 'coverage'          => 'kml1',
@@ -616,7 +616,7 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
                 'graphic_opacity'   => 8,
                 'stroke_width'      => 10,
                 'point_radius'      => 12,
-                'point_image'       => 'http://test2.org',
+                'point_image'       => 'file2.png',
                 'map_focus'         => 'center2',
                 'map_zoom'          => 14,
                 'coverage'          => 'kml2',
