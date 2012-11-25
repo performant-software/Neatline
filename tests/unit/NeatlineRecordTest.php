@@ -40,9 +40,9 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
         $record->stroke_width       = 3;
         $record->point_radius       = 3;
         $record->point_image        = 'http://test.org';
-        $record->coverage           = 'POINT()';
+        $record->coverage           = 'wkt';
         $record->map_active         = 1;
-        $record->map_focus          = 'CENTER()';
+        $record->map_focus          = 'lat/lon';
         $record->map_zoom           = 5;
         $record->save();
 
@@ -62,9 +62,9 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
         $this->assertEquals($record->stroke_width, 3);
         $this->assertEquals($record->point_radius, 3);
         $this->assertEquals($record->point_image, 'http://test.org');
-        $this->assertEquals($record->coverage, 'POINT()');
+        $this->assertEquals($record->coverage, 'wkt');
         $this->assertEquals($record->map_active, 1);
-        $this->assertEquals($record->map_focus, 'CENTER()');
+        $this->assertEquals($record->map_focus, 'lat/lon');
         $this->assertEquals($record->map_zoom, 5);
 
     }
@@ -108,61 +108,6 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
     }
 
     /**
-     * getItem() should return the parent item when one exists.
-     *
-     * @return void.
-     */
-    public function testGetItemWithItem()
-    {
-
-        // Create a record.
-        $neatline = $this->__exhibit();
-        $item = $this->__item();
-        $record = new NeatlineRecord($item, $neatline);
-
-        // Get the item.
-        $retrievedItem = $record->getItem();
-        $this->assertEquals($item->id, $retrievedItem->id);
-
-    }
-
-    /**
-     * getItem() should return null when there is not a parent item.
-     *
-     * @return void.
-     */
-    public function testGetItemWithNoItem()
-    {
-
-        // Create a record.
-        $neatline = $this->__exhibit();
-        $record = new NeatlineRecord(null, $neatline);
-
-        // Get the item.
-        $retrievedItem = $record->getItem();
-        $this->assertNull($retrievedItem);
-
-    }
-
-    /**
-     * getExhibit() should return the parent exhibit.
-     *
-     * @return void.
-     */
-    public function testGetExhibit()
-    {
-
-        // Create a record.
-        $neatline = $this->__exhibit();
-        $record = new NeatlineRecord(null, $neatline);
-
-        // Get the exhibit.
-        $retrievedExhibit = $record->getExhibit();
-        $this->assertEquals($neatline->id, $retrievedExhibit->id);
-
-    }
-
-    /**
      * setNotEmpty() should set value when value is not null or ''.
      *
      * @return void.
@@ -175,7 +120,6 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
 
         // Test with empty value, check for set.
         $record->setNotEmpty('title', 'Title');
-        $this->assertNotNull($record->title);
         $this->assertEquals($record->title, 'Title');
 
     }
@@ -239,6 +183,31 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
     }
 
     /**
+     * setCoverage() should set a GEOMETRYCOLLECTION value.
+     *
+     * @group coverage
+     * @return void.
+     */
+    public function testSetCoverage()
+    {
+
+        // Create exhibit and record.
+        $exhibit = $this->__exhibit();
+        $record = new NeatlineRecord(null, $exhibit);
+        $record->save();
+
+        // Set coverage.
+        $record->setCoverage('POINT(1 1),POLYGON((0 0,0 5,5 5,5 0,0 0))');
+
+        // // TODO|dev: Test spatial query.
+        // $select = $this->_recordsTable->getSelect();
+        // $select->where(new Zend_Db_Expr('MBRIntersects(coverage,GeomFromText("POINT(3 3)"))'));
+        // $records = $this->_recordsTable->fetchObjects($select);
+        // echo count($records);
+
+    }
+
+    /**
      * The resetStyles() method should null out all style parameters.
      *
      * @return void.
@@ -275,6 +244,61 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
         $this->assertNull($record->stroke_width);
         $this->assertNull($record->point_radius);
         $this->assertNull($record->point_image);
+
+    }
+
+    /**
+     * getItem() should return the parent item when one exists.
+     *
+     * @return void.
+     */
+    public function testGetItemWithItem()
+    {
+
+        // Create a record.
+        $neatline = $this->__exhibit();
+        $item = $this->__item();
+        $record = new NeatlineRecord($item, $neatline);
+
+        // Get the item.
+        $retrievedItem = $record->getItem();
+        $this->assertEquals($item->id, $retrievedItem->id);
+
+    }
+
+    /**
+     * getItem() should return null when there is not a parent item.
+     *
+     * @return void.
+     */
+    public function testGetItemWithNoItem()
+    {
+
+        // Create a record.
+        $neatline = $this->__exhibit();
+        $record = new NeatlineRecord(null, $neatline);
+
+        // Get the item.
+        $retrievedItem = $record->getItem();
+        $this->assertNull($retrievedItem);
+
+    }
+
+    /**
+     * getExhibit() should return the parent exhibit.
+     *
+     * @return void.
+     */
+    public function testGetExhibit()
+    {
+
+        // Create a record.
+        $neatline = $this->__exhibit();
+        $record = new NeatlineRecord(null, $neatline);
+
+        // Get the exhibit.
+        $retrievedExhibit = $record->getExhibit();
+        $this->assertEquals($neatline->id, $retrievedExhibit->id);
 
     }
 

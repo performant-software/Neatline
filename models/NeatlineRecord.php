@@ -247,13 +247,32 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
     public function setSlug($slug)
     {
 
-        // Get records table.
-        $_recordsTable = $this->getTable('NeatlineRecord');
+        // Get records table and exhibit.
+        $recordsTable = $this->getTable('NeatlineRecord');
+        $exhibit = $this->getExhibit();
 
         // Set the record value if it is unique.
-        if ($_recordsTable->slugIsAvailable($this, $this->getExhibit(), $slug)) {
+        if ($recordsTable->slugIsAvailable($this, $exhibit, $slug)) {
             $this->slug = $slug;
         }
+
+    }
+
+    /**
+     * Set all style attributes to null.
+     *
+     * @param string $wkt The coverage, as WKT GEOMETRYCOLLECTION.
+     *
+     * @return void.
+     */
+    public function setCoverage($wkt)
+    {
+
+        $sql = "UPDATE `{$this->_db->prefix}neatline_records`
+                SET coverage = GeomFromText('{$wkt}')
+                WHERE id = {$this->id}";
+
+        $this->_db->query($sql);
 
     }
 
@@ -451,8 +470,18 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
      */
     public function update($values)
     {
+
+        // Pluck out coverage.
+        $coverage = $values['coverage'];
+        unset($values['coverage']);
+
+        // Update bounds.
+        $this->setCoverage($coverage);
+
+        // Set remaining fields
         foreach ($values as $key => $val) $this->setNotEmpty($key, $val);
         $this->save();
+
     }
 
     /**
