@@ -14,37 +14,6 @@
 class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
 {
 
-    // Testing parameters.
-    private static $__testParams = array(
-        'title' => 'Test Title',
-        'slug' => 'test-slug',
-        'description' => 'Test description.',
-        'start_date' => '1564-04-26 14:39:22',
-        'end_date' => '1616-04-23 12:45:34',
-        'start_visible_date' => '1864-04-26 14:39:22',
-        'end_visible_date' => '1916-04-23 12:45:34',
-        'vector_color' => '#ffffff',
-        'stroke_color' => '#000000',
-        'select_color' => '#ff0000',
-        'vector_opacity' => 60,
-        'select_opacity' => 50,
-        'stroke_opacity' => 40,
-        'graphic_opacity' => 90,
-        'stroke_width' => 5,
-        'point_radius' => 7,
-        'point_image' => 'http://test.org',
-        'left_percent' => 0,
-        'right_percent' => 100,
-        'coverage' => '[POINT(-1.0, 1.0)]',
-        'map_focus' => '[POINT(-1.0, 1.0)]',
-        'map_zoom' => 5,
-        'map_active' => true,
-        'time_active' => true,
-        'parent_record_id' => 1,
-        'use_dc_metadata' => 1,
-        'show_bubble' => 1
-    );
-
     /**
      * Test get and set on columns.
      *
@@ -353,30 +322,29 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
         $record = new NeatlineRecord(null, $exhibit);
 
         // Text.
-        $record->title                  = self::$__testParams['title'];
-        $record->description            = self::$__testParams['description'];
-        $record->slug                   = self::$__testParams['slug'];
+        $record->title                  = 'Title';
+        $record->description            = 'Description.';
+        $record->slug                   = 'slug';
 
         // Styles.
-        $record->vector_color           = self::$__testParams['vector_color'];
-        $record->stroke_color           = self::$__testParams['stroke_color'];
-        $record->select_color           = self::$__testParams['select_color'];
-        $record->vector_opacity         = self::$__testParams['vector_opacity'];
-        $record->select_opacity         = self::$__testParams['select_opacity'];
-        $record->stroke_opacity         = self::$__testParams['stroke_opacity'];
-        $record->graphic_opacity        = self::$__testParams['graphic_opacity'];
-        $record->stroke_width           = self::$__testParams['stroke_width'];
-        $record->point_radius           = self::$__testParams['point_radius'];
-        $record->point_image            = self::$__testParams['point_image'];
-        $record->show_bubble            = self::$__testParams['show_bubble'];
+        $record->vector_color           = '#1';
+        $record->stroke_color           = '#2';
+        $record->select_color           = '#3';
+        $record->vector_opacity         = 1;
+        $record->select_opacity         = 2;
+        $record->stroke_opacity         = 3;
+        $record->graphic_opacity        = 4;
+        $record->stroke_width           = 5;
+        $record->point_radius           = 6;
+        $record->point_image            = 'file.png';
 
         // Map.
-        $record->map_focus              = self::$__testParams['map_focus'];
-        $record->map_zoom               = self::$__testParams['map_zoom'];
-        $record->coverage               = self::$__testParams['coverage'];
+        $record->map_focus              = 'lat/lon';
+        $record->coverage               = 'kml';
+        $record->map_zoom               = 10;
 
         // Statuses.
-        $record->map_active             = self::$__testParams['map_active'];
+        $record->map_active             = 1;
 
         $record->save();
 
@@ -391,31 +359,31 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
                 'item_id'               => $record->item_id,
 
                 // Text.
-                'title'                 => self::$__testParams['title'],
-                'description'           => self::$__testParams['description'],
-                'slug'                  => self::$__testParams['slug'],
+                'title'                 => 'Title',
+                'description'           => 'Description.',
+                'slug'                  => 'slug',
 
                 // Styles.
-                'vector_color'          => self::$__testParams['vector_color'],
-                'stroke_color'          => self::$__testParams['stroke_color'],
-                'select_color'          => self::$__testParams['select_color'],
-                'vector_opacity'        => self::$__testParams['vector_opacity'],
-                'select_opacity'        => self::$__testParams['select_opacity'],
-                'stroke_opacity'        => self::$__testParams['stroke_opacity'],
-                'graphic_opacity'       => self::$__testParams['graphic_opacity'],
-                'stroke_width'          => self::$__testParams['stroke_width'],
-                'point_radius'          => self::$__testParams['point_radius'],
-                'point_image'           => self::$__testParams['point_image'],
+                'vector_color'          => '#1',
+                'stroke_color'          => '#2',
+                'select_color'          => '#3',
+                'vector_opacity'        => 1,
+                'select_opacity'        => 2,
+                'stroke_opacity'        => 3,
+                'graphic_opacity'       => 4,
+                'stroke_width'          => 5,
+                'point_radius'          => 6,
+                'point_image'           => 'file.png',
 
                 // Map.
-                'map_focus'             => self::$__testParams['map_focus'],
-                'map_zoom'              => self::$__testParams['map_zoom'],
-                'coverage'              => self::$__testParams['coverage'],
+                'map_focus'             => 'lat/lon',
+                'map_zoom'              => 10,
+                'coverage'              => 'kml',
                 'wmsAddress'            => null,
                 'layers'                => null,
 
                 // Statuses.
-                'map_active'            => self::$__testParams['map_active']
+                'map_active'            => 1
 
             )
         );
