@@ -197,13 +197,26 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
         $record->save();
 
         // Set coverage.
-        $record->setCoverage('POINT(1 1),POLYGON((0 0,0 5,5 5,5 0,0 0))');
+        $record->setCoverage('GEOMETRYCOLLECTION(
+            POLYGON((0 0,0 4,4 4,4 0,0 0)))');
 
-        // // TODO|dev: Test spatial query.
-        // $select = $this->_recordsTable->getSelect();
-        // $select->where(new Zend_Db_Expr('MBRIntersects(coverage,GeomFromText("POINT(3 3)"))'));
-        // $records = $this->_recordsTable->fetchObjects($select);
-        // echo count($records);
+        // Get select for intersecting point.
+        $select = $this->_recordsTable->getSelect();
+        $select->where(new Zend_Db_Expr('MBRIntersects(
+            coverage,GeomFromText("POINT(2 2)"))'));
+
+        // Check match.
+        $records = $this->_recordsTable->fetchObjects($select);
+        $this->assertCount(1, $records);
+
+        // Get select for non-intersecting point.
+        $select = $this->_recordsTable->getSelect();
+        $select->where(new Zend_Db_Expr('MBRIntersects(
+            coverage,GeomFromText("POINT(5 5)"))'));
+
+        // Check match.
+        $records = $this->_recordsTable->fetchObjects($select);
+        $this->assertCount(0, $records);
 
     }
 
