@@ -258,8 +258,8 @@ Neatline.Views.Map = Backbone.View.extend({
     if (record.get('map_active') == 1) {
 
       // Build geometry and style.
-      var formatKML = new OpenLayers.Format.KML();
-      var geometry = formatKML.read(record.get('coverage'));
+      var formatWKT = new OpenLayers.Format.WKT();
+      var features = formatWKT.read(record.get('coverage'));
       var style = this.getStyleMap(record);
 
       // Build the layer.
@@ -270,7 +270,7 @@ Neatline.Views.Map = Backbone.View.extend({
       );
 
       // Add to map, track.
-      layer.addFeatures(geometry);
+      layer.addFeatures(features);
       this.map.addLayer(layer);
 
       // Store model, id.

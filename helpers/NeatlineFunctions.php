@@ -214,21 +214,19 @@ function __devInstall()
         $record->description = 'Record'.$i.' body.';
         $record->map_active = 1;
 
-        // Set coverage.
-        $record->coverage = '<kml xmlns="http://earth.google.com/kml/2.0"><Folder><Placemark><name>Record'.$i.'</name><Point><coordinates>'.$lat.','.$lon.'</coordinates></Point></Placemark></Folder></kml>';
-
         // Styles.
         $record->vector_color =     '#ff0000';
         $record->stroke_color =     '#000000';
         $record->select_color =     '#0000ff';
-        $record->point_radius =     rand(10,50);
+        $record->point_radius =     rand(10,100);
         $record->stroke_opacity =   100;
         $record->graphic_opacity =  100;
         $record->vector_opacity =   30;
         $record->select_opacity =   70;
         $record->stroke_width =     2;
 
-        $record->save();
+        // Coverage.
+        $record->save('POINT('.$lon.' '.$lat.')');
 
     }
 

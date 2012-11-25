@@ -89,10 +89,10 @@ describe('Map', function() {
 
         // Check geometry.
         expect(layers.length).toEqual(2);
-        expect(layers[0].features[0].geometry.x).toEqual(-8233185.189506843);
-        expect(layers[0].features[0].geometry.y).toEqual(4978802.273690212);
-        expect(layers[1].features[0].geometry.x).toEqual(-7910926.6783014);
-        expect(layers[1].features[0].geometry.y).toEqual(5214839.817002);
+        expect(layers[0].features[0].geometry.x).toEqual(1);
+        expect(layers[0].features[0].geometry.y).toEqual(1);
+        expect(layers[1].features[0].geometry.x).toEqual(2);
+        expect(layers[1].features[0].geometry.y).toEqual(2);
 
       });
 
@@ -118,8 +118,8 @@ describe('Map', function() {
         });
 
         // Check geometry.
-        expect(record2Layer.features[0].geometry.x).toEqual(-7910926.6783014);
-        expect(record2Layer.features[0].geometry.y).toEqual(5214839.817002);
+        expect(record2Layer.features[0].geometry.x).toEqual(2);
+        expect(record2Layer.features[0].geometry.y).toEqual(2);
 
       });
 
@@ -145,8 +145,8 @@ describe('Map', function() {
         });
 
         // Check geometry.
-        expect(record2Layer.features[0].geometry.x).toEqual(-7910926.6783014);
-        expect(record2Layer.features[0].geometry.y).toEqual(5214839.817002);
+        expect(record2Layer.features[0].geometry.x).toEqual(2);
+        expect(record2Layer.features[0].geometry.y).toEqual(2);
 
       });
 
@@ -449,8 +449,8 @@ describe('Map', function() {
 
         // Check geometry.
         layers = _t.getVectorLayers();
-        expect(layers[1].features[0].geometry.x).toEqual(-8575597.889921868);
-        expect(layers[1].features[0].geometry.y).toEqual(4705631.73705383);
+        expect(layers[1].features[0].geometry.x).toEqual(3);
+        expect(layers[1].features[0].geometry.y).toEqual(3);
 
       });
 
@@ -480,8 +480,8 @@ describe('Map', function() {
         zoom = _t.map.map.getZoom();
 
         // Check focus and zoom.
-        expect(Math.round(center.lat)).toEqual(5214840);
-        expect(Math.round(center.lon)).toEqual(-7910927);
+        expect(Math.round(center.lat)).toEqual(2);
+        expect(Math.round(center.lon)).toEqual(2);
         expect(zoom).toEqual(18);
 
       });

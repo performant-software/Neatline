@@ -171,8 +171,7 @@ describe('Form', function() {
       expect(_t.form.strokeWidth.val()).toEqual('13');
       expect(_t.form.pointRadius.val()).toEqual('16');
       expect(_t.form.pointGraphic.val()).toEqual('file1.png');
-      expect(_t.form.coverage.val().indexOf('New York')).
-        not.toEqual(-1);
+      expect(_t.form.coverage.val()).toEqual('POINT(1 1)');
 
     });
 
@@ -215,7 +214,7 @@ describe('Form', function() {
       expect(params.stroke_width).toEqual('14');
       expect(params.point_radius).toEqual('17');
       expect(params.point_image).toEqual('file2.png');
-      expect(params.coverage.indexOf('Boston')).not.toEqual(-1);
+      expect(params.coverage).toEqual('POINT(2 2)');
 
     });
 
@@ -374,8 +373,9 @@ describe('Form', function() {
         _t.map.controls.point.drawFeature(pt);
 
         // Check for new data.
-        expect(_t.form.coverage.val().indexOf('3,4')).
-          not.toEqual(-1);
+        expect(_t.form.coverage.val()).toEqual(
+          'GEOMETRYCOLLECTION(POINT(1 1),POINT(3 4))'
+        );
 
       });
 
@@ -384,14 +384,13 @@ describe('Form', function() {
         // Create a new point, trigger modify.
         var pt1 = new OpenLayers.Geometry.Point(1,2);
         var pt2 = new OpenLayers.Geometry.Point(3,4);
-        var line = new OpenLayers.Geometry.LineString(pt1,pt2);
+        var line = new OpenLayers.Geometry.LineString([pt1,pt2]);
         _t.map.controls.line.drawFeature(line);
 
         // Check for new data.
-        expect(_t.form.coverage.val().indexOf('1,2')).
-          not.toEqual(-1);
-        expect(_t.form.coverage.val().indexOf('3,4')).
-          not.toEqual(-1);
+        expect(_t.form.coverage.val()).toEqual(
+          'GEOMETRYCOLLECTION(POINT(1 1),LINESTRING(1 2,3 4))'
+        );
 
       });
 
@@ -406,12 +405,9 @@ describe('Form', function() {
         _t.map.controls.poly.drawFeature(poly);
 
         // Check for new data.
-        expect(_t.form.coverage.val().indexOf('1,2')).
-          not.toEqual(-1);
-        expect(_t.form.coverage.val().indexOf('3,4')).
-          not.toEqual(-1);
-        expect(_t.form.coverage.val().indexOf('5,6')).
-          not.toEqual(-1);
+        expect(_t.form.coverage.val()).toEqual(
+          'GEOMETRYCOLLECTION(POINT(1 1),POLYGON((1 2,3 4,5 6,1 2)))'
+        );
 
       });
 
@@ -426,12 +422,9 @@ describe('Form', function() {
         _t.map.controls.reg.drawFeature(poly);
 
         // Check for new data.
-        expect(_t.form.coverage.val().indexOf('1,2')).
-          not.toEqual(-1);
-        expect(_t.form.coverage.val().indexOf('3,4')).
-          not.toEqual(-1);
-        expect(_t.form.coverage.val().indexOf('5,6')).
-          not.toEqual(-1);
+        expect(_t.form.coverage.val()).toEqual(
+          'GEOMETRYCOLLECTION(POINT(1 1),POLYGON((1 2,3 4,5 6,1 2)))'
+        );
 
       });
 
@@ -445,8 +438,11 @@ describe('Form', function() {
 
         // Trigger modification.
         _t.map.controls.edit.dragComplete();
-        expect(_t.form.coverage.val().indexOf('1,2')).
-          not.toEqual(-1);
+
+        // Check for new data.
+        expect(_t.form.coverage.val()).toEqual(
+          'GEOMETRYCOLLECTION(POINT(1 2))'
+        );
 
       });
 
@@ -457,7 +453,11 @@ describe('Form', function() {
 
         // Trigger modification.
         _t.map.controls.del.selectFeature(feature);
-        expect(_t.form.coverage.val().indexOf('<Point>')).toEqual(-1);
+
+        // Check for new data.
+        expect(_t.form.coverage.val()).toEqual(
+          'GEOMETRYCOLLECTION()'
+        );
 
       });
 
