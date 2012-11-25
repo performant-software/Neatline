@@ -31,7 +31,7 @@ desc 'Build the application'
 task :build do
 
   # Paths.
-  js = 'views/shared/javascripts/v2'
+  js = 'views/shared/javascripts'
   bs = js+'/components/bootstrap'
   ol = js+'/components/openlayers/build'
 
@@ -61,9 +61,9 @@ end
 desc 'Clean pacakges'
 task :clean do
   sh %{rm -rf node_modules}
-  sh %{rm -rf views/shared/javascripts/v2/payloads}
-  sh %{rm -rf views/shared/javascripts/v2/components}
-  sh %{rm -rf views/shared/css/v2/payloads}
+  sh %{rm -rf views/shared/javascripts/payloads}
+  sh %{rm -rf views/shared/javascripts/components}
+  sh %{rm -rf views/shared/css/payloads}
   sh %{rm -rf spec/javascripts/helpers/components}
 end
 

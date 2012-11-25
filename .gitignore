@@ -9,8 +9,8 @@ build/tmp/
 spec/javascripts/fixtures/
 views/shared/css/exhibits/
 node_modules/
-views/shared/javascripts/v2/payloads/
-views/shared/javascripts/v2/components/
+views/shared/javascripts/payloads/
+views/shared/javascripts/components/
 views/shared/css/v2/payloads/
 spec/javascripts/helpers/components/
 .sql/

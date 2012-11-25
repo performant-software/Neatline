@@ -4,7 +4,7 @@
 
 // Get package configuration.
 var config = require('yaml-config');
-var configPath = '/views/shared/javascripts/v2/config.yaml';
+var configPath = '/views/shared/javascripts/config.yaml';
 var c = config.readConfig(process.cwd()+configPath);
 
 module.exports = function(grunt) {
@@ -14,9 +14,9 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-stylus');
 
   // Paths.
-  var js = 'views/shared/javascripts/v2/payloads/';
-  var stylus = 'views/shared/css/v2/stylus/';
-  var css = 'views/shared/css/v2/payloads/';
+  var js = 'views/shared/javascripts/payloads/';
+  var stylus = 'views/shared/css/stylus/';
+  var css = 'views/shared/css/payloads/';
 
   var neatlineFiles = [
     c.components+c.vendor.jquery,

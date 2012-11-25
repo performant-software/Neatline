@@ -11,7 +11,7 @@
 #   - dist/**/*.js
 #
 src_files:
-    - views/shared/javascripts/v2/payloads/test.js
+    - views/shared/javascripts/payloads/test.js
 
 # stylesheets
 #

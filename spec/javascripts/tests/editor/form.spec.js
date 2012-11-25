@@ -216,10 +216,6 @@ describe('Form', function() {
       expect(params.point_radius).toEqual('17');
       expect(params.point_image).toEqual('file2.png');
       expect(params.coverage.indexOf('Boston')).not.toEqual(-1);
-      expect(params.bounds).toEqual('POLYGON(('+
-        '-7910926.6783014 5214839.817002,'+
-        '-7910926.6783014 5214839.817002'+
-      '))');
 
     });
 
