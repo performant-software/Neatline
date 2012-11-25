@@ -51,12 +51,6 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
     public $coverage;
 
     /**
-     * Minimum coverage extent.
-     * POLYGON NOT NULL
-     */
-    public $bounds;
-
-    /**
      * Boolean for whether the record is present on the map.
      * tinyint(1) NULL
      */
@@ -264,18 +258,6 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
     }
 
     /**
-     * Set the `bounds` attribute with PolyFromText().
-     *
-     * @param string $bounds The bounds, as a WKT polygon.
-     *
-     * @return void.
-     */
-    public function setBounds($bounds)
-    {
-        // $this->bounds = new Zend_Db_Expr("PolyFromText('$bounds')");
-    }
-
-    /**
      * Set all style attributes to null.
      *
      * @return void.
@@ -469,18 +451,8 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
      */
     public function update($values)
     {
-
-        // Get record and bounds.
-        $bounds = $values['bounds'];
-        unset($values['bounds']);
-
-        // Update bounds.
-        $this->setBounds($bounds);
-
-        // Set remaining fields.
         foreach ($values as $key => $val) $this->setNotEmpty($key, $val);
         $this->save();
-
     }
 
     /**

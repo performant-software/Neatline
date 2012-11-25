@@ -182,12 +182,12 @@ Neatline.Views.Map.prototype.publish = function() {
     return !f._sketch;
   });
 
-  // Write KML.
-  var formatKML = new OpenLayers.Format.KML();
-  var kml = formatKML.write(features);
+  // Write WKT.
+  var formatWKT = new OpenLayers.Format.WKT();
+  var wkt = formatWKT.write(features);
 
   // Publish.
-  Editor.vent.trigger('map:newCoverage', kml);
+  Editor.vent.trigger('map:newCoverage', wkt);
 
 };
 
