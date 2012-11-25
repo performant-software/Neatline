@@ -177,7 +177,8 @@ describe('Form', function() {
 
     it('should PUT well-formed data on save', function() {
 
-      // Get Boston record.
+      // Get record models.
+      var nyc = Editor.Modules.Records.collection.models[0];
       var boston = Editor.Modules.Records.collection.models[1];
       var coverage = boston.get('coverage');
 
@@ -201,8 +202,10 @@ describe('Form', function() {
       var request = _.last(server.requests);
       var params = $.parseJSON(request.requestBody);
 
+      // Check route.
+      expect(request.url).toEqual('/neatline/records/'+nyc.get('id'));
+
       // Check query string.
-      expect(request.url).toEqual('/neatline/record/');
       expect(params.title).toEqual('Record 2');
       expect(params.description).toEqual('Record 2 desc.');
       expect(params.vector_color).toEqual('#222222');

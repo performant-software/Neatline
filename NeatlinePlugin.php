@@ -213,8 +213,11 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
      */
     public function hookDefineRoutes($args)
     {
+
+        // Add default routes.
         $args['router']->addConfig(new Zend_Config_Ini(
             NEATLINE_PLUGIN_DIR . '/routes.ini', 'routes'));
+
     }
 
     /**

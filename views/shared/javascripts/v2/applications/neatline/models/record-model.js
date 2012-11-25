@@ -11,5 +11,5 @@
  */
 
 Neatline.Models.Record = Backbone.Model.extend({
-  url: (function() { return __exhibit.api; })
+  url: function() { return __exhibit.api+'/'+this.get('id'); }
 });

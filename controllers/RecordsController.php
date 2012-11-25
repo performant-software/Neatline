@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
 
 /**
- * Records API.
+ * Records controller. Emulates a REST API.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -11,15 +11,33 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class Neatline_RecordsController extends Neatline_Rest_Controller
+class Neatline_RecordsController extends Omeka_Controller_AbstractActionController
 {
+
+    /**
+     * Disable view rendering.
+     *
+     * @return void.
+     */
+    public function init()
+    {
+
+        // Disable view rendering, set content type.
+        $this->_helper->viewRenderer->setNoRender(true);
+        $this->getResponse()->setHeader('Content-type', 'application/json');
+
+        // Get models.
+        $this->__records = $this->_helper->db->getTable('NeatlineRecord');
+        $this->__exhibits = $this->_helper->db->getTable('NeatlineExhibit');
+
+    }
 
     /**
      * Get a collection of records.
      *
      * @return void.
      */
-    public function indexAction()
+    public function listAction()
     {
 
         // Get the exhibit.
@@ -30,6 +48,39 @@ class Neatline_RecordsController extends Neatline_Rest_Controller
             $this->_request->extent,
             $this->_request->zoom
         ));
+
+    }
+
+    /**
+     * Forward request to appropriate method action.
+     *
+     * @return void.
+     */
+    public function indexAction()
+    {
+
+        // Get the request method.
+        $method = $this->getRequest()->getMethod();
+
+        switch($method) {
+
+            case 'GET':
+                $this->_forward('get');
+                break;
+
+            case 'POST':
+                $this->_forward('post');
+                break;
+
+            case 'PUT':
+                $this->_forward('put');
+                break;
+
+            case 'DELETE':
+                $this->_forward('delete');
+                break;
+
+        }
 
     }
 
