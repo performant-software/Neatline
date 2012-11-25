@@ -21,8 +21,16 @@ class Neatline_RecordsController extends Neatline_Rest_Controller
      */
     public function indexAction()
     {
-        $this->getResponse()->setBody('test');
-        $this->getResponse()->setHttpResponseCode(200);
+
+        // Get the exhibit.
+        $exhibit = $this->__exhibits->find($this->_request->id);
+
+        // Output the JSON string.
+        echo Zend_Json::encode($this->__records->queryRecords($exhibit,
+            $this->_request->extent,
+            $this->_request->zoom
+        ));
+
     }
 
     /**
@@ -52,7 +60,8 @@ class Neatline_RecordsController extends Neatline_Rest_Controller
      */
     public function putAction()
     {
-
+        $put = file_get_contents(Zend_Registry::get('fileIn'));
+        $this->__records->updateRecord(Zend_Json::decode($put, true));
     }
 
     /**

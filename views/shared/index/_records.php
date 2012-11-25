@@ -17,4 +17,4 @@
 </div>
 
 <!-- Templates. -->
-<?php echo $this->partial('editor/_templates.php'); ?>
+<?php echo $this->partial('index/_templates.php'); ?>

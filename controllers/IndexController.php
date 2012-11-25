@@ -15,16 +15,21 @@ class Neatline_IndexController extends Omeka_Controller_AbstractActionController
 {
 
     /**
-     * Get tables.
+     * Set pagination options, get tables.
      *
      * @return void
      */
     public function init()
     {
+
+        // Set default model and pagination options.
         $this->_helper->db->setDefaultModelName('NeatlineExhibit');
         $this->_browseRecordsPerPage = get_option('per_page_admin');
-        $this->recordsTable = $this->_helper->db->getTable('NeatlineRecord');
-        $this->exhibitsTable = $this->_helper->db->getTable('NeatlineExhibit');
+
+        // Get models.
+        $this->__records = $this->_helper->db->getTable('NeatlineRecord');
+        $this->__exhibits = $this->_helper->db->getTable('NeatlineExhibit');
+
     }
 
     /**
@@ -54,7 +59,7 @@ class Neatline_IndexController extends Omeka_Controller_AbstractActionController
     }
 
     /**
-     * Edit an exhibit.
+     * Edit exhibit settings.
      *
      * @return void
      */
@@ -111,6 +116,17 @@ class Neatline_IndexController extends Omeka_Controller_AbstractActionController
     }
 
     /**
+     * Edit an exhibit.
+     *
+     * @return void
+     */
+    public function editorAction()
+    {
+        $id = $this->_request->getParam('id');
+        $this->view->exhibit = $this->__exhibits->find($id);
+    }
+
+    /**
      * Default exhibit show view.
      *
      * @return void
@@ -119,63 +135,6 @@ class Neatline_IndexController extends Omeka_Controller_AbstractActionController
     {
         $neatline = $this->_findExhibit();
         $this->view->neatline_exhibit = $neatline;
-    }
-
-    /**
-     * ~ AJAX ~
-     * Record collection emitter for exhibit and editor.
-     *
-     * @return JSON The vector data.
-     */
-    public function recordsAction()
-    {
-
-        // Supress the default layout.
-        $this->_helper->viewRenderer->setNoRender(true);
-        $this->getResponse()->setHeader('Content-type', 'application/json');
-
-        // Get the exhibit.
-        $exhibit = $this->exhibitsTable->find($this->_request->id);
-
-        // Output the JSON string.
-        echo json_encode($this->recordsTable->queryRecords($exhibit,
-            $this->_request->extent,
-            $this->_request->zoom
-        ));
-
-    }
-
-    /**
-     * ~ AJAX ~
-     * Rest interface for individual record.
-     *
-     * @return void
-     */
-    public function recordAction()
-    {
-
-        // Supress the default layout.
-        $this->_helper->viewRenderer->setNoRender(true);
-        $this->getResponse()->setHeader('Content-type', 'application/json');
-
-        switch ($this->_request->getMethod()) {
-
-            case 'GET':
-                break;
-
-            case 'POST':
-                break;
-
-            case 'PUT':
-                $put = file_get_contents(Zend_Registry::get('fileIn'));
-                $this->recordsTable->updateRecord(json_decode($put, true));
-                break;
-
-            case 'DELETE':
-                break;
-
-        }
-
     }
 
     /**
@@ -235,7 +194,7 @@ class Neatline_IndexController extends Omeka_Controller_AbstractActionController
     {
 
         // Get the exhibit.
-        $record = $this->exhibitsTable->findBySlug($this->_request->slug);
+        $record = $this->__exhibits->findBySlug($this->_request->slug);
 
         // Catch invalid slug.
         if (!$record) { throw new Omeka_Controller_Exception_404(

@@ -60,7 +60,7 @@ class Neatline_FixturesController extends Omeka_Controller_AbstractActionControl
         $exhibit = new NeatlineExhibit;
 
         // Render.
-        echo $this->view->partial('editor/_editor.php', array(
+        echo $this->view->partial('index/_editor.php', array(
             'exhibit' => $exhibit
         ));
 

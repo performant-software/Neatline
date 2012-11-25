@@ -14,7 +14,7 @@
 ?>
 
 <!-- Records. -->
-<?php echo $this->partial('editor/_records.php', array(
+<?php echo $this->partial('index/_records.php', array(
   'exhibit' => $exhibit
 )); ?>
 

@@ -1,4 +1,7 @@
 <?php
+
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
+
 /**
  * Unit tests for view helpers.
  *
@@ -10,6 +13,8 @@
 
 class Neatline_HelpersTest extends Neatline_Test_AppTestCase
 {
+
+    protected $_isAdminTest = false;
 
     /**
      * get_current_neatline() should return the current exhibit object on
@@ -27,24 +32,6 @@ class Neatline_HelpersTest extends Neatline_Test_AppTestCase
         // Get out view exhibit.
         $retrievedExhibit = get_current_neatline();
         $this->assertEquals($retrievedExhibit->id, $exhibit->id);
-
-    }
-
-    /**
-     * get_neatlines_for_loop() should an array of exhibit objects.
-     *
-     * @return void.
-     */
-    public function testGetNeatlinesForLoop()
-    {
-
-        // Create exhibits, hit route.
-        for ($i = 0; $i < 10; $i++) $this->__exhibit();
-        $this->dispatch('neatline');
-
-        // Check for 10 exhibits.
-        $exhibits = get_neatlines_for_loop();
-        $this->assertEquals(10, count($exhibits));
 
     }
 
@@ -71,54 +58,6 @@ class Neatline_HelpersTest extends Neatline_Test_AppTestCase
         $this->__exhibit();
         $this->dispatch('neatline');
         $this->assertTrue(has_neatlines_for_loop());
-    }
-
-    /**
-     * has_neatlines() should return false when there are not exhibits.
-     *
-     * @return void.
-     */
-    public function testHasNoNeatlines()
-    {
-        $this->dispatch('neatline');
-        $this->assertFalse(has_neatlines());
-    }
-
-    /**
-     * has_neatlines() should return true when there is at least one exhibit.
-     *
-     * @return void.
-     */
-    public function testHasNeatlines()
-    {
-        $this->__exhibit();
-        $this->dispatch('neatline');
-        $this->assertTrue(has_neatlines());
-    }
-
-    /**
-     * loop_neatlines() should return any empty array when there are no
-     * exhibits.
-     *
-     * @return void.
-     */
-    public function testNoLoopNeatlines()
-    {
-        $this->dispatch('neatline');
-        $this->assertEmpty(loop_neatlines());
-    }
-
-    /**
-     * loop_neatlines() should return any array of exhibits when there is at
-     * least one exhibit.
-     *
-     * @return void.
-     */
-    public function testLoopNeatlines()
-    {
-        for ($i=1; $i<=5; $i++) $this->__exhibit();
-        $this->dispatch('neatline');
-        $this->assertNotEmpty(loop_neatlines());
     }
 
     /**
@@ -153,42 +92,6 @@ class Neatline_HelpersTest extends Neatline_Test_AppTestCase
 
         $this->assertEquals('test-exhibit', neatline('slug'));
         $this->assertEquals('test-exhibit', neatline('Slug'));
-
-    }
-
-    /**
-     * set_current_neatline() should set the current exhibit on the view.
-     *
-     * @return void.
-     */
-    public function testSetCurrentNeatlineTest()
-    {
-
-        // Create exhibit, hit /show.
-        $exhibit = $this->__exhibit('test-exhibit');
-        $this->dispatch('neatline/show/test-exhibit');
-
-        $newExhibit = $this->__exhibit();
-        set_current_neatline($newExhibit);
-        $this->assertEquals($newExhibit, get_current_neatline());
-
-    }
-
-    /**
-     * set_neatlines_for_loop() should set an array of exhibit objects on
-     * the view.
-     *
-     * @return void.
-     */
-    public function testSetNeatlinesForLoop()
-    {
-
-        // Create exhibit, hit item browse.
-        $neatline = $this->__exhibit();
-        $this->dispatch('items/browse');
-
-        set_neatlines_for_loop(array($neatline));
-        $this->assertTrue(in_array($neatline, get_neatlines_for_loop()));
 
     }
 

@@ -11,6 +11,6 @@
  */
 
 Neatline.Collections.Records = Backbone.Collection.extend({
-  url: (function() { return __exhibit.recordsSource; }),
+  url: (function() { return __exhibit.api; }),
   model: Neatline.Models.Record
 });

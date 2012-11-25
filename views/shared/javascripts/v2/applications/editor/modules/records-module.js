@@ -36,12 +36,13 @@ Editor.Modules.Records = (function(Backbone, Editor, Neatline) {
   Records.fetch = function(params) {
 
     params = params || {};
+    params.id = __exhibit.id;
 
     // Get records.
     this.collection.fetch({
       data: $.param(params),
-      success: _.bind(function() {
-        this.view.show(this.collection);
+      success: _.bind(function(collection) {
+        this.view.show(collection);
       }, this)
     });
 

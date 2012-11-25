@@ -69,11 +69,10 @@ function neatline_queueGoogleMapsApi()
 function neatline_renderExhibit($exhibit)
 {
     return json_encode(array(
-        'id'              => $exhibit->id,
-        'recordsSource'   => neatline_getRecordsDataSource($exhibit),
-        'recordSource'    => neatline_getRecordDataSource($exhibit),
-        'mapFocus'        => $exhibit->map_focus,
-        'mapZoom'         => $exhibit->map_zoom
+        'id'        => $exhibit->id,
+        'api'       => public_url('neatline/records'),
+        'mapFocus'  => $exhibit->map_focus,
+        'mapZoom'   => $exhibit->map_zoom
     ));
 }
 
@@ -87,30 +86,6 @@ function neatline_renderExhibit($exhibit)
 function neatline_renderEditor($exhibit)
 {
     return json_encode(array('id' => $exhibit->id));
-}
-
-/**
- * Get the data emitter URL for editor records list.
- *
- * @param NeatlineExhibit $exhibit The exhibit.
- *
- * @return string The url.
- */
-function neatline_getRecordsDataSource($exhibit)
-{
-    return public_url('neatline/records/' . $exhibit->id);
-}
-
-/**
- * Get the data emitter URL for editor record form.
- *
- * @param NeatlineExhibit $exhibit The exhibit.
- *
- * @return string The url.
- */
-function neatline_getRecordDataSource($exhibit)
-{
-    return public_url('neatline/record/' . $exhibit->id);
 }
 
 /**
@@ -143,60 +118,6 @@ function neatline($fieldname, $options = array(), $neatline = null)
 function get_current_neatline()
 {
     return get_view()->neatline_exhibit;
-}
-
-/**
- * Sets the current neatline.
- *
- * @param NeatlineExhibit|null
- * @return void
- */
-function set_current_neatline($neatline = null)
-{
-    get_view()->neatline_exhibit = $neatline;
-}
-
-/**
- * Sets the neatlines for loop
- *
- * @param array $neatlines
- * @return void
- */
-function set_neatlines_for_loop($neatlines)
-{
-    get_view()->neatline_exhibits = $neatlines;
-}
-
-/**
- * Get the set of neatlines for the current loop.
- *
- * @return array
- */
-function get_neatlines_for_loop()
-{
-    return get_view()->neatline_exhibits;
-}
-
-/**
- * Loops through neatlines assigned to the view.
- *
- * @return mixed
- */
-function loop_neatlines()
-{
-    return get_loop_records(
-        'neatline_exhibits', get_neatlines_for_loop(), 'set_current_neatline'
-    );
-}
-
-/**
- * Determines whether there are any neatlines in the database.
- *
- * @return boolean
- */
-function has_neatlines()
-{
-    return (total_neatlines() > 0);
 }
 
 /**

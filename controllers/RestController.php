@@ -21,7 +21,15 @@ abstract class Neatline_Rest_Controller extends Zend_Rest_Controller
      */
     public function init()
     {
+
+        // Disable view rendering, set content type.
         $this->_helper->viewRenderer->setNoRender(true);
+        $this->getResponse()->setHeader('Content-type', 'application/json');
+
+        // Get models.
+        $this->__records = $this->_helper->db->getTable('NeatlineRecord');
+        $this->__exhibits = $this->_helper->db->getTable('NeatlineExhibit');
+
     }
 
     /**

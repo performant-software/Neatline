@@ -35,6 +35,7 @@ Neatline.Modules.Exhibit = (function(Backbone, Neatline) {
   Exhibit.fetch = function(params) {
 
     params = params || {};
+    params.id = __exhibit.id;
 
     // Get records.
     this.collection.fetch({
