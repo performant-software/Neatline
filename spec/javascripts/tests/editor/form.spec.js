@@ -12,7 +12,7 @@
 
 describe('Form', function() {
 
-  var server, records;
+  var server, records, models;
   var json = readFixtures('records.json');
 
   // Get fixtures.
@@ -30,8 +30,9 @@ describe('Form', function() {
       _t.respond200(r, json);
     });
 
-    // Get record listings.
+    // Get models record listings.
     records = _t.records.$el.find('.record-row');
+    models = Editor.Modules.Records.collection.models;
 
   });
 
@@ -177,11 +178,6 @@ describe('Form', function() {
 
     it('should PUT well-formed data on save', function() {
 
-      // Get record models.
-      var nyc = Editor.Modules.Records.collection.models[0];
-      var boston = Editor.Modules.Records.collection.models[1];
-      var coverage = boston.get('coverage');
-
       // Enter new data.
       _t.form.title.val('Record 2');
       _t.form.body.val('Record 2 desc.');
@@ -195,7 +191,7 @@ describe('Form', function() {
       _t.form.strokeWidth.val('14');
       _t.form.pointRadius.val('17');
       _t.form.pointGraphic.val('file2.png');
-      _t.form.coverage.val(coverage);
+      _t.form.coverage.val(models[1].get('coverage'));
 
       // Click save, capture request.
       _t.form.saveButton.trigger('click');
@@ -203,7 +199,8 @@ describe('Form', function() {
       var params = $.parseJSON(request.requestBody);
 
       // Check route.
-      expect(request.url).toEqual('/neatline/records/'+nyc.get('id'));
+      expect(request.url).toEqual('/neatline/records/'+
+        models[0].get('id'));
 
       // Check query string.
       expect(params.title).toEqual('Record 2');
