@@ -176,6 +176,8 @@ class NeatlineRecordTable extends Omeka_Db_Table
     public function queryRecords($exhibit, $extent=null, $zoom=null)
     {
 
+        $data = array();
+
         // Build the select.
         $select = $this->getSelect()
             ->columns(array('wkt' => new Zend_Db_Expr('AsText(coverage)')))
@@ -195,11 +197,8 @@ class NeatlineRecordTable extends Omeka_Db_Table
             $select = $this->filterByZoom($select, $zoom);
         }
 
-
         // Get records.
         if ($records = $this->fetchObjects($select)) {
-
-            $data = array();
 
             // Construct record objects.
             foreach ($records as $record) {
@@ -237,7 +236,8 @@ class NeatlineRecordTable extends Omeka_Db_Table
      */
     protected function filterByExtent($select, $extent)
     {
-
+        $select->where(new Zend_Db_Expr('MBRIntersects(
+            coverage,GeomFromText("'.$extent.'"))'));
         return $select;
     }
 

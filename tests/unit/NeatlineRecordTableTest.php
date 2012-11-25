@@ -618,7 +618,7 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
         $record3->save();
         $record4->save();
 
-        // When zoom=null, get all records.
+        // Zoom=null, get all records.
         $records = $this->_recordsTable->queryRecords($exhibit);
         $this->assertCount(4, $records);
         $this->assertEquals($records[0]['id'], $record1->id);
@@ -627,19 +627,22 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
         $this->assertEquals($records[3]['id'], $record4->id);
 
         // Zoom < min_zoom.
-        $records = $this->_recordsTable->queryRecords($exhibit, null, $zoom=9);
+        $records = $this->_recordsTable->queryRecords($exhibit,
+            null, $zoom=9);
         $this->assertCount(2, $records);
         $this->assertEquals($records[0]['id'], $record1->id);
         $this->assertEquals($records[1]['id'], $record3->id);
 
         // Zoom > min_zoom.
-        $records = $this->_recordsTable->queryRecords($exhibit, null, $zoom=16);
+        $records = $this->_recordsTable->queryRecords($exhibit,
+            null, $zoom=16);
         $this->assertCount(2, $records);
         $this->assertEquals($records[0]['id'], $record1->id);
         $this->assertEquals($records[1]['id'], $record2->id);
 
         // min_zoom < Zoom < max_zoom.
-        $records = $this->_recordsTable->queryRecords($exhibit, null, $zoom=25);
+        $records = $this->_recordsTable->queryRecords($exhibit,
+            null, $zoom=25);
         $this->assertCount(3, $records);
         $this->assertEquals($records[0]['id'], $record1->id);
         $this->assertEquals($records[1]['id'], $record2->id);
@@ -662,16 +665,31 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
         $record1 = new NeatlineRecord(null, $exhibit);
         $record2 = new NeatlineRecord(null, $exhibit);
 
-        // Set bounds.
-        // $record1->bounds = 'POLYGON((0 0,0 5,5 5,5 0))';
-        // $record2->bounds = null;
-
         // Save.
-        $record1->save();
-        $record2->save();
+        $record1->save('POLYGON((0 0,0 2,2 2,2 0,0 0))');
+        $record2->save('POLYGON((4 4,4 6,6 6,6 4,4 4))');
 
-        // When extent=null, get all records.
+        // Extent=null, get all records.
         $records = $this->_recordsTable->queryRecords($exhibit);
+        $this->assertCount(2, $records);
+        $this->assertEquals($records[0]['id'], $record1->id);
+        $this->assertEquals($records[1]['id'], $record2->id);
+
+        // Record1 intersection.
+        $records = $this->_recordsTable->queryRecords($exhibit,
+            'POLYGON((1 1,1 3,3 3,3 1,1 1))');
+        $this->assertCount(1, $records);
+        $this->assertEquals($records[0]['id'], $record1->id);
+
+        // Record2 intersection.
+        $records = $this->_recordsTable->queryRecords($exhibit,
+            'POLYGON((5 5,5 7,7 7,7 5,5 5))');
+        $this->assertCount(1, $records);
+        $this->assertEquals($records[0]['id'], $record2->id);
+
+        // Record1 and record2 intersection.
+        $records = $this->_recordsTable->queryRecords($exhibit,
+            'POLYGON((1 1,1 5,5 5,5 1,1 1))');
         $this->assertCount(2, $records);
         $this->assertEquals($records[0]['id'], $record1->id);
         $this->assertEquals($records[1]['id'], $record2->id);
