@@ -60,8 +60,9 @@ class Neatline_RecordsController extends Neatline_Rest_Controller
      */
     public function putAction()
     {
+        $record = $this->__records->find($this->_request->id);
         $put = file_get_contents(Zend_Registry::get('fileIn'));
-        $this->__records->updateRecord(Zend_Json::decode($put, true));
+        $record->update(Zend_Json::decode($put, true));
     }
 
     /**

@@ -158,30 +158,6 @@ class NeatlineRecordTable extends Omeka_Db_Table
 
     }
 
-    /**
-     * Update a record.
-     *
-     * @param array $values The PUT values.
-     *
-     * @return void.
-     */
-    public function updateRecord($values)
-    {
-
-        // Get record and bounds.
-        $record = $this->find((int) $values['id']);
-        $bounds = $values['bounds'];
-        unset($values['bounds']);
-
-        // Update bounds.
-        $record->setBounds($bounds);
-
-        // Set remaining fields.
-        foreach ($values as $key => $val) $record->setNotEmpty($key, $val);
-        $record->save();
-
-    }
-
 
     /**
      * JSON constructors.

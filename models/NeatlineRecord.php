@@ -461,6 +461,29 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
     }
 
     /**
+     * Update the record.
+     *
+     * @param array $values The PUT values.
+     *
+     * @return void.
+     */
+    public function update($values)
+    {
+
+        // Get record and bounds.
+        $bounds = $values['bounds'];
+        unset($values['bounds']);
+
+        // Update bounds.
+        $this->setBounds($bounds);
+
+        // Set remaining fields.
+        foreach ($values as $key => $val) $this->setNotEmpty($key, $val);
+        $this->save();
+
+    }
+
+    /**
      * On save, update the modified column on the parent exhibit and set
      * a default bounds value if one does not exist.
      *

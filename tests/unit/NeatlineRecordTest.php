@@ -279,6 +279,86 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
     }
 
     /**
+     * update() should update all non-empty properties.
+     *
+     * @return void
+     **/
+    public function testUpdate()
+    {
+
+        // Create record.
+        $exhibit = $this->__exhibit();
+        $record = $this->__record();
+
+        // Set parameters.
+        $record->title              = 'title';
+        $record->description        = 'desc';
+        $record->slug               = 'slug';
+        $record->vector_color       = '#vector';
+        $record->stroke_color       = '#stroke';
+        $record->select_color       = '#select';
+        $record->vector_opacity     = 1;
+        $record->select_opacity     = 2;
+        $record->stroke_opacity     = 3;
+        $record->graphic_opacity    = 4;
+        $record->stroke_width       = 5;
+        $record->point_radius       = 6;
+        $record->point_image        = 'file.png';
+        $record->map_focus          = 'lat/lon';
+        $record->map_zoom           = 7;
+        $record->coverage           = 'kml';
+        $record->map_active         = 1;
+
+        // Mock values.
+        $values = array(
+            'id'                    => (string) $record->id,
+            'item_id'               => null,
+            'title'                 => 'title2',
+            'description'           => 'desc2',
+            'slug'                  => 'slug2',
+            'vector_color'          => '#vector2',
+            'stroke_color'          => '#stroke2',
+            'select_color'          => '#select2',
+            'vector_opacity'        => '10',
+            'select_opacity'        => '20',
+            'stroke_opacity'        => '30',
+            'graphic_opacity'       => '40',
+            'stroke_width'          => '50',
+            'point_radius'          => '60',
+            'point_image'           => 'file2.png',
+            'map_focus'             => 'lat2/lon2',
+            'map_zoom'              => '70',
+            'coverage'              => 'kml2',
+            'bounds'                => 'POLYGON((0 0,0 1,1 1,1 0,0 0))',
+            'map_active'            => '0'
+        );
+
+        // Update, reget record.
+        $record->update($values);
+        $record = $this->_recordsTable->find($record->id);
+
+        // Check new values.
+        $this->assertEquals($record->title, 'title2');
+        $this->assertEquals($record->description, 'desc2');
+        $this->assertEquals($record->slug, 'slug2');
+        $this->assertEquals($record->vector_color, '#vector2');
+        $this->assertEquals($record->stroke_color, '#stroke2');
+        $this->assertEquals($record->select_color, '#select2');
+        $this->assertEquals($record->vector_opacity, 10);
+        $this->assertEquals($record->select_opacity, 20);
+        $this->assertEquals($record->stroke_opacity, 30);
+        $this->assertEquals($record->graphic_opacity, 40);
+        $this->assertEquals($record->stroke_width, 50);
+        $this->assertEquals($record->point_radius, 60);
+        $this->assertEquals($record->point_image, 'file2.png');
+        $this->assertEquals($record->map_focus, 'lat2/lon2');
+        $this->assertEquals($record->map_zoom, 70);
+        $this->assertEquals($record->coverage, 'kml2');
+        $this->assertEquals($record->map_active, 0);
+
+    }
+
+    /**
      * save() should update the modified field on the parent exhibit.
      *
      * @return void.

@@ -123,7 +123,7 @@ class Neatline_RecordsControllerTest extends Neatline_Test_AppTestCase
 
         // Issue request.
         $this->request->setMethod('PUT');
-        $this->dispatch('neatline/records');
+        $this->dispatch('neatline/records/'.$record->id);
 
         // Re-get record.
         $record = $this->_recordsTable->find($record->id);
