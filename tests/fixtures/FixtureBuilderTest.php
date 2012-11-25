@@ -111,8 +111,8 @@ class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
         $record3->save();
 
         // Generate the fixture.
-        $this->writeFixture('neatline/records/'.$exhibit->id,
-            'records.json');
+        $this->request->setQuery(array('id' => $exhibit->id));
+        $this->writeFixture('neatline/records', 'records.json');
 
 
         // Case 2: Data for record 2 has changed.
@@ -123,8 +123,7 @@ class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
 
         // Generate the fixture.
         $this->resetResponse();
-        $this->writeFixture('neatline/records/'.$exhibit->id,
-            'records-changed-data.json');
+        $this->writeFixture('neatline/records', 'records-changed-data.json');
 
 
         // Case 2: Record 2 is absent from the set.
@@ -134,8 +133,7 @@ class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
 
         // Generate the fixture.
         $this->resetResponse();
-        $this->writeFixture('neatline/records/'.$exhibit->id,
-            'records-removed-record.json');
+        $this->writeFixture('neatline/records', 'records-removed-record.json');
 
 
     }
