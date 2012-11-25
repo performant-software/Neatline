@@ -179,6 +179,27 @@ class Neatline_Test_AppTestCase extends Omeka_Test_AppTestCase
     }
 
     /**
+     * Get the coverage of a record as a raw WKT string.
+     *
+     * @param NeatlineRecord $record The record.
+     *
+     * @return string $coverge The coverage as raw WKT.
+     */
+    public function getCoverageAsText($record)
+    {
+
+        // Build the select.
+        $select = $this->_recordsTable->getSelect()
+            ->columns(array('wkt' => new Zend_Db_Expr('AsText(coverage)')))
+            ->where('id=?', $record->id);
+
+        // Query and return value.
+        $record = $this->_recordsTable->fetchObject($select);
+        return $record->wkt;
+
+    }
+
+    /**
      * Get the first exhibit.
      *
      * @return NeatlineExhibit The record.

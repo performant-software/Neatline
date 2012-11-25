@@ -143,7 +143,10 @@ class Neatline_RecordsControllerTest extends Neatline_Test_AppTestCase
         $this->assertEquals($record->map_focus, 'lat2/lon2');
         $this->assertEquals($record->map_zoom, 70);
         $this->assertEquals($record->map_active, 0);
-        $this->assertNotNull($record->coverage);
+
+        // Check the coverage value.
+        $this->assertEquals($this->getCoverageAsText($record),
+            'POINT(1 1)');
 
     }
 

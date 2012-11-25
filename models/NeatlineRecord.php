@@ -349,68 +349,6 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
     }
 
     /**
-     * Return coverage.
-     *
-     * @return string The coverage data. If there is record-specific data,
-     * return it. If not, and there is a parent Omeka item, try to get a non-
-     * empty value from the DC coverage field.
-     */
-    public function getGeocoverage()
-    {
-
-        // Return local value if one exists.
-        if (!is_null($this->coverage) && $this->coverage !== '') {
-            return $this->coverage;
-        }
-
-        // Try to get DC value.
-        else if (!is_null($this->item_id)) {
-
-            // If Neatline Features is not installed.
-            if (!plugin_is_active('NeatlineFeatures')) {
-
-                // Get the DC coverage.
-                $coverage = metadata(
-                    $this->getItem(), array('Dublin Core', 'Coverage'));
-
-                // Return if not empty, otherwise return default.
-                return ($coverage !== '') ?
-                    $coverage : self::$defaults['coverage'];
-
-            }
-
-            // If Neatline Features is installed.
-            else {
-
-                // Get feature records.
-                $features = $this->getTable('NeatlineFeature')
-                    ->getItemFeatures($this->getItem());
-
-                // Walk features and build array.
-                $wkt = array();
-                foreach ($features as $feature) {
-
-                    // Push wkt if not null or empty.
-                    if (!is_null($feature->wkt) && $feature->wkt !== '') {
-                        $wkt[] = $feature->wkt;
-                    }
-
-                    // If at least one feature exists, implode and return.
-                    if (count($wkt)) return implode('|', $wkt);
-                    else return self::$defaults['coverage'];
-
-                }
-
-            }
-
-        }
-
-        // Fall back on default string.
-        else return self::$defaults['coverage'];
-
-    }
-
-    /**
      * Assemble record data for the front-end application.
      *
      * @param string $coverage The coverage as plaintext WKT.

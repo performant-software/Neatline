@@ -48,7 +48,7 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
         // Re-get the record object.
         $record = $this->_recordsTable->find($record->id);
 
-        // Get.
+        // Check values.
         $this->assertEquals($record->title, 'title');
         $this->assertEquals($record->description, 'description');
         $this->assertEquals($record->vector_color, '#ffffff');
@@ -64,7 +64,10 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
         $this->assertEquals($record->map_active, 1);
         $this->assertEquals($record->map_focus, 'lat/lon');
         $this->assertEquals($record->map_zoom, 5);
-        $this->assertNotNull($record->coverage);
+
+        // Check the coverage value.
+        $this->assertEquals($this->getCoverageAsText($record),
+            'POINT(1 1)');
 
     }
 
