@@ -176,8 +176,10 @@ class NeatlineRecordTable extends Omeka_Db_Table
     public function queryRecords($exhibit, $extent=null, $zoom=null)
     {
 
-        $data = array();
-        $select = $this->getSelect()->where('exhibit_id=?', $exhibit->id);
+        // Build the select.
+        $select = $this->getSelect()
+            ->columns(array('wkt' => new Zend_Db_Expr('AsText(coverage)')))
+            ->where('exhibit_id=?', $exhibit->id);
 
 
         // Extent.
@@ -197,9 +199,11 @@ class NeatlineRecordTable extends Omeka_Db_Table
         // Get records.
         if ($records = $this->fetchObjects($select)) {
 
+            $data = array();
+
             // Construct record objects.
             foreach ($records as $record) {
-                $data[] = $record->buildJsonData();
+                $data[] = $record->buildJsonData($record->wkt);
             }
 
         }

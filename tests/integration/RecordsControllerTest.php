@@ -90,9 +90,8 @@ class Neatline_RecordsControllerTest extends Neatline_Test_AppTestCase
         $record->point_image        = 'file.png';
         $record->map_focus          = 'lat/lon';
         $record->map_zoom           = 7;
-        $record->coverage           = 'kml';
         $record->map_active         = 1;
-        $record->save();
+        $record->save('POINT(1 1)');
 
         // Mock values.
         $values = array(
@@ -113,7 +112,7 @@ class Neatline_RecordsControllerTest extends Neatline_Test_AppTestCase
             'point_image'           => 'file2.png',
             'map_focus'             => 'lat2/lon2',
             'map_zoom'              => '70',
-            'coverage'              => 'kml2',
+            'coverage'              => 'POINT(1 1)',
             'map_active'            => '0'
         );
 
@@ -143,8 +142,8 @@ class Neatline_RecordsControllerTest extends Neatline_Test_AppTestCase
         $this->assertEquals($record->point_image, 'file2.png');
         $this->assertEquals($record->map_focus, 'lat2/lon2');
         $this->assertEquals($record->map_zoom, 70);
-        $this->assertEquals($record->coverage, 'kml2');
         $this->assertEquals($record->map_active, 0);
+        $this->assertNotNull($record->coverage);
 
     }
 

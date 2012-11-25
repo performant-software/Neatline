@@ -53,10 +53,6 @@ class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
         $record2->description = 'Record 2 desc.';
         $record3->description = 'Record 3 desc.';
 
-        $record1->coverage = $nyc;
-        $record2->coverage = $boston;
-        $record3->coverage = $dc;
-
         // No default focus/zoom for records 2 and 3.
         $record1->map_focus = '-8233185.189506843,4978802.273690212';
         $record1->map_zoom = 10;
@@ -106,9 +102,9 @@ class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
         $record2->point_image = 'file2.png';
         $record3->point_image = 'file3.png';
 
-        $record1->save();
-        $record2->save();
-        $record3->save();
+        $record1->save('POINT(1 1)');
+        $record2->save('POINT(2 2)');
+        $record3->save('POINT(3 3)');
 
         // Generate the fixture.
         $this->request->setQuery(array('id' => $exhibit->id));
@@ -118,8 +114,7 @@ class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
         // Case 2: Data for record 2 has changed.
         // --------------------------------------
 
-        $record2->coverage = $dc;
-        $record2->save();
+        $record2->save('POINT(3 3)');
 
         // Generate the fixture.
         $this->resetResponse();

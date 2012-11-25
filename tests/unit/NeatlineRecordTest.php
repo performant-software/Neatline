@@ -40,11 +40,10 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
         $record->stroke_width       = 3;
         $record->point_radius       = 3;
         $record->point_image        = 'http://test.org';
-        $record->coverage           = 'wkt';
         $record->map_active         = 1;
         $record->map_focus          = 'lat/lon';
         $record->map_zoom           = 5;
-        $record->save();
+        $record->save('POINT(1 1)');
 
         // Re-get the record object.
         $record = $this->_recordsTable->find($record->id);
@@ -62,10 +61,10 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
         $this->assertEquals($record->stroke_width, 3);
         $this->assertEquals($record->point_radius, 3);
         $this->assertEquals($record->point_image, 'http://test.org');
-        $this->assertEquals($record->coverage, 'wkt');
         $this->assertEquals($record->map_active, 1);
         $this->assertEquals($record->map_focus, 'lat/lon');
         $this->assertEquals($record->map_zoom, 5);
+        $this->assertNotNull($record->coverage);
 
     }
 
@@ -343,7 +342,6 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
         $record->point_image        = 'file.png';
         $record->map_focus          = 'lat/lon';
         $record->map_zoom           = 7;
-        $record->coverage           = 'kml';
         $record->map_active         = 1;
 
         // Mock values.
@@ -365,7 +363,7 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
             'point_image'           => 'file2.png',
             'map_focus'             => 'lat2/lon2',
             'map_zoom'              => '70',
-            'coverage'              => 'kml2',
+            'coverage'              => 'POINT(1 1)',
             'map_active'            => '0'
         );
 
@@ -389,8 +387,8 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
         $this->assertEquals($record->point_image, 'file2.png');
         $this->assertEquals($record->map_focus, 'lat2/lon2');
         $this->assertEquals($record->map_zoom, 70);
-        $this->assertEquals($record->coverage, 'kml2');
         $this->assertEquals($record->map_active, 0);
+        $this->assertNotNull($record->coverage);
 
     }
 
@@ -456,7 +454,6 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
 
         // Map.
         $record->map_focus              = 'lat/lon';
-        $record->coverage               = 'kml';
         $record->map_zoom               = 10;
 
         // Statuses.
@@ -465,7 +462,7 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
         $record->save();
 
         // Ping the method for the json.
-        $data = $record->buildJsonData();
+        $data = $record->buildJsonData('POINT(1 1)');
 
         $this->assertEquals(
             $data,
@@ -494,7 +491,7 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
                 // Map.
                 'map_focus'             => 'lat/lon',
                 'map_zoom'              => 10,
-                'coverage'              => 'kml',
+                'coverage'              => 'POINT(1 1)',
                 'wmsAddress'            => null,
                 'layers'                => null,
 

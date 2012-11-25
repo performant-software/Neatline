@@ -413,14 +413,11 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
     /**
      * Assemble record data for the front-end application.
      *
-     * @param array $index This is the index of NeatlineRecord objects for
-     * caching. Optional.
-     * @param array $wmss This is an index mapping item IDs to rows from the
-     * NeatlineMapsService WMS data.
+     * @param string $coverage The coverage as plaintext WKT.
      *
      * @return array The map JSON.
      **/
-    public function buildJsonData($index=array(), $wmss=array()) {
+    public function buildJsonData($coverage=null) {
 
         $data = array(
 
@@ -448,7 +445,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
             // Map:
             'map_focus'           => $this->map_focus,
             'map_zoom'            => $this->map_zoom,
-            'coverage'            => $this->getGeocoverage(),
+            'coverage'            => $coverage,
             'wmsAddress'          => null,
             'layers'              => null,
 
@@ -475,23 +472,22 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
         $coverage = $values['coverage'];
         unset($values['coverage']);
 
-        // Update bounds.
-        $this->setCoverage($coverage);
-
         // Set remaining fields
         foreach ($values as $key => $val) $this->setNotEmpty($key, $val);
-        $this->save();
+        $this->save($coverage);
 
     }
 
     /**
-     * On save, update the modified column on the parent exhibit and set
-     * a default bounds value if one does not exist.
+     * On save, update the modified column on the parent exhibit. If string
+     * $coverage is passed, run the coverage update.
      *
      * @return void.
      */
-    public function save()
+    public function save($coverage = null)
     {
+
+        parent::save();
 
         // Set `modified` on parent.
         if (!is_null($this->exhibit_id)) {
@@ -499,7 +495,8 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
             $exhibit->save();
         }
 
-        parent::save();
+        // Update `coverage`.
+        if (!is_null($coverage)) $this->setCoverage($coverage);
 
     }
 
