@@ -194,12 +194,6 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
         'select_color'
     );
 
-    /**
-     * DC Date regular expression.
-     */
-    private static $dcDateRegex =
-        '/^(?P<start>[0-9:\-\s]+)(\/(?P<end>[0-9:\-\s]+))?/';
-
 
     /**
      * Instantiate and foreign keys.
@@ -278,7 +272,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
      */
     public function setBounds($bounds)
     {
-        $this->bounds = new Zend_Db_Expr("PolyFromText('$bounds')");
+        // $this->bounds = new Zend_Db_Expr("PolyFromText('$bounds')");
     }
 
     /**
@@ -461,13 +455,6 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
             'map_active'          => $this->map_active
 
         );
-
-        // If the record has a parent item and Neatline Maps is present.
-        if (!is_null($this->item_id) && array_key_exists($this->item_id, $wmss)) {
-            $wms = $wmss[$this->item_id];
-            $data['wmsAddress'] = $wms['address'];
-            $data['layers']     = $wms['layers'];
-        }
 
         return $data;
 

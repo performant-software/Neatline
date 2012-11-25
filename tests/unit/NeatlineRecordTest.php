@@ -59,22 +59,22 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
         $record = new NeatlineRecord($item, $neatline);
 
         // Set.
-        $record->title =                        'title';
-        $record->description =                  'description';
-        $record->vector_color =                 '#ffffff';
-        $record->stroke_color =                 '#ffffff';
-        $record->select_color =                 '#ffffff';
-        $record->vector_opacity =               50;
-        $record->select_opacity =               50;
-        $record->stroke_opacity =               50;
-        $record->graphic_opacity =              50;
-        $record->stroke_width =                 3;
-        $record->point_radius =                 3;
-        $record->point_image =                  'http://test.org';
-        $record->coverage =                     'POINT()';
-        $record->map_active =                   1;
-        $record->map_focus =                   'CENTER()';
-        $record->map_zoom =                     5;
+        $record->title              = 'title';
+        $record->description        = 'description';
+        $record->vector_color       = '#ffffff';
+        $record->stroke_color       = '#ffffff';
+        $record->select_color       = '#ffffff';
+        $record->vector_opacity     = 50;
+        $record->select_opacity     = 50;
+        $record->stroke_opacity     = 50;
+        $record->graphic_opacity    = 50;
+        $record->stroke_width       = 3;
+        $record->point_radius       = 3;
+        $record->point_image        = 'http://test.org';
+        $record->coverage           = 'POINT()';
+        $record->map_active         = 1;
+        $record->map_focus          = 'CENTER()';
+        $record->map_zoom           = 5;
         $record->save();
 
         // Re-get the record object.
@@ -266,106 +266,6 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
         // Set unique slug.
         $record1->setSlug('new-slug');
         $this->assertEquals($record1->slug, 'new-slug');
-
-    }
-
-    /**
-     * The getGeocoverage() method return the default value when there is no locally
-     * set value and no parent record. When there is a local value that is not an
-     * empty string, it should be returned.
-     *
-     * @return void.
-     */
-    public function testGetGeocoverageNoNeatlineFeaturesWithoutParentItem()
-    {
-
-        // Create an item, exhibit, and record.
-        $neatline = $this->__exhibit();
-        $record = new NeatlineRecord(null, $neatline);
-
-        // Should return null when the value is null.
-        $this->assertEquals($record->getGeocoverage(), '');
-
-        // Should return empty WKT for empty string.
-        $record->coverage = '';
-        $this->assertEquals($record->getGeocoverage(), '');
-
-        // Should return the value when the value is set.
-        $record->coverage = 'POINT(0,1)';
-        $this->assertEquals($record->getGeocoverage(), 'POINT(0,1)');
-
-    }
-
-    /**
-     * The getGeocoverage() method return the DC coverage field when there is not a
-     * locally-set value, a parent item exists, and the coverage field is not empty.
-     *
-     * @return void.
-     */
-    public function testGetGeocoverageNoNeatlineFeaturesWithParentItemEmptyGeocoverage()
-    {
-
-        // Create an item, exhibit, and record.
-        $item = $this->__item();
-        $neatline = $this->__exhibit();
-        $record = new NeatlineRecord($item, $neatline);
-
-        // Should return empty string.
-        $this->assertEquals($record->getGeocoverage(), '');
-
-        // Add an empty DC coverage field on the parent item.
-        $this->__text(
-            $item,
-            'Dublin Core',
-            'Coverage',
-            '');
-
-        // Should return empty WKT.
-        $this->assertEquals($record->getGeocoverage(), '');
-
-        // When there is a locally set value, override.
-        $record->coverage = 'POINT(11,12)';
-        $this->assertEquals($record->getGeocoverage(), 'POINT(11,12)');
-
-    }
-
-    /**
-     * The getGeocoverage() method return the DC coverage field when there is not a
-     * locally-set value, a parent item exists, and the coverage field is not empty.
-     *
-     * @return void.
-     */
-    public function testGetGeocoverageNoNeatlineFeaturesWithParentItemNonEmptyGeocoverage()
-    {
-
-        // Create an item, exhibit, and record.
-        $item = $this->__item();
-        $neatline = $this->__exhibit();
-        $record = new NeatlineRecord($item, $neatline);
-
-        // Add a non-empty DC coverage field on the parent item.
-        $this->__text(
-            $item,
-            'Dublin Core',
-            'Coverage',
-            'POINT(10,11)');
-
-        // Should return the DC value.
-        $this->assertEquals($record->getGeocoverage(), 'POINT(10,11)');
-
-        // When there is a locally set value, override.
-        $record->coverage = 'POINT(11,12)';
-        $this->assertEquals($record->getGeocoverage(), 'POINT(11,12)');
-
-    }
-
-    /**
-     * .
-     *
-     * @return void.
-     */
-    public function testBuildEditFormData()
-    {
 
     }
 

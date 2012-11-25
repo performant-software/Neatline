@@ -485,7 +485,7 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
             'map_focus'             => 'lat2/lon2',
             'map_zoom'              => '70',
             'coverage'              => 'kml2',
-            'bounds'                => 'POLYGON((0 0,0 1,1 1,1 0))',
+            'bounds'                => 'POLYGON((0 0,0 1,1 1,1 0,0 0))',
             'map_active'            => '0'
         );
 
