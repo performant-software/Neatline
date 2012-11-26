@@ -17,7 +17,7 @@ Neatline.Views.Map = Backbone.View.extend({
   },
 
   /*
-   * Start OpenLayers.
+   * Start OpenLayers, publish starting position.
    *
    * @return void.
    */
@@ -25,6 +25,7 @@ Neatline.Views.Map = Backbone.View.extend({
     this.layers = [];
     this.frozen = [];
     this.initializeOpenLayers();
+    this.publishPosition();
   },
 
   /*
@@ -119,22 +120,32 @@ Neatline.Views.Map = Backbone.View.extend({
   },
 
   /*
-   * Listen for move and zoom.
+   * Listen for pan and zoom.
    *
    * @return void.
    */
   registerMapEvents: function() {
 
     // Register for `moveend`.
-    this.map.events.register('moveend', this.map, _.bind(function() {
+    this.map.events.register('moveend', this.map,
+      _.bind(this.publishPosition, this)
+    );
 
-      // Publish.
-      Neatline.vent.trigger('map:move', {
-        extent: this.getExtentAsWKT(),
-        zoom: this.getZoom()
-      });
+  },
 
-    }, this));
+  /*
+   * Publish the extent and zoom.
+   *
+   * @return void.
+   */
+  publishPosition: function() {
+
+    // Trigger out.
+    Neatline.vent.trigger('map:move', {
+      extent: this.getExtentAsWKT(),
+      zoom:   this.getZoom()
+    });
+
   },
 
   /*
@@ -207,7 +218,6 @@ Neatline.Views.Map = Backbone.View.extend({
   ingest: function(records) {
 
     var layers = [];
-    console.log(records.length);
 
 
     // Clear layers.

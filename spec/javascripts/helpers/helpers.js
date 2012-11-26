@@ -83,5 +83,7 @@ _t.getVectorLayers = function() {
  * @return void.
  */
 _t.respond200 = function(request, response) {
-  request.respond(200, {'Content-Type':'application/json'},response);
+  request.respond(200, {
+    'Content-Type':'application/json'
+  }, response);
 };

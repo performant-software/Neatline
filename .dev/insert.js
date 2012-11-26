@@ -16,13 +16,8 @@ var client = mysql.createConnection({
 
 client.connect();
 
-var count = parseInt(process.argv[2], 10);
 
-// Create exhibit.
-var sql = 'INSERT INTO omeka_neatline_exhibits ' +
-  '(title, slug) VALUES ("dev", "dev")';
-
-client.query(sql, function(err, res) {
+function layer(exhibit_id, count, zoom, color) {
 
   // Base insert.
   var sql = 'INSERT INTO omeka_neatline_records (' +
@@ -40,6 +35,7 @@ client.query(sql, function(err, res) {
       'select_opacity,'+
       'stroke_width,'+
       'min_zoom,'+
+      'max_zoom,'+
       'coverage'+
       ') VALUES';
 
@@ -54,20 +50,21 @@ client.query(sql, function(err, res) {
 
     // Values.
     sql += '(' +
-      res.insertId+','+
+      exhibit_id+','+
       '"Record'+n+'",'+
       '"Description'+n+'",'+
       '1,'+
-      '"#fff600",'+
+      '"'+color+'",'+
       '"#000000",'+
-      '"#0030ff",'+
+      '"'+color+'",'+
       rad+','+
       100+','+
       100+','+
       30+','+
-      70+','+
+      90+','+
       2+','+
-      8+','+
+      zoom+','+
+      zoom+','+
       geo+
     ')';
 
@@ -77,6 +74,23 @@ client.query(sql, function(err, res) {
   });
 
   client.query(sql);
+
+}
+
+
+// Create exhibit.
+var sql = 'INSERT INTO omeka_neatline_exhibits ' +
+  '(title, slug) VALUES ("dev", "dev")';
+
+client.query(sql, function(err, res) {
+
+  layer(res.insertId, 200, 3, '#00ff24');
+  layer(res.insertId, 500, 4, '#00aeff');
+  layer(res.insertId, 5000, 5, '#0006ff');
+  layer(res.insertId, 20000, 6, '#7800ff');
+  layer(res.insertId, 50000, 7, '#f000ff');
+  layer(res.insertId, 100000, 8, '#ff0000');
+
   client.end(function() {
     process.exit();
   });
