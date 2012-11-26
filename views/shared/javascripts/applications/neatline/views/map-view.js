@@ -22,10 +22,15 @@ Neatline.Views.Map = Backbone.View.extend({
    * @return void.
    */
   initialize: function() {
+
+    // Trackers.
     this.layers = [];
     this.frozen = [];
+
+    // Startup.
     this.initializeOpenLayers();
     this.publishPosition();
+
   },
 
   /*
@@ -134,7 +139,7 @@ Neatline.Views.Map = Backbone.View.extend({
   },
 
   /*
-   * Publish the extent and zoom.
+   * Publish the current focus position.
    *
    * @return void.
    */

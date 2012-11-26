@@ -98,9 +98,9 @@ class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
         $record2->point_radius = 17;
         $record3->point_radius = 18;
 
-        $record1->point_image = 'file1.png';
-        $record2->point_image = 'file2.png';
-        $record3->point_image = 'file3.png';
+        $record1->point_image = 'https://www.google.com/favicon.ico';
+        $record2->point_image = 'http://en.wikipedia.org/favicon.ico';
+        $record3->point_image = 'http://www.amazon.com/favicon.ico';
 
         $record1->save('POINT(1 1)');
         $record2->save('POINT(2 2)');
@@ -118,7 +118,8 @@ class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
 
         // Generate the fixture.
         $this->resetResponse();
-        $this->writeFixture('neatline/records', 'records-changed-data.json');
+        $this->writeFixture('neatline/records',
+          'records-changed-data.json');
 
 
         // Case 2: Record 2 is absent from the set.
@@ -128,7 +129,8 @@ class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
 
         // Generate the fixture.
         $this->resetResponse();
-        $this->writeFixture('neatline/records', 'records-removed-record.json');
+        $this->writeFixture('neatline/records',
+          'records-removed-record.json');
 
 
     }
@@ -140,11 +142,8 @@ class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
      */
     public function testNeatlinePartial()
     {
-
-        // Generate the fixture.
         $this->writeFixture('neatline/fixtures/neatline',
             'neatline-partial.html');
-
     }
 
     /**
@@ -154,11 +153,8 @@ class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
      */
     public function testEditorPartial()
     {
-
-        // Generate the fixture.
         $this->writeFixture('neatline/fixtures/editor',
             'editor-partial.html');
-
     }
 
 }

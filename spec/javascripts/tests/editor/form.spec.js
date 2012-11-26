@@ -170,8 +170,9 @@ describe('Form', function() {
       expect(_t.form.graphicOpacity.val()).toEqual('10');
       expect(_t.form.strokeWidth.val()).toEqual('13');
       expect(_t.form.pointRadius.val()).toEqual('16');
-      expect(_t.form.pointGraphic.val()).toEqual('file1.png');
       expect(_t.form.coverage.val()).toEqual('POINT(1 1)');
+      expect(_t.form.pointGraphic.val()).toEqual(
+        'https://www.google.com/favicon.ico');
 
     });
 
@@ -189,8 +190,8 @@ describe('Form', function() {
       _t.form.graphicOpacity.val('11');
       _t.form.strokeWidth.val('14');
       _t.form.pointRadius.val('17');
-      _t.form.pointGraphic.val('file2.png');
       _t.form.coverage.val(models[1].get('coverage'));
+      _t.form.pointGraphic.val('file2.png');
 
       // Click save, capture request.
       _t.form.saveButton.trigger('click');

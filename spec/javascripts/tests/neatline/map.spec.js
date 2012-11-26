@@ -63,24 +63,6 @@ describe('Map', function() {
 
       });
 
-      it('should set a focus and zoom when no exhibit defaults', function() {
-
-        // Set exhibit defaults.
-        __exhibit.mapZoom = null;
-        __exhibit.mapFocus = null;
-
-        // Restart.
-        _t.loadNeatline();
-        var request = _.last(server.requests);
-        _t.respond200(request, json);
-
-        // Check viewport.
-        expect(_t.map.map.zoom).toEqual(_t.map.options.defaultZoom);
-
-        // TODO: How to check for geolocation?
-
-      });
-
     });
 
     describe('Record Data', function() {
