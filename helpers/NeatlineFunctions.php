@@ -199,10 +199,15 @@ function __devInstall()
     $exhibit = new NeatlineExhibit();
     $exhibit->title = 'dev';
     $exhibit->slug = 'dev';
+    $exhibit->map_zoom = 10;
     $exhibit->save();
 
     // Create records.
-    for ($i=3; $i<19; $i++) {
+    for ($i=0; $i<100; $i++) {
+
+        // Random coordianates.
+        $lat = rand(-20000000,20000000);
+        $lon = rand(-20000000,20000000);
 
         // Create the record.
         $record = new NeatlineRecord(null, $exhibit);
@@ -214,17 +219,15 @@ function __devInstall()
         $record->vector_color =     '#ff0000';
         $record->stroke_color =     '#000000';
         $record->select_color =     '#0000ff';
-        $record->point_radius =     $i;
+        $record->point_radius =     rand(10,100);
         $record->stroke_opacity =   100;
         $record->graphic_opacity =  100;
         $record->vector_opacity =   30;
         $record->select_opacity =   70;
         $record->stroke_width =     2;
-        $record->min_zoom =         $i;
-        $record->max_zoom =         $i;
 
         // Coverage.
-        $record->save('POINT(-8742980.086855464 4579848.271713871)');
+        $record->save('POINT('.$lon.' '.$lat.')');
 
     }
 

@@ -207,6 +207,7 @@ Neatline.Views.Map = Backbone.View.extend({
   ingest: function(records) {
 
     var layers = [];
+    console.log(records.length);
 
 
     // Clear layers.

@@ -46,6 +46,7 @@ module.exports = function(grunt) {
         src: neatlineFiles.concat([
           c.apps.neatline+'app.js',
           c.apps.neatline+'run.js',
+          c.apps.neatline+'models/*.js',
           c.apps.neatline+'collections/*.js',
           c.apps.neatline+'modules/*.js',
           c.apps.neatline+'views/*.js'

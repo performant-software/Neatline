@@ -13,4 +13,3 @@ views/shared/javascripts/payloads/
 views/shared/javascripts/components/
 views/shared/css/v2/payloads/
 spec/javascripts/helpers/components/
-.sql/
