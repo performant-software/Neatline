@@ -88,7 +88,7 @@ describe('Form Open/Close', function() {
 
   });
 
-  it('should not change form records in response to map click', function() {
+  it('should not open new form in response to map click', function() {
 
     // Mock feature1 click.
     layers[0].getFeatureFromEvent = function(evt) { return feature1; };
@@ -118,20 +118,62 @@ describe('Form Open/Close', function() {
 
   });
 
-  it('should freeze the form model on the map on form open', function() {
+  it('should freeze map when form is opened via records', function() {
 
-    // Get Record 1 layer.
-    var layers = _t.getVectorLayers();
-    var record1Layer = _.find(layers, function(layer) {
-      return layer.name == 'Record 1';
-    });
+    // By default, map unfrozen.
+    expect(_t.map.frozen).toBeFalsy();
 
-    // By default, no frozen layers.
-    expect(_t.map.frozen).toEqual([]);
-
-    // Open form, check for frozen.
+    // Show form, check frozen.
     $(records[0]).trigger('click');
-    expect(_t.map.frozen).toEqual([record1Layer.nId]);
+    expect(_t.map.frozen).toBeTruthy();
+
+    // Close, check unfrozen.
+    $(_t.form.closeButton).trigger('click');
+    expect(_t.map.frozen).toBeFalsy();
+
+  });
+
+  it('should freeze map when form is opened via map', function() {
+
+    // Clobber getFeaturesFromEvent().
+    layers[0].getFeatureFromEvent = function(evt) { return feature1; };
+
+    // Mock cursor event.
+    var evt = {
+      xy: new OpenLayers.Pixel(Math.random(), Math.random()),
+      type: 'click'
+    };
+
+    // By default, map unfrozen.
+    expect(_t.map.frozen).toBeFalsy();
+
+    // Show form, check frozen.
+    _t.map.map.events.triggerEvent('click', evt);
+    expect(_t.map.frozen).toBeTruthy();
+
+    // Close, check unfrozen.
+    $(_t.form.closeButton).trigger('click');
+    expect(_t.map.frozen).toBeFalsy();
+
+  });
+
+  it('should default to "Navigate" mode on open', function() {
+
+    // Show form, check mode.
+    $(records[0]).trigger('click');
+    expect(_t.form.getMapControl()).toEqual('pan');
+
+    // Activate "Polygon" control, check mode.
+    $('input[name="mapControls"]')[3].checked = true;
+    expect(_t.form.getMapControl()).toEqual('poly');
+
+    // Close the form, re-get records.
+    $(_t.form.closeButton).trigger('click');
+    records = _t.records.$el.find('.record-row');
+
+    // Open new form, check mode.
+    $(records[1]).trigger('click');
+    expect(_t.form.getMapControl()).toEqual('pan');
 
   });
 

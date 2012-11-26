@@ -25,7 +25,7 @@ Neatline.Views.Map = Backbone.View.extend({
 
     // Trackers.
     this.layers = [];
-    this.frozen = [];
+    this.frozen = false;
 
     // Startup.
     this.initializeOpenLayers();
@@ -145,6 +145,9 @@ Neatline.Views.Map = Backbone.View.extend({
    */
   publishPosition: function() {
 
+    // Break if frozen.
+    if (this.frozen) return;
+
     // Trigger out.
     Neatline.vent.trigger('map:move', {
       extent: this.getExtentAsWKT(),
@@ -162,7 +165,7 @@ Neatline.Views.Map = Backbone.View.extend({
    */
   focusByModel: function(model) {
 
-    // Try to get a map focus..
+    // Try to get a map focus.
     var mapFocus = model.get('map_focus');
 
     // If defined, apply.
@@ -222,43 +225,21 @@ Neatline.Views.Map = Backbone.View.extend({
    */
   ingest: function(records) {
 
-    var layers = [];
-
-
     // Clear layers.
-    // -------------
-
     _.each(this.layers, _.bind(function(layer) {
-
-      // If unfrozen, remove from map.
-      if (!_.contains(this.frozen, layer.nId)) {
         this.map.removeLayer(layer);
-      }
-
-      // Else, add to new tracker.
-      else layers.push(layer);
-
     }, this));
 
-    this.layers = layers;
-
+    this.layers = [];
 
     // Add layers.
-    // -----------
-
     records.each(_.bind(function(record) {
-
-      // Build if map active and unfrozen.
-      if (!_.contains(this.frozen, record.get('id'))) {
-          this.buildLayer(record);
-      }
-
+        this.buildLayer(record);
     }, this));
 
     // Update controls with new layers.
     this.hoverControl.setLayer(this.layers);
     this.clickControl.setLayer(this.layers);
-
 
   },
 
@@ -342,7 +323,7 @@ Neatline.Views.Map = Backbone.View.extend({
         pointRadius:      record.get('point_radius'),
         externalGraphic:  record.get('point_image'),
         strokeWidth:      record.get('stroke_width'),
-        fillOpacity:      fillOpacity,
+        fillOpacity:      selectOpacity,
         graphicOpacity:   graphicOpacity,
         strokeOpacity:    strokeOpacity
       })
@@ -423,6 +404,24 @@ Neatline.Views.Map = Backbone.View.extend({
    */
   onFeatureUnhighlight: function(evt) {
     Neatline.vent.trigger('map:unhighlight', evt.feature.layer.nModel);
+  },
+
+  /*
+   * Set frozen.
+   *
+   * @return void.
+   */
+  freeze: function() {
+    this.frozen = true;
+  },
+
+  /*
+   * Set frozen.
+   *
+   * @return void.
+   */
+  unFreeze: function() {
+    this.frozen = false;
   }
 
 });

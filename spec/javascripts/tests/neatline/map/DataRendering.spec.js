@@ -50,60 +50,6 @@ describe('Map Data Rendering', function() {
 
   });
 
-  it('should not change data for frozen record', function() {
-
-    // Get Record 2 layer.
-    var record2Layer = _.find(layers, function(layer) {
-      return layer.name == 'Record 2';
-    });
-
-    // Set frozen.
-    _t.map.frozen.push(record2Layer.nId);
-
-    // Trigger a map move, inject fixture.
-    _t.map.map.events.triggerEvent('moveend');
-    var request = _.last(server.requests);
-    _t.respond200(request, jsonChangedData);
-
-    // Get the new layer for record 2
-    var newLayers = _t.getVectorLayers();
-    record2Layer = _.find(newLayers, function(layer) {
-      return layer.name == 'Record 2';
-    });
-
-    // Check geometry.
-    expect(record2Layer.features[0].geometry.x).toEqual(2);
-    expect(record2Layer.features[0].geometry.y).toEqual(2);
-
-  });
-
-  it('should not remove data for frozen record', function() {
-
-    // Get Record 2 layer.
-    var record2Layer = _.find(layers, function(layer) {
-      return layer.name == 'Record 2';
-    });
-
-    // Set frozen.
-    _t.map.frozen.push(record2Layer.nId);
-
-    // Trigger a map move, inject fixture.
-    _t.map.map.events.triggerEvent('moveend');
-    var request = _.last(server.requests);
-    _t.respond200(request, jsonRemovedData);
-
-    // Get the new layer for record 2
-    var newLayers = _t.getVectorLayers();
-    record2Layer = _.find(newLayers, function(layer) {
-      return layer.name == 'Record 2';
-    });
-
-    // Check geometry.
-    expect(record2Layer.features[0].geometry.x).toEqual(2);
-    expect(record2Layer.features[0].geometry.y).toEqual(2);
-
-  });
-
   it('should render styles', function() {
 
     /*
@@ -216,9 +162,9 @@ describe('Map Data Rendering', function() {
 
     // Fill opacity
     expect(layers[0].styleMap.styles.temporary.defaultStyle.fillOpacity).
-      toEqual(0.01);
+      toEqual(0.04);
     expect(layers[1].styleMap.styles.temporary.defaultStyle.fillOpacity).
-      toEqual(0.02);
+      toEqual(0.05);
 
     // Stroke opacity
     expect(layers[0].styleMap.styles.temporary.defaultStyle.strokeOpacity).

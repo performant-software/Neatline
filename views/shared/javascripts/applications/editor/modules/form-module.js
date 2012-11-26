@@ -41,17 +41,6 @@ Editor.Modules.Form = (function(Backbone, Editor, Neatline) {
   });
 
   /*
-   * Push updated KML back into the form.
-   *
-   * @param {String} coverage: The new KML.
-   *
-   * @return void.
-   */
-  Editor.vent.on('map:newCoverage', function(coverage) {
-    Form.view.setCoverage(coverage);
-  });
-
-  /*
    * Show form on map feature click.
    *
    * @param {Object} model: The record model.
@@ -60,6 +49,17 @@ Editor.Modules.Form = (function(Backbone, Editor, Neatline) {
    */
   Neatline.vent.on('map:select', function(model) {
     Form.view.show(model);
+  });
+
+  /*
+   * Push updated KML back into the form.
+   *
+   * @param {String} coverage: The new KML.
+   *
+   * @return void.
+   */
+  Editor.vent.on('map:newCoverage', function(coverage) {
+    Form.view.setCoverage(coverage);
   });
 
 

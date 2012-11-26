@@ -39,6 +39,7 @@ Editor.Modules.Map = (function(Backbone, Editor, Neatline) {
   Editor.vent.on('records:openForm', function(model) {
     Neatline.vent.trigger('map:focus', model);
     Map.view.startEdit(model);
+    Map.view.freeze();
   });
 
   /*
@@ -50,6 +51,7 @@ Editor.Modules.Map = (function(Backbone, Editor, Neatline) {
    */
   Neatline.vent.on('map:select', function(model) {
     Map.view.startEdit(model);
+    Map.view.freeze();
   });
 
   /*
@@ -61,6 +63,7 @@ Editor.Modules.Map = (function(Backbone, Editor, Neatline) {
    */
   Editor.vent.on('form:close', function(model) {
     Map.view.endEdit(model);
+    Map.view.unFreeze();
   });
 
   /*

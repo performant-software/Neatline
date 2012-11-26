@@ -107,12 +107,18 @@ Editor.Views.Form = Backbone.View.extend({
    * @return void.
    */
   show: function(model) {
-    if (!this.open) {
-      this.model = model;
-      this.$el.html(this.form);
-      this.render();
-      this.open = true;
-    }
+
+    // Block if open.
+    if (this.open) return;
+
+    // Set model, render.
+    this.model = model;
+    this.$el.html(this.form);
+    this.render();
+
+    // Trackers.
+    this.open = true;
+
   },
 
   /*
@@ -121,10 +127,15 @@ Editor.Views.Form = Backbone.View.extend({
    * @return void.
    */
   close: function() {
+
+    // Hide, publish.
     this.form.detach();
     Editor.vent.trigger('form:close', this.model);
+
+    // Trackers.
     this.model = null;
     this.open = false;
+
   },
 
   /*
@@ -134,8 +145,11 @@ Editor.Views.Form = Backbone.View.extend({
    */
   render: function() {
 
-    // Render "Text".
+    // Activate "Text" tab.
     if (!this.started) this.setStarted();
+
+    // Reset map editing.
+    this.resetMapControl();
 
     // Text.
     this.head.            text(this.model.get('title'));
@@ -244,6 +258,15 @@ Editor.Views.Form = Backbone.View.extend({
    */
   getMapControl: function() {
     return $('input[name="mapControls"]:checked').val();
+  },
+
+  /*
+   * Set the map control to "Navigate".
+   *
+   * @return string: The input value.
+   */
+  resetMapControl: function() {
+    return $('input[name="mapControls"]')[0].checked = true;
   },
 
   /*

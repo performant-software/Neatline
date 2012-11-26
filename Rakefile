@@ -22,6 +22,7 @@ namespace :test do
 
   desc 'Run the Jasmine server'
   task :jasmine do
+    Rake::Task['test:server'].invoke
     sh %{rake jasmine JASMINE_PORT=1337}
   end
 
@@ -71,26 +72,4 @@ desc 'Rebuild the application'
 task :rebuild do
   Rake::Task['clean'].invoke
   Rake::Task['build'].invoke
-end
-
-namespace :dev do
-
-  desc 'Install exhibit'
-  task :install do
-    uri = URI.parse('http://localhost:8888/tei/neatline/dev/install')
-    Net::HTTP.get_response(uri)
-  end
-
-  desc 'Uninstall exhibit'
-  task :uninstall do
-    uri = URI.parse('http://localhost:8888/tei/neatline/dev/uninstall')
-    Net::HTTP.get_response(uri)
-  end
-
-  desc 'Reinstall exhibit'
-  task :reinstall do
-    Rake::Task['dev:uninstall'].invoke
-    Rake::Task['dev:install'].invoke
-  end
-
 end

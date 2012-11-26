@@ -22,7 +22,6 @@ Neatline.Views.Map.prototype.startEdit = function(model) {
 
   // Get the layer, freeze model.
   this.editLayer = this.getLayerByModel(model);
-  this.frozen.push(model.get('id'));
 
   this.controls = {
 
@@ -75,6 +74,7 @@ Neatline.Views.Map.prototype.endEdit = function(model) {
 
   // Remove controls.
   _.each(this.controls, _.bind(function(val,key) {
+    val.deactivate();
     this.map.removeControl(val);
   }, this));
 
