@@ -454,10 +454,12 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
         $record->stroke_width           = 5;
         $record->point_radius           = 6;
         $record->point_image            = 'file.png';
+        $record->min_zoom               = 7;
+        $record->max_zoom               = 8;
 
         // Map.
         $record->map_focus              = 'lat/lon';
-        $record->map_zoom               = 10;
+        $record->map_zoom               = 9;
 
         // Statuses.
         $record->map_active             = 1;
@@ -490,10 +492,12 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
                 'stroke_width'          => 5,
                 'point_radius'          => 6,
                 'point_image'           => 'file.png',
+                'min_zoom'              => 7,
+                'max_zoom'              => 8,
 
                 // Map.
                 'map_focus'             => 'lat/lon',
-                'map_zoom'              => 10,
+                'map_zoom'              => 9,
                 'coverage'              => 'POINT(1 1)',
                 'wmsAddress'            => null,
                 'layers'                => null,

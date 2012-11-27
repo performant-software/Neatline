@@ -360,35 +360,37 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
         $data = array(
 
             // Relations:
-            'id'                  => $this->id,
-            'item_id'             => $this->item_id,
+            'id'                => $this->id,
+            'item_id'           => $this->item_id,
 
             // Text:
-            'title'               => $this->title,
-            'description'         => $this->description,
-            'slug'                => $this->slug,
+            'title'             => $this->title,
+            'description'       => $this->description,
+            'slug'              => $this->slug,
 
             // Styles:
-            'vector_color'        => $this->getStyle('vector_color'),
-            'stroke_color'        => $this->getStyle('stroke_color'),
-            'select_color'        => $this->getStyle('select_color'),
-            'vector_opacity'      => $this->getStyle('vector_opacity'),
-            'select_opacity'      => $this->getStyle('select_opacity'),
-            'stroke_opacity'      => $this->getStyle('stroke_opacity'),
-            'graphic_opacity'     => $this->getStyle('graphic_opacity'),
-            'stroke_width'        => $this->getStyle('stroke_width'),
-            'point_radius'        => $this->getStyle('point_radius'),
-            'point_image'         => $this->getStyle('point_image'),
+            'vector_color'      => $this->getStyle('vector_color'),
+            'stroke_color'      => $this->getStyle('stroke_color'),
+            'select_color'      => $this->getStyle('select_color'),
+            'vector_opacity'    => $this->getStyle('vector_opacity'),
+            'select_opacity'    => $this->getStyle('select_opacity'),
+            'stroke_opacity'    => $this->getStyle('stroke_opacity'),
+            'graphic_opacity'   => $this->getStyle('graphic_opacity'),
+            'stroke_width'      => $this->getStyle('stroke_width'),
+            'point_radius'      => $this->getStyle('point_radius'),
+            'point_image'       => $this->getStyle('point_image'),
+            'min_zoom'          => $this->min_zoom,
+            'max_zoom'          => $this->max_zoom,
 
             // Map:
-            'map_focus'           => $this->map_focus,
-            'map_zoom'            => $this->map_zoom,
-            'coverage'            => $coverage,
-            'wmsAddress'          => null,
-            'layers'              => null,
+            'map_focus'         => $this->map_focus,
+            'map_zoom'          => $this->map_zoom,
+            'coverage'          => $coverage,
+            'wmsAddress'        => null,
+            'layers'            => null,
 
             // Statuses:
-            'map_active'          => $this->map_active
+            'map_active'        => $this->map_active
 
         );
 

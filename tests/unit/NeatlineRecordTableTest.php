@@ -479,12 +479,16 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
         $record2->point_radius      = 12;
         $record1->point_image       = 'file1.png';
         $record2->point_image       = 'file2.png';
+        $record1->min_zoom          = 13;
+        $record2->min_zoom          = 14;
+        $record1->max_zoom          = 15;
+        $record2->max_zoom          = 16;
         $record1->map_active        = 1;
         $record2->map_active        = 1;
         $record1->map_focus         = 'center1';
         $record2->map_focus         = 'center2';
-        $record1->map_zoom          = 13;
-        $record2->map_zoom          = 14;
+        $record1->map_zoom          = 17;
+        $record2->map_zoom          = 18;
 
         // Save.
         $record1->save('POINT(1 1)');
@@ -512,8 +516,10 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
                 'stroke_width'      => 9,
                 'point_radius'      => 11,
                 'point_image'       => 'file1.png',
+                'min_zoom'          => 13,
+                'max_zoom'          => 15,
                 'map_focus'         => 'center1',
-                'map_zoom'          => 13,
+                'map_zoom'          => 17,
                 'coverage'          => 'POINT(1 1)',
                 'wmsAddress'        => null,
                 'layers'            => null,
@@ -535,8 +541,10 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
                 'stroke_width'      => 10,
                 'point_radius'      => 12,
                 'point_image'       => 'file2.png',
+                'min_zoom'          => 14,
+                'max_zoom'          => 16,
                 'map_focus'         => 'center2',
-                'map_zoom'          => 14,
+                'map_zoom'          => 18,
                 'coverage'          => 'POINT(2 2)',
                 'wmsAddress'        => null,
                 'layers'            => null,

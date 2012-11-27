@@ -40,25 +40,27 @@ class Neatline_RecordsControllerTest extends Neatline_Test_AppTestCase
         $this->assertEquals(count($response), 2);
 
         // Check for keys.
-        $this->assertObjectHasAttribute('id',                 $response[0]);
-        $this->assertObjectHasAttribute('item_id',            $response[0]);
-        $this->assertObjectHasAttribute('title',              $response[0]);
-        $this->assertObjectHasAttribute('description',        $response[0]);
-        $this->assertObjectHasAttribute('slug',               $response[0]);
-        $this->assertObjectHasAttribute('vector_color',       $response[0]);
-        $this->assertObjectHasAttribute('stroke_color',       $response[0]);
-        $this->assertObjectHasAttribute('select_color',       $response[0]);
-        $this->assertObjectHasAttribute('vector_opacity',     $response[0]);
-        $this->assertObjectHasAttribute('select_opacity',     $response[0]);
-        $this->assertObjectHasAttribute('stroke_opacity',     $response[0]);
-        $this->assertObjectHasAttribute('graphic_opacity',    $response[0]);
-        $this->assertObjectHasAttribute('stroke_width',       $response[0]);
-        $this->assertObjectHasAttribute('point_radius',       $response[0]);
-        $this->assertObjectHasAttribute('point_image',        $response[0]);
-        $this->assertObjectHasAttribute('map_focus',          $response[0]);
-        $this->assertObjectHasAttribute('coverage',           $response[0]);
-        $this->assertObjectHasAttribute('wmsAddress',         $response[0]);
-        $this->assertObjectHasAttribute('layers',             $response[0]);
+        $this->assertObjectHasAttribute('id',               $response[0]);
+        $this->assertObjectHasAttribute('item_id',          $response[0]);
+        $this->assertObjectHasAttribute('title',            $response[0]);
+        $this->assertObjectHasAttribute('description',      $response[0]);
+        $this->assertObjectHasAttribute('slug',             $response[0]);
+        $this->assertObjectHasAttribute('vector_color',     $response[0]);
+        $this->assertObjectHasAttribute('stroke_color',     $response[0]);
+        $this->assertObjectHasAttribute('select_color',     $response[0]);
+        $this->assertObjectHasAttribute('vector_opacity',   $response[0]);
+        $this->assertObjectHasAttribute('select_opacity',   $response[0]);
+        $this->assertObjectHasAttribute('stroke_opacity',   $response[0]);
+        $this->assertObjectHasAttribute('graphic_opacity',  $response[0]);
+        $this->assertObjectHasAttribute('stroke_width',     $response[0]);
+        $this->assertObjectHasAttribute('point_radius',     $response[0]);
+        $this->assertObjectHasAttribute('point_image',      $response[0]);
+        $this->assertObjectHasAttribute('min_zoom',         $response[0]);
+        $this->assertObjectHasAttribute('max_zoom',         $response[0]);
+        $this->assertObjectHasAttribute('map_focus',        $response[0]);
+        $this->assertObjectHasAttribute('coverage',         $response[0]);
+        $this->assertObjectHasAttribute('wmsAddress',       $response[0]);
+        $this->assertObjectHasAttribute('layers',           $response[0]);
 
     }
 
@@ -88,8 +90,10 @@ class Neatline_RecordsControllerTest extends Neatline_Test_AppTestCase
         $record->stroke_width       = 5;
         $record->point_radius       = 6;
         $record->point_image        = 'file.png';
+        $record->min_zoom           = 7;
+        $record->max_zoom           = 8;
         $record->map_focus          = 'lat/lon';
-        $record->map_zoom           = 7;
+        $record->map_zoom           = 9;
         $record->map_active         = 1;
         $record->save('POINT(1 1)');
 
@@ -110,8 +114,10 @@ class Neatline_RecordsControllerTest extends Neatline_Test_AppTestCase
             'stroke_width'          => '50',
             'point_radius'          => '60',
             'point_image'           => 'file2.png',
+            'min_zoom'              => '70',
+            'max_zoom'              => '80',
             'map_focus'             => 'lat2/lon2',
-            'map_zoom'              => '70',
+            'map_zoom'              => '90',
             'coverage'              => 'POINT(1 1)',
             'map_active'            => '0'
         );
@@ -140,8 +146,10 @@ class Neatline_RecordsControllerTest extends Neatline_Test_AppTestCase
         $this->assertEquals($record->stroke_width, 50);
         $this->assertEquals($record->point_radius, 60);
         $this->assertEquals($record->point_image, 'file2.png');
+        $this->assertEquals($record->min_zoom, '70');
+        $this->assertEquals($record->max_zoom, '80');
         $this->assertEquals($record->map_focus, 'lat2/lon2');
-        $this->assertEquals($record->map_zoom, 70);
+        $this->assertEquals($record->map_zoom, 90);
         $this->assertEquals($record->map_active, 0);
 
         // Check the coverage value.

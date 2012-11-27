@@ -57,6 +57,8 @@ Editor.Views.Form = Backbone.View.extend({
     this.strokeWidth =    this.form.find('input[name="stroke-width"]');
     this.pointRadius =    this.form.find('input[name="point-radius"]');
     this.pointGraphic =   this.form.find('input[name="point-image"]');
+    this.minZoom =        this.form.find('input[name="min-zoom"]');
+    this.maxZoom =        this.form.find('input[name="max-zoom"]');
     this.mapFocus =       this.form.find('button[name="map-focus"]');
 
     // Buttons.
@@ -170,6 +172,8 @@ Editor.Views.Form = Backbone.View.extend({
     this.strokeWidth.     val(this.model.get('stroke_width'));
     this.pointRadius.     val(this.model.get('point_radius'));
     this.pointGraphic.    val(this.model.get('point_image'));
+    this.minZoom.         val(this.model.get('min_zoom'));
+    this.maxZoom.         val(this.model.get('max_zoom'));
 
   },
 
@@ -198,6 +202,8 @@ Editor.Views.Form = Backbone.View.extend({
       stroke_width:       this.strokeWidth.val(),
       point_radius:       this.pointRadius.val(),
       point_image:        this.pointGraphic.val(),
+      min_zoom:           this.minZoom.val(),
+      max_zoom:           this.maxZoom.val(),
       coverage:           this.coverage.val()
 
     }, {

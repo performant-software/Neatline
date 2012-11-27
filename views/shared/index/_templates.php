@@ -213,30 +213,24 @@
           </div>
         </div>
 
-        <div class="control-group">
-          <label><?php echo __('Point Graphic'); ?></label>
-          <div class="controls">
-            <div class="inline-inputs">
-              <input name="point-image" type="text" />
-            </div>
+        <label><?php echo __('Point Graphic'); ?></label>
+        <div class="controls">
+          <div class="inline-inputs">
+            <input name="point-image" type="text" />
           </div>
         </div>
 
-        <div class="control-group">
-          <label><?php echo __('Min Zoom'); ?></label>
-          <div class="controls">
-            <div class="inline-inputs">
-              <input name="min-zoom" type="text" />
-            </div>
+        <label><?php echo __('Min Zoom'); ?></label>
+        <div class="controls">
+          <div class="inline-inputs">
+            <input name="min-zoom" type="text" />
           </div>
         </div>
 
-        <div class="control-group">
-          <label><?php echo __('Max Zoom'); ?></label>
-          <div class="controls">
-            <div class="inline-inputs">
-              <input name="max-zoom" type="text" />
-            </div>
+        <label><?php echo __('Max Zoom'); ?></label>
+        <div class="controls">
+          <div class="inline-inputs">
+            <input name="max-zoom" type="text" />
           </div>
         </div>
 

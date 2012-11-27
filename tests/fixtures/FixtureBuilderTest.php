@@ -98,6 +98,14 @@ class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
         $record2->point_radius = 17;
         $record3->point_radius = 18;
 
+        $record1->min_zoom = 19;
+        $record2->min_zoom = 20;
+        $record3->min_zoom = 21;
+
+        $record1->max_zoom = 22;
+        $record2->max_zoom = 23;
+        $record3->max_zoom = 24;
+
         $record1->point_image = 'https://www.google.com/favicon.ico';
         $record2->point_image = 'http://en.wikipedia.org/favicon.ico';
         $record3->point_image = 'http://www.amazon.com/favicon.ico';
