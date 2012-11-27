@@ -37,7 +37,7 @@ Editor.Views.RecordRow = Backbone.View.extend({
   },
 
   /*
-   * Open the edit form for the record.
+   * Open the edit form for the record, focus map.
    *
    * @return void.
    */

@@ -30,17 +30,6 @@ Editor.Modules.Map = (function(Backbone, Editor, Neatline) {
   // -------
 
   /*
-   * Show form on record row click.
-   *
-   * @param {Object} model: The record model.
-   *
-   * @return void.
-   */
-  Editor.vent.on('records:openForm', function(model) {
-    Neatline.vent.trigger('map:focus', model);
-  });
-
-  /*
    * Show form on map feature click.
    *
    * @param {Object} model: The record model.
