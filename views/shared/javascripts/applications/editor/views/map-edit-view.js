@@ -78,6 +78,11 @@ Neatline.Views.Map.prototype.endEdit = function(model) {
     this.map.removeControl(val);
   }, this));
 
+
+  // Activate default controls.
+  this.clickControl.activate();
+  this.hoverControl.activate();
+
 };
 
 
@@ -91,6 +96,9 @@ Neatline.Views.Map.prototype.endEdit = function(model) {
  */
 Neatline.Views.Map.prototype.update = function(settings) {
 
+
+  // Reactivate controls.
+  this.activateControls();
 
   // Deactivate all controls, reset modify mode.
   _.each(this.controls, function(val,key) { val.deactivate(); });
@@ -120,6 +128,7 @@ Neatline.Views.Map.prototype.update = function(settings) {
       break;
 
     case 'modify':
+      this.deactivateControls();
       this.controls.edit.activate();
       break;
 

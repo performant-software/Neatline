@@ -58,24 +58,23 @@ Neatline.Views.Map = Backbone.View.extend({
     this.map = new OpenLayers.Map(this.el, options);
 
     // Get OSM base layer.
-    // TODO: Manage multiple base layers.
     this.osm = new OpenLayers.Layer.OSM();
     this.map.addLayer(this.osm);
     this.map.setBaseLayer(this.osm);
 
     // Startup routines.
-    this.addCursorControls();
+    this.addControls();
     this.setDefaultViewport();
     this.registerMapEvents();
 
   },
 
   /*
-   * Listen for hover and click on geometries.
+   * Construct hover and click managers.
    *
    * @return void.
    */
-  addCursorControls: function() {
+  addControls: function() {
 
     // Build the hover control, bind callbacks.
     this.hoverControl = new OpenLayers.Control.SelectFeature(
@@ -100,9 +99,28 @@ Neatline.Views.Map = Backbone.View.extend({
 
     // Add to map, activate.
     this.map.addControls([this.hoverControl, this.clickControl]);
+    this.activateControls();
+
+  },
+
+  /*
+   * Activate default cursor controls.
+   *
+   * @return void.
+   */
+  activateControls: function() {
     this.hoverControl.activate();
     this.clickControl.activate();
+  },
 
+  /*
+   * Activate default cursor controls.
+   *
+   * @return void.
+   */
+  deactivateControls: function() {
+    this.hoverControl.deactivate();
+    this.clickControl.deactivate();
   },
 
   /*
@@ -347,6 +365,7 @@ Neatline.Views.Map = Backbone.View.extend({
         strokeOpacity:    strokeOpacity
       })
     });
+
   },
 
   /*
