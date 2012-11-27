@@ -85,7 +85,7 @@ var sql = 'INSERT INTO omeka_neatline_exhibits ' +
 client.query(sql, function(err, res) {
 
   // layer(res.insertId, 200, 3, '#00ff24');
-  layer(res.insertId, 10, 'NULL', '#00aeff');
+  layer(res.insertId, 200, 'NULL', '#00aeff');
   // layer(res.insertId, 5000, 5, '#0006ff');
   // layer(res.insertId, 20000, 6, '#7800ff');
   // layer(res.insertId, 50000, 7, '#f000ff');

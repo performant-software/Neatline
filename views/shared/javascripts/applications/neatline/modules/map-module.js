@@ -21,7 +21,34 @@ Neatline.Modules.Map = (function(Backbone, Neatline) {
    * @return void.
    */
   Map.init = function() {
+    this.collection = new Neatline.Collections.Records();
     this.view = new Neatline.Views.Map({ el: '#neatline-map' });
+  };
+
+  /*
+   * Query for records.
+   *
+   * @param {Object} params: Query parameters.
+   *
+   * @return void.
+   */
+  Map.fetch = function(params) {
+
+    params = params || {};
+    params.id = __exhibit.id;
+
+    // Get records.
+    this.collection.fetch({
+      data: $.param(params),
+      success: function(records) {
+
+        // Ingest, publish.
+        Map.view.ingest(records);
+        Neatline.vent.trigger('exhibit:newRecords', records);
+
+      }
+    });
+
   };
 
 
@@ -30,14 +57,14 @@ Neatline.Modules.Map = (function(Backbone, Neatline) {
   // -------
 
   /*
-   * Consume records.
+   * Get new map data on pan/zoom.
    *
-   * @param {Object} records: The records collection.
+   * @param {Object} params: Hash with `extent` and `zoom`.
    *
    * @return void.
    */
-  Neatline.vent.on('exhibit:newRecords', function(records) {
-    Map.view.ingest(records);
+  Neatline.vent.on('map:move', function(params) {
+    Map.fetch(params);
   });
 
   /*
