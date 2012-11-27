@@ -66,13 +66,11 @@ Neatline.Views.Map.prototype.startEdit = function(model) {
 /*
  * Strip editing controls.
  *
- * @param {Object} model: The record model.
- *
  * @return void.
  */
-Neatline.Views.Map.prototype.endEdit = function(model) {
+Neatline.Views.Map.prototype.endEdit = function() {
 
-  // Remove controls.
+  // Deactivate and remove controls.
   _.each(this.controls, _.bind(function(val,key) {
     val.deactivate();
     this.map.removeControl(val);

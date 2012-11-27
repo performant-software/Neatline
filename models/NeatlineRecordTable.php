@@ -165,7 +165,28 @@ class NeatlineRecordTable extends Omeka_Db_Table
 
 
     /**
-     * Construct records JSON for exhibit and editor.
+     * Construct data array for individual record.
+     *
+     * @param int $id The record id.
+     *
+     * @return array The record data.
+     */
+    public function queryRecord($id)
+    {
+
+        // Build the select.
+        $select = $this->getSelect()
+            ->columns(array('wkt' => new Zend_Db_Expr('AsText(coverage)')))
+            ->where('id=?', $id);
+
+        // Query.
+        $record = $this->fetchObject($select);
+        return $record->buildJsonData($record->wkt);
+
+    }
+
+    /**
+     * Construct records array for exhibit and editor.
      *
      * @param Omeka_Record_AbstractRecord $exhibit The exhibit record.
      * @param string $extent The current map viewport extent.
@@ -196,6 +217,7 @@ class NeatlineRecordTable extends Omeka_Db_Table
         if (!is_null($zoom)) {
             $select = $this->filterByZoom($select, $zoom);
         }
+
 
         // Get records.
         if ($records = $this->fetchObjects($select)) {

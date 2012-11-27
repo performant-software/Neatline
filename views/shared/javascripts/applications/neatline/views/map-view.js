@@ -124,6 +124,16 @@ Neatline.Views.Map = Backbone.View.extend({
   },
 
   /*
+   * Update the layer collection for the cursor controls.
+   *
+   * @return void.
+   */
+  updateControls: function() {
+    this.hoverControl.setLayer(this.layers);
+    this.clickControl.setLayer(this.layers);
+  },
+
+  /*
    * Set default focus and zoom.
    *
    * @return void.
@@ -179,6 +189,11 @@ Neatline.Views.Map = Backbone.View.extend({
    * @return void.
    */
   focusByModel: function(model) {
+
+    // Build layer if necessary.
+    if (!this.getLayerByModel(model)) {
+      this.buildLayer(model);
+    }
 
     // Try to get a map focus.
     var mapFocus = model.get('map_focus');
@@ -273,9 +288,8 @@ Neatline.Views.Map = Backbone.View.extend({
 
     }, this));
 
-    // Update controls with new layers.
-    this.hoverControl.setLayer(this.layers);
-    this.clickControl.setLayer(this.layers);
+    // Register layers.
+    this.updateControls();
 
 
   },

@@ -122,7 +122,7 @@ Editor.Views.Form = Backbone.View.extend({
     this.open = true;
 
     // Publish.
-    Editor.vent.trigger('form:open', this.model);
+    Editor.vent.trigger('form:open', this.model.get('id'));
 
   },
 
@@ -135,7 +135,7 @@ Editor.Views.Form = Backbone.View.extend({
 
     // Hide, publish.
     this.form.detach();
-    Editor.vent.trigger('form:close', this.model);
+    Editor.vent.trigger('form:close', this.model.get('id'));
 
     // Trackers.
     this.model = null;

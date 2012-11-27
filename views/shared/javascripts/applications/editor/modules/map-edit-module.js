@@ -32,25 +32,33 @@ Editor.Modules.Map = (function(Backbone, Editor, Neatline) {
   /*
    * Show form on map feature click.
    *
-   * @param {Object} model: The record model.
+   * @param {Number} model: The record id.
    *
    * @return void.
    */
-  Editor.vent.on('form:open', function(model) {
-    Map.view.freeze(model.get('id'));
-    Map.view.startEdit(model);
+  Editor.vent.on('form:open', function(id) {
+
+    // Freeze the id.
+    Map.view.freeze(id);
+
+    // Get model, focus and start edit.
+    Neatline.Modules.Map.collection.getModel(id, function(model) {
+      Map.view.focusByModel(model);
+      Map.view.startEdit(model);
+    });
+
   });
 
   /*
    * Close form.
    *
-   * @param {Object} model: The record model.
+   * @param {Number} model: The record id.
    *
    * @return void.
    */
-  Editor.vent.on('form:close', function(model) {
-    Map.view.endEdit(model);
-    Map.view.unFreeze(model.get('id'));
+  Editor.vent.on('form:close', function(id) {
+    Map.view.unFreeze(id);
+    Map.view.endEdit();
   });
 
   /*

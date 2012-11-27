@@ -91,7 +91,8 @@ class Neatline_RecordsController extends Omeka_Controller_AbstractActionControll
      */
     public function getAction()
     {
-
+        $id = $this->_request->id;
+        echo Zend_Json::encode($this->__records->queryRecord($id));
     }
 
     /**
