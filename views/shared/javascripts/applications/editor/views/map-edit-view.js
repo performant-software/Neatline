@@ -78,11 +78,6 @@ Neatline.Views.Map.prototype.endEdit = function(model) {
     this.map.removeControl(val);
   }, this));
 
-  // Remove model id from frozen tracker.
-  this.frozen = _.reject(this.frozen, function(id) {
-    return id == model.get('id');
-  });
-
 };
 
 

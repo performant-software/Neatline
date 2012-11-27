@@ -193,18 +193,4 @@ describe('Map Outgoing Events', function() {
 
   });
 
-  it('should not publish map move when frozen', function() {
-
-    // Spy on map:highlight.
-    spyOn(Neatline.vent, 'trigger');
-
-    // Trigger pan.
-    _t.map.freeze();
-    _t.map.map.events.triggerEvent('moveend');
-
-    // Check for no publication.
-    expect(Neatline.vent.trigger).not.toHaveBeenCalled();
-
-  });
-
 });

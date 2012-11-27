@@ -25,7 +25,7 @@ Neatline.Views.Map = Backbone.View.extend({
 
     // Trackers.
     this.layers = [];
-    this.frozen = false;
+    this.frozen = [];
 
     // Startup.
     this.initializeOpenLayers();
@@ -145,9 +145,6 @@ Neatline.Views.Map = Backbone.View.extend({
    */
   publishPosition: function() {
 
-    // Break if frozen.
-    if (this.frozen) return;
-
     // Trigger out.
     Neatline.vent.trigger('map:move', {
       extent: this.getExtentAsWKT(),
@@ -225,21 +222,43 @@ Neatline.Views.Map = Backbone.View.extend({
    */
   ingest: function(records) {
 
+    var layers = [];
+
+
     // Clear layers.
+    // -------------
+
     _.each(this.layers, _.bind(function(layer) {
+
+      // If unfrozen, remove from map.
+      if (!_.contains(this.frozen, layer.nId)) {
         this.map.removeLayer(layer);
+      }
+
+      // Else, add to new tracker.
+      else layers.push(layer);
+
     }, this));
 
-    this.layers = [];
+    this.layers = layers;
+
 
     // Add layers.
+    // -----------
+
     records.each(_.bind(function(record) {
-        this.buildLayer(record);
+
+      // Build if map active and unfrozen.
+      if (!_.contains(this.frozen, record.get('id'))) {
+          this.buildLayer(record);
+      }
+
     }, this));
 
     // Update controls with new layers.
     this.hoverControl.setLayer(this.layers);
     this.clickControl.setLayer(this.layers);
+
 
   },
 
@@ -407,21 +426,27 @@ Neatline.Views.Map = Backbone.View.extend({
   },
 
   /*
-   * Set frozen.
+   * Freeze an id.
+   *
+   * @param {Number} id: The id to freeze.
    *
    * @return void.
    */
-  freeze: function() {
-    this.frozen = true;
+  freeze: function(id) {
+    this.frozen.push(id);
   },
 
   /*
-   * Set frozen.
+   * Unfreeze an id.
+   *
+   * @param {Number} id: The id to unfreeze.
    *
    * @return void.
    */
-  unFreeze: function() {
-    this.frozen = false;
+  unFreeze: function(id) {
+    this.frozen = _.reject(this.frozen, function(fid) {
+      return fid == id;
+    });
   }
 
 });

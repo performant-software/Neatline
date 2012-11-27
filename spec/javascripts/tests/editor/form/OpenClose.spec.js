@@ -12,7 +12,7 @@
 
 describe('Form Open/Close', function() {
 
-  var server, records, layers, feature1, feature2;
+  var server, records, layers, models, feature1, feature2;
   var json = readFixtures('records.json');
 
   // Get fixtures.
@@ -37,6 +37,9 @@ describe('Form Open/Close', function() {
     layers = _t.getVectorLayers();
     feature1 = layers[0].features[0];
     feature2 = layers[1].features[0];
+
+    // Get models.
+    models = Editor.Modules.Records.collection.models;
 
   });
 
@@ -118,22 +121,22 @@ describe('Form Open/Close', function() {
 
   });
 
-  it('should freeze map when form is opened via records', function() {
+  it('should freeze edit layer when form opened via editor', function() {
 
-    // By default, map unfrozen.
-    expect(_t.map.frozen).toBeFalsy();
+    // By default, frozen empty.
+    expect(_t.map.frozen).toEqual([]);
 
     // Show form, check frozen.
     $(records[0]).trigger('click');
-    expect(_t.map.frozen).toBeTruthy();
+    expect(_t.map.frozen).toEqual([models[0].get('id')]);
 
-    // Close, check unfrozen.
+    // Close, check frozen.
     $(_t.form.closeButton).trigger('click');
-    expect(_t.map.frozen).toBeFalsy();
+    expect(_t.map.frozen).toEqual([]);
 
   });
 
-  it('should freeze map when form is opened via map', function() {
+  it('should freeze edit layer when form opened via map', function() {
 
     // Clobber getFeaturesFromEvent().
     layers[0].getFeatureFromEvent = function(evt) { return feature1; };
@@ -144,16 +147,16 @@ describe('Form Open/Close', function() {
       type: 'click'
     };
 
-    // By default, map unfrozen.
-    expect(_t.map.frozen).toBeFalsy();
+    // By default, frozen empty.
+    expect(_t.map.frozen).toEqual([]);
 
     // Show form, check frozen.
     _t.map.map.events.triggerEvent('click', evt);
-    expect(_t.map.frozen).toBeTruthy();
+    expect(_t.map.frozen).toEqual([models[0].get('id')]);
 
-    // Close, check unfrozen.
+    // Close, check frozen.
     $(_t.form.closeButton).trigger('click');
-    expect(_t.map.frozen).toBeFalsy();
+    expect(_t.map.frozen).toEqual([]);
 
   });
 
