@@ -121,6 +121,9 @@ Editor.Views.Form = Backbone.View.extend({
     // Trackers.
     this.open = true;
 
+    // Publish.
+    Editor.vent.trigger('form:open', this.model);
+
   },
 
   /*

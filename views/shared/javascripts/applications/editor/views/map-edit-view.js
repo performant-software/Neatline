@@ -188,9 +188,9 @@ Neatline.Views.Map.prototype.publish = function() {
 
 
 /*
- * Publish updated KML.
+ * Delete a feature.
  *
- * @param {Object|} feature: The selected feature.
+ * @param {Object} feature: The selected feature.
  *
  * @return void.
  */
