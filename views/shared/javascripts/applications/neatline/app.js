@@ -12,9 +12,11 @@
 
 Neatline = new Backbone.Marionette.Application();
 
+
 // --------------------
 // Instance namespaces.
 // --------------------
+
 Neatline.Modules = {};
 Neatline.Models = {};
 Neatline.Collections = {};

@@ -12,9 +12,26 @@
 
 Editor = new Backbone.Marionette.Application();
 
+
 // --------------------
 // Instance namespaces.
 // --------------------
+
 Editor.Modules = {};
 Editor.Collections = {};
 Editor.Views = {};
+
+
+// -------------------
+// Application events.
+// -------------------
+
+// Start Neatline after editor.
+Editor.on('initialize:after', function() {
+  Neatline.start();
+});
+
+// Start geometry module after Neatline.
+Neatline.on('initialize:after', function() {
+  Editor.Modules.Geometry.init();
+});
