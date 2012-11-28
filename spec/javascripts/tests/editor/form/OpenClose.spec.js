@@ -13,7 +13,11 @@
 describe('Form Open/Close', function() {
 
   var server, records, layers, models, feature1, feature2;
+
+  // Load AJAX fixtures.
   var json = readFixtures('records.json');
+  var jsonRemovedData = readFixtures('records-removed-record.json');
+  var jsonRecord = readFixtures('record.json');
 
   // Get fixtures.
   beforeEach(function() {
@@ -44,16 +48,47 @@ describe('Form Open/Close', function() {
   });
 
   it('should open the form when a record row is clicked', function() {
+
+    // Click on record listing.
     $(records[0]).trigger('click');
+
+    // Check for form, no records.
     expect(_t.records.$el).toContain(_t.form.form);
     expect(_t.records.$el).not.toContain(_t.records.ul);
+
   });
 
   it('should close the form when "Close" is clicked', function() {
+
+    // Open form, click close.
     $(records[0]).trigger('click');
     $(_t.form.closeButton).trigger('click');
+
+    // Check for records, no form.
     expect(_t.records.$el).not.toContain(_t.form.form);
     expect(_t.records.$el).toContain(_t.records.ul);
+
+  });
+
+  it('should create map edit layer when one does not exist', function() {
+
+    // Load map data with missing record2.
+    _t.map.map.events.triggerEvent('moveend');
+    var request = _.last(server.requests);
+    _t.respond200(request, jsonRemovedData);
+
+    // Check starting layers.
+    expect(_t.map.layers.length).toEqual(1);
+
+    // Open record without map layer.
+    $(records[1]).trigger('click');
+
+    // Check for new layer.
+    layers = _t.getVectorLayers();
+    expect(_t.map.layers.length).toEqual(2);
+    expect(layers[1].features[0].geometry.x).toEqual(3);
+    expect(layers[1].features[0].geometry.y).toEqual(4);
+
   });
 
   it('should show the "Text" tab on first form open', function() {

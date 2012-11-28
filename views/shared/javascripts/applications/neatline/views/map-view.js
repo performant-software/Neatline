@@ -190,16 +190,15 @@ Neatline.Views.Map = Backbone.View.extend({
    */
   focusByModel: function(model) {
 
-    // Build layer if necessary.
-    if (!this.getLayerByModel(model)) {
-
-      // Break if map-inactive.
-      if (!this.buildLayer(model)) {
-        Neatline.vent.trigger('map:focused');
-        return;
-      }
-
+    // Break if map-inactive.
+    if (model.get('map_active') === 0) {
+      Neatline.vent.trigger('map:focused');
+      return;
     }
+
+    // Get / build the layer for the model.
+    var layer = this.getLayerByModel(model);
+    if (!layer) layer = this.buildLayer(model);
 
     // Try to get a map focus.
     var mapFocus = model.get('map_focus');
@@ -210,7 +209,7 @@ Neatline.Views.Map = Backbone.View.extend({
     }
 
     else {
-      var layer = this.getLayerByModel(model);
+      // Otherwise, fit to viewport.
       this.map.zoomToExtent(layer.getDataExtent());
     }
 
@@ -291,10 +290,12 @@ Neatline.Views.Map = Backbone.View.extend({
 
     records.each(_.bind(function(record) {
 
+      // Test for frozen and active.
+      var frozen = _.contains(this.frozen, record.get('id'));
+      var active = record.get('map_active') == 1;
+
       // Build if map active and unfrozen.
-      if (!_.contains(this.frozen, record.get('id'))) {
-          this.buildLayer(record);
-      }
+      if (!frozen && active) this.buildLayer(record);
 
     }, this));
 
@@ -312,8 +313,6 @@ Neatline.Views.Map = Backbone.View.extend({
    * @return {Boolean}: True if the layer was added.
    */
   buildLayer: function(record) {
-
-    if (record.get('map_active') != 1) return false;
 
     // Build geometry and style.
     var formatWKT = new OpenLayers.Format.WKT();
@@ -338,7 +337,7 @@ Neatline.Views.Map = Backbone.View.extend({
     // Track layer.
     this.layers.push(layer);
 
-    return true;
+    return layer;
 
   },
 

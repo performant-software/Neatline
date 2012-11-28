@@ -20,8 +20,9 @@
  */
 Neatline.Views.Map.prototype.startEdit = function(model) {
 
-  // Get the layer, freeze model.
-  this.editLayer = this.getLayerByModel(model);
+  // Get the layer.
+  var layer = this.getLayerByModel(model);
+  this.editLayer = layer ? layer : this.buildLayer(model);
 
   this.controls = {
 
