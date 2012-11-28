@@ -28,9 +28,16 @@ Neatline.Collections.Records = Backbone.Collection.extend({
    */
   getModel: function(id, cb) {
 
-    // Query for model.
+    cb = cb || function() {};
+
+    // Try to get existing model.
+    // --------------------------
+
     var model = this.get(id);
     if (model) cb(model);
+
+    // If absent, create and fetch it.
+    // -------------------------------
 
     else {
 

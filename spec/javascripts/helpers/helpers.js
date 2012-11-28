@@ -29,6 +29,7 @@ _t.loadNeatline = function() {
 
   // Shortcut components
   this.map = Neatline.Modules.Map.view;
+  this.records = Neatline.Modules.Map.collection;
 
 };
 
