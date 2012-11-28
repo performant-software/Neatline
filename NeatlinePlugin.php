@@ -73,9 +73,9 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
             `map_focus`             varchar(100) NULL,
             `map_zoom`              int(10) unsigned NULL,
 
-             PRIMARY KEY (`id`)
+             PRIMARY KEY            (`id`)
 
-        ) ENGINE=innodb DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
+        ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
 
         $this->_db->query($sql);
 
@@ -111,9 +111,10 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
             `point_radius`          int(10) unsigned NULL,
             `point_image`           tinytext COLLATE utf8_unicode_ci NULL,
 
-             PRIMARY KEY (`id`)
+             PRIMARY KEY            (`id`),
+             FULLTEXT KEY `text`    (`title`, `slug`, `description`)
 
-        ) ENGINE=innodb DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
+        ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
 
         $this->_db->query($sql);
 
@@ -141,28 +142,26 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
             `point_radius`          int(10) unsigned NULL,
             `point_image`           tinytext COLLATE utf8_unicode_ci NULL,
 
-             PRIMARY KEY (`id`)
+             PRIMARY KEY            (`id`)
 
-        ) ENGINE=innodb DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
+        ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
 
         $this->_db->query($sql);
 
-
-        // Add index on exhibit_id.
-        $this->_addIndex(
-            $this->_db->prefix . 'neatline_records',
-            $this->_db->prefix . 'neatline_records_exhibit_idx',
-            'exhibit_id'
-        );
 
         // Layers table.
+        // -------------
         $sql = "CREATE TABLE IF NOT EXISTS `{$this->_db->prefix}neatline_layers` (
+
                 `id`                int(10) unsigned not null auto_increment,
                 `name`              tinytext COLLATE utf8_unicode_ci NULL,
-                 PRIMARY KEY (`id`)
-               ) ENGINE=innodb DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
+
+                 PRIMARY KEY        (`id`)
+
+        ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
 
         $this->_db->query($sql);
+
 
         // Install base layers.
         foreach (self::$_baseLayers as $baseLayer) {
@@ -170,6 +169,13 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
             $layer->name = $baseLayer;
             $layer->save();
         }
+
+        // Add index on exhibit_id.
+        $this->_addIndex(
+            $this->_db->prefix . 'neatline_records',
+            $this->_db->prefix . 'neatline_records_exhibit_idx',
+            'exhibit_id'
+        );
 
     }
 

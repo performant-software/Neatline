@@ -42,6 +42,25 @@ class Neatline_Test_AppTestCase extends Omeka_Test_AppTestCase
 
     }
 
+    /**
+     * Clear out the database.
+     *
+     * @return void.
+     */
+    public function tearDown()
+    {
+
+        parent::tearDown();
+
+        // Truncate Neatline tables.
+        $p = $this->db->prefix;
+        $this->db->query("TRUNCATE TABLE `{$p}neatline_exhibits");
+        $this->db->query("TRUNCATE TABLE `{$p}neatline_records");
+        $this->db->query("TRUNCATE TABLE `{$p}neatline_tags");
+        $this->db->query("TRUNCATE TABLE `{$p}neatline_layers");
+
+    }
+
 
     /**
      * Testing helpers.
