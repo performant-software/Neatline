@@ -12,17 +12,39 @@
 
 Editor.Views.Search = Backbone.View.extend({
 
+  events: {
+    'keyup input': 'keystroke',
+    'click button': 'search'
+  },
+
   /*
-   * Get components, bind events.
+   * Get components.
    *
    * @return void.
    */
   initialize: function() {
-
-    // UX.
     this.input = this.$el.find('input');
     this.button = this.$el.find('button');
+  },
 
+  /*
+   * Check for `Enter` keystroke.
+   *
+   * @param {Object} e: The keyup event.
+   *
+   * @return void.
+   */
+  keystroke: function(e) {
+    console.log('keystroke', e);
+  },
+
+  /*
+   * Execute search.
+   *
+   * @return void.
+   */
+  search: function() {
+    console.log('search');
   }
 
 });
