@@ -74,10 +74,21 @@ Neatline.Modules.Map = (function(Backbone, Neatline) {
    *
    * @return void.
    */
-  Neatline.vent.on('map:focus', function(id) {
+  Neatline.vent.on('map:focusById', function(id) {
     Map.collection.getModel(id, function(model) {
       Map.view.focusByModel(model);
     });
+  });
+
+  /*
+   * Focus the map on a record.
+   *
+   * @param {Object} model: The record model.
+   *
+   * @return void.
+   */
+  Neatline.vent.on('map:focusByModel', function(model) {
+    Map.view.focusByModel(model);
   });
 
 

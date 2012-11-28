@@ -37,10 +37,10 @@ describe('Map Incoming Events', function() {
 
   });
 
-  it('should focus on model features on map:focus', function() {
+  it('should focus on model features on map:focusById', function() {
 
     // Trigger map:focus on model with set focus/zoom.
-    Neatline.vent.trigger('map:focus', layers[0].nModel);
+    Neatline.vent.trigger('map:focusById', layers[0].nId);
 
     // Get focus and zoom.
     var center = _t.map.map.getCenter();
@@ -52,7 +52,35 @@ describe('Map Incoming Events', function() {
     expect(zoom).toEqual(10);
 
     // Trigger map:focus on model with no defaults.
-    Neatline.vent.trigger('map:focus', layers[1].nModel);
+    Neatline.vent.trigger('map:focusById', layers[1].nId);
+
+    // Get focus and zoom.
+    center = _t.map.map.getCenter();
+    zoom = _t.map.map.getZoom();
+
+    // Check focus and zoom.
+    expect(center.lat).toEqual(4);
+    expect(center.lon).toEqual(3);
+    expect(zoom).toEqual(18);
+
+  });
+
+  it('should focus on model features on map:focusByModel', function() {
+
+    // Trigger map:focus on model with set focus/zoom.
+    Neatline.vent.trigger('map:focusByModel', layers[0].nModel);
+
+    // Get focus and zoom.
+    var center = _t.map.map.getCenter();
+    var zoom = _t.map.map.getZoom();
+
+    // Check focus and zoom.
+    expect(Math.round(center.lat)).toEqual(4978802);
+    expect(Math.round(center.lon)).toEqual(-8233185);
+    expect(zoom).toEqual(10);
+
+    // Trigger map:focus on model with no defaults.
+    Neatline.vent.trigger('map:focusByModel', layers[1].nModel);
 
     // Get focus and zoom.
     center = _t.map.map.getCenter();

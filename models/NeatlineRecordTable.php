@@ -205,17 +205,17 @@ class NeatlineRecordTable extends Omeka_Db_Table
             ->where('exhibit_id=?', $exhibit->id);
 
 
-        // Extent.
-        // -------
-        if (!is_null($extent)) {
-            $select = $this->filterByExtent($select, $extent);
-        }
-
-
         // Zoom.
         // -----
         if (!is_null($zoom)) {
             $select = $this->filterByZoom($select, $zoom);
+        }
+
+
+        // Extent.
+        // -------
+        if (!is_null($extent)) {
+            $select = $this->filterByExtent($select, $extent);
         }
 
 

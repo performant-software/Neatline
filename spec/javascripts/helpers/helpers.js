@@ -43,7 +43,7 @@ _t.loadEditor = function() {
   // Restart components.
   Editor.Modules.Layout.init();
   Editor.Modules.Records.init();
-  Editor.Modules.Map.init();
+  Editor.Modules.Geometry.init();
   Editor.Modules.Form.init();
 
   // Shortcut components
