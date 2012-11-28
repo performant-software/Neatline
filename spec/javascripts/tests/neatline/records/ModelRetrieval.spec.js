@@ -16,6 +16,7 @@ describe('Records Model Retrieval', function() {
 
   // Load AJAX fixtures.
   var json = readFixtures('records.json');
+  var jsonIndividualRecord = readFixtures('individual-record.json');
 
   // Get fixtures.
   beforeEach(function() {
@@ -59,6 +60,32 @@ describe('Records Model Retrieval', function() {
 
   });
 
-  it('should create and fetch the model when it is absent');
+  it('should create and fetch the model when it is absent', function() {
+
+    var done = false;
+
+    // Capture starting requests count.
+    var startCount = server.requests.length;
+
+    // Query for absent model.
+    var id = _.last(_t.records.models).get('id');
+    _t.records.getModel(id+1, function(model) {
+      expect(model.get('title')).toEqual('Record 4');
+      done = true;
+    });
+
+    // Plug in the fixture.
+    _t.respond200(_.last(server.requests), jsonIndividualRecord);
+
+    waitsFor(function() {
+      return done;
+    });
+
+    // No new ajax.
+    runs(function() {
+      expect(server.requests.length).toEqual(startCount+1);
+    });
+
+  });
 
 });

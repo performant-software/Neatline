@@ -18,7 +18,7 @@ class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
     private $path_to_fixtures = null;
 
     /**
-     * Records JSON for map.
+     * Records JSON for map (Index response).
      *
      * @return void.
      */
@@ -35,15 +35,6 @@ class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
 
         // Case 1: 3 records, 1 and 2 map-active, 3 map-inactive.
         // ------------------------------------------------------
-
-        $nyc = file_get_contents(NEATLINE_PLUGIN_DIR .
-            '/tests/mocks/nyc.kml');
-
-        $boston = file_get_contents(NEATLINE_PLUGIN_DIR .
-            '/tests/mocks/boston.kml');
-
-        $dc = file_get_contents(NEATLINE_PLUGIN_DIR .
-            '/tests/mocks/dc.kml');
 
         $record1->title = 'Record 1';
         $record2->title = 'Record 2';
@@ -140,6 +131,45 @@ class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
         $this->writeFixture('neatline/records',
           'records-removed-record.json');
 
+
+    }
+
+    /**
+     * JSON for individual record (GET response).
+     *
+     * @return void.
+     */
+    public function testRecordJson()
+    {
+
+        // Exhibit.
+        $exhibit = $this->__exhibit();
+
+        // Record.
+        $record = $this->__record(null, $exhibit);
+        $record->title = 'Record 4';
+        $record->description = 'Record 4 desc.';
+        $record->map_focus = '100,200';
+        $record->map_zoom = 10;
+        $record->map_active = 1;
+        $record->vector_color = '#111111';
+        $record->stroke_color = '#444444';
+        $record->select_color = '#777777';
+        $record->vector_opacity = 1;
+        $record->select_opacity = 4;
+        $record->stroke_opacity = 7;
+        $record->graphic_opacity = 10;
+        $record->stroke_width = 13;
+        $record->point_radius = 16;
+        $record->min_zoom = 19;
+        $record->max_zoom = 22;
+        $record->point_image = 'https://www.google.com/favicon.ico';
+        $record->save('POINT(1 2)');
+
+        // Generate the fixture.
+        $this->request->setQuery(array('id' => $exhibit->id));
+        $this->writeFixture('neatline/records/'.$record->id,
+          'individual-record.json');
 
     }
 
