@@ -118,7 +118,7 @@ class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
         // Generate the fixture.
         $this->resetResponse();
         $this->writeFixture('neatline/records',
-          'records-changed-data.json');
+            'records-changed-data.json');
 
 
         // Case 2: Record 2 is absent from the set.
@@ -129,18 +129,19 @@ class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
         // Generate the fixture.
         $this->resetResponse();
         $this->writeFixture('neatline/records',
-          'records-removed-record.json');
+            'records-removed-record.json');
 
 
     }
 
     /**
-     * JSON for individual record (GET response).
+     * JSON for individual records (GET response).
      *
      * @return void.
      */
     public function testRecordJson()
     {
+
 
         // Exhibit.
         $exhibit = $this->__exhibit();
@@ -164,12 +165,28 @@ class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
         $record->min_zoom = 19;
         $record->max_zoom = 22;
         $record->point_image = 'https://www.google.com/favicon.ico';
-        $record->save('POINT(1 2)');
+        $record->save('POINT(6 7)');
+
+
+        // Case 1: Map active.
+        // -------------------
 
         // Generate the fixture.
-        $this->request->setQuery(array('id' => $exhibit->id));
         $this->writeFixture('neatline/records/'.$record->id,
-          'individual-record.json');
+            'record.json');
+
+
+        // Case 1: Map inactive.
+        // ---------------------
+
+        $record->map_active = 0;
+        $record->save();
+
+        // Generate the fixture.
+        $this->resetResponse();
+        $this->writeFixture('neatline/records/'.$record->id,
+            'record-inactive.json');
+
 
     }
 

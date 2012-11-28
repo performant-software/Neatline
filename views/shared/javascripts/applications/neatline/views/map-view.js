@@ -192,7 +192,13 @@ Neatline.Views.Map = Backbone.View.extend({
 
     // Build layer if necessary.
     if (!this.getLayerByModel(model)) {
-      if (!this.buildLayer(model)) return false;
+
+      // Break if map-inactive.
+      if (!this.buildLayer(model)) {
+        Neatline.vent.trigger('map:focused');
+        return;
+      }
+
     }
 
     // Try to get a map focus.
@@ -207,6 +213,9 @@ Neatline.Views.Map = Backbone.View.extend({
       var layer = this.getLayerByModel(model);
       this.map.zoomToExtent(layer.getDataExtent());
     }
+
+    // Publish complete.
+    Neatline.vent.trigger('map:focused');
 
   },
 
