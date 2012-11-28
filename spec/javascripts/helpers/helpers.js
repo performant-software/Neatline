@@ -23,12 +23,12 @@ _t = {};
  */
 _t.loadNeatline = function() {
 
-  // Restart components.
-  Neatline.Modules.Exhibit.init();
-  Neatline.Modules.Map.init();
+  // Restart application.
+  Neatline.initCallbacks.reset();
+  Neatline.start();
 
   // Shortcut components
-  _t.map = Neatline.Modules.Map.view;
+  this.map = Neatline.Modules.Map.view;
 
 };
 
@@ -37,19 +37,18 @@ _t.loadNeatline = function() {
  */
 _t.loadEditor = function() {
 
-  // Clobber Marionette startup.
-  Neatline.start = this.loadNeatline;
+  // Restart application.
+  Neatline.initCallbacks.reset();
+  Editor.initCallbacks.reset();
+  Editor.start();
 
-  // Restart components.
-  Editor.Modules.Layout.init();
-  Editor.Modules.Records.init();
-  Editor.Modules.Geometry.init();
-  Editor.Modules.Form.init();
+  // Shortcut editor components
+  this.layout = Editor.Modules.Layout.view;
+  this.records = Editor.Modules.Records.view;
+  this.form = Editor.Modules.Form.view;
 
-  // Shortcut components
-  _t.layout = Editor.Modules.Layout.view;
-  _t.records = Editor.Modules.Records.view;
-  _t.form = Editor.Modules.Form.view;
+  // Shortcut application components
+  this.map = Neatline.Modules.Map.view;
 
 };
 
@@ -66,7 +65,7 @@ _t.loadEditor = function() {
 _t.getVectorLayers = function() {
 
   // Filter for features.length > 0.
-  return _t.map.map.getLayersBy('features', {
+  return this.map.map.getLayersBy('features', {
     test: function(prop) {
       return !_.isUndefined(prop) && prop.length > 0;
     }

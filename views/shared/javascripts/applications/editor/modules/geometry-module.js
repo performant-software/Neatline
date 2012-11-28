@@ -66,7 +66,7 @@ Editor.Modules.Geometry = (function(Backbone, Editor, Neatline) {
    *
    * @return void.
    */
-  Editor.vent.on('form:updateGeometry', function(settings) {
+  Editor.vent.on('form:updateMap', function(settings) {
     Geometry.view.update(settings);
   });
 
