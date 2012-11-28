@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2; */
 
 /**
- * Content management shell in editor.
+ * Search box in editor.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -13,15 +13,9 @@
 
 ?>
 
-<div id="editor">
-
-  <div id="menu">
-    <?php echo $this->partial('index/_search.php'); ?>
+<form class="form-search">
+  <div class="input-prepend">
+    <button type="submit" class="btn">Search</button>
+    <input type="text" class="span2 search-query" />
   </div>
-
-  <div id="content"></div>
-
-</div>
-
-<!-- Underscore templates. -->
-<?php echo $this->partial('index/_templates.php'); ?>
+</form>

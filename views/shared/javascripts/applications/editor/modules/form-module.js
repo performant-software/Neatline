@@ -21,7 +21,7 @@ Editor.Modules.Form = (function(Backbone, Editor, Neatline) {
    * @return void.
    */
   Form.init = function() {
-    this.view = new Editor.Views.Form({ el: '#editor' });
+    this.view = new Editor.Views.Form({ el: '#content' });
   };
 
 

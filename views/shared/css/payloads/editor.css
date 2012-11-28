@@ -1120,6 +1120,8 @@ body{margin:0;text-rendering:optimizeLegibility}
 #editor,#drag-handle,#neatline{position:absolute;box-sizing:border-box}
 #neatline{-webkit-user-select:none;-moz-user-select:none}
 #editor{background:#f9f9f9;width:380px;overflow-y:scroll;overflow-x:hidden;}
+#editor #menu{position:fixed;width:380px;height:70px}
+#editor #content{margin-top:70px}
 #editor ul.records{margin:0;}
 #editor ul.records li{list-style:none;cursor:pointer;font-size:14px;font-weight:300;padding:.2em 1em;border-bottom:1px solid #f0f0f0;}
 #editor ul.records li:hover{background:#3f3f3f;color:#fff}

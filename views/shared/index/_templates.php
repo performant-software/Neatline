@@ -27,7 +27,7 @@
 <!-- Record edito form. -->
 <script id="edit-form" type="text/templates">
 
-  <form class="form-stacked">
+  <form class="form-stacked record">
 
     <h3 class="head"></h3>
 

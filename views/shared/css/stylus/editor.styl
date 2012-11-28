@@ -7,8 +7,11 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
+
 @import 'colors'
+@import 'constants'
 @import 'mixins'
+
 
 body
   margin 0
@@ -24,11 +27,29 @@ body
   -webkit-user-select none
   -moz-user-select none
 
+
+// Left edit pane.
+// ---------------
+
 #editor
   background #f9f9f9
-  width 380px
+  width editorWidth
   overflow-y scroll
   overflow-x hidden
+
+  // Search/buttons.
+  // ---------------
+
+  #menu
+    position fixed
+    width editorWidth
+    height menuHeight
+
+  #content
+    margin-top menuHeight
+
+  // Records list.
+  // -------------
 
   ul.records
     margin 0
@@ -44,6 +65,9 @@ body
       &:hover
         background #3f3f3f
         color white
+
+  // Edit form.
+  // ----------
 
   form
     margin 1.6em
@@ -72,6 +96,9 @@ body
 
       &[name="body"]
         height 300px
+
+    // Spatial tab.
+    // ------------
 
     #form-spatial
 
@@ -105,6 +132,9 @@ body
         font-family Consolas
         font-weight bold
         font-size 11px
+
+    // Form buttons.
+    // -------------
 
     .form-actions
       background transparent

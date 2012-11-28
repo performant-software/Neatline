@@ -21,7 +21,7 @@ Editor.Modules.Records = (function(Backbone, Editor, Neatline) {
    * @return void.
    */
   Records.init = function() {
-    this.view = new Editor.Views.Records({ el: '#editor' });
+    this.view = new Editor.Views.Records({ el: '#content' });
     this.collection = new Neatline.Collections.Records();
     this.fetch();
   };
