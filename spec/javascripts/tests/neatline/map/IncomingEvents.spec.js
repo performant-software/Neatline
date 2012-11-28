@@ -59,8 +59,8 @@ describe('Map Incoming Events', function() {
     zoom = _t.map.map.getZoom();
 
     // Check focus and zoom.
-    expect(Math.round(center.lat)).toEqual(2);
-    expect(Math.round(center.lon)).toEqual(2);
+    expect(center.lat).toEqual(4);
+    expect(center.lon).toEqual(3);
     expect(zoom).toEqual(18);
 
   });

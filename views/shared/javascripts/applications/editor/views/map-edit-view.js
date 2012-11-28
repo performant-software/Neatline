@@ -76,10 +76,8 @@ Neatline.Views.Map.prototype.endEdit = function() {
     this.map.removeControl(val);
   }, this));
 
-
-  // Activate default controls.
-  this.clickControl.activate();
-  this.hoverControl.activate();
+  // Reactivate controls.
+  this.activateControls();
 
 };
 

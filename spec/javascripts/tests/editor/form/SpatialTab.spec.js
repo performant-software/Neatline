@@ -184,7 +184,7 @@ describe('Form Spatial Tab', function() {
 
     // Check for new data.
     expect(_t.form.coverage.val()).toEqual(
-      'GEOMETRYCOLLECTION(POINT(1 1),POINT(3 4))'
+      'GEOMETRYCOLLECTION(POINT(1 2),POINT(3 4))'
     );
 
   });
@@ -199,7 +199,7 @@ describe('Form Spatial Tab', function() {
 
     // Check for new data.
     expect(_t.form.coverage.val()).toEqual(
-      'GEOMETRYCOLLECTION(POINT(1 1),LINESTRING(1 2,3 4))'
+      'GEOMETRYCOLLECTION(POINT(1 2),LINESTRING(1 2,3 4))'
     );
 
   });
@@ -216,7 +216,7 @@ describe('Form Spatial Tab', function() {
 
     // Check for new data.
     expect(_t.form.coverage.val()).toEqual(
-      'GEOMETRYCOLLECTION(POINT(1 1),POLYGON((1 2,3 4,5 6,1 2)))'
+      'GEOMETRYCOLLECTION(POINT(1 2),POLYGON((1 2,3 4,5 6,1 2)))'
     );
 
   });
@@ -233,7 +233,7 @@ describe('Form Spatial Tab', function() {
 
     // Check for new data.
     expect(_t.form.coverage.val()).toEqual(
-      'GEOMETRYCOLLECTION(POINT(1 1),POLYGON((1 2,3 4,5 6,1 2)))'
+      'GEOMETRYCOLLECTION(POINT(1 2),POLYGON((1 2,3 4,5 6,1 2)))'
     );
 
   });
@@ -243,15 +243,15 @@ describe('Form Spatial Tab', function() {
     // Edit feature, set new point coords.
     var feature = _t.map.editLayer.features[0];
     _t.map.controls.edit.feature = feature;
-    feature.geometry.x = 1;
-    feature.geometry.y = 2;
+    feature.geometry.x = 2;
+    feature.geometry.y = 3;
 
     // Trigger modification.
     _t.map.controls.edit.dragComplete();
 
     // Check for new data.
     expect(_t.form.coverage.val()).toEqual(
-      'GEOMETRYCOLLECTION(POINT(1 2))'
+      'GEOMETRYCOLLECTION(POINT(2 3))'
     );
 
   });

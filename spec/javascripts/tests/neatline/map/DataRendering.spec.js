@@ -44,9 +44,9 @@ describe('Map Data Rendering', function() {
     // Check geometry.
     expect(layers.length).toEqual(2);
     expect(layers[0].features[0].geometry.x).toEqual(1);
-    expect(layers[0].features[0].geometry.y).toEqual(1);
-    expect(layers[1].features[0].geometry.x).toEqual(2);
-    expect(layers[1].features[0].geometry.y).toEqual(2);
+    expect(layers[0].features[0].geometry.y).toEqual(2);
+    expect(layers[1].features[0].geometry.x).toEqual(3);
+    expect(layers[1].features[0].geometry.y).toEqual(4);
 
   });
 
@@ -57,8 +57,13 @@ describe('Map Data Rendering', function() {
       return layer.name == 'Record 2';
     });
 
+    // Add a new point to the layer.
+    var pt = new OpenLayers.Geometry.Point(8,9);
+    var feature = new OpenLayers.Feature.Vector(pt);
+    record2Layer.addFeatures([feature]);
+
     // Set frozen.
-    _t.map.frozen.push(record2Layer.nId);
+    _t.map.freeze(record2Layer.nId);
 
     // Trigger a map move, inject fixture.
     _t.map.map.events.triggerEvent('moveend');
@@ -72,8 +77,10 @@ describe('Map Data Rendering', function() {
     });
 
     // Check geometry.
-    expect(record2Layer.features[0].geometry.x).toEqual(2);
-    expect(record2Layer.features[0].geometry.y).toEqual(2);
+    expect(record2Layer.features[0].geometry.x).toEqual(3);
+    expect(record2Layer.features[0].geometry.y).toEqual(4);
+    expect(record2Layer.features[1].geometry.x).toEqual(8);
+    expect(record2Layer.features[1].geometry.y).toEqual(9);
 
   });
 
@@ -84,8 +91,13 @@ describe('Map Data Rendering', function() {
       return layer.name == 'Record 2';
     });
 
+    // Add a new point to the layer.
+    var pt = new OpenLayers.Geometry.Point(8,9);
+    var feature = new OpenLayers.Feature.Vector(pt);
+    record2Layer.addFeatures([feature]);
+
     // Set frozen.
-    _t.map.frozen.push(record2Layer.nId);
+    _t.map.freeze(record2Layer.nId);
 
     // Trigger a map move, inject fixture.
     _t.map.map.events.triggerEvent('moveend');
@@ -99,8 +111,10 @@ describe('Map Data Rendering', function() {
     });
 
     // Check geometry.
-    expect(record2Layer.features[0].geometry.x).toEqual(2);
-    expect(record2Layer.features[0].geometry.y).toEqual(2);
+    expect(record2Layer.features[0].geometry.x).toEqual(3);
+    expect(record2Layer.features[0].geometry.y).toEqual(4);
+    expect(record2Layer.features[1].geometry.x).toEqual(8);
+    expect(record2Layer.features[1].geometry.y).toEqual(9);
 
   });
 

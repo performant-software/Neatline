@@ -56,7 +56,7 @@ describe('Form Data I/O', function() {
     expect(_t.form.pointRadius.val()).toEqual('16');
     expect(_t.form.minZoom.val()).toEqual('19');
     expect(_t.form.maxZoom.val()).toEqual('22');
-    expect(_t.form.coverage.val()).toEqual('POINT(1 1)');
+    expect(_t.form.coverage.val()).toEqual('POINT(1 2)');
     expect(_t.form.pointGraphic.val()).toEqual(
       'https://www.google.com/favicon.ico');
 
@@ -78,7 +78,7 @@ describe('Form Data I/O', function() {
     _t.form.pointRadius.val('17');
     _t.form.minZoom.val('20');
     _t.form.maxZoom.val('23');
-    _t.form.coverage.val('POINT(2 2)');
+    _t.form.coverage.val('POINT(3 4)');
     _t.form.pointGraphic.val('file2.png');
 
     // Click save, capture request.
@@ -104,7 +104,7 @@ describe('Form Data I/O', function() {
     expect(params.point_radius).toEqual('17');
     expect(params.min_zoom).toEqual('20');
     expect(params.max_zoom).toEqual('23');
-    expect(params.coverage).toEqual('POINT(2 2)');
+    expect(params.coverage).toEqual('POINT(3 4)');
     expect(params.point_image).toEqual('file2.png');
 
   });

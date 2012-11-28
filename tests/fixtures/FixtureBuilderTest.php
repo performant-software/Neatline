@@ -110,9 +110,9 @@ class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
         $record2->point_image = 'http://en.wikipedia.org/favicon.ico';
         $record3->point_image = 'http://www.amazon.com/favicon.ico';
 
-        $record1->save('POINT(1 1)');
-        $record2->save('POINT(2 2)');
-        $record3->save('POINT(3 3)');
+        $record1->save('POINT(1 2)');
+        $record2->save('POINT(3 4)');
+        $record3->save('POINT(4 5)');
 
         // Generate the fixture.
         $this->request->setQuery(array('id' => $exhibit->id));
@@ -122,7 +122,7 @@ class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
         // Case 2: Data for record 2 has changed.
         // --------------------------------------
 
-        $record2->save('POINT(3 3)');
+        $record2->save('POINT(6 7)');
 
         // Generate the fixture.
         $this->resetResponse();

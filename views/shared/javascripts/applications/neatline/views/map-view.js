@@ -192,7 +192,7 @@ Neatline.Views.Map = Backbone.View.extend({
 
     // Build layer if necessary.
     if (!this.getLayerByModel(model)) {
-      this.buildLayer(model);
+      if (!this.buildLayer(model)) return false;
     }
 
     // Try to get a map focus.
@@ -251,6 +251,7 @@ Neatline.Views.Map = Backbone.View.extend({
    *
    * @param {Object} records: The records collection.
    *
+   * @unittest
    * @return void.
    */
   ingest: function(records) {
@@ -299,36 +300,36 @@ Neatline.Views.Map = Backbone.View.extend({
    *
    * @param {Object} record: The record model.
    *
-   * @return void.
+   * @return {Boolean}: True if the layer was added.
    */
   buildLayer: function(record) {
 
-    if (record.get('map_active') == 1) {
+    if (record.get('map_active') != 1) return false;
 
-      // Build geometry and style.
-      var formatWKT = new OpenLayers.Format.WKT();
-      var features = formatWKT.read(record.get('coverage'));
-      var style = this.getStyleMap(record);
+    // Build geometry and style.
+    var formatWKT = new OpenLayers.Format.WKT();
+    var features = formatWKT.read(record.get('coverage'));
+    var style = this.getStyleMap(record);
 
-      // Build the layer.
-      var layer = new OpenLayers.Layer.Vector(
-        record.get('title'), {
-          styleMap: style, displayInLayerSwitcher: false
-        }
-      );
+    // Build the layer.
+    var layer = new OpenLayers.Layer.Vector(
+      record.get('title'), {
+        styleMap: style, displayInLayerSwitcher: false
+      }
+    );
 
-      // Add to map, track.
-      layer.addFeatures(features);
-      this.map.addLayer(layer);
+    // Add to map, track.
+    layer.addFeatures(features);
+    this.map.addLayer(layer);
 
-      // Store model, id.
-      layer.nModel = record;
-      layer.nId = record.get('id');
+    // Store model, id.
+    layer.nModel = record;
+    layer.nId = record.get('id');
 
-      // Track layer.
-      this.layers.push(layer);
+    // Track layer.
+    this.layers.push(layer);
 
-    }
+    return true;
 
   },
 

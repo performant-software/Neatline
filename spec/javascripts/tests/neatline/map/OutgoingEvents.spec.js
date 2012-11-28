@@ -188,8 +188,8 @@ describe('Map Outgoing Events', function() {
 
     // Check geometry.
     layers = _t.getVectorLayers();
-    expect(layers[1].features[0].geometry.x).toEqual(3);
-    expect(layers[1].features[0].geometry.y).toEqual(3);
+    expect(layers[1].features[0].geometry.x).toEqual(6);
+    expect(layers[1].features[0].geometry.y).toEqual(7);
 
   });
 
