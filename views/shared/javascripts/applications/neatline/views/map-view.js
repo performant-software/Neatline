@@ -222,10 +222,10 @@ Neatline.Views.Map = Backbone.View.extend({
 
     // Get focus lat/lon.
     focus = focus.split(',');
-    var latlon = new OpenLayers.LonLat(focus[0], focus[1]);
+    var lonlat = new OpenLayers.LonLat(focus[0], focus[1]);
 
     // Set center.
-    this.map.setCenter(latlon, zoom);
+    this.map.setCenter(lonlat, zoom);
 
   },
 

@@ -54,7 +54,7 @@ class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
         $record3->description = 'Record 3 desc.';
 
         // No default focus/zoom for records 2 and 3.
-        $record1->map_focus = '-8233185.189506843,4978802.273690212';
+        $record1->map_focus = '100,200';
         $record1->map_zoom = 10;
 
         // Record 3 inactive.

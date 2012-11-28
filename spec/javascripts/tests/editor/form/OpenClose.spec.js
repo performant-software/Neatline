@@ -121,6 +121,35 @@ describe('Form Open/Close', function() {
 
   });
 
+  it('should not focus the map when the form is opened via map', function() {
+
+    // Set center and zoom.
+    var lonlat = new OpenLayers.LonLat(200, 300);
+    _t.map.map.setCenter(lonlat, 15);
+
+    // Mock feature1 click.
+    layers[0].getFeatureFromEvent = function(evt) { return feature1; };
+
+    // Mock cursor event.
+    var evt = {
+      xy: new OpenLayers.Pixel(Math.random(), Math.random()),
+      type: 'click'
+    };
+
+    // Trigger click.
+    _t.map.map.events.triggerEvent('click', evt);
+
+    // Get focus and zoom.
+    var center = _t.map.map.getCenter();
+    var zoom = _t.map.map.getZoom();
+
+    // Check unchanged focus.
+    expect(center.lon).toEqual(200);
+    expect(center.lat).toEqual(300);
+    expect(zoom).toEqual(15);
+
+  });
+
   it('should freeze edit layer when form opened via editor', function() {
 
     // By default, frozen empty.

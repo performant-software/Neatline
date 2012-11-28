@@ -47,8 +47,8 @@ describe('Map Incoming Events', function() {
     var zoom = _t.map.map.getZoom();
 
     // Check focus and zoom.
-    expect(Math.round(center.lat)).toEqual(4978802);
-    expect(Math.round(center.lon)).toEqual(-8233185);
+    expect(Math.round(center.lon)).toEqual(100);
+    expect(Math.round(center.lat)).toEqual(200);
     expect(zoom).toEqual(10);
 
     // Trigger map:focus on model with no defaults.
@@ -59,8 +59,8 @@ describe('Map Incoming Events', function() {
     zoom = _t.map.map.getZoom();
 
     // Check focus and zoom.
-    expect(center.lat).toEqual(4);
     expect(center.lon).toEqual(3);
+    expect(center.lat).toEqual(4);
     expect(zoom).toEqual(18);
 
   });
@@ -75,8 +75,8 @@ describe('Map Incoming Events', function() {
     var zoom = _t.map.map.getZoom();
 
     // Check focus and zoom.
-    expect(Math.round(center.lat)).toEqual(4978802);
-    expect(Math.round(center.lon)).toEqual(-8233185);
+    expect(Math.round(center.lon)).toEqual(100);
+    expect(Math.round(center.lat)).toEqual(200);
     expect(zoom).toEqual(10);
 
     // Trigger map:focus on model with no defaults.
@@ -87,8 +87,8 @@ describe('Map Incoming Events', function() {
     zoom = _t.map.map.getZoom();
 
     // Check focus and zoom.
-    expect(center.lat).toEqual(4);
     expect(center.lon).toEqual(3);
+    expect(center.lat).toEqual(4);
     expect(zoom).toEqual(18);
 
   });

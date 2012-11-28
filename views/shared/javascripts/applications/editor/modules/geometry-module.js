@@ -37,14 +37,8 @@ Editor.Modules.Geometry = (function(Backbone, Editor, Neatline) {
    * @return void.
    */
   Editor.vent.on('form:open', function(model) {
-
-    // Freeze the id.
     Geometry.view.freeze(model.get('id'));
-
-    // Focus and start edit.
-    Geometry.view.focusByModel(model);
     Geometry.view.startEdit(model);
-
   });
 
   /*
