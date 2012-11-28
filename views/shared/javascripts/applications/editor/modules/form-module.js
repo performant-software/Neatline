@@ -37,7 +37,7 @@ Editor.Modules.Form = (function(Backbone, Editor, Neatline) {
    * @return void.
    */
   Editor.vent.on('records:openForm', function(model) {
-    Form.view.show(model);
+    Form.view.show(model, true);
   });
 
   /*
@@ -48,7 +48,7 @@ Editor.Modules.Form = (function(Backbone, Editor, Neatline) {
    * @return void.
    */
   Neatline.vent.on('map:select', function(model) {
-    Form.view.show(model);
+    Form.view.show(model, false);
   });
 
   /*

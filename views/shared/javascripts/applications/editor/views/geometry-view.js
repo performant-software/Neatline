@@ -15,14 +15,18 @@
  * Construct editing controls for record.
  *
  * @param {Object} model: The record model.
+ * @param {Boolean} focus: If true, focus the map on the edit layer.
  *
  * @return void.
  */
-Neatline.Views.Map.prototype.startEdit = function(model) {
+Neatline.Views.Map.prototype.startEdit = function(model, focus) {
 
   // Get the layer.
   var layer = this.getLayerByModel(model);
   this.editLayer = layer ? layer : this.buildLayer(model);
+
+  // Focus the map on the edit layer.
+  if (focus) this.focusByModel(model);
 
   this.controls = {
 

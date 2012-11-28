@@ -156,6 +156,26 @@ describe('Form Open/Close', function() {
 
   });
 
+  it('should focus the map when the form is opened via editor', function() {
+
+    // Set center and zoom.
+    var lonlat = new OpenLayers.LonLat(200, 300);
+    _t.map.map.setCenter(lonlat, 15);
+
+    // Click on record listing.
+    $(records[0]).trigger('click');
+
+    // Get focus and zoom.
+    var center = _t.map.map.getCenter();
+    var zoom = _t.map.map.getZoom();
+
+    // Check unchanged focus.
+    expect(center.lon).toEqual(100);
+    expect(center.lat).toEqual(200);
+    expect(zoom).toEqual(10);
+
+  });
+
   it('should not focus the map when the form is opened via map', function() {
 
     // Set center and zoom.

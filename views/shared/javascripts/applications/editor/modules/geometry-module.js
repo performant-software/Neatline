@@ -33,12 +33,13 @@ Editor.Modules.Geometry = (function(Backbone, Editor, Neatline) {
    * Show form on map feature click.
    *
    * @param {Object} model: The record model.
+   * @param {Boolean} focus: If true, focus the map on the edit layer.
    *
    * @return void.
    */
-  Editor.vent.on('form:open', function(model) {
+  Editor.vent.on('form:open', function(model, focus) {
     Geometry.view.freeze(model.get('id'));
-    Geometry.view.startEdit(model);
+    Geometry.view.startEdit(model, focus);
   });
 
   /*

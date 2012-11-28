@@ -105,13 +105,17 @@ Editor.Views.Form = Backbone.View.extend({
    * Show the form; block if the form is already open.
    *
    * @param {Object} model: The record model.
+   * @param {Boolean} focus: If true, focus the map on the edit layer.
    *
    * @return void.
    */
-  show: function(model) {
+  show: function(model, focus) {
 
     // Block if open.
     if (this.open) return;
+
+    // Publish.
+    Editor.vent.trigger('form:open', model, focus);
 
     // Set model, render.
     this.model = model;
@@ -120,9 +124,6 @@ Editor.Views.Form = Backbone.View.extend({
 
     // Trackers.
     this.open = true;
-
-    // Publish.
-    Editor.vent.trigger('form:open', this.model);
 
   },
 
