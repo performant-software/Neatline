@@ -90,7 +90,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
             `title`                 mediumtext COLLATE utf8_unicode_ci NULL,
             `slug`                  varchar(100) NULL,
             `description`           mediumtext COLLATE utf8_unicode_ci NULL,
-            `coverage`              GEOMETRYCOLLECTION,
+            `coverage`              GEOMETRY,
             `map_active`            tinyint(1) NULL,
             `map_focus`             varchar(100) NULL,
             `map_zoom`              int(10) unsigned NULL,
@@ -204,8 +204,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
         $this->_db->query($sql);
 
         // Remove default map style attributes.
-        foreach ($this->_mapStyles as $style)
-            delete_option($style);
+        foreach ($this->_mapStyles as $style) delete_option($style);
 
     }
 

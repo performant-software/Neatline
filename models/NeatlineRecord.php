@@ -382,7 +382,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
             'min_zoom'          => $this->min_zoom,
             'max_zoom'          => $this->max_zoom,
 
-            // Map:
+            // Spatial:
             'map_focus'         => $this->map_focus,
             'map_zoom'          => $this->map_zoom,
             'coverage'          => $coverage,
@@ -436,7 +436,9 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
         }
 
         // Update `coverage`.
-        if (!is_null($coverage)) $this->setCoverage($coverage);
+        if (!is_null($coverage)) {
+            $this->setCoverage($coverage);
+        }
 
     }
 

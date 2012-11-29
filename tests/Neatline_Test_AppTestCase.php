@@ -60,8 +60,8 @@ class Neatline_Test_AppTestCase extends Omeka_Test_AppTestCase
         $p = $this->db->prefix;
         $this->db->query("DELETE FROM `{$p}neatline_exhibits` WHERE 1=1");
         $this->db->query("DELETE FROM `{$p}neatline_records` WHERE 1=1");
-        $this->db->query("DELETE FROM `{$p}neatline_layers` WHERE 1=1");
         $this->db->query("DELETE FROM `{$p}neatline_tags` WHERE 1=1");
+        $this->db->query("DELETE FROM `{$p}neatline_layers` WHERE 1=1");
 
     }
 
