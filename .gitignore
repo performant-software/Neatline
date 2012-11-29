@@ -11,5 +11,6 @@ views/shared/css/exhibits/
 node_modules/
 views/shared/javascripts/payloads/
 views/shared/javascripts/components/
-views/shared/css/v2/payloads/
+views/shared/css/payloads/
+views/shared/css/img/
 spec/javascripts/helpers/components/
