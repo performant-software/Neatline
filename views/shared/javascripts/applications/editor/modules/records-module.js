@@ -63,7 +63,28 @@ Editor.Modules.Records = (function(Backbone, Editor, Neatline) {
   });
 
   /*
-   * Mirror map records.
+   * Render current map collection in editor.
+   *
+   * @params {Object} query: The query object.
+   *
+   * @return void.
+   */
+  Editor.vent.on('search:query', function(query) {
+    Records.fetch(query);
+  });
+
+  /*
+   * Render current map collection in editor.
+   *
+   * @return void.
+   */
+  Editor.vent.on('search:mapMirror', function() {
+    Records.view.show(Neatline.Modules.Map.collection);
+  });
+
+  /*
+   * When map mirror is active, render new map record collections
+   * in the editor.
    *
    * @param {Object} collection: The new map records.
    *

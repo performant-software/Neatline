@@ -35,7 +35,7 @@ Editor.Views.Search = Backbone.View.extend({
    *
    * @return void.
    */
-  keystroke: function(e) {
+  keystroke: function() {
     this.parseQuery();
   },
 
@@ -45,9 +45,20 @@ Editor.Views.Search = Backbone.View.extend({
    * @return void.
    */
   search: function(e) {
+
+    // Block reload.
     e.preventDefault();
-    Editor.vent.trigger('search:submit', this.query);
+
+    // Set map mirroring.
+    Editor.global.mapMirror = this.query.mapMirror;
+    if (this.query.mapMirror) Editor.vent.trigger('search:mapMirror');
+
+    // If not "map:", execute query normally.
+    else Editor.vent.trigger('search:query', this.query);
+
+    // Update button
     this.updateStatus();
+
   },
 
   /*
@@ -57,7 +68,12 @@ Editor.Views.Search = Backbone.View.extend({
    */
   parseQuery: function() {
 
-    this.query = { mapMirror: false };
+    this.query = {
+      mapMirror: false,
+      query: null
+    };
+
+    // Get the raw query.
     var value = this.input.val();
 
 
@@ -74,6 +90,7 @@ Editor.Views.Search = Backbone.View.extend({
     // ---------------
 
     else {
+      this.query = value;
       this.unboldQuery();
     }
 

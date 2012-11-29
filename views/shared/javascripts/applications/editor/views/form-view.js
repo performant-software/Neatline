@@ -114,16 +114,15 @@ Editor.Views.Form = Backbone.View.extend({
     // Block if open.
     if (this.open) return;
 
-    // Publish.
+    // Publish, set trackers.
     Editor.vent.trigger('form:open', model, focus);
+    Editor.global.formOpen = true;
+    this.open = true;
 
     // Set model, render.
     this.model = model;
     this.$el.html(this.form);
     this.render();
-
-    // Trackers.
-    this.open = true;
 
   },
 
@@ -140,6 +139,7 @@ Editor.Views.Form = Backbone.View.extend({
 
     // Trackers.
     this.model = null;
+    Editor.global.formOpen = false;
     this.open = false;
 
   },
