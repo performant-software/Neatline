@@ -23,19 +23,11 @@ Editor.Views.Search = Backbone.View.extend({
    * @return void.
    */
   initialize: function() {
+
+    // UX.
     this.input = this.$el.find('input');
     this.button = this.$el.find('button');
-  },
 
-  /*
-   * Check for `Enter` keystroke.
-   *
-   * @param {Object} e: The keyup event.
-   *
-   * @return void.
-   */
-  keystroke: function(e) {
-    console.log('keystroke', e);
   },
 
   /*
@@ -43,8 +35,95 @@ Editor.Views.Search = Backbone.View.extend({
    *
    * @return void.
    */
-  search: function() {
-    console.log('search');
+  keystroke: function(e) {
+    this.parseQuery();
+  },
+
+  /*
+   * Execute search.
+   *
+   * @return void.
+   */
+  search: function(e) {
+    e.preventDefault();
+    Editor.vent.trigger('search:submit', this.query);
+    this.updateStatus();
+  },
+
+  /*
+   * Parse and publish the search string.
+   *
+   * @return void.
+   */
+  parseQuery: function() {
+
+    this.query = { mapMirror: false };
+    var value = this.input.val();
+
+
+    // Map mirroring:
+    // --------------
+
+    if (_.string.startsWith(value, 'map:')) {
+      this.query.mapMirror = true;
+      this.boldQuery();
+    }
+
+
+    // Normal keyword:
+    // ---------------
+
+    else {
+      this.unboldQuery();
+    }
+
+
+  },
+
+  /*
+   * If input has a value, set button active.
+   *
+   * @return void.
+   */
+  updateStatus: function() {
+    if (this.input.val() === '') this.setSearchInactive();
+    else this.setSearchActive();
+  },
+
+  /*
+   * Bold search query with structured format.
+   *
+   * @return void.
+   */
+  boldQuery: function() {
+    this.input.addClass('bold');
+  },
+
+  /*
+   * Un-bold search query with unstructured format.
+   *
+   * @return void.
+   */
+  unboldQuery: function() {
+    this.input.removeClass('bold');
+  },
+
+  /*
+   * Set search button active.
+   *
+   * @return void.
+   */
+  setSearchActive: function() {
+    this.button.addClass('btn-primary');
+  },
+
+  /*
+   * Set search button inactive.
+   *
+   * @return void.
+   */
+  setSearchInactive: function() {
+    this.button.removeClass('btn-primary');
   }
 
 });

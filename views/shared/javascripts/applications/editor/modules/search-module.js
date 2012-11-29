@@ -25,6 +25,29 @@ Editor.Modules.Search = (function(Backbone, Editor) {
   };
 
 
+  // -------
+  // Events.
+  // -------
+
+  /*
+   * Activate map mirroring or execute query.
+   *
+   * @param {Object} query: The query object.
+   *
+   * @return void.
+   */
+  Editor.vent.on('search:submit', function(query) {
+
+    // Set map mirroring.
+    Editor.global.mapMirror = query.mapMirror;
+    if (query.mapMirror) Editor.vent.trigger('search:mapMirror');
+
+    // If not "map:", execute query normally.
+    else Editor.vent.trigger('search:query', query);
+
+  });
+
+
   // Export.
   Editor.addInitializer(function() { Search.init(); });
   return Search;

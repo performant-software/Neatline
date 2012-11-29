@@ -35,3 +35,13 @@ Editor.on('initialize:after', function() {
 Neatline.on('initialize:after', function() {
   Editor.Modules.Geometry.init();
 });
+
+
+// --------------------
+// Application globals.
+// --------------------
+
+Editor.global = {
+  formOpen:   false,
+  mapMirror:  false
+};

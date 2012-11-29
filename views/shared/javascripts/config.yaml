@@ -10,6 +10,7 @@ default:
   vendor:
     jquery: jquery/jquery.js
     underscore: underscore/underscore.js
+    underscore_string: underscore.string/lib/underscore.string.js
     backbone: backbone/backbone.js
     eventbinder: Backbone.EventBinder/lib/backbone.eventbinder.js
     wreqr: Backbone.Wreqr/lib/backbone.wreqr.js

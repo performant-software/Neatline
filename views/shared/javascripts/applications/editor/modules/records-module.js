@@ -62,6 +62,20 @@ Editor.Modules.Records = (function(Backbone, Editor, Neatline) {
     Records.view.show(Records.collection);
   });
 
+  /*
+   * Mirror map records.
+   *
+   * @param {Object} collection: The new map records.
+   *
+   * @return void.
+   */
+  Neatline.vent.on('exhibit:newRecords', function(collection) {
+    if (Editor.global.mapMirror && !Editor.global.formOpen) {
+      Records.collection = collection;
+      Records.view.show(collection);
+    }
+  });
+
 
   // Export.
   Editor.addInitializer(function() { Records.init(); });

@@ -189,8 +189,11 @@ class NeatlineRecordTable extends Omeka_Db_Table
      * Construct records array for exhibit and editor.
      *
      * @param Omeka_Record_AbstractRecord $exhibit The exhibit record.
-     * @param string $extent The current map viewport extent.
-     * @param int $zoom The zoom level.
+     *
+     * Filter parameters:
+     * ------------------
+     * @param string $extent  The current map viewport extent.
+     * @param int $zoom       The zoom level.
      *
      * @return array Array of matching records.
      */

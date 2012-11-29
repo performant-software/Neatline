@@ -31,12 +31,13 @@ module.exports = function(grunt) {
   ];
 
   var editorFiles = [
-    c.components+c.vendor.minicolors_js
+    c.components+c.vendor.underscore_string
   ];
 
   var stylusFiles = {};
   stylusFiles[css+'neatline.css'] = stylus+'neatline.styl';
   stylusFiles[css+'editor.css'] = stylus+'editor.styl';
+  stylusFiles[css+'overrides.css'] = stylus+'overrides.styl';
 
   grunt.initConfig({
 
@@ -102,7 +103,7 @@ module.exports = function(grunt) {
       editorCss: {
         src: [
           '<config:concat.neatlineCss.src>',
-          c.components+c.vendor.minicolors_css,
+          css+'overrides.css',
           css+'editor.css'
         ],
         dest: css+'editor.css'
