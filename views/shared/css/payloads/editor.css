@@ -999,8 +999,7 @@ body{margin:0;text-rendering:optimizeLegibility}
 #neatline{-webkit-user-select:none;-moz-user-select:none}
 #editor{background:#f9f9f9;width:380px;overflow-y:scroll;overflow-x:hidden;}
 #editor #menu #search{margin-left:1em;}
-#editor #menu #search input.search-query{width:220px;}
-#editor #menu #search input.search-query.bold{font-weight:bold}
+#editor #menu #search input.bold{font-weight:bold}
 #editor ul.records{margin:0;}
 #editor ul.records li{list-style:none;cursor:pointer;font-size:14px;font-weight:300;padding:.2em 1em;border-bottom:1px solid #f0f0f0;}
 #editor ul.records li:hover{background:#3f3f3f;color:#fff}

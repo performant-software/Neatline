@@ -13,9 +13,8 @@
 
 ?>
 
-<form id="search" class="form-search">
-  <div class="input-prepend">
-    <button type="submit" class="btn">Search</button>
-    <input type="text" class="span2 search-query" />
-  </div>
-</form>
+<div id="search" class="input-prepend">
+  <button class="btn search">Search</button>
+  <button class="btn mirror"><i class="icon-globe"></i></button>
+  <input type="text" class="span2" />
+</div>

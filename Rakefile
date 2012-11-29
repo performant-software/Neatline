@@ -33,6 +33,7 @@ task :build do
 
   # Paths.
   js = 'views/shared/javascripts'
+  css = 'views/shared/css'
   bs = js+'/components/bootstrap'
   ol = js+'/components/openlayers/build'
 
@@ -43,6 +44,9 @@ task :build do
   # Build Boostrap and OpenLayers.
   sh %{cd #{bs} && make bootstrap}
   sh %{cd #{ol} && python build.py full OpenLayers.js}
+
+  # Move Boostrap images.
+  sh %{cp -r #{bs}/img #{css}/img}
 
   # Application JavaScript.
   sh %{grunt min:neatline}

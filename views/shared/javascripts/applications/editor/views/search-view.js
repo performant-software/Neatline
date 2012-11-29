@@ -14,7 +14,7 @@ Editor.Views.Search = Backbone.View.extend({
 
   events: {
     'keyup input': 'keystroke',
-    'click button': 'search'
+    'click button.search': 'search'
   },
 
   /*
@@ -46,15 +46,14 @@ Editor.Views.Search = Backbone.View.extend({
    */
   search: function(e) {
 
-    // Block reload.
-    e.preventDefault();
-
+    // TODO|dev.
     // Set map mirroring.
-    Editor.global.mapMirror = this.query.mapMirror;
-    if (this.query.mapMirror) Editor.vent.trigger('search:mapMirror');
+    // Editor.global.mapMirror = this.query.mapMirror;
+    // if (this.query.mapMirror) Editor.vent.trigger('search:mapMirror');
 
-    // If not "map:", execute query normally.
-    else Editor.vent.trigger('search:query', this.query);
+    // Execute query.
+    Editor.vent.trigger('search:query', this.query);
+    console.log(this.query);
 
     // Update button
     this.updateStatus();
@@ -69,29 +68,30 @@ Editor.Views.Search = Backbone.View.extend({
   parseQuery: function() {
 
     this.query = {
-      mapMirror: false,
-      query: null
+      keywords: null,
+      tags: null
     };
 
     // Get the raw query.
     var value = this.input.val();
 
 
-    // Map mirroring:
-    // --------------
+    // Tags:
+    // -----
 
-    if (_.string.startsWith(value, 'map:')) {
-      this.query.mapMirror = true;
-      this.boldQuery();
+    if (_.string.startsWith(value, 'tags:')) {
+      var tags = _.string.strRight(value, 'tags:');
+      this.query.tags = _.string.trim(tags);
+      this.bold();
     }
 
 
-    // Normal keyword:
-    // ---------------
+    // Keywords:
+    // ---------
 
     else {
-      this.query = value;
-      this.unboldQuery();
+      this.query.keywords = value;
+      this.unbold();
     }
 
 
@@ -103,26 +103,8 @@ Editor.Views.Search = Backbone.View.extend({
    * @return void.
    */
   updateStatus: function() {
-    if (this.input.val() === '') this.setSearchInactive();
-    else this.setSearchActive();
-  },
-
-  /*
-   * Bold search query with structured format.
-   *
-   * @return void.
-   */
-  boldQuery: function() {
-    this.input.addClass('bold');
-  },
-
-  /*
-   * Un-bold search query with unstructured format.
-   *
-   * @return void.
-   */
-  unboldQuery: function() {
-    this.input.removeClass('bold');
+    if (this.input.val() === '') this.inactive();
+    else this.active();
   },
 
   /*
@@ -130,7 +112,7 @@ Editor.Views.Search = Backbone.View.extend({
    *
    * @return void.
    */
-  setSearchActive: function() {
+  active: function() {
     this.button.addClass('btn-primary');
   },
 
@@ -139,8 +121,26 @@ Editor.Views.Search = Backbone.View.extend({
    *
    * @return void.
    */
-  setSearchInactive: function() {
+  inactive: function() {
     this.button.removeClass('btn-primary');
+  },
+
+  /*
+   * Bold search query with structured format.
+   *
+   * @return void.
+   */
+  bold: function() {
+    this.input.addClass('bold');
+  },
+
+  /*
+   * Un-bold search query with unstructured format.
+   *
+   * @return void.
+   */
+  unbold: function() {
+    this.input.removeClass('bold');
   }
 
 });
