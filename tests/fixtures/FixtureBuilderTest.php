@@ -18,7 +18,7 @@ class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
     private $path_to_fixtures = null;
 
     /**
-     * Records JSON for map (Index response).
+     * Records JSON for map (INDEX and GET responses).
      *
      * @return void.
      */

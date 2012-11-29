@@ -52,12 +52,16 @@ class Neatline_Test_AppTestCase extends Omeka_Test_AppTestCase
 
         parent::tearDown();
 
-        // Truncate Neatline tables.
+        // Clear out testing data. Uses DELETE instead of TRUNCATE to
+        // maintain primary key incrementing among cases, which guarantees
+        // that Jasmine fixtures generated in separate cases will have
+        // unique `id`s.
+
         $p = $this->db->prefix;
-        $this->db->query("TRUNCATE TABLE `{$p}neatline_exhibits");
-        $this->db->query("TRUNCATE TABLE `{$p}neatline_records");
-        $this->db->query("TRUNCATE TABLE `{$p}neatline_tags");
-        $this->db->query("TRUNCATE TABLE `{$p}neatline_layers");
+        $this->db->query("DELETE FROM `{$p}neatline_exhibits` WHERE 1=1");
+        $this->db->query("DELETE FROM `{$p}neatline_records` WHERE 1=1");
+        $this->db->query("DELETE FROM `{$p}neatline_layers` WHERE 1=1");
+        $this->db->query("DELETE FROM `{$p}neatline_tags` WHERE 1=1");
 
     }
 
