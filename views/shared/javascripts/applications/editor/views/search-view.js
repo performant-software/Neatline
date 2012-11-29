@@ -13,8 +13,9 @@
 Editor.Views.Search = Backbone.View.extend({
 
   events: {
-    'keyup input': 'keystroke',
-    'click button.search': 'search'
+    'keyup input': 'onKeystroke',
+    'click button[name="search"]': 'executeSearch',
+    'click button[name="mirror"]': 'toggleMirrored'
   },
 
   /*
@@ -26,8 +27,23 @@ Editor.Views.Search = Backbone.View.extend({
 
     // UX.
     this.input = this.$el.find('input');
-    this.button = this.$el.find('button');
+    this.searchButton = this.$el.find('button[name="search"]');
+    this.mirrorButton = this.$el.find('button[name="mirror"]');
+    this.icon = this.mirrorButton.find('i');
 
+    // Trackers.
+    this.mirrored = false;
+
+  },
+
+  /*
+   * Execute search on `Enter`; otherwise, parse query.
+   *
+   * @return void.
+   */
+  onKeystroke: function(e) {
+    if (e.keyCode == 13) this.executeSearch();
+    else this.parseQuery();
   },
 
   /*
@@ -35,28 +51,48 @@ Editor.Views.Search = Backbone.View.extend({
    *
    * @return void.
    */
-  keystroke: function() {
+  executeSearch: function() {
     this.parseQuery();
+    Editor.vent.trigger('search:query', this.query);
+    this.updateSearchStatus();
+    console.log(this.query);
   },
 
   /*
-   * Execute search.
+   * Activate/deactivate map mirroring.
    *
    * @return void.
    */
-  search: function(e) {
+  toggleMirrored: function() {
 
-    // TODO|dev.
-    // Set map mirroring.
-    // Editor.global.mapMirror = this.query.mapMirror;
-    // if (this.query.mapMirror) Editor.vent.trigger('search:mapMirror');
+    // Activate.
+    if (!this.mirrored) {
 
-    // Execute query.
-    Editor.vent.trigger('search:query', this.query);
-    console.log(this.query);
+      // Publish, toggle button.
+      Editor.vent.trigger('search:mapMirror');
+      this.setMirroredActive();
 
-    // Update button
-    this.updateStatus();
+      // Set trackers.
+      Editor.global.mapMirror = true;
+      this.mirrored = true;
+
+    }
+
+    // Deactivate.
+    else {
+
+      // Revert to query.
+      this.parseQuery();
+      this.executeSearch();
+
+      // Toggle button.
+      this.setMirroredInactive();
+
+      // Set trackers.
+      Editor.global.mapMirror = true;
+      this.mirrored = true;
+
+    }
 
   },
 
@@ -82,7 +118,7 @@ Editor.Views.Search = Backbone.View.extend({
     if (_.string.startsWith(value, 'tags:')) {
       var tags = _.string.strRight(value, 'tags:');
       this.query.tags = _.string.trim(tags);
-      this.bold();
+      this.setInputBold();
     }
 
 
@@ -91,7 +127,7 @@ Editor.Views.Search = Backbone.View.extend({
 
     else {
       this.query.keywords = value;
-      this.unbold();
+      this.setInputUnbold();
     }
 
 
@@ -102,9 +138,9 @@ Editor.Views.Search = Backbone.View.extend({
    *
    * @return void.
    */
-  updateStatus: function() {
-    if (this.input.val() === '') this.inactive();
-    else this.active();
+  updateSearchStatus: function() {
+    if (this.input.val() === '') this.setSearchInactive();
+    else this.setSearchActive();
   },
 
   /*
@@ -112,8 +148,8 @@ Editor.Views.Search = Backbone.View.extend({
    *
    * @return void.
    */
-  active: function() {
-    this.button.addClass('btn-primary');
+  setSearchActive: function() {
+    this.searchButton.addClass('btn-primary');
   },
 
   /*
@@ -121,8 +157,28 @@ Editor.Views.Search = Backbone.View.extend({
    *
    * @return void.
    */
-  inactive: function() {
-    this.button.removeClass('btn-primary');
+  setSearchInactive: function() {
+    this.searchButton.removeClass('btn-primary');
+  },
+
+  /*
+   * Set mirror button active.
+   *
+   * @return void.
+   */
+  setMirroredActive: function() {
+    this.mirrorButton.addClass('btn-primary');
+    this.icon.addClass('icon-white');
+  },
+
+  /*
+   * Set mirror button inactive.
+   *
+   * @return void.
+   */
+  setMirroredInactive: function() {
+    this.mirrorButton.removeClass('btn-primary');
+    this.icon.removeClass('icon-white');
   },
 
   /*
@@ -130,7 +186,7 @@ Editor.Views.Search = Backbone.View.extend({
    *
    * @return void.
    */
-  bold: function() {
+  setInputBold: function() {
     this.input.addClass('bold');
   },
 
@@ -139,7 +195,7 @@ Editor.Views.Search = Backbone.View.extend({
    *
    * @return void.
    */
-  unbold: function() {
+  setInputUnbold: function() {
     this.input.removeClass('bold');
   }
 

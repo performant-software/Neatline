@@ -14,7 +14,7 @@
 ?>
 
 <div id="search" class="input-prepend">
-  <button class="btn search">Search</button>
-  <button class="btn mirror"><i class="icon-globe"></i></button>
+  <button name="search" class="btn">Search</button>
+  <button name="mirror" class="btn"><i class="icon-globe"></i></button>
   <input type="text" class="span2" />
 </div>
