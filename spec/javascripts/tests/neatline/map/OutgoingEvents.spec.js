@@ -165,26 +165,22 @@ describe('Map Outgoing Events', function() {
 
   it('should publish map move', function() {
 
-    // Spy on map:highlight.
-    spyOn(Neatline.vent, 'trigger');
+    // Spy on the event aggregator.
+    var spy = spyOn(Neatline.vent, 'trigger').andCallThrough();
 
     // Trigger pan.
     _t.map.map.events.triggerEvent('moveend');
-
-    // Check publication.
-    expect(Neatline.vent.trigger).toHaveBeenCalledWith('map:move', {
-      extent: _t.map.getExtentAsWKT(),
-      zoom: _t.map.getZoom()
-    });
-
-  });
-
-  it('should fetch new data on map move', function() {
-
-    // Trigger pan, inject changed data.
-    _t.map.map.events.triggerEvent('moveend');
     var request = _.last(server.requests);
     _t.respond200(request, jsonChangedData);
+
+    // Get extent and zoom.
+    var extent = _t.map.getExtentAsWKT();
+    var zoom = _t.map.getZoom();
+
+    // Check publication.
+    expect(spy.argsForCall[0][0]).toEqual('map:move');
+    expect(spy.argsForCall[0][1].extent).toEqual(extent);
+    expect(spy.argsForCall[0][1].zoom).toEqual(zoom);
 
     // Check geometry.
     layers = _t.getVectorLayers();

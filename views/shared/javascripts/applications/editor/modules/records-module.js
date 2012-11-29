@@ -37,7 +37,6 @@ Editor.Modules.Records = (function(Backbone, Editor, Neatline) {
 
     params = params || {};
     params.id = __exhibit.id;
-    console.log(params);
 
     // Get records.
     this.collection.fetch({
@@ -93,7 +92,6 @@ Editor.Modules.Records = (function(Backbone, Editor, Neatline) {
    */
   Neatline.vent.on('exhibit:newRecords', function(collection) {
     if (Editor.global.mapMirror && !Editor.global.formOpen) {
-      Records.collection = collection;
       Records.view.show(collection);
     }
   });
