@@ -47,6 +47,7 @@ _t.loadEditor = function() {
   this.layout = Editor.Modules.Layout.view;
   this.records = Editor.Modules.Records.view;
   this.form = Editor.Modules.Form.view;
+  this.search = Editor.Modules.Search.view;
 
   // Shortcut application components
   this.map = Neatline.Modules.Map.view;

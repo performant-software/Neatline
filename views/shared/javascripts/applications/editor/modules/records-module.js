@@ -37,6 +37,7 @@ Editor.Modules.Records = (function(Backbone, Editor, Neatline) {
 
     params = params || {};
     params.id = __exhibit.id;
+    console.log(params);
 
     // Get records.
     this.collection.fetch({

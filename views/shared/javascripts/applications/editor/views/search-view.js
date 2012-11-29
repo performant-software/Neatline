@@ -15,7 +15,8 @@ Editor.Views.Search = Backbone.View.extend({
   events: {
     'keyup input': 'onKeystroke',
     'click button[name="search"]': 'executeSearch',
-    'click button[name="mirror"]': 'toggleMirrored'
+    'click button[name="mirror"]': 'toggleMirroring',
+    'click button[name="cancel"]': 'reset'
   },
 
   /*
@@ -29,6 +30,7 @@ Editor.Views.Search = Backbone.View.extend({
     this.input = this.$el.find('input');
     this.searchButton = this.$el.find('button[name="search"]');
     this.mirrorButton = this.$el.find('button[name="mirror"]');
+    this.cancelButton = this.$el.find('button[name="cancel"]');
     this.icon = this.mirrorButton.find('i');
 
     // Trackers.
@@ -55,7 +57,6 @@ Editor.Views.Search = Backbone.View.extend({
     this.parseQuery();
     Editor.vent.trigger('search:query', this.query);
     this.updateSearchStatus();
-    console.log(this.query);
   },
 
   /*
@@ -63,36 +64,48 @@ Editor.Views.Search = Backbone.View.extend({
    *
    * @return void.
    */
-  toggleMirrored: function() {
+  toggleMirroring: function() {
+    if (!this.mirrored) this.enableMirroring();
+    else this.disableMirroring();
+  },
 
-    // Activate.
-    if (!this.mirrored) {
+  /*
+   * Activate map mirroring.
+   *
+   * @return void.
+   */
+  enableMirroring: function() {
 
-      // Publish, toggle button.
-      Editor.vent.trigger('search:mapMirror');
-      this.setMirroredActive();
+    // Publish, toggle button.
+    Editor.vent.trigger('search:mapMirror');
+    this.setMirroringEnabled();
+    this.setSearchInactive();
+    this.setSearchDisabled();
 
-      // Set trackers.
-      Editor.global.mapMirror = true;
-      this.mirrored = true;
+    // Set trackers.
+    Editor.global.mapMirror = true;
+    this.mirrored = true;
 
-    }
+  },
 
-    // Deactivate.
-    else {
+  /*
+   * Deactivate map mirroring.
+   *
+   * @return void.
+   */
+  disableMirroring: function() {
 
-      // Revert to query.
-      this.parseQuery();
-      this.executeSearch();
+    // Revert to query.
+    this.executeSearch();
 
-      // Toggle button.
-      this.setMirroredInactive();
+    // Toggle button.
+    this.setMirroringDisabled();
+    this.setSearchEnabled();
+    this.updateSearchStatus();
 
-      // Set trackers.
-      Editor.global.mapMirror = true;
-      this.mirrored = true;
-
-    }
+    // Set trackers.
+    Editor.global.mapMirror = false;
+    this.mirrored = false;
 
   },
 
@@ -134,6 +147,16 @@ Editor.Views.Search = Backbone.View.extend({
   },
 
   /*
+   * Disable mirroring, clear input, execute default query.
+   *
+   * @return void.
+   */
+  reset: function() {
+    this.input.val('');
+    this.disableMirroring();
+  },
+
+  /*
    * If input has a value, set button active.
    *
    * @return void.
@@ -162,11 +185,31 @@ Editor.Views.Search = Backbone.View.extend({
   },
 
   /*
+   * Set search button and input enabled.
+   *
+   * @return void.
+   */
+  setSearchEnabled: function() {
+    this.searchButton.removeAttr('disabled');
+    this.input.removeAttr('disabled');
+  },
+
+  /*
+   * Set search button and input disabled.
+   *
+   * @return void.
+   */
+  setSearchDisabled: function() {
+    this.searchButton.attr('disabled', 'disabled');
+    this.input.attr('disabled', 'disabled');
+  },
+
+  /*
    * Set mirror button active.
    *
    * @return void.
    */
-  setMirroredActive: function() {
+  setMirroringEnabled: function() {
     this.mirrorButton.addClass('btn-primary');
     this.icon.addClass('icon-white');
   },
@@ -176,7 +219,7 @@ Editor.Views.Search = Backbone.View.extend({
    *
    * @return void.
    */
-  setMirroredInactive: function() {
+  setMirroringDisabled: function() {
     this.mirrorButton.removeClass('btn-primary');
     this.icon.removeClass('icon-white');
   },
