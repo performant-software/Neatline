@@ -17,7 +17,10 @@ Neatline.Views.Map = Backbone.View.extend({
   },
 
   /*
-   * Start OpenLayers, publish starting position.
+   * ----------------------------------------------------------------------
+   * Initialize state variables, kick off the top-level start-up routine,
+   * and publish initial request for data.
+   * ----------------------------------------------------------------------
    *
    * @return void.
    */
@@ -34,7 +37,11 @@ Neatline.Views.Map = Backbone.View.extend({
   },
 
   /*
-   * Construct map.
+   * ----------------------------------------------------------------------
+   * Construct the OpenLayers Map instance, set the default base layer
+   * and call component start-up routines that add cursor controls, set
+   * the default focus/zoom, and listen for movement events.
+   * ----------------------------------------------------------------------
    *
    * @return void.
    */
@@ -70,7 +77,10 @@ Neatline.Views.Map = Backbone.View.extend({
   },
 
   /*
-   * Construct hover and click managers.
+   * ----------------------------------------------------------------------
+   * Add hover and click selectFeature controls to the map. `hoverControl`
+   * handles vector highlighting, `clickControl` handles vector clicks.
+   * ----------------------------------------------------------------------
    *
    * @return void.
    */
@@ -104,7 +114,9 @@ Neatline.Views.Map = Backbone.View.extend({
   },
 
   /*
-   * Activate default cursor controls.
+   * ----------------------------------------------------------------------
+   * Activate the hover and click controls.
+   * ----------------------------------------------------------------------
    *
    * @return void.
    */
@@ -114,7 +126,9 @@ Neatline.Views.Map = Backbone.View.extend({
   },
 
   /*
-   * Activate default cursor controls.
+   * ----------------------------------------------------------------------
+   * Deactivate the hover and click controls.
+   * ----------------------------------------------------------------------
    *
    * @return void.
    */
@@ -124,7 +138,11 @@ Neatline.Views.Map = Backbone.View.extend({
   },
 
   /*
-   * Update the layer collection for the cursor controls.
+   * ----------------------------------------------------------------------
+   * Update the layer collections operated on by the hover and click
+   * controls. This is called after new data arrives and the layer set has
+   * been rebuild by the `ingest` flow.
+   * ----------------------------------------------------------------------
    *
    * @return void.
    */
@@ -134,7 +152,12 @@ Neatline.Views.Map = Backbone.View.extend({
   },
 
   /*
-   * Set default focus and zoom.
+   * ----------------------------------------------------------------------
+   * Set the starting focus and zoom on the map. If `mapFocus` is non-null
+   * on the global __exhibit object, then a default focus and zoom has
+   * been set for the exhibit and should be manifested. If no default has
+   * been set, apply the default zoom option and geolocate the focus.
+   * ----------------------------------------------------------------------
    *
    * @return void.
    */
@@ -153,7 +176,11 @@ Neatline.Views.Map = Backbone.View.extend({
   },
 
   /*
-   * Listen for pan and zoom.
+   * ----------------------------------------------------------------------
+   * Add a listener for the `moveend` event on the map, which is called
+   * when a pan or zoom is completed. Bind to `publishPosition`, which
+   * emits the current focus of the map and triggers off a data reload.
+   * ----------------------------------------------------------------------
    *
    * @return void.
    */
@@ -167,7 +194,9 @@ Neatline.Views.Map = Backbone.View.extend({
   },
 
   /*
-   * Publish the current focus position.
+   * ----------------------------------------------------------------------
+   * Publish the current focus and zoom of the map via `map:move`.
+   * ----------------------------------------------------------------------
    *
    * @return void.
    */
@@ -182,7 +211,19 @@ Neatline.Views.Map = Backbone.View.extend({
   },
 
   /*
-   * Focus on a record model.
+   * ----------------------------------------------------------------------
+   * Focus the position and zoom level of the map to center around the
+   * geometries associated with the passed model instance.
+   *
+   * - If `map_active` is 0, break and do nothing.
+   *
+   * - If the model has a defined `map_focus` attribute, then we know that
+   *   a default position has been defined and can assume that `map_zoom`
+   *   also has a value. Set the viewport using these values.
+   *
+   * - Otherwise, fit the viewport around the data extent of the model's
+   *   geometries.
+   * ----------------------------------------------------------------------
    *
    * @param {Object} model: The record model.
    *
@@ -219,7 +260,10 @@ Neatline.Views.Map = Backbone.View.extend({
   },
 
   /*
-   * Set custom focus and zoom.
+   * ----------------------------------------------------------------------
+   * Set the focus and zoom of the map working from a comma-delimited lon/
+   * lat pair and the zoom level as an integer.
+   * ----------------------------------------------------------------------
    *
    * @param {String} focus: Comma-delimited lat/lon.
    * @param {Number} zoom: The zoom value.
@@ -234,12 +278,13 @@ Neatline.Views.Map = Backbone.View.extend({
 
     // Set center.
     this.map.setCenter(lonlat, zoom);
-    console.log(lonlat, zoom);
 
   },
 
   /*
-   * Focus map on user's location.
+   * ----------------------------------------------------------------------
+   * Focus the map on the user's browser location.
+   * ----------------------------------------------------------------------
    *
    * @return void.
    */
@@ -256,7 +301,15 @@ Neatline.Views.Map = Backbone.View.extend({
   },
 
   /*
-   * Ingest records.
+   * ----------------------------------------------------------------------
+   * The top-level point of entry when a new collection of models arrives.
+   * Records in the `frozen` array are left untouched.
+   *
+   * - Remove all records that are not included in the `frozen` array.
+   *
+   * - Then walk the new collection and construct new layers for models
+   *   that are active on the map and not in the `frozen` array.
+   * ----------------------------------------------------------------------
    *
    * @param {Object} records: The records collection.
    *
@@ -307,7 +360,9 @@ Neatline.Views.Map = Backbone.View.extend({
   },
 
   /*
-   * Ingest records.
+   * ----------------------------------------------------------------------
+   * Construct a vector layer and geometries for a model.
+   * ----------------------------------------------------------------------
    *
    * @param {Object} record: The record model.
    *
@@ -343,7 +398,10 @@ Neatline.Views.Map = Backbone.View.extend({
   },
 
   /*
-   * Construct style map for a record.
+   * ----------------------------------------------------------------------
+   * Construct a style map object for a vector. Used by `buildLayer` to
+   * populate the `styleMap` attribute for a model's vector layer.
+   * ----------------------------------------------------------------------
    *
    * @param {Object} record: The record.
    *
@@ -393,7 +451,9 @@ Neatline.Views.Map = Backbone.View.extend({
   },
 
   /*
-   * Get the map vector layer for the passed record model.
+   * ----------------------------------------------------------------------
+   * Return the map layer that corresponds the the passed model instance.
+   * ----------------------------------------------------------------------
    *
    * @param {Object} model: The record model.
    *
@@ -404,7 +464,9 @@ Neatline.Views.Map = Backbone.View.extend({
   },
 
   /*
+   * ----------------------------------------------------------------------
    * Get the current zoom level.
+   * ----------------------------------------------------------------------
    *
    * @return {Number}: The zoom level.
    */
@@ -413,7 +475,9 @@ Neatline.Views.Map = Backbone.View.extend({
   },
 
   /*
-   * Get the current map viewport as a WKT polygon string.
+   * ----------------------------------------------------------------------
+   * Get the current map viewport bounds as a WKT polygon string.
+   * ----------------------------------------------------------------------
    *
    * @return {String}: The WKT string.
    */
@@ -425,7 +489,10 @@ Neatline.Views.Map = Backbone.View.extend({
   },
 
   /*
-   * When a feature is selected.
+   * ----------------------------------------------------------------------
+   * When a feature is selected, publish `map:select` with the model
+   * instance that was used to construct the layer.
+   * ----------------------------------------------------------------------
    *
    * @param {Object|OpenLayers.Feature} feature: The feature.
    *
@@ -436,7 +503,10 @@ Neatline.Views.Map = Backbone.View.extend({
   },
 
   /*
-   * When a feature is unselected.
+   * ----------------------------------------------------------------------
+   * When a feature is unselected, publish `map:unselect` with the model
+   * instance that was used to construct the layer.
+   * ----------------------------------------------------------------------
    *
    * @param {Object|OpenLayers.Feature} feature: The feature.
    *
@@ -447,7 +517,10 @@ Neatline.Views.Map = Backbone.View.extend({
   },
 
   /*
-   * When a feature is highlighted.
+   * ----------------------------------------------------------------------
+   * When a feature is highlighted, publish `map:highlight` with the model
+   * instance that was used to construct the layer.
+   * ----------------------------------------------------------------------
    *
    * @param {Object} evt: The highlight event.
    *
@@ -458,7 +531,10 @@ Neatline.Views.Map = Backbone.View.extend({
   },
 
   /*
-   * When a feature is un-highlighted.
+   * ----------------------------------------------------------------------
+   * When a feature is un-highlighted, publish `map:unhighlight` with the
+   * model instance that was used to construct the layer.
+   * ----------------------------------------------------------------------
    *
    * @param {Object} evt: The unhighlight event.
    *
@@ -469,7 +545,9 @@ Neatline.Views.Map = Backbone.View.extend({
   },
 
   /*
-   * Freeze an id.
+   * ----------------------------------------------------------------------
+   * Add the passed record id to the `frozen` array.
+   * ----------------------------------------------------------------------
    *
    * @param {Number} id: The id to freeze.
    *
@@ -480,7 +558,9 @@ Neatline.Views.Map = Backbone.View.extend({
   },
 
   /*
-   * Unfreeze an id.
+   * ----------------------------------------------------------------------
+   * Remove the passed record id to the `frozen` array.
+   * ----------------------------------------------------------------------
    *
    * @param {Number} id: The id to unfreeze.
    *

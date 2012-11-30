@@ -41,8 +41,11 @@ _t.loadNeatline = function() {
   // Inject default records fixtures.
   this.respondAll200(this.json);
 
-  // Shortcut components
-  this.mapView = Neatline.Modules.Map.view;
+  // Views.
+  this.mapView =      Neatline.Modules.Map.view;
+
+  // Collections.
+  this.recordsColl =  Editor.Modules.Records.collection;
 
 };
 
@@ -97,12 +100,14 @@ _t.loadJsonFixtures = function() {
   this.json = readFixtures('records.json');
   this.removedRecord2Json = readFixtures('records-removed-record.json');
   this.updatedRecord2Json = readFixtures('records-changed-data.json');
+  this.recordJson = readFixtures('record.json');
+  this.recordInactiveJson = readFixtures('record-inactive.json');
 };
 
 /*
  * Get DOM collection of editor record listings.
  *
- * @return void.
+ * @return {Array}: The DOM collection of <li> elements.
  */
 _t.getRecordRows = function() {
   return this.recordsView.$el.find('.record-row');
@@ -111,7 +116,7 @@ _t.getRecordRows = function() {
 /*
  * Get vector layers on the map.
  *
- * @return void.
+ * @return {Array}: The layers.
  */
 _t.getVectorLayers = function() {
 
@@ -129,7 +134,7 @@ _t.getVectorLayers = function() {
  *
  * @param {String} title: The record title.
  *
- * @return void.
+ * @return {Object}: The layer.
  */
 _t.getVectorLayerByTitle = function(title) {
 
@@ -141,6 +146,17 @@ _t.getVectorLayerByTitle = function(title) {
     return layer.name == title;
   });
 
+};
+
+/*
+ * Construct a record model instance from a JSON string.
+ *
+ * @param {String} json: The JSON string.
+ *
+ * @return {Object} model: The model.
+ */
+_t.buildModelFromJson = function(json) {
+  return new Neatline.Models.Record(JSON.parse(json));
 };
 
 /*
@@ -183,10 +199,12 @@ _t.respondAll200 = function(response) {
  *
  * @param {Object} response: The response body.
  *
- * @return void.
+ * @return {Object} response: The last request.
  */
 _t.respondLast200 = function(response) {
-  this.respond200(_.last(this.server.requests), response);
+  var request = _.last(this.server.requests);
+  this.respond200(request, response);
+  return request;
 };
 
 /*
