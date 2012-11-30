@@ -25,13 +25,24 @@ _t = {};
  */
 _t.loadNeatline = function() {
 
+  // Load partial.
+  loadFixtures('editor-partial.html');
+
+  // Load JSON fixtures.
+  this.loadJsonFixtures();
+
+  // Mock the server.
+  this.server = sinon.fakeServer.create();
+
   // Restart application.
   Neatline.initCallbacks.reset();
   Neatline.start();
 
+  // Inject default records fixtures.
+  this.respondAll200(this.json);
+
   // Shortcut components
-  this.map = Neatline.Modules.Map.view;
-  this.records = Neatline.Modules.Map.collection;
+  this.mapView = Neatline.Modules.Map.view;
 
 };
 
@@ -42,9 +53,11 @@ _t.loadNeatline = function() {
  */
 _t.loadEditor = function() {
 
-  // Load partial and JSON fixture.
+  // Load partial.
   loadFixtures('editor-partial.html');
-  var json = readFixtures('records.json');
+
+  // Load JSON fixtures.
+  this.loadJsonFixtures();
 
   // Mock the server.
   this.server = sinon.fakeServer.create();
@@ -55,7 +68,7 @@ _t.loadEditor = function() {
   Editor.start();
 
   // Inject default records fixtures.
-  this.respondAll200(json);
+  this.respondAll200(this.json);
 
   // Views.
   this.layoutView =   Editor.Modules.Layout.view;
@@ -80,6 +93,17 @@ _t.loadEditor = function() {
  *
  * @return void.
  */
+_t.loadJsonFixtures = function() {
+  this.json = readFixtures('records.json');
+  this.removedRecord2Json = readFixtures('records-removed-record.json');
+  this.updatedRecord2Json = readFixtures('records-changed-data.json');
+};
+
+/*
+ * Get DOM collection of editor record listings.
+ *
+ * @return void.
+ */
 _t.getRecordRows = function() {
   return this.recordsView.$el.find('.record-row');
 };
@@ -96,6 +120,25 @@ _t.getVectorLayers = function() {
     test: function(prop) {
       return !_.isUndefined(prop) && prop.length > 0;
     }
+  });
+
+};
+
+/*
+ * Get the vector layer by record title.
+ *
+ * @param {String} title: The record title.
+ *
+ * @return void.
+ */
+_t.getVectorLayerByTitle = function(title) {
+
+  // Get map layers.
+  var layers = this.getVectorLayers();
+
+  // Search layers for title.
+  return _.find(layers, function(layer) {
+    return layer.name == title;
   });
 
 };

@@ -103,7 +103,7 @@ class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
 
         $record1->save('POINT(1 2)');
         $record2->save('POINT(3 4)');
-        $record3->save('POINT(4 5)');
+        $record3->save('POINT(5 6)');
 
         // Generate the fixture.
         $this->request->setQuery(array('id' => $exhibit->id));
@@ -113,7 +113,7 @@ class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
         // Case 2: Data for record 2 has changed.
         // --------------------------------------
 
-        $record2->save('POINT(6 7)');
+        $record2->save('POINT(7 8)');
 
         // Generate the fixture.
         $this->resetResponse();

@@ -1,5 +1,5 @@
 
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2; */
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
  * Tests for map data manifestation.
@@ -12,34 +12,25 @@
 
 describe('Map Data Rendering', function() {
 
-  var server, layers;
+  var layers, layer;
 
-  // Load AJAX fixtures.
-  var json = readFixtures('records.json');
-  var jsonChangedData = readFixtures('records-changed-data.json');
-  var jsonRemovedData = readFixtures('records-removed-record.json');
-
-  // Get fixtures.
+  // Start Neatline.
   beforeEach(function() {
 
-    // Load partial, mock server.
-    loadFixtures('neatline-partial.html');
-    server = sinon.fakeServer.create();
-
-    // Run Neatline.
     _t.loadNeatline();
 
-    // Intercept requests.
-    _.each(server.requests, function(r) {
-      _t.respond200(r, json);
-    });
-
     // Get layers.
-    layers = _t.getVectorLayers(); layer = layers[0];
+    layers = _t.getVectorLayers();
+    layer = layers[0];
 
   });
 
   it('should render features for map-active models', function() {
+
+    // --------------------------------------------------------------------
+    // When the exhibit starts up, the map should render vector geometry
+    // for all models that are set to active with `map_active`.
+    // --------------------------------------------------------------------
 
     // Check geometry.
     expect(layers.length).toEqual(2);
@@ -50,75 +41,119 @@ describe('Map Data Rendering', function() {
 
   });
 
-  it('should not change data for frozen record', function() {
+  it('should update data for unfrozen record', function() {
+
+    // --------------------------------------------------------------------
+    // When a new set of records is ingested (for example, in response to
+    // a pan or zoom event on the map) and the data for an unfrozen record
+    // has been changed, the new data should be rendered.
+    // --------------------------------------------------------------------
 
     // Get Record 2 layer.
-    var record2Layer = _.find(layers, function(layer) {
-      return layer.name == 'Record 2';
-    });
+    var record2Layer = _t.getVectorLayerByTitle('Record 2');
 
-    // Add a new point to the layer.
-    var pt = new OpenLayers.Geometry.Point(8,9);
-    var feature = new OpenLayers.Feature.Vector(pt);
-    record2Layer.addFeatures([feature]);
-
-    // Set frozen.
-    _t.map.freeze(record2Layer.nId);
-
-    // Trigger a map move, inject fixture.
-    _t.map.map.events.triggerEvent('moveend');
-    var request = _.last(server.requests);
-    _t.respond200(request, jsonChangedData);
-
-    // Get the new layer for record 2
-    var newLayers = _t.getVectorLayers();
-    record2Layer = _.find(newLayers, function(layer) {
-      return layer.name == 'Record 2';
-    });
-
-    // Check geometry.
+    // At start, 1 point at POINT(3 4).
+    expect(record2Layer.features.length).toEqual(1);
     expect(record2Layer.features[0].geometry.x).toEqual(3);
     expect(record2Layer.features[0].geometry.y).toEqual(4);
-    expect(record2Layer.features[1].geometry.x).toEqual(8);
-    expect(record2Layer.features[1].geometry.y).toEqual(9);
+
+    // Trigger a map move, inject updated data.
+    _t.refreshMap(_t.updatedRecord2Json);
+
+    // Get the new layer for record 2
+    record2Layer = _t.getVectorLayerByTitle('Record 2');
+
+    // Geometry should be changed.
+    expect(record2Layer.features.length).toEqual(1);
+    expect(record2Layer.features[0].geometry.x).toEqual(7);
+    expect(record2Layer.features[0].geometry.y).toEqual(8);
+
+  });
+
+  it('should remove data for unfrozen record', function() {
+
+    // --------------------------------------------------------------------
+    // When a new set of records is ingested (for example, in response to
+    // a pan or zoom event on the map) and record that is currently on the
+    // map is absent from the new records collection, the layer for the
+    // record should be removed.
+    // --------------------------------------------------------------------
+
+    // At start, Record 2 layer exists.
+    expect(_t.getVectorLayerByTitle('Record 2')).toBeDefined();
+
+    // Trigger a map move, inject data without Record 2.
+    _t.refreshMap(_t.removedRecord2Json);
+
+    // Record 2 layer no longer exists.
+    expect(_t.getVectorLayerByTitle('Record 2')).toBeUndefined();
+
+  });
+
+  it('should not change data for frozen record', function() {
+
+    // --------------------------------------------------------------------
+    // When a record is set to frozen (for example, when the edit form for
+    // the record is open in the editor), the layer for the record should
+    // not be rebuilt when new data is requested and ingested on the map
+    // in response to a pan or zoom event. This is to prevent new, unsaved
+    // changes to the geometry from being overwritten by the old data.
+    // --------------------------------------------------------------------
+
+    // Get Record 2 layer, add new point.
+    var record2Layer = _t.getVectorLayerByTitle('Record 2');
+    var point = new OpenLayers.Geometry.Point(9,10);
+    var feature = new OpenLayers.Feature.Vector(point);
+    record2Layer.addFeatures([feature]);
+
+    // Set Record 2 frozen.
+    _t.mapView.freeze(record2Layer.nId);
+
+    // Trigger a map move.
+    _t.refreshMap(_t.json);
+
+    // Get the new layer for record 2
+    record2Layer = _t.getVectorLayerByTitle('Record 2');
+
+    // Geometry should be unchanged.
+    expect(record2Layer.features[0].geometry.x).toEqual(3);
+    expect(record2Layer.features[0].geometry.y).toEqual(4);
+    expect(record2Layer.features[1].geometry.x).toEqual(9);
+    expect(record2Layer.features[1].geometry.y).toEqual(10);
 
   });
 
   it('should not remove data for frozen record', function() {
 
-    // Get Record 2 layer.
-    var record2Layer = _.find(layers, function(layer) {
-      return layer.name == 'Record 2';
-    });
+    // --------------------------------------------------------------------
+    // When a record is set to frozen (for example, when the edit form for
+    // the record is open in the editor), the layer for the record should
+    // not be removed if a new data set is ingested in which the record is
+    // absent. This is to prevent new, unsaved changes to the geometry
+    // from being lost when the map is moved.
+    // --------------------------------------------------------------------
 
-    // Add a new point to the layer.
-    var pt = new OpenLayers.Geometry.Point(8,9);
-    var feature = new OpenLayers.Feature.Vector(pt);
-    record2Layer.addFeatures([feature]);
+    // At start, Record 2 layer exists.
+    var record2Layer = _t.getVectorLayerByTitle('Record 2');
+    expect(record2Layer).toBeDefined();
 
-    // Set frozen.
-    _t.map.freeze(record2Layer.nId);
+    // Set Record 2 frozen.
+    _t.mapView.freeze(record2Layer.nId);
 
-    // Trigger a map move, inject fixture.
-    _t.map.map.events.triggerEvent('moveend');
-    var request = _.last(server.requests);
-    _t.respond200(request, jsonRemovedData);
+    // Trigger a map move, inject data without Record 2.
+    _t.refreshMap(_t.removedRecord2Json);
 
-    // Get the new layer for record 2
-    var newLayers = _t.getVectorLayers();
-    record2Layer = _.find(newLayers, function(layer) {
-      return layer.name == 'Record 2';
-    });
-
-    // Check geometry.
-    expect(record2Layer.features[0].geometry.x).toEqual(3);
-    expect(record2Layer.features[0].geometry.y).toEqual(4);
-    expect(record2Layer.features[1].geometry.x).toEqual(8);
-    expect(record2Layer.features[1].geometry.y).toEqual(9);
+    // Record 2 layer still exists.
+    expect(_t.getVectorLayerByTitle('Record 2')).toBeDefined();
 
   });
 
   it('should render styles', function() {
+
+    // --------------------------------------------------------------------
+    // The map should construct layers for vectors with properly formed
+    // style maps that manifest the values in the record models.
+    // --------------------------------------------------------------------
 
     /*
      * Default:

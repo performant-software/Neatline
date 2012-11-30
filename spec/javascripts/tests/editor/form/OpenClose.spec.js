@@ -15,8 +15,6 @@ describe('Form Open/Close', function() {
   var recordRows, mapLayers, models, feature1, feature2;
 
   // Load AJAX fixtures.
-  var noRecord2Json = readFixtures('records-removed-record.json');
-
   // Start editor.
   beforeEach(function() {
 
@@ -88,7 +86,7 @@ describe('Form Open/Close', function() {
     // --------------------------------------------------------------------
 
     // Load map without Record 2.
-    _t.refreshMap(noRecord2Json);
+    _t.refreshMap(_t.removedRecord2Json);
 
     // Just 1 layer on the map.
     expect(_t.mapView.layers.length).toEqual(1);

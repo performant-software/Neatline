@@ -18,7 +18,7 @@ describe('Form Data I/O', function() {
     _t.loadEditor();
 
     // Open form.
-    var recordRows = _t.recordsView.$el.find('.record-row');
+    var recordRows = _t.getRecordRows();
     $(recordRows[0]).trigger('click');
 
   });
