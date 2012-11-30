@@ -17,7 +17,7 @@ describe('Form Open/Close', function() {
   // Load AJAX fixtures.
   var noRecord2Json = readFixtures('records-removed-record.json');
 
-  // Get fixtures.
+  // Start editor.
   beforeEach(function() {
 
     _t.loadEditor();

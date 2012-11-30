@@ -12,7 +12,7 @@
 
 describe('Form Data I/O', function() {
 
-  // Get fixtures.
+  // Start editor.
   beforeEach(function() {
 
     _t.loadEditor();
