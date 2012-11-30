@@ -76,6 +76,15 @@ _t.loadEditor = function() {
 // --------
 
 /*
+ * Get DOM collection of editor record listings.
+ *
+ * @return void.
+ */
+_t.getRecordRows = function() {
+  return this.recordsView.$el.find('.record-row');
+};
+
+/*
  * Get vector layers on the map.
  *
  * @return void.
@@ -124,4 +133,36 @@ _t.respondAll200 = function(response) {
   _.each(this.server.requests, _.bind(function(r) {
     this.respond200(r, response);
   }, this));
+};
+
+/*
+ * Respond to the last AJAX call.
+ *
+ * @param {Object} response: The response body.
+ *
+ * @return void.
+ */
+_t.respondLast200 = function(response) {
+  this.respond200(_.last(this.server.requests), response);
+};
+
+/*
+ * Trigger a pan/zoom event on the map.
+ *
+ * @return void.
+ */
+_t.triggerMapMove = function() {
+  _t.mapView.map.events.triggerEvent('moveend');
+};
+
+/*
+ * Simulate map move event and plug in JSON fixture.
+ *
+ * @param {Object} response: The response body.
+ *
+ * @return void.
+ */
+_t.refreshMap = function(response) {
+  _t.triggerMapMove();
+  _t.respondLast200(response);
 };

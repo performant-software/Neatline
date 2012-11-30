@@ -18,8 +18,8 @@ describe('Form Data I/O', function() {
     _t.loadEditor();
 
     // Open form.
-    var records = _t.recordsView.$el.find('.record-row');
-    $(records[0]).trigger('click');
+    var recordRows = _t.recordsView.$el.find('.record-row');
+    $(recordRows[0]).trigger('click');
 
   });
 
