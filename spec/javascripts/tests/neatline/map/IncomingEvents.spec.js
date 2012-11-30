@@ -100,7 +100,7 @@ describe('Map Incoming Events', function() {
 
     });
 
-    it('should not create layer for absent inactive model', function() {
+    it('should not create layer for absent inactive, model', function() {
 
       var done = false;
 
@@ -117,7 +117,8 @@ describe('Map Incoming Events', function() {
       Neatline.vent.trigger('map:focusById', id+1);
 
       // Plug in the fixture.
-      _t.respond200(_.last(server.requests), jsonRecordInactive);
+      var request = _.last(server.requests);
+      _t.respond200(request, jsonRecordInactive);
 
       waitsFor(function() {
         return done;

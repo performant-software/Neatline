@@ -178,7 +178,7 @@ describe('Records Search', function() {
 
     });
 
-    it('should update with map when mirroring is enabled', function() {
+    it('should propagate map collection when mirroring is enabled', function() {
 
       // Trigger a map move, inject new data.
       _t.map.map.events.triggerEvent('moveend');
@@ -216,6 +216,11 @@ describe('Records Search', function() {
       // Open form.
       var records = _t.records.$el.find('.record-row');
       $(records[0]).trigger('click');
+
+      // Trigger a map move, inject new data.
+      _t.map.map.events.triggerEvent('moveend');
+      var request = _.last(server.requests);
+      _t.respond200(request, jsonRemovedData);
 
       // Check for form and no records.
       expect(editor).toContain(_t.form.form);
