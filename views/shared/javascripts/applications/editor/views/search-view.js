@@ -139,7 +139,7 @@ Editor.Views.Search = Backbone.View.extend({
     // ---------
 
     else {
-      this.query.keywords = value;
+      this.query.keywords = (value !== '') ? value : null;
       this.setInputUnbold();
     }
 

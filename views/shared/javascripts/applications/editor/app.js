@@ -26,6 +26,14 @@ Editor.Views = {};
 // Application events.
 // -------------------
 
+// Initialize application globals.
+Editor.on('initialize:before', function() {
+  Editor.global = {
+    formOpen:   false,
+    mapMirror:  false
+  };
+});
+
 // Start Neatline after editor.
 Editor.on('initialize:after', function() {
   Neatline.start();
@@ -35,13 +43,3 @@ Editor.on('initialize:after', function() {
 Neatline.on('initialize:after', function() {
   Editor.Modules.Geometry.init();
 });
-
-
-// --------------------
-// Application globals.
-// --------------------
-
-Editor.global = {
-  formOpen:   false,
-  mapMirror:  false
-};

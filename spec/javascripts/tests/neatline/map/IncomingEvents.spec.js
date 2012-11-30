@@ -94,7 +94,7 @@ describe('Map Incoming Events', function() {
 
       // Check for new layer.
       layers = _t.getVectorLayers();
-      expect(_t.map.layers.length).toEqual(3);
+      expect(layers.length).toEqual(3);
       expect(layers[2].features[0].geometry.x).toEqual(6);
       expect(layers[2].features[0].geometry.y).toEqual(7);
 
@@ -125,7 +125,7 @@ describe('Map Incoming Events', function() {
 
       // Check for new layer.
       layers = _t.getVectorLayers();
-      expect(_t.map.layers.length).toEqual(2);
+      expect(layers.length).toEqual(2);
 
     });
 
@@ -184,13 +184,13 @@ describe('Map Incoming Events', function() {
 
       // Check for new layer.
       layers = _t.getVectorLayers();
-      expect(_t.map.layers.length).toEqual(3);
+      expect(layers.length).toEqual(3);
       expect(layers[2].features[0].geometry.x).toEqual(6);
       expect(layers[2].features[0].geometry.y).toEqual(7);
 
     });
 
-    it('should not create layer for absent inactive model', function() {
+    it('should not create layer for absent, inactive model', function() {
 
       var done = false;
 
@@ -208,15 +208,16 @@ describe('Map Incoming Events', function() {
       Neatline.vent.trigger('map:focusByModel', model);
 
       // Plug in the fixture.
-      _t.respond200(_.last(server.requests), jsonRecordInactive);
+      var request = _.last(server.requests);
+      _t.respond200(request, jsonRecordInactive);
 
       waitsFor(function() {
         return done;
       });
 
-      // Check for new layer.
+      // Check for no new layer.
       layers = _t.getVectorLayers();
-      expect(_t.map.layers.length).toEqual(2);
+      expect(layers.length).toEqual(2);
 
     });
 

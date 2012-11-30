@@ -59,7 +59,15 @@ Editor.Modules.Records = (function(Backbone, Editor, Neatline) {
    * @return void.
    */
   Editor.vent.on('form:close', function() {
-    Records.view.show(Records.collection);
+
+    // Render map records if mirroring is enabled.
+    if (Editor.global.mapMirror) {
+      Records.view.show(Neatline.Modules.Map.collection);
+    }
+
+    // Otherwise, render local collection.
+    else Records.view.show(Records.collection);
+
   });
 
   /*
@@ -83,17 +91,19 @@ Editor.Modules.Records = (function(Backbone, Editor, Neatline) {
   });
 
   /*
-   * When map mirror is active, render new map record collections
-   * in the editor.
+   * Render new map record collections in the editor.
    *
    * @param {Object} collection: The new map records.
    *
    * @return void.
    */
   Neatline.vent.on('exhibit:newRecords', function(collection) {
+
+    // Block if mapMirror is disabled or a form is open.
     if (Editor.global.mapMirror && !Editor.global.formOpen) {
       Records.view.show(collection);
     }
+
   });
 
 
