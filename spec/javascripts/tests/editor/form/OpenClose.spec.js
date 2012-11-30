@@ -106,31 +106,62 @@ describe('Form Open/Close', function() {
 
   it('should show the "Text" tab on first form open', function() {
 
+    // --------------------------------------------------------------------
+    // When a form is opened for the first time in an editing session, the
+    // "Text" tab should be activated by default.
+    // --------------------------------------------------------------------
+
     // Open form.
     $(recordRows[0]).trigger('click');
 
     // Check for visible "Text."
     expect($('#form-text')).toHaveClass('active');
 
-    // Invisible "Spatial" and "Style."
+    // "Spatial" and "Style" should be invisible.
     expect($('#form-spatial')).not.toHaveClass('active');
+    expect($('#form-style')).not.toHaveClass('active');
+
+  });
+
+  it('should retain tab state after first form open', function() {
+
+    // --------------------------------------------------------------------
+    // If a given tab (eg, "Spatial") is selected when the form is closed,
+    // that same tab should still be selected when the form is re-opened.
+    // --------------------------------------------------------------------
+
+    // Open Record 1 form.
+    $(recordRows[0]).trigger('click');
+
+    // Select "Spatial" tab.
+    $('a[href="#form-spatial"]').tab('show');
+
+    // Close Record 1 form.
+    $(_t.formView.closeButton).trigger('click');
+
+    // Open Record 2.
+    recordRows = _t.getRecordRows();
+    $(recordRows[1]).trigger('click');
+
+    // "Spatial" should still be visible.
+    expect($('#form-spatial')).toHaveClass('active');
+
+    // "Text" and "Style" should be invisible.
+    expect($('#form-text')).not.toHaveClass('active');
     expect($('#form-style')).not.toHaveClass('active');
 
   });
 
   it('should show form when a map feature is clicked', function() {
 
-    // Clobber getFeaturesFromEvent().
-    mapLayers[0].getFeatureFromEvent = function(evt) { return feature1; };
-
-    // Mock cursor event.
-    var evt = {
-      xy: new OpenLayers.Pixel(Math.random(), Math.random()),
-      type: 'click'
-    };
+    // --------------------------------------------------------------------
+    // When a vector geometry on the map is clicked and an edit form isn't
+    // already open, the edit form that corresponds to the geometry should
+    // be displayed in the left pane.
+    // --------------------------------------------------------------------
 
     // Trigger click.
-    _t.mapView.map.events.triggerEvent('click', evt);
+    _t.clickOnMapFeature(mapLayers[0], feature1);
 
     // Check for form.
     expect(_t.recordsView.$el).toContain(_t.formView.form);
@@ -141,39 +172,41 @@ describe('Form Open/Close', function() {
 
   it('should not open new form in response to map click', function() {
 
-    // Mock feature1 click.
-    mapLayers[0].getFeatureFromEvent = function(evt) { return feature1; };
+    // --------------------------------------------------------------------
+    // When an edit form is already open, clicking on a map feature that
+    // corresponds to a different model from the one bound to the form
+    // should _not_ open the new form. This makes it impossible to
+    // accidentally switch to another edit form by clicking on a feature
+    // that belongs to a different record while drawing shapes in close
+    // proximity to other vectors.
+    // --------------------------------------------------------------------
 
-    // Mock cursor event.
-    var evt = {
-      xy: new OpenLayers.Pixel(Math.random(), Math.random()),
-      type: 'click'
-    };
-
-    // Trigger click.
-    _t.mapView.map.events.triggerEvent('click', evt);
+    // Trigger click on Record 1 feature.
+    _t.clickOnMapFeature(mapLayers[0], feature1);
 
     // Check for form.
     expect(_t.recordsView.$el).toContain(_t.formView.form);
     expect(_t.recordsView.$el).not.toContain(_t.recordsView.ul);
     expect(_t.formView.model.get('title')).toEqual('Record 1');
 
-    // Mock feature2 click.
-    mapLayers[0].getFeatureFromEvent = function(evt) { return feature2; };
+    // Trigger click on Record 2 feature.
+    _t.clickOnMapFeature(mapLayers[0], feature2);
 
-    // Trigger click.
-    _t.mapView.map.events.triggerEvent('click', evt);
-
-    // Check for unchanged.
+    // Check for unchanged form.
     expect(_t.formView.model.get('title')).toEqual('Record 1');
 
   });
 
-  it('should focus the map when the form is opened via editor', function() {
+  it('should focus map when the form is opened via editor', function() {
+
+    // --------------------------------------------------------------------
+    // When an edit form is opened by way of the records pane (when the
+    // user clicks on one of the listings), the map should focus on the
+    // geometry vectors for that record.
+    // --------------------------------------------------------------------
 
     // Set center and zoom.
-    var lonlat = new OpenLayers.LonLat(200, 300);
-    _t.mapView.map.setCenter(lonlat, 15);
+    _t.setMapCenter(200, 300, 15);
 
     // Click on record listing.
     $(recordRows[0]).trigger('click');
@@ -189,23 +222,21 @@ describe('Form Open/Close', function() {
 
   });
 
-  it('should not focus the map when the form is opened via map', function() {
+  it('should not focus map when the form is opened via map', function() {
+
+    // --------------------------------------------------------------------
+    // When the user clicks on a map vector to open an edit form, the map
+    // should _not_ jump to the default focus position for the record that
+    // corresponds to the clicked geometry. This to prevent lurching,
+    // disorienting leaps that can occur when the default zoom for the
+    // clicked record is much wider or tighter than the current map zoom.
+    // --------------------------------------------------------------------
 
     // Set center and zoom.
-    var lonlat = new OpenLayers.LonLat(200, 300);
-    _t.mapView.map.setCenter(lonlat, 15);
+    _t.setMapCenter(200, 300, 15);
 
-    // Mock feature1 click.
-    mapLayers[0].getFeatureFromEvent = function(evt) { return feature1; };
-
-    // Mock cursor event.
-    var evt = {
-      xy: new OpenLayers.Pixel(Math.random(), Math.random()),
-      type: 'click'
-    };
-
-    // Trigger click.
-    _t.mapView.map.events.triggerEvent('click', evt);
+    // Trigger click on Record 1 feature.
+    _t.clickOnMapFeature(mapLayers[0], feature1);
 
     // Get focus and zoom.
     var center = _t.mapView.map.getCenter();
@@ -220,14 +251,24 @@ describe('Form Open/Close', function() {
 
   it('should freeze edit layer when form opened via editor', function() {
 
+    // --------------------------------------------------------------------
+    // When an edit form for a record is opened by clicking on the record
+    // listing in the left pane, the record id should be added to the
+    // `frozen` array on the map view. This prevents the layer for the
+    // record from being remove, replaced, or changed when new map data is
+    // ingested after a map move, which would have the effect of removing
+    // the layer instance with the editing controls and clearing out
+    // unsaved changes/additions to the geometry.
+    // --------------------------------------------------------------------
+
     // By default, frozen empty.
     expect(_t.mapView.frozen).toEqual([]);
 
-    // Show form, check frozen.
+    // Show form, check `frozen`.
     $(recordRows[0]).trigger('click');
     expect(_t.mapView.frozen).toEqual([models[0].get('id')]);
 
-    // Close, check frozen.
+    // Close, check `frozen` empty.
     $(_t.formView.closeButton).trigger('click');
     expect(_t.mapView.frozen).toEqual([]);
 
@@ -235,29 +276,30 @@ describe('Form Open/Close', function() {
 
   it('should freeze edit layer when form opened via map', function() {
 
-    // Clobber getFeaturesFromEvent().
-    mapLayers[0].getFeatureFromEvent = function(evt) { return feature1; };
+    // --------------------------------------------------------------------
+    // When a form is opened by clicking on a map feature, the id of the
+    // record should be added to the `frozen` array (see above).
+    // --------------------------------------------------------------------
 
-    // Mock cursor event.
-    var evt = {
-      xy: new OpenLayers.Pixel(Math.random(), Math.random()),
-      type: 'click'
-    };
+    // Trigger click on Record 1 feature.
+    _t.clickOnMapFeature(mapLayers[0], feature1);
 
-    // By default, frozen empty.
-    expect(_t.mapView.frozen).toEqual([]);
-
-    // Show form, check frozen.
-    _t.mapView.map.events.triggerEvent('click', evt);
+    // Check `frozen`.
     expect(_t.mapView.frozen).toEqual([models[0].get('id')]);
 
-    // Close, check frozen.
+    // Close, check `frozen` empty.
     $(_t.formView.closeButton).trigger('click');
     expect(_t.mapView.frozen).toEqual([]);
 
   });
 
-  it('should default to "Navigate" mode on open', function() {
+  it('should default to "Navigate" edit mode when opened', function() {
+
+    // --------------------------------------------------------------------
+    // The "Edit Geometry" controls should always revert to the default
+    // "Navigate" mode when a form is opened, regardless of what the state
+    // of the form was when it was last closed.
+    // --------------------------------------------------------------------
 
     // Show form, check mode.
     $(recordRows[0]).trigger('click');

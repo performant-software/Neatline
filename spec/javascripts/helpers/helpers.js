@@ -57,16 +57,16 @@ _t.loadEditor = function() {
   // Inject default records fixtures.
   this.respondAll200(json);
 
-  // Shortcut views.
-  this.layoutView = Editor.Modules.Layout.view;
-  this.recordsView = Editor.Modules.Records.view;
-  this.formView = Editor.Modules.Form.view;
-  this.searchView = Editor.Modules.Search.view;
-  this.mapView = Neatline.Modules.Map.view;
+  // Views.
+  this.layoutView =   Editor.Modules.Layout.view;
+  this.recordsView =  Editor.Modules.Records.view;
+  this.formView =     Editor.Modules.Form.view;
+  this.searchView =   Editor.Modules.Search.view;
+  this.mapView =      Neatline.Modules.Map.view;
 
-  // Shortcut collections.
-  this.recordsColl = Editor.Modules.Records.collection;
-  this.mapColl = Neatline.Modules.Map.collection;
+  // Collections.
+  this.recordsColl =  Editor.Modules.Records.collection;
+  this.mapColl =      Neatline.Modules.Map.collection;
 
 };
 
@@ -152,7 +152,7 @@ _t.respondLast200 = function(response) {
  * @return void.
  */
 _t.triggerMapMove = function() {
-  _t.mapView.map.events.triggerEvent('moveend');
+  this.mapView.map.events.triggerEvent('moveend');
 };
 
 /*
@@ -163,6 +163,46 @@ _t.triggerMapMove = function() {
  * @return void.
  */
 _t.refreshMap = function(response) {
-  _t.triggerMapMove();
-  _t.respondLast200(response);
+  this.triggerMapMove();
+  this.respondLast200(response);
+};
+
+/*
+ * Simulate a click on a map feature.
+ *
+ * @param {Object} layer: The feature parent layer.
+ * @param {Object} feature: The feature to be clicked on.
+ *
+ * @return void.
+ */
+_t.clickOnMapFeature = function(layer, feature) {
+
+  // Mock getFeaturesFromEvent().
+  layer.getFeatureFromEvent = function(evt) {
+    return feature;
+  };
+
+  // Mock cursor event.
+  var evt = {
+    xy: new OpenLayers.Pixel(Math.random(), Math.random()),
+    type: 'click'
+  };
+
+  // Trigger click.
+  this.mapView.map.events.triggerEvent('click', evt);
+
+};
+
+/*
+ * Set the map focus to a lon/lat and zoom position.
+ *
+ * @param {Number} lon: The longitude.
+ * @param {Number} lat: The latitude.
+ * @param {Number} zoom: The zoom level.
+ *
+ * @return void.
+ */
+_t.setMapCenter = function(lon, lat, zoom) {
+  var lonlat = new OpenLayers.LonLat(lon, lat);
+  this.mapView.map.setCenter(lonlat, zoom);
 };

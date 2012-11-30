@@ -1,5 +1,5 @@
 
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2; */
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
  * Form view.
@@ -119,7 +119,7 @@ Editor.Views.Form = Backbone.View.extend({
     Editor.global.formOpen = true;
     this.open = true;
 
-    // Set model, render.
+    // Store model, render.
     this.model = model;
     this.$el.html(this.form);
     this.render();
