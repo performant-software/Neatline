@@ -1,5 +1,5 @@
 
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2; */
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
  * Map view.
@@ -234,6 +234,7 @@ Neatline.Views.Map = Backbone.View.extend({
 
     // Set center.
     this.map.setCenter(lonlat, zoom);
+    console.log(lonlat, zoom);
 
   },
 
