@@ -1,5 +1,5 @@
 
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2; */
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
  * Testing helpers.
@@ -20,6 +20,8 @@ _t = {};
 
 /*
  * Load neatline application.
+ *
+ * @return void.
  */
 _t.loadNeatline = function() {
 
@@ -35,6 +37,8 @@ _t.loadNeatline = function() {
 
 /*
  * Load editor application.
+ *
+ * @return void.
  */
 _t.loadEditor = function() {
 
@@ -53,14 +57,16 @@ _t.loadEditor = function() {
   // Inject default records fixtures.
   this.respondAll200(json);
 
-  // Shortcut editor components
-  this.layout = Editor.Modules.Layout.view;
-  this.records = Editor.Modules.Records.view;
-  this.form = Editor.Modules.Form.view;
-  this.search = Editor.Modules.Search.view;
+  // Shortcut views.
+  this.layoutView = Editor.Modules.Layout.view;
+  this.recordsView = Editor.Modules.Records.view;
+  this.formView = Editor.Modules.Form.view;
+  this.searchView = Editor.Modules.Search.view;
+  this.mapView = Neatline.Modules.Map.view;
 
-  // Shortcut application components
-  this.map = Neatline.Modules.Map.view;
+  // Shortcut collections.
+  this.recordsColl = Editor.Modules.Records.collection;
+  this.mapColl = Neatline.Modules.Map.collection;
 
 };
 
@@ -77,12 +83,21 @@ _t.loadEditor = function() {
 _t.getVectorLayers = function() {
 
   // Filter for features.length > 0.
-  return this.map.map.getLayersBy('features', {
+  return this.mapView.map.getLayersBy('features', {
     test: function(prop) {
       return !_.isUndefined(prop) && prop.length > 0;
     }
   });
 
+};
+
+/*
+ * Return the most recent sinon-wrapped AJAX request.
+ *
+ * @return {Object} request: The sinon request.
+ */
+_t.getLastRequest = function() {
+  return _.last(this.server.requests);
 };
 
 /*

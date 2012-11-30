@@ -1,8 +1,8 @@
 
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2; */
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Test for form open and close.
+ * Tests for form open and close.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -12,30 +12,18 @@
 
 describe('Form Open/Close', function() {
 
-  var server, records, layers, models, feature1, feature2;
+  var records, layers, models, feature1, feature2;
 
   // Load AJAX fixtures.
-  var json = readFixtures('records.json');
   var jsonRemovedData = readFixtures('records-removed-record.json');
-  var jsonRecord = readFixtures('record.json');
 
   // Get fixtures.
   beforeEach(function() {
 
-    // Load partial, mock server.
-    loadFixtures('editor-partial.html');
-    server = sinon.fakeServer.create();
-
-    // Run Editor.
     _t.loadEditor();
 
-    // Intercept requests.
-    _.each(server.requests, function(r) {
-      _t.respond200(r, json);
-    });
-
     // Get record listings.
-    records = _t.records.$el.find('.record-row');
+    records = _t.recordsView.$el.find('.record-row');
 
     // Get layers and features.
     layers = _t.getVectorLayers();
@@ -53,8 +41,8 @@ describe('Form Open/Close', function() {
     $(records[0]).trigger('click');
 
     // Check for form, no records.
-    expect(_t.records.$el).toContain(_t.form.form);
-    expect(_t.records.$el).not.toContain(_t.records.ul);
+    expect(_t.recordsView.$el).toContain(_t.formView.form);
+    expect(_t.recordsView.$el).not.toContain(_t.recordsView.ul);
 
   });
 
@@ -62,30 +50,30 @@ describe('Form Open/Close', function() {
 
     // Open form, click close.
     $(records[0]).trigger('click');
-    $(_t.form.closeButton).trigger('click');
+    $(_t.formView.closeButton).trigger('click');
 
     // Check for records, no form.
-    expect(_t.records.$el).not.toContain(_t.form.form);
-    expect(_t.records.$el).toContain(_t.records.ul);
+    expect(_t.recordsView.$el).not.toContain(_t.formView.form);
+    expect(_t.recordsView.$el).toContain(_t.recordsView.ul);
 
   });
 
   it('should create map edit layer when one does not exist', function() {
 
     // Load map data with missing record2.
-    _t.map.map.events.triggerEvent('moveend');
-    var request = _.last(server.requests);
+    _t.mapView.map.events.triggerEvent('moveend');
+    var request = _.last(_t.server.requests);
     _t.respond200(request, jsonRemovedData);
 
     // Check starting layers.
-    expect(_t.map.layers.length).toEqual(1);
+    expect(_t.mapView.layers.length).toEqual(1);
 
     // Open record without map layer.
     $(records[1]).trigger('click');
 
     // Check for new layer.
     layers = _t.getVectorLayers();
-    expect(_t.map.layers.length).toEqual(2);
+    expect(_t.mapView.layers.length).toEqual(2);
     expect(layers[1].features[0].geometry.x).toEqual(3);
     expect(layers[1].features[0].geometry.y).toEqual(4);
 
@@ -117,12 +105,12 @@ describe('Form Open/Close', function() {
     };
 
     // Trigger click.
-    _t.map.map.events.triggerEvent('click', evt);
+    _t.mapView.map.events.triggerEvent('click', evt);
 
     // Check for form.
-    expect(_t.records.$el).toContain(_t.form.form);
-    expect(_t.records.$el).not.toContain(_t.records.ul);
-    expect(_t.form.model.get('title')).toEqual('Record 1');
+    expect(_t.recordsView.$el).toContain(_t.formView.form);
+    expect(_t.recordsView.$el).not.toContain(_t.recordsView.ul);
+    expect(_t.formView.model.get('title')).toEqual('Record 1');
 
   });
 
@@ -138,21 +126,21 @@ describe('Form Open/Close', function() {
     };
 
     // Trigger click.
-    _t.map.map.events.triggerEvent('click', evt);
+    _t.mapView.map.events.triggerEvent('click', evt);
 
     // Check for form.
-    expect(_t.records.$el).toContain(_t.form.form);
-    expect(_t.records.$el).not.toContain(_t.records.ul);
-    expect(_t.form.model.get('title')).toEqual('Record 1');
+    expect(_t.recordsView.$el).toContain(_t.formView.form);
+    expect(_t.recordsView.$el).not.toContain(_t.recordsView.ul);
+    expect(_t.formView.model.get('title')).toEqual('Record 1');
 
     // Mock feature2 click.
     layers[0].getFeatureFromEvent = function(evt) { return feature2; };
 
     // Trigger click.
-    _t.map.map.events.triggerEvent('click', evt);
+    _t.mapView.map.events.triggerEvent('click', evt);
 
     // Check for unchanged.
-    expect(_t.form.model.get('title')).toEqual('Record 1');
+    expect(_t.formView.model.get('title')).toEqual('Record 1');
 
   });
 
@@ -160,14 +148,14 @@ describe('Form Open/Close', function() {
 
     // Set center and zoom.
     var lonlat = new OpenLayers.LonLat(200, 300);
-    _t.map.map.setCenter(lonlat, 15);
+    _t.mapView.map.setCenter(lonlat, 15);
 
     // Click on record listing.
     $(records[0]).trigger('click');
 
     // Get focus and zoom.
-    var center = _t.map.map.getCenter();
-    var zoom = _t.map.map.getZoom();
+    var center = _t.mapView.map.getCenter();
+    var zoom = _t.mapView.map.getZoom();
 
     // Check unchanged focus.
     expect(center.lon).toEqual(100);
@@ -180,7 +168,7 @@ describe('Form Open/Close', function() {
 
     // Set center and zoom.
     var lonlat = new OpenLayers.LonLat(200, 300);
-    _t.map.map.setCenter(lonlat, 15);
+    _t.mapView.map.setCenter(lonlat, 15);
 
     // Mock feature1 click.
     layers[0].getFeatureFromEvent = function(evt) { return feature1; };
@@ -192,11 +180,11 @@ describe('Form Open/Close', function() {
     };
 
     // Trigger click.
-    _t.map.map.events.triggerEvent('click', evt);
+    _t.mapView.map.events.triggerEvent('click', evt);
 
     // Get focus and zoom.
-    var center = _t.map.map.getCenter();
-    var zoom = _t.map.map.getZoom();
+    var center = _t.mapView.map.getCenter();
+    var zoom = _t.mapView.map.getZoom();
 
     // Check unchanged focus.
     expect(center.lon).toEqual(200);
@@ -208,15 +196,15 @@ describe('Form Open/Close', function() {
   it('should freeze edit layer when form opened via editor', function() {
 
     // By default, frozen empty.
-    expect(_t.map.frozen).toEqual([]);
+    expect(_t.mapView.frozen).toEqual([]);
 
     // Show form, check frozen.
     $(records[0]).trigger('click');
-    expect(_t.map.frozen).toEqual([models[0].get('id')]);
+    expect(_t.mapView.frozen).toEqual([models[0].get('id')]);
 
     // Close, check frozen.
-    $(_t.form.closeButton).trigger('click');
-    expect(_t.map.frozen).toEqual([]);
+    $(_t.formView.closeButton).trigger('click');
+    expect(_t.mapView.frozen).toEqual([]);
 
   });
 
@@ -232,15 +220,15 @@ describe('Form Open/Close', function() {
     };
 
     // By default, frozen empty.
-    expect(_t.map.frozen).toEqual([]);
+    expect(_t.mapView.frozen).toEqual([]);
 
     // Show form, check frozen.
-    _t.map.map.events.triggerEvent('click', evt);
-    expect(_t.map.frozen).toEqual([models[0].get('id')]);
+    _t.mapView.map.events.triggerEvent('click', evt);
+    expect(_t.mapView.frozen).toEqual([models[0].get('id')]);
 
     // Close, check frozen.
-    $(_t.form.closeButton).trigger('click');
-    expect(_t.map.frozen).toEqual([]);
+    $(_t.formView.closeButton).trigger('click');
+    expect(_t.mapView.frozen).toEqual([]);
 
   });
 
@@ -248,19 +236,19 @@ describe('Form Open/Close', function() {
 
     // Show form, check mode.
     $(records[0]).trigger('click');
-    expect(_t.form.getMapControl()).toEqual('pan');
+    expect(_t.formView.getMapControl()).toEqual('pan');
 
     // Activate "Polygon" control, check mode.
     $('input[name="mapControls"]')[3].checked = true;
-    expect(_t.form.getMapControl()).toEqual('poly');
+    expect(_t.formView.getMapControl()).toEqual('poly');
 
     // Close the form, re-get records.
-    $(_t.form.closeButton).trigger('click');
-    records = _t.records.$el.find('.record-row');
+    $(_t.formView.closeButton).trigger('click');
+    records = _t.recordsView.$el.find('.record-row');
 
     // Open new form, check mode.
     $(records[1]).trigger('click');
-    expect(_t.form.getMapControl()).toEqual('pan');
+    expect(_t.formView.getMapControl()).toEqual('pan');
 
   });
 
