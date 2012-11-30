@@ -38,10 +38,20 @@ _t.loadNeatline = function() {
  */
 _t.loadEditor = function() {
 
+  // Load partial and JSON fixture.
+  loadFixtures('editor-partial.html');
+  var json = readFixtures('records.json');
+
+  // Mock the server.
+  this.server = sinon.fakeServer.create();
+
   // Restart application.
   Neatline.initCallbacks.reset();
   Editor.initCallbacks.reset();
   Editor.start();
+
+  // Inject default records fixtures.
+  this.respondAll200(json);
 
   // Shortcut editor components
   this.layout = Editor.Modules.Layout.view;
@@ -76,15 +86,27 @@ _t.getVectorLayers = function() {
 };
 
 /*
- * Inject mock into ajax request.
+ * Inject AJAX mock into sinon-wrapped a request.
  *
- * @param {Object} request: The mocked sinon request.
+ * @param {Object} request: The sinon request.
  * @param {Object} response: The response body.
  *
  * @return void.
  */
 _t.respond200 = function(request, response) {
-  request.respond(200, {
-    'Content-Type':'application/json'
-  }, response);
+  var contentType = { 'Content-Type':'application/json' };
+  request.respond(200, contentType, response);
+};
+
+/*
+ * Respond to all queued AJAX calls with a single response.
+ *
+ * @param {Object} response: The response body.
+ *
+ * @return void.
+ */
+_t.respondAll200 = function(response) {
+  _.each(this.server.requests, _.bind(function(r) {
+    this.respond200(r, response);
+  }, this));
 };
