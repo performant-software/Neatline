@@ -26,7 +26,7 @@ _t = {};
 _t.loadNeatline = function() {
 
   // Load partial.
-  loadFixtures('editor-partial.html');
+  loadFixtures('neatline-partial.html');
 
   // Load JSON fixtures.
   this.loadJsonFixtures();
@@ -245,12 +245,92 @@ _t.clickOnMapFeature = function(layer, feature) {
 
   // Mock cursor event.
   var evt = {
-    xy: new OpenLayers.Pixel(Math.random(), Math.random()),
+    xy: new OpenLayers.Pixel(1,2),
     type: 'click'
   };
 
   // Trigger click.
   this.mapView.map.events.triggerEvent('click', evt);
+
+};
+
+/*
+ * Simulate a click out on a map feature.
+ *
+ * @param {Array} layers: All vector layers on the map.
+ *
+ * @return void.
+ */
+_t.clickOffMapFeature = function(layers) {
+
+  // Mock getFeaturesFromEvent().
+  _.each(layers, function(layer) {
+    layer.getFeatureFromEvent = function(evt) {
+      return null;
+    };
+  });
+
+  // Mock cursor event.
+  var evt = {
+    xy: new OpenLayers.Pixel(1,2),
+    type: 'click'
+  };
+
+  // Trigger click.
+  this.mapView.map.events.triggerEvent('click', evt);
+
+};
+
+/*
+ * Simulate a mouseenter on a map feature.
+ *
+ * @param {Object} layer: The feature parent layer.
+ * @param {Object} feature: The feature to be clicked on.
+ *
+ * @return void.
+ */
+_t.hoverOnMapFeature = function(layer, feature) {
+
+  // Mock getFeaturesFromEvent().
+  layer.getFeatureFromEvent = function(evt) {
+    return feature;
+  };
+
+  // Mock cursor event.
+  var evt = {
+    xy: new OpenLayers.Pixel(1,2),
+    type: 'mousemove'
+  };
+
+  // Trigger click.
+  this.mapView.map.events.triggerEvent('mousemove', evt);
+
+};
+
+/*
+ * Simulate a mouseleave on a map feature.
+ *
+ * @param {Array} layers: All vector layers on the map.
+ *
+ * @return void.
+ */
+_t.unHoverOnMapFeature = function(layers) {
+
+  // Mock getFeaturesFromEvent().
+  _.each(layers, function(layer) {
+    layer.getFeatureFromEvent = function(evt) {
+      return null;
+    };
+  });
+
+  // Mock cursor event.
+  var evt = {
+    xy: new OpenLayers.Pixel(1,2),
+    type: 'mousemove'
+  };
+
+  // Trigger click.
+  this.mapView.map.events.triggerEvent('mousemove', evt);
 
 };
 
