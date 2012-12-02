@@ -2,12 +2,8 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * ------------------------------------------------------------------------
  * Neatline editor presenter. Hook onto initialization events to enforce
- * the correct startup sequence:
- *
- * Editor => Neatline => Geometry edit module.
- * ------------------------------------------------------------------------
+ * the correct startup sequence: Editor => Neatline => Geometry module.
  *
  * @package     omeka
  * @subpackage  neatline

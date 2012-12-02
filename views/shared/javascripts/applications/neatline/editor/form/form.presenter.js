@@ -1,8 +1,8 @@
 
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2; */
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Form controller.
+ * Form presenter.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -10,30 +10,27 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Editor.Modules.Form = (function(Backbone, Editor, Neatline) {
-
-  var Form = {};
+Neatline.module('Editor.Form', function(
+  Form, Editor, Backbone, Marionette, $, _) {
 
 
   /*
+   * ----------------------------------------------------------------------
    * Instantiate the form view.
+   * ----------------------------------------------------------------------
    *
    * @return void.
    */
-  Form.init = function() {
-    this.view = new Editor.Views.Form({ el: '#content' });
-  };
-
-
-  // -------
-  // Events.
-  // -------
+  Form.addInitializer(function() {
+    this.view = new Neatline.Editor.Form.Views.Form();
+  });
 
   /*
+   * ----------------------------------------------------------------------
    * Show form on record row click.
+   * ----------------------------------------------------------------------
    *
    * @param {Object} model: The record model.
-   *
    * @return void.
    */
   Editor.vent.on('records:openForm', function(model) {
@@ -41,10 +38,11 @@ Editor.Modules.Form = (function(Backbone, Editor, Neatline) {
   });
 
   /*
+   * ----------------------------------------------------------------------
    * Show form on map feature click.
+   * ----------------------------------------------------------------------
    *
    * @param {Object} model: The record model.
-   *
    * @return void.
    */
   Neatline.vent.on('map:select', function(model) {
@@ -52,10 +50,11 @@ Editor.Modules.Form = (function(Backbone, Editor, Neatline) {
   });
 
   /*
+   * ----------------------------------------------------------------------
    * Push updated KML back into the form.
+   * ----------------------------------------------------------------------
    *
    * @param {String} coverage: The new KML.
-   *
    * @return void.
    */
   Editor.vent.on('map:newCoverage', function(coverage) {
@@ -63,8 +62,4 @@ Editor.Modules.Form = (function(Backbone, Editor, Neatline) {
   });
 
 
-  // Export.
-  Editor.addInitializer(function() { Form.init(); });
-  return Form;
-
-})(Backbone, Editor, Neatline);
+});

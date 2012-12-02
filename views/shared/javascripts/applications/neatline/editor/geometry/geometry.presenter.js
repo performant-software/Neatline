@@ -1,8 +1,8 @@
 
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2; */
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Geometry editing module.
+ * Geometry presenter.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -10,27 +10,25 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Editor.Modules.Geometry = (function(Backbone, Editor, Neatline) {
-
-  var Geometry = {};
+Neatline.module('Editor.Geometry', function(
+  Geometry, Editor, Backbone, Marionette, $, _) {
 
 
   /*
+   * ----------------------------------------------------------------------
    * Alias the exhibit map view.
+   * ----------------------------------------------------------------------
    *
    * @return void.
    */
-  Geometry.init = function() {
-    this.view = Neatline.Modules.Map.view;
-  };
-
-
-  // -------
-  // Events.
-  // -------
+  Geometry.addInitializer(function() {
+    this.view = Neatline.Map.view;
+  });
 
   /*
+   * ----------------------------------------------------------------------
    * Show form on map feature click.
+   * ----------------------------------------------------------------------
    *
    * @param {Object} model: The record model.
    * @param {Boolean} focus: If true, focus the map on the edit layer.
@@ -43,7 +41,9 @@ Editor.Modules.Geometry = (function(Backbone, Editor, Neatline) {
   });
 
   /*
+   * ----------------------------------------------------------------------
    * Close form.
+   * ----------------------------------------------------------------------
    *
    * @param {Object} model: The record model.
    *
@@ -55,7 +55,9 @@ Editor.Modules.Geometry = (function(Backbone, Editor, Neatline) {
   });
 
   /*
+   * ----------------------------------------------------------------------
    * Update map settings.
+   * ----------------------------------------------------------------------
    *
    * @param {Object} settings: Settings hash.
    *
@@ -66,8 +68,4 @@ Editor.Modules.Geometry = (function(Backbone, Editor, Neatline) {
   });
 
 
-  // Export.
-  Editor.addInitializer(function() { Geometry.init(); });
-  return Geometry;
-
-})(Backbone, Editor, Neatline);
+});

@@ -2,9 +2,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * ------------------------------------------------------------------------
- * Map presenter. Instiantiates the map view and supplies it with data.
- * ------------------------------------------------------------------------
+ * Map presenter.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -28,18 +26,12 @@ Neatline.module('Map', function(
     this.view = new Neatline.Map.Views.Map({ el: '#neatline-map' });
   });
 
-
-  // ---------------
-  // Event handlers.
-  // ---------------
-
   /*
    * ----------------------------------------------------------------------
    * Get new map data on pan/zoom.
    * ----------------------------------------------------------------------
    *
    * @param {Object} params: Hash with `extent` and `zoom`.
-   *
    * @return void.
    */
   Neatline.vent.on('map:move', function(params) {
@@ -52,7 +44,6 @@ Neatline.module('Map', function(
    * ----------------------------------------------------------------------
    *
    * @param {Object} records: The new collection.
-   *
    * @return void.
    */
   Neatline.vent.on('records:newRecords', function(records) {
@@ -65,7 +56,6 @@ Neatline.module('Map', function(
    * ----------------------------------------------------------------------
    *
    * @param {Number} id: The record id.
-   *
    * @return void.
    */
   Neatline.vent.on('map:focusById', function(id) {

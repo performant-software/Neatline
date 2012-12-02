@@ -2,11 +2,9 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * ------------------------------------------------------------------------
  * Map records collection. Serves as the canonical data source for vectors
  * on the map at any given point in time. Updated in real-time in response
  * to pan and zoom events on the map.
- * ------------------------------------------------------------------------
  *
  * @package     omeka
  * @subpackage  neatline
