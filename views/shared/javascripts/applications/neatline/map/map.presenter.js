@@ -25,7 +25,7 @@ Neatline.module('Map', function(
    */
   Map.addInitializer(function() {
     this.collection = new Neatline.Map.Collections.Records();
-    this.view = new Neatline.Map.Views.Map();
+    this.view = new Neatline.Map.Views.Map({ el: '#neatline-map' });
   });
 
 
@@ -43,7 +43,7 @@ Neatline.module('Map', function(
    * @return void.
    */
   Neatline.vent.on('map:move', function(params) {
-    this.collection.updateCollection(params);
+    Map.collection.updateCollection(params);
   });
 
   /*
@@ -56,7 +56,7 @@ Neatline.module('Map', function(
    * @return void.
    */
   Neatline.vent.on('records:newRecords', function(records) {
-    this.view.ingest(records);
+    Map.view.ingest(records);
   });
 
   /*

@@ -47,7 +47,7 @@ Neatline.module('Map.Collections', function(
       this.fetch({
         data: $.param(params),
         success: function(records) {
-          Neatline.Map.vent.trigger('records:newRecords', records);
+          Neatline.vent.trigger('records:newRecords', records);
         }
       });
 
