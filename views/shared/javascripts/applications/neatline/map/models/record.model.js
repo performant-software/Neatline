@@ -3,7 +3,7 @@
 
 /**
  * ------------------------------------------------------------------------
- * Top-level Neatline application runner.
+ * Model for an individual map record.
  * ------------------------------------------------------------------------
  *
  * @package     omeka
@@ -12,14 +12,13 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline = new Backbone.Marionette.Application();
+Neatline.module('Map.Models', function(
+  Models, Neatline, Backbone, Marionette, $, _) {
 
 
-// --------------------
-// Instance namespaces.
-// --------------------
+  Models.Record = Backbone.Model.extend({
+    url: function() { return __exhibit.api+'/'+this.get('id'); }
+  });
 
-Neatline.Modules = {};
-Neatline.Models = {};
-Neatline.Collections = {};
-Neatline.Views = {};
+
+});

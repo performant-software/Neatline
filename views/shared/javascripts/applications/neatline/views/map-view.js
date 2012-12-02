@@ -2,7 +2,9 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Map view.
+ * ------------------------------------------------------------------------
+ * Map view. Creates and manages the core OpenLayers.Map instance.
+ * ------------------------------------------------------------------------
  *
  * @package     omeka
  * @subpackage  neatline
@@ -303,7 +305,7 @@ Neatline.Views.Map = Backbone.View.extend({
   /*
    * ----------------------------------------------------------------------
    * The top-level point of entry when a new collection of models arrives.
-   * Records in the `frozen` array are left untouched.
+   * Updates the map layers to mirror the new records collection.
    *
    * - Remove all records that are not included in the `frozen` array.
    *
