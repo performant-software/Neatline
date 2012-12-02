@@ -160,9 +160,9 @@ Neatline.module('Map.Views', function(
     /*
      * --------------------------------------------------------------------
      * Set the starting focus and zoom. If `mapFocus` is non-null on the
-     * global __exhibit object, then a default focus and zoom has been set
-     * for the exhibit and should be manifested. If no default exists,
-     * apply the default zoom option and geolocate the focus.
+     * global __exhibit object, then we know that a default focus and zoom
+     * has been set for the exhibit and should be manifested. If no
+     * default exists, apply the default zoom and geolocate the focus.
      * --------------------------------------------------------------------
      *
      * @return void.

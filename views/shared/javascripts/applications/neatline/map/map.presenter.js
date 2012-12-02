@@ -55,7 +55,7 @@ Neatline.module('Map', function(
    *
    * @return void.
    */
-  Neatline.vent.on('map:move', function(records) {
+  Neatline.vent.on('records:newRecords', function(records) {
     this.view.ingest(records);
   });
 
