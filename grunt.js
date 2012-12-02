@@ -18,7 +18,7 @@ module.exports = function(grunt) {
   var stylus = 'views/shared/css/stylus/';
   var css = 'views/shared/css/payloads/';
 
-  var neatlineFiles = [
+  var neatlineVendor = [
     c.components+c.vendor.jquery,
     c.components+c.vendor.underscore,
     c.components+c.vendor.backbone,
@@ -30,7 +30,7 @@ module.exports = function(grunt) {
     c.components+c.vendor.d3
   ];
 
-  var editorFiles = [
+  var editorVendor = [
     c.components+c.vendor.underscore_string
   ];
 
@@ -44,44 +44,44 @@ module.exports = function(grunt) {
     concat: {
 
       neatline: {
-        src: neatlineFiles.concat([
+        src: neatlineVendor.concat([
           c.apps.neatline+'app.js',
-          c.apps.neatline+'run.js',
           c.apps.neatline+'map/models/*.js',
           c.apps.neatline+'map/collections/*.js',
           c.apps.neatline+'map/views/*.js',
-          c.apps.neatline+'map/map.presenter.js'
+          c.apps.neatline+'map/map.presenter.js',
+          c.apps.neatline+'run.js'
         ]),
         dest: c.payload+'neatline.js',
         separator: ';'
       },
 
       editor: {
-        src: neatlineFiles.concat(
-          editorFiles).concat([
+        src: neatlineVendor.concat(
+          editorVendor).concat([
           c.apps.neatline+'app.js',
           c.apps.neatline+'models/*.js',
           c.apps.neatline+'collections/*.js',
           c.apps.neatline+'modules/*.js',
           c.apps.neatline+'views/*.js',
           c.apps.editor+'app.js',
-          c.apps.editor+'run.js',
           c.apps.editor+'collections/*.js',
           c.apps.editor+'modules/*.js',
-          c.apps.editor+'views/*.js'
+          c.apps.editor+'views/*.js',
+          c.apps.editor+'run.js'
         ]),
         dest: c.payload+'editor.js',
         separator: ';'
       },
 
       test: {
-        src: neatlineFiles.concat(
-          editorFiles).concat([
+        src: neatlineVendor.concat(
+          editorVendor).concat([
           c.apps.neatline+'app.js',
-          c.apps.neatline+'models/*.js',
-          c.apps.neatline+'collections/*.js',
-          c.apps.neatline+'modules/*.js',
-          c.apps.neatline+'views/*.js',
+          c.apps.neatline+'map/models/*.js',
+          c.apps.neatline+'map/collections/*.js',
+          c.apps.neatline+'map/views/*.js',
+          c.apps.neatline+'map/map.presenter.js',
           c.apps.editor+'app.js',
           c.apps.editor+'collections/*.js',
           c.apps.editor+'modules/*.js',
