@@ -11,10 +11,10 @@
  */
 
 Neatline.module('Map.Views', function(
-  Views, App, Backbone, Marionette, $, _) {
+  Views, Neatline, Backbone, Marionette, $, _) {
 
 
-    Views.Map = Backbone.View.extend({
+  Views.Map = Backbone.View.extend({
 
     options: {
       defaultZoom: 6

@@ -195,7 +195,7 @@
         <label><?php echo __('Graphic Opacity'); ?></label>
         <div class="controls">
           <div class="inline-inputs">
-            <input type="text" name="graphic-opacity" />
+            <input type="text" name="image-opacity" />
           </div>
         </div>
 

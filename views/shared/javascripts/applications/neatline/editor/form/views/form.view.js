@@ -10,294 +10,331 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Editor.Views.Form = Backbone.View.extend({
+Neatline.module('Editor.Form.Views', function(
+  Views, Form, Backbone, Marionette, $, _) {
 
-  getTemplate: function() {
-    return _.template($('#edit-form').html());
-  },
 
-  /*
-   * Render form template, get components.
-   *
-   * @return void.
-   */
-  initialize: function() {
+  Views.Form = Backbone.View.extend({
 
-    // Trackers.
-    this.model =    null;
-    this.started =  false;
-    this.open =     false;
+    getTemplate: function() {
+      return _.template($('#edit-form').html());
+    },
 
-    // Render template.
-    this.form = $(this.getTemplate()());
+    /*
+     * --------------------------------------------------------------------
+     * Render the form template, initialize trackers, get element markup.
+     * --------------------------------------------------------------------
+     *
+     * @return void.
+     */
+    initialize: function() {
 
-    // UX.
-    this.tabs =           this.form.find('ul.nav a');
+      // Trackers.
+      this.model = null;
+      this.started = false;
+      this.open = false;
 
-    // Text.
-    this.head =           this.form.find('h3.head');
-    this.title =          this.form.find('textarea[name="title"]');
-    this.body =           this.form.find('textarea[name="body"]');
+      // Render template.
+      this.$el = $(this.getTemplate()());
 
-    // Spatial.
-    this.sides =          this.form.find('input[name="sides"]');
-    this.snap =           this.form.find('input[name="snap"]');
-    this.irregular =      this.form.find('input[name="irregular"]');
-    this.coverage =       this.form.find('textarea[name="coverage"]');
-    this.spatial =        this.form.find('div.geometry input');
+      this.els = {
 
-    // Styles.
-    this.vectorColor =    this.form.find('input[name="vector-color"]');
-    this.strokeColor =    this.form.find('input[name="stroke-color"]');
-    this.selectColor =    this.form.find('input[name="select-color"]');
-    this.vectorOpacity =  this.form.find('input[name="vector-opacity"]');
-    this.strokeOpacity =  this.form.find('input[name="stroke-opacity"]');
-    this.selectOpacity =  this.form.find('input[name="select-opacity"]');
-    this.graphicOpacity = this.form.find('input[name="graphic-opacity"]');
-    this.strokeWidth =    this.form.find('input[name="stroke-width"]');
-    this.pointRadius =    this.form.find('input[name="point-radius"]');
-    this.pointGraphic =   this.form.find('input[name="point-image"]');
-    this.minZoom =        this.form.find('input[name="min-zoom"]');
-    this.maxZoom =        this.form.find('input[name="max-zoom"]');
-    this.mapFocus =       this.form.find('button[name="map-focus"]');
+        // UX.
+        tabs: this.$el.find('ul.nav a'),
 
-    // Buttons.
-    this.saveButton =     this.form.find('button[name="save"]');
-    this.closeButton =    this.form.find('button[name="close"]');
-    this.delButton =      this.form.find('button[name="del"]');
+        // Text inputs.
+        head:   this.$el.find('h3.head'),
+        title:  this.$el.find('textarea[name="title"]'),
+        body:   this.$el.find('textarea[name="body"]'),
 
-    // Bind form listeners.
-    this.bindEvents();
+        // Geometry editing options.
+        sides:      this.$el.find('input[name="sides"]'),
+        snap:       this.$el.find('input[name="snap"]'),
+        irregular:  this.$el.find('input[name="irregular"]'),
+        coverage:   this.$el.find('textarea[name="coverage"]'),
+        geoInputs:  this.$el.find('div.geometry input'),
 
-  },
+        // Style inputs.
+        vectorColor:    this.$el.find('input[name="vector-color"]'),
+        strokeColor:    this.$el.find('input[name="stroke-color"]'),
+        selectColor:    this.$el.find('input[name="select-color"]'),
+        vectorOpacity:  this.$el.find('input[name="vector-opacity"]'),
+        strokeOpacity:  this.$el.find('input[name="stroke-opacity"]'),
+        selectOpacity:  this.$el.find('input[name="select-opacity"]'),
+        imageOpacity:   this.$el.find('input[name="image-opacity"]'),
+        strokeWidth:    this.$el.find('input[name="stroke-width"]'),
+        pointRadius:    this.$el.find('input[name="point-radius"]'),
+        pointGraphic:   this.$el.find('input[name="point-image"]'),
+        minZoom:        this.$el.find('input[name="min-zoom"]'),
+        maxZoom:        this.$el.find('input[name="max-zoom"]'),
+        mapFocus:       this.$el.find('button[name="map-focus"]'),
 
-  /*
-   * Bind event listeners to form elements.
-   *
-   * @return void.
-   */
-  bindEvents: function() {
+        // Buttons.
+        saveButton:   this.$el.find('button[name="save"]'),
+        closeButton:  this.$el.find('button[name="close"]'),
+        delButton:    this.$el.find('button[name="del"]')
 
-    // Close button.
-    // -------------
-    this.closeButton.click(_.bind(function(e) {
-      e.preventDefault();
-      this.close();
-    }, this));
+      };
 
-    // Save button.
-    // ------------
-    this.saveButton.click(_.bind(function(e) {
-      e.preventDefault();
-      this.save();
-    }, this));
+      // Bind input listeners.
+      this.bindEvents();
 
-    // Spatial controls.
-    // -----------------
-    this.spatial.on('change keyup',
-      _.bind(function(e) {
-        this.updateMap();
-    }, this));
+    },
 
-  },
+    /*
+     * --------------------------------------------------------------------
+     * Bind event listeners to form elements.
+     * --------------------------------------------------------------------
+     *
+     * @return void.
+     */
+    bindEvents: function() {
 
-  /*
-   * Show the form; block if the form is already open.
-   *
-   * @param {Object} model: The record model.
-   * @param {Boolean} focus: If true, focus the map on the edit layer.
-   *
-   * @return void.
-   */
-  show: function(model, focus) {
+      // Close button.
+      // -------------
+      this.els.closeButton.click(_.bind(function(e) {
+        e.preventDefault();
+        this.close();
+      }, this));
 
-    // Block if open.
-    if (this.open) return;
+      // Save button.
+      // ------------
+      this.els.saveButton.click(_.bind(function(e) {
+        e.preventDefault();
+        this.save();
+      }, this));
 
-    // Publish, set trackers.
-    Editor.vent.trigger('form:open', model, focus);
-    Editor.global.formOpen = true;
-    this.open = true;
+      // Spatial controls.
+      // -----------------
+      this.els.geoInputs.on('change keyup',
+        _.bind(function(e) {
+          this.updateMap();
+      }, this));
 
-    // Store model, render.
-    this.model = model;
-    this.$el.html(this.form);
-    this.render();
+    },
 
-  },
+    /*
+     * --------------------------------------------------------------------
+     * Show the form; block if the form is already open.
+     * --------------------------------------------------------------------
+     *
+     * @param {Object} model: The record model.
+     * @param {Boolean} focus: If true, focus the map on the edit layer.
+     *
+     * @return void.
+     */
+    show: function(model, focus) {
 
-  /*
-   * Close the form.
-   *
-   * @return void.
-   */
-  close: function() {
+      // Block if open.
+      if (this.open) return;
 
-    // Hide, publish.
-    this.form.detach();
-    Editor.vent.trigger('form:close', this.model);
+      // Publish, set trackers.
+      Editor.vent.trigger('form:open', model, focus);
+      Editor.global.formOpen = true;
+      this.open = true;
 
-    // Trackers.
-    this.model = null;
-    Editor.global.formOpen = false;
-    this.open = false;
+      // Store model, render.
+      this.model = model;
+      this.$el.html(this.$el);
+      this.render();
 
-  },
+    },
 
-  /*
-   * Render form values.
-   *
-   * @return void.
-   */
-  render: function() {
+    /*
+     * --------------------------------------------------------------------
+     * Close the form, publish the event, set the global tracker.
+     * --------------------------------------------------------------------
+     *
+     * @return void.
+     */
+    close: function() {
 
-    // Activate "Text" tab.
-    if (!this.started) this.setStarted();
+      // Hide, publish.
+      this.$el.detach();
+      Editor.vent.trigger('form:close', this.model);
 
-    // Reset map editing.
-    this.resetMapControl();
+      // Trackers.
+      this.model = null;
+      Editor.global.formOpen = false;
+      this.open = false;
 
-    // Text.
-    this.head.            text(this.model.get('title'));
-    this.title.           val(this.model.get('title'));
-    this.body.            val(this.model.get('description'));
+    },
 
-    // Spatial.
-    this.coverage.        val(this.model.get('coverage'));
+    /*
+     * --------------------------------------------------------------------
+     * Render new values from `this.model` into the form elements.
+     * --------------------------------------------------------------------
+     *
+     * @return void.
+     */
+    render: function() {
 
-    // Styles.
-    this.vectorColor.     val(this.model.get('vector_color'));
-    this.strokeColor.     val(this.model.get('stroke_color'));
-    this.selectColor.     val(this.model.get('select_color'));
-    this.vectorOpacity.   val(this.model.get('vector_opacity'));
-    this.strokeOpacity.   val(this.model.get('stroke_opacity'));
-    this.selectOpacity.   val(this.model.get('select_opacity'));
-    this.graphicOpacity.  val(this.model.get('graphic_opacity'));
-    this.strokeWidth.     val(this.model.get('stroke_width'));
-    this.pointRadius.     val(this.model.get('point_radius'));
-    this.pointGraphic.    val(this.model.get('point_image'));
-    this.minZoom.         val(this.model.get('min_zoom'));
-    this.maxZoom.         val(this.model.get('max_zoom'));
+      // Activate "Text" tab.
+      if (!this.started) this.setStarted();
 
-  },
-
-  /*
-   * Save form to record model.
-   *
-   * @return void.
-   */
-  save: function() {
-
-    // Commit model.
-    this.model.save({
+      // Reset map editing.
+      this.resetMapControl();
 
       // Text.
-      title:              this.title.val(),
-      description:        this.body.val(),
+      this.els.head.            text(this.model.get('title'));
+      this.els.title.           val(this.model.get('title'));
+      this.els.body.            val(this.model.get('description'));
+
+      // Spatial.
+      this.els.coverage.        val(this.model.get('coverage'));
 
       // Styles.
-      vector_color:       this.vectorColor.val(),
-      stroke_color:       this.strokeColor.val(),
-      select_color:       this.selectColor.val(),
-      vector_opacity:     this.vectorOpacity.val(),
-      stroke_opacity:     this.strokeOpacity.val(),
-      select_opacity:     this.selectOpacity.val(),
-      graphic_opacity:    this.graphicOpacity.val(),
-      stroke_width:       this.strokeWidth.val(),
-      point_radius:       this.pointRadius.val(),
-      point_image:        this.pointGraphic.val(),
-      min_zoom:           this.minZoom.val(),
-      max_zoom:           this.maxZoom.val(),
-      coverage:           this.coverage.val()
+      this.els.vectorColor.     val(this.model.get('vector_color'));
+      this.els.strokeColor.     val(this.model.get('stroke_color'));
+      this.els.selectColor.     val(this.model.get('select_color'));
+      this.els.vectorOpacity.   val(this.model.get('vector_opacity'));
+      this.els.strokeOpacity.   val(this.model.get('stroke_opacity'));
+      this.els.selectOpacity.   val(this.model.get('select_opacity'));
+      this.els.imageOpacity.    val(this.model.get('graphic_opacity'));
+      this.els.strokeWidth.     val(this.model.get('stroke_width'));
+      this.els.pointRadius.     val(this.model.get('point_radius'));
+      this.els.pointGraphic.    val(this.model.get('point_image'));
+      this.els.minZoom.         val(this.model.get('min_zoom'));
+      this.els.maxZoom.         val(this.model.get('max_zoom'));
 
-    }, {
+    },
 
-      // Update head and button.
-      success: _.bind(function() {
-        this.updateHead();
-      }, this)
+    /*
+     * --------------------------------------------------------------------
+     * Save the current form values.
+     * --------------------------------------------------------------------
+     *
+     * @return void.
+     */
+    save: function() {
 
-    });
+      // Commit model.
+      this.model.save({
 
-  },
+        // Text.
+        title:              this.els.title.val(),
+        description:        this.els.body.val(),
 
-  /*
-   * Initialize the starting tab state.
-   *
-   * @return void.
-   */
-  setStarted: function() {
-    $(this.tabs[0]).tab('show');
-    this.started = true;
-  },
+        // Styles.
+        vector_color:       this.els.vectorColor.val(),
+        stroke_color:       this.els.strokeColor.val(),
+        select_color:       this.els.selectColor.val(),
+        vector_opacity:     this.els.vectorOpacity.val(),
+        stroke_opacity:     this.els.strokeOpacity.val(),
+        select_opacity:     this.els.selectOpacity.val(),
+        graphic_opacity:    this.els.imageOpacity.val(),
+        stroke_width:       this.els.strokeWidth.val(),
+        point_radius:       this.els.pointRadius.val(),
+        point_image:        this.els.pointGraphic.val(),
+        min_zoom:           this.els.minZoom.val(),
+        max_zoom:           this.els.maxZoom.val(),
+        coverage:           this.els.coverage.val()
 
-  /*
-   * Update the text in the form header.
-   *
-   * @return void.
-   */
-  updateHead: function() {
-    this.head.text(this.model.get('title'));
-  },
+      }, {
 
-  /*
-   * Get current edit geometry settings.
-   *
-   * @return void.
-   */
-  updateMap: function() {
+        // Update head and button.
+        success: _.bind(function() {
+          this.updateHead();
+        }, this)
 
-    // Get values.
-    var settings = {
-      modify:   this.getModifySettings(),
-      sides:    this.sides.val(),
-      irreg:    this.irregular.is(':checked'),
-      control:  this.getMapControl(),
-      snap:     this.snap.val()
-    };
+      });
 
-    // Publish.
-    Editor.vent.trigger('form:updateMap', settings);
+    },
 
-  },
+    /*
+     * --------------------------------------------------------------------
+     * Activate "Text" as the starting tab selection.
+     * --------------------------------------------------------------------
+     *
+     * @return void.
+     */
+    setStarted: function() {
+      $(this.els.tabs[0]).tab('show');
+      this.started = true;
+    },
 
-  /*
-   * Get the value of the current map control mode.
-   *
-   * @return string: The input value.
-   */
-  getMapControl: function() {
-    return $('input[name="mapControls"]:checked').val();
-  },
+    /*
+     * --------------------------------------------------------------------
+     * Render the record title in the header block at the top of the form.
+     * --------------------------------------------------------------------
+     *
+     * @return void.
+     */
+    updateHead: function() {
+      this.els.head.text(this.model.get('title'));
+    },
 
-  /*
-   * Set the map control to "Navigate".
-   *
-   * @return string: The input value.
-   */
-  resetMapControl: function() {
-    return $('input[name="mapControls"]')[0].checked = true;
-  },
+    /*
+     * --------------------------------------------------------------------
+     * Collect and publish current edit geometry settings.
+     * --------------------------------------------------------------------
+     *
+     * @return void.
+     */
+    updateMap: function() {
 
-  /*
-   * Get an array of the values of all checked modify settings.
-   *
-   * @return
-   */
-  getModifySettings: function() {
-    var inputs = $('input[name="modifySettings"]:checked');
-    return _.map(inputs, function(i) { return $(i).val(); });
-  },
+      // Get values.
+      var settings = {
+        modify:   this.getModifySettings(),
+        sides:    this.els.sides.val(),
+        irreg:    this.els.irregular.is(':checked'),
+        control:  this.getMapControl(),
+        snap:     this.els.snap.val()
+      };
 
-  /*
-   * Update the coverage textarea.
-   *
-   * @param {String} coverage: The new KML.
-   *
-   * @return void.
-   */
-  setCoverage: function(coverage) {
-    this.coverage.val(coverage);
-  }
+      // Publish.
+      Editor.vent.trigger('form:updateMap', settings);
+
+    },
+
+    /*
+     * --------------------------------------------------------------------
+     * Get the value of the current map control mode.
+     * --------------------------------------------------------------------
+     *
+     * @return string: The input value.
+     */
+    getMapControl: function() {
+      return $('input[name="mapControls"]:checked').val();
+    },
+
+    /*
+     * --------------------------------------------------------------------
+     * Set the map control to "Navigate".
+     * --------------------------------------------------------------------
+     *
+     * @return string: The input value.
+     */
+    resetMapControl: function() {
+      return $('input[name="mapControls"]')[0].checked = true;
+    },
+
+    /*
+     * --------------------------------------------------------------------
+     * Get an array of the values of all checked modify settings.
+     * --------------------------------------------------------------------
+     *
+     * @return
+     */
+    getModifySettings: function() {
+      var inputs = $('input[name="modifySettings"]:checked');
+      return _.map(inputs, function(i) { return $(i).val(); });
+    },
+
+    /*
+     * --------------------------------------------------------------------
+     * Update the coverage textarea.
+     * --------------------------------------------------------------------
+     *
+     * @param {String} coverage: The new KML.
+     *
+     * @return void.
+     */
+    setCoverage: function(coverage) {
+      this.els.coverage.val(coverage);
+    }
+
+  });
+
 
 });
