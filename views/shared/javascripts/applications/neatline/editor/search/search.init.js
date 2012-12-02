@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Search presenter.
+ * Search initializer.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -25,17 +25,6 @@ Neatline.module('Editor.Search', function(
     this.view = new Neatline.Editor.Search.Views.Search({
       el: '#search'
     });
-  });
-
-  /*
-   * ----------------------------------------------------------------------
-   * Is map mirroring currently enabled?
-   * ----------------------------------------------------------------------
-   *
-   * @return {Boolean}: True if map mirroring is enabled.
-   */
-  Neatline.reqres.addHandler('editor:search:mapMirror?', function() {
-    return Search.view.mirrored;
   });
 
 

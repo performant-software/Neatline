@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Map presenter.
+ * Map events.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -13,18 +13,6 @@
 Neatline.module('Map', function(
   Map, Neatline, Backbone, Marionette, $, _) {
 
-
-  /*
-   * ----------------------------------------------------------------------
-   * Instantiate the map view and records collection.
-   * ----------------------------------------------------------------------
-   *
-   * @return void.
-   */
-  Map.addInitializer(function() {
-    this.collection = new Neatline.Map.Collections.Records();
-    this.view = new Neatline.Map.Views.Map({ el: '#neatline-map' });
-  });
 
   /*
    * ----------------------------------------------------------------------

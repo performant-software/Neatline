@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Layout presenter.
+ * Form initializer.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -10,19 +10,19 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Editor.Layout', function(
-  Layout, Editor, Backbone, Marionette, $, _) {
+Neatline.module('Editor.Form', function(
+  Form, Editor, Backbone, Marionette, $, _) {
 
 
   /*
    * ----------------------------------------------------------------------
-   * Instantiate the layout view.
+   * Instantiate the form view.
    * ----------------------------------------------------------------------
    *
    * @return void.
    */
-  Layout.addInitializer(function() {
-    this.view = new Neatline.Editor.Layout.Views.Layout();
+  Form.addInitializer(function() {
+    this.view = new Neatline.Editor.Form.Views.Form({ el: '#content' });
   });
 
 

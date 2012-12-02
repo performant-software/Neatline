@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Form presenter.
+ * Form events.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -13,17 +13,6 @@
 Neatline.module('Editor.Form', function(
   Form, Editor, Backbone, Marionette, $, _) {
 
-
-  /*
-   * ----------------------------------------------------------------------
-   * Instantiate the form view.
-   * ----------------------------------------------------------------------
-   *
-   * @return void.
-   */
-  Form.addInitializer(function() {
-    this.view = new Neatline.Editor.Form.Views.Form({ el: '#content' });
-  });
 
   /*
    * ----------------------------------------------------------------------
@@ -59,17 +48,6 @@ Neatline.module('Editor.Form', function(
    */
   Neatline.vent.on('editor:geometry:newCoverage', function(coverage) {
     Form.view.setCoverage(coverage);
-  });
-
-  /*
-   * ----------------------------------------------------------------------
-   * Is a form currently open?
-   * ----------------------------------------------------------------------
-   *
-   * @return {Boolean}: True if a form is open.
-   */
-  Neatline.reqres.addHandler('editor:form:isOpen?', function() {
-    return Form.view.open;
   });
 
 

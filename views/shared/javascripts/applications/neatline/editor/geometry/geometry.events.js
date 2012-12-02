@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Geometry presenter.
+ * Geometry events.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -13,17 +13,6 @@
 Neatline.module('Editor.Geometry', { startWithParent: false,
   define: function(Geometry, Editor, Backbone, Marionette, $, _) {
 
-
-  /*
-   * ----------------------------------------------------------------------
-   * Alias the exhibit map view.
-   * ----------------------------------------------------------------------
-   *
-   * @return void.
-   */
-  Geometry.addInitializer(function() {
-    this.view = Neatline.Map.view;
-  });
 
   /*
    * ----------------------------------------------------------------------

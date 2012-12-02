@@ -49,7 +49,7 @@ module.exports = function(grunt) {
           c.apps.neatline+'map/models/*.js',
           c.apps.neatline+'map/collections/*.js',
           c.apps.neatline+'map/views/*.js',
-          c.apps.neatline+'map/map.presenter.js',
+          c.apps.neatline+'map/*.js',
           c.apps.neatline+'run.js'
         ]),
         dest: c.payload+'neatline.js',
@@ -64,6 +64,7 @@ module.exports = function(grunt) {
           c.apps.neatline+'map/collections/*.js',
           c.apps.neatline+'map/views/*.js',
           c.apps.neatline+'map/map.presenter.js',
+          c.apps.neatline+'map/*.js',
           c.apps.neatline+'editor/**/*.js',
           c.apps.neatline+'run.js'
         ]),
