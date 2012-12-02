@@ -10,52 +10,62 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Editor.Views.Records = Backbone.View.extend({
+Neatline.module('Editor.Records.Views', function(
+  Views, Records, Backbone, Marionette, $, _) {
 
-  getListTemplate: function() {
-    return _.template($('#record-list').html());
-  },
 
-  getRowTemplate: function() {
-    return _.template($('#record-row').html());
-  },
+  Views.RecordList = Backbone.View.extend({
 
-  /*
-   * Compile templates.
-   *
-   * @return void.
-   */
-  initialize: function() {
-    this.listTemplate = this.getListTemplate();
-    this.rowTemplate = this.getRowTemplate();
-  },
+    getListTemplate: function() {
+      return _.template($('#record-list').html());
+    },
 
-  /*
-   * Render record listings.
-   *
-   * @param {Object} records: The records collection.
-   *
-   * @return void.
-   */
-  show: function(records) {
+    getRowTemplate: function() {
+      return _.template($('#record-row').html());
+    },
 
-    // Append container.
-    this.ul = $(this.listTemplate());
-    this.$el.html(this.ul);
+    /*
+     * --------------------------------------------------------------------
+     * Compile templates.
+     * --------------------------------------------------------------------
+     *
+     * @return void.
+     */
+    initialize: function() {
+      this.listTemplate = this.getListTemplate();
+      this.rowTemplate = this.getRowTemplate();
+    },
 
-    // Walk the incoming records.
-    records.each(_.bind(function(r) {
+    /*
+     * --------------------------------------------------------------------
+     * Render record listings.
+     * --------------------------------------------------------------------
+     *
+     * @param {Object} records: The records collection.
+     *
+     * @return void.
+     */
+    show: function(records) {
 
-      // Create record.
-      var record = new Editor.Views.RecordRow({
-        model: r, template: this.rowTemplate
-      });
+      // Append container.
+      this.ul = $(this.listTemplate());
+      this.$el.html(this.ul);
 
-      // Append.
-      this.ul.append(record.$el);
+      // Walk the incoming records.
+      records.each(_.bind(function(r) {
 
-    }, this));
+        // Create record.
+        var record = new Neatline.Editor.Records.Views.RecordRow({
+          model: r, template: this.rowTemplate
+        });
 
-  }
+        // Append.
+        this.ul.append(record.$el);
+
+      }, this));
+
+    }
+
+  });
 
 });

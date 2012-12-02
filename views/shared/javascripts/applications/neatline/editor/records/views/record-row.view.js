@@ -10,39 +10,50 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Editor.Views.RecordRow = Backbone.View.extend({
+Neatline.module('Editor.Layout.Views', function(
+  Views, Layout, Backbone, Marionette, $, _) {
 
-  tagName: 'li',
-  className: 'record-row',
 
-  events: {
-    'click': 'openForm'
-  },
+  Views.RecordRow = Backbone.View.extend({
 
-  /*
-   * Set instance model.
-   *
-   * @return void.
-   */
-  initialize: function() {
+    tagName: 'li',
+    className: 'record-row',
 
-    // Store model.
-    this.model = this.options.model;
+    events: {
+      'click': 'openForm'
+    },
 
-    // Render template.
-    this.$el.append($(this.options.template({
-      title: this.model.get('title')
-    })));
+    /*
+     * --------------------------------------------------------------------
+     * Set instance model, render the template.
+     * --------------------------------------------------------------------
+     *
+     * @return void.
+     */
+    initialize: function() {
 
-  },
+      // Store model.
+      this.model = this.options.model;
 
-  /*
-   * Open the edit form for the record, focus map.
-   *
-   * @return void.
-   */
-  openForm: function() {
-    Editor.vent.trigger('records:openForm', this.model);
-  }
+      // Render template.
+      this.$el.append($(this.options.template({
+        title: this.model.get('title')
+      })));
+
+    },
+
+    /*
+     * --------------------------------------------------------------------
+     * When the listing is clicked, open the edit form for the record.
+     * --------------------------------------------------------------------
+     *
+     * @return void.
+     */
+    openForm: function() {
+      Editor.vent.trigger('records:openForm', this.model);
+    }
+
+  });
+
 
 });

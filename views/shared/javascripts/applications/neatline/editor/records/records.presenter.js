@@ -22,7 +22,7 @@ Neatline.module('Editor.Records', function(
    * @return void.
    */
   Records.addInitializer(function() {
-    this.view = new Neatline.Editor.Views.Records({ el: '#content' });
+    this.view = new Neatline.Editor.Views.RecordList({ el: '#content' });
     this.collection = new Neatline.Map.Collections.Records();
     this.fetch();
   });
