@@ -22,9 +22,16 @@ Neatline.module('Editor.Records', function(
    * @return void.
    */
   Records.addInitializer(function() {
-    this.view = new Neatline.Editor.Views.RecordList({ el: '#content' });
+
+    // Construct collection and view.
     this.collection = new Neatline.Map.Collections.Records();
-    this.fetch();
+    this.view = new Neatline.Editor.Records.Views.RecordList({
+      el: '#content'
+    });
+
+    // Get records.
+    Neatline.vent.trigger('editor:search:query');
+
   });
 
   /*
@@ -34,10 +41,10 @@ Neatline.module('Editor.Records', function(
    *
    * @return void.
    */
-  Editor.vent.on('form:close', function() {
+  Neatline.vent.on('editor:form:close', function() {
 
     // Render map records if mirroring is enabled.
-    if (Editor.global.mapMirror) {
+    if (Neatline.reqres.request('editor:search:mapMirror?')) {
       Records.view.show(Neatline.Modules.Map.collection);
     }
 
@@ -48,15 +55,17 @@ Neatline.module('Editor.Records', function(
 
   /*
    * ----------------------------------------------------------------------
-   * Render current map collection in editor.
+   * Execute search query.
    * ----------------------------------------------------------------------
    *
    * @params {Object} query: The query object.
    *
    * @return void.
    */
-  Editor.vent.on('search:query', function(query) {
-    this.collection.updateCollection(query);
+  Neatline.vent.on('editor:search:query', function(query) {
+    Records.collection.updateCollection(query, function(records) {
+      Records.view.show(records);
+    });
   });
 
   /*
@@ -66,8 +75,8 @@ Neatline.module('Editor.Records', function(
    *
    * @return void.
    */
-  Editor.vent.on('search:mapMirror', function() {
-    Records.view.show(Neatline.Modules.Map.collection);
+  Neatline.vent.on('editor:search:mapMirror', function() {
+    Records.view.show(Neatline.Map.collection);
   });
 
   /*
@@ -79,12 +88,14 @@ Neatline.module('Editor.Records', function(
    *
    * @return void.
    */
-  Neatline.vent.on('exhibit:newRecords', function(collection) {
+  Neatline.vent.on('map:newRecords', function(collection) {
+
+    // Check if map mirroring is active and if there is a form.
+    var mapMirror = Neatline.reqres.request('editor:search:mapMirror?');
+    var formOpen = Neatline.reqres.request('editor:form:isOpen?');
 
     // Block if mapMirror is disabled or a form is open.
-    if (Editor.global.mapMirror && !Editor.global.formOpen) {
-      Records.view.show(collection);
-    }
+    if (mapMirror && !formOpen) Records.view.show(collection);
 
   });
 

@@ -27,5 +27,16 @@ Neatline.module('Editor.Search', function(
     });
   });
 
+  /*
+   * ----------------------------------------------------------------------
+   * Is map mirroring currently enabled?
+   * ----------------------------------------------------------------------
+   *
+   * @return {Boolean}: True if map mirroring is enabled.
+   */
+  Neatline.reqres.addHandler('editor:search:mapMirror?', function() {
+    return Search.view.mirrored;
+  });
+
 
 });

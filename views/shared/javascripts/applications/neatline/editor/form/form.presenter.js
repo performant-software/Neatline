@@ -22,7 +22,7 @@ Neatline.module('Editor.Form', function(
    * @return void.
    */
   Form.addInitializer(function() {
-    this.view = new Neatline.Editor.Form.Views.Form();
+    this.view = new Neatline.Editor.Form.Views.Form({ el: '#content' });
   });
 
   /*
@@ -33,7 +33,7 @@ Neatline.module('Editor.Form', function(
    * @param {Object} model: The record model.
    * @return void.
    */
-  Editor.vent.on('records:openForm', function(model) {
+  Neatline.vent.on('editor:records:openForm', function(model) {
     Form.view.show(model, true);
   });
 
@@ -57,8 +57,19 @@ Neatline.module('Editor.Form', function(
    * @param {String} coverage: The new KML.
    * @return void.
    */
-  Editor.vent.on('map:newCoverage', function(coverage) {
+  Neatline.vent.on('editor:geometry:newCoverage', function(coverage) {
     Form.view.setCoverage(coverage);
+  });
+
+  /*
+   * ----------------------------------------------------------------------
+   * Is a form currently open?
+   * ----------------------------------------------------------------------
+   *
+   * @return {Boolean}: True if a form is open.
+   */
+  Neatline.reqres.addHandler('editor:form:isOpen?', function() {
+    return Form.view.open;
   });
 
 

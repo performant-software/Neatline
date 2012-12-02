@@ -26,7 +26,7 @@ Neatline.module('Editor.Search.Views', function(
 
     /*
      * --------------------------------------------------------------------
-     * Get components, set trackers.
+     * Get markup components, initialize the `mirrored` tracker.
      * --------------------------------------------------------------------
      *
      * @return void.
@@ -66,7 +66,7 @@ Neatline.module('Editor.Search.Views', function(
      */
     executeSearch: function() {
       this.parseQuery();
-      Editor.vent.trigger('search:query', this.query);
+      Neatline.vent.trigger('editor:search:query', this.query);
       this.updateSearchStatus();
     },
 
@@ -92,13 +92,12 @@ Neatline.module('Editor.Search.Views', function(
     enableMirroring: function() {
 
       // Publish, toggle button.
-      Editor.vent.trigger('search:mapMirror');
+      Neatline.vent.trigger('editor:search:mapMirror');
       this.setMirroringEnabled();
       this.setSearchInactive();
       this.setSearchDisabled();
 
-      // Set trackers.
-      Editor.global.mapMirror = true;
+      // Set tracker.
       this.mirrored = true;
 
     },
@@ -120,8 +119,7 @@ Neatline.module('Editor.Search.Views', function(
       this.setSearchEnabled();
       this.updateSearchStatus();
 
-      // Set trackers.
-      Editor.global.mapMirror = false;
+      // Set tracker.
       this.mirrored = false;
 
     },

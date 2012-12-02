@@ -199,7 +199,7 @@ _.extend(Neatline.Map.Views.Map.prototype, {
     var wkt = formatWKT.write(features);
 
     // Publish.
-    Editor.vent.trigger('map:newCoverage', wkt);
+    Neatline.vent.trigger('editor:geometry:newCoverage', wkt);
 
   },
 

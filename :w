@@ -19,7 +19,7 @@ Neatline.module('Map.Collections', function(
   Collections.Records = Backbone.Collection.extend({
 
     url: (function() { return __exhibit.api; }),
-    model: Neatline.Map.Models.Record,
+    model: (function() { return Neatline.Map.Models.Record; }),
 
     /*
      * --------------------------------------------------------------------
@@ -33,19 +33,21 @@ Neatline.module('Map.Collections', function(
      *  - `keywords` (optional): A raw-text search query.
      *  - `tags` (optional): A comma-delimited list of tags.
      *
-     * @param {Function} cb: A success callback, called with the `fetch()`
-     * completes with the updated collection.
-     *
      * @unittest
      * @return void.
      */
-    updateCollection: function(params, cb) {
+    updateCollection: function(params) {
 
       params = params || {};
       params.id = __exhibit.id;
 
       // Get records.
-      this.fetch({ data: $.param(params), success: cb });
+      this.fetch({
+        data: $.param(params),
+        success: function(records) {
+          Neatline.vent.trigger('records:newRecords', records);
+        }
+      });
 
     },
 

@@ -10,8 +10,8 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Editor.Geometry', function(
-  Geometry, Editor, Backbone, Marionette, $, _) {
+Neatline.module('Editor.Geometry', { startWithParent: false,
+  define: function(Geometry, Editor, Backbone, Marionette, $, _) {
 
 
   /*
@@ -35,7 +35,7 @@ Neatline.module('Editor.Geometry', function(
    *
    * @return void.
    */
-  Editor.vent.on('form:open', function(model, focus) {
+  Neatline.vent.on('editor:form:open', function(model, focus) {
     Geometry.view.freeze(model.get('id'));
     Geometry.view.startEdit(model, focus);
   });
@@ -49,7 +49,7 @@ Neatline.module('Editor.Geometry', function(
    *
    * @return void.
    */
-  Editor.vent.on('form:close', function(model) {
+  Neatline.vent.on('editor:form:close', function(model) {
     Geometry.view.unFreeze(model.get('id'));
     Geometry.view.endEdit();
   });
@@ -63,9 +63,9 @@ Neatline.module('Editor.Geometry', function(
    *
    * @return void.
    */
-  Editor.vent.on('form:updateMap', function(settings) {
+  Neatline.vent.on('editor:form:updateMap', function(settings) {
     Geometry.view.update(settings);
   });
 
 
-});
+}});

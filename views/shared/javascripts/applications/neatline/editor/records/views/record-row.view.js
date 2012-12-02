@@ -10,8 +10,8 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Editor.Layout.Views', function(
-  Views, Layout, Backbone, Marionette, $, _) {
+Neatline.module('Editor.Records.Views', function(
+  Views, Records, Backbone, Marionette, $, _) {
 
 
   Views.RecordRow = Backbone.View.extend({
@@ -50,7 +50,7 @@ Neatline.module('Editor.Layout.Views', function(
      * @return void.
      */
     openForm: function() {
-      Editor.vent.trigger('records:openForm', this.model);
+      Neatline.vent.trigger('editor:records:openForm', this.model);
     }
 
   });

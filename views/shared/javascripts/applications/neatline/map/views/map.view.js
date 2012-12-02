@@ -314,8 +314,6 @@ Neatline.module('Map.Views', function(
      * --------------------------------------------------------------------
      *
      * @param {Object} records: The records collection.
-     *
-     * @unittest
      * @return void.
      */
     ingest: function(records) {
@@ -367,7 +365,6 @@ Neatline.module('Map.Views', function(
      * --------------------------------------------------------------------
      *
      * @param {Object} record: The record model.
-     *
      * @return {Boolean}: True if the layer was added.
      */
     buildLayer: function(record) {
@@ -406,7 +403,6 @@ Neatline.module('Map.Views', function(
      * --------------------------------------------------------------------
      *
      * @param {Object} record: The record.
-     *
      * @return void.
      */
     getStyleMap: function(record) {
@@ -458,7 +454,6 @@ Neatline.module('Map.Views', function(
      * --------------------------------------------------------------------
      *
      * @param {Object} model: The record model.
-     *
      * @return {Object|OpenLayers.Layer.Vector} The vector layer.
      */
     getLayerByModel: function(model) {
@@ -497,7 +492,6 @@ Neatline.module('Map.Views', function(
      * --------------------------------------------------------------------
      *
      * @param {Object|OpenLayers.Feature} feature: The feature.
-     *
      * @return void.
      */
     onFeatureSelect: function(feature) {
@@ -511,7 +505,6 @@ Neatline.module('Map.Views', function(
      * --------------------------------------------------------------------
      *
      * @param {Object|OpenLayers.Feature} feature: The feature.
-     *
      * @return void.
      */
     onFeatureUnselect: function(feature) {
@@ -525,7 +518,6 @@ Neatline.module('Map.Views', function(
      * --------------------------------------------------------------------
      *
      * @param {Object} evt: The highlight event.
-     *
      * @return void.
      */
     onFeatureHighlight: function(evt) {
@@ -539,7 +531,6 @@ Neatline.module('Map.Views', function(
      * --------------------------------------------------------------------
      *
      * @param {Object} evt: The unhighlight event.
-     *
      * @return void.
      */
     onFeatureUnhighlight: function(evt) {
@@ -552,7 +543,6 @@ Neatline.module('Map.Views', function(
      * --------------------------------------------------------------------
      *
      * @param {Number} id: The id to freeze.
-     *
      * @return void.
      */
     freeze: function(id) {
@@ -565,7 +555,6 @@ Neatline.module('Map.Views', function(
      * --------------------------------------------------------------------
      *
      * @param {Number} id: The id to unfreeze.
-     *
      * @return void.
      */
     unFreeze: function(id) {

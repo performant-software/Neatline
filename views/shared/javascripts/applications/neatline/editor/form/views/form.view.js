@@ -35,44 +35,44 @@ Neatline.module('Editor.Form.Views', function(
       this.open = false;
 
       // Render template.
-      this.$el = $(this.getTemplate()());
+      this.form = $(this.getTemplate()());
 
       this.els = {
 
         // UX.
-        tabs: this.$el.find('ul.nav a'),
+        tabs: this.form.find('ul.nav a'),
 
         // Text inputs.
-        head:   this.$el.find('h3.head'),
-        title:  this.$el.find('textarea[name="title"]'),
-        body:   this.$el.find('textarea[name="body"]'),
+        head:   this.form.find('h3.head'),
+        title:  this.form.find('textarea[name="title"]'),
+        body:   this.form.find('textarea[name="body"]'),
 
         // Geometry editing options.
-        sides:      this.$el.find('input[name="sides"]'),
-        snap:       this.$el.find('input[name="snap"]'),
-        irregular:  this.$el.find('input[name="irregular"]'),
-        coverage:   this.$el.find('textarea[name="coverage"]'),
-        geoInputs:  this.$el.find('div.geometry input'),
+        sides:      this.form.find('input[name="sides"]'),
+        snap:       this.form.find('input[name="snap"]'),
+        irregular:  this.form.find('input[name="irregular"]'),
+        coverage:   this.form.find('textarea[name="coverage"]'),
+        geoInputs:  this.form.find('div.geometry input'),
 
         // Style inputs.
-        vectorColor:    this.$el.find('input[name="vector-color"]'),
-        strokeColor:    this.$el.find('input[name="stroke-color"]'),
-        selectColor:    this.$el.find('input[name="select-color"]'),
-        vectorOpacity:  this.$el.find('input[name="vector-opacity"]'),
-        strokeOpacity:  this.$el.find('input[name="stroke-opacity"]'),
-        selectOpacity:  this.$el.find('input[name="select-opacity"]'),
-        imageOpacity:   this.$el.find('input[name="image-opacity"]'),
-        strokeWidth:    this.$el.find('input[name="stroke-width"]'),
-        pointRadius:    this.$el.find('input[name="point-radius"]'),
-        pointGraphic:   this.$el.find('input[name="point-image"]'),
-        minZoom:        this.$el.find('input[name="min-zoom"]'),
-        maxZoom:        this.$el.find('input[name="max-zoom"]'),
-        mapFocus:       this.$el.find('button[name="map-focus"]'),
+        vectorColor:    this.form.find('input[name="vector-color"]'),
+        strokeColor:    this.form.find('input[name="stroke-color"]'),
+        selectColor:    this.form.find('input[name="select-color"]'),
+        vectorOpacity:  this.form.find('input[name="vector-opacity"]'),
+        strokeOpacity:  this.form.find('input[name="stroke-opacity"]'),
+        selectOpacity:  this.form.find('input[name="select-opacity"]'),
+        imageOpacity:   this.form.find('input[name="image-opacity"]'),
+        strokeWidth:    this.form.find('input[name="stroke-width"]'),
+        pointRadius:    this.form.find('input[name="point-radius"]'),
+        pointGraphic:   this.form.find('input[name="point-image"]'),
+        minZoom:        this.form.find('input[name="min-zoom"]'),
+        maxZoom:        this.form.find('input[name="max-zoom"]'),
+        mapFocus:       this.form.find('button[name="map-focus"]'),
 
         // Buttons.
-        saveButton:   this.$el.find('button[name="save"]'),
-        closeButton:  this.$el.find('button[name="close"]'),
-        delButton:    this.$el.find('button[name="del"]')
+        saveButton:   this.form.find('button[name="save"]'),
+        closeButton:  this.form.find('button[name="close"]'),
+        delButton:    this.form.find('button[name="del"]')
 
       };
 
@@ -129,13 +129,12 @@ Neatline.module('Editor.Form.Views', function(
       if (this.open) return;
 
       // Publish, set trackers.
-      Editor.vent.trigger('form:open', model, focus);
-      Editor.global.formOpen = true;
+      Neatline.vent.trigger('editor:form:open', model, focus);
       this.open = true;
 
       // Store model, render.
       this.model = model;
-      this.$el.html(this.$el);
+      this.$el.html(this.form);
       this.render();
 
     },
@@ -150,12 +149,11 @@ Neatline.module('Editor.Form.Views', function(
     close: function() {
 
       // Hide, publish.
-      this.$el.detach();
-      Editor.vent.trigger('form:close', this.model);
+      this.form.detach();
+      Neatline.vent.trigger('editor:form:close', this.model);
 
       // Trackers.
       this.model = null;
-      Editor.global.formOpen = false;
       this.open = false;
 
     },
@@ -283,7 +281,7 @@ Neatline.module('Editor.Form.Views', function(
       };
 
       // Publish.
-      Editor.vent.trigger('form:updateMap', settings);
+      Neatline.vent.trigger('editor:form:updateMap', settings);
 
     },
 
@@ -327,7 +325,6 @@ Neatline.module('Editor.Form.Views', function(
      * --------------------------------------------------------------------
      *
      * @param {String} coverage: The new KML.
-     *
      * @return void.
      */
     setCoverage: function(coverage) {

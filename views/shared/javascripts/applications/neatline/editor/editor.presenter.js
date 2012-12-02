@@ -11,8 +11,9 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Editor', { startWithParent: false, define: function(
-  Editor, Neatline, Backbone, Marionette, $, _) {
+Neatline.module('Editor', { startWithParent: false,
+  define: function(Editor, Neatline, Backbone, Marionette, $, _) {
+
 
   /*
    * ----------------------------------------------------------------------
@@ -30,17 +31,6 @@ Neatline.module('Editor', { startWithParent: false, define: function(
 
   /*
    * ----------------------------------------------------------------------
-   * Reset global state variables before application start-up.
-   * ----------------------------------------------------------------------
-   *
-   * @return void.
-   */
-  Editor.on('initialize:before', function() {
-    Editor.global = { formOpen: false, mapMirror: false };
-  });
-
-  /*
-   * ----------------------------------------------------------------------
    * Wait until Neatline is running before initializing the geometry
    * module, which needs the application map view to be running.
    * ----------------------------------------------------------------------
@@ -50,5 +40,6 @@ Neatline.module('Editor', { startWithParent: false, define: function(
   Neatline.on('initialize:after', function() {
     Editor.Geometry.start();
   });
+
 
 }});

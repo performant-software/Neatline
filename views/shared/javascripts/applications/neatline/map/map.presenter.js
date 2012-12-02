@@ -35,19 +35,10 @@ Neatline.module('Map', function(
    * @return void.
    */
   Neatline.vent.on('map:move', function(params) {
-    Map.collection.updateCollection(params);
-  });
-
-  /*
-   * ----------------------------------------------------------------------
-   * Push new record data onto the map.
-   * ----------------------------------------------------------------------
-   *
-   * @param {Object} records: The new collection.
-   * @return void.
-   */
-  Neatline.vent.on('records:newRecords', function(records) {
-    Map.view.ingest(records);
+    Map.collection.updateCollection(params, function(records) {
+      Neatline.vent.trigger('map:newRecords', records);
+      Map.view.ingest(records);
+    });
   });
 
   /*
