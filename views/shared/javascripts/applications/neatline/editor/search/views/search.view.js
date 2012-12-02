@@ -25,7 +25,9 @@ Neatline.module('Editor.Search.Views', function(
     },
 
     /*
-     * Get components.
+     * --------------------------------------------------------------------
+     * Get components, set trackers.
+     * --------------------------------------------------------------------
      *
      * @return void.
      */
@@ -44,7 +46,9 @@ Neatline.module('Editor.Search.Views', function(
     },
 
     /*
+     * --------------------------------------------------------------------
      * Execute search on `Enter`; otherwise, parse query.
+     * --------------------------------------------------------------------
      *
      * @return void.
      */
@@ -54,7 +58,9 @@ Neatline.module('Editor.Search.Views', function(
     },
 
     /*
+     * --------------------------------------------------------------------
      * Execute search.
+     * --------------------------------------------------------------------
      *
      * @return void.
      */
@@ -65,7 +71,9 @@ Neatline.module('Editor.Search.Views', function(
     },
 
     /*
+     * --------------------------------------------------------------------
      * Activate/deactivate map mirroring.
+     * --------------------------------------------------------------------
      *
      * @return void.
      */
@@ -75,7 +83,9 @@ Neatline.module('Editor.Search.Views', function(
     },
 
     /*
+     * --------------------------------------------------------------------
      * Activate map mirroring.
+     * --------------------------------------------------------------------
      *
      * @return void.
      */
@@ -94,7 +104,9 @@ Neatline.module('Editor.Search.Views', function(
     },
 
     /*
+     * --------------------------------------------------------------------
      * Deactivate map mirroring.
+     * --------------------------------------------------------------------
      *
      * @return void.
      */
@@ -115,7 +127,9 @@ Neatline.module('Editor.Search.Views', function(
     },
 
     /*
+     * --------------------------------------------------------------------
      * Parse and publish the search string.
+     * --------------------------------------------------------------------
      *
      * @return void.
      */
@@ -152,7 +166,9 @@ Neatline.module('Editor.Search.Views', function(
     },
 
     /*
+     * --------------------------------------------------------------------
      * Disable mirroring, clear input, execute default query.
+     * --------------------------------------------------------------------
      *
      * @return void.
      */
@@ -162,7 +178,9 @@ Neatline.module('Editor.Search.Views', function(
     },
 
     /*
+     * --------------------------------------------------------------------
      * If input has a value, set button active.
+     * --------------------------------------------------------------------
      *
      * @return void.
      */
@@ -172,7 +190,9 @@ Neatline.module('Editor.Search.Views', function(
     },
 
     /*
+     * --------------------------------------------------------------------
      * Set search button active.
+     * --------------------------------------------------------------------
      *
      * @return void.
      */
@@ -181,7 +201,9 @@ Neatline.module('Editor.Search.Views', function(
     },
 
     /*
+     * --------------------------------------------------------------------
      * Set search button inactive.
+     * --------------------------------------------------------------------
      *
      * @return void.
      */
@@ -190,7 +212,9 @@ Neatline.module('Editor.Search.Views', function(
     },
 
     /*
+     * --------------------------------------------------------------------
      * Set search button and input enabled.
+     * --------------------------------------------------------------------
      *
      * @return void.
      */
@@ -200,7 +224,9 @@ Neatline.module('Editor.Search.Views', function(
     },
 
     /*
+     * --------------------------------------------------------------------
      * Set search button and input disabled.
+     * --------------------------------------------------------------------
      *
      * @return void.
      */
@@ -210,7 +236,9 @@ Neatline.module('Editor.Search.Views', function(
     },
 
     /*
+     * --------------------------------------------------------------------
      * Set mirror button active.
+     * --------------------------------------------------------------------
      *
      * @return void.
      */
@@ -220,7 +248,9 @@ Neatline.module('Editor.Search.Views', function(
     },
 
     /*
+     * --------------------------------------------------------------------
      * Set mirror button inactive.
+     * --------------------------------------------------------------------
      *
      * @return void.
      */
@@ -230,7 +260,9 @@ Neatline.module('Editor.Search.Views', function(
     },
 
     /*
+     * --------------------------------------------------------------------
      * Bold search query with structured format.
+     * --------------------------------------------------------------------
      *
      * @return void.
      */
@@ -239,7 +271,9 @@ Neatline.module('Editor.Search.Views', function(
     },
 
     /*
+     * --------------------------------------------------------------------
      * Un-bold search query with unstructured format.
+     * --------------------------------------------------------------------
      *
      * @return void.
      */
