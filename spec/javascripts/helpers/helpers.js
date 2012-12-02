@@ -14,98 +14,96 @@
 _t = {};
 
 
-// --------------------
-// Application loaders.
-// --------------------
-
 /*
+ * ------------------------------------------------------------------------
  * Load neatline application.
+ * ------------------------------------------------------------------------
  *
  * @return void.
  */
 _t.loadNeatline = function() {
 
-  // Load partial.
+  // Load partials, mock server.
   loadFixtures('neatline-partial.html');
-
-  // Load JSON fixtures.
   this.loadJsonFixtures();
-
-  // Mock the server.
   this.server = sinon.fakeServer.create();
 
   // Restart application.
   Neatline.initCallbacks.reset();
   Neatline.start();
 
-  // Inject default records fixtures.
-  this.respondAll200(this.json);
+  // Disable the editor.
+  Neatline.Editor.stop();
 
-  // Views.
-  this.mapView =      Neatline.Modules.Map.view;
+  // Respond to data loads.
+  this.respondAll200(this.json.collections.standard);
 
-  // Collections.
-  this.recordsColl =  Editor.Modules.Records.collection;
+  // Shortcut components.
+  this.mapView = Neatline.Map.view;
+  this.recordsColl = Neatline.Map.collection;
 
 };
 
+
 /*
+ * ------------------------------------------------------------------------
  * Load editor application.
+ * ------------------------------------------------------------------------
  *
  * @return void.
  */
 _t.loadEditor = function() {
 
-  // Load partial.
+  // Load partials, mock server.
   loadFixtures('editor-partial.html');
-
-  // Load JSON fixtures.
   this.loadJsonFixtures();
-
-  // Mock the server.
   this.server = sinon.fakeServer.create();
 
   // Restart application.
   Neatline.initCallbacks.reset();
-  Editor.initCallbacks.reset();
-  Editor.start();
+  Neatline.start();
 
-  // Inject default records fixtures.
-  this.respondAll200(this.json);
+  // Respond to data loads.
+  this.respondAll200(this.json.collections.standard);
 
-  // Views.
-  this.layoutView =   Editor.Modules.Layout.view;
-  this.recordsView =  Editor.Modules.Records.view;
-  this.formView =     Editor.Modules.Form.view;
-  this.searchView =   Editor.Modules.Search.view;
-  this.mapView =      Neatline.Modules.Map.view;
-
-  // Collections.
-  this.recordsColl =  Editor.Modules.Records.collection;
-  this.mapColl =      Neatline.Modules.Map.collection;
+  // Shortcut components
+  this.layoutView = Neatline.Editor.Layout.view;
+  this.recordsView = Neatline.Editor.Records.view;
+  this.formView = Neatline.Editor.Form.view;
+  this.searchView = Neatline.Editor.Search.view;
+  this.mapView = Neatline.Map.view;
+  this.recordsColl = Neatline.Editor.Records.collection;
+  this.mapColl = Neatline.Map.collection;
 
 };
 
 
-// --------
-// Helpers.
-// --------
-
 /*
+ * ------------------------------------------------------------------------
  * Get DOM collection of editor record listings.
+ * ------------------------------------------------------------------------
  *
  * @return void.
  */
 _t.loadJsonFixtures = function() {
-  this.json = readFixtures('records.json');
-  this.removedRecord2Json = readFixtures('records-removed-record.json');
-  this.updatedRecord2Json = readFixtures('records-changed-data.json');
-  this.recordJson = readFixtures('record.json');
-  this.recordInactiveJson = readFixtures('record-inactive.json');
+  this.json = {
+    collections: {
+      standard: readFixtures('coll.default.json'),
+      changed:  readFixtures('coll.changed.json'),
+      removed:  readFixtures('coll.removed.json')
+    },
+    records: {
+      standard: readFixtures('record.default.json'),
+      inactive: readFixtures('record.inactive.json')
+    }
+  };
 };
 
+
 /*
+ * ------------------------------------------------------------------------
  * Get DOM collection of editor record listings.
+ * ------------------------------------------------------------------------
  *
  * @return {Array}: The DOM collection of <li> elements.
  */
@@ -113,8 +111,11 @@ _t.getRecordRows = function() {
   return this.recordsView.$el.find('.record-row');
 };
 
+
 /*
+ * ------------------------------------------------------------------------
  * Get vector layers on the map.
+ * ------------------------------------------------------------------------
  *
  * @return {Array}: The layers.
  */
@@ -129,8 +130,11 @@ _t.getVectorLayers = function() {
 
 };
 
+
 /*
+ * ------------------------------------------------------------------------
  * Get the vector layer by record title.
+ * ------------------------------------------------------------------------
  *
  * @param {String} title: The record title.
  *
@@ -148,8 +152,11 @@ _t.getVectorLayerByTitle = function(title) {
 
 };
 
+
 /*
+ * ------------------------------------------------------------------------
  * Construct a record model instance from a JSON string.
+ * ------------------------------------------------------------------------
  *
  * @param {String} json: The JSON string.
  *
@@ -159,8 +166,11 @@ _t.buildModelFromJson = function(json) {
   return new Neatline.Models.Record(JSON.parse(json));
 };
 
+
 /*
+ * ------------------------------------------------------------------------
  * Return the most recent sinon-wrapped AJAX request.
+ * ------------------------------------------------------------------------
  *
  * @return {Object} request: The sinon request.
  */
@@ -168,8 +178,11 @@ _t.getLastRequest = function() {
   return _.last(this.server.requests);
 };
 
+
 /*
+ * ------------------------------------------------------------------------
  * Inject AJAX mock into sinon-wrapped a request.
+ * ------------------------------------------------------------------------
  *
  * @param {Object} request: The sinon request.
  * @param {Object} response: The response body.
@@ -181,8 +194,11 @@ _t.respond200 = function(request, response) {
   request.respond(200, contentType, response);
 };
 
+
 /*
+ * ------------------------------------------------------------------------
  * Respond to all queued AJAX calls with a single response.
+ * ------------------------------------------------------------------------
  *
  * @param {Object} response: The response body.
  *
@@ -194,8 +210,11 @@ _t.respondAll200 = function(response) {
   }, this));
 };
 
+
 /*
+ * ------------------------------------------------------------------------
  * Respond to the last AJAX call.
+ * ------------------------------------------------------------------------
  *
  * @param {Object} response: The response body.
  *
@@ -207,8 +226,11 @@ _t.respondLast200 = function(response) {
   return request;
 };
 
+
 /*
+ * ------------------------------------------------------------------------
  * Trigger a pan/zoom event on the map.
+ * ------------------------------------------------------------------------
  *
  * @return void.
  */
@@ -216,8 +238,11 @@ _t.triggerMapMove = function() {
   this.mapView.map.events.triggerEvent('moveend');
 };
 
+
 /*
+ * ------------------------------------------------------------------------
  * Simulate map move event and plug in JSON fixture.
+ * ------------------------------------------------------------------------
  *
  * @param {Object} response: The response body.
  *
@@ -228,8 +253,11 @@ _t.refreshMap = function(response) {
   this.respondLast200(response);
 };
 
+
 /*
+ * ------------------------------------------------------------------------
  * Simulate a click on a map feature.
+ * ------------------------------------------------------------------------
  *
  * @param {Object} layer: The feature parent layer.
  * @param {Object} feature: The feature to be clicked on.
@@ -254,8 +282,11 @@ _t.clickOnMapFeature = function(layer, feature) {
 
 };
 
+
 /*
+ * ------------------------------------------------------------------------
  * Simulate a click out on a map feature.
+ * ------------------------------------------------------------------------
  *
  * @param {Array} layers: All vector layers on the map.
  *
@@ -281,8 +312,11 @@ _t.clickOffMapFeature = function(layers) {
 
 };
 
+
 /*
+ * ------------------------------------------------------------------------
  * Simulate a mouseenter on a map feature.
+ * ------------------------------------------------------------------------
  *
  * @param {Object} layer: The feature parent layer.
  * @param {Object} feature: The feature to be clicked on.
@@ -307,8 +341,11 @@ _t.hoverOnMapFeature = function(layer, feature) {
 
 };
 
+
 /*
+ * ------------------------------------------------------------------------
  * Simulate a mouseleave on a map feature.
+ * ------------------------------------------------------------------------
  *
  * @param {Array} layers: All vector layers on the map.
  *
@@ -334,8 +371,11 @@ _t.unHoverOnMapFeature = function(layers) {
 
 };
 
+
 /*
+ * ------------------------------------------------------------------------
  * Set the map focus to a lon/lat and zoom position.
+ * ------------------------------------------------------------------------
  *
  * @param {Number} lon: The longitude.
  * @param {Number} lat: The latitude.

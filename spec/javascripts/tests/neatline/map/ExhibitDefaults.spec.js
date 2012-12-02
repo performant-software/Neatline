@@ -32,7 +32,7 @@ describe('Map Exhibit Defaults', function() {
     Neatline.start();
 
     // Check viewport.
-    var mapView = Neatline.Modules.Map.view;
+    var mapView = Neatline.Map.view;
     var center = mapView.map.getCenter();
     expect(mapView.map.zoom).toEqual(10);
     expect(center.lon).toEqual(-8031391.4348622);

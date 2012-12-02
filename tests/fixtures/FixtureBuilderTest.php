@@ -107,7 +107,8 @@ class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
 
         // Generate the fixture.
         $this->request->setQuery(array('id' => $exhibit->id));
-        $this->writeFixture('neatline/records', 'records.json');
+        $this->writeFixture('neatline/records',
+            'coll.default.json');
 
 
         // Case 2: Data for record 2 has changed.
@@ -118,7 +119,7 @@ class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
         // Generate the fixture.
         $this->resetResponse();
         $this->writeFixture('neatline/records',
-            'records-changed-data.json');
+            'coll.changed.json');
 
 
         // Case 2: Record 2 is absent from the set.
@@ -129,7 +130,7 @@ class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
         // Generate the fixture.
         $this->resetResponse();
         $this->writeFixture('neatline/records',
-            'records-removed-record.json');
+            'coll.removed.json');
 
 
     }
@@ -173,7 +174,7 @@ class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
 
         // Generate the fixture.
         $this->writeFixture('neatline/records/'.$record->id,
-            'record.json');
+            'record.default.json');
 
 
         // Case 1: Map inactive.
@@ -185,7 +186,7 @@ class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
         // Generate the fixture.
         $this->resetResponse();
         $this->writeFixture('neatline/records/'.$record->id,
-            'record-inactive.json');
+            'record.inactive.json');
 
 
     }
