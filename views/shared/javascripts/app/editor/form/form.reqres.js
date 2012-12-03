@@ -14,10 +14,8 @@ Neatline.module('Editor.Form', function(
   Form, Editor, Backbone, Marionette, $, _) {
 
 
-  /*
-   * ----------------------------------------------------------------------
-   * Is a form currently open?
-   * ----------------------------------------------------------------------
+  /**
+   * Respond with true if the form is currently open.
    *
    * @return {Boolean}: True if a form is open.
    */

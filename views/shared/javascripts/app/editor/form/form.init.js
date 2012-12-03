@@ -14,10 +14,8 @@ Neatline.module('Editor.Form', function(
   Form, Editor, Backbone, Marionette, $, _) {
 
 
-  /*
-   * ----------------------------------------------------------------------
+  /**
    * Instantiate the form view.
-   * ----------------------------------------------------------------------
    *
    * @return void.
    */

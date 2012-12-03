@@ -2,9 +2,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Map records collection. Serves as the canonical data source for vectors
- * on the map at any given point in time. Updated in real-time in response
- * to pan and zoom events on the map.
+ * Map records collection.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -18,18 +16,19 @@ Neatline.module('Map.Collections', function(
 
   Collections.Records = Backbone.Collection.extend({
 
+
     url: function() {
       return __exhibit.api;
     },
+
 
     model: Backbone.Model.extend({
       url: function() { return __exhibit.api+'/'+this.get('id'); }
     }),
 
-    /*
-     * --------------------------------------------------------------------
+
+    /**
      * Update the collection.
-     * --------------------------------------------------------------------
      *
      * @param {Object} params: Query parameters for the records API:
      *
@@ -38,13 +37,10 @@ Neatline.module('Map.Collections', function(
      *  - `keywords` (optional): A raw-text search query.
      *  - `tags` (optional): A comma-delimited list of tags.
      *
-     * @param {Function} cb: A success callback, called with the `fetch()`
-     * completes with the updated collection.
-     *
-     * @unittest
+     * @param {Function} callback: Called when the fetch() completes.
      * @return void.
      */
-    updateCollection: function(params, cb) {
+    updateCollection: function(params, callback) {
 
       params = params || {};
       params.id = __exhibit.id;
@@ -54,8 +50,8 @@ Neatline.module('Map.Collections', function(
 
     },
 
-    /*
-     * --------------------------------------------------------------------
+
+    /**
      * Get a model by id.
      *
      * - If the model is already present in the collection, pass it to the
@@ -63,12 +59,9 @@ Neatline.module('Map.Collections', function(
      *
      * - If the model is absent, create a new model on the fly, fetch data
      *   from the server, and pass the populated model to the callback.
-     * --------------------------------------------------------------------
      *
      * @param {Number} id: The model id.
      * @param {Function} cb: Callback, called with the model.
-     *
-     * @unittest
      * @return void.
      */
     getModel: function(id, cb) {
@@ -97,6 +90,7 @@ Neatline.module('Map.Collections', function(
       }
 
     }
+
 
   });
 

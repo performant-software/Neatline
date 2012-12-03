@@ -14,10 +14,8 @@ Neatline.module('Map', function(
   Map, Neatline, Backbone, Marionette, $, _) {
 
 
-  /*
-   * ----------------------------------------------------------------------
-   * Get new map data on pan/zoom.
-   * ----------------------------------------------------------------------
+  /**
+   * Query for updated spatial data when the map is panned or zoomed.
    *
    * @param {Object} params: Hash with `extent` and `zoom`.
    * @return void.
@@ -29,10 +27,9 @@ Neatline.module('Map', function(
     });
   });
 
-  /*
-   * ----------------------------------------------------------------------
-   * Focus the map on a record, identified by id.
-   * ----------------------------------------------------------------------
+
+  /**
+   * Focus the map on the data extent for a record, identified by id.
    *
    * @param {Number} id: The record id.
    * @return void.
@@ -43,13 +40,11 @@ Neatline.module('Map', function(
     });
   });
 
-  /*
-   * ----------------------------------------------------------------------
-   * Focus the map on a record, identified by model.
-   * ----------------------------------------------------------------------
+
+  /**
+   * Focus the map on the data extent for a record, identified by model.
    *
    * @param {Object} model: The record model.
-   *
    * @return void.
    */
   Neatline.vent.on('map:focusByModel', function(model) {

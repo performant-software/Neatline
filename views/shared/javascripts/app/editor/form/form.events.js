@@ -14,10 +14,8 @@ Neatline.module('Editor.Form', function(
   Form, Editor, Backbone, Marionette, $, _) {
 
 
-  /*
-   * ----------------------------------------------------------------------
-   * Show form on record row click.
-   * ----------------------------------------------------------------------
+  /**
+   * Show the form when the listing for a record is clicked.
    *
    * @param {Object} model: The record model.
    * @return void.
@@ -26,10 +24,9 @@ Neatline.module('Editor.Form', function(
     Form.view.show(model, true);
   });
 
-  /*
-   * ----------------------------------------------------------------------
-   * Show form on map feature click.
-   * ----------------------------------------------------------------------
+
+  /**
+   * Show the form when a map geometry is clicked.
    *
    * @param {Object} model: The record model.
    * @return void.
@@ -38,10 +35,10 @@ Neatline.module('Editor.Form', function(
     Form.view.show(model, false);
   });
 
-  /*
-   * ----------------------------------------------------------------------
-   * Push updated KML back into the form.
-   * ----------------------------------------------------------------------
+
+  /**
+   * Updated the "Spatial Data" field on the form when the record's map
+   * geometries are changed.
    *
    * @param {String} coverage: The new KML.
    * @return void.

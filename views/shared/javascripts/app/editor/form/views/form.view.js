@@ -16,14 +16,14 @@ Neatline.module('Editor.Form.Views', function(
 
   Views.Form = Backbone.View.extend({
 
+
     getTemplate: function() {
       return _.template($('#edit-form').html());
     },
 
-    /*
-     * --------------------------------------------------------------------
+
+    /**
      * Render the form template, initialize trackers, get element markup.
-     * --------------------------------------------------------------------
      *
      * @return void.
      */
@@ -81,10 +81,9 @@ Neatline.module('Editor.Form.Views', function(
 
     },
 
-    /*
-     * --------------------------------------------------------------------
+
+    /**
      * Bind event listeners to form elements.
-     * --------------------------------------------------------------------
      *
      * @return void.
      */
@@ -113,14 +112,12 @@ Neatline.module('Editor.Form.Views', function(
 
     },
 
-    /*
-     * --------------------------------------------------------------------
+
+    /**
      * Show the form; block if the form is already open.
-     * --------------------------------------------------------------------
      *
      * @param {Object} model: The record model.
      * @param {Boolean} focus: If true, focus the map on the edit layer.
-     *
      * @return void.
      */
     show: function(model, focus) {
@@ -139,10 +136,9 @@ Neatline.module('Editor.Form.Views', function(
 
     },
 
-    /*
-     * --------------------------------------------------------------------
+
+    /**
      * Close the form, publish the event, set the global tracker.
-     * --------------------------------------------------------------------
      *
      * @return void.
      */
@@ -158,10 +154,9 @@ Neatline.module('Editor.Form.Views', function(
 
     },
 
-    /*
-     * --------------------------------------------------------------------
+
+    /**
      * Render new values from `this.model` into the form elements.
-     * --------------------------------------------------------------------
      *
      * @return void.
      */
@@ -197,10 +192,9 @@ Neatline.module('Editor.Form.Views', function(
 
     },
 
-    /*
-     * --------------------------------------------------------------------
+
+    /**
      * Save the current form values.
-     * --------------------------------------------------------------------
      *
      * @return void.
      */
@@ -239,10 +233,9 @@ Neatline.module('Editor.Form.Views', function(
 
     },
 
-    /*
-     * --------------------------------------------------------------------
+
+    /**
      * Activate "Text" as the starting tab selection.
-     * --------------------------------------------------------------------
      *
      * @return void.
      */
@@ -251,10 +244,9 @@ Neatline.module('Editor.Form.Views', function(
       this.started = true;
     },
 
-    /*
-     * --------------------------------------------------------------------
+
+    /**
      * Render the record title in the header block at the top of the form.
-     * --------------------------------------------------------------------
      *
      * @return void.
      */
@@ -262,10 +254,9 @@ Neatline.module('Editor.Form.Views', function(
       this.els.head.text(this.model.get('title'));
     },
 
-    /*
-     * --------------------------------------------------------------------
+
+    /**
      * Collect and publish current edit geometry settings.
-     * --------------------------------------------------------------------
      *
      * @return void.
      */
@@ -285,10 +276,9 @@ Neatline.module('Editor.Form.Views', function(
 
     },
 
-    /*
-     * --------------------------------------------------------------------
+
+    /**
      * Get the value of the current map control mode.
-     * --------------------------------------------------------------------
      *
      * @return string: The input value.
      */
@@ -296,10 +286,9 @@ Neatline.module('Editor.Form.Views', function(
       return $('input[name="mapControls"]:checked').val();
     },
 
-    /*
-     * --------------------------------------------------------------------
+
+    /**
      * Set the map control to "Navigate".
-     * --------------------------------------------------------------------
      *
      * @return string: The input value.
      */
@@ -307,22 +296,21 @@ Neatline.module('Editor.Form.Views', function(
       return $('input[name="mapControls"]')[0].checked = true;
     },
 
-    /*
-     * --------------------------------------------------------------------
+
+    /**
      * Get an array of the values of all checked modify settings.
-     * --------------------------------------------------------------------
      *
-     * @return
+     * @return {Array}: An array of 0-3 strings representing the current
+     * combination of options: "rotate", "resize", "drag".
      */
     getModifySettings: function() {
       var inputs = $('input[name="modifySettings"]:checked');
       return _.map(inputs, function(i) { return $(i).val(); });
     },
 
-    /*
-     * --------------------------------------------------------------------
+
+    /**
      * Update the coverage textarea.
-     * --------------------------------------------------------------------
      *
      * @param {String} coverage: The new KML.
      * @return void.
@@ -330,6 +318,7 @@ Neatline.module('Editor.Form.Views', function(
     setCoverage: function(coverage) {
       this.els.coverage.val(coverage);
     }
+
 
   });
 

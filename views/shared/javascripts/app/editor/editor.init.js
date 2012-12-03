@@ -2,8 +2,8 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Neatline editor presenter. Hook onto initialization events to enforce
- * the correct startup sequence: Editor => Neatline => Geometry module.
+ * Neatline editor initializer. Enforces the correct startup sequence:
+ * Editor => Neatline => Geometry module.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -15,13 +15,11 @@ Neatline.module('Editor', { startWithParent: false,
   define: function(Editor, Neatline, Backbone, Marionette, $, _) {
 
 
-  /*
-   * ----------------------------------------------------------------------
+  /**
    * Start the editor before running Neatline. This ordering is necessary
    * to ensure that the editor layout retine sets non-zero dimensions on
    * the map container before Neatline starts OpenLayers, which needs to
    * be instantiated on a space-occupying div.
-   * ----------------------------------------------------------------------
    *
    * @return void.
    */
@@ -29,11 +27,10 @@ Neatline.module('Editor', { startWithParent: false,
     Editor.start();
   });
 
-  /*
-   * ----------------------------------------------------------------------
+
+  /**
    * Wait until Neatline is running before initializing the geometry
    * module, which needs the application map view to be running.
-   * ----------------------------------------------------------------------
    *
    * @return void.
    */
