@@ -14,19 +14,15 @@ Neatline.module('Editor.Form', function(
   Form, Editor, Backbone, Marionette, $, _) {
 
 
-  Form.addInitializer(function() {
-
-    /*
-     * --------------------------------------------------------------------
-     * Is a form currently open?
-     * --------------------------------------------------------------------
-     *
-     * @return {Boolean}: True if a form is open.
-     */
-    Neatline.reqres.addHandler('editor:form:isOpen?', function() {
-      return Form.view.open;
-    });
-
+  /*
+   * ----------------------------------------------------------------------
+   * Is a form currently open?
+   * ----------------------------------------------------------------------
+   *
+   * @return {Boolean}: True if a form is open.
+   */
+  Neatline.reqres.addHandler('editor:form:isOpen?', function() {
+    return Form.view.open;
   });
 
 

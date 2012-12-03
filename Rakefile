@@ -1,5 +1,7 @@
 begin
   require 'jasmine'
+  require 'net/http'
+  require 'uri'
   load 'jasmine/tasks/jasmine.rake'
 end
 
