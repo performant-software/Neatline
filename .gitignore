@@ -1,4 +1,8 @@
-.DS_Store
+spec/javascripts/fixtures/
+spec/javascripts/helpers/components/
+views/shared/javascripts/components/
+views/shared/css/img/
+node_modules/
 build/api/
 build/code-browser/
 build/coverage/
@@ -6,6 +10,4 @@ build/dist/
 build/logs/
 build/pdepend/
 build/tmp/
-node_modules/
-views/shared/javascripts/components/
-views/shared/css/img/
+.DS_Store
