@@ -14,40 +14,47 @@ Neatline.module('Editor.Form', function(
   Form, Editor, Backbone, Marionette, $, _) {
 
 
-  /*
-   * ----------------------------------------------------------------------
-   * Show form on record row click.
-   * ----------------------------------------------------------------------
-   *
-   * @param {Object} model: The record model.
-   * @return void.
-   */
-  Neatline.vent.on('editor:records:openForm', function(model) {
-    Form.view.show(model, true);
-  });
+  Form.addInitializer(function() {
 
-  /*
-   * ----------------------------------------------------------------------
-   * Show form on map feature click.
-   * ----------------------------------------------------------------------
-   *
-   * @param {Object} model: The record model.
-   * @return void.
-   */
-  Neatline.vent.on('map:select', function(model) {
-    Form.view.show(model, false);
-  });
+    /*
+     * --------------------------------------------------------------------
+     * Show form on record row click.
+     * --------------------------------------------------------------------
+     *
+     * @param {Object} model: The record model.
+     * @return void.
+     */
+    Neatline.vent.bindTo(
+      Neatline.vent, 'editor:records:openForm', function(model) {
+        Form.view.show(model, true);
+    });
 
-  /*
-   * ----------------------------------------------------------------------
-   * Push updated KML back into the form.
-   * ----------------------------------------------------------------------
-   *
-   * @param {String} coverage: The new KML.
-   * @return void.
-   */
-  Neatline.vent.on('editor:geometry:newCoverage', function(coverage) {
-    Form.view.setCoverage(coverage);
+    /*
+     * --------------------------------------------------------------------
+     * Show form on map feature click.
+     * --------------------------------------------------------------------
+     *
+     * @param {Object} model: The record model.
+     * @return void.
+     */
+    Neatline.vent.bindTo(
+      Neatline.vent, 'map:select', function(model) {
+        Form.view.show(model, false);
+    });
+
+    /*
+     * --------------------------------------------------------------------
+     * Push updated KML back into the form.
+     * --------------------------------------------------------------------
+     *
+     * @param {String} coverage: The new KML.
+     * @return void.
+     */
+    Neatline.vent.bindTo(
+      Neatline.vent, 'editor:geometry:newCoverage', function(coverage) {
+        Form.view.setCoverage(coverage);
+    });
+
   });
 
 

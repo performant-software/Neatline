@@ -23,6 +23,8 @@ _t = {};
  */
 _t.loadNeatline = function() {
 
+  this.reset();
+
   // Load partials, mock server.
   loadFixtures('neatline-partial.html');
   this.loadJsonFixtures();
@@ -68,6 +70,18 @@ _t.loadEditor = function() {
   this.recordsColl = Neatline.Editor.Records.collection;
   this.mapColl = Neatline.Map.collection;
 
+};
+
+
+/*
+ * ------------------------------------------------------------------------
+ * Strip all bindings off the application event aggregator.
+ * ------------------------------------------------------------------------
+ *
+ * @return void.
+ */
+_t.reset = function() {
+  Neatline.vent.unbindAll();
 };
 
 
