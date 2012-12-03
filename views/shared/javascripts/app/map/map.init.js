@@ -14,10 +14,8 @@ Neatline.module('Map', function(
   Map, Neatline, Backbone, Marionette, $, _) {
 
 
-  /*
-   * ----------------------------------------------------------------------
+  /**
    * Instantiate the map view and records collection.
-   * ----------------------------------------------------------------------
    *
    * @return void.
    */

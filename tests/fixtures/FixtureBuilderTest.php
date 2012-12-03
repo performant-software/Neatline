@@ -35,13 +35,13 @@ class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
         // Case 1: 3 records, 1 and 2 map-active, 3 map-inactive.
         // ------------------------------------------------------
 
-        $record1->title = 'Record 1';
-        $record2->title = 'Record 2';
-        $record3->title = 'Record 3';
+        $record1->title = 'Title 1';
+        $record2->title = 'Title 2';
+        $record3->title = 'Title 3';
 
-        $record1->description = 'Record 1 desc.';
-        $record2->description = 'Record 2 desc.';
-        $record3->description = 'Record 3 desc.';
+        $record1->description = 'Body 1.';
+        $record2->description = 'Body 2.';
+        $record3->description = 'Body 3.';
 
         // No default focus/zoom for records 2 and 3.
         $record1->map_focus = '100,200';

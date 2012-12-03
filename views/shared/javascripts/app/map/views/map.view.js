@@ -16,15 +16,15 @@ Neatline.module('Map.Views', function(
 
   Views.Map = Backbone.View.extend({
 
+
     options: {
       defaultZoom: 6
     },
 
-    /*
-     * --------------------------------------------------------------------
+
+    /**
      * Initialize state variables, run the top-level start-up routine, and
      * publish initial request for data.
-     * --------------------------------------------------------------------
      *
      * @return void.
      */
@@ -40,12 +40,11 @@ Neatline.module('Map.Views', function(
 
     },
 
-    /*
-     * --------------------------------------------------------------------
+
+    /**
      * Construct the OpenLayers Map instance, set the default base layer
      * and call component start-up routines that add cursor controls, set
      * the default focus/zoom, and listen for movement events.
-     * --------------------------------------------------------------------
      *
      * @return void.
      */
@@ -80,11 +79,10 @@ Neatline.module('Map.Views', function(
 
     },
 
-    /*
-     * --------------------------------------------------------------------
+
+    /**
      * Construct, add, and activate hover and click controls to the map.
      * `hoverControl` handles highlighting, `clickControl` handles clicks.
-     * --------------------------------------------------------------------
      *
      * @return void.
      */
@@ -117,10 +115,9 @@ Neatline.module('Map.Views', function(
 
     },
 
-    /*
-     * --------------------------------------------------------------------
+
+    /**
      * Activate the hover and click controls.
-     * --------------------------------------------------------------------
      *
      * @return void.
      */
@@ -129,10 +126,9 @@ Neatline.module('Map.Views', function(
       this.clickControl.activate();
     },
 
-    /*
-     * --------------------------------------------------------------------
+
+    /**
      * Deactivate the hover and click controls.
-     * --------------------------------------------------------------------
      *
      * @return void.
      */
@@ -141,12 +137,11 @@ Neatline.module('Map.Views', function(
       this.clickControl.deactivate();
     },
 
-    /*
-     * --------------------------------------------------------------------
+
+    /**
      * Update the layer collections operated on by the hover and click
      * controls. Called after new data arrives and the layer set has been
      * rebuild by the `ingest` flow.
-     * --------------------------------------------------------------------
      *
      * @return void.
      */
@@ -155,13 +150,12 @@ Neatline.module('Map.Views', function(
       this.clickControl.setLayer(this.layers);
     },
 
-    /*
-     * --------------------------------------------------------------------
+
+    /**
      * Set the starting focus and zoom. If `mapFocus` is non-null on the
      * global __exhibit object, then we know that a default focus and zoom
      * has been set for the exhibit and should be manifested. If no
      * default exists, apply the default zoom and geolocate the focus.
-     * --------------------------------------------------------------------
      *
      * @return void.
      */
@@ -172,6 +166,7 @@ Neatline.module('Map.Views', function(
         this.setViewport(__exhibit.mapFocus, __exhibit.mapZoom);
       }
 
+
       else {
         this.map.zoomTo(this.options.defaultZoom);
         this.geolocate();
@@ -179,12 +174,11 @@ Neatline.module('Map.Views', function(
 
     },
 
-    /*
-     * --------------------------------------------------------------------
+
+    /**
      * Add a listener for the `moveend` event on the map, which is called
      * when a pan or zoom is completed. Bind to `publishPosition`, which
      * emits the current focus of the map and triggers off a data reload.
-     * --------------------------------------------------------------------
      *
      * @return void.
      */
@@ -197,10 +191,9 @@ Neatline.module('Map.Views', function(
 
     },
 
-    /*
-     * --------------------------------------------------------------------
+
+    /**
      * Publish the current focus and zoom of the map via `map:move`.
-     * --------------------------------------------------------------------
      *
      * @return void.
      */
@@ -214,8 +207,8 @@ Neatline.module('Map.Views', function(
 
     },
 
-    /*
-     * --------------------------------------------------------------------
+
+    /**
      * Focus the position and zoom to center around the passed model.
      *
      * - If `map_active` is 0, break and do nothing.
@@ -226,7 +219,6 @@ Neatline.module('Map.Views', function(
      *
      * - Otherwise, automatically fit the viewport around the extent of
      *   the model's geometries.
-     * --------------------------------------------------------------------
      *
      * @param {Object} model: The record model.
      *
@@ -262,14 +254,12 @@ Neatline.module('Map.Views', function(
 
     },
 
-    /*
-     * --------------------------------------------------------------------
+
+    /**
      * Set the focus and zoom of the map.
-     * --------------------------------------------------------------------
      *
      * @param {String} focus: Comma-delimited lat/lon.
      * @param {Number} zoom: The zoom value.
-     *
      * @return void.
      */
     setViewport: function(focus, zoom) {
@@ -283,10 +273,9 @@ Neatline.module('Map.Views', function(
 
     },
 
-    /*
-     * --------------------------------------------------------------------
+
+    /**
      * Focus the map on the user's location.
-     * --------------------------------------------------------------------
      *
      * @return void.
      */
@@ -302,8 +291,8 @@ Neatline.module('Map.Views', function(
 
     },
 
-    /*
-     * --------------------------------------------------------------------
+
+    /**
      * The top-level point of entry when a new record collection arrives.
      * Updates the map layers to mirror the new records collection.
      *
@@ -311,7 +300,6 @@ Neatline.module('Map.Views', function(
      *
      * - Then walk the new collection and construct new layers for models
      *   that are active on the map and not in the `frozen` array.
-     * --------------------------------------------------------------------
      *
      * @param {Object} records: The records collection.
      * @return void.
@@ -359,10 +347,9 @@ Neatline.module('Map.Views', function(
 
     },
 
-    /*
-     * --------------------------------------------------------------------
+
+    /**
      * Construct a vector layer and geometries for a model.
-     * --------------------------------------------------------------------
      *
      * @param {Object} record: The record model.
      * @return {Boolean}: True if the layer was added.
@@ -396,11 +383,10 @@ Neatline.module('Map.Views', function(
 
     },
 
-    /*
-     * --------------------------------------------------------------------
+
+    /**
      * Construct a style map object for a vector. Used by `buildLayer` to
      * populate the `styleMap` attribute for a model's vector layer.
-     * --------------------------------------------------------------------
      *
      * @param {Object} record: The record.
      * @return void.
@@ -448,10 +434,9 @@ Neatline.module('Map.Views', function(
 
     },
 
-    /*
-     * --------------------------------------------------------------------
+
+    /**
      * Return the layer that corresponds the the passed model instance.
-     * --------------------------------------------------------------------
      *
      * @param {Object} model: The record model.
      * @return {Object|OpenLayers.Layer.Vector} The vector layer.
@@ -460,10 +445,9 @@ Neatline.module('Map.Views', function(
       return _.first(this.map.getLayersBy('nId', model.get('id')));
     },
 
-    /*
-     * --------------------------------------------------------------------
+
+    /**
      * Get the current zoom level.
-     * --------------------------------------------------------------------
      *
      * @return {Number}: The zoom level.
      */
@@ -471,10 +455,9 @@ Neatline.module('Map.Views', function(
       return this.map.getZoom();
     },
 
-    /*
-     * --------------------------------------------------------------------
+
+    /**
      * Get the current map viewport bounds as a WKT polygon string.
-     * --------------------------------------------------------------------
      *
      * @return {String}: The WKT string.
      */
@@ -485,11 +468,10 @@ Neatline.module('Map.Views', function(
       return formatWKT.write(feature);
     },
 
-    /*
-     * --------------------------------------------------------------------
+
+    /**
      * When a feature is selected, publish `map:select` with the model
      * instance that was used to construct the layer.
-     * --------------------------------------------------------------------
      *
      * @param {Object|OpenLayers.Feature} feature: The feature.
      * @return void.
@@ -498,11 +480,10 @@ Neatline.module('Map.Views', function(
       Neatline.vent.trigger('map:select', feature.layer.nModel);
     },
 
-    /*
-     * --------------------------------------------------------------------
+
+    /**
      * When a feature is unselected, publish `map:unselect` with the model
      * instance that was used to construct the layer.
-     * --------------------------------------------------------------------
      *
      * @param {Object|OpenLayers.Feature} feature: The feature.
      * @return void.
@@ -511,11 +492,10 @@ Neatline.module('Map.Views', function(
       Neatline.vent.trigger('map:unselect', feature.layer.nModel);
     },
 
-    /*
-     * --------------------------------------------------------------------
+
+    /**
      * When a feature is highlighted, publish `map:highlight` with the
      * model instance that was used to construct the layer.
-     * --------------------------------------------------------------------
      *
      * @param {Object} evt: The highlight event.
      * @return void.
@@ -524,11 +504,10 @@ Neatline.module('Map.Views', function(
       Neatline.vent.trigger('map:highlight', evt.feature.layer.nModel);
     },
 
-    /*
-     * --------------------------------------------------------------------
+
+    /**
      * When a feature is un-highlighted, publish `map:unhighlight` with
      * the model instance that was used to construct the layer.
-     * --------------------------------------------------------------------
      *
      * @param {Object} evt: The unhighlight event.
      * @return void.
@@ -537,10 +516,9 @@ Neatline.module('Map.Views', function(
       Neatline.vent.trigger('map:unhighlight', evt.feature.layer.nModel);
     },
 
-    /*
-     * --------------------------------------------------------------------
+
+    /**
      * Add the passed record id to the `frozen` array.
-     * --------------------------------------------------------------------
      *
      * @param {Number} id: The id to freeze.
      * @return void.
@@ -549,10 +527,9 @@ Neatline.module('Map.Views', function(
       this.frozen.push(id);
     },
 
-    /*
-     * --------------------------------------------------------------------
+
+    /**
      * Remove the passed record id to the `frozen` array.
-     * --------------------------------------------------------------------
      *
      * @param {Number} id: The id to unfreeze.
      * @return void.
@@ -562,6 +539,7 @@ Neatline.module('Map.Views', function(
         return fid == id;
       });
     }
+
 
   });
 

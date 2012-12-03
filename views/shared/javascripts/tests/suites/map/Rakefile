@@ -1,0 +1,5 @@
+begin
+  require 'jasmine'
+  require './jasmine_config.rb'
+  load 'jasmine/tasks/jasmine.rake'
+end
