@@ -143,10 +143,10 @@ describe('Form Spatial Tab', function() {
     // --------------------------------------------------------------------
 
     // Set sides.
-    _t.formView.sides.val('10');
+    _t.formView.els.sides.val('10');
 
     // Trigger change.
-    _t.formView.sides.trigger('change');
+    _t.formView.els.sides.trigger('change');
 
     // Check settings.
     expect(_t.mapView.controls.reg.handler.sides).toEqual(10);
@@ -161,10 +161,10 @@ describe('Form Spatial Tab', function() {
     // --------------------------------------------------------------------
 
     // Set snap angle.
-    _t.formView.snap.val('45');
+    _t.formView.els.snap.val('45');
 
     // Trigger change.
-    _t.formView.snap.trigger('change');
+    _t.formView.els.snap.trigger('change');
 
     // Check settings.
     expect(_t.mapView.controls.reg.handler.snapAngle).toEqual(45);
@@ -179,19 +179,19 @@ describe('Form Spatial Tab', function() {
     // --------------------------------------------------------------------
 
     // Set irregular.
-    _t.formView.irregular.attr('checked', 'checked');
+    _t.formView.els.irregular.attr('checked', 'checked');
 
     // Trigger change.
-    _t.formView.sides.trigger('change');
+    _t.formView.els.sides.trigger('change');
 
     // Check settings.
     expect(_t.mapView.controls.reg.handler.irregular).toEqual(true);
 
     // Unset irregular.
-    _t.formView.irregular.removeAttr('checked');
+    _t.formView.els.irregular.removeAttr('checked');
 
     // Trigger change.
-    _t.formView.sides.trigger('change');
+    _t.formView.els.sides.trigger('change');
 
     // Check settings.
     expect(_t.mapView.controls.reg.handler.irregular).toEqual(false);
@@ -270,7 +270,7 @@ describe('Form Spatial Tab', function() {
     _t.mapView.controls.point.drawFeature(pt);
 
     // Check for new data.
-    expect(_t.formView.coverage.val()).toEqual(
+    expect(_t.formView.els.coverage.val()).toEqual(
       'GEOMETRYCOLLECTION(POINT(1 2),POINT(3 4))'
     );
 
@@ -290,7 +290,7 @@ describe('Form Spatial Tab', function() {
     _t.mapView.controls.line.drawFeature(line);
 
     // Check for new data.
-    expect(_t.formView.coverage.val()).toEqual(
+    expect(_t.formView.els.coverage.val()).toEqual(
       'GEOMETRYCOLLECTION(POINT(1 2),LINESTRING(1 2,3 4))'
     );
 
@@ -312,7 +312,7 @@ describe('Form Spatial Tab', function() {
     _t.mapView.controls.poly.drawFeature(poly);
 
     // Check for new data.
-    expect(_t.formView.coverage.val()).toEqual(
+    expect(_t.formView.els.coverage.val()).toEqual(
       'GEOMETRYCOLLECTION(POINT(1 2),POLYGON((1 2,3 4,5 6,1 2)))'
     );
 
@@ -334,7 +334,7 @@ describe('Form Spatial Tab', function() {
     _t.mapView.controls.reg.drawFeature(poly);
 
     // Check for new data.
-    expect(_t.formView.coverage.val()).toEqual(
+    expect(_t.formView.els.coverage.val()).toEqual(
       'GEOMETRYCOLLECTION(POINT(1 2),POLYGON((1 2,3 4,5 6,1 2)))'
     );
 
@@ -357,7 +357,7 @@ describe('Form Spatial Tab', function() {
     _t.mapView.controls.edit.dragComplete();
 
     // Check for new data.
-    expect(_t.formView.coverage.val()).toEqual(
+    expect(_t.formView.els.coverage.val()).toEqual(
       'GEOMETRYCOLLECTION(POINT(2 3))'
     );
 
@@ -377,7 +377,7 @@ describe('Form Spatial Tab', function() {
     _t.mapView.controls.del.selectFeature(feature);
 
     // Check for new data.
-    expect(_t.formView.coverage.val()).toEqual(
+    expect(_t.formView.els.coverage.val()).toEqual(
       'GEOMETRYCOLLECTION()'
     );
 

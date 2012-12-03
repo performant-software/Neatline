@@ -115,7 +115,6 @@ module.exports = function(grunt) {
       tasks: [
         'concat:neatline',
         'concat:editor',
-        'concat:test',
         'stylus',
         'concat:neatlineCss',
         'concat:editorCss'

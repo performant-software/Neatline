@@ -37,10 +37,10 @@ Neatline.module('Map.Collections', function(
      *  - `keywords` (optional): A raw-text search query.
      *  - `tags` (optional): A comma-delimited list of tags.
      *
-     * @param {Function} callback: Called when the fetch() completes.
+     * @param {Function} cb: Called when the fetch() completes.
      * @return void.
      */
-    updateCollection: function(params, callback) {
+    updateCollection: function(params, cb) {
 
       params = params || {};
       params.id = __exhibit.id;
