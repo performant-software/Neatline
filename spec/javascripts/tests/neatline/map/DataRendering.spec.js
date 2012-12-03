@@ -12,7 +12,7 @@
 
 describe('Map Data Rendering', function() {
 
-  var layers, layer;
+  var mapLayers, layer1, layer2;
 
   // Start Neatline.
   beforeEach(function() {
@@ -20,8 +20,9 @@ describe('Map Data Rendering', function() {
     _t.loadNeatline();
 
     // Get layers.
-    layers = _t.getVectorLayers();
-    layer = layers[0];
+    mapLayers = _t.getVectorLayers();
+    layer1 = mapLayers[0];
+    layer2 = mapLayers[1];
 
   });
 
@@ -33,11 +34,11 @@ describe('Map Data Rendering', function() {
     // --------------------------------------------------------------------
 
     // Check geometry.
-    expect(layers.length).toEqual(2);
-    expect(layers[0].features[0].geometry.x).toEqual(1);
-    expect(layers[0].features[0].geometry.y).toEqual(2);
-    expect(layers[1].features[0].geometry.x).toEqual(3);
-    expect(layers[1].features[0].geometry.y).toEqual(4);
+    expect(mapLayers.length).toEqual(2);
+    expect(layer1.features[0].geometry.x).toEqual(1);
+    expect(layer1.features[0].geometry.y).toEqual(2);
+    expect(layer2.features[0].geometry.x).toEqual(3);
+    expect(layer2.features[0].geometry.y).toEqual(4);
 
   });
 
@@ -49,7 +50,7 @@ describe('Map Data Rendering', function() {
     // has been changed, the new data should be rendered.
     // --------------------------------------------------------------------
 
-    // Get Record 2 layer.
+    // Get Record 2 layer1.
     var record2Layer = _t.getVectorLayerByTitle('Record 2');
 
     // At start, 1 point at POINT(3 4).
@@ -57,10 +58,10 @@ describe('Map Data Rendering', function() {
     expect(record2Layer.features[0].geometry.x).toEqual(3);
     expect(record2Layer.features[0].geometry.y).toEqual(4);
 
-    // Trigger a map move, inject updated data.
-    _t.refreshMap(_t.updatedRecord2Json);
+    // Trigger a map move, inject new data.
+    _t.refreshMap(_t.json.collections.changed);
 
-    // Get the new layer for record 2
+    // Get the new layer1 for record 2
     record2Layer = _t.getVectorLayerByTitle('Record 2');
 
     // Geometry should be changed.
@@ -75,17 +76,17 @@ describe('Map Data Rendering', function() {
     // --------------------------------------------------------------------
     // When a new set of records is ingested (for example, in response to
     // a pan or zoom event on the map) and record that is currently on the
-    // map is absent from the new records collection, the layer for the
+    // map is absent from the new records collection, the layer1 for the
     // record should be removed.
     // --------------------------------------------------------------------
 
-    // At start, Record 2 layer exists.
+    // At start, Record 2 layer1 exists.
     expect(_t.getVectorLayerByTitle('Record 2')).toBeDefined();
 
     // Trigger a map move, inject data without Record 2.
-    _t.refreshMap(_t.removedRecord2Json);
+    _t.refreshMap(_t.json.collections.removed);
 
-    // Record 2 layer no longer exists.
+    // Record 2 layer1 no longer exists.
     expect(_t.getVectorLayerByTitle('Record 2')).toBeUndefined();
 
   });
@@ -94,25 +95,25 @@ describe('Map Data Rendering', function() {
 
     // --------------------------------------------------------------------
     // When a record is set to frozen (for example, when the edit form for
-    // the record is open in the editor), the layer for the record should
+    // the record is open in the editor), the layer1 for the record should
     // not be rebuilt when new data is requested and ingested on the map
     // in response to a pan or zoom event. This is to prevent new, unsaved
     // changes to the geometry from being overwritten by the old data.
     // --------------------------------------------------------------------
 
-    // Get Record 2 layer, add new point.
+    // Get Record 2 layer1, add new point.
     var record2Layer = _t.getVectorLayerByTitle('Record 2');
     var point = new OpenLayers.Geometry.Point(9,10);
     var feature = new OpenLayers.Feature.Vector(point);
     record2Layer.addFeatures([feature]);
 
     // Set Record 2 frozen.
-    _t.mapView.freeze(record2Layer.nId);
+    Neatline.Map.view.freeze(record2Layer.nId);
 
     // Trigger a map move.
-    _t.refreshMap(_t.json);
+    _t.refreshMap(_t.json.collections.changed);
 
-    // Get the new layer for record 2
+    // Get the new layer1 for record 2
     record2Layer = _t.getVectorLayerByTitle('Record 2');
 
     // Geometry should be unchanged.
@@ -127,23 +128,23 @@ describe('Map Data Rendering', function() {
 
     // --------------------------------------------------------------------
     // When a record is set to frozen (for example, when the edit form for
-    // the record is open in the editor), the layer for the record should
+    // the record is open in the editor), the layer1 for the record should
     // not be removed if a new data set is ingested in which the record is
     // absent. This is to prevent new, unsaved changes to the geometry
     // from being lost when the map is moved.
     // --------------------------------------------------------------------
 
-    // At start, Record 2 layer exists.
+    // At start, Record 2 layer1 exists.
     var record2Layer = _t.getVectorLayerByTitle('Record 2');
     expect(record2Layer).toBeDefined();
 
     // Set Record 2 frozen.
-    _t.mapView.freeze(record2Layer.nId);
+    Neatline.Map.view.freeze(record2Layer.nId);
 
     // Trigger a map move, inject data without Record 2.
     _t.refreshMap(_t.removedRecord2Json);
 
-    // Record 2 layer still exists.
+    // Record 2 layer1 still exists.
     expect(_t.getVectorLayerByTitle('Record 2')).toBeDefined();
 
   });
@@ -160,45 +161,45 @@ describe('Map Data Rendering', function() {
      */
 
     // Fill color.
-    expect(layers[0].styleMap.styles.default.defaultStyle.fillColor).
+    expect(layer1.styleMap.styles.default.defaultStyle.fillColor).
       toEqual('#111111');
-    expect(layers[1].styleMap.styles.default.defaultStyle.fillColor).
+    expect(layer2.styleMap.styles.default.defaultStyle.fillColor).
       toEqual('#222222');
 
     // Stroke color.
-    expect(layers[0].styleMap.styles.default.defaultStyle.strokeColor).
+    expect(layer1.styleMap.styles.default.defaultStyle.strokeColor).
       toEqual('#444444');
-    expect(layers[1].styleMap.styles.default.defaultStyle.strokeColor).
+    expect(layer2.styleMap.styles.default.defaultStyle.strokeColor).
       toEqual('#555555');
 
     // Fill opacity
-    expect(layers[0].styleMap.styles.default.defaultStyle.fillOpacity).
+    expect(layer1.styleMap.styles.default.defaultStyle.fillOpacity).
       toEqual(0.01);
-    expect(layers[1].styleMap.styles.default.defaultStyle.fillOpacity).
+    expect(layer2.styleMap.styles.default.defaultStyle.fillOpacity).
       toEqual(0.02);
 
     // Stroke opacity
-    expect(layers[0].styleMap.styles.default.defaultStyle.strokeOpacity).
+    expect(layer1.styleMap.styles.default.defaultStyle.strokeOpacity).
       toEqual(0.07);
-    expect(layers[1].styleMap.styles.default.defaultStyle.strokeOpacity).
+    expect(layer2.styleMap.styles.default.defaultStyle.strokeOpacity).
       toEqual(0.08);
 
     // Graphic opacity
-    expect(layers[0].styleMap.styles.default.defaultStyle.graphicOpacity).
+    expect(layer1.styleMap.styles.default.defaultStyle.graphicOpacity).
       toEqual(0.1);
-    expect(layers[1].styleMap.styles.default.defaultStyle.graphicOpacity).
+    expect(layer2.styleMap.styles.default.defaultStyle.graphicOpacity).
       toEqual(0.11);
 
     // Stroke width.
-    expect(layers[0].styleMap.styles.default.defaultStyle.strokeWidth).
+    expect(layer1.styleMap.styles.default.defaultStyle.strokeWidth).
       toEqual(13);
-    expect(layers[1].styleMap.styles.default.defaultStyle.strokeWidth).
+    expect(layer2.styleMap.styles.default.defaultStyle.strokeWidth).
       toEqual(14);
 
     // Point radius.
-    expect(layers[0].styleMap.styles.default.defaultStyle.pointRadius).
+    expect(layer1.styleMap.styles.default.defaultStyle.pointRadius).
       toEqual(16);
-    expect(layers[1].styleMap.styles.default.defaultStyle.pointRadius).
+    expect(layer2.styleMap.styles.default.defaultStyle.pointRadius).
       toEqual(17);
 
     /*
@@ -206,45 +207,45 @@ describe('Map Data Rendering', function() {
      */
 
     // Fill color.
-    expect(layers[0].styleMap.styles.select.defaultStyle.fillColor).
+    expect(layer1.styleMap.styles.select.defaultStyle.fillColor).
       toEqual('#777777');
-    expect(layers[1].styleMap.styles.select.defaultStyle.fillColor).
+    expect(layer2.styleMap.styles.select.defaultStyle.fillColor).
       toEqual('#888888');
 
     // Stroke color.
-    expect(layers[0].styleMap.styles.select.defaultStyle.strokeColor).
+    expect(layer1.styleMap.styles.select.defaultStyle.strokeColor).
       toEqual('#444444');
-    expect(layers[1].styleMap.styles.select.defaultStyle.strokeColor).
+    expect(layer2.styleMap.styles.select.defaultStyle.strokeColor).
       toEqual('#555555');
 
     // Fill opacity
-    expect(layers[0].styleMap.styles.select.defaultStyle.fillOpacity).
+    expect(layer1.styleMap.styles.select.defaultStyle.fillOpacity).
       toEqual(0.04);
-    expect(layers[1].styleMap.styles.select.defaultStyle.fillOpacity).
+    expect(layer2.styleMap.styles.select.defaultStyle.fillOpacity).
       toEqual(0.05);
 
     // Stroke opacity
-    expect(layers[0].styleMap.styles.select.defaultStyle.strokeOpacity).
+    expect(layer1.styleMap.styles.select.defaultStyle.strokeOpacity).
       toEqual(0.07);
-    expect(layers[1].styleMap.styles.select.defaultStyle.strokeOpacity).
+    expect(layer2.styleMap.styles.select.defaultStyle.strokeOpacity).
       toEqual(0.08);
 
     // Graphic opacity
-    expect(layers[0].styleMap.styles.select.defaultStyle.graphicOpacity).
+    expect(layer1.styleMap.styles.select.defaultStyle.graphicOpacity).
       toEqual(0.1);
-    expect(layers[1].styleMap.styles.select.defaultStyle.graphicOpacity).
+    expect(layer2.styleMap.styles.select.defaultStyle.graphicOpacity).
       toEqual(0.11);
 
     // Stroke width.
-    expect(layers[0].styleMap.styles.select.defaultStyle.strokeWidth).
+    expect(layer1.styleMap.styles.select.defaultStyle.strokeWidth).
       toEqual(13);
-    expect(layers[1].styleMap.styles.select.defaultStyle.strokeWidth).
+    expect(layer2.styleMap.styles.select.defaultStyle.strokeWidth).
       toEqual(14);
 
     // Point radius.
-    expect(layers[0].styleMap.styles.select.defaultStyle.pointRadius).
+    expect(layer1.styleMap.styles.select.defaultStyle.pointRadius).
       toEqual(16);
-    expect(layers[1].styleMap.styles.select.defaultStyle.pointRadius).
+    expect(layer2.styleMap.styles.select.defaultStyle.pointRadius).
       toEqual(17);
 
     /*
@@ -252,45 +253,45 @@ describe('Map Data Rendering', function() {
      */
 
     // Fill color.
-    expect(layers[0].styleMap.styles.temporary.defaultStyle.fillColor).
+    expect(layer1.styleMap.styles.temporary.defaultStyle.fillColor).
       toEqual('#777777');
-    expect(layers[1].styleMap.styles.temporary.defaultStyle.fillColor).
+    expect(layer2.styleMap.styles.temporary.defaultStyle.fillColor).
       toEqual('#888888');
 
     // Stroke color.
-    expect(layers[0].styleMap.styles.temporary.defaultStyle.strokeColor).
+    expect(layer1.styleMap.styles.temporary.defaultStyle.strokeColor).
       toEqual('#444444');
-    expect(layers[1].styleMap.styles.temporary.defaultStyle.strokeColor).
+    expect(layer2.styleMap.styles.temporary.defaultStyle.strokeColor).
       toEqual('#555555');
 
     // Fill opacity
-    expect(layers[0].styleMap.styles.temporary.defaultStyle.fillOpacity).
+    expect(layer1.styleMap.styles.temporary.defaultStyle.fillOpacity).
       toEqual(0.04);
-    expect(layers[1].styleMap.styles.temporary.defaultStyle.fillOpacity).
+    expect(layer2.styleMap.styles.temporary.defaultStyle.fillOpacity).
       toEqual(0.05);
 
     // Stroke opacity
-    expect(layers[0].styleMap.styles.temporary.defaultStyle.strokeOpacity).
+    expect(layer1.styleMap.styles.temporary.defaultStyle.strokeOpacity).
       toEqual(0.07);
-    expect(layers[1].styleMap.styles.temporary.defaultStyle.strokeOpacity).
+    expect(layer2.styleMap.styles.temporary.defaultStyle.strokeOpacity).
       toEqual(0.08);
 
     // Graphic opacity
-    expect(layers[0].styleMap.styles.temporary.defaultStyle.graphicOpacity).
+    expect(layer1.styleMap.styles.temporary.defaultStyle.graphicOpacity).
       toEqual(0.1);
-    expect(layers[1].styleMap.styles.temporary.defaultStyle.graphicOpacity).
+    expect(layer2.styleMap.styles.temporary.defaultStyle.graphicOpacity).
       toEqual(0.11);
 
     // Stroke width.
-    expect(layers[0].styleMap.styles.temporary.defaultStyle.strokeWidth).
+    expect(layer1.styleMap.styles.temporary.defaultStyle.strokeWidth).
       toEqual(13);
-    expect(layers[1].styleMap.styles.temporary.defaultStyle.strokeWidth).
+    expect(layer2.styleMap.styles.temporary.defaultStyle.strokeWidth).
       toEqual(14);
 
     // Point radius.
-    expect(layers[0].styleMap.styles.temporary.defaultStyle.pointRadius).
+    expect(layer1.styleMap.styles.temporary.defaultStyle.pointRadius).
       toEqual(16);
-    expect(layers[1].styleMap.styles.temporary.defaultStyle.pointRadius).
+    expect(layer2.styleMap.styles.temporary.defaultStyle.pointRadius).
       toEqual(17);
 
   });

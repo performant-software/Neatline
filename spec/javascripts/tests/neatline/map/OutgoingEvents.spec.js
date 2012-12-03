@@ -58,10 +58,8 @@ describe('Map Outgoing Events', function() {
     // should be triggered with the parent model of the feature.
     // --------------------------------------------------------------------
 
-    // Simulate hover on feature.
-    _t.hoverOnMapFeature(layer, feature);
-
     // Simulate unhover on feature.
+    _t.hoverOnMapFeature(layer, feature);
     _t.unHoverOnMapFeature(mapLayers);
 
     // Check render intent.
@@ -89,7 +87,7 @@ describe('Map Outgoing Events', function() {
 
     // Check publication.
     expect(Neatline.vent.trigger).toHaveBeenCalledWith(
-      'map:highlight', layer.nModel
+      'map:select', layer.nModel
     );
 
   });
@@ -126,11 +124,11 @@ describe('Map Outgoing Events', function() {
     // --------------------------------------------------------------------
 
     // Trigger pan.
-    _t.refreshMap(_t.updatedRecord2Json);
+    _t.refreshMap(_t.json.collections.changed);
 
     // Get extent and zoom.
-    var extent = _t.mapView.getExtentAsWKT();
-    var zoom = _t.mapView.getZoom();
+    var extent = Neatline.Map.view.getExtentAsWKT();
+    var zoom = Neatline.Map.view.getZoom();
 
     // Check publication.
     expect(spy.argsForCall[0][0]).toEqual('map:move');

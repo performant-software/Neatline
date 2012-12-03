@@ -78,7 +78,7 @@ describe('Map Incoming Events', function() {
       Neatline.vent.trigger('map:focusById', 999);
 
       // Respond to the GET request.
-      var request = _t.respondLast200(_t.recordJson);
+      var request = _t.respondLast200(_t.json.records.standard);
       waitsFor(function() { return done; });
 
       // Check request formation.
@@ -128,7 +128,7 @@ describe('Map Incoming Events', function() {
       Neatline.vent.trigger('map:focusById', 999);
 
       // Respond to the GET request.
-      var request = _t.respondLast200(_t.recordInactiveJson);
+      var request = _t.respondLast200(_t.json.records.inactive);
       waitsFor(function() { return done; });
 
       // Get focus and zoom.
@@ -197,7 +197,7 @@ describe('Map Incoming Events', function() {
       expect(mapLayers.length).toEqual(2);
 
       // Create a model that does not have a map layer.
-      var model = _t.buildModelFromJson(_t.recordJson);
+      var model = _t.buildModelFromJson(_t.json.records.standard);
 
       // Trigger map:focusByModel.
       Neatline.vent.trigger('map:focusByModel', model);
@@ -241,7 +241,7 @@ describe('Map Incoming Events', function() {
 
       // Create a model that (a) does not have a map layer and (b) is not
       // active on the map.
-      var model = _t.buildModelFromJson(_t.recordInactiveJson);
+      var model = _t.buildModelFromJson(_t.json.records.inactive);
 
       // Trigger map:focusByModel.
       Neatline.vent.trigger('map:focusByModel', model);

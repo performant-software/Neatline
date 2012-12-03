@@ -28,15 +28,8 @@ _t.loadNeatline = function() {
   this.loadJsonFixtures();
   this.server = sinon.fakeServer.create();
 
-  // Restart application.
-  Neatline.initCallbacks.reset();
-  Neatline.start();
-
-  // Disable the editor.
-  Neatline.Editor.stop();
-
-  // Respond to data loads.
-  this.respondAll200(this.json.collections.standard);
+  // Load map.
+  this.loadMapModule();
 
   // Shortcut components.
   this.mapView = Neatline.Map.view;
@@ -74,6 +67,25 @@ _t.loadEditor = function() {
   this.mapView = Neatline.Map.view;
   this.recordsColl = Neatline.Editor.Records.collection;
   this.mapColl = Neatline.Map.collection;
+
+};
+
+
+/*
+ * ------------------------------------------------------------------------
+ * Load the Neatline `Map` module.
+ * ------------------------------------------------------------------------
+ *
+ * @return void.
+ */
+_t.loadMapModule = function() {
+
+  // Restart module.
+  Neatline.Map.stop();
+  Neatline.Map.start();
+
+  // Inject fixtures.
+  this.respondAll200(this.json.collections.standard);
 
 };
 
@@ -163,7 +175,7 @@ _t.getVectorLayerByTitle = function(title) {
  * @return {Object} model: The model.
  */
 _t.buildModelFromJson = function(json) {
-  return new Neatline.Models.Record(JSON.parse(json));
+  return new Neatline.Map.Models.Record(JSON.parse(json));
 };
 
 
@@ -197,7 +209,7 @@ _t.respond200 = function(request, response) {
 
 /*
  * ------------------------------------------------------------------------
- * Respond to all queued AJAX calls with a single response.
+ e Respond to all queued AJAX calls with a single response.
  * ------------------------------------------------------------------------
  *
  * @param {Object} response: The response body.

@@ -21,20 +21,18 @@ describe('Map Exhibit Defaults', function() {
 
     // Load partial manually so that the __exhibit object can be modified
     // before the application is started.
-    loadFixtures('editor-partial.html');
+    loadFixtures('neatline-partial.html');
 
     // Set exhibit defaults.
     __exhibit.mapZoom = 10;
     __exhibit.mapFocus = '-8031391.4348622, 5085508.3651615';
 
-    // Start Neatline.
-    Neatline.initCallbacks.reset();
-    Neatline.start();
+    // Start map.
+    _t.loadMapModule();
 
     // Check viewport.
-    var mapView = Neatline.Map.view;
-    var center = mapView.map.getCenter();
-    expect(mapView.map.zoom).toEqual(10);
+    var center = Neatline.Map.view.map.getCenter();
+    expect(Neatline.Map.view.map.zoom).toEqual(10);
     expect(center.lon).toEqual(-8031391.4348622);
     expect(center.lat).toEqual(5085508.3651615);
 
