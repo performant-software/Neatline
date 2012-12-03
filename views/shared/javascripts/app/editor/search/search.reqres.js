@@ -14,10 +14,8 @@ Neatline.module('Editor.Search', function(
   Search, Editor, Backbone, Marionette, $, _) {
 
 
-  /*
-   * ----------------------------------------------------------------------
+  /**
    * Is map mirroring currently enabled?
-   * ----------------------------------------------------------------------
    *
    * @return {Boolean}: True if map mirroring is enabled.
    */

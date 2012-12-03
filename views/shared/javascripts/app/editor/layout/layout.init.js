@@ -14,10 +14,8 @@ Neatline.module('Editor.Layout', function(
   Layout, Editor, Backbone, Marionette, $, _) {
 
 
-  /*
-   * ----------------------------------------------------------------------
+  /**
    * Instantiate the layout view.
-   * ----------------------------------------------------------------------
    *
    * @return void.
    */

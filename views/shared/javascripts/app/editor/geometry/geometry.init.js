@@ -14,10 +14,8 @@ Neatline.module('Editor.Geometry', { startWithParent: false,
   define: function(Geometry, Editor, Backbone, Marionette, $, _) {
 
 
-  /*
-   * ----------------------------------------------------------------------
+  /**
    * Alias the exhibit map view.
-   * ----------------------------------------------------------------------
    *
    * @return void.
    */

@@ -16,17 +16,18 @@ Neatline.module('Editor.Records.Views', function(
 
   Views.RecordRow = Backbone.View.extend({
 
+
     tagName: 'li',
     className: 'record-row',
+
 
     events: {
       'click': 'openForm'
     },
 
-    /*
-     * --------------------------------------------------------------------
+
+    /**
      * Set instance model, render the template.
-     * --------------------------------------------------------------------
      *
      * @return void.
      */
@@ -42,10 +43,8 @@ Neatline.module('Editor.Records.Views', function(
 
     },
 
-    /*
-     * --------------------------------------------------------------------
+    /**
      * When the listing is clicked, open the edit form for the record.
-     * --------------------------------------------------------------------
      *
      * @return void.
      */

@@ -14,10 +14,8 @@ Neatline.module('Editor.Records', function(
   Records, Editor, Backbone, Marionette, $, _) {
 
 
-  /*
-   * ----------------------------------------------------------------------
+  /**
    * Instantiate the records collection and view.
-   * ----------------------------------------------------------------------
    *
    * @return void.
    */

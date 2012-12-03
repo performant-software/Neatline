@@ -14,10 +14,8 @@ Neatline.module('Editor.Records', function(
   Records, Editor, Backbone, Marionette, $, _) {
 
 
-  /*
-   * ----------------------------------------------------------------------
+  /**
    * Re-render the current record collection when the form is closed.
-   * ----------------------------------------------------------------------
    *
    * @return void.
    */
@@ -33,13 +31,11 @@ Neatline.module('Editor.Records', function(
 
   });
 
-  /*
-   * ----------------------------------------------------------------------
+
+  /**
    * Execute search query.
-   * ----------------------------------------------------------------------
    *
    * @params {Object} query: The query object.
-   *
    * @return void.
    */
   Neatline.vent.on('editor:search:query', function(query) {
@@ -48,10 +44,9 @@ Neatline.module('Editor.Records', function(
     });
   });
 
-  /*
-   * ----------------------------------------------------------------------
+
+  /**
    * Render current map collection in editor.
-   * ----------------------------------------------------------------------
    *
    * @return void.
    */
@@ -59,13 +54,11 @@ Neatline.module('Editor.Records', function(
     Records.view.show(Neatline.Map.collection);
   });
 
-  /*
-   * ----------------------------------------------------------------------
+
+  /**
    * Render new map record collections in the editor.
-   * ----------------------------------------------------------------------
    *
    * @param {Object} collection: The new map records.
-   *
    * @return void.
    */
   Neatline.vent.on('map:newRecords', function(collection) {

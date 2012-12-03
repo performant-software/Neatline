@@ -14,10 +14,8 @@ Neatline.module('Editor.Search', function(
   Search, Editor, Backbone, Marionette, $, _) {
 
 
-  /*
-   * ----------------------------------------------------------------------
+  /**
    * Instantiate the search view.
-   * ----------------------------------------------------------------------
    *
    * @return void.
    */

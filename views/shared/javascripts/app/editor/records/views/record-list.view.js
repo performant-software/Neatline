@@ -16,18 +16,19 @@ Neatline.module('Editor.Records.Views', function(
 
   Views.RecordList = Backbone.View.extend({
 
+
     getListTemplate: function() {
       return _.template($('#record-list').html());
     },
+
 
     getRowTemplate: function() {
       return _.template($('#record-row').html());
     },
 
-    /*
-     * --------------------------------------------------------------------
+
+    /**
      * Compile templates.
-     * --------------------------------------------------------------------
      *
      * @return void.
      */
@@ -36,13 +37,11 @@ Neatline.module('Editor.Records.Views', function(
       this.rowTemplate = this.getRowTemplate();
     },
 
-    /*
-     * --------------------------------------------------------------------
+
+    /**
      * Render record listings.
-     * --------------------------------------------------------------------
      *
      * @param {Object} records: The records collection.
-     *
      * @return void.
      */
     show: function(records) {
@@ -65,6 +64,7 @@ Neatline.module('Editor.Records.Views', function(
       }, this));
 
     }
+
 
   });
 

@@ -14,14 +14,11 @@ Neatline.module('Editor.Geometry', { startWithParent: false,
   define: function(Geometry, Editor, Backbone, Marionette, $, _) {
 
 
-  /*
-   * ----------------------------------------------------------------------
-   * Show form on map feature click.
-   * ----------------------------------------------------------------------
+  /**
+   * Graft editing functionality onto the map when a form is opened.
    *
    * @param {Object} model: The record model.
    * @param {Boolean} focus: If true, focus the map on the edit layer.
-   *
    * @return void.
    */
   Neatline.vent.on('editor:form:open', function(model, focus) {
@@ -29,13 +26,11 @@ Neatline.module('Editor.Geometry', { startWithParent: false,
     Geometry.view.startEdit(model, focus);
   });
 
-  /*
-   * ----------------------------------------------------------------------
-   * Close form.
-   * ----------------------------------------------------------------------
+
+  /**
+   * Strip editing functionality off the map when a form is closed.
    *
    * @param {Object} model: The record model.
-   *
    * @return void.
    */
   Neatline.vent.on('editor:form:close', function(model) {
@@ -43,13 +38,11 @@ Neatline.module('Editor.Geometry', { startWithParent: false,
     Geometry.view.endEdit();
   });
 
-  /*
-   * ----------------------------------------------------------------------
-   * Update map settings.
-   * ----------------------------------------------------------------------
+
+  /**
+   * Updated editing settings when control inputs are changed on the form.
    *
    * @param {Object} settings: Settings hash.
-   *
    * @return void.
    */
   Neatline.vent.on('editor:form:updateMap', function(settings) {

@@ -16,11 +16,10 @@ Neatline.module('Editor.Layout.Views', function(
 
   Views.Layout = Backbone.View.extend({
 
-    /*
-     * --------------------------------------------------------------------
+
+    /**
      * Get markup, measure the width of the editor div, bind window resize
      * listener, make starting call to position().
-     * --------------------------------------------------------------------
      *
      * @return void.
      */
@@ -42,10 +41,9 @@ Neatline.module('Editor.Layout.Views', function(
 
     },
 
-    /*
-     * --------------------------------------------------------------------
+
+    /**
      * Render the layout.
-     * --------------------------------------------------------------------
      *
      * @return void.
      */
@@ -61,6 +59,7 @@ Neatline.module('Editor.Layout.Views', function(
       this.exhibit.css({ left: this.width });
 
     }
+
 
   });
 

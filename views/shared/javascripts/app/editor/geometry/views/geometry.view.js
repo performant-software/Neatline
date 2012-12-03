@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2; */
 
 /**
- * Injects editor-endemic methods into Neatline map view.
+ * Mixes editing functionality into application map view.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -12,14 +12,12 @@
 
 _.extend(Neatline.Map.Views.Map.prototype, {
 
-  /*
-   * ----------------------------------------------------------------------
+
+  /**
    * Construct editing controls for record.
-   * ----------------------------------------------------------------------
    *
    * @param {Object} model: The record model.
    * @param {Boolean} focus: If true, focus the map on the edit layer.
-   *
    * @return void.
    */
   startEdit: function(model, focus) {
@@ -70,10 +68,9 @@ _.extend(Neatline.Map.Views.Map.prototype, {
 
   },
 
-  /*
-   * ----------------------------------------------------------------------
+
+  /**
    * Deactivate and remove all editing controls.
-   * ----------------------------------------------------------------------
    *
    * @return void.
    */
@@ -91,14 +88,12 @@ _.extend(Neatline.Map.Views.Map.prototype, {
   },
 
 
-  /*
-   * ----------------------------------------------------------------------
+
+  /**
    * Apply a settings combination to the controls. Based on:
    * http://openlayers.org/dev/examples/modify-feature.html
-   * ----------------------------------------------------------------------
    *
    * @param {Object} settings: Settings for the controls.
-   *
    * @return void.
    */
   update: function(settings) {
@@ -112,7 +107,6 @@ _.extend(Neatline.Map.Views.Map.prototype, {
     this.controls.edit.mode = OpenLayers.Control.ModifyFeature.RESHAPE;
 
 
-    // -----------------
     // Set control mode.
     // -----------------
 
@@ -146,7 +140,6 @@ _.extend(Neatline.Map.Views.Map.prototype, {
     }
 
 
-    // -----------------------------
     // Set regular polygon settings.
     // -----------------------------
 
@@ -162,7 +155,6 @@ _.extend(Neatline.Map.Views.Map.prototype, {
     this.controls.reg.handler.irregular = settings.irreg;
 
 
-    // ----------------------------
     // Apply modification settings.
     // ----------------------------
 
@@ -180,10 +172,9 @@ _.extend(Neatline.Map.Views.Map.prototype, {
 
   },
 
-  /*
-   * ----------------------------------------------------------------------
+
+  /**
    * Publish updated KML.
-   * ----------------------------------------------------------------------
    *
    * @return void.
    */
@@ -203,13 +194,11 @@ _.extend(Neatline.Map.Views.Map.prototype, {
 
   },
 
-  /*
-   * ----------------------------------------------------------------------
+
+  /**
    * Delete a feature.
-   * ----------------------------------------------------------------------
    *
    * @param {Object} feature: The selected feature.
-   *
    * @return void.
    */
   remove: function(feature) {
@@ -217,5 +206,6 @@ _.extend(Neatline.Map.Views.Map.prototype, {
     this.editLayer.destroyFeatures([feature]);
     this.publish();
   }
+
 
 });

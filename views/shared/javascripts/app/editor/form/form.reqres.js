@@ -15,7 +15,7 @@ Neatline.module('Editor.Form', function(
 
 
   /**
-   * Respond with true if the form is currently open.
+   * Is the form currently open?
    *
    * @return {Boolean}: True if a form is open.
    */
