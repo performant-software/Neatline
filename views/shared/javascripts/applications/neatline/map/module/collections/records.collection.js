@@ -18,8 +18,13 @@ Neatline.module('Map.Collections', function(
 
   Collections.Records = Backbone.Collection.extend({
 
-    url: (function() { return __exhibit.api; }),
-    model: Neatline.Map.Models.Record,
+    url: function() {
+      return __exhibit.api;
+    },
+
+    model: Backbone.Model.extend({
+      url: function() { return __exhibit.api+'/'+this.get('id'); }
+    }),
 
     /*
      * --------------------------------------------------------------------

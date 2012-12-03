@@ -6,11 +6,6 @@ build/dist/
 build/logs/
 build/pdepend/
 build/tmp/
-spec/javascripts/fixtures/
-views/shared/css/exhibits/
 node_modules/
-views/shared/javascripts/payloads/
 views/shared/javascripts/components/
-views/shared/css/payloads/
 views/shared/css/img/
-spec/javascripts/helpers/components/

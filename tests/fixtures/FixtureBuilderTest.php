@@ -15,7 +15,6 @@ class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
 {
 
     protected $_isAdminTest = false;
-    private $path_to_fixtures = null;
 
     /**
      * Records JSON for map (INDEX and GET responses).
