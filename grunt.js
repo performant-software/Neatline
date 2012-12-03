@@ -46,8 +46,7 @@ module.exports = function(grunt) {
       neatline: {
         src: neatlineVendor.concat([
           c.app+'app.js',
-          c.app+'map/module/**/*.js',
-          c.app+'run.js'
+          c.app+'map/**/*.js'
         ]),
         dest: c.payload+'neatline.js',
         separator: ';'
@@ -57,21 +56,10 @@ module.exports = function(grunt) {
         src: neatlineVendor.concat(
           editorVendor).concat([
           c.app+'app.js',
-          c.app+'map/module/**/*.js',
-          c.app+'editor/module/**/*.js',
-          c.app+'run.js'
+          c.app+'map/**/*.js',
+          c.app+'editor/**/*.js'
         ]),
         dest: c.payload+'editor.js',
-        separator: ';'
-      },
-
-      test: {
-        src: neatlineVendor.concat(
-          editorVendor).concat([
-          c.app+'app.js',
-          c.app+'map/module/**/*.js'
-        ]),
-        dest: c.payload+'test.js',
         separator: ';'
       },
 

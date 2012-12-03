@@ -11,7 +11,7 @@
 #   - dist/**/*.js
 #
 src_files:
-    - spec/javascripts/payloads/test.js
+    - spec/javascripts/payloads/editor.js
 
 # stylesheets
 #
