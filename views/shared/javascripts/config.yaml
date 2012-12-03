@@ -1,24 +1,22 @@
+
 default:
 
-  components: views/shared/javascripts/components/
-  payload: views/shared/javascripts/payloads/
+  - components:           views/shared/javascripts/components/
+  - payload:              views/shared/javascripts/payloads/
+  - app:                  views/shared/javascripts/app/
 
-  apps:
-    neatline: views/shared/javascripts/applications/neatline/
-    editor: views/shared/javascripts/applications/editor/
-
-  vendor:
-    jquery: jquery/jquery.js
-    underscore: underscore/underscore.js
-    underscore_string: underscore.string/lib/underscore.string.js
-    backbone: backbone/backbone.js
-    eventbinder: Backbone.EventBinder/lib/backbone.eventbinder.js
-    wreqr: Backbone.Wreqr/lib/backbone.wreqr.js
-    marionette: backbone.marionette/lib/backbone.marionette.js
-    openlayers_js: openlayers/build/OpenLayers.js
-    openlayers_css: openlayers/theme/default/style.css
-    bootstrap_js: bootstrap/bootstrap/js/bootstrap.js
-    bootstrap_css: bootstrap/bootstrap/css/bootstrap.min.css
-    minicolors_js: minicolors/jquery.miniColors.js
-    minicolors_css: minicolors/jquery.miniColors.css
-    d3: d3/d3.v2.js
+  - vendor:
+    - jquery:             jquery/jquery.js
+    - underscore:         underscore/underscore.js
+    - underscore_string:  underscore.string/lib/underscore.string.js
+    - backbone:           backbone/backbone.js
+    - eventbinder:        Backbone.EventBinder/lib/backbone.eventbinder.js
+    - wreqr:              Backbone.Wreqr/lib/backbone.wreqr.js
+    - marionette:         backbone.marionette/lib/backbone.marionette.js
+    - openlayers_js:      openlayers/build/OpenLayers.js
+    - openlayers_css:     openlayers/theme/default/style.css
+    - bootstrap_js:       bootstrap/bootstrap/js/bootstrap.js
+    - bootstrap_css:      bootstrap/bootstrap/css/bootstrap.min.css
+    - minicolors_js:      minicolors/jquery.miniColors.js
+    - minicolors_css:     minicolors/jquery.miniColors.css
+    - d3:                 d3/d3.v2.js

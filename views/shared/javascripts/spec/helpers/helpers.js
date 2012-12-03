@@ -32,7 +32,6 @@ _t.loadNeatline = function() {
   this.loadMapModule();
 
   // Shortcut components.
-  this.mapView = Neatline.Map.view;
   this.recordsColl = Neatline.Map.collection;
 
 };
@@ -64,7 +63,7 @@ _t.loadEditor = function() {
   this.recordsView = Neatline.Editor.Records.view;
   this.formView = Neatline.Editor.Form.view;
   this.searchView = Neatline.Editor.Search.view;
-  this.mapView = Neatline.Map.view;
+  Neatline.Map.view = Neatline.Map.view;
   this.recordsColl = Neatline.Editor.Records.collection;
   this.mapColl = Neatline.Map.collection;
 
@@ -134,7 +133,7 @@ _t.getRecordRows = function() {
 _t.getVectorLayers = function() {
 
   // Filter for features.length > 0.
-  return this.mapView.map.getLayersBy('features', {
+  return Neatline.Map.view.map.getLayersBy('features', {
     test: function(prop) {
       return !_.isUndefined(prop) && prop.length > 0;
     }
@@ -249,7 +248,7 @@ _t.respondLast200 = function(response) {
  * @return void.
  */
 _t.triggerMapMove = function() {
-  this.mapView.map.events.triggerEvent('moveend');
+  Neatline.Map.view.map.events.triggerEvent('moveend');
 };
 
 
@@ -292,7 +291,7 @@ _t.clickOnMapFeature = function(layer, feature) {
   };
 
   // Trigger click.
-  this.mapView.map.events.triggerEvent('click', evt);
+  Neatline.Map.view.map.events.triggerEvent('click', evt);
 
 };
 
@@ -322,7 +321,7 @@ _t.clickOffMapFeature = function(layers) {
   };
 
   // Trigger click.
-  this.mapView.map.events.triggerEvent('click', evt);
+  Neatline.Map.view.map.events.triggerEvent('click', evt);
 
 };
 
@@ -351,7 +350,7 @@ _t.hoverOnMapFeature = function(layer, feature) {
   };
 
   // Trigger click.
-  this.mapView.map.events.triggerEvent('mousemove', evt);
+  Neatline.Map.view.map.events.triggerEvent('mousemove', evt);
 
 };
 
@@ -381,7 +380,7 @@ _t.unHoverOnMapFeature = function(layers) {
   };
 
   // Trigger click.
-  this.mapView.map.events.triggerEvent('mousemove', evt);
+  Neatline.Map.view.map.events.triggerEvent('mousemove', evt);
 
 };
 
@@ -399,5 +398,5 @@ _t.unHoverOnMapFeature = function(layers) {
  */
 _t.setMapCenter = function(lon, lat, zoom) {
   var lonlat = new OpenLayers.LonLat(lon, lat);
-  this.mapView.map.setCenter(lonlat, zoom);
+  Neatline.Map.view.map.setCenter(lonlat, zoom);
 };
