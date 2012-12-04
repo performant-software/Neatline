@@ -3,6 +3,7 @@ spec/javascripts/helpers/components/
 views/shared/javascripts/components/
 views/shared/javascripts/tests/helpers/components/
 views/shared/css/img/
+_SpecRunner.html
 node_modules/
 build/api/
 build/code-browser/

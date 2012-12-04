@@ -22,6 +22,7 @@ _t = {};
 _t.loadNeatline = function() {
 
   // Load partials.
+  _t.setFixturesPath();
   loadFixtures('neatline-partial.html');
   this.loadJsonFixtures();
 
@@ -62,6 +63,7 @@ _t.loadMapModule = function() {
 _t.loadEditor = function() {
 
   // Load partials.
+  _t.setFixturesPath();
   loadFixtures('editor-partial.html');
   this.loadJsonFixtures();
 
@@ -104,6 +106,17 @@ _t.loadEditorModule = function() {
   // Inject fixtures.
   this.respondAll200(this.json.collections.standard);
 
+};
+
+
+/**
+ * Set the fixtures path.
+ *
+ * @return void.
+ */
+_t.setFixturesPath = function() {
+  jasmine.getFixtures().fixturesPath =
+    'views/shared/javascripts/tests/fixtures';
 };
 
 

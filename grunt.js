@@ -23,6 +23,8 @@ module.exports = function(grunt) {
   // Load custom tasks.
   grunt.loadNpmTasks('grunt-css');
   grunt.loadNpmTasks('grunt-stylus');
+  grunt.loadNpmTasks('grunt-jasmine-runner');
+  grunt.loadNpmTasks('grunt-shell');
 
   // Create vendor file array.
   var vendorFiles = _.map(c.js.lib, function(v,k) {
@@ -37,8 +39,28 @@ module.exports = function(grunt) {
 
   grunt.initConfig({
 
-    concat: {
+    shell: {
+      phpunit: {
+        command: 'phpunit --color',
+        stdout: true,
+        execOptions: {
+          cwd: './tests'
+        }
+      }
+    },
 
+    jasmine: {
+      src: 'views/shared/javascripts/payloads/neatline.js',
+      specs: 'views/shared/javascripts/tests/suites/map/spec/javascripts/tests/**/*.spec.js',
+      helpers: [
+        'views/shared/javascripts/tests/helpers/*.js',
+        'views/shared/javascripts/tests/helpers/components/jasmine-jquery/lib/jasmine-jquery.js',
+        'views/shared/javascripts/tests/helpers/components/sinon.js/sinon.js'
+      ],
+      port: 1337
+    },
+
+    concat: {
       neatline: {
         src: vendorFiles.concat([
           c.app+'app.js',
@@ -47,7 +69,6 @@ module.exports = function(grunt) {
         dest: c.js.payload+'neatline.js',
         separator: ';'
       },
-
       editor: {
         src: vendorFiles.concat([
           c.app+'app.js',
@@ -57,7 +78,6 @@ module.exports = function(grunt) {
         dest: c.js.payload+'editor.js',
         separator: ';'
       },
-
       neatlineCss: {
         src: [
           c.css.payload+'neatline.css',
@@ -66,7 +86,6 @@ module.exports = function(grunt) {
         ],
         dest: c.css.payload+'neatline.css'
       },
-
       editorCss: {
         src: [
           '<config:concat.neatlineCss.src>',
@@ -75,23 +94,19 @@ module.exports = function(grunt) {
         ],
         dest: c.css.payload+'editor.css'
       }
-
     },
 
     min: {
-
       neatline: {
         src: ['<config:concat.neatline.src>'],
         dest: c.js.payload+'neatline.js',
         separator: ';'
       },
-
       editor: {
         src: ['<config:concat.editor.src>'],
         dest: c.js.payload+'editor.js',
         separator: ';'
       }
-
     },
 
     stylus: {
