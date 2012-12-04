@@ -39,22 +39,25 @@ Neatline.module('Editor.Form.Views', function(
 
       this.els = {
 
-        // UX.
-        tabs: this.form.find('ul.nav a'),
+                        // Text:
+        head:           this.form.find('h3.head'),
+        title:          this.form.find('textarea[name="title"]'),
+        body:           this.form.find('textarea[name="body"]'),
 
-        // Text inputs.
-        head:   this.form.find('h3.head'),
-        title:  this.form.find('textarea[name="title"]'),
-        body:   this.form.find('textarea[name="body"]'),
+                        // Spatial:
+        pan:            this.form.find('input[value="pan"]'),
+        point:          this.form.find('input[value="point"]'),
+        line:           this.form.find('input[value="line"]'),
+        poly:           this.form.find('input[value="poly"]'),
+        regPoly:        this.form.find('input[value="regPoly"]'),
+        modify:         this.form.find('input[value="modify"]'),
+        remove:         this.form.find('input[value="remove"]'),
+        sides:          this.form.find('input[name="sides"]'),
+        snap:           this.form.find('input[name="snap"]'),
+        irregular:      this.form.find('input[name="irregular"]'),
+        coverage:       this.form.find('textarea[name="coverage"]'),
 
-        // Geometry editing options.
-        sides:      this.form.find('input[name="sides"]'),
-        snap:       this.form.find('input[name="snap"]'),
-        irregular:  this.form.find('input[name="irregular"]'),
-        coverage:   this.form.find('textarea[name="coverage"]'),
-        geoInputs:  this.form.find('div.geometry input'),
-
-        // Style inputs.
+                        // Style:
         vectorColor:    this.form.find('input[name="vector-color"]'),
         strokeColor:    this.form.find('input[name="stroke-color"]'),
         selectColor:    this.form.find('input[name="select-color"]'),
@@ -69,10 +72,14 @@ Neatline.module('Editor.Form.Views', function(
         maxZoom:        this.form.find('input[name="max-zoom"]'),
         mapFocus:       this.form.find('button[name="map-focus"]'),
 
-        // Buttons.
-        saveButton:   this.form.find('button[name="save"]'),
-        closeButton:  this.form.find('button[name="close"]'),
-        delButton:    this.form.find('button[name="del"]')
+                        // Buttons:
+        saveButton:     this.form.find('button[name="save"]'),
+        closeButton:    this.form.find('button[name="close"]'),
+        delButton:      this.form.find('button[name="del"]'),
+
+                        // Groups:
+        tabs:           this.form.find('ul.nav a'),
+        spatialInputs:  this.form.find('div.geometry input')
 
       };
 
@@ -105,7 +112,7 @@ Neatline.module('Editor.Form.Views', function(
 
       // Spatial controls.
       // -----------------
-      this.els.geoInputs.on('change keyup',
+      this.els.spatialInputs.on('change keyup',
         _.bind(function(e) {
           this.updateMap();
       }, this));
@@ -264,7 +271,7 @@ Neatline.module('Editor.Form.Views', function(
 
       // Get values.
       var settings = {
-        modify:   this.getModifySettings(),
+        modify:   this.getmodifyOptions(),
         sides:    this.els.sides.val(),
         irreg:    this.els.irregular.is(':checked'),
         control:  this.getMapControl(),
@@ -283,7 +290,7 @@ Neatline.module('Editor.Form.Views', function(
      * @return string: The input value.
      */
     getMapControl: function() {
-      return $('input[name="mapControls"]:checked').val();
+      return $('input[name="editMode"]:checked').val();
     },
 
 
@@ -293,7 +300,7 @@ Neatline.module('Editor.Form.Views', function(
      * @return string: The input value.
      */
     resetMapControl: function() {
-      return $('input[name="mapControls"]')[0].checked = true;
+      return $('input[name="editMode"]')[0].checked = true;
     },
 
 
@@ -303,8 +310,8 @@ Neatline.module('Editor.Form.Views', function(
      * @return {Array}: An array of 0-3 strings representing the current
      * combination of options: "rotate", "resize", "drag".
      */
-    getModifySettings: function() {
-      var inputs = $('input[name="modifySettings"]:checked');
+    getmodifyOptions: function() {
+      var inputs = $('input[name="modifyOptions"]:checked');
       return _.map(inputs, function(i) { return $(i).val(); });
     },
 

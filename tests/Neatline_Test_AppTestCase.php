@@ -166,7 +166,7 @@ class Neatline_Test_AppTestCase extends Omeka_Test_AppTestCase
 
         // Construct fixture path.
         $fixturePath = NEATLINE_PLUGIN_DIR .
-            '/views/shared/javascripts/tests/fixtures/';
+            '/views/shared/javascripts/shared/fixtures/';
 
         // Open file.
         $fixture = fopen($fixturePath . $file, 'w');

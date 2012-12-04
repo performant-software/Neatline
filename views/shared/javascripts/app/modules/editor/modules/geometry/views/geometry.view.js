@@ -133,7 +133,7 @@ _.extend(Neatline.Map.Views.Map.prototype, {
         this.controls.edit.activate();
         break;
 
-      case 'delete':
+      case 'remove':
         this.controls.del.activate();
         break;
 

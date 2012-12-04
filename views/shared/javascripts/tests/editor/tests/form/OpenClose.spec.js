@@ -304,7 +304,8 @@ describe('Form Open/Close', function() {
     expect(_t.formView.getMapControl()).toEqual('pan');
 
     // Activate "Polygon" control, check mode.
-    $('input[name="mapControls"]')[3].checked = true;
+    $('input[name="editMode"]')[0].checked = false;
+    $('input[name="editMode"]')[3].checked = true;
     expect(_t.formView.getMapControl()).toEqual('poly');
 
     // Close the form, re-get records.

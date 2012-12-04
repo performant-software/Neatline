@@ -49,17 +49,6 @@ module.exports = function(grunt) {
       }
     },
 
-    jasmine: {
-      src: 'views/shared/javascripts/payloads/neatline.js',
-      specs: 'views/shared/javascripts/tests/suites/map/spec/javascripts/tests/**/*.spec.js',
-      helpers: [
-        'views/shared/javascripts/tests/helpers/*.js',
-        'views/shared/javascripts/tests/helpers/components/jasmine-jquery/lib/jasmine-jquery.js',
-        'views/shared/javascripts/tests/helpers/components/sinon.js/sinon.js'
-      ],
-      port: 1337
-    },
-
     concat: {
       neatline: {
         src: vendorFiles.concat([

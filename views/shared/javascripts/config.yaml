@@ -4,7 +4,7 @@ default:
   vendor:               views/shared/javascripts/components/
 
   js:
-    payload:            views/shared/javascripts/payloads/
+    payload:            views/shared/javascripts/shared/payloads/
     lib:
       jquery:           jquery/jquery.js
       underscore:       underscore/underscore.js

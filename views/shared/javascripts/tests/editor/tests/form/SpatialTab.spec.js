@@ -41,9 +41,9 @@ describe('Form Spatial Tab', function() {
     // --------------------------------------------------------------------
 
     // Check "Draw Point."
-    var point = $('input[name="mapControls"][value="point"]');
-    point.attr('checked', 'checked');
-    point.trigger('change');
+    _t.formView.els.pan.removeAttr('checked');
+    _t.formView.els.point.attr('checked', 'checked');
+    _t.formView.els.point.trigger('change');
 
     // Check for control activation.
     expect(_t.mapView.controls.point.active).toBeTruthy();
@@ -58,9 +58,9 @@ describe('Form Spatial Tab', function() {
     // --------------------------------------------------------------------
 
     // Check "Draw Line."
-    var line = $('input[name="mapControls"][value="line"]');
-    line.attr('checked', 'checked');
-    line.trigger('change');
+    _t.formView.els.pan.removeAttr('checked');
+    _t.formView.els.line.attr('checked', 'checked');
+    _t.formView.els.line.trigger('change');
 
     // Check for control activation.
     expect(_t.mapView.controls.line.active).toBeTruthy();
@@ -75,9 +75,9 @@ describe('Form Spatial Tab', function() {
     // --------------------------------------------------------------------
 
     // Check "Draw Polygon."
-    var poly = $('input[name="mapControls"][value="poly"]');
-    poly.attr('checked', 'checked');
-    poly.trigger('change');
+    _t.formView.els.pan.removeAttr('checked');
+    _t.formView.els.poly.attr('checked', 'checked');
+    _t.formView.els.poly.trigger('change');
 
     // Check for control activation.
     expect(_t.mapView.controls.poly.active).toBeTruthy();
@@ -92,9 +92,9 @@ describe('Form Spatial Tab', function() {
     // --------------------------------------------------------------------
 
     // Check "Draw Regular Polygon."
-    var reg = $('input[name="mapControls"][value="regPoly"]');
-    reg.attr('checked', 'checked');
-    reg.trigger('change');
+    _t.formView.els.pan.removeAttr('checked');
+    _t.formView.els.regPoly.attr('checked', 'checked');
+    _t.formView.els.regPoly.trigger('change');
 
     // Check for control activation.
     expect(_t.mapView.controls.reg.active).toBeTruthy();
@@ -109,9 +109,9 @@ describe('Form Spatial Tab', function() {
     // --------------------------------------------------------------------
 
     // Check "Modify Shape."
-    var modify = $('input[name="mapControls"][value="modify"]');
-    modify.attr('checked', 'checked');
-    modify.trigger('change');
+    _t.formView.els.pan.removeAttr('checked');
+    _t.formView.els.modify.attr('checked', 'checked');
+    _t.formView.els.modify.trigger('change');
 
     // Check for control activation.
     expect(_t.mapView.controls.edit.active).toBeTruthy();
@@ -126,9 +126,9 @@ describe('Form Spatial Tab', function() {
     // --------------------------------------------------------------------
 
     // Check "Delete Shape."
-    var del = $('input[name="mapControls"][value="delete"]');
-    del.attr('checked', 'checked');
-    del.trigger('change');
+    _t.formView.els.pan.removeAttr('checked');
+    _t.formView.els.remove.attr('checked', 'checked');
+    _t.formView.els.remove.trigger('change');
 
     // Check for control activation.
     expect(_t.mapView.controls.del.active).toBeTruthy();
@@ -206,7 +206,7 @@ describe('Form Spatial Tab', function() {
     // --------------------------------------------------------------------
 
     // Set options.
-    var rotate = $('input[name="modifySettings"][value="rotate"]');
+    var rotate = $('input[name="modifyOptions"][value="rotate"]');
     rotate.attr('checked', 'checked');
     rotate.trigger('change');
 
@@ -226,7 +226,7 @@ describe('Form Spatial Tab', function() {
     // --------------------------------------------------------------------
 
     // Set options.
-    var resize = $('input[name="modifySettings"][value="resize"]');
+    var resize = $('input[name="modifyOptions"][value="resize"]');
     resize.attr('checked', 'checked');
     resize.trigger('change');
 
@@ -246,7 +246,7 @@ describe('Form Spatial Tab', function() {
     // --------------------------------------------------------------------
 
     // Set options.
-    var drag = $('input[name="modifySettings"][value="drag"]');
+    var drag = $('input[name="modifyOptions"][value="drag"]');
     drag.attr('checked', 'checked');
     drag.trigger('change');
 

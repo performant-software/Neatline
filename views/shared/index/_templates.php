@@ -64,27 +64,27 @@
         <div class="geometry">
 
           <label class="radio">
-            <input type="radio" name="mapControls" value="pan" checked>
+            <input type="radio" name="editMode" value="pan" checked>
             Navigate
           </label>
 
           <label class="radio">
-            <input type="radio" name="mapControls" value="point">
+            <input type="radio" name="editMode" value="point">
             Draw Point
           </label>
 
           <label class="radio">
-            <input type="radio" name="mapControls" value="line">
+            <input type="radio" name="editMode" value="line">
             Draw Line
           </label>
 
           <label class="radio">
-            <input type="radio" name="mapControls" value="poly">
+            <input type="radio" name="editMode" value="poly">
             Draw Polygon
           </label>
 
           <label class="radio">
-            <input type="radio" name="mapControls" value="regPoly">
+            <input type="radio" name="editMode" value="regPoly">
             Draw Regular Polygon
           </label>
 
@@ -108,31 +108,31 @@
           </div>
 
           <label class="radio">
-            <input type="radio" name="mapControls" value="modify">
+            <input type="radio" name="editMode" value="modify">
             Modify Shape
           </label>
 
           <div class="control-group indent">
 
             <label class="checkbox">
-              <input type="checkbox" name="modifySettings" value="rotate">
+              <input type="checkbox" name="modifyOptions" value="rotate">
               Rotate
             </label>
 
             <label class="checkbox">
-              <input type="checkbox" name="modifySettings" value="resize">
+              <input type="checkbox" name="modifyOptions" value="resize">
               Resize
             </label>
 
             <label class="checkbox">
-              <input type="checkbox" name="modifySettings" value="drag">
+              <input type="checkbox" name="modifyOptions" value="drag">
               Drag
             </label>
 
           </div>
 
           <label class="radio">
-            <input type="radio" name="mapControls" value="delete">
+            <input type="radio" name="editMode" value="remove">
             Delete Shape
           </label>
 
