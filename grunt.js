@@ -10,11 +10,13 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-// Load configuration.
+// Module dependencies.
 var yaml = require('yaml-config');
+var _ = require('underscore');
+
+// Load configuration.
 var path = '/views/shared/javascripts/config.yaml';
 var c = yaml.readConfig(process.cwd()+path);
-var _ = require('underscore');
 
 module.exports = function(grunt) {
 

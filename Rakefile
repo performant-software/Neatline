@@ -55,19 +55,25 @@ task :build do
   sh %{grunt concat:neatlineCss}
   sh %{grunt concat:editorCss}
 
-  # Jasmine packages and payload.
-  sh %{cd spec/javascripts/helpers && bower install}
-  sh %{grunt concat:test}
+  # Jasmine packages.
+  sh %{cd views/shared/javascripts/tests/helpers && bower install}
 
 end
 
 desc 'Clean pacakges'
 task :clean do
+
+  # NPM.
   sh %{rm -rf node_modules}
-  sh %{rm -rf views/shared/javascripts/payloads}
+
+  # Bower.
   sh %{rm -rf views/shared/javascripts/components}
+  sh %{rm -rf views/shared/javascripts/tests/helpers/components}
+
+  # Payloads.
+  sh %{rm -rf views/shared/javascripts/payloads}
   sh %{rm -rf views/shared/css/payloads}
-  sh %{rm -rf spec/javascripts/helpers/components}
+
 end
 
 desc 'Rebuild the application'
