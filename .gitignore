@@ -2,6 +2,7 @@ spec/javascripts/fixtures/
 spec/javascripts/helpers/components/
 views/shared/javascripts/components/
 views/shared/javascripts/shared/helpers/components/
+views/shared/javascripts/shared/payloads/
 views/shared/css/img/
 node_modules/
 build/api/
