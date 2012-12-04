@@ -1,21 +1,31 @@
 default:
 
   app:                  views/shared/javascripts/app/
-  components:           views/shared/javascripts/components/
-  payload:              views/shared/javascripts/payloads/
+  vendor:               views/shared/javascripts/components/
 
-  vendor:
-    jquery:             jquery/jquery.js
-    underscore:         underscore/underscore.js
-    underscore_string:  underscore.string/lib/underscore.string.js
-    backbone:           backbone/backbone.js
-    eventbinder:        Backbone.EventBinder/lib/backbone.eventbinder.js
-    wreqr:              Backbone.Wreqr/lib/backbone.wreqr.js
-    marionette:         backbone.marionette/lib/backbone.marionette.js
-    openlayers_js:      openlayers/build/OpenLayers.js
-    openlayers_css:     openlayers/theme/default/style.css
-    bootstrap_js:       bootstrap/bootstrap/js/bootstrap.js
-    bootstrap_css:      bootstrap/bootstrap/css/bootstrap.min.css
-    minicolors_js:      minicolors/jquery.miniColors.js
-    minicolors_css:     minicolors/jquery.miniColors.css
-    d3:                 d3/d3.v2.js
+  js:
+    payload:            views/shared/javascripts/payloads/
+    lib:
+      jquery:           jquery/jquery.js
+      underscore:       underscore/underscore.js
+      underscore_s:     underscore.string/lib/underscore.string.js
+      backbone:         backbone/backbone.js
+      eventbinder:      Backbone.EventBinder/lib/backbone.eventbinder.js
+      wreqr:            Backbone.Wreqr/lib/backbone.wreqr.js
+      marionette:       backbone.marionette/lib/backbone.marionette.js
+      openlayers:       openlayers/build/OpenLayers.js
+      bootstrap:        bootstrap/bootstrap/js/bootstrap.js
+      d3:               d3/d3.v2.js
+
+  css:
+    payload:            views/shared/css/payloads/
+    lib:
+      bootstrap:        bootstrap/bootstrap/css/bootstrap.min.css
+      openlayers:       openlayers/theme/default/style.css
+
+    stylus:
+      source:           views/shared/css/stylus/
+      mappings:
+        neatline.styl:  neatline.css
+        editor.styl:    editor.css
+        overrides.styl: overrides.css

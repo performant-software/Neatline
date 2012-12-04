@@ -1,84 +1,76 @@
-/*
+
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
+
+/**
  * Grunt file.
+ *
+ * @package     omeka
+ * @subpackage  neatline
+ * @copyright   2012 Rector and Board of Visitors, University of Virginia
+ * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-// Get package configuration.
-var config = require('yaml-config');
-var configPath = '/views/shared/javascripts/config.yaml';
-var c = config.readConfig(process.cwd()+configPath);
+// Load configuration.
+var yaml = require('yaml-config');
+var path = '/views/shared/javascripts/config.yaml';
+var c = yaml.readConfig(process.cwd()+path);
+var _ = require('underscore');
 
 module.exports = function(grunt) {
 
-  // Load tasks.
+  // Load custom tasks.
   grunt.loadNpmTasks('grunt-css');
   grunt.loadNpmTasks('grunt-stylus');
 
-  // Paths.
-  var js = 'views/shared/javascripts/payloads/';
-  var stylus = 'views/shared/css/stylus/';
-  var css = 'views/shared/css/payloads/';
+  // Create vendor file array.
+  var vendor = _.map(c.js.lib, function(v,k) {
+    return c.vendor+v;
+  });
 
-  var neatlineVendor = [
-    c.components+c.vendor.jquery,
-    c.components+c.vendor.underscore,
-    c.components+c.vendor.backbone,
-    c.components+c.vendor.eventbinder,
-    c.components+c.vendor.wreqr,
-    c.components+c.vendor.marionette,
-    c.components+c.vendor.openlayers_js,
-    c.components+c.vendor.bootstrap_js,
-    c.components+c.vendor.d3
-  ];
-
-  var editorVendor = [
-    c.components+c.vendor.underscore_string
-  ];
-
-  var stylusFiles = {};
-  stylusFiles[css+'neatline.css'] = stylus+'neatline.styl';
-  stylusFiles[css+'editor.css'] = stylus+'editor.styl';
-  stylusFiles[css+'overrides.css'] = stylus+'overrides.styl';
+  var stylus = {}; // Create stylus .css => .styl map.
+  _.each(c.css.stylus.mappings, function(v,k) {
+    stylus[c.css.payload+v] = c.css.stylus.source+k;
+  });
 
   grunt.initConfig({
 
     concat: {
 
       neatline: {
-        src: neatlineVendor.concat([
+        src: vendor.concat([
           c.app+'app.js',
           c.app+'map/**/*.js'
         ]),
-        dest: c.payload+'neatline.js',
+        dest: c.js.payload+'neatline.js',
         separator: ';'
       },
 
       editor: {
-        src: neatlineVendor.concat(
-          editorVendor).concat([
+        src: vendor.concat([
           c.app+'app.js',
           c.app+'map/**/*.js',
           c.app+'editor/**/*.js'
         ]),
-        dest: c.payload+'editor.js',
+        dest: c.js.payload+'editor.js',
         separator: ';'
       },
 
       neatlineCss: {
         src: [
-          css+'neatline.css',
-          c.components+c.vendor.openlayers_css,
-          c.components+c.vendor.bootstrap_css
+          c.css.payload+'neatline.css',
+          c.vendor+c.css.lib.openlayers,
+          c.vendor+c.css.lib.bootstrap
         ],
-        dest: css+'neatline.css'
+        dest: c.css.payload+'neatline.css'
       },
 
       editorCss: {
         src: [
           '<config:concat.neatlineCss.src>',
-          css+'overrides.css',
-          css+'editor.css'
+          c.css.payload+'overrides.css',
+          c.css.payload+'editor.css'
         ],
-        dest: css+'editor.css'
+        dest: c.css.payload+'editor.css'
       }
 
     },
@@ -87,13 +79,13 @@ module.exports = function(grunt) {
 
       neatline: {
         src: ['<config:concat.neatline.src>'],
-        dest: js+'neatline.js',
+        dest: c.js.payload+'neatline.js',
         separator: ';'
       },
 
       editor: {
         src: ['<config:concat.editor.src>'],
-        dest: js+'editor.js',
+        dest: c.js.payload+'editor.js',
         separator: ';'
       }
 
@@ -102,7 +94,7 @@ module.exports = function(grunt) {
     stylus: {
       compile: {
         options: {},
-        files: stylusFiles
+        files: stylus
       }
     },
 
@@ -110,7 +102,7 @@ module.exports = function(grunt) {
       files: [
         '<config:concat.neatline.src>',
         '<config:concat.editor.src>',
-        stylus+'/*.styl'
+        c.css.stylus.source+'/*.styl'
       ],
       tasks: [
         'concat:neatline',
