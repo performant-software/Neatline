@@ -23,13 +23,14 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-stylus');
 
   // Create vendor file array.
-  var vendor = _.map(c.js.lib, function(v,k) {
+  var vendorFiles = _.map(c.js.lib, function(v,k) {
     return c.vendor+v;
   });
 
-  var stylus = {}; // Create stylus .css => .styl map.
+  // css => styl.
+  var stylusFiles = {};
   _.each(c.css.stylus.mappings, function(v,k) {
-    stylus[c.css.payload+v] = c.css.stylus.source+k;
+    stylusFiles[c.css.payload+v] = c.css.stylus.source+k;
   });
 
   grunt.initConfig({
@@ -37,7 +38,7 @@ module.exports = function(grunt) {
     concat: {
 
       neatline: {
-        src: vendor.concat([
+        src: vendorFiles.concat([
           c.app+'app.js',
           c.app+'map/**/*.js'
         ]),
@@ -46,7 +47,7 @@ module.exports = function(grunt) {
       },
 
       editor: {
-        src: vendor.concat([
+        src: vendorFiles.concat([
           c.app+'app.js',
           c.app+'map/**/*.js',
           c.app+'editor/**/*.js'
@@ -94,7 +95,7 @@ module.exports = function(grunt) {
     stylus: {
       compile: {
         options: {},
-        files: stylus
+        files: stylusFiles
       }
     },
 
