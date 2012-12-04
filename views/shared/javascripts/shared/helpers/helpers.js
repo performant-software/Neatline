@@ -115,8 +115,7 @@ _t.loadEditorModule = function() {
  * @return void.
  */
 _t.setFixturesPath = function() {
-  jasmine.getFixtures().fixturesPath =
-    'views/shared/javascripts/tests/fixtures';
+  jasmine.getFixtures().fixturesPath = 'shared/fixtures';
 };
 
 
