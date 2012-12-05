@@ -70,7 +70,7 @@ module.exports = function(grunt) {
         }
       },
       move_bootstrap_images: {
-        command: 'cp -r img ../../../img',
+        command: 'cp -r img ../../../css/img',
         stdout: true,
         execOptions: {
           cwd: config.build.bootstrap
