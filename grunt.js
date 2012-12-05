@@ -15,7 +15,7 @@ module.exports = function(grunt) {
   // Load custom tasks.
   grunt.loadNpmTasks('grunt-css');
   grunt.loadNpmTasks('grunt-contrib-stylus');
-  grunt.loadNpmTasks('grunt-clean');
+  grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-shell');
 
   // Load configuration.
@@ -116,12 +116,18 @@ module.exports = function(grunt) {
     },
 
     clean: {
-      npm_tests_map: config.jasmine.map+'/node_modules',
-      npm_tests_editor: config.jasmine.editor+'/node_modules',
-      bower_app: config.bower.app+'/components',
-      bower_tests: config.bower.tests+'/components',
-      payloads_css: config.payloads.css,
-      payloads_js: config.payloads.js
+      npm: [
+        config.jasmine.map+'/node_modules',
+        config.jasmine.editor+'/node_modules'
+      ],
+      bower: [
+        config.bower.app+'/components',
+        config.bower.tests+'/components'
+      ],
+      payload: [
+        config.payloads.css,
+        config.payloads.js
+      ]
     },
 
     concat: {
@@ -151,10 +157,20 @@ module.exports = function(grunt) {
         src: [
 
           // Vendor:
-          '<config:concat.neatline.src>',
+          config.vendor.js.jquery,
+          config.vendor.js.underscore,
           config.vendor.js.underscore_s,
+          config.vendor.js.backbone,
+          config.vendor.js.eventbinder,
+          config.vendor.js.wreqr,
+          config.vendor.js.marionette,
+          config.vendor.js.openlayers,
+          config.vendor.js.bootstrap,
+          config.vendor.js.d3,
 
           // Editor:
+          config.app+'/app.js',
+          config.app+'/modules/map/**/*.js',
           config.app+'/modules/editor/**/*.js'
 
         ],
@@ -249,6 +265,13 @@ module.exports = function(grunt) {
   // Run all tests.
   grunt.registerTask('test', [
     'shell:phpunit',
+    'shell:jasmine_map',
+    'shell:jasmine_editor'
+  ]);
+
+  // Run PHPUnit / Jasmine.
+  grunt.registerTask('phpunit', 'shell:phpunit');
+  grunt.registerTask('jasmine', [
     'shell:jasmine_map',
     'shell:jasmine_editor'
   ]);

@@ -48,4 +48,15 @@ Neatline.module('Editor.Form', function(
   });
 
 
+  /**
+   * Merge tab data onto the aggregate hash on the form view.
+   *
+   * @param {Object} data: The data hash.
+   * @return void.
+   */
+  Neatline.vent.on('editor:form:addData', function(data) {
+    _.extend(Form.view.data, data);
+  });
+
+
 });

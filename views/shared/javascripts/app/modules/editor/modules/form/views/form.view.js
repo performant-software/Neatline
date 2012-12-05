@@ -29,10 +29,14 @@ Neatline.module('Editor.Form.Views', function(
      */
     initialize: function() {
 
-      // Trackers.
-      this.model = null;
-      this.started = false;
-      this.open = false;
+      /**
+       * Trackers.
+       */
+
+      this.model = null; // The model currently bound to the form.
+      this.started = false; // True if the form has been displayed.
+      this.open = false; // True if the form is currently open.
+      this.data = {}; // Aggregate data gathered from tabs.
 
       // Render template.
       this.form = $(this.getTemplate()());
@@ -84,6 +88,7 @@ Neatline.module('Editor.Form.Views', function(
       };
 
       // Bind input listeners.
+      Neatline.vent.trigger('editor:form:initialize', this.form);
       this.bindEvents();
 
     },
@@ -132,14 +137,14 @@ Neatline.module('Editor.Form.Views', function(
       // Block if open.
       if (this.open) return;
 
-      // Publish, set trackers.
-      Neatline.vent.trigger('editor:form:open', model, focus);
-      this.open = true;
-
       // Store model, render.
       this.model = model;
       this.$el.html(this.form);
       this.render();
+
+      // Publish, set trackers.
+      Neatline.vent.trigger('editor:form:open', model, focus);
+      this.open = true;
 
     },
 
@@ -169,33 +174,32 @@ Neatline.module('Editor.Form.Views', function(
      */
     render: function() {
 
-      // Activate "Text" tab.
       if (!this.started) this.setStarted();
+      this.els.head.text(this.model.get('title'));
 
-      // Reset map editing.
-      this.resetMapControl();
+      // // Reset map editing.
+      // this.resetMapControl();
 
-      // Text.
-      this.els.head.            text(this.model.get('title'));
-      this.els.title.           val(this.model.get('title'));
-      this.els.body.            val(this.model.get('description'));
+      // // Text.
+      // this.els.title.           val(this.model.get('title'));
+      // this.els.body.            val(this.model.get('description'));
 
-      // Spatial.
-      this.els.coverage.        val(this.model.get('coverage'));
+      // // Spatial.
+      // this.els.coverage.        val(this.model.get('coverage'));
 
-      // Styles.
-      this.els.vectorColor.     val(this.model.get('vector_color'));
-      this.els.strokeColor.     val(this.model.get('stroke_color'));
-      this.els.selectColor.     val(this.model.get('select_color'));
-      this.els.vectorOpacity.   val(this.model.get('vector_opacity'));
-      this.els.strokeOpacity.   val(this.model.get('stroke_opacity'));
-      this.els.selectOpacity.   val(this.model.get('select_opacity'));
-      this.els.imageOpacity.    val(this.model.get('graphic_opacity'));
-      this.els.strokeWidth.     val(this.model.get('stroke_width'));
-      this.els.pointRadius.     val(this.model.get('point_radius'));
-      this.els.pointGraphic.    val(this.model.get('point_image'));
-      this.els.minZoom.         val(this.model.get('min_zoom'));
-      this.els.maxZoom.         val(this.model.get('max_zoom'));
+      // // Styles.
+      // this.els.vectorColor.     val(this.model.get('vector_color'));
+      // this.els.strokeColor.     val(this.model.get('stroke_color'));
+      // this.els.selectColor.     val(this.model.get('select_color'));
+      // this.els.vectorOpacity.   val(this.model.get('vector_opacity'));
+      // this.els.strokeOpacity.   val(this.model.get('stroke_opacity'));
+      // this.els.selectOpacity.   val(this.model.get('select_opacity'));
+      // this.els.imageOpacity.    val(this.model.get('graphic_opacity'));
+      // this.els.strokeWidth.     val(this.model.get('stroke_width'));
+      // this.els.pointRadius.     val(this.model.get('point_radius'));
+      // this.els.pointGraphic.    val(this.model.get('point_image'));
+      // this.els.minZoom.         val(this.model.get('min_zoom'));
+      // this.els.maxZoom.         val(this.model.get('max_zoom'));
 
     },
 
@@ -207,31 +211,13 @@ Neatline.module('Editor.Form.Views', function(
      */
     save: function() {
 
-      // Commit model.
-      this.model.save({
+      // Gather field data.
+      Neatline.vent.trigger('editor:form:getData');
 
-        // Text.
-        title:              this.els.title.val(),
-        description:        this.els.body.val(),
+      // Save the model.
+      this.model.save(this.data, {
 
-        // Styles.
-        vector_color:       this.els.vectorColor.val(),
-        stroke_color:       this.els.strokeColor.val(),
-        select_color:       this.els.selectColor.val(),
-        vector_opacity:     this.els.vectorOpacity.val(),
-        stroke_opacity:     this.els.strokeOpacity.val(),
-        select_opacity:     this.els.selectOpacity.val(),
-        graphic_opacity:    this.els.imageOpacity.val(),
-        stroke_width:       this.els.strokeWidth.val(),
-        point_radius:       this.els.pointRadius.val(),
-        point_image:        this.els.pointGraphic.val(),
-        min_zoom:           this.els.minZoom.val(),
-        max_zoom:           this.els.maxZoom.val(),
-        coverage:           this.els.coverage.val()
-
-      }, {
-
-        // Update head and button.
+        // Update the header.
         success: _.bind(function() {
           this.updateHead();
         }, this)
