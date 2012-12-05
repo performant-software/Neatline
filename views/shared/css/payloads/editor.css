@@ -1003,6 +1003,10 @@ a.olControlZoomOut {
  * @copyright   2012 Rector and Board of Visitors, University of Virginia
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
+ul.pager {
+  text-align: left;
+  margin: 10px 0;
+}
 
 /**
  * Editor styles.
@@ -1068,7 +1072,7 @@ body {
   padding: 0.7em 0.7em;
 }
 #editor form h3.head {
-  font-size: 2.4em;
+  font-size: 2em;
   font-weight: 300;
 }
 #editor form textarea,

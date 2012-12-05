@@ -40,11 +40,11 @@ Neatline.module('Editor.Form.Views', function(
 
       // Render template, get markup.
       this.form = $(this.getTemplate()());
-      this.head = this.form.find('h3.head');
+      this.lead = this.form.find('p.lead');
       this.tabs = this.form.find('ul.nav a');
-      this.saveButton = this.form.find('button[name="save"]');
-      this.closeButton = this.form.find('button[name="close"]');
-      this.delButton = this.form.find('button[name="del"]');
+      this.closeButton = this.form.find('a[name="close"]');
+      this.saveButton = this.form.find('a[name="save"]');
+      this.delButton = this.form.find('a[name="delete"]');
 
       // Bind input listeners.
       Neatline.vent.trigger('editor:form:initialize', this.form);
@@ -65,6 +65,13 @@ Neatline.module('Editor.Form.Views', function(
       this.closeButton.click(_.bind(function(e) {
         e.preventDefault();
         this.close();
+      }, this));
+
+      // Save button.
+      // ------------
+      this.saveButton.click(_.bind(function(e) {
+        e.preventDefault();
+        this.save();
       }, this));
 
       // Save button.
@@ -126,7 +133,7 @@ Neatline.module('Editor.Form.Views', function(
      */
     render: function() {
       if (!this.started) this.setStarted();
-      this.head.text(this.model.get('title'));
+      this.lead.text(this.model.get('title'));
     },
 
 
@@ -173,7 +180,7 @@ Neatline.module('Editor.Form.Views', function(
      * @return void.
      */
     updateHead: function() {
-      this.head.text(this.model.get('title'));
+      this.lead.text(this.model.get('title'));
     }
 
 

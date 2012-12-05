@@ -31,9 +31,10 @@ describe('Form Data I/O', function() {
     // --------------------------------------------------------------------
 
     var favicon = 'https://www.google.com/favicon.ico';
+    console.log(_t.formView.lead);
 
     // Check for form and values.
-    expect(_t.formView.head.text()).              toEqual('Title 1');
+    expect(_t.formView.lead.text()).              toEqual('Title 1');
     expect(_t.textTabView.title.val()).           toEqual('Title 1');
     expect(_t.textTabView.body.val()).            toEqual('Body 1.');
     expect(_t.styleTabView.vectorColor.val()).    toEqual('#111111');
