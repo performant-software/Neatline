@@ -3,6 +3,7 @@
   , "version": "2.0.0"
   , "private": false
   , "dependencies": {
+      "grunt": ">= 0.3.17"
       "grunt-css": ">= 0.2.1"
     , "grunt-shell": ">= 0.1.3"
     , "grunt-contrib-stylus": "*"
