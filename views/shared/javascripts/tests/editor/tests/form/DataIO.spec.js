@@ -33,22 +33,22 @@ describe('Form Data I/O', function() {
     var favicon = 'https://www.google.com/favicon.ico';
 
     // Check for form and values.
-    expect(_t.formView.els.head.text()).          toEqual('Title 1');
-    expect(_t.formView.els.title.val()).          toEqual('Title 1');
-    expect(_t.formView.els.body.val()).           toEqual('Body 1.');
-    expect(_t.formView.els.vectorColor.val()).    toEqual('#111111');
-    expect(_t.formView.els.strokeColor.val()).    toEqual('#444444');
-    expect(_t.formView.els.selectColor.val()).    toEqual('#777777');
-    expect(_t.formView.els.vectorOpacity.val()).  toEqual('1');
-    expect(_t.formView.els.selectOpacity.val()).  toEqual('4');
-    expect(_t.formView.els.strokeOpacity.val()).  toEqual('7');
-    expect(_t.formView.els.imageOpacity.val()).   toEqual('10');
-    expect(_t.formView.els.strokeWidth.val()).    toEqual('13');
-    expect(_t.formView.els.pointRadius.val()).    toEqual('16');
-    expect(_t.formView.els.minZoom.val()).        toEqual('19');
-    expect(_t.formView.els.maxZoom.val()).        toEqual('22');
-    expect(_t.formView.els.coverage.val()).       toEqual('POINT(1 2)');
-    expect(_t.formView.els.pointGraphic.val()).   toEqual(favicon);
+    expect(_t.formView.head.text()).              toEqual('Title 1');
+    expect(_t.textTabView.title.val()).           toEqual('Title 1');
+    expect(_t.textTabView.body.val()).            toEqual('Body 1.');
+    expect(_t.styleTabView.vectorColor.val()).    toEqual('#111111');
+    expect(_t.styleTabView.strokeColor.val()).    toEqual('#444444');
+    expect(_t.styleTabView.selectColor.val()).    toEqual('#777777');
+    expect(_t.styleTabView.vectorOpacity.val()).  toEqual('1');
+    expect(_t.styleTabView.selectOpacity.val()).  toEqual('4');
+    expect(_t.styleTabView.strokeOpacity.val()).  toEqual('7');
+    expect(_t.styleTabView.imageOpacity.val()).   toEqual('10');
+    expect(_t.styleTabView.strokeWidth.val()).    toEqual('13');
+    expect(_t.styleTabView.pointRadius.val()).    toEqual('16');
+    expect(_t.styleTabView.minZoom.val()).        toEqual('19');
+    expect(_t.styleTabView.maxZoom.val()).        toEqual('22');
+    expect(_t.styleTabView.pointGraphic.val()).   toEqual(favicon);
+    expect(_t.spatialTabView.coverage.val()).     toEqual('POINT(1 2)');
 
   });
 
@@ -65,24 +65,24 @@ describe('Form Data I/O', function() {
     var id = _.first(_t.recordsColl.models).get('id');
 
     // Enter new values into the inputs.
-    _t.formView.els.title.          val('Title 2');
-    _t.formView.els.body.           val('Body 2.');
-    _t.formView.els.vectorColor.    val('#222222');
-    _t.formView.els.strokeColor.    val('#555555');
-    _t.formView.els.selectColor.    val('#888888');
-    _t.formView.els.vectorOpacity.  val('2');
-    _t.formView.els.selectOpacity.  val('5');
-    _t.formView.els.strokeOpacity.  val('8');
-    _t.formView.els.imageOpacity.   val('11');
-    _t.formView.els.strokeWidth.    val('14');
-    _t.formView.els.pointRadius.    val('17');
-    _t.formView.els.minZoom.        val('20');
-    _t.formView.els.maxZoom.        val('23');
-    _t.formView.els.coverage.       val('POINT(3 4)');
-    _t.formView.els.pointGraphic.   val('file2.png');
+    _t.textTabView.title.           val('Title 2');
+    _t.textTabView.body.            val('Body 2.');
+    _t.styleTabView.vectorColor.    val('#222222');
+    _t.styleTabView.strokeColor.    val('#555555');
+    _t.styleTabView.selectColor.    val('#888888');
+    _t.styleTabView.vectorOpacity.  val('2');
+    _t.styleTabView.selectOpacity.  val('5');
+    _t.styleTabView.strokeOpacity.  val('8');
+    _t.styleTabView.imageOpacity.   val('11');
+    _t.styleTabView.strokeWidth.    val('14');
+    _t.styleTabView.pointRadius.    val('17');
+    _t.styleTabView.minZoom.        val('20');
+    _t.styleTabView.maxZoom.        val('23');
+    _t.styleTabView.pointGraphic.   val('file2.png');
+    _t.spatialTabView.coverage.     text('POINT(3 4)');
 
     // Click "Save" button.
-    _t.formView.els.saveButton.trigger('click');
+    _t.formView.saveButton.trigger('click');
 
     // Capture outoing PUT request.
     var request = _t.getLastRequest();

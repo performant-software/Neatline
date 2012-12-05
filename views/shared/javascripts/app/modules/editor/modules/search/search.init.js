@@ -20,9 +20,7 @@ Neatline.module('Editor.Search', function(
    * @return void.
    */
   Search.addInitializer(function() {
-    this.view = new Neatline.Editor.Search.Views.Search({
-      el: '#search'
-    });
+    this.view = new Search.Views.Search({ el: '#search' });
   });
 
 

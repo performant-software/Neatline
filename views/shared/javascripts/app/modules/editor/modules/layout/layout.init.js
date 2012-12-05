@@ -20,7 +20,7 @@ Neatline.module('Editor.Layout', function(
    * @return void.
    */
   Layout.addInitializer(function() {
-    this.view = new Neatline.Editor.Layout.Views.Layout();
+    this.view = new Layout.Views.Layout();
   });
 
 

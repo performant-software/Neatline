@@ -20,9 +20,7 @@ Neatline.module('Editor.Form.StyleTab', function(
    * @return void.
    */
   StyleTab.addInitializer(function() {
-    this.view = new Neatline.Editor.Form.StyleTab.Views.Tab({
-      el: '#form-style'
-    });
+    this.view = new StyleTab.Views.Tab({ el: '#form-style' });
   });
 
 

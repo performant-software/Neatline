@@ -23,9 +23,7 @@ Neatline.module('Editor.Records', function(
 
     // Construct collection and view.
     this.collection = new Neatline.Map.Collections.Records();
-    this.view = new Neatline.Editor.Records.Views.RecordList({
-      el: '#content'
-    });
+    this.view = new Records.Views.RecordList({ el: '#content' });
 
     // Get records.
     Neatline.vent.trigger('editor:search:query');

@@ -37,18 +37,6 @@ Neatline.module('Editor.Form', function(
 
 
   /**
-   * Updated the "Spatial Data" field on the form when the record's map
-   * geometries are changed.
-   *
-   * @param {String} coverage: The new KML.
-   * @return void.
-   */
-  Neatline.vent.on('editor:geometry:newCoverage', function(coverage) {
-    Form.view.setCoverage(coverage);
-  });
-
-
-  /**
    * Merge tab data onto the aggregate hash on the form view.
    *
    * @param {Object} data: The data hash.

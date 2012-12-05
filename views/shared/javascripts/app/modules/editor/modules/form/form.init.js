@@ -20,7 +20,7 @@ Neatline.module('Editor.Form', function(
    * @return void.
    */
   Form.addInitializer(function() {
-    this.view = new Neatline.Editor.Form.Views.Form({ el: '#content' });
+    this.view = new Form.Views.Form({ el: '#content' });
   });
 
 

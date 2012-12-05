@@ -59,7 +59,7 @@ describe('Form Open/Close', function() {
 
     // Open form, click close.
     $(recordRows[0]).trigger('click');
-    $(_t.formView.els.closeButton).trigger('click');
+    $(_t.formView.closeButton).trigger('click');
 
     // Check for records list, no form.
     expect(_t.recordsView.$el).not.toContain(_t.formView.form);
@@ -267,7 +267,7 @@ describe('Form Open/Close', function() {
     expect(_t.mapView.frozen).toEqual([models[0].get('id')]);
 
     // Close, check `frozen` empty.
-    $(_t.formView.els.closeButton).trigger('click');
+    $(_t.formView.closeButton).trigger('click');
     expect(_t.mapView.frozen).toEqual([]);
 
   });
@@ -286,7 +286,7 @@ describe('Form Open/Close', function() {
     expect(_t.mapView.frozen).toEqual([models[0].get('id')]);
 
     // Close, check `frozen` empty.
-    $(_t.formView.els.closeButton).trigger('click');
+    $(_t.formView.closeButton).trigger('click');
     expect(_t.mapView.frozen).toEqual([]);
 
   });
@@ -301,20 +301,20 @@ describe('Form Open/Close', function() {
 
     // Show form, check mode.
     $(recordRows[0]).trigger('click');
-    expect(_t.formView.getMapControl()).toEqual('pan');
+    expect(_t.spatialTabView.getMapControl()).toEqual('pan');
 
     // Activate "Polygon" control, check mode.
     $('input[name="editMode"]')[0].checked = false;
     $('input[name="editMode"]')[3].checked = true;
-    expect(_t.formView.getMapControl()).toEqual('poly');
+    expect(_t.spatialTabView.getMapControl()).toEqual('poly');
 
     // Close the form, re-get records.
-    $(_t.formView.els.closeButton).trigger('click');
+    $(_t.formView.closeButton).trigger('click');
     recordRows = _t.recordsView.$el.find('.record-row');
 
     // Open new form, check mode.
     $(recordRows[1]).trigger('click');
-    expect(_t.formView.getMapControl()).toEqual('pan');
+    expect(_t.spatialTabView.getMapControl()).toEqual('pan');
 
   });
 
