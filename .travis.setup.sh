@@ -32,5 +32,6 @@ sed -i 's/256M/512M/' $OMEKA_DIR/application/tests/bootstrap.php
 # symlink the plugin
 cd $OMEKA_DIR/plugins && ln -s $PLUGIN_DIR
 bundle install
+grunt build
 # export DISPLAY=:99.0
 # sh -e /etc/init.d/xvfb start
