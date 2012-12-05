@@ -129,15 +129,15 @@ module.exports = function(grunt) {
         src: [
 
           // Vendor:
-          config.vendor.jquery,
-          config.vendor.underscore,
-          config.vendor.backbone,
-          config.vendor.eventbinder,
-          config.vendor.wreqr,
-          config.vendor.marionette,
-          config.vendor.openlayers,
-          config.vendor.bootstrap,
-          config.vendor.d3,
+          config.vendor.js.jquery,
+          config.vendor.js.underscore,
+          config.vendor.js.backbone,
+          config.vendor.js.eventbinder,
+          config.vendor.js.wreqr,
+          config.vendor.js.marionette,
+          config.vendor.js.openlayers,
+          config.vendor.js.bootstrap,
+          config.vendor.js.d3,
 
           // Neatline:
           config.app+'/app.js',
@@ -146,46 +146,51 @@ module.exports = function(grunt) {
         ],
         dest: config.payloads.js+'/neatline.js',
         separator: ';'
+      },
+      editor: {
+        src: [
+
+          // Vendor:
+          '<config:concat.neatline.src>',
+          config.vendor.js.underscore_s,
+
+          // Editor:
+          config.app+'/modules/editor/**/*.js'
+
+        ],
+        dest: config.payloads.js+'/editor.js',
+        separator: ';'
+      },
+      neatline_css: {
+        src: [
+          config.payloads.css+'/neatline.css',
+          config.vendor.css.openlayers,
+          config.vendor.css.bootstrap
+        ],
+        dest: config.payloads.css+'/neatline.css'
+      },
+      editor_css: {
+        src: [
+          '<config:concat.neatline_css.src>',
+          config.payloads.css+'/overrides.css',
+          config.payloads.css+'/editor.css'
+        ],
+        dest: config.payloads.css+'/editor.css'
       }
-    //   editor: {
-    //     src: vendorFiles.concat([
-    //       c.app+'app.js',
-    //       c.app+'modules/map/**/*.js',
-    //       c.app+'modules/editor/**/*.js'
-    //     ]),
-    //     dest: c.js.payload+'editor.js',
-    //     separator: ';'
-    //   },
-    //   neatline_css: {
-    //     src: [
-    //       c.css.payload+'neatline.css',
-    //       c.vendor+c.css.lib.openlayers,
-    //       c.vendor+c.css.lib.bootstrap
-    //     ],
-    //     dest: c.css.payload+'neatline.css'
-    //   },
-    //   editor_css: {
-    //     src: [
-    //       '<config:concat.neatline_css.src>',
-    //       c.css.payload+'overrides.css',
-    //       c.css.payload+'editor.css'
-    //     ],
-    //     dest: c.css.payload+'editor.css'
-    //   }
     },
 
-    // min: {
-    //   neatline: {
-    //     src: ['<config:concat.neatline.src>'],
-    //     dest: c.js.payload+'neatline.js',
-    //     separator: ';'
-    //   },
-    //   editor: {
-    //     src: ['<config:concat.editor.src>'],
-    //     dest: c.js.payload+'editor.js',
-    //     separator: ';'
-    //   }
-    // },
+    min: {
+      neatline: {
+        src: ['<config:concat.neatline.src>'],
+        dest: config.payloads.js+'/neatline.js',
+        separator: ';'
+      },
+      editor: {
+        src: ['<config:concat.editor.src>'],
+        dest: config.payloads.js+'/editor.js',
+        separator: ';'
+      }
+    },
 
     stylus: {
       compile: {
@@ -234,11 +239,11 @@ module.exports = function(grunt) {
     'shell:build_openlayers',
     'shell:build_bootstrap',
     'shell:move_bootstrap_images',
-    // 'min:neatline',
-    // 'min:editor',
-    'stylus'
-    // 'concat:neatline_css',
-    // 'concat:editor_css'
+    'min:neatline',
+    'min:editor',
+    'stylus',
+    'concat:neatline_css',
+    'concat:editor_css'
   ]);
 
   // Run all tests.

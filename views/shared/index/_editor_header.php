@@ -23,8 +23,8 @@
   <?php
   fire_plugin_hook('admin_theme_header');
   neatline_queueEditorAssets();
-  echo head_css();
   echo head_js();
+  echo head_css();
   ?>
 
 </head>

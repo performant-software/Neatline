@@ -10,4 +10,4 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-$(function() { Neatline.start(); });
+jQuery(function() { Neatline.start(); });
