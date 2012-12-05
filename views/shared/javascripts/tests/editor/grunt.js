@@ -21,7 +21,9 @@ module.exports = function(grunt) {
         'shared/helpers/components/jasmine-jquery/lib/jasmine-jquery.js',
         'shared/helpers/components/sinon.js/sinon.js'
       ],
-      port: 1337
+      server: {
+        port: 1337
+      }
     }
   });
 };

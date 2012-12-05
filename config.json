@@ -1,0 +1,25 @@
+{
+
+  "payloads": {
+    "js": "./views/shared/javascripts/shared/payloads",
+    "css": "./views/shared/css/payloads"
+  },
+
+  "jasmine": {
+    "map": "./views/shared/javascripts/tests/map",
+    "editor": "./views/shared/javascripts/tests/editor"
+  },
+
+  "bower": {
+    "app": "./views/shared/javascripts",
+    "tests": "./views/shared/javascripts/shared/helpers"
+  },
+
+  "build": {
+    "openlayers": "./views/shared/javascripts/components/openlayers/build",
+    "bootstrap": "./views/shared/javascripts/components/bootstrap"
+  },
+
+  "stylus": "./views/shared/css/stylus"
+
+}
