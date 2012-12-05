@@ -124,15 +124,29 @@ module.exports = function(grunt) {
       payloads_js: config.payloads.js
     },
 
-    // concat: {
-    //   neatline: {
-    //     src: vendorFiles.concat([
-    //       c.app+'app.js',
-    //       c.app+'modules/map/**/*.js'
-    //     ]),
-    //     dest: c.js.payload+'neatline.js',
-    //     separator: ';'
-    //   },
+    concat: {
+      neatline: {
+        src: [
+
+          // Vendor:
+          config.vendor.jquery,
+          config.vendor.underscore,
+          config.vendor.backbone,
+          config.vendor.eventbinder,
+          config.vendor.wreqr,
+          config.vendor.marionette,
+          config.vendor.openlayers,
+          config.vendor.bootstrap,
+          config.vendor.d3,
+
+          // Neatline:
+          config.app+'/app.js',
+          config.app+'/modules/map/**/*.js'
+
+        ],
+        dest: config.payloads.js+'/neatline.js',
+        separator: ';'
+      }
     //   editor: {
     //     src: vendorFiles.concat([
     //       c.app+'app.js',
@@ -158,7 +172,7 @@ module.exports = function(grunt) {
     //     ],
     //     dest: c.css.payload+'editor.css'
     //   }
-    // },
+    },
 
     // min: {
     //   neatline: {

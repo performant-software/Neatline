@@ -1,5 +1,8 @@
 {
 
+  "app": "./views/shared/javascripts/app",
+  "stylus": "./views/shared/css/stylus",
+
   "payloads": {
     "js": "./views/shared/javascripts/shared/payloads",
     "css": "./views/shared/css/payloads"
@@ -20,6 +23,17 @@
     "bootstrap": "./views/shared/javascripts/components/bootstrap"
   },
 
-  "stylus": "./views/shared/css/stylus"
+  "vendor": {
+    "jquery": "./views/shared/javascripts/components/jquery/jquery.js",
+    "underscore": "./views/shared/javascripts/components/underscore/underscore.js",
+    "underscore_s": "./views/shared/javascripts/components/underscore.string/lib/underscore.string.js",
+    "backbone": "./views/shared/javascripts/components/backbone/backbone.js",
+    "eventbinder": "./views/shared/javascripts/components/Backbone.EventBinder/lib/backbone.eventbinder.js",
+    "wreqr": "./views/shared/javascripts/components/Backbone.Wreqr/lib/backbone.wreqr.js",
+    "marionette": "./views/shared/javascripts/components/backbone.marionette/lib/backbone.marionette.js",
+    "openlayers": "./views/shared/javascripts/components/openlayers/build/OpenLayers.js",
+    "bootstrap": "./views/shared/javascripts/components/bootstrap/bootstrap/js/bootstrap.js",
+    "d3": "./views/shared/javascripts/components/d3/d3.v2.js"
+  }
 
 }
