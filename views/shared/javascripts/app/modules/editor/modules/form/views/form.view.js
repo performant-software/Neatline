@@ -44,7 +44,7 @@ Neatline.module('Editor.Form.Views', function(
       this.tabs = this.form.find('ul.nav a');
       this.closeButton = this.form.find('a[name="close"]');
       this.saveButton = this.form.find('a[name="save"]');
-      this.delButton = this.form.find('a[name="delete"]');
+      this.delButton = this.form.find('button[name="delete"]');
 
       // Bind input listeners.
       Neatline.vent.trigger('editor:form:initialize', this.form);
@@ -76,11 +76,22 @@ Neatline.module('Editor.Form.Views', function(
 
       // Save button.
       // ------------
-      this.saveButton.click(_.bind(function(e) {
+      this.delButton.click(_.bind(function(e) {
         e.preventDefault();
-        this.save();
+        this.delete();
       }, this));
 
+    },
+
+
+    /**
+     * Render the form header, set the starting tab.
+     *
+     * @return void.
+     */
+    render: function() {
+      if (!this.started) this.setStarted();
+      this.lead.text(this.model.get('title'));
     },
 
 
@@ -127,17 +138,6 @@ Neatline.module('Editor.Form.Views', function(
 
 
     /**
-     * Render the form header, set the starting tab.
-     *
-     * @return void.
-     */
-    render: function() {
-      if (!this.started) this.setStarted();
-      this.lead.text(this.model.get('title'));
-    },
-
-
-    /**
      * Save the current form values.
      *
      * @return void.
@@ -160,6 +160,17 @@ Neatline.module('Editor.Form.Views', function(
       // Clea aggregator.
       this.data = {};
 
+    },
+
+
+    /**
+     * Destroy the model, close the form.
+     *
+     * @return void.
+     */
+    delete: function() {
+      console.log('delete');
+      this.model.destroy();
     },
 
 

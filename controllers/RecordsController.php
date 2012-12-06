@@ -124,7 +124,8 @@ class Neatline_RecordsController extends Omeka_Controller_AbstractActionControll
      */
     public function deleteAction()
     {
-
+        $record = $this->__records->find($this->_request->id);
+        $record->delete();
     }
 
 }

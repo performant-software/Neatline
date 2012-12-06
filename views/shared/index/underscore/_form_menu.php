@@ -27,9 +27,25 @@
     </a>
   </li>
   <li>
-    <a name="delete" class="btn btn-link">
-      <i class="icon-trash"></i>
-      <?php echo __('Delete'); ?>
+    <a href="#deleteConfirm" name="delete" class="btn btn-link"
+       data-toggle="modal">
+        <i class="icon-trash"></i>
+        <?php echo __('Delete'); ?>
     </a>
   </li>
 </ul>
+
+<div id="deleteConfirm" class="modal hide" role="dialog">
+  <div class="modal-header">
+    <h4>Are you sure?</h4>
+  </div>
+  <div class="modal-body">
+    <p>This will completely delete the record from the database and remove
+       all associated metadata. This action cannot be undone.
+    </p>
+  </div>
+  <div class="modal-footer">
+    <button name="delete" class="btn btn-danger">Yes, delete</button>
+    <button class="btn" data-dismiss="modal">Cancel</button>
+  </div>
+</div>

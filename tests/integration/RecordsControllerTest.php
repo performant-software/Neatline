@@ -23,7 +23,7 @@ class Neatline_RecordsControllerTest extends Neatline_Test_AppTestCase
     public function testIndex()
     {
 
-        // Create exhibit and record.
+        // Create exhibit and records.
         $exhibit = $this->__exhibit();
         $record1 = $this->__record(null, $exhibit);
         $record2 = $this->__record(null, $exhibit);
@@ -201,6 +201,38 @@ class Neatline_RecordsControllerTest extends Neatline_Test_AppTestCase
         // Check the coverage value.
         $this->assertEquals($this->getCoverageAsText($record),
             'POINT(1 1)');
+
+    }
+
+    /**
+     * DELETE should delete a record.
+     *
+     * @return void.
+     */
+    public function testDelete()
+    {
+
+        // Create exhibit and records.
+        $exhibit = $this->__exhibit();
+        $record1 = $this->__record(null, $exhibit);
+        $record2 = $this->__record(null, $exhibit);
+
+        // Starting count.
+        $startingCount = $this->_recordsTable->count();
+
+        // Hit /records.
+        $this->request->setMethod('DELETE');
+        $this->dispatch('neatline/records/'.$record2->id);
+
+        // Ending count.
+        $endingCount = $this->_recordsTable->count();
+
+        // Check code.
+        $this->assertResponseCode(200);
+
+        // Check record deleted.
+        $this->assertNull($this->_recordsTable->find($record2->id));
+        $this->assertEquals($endingCount, $startingCount-1);
 
     }
 
