@@ -29,7 +29,7 @@ module.exports = function(grunt) {
         command: 'npm install',
         stdout: true,
         execOptions: {
-          cwd: config.jasmine.map
+          cwd: config.jasmine.neatline
         }
       },
       npm_tests_editor: {
@@ -84,18 +84,18 @@ module.exports = function(grunt) {
           cwd: './tests'
         }
       },
-      jasmine_map: {
+      jasmine_neatline: {
         command: 'grunt jasmine',
         stdout: true,
         execOptions: {
-          cwd: config.jasmine.map
+          cwd: config.jasmine.neatline
         }
       },
-      jasmine_map_server: {
+      jasmine_neatline_server: {
         command: 'grunt jasmine-server',
         stdout: true,
         execOptions: {
-          cwd: config.jasmine.map
+          cwd: config.jasmine.neatline
         }
       },
       jasmine_editor: {
@@ -271,19 +271,19 @@ module.exports = function(grunt) {
   // Run all tests.
   grunt.registerTask('test', [
     'shell:phpunit',
-    'shell:jasmine_map',
+    'shell:jasmine_neatline',
     'shell:jasmine_editor'
   ]);
 
   // Run PHPUnit / Jasmine.
   grunt.registerTask('phpunit', 'shell:phpunit');
   grunt.registerTask('jasmine', [
-    'shell:jasmine_map',
+    'shell:jasmine_neatline',
     'shell:jasmine_editor'
   ]);
 
   // Run Jasmine servers.
-  grunt.registerTask('map_server', 'shell:jasmine_map_server');
+  grunt.registerTask('neatline_server', 'shell:jasmine_neatline_server');
   grunt.registerTask('editor_server', 'shell:jasmine_editor_server');
 
 

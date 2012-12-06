@@ -34,6 +34,7 @@
 }
 #bubble .record-title {
   font-weight: bold;
+  margin-bottom: 0.2em;
 }
 
 div.olMap {

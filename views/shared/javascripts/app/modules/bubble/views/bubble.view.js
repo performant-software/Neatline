@@ -37,6 +37,9 @@ Neatline.module('Bubble.Views', function(
       this.window = $(window);
       this.body = $('body');
 
+      // Trackers.
+      this.locked = false;
+
     },
 
 
@@ -48,10 +51,12 @@ Neatline.module('Bubble.Views', function(
      */
     show: function(model) {
 
+      // Break if locked.
+      if (this.locked) return;
+
       // Render values, measure.
       this.title.html(model.get('title'));
       this.description.html(model.get('description'));
-      this.measureBubble();
 
       // Position on move.
       this.window.bind('mousemove.bubble', _.bind(function(e) {
@@ -65,25 +70,27 @@ Neatline.module('Bubble.Views', function(
 
 
     /**
-     * .
+     * Hide the bubble.
      *
      * @param {Object} model: The record model.
      * @return void.
      */
     hide: function(model) {
       this.window.unbind('mousemove.bubble');
+      this.locked = false;
       this.$el.hide();
     },
 
 
     /**
-     * .
+     * Freeze the bubble in place.
      *
      * @param {Object} model: The record model.
      * @return void.
      */
     lock: function(model) {
       this.window.unbind('mousemove.bubble');
+      this.locked = true;
     },
 
 
@@ -94,20 +101,9 @@ Neatline.module('Bubble.Views', function(
      * @return void.
      */
     position: function(evt) {
-
-      this.measureWindow();
-
-      // Base coordiantes.
       var x = evt.clientX + this.options.padding;
       var y = evt.clientY - this.options.padding;
-
-      // Catch overflows.
-      if (x > this.ww) x = this.ww - this.bw;
-      if (y > this.wh) y = this.wh - this.bh;
-
-      // Render.
       this.$el.css({ left: x, top: y });
-
     },
 
 
@@ -119,26 +115,6 @@ Neatline.module('Bubble.Views', function(
     measureWindow: function() {
       this.wh = this.window.height();
       this.ww = this.window.width();
-    },
-
-
-    /**
-     * Measure the size of the bubble.
-     *
-     * @return void.
-     */
-    measureBubble: function() {
-
-      // Clone and append to DOM.
-      var clone = this.$el.clone().css({
-        top: -1000, left: -1000
-      }).appendTo(this.body);
-
-      // Measure and remove.
-      this.bh = clone.outerHeight();
-      this.bw = clone.outerWidth();
-      clone.remove();
-
     }
 
 
