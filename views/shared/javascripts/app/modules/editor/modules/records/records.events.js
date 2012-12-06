@@ -73,4 +73,15 @@ Neatline.module('Editor.Records', function(
   });
 
 
+  /**
+   * When a record is deleted, purge it from the collection.
+   *
+   * @param {Object} model: The deleted record.
+   * @return void.
+   */
+  Neatline.vent.on('editor:form:delete', function(model) {
+    Records.collection.remove(model);
+  });
+
+
 });

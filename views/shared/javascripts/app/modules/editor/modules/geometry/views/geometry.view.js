@@ -205,6 +205,31 @@ _.extend(Neatline.Map.Views.Map.prototype, {
     this.controls.del.unselectFeature(feature);
     this.editLayer.destroyFeatures([feature]);
     this.publish();
+  },
+
+
+  /**
+   * Remove a layer by model.
+   *
+   * @param {Object} model: The model of the deleted record.
+   * @return void.
+   */
+  removeLayerByModel: function(model) {
+
+    // Try to get a layer for the model.
+    var layer = this.getLayerByModel(model);
+
+    // If layer, delete.
+    if (!_.isNull(layer)) {
+
+      // Remove from map.
+      this.map.removeLayer(layer);
+      this.layers = _.reject(this.layers, function(layer) {
+        return layer.nId == model.get('id');
+      });
+
+    }
+
   }
 
 

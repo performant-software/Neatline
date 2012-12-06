@@ -14,7 +14,6 @@ describe('Form Open/Close', function() {
 
   var recordRows, mapLayers, models, feature1, feature2;
 
-  // Load AJAX fixtures.
   // Start editor.
   beforeEach(function() {
 

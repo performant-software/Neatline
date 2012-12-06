@@ -45,7 +45,11 @@
     </p>
   </div>
   <div class="modal-footer">
-    <button name="delete" class="btn btn-danger">Yes, delete</button>
-    <button class="btn" data-dismiss="modal">Cancel</button>
+    <button name="delete" class="btn btn-danger">
+      <i class="icon-trash icon-white"></i> Yes, delete
+    </button>
+    <button class="btn" data-dismiss="modal">
+      <i class="icon-ban-circle"></i> Cancel
+    </button>
   </div>
 </div>

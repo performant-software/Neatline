@@ -169,8 +169,17 @@ Neatline.module('Editor.Form.Views', function(
      * @return void.
      */
     delete: function() {
-      console.log('delete');
-      this.model.destroy();
+
+      // Issue DELETE.
+      this.model.destroy({
+
+        // Close form, purge model.
+        success: _.bind(function() {
+          Neatline.vent.trigger('editor:form:delete', this.model);
+          this.close();
+        }, this)
+      });
+
     },
 
 

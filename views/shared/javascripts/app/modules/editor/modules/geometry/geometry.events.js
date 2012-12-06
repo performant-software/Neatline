@@ -50,4 +50,16 @@ Neatline.module('Editor.Geometry', { startWithParent: false,
   });
 
 
+  /**
+   * When a record is deleted, purge it from the collection and map.
+   *
+   * @param {Object} model: The deleted record.
+   * @return void.
+   */
+  Neatline.vent.on('editor:form:delete', function(model) {
+    Neatline.Map.collection.remove(model);
+    Geometry.view.removeLayerByModel(model);
+  });
+
+
 }});
