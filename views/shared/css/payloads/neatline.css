@@ -1,8 +1,39 @@
+/**
+ * Exhibit styles.
+ *
+ * @package     omeka
+ * @subpackage  neatline
+ * @copyright   2012 Rector and Board of Visitors, University of Virginia
+ * @license     http://www.apache.org/licenses/LICENSE-2.0.html
+ */
 #neatline-map {
   height: 800px;
 }
 #neatline-map img {
   max-width: none;
+}
+
+/**
+ * Bubble styles.
+ *
+ * @package     omeka
+ * @subpackage  neatline
+ * @copyright   2012 Rector and Board of Visitors, University of Virginia
+ * @license     http://www.apache.org/licenses/LICENSE-2.0.html
+ */
+#bubble {
+  overflow: hidden;
+  position: fixed;
+  z-index: 9999;
+  display: none;
+  border: 1px solid rgba(0,0,0,0.2);
+  box-shadow: 0 5px 10px rgba(0,0,0,0.3);
+  background: #fcfcfc;
+  padding: 10px;
+  max-width: 500px;
+}
+#bubble .record-title {
+  font-weight: bold;
 }
 
 div.olMap {

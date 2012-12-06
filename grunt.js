@@ -148,7 +148,8 @@ module.exports = function(grunt) {
           // Neatline:
           config.app+'/app.init.js',
           config.app+'/collections/*.js',
-          config.app+'/modules/map/**/*.js'
+          config.app+'/modules/map/**/*.js',
+          config.app+'/modules/bubble/**/*.js'
 
         ],
         dest: config.payloads.js+'/neatline.js',
@@ -173,6 +174,7 @@ module.exports = function(grunt) {
           config.app+'/app.init.js',
           config.app+'/collections/*.js',
           config.app+'/modules/map/**/*.js',
+          config.app+'/modules/bubble/**/*.js',
           config.app+'/modules/editor/**/*.js'
 
         ],
@@ -181,7 +183,8 @@ module.exports = function(grunt) {
       },
       neatline_css: {
         src: [
-          config.payloads.css+'/neatline.css',
+          config.payloads.css+'/map.css',
+          config.payloads.css+'/bubble.css',
           config.vendor.css.openlayers,
           config.vendor.css.bootstrap
         ],
@@ -215,7 +218,8 @@ module.exports = function(grunt) {
         options: {},
         files: {
           'views/shared/css/payloads/*.css': [
-            config.stylus+'/neatline.styl',
+            config.stylus+'/map.styl',
+            config.stylus+'/bubble.styl',
             config.stylus+'/editor.styl',
             config.stylus+'/overrides.styl'
           ]

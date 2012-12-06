@@ -14,10 +14,14 @@
 ?>
 
 <div id="neatline">
-  <div id="neatline-map" class="neatline-block"></div>
+  <!-- Map. -->
+  <?php echo $this->partial('neatline/_map.php'); ?>
 </div>
 
 <!-- JSON globals. -->
 <script type="text/javascript">
   __exhibit = <?php echo neatline_renderExhibit($exhibit); ?>
 </script>
+
+<!-- Bubble. -->
+<?php echo $this->partial('neatline/_bubble.php'); ?>

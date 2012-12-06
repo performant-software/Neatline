@@ -29,8 +29,9 @@ _t.loadNeatline = function() {
   // Mock server.
   this.server = sinon.fakeServer.create();
 
-  // Load map.
+  // Load modules.
   this.loadMapModule();
+  this.loadBubbleModule();
 
   // Shortcut components.
   this.mapView = Neatline.Map.view;
@@ -52,6 +53,17 @@ _t.loadMapModule = function() {
   // Inject fixtures.
   this.respondAll200(this.json.collections.standard);
 
+};
+
+
+/**
+ * Load the Neatline `Bubble` module.
+ *
+ * @return void.
+ */
+_t.loadBubbleModule = function() {
+  Neatline.Bubble.stop();
+  Neatline.Bubble.start();
 };
 
 
@@ -100,6 +112,7 @@ _t.loadEditorModule = function() {
 
   // Reset modules.
   Neatline.Editor.stop();
+  Neatline.Bubble.stop();
   Neatline.Map.stop();
 
   // Restart Neatline.
