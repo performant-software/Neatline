@@ -14,7 +14,13 @@ describe('Form Delete', function() {
 
   // Start editor.
   beforeEach(function() {
+
     _t.loadEditor();
+
+    // Open Record 2 form.
+    var recordRows = _t.getRecordRows();
+    $(recordRows[0]).trigger('click');
+
   });
 
   it('should show modal when "Delete" is clicked', function() {
@@ -23,6 +29,12 @@ describe('Form Delete', function() {
     // When the "Delete" button is clicked, a modal should display that
     // prompts the user for confirmation.
     // --------------------------------------------------------------------
+
+    // Click on "Delete".
+    _t.formView.delButton.modal('show');
+
+    // Check for overlay and modal.
+    expect($('body')).toContain('div.modal-backdrop.in');
 
   });
 
@@ -74,12 +86,16 @@ describe('Form Delete', function() {
 
   });
 
-  it('should not try to remove a non-existent map layer', function() {
+  describe('Regression', function() {
 
-    // --------------------------------------------------------------------
-    // When a record is deleted that does not have a corresponding layer
-    // on the map, `removeLayer` should not be called with a null value.
-    // --------------------------------------------------------------------
+    it('should not try to remove a non-existent map layer', function() {
+
+      // ------------------------------------------------------------------
+      // When a record is deleted that does not have a corresponding layer
+      // on the map, `removeLayer` should not be called with a null value.
+      // ------------------------------------------------------------------
+
+    });
 
   });
 

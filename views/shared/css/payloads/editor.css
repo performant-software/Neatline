@@ -1007,6 +1007,12 @@ ul.pager {
   text-align: left;
   margin: 10px 0;
 }
+ul.pager li a {
+  border-color: #a3a3a3;
+}
+.modal-backdrop {
+  opacity: 0.3;
+}
 
 /**
  * Editor styles.

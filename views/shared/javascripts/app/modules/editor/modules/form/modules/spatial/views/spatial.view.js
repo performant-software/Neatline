@@ -54,7 +54,7 @@ Neatline.module('Editor.Form.SpatialTab.Views', function(
      */
     render: function(model) {
       this.resetMapControl();
-      this.coverage.text(model.get('coverage'));
+      this.coverage.val(model.get('coverage'));
     },
 
 
@@ -66,7 +66,7 @@ Neatline.module('Editor.Form.SpatialTab.Views', function(
      */
     gather: function(model) {
       return {
-        coverage: this.coverage.text()
+        coverage: this.coverage.val()
       };
     },
 

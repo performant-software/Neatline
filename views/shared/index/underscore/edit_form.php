@@ -19,8 +19,6 @@
 
   <form class="form-stacked record">
 
-    <?php echo $this->partial('index/underscore/_form_menu.php'); ?>
-
     <p class="lead"></p>
 
     <ul class="nav nav-tabs">
@@ -233,6 +231,8 @@
       </div>
 
     </div>
+
+    <?php echo $this->partial('index/underscore/_form_menu.php'); ?>
 
   </form>
 

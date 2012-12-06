@@ -31,7 +31,6 @@ describe('Form Data I/O', function() {
     // --------------------------------------------------------------------
 
     var favicon = 'https://www.google.com/favicon.ico';
-    console.log(_t.formView.lead);
 
     // Check for form and values.
     expect(_t.formView.lead.text()).              toEqual('Title 1');
@@ -80,7 +79,7 @@ describe('Form Data I/O', function() {
     _t.styleTabView.minZoom.        val('20');
     _t.styleTabView.maxZoom.        val('23');
     _t.styleTabView.pointGraphic.   val('file2.png');
-    _t.spatialTabView.coverage.     text('POINT(3 4)');
+    _t.spatialTabView.coverage.     val('POINT(3 4)');
 
     // Click "Save" button.
     _t.formView.saveButton.trigger('click');
