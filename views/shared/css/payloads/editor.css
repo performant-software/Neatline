@@ -1021,7 +1021,6 @@ body {
   text-rendering: optimizeLegibility;
 }
 #editor,
-#drag-handle,
 #neatline {
   position: absolute;
   box-sizing: border-box;
@@ -1031,7 +1030,7 @@ body {
   -moz-user-select: none;
 }
 #editor {
-  background: #f9f9f9;
+  background: #fcfcfc;
   width: 380px;
   overflow-y: scroll;
   overflow-x: hidden;
@@ -1052,10 +1051,14 @@ body {
   font-weight: 300;
   padding: 0.2em 1em;
   border-bottom: 1px solid #f0f0f0;
+  white-space: nowrap;
 }
 #editor ul.records li:hover {
-  background: #3f3f3f;
+  background: #08c;
   color: #fff;
+}
+#editor ul.records li .record-title {
+  font-weight: bold;
 }
 #editor form {
   margin: 1.6em;

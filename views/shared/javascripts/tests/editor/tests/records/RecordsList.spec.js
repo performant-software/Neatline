@@ -32,9 +32,18 @@ describe('Records List', function() {
     // --------------------------------------------------------------------
 
     expect(recordRows.length).toEqual(3);
-    expect($(recordRows[0]).text()).toEqual('Title 1');
-    expect($(recordRows[1]).text()).toEqual('Title 2');
-    expect($(recordRows[2]).text()).toEqual('Title 3');
+    expect($(recordRows[0]).find('.record-title').text()).
+      toEqual('Title 1');
+    expect($(recordRows[0]).find('.record-body').text()).
+      toEqual('Body 1.');
+    expect($(recordRows[1]).find('.record-title').text()).
+      toEqual('Title 2');
+    expect($(recordRows[1]).find('.record-body').text()).
+      toEqual('Body 2.');
+    expect($(recordRows[2]).find('.record-title').text()).
+      toEqual('Title 3');
+    expect($(recordRows[2]).find('.record-body').text()).
+      toEqual('Body 3.');
 
   });
 

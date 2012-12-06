@@ -15,9 +15,11 @@
 
 <div id="editor">
 
+  <!--
   <div id="menu">
     <?php echo $this->partial('index/_search.php'); ?>
   </div>
+  -->
 
   <div id="content"></div>
 

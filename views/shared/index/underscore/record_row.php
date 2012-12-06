@@ -16,4 +16,5 @@
 <!-- Record row. -->
 <script id="record-row" type="text/templates">
   <span class="record-title"><%= title %></span>
+  <span class="record-body"><%= body %></span>
 </script>

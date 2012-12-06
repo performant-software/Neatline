@@ -226,16 +226,6 @@
           </div>
         </div>
 
-        <div class="control-group">
-          <div class="controls">
-            <div class="inline-inputs">
-              <button name="map-focus" class="btn">
-                <?php echo __('Set Map Focus'); ?>
-              </button>
-            </div>
-          </div>
-        </div>
-
       </div>
 
       <div class="tab-pane" id="form-tags">
