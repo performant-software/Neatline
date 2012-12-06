@@ -12,14 +12,19 @@
 
 describe('Form Data I/O', function() {
 
+  var recordRows, mapLayers, feature;
+
   // Start editor.
   beforeEach(function() {
 
     _t.loadEditor();
 
-    // Open form.
-    var recordRows = _t.getRecordRows();
-    $(recordRows[0]).trigger('click');
+    // Get rows.
+    recordRows = _t.getRecordRows();
+
+    // Get layers.
+    mapLayers = _t.getVectorLayers();
+    feature = mapLayers[0].features[0];
 
   });
 
@@ -29,6 +34,9 @@ describe('Form Data I/O', function() {
     // When the edit form for a record is opened in the editor, the form
     // should render data from the record's model into the form fields.
     // --------------------------------------------------------------------
+
+    // Open form.
+    $(recordRows[0]).trigger('click');
 
     var favicon = 'https://www.google.com/favicon.ico';
 
@@ -60,6 +68,9 @@ describe('Form Data I/O', function() {
     // the input fields and issue a PUT request to the records API with
     // the new data.
     // --------------------------------------------------------------------
+
+    // Open form.
+    $(recordRows[0]).trigger('click');
 
     // Get the id of the current form model.
     var id = _.first(_t.recordsColl.models).get('id');
@@ -98,14 +109,14 @@ describe('Form Data I/O', function() {
     expect(params.vector_color).    toEqual('#222222');
     expect(params.stroke_color).    toEqual('#555555');
     expect(params.select_color).    toEqual('#888888');
-    expect(params.vector_opacity).  toEqual('2');
-    expect(params.select_opacity).  toEqual('5');
-    expect(params.stroke_opacity).  toEqual('8');
-    expect(params.graphic_opacity). toEqual('11');
-    expect(params.stroke_width).    toEqual('14');
-    expect(params.point_radius).    toEqual('17');
-    expect(params.min_zoom).        toEqual('20');
-    expect(params.max_zoom).        toEqual('23');
+    expect(params.vector_opacity).  toEqual(2);
+    expect(params.select_opacity).  toEqual(5);
+    expect(params.stroke_opacity).  toEqual(8);
+    expect(params.graphic_opacity). toEqual(11);
+    expect(params.stroke_width).    toEqual(14);
+    expect(params.point_radius).    toEqual(17);
+    expect(params.min_zoom).        toEqual(20);
+    expect(params.max_zoom).        toEqual(23);
     expect(params.coverage).        toEqual('POINT(3 4)');
     expect(params.point_image).     toEqual('file2.png');
 

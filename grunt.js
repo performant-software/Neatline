@@ -146,7 +146,8 @@ module.exports = function(grunt) {
           config.vendor.js.d3,
 
           // Neatline:
-          config.app+'/app.js',
+          config.app+'/app.init.js',
+          config.app+'/collections/*.js',
           config.app+'/modules/map/**/*.js'
 
         ],
@@ -169,7 +170,8 @@ module.exports = function(grunt) {
           config.vendor.js.d3,
 
           // Editor:
-          config.app+'/app.js',
+          config.app+'/app.init.js',
+          config.app+'/collections/*.js',
           config.app+'/modules/map/**/*.js',
           config.app+'/modules/editor/**/*.js'
 

@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Map records collection.
+ * Collection of Neatline records.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -10,8 +10,8 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Map.Collections', function(
-  Collections, Map, Backbone, Marionette, $, _) {
+Neatline.module('Collections', function(
+  Collections, Neatline, Backbone, Marionette, $, _) {
 
 
   Collections.Records = Backbone.Collection.extend({
@@ -40,7 +40,7 @@ Neatline.module('Map.Collections', function(
      * @param {Function} cb: Called when the fetch() completes.
      * @return void.
      */
-    updateCollection: function(params, cb) {
+    getCollection: function(params, cb) {
 
       params = params || {};
       params.id = __exhibit.id;
@@ -89,6 +89,19 @@ Neatline.module('Map.Collections', function(
 
       }
 
+    },
+
+
+    /**
+     * Update the data for a model with the passed id.
+     *
+     * @param {Number} id: The model id.
+     * @param {Object} data: The new data.
+     * @return void.
+     */
+    updateModel: function(id, data) {
+      var model = this.get(id);
+      if (model) model.set(data);
     }
 
 

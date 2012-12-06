@@ -38,13 +38,17 @@ Neatline.module('Editor.Form.Views', function(
       this.open = false;      // True if the form is currently open.
       this.data = {};         // Aggregate data gathered from tabs.
 
-      // Render template, get markup.
+      // Render template.
       this.form = $(this.getTemplate()());
-      this.lead = this.form.find('p.lead');
-      this.tabs = this.form.find('ul.nav a');
-      this.closeButton = this.form.find('a[name="close"]');
-      this.saveButton = this.form.find('a[name="save"]');
-      this.delButton = this.form.find('button[name="delete"]');
+
+      // Markup:
+      this.closeButton =    this.form.find('a[name="close"]');
+      this.saveButton =     this.form.find('a[name="save"]');
+      this.confirmButton =  this.form.find('button[name="delete"]');
+      this.deleteButton =   this.form.find('a[name="delete"]');
+      this.deleteModal =    this.form.find('#deleteConfirm');
+      this.lead =           this.form.find('p.lead');
+      this.tabs =           this.form.find('ul.nav a');
 
       // Bind input listeners.
       Neatline.vent.trigger('editor:form:initialize', this.form);
@@ -74,9 +78,9 @@ Neatline.module('Editor.Form.Views', function(
         this.save();
       }, this));
 
-      // Save button.
+      // Delete button.
       // ------------
-      this.delButton.click(_.bind(function(e) {
+      this.confirmButton.click(_.bind(function(e) {
         e.preventDefault();
         this.delete();
       }, this));
@@ -144,11 +148,13 @@ Neatline.module('Editor.Form.Views', function(
      */
     save: function() {
 
-      // Gather field data.
+      // Gather data, propagate to all collections.
       Neatline.vent.trigger('editor:form:getData');
+      Neatline.vent.trigger('editor:form:updateRecord',
+        this.model.get('id'), this.data);
 
       // Save the model.
-      this.model.save(this.data, {
+      this.model.save({
 
         // Update the header.
         success: _.bind(function() {
@@ -157,7 +163,7 @@ Neatline.module('Editor.Form.Views', function(
 
       });
 
-      // Clea aggregator.
+      // Clear data.
       this.data = {};
 
     },
@@ -176,6 +182,7 @@ Neatline.module('Editor.Form.Views', function(
         // Close form, purge model.
         success: _.bind(function() {
           Neatline.vent.trigger('editor:form:delete', this.model);
+          this.deleteModal.modal('hide');
           this.close();
         }, this)
       });

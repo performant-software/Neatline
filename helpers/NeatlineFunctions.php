@@ -23,7 +23,7 @@ function neatline_queueNeatlineAssets()
 {
     neatline_queueGoogleMapsApi();
     queue_js_file('shared/payloads/neatline', 'javascripts');
-    queue_js_file('app/bootstrap', 'javascripts');
+    queue_js_file('bootstrap', 'javascripts');
     queue_css_file('payloads/neatline');
 }
 
@@ -35,7 +35,7 @@ function neatline_queueNeatlineAssets()
 function neatline_queueEditorAssets()
 {
     queue_js_file('shared/payloads/editor', 'javascripts');
-    queue_js_file('app/bootstrap', 'javascripts');
+    queue_js_file('bootstrap', 'javascripts');
     queue_css_file('payloads/editor');
 }
 

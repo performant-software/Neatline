@@ -1009,6 +1009,8 @@ ul.pager {
 }
 ul.pager li a {
   border-color: #a3a3a3;
+  border-radius: 10px;
+  margin-right: 5px;
 }
 .modal-backdrop {
   opacity: 0.3;

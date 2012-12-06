@@ -35,7 +35,8 @@
   </li>
 </ul>
 
-<div id="deleteConfirm" class="modal hide" role="dialog">
+<div id="deleteConfirm" class="modal hide" role="dialog"
+  aria-hidden="true">
   <div class="modal-header">
     <h4>Are you sure?</h4>
   </div>

@@ -39,7 +39,7 @@ Neatline.module('Editor.Records', function(
    * @return void.
    */
   Neatline.vent.on('editor:search:query', function(query) {
-    Records.collection.updateCollection(query, function(records) {
+    Records.collection.getCollection(query, function(records) {
       Records.view.show(records);
     });
   });
@@ -70,6 +70,19 @@ Neatline.module('Editor.Records', function(
     // Block if mapMirror is disabled or a form is open.
     if (mapMirror && !formOpen) Records.view.show(collection);
 
+  });
+
+
+  /**
+   * When a record is updated by a from save, propagate the new data into
+   * the records collection.
+   *
+   * @param {Number} id: The id of the updated record.
+   * @param {Object} data: The new data.
+   * @return void.
+   */
+  Neatline.vent.on('editor:form:updateRecord', function(id, data) {
+    Records.collection.updateModel(id, data);
   });
 
 

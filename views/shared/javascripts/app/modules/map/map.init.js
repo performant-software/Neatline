@@ -20,7 +20,7 @@ Neatline.module('Map', function(
    * @return void.
    */
   Map.addInitializer(function() {
-    this.collection = new Neatline.Map.Collections.Records();
+    this.collection = new Neatline.Collections.Records();
     this.view = new Neatline.Map.Views.Map({ el: '#neatline-map' });
   });
 
