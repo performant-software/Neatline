@@ -44,8 +44,8 @@ Neatline.module('Editor.Form.Views', function(
       // Markup:
       this.closeButton =    this.form.find('a[name="close"]');
       this.saveButton =     this.form.find('a[name="save"]');
-      this.confirmButton =  this.form.find('button[name="delete"]');
       this.deleteButton =   this.form.find('a[name="delete"]');
+      this.confirmButton =  this.form.find('button[name="delete"]');
       this.deleteModal =    this.form.find('#deleteConfirm');
       this.lead =           this.form.find('p.lead');
       this.tabs =           this.form.find('ul.nav a');
@@ -82,7 +82,7 @@ Neatline.module('Editor.Form.Views', function(
       // ------------
       this.confirmButton.click(_.bind(function(e) {
         e.preventDefault();
-        this.delete();
+        this.remove();
       }, this));
 
     },
@@ -148,13 +148,15 @@ Neatline.module('Editor.Form.Views', function(
      */
     save: function() {
 
-      // Gather data, propagate to all collections.
+      // Gather data from tab views.
       Neatline.vent.trigger('editor:form:getData');
+
+      // Propagate the new data to all collections.
       Neatline.vent.trigger('editor:form:updateRecord',
         this.model.get('id'), this.data);
 
       // Save the model.
-      this.model.save({
+      this.model.save({}, {
 
         // Update the header.
         success: _.bind(function() {
@@ -174,16 +176,19 @@ Neatline.module('Editor.Form.Views', function(
      *
      * @return void.
      */
-    delete: function() {
+    remove: function() {
 
       // Issue DELETE.
       this.model.destroy({
-
-        // Close form, purge model.
         success: _.bind(function() {
+
+          // Notify collections to purge the model.
           Neatline.vent.trigger('editor:form:delete', this.model);
+
+          // Close the modal and form.
           this.deleteModal.modal('hide');
           this.close();
+
         }, this)
       });
 

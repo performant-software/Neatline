@@ -30,6 +30,7 @@
   box-shadow: 0 5px 10px rgba(0,0,0,0.3);
   background: #fcfcfc;
   padding: 10px;
+  opacity: 0.95;
   max-width: 500px;
 }
 #bubble .record-title {
@@ -615,6 +616,7 @@ body {
   margin-right: 8px;
 }
 #editor form ul.nav a {
+  padding: 8px 10px;
   font-size: 18px;
   font-weight: 300;
 }

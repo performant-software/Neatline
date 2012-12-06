@@ -38,7 +38,7 @@ Neatline.module('Bubble.Views', function(
       this.body = $('body');
 
       // Trackers.
-      this.locked = false;
+      this.frozen = false;
 
     },
 
@@ -51,8 +51,8 @@ Neatline.module('Bubble.Views', function(
      */
     show: function(model) {
 
-      // Break if locked.
-      if (this.locked) return;
+      // Break if frozen.
+      if (this.frozen) return;
 
       // Render values, measure.
       this.title.html(model.get('title'));
@@ -72,13 +72,10 @@ Neatline.module('Bubble.Views', function(
     /**
      * Hide the bubble.
      *
-     * @param {Object} model: The record model.
      * @return void.
      */
-    hide: function(model) {
-      this.window.unbind('mousemove.bubble');
-      this.locked = false;
-      this.$el.hide();
+    hide: function() {
+      if (!this.frozen) this.thaw();
     },
 
 
@@ -88,9 +85,22 @@ Neatline.module('Bubble.Views', function(
      * @param {Object} model: The record model.
      * @return void.
      */
-    lock: function(model) {
+    freeze: function() {
       this.window.unbind('mousemove.bubble');
-      this.locked = true;
+      this.frozen = true;
+    },
+
+
+    /**
+     * Unfreeze the bubble.
+     *
+     * @param {Object} model: The record model.
+     * @return void.
+     */
+    thaw: function() {
+      this.window.unbind('mousemove.bubble');
+      this.frozen = false;
+      this.$el.hide();
     },
 
 

@@ -34,7 +34,7 @@ _t.loadNeatline = function() {
   this.loadBubbleModule();
 
   // Shortcut components.
-  this.mapView = Neatline.Map.view;
+  _t.shortcutNeatlineComponents();
 
 };
 
@@ -88,17 +88,9 @@ _t.loadEditor = function() {
   // Respond to data loads.
   this.respondAll200(this.json.collections.standard);
 
-  // Shortcut components
-  this.layoutView = Neatline.Editor.Layout.view;
-  this.recordsView = Neatline.Editor.Records.view;
-  this.formView = Neatline.Editor.Form.view;
-  this.textTabView = Neatline.Editor.Form.TextTab.view;
-  this.spatialTabView = Neatline.Editor.Form.SpatialTab.view;
-  this.styleTabView = Neatline.Editor.Form.StyleTab.view;
-  this.searchView = Neatline.Editor.Search.view;
-  this.mapView = Neatline.Map.view;
-  this.recordsColl = Neatline.Editor.Records.collection;
-  this.mapColl = Neatline.Map.collection;
+  // Shortcut components.
+  _t.shortcutNeatlineComponents();
+  _t.shortcutEditorComponents();
 
 };
 
@@ -122,6 +114,35 @@ _t.loadEditorModule = function() {
   // Inject fixtures.
   this.respondAll200(this.json.collections.standard);
 
+};
+
+
+/**
+ * Shortcut public-facing exhibit components.
+ *
+ * @return void.
+ */
+_t.shortcutNeatlineComponents = function() {
+  this.mapColl = Neatline.Map.collection;
+  this.mapView = Neatline.Map.view;
+  this.bubbleView = Neatline.Bubble.view;
+};
+
+
+/**
+ * Shortcut editor components.
+ *
+ * @return void.
+ */
+_t.shortcutEditorComponents = function() {
+  this.layoutView = Neatline.Editor.Layout.view;
+  this.recordsView = Neatline.Editor.Records.view;
+  this.formView = Neatline.Editor.Form.view;
+  this.textTabView = Neatline.Editor.Form.TextTab.view;
+  this.spatialTabView = Neatline.Editor.Form.SpatialTab.view;
+  this.styleTabView = Neatline.Editor.Form.StyleTab.view;
+  this.searchView = Neatline.Editor.Search.view;
+  this.recordsColl = Neatline.Editor.Records.collection;
 };
 
 

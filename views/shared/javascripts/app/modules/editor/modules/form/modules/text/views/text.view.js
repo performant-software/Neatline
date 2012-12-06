@@ -36,8 +36,8 @@ Neatline.module('Editor.Form.TextTab.Views', function(
      * @return void.
      */
     render: function(model) {
-      this.title.text(model.get('title'));
-      this.body.text(model.get('description'));
+      this.title.val(model.get('title'));
+      this.body.val(model.get('description'));
     },
 
 

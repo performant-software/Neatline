@@ -32,7 +32,7 @@ Neatline.module('Bubble', function(
    * @return void.
    */
   Neatline.vent.on('map:unhighlight', function(model) {
-    Bubble.view.hide(model);
+    Bubble.view.hide();
   });
 
 
@@ -43,7 +43,7 @@ Neatline.module('Bubble', function(
    * @return void.
    */
   Neatline.vent.on('map:select', function(model) {
-    Bubble.view.lock(model);
+    Bubble.view.freeze();
   });
 
 
@@ -54,7 +54,7 @@ Neatline.module('Bubble', function(
    * @return void.
    */
   Neatline.vent.on('map:unselect', function(model) {
-    Bubble.view.hide(model);
+    Bubble.view.thaw();
   });
 
 

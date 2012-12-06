@@ -14,7 +14,7 @@ describe('Map Outgoing Events', function() {
 
   var mapLayers, layer, feature, spy;
 
-  // Get fixtures.
+  // Start Neatline.
   beforeEach(function() {
 
     _t.loadNeatline();
