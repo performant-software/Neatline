@@ -18,7 +18,10 @@ Neatline.module('Bubble.Views', function(
 
 
     options: {
-      padding: 25
+      padding: {
+        x: 50,
+        y: 25
+      }
     },
 
 
@@ -111,8 +114,8 @@ Neatline.module('Bubble.Views', function(
      * @return void.
      */
     position: function(evt) {
-      var x = evt.clientX + this.options.padding;
-      var y = evt.clientY - this.options.padding;
+      var x = evt.clientX + this.options.padding.x;
+      var y = evt.clientY - this.options.padding.y;
       this.$el.css({ left: x, top: y });
     },
 
