@@ -228,18 +228,22 @@ module.exports = function(grunt) {
     },
 
     watch: {
-      files: [
-        '<config:concat.neatline.src>',
-        '<config:concat.editor.src>',
-        config.stylus+'/*.styl'
-      ],
-      tasks: [
-        'concat:neatline',
-        'concat:editor',
-        'stylus',
-        'concat:neatline_css',
-        'concat:editor_css'
-      ]
+      payload: {
+        files: [
+          '<config:concat.neatline.src>',
+          '<config:concat.editor.src>',
+          config.jasmine.neatline+'/**/*.js',
+          config.jasmine.editor+'/**/*.js',
+          config.stylus+'/*.styl'
+        ],
+        tasks: [
+          'concat:neatline',
+          'concat:editor',
+          'stylus',
+          'concat:neatline_css',
+          'concat:editor_css'
+        ]
+      }
     }
 
   });

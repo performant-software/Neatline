@@ -12,7 +12,7 @@
 
 describe('Bubble Show/Hide', function() {
 
-  var mapLayers, layer, feature;
+  var mapLayers, layer1, layer2, feature1, feature2;
 
   // Start Neatline.
   beforeEach(function() {
@@ -22,23 +22,169 @@ describe('Bubble Show/Hide', function() {
     // Get map layers.
     mapLayers = _t.getVectorLayers();
 
-    // Get layer and feature.
-    layer = mapLayers[0];
-    feature = layer.features[0];
+    // Get layers.
+    layer1 = mapLayers[0];
+    layer2 = mapLayers[1];
+
+    // Get features.
+    feature1 = layer1.features[0];
+    feature2 = layer2.features[0];
 
   });
 
   it('should show bubble on feature hover', function() {
 
     // --------------------------------------------------------------------
-    // The bubble should be shown when the cursor hovers over a feature.
+    // The bubble should be displayed when the cursor hovers on a feature.
     // --------------------------------------------------------------------
 
-    // Simulate hover on feature.
-    _t.hoverOnMapFeature(layer, feature);
+    // Hover on feature1.
+    _t.hoverOnMapFeature(layer1, feature1);
 
     // Bubble should be visible.
     expect(_t.bubbleView.$el).toBeVisible();
+
+  });
+
+  it('should hide bubble on feature unhover', function() {
+
+    // --------------------------------------------------------------------
+    // The bubble should be hidden when the cursor leaves a feature.
+    // --------------------------------------------------------------------
+
+    // Hover off feature1.
+    _t.hoverOnMapFeature(layer1, feature1);
+    _t.unHoverOnMapFeature(mapLayers);
+
+    // Bubble should be visible.
+    expect(_t.bubbleView.$el).not.toBeVisible();
+
+  });
+
+  it('should freeze bubble on feature select', function() {
+
+    // --------------------------------------------------------------------
+    // The bubble should be frozen when a feature is selected. The bubble
+    // should stop tracking the cursor and should remain visible when the
+    // cursor leaves the feature1.
+    // --------------------------------------------------------------------
+
+    // Hover, select.
+    _t.hoverOnMapFeature(layer1, feature1);
+    _t.clickOnMapFeature(layer1, feature1);
+
+    // Capture current bubble offset.
+    var offset = _t.bubbleView.$el.offset();
+
+    // Move the cursor.
+    $(window).trigger($.Event('mousemove', {
+      clientX: 3, clientY:4
+    }));
+
+    // Bubble should not move.
+    expect(_t.bubbleView.$el.offset()).toEqual(offset);
+
+    // Bubble should be visible after unhover.
+    _t.unHoverOnMapFeature(mapLayers);
+    expect(_t.bubbleView.$el).toBeVisible();
+
+  });
+
+  it('should add `frozen` class on feature select', function() {
+
+    // --------------------------------------------------------------------
+    // A `frozen` class should be added when the bubble is frozen.
+    // --------------------------------------------------------------------
+
+    // Hover, select.
+    _t.hoverOnMapFeature(layer1, feature1);
+    _t.clickOnMapFeature(layer1, feature1);
+
+    // Check for `.frozen`.
+    expect(_t.bubbleView.$el).toHaveClass('frozen');
+
+  });
+
+  it('should not respond to hover events when frozen', function() {
+
+    // --------------------------------------------------------------------
+    // When the bubble is frozen and the cursor hovers over a feature1 for
+    // a different record, the bubble should not show the data for the new
+    // record and should not track the cursor.
+    // --------------------------------------------------------------------
+
+    // Hover, select.
+    _t.hoverOnMapFeature(layer1, feature1);
+    _t.clickOnMapFeature(layer1, feature1);
+
+    // Capture current bubble offset.
+    var offset = _t.bubbleView.$el.offset();
+
+    // Hover on a different feature.
+    _t.hoverOnMapFeature(layer1, feature2);
+
+    // Check for unchanged bubble values.
+    expect(_t.bubbleView.title.text()).toEqual('Title 1');
+    expect(_t.bubbleView.description.text()).toEqual('Body 1.');
+
+    // Move the cursor.
+    $(window).trigger($.Event('mousemove', {
+      clientX: 3, clientY:4
+    }));
+
+    // Bubble should not move.
+    expect(_t.bubbleView.$el.offset()).toEqual(offset);
+
+  });
+
+  it('should thaw bubble on feature unselect', function() {
+
+    // --------------------------------------------------------------------
+    // When a feature is unselected, the bubble should disappear and start
+    // responding to hover events.
+    // --------------------------------------------------------------------
+
+    // Hover, select.
+    _t.hoverOnMapFeature(layer1, feature1);
+    _t.clickOnMapFeature(layer1, feature1);
+
+    // Bubble should not be visible after unselect.
+    _t.clickOffMapFeature(mapLayers);
+    expect(_t.bubbleView.$el).not.toBeVisible();
+
+    // Hover on a different feature.
+    _t.hoverOnMapFeature(layer1, feature2);
+
+    // Capture current bubble offset.
+    var offset = _t.bubbleView.$el.offset();
+
+    // Check for changed bubble values.
+    expect(_t.bubbleView.title.text()).toEqual('Title 2');
+    expect(_t.bubbleView.description.text()).toEqual('Body 2.');
+
+    // Move the cursor.
+    $(window).trigger($.Event('mousemove', {
+      clientX: 3, clientY:4
+    }));
+
+    // Bubble should track the cursor.
+    expect(_t.bubbleView.$el.offset()).not.toEqual(offset);
+
+  });
+
+  it('should remove `frozen` class on thaw', function() {
+
+    // --------------------------------------------------------------------
+    // The `frozen` class should be removed when the bubble is thawed.
+    // --------------------------------------------------------------------
+
+    // Hover, select, unselect.
+    _t.hoverOnMapFeature(layer1, feature1);
+    _t.clickOnMapFeature(layer1, feature1);
+    _t.clickOffMapFeature(mapLayers);
+
+    // Check for `.frozen`.
+    expect(_t.bubbleView.$el).not.toHaveClass('frozen');
 
   });
 

@@ -4,7 +4,7 @@
   "stylus": "./views/shared/css/stylus",
 
   "payloads": {
-    "js": "./views/shared/javascripts/shared/payloads",
+    "js": "./views/shared/javascripts/payloads",
     "css": "./views/shared/css/payloads"
   },
 

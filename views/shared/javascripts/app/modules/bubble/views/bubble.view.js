@@ -90,6 +90,7 @@ Neatline.module('Bubble.Views', function(
      */
     freeze: function() {
       this.window.unbind('mousemove.bubble');
+      this.$el.addClass('frozen');
       this.frozen = true;
     },
 
@@ -102,6 +103,7 @@ Neatline.module('Bubble.Views', function(
      */
     thaw: function() {
       this.window.unbind('mousemove.bubble');
+      this.$el.removeClass('frozen');
       this.frozen = false;
       this.$el.hide();
     },
@@ -116,6 +118,7 @@ Neatline.module('Bubble.Views', function(
     position: function(evt) {
       var x = evt.clientX + this.options.padding.x;
       var y = evt.clientY - this.options.padding.y;
+      console.log(x, y);
       this.$el.css({ left: x, top: y });
     },
 

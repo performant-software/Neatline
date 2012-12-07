@@ -14,7 +14,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-jasmine-runner');
   grunt.initConfig({
     jasmine: {
-      src: 'shared/payloads/neatline.js',
+      src: 'shared/payloads/js/neatline.js',
       specs: 'tests/**/*.spec.js',
       helpers: [
         'shared/helpers/*.js',

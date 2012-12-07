@@ -24,6 +24,7 @@ _t.loadNeatline = function() {
   // Load partials.
   _t.setFixturesPath();
   loadFixtures('neatline-partial.html');
+  loadStyleFixtures('neatline.css');
   this.loadJsonFixtures();
 
   // Mock server.
@@ -77,6 +78,7 @@ _t.loadEditor = function() {
   // Load partials.
   _t.setFixturesPath();
   loadFixtures('editor-partial.html');
+  loadStyleFixtures('neatline.css');
   this.loadJsonFixtures();
 
   // Mock server.
@@ -153,6 +155,7 @@ _t.shortcutEditorComponents = function() {
  */
 _t.setFixturesPath = function() {
   jasmine.getFixtures().fixturesPath = 'shared/fixtures';
+  jasmine.getStyleFixtures().fixturesPath = 'shared/payloads/css';
 };
 
 
@@ -354,7 +357,7 @@ _t.clickOffMapFeature = function(layers) {
   };
 
   // Trigger click.
-  Neatline.Map.view.map.events.triggerEvent('click', evt);
+  this.mapView.map.events.triggerEvent('click', evt);
 
 };
 
@@ -380,7 +383,7 @@ _t.hoverOnMapFeature = function(layer, feature) {
   };
 
   // Trigger click.
-  Neatline.Map.view.map.events.triggerEvent('mousemove', evt);
+  this.mapView.map.events.triggerEvent('mousemove', evt);
 
 };
 
@@ -407,7 +410,7 @@ _t.unHoverOnMapFeature = function(layers) {
   };
 
   // Trigger click.
-  Neatline.Map.view.map.events.triggerEvent('mousemove', evt);
+  this.mapView.map.events.triggerEvent('mousemove', evt);
 
 };
 
@@ -422,5 +425,5 @@ _t.unHoverOnMapFeature = function(layers) {
  */
 _t.setMapCenter = function(lon, lat, zoom) {
   var lonlat = new OpenLayers.LonLat(lon, lat);
-  Neatline.Map.view.map.setCenter(lonlat, zoom);
+  this.mapView.map.setCenter(lonlat, zoom);
 };
