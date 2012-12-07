@@ -1,6 +1,6 @@
 <?php
 
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2; */
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
  * Content management shell in editor.
@@ -16,9 +16,10 @@
 <div id="editor">
 
   <!--
-  <div id="menu">
-    <?php echo $this->partial('index/_search.php'); ?>
-  </div>
+  <header>
+    <p class="lead"><?php echo $exhibit->title; ?></p>
+    <?php echo $this->partial('index/_nav.php'); ?>
+  </header>
   -->
 
   <div id="content"></div>
@@ -26,4 +27,6 @@
 </div>
 
 <!-- Underscore templates. -->
-<?php echo $this->partial('index/_templates.php'); ?>
+<?php echo $this->partial('index/_record_list.php'); ?>
+<?php echo $this->partial('index/_record_row.php'); ?>
+<?php echo $this->partial('index/_record_form.php'); ?>

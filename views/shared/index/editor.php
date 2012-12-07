@@ -1,6 +1,6 @@
 <?php
 
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2; */
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
  * The top-level Neatline editor view. Wraps the markup for the editing
@@ -15,14 +15,25 @@
 
 ?>
 
+<!-- Header. -->
 <?php echo $this->partial('index/_editor_header.php', array(
   'exhibit' => $exhibit,
   'title' => __('Neatline Editor: %s', $exhibit->title)
 )); ?>
 
-<!-- Editor. -->
-<?php echo $this->partial('index/_editor.php', array(
+<!-- Records. -->
+<?php echo $this->partial('index/_records.php', array(
   'exhibit' => $exhibit
 )); ?>
+
+<!-- Exhibit. -->
+<?php echo $this->partial('neatline/_neatline.php', array(
+  'exhibit' => $exhibit
+)); ?>
+
+<!-- JSON globals. -->
+<script type="text/javascript">
+  __editor = <?php echo neatline_editorGlobals($exhibit); ?>
+</script>
 
 <?php echo $this->partial('index/_editor_footer.php'); ?>

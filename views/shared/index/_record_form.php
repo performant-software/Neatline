@@ -232,7 +232,7 @@
 
     </div>
 
-    <?php echo $this->partial('index/underscore/_form_menu.php'); ?>
+    <?php echo $this->partial('index/_form_menu.php'); ?>
 
   </form>
 

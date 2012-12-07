@@ -20,7 +20,7 @@
 
 <!-- JSON globals. -->
 <script type="text/javascript">
-  __exhibit = <?php echo neatline_renderExhibit($exhibit); ?>
+  __exhibit = <?php echo neatline_exhibitGlobals($exhibit); ?>
 </script>
 
 <!-- Bubble. -->

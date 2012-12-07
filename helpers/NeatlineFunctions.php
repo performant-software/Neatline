@@ -22,9 +22,9 @@
 function neatline_queueNeatlineAssets()
 {
     neatline_queueGoogleMapsApi();
-    queue_js_file('shared/payloads/neatline', 'javascripts');
-    queue_js_file('bootstrap', 'javascripts');
     queue_css_file('payloads/neatline');
+    queue_js_file('shared/payloads/neatline');
+    queue_js_file('bootstrap');
 }
 
 /**
@@ -34,9 +34,9 @@ function neatline_queueNeatlineAssets()
  */
 function neatline_queueEditorAssets()
 {
-    queue_js_file('shared/payloads/editor', 'javascripts');
-    queue_js_file('bootstrap', 'javascripts');
     queue_css_file('payloads/editor');
+    queue_js_file('shared/payloads/editor');
+    queue_js_file('bootstrap');
 }
 
 /**
@@ -68,7 +68,7 @@ function neatline_queueGoogleMapsApi()
  *
  * @return array The exhibit data.
  */
-function neatline_renderExhibit($exhibit)
+function neatline_exhibitGlobals($exhibit)
 {
     return json_encode(array(
         'id'        => $exhibit->id,
@@ -85,7 +85,7 @@ function neatline_renderExhibit($exhibit)
  *
  * @return array The exhibit data.
  */
-function neatline_renderEditor($exhibit)
+function neatline_editorGlobals($exhibit)
 {
     return json_encode(array('id' => $exhibit->id));
 }

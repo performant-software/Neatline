@@ -19,7 +19,7 @@ Neatline.module('Bubble.Views', function(
 
     options: {
       padding: {
-        x: 50,
+        x: 40,
         y: 25
       }
     },

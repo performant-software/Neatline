@@ -1,3 +1,4 @@
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 /**
  * Bootstrap overrides.
  *
@@ -14,6 +15,14 @@ ul.pager li a {
   border-color: #a3a3a3;
   border-radius: 10px;
   margin-right: 5px;
+}
+ul.nav li {
+  margin-right: 8px;
+}
+ul.nav a {
+  padding: 8px 10px;
+  font-size: 18px;
+  font-weight: 300;
 }
 .modal-backdrop {
   opacity: 0.3;
