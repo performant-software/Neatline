@@ -11,6 +11,7 @@
     , "marionette.wreqr": "https://github.com/marionettejs/backbone.wreqr.git"
     , "openlayers": "https://github.com/openlayers/openlayers.git"
     , "minicolors": "https://github.com/claviska/jquery-miniColors.git"
+    , "noty": "https://github.com/needim/noty.git"
     , "bootstrap": ">= 2.2.0"
     , "d3": ">= 2.10.3"
   }

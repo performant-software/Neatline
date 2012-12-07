@@ -61,15 +61,16 @@ describe('Bubble Show/Hide', function() {
 
   });
 
-  it('should hide bubble on map mouseout', function() {
+  it('should hide bubble when the cursor leaves the exhibit', function() {
 
     // --------------------------------------------------------------------
-    // The bubble should be hidden when the cursor leaves the map.
+    // The bubble should be hidden when the cursor leaves the top-level
+    // `#neatline` container.
     // --------------------------------------------------------------------
 
-    // Hover out of map.
+    // Move cursor out of the exhibit.
     _t.hoverOnMapFeature(layer1, feature1);
-    _t.triggerMapMouseout();
+    $('#neatline').trigger('mouseleave');
 
     // Bubble should be visible.
     expect(_t.bubbleView.$el).not.toBeVisible();

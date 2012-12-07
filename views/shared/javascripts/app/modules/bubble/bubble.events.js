@@ -36,16 +36,6 @@ Neatline.module('Bubble', function(
 
 
   /**
-   * Hide bubble when the mouse leaves the map.
-   *
-   * @return void.
-   */
-  Neatline.vent.on('map:mouseout', function() {
-    Bubble.view.hide();
-  });
-
-
-  /**
    * Lock bubble on feature click on.
    *
    * @return void.
@@ -71,6 +61,7 @@ Neatline.module('Bubble', function(
    * @return void.
    */
   Neatline.vent.on('editor:form:close', function() {
+    Bubble.view.activate();
     Bubble.view.thaw();
   });
 

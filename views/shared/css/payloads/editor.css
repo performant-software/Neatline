@@ -687,3 +687,6 @@ body {
 #editor form .actions a {
   margin-right: 5px;
 }
+#editor form .actions a[name="save"] {
+  width: 80px;
+}

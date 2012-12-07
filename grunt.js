@@ -168,6 +168,10 @@ module.exports = function(grunt) {
           config.vendor.js.marionette,
           config.vendor.js.openlayers,
           config.vendor.js.bootstrap,
+          config.vendor.js.noty,
+          config.vendor.js.noty_layout_base,
+          config.vendor.js.noty_layout,
+          config.vendor.js.noty_theme,
           config.vendor.js.d3,
 
           // Editor:

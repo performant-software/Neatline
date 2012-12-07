@@ -17,6 +17,14 @@ Neatline.module('Editor.Form.Views', function(
   Views.Form = Backbone.View.extend({
 
 
+    options: {
+      messages: {
+        save: 'The record was saved successfully!',
+        remove: 'The record was deleted successfully!'
+      }
+    },
+
+
     getTemplate: function() {
       return _.template($('#edit-form').html());
     },
@@ -34,6 +42,7 @@ Neatline.module('Editor.Form.Views', function(
        */
 
       this.model = null;      // The model currently bound to the form.
+      this.hash = null;       // The hash of the currently selected tab.
       this.started = false;   // True if the form has been displayed.
       this.open = false;      // True if the form is currently open.
       this.data = {};         // Aggregate data gathered from tabs.
@@ -41,12 +50,16 @@ Neatline.module('Editor.Form.Views', function(
       // Render template.
       this.form = $(this.getTemplate()());
 
-      // Markup:
+      // Buttons:
       this.closeButton =    this.form.find('button.close');
-      this.saveButton =     this.form.find('a[name="save"]');
       this.deleteButton =   this.form.find('a[name="delete"]');
       this.confirmButton =  this.form.find('button[name="delete"]');
+      this.saveButton =     this.form.find('a[name="save"]');
+
+      // Delete modal:
       this.deleteModal =    this.form.find('#deleteConfirm');
+
+      // Groups:
       this.lead =           this.form.find('p.lead');
       this.tabs =           this.form.find('ul.nav a');
 
@@ -71,10 +84,14 @@ Neatline.module('Editor.Form.Views', function(
 
         // Check if the "Spatial" tab is active.
         var event = (e.target.hash == '#form-spatial') ?
-          'editor:form:spatialSelect' : 'editor:form:spatialDeselect';
+          'editor:form:spatialSelect' :
+          'editor:form:spatialDeselect';
 
         // Publish "Spatial" (de)selection.
         Neatline.vent.trigger(event);
+
+        // Track the hash.
+        this.hash = e.target.hash;
 
       }, this));
 
@@ -112,8 +129,16 @@ Neatline.module('Editor.Form.Views', function(
      * @return void.
      */
     render: function() {
+
+      // Do first-open routine, set header.
       if (!this.started) this.setStarted();
       this.lead.text(this.model.get('title'));
+
+      // Disable bubble if "Spatial" is active.
+      if (this.hash == '#form-spatial') {
+        Neatline.vent.trigger('editor:form:spatialSelect');
+      }
+
     },
 
 
@@ -166,6 +191,9 @@ Neatline.module('Editor.Form.Views', function(
      */
     save: function() {
 
+      // Set button.
+      this.setSaving();
+
       // Gather data from tab views.
       Neatline.vent.trigger('editor:form:getData');
 
@@ -179,6 +207,7 @@ Neatline.module('Editor.Form.Views', function(
         // Update the header.
         success: _.bind(function() {
           this.updateHead();
+          this.setSaved();
         }, this)
 
       });
@@ -207,9 +236,23 @@ Neatline.module('Editor.Form.Views', function(
           this.deleteModal.modal('hide');
           this.close();
 
+          // Flash notification.
+          this.notify(this.options.messages.remove);
+
         }, this)
       });
 
+    },
+
+
+    /**
+     * Flash a notification.
+     *
+     * @param {String} text: The notification content.
+     * @return void.
+     */
+    notify: function(text) {
+      noty({ text: text, layout: 'topCenter', timeout: 500 });
     },
 
 
@@ -231,6 +274,27 @@ Neatline.module('Editor.Form.Views', function(
      */
     updateHead: function() {
       this.lead.text(this.model.get('title'));
+    },
+
+
+    /**
+     * Return the saved button to its default state, notify.
+     *
+     * @return void.
+     */
+    setSaved: function() {
+      this.notify(this.options.messages.save);
+      this.saveButton.text('Save');
+    },
+
+
+    /**
+     * Set the saved button to "Saving.." mode.
+     *
+     * @return void.
+     */
+    setSaving: function() {
+      this.saveButton.text('Saving');
     }
 
 

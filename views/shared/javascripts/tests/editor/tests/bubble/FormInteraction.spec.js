@@ -12,15 +12,16 @@
 
 describe('Bubble Form Interaction', function() {
 
-  var mapLayers, layer, feature;
+  var recordRows, mapLayers, layer, feature;
 
   // Start editor.
   beforeEach(function() {
 
     _t.loadEditor();
 
-    // Get layers.
+    // Get layers and rows.
     mapLayers = _t.getVectorLayers();
+    recordRows = _t.getRecordRows();
 
     // Alias layer and feature.
     layer = mapLayers[0];
@@ -74,7 +75,6 @@ describe('Bubble Form Interaction', function() {
     // --------------------------------------------------------------------
 
     // Open form.
-    var recordRows = _t.getRecordRows();
     $(recordRows[0]).trigger('click');
 
     // Click the "Spatial" tab.
@@ -98,7 +98,6 @@ describe('Bubble Form Interaction', function() {
     // --------------------------------------------------------------------
 
     // Open form.
-    var recordRows = _t.getRecordRows();
     $(recordRows[0]).trigger('click');
 
     // Click the "Spatial" tab.
@@ -110,6 +109,55 @@ describe('Bubble Form Interaction', function() {
     // Hover on feature, check bubble.
     _t.hoverOnMapFeature(layer, feature);
     expect(_t.bubbleView.$el).toBeVisible();
+
+  });
+
+  it('should activate bubble when the form is closed', function() {
+
+    // --------------------------------------------------------------------
+    // If the spatial tab is selected, the bubble should be deactivated;
+    // but then if the form is closed while the spatial tab is still open,
+    // the bubble should be reactivated.
+    // --------------------------------------------------------------------
+
+    // Open form.
+    $(recordRows[0]).trigger('click');
+
+    // Click the "Spatial" tab.
+    $('a[href="#form-spatial"]').tab('show');
+
+    // Close the form.
+    _t.formView.closeButton.trigger('click');
+
+    // Hover on feature, check bubble.
+    _t.hoverOnMapFeature(layer, feature);
+    expect(_t.bubbleView.$el).toBeVisible();
+
+  });
+
+  it('should deactivate bubble on form open w/ spatial tab', function() {
+
+    // --------------------------------------------------------------------
+    // If the form is opened with the spatial tab already selected as the
+    // default, the bubble should be deactivated.
+    // --------------------------------------------------------------------
+
+    // Open form.
+    $(recordRows[0]).trigger('click');
+
+    // Click the "Spatial" tab.
+    $('a[href="#form-spatial"]').tab('show');
+
+    // Close the form.
+    _t.formView.closeButton.trigger('click');
+
+    // Reopen the form.
+    recordRows = _t.getRecordRows();
+    $(recordRows[0]).trigger('click');
+
+    // Hover on feature, check for no bubble.
+    _t.hoverOnMapFeature(layer, feature);
+    expect(_t.bubbleView.$el).not.toBeVisible();
 
   });
 

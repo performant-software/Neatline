@@ -32,14 +32,15 @@ Neatline.module('Bubble.Views', function(
      */
     initialize: function() {
 
-      this.active = true; // True when bubble should be displayed.
-      this.frozen = false; // True when bubble is frozen after a click.
+      this.active = true;   // True when bubble should be displayed.
+      this.frozen = false;  // True when bubble is frozen after a click.
 
       // Bubble components.
       this.title = this.$el.find('.record-title');
       this.description = this.$el.find('.record-body');
 
-      // Document.
+      // Containers.
+      this.exhibit = $('#neatline');
       this.window = $(window);
       this.body = $('body');
 
@@ -61,9 +62,14 @@ Neatline.module('Bubble.Views', function(
       this.title.html(model.get('title'));
       this.description.html(model.get('description'));
 
-      // Position on move.
+      // Position on mousemove.
       this.window.bind('mousemove.bubble', _.bind(function(e) {
         this.position(e);
+      }, this));
+
+      // Hide on exhibit mouseleave.
+      this.exhibit.bind('mouseleave.bubble', _.bind(function() {
+        this.hide();
       }, this));
 
       // Show.
@@ -89,9 +95,15 @@ Neatline.module('Bubble.Views', function(
      * @return void.
      */
     freeze: function() {
+
+      // Strip events.
       this.window.unbind('mousemove.bubble');
+      this.exhibit.unbind('mouseleave.bubble');
+
+      // Add class, track.
       this.$el.addClass('frozen');
       this.frozen = true;
+
     },
 
 
@@ -102,10 +114,18 @@ Neatline.module('Bubble.Views', function(
      * @return void.
      */
     thaw: function() {
+
+      // Strip events.
       this.window.unbind('mousemove.bubble');
+      this.exhibit.unbind('mouseleave.bubble');
+
+      // Pop class, track, hide.
       this.$el.removeClass('frozen');
       this.frozen = false;
+
+      // Hide.
       this.$el.hide();
+
     },
 
 

@@ -83,6 +83,29 @@ describe('Form Delete', function() {
 
   });
 
+  it('should flash a notification when the delete succeeds', function() {
+
+    // --------------------------------------------------------------------
+    // When the DELETE request completes, `noty` should be called with the
+    // correct message string.
+    // --------------------------------------------------------------------
+
+    // Spy on noty.
+    noty = jasmine.createSpy();
+
+    // Click on "Save".
+    _t.formView.deleteButton.trigger('click');
+    _t.formView.confirmButton.trigger('click');
+    _t.respondLast200('');
+
+    // Check for `noty` call.
+    expect(noty).toHaveBeenCalled();
+    expect(noty.argsForCall[0][0].text).toEqual(
+      _t.formView.options.messages.remove
+    );
+
+  });
+
   it('should close modal when "Delete" is clicked', function() {
 
     // --------------------------------------------------------------------
