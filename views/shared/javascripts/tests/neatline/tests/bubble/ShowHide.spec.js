@@ -19,14 +19,14 @@ describe('Bubble Show/Hide', function() {
 
     _t.loadNeatline();
 
-    // Get map layers.
+    // Get layers.
     mapLayers = _t.getVectorLayers();
 
-    // Get layers.
+    // Alias layers.
     layer1 = mapLayers[0];
     layer2 = mapLayers[1];
 
-    // Get features.
+    // Alias features.
     feature1 = layer1.features[0];
     feature2 = layer2.features[0];
 
@@ -52,7 +52,7 @@ describe('Bubble Show/Hide', function() {
     // The bubble should be hidden when the cursor leaves a feature.
     // --------------------------------------------------------------------
 
-    // Hover off feature1.
+    // Hover off feature.
     _t.hoverOnMapFeature(layer1, feature1);
     _t.unHoverOnMapFeature(mapLayers);
 

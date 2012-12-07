@@ -232,8 +232,6 @@ module.exports = function(grunt) {
         files: [
           '<config:concat.neatline.src>',
           '<config:concat.editor.src>',
-          config.jasmine.neatline+'/**/*.js',
-          config.jasmine.editor+'/**/*.js',
           config.stylus+'/*.styl'
         ],
         tasks: [

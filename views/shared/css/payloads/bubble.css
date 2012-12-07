@@ -19,6 +19,9 @@
   opacity: 0.95;
   max-width: 500px;
 }
+#bubble.frozen {
+  opacity: 1;
+}
 #bubble .record-title {
   font-weight: bold;
   margin-bottom: 0.2em;

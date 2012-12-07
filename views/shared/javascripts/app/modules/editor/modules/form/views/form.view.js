@@ -64,12 +64,28 @@ Neatline.module('Editor.Form.Views', function(
      */
     bindEvents: function() {
 
+
+      // Tabs.
+      // ------------
+      this.tabs.on('shown', _.bind(function(e) {
+
+        // Check if the "Spatial" tab is active.
+        var event = (e.target.hash == '#form-spatial') ?
+          'editor:form:spatialSelect' : 'editor:form:spatialDeselect';
+
+        // Publish "Spatial" (de)selection.
+        Neatline.vent.trigger(event);
+
+      }, this));
+
+
       // Close button.
       // -------------
       this.closeButton.click(_.bind(function(e) {
         e.preventDefault();
         this.close();
       }, this));
+
 
       // Save button.
       // ------------
@@ -78,12 +94,14 @@ Neatline.module('Editor.Form.Views', function(
         this.save();
       }, this));
 
+
       // Delete button.
-      // ------------
+      // --------------
       this.confirmButton.click(_.bind(function(e) {
         e.preventDefault();
         this.remove();
       }, this));
+
 
     },
 

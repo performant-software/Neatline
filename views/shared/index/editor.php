@@ -21,19 +21,10 @@
   'title' => __('Neatline Editor: %s', $exhibit->title)
 )); ?>
 
-<!-- Records. -->
-<?php echo $this->partial('index/_records.php', array(
+<!-- Editor partial. -->
+<?php echo $this->partial('index/_editor.php', array(
   'exhibit' => $exhibit
 )); ?>
 
-<!-- Exhibit. -->
-<?php echo $this->partial('neatline/_neatline.php', array(
-  'exhibit' => $exhibit
-)); ?>
-
-<!-- JSON globals. -->
-<script type="text/javascript">
-  __editor = <?php echo neatline_editorGlobals($exhibit); ?>
-</script>
-
+<!-- Footer. -->
 <?php echo $this->partial('index/_editor_footer.php'); ?>

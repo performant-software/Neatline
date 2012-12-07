@@ -32,6 +32,9 @@ Neatline.module('Bubble.Views', function(
      */
     initialize: function() {
 
+      this.active = true; // True when bubble should be displayed.
+      this.frozen = false; // True when bubble is frozen after a click.
+
       // Bubble components.
       this.title = this.$el.find('.record-title');
       this.description = this.$el.find('.record-body');
@@ -39,9 +42,6 @@ Neatline.module('Bubble.Views', function(
       // Document.
       this.window = $(window);
       this.body = $('body');
-
-      // Trackers.
-      this.frozen = false;
 
     },
 
@@ -55,7 +55,7 @@ Neatline.module('Bubble.Views', function(
     show: function(model) {
 
       // Break if frozen.
-      if (this.frozen) return;
+      if (this.frozen || !this.active) return;
 
       // Render values, measure.
       this.title.html(model.get('title'));
@@ -118,7 +118,6 @@ Neatline.module('Bubble.Views', function(
     position: function(evt) {
       var x = evt.clientX + this.options.padding.x;
       var y = evt.clientY - this.options.padding.y;
-      console.log(x, y);
       this.$el.css({ left: x, top: y });
     },
 
@@ -131,6 +130,26 @@ Neatline.module('Bubble.Views', function(
     measureWindow: function() {
       this.wh = this.window.height();
       this.ww = this.window.width();
+    },
+
+
+    /**
+     * Enable the bubble.
+     *
+     * @return void.
+     */
+    activate: function() {
+      this.active = true;
+    },
+
+
+    /**
+     * Disable the bubble
+     *
+     * @return void.
+     */
+    deactivate: function() {
+      this.active = false;
     }
 
 

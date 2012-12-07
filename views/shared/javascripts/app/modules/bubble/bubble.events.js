@@ -58,4 +58,25 @@ Neatline.module('Bubble', function(
   });
 
 
+  /**
+   * Close and deactivate the bubble when the "Spatial" tab is active.
+   *
+   * @return void.
+   */
+  Neatline.vent.on('editor:form:spatialSelect', function(model) {
+    Bubble.view.thaw();
+    Bubble.view.deactivate();
+  });
+
+
+  /**
+   * Reactivate the bubble when the "Spatial" tab is inactive.
+   *
+   * @return void.
+   */
+  Neatline.vent.on('editor:form:spatialDeselect', function(model) {
+    Bubble.view.activate();
+  });
+
+
 });
