@@ -42,7 +42,7 @@ Neatline.module('Editor.Form.Views', function(
       this.form = $(this.getTemplate()());
 
       // Markup:
-      this.closeButton =    this.form.find('a[name="close"]');
+      this.closeButton =    this.form.find('button.close');
       this.saveButton =     this.form.find('a[name="save"]');
       this.deleteButton =   this.form.find('a[name="delete"]');
       this.confirmButton =  this.form.find('button[name="delete"]');

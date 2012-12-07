@@ -142,4 +142,19 @@ describe('Map Outgoing Events', function() {
 
   });
 
+  it('should publish mouseout', function() {
+
+    // --------------------------------------------------------------------
+    // When the cursor leaves the map, the `map:mouseout` event should be
+    // triggered with the event object.
+    // --------------------------------------------------------------------
+
+    // Trigger mouseout.
+    _t.triggerMapMouseout();
+
+    // Check publication.
+    expect(spy.argsForCall[0][0]).toEqual('map:mouseout');
+
+  });
+
 });

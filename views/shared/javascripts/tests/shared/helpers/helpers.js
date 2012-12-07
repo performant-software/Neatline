@@ -298,6 +298,16 @@ _t.triggerMapMove = function() {
 
 
 /**
+ * Trigger a mouseout event on the map.
+ *
+ * @return void.
+ */
+_t.triggerMapMouseout = function() {
+  Neatline.Map.view.map.events.triggerEvent('mouseout');
+};
+
+
+/**
  * Simulate map move event and plug in JSON fixture.
  *
  * @param {Object} response: The response body.

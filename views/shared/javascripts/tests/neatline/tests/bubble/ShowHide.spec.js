@@ -61,6 +61,21 @@ describe('Bubble Show/Hide', function() {
 
   });
 
+  it('should hide bubble on map mouseout', function() {
+
+    // --------------------------------------------------------------------
+    // The bubble should be hidden when the cursor leaves the map.
+    // --------------------------------------------------------------------
+
+    // Hover out of map.
+    _t.hoverOnMapFeature(layer1, feature1);
+    _t.triggerMapMouseout();
+
+    // Bubble should be visible.
+    expect(_t.bubbleView.$el).not.toBeVisible();
+
+  });
+
   it('should freeze bubble on feature select', function() {
 
     // --------------------------------------------------------------------

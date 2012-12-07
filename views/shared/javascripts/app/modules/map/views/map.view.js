@@ -189,6 +189,11 @@ Neatline.module('Map.Views', function(
         _.bind(this.publishPosition, this)
       );
 
+      // Register for `mouseout`.
+      this.map.events.register('mouseout', this.map,
+        _.bind(this.onMouseOut, this)
+      );
+
     },
 
 
@@ -514,6 +519,18 @@ Neatline.module('Map.Views', function(
      */
     onFeatureUnhighlight: function(evt) {
       Neatline.vent.trigger('map:unhighlight', evt.feature.layer.nModel);
+    },
+
+
+    /**
+     * When the cursor moves on the map, publish `map:mouseout` with the
+     * triggering event.
+     *
+     * @param {Object} evt: The mouseout event.
+     * @return void.
+     */
+    onMouseOut: function(evt) {
+      Neatline.vent.trigger('map:mouseout', evt);
     },
 
 

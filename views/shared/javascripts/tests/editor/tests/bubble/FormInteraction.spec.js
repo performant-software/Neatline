@@ -46,6 +46,24 @@ describe('Bubble Form Interaction', function() {
 
   });
 
+  it('should hide bubble when the form is closed', function() {
+
+    // --------------------------------------------------------------------
+    // An open bubble should be closed when the form is closed.
+    // --------------------------------------------------------------------
+
+    // Select a feature, open bubble.
+    _t.hoverOnMapFeature(layer, feature);
+    _t.clickOnMapFeature(layer, feature);
+
+    // Close the form.
+    _t.formView.closeButton.trigger('click');
+
+    // Bubble should be hidden
+    expect(_t.bubbleView.$el).not.toBeVisible();
+
+  });
+
   it('should not show bubble when the spatial tab is active', function() {
 
     // --------------------------------------------------------------------

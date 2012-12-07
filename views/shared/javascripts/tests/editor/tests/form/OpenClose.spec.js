@@ -58,7 +58,7 @@ describe('Form Open/Close', function() {
 
     // Open form, click close.
     $(recordRows[0]).trigger('click');
-    $(_t.formView.closeButton).trigger('click');
+    _t.formView.closeButton.trigger('click');
 
     // Check for records list, no form.
     expect(_t.recordsView.$el).not.toContain(_t.formView.form);
@@ -143,7 +143,7 @@ describe('Form Open/Close', function() {
     $('a[href="#form-spatial"]').tab('show');
 
     // Close Record 1 form.
-    $(_t.formView.closeButton).trigger('click');
+    _t.formView.closeButton.trigger('click');
 
     // Open Record 2.
     recordRows = _t.getRecordRows();
@@ -275,7 +275,7 @@ describe('Form Open/Close', function() {
     expect(_t.mapView.frozen).toEqual([models[0].get('id')]);
 
     // Close, check `frozen` empty.
-    $(_t.formView.closeButton).trigger('click');
+    _t.formView.closeButton.trigger('click');
     expect(_t.mapView.frozen).toEqual([]);
 
   });
@@ -294,7 +294,7 @@ describe('Form Open/Close', function() {
     expect(_t.mapView.frozen).toEqual([models[0].get('id')]);
 
     // Close, check `frozen` empty.
-    $(_t.formView.closeButton).trigger('click');
+    _t.formView.closeButton.trigger('click');
     expect(_t.mapView.frozen).toEqual([]);
 
   });
@@ -317,7 +317,7 @@ describe('Form Open/Close', function() {
     expect(_t.spatialTabView.getMapControl()).toEqual('poly');
 
     // Close the form, re-get records.
-    $(_t.formView.closeButton).trigger('click');
+    _t.formView.closeButton.trigger('click');
     recordRows = _t.recordsView.$el.find('.record-row');
 
     // Open new form, check mode.

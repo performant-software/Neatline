@@ -25,7 +25,7 @@
 #bubble {
   overflow: hidden;
   position: fixed;
-  z-index: 9999;
+  z-index: 999;
   display: none;
   border: 1px solid rgba(0,0,0,0.2);
   box-shadow: 0 5px 10px rgba(0,0,0,0.3);
@@ -626,6 +626,12 @@ body {
 #editor form {
   margin: 1.6em;
 }
+#editor form button.close {
+  font-size: 3em;
+  line-height: 1em;
+  margin-top: -10px;
+  margin-left: 5px;
+}
 #editor form ul.nav {
   margin-top: 20px;
 }
@@ -675,10 +681,9 @@ body {
   font-weight: bold;
   font-size: 11px;
 }
-#editor form .form-actions {
-  background: transparent;
-  padding-left: 0;
+#editor form #form-style div.controls:last-child {
+  margin-bottom: 10px;
 }
-#editor form .form-actions button {
+#editor form .actions a {
   margin-right: 5px;
 }

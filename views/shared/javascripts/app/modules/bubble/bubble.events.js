@@ -28,10 +28,19 @@ Neatline.module('Bubble', function(
   /**
    * Hide bubble on feature mouseleave.
    *
-   * @param {Object} model: The record model.
    * @return void.
    */
-  Neatline.vent.on('map:unhighlight', function(model) {
+  Neatline.vent.on('map:unhighlight', function() {
+    Bubble.view.hide();
+  });
+
+
+  /**
+   * Hide bubble when the mouse leaves the map.
+   *
+   * @return void.
+   */
+  Neatline.vent.on('map:mouseout', function() {
     Bubble.view.hide();
   });
 
@@ -39,10 +48,9 @@ Neatline.module('Bubble', function(
   /**
    * Lock bubble on feature click on.
    *
-   * @param {Object} model: The record model.
    * @return void.
    */
-  Neatline.vent.on('map:select', function(model) {
+  Neatline.vent.on('map:select', function() {
     Bubble.view.freeze();
   });
 
@@ -50,10 +58,19 @@ Neatline.module('Bubble', function(
   /**
    * Lock bubble on feature click off.
    *
-   * @param {Object} model: The record model.
    * @return void.
    */
-  Neatline.vent.on('map:unselect', function(model) {
+  Neatline.vent.on('map:unselect', function() {
+    Bubble.view.thaw();
+  });
+
+
+  /**
+   * Close the bubble when an edit form is closed.
+   *
+   * @return void.
+   */
+  Neatline.vent.on('editor:form:close', function() {
     Bubble.view.thaw();
   });
 
@@ -63,7 +80,7 @@ Neatline.module('Bubble', function(
    *
    * @return void.
    */
-  Neatline.vent.on('editor:form:spatialSelect', function(model) {
+  Neatline.vent.on('editor:form:spatialSelect', function() {
     Bubble.view.thaw();
     Bubble.view.deactivate();
   });

@@ -17,7 +17,12 @@
 <!-- Record edit form. -->
 <script id="edit-form" type="text/templates">
 
+
   <form class="form-stacked record">
+
+    <!-- Close button. -->
+    <button type="button" class="close" data-dismiss="modal"
+      aria-hidden="true">&times;</button>
 
     <p class="lead"></p>
 

@@ -13,27 +13,16 @@
 
 ?>
 
-<ul class="pager">
-  <li>
-    <a name="close" class="btn btn-link" \>
-      <i class="icon-arrow-left"></i>
-      <?php echo __('Back'); ?>
-    </a>
-  </li>
-  <li>
-    <a name="save" class="btn btn-link" \>
-      <i class="icon-ok-circle"></i>
-      <?php echo __('Save'); ?>
-    </a>
-  </li>
-  <li>
-    <a href="#deleteConfirm" name="delete" class="btn btn-link"
-       data-toggle="modal">
-        <i class="icon-trash"></i>
-        <?php echo __('Delete'); ?>
-    </a>
-  </li>
-</ul>
+<div class="actions">
+  <a name="save" class="btn btn-large btn-primary" \>
+    <i class="icon-ok-circle icon-white"></i>
+    <?php echo __('Save'); ?>
+  </a>
+  <a href="#deleteConfirm" name="delete" class="btn btn-large btn-inverse"
+     data-toggle="modal"><i class="icon-trash icon-white"></i>
+      <?php echo __('Delete'); ?>
+  </a>
+</div>
 
 <div id="deleteConfirm" class="modal hide" role="dialog"
   aria-hidden="true">
