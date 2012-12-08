@@ -92,4 +92,16 @@ class NeatlineTag extends Omeka_Record_AbstractRecord
      */
     public $point_image;
 
+    /**
+     * Maximum map zoom level.
+     * int(10) unsigned NULL
+     */
+    public $max_zoom;
+
+    /**
+     * Minimum map zoom level.
+     * int(10) unsigned NULL
+     */
+    public $min_zoom;
+
 }

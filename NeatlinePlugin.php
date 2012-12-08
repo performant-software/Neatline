@@ -94,18 +94,6 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
             `map_active`            tinyint(1) NULL,
             `map_focus`             varchar(100) NULL,
             `map_zoom`              int(10) unsigned NULL,
-            `max_zoom`              int(10) unsigned NULL,
-            `min_zoom`              int(10) unsigned NULL,
-            `vector_color`          tinytext COLLATE utf8_unicode_ci NULL,
-            `stroke_color`          tinytext COLLATE utf8_unicode_ci NULL,
-            `select_color`          tinytext COLLATE utf8_unicode_ci NULL,
-            `vector_opacity`        int(10) unsigned NULL,
-            `select_opacity`        int(10) unsigned NULL,
-            `stroke_opacity`        int(10) unsigned NULL,
-            `image_opacity`         int(10) unsigned NULL,
-            `stroke_width`          int(10) unsigned NULL,
-            `point_radius`          int(10) unsigned NULL,
-            `point_image`           tinytext COLLATE utf8_unicode_ci NULL,
 
              PRIMARY KEY            (`id`),
              FULLTEXT KEY `text`    (`title`, `slug`, `body`)
@@ -123,8 +111,6 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
             `exhibit_id`            int(10) unsigned NULL,
             `is_default`            tinyint(1) NULL,
             `tag`                   tinytext COLLATE utf8_unicode_ci NULL,
-            `max_zoom`              int(10) unsigned NULL,
-            `min_zoom`              int(10) unsigned NULL,
             `vector_color`          tinytext COLLATE utf8_unicode_ci NULL,
             `stroke_color`          tinytext COLLATE utf8_unicode_ci NULL,
             `select_color`          tinytext COLLATE utf8_unicode_ci NULL,
@@ -135,6 +121,8 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
             `stroke_width`          int(10) unsigned NULL,
             `point_radius`          int(10) unsigned NULL,
             `point_image`           tinytext COLLATE utf8_unicode_ci NULL,
+            `max_zoom`              int(10) unsigned NULL,
+            `min_zoom`              int(10) unsigned NULL,
 
              PRIMARY KEY            (`id`)
 
