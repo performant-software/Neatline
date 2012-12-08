@@ -14,13 +14,14 @@
 class NeatlineRecordTable extends Omeka_Db_Table
 {
 
+
     /**
      * Check to see if a reord exists for a given exhibit and item. If one
      * exists, return it. If not, create a new record and return it.
      *
      * @param Omeka_record $item The item.
      * @param Omeka_record $exhibit The exhibit.
-     * @return void.
+     * @return Omeka_record The retrieved or created record.
      */
     public function createOrGetRecord($item, $exhibit)
     {
@@ -38,12 +39,13 @@ class NeatlineRecordTable extends Omeka_Db_Table
 
     }
 
+
     /**
      * Find a record for a given item and exhibit.
      *
      * @param Omeka_record $item The item record.
      * @param Omeka_record $neatline The exhibit record.
-     * @return Omeka_record $record The record.
+     * @return Omeka_record The record.
      */
     public function getRecordByItemAndExhibit($item, $neatline)
     {
@@ -58,31 +60,12 @@ class NeatlineRecordTable extends Omeka_Db_Table
 
     }
 
-    /**
-     * Find a record for a given exhibit and slug.
-     *
-     * @param Omeka_record $exhibit The exhibit record.
-     * @param string $slug The slug.
-     * @return Omeka_record $record The record..
-     */
-    public function getRecordByExhibitAndSlug($exhibit, $slug)
-    {
-
-        $record = $this->fetchObject(
-            $this->getSelect()
-                 ->where('exhibit_id=?', $exhibit->id)
-                 ->where('slug=?', $slug)
-        );
-
-        return $record ? $record : false;
-
-    }
 
     /**
      * Find all records associated with a given exhibit.
      *
      * @param Omeka_record $neatline The exhibit record.
-     * @return array of Omeka_record The records.
+     * @return array|boolean The records.
      */
     public function getRecordsByExhibit($neatline)
     {
@@ -95,11 +78,12 @@ class NeatlineRecordTable extends Omeka_Db_Table
 
     }
 
+
     /**
      * Find all active records in an exhibit.
      *
      * @param Omeka_record $exhibit The exhibit record.
-     * @return array of Omeka_record The records.
+     * @return array The records.
      */
     public function getActiveRecordsByExhibit($exhibit)
     {
@@ -114,11 +98,12 @@ class NeatlineRecordTable extends Omeka_Db_Table
 
     }
 
+
     /**
      * Count all active records in an exhibit.
      *
      * @param Omeka_record $exhibit The exhibit record.
-     * @return integer $count The number of active records.
+     * @return integer The number of active records.
      */
     public function countActiveRecordsByExhibit($exhibit)
     {
@@ -128,40 +113,11 @@ class NeatlineRecordTable extends Omeka_Db_Table
         ));
     }
 
-    /**
-     * Check whether a given slug is unique for an exhibit.
-     *
-     * @param Omeka_record $exhibit The exhibit record.
-     * @param string $slug The slug.
-     * @return boolean True if the slug is unique.
-     */
-    public function slugIsAvailable($record, $exhibit, $slug)
-    {
-
-        // Always allow the empty string.
-        if ($slug === '') { return true; }
-
-        // Try to get out an existing record with the slug.
-        $retrievedRecord = $this->getRecordByExhibitAndSlug(
-            $exhibit, $slug);
-
-        // If there is an existing record and the record is not the same
-        // as the passed record, return false; otherwise true.
-        return !($retrievedRecord && $record->id !== $retrievedRecord->id);
-
-    }
-
-
-    /**
-     * JSON constructors.
-     */
-
 
     /**
      * Construct data array for individual record.
      *
      * @param int $id The record id.
-     *
      * @return array The record data.
      */
     public function queryRecord($id)
@@ -169,7 +125,7 @@ class NeatlineRecordTable extends Omeka_Db_Table
 
         // Build the select.
         $select = $this->getSelect()
-            ->columns(array('wkt' => new Zend_Db_Expr('AsText(coverage)')))
+            ->columns(array('wkt'=>new Zend_Db_Expr('AsText(coverage)')))
             ->where('id=?', $id);
 
         // Query.
@@ -178,6 +134,7 @@ class NeatlineRecordTable extends Omeka_Db_Table
 
     }
 
+
     /**
      * Construct records array for exhibit and editor.
      *
@@ -185,10 +142,10 @@ class NeatlineRecordTable extends Omeka_Db_Table
      *
      * Filter parameters:
      * ------------------
-     * @param string $extent  The current map viewport extent.
-     * @param int $zoom       The zoom level.
+     * @param string $extent The current map viewport extent.
+     * @param int $zoom The zoom level.
      *
-     * @return array Array of matching records.
+     * @return array The collection of matching records.
      */
     public function queryRecords($exhibit, $extent=null, $zoom=null)
     {
@@ -197,7 +154,7 @@ class NeatlineRecordTable extends Omeka_Db_Table
 
         // Build the select.
         $select = $this->getSelect()
-            ->columns(array('wkt' => new Zend_Db_Expr('AsText(coverage)')))
+            ->columns(array('wkt'=>new Zend_Db_Expr('AsText(coverage)')))
             ->where('exhibit_id=?', $exhibit->id);
 
 
@@ -229,13 +186,13 @@ class NeatlineRecordTable extends Omeka_Db_Table
 
     }
 
+
     /**
      * Filter by zoom.
      *
      * @param Omeka_Db_Select $select The starting select.
      * @param integer $zoom The zoom level.
-     *
-     * @return Omeka_Db_Select $select The filtered select.
+     * @return Omeka_Db_Select The filtered select.
      */
     protected function filterByZoom($select, $zoom)
     {
@@ -244,13 +201,13 @@ class NeatlineRecordTable extends Omeka_Db_Table
         return $select;
     }
 
+
     /**
      * Filter by extent.
      *
      * @param Omeka_Db_Select $select The starting select.
      * @param string $extent The extent, as a WKT polygon.
-     *
-     * @return Omeka_Db_Select $select The filtered select.
+     * @return Omeka_Db_Select The filtered select.
      */
     protected function filterByExtent($select, $extent)
     {
@@ -258,5 +215,6 @@ class NeatlineRecordTable extends Omeka_Db_Table
             coverage,GeomFromText("'.$extent.'"))'));
         return $select;
     }
+
 
 }

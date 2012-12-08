@@ -154,37 +154,6 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
     }
 
     /**
-     * setSlug() should not set value when slug is not unique.
-     *
-     * @return void.
-     */
-    public function testSetSlug()
-    {
-
-        // Create item.
-        $item = $this->__item();
-
-        // Create exhibit.
-        $exhibit = $this->__exhibit();
-
-        // Create two records.
-        $record1 = new NeatlineRecord($item, $exhibit);
-        $record1->save();
-        $record2 = new NeatlineRecord($item, $exhibit);
-        $record2->slug = 'taken-slug';
-        $record2->save();
-
-        // Set duplicate slug.
-        $record1->setSlug('taken-slug');
-        $this->assertNull($record1->slug);
-
-        // Set unique slug.
-        $record1->setSlug('new-slug');
-        $this->assertEquals($record1->slug, 'new-slug');
-
-    }
-
-    /**
      * setCoverage() should set a GEOMETRYCOLLECTION value.
      *
      * @group coverage

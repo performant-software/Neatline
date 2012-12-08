@@ -50,8 +50,6 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
 
     /**
      * Create tables.
-     *
-     * @return void.
      */
     public function hookInstall()
     {
@@ -74,7 +72,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
             `map_focus`         varchar(100) NULL,
             `map_zoom`          int(10) unsigned NULL,
 
-             PRIMARY KEY            (`id`)
+             PRIMARY KEY        (`id`)
 
         ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
 
@@ -90,7 +88,6 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
             `item_id`           int(10) unsigned NULL,
             `exhibit_id`        int(10) unsigned NULL,
             `title`             mediumtext COLLATE utf8_unicode_ci NULL,
-            `slug`              varchar(100) NULL,
             `body`              mediumtext COLLATE utf8_unicode_ci NULL,
             `coverage`          GEOMETRY,
             `map_active`        tinyint(1) NULL,
@@ -158,10 +155,9 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
 
     }
 
+
     /**
      * Drop tables.
-     *
-     * @return void.
      */
     public function hookUninstall()
     {
@@ -191,11 +187,11 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
 
     }
 
+
     /**
      * Register routes.
      *
-     * @param object $router Router passed in by the front controller.
-     * @return void
+     * @param array $args Array of hook parameters, with 'router' key.
      */
     public function hookDefineRoutes($args)
     {
@@ -203,21 +199,20 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
             NEATLINE_PLUGIN_DIR . '/routes.ini', 'routes'));
     }
 
+
     /**
      * Add translation source.
-     *
-     * @return void.
      */
     public function hookInitialize()
     {
         add_translation_source(dirname(__FILE__) . '/languages');
     }
 
+
     /**
      * Delete data records associated with items that are deleted.
      *
      * @param Omeka_Item $item The item being deleted.
-     * @return void
      **/
     public function hookBeforeDeleteItem($args)
     {
@@ -259,13 +254,14 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
     /**
      * Add link to main admin menu bar.
      *
-     * @param array $tabs This is an array of label => URI pairs.
-     * @return array The tabs array with the Neatline Maps tab.
+     * @param array $tabs Array of label => URI pairs.
+     * @return array The tab array with the "Neatline" tab.
      */
     public function filterAdminNavigationMain($tabs)
     {
         $tabs[] = array('label' => 'Neatline', 'uri' => url('neatline'));
         return $tabs;
     }
+
 
 }

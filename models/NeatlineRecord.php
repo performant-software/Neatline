@@ -14,6 +14,7 @@
 class NeatlineRecord extends Omeka_Record_AbstractRecord
 {
 
+
     /**
      * The id of the parent item.
      * int(10) unsigned NULL
@@ -33,12 +34,6 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
     public $title;
 
     /**
-     * An exhibit-unique plaintext identifier for the record.
-     * varchar(100) NULL
-     */
-    public $slug;
-
-    /**
      * A plaintext description for the record.
      * mediumtext COLLATE utf8_unicode_ci NULL
      */
@@ -51,7 +46,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
     public $coverage;
 
     /**
-     * Boolean for whether the record is present on the map.
+     * True if the record is present on the map.
      * tinyint(1) NULL
      */
     public $map_active;
@@ -68,37 +63,12 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
      */
     public $map_zoom;
 
-    /**
-     * Default attributes.
-     */
-    private static $defaults = array(
-        'left_percent' => 0,
-        'right_percent' => 100,
-        'coverage' => ''
-    );
-
-    /**
-     * Valid style attribute names.
-     */
-    private static $styles = array(
-        'vector_color',
-        'vector_opacity',
-        'stroke_color',
-        'stroke_opacity',
-        'stroke_width',
-        'select_opacity',
-        'image_opacity',
-        'point_radius',
-        'select_color'
-    );
-
 
     /**
      * Instantiate and foreign keys.
      *
      * @param Omeka_record $item The item record.
      * @param Omeka_record $neatline The exhibit record.
-     * @return Omeka_record $this.
      */
     public function __construct($item = null, $neatline = null)
     {
@@ -122,16 +92,10 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
 
 
     /**
-     * Setters.
-     */
-
-
-    /**
      * Set the an attribute if the passed value is not null or ''.
      *
      * @param string $attribute The name of the attribute.
      * @param boolean $value The value to set.
-     * @return void.
      */
     public function setNotEmpty($attribute, $value)
     {
@@ -139,31 +103,11 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
         else $this[$attribute] = $value;
     }
 
-    /**
-     * Set the slug if it is unique.
-     *
-     * @param boolean $slug The slug.
-     * @return void.
-     */
-    public function setSlug($slug)
-    {
-
-        // Get records table and exhibit.
-        $recordsTable = $this->getTable('NeatlineRecord');
-        $exhibit = $this->getExhibit();
-
-        // Set the record value if it is unique.
-        if ($recordsTable->slugIsAvailable($this, $exhibit, $slug)) {
-            $this->slug = $slug;
-        }
-
-    }
 
     /**
      * Set all style attributes to null.
      *
-     * @param string $wkt The coverage, as WKT GEOMETRYCOLLECTION.
-     * @return void.
+     * @param string $wkt The coverage as a WKT string.
      */
     public function setCoverage($wkt)
     {
@@ -176,10 +120,9 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
 
     }
 
+
     /**
      * Set all style attributes to null.
-     *
-     * @return void.
      */
     public function resetStyles()
     {
@@ -196,21 +139,16 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
 
 
     /**
-     * Getters.
-     */
-
-
-    /**
      * Get the parent item record.
      *
-     * @return Omeka_record $item The parent item.
+     * @return Omeka_record The parent item.
      */
     public function getItem()
     {
 
         $item = null;
 
-        // If record id is defined, get item.
+        // Get item if non-null item_id.
         if (!is_null($this->item_id)) {
            $item = $this->getTable('Item')->find($this->item_id);
         }
@@ -219,10 +157,11 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
 
     }
 
+
     /**
      * Get the parent exhibit record.
      *
-     * @return Omeka_record $exhibit The parent exhibit.
+     * @return Omeka_record The parent exhibit.
      */
     public function getExhibit()
     {
@@ -236,16 +175,18 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
 
     }
 
+
     /**
      * Get a style attribute.
      *
-     * @param string style The name of the style.
-     * @return mixed The value.
+     * @param string $style The name of the style.
+     * @return int|string The value.
      */
     public function getStyle($style)
     {
         return $this[$style];
     }
+
 
     /**
      * Assemble record data for the front-end application.
@@ -296,11 +237,11 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
 
     }
 
+
     /**
      * Update the record.
      *
      * @param array $values The PUT values.
-     * @return void.
      */
     public function update($values)
     {
@@ -315,11 +256,12 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
 
     }
 
+
     /**
      * On save, update the modified column on the parent exhibit. If a
      * `$coverage` string is passed, run the coverage update.
      *
-     * @return void.
+     * @param string $coverage The coverage, as a WKT string.
      */
     public function save($coverage = null)
     {
@@ -339,10 +281,9 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
 
     }
 
+
     /**
      * Call `delete` in a transaction.
-     *
-     * @return void
      */
     public function deleteTransaction()
     {
@@ -356,5 +297,6 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
             throw $e;
         }
     }
+
 
 }
