@@ -31,8 +31,8 @@ Neatline.module('Map.Views', function(
     initialize: function() {
 
       // Trackers.
-      this.layers = [];
-      this.frozen = [];
+      this.layers = [];   // Array of all current vector layers.
+      this.frozen = [];   // Array of layers that should not be updated.
 
       // Startup.
       this.initializeOpenLayers();
@@ -187,11 +187,6 @@ Neatline.module('Map.Views', function(
       // Register for `moveend`.
       this.map.events.register('moveend', this.map,
         _.bind(this.publishPosition, this)
-      );
-
-      // Register for `mouseout`.
-      this.map.events.register('mouseout', this.map,
-        _.bind(this.onMouseOut, this)
       );
 
     },
@@ -519,18 +514,6 @@ Neatline.module('Map.Views', function(
      */
     onFeatureUnhighlight: function(evt) {
       Neatline.vent.trigger('map:unhighlight', evt.feature.layer.nModel);
-    },
-
-
-    /**
-     * When the cursor moves on the map, publish `map:mouseout` with the
-     * triggering event.
-     *
-     * @param {Object} evt: The mouseout event.
-     * @return void.
-     */
-    onMouseOut: function(evt) {
-      Neatline.vent.trigger('map:mouseout', evt);
     },
 
 
