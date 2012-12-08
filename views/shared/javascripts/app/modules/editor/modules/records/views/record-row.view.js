@@ -39,7 +39,7 @@ Neatline.module('Editor.Records.Views', function(
       // Render template.
       this.$el.append($(this.options.template({
         title: this.model.get('title'),
-        body: this.model.get('description')
+        body: this.model.get('body')
       })));
 
     },

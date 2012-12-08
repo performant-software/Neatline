@@ -105,7 +105,7 @@ describe('Form Data I/O', function() {
 
     // Check the query string for updated values.
     expect(params.title).           toEqual('Title 2');
-    expect(params.description).     toEqual('Body 2.');
+    expect(params.body).            toEqual('Body 2.');
     expect(params.vector_color).    toEqual('#222222');
     expect(params.stroke_color).    toEqual('#555555');
     expect(params.select_color).    toEqual('#888888');

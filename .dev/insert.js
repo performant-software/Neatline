@@ -23,7 +23,7 @@ function layer(exhibit_id, count, zoom, color) {
   var sql = 'INSERT INTO omeka_neatline_records (' +
       'exhibit_id,'+
       'title,'+
-      'description,'+
+      'body,'+
       'map_active,'+
       'vector_color,'+
       'stroke_color,'+
@@ -52,7 +52,7 @@ function layer(exhibit_id, count, zoom, color) {
     sql += '(' +
       exhibit_id+','+
       '"Record'+n+'",'+
-      '"Description'+n+'",'+
+      '"Body'+n+'",'+
       '1,'+
       '"'+color+'",'+
       '"#000000",'+

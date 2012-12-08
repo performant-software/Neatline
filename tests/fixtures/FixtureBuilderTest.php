@@ -39,9 +39,9 @@ class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
         $record2->title = 'Title 2';
         $record3->title = 'Title 3';
 
-        $record1->description = 'Body 1.';
-        $record2->description = 'Body 2.';
-        $record3->description = 'Body 3.';
+        $record1->body = 'Body 1.';
+        $record2->body = 'Body 2.';
+        $record3->body = 'Body 3.';
 
         // No default focus/zoom for records 2 and 3.
         $record1->map_focus = '100,200';
@@ -149,7 +149,7 @@ class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
         // Record.
         $record = $this->__record(null, $exhibit);
         $record->title = 'Record 4';
-        $record->description = 'Record 4 desc.';
+        $record->body = 'Record 4 desc.';
         $record->map_focus = '100,200';
         $record->map_zoom = 10;
         $record->map_active = 1;

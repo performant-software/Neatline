@@ -43,7 +43,7 @@ class Neatline_RecordsControllerTest extends Neatline_Test_AppTestCase
         $this->assertObjectHasAttribute('id',               $response[0]);
         $this->assertObjectHasAttribute('item_id',          $response[0]);
         $this->assertObjectHasAttribute('title',            $response[0]);
-        $this->assertObjectHasAttribute('description',      $response[0]);
+        $this->assertObjectHasAttribute('body',             $response[0]);
         $this->assertObjectHasAttribute('slug',             $response[0]);
         $this->assertObjectHasAttribute('vector_color',     $response[0]);
         $this->assertObjectHasAttribute('stroke_color',     $response[0]);
@@ -89,7 +89,7 @@ class Neatline_RecordsControllerTest extends Neatline_Test_AppTestCase
         $this->assertObjectHasAttribute('id',               $response);
         $this->assertObjectHasAttribute('item_id',          $response);
         $this->assertObjectHasAttribute('title',            $response);
-        $this->assertObjectHasAttribute('description',      $response);
+        $this->assertObjectHasAttribute('body',             $response);
         $this->assertObjectHasAttribute('slug',             $response);
         $this->assertObjectHasAttribute('vector_color',     $response);
         $this->assertObjectHasAttribute('stroke_color',     $response);
@@ -124,7 +124,7 @@ class Neatline_RecordsControllerTest extends Neatline_Test_AppTestCase
 
         // Set parameters.
         $record->title              = 'title';
-        $record->description        = 'desc';
+        $record->body               = 'body';
         $record->slug               = 'slug';
         $record->vector_color       = '#vector';
         $record->stroke_color       = '#stroke';
@@ -148,7 +148,7 @@ class Neatline_RecordsControllerTest extends Neatline_Test_AppTestCase
             'id'                    => $record->id,
             'item_id'               => null,
             'title'                 => 'title2',
-            'description'           => 'desc2',
+            'body'                  => 'body2',
             'slug'                  => 'slug2',
             'vector_color'          => '#vector2',
             'stroke_color'          => '#stroke2',
@@ -180,7 +180,7 @@ class Neatline_RecordsControllerTest extends Neatline_Test_AppTestCase
 
         // Check new values.
         $this->assertEquals($record->title, 'title2');
-        $this->assertEquals($record->description, 'desc2');
+        $this->assertEquals($record->body, 'body2');
         $this->assertEquals($record->slug, 'slug2');
         $this->assertEquals($record->vector_color, '#vector2');
         $this->assertEquals($record->stroke_color, '#stroke2');

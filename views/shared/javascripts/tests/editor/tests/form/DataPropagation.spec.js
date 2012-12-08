@@ -68,7 +68,7 @@ describe('Form Data Propagation', function() {
     // Check for updated data in records collection.
     record = _t.recordsColl.get(mapLayers[0].nId);
     expect(record.get('title')).            toEqual('Title Updated');
-    expect(record.get('description')).      toEqual('Body updated.');
+    expect(record.get('body')).      toEqual('Body updated.');
     expect(record.get('vector_color')).     toEqual('#222222');
     expect(record.get('stroke_color')).     toEqual('#555555');
     expect(record.get('select_color')).     toEqual('#888888');
@@ -134,7 +134,7 @@ describe('Form Data Propagation', function() {
     // Check for updated data in map collection.
     var record = _t.mapColl.get(mapLayers[0].nId);
     expect(record.get('title')).            toEqual('Title Updated');
-    expect(record.get('description')).      toEqual('Body updated.');
+    expect(record.get('body')).      toEqual('Body updated.');
     expect(record.get('vector_color')).     toEqual('#222222');
     expect(record.get('stroke_color')).     toEqual('#555555');
     expect(record.get('select_color')).     toEqual('#888888');
@@ -154,7 +154,7 @@ describe('Form Data Propagation', function() {
 
     // Check for updated title and description.
     expect(_t.bubbleView.title.text()).toEqual('Title Updated');
-    expect(_t.bubbleView.description.text()).toEqual('Body updated.');
+    expect(_t.bubbleView.body.text()).toEqual('Body updated.');
 
   });
 

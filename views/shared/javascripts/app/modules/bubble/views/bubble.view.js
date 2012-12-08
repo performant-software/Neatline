@@ -37,12 +37,11 @@ Neatline.module('Bubble.Views', function(
 
       // Bubble components.
       this.title = this.$el.find('.record-title');
-      this.description = this.$el.find('.record-body');
+      this.body = this.$el.find('.record-body');
 
       // Containers.
       this.exhibit = $('#neatline');
       this.window = $(window);
-      this.body = $('body');
 
     },
 
@@ -60,7 +59,7 @@ Neatline.module('Bubble.Views', function(
 
       // Render values, measure.
       this.title.html(model.get('title'));
-      this.description.html(model.get('description'));
+      this.body.html(model.get('body'));
 
       // Position on mousemove.
       this.window.bind('mousemove.bubble', _.bind(function(e) {

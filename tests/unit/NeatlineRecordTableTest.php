@@ -451,24 +451,24 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
         $record = new NeatlineRecord($item, $exhibit);
 
         // Map attributes.
-        $record->title             = 'Title';
-        $record->description       = 'Description.';
-        $record->slug              = 'slug';
-        $record->vector_color      = '#1';
-        $record->stroke_color      = '#2';
-        $record->select_color      = '#3';
-        $record->vector_opacity    = 1;
-        $record->select_opacity    = 2;
-        $record->stroke_opacity    = 3;
-        $record->graphic_opacity   = 4;
-        $record->stroke_width      = 5;
-        $record->point_radius      = 6;
-        $record->point_image       = 'file1.png';
-        $record->min_zoom          = 7;
-        $record->max_zoom          = 8;
-        $record->map_active        = 1;
-        $record->map_focus         = 'center1';
-        $record->map_zoom          = 9;
+        $record->title              = 'Title';
+        $record->body               = 'Body.';
+        $record->slug               = 'slug';
+        $record->vector_color       = '#1';
+        $record->stroke_color       = '#2';
+        $record->select_color       = '#3';
+        $record->vector_opacity     = 1;
+        $record->select_opacity     = 2;
+        $record->stroke_opacity     = 3;
+        $record->graphic_opacity    = 4;
+        $record->stroke_width       = 5;
+        $record->point_radius       = 6;
+        $record->point_image        = 'file1.png';
+        $record->min_zoom           = 7;
+        $record->max_zoom           = 8;
+        $record->map_active         = 1;
+        $record->map_focus          = 'center1';
+        $record->map_zoom           = 9;
 
         // Save.
         $record->save('POINT(1 2)');
@@ -482,7 +482,7 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
                 'id'                => $record->id,
                 'item_id'           => $item->id,
                 'title'             => 'Title',
-                'description'       => 'Description.',
+                'body'              => 'Body.',
                 'slug'              => 'slug',
                 'vector_color'      => '#1',
                 'stroke_color'      => '#2',
@@ -528,8 +528,8 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
         // Map attributes.
         $record1->title             = 'Record 1 Title';
         $record2->title             = 'Record 2 Title';
-        $record1->description       = 'Record 1 description.';
-        $record2->description       = 'Record 2 description.';
+        $record1->body              = 'Record 1 body.';
+        $record2->body              = 'Record 2 body.';
         $record1->slug              = 'slug-1';
         $record2->slug              = 'slug-2';
         $record1->vector_color      = '#1';
@@ -577,7 +577,7 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
                 'id'                => $record1->id,
                 'item_id'           => $item1->id,
                 'title'             => 'Record 1 Title',
-                'description'       => 'Record 1 description.',
+                'body'              => 'Record 1 body.',
                 'slug'              => 'slug-1',
                 'vector_color'      => '#1',
                 'stroke_color'      => '#3',
@@ -602,7 +602,7 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
                 'id'                => $record2->id,
                 'item_id'           => $item2->id,
                 'title'             => 'Record 2 Title',
-                'description'       => 'Record 2 description.',
+                'body'              => 'Record 2 body.',
                 'slug'              => 'slug-2',
                 'vector_color'      => '#2',
                 'stroke_color'      => '#4',

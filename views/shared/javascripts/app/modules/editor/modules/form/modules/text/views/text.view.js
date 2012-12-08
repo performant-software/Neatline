@@ -37,7 +37,7 @@ Neatline.module('Editor.Form.TextTab.Views', function(
      */
     render: function(model) {
       this.title.val(model.get('title'));
-      this.body.val(model.get('description'));
+      this.body.val(model.get('body'));
     },
 
 
@@ -50,7 +50,7 @@ Neatline.module('Editor.Form.TextTab.Views', function(
     gather: function(model) {
       return {
         title: this.title.val(),
-        description: this.body.val()
+        body: this.body.val()
       };
     }
 

@@ -89,7 +89,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
             `exhibit_id`            int(10) unsigned NULL,
             `title`                 mediumtext COLLATE utf8_unicode_ci NULL,
             `slug`                  varchar(100) NULL,
-            `description`           mediumtext COLLATE utf8_unicode_ci NULL,
+            `body`                  mediumtext COLLATE utf8_unicode_ci NULL,
             `coverage`              GEOMETRY,
             `map_active`            tinyint(1) NULL,
             `map_focus`             varchar(100) NULL,
@@ -108,7 +108,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
             `point_image`           tinytext COLLATE utf8_unicode_ci NULL,
 
              PRIMARY KEY            (`id`),
-             FULLTEXT KEY `text`    (`title`, `slug`, `description`)
+             FULLTEXT KEY `text`    (`title`, `slug`, `body`)
 
         ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
 
@@ -147,10 +147,10 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
         // -------------
         $sql = "CREATE TABLE IF NOT EXISTS `{$this->_db->prefix}neatline_layers` (
 
-                `id`                int(10) unsigned not null auto_increment,
-                `name`              tinytext COLLATE utf8_unicode_ci NULL,
+            `id`                    int(10) unsigned not null auto_increment,
+            `name`                  tinytext COLLATE utf8_unicode_ci NULL,
 
-                 PRIMARY KEY        (`id`)
+            PRIMARY KEY             (`id`)
 
         ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
 
@@ -211,11 +211,8 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
      */
     public function hookDefineRoutes($args)
     {
-
-        // Add default routes.
         $args['router']->addConfig(new Zend_Config_Ini(
             NEATLINE_PLUGIN_DIR . '/routes.ini', 'routes'));
-
     }
 
     /**

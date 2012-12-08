@@ -42,7 +42,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
      * A plaintext description for the record.
      * mediumtext COLLATE utf8_unicode_ci NULL
      */
-    public $description;
+    public $body;
 
     /**
      * KML for geometries.
@@ -341,7 +341,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
 
             // Text:
             'title'             => $this->title,
-            'description'       => $this->description,
+            'body'              => $this->body,
             'slug'              => $this->slug,
 
             // Styles:
