@@ -1,6 +1,6 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
 
 /**
  * Plugin manager class.
@@ -58,20 +58,21 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
 
         // Exhibits table.
         // ---------------
-        $sql = "CREATE TABLE IF NOT EXISTS `{$this->_db->prefix}neatline_exhibits` (
+        $sql = "CREATE TABLE IF NOT EXISTS
+            `{$this->_db->prefix}neatline_exhibits` (
 
-            `id`                    int(10) unsigned NOT NULL auto_increment,
-            `added`                 TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-            `modified`              TIMESTAMP NULL,
-            `title`                 tinytext collate utf8_unicode_ci,
-            `description`           TEXT COLLATE utf8_unicode_ci DEFAULT NULL,
-            `slug`                  varchar(100) NOT NULL,
-            `public`                tinyint(1) NOT NULL,
-            `query`                 TEXT COLLATE utf8_unicode_ci NULL,
-            `creator_id`            int(10) unsigned NOT NULL,
-            `image_id`              int(10) unsigned NULL,
-            `map_focus`             varchar(100) NULL,
-            `map_zoom`              int(10) unsigned NULL,
+            `id`                int(10) unsigned NOT NULL auto_increment,
+            `added`             TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            `modified`          TIMESTAMP NULL,
+            `title`             tinytext collate utf8_unicode_ci,
+            `description`       TEXT COLLATE utf8_unicode_ci DEFAULT NULL,
+            `slug`              varchar(100) NOT NULL,
+            `public`            tinyint(1) NOT NULL,
+            `query`             TEXT COLLATE utf8_unicode_ci NULL,
+            `creator_id`        int(10) unsigned NOT NULL,
+            `image_id`          int(10) unsigned NULL,
+            `map_focus`         varchar(100) NULL,
+            `map_zoom`          int(10) unsigned NULL,
 
              PRIMARY KEY            (`id`)
 
@@ -82,21 +83,22 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
 
         // Records table.
         // --------------
-        $sql = "CREATE TABLE IF NOT EXISTS `{$this->_db->prefix}neatline_records` (
+        $sql = "CREATE TABLE IF NOT EXISTS
+            `{$this->_db->prefix}neatline_records` (
 
-            `id`                    int(10) unsigned NOT NULL auto_increment,
-            `item_id`               int(10) unsigned NULL,
-            `exhibit_id`            int(10) unsigned NULL,
-            `title`                 mediumtext COLLATE utf8_unicode_ci NULL,
-            `slug`                  varchar(100) NULL,
-            `body`                  mediumtext COLLATE utf8_unicode_ci NULL,
-            `coverage`              GEOMETRY,
-            `map_active`            tinyint(1) NULL,
-            `map_focus`             varchar(100) NULL,
-            `map_zoom`              int(10) unsigned NULL,
+            `id`                int(10) unsigned NOT NULL auto_increment,
+            `item_id`           int(10) unsigned NULL,
+            `exhibit_id`        int(10) unsigned NULL,
+            `title`             mediumtext COLLATE utf8_unicode_ci NULL,
+            `slug`              varchar(100) NULL,
+            `body`              mediumtext COLLATE utf8_unicode_ci NULL,
+            `coverage`          GEOMETRY,
+            `map_active`        tinyint(1) NULL,
+            `map_focus`         varchar(100) NULL,
+            `map_zoom`          int(10) unsigned NULL,
 
-             PRIMARY KEY            (`id`),
-             FULLTEXT KEY `text`    (`title`, `slug`, `body`)
+             PRIMARY KEY        (`id`),
+             FULLTEXT KEY       (`title`, `slug`, `body`)
 
         ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
 
@@ -105,26 +107,27 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
 
         // Tags table.
         // -----------
-        $sql = "CREATE TABLE IF NOT EXISTS `{$this->_db->prefix}neatline_tags` (
+        $sql = "CREATE TABLE IF NOT EXISTS
+            `{$this->_db->prefix}neatline_tags` (
 
-            `id`                    int(10) unsigned NOT NULL auto_increment,
-            `exhibit_id`            int(10) unsigned NULL,
-            `is_default`            tinyint(1) NULL,
-            `tag`                   tinytext COLLATE utf8_unicode_ci NULL,
-            `vector_color`          tinytext COLLATE utf8_unicode_ci NULL,
-            `stroke_color`          tinytext COLLATE utf8_unicode_ci NULL,
-            `select_color`          tinytext COLLATE utf8_unicode_ci NULL,
-            `vector_opacity`        int(10) unsigned NULL,
-            `select_opacity`        int(10) unsigned NULL,
-            `stroke_opacity`        int(10) unsigned NULL,
-            `image_opacity`         int(10) unsigned NULL,
-            `stroke_width`          int(10) unsigned NULL,
-            `point_radius`          int(10) unsigned NULL,
-            `point_image`           tinytext COLLATE utf8_unicode_ci NULL,
-            `max_zoom`              int(10) unsigned NULL,
-            `min_zoom`              int(10) unsigned NULL,
+            `id`                int(10) unsigned NOT NULL auto_increment,
+            `exhibit_id`        int(10) unsigned NULL,
+            `is_default`        tinyint(1) NULL,
+            `tag`               tinytext COLLATE utf8_unicode_ci NULL,
+            `vector_color`      tinytext COLLATE utf8_unicode_ci NULL,
+            `stroke_color`      tinytext COLLATE utf8_unicode_ci NULL,
+            `select_color`      tinytext COLLATE utf8_unicode_ci NULL,
+            `vector_opacity`    int(10) unsigned NULL,
+            `select_opacity`    int(10) unsigned NULL,
+            `stroke_opacity`    int(10) unsigned NULL,
+            `image_opacity`     int(10) unsigned NULL,
+            `stroke_width`      int(10) unsigned NULL,
+            `point_radius`      int(10) unsigned NULL,
+            `point_image`       tinytext COLLATE utf8_unicode_ci NULL,
+            `max_zoom`          int(10) unsigned NULL,
+            `min_zoom`          int(10) unsigned NULL,
 
-             PRIMARY KEY            (`id`)
+             PRIMARY KEY        (`id`)
 
         ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
 
@@ -133,12 +136,13 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
 
         // Layers table.
         // -------------
-        $sql = "CREATE TABLE IF NOT EXISTS `{$this->_db->prefix}neatline_layers` (
+        $sql = "CREATE TABLE IF NOT EXISTS
+            `{$this->_db->prefix}neatline_layers` (
 
-            `id`                    int(10) unsigned not null auto_increment,
-            `name`                  tinytext COLLATE utf8_unicode_ci NULL,
+            `id`                int(10) unsigned not null auto_increment,
+            `name`              tinytext COLLATE utf8_unicode_ci NULL,
 
-            PRIMARY KEY             (`id`)
+            PRIMARY KEY         (`id`)
 
         ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
 
@@ -152,13 +156,6 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
             $layer->save();
         }
 
-        // Add index on exhibit_id.
-        $this->_addIndex(
-            $this->_db->prefix . 'neatline_records',
-            $this->_db->prefix . 'neatline_records_exhibit_idx',
-            'exhibit_id'
-        );
-
     }
 
     /**
@@ -170,19 +167,23 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
     {
 
         // Drop the exhibits table.
-        $sql = "DROP TABLE IF EXISTS `{$this->_db->prefix}neatline_exhibits`";
+        $sql = "DROP TABLE IF EXISTS
+            `{$this->_db->prefix}neatline_exhibits`";
         $this->_db->query($sql);
 
         // Drop the data table.
-        $sql = "DROP TABLE IF EXISTS `{$this->_db->prefix}neatline_records`";
+        $sql = "DROP TABLE IF EXISTS
+            `{$this->_db->prefix}neatline_records`";
         $this->_db->query($sql);
 
         // Drop the data table.
-        $sql = "DROP TABLE IF EXISTS `{$this->_db->prefix}neatline_layers`";
+        $sql = "DROP TABLE IF EXISTS
+            `{$this->_db->prefix}neatline_layers`";
         $this->_db->query($sql);
 
         // Drop the tags table.
-        $sql = "DROP TABLE IF EXISTS `{$this->_db->prefix}neatline_tags`";
+        $sql = "DROP TABLE IF EXISTS
+            `{$this->_db->prefix}neatline_tags`";
         $this->_db->query($sql);
 
         // Remove default map style attributes.
@@ -194,7 +195,6 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
      * Register routes.
      *
      * @param object $router Router passed in by the front controller.
-     *
      * @return void
      */
     public function hookDefineRoutes($args)
@@ -217,9 +217,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
      * Delete data records associated with items that are deleted.
      *
      * @param Omeka_Item $item The item being deleted.
-     *
      * @return void
-     * @author Eric Rochester <erochest@virginia.edu>
      **/
     public function hookBeforeDeleteItem($args)
     {
@@ -229,8 +227,11 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
         $alias =    $table->getTableAlias();
         $adapter =  $table->getAdapter();
         $select =   $table->getSelect();
-        $where =    $adapter->quoteInto("$alias.item_id=?", $args['record']->id);
-        $select->where($where);
+
+        // Form select.
+        $select->where($adapter->quoteInto(
+            "$alias.item_id=?", $args['record']->id)
+        );
 
         // Start transaction.
         $this->_db->beginTransaction();
@@ -259,37 +260,12 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
      * Add link to main admin menu bar.
      *
      * @param array $tabs This is an array of label => URI pairs.
-     *
      * @return array The tabs array with the Neatline Maps tab.
      */
     public function filterAdminNavigationMain($tabs)
     {
         $tabs[] = array('label' => 'Neatline', 'uri' => url('neatline'));
         return $tabs;
-    }
-
-
-    // --------
-    // Helpers.
-    // --------
-
-
-    /**
-     * Add an index if one doesn't already exist.
-     *
-     * @param $table  string The name of the table the index is based on.
-     * @param $name   string The name of the index to check for.
-     * @param $fields string The SQL field list defining the index.
-     *
-     * @return void
-     */
-    protected function _addIndex($table, $name, $fields)
-    {
-        $check = "SHOW INDEX FROM `$table` WHERE key_name=?;";
-        if (!$this->_db->query($check, $name)) {
-            $sql = "CREATE INDEX $name ON $table ($fields);";
-            $this->_db->query($sql);
-        }
     }
 
 }

@@ -1,6 +1,6 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
 
 /**
  * Table class for Neatline data records.
@@ -15,12 +15,11 @@ class NeatlineRecordTable extends Omeka_Db_Table
 {
 
     /**
-     * For a given item and exhibit combination, check to see if there is an existing
-     * record. If there is, return it. If not, create a new record and return it.
+     * Check to see if a reord exists for a given exhibit and item. If one
+     * exists, return it. If not, create a new record and return it.
      *
      * @param Omeka_record $item The item.
      * @param Omeka_record $exhibit The exhibit.
-     *
      * @return void.
      */
     public function createOrGetRecord($item, $exhibit)
@@ -44,8 +43,7 @@ class NeatlineRecordTable extends Omeka_Db_Table
      *
      * @param Omeka_record $item The item record.
      * @param Omeka_record $neatline The exhibit record.
-     *
-     * @return Omeka_record $record if a record exists, else boolean False.
+     * @return Omeka_record $record The record.
      */
     public function getRecordByItemAndExhibit($item, $neatline)
     {
@@ -65,8 +63,7 @@ class NeatlineRecordTable extends Omeka_Db_Table
      *
      * @param Omeka_record $exhibit The exhibit record.
      * @param string $slug The slug.
-     *
-     * @return Omeka_record $record if a record exists, else boolean False.
+     * @return Omeka_record $record The record..
      */
     public function getRecordByExhibitAndSlug($exhibit, $slug)
     {
@@ -85,7 +82,6 @@ class NeatlineRecordTable extends Omeka_Db_Table
      * Find all records associated with a given exhibit.
      *
      * @param Omeka_record $neatline The exhibit record.
-     *
      * @return array of Omeka_record The records.
      */
     public function getRecordsByExhibit($neatline)
@@ -103,7 +99,6 @@ class NeatlineRecordTable extends Omeka_Db_Table
      * Find all active records in an exhibit.
      *
      * @param Omeka_record $exhibit The exhibit record.
-     *
      * @return array of Omeka_record The records.
      */
     public function getActiveRecordsByExhibit($exhibit)
@@ -123,7 +118,6 @@ class NeatlineRecordTable extends Omeka_Db_Table
      * Count all active records in an exhibit.
      *
      * @param Omeka_record $exhibit The exhibit record.
-     *
      * @return integer $count The number of active records.
      */
     public function countActiveRecordsByExhibit($exhibit)
@@ -139,7 +133,6 @@ class NeatlineRecordTable extends Omeka_Db_Table
      *
      * @param Omeka_record $exhibit The exhibit record.
      * @param string $slug The slug.
-     *
      * @return boolean True if the slug is unique.
      */
     public function slugIsAvailable($record, $exhibit, $slug)
@@ -149,12 +142,12 @@ class NeatlineRecordTable extends Omeka_Db_Table
         if ($slug === '') { return true; }
 
         // Try to get out an existing record with the slug.
-        $retrievedRecord = $this->getRecordByExhibitAndSlug($exhibit, $slug);
+        $retrievedRecord = $this->getRecordByExhibitAndSlug(
+            $exhibit, $slug);
 
         // If there is an existing record and the record is not the same
         // as the passed record, return false; otherwise true.
-        return ($retrievedRecord && $record->id !== $retrievedRecord->id) ?
-            false : true;
+        return !($retrievedRecord && $record->id !== $retrievedRecord->id);
 
     }
 

@@ -1,6 +1,6 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
 
 /**
  * Row class for Neatline data record.
@@ -98,7 +98,6 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
      *
      * @param Omeka_record $item The item record.
      * @param Omeka_record $neatline The exhibit record.
-     *
      * @return Omeka_record $this.
      */
     public function __construct($item = null, $neatline = null)
@@ -132,7 +131,6 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
      *
      * @param string $attribute The name of the attribute.
      * @param boolean $value The value to set.
-     *
      * @return void.
      */
     public function setNotEmpty($attribute, $value)
@@ -145,7 +143,6 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
      * Set the slug if it is unique.
      *
      * @param boolean $slug The slug.
-     *
      * @return void.
      */
     public function setSlug($slug)
@@ -166,7 +163,6 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
      * Set all style attributes to null.
      *
      * @param string $wkt The coverage, as WKT GEOMETRYCOLLECTION.
-     *
      * @return void.
      */
     public function setCoverage($wkt)
@@ -192,7 +188,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
         $this->select_color =       null;
         $this->vector_opacity =     null;
         $this->stroke_opacity =     null;
-        $this->image_opacity =    null;
+        $this->image_opacity =      null;
         $this->stroke_width =       null;
         $this->point_radius =       null;
         $this->point_image =        null;
@@ -244,7 +240,6 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
      * Get a style attribute.
      *
      * @param string style The name of the style.
-     *
      * @return mixed The value.
      */
     public function getStyle($style)
@@ -256,7 +251,6 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
      * Assemble record data for the front-end application.
      *
      * @param string $coverage The coverage as plaintext WKT.
-     *
      * @return array The map JSON.
      **/
     public function buildJsonData($coverage=null) {
@@ -306,7 +300,6 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
      * Update the record.
      *
      * @param array $values The PUT values.
-     *
      * @return void.
      */
     public function update($values)
@@ -323,8 +316,8 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
     }
 
     /**
-     * On save, update the modified column on the parent exhibit. If string
-     * $coverage is passed, run the coverage update.
+     * On save, update the modified column on the parent exhibit. If a
+     * `$coverage` string is passed, run the coverage update.
      *
      * @return void.
      */
@@ -350,7 +343,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
      * Call `delete` in a transaction.
      *
      * @return void
-     **/
+     */
     public function deleteTransaction()
     {
         $db = get_db();
