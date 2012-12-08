@@ -395,7 +395,7 @@ Neatline.module('Map.Views', function(
 
       // Compute decimal opacities.
       var fillOpacity = record.get('vector_opacity')/100;
-      var graphicOpacity = record.get('graphic_opacity')/100;
+      var imageOpacity = record.get('image_opacity')/100;
       var selectOpacity = record.get('select_opacity')/100;
       var strokeOpacity = record.get('stroke_opacity')/100;
 
@@ -407,7 +407,7 @@ Neatline.module('Map.Views', function(
           externalGraphic:  record.get('point_image'),
           strokeWidth:      record.get('stroke_width'),
           fillOpacity:      fillOpacity,
-          graphicOpacity:   graphicOpacity,
+          graphicOpacity:   imageOpacity,
           strokeOpacity:    strokeOpacity
         }),
         'select': new OpenLayers.Style({
@@ -417,7 +417,7 @@ Neatline.module('Map.Views', function(
           externalGraphic:  record.get('point_image'),
           strokeWidth:      record.get('stroke_width'),
           fillOpacity:      selectOpacity,
-          graphicOpacity:   graphicOpacity,
+          graphicOpacity:   imageOpacity,
           strokeOpacity:    strokeOpacity
         }),
         'temporary': new OpenLayers.Style({
@@ -427,7 +427,7 @@ Neatline.module('Map.Views', function(
           externalGraphic:  record.get('point_image'),
           strokeWidth:      record.get('stroke_width'),
           fillOpacity:      selectOpacity,
-          graphicOpacity:   graphicOpacity,
+          graphicOpacity:   imageOpacity,
           strokeOpacity:    strokeOpacity
         })
       });

@@ -87,7 +87,7 @@ class NeatlineExhibit extends Omeka_Record_AbstractRecord
         'stroke_opacity',
         'stroke_width',
         'select_opacity',
-        'graphic_opacity',
+        'image_opacity',
         'point_radius',
         'highlight_color'
     );

@@ -120,7 +120,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
      * The opacity of points rendered as images.
      * int(10) unsigned NULL
      */
-    public $graphic_opacity;
+    public $image_opacity;
 
     /**
      * The width of lines on geometries.
@@ -159,7 +159,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
         'stroke_opacity',
         'stroke_width',
         'select_opacity',
-        'graphic_opacity',
+        'image_opacity',
         'point_radius',
         'select_color'
     );
@@ -264,7 +264,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
         $this->select_color =       null;
         $this->vector_opacity =     null;
         $this->stroke_opacity =     null;
-        $this->graphic_opacity =    null;
+        $this->image_opacity =    null;
         $this->stroke_width =       null;
         $this->point_radius =       null;
         $this->point_image =        null;
@@ -351,7 +351,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
             'vector_opacity'    => $this->getStyle('vector_opacity'),
             'select_opacity'    => $this->getStyle('select_opacity'),
             'stroke_opacity'    => $this->getStyle('stroke_opacity'),
-            'graphic_opacity'   => $this->getStyle('graphic_opacity'),
+            'image_opacity'     => $this->getStyle('image_opacity'),
             'stroke_width'      => $this->getStyle('stroke_width'),
             'point_radius'      => $this->getStyle('point_radius'),
             'point_image'       => $this->getStyle('point_image'),

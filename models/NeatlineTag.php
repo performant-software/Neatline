@@ -84,7 +84,7 @@ class NeatlineTag extends Omeka_Record_AbstractRecord
      * The opacity of points rendered as images.
      * int(10) unsigned NULL
      */
-    public $graphic_opacity;
+    public $image_opacity;
 
     /**
      * The width of lines on geometries.

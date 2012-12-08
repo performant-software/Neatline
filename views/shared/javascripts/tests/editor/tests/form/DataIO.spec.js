@@ -55,7 +55,7 @@ describe('Form Data I/O', function() {
     expect(_t.styleTabView.pointRadius.val()).    toEqual('16');
     expect(_t.styleTabView.minZoom.val()).        toEqual('19');
     expect(_t.styleTabView.maxZoom.val()).        toEqual('22');
-    expect(_t.styleTabView.pointGraphic.val()).   toEqual(favicon);
+    expect(_t.styleTabView.pointImage.val()).     toEqual(favicon);
     expect(_t.spatialTabView.coverage.val()).     toEqual('POINT(1 2)');
 
   });
@@ -89,7 +89,7 @@ describe('Form Data I/O', function() {
     _t.styleTabView.pointRadius.    val('17');
     _t.styleTabView.minZoom.        val('20');
     _t.styleTabView.maxZoom.        val('23');
-    _t.styleTabView.pointGraphic.   val('file2.png');
+    _t.styleTabView.pointImage.     val('file2.png');
     _t.spatialTabView.coverage.     val('POINT(3 4)');
 
     // Click "Save" button.
@@ -112,7 +112,7 @@ describe('Form Data I/O', function() {
     expect(params.vector_opacity).  toEqual(2);
     expect(params.select_opacity).  toEqual(5);
     expect(params.stroke_opacity).  toEqual(8);
-    expect(params.graphic_opacity). toEqual(11);
+    expect(params.image_opacity).   toEqual(11);
     expect(params.stroke_width).    toEqual(14);
     expect(params.point_radius).    toEqual(17);
     expect(params.min_zoom).        toEqual(20);

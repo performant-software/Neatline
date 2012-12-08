@@ -33,7 +33,7 @@ Neatline.module('Editor.Form.StyleTab.Views', function(
       this.imageOpacity   = form.find('input[name="image-opacity"]');
       this.strokeWidth    = form.find('input[name="stroke-width"]');
       this.pointRadius    = form.find('input[name="point-radius"]');
-      this.pointGraphic   = form.find('input[name="point-image"]');
+      this.pointImage     = form.find('input[name="point-image"]');
       this.minZoom        = form.find('input[name="min-zoom"]');
       this.maxZoom        = form.find('input[name="max-zoom"]');
     },
@@ -52,10 +52,10 @@ Neatline.module('Editor.Form.StyleTab.Views', function(
       this.vectorOpacity. val(model.get('vector_opacity'));
       this.strokeOpacity. val(model.get('stroke_opacity'));
       this.selectOpacity. val(model.get('select_opacity'));
-      this.imageOpacity.  val(model.get('graphic_opacity'));
+      this.imageOpacity.  val(model.get('image_opacity'));
       this.strokeWidth.   val(model.get('stroke_width'));
       this.pointRadius.   val(model.get('point_radius'));
-      this.pointGraphic.  val(model.get('point_image'));
+      this.pointImage.    val(model.get('point_image'));
       this.minZoom.       val(model.get('min_zoom'));
       this.maxZoom.       val(model.get('max_zoom'));
     },
@@ -75,10 +75,10 @@ Neatline.module('Editor.Form.StyleTab.Views', function(
         vector_opacity:   parseInt(this.vectorOpacity.val(), 10),
         stroke_opacity:   parseInt(this.strokeOpacity.val(), 10),
         select_opacity:   parseInt(this.selectOpacity.val(), 10),
-        graphic_opacity:  parseInt(this.imageOpacity.val(), 10),
+        image_opacity:    parseInt(this.imageOpacity.val(), 10),
         stroke_width:     parseInt(this.strokeWidth.val(), 10),
         point_radius:     parseInt(this.pointRadius.val(), 10),
-        point_image:      this.pointGraphic.val(),
+        point_image:      this.pointImage.val(),
         min_zoom:         parseInt(this.minZoom.val(), 10),
         max_zoom:         parseInt(this.maxZoom.val(), 10)
       };

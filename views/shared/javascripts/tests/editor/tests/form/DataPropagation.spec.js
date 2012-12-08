@@ -58,7 +58,7 @@ describe('Form Data Propagation', function() {
     _t.styleTabView.pointRadius.    val('17');
     _t.styleTabView.minZoom.        val('20');
     _t.styleTabView.maxZoom.        val('23');
-    _t.styleTabView.pointGraphic.   val('file2.png');
+    _t.styleTabView.pointImage.     val('file2.png');
     _t.spatialTabView.coverage.     val('POINT(3 4)');
 
     // Click "Save" button.
@@ -68,14 +68,14 @@ describe('Form Data Propagation', function() {
     // Check for updated data in records collection.
     record = _t.recordsColl.get(mapLayers[0].nId);
     expect(record.get('title')).            toEqual('Title Updated');
-    expect(record.get('body')).      toEqual('Body updated.');
+    expect(record.get('body')).             toEqual('Body updated.');
     expect(record.get('vector_color')).     toEqual('#222222');
     expect(record.get('stroke_color')).     toEqual('#555555');
     expect(record.get('select_color')).     toEqual('#888888');
     expect(record.get('vector_opacity')).   toEqual(2);
     expect(record.get('select_opacity')).   toEqual(5);
     expect(record.get('stroke_opacity')).   toEqual(8);
-    expect(record.get('graphic_opacity')).  toEqual(11);
+    expect(record.get('image_opacity')).    toEqual(11);
     expect(record.get('stroke_width')).     toEqual(14);
     expect(record.get('point_radius')).     toEqual(17);
     expect(record.get('min_zoom')).         toEqual(20);
@@ -124,7 +124,7 @@ describe('Form Data Propagation', function() {
     _t.styleTabView.pointRadius.    val('17');
     _t.styleTabView.minZoom.        val('20');
     _t.styleTabView.maxZoom.        val('23');
-    _t.styleTabView.pointGraphic.   val('file2.png');
+    _t.styleTabView.pointImage.     val('file2.png');
     _t.spatialTabView.coverage.     val('POINT(3 4)');
 
     // Click "Save" button.
@@ -134,14 +134,14 @@ describe('Form Data Propagation', function() {
     // Check for updated data in map collection.
     var record = _t.mapColl.get(mapLayers[0].nId);
     expect(record.get('title')).            toEqual('Title Updated');
-    expect(record.get('body')).      toEqual('Body updated.');
+    expect(record.get('body')).             toEqual('Body updated.');
     expect(record.get('vector_color')).     toEqual('#222222');
     expect(record.get('stroke_color')).     toEqual('#555555');
     expect(record.get('select_color')).     toEqual('#888888');
     expect(record.get('vector_opacity')).   toEqual(2);
     expect(record.get('select_opacity')).   toEqual(5);
     expect(record.get('stroke_opacity')).   toEqual(8);
-    expect(record.get('graphic_opacity')).  toEqual(11);
+    expect(record.get('image_opacity')).    toEqual(11);
     expect(record.get('stroke_width')).     toEqual(14);
     expect(record.get('point_radius')).     toEqual(17);
     expect(record.get('min_zoom')).         toEqual(20);

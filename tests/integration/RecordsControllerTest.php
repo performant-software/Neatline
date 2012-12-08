@@ -51,7 +51,7 @@ class Neatline_RecordsControllerTest extends Neatline_Test_AppTestCase
         $this->assertObjectHasAttribute('vector_opacity',   $response[0]);
         $this->assertObjectHasAttribute('select_opacity',   $response[0]);
         $this->assertObjectHasAttribute('stroke_opacity',   $response[0]);
-        $this->assertObjectHasAttribute('graphic_opacity',  $response[0]);
+        $this->assertObjectHasAttribute('image_opacity',    $response[0]);
         $this->assertObjectHasAttribute('stroke_width',     $response[0]);
         $this->assertObjectHasAttribute('point_radius',     $response[0]);
         $this->assertObjectHasAttribute('point_image',      $response[0]);
@@ -97,7 +97,7 @@ class Neatline_RecordsControllerTest extends Neatline_Test_AppTestCase
         $this->assertObjectHasAttribute('vector_opacity',   $response);
         $this->assertObjectHasAttribute('select_opacity',   $response);
         $this->assertObjectHasAttribute('stroke_opacity',   $response);
-        $this->assertObjectHasAttribute('graphic_opacity',  $response);
+        $this->assertObjectHasAttribute('image_opacity',    $response);
         $this->assertObjectHasAttribute('stroke_width',     $response);
         $this->assertObjectHasAttribute('point_radius',     $response);
         $this->assertObjectHasAttribute('point_image',      $response);
@@ -132,7 +132,7 @@ class Neatline_RecordsControllerTest extends Neatline_Test_AppTestCase
         $record->vector_opacity     = 1;
         $record->select_opacity     = 2;
         $record->stroke_opacity     = 3;
-        $record->graphic_opacity    = 4;
+        $record->image_opacity      = 4;
         $record->stroke_width       = 5;
         $record->point_radius       = 6;
         $record->point_image        = 'file.png';
@@ -156,7 +156,7 @@ class Neatline_RecordsControllerTest extends Neatline_Test_AppTestCase
             'vector_opacity'        => '10',
             'select_opacity'        => '20',
             'stroke_opacity'        => '30',
-            'graphic_opacity'       => '40',
+            'image_opacity'         => '40',
             'stroke_width'          => '50',
             'point_radius'          => '60',
             'point_image'           => 'file2.png',
@@ -188,7 +188,7 @@ class Neatline_RecordsControllerTest extends Neatline_Test_AppTestCase
         $this->assertEquals($record->vector_opacity, 10);
         $this->assertEquals($record->select_opacity, 20);
         $this->assertEquals($record->stroke_opacity, 30);
-        $this->assertEquals($record->graphic_opacity, 40);
+        $this->assertEquals($record->image_opacity, 40);
         $this->assertEquals($record->stroke_width, 50);
         $this->assertEquals($record->point_radius, 60);
         $this->assertEquals($record->point_image, 'file2.png');

@@ -36,7 +36,7 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
         $record->vector_opacity     = 50;
         $record->select_opacity     = 50;
         $record->stroke_opacity     = 50;
-        $record->graphic_opacity    = 50;
+        $record->image_opacity      = 50;
         $record->stroke_width       = 3;
         $record->point_radius       = 3;
         $record->point_image        = 'http://test.org';
@@ -57,7 +57,7 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
         $this->assertEquals($record->vector_opacity, 50);
         $this->assertEquals($record->select_opacity, 50);
         $this->assertEquals($record->stroke_opacity, 50);
-        $this->assertEquals($record->graphic_opacity, 50);
+        $this->assertEquals($record->image_opacity, 50);
         $this->assertEquals($record->stroke_width, 3);
         $this->assertEquals($record->point_radius, 3);
         $this->assertEquals($record->point_image, 'http://test.org');
@@ -241,7 +241,7 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
         $record->select_color = '#ffffff';
         $record->vector_opacity = 50;
         $record->stroke_opacity = 50;
-        $record->graphic_opacity = 50;
+        $record->image_opacity = 50;
         $record->stroke_width = 50;
         $record->point_radius = 50;
         $record->point_image = '/path';
@@ -255,7 +255,7 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
         $this->assertNull($record->select_color);
         $this->assertNull($record->vector_opacity);
         $this->assertNull($record->stroke_opacity);
-        $this->assertNull($record->graphic_opacity);
+        $this->assertNull($record->image_opacity);
         $this->assertNull($record->stroke_width);
         $this->assertNull($record->point_radius);
         $this->assertNull($record->point_image);
@@ -339,7 +339,7 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
         $record->vector_opacity     = 1;
         $record->select_opacity     = 2;
         $record->stroke_opacity     = 3;
-        $record->graphic_opacity    = 4;
+        $record->image_opacity      = 4;
         $record->stroke_width       = 5;
         $record->point_radius       = 6;
         $record->point_image        = 'file.png';
@@ -360,7 +360,7 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
             'vector_opacity'        => '10',
             'select_opacity'        => '20',
             'stroke_opacity'        => '30',
-            'graphic_opacity'       => '40',
+            'image_opacity'         => '40',
             'stroke_width'          => '50',
             'point_radius'          => '60',
             'point_image'           => 'file2.png',
@@ -384,7 +384,7 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
         $this->assertEquals($record->vector_opacity, 10);
         $this->assertEquals($record->select_opacity, 20);
         $this->assertEquals($record->stroke_opacity, 30);
-        $this->assertEquals($record->graphic_opacity, 40);
+        $this->assertEquals($record->image_opacity, 40);
         $this->assertEquals($record->stroke_width, 50);
         $this->assertEquals($record->point_radius, 60);
         $this->assertEquals($record->point_image, 'file2.png');
@@ -450,7 +450,7 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
         $record->vector_opacity         = 1;
         $record->select_opacity         = 2;
         $record->stroke_opacity         = 3;
-        $record->graphic_opacity        = 4;
+        $record->image_opacity          = 4;
         $record->stroke_width           = 5;
         $record->point_radius           = 6;
         $record->point_image            = 'file.png';
@@ -488,7 +488,7 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
                 'vector_opacity'        => 1,
                 'select_opacity'        => 2,
                 'stroke_opacity'        => 3,
-                'graphic_opacity'       => 4,
+                'image_opacity'         => 4,
                 'stroke_width'          => 5,
                 'point_radius'          => 6,
                 'point_image'           => 'file.png',

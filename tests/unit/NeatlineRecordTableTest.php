@@ -27,8 +27,8 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
         $item = $this->__item();
         $neatline = $this->__exhibit();
         $record1 = new NeatlineRecord($item, $neatline);
-        $record1->save();
         $record2 = new NeatlineRecord(null, $neatline);
+        $record1->save();
         $record2->save();
 
         // 2 records.
@@ -460,7 +460,7 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
         $record->vector_opacity     = 1;
         $record->select_opacity     = 2;
         $record->stroke_opacity     = 3;
-        $record->graphic_opacity    = 4;
+        $record->image_opacity      = 4;
         $record->stroke_width       = 5;
         $record->point_radius       = 6;
         $record->point_image        = 'file1.png';
@@ -490,7 +490,7 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
                 'vector_opacity'    => 1,
                 'select_opacity'    => 2,
                 'stroke_opacity'    => 3,
-                'graphic_opacity'   => 4,
+                'image_opacity'     => 4,
                 'stroke_width'      => 5,
                 'point_radius'      => 6,
                 'point_image'       => 'file1.png',
@@ -544,8 +544,8 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
         $record2->select_opacity    = 4;
         $record1->stroke_opacity    = 5;
         $record2->stroke_opacity    = 6;
-        $record1->graphic_opacity   = 7;
-        $record2->graphic_opacity   = 8;
+        $record1->image_opacity   = 7;
+        $record2->image_opacity   = 8;
         $record1->stroke_width      = 9;
         $record2->stroke_width      = 10;
         $record1->point_radius      = 11;
@@ -585,7 +585,7 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
                 'vector_opacity'    => 1,
                 'select_opacity'    => 3,
                 'stroke_opacity'    => 5,
-                'graphic_opacity'   => 7,
+                'image_opacity'     => 7,
                 'stroke_width'      => 9,
                 'point_radius'      => 11,
                 'point_image'       => 'file1.png',
@@ -610,7 +610,7 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
                 'vector_opacity'    => 2,
                 'select_opacity'    => 4,
                 'stroke_opacity'    => 6,
-                'graphic_opacity'   => 8,
+                'image_opacity'     => 8,
                 'stroke_width'      => 10,
                 'point_radius'      => 12,
                 'point_image'       => 'file2.png',

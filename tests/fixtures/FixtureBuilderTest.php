@@ -76,9 +76,9 @@ class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
         $record2->stroke_opacity = 8;
         $record3->stroke_opacity = 9;
 
-        $record1->graphic_opacity = 10;
-        $record2->graphic_opacity = 11;
-        $record3->graphic_opacity = 12;
+        $record1->image_opacity = 10;
+        $record2->image_opacity = 11;
+        $record3->image_opacity = 12;
 
         $record1->stroke_width = 13;
         $record2->stroke_width = 14;
@@ -159,7 +159,7 @@ class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
         $record->vector_opacity = 1;
         $record->select_opacity = 4;
         $record->stroke_opacity = 7;
-        $record->graphic_opacity = 10;
+        $record->image_opacity = 10;
         $record->stroke_width = 13;
         $record->point_radius = 16;
         $record->min_zoom = 19;

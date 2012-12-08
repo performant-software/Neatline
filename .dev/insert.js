@@ -30,7 +30,7 @@ function layer(exhibit_id, count, zoom, color) {
       'select_color,'+
       'point_radius,'+
       'stroke_opacity,'+
-      'graphic_opacity,'+
+      'image_opacity,'+
       'vector_opacity,'+
       'select_opacity,'+
       'stroke_width,'+
