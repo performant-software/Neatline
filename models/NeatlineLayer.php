@@ -1,4 +1,7 @@
 <?php
+
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
+
 /**
  * Row class for Neatline base layer.
  *
@@ -11,10 +14,12 @@
 class NeatlineLayer extends Omeka_Record_AbstractRecord
 {
 
+
     /**
      * The name of the layer.
      * tinytext COLLATE utf8_unicode_ci NULL
      */
     public $name;
+
 
 }

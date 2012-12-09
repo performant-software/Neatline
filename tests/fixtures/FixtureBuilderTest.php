@@ -1,6 +1,6 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
 
 /**
  * Fixture generation routines.
@@ -14,12 +14,12 @@
 class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
 {
 
+
     protected $_isAdminTest = false;
+
 
     /**
      * Records JSON for map (INDEX and GET responses).
-     *
-     * @return void.
      */
     public function testRecordsJson()
     {
@@ -134,10 +134,9 @@ class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
 
     }
 
+
     /**
      * JSON for individual records (GET response).
-     *
-     * @return void.
      */
     public function testRecordJson()
     {
@@ -190,10 +189,9 @@ class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
 
     }
 
+
     /**
      * Core Neatline partial markup.
-     *
-     * @return void.
      */
     public function testNeatlinePartial()
     {
@@ -201,15 +199,15 @@ class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
             'neatline-partial.html');
     }
 
+
     /**
      * Editor partial markup.
-     *
-     * @return void.
      */
     public function testEditorPartial()
     {
         $this->writeFixture('neatline/fixtures/editor',
             'editor-partial.html');
     }
+
 
 }

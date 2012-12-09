@@ -28,6 +28,12 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
     public $exhibit_id;
 
     /**
+     * The URL slug for the exhibit.
+     * varchar(100) NULL
+     */
+    public $slug;
+
+    /**
      * The title for the record.
      * mediumtext COLLATE utf8_unicode_ci NULL
      */

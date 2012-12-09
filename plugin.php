@@ -1,6 +1,6 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
 
 /**
  * Plugin runner.
@@ -11,9 +11,6 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-
-if (!defined('NEATLINE_PLUGIN_VERSION'))
-    define('NEATLINE_PLUGIN_VERSION', get_plugin_ini('Neatline', 'version'));
 
 if (!defined('NEATLINE_PLUGIN_DIR'))
     define('NEATLINE_PLUGIN_DIR', dirname(__FILE__));

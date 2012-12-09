@@ -1,6 +1,6 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
 
 /**
  * Test suite parent class.
@@ -11,15 +11,16 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
+
 require_once dirname(__FILE__) . '/../NeatlinePlugin.php';
+
 
 class Neatline_Test_AppTestCase extends Omeka_Test_AppTestCase
 {
 
+
     /**
      * Bootstrap the plugin.
-     *
-     * @return void.
      */
     public function setUp()
     {
@@ -42,10 +43,9 @@ class Neatline_Test_AppTestCase extends Omeka_Test_AppTestCase
 
     }
 
+
     /**
-     * Clear out the database.
-     *
-     * @return void.
+     * Clear the database.
      */
     public function tearDown()
     {
@@ -67,15 +67,9 @@ class Neatline_Test_AppTestCase extends Omeka_Test_AppTestCase
 
 
     /**
-     * Testing helpers.
-     */
-
-
-    /**
      * Create a Neatline exhibit.
      *
      * @param string $slug The exhibit slug.
-     *
      * @return Omeka_record $neatline The exhibit.
      */
     public function __exhibit($slug='test-slug')
@@ -85,6 +79,7 @@ class Neatline_Test_AppTestCase extends Omeka_Test_AppTestCase
         $exhibit->save();
         return $exhibit;
     }
+
 
     /**
      * Create an Item.
@@ -98,12 +93,12 @@ class Neatline_Test_AppTestCase extends Omeka_Test_AppTestCase
         return $item;
     }
 
+
     /**
      * Create a data record.
      *
      * @param Item $item The parent item.
      * @param NeatlineExhibit $exhibit The parent exhibit.
-     *
      * @return NeatlineRecord $record The record.
      */
     public function __record($item=null, $exhibit=null)
@@ -115,12 +110,13 @@ class Neatline_Test_AppTestCase extends Omeka_Test_AppTestCase
         // Create exhibit.
         if (is_null($exhibit)) $exhibit = $this->__exhibit();
 
+        // Create record.
         $record = new NeatlineRecord($item, $exhibit);
         $record->save();
-
         return $record;
 
     }
+
 
     /**
      * Create an element text for an item.
@@ -129,7 +125,6 @@ class Neatline_Test_AppTestCase extends Omeka_Test_AppTestCase
      * @param string $elementSet The element set.
      * @param string $elementName The element name.
      * @param string $value The value for the text.
-     *
      * @return Omeka_record $text The new text.
      */
     public function __text($item, $elementSet, $elementName, $value)
@@ -153,13 +148,12 @@ class Neatline_Test_AppTestCase extends Omeka_Test_AppTestCase
 
     }
 
+
     /**
      * Write the response body from a route to a fixture file.
      *
      * @param string $route The resource location.
      * @param string $file The name of the fixture file.
-     *
-     * @return void.
      */
     public function writeFixture($route, $file)
     {
@@ -181,12 +175,11 @@ class Neatline_Test_AppTestCase extends Omeka_Test_AppTestCase
 
     }
 
+
     /**
      * Mock out PUT data before a request.
      *
-     * @param array $data Key value pairs.
-     *
-     * @return void.
+     * @param array $data Key-value pairs.
      */
     public function writePut($data)
     {
@@ -204,11 +197,11 @@ class Neatline_Test_AppTestCase extends Omeka_Test_AppTestCase
 
     }
 
+
     /**
      * Get the coverage of a record as a raw WKT string.
      *
      * @param NeatlineRecord $record The record.
-     *
      * @return string $coverge The coverage as raw WKT.
      */
     public function getCoverageAsText($record)
@@ -216,7 +209,7 @@ class Neatline_Test_AppTestCase extends Omeka_Test_AppTestCase
 
         // Build the select.
         $select = $this->_recordsTable->getSelect()
-            ->columns(array('wkt' => new Zend_Db_Expr('AsText(coverage)')))
+            ->columns(array('wkt'=>new Zend_Db_Expr('AsText(coverage)')))
             ->where('id=?', $record->id);
 
         // Query and return value.
@@ -224,6 +217,7 @@ class Neatline_Test_AppTestCase extends Omeka_Test_AppTestCase
         return $record->wkt;
 
     }
+
 
     /**
      * Get the first exhibit.
@@ -237,6 +231,7 @@ class Neatline_Test_AppTestCase extends Omeka_Test_AppTestCase
         return $exhibits[0];
     }
 
+
     /**
      * Get the last item record.
      *
@@ -248,5 +243,6 @@ class Neatline_Test_AppTestCase extends Omeka_Test_AppTestCase
             $this->_recordsTable->getSelect());
         return end($records);
     }
+
 
 }

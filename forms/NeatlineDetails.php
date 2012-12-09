@@ -1,38 +1,25 @@
 <?php
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
+
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
 
 /**
  * Add exhibit form.
  *
- * PHP version 5
- *
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not
- * use this file except in compliance with the License. You may obtain a copy of
- * the License at http://www.apache.org/licenses/LICENSE-2.0 Unless required by
- * applicable law or agreed to in writing, software distributed under the
- * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS
- * OF ANY KIND, either express or implied. See the License for the specific
- * language governing permissions and limitations under the License.
- *
  * @package     omeka
  * @subpackage  neatline
- * @author      Scholars' Lab <>
- * @author      Bethany Nowviskie <bethany@virginia.edu>
- * @author      Adam Soroka <ajs6f@virginia.edu>
- * @author      David McClure <david.mcclure@virginia.edu>
- * @copyright   2011 Rector and Board of Visitors, University of Virginia
- * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache 2 License
+ * @copyright   2012 Rector and Board of Visitors, University of Virginia
+ * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
 class Neatline_Form_NeatlineDetails extends Omeka_Form
 {
 
+
     private $_neatline;
+
 
     /**
      * Construct the exhibit add/edit form.
-     *
-     * @return void.
      */
     public function init()
     {
@@ -89,7 +76,7 @@ class Neatline_Form_NeatlineDetails extends Omeka_Form
                     array(
                         'pattern' => '/^[0-9a-z\-]+$/',
                         'messages' => array(
-                            Zend_Validate_Regex::NOT_MATCH => __('The slug can only contain lowercase letters, numbers, and hyphens.')
+                            Zend_Validate_Regex::NOT_MATCH => __('The slug can only contain letters, numbers, and hyphens.')
                         )
                     )
                 ),
@@ -137,9 +124,14 @@ class Neatline_Form_NeatlineDetails extends Omeka_Form
 
     }
 
+
+    /**
+     * Bind an exhibit record to the form.
+     */
     public function setNeatline(NeatlineExhibit $neatline)
     {
         $this->_neatline = $neatline;
     }
+
 
 }

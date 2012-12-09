@@ -87,6 +87,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
             `id`                int(10) unsigned NOT NULL auto_increment,
             `item_id`           int(10) unsigned NULL,
             `exhibit_id`        int(10) unsigned NULL,
+            `slug`              varchar(100) NULL,
             `title`             mediumtext COLLATE utf8_unicode_ci NULL,
             `body`              mediumtext COLLATE utf8_unicode_ci NULL,
             `coverage`          GEOMETRY,

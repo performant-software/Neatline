@@ -14,6 +14,7 @@
 class NeatlineTag extends Omeka_Record_AbstractRecord
 {
 
+
     /**
      * The id of the parent exhibit.
      * int(10) unsigned NULL
@@ -103,5 +104,6 @@ class NeatlineTag extends Omeka_Record_AbstractRecord
      * int(10) unsigned NULL
      */
     public $min_zoom;
+
 
 }

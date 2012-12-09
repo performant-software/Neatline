@@ -1,6 +1,6 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
 
 /**
  * Table class for base layers.
@@ -14,10 +14,11 @@
 class NeatlineLayerTable extends Omeka_Db_Table
 {
 
+
     /**
-     * Build an array of base layers of format [id] => [name].
+     * Build an associated array of all base layers.
      *
-     * @return void.
+     * @return array An associative array: [record id] => [layer name].
      */
     public function getLayersForSelect()
     {
@@ -36,22 +37,19 @@ class NeatlineLayerTable extends Omeka_Db_Table
 
     }
 
+
     /**
      * Get layer by name.
      *
      * @param string name The name.
-     *
-     * @return void.
+     * @return Omeka_Record The layer.
      */
     public function getLayerByName($name)
     {
-
-        $record = $this->fetchObject(
+        return $this->fetchObject(
             $this->getSelect()->where('name = ?', $name)
         );
-
-        return $record ? $record : false;
-
     }
+
 
 }

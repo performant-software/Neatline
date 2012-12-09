@@ -1,9 +1,9 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
 
 /**
- * Markup emitters for Jasmine suite.
+ * Markup constructor actions for Jasmine suite.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -11,23 +11,13 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class Neatline_FixturesController extends Omeka_Controller_AbstractActionController
+class Neatline_FixturesController
+    extends Omeka_Controller_AbstractActionController
 {
 
-    /**
-     * Get table objects.
-     *
-     * @return void
-     */
-    public function init()
-    {
-        $this->exhibitsTable = $this->_helper->db->getTable('NeatlineExhibit');
-    }
 
     /**
-     * Base exhibit markup.
-     *
-     * @return void
+     * Generate base exhibit markup.
      */
     public function neatlineAction()
     {
@@ -45,10 +35,9 @@ class Neatline_FixturesController extends Omeka_Controller_AbstractActionControl
 
     }
 
+
     /**
-     * Editor markup.
-     *
-     * @return void
+     * Generate editor markup.
      */
     public function editorAction()
     {
@@ -65,5 +54,6 @@ class Neatline_FixturesController extends Omeka_Controller_AbstractActionControl
         ));
 
     }
+
 
 }

@@ -1,9 +1,9 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
 
 /**
- * Admin controller.
+ * Controller for exhibit create, edit, and delete.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -11,38 +11,33 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class Neatline_IndexController extends Omeka_Controller_AbstractActionController
+class Neatline_IndexController
+    extends Omeka_Controller_AbstractActionController
 {
 
+
     /**
-     * Set pagination options, get tables.
-     *
-     * @return void
+     * Set default model and pagination page length.
      */
     public function init()
     {
-
-        // Set default model and pagination options.
         $this->_helper->db->setDefaultModelName('NeatlineExhibit');
         $this->_browseRecordsPerPage = get_option('per_page_admin');
-
-        // Get models.
-        $this->__records = $this->_helper->db->getTable('NeatlineRecord');
-        $this->__exhibits = $this->_helper->db->getTable('NeatlineExhibit');
-
     }
+
 
     /**
      * Create a new exhibit.
-     *
-     * @return void
      */
     public function addAction()
     {
+
+        // Construct add form.
         $neatline = new NeatlineExhibit;
         $form = $this->_getNeatlineDetailsForm($neatline);
         $this->view->form = $form;
 
+        // If form is posted.
         if ($this->_request->isPost()) {
 
             // Validate form.
@@ -58,10 +53,9 @@ class Neatline_IndexController extends Omeka_Controller_AbstractActionController
 
     }
 
+
     /**
      * Edit exhibit settings.
-     *
-     * @return void
      */
     public function editAction()
     {
@@ -70,6 +64,7 @@ class Neatline_IndexController extends Omeka_Controller_AbstractActionController
         $neatline = $this->_helper->db->findById();
         $form = $this->_getNeatlineDetailsForm($neatline);
 
+        // If form is posted.
         if ($this->_request->isPost()) {
 
             // Validate the form.
@@ -83,16 +78,15 @@ class Neatline_IndexController extends Omeka_Controller_AbstractActionController
 
         }
 
-        // Push exhibit and form.
+        // Push form and exhibit to view.
         $this->view->neatline_exhibit = $neatline;
         $this->view->form = $form;
 
     }
 
+
     /**
      * Edit items query.
-     *
-     * @return void
      */
     public function queryAction()
     {
@@ -111,9 +105,11 @@ class Neatline_IndexController extends Omeka_Controller_AbstractActionController
             $_REQUEST = $queryArray;
         }
 
+        // Push exhibit to view.
         $this->view->neatline_exhibit = $neatline;
 
     }
+
 
     /**
      * Edit an exhibit.
@@ -123,19 +119,20 @@ class Neatline_IndexController extends Omeka_Controller_AbstractActionController
     public function editorAction()
     {
         $id = $this->_request->getParam('id');
-        $this->view->exhibit = $this->__exhibits->find($id);
+        $__exhibits = $this->_helper->db->getTable('NeatlineExhibit');
+        $this->view->exhibit = $__exhibits->find($id);
     }
+
 
     /**
      * Default exhibit show view.
-     *
-     * @return void
      */
     public function showAction()
     {
         $neatline = $this->_findExhibit();
         $this->view->neatline_exhibit = $neatline;
     }
+
 
     /**
      * Sets the add success message.
@@ -146,6 +143,7 @@ class Neatline_IndexController extends Omeka_Controller_AbstractActionController
             $neatline->title);
     }
 
+
     /**
      * Sets the edit success message.
      */
@@ -154,6 +152,7 @@ class Neatline_IndexController extends Omeka_Controller_AbstractActionController
         return __('The Neatline "%s" was successfully changed!',
             $neatline->title);
     }
+
 
     /**
      * Sets the delete success message.
@@ -164,6 +163,7 @@ class Neatline_IndexController extends Omeka_Controller_AbstractActionController
             $neatline->title);
     }
 
+
     /**
      * Sets the delete confirm message.
      */
@@ -173,19 +173,22 @@ class Neatline_IndexController extends Omeka_Controller_AbstractActionController
         $neatline->title);
     }
 
+
     /**
      * Construct the details form.
      */
     private function _getNeatlineDetailsForm(NeatlineExhibit $neatline)
     {
-        $form = new Neatline_Form_NeatlineDetails(array('neatline' => $neatline));
-        return $form;
+        return new Neatline_Form_NeatlineDetails(array(
+            'neatline' => $neatline
+        ));
     }
 
+
     /**
-     * Checks for existence of 'slug' in URL, then tries to find a Neatline
-     * record with that slug. If there is no 'slug' parameter, it falls back
-     * to Omeka_Controller_Action::findById()
+     * Find the Neatline exhbit associated with the current request. If
+     * there is a `slug` parameter, find the exhibit record with the slug;
+     * if not, fall back on Omeka_Controller_Action::findById().
      *
      * @throws Omeka_Controller_Exception_404
      * @return NeatlineExhibit
@@ -194,7 +197,8 @@ class Neatline_IndexController extends Omeka_Controller_AbstractActionController
     {
 
         // Get the exhibit.
-        $record = $this->__exhibits->findBySlug($this->_request->slug);
+        $__exhibits = $this->_helper->db->getTable('NeatlineExhibit');
+        $record = $__exhibits->findBySlug($this->_request->slug);
 
         // Catch invalid slug.
         if (!$record) { throw new Omeka_Controller_Exception_404(
@@ -204,5 +208,6 @@ class Neatline_IndexController extends Omeka_Controller_AbstractActionController
         return $record;
 
     }
+
 
 }

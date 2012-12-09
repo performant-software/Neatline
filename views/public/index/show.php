@@ -1,9 +1,9 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
 
 /**
- * Show exhibit.
+ * Public exhibit show.
  *
  * @package     omeka
  * @subpackage  neatline

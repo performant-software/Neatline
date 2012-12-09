@@ -1,6 +1,6 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
 
 /**
  * Unit tests for view helpers.
@@ -14,13 +14,13 @@
 class Neatline_HelpersTest extends Neatline_Test_AppTestCase
 {
 
+
     protected $_isAdminTest = false;
 
+
     /**
-     * get_current_neatline() should return the current exhibit object on
+     * get_current_neatline() should return the exhibit currently bound to
      * the view.
-     *
-     * @return void.
      */
     public function testGetCurrentNeatline()
     {
@@ -35,11 +35,10 @@ class Neatline_HelpersTest extends Neatline_Test_AppTestCase
 
     }
 
+
     /**
      * has_neatlines_for_loop() should return false when there are no
      * exhibits.
-     *
-     * @return void.
      */
     public function testHasNoNeatlinesForLoop()
     {
@@ -47,11 +46,10 @@ class Neatline_HelpersTest extends Neatline_Test_AppTestCase
         $this->assertFalse(has_neatlines_for_loop());
     }
 
+
     /**
      * has_neatlines_for_loop() should return true when there is at least
      * one exhibit.
-     *
-     * @return void.
      */
     public function testHasNeatlinesForLoop()
     {
@@ -60,11 +58,10 @@ class Neatline_HelpersTest extends Neatline_Test_AppTestCase
         $this->assertTrue(has_neatlines_for_loop());
     }
 
+
     /**
-     * neatline() should return object parameters for the current exhibit
-     * object on the view.
-     *
-     * @return void.
+     * neatline() should return attribute values for the exhibit currently
+     * bound to the view.
      */
     public function testNeatlineValue()
     {
@@ -95,10 +92,9 @@ class Neatline_HelpersTest extends Neatline_Test_AppTestCase
 
     }
 
+
     /**
-     * total_neatlines() should return a count of all the exhibits.
-     *
-     * @return void.
+     * total_neatlines() should return the total number of exhibits.
      */
     public function testTotalNeatlines()
     {
@@ -116,5 +112,6 @@ class Neatline_HelpersTest extends Neatline_Test_AppTestCase
         $this->assertEquals(1, total_neatlines());
 
     }
+
 
 }

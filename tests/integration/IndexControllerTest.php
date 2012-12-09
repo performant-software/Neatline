@@ -1,6 +1,6 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
 
 /**
  * Index controller integration tests.
@@ -14,25 +14,21 @@
 class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
 {
 
+
     /**
      * Index should redirect to the browse action.
-     *
-     * @return void.
      */
     public function testIndexRedirect()
     {
-
         $this->dispatch('neatline');
         $this->assertModule('neatline');
         $this->assertController('index');
         $this->assertAction('browse');
-
     }
+
 
     /**
      * Check for base markup in the browse view.
-     *
-     * @return void.
      */
     public function testBrowseBaseMarkup()
     {
@@ -40,11 +36,10 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
         $this->assertQueryContentContains('a.add', 'Create an Exhibit');
     }
 
+
     /**
      * When there are no exhibits, the browse view should display a link
      * to create an exhibit.
-     *
-     * @return void.
      */
     public function testBrowseWithNoExhibits()
     {
@@ -63,10 +58,10 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
 
     }
 
+
     /**
-     * Show pagination when exhibits can't fit on a single page.
-     *
-     * @return void.
+     * Pagination should be displayed when there are too many the exhibits
+     * to fit on one page.
      */
     public function testBrowsePagination()
     {
@@ -87,10 +82,9 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
 
     }
 
+
     /**
      * Check for base markup in the add view.
-     *
-     * @return void.
      */
     public function testAddBaseMarkup()
     {
@@ -106,20 +100,17 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
 
     }
 
+
     /**
      * If the title field is blank, flash error.
-     *
-     * @return void.
      */
     public function testAddNoTitleError()
     {
 
         // Missing title.
-        $this->request->setMethod('POST')
-            ->setPost(array(
-                'title' => ''
-            )
-        );
+        $this->request->setMethod('POST')->setPost(array(
+            'title' => ''
+        ));
 
         // No exhibits at the start.
         $this->assertEquals($this->_exhibitsTable->count(), 0);
@@ -143,20 +134,17 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
 
     }
 
+
     /**
      * If the slug field is blank, flash error.
-     *
-     * @return void.
      */
     public function testAddNoSlugError()
     {
 
         // Missing slug.
-        $this->request->setMethod('POST')
-            ->setPost(array(
-                'slug' => ''
-            )
-        );
+        $this->request->setMethod('POST')->setPost(array(
+            'slug' => ''
+        ));
 
         // No exhibits at the start.
         $this->assertEquals($this->_exhibitsTable->count(), 0);
@@ -180,20 +168,17 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
 
     }
 
+
     /**
      * If slug has spaces, flash error.
-     *
-     * @return void.
      */
     public function testAddInvalidSlugWithSpacesError()
     {
 
         // Spaces.
-        $this->request->setMethod('POST')
-            ->setPost(array(
-                'slug' => 'slug with spaces'
-            )
-        );
+        $this->request->setMethod('POST')->setPost(array(
+            'slug' => 'slug with spaces'
+        ));
 
         // No exhibits at the start.
         $this->assertEquals($this->_exhibitsTable->count(), 0);
@@ -209,7 +194,7 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
         // Check for the error.
         $this->assertQueryContentContains(
             'ul.error li',
-            'The slug can only contain lowercase letters, numbers, and hyphens.'
+            'The slug can only contain letters, numbers, and hyphens.'
         );
 
         // No exhibit should have been created.
@@ -217,20 +202,17 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
 
     }
 
+
     /**
      * If slug has capital letters, flash error.
-     *
-     * @return void.
      */
     public function testAddInvalidSlugWithCapsError()
     {
 
         // Spaces.
-        $this->request->setMethod('POST')
-            ->setPost(array(
-                'slug' => 'Slug-With-Capitals'
-            )
-        );
+        $this->request->setMethod('POST')->setPost(array(
+            'slug' => 'Slug-With-Capitals'
+        ));
 
         // No exhibits at the start.
         $this->assertEquals($this->_exhibitsTable->count(), 0);
@@ -246,7 +228,7 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
         // Check for the error.
         $this->assertQueryContentContains(
             'ul.error li',
-            'The slug can only contain lowercase letters, numbers, and hyphens.'
+            'The slug can only contain letters, numbers, and hyphens.'
         );
 
         // No exhibit should have been created.
@@ -254,20 +236,17 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
 
     }
 
+
     /**
      * If slug has non-alphanumerics, flash error.
-     *
-     * @return void.
      */
     public function testAddInvalidSlugWithNonAlphasError()
     {
 
         // Spaces.
-        $this->request->setMethod('POST')
-            ->setPost(array(
-                'slug' => 'slug-with-non-alphas!'
-            )
-        );
+        $this->request->setMethod('POST')->setPost(array(
+            'slug' => 'slug-with-non-alphas!'
+        ));
 
         // No exhibits at the start.
         $this->assertEquals($this->_exhibitsTable->count(), 0);
@@ -283,7 +262,7 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
         // Check for the error.
         $this->assertQueryContentContains(
             'ul.error li',
-            'The slug can only contain lowercase letters, numbers, and hyphens.'
+            'The slug can only contain letters, numbers, and hyphens.'
         );
 
         // No exhibit should have been created.
@@ -291,20 +270,17 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
 
     }
 
+
     /**
      * If slug is valid, do not flash error.
-     *
-     * @return void.
      */
     public function testAddNoErrorForValidSlug()
     {
 
         // Spaces.
-        $this->request->setMethod('POST')
-            ->setPost(array(
-                'slug' => 'valid-slug'
-            )
-        );
+        $this->request->setMethod('POST')->setPost(array(
+            'slug' => 'valid-slug'
+        ));
 
         // No exhibits at the start.
         $this->assertEquals($this->_exhibitsTable->count(), 0);
@@ -327,6 +303,7 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
         $this->assertEquals($this->_exhibitsTable->count(), 0);
 
     }
+
 
     /**
      * If slug is taken, flash error.

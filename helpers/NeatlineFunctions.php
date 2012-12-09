@@ -1,6 +1,6 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
 
 /**
  * Miscellaneous helpers.
@@ -14,10 +14,6 @@
 
 /**
  * Include the static files for the Neatline.
- *
- * @param Omeka_record $exhibit The exhibit.
- *
- * @return void.
  */
 function neatline_queueNeatlineAssets()
 {
@@ -27,10 +23,9 @@ function neatline_queueNeatlineAssets()
     queue_js_file('bootstrap');
 }
 
+
 /**
  * Include the static files for the editor.
- *
- * @return void.
  */
 function neatline_queueEditorAssets()
 {
@@ -39,34 +34,23 @@ function neatline_queueEditorAssets()
     queue_js_file('bootstrap');
 }
 
-/**
- * Try to find a CSS file that matches the exhibit slug.
- *
- * @return void.
- */
-function neatline_queueExhibitCss($exhibit)
-{
-    try { queue_css_file($exhibit->slug); } catch (Exception $e) {}
-}
 
 /**
  * Include the Google Maps API.
- *
- * @return void.
  */
 function neatline_queueGoogleMapsApi()
 {
     $url = 'http://maps.google.com/maps/api/js?v=3.8&sensor=false';
     $headScript = get_view()->headScript();
-    $headScript->appendScript('', 'text/javascript', array('src' => $url));
+    $headScript->appendScript('','text/javascript',array('src'=>$url));
 }
+
 
 /**
  * Construct exhibit globals.
  *
  * @param NeatlineExhibit $exhibit The exhibit.
- *
- * @return array The exhibit data.
+ * @return string A JSON representation of the exhibit defaults.
  */
 function neatline_exhibitGlobals($exhibit)
 {
@@ -78,39 +62,44 @@ function neatline_exhibitGlobals($exhibit)
     ));
 }
 
+
 /**
  * Construct editor globals.
  *
  * @param NeatlineExhibit $exhibit The exhibit.
- *
- * @return array The exhibit data.
+ * @return array A JSON representation of the editor defaults.
  */
 function neatline_editorGlobals($exhibit)
 {
     return json_encode(array('id' => $exhibit->id));
 }
 
+
 /**
  * Return specific field for a neatline record.
  *
- * @param string
- * @param array $options
- * @param neatlines|null
- * @return string
+ * @param string $fieldname The model attribute name being requested.
+ * @param array $options An array of options.
+ * @param Omeka_Record $neatline|null The exhibit.
+ * @return string The field value.
  */
 function neatline($fieldname, $options = array(), $neatline = null)
 {
 
+    // Get the exhibit and raw field value.
     $neatline = $neatline ? $neatline : get_current_neatline();
     $fieldname = strtolower($fieldname);
     $text = $neatline->$fieldname;
 
-    if(isset($options['snippet']))
+    // Truncate if snippet.
+    if(isset($options['snippet'])) {
         $text = nls2p(snippet($text, 0, (int)$options['snippet']));
+    }
 
     return $text;
 
 }
+
 
 /**
  * Returns the current neatline.
@@ -122,8 +111,9 @@ function get_current_neatline()
     return get_view()->neatline_exhibit;
 }
 
+
 /**
- * Determines whether there are any neatlines to loop on the view.
+ * Determine whether there are any neatlines to loop on the view.
  *
  * @return boolean
  */
@@ -133,8 +123,9 @@ function has_neatlines_for_loop()
     return ($view->neatline_exhibits and count($view->neatline_exhibits));
 }
 
+
 /**
- * Returns the total number of neatlines in the database.
+ * Returns the total number of exhibits in the database.
  *
  * @return integer
  */
@@ -143,13 +134,14 @@ function total_neatlines()
     return get_db()->getTable('NeatlineExhibits')->count();
 }
 
+
 /**
  * Returns a link to a Neatline exhibit.
  *
- * @param string HTML for the text of the link.
- * @param array Attributes for the link tag. (optional)
- * @param string The action for the link. Default is 'show'.
- * @param NeatlineExhibit|null
+ * @param string $text HTML for the text of the link.
+ * @param array $props Attributes for the link tag. (optional)
+ * @param string $action The action for the link. Default is 'show'.
+ * @param NeatlineExhibit|null $neatline The exhibit record.
  * @return string The HTML link.
  */
 function link_to_neatline(
@@ -160,12 +152,15 @@ function link_to_neatline(
     $public = true)
 {
 
+    // Get the exhibit, form the link text.
     $neatline = $neatline ? $neatline : get_current_neatline();
-    $text = $text ? $text : strip_formatting(neatline('title', $neatline));
+    $text = $text ? $text : strip_formatting(neatline('title',$neatline));
 
+    // Form the identified (id or slug).
     if ($action == 'show') { $slug = $neatline->slug; }
     else { $slug = $neatline->id; }
 
+    // Form the route and link tag.
     $route = 'neatline/' . $action . '/' . $slug;
     $uri = $public ? public_url($route) : url($route);
     $props['href'] = $uri;
@@ -173,10 +168,11 @@ function link_to_neatline(
 
 }
 
+
 /**
  * Returns the number of records used in a given Neatline.
  *
- * @param NeatlineExhibit|null
+ * @param NeatlineExhibit|null $neatline The exhibit record.
  * @return integer
  */
 function total_records_for_neatline($neatline = null)
