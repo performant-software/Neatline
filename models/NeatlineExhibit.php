@@ -88,26 +88,6 @@ class NeatlineExhibit extends Omeka_Record_AbstractRecord
 
 
     /**
-     * Set `added` and `modified` fields before a new record is inserted.
-     */
-    protected function beforeInsert()
-    {
-        $now = Zend_Date::now()->toString(self::DATE_FORMAT);
-        $this->added = $now;
-        $this->modified = $now;
-    }
-
-
-    /**
-     * Update the `modified` field before a record is saved.
-     */
-    protected function beforeSave()
-    {
-        $this->modified = Zend_Date::now()->toString(self::DATE_FORMAT);
-    }
-
-
-    /**
      * Save data from the add/edit form.
      *
      * @param array $formValues The form values.
@@ -128,23 +108,6 @@ class NeatlineExhibit extends Omeka_Record_AbstractRecord
     {
         $recordsTable = $this->getTable('NeatlineRecord');
         return $recordsTable->countActiveRecordsByExhibit($this);
-    }
-
-
-    /**
-     * Delete all child data records when an exhibit is deleted.
-     */
-    public function delete()
-    {
-
-        // Delete all child records.
-        $recordsTable = $this->getTable('NeatlineRecord');
-        $recordsTable->delete("{$this->_db->prefix}neatline_records",
-            array('exhibit_id = ?' => $this->id));
-
-        // Call parent.
-        parent::delete();
-
     }
 
 
@@ -191,6 +154,41 @@ class NeatlineExhibit extends Omeka_Record_AbstractRecord
         if (!$user->exists())
             throw new RuntimeException(__("User does not exist."));
         $this->creator_id = $user->id;
+    }
+
+
+    /**
+     * Before a new record is saved:
+     * - Set `added` fields to the current timestamp if the record is new.
+     * - Set `modified` fields to the current timestamp.
+     * - Create a default exhibit style tag.
+     */
+    protected function beforeSave()
+    {
+
+        // Set `modified`.
+        $now = Zend_Date::now()->toString(self::DATE_FORMAT);
+        $this->modified = $now;
+
+        // If the record is being inserted.
+        if (!$this->exists()) {
+            $this->added = $now;
+        }
+
+    }
+
+
+    /**
+     * Delete all child data records when an exhibit is deleted.
+     */
+    protected function beforeDelete()
+    {
+
+        // Delete all child records.
+        $recordsTable = $this->getTable('NeatlineRecord');
+        $recordsTable->delete("{$this->_db->prefix}neatline_records",
+            array('exhibit_id = ?' => $this->id));
+
     }
 
 

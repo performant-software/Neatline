@@ -69,6 +69,78 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
      */
     public $map_zoom;
 
+    /**
+     * *** Tag reference.
+     * int(10) unsigned NOT NULL
+     */
+    public $vector_color;
+
+    /**
+     * *** Tag reference.
+     * int(10) unsigned NOT NULL
+     */
+    public $stroke_color;
+
+    /**
+     * *** Tag reference.
+     * int(10) unsigned NOT NULL
+     */
+    public $select_color;
+
+    /**
+     * *** Tag reference.
+     * int(10) unsigned NOT NULL
+     */
+    public $vector_opacity;
+
+    /**
+     * *** Tag reference.
+     * int(10) unsigned NOT NULL
+     */
+    public $select_opacity;
+
+    /**
+     * *** Tag reference.
+     * int(10) unsigned NOT NULL
+     */
+    public $stroke_opacity;
+
+    /**
+     * *** Tag reference.
+     * int(10) unsigned NOT NULL
+     */
+    public $image_opacity;
+
+    /**
+     * *** Tag reference.
+     * int(10) unsigned NOT NULL
+     */
+    public $stroke_width;
+
+    /**
+     * *** Tag reference.
+     * int(10) unsigned NOT NULL
+     */
+    public $point_radius;
+
+    /**
+     * *** Tag reference.
+     * int(10) unsigned NOT NULL
+     */
+    public $point_image;
+
+    /**
+     * *** Tag reference.
+     * int(10) unsigned NOT NULL
+     */
+    public $max_zoom;
+
+    /**
+     * *** Tag reference.
+     * int(10) unsigned NOT NULL
+     */
+    public $min_zoom;
+
 
     /**
      * Instantiate and foreign keys.

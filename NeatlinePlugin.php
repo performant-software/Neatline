@@ -95,6 +95,19 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
             `map_focus`         varchar(100) NULL,
             `map_zoom`          int(10) unsigned NULL,
 
+            `vector_color`      int(10) unsigned NOT NULL,
+            `stroke_color`      int(10) unsigned NOT NULL,
+            `select_color`      int(10) unsigned NOT NULL,
+            `vector_opacity`    int(10) unsigned NOT NULL,
+            `select_opacity`    int(10) unsigned NOT NULL,
+            `stroke_opacity`    int(10) unsigned NOT NULL,
+            `image_opacity`     int(10) unsigned NOT NULL,
+            `stroke_width`      int(10) unsigned NOT NULL,
+            `point_radius`      int(10) unsigned NOT NULL,
+            `point_image`       int(10) unsigned NOT NULL,
+            `max_zoom`          int(10) unsigned NOT NULL,
+            `min_zoom`          int(10) unsigned NOT NULL,
+
              PRIMARY KEY        (`id`),
              FULLTEXT KEY       (`title`, `slug`, `body`)
 
@@ -112,6 +125,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
             `exhibit_id`        int(10) unsigned NULL,
             `is_default`        tinyint(1) NULL,
             `tag`               tinytext COLLATE utf8_unicode_ci NULL,
+
             `vector_color`      tinytext COLLATE utf8_unicode_ci NULL,
             `stroke_color`      tinytext COLLATE utf8_unicode_ci NULL,
             `select_color`      tinytext COLLATE utf8_unicode_ci NULL,

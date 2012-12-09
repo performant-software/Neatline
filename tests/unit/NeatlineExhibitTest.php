@@ -78,6 +78,81 @@ class Neatline_NeatlineExhibitTest extends Neatline_Test_AppTestCase
 
 
     /**
+     * getNumberOfRecords() should return the exhibit record count.
+     */
+    public function testGetNumberOfRecords()
+    {
+
+        // Create exhibit.
+        $exhibit = $this->__exhibit();
+
+        // Create records.
+        $record1 = new NeatlineRecord(null, $exhibit);
+        $record2 = new NeatlineRecord(null, $exhibit);
+        $record3 = new NeatlineRecord(null, $exhibit);
+        $record1->map_active = 1;
+        $record2->map_active = 1;
+        $record3->map_active = 1;
+        $record1->save();
+        $record2->save();
+        $record3->save();
+
+        // Check count.
+        $this->assertEquals($exhibit->getNumberOfRecords(), 3);
+
+    }
+
+
+    /**
+     * beforeSave() should set `added` and `modified` when the record has
+     * not been saved before (when it is being inserted).
+     */
+    public function testBeforeInsertTimestamps()
+    {
+
+        // Create exhibit.
+        $exhibit = new NeatlineExhibit();
+        $exhibit->slug = 'test';
+        $exhibit->save();
+
+        // Check for non-null timestamps.
+        $this->assertNotNull($exhibit->modified);
+        $this->assertNotNull($exhibit->added);
+
+    }
+
+
+    /**
+     * beforeSave() should just set `modified` when the record has already
+     * been saved (when it is being updated).
+     */
+    public function testBeforeSaveTimestamps()
+    {
+
+        // Create exhibit.
+        $exhibit = $this->__exhibit();
+        $exhibit->modified = '2000-01-01';
+        $exhibit->added = '2000-01-01';
+        $exhibit->save();
+
+        // Changed `modified`, unchanged `added`.
+        $this->assertNotEquals($exhibit->modified, '2000-01-01');
+        $this->assertEquals($exhibit->added, '2000-01-01');
+
+    }
+
+
+    /**
+     * beforeSave() should create a default style tag for the exhibit with
+     * values drawn from the system defaults when the exhibit is inserted.
+     */
+    public function testBeforeSaveDefaultTag()
+    {
+
+    }
+
+
+    /**
      * The delete() method should delete the exhibit record and all child
      * data records.
      */
@@ -112,32 +187,6 @@ class Neatline_NeatlineExhibitTest extends Neatline_Test_AppTestCase
         // 1 exhibits, 2 data records.
         $this->assertEquals($_exhibitsTable->count(), 1);
         $this->assertEquals($_recordsTable->count(), 2);
-
-    }
-
-
-    /**
-     * getNumberOfRecords() should return the exhibit record count.
-     */
-    public function testGetNumberOfRecords()
-    {
-
-        // Create exhibit.
-        $exhibit = $this->__exhibit();
-
-        // Create records.
-        $record1 = new NeatlineRecord(null, $exhibit);
-        $record2 = new NeatlineRecord(null, $exhibit);
-        $record3 = new NeatlineRecord(null, $exhibit);
-        $record1->map_active = 1;
-        $record2->map_active = 1;
-        $record3->map_active = 1;
-        $record1->save();
-        $record2->save();
-        $record3->save();
-
-        // Check count.
-        $this->assertEquals($exhibit->getNumberOfRecords(), 3);
 
     }
 
