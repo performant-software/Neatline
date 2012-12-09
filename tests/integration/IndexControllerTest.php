@@ -296,7 +296,7 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
         // Check for the error.
         $this->assertNotQueryContentContains(
             'ul.error li',
-            'The slug can only contain lowercase letters, numbers, and hyphens.'
+            'The slug can only contain letters, numbers, and hyphens.'
         );
 
         // No exhibit should have been created.
@@ -307,8 +307,6 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
 
     /**
      * If slug is taken, flash error.
-     *
-     * @return void.
      */
     public function testAddDuplicateSlugError()
     {
@@ -317,11 +315,9 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
         $exhibit = $this->__exhibit('test-exhibit');
 
         // Duplicate slug.
-        $this->request->setMethod('POST')
-            ->setPost(array(
-                'slug' => 'test-exhibit'
-            )
-        );
+        $this->request->setMethod('POST')->setPost(array(
+            'slug' => 'test-exhibit'
+        ));
 
         // No exhibits at the start.
         $this->assertEquals($this->_exhibitsTable->count(), 1);
@@ -345,22 +341,19 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
 
     }
 
+
     /**
      * Valid form should create new exhibit.
-     *
-     * @return void.
      */
     public function testAddSuccess()
     {
 
-        $this->request->setMethod('POST')
-            ->setPost(array(
-                'title' => 'Test Exhibit',
-                'description' => 'Test description.',
-                'slug' => 'test-exhibit',
-                'public' => 1
-            )
-        );
+        $this->request->setMethod('POST')->setPost(array(
+            'title'         => 'Test Exhibit',
+            'description'   => 'Test description.',
+            'slug'          => 'test-exhibit',
+            'public'        => 1
+        ));
 
         // No exhibits at the start.
         $this->assertEquals($this->_exhibitsTable->count(), 0);
@@ -380,10 +373,9 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
 
     }
 
+
     /**
      * Test for base markup and field population in edit view.
-     *
-     * @return void.
      */
     public function testEditBaseMarkup()
     {
@@ -399,24 +391,31 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
         $this->dispatch('neatline/edit/'.$exhibit->id);
 
         // Title.
-        $this->assertXpath('//input[@name="title"][@value="Test Exhibit"]');
+        $this->assertXpath(
+            '//input[@name="title"][@value="Test Exhibit"]'
+        );
 
         // Description.
-        $this->assertXpathContentContains('//textarea[@name="description"]',
-            'Test description.');
+        $this->assertXpathContentContains(
+            '//textarea[@name="description"]',
+            'Test description.'
+        );
 
         // Slug.
-        $this->assertXpath('//input[@name="slug"][@value="test-exhibit"]');
+        $this->assertXpath(
+            '//input[@name="slug"][@value="test-exhibit"]'
+        );
 
         // Public.
-        $this->assertXpath('//input[@name="public"][@checked="checked"]');
+        $this->assertXpath(
+            '//input[@name="public"][@checked="checked"]'
+        );
 
     }
 
+
     /**
      * If the title field is blank, flash error.
-     *
-     * @return void.
      */
     public function testEditNoTitleError()
     {
@@ -425,11 +424,9 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
         $exhibit = $this->__exhibit();
 
         // Missing title.
-        $this->request->setMethod('POST')
-            ->setPost(array(
-                'title' => ''
-            )
-        );
+        $this->request->setMethod('POST')->setPost(array(
+            'title' => ''
+        ));
 
         // Submit the form.
         $this->dispatch('neatline/edit/'.$exhibit->id);
@@ -447,10 +444,9 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
 
     }
 
+
     /**
      * If the slug field is blank, flash error.
-     *
-     * @return void.
      */
     public function testEditNoSlugError()
     {
@@ -459,11 +455,9 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
         $exhibit = $this->__exhibit();
 
         // Missing slug.
-        $this->request->setMethod('POST')
-            ->setPost(array(
-                'slug' => ''
-            )
-        );
+        $this->request->setMethod('POST')->setPost(array(
+            'slug' => ''
+        ));
 
         // Submit the form.
         $this->dispatch('neatline/edit/'.$exhibit->id);
@@ -481,10 +475,9 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
 
     }
 
+
     /**
      * If slug has spaces, flash error.
-     *
-     * @return void.
      */
     public function testEditInvalidSlugWithSpacesError()
     {
@@ -493,11 +486,9 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
         $exhibit = $this->__exhibit();
 
         // Spaces.
-        $this->request->setMethod('POST')
-            ->setPost(array(
-                'slug' => 'slug with spaces'
-            )
-        );
+        $this->request->setMethod('POST')->setPost(array(
+            'slug' => 'slug with spaces'
+        ));
 
         // Submit the form.
         $this->dispatch('neatline/edit/'.$exhibit->id);
@@ -510,15 +501,14 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
         // Check for the error.
         $this->assertQueryContentContains(
             'ul.error li',
-            'The slug can only contain lowercase letters, numbers, and hyphens.'
+            'The slug can only contain letters, numbers, and hyphens.'
         );
 
     }
 
+
     /**
      * If slug has capital letters, flash error.
-     *
-     * @return void.
      */
     public function testEditInvalidSlugWithCapsError()
     {
@@ -527,11 +517,9 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
         $exhibit = $this->__exhibit();
 
         // Spaces.
-        $this->request->setMethod('POST')
-            ->setPost(array(
-                'slug' => 'Slug-With-Capitals'
-            )
-        );
+        $this->request->setMethod('POST')->setPost(array(
+            'slug' => 'Slug-With-Capitals'
+        ));
 
         // Submit the form.
         $this->dispatch('neatline/edit/'.$exhibit->id);
@@ -544,15 +532,14 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
         // Check for the error.
         $this->assertQueryContentContains(
             'ul.error li',
-            'The slug can only contain lowercase letters, numbers, and hyphens.'
+            'The slug can only contain letters, numbers, and hyphens.'
         );
 
     }
 
+
     /**
      * If slug has non-alphanumerics, flash error.
-     *
-     * @return void.
      */
     public function testEditInvalidSlugWithNonAlphasError()
     {
@@ -561,11 +548,9 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
         $exhibit = $this->__exhibit();
 
         // Spaces.
-        $this->request->setMethod('POST')
-            ->setPost(array(
-                'slug' => 'slug-with-non-alphas!'
-            )
-        );
+        $this->request->setMethod('POST')->setPost(array(
+            'slug' => 'slug-with-non-alphas!'
+        ));
 
         // Submit the form.
         $this->dispatch('neatline/edit/'.$exhibit->id);
@@ -578,15 +563,14 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
         // Check for the error.
         $this->assertQueryContentContains(
             'ul.error li',
-            'The slug can only contain lowercase letters, numbers, and hyphens.'
+            'The slug can only contain letters, numbers, and hyphens.'
         );
 
     }
 
+
     /**
      * If slug is valid, do not flash error.
-     *
-     * @return void.
      */
     public function testEditNoErrorForValidSlug()
     {
@@ -595,11 +579,9 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
         $exhibit = $this->__exhibit();
 
         // Spaces.
-        $this->request->setMethod('POST')
-            ->setPost(array(
-                'slug' => 'valid-slug'
-            )
-        );
+        $this->request->setMethod('POST')->setPost(array(
+            'slug' => 'valid-slug'
+        ));
 
         // Submit the form.
         $this->dispatch('neatline/edit/'.$exhibit->id);
@@ -612,15 +594,13 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
         // Check for the error.
         $this->assertNotQueryContentContains(
             'ul.error li',
-            'The slug can only contain lowercase letters, numbers, and hyphens.'
+            'The slug can only contain letters, numbers, and hyphens.'
         );
 
     }
 
     /**
      * If slug is taken, flash error.
-     *
-     * @return void.
      */
     public function testEditDuplicateSlugError()
     {
@@ -630,11 +610,9 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
         $exhibit2 = $this->__exhibit('test-exhibit-2');
 
         // Duplicate slug.
-        $this->request->setMethod('POST')
-            ->setPost(array(
-                'slug' => 'test-exhibit-2'
-            )
-        );
+        $this->request->setMethod('POST')->setPost(array(
+            'slug' => 'test-exhibit-2'
+        ));
 
         // No exhibits at the start.
         $this->dispatch('neatline/edit/'.$exhibit1->id);
@@ -652,10 +630,9 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
 
     }
 
+
     /**
      * Valid form should edit exhibit.
-     *
-     * @return void.
      */
     public function testEditSuccess()
     {
@@ -664,14 +641,12 @@ class Neatline_IndexControllerTest extends Neatline_Test_AppTestCase
         $exhibit = $this->__exhibit();
 
         // Valid form.
-        $this->request->setMethod('POST')
-            ->setPost(array(
-                'title' => 'New Exhibit',
-                'description' => 'New description.',
-                'slug' => 'new-exhibit',
-                'public' => 0
-            )
-        );
+        $this->request->setMethod('POST')->setPost(array(
+            'title'         => 'New Exhibit',
+            'description'   => 'New description.',
+            'slug'          => 'new-exhibit',
+            'public'        => 0
+        ));
 
         // Submit the form.
         $this->dispatch('neatline/edit/'.$exhibit->id);
