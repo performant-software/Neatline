@@ -72,4 +72,18 @@ class NeatlineTagTable extends Omeka_Db_Table
     }
 
 
+    /**
+     * Get the default style tag for an exhibit.
+     *
+     * @param Omeka_Record $exhibit The exhibit record.
+     * @return Omeka_Record $tag The default tag.
+     */
+    public function getExhibitDefault($exhibit)
+    {
+        return $this->fetchObject(
+            $this->getSelect()->where('exhibit_id = ?', $exhibit->id)
+        );
+    }
+
+
 }

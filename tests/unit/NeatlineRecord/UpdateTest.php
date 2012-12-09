@@ -18,7 +18,7 @@ class Neatline_NeatlineRecordTest_Update
 
     /**
      * update() should update all non-empty properties.
-     **/
+     */
     public function testUpdate()
     {
 
@@ -31,16 +31,16 @@ class Neatline_NeatlineRecordTest_Update
         $record->title              = 'title';
         $record->body               = 'body';
         $record->tags               = 'tag1,tag2';
-        $record->vector_color       = '#vector';
-        $record->stroke_color       = '#stroke';
-        $record->select_color       = '#select';
-        $record->vector_opacity     = 1;
-        $record->select_opacity     = 2;
-        $record->stroke_opacity     = 3;
-        $record->image_opacity      = 4;
-        $record->stroke_width       = 5;
-        $record->point_radius       = 6;
-        $record->point_image        = 'file.png';
+        // $record->vector_color       = '#vector';
+        // $record->stroke_color       = '#stroke';
+        // $record->select_color       = '#select';
+        // $record->vector_opacity     = 1;
+        // $record->select_opacity     = 2;
+        // $record->stroke_opacity     = 3;
+        // $record->image_opacity      = 4;
+        // $record->stroke_width       = 5;
+        // $record->point_radius       = 6;
+        // $record->point_image        = 'file.png';
         $record->map_focus          = 'lat/lon';
         $record->map_zoom           = 7;
         $record->map_active         = 1;
@@ -78,16 +78,16 @@ class Neatline_NeatlineRecordTest_Update
         $this->assertEquals($record->title, 'title2');
         $this->assertEquals($record->body, 'body2');
         $this->assertEquals($record->tags, 'tag3,tag4');
-        $this->assertEquals($record->vector_color, '#vector2');
-        $this->assertEquals($record->stroke_color, '#stroke2');
-        $this->assertEquals($record->select_color, '#select2');
-        $this->assertEquals($record->vector_opacity, 10);
-        $this->assertEquals($record->select_opacity, 20);
-        $this->assertEquals($record->stroke_opacity, 30);
-        $this->assertEquals($record->image_opacity, 40);
-        $this->assertEquals($record->stroke_width, 50);
-        $this->assertEquals($record->point_radius, 60);
-        $this->assertEquals($record->point_image, 'file2.png');
+        // $this->assertEquals($record->vector_color, '#vector2');
+        // $this->assertEquals($record->stroke_color, '#stroke2');
+        // $this->assertEquals($record->select_color, '#select2');
+        // $this->assertEquals($record->vector_opacity, 10);
+        // $this->assertEquals($record->select_opacity, 20);
+        // $this->assertEquals($record->stroke_opacity, 30);
+        // $this->assertEquals($record->image_opacity, 40);
+        // $this->assertEquals($record->stroke_width, 50);
+        // $this->assertEquals($record->point_radius, 60);
+        // $this->assertEquals($record->point_image, 'file2.png');
         $this->assertEquals($record->map_focus, 'lat2/lon2');
         $this->assertEquals($record->map_zoom, 70);
         $this->assertEquals($record->map_active, 0);

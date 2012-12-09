@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
 
 /**
- * Tests for functionality in the plugin manager class.
+ * Tests `before_delete_item` hook callback in plugin manager class.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -12,7 +12,8 @@
  */
 
 
-class NeatlinePluginTest extends Neatline_Test_AppTestCase
+class NeatlinePluginTest_BeforeDeleteItemHook
+    extends Neatline_Test_AppTestCase
 {
 
 
@@ -28,7 +29,7 @@ class NeatlinePluginTest extends Neatline_Test_AppTestCase
         // Create record.
         $item = $this->__item();
         $exhibit = $this->__exhibit();
-        $record = new NeatlineRecord($item, $neatline);
+        $record = new NeatlineRecord($item, $exhibit);
         $record->save();
 
         // Delete parent item.

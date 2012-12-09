@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
 
 /**
- * Tag table tests.
+ * Tests for `createExhibitDefault()` on NeatlineTagTable.
  *
  * @package     omeka
  * @subpackage  neatline

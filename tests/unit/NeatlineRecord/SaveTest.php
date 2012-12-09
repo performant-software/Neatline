@@ -19,7 +19,7 @@ class Neatline_NeatlineRecordTest_Save
     /**
      * save() should update the modified field on the parent exhibit.
      */
-    public function testSave()
+    public function testUpdateParentModified()
     {
 
         // Get time.
@@ -41,6 +41,59 @@ class Neatline_NeatlineRecordTest_Save
         // Get delta and check.
         $delta = strtotime($timestamp) - strtotime($exhibit->modified);
         $this->assertLessThanOrEqual(1, $delta);
+
+    }
+
+
+    /**
+     * save() should update the coverage if a WKT string is passed.
+     */
+    public function testSetCoverage()
+    {
+
+        // Create exhibit and record.
+        $exhibit = $this->__exhibit();
+        $record = new NeatlineRecord(null, $exhibit);
+
+        // Set coverage.
+        $record->save('GEOMETRYCOLLECTION(
+            POLYGON((0 0,0 4,4 4,4 0,0 0)))');
+
+        // Re-get, check for set coverage.
+        $record = $this->_recordsTable->find($record->id);
+        $this->assertNotNull($record->coverage);
+
+    }
+
+
+    /**
+     * When save() is called, any NULL style attributes should be pointed
+     * at the default tag for the parent exhibit.
+     *
+     * @group tags
+     */
+    public function testSetDefaultStyles()
+    {
+
+        // Create exhibit and record.
+        $exhibit = $this->__exhibit();
+        $record = new NeatlineRecord(null, $exhibit);
+        $record->save();
+
+        // Get the exhibit default tag, check references.
+        $tag = $this->_tagsTable->getExhibitDefault($exhibit);
+        $this->assertEquals($record->vector_color, $tag->id);
+        $this->assertEquals($record->stroke_color, $tag->id);
+        $this->assertEquals($record->select_color, $tag->id);
+        $this->assertEquals($record->vector_opacity, $tag->id);
+        $this->assertEquals($record->select_opacity, $tag->id);
+        $this->assertEquals($record->stroke_opacity, $tag->id);
+        $this->assertEquals($record->image_opacity, $tag->id);
+        $this->assertEquals($record->stroke_width, $tag->id);
+        $this->assertEquals($record->point_radius, $tag->id);
+        $this->assertEquals($record->point_image, $tag->id);
+        $this->assertEquals($record->max_zoom, $tag->id);
+        $this->assertEquals($record->min_zoom, $tag->id);
 
     }
 

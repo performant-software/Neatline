@@ -147,6 +147,24 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
      */
     public $min_zoom;
 
+    /**
+     * List of tag-reference keys.
+     */
+    protected static $styles = array(
+        'vector_color',
+        'stroke_color',
+        'select_color',
+        'vector_opacity',
+        'select_opacity',
+        'stroke_opacity',
+        'image_opacity',
+        'stroke_width',
+        'point_radius',
+        'point_image',
+        'max_zoom',
+        'min_zoom'
+    );
+
 
     /**
      * Instantiate and foreign keys.
@@ -168,9 +186,6 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
         if (!is_null($neatline)) {
             $this->exhibit_id = $neatline->id;
         }
-
-        $this->_parent = null;
-        $this->_exhibit = null;
 
     }
 
@@ -196,9 +211,11 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
     public function setCoverage($wkt)
     {
 
-        $sql = "UPDATE `{$this->_db->prefix}neatline_records`
-                SET coverage = GeomFromText('{$wkt}')
-                WHERE id = {$this->id}";
+        $sql = "
+            UPDATE `{$this->_db->prefix}neatline_records`
+            SET coverage = GeomFromText('{$wkt}')
+            WHERE id = {$this->id}
+        ";
 
         $this->_db->query($sql);
 
@@ -217,7 +234,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
 
         // Get item if non-null item_id.
         if (!is_null($this->item_id)) {
-           $item = $this->getTable('Item')->find($this->item_id);
+            $item = $this->getTable('Item')->find($this->item_id);
         }
 
         return $item;
@@ -232,14 +249,8 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
      */
     public function getExhibit()
     {
-
-        if (is_null($this->_exhibit)) {
-            $this->_exhibit = $this->getTable('NeatlineExhibit')
-                ->find($this->exhibit_id);
-        }
-
-        return $this->_exhibit;
-
+        return $this->getTable('NeatlineExhibit')
+            ->find($this->exhibit_id);
     }
 
 
@@ -333,7 +344,17 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
     public function save($coverage = null)
     {
 
-        parent::save();
+        // Get parent exhibit.
+        $exhibit = $this->getExhibit();
+
+        // Get default tag.
+        $tagsTable = $this->getTable('NeatlineTag');
+        $tag = $tagsTable->getExhibitDefault($exhibit);
+
+        // Set default styles.
+        foreach (self::$styles as $style) {
+            if (is_null($this[$style])) $this[$style] = $tag->id;
+        }
 
         // Set `modified` on parent.
         if (!is_null($this->exhibit_id)) {
@@ -345,6 +366,8 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
         if (!is_null($coverage)) {
             $this->setCoverage($coverage);
         }
+
+        parent::save();
 
     }
 
