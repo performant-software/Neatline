@@ -46,6 +46,12 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
     public $body;
 
     /**
+     * A comma-delimited list of tags.
+     * text COLLATE utf8_unicode_ci NULL
+     */
+    public $tags;
+
+    /**
      * KML for geometries.
      * mediumtext COLLATE utf8_unicode_ci NULL
      */

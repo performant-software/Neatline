@@ -27,8 +27,10 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
         $record = new NeatlineRecord($item, $neatline);
 
         // Set.
+        $record->slug               = 'slug';
         $record->title              = 'title';
         $record->body               = 'body';
+        $record->tags               = 'tag1,tag2';
         $record->vector_color       = '#ffffff';
         $record->stroke_color       = '#ffffff';
         $record->select_color       = '#ffffff';
@@ -48,8 +50,10 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
         $record = $this->_recordsTable->find($record->id);
 
         // Check values.
+        $this->assertEquals($record->slug, 'slug');
         $this->assertEquals($record->title, 'title');
         $this->assertEquals($record->body, 'body');
+        $this->assertEquals($record->tags, 'tag1,tag2');
         $this->assertEquals($record->vector_color, '#ffffff');
         $this->assertEquals($record->stroke_color, '#ffffff');
         $this->assertEquals($record->select_color, '#ffffff');
@@ -286,10 +290,11 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
         $exhibit = $this->__exhibit();
         $record = $this->__record();
 
-        // Set parameters.
+        // Set:
+        $record->slug               = 'slug';
         $record->title              = 'title';
         $record->body               = 'body';
-        $record->slug               = 'slug';
+        $record->tags               = 'tag1,tag2';
         $record->vector_color       = '#vector';
         $record->stroke_color       = '#stroke';
         $record->select_color       = '#select';
@@ -308,9 +313,10 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
         $values = array(
             'id'                    => (string) $record->id,
             'item_id'               => null,
+            'slug'                  => 'slug2',
             'title'                 => 'title2',
             'body'                  => 'body2',
-            'slug'                  => 'slug2',
+            'tags'                  => 'tag3,tag4',
             'vector_color'          => '#vector2',
             'stroke_color'          => '#stroke2',
             'select_color'          => '#select2',
@@ -332,9 +338,10 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
         $record = $this->_recordsTable->find($record->id);
 
         // Check new values.
+        $this->assertEquals($record->slug, 'slug2');
         $this->assertEquals($record->title, 'title2');
         $this->assertEquals($record->body, 'body2');
-        $this->assertEquals($record->slug, 'slug2');
+        $this->assertEquals($record->tags, 'tag3,tag4');
         $this->assertEquals($record->vector_color, '#vector2');
         $this->assertEquals($record->stroke_color, '#stroke2');
         $this->assertEquals($record->select_color, '#select2');

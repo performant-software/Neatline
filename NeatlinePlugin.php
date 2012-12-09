@@ -90,6 +90,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
             `slug`              varchar(100) NULL,
             `title`             mediumtext COLLATE utf8_unicode_ci NULL,
             `body`              mediumtext COLLATE utf8_unicode_ci NULL,
+            `tags`              text COLLATE utf8_unicode_ci NULL,
             `coverage`          GEOMETRY,
             `map_active`        tinyint(1) NULL,
             `map_focus`         varchar(100) NULL,
