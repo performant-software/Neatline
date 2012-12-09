@@ -1,6 +1,9 @@
 <?php
+
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
+
 /**
- * Base layer row tests.
+ * Layer table tests.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -11,26 +14,10 @@
 class Neatline_NeatlineLayerTableTest extends Neatline_Test_AppTestCase
 {
 
-    /**
-     * Instantiate the helper class, install the plugins, get the database.
-     *
-     * @return void.
-     */
-    public function setUp()
-    {
-
-        parent::setUp();
-
-        $this->db = get_db();
-        $this->_layersTable = $this->db->getTable('NeatlineLayer');
-
-    }
 
     /**
      * getLayersForSelect() should construct a well-formed array with the
      * layer ids and names.
-     *
-     * @return void.
      */
     public function testGetLayersForSelect()
     {
@@ -83,11 +70,9 @@ class Neatline_NeatlineLayerTableTest extends Neatline_Test_AppTestCase
 
     }
 
+
     /**
-     * getLayerByName() should retrieve the layer record with the passed
-     * name.
-     *
-     * @return void.
+     * getLayerByName() should get the layer record with the passed name.
      */
     public function testGetLayerByName()
     {
@@ -97,9 +82,10 @@ class Neatline_NeatlineLayerTableTest extends Neatline_Test_AppTestCase
         $layer->name = 'Test Layer';
         $layer->save();
 
-        $retrievedLayer = $this->_layersTable->getLayerByName('Test Layer');
-        $this->assertEquals($retrievedLayer->id, $layer->id);
+        $retrieved = $this->_layersTable->getLayerByName('Test Layer');
+        $this->assertEquals($retrieved->id, $layer->id);
 
     }
+
 
 }

@@ -1,6 +1,6 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
 
 /**
  * Records API integration tests.
@@ -14,11 +14,10 @@
 class Neatline_RecordsControllerTest extends Neatline_Test_AppTestCase
 {
 
+
     /**
      * INDEX should emit a JSON object containing all record data needed
      * by the front-end application.
-     *
-     * @return void.
      */
     public function testIndex()
     {
@@ -64,10 +63,9 @@ class Neatline_RecordsControllerTest extends Neatline_Test_AppTestCase
 
     }
 
+
     /**
      * GET should emit a JSON object containing data for a single record.
-     *
-     * @return void.
      */
     public function testGet()
     {
@@ -110,10 +108,9 @@ class Neatline_RecordsControllerTest extends Neatline_Test_AppTestCase
 
     }
 
+
     /**
      * PUT should update a record.
-     *
-     * @return void.
      */
     public function testPut()
     {
@@ -204,10 +201,9 @@ class Neatline_RecordsControllerTest extends Neatline_Test_AppTestCase
 
     }
 
+
     /**
      * DELETE should delete a record.
-     *
-     * @return void.
      */
     public function testDelete()
     {
@@ -235,5 +231,6 @@ class Neatline_RecordsControllerTest extends Neatline_Test_AppTestCase
         $this->assertEquals($endingCount, $startingCount-1);
 
     }
+
 
 }

@@ -1,6 +1,6 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
 
 /**
  * Data record table tests.
@@ -14,10 +14,10 @@
 class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
 {
 
+
     /**
-     * countActiveRecordsByExhibit() should return the exhibit record count.
-     *
-     * @return void.
+     * countActiveRecordsByExhibit() should number of map-active records
+     * in the exhibit.
      */
     public function testCountActiveRecordsByExhibit()
     {
@@ -49,11 +49,10 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
 
     }
 
+
     /**
-     * queryRecord() should construct a well-formed data array of an
-     * individual record for the front-end application.
-     *
-     * @return void.
+     * queryRecord() should construct an array representation of a record
+     * for the front-end application.
      */
     public function testQueryRecord()
     {
@@ -122,11 +121,10 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
 
     }
 
+
     /**
-     * queryRecords() should construct a well-formed array of records
-     * with all attributes needed for the front-end application.
-     *
-     * @return void.
+     * queryRecords() should construct an array of records with all
+     * attributes needed for the front-end application.
      */
     public function testQueryRecords()
     {
@@ -243,10 +241,9 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
 
     }
 
+
     /**
      * queryRecords() should filter on exhibit.
-     *
-     * @return void.
      */
     public function testQueryRecordsExhibitFilter()
     {
@@ -275,10 +272,9 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
 
     }
 
+
     /**
      * queryRecords() should filter on zoom.
-     *
-     * @return void.
      */
     public function testQueryRecordsZoomFilter()
     {
@@ -346,10 +342,9 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
 
     }
 
+
     /**
      * queryRecords() should filter on extent.
-     *
-     * @return void.
      */
     public function testQueryRecordsExtentFilter()
     {
@@ -391,5 +386,6 @@ class Neatline_NeatlineRecordTableTest extends Neatline_Test_AppTestCase
         $this->assertEquals($records[1]['id'], $record2->id);
 
     }
+
 
 }

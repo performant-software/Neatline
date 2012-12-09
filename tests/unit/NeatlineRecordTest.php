@@ -1,6 +1,6 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
 
 /**
  * Data row record tests.
@@ -14,10 +14,9 @@
 class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
 {
 
+
     /**
      * Test get and set on columns.
-     *
-     * @return void.
      */
     public function testAttributeAccess()
     {
@@ -71,10 +70,9 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
 
     }
 
+
     /**
      * __construct() should set foreign keys.
-     *
-     * @return void.
      */
     public function testAttributeDefaults()
     {
@@ -90,11 +88,10 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
 
     }
 
+
     /**
-     * If null is passed for the $item parameter to __construct(), the record
-     * should not be associated with any item.
-     *
-     * @return void.
+     * If null is passed for the $item parameter to __construct(), the
+     * record should not be associated with any item.
      */
     public function testAttributeDefaultsWithNoParentItem()
     {
@@ -109,10 +106,9 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
 
     }
 
+
     /**
      * setNotEmpty() should set value when value is not null or ''.
-     *
-     * @return void.
      */
     public function testSetNotEmptyWithNonEmptyValue()
     {
@@ -126,10 +122,9 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
 
     }
 
+
     /**
      * setNotEmpty() should set null when value is null or ''.
-     *
-     * @return void.
      */
     public function testSetNotEmptyWithEmptyValue()
     {
@@ -153,11 +148,9 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
 
     }
 
+
     /**
      * setCoverage() should set a GEOMETRYCOLLECTION value.
-     *
-     * @group coverage
-     * @return void.
      */
     public function testSetCoverage()
     {
@@ -191,10 +184,9 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
 
     }
 
+
     /**
      * The resetStyles() method should null out all style parameters.
-     *
-     * @return void.
      */
     public function testResetStyles()
     {
@@ -231,10 +223,9 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
 
     }
 
+
     /**
      * getItem() should return the parent item when one exists.
-     *
-     * @return void.
      */
     public function testGetItemWithItem()
     {
@@ -250,10 +241,9 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
 
     }
 
+
     /**
      * getItem() should return null when there is not a parent item.
-     *
-     * @return void.
      */
     public function testGetItemWithNoItem()
     {
@@ -268,10 +258,9 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
 
     }
 
+
     /**
      * getExhibit() should return the parent exhibit.
-     *
-     * @return void.
      */
     public function testGetExhibit()
     {
@@ -286,10 +275,9 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
 
     }
 
+
     /**
      * update() should update all non-empty properties.
-     *
-     * @return void
      **/
     public function testUpdate()
     {
@@ -364,10 +352,9 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
 
     }
 
+
     /**
      * save() should update the modified field on the parent exhibit.
-     *
-     * @return void.
      */
     public function testUpdateExhibitModifiedOnSave()
     {
@@ -394,11 +381,10 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
 
     }
 
+
     /**
      * buildJsonData() should construct a well-formed array object with
      * all attributes necessary for the front-end application.
-     *
-     * @return void.
      */
     public function testBuildJsonData()
     {
@@ -478,5 +464,6 @@ class Neatline_NeatlineRecordTest extends Neatline_Test_AppTestCase
         );
 
     }
+
 
 }

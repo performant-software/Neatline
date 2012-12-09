@@ -1,6 +1,6 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4; */
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
 
 /**
  * Tests for functionality in the plugin manager class.
@@ -15,10 +15,9 @@
 class NeatlinePluginTest extends Neatline_Test_AppTestCase
 {
 
+
     /**
      * Set up the helper class, plugin, etc.
-     *
-     * @return void
      * @author Eric Rochester <erochest@virginia.edu>
      **/
     public function setUp()
@@ -29,14 +28,14 @@ class NeatlinePluginTest extends Neatline_Test_AppTestCase
         $this->_dataTable = $this->db->getTable('NeatlineRecord');
     }
 
+
     /**
      * This tests the before_delete_record hook.
-     *
-     * @return void
      * @author Eric Rochester <erochest@virginia.edu>
      **/
     public function testBeforeDeleteRecord()
     {
+
         $item     = $this->__item();
         $neatline = $this->__exhibit();
         $record   = new NeatlineRecord($item, $neatline);
@@ -46,6 +45,8 @@ class NeatlinePluginTest extends Neatline_Test_AppTestCase
 
         $r2 = $this->_dataTable->find($record->id);
         $this->assertNull($r2);
+
     }
+
 
 }
