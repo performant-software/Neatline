@@ -108,7 +108,12 @@ client.query(sql, function(err, res) {
         'point_image,'+
         'max_zoom,'+
         'min_zoom'+
-        ') VALUES ('+
+        ') VALUES';
+
+    var c = 100000;
+    _(c).times(function(n) {
+
+      sql += '(' +
         results[0].insertId+','+
         results[1].insertId+','+
         results[2].insertId+','+
@@ -121,6 +126,10 @@ client.query(sql, function(err, res) {
         results[9].insertId+','+
         results[10].insertId+','+
         results[11].insertId+')';
+
+      if (n != c-1) sql += ',';
+
+    });
 
     client.query(sql);
     client.end(function() {
