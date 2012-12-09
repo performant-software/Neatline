@@ -19,7 +19,7 @@ class Neatline_NeatlineExhibitTest_FieldAccess
     /**
      * Test field set and get.
      */
-    public function testFieldGetSet()
+    public function testFieldAccess()
     {
 
         // Create exhibit.

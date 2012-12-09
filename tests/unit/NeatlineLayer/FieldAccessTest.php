@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
 
 /**
- * Layer row tests.
+ * Field set/get tests for NeatlineLayer.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -11,16 +11,15 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class Neatline_NeatlineLayerTest extends Neatline_Test_AppTestCase
+class Neatline_NeatlineLayerTest_FieldAccess
+    extends Neatline_Test_AppTestCase
 {
 
 
     /**
-     * Test attribute set and get.
-     *
-     * @return void.
+     * Test field set and get.
      */
-    public function testAttributeAccess()
+    public function testFieldAccess()
     {
 
         // Create a record.

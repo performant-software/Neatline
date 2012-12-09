@@ -11,7 +11,8 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class Neatline_NeatlineTagTableTest extends Neatline_Test_AppTestCase
+class Neatline_NeatlineTagTableTest_CreateExhibitDefault
+    extends Neatline_Test_AppTestCase
 {
 
 

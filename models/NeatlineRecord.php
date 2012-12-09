@@ -206,23 +206,6 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
 
 
     /**
-     * Set all style attributes to null.
-     */
-    public function resetStyles()
-    {
-        $this->vector_color =       null;
-        $this->stroke_color =       null;
-        $this->select_color =       null;
-        $this->vector_opacity =     null;
-        $this->stroke_opacity =     null;
-        $this->image_opacity =      null;
-        $this->stroke_width =       null;
-        $this->point_radius =       null;
-        $this->point_image =        null;
-    }
-
-
-    /**
      * Get the parent item record.
      *
      * @return Omeka_record The parent item.

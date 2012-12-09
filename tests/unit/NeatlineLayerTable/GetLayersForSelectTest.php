@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
 
 /**
- * Layer table tests.
+ * Tests for `getLayersForSelect()` on NeatlineLayerTable.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -11,7 +11,8 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class Neatline_NeatlineLayerTableTest extends Neatline_Test_AppTestCase
+class Neatline_NeatlineLayerTableTest_GetLayersForSelect
+    extends Neatline_Test_AppTestCase
 {
 
 
@@ -67,23 +68,6 @@ class Neatline_NeatlineLayerTableTest extends Neatline_Test_AppTestCase
         $this->assertEquals($layers[$gstr->id], 'Google Streets');
         $this->assertEquals($layers[$ghyb->id], 'Google Hybrid');
         $this->assertEquals($layers[$gsat->id], 'Google Satellite');
-
-    }
-
-
-    /**
-     * getLayerByName() should get the layer record with the passed name.
-     */
-    public function testGetLayerByName()
-    {
-
-        // Create a base layer.
-        $layer = new NeatlineLayer();
-        $layer->name = 'Test Layer';
-        $layer->save();
-
-        $retrieved = $this->_layersTable->getLayerByName('Test Layer');
-        $this->assertEquals($retrieved->id, $layer->id);
 
     }
 
