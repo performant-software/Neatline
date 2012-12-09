@@ -3,7 +3,8 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
 
 /**
- * Exhibit row tests.
+ * Tests for `save()`, `beforeSave()`, `afterSave()`, and `delete()` on
+ * NeatlineExhibit.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -11,96 +12,9 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class Neatline_NeatlineExhibitTest extends Neatline_Test_AppTestCase
+class Neatline_NeatlineExhibitTest_SaveDeleteHooks
+    extends Neatline_Test_AppTestCase
 {
-
-
-    /**
-     * Test attribute set and get.
-     */
-    public function testAttributeAccess()
-    {
-
-        // Create exhibit.
-        $exhibit = new NeatlineExhibit();
-
-        // Set.
-        $exhibit->title         = 'title';
-        $exhibit->description   = 'Description.';
-        $exhibit->slug          = 'slug';
-        $exhibit->public        = 1;
-        $exhibit->query         = 'query';
-        $exhibit->map_focus     = 'CENTER()';
-        $exhibit->map_zoom      = 1;
-        $exhibit->save();
-
-        // Re-get the exhibit object.
-        $exhibit = $this->_exhibitsTable->find($exhibit->id);
-
-        // Get.
-        $this->assertNotNull($exhibit->added);
-        $this->assertNotNull($exhibit->modified);
-        $this->assertEquals($exhibit->query, 'query');
-        $this->assertEquals($exhibit->title, 'title');
-        $this->assertEquals($exhibit->description, 'Description.');
-        $this->assertEquals($exhibit->slug, 'slug');
-        $this->assertEquals($exhibit->public, 1);
-        $this->assertEquals($exhibit->map_focus, 'CENTER()');
-        $this->assertEquals($exhibit->map_zoom, 1);
-
-    }
-
-
-    /**
-     * saveForm() should save all key=>value pairs in the form data.
-     */
-    public function testSaveForm()
-    {
-
-        // Create an exhibit and map.
-        $exhibit = $this->__exhibit();
-
-        // Save form data.
-        $exhibit->saveForm(array(
-            'title'         => 'Form Title',
-            'description'   => 'Form description.',
-            'slug'          => 'form-slug',
-            'public'        => 1
-        ));
-
-        // Check values.
-        $this->assertEquals($exhibit->title, 'Form Title');
-        $this->assertEquals($exhibit->description, 'Form description.');
-        $this->assertEquals($exhibit->slug, 'form-slug');
-        $this->assertEquals($exhibit->public, 1);
-
-    }
-
-
-    /**
-     * getNumberOfRecords() should return the exhibit record count.
-     */
-    public function testGetNumberOfRecords()
-    {
-
-        // Create exhibit.
-        $exhibit = $this->__exhibit();
-
-        // Create records.
-        $record1 = new NeatlineRecord(null, $exhibit);
-        $record2 = new NeatlineRecord(null, $exhibit);
-        $record3 = new NeatlineRecord(null, $exhibit);
-        $record1->map_active = 1;
-        $record2->map_active = 1;
-        $record3->map_active = 1;
-        $record1->save();
-        $record2->save();
-        $record3->save();
-
-        // Check count.
-        $this->assertEquals($exhibit->getNumberOfRecords(), 3);
-
-    }
 
 
     /**

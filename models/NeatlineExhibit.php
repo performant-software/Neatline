@@ -81,11 +81,6 @@ class NeatlineExhibit extends Omeka_Record_AbstractRecord
      */
     const DATE_FORMAT = 'yyyy-MM-dd HH:mm:ss';
 
-    /**
-     * Name of default base layer.
-     */
-    const DEFAULT_LAYER = 'Google Physical';
-
 
     /**
      * Save data from the add/edit form.

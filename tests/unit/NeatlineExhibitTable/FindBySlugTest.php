@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
 
 /**
- * Exhibit table tests.
+ * Tests for `findBySlug()` on NeatlineExhibitTable.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -11,7 +11,8 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class Neatline_NeatlineExhibitTableTest extends Neatline_Test_AppTestCase
+class Neatline_NeatlineExhibitTableTest_FindBySlug
+    extends Neatline_Test_AppTestCase
 {
 
 
