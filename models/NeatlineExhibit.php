@@ -158,10 +158,9 @@ class NeatlineExhibit extends Omeka_Record_AbstractRecord
 
 
     /**
-     * Before a new record is saved:
-     * - Set `added` fields to the current timestamp if the record is new.
-     * - Set `modified` fields to the current timestamp.
-     * - Create a default exhibit style tag.
+     * Before a record is saved:
+     * - Set `modified` field to the current timestamp.
+     * - Set `added` field if the record is being inserted.
      */
     protected function beforeSave()
     {
@@ -170,9 +169,32 @@ class NeatlineExhibit extends Omeka_Record_AbstractRecord
         $now = Zend_Date::now()->toString(self::DATE_FORMAT);
         $this->modified = $now;
 
-        // If the record is being inserted.
+        // Set `added` if inserting.
         if (!$this->exists()) $this->added = $now;
 
+    }
+
+
+    /**
+     * Create a default tag after an exhibit is saved. For now, this runs
+     * after every save, since there's no way in Omeka 2.0 to explicitly
+     * hook on to the insert event. The unique key on the exhibit_id field
+     * on the tag table prevents duplicates.
+     */
+    public function save()
+    {
+        parent::save();
+        $tagsTable = $this->getTable('NeatlineTag');
+        $tagsTable->createExhibitDefault($this);
+    }
+
+
+    /**
+     * Alias the unmodified `save` method. Needed for testing.
+     */
+    public function parentSave()
+    {
+        parent::save();
     }
 
 
@@ -181,12 +203,10 @@ class NeatlineExhibit extends Omeka_Record_AbstractRecord
      */
     protected function beforeDelete()
     {
-
-        // Delete all child records.
         $recordsTable = $this->getTable('NeatlineRecord');
         $recordsTable->delete("{$this->_db->prefix}neatline_records",
-            array('exhibit_id = ?' => $this->id));
-
+            array('exhibit_id = ?' => $this->id)
+        );
     }
 
 

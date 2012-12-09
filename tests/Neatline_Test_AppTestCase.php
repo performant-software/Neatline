@@ -233,7 +233,7 @@ class Neatline_Test_AppTestCase extends Omeka_Test_AppTestCase
 
 
     /**
-     * Get the last item record.
+     * Get the last record.
      *
      * @return Item The record.
      */
@@ -241,6 +241,19 @@ class Neatline_Test_AppTestCase extends Omeka_Test_AppTestCase
     {
         $records = $this->_recordsTable->fetchObjects(
             $this->_recordsTable->getSelect());
+        return end($records);
+    }
+
+
+    /**
+     * Get the last tag.
+     *
+     * @return Item The tag.
+     */
+    public function getLastTag()
+    {
+        $records = $this->_tagsTable->fetchObjects(
+            $this->_tagsTable->getSelect());
         return end($records);
     }
 

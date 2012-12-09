@@ -143,13 +143,28 @@ class Neatline_NeatlineExhibitTest extends Neatline_Test_AppTestCase
 
 
     /**
-     * beforeSave() should create a default style tag for the exhibit with
+     * afterSave() should create a default style tag for the exhibit with
      * values drawn from the system defaults when the exhibit is inserted.
      *
      * @group tags
      */
-    public function testBeforeSaveDefaultTag()
+    public function testAfterSaveDefaultTag()
     {
+
+        // Starting tags count.
+        $startCount = $this->_tagsTable->count();
+
+        // Create exhibit.
+        $exhibit = new NeatlineExhibit();
+        $exhibit->slug = 'test';
+        $exhibit->save();
+
+        // Check +1 tags.
+        $this->assertEquals($startCount+1, $this->_tagsTable->count());
+        $tag = $this->getLastTag();
+
+        // Check reference.
+        $this->assertEquals($tag->exhibit_id, $exhibit->id);
 
     }
 

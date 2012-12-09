@@ -28,10 +28,13 @@ class Neatline_NeatlineTagTableTest extends Neatline_Test_AppTestCase
         $startCount = $this->_tagsTable->count();
 
         // Create exhibit.
-        $exhibit = $this->__exhibit();
+        $exhibit = new NeatlineExhibit();
+        $exhibit->slug = 'test';
+        $exhibit->parentSave();
 
         // Create default tag.
         $tag = $this->_tagsTable->createExhibitDefault($exhibit);
+        $this->assertEquals($startCount+1, $this->_tagsTable->count());
 
         // Check attributes.
         $this->assertEquals($tag->is_default, 1);
@@ -78,6 +81,31 @@ class Neatline_NeatlineTagTableTest extends Neatline_Test_AppTestCase
         $this->assertNull($tag->point_image);
         $this->assertNull($tag->max_zoom);
         $this->assertNull($tag->min_zoom);
+
+    }
+
+
+    /**
+     * createExhibitDefault() should not insert a new default tag for an
+     * exhibit if one already exists. Enforced by the unique key for the
+     * `exhibit_id` field on the table.
+     *
+     * @group tags
+     */
+    public function testCreateExhibitDefaultDuplicationBlocking()
+    {
+
+        // Create exhibit.
+        $exhibit = new NeatlineExhibit();
+        $exhibit->slug = 'test';
+        $exhibit->save();
+
+        // Starting tags count.
+        $startCount = $this->_tagsTable->count();
+
+        // Try to create new default, check unchanged count.
+        $tag = $this->_tagsTable->createExhibitDefault($exhibit);
+        $this->assertEquals($startCount, $this->_tagsTable->count());
 
     }
 

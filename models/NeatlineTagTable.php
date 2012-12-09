@@ -66,7 +66,8 @@ class NeatlineTagTable extends Omeka_Db_Table
         $tag->point_radius = get_plugin_ini(
             'Neatline', 'point_radius');
 
-        return $tag->save();
+        $tag->save();
+        return $tag;
 
     }
 

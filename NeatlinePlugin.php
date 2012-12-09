@@ -139,7 +139,8 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
             `max_zoom`          int(10) unsigned NULL,
             `min_zoom`          int(10) unsigned NULL,
 
-             PRIMARY KEY        (`id`)
+             PRIMARY KEY        (`id`),
+             UNIQUE             (`exhibit_id`)
 
         ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
 
