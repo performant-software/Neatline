@@ -17,33 +17,25 @@ class NeatlinePluginTest extends Neatline_Test_AppTestCase
 
 
     /**
-     * Set up the helper class, plugin, etc.
+     * When an item is deleted, all Neatline records that are backed by
+     * the record should also be deleted.
+     *
      * @author Eric Rochester <erochest@virginia.edu>
-     **/
-    public function setUp()
-    {
-        parent::setUp();
-
-        $this->db = get_db();
-        $this->_dataTable = $this->db->getTable('NeatlineRecord');
-    }
-
-
-    /**
-     * This tests the before_delete_record hook.
-     * @author Eric Rochester <erochest@virginia.edu>
-     **/
+     */
     public function testBeforeDeleteRecord()
     {
 
-        $item     = $this->__item();
-        $neatline = $this->__exhibit();
-        $record   = new NeatlineRecord($item, $neatline);
+        // Create record.
+        $item = $this->__item();
+        $exhibit = $this->__exhibit();
+        $record = new NeatlineRecord($item, $neatline);
         $record->save();
 
+        // Delete parent item.
         $item->delete();
 
-        $r2 = $this->_dataTable->find($record->id);
+        // Check for deleted record.
+        $r2 = $this->_recordsTable->find($record->id);
         $this->assertNull($r2);
 
     }
