@@ -145,6 +145,8 @@ class Neatline_NeatlineExhibitTest extends Neatline_Test_AppTestCase
     /**
      * beforeSave() should create a default style tag for the exhibit with
      * values drawn from the system defaults when the exhibit is inserted.
+     *
+     * @group tags
      */
     public function testBeforeSaveDefaultTag()
     {

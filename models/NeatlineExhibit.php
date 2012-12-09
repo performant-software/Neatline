@@ -171,9 +171,7 @@ class NeatlineExhibit extends Omeka_Record_AbstractRecord
         $this->modified = $now;
 
         // If the record is being inserted.
-        if (!$this->exists()) {
-            $this->added = $now;
-        }
+        if (!$this->exists()) $this->added = $now;
 
     }
 
