@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
 
 /**
- * Tests for `createExhibitDefault()` on NeatlineTagTable.
+ * Tests for `createExhibitDefaultTag()` on NeatlineTagTable.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -11,7 +11,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class Neatline_NeatlineTagTableTest_CreateExhibitDefault
+class Neatline_NeatlineTagTableTest_CreateExhibitDefaultTag
     extends Neatline_Test_AppTestCase
 {
 
@@ -22,19 +22,19 @@ class Neatline_NeatlineTagTableTest_CreateExhibitDefault
      *
      * @group tags
      */
-    public function testCreateExhibitDefault()
+    public function testCreateExhibitDefaultTag()
     {
-
-        // Starting tags count.
-        $startCount = $this->_tagsTable->count();
 
         // Create exhibit.
         $exhibit = new NeatlineExhibit();
         $exhibit->slug = 'test';
         $exhibit->parentSave();
 
+        // Starting tags count.
+        $startCount = $this->_tagsTable->count();
+
         // Create default tag.
-        $tag = $this->_tagsTable->createExhibitDefault($exhibit);
+        $tag = $this->_tagsTable->createExhibitDefaultTag($exhibit);
         $this->assertEquals($startCount+1, $this->_tagsTable->count());
 
         // Check attributes.
@@ -87,9 +87,9 @@ class Neatline_NeatlineTagTableTest_CreateExhibitDefault
 
 
     /**
-     * createExhibitDefault() should not insert a new default tag for an
-     * exhibit if one already exists. Enforced by the unique key for the
-     * `exhibit_id` field on the table.
+     * createExhibitDefaultTag() should not insert a new default tag for
+     * an exhibit if one already exists. Enforced by the unique key on the
+     * `exhibit_id` field.
      *
      * @group tags
      */
@@ -105,7 +105,7 @@ class Neatline_NeatlineTagTableTest_CreateExhibitDefault
         $startCount = $this->_tagsTable->count();
 
         // Try to create new default, check unchanged count.
-        $tag = $this->_tagsTable->createExhibitDefault($exhibit);
+        $tag = $this->_tagsTable->createExhibitDefaultTag($exhibit);
         $this->assertEquals($startCount, $this->_tagsTable->count());
 
     }

@@ -22,7 +22,7 @@ class NeatlineTagTable extends Omeka_Db_Table
      * @param Omeka_Record $exhibit The exhibit record.
      * @return Omeka_Record $tag The new tag.
      */
-    public function createExhibitDefault($exhibit)
+    public function createExhibitDefaultTag($exhibit)
     {
 
         // Create tag.

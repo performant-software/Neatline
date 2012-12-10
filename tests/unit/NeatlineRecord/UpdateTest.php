@@ -68,12 +68,59 @@ class Neatline_NeatlineRecordTest_Update
 
 
     /**
-     * .
+     * When non-null style values are passed to update() and the record
+     * does not have an existing record-specific tag, a new tag should be
+     * created and populated with values.
      *
      * @group tags
      */
     public function testUpdateCreateLocalTag()
     {
+
+        // Create record.
+        $record = $this->__record();
+
+        // Mock values.
+        $values = array(
+
+            // Local values:
+            // -------------
+
+            'id'                    => $record->id,
+            'item_id'               => null,
+            'slug'                  => 'slug2',
+            'title'                 => 'title2',
+            'body'                  => 'body2',
+            'tags'                  => 'tag3,tag4',
+            'coverage'              => 'POINT(1 1)',
+            'map_active'            => 1,
+            'map_focus'             => 'lat2/lon2',
+            'map_zoom'              => 5,
+
+            // Locally-set styles:
+            // -------------------
+
+            'vector_color'          => '#vector2',
+            'stroke_color'          => '#stroke2',
+            'select_color'          => '#select2',
+            'vector_opacity'        => 10,
+            'select_opacity'        => 20,
+            'stroke_opacity'        => 30,
+            'image_opacity'         => 40,
+            'stroke_width'          => 50,
+            'point_radius'          => 60,
+            'point_image'           => 'file2.png',
+            'max_zoom'              => 70,
+            'min_zoom'              => 80,
+
+        );
+
+        // Starting tags count.
+        $startCount = $this->_tagsTable->count();
+
+        // Update, check tags+1.
+        $record->update($values);
+        $this->assertEquals($startCount+1, $this->_tagsTable->count());
 
     }
 

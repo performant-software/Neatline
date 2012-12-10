@@ -76,6 +76,12 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
     public $map_zoom;
 
     /**
+     * Record-specifici tag.
+     * int(10) unsigned NULL
+     */
+    public $tag;
+
+    /**
      * *** Tag reference.
      * int(10) unsigned NOT NULL
      */
@@ -355,16 +361,6 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
 
 
     /**
-     * After saving, update the `modified` column on the parent exhibit by
-     * re-saving it.
-     */
-    public function afterSave()
-    {
-        if (!is_null($this->exhibit_id)) $this->getExhibit()->save();
-    }
-
-
-    /**
      * If a WKT string is passed to save(), update the `coverage` field.
      *
      * @param string $coverage The coverage, as a WKT string.
@@ -373,6 +369,16 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
     {
         parent::save();
         if (!is_null($coverage)) $this->setCoverage($coverage);
+    }
+
+
+    /**
+     * After saving, update the `modified` column on the parent exhibit by
+     * re-saving it.
+     */
+    public function afterSave()
+    {
+        if (!is_null($this->exhibit_id)) $this->getExhibit()->save();
     }
 
 

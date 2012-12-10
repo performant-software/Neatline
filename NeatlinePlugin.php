@@ -71,6 +71,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
             `image_id`          int(10) unsigned NULL,
             `map_focus`         varchar(100) NULL,
             `map_zoom`          int(10) unsigned NULL,
+            `tag`               int(10) unsigned NULL,
 
              PRIMARY KEY        (`id`)
 
@@ -95,6 +96,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
             `map_active`        tinyint(1) NULL,
             `map_focus`         varchar(100) NULL,
             `map_zoom`          int(10) unsigned NULL,
+            `tag`               int(10) unsigned NULL,
 
             `vector_color`      int(10) unsigned NOT NULL,
             `stroke_color`      int(10) unsigned NOT NULL,

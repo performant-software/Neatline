@@ -75,6 +75,12 @@ class NeatlineExhibit extends Omeka_Record_AbstractRecord
      */
     public $map_zoom;
 
+    /**
+     * Record-specifici tag.
+     * int(10) unsigned NULL
+     */
+    public $tag;
+
 
     /**
      * Zend_Date format for saving to the database.
@@ -180,7 +186,7 @@ class NeatlineExhibit extends Omeka_Record_AbstractRecord
     {
         parent::save();
         $tagsTable = $this->getTable('NeatlineTag');
-        $tagsTable->createExhibitDefault($this);
+        $tagsTable->createExhibitDefaultTag($this);
     }
 
 

@@ -17,30 +17,33 @@ class Neatline_NeatlineRecordTest_Save
 
 
     /**
-     * save() should update the modified field on the parent exhibit.
+     * When save() is called, any NULL style attributes should be pointed
+     * at the default tag for the parent exhibit by beforeSave().
+     *
+     * @group tags
      */
-    public function testUpdateParentModified()
+    public function testSetDefaultStyles()
     {
 
-        // Get time.
-        $timestamp = date('Y-m-d H:i:s');
-
-        // Set the modified date back, get delta and check.
+        // Create exhibit and record.
         $exhibit = $this->__exhibit();
-        $exhibit->modified = '2010-01-01 00:00:00';
-        $delta = strtotime($timestamp) - strtotime($exhibit->modified);
-        $this->assertGreaterThanOrEqual(1, $delta);
-
-        // Create a record and save.
         $record = new NeatlineRecord(null, $exhibit);
         $record->save();
 
-        // Reget the record.
-        $exhibit = $record->getExhibit();
-
-        // Get delta and check.
-        $delta = strtotime($timestamp) - strtotime($exhibit->modified);
-        $this->assertLessThanOrEqual(1, $delta);
+        // Get the exhibit default tag, check references.
+        $tag = $this->_tagsTable->getExhibitDefault($exhibit);
+        $this->assertEquals($record->vector_color, $tag->id);
+        $this->assertEquals($record->stroke_color, $tag->id);
+        $this->assertEquals($record->select_color, $tag->id);
+        $this->assertEquals($record->vector_opacity, $tag->id);
+        $this->assertEquals($record->select_opacity, $tag->id);
+        $this->assertEquals($record->stroke_opacity, $tag->id);
+        $this->assertEquals($record->image_opacity, $tag->id);
+        $this->assertEquals($record->stroke_width, $tag->id);
+        $this->assertEquals($record->point_radius, $tag->id);
+        $this->assertEquals($record->point_image, $tag->id);
+        $this->assertEquals($record->max_zoom, $tag->id);
+        $this->assertEquals($record->min_zoom, $tag->id);
 
     }
 
@@ -67,33 +70,30 @@ class Neatline_NeatlineRecordTest_Save
 
 
     /**
-     * When save() is called, any NULL style attributes should be pointed
-     * at the default tag for the parent exhibit.
-     *
-     * @group tags
+     * afterSave() should update the modified field on the parent exhibit.
      */
-    public function testSetDefaultStyles()
+    public function testUpdateParentModified()
     {
 
-        // Create exhibit and record.
+        // Get time.
+        $timestamp = date('Y-m-d H:i:s');
+
+        // Set the modified date back, get delta and check.
         $exhibit = $this->__exhibit();
+        $exhibit->modified = '2010-01-01 00:00:00';
+        $delta = strtotime($timestamp) - strtotime($exhibit->modified);
+        $this->assertGreaterThanOrEqual(1, $delta);
+
+        // Create a record and save.
         $record = new NeatlineRecord(null, $exhibit);
         $record->save();
 
-        // Get the exhibit default tag, check references.
-        $tag = $this->_tagsTable->getExhibitDefault($exhibit);
-        $this->assertEquals($record->vector_color, $tag->id);
-        $this->assertEquals($record->stroke_color, $tag->id);
-        $this->assertEquals($record->select_color, $tag->id);
-        $this->assertEquals($record->vector_opacity, $tag->id);
-        $this->assertEquals($record->select_opacity, $tag->id);
-        $this->assertEquals($record->stroke_opacity, $tag->id);
-        $this->assertEquals($record->image_opacity, $tag->id);
-        $this->assertEquals($record->stroke_width, $tag->id);
-        $this->assertEquals($record->point_radius, $tag->id);
-        $this->assertEquals($record->point_image, $tag->id);
-        $this->assertEquals($record->max_zoom, $tag->id);
-        $this->assertEquals($record->min_zoom, $tag->id);
+        // Reget the record.
+        $exhibit = $record->getExhibit();
+
+        // Get delta and check.
+        $delta = strtotime($timestamp) - strtotime($exhibit->modified);
+        $this->assertLessThanOrEqual(1, $delta);
 
     }
 
