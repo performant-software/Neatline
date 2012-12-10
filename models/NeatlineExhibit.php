@@ -196,7 +196,7 @@ class NeatlineExhibit extends Omeka_Record_AbstractRecord
 
             // Create default tag, set key.
             $tagsTable = $this->getTable('NeatlineTag');
-            $tag = $tagsTable->createExhibitTag($this);
+            $tag = $tagsTable->createExhibitTag();
             $this->tag_id = $tag->id;
 
         }

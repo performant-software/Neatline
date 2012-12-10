@@ -330,12 +330,61 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
     public function update($values)
     {
 
-        // Pluck out coverage.
+        // Pluck out the coverage.
         $coverage = $values['coverage'];
         unset($values['coverage']);
 
-        // Set remaining fields
+        // Are any of the fields from the the "Style" tab in the record
+        // edit form set with non-null values?
+
+        $localStyles = false;
+        foreach (self::$styles as $s) {
+            if (!is_null($values[$s])) { $localStyles = true; break; }
+        }
+
+        // If so, then these values need to be stored in a record-specific
+        // "local" tag referenced by the record's `tag_id` attribute. This
+        // tag is not created by default for the record (since it is not
+        // needed when all of a record's styles are inherited from regular
+        // tags) and needs to created if one does not exist.
+
+        if ($localStyles) {
+
+            // Get or create the local tag.
+            $tagsTable = $this->getTable('NeatlineTag');
+            $tag = $tagsTable->getOrCreateRecordTag($this);
+
+            // Update attributes.
+            foreach (self::$styles as $s) $tag[$s] = $values[$s];
+            $tag->save();
+
+            // Set tag reference.
+            $this->tag_id = $tag->id;
+
+        }
+
+        // If all of the local styles from the form are null, we need to
+        // garbage collect a existing record-specific tag if one exists.
+
+        else if (!is_null($this->tag_id)) {
+
+            // Get the local tag.
+            $tagsTable = $this->getTable('NeatlineTag');
+            $tag = $tagsTable->getOrCreateRecordTag($this);
+
+            // Remove.
+            $this->tag_id = null;
+            $tag->delete();
+
+        }
+
+        // Unset all of the tag-backed attributes and set the remaining
+        // values directly as a group.
+
+        foreach (self::$styles as $style) unset($values[$style]);
         foreach ($values as $key => $val) $this->setNotEmpty($key, $val);
+
+        // Save.
         $this->save($coverage);
 
     }
@@ -379,23 +428,6 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
     public function afterSave()
     {
         if (!is_null($this->exhibit_id)) $this->getExhibit()->save();
-    }
-
-
-    /**
-     * Call `delete` in a transaction.
-     */
-    public function deleteTransaction()
-    {
-        $db = get_db();
-        $db->beginTransaction();
-        try {
-            $this->delete();
-            $db->commit();
-        } catch (Exception $e) {
-            $db->rollback();
-            throw $e;
-        }
     }
 
 

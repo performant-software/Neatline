@@ -119,6 +119,21 @@ class Neatline_Test_AppTestCase extends Omeka_Test_AppTestCase
 
 
     /**
+     * Create a tag.
+     *
+     * @param string $name The tag name.
+     * @return NeatineTag The tag.
+     */
+    public function __tag($name=null)
+    {
+        $tag = new NeatlineTag();
+        $tag->tag = $name;
+        $tag->save();
+        return $tag;
+    }
+
+
+    /**
      * Create an element text for an item.
      *
      * @param Omeka_record $item The item.

@@ -84,4 +84,27 @@ class NeatlineTagTable extends Omeka_Db_Table
     }
 
 
+    /**
+     * Get or create the record-specific tag for a record.
+     *
+     * @param Omeka_Record $record The record.
+     * @return Omeka_Record $tag The record tag.
+     */
+    public function getOrCreateRecordTag($record)
+    {
+
+        // Try to get existing tag.
+        if (!is_null($record->tag_id)) {
+            $tag = $this->fetchObject(
+                $this->getSelect()->where('id = ?', $record->tag_id)
+            );
+        }
+
+        // If no tag, create one.
+        else $tag = new NeatlineTag;
+        return $tag;
+
+    }
+
+
 }
