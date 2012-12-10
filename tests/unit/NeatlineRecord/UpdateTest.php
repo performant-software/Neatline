@@ -438,86 +438,200 @@ class Neatline_NeatlineRecordTest_Update
 
 
     /**
-     * When a record that has a record-specific tag from previous updates
-     * is updated with all-null local style values, the existing local tag
-     * is no longer needed and should be removed and the `tag_id` on the
-     * record should be set to null.
+     * When a record is updated, the tags string should be used to update
+     * all of the style tag references to point to the first tag in the
+     * depth chart for which the field in question is defined.
      *
      * @group tags
      */
-    public function testUpdateStyleReferences()
+    public function testUpdateTagReferences()
     {
 
         // Create record.
         $record = $this->__record();
 
-        // Create tag.
-        $tag = new NeatlineTag;
-        $tag->vector_color =    '#111111';
-        $tag->stroke_color =    '#222222';
-        $tag->select_color =    '#333333';
-        $tag->vector_opacity =  4;
-        $tag->select_opacity =  5;
-        $tag->stroke_opacity =  6;
-        $tag->image_opacity =   7;
-        $tag->stroke_width =    8;
-        $tag->point_radius =    9;
-        $tag->point_image =     'file.png';
-        $tag->max_zoom =        10;
-        $tag->min_zoom =        11;
-        $tag->save();
+        // Create 12 tags, each with one more defined field than the last.
+        // ---------------------------------------------------------------
 
-        // Set tag reference.
-        $record->tag_id = $tag->id;
+        $tag1 = new NeatlineTag;
+        $tag1->vector_color =    '#1';
+        $tag1->save();
 
-        // Mock new values.
-        $values = array(
+        $tag2 = new NeatlineTag;
+        $tag2->vector_color =    '#2';
+        $tag2->stroke_color =    '#3';
+        $tag2->save();
 
-            // Local values:
-            // -------------
+        $tag3 = new NeatlineTag;
+        $tag3->vector_color =    '#4';
+        $tag3->stroke_color =    '#5';
+        $tag3->select_color =    '#6';
+        $tag3->save();
 
-            'id'                    => $record->id,
-            'item_id'               => null,
-            'slug'                  => 'slug',
-            'title'                 => 'title',
-            'body'                  => 'body',
-            'tags'                  => 'tag1,tag2',
-            'coverage'              => 'POINT(1 1)',
-            'map_active'            => 1,
-            'map_focus'             => 'lat/lon',
-            'map_zoom'              => 2,
+        $tag4 = new NeatlineTag;
+        $tag4->vector_color =    '#7';
+        $tag4->stroke_color =    '#8';
+        $tag4->select_color =    '#9';
+        $tag4->vector_opacity =  10;
+        $tag4->save();
 
-            // Locally-set styles:
-            // -------------------
+        $tag5 = new NeatlineTag;
+        $tag5->vector_color =    '#11';
+        $tag5->stroke_color =    '#12';
+        $tag5->select_color =    '#13';
+        $tag5->vector_opacity =  14;
+        $tag5->select_opacity =  15;
+        $tag5->save();
 
-            'vector_color'          => null,
-            'stroke_color'          => null,
-            'select_color'          => null,
-            'vector_opacity'        => null,
-            'select_opacity'        => null,
-            'stroke_opacity'        => null,
-            'image_opacity'         => null,
-            'stroke_width'          => null,
-            'point_radius'          => null,
-            'point_image'           => null,
-            'max_zoom'              => null,
-            'min_zoom'              => null,
+        $tag6 = new NeatlineTag;
+        $tag6->vector_color =    '#16';
+        $tag6->stroke_color =    '#17';
+        $tag6->select_color =    '#18';
+        $tag6->vector_opacity =  19;
+        $tag6->select_opacity =  20;
+        $tag6->stroke_opacity =  21;
+        $tag6->save();
 
-        );
+        $tag7 = new NeatlineTag;
+        $tag7->vector_color =    '#22';
+        $tag7->stroke_color =    '#23';
+        $tag7->select_color =    '#24';
+        $tag7->vector_opacity =  25;
+        $tag7->select_opacity =  26;
+        $tag7->stroke_opacity =  27;
+        $tag7->image_opacity =   28;
+        $tag7->save();
 
-        // Starting tags count.
-        $startCount = $this->_tagsTable->count();
+        $tag8 = new NeatlineTag;
+        $tag8->vector_color =    '#29';
+        $tag8->stroke_color =    '#30';
+        $tag8->select_color =    '#31';
+        $tag8->vector_opacity =  32;
+        $tag8->select_opacity =  33;
+        $tag8->stroke_opacity =  34;
+        $tag8->image_opacity =   35;
+        $tag8->stroke_width =    36;
+        $tag8->save();
 
-        // Update.
-        $record->update($values);
+        $tag9 = new NeatlineTag;
+        $tag9->vector_color =    '#37';
+        $tag9->stroke_color =    '#38';
+        $tag9->select_color =    '#39';
+        $tag9->vector_opacity =  40;
+        $tag9->select_opacity =  41;
+        $tag9->stroke_opacity =  42;
+        $tag9->image_opacity =   43;
+        $tag9->stroke_width =    44;
+        $tag9->point_radius =    45;
+        $tag9->save();
 
-        // Check tags-1.
-        $this->assertEquals($startCount-1, $this->_tagsTable->count());
-        $this->assertNull($this->_tagsTable->find($tag->id));
+        $tag10 = new NeatlineTag;
+        $tag10->vector_color =    '#37';
+        $tag10->stroke_color =    '#38';
+        $tag10->select_color =    '#39';
+        $tag10->vector_opacity =  40;
+        $tag10->select_opacity =  41;
+        $tag10->stroke_opacity =  42;
+        $tag10->image_opacity =   43;
+        $tag10->stroke_width =    44;
+        $tag10->point_radius =    45;
+        $tag10->point_image =     '46.png';
+        $tag10->save();
 
-        // Re-get the record, check for null `tag_id`.
-        $record = $this->_recordsTable->find($record->id);
-        $this->assertNull($record->tag_id);
+        $tag11 = new NeatlineTag;
+        $tag11->vector_color =    '#47';
+        $tag11->stroke_color =    '#48';
+        $tag11->select_color =    '#49';
+        $tag11->vector_opacity =  50;
+        $tag11->select_opacity =  51;
+        $tag11->stroke_opacity =  52;
+        $tag11->image_opacity =   53;
+        $tag11->stroke_width =    54;
+        $tag11->point_radius =    55;
+        $tag11->point_image =     '56.png';
+        $tag11->save();
+
+        $tag12 = new NeatlineTag;
+        $tag12->vector_color =    '#57';
+        $tag12->stroke_color =    '#58';
+        $tag12->select_color =    '#59';
+        $tag12->vector_opacity =  60;
+        $tag12->select_opacity =  61;
+        $tag12->stroke_opacity =  62;
+        $tag12->image_opacity =   63;
+        $tag12->stroke_width =    64;
+        $tag12->point_radius =    65;
+        $tag12->point_image =     '66.png';
+        $tag12->max_zoom =        67;
+        $tag12->save();
+
+        $tag13 = new NeatlineTag;
+        $tag13->vector_color =    '#68';
+        $tag13->stroke_color =    '#69';
+        $tag13->select_color =    '#70';
+        $tag13->vector_opacity =  71;
+        $tag13->select_opacity =  72;
+        $tag13->stroke_opacity =  73;
+        $tag13->image_opacity =   74;
+        $tag13->stroke_width =    75;
+        $tag13->point_radius =    76;
+        $tag13->point_image =     '77.png';
+        $tag13->max_zoom =        78;
+        $tag13->min_zoom =        79;
+        $tag13->save();
+
+
+        // // Set tag reference.
+        // $record->tag_id = $tag->id;
+
+        // // Mock new values.
+        // $values = array(
+
+        //     // Local values:
+        //     // -------------
+
+        //     'id'                    => $record->id,
+        //     'item_id'               => null,
+        //     'slug'                  => 'slug',
+        //     'title'                 => 'title',
+        //     'body'                  => 'body',
+        //     'tags'                  => 'tag1,tag2',
+        //     'coverage'              => 'POINT(1 1)',
+        //     'map_active'            => 1,
+        //     'map_focus'             => 'lat/lon',
+        //     'map_zoom'              => 2,
+
+        //     // Locally-set styles:
+        //     // -------------------
+
+        //     'vector_color'          => null,
+        //     'stroke_color'          => null,
+        //     'select_color'          => null,
+        //     'vector_opacity'        => null,
+        //     'select_opacity'        => null,
+        //     'stroke_opacity'        => null,
+        //     'image_opacity'         => null,
+        //     'stroke_width'          => null,
+        //     'point_radius'          => null,
+        //     'point_image'           => null,
+        //     'max_zoom'              => null,
+        //     'min_zoom'              => null,
+
+        // );
+
+        // // Starting tags count.
+        // $startCount = $this->_tagsTable->count();
+
+        // // Update.
+        // $record->update($values);
+
+        // // Check tags-1.
+        // $this->assertEquals($startCount-1, $this->_tagsTable->count());
+        // $this->assertNull($this->_tagsTable->find($tag->id));
+
+        // // Re-get the record, check for null `tag_id`.
+        // $record = $this->_recordsTable->find($record->id);
+        // $this->assertNull($record->tag_id);
 
     }
 

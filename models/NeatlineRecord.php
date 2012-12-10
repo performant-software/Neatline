@@ -364,13 +364,13 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
         }
 
         // If all of the local styles from the form are null, we need to
-        // garbage collect a existing record-specific tag if one exists.
+        // garbage collect an existing record-specific tag if one exists.
 
         else if (!is_null($this->tag_id)) {
 
             // Get the local tag.
             $tagsTable = $this->getTable('NeatlineTag');
-            $tag = $tagsTable->getOrCreateRecordTag($this);
+            $tag = $tagsTable->find($this->tag_id);
 
             // Remove.
             $this->tag_id = null;
