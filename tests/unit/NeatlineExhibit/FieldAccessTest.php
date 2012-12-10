@@ -26,13 +26,15 @@ class Neatline_NeatlineExhibitTest_FieldAccess
         $exhibit = new NeatlineExhibit();
 
         // Set.
-        $exhibit->title         = 'title';
+        $exhibit->creator_id    = 1;
+        $exhibit->tag_id        = 2;
+        $exhibit->title         = 'Title';
         $exhibit->description   = 'Description.';
         $exhibit->slug          = 'slug';
-        $exhibit->public        = 1;
+        $exhibit->public        = 3;
         $exhibit->query         = 'query';
         $exhibit->map_focus     = 'CENTER()';
-        $exhibit->map_zoom      = 1;
+        $exhibit->map_zoom      = 4;
         $exhibit->save();
 
         // Re-get the exhibit object.
@@ -41,13 +43,15 @@ class Neatline_NeatlineExhibitTest_FieldAccess
         // Get.
         $this->assertNotNull($exhibit->added);
         $this->assertNotNull($exhibit->modified);
-        $this->assertEquals($exhibit->query, 'query');
-        $this->assertEquals($exhibit->title, 'title');
+        $this->assertEquals($exhibit->creator_id, 1);
+        $this->assertEquals($exhibit->tag_id, 2);
+        $this->assertEquals($exhibit->title, 'Title');
         $this->assertEquals($exhibit->description, 'Description.');
         $this->assertEquals($exhibit->slug, 'slug');
-        $this->assertEquals($exhibit->public, 1);
+        $this->assertEquals($exhibit->query, 'query');
+        $this->assertEquals($exhibit->public, 3);
         $this->assertEquals($exhibit->map_focus, 'CENTER()');
-        $this->assertEquals($exhibit->map_zoom, 1);
+        $this->assertEquals($exhibit->map_zoom, 4);
 
     }
 

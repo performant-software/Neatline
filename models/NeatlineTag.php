@@ -16,18 +16,6 @@ class NeatlineTag extends Omeka_Record_AbstractRecord
 
 
     /**
-     * The id of the parent exhibit.
-     * int(10) unsigned NULL
-     */
-    public $exhibit_id;
-
-    /**
-     * The id of the parent exhibit.
-     * tinyint(1) NULL
-     */
-    public $is_default;
-
-    /**
      * The tag name.
      * tinytext COLLATE utf8_unicode_ci NULL
      */

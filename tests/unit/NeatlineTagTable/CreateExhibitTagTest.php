@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
 
 /**
- * Tests for `createExhibitDefaultTag()` on NeatlineTagTable.
+ * Tests for `createExhibitTag()` on NeatlineTagTable.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -11,18 +11,19 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class Neatline_NeatlineTagTableTest_CreateExhibitDefaultTag
+class Neatline_NeatlineTagTableTest_CreateExhibitTag
     extends Neatline_Test_AppTestCase
 {
 
 
     /**
      * createExhibitDefault() should create a default tag for an exhibit
-     * populated with system-default values from the plugin.ini file.
+     * populated with system-default values from the plugin.ini file and
+     * set the `tag` key reference on the exhibit to point to the tag.
      *
      * @group tags
      */
-    public function testCreateExhibitDefaultTag()
+    public function testCreateExhibitTag()
     {
 
         // Create exhibit.

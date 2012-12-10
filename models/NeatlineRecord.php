@@ -28,6 +28,12 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
     public $exhibit_id;
 
     /**
+     * Record default tag.
+     * int(10) unsigned NULL
+     */
+    public $tag_id;
+
+    /**
      * The URL slug for the exhibit.
      * varchar(100) NULL
      */
@@ -74,12 +80,6 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
      * int(10) unsigned NULL
      */
     public $map_zoom;
-
-    /**
-     * Record-specifici tag.
-     * int(10) unsigned NULL
-     */
-    public $tag;
 
     /**
      * *** Tag reference.

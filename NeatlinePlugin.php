@@ -60,6 +60,8 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
             `{$this->_db->prefix}neatline_exhibits` (
 
             `id`                int(10) unsigned NOT NULL auto_increment,
+            `creator_id`        int(10) unsigned NOT NULL,
+            `tag_id`            int(10) unsigned NULL,
             `added`             TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             `modified`          TIMESTAMP NULL,
             `title`             tinytext collate utf8_unicode_ci,
@@ -67,11 +69,8 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
             `slug`              varchar(100) NOT NULL,
             `public`            tinyint(1) NOT NULL,
             `query`             TEXT COLLATE utf8_unicode_ci NULL,
-            `creator_id`        int(10) unsigned NOT NULL,
-            `image_id`          int(10) unsigned NULL,
             `map_focus`         varchar(100) NULL,
             `map_zoom`          int(10) unsigned NULL,
-            `tag`               int(10) unsigned NULL,
 
              PRIMARY KEY        (`id`)
 
@@ -88,6 +87,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
             `id`                int(10) unsigned NOT NULL auto_increment,
             `item_id`           int(10) unsigned NULL,
             `exhibit_id`        int(10) unsigned NULL,
+            `tag_id`            int(10) unsigned NULL,
             `slug`              varchar(100) NULL,
             `title`             mediumtext COLLATE utf8_unicode_ci NULL,
             `body`              mediumtext COLLATE utf8_unicode_ci NULL,
@@ -96,7 +96,6 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
             `map_active`        tinyint(1) NULL,
             `map_focus`         varchar(100) NULL,
             `map_zoom`          int(10) unsigned NULL,
-            `tag`               int(10) unsigned NULL,
 
             `vector_color`      int(10) unsigned NOT NULL,
             `stroke_color`      int(10) unsigned NOT NULL,
@@ -125,8 +124,6 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
             `{$this->_db->prefix}neatline_tags` (
 
             `id`                int(10) unsigned NOT NULL auto_increment,
-            `exhibit_id`        int(10) unsigned NULL,
-            `is_default`        tinyint(1) NULL,
             `tag`               tinytext COLLATE utf8_unicode_ci NULL,
 
             `vector_color`      tinytext COLLATE utf8_unicode_ci NULL,
@@ -142,8 +139,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
             `max_zoom`          int(10) unsigned NULL,
             `min_zoom`          int(10) unsigned NULL,
 
-             PRIMARY KEY        (`id`),
-             UNIQUE             (`exhibit_id`)
+             PRIMARY KEY        (`id`)
 
         ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
 

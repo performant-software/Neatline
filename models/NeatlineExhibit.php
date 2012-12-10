@@ -16,6 +16,18 @@ class NeatlineExhibit extends Omeka_Record_AbstractRecord
 
 
     /**
+     * The id of the user who created the exhibit.
+     * int(10) unsigned NOT NULL
+     */
+    public $creator_id = 0;
+
+    /**
+     * Exhibit default tag.
+     * int(10) unsigned NULL
+     */
+    public $tag_id;
+
+    /**
      * The date the exhibit was created.
      * TIMESTAMP DEFAULT CURRENT_TIMESTAMP
      */
@@ -58,12 +70,6 @@ class NeatlineExhibit extends Omeka_Record_AbstractRecord
     public $query;
 
     /**
-     * The id of the user who created the exhibit.
-     * int(10) unsigned NOT NULL
-     */
-    public $creator_id = 0;
-
-    /**
      * Default map focus position.
      * varchar(100) NULL
      */
@@ -74,12 +80,6 @@ class NeatlineExhibit extends Omeka_Record_AbstractRecord
      * varchar(100) NULL
      */
     public $map_zoom;
-
-    /**
-     * Record-specifici tag.
-     * int(10) unsigned NULL
-     */
-    public $tag;
 
 
     /**
