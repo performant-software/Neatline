@@ -177,25 +177,32 @@ class NeatlineExhibit extends Omeka_Record_AbstractRecord
 
 
     /**
-     * Create a default tag after an exhibit is saved. For now, this runs
-     * after every save, since there's no way in Omeka 2.0 to explicitly
-     * hook on to the insert event. The unique key on the exhibit_id field
-     * on the tag table prevents duplicates.
-     */
-    public function save()
-    {
-        parent::save();
-        $tagsTable = $this->getTable('NeatlineTag');
-        $tagsTable->createExhibitDefaultTag($this);
-    }
-
-
-    /**
      * Alias the unmodified `save` method. Needed for testing.
      */
     public function parentSave()
     {
         parent::save();
+    }
+
+
+    /**
+     * Create a default tag when an exhibit is inserted.
+     */
+    public function save()
+    {
+
+        // If inserting.
+        if (!$this->exists()) {
+
+            // Create default tag, set key.
+            $tagsTable = $this->getTable('NeatlineTag');
+            $tag = $tagsTable->createExhibitTag($this);
+            $this->tag_id = $tag->id;
+
+        }
+
+        parent::save();
+
     }
 
 

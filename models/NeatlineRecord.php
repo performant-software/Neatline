@@ -350,7 +350,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
 
         // Get the exhibit default tag.
         $tagsTable = $this->getTable('NeatlineTag');
-        $tag = $tagsTable->getExhibitDefault($this->getExhibit());
+        $tag = $tagsTable->getExhibitTag($this->getExhibit());
 
         // Set default styles.
         foreach (self::$styles as $style) {

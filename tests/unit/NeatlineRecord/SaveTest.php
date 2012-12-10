@@ -31,8 +31,8 @@ class Neatline_NeatlineRecordTest_Save
         $record->save();
 
         // Get the exhibit default tag, check references.
-        $tag = $this->_tagsTable->getExhibitDefault($exhibit);
-        $this->assertEquals($record->vector_color, $tag->id);
+        $tag = $this->_tagsTable->getExhibitTag($exhibit);
+        $this->assertEquals($record->vector_color,  $tag->id);
         $this->assertEquals($record->stroke_color, $tag->id);
         $this->assertEquals($record->select_color, $tag->id);
         $this->assertEquals($record->vector_opacity, $tag->id);

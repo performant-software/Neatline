@@ -19,16 +19,13 @@ class NeatlineTagTable extends Omeka_Db_Table
      * Create a default style tag for an exhibit, drawing values from the
      * system defaults in the plugin.ini.
      *
-     * @param Omeka_Record $exhibit The exhibit record.
      * @return Omeka_Record $tag The new tag.
      */
-    public function createExhibitDefaultTag($exhibit)
+    public function createExhibitTag()
     {
 
         // Create tag.
         $tag = new NeatlineTag();
-        $tag->exhibit_id = $exhibit->id;
-        $tag->is_default = 1;
 
         // Vector color:
         $tag->vector_color = get_plugin_ini(
@@ -66,6 +63,7 @@ class NeatlineTagTable extends Omeka_Db_Table
         $tag->point_radius = get_plugin_ini(
             'Neatline', 'point_radius');
 
+        // Save.
         $tag->save();
         return $tag;
 
@@ -78,10 +76,10 @@ class NeatlineTagTable extends Omeka_Db_Table
      * @param Omeka_Record $exhibit The exhibit record.
      * @return Omeka_Record $tag The default tag.
      */
-    public function getExhibitDefault($exhibit)
+    public function getExhibitTag($exhibit)
     {
         return $this->fetchObject(
-            $this->getSelect()->where('exhibit_id = ?', $exhibit->id)
+            $this->getSelect()->where('id = ?', $exhibit->tag_id)
         );
     }
 

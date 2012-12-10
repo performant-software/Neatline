@@ -115,12 +115,7 @@ class Neatline_NeatlineRecordTest_Update
 
         );
 
-        // Starting tags count.
-        $startCount = $this->_tagsTable->count();
-
-        // Update, check tags+1.
-        $record->update($values);
-        $this->assertEquals($startCount+1, $this->_tagsTable->count());
+        // TODO|dev.
 
     }
 

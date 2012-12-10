@@ -57,12 +57,13 @@ class Neatline_NeatlineExhibitTest_SaveDeleteHooks
 
 
     /**
-     * afterSave() should create a default style tag for the exhibit with
-     * values drawn from the system defaults when the exhibit is inserted.
+     * save() should create a default style tag for the exhibit with
+     * values drawn from the system defaults when the exhibit is inserted
+     * and set the `tag_id` reference to point to the new tag.
      *
      * @group tags
      */
-    public function testAfterSaveDefaultTag()
+    public function testInsertCreateDefaultTag()
     {
 
         // Starting tags count.
@@ -78,7 +79,31 @@ class Neatline_NeatlineExhibitTest_SaveDeleteHooks
         $tag = $this->getLastTag();
 
         // Check reference.
-        $this->assertEquals($tag->exhibit_id, $exhibit->id);
+        $this->assertEquals($exhibit->tag_id, $tag->id);
+
+    }
+
+
+    /**
+     * save() should only create a default style tag for the exhibit when
+     * the exhibit is inserted, not when it is re-saved.
+     *
+     * @group tags
+     */
+    public function testSaveDefaultTagNonDuplication()
+    {
+
+        // Create exhibit.
+        $exhibit = new NeatlineExhibit();
+        $exhibit->slug = 'test';
+        $exhibit->save();
+
+        // Starting tags count.
+        $startCount = $this->_tagsTable->count();
+        $exhibit->save();
+
+        // Check +0 tags.
+        $this->assertEquals($startCount, $this->_tagsTable->count());
 
     }
 

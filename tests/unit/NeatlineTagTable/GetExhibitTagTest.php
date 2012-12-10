@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
 
 /**
- * Tests for `getExhibitDefault()` on NeatlineTagTable.
+ * Tests for `getExhibitTag()` on NeatlineTagTable.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -11,18 +11,17 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class Neatline_NeatlineTagTableTest_GetExhibitDefault
+class Neatline_NeatlineTagTableTest_GetExhibitTag
     extends Neatline_Test_AppTestCase
 {
 
 
     /**
-     * getExhibitDefault() should return the default tag record for an
-     * exhibit.
+     * getExhibitTag() should return the tag record for an exhibit.
      *
      * @group tags
      */
-    public function testGetExhibitDefault()
+    public function testGetExhibitTag()
     {
 
         // Create exhibit.
@@ -31,8 +30,8 @@ class Neatline_NeatlineTagTableTest_GetExhibitDefault
         $exhibit->save();
 
         // Get default tag.
-        $tag = $this->_tagsTable->getExhibitDefault($exhibit);
-        $this->assertEquals($tag->exhibit_id, $exhibit->id);
+        $tag = $this->_tagsTable->getExhibitTag($exhibit);
+        $this->assertEquals($exhibit->tag_id, $tag->id);
 
     }
 

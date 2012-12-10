@@ -17,9 +17,8 @@ class Neatline_NeatlineTagTableTest_CreateExhibitTag
 
 
     /**
-     * createExhibitDefault() should create a default tag for an exhibit
-     * populated with system-default values from the plugin.ini file and
-     * set the `tag` key reference on the exhibit to point to the tag.
+     * createExhibitTag() should create a default tag for an exhibit and
+     * populate it with default values from the plugin.ini file.
      *
      * @group tags
      */
@@ -35,12 +34,10 @@ class Neatline_NeatlineTagTableTest_CreateExhibitTag
         $startCount = $this->_tagsTable->count();
 
         // Create default tag.
-        $tag = $this->_tagsTable->createExhibitDefaultTag($exhibit);
+        $tag = $this->_tagsTable->createExhibitTag();
         $this->assertEquals($startCount+1, $this->_tagsTable->count());
 
-        // Check attributes.
-        $this->assertEquals($tag->is_default, 1);
-        $this->assertEquals($tag->exhibit_id, $exhibit->id);
+        // NULL tag name:
         $this->assertNull($tag->tag);
 
         // Vector color:
@@ -83,31 +80,6 @@ class Neatline_NeatlineTagTableTest_CreateExhibitTag
         $this->assertNull($tag->point_image);
         $this->assertNull($tag->max_zoom);
         $this->assertNull($tag->min_zoom);
-
-    }
-
-
-    /**
-     * createExhibitDefaultTag() should not insert a new default tag for
-     * an exhibit if one already exists. Enforced by the unique key on the
-     * `exhibit_id` field.
-     *
-     * @group tags
-     */
-    public function testCreateExhibitDefaultDuplicationBlocking()
-    {
-
-        // Create exhibit.
-        $exhibit = new NeatlineExhibit();
-        $exhibit->slug = 'test';
-        $exhibit->save();
-
-        // Starting tags count.
-        $startCount = $this->_tagsTable->count();
-
-        // Try to create new default, check unchanged count.
-        $tag = $this->_tagsTable->createExhibitDefaultTag($exhibit);
-        $this->assertEquals($startCount, $this->_tagsTable->count());
 
     }
 
