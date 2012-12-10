@@ -336,39 +336,43 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
 
 
     /**
-     * On save, update the modified column on the parent exhibit. If a
-     * `$coverage` string is passed, run the coverage update.
-     *
-     * @param string $coverage The coverage, as a WKT string.
+     * Before saving, point any NULL style tag references to the default
+     * tag for the exhibit.
      */
-    public function save($coverage = null)
+    public function beforeSave()
     {
 
-        // Get parent exhibit.
-        $exhibit = $this->getExhibit();
-
-        // Get default tag.
+        // Get the exhibit default tag.
         $tagsTable = $this->getTable('NeatlineTag');
-        $tag = $tagsTable->getExhibitDefault($exhibit);
+        $tag = $tagsTable->getExhibitDefault($this->getExhibit());
 
         // Set default styles.
         foreach (self::$styles as $style) {
             if (is_null($this[$style])) $this[$style] = $tag->id;
         }
 
-        // Set `modified` on parent.
-        if (!is_null($this->exhibit_id)) {
-            $exhibit = $this->getExhibit();
-            $exhibit->save();
-        }
+    }
 
-        // Update `coverage`.
-        if (!is_null($coverage)) {
-            $this->setCoverage($coverage);
-        }
 
+    /**
+     * After saving, update the `modified` column on the parent exhibit by
+     * re-saving it.
+     */
+    public function afterSave()
+    {
+        if (!is_null($this->exhibit_id)) $this->getExhibit()->save();
+    }
+
+
+    /**
+     * If a WKT string is passed to save(), update the `coverage` field.
+     *
+     * @param string $coverage The coverage, as a WKT string.
+     */
+    public function save($coverage = null)
+    {
         parent::save();
-
+        if (!is_null($coverage)) $this->setCoverage($coverage);
     }
 
 
