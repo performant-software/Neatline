@@ -287,9 +287,17 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
      */
     public function setStaticFields($values)
     {
-        foreach ($values as $key => $val) {
-            if (in_array($key, self::$local)) $this[$key] = $val;
+
+        // Walk non-style fields.
+        foreach (self::$local as $f) {
+
+            // If the field is passed, set it.
+            if (array_key_exists($f, $values)) {
+                $this->setNotEmpty($f, $values[$f]);
+            }
+
         }
+
     }
 
 
@@ -312,8 +320,9 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
         // "Style" tab in a record edit form.
 
         $localStyles = false;
-        foreach ($values as $key => $val) {
-            if (in_array($key, self::$styles) && !is_null($val)) {
+
+        foreach (self::$styles as $style) {
+            if (in_array($style, $values) && !is_null($values[$style])) {
                 $localStyles = true; break;
             }
         }
@@ -336,7 +345,10 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
             else $tag=new NeatlineTag($exhibit);
 
             // Update attributes.
-            foreach (self::$styles as $s) $tag[$s] = $values[$s];
+            foreach (self::$styles as $s) {
+                if (array_key_exists($s, $values)) $tag[$s] = $values[$s];
+            }
+
             $tag->save();
 
             // Set tag reference.
@@ -364,11 +376,11 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
 
 
     /**
-     * Update the style tag references by constructing the tag depth
-     * chart (record-specific tag first, then general tags ordered by
-     * the `tags` string, then the exhibit default tag), walking each
-     * of the styles, and finding the first tag in the list for which
-     * there is a non-null value for the style in question.
+     * Update the style tag references by constructing the tag depth chart
+     * (record-specific tag first, then general tags ordered by the `tags`
+     * string, then the exhibit default tag), walking each of the styles,
+     * and finding the first tag in the list for which there is a non-null
+     * value for the style in question.
      *
      * @param array $values An associative array of values.
      */
@@ -376,6 +388,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
     {
 
         // Get the tag depth chart.
+        $tags = $this->getTable('NeatlineTag');
         $stack = $tags->getTagStack($this->tags, $this);
 
         // Update the tag references.
@@ -396,89 +409,92 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
      */
     public function update($values)
     {
+        $this->setStaticFields($values);
+        $this->setLocalStyles($values);
+        $this->updateTagReferences($values);
 
-        // Get the tags table.
-        $tags = $this->getTable('NeatlineTag');
+        // // Get the tags table.
+        // $tags = $this->getTable('NeatlineTag');
 
-        // ----------------------------------------------------------------
+        // // ----------------------------------------------------------------
 
-        // Are any of the fields from the the "Style" tab in the record
-        // edit form set with non-null values?
+        // // Are any of the fields from the the "Style" tab in the record
+        // // edit form set with non-null values?
 
-        $localStyles = false;
-        foreach (self::$styles as $s) {
-            if (!is_null($values[$s])) { $localStyles = true; break; }
-        }
+        // $localStyles = false;
+        // foreach (self::$styles as $s) {
+        //     if (!is_null($values[$s])) { $localStyles = true; break; }
+        // }
 
-        // If so, then these values need to be stored in a record-specific
-        // "local" tag referenced by the record's `tag_id` attribute. This
-        // tag is not created by default for the record (since it is not
-        // needed when all of a record's styles are inherited from regular
-        // tags) and needs to created if it does not already exist.
+        // // If so, then these values need to be stored in a record-specific
+        // // "local" tag referenced by the record's `tag_id` attribute. This
+        // // tag is not created by default for the record (since it is not
+        // // needed when all of a record's styles are inherited from regular
+        // // tags) and needs to created if it does not already exist.
 
-        if ($localStyles) {
+        // if ($localStyles) {
 
-            // Get the parent exhibit.
-            $exhibit = $this->getExhibit();
+        //     // Get the parent exhibit.
+        //     $exhibit = $this->getExhibit();
 
-            // Get or crete the tag.
-            if (!is_null($this->tag_id)) $tag=$tags->find($this->tag_id);
-            else $tag=new NeatlineTag($exhibit);
+        //     // Get or crete the tag.
+        //     if (!is_null($this->tag_id)) $tag=$tags->find($this->tag_id);
+        //     else $tag=new NeatlineTag($exhibit);
 
-            // Update attributes.
-            foreach (self::$styles as $s) $tag[$s] = $values[$s];
-            $tag->save();
+        //     // Update attributes.
+        //     foreach (self::$styles as $s) $tag[$s] = $values[$s];
+        //     $tag->save();
 
-            // Set tag reference.
-            $this->tag_id = $tag->id;
+        //     // Set tag reference.
+        //     $this->tag_id = $tag->id;
 
-        }
+        // }
 
-        // If all of the local styles from the form are null, we need to
-        // garbage collect an existing record-specific tag if one exists.
+        // // If all of the local styles from the form are null, we need to
+        // // garbage collect an existing record-specific tag if one exists.
 
-        else if (!is_null($this->tag_id)) {
+        // else if (!is_null($this->tag_id)) {
 
-            // Get the local tag.
-            $tag = $tags->find($this->tag_id);
+        //     // Get the local tag.
+        //     $tag = $tags->find($this->tag_id);
 
-            // Remove.
-            $this->tag_id = null;
-            $tag->delete();
+        //     // Remove.
+        //     $this->tag_id = null;
+        //     $tag->delete();
 
-        }
+        // }
 
-        // ----------------------------------------------------------------
+        // // ----------------------------------------------------------------
 
-        // Unset all of the tag-backed attributes and set the remaining
-        // values directly as a group.
+        // // Unset all of the tag-backed attributes and set the remaining
+        // // values directly as a group.
 
-        foreach (self::$styles as $style) unset($values[$style]);
-        foreach ($values as $key => $val) $this->setNotEmpty($key, $val);
+        // foreach (self::$styles as $style) unset($values[$style]);
+        // foreach ($values as $key => $val) $this->setNotEmpty($key, $val);
 
-        // ----------------------------------------------------------------
+        // // ----------------------------------------------------------------
 
-        // Update the style tag references by constructing the tag depth
-        // chart (record-specific tag first, then general tags ordered by
-        // the `tags` string, then the exhibit default tag), walking each
-        // of the styles, and finding the first tag in the list for which
-        // there is a non-null value for the style in question.
+        // // Update the style tag references by constructing the tag depth
+        // // chart (record-specific tag first, then general tags ordered by
+        // // the `tags` string, then the exhibit default tag), walking each
+        // // of the styles, and finding the first tag in the list for which
+        // // there is a non-null value for the style in question.
 
-        // Get the tag depth chart.
-        $stack = $tags->getTagStack($this->tags, $this);
+        // // Get the tag depth chart.
+        // $stack = $tags->getTagStack($this->tags, $this);
 
-        // Update the tag references.
-        foreach (self::$styles as $s) {
-            foreach ($stack as $t) { if (!is_null($t[$s])) {
-                $this[$s] = $t->id;
-                break;
-            }}
-        }
+        // // Update the tag references.
+        // foreach (self::$styles as $s) {
+        //     foreach ($stack as $t) { if (!is_null($t[$s])) {
+        //         $this[$s] = $t->id;
+        //         break;
+        //     }}
+        // }
 
-        // ----------------------------------------------------------------
+        // // ----------------------------------------------------------------
 
-        // Save.
-        $this->save($coverage);
+        // // Save.
+        // $this->save($coverage);
 
     }
 
