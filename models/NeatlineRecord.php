@@ -271,6 +271,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
 
             // Set reference.
             $this->tag_id = $tag->id;
+            $this->save();
 
         }
 
