@@ -122,14 +122,21 @@ class Neatline_Test_AppTestCase extends Omeka_Test_AppTestCase
      * Create a tag.
      *
      * @param string $name The tag name.
+     * @param Omeka_Record $exhibit The parent exhibit.
      * @return NeatineTag The tag.
      */
-    public function __tag($name=null)
+    public function __tag($name=null, $exhibit=null)
     {
-        $tag = new NeatlineTag();
+
+        // Create exhibit.
+        if (is_null($exhibit)) $exhibit = $this->__exhibit();
+
+        // Create tag.
+        $tag = new NeatlineTag($exhibit);
         $tag->tag = $name;
         $tag->save();
         return $tag;
+
     }
 
 

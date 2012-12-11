@@ -34,7 +34,7 @@ class Neatline_NeatlineTagTableTest_CreateExhibitTag
         $startCount = $this->_tagsTable->count();
 
         // Create default tag.
-        $tag = $this->_tagsTable->createExhibitTag();
+        $tag = $this->_tagsTable->createExhibitTag($exhibit);
         $this->assertEquals($startCount+1, $this->_tagsTable->count());
 
         // NULL tag name:

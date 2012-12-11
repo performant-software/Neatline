@@ -175,10 +175,11 @@ class Neatline_NeatlineRecordTest_Update
     {
 
         // Create record.
-        $record = $this->__record();
+        $exhibit = $this->__exhibit();
+        $record = $this->__record(null, $exhibit);
 
         // Create tag.
-        $tag = new NeatlineTag;
+        $tag = new NeatlineTag($exhibit);
         $tag->vector_color =    '#111111';
         $tag->stroke_color =    '#222222';
         $tag->select_color =    '#333333';
@@ -269,10 +270,11 @@ class Neatline_NeatlineRecordTest_Update
     {
 
         // Create record.
-        $record = $this->__record();
+        $exhibit = $this->__exhibit();
+        $record = $this->__record(null, $exhibit);
 
         // Create tag.
-        $tag = new NeatlineTag;
+        $tag = new NeatlineTag($exhibit);
         $tag->vector_color =    '#111111';
         $tag->stroke_color =    '#222222';
         $tag->select_color =    '#333333';
@@ -364,10 +366,11 @@ class Neatline_NeatlineRecordTest_Update
     {
 
         // Create record.
-        $record = $this->__record();
+        $exhibit = $this->__exhibit();
+        $record = $this->__record(null, $exhibit);
 
         // Create tag.
-        $tag = new NeatlineTag;
+        $tag = new NeatlineTag($exhibit);
         $tag->vector_color =    '#111111';
         $tag->stroke_color =    '#222222';
         $tag->select_color =    '#333333';
@@ -448,190 +451,126 @@ class Neatline_NeatlineRecordTest_Update
     {
 
         // Create record.
-        $record = $this->__record();
+        $exhibit = $this->__exhibit();
+        $record = $this->__record(null, $exhibit);
 
-        // Create 12 tags, each with one more defined field than the last.
-        // ---------------------------------------------------------------
+        // Create 12 tags, each with a different field defined.
+        // ----------------------------------------------------
 
-        $tag1 = new NeatlineTag;
-        $tag1->vector_color =    '#1';
+        $tag1 = new NeatlineTag($exhibit);
+        $tag1->vector_color = '#1';
+        $tag1->tag = 't1';
         $tag1->save();
 
-        $tag2 = new NeatlineTag;
-        $tag2->vector_color =    '#2';
-        $tag2->stroke_color =    '#3';
+        $tag2 = new NeatlineTag($exhibit);
+        $tag2->stroke_color = '#2';
+        $tag2->tag = 't2';
         $tag2->save();
 
-        $tag3 = new NeatlineTag;
-        $tag3->vector_color =    '#4';
-        $tag3->stroke_color =    '#5';
-        $tag3->select_color =    '#6';
+        $tag3 = new NeatlineTag($exhibit);
+        $tag3->select_color = '#3';
+        $tag3->tag = 't3';
         $tag3->save();
 
-        $tag4 = new NeatlineTag;
-        $tag4->vector_color =    '#7';
-        $tag4->stroke_color =    '#8';
-        $tag4->select_color =    '#9';
-        $tag4->vector_opacity =  10;
+        $tag4 = new NeatlineTag($exhibit);
+        $tag4->vector_opacity = 4;
+        $tag4->tag = 't4';
         $tag4->save();
 
-        $tag5 = new NeatlineTag;
-        $tag5->vector_color =    '#11';
-        $tag5->stroke_color =    '#12';
-        $tag5->select_color =    '#13';
-        $tag5->vector_opacity =  14;
-        $tag5->select_opacity =  15;
+        $tag5 = new NeatlineTag($exhibit);
+        $tag5->select_opacity = 5;
+        $tag5->tag = 't5';
         $tag5->save();
 
-        $tag6 = new NeatlineTag;
-        $tag6->vector_color =    '#16';
-        $tag6->stroke_color =    '#17';
-        $tag6->select_color =    '#18';
-        $tag6->vector_opacity =  19;
-        $tag6->select_opacity =  20;
-        $tag6->stroke_opacity =  21;
+        $tag6 = new NeatlineTag($exhibit);
+        $tag6->stroke_opacity = 6;
+        $tag6->tag = 't6';
         $tag6->save();
 
-        $tag7 = new NeatlineTag;
-        $tag7->vector_color =    '#22';
-        $tag7->stroke_color =    '#23';
-        $tag7->select_color =    '#24';
-        $tag7->vector_opacity =  25;
-        $tag7->select_opacity =  26;
-        $tag7->stroke_opacity =  27;
-        $tag7->image_opacity =   28;
+        $tag7 = new NeatlineTag($exhibit);
+        $tag7->image_opacity = 7;
+        $tag7->tag = 't7';
         $tag7->save();
 
-        $tag8 = new NeatlineTag;
-        $tag8->vector_color =    '#29';
-        $tag8->stroke_color =    '#30';
-        $tag8->select_color =    '#31';
-        $tag8->vector_opacity =  32;
-        $tag8->select_opacity =  33;
-        $tag8->stroke_opacity =  34;
-        $tag8->image_opacity =   35;
-        $tag8->stroke_width =    36;
+        $tag8 = new NeatlineTag($exhibit);
+        $tag8->stroke_width = 8;
+        $tag8->tag = 't8';
         $tag8->save();
 
-        $tag9 = new NeatlineTag;
-        $tag9->vector_color =    '#37';
-        $tag9->stroke_color =    '#38';
-        $tag9->select_color =    '#39';
-        $tag9->vector_opacity =  40;
-        $tag9->select_opacity =  41;
-        $tag9->stroke_opacity =  42;
-        $tag9->image_opacity =   43;
-        $tag9->stroke_width =    44;
-        $tag9->point_radius =    45;
+        $tag9 = new NeatlineTag($exhibit);
+        $tag9->point_radius = 9;
+        $tag9->tag = 't9';
         $tag9->save();
 
-        $tag10 = new NeatlineTag;
-        $tag10->vector_color =    '#37';
-        $tag10->stroke_color =    '#38';
-        $tag10->select_color =    '#39';
-        $tag10->vector_opacity =  40;
-        $tag10->select_opacity =  41;
-        $tag10->stroke_opacity =  42;
-        $tag10->image_opacity =   43;
-        $tag10->stroke_width =    44;
-        $tag10->point_radius =    45;
-        $tag10->point_image =     '46.png';
+        $tag10 = new NeatlineTag($exhibit);
+        $tag10->point_image = '10.png';
+        $tag10->tag = 't10';
         $tag10->save();
 
-        $tag11 = new NeatlineTag;
-        $tag11->vector_color =    '#47';
-        $tag11->stroke_color =    '#48';
-        $tag11->select_color =    '#49';
-        $tag11->vector_opacity =  50;
-        $tag11->select_opacity =  51;
-        $tag11->stroke_opacity =  52;
-        $tag11->image_opacity =   53;
-        $tag11->stroke_width =    54;
-        $tag11->point_radius =    55;
-        $tag11->point_image =     '56.png';
+        $tag11 = new NeatlineTag($exhibit);
+        $tag11->max_zoom = 11;
+        $tag11->tag = 't11';
         $tag11->save();
 
-        $tag12 = new NeatlineTag;
-        $tag12->vector_color =    '#57';
-        $tag12->stroke_color =    '#58';
-        $tag12->select_color =    '#59';
-        $tag12->vector_opacity =  60;
-        $tag12->select_opacity =  61;
-        $tag12->stroke_opacity =  62;
-        $tag12->image_opacity =   63;
-        $tag12->stroke_width =    64;
-        $tag12->point_radius =    65;
-        $tag12->point_image =     '66.png';
-        $tag12->max_zoom =        67;
+        $tag12 = new NeatlineTag($exhibit);
+        $tag12->min_zoom = 12;
+        $tag12->tag = 't12';
         $tag12->save();
 
-        $tag13 = new NeatlineTag;
-        $tag13->vector_color =    '#68';
-        $tag13->stroke_color =    '#69';
-        $tag13->select_color =    '#70';
-        $tag13->vector_opacity =  71;
-        $tag13->select_opacity =  72;
-        $tag13->stroke_opacity =  73;
-        $tag13->image_opacity =   74;
-        $tag13->stroke_width =    75;
-        $tag13->point_radius =    76;
-        $tag13->point_image =     '77.png';
-        $tag13->max_zoom =        78;
-        $tag13->min_zoom =        79;
-        $tag13->save();
+        $tags = 't1,t2,t3,t4,t5,t6,t7,t8,t9,t10,t11,t12';
 
+        // Mock values.
+        $values = array(
 
-        // // Set tag reference.
-        // $record->tag_id = $tag->id;
+            // Local values:
+            // -------------
 
-        // // Mock new values.
-        // $values = array(
+            'id'                    => $record->id,
+            'item_id'               => null,
+            'slug'                  => 'slug',
+            'title'                 => 'title',
+            'body'                  => 'body',
+            'tags'                  => $tags,
+            'coverage'              => 'POINT(1 1)',
+            'map_active'            => 1,
+            'map_focus'             => 'lat/lon',
+            'map_zoom'              => 2,
 
-        //     // Local values:
-        //     // -------------
+            // Null local styles:
+            // ------------------
 
-        //     'id'                    => $record->id,
-        //     'item_id'               => null,
-        //     'slug'                  => 'slug',
-        //     'title'                 => 'title',
-        //     'body'                  => 'body',
-        //     'tags'                  => 'tag1,tag2',
-        //     'coverage'              => 'POINT(1 1)',
-        //     'map_active'            => 1,
-        //     'map_focus'             => 'lat/lon',
-        //     'map_zoom'              => 2,
+            'vector_color'          => null,
+            'stroke_color'          => null,
+            'select_color'          => null,
+            'vector_opacity'        => null,
+            'select_opacity'        => null,
+            'stroke_opacity'        => null,
+            'image_opacity'         => null,
+            'stroke_width'          => null,
+            'point_radius'          => null,
+            'point_image'           => null,
+            'max_zoom'              => null,
+            'min_zoom'              => null,
 
-        //     // Locally-set styles:
-        //     // -------------------
+        );
 
-        //     'vector_color'          => null,
-        //     'stroke_color'          => null,
-        //     'select_color'          => null,
-        //     'vector_opacity'        => null,
-        //     'select_opacity'        => null,
-        //     'stroke_opacity'        => null,
-        //     'image_opacity'         => null,
-        //     'stroke_width'          => null,
-        //     'point_radius'          => null,
-        //     'point_image'           => null,
-        //     'max_zoom'              => null,
-        //     'min_zoom'              => null,
+        // Update.
+        $record->update($values);
 
-        // );
-
-        // // Starting tags count.
-        // $startCount = $this->_tagsTable->count();
-
-        // // Update.
-        // $record->update($values);
-
-        // // Check tags-1.
-        // $this->assertEquals($startCount-1, $this->_tagsTable->count());
-        // $this->assertNull($this->_tagsTable->find($tag->id));
-
-        // // Re-get the record, check for null `tag_id`.
-        // $record = $this->_recordsTable->find($record->id);
-        // $this->assertNull($record->tag_id);
+        // Re-get the record, check the references.
+        $record = $this->_recordsTable->find($record->id);
+        $this->assertEquals($record->vector_color, $tag1->id);
+        $this->assertEquals($record->stroke_color, $tag2->id);
+        $this->assertEquals($record->select_color, $tag3->id);
+        $this->assertEquals($record->vector_opacity, $tag4->id);
+        $this->assertEquals($record->select_opacity, $tag5->id);
+        $this->assertEquals($record->stroke_opacity, $tag6->id);
+        $this->assertEquals($record->image_opacity, $tag7->id);
+        $this->assertEquals($record->stroke_width, $tag8->id);
+        $this->assertEquals($record->point_radius, $tag9->id);
+        $this->assertEquals($record->point_image, $tag10->id);
+        $this->assertEquals($record->max_zoom, $tag11->id);
+        $this->assertEquals($record->min_zoom, $tag12->id);
 
     }
 

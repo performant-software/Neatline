@@ -11,7 +11,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class Neatline_NeatlineRecordTest_FieldDefaults
+class Neatline_NeatlineRecordTest_Construct
     extends Neatline_Test_AppTestCase
 {
 
@@ -45,7 +45,7 @@ class Neatline_NeatlineRecordTest_FieldDefaults
         $neatline = $this->__exhibit();
         $record = new NeatlineRecord(null, $neatline);
 
-        // Item and exhibit keys should be set.
+        // Exhibit key should be set.
         $this->assertEquals($record->exhibit_id, $neatline->id);
         $this->assertEquals($record->item_id, null);
 

@@ -16,6 +16,12 @@ class NeatlineTag extends Omeka_Record_AbstractRecord
 
 
     /**
+     * The parent exhibit id.
+     * int(10) unsigned NOT NULL
+     */
+    public $exhibit_id;
+
+    /**
      * The tag name.
      * tinytext COLLATE utf8_unicode_ci NULL
      */
@@ -92,6 +98,18 @@ class NeatlineTag extends Omeka_Record_AbstractRecord
      * int(10) unsigned NULL
      */
     public $min_zoom;
+
+
+    /**
+     * Set foreign keys.
+     *
+     * @param Omeka_record $exhibit The exhibit record.
+     */
+    public function __construct($exhibit = null)
+    {
+        parent::__construct();
+        if (!is_null($exhibit)) $this->exhibit_id = $exhibit->id;
+    }
 
 
 }

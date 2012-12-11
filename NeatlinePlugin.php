@@ -124,6 +124,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
             `{$this->_db->prefix}neatline_tags` (
 
             `id`                int(10) unsigned NOT NULL auto_increment,
+            `exhibit_id`        int(10) unsigned NOT NULL,
             `tag`               tinytext COLLATE utf8_unicode_ci NULL,
 
             `vector_color`      tinytext COLLATE utf8_unicode_ci NULL,

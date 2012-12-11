@@ -19,13 +19,14 @@ class NeatlineTagTable extends Omeka_Db_Table
      * Create a default style tag for an exhibit, drawing values from the
      * system defaults in the plugin.ini.
      *
+     * @param Omeka_Record $exhibit The exhibit record.
      * @return Omeka_Record $tag The new tag.
      */
-    public function createExhibitTag()
+    public function createExhibitTag($exhibit)
     {
 
         // Create tag.
-        $tag = new NeatlineTag();
+        $tag = new NeatlineTag($exhibit);
 
         // Vector color:
         $tag->vector_color = get_plugin_ini(
@@ -85,24 +86,64 @@ class NeatlineTagTable extends Omeka_Db_Table
 
 
     /**
-     * Get or create the record-specific tag for a record.
+     * Get a tag by its name.
      *
-     * @param Omeka_Record $record The record.
-     * @return Omeka_Record $tag The record tag.
+     * @param string $name The tag name.
+     * @return Omeka_Record $exhibit The parent exhibit.
+     * @return Omeka_Record $tag The tag.
      */
-    public function getOrCreateRecordTag($record)
+    public function getTagByName($exhibit, $name)
+    {
+        return $this->fetchObject(
+            $this->getSelect()
+                ->where('exhibit_id = ?', $exhibit->id)
+                ->where('tag = ?', $name)
+        );
+    }
+
+
+    /**
+     * Working with a comma-delimited tags like "tag1,tag2,tag3", get all
+     * of the referenced tags from the database and put them into an array
+     * in the same order as the labels in the string. Put the exhibit-
+     * default tag at the end of the array, and if one exists, the record
+     * local tag at the beginning of the array:
+     *
+     * array(
+     *  [record default],
+     *  [tag1],
+     *  [tag2],
+     *  [tag3],
+     *  [exhibit default]
+     * );
+     *
+     * @param string $tags The tag string.
+     * @param Omeka_Record $record The record.
+     * @return array(Omeka_Record) The ordered array.
+     */
+    public function getTagStack($tags, $record)
     {
 
-        // Try to get existing tag.
+        $stack = array();
+
+        // Strip all spaces, explode on ','.
+        $tags = explode(',', str_replace(' ', '', $tags));
+        $exhibit = $record->getExhibit();
+
+        // Push on the record-default.
         if (!is_null($record->tag_id)) {
-            $tag = $this->fetchObject(
-                $this->getSelect()->where('id = ?', $record->tag_id)
-            );
+            array_push($stack, $this->find($record->tag_id));
         }
 
-        // If no tag, create one.
-        else $tag = new NeatlineTag;
-        return $tag;
+        // Push the tags.
+        foreach ($tags as $t) {
+            array_push($stack, $this->getTagByName($exhibit, $t));
+        }
+
+        // Push the default.
+        array_push($stack, $this->getExhibitTag($exhibit));
+
+        return $stack;
 
     }
 

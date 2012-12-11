@@ -23,7 +23,8 @@ class Neatline_NeatlineTagTest_FieldAccess
     {
 
         // Create a tag.
-        $tag = new NeatlineTag();
+        $exhibit = $this->__exhibit();
+        $tag = new NeatlineTag($exhibit);
 
         // Set:
         $tag->tag                = 'tag';

@@ -173,26 +173,16 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
 
 
     /**
-     * Instantiate and foreign keys.
+     * Set foreign keys.
      *
      * @param Omeka_record $item The item record.
-     * @param Omeka_record $neatline The exhibit record.
+     * @param Omeka_record $exhibit The exhibit record.
      */
-    public function __construct($item = null, $neatline = null)
+    public function __construct($item = null, $exhibit = null)
     {
-
         parent::__construct();
-
-        // If defined, set the item key.
-        if (!is_null($item)) {
-            $this->item_id = $item->id;
-        }
-
-        // If defined, set the item key.
-        if (!is_null($neatline)) {
-            $this->exhibit_id = $neatline->id;
-        }
-
+        if (!is_null($exhibit)) $this->exhibit_id = $exhibit->id;
+        if (!is_null($item)) $this->item_id = $item->id;
     }
 
 
@@ -273,6 +263,104 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
 
 
     /**
+     * Update the record.
+     *
+     * @param array $values The PUT values.
+     */
+    public function update($values)
+    {
+
+        // Get the tags table.
+        $tags = $this->getTable('NeatlineTag');
+
+        // Pluck out the coverage.
+        $coverage = $values['coverage'];
+        unset($values['coverage']);
+
+        // ----------------------------------------------------------------
+
+        // Are any of the fields from the the "Style" tab in the record
+        // edit form set with non-null values?
+
+        $localStyles = false;
+        foreach (self::$styles as $s) {
+            if (!is_null($values[$s])) { $localStyles = true; break; }
+        }
+
+        // If so, then these values need to be stored in a record-specific
+        // "local" tag referenced by the record's `tag_id` attribute. This
+        // tag is not created by default for the record (since it is not
+        // needed when all of a record's styles are inherited from regular
+        // tags) and needs to created if one does not exist.
+
+        if ($localStyles) {
+
+            // Get the parent exhibit.
+            $exhibit = $this->getExhibit();
+
+            // Get or crete the tag.
+            if (!is_null($this->tag_id)) $tag=$tags->find($this->tag_id);
+            else $tag=new NeatlineTag($exhibit);
+
+            // Update attributes.
+            foreach (self::$styles as $s) $tag[$s] = $values[$s];
+            $tag->save();
+
+            // Set tag reference.
+            $this->tag_id = $tag->id;
+
+        }
+
+        // If all of the local styles from the form are null, we need to
+        // garbage collect an existing record-specific tag if one exists.
+
+        else if (!is_null($this->tag_id)) {
+
+            // Get the local tag.
+            $tag = $tags->find($this->tag_id);
+
+            // Remove.
+            $this->tag_id = null;
+            $tag->delete();
+
+        }
+
+        // ----------------------------------------------------------------
+
+        // Unset all of the tag-backed attributes and set the remaining
+        // values directly as a group.
+
+        foreach (self::$styles as $style) unset($values[$style]);
+        foreach ($values as $key => $val) $this->setNotEmpty($key, $val);
+
+        // ----------------------------------------------------------------
+
+        // Update the style tag references by constructing the tag depth
+        // chart (record-specific tag first, then general tags ordered by
+        // the `tags` string, then the exhibit default tag), walking each
+        // of the styles, and finding the first tag in the list for which
+        // there is a non-null value for the style in question.
+
+        // Get the tag depth chart.
+        $stack = $tags->getTagStack($this->tags, $this);
+
+        // Update the tag references.
+        foreach (self::$styles as $s) {
+            foreach ($stack as $t) { if (!is_null($t[$s])) {
+                $this[$s] = $t->id;
+                break;
+            }}
+        }
+
+        // ----------------------------------------------------------------
+
+        // Save.
+        $this->save($coverage);
+
+    }
+
+
+    /**
      * Assemble record data for the front-end application.
      *
      * @param string $coverage The coverage as plaintext WKT.
@@ -318,74 +406,6 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
         );
 
         return $data;
-
-    }
-
-
-    /**
-     * Update the record.
-     *
-     * @param array $values The PUT values.
-     */
-    public function update($values)
-    {
-
-        // Pluck out the coverage.
-        $coverage = $values['coverage'];
-        unset($values['coverage']);
-
-        // Are any of the fields from the the "Style" tab in the record
-        // edit form set with non-null values?
-
-        $localStyles = false;
-        foreach (self::$styles as $s) {
-            if (!is_null($values[$s])) { $localStyles = true; break; }
-        }
-
-        // If so, then these values need to be stored in a record-specific
-        // "local" tag referenced by the record's `tag_id` attribute. This
-        // tag is not created by default for the record (since it is not
-        // needed when all of a record's styles are inherited from regular
-        // tags) and needs to created if one does not exist.
-
-        if ($localStyles) {
-
-            // Get or create the local tag.
-            $tagsTable = $this->getTable('NeatlineTag');
-            $tag = $tagsTable->getOrCreateRecordTag($this);
-
-            // Update attributes.
-            foreach (self::$styles as $s) $tag[$s] = $values[$s];
-            $tag->save();
-
-            // Set tag reference.
-            $this->tag_id = $tag->id;
-
-        }
-
-        // If all of the local styles from the form are null, we need to
-        // garbage collect an existing record-specific tag if one exists.
-
-        else if (!is_null($this->tag_id)) {
-
-            // Get the local tag.
-            $tagsTable = $this->getTable('NeatlineTag');
-            $tag = $tagsTable->find($this->tag_id);
-
-            // Remove.
-            $this->tag_id = null;
-            $tag->delete();
-
-        }
-
-        // Unset all of the tag-backed attributes and set the remaining
-        // values directly as a group.
-
-        foreach (self::$styles as $style) unset($values[$style]);
-        foreach ($values as $key => $val) $this->setNotEmpty($key, $val);
-
-        // Save.
-        $this->save($coverage);
 
     }
 
