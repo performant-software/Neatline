@@ -17,8 +17,8 @@ class Neatline_NeatlineRecordTest_SetStaticFields
 
 
     /**
-     * setStaticFields() set all static fields when there are keys for all
-     * valid fields in the input array.
+     * setStaticFields() should set all static fields when there are keys
+     * for all valid fields in the input array.
      *
      * @group tags
      */
@@ -160,18 +160,18 @@ class Neatline_NeatlineRecordTest_SetStaticFields
             // Locally-set styles:
             // -------------------
 
-            'vector_color'          => '#333333',
-            'stroke_color'          => '#444444',
-            'select_color'          => '#555555',
-            'vector_opacity'        => 6,
-            'select_opacity'        => 7,
-            'stroke_opacity'        => 8,
-            'image_opacity'         => 9,
-            'stroke_width'          => 10,
-            'point_radius'          => 11,
-            'point_image'           => 'file.png',
-            'max_zoom'              => 12,
-            'min_zoom'              => 13,
+            'vector_color'      => '#333333',
+            'stroke_color'      => '#444444',
+            'select_color'      => '#555555',
+            'vector_opacity'    => 6,
+            'select_opacity'    => 7,
+            'stroke_opacity'    => 8,
+            'image_opacity'     => 9,
+            'stroke_width'      => 10,
+            'point_radius'      => 11,
+            'point_image'       => 'file.png',
+            'max_zoom'          => 12,
+            'min_zoom'          => 13
 
         );
 

@@ -432,12 +432,22 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
         $tagsTable = $this->getTable('NeatlineTag');
         $stack = $tagsTable->getTagStack($this->tags, $this);
 
-        // Update the tag references.
-        foreach (self::$styles as $s) {
-            foreach ($stack as $t) { if (!is_null($t[$s])) {
-                $this[$s] = $t->id;
-                break;
-            }}
+        // Walk the style keys.
+        foreach (self::$styles as $style) {
+
+            // Walk the tag stack.
+            foreach ($stack as $tag) {
+
+                // When a non-null value is found, point the local style
+                // key at the tag and break out of the loop.
+
+                if (!is_null($tag[$style])) {
+                    $this[$style] = $tag->id;
+                    break;
+                }
+
+            }
+
         }
 
     }

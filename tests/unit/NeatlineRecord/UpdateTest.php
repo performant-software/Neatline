@@ -21,71 +21,74 @@ class Neatline_NeatlineRecordTest_Update
      *
      * @group tags
      */
-    public function testUpdateNonStyleValues()
-    {
+    // public function testUpdateNonStyleValues()
+    // {
 
-        // Create record.
-        $record = $this->__record();
+    //     // Create record.
+    //     $record = $this->__record();
 
-        // Set:
-        $record->slug               = 'slug';
-        $record->title              = 'title';
-        $record->body               = 'body';
-        $record->tags               = 'tag1,tag2';
-        $record->map_focus          = 'lat/lon';
-        $record->map_zoom           = 1;
-        $record->map_active         = 2;
+    //     // Set:
+    //     $record->slug       = '1';
+    //     $record->title      = '2';
+    //     $record->body       = '3';
+    //     $record->tags       = '4';
+    //     $record->map_focus  = '5';
+    //     $record->map_zoom   = 6;
+    //     $record->map_active = 7;
 
-        // Mock values.
-        $values = array(
+    //     // Mock values.
+    //     $values = array(
 
-            // Local values:
-            // -------------
+    //         // Local values:
+    //         // -------------
 
-            'id'                    => $record->id,
-            'item_id'               => null,
-            'slug'                  => 'slug2',
-            'title'                 => 'title2',
-            'body'                  => 'body2',
-            'tags'                  => 'tag3,tag4',
-            'map_focus'             => 'lat2/lon2',
-            'coverage'              => 'POINT(1 1)',
-            'map_zoom'              => 2,
-            'map_active'            => 0,
+    //         'id'            => $record->id,
+    //         'item_id'       => 8,
+    //         'slug'          => '9',
+    //         'title'         => '10',
+    //         'body'          => '11',
+    //         'tags'          => '12',
+    //         'map_focus'     => '13',
+    //         'coverage'      => '14',
+    //         'map_zoom'      => 15,
+    //         'map_active'    => 16,
 
-            // Un-set local styles:
-            // --------------------
+    //         // Null local styles:
+    //         // --------------------
 
-            'vector_color'          => null,
-            'stroke_color'          => null,
-            'select_color'          => null,
-            'vector_opacity'        => null,
-            'select_opacity'        => null,
-            'stroke_opacity'        => null,
-            'image_opacity'         => null,
-            'stroke_width'          => null,
-            'point_radius'          => null,
-            'point_image'           => null,
-            'max_zoom'              => null,
-            'min_zoom'              => null
+    //         'vector_color'      => null,
+    //         'stroke_color'      => null,
+    //         'select_color'      => null,
+    //         'vector_opacity'    => null,
+    //         'select_opacity'    => null,
+    //         'stroke_opacity'    => null,
+    //         'image_opacity'     => null,
+    //         'stroke_width'      => null,
+    //         'point_radius'      => null,
+    //         'point_image'       => null,
+    //         'max_zoom'          => null,
+    //         'min_zoom'          => null
 
-        );
+    //     );
 
-        // Update, get record.
-        $record->update($values);
-        $record = $this->_recordsTable->find($record->id);
+    //     // Update, get record.
+    //     $record->update($values);
+    //     $record = $this->_recordsTable->find($record->id);
 
-        // Check new values.
-        $this->assertEquals($record->slug, 'slug2');
-        $this->assertEquals($record->title, 'title2');
-        $this->assertEquals($record->body, 'body2');
-        $this->assertEquals($record->tags, 'tag3,tag4');
-        $this->assertEquals($record->map_focus, 'lat2/lon2');
-        $this->assertEquals($record->map_zoom, 2);
-        $this->assertEquals($record->map_active, 0);
-        $this->assertNotNull($record->coverage);
+    //     // Check new values.
+    //     $this->assertEquals($record->slug,          '9');
+    //     $this->assertEquals($record->slug,          '9');
+    //     $this->assertEquals($record->title,         '10');
+    //     $this->assertEquals($record->body,          '11');
+    //     $this->assertEquals($record->tags,          '12');
+    //     $this->assertEquals($record->map_focus,     '13');
+    //     $this->assertEquals($record->map_zoom,      15);
+    //     $this->assertEquals($record->map_active,    16);
 
-    }
+    //     // Check set coverage.
+    //     $this->assertNotNull($record->coverage);
+
+    // }
 
 
     /**
@@ -95,73 +98,73 @@ class Neatline_NeatlineRecordTest_Update
      *
      * @group tags
      */
-    public function testUpdateCreateLocalTag()
-    {
+    // public function testUpdateCreateLocalTag()
+    // {
 
-        // Create record.
-        $record = $this->__record();
+    //     // Create record.
+    //     $record = $this->__record();
 
-        // Mock values.
-        $values = array(
+    //     // Mock values.
+    //     $values = array(
 
-            // Local values:
-            // -------------
+    //         // Local values:
+    //         // -------------
 
-            'id'                    => $record->id,
-            'item_id'               => null,
-            'slug'                  => 'slug',
-            'title'                 => 'title',
-            'body'                  => 'body',
-            'tags'                  => 'tag1,tag2',
-            'coverage'              => 'POINT(1 1)',
-            'map_active'            => 1,
-            'map_focus'             => 'lat/lon',
-            'map_zoom'              => 2,
+    //         'id'            => $record->id,
+    //         'item_id'       => null,
+    //         'slug'          => 'slug',
+    //         'title'         => 'title',
+    //         'body'          => 'body',
+    //         'tags'          => 'tag1,tag2',
+    //         'coverage'      => 'POINT(1 1)',
+    //         'map_active'    => 1,
+    //         'map_focus'     => 'lat/lon',
+    //         'map_zoom'      => 2,
 
-            // Locally-set styles:
-            // -------------------
+    //         // Locally-set styles:
+    //         // -------------------
 
-            'vector_color'          => '#333333',
-            'stroke_color'          => '#444444',
-            'select_color'          => '#555555',
-            'vector_opacity'        => 6,
-            'select_opacity'        => 7,
-            'stroke_opacity'        => 8,
-            'image_opacity'         => 9,
-            'stroke_width'          => 10,
-            'point_radius'          => 11,
-            'point_image'           => 'file.png',
-            'max_zoom'              => 12,
-            'min_zoom'              => 13,
+    //         'vector_color'      => '#333333',
+    //         'stroke_color'      => '#444444',
+    //         'select_color'      => '#555555',
+    //         'vector_opacity'    => 6,
+    //         'select_opacity'    => 7,
+    //         'stroke_opacity'    => 8,
+    //         'image_opacity'     => 9,
+    //         'stroke_width'      => 10,
+    //         'point_radius'      => 11,
+    //         'point_image'       => 'file.png',
+    //         'max_zoom'          => 12,
+    //         'min_zoom'          => 13
 
-        );
+    //     );
 
-        // Starting tags count.
-        $startCount = $this->_tagsTable->count();
+    //     // Starting tags count.
+    //     $startCount = $this->_tagsTable->count();
 
-        // Update.
-        $record->update($values);
+    //     // Update.
+    //     $record->update($values);
 
-        // Check tags+1.
-        $this->assertEquals($startCount+1, $this->_tagsTable->count());
+    //     // Check tags+1.
+    //     $this->assertEquals($startCount+1, $this->_tagsTable->count());
 
-        // Check new tag.
-        $tag = $this->getLastTag();
-        $this->assertEquals($record->tag_id,        $tag->id);
-        $this->assertEquals($tag->vector_color,      '#333333');
-        $this->assertEquals($tag->stroke_color,      '#444444');
-        $this->assertEquals($tag->select_color,      '#555555');
-        $this->assertEquals($tag->vector_opacity,    6);
-        $this->assertEquals($tag->select_opacity,    7);
-        $this->assertEquals($tag->stroke_opacity,    8);
-        $this->assertEquals($tag->image_opacity,     9);
-        $this->assertEquals($tag->stroke_width,      10);
-        $this->assertEquals($tag->point_radius,      11);
-        $this->assertEquals($tag->point_image,       'file.png');
-        $this->assertEquals($tag->max_zoom,          12);
-        $this->assertEquals($tag->min_zoom,          13);
+    //     // Check new tag.
+    //     $tag = $this->getLastTag();
+    //     $this->assertEquals($record->tag_id,        $tag->id);
+    //     $this->assertEquals($tag->vector_color,     '#333333');
+    //     $this->assertEquals($tag->stroke_color,     '#444444');
+    //     $this->assertEquals($tag->select_color,     '#555555');
+    //     $this->assertEquals($tag->vector_opacity,   6);
+    //     $this->assertEquals($tag->select_opacity,   7);
+    //     $this->assertEquals($tag->stroke_opacity,   8);
+    //     $this->assertEquals($tag->image_opacity,    9);
+    //     $this->assertEquals($tag->stroke_width,     10);
+    //     $this->assertEquals($tag->point_radius,     11);
+    //     $this->assertEquals($tag->point_image,      'file.png');
+    //     $this->assertEquals($tag->max_zoom,         12);
+    //     $this->assertEquals($tag->min_zoom,         13);
 
-    }
+    // }
 
 
     /**
@@ -171,92 +174,92 @@ class Neatline_NeatlineRecordTest_Update
      *
      * @group tags
      */
-    public function testUpdateUpdateLocalTag()
-    {
+    // public function testUpdateUpdateLocalTag()
+    // {
 
-        // Create record.
-        $exhibit = $this->__exhibit();
-        $record = $this->__record(null, $exhibit);
+    //     // Create record.
+    //     $exhibit = $this->__exhibit();
+    //     $record = $this->__record(null, $exhibit);
 
-        // Create tag.
-        $tag = new NeatlineTag($exhibit);
-        $tag->vector_color =    '#111111';
-        $tag->stroke_color =    '#222222';
-        $tag->select_color =    '#333333';
-        $tag->vector_opacity =  4;
-        $tag->select_opacity =  5;
-        $tag->stroke_opacity =  6;
-        $tag->image_opacity =   7;
-        $tag->stroke_width =    8;
-        $tag->point_radius =    9;
-        $tag->point_image =     'file.png';
-        $tag->max_zoom =        10;
-        $tag->min_zoom =        11;
-        $tag->save();
+    //     // Create tag.
+    //     $tag = new NeatlineTag($exhibit);
+    //     $tag->vector_color =    '#111111';
+    //     $tag->stroke_color =    '#222222';
+    //     $tag->select_color =    '#333333';
+    //     $tag->vector_opacity =  4;
+    //     $tag->select_opacity =  5;
+    //     $tag->stroke_opacity =  6;
+    //     $tag->image_opacity =   7;
+    //     $tag->stroke_width =    8;
+    //     $tag->point_radius =    9;
+    //     $tag->point_image =     'file.png';
+    //     $tag->max_zoom =        10;
+    //     $tag->min_zoom =        11;
+    //     $tag->save();
 
-        // Set tag reference.
-        $record->tag_id = $tag->id;
+    //     // Set tag reference.
+    //     $record->tag_id = $tag->id;
 
-        // Mock new values.
-        $values = array(
+    //     // Mock new values.
+    //     $values = array(
 
-            // Local values:
-            // -------------
+    //         // Local values:
+    //         // -------------
 
-            'id'                    => $record->id,
-            'item_id'               => null,
-            'slug'                  => 'slug',
-            'title'                 => 'title',
-            'body'                  => 'body',
-            'tags'                  => 'tag1,tag2',
-            'coverage'              => 'POINT(1 1)',
-            'map_active'            => 1,
-            'map_focus'             => 'lat/lon',
-            'map_zoom'              => 2,
+    //         'id'            => $record->id,
+    //         'item_id'       => null,
+    //         'slug'          => 'slug',
+    //         'title'         => 'title',
+    //         'body'          => 'body',
+    //         'tags'          => 'tag1,tag2',
+    //         'coverage'      => 'POINT(1 1)',
+    //         'map_active'    => 1,
+    //         'map_focus'     => 'lat/lon',
+    //         'map_zoom'      => 2,
 
-            // Locally-set styles:
-            // -------------------
+    //         // Locally-set styles:
+    //         // -------------------
 
-            'vector_color'          => '#222222',
-            'stroke_color'          => '#333333',
-            'select_color'          => '#444444',
-            'vector_opacity'        => 5,
-            'select_opacity'        => 6,
-            'stroke_opacity'        => 7,
-            'image_opacity'         => 8,
-            'stroke_width'          => 9,
-            'point_radius'          => 10,
-            'point_image'           => 'file2.png',
-            'max_zoom'              => 11,
-            'min_zoom'              => 12,
+    //         'vector_color'      => '#222222',
+    //         'stroke_color'      => '#333333',
+    //         'select_color'      => '#444444',
+    //         'vector_opacity'    => 5,
+    //         'select_opacity'    => 6,
+    //         'stroke_opacity'    => 7,
+    //         'image_opacity'     => 8,
+    //         'stroke_width'      => 9,
+    //         'point_radius'      => 10,
+    //         'point_image'       => 'file2.png',
+    //         'max_zoom'          => 11,
+    //         'min_zoom'          => 12
 
-        );
+    //     );
 
-        // Starting tags count.
-        $startCount = $this->_tagsTable->count();
+    //     // Starting tags count.
+    //     $startCount = $this->_tagsTable->count();
 
-        // Update.
-        $record->update($values);
+    //     // Update.
+    //     $record->update($values);
 
-        // Check tags+0.
-        $this->assertEquals($startCount, $this->_tagsTable->count());
+    //     // Check tags+0.
+    //     $this->assertEquals($startCount, $this->_tagsTable->count());
 
-        // Check updated tag.
-        $tag = $this->_tagsTable->find($tag->id);
-        $this->assertEquals($tag->vector_color,      '#222222');
-        $this->assertEquals($tag->stroke_color,      '#333333');
-        $this->assertEquals($tag->select_color,      '#444444');
-        $this->assertEquals($tag->vector_opacity,    5);
-        $this->assertEquals($tag->select_opacity,    6);
-        $this->assertEquals($tag->stroke_opacity,    7);
-        $this->assertEquals($tag->image_opacity,     8);
-        $this->assertEquals($tag->stroke_width,      9);
-        $this->assertEquals($tag->point_radius,      10);
-        $this->assertEquals($tag->point_image,       'file2.png');
-        $this->assertEquals($tag->max_zoom,          11);
-        $this->assertEquals($tag->min_zoom,          12);
+    //     // Check updated tag.
+    //     $tag = $this->_tagsTable->find($tag->id);
+    //     $this->assertEquals($tag->vector_color,     '#222222');
+    //     $this->assertEquals($tag->stroke_color,     '#333333');
+    //     $this->assertEquals($tag->select_color,     '#444444');
+    //     $this->assertEquals($tag->vector_opacity,   5);
+    //     $this->assertEquals($tag->select_opacity,   6);
+    //     $this->assertEquals($tag->stroke_opacity,   7);
+    //     $this->assertEquals($tag->image_opacity,    8);
+    //     $this->assertEquals($tag->stroke_width,     9);
+    //     $this->assertEquals($tag->point_radius,     10);
+    //     $this->assertEquals($tag->point_image,      'file2.png');
+    //     $this->assertEquals($tag->max_zoom,         11);
+    //     $this->assertEquals($tag->min_zoom,         12);
 
-    }
+    // }
 
 
     /**
@@ -266,92 +269,94 @@ class Neatline_NeatlineRecordTest_Update
      *
      * @group tags
      */
-    public function testUpdateUpdateLocalTagNullValues()
-    {
+    // public function testUpdateUpdateLocalTagNullValues()
+    // {
 
-        // Create record.
-        $exhibit = $this->__exhibit();
-        $record = $this->__record(null, $exhibit);
+    //     // Create record.
+    //     $exhibit = $this->__exhibit();
+    //     $record = $this->__record(null, $exhibit);
 
-        // Create tag.
-        $tag = new NeatlineTag($exhibit);
-        $tag->vector_color =    '#111111';
-        $tag->stroke_color =    '#222222';
-        $tag->select_color =    '#333333';
-        $tag->vector_opacity =  4;
-        $tag->select_opacity =  5;
-        $tag->stroke_opacity =  6;
-        $tag->image_opacity =   7;
-        $tag->stroke_width =    8;
-        $tag->point_radius =    9;
-        $tag->point_image =     'file.png';
-        $tag->max_zoom =        10;
-        $tag->min_zoom =        11;
-        $tag->save();
+    //     // Create tag.
+    //     $tag = new NeatlineTag($exhibit);
+    //     $tag->vector_color =    '#111111';
+    //     $tag->stroke_color =    '#222222';
+    //     $tag->select_color =    '#333333';
+    //     $tag->vector_opacity =  4;
+    //     $tag->select_opacity =  5;
+    //     $tag->stroke_opacity =  6;
+    //     $tag->image_opacity =   7;
+    //     $tag->stroke_width =    8;
+    //     $tag->point_radius =    9;
+    //     $tag->point_image =     'file.png';
+    //     $tag->max_zoom =        10;
+    //     $tag->min_zoom =        11;
+    //     $tag->save();
 
-        // Set tag reference.
-        $record->tag_id = $tag->id;
+    //     // Set tag reference.
+    //     $record->tag_id = $tag->id;
 
-        // Mock new values.
-        $values = array(
+    //     // Mock new values.
+    //     $values = array(
 
-            // Local values:
-            // -------------
+    //         // Local values:
+    //         // -------------
 
-            'id'                    => $record->id,
-            'item_id'               => null,
-            'slug'                  => 'slug',
-            'title'                 => 'title',
-            'body'                  => 'body',
-            'tags'                  => 'tag1,tag2',
-            'coverage'              => 'POINT(1 1)',
-            'map_active'            => 1,
-            'map_focus'             => 'lat/lon',
-            'map_zoom'              => 2,
+    //         'id'            => $record->id,
+    //         'item_id'       => null,
+    //         'slug'          => 'slug',
+    //         'title'         => 'title',
+    //         'body'          => 'body',
+    //         'tags'          => 'tag1,tag2',
+    //         'coverage'      => 'POINT(1 1)',
+    //         'map_active'    => 1,
+    //         'map_focus'     => 'lat/lon',
+    //         'map_zoom'      => 2,
 
-            // Locally-set styles:
-            // -------------------
+    //         // Locally-set styles:
+    //         // -------------------
 
-            'vector_color'          => '#222222',
-            'stroke_color'          => null,
-            'select_color'          => '#444444',
-            'vector_opacity'        => null,
-            'select_opacity'        => 6,
-            'stroke_opacity'        => null,
-            'image_opacity'         => 8,
-            'stroke_width'          => null,
-            'point_radius'          => 10,
-            'point_image'           => null,
-            'max_zoom'              => 11,
-            'min_zoom'              => null,
+    //         'vector_color'      => '#222222',
+    //         'stroke_color'      => null,
+    //         'select_color'      => '#444444',
+    //         'vector_opacity'    => null,
+    //         'select_opacity'    => 6,
+    //         'stroke_opacity'    => null,
+    //         'image_opacity'     => 8,
+    //         'stroke_width'      => null,
+    //         'point_radius'      => 10,
+    //         'point_image'       => null,
+    //         'max_zoom'          => 11,
+    //         'min_zoom'          => null
 
-        );
+    //     );
 
-        // Starting tags count.
-        $startCount = $this->_tagsTable->count();
+    //     // Starting tags count.
+    //     $startCount = $this->_tagsTable->count();
 
-        // Update.
-        $record->update($values);
+    //     // Update.
+    //     $record->update($values);
 
-        // Check tags+0.
-        $this->assertEquals($startCount, $this->_tagsTable->count());
+    //     // Check tags+0.
+    //     $this->assertEquals($startCount, $this->_tagsTable->count());
 
-        // Check updated tag.
-        $tag = $this->_tagsTable->find($tag->id);
-        $this->assertEquals($tag->vector_color,      '#222222');
-        $this->assertNull($tag->stroke_color);
-        $this->assertEquals($tag->select_color,      '#444444');
-        $this->assertNull($tag->vector_opacity);
-        $this->assertEquals($tag->select_opacity,    6);
-        $this->assertNull($tag->stroke_opacity);
-        $this->assertEquals($tag->image_opacity,     8);
-        $this->assertNull($tag->stroke_width);
-        $this->assertEquals($tag->point_radius,      10);
-        $this->assertNull($tag->point_image);
-        $this->assertEquals($tag->max_zoom,          11);
-        $this->assertNull($tag->min_zoom);
+    //     // Check updated values.
+    //     $tag = $this->_tagsTable->find($tag->id);
+    //     $this->assertEquals($tag->vector_color,     '#222222');
+    //     $this->assertEquals($tag->select_color,     '#444444');
+    //     $this->assertEquals($tag->select_opacity,   6);
+    //     $this->assertEquals($tag->image_opacity,    8);
+    //     $this->assertEquals($tag->point_radius,     10);
+    //     $this->assertEquals($tag->max_zoom,         11);
 
-    }
+    //     // Check unset values.
+    //     $this->assertNull($tag->stroke_color);
+    //     $this->assertNull($tag->vector_opacity);
+    //     $this->assertNull($tag->stroke_opacity);
+    //     $this->assertNull($tag->stroke_width);
+    //     $this->assertNull($tag->point_image);
+    //     $this->assertNull($tag->min_zoom);
+
+    // }
 
 
     /**
@@ -394,32 +399,32 @@ class Neatline_NeatlineRecordTest_Update
             // Local values:
             // -------------
 
-            'id'                    => $record->id,
-            'item_id'               => null,
-            'slug'                  => 'slug',
-            'title'                 => 'title',
-            'body'                  => 'body',
-            'tags'                  => 'tag1,tag2',
-            'coverage'              => 'POINT(1 1)',
-            'map_active'            => 1,
-            'map_focus'             => 'lat/lon',
-            'map_zoom'              => 2,
+            'id'            => $record->id,
+            'item_id'       => null,
+            'slug'          => 'slug',
+            'title'         => 'title',
+            'body'          => 'body',
+            'tags'          => 'tag1,tag2',
+            'coverage'      => 'POINT(1 1)',
+            'map_active'    => 1,
+            'map_focus'     => 'lat/lon',
+            'map_zoom'      => 2,
 
             // Locally-set styles:
             // -------------------
 
-            'vector_color'          => null,
-            'stroke_color'          => null,
-            'select_color'          => null,
-            'vector_opacity'        => null,
-            'select_opacity'        => null,
-            'stroke_opacity'        => null,
-            'image_opacity'         => null,
-            'stroke_width'          => null,
-            'point_radius'          => null,
-            'point_image'           => null,
-            'max_zoom'              => null,
-            'min_zoom'              => null,
+            'vector_color'      => null,
+            'stroke_color'      => null,
+            'select_color'      => null,
+            'vector_opacity'    => null,
+            'select_opacity'    => null,
+            'stroke_opacity'    => null,
+            'image_opacity'     => null,
+            'stroke_width'      => null,
+            'point_radius'      => null,
+            'point_image'       => null,
+            'max_zoom'          => null,
+            'min_zoom'          => null
 
         );
 
@@ -525,32 +530,32 @@ class Neatline_NeatlineRecordTest_Update
             // Local values:
             // -------------
 
-            'id'                    => $record->id,
-            'item_id'               => null,
-            'slug'                  => 'slug',
-            'title'                 => 'title',
-            'body'                  => 'body',
-            'tags'                  => $tags,
-            'coverage'              => 'POINT(1 1)',
-            'map_active'            => 1,
-            'map_focus'             => 'lat/lon',
-            'map_zoom'              => 2,
+            'id'            => $record->id,
+            'item_id'       => null,
+            'slug'          => 'slug',
+            'title'         => 'title',
+            'body'          => 'body',
+            'tags'          => $tags,
+            'coverage'      => 'POINT(1 1)',
+            'map_active'    => 1,
+            'map_focus'     => 'lat/lon',
+            'map_zoom'      => 2,
 
             // Null local styles:
             // ------------------
 
-            'vector_color'          => null,
-            'stroke_color'          => null,
-            'select_color'          => null,
-            'vector_opacity'        => null,
-            'select_opacity'        => null,
-            'stroke_opacity'        => null,
-            'image_opacity'         => null,
-            'stroke_width'          => null,
-            'point_radius'          => null,
-            'point_image'           => null,
-            'max_zoom'              => null,
-            'min_zoom'              => null,
+            'vector_color'      => null,
+            'stroke_color'      => null,
+            'select_color'      => null,
+            'vector_opacity'    => null,
+            'select_opacity'    => null,
+            'stroke_opacity'    => null,
+            'image_opacity'     => null,
+            'stroke_width'      => null,
+            'point_radius'      => null,
+            'point_image'       => null,
+            'max_zoom'          => null,
+            'min_zoom'          => null
 
         );
 
@@ -559,18 +564,18 @@ class Neatline_NeatlineRecordTest_Update
 
         // Re-get the record, check the references.
         $record = $this->_recordsTable->find($record->id);
-        $this->assertEquals($record->vector_color, $tag1->id);
-        $this->assertEquals($record->stroke_color, $tag2->id);
-        $this->assertEquals($record->select_color, $tag3->id);
-        $this->assertEquals($record->vector_opacity, $tag4->id);
-        $this->assertEquals($record->select_opacity, $tag5->id);
-        $this->assertEquals($record->stroke_opacity, $tag6->id);
-        $this->assertEquals($record->image_opacity, $tag7->id);
-        $this->assertEquals($record->stroke_width, $tag8->id);
-        $this->assertEquals($record->point_radius, $tag9->id);
-        $this->assertEquals($record->point_image, $tag10->id);
-        $this->assertEquals($record->max_zoom, $tag11->id);
-        $this->assertEquals($record->min_zoom, $tag12->id);
+        $this->assertEquals($record->vector_color,      $tag1->id);
+        $this->assertEquals($record->stroke_color,      $tag2->id);
+        $this->assertEquals($record->select_color,      $tag3->id);
+        $this->assertEquals($record->vector_opacity,    $tag4->id);
+        $this->assertEquals($record->select_opacity,    $tag5->id);
+        $this->assertEquals($record->stroke_opacity,    $tag6->id);
+        $this->assertEquals($record->image_opacity,     $tag7->id);
+        $this->assertEquals($record->stroke_width,      $tag8->id);
+        $this->assertEquals($record->point_radius,      $tag9->id);
+        $this->assertEquals($record->point_image,       $tag10->id);
+        $this->assertEquals($record->max_zoom,          $tag11->id);
+        $this->assertEquals($record->min_zoom,          $tag12->id);
 
     }
 
