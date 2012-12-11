@@ -34,7 +34,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
     public $tag_id;
 
     /**
-     * The URL slug for the exhibit.
+     * A plaintext, unique identifier.
      * varchar(100) NULL
      */
     public $slug;
@@ -153,8 +153,27 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
      */
     public $min_zoom;
 
+
     /**
-     * List of tag-reference keys.
+     * Locally-stored fields. Set via `updateLocal`.
+     */
+    protected static $local = array(
+        'item_id',
+        'exhibit_id',
+        'tag_id',
+        'slug',
+        'title',
+        'body',
+        'tags',
+        'coverage',
+        'map_active',
+        'map_focus',
+        'map_zoom'
+    );
+
+
+    /**
+     * Tag-reference fields. Set via `setStyles`
      */
     protected static $styles = array(
         'vector_color',
@@ -200,7 +219,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
 
 
     /**
-     * Set all style attributes to null.
+     * Update the `coverage` field with the `GeomFromText` function.
      *
      * @param string $wkt The coverage as a WKT string.
      */

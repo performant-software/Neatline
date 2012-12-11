@@ -103,14 +103,15 @@ class NeatlineTagTable extends Omeka_Db_Table
 
 
     /**
-     * Working with a comma-delimited tags like "tag1,tag2,tag3", get all
-     * of the referenced tags from the database and put them into an array
-     * in the same order as the labels in the string. Put the exhibit-
-     * default tag at the end of the array, and if one exists, the record
-     * local tag at the beginning of the array:
+     * Working with a comma-delimited tag string like "tag1,tag2,tag3",
+     * fetch all of the listed tags and put them into an array in the same
+     * order that they appear in the string. Push the exhibit-default tag
+     * onto the back of the array (the lowest-priority position) and push
+     * the record-specific tag, if one exists, onto the front of the array
+     * (the highest-priority position):
      *
      * array(
-     *  [record default],
+     *  [record default] (if exists),
      *  [tag1],
      *  [tag2],
      *  [tag3],
@@ -130,17 +131,17 @@ class NeatlineTagTable extends Omeka_Db_Table
         $tags = explode(',', str_replace(' ', '', $tags));
         $exhibit = $record->getExhibit();
 
-        // Push on the record-default.
-        if (!is_null($record->tag_id)) {
-            array_push($stack, $this->find($record->tag_id));
-        }
-
         // Push the tags.
         foreach ($tags as $t) {
             array_push($stack, $this->getTagByName($exhibit, $t));
         }
 
-        // Push the default.
+        // Push front the record default.
+        if (!is_null($record->tag_id)) {
+            array_unshift($stack, $this->find($record->tag_id));
+        }
+
+        // Push back the exhibit default.
         array_push($stack, $this->getExhibitTag($exhibit));
 
         return $stack;
