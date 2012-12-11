@@ -237,46 +237,45 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
 
 
     /**
-     * Get the parent item record.
-     *
-     * @return Omeka_record The parent item.
-     */
-    public function getItem()
-    {
-
-        $item = null;
-
-        // Get item if non-null item_id.
-        if (!is_null($this->item_id)) {
-            $item = $this->getTable('Item')->find($this->item_id);
-        }
-
-        return $item;
-
-    }
-
-
-    /**
      * Get the parent exhibit record.
      *
      * @return Omeka_record The parent exhibit.
      */
     public function getExhibit()
     {
-        return $this->getTable('NeatlineExhibit')
-            ->find($this->exhibit_id);
+        $exhibits = $this->getTable('NeatlineExhibit');
+        return $exhibits->find($this->exhibit_id);
     }
 
 
     /**
-     * Get a style attribute.
+     * Get or create the record-specific tag.
      *
-     * @param string $style The name of the style.
-     * @return int|string The value.
+     * @return Omeka_record The record tag.
      */
-    public function getStyle($style)
+    public function getOrCreateTag()
     {
-        return $this[$style];
+
+        // Try to get existing tag.
+        if (!is_null($this->tag_id)) {
+            $tagsTable = $this->getTable('NeatlineTag');
+            $tag = $tagsTable->find($this->tag_id);
+        }
+
+        else {
+
+            // Create new tag.
+            $exhibit = $this->getExhibit();
+            $tag = new NeatlineTag($exhibit);
+            $tag->save();
+
+            // Set reference.
+            $this->tag_id = $tag->id;
+
+        }
+
+        return $tag;
+
     }
 
 
@@ -363,32 +362,17 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
 
         if ($localStyles) {
 
-            // Get the parent exhibit.
-            $exhibit = $this->getExhibit();
+            // Get or create the local tag.
+            $tag = $this->getOrCreateTag();
 
-            // Try to get a local tag.
-            if (!is_null($this->tag_id)) {
-                $tagsTable = $this->getTable('NeatlineTag');
-                $tag = $tagsTable->find($this->tag_id);
-            }
-
-            // If no tag, create one.
-            else $tag = new NeatlineTag($exhibit);
-
-            // Walk style keys.
+            // Set the tag fields.
             foreach (self::$styles as $style) {
-
-                // If key is defined, set the value.
                 if (array_key_exists($style, $values)) {
                     $tag[$style] = $values[$style];
                 }
-
             }
 
             $tag->save();
-
-            // Set tag reference.
-            $this->tag_id = $tag->id;
 
         }
 
@@ -415,8 +399,8 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
             // Walk the tag stack.
             foreach ($stack as $tag) {
 
-                // When a non-null value is found, point the local style
-                // key at the tag and break out of the loop.
+                // As soon as a non-null value is found, point the local
+                // style key at the tag and break out of the loop.
 
                 if (!is_null($tag[$style])) {
                     $this[$style] = $tag->id;
@@ -450,16 +434,16 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
             'slug'              => $this->slug,
 
             // Styles:
-            'vector_color'      => $this->getStyle('vector_color'),
-            'stroke_color'      => $this->getStyle('stroke_color'),
-            'select_color'      => $this->getStyle('select_color'),
-            'vector_opacity'    => $this->getStyle('vector_opacity'),
-            'select_opacity'    => $this->getStyle('select_opacity'),
-            'stroke_opacity'    => $this->getStyle('stroke_opacity'),
-            'image_opacity'     => $this->getStyle('image_opacity'),
-            'stroke_width'      => $this->getStyle('stroke_width'),
-            'point_radius'      => $this->getStyle('point_radius'),
-            'point_image'       => $this->getStyle('point_image'),
+            'vector_color'      => $this->vector_color,
+            'stroke_color'      => $this->stroke_color,
+            'select_color'      => $this->select_color,
+            'vector_opacity'    => $this->vector_opacity,
+            'select_opacity'    => $this->select_opacity,
+            'stroke_opacity'    => $this->stroke_opacity,
+            'image_opacity'     => $this->image_opacity,
+            'stroke_width'      => $this->stroke_width,
+            'point_radius'      => $this->point_radius,
+            'point_image'       => $this->point_image,
             'min_zoom'          => $this->min_zoom,
             'max_zoom'          => $this->max_zoom,
 
