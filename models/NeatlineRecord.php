@@ -340,11 +340,9 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
         // Get tags table.
         $tagsTable = $this->getTable('NeatlineTag');
 
-        // ----------------------------------------------------------------
         // Check to see if any of the passed values are valid, non-null
         // styles. This is the case when values are entered directly into
         // the "Style" tab in a record edit form.
-        // ----------------------------------------------------------------
 
         $localStyles = false;
 
@@ -358,13 +356,11 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
 
         }
 
-        // ----------------------------------------------------------------
         // If so, then these values need to be stored in a record-specific
         // "local" tag referenced by the record's `tag_id` attribute. This
         // tag is not created by default for the record (since it is not
         // needed when all of a record's styles are inherited from regular
         // tags) and needs to created if it does not already exist.
-        // ----------------------------------------------------------------
 
         if ($localStyles) {
 
@@ -396,10 +392,9 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
 
         }
 
-        // ----------------------------------------------------------------
         // If all of the local styles from the form are null, we need to
-        // garbage collect an existing record-specific tag if one exists.
-        // ----------------------------------------------------------------
+        // garbage collect an existing record-specific tag if one already
+        // exists from a previous update.
 
         else if (!is_null($this->tag_id)) {
 
