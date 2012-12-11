@@ -256,10 +256,12 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
     public function getOrCreateTag()
     {
 
-        // Try to get existing tag.
         if (!is_null($this->tag_id)) {
+
+            // Try to get existing tag.
             $tagsTable = $this->getTable('NeatlineTag');
             $tag = $tagsTable->find($this->tag_id);
+
         }
 
         else {
@@ -366,7 +368,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
             // Get or create the tag.
             $tag = $this->getOrCreateTag();
 
-            // Set the tag fields.
+            // Update the tag fields.
             foreach (self::$styles as $style) {
                 if (array_key_exists($style, $values)) {
                     $tag[$style] = $values[$style];
