@@ -155,7 +155,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
 
 
     /**
-     * Locally-stored fields. Set via `updateLocal`.
+     * Locally-stored fields. Set via `setLocal`.
      */
     protected static $local = array(
         'item_id',
@@ -282,6 +282,33 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
 
 
     /**
+     * Update locally-stored, non-style fields.
+     *
+     * @param array $values An associative array of values.
+     */
+    public function setLocal($values)
+    {
+
+        $coverage = null;
+
+        // Pull out the coverage.
+        if (array_key_exists('coverage', $values)) {
+            $coverage = $values['coverage'];
+            unset($values['coverage']);
+        }
+
+        // Set all non-style fields.
+        foreach ($values as $key => $val) {
+            if (in_array($key, self::$local)) $this[$key] = $val;
+        }
+
+        // Save with coverage.
+        $this->save($coverage);
+
+    }
+
+
+    /**
      * Update the record.
      *
      * @param array $values The PUT values.
@@ -291,10 +318,6 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
 
         // Get the tags table.
         $tags = $this->getTable('NeatlineTag');
-
-        // Pluck out the coverage.
-        $coverage = $values['coverage'];
-        unset($values['coverage']);
 
         // ----------------------------------------------------------------
 
