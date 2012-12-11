@@ -253,7 +253,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
      *
      * @return Omeka_record The record tag.
      */
-    public function getOrCreateTag()
+    public function getTag()
     {
 
         if (!is_null($this->tag_id)) {
