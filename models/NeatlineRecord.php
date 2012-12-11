@@ -158,9 +158,6 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
      * Locally-stored fields.
      */
     protected static $local = array(
-        'item_id',
-        'exhibit_id',
-        'tag_id',
         'slug',
         'title',
         'body',
@@ -291,11 +288,9 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
     {
 
         // Update fields.
-        $this->setStaticFields($values);
-        $this->setLocalStyles($values);
-
-        // Update tag keys.
-        $this->setTagReferences();
+        $this->setFields($values);
+        $this->setStyles($values);
+        $this->setTags();
 
         // Get coverage.
         $coverage = array_key_exists('coverage', $values) ?
@@ -312,7 +307,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
      *
      * @param array $values An associative array of values.
      */
-    public function setStaticFields($values)
+    public function setFields($values)
     {
 
         // Walk non-style keys.
@@ -334,7 +329,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
      *
      * @param array $values An associative array of values.
      */
-    public function setLocalStyles($values)
+    public function setStyles($values)
     {
 
         // ----------------------------------------------------------------
@@ -365,8 +360,8 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
 
         if ($localStyles) {
 
-            // Get or create the tag.
-            $tag = $this->getOrCreateTag();
+            // Get the local tag.
+            $tag = $this->getTag();
 
             // Update the tag fields.
             foreach (self::$styles as $style) {
@@ -389,7 +384,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
      * and finding the first tag in the list for which there is a non-null
      * value for the style in question.
      */
-    public function setTagReferences()
+    public function setTags()
     {
 
         // Get the tag depth chart.

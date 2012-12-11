@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
 
 /**
- * Tests for `setLocalStyles()` on NeatlineRecord.
+ * Tests for `setStyles()` on NeatlineRecord.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -11,14 +11,14 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class Neatline_NeatlineRecordTest_SetLocalStyles
+class Neatline_NeatlineRecordTest_SetStyles
     extends Neatline_Test_AppTestCase
 {
 
 
     /**
-     * setLocalStyles() should create a record-specific tag when non-null
-     * style values are passed in and a tag does not already exist.
+     * setStyles() should create a record-specific tag when non-null style
+     * values are passed in and a tag does not already exist.
      *
      * @group tags
      */
@@ -46,7 +46,7 @@ class Neatline_NeatlineRecordTest_SetLocalStyles
 
         // Set local styles.
         $c1 = $this->_tagsTable->count();
-        $record->setLocalStyles($values);
+        $record->setStyles($values);
         $c2 = $this->_tagsTable->count();
 
         // 1 new tag.
@@ -81,12 +81,11 @@ class Neatline_NeatlineRecordTest_SetLocalStyles
     public function testTagUpdate()
     {
 
-        // Create record.
-        $exhibit = $this->__exhibit();
-        $record = $this->__record(null, $exhibit);
+        // Create record and tag.
+        $record = $this->__record();
+        $tag = new NeatlineTag($record->getExhibit());
 
-        // Create tag.
-        $tag = new NeatlineTag($exhibit);
+        // Set tag fields.
         $tag->vector_color =    '1';
         $tag->stroke_color =    '2';
         $tag->select_color =    '3';
@@ -122,7 +121,7 @@ class Neatline_NeatlineRecordTest_SetLocalStyles
 
         // Set local styles.
         $c1 = $this->_tagsTable->count();
-        $record->setLocalStyles($values);
+        $record->setStyles($values);
         $c2 = $this->_tagsTable->count();
 
         // No tag created.

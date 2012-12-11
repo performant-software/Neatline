@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
 
 /**
- * Tests for `setTagReferences()` on NeatlineRecord.
+ * Tests for `setTags()` on NeatlineRecord.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -11,19 +11,19 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class Neatline_NeatlineRecordTest_SetTagReferences
+class Neatline_NeatlineRecordTest_SetTags
     extends Neatline_Test_AppTestCase
 {
 
 
     /**
-     * updateTagReferences() should use the comma-delimited `tags` string
-     * to point each tag key reference to the first tag in the depth chart
-     * for which there is a non-null value for the style in question.
+     * setTags() should use the comma-delimited `tags` string to point
+     * each tag key reference to the first tag in the depth chart for
+     * which there is a non-null value for the style in question.
      *
      * @group tags
      */
-    public function testSetTagReferences()
+    public function testSetTags()
     {
 
         // Create record.
@@ -106,7 +106,7 @@ class Neatline_NeatlineRecordTest_SetTagReferences
         $exhibit->save();
 
         // Update keys.
-        $record->setTagReferences();
+        $record->setTags();
 
         // Check the references.
         $this->assertEquals($record->vector_color,      $tag1->id);
