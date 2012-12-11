@@ -288,14 +288,12 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
     public function update($values)
     {
 
-        // Update local fields.
+        // Update fields.
         $this->setStaticFields($values);
-
-        // Update local style tag.
         $this->setLocalStyles($values);
 
         // Update tag keys.
-        $this->setTagReferences($values);
+        $this->setTagReferences();
 
         // Get coverage.
         $coverage = array_key_exists('coverage', $values) ?
@@ -337,9 +335,6 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
     public function setLocalStyles($values)
     {
 
-        // Get tags table.
-        $tagsTable = $this->getTable('NeatlineTag');
-
         // ----------------------------------------------------------------
         // Check to see if any of the passed values are valid, non-null
         // styles. This is the case when values are entered directly into
@@ -373,6 +368,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
 
             // Try to get a local tag.
             if (!is_null($this->tag_id)) {
+                $tagsTable = $this->getTable('NeatlineTag');
                 $tag = $tagsTable->find($this->tag_id);
             }
 
@@ -396,23 +392,6 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
 
         }
 
-        // ----------------------------------------------------------------
-        // If all of the local styles from the form are null, we need to
-        // garbage collect an existing record-specific tag if one already
-        // exists from a previous update.
-        // ----------------------------------------------------------------
-
-        else if (!is_null($this->tag_id)) {
-
-            // Get the local tag.
-            $tag = $tagsTable->find($this->tag_id);
-
-            // Remove.
-            $this->tag_id = null;
-            $tag->delete();
-
-        }
-
     }
 
 
@@ -422,10 +401,8 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
      * string, then the exhibit default tag), walking each of the styles,
      * and finding the first tag in the list for which there is a non-null
      * value for the style in question.
-     *
-     * @param array $values An associative array of values.
      */
-    public function setTagReferences($values)
+    public function setTagReferences()
     {
 
         // Get the tag depth chart.
