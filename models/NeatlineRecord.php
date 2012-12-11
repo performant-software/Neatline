@@ -295,7 +295,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
         $this->setLocalStyles($values);
 
         // Update tag keys.
-        $this->updateTagReferences($values);
+        $this->setTagReferences($values);
 
         // Get coverage.
         $coverage = array_key_exists('coverage', $values) ?
@@ -315,12 +315,12 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
     public function setStaticFields($values)
     {
 
-        // Walk non-style fields.
-        foreach (self::$local as $f) {
+        // Walk non-style keys.
+        foreach (self::$local as $field) {
 
-            // If the field is passed, set it.
-            if (array_key_exists($f, $values)) {
-                $this->setNotEmpty($f, $values[$f]);
+            // If the key is passed, set it.
+            if (array_key_exists($field, $values)) {
+                $this->setNotEmpty($field, $values[$field]);
             }
 
         }
@@ -337,36 +337,34 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
     public function setLocalStyles($values)
     {
 
-        // Get the tags table.
-        $tags = $this->getTable('NeatlineTag');
+        // Get tags table.
+        $tagsTable = $this->getTable('NeatlineTag');
 
         // ----------------------------------------------------------------
-
         // Check to see if any of the passed values are valid, non-null
-        // styles. This is the case values are entered directly into the
-        // "Style" tab in a record edit form.
+        // styles. This is the case when values are entered directly into
+        // the "Style" tab in a record edit form.
+        // ----------------------------------------------------------------
 
         $localStyles = false;
 
         // Walk style keys.
-        foreach (self::$styles as $style) {
+        foreach (self::$styles as $s) {
 
             // Check for first defined, non-null style.
-            if (array_key_exists($style, $values) &&
-                !is_null($values[$style])) {
-                    $localStyles = true;
-                    break;
+            if (array_key_exists($s, $values) && !is_null($values[$s])) {
+                $localStyles = true; break;
             }
 
         }
 
         // ----------------------------------------------------------------
-
         // If so, then these values need to be stored in a record-specific
         // "local" tag referenced by the record's `tag_id` attribute. This
         // tag is not created by default for the record (since it is not
         // needed when all of a record's styles are inherited from regular
         // tags) and needs to created if it does not already exist.
+        // ----------------------------------------------------------------
 
         if ($localStyles) {
 
@@ -375,7 +373,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
 
             // Try to get a local tag.
             if (!is_null($this->tag_id)) {
-                $tag = $tags->find($this->tag_id);
+                $tag = $tagsTable->find($this->tag_id);
             }
 
             // If no tag, create one.
@@ -399,14 +397,14 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
         }
 
         // ----------------------------------------------------------------
-
         // If all of the local styles from the form are null, we need to
         // garbage collect an existing record-specific tag if one exists.
+        // ----------------------------------------------------------------
 
         else if (!is_null($this->tag_id)) {
 
             // Get the local tag.
-            $tag = $tags->find($this->tag_id);
+            $tag = $tagsTable->find($this->tag_id);
 
             // Remove.
             $this->tag_id = null;
@@ -426,12 +424,12 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
      *
      * @param array $values An associative array of values.
      */
-    public function updateTagReferences($values)
+    public function setTagReferences($values)
     {
 
         // Get the tag depth chart.
-        $tags = $this->getTable('NeatlineTag');
-        $stack = $tags->getTagStack($this->tags, $this);
+        $tagsTable = $this->getTable('NeatlineTag');
+        $stack = $tagsTable->getTagStack($this->tags, $this);
 
         // Update the tag references.
         foreach (self::$styles as $s) {
