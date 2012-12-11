@@ -362,7 +362,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
 
         if ($localStyles) {
 
-            // Get or create the local tag.
+            // Get or create the tag.
             $tag = $this->getOrCreateTag();
 
             // Set the tag fields.
@@ -393,14 +393,17 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
         $tagsTable = $this->getTable('NeatlineTag');
         $stack = $tagsTable->getTagStack($this->tags, $this);
 
-        // Walk the style keys.
+        // For each tag-backed field:
         foreach (self::$styles as $style) {
 
-            // Walk the tag stack.
+            // Walk through the tags:
             foreach ($stack as $tag) {
 
-                // As soon as a non-null value is found, point the local
-                // style key at the tag and break out of the loop.
+                // --------------------------------------------------------
+                // Stop as soon as a non-null value is found for the field
+                // in question. Point the key reference on the record at
+                // the tag with the value and continue to the next field.
+                // --------------------------------------------------------
 
                 if (!is_null($tag[$style])) {
                     $this[$style] = $tag->id;

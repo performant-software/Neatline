@@ -17,106 +17,6 @@ class Neatline_NeatlineRecordTest_SetLocalStyles
 
 
     /**
-     * When setLocalStyles() is passed a values array that includes non-
-     * null static fields but either (a) no defined style fields or (b)
-     * null style fields, the presence of the defined static fields should
-     * not cause a record-specific tag to be created.
-     *
-     * @group tags
-     */
-    public function testIgnoreStaticFields()
-    {
-
-        // Create a record.
-        $record = $this->__record();
-
-
-        // With null style fields:
-        // -----------------------
-
-        // Mock values:
-        $values = array(
-
-            // Local values:
-            // -------------
-
-            'id'            => $record->id,
-            'item_id'       => null,
-            'slug'          => 'slug2',
-            'title'         => 'title2',
-            'body'          => 'body2',
-            'tags'          => 'tag3,tag4',
-            'map_focus'     => 'lat2/lon2',
-            'coverage'      => 'POINT(1 1)',
-            'map_zoom'      => 2,
-            'map_active'    => 0,
-
-            // Null local styles:
-            // --------------------
-
-            'vector_color'      => null,
-            'stroke_color'      => null,
-            'select_color'      => null,
-            'vector_opacity'    => null,
-            'select_opacity'    => null,
-            'stroke_opacity'    => null,
-            'image_opacity'     => null,
-            'stroke_width'      => null,
-            'point_radius'      => null,
-            'point_image'       => null,
-            'max_zoom'          => null,
-            'min_zoom'          => null
-
-        );
-
-        // Starting tags count.
-        $startCount = $this->_tagsTable->count();
-
-        // Set local styles.
-        $record->setLocalStyles($values);
-
-        // Check tags+0.
-        $this->assertEquals($startCount, $this->_tagsTable->count());
-
-
-        // With unset style fields:
-        // ------------------------
-
-        // Mock values:
-        $values = array(
-
-            // Local values:
-            // -------------
-
-            'id'            => $record->id,
-            'item_id'       => null,
-            'slug'          => 'slug2',
-            'title'         => 'title2',
-            'body'          => 'body2',
-            'tags'          => 'tag3,tag4',
-            'map_focus'     => 'lat2/lon2',
-            'coverage'      => 'POINT(1 1)',
-            'map_zoom'      => 2,
-            'map_active'    => 0
-
-            // Un-set local styles:
-            // --------------------
-
-        );
-
-        // Starting tags count.
-        $startCount = $this->_tagsTable->count();
-
-        // Set local styles.
-        $record->setLocalStyles($values);
-
-        // Check tags+0.
-        $this->assertEquals($startCount, $this->_tagsTable->count());
-
-    }
-
-
-    /**
      * setLocalStyles() should create a record-specific tag when non-null
      * style values are passed in and a tag does not already exist.
      *
@@ -144,14 +44,13 @@ class Neatline_NeatlineRecordTest_SetLocalStyles
             'min_zoom'          => 12
         );
 
-        // Starting tags count.
-        $startCount = $this->_tagsTable->count();
-
         // Set local styles.
+        $c1 = $this->_tagsTable->count();
         $record->setLocalStyles($values);
+        $c2 = $this->_tagsTable->count();
 
-        // Check tags+1.
-        $this->assertEquals($startCount+1, $this->_tagsTable->count());
+        // 1 new tag.
+        $this->assertEquals($c1+1, $c2);
 
         // Check new tag.
         $tag = $this->getLastTag();
@@ -221,14 +120,13 @@ class Neatline_NeatlineRecordTest_SetLocalStyles
             'min_zoom'          => null
         );
 
-        // Starting tags count.
-        $startCount = $this->_tagsTable->count();
-
         // Set local styles.
+        $c1 = $this->_tagsTable->count();
         $record->setLocalStyles($values);
+        $c2 = $this->_tagsTable->count();
 
-        // Check tags+0.
-        $this->assertEquals($startCount, $this->_tagsTable->count());
+        // No tag created.
+        $this->assertEquals($c1, $c2);
 
         // Check updated tag.
         $tag = $this->getLastTag();
