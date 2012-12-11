@@ -291,7 +291,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
         // "local" tag referenced by the record's `tag_id` attribute. This
         // tag is not created by default for the record (since it is not
         // needed when all of a record's styles are inherited from regular
-        // tags) and needs to created if one does not exist.
+        // tags) and needs to created if it does not already exist.
 
         if ($localStyles) {
 
