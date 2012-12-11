@@ -28,14 +28,15 @@ class Neatline_NeatlineTagTableTest_CreateExhibitTag
         // Create exhibit.
         $exhibit = new NeatlineExhibit();
         $exhibit->slug = 'test';
-        $exhibit->parentSave();
-
-        // Starting tags count.
-        $startCount = $this->_tagsTable->count();
+        $exhibit->__save();
 
         // Create default tag.
+        $c1 = $this->_tagsTable->count();
         $tag = $this->_tagsTable->createExhibitTag($exhibit);
-        $this->assertEquals($startCount+1, $this->_tagsTable->count());
+        $c2 = $this->_tagsTable->count();
+
+        // 1 new tag.
+        $this->assertEquals($c1+1, $c2);
 
         // NULL tag name:
         $this->assertNull($tag->tag);

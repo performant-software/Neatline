@@ -82,7 +82,7 @@ class Neatline_NeatlineRecordTest_SetTags
         $tag9->save();
 
         $tag10 = new NeatlineTag($exhibit);
-        $tag10->point_image = '10.png';
+        $tag10->point_image = '10';
         $tag10->tag = 't10';
         $tag10->save();
 

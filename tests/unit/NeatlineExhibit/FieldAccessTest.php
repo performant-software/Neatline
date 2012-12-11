@@ -28,30 +28,30 @@ class Neatline_NeatlineExhibitTest_FieldAccess
         // Set.
         $exhibit->creator_id    = 1;
         $exhibit->tag_id        = 2;
-        $exhibit->title         = 'Title';
-        $exhibit->description   = 'Description.';
-        $exhibit->slug          = 'slug';
-        $exhibit->public        = 3;
-        $exhibit->query         = 'query';
-        $exhibit->map_focus     = 'CENTER()';
-        $exhibit->map_zoom      = 4;
-        $exhibit->save();
+        $exhibit->title         = '3';
+        $exhibit->description   = '4';
+        $exhibit->slug          = '5';
+        $exhibit->public        = 6;
+        $exhibit->query         = '7';
+        $exhibit->map_focus     = '8';
+        $exhibit->map_zoom      = 9;
+        $exhibit->__save();
 
-        // Re-get the exhibit object.
+        // Reload.
         $exhibit = $this->_exhibitsTable->find($exhibit->id);
 
         // Get.
         $this->assertNotNull($exhibit->added);
         $this->assertNotNull($exhibit->modified);
-        $this->assertEquals($exhibit->creator_id, 1);
-        $this->assertEquals($exhibit->tag_id, 2);
-        $this->assertEquals($exhibit->title, 'Title');
-        $this->assertEquals($exhibit->description, 'Description.');
-        $this->assertEquals($exhibit->slug, 'slug');
-        $this->assertEquals($exhibit->query, 'query');
-        $this->assertEquals($exhibit->public, 3);
-        $this->assertEquals($exhibit->map_focus, 'CENTER()');
-        $this->assertEquals($exhibit->map_zoom, 4);
+        $this->assertEquals($exhibit->creator_id,   1);
+        $this->assertEquals($exhibit->tag_id,       2);
+        $this->assertEquals($exhibit->title,        '3');
+        $this->assertEquals($exhibit->description,  '4');
+        $this->assertEquals($exhibit->slug,         '5');
+        $this->assertEquals($exhibit->public,       6);
+        $this->assertEquals($exhibit->query,        '7');
+        $this->assertEquals($exhibit->map_focus,    '8');
+        $this->assertEquals($exhibit->map_zoom,     9);
 
     }
 

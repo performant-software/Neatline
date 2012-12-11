@@ -51,8 +51,8 @@ class Neatline_NeatlineRecordTableTest_QueryRecords
         $record2->select_opacity    = 4;
         $record1->stroke_opacity    = 5;
         $record2->stroke_opacity    = 6;
-        $record1->image_opacity   = 7;
-        $record2->image_opacity   = 8;
+        $record1->image_opacity     = 7;
+        $record2->image_opacity     = 8;
         $record1->stroke_width      = 9;
         $record2->stroke_width      = 10;
         $record1->point_radius      = 11;

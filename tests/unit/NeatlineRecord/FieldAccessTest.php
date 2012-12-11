@@ -23,7 +23,7 @@ class Neatline_NeatlineRecordTest_FieldAccess
     {
 
         // Create a record.
-        $record = new NeatlineRecord();
+        $record = $this->__record();
 
         // Set values:
         $record->item_id            = 1;

@@ -134,7 +134,7 @@ class NeatlineExhibit extends Omeka_Record_AbstractRecord
 
 
     /**
-     * Check whether a Neatline was created by a given user
+     * Check whether a Neatline was created by a given user.
      *
      * @param Omeka_Record $user The user record.
      * @return boolean
@@ -177,15 +177,6 @@ class NeatlineExhibit extends Omeka_Record_AbstractRecord
 
 
     /**
-     * Alias the unmodified `save` method. Needed for testing.
-     */
-    public function parentSave()
-    {
-        parent::save();
-    }
-
-
-    /**
      * Create a default tag when an exhibit is inserted.
      */
     public function save()
@@ -223,6 +214,15 @@ class NeatlineExhibit extends Omeka_Record_AbstractRecord
         $recordsTable->delete("{$this->_db->prefix}neatline_records",
             array('exhibit_id = ?' => $this->id)
         );
+    }
+
+
+    /**
+     * Alias original `save` for testing.
+     */
+    public function __save()
+    {
+        parent::save();
     }
 
 
