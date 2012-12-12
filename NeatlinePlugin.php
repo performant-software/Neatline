@@ -33,7 +33,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
 
 
     // Layers.
-    protected $_baseLayers = array(
+    protected $_layers = array(
         'OpenStreetMap',
         'Google Physical',
         'Google Streets',
@@ -165,7 +165,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
 
 
         // Install base layers.
-        foreach ($this->_baseLayers as $baseLayer) {
+        foreach ($this->_layers as $baseLayer) {
             $layer = new NeatlineLayer;
             $layer->name = $baseLayer;
             $layer->save();
