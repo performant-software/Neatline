@@ -90,13 +90,12 @@ class Neatline_NeatlineRecordTest_Update
         $this->assertEquals($record->map_active,    4);
         $this->assertEquals($record->map_focus,     'lat/lon');
         $this->assertEquals($record->map_zoom,      5);
-        $this->assertNotNull($record->coverage);
 
         // Record tag created.
         $this->assertEquals($c1+1, $c2);
+        $tag = $this->getLastTag();
 
         // Tag fields set.
-        $tag = $this->getLastTag();
         $this->assertEquals($record->tag_id,        $tag->id);
         $this->assertEquals($tag->vector_color,     '#333333');
         $this->assertEquals($tag->stroke_color,     '#444444');
@@ -114,6 +113,9 @@ class Neatline_NeatlineRecordTest_Update
         // Tag keys updated.
         $this->assertEquals($record->max_zoom, $tag1->id);
         $this->assertEquals($record->min_zoom, $tag2->id);
+
+        // Coverage updated.
+        $this->assertNotNull($record->coverage);
 
     }
 

@@ -95,7 +95,7 @@ class NeatlineExhibit extends Omeka_Record_AbstractRecord
      */
     public function saveForm($formValues)
     {
-        foreach ($formValues as $key => $value) { $this->$key = $value; }
+        foreach ($formValues as $key => $value) $this->$key = $value;
         $this->save();
     }
 
@@ -109,52 +109,6 @@ class NeatlineExhibit extends Omeka_Record_AbstractRecord
     {
         $recordsTable = $this->getTable('NeatlineRecord');
         return $recordsTable->countActiveRecordsByExhibit($this);
-    }
-
-
-    /**
-     * Validate the slug.
-     */
-    protected function _validate()
-    {
-
-        // Block empty slug.
-        if (trim($this->slug) == '') {
-            $this->addError('slug', __('The slug cannot be empty.'));
-        }
-
-        // Block invalid slug.
-        if (!preg_match('/^[0-9a-z\-]+$/', $this->slug)) {
-            $this->addError('slug', __('The slug can only contain \
-                lowercase letters, numbers, and hyphens.'
-            ));
-        }
-
-    }
-
-
-    /**
-     * Check whether a Neatline was created by a given user.
-     *
-     * @param Omeka_Record $user The user record.
-     * @return boolean
-     */
-    public function addedBy($user)
-    {
-        return ($user->id == $this->creator_id);
-    }
-
-
-    /**
-     * Set the exhibit owner.
-     *
-     * @param User $user The user record.
-     */
-    public function setAddedBy(User $user)
-    {
-        if (!$user->exists())
-            throw new RuntimeException(__("User does not exist."));
-        $this->creator_id = $user->id;
     }
 
 
@@ -186,7 +140,7 @@ class NeatlineExhibit extends Omeka_Record_AbstractRecord
         $isInserting = !$this->exists();
         parent::save();
 
-        // Emulate `afterInsert` hook.
+        // Call `afterInsert`.
         if ($isInserting) $this->afterInsert();
 
     }
@@ -198,10 +152,15 @@ class NeatlineExhibit extends Omeka_Record_AbstractRecord
      */
     protected function afterInsert()
     {
+
+        // Create an exhibit-default tag.
         $tagsTable = $this->getTable('NeatlineTag');
         $tag = $tagsTable->createExhibitTag($this);
+
+        // Set the reference.
         $this->tag_id = $tag->id;
         $this->save();
+
     }
 
 
