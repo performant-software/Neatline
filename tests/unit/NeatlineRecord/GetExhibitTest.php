@@ -23,12 +23,12 @@ class Neatline_NeatlineRecordTest_GetExhibit
     {
 
         // Create a record.
-        $neatline = $this->__exhibit();
+        $exhibit = $this->__exhibit();
         $record = new NeatlineRecord(null, $neatline);
 
         // Get the exhibit.
-        $retrievedExhibit = $record->getExhibit();
-        $this->assertEquals($neatline->id, $retrievedExhibit->id);
+        $retrieved = $record->getExhibit();
+        $this->assertEquals($exhibit->id, $retrieved->id);
 
     }
 

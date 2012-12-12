@@ -29,27 +29,27 @@ class Neatline_NeatlineRecordTest_FieldAccess
         $record->item_id            = 1;
         $record->exhibit_id         = 2;
         $record->tag_id             = 3;
-        $record->slug               = 'slug';
-        $record->title              = 'title';
-        $record->body               = 'body';
-        $record->tags               = 'tag1,tag2';
-        $record->map_active         = 4;
-        $record->map_focus          = 'lat/lon';
-        $record->map_zoom           = 5;
+        $record->slug               = '4';
+        $record->title              = '5';
+        $record->body               = '6';
+        $record->tags               = '7';
+        $record->map_active         = 8;
+        $record->map_focus          = '9';
+        $record->map_zoom           = 10;
 
         // Set keys:
-        $record->vector_color       = 6;
-        $record->stroke_color       = 7;
-        $record->select_color       = 8;
-        $record->vector_opacity     = 9;
-        $record->select_opacity     = 10;
-        $record->stroke_opacity     = 11;
-        $record->image_opacity      = 12;
-        $record->stroke_width       = 13;
-        $record->point_radius       = 14;
-        $record->point_image        = 'file.png';
-        $record->max_zoom           = 15;
-        $record->min_zoom           = 16;
+        $record->vector_color       = 11;
+        $record->stroke_color       = 12;
+        $record->select_color       = 13;
+        $record->vector_opacity     = 14;
+        $record->select_opacity     = 15;
+        $record->stroke_opacity     = 16;
+        $record->image_opacity      = 17;
+        $record->stroke_width       = 18;
+        $record->point_radius       = 19;
+        $record->point_image        = '20';
+        $record->max_zoom           = 21;
+        $record->min_zoom           = 22;
 
         // Save with coverage.
         $record->save('POINT(1 1)');
@@ -61,27 +61,27 @@ class Neatline_NeatlineRecordTest_FieldAccess
         $this->assertEquals($record->item_id,       1);
         $this->assertEquals($record->exhibit_id,    2);
         $this->assertEquals($record->tag_id,        3);
-        $this->assertEquals($record->slug,          'slug');
-        $this->assertEquals($record->title,         'title');
-        $this->assertEquals($record->body,          'body');
-        $this->assertEquals($record->tags,          'tag1,tag2');
-        $this->assertEquals($record->map_active,    4);
-        $this->assertEquals($record->map_focus,     'lat/lon');
-        $this->assertEquals($record->map_zoom,      5);
+        $this->assertEquals($record->slug,          '4');
+        $this->assertEquals($record->title,         '5');
+        $this->assertEquals($record->body,          '6');
+        $this->assertEquals($record->tags,          '7');
+        $this->assertEquals($record->map_active,    8);
+        $this->assertEquals($record->map_focus,     '9');
+        $this->assertEquals($record->map_zoom,      10);
 
         // Check keys:
-        $this->assertEquals($record->vector_color,      6);
-        $this->assertEquals($record->stroke_color,      7);
-        $this->assertEquals($record->select_color,      8);
-        $this->assertEquals($record->vector_opacity,    9);
-        $this->assertEquals($record->select_opacity,    10);
-        $this->assertEquals($record->stroke_opacity,    11);
-        $this->assertEquals($record->image_opacity,     12);
-        $this->assertEquals($record->stroke_width,      13);
-        $this->assertEquals($record->point_radius,      14);
-        $this->assertEquals($record->point_image,       'file.png');
-        $this->assertEquals($record->max_zoom,          15);
-        $this->assertEquals($record->min_zoom,          16);
+        $this->assertEquals($record->vector_color,      11);
+        $this->assertEquals($record->stroke_color,      12);
+        $this->assertEquals($record->select_color,      13);
+        $this->assertEquals($record->vector_opacity,    14);
+        $this->assertEquals($record->select_opacity,    15);
+        $this->assertEquals($record->stroke_opacity,    16);
+        $this->assertEquals($record->image_opacity,     17);
+        $this->assertEquals($record->stroke_width,      18);
+        $this->assertEquals($record->point_radius,      19);
+        $this->assertEquals($record->point_image,       '20');
+        $this->assertEquals($record->max_zoom,          21);
+        $this->assertEquals($record->min_zoom,          22);
 
         // Check the coverage value.
         $this->assertEquals($this->getCoverageAsText($record),

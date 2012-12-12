@@ -27,72 +27,65 @@ class Neatline_NeatlineRecordTest_BuildJsonData
         $exhibit = $this->__exhibit();
         $record = new NeatlineRecord(null, $exhibit);
 
-        // Text.
-        $record->title                  = 'Title';
-        $record->body                   = 'Body.';
-        $record->slug                   = 'slug';
+        // Text:
+        $record->title              = '1';
+        $record->body               = '2';
+        $record->slug               = '3';
 
-        // Styles.
-        $record->vector_color           = '#1';
-        $record->stroke_color           = '#2';
-        $record->select_color           = '#3';
-        $record->vector_opacity         = 1;
-        $record->select_opacity         = 2;
-        $record->stroke_opacity         = 3;
-        $record->image_opacity          = 4;
-        $record->stroke_width           = 5;
-        $record->point_radius           = 6;
-        $record->point_image            = 'file.png';
-        $record->min_zoom               = 7;
-        $record->max_zoom               = 8;
+        // Styles:
+        $record->vector_color       = '4';
+        $record->stroke_color       = '5';
+        $record->select_color       = '6';
+        $record->vector_opacity     = 7;
+        $record->select_opacity     = 8;
+        $record->stroke_opacity     = 9;
+        $record->image_opacity      = 10;
+        $record->stroke_width       = 11;
+        $record->point_radius       = 12;
+        $record->point_image        = '13';
+        $record->min_zoom           = 14;
+        $record->max_zoom           = 15;
 
-        // Map.
-        $record->map_focus              = 'lat/lon';
-        $record->map_zoom               = 9;
-
-        // Statuses.
-        $record->map_active             = 1;
-
+        // Map:
+        $record->map_active         = 16;
+        $record->map_focus          = '17';
+        $record->map_zoom           = 18;
         $record->save();
 
-        // Ping the method for the json.
-        $data = $record->buildJsonData('POINT(1 1)');
+        // Construct the array.
+        $data = $record->buildJsonData('19');
 
-        $this->assertEquals(
-            $data,
+        $this->assertEquals($data,
             array(
 
-                'id'                    => $record->id,
-                'item_id'               => $record->item_id,
+                // Relations:
+                'id'                => $record->id,
+                'item_id'           => $record->item_id,
 
-                // Text.
-                'title'                 => 'Title',
-                'body'                  => 'Body.',
-                'slug'                  => 'slug',
+                // Text:
+                'title'             => '1',
+                'body'              => '2',
+                'slug'              => '3',
 
-                // Styles.
-                'vector_color'          => '#1',
-                'stroke_color'          => '#2',
-                'select_color'          => '#3',
-                'vector_opacity'        => 1,
-                'select_opacity'        => 2,
-                'stroke_opacity'        => 3,
-                'image_opacity'         => 4,
-                'stroke_width'          => 5,
-                'point_radius'          => 6,
-                'point_image'           => 'file.png',
-                'min_zoom'              => 7,
-                'max_zoom'              => 8,
+                // Styles:
+                'vector_color'      => '4',
+                'stroke_color'      => '5',
+                'select_color'      => '6',
+                'vector_opacity'    => 7,
+                'select_opacity'    => 8,
+                'stroke_opacity'    => 9,
+                'image_opacity'     => 10,
+                'stroke_width'      => 11,
+                'point_radius'      => 12,
+                'point_image'       => '13',
+                'min_zoom'          => 14,
+                'max_zoom'          => 15,
 
-                // Map.
-                'map_focus'             => 'lat/lon',
-                'map_zoom'              => 9,
-                'coverage'              => 'POINT(1 1)',
-                'wmsAddress'            => null,
-                'layers'                => null,
-
-                // Statuses.
-                'map_active'            => 1
+                // Map:
+                'map_active'        => 16,
+                'map_focus'         => '17',
+                'map_zoom'          => 18,
+                'coverage'          => '19'
 
             )
         );

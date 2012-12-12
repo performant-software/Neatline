@@ -17,8 +17,8 @@ class Neatline_NeatlineRecordTest_GetTag
 
 
     /**
-     * getTag() should create a new tag for a record when one does not
-     * already exist and set the `tag_id` reference.
+     * getTag() should create a new record-specific tag for a record when
+     * one does not exist and set the `tag_id` reference.
      *
      * @group tags
      */
@@ -28,7 +28,7 @@ class Neatline_NeatlineRecordTest_GetTag
         // Create record.
         $record = $this->__record();
 
-        // Get local tag.
+        // Get tag.
         $c1 = $this->_tagsTable->count();
         $tag = $record->getTag();
         $c2 = $this->_tagsTable->count();
@@ -49,18 +49,18 @@ class Neatline_NeatlineRecordTest_GetTag
      *
      * @group tags
      */
-    public function testUpdateTag()
+    public function testFetchTag()
     {
 
         // Create record.
         $record = $this->__record();
 
         // Create tag record.
-        $tag = $this->__tag(null, $record->getExhibit());
+        $tag = $this->__tag($record->getExhibit());
         $record->tag_id = $tag->id;
         $record->save();
 
-        // Get local tag.
+        // Get tag.
         $c1 = $this->_tagsTable->count();
         $tag = $record->getTag();
         $c2 = $this->_tagsTable->count();

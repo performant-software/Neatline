@@ -449,14 +449,10 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
             'max_zoom'          => $this->max_zoom,
 
             // Spatial:
+            'map_active'        => $this->map_active,
             'map_focus'         => $this->map_focus,
             'map_zoom'          => $this->map_zoom,
-            'coverage'          => $coverage,
-            'wmsAddress'        => null,
-            'layers'            => null,
-
-            // Statuses:
-            'map_active'        => $this->map_active
+            'coverage'          => $coverage
 
         );
 

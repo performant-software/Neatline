@@ -30,8 +30,8 @@ class Neatline_NeatlineTagTableTest_GetTagByName
         $exhibit2 = $this->__exhibit();
 
         // Create tags.
-        $tag1 = $this->__tag('tag', $exhibit1);
-        $tag2 = $this->__tag('tag', $exhibit2);
+        $tag1 = $this->__tag($exhibit1, 'tag');
+        $tag2 = $this->__tag($exhibit2, 'tag');
 
         // Get tags by name.
         $retrieved1 = $this->_tagsTable->getTagByName($exhibit1, 'tag');
