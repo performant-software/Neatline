@@ -25,13 +25,15 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
         'initialize'
     );
 
+
     // Filters.
     protected $_filters = array(
         'admin_navigation_main'
     );
 
+
     // Layers.
-    public static $_baseLayers = array(
+    protected $_baseLayers = array(
         'OpenStreetMap',
         'Google Physical',
         'Google Streets',
@@ -163,7 +165,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
 
 
         // Install base layers.
-        foreach (self::$_baseLayers as $baseLayer) {
+        foreach ($this->_baseLayers as $baseLayer) {
             $layer = new NeatlineLayer;
             $layer->name = $baseLayer;
             $layer->save();
@@ -239,7 +241,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
         $adapter =  $table->getAdapter();
         $select =   $table->getSelect();
 
-        // Form select.
+        // Define the select.
         $select->where($adapter->quoteInto(
             "$alias.item_id=?", $args['record']->id)
         );
@@ -255,8 +257,11 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
             $this->_db->commit();
 
         } catch (Exception $e) {
+
+            // Rollback on failure.
             $this->_db->rollback();
             throw $e;
+
         }
 
     }
