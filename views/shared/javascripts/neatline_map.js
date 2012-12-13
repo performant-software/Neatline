@@ -725,6 +725,7 @@
 
             // Set tracker.
             record.selected = true;
+            this._selectedRecord = record;
 
         },
 

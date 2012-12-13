@@ -396,6 +396,9 @@
             this.time =                     this.item.find('.time input');
             this.space =                    this.item.find('.space input');
 
+            // TODO|dev
+            console.log(recordRaw);
+
             // For record ids, fall back to null if undefined.
             this.itemId = itemRaw === '' ?
                 null : parseInt(itemRaw, 10);
