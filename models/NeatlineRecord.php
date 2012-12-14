@@ -56,20 +56,6 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
 
 
     /**
-     * Locally-stored fields.
-     */
-    protected static $local = array(
-        'slug',
-        'title',
-        'body',
-        'tags',
-        'map_active',
-        'map_focus',
-        'map_zoom'
-    );
-
-
-    /**
      * Tag-reference fields.
      */
     protected static $styles = array(
@@ -147,40 +133,6 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
 
 
     /**
-     * Get or create the record-specific tag.
-     *
-     * @return Omeka_record The record tag.
-     */
-    public function getTag()
-    {
-
-        if (!is_null($this->tag_id)) {
-
-            // Try to get existing tag.
-            $tagsTable = $this->getTable('NeatlineTag');
-            $tag = $tagsTable->find($this->tag_id);
-
-        }
-
-        else {
-
-            // Create new tag.
-            $exhibit = $this->getExhibit();
-            $tag = new NeatlineTag($exhibit);
-            $tag->save();
-
-            // Set reference.
-            $this->tag_id = $tag->id;
-            $this->save();
-
-        }
-
-        return $tag;
-
-    }
-
-
-    /**
      * Update the record.
      *
      * @param array $values The PUT values.
@@ -188,92 +140,13 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
     public function update($values)
     {
 
-        // Update fields.
-        $this->setFields($values);
-        $this->setStyles($values);
-        $this->setTags();
+        // Pluck out coverage.
+        $coverage = $values['coverage'];
+        unset($values['coverage']);
 
-        // Get coverage.
-        $coverage = array_key_exists('coverage', $values) ?
-            $values['coverage'] : null;
-
-        // Save.
+        // Set remaining fields
+        foreach ($values as $key => $val) $this->setNotEmpty($key, $val);
         $this->save($coverage);
-
-    }
-
-
-    /**
-     * Update locally-stored, non-style fields.
-     *
-     * @param array $values An associative array of values.
-     */
-    public function setFields($values)
-    {
-
-        // Walk non-style keys.
-        foreach (self::$local as $field) {
-
-            // If the key is passed, set it.
-            if (array_key_exists($field, $values)) {
-                $this->setNotEmpty($field, $values[$field]);
-            }
-
-        }
-
-    }
-
-
-    /**
-     * Create, modify, or delete the record-specific style tag that stores
-     * style values set directly on the record.
-     *
-     * @param array $values An associative array of values.
-     */
-    public function setStyles($values)
-    {
-
-        // ----------------------------------------------------------------
-        // Check to see if any of the passed values are valid, non-null
-        // styles. This is the case when values are entered directly into
-        // the "Style" tab in a record edit form.
-        // ----------------------------------------------------------------
-
-        $localStyles = false;
-
-        // Walk style keys.
-        foreach (self::$styles as $s) {
-
-            // Check for first defined, non-null style.
-            if (array_key_exists($s, $values) && !is_null($values[$s])) {
-                $localStyles = true; break;
-            }
-
-        }
-
-        // ----------------------------------------------------------------
-        // If so, then these values need to be stored in a record-specific
-        // "local" tag referenced by the record's `tag_id` attribute. This
-        // tag is not created by default for the record (since it is not
-        // needed when all of a record's styles are inherited from regular
-        // tags) and needs to created if it does not already exist.
-        // ----------------------------------------------------------------
-
-        if ($localStyles) {
-
-            // Get the local tag.
-            $tag = $this->getTag();
-
-            // Update the tag fields.
-            foreach (self::$styles as $style) {
-                if (array_key_exists($style, $values)) {
-                    $tag[$style] = $values[$style];
-                }
-            }
-
-            $tag->save();
-
-        }
 
     }
 

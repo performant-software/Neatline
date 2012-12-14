@@ -29,23 +29,8 @@ class Neatline_NeatlineRecordTest_Update
         $exhibit = $this->__exhibit();
         $record = $this->__record($exhibit);
 
-        // Create tag1.
-        $tag1 = new NeatlineTag($exhibit);
-        $tag1->max_zoom = 15;
-        $tag1->tag = 'tag1';
-        $tag1->save();
-
-        // Create tag2.
-        $tag2 = new NeatlineTag($exhibit);
-        $tag2->min_zoom = 10;
-        $tag2->tag = 'tag2';
-        $tag2->save();
-
         // Mock values:
         $values = array(
-
-            // Local values:
-            // -------------
 
             'slug'          => 'slug',
             'title'         => 'title',
@@ -55,9 +40,6 @@ class Neatline_NeatlineRecordTest_Update
             'map_active'    => 4,
             'map_focus'     => 'lat/lon',
             'map_zoom'      => 5,
-
-            // Locally-set styles:
-            // -------------------
 
             'vector_color'      => '#333333',
             'stroke_color'      => '#444444',
@@ -69,20 +51,18 @@ class Neatline_NeatlineRecordTest_Update
             'stroke_width'      => 10,
             'point_radius'      => 11,
             'point_image'       => 'file.png',
-            'max_zoom'          => null,
-            'min_zoom'          => null,
+            'max_zoom'          => 12,
+            'min_zoom'          => 13,
 
         );
 
         // Update.
-        $c1 = $this->_tagsTable->count();
         $record->update($values);
-        $c2 = $this->_tagsTable->count();
 
         // Reload record.
         $record = $this->_recordsTable->find($record->id);
 
-        // Static fields updated.
+        // Data fields updated.
         $this->assertEquals($record->slug,          'slug');
         $this->assertEquals($record->title,         'title');
         $this->assertEquals($record->body,          'body');
@@ -91,28 +71,19 @@ class Neatline_NeatlineRecordTest_Update
         $this->assertEquals($record->map_focus,     'lat/lon');
         $this->assertEquals($record->map_zoom,      5);
 
-        // Record tag created.
-        $this->assertEquals($c1+1, $c2);
-        $tag = $this->getLastTag();
-
         // Tag fields set.
-        $this->assertEquals($record->tag_id,        $tag->id);
-        $this->assertEquals($tag->vector_color,     '#333333');
-        $this->assertEquals($tag->stroke_color,     '#444444');
-        $this->assertEquals($tag->select_color,     '#555555');
-        $this->assertEquals($tag->vector_opacity,   6);
-        $this->assertEquals($tag->select_opacity,   7);
-        $this->assertEquals($tag->stroke_opacity,   8);
-        $this->assertEquals($tag->image_opacity,    9);
-        $this->assertEquals($tag->stroke_width,     10);
-        $this->assertEquals($tag->point_radius,     11);
-        $this->assertEquals($tag->point_image,      'file.png');
-        $this->assertNull($tag->max_zoom);
-        $this->assertNull($tag->min_zoom);
-
-        // Tag keys updated.
-        $this->assertEquals($record->max_zoom, $tag1->id);
-        $this->assertEquals($record->min_zoom, $tag2->id);
+        $this->assertEquals($record->vector_color,      '#333333');
+        $this->assertEquals($record->stroke_color,      '#444444');
+        $this->assertEquals($record->select_color,      '#555555');
+        $this->assertEquals($record->vector_opacity,    6);
+        $this->assertEquals($record->select_opacity,    7);
+        $this->assertEquals($record->stroke_opacity,    8);
+        $this->assertEquals($record->image_opacity,     9);
+        $this->assertEquals($record->stroke_width,      10);
+        $this->assertEquals($record->point_radius,      11);
+        $this->assertEquals($record->point_image,       'file.png');
+        $this->assertEquals($record->max_zoom,          12);
+        $this->assertEquals($record->min_zoom,          13);
 
         // Coverage updated.
         $this->assertNotNull($record->coverage);
