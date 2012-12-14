@@ -12,8 +12,9 @@
  */
 
 
-if (!defined('NEATLINE_PLUGIN_DIR'))
+if (!defined('NEATLINE_PLUGIN_DIR')) {
     define('NEATLINE_PLUGIN_DIR', dirname(__FILE__));
+}
 
 require_once NEATLINE_PLUGIN_DIR . '/NeatlinePlugin.php';
 require_once NEATLINE_PLUGIN_DIR . '/helpers/NeatlineFunctions.php';
