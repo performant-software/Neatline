@@ -22,13 +22,16 @@ class NeatlineRecordTable extends Omeka_Db_Table
      *
      * @return Omeka_Db_Select The modified select.
      */
-    public function getSelect()
+    public function apiSelect()
     {
 
         // Get base select.
         $select = new Omeka_Db_Select($this->getDb()->getAdapter());
 
-        // Columns.
+
+        // Define the columns:
+        // -------------------
+
         $select->from(
             array(
                 'r' => "{$this->_db->prefix}neatline_records",
@@ -72,11 +75,55 @@ class NeatlineRecordTable extends Omeka_Db_Table
             )
         );
 
+
+        // Add the style joins:
+        // --------------------
+
+        $select
+            ->joinLeft(
+                array('t1' => "{$this->_db->prefix}neatline_tags"),
+                'r.vector_color = t1.id')
+            ->joinLeft(
+                array('t2' => "{$this->_db->prefix}neatline_tags"),
+                'r.stroke_color = t2.id')
+            ->joinLeft(
+                array('t3' => "{$this->_db->prefix}neatline_tags"),
+                'r.select_color = t3.id')
+            ->joinLeft(
+                array('t4' => "{$this->_db->prefix}neatline_tags"),
+                'r.vector_opacity = t4.id')
+            ->joinLeft(
+                array('t5' => "{$this->_db->prefix}neatline_tags"),
+                'r.select_opacity = t5.id')
+            ->joinLeft(
+                array('t6' => "{$this->_db->prefix}neatline_tags"),
+                'r.stroke_opacity = t6.id')
+            ->joinLeft(
+                array('t7' => "{$this->_db->prefix}neatline_tags"),
+                'r.image_opacity = t7.id')
+            ->joinLeft(
+                array('t8' => "{$this->_db->prefix}neatline_tags"),
+                'r.stroke_width = t8.id')
+            ->joinLeft(
+                array('t9' => "{$this->_db->prefix}neatline_tags"),
+                'r.point_radius = t9.id')
+            ->joinLeft(
+                array('t10' => "{$this->_db->prefix}neatline_tags"),
+                'r.point_image = t10.id')
+            ->joinLeft(
+                array('t11' => "{$this->_db->prefix}neatline_tags"),
+                'r.max_zoom = t11.id')
+            ->joinLeft(
+                array('t12' => "{$this->_db->prefix}neatline_tags"),
+                'r.min_zoom = t12.id');
+
+
         // Add `wkt` column.
         $select->columns(array(
             'wkt' => new Zend_Db_Expr('AsText(r.coverage)')
         ));
 
+        echo $select->__toString();
         return $select;
 
     }
@@ -119,7 +166,7 @@ class NeatlineRecordTable extends Omeka_Db_Table
     /**
      * Construct records array for exhibit and editor.
      *
-     * @param Omeka_Record_AbstractRecord $exhibit The exhibit record.
+     * @param NeatlineExhibit $exhibit The exhibit record.
      *
      * Filter parameters:
      * ------------------
@@ -134,7 +181,7 @@ class NeatlineRecordTable extends Omeka_Db_Table
         $data = array();
 
         // Build the select.
-        $select = $this->getSelect()->where('exhibit_id=?', $exhibit->id);
+        $select = $this->apiSelect()->where('exhibit_id=?', $exhibit->id);
 
 
         // Zoom.
@@ -169,7 +216,7 @@ class NeatlineRecordTable extends Omeka_Db_Table
     /**
      * Filter by zoom.
      *
-     * @param Omeka_Db_Select $select The starting select.
+     * @param Omeka_Db_Select $select The select.
      * @param integer $zoom The zoom level.
      * @return Omeka_Db_Select The filtered select.
      */
@@ -184,7 +231,7 @@ class NeatlineRecordTable extends Omeka_Db_Table
     /**
      * Filter by extent.
      *
-     * @param Omeka_Db_Select $select The starting select.
+     * @param Omeka_Db_Select $select The select.
      * @param string $extent The extent, as a WKT polygon.
      * @return Omeka_Db_Select The filtered select.
      */
