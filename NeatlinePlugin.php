@@ -21,7 +21,6 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
         'install',
         'uninstall',
         'define_routes',
-        'before_delete_item',
         'initialize'
     );
 
@@ -200,7 +199,8 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
     public function hookDefineRoutes($args)
     {
         $args['router']->addConfig(new Zend_Config_Ini(
-            NEATLINE_PLUGIN_DIR . '/routes.ini', 'routes'));
+            NEATLINE_PLUGIN_DIR . '/routes.ini', 'routes')
+        );
     }
 
 
@@ -210,46 +210,6 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
     public function hookInitialize()
     {
         add_translation_source(dirname(__FILE__) . '/languages');
-    }
-
-
-    /**
-     * Delete data records associated with items that are deleted.
-     *
-     * @param Omeka_Item $item The item being deleted.
-     **/
-    public function hookBeforeDeleteItem($args)
-    {
-
-        // Prepare the select.
-        $table =    $this->_db->getTable('NeatlineRecord');
-        $alias =    $table->getTableAlias();
-        $adapter =  $table->getAdapter();
-        $select =   $table->getSelect();
-
-        // Define the select.
-        $select->where($adapter->quoteInto(
-            "$alias.item_id=?", $args['record']->id)
-        );
-
-        // Start transaction.
-        $this->_db->beginTransaction();
-
-        try {
-
-            // Delete the records.
-            $records = $table->fetchObjects($select);
-            foreach ($records as $record) { $record->delete(); }
-            $this->_db->commit();
-
-        } catch (Exception $e) {
-
-            // Rollback on failure.
-            $this->_db->rollback();
-            throw $e;
-
-        }
-
     }
 
 

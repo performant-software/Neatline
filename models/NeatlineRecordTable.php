@@ -23,17 +23,10 @@ class NeatlineRecordTable extends Omeka_Db_Table
      */
     public function getSelect()
     {
-
-        // Get base select.
         $select = parent::getSelect();
-
-        // Add `wkt` column.
-        $select->columns(array(
-            'wkt' => new Zend_Db_Expr('AsText(coverage)')
-        ));
-
-        return $select;
-
+        return $select->columns(array(
+            'wkt' => new Zend_Db_Expr('AsText(coverage)'))
+        );
     }
 
 
