@@ -16,6 +16,29 @@ class NeatlineRecordTable extends Omeka_Db_Table
 
 
     /**
+     * Extend the default `getSelect`:
+     * - Add a `wkt` column, which selects the raw value of `coverage`.
+     * - For each of the style key columns, join on the tag value.
+     *
+     * @return Omeka_Db_Select The modified select.
+     */
+    public function getSelect()
+    {
+
+        // Get default select.
+        $select = parent::getSelect();
+
+        // Add `wkt` column.
+        $select->columns(array(
+            'wkt' => new Zend_Db_Expr('AsText(coverage)')
+        ));
+
+        return $select;
+
+    }
+
+
+    /**
      * Count all active records in an exhibit.
      *
      * @param Omeka_record $exhibit The exhibit record.
@@ -40,9 +63,7 @@ class NeatlineRecordTable extends Omeka_Db_Table
     {
 
         // Build the select.
-        $select = $this->getSelect()
-            ->columns(array('wkt'=>new Zend_Db_Expr('AsText(coverage)')))
-            ->where('id=?', $id);
+        $select = $this->getSelect()->where('id=?', $id);
 
         // Query.
         $record = $this->fetchObject($select);
@@ -69,9 +90,7 @@ class NeatlineRecordTable extends Omeka_Db_Table
         $data = array();
 
         // Build the select.
-        $select = $this->getSelect()
-            ->columns(array('wkt'=>new Zend_Db_Expr('AsText(coverage)')))
-            ->where('exhibit_id=?', $exhibit->id);
+        $select = $this->getSelect()->where('exhibit_id=?', $exhibit->id);
 
 
         // Zoom.

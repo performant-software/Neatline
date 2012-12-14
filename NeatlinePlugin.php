@@ -62,7 +62,6 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
             `{$this->_db->prefix}neatline_exhibits` (
 
             `id`                INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-            `creator_id`        INT(10) UNSIGNED NOT NULL,
             `tag_id`            INT(10) UNSIGNED NULL,
 
             `added`             TIMESTAMP NULL,

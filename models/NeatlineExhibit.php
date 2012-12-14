@@ -15,71 +15,16 @@ class NeatlineExhibit extends Omeka_Record_AbstractRecord
 {
 
 
-    /**
-     * The id of the user who created the exhibit.
-     * int(10) unsigned NOT NULL
-     */
-    public $creator_id = 0;
-
-    /**
-     * Exhibit default tag.
-     * int(10) unsigned NULL
-     */
-    public $tag_id;
-
-    /**
-     * The date the exhibit was created.
-     * TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-     */
-    public $added;
-
-    /**
-     * The date the exhibit was last modified.
-     * TIMESTAMP NULL
-     */
-    public $modified;
-
-    /**
-     * The title of the exhibit.
-     * tinytext collate utf8_unicode_ci
-     */
-    public $title;
-
-    /**
-     * A text descriptiption for the exhibit.
-     * TEXT COLLATE utf8_unicode_ci DEFAULT NULL
-     */
-    public $description;
-
-    /**
-     * The URL slug for the exhibit.
-     * varchar(100) NOT NULL
-     */
-    public $slug;
-
-    /**
-     * Public/private setting.
-     * tinyint(1) NOT NULL
-     */
-    public $public = 0;
-
-    /**
-     * Omeka items query for the editor.
-     * TEXT COLLATE utf8_unicode_ci NULL
-     */
-    public $query;
-
-    /**
-     * Default map focus position.
-     * varchar(100) NULL
-     */
-    public $map_focus;
-
-    /**
-     * Default map zoom.
-     * varchar(100) NULL
-     */
-    public $map_zoom;
+    public $tag_id;         // INT(10) UNSIGNED NULL
+    public $added;          // TIMESTAMP NULL
+    public $modified;       // TIMESTAMP NULL
+    public $title;          // TINYTEXT COLLATE utf8_unicode_ci NULL
+    public $description;    // TEXT COLLATE utf8_unicode_ci NULL
+    public $slug;           // VARCHAR(100) NOT NULL
+    public $public = 0;     // TINYINT(1) NOT NULL
+    public $query;          // TEXT COLLATE utf8_unicode_ci NULL
+    public $map_focus;      // VARCHAR(100) NULL
+    public $map_zoom;       // INT(10) UNSIGNED NULL
 
 
     /**

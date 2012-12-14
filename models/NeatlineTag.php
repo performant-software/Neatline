@@ -15,89 +15,20 @@ class NeatlineTag extends Omeka_Record_AbstractRecord
 {
 
 
-    /**
-     * The parent exhibit id.
-     * int(10) unsigned NOT NULL
-     */
-    public $exhibit_id;
-
-    /**
-     * The tag name.
-     * tinytext COLLATE utf8_unicode_ci NULL
-     */
-    public $tag;
-
-    /**
-     * The fill color for geometries.
-     * tinytext COLLATE utf8_unicode_ci NULL
-     */
-    public $vector_color;
-
-    /**
-     * The line color for geometries.
-     * tinytext COLLATE utf8_unicode_ci NULLL
-     */
-    public $stroke_color;
-
-    /**
-     * The highlight color for geometries.
-     * tinytext COLLATE utf8_unicode_ci NULL
-     */
-    public $select_color;
-
-    /**
-     * The fill opacity for geometries.
-     * int(10) unsigned NULL
-     */
-    public $vector_opacity;
-
-    /**
-     * The selected opacity for geometries.
-     * int(10) unsigned NULL
-     */
-    public $select_opacity;
-
-    /**
-     * The line opacity for geometries.
-     * int(10) unsigned NULL
-     */
-    public $stroke_opacity;
-
-    /**
-     * The opacity of points rendered as images.
-     * int(10) unsigned NULL
-     */
-    public $image_opacity;
-
-    /**
-     * The width of lines on geometries.
-     * int(10) unsigned NULL
-     */
-    public $stroke_width;
-
-    /**
-     * The radius of points on geometries.
-     * int(10) unsigned NULL
-     */
-    public $point_radius;
-
-    /**
-     * The URL for a static to represent points.
-     * tinytext COLLATE utf8_unicode_ci NULL
-     */
-    public $point_image;
-
-    /**
-     * Maximum map zoom level.
-     * int(10) unsigned NULL
-     */
-    public $max_zoom;
-
-    /**
-     * Minimum map zoom level.
-     * int(10) unsigned NULL
-     */
-    public $min_zoom;
+    public $exhibit_id;         // INT(10) UNSIGNED NOT NULL
+    public $tag;                // TINYTEXT COLLATE utf8_unicode_ci NULL
+    public $vector_color;       // TINYTEXT COLLATE utf8_unicode_ci NULL
+    public $stroke_color;       // TINYTEXT COLLATE utf8_unicode_ci NULL
+    public $select_color;       // TINYTEXT COLLATE utf8_unicode_ci NULL
+    public $vector_opacity;     // INT(10) UNSIGNED NULL
+    public $select_opacity;     // INT(10) UNSIGNED NULL
+    public $stroke_opacity;     // INT(10) UNSIGNED NULL
+    public $image_opacity;      // INT(10) UNSIGNED NULL
+    public $stroke_width;       // INT(10) UNSIGNED NULL
+    public $point_radius;       // INT(10) UNSIGNED NULL
+    public $point_image;        // TINYTEXT COLLATE utf8_unicode_ci NULL
+    public $max_zoom;           // INT(10) UNSIGNED NULL
+    public $min_zoom;           // INT(10) UNSIGNED NULL
 
 
     /**

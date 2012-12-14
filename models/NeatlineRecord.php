@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
 
 /**
- * Row class for Neatline data record.
+ * Row class for NeatlineRecord.
  *
  * @package     omeka
  * @subpackage  neatline
