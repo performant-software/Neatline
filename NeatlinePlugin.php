@@ -61,18 +61,18 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
         $sql = "CREATE TABLE IF NOT EXISTS
             `{$this->_db->prefix}neatline_exhibits` (
 
-            `id`                int(10) unsigned NOT NULL auto_increment,
-            `creator_id`        int(10) unsigned NOT NULL,
-            `tag_id`            int(10) unsigned NULL,
-            `added`             timestamp NULL,
-            `modified`          timestamp NULL,
-            `title`             tinytext collate utf8_unicode_ci NULL,
-            `description`       text collate utf8_unicode_ci NULL,
-            `slug`              varchar(100) NOT NULL,
-            `public`            tinyint(1) NOT NULL,
-            `query`             text collate utf8_unicode_ci NULL,
-            `map_focus`         varchar(100) NULL,
-            `map_zoom`          int(10) unsigned NULL,
+            `id`                INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+            `creator_id`        INT(10) UNSIGNED NOT NULL,
+            `tag_id`            INT(10) UNSIGNED NULL,
+            `added`             TIMESTAMP NULL,
+            `modified`          TIMESTAMP NULL,
+            `title`             TINYTEXT COLLATE utf8_unicode_ci NULL,
+            `description`       TEXT COLLATE utf8_unicode_ci NULL,
+            `slug`              VARCHAR(100) NOT NULL,
+            `public`            TINYINT(1) NOT NULL,
+            `query`             TEXT COLLATE utf8_unicode_ci NULL,
+            `map_focus`         VARCHAR(100) NULL,
+            `map_zoom`          INT(10) UNSIGNED NULL,
 
              PRIMARY KEY        (`id`)
 
@@ -86,31 +86,31 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
         $sql = "CREATE TABLE IF NOT EXISTS
             `{$this->_db->prefix}neatline_records` (
 
-            `id`                int(10) unsigned NOT NULL auto_increment,
-            `item_id`           int(10) unsigned NULL,
-            `exhibit_id`        int(10) unsigned NULL,
-            `tag_id`            int(10) unsigned NULL,
-            `slug`              varchar(100) NULL,
-            `title`             mediumtext COLLATE utf8_unicode_ci NULL,
-            `body`              mediumtext COLLATE utf8_unicode_ci NULL,
-            `tags`              text COLLATE utf8_unicode_ci NULL,
-            `coverage`          geometry,
-            `map_active`        tinyint(1) NULL,
-            `map_focus`         varchar(100) NULL,
-            `map_zoom`          int(10) unsigned NULL,
+            `id`                INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+            `item_id`           INT(10) UNSIGNED NULL,
+            `exhibit_id`        INT(10) UNSIGNED NULL,
+            `tag_id`            INT(10) UNSIGNED NULL,
+            `slug`              VARCHAR(100) NULL,
+            `title`             MEDIUMTEXT COLLATE utf8_unicode_ci NULL,
+            `body`              MEDIUMTEXT COLLATE utf8_unicode_ci NULL,
+            `tags`              TEXT COLLATE utf8_unicode_ci NULL,
+            `coverage`          GEOMETRY,
+            `map_active`        TINYINT(1) NULL,
+            `map_focus`         VARCHAR(100) NULL,
+            `map_zoom`          INT(10) UNSIGNED NULL,
 
-            `vector_color`      int(10) unsigned NOT NULL,
-            `stroke_color`      int(10) unsigned NOT NULL,
-            `select_color`      int(10) unsigned NOT NULL,
-            `vector_opacity`    int(10) unsigned NOT NULL,
-            `select_opacity`    int(10) unsigned NOT NULL,
-            `stroke_opacity`    int(10) unsigned NOT NULL,
-            `image_opacity`     int(10) unsigned NOT NULL,
-            `stroke_width`      int(10) unsigned NOT NULL,
-            `point_radius`      int(10) unsigned NOT NULL,
-            `point_image`       int(10) unsigned NOT NULL,
-            `max_zoom`          int(10) unsigned NOT NULL,
-            `min_zoom`          int(10) unsigned NOT NULL,
+            `vector_color`      INT(10) UNSIGNED NOT NULL,
+            `stroke_color`      INT(10) UNSIGNED NOT NULL,
+            `select_color`      INT(10) UNSIGNED NOT NULL,
+            `vector_opacity`    INT(10) UNSIGNED NOT NULL,
+            `select_opacity`    INT(10) UNSIGNED NOT NULL,
+            `stroke_opacity`    INT(10) UNSIGNED NOT NULL,
+            `image_opacity`     INT(10) UNSIGNED NOT NULL,
+            `stroke_width`      INT(10) UNSIGNED NOT NULL,
+            `point_radius`      INT(10) UNSIGNED NOT NULL,
+            `point_image`       INT(10) UNSIGNED NOT NULL,
+            `max_zoom`          INT(10) UNSIGNED NOT NULL,
+            `min_zoom`          INT(10) UNSIGNED NOT NULL,
 
              PRIMARY KEY        (`id`),
              FULLTEXT KEY       (`title`, `slug`, `body`)
@@ -125,22 +125,22 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
         $sql = "CREATE TABLE IF NOT EXISTS
             `{$this->_db->prefix}neatline_tags` (
 
-            `id`                int(10) unsigned NOT NULL auto_increment,
-            `exhibit_id`        int(10) unsigned NOT NULL,
-            `tag`               tinytext COLLATE utf8_unicode_ci NULL,
+            `id`                INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+            `exhibit_id`        INT(10) UNSIGNED NOT NULL,
+            `tag`               TINYTEXT COLLATE utf8_unicode_ci NULL,
 
-            `vector_color`      tinytext COLLATE utf8_unicode_ci NULL,
-            `stroke_color`      tinytext COLLATE utf8_unicode_ci NULL,
-            `select_color`      tinytext COLLATE utf8_unicode_ci NULL,
-            `vector_opacity`    int(10) unsigned NULL,
-            `select_opacity`    int(10) unsigned NULL,
-            `stroke_opacity`    int(10) unsigned NULL,
-            `image_opacity`     int(10) unsigned NULL,
-            `stroke_width`      int(10) unsigned NULL,
-            `point_radius`      int(10) unsigned NULL,
-            `point_image`       tinytext COLLATE utf8_unicode_ci NULL,
-            `max_zoom`          int(10) unsigned NULL,
-            `min_zoom`          int(10) unsigned NULL,
+            `vector_color`      TINYTEXT COLLATE utf8_unicode_ci NULL,
+            `stroke_color`      TINYTEXT COLLATE utf8_unicode_ci NULL,
+            `select_color`      TINYTEXT COLLATE utf8_unicode_ci NULL,
+            `vector_opacity`    INT(10) UNSIGNED NULL,
+            `select_opacity`    INT(10) UNSIGNED NULL,
+            `stroke_opacity`    INT(10) UNSIGNED NULL,
+            `image_opacity`     INT(10) UNSIGNED NULL,
+            `stroke_width`      INT(10) UNSIGNED NULL,
+            `point_radius`      INT(10) UNSIGNED NULL,
+            `point_image`       TINYTEXT COLLATE utf8_unicode_ci NULL,
+            `max_zoom`          INT(10) UNSIGNED NULL,
+            `min_zoom`          INT(10) UNSIGNED NULL,
 
              PRIMARY KEY        (`id`)
 
@@ -154,8 +154,8 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
         $sql = "CREATE TABLE IF NOT EXISTS
             `{$this->_db->prefix}neatline_layers` (
 
-            `id`                int(10) unsigned not null auto_increment,
-            `name`              tinytext COLLATE utf8_unicode_ci NULL,
+            `id`                INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+            `name`              TINYTEXT COLLATE utf8_unicode_ci NULL,
 
             PRIMARY KEY         (`id`)
 
