@@ -59,8 +59,6 @@ class Neatline_RecordsControllerTest_Index
         $this->assertObjectHasAttribute('max_zoom',         $response[0]);
         $this->assertObjectHasAttribute('map_focus',        $response[0]);
         $this->assertObjectHasAttribute('coverage',         $response[0]);
-        $this->assertObjectHasAttribute('wmsAddress',       $response[0]);
-        $this->assertObjectHasAttribute('layers',           $response[0]);
 
     }
 

@@ -85,7 +85,8 @@ class Neatline_NeatlineRecordTest_FieldAccess
 
         // Check the coverage value.
         $this->assertEquals($this->getCoverageAsText($record),
-            'POINT(1 1)');
+            'POINT(1 1)'
+        );
 
     }
 

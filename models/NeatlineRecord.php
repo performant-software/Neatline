@@ -18,6 +18,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
     public $item_id;            // INT(10) UNSIGNED NULL
     public $exhibit_id;         // INT(10) UNSIGNED NULL
     public $tag_id;             // INT(10) UNSIGNED NULL
+
     public $slug;               // VARCHAR(100) NULL
     public $title;              // MEDIUMTEXT COLLATE utf8_unicode_ci NULL
     public $body;               // MEDIUMTEXT COLLATE utf8_unicode_ci NULL
@@ -26,18 +27,32 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
     public $map_active;         // TINYINT(1) NULL
     public $map_focus;          // VARCHAR(100) NULL
     public $map_zoom;           // INT(10) UNSIGNED NULL
-    public $vector_color;       // INT(10) UNSIGNED NOT NULL
-    public $stroke_color;       // INT(10) UNSIGNED NOT NULL
-    public $select_color;       // INT(10) UNSIGNED NOT NULL
-    public $vector_opacity;     // INT(10) UNSIGNED NOT NULL
-    public $select_opacity;     // INT(10) UNSIGNED NOT NULL
-    public $stroke_opacity;     // INT(10) UNSIGNED NOT NULL
-    public $image_opacity;      // INT(10) UNSIGNED NOT NULL
-    public $stroke_width;       // INT(10) UNSIGNED NOT NULL
-    public $point_radius;       // INT(10) UNSIGNED NOT NULL
-    public $point_image;        // INT(10) UNSIGNED NOT NULL
-    public $max_zoom;           // INT(10) UNSIGNED NOT NULL
-    public $min_zoom;           // INT(10) UNSIGNED NOT NULL
+
+    public $vector_color;       // TINYTEXT COLLATE utf8_unicode_ci NULL
+    public $stroke_color;       // TINYTEXT COLLATE utf8_unicode_ci NULL
+    public $select_color;       // TINYTEXT COLLATE utf8_unicode_ci NULL
+    public $vector_opacity;     // INT(10) UNSIGNED NULL
+    public $select_opacity;     // INT(10) UNSIGNED NULL
+    public $stroke_opacity;     // INT(10) UNSIGNED NULL
+    public $image_opacity;      // INT(10) UNSIGNED NULL
+    public $stroke_width;       // INT(10) UNSIGNED NULL
+    public $point_radius;       // INT(10) UNSIGNED NULL
+    public $point_image;        // TINYTEXT COLLATE utf8_unicode_ci NULL
+    public $max_zoom;           // INT(10) UNSIGNED NULL
+    public $min_zoom;           // INT(10) UNSIGNED NULL
+
+    public $_vector_color;      // INT(10) UNSIGNED NULL
+    public $_stroke_color;      // INT(10) UNSIGNED NULL
+    public $_select_color;      // INT(10) UNSIGNED NULL
+    public $_vector_opacity;    // INT(10) UNSIGNED NULL
+    public $_select_opacity;    // INT(10) UNSIGNED NULL
+    public $_stroke_opacity;    // INT(10) UNSIGNED NULL
+    public $_image_opacity;     // INT(10) UNSIGNED NULL
+    public $_stroke_width;      // INT(10) UNSIGNED NULL
+    public $_point_radius;      // INT(10) UNSIGNED NULL
+    public $_point_image;       // INT(10) UNSIGNED NULL
+    public $_max_zoom;          // INT(10) UNSIGNED NULL
+    public $_min_zoom;          // INT(10) UNSIGNED NULL
 
 
     /**
@@ -348,25 +363,6 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
 
 
     /**
-     * Before saving, point any NULL style tag references to the default
-     * tag for the exhibit.
-     */
-    public function beforeSave()
-    {
-
-        // Get the exhibit default tag.
-        $tagsTable = $this->getTable('NeatlineTag');
-        $tag = $tagsTable->getExhibitTag($this->getExhibit());
-
-        // Set default styles.
-        foreach (self::$styles as $style) {
-            if (is_null($this[$style])) $this[$style] = $tag->id;
-        }
-
-    }
-
-
-    /**
      * If a WKT string is passed to save(), update the `coverage` field.
      *
      * @param string $coverage The coverage, as a WKT string.
@@ -375,16 +371,6 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
     {
         parent::save();
         if (!is_null($coverage)) $this->setCoverage($coverage);
-    }
-
-
-    /**
-     * After saving, update the `modified` column on the parent exhibit by
-     * re-saving it.
-     */
-    public function afterSave()
-    {
-        if (!is_null($this->exhibit_id)) $this->getExhibit()->save();
     }
 
 

@@ -26,7 +26,6 @@ class Neatline_NeatlineExhibitTest_FieldAccess
         $exhibit = new NeatlineExhibit();
 
         // Set.
-        $exhibit->creator_id    = 1;
         $exhibit->tag_id        = 2;
         $exhibit->title         = '3';
         $exhibit->description   = '4';
@@ -43,7 +42,6 @@ class Neatline_NeatlineExhibitTest_FieldAccess
         // Get.
         $this->assertNotNull($exhibit->added);
         $this->assertNotNull($exhibit->modified);
-        $this->assertEquals($exhibit->creator_id,   1);
         $this->assertEquals($exhibit->tag_id,       2);
         $this->assertEquals($exhibit->title,        '3');
         $this->assertEquals($exhibit->description,  '4');

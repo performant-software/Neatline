@@ -16,119 +16,20 @@ class NeatlineRecordTable extends Omeka_Db_Table
 
 
     /**
-     * Construct a query select that replaces each of the tag foreign key
-     * references with the corresponding value in the referenced tag. For
-     * example, if the `vector_color` attribute on a record points at the
-     * tag with `id` 5, left join the tag onto the row and select the tag
-     * value for `vector_color`, effectively replacing the local foreign
-     * key reference on the record with the referenced value on the tag.
+     * Extend the default `getSelect` to add a `wkt` column, which selects
+     * the raw value of `coverage`.
      *
      * @return Omeka_Db_Select The modified select.
      */
-    public function getStyleSelect()
+    public function getSelect()
     {
 
         // Get base select.
-        $select = new Omeka_Db_Select($this->getDb()->getAdapter());
-
-
-        // ----------------------------------------------------------------
-        // Define the columns. Directly select all of the locally-defined,
-        // non-style attributes off the record. For each style field, just
-        // select the value from the tag joined for that field.
-        // ----------------------------------------------------------------
-
-        $select->from(
-            array(
-                'r' => "{$this->_db->prefix}neatline_records",
-                't1' => "{$this->_db->prefix}neatline_tags",
-                't2' => "{$this->_db->prefix}neatline_tags",
-                't3' => "{$this->_db->prefix}neatline_tags",
-                't4' => "{$this->_db->prefix}neatline_tags",
-                't5' => "{$this->_db->prefix}neatline_tags",
-                't6' => "{$this->_db->prefix}neatline_tags",
-                't7' => "{$this->_db->prefix}neatline_tags",
-                't8' => "{$this->_db->prefix}neatline_tags",
-                't9' => "{$this->_db->prefix}neatline_tags",
-                't10' => "{$this->_db->prefix}neatline_tags",
-                't11' => "{$this->_db->prefix}neatline_tags",
-                't12' => "{$this->_db->prefix}neatline_tags"
-            ),
-            array(
-                'r.item_id',
-                'r.exhibit_id',
-                'r.tag_id',
-                'r.slug',
-                'r.slug',
-                'r.title',
-                'r.body',
-                'r.tags',
-                'r.map_active',
-                'r.map_focus',
-                'r.map_zoom',
-                't1.vector_color',
-                't2.stroke_color',
-                't3.select_color',
-                't4.vector_opacity',
-                't5.select_opacity',
-                't6.stroke_opacity',
-                't7.image_opacity',
-                't8.stroke_width',
-                't8.point_radius',
-                't10.point_image',
-                't11.max_zoom',
-                't12.min_zoom'
-            )
-        );
-
-
-        // ----------------------------------------------------------------
-        // For each of the tag-backed attributes, left join the tag record
-        // with the `id` referenced by the foreign keys on the record.
-        // ----------------------------------------------------------------
-
-        $select
-            ->joinLeft(
-                array('t1' => "{$this->_db->prefix}neatline_tags"),
-                'r.vector_color = t1.id')
-            ->joinLeft(
-                array('t2' => "{$this->_db->prefix}neatline_tags"),
-                'r.stroke_color = t2.id')
-            ->joinLeft(
-                array('t3' => "{$this->_db->prefix}neatline_tags"),
-                'r.select_color = t3.id')
-            ->joinLeft(
-                array('t4' => "{$this->_db->prefix}neatline_tags"),
-                'r.vector_opacity = t4.id')
-            ->joinLeft(
-                array('t5' => "{$this->_db->prefix}neatline_tags"),
-                'r.select_opacity = t5.id')
-            ->joinLeft(
-                array('t6' => "{$this->_db->prefix}neatline_tags"),
-                'r.stroke_opacity = t6.id')
-            ->joinLeft(
-                array('t7' => "{$this->_db->prefix}neatline_tags"),
-                'r.image_opacity = t7.id')
-            ->joinLeft(
-                array('t8' => "{$this->_db->prefix}neatline_tags"),
-                'r.stroke_width = t8.id')
-            ->joinLeft(
-                array('t9' => "{$this->_db->prefix}neatline_tags"),
-                'r.point_radius = t9.id')
-            ->joinLeft(
-                array('t10' => "{$this->_db->prefix}neatline_tags"),
-                'r.point_image = t10.id')
-            ->joinLeft(
-                array('t11' => "{$this->_db->prefix}neatline_tags"),
-                'r.max_zoom = t11.id')
-            ->joinLeft(
-                array('t12' => "{$this->_db->prefix}neatline_tags"),
-                'r.min_zoom = t12.id');
-
+        $select = parent::getSelect();
 
         // Add `wkt` column.
         $select->columns(array(
-            'wkt' => new Zend_Db_Expr('AsText(r.coverage)')
+            'wkt' => new Zend_Db_Expr('AsText(coverage)')
         ));
 
         return $select;
@@ -173,7 +74,7 @@ class NeatlineRecordTable extends Omeka_Db_Table
     /**
      * Construct records array for exhibit and editor.
      *
-     * @param NeatlineExhibit $exhibit The exhibit record.
+     * @param Omeka_Record_AbstractRecord $exhibit The exhibit record.
      *
      * Filter parameters:
      * ------------------
@@ -188,9 +89,7 @@ class NeatlineRecordTable extends Omeka_Db_Table
         $data = array();
 
         // Build the select.
-        $select = $this->getStyleSelect()->where(
-            'exhibit_id=?', $exhibit->id
-        );
+        $select = $this->getSelect()->where('exhibit_id=?', $exhibit->id);
 
 
         // Zoom.
@@ -225,7 +124,7 @@ class NeatlineRecordTable extends Omeka_Db_Table
     /**
      * Filter by zoom.
      *
-     * @param Omeka_Db_Select $select The select.
+     * @param Omeka_Db_Select $select The starting select.
      * @param integer $zoom The zoom level.
      * @return Omeka_Db_Select The filtered select.
      */
@@ -240,7 +139,7 @@ class NeatlineRecordTable extends Omeka_Db_Table
     /**
      * Filter by extent.
      *
-     * @param Omeka_Db_Select $select The select.
+     * @param Omeka_Db_Select $select The starting select.
      * @param string $extent The extent, as a WKT polygon.
      * @return Omeka_Db_Select The filtered select.
      */

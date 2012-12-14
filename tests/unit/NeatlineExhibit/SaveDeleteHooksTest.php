@@ -115,34 +115,26 @@ class Neatline_NeatlineExhibitTest_SaveDeleteHooks
     public function testDelete()
     {
 
-        // Create exhibits and items.
-        $neatline1 = $this->__exhibit('test-exhibit-1');
-        $neatline2 = $this->__exhibit('test-exhibit-2');
-        $item1 = $this->__item();
-        $item2 = $this->__item();
+        // Create two exhibits.
+        $exhibit1 = $this->__exhibit();
+        $exhibit2 = $this->__exhibit();
 
         // Create records.
-        $record1 = new NeatlineRecord($neatline1, $item1);
-        $record2 = new NeatlineRecord($neatline1, $item2);
-        $record3 = new NeatlineRecord($neatline2, $item3);
-        $record4 = new NeatlineRecord($neatline2, $item4);
-        $record1->save();
-        $record2->save();
-        $record3->save();
-        $record4->save();
+        $record1 = $this->__record($exhibit1);
+        $record2 = $this->__record($exhibit1);
+        $record3 = $this->__record($exhibit2);
+        $record4 = $this->__record($exhibit2);
 
-        // 2 exhibits, 4 data records.
-        $_exhibitsTable = $this->db->getTable('NeatlineExhibit');
-        $_recordsTable = $this->db->getTable('NeatlineRecord');
-        $this->assertEquals($_exhibitsTable->count(), 2);
-        $this->assertEquals($_recordsTable->count(), 4);
-
-        // Call delete.
-        $neatline1->delete();
+        // Delete exhibit.
+        $exhibit1->delete();
 
         // 1 exhibits, 2 data records.
-        $this->assertEquals($_exhibitsTable->count(), 1);
-        $this->assertEquals($_recordsTable->count(), 2);
+        $this->assertEquals($this->_exhibitsTable->count(), 1);
+        $this->assertEquals($this->_recordsTable->count(), 2);
+
+        // Check unmodified exhibit 2 records.
+        $this->assertNotNull($this->_recordsTable->find($record3->id));
+        $this->assertNotNull($this->_recordsTable->find($record4->id));
 
     }
 

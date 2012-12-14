@@ -76,12 +76,10 @@ class Neatline_NeatlineRecordTableTest_QueryRecord
                 'point_image'       => 'file1.png',
                 'min_zoom'          => 7,
                 'max_zoom'          => 8,
+                'map_active'        => 1,
                 'map_focus'         => 'center1',
                 'map_zoom'          => 9,
-                'coverage'          => 'POINT(1 2)',
-                'wmsAddress'        => null,
-                'layers'            => null,
-                'map_active'        => 1
+                'coverage'          => 'POINT(1 2)'
             )
         );
 

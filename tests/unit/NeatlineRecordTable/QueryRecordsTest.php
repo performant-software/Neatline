@@ -98,12 +98,10 @@ class Neatline_NeatlineRecordTableTest_QueryRecords
                 'point_image'       => 'file1.png',
                 'min_zoom'          => 13,
                 'max_zoom'          => 15,
+                'map_active'        => 1,
                 'map_focus'         => 'center1',
                 'map_zoom'          => 17,
-                'coverage'          => 'POINT(1 1)',
-                'wmsAddress'        => null,
-                'layers'            => null,
-                'map_active'        => 1
+                'coverage'          => 'POINT(1 1)'
             ),
             array(
                 'id'                => $record2->id,
@@ -123,12 +121,10 @@ class Neatline_NeatlineRecordTableTest_QueryRecords
                 'point_image'       => 'file2.png',
                 'min_zoom'          => 14,
                 'max_zoom'          => 16,
+                'map_active'        => 1,
                 'map_focus'         => 'center2',
                 'map_zoom'          => 18,
-                'coverage'          => 'POINT(2 2)',
-                'wmsAddress'        => null,
-                'layers'            => null,
-                'map_active'        => 1
+                'coverage'          => 'POINT(2 2)'
             )
             )
         );
