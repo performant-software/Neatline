@@ -28,7 +28,7 @@ class Neatline_NeatlineRecordTest_SetTags
 
         // Create record.
         $exhibit = $this->__exhibit();
-        $record = $this->__record(null, $exhibit);
+        $record = $this->__record($exhibit);
 
         // Set tags string.
         $record->tags = 't2,t3,t4,t5,t6,t7,t8,t9,t10,t11';

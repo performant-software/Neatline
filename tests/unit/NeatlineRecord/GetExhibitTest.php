@@ -24,7 +24,7 @@ class Neatline_NeatlineRecordTest_GetExhibit
 
         // Create a record.
         $exhibit = $this->__exhibit();
-        $record = new NeatlineRecord(null, $neatline);
+        $record = new NeatlineRecord(null, $exhibit);
 
         // Get the exhibit.
         $retrieved = $record->getExhibit();

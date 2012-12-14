@@ -29,7 +29,7 @@ class NeatlinePluginTest_BeforeDeleteItemHook
         // Create record.
         $item = $this->__item();
         $exhibit = $this->__exhibit();
-        $record = new NeatlineRecord($item, $exhibit);
+        $record = new NeatlineRecord($exhibit, $item);
         $record->save();
 
         // Delete parent item.

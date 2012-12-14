@@ -122,10 +122,10 @@ class Neatline_NeatlineExhibitTest_SaveDeleteHooks
         $item2 = $this->__item();
 
         // Create records.
-        $record1 = new NeatlineRecord($item1, $neatline1);
-        $record2 = new NeatlineRecord($item2, $neatline1);
-        $record3 = new NeatlineRecord($item1, $neatline2);
-        $record4 = new NeatlineRecord($item2, $neatline2);
+        $record1 = new NeatlineRecord($neatline1, $item1);
+        $record2 = new NeatlineRecord($neatline1, $item2);
+        $record3 = new NeatlineRecord($neatline2, $item3);
+        $record4 = new NeatlineRecord($neatline2, $item4);
         $record1->save();
         $record2->save();
         $record3->save();

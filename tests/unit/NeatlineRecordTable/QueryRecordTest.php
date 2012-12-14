@@ -28,7 +28,7 @@ class Neatline_NeatlineRecordTableTest_QueryRecord
         $item = $this->__item();
 
         // Create record.
-        $record = new NeatlineRecord($item, $exhibit);
+        $record = new NeatlineRecord($exhibit, $item);
 
         // Map attributes.
         $record->title              = 'Title';

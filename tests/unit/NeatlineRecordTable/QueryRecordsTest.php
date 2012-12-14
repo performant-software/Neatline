@@ -29,8 +29,8 @@ class Neatline_NeatlineRecordTableTest_QueryRecords
         $item2 = $this->__item();
 
         // Create two records.
-        $record1 = new NeatlineRecord($item1, $exhibit);
-        $record2 = new NeatlineRecord($item2, $exhibit);
+        $record1 = new NeatlineRecord($exhibit, $item1);
+        $record2 = new NeatlineRecord($exhibit, $item2);
 
         // Map attributes.
         $record1->title             = 'Record 1 Title';
@@ -147,9 +147,9 @@ class Neatline_NeatlineRecordTableTest_QueryRecords
         $exhibit2 = $this->__exhibit();
 
         // Create 3 records.
-        $record1 = new NeatlineRecord(null, $exhibit1);
-        $record2 = new NeatlineRecord(null, $exhibit1);
-        $record3 = new NeatlineRecord(null, $exhibit2);
+        $record1 = new NeatlineRecord($exhibit1);
+        $record2 = new NeatlineRecord($exhibit1);
+        $record3 = new NeatlineRecord($exhibit2);
 
         // Save.
         $record1->save();
@@ -177,10 +177,10 @@ class Neatline_NeatlineRecordTableTest_QueryRecords
         $exhibit = $this->__exhibit();
 
         // Create 4 records.
-        $record1 = new NeatlineRecord(null, $exhibit);
-        $record2 = new NeatlineRecord(null, $exhibit);
-        $record3 = new NeatlineRecord(null, $exhibit);
-        $record4 = new NeatlineRecord(null, $exhibit);
+        $record1 = new NeatlineRecord($exhibit);
+        $record2 = new NeatlineRecord($exhibit);
+        $record3 = new NeatlineRecord($exhibit);
+        $record4 = new NeatlineRecord($exhibit);
 
         // Both null.
         $record1->min_zoom = null;
@@ -247,8 +247,8 @@ class Neatline_NeatlineRecordTableTest_QueryRecords
         $exhibit = $this->__exhibit();
 
         // Create 2 records.
-        $record1 = new NeatlineRecord(null, $exhibit);
-        $record2 = new NeatlineRecord(null, $exhibit);
+        $record1 = new NeatlineRecord($exhibit);
+        $record2 = new NeatlineRecord($exhibit);
 
         // Save.
         $record1->save('POLYGON((0 0,0 2,2 2,2 0,0 0))');

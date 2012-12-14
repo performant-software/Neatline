@@ -28,11 +28,11 @@ class Neatline_NeatlineRecordTableTest_CountActiveRecordsByExhibit
         $exhibit2 = $this->__exhibit('test-2');
 
         // Create records.
-        $record1 = new NeatlineRecord(null, $exhibit1);
-        $record2 = new NeatlineRecord(null, $exhibit1);
-        $record3 = new NeatlineRecord(null, $exhibit1);
-        $record4 = new NeatlineRecord(null, $exhibit2);
-        $record5 = new NeatlineRecord(null, $exhibit2);
+        $record1 = new NeatlineRecord($exhibit1);
+        $record2 = new NeatlineRecord($exhibit1);
+        $record3 = new NeatlineRecord($exhibit1);
+        $record4 = new NeatlineRecord($exhibit2);
+        $record5 = new NeatlineRecord($exhibit2);
         $record1->map_active = 1;
         $record2->map_active = 1;
         $record3->map_active = 1;

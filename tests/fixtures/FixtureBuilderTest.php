@@ -27,9 +27,9 @@ class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
 
         // Exhibit and records.
         $exhibit = $this->__exhibit();
-        $record1 = $this->__record(null, $exhibit);
-        $record2 = $this->__record(null, $exhibit);
-        $record3 = $this->__record(null, $exhibit);
+        $record1 = $this->__record($exhibit);
+        $record2 = $this->__record($exhibit);
+        $record3 = $this->__record($exhibit);
 
 
         // Case 1: 3 records, 1 and 2 map-active, 3 map-inactive.
@@ -146,7 +146,7 @@ class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
         $exhibit = $this->__exhibit();
 
         // Record.
-        $record = $this->__record(null, $exhibit);
+        $record = $this->__record($exhibit);
         $record->title = 'Record 4';
         $record->body = 'Record 4 desc.';
         $record->map_focus = '100,200';

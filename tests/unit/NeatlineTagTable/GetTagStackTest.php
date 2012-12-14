@@ -30,7 +30,7 @@ class Neatline_NeatlineTagTableTest_GetTagStack
         $exhibit = $this->__exhibit();
 
         // Create record.
-        $record = $this->__record(null, $exhibit);
+        $record = $this->__record($exhibit);
 
         // Create 3 tags.
         // --------------
@@ -76,7 +76,7 @@ class Neatline_NeatlineTagTableTest_GetTagStack
 
         // Create record with tag.
         $recordTag = $this->__tag();
-        $record = $this->__record(null, $exhibit);
+        $record = $this->__record($exhibit);
         $record->tag_id = $recordTag->id;
         $record->save();
 

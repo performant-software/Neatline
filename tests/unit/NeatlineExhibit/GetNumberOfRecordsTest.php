@@ -26,9 +26,9 @@ class Neatline_NeatlineExhibitTest_GetNumberOfRecords
         $exhibit = $this->__exhibit();
 
         // Create records.
-        $record1 = new NeatlineRecord(null, $exhibit);
-        $record2 = new NeatlineRecord(null, $exhibit);
-        $record3 = new NeatlineRecord(null, $exhibit);
+        $record1 = new NeatlineRecord($exhibit);
+        $record2 = new NeatlineRecord($exhibit);
+        $record3 = new NeatlineRecord($exhibit);
         $record1->map_active = 1;
         $record2->map_active = 1;
         $record3->map_active = 1;

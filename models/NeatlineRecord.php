@@ -193,7 +193,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
      * @param Omeka_record $item The item record.
      * @param Omeka_record $exhibit The exhibit record.
      */
-    public function __construct($item = null, $exhibit = null)
+    public function __construct($exhibit = null, $item = null)
     {
         parent::__construct();
         if (!is_null($exhibit)) $this->exhibit_id = $exhibit->id;

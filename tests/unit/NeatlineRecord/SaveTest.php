@@ -27,7 +27,7 @@ class Neatline_NeatlineRecordTest_Save
 
         // Create exhibit and record.
         $exhibit = $this->__exhibit();
-        $record = new NeatlineRecord(null, $exhibit);
+        $record = new NeatlineRecord($exhibit);
         $record->save();
 
         // Get the exhibit default tag, check references.
@@ -56,7 +56,7 @@ class Neatline_NeatlineRecordTest_Save
 
         // Create exhibit and record.
         $exhibit = $this->__exhibit();
-        $record = new NeatlineRecord(null, $exhibit);
+        $record = new NeatlineRecord($exhibit);
 
         // Set coverage.
         $record->save('GEOMETRYCOLLECTION(
@@ -85,7 +85,7 @@ class Neatline_NeatlineRecordTest_Save
         $this->assertGreaterThanOrEqual(1, $delta);
 
         // Create a record and save.
-        $record = new NeatlineRecord(null, $exhibit);
+        $record = new NeatlineRecord($exhibit);
         $record->save();
 
         // Reget the record.

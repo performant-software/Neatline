@@ -25,7 +25,7 @@ class Neatline_NeatlineRecordTest_BuildJsonData
 
         // Create exhibit and record.
         $exhibit = $this->__exhibit();
-        $record = new NeatlineRecord(null, $exhibit);
+        $record = new NeatlineRecord($exhibit);
 
         // Text:
         $record->title              = '1';

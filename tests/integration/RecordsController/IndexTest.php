@@ -25,8 +25,8 @@ class Neatline_RecordsControllerTest_Index
 
         // Create exhibit and records.
         $exhibit = $this->__exhibit();
-        $record1 = $this->__record(null, $exhibit);
-        $record2 = $this->__record(null, $exhibit);
+        $record1 = $this->__record($exhibit);
+        $record2 = $this->__record($exhibit);
 
         // Hit /records.
         $this->request->setQuery(array('id' => $exhibit->id));

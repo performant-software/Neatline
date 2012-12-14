@@ -25,7 +25,7 @@ class Neatline_NeatlineRecordTest_Construct
         // Create a record.
         $item = $this->__item();
         $exhibit = $this->__exhibit();
-        $record = new NeatlineRecord($item, $exhibit);
+        $record = new NeatlineRecord($exhibit, $item);
 
         // Item and exhibit keys should be set.
         $this->assertEquals($record->exhibit_id, $exhibit->id);
@@ -43,7 +43,7 @@ class Neatline_NeatlineRecordTest_Construct
 
         // Create a record.
         $exhibit = $this->__exhibit();
-        $record = new NeatlineRecord(null, $exhibit);
+        $record = new NeatlineRecord($exhibit);
 
         // Exhibit key should be set.
         $this->assertEquals($record->exhibit_id, $exhibit->id);

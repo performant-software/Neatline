@@ -97,21 +97,21 @@ class Neatline_Test_AppTestCase extends Omeka_Test_AppTestCase
     /**
      * Create a data record.
      *
-     * @param Item $item The parent item.
      * @param NeatlineExhibit $exhibit The parent exhibit.
+     * @param Item $item The parent item.
      * @return NeatlineRecord $record The record.
      */
-    public function __record($item=null, $exhibit=null)
+    public function __record($exhibit=null, $item=null)
     {
-
-        // Create item.
-        if (is_null($item)) $item = $this->__item();
 
         // Create exhibit.
         if (is_null($exhibit)) $exhibit = $this->__exhibit();
 
+        // Create item.
+        if (is_null($item)) $item = $this->__item();
+
         // Create record.
-        $record = new NeatlineRecord($item, $exhibit);
+        $record = new NeatlineRecord($exhibit, $item);
         $record->save();
         return $record;
 

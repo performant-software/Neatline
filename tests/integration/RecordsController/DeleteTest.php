@@ -24,8 +24,8 @@ class Neatline_RecordsControllerTest_Delete
 
         // Create exhibit and records.
         $exhibit = $this->__exhibit();
-        $record1 = $this->__record(null, $exhibit);
-        $record2 = $this->__record(null, $exhibit);
+        $record1 = $this->__record($exhibit);
+        $record2 = $this->__record($exhibit);
 
         // Starting count.
         $startingCount = $this->_recordsTable->count();

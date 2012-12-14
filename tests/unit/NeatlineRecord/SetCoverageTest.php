@@ -24,7 +24,7 @@ class Neatline_NeatlineRecordTest_SetCoverage
 
         // Create exhibit and record.
         $exhibit = $this->__exhibit();
-        $record = new NeatlineRecord(null, $exhibit);
+        $record = new NeatlineRecord($exhibit);
         $record->save();
 
         // Set coverage.

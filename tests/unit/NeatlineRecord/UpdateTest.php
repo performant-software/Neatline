@@ -27,7 +27,7 @@ class Neatline_NeatlineRecordTest_Update
 
         // Create record.
         $exhibit = $this->__exhibit();
-        $record = $this->__record(null, $exhibit);
+        $record = $this->__record($exhibit);
 
         // Create tag1.
         $tag1 = new NeatlineTag($exhibit);

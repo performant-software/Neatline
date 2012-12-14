@@ -24,7 +24,7 @@ class Neatline_RecordsControllerTest_Get
 
         // Create exhibit and record.
         $exhibit = $this->__exhibit();
-        $record = $this->__record(null, $exhibit);
+        $record = $this->__record($exhibit);
 
         // Hit /records.
         $this->dispatch('neatline/records/'.$record->id);
