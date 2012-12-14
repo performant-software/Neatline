@@ -25,12 +25,56 @@ class NeatlineRecordTable extends Omeka_Db_Table
     public function getSelect()
     {
 
-        // Get default select.
-        $select = parent::getSelect();
+        // Get base select.
+        $select = new Omeka_Db_Select($this->getDb()->getAdapter());
+
+        // Columns.
+        $select->from(
+            array(
+                'r' => "{$this->_db->prefix}neatline_records",
+                't1' => "{$this->_db->prefix}neatline_tags",
+                't2' => "{$this->_db->prefix}neatline_tags",
+                't3' => "{$this->_db->prefix}neatline_tags",
+                't4' => "{$this->_db->prefix}neatline_tags",
+                't5' => "{$this->_db->prefix}neatline_tags",
+                't6' => "{$this->_db->prefix}neatline_tags",
+                't7' => "{$this->_db->prefix}neatline_tags",
+                't8' => "{$this->_db->prefix}neatline_tags",
+                't9' => "{$this->_db->prefix}neatline_tags",
+                't10' => "{$this->_db->prefix}neatline_tags",
+                't11' => "{$this->_db->prefix}neatline_tags",
+                't12' => "{$this->_db->prefix}neatline_tags"
+            ),
+            array(
+                'r.item_id',
+                'r.exhibit_id',
+                'r.tag_id',
+                'r.slug',
+                'r.slug',
+                'r.title',
+                'r.body',
+                'r.tags',
+                'r.map_active',
+                'r.map_focus',
+                'r.map_zoom',
+                't1.vector_color',
+                't2.stroke_color',
+                't3.select_color',
+                't4.vector_opacity',
+                't5.select_opacity',
+                't6.stroke_opacity',
+                't7.image_opacity',
+                't8.stroke_width',
+                't8.point_radius',
+                't10.point_image',
+                't11.max_zoom',
+                't12.min_zoom'
+            )
+        );
 
         // Add `wkt` column.
         $select->columns(array(
-            'wkt' => new Zend_Db_Expr('AsText(coverage)')
+            'wkt' => new Zend_Db_Expr('AsText(r.coverage)')
         ));
 
         return $select;
