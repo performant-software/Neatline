@@ -40,8 +40,6 @@ class Neatline_NeatlineExhibitTest_FieldAccess
         $exhibit = $this->_exhibitsTable->find($exhibit->id);
 
         // Get.
-        $this->assertNotNull($exhibit->added);
-        $this->assertNotNull($exhibit->modified);
         $this->assertEquals($exhibit->tag_id,       2);
         $this->assertEquals($exhibit->title,        '3');
         $this->assertEquals($exhibit->description,  '4');

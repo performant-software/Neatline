@@ -18,45 +18,6 @@ class Neatline_NeatlineExhibitTest_SaveDeleteHooks
 
 
     /**
-     * beforeSave() should set `added` and `modified` when the record has
-     * not been saved before (when it is being inserted).
-     */
-    public function testBeforeInsertTimestamps()
-    {
-
-        // Create exhibit.
-        $exhibit = new NeatlineExhibit();
-        $exhibit->slug = 'test';
-        $exhibit->save();
-
-        // Check for non-null timestamps.
-        $this->assertNotNull($exhibit->modified);
-        $this->assertNotNull($exhibit->added);
-
-    }
-
-
-    /**
-     * beforeSave() should just set `modified` when the record has already
-     * been saved (when it is being updated).
-     */
-    public function testBeforeSaveTimestamps()
-    {
-
-        // Create exhibit.
-        $exhibit = $this->__exhibit();
-        $exhibit->modified = '2000-01-01';
-        $exhibit->added = '2000-01-01';
-        $exhibit->save();
-
-        // Changed `modified`, unchanged `added`.
-        $this->assertNotEquals($exhibit->modified, '2000-01-01');
-        $this->assertEquals($exhibit->added, '2000-01-01');
-
-    }
-
-
-    /**
      * save() should create a default style tag for the exhibit with
      * values drawn from the system defaults when the exhibit is inserted
      * and set the `tag_id` reference to point to the new tag.

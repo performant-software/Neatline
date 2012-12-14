@@ -28,12 +28,6 @@ class NeatlineExhibit extends Omeka_Record_AbstractRecord
 
 
     /**
-     * Zend_Date format for saving to the database.
-     */
-    const DATE_FORMAT = 'yyyy-MM-dd HH:mm:ss';
-
-
-    /**
      * Save data from the add/edit form.
      *
      * @param array $formValues The form values.
@@ -54,24 +48,6 @@ class NeatlineExhibit extends Omeka_Record_AbstractRecord
     {
         $recordsTable = $this->getTable('NeatlineRecord');
         return $recordsTable->countActiveRecordsByExhibit($this);
-    }
-
-
-    /**
-     * Before a record is saved:
-     * - Set `modified` field to the current timestamp.
-     * - Set `added` field if the record is being inserted.
-     */
-    protected function beforeSave()
-    {
-
-        // Set `modified`.
-        $now = Zend_Date::now()->toString(self::DATE_FORMAT);
-        $this->modified = $now;
-
-        // Set `added` if inserting.
-        if (!$this->exists()) $this->added = $now;
-
     }
 
 
