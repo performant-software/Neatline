@@ -32,27 +32,27 @@ class Neatline_NeatlineRecordTest_Update
         // Mock values:
         $values = array(
 
-            'slug'          => 'slug',
-            'title'         => 'title',
-            'body'          => 'body',
-            'tags'          => 'tag1,tag2',
+            'slug'          => '1',
+            'title'         => '2',
+            'body'          => '3',
+            'tags'          => '4',
             'coverage'      => 'POINT(1 1)',
-            'map_active'    => 4,
-            'map_focus'     => 'lat/lon',
-            'map_zoom'      => 5,
+            'map_active'    => 5,
+            'map_focus'     => '6',
+            'map_zoom'      => 7,
 
-            'vector_color'      => '#333333',
-            'stroke_color'      => '#444444',
-            'select_color'      => '#555555',
-            'vector_opacity'    => 6,
-            'select_opacity'    => 7,
-            'stroke_opacity'    => 8,
-            'image_opacity'     => 9,
-            'stroke_width'      => 10,
-            'point_radius'      => 11,
-            'point_image'       => 'file.png',
-            'max_zoom'          => 12,
-            'min_zoom'          => 13,
+            'vector_color'      => '8',
+            'stroke_color'      => '9',
+            'select_color'      => '10',
+            'vector_opacity'    => 11,
+            'select_opacity'    => 12,
+            'stroke_opacity'    => 13,
+            'image_opacity'     => 14,
+            'stroke_width'      => 15,
+            'point_radius'      => 16,
+            'point_image'       => '17',
+            'max_zoom'          => 18,
+            'min_zoom'          => 19
 
         );
 
@@ -63,27 +63,27 @@ class Neatline_NeatlineRecordTest_Update
         $record = $this->_recordsTable->find($record->id);
 
         // Data fields updated.
-        $this->assertEquals($record->slug,          'slug');
-        $this->assertEquals($record->title,         'title');
-        $this->assertEquals($record->body,          'body');
-        $this->assertEquals($record->tags,          'tag1,tag2');
-        $this->assertEquals($record->map_active,    4);
-        $this->assertEquals($record->map_focus,     'lat/lon');
-        $this->assertEquals($record->map_zoom,      5);
+        $this->assertEquals($record->slug,          '1');
+        $this->assertEquals($record->title,         '2');
+        $this->assertEquals($record->body,          '3');
+        $this->assertEquals($record->tags,          '4');
+        $this->assertEquals($record->map_active,    5);
+        $this->assertEquals($record->map_focus,     '6');
+        $this->assertEquals($record->map_zoom,      7);
 
         // Tag fields set.
-        $this->assertEquals($record->vector_color,      '#333333');
-        $this->assertEquals($record->stroke_color,      '#444444');
-        $this->assertEquals($record->select_color,      '#555555');
-        $this->assertEquals($record->vector_opacity,    6);
-        $this->assertEquals($record->select_opacity,    7);
-        $this->assertEquals($record->stroke_opacity,    8);
-        $this->assertEquals($record->image_opacity,     9);
-        $this->assertEquals($record->stroke_width,      10);
-        $this->assertEquals($record->point_radius,      11);
-        $this->assertEquals($record->point_image,       'file.png');
-        $this->assertEquals($record->max_zoom,          12);
-        $this->assertEquals($record->min_zoom,          13);
+        $this->assertEquals($record->vector_color,      '8');
+        $this->assertEquals($record->stroke_color,      '9');
+        $this->assertEquals($record->select_color,      '10');
+        $this->assertEquals($record->vector_opacity,    11);
+        $this->assertEquals($record->select_opacity,    12);
+        $this->assertEquals($record->stroke_opacity,    13);
+        $this->assertEquals($record->image_opacity,     14);
+        $this->assertEquals($record->stroke_width,      15);
+        $this->assertEquals($record->point_radius,      16);
+        $this->assertEquals($record->point_image,       '17');
+        $this->assertEquals($record->max_zoom,          18);
+        $this->assertEquals($record->min_zoom,          19);
 
         // Coverage updated.
         $this->assertNotNull($record->coverage);
