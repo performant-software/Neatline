@@ -25,7 +25,7 @@ class Neatline_NeatlineRecordTest_FieldAccess
         // Create a record.
         $record = $this->__record();
 
-        // Set values:
+        // Data fields:
         $record->item_id            = 1;
         $record->exhibit_id         = 2;
         $record->tag_id             = 3;
@@ -37,10 +37,10 @@ class Neatline_NeatlineRecordTest_FieldAccess
         $record->map_focus          = '9';
         $record->map_zoom           = 10;
 
-        // Set keys:
-        $record->vector_color       = 11;
-        $record->stroke_color       = 12;
-        $record->select_color       = 13;
+        // Local styles:
+        $record->vector_color       = '11';
+        $record->stroke_color       = '12';
+        $record->select_color       = '13';
         $record->vector_opacity     = 14;
         $record->select_opacity     = 15;
         $record->stroke_opacity     = 16;
@@ -51,13 +51,27 @@ class Neatline_NeatlineRecordTest_FieldAccess
         $record->max_zoom           = 21;
         $record->min_zoom           = 22;
 
+        // Tag references:
+        $record->_vector_color      = 23;
+        $record->_stroke_color      = 24;
+        $record->_select_color      = 25;
+        $record->_vector_opacity    = 26;
+        $record->_select_opacity    = 27;
+        $record->_stroke_opacity    = 28;
+        $record->_image_opacity     = 29;
+        $record->_stroke_width      = 30;
+        $record->_point_radius      = 31;
+        $record->_point_image       = 32;
+        $record->_max_zoom          = 33;
+        $record->_min_zoom          = 34;
+
         // Save with coverage.
         $record->save('POINT(1 1)');
 
         // Re-get the record object.
         $record = $this->_recordsTable->find($record->id);
 
-        // Check values:
+        // Data fields:
         $this->assertEquals($record->item_id,       1);
         $this->assertEquals($record->exhibit_id,    2);
         $this->assertEquals($record->tag_id,        3);
@@ -69,10 +83,10 @@ class Neatline_NeatlineRecordTest_FieldAccess
         $this->assertEquals($record->map_focus,     '9');
         $this->assertEquals($record->map_zoom,      10);
 
-        // Check keys:
-        $this->assertEquals($record->vector_color,      11);
-        $this->assertEquals($record->stroke_color,      12);
-        $this->assertEquals($record->select_color,      13);
+        // Local styles:
+        $this->assertEquals($record->vector_color,      '11');
+        $this->assertEquals($record->stroke_color,      '12');
+        $this->assertEquals($record->select_color,      '13');
         $this->assertEquals($record->vector_opacity,    14);
         $this->assertEquals($record->select_opacity,    15);
         $this->assertEquals($record->stroke_opacity,    16);
@@ -82,6 +96,20 @@ class Neatline_NeatlineRecordTest_FieldAccess
         $this->assertEquals($record->point_image,       '20');
         $this->assertEquals($record->max_zoom,          21);
         $this->assertEquals($record->min_zoom,          22);
+
+        // Tag references:
+        $this->assertEquals($record->_vector_color,      23);
+        $this->assertEquals($record->_stroke_color,      24);
+        $this->assertEquals($record->_select_color,      25);
+        $this->assertEquals($record->_vector_opacity,    26);
+        $this->assertEquals($record->_select_opacity,    27);
+        $this->assertEquals($record->_stroke_opacity,    28);
+        $this->assertEquals($record->_image_opacity,     29);
+        $this->assertEquals($record->_stroke_width,      30);
+        $this->assertEquals($record->_point_radius,      31);
+        $this->assertEquals($record->_point_image,       32);
+        $this->assertEquals($record->_max_zoom,          33);
+        $this->assertEquals($record->_min_zoom,          34);
 
         // Check the coverage value.
         $this->assertEquals($this->getCoverageAsText($record),
