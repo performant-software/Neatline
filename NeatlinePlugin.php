@@ -214,9 +214,6 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
             `{$this->_db->prefix}neatline_tags`";
         $this->_db->query($sql);
 
-        // Remove default map style attributes.
-        foreach ($this->_mapStyles as $style) delete_option($style);
-
     }
 
 
