@@ -15,143 +15,29 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
 {
 
 
-    /**
-     * The id of the parent item.
-     * int(10) unsigned NULL
-     */
-    public $item_id;
-
-    /**
-     * The id of the parent exhibit.
-     * int(10) unsigned NULL
-     */
-    public $exhibit_id;
-
-    /**
-     * Record default tag.
-     * int(10) unsigned NULL
-     */
-    public $tag_id;
-
-    /**
-     * A plaintext, unique identifier.
-     * varchar(100) NULL
-     */
-    public $slug;
-
-    /**
-     * The title for the record.
-     * mediumtext COLLATE utf8_unicode_ci NULL
-     */
-    public $title;
-
-    /**
-     * A plaintext description for the record.
-     * mediumtext COLLATE utf8_unicode_ci NULL
-     */
-    public $body;
-
-    /**
-     * A comma-delimited list of tags.
-     * text COLLATE utf8_unicode_ci NULL
-     */
-    public $tags;
-
-    /**
-     * KML for geometries.
-     * mediumtext COLLATE utf8_unicode_ci NULL
-     */
-    public $coverage;
-
-    /**
-     * True if the record is present on the map.
-     * tinyint(1) NULL
-     */
-    public $map_active;
-
-    /**
-     * Default map focus position
-     * varchar(100) NULL
-     */
-    public $map_focus;
-
-    /**
-     * Default map zoom level.
-     * int(10) unsigned NULL
-     */
-    public $map_zoom;
-
-    /**
-     * *** Tag reference.
-     * int(10) unsigned NOT NULL
-     */
-    public $vector_color;
-
-    /**
-     * *** Tag reference.
-     * int(10) unsigned NOT NULL
-     */
-    public $stroke_color;
-
-    /**
-     * *** Tag reference.
-     * int(10) unsigned NOT NULL
-     */
-    public $select_color;
-
-    /**
-     * *** Tag reference.
-     * int(10) unsigned NOT NULL
-     */
-    public $vector_opacity;
-
-    /**
-     * *** Tag reference.
-     * int(10) unsigned NOT NULL
-     */
-    public $select_opacity;
-
-    /**
-     * *** Tag reference.
-     * int(10) unsigned NOT NULL
-     */
-    public $stroke_opacity;
-
-    /**
-     * *** Tag reference.
-     * int(10) unsigned NOT NULL
-     */
-    public $image_opacity;
-
-    /**
-     * *** Tag reference.
-     * int(10) unsigned NOT NULL
-     */
-    public $stroke_width;
-
-    /**
-     * *** Tag reference.
-     * int(10) unsigned NOT NULL
-     */
-    public $point_radius;
-
-    /**
-     * *** Tag reference.
-     * int(10) unsigned NOT NULL
-     */
-    public $point_image;
-
-    /**
-     * *** Tag reference.
-     * int(10) unsigned NOT NULL
-     */
-    public $max_zoom;
-
-    /**
-     * *** Tag reference.
-     * int(10) unsigned NOT NULL
-     */
-    public $min_zoom;
+    public $item_id;            // INT(10) UNSIGNED NULL
+    public $exhibit_id;         // INT(10) UNSIGNED NULL
+    public $tag_id;             // INT(10) UNSIGNED NULL
+    public $slug;               // VARCHAR(100) NULL
+    public $title;              // MEDIUMTEXT COLLATE utf8_unicode_ci NULL
+    public $body;               // MEDIUMTEXT COLLATE utf8_unicode_ci NULL
+    public $tags;               // TEXT COLLATE utf8_unicode_ci NULL
+    public $coverage;           // GEOMETRY
+    public $map_active;         // TINYINT(1) NULL
+    public $map_focus;          // VARCHAR(100) NULL
+    public $map_zoom;           // INT(10) UNSIGNED NULL
+    public $vector_color;       // INT(10) UNSIGNED NOT NULL
+    public $stroke_color;       // INT(10) UNSIGNED NOT NULL
+    public $select_color;       // INT(10) UNSIGNED NOT NULL
+    public $vector_opacity;     // INT(10) UNSIGNED NOT NULL
+    public $select_opacity;     // INT(10) UNSIGNED NOT NULL
+    public $stroke_opacity;     // INT(10) UNSIGNED NOT NULL
+    public $image_opacity;      // INT(10) UNSIGNED NOT NULL
+    public $stroke_width;       // INT(10) UNSIGNED NOT NULL
+    public $point_radius;       // INT(10) UNSIGNED NOT NULL
+    public $point_image;        // INT(10) UNSIGNED NOT NULL
+    public $max_zoom;           // INT(10) UNSIGNED NOT NULL
+    public $min_zoom;           // INT(10) UNSIGNED NOT NULL
 
 
     /**
