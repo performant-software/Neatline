@@ -16,21 +16,27 @@ class NeatlineRecordTable extends Omeka_Db_Table
 
 
     /**
-     * Extend the default `getSelect`:
-     * - Add a `wkt` column, which selects the raw value of `coverage`.
-     * - For each of the style key columns, join on the tag value.
+     * Construct a query select that replaces each of the tag foreign key
+     * references with the corresponding value in the referenced tag. For
+     * example, if the `vector_color` attribute on a record points at the
+     * tag with `id` 5, left join the tag onto the row and select the tag
+     * value for `vector_color`, effectively replacing the local foreign
+     * key reference on the record with the referenced value on the tag.
      *
      * @return Omeka_Db_Select The modified select.
      */
-    public function apiSelect()
+    public function getStyleSelect()
     {
 
         // Get base select.
         $select = new Omeka_Db_Select($this->getDb()->getAdapter());
 
 
-        // Define the columns:
-        // -------------------
+        // ----------------------------------------------------------------
+        // Define the columns. Directly select all of the locally-defined,
+        // non-style attributes off the record. For each style field, just
+        // select the value from the tag joined for that field.
+        // ----------------------------------------------------------------
 
         $select->from(
             array(
@@ -76,8 +82,10 @@ class NeatlineRecordTable extends Omeka_Db_Table
         );
 
 
-        // Add the style joins:
-        // --------------------
+        // ----------------------------------------------------------------
+        // For each of the tag-backed attributes, left join the tag record
+        // with the `id` referenced by the foreign keys on the record.
+        // ----------------------------------------------------------------
 
         $select
             ->joinLeft(
@@ -123,7 +131,6 @@ class NeatlineRecordTable extends Omeka_Db_Table
             'wkt' => new Zend_Db_Expr('AsText(r.coverage)')
         ));
 
-        echo $select->__toString();
         return $select;
 
     }
@@ -181,7 +188,9 @@ class NeatlineRecordTable extends Omeka_Db_Table
         $data = array();
 
         // Build the select.
-        $select = $this->apiSelect()->where('exhibit_id=?', $exhibit->id);
+        $select = $this->getStyleSelect()->where(
+            'exhibit_id=?', $exhibit->id
+        );
 
 
         // Zoom.
