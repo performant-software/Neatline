@@ -32,47 +32,49 @@ class Neatline_NeatlineRecordTableTest_QueryRecords
         $record1 = new NeatlineRecord($exhibit, $item1);
         $record2 = new NeatlineRecord($exhibit, $item2);
 
-        // Map attributes.
-        $record1->title             = 'Record 1 Title';
-        $record2->title             = 'Record 2 Title';
-        $record1->body              = 'Record 1 body.';
-        $record2->body              = 'Record 2 body.';
-        $record1->slug              = 'slug-1';
-        $record2->slug              = 'slug-2';
-        $record1->vector_color      = '#1';
-        $record2->vector_color      = '#2';
-        $record1->stroke_color      = '#3';
-        $record2->stroke_color      = '#4';
-        $record1->select_color      = '#5';
-        $record2->select_color      = '#6';
-        $record1->vector_opacity    = 1;
-        $record2->vector_opacity    = 2;
-        $record1->select_opacity    = 3;
-        $record2->select_opacity    = 4;
-        $record1->stroke_opacity    = 5;
-        $record2->stroke_opacity    = 6;
-        $record1->image_opacity     = 7;
-        $record2->image_opacity     = 8;
-        $record1->stroke_width      = 9;
-        $record2->stroke_width      = 10;
-        $record1->point_radius      = 11;
-        $record2->point_radius      = 12;
-        $record1->point_image       = 'file1.png';
-        $record2->point_image       = 'file2.png';
-        $record1->min_zoom          = 13;
-        $record2->min_zoom          = 14;
-        $record1->max_zoom          = 15;
-        $record2->max_zoom          = 16;
-        $record1->map_active        = 1;
-        $record2->map_active        = 1;
-        $record1->map_focus         = 'center1';
-        $record2->map_focus         = 'center2';
-        $record1->map_zoom          = 17;
-        $record2->map_zoom          = 18;
+        // Fields:
+        $record1->title             = '1';
+        $record2->title             = '2';
+        $record1->body              = '3';
+        $record2->body              = '4';
+        $record1->slug              = '5';
+        $record2->slug              = '6';
+        $record1->vector_color      = '7';
+        $record2->vector_color      = '8';
+        $record1->stroke_color      = '9';
+        $record2->stroke_color      = '10';
+        $record1->select_color      = '11';
+        $record2->select_color      = '12';
+        $record1->vector_opacity    = 13;
+        $record2->vector_opacity    = 14;
+        $record1->select_opacity    = 15;
+        $record2->select_opacity    = 16;
+        $record1->stroke_opacity    = 17;
+        $record2->stroke_opacity    = 18;
+        $record1->image_opacity     = 19;
+        $record2->image_opacity     = 20;
+        $record1->stroke_width      = 21;
+        $record2->stroke_width      = 22;
+        $record1->point_radius      = 23;
+        $record2->point_radius      = 24;
+        $record1->point_image       = '25';
+        $record2->point_image       = '26';
+        $record1->min_zoom          = 27;
+        $record2->min_zoom          = 28;
+        $record1->max_zoom          = 29;
+        $record2->max_zoom          = 30;
+        $record1->map_active        = 31;
+        $record2->map_active        = 32;
+        $record1->map_focus         = '33';
+        $record2->map_focus         = '34';
+        $record1->map_zoom          = 35;
+        $record2->map_zoom          = 36;
+        $record1->coverage          = 'POINT(1 1)';
+        $record2->coverage          = 'POINT(2 2)';
 
         // Save.
-        $record1->save('POINT(1 1)');
-        $record2->save('POINT(2 2)');
+        $record1->save();
+        $record2->save();
 
         // Build the record array.
         $records = $this->_recordsTable->queryRecords($exhibit);
@@ -83,47 +85,47 @@ class Neatline_NeatlineRecordTableTest_QueryRecords
             array(
                 'id'                => $record1->id,
                 'item_id'           => $item1->id,
-                'title'             => 'Record 1 Title',
-                'body'              => 'Record 1 body.',
-                'slug'              => 'slug-1',
-                'vector_color'      => '#1',
-                'stroke_color'      => '#3',
-                'select_color'      => '#5',
-                'vector_opacity'    => 1,
-                'select_opacity'    => 3,
-                'stroke_opacity'    => 5,
-                'image_opacity'     => 7,
-                'stroke_width'      => 9,
-                'point_radius'      => 11,
-                'point_image'       => 'file1.png',
-                'min_zoom'          => 13,
-                'max_zoom'          => 15,
-                'map_active'        => 1,
-                'map_focus'         => 'center1',
-                'map_zoom'          => 17,
+                'title'             => '1',
+                'body'              => '3',
+                'slug'              => '5',
+                'vector_color'      => '7',
+                'stroke_color'      => '9',
+                'select_color'      => '11',
+                'vector_opacity'    => 13,
+                'select_opacity'    => 15,
+                'stroke_opacity'    => 17,
+                'image_opacity'     => 19,
+                'stroke_width'      => 21,
+                'point_radius'      => 23,
+                'point_image'       => '25',
+                'min_zoom'          => 27,
+                'max_zoom'          => 29,
+                'map_active'        => 31,
+                'map_focus'         => '33',
+                'map_zoom'          => 35,
                 'coverage'          => 'POINT(1 1)'
             ),
             array(
                 'id'                => $record2->id,
                 'item_id'           => $item2->id,
-                'title'             => 'Record 2 Title',
-                'body'              => 'Record 2 body.',
-                'slug'              => 'slug-2',
-                'vector_color'      => '#2',
-                'stroke_color'      => '#4',
-                'select_color'      => '#6',
-                'vector_opacity'    => 2,
-                'select_opacity'    => 4,
-                'stroke_opacity'    => 6,
-                'image_opacity'     => 8,
-                'stroke_width'      => 10,
-                'point_radius'      => 12,
-                'point_image'       => 'file2.png',
-                'min_zoom'          => 14,
-                'max_zoom'          => 16,
-                'map_active'        => 1,
-                'map_focus'         => 'center2',
-                'map_zoom'          => 18,
+                'title'             => '2',
+                'body'              => '4',
+                'slug'              => '6',
+                'vector_color'      => '8',
+                'stroke_color'      => '10',
+                'select_color'      => '12',
+                'vector_opacity'    => 14,
+                'select_opacity'    => 16,
+                'stroke_opacity'    => 18,
+                'image_opacity'     => 20,
+                'stroke_width'      => 22,
+                'point_radius'      => 24,
+                'point_image'       => '26',
+                'min_zoom'          => 28,
+                'max_zoom'          => 30,
+                'map_active'        => 32,
+                'map_focus'         => '34',
+                'map_zoom'          => 36,
                 'coverage'          => 'POINT(2 2)'
             )
             )
@@ -245,10 +247,12 @@ class Neatline_NeatlineRecordTableTest_QueryRecords
         // Create 2 records.
         $record1 = new NeatlineRecord($exhibit);
         $record2 = new NeatlineRecord($exhibit);
+        $record1->coverage = 'POLYGON((0 0,0 2,2 2,2 0,0 0))';
+        $record2->coverage = 'POLYGON((4 4,4 6,6 6,6 4,4 4))';
 
         // Save.
-        $record1->save('POLYGON((0 0,0 2,2 2,2 0,0 0))');
-        $record2->save('POLYGON((4 4,4 6,6 6,6 4,4 4))');
+        $record1->save();
+        $record2->save();
 
         // Extent=null, get all records.
         $records = $this->_recordsTable->queryRecords($exhibit);

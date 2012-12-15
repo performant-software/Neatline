@@ -33,6 +33,7 @@ class Neatline_NeatlineRecordTest_FieldAccess
         $record->title              = '5';
         $record->body               = '6';
         $record->tags               = '7';
+        $record->coverage           = 'POINT(1 1)';
         $record->map_active         = 8;
         $record->map_focus          = '9';
         $record->map_zoom           = 10;
@@ -64,11 +65,9 @@ class Neatline_NeatlineRecordTest_FieldAccess
         $record->_point_image       = 32;
         $record->_max_zoom          = 33;
         $record->_min_zoom          = 34;
+        $record->save();
 
-        // Save with coverage.
-        $record->save('POINT(1 1)');
-
-        // Re-get the record object.
+        // Reload the record.
         $record = $this->_recordsTable->find($record->id);
 
         // Data fields:

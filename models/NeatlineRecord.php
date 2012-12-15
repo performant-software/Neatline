@@ -89,6 +89,28 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
 
 
     /**
+     * Prepare the MySQL expression for the coverage insert.
+     *
+     * @return array The array representation of the record fields.
+     */
+    public function toArray()
+    {
+
+        $fields = parent::toArray();
+
+        // Construct the geometry.
+        if (!empty($fields['coverage'])) {
+            $fields['coverage'] = new Zend_Db_Expr(
+                "GeomFromText('{$fields['coverage']}')"
+            );
+        }
+
+        return $fields;
+
+    }
+
+
+    /**
      * Set the an attribute if the passed value is not null or ''.
      *
      * @param string $attribute The name of the attribute.
@@ -98,25 +120,6 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
     {
         if ($value == '') $this[$attribute] = null;
         else $this[$attribute] = $value;
-    }
-
-
-    /**
-     * Update the `coverage` field with the `GeomFromText` function.
-     *
-     * @param string $wkt The coverage as a WKT string.
-     */
-    public function setCoverage($wkt)
-    {
-
-        $sql = "
-            UPDATE `{$this->_db->prefix}neatline_records`
-            SET coverage = GeomFromText('{$wkt}')
-            WHERE id = {$this->id}
-        ";
-
-        $this->_db->query($sql);
-
     }
 
 
@@ -139,15 +142,8 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
      */
     public function update($values)
     {
-
-        // Pluck out coverage.
-        $coverage = $values['coverage'];
-        unset($values['coverage']);
-
-        // Set remaining fields
         foreach ($values as $key => $val) $this->setNotEmpty($key, $val);
-        $this->save($coverage);
-
+        $this->save();
     }
 
 
@@ -199,16 +195,15 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
 
         $data = array(
 
-            // Relations:
             'id'                => $this->id,
             'item_id'           => $this->item_id,
 
-            // Text:
+            // TEXT
             'title'             => $this->title,
             'body'              => $this->body,
             'slug'              => $this->slug,
 
-            // Styles:
+            // STYLE
             'vector_color'      => $this->vector_color,
             'stroke_color'      => $this->stroke_color,
             'select_color'      => $this->select_color,
@@ -222,7 +217,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
             'min_zoom'          => $this->min_zoom,
             'max_zoom'          => $this->max_zoom,
 
-            // Spatial:
+            // SPATIAL
             'map_active'        => $this->map_active,
             'map_focus'         => $this->map_focus,
             'map_zoom'          => $this->map_zoom,
@@ -232,18 +227,6 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
 
         return $data;
 
-    }
-
-
-    /**
-     * If a WKT string is passed to save(), update the `coverage` field.
-     *
-     * @param string $coverage The coverage, as a WKT string.
-     */
-    public function save($coverage = null)
-    {
-        parent::save();
-        if (!is_null($coverage)) $this->setCoverage($coverage);
     }
 
 

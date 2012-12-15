@@ -30,28 +30,33 @@ class Neatline_NeatlineRecordTableTest_QueryRecord
         // Create record.
         $record = new NeatlineRecord($exhibit, $item);
 
-        // Map attributes.
-        $record->title              = 'Title';
-        $record->body               = 'Body.';
-        $record->slug               = 'slug';
-        $record->vector_color       = '#1';
-        $record->stroke_color       = '#2';
-        $record->select_color       = '#3';
-        $record->vector_opacity     = 1;
-        $record->select_opacity     = 2;
-        $record->stroke_opacity     = 3;
-        $record->image_opacity      = 4;
-        $record->stroke_width       = 5;
-        $record->point_radius       = 6;
-        $record->point_image        = 'file1.png';
-        $record->min_zoom           = 7;
-        $record->max_zoom           = 8;
-        $record->map_active         = 1;
-        $record->map_focus          = 'center1';
-        $record->map_zoom           = 9;
+        // Text:
+        $record->title              = '1';
+        $record->body               = '2';
+        $record->slug               = '3';
+
+        // Styles:
+        $record->vector_color       = '4';
+        $record->stroke_color       = '5';
+        $record->select_color       = '6';
+        $record->vector_opacity     = 7;
+        $record->select_opacity     = 8;
+        $record->stroke_opacity     = 9;
+        $record->image_opacity      = 10;
+        $record->stroke_width       = 11;
+        $record->point_radius       = 12;
+        $record->point_image        = '13';
+        $record->min_zoom           = 14;
+        $record->max_zoom           = 15;
+
+        // Spatial:
+        $record->map_active         = 16;
+        $record->map_focus          = '17';
+        $record->map_zoom           = 18;
+        $record->coverage           = 'POINT(1 1)';
 
         // Save.
-        $record->save('POINT(1 2)');
+        $record->save();
 
         // Build the record array.
         $records = $this->_recordsTable->queryRecord($record->id);
@@ -59,27 +64,31 @@ class Neatline_NeatlineRecordTableTest_QueryRecord
         // Check result.
         $this->assertEquals(
             $records, array(
+
                 'id'                => $record->id,
                 'item_id'           => $item->id,
-                'title'             => 'Title',
-                'body'              => 'Body.',
-                'slug'              => 'slug',
-                'vector_color'      => '#1',
-                'stroke_color'      => '#2',
-                'select_color'      => '#3',
-                'vector_opacity'    => 1,
-                'select_opacity'    => 2,
-                'stroke_opacity'    => 3,
-                'image_opacity'     => 4,
-                'stroke_width'      => 5,
-                'point_radius'      => 6,
-                'point_image'       => 'file1.png',
-                'min_zoom'          => 7,
-                'max_zoom'          => 8,
-                'map_active'        => 1,
-                'map_focus'         => 'center1',
-                'map_zoom'          => 9,
-                'coverage'          => 'POINT(1 2)'
+
+                'title'             => '1',
+                'body'              => '2',
+                'slug'              => '3',
+
+                'vector_color'      => '4',
+                'stroke_color'      => '5',
+                'select_color'      => '6',
+                'vector_opacity'    => 7,
+                'select_opacity'    => 8,
+                'stroke_opacity'    => 9,
+                'image_opacity'     => 10,
+                'stroke_width'      => 11,
+                'point_radius'      => 12,
+                'point_image'       => '13',
+                'min_zoom'          => 14,
+                'max_zoom'          => 15,
+
+                'map_active'        => 16,
+                'map_focus'         => '17',
+                'map_zoom'          => 18,
+                'coverage'          => 'POINT(1 1)'
             )
         );
 
