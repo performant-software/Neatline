@@ -89,28 +89,6 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
 
 
     /**
-     * Prepare the MySQL expression for the coverage insert.
-     *
-     * @return array The array representation of the record fields.
-     */
-    public function toArray()
-    {
-
-        $fields = parent::toArray();
-
-        // Construct the geometry.
-        if (!empty($fields['coverage'])) {
-            $fields['coverage'] = new Zend_Db_Expr(
-                "GeomFromText('{$fields['coverage']}')"
-            );
-        }
-
-        return $fields;
-
-    }
-
-
-    /**
      * Set the an attribute if the passed value is not null or ''.
      *
      * @param string $attribute The name of the attribute.
