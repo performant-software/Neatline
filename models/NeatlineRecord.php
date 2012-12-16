@@ -56,25 +56,6 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
 
 
     /**
-     * Tag-reference fields.
-     */
-    protected static $styles = array(
-        'vector_color',
-        'stroke_color',
-        'select_color',
-        'vector_opacity',
-        'select_opacity',
-        'stroke_opacity',
-        'image_opacity',
-        'stroke_width',
-        'point_radius',
-        'point_image',
-        'max_zoom',
-        'min_zoom'
-    );
-
-
-    /**
      * Set foreign keys.
      *
      * @param Omeka_record $item The item record.
@@ -90,7 +71,10 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
 
     /**
      * Plug the MySQL expression for the coverage insert into the array
-     * representation of the record used by `insert`.
+     * representation of the record used by `insert`. When `coverage` is
+     * defined, form the expression from the value; when it is undefined,
+     * use `POINT(0 0)` as a palceholder value since MySQL requires that
+     * spatially-indexed columns be NOT NULL.
      *
      * @return array The array representation of the record fields.
      */
@@ -99,10 +83,13 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
 
         $fields = parent::toArray();
 
-        // Construct the geometry.
         if (!empty($fields['coverage'])) {
             $fields['coverage'] = new Zend_Db_Expr(
                 "GeomFromText('{$fields['coverage']}')"
+            );
+        } else {
+            $fields['coverage'] = new Zend_Db_Expr(
+                "GeomFromText('POINT(0 0)')"
             );
         }
 
@@ -239,7 +226,9 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
 
 
     /**
-     * Insert or update the record.
+     * Insert or update the record. Overrides the default in order to make
+     * it possible to pass MySQL expressions as values on insert/update,
+     * which is needed to set the `coverage` field with `GeomFromText()`.
      */
     public function save()
     {

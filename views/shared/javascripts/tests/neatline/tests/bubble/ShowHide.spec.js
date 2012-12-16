@@ -140,8 +140,8 @@ describe('Bubble Show/Hide', function() {
     _t.hoverOnMapFeature(layer1, feature2);
 
     // Check for unchanged bubble values.
-    expect(_t.bubbleView.title.text()).toEqual('Title 1');
-    expect(_t.bubbleView.body.text()).toEqual('Body 1.');
+    expect(_t.bubbleView.title.text()).toEqual('title1');
+    expect(_t.bubbleView.body.text()).toEqual('body1');
 
     // Move the cursor.
     $(window).trigger($.Event('mousemove', {
@@ -175,8 +175,8 @@ describe('Bubble Show/Hide', function() {
     var offset = _t.bubbleView.$el.offset();
 
     // Check for changed bubble values.
-    expect(_t.bubbleView.title.text()).toEqual('Title 2');
-    expect(_t.bubbleView.body.text()).toEqual('Body 2.');
+    expect(_t.bubbleView.title.text()).toEqual('title2');
+    expect(_t.bubbleView.body.text()).toEqual('body2');
 
     // Move the cursor.
     $(window).trigger($.Event('mousemove', {

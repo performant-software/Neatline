@@ -76,7 +76,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
             `title`             MEDIUMTEXT COLLATE utf8_unicode_ci NULL,
             `body`              MEDIUMTEXT COLLATE utf8_unicode_ci NULL,
             `tags`              TEXT COLLATE utf8_unicode_ci NULL,
-            `coverage`          GEOMETRY,
+            `coverage`          GEOMETRY NOT NULL,
             `map_active`        TINYINT(1) NULL,
             `map_focus`         VARCHAR(100) NULL,
             `map_zoom`          INT(10) UNSIGNED NULL,
@@ -108,7 +108,8 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
             `_min_zoom`         INT(10) UNSIGNED NULL,
 
              PRIMARY KEY        (`id`),
-             FULLTEXT KEY       (`title`, `slug`, `body`)
+             FULLTEXT KEY       (`title`, `slug`, `body`),
+             SPATIAL INDEX      (`coverage`)
 
         ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
 

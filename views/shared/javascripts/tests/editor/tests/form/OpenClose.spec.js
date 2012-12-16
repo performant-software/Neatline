@@ -68,17 +68,17 @@ describe('Form Open/Close', function() {
     recordRows = _t.getRecordRows();
     expect(recordRows.length).toEqual(3);
     expect($(recordRows[0]).find('.record-title').text()).
-      toEqual('Title 1');
+      toEqual('title1');
     expect($(recordRows[0]).find('.record-body').text()).
-      toEqual('Body 1.');
+      toEqual('body1');
     expect($(recordRows[1]).find('.record-title').text()).
-      toEqual('Title 2');
+      toEqual('title2');
     expect($(recordRows[1]).find('.record-body').text()).
-      toEqual('Body 2.');
+      toEqual('body2');
     expect($(recordRows[2]).find('.record-title').text()).
-      toEqual('Title 3');
+      toEqual('title3');
     expect($(recordRows[2]).find('.record-body').text()).
-      toEqual('Body 3.');
+      toEqual('body3');
 
   });
 
@@ -172,7 +172,7 @@ describe('Form Open/Close', function() {
     // Check for form.
     expect(_t.recordsView.$el).toContain(_t.formView.form);
     expect(_t.recordsView.$el).not.toContain(_t.recordsView.ul);
-    expect(_t.formView.model.get('title')).toEqual('Title 1');
+    expect(_t.formView.model.get('title')).toEqual('title1');
 
   });
 
@@ -193,13 +193,13 @@ describe('Form Open/Close', function() {
     // Check for form.
     expect(_t.recordsView.$el).toContain(_t.formView.form);
     expect(_t.recordsView.$el).not.toContain(_t.recordsView.ul);
-    expect(_t.formView.model.get('title')).toEqual('Title 1');
+    expect(_t.formView.model.get('title')).toEqual('title1');
 
     // Trigger click on Record 2 feature.
     _t.clickOnMapFeature(mapLayers[0], feature2);
 
     // Check for unchanged form.
-    expect(_t.formView.model.get('title')).toEqual('Title 1');
+    expect(_t.formView.model.get('title')).toEqual('title1');
 
   });
 

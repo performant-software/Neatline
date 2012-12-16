@@ -147,9 +147,9 @@ describe('Form Delete', function() {
 
     // Record 2 removed from list.
     expect($(recordRows[0]).find('.record-title').text()).
-      toEqual('Title 1');
+      toEqual('title1');
     expect($(recordRows[1]).find('.record-title').text()).
-      toEqual('Title 3');
+      toEqual('title3');
 
   });
 

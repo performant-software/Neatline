@@ -50,8 +50,8 @@ describe('Map Data Rendering', function() {
     // has been changed, the new data should be rendered.
     // --------------------------------------------------------------------
 
-    // Get Title 2 layer1.
-    var record2Layer = _t.getVectorLayerByTitle('Title 2');
+    // Get title2 layer1.
+    var record2Layer = _t.getVectorLayerByTitle('title2');
 
     // At start, 1 point at POINT(3 4).
     expect(record2Layer.features.length).toEqual(1);
@@ -61,8 +61,8 @@ describe('Map Data Rendering', function() {
     // Trigger a map move, inject new data.
     _t.refreshMap(_t.json.collections.changed);
 
-    // Get the new layer1 for Title 2
-    record2Layer = _t.getVectorLayerByTitle('Title 2');
+    // Get the new layer1 for title2
+    record2Layer = _t.getVectorLayerByTitle('title2');
 
     // Geometry should be changed.
     expect(record2Layer.features.length).toEqual(1);
@@ -80,14 +80,14 @@ describe('Map Data Rendering', function() {
     // record should be removed.
     // --------------------------------------------------------------------
 
-    // At start, Title 2 layer1 exists.
-    expect(_t.getVectorLayerByTitle('Title 2')).toBeDefined();
+    // At start, title2 layer1 exists.
+    expect(_t.getVectorLayerByTitle('title2')).toBeDefined();
 
-    // Trigger a map move, inject data without Title 2.
+    // Trigger a map move, inject data without title2.
     _t.refreshMap(_t.json.collections.removed);
 
-    // Title 2 layer1 no longer exists.
-    expect(_t.getVectorLayerByTitle('Title 2')).toBeUndefined();
+    // title2 layer1 no longer exists.
+    expect(_t.getVectorLayerByTitle('title2')).toBeUndefined();
 
   });
 
@@ -101,20 +101,20 @@ describe('Map Data Rendering', function() {
     // changes to the geometry from being overwritten by the old data.
     // --------------------------------------------------------------------
 
-    // Get Title 2 layer1, add new point.
-    var record2Layer = _t.getVectorLayerByTitle('Title 2');
+    // Get title2 layer1, add new point.
+    var record2Layer = _t.getVectorLayerByTitle('title2');
     var point = new OpenLayers.Geometry.Point(9,10);
     var feature = new OpenLayers.Feature.Vector(point);
     record2Layer.addFeatures([feature]);
 
-    // Set Title 2 frozen.
+    // Set title2 frozen.
     _t.mapView.freeze(record2Layer.nId);
 
     // Trigger a map move.
     _t.refreshMap(_t.json.collections.changed);
 
-    // Get the new layer1 for Title 2
-    record2Layer = _t.getVectorLayerByTitle('Title 2');
+    // Get the new layer1 for title2
+    record2Layer = _t.getVectorLayerByTitle('title2');
 
     // Geometry should be unchanged.
     expect(record2Layer.features[0].geometry.x).toEqual(3);
@@ -134,18 +134,18 @@ describe('Map Data Rendering', function() {
     // from being lost when the map is moved.
     // --------------------------------------------------------------------
 
-    // At start, Title 2 layer1 exists.
-    var record2Layer = _t.getVectorLayerByTitle('Title 2');
+    // At start, title2 layer1 exists.
+    var record2Layer = _t.getVectorLayerByTitle('title2');
     expect(record2Layer).toBeDefined();
 
-    // Set Title 2 frozen.
+    // Set title2 frozen.
     _t.mapView.freeze(record2Layer.nId);
 
-    // Trigger a map move, inject data without Title 2.
+    // Trigger a map move, inject data without title2.
     _t.refreshMap(_t.removedRecord2Json);
 
-    // Title 2 layer1 still exists.
-    expect(_t.getVectorLayerByTitle('Title 2')).toBeDefined();
+    // title2 layer1 still exists.
+    expect(_t.getVectorLayerByTitle('title2')).toBeDefined();
 
   });
 

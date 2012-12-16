@@ -41,9 +41,9 @@ describe('Form Data I/O', function() {
     var favicon = 'https://www.google.com/favicon.ico';
 
     // Check for form and values.
-    expect(_t.formView.lead.text()).              toEqual('Title 1');
-    expect(_t.textTabView.title.val()).           toEqual('Title 1');
-    expect(_t.textTabView.body.val()).            toEqual('Body 1.');
+    expect(_t.formView.lead.text()).              toEqual('title1');
+    expect(_t.textTabView.title.val()).           toEqual('title1');
+    expect(_t.textTabView.body.val()).            toEqual('body1');
     expect(_t.styleTabView.vectorColor.val()).    toEqual('#111111');
     expect(_t.styleTabView.strokeColor.val()).    toEqual('#444444');
     expect(_t.styleTabView.selectColor.val()).    toEqual('#777777');
@@ -76,8 +76,8 @@ describe('Form Data I/O', function() {
     var id = _.first(_t.recordsColl.models).get('id');
 
     // Enter new values into the inputs.
-    _t.textTabView.title.           val('Title 2');
-    _t.textTabView.body.            val('Body 2.');
+    _t.textTabView.title.           val('title2');
+    _t.textTabView.body.            val('body2');
     _t.styleTabView.vectorColor.    val('#222222');
     _t.styleTabView.strokeColor.    val('#555555');
     _t.styleTabView.selectColor.    val('#888888');
@@ -104,8 +104,8 @@ describe('Form Data I/O', function() {
     expect(request.url).toEqual('/neatline/records/'+id);
 
     // Check the query string for updated values.
-    expect(params.title).           toEqual('Title 2');
-    expect(params.body).            toEqual('Body 2.');
+    expect(params.title).           toEqual('title2');
+    expect(params.body).            toEqual('body2');
     expect(params.vector_color).    toEqual('#222222');
     expect(params.stroke_color).    toEqual('#555555');
     expect(params.select_color).    toEqual('#888888');
