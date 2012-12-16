@@ -224,14 +224,14 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
         }
 
         $sql = sprintf(
-            "INSERT INTO %s (%s) VALUES (%s) ON DUPLICATE KEY UPDATE %s;",
+            "INSERT INTO %s (%s) VALUES (%s);",
             $db->quoteIdentifier($table->getTableName(), true),
             implode(', ', $cols),
-            implode(', ', $vals),
-            implode(', ', $set)
+            implode(', ', $vals)
         );
 
         $db->query($sql, $bind);
+        return (int) $db->lastInsertId();
 
     }
 
@@ -241,7 +241,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
      */
     public function save()
     {
-        $this->insertOrUpdate($this->toArray());
+        $this->id = $this->insertOrUpdate($this->toArray());
     }
 
 
