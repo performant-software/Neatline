@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
 
 /**
- * Tests for `update()` on NeatlineRecord.
+ * Tests for `saveForm()` on NeatlineRecord.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -11,14 +11,14 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class Neatline_NeatlineRecordTest_Update
+class Neatline_NeatlineRecordTest_SaveForm
     extends Neatline_Test_AppTestCase
 {
 
 
     /**
-     * update() should set non-style fields, create/update the record's
-     * style tag, and update the tag key references.
+     * saveForm() should update fields with the values in the associative
+     * array passed in from the records controller.
      *
      * @group tags
      */
@@ -57,7 +57,7 @@ class Neatline_NeatlineRecordTest_Update
         );
 
         // Update.
-        $record->update($values);
+        $record->saveForm($values);
 
         // Reload record.
         $record = $this->_recordsTable->find($record->id);

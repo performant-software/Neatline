@@ -17,8 +17,11 @@ class Neatline_NeatlineRecordTableTest_QueryRecords
 
 
     /**
-     * queryRecords() should construct an array of records with all
-     * attributes needed for the front-end application.
+     * When just an exhibit record (and no filter parameters) is passed,
+     * queryRecords() should retrieve all of the data records that belong
+     * to the exhibit and construct an array of associative arrays, one
+     * for each record, that contain all of the information needed for the
+     * front-end application.
      */
     public function testQueryRecords()
     {
@@ -39,6 +42,8 @@ class Neatline_NeatlineRecordTableTest_QueryRecords
         $record2->body              = '4';
         $record1->slug              = '5';
         $record2->slug              = '6';
+
+        // Styles:
         $record1->vector_color      = '7';
         $record2->vector_color      = '8';
         $record1->stroke_color      = '9';
@@ -63,6 +68,8 @@ class Neatline_NeatlineRecordTableTest_QueryRecords
         $record2->min_zoom          = 28;
         $record1->max_zoom          = 29;
         $record2->max_zoom          = 30;
+
+        // Spatial:
         $record1->map_active        = 31;
         $record2->map_active        = 32;
         $record1->map_focus         = '33';
@@ -135,7 +142,8 @@ class Neatline_NeatlineRecordTableTest_QueryRecords
 
 
     /**
-     * queryRecords() should filter on exhibit.
+     * queryRecords() should retrieve records that belong to the passed
+     * exhibit. Records in other exhibits should be excluded.
      */
     public function testQueryRecordsExhibitFilter()
     {

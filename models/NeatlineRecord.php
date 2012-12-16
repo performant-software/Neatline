@@ -114,52 +114,14 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
 
 
     /**
-     * Update the record.
+     * Save form values.
      *
      * @param array $values The PUT values.
      */
-    public function update($values)
+    public function saveForm($values)
     {
         foreach ($values as $key => $val) $this->setNotEmpty($key, $val);
         $this->save();
-    }
-
-
-    /**
-     * Update the style tag references by constructing the tag depth chart
-     * (record-specific tag first, then general tags ordered by the `tags`
-     * string, then the exhibit default tag), walking each of the styles,
-     * and finding the first tag in the list for which there is a non-null
-     * value for the style in question.
-     */
-    public function setTags()
-    {
-
-        // Get the tag depth chart.
-        $tagsTable = $this->getTable('NeatlineTag');
-        $stack = $tagsTable->getTagStack($this->tags, $this);
-
-        // For each tag-backed field:
-        foreach (self::$styles as $style) {
-
-            // Walk through the tags:
-            foreach ($stack as $tag) {
-
-                // --------------------------------------------------------
-                // Stop as soon as a non-null value is found for the field
-                // in question. Point the key reference on the record at
-                // the tag with the value and continue to the next field.
-                // --------------------------------------------------------
-
-                if (!is_null($tag[$style])) {
-                    $this[$style] = $tag->id;
-                    break;
-                }
-
-            }
-
-        }
-
     }
 
 
@@ -206,6 +168,15 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
         return $data;
 
     }
+
+
+    /**
+     * Insert or update the record.
+     */
+    // public function save()
+    // {
+
+    // }
 
 
 }

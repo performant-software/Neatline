@@ -16,8 +16,8 @@ class NeatlineRecordTable extends Omeka_Db_Table
 
 
     /**
-     * Extend the default `getSelect` to add a `wkt` column, which selects
-     * the raw value of `coverage`.
+     * Extend the default `getSelect` to add a `wkt` column to all queries
+     * that selects the plain-text value of `coverage` by way of `AsText`.
      *
      * @return Omeka_Db_Select The modified select.
      */
@@ -31,7 +31,7 @@ class NeatlineRecordTable extends Omeka_Db_Table
 
 
     /**
-     * Count all active records in an exhibit.
+     * Count the number of active records in an exhibit.
      *
      * @param Omeka_record $exhibit The exhibit record.
      * @return integer The number of active records.
@@ -43,6 +43,8 @@ class NeatlineRecordTable extends Omeka_Db_Table
             'map_active' => 1
         ));
     }
+
+
 
 
     /**
