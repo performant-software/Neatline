@@ -194,7 +194,8 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
 
 
     /**
-     * Insert or update the record.
+     * Insert or update the record. Approach based on:
+     * https://gist.github.com/1942116
      *
      * @param array $values The record values.
      */
