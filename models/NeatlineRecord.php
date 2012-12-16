@@ -224,13 +224,14 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
         }
 
         $sql = sprintf(
-            "INSERT INTO %s (%s) VALUES (%s);",
+            "INSERT INTO %s (%s) VALUES (%s) ON DUPLICATE KEY UPDATE %s;",
             $db->quoteIdentifier($table->getTableName(), true),
             implode(', ', $cols),
-            implode(', ', $vals)
+            implode(', ', $vals),
+            implode(', ', $set)
         );
 
-        $db->query($sql, $bind);
+        $db->query($sql, array_merge($bind, $bind));
         return (int) $db->lastInsertId();
 
     }
