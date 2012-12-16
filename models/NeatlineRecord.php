@@ -89,6 +89,29 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
 
 
     /**
+     * Plug the MySQL expression for the coverage insert into the array
+     * representation of the record used by `insert`.
+     *
+     * @return array The array representation of the record fields.
+     */
+    public function toArray()
+    {
+
+        $fields = parent::toArray();
+
+        // Construct the geometry.
+        if (!empty($fields['coverage'])) {
+            $fields['coverage'] = new Zend_Db_Expr(
+                "GeomFromText('{$fields['coverage']}')"
+            );
+        }
+
+        return $fields;
+
+    }
+
+
+    /**
      * Set the an attribute if the passed value is not null or ''.
      *
      * @param string $attribute The name of the attribute.
@@ -120,7 +143,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
      */
     public function saveForm($values)
     {
-        foreach ($values as $key => $val) $this->setNotEmpty($key, $val);
+        foreach ($values as $k => $v) $this->setNotEmpty($k, $v);
         $this->save();
     }
 
@@ -172,11 +195,54 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
 
     /**
      * Insert or update the record.
+     *
+     * @param array $values The record values.
      */
-    // public function save()
-    // {
+    public function insertOrUpdate(array $values)
+    {
 
-    // }
+        $table = $this->getTable('NeatlineRecord');
+        $db = $table->getAdapter();
+
+        $cols = array();
+        $vals = array();
+        $bind = array();
+
+        foreach ($values as $col => $val) {
+            $cols[] = $db->quoteIdentifier($col, true);
+            if ($val instanceof Zend_Db_Expr) {
+                $vals[] = $val->__toString();
+            } else {
+                $vals[] = '?';
+                $bind[] = $val;
+            }
+        }
+
+        $set = array();
+        foreach ($cols as $i => $col) {
+            $set[] = sprintf('%s = %s', $col, $vals[$i]);
+        }
+
+        $sql = sprintf(
+            "INSERT INTO %s (%s) VALUES (%s) ON DUPLICATE KEY UPDATE %s;",
+            $db->quoteIdentifier($table->getTableName(), true),
+            implode(', ', $cols),
+            implode(', ', $vals),
+            implode(', ', $set)
+        );
+
+        $db->query($sql, $bind);
+
+    }
+
+
+    /**
+     * Insert or update the record.
+     */
+    public function save()
+    {
+        $this->insertOrUpdate($this->toArray());
+    }
 
 
 }
