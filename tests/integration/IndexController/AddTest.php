@@ -17,7 +17,10 @@ class Neatline_IndexControllerTest_Add
 
 
     /**
-     * Check for base markup in the add view.
+     * --------------------------------------------------------------------
+     * The /add route should display form elements for the exhibit title,
+     * description, and slug, and a checkbox to set the exhibit public.
+     * --------------------------------------------------------------------
      */
     public function testAddBaseMarkup()
     {
@@ -35,7 +38,11 @@ class Neatline_IndexControllerTest_Add
 
 
     /**
-     * If the title field is blank, flash error.
+     * --------------------------------------------------------------------
+     * When the "Create an Exhibit" form is submitted with an empty title,
+     * the form should be redisplayed with an error and an exhibit should
+     * not be created.
+     * --------------------------------------------------------------------
      */
     public function testAddNoTitleError()
     {
@@ -45,13 +52,12 @@ class Neatline_IndexControllerTest_Add
             'title' => ''
         ));
 
-        // No exhibits at the start.
+        // Submit the form, check for no new exhibits.
+        $this->assertEquals($this->_exhibitsTable->count(), 0);
+        $this->dispatch('neatline/add');
         $this->assertEquals($this->_exhibitsTable->count(), 0);
 
-        // Submit the form.
-        $this->dispatch('neatline/add');
-
-        // Should redirect to the add view.
+        // Should redisplay the form.
         $this->assertModule('neatline');
         $this->assertController('index');
         $this->assertAction('add');
@@ -62,14 +68,15 @@ class Neatline_IndexControllerTest_Add
             'Enter a title.'
         );
 
-        // No exhibit should have been created.
-        $this->assertEquals($this->_exhibitsTable->count(), 0);
-
     }
 
 
     /**
-     * If the slug field is blank, flash error.
+     * --------------------------------------------------------------------
+     * When the "Create an Exhibit" form is submitted with an empty slug,
+     * the form should be redisplayed with an error and an exhibit should
+     * not be created.
+     * --------------------------------------------------------------------
      */
     public function testAddNoSlugError()
     {
@@ -79,13 +86,12 @@ class Neatline_IndexControllerTest_Add
             'slug' => ''
         ));
 
-        // No exhibits at the start.
+        // Submit the form, check for no new exhibits.
+        $this->assertEquals($this->_exhibitsTable->count(), 0);
+        $this->dispatch('neatline/add');
         $this->assertEquals($this->_exhibitsTable->count(), 0);
 
-        // Submit the form.
-        $this->dispatch('neatline/add');
-
-        // Should redirect to the add view.
+        // Should redisplay the form.
         $this->assertModule('neatline');
         $this->assertController('index');
         $this->assertAction('add');
@@ -96,14 +102,15 @@ class Neatline_IndexControllerTest_Add
             'The slug cannot be empty.'
         );
 
-        // No exhibit should have been created.
-        $this->assertEquals($this->_exhibitsTable->count(), 0);
-
     }
 
 
     /**
-     * If slug has spaces, flash error.
+     * --------------------------------------------------------------------
+     * When the "Create an Exhibit" form is submitted with a slug that has
+     * spaces, the form should be redisplayed with an error and an exhibit
+     * should not be created.
+     * --------------------------------------------------------------------
      */
     public function testAddInvalidSlugWithSpacesError()
     {
@@ -113,13 +120,12 @@ class Neatline_IndexControllerTest_Add
             'slug' => 'slug with spaces'
         ));
 
-        // No exhibits at the start.
+        // Submit the form, check for no new exhibits.
+        $this->assertEquals($this->_exhibitsTable->count(), 0);
+        $this->dispatch('neatline/add');
         $this->assertEquals($this->_exhibitsTable->count(), 0);
 
-        // Submit the form.
-        $this->dispatch('neatline/add');
-
-        // Should redirect to the add view.
+        // Should redisplay the form.
         $this->assertModule('neatline');
         $this->assertController('index');
         $this->assertAction('add');
@@ -130,14 +136,15 @@ class Neatline_IndexControllerTest_Add
             'The slug can only contain letters, numbers, and hyphens.'
         );
 
-        // No exhibit should have been created.
-        $this->assertEquals($this->_exhibitsTable->count(), 0);
-
     }
 
 
     /**
-     * If slug has capital letters, flash error.
+     * --------------------------------------------------------------------
+     * When the "Create an Exhibit" form is submitted with a slug that has
+     * capital letters, the form should be redisplayed with an error and
+     * an exhibit should not be created.
+     * --------------------------------------------------------------------
      */
     public function testAddInvalidSlugWithCapsError()
     {
@@ -147,13 +154,12 @@ class Neatline_IndexControllerTest_Add
             'slug' => 'Slug-With-Capitals'
         ));
 
-        // No exhibits at the start.
+        // Submit the form, check for no new exhibits.
+        $this->assertEquals($this->_exhibitsTable->count(), 0);
+        $this->dispatch('neatline/add');
         $this->assertEquals($this->_exhibitsTable->count(), 0);
 
-        // Submit the form.
-        $this->dispatch('neatline/add');
-
-        // Should redirect to the add view.
+        // Should redisplay the form.
         $this->assertModule('neatline');
         $this->assertController('index');
         $this->assertAction('add');
@@ -164,14 +170,15 @@ class Neatline_IndexControllerTest_Add
             'The slug can only contain letters, numbers, and hyphens.'
         );
 
-        // No exhibit should have been created.
-        $this->assertEquals($this->_exhibitsTable->count(), 0);
-
     }
 
 
     /**
-     * If slug has non-alphanumerics, flash error.
+     * --------------------------------------------------------------------
+     * When the "Create an Exhibit" form is submitted with a slug that has
+     * non-alphanumeric characters, the form should be redisplayed with an
+     * error and an exhibit should not be created.
+     * --------------------------------------------------------------------
      */
     public function testAddInvalidSlugWithNonAlphasError()
     {
@@ -181,13 +188,12 @@ class Neatline_IndexControllerTest_Add
             'slug' => 'slug-with-non-alphas!'
         ));
 
-        // No exhibits at the start.
+        // Submit the form, check for no new exhibits.
+        $this->assertEquals($this->_exhibitsTable->count(), 0);
+        $this->dispatch('neatline/add');
         $this->assertEquals($this->_exhibitsTable->count(), 0);
 
-        // Submit the form.
-        $this->dispatch('neatline/add');
-
-        // Should redirect to the add view.
+        // Should redisplay the form.
         $this->assertModule('neatline');
         $this->assertController('index');
         $this->assertAction('add');
@@ -198,48 +204,15 @@ class Neatline_IndexControllerTest_Add
             'The slug can only contain letters, numbers, and hyphens.'
         );
 
-        // No exhibit should have been created.
-        $this->assertEquals($this->_exhibitsTable->count(), 0);
-
     }
 
 
     /**
-     * If slug is valid, do not flash error.
-     */
-    public function testAddNoErrorForValidSlug()
-    {
-
-        // Spaces.
-        $this->request->setMethod('POST')->setPost(array(
-            'slug' => 'valid-slug'
-        ));
-
-        // No exhibits at the start.
-        $this->assertEquals($this->_exhibitsTable->count(), 0);
-
-        // Submit the form.
-        $this->dispatch('neatline/add');
-
-        // Should redirect to the add view.
-        $this->assertModule('neatline');
-        $this->assertController('index');
-        $this->assertAction('add');
-
-        // Check for the error.
-        $this->assertNotQueryContentContains(
-            'ul.error li',
-            'The slug can only contain letters, numbers, and hyphens.'
-        );
-
-        // No exhibit should have been created.
-        $this->assertEquals($this->_exhibitsTable->count(), 0);
-
-    }
-
-
-    /**
-     * If slug is taken, flash error.
+     * --------------------------------------------------------------------
+     * When the "Create an Exhibit" form is submitted with a slug that is
+     * the same as the slug of an existing exhibit, the form should be
+     * redisplayed and an exhibit should not be created.
+     * --------------------------------------------------------------------
      */
     public function testAddDuplicateSlugError()
     {
@@ -252,13 +225,12 @@ class Neatline_IndexControllerTest_Add
             'slug' => 'test-exhibit'
         ));
 
-        // No exhibits at the start.
+        // Submit the form, check for no new exhibits.
+        $this->assertEquals($this->_exhibitsTable->count(), 1);
+        $this->dispatch('neatline/add');
         $this->assertEquals($this->_exhibitsTable->count(), 1);
 
-        // Submit the form.
-        $this->dispatch('neatline/add');
-
-        // Should redirect to the add view.
+        // Should redisplay the form.
         $this->assertModule('neatline');
         $this->assertController('index');
         $this->assertAction('add');
@@ -269,14 +241,15 @@ class Neatline_IndexControllerTest_Add
             'The slug is already in use.'
         );
 
-        // No exhibit should have been created.
-        $this->assertEquals($this->_exhibitsTable->count(), 1);
-
     }
 
 
     /**
-     * Valid form should create new exhibit.
+     * --------------------------------------------------------------------
+     * When the "Create an Exhibit" form is submitted with a title and a
+     * valid slug, a new exhibit should be created and populated with the
+     * values for the title, slug, dsecription, and public status.
+     * --------------------------------------------------------------------
      */
     public function testAddSuccess()
     {
@@ -288,13 +261,9 @@ class Neatline_IndexControllerTest_Add
             'public'        => 1
         ));
 
-        // No exhibits at the start.
+        // Submit the form, check for new exhibit.
         $this->assertEquals($this->_exhibitsTable->count(), 0);
-
-        // Submit the form.
         $this->dispatch('neatline/add');
-
-        // No exhibit should have been created.
         $this->assertEquals($this->_exhibitsTable->count(), 1);
 
         // Get the exhibit and examine.

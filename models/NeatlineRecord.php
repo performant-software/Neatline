@@ -181,6 +181,17 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
 
 
     /**
+     * Insert or update the record. Overrides the default in order to make
+     * it possible to pass MySQL expressions as values on insert/update,
+     * which is needed to set the `coverage` field with `GeomFromText()`.
+     */
+    public function save()
+    {
+        $this->id = $this->insertOrUpdate($this->toArray());
+    }
+
+
+    /**
      * Insert or update the record. Approach based on:
      * https://gist.github.com/1942116
      *
@@ -189,13 +200,16 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
     public function insertOrUpdate(array $values)
     {
 
+        // Get table and adapter.
         $table = $this->getTable('NeatlineRecord');
         $db = $table->getAdapter();
 
         $cols = array();
         $vals = array();
         $bind = array();
+        $set  = array();
 
+        // Build column and value arrays.
         foreach ($values as $col => $val) {
             $cols[] = $db->quoteIdentifier($col, true);
             if ($val instanceof Zend_Db_Expr) {
@@ -206,7 +220,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
             }
         }
 
-        $set = array();
+        // Build update assignments.
         foreach ($cols as $i => $col) {
             $set[] = sprintf('%s = %s', $col, $vals[$i]);
         }
@@ -219,20 +233,10 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
             implode(', ', $set)
         );
 
+        // Query, return insert id.
         $db->query($sql, array_merge($bind, $bind));
         return (int) $db->lastInsertId();
 
-    }
-
-
-    /**
-     * Insert or update the record. Overrides the default in order to make
-     * it possible to pass MySQL expressions as values on insert/update,
-     * which is needed to set the `coverage` field with `GeomFromText()`.
-     */
-    public function save()
-    {
-        $this->id = $this->insertOrUpdate($this->toArray());
     }
 
 
