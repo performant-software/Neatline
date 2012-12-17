@@ -17,94 +17,96 @@ class Neatline_RecordsControllerTest_Put
 
 
     /**
+     * --------------------------------------------------------------------
      * PUT should update a record.
+     * --------------------------------------------------------------------
      */
     public function testPut()
     {
 
         // Create record.
-        $exhibit = $this->__exhibit();
         $record = $this->__record();
 
-        // Set parameters.
-        $record->title              = 'title';
-        $record->body               = 'body';
-        $record->slug               = 'slug';
-        $record->vector_color       = '#vector';
-        $record->stroke_color       = '#stroke';
-        $record->select_color       = '#select';
-        $record->vector_opacity     = 1;
-        $record->select_opacity     = 2;
-        $record->stroke_opacity     = 3;
-        $record->image_opacity      = 4;
-        $record->stroke_width       = 5;
-        $record->point_radius       = 6;
-        $record->point_image        = 'file.png';
-        $record->min_zoom           = 7;
-        $record->max_zoom           = 8;
-        $record->map_focus          = 'lat/lon';
-        $record->map_zoom           = 9;
-        $record->map_active         = 1;
-        $record->save('POINT(1 1)');
+        // Text:
+        $record->title              = '1';
+        $record->body               = '2';
+        $record->slug               = '3';
+
+        // Styles:
+        $record->vector_color       = '4';
+        $record->stroke_color       = '5';
+        $record->select_color       = '6';
+        $record->vector_opacity     = 7;
+        $record->select_opacity     = 8;
+        $record->stroke_opacity     = 9;
+        $record->image_opacity      = 10;
+        $record->stroke_width       = 11;
+        $record->point_radius       = 12;
+        $record->point_image        = '13';
+        $record->min_zoom           = 14;
+        $record->max_zoom           = 15;
+
+        // Map:
+        $record->coverage           = 'POINT(16 16)';
+        $record->map_active         = 0;
+        $record->map_focus          = '17';
+        $record->map_zoom           = 18;
+        $record->save();
 
         // Mock values.
         $values = array(
-            'id'                    => $record->id,
-            'item_id'               => null,
-            'title'                 => 'title2',
-            'body'                  => 'body2',
-            'slug'                  => 'slug2',
-            'vector_color'          => '#vector2',
-            'stroke_color'          => '#stroke2',
-            'select_color'          => '#select2',
-            'vector_opacity'        => '10',
-            'select_opacity'        => '20',
-            'stroke_opacity'        => '30',
-            'image_opacity'         => '40',
-            'stroke_width'          => '50',
-            'point_radius'          => '60',
-            'point_image'           => 'file2.png',
-            'min_zoom'              => '70',
-            'max_zoom'              => '80',
-            'map_focus'             => 'lat2/lon2',
-            'map_zoom'              => '90',
-            'coverage'              => 'POINT(1 1)',
-            'map_active'            => '0'
+            'title'                 => '20',
+            'body'                  => '21',
+            'slug'                  => '22',
+            'vector_color'          => '23',
+            'stroke_color'          => '24',
+            'select_color'          => '25',
+            'vector_opacity'        => 26,
+            'select_opacity'        => 27,
+            'stroke_opacity'        => 28,
+            'image_opacity'         => 29,
+            'stroke_width'          => 30,
+            'point_radius'          => 31,
+            'point_image'           => '32',
+            'min_zoom'              => 33,
+            'max_zoom'              => 34,
+            'map_active'            => 1,
+            'map_focus'             => '35',
+            'map_zoom'              => '36',
+            'coverage'              => 'POINT(37 37)'
         );
 
-        // Mock PUT.
-        $this->writePut($values);
-
         // Issue request.
+        $this->writePut($values);
         $this->request->setMethod('PUT');
         $this->dispatch('neatline/records/'.$record->id);
 
-        // Re-get record.
+        // Reload the record.
         $record = $this->_recordsTable->find($record->id);
 
-        // Check new values.
-        $this->assertEquals($record->title, 'title2');
-        $this->assertEquals($record->body, 'body2');
-        $this->assertEquals($record->slug, 'slug2');
-        $this->assertEquals($record->vector_color, '#vector2');
-        $this->assertEquals($record->stroke_color, '#stroke2');
-        $this->assertEquals($record->select_color, '#select2');
-        $this->assertEquals($record->vector_opacity, 10);
-        $this->assertEquals($record->select_opacity, 20);
-        $this->assertEquals($record->stroke_opacity, 30);
-        $this->assertEquals($record->image_opacity, 40);
-        $this->assertEquals($record->stroke_width, 50);
-        $this->assertEquals($record->point_radius, 60);
-        $this->assertEquals($record->point_image, 'file2.png');
-        $this->assertEquals($record->min_zoom, '70');
-        $this->assertEquals($record->max_zoom, '80');
-        $this->assertEquals($record->map_focus, 'lat2/lon2');
-        $this->assertEquals($record->map_zoom, 90);
-        $this->assertEquals($record->map_active, 0);
+        // Check updated fields:
+        $this->assertEquals($record->title,             '20');
+        $this->assertEquals($record->body,              '21');
+        $this->assertEquals($record->slug,              '22');
+        $this->assertEquals($record->vector_color,      '23');
+        $this->assertEquals($record->stroke_color,      '24');
+        $this->assertEquals($record->select_color,      '25');
+        $this->assertEquals($record->vector_opacity,    26);
+        $this->assertEquals($record->select_opacity,    27);
+        $this->assertEquals($record->stroke_opacity,    28);
+        $this->assertEquals($record->image_opacity,     29);
+        $this->assertEquals($record->stroke_width,      30);
+        $this->assertEquals($record->point_radius,      31);
+        $this->assertEquals($record->point_image,       '32');
+        $this->assertEquals($record->min_zoom,          33);
+        $this->assertEquals($record->max_zoom,          34);
+        $this->assertEquals($record->map_active,        1);
+        $this->assertEquals($record->map_focus,         '35');
+        $this->assertEquals($record->map_zoom,          36);
 
         // Check the coverage value.
         $this->assertEquals($this->getCoverageAsText($record),
-            'POINT(1 1)');
+            'POINT(37 37)');
 
     }
 

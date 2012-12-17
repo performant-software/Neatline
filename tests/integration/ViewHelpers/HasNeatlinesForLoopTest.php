@@ -20,8 +20,9 @@ class Neatline_HelpersTest_HasNeatlinesForLoop
 
 
     /**
-     * has_neatlines_for_loop() should return false when there are no
-     * exhibits.
+     * --------------------------------------------------------------------
+     * has_neatlines_for_loop() should return false when no exhibits.
+     * --------------------------------------------------------------------
      */
     public function testHasNoNeatlinesForLoop()
     {
@@ -31,8 +32,9 @@ class Neatline_HelpersTest_HasNeatlinesForLoop
 
 
     /**
-     * has_neatlines_for_loop() should return true when there is at least
-     * one exhibit.
+     * --------------------------------------------------------------------
+     * has_neatlines_for_loop() should return true when >= 1 exhibit.
+     * --------------------------------------------------------------------
      */
     public function testHasNeatlinesForLoop()
     {

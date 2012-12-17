@@ -20,8 +20,10 @@ class Neatline_HelpersTest_GetCurrentNeatline
 
 
     /**
-     * get_current_neatline() should return the exhibit currently bound to
-     * the view.
+     * --------------------------------------------------------------------
+     * get_current_neatline() should return the exhibit record currently
+     * bound to the view.
+     * --------------------------------------------------------------------
      */
     public function testGetCurrentNeatline()
     {
@@ -30,9 +32,9 @@ class Neatline_HelpersTest_GetCurrentNeatline
         $exhibit = $this->__exhibit('test-exhibit');
         $this->dispatch('neatline/show/test-exhibit');
 
-        // Get out view exhibit.
-        $retrievedExhibit = get_current_neatline();
-        $this->assertEquals($retrievedExhibit->id, $exhibit->id);
+        // Get view exhibit.
+        $retrieved = get_current_neatline();
+        $this->assertEquals($retrieved->id, $exhibit->id);
 
     }
 

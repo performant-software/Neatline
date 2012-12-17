@@ -17,10 +17,9 @@ class Neatline_NeatlineTagTableTest_GetTagByName
 
 
     /**
-     * getTagByName() should return the tag with the passed name in the
-     * passed exhibit.
-     *
-     * @group tags
+     * --------------------------------------------------------------------
+     * getTagByName() should retrieve a tag in an exhibit by name.
+     * --------------------------------------------------------------------
      */
     public function testGetExhibitTag()
     {

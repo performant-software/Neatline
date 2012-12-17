@@ -17,10 +17,10 @@ class Neatline_NeatlineRecordTest_SaveForm
 
 
     /**
-     * saveForm() should update fields with the values in the associative
-     * array passed in from the records controller.
-     *
-     * @group tags
+     * --------------------------------------------------------------------
+     * saveForm() should update fields to match the key => value pairs in
+     * the input array.
+     * --------------------------------------------------------------------
      */
     public function testUpdate()
     {

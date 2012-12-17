@@ -18,25 +18,21 @@ class Neatline_NeatlineExhibitTest_SaveDeleteHooks
 
 
     /**
-     * save() should create a default style tag for the exhibit with
-     * values drawn from the system defaults when the exhibit is inserted
-     * and set the `tag_id` reference to point to the new tag.
-     *
-     * @group tags
+     * --------------------------------------------------------------------
+     * When a new exhibit is saved for the first time, a default style tag
+     * should be created and referenced by the `tag_id` field.
+     * --------------------------------------------------------------------
      */
     public function testInsertCreateDefaultTag()
     {
 
-        // Starting tags count.
-        $startCount = $this->_tagsTable->count();
-
         // Create exhibit.
-        $exhibit = new NeatlineExhibit();
-        $exhibit->slug = 'test';
-        $exhibit->save();
+        $c1 = $this->_tagsTable->count();
+        $exhibit = $this->__exhibit();
+        $c2 = $this->_tagsTable->count();
 
-        // Check +1 tags.
-        $this->assertEquals($startCount+1, $this->_tagsTable->count());
+        // Check for new tag.
+        $this->assertEquals($c1+1, $c2);
         $tag = $this->getLastTag();
 
         // Check reference.
@@ -46,32 +42,32 @@ class Neatline_NeatlineExhibitTest_SaveDeleteHooks
 
 
     /**
-     * save() should only create a default style tag for the exhibit when
-     * the exhibit is inserted, not when it is re-saved.
-     *
-     * @group tags
+     * --------------------------------------------------------------------
+     * An exhibit default tag should only be created when a new exhibit is
+     * inserted, not when an existing exhibit is saved.
+     * --------------------------------------------------------------------
      */
     public function testSaveDefaultTagNonDuplication()
     {
 
         // Create exhibit.
-        $exhibit = new NeatlineExhibit();
-        $exhibit->slug = 'test';
-        $exhibit->save();
+        $exhibit = $this->__exhibit();
 
-        // Starting tags count.
-        $startCount = $this->_tagsTable->count();
+        // Re-save.
+        $c1 = $this->_tagsTable->count();
         $exhibit->save();
+        $c2 = $this->_tagsTable->count();
 
         // Check +0 tags.
-        $this->assertEquals($startCount, $this->_tagsTable->count());
+        $this->assertEquals($c1, $c2);
 
     }
 
 
     /**
-     * The delete() method should delete the exhibit record and all child
-     * data records.
+     * --------------------------------------------------------------------
+     * delete() should delete the exhibit record and all child records.
+     * --------------------------------------------------------------------
      */
     public function testDelete()
     {
@@ -89,7 +85,7 @@ class Neatline_NeatlineExhibitTest_SaveDeleteHooks
         // Delete exhibit.
         $exhibit1->delete();
 
-        // 1 exhibits, 2 data records.
+        // 1 exhibit, 2 records.
         $this->assertEquals($this->_exhibitsTable->count(), 1);
         $this->assertEquals($this->_recordsTable->count(), 2);
 

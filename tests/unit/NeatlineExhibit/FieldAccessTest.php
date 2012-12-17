@@ -17,7 +17,9 @@ class Neatline_NeatlineExhibitTest_FieldAccess
 
 
     /**
-     * Test field set and get.
+     * --------------------------------------------------------------------
+     * Test field set/get.
+     * --------------------------------------------------------------------
      */
     public function testFieldAccess()
     {

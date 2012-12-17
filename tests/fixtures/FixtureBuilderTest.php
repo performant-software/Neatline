@@ -19,7 +19,9 @@ class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
 
 
     /**
+     * --------------------------------------------------------------------
      * Records JSON for map (INDEX and GET responses).
+     * --------------------------------------------------------------------
      */
     public function testRecordsJson()
     {
@@ -141,7 +143,9 @@ class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
 
 
     /**
+     * --------------------------------------------------------------------
      * JSON for individual records (GET response).
+     * --------------------------------------------------------------------
      */
     public function testRecordJson()
     {
@@ -152,12 +156,12 @@ class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
         $record = $this->__record($exhibit);
 
         // Fields:
-        $record->title          = 'title4';
-        $record->body           = 'body4';
-        $record->coverage       = 'POINT(6 7)';
-        $record->map_active     = 1;
-        $record->map_focus      = '100,200';
-        $record->map_zoom       = 10;
+        $record->title      = 'title4';
+        $record->body       = 'body4';
+        $record->coverage   = 'POINT(6 7)';
+        $record->map_active = 1;
+        $record->map_focus  = '100,200';
+        $record->map_zoom   = 10;
 
         // Styles:
         $record->vector_color   = '#111111';
@@ -199,7 +203,9 @@ class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
 
 
     /**
-     * Core Neatline partial markup.
+     * --------------------------------------------------------------------
+     * Neatline partial markup.
+     * --------------------------------------------------------------------
      */
     public function testNeatlinePartial()
     {
@@ -209,7 +215,9 @@ class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
 
 
     /**
+     * --------------------------------------------------------------------
      * Editor partial markup.
+     * --------------------------------------------------------------------
      */
     public function testEditorPartial()
     {

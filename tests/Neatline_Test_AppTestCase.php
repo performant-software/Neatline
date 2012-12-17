@@ -36,10 +36,9 @@ class Neatline_Test_AppTestCase extends Omeka_Test_AppTestCase
         $pluginHelper->setUp('Neatline');
 
         // Get plugin tables.
+        $this->_recordsTable =  $this->db->getTable('NeatlineRecord');
         $this->_exhibitsTable = $this->db->getTable('NeatlineExhibit');
-        $this->_layersTable = $this->db->getTable('NeatlineLayer');
-        $this->_recordsTable = $this->db->getTable('NeatlineRecord');
-        $this->_tagsTable = $this->db->getTable('NeatlineTag');
+        $this->_tagsTable =     $this->db->getTable('NeatlineTag');
 
     }
 
@@ -58,10 +57,9 @@ class Neatline_Test_AppTestCase extends Omeka_Test_AppTestCase
         // unique `id`s.
 
         $p = $this->db->prefix;
-        $this->db->query("DELETE FROM `{$p}neatline_exhibits` WHERE 1=1");
         $this->db->query("DELETE FROM `{$p}neatline_records` WHERE 1=1");
+        $this->db->query("DELETE FROM `{$p}neatline_exhibits` WHERE 1=1");
         $this->db->query("DELETE FROM `{$p}neatline_tags` WHERE 1=1");
-        $this->db->query("DELETE FROM `{$p}neatline_layers` WHERE 1=1");
 
     }
 

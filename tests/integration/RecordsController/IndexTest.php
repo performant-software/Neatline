@@ -17,8 +17,10 @@ class Neatline_RecordsControllerTest_Index
 
 
     /**
-     * INDEX should emit a JSON object containing all record data needed
-     * by the front-end application.
+     * --------------------------------------------------------------------
+     * INDEX should emit a JSON object containing a list of records with
+     * all data needed by the front-end application.
+     * --------------------------------------------------------------------
      */
     public function testIndex()
     {

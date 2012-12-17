@@ -17,27 +17,29 @@ class Neatline_NeatlineExhibitTest_SaveForm
 
 
     /**
-     * saveForm() should save all key=>value pairs in the form data.
+     * --------------------------------------------------------------------
+     * saveForm() should save all key => value pairs in the form data.
+     * --------------------------------------------------------------------
      */
     public function testSaveForm()
     {
 
-        // Create an exhibit and map.
+        // Create exhibit.
         $exhibit = $this->__exhibit();
 
         // Save form data.
         $exhibit->saveForm(array(
-            'title'         => 'Form Title',
-            'description'   => 'Form description.',
-            'slug'          => 'form-slug',
+            'title'         => 'title',
+            'description'   => 'desc',
+            'slug'          => 'slug',
             'public'        => 1
         ));
 
         // Check values.
-        $this->assertEquals($exhibit->title, 'Form Title');
-        $this->assertEquals($exhibit->description, 'Form description.');
-        $this->assertEquals($exhibit->slug, 'form-slug');
-        $this->assertEquals($exhibit->public, 1);
+        $this->assertEquals($exhibit->title,        'title');
+        $this->assertEquals($exhibit->description,  'desc');
+        $this->assertEquals($exhibit->slug,         'slug');
+        $this->assertEquals($exhibit->public,       1);
 
     }
 

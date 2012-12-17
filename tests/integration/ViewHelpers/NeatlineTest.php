@@ -20,35 +20,26 @@ class Neatline_HelpersTest_Neatline
 
 
     /**
-     * neatline() should return attribute values for the exhibit currently
-     * bound to the view.
+     * --------------------------------------------------------------------
+     * neatline() should return exhibit field values.
+     * --------------------------------------------------------------------
      */
     public function testNeatlineValue()
     {
 
-        // Create exhibit, hit /show.
+        // Create exhibit, set fields.
         $exhibit = $this->__exhibit('test-exhibit');
-        $exhibit->title = 'Test Exhibit';
-        $exhibit->description = 'Test description.';
+        $exhibit->title         = 'title';
+        $exhibit->description   = 'desc';
         $exhibit->save();
 
         // Hit /show.
         $this->dispatch('neatline/show/test-exhibit');
 
-        // Neatline Name
-        $this->assertEquals('Test Exhibit', neatline('title'));
-        $this->assertEquals('Test Exhibit', neatline('Title'));
-
-        // Neatline Description
-        $this->assertEquals('Test description.', neatline('description'));
-        $this->assertEquals('Test description.', neatline('Description'));
-
-        // Neatline ID
+        // Get fields
+        $this->assertEquals('title', neatline('title'));
+        $this->assertEquals('desc', neatline('description'));
         $this->assertEquals($exhibit->id, neatline('id'));
-        $this->assertEquals($exhibit->id, neatline('ID'));
-
-        $this->assertEquals('test-exhibit', neatline('slug'));
-        $this->assertEquals('test-exhibit', neatline('Slug'));
 
     }
 

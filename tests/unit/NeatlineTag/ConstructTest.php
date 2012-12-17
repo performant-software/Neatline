@@ -17,9 +17,9 @@ class Neatline_NeatlineTagTest_Construct
 
 
     /**
+     * --------------------------------------------------------------------
      * __construct() should set foreign keys.
-     *
-     * @group tags
+     * --------------------------------------------------------------------
      */
     public function testFieldDefaults()
     {

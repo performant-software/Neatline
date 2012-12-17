@@ -17,7 +17,9 @@ class Neatline_RecordsControllerTest_Get
 
 
     /**
+     * --------------------------------------------------------------------
      * GET should emit a JSON object containing data for a single record.
+     * --------------------------------------------------------------------
      */
     public function testGet()
     {
@@ -26,10 +28,8 @@ class Neatline_RecordsControllerTest_Get
         $exhibit = $this->__exhibit();
         $record = $this->__record($exhibit);
 
-        // Hit /records.
+        // Hit /records, capture response.
         $this->dispatch('neatline/records/'.$record->id);
-
-        // Capture response.
         $response = json_decode($this->getResponse()->getBody('default'));
 
         // Check code.

@@ -20,23 +20,18 @@ class Neatline_HelpersTest_TotalNeatlines
 
 
     /**
+     * --------------------------------------------------------------------
      * total_neatlines() should return the total number of exhibits.
+     * --------------------------------------------------------------------
      */
     public function testTotalNeatlines()
     {
-
         $this->dispatch('neatline');
         $this->assertEquals(0, total_neatlines());
-
-        $neatlineOne = $this->__exhibit();
+        $exhibit1 = $this->__exhibit();
         $this->assertEquals(1, total_neatlines());
-
-        $neatlineTwo = $this->__exhibit();
+        $exhibit2 = $this->__exhibit();
         $this->assertEquals(2, total_neatlines());
-
-        $neatlineTwo->delete();
-        $this->assertEquals(1, total_neatlines());
-
     }
 
 

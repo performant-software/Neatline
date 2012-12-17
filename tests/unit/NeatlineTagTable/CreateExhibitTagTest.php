@@ -21,8 +21,6 @@ class Neatline_NeatlineTagTableTest_CreateExhibitTag
      * createExhibitTag() should create a default tag for an exhibit and
      * populate it with default values from the plugin.ini file.
      * --------------------------------------------------------------------
-     *
-     * @group tags
      */
     public function testCreateExhibitTag()
     {

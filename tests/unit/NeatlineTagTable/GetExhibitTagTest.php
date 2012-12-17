@@ -17,17 +17,15 @@ class Neatline_NeatlineTagTableTest_GetExhibitTag
 
 
     /**
-     * getExhibitTag() should return the tag record for an exhibit.
-     *
-     * @group tags
+     * --------------------------------------------------------------------
+     * getExhibitTag() should return the default tag for an exhibit.
+     * --------------------------------------------------------------------
      */
     public function testGetExhibitTag()
     {
 
         // Create exhibit.
-        $exhibit = new NeatlineExhibit();
-        $exhibit->slug = 'test';
-        $exhibit->save();
+        $exhibit = $this->__exhibit();
 
         // Get default tag.
         $tag = $this->_tagsTable->getExhibitTag($exhibit);

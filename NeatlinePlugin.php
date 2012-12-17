@@ -145,21 +145,6 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
         $this->_db->query($sql);
 
 
-        // Layers table.
-        // -------------
-        $sql = "CREATE TABLE IF NOT EXISTS
-            `{$this->_db->prefix}neatline_layers` (
-
-            `id`                INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-            `name`              TINYTEXT COLLATE utf8_unicode_ci NULL,
-
-            PRIMARY KEY         (`id`)
-
-        ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
-
-        $this->_db->query($sql);
-
-
     }
 
 
@@ -177,11 +162,6 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
         // Drop the data table.
         $sql = "DROP TABLE IF EXISTS
             `{$this->_db->prefix}neatline_records`";
-        $this->_db->query($sql);
-
-        // Drop the data table.
-        $sql = "DROP TABLE IF EXISTS
-            `{$this->_db->prefix}neatline_layers`";
         $this->_db->query($sql);
 
         // Drop the tags table.

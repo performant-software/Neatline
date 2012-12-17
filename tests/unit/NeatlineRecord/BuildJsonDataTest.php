@@ -17,8 +17,10 @@ class Neatline_NeatlineRecordTest_BuildJsonData
 
 
     /**
+     * --------------------------------------------------------------------
      * buildJsonData() should construct a well-formed array object with
      * all attributes necessary for the front-end application.
+     * --------------------------------------------------------------------
      */
     public function testBuildJsonData()
     {
@@ -47,13 +49,13 @@ class Neatline_NeatlineRecordTest_BuildJsonData
         $record->max_zoom           = 15;
 
         // Map:
-        $record->map_active         = 16;
-        $record->map_focus          = '17';
-        $record->map_zoom           = 18;
+        $record->map_active         = 0;
+        $record->map_focus          = '16';
+        $record->map_zoom           = 17;
         $record->save();
 
         // Construct the array.
-        $data = $record->buildJsonData('19');
+        $data = $record->buildJsonData('18');
 
         $this->assertEquals($data,
             array(
@@ -82,10 +84,10 @@ class Neatline_NeatlineRecordTest_BuildJsonData
                 'max_zoom'          => 15,
 
                 // Map:
-                'map_active'        => 16,
-                'map_focus'         => '17',
-                'map_zoom'          => 18,
-                'coverage'          => '19'
+                'map_active'        => 0,
+                'map_focus'         => '16',
+                'map_zoom'          => 17,
+                'coverage'          => '18'
 
             )
         );

@@ -17,11 +17,13 @@ class Neatline_NeatlineRecordTableTest_QueryRecords
 
 
     /**
+     * --------------------------------------------------------------------
      * When just an exhibit record (and no filter parameters) is passed,
      * queryRecords() should retrieve all of the data records that belong
      * to the exhibit and construct an array of associative arrays, one
      * for each record, that contain all of the information needed for the
      * front-end application.
+     * --------------------------------------------------------------------
      */
     public function testQueryRecords()
     {
@@ -142,8 +144,10 @@ class Neatline_NeatlineRecordTableTest_QueryRecords
 
 
     /**
+     * --------------------------------------------------------------------
      * queryRecords() should retrieve records that belong to the passed
      * exhibit. Records in other exhibits should be excluded.
+     * --------------------------------------------------------------------
      */
     public function testQueryRecordsExhibitFilter()
     {
@@ -174,7 +178,9 @@ class Neatline_NeatlineRecordTableTest_QueryRecords
 
 
     /**
+     * --------------------------------------------------------------------
      * queryRecords() should filter on zoom.
+     * --------------------------------------------------------------------
      */
     public function testQueryRecordsZoomFilter()
     {
@@ -244,7 +250,9 @@ class Neatline_NeatlineRecordTableTest_QueryRecords
 
 
     /**
+     * --------------------------------------------------------------------
      * queryRecords() should filter on extent.
+     * --------------------------------------------------------------------
      */
     public function testQueryRecordsExtentFilter()
     {

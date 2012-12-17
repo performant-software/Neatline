@@ -17,7 +17,9 @@ class Neatline_NeatlineExhibitTableTest_FindBySlug
 
 
     /**
+     * --------------------------------------------------------------------
      * findBySlug() should return the exhibit with the passed slug.
+     * --------------------------------------------------------------------
      */
     public function testFindBySlug()
     {
@@ -33,9 +35,11 @@ class Neatline_NeatlineExhibitTableTest_FindBySlug
 
 
     /**
-     * findBySlug should escapes all input before passing it to SQL.
+     * --------------------------------------------------------------------
+     * findBySlug should escape input before passing it to SQL.
+     * --------------------------------------------------------------------
      */
-    public function testFindBySlugHole()
+    public function testFindBySlugEscaping()
     {
 
         // Create exhibit.

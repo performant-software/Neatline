@@ -17,8 +17,10 @@ class Neatline_NeatlineRecordTableTest_CountActiveRecordsByExhibit
 
 
     /**
+     * --------------------------------------------------------------------
      * countActiveRecordsByExhibit() should number of map-active records
      * in the exhibit.
+     * --------------------------------------------------------------------
      */
     public function testCountActiveRecordsByExhibit()
     {

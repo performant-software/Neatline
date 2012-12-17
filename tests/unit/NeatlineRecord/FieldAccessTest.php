@@ -17,9 +17,9 @@ class Neatline_NeatlineRecordTest_FieldAccess
 
 
     /**
-     * Test that all of the public attributes on the model can be set and
-     * successfully saved to the database. Check that the field values are
-     * properly persisted when the record is retrieved from the database.
+     * --------------------------------------------------------------------
+     * Test field set/get.
+     * --------------------------------------------------------------------
      */
     public function testFieldAccess()
     {

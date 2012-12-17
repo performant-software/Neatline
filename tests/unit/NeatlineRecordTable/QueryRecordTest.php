@@ -17,9 +17,11 @@ class Neatline_NeatlineRecordTableTest_QueryRecord
 
 
     /**
+     * --------------------------------------------------------------------
      * queryRecord() should retrieve the data record with a given id and
      * construct an associative array that contains all of the information
      * about the record needed by the front end application.
+     * --------------------------------------------------------------------
      */
     public function testQueryRecord()
     {
