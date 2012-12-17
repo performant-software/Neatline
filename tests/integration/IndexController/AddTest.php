@@ -39,9 +39,7 @@ class Neatline_IndexControllerTest_Add
 
     /**
      * --------------------------------------------------------------------
-     * When the "Create an Exhibit" form is submitted with an empty title,
-     * the form should be redisplayed with an error and an exhibit should
-     * not be created.
+     * Add form should require a title.
      * --------------------------------------------------------------------
      */
     public function testAddNoTitleError()
@@ -73,9 +71,7 @@ class Neatline_IndexControllerTest_Add
 
     /**
      * --------------------------------------------------------------------
-     * When the "Create an Exhibit" form is submitted with an empty slug,
-     * the form should be redisplayed with an error and an exhibit should
-     * not be created.
+     * Add form should require a slug.
      * --------------------------------------------------------------------
      */
     public function testAddNoSlugError()
@@ -107,9 +103,7 @@ class Neatline_IndexControllerTest_Add
 
     /**
      * --------------------------------------------------------------------
-     * When the "Create an Exhibit" form is submitted with a slug that has
-     * spaces, the form should be redisplayed with an error and an exhibit
-     * should not be created.
+     * Add form should block a slug with spaces.
      * --------------------------------------------------------------------
      */
     public function testAddInvalidSlugWithSpacesError()
@@ -141,9 +135,7 @@ class Neatline_IndexControllerTest_Add
 
     /**
      * --------------------------------------------------------------------
-     * When the "Create an Exhibit" form is submitted with a slug that has
-     * capital letters, the form should be redisplayed with an error and
-     * an exhibit should not be created.
+     * Add form should block a slug with capitals.
      * --------------------------------------------------------------------
      */
     public function testAddInvalidSlugWithCapsError()
@@ -175,9 +167,7 @@ class Neatline_IndexControllerTest_Add
 
     /**
      * --------------------------------------------------------------------
-     * When the "Create an Exhibit" form is submitted with a slug that has
-     * non-alphanumeric characters, the form should be redisplayed with an
-     * error and an exhibit should not be created.
+     * Add form should block a slug with non-alphanumeric characters.
      * --------------------------------------------------------------------
      */
     public function testAddInvalidSlugWithNonAlphasError()
@@ -209,9 +199,7 @@ class Neatline_IndexControllerTest_Add
 
     /**
      * --------------------------------------------------------------------
-     * When the "Create an Exhibit" form is submitted with a slug that is
-     * the same as the slug of an existing exhibit, the form should be
-     * redisplayed and an exhibit should not be created.
+     * Add form should block a duplicate slug.
      * --------------------------------------------------------------------
      */
     public function testAddDuplicateSlugError()
@@ -246,9 +234,8 @@ class Neatline_IndexControllerTest_Add
 
     /**
      * --------------------------------------------------------------------
-     * When the "Create an Exhibit" form is submitted with a title and a
-     * valid slug, a new exhibit should be created and populated with the
-     * values for the title, slug, dsecription, and public status.
+     * Add form should create and populate an exhibit when a valid title,
+     * description, and slug are provided.
      * --------------------------------------------------------------------
      */
     public function testAddSuccess()

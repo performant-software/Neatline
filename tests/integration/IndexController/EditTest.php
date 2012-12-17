@@ -17,35 +17,40 @@ class Neatline_IndexControllerTest_Edit
 
 
     /**
-     * Test for base markup and field population in edit view.
+     * --------------------------------------------------------------------
+     * The /edit/:id route should display the exhibit edit form populated
+     * with exhibit values.
+     * --------------------------------------------------------------------
      */
     public function testEditBaseMarkup()
     {
 
         // Create exhibit.
-        $exhibit = $this->__exhibit('test-exhibit');
-        $exhibit->title = 'Test Exhibit';
-        $exhibit->description = 'Test description.';
-        $exhibit->public = 1;
+        $exhibit = $this->__exhibit('slug');
+
+        // Fields:
+        $exhibit->title         = 'title';
+        $exhibit->description   = 'description';
+        $exhibit->public        = 1;
         $exhibit->save();
 
-        // Hit the edit form.
+        // Hit /edit.
         $this->dispatch('neatline/edit/'.$exhibit->id);
 
-        // Title.
+        // Title:
         $this->assertXpath(
-            '//input[@name="title"][@value="Test Exhibit"]'
+            '//input[@name="title"][@value="title"]'
         );
 
-        // Description.
+        // Description:
         $this->assertXpathContentContains(
             '//textarea[@name="description"]',
-            'Test description.'
+            'description'
         );
 
-        // Slug.
+        // Slug:
         $this->assertXpath(
-            '//input[@name="slug"][@value="test-exhibit"]'
+            '//input[@name="slug"][@value="slug"]'
         );
 
         // Public.
@@ -57,25 +62,25 @@ class Neatline_IndexControllerTest_Edit
 
 
     /**
-     * If the title field is blank, flash error.
+     * --------------------------------------------------------------------
+     * Edit form should require a title.
+     * --------------------------------------------------------------------
      */
     public function testEditNoTitleError()
     {
 
         // Create exhibit.
         $exhibit = $this->__exhibit();
+        $exhibit->title = "title";
+        $exhibit->save();
 
-        // Missing title.
+        // Missing title:
         $this->request->setMethod('POST')->setPost(array(
             'title' => ''
         ));
 
         // Submit the form.
         $this->dispatch('neatline/edit/'.$exhibit->id);
-
-        // Should redirect to the add view.
-        $this->assertModule('neatline');
-        $this->assertController('index');
         $this->assertAction('edit');
 
         // Check for the error.
@@ -84,29 +89,31 @@ class Neatline_IndexControllerTest_Edit
             'Enter a title.'
         );
 
+        // Check for unsaved exhibit.
+        $exhibit = $this->_exhibitsTable->find($exhibit->id);
+        $this->assertEquals($exhibit->title, 'title');
+
     }
 
 
     /**
-     * If the slug field is blank, flash error.
+     * --------------------------------------------------------------------
+     * Edit form should require a slug.
+     * --------------------------------------------------------------------
      */
     public function testEditNoSlugError()
     {
 
         // Create exhibit.
-        $exhibit = $this->__exhibit();
+        $exhibit = $this->__exhibit('slug');
 
-        // Missing slug.
+        // Missing slug:
         $this->request->setMethod('POST')->setPost(array(
             'slug' => ''
         ));
 
         // Submit the form.
         $this->dispatch('neatline/edit/'.$exhibit->id);
-
-        // Should redirect to the add view.
-        $this->assertModule('neatline');
-        $this->assertController('index');
         $this->assertAction('edit');
 
         // Check for the error.
@@ -115,29 +122,31 @@ class Neatline_IndexControllerTest_Edit
             'The slug cannot be empty.'
         );
 
+        // Check for unsaved exhibit.
+        $exhibit = $this->_exhibitsTable->find($exhibit->id);
+        $this->assertEquals($exhibit->slug, 'slug');
+
     }
 
 
     /**
-     * If slug has spaces, flash error.
+     * --------------------------------------------------------------------
+     * Edit form should block a slug with spaces.
+     * --------------------------------------------------------------------
      */
     public function testEditInvalidSlugWithSpacesError()
     {
 
         // Create exhibit.
-        $exhibit = $this->__exhibit();
+        $exhibit = $this->__exhibit('slug');
 
-        // Spaces.
+        // Spaces:
         $this->request->setMethod('POST')->setPost(array(
             'slug' => 'slug with spaces'
         ));
 
         // Submit the form.
         $this->dispatch('neatline/edit/'.$exhibit->id);
-
-        // Should redirect to the add view.
-        $this->assertModule('neatline');
-        $this->assertController('index');
         $this->assertAction('edit');
 
         // Check for the error.
@@ -146,29 +155,31 @@ class Neatline_IndexControllerTest_Edit
             'The slug can only contain letters, numbers, and hyphens.'
         );
 
+        // Check for unsaved exhibit.
+        $exhibit = $this->_exhibitsTable->find($exhibit->id);
+        $this->assertEquals($exhibit->slug, 'slug');
+
     }
 
 
     /**
-     * If slug has capital letters, flash error.
+     * --------------------------------------------------------------------
+     * Edit form should block a slug with capitals.
+     * --------------------------------------------------------------------
      */
     public function testEditInvalidSlugWithCapsError()
     {
 
         // Create exhibit.
-        $exhibit = $this->__exhibit();
+        $exhibit = $this->__exhibit('slug');
 
-        // Spaces.
+        // Capitals:
         $this->request->setMethod('POST')->setPost(array(
             'slug' => 'Slug-With-Capitals'
         ));
 
         // Submit the form.
         $this->dispatch('neatline/edit/'.$exhibit->id);
-
-        // Should redirect to the add view.
-        $this->assertModule('neatline');
-        $this->assertController('index');
         $this->assertAction('edit');
 
         // Check for the error.
@@ -177,29 +188,31 @@ class Neatline_IndexControllerTest_Edit
             'The slug can only contain letters, numbers, and hyphens.'
         );
 
+        // Check for unsaved exhibit.
+        $exhibit = $this->_exhibitsTable->find($exhibit->id);
+        $this->assertEquals($exhibit->slug, 'slug');
+
     }
 
 
     /**
-     * If slug has non-alphanumerics, flash error.
+     * --------------------------------------------------------------------
+     * Edit form should block a slug with non-alphanumeric characters.
+     * --------------------------------------------------------------------
      */
     public function testEditInvalidSlugWithNonAlphasError()
     {
 
         // Create exhibit.
-        $exhibit = $this->__exhibit();
+        $exhibit = $this->__exhibit('slug');
 
-        // Spaces.
+        // Non-alphanumerics:
         $this->request->setMethod('POST')->setPost(array(
-            'slug' => 'slug-with-non-alphas!'
+            'slug' => 'slug#with%non&alphas!'
         ));
 
         // Submit the form.
         $this->dispatch('neatline/edit/'.$exhibit->id);
-
-        // Should redirect to the add view.
-        $this->assertModule('neatline');
-        $this->assertController('index');
         $this->assertAction('edit');
 
         // Check for the error.
@@ -208,41 +221,16 @@ class Neatline_IndexControllerTest_Edit
             'The slug can only contain letters, numbers, and hyphens.'
         );
 
-    }
-
-
-    /**
-     * If slug is valid, do not flash error.
-     */
-    public function testEditNoErrorForValidSlug()
-    {
-
-        // Create exhibit.
-        $exhibit = $this->__exhibit();
-
-        // Spaces.
-        $this->request->setMethod('POST')->setPost(array(
-            'slug' => 'valid-slug'
-        ));
-
-        // Submit the form.
-        $this->dispatch('neatline/edit/'.$exhibit->id);
-
-        // Should redirect to the add view.
-        $this->assertModule('neatline');
-        $this->assertController('index');
-        $this->assertAction('edit');
-
-        // Check for the error.
-        $this->assertNotQueryContentContains(
-            'ul.error li',
-            'The slug can only contain letters, numbers, and hyphens.'
-        );
+        // Check for unsaved exhibit.
+        $exhibit = $this->_exhibitsTable->find($exhibit->id);
+        $this->assertEquals($exhibit->slug, 'slug');
 
     }
 
     /**
-     * If slug is taken, flash error.
+     * --------------------------------------------------------------------
+     * Edit form should block a duplicate slug.
+     * --------------------------------------------------------------------
      */
     public function testEditDuplicateSlugError()
     {
@@ -256,12 +244,8 @@ class Neatline_IndexControllerTest_Edit
             'slug' => 'test-exhibit-2'
         ));
 
-        // No exhibits at the start.
+        // Submit the form.
         $this->dispatch('neatline/edit/'.$exhibit1->id);
-
-        // Should redirect to the add view.
-        $this->assertModule('neatline');
-        $this->assertController('index');
         $this->assertAction('edit');
 
         // Check for the error.
@@ -272,9 +256,38 @@ class Neatline_IndexControllerTest_Edit
 
     }
 
+    /**
+     * --------------------------------------------------------------------
+     * Edit form should not block an unchanged slug.
+     * --------------------------------------------------------------------
+     */
+    public function testEditUnchangedSlug()
+    {
+
+        // Create exhibit.
+        $exhibit = $this->__exhibit('slug');
+
+        // Unchanged slug.
+        $this->request->setMethod('POST')->setPost(array(
+            'title' => 'title',
+            'slug' => 'slug'
+        ));
+
+        // Submit the form.
+        $this->dispatch('neatline/edit/'.$exhibit->id);
+
+        // Check for saved exhibit.
+        $exhibit = $this->_exhibitsTable->find($exhibit->id);
+        $this->assertEquals($exhibit->title, 'title');
+
+    }
+
 
     /**
-     * Valid form should edit exhibit.
+     * --------------------------------------------------------------------
+     * Edit form should update an exhibit when a valid title, description,
+     * and slug are provided.
+     * --------------------------------------------------------------------
      */
     public function testEditSuccess()
     {
@@ -284,22 +297,21 @@ class Neatline_IndexControllerTest_Edit
 
         // Valid form.
         $this->request->setMethod('POST')->setPost(array(
-            'title'         => 'New Exhibit',
-            'description'   => 'New description.',
-            'slug'          => 'new-exhibit',
-            'public'        => 0
+            'title'         => 'title2',
+            'description'   => 'desc2',
+            'slug'          => 'slug2',
+            'public'        => 1
         ));
 
-        // Submit the form.
+        // Submit the form, reload exhibit.
         $this->dispatch('neatline/edit/'.$exhibit->id);
-
-        // Get the exhibit and examine.
         $exhibit = $this->_exhibitsTable->find($exhibit->id);
-        $this->assertEquals($exhibit->title, 'New Exhibit');
-        $this->assertEquals($exhibit->description, 'New description.');
-        $this->assertEquals($exhibit->slug, 'new-exhibit');
-        $this->assertEquals($exhibit->public, 0);
-        $this->assertNull($exhibit->image_id);
+
+        // Check fields.
+        $this->assertEquals($exhibit->title,        'title2');
+        $this->assertEquals($exhibit->description,  'desc2');
+        $this->assertEquals($exhibit->slug,         'slug2');
+        $this->assertEquals($exhibit->public,       1);
 
     }
 
