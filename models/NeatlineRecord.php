@@ -99,15 +99,15 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
 
 
     /**
-     * Set the an attribute if the passed value is not null or ''.
+     * Set a field if the passed value is not null or ''.
      *
-     * @param string $attribute The name of the attribute.
+     * @param string $field The name of the fiel.
      * @param boolean $value The value to set.
      */
-    public function setNotEmpty($attribute, $value)
+    public function setNotEmpty($field, $value)
     {
-        if ($value == '') $this[$attribute] = null;
-        else $this[$attribute] = $value;
+        if (trim($value) == '') $this[$field] = null;
+        else $this[$field] = $value;
     }
 
 

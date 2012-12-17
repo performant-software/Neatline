@@ -17,7 +17,10 @@ class Neatline_NeatlineRecordTest_SetNotEmpty
 
 
     /**
-     * setNotEmpty() should set value when value is not null or ''.
+     * --------------------------------------------------------------------
+     * setNotEmpty() should set the field with the passed value when value
+     * is not an empty string or NULL.
+     * --------------------------------------------------------------------
      */
     public function testSetNotEmptyWithNonEmptyValue()
     {
@@ -25,15 +28,18 @@ class Neatline_NeatlineRecordTest_SetNotEmpty
         // Create a record.
         $record = $this->__record();
 
-        // Test with empty value, check for set.
-        $record->setNotEmpty('title', 'Title');
-        $this->assertEquals($record->title, 'Title');
+        // Non-empty value:
+        $record->setNotEmpty('title', 'title');
+        $this->assertEquals($record->title, 'title');
 
     }
 
 
     /**
-     * setNotEmpty() should set null when value is null or ''.
+     * --------------------------------------------------------------------
+     * setNotEmpty() should set the field to NULL when the passed value is
+     * an empty string or NULL.
+     * --------------------------------------------------------------------
      */
     public function testSetNotEmptyWithEmptyValue()
     {
@@ -41,17 +47,15 @@ class Neatline_NeatlineRecordTest_SetNotEmpty
         // Create a record.
         $record = $this->__record();
 
-        // Test with empty value, check for set.
+        // Empty string:
         $record->setNotEmpty('title', '');
-        $this->assertNull($record->title);
-        $record->setNotEmpty('title', null);
         $this->assertNull($record->title);
 
-        // Test with populated value, check for set.
-        $record->title = 'Title';
-        $record->setNotEmpty('title', '');
+        // Untrimmed empty string:
+        $record->setNotEmpty('title', '  ');
         $this->assertNull($record->title);
-        $record->title = 'Title';
+
+        // Null:
         $record->setNotEmpty('title', null);
         $this->assertNull($record->title);
 
