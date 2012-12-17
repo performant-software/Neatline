@@ -80,40 +80,6 @@ describe('Form Open/Close', function() {
 
   });
 
-  it('should close the form when "Close" is clicked', function() {
-
-    // --------------------------------------------------------------------
-    // When the "Close" button at the bottom of the record edit form is
-    // clicked, the form should disappear and the records list should be
-    // re-rendered in the content pane.
-    // --------------------------------------------------------------------
-
-    // Open form, click close.
-    $(recordRows[0]).trigger('click');
-    _t.formView.closeButton.trigger('click');
-
-    // Check for records list, no form.
-    expect(_t.recordsView.$el).not.toContain(_t.formView.form);
-    expect(_t.recordsView.$el).toContain(_t.recordsView.ul);
-
-    // 3 records in browser pane.
-    recordRows = _t.getRecordRows();
-    expect(recordRows.length).toEqual(3);
-    expect($(recordRows[0]).find('.record-title').text()).
-      toEqual('title1');
-    expect($(recordRows[0]).find('.record-body').text()).
-      toEqual('body1');
-    expect($(recordRows[1]).find('.record-title').text()).
-      toEqual('title2');
-    expect($(recordRows[1]).find('.record-body').text()).
-      toEqual('body2');
-    expect($(recordRows[2]).find('.record-title').text()).
-      toEqual('title3');
-    expect($(recordRows[2]).find('.record-body').text()).
-      toEqual('body3');
-
-  });
-
   it('should create map edit layer when one does not exist', function() {
 
     // --------------------------------------------------------------------
