@@ -99,8 +99,7 @@ Neatline.module('Bubble.Views', function(
       this.window.unbind('mousemove.bubble');
       this.exhibit.unbind('mouseleave.bubble');
 
-      // Add class, track.
-      this.$el.addClass('frozen');
+      // Track.
       this.frozen = true;
 
     },
@@ -118,11 +117,8 @@ Neatline.module('Bubble.Views', function(
       this.window.unbind('mousemove.bubble');
       this.exhibit.unbind('mouseleave.bubble');
 
-      // Pop class, track, hide.
-      this.$el.removeClass('frozen');
+      // Track, hide.
       this.frozen = false;
-
-      // Hide.
       this.$el.hide();
 
     },

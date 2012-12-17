@@ -106,21 +106,6 @@ describe('Bubble Show/Hide', function() {
 
   });
 
-  it('should add `frozen` class on feature select', function() {
-
-    // --------------------------------------------------------------------
-    // A `frozen` class should be added when the bubble is frozen.
-    // --------------------------------------------------------------------
-
-    // Hover, select.
-    _t.hoverOnMapFeature(layer1, feature1);
-    _t.clickOnMapFeature(layer1, feature1);
-
-    // Check for `.frozen`.
-    expect(_t.bubbleView.$el).toHaveClass('frozen');
-
-  });
-
   it('should not respond to hover events when frozen', function() {
 
     // --------------------------------------------------------------------
@@ -185,22 +170,6 @@ describe('Bubble Show/Hide', function() {
 
     // Bubble should track the cursor.
     expect(_t.bubbleView.$el.offset()).not.toEqual(offset);
-
-  });
-
-  it('should remove `frozen` class on thaw', function() {
-
-    // --------------------------------------------------------------------
-    // The `frozen` class should be removed when the bubble is thawed.
-    // --------------------------------------------------------------------
-
-    // Hover, select, unselect.
-    _t.hoverOnMapFeature(layer1, feature1);
-    _t.clickOnMapFeature(layer1, feature1);
-    _t.clickOffMapFeature(mapLayers);
-
-    // Check for `.frozen`.
-    expect(_t.bubbleView.$el).not.toHaveClass('frozen');
 
   });
 
