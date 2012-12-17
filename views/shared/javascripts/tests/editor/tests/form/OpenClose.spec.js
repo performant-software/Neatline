@@ -48,6 +48,38 @@ describe('Form Open/Close', function() {
 
   });
 
+  it('should populate form values', function() {
+
+    // --------------------------------------------------------------------
+    // When the edit form for a record is opened in the editor, the form
+    // should render data from the record's model into the form fields.
+    // --------------------------------------------------------------------
+
+    // Open form.
+    $(recordRows[0]).trigger('click');
+
+    var favicon = 'https://www.google.com/favicon.ico';
+
+    // Check for form and values.
+    expect(_t.formView.lead.text()).              toEqual('title1');
+    expect(_t.textTabView.title.val()).           toEqual('title1');
+    expect(_t.textTabView.body.val()).            toEqual('body1');
+    expect(_t.styleTabView.vectorColor.val()).    toEqual('#111111');
+    expect(_t.styleTabView.strokeColor.val()).    toEqual('#444444');
+    expect(_t.styleTabView.selectColor.val()).    toEqual('#777777');
+    expect(_t.styleTabView.vectorOpacity.val()).  toEqual('1');
+    expect(_t.styleTabView.selectOpacity.val()).  toEqual('4');
+    expect(_t.styleTabView.strokeOpacity.val()).  toEqual('7');
+    expect(_t.styleTabView.imageOpacity.val()).   toEqual('10');
+    expect(_t.styleTabView.strokeWidth.val()).    toEqual('13');
+    expect(_t.styleTabView.pointRadius.val()).    toEqual('16');
+    expect(_t.styleTabView.minZoom.val()).        toEqual('19');
+    expect(_t.styleTabView.maxZoom.val()).        toEqual('22');
+    expect(_t.styleTabView.pointImage.val()).     toEqual(favicon);
+    expect(_t.spatialTabView.coverage.val()).     toEqual('POINT(1 2)');
+
+  });
+
   it('should close the form when "Close" is clicked', function() {
 
     // --------------------------------------------------------------------

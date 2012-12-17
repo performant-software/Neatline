@@ -14,7 +14,7 @@ Neatline.module('Editor.Form.Views', function(
   Views, Form, Backbone, Marionette, $, _) {
 
 
-  Views.Form = Backbone.View.extend({
+  Views.RecordForm = Backbone.View.extend({
 
 
     options: {
@@ -41,11 +41,11 @@ Neatline.module('Editor.Form.Views', function(
        * Trackers.
        */
 
-      this.model = null;      // The model currently bound to the form.
-      this.hash = null;       // The hash of the currently selected tab.
-      this.started = false;   // True if the form has been displayed.
-      this.open = false;      // True if the form is currently open.
-      this.data = {};         // Aggregate data gathered from tabs.
+      this.model    = null;   // The model currently bound to the form.
+      this.hash     = null;   // The hash of the currently selected tab.
+      this.started  = false;  // True if the form has been displayed.
+      this.open     = false;  // True if the form is currently open.
+      this.data     = {};     // Aggregate data gathered from tabs.
 
       // Render template.
       this.form = $(this.getTemplate()());
@@ -79,7 +79,7 @@ Neatline.module('Editor.Form.Views', function(
 
 
       // Tabs.
-      // ------------
+      // -----
       this.tabs.on('shown', _.bind(function(e) {
 
         // Check if the "Spatial" tab is active.
@@ -138,6 +138,8 @@ Neatline.module('Editor.Form.Views', function(
       if (this.hash == '#form-spatial') {
         Neatline.vent.trigger('editor:form:spatialSelect');
       }
+
+      return this;
 
     },
 
