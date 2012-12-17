@@ -138,17 +138,17 @@ function total_neatlines()
 /**
  * Returns a link to a Neatline exhibit.
  *
+ * @param NeatlineExhibit|null $neatline The exhibit record.
  * @param string $text HTML for the text of the link.
  * @param array $props Attributes for the link tag. (optional)
  * @param string $action The action for the link. Default is 'show'.
- * @param NeatlineExhibit|null $neatline The exhibit record.
  * @return string The HTML link.
  */
 function link_to_neatline(
+    $neatline = null,
     $text = null,
     $props = array(),
     $action = 'show',
-    $neatline = null,
     $public = true)
 {
 

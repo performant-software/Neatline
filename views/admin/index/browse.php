@@ -60,14 +60,17 @@ echo head(array('content_class' => 'neatline', 'title' => $title));
             <td class="title">
                 <?php echo link_to_neatline(); ?>
                 <ul class="action-links group">
-                    <li><?php echo link_to_neatline(__('Edit Details'), array('class' => 'edit'), 'edit', null, false); ?></li>
-                    <li><?php echo link_to_neatline(__('Delete'), array('class' => 'delete delete-confirm'), 'delete-confirm', null, false); ?></li>
+                    <li><?php echo link_to_neatline($exhibit, __('Edit Details'), array('class' => 'edit'), 'edit', false); ?></li>
+                    <li><?php echo link_to_neatline($exhibit, __('Delete'), array('class' => 'delete delete-confirm'), 'delete-confirm', false); ?></li>
+                </ul>
             </td>
-            <td><?php echo link_to_neatline(__('Edit Query'), array('class' => 'query'), 'query', null, false);?></td>
+            <td><?php echo link_to_neatline($exhibit, __('Edit Query'), array('class' => 'query'), 'query', false);?></td>
             <td><?php echo format_date(neatline('modified')); ?></td>
             <td><?php echo total_records_for_neatline(); ?></td>
             <td><?php echo neatline('public') ? __('Yes') : __('No'); ?></td>
-            <td><a href="<?php echo url('neatline/editor/' . neatline('id')); ?>" class="edit"><?php echo __('Edit'); ?></a></td>
+            <td class="edit">
+                <a href="<?php echo url('neatline/editor/' . neatline('id')); ?>" class="edit"><?php echo __('Edit'); ?></a>
+            </td>
         </tr>
         <?php endforeach; ?>
 
