@@ -52,27 +52,17 @@ class NeatlineExhibit extends Omeka_Record_AbstractRecord
 
 
     /**
-     * Create a default tag when an exhibit is inserted.
-     */
-    public function save()
-    {
-
-        // Is the record new?
-        $isInserting = !$this->exists();
-        parent::save();
-
-        // Call `afterInsert`.
-        if ($isInserting) $this->afterInsert();
-
-    }
-
-
-    /**
      * When a new exhibit is inserted, create a tag for the exhibit, set
      * the `tag_id reference`, and re-save the exhibit.
+     *
+     * @param array $args The array of callback parameters passed in from
+     * Omeka_Record_AbstractRecord
      */
-    protected function afterInsert()
+    protected function afterSave($args)
     {
+
+        // Break if not inserting.
+        if (!$args['insert']) return;
 
         // Create an exhibit-default tag.
         $tagsTable = $this->getTable('NeatlineTag');
@@ -94,15 +84,6 @@ class NeatlineExhibit extends Omeka_Record_AbstractRecord
         $recordsTable->delete("{$this->_db->prefix}neatline_records",
             array('exhibit_id = ?' => $this->id)
         );
-    }
-
-
-    /**
-     * Alias original `save` for testing.
-     */
-    public function __save()
-    {
-        parent::save();
     }
 
 

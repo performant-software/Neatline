@@ -26,7 +26,6 @@ class Neatline_NeatlineExhibitTest_FieldAccess
         $exhibit = new NeatlineExhibit();
 
         // Set.
-        $exhibit->tag_id        = 2;
         $exhibit->title         = '3';
         $exhibit->description   = '4';
         $exhibit->slug          = '5';
@@ -34,13 +33,12 @@ class Neatline_NeatlineExhibitTest_FieldAccess
         $exhibit->query         = '7';
         $exhibit->map_focus     = '8';
         $exhibit->map_zoom      = 9;
-        $exhibit->__save();
+        $exhibit->save();
 
         // Reload.
         $exhibit = $this->_exhibitsTable->find($exhibit->id);
 
         // Get.
-        $this->assertEquals($exhibit->tag_id,       2);
         $this->assertEquals($exhibit->title,        '3');
         $this->assertEquals($exhibit->description,  '4');
         $this->assertEquals($exhibit->slug,         '5');

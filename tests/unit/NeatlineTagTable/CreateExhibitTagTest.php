@@ -28,7 +28,11 @@ class Neatline_NeatlineTagTableTest_CreateExhibitTag
         // Create exhibit.
         $exhibit = new NeatlineExhibit();
         $exhibit->slug = 'test';
-        $exhibit->__save();
+        $exhibit->save();
+
+        // Delete default tag.
+        $tag = $this->_tagsTable->find($exhibit->tag_id);
+        $tag->delete();
 
         // Create default tag.
         $c1 = $this->_tagsTable->count();
