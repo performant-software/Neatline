@@ -53,7 +53,6 @@ Neatline.module('Editor.Forms.Record.Views', function(
       // Startup:
       this.instantiateTabs();
       this.bindEvents();
-      this.$el.detach();
 
     },
 
@@ -186,7 +185,7 @@ Neatline.module('Editor.Forms.Record.Views', function(
       // Gather data from tab views.
       Neatline.vent.trigger('editor:form:getData');
 
-      // Save the model.
+      // PUT:
       this.model.save(this.data, {
 
         // Update the header.
@@ -208,7 +207,7 @@ Neatline.module('Editor.Forms.Record.Views', function(
      */
     remove: function() {
 
-      // Issue DELETE.
+      // DELETE:
       this.model.destroy({
         success: _.bind(function() {
 

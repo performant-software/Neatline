@@ -39,7 +39,7 @@ Neatline.module('Editor', { startWithParent: false,
    * Register an `editor` region on the application, the container on the
    * left side of the screen where model lists and forms are displayed.
    */
-  Neatline.addRegions({ editor: '#editor' });
+  Neatline.addRegions({ editorRegion: '#editor' });
 
 
 }});
