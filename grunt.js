@@ -147,6 +147,7 @@ module.exports = function(grunt) {
 
           // Neatline:
           config.app+'/app.init.js',
+          config.app+'/models/*.js',
           config.app+'/collections/*.js',
           config.app+'/modules/map/**/*.js',
           config.app+'/modules/bubble/**/*.js'
@@ -176,6 +177,7 @@ module.exports = function(grunt) {
 
           // Editor:
           config.app+'/app.init.js',
+          config.app+'/models/*.js',
           config.app+'/collections/*.js',
           config.app+'/modules/map/**/*.js',
           config.app+'/modules/bubble/**/*.js',

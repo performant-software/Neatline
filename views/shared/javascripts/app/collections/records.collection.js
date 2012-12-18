@@ -17,14 +17,8 @@ Neatline.module('Collections', function(
   Collections.Records = Backbone.Collection.extend({
 
 
-    url: function() {
-      return __exhibit.api;
-    },
-
-
-    model: Backbone.Model.extend({
-      url: function() { return __exhibit.api+'/'+this.get('id'); }
-    }),
+    url: function() { return __exhibit.api; },
+    model: Neatline.Models.Record,
 
 
     /**
