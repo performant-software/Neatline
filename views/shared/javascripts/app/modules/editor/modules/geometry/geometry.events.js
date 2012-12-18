@@ -51,19 +51,6 @@ Neatline.module('Editor.Geometry', { startWithParent: false,
 
 
   /**
-   * When a record is updated by a from save, propagate the new data into
-   * the records collection.
-   *
-   * @param {Number} id: The id of the updated record.
-   * @param {Object} data: The new data.
-   * @return void.
-   */
-  Neatline.vent.on('editor:form:updateRecord', function(id, data) {
-    Geometry.collection.updateModel(id, data);
-  });
-
-
-  /**
    * When a record is deleted, purge it from the collection and map.
    *
    * @param {Object} model: The deleted record.

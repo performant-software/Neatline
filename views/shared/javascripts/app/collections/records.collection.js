@@ -22,6 +22,17 @@ Neatline.module('Collections', function(
 
 
     /**
+     * When any instance of the `Record` model changes, check to see if a
+     * model with the same id is in the collection and, if so, update it.
+     */
+    initialize: function() {
+      this.model.prototype.on('change', _.bind(function(model) {
+        this.updateModel(model.toJSON());
+      }, this));
+    },
+
+
+    /**
      * Fetch a subset of the collection from the server.
      *
      * @param {Object} params: Query parameters for the records API.
@@ -30,7 +41,6 @@ Neatline.module('Collections', function(
      *  - `zoom`: The current zoom level of the map, as an integer.
      *
      * @param {Function} cb: Called when the fetch() completes.
-     * @return void.
      */
     getCollection: function(params, cb) {
       var data = $.param(_.extend({ id: __exhibit.id }, params));
@@ -49,7 +59,6 @@ Neatline.module('Collections', function(
      *
      * @param {Number} id: The model id.
      * @param {Function} cb: Callback, called with the model.
-     * @return void.
      */
     getModel: function(id, cb) {
 
@@ -73,13 +82,11 @@ Neatline.module('Collections', function(
     /**
      * Update the data for a model with the passed id.
      *
-     * @param {Number} id: The model id.
-     * @param {Object} data: The new data.
-     * @return void.
+     * @param {Object} json: The new data.
      */
-    updateModel: function(id, data) {
-      var model = this.get(id);
-      if (model) model.set(data);
+    updateModel: function(json) {
+      var model = this.get(json.id);
+      if (model) model.set(json);
     }
 
 

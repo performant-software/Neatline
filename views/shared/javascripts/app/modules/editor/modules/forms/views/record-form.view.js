@@ -199,12 +199,8 @@ Neatline.module('Editor.Form.Views', function(
       // Gather data from tab views.
       Neatline.vent.trigger('editor:form:getData');
 
-      // Propagate the new data to all collections.
-      Neatline.vent.trigger('editor:form:updateRecord',
-        this.model.get('id'), this.data);
-
       // Save the model.
-      this.model.save({}, {
+      this.model.save(this.data, {
 
         // Update the header.
         success: _.bind(function() {
