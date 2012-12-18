@@ -17,9 +17,9 @@ Neatline.module('Models', function(
   Models.Record = Backbone.Model.extend({
 
 
-      url: function() {
-        return __exhibit.api+'/'+this.get('id');
-      }
+    url: function() {
+      return __exhibit.api+'/'+this.get('id');
+    }
 
 
   });

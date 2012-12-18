@@ -86,7 +86,7 @@ Neatline.module('Collections', function(
      */
     updateModel: function(json) {
       var model = this.get(json.id);
-      if (model) model.set(json);
+      if (model) model.set(json, { silent: true });
     }
 
 
