@@ -25,45 +25,35 @@ Neatline.module('Editor.Forms.Record.Views', function(
     },
 
 
-    getTemplate: function() {
-      return _.template($('#edit-form').html());
-    },
-
-
     /**
      * Render the form template, initialize trackers, get element markup.
      */
     initialize: function() {
 
-      /**
-       * Trackers.
-       */
-
+      // Trackers:
       this.model    = null;   // The model currently bound to the form.
       this.hash     = null;   // The hash of the currently selected tab.
       this.started  = false;  // True if the form has been displayed.
       this.open     = false;  // True if the form is currently open.
       this.data     = {};     // Aggregate data gathered from tabs.
 
-      // Render template.
-      this.form = $(this.getTemplate()());
-
       // Buttons:
-      this.closeButton =    this.form.find('button.close');
-      this.deleteButton =   this.form.find('a[name="delete"]');
-      this.confirmButton =  this.form.find('button[name="delete"]');
-      this.saveButton =     this.form.find('a[name="save"]');
+      this.closeButton =    this.$el.find('button.close');
+      this.deleteButton =   this.$el.find('a[name="delete"]');
+      this.confirmButton =  this.$el.find('button[name="delete"]');
+      this.saveButton =     this.$el.find('a[name="save"]');
 
       // Delete modal:
-      this.deleteModal = this.form.find('#deleteConfirm');
+      this.deleteModal = this.$el.find('#deleteConfirm');
 
       // Groups:
-      this.lead = this.form.find('p.lead');
-      this.tabs = this.form.find('ul.nav a');
+      this.lead = this.$el.find('p.lead');
+      this.tabs = this.$el.find('ul.nav a');
 
       // Startup:
       this.instantiateTabs();
       this.bindEvents();
+      this.$el.detach();
 
     },
 

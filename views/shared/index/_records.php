@@ -24,9 +24,11 @@
 
   <div id="content"></div>
 
+  <!-- Form templates. -->
+  <?php echo $this->partial('index/_record_form.php'); ?>
+
 </div>
 
 <!-- Underscore templates. -->
 <?php echo $this->partial('index/_record_list.php'); ?>
 <?php echo $this->partial('index/_record_row.php'); ?>
-<?php echo $this->partial('index/_record_form.php'); ?>
