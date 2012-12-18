@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Tests for form open and close.
+ * Tests for form open.
  *
  * @package     omeka
  * @subpackage  neatline

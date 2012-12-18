@@ -9,7 +9,7 @@
   },
 
   "jasmine": {
-    "neatline": "./views/shared/javascripts/tests/neatline",
+    "public": "./views/shared/javascripts/tests/public",
     "editor": "./views/shared/javascripts/tests/editor"
   },
 

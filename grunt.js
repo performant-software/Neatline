@@ -84,18 +84,18 @@ module.exports = function(grunt) {
           cwd: './tests'
         }
       },
-      jasmine_neatline: {
+      jasmine_public: {
         command: 'grunt jasmine',
         stdout: true,
         execOptions: {
-          cwd: config.jasmine.neatline
+          cwd: config.jasmine['public']
         }
       },
-      jasmine_neatline_server: {
+      jasmine_public_server: {
         command: 'grunt jasmine-server',
         stdout: true,
         execOptions: {
-          cwd: config.jasmine.neatline
+          cwd: config.jasmine['public']
         }
       },
       jasmine_editor: {
@@ -277,19 +277,19 @@ module.exports = function(grunt) {
   // Run all tests.
   grunt.registerTask('test', [
     'shell:phpunit',
-    'shell:jasmine_neatline',
+    'shell:jasmine_public',
     'shell:jasmine_editor'
   ]);
 
   // Run PHPUnit / Jasmine.
   grunt.registerTask('phpunit', 'shell:phpunit');
   grunt.registerTask('jasmine', [
-    'shell:jasmine_neatline',
+    'shell:jasmine_public',
     'shell:jasmine_editor'
   ]);
 
   // Run Jasmine servers.
-  grunt.registerTask('neatline_server', 'shell:jasmine_neatline_server');
+  grunt.registerTask('public_server', 'shell:jasmine_public_server');
   grunt.registerTask('editor_server', 'shell:jasmine_editor_server');
 
 

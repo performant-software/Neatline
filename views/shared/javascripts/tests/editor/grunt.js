@@ -15,7 +15,10 @@ module.exports = function(grunt) {
   grunt.initConfig({
     jasmine: {
       src: 'shared/payloads/js/editor.js',
-      specs: 'tests/**/*.spec.js',
+      specs: [
+        'integration/**/*.spec.js',
+        'unit/**/*.spec.js'
+      ],
       helpers: [
         'shared/helpers/*.js',
         'shared/helpers/components/jasmine-jquery/lib/jasmine-jquery.js',
