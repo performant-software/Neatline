@@ -30,15 +30,15 @@
 
   <div class="tab-content">
 
-    <div class="tab-pane" id="record-form-text">
+    <div class="tab-pane text" id="record-form-text">
       <?php echo $this->partial('index/_text_tab.php'); ?>
     </div>
 
-    <div class="tab-pane" id="record-form-spatial">
+    <div class="tab-pane spatial" id="record-form-spatial">
       <?php echo $this->partial('index/_spatial_tab.php'); ?>
     </div>
 
-    <div class="tab-pane" id="record-form-style">
+    <div class="tab-pane style" id="record-form-style">
       <?php echo $this->partial('index/_style_tab.php'); ?>
     </div>
 

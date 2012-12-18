@@ -70,48 +70,37 @@ Neatline.module('Editor.Forms.Record.Views', function(
      */
     bindEvents: function() {
 
-
-      // Tabs.
-      // -----
+      // Tabs:
       this.tabs.on('shown', _.bind(function(e) {
 
-        // Check if the "Spatial" tab is active.
+        // Publish "Spatial" (de)selection.
         var event = (e.target.hash == '#form-spatial') ?
           'editor:form:spatialSelect' :
           'editor:form:spatialDeselect';
-
-        // Publish "Spatial" (de)selection.
         Neatline.vent.trigger(event);
 
-        // Track the hash.
+        // Store the hash.
         this.hash = e.target.hash;
 
       }, this));
 
-
-      // Close button.
-      // -------------
+      // Close button:
       this.closeButton.click(_.bind(function(e) {
         e.preventDefault();
         this.close();
       }, this));
 
-
-      // Save button.
-      // ------------
+      // Save button:
       this.saveButton.click(_.bind(function(e) {
         e.preventDefault();
         this.save();
       }, this));
 
-
-      // Delete button.
-      // --------------
+      // Delete button:
       this.confirmButton.click(_.bind(function(e) {
         e.preventDefault();
         this.remove();
       }, this));
-
 
     },
 
@@ -130,6 +119,7 @@ Neatline.module('Editor.Forms.Record.Views', function(
         Neatline.vent.trigger('editor:form:spatialSelect');
       }
 
+      this.$el.show();
       return this;
 
     },
@@ -143,13 +133,12 @@ Neatline.module('Editor.Forms.Record.Views', function(
      */
     show: function(model, focus) {
 
-      // Block if open.
+      // Break if open.
       if (this.open) return;
-
-      // Store model, render.
       this.model = model;
-      this.$el.html(this.form);
-      this.render();
+
+      // Render to editor.
+      Neatline.editorRegion.show(this);
 
       // Publish, set trackers.
       Neatline.vent.trigger('editor:form:open', model, focus);
@@ -162,15 +151,10 @@ Neatline.module('Editor.Forms.Record.Views', function(
      * Close the form, publish the event, set the global tracker.
      */
     close: function() {
-
-      // Hide, publish.
-      this.form.detach();
       Neatline.vent.trigger('editor:form:close', this.model);
-
-      // Trackers.
+      this.$el.hide();
       this.model = null;
       this.open = false;
-
     },
 
 

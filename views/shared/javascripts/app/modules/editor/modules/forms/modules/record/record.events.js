@@ -20,7 +20,6 @@ Neatline.module('Editor.Forms.Record', function(
    * @param {Object} model: The record model.
    */
   Neatline.vent.on('editor:records:openForm', function(model) {
-    Neatline.editorRegion.show(Record.view);
     Record.view.show(model, true);
   });
 
