@@ -20,8 +20,6 @@ Neatline.module('Editor', { startWithParent: false,
    * to ensure that the editor layout retine sets non-zero dimensions on
    * the map container before Neatline starts OpenLayers, which needs to
    * be instantiated on a space-occupying div.
-   *
-   * @return void.
    */
   Neatline.on('initialize:before', function() {
     Editor.start();
@@ -31,8 +29,6 @@ Neatline.module('Editor', { startWithParent: false,
   /**
    * Wait until Neatline is running before initializing the geometry
    * module, which needs the application map view to be running.
-   *
-   * @return void.
    */
   Neatline.on('initialize:after', function() {
     Editor.Geometry.start();

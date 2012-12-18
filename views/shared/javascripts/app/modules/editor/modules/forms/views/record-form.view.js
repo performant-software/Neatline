@@ -32,8 +32,6 @@ Neatline.module('Editor.Form.Views', function(
 
     /**
      * Render the form template, initialize trackers, get element markup.
-     *
-     * @return void.
      */
     initialize: function() {
 
@@ -72,8 +70,6 @@ Neatline.module('Editor.Form.Views', function(
 
     /**
      * Bind event listeners to form elements.
-     *
-     * @return void.
      */
     bindEvents: function() {
 
@@ -125,8 +121,6 @@ Neatline.module('Editor.Form.Views', function(
 
     /**
      * Render the form header, set the starting tab.
-     *
-     * @return void.
      */
     render: function() {
 
@@ -149,7 +143,6 @@ Neatline.module('Editor.Form.Views', function(
      *
      * @param {Object} model: The record model.
      * @param {Boolean} focus: If true, focus the map on the edit layer.
-     * @return void.
      */
     show: function(model, focus) {
 
@@ -170,8 +163,6 @@ Neatline.module('Editor.Form.Views', function(
 
     /**
      * Close the form, publish the event, set the global tracker.
-     *
-     * @return void.
      */
     close: function() {
 
@@ -188,8 +179,6 @@ Neatline.module('Editor.Form.Views', function(
 
     /**
      * Save the current form values.
-     *
-     * @return void.
      */
     save: function() {
 
@@ -218,8 +207,6 @@ Neatline.module('Editor.Form.Views', function(
 
     /**
      * Destroy the model, close the form.
-     *
-     * @return void.
      */
     remove: function() {
 
@@ -247,7 +234,6 @@ Neatline.module('Editor.Form.Views', function(
      * Flash a notification.
      *
      * @param {String} text: The notification content.
-     * @return void.
      */
     notify: function(text) {
       noty({ text: text, layout: 'topCenter', timeout: 500 });
@@ -256,8 +242,6 @@ Neatline.module('Editor.Form.Views', function(
 
     /**
      * Activate "Text" as the starting tab selection.
-     *
-     * @return void.
      */
     setStarted: function() {
       $(this.tabs[0]).tab('show');
@@ -267,8 +251,6 @@ Neatline.module('Editor.Form.Views', function(
 
     /**
      * Render the record title at the top of the form.
-     *
-     * @return void.
      */
     updateHead: function() {
       this.lead.text(this.model.get('title'));
@@ -277,8 +259,6 @@ Neatline.module('Editor.Form.Views', function(
 
     /**
      * Return the saved button to its default state, notify.
-     *
-     * @return void.
      */
     setSaved: function() {
       this.notify(this.options.messages.save);
@@ -288,8 +268,6 @@ Neatline.module('Editor.Form.Views', function(
 
     /**
      * Set the saved button to "Saving.." mode.
-     *
-     * @return void.
      */
     setSaving: function() {
       this.saveButton.text('Saving');

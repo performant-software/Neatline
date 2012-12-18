@@ -20,8 +20,6 @@ Neatline.module('Editor.Layout.Views', function(
     /**
      * Get markup, measure the width of the editor div, bind window resize
      * listener, make starting call to position().
-     *
-     * @return void.
      */
     initialize: function() {
 
@@ -44,8 +42,6 @@ Neatline.module('Editor.Layout.Views', function(
 
     /**
      * Render the layout.
-     *
-     * @return void.
      */
     position: function() {
 

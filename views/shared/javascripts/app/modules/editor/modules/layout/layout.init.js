@@ -16,8 +16,6 @@ Neatline.module('Editor.Layout', function(
 
   /**
    * Instantiate the layout view.
-   *
-   * @return void.
    */
   Layout.addInitializer(function() {
     this.view = new Layout.Views.Layout();

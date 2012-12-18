@@ -25,8 +25,6 @@ Neatline.module('Map.Views', function(
     /**
      * Initialize state variables, run the top-level start-up routine, and
      * publish initial request for data.
-     *
-     * @return void.
      */
     initialize: function() {
 
@@ -45,8 +43,6 @@ Neatline.module('Map.Views', function(
      * Construct the OpenLayers Map instance, set the default base layer
      * and call component start-up routines that add cursor controls, set
      * the default focus/zoom, and listen for movement events.
-     *
-     * @return void.
      */
     initializeOpenLayers: function() {
 
@@ -83,8 +79,6 @@ Neatline.module('Map.Views', function(
     /**
      * Construct, add, and activate hover and click controls to the map.
      * `hoverControl` handles highlighting, `clickControl` handles clicks.
-     *
-     * @return void.
      */
     addControls: function() {
 
@@ -118,8 +112,6 @@ Neatline.module('Map.Views', function(
 
     /**
      * Activate the hover and click controls.
-     *
-     * @return void.
      */
     activateControls: function() {
       this.hoverControl.activate();
@@ -129,8 +121,6 @@ Neatline.module('Map.Views', function(
 
     /**
      * Deactivate the hover and click controls.
-     *
-     * @return void.
      */
     deactivateControls: function() {
       this.hoverControl.deactivate();
@@ -142,8 +132,6 @@ Neatline.module('Map.Views', function(
      * Update the layer collections operated on by the hover and click
      * controls. Called after new data arrives and the layer set has been
      * rebuild by the `ingest` flow.
-     *
-     * @return void.
      */
     updateControls: function() {
       this.hoverControl.setLayer(this.layers);
@@ -156,8 +144,6 @@ Neatline.module('Map.Views', function(
      * global __exhibit object, then we know that a default focus and zoom
      * has been set for the exhibit and should be manifested. If no
      * default exists, apply the default zoom and geolocate the focus.
-     *
-     * @return void.
      */
     setDefaultViewport: function() {
 
@@ -179,8 +165,6 @@ Neatline.module('Map.Views', function(
      * Add a listener for the `moveend` event on the map, which is called
      * when a pan or zoom is completed. Bind to `publishPosition`, which
      * emits the current focus of the map and triggers off a data reload.
-     *
-     * @return void.
      */
     registerMapEvents: function() {
 
@@ -194,8 +178,6 @@ Neatline.module('Map.Views', function(
 
     /**
      * Publish the current focus and zoom of the map via `map:move`.
-     *
-     * @return void.
      */
     publishPosition: function() {
 
@@ -221,8 +203,6 @@ Neatline.module('Map.Views', function(
      *   the model's geometries.
      *
      * @param {Object} model: The record model.
-     *
-     * @return void.
      */
     focusByModel: function(model) {
 
@@ -260,7 +240,6 @@ Neatline.module('Map.Views', function(
      *
      * @param {String} focus: Comma-delimited lat/lon.
      * @param {Number} zoom: The zoom value.
-     * @return void.
      */
     setViewport: function(focus, zoom) {
 
@@ -276,8 +255,6 @@ Neatline.module('Map.Views', function(
 
     /**
      * Focus the map on the user's location.
-     *
-     * @return void.
      */
     geolocate: function() {
 
@@ -302,7 +279,6 @@ Neatline.module('Map.Views', function(
      *   that are active on the map and not in the `frozen` array.
      *
      * @param {Object} records: The records collection.
-     * @return void.
      */
     ingest: function(records) {
 
@@ -389,7 +365,6 @@ Neatline.module('Map.Views', function(
      * populate the `styleMap` attribute for a model's vector layer.
      *
      * @param {Object} record: The record.
-     * @return void.
      */
     getStyleMap: function(record) {
 
@@ -474,7 +449,6 @@ Neatline.module('Map.Views', function(
      * instance that was used to construct the layer.
      *
      * @param {Object|OpenLayers.Feature} feature: The feature.
-     * @return void.
      */
     onFeatureSelect: function(feature) {
       Neatline.vent.trigger('map:select', feature.layer.nModel);
@@ -486,7 +460,6 @@ Neatline.module('Map.Views', function(
      * instance that was used to construct the layer.
      *
      * @param {Object|OpenLayers.Feature} feature: The feature.
-     * @return void.
      */
     onFeatureUnselect: function(feature) {
       Neatline.vent.trigger('map:unselect', feature.layer.nModel);
@@ -498,7 +471,6 @@ Neatline.module('Map.Views', function(
      * model instance that was used to construct the layer.
      *
      * @param {Object} evt: The highlight event.
-     * @return void.
      */
     onFeatureHighlight: function(evt) {
       Neatline.vent.trigger('map:highlight', evt.feature.layer.nModel);
@@ -510,7 +482,6 @@ Neatline.module('Map.Views', function(
      * the model instance that was used to construct the layer.
      *
      * @param {Object} evt: The unhighlight event.
-     * @return void.
      */
     onFeatureUnhighlight: function(evt) {
       Neatline.vent.trigger('map:unhighlight', evt.feature.layer.nModel);
@@ -521,7 +492,6 @@ Neatline.module('Map.Views', function(
      * Add the passed record id to the `frozen` array.
      *
      * @param {Number} id: The id to freeze.
-     * @return void.
      */
     freeze: function(id) {
       this.frozen.push(id);
@@ -532,7 +502,6 @@ Neatline.module('Map.Views', function(
      * Remove the passed record id to the `frozen` array.
      *
      * @param {Number} id: The id to unfreeze.
-     * @return void.
      */
     unFreeze: function(id) {
       this.frozen = _.reject(this.frozen, function(fid) {

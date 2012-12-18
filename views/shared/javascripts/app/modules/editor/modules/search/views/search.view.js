@@ -28,8 +28,6 @@ Neatline.module('Editor.Search.Views', function(
 
     /**
      * Get markup components, initialize the `mirrored` tracker.
-     *
-     * @return void.
      */
     initialize: function() {
 
@@ -47,8 +45,6 @@ Neatline.module('Editor.Search.Views', function(
 
     /**
      * Execute search on `Enter`; otherwise, parse query.
-     *
-     * @return void.
      */
     onKeystroke: function(e) {
       if (e.keyCode == 13) this.executeSearch();
@@ -58,8 +54,6 @@ Neatline.module('Editor.Search.Views', function(
 
     /**
      * Execute search.
-     *
-     * @return void.
      */
     executeSearch: function() {
       this.parseQuery();
@@ -70,8 +64,6 @@ Neatline.module('Editor.Search.Views', function(
 
     /**
      * Activate/deactivate map mirroring.
-     *
-     * @return void.
      */
     toggleMirroring: function() {
       if (!this.mirrored) this.enableMirroring();
@@ -81,8 +73,6 @@ Neatline.module('Editor.Search.Views', function(
 
     /**
      * Activate map mirroring.
-     *
-     * @return void.
      */
     enableMirroring: function() {
 
@@ -100,8 +90,6 @@ Neatline.module('Editor.Search.Views', function(
 
     /**
      * Deactivate map mirroring.
-     *
-     * @return void.
      */
     disableMirroring: function() {
 
@@ -121,8 +109,6 @@ Neatline.module('Editor.Search.Views', function(
 
     /**
      * Parse and publish the search string.
-     *
-     * @return void.
      */
     parseQuery: function() {
 
@@ -159,8 +145,6 @@ Neatline.module('Editor.Search.Views', function(
 
     /**
      * Disable mirroring, clear input, execute default query.
-     *
-     * @return void.
      */
     reset: function() {
       this.input.val('');
@@ -170,8 +154,6 @@ Neatline.module('Editor.Search.Views', function(
 
     /**
      * If input has a value, set button active.
-     *
-     * @return void.
      */
     updateSearchStatus: function() {
       if (this.input.val() === '') this.setSearchInactive();
@@ -181,8 +163,6 @@ Neatline.module('Editor.Search.Views', function(
 
     /**
      * Set search button active.
-     *
-     * @return void.
      */
     setSearchActive: function() {
       this.searchButton.addClass('btn-primary');
@@ -191,8 +171,6 @@ Neatline.module('Editor.Search.Views', function(
 
     /**
      * Set search button inactive.
-     *
-     * @return void.
      */
     setSearchInactive: function() {
       this.searchButton.removeClass('btn-primary');
@@ -201,8 +179,6 @@ Neatline.module('Editor.Search.Views', function(
 
     /**
      * Set search button and input enabled.
-     *
-     * @return void.
      */
     setSearchEnabled: function() {
       this.searchButton.removeAttr('disabled');
@@ -212,8 +188,6 @@ Neatline.module('Editor.Search.Views', function(
 
     /**
      * Set search button and input disabled.
-     *
-     * @return void.
      */
     setSearchDisabled: function() {
       this.searchButton.attr('disabled', 'disabled');
@@ -223,8 +197,6 @@ Neatline.module('Editor.Search.Views', function(
 
     /**
      * Set mirror button active.
-     *
-     * @return void.
      */
     setMirroringEnabled: function() {
       this.mirrorButton.addClass('btn-primary');
@@ -234,8 +206,6 @@ Neatline.module('Editor.Search.Views', function(
 
     /**
      * Set mirror button inactive.
-     *
-     * @return void.
      */
     setMirroringDisabled: function() {
       this.mirrorButton.removeClass('btn-primary');
@@ -245,8 +215,6 @@ Neatline.module('Editor.Search.Views', function(
 
     /**
      * Bold search query with structured format.
-     *
-     * @return void.
      */
     setInputBold: function() {
       this.input.addClass('bold');
@@ -255,8 +223,6 @@ Neatline.module('Editor.Search.Views', function(
 
     /**
      * Un-bold search query with unstructured format.
-     *
-     * @return void.
      */
     setInputUnbold: function() {
       this.input.removeClass('bold');
@@ -264,5 +230,6 @@ Neatline.module('Editor.Search.Views', function(
 
 
   });
+
 
 });

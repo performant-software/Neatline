@@ -19,7 +19,6 @@ Neatline.module('Editor.Geometry', { startWithParent: false,
    *
    * @param {Object} model: The record model.
    * @param {Boolean} focus: If true, focus the map on the edit layer.
-   * @return void.
    */
   Neatline.vent.on('editor:form:open', function(model, focus) {
     Geometry.view.freeze(model.get('id'));
@@ -31,7 +30,6 @@ Neatline.module('Editor.Geometry', { startWithParent: false,
    * Strip editing functionality off the map when a form is closed.
    *
    * @param {Object} model: The record model.
-   * @return void.
    */
   Neatline.vent.on('editor:form:close', function(model) {
     Geometry.view.unFreeze(model.get('id'));
@@ -43,7 +41,6 @@ Neatline.module('Editor.Geometry', { startWithParent: false,
    * Updated editing settings when control inputs are changed on the form.
    *
    * @param {Object} settings: Settings hash.
-   * @return void.
    */
   Neatline.vent.on('editor:form:updateMap', function(settings) {
     Geometry.view.update(settings);
@@ -54,7 +51,6 @@ Neatline.module('Editor.Geometry', { startWithParent: false,
    * When a record is deleted, purge it from the collection and map.
    *
    * @param {Object} model: The deleted record.
-   * @return void.
    */
   Neatline.vent.on('editor:form:delete', function(model) {
     Neatline.Map.collection.remove(model);

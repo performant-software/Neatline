@@ -29,8 +29,6 @@ Neatline.module('Editor.Records.Views', function(
 
     /**
      * Compile templates.
-     *
-     * @return void.
      */
     initialize: function() {
       this.listTemplate = this.getListTemplate();
@@ -42,7 +40,6 @@ Neatline.module('Editor.Records.Views', function(
      * Render record listings.
      *
      * @param {Object} records: The records collection.
-     * @return void.
      */
     show: function(records) {
 

@@ -21,7 +21,6 @@ Neatline.module('Editor.Form.StyleTab.Views', function(
      * Get element markup.
      *
      * @param {Object|DOMElement} form: The form element.
-     * @return void.
      */
     getElements: function(form) {
       this.vectorColor    = form.find('input[name="vector-color"]');
@@ -43,7 +42,6 @@ Neatline.module('Editor.Form.StyleTab.Views', function(
      * Populate input elements with model values.
      *
      * @param {Object} model: The record model.
-     * @return void.
      */
     render: function(model) {
       this.vectorColor.   val(model.get('vector_color'));
@@ -65,7 +63,6 @@ Neatline.module('Editor.Form.StyleTab.Views', function(
      * Return title and body values object.
      *
      * @param {Object}: The values.
-     * @return void.
      */
     gather: function(model) {
       return {

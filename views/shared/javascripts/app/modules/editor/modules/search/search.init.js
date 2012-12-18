@@ -16,8 +16,6 @@ Neatline.module('Editor.Search', function(
 
   /**
    * Instantiate the search view.
-   *
-   * @return void.
    */
   Search.addInitializer(function() {
     this.view = new Search.Views.Search({ el: '#search' });

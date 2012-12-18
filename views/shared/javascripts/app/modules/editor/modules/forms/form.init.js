@@ -16,8 +16,6 @@ Neatline.module('Editor.Form', function(
 
   /**
    * Instantiate the form view.
-   *
-   * @return void.
    */
   Form.addInitializer(function() {
     this.view = new Form.Views.RecordForm({ el: '#content' });

@@ -21,7 +21,6 @@ Neatline.module('Editor.Form.SpatialTab.Views', function(
      * Get element markup.
      *
      * @param {Object|DOMElement} form: The form element.
-     * @return void.
      */
     getElements: function(form) {
 
@@ -50,7 +49,6 @@ Neatline.module('Editor.Form.SpatialTab.Views', function(
      * Populate input elements with model values.
      *
      * @param {Object} model: The record model.
-     * @return void.
      */
     render: function(model) {
       this.resetMapControl();
@@ -62,7 +60,6 @@ Neatline.module('Editor.Form.SpatialTab.Views', function(
      * Return title and body values object.
      *
      * @param {Object}: The values.
-     * @return void.
      */
     gather: function(model) {
       return {
@@ -73,8 +70,6 @@ Neatline.module('Editor.Form.SpatialTab.Views', function(
 
     /**
      * Collect and publish current edit geometry settings.
-     *
-     * @return void.
      */
     updateMap: function() {
 
@@ -129,7 +124,6 @@ Neatline.module('Editor.Form.SpatialTab.Views', function(
      * Update the coverage textarea.
      *
      * @param {String} coverage: The new KML.
-     * @return void.
      */
     setCoverage: function(coverage) {
       this.coverage.val(coverage);

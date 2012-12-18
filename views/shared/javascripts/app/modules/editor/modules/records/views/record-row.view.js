@@ -28,8 +28,6 @@ Neatline.module('Editor.Records.Views', function(
 
     /**
      * Set instance model, render the template.
-     *
-     * @return void.
      */
     initialize: function() {
 
@@ -46,8 +44,6 @@ Neatline.module('Editor.Records.Views', function(
 
     /**
      * When the listing is clicked, open the edit form for the record.
-     *
-     * @return void.
      */
     openForm: function() {
       Neatline.vent.trigger('editor:records:openForm', this.model);

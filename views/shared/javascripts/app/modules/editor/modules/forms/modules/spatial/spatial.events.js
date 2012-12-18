@@ -18,7 +18,6 @@ Neatline.module('Editor.Form.SpatialTab', function(
    * Render element values when the form is opened.
    *
    * @param {Object|DOMElement} form: The form element.
-   * @return void.
    */
   Neatline.vent.on('editor:form:initialize', function(form) {
     SpatialTab.view.getElements(form);
@@ -29,7 +28,6 @@ Neatline.module('Editor.Form.SpatialTab', function(
    * Render element values when the form is opened.
    *
    * @param {Object} model: The record model.
-   * @return void.
    */
   Neatline.vent.on('editor:form:open', function(model) {
     SpatialTab.view.render(model);
@@ -39,8 +37,6 @@ Neatline.module('Editor.Form.SpatialTab', function(
   /**
    * Before the form is saved, broadcast the tab's data hash to be added
    * to the  aggregated hash on the form view.
-   *
-   * @return void.
    */
   Neatline.vent.on('editor:form:getData', function() {
     Neatline.vent.trigger('editor:form:addData',
@@ -54,7 +50,6 @@ Neatline.module('Editor.Form.SpatialTab', function(
    * changed.
    *
    * @param {String} coverage: The new KML.
-   * @return void.
    */
   Neatline.vent.on('editor:geometry:newCoverage', function(coverage) {
     SpatialTab.view.setCoverage(coverage);

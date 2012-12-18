@@ -16,8 +16,6 @@ Neatline.module('Editor.Form.TextTab', function(
 
   /**
    * Instantiate the "Text" tab view.
-   *
-   * @return void.
    */
   TextTab.addInitializer(function() {
     this.view = new TextTab.Views.Tab({ el: '#form-text' });

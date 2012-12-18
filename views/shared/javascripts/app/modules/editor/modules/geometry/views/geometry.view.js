@@ -18,7 +18,6 @@ _.extend(Neatline.Map.Views.Map.prototype, {
    *
    * @param {Object} model: The record model.
    * @param {Boolean} focus: If true, focus the map on the edit layer.
-   * @return void.
    */
   startEdit: function(model, focus) {
 
@@ -71,8 +70,6 @@ _.extend(Neatline.Map.Views.Map.prototype, {
 
   /**
    * Deactivate and remove all editing controls.
-   *
-   * @return void.
    */
   endEdit: function() {
 
@@ -94,7 +91,6 @@ _.extend(Neatline.Map.Views.Map.prototype, {
    * http://openlayers.org/dev/examples/modify-feature.html
    *
    * @param {Object} settings: Settings for the controls.
-   * @return void.
    */
   update: function(settings) {
 
@@ -175,8 +171,6 @@ _.extend(Neatline.Map.Views.Map.prototype, {
 
   /**
    * Publish updated KML.
-   *
-   * @return void.
    */
   publish: function() {
 
@@ -199,7 +193,6 @@ _.extend(Neatline.Map.Views.Map.prototype, {
    * Delete a feature.
    *
    * @param {Object} feature: The selected feature.
-   * @return void.
    */
   remove: function(feature) {
     this.controls.del.unselectFeature(feature);
@@ -212,7 +205,6 @@ _.extend(Neatline.Map.Views.Map.prototype, {
    * Remove a layer by model.
    *
    * @param {Object} model: The model of the deleted record.
-   * @return void.
    */
   removeLayerByModel: function(model) {
 

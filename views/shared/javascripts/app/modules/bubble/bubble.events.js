@@ -18,7 +18,6 @@ Neatline.module('Bubble', function(
    * Show bubble on feature mouseenter.
    *
    * @param {Object} model: The record model.
-   * @return void.
    */
   Neatline.vent.on('map:highlight', function(model) {
     Bubble.view.show(model);
@@ -27,8 +26,6 @@ Neatline.module('Bubble', function(
 
   /**
    * Hide bubble on feature mouseleave.
-   *
-   * @return void.
    */
   Neatline.vent.on('map:unhighlight', function() {
     Bubble.view.hide();
@@ -37,8 +34,6 @@ Neatline.module('Bubble', function(
 
   /**
    * Lock bubble on feature click on.
-   *
-   * @return void.
    */
   Neatline.vent.on('map:select', function() {
     Bubble.view.freeze();
@@ -47,8 +42,6 @@ Neatline.module('Bubble', function(
 
   /**
    * Lock bubble on feature click off.
-   *
-   * @return void.
    */
   Neatline.vent.on('map:unselect', function() {
     Bubble.view.thaw();
@@ -57,8 +50,6 @@ Neatline.module('Bubble', function(
 
   /**
    * Close the bubble when an edit form is closed.
-   *
-   * @return void.
    */
   Neatline.vent.on('editor:form:close', function() {
     Bubble.view.activate();
@@ -68,8 +59,6 @@ Neatline.module('Bubble', function(
 
   /**
    * Close and deactivate the bubble when the "Spatial" tab is active.
-   *
-   * @return void.
    */
   Neatline.vent.on('editor:form:spatialSelect', function() {
     Bubble.view.thaw();
@@ -79,8 +68,6 @@ Neatline.module('Bubble', function(
 
   /**
    * Reactivate the bubble when the "Spatial" tab is inactive.
-   *
-   * @return void.
    */
   Neatline.vent.on('editor:form:spatialDeselect', function(model) {
     Bubble.view.activate();

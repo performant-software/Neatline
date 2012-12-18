@@ -16,8 +16,6 @@ Neatline.module('Editor.Records', function(
 
   /**
    * Instantiate the records collection and view.
-   *
-   * @return void.
    */
   Records.addInitializer(function() {
 

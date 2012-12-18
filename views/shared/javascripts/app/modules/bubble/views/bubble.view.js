@@ -26,9 +26,7 @@ Neatline.module('Bubble.Views', function(
 
 
     /**
-     * Get markup.
-     *
-     * @return void.
+     * Initialize trackers, get markup.
      */
     initialize: function() {
 
@@ -50,7 +48,6 @@ Neatline.module('Bubble.Views', function(
      * Render values, inject bubble, add move listener.
      *
      * @param {Object} model: The record model.
-     * @return void.
      */
     show: function(model) {
 
@@ -79,8 +76,6 @@ Neatline.module('Bubble.Views', function(
 
     /**
      * Hide the bubble.
-     *
-     * @return void.
      */
     hide: function() {
       if (!this.frozen) this.thaw();
@@ -91,7 +86,6 @@ Neatline.module('Bubble.Views', function(
      * Freeze the bubble in place.
      *
      * @param {Object} model: The record model.
-     * @return void.
      */
     freeze: function() {
 
@@ -109,7 +103,6 @@ Neatline.module('Bubble.Views', function(
      * Unfreeze the bubble.
      *
      * @param {Object} model: The record model.
-     * @return void.
      */
     thaw: function() {
 
@@ -128,7 +121,6 @@ Neatline.module('Bubble.Views', function(
      * Render position.
      *
      * @param {Object} evt: The mousemove event.
-     * @return void.
      */
     position: function(evt) {
       var x = evt.clientX + this.options.padding.x;
@@ -139,8 +131,6 @@ Neatline.module('Bubble.Views', function(
 
     /**
      * Measure the size of the window.
-     *
-     * @return void.
      */
     measureWindow: function() {
       this.wh = this.window.height();
@@ -150,8 +140,6 @@ Neatline.module('Bubble.Views', function(
 
     /**
      * Enable the bubble.
-     *
-     * @return void.
      */
     activate: function() {
       this.active = true;
@@ -160,8 +148,6 @@ Neatline.module('Bubble.Views', function(
 
     /**
      * Disable the bubble
-     *
-     * @return void.
      */
     deactivate: function() {
       this.active = false;

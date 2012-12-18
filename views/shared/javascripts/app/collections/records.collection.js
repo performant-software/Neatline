@@ -26,7 +26,7 @@ Neatline.module('Collections', function(
      * model with the same id is in the collection and, if so, update it.
      */
     initialize: function() {
-      this.model.prototype.on('change', _.bind(function(model) {
+      this.model.prototype.bind('change', _.bind(function(model) {
         this.updateModel(model.toJSON());
       }, this));
     },

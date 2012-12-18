@@ -18,7 +18,6 @@ Neatline.module('Editor.Form', function(
    * Show the form when the listing for a record is clicked.
    *
    * @param {Object} model: The record model.
-   * @return void.
    */
   Neatline.vent.on('editor:records:openForm', function(model) {
     Form.view.show(model, true);
@@ -29,7 +28,6 @@ Neatline.module('Editor.Form', function(
    * Show the form when a map geometry is clicked.
    *
    * @param {Object} model: The record model.
-   * @return void.
    */
   Neatline.vent.on('map:select', function(model) {
     Form.view.show(model, false);
@@ -40,7 +38,6 @@ Neatline.module('Editor.Form', function(
    * Merge tab data onto the aggregate hash on the form view.
    *
    * @param {Object} data: The data hash.
-   * @return void.
    */
   Neatline.vent.on('editor:form:addData', function(data) {
     _.extend(Form.view.data, data);

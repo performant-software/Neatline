@@ -16,8 +16,6 @@ Neatline.module('Editor.Form.StyleTab', function(
 
   /**
    * Instantiate the "Style" tab view.
-   *
-   * @return void.
    */
   StyleTab.addInitializer(function() {
     this.view = new StyleTab.Views.Tab({ el: '#form-style' });

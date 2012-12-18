@@ -15,9 +15,7 @@ Neatline.module('Editor.Form.SpatialTab', function(
 
 
   /**
-   * Instantiate the "Text" tab view.
-   *
-   * @return void.
+   * Instantiate the "Spatial" tab view.
    */
   SpatialTab.addInitializer(function() {
     this.view = new SpatialTab.Views.Tab({ el: '#form-text' });

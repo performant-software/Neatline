@@ -16,12 +16,10 @@ Neatline.module('Editor.Geometry', { startWithParent: false,
 
   /**
    * Alias the exhibit map view and collection.
-   *
-   * @return void.
    */
   Geometry.addInitializer(function() {
-    this.view = Neatline.Map.view;
     this.collection = Neatline.Map.collection;
+    this.view = Neatline.Map.view;
   });
 
 
