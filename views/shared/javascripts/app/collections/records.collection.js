@@ -28,26 +28,19 @@ Neatline.module('Collections', function(
 
 
     /**
-     * Update the collection.
+     * Fetch a subset of the collection from the server.
      *
-     * @param {Object} params: Query parameters for the records API:
+     * @param {Object} params: Query parameters for the records API.
      *
      *  - `extent`: The current map viewport extent, as a WKT polygon.
      *  - `zoom`: The current zoom level of the map, as an integer.
-     *  - `keywords` (optional): A raw-text search query.
-     *  - `tags` (optional): A comma-delimited list of tags.
      *
      * @param {Function} cb: Called when the fetch() completes.
      * @return void.
      */
     getCollection: function(params, cb) {
-
-      params = params || {};
-      params.id = __exhibit.id;
-
-      // Get records.
-      this.fetch({ data: $.param(params), success: cb });
-
+      var data = $.param(_.extend({ id: __exhibit.id }, params));
+      this.fetch({ data: data, success: cb });
     },
 
 
@@ -66,23 +59,14 @@ Neatline.module('Collections', function(
      */
     getModel: function(id, cb) {
 
-      cb = cb || function() {};
-
-      // Try to get existing model.
-      // --------------------------
-
+      // Get existing model.
       var model = this.get(id);
       if (model) cb(model);
 
-      // If absent, create and fetch it.
-      // -------------------------------
-
       else {
 
-        // Create new model.
+        // Create new model, populate.
         model = new this.model({ id: id });
-
-        // Fetch data.
         model.fetch({ success: function() {
           cb(model);
         }});
