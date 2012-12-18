@@ -10,31 +10,29 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Editor.Form.StyleTab.Views', function(
-  Views, StyleTab, Backbone, Marionette, $, _) {
+Neatline.module('Editor.Forms.Views', function(
+  Views, Forms, Backbone, Marionette, $, _) {
 
 
-  Views.Tab = Backbone.View.extend({
+  Views.StyleTab = Backbone.View.extend({
 
 
     /**
      * Get element markup.
-     *
-     * @param {Object|DOMElement} form: The form element.
      */
-    getElements: function(form) {
-      this.vectorColor    = form.find('input[name="vector-color"]');
-      this.strokeColor    = form.find('input[name="stroke-color"]');
-      this.selectColor    = form.find('input[name="select-color"]');
-      this.vectorOpacity  = form.find('input[name="vector-opacity"]');
-      this.strokeOpacity  = form.find('input[name="stroke-opacity"]');
-      this.selectOpacity  = form.find('input[name="select-opacity"]');
-      this.imageOpacity   = form.find('input[name="image-opacity"]');
-      this.strokeWidth    = form.find('input[name="stroke-width"]');
-      this.pointRadius    = form.find('input[name="point-radius"]');
-      this.pointImage     = form.find('input[name="point-image"]');
-      this.minZoom        = form.find('input[name="min-zoom"]');
-      this.maxZoom        = form.find('input[name="max-zoom"]');
+    initialize: function() {
+      this.vectorColor    = this.$el.find('input[name="vector-color"]');
+      this.strokeColor    = this.$el.find('input[name="stroke-color"]');
+      this.selectColor    = this.$el.find('input[name="select-color"]');
+      this.vectorOpacity  = this.$el.find('input[name="vector-opacity"]');
+      this.strokeOpacity  = this.$el.find('input[name="stroke-opacity"]');
+      this.selectOpacity  = this.$el.find('input[name="select-opacity"]');
+      this.imageOpacity   = this.$el.find('input[name="image-opacity"]');
+      this.strokeWidth    = this.$el.find('input[name="stroke-width"]');
+      this.pointRadius    = this.$el.find('input[name="point-radius"]');
+      this.pointImage     = this.$el.find('input[name="point-image"]');
+      this.minZoom        = this.$el.find('input[name="min-zoom"]');
+      this.maxZoom        = this.$el.find('input[name="max-zoom"]');
     },
 
 

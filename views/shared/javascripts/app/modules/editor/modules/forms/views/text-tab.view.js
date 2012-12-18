@@ -10,21 +10,19 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Editor.Form.TextTab.Views', function(
-  Views, TextTab, Backbone, Marionette, $, _) {
+Neatline.module('Editor.Forms.Views', function(
+  Views, Forms, Backbone, Marionette, $, _) {
 
 
-  Views.Tab = Backbone.View.extend({
+  Views.TextTab = Backbone.View.extend({
 
 
     /**
      * Get element markup.
-     *
-     * @param {Object|DOMElement} form: The form element.
      */
-    getElements: function(form) {
-      this.title = form.find('textarea[name="title"]');
-      this.body = form.find('textarea[name="body"]');
+    initialize: function() {
+      this.title =  this.$el.find('textarea[name="title"]');
+      this.body =   this.$el.find('textarea[name="body"]');
     },
 
 

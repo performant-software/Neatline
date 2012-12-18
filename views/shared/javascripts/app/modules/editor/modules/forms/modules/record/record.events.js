@@ -10,8 +10,8 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Editor.Form', function(
-  Form, Editor, Backbone, Marionette, $, _) {
+Neatline.module('Editor.Forms.Record', function(
+  Record, Forms, Backbone, Marionette, $, _) {
 
 
   /**
@@ -20,7 +20,7 @@ Neatline.module('Editor.Form', function(
    * @param {Object} model: The record model.
    */
   Neatline.vent.on('editor:records:openForm', function(model) {
-    Form.view.show(model, true);
+    Record.view.show(model, true);
   });
 
 
@@ -30,7 +30,7 @@ Neatline.module('Editor.Form', function(
    * @param {Object} model: The record model.
    */
   Neatline.vent.on('map:select', function(model) {
-    Form.view.show(model, false);
+    Record.view.show(model, false);
   });
 
 
@@ -40,7 +40,7 @@ Neatline.module('Editor.Form', function(
    * @param {Object} data: The data hash.
    */
   Neatline.vent.on('editor:form:addData', function(data) {
-    _.extend(Form.view.data, data);
+    _.extend(Record.view.data, data);
   });
 
 

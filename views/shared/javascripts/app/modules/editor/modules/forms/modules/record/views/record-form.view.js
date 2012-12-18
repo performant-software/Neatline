@@ -10,11 +10,11 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Editor.Form.Views', function(
-  Views, Form, Backbone, Marionette, $, _) {
+Neatline.module('Editor.Forms.Record.Views', function(
+  Views, Record, Backbone, Marionette, $, _) {
 
 
-  Views.AbstractForm = Backbone.View.extend({
+  Views.RecordForm = Backbone.View.extend({
 
 
     options: {
@@ -55,16 +55,24 @@ Neatline.module('Editor.Form.Views', function(
       this.saveButton =     this.form.find('a[name="save"]');
 
       // Delete modal:
-      this.deleteModal =    this.form.find('#deleteConfirm');
+      this.deleteModal = this.form.find('#deleteConfirm');
 
       // Groups:
-      this.lead =           this.form.find('p.lead');
-      this.tabs =           this.form.find('ul.nav a');
+      this.lead = this.form.find('p.lead');
+      this.tabs = this.form.find('ul.nav a');
 
-      // Bind input listeners.
-      Neatline.vent.trigger('editor:form:initialize', this.form);
+      // Startup:
+      this.instantiateTabs();
       this.bindEvents();
 
+    },
+
+
+    /**
+     * Construct the tab views.
+     */
+    instantiateTabs: function() {
+      console.log('tabs');
     },
 
 
@@ -188,12 +196,8 @@ Neatline.module('Editor.Form.Views', function(
       // Gather data from tab views.
       Neatline.vent.trigger('editor:form:getData');
 
-      // Propagate the new data to all collections.
-      Neatline.vent.trigger('editor:form:updateRecord',
-        this.model.get('id'), this.data);
-
       // Save the model.
-      this.model.save({}, {
+      this.model.save(this.data, {
 
         // Update the header.
         success: _.bind(function() {

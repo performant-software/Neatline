@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * "Text" tab view.
+ * "Spatial" tab view.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -10,35 +10,33 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Editor.Form.SpatialTab.Views', function(
-  Views, SpatialTab, Backbone, Marionette, $, _) {
+Neatline.module('Editor.Forms.Views', function(
+  Views, Forms, Backbone, Marionette, $, _) {
 
 
-  Views.Tab = Backbone.View.extend({
+  Views.SpatialTab = Backbone.View.extend({
 
 
     /**
      * Get element markup.
-     *
-     * @param {Object|DOMElement} form: The form element.
      */
-    getElements: function(form) {
+    initialize: function() {
 
       // Elements:
-      this.pan          = form.find('input[value="pan"]');
-      this.point        = form.find('input[value="point"]');
-      this.line         = form.find('input[value="line"]');
-      this.poly         = form.find('input[value="poly"]');
-      this.regPoly      = form.find('input[value="regPoly"]');
-      this.modify       = form.find('input[value="modify"]');
-      this.remove       = form.find('input[value="remove"]');
-      this.coverage     = form.find('textarea[name="coverage"]');
-      this.sides        = form.find('input[name="sides"]');
-      this.irregular    = form.find('input[name="irregular"]');
-      this.snap         = form.find('input[name="snap"]');
+      this.pan          = this.$el.find('input[value="pan"]');
+      this.point        = this.$el.find('input[value="point"]');
+      this.line         = this.$el.find('input[value="line"]');
+      this.poly         = this.$el.find('input[value="poly"]');
+      this.regPoly      = this.$el.find('input[value="regPoly"]');
+      this.modify       = this.$el.find('input[value="modify"]');
+      this.remove       = this.$el.find('input[value="remove"]');
+      this.coverage     = this.$el.find('textarea[name="coverage"]');
+      this.sides        = this.$el.find('input[name="sides"]');
+      this.irregular    = this.$el.find('input[name="irregular"]');
+      this.snap         = this.$el.find('input[name="snap"]');
 
       // Listen for edit mode changes.
-      form.find('div.geometry input').on('change keyup',
+      this.$el.find('div.geometry input').on('change keyup',
         _.bind(function(e) { this.updateMap(); }, this)
       );
 
