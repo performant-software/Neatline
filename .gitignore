@@ -3,6 +3,7 @@ spec/javascripts/helpers/components/
 views/shared/javascripts/components/
 views/shared/javascripts/tests/shared/helpers/components/
 views/shared/javascripts/payloads/
+views/shared/css/payloads/
 views/shared/css/img/
 node_modules/
 build/api/
