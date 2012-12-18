@@ -100,6 +100,24 @@ describe('Record Collection', function() {
       // to the provided callback without any interaction with the server.
       // ------------------------------------------------------------------
 
+      // Create a collection and a model.
+      var coll = new Neatline.Collections.Records();
+      var model = coll.create({ id: 1, key: 'val' });
+
+      // Fetch success callback.
+      var callback = function(model) {
+        expect(model.get('id')).toEqual(1);
+        expect(model.get('key')).toEqual('val');
+        done = true;
+      };
+
+      // Get existing model.
+      var c1 = _t.server.requests.length;
+      coll.getModel(1, callback);
+      var c2 = _t.server.requests.length;
+
+      // No new request.
+      expect(c2).toEqual(c1);
 
     });
 
@@ -113,6 +131,28 @@ describe('Record Collection', function() {
       // and then passed to the supplied callback when it has data.
       // ------------------------------------------------------------------
 
+      var done = false;
+
+      // Create a collection.
+      var coll = new Neatline.Collections.Records();
+
+      // Fetch success callback.
+      var callback = function(model) {
+        expect(model.get('title')).toEqual('title4');
+        done = true;
+      };
+
+      // Get absent model.
+      coll.getModel(1, callback);
+
+      // Capture outoing GET request.
+      var request = _t.getLastRequest();
+      _t.respondLast200(_t.json.records.standard);
+      waitsFor(function() { return done; });
+
+      // Check method and route.
+      expect(request.method).toEqual('GET');
+      expect(request.url).toEqual('/api/1');
 
     });
 
@@ -128,6 +168,13 @@ describe('Record Collection', function() {
       // updated with the passed object.
       // ------------------------------------------------------------------
 
+      // Create a collection and a model.
+      var coll = new Neatline.Collections.Records();
+      coll.create({ id: 1 });
+
+      // Update.
+      coll.updateModel({ id: 1, key: 'val' });
+      expect(coll.get(1).get('key')).toEqual('val');
 
     });
 
