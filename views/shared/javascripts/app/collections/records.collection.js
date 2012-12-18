@@ -40,7 +40,7 @@ Neatline.module('Collections', function(
      *  - `extent`: The current map viewport extent, as a WKT polygon.
      *  - `zoom`: The current zoom level of the map, as an integer.
      *
-     * @param {Function} cb: Called when the fetch() completes.
+     * @param {Function} cb: Called when `fetch` completes.
      */
     getCollection: function(params, cb) {
       var data = $.param(_.extend({ id: __exhibit.id }, params));
