@@ -19,10 +19,12 @@ Neatline.module('Editor.Forms.Views', function(
 
     /**
      * Get element markup.
+     *
+     * @param {Object|DOMElement} form: The form element.
      */
-    initialize: function() {
-      this.title =  this.$el.find('textarea[name="title"]');
-      this.body =   this.$el.find('textarea[name="body"]');
+    getElements: function(form) {
+      this.title =  form.find('textarea[name="title"]');
+      this.body =   form.find('textarea[name="body"]');
     },
 
 

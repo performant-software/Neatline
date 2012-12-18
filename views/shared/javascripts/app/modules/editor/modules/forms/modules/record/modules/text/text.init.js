@@ -18,9 +18,7 @@ Neatline.module('Editor.Forms.Record.Text', function(
    * Instantiate the "Text" tab view.
    */
   Text.addInitializer(function() {
-    this.view = new Neatline.Editor.Forms.Views.TextTab({
-      el: '#record-form-text'
-    });
+    this.view = new Neatline.Editor.Forms.Views.TextTab();
   });
 
 

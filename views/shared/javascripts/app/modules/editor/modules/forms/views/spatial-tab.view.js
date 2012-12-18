@@ -19,8 +19,10 @@ Neatline.module('Editor.Forms.Views', function(
 
     /**
      * Get element markup.
+     *
+     * @param {Object|DOMElement} form: The form element.
      */
-    initialize: function() {
+    getElements: function() {
 
       // Elements:
       this.pan          = this.$el.find('input[value="pan"]');

@@ -18,9 +18,7 @@ Neatline.module('Editor.Forms.Record.Spatial', function(
    * Instantiate the "Spatial" tab view.
    */
   Spatial.addInitializer(function() {
-    this.view = new Neatline.Editor.Forms.Views.SpatialTab({
-      el: '#record-form-spatial'
-    });
+    this.view = new Neatline.Editor.Forms.Views.SpatialTab();
   });
 
 

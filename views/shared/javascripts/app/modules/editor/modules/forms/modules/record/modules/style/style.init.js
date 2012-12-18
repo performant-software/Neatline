@@ -18,9 +18,7 @@ Neatline.module('Editor.Forms.Record.Style', function(
    * Instantiate the "Style" tab view.
    */
   Style.addInitializer(function() {
-    this.view = new Neatline.Editor.Forms.Views.StyleTab({
-      el: '#record-form-style'
-    });
+    this.view = new Neatline.Editor.Forms.Views.StyleTab();
   });
 
 

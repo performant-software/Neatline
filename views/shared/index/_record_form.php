@@ -14,36 +14,40 @@
 ?>
 
 
-<form id="record-form" class="form-stacked">
+<script id="record-form" type="text/templates">
 
-  <!-- Close button. -->
-  <button type="button" class="close" data-dismiss="modal"
-    aria-hidden="true">&times;</button>
+  <form class="form-stacked">
 
-  <p class="lead"></p>
+    <!-- Close button. -->
+    <button type="button" class="close" data-dismiss="modal"
+      aria-hidden="true">&times;</button>
 
-  <ul class="nav nav-pills">
-    <li><a href="#record-form-text" data-toggle="tab">Text</a></li>
-    <li><a href="#record-form-spatial" data-toggle="tab">Spatial</a></li>
-    <li><a href="#record-form-style" data-toggle="tab">Style</a></li>
-  </ul>
+    <p class="lead"></p>
 
-  <div class="tab-content">
+    <ul class="nav nav-pills">
+      <li><a href="#record-form-text" data-toggle="tab">Text</a></li>
+      <li><a href="#record-form-spatial" data-toggle="tab">Spatial</a></li>
+      <li><a href="#record-form-style" data-toggle="tab">Style</a></li>
+    </ul>
 
-    <div class="tab-pane text" id="record-form-text">
-      <?php echo $this->partial('index/_text_tab.php'); ?>
+    <div class="tab-content">
+
+      <div class="tab-pane text" id="record-form-text">
+        <?php echo $this->partial('index/_text_tab.php'); ?>
+      </div>
+
+      <div class="tab-pane spatial" id="record-form-spatial">
+        <?php echo $this->partial('index/_spatial_tab.php'); ?>
+      </div>
+
+      <div class="tab-pane style" id="record-form-style">
+        <?php echo $this->partial('index/_style_tab.php'); ?>
+      </div>
+
     </div>
 
-    <div class="tab-pane spatial" id="record-form-spatial">
-      <?php echo $this->partial('index/_spatial_tab.php'); ?>
-    </div>
+    <?php echo $this->partial('index/_form_menu.php'); ?>
 
-    <div class="tab-pane style" id="record-form-style">
-      <?php echo $this->partial('index/_style_tab.php'); ?>
-    </div>
+  </form>
 
-  </div>
-
-  <?php echo $this->partial('index/_form_menu.php'); ?>
-
-</form>
+</script>

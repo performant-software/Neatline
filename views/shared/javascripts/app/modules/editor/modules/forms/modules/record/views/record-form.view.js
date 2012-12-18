@@ -25,6 +25,11 @@ Neatline.module('Editor.Forms.Record.Views', function(
     },
 
 
+    getTemplate: function() {
+      return _.template($('#record-form').html());
+    },
+
+
     /**
      * Render the form template, initialize trackers, get element markup.
      */
@@ -37,31 +42,22 @@ Neatline.module('Editor.Forms.Record.Views', function(
       this.open     = false;  // True if the form is currently open.
       this.data     = {};     // Aggregate data gathered from tabs.
 
-      // Buttons:
-      this.closeButton =    this.$el.find('button.close');
-      this.deleteButton =   this.$el.find('a[name="delete"]');
-      this.confirmButton =  this.$el.find('button[name="delete"]');
-      this.saveButton =     this.$el.find('a[name="save"]');
+      // Render template.
+      this.form = $(this.getTemplate()());
 
-      // Delete modal:
-      this.deleteModal = this.$el.find('#deleteConfirm');
+      // Markup:
+      this.closeButton =    this.form.find('button.close');
+      this.deleteButton =   this.form.find('a[name="delete"]');
+      this.confirmButton =  this.form.find('button[name="delete"]');
+      this.saveButton =     this.form.find('a[name="save"]');
+      this.deleteModal =    this.form.find('#deleteConfirm');
+      this.lead =           this.form.find('p.lead');
+      this.tabs =           this.form.find('ul.nav a');
 
-      // Groups:
-      this.lead = this.$el.find('p.lead');
-      this.tabs = this.$el.find('ul.nav a');
-
-      // Startup:
-      this.instantiateTabs();
+      // Bind input listeners.
+      Neatline.vent.trigger('editor:form:initialize', this.form);
       this.bindEvents();
 
-    },
-
-
-    /**
-     * Construct the tab views.
-     */
-    instantiateTabs: function() {
-      console.log('tabs');
     },
 
 
@@ -92,6 +88,7 @@ Neatline.module('Editor.Forms.Record.Views', function(
 
       // Save button:
       this.saveButton.click(_.bind(function(e) {
+        console.log('save');
         e.preventDefault();
         this.save();
       }, this));
@@ -101,6 +98,28 @@ Neatline.module('Editor.Forms.Record.Views', function(
         e.preventDefault();
         this.remove();
       }, this));
+
+    },
+
+
+    /**
+     * Show the form; block if the form is already open.
+     *
+     * @param {Object} model: The record model.
+     * @param {Boolean} focus: If true, focus the map on the edit layer.
+     */
+    show: function(model, focus) {
+
+      // Break if open.
+      if (this.open) return;
+
+      // Render.
+      this.model = model;
+      this.render();
+
+      // Publish, set trackers.
+      Neatline.vent.trigger('editor:form:open', model, focus);
+      this.open = true;
 
     },
 
@@ -119,30 +138,8 @@ Neatline.module('Editor.Forms.Record.Views', function(
         Neatline.vent.trigger('editor:form:spatialSelect');
       }
 
-      this.$el.show();
+      this.$el.html(this.form);
       return this;
-
-    },
-
-
-    /**
-     * Show the form; block if the form is already open.
-     *
-     * @param {Object} model: The record model.
-     * @param {Boolean} focus: If true, focus the map on the edit layer.
-     */
-    show: function(model, focus) {
-
-      // Break if open.
-      if (this.open) return;
-      this.model = model;
-
-      // Render to editor.
-      Neatline.editorRegion.show(this);
-
-      // Publish, set trackers.
-      Neatline.vent.trigger('editor:form:open', model, focus);
-      this.open = true;
 
     },
 
@@ -152,7 +149,7 @@ Neatline.module('Editor.Forms.Record.Views', function(
      */
     close: function() {
       Neatline.vent.trigger('editor:form:close', this.model);
-      this.$el.hide();
+      this.form.hide();
       this.model = null;
       this.open = false;
     },
@@ -171,13 +168,10 @@ Neatline.module('Editor.Forms.Record.Views', function(
 
       // PUT:
       this.model.save(this.data, {
-
-        // Update the header.
         success: _.bind(function() {
           this.updateHead();
           this.setSaved();
         }, this)
-
       });
 
       // Clear data.

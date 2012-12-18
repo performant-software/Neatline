@@ -15,10 +15,19 @@ Neatline.module('Editor.Forms.Record.Style', function(
 
 
   /**
+   * Get input markup when the form is initialized.
+   *
+   * @param {Object|DOMElement} form: The form element.
+   */
+  Neatline.vent.on('editor:form:initialize', function(form) {
+    Style.view.getElements(form);
+  });
+
+
+  /**
    * Render element values when the form is opened.
    *
    * @param {Object} model: The record model.
-   * @return void.
    */
   Neatline.vent.on('editor:form:open', function(model) {
     Style.view.render(model);
@@ -28,8 +37,6 @@ Neatline.module('Editor.Forms.Record.Style', function(
   /**
    * Before the form is saved, broadcast the tab's data hash to be added
    * to the aggregated hash on the form view.
-   *
-   * @return void.
    */
   Neatline.vent.on('editor:form:getData', function() {
     Neatline.vent.trigger('editor:form:addData',

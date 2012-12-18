@@ -19,8 +19,10 @@ Neatline.module('Editor.Forms.Views', function(
 
     /**
      * Get element markup.
+     *
+     * @param {Object|DOMElement} form: The form element.
      */
-    initialize: function() {
+    getElements: function() {
       this.vectorColor    = this.$el.find('input[name="vector-color"]');
       this.strokeColor    = this.$el.find('input[name="stroke-color"]');
       this.selectColor    = this.$el.find('input[name="select-color"]');
