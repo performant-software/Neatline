@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Record form "Style" tab events.
+ * "Text" tab events.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -10,17 +10,17 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Editor.Forms.Record.Style', function(
-  Style, Record, Backbone, Marionette, $, _) {
+Neatline.module('Editor.Form.SpatialTab', function(
+  SpatialTab, Form, Backbone, Marionette, $, _) {
 
 
   /**
-   * Get input markup when the form is initialized.
+   * Render element values when the form is opened.
    *
    * @param {Object|DOMElement} form: The form element.
    */
   Neatline.vent.on('editor:form:initialize', function(form) {
-    Style.view.getElements(form);
+    SpatialTab.view.getElements(form);
   });
 
 
@@ -30,18 +30,29 @@ Neatline.module('Editor.Forms.Record.Style', function(
    * @param {Object} model: The record model.
    */
   Neatline.vent.on('editor:form:open', function(model) {
-    Style.view.render(model);
+    SpatialTab.view.render(model);
   });
 
 
   /**
    * Before the form is saved, broadcast the tab's data hash to be added
-   * to the aggregated hash on the form view.
+   * to the  aggregated hash on the form view.
    */
   Neatline.vent.on('editor:form:getData', function() {
     Neatline.vent.trigger('editor:form:addData',
-      Style.view.gather()
+      SpatialTab.view.gather()
     );
+  });
+
+
+  /**
+   * Updated the "Spatial Data" field when the record's map geometries are
+   * changed.
+   *
+   * @param {String} coverage: The new KML.
+   */
+  Neatline.vent.on('editor:geometry:newCoverage', function(coverage) {
+    SpatialTab.view.setCoverage(coverage);
   });
 
 

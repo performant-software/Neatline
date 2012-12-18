@@ -15,10 +15,12 @@
 
 <div id="editor">
 
+  <!--
   <header>
     <p class="lead"><?php echo $exhibit->title; ?></p>
     <?php echo $this->partial('index/_nav.php'); ?>
   </header>
+  -->
 
   <div id="content"></div>
 

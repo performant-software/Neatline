@@ -42,6 +42,9 @@ body
   header
     margin 1.6em
 
+    p.lead
+      font-weight bold
+
     // Search/buttons.
     // ---------------
 
@@ -62,7 +65,7 @@ body
       font-size 14px
       font-weight 300
       padding 0.2em 1.6em
-      border-top 1px solid #f0f0f0
+      border-bottom 1px solid #f0f0f0
       white-space nowrap
 
       &:hover
@@ -72,11 +75,10 @@ body
       .record-title
         font-weight bold
 
-  // Forms.
-  // ------
+  // Edit form.
+  // ----------
 
   form
-    display none
     margin 1.6em
 
     button.close
@@ -105,7 +107,7 @@ body
     // Spatial tab.
     // ------------
 
-    .tab-pane.spatial
+    #form-spatial
 
       label.radio
       label.checkbox
@@ -141,7 +143,7 @@ body
     // Spatial tab.
     // ------------
 
-    .tab-pane.style
+    #form-style
 
       div.controls:last-child
         margin-bottom 10px

@@ -10,11 +10,11 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Editor.Forms.Record.Views', function(
-  Views, Record, Backbone, Marionette, $, _) {
+Neatline.module('Editor.Form.Views', function(
+  Views, Form, Backbone, Marionette, $, _) {
 
 
-  Views.RecordForm = Backbone.View.extend({
+  Views.AbstractForm = Backbone.View.extend({
 
 
     options: {
@@ -26,7 +26,7 @@ Neatline.module('Editor.Forms.Record.Views', function(
 
 
     getTemplate: function() {
-      return _.template($('#record-form').html());
+      return _.template($('#edit-form').html());
     },
 
 
@@ -35,7 +35,10 @@ Neatline.module('Editor.Forms.Record.Views', function(
      */
     initialize: function() {
 
-      // Trackers:
+      /**
+       * Trackers.
+       */
+
       this.model    = null;   // The model currently bound to the form.
       this.hash     = null;   // The hash of the currently selected tab.
       this.started  = false;  // True if the form has been displayed.
@@ -45,12 +48,16 @@ Neatline.module('Editor.Forms.Record.Views', function(
       // Render template.
       this.form = $(this.getTemplate()());
 
-      // Markup:
+      // Buttons:
       this.closeButton =    this.form.find('button.close');
       this.deleteButton =   this.form.find('a[name="delete"]');
       this.confirmButton =  this.form.find('button[name="delete"]');
       this.saveButton =     this.form.find('a[name="save"]');
+
+      // Delete modal:
       this.deleteModal =    this.form.find('#deleteConfirm');
+
+      // Groups:
       this.lead =           this.form.find('p.lead');
       this.tabs =           this.form.find('ul.nav a');
 
@@ -66,60 +73,48 @@ Neatline.module('Editor.Forms.Record.Views', function(
      */
     bindEvents: function() {
 
-      // Tabs:
+
+      // Tabs.
+      // -----
       this.tabs.on('shown', _.bind(function(e) {
 
-        // Publish "Spatial" (de)selection.
+        // Check if the "Spatial" tab is active.
         var event = (e.target.hash == '#form-spatial') ?
           'editor:form:spatialSelect' :
           'editor:form:spatialDeselect';
+
+        // Publish "Spatial" (de)selection.
         Neatline.vent.trigger(event);
 
-        // Store the hash.
+        // Track the hash.
         this.hash = e.target.hash;
 
       }, this));
 
-      // Close button:
+
+      // Close button.
+      // -------------
       this.closeButton.click(_.bind(function(e) {
         e.preventDefault();
         this.close();
       }, this));
 
-      // Save button:
+
+      // Save button.
+      // ------------
       this.saveButton.click(_.bind(function(e) {
-        console.log('save');
         e.preventDefault();
         this.save();
       }, this));
 
-      // Delete button:
+
+      // Delete button.
+      // --------------
       this.confirmButton.click(_.bind(function(e) {
         e.preventDefault();
         this.remove();
       }, this));
 
-    },
-
-
-    /**
-     * Show the form; block if the form is already open.
-     *
-     * @param {Object} model: The record model.
-     * @param {Boolean} focus: If true, focus the map on the edit layer.
-     */
-    show: function(model, focus) {
-
-      // Break if open.
-      if (this.open) return;
-
-      // Render.
-      this.model = model;
-      this.render();
-
-      // Publish, set trackers.
-      Neatline.vent.trigger('editor:form:open', model, focus);
-      this.open = true;
 
     },
 
@@ -138,8 +133,30 @@ Neatline.module('Editor.Forms.Record.Views', function(
         Neatline.vent.trigger('editor:form:spatialSelect');
       }
 
-      this.$el.html(this.form);
       return this;
+
+    },
+
+
+    /**
+     * Show the form; block if the form is already open.
+     *
+     * @param {Object} model: The record model.
+     * @param {Boolean} focus: If true, focus the map on the edit layer.
+     */
+    show: function(model, focus) {
+
+      // Block if open.
+      if (this.open) return;
+
+      // Store model, render.
+      this.model = model;
+      this.$el.html(this.form);
+      this.render();
+
+      // Publish, set trackers.
+      Neatline.vent.trigger('editor:form:open', model, focus);
+      this.open = true;
 
     },
 
@@ -148,10 +165,15 @@ Neatline.module('Editor.Forms.Record.Views', function(
      * Close the form, publish the event, set the global tracker.
      */
     close: function() {
+
+      // Hide, publish.
+      this.form.detach();
       Neatline.vent.trigger('editor:form:close', this.model);
-      this.form.hide();
+
+      // Trackers.
       this.model = null;
       this.open = false;
+
     },
 
 
@@ -166,12 +188,19 @@ Neatline.module('Editor.Forms.Record.Views', function(
       // Gather data from tab views.
       Neatline.vent.trigger('editor:form:getData');
 
-      // PUT:
-      this.model.save(this.data, {
+      // Propagate the new data to all collections.
+      Neatline.vent.trigger('editor:form:updateRecord',
+        this.model.get('id'), this.data);
+
+      // Save the model.
+      this.model.save({}, {
+
+        // Update the header.
         success: _.bind(function() {
           this.updateHead();
           this.setSaved();
         }, this)
+
       });
 
       // Clear data.
@@ -185,7 +214,7 @@ Neatline.module('Editor.Forms.Record.Views', function(
      */
     remove: function() {
 
-      // DELETE:
+      // Issue DELETE.
       this.model.destroy({
         success: _.bind(function() {
 

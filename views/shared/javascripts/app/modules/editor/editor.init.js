@@ -27,19 +27,12 @@ Neatline.module('Editor', { startWithParent: false,
 
 
   /**
-   * Wait until Neatline is running before starting the geometry module,
-   * which needs the application map view to be running.
+   * Wait until Neatline is running before initializing the geometry
+   * module, which needs the application map view to be running.
    */
   Neatline.on('initialize:after', function() {
     Editor.Geometry.start();
   });
-
-
-  /**
-   * Register an `editor` region on the application, the container on the
-   * left side of the screen where model lists and forms are displayed.
-   */
-  Neatline.addRegions({ editorRegion: '#editor' });
 
 
 }});

@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Record form "Text" tab events.
+ * "Text" tab events.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -10,17 +10,17 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Editor.Forms.Record.Text', function(
-  Text, Record, Backbone, Marionette, $, _) {
+Neatline.module('Editor.Form.TextTab', function(
+  TextTab, Form, Backbone, Marionette, $, _) {
 
 
   /**
-   * Get input markup when the form is initialized.
+   * Render element values when the form is opened.
    *
    * @param {Object|DOMElement} form: The form element.
    */
   Neatline.vent.on('editor:form:initialize', function(form) {
-    Text.view.getElements(form);
+    TextTab.view.getElements(form);
   });
 
 
@@ -30,17 +30,17 @@ Neatline.module('Editor.Forms.Record.Text', function(
    * @param {Object} model: The record model.
    */
   Neatline.vent.on('editor:form:open', function(model) {
-    Text.view.render(model);
+    TextTab.view.render(model);
   });
 
 
   /**
    * Before the form is saved, broadcast the tab's data hash to be added
-   * to the aggregated hash on the form view.
+   * to the  aggregated hash on the form view.
    */
   Neatline.vent.on('editor:form:getData', function() {
     Neatline.vent.trigger('editor:form:addData',
-      Text.view.gather()
+      TextTab.view.gather()
     );
   });
 

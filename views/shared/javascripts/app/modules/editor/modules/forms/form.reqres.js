@@ -10,8 +10,8 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Editor.Forms.Record', function(
-  Record, Forms, Backbone, Marionette, $, _) {
+Neatline.module('Editor.Form', function(
+  Form, Editor, Backbone, Marionette, $, _) {
 
 
   /**
@@ -20,7 +20,7 @@ Neatline.module('Editor.Forms.Record', function(
    * @return {Boolean}: True if a form is open.
    */
   Neatline.reqres.addHandler('editor:form:isOpen?', function() {
-    return Record.view.open;
+    return Form.view.open;
   });
 
 
