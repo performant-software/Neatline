@@ -27,11 +27,28 @@ Neatline.module('Editor', { startWithParent: false,
 
 
   /**
-   * Wait until Neatline is running before initializing the geometry
-   * module, which needs the application map view to be running.
+   * Wait until Neatline is running before starting the geometry module,
+   * which needs the application map view to be running.
    */
   Neatline.on('initialize:after', function() {
     Editor.Geometry.start();
+  });
+
+
+  /**
+   * Start the router.
+   */
+  Editor.addInitializer(function() {
+    new Editor.Router();
+    Backbone.history.start();
+  });
+
+
+  /**
+   * Stop the router.
+   */
+  Editor.addFinalizer(function() {
+    Backbone.history.stop();
   });
 
 

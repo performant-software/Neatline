@@ -14,14 +14,14 @@ Neatline.module('Editor', { startWithParent: false,
   define: function(Editor, Neatline, Backbone, Marionette, $, _) {
 
 
-  Editor.Controller = Backbone.Marionette.Controller.extend({
+  Editor.Controller = {
 
 
     /**
      * Show the list of records.
      */
     showRecordList: function() {
-      console.log('showRecordList');
+      // console.log('showRecordList');
     },
 
 
@@ -31,7 +31,7 @@ Neatline.module('Editor', { startWithParent: false,
      * @param {String} id: The record id.
      */
     showRecordForm: function(id) {
-      console.log('showRecordForm', id);
+      // console.log('showRecordForm', id);
     },
 
 
@@ -39,7 +39,7 @@ Neatline.module('Editor', { startWithParent: false,
      * Show the list of tags.
      */
     showTagList: function() {
-      console.log('showTagList');
+      // console.log('showTagList');
     },
 
 
@@ -49,10 +49,11 @@ Neatline.module('Editor', { startWithParent: false,
      * @param {String} id: The tag id.
      */
     showTagForm: function(id) {
-      console.log('showTagForm', id);
+      // console.log('showTagForm', id);
     }
 
-  });
+
+  };
 
 
   Editor.Router = Backbone.Marionette.AppRouter.extend({
