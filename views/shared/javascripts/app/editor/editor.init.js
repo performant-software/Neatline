@@ -36,6 +36,14 @@ Neatline.module('Editor', { startWithParent: false,
 
 
   /**
+   * Start listening for route changes when editor components are running.
+   */
+  Editor.on('start', function() {
+    Backbone.history.start();
+  });
+
+
+  /**
    * Initialize the layout.
    */
   Editor.addInitializer(function() {
@@ -44,11 +52,10 @@ Neatline.module('Editor', { startWithParent: false,
 
 
   /**
-   * Start the router.
+   * Initialize the router.
    */
   Editor.addInitializer(function() {
     this.router = new Editor.Router();
-    Backbone.history.start();
   });
 
 
