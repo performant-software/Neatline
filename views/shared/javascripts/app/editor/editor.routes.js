@@ -21,7 +21,7 @@ Neatline.module('Editor', { startWithParent: false,
      * Show the list of records.
      */
     showRecordList: function() {
-      // console.log('showRecordList');
+      console.log('showRecordList');
     },
 
 
@@ -31,7 +31,15 @@ Neatline.module('Editor', { startWithParent: false,
      * @param {String} id: The record id.
      */
     showRecordForm: function(id) {
-      // console.log('showRecordForm', id);
+      console.log('showRecordForm', id);
+    },
+
+
+    /**
+     * Show add record form.
+     */
+    showNewRecordForm: function(id) {
+      console.log('showNewRecordForm');
     },
 
 
@@ -39,7 +47,7 @@ Neatline.module('Editor', { startWithParent: false,
      * Show the list of tags.
      */
     showTagList: function() {
-      // console.log('showTagList');
+      console.log('showTagList');
     },
 
 
@@ -49,7 +57,15 @@ Neatline.module('Editor', { startWithParent: false,
      * @param {String} id: The tag id.
      */
     showTagForm: function(id) {
-      // console.log('showTagForm', id);
+      console.log('showTagForm', id);
+    },
+
+
+    /**
+     * Show add tag form.
+     */
+    showNewTagForm: function(id) {
+      console.log('showNewTagForm');
     }
 
 
@@ -63,11 +79,13 @@ Neatline.module('Editor', { startWithParent: false,
 
 
     appRoutes: {
-      '':               'showRecordList',
-      'records':        'showRecordList',
-      'records/:id':    'showRecordForm',
-      'tags':           'showTagList',
-      'tags/:id':       'showTagForm'
+      '':                 'showRecordList',
+      'records':          'showRecordList',
+      'records/add':      'showNewRecordForm',
+      'records/:id':      'showRecordForm',
+      'tags':             'showTagList',
+      'tags/add':         'showNewTagForm',
+      'tags/:id':         'showTagForm'
     }
 
 

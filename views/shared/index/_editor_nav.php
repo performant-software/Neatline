@@ -16,13 +16,13 @@
 <ul class="nav nav-pills">
 
   <li>
-    <a href="#records-list" data-toggle="tab">
+    <a href="#records">
       <i class="icon-file"></i> Records
     </a>
   </li>
 
   <li>
-    <a href="#tags-list" data-toggle="tab">
+    <a href="#tags">
       <i class="icon-tags"></i> Tags
     </a>
   </li>
@@ -36,13 +36,13 @@
     <ul class="dropdown-menu" role="menu">
 
       <li>
-        <a href="#">
+        <a href="#records/add">
           <i class="icon-file"></i> New Record
         </a>
       </li>
 
       <li>
-        <a href="#">
+        <a href="#tags/add">
           <i class="icon-tag"></i> New Tag
         </a>
       </li>

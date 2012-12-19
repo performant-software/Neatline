@@ -23,9 +23,6 @@ Neatline.module('Editor.Records', function(
     this.collection = new Neatline.Collections.Record();
     this.view = new Records.Views.RecordList({ el: '#content' });
 
-    // Get records.
-    Neatline.vent.trigger('editor:search:query');
-
   });
 
 

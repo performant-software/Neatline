@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2; */
 
 /**
- * Layout manager view.
+ * Editor layout manager.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -57,9 +57,9 @@ Neatline.module('Editor', { startWithParent: false,
       var w = this.$el.width();
 
       // Render the regions.
-      this.editorDiv.css({ height: h, width: this.width });
-      this.mapDiv.css({ height: h, width: w - this.width });
-      this.exhibitDiv.css({ left: this.width });
+      this.editorDiv.   css({ height: h, width: this.width });
+      this.mapDiv.      css({ height: h, width: w - this.width });
+      this.exhibitDiv.  css({ left: this.width });
 
     }
 
