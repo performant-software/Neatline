@@ -147,10 +147,10 @@ module.exports = function(grunt) {
 
           // Neatline:
           config.app+'/app.init.js',
-          config.app+'/models/*.js',
-          config.app+'/collections/*.js',
-          config.app+'/modules/map/**/*.js',
-          config.app+'/modules/bubble/**/*.js'
+          config.app+'/_models/*.js',
+          config.app+'/_collections/*.js',
+          config.app+'/map/**/*.js',
+          config.app+'/bubble/**/*.js'
 
         ],
         dest: config.payloads.js+'/neatline.js',
@@ -177,11 +177,11 @@ module.exports = function(grunt) {
 
           // Editor:
           config.app+'/app.init.js',
-          config.app+'/models/*.js',
-          config.app+'/collections/*.js',
-          config.app+'/modules/map/**/*.js',
-          config.app+'/modules/bubble/**/*.js',
-          config.app+'/modules/editor/**/*.js'
+          config.app+'/_models/*.js',
+          config.app+'/_collections/*.js',
+          config.app+'/map/**/*.js',
+          config.app+'/bubble/**/*.js',
+          config.app+'/editor/**/*.js'
 
         ],
         dest: config.payloads.js+'/editor.js',
