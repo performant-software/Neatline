@@ -18,7 +18,7 @@ Neatline.module('Map', function(
    * Instantiate the map view and records collection.
    */
   Map.addInitializer(function() {
-    this.collection = new Neatline.Collections.Records();
+    this.collection = new Neatline.Collections.Record();
     this.view = new Neatline.Map.Views.Map({ el: '#neatline-map' });
   });
 

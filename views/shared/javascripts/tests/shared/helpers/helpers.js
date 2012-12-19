@@ -232,9 +232,7 @@ _t.getVectorLayerByTitle = function(title) {
  * @return {Object} model: The model.
  */
 _t.buildModelFromJson = function(json) {
-  return new Neatline.Collections.Records.prototype.model(
-    JSON.parse(json)
-  );
+  return new Neatline.Models.Record(JSON.parse(json));
 };
 
 

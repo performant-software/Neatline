@@ -14,7 +14,7 @@ Neatline.module('Collections', function(
   Collections, Neatline, Backbone, Marionette, $, _) {
 
 
-  Collections.Records = Backbone.Collection.extend({
+  Collections.Record = Backbone.Collection.extend({
 
 
     url: function() { return __exhibit.api; },

@@ -20,7 +20,7 @@ Neatline.module('Editor.Records', function(
   Records.addInitializer(function() {
 
     // Construct collection and view.
-    this.collection = new Neatline.Collections.Records();
+    this.collection = new Neatline.Collections.Record();
     this.view = new Records.Views.RecordList({ el: '#content' });
 
     // Get records.

@@ -26,7 +26,7 @@ describe('Record Collection', function() {
 
     // --------------------------------------------------------------------
     // When any instance of Neatline.Models.Record is changed by way of a
-    // call to `set`, all instances of Neatline.Collections.Records should
+    // call to `set`, all instances of Neatline.Collections.Record should
     // check to see if a model with the same id as the originally changed
     // model is present, and, if so, updated the local copy of the model.
     // This ensures that all instances of a model are kept up-to-date when
@@ -36,8 +36,8 @@ describe('Record Collection', function() {
     // --------------------------------------------------------------------
 
     // Create two collections.
-    var coll1 = new Neatline.Collections.Records();
-    var coll2 = new Neatline.Collections.Records();
+    var coll1 = new Neatline.Collections.Record();
+    var coll2 = new Neatline.Collections.Record();
 
     // Populate with the same model.
     var model1 = coll1.create({ id: 1 });
@@ -73,7 +73,7 @@ describe('Record Collection', function() {
       };
 
       // Create a collection, update.
-      var coll = new Neatline.Collections.Records();
+      var coll = new Neatline.Collections.Record();
       coll.getCollection({ key: 'val'}, callback);
 
       // Capture outoing GET request.
@@ -101,7 +101,7 @@ describe('Record Collection', function() {
       // ------------------------------------------------------------------
 
       // Create a collection and a model.
-      var coll = new Neatline.Collections.Records();
+      var coll = new Neatline.Collections.Record();
       var model = coll.create({ id: 1, key: 'val' });
 
       // Fetch success callback.
@@ -134,7 +134,7 @@ describe('Record Collection', function() {
       var done = false;
 
       // Create a collection.
-      var coll = new Neatline.Collections.Records();
+      var coll = new Neatline.Collections.Record();
 
       // Fetch success callback.
       var callback = function(model) {
@@ -169,7 +169,7 @@ describe('Record Collection', function() {
       // ------------------------------------------------------------------
 
       // Create a collection and a model.
-      var coll = new Neatline.Collections.Records();
+      var coll = new Neatline.Collections.Record();
       coll.create({ id: 1 });
 
       // Update.

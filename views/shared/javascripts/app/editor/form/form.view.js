@@ -14,7 +14,7 @@ Neatline.module('Editor.Form.Views', function(
   Views, Form, Backbone, Marionette, $, _) {
 
 
-  Views.RecordForm = Backbone.View.extend({
+  Views.Form = Backbone.View.extend({
 
 
     options: {
