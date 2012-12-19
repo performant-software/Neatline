@@ -23,7 +23,7 @@
 
   <li>
     <a href="#tags-list" data-toggle="tab">
-      <i class="icon-tag"></i> Tags
+      <i class="icon-tags"></i> Tags
     </a>
   </li>
 

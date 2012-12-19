@@ -26,9 +26,25 @@
     <p class="lead"></p>
 
     <ul class="nav nav-pills">
-      <li><a href="#form-text" data-toggle="tab">Text</a></li>
-      <li><a href="#form-spatial" data-toggle="tab">Spatial</a></li>
-      <li><a href="#form-style" data-toggle="tab">Style</a></li>
+
+      <li>
+        <a href="#form-text" data-toggle="tab">
+          <i class="icon-font"></i> Text
+        </a>
+      </li>
+
+      <li>
+        <a href="#form-spatial" data-toggle="tab">
+          <i class="icon-map-marker"></i> Spatial
+        </a>
+      </li>
+
+      <li>
+        <a href="#form-style" data-toggle="tab">
+          <i class="icon-tasks"></i> Style
+        </a>
+      </li>
+
     </ul>
 
     <div class="tab-content">
