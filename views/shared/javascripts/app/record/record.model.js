@@ -10,18 +10,12 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Models', function(
-  Models, Neatline, Backbone, Marionette, $, _) {
+Neatline.module('Record', function(
+  Record, Neatline, Backbone, Marionette, $, _) {
 
 
-  Models.Record = Backbone.Model.extend({
-
-
-    url: function() {
-      return __exhibit.api+'/'+this.get('id');
-    }
-
-
+  Record.Model = Backbone.Model.extend({
+    url: function() { return __exhibit.api+'/'+this.get('id'); }
   });
 
 

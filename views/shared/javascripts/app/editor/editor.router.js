@@ -14,14 +14,25 @@ Neatline.module('Editor', { startWithParent: false,
   define: function(Editor, Neatline, Backbone, Marionette, $, _) {
 
 
-  Editor.Controller = {
+  Editor.Router = {
+
+
+    routes: {
+      '':                 'showRecordList',
+      'records':          'showRecordList',
+      'records/add':      'showNewRecordForm',
+      'records/:id':      'showRecordForm',
+      'tags':             'showTagList',
+      'tags/add':         'showNewTagForm',
+      'tags/:id':         'showTagForm'
+    },
 
 
     /**
      * Show the list of records.
      */
     showRecordList: function() {
-      Neatline.vent.trigger('editor:show:records');
+      // console.log('showRecordList');
     },
 
 
@@ -38,7 +49,7 @@ Neatline.module('Editor', { startWithParent: false,
     /**
      * Show add record form.
      */
-    showNewRecordForm: function(id) {
+    showNewRecordForm: function() {
       // console.log('showNewRecordForm');
     },
 
@@ -64,29 +75,12 @@ Neatline.module('Editor', { startWithParent: false,
     /**
      * Show add tag form.
      */
-    showNewTagForm: function(id) {
+    showNewTagForm: function() {
       // console.log('showNewTagForm');
     }
 
 
   };
-
-
-  Editor.Router = Backbone.Marionette.AppRouter.extend({
-
-    controller: Editor.Controller,
-
-    appRoutes: {
-      '':                 'showRecordList',
-      'records':          'showRecordList',
-      'records/add':      'showNewRecordForm',
-      'records/:id':      'showRecordForm',
-      'tags':             'showTagList',
-      'tags/add':         'showNewTagForm',
-      'tags/:id':         'showTagForm'
-    }
-
-  });
 
 
 }});

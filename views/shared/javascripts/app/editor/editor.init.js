@@ -2,8 +2,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Neatline editor initializer. Enforces the correct startup sequence:
- * Editor => Neatline => Geometry module.
+ * Neatline editor initializer.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -16,10 +15,9 @@ Neatline.module('Editor', { startWithParent: false,
 
 
   /**
-   * Start the editor before running Neatline. This ordering is necessary
-   * to ensure that the editor layout retine sets non-zero dimensions on
-   * the map container before Neatline starts OpenLayers, which needs to
-   * be instantiated on a space-occupying div.
+   * Start the editor before Neatline. This ensures that the editor layout
+   * routine sets non-zero dimensions on the map container before Neatline
+   * starts OpenLayers, which needs a space-occupying div.
    */
   Neatline.on('initialize:before', function() {
     Editor.start();
@@ -27,16 +25,16 @@ Neatline.module('Editor', { startWithParent: false,
 
 
   /**
-   * Initialize events and commands aggregators, layout view, and router.
+   * Initialize the router and layout view.
    */
   Editor.addInitializer(function() {
-    this._layout = new Editor.Layout();
-    this._router = new Editor.Router();
+    // this.__router = new Editor.Router();
+    // this.__view   = new Editor.View();
   });
 
 
   /**
-   * Start listening for route changes when editor components are running.
+   * Start history when all editor modules are running.
    */
   Editor.on('start', function() {
     Backbone.history.start();

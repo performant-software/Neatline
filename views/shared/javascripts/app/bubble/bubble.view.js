@@ -130,15 +130,6 @@ Neatline.module('Bubble.Views', function(
 
 
     /**
-     * Measure the size of the window.
-     */
-    measureWindow: function() {
-      this.wh = this.window.height();
-      this.ww = this.window.width();
-    },
-
-
-    /**
      * Enable the bubble.
      */
     activate: function() {

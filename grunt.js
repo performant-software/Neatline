@@ -146,9 +146,9 @@ module.exports = function(grunt) {
           config.vendor.js.d3,
 
           // Neatline:
-          config.app+'/app.init.js',
-          config.app+'/app.model.js',
-          config.app+'/app.collection.js',
+          config.app+'/app.js',
+          config.app+'/record/record.model.js',
+          config.app+'/record/record.collection.js',
           config.app+'/map/**/*.js',
           config.app+'/bubble/**/*.js'
 
@@ -176,9 +176,9 @@ module.exports = function(grunt) {
           config.vendor.js.d3,
 
           // Editor:
-          config.app+'/app.init.js',
-          config.app+'/app.model.js',
-          config.app+'/app.collection.js',
+          config.app+'/app.js',
+          config.app+'/record/record.model.js',
+          config.app+'/record/record.collection.js',
           config.app+'/map/**/*.js',
           config.app+'/bubble/**/*.js',
           config.app+'/editor/**/*.js'

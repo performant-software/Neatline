@@ -20,9 +20,9 @@ Neatline.module('Map', function(
    * @param {Object} params: Hash with `extent` and `zoom`.
    */
   Neatline.vent.on('map:move', function(params) {
-    Map._collection.getCollection(params, function(records) {
+    Map.__collection.getCollection(params, function(records) {
       Neatline.vent.trigger('map:newRecords', records);
-      Map._view.ingest(records);
+      Map.__view.ingest(records);
     });
   });
 
@@ -33,8 +33,8 @@ Neatline.module('Map', function(
    * @param {Number} id: The record id.
    */
   Neatline.vent.on('map:focusById', function(id) {
-    Map._collection.getModel(id, function(model) {
-      Map._view.focusByModel(model);
+    Map.__collection.getModel(id, function(model) {
+      view.focusByModel(model);
     });
   });
 
@@ -45,7 +45,7 @@ Neatline.module('Map', function(
    * @param {Object} model: The record model.
    */
   Neatline.vent.on('map:focusByModel', function(model) {
-    Map._view.focusByModel(model);
+    Map.__view.focusByModel(model);
   });
 
 

@@ -10,15 +10,15 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Collections', function(
-  Collections, Neatline, Backbone, Marionette, $, _) {
+Neatline.module('Record', function(
+  Record, Neatline, Backbone, Marionette, $, _) {
 
 
-  Collections.Record = Backbone.Collection.extend({
+  Record.Collection = Backbone.Collection.extend({
 
 
     url: function() { return __exhibit.api; },
-    model: Neatline.Models.Record,
+    model: Neatline.Record.Model,
 
 
     /**

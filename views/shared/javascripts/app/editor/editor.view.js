@@ -14,7 +14,7 @@ Neatline.module('Editor', { startWithParent: false,
   define: function(Editor, Neatline, Backbone, Marionette, $, _) {
 
 
-  Editor.Layout = Backbone.Marionette.Layout.extend({
+  Editor.View = Backbone.View.extend({
 
 
     el: 'body',
@@ -25,22 +25,15 @@ Neatline.module('Editor', { startWithParent: false,
       editor:   '#editor'
     },
 
-    regions: {
-      editor:   '#editor'
-    },
-
 
     /**
      * Bind position routine to window resize, do initial position.
      */
     initialize: function() {
 
-      // Get elements.
-      this.window = $(window);
-      this.bindUIElements();
-
       // Cache starting width.
       this.width = this.ui.editor.width();
+      this.window = $(window);
 
       // Listen for window resize.
       this.window.resize(_.bind(this.position, this));
@@ -52,7 +45,7 @@ Neatline.module('Editor', { startWithParent: false,
     /**
      * Fit the exhibit and editor to fill the screen.
      */
-    position: function(e) {
+    position: function() {
 
       // Measure window.
       var h = this.window.height();
