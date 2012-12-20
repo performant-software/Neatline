@@ -21,8 +21,6 @@ Neatline.module('Editor', { startWithParent: false,
 
 
     regions: {
-      exhibit:  '#neatline',
-      map:      '#neatline-map',
       editor:   '#editor'
     },
 
@@ -33,9 +31,9 @@ Neatline.module('Editor', { startWithParent: false,
      */
     initialize: function() {
 
-      this.exhibitDiv =   $(this.exhibit.el);
-      this.mapDiv =       $(this.map.el);
-      this.editorDiv =    $(this.editor.el);
+      this.exhibitDiv =   $('#neatline');
+      this.mapDiv =       $('#neatline-map');
+      this.editorDiv =    $('#editor');
 
       // Cache default width.
       this.width = this.editorDiv.width();

@@ -44,18 +44,13 @@ Neatline.module('Editor', { startWithParent: false,
 
 
   /**
-   * Initialize the layout.
+   * Initialize events and commands aggregators, layout view, and router.
    */
   Editor.addInitializer(function() {
-    this.layout = new Editor.Layout();
-  });
-
-
-  /**
-   * Initialize the router.
-   */
-  Editor.addInitializer(function() {
-    this.router = new Editor.Router();
+    Editor.events = new Backbone.Marionette.EventAggregator();
+    Editor.orders = new Backbone.Wreqr.Commands();
+    Editor.layout = new Editor.Layout();
+    Editor.router = new Editor.Router();
   });
 
 

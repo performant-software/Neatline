@@ -18,8 +18,7 @@ Neatline.module('Editor.Lists', function(
 
 
     regions: {
-      records:  '#record-list',
-      tags:     '#tag-list'
+
     }
 
 
