@@ -21,7 +21,7 @@ Neatline.module('Editor', { startWithParent: false,
      * Show the list of records.
      */
     showRecordList: function() {
-      console.log('showRecordList');
+      Editor.commands.execute('showRecordList', Editor.layout.editor);
     },
 
 
@@ -31,7 +31,7 @@ Neatline.module('Editor', { startWithParent: false,
      * @param {String} id: The record id.
      */
     showRecordForm: function(id) {
-      console.log('showRecordForm', id);
+      // console.log('showRecordForm', id);
     },
 
 
@@ -39,7 +39,7 @@ Neatline.module('Editor', { startWithParent: false,
      * Show add record form.
      */
     showNewRecordForm: function(id) {
-      console.log('showNewRecordForm');
+      // console.log('showNewRecordForm');
     },
 
 
@@ -47,7 +47,7 @@ Neatline.module('Editor', { startWithParent: false,
      * Show the list of tags.
      */
     showTagList: function() {
-      console.log('showTagList');
+      // console.log('showTagList');
     },
 
 
@@ -57,7 +57,7 @@ Neatline.module('Editor', { startWithParent: false,
      * @param {String} id: The tag id.
      */
     showTagForm: function(id) {
-      console.log('showTagForm', id);
+      // console.log('showTagForm', id);
     },
 
 

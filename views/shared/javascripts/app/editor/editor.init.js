@@ -31,7 +31,7 @@ Neatline.module('Editor', { startWithParent: false,
    * which needs the application map view to be running.
    */
   Neatline.on('initialize:after', function() {
-    Editor.Geometry.start();
+    // Editor.Geometry.start();
   });
 
 
@@ -47,10 +47,10 @@ Neatline.module('Editor', { startWithParent: false,
    * Initialize events and commands aggregators, layout view, and router.
    */
   Editor.addInitializer(function() {
-    Editor.events = new Backbone.Marionette.EventAggregator();
-    Editor.orders = new Backbone.Wreqr.Commands();
-    Editor.layout = new Editor.Layout();
-    Editor.router = new Editor.Router();
+    Editor.events   = new Backbone.Marionette.EventAggregator();
+    Editor.commands = new Backbone.Wreqr.Commands();
+    Editor.layout   = new Editor.Layout();
+    Editor.router   = new Editor.Router();
   });
 
 

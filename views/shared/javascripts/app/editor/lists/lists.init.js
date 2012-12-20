@@ -1,9 +1,8 @@
-<?php
 
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Records list underscore template.
+ * Lists initializers.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -11,9 +10,16 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-?>
+Neatline.module('Editor.Lists', function(
+  Lists, Editor, Backbone, Marionette, $, _) {
 
-<!-- Records list. -->
-<script id="record-list" type="text/templates">
-  <ul class="records"></ul>
-</script>
+
+  /**
+   * Initialize the local command aggregator.
+   */
+  Lists.addInitializer(function() {
+    Lists.orders = new Backbone.Wreqr.Commands();
+  });
+
+
+});

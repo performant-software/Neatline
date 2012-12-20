@@ -13,18 +13,9 @@
 
 ?>
 
-<div id="editor">
-
-  <header>
-    <p class="lead"><?php echo $exhibit->title; ?></p>
-    <?php echo $this->partial('index/_editor_nav.php'); ?>
-  </header>
-
-  <div id="content"></div>
-
-</div>
+<div id="editor"></div>
 
 <!-- Underscore templates. -->
-<?php echo $this->partial('index/_record_list.php'); ?>
+<?php echo $this->partial('index/_lists.php'); ?>
 <?php echo $this->partial('index/_record_row.php'); ?>
 <?php echo $this->partial('index/_record_form.php'); ?>

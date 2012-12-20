@@ -15,7 +15,7 @@
 
 
 <!-- Record edit form. -->
-<script id="edit-form" type="text/templates">
+<script id="record-form-template" type="text/templates">
 
   <form class="form-stacked">
 

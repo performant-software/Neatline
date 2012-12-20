@@ -1,8 +1,9 @@
+<?php
 
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Search initializer.
+ * Lists menu and container.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -10,16 +11,15 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Editor.Search', function(
-  Search, Editor, Backbone, Marionette, $, _) {
+?>
 
+<script id="lists-template" type="text/templates">
 
-  /**
-   * Instantiate the search view.
-   */
-  Search.addInitializer(function() {
-    this.view = new Search.Views.Search({ el: '#search' });
-  });
+  <header>
+    <p class="lead"><?php echo $exhibit->title; ?></p>
+    <?php echo $this->partial('index/_editor_nav.php'); ?>
+  </header>
 
+  <div id="lists"></div>
 
-});
+</script>

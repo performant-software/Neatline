@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2; */
 
 /**
- * Lists layout manager.
+ * Lists command handlers.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -13,14 +13,16 @@
 Neatline.module('Editor.Lists', function(
   Lists, Editor, Backbone, Marionette, $, _) {
 
+  console.log(Editor);
 
-  Lists.Layout = Backbone.Marionette.Layout.extend({
+  /**
+   * Show the lists layout and records list.
+   */
+  Editor.commands.addHandler('showRecordList', function(region) {
 
-
-    regions: {
-      list: '#lists'
-    }
-
+    // Render lists layout.
+    var listsLayout = new Lists.Layout();
+    region.show(listsLayout);
 
   });
 
