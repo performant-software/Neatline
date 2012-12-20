@@ -30,8 +30,8 @@ Neatline.module('Editor', { startWithParent: false,
    * Initialize events and commands aggregators, layout view, and router.
    */
   Editor.addInitializer(function() {
-    this.layout = new Editor.Layout();
-    this.router = new Editor.Router();
+    this._layout = new Editor.Layout();
+    this._router = new Editor.Router();
   });
 
 

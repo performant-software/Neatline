@@ -10,15 +10,15 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Editor.Lists.Records', function(
+Neatline.module('Editor.Browser.Records', function(
   Records, Neatline, Backbone, Marionette, $, _) {
 
 
   /**
-   * Instantiate the record list layout, search view, and list view.
+   * Instantiate the record list layout.
    */
   Records.addInitializer(function() {
-    this.layout = new Records.Layout();
+    this._layout = new Records.Layout();
   });
 
 

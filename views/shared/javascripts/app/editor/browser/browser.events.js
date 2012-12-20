@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Lists events.
+ * Browser events.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -10,15 +10,15 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Editor.Lists', function(
-  Lists, Editor, Backbone, Marionette, $, _) {
+Neatline.module('Editor.Browser', function(
+  Browser, Neatline, Backbone, Marionette, $, _) {
 
 
   /**
    * Show the list menu ("Records" and "Tags" tabs) and record list.
    */
   Neatline.vent.on('editor:show:records', function() {
-    Neatline.Editor.layout.editor.show(Lists.layout);
+    Neatline.Editor._layout.editor.show(Browser._layout);
   });
 
 

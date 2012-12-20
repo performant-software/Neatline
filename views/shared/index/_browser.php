@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Lists menu and container.
+ * Browser menu and record/tag lists container.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -13,13 +13,13 @@
 
 ?>
 
-<script id="lists-template" type="text/templates">
+<script id="browser-template" type="text/templates">
 
   <header>
     <p class="lead"><?php echo $exhibit->title; ?></p>
     <?php echo $this->partial('index/_editor_nav.php'); ?>
   </header>
 
-  <div id="lists"></div>
+  <div id="browser"></div>
 
 </script>

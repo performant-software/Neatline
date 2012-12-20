@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Record list layout manager.
+ * Browser layout manager.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -10,18 +10,17 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Editor.Lists.Records', function(
-  Records, Neatline, Backbone, Marionette, $, _) {
+Neatline.module('Editor.Browser', function(
+  Browser, Neatline, Backbone, Marionette, $, _) {
 
 
-  Records.Layout = Backbone.Marionette.Layout.extend({
+  Browser.Layout = Backbone.Marionette.Layout.extend({
 
 
-    template: '#record-list-template',
+    template: '#browser-template',
 
     regions: {
-      search:   '#search',
-      records:  '#records'
+      list: '#browser'
     }
 
 
