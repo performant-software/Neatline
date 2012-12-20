@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Lists initializers.
+ * Lists events.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -15,10 +15,10 @@ Neatline.module('Editor.Lists', function(
 
 
   /**
-   * Initialize the local command handler.
+   * Show the list menu ("Records" and "Tags" tabs) and record list.
    */
-  Lists.addInitializer(function() {
-    this.layout = new Lists.Layout();
+  Neatline.vent.on('editor:show:records', function() {
+    Neatline.Editor.layout.editor.show(Lists.layout);
   });
 
 

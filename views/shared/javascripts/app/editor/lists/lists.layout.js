@@ -1,5 +1,5 @@
 
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2; */
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
  * Lists layout manager.
@@ -16,6 +16,8 @@ Neatline.module('Editor.Lists', function(
 
   Lists.Layout = Backbone.Marionette.Layout.extend({
 
+
+    template: '#lists-template',
 
     regions: {
       list: '#lists'

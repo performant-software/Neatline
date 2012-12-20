@@ -21,7 +21,7 @@ Neatline.module('Editor', { startWithParent: false,
      * Show the list of records.
      */
     showRecordList: function() {
-      Editor.commands.execute('showRecordList', Editor.layout.editor);
+      Neatline.vent.trigger('editor:show:records');
     },
 
 
@@ -65,7 +65,7 @@ Neatline.module('Editor', { startWithParent: false,
      * Show add tag form.
      */
     showNewTagForm: function(id) {
-      console.log('showNewTagForm');
+      // console.log('showNewTagForm');
     }
 
 
@@ -74,9 +74,7 @@ Neatline.module('Editor', { startWithParent: false,
 
   Editor.Router = Backbone.Marionette.AppRouter.extend({
 
-
     controller: Editor.Controller,
-
 
     appRoutes: {
       '':                 'showRecordList',
@@ -87,7 +85,6 @@ Neatline.module('Editor', { startWithParent: false,
       'tags/add':         'showNewTagForm',
       'tags/:id':         'showTagForm'
     }
-
 
   });
 

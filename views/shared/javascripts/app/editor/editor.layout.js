@@ -1,5 +1,5 @@
 
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2; */
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
  * Editor layout manager.
@@ -17,8 +17,13 @@ Neatline.module('Editor', { startWithParent: false,
   Editor.Layout = Backbone.Marionette.Layout.extend({
 
 
-    el: window,
+    el: 'body',
 
+    ui: {
+      exhibit:  '#neatline',
+      map:      '#neatline-map',
+      editor:   '#editor'
+    },
 
     regions: {
       editor:   '#editor'
@@ -26,20 +31,19 @@ Neatline.module('Editor', { startWithParent: false,
 
 
     /**
-     * Get region container divs, measure the width of the editor, listen
-     * for window resize, and make starting call to position().
+     * Bind position routine to window resize, do initial position.
      */
     initialize: function() {
 
-      this.exhibitDiv =   $('#neatline');
-      this.mapDiv =       $('#neatline-map');
-      this.editorDiv =    $('#editor');
+      // Get elements.
+      this.window = $(window);
+      this.bindUIElements();
 
-      // Cache default width.
-      this.width = this.editorDiv.width();
+      // Cache starting width.
+      this.width = this.ui.editor.width();
 
       // Listen for window resize.
-      this.$el.resize(_.bind(this.position, this));
+      this.window.resize(_.bind(this.position, this));
       this.position();
 
     },
@@ -48,16 +52,16 @@ Neatline.module('Editor', { startWithParent: false,
     /**
      * Fit the exhibit and editor to fill the screen.
      */
-    position: function() {
+    position: function(e) {
 
       // Measure window.
-      var h = this.$el.height();
-      var w = this.$el.width();
+      var h = this.window.height();
+      var w = this.window.width();
 
       // Render the regions.
-      this.editorDiv.   css({ height: h, width: this.width });
-      this.mapDiv.      css({ height: h, width: w - this.width });
-      this.exhibitDiv.  css({ left: this.width });
+      this.ui.editor.   css({ height: h, width: this.width });
+      this.ui.map.      css({ height: h, width: w - this.width });
+      this.ui.exhibit.  css({ left: this.width });
 
     }
 
