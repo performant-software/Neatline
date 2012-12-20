@@ -13,7 +13,6 @@
 
 ?>
 
-<!-- Record row. -->
 <script id="record-row-template" type="text/templates">
   <span class="record-title"><%= title %></span>
   <span class="record-body"><%= body %></span>

@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
 
 /**
- * Search box in editor.
+ * Record list template (search box and records stack).
  *
  * @package     omeka
  * @subpackage  neatline
@@ -13,7 +13,7 @@
 
 ?>
 
-<script id="search-template" type="text/templates">
-  <input type="text" />
-  <button class="btn"><i class="icon-globe"></i></button>
+<script id="record-list-template" type="text/templates">
+  <div id="search"></div>
+  <div id="records"></div>
 </script>

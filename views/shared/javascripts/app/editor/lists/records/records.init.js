@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Lists initializer.
+ * Records list initializer.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -10,15 +10,15 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Editor.Lists', function(
-  Lists, Neatline, Backbone, Marionette, $, _) {
+Neatline.module('Editor.Lists.Records', function(
+  Records, Neatline, Backbone, Marionette, $, _) {
 
 
   /**
-   * Initialize the list menu layout.
+   * Instantiate the record list layout, search view, and list view.
    */
-  Lists.addInitializer(function() {
-    this.layout = new Lists.Layout();
+  Records.addInitializer(function() {
+    this.layout = new Records.Layout();
   });
 
 
