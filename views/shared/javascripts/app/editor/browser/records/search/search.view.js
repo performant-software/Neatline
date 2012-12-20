@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Records browser initializer.
+ * Search view.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -10,15 +10,12 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Editor.Browser.Records', function(
-  Records, Neatline, Backbone, Marionette, $, _) {
+Neatline.module('Editor.Browser.Records.Search', function(
+  Search, Neatline, Backbone, Marionette, $, _) {
 
 
-  /**
-   * Instantiate the record list layout.
-   */
-  Records.addInitializer(function() {
-    this._layout = new Records.Layout();
+  Search.View = Backbone.Marionette.ItemView.extend({
+    template: '#search-template'
   });
 
 
