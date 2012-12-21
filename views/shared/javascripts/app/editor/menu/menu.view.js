@@ -10,14 +10,14 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Editor.Browser', function(
-  Browser, Neatline, Backbone, Marionette, $, _) {
+Neatline.module('Editor.Menu', function(
+  Menu, Neatline, Backbone, Marionette, $, _) {
 
 
-  Browser.View = Backbone.View.extend({
+  Menu.View = Backbone.View.extend({
 
 
-    template: '#browser-template',
+    template: '#menu-template',
     tagName: 'header',
 
 

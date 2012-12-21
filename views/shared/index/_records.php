@@ -20,6 +20,6 @@
 <?php echo $this->partial('index/_record_row.php'); ?>
 <?php echo $this->partial('index/_record_form.php'); ?>
 <?php echo $this->partial('index/_search.php'); ?>
-<?php echo $this->partial('index/_browser.php', array(
+<?php echo $this->partial('index/_menu.php', array(
   'exhibit' => $exhibit));
 ?>

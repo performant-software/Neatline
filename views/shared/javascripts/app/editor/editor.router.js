@@ -34,8 +34,8 @@ Neatline.module('Editor', { startWithParent: false,
     showRecordList: function() {
 
       // Show the browser menu.
-      Editor.__view.editor.html(Editor.Browser.__view.$el);
-      Editor.Browser.__view.activateRecords();
+      Editor.__view.editor.html(Editor.Menu.__view.$el);
+      Editor.Menu.__view.activateRecords();
 
       // Show the search form and records list.
       Editor.__view.editor.append(Editor.Search.__view.$el);
@@ -68,8 +68,8 @@ Neatline.module('Editor', { startWithParent: false,
     showTagList: function() {
 
       // Show the browser menu.
-      Editor.__view.editor.html(Editor.Browser.__view.$el);
-      Editor.Browser.__view.activateTags();
+      Editor.__view.editor.html(Editor.Menu.__view.$el);
+      Editor.Menu.__view.activateTags();
 
       // Show the tags list.
       Editor.__view.editor.append(Editor.Tags.__view.$el);
