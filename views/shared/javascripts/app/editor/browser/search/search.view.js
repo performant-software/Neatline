@@ -17,7 +17,9 @@ Neatline.module('Editor.Browser.Search', function(
   Search.View = Backbone.Marionette.ItemView.extend({
 
 
-    template: '#search-template',
+    template:   '#search-template',
+    className:  'search',
+    tagName:    'form',
 
 
     /**
