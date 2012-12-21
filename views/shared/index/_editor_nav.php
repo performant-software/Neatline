@@ -15,13 +15,13 @@
 
 <ul class="nav nav-pills">
 
-  <li>
+  <li class="records">
     <a href="#records">
       <i class="icon-file"></i> Records
     </a>
   </li>
 
-  <li>
+  <li class="tags">
     <a href="#tags">
       <i class="icon-tags"></i> Tags
     </a>

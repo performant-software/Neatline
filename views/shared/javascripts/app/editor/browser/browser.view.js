@@ -26,8 +26,8 @@ Neatline.module('Editor.Browser', function(
      */
     initialize: function() {
       this.$el.append(_.template($(this.template).html()));
-      this.recordsTab = this.$('a[href="#records"]').parent('li');
-      this.tagsTab    = this.$('a[href="#tags"]').parent('li');
+      this.recordsTab = this.$('li.records');
+      this.tagsTab    = this.$('li.tags');
     },
 
 
