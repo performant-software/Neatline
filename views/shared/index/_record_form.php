@@ -17,54 +17,50 @@
 <!-- Record edit form. -->
 <script id="record-form-template" type="text/templates">
 
-  <form class="form-stacked">
+  <!-- Close button. -->
+  <button type="button" class="close" data-dismiss="modal"
+    aria-hidden="true">&times;</button>
 
-    <!-- Close button. -->
-    <button type="button" class="close" data-dismiss="modal"
-      aria-hidden="true">&times;</button>
+  <p class="lead"></p>
 
-    <p class="lead"></p>
+  <ul class="nav nav-pills">
 
-    <ul class="nav nav-pills">
+    <li>
+      <a href="#form-text" data-toggle="tab">
+        <i class="icon-font"></i> Text
+      </a>
+    </li>
 
-      <li>
-        <a href="#form-text" data-toggle="tab">
-          <i class="icon-font"></i> Text
-        </a>
-      </li>
+    <li>
+      <a href="#form-spatial" data-toggle="tab">
+        <i class="icon-map-marker"></i> Spatial
+      </a>
+    </li>
 
-      <li>
-        <a href="#form-spatial" data-toggle="tab">
-          <i class="icon-map-marker"></i> Spatial
-        </a>
-      </li>
+    <li>
+      <a href="#form-style" data-toggle="tab">
+        <i class="icon-tasks"></i> Style
+      </a>
+    </li>
 
-      <li>
-        <a href="#form-style" data-toggle="tab">
-          <i class="icon-tasks"></i> Style
-        </a>
-      </li>
+  </ul>
 
-    </ul>
+  <div class="tab-content">
 
-    <div class="tab-content">
-
-      <div class="tab-pane text" id="form-text">
-        <?php echo $this->partial('index/_text_tab.php'); ?>
-      </div>
-
-      <div class="tab-pane spatial" id="form-spatial">
-        <?php echo $this->partial('index/_spatial_tab.php'); ?>
-      </div>
-
-      <div class="tab-pane style" id="form-style">
-        <?php echo $this->partial('index/_style_tab.php'); ?>
-      </div>
-
+    <div class="tab-pane text" id="form-text">
+      <?php echo $this->partial('index/_text_tab.php'); ?>
     </div>
 
-    <?php echo $this->partial('index/_form_menu.php'); ?>
+    <div class="tab-pane spatial" id="form-spatial">
+      <?php echo $this->partial('index/_spatial_tab.php'); ?>
+    </div>
 
-  </form>
+    <div class="tab-pane style" id="form-style">
+      <?php echo $this->partial('index/_style_tab.php'); ?>
+    </div>
+
+  </div>
+
+  <?php echo $this->partial('index/_form_menu.php'); ?>
 
 </script>
