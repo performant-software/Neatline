@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Browser menu and record/tag lists container.
+ * Editor menu.
  *
  * @package     omeka
  * @subpackage  neatline

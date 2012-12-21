@@ -117,7 +117,7 @@ module.exports = function(grunt) {
 
     clean: {
       npm: [
-        config.jasmine.map+'/node_modules',
+        config.jasmine['public']+'/node_modules',
         config.jasmine.editor+'/node_modules'
       ],
       bower: [

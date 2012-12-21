@@ -14,10 +14,8 @@
 
 ?>
 
-<!-- Records. -->
-<?php echo $this->partial('index/_records.php', array(
-  'exhibit' => $exhibit
-)); ?>
+<!-- Editor. -->
+<div id="editor"></div>
 
 <!-- Exhibit. -->
 <?php echo $this->partial('neatline/_neatline.php', array(
@@ -28,3 +26,11 @@
 <script type="text/javascript">
   __editor = <?php echo neatline_editorGlobals($exhibit); ?>
 </script>
+
+<!-- Templates. -->
+<?php echo $this->partial('index/underscore/_record_row.php'); ?>
+<?php echo $this->partial('index/underscore/_record_form.php'); ?>
+<?php echo $this->partial('index/underscore/_search.php'); ?>
+<?php echo $this->partial('index/underscore/_menu.php', array(
+  'exhibit' => $exhibit));
+?>

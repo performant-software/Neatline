@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Text tab template.
+ * Bootstrap textarea.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -15,15 +15,10 @@
 
 
 <div class="control-group">
-  <label for="title"><?php echo __('Title'); ?></label>
+  <label for="<?php echo $name; ?>">
+    <?php echo __($title); ?>
+  </label>
   <div class="controls">
-    <textarea name="title"></textarea>
-  </div>
-</div>
-
-<div class="control-group">
-  <label for="description"><?php echo __('Body'); ?></label>
-  <div class="controls">
-    <textarea name="body"></textarea>
+    <textarea name="<?php echo $name; ?>"></textarea>
   </div>
 </div>

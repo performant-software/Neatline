@@ -3,9 +3,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * The top-level Neatline editor view. Wraps the markup for the editing
- * interface and then calls the central _neatline.php partial, which is
- * shared with public views.
+ * Neatline editor.
  *
  * @package     omeka
  * @subpackage  neatline

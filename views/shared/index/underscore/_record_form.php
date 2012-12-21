@@ -18,8 +18,7 @@
 <script id="record-form-template" type="text/templates">
 
   <!-- Close button. -->
-  <button type="button" class="close" data-dismiss="modal"
-    aria-hidden="true">&times;</button>
+  <button type="button" class="close">&times;</button>
 
   <p class="lead"></p>
 
@@ -44,19 +43,27 @@
   <div class="tab-content">
 
     <div class="tab-pane text" id="form-text">
-      <?php echo $this->partial('index/_text_tab.php'); ?>
+      <?php echo $this->partial(
+        'index/underscore/partials/_text_tab.php'
+      ); ?>
     </div>
 
     <div class="tab-pane spatial" id="form-spatial">
-      <?php echo $this->partial('index/_spatial_tab.php'); ?>
+      <?php echo $this->partial(
+        'index/underscore/partials/_spatial_tab.php'
+      ); ?>
     </div>
 
     <div class="tab-pane style" id="form-style">
-      <?php echo $this->partial('index/_style_tab.php'); ?>
+      <?php echo $this->partial(
+        'index/underscore/partials/_style_tab.php'
+      ); ?>
     </div>
 
   </div>
 
-  <?php echo $this->partial('index/_form_menu.php'); ?>
+  <?php echo $this->partial(
+    'index/underscore/partials/_form_menu.php'
+  ); ?>
 
 </script>
