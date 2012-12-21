@@ -14,14 +14,20 @@
 ?>
 
 
-<?php echo $this->partial(
-  'index/underscore/helpers/_textarea.php', array(
-    'name' => 'title',
-    'title' => 'Title'
-)); ?>
+<div class="control-group">
 
-<?php echo $this->partial(
-  'index/underscore/helpers/_textarea.php', array(
-    'name' => 'body',
-    'title' => 'Body'
-)); ?>
+  <legend>Text Annotation</legend>
+
+  <?php echo $this->partial(
+    'index/underscore/helpers/_textarea.php', array(
+      'name' => 'title',
+      'title' => 'Title'
+  )); ?>
+
+  <?php echo $this->partial(
+    'index/underscore/helpers/_textarea.php', array(
+      'name' => 'body',
+      'title' => 'Body'
+  )); ?>
+
+</div>

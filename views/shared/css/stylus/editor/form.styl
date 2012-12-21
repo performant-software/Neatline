@@ -15,14 +15,13 @@
 
 
 #editor
-  background #fcfcfc
-  width editorWidth
-  overflow-y scroll
-  overflow-x hidden
 
   form.record
   form.tag
     margin editorMargin
+
+    legend
+      font-weight bold
 
     button.close
       font-size 3em
@@ -75,10 +74,11 @@
             margin 0
 
       textarea[name="coverage"]
-        height 80px
-        font-family Consolas
-        font-weight bold
-        font-size 11px
+        height 100px
+        font-size 12px
+
+      button[name="focus-map"]
+        margin 5px 0 10px
 
     #form-style
 
@@ -86,6 +86,7 @@
         margin-bottom 10px
 
     .actions
+      margin-top 1em
 
       a
         margin-right 5px

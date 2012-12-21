@@ -14,9 +14,9 @@
 ?>
 
 
-<legend>Edit Geometry</legend>
+<div class="control-group geometry">
 
-<div class="geometry">
+  <legend>Geometry</legend>
 
   <label class="radio">
     <input type="radio" name="editMode" value="pan" checked>
@@ -91,12 +91,58 @@
     Delete Shape
   </label>
 
+  <hr>
+
+  <div class="control-group">
+    <div class="controls">
+      <textarea name="coverage"
+        placeholder="Spatial Data (Well-Known Text)"></textarea>
+    </div>
+  </div>
+
 </div>
 
-<legend>Spatial Data</legend>
+<div class="control-group">
+
+  <legend>Visibility</legend>
+
+  <?php echo $this->partial(
+    'index/underscore/helpers/_text_input.php', array(
+      'name' => 'min-zoom',
+      'title' => 'Min Zoom'
+  )); ?>
+
+  <?php echo $this->partial(
+    'index/underscore/helpers/_text_input.php', array(
+      'name' => 'max-zoom',
+      'title' => 'Max Zoom'
+  )); ?>
+
+</div>
 
 <div class="control-group">
+
+  <legend>Focus</legend>
+
+  <?php echo $this->partial(
+    'index/underscore/helpers/_text_input.php', array(
+      'name' => 'map-focus',
+      'title' => 'Coordinates'
+  )); ?>
+
+  <?php echo $this->partial(
+    'index/underscore/helpers/_text_input.php', array(
+      'name' => 'map-zoom',
+      'title' => 'Zoom Level'
+  )); ?>
+
   <div class="controls">
-    <textarea name="coverage"></textarea>
+    <div class="inline-inputs">
+      <button name="focus-map" class="btn btn-small">
+        <i class="icon-map-marker"></i> Use Current Focus
+      </button>
+    </div>
   </div>
+
+
 </div>

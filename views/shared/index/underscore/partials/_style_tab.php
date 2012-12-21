@@ -14,84 +14,86 @@
 ?>
 
 
-<legend>Color</legend>
+<div class="control-group">
 
-<?php echo $this->partial(
-  'index/underscore/helpers/_text_input.php', array(
-    'name' => 'vector-color',
-    'title' => 'Shape Color'
-)); ?>
+  <legend>Color</legend>
 
-<?php echo $this->partial(
-  'index/underscore/helpers/_text_input.php', array(
-    'name' => 'stroke-color',
-    'title' => 'Line Color'
-)); ?>
+  <?php echo $this->partial(
+    'index/underscore/helpers/_text_input.php', array(
+      'name' => 'vector-color',
+      'title' => 'Shape Color'
+  )); ?>
 
-<?php echo $this->partial(
-  'index/underscore/helpers/_text_input.php', array(
-    'name' => 'select-color',
-    'title' => 'Selected Color'
-)); ?>
+  <?php echo $this->partial(
+    'index/underscore/helpers/_text_input.php', array(
+      'name' => 'stroke-color',
+      'title' => 'Line Color'
+  )); ?>
 
-<legend>Opacity</legend>
+  <?php echo $this->partial(
+    'index/underscore/helpers/_text_input.php', array(
+      'name' => 'select-color',
+      'title' => 'Selected Color'
+  )); ?>
 
-<?php echo $this->partial(
-  'index/underscore/helpers/_text_input.php', array(
-    'name' => 'vector-opacity',
-    'title' => 'Shape Opacity'
-)); ?>
+</div>
 
-<?php echo $this->partial(
-  'index/underscore/helpers/_text_input.php', array(
-    'name' => 'select-color',
-    'title' => 'Selected Opacity'
-)); ?>
+<div class="control-group">
 
-<?php echo $this->partial(
-  'index/underscore/helpers/_text_input.php', array(
-    'name' => 'stroke-opacity',
-    'title' => 'Line Opacity'
-)); ?>
+  <legend>Opacity</legend>
 
-<?php echo $this->partial(
-  'index/underscore/helpers/_text_input.php', array(
-    'name' => 'image-opacity',
-    'title' => 'Image Opacity'
-)); ?>
+  <?php echo $this->partial(
+    'index/underscore/helpers/_text_input.php', array(
+      'name' => 'vector-opacity',
+      'title' => 'Shape Opacity'
+  )); ?>
 
-<legend>Size</legend>
+  <?php echo $this->partial(
+    'index/underscore/helpers/_text_input.php', array(
+      'name' => 'select-color',
+      'title' => 'Selected Opacity'
+  )); ?>
 
-<?php echo $this->partial(
-  'index/underscore/helpers/_text_input.php', array(
-    'name' => 'stroke-width',
-    'title' => 'Line Width'
-)); ?>
+  <?php echo $this->partial(
+    'index/underscore/helpers/_text_input.php', array(
+      'name' => 'stroke-opacity',
+      'title' => 'Line Opacity'
+  )); ?>
 
-<?php echo $this->partial(
-  'index/underscore/helpers/_text_input.php', array(
-    'name' => 'point-radius',
-    'title' => 'Point Radius'
-)); ?>
+  <?php echo $this->partial(
+    'index/underscore/helpers/_text_input.php', array(
+      'name' => 'image-opacity',
+      'title' => 'Image Opacity'
+  )); ?>
 
-<legend>Image</legend>
+</div>
 
-<?php echo $this->partial(
-  'index/underscore/helpers/_text_input.php', array(
-    'name' => 'point-image',
-    'title' => 'Point Image'
-)); ?>
+<div class="control-group">
 
-<legend>Visibility</legend>
+  <legend>Size</legend>
 
-<?php echo $this->partial(
-  'index/underscore/helpers/_text_input.php', array(
-    'name' => 'min-zoom',
-    'title' => 'Min Zoom'
-)); ?>
+  <?php echo $this->partial(
+    'index/underscore/helpers/_text_input.php', array(
+      'name' => 'stroke-width',
+      'title' => 'Line Width'
+  )); ?>
 
-<?php echo $this->partial(
-  'index/underscore/helpers/_text_input.php', array(
-    'name' => 'max-zoom',
-    'title' => 'Max Zoom'
-)); ?>
+  <?php echo $this->partial(
+    'index/underscore/helpers/_text_input.php', array(
+      'name' => 'point-radius',
+      'title' => 'Point Radius'
+  )); ?>
+
+</div>
+
+<div class="control-group">
+
+  <legend>Image</legend>
+
+  <?php echo $this->partial(
+    'index/underscore/helpers/_text_input.php', array(
+      'name' => 'point-image',
+      'title' => 'Point Image'
+  )); ?>
+
+</div>
