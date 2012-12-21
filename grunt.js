@@ -189,8 +189,7 @@ module.exports = function(grunt) {
       },
       neatline_css: {
         src: [
-          config.payloads.css+'/map.css',
-          config.payloads.css+'/bubble.css',
+          config.payloads.css+'/public/*.css',
           config.vendor.css.openlayers,
           config.vendor.css.bootstrap
         ],
@@ -199,8 +198,7 @@ module.exports = function(grunt) {
       editor_css: {
         src: [
           '<config:concat.neatline_css.src>',
-          config.payloads.css+'/overrides.css',
-          config.payloads.css+'/editor.css'
+          config.payloads.css+'/editor/*.css'
         ],
         dest: config.payloads.css+'/editor.css'
       }
@@ -221,13 +219,13 @@ module.exports = function(grunt) {
 
     stylus: {
       compile: {
-        options: {},
+        options: {
+          paths: [config.stylus]
+        },
         files: {
           'views/shared/css/payloads/*.css': [
-            config.stylus+'/map.styl',
-            config.stylus+'/bubble.styl',
-            config.stylus+'/editor.styl',
-            config.stylus+'/overrides.styl'
+            config.stylus+'/public/*.styl',
+            config.stylus+'/editor/*.styl'
           ]
         }
       }
@@ -238,7 +236,7 @@ module.exports = function(grunt) {
         files: [
           '<config:concat.neatline.src>',
           '<config:concat.editor.src>',
-          config.stylus+'/*.styl'
+          config.stylus+'/**/*.styl'
         ],
         tasks: [
           'concat:neatline',

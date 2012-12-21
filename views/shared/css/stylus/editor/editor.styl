@@ -1,0 +1,34 @@
+
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
+
+/**
+ * Editor styles.
+ *
+ * @package     omeka
+ * @subpackage  neatline
+ * @copyright   2012 Rector and Board of Visitors, University of Virginia
+ * @license     http://www.apache.org/licenses/LICENSE-2.0.html
+ */
+
+
+@import '_constants'
+
+
+body
+  margin 0
+  text-rendering optimizeLegibility
+
+#editor
+#neatline
+  position absolute
+  box-sizing border-box
+
+#neatline
+  -webkit-user-select none
+  -moz-user-select none
+
+#editor
+  background #fcfcfc
+  width editorWidth
+  overflow-y scroll
+  overflow-x hidden

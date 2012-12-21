@@ -1,5 +1,8 @@
+
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
+
 /**
- * Constants.
+ * Search box styles.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -8,11 +11,13 @@
  */
 
 
-// Colors:
-neatlineColor = #5b396c
-highlightColor = #08c
+@import '_constants'
 
-// Sizes:
-editorWidth = 380px
-editorMargin = 1.6em
-menuHeight = 70px
+
+#editor
+
+  .search
+    margin editorMargin
+
+      &.bold
+        font-weight bold
