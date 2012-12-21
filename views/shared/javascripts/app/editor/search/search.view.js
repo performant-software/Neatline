@@ -14,7 +14,7 @@ Neatline.module('Editor.Search', function(
   Search, Neatline, Backbone, Marionette, $, _) {
 
 
-  Search.View = Backbone.Marionette.ItemView.extend({
+  Search.View = Backbone.View.extend({
 
 
     template:   '#search-template',

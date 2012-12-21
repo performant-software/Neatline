@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Records list initializer.
+ * Tag form initializer.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -10,15 +10,15 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Editor.Records', function(
-  Records, Neatline, Backbone, Marionette, $, _) {
+Neatline.module('Editor.Tag', function(
+  Tag, Neatline, Backbone, Marionette, $, _) {
 
 
   /**
-   * Instantiate the record list view.
+   * Instantiate the tag form view.
    */
-  Records.addInitializer(function() {
-    this.__view = new Records.View();
+  Tag.addInitializer(function() {
+    this.__view = new Tag.View();
   });
 
 

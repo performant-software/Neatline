@@ -50,7 +50,7 @@ Neatline.module('Editor', { startWithParent: false,
      * @param {String} id: The record id.
      */
     showRecordForm: function(id) {
-      console.log('showRecordForm', id);
+      Editor.__view.editor.html(Editor.Record.__view.$el);
     },
 
 
@@ -58,7 +58,7 @@ Neatline.module('Editor', { startWithParent: false,
      * Show add record form.
      */
     showNewRecordForm: function() {
-      console.log('showNewRecordForm');
+      Editor.__view.editor.html(Editor.Record.__view.$el);
     },
 
 
@@ -83,7 +83,7 @@ Neatline.module('Editor', { startWithParent: false,
      * @param {String} id: The tag id.
      */
     showTagForm: function(id) {
-      console.log('showTagForm', id);
+      Editor.__view.editor.html(Editor.Tag.__view.$el);
     },
 
 
@@ -91,7 +91,7 @@ Neatline.module('Editor', { startWithParent: false,
      * Show add tag form.
      */
     showNewTagForm: function() {
-      console.log('showNewTagForm');
+      Editor.__view.editor.html(Editor.Tag.__view.$el);
     }
 
 
