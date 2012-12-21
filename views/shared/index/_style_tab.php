@@ -14,6 +14,8 @@
 ?>
 
 
+<legend>Color</legend>
+
 <label><?php echo __('Shape Color'); ?></label>
 <div class="controls">
   <div class="inline-inputs">
@@ -34,6 +36,8 @@
     <input type="text" name="select-color" />
   </div>
 </div>
+
+<legend>Opacity</legend>
 
 <label><?php echo __('Shape Opacity'); ?></label>
 <div class="controls">
@@ -63,6 +67,8 @@
   </div>
 </div>
 
+<legend>Size</legend>
+
 <label><?php echo __('Line Width'); ?></label>
 <div class="controls">
   <div class="inline-inputs">
@@ -77,12 +83,16 @@
   </div>
 </div>
 
+<legend>Image</legend>
+
 <label><?php echo __('Point Graphic'); ?></label>
 <div class="controls">
   <div class="inline-inputs">
     <input name="point-image" type="text" />
   </div>
 </div>
+
+<legend>Visibility</legend>
 
 <label><?php echo __('Min Zoom'); ?></label>
 <div class="controls">

@@ -14,9 +14,6 @@ Neatline.module('Editor.Tag', function(
   Tag, Neatline, Backbone, Marionette, $, _) {
 
 
-  /**
-   * Instantiate the tag form view.
-   */
   Tag.addInitializer(function() {
     this.__view = new Tag.View();
   });

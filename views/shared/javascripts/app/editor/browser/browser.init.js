@@ -14,9 +14,6 @@ Neatline.module('Editor.Browser', function(
   Browser, Neatline, Backbone, Marionette, $, _) {
 
 
-  /**
-   * Initialize the list menu view.
-   */
   Browser.addInitializer(function() {
     this.__view = new Browser.View();
   });

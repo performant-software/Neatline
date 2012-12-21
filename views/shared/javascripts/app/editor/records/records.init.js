@@ -14,9 +14,6 @@ Neatline.module('Editor.Records', function(
   Records, Neatline, Backbone, Marionette, $, _) {
 
 
-  /**
-   * Instantiate the record list view.
-   */
   Records.addInitializer(function() {
     this.__view = new Records.View();
   });
