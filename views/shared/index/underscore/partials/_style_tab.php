@@ -39,7 +39,7 @@
 <?php echo $this->partial(
   'index/underscore/helpers/_text_input.php', array(
     'name' => 'vector-opacity',
-    'title' => 'Shape Color'
+    'title' => 'Shape Opacity'
 )); ?>
 
 <?php echo $this->partial(
@@ -57,7 +57,7 @@
 <?php echo $this->partial(
   'index/underscore/helpers/_text_input.php', array(
     'name' => 'image-opacity',
-    'title' => 'Point Image Opacity'
+    'title' => 'Image Opacity'
 )); ?>
 
 <legend>Size</legend>
