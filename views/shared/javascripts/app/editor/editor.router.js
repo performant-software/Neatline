@@ -43,8 +43,8 @@ Neatline.module('Editor', { startWithParent: false,
 
       // Show the search form and records list.
       // ------------------------------------------------------------------
-      Editor.__view.editor.append(Editor.Browser.Search.__view.$el);
-      Editor.__view.editor.append(Editor.Browser.Records.__view.$el);
+      Editor.__view.editor.append(Editor.Search.__view.$el);
+      Editor.__view.editor.append(Editor.Records.__view.$el);
       // ------------------------------------------------------------------
 
 
@@ -84,7 +84,7 @@ Neatline.module('Editor', { startWithParent: false,
 
       // Show the tags list.
       // ------------------------------------------------------------------
-      Editor.__view.editor.append(Editor.Browser.Tags.__view.$el);
+      // Editor.__view.editor.append(Editor.Tags.__view.$el);
       // ------------------------------------------------------------------
 
 

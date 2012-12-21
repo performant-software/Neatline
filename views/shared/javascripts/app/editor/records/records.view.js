@@ -10,17 +10,13 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Editor.Browser.Records', function(
+Neatline.module('Editor.Records', function(
   Records, Neatline, Backbone, Marionette, $, _) {
 
 
   Records.View = Backbone.Marionette.Layout.extend({
-
-
-    tagName: 'ul',
-    className: 'records'
-
-
+    className: 'records',
+    tagName: 'ul'
   });
 
 
