@@ -14,12 +14,6 @@
 ?>
 
 <script id="browser-template" type="text/templates">
-
-  <header>
-    <p class="lead"><?php echo $exhibit->title; ?></p>
-    <?php echo $this->partial('index/_editor_nav.php'); ?>
-  </header>
-
-  <div id="browser"></div>
-
+  <p class="lead"><?php echo $exhibit->title; ?></p>
+  <?php echo $this->partial('index/_editor_nav.php'); ?>
 </script>

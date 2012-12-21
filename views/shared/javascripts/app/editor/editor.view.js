@@ -19,21 +19,19 @@ Neatline.module('Editor', { startWithParent: false,
 
     el: 'body',
 
-    ui: {
-      exhibit:  '#neatline',
-      map:      '#neatline-map',
-      editor:   '#editor'
-    },
-
 
     /**
      * Bind position routine to window resize, do initial position.
      */
     initialize: function() {
 
+      this.window =   $(window);
+      this.exhibit =  this.$('#neatline');
+      this.map =      this.$('#neatline-map');
+      this.editor =   this.$('#editor');
+
       // Cache starting width.
-      this.width = this.ui.editor.width();
-      this.window = $(window);
+      this.width = this.editor.width();
 
       // Listen for window resize.
       this.window.resize(_.bind(this.position, this));
@@ -51,10 +49,9 @@ Neatline.module('Editor', { startWithParent: false,
       var h = this.window.height();
       var w = this.window.width();
 
-      // Render the regions.
-      this.ui.editor.   css({ height: h, width: this.width });
-      this.ui.map.      css({ height: h, width: w - this.width });
-      this.ui.exhibit.  css({ left: this.width });
+      this.editor.    css({ height: h, width: this.width });
+      this.map.       css({ height: h, width: w - this.width });
+      this.exhibit.   css({ left: this.width });
 
     }
 

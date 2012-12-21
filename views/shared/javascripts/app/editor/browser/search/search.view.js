@@ -10,12 +10,24 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Editor.Browser.Records.Search', function(
+Neatline.module('Editor.Browser.Search', function(
   Search, Neatline, Backbone, Marionette, $, _) {
 
 
   Search.View = Backbone.Marionette.ItemView.extend({
-    template: '#search-template'
+
+
+    template: '#search-template',
+
+
+    /**
+     * Inject the template.
+     */
+    initialize: function() {
+      this.$el.append(_.template($(this.template).html()));
+    }
+
+
   });
 
 

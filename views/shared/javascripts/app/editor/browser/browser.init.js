@@ -15,10 +15,10 @@ Neatline.module('Editor.Browser', function(
 
 
   /**
-   * Initialize the list menu layout.
+   * Initialize the list menu view.
    */
   Browser.addInitializer(function() {
-    this._layout = new Browser.Layout();
+    this.__view = new Browser.View();
   });
 
 

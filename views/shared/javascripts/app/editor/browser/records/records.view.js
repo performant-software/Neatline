@@ -14,15 +14,11 @@ Neatline.module('Editor.Browser.Records', function(
   Records, Neatline, Backbone, Marionette, $, _) {
 
 
-  Records.Layout = Backbone.Marionette.Layout.extend({
+  Records.View = Backbone.Marionette.Layout.extend({
 
 
-    template: '#record-list-template',
-
-    regions: {
-      search:   '#search',
-      records:  '#records'
-    }
+    tagName: 'ul',
+    className: 'records'
 
 
   });

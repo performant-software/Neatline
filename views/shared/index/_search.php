@@ -14,6 +14,8 @@
 ?>
 
 <script id="search-template" type="text/templates">
-  <input type="text" />
-  <button class="btn"><i class="icon-globe"></i></button>
+  <div class="search input-append">
+    <input type="text" class="input-large" />
+    <button class="btn"><i class="icon-globe"></i></button>
+  </div>
 </script>

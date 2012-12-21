@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Editor routes.
+ * Editor controller.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -32,7 +32,19 @@ Neatline.module('Editor', { startWithParent: false,
      * Show the list of records.
      */
     showRecordList: function() {
-      console.log('showRecordList');
+
+      // Show the browser menu.
+      // ------------------------------------------------------------------
+      Editor.__view.editor.html(Editor.Browser.__view.$el);
+      Editor.Browser.__view.activateRecords();
+      // ------------------------------------------------------------------
+
+      // Show the search form and records list.
+      // ------------------------------------------------------------------
+      Editor.__view.editor.append(Editor.Browser.Search.__view.$el);
+      Editor.__view.editor.append(Editor.Browser.Records.__view.$el);
+      // ------------------------------------------------------------------
+
     },
 
 
@@ -58,7 +70,11 @@ Neatline.module('Editor', { startWithParent: false,
      * Show the list of tags.
      */
     showTagList: function() {
-      console.log('showTagList');
+
+      // Show the browser menu.
+      Editor.__view.editor.html(Editor.Browser.__view.$el);
+      Editor.Browser.__view.activateTags();
+
     },
 
 

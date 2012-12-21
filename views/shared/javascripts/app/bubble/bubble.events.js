@@ -49,15 +49,6 @@ Neatline.module('Bubble', function(
 
 
   /**
-   * Close the bubble when an edit form is closed.
-   */
-  Neatline.vent.on('editor:form:close', function() {
-    Bubble.__view.activate();
-    Bubble.__view.thaw();
-  });
-
-
-  /**
    * Close and deactivate the bubble when the "Spatial" tab is active.
    */
   Neatline.vent.on('editor:form:spatialSelect', function() {
@@ -71,6 +62,15 @@ Neatline.module('Bubble', function(
    */
   Neatline.vent.on('editor:form:spatialDeselect', function(model) {
     Bubble.__view.activate();
+  });
+
+
+  /**
+   * Close the bubble when an edit form is closed.
+   */
+  Neatline.vent.on('editor:form:close', function() {
+    Bubble.__view.activate();
+    Bubble.__view.thaw();
   });
 
 

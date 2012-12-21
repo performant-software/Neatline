@@ -29,7 +29,7 @@ Neatline.module('Editor', { startWithParent: false,
    */
   Editor.addInitializer(function() {
     this.__router = new Editor.Router();
-    // this.__view   = new Editor.View();
+    this.__view   = new Editor.View();
   });
 
 

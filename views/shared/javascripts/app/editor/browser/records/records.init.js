@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Records browser initializer.
+ * Records list initializer.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -15,10 +15,10 @@ Neatline.module('Editor.Browser.Records', function(
 
 
   /**
-   * Instantiate the record list layout.
+   * Instantiate the record view.
    */
   Records.addInitializer(function() {
-    this._layout = new Records.Layout();
+    this.__view = new Records.View();
   });
 
 

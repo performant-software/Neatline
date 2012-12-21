@@ -10,7 +10,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Editor.Browser.Records.Search', function(
+Neatline.module('Editor.Browser.Search', function(
   Search, Neatline, Backbone, Marionette, $, _) {
 
 
@@ -18,7 +18,7 @@ Neatline.module('Editor.Browser.Records.Search', function(
    * Instantiate the search view.
    */
   Search.addInitializer(function() {
-    this._view = new Search.View();
+    this.__view = new Search.View();
   });
 
 

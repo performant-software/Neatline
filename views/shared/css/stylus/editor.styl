@@ -42,13 +42,13 @@ body
   header
     margin 1.6em
 
-    // Search/buttons.
-    // ---------------
+  // Search/buttons.
+  // ---------------
 
-    #search
-      input
-        &.bold
-          font-weight bold
+  .search
+
+      &.bold
+        font-weight bold
 
   // Records list.
   // -------------
@@ -78,80 +78,82 @@ body
   form
     margin 1.6em
 
-    button.close
-      font-size 3em
-      line-height 1em
-      margin-top -10px
-      margin-left 5px
+    &.record
 
-    ul.nav
-      margin-top 20px
+      button.close
+        font-size 3em
+        line-height 1em
+        margin-top -10px
+        margin-left 5px
 
-    h3.head
-      font-size 2em
-      font-weight 300
+      ul.nav
+        margin-top 20px
 
-    textarea
-    input[type="text"]
-      width 95%
+      h3.head
+        font-size 2em
+        font-weight 300
 
-      &[name="title"]
-        height 100px
+      textarea
+      input[type="text"]
+        width 95%
 
-      &[name="body"]
-        height 300px
+        &[name="title"]
+          height 100px
 
-    // Spatial tab.
-    // ------------
+        &[name="body"]
+          height 300px
 
-    #form-spatial
+      // Spatial tab.
+      // ------------
 
-      label.radio
-      label.checkbox
-        cursor pointer
+      #form-spatial
 
-        &:hover
-          color #08C
+        label.radio
+        label.checkbox
+          cursor pointer
 
-      label.radio
-        margin-left 0.5em
+          &:hover
+            color #08C
 
-      div.control-group.indent
-        margin-left 1.4em
+        label.radio
+          margin-left 0.5em
 
-        &.regular-polygon
+        div.control-group.indent
+          margin-left 1.4em
 
-          .inline-inputs
-            margin-bottom 5px
+          &.regular-polygon
 
-          input[type="text"]
-            display inline
-            line-height 1em
-            width 20px
-            padding 0 5px
-            margin 0
+            .inline-inputs
+              margin-bottom 5px
 
-      textarea[name="coverage"]
-        height 80px
-        font-family Consolas
-        font-weight bold
-        font-size 11px
+            input[type="text"]
+              display inline
+              line-height 1em
+              width 20px
+              padding 0 5px
+              margin 0
 
-    // Spatial tab.
-    // ------------
+        textarea[name="coverage"]
+          height 80px
+          font-family Consolas
+          font-weight bold
+          font-size 11px
 
-    #form-style
+      // Spatial tab.
+      // ------------
 
-      div.controls:last-child
-        margin-bottom 10px
+      #form-style
 
-    // Form buttons.
-    // -------------
+        div.controls:last-child
+          margin-bottom 10px
 
-    .actions
+      // Form buttons.
+      // -------------
 
-      a
-        margin-right 5px
+      .actions
 
-        &[name="save"]
-          width 80px
+        a
+          margin-right 5px
+
+          &[name="save"]
+            width 80px
