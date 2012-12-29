@@ -16,8 +16,6 @@ _t = {};
 
 /**
  * Load neatline application.
- *
- * @return void.
  */
 _t.loadNeatline = function() {
 
@@ -42,8 +40,6 @@ _t.loadNeatline = function() {
 
 /**
  * Load the Neatline `Map` module.
- *
- * @return void.
  */
 _t.loadMapModule = function() {
 
@@ -70,8 +66,6 @@ _t.loadBubbleModule = function() {
 
 /**
  * Load editor application.
- *
- * @return void.
  */
 _t.loadEditor = function() {
 
@@ -99,8 +93,6 @@ _t.loadEditor = function() {
 
 /**
  * Load the `Editor` module.
- *
- * @return void.
  */
 _t.loadEditorModule = function() {
 
@@ -121,37 +113,31 @@ _t.loadEditorModule = function() {
 
 /**
  * Shortcut public-facing exhibit components.
- *
- * @return void.
  */
 _t.shortcutNeatlineComponents = function() {
-  this.mapColl = Neatline.Map.collection;
-  this.mapView = Neatline.Map.view;
-  this.bubbleView = Neatline.Bubble.view;
+  this.mapColl =        Neatline.Map.collection;
+  this.mapView =        Neatline.Map.view;
+  this.bubbleView =     Neatline.Bubble.view;
 };
 
 
 /**
  * Shortcut editor components.
- *
- * @return void.
  */
 _t.shortcutEditorComponents = function() {
-  this.layoutView = Neatline.Editor.Layout.view;
-  this.recordsView = Neatline.Editor.Records.view;
-  this.formView = Neatline.Editor.Form.view;
-  this.textTabView = Neatline.Editor.Form.TextTab.view;
+  this.layoutView =     Neatline.Editor.Layout.view;
+  this.recordsView =    Neatline.Editor.Records.view;
+  this.formView =       Neatline.Editor.Form.view;
+  this.textTabView =    Neatline.Editor.Form.TextTab.view;
   this.spatialTabView = Neatline.Editor.Form.SpatialTab.view;
-  this.styleTabView = Neatline.Editor.Form.StyleTab.view;
-  this.searchView = Neatline.Editor.Search.view;
-  this.recordsColl = Neatline.Editor.Records.collection;
+  this.styleTabView =   Neatline.Editor.Form.StyleTab.view;
+  this.searchView =     Neatline.Editor.Search.view;
+  this.recordsColl =    Neatline.Editor.Records.collection;
 };
 
 
 /**
  * Set the fixtures path.
- *
- * @return void.
  */
 _t.setFixturesPath = function() {
   jasmine.getFixtures().fixturesPath = 'shared/fixtures';
@@ -160,9 +146,7 @@ _t.setFixturesPath = function() {
 
 
 /**
- * Get DOM collection of editor record listings.
- *
- * @return void.
+ * Read JSON fixtures.
  */
 _t.loadJsonFixtures = function() {
   this.json = {
@@ -279,7 +263,7 @@ _t.respondAll200 = function(response) {
  * @return {Object} response: The last request.
  */
 _t.respondLast200 = function(response) {
-  var request = _.last(this.server.requests);
+  var request = this.getLastRequest();
   this.respond200(request, response);
   return request;
 };
@@ -287,8 +271,6 @@ _t.respondLast200 = function(response) {
 
 /**
  * Trigger a pan/zoom event on the map.
- *
- * @return void.
  */
 _t.triggerMapMove = function() {
   Neatline.Map.view.map.events.triggerEvent('moveend');
@@ -297,8 +279,6 @@ _t.triggerMapMove = function() {
 
 /**
  * Trigger a mouseout event on the map.
- *
- * @return void.
  */
 _t.triggerMapMouseout = function() {
   Neatline.Map.view.map.events.triggerEvent('mouseout');
@@ -309,7 +289,6 @@ _t.triggerMapMouseout = function() {
  * Simulate map move event and plug in JSON fixture.
  *
  * @param {Object} response: The response body.
- * @return void.
  */
 _t.refreshMap = function(response) {
   this.triggerMapMove();
@@ -322,7 +301,6 @@ _t.refreshMap = function(response) {
  *
  * @param {Object} layer: The feature parent layer.
  * @param {Object} feature: The feature to be clicked on.
- * @return void.
  */
 _t.clickOnMapFeature = function(layer, feature) {
 
@@ -347,7 +325,6 @@ _t.clickOnMapFeature = function(layer, feature) {
  * Simulate a click out on a map feature.
  *
  * @param {Array} layers: All vector layers on the map.
- * @return void.
  */
 _t.clickOffMapFeature = function(layers) {
 
@@ -375,7 +352,6 @@ _t.clickOffMapFeature = function(layers) {
  *
  * @param {Object} layer: The feature parent layer.
  * @param {Object} feature: The feature to be clicked on.
- * @return void.
  */
 _t.hoverOnMapFeature = function(layer, feature) {
 
@@ -400,7 +376,6 @@ _t.hoverOnMapFeature = function(layer, feature) {
  * Simulate a mouseleave on a map feature.
  *
  * @param {Array} layers: All vector layers on the map.
- * @return void.
  */
 _t.unHoverOnMapFeature = function(layers) {
 
@@ -429,7 +404,6 @@ _t.unHoverOnMapFeature = function(layers) {
  * @param {Number} lon: The longitude.
  * @param {Number} lat: The latitude.
  * @param {Number} zoom: The zoom level.
- * @return void.
  */
 _t.setMapCenter = function(lon, lat, zoom) {
   var lonlat = new OpenLayers.LonLat(lon, lat);

@@ -1,48 +1,48 @@
 {
 
-  "app": "./views/shared/javascripts/app",
-  "stylus": "./views/shared/css/stylus",
+  "app":            "./views/shared/javascripts/app",
+  "stylus":         "./views/shared/css/stylus",
 
   "payloads": {
-    "js": "./views/shared/javascripts/payloads",
-    "css": "./views/shared/css/payloads"
+    "js":           "./views/shared/javascripts/payloads",
+    "css":          "./views/shared/css/payloads"
   },
 
   "jasmine": {
-    "public": "./views/shared/javascripts/tests/public",
-    "editor": "./views/shared/javascripts/tests/editor"
+    "public":       "./views/shared/javascripts/tests/public",
+    "editor":       "./views/shared/javascripts/tests/editor"
   },
 
   "bower": {
-    "app": "./views/shared/javascripts",
-    "tests": "./views/shared/javascripts/shared/helpers"
+    "app":          "./views/shared/javascripts",
+    "tests":        "./views/shared/javascripts/shared/helpers"
   },
 
   "build": {
-    "openlayers": "./views/shared/javascripts/components/openlayers/build",
-    "bootstrap": "./views/shared/javascripts/components/bootstrap"
+    "openlayers":   "./views/shared/javascripts/components/openlayers/build",
+    "bootstrap":    "./views/shared/javascripts/components/bootstrap"
   },
 
   "vendor": {
     "js": {
-      "jquery": "./views/shared/javascripts/components/jquery/jquery.js",
-      "underscore": "./views/shared/javascripts/components/underscore/underscore.js",
-      "underscore_s": "./views/shared/javascripts/components/underscore.string/lib/underscore.string.js",
-      "backbone": "./views/shared/javascripts/components/backbone/backbone.js",
-      "eventbinder": "./views/shared/javascripts/components/Backbone.EventBinder/lib/backbone.eventbinder.js",
-      "wreqr": "./views/shared/javascripts/components/Backbone.Wreqr/lib/backbone.wreqr.js",
-      "marionette": "./views/shared/javascripts/components/backbone.marionette/lib/backbone.marionette.js",
-      "openlayers": "./views/shared/javascripts/components/openlayers/build/OpenLayers.js",
-      "bootstrap": "./views/shared/javascripts/components/bootstrap/bootstrap/js/bootstrap.js",
-      "noty": "./views/shared/javascripts/components/noty/js/noty/jquery.noty.js",
-      "noty_layout_base": "./views/shared/javascripts/components/noty/js/noty/layouts/top.js",
-      "noty_layout": "./views/shared/javascripts/components/noty/js/noty/layouts/topCenter.js",
-      "noty_theme": "./views/shared/javascripts/components/noty/js/noty/themes/default.js",
-      "d3": "./views/shared/javascripts/components/d3/d3.v2.js"
+      "jquery":             "./views/shared/javascripts/components/jquery/jquery.js",
+      "underscore":         "./views/shared/javascripts/components/underscore/underscore.js",
+      "underscore_s":       "./views/shared/javascripts/components/underscore.string/lib/underscore.string.js",
+      "backbone":           "./views/shared/javascripts/components/backbone/backbone.js",
+      "eventbinder":        "./views/shared/javascripts/components/Backbone.EventBinder/lib/backbone.eventbinder.js",
+      "wreqr":              "./views/shared/javascripts/components/Backbone.Wreqr/lib/backbone.wreqr.js",
+      "marionette":         "./views/shared/javascripts/components/backbone.marionette/lib/backbone.marionette.js",
+      "openlayers":         "./views/shared/javascripts/components/openlayers/build/OpenLayers.js",
+      "bootstrap":          "./views/shared/javascripts/components/bootstrap/bootstrap/js/bootstrap.js",
+      "noty":               "./views/shared/javascripts/components/noty/js/noty/jquery.noty.js",
+      "noty_layout_base":   "./views/shared/javascripts/components/noty/js/noty/layouts/top.js",
+      "noty_layout":        "./views/shared/javascripts/components/noty/js/noty/layouts/topCenter.js",
+      "noty_theme":         "./views/shared/javascripts/components/noty/js/noty/themes/default.js",
+      "d3":                 "./views/shared/javascripts/components/d3/d3.v2.js"
     },
     "css": {
-      "openlayers": "./views/shared/javascripts/components/openlayers/theme/default/style.css",
-      "bootstrap": "./views/shared/javascripts/components/bootstrap/bootstrap/css/bootstrap.min.css"
+      "openlayers":         "./views/shared/javascripts/components/openlayers/theme/default/style.css",
+      "bootstrap":          "./views/shared/javascripts/components/bootstrap/bootstrap/css/bootstrap.min.css"
     }
   }
 

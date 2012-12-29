@@ -82,11 +82,11 @@ Neatline.module('Record', function(
     /**
      * Update the data for a model with the passed id.
      *
-     * @param {Object} json: The new data.
+     * @param {Object} data: The new data.
      */
-    updateModel: function(json) {
-      var model = this.get(json.id);
-      if (model) model.set(json, { silent: true });
+    updateModel: function(data) {
+      var model = this.get(data.id);
+      if (model) model.set(data, { silent: true });
     }
 
 
