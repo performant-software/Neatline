@@ -9,6 +9,7 @@
     , "marionette": ">= 0.10.2"
     , "marionette.eventbinder": "https://github.com/marionettejs/backbone.eventbinder.git"
     , "marionette.wreqr": "https://github.com/marionettejs/backbone.wreqr.git"
+    , "backbone.neatline": "https://github.com/davidmcclure/backbone.neatline.git"
     , "openlayers": "https://github.com/openlayers/openlayers.git"
     , "minicolors": "https://github.com/claviska/jquery-miniColors.git"
     , "noty": "https://github.com/needim/noty.git"
