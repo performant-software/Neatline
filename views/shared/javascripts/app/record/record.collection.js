@@ -14,22 +14,11 @@ Neatline.module('Record', function(
   Record, Neatline, Backbone, Marionette, $, _) {
 
 
-  Record.Collection = Backbone.Collection.extend({
+  Record.Collection = Backbone.Neatline.SyncCollection.extend({
 
 
     url: function() { return __exhibit.api; },
     model: Neatline.Record.Model,
-
-
-    /**
-     * When any instance of the `Record` model changes, check to see if a
-     * model with the same id is in the collection and, if so, update it.
-     */
-    initialize: function() {
-      this.model.prototype.bind('change', _.bind(function(model) {
-        this.updateModel(model.toJSON());
-      }, this));
-    },
 
 
     /**
@@ -45,48 +34,6 @@ Neatline.module('Record', function(
     getCollection: function(params, cb) {
       var data = $.param(_.extend({ id: __exhibit.id }, params));
       this.fetch({ data: data, success: cb });
-    },
-
-
-    /**
-     * Get a model by id.
-     *
-     * - If the model is already present in the collection, pass it to the
-     *   callback immediately.
-     *
-     * - If the model is absent, create a new model on the fly, fetch data
-     *   from the server, and pass the populated model to the callback.
-     *
-     * @param {Number} id: The model id.
-     * @param {Function} cb: Callback, called with the model.
-     */
-    getModel: function(id, cb) {
-
-      // Get existing model.
-      var model = this.get(id);
-      if (model) cb(model);
-
-      else {
-
-        // Create new model, populate.
-        model = new this.model({ id: id });
-        model.fetch({ success: function() {
-          cb(model);
-        }});
-
-      }
-
-    },
-
-
-    /**
-     * Update the data for a model with the passed id.
-     *
-     * @param {Object} data: The new data.
-     */
-    updateModel: function(data) {
-      var model = this.get(data.id);
-      if (model) model.set(data, { silent: true });
     }
 
 
