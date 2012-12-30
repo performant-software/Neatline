@@ -14,28 +14,30 @@ Neatline.module('Editor', { startWithParent: false,
   define: function(Editor, Neatline, Backbone, Marionette, $, _) {
 
 
-  Editor.View = Backbone.View.extend({
+  Editor.View = Backbone.Neatline.View.extend({
 
 
-    el: 'body',
+    ui: {
+      exhibit:  '#neatline',
+      map:      '#neatline-map',
+      editor:   '#editor'
+    },
 
 
     /**
-     * Bind position routine to window resize, do initial position.
+     * Get ui, store default editor width, listen for window resize.
      */
     initialize: function() {
 
-      this.window =   $(window);
-      this.exhibit =  this.$('#neatline');
-      this.map =      this.$('#neatline-map');
-      this.editor =   this.$('#editor');
+      this.getUi();
 
       // Cache starting width.
-      this.width = this.editor.width();
+      this.width = this.ui.editor.width();
 
-      // Listen for window resize.
+      // Listen for resize.
+      this.window = $(window);
       this.window.resize(_.bind(this.position, this));
-      this.position();
+      this.window.trigger('resize');
 
     },
 
@@ -49,9 +51,9 @@ Neatline.module('Editor', { startWithParent: false,
       var h = this.window.height();
       var w = this.window.width();
 
-      this.editor.    css({ height: h, width: this.width });
-      this.map.       css({ height: h, width: w - this.width });
-      this.exhibit.   css({ left: this.width });
+      this.ui.editor.    css({ height: h, width: this.width });
+      this.ui.map.       css({ height: h, width: w - this.width });
+      this.ui.exhibit.   css({ left: this.width });
 
     }
 

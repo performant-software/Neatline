@@ -14,7 +14,7 @@ Neatline.module('Bubble.Views', function(
   Views, Bubble, Backbone, Marionette, $, _) {
 
 
-  Views.Bubble = Backbone.View.extend({
+  Views.Bubble = Backbone.Neatline.View.extend({
 
 
     options: {
@@ -24,18 +24,22 @@ Neatline.module('Bubble.Views', function(
       }
     },
 
+    ui: {
+      title:  '.record-title',
+      body:   '.record-body'
+    },
+
 
     /**
      * Initialize trackers, get markup.
      */
     initialize: function() {
 
+      this.getUi();
+
+      // State trackers.
       this.active = true;   // True when bubble should be displayed.
       this.frozen = false;  // True when bubble is frozen after a click.
-
-      // Bubble components.
-      this.title = this.$el.find('.record-title');
-      this.body = this.$el.find('.record-body');
 
       // Containers.
       this.exhibit = $('#neatline');
@@ -55,8 +59,8 @@ Neatline.module('Bubble.Views', function(
       if (this.frozen || !this.active) return;
 
       // Render values, measure.
-      this.title.html(model.get('title'));
-      this.body.html(model.get('body'));
+      this.ui.title.html(model.get('title'));
+      this.ui.body.html(model.get('body'));
 
       // Position on mousemove.
       this.window.bind('mousemove.bubble', _.bind(function(e) {

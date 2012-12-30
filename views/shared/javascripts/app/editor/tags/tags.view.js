@@ -15,8 +15,8 @@ Neatline.module('Editor.Tags', function(
 
 
   Tags.View = Backbone.View.extend({
-    className: 'tags',
-    tagName: 'ul'
+    className:  'tags',
+    tagName:    'ul'
   });
 
 

@@ -14,7 +14,7 @@ Neatline.module('Editor.Record', function(
   Record, Neatline, Backbone, Marionette, $, _) {
 
 
-  Record.View = Backbone.View.extend({
+  Record.View = Backbone.Neatline.View.extend({
 
 
     template:   '#record-form-template',
@@ -23,10 +23,10 @@ Neatline.module('Editor.Record', function(
 
 
     /**
-     * Inject the template, get elements.
+     * Render template.
      */
     initialize: function() {
-      this.$el.append(_.template($(this.template).html()));
+      this.getTemplate();
     }
 
 

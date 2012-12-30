@@ -15,8 +15,8 @@ Neatline.module('Editor.Records', function(
 
 
   Records.View = Backbone.View.extend({
-    className: 'records',
-    tagName: 'ul'
+    className:  'records',
+    tagName:    'ul'
   });
 
 

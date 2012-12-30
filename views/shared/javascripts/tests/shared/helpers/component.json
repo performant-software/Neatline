@@ -3,6 +3,6 @@
   , "version": "2.0"
   , "dependencies": {
       "jasmine-jquery": ">= 1.4.2"
-    , "sinon.js": "*"
+    , "sinon.js":       "*"
   }
 }

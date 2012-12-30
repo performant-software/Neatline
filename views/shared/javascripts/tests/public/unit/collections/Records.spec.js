@@ -44,7 +44,7 @@ describe('Record Collection', function() {
       };
 
       // Create a collection, update.
-      var coll = new Neatline.Collections.Record();
+      var coll = new Neatline.Record.Collection();
       coll.getCollection({ key: 'val'}, callback);
 
       // Capture outoing GET request.

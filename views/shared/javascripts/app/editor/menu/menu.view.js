@@ -14,38 +14,38 @@ Neatline.module('Editor.Menu', function(
   Menu, Neatline, Backbone, Marionette, $, _) {
 
 
-  Menu.View = Backbone.View.extend({
+  Menu.View = Backbone.Neatline.View.extend({
 
 
     template: '#menu-template',
     tagName: 'header',
 
+    ui: {
+      tabs: {
+        all:      'ul.nav li',
+        records:  'li.records',
+        tags:     'li.tags'
+      }
+    },
+
 
     /**
-     * Inject the template, get elements.
+     * Render template, get ui.
      */
     initialize: function() {
-      this.$el.append(_.template($(this.template).html()));
-      this.recordsTab = this.$('li.records');
-      this.tagsTab    = this.$('li.tags');
+      this.getTemplate();
+      this.getUi();
     },
 
 
     /**
-     * Activate the "Records" tab.
+     * Activate a tab.
+     *
+     * @param {String} tab: The tab name.
      */
-    activateRecords: function() {
-      this.recordsTab.addClass('active');
-      this.tagsTab.removeClass('active');
-    },
-
-
-    /**
-     * Activate the "Tags" tab.
-     */
-    activateTags: function() {
-      this.recordsTab.removeClass('active');
-      this.tagsTab.addClass('active');
+    activateTab: function(tab) {
+      this.ui.tabs.all.removeClass('active');
+      this.ui.tabs[tab].addClass('active');
     }
 
 

@@ -23,7 +23,7 @@ describe('Record Model', function() {
     // --------------------------------------------------------------------
 
     // Create model, set exhibit api root.
-    var model = new Neatline.Models.Record({ id: 1 });
+    var model = new Neatline.Record.Model({ id: 1 });
     __exhibit.api = 'api';
 
     // Check route construction.

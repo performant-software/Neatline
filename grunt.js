@@ -40,6 +40,13 @@ module.exports = function(grunt) {
         }
       },
 
+      bower_cache_clean: {
+        command: 'bower cache-clean',
+        stdout: true,
+        execOptions: {
+          cwd: config.bower.app
+        }
+      },
       bower_app: {
         command: 'bower install',
         stdout: true,
@@ -138,8 +145,6 @@ module.exports = function(grunt) {
           config.vendor.js.jquery,
           config.vendor.js.underscore,
           config.vendor.js.backbone,
-          config.vendor.js.eventbinder,
-          config.vendor.js.wreqr,
           config.vendor.js.marionette,
           config.vendor.js.neatline,
           config.vendor.js.openlayers,
@@ -165,8 +170,6 @@ module.exports = function(grunt) {
           config.vendor.js.underscore,
           config.vendor.js.underscore_s,
           config.vendor.js.backbone,
-          config.vendor.js.eventbinder,
-          config.vendor.js.wreqr,
           config.vendor.js.marionette,
           config.vendor.js.neatline,
           config.vendor.js.openlayers,
@@ -241,11 +244,7 @@ module.exports = function(grunt) {
           config.stylus+'/**/*.styl'
         ],
         tasks: [
-          'concat:neatline',
-          'concat:editor',
-          'stylus',
-          'concat:neatline_css',
-          'concat:editor_css'
+          'compile_concat'
         ]
       }
     }
@@ -259,21 +258,38 @@ module.exports = function(grunt) {
   // Default task.
   grunt.registerTask('default', 'test');
 
-  // Build the application.
-  grunt.registerTask('build', [
-    'clean',
-    'shell:npm_tests_map',
-    'shell:npm_tests_editor',
-    'shell:bower_app',
-    'shell:bower_tests',
-    'shell:build_openlayers',
-    'shell:build_bootstrap',
-    'shell:move_bootstrap_images',
+  // Assemble static assets.
+  grunt.registerTask('compile_concat', [
+    'clean:payload',
+    'concat:neatline',
+    'concat:editor',
+    'stylus',
+    'concat:neatline_css',
+    'concat:editor_css'
+  ]);
+
+  // Assemble/min static assets.
+  grunt.registerTask('compile_min', [
+    'clean:payload',
     'min:neatline',
     'min:editor',
     'stylus',
     'concat:neatline_css',
     'concat:editor_css'
+  ]);
+
+  // Build the application.
+  grunt.registerTask('build', [
+    'clean',
+    'shell:npm_tests_map',
+    'shell:npm_tests_editor',
+    'shell:bower_cache_clean',
+    'shell:bower_app',
+    'shell:bower_tests',
+    'shell:build_openlayers',
+    'shell:build_bootstrap',
+    'shell:move_bootstrap_images',
+    'compile_min'
   ]);
 
   // Run all tests.

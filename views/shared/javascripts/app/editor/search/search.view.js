@@ -14,7 +14,7 @@ Neatline.module('Editor.Search', function(
   Search, Neatline, Backbone, Marionette, $, _) {
 
 
-  Search.View = Backbone.View.extend({
+  Search.View = Backbone.Neatline.View.extend({
 
 
     template:   '#search-template',
@@ -23,10 +23,10 @@ Neatline.module('Editor.Search', function(
 
 
     /**
-     * Inject the template.
+     * Render template.
      */
     initialize: function() {
-      this.$el.append(_.template($(this.template).html()));
+      this.getTemplate();
     }
 
 

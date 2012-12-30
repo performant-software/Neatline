@@ -29,18 +29,41 @@ Neatline.module('Editor', { startWithParent: false,
 
 
     /**
+     * Shortcut view components.
+     */
+    initialize: function() {
+
+      this.views = {
+        editor:   Editor.__view,
+        menu:     Editor.Menu.__view,
+        search:   Editor.Search.__view,
+        records:  Editor.Records.__view,
+        record:   Editor.Record.__view,
+        tags:     Editor.Tags.__view,
+        tag:      Editor.Tag.__view
+      };
+
+      this.ui = {
+        editor:   Editor.__view.ui.editor,
+        menu:     Editor.Menu.__view.$el,
+        search:   Editor.Search.__view.$el,
+        records:  Editor.Records.__view.$el,
+        record:   Editor.Record.__view.$el,
+        tags:     Editor.Tags.__view.$el,
+        tag:      Editor.Tag.__view.$el
+      };
+
+    },
+
+
+    /**
      * Show the list of records.
      */
     showRecordList: function() {
-
-      // Show the browser menu.
-      Editor.__view.editor.html(Editor.Menu.__view.$el);
-      Editor.Menu.__view.activateRecords();
-
-      // Show the search form and records list.
-      Editor.__view.editor.append(Editor.Search.__view.$el);
-      Editor.__view.editor.append(Editor.Records.__view.$el);
-
+      this.ui.editor.html(this.ui.menu);
+      this.ui.editor.append(this.ui.search);
+      this.ui.editor.append(this.ui.records);
+      this.views.menu.activateTab('records');
     },
 
 
@@ -50,7 +73,7 @@ Neatline.module('Editor', { startWithParent: false,
      * @param {String} id: The record id.
      */
     showRecordForm: function(id) {
-      Editor.__view.editor.html(Editor.Record.__view.$el);
+      this.ui.editor.html(this.ui.record);
     },
 
 
@@ -58,7 +81,7 @@ Neatline.module('Editor', { startWithParent: false,
      * Show add record form.
      */
     showNewRecordForm: function() {
-      Editor.__view.editor.html(Editor.Record.__view.$el);
+      this.ui.editor.html(this.ui.record);
     },
 
 
@@ -66,14 +89,9 @@ Neatline.module('Editor', { startWithParent: false,
      * Show the list of tags.
      */
     showTagList: function() {
-
-      // Show the browser menu.
-      Editor.__view.editor.html(Editor.Menu.__view.$el);
-      Editor.Menu.__view.activateTags();
-
-      // Show the tags list.
-      Editor.__view.editor.append(Editor.Tags.__view.$el);
-
+      this.ui.editor.html(this.ui.menu);
+      this.ui.editor.append(this.ui.tags);
+      this.views.menu.activateTab('tags');
     },
 
 
@@ -83,7 +101,7 @@ Neatline.module('Editor', { startWithParent: false,
      * @param {String} id: The tag id.
      */
     showTagForm: function(id) {
-      Editor.__view.editor.html(Editor.Tag.__view.$el);
+      this.ui.editor.html(this.ui.record);
     },
 
 
@@ -91,7 +109,7 @@ Neatline.module('Editor', { startWithParent: false,
      * Show add tag form.
      */
     showNewTagForm: function() {
-      Editor.__view.editor.html(Editor.Tag.__view.$el);
+      this.ui.editor.html(this.ui.record);
     }
 
 
