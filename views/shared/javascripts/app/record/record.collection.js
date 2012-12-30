@@ -15,28 +15,8 @@ Neatline.module('Record', function(
 
 
   Record.Collection = Backbone.Neatline.SyncCollection.extend({
-
-
     url: function() { return __exhibit.api.records; },
-    model: Neatline.Record.Model,
-
-
-    /**
-     * Fetch a subset of the collection from the server.
-     *
-     * @param {Object} params: Query parameters for the records API.
-     *
-     *  - `extent`: The current map viewport extent, as a WKT polygon.
-     *  - `zoom`: The current zoom level of the map, as an integer.
-     *
-     * @param {Function} cb: Called when `fetch` completes.
-     */
-    getCollection: function(params, cb) {
-      var data = $.param(_.extend({ id: __exhibit.id }, params));
-      this.fetch({ data: data, success: cb });
-    }
-
-
+    model: Neatline.Record.Model
   });
 
 
