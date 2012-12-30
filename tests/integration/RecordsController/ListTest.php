@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
 
 /**
- * Tests for index action in records API.
+ * Tests for list action in records API.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -18,7 +18,7 @@ class Neatline_RecordsControllerTest_Index
 
     /**
      * --------------------------------------------------------------------
-     * INDEX should emit a JSON object containing a list of records with
+     * LIST should emit a JSON object containing a list of records with
      * all data needed by the front-end application.
      * --------------------------------------------------------------------
      */
@@ -31,8 +31,7 @@ class Neatline_RecordsControllerTest_Index
         $record2 = $this->__record($exhibit);
 
         // Hit /records.
-        $this->request->setQuery(array('id' => $exhibit->id));
-        $this->dispatch('neatline/records');
+        $this->dispatch('neatline/records/'.$exhibit->id);
 
         // Capture response.
         $response = json_decode($this->getResponse()->getBody('default'));

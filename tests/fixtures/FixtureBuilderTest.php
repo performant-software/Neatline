@@ -111,8 +111,7 @@ class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
         $record3->save();
 
         // Generate the fixture.
-        $this->request->setQuery(array('id' => $exhibit->id));
-        $this->writeFixture('neatline/records',
+        $this->writeFixture('neatline/records/'.$exhibit->id,
             'coll.default.json');
 
 
@@ -124,7 +123,7 @@ class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
 
         // Generate the fixture.
         $this->resetResponse();
-        $this->writeFixture('neatline/records',
+        $this->writeFixture('neatline/records/'.$exhibit->id,
             'coll.changed.json');
 
 
@@ -135,7 +134,7 @@ class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
 
         // Generate the fixture.
         $this->resetResponse();
-        $this->writeFixture('neatline/records',
+        $this->writeFixture('neatline/records/'.$exhibit->id,
             'coll.removed.json');
 
 
@@ -183,7 +182,7 @@ class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
         // -------------------
 
         // Generate the fixture.
-        $this->writeFixture('neatline/records/'.$record->id,
+        $this->writeFixture('neatline/record/'.$record->id,
             'record.default.json');
 
 
@@ -195,7 +194,7 @@ class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
 
         // Generate the fixture.
         $this->resetResponse();
-        $this->writeFixture('neatline/records/'.$record->id,
+        $this->writeFixture('neatline/record/'.$record->id,
             'record.inactive.json');
 
 
