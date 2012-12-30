@@ -17,7 +17,7 @@ Neatline.module('Record', function(
   Record.Collection = Backbone.Neatline.SyncCollection.extend({
 
 
-    url: function() { return __exhibit.api; },
+    url: function() { return __exhibit.api.records; },
     model: Neatline.Record.Model,
 
 

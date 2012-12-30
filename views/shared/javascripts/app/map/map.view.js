@@ -148,8 +148,8 @@ Neatline.module('Map.Views', function(
     setDefaultViewport: function() {
 
       // If defaults are defined.
-      if (!_.isNull(__exhibit.mapFocus)) {
-        this.setViewport(__exhibit.mapFocus, __exhibit.mapZoom);
+      if (!_.isNull(__exhibit.map.focus)) {
+        this.setViewport(__exhibit.map.focus, __exhibit.map.zoom);
       }
 
 

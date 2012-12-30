@@ -55,10 +55,15 @@ function neatline_queueGoogleMapsApi()
 function neatline_exhibitGlobals($exhibit)
 {
     return json_encode(array(
-        'id'        => $exhibit->id,
-        'api'       => public_url('neatline/records'),
-        'mapFocus'  => $exhibit->map_focus,
-        'mapZoom'   => $exhibit->map_zoom
+        'id'    => $exhibit->id,
+        'api'   => array(
+            'records'   => public_url('neatline/records/'.$exhibit->id),
+            'record'    => public_url('neatline/record')
+        ),
+        'map'   => array(
+            'focus'     => $exhibit->map_focus,
+            'zoom'      => $exhibit->map_zoom
+        )
     ));
 }
 
