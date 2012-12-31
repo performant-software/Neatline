@@ -12,12 +12,14 @@
 
 describe('Records List', function() {
 
+
   var recordRows, models;
 
   // Get fixtures.
   beforeEach(function() {
 
     _t.loadEditor();
+    _t.navigate('records');
 
     // Get record rows and models.
     recordRows = _t.getRecordRows();

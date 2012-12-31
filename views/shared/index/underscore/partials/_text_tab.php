@@ -16,8 +16,6 @@
 
 <div class="control-group">
 
-  <legend>Text</legend>
-
   <?php echo $this->partial(
     'index/underscore/helpers/_textarea.php', array(
       'name' => 'title',

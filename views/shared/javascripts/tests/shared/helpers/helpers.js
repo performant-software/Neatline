@@ -109,6 +109,36 @@ _t.loadEditorModule = function() {
 
 
 /**
+ * Set the fixtures path.
+ */
+_t.setFixturesPath = function() {
+  jasmine.getFixtures().fixturesPath = 'shared/fixtures';
+  jasmine.getStyleFixtures().fixturesPath = 'shared/payloads/css';
+};
+
+
+/**
+ * Read JSON fixtures.
+ */
+_t.loadJsonFixtures = function() {
+  this.json = {
+
+    collections: {
+      standard: readFixtures('coll.default.json'),
+      changed:  readFixtures('coll.changed.json'),
+      removed:  readFixtures('coll.removed.json')
+    },
+
+    records: {
+      standard: readFixtures('record.default.json'),
+      inactive: readFixtures('record.inactive.json')
+    }
+
+  };
+};
+
+
+/**
  * Shortcut public-facing exhibit components.
  */
 _t.shortcutNeatlineComponents = function() {
@@ -145,29 +175,12 @@ _t.shortcutEditorComponents = function() {
 
 
 /**
- * Set the fixtures path.
+ * Navigate to a route.
+ *
+ * @param {String} frag: The URL fragment.
  */
-_t.setFixturesPath = function() {
-  jasmine.getFixtures().fixturesPath = 'shared/fixtures';
-  jasmine.getStyleFixtures().fixturesPath = 'shared/payloads/css';
-};
-
-
-/**
- * Read JSON fixtures.
- */
-_t.loadJsonFixtures = function() {
-  this.json = {
-    collections: {
-      standard: readFixtures('coll.default.json'),
-      changed:  readFixtures('coll.changed.json'),
-      removed:  readFixtures('coll.removed.json')
-    },
-    records: {
-      standard: readFixtures('record.default.json'),
-      inactive: readFixtures('record.inactive.json')
-    }
-  };
+_t.navigate = function(frag) {
+  Neatline.Editor.__router.navigate(frag, { trigger: true });
 };
 
 
