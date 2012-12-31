@@ -51,14 +51,6 @@
           </a>
         </li>
 
-        <li class="divider"></li>
-
-        <li>
-          <a href="#">
-            <i class="icon-screenshot"></i> Save Focus
-          </a>
-        </li>
-
       </ul>
 
     </li>
