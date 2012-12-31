@@ -12,15 +12,16 @@
 
 describe('Records List', function() {
 
-  var recordRows;
+  var recordRows, models;
 
   // Get fixtures.
   beforeEach(function() {
 
     _t.loadEditor();
 
-    // Get record rows.
+    // Get record rows and models.
     recordRows = _t.getRecordRows();
+    models = _t.collections.records.models;
 
   });
 
@@ -31,6 +32,7 @@ describe('Records List', function() {
     // rendered in the left editing pane.
     // --------------------------------------------------------------------
 
+    // Check listings.
     expect(recordRows.length).toEqual(3);
     expect($(recordRows[0]).find('.record-title').text()).
       toEqual('title1');
@@ -44,6 +46,14 @@ describe('Records List', function() {
       toEqual('title3');
     expect($(recordRows[2]).find('.record-body').text()).
       toEqual('body3');
+
+    // Check links.
+    expect($(recordRows[0]).attr('href')).
+      toEqual('#records/'+models[0].get('id'));
+    expect($(recordRows[1]).attr('href')).
+      toEqual('#records/'+models[1].get('id'));
+    expect($(recordRows[2]).attr('href')).
+      toEqual('#records/'+models[2].get('id'));
 
   });
 
