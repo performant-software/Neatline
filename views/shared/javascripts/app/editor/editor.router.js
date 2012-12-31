@@ -44,7 +44,7 @@ Neatline.module('Editor', { startWithParent: false,
       };
 
       this.ui = {
-        editor:   Editor.__view.ui.editor,
+        editor:   Editor.__view.__ui.editor,
         menu:     Editor.Menu.__view.$el,
         search:   Editor.Search.__view.$el,
         records:  Editor.Records.__view.$el,

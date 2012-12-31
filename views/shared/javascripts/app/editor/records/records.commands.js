@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Records list initializer.
+ * Records list command handlers.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -14,15 +14,15 @@ Neatline.module('Editor.Records', function(
   Records, Neatline, Backbone, Marionette, $, _) {
 
 
-  Records.addInitializer(function() {
-
-    // Instantiate collection and view.
-    this.__collection = new Neatline.Record.Collection();
-    this.__view = new Records.View();
-
-    // Execute default search query.
-    Neatline.execute('editor:loadRecords');
-
+  /**
+   * Execute search query.
+   *
+   * @param {Object} params: Query parameters.
+   */
+  Neatline.commands.addHandler('editor:loadRecords', function(params) {
+    Records.__collection.update(params, function(records) {
+      Records.__view.ingest(records);
+    });
   });
 
 

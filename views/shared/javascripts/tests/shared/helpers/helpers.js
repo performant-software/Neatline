@@ -177,7 +177,7 @@ _t.loadJsonFixtures = function() {
  * @return {Array}: The DOM collection of <li> elements.
  */
 _t.getRecordRows = function() {
-  return this.recordsView.$el.find('.record-row');
+  return this.views.records.$el.find('.record-row');
 };
 
 

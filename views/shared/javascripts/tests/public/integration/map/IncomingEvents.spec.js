@@ -41,7 +41,7 @@ describe('Map Incoming Events', function() {
       var requestCount = _t.server.requests.count;
 
       // Trigger map:focusById with the id.
-      Neatline.vent.trigger('map:focusById', model.get('id'));
+      Neatline.execute('map:focusById', model.get('id'));
 
       // Get focus and zoom.
       var center = _t.views.map.map.getCenter();
@@ -75,7 +75,7 @@ describe('Map Incoming Events', function() {
       Neatline.vent.on('map:focused', function() { done = true; });
 
       // Trigger map:focusById with an id that does not have a map layer.
-      Neatline.vent.trigger('map:focusById', 999);
+      Neatline.execute('map:focusById', 999);
 
       // Respond to the GET request.
       var request = _t.respondLast200(_t.json.records.standard);
@@ -125,7 +125,7 @@ describe('Map Incoming Events', function() {
 
       // Trigger map:focusById with an id that does not have a map layer,
       // but for which the corresponding model is inactive on the map.
-      Neatline.vent.trigger('map:focusById', 999);
+      Neatline.execute('map:focusById', 999);
 
       // Respond to the GET request.
       var request = _t.respondLast200(_t.json.records.inactive);
@@ -165,7 +165,7 @@ describe('Map Incoming Events', function() {
       var requestCount = _t.server.requests.count;
 
       // Trigger map:focusById with the id.
-      Neatline.vent.trigger('map:focusById', model);
+      Neatline.execute('map:focusById', model);
 
       // No API request should have been spawned.
       expect(_t.server.requests.count).toEqual(requestCount);
@@ -200,7 +200,7 @@ describe('Map Incoming Events', function() {
       var model = _t.buildModelFromJson(_t.json.records.standard);
 
       // Trigger map:focusByModel.
-      Neatline.vent.trigger('map:focusByModel', model);
+      Neatline.execute('map:focusByModel', model);
 
       // No API request for new data.
       expect(_t.server.requests.count).toEqual(requestCount);
@@ -244,7 +244,7 @@ describe('Map Incoming Events', function() {
       var model = _t.buildModelFromJson(_t.json.records.inactive);
 
       // Trigger map:focusByModel.
-      Neatline.vent.trigger('map:focusByModel', model);
+      Neatline.execute('map:focusByModel', model);
 
       // No API request for new data.
       expect(_t.server.requests.count).toEqual(requestCount);

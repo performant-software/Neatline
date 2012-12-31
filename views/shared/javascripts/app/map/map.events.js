@@ -27,26 +27,4 @@ Neatline.module('Map', function(
   });
 
 
-  /**
-   * Focus the map on the data extent for a record, identified by id.
-   *
-   * @param {Number} id: The record id.
-   */
-  Neatline.vent.on('map:focusById', function(id) {
-    Map.__collection.getOrFetch(id, function(model) {
-      Map.__view.focusByModel(model);
-    });
-  });
-
-
-  /**
-   * Focus the map on the data extent for a record, identified by model.
-   *
-   * @param {Object} model: The record model.
-   */
-  Neatline.vent.on('map:focusByModel', function(model) {
-    Map.__view.focusByModel(model);
-  });
-
-
 });
