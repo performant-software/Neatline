@@ -29,7 +29,7 @@ Neatline.module('Editor', { startWithParent: false,
 
 
     /**
-     * Shortcut view components.
+     * Alias components.
      */
     initialize: function() {
 

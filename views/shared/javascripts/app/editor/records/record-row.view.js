@@ -18,18 +18,24 @@ Neatline.module('Editor.Records', function(
 
 
     className:  'record',
-    tagName:    'li',
+    tagName:    'a',
 
 
     /**
-     * Store model, render template.
+     * Store model, set `href`, render template.
      */
     initialize: function() {
+
+      // Store model, set `href`.
       this.model = this.options.model;
+      this.$el.attr('href', '#records/'+this.model.get('id'));
+
+      // Render template.
       this.$el.append(this.options.template({
         title:  this.model.get('title'),
         body:   this.model.get('body')
       }));
+
     }
 
 

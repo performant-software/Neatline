@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Tests for form open.
+ * Tests for record form open.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -10,7 +10,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Form Open/Close', function() {
+describe('Record Form Open/Close', function() {
 
   var recordRows, mapLayers, models, feature1, feature2;
 
@@ -28,7 +28,7 @@ describe('Form Open/Close', function() {
     feature2 = mapLayers[1].features[0];
 
     // Get models.
-    models = _t.recordsColl.models;
+    models = _t.collections.records.models;
 
   });
 
@@ -43,10 +43,14 @@ describe('Form Open/Close', function() {
     $(recordRows[0]).trigger('click');
 
     // Check for form, no records.
-    expect(_t.recordsView.$el).toContain(_t.formView.form);
-    expect(_t.recordsView.$el).not.toContain(_t.recordsView.ul);
+    expect(_t.views.editor.$el).toContain(_t.views.record.$el);
+    expect(_t.views.editor.$el).not.toContain(_t.views.records.$el);
 
   });
+
+
+
+
 
   it('should populate form values', function() {
 
@@ -61,7 +65,7 @@ describe('Form Open/Close', function() {
     var favicon = 'https://www.google.com/favicon.ico';
 
     // Check for form and values.
-    expect(_t.formView.lead.text()).              toEqual('title1');
+    expect(_t.views.record.lead.text()).              toEqual('title1');
     expect(_t.textTabView.title.val()).           toEqual('title1');
     expect(_t.textTabView.body.val()).            toEqual('body1');
     expect(_t.styleTabView.vectorColor.val()).    toEqual('#111111');
@@ -141,7 +145,7 @@ describe('Form Open/Close', function() {
     $('a[href="#form-spatial"]').tab('show');
 
     // Close Record 1 form.
-    _t.formView.closeButton.trigger('click');
+    _t.views.record.closeButton.trigger('click');
 
     // Open Record 2.
     recordRows = _t.getRecordRows();
@@ -168,9 +172,9 @@ describe('Form Open/Close', function() {
     _t.clickOnMapFeature(mapLayers[0], feature1);
 
     // Check for form.
-    expect(_t.recordsView.$el).toContain(_t.formView.form);
-    expect(_t.recordsView.$el).not.toContain(_t.recordsView.ul);
-    expect(_t.formView.model.get('title')).toEqual('title1');
+    expect(_t.views.records.$el).toContain(_t.views.record.form);
+    expect(_t.views.records.$el).not.toContain(_t.views.records.ul);
+    expect(_t.views.record.model.get('title')).toEqual('title1');
 
   });
 
@@ -189,15 +193,15 @@ describe('Form Open/Close', function() {
     _t.clickOnMapFeature(mapLayers[0], feature1);
 
     // Check for form.
-    expect(_t.recordsView.$el).toContain(_t.formView.form);
-    expect(_t.recordsView.$el).not.toContain(_t.recordsView.ul);
-    expect(_t.formView.model.get('title')).toEqual('title1');
+    expect(_t.views.records.$el).toContain(_t.views.record.form);
+    expect(_t.views.records.$el).not.toContain(_t.views.records.ul);
+    expect(_t.views.record.model.get('title')).toEqual('title1');
 
     // Trigger click on Record 2 feature.
     _t.clickOnMapFeature(mapLayers[0], feature2);
 
     // Check for unchanged form.
-    expect(_t.formView.model.get('title')).toEqual('title1');
+    expect(_t.views.record.model.get('title')).toEqual('title1');
 
   });
 
@@ -273,7 +277,7 @@ describe('Form Open/Close', function() {
     expect(_t.mapView.frozen).toEqual([models[0].get('id')]);
 
     // Close, check `frozen` empty.
-    _t.formView.closeButton.trigger('click');
+    _t.views.record.closeButton.trigger('click');
     expect(_t.mapView.frozen).toEqual([]);
 
   });
@@ -292,7 +296,7 @@ describe('Form Open/Close', function() {
     expect(_t.mapView.frozen).toEqual([models[0].get('id')]);
 
     // Close, check `frozen` empty.
-    _t.formView.closeButton.trigger('click');
+    _t.views.record.closeButton.trigger('click');
     expect(_t.mapView.frozen).toEqual([]);
 
   });
@@ -315,8 +319,8 @@ describe('Form Open/Close', function() {
     expect(_t.spatialTabView.getMapControl()).toEqual('poly');
 
     // Close the form, re-get records.
-    _t.formView.closeButton.trigger('click');
-    recordRows = _t.recordsView.$el.find('.record-row');
+    _t.views.record.closeButton.trigger('click');
+    recordRows = _t.views.records.$el.find('.record-row');
 
     // Open new form, check mode.
     $(recordRows[1]).trigger('click');
