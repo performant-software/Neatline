@@ -34,23 +34,23 @@ Neatline.module('Editor', { startWithParent: false,
     initialize: function() {
 
       this.views = {
-        editor:   Editor.__view,
-        menu:     Editor.Menu.__view,
-        search:   Editor.Search.__view,
-        records:  Editor.Records.__view,
-        record:   Editor.Record.__view,
-        tags:     Editor.Tags.__view,
-        tag:      Editor.Tag.__view
+        editor:   Editor.         __view,
+        menu:     Editor.Menu.    __view,
+        search:   Editor.Search.  __view,
+        records:  Editor.Records. __view,
+        record:   Editor.Record.  __view,
+        tags:     Editor.Tags.    __view,
+        tag:      Editor.Tag.     __view
       };
 
       this.ui = {
-        editor:   Editor.__view.__ui.editor,
-        menu:     Editor.Menu.__view.$el,
-        search:   Editor.Search.__view.$el,
-        records:  Editor.Records.__view.$el,
-        record:   Editor.Record.__view.$el,
-        tags:     Editor.Tags.__view.$el,
-        tag:      Editor.Tag.__view.$el
+        editor:   Editor.         __view.__ui.editor,
+        menu:     Editor.Menu.    __view.$el,
+        search:   Editor.Search.  __view.$el,
+        records:  Editor.Records. __view.$el,
+        record:   Editor.Record.  __view.$el,
+        tags:     Editor.Tags.    __view.$el,
+        tag:      Editor.Tag.     __view.$el
       };
 
     },

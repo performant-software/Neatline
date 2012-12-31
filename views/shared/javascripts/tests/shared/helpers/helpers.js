@@ -131,14 +131,14 @@ _t.shortcutNeatlineComponents = function() {
 _t.shortcutEditorComponents = function() {
 
   _.extend(this.collections, {
-    records:  Neatline.Records.__collection
+    records:  Neatline.Editor.Records.__collection
   });
 
   _.extend(this.views, {
     editor:   Neatline.Editor.__view,
-    records:  Neatline.Records.__view,
-    record:   Neatline.Record.__view,
-    search:   Neatline.Search.__view
+    records:  Neatline.Editor.Records.__view,
+    record:   Neatline.Editor.Record.__view,
+    search:   Neatline.Editor.Search.__view
   });
 
 };
@@ -177,7 +177,7 @@ _t.loadJsonFixtures = function() {
  * @return {Array}: The DOM collection of <li> elements.
  */
 _t.getRecordRows = function() {
-  return this.views.records.$el.find('.record-row');
+  return this.views.records.$el.find('.record');
 };
 
 
