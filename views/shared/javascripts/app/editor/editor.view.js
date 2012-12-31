@@ -32,7 +32,7 @@ Neatline.module('Editor', { startWithParent: false,
       this.getUi();
 
       // Cache starting width.
-      this.width = this.ui.editor.width();
+      this.width = this.__ui.editor.width();
 
       // Listen for resize.
       this.window = $(window);
@@ -51,9 +51,9 @@ Neatline.module('Editor', { startWithParent: false,
       var h = this.window.height();
       var w = this.window.width();
 
-      this.ui.editor.    css({ height: h, width: this.width });
-      this.ui.map.       css({ height: h, width: w - this.width });
-      this.ui.exhibit.   css({ left: this.width });
+      this.__ui.editor.   css({ height: h, width: this.width });
+      this.__ui.map.      css({ height: h, width: w - this.width });
+      this.__ui.exhibit.  css({ left: this.width });
 
     }
 

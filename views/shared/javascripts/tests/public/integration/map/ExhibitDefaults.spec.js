@@ -24,17 +24,17 @@ describe('Map Exhibit Defaults', function() {
     loadFixtures('neatline-partial.html');
 
     // Set exhibit defaults.
-    __exhibit.mapZoom = 10;
-    __exhibit.mapFocus = '-8031391.4348622, 5085508.3651615';
+    __exhibit.map.zoom = 10;
+    __exhibit.map.focus = '1,2';
 
     // Start map.
     _t.loadMapModule();
 
     // Check viewport.
-    var center = Neatline.Map.view.map.getCenter();
-    expect(Neatline.Map.view.map.zoom).toEqual(10);
-    expect(center.lon).toEqual(-8031391.4348622);
-    expect(center.lat).toEqual(5085508.3651615);
+    var center = Neatline.Map.__view.map.getCenter();
+    expect(Neatline.Map.__view.map.zoom).toEqual(10);
+    expect(center.lon).toEqual(1);
+    expect(center.lat).toEqual(2);
 
   });
 

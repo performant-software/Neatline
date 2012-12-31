@@ -44,8 +44,8 @@ describe('Map Incoming Events', function() {
       Neatline.vent.trigger('map:focusById', model.get('id'));
 
       // Get focus and zoom.
-      var center = _t.mapView.map.getCenter();
-      var zoom = _t.mapView.map.getZoom();
+      var center = _t.views.map.map.getCenter();
+      var zoom = _t.views.map.map.getZoom();
 
       // Focus and zoom should match the model values.
       expect(Math.round(center.lon)).toEqual(100);
@@ -83,11 +83,11 @@ describe('Map Incoming Events', function() {
 
       // Check request formation.
       expect(request.method).toEqual('GET');
-      expect(request.url).toEqual('/neatline/records/999');
+      expect(request.url).toEqual('/neatline/record/999');
 
       // Get focus and zoom.
-      var center = _t.mapView.map.getCenter();
-      var zoom = _t.mapView.map.getZoom();
+      var center = _t.views.map.map.getCenter();
+      var zoom = _t.views.map.map.getZoom();
 
       // Check for new layer.
       mapLayers = _t.getVectorLayers();
@@ -132,8 +132,8 @@ describe('Map Incoming Events', function() {
       waitsFor(function() { return done; });
 
       // Get focus and zoom.
-      var center = _t.mapView.map.getCenter();
-      var zoom = _t.mapView.map.getZoom();
+      var center = _t.views.map.map.getCenter();
+      var zoom = _t.views.map.map.getZoom();
 
       // Check for no new layer.
       mapLayers = _t.getVectorLayers();
@@ -171,8 +171,8 @@ describe('Map Incoming Events', function() {
       expect(_t.server.requests.count).toEqual(requestCount);
 
       // Get focus and zoom.
-      var center = _t.mapView.map.getCenter();
-      var zoom = _t.mapView.map.getZoom();
+      var center = _t.views.map.map.getCenter();
+      var zoom = _t.views.map.map.getZoom();
 
       // Focus and zoom should match the model values.
       expect(Math.round(center.lon)).toEqual(100);
@@ -206,8 +206,8 @@ describe('Map Incoming Events', function() {
       expect(_t.server.requests.count).toEqual(requestCount);
 
       // Get focus and zoom.
-      var center = _t.mapView.map.getCenter();
-      var zoom = _t.mapView.map.getZoom();
+      var center = _t.views.map.map.getCenter();
+      var zoom = _t.views.map.map.getZoom();
 
       // Check for new layer.
       mapLayers = _t.getVectorLayers();
@@ -250,8 +250,8 @@ describe('Map Incoming Events', function() {
       expect(_t.server.requests.count).toEqual(requestCount);
 
       // Get focus and zoom.
-      var center = _t.mapView.map.getCenter();
-      var zoom = _t.mapView.map.getZoom();
+      var center = _t.views.map.map.getCenter();
+      var zoom = _t.views.map.map.getZoom();
 
       // Check for no new layer.
       mapLayers = _t.getVectorLayers();

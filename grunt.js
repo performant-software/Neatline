@@ -29,7 +29,7 @@ module.exports = function(grunt) {
         command: 'npm install',
         stdout: true,
         execOptions: {
-          cwd: config.jasmine.neatline
+          cwd: config.jasmine['public']
         }
       },
       npm_tests_editor: {

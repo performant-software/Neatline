@@ -108,7 +108,7 @@ describe('Map Data Rendering', function() {
     record2Layer.addFeatures([feature]);
 
     // Set title2 frozen.
-    _t.mapView.freeze(record2Layer.nId);
+    _t.views.map.freeze(record2Layer.nId);
 
     // Trigger a map move.
     _t.refreshMap(_t.json.collections.changed);
@@ -139,7 +139,7 @@ describe('Map Data Rendering', function() {
     expect(record2Layer).toBeDefined();
 
     // Set title2 frozen.
-    _t.mapView.freeze(record2Layer.nId);
+    _t.views.map.freeze(record2Layer.nId);
 
     // Trigger a map move, inject data without title2.
     _t.refreshMap(_t.removedRecord2Json);

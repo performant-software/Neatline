@@ -11,7 +11,7 @@
  */
 
 
-_t = {};
+_t = { collections: {}, views: {} };
 
 
 /**
@@ -81,9 +81,6 @@ _t.loadEditor = function() {
   // Load editor.
   this.loadEditorModule();
 
-  // Respond to data loads.
-  this.respondAll200(this.json.collections.standard);
-
   // Shortcut components.
   _t.shortcutNeatlineComponents();
   _t.shortcutEditorComponents();
@@ -115,9 +112,16 @@ _t.loadEditorModule = function() {
  * Shortcut public-facing exhibit components.
  */
 _t.shortcutNeatlineComponents = function() {
-  this.mapColl =        Neatline.Map.collection;
-  this.mapView =        Neatline.Map.view;
-  this.bubbleView =     Neatline.Bubble.view;
+
+  _.extend(this.collections, {
+    map:      Neatline.Map.__collection
+  });
+
+  _.extend(this.views, {
+    map:      Neatline.Map.__view,
+    bubble:   Neatline.Bubble.__view
+  });
+
 };
 
 
@@ -125,14 +129,18 @@ _t.shortcutNeatlineComponents = function() {
  * Shortcut editor components.
  */
 _t.shortcutEditorComponents = function() {
-  this.layoutView =     Neatline.Editor.Layout.view;
-  this.recordsView =    Neatline.Editor.Records.view;
-  this.formView =       Neatline.Editor.Form.view;
-  this.textTabView =    Neatline.Editor.Form.TextTab.view;
-  this.spatialTabView = Neatline.Editor.Form.SpatialTab.view;
-  this.styleTabView =   Neatline.Editor.Form.StyleTab.view;
-  this.searchView =     Neatline.Editor.Search.view;
-  this.recordsColl =    Neatline.Editor.Records.collection;
+
+  _.extend(this.collections, {
+    records:  Neatline.Records.__collection
+  });
+
+  _.extend(this.views, {
+    editor:   Neatline.Editor.__view,
+    records:  Neatline.Records.__view,
+    record:   Neatline.Record.__view,
+    search:   Neatline.Search.__view
+  });
+
 };
 
 
@@ -181,7 +189,7 @@ _t.getRecordRows = function() {
 _t.getVectorLayers = function() {
 
   // Filter for features.length > 0.
-  return this.mapView.map.getLayersBy('features', {
+  return this.views.map.map.getLayersBy('features', {
     test: function(prop) {
       return !_.isUndefined(prop) && prop.length > 0;
     }
@@ -216,7 +224,7 @@ _t.getVectorLayerByTitle = function(title) {
  * @return {Object} model: The model.
  */
 _t.buildModelFromJson = function(json) {
-  return new Neatline.Models.Record(JSON.parse(json));
+  return new Neatline.Record.Model(JSON.parse(json));
 };
 
 
@@ -273,7 +281,7 @@ _t.respondLast200 = function(response) {
  * Trigger a pan/zoom event on the map.
  */
 _t.triggerMapMove = function() {
-  Neatline.Map.view.map.events.triggerEvent('moveend');
+  this.views.map.map.events.triggerEvent('moveend');
 };
 
 
@@ -281,7 +289,7 @@ _t.triggerMapMove = function() {
  * Trigger a mouseout event on the map.
  */
 _t.triggerMapMouseout = function() {
-  Neatline.Map.view.map.events.triggerEvent('mouseout');
+  this.views.map.map.events.triggerEvent('mouseout');
 };
 
 
@@ -316,7 +324,7 @@ _t.clickOnMapFeature = function(layer, feature) {
   };
 
   // Trigger click.
-  this.mapView.map.events.triggerEvent('click', evt);
+  this.views.map.map.events.triggerEvent('click', evt);
 
 };
 
@@ -342,7 +350,7 @@ _t.clickOffMapFeature = function(layers) {
   };
 
   // Trigger click.
-  this.mapView.map.events.triggerEvent('click', evt);
+  this.views.map.map.events.triggerEvent('click', evt);
 
 };
 
@@ -367,7 +375,7 @@ _t.hoverOnMapFeature = function(layer, feature) {
   };
 
   // Trigger click.
-  this.mapView.map.events.triggerEvent('mousemove', evt);
+  this.views.map.map.events.triggerEvent('mousemove', evt);
 
 };
 
@@ -393,7 +401,7 @@ _t.unHoverOnMapFeature = function(layers) {
   };
 
   // Trigger click.
-  this.mapView.map.events.triggerEvent('mousemove', evt);
+  this.views.map.map.events.triggerEvent('mousemove', evt);
 
 };
 
@@ -407,5 +415,5 @@ _t.unHoverOnMapFeature = function(layers) {
  */
 _t.setMapCenter = function(lon, lat, zoom) {
   var lonlat = new OpenLayers.LonLat(lon, lat);
-  this.mapView.map.setCenter(lonlat, zoom);
+  this.views.map.map.setCenter(lonlat, zoom);
 };

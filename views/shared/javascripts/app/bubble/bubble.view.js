@@ -59,8 +59,8 @@ Neatline.module('Bubble.Views', function(
       if (this.frozen || !this.active) return;
 
       // Render values, measure.
-      this.ui.title.html(model.get('title'));
-      this.ui.body.html(model.get('body'));
+      this.__ui.title.html(model.get('title'));
+      this.__ui.body.html(model.get('body'));
 
       // Position on mousemove.
       this.window.bind('mousemove.bubble', _.bind(function(e) {
