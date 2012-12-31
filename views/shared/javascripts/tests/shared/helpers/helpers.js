@@ -14,6 +14,9 @@
 _t = { collections: {}, views: {} };
 
 
+// State:
+// ========================================================================
+
 /**
  * Load neatline application.
  */
@@ -109,6 +112,19 @@ _t.loadEditorModule = function() {
 
 
 /**
+ * Navigate to a route.
+ *
+ * @param {String} frag: The URL fragment.
+ */
+_t.navigate = function(frag) {
+  Neatline.Editor.__router.navigate(frag, { trigger: true });
+};
+
+
+// Fixtures:
+// ========================================================================
+
+/**
  * Set the fixtures path.
  */
 _t.setFixturesPath = function() {
@@ -137,6 +153,9 @@ _t.loadJsonFixtures = function() {
   };
 };
 
+
+// Components:
+// ========================================================================
 
 /**
  * Shortcut public-facing exhibit components.
@@ -174,15 +193,8 @@ _t.shortcutEditorComponents = function() {
 };
 
 
-/**
- * Navigate to a route.
- *
- * @param {String} frag: The URL fragment.
- */
-_t.navigate = function(frag) {
-  Neatline.Editor.__router.navigate(frag, { trigger: true });
-};
-
+// Data access:
+// ========================================================================
 
 /**
  * Get DOM collection of editor record listings.
@@ -241,6 +253,9 @@ _t.buildModelFromJson = function(json) {
 };
 
 
+// Server:
+// ========================================================================
+
 /**
  * Return the most recent sinon-wrapped AJAX request.
  *
@@ -289,6 +304,9 @@ _t.respondLast200 = function(response) {
   return request;
 };
 
+
+// Map:
+// ========================================================================
 
 /**
  * Trigger a pan/zoom event on the map.
