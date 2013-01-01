@@ -14,10 +14,12 @@ Neatline.module('Map', function(
   Map, Neatline, Backbone, Marionette, $, _) {
 
 
-  Map.addInitializer(function() {
+  Map.init = function() {
     this.__collection = new Neatline.Record.Collection();
     this.__view = new Neatline.Map.Views.Map({ el: '#neatline-map' });
-  });
+  };
+
+  Map.addInitializer(Map.init);
 
 
 });

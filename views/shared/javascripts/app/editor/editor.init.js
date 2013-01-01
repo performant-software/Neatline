@@ -15,9 +15,7 @@ Neatline.module('Editor', { startWithParent: false,
 
 
   /**
-   * Start the editor before Neatline. This ensures that the editor layout
-   * routine sets non-zero dimensions on the map container before Neatline
-   * starts OpenLayers, which needs a space-occupying div.
+   * Start the editor before Neatline.
    */
   Neatline.on('initialize:before', function() {
     Editor.start();
@@ -27,26 +25,14 @@ Neatline.module('Editor', { startWithParent: false,
   /**
    * Initialize the router and layout view.
    */
-  Editor.addInitializer(function() {
+  Editor.init = function() {
     this.__view   = new Editor.View({ el: 'body' });
     this.__router = new Editor.Router();
-  });
-
-
-  /**
-   * Start history when all editor modules are running.
-   */
-  Editor.on('start', function() {
-    Backbone.history.start();
-  });
-
-
-  /**
-   * Stop the router.
-   */
-  Editor.addFinalizer(function() {
     Backbone.history.stop();
-  });
+    Backbone.history.start();
+  };
+
+  Editor.addInitializer(Editor.init);
 
 
 }});

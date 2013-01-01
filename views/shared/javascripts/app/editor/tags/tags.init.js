@@ -14,9 +14,11 @@ Neatline.module('Editor.Tags', function(
   Tags, Neatline, Backbone, Marionette, $, _) {
 
 
-  Tags.addInitializer(function() {
+  Tags.init = function() {
     this.__view = new Tags.View();
-  });
+  };
+
+  Tags.addInitializer(Tags.init);
 
 
 });

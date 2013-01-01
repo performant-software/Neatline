@@ -14,9 +14,11 @@ Neatline.module('Editor.Record', function(
   Record, Neatline, Backbone, Marionette, $, _) {
 
 
-  Record.addInitializer(function() {
+  Record.init = function() {
     this.__view = new Record.View();
-  });
+  };
+
+  Record.addInitializer(Record.init);
 
 
 });

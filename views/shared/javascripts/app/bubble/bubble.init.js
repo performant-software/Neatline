@@ -14,9 +14,11 @@ Neatline.module('Bubble', function(
   Bubble, Neatline, Backbone, Marionette, $, _) {
 
 
-  Bubble.addInitializer(function() {
+  Bubble.init = function() {
     this.__view = new Neatline.Bubble.Views.Bubble({ el: '#bubble' });
-  });
+  };
+
+  Bubble.addInitializer(Bubble.init);
 
 
 });

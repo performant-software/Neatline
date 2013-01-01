@@ -14,7 +14,7 @@ Neatline.module('Editor.Records', function(
   Records, Neatline, Backbone, Marionette, $, _) {
 
 
-  Records.addInitializer(function() {
+  Records.init = function() {
 
     // Instantiate collection and view.
     this.__collection = new Neatline.Record.Collection();
@@ -23,7 +23,9 @@ Neatline.module('Editor.Records', function(
     // Execute default search query.
     Neatline.execute('editor:loadRecords');
 
-  });
+  };
+
+  Records.addInitializer(Records.init);
 
 
 });
