@@ -96,11 +96,6 @@ _t.loadEditor = function() {
  */
 _t.loadEditorModule = function() {
 
-  // Reset modules.
-  Neatline.Editor.stop();
-  Neatline.Bubble.stop();
-  Neatline.Map.stop();
-
   // Restart Neatline.
   Neatline.initCallbacks.reset();
   Neatline.start();
@@ -118,6 +113,16 @@ _t.loadEditorModule = function() {
  */
 _t.navigate = function(frag) {
   Neatline.Editor.__router.navigate(frag, { trigger: true });
+};
+
+
+/**
+ * Simulate a click on an element.
+ *
+ * @param {Object} el: The anchor element.
+ */
+_t.click = function(el) {
+  this.navigate(el.attr('href'));
 };
 
 

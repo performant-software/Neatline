@@ -18,6 +18,7 @@ describe('Record Form Open/Close', function() {
   beforeEach(function() {
 
     _t.loadEditor();
+    _t.navigate('records');
 
     // Get records rows.
     recordRows = _t.getRecordRows();
@@ -32,21 +33,21 @@ describe('Record Form Open/Close', function() {
 
   });
 
-  // it('should open the form when a record row is clicked', function() {
+  it('should open the form when a record row is clicked', function() {
 
-  //   // --------------------------------------------------------------------
-  //   // When one of the record listings in the left panel is clicked, the
-  //   // list of records should be replaced by the edit form.
-  //   // --------------------------------------------------------------------
+    // --------------------------------------------------------------------
+    // When one of the record listings in the left panel is clicked, the
+    // list of records should be replaced by the edit form.
+    // --------------------------------------------------------------------
 
-  //   // Click on record listing.
-  //   $(recordRows[0]).trigger('click');
+    // Click on record row.
+    _t.click($(recordRows[0]));
 
-  //   // Check for form, no records.
-  //   expect(_t.views.editor.$el).toContain(_t.views.record.$el);
-  //   expect(_t.views.editor.$el).not.toContain(_t.views.records.$el);
+    // Check for form, no records.
+    expect(_t.views.editor.__ui.editor).toContain(_t.views.record.$el);
+    expect(_t.views.editor.__ui.editor).not.toContain(_t.views.records.$el);
 
-  // });
+  });
 
   // it('should populate form values', function() {
 
