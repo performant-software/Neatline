@@ -14,7 +14,7 @@
 /**
  * Shortcut public-facing exhibit components.
  */
-_t.shortcutNeatlineComponents = function() {
+_t.aliasNeatline = function() {
 
   _.extend(this.collections, {
     map:      Neatline.Map.__collection
@@ -31,7 +31,7 @@ _t.shortcutNeatlineComponents = function() {
 /**
  * Shortcut editor components.
  */
-_t.shortcutEditorComponents = function() {
+_t.aliasEditor = function() {
 
   _.extend(this.collections, {
     records:  Neatline.Editor.Records.__collection

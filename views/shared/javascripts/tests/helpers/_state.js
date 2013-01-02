@@ -16,48 +16,18 @@
  */
 _t.loadNeatline = function() {
 
-  // Load partials.
-  _t.setFixturesPath();
-  loadFixtures('neatline-partial.html');
-  loadStyleFixtures('neatline.css');
-  this.loadJsonFixtures();
-
-  // Mock server.
+  // Load fixtures, mock server.
+  this.loadFixtures('neatline-partial.html', 'neatline.css');
   this.server = sinon.fakeServer.create();
 
-  // Load modules.
-  this.loadMapModule();
-  this.loadBubbleModule();
+  // Start modules.
+  Neatline.Map.init();
+  Neatline.Bubble.init();
 
-  // Shortcut components.
-  _t.shortcutNeatlineComponents();
-
-};
-
-
-/**
- * Load the Neatline `Map` module.
- */
-_t.loadMapModule = function() {
-
-  // Restart module.
-  Neatline.Map.stop();
-  Neatline.Map.start();
-
-  // Inject fixtures.
+  // Inject fixtures, alias components.
   this.respondAll200(this.json.collections.standard);
+  _t.aliasNeatline();
 
-};
-
-
-/**
- * Load the Neatline `Bubble` module.
- *
- * @return void.
- */
-_t.loadBubbleModule = function() {
-  Neatline.Bubble.stop();
-  Neatline.Bubble.start();
 };
 
 
@@ -66,36 +36,25 @@ _t.loadBubbleModule = function() {
  */
 _t.loadEditor = function() {
 
-  // Load partials.
-  _t.setFixturesPath();
-  loadFixtures('editor-partial.html');
-  loadStyleFixtures('neatline.css');
-  this.loadJsonFixtures();
-
-  // Mock server.
+  // Load fixtures, mock server.
+  this.loadFixtures('editor-partial.html', 'neatline.css');
   this.server = sinon.fakeServer.create();
 
-  // Load editor.
-  this.loadEditorModule();
+  // Start modules.
+  Neatline.Editor.Menu.init();
+  Neatline.Editor.Record.init();
+  Neatline.Editor.Records.init();
+  Neatline.Editor.Search.init();
+  Neatline.Editor.Tag.init();
+  Neatline.Editor.Tags.init();
+  Neatline.Editor.init();
+  Neatline.Map.init();
+  Neatline.Bubble.init();
 
-  // Shortcut components.
-  _t.shortcutNeatlineComponents();
-  _t.shortcutEditorComponents();
-
-};
-
-
-/**
- * Load the `Editor` module.
- */
-_t.loadEditorModule = function() {
-
-  // Restart Neatline.
-  Neatline.initCallbacks.reset();
-  Neatline.start();
-
-  // Inject fixtures.
+  // // Inject fixtures, alias components.
   this.respondAll200(this.json.collections.standard);
+  _t.aliasNeatline();
+  _t.aliasEditor();
 
 };
 

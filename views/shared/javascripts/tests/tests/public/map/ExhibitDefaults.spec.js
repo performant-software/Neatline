@@ -28,7 +28,7 @@ describe('Map Exhibit Defaults', function() {
     __exhibit.map.focus = '1,2';
 
     // Start map.
-    _t.loadMapModule();
+    Neatline.Map.init();
 
     // Check viewport.
     var center = Neatline.Map.__view.map.getCenter();
