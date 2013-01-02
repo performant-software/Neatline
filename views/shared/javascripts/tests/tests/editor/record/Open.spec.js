@@ -57,25 +57,44 @@ describe('Record Form Open/Close', function() {
     // Open form.
     _t.click($(recordRows[0]));
 
-    var favicon = 'https://www.google.com/favicon.ico';
+    var favicon       = 'https://www.google.com/favicon.ico';
+    var lead          = _t.el.record.find('p.lead');
+    var title         = _t.el.record.find('textarea[name="title"]');
+    var body          = _t.el.record.find('textarea[name="body"]');
+    var coverage      = _t.el.record.find('textarea[name="coverage"]');
+    var vectorColor   = _t.el.record.find('input[name="vector-color"]');
+    var strokeColor   = _t.el.record.find('input[name="stroke-color"]');
+    var selectColor   = _t.el.record.find('input[name="select-color"]');
+    var vectorOpacity = _t.el.record.find('input[name="vector-opacity"]');
+    var selectOpacity = _t.el.record.find('input[name="select-opacity"]');
+    var strokeOpacity = _t.el.record.find('input[name="stroke-opacity"]');
+    var imageOpacity  = _t.el.record.find('input[name="image-opacity"]');
+    var strokeWidth   = _t.el.record.find('input[name="stroke-width"]');
+    var pointRadius   = _t.el.record.find('input[name="point-radius"]');
+    var minZoom       = _t.el.record.find('input[name="min-zoom"]');
+    var maxZoom       = _t.el.record.find('input[name="max-zoom"]');
+    var pointImage    = _t.el.record.find('input[name="point-image"]');
+    var mapFocus      = _t.el.record.find('input[name="map-focus"]');
+    var mapZoom       = _t.el.record.find('input[name="map-zoom"]');
 
-    // Check for form and values.
-    expect(_t.el.record.find('p.lead')).            toHaveText('title1');
-    // expect(_t.textTabView.title.val()).           toEqual('title1');
-    // expect(_t.textTabView.body.val()).            toEqual('body1');
-    // expect(_t.styleTabView.vectorColor.val()).    toEqual('#111111');
-    // expect(_t.styleTabView.strokeColor.val()).    toEqual('#444444');
-    // expect(_t.styleTabView.selectColor.val()).    toEqual('#777777');
-    // expect(_t.styleTabView.vectorOpacity.val()).  toEqual('1');
-    // expect(_t.styleTabView.selectOpacity.val()).  toEqual('4');
-    // expect(_t.styleTabView.strokeOpacity.val()).  toEqual('7');
-    // expect(_t.styleTabView.imageOpacity.val()).   toEqual('10');
-    // expect(_t.styleTabView.strokeWidth.val()).    toEqual('13');
-    // expect(_t.styleTabView.pointRadius.val()).    toEqual('16');
-    // expect(_t.styleTabView.minZoom.val()).        toEqual('19');
-    // expect(_t.styleTabView.maxZoom.val()).        toEqual('22');
-    // expect(_t.styleTabView.pointImage.val()).     toEqual(favicon);
-    // expect(_t.spatialTabView.coverage.val()).     toEqual('POINT(1 2)');
+    expect(lead).           toHaveText('title1');
+    expect(title).          toHaveText('title1');
+    expect(body).           toHaveText('body1');
+    expect(coverage).       toHaveText('POINT(1 2)');
+    expect(vectorColor).    toHaveValue('#111111');
+    expect(strokeColor).    toHaveValue('#444444');
+    expect(selectColor).    toHaveValue('#777777');
+    expect(vectorOpacity).  toHaveValue('1');
+    expect(selectOpacity).  toHaveValue('4');
+    expect(strokeOpacity).  toHaveValue('7');
+    expect(imageOpacity).   toHaveValue('10');
+    expect(strokeWidth).    toHaveValue('13');
+    expect(pointRadius).    toHaveValue('16');
+    expect(pointImage).     toHaveValue(favicon);
+    expect(minZoom).        toHaveValue('19');
+    expect(maxZoom).        toHaveValue('22');
+    expect(mapFocus).       toHaveValue('100,200');
+    expect(mapZoom).        toHaveValue('10');
 
   });
 

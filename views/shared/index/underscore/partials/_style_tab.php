@@ -39,12 +39,12 @@
   'index/underscore/helpers/_text_input.php', array(
     'name'  => 'vector-opacity',
     'title' => 'Shape Opacity',
-    'bind'  => 'record.vector_color'
+    'bind'  => 'record.vector_opacity'
 )); ?>
 
 <?php echo $this->partial(
   'index/underscore/helpers/_text_input.php', array(
-    'name'  => 'select-color',
+    'name'  => 'select-opacity',
     'title' => 'Selected Opacity',
     'bind'  => 'record.select_opacity'
 )); ?>
@@ -67,7 +67,7 @@
   'index/underscore/helpers/_text_input.php', array(
     'name'  => 'stroke-width',
     'title' => 'Line Width',
-    'bind'  => 'record.stroke_opacity'
+    'bind'  => 'record.stroke_width'
 )); ?>
 
 <?php echo $this->partial(
