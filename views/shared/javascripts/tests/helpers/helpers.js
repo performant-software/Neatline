@@ -167,14 +167,15 @@ _t.loadJsonFixtures = function() {
  */
 _t.aliasNeatline = function() {
 
-  _.extend(this.collections, {
-    map:      Neatline.Map.__collection
-  });
+  this.vw = {
+    map:    Neatline.Map.     __view,
+    bubble: Neatline.Bubble.  __view
+  };
 
-  _.extend(this.views, {
-    map:      Neatline.Map.__view,
-    bubble:   Neatline.Bubble.__view
-  });
+  this.el = {
+    map:    Neatline.Map.     __view.$el,
+    bubble: Neatline.Bubble.  __view.$el
+  };
 
 };
 
@@ -184,16 +185,27 @@ _t.aliasNeatline = function() {
  */
 _t.aliasEditor = function() {
 
-  _.extend(this.collections, {
-    records:  Neatline.Editor.Records.__collection
-  });
+  this.vw = {
+    map:      Neatline.Map.             __view,
+    bubble:   Neatline.Map.             __view,
+    editor:   Neatline.Editor.          __view,
+    records:  Neatline.Editor.Records.  __view,
+    record:   Neatline.Editor.Record.   __view,
+    tags:     Neatline.Editor.Tags.     __view,
+    tag:      Neatline.Editor.Tag.      __view,
+    search:   Neatline.Editor.Search.   __view
+  };
 
-  _.extend(this.views, {
-    editor:   Neatline.Editor.__view,
-    records:  Neatline.Editor.Records.__view,
-    record:   Neatline.Editor.Record.__view,
-    search:   Neatline.Editor.Search.__view
-  });
+  this.el = {
+    map:      Neatline.Map.             __view.$el,
+    bubble:   Neatline.Map.             __view.$el,
+    editor:   Neatline.Editor.          __view.__ui.editor,
+    records:  Neatline.Editor.Records.  __view.$el,
+    record:   Neatline.Editor.Record.   __view.$el,
+    tags:     Neatline.Editor.Tags.     __view.$el,
+    tag:      Neatline.Editor.Tag.      __view.$el,
+    search:   Neatline.Editor.Search.   __view.$el
+  };
 
 };
 
@@ -216,7 +228,17 @@ _t.aliasEditor = function() {
  * @return {Array}: The DOM collection of <li> elements.
  */
 _t.getRecordRows = function() {
-  return this.views.records.$el.find('.record');
+  return this.el.records.find('.record');
+};
+
+
+/**
+ * Get the array of models from the record list collection.
+ *
+ * @return {Array}: The models.
+ */
+_t.getRecordModels = function() {
+  return Neatline.Editor.Records.__collection.models;
 };
 
 
@@ -228,7 +250,7 @@ _t.getRecordRows = function() {
 _t.getVectorLayers = function() {
 
   // Filter for features.length > 0.
-  return this.views.map.map.getLayersBy('features', {
+  return this.vw.map.map.getLayersBy('features', {
     test: function(prop) {
       return !_.isUndefined(prop) && prop.length > 0;
     }
@@ -342,7 +364,7 @@ _t.respondLast200 = function(response) {
  * Trigger a pan/zoom event on the map.
  */
 _t.triggerMapMove = function() {
-  this.views.map.map.events.triggerEvent('moveend');
+  this.vw.map.map.events.triggerEvent('moveend');
 };
 
 
@@ -350,7 +372,7 @@ _t.triggerMapMove = function() {
  * Trigger a mouseout event on the map.
  */
 _t.triggerMapMouseout = function() {
-  this.views.map.map.events.triggerEvent('mouseout');
+  this.vw.map.map.events.triggerEvent('mouseout');
 };
 
 
@@ -385,7 +407,7 @@ _t.clickOnMapFeature = function(layer, feature) {
   };
 
   // Trigger click.
-  this.views.map.map.events.triggerEvent('click', evt);
+  this.vw.map.map.events.triggerEvent('click', evt);
 
 };
 
@@ -411,7 +433,7 @@ _t.clickOffMapFeature = function(layers) {
   };
 
   // Trigger click.
-  this.views.map.map.events.triggerEvent('click', evt);
+  this.vw.map.map.events.triggerEvent('click', evt);
 
 };
 
@@ -436,7 +458,7 @@ _t.hoverOnMapFeature = function(layer, feature) {
   };
 
   // Trigger click.
-  this.views.map.map.events.triggerEvent('mousemove', evt);
+  this.vw.map.map.events.triggerEvent('mousemove', evt);
 
 };
 
@@ -462,7 +484,7 @@ _t.unHoverOnMapFeature = function(layers) {
   };
 
   // Trigger click.
-  this.views.map.map.events.triggerEvent('mousemove', evt);
+  this.vw.map.map.events.triggerEvent('mousemove', evt);
 
 };
 
@@ -476,7 +498,7 @@ _t.unHoverOnMapFeature = function(layers) {
  */
 _t.setMapCenter = function(lon, lat, zoom) {
   var lonlat = new OpenLayers.LonLat(lon, lat);
-  this.views.map.map.setCenter(lonlat, zoom);
+  this.vw.map.map.setCenter(lonlat, zoom);
 };
 
   return _t;

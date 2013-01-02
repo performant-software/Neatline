@@ -127,8 +127,8 @@ describe('Map Outgoing Events', function() {
     _t.refreshMap(_t.json.collections.changed);
 
     // Get extent and zoom.
-    var extent = _t.views.map.getExtentAsWKT();
-    var zoom = _t.views.map.getZoom();
+    var extent = _t.vw.map.getExtentAsWKT();
+    var zoom = _t.vw.map.getZoom();
 
     // Check publication.
     expect(spy.argsForCall[0][0]).toEqual('map:move');

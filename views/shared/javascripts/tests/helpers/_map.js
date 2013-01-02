@@ -15,7 +15,7 @@
  * Trigger a pan/zoom event on the map.
  */
 _t.triggerMapMove = function() {
-  this.views.map.map.events.triggerEvent('moveend');
+  this.vw.map.map.events.triggerEvent('moveend');
 };
 
 
@@ -23,7 +23,7 @@ _t.triggerMapMove = function() {
  * Trigger a mouseout event on the map.
  */
 _t.triggerMapMouseout = function() {
-  this.views.map.map.events.triggerEvent('mouseout');
+  this.vw.map.map.events.triggerEvent('mouseout');
 };
 
 
@@ -58,7 +58,7 @@ _t.clickOnMapFeature = function(layer, feature) {
   };
 
   // Trigger click.
-  this.views.map.map.events.triggerEvent('click', evt);
+  this.vw.map.map.events.triggerEvent('click', evt);
 
 };
 
@@ -84,7 +84,7 @@ _t.clickOffMapFeature = function(layers) {
   };
 
   // Trigger click.
-  this.views.map.map.events.triggerEvent('click', evt);
+  this.vw.map.map.events.triggerEvent('click', evt);
 
 };
 
@@ -109,7 +109,7 @@ _t.hoverOnMapFeature = function(layer, feature) {
   };
 
   // Trigger click.
-  this.views.map.map.events.triggerEvent('mousemove', evt);
+  this.vw.map.map.events.triggerEvent('mousemove', evt);
 
 };
 
@@ -135,7 +135,7 @@ _t.unHoverOnMapFeature = function(layers) {
   };
 
   // Trigger click.
-  this.views.map.map.events.triggerEvent('mousemove', evt);
+  this.vw.map.map.events.triggerEvent('mousemove', evt);
 
 };
 
@@ -149,5 +149,5 @@ _t.unHoverOnMapFeature = function(layers) {
  */
 _t.setMapCenter = function(lon, lat, zoom) {
   var lonlat = new OpenLayers.LonLat(lon, lat);
-  this.views.map.map.setCenter(lonlat, zoom);
+  this.vw.map.map.setCenter(lonlat, zoom);
 };

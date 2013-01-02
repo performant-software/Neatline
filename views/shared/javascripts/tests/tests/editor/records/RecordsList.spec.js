@@ -22,8 +22,8 @@ describe('Records List', function() {
     _t.navigate('records');
 
     // Get record rows and models.
-    recordRows = _t.getRecordRows();
-    models = _t.collections.records.models;
+    recordRows    = _t.getRecordRows();
+    recordModels  = _t.getRecordModels();
 
   });
 
@@ -51,11 +51,11 @@ describe('Records List', function() {
 
     // Check links.
     expect($(recordRows[0]).attr('href')).
-      toEqual('#records/'+models[0].get('id'));
+      toEqual('#records/'+recordModels[0].get('id'));
     expect($(recordRows[1]).attr('href')).
-      toEqual('#records/'+models[1].get('id'));
+      toEqual('#records/'+recordModels[1].get('id'));
     expect($(recordRows[2]).attr('href')).
-      toEqual('#records/'+models[2].get('id'));
+      toEqual('#records/'+recordModels[2].get('id'));
 
   });
 

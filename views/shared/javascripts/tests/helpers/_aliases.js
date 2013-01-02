@@ -16,14 +16,15 @@
  */
 _t.aliasNeatline = function() {
 
-  _.extend(this.collections, {
-    map:      Neatline.Map.__collection
-  });
+  this.vw = {
+    map:    Neatline.Map.     __view,
+    bubble: Neatline.Bubble.  __view
+  };
 
-  _.extend(this.views, {
-    map:      Neatline.Map.__view,
-    bubble:   Neatline.Bubble.__view
-  });
+  this.el = {
+    map:    Neatline.Map.     __view.$el,
+    bubble: Neatline.Bubble.  __view.$el
+  };
 
 };
 
@@ -33,15 +34,26 @@ _t.aliasNeatline = function() {
  */
 _t.aliasEditor = function() {
 
-  _.extend(this.collections, {
-    records:  Neatline.Editor.Records.__collection
-  });
+  this.vw = {
+    map:      Neatline.Map.             __view,
+    bubble:   Neatline.Map.             __view,
+    editor:   Neatline.Editor.          __view,
+    records:  Neatline.Editor.Records.  __view,
+    record:   Neatline.Editor.Record.   __view,
+    tags:     Neatline.Editor.Tags.     __view,
+    tag:      Neatline.Editor.Tag.      __view,
+    search:   Neatline.Editor.Search.   __view
+  };
 
-  _.extend(this.views, {
-    editor:   Neatline.Editor.__view,
-    records:  Neatline.Editor.Records.__view,
-    record:   Neatline.Editor.Record.__view,
-    search:   Neatline.Editor.Search.__view
-  });
+  this.el = {
+    map:      Neatline.Map.             __view.$el,
+    bubble:   Neatline.Map.             __view.$el,
+    editor:   Neatline.Editor.          __view.__ui.editor,
+    records:  Neatline.Editor.Records.  __view.$el,
+    record:   Neatline.Editor.Record.   __view.$el,
+    tags:     Neatline.Editor.Tags.     __view.$el,
+    tag:      Neatline.Editor.Tag.      __view.$el,
+    search:   Neatline.Editor.Search.   __view.$el
+  };
 
 };

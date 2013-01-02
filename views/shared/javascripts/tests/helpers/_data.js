@@ -17,7 +17,17 @@
  * @return {Array}: The DOM collection of <li> elements.
  */
 _t.getRecordRows = function() {
-  return this.views.records.$el.find('.record');
+  return this.el.records.find('.record');
+};
+
+
+/**
+ * Get the array of models from the record list collection.
+ *
+ * @return {Array}: The models.
+ */
+_t.getRecordModels = function() {
+  return Neatline.Editor.Records.__collection.models;
 };
 
 
@@ -29,7 +39,7 @@ _t.getRecordRows = function() {
 _t.getVectorLayers = function() {
 
   // Filter for features.length > 0.
-  return this.views.map.map.getLayersBy('features', {
+  return this.vw.map.map.getLayersBy('features', {
     test: function(prop) {
       return !_.isUndefined(prop) && prop.length > 0;
     }

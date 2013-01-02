@@ -42,7 +42,7 @@ describe('Bubble Show/Hide', function() {
     _t.hoverOnMapFeature(layer1, feature1);
 
     // Bubble should be visible.
-    expect(_t.views.bubble.$el).toBeVisible();
+    expect(_t.el.bubble).toBeVisible();
 
   });
 
@@ -57,7 +57,7 @@ describe('Bubble Show/Hide', function() {
     _t.unHoverOnMapFeature(mapLayers);
 
     // Bubble should be visible.
-    expect(_t.views.bubble.$el).not.toBeVisible();
+    expect(_t.el.bubble).not.toBeVisible();
 
   });
 
@@ -73,7 +73,7 @@ describe('Bubble Show/Hide', function() {
     $('#neatline').trigger('mouseleave');
 
     // Bubble should be visible.
-    expect(_t.views.bubble.$el).not.toBeVisible();
+    expect(_t.el.bubble).not.toBeVisible();
 
   });
 
@@ -90,7 +90,7 @@ describe('Bubble Show/Hide', function() {
     _t.clickOnMapFeature(layer1, feature1);
 
     // Capture current bubble offset.
-    var offset = _t.views.bubble.$el.offset();
+    var offset = _t.el.bubble.offset();
 
     // Move the cursor.
     $(window).trigger($.Event('mousemove', {
@@ -98,11 +98,11 @@ describe('Bubble Show/Hide', function() {
     }));
 
     // Bubble should not move.
-    expect(_t.views.bubble.$el.offset()).toEqual(offset);
+    expect(_t.el.bubble.offset()).toEqual(offset);
 
     // Bubble should be visible after unhover.
     _t.unHoverOnMapFeature(mapLayers);
-    expect(_t.views.bubble.$el).toBeVisible();
+    expect(_t.el.bubble).toBeVisible();
 
   });
 
@@ -119,14 +119,14 @@ describe('Bubble Show/Hide', function() {
     _t.clickOnMapFeature(layer1, feature1);
 
     // Capture current bubble offset.
-    var offset = _t.views.bubble.$el.offset();
+    var offset = _t.el.bubble.offset();
 
     // Hover on a different feature.
     _t.hoverOnMapFeature(layer1, feature2);
 
     // Check for unchanged bubble values.
-    expect(_t.views.bubble.__ui.title.text()).toEqual('title1');
-    expect(_t.views.bubble.__ui.body.text()).toEqual('body1');
+    expect(_t.vw.bubble.__ui.title.text()).toEqual('title1');
+    expect(_t.vw.bubble.__ui.body.text()).toEqual('body1');
 
     // Move the cursor.
     $(window).trigger($.Event('mousemove', {
@@ -134,7 +134,7 @@ describe('Bubble Show/Hide', function() {
     }));
 
     // Bubble should not move.
-    expect(_t.views.bubble.$el.offset()).toEqual(offset);
+    expect(_t.el.bubble.offset()).toEqual(offset);
 
   });
 
@@ -151,17 +151,17 @@ describe('Bubble Show/Hide', function() {
 
     // Bubble should not be visible after unselect.
     _t.clickOffMapFeature(mapLayers);
-    expect(_t.views.bubble.$el).not.toBeVisible();
+    expect(_t.el.bubble).not.toBeVisible();
 
     // Hover on a different feature.
     _t.hoverOnMapFeature(layer1, feature2);
 
     // Capture current bubble offset.
-    var offset = _t.views.bubble.$el.offset();
+    var offset = _t.el.bubble.offset();
 
     // Check for changed bubble values.
-    expect(_t.views.bubble.__ui.title.text()).toEqual('title2');
-    expect(_t.views.bubble.__ui.body.text()).toEqual('body2');
+    expect(_t.vw.bubble.__ui.title.text()).toEqual('title2');
+    expect(_t.vw.bubble.__ui.body.text()).toEqual('body2');
 
     // Move the cursor.
     $(window).trigger($.Event('mousemove', {
@@ -169,7 +169,7 @@ describe('Bubble Show/Hide', function() {
     }));
 
     // Bubble should track the cursor.
-    expect(_t.views.bubble.$el.offset()).not.toEqual(offset);
+    expect(_t.el.bubble.offset()).not.toEqual(offset);
 
   });
 
