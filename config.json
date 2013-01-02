@@ -2,15 +2,11 @@
 
   "app":            "./views/shared/javascripts/app",
   "stylus":         "./views/shared/css/stylus",
+  "jasmine":        "./views/shared/javascripts/tests",
 
   "payloads": {
     "js":           "./views/shared/javascripts/payloads",
     "css":          "./views/shared/css/payloads"
-  },
-
-  "jasmine": {
-    "public":       "./views/shared/javascripts/tests/public",
-    "editor":       "./views/shared/javascripts/tests/editor"
   },
 
   "bower": {

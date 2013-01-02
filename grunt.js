@@ -25,21 +25,16 @@ module.exports = function(grunt) {
 
     shell: {
 
-      npm_tests_map: {
+      // NPM
+      npm_jasmine: {
         command: 'npm install',
         stdout: true,
         execOptions: {
-          cwd: config.jasmine['public']
-        }
-      },
-      npm_tests_editor: {
-        command: 'npm install',
-        stdout: true,
-        execOptions: {
-          cwd: config.jasmine.editor
+          cwd: config.jasmine
         }
       },
 
+      // BOWER
       bower_cache_clean: {
         command: 'bower cache-clean',
         stdout: true,
@@ -62,6 +57,7 @@ module.exports = function(grunt) {
         }
       },
 
+      // LIB
       build_openlayers: {
         command: 'python build.py full OpenLayers.js',
         stdout: true,
@@ -84,6 +80,7 @@ module.exports = function(grunt) {
         }
       },
 
+      // TEST
       phpunit: {
         command: 'phpunit --color',
         stdout: true,
@@ -92,31 +89,31 @@ module.exports = function(grunt) {
         }
       },
       jasmine_public: {
-        command: 'grunt jasmine',
+        command: 'grunt --config gruntPublic.js jasmine',
         stdout: true,
         execOptions: {
-          cwd: config.jasmine['public']
+          cwd: config.jasmine
         }
       },
       jasmine_public_server: {
-        command: 'grunt jasmine-server',
+        command: 'grunt --config gruntPublic.js jasmine-server',
         stdout: true,
         execOptions: {
-          cwd: config.jasmine['public']
+          cwd: config.jasmine
         }
       },
       jasmine_editor: {
-        command: 'grunt jasmine',
+        command: 'grunt --config gruntEditor.js jasmine',
         stdout: true,
         execOptions: {
-          cwd: config.jasmine.editor
+          cwd: config.jasmine
         }
       },
       jasmine_editor_server: {
-        command: 'grunt jasmine-server',
+        command: 'grunt --config gruntEditor.js jasmine-server',
         stdout: true,
         execOptions: {
-          cwd: config.jasmine.editor
+          cwd: config.jasmine
         }
       }
 
@@ -281,8 +278,7 @@ module.exports = function(grunt) {
   // Build the application.
   grunt.registerTask('build', [
     'clean',
-    'shell:npm_tests_map',
-    'shell:npm_tests_editor',
+    'shell:npm_jasmine',
     'shell:bower_cache_clean',
     'shell:bower_app',
     'shell:bower_tests',

@@ -1,8 +1,0 @@
-{
-    "name": "Neatline"
-  , "version": "2.0.0"
-  , "private": false
-  , "dependencies": {
-    "grunt-jasmine-runner": ">= 0.6.0"
-  }
-}
