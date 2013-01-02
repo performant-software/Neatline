@@ -44,8 +44,8 @@ Neatline.module('Editor.Menu', function(
      * @param {String} tab: The tab name.
      */
     activateTab: function(tab) {
-      this.ui.tabs.all.removeClass('active');
-      this.ui.tabs[tab].addClass('active');
+      this.__ui.tabs.all.removeClass('active');
+      this.__ui.tabs[tab].addClass('active');
     }
 
 

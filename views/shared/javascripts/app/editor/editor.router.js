@@ -101,7 +101,7 @@ Neatline.module('Editor', { startWithParent: false,
      * @param {String} id: The tag id.
      */
     showTagForm: function(id) {
-      this.ui.editor.html(this.ui.record);
+      this.ui.editor.html(this.ui.tag);
     },
 
 
@@ -109,7 +109,7 @@ Neatline.module('Editor', { startWithParent: false,
      * Show add tag form.
      */
     showNewTagForm: function() {
-      this.ui.editor.html(this.ui.record);
+      this.ui.editor.html(this.ui.tag);
     }
 
 

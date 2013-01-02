@@ -12,7 +12,7 @@
 
 describe('Record Form Open/Close', function() {
 
-  var recordRows, mapLayers, models, feature1, feature2;
+  var recordRows, recordModels, mapLayers, feature1, feature2;
 
   // Start editor.
   beforeEach(function() {
@@ -20,34 +20,32 @@ describe('Record Form Open/Close', function() {
     _t.loadEditor();
     _t.navigate('records');
 
-    // Get records rows.
-    recordRows = _t.getRecordRows();
+    // Get record rows and models.
+    recordRows    = _t.getRecordRows();
+    recordModels  = _t.getRecordModels();
 
     // Get layers and features.
-    mapLayers = _t.getVectorLayers();
-    feature1 = mapLayers[0].features[0];
-    feature2 = mapLayers[1].features[0];
-
-    // Get models.
-    models = _t.collections.records.models;
+    mapLayers     = _t.getVectorLayers();
+    feature1      = mapLayers[0].features[0];
+    feature2      = mapLayers[1].features[0];
 
   });
 
-  // it('should open the form when a record row is clicked', function() {
+  it('should open the form when a record row is clicked', function() {
 
-  //   // --------------------------------------------------------------------
-  //   // When one of the record listings in the left panel is clicked, the
-  //   // list of records should be replaced by the edit form.
-  //   // --------------------------------------------------------------------
+    // --------------------------------------------------------------------
+    // When one of the record listings in the left panel is clicked, the
+    // list of records should be replaced by the edit form.
+    // --------------------------------------------------------------------
 
-  //   // Click on record row.
-  //   _t.click($(recordRows[0]));
+    // Click on record row.
+    _t.click($(recordRows[0]));
 
-  //   // Check for form, no records.
-  //   expect(_t.views.editor.__ui.editor).toContain(_t.views.record.$el);
-  //   expect(_t.views.editor.__ui.editor).not.toContain(_t.views.records.$el);
+    // Check for form, no records.
+    expect(_t.el.editor).toContain(_t.el.record);
+    expect(_t.el.editor).not.toContain(_t.el.records);
 
-  // });
+  });
 
   // it('should populate form values', function() {
 

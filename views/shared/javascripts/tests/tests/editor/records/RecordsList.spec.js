@@ -12,8 +12,7 @@
 
 describe('Records List', function() {
 
-
-  var recordRows, models;
+  var recordRows, recordModels;
 
   // Get fixtures.
   beforeEach(function() {
