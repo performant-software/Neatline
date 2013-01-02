@@ -9,6 +9,7 @@
     , "grunt-contrib-clean": "0.3.1"
     , "grunt-contrib-stylus": "*"
     , "grunt-contrib-copy": "0.3.2"
+    , "grunt-rigger": "latest"
     , "underscore": ">= 1.4.2"
   }
 }

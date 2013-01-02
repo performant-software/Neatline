@@ -17,7 +17,7 @@ module.exports = function(grunt) {
       src: 'payloads/js/editor.js',
       specs: 'tests/editor/**/*.spec.js',
       helpers: [
-        'helpers/*.js',
+        'helpers/helpers.js',
         'helpers/components/jasmine-jquery/lib/jasmine-jquery.js',
         'helpers/components/sinon.js/sinon.js'
       ],

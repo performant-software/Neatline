@@ -17,6 +17,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-stylus');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-rigger');
   grunt.loadNpmTasks('grunt-shell');
 
   // Load configuration.
@@ -130,9 +131,8 @@ module.exports = function(grunt) {
       ],
       payload: [
         config.payloads.app.css,
-        config.payloads.test.css,
         config.payloads.app.js,
-        config.payloads.test.js
+        config.payloads.test.root
       ]
     },
 
@@ -235,11 +235,15 @@ module.exports = function(grunt) {
       }
     },
 
+    rig: {
+      jasmine: {
+        src: config.jasmine+'/helpers/_helpers.js',
+        dest: config.jasmine+'/helpers/helpers.js',
+      }
+    },
+
     copy: {
       jasmine: {
-        // options: {
-        //   cwd: './views/shared/'
-        // },
         files: {
           './views/shared/javascripts/tests/payloads/js/':
           './views/shared/javascripts/payloads/*.js',
@@ -254,7 +258,8 @@ module.exports = function(grunt) {
         files: [
           '<config:concat.neatline.src>',
           '<config:concat.editor.src>',
-          config.stylus+'/**/*.styl'
+          config.stylus+'/**/*.styl',
+          config.jasmine+'/helpers/*.js'
         ],
         tasks: [
           'compile_concat'
@@ -278,7 +283,9 @@ module.exports = function(grunt) {
     'concat:editor',
     'stylus',
     'concat:neatline_css',
-    'concat:editor_css'
+    'concat:editor_css',
+    'copy',
+    'rig'
   ]);
 
   // Assemble/min static assets.
@@ -288,7 +295,9 @@ module.exports = function(grunt) {
     'min:editor',
     'stylus',
     'concat:neatline_css',
-    'concat:editor_css'
+    'concat:editor_css',
+    'copy',
+    'rig'
   ]);
 
   // Build the application.

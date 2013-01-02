@@ -10,6 +10,7 @@
       "css":        "./views/shared/css/payloads"
     },
     "test": {
+      "root":       "./views/shared/javascripts/tests/payloads",
       "js":         "./views/shared/javascripts/tests/payloads/js",
       "css":        "./views/shared/javascripts/tests/payloads/css"
     }

@@ -11,11 +11,20 @@
  */
 
 
-_t = { collections: {}, views: {} };
+_t = (function() {
+  var _t = {views:{}, collections:{}};
 
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
-// State Management:
-// ========================================================================
+/**
+ * State management helpers.
+ *
+ * @package     omeka
+ * @subpackage  neatline
+ * @copyright   2012 Rector and Board of Visitors, University of Virginia
+ * @license     http://www.apache.org/licenses/LICENSE-2.0.html
+ */
+
 
 /**
  * Load neatline application.
@@ -126,15 +135,24 @@ _t.click = function(el) {
 };
 
 
-// Fixtures Loading:
-// ========================================================================
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
+
+/**
+ * Fixture loading helpers.
+ *
+ * @package     omeka
+ * @subpackage  neatline
+ * @copyright   2012 Rector and Board of Visitors, University of Virginia
+ * @license     http://www.apache.org/licenses/LICENSE-2.0.html
+ */
+
 
 /**
  * Set the fixtures path.
  */
 _t.setFixturesPath = function() {
   jasmine.getFixtures().fixturesPath = 'fixtures';
-  jasmine.getStyleFixtures().fixturesPath = 'shared/payloads/css';
+  jasmine.getStyleFixtures().fixturesPath = 'payloads/css';
 };
 
 
@@ -159,8 +177,17 @@ _t.loadJsonFixtures = function() {
 };
 
 
-// Component Access:
-// ========================================================================
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
+
+/**
+ * Component aliasing helpers.
+ *
+ * @package     omeka
+ * @subpackage  neatline
+ * @copyright   2012 Rector and Board of Visitors, University of Virginia
+ * @license     http://www.apache.org/licenses/LICENSE-2.0.html
+ */
+
 
 /**
  * Shortcut public-facing exhibit components.
@@ -198,8 +225,17 @@ _t.shortcutEditorComponents = function() {
 };
 
 
-// Data Access:
-// ========================================================================
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
+
+/**
+ * Data access helpers.
+ *
+ * @package     omeka
+ * @subpackage  neatline
+ * @copyright   2012 Rector and Board of Visitors, University of Virginia
+ * @license     http://www.apache.org/licenses/LICENSE-2.0.html
+ */
+
 
 /**
  * Get DOM collection of editor record listings.
@@ -258,8 +294,17 @@ _t.buildModelFromJson = function(json) {
 };
 
 
-// Server Mocks:
-// ========================================================================
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
+
+/**
+ * Ajax mocking helpers.
+ *
+ * @package     omeka
+ * @subpackage  neatline
+ * @copyright   2012 Rector and Board of Visitors, University of Virginia
+ * @license     http://www.apache.org/licenses/LICENSE-2.0.html
+ */
+
 
 /**
  * Return the most recent sinon-wrapped AJAX request.
@@ -276,7 +321,6 @@ _t.getLastRequest = function() {
  *
  * @param {Object} request: The sinon request.
  * @param {Object} response: The response body.
- * @return void.
  */
 _t.respond200 = function(request, response) {
   var contentType = { 'Content-Type':'application/json' };
@@ -288,7 +332,6 @@ _t.respond200 = function(request, response) {
  * Respond to all queued AJAX calls with a single response.
  *
  * @param {Object} response: The response body.
- * @return void.
  */
 _t.respondAll200 = function(response) {
   _.each(this.server.requests, _.bind(function(r) {
@@ -310,8 +353,17 @@ _t.respondLast200 = function(response) {
 };
 
 
-// Map Actions:
-// ========================================================================
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
+
+/**
+ * Map helpers.
+ *
+ * @package     omeka
+ * @subpackage  neatline
+ * @copyright   2012 Rector and Board of Visitors, University of Virginia
+ * @license     http://www.apache.org/licenses/LICENSE-2.0.html
+ */
+
 
 /**
  * Trigger a pan/zoom event on the map.
@@ -453,3 +505,6 @@ _t.setMapCenter = function(lon, lat, zoom) {
   var lonlat = new OpenLayers.LonLat(lon, lat);
   this.views.map.map.setCenter(lonlat, zoom);
 };
+
+  return _t;
+})();
