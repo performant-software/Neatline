@@ -121,8 +121,7 @@ module.exports = function(grunt) {
 
     clean: {
       npm: [
-        config.jasmine['public']+'/node_modules',
-        config.jasmine.editor+'/node_modules'
+        config.jasmine+'/node_modules',
       ],
       bower: [
         config.bower.app+'/components',

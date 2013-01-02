@@ -14,12 +14,12 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-jasmine-runner');
   grunt.initConfig({
     jasmine: {
-      src: 'shared/payloads/js/neatline.js',
-      specs: 'public/**/*.spec.js',
+      src: 'payloads/js/neatline.js',
+      specs: 'tests/public/**/*.spec.js',
       helpers: [
-        'shared/helpers/*.js',
-        'shared/helpers/components/jasmine-jquery/lib/jasmine-jquery.js',
-        'shared/helpers/components/sinon.js/sinon.js'
+        'helpers/*.js',
+        'helpers/components/jasmine-jquery/lib/jasmine-jquery.js',
+        'helpers/components/sinon.js/sinon.js'
       ],
       server: {
         port: 1337

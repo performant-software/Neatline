@@ -133,7 +133,7 @@ _t.click = function(el) {
  * Set the fixtures path.
  */
 _t.setFixturesPath = function() {
-  jasmine.getFixtures().fixturesPath = 'shared/fixtures';
+  jasmine.getFixtures().fixturesPath = 'fixtures';
   jasmine.getStyleFixtures().fixturesPath = 'shared/payloads/css';
 };
 
