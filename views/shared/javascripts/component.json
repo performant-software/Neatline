@@ -11,6 +11,7 @@
     , "openlayers":         "https://github.com/openlayers/openlayers.git"
     , "noty":               "https://github.com/needim/noty.git"
     , "bootstrap":          ">= 2.2.0"
+    , "rivets":             ">= 0.4.3"
     , "d3":                 ">= 2.10.3"
   }
 }

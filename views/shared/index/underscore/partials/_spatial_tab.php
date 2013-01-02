@@ -94,7 +94,8 @@
   <div class="control-group">
     <div class="controls">
       <textarea name="coverage"
-        placeholder="Spatial Data (Well-Known Text)"></textarea>
+        placeholder="Spatial Data (Well-Known Text)"
+        data-text="record.coverage"></textarea>
     </div>
   </div>
 

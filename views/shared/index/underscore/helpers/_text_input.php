@@ -17,6 +17,7 @@
 <label><?php echo __($title); ?></label>
 <div class="controls">
   <div class="inline-inputs">
-    <input type="text" name="<?php echo $name; ?>" />
+    <input type="text" name="<?php echo $name; ?>"
+      data-value="<?php echo $bind; ?>"/>
   </div>
 </div>

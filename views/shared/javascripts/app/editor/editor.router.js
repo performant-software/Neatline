@@ -33,6 +33,10 @@ Neatline.module('Editor', { startWithParent: false,
      */
     initialize: function() {
 
+      this.collections = {
+        records:  Editor.Records. __collection
+      };
+
       this.views = {
         editor:   Editor.         __view,
         menu:     Editor.Menu.    __view,
@@ -60,10 +64,10 @@ Neatline.module('Editor', { startWithParent: false,
      * Show the list of records.
      */
     showRecordList: function() {
+      Neatline.execute('menu:activateTab', 'records');
       this.ui.editor.html(this.ui.menu);
       this.ui.editor.append(this.ui.search);
       this.ui.editor.append(this.ui.records);
-      this.views.menu.activateTab('records');
     },
 
 
@@ -73,7 +77,10 @@ Neatline.module('Editor', { startWithParent: false,
      * @param {String} id: The record id.
      */
     showRecordForm: function(id) {
-      this.ui.editor.html(this.ui.record);
+      this.collections.records.getOrFetch(id, _.bind(function(model) {
+        Neatline.execute('record:showForm', model);
+        this.ui.editor.html(this.ui.record);
+      }, this));
     },
 
 

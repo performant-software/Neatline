@@ -19,7 +19,7 @@ Neatline.module('Editor.Records', function(
    *
    * @param {Object} params: Query parameters.
    */
-  Neatline.commands.addHandler('editor:loadRecords', function(params) {
+  Neatline.commands.addHandler('records:loadRecords', function(params) {
     Records.__collection.update(params, function(records) {
       Records.__view.ingest(records);
     });

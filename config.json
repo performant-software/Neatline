@@ -34,6 +34,7 @@
       "backbone":           "./views/shared/javascripts/components/backbone/backbone.js",
       "marionette":         "./views/shared/javascripts/components/marionette/lib/backbone.marionette.js",
       "neatline":           "./views/shared/javascripts/components/backbone.neatline/lib/backbone.neatline.js",
+      "rivets":             "./views/shared/javascripts/components/rivets/lib/rivets.js",
       "openlayers":         "./views/shared/javascripts/components/openlayers/build/OpenLayers.js",
       "bootstrap":          "./views/shared/javascripts/components/bootstrap/bootstrap/js/bootstrap.js",
       "noty":               "./views/shared/javascripts/components/noty/js/noty/jquery.noty.js",

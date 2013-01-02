@@ -20,7 +20,7 @@
   <!-- Close button. -->
   <button type="button" class="close">&times;</button>
 
-  <p class="lead"></p>
+  <p class="lead" data-text="record.title"></p>
 
   <ul class="nav nav-pills">
     <li>

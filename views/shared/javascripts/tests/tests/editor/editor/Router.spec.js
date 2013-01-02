@@ -40,7 +40,8 @@ describe('Router', function() {
     // #records/:id should display a record edit form.
     // --------------------------------------------------------------------
 
-    _t.navigate('records/1');
+    var recordRows = _t.getRecordRows();
+    _t.navigate($(recordRows[0]).attr('href'));
     expect(_t.el.editor).toContain(_t.el.record);
 
   });

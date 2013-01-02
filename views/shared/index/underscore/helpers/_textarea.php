@@ -19,6 +19,7 @@
     <?php echo __($title); ?>
   </label>
   <div class="controls">
-    <textarea name="<?php echo $name; ?>"></textarea>
+    <textarea name="<?php echo $name; ?>"data-text="<?php echo $bind; ?>">
+    </textarea>
   </div>
 </div>

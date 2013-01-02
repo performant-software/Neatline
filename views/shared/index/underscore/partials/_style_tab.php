@@ -16,86 +16,100 @@
 
 <?php echo $this->partial(
   'index/underscore/helpers/_text_input.php', array(
-    'name' => 'vector-color',
-    'title' => 'Shape Color'
+    'name'  => 'vector-color',
+    'title' => 'Shape Color',
+    'bind'  => 'record.vector_color'
 )); ?>
 
 <?php echo $this->partial(
   'index/underscore/helpers/_text_input.php', array(
-    'name' => 'stroke-color',
-    'title' => 'Line Color'
+    'name'  => 'stroke-color',
+    'title' => 'Line Color',
+    'bind'  => 'record.stroke_color'
 )); ?>
 
 <?php echo $this->partial(
   'index/underscore/helpers/_text_input.php', array(
-    'name' => 'select-color',
-    'title' => 'Selected Color'
+    'name'  => 'select-color',
+    'title' => 'Selected Color',
+    'bind'  => 'record.select_color'
 )); ?>
 
 <?php echo $this->partial(
   'index/underscore/helpers/_text_input.php', array(
-    'name' => 'vector-opacity',
-    'title' => 'Shape Opacity'
+    'name'  => 'vector-opacity',
+    'title' => 'Shape Opacity',
+    'bind'  => 'record.vector_color'
 )); ?>
 
 <?php echo $this->partial(
   'index/underscore/helpers/_text_input.php', array(
-    'name' => 'select-color',
-    'title' => 'Selected Opacity'
+    'name'  => 'select-color',
+    'title' => 'Selected Opacity',
+    'bind'  => 'record.select_opacity'
 )); ?>
 
 <?php echo $this->partial(
   'index/underscore/helpers/_text_input.php', array(
-    'name' => 'stroke-opacity',
-    'title' => 'Line Opacity'
+    'name'  => 'stroke-opacity',
+    'title' => 'Line Opacity',
+    'bind'  => 'record.stroke_opacity'
 )); ?>
 
 <?php echo $this->partial(
   'index/underscore/helpers/_text_input.php', array(
-    'name' => 'image-opacity',
-    'title' => 'Image Opacity'
+    'name'  => 'image-opacity',
+    'title' => 'Image Opacity',
+    'bind'  => 'record.image_opacity'
 )); ?>
 
 <?php echo $this->partial(
   'index/underscore/helpers/_text_input.php', array(
-    'name' => 'stroke-width',
-    'title' => 'Line Width'
+    'name'  => 'stroke-width',
+    'title' => 'Line Width',
+    'bind'  => 'record.stroke_opacity'
 )); ?>
 
 <?php echo $this->partial(
   'index/underscore/helpers/_text_input.php', array(
-    'name' => 'point-radius',
-    'title' => 'Point Radius'
+    'name'  => 'point-radius',
+    'title' => 'Point Radius',
+    'bind'  => 'record.point_radius'
 )); ?>
 
 <?php echo $this->partial(
   'index/underscore/helpers/_text_input.php', array(
-    'name' => 'point-image',
-    'title' => 'Point Image'
+    'name'  => 'point-image',
+    'title' => 'Point Image',
+    'bind'  => 'record.point_image'
 )); ?>
 
 <?php echo $this->partial(
   'index/underscore/helpers/_text_input.php', array(
-    'name' => 'min-zoom',
-    'title' => 'Min Zoom'
+    'name'  => 'min-zoom',
+    'title' => 'Min Zoom',
+    'bind'  => 'record.min_zoom'
 )); ?>
 
 <?php echo $this->partial(
   'index/underscore/helpers/_text_input.php', array(
-    'name' => 'max-zoom',
-    'title' => 'Max Zoom'
+    'name'  => 'max-zoom',
+    'title' => 'Max Zoom',
+    'bind'  => 'record.max_zoom'
 )); ?>
 
 <?php echo $this->partial(
   'index/underscore/helpers/_text_input.php', array(
-    'name' => 'map-focus',
-    'title' => 'Focus Coordinates'
+    'name'  => 'map-focus',
+    'title' => 'Focus Coordinates',
+    'bind'  => 'record.map_focus'
 )); ?>
 
 <?php echo $this->partial(
   'index/underscore/helpers/_text_input.php', array(
-    'name' => 'map-zoom',
-    'title' => 'Focus Zoom'
+    'name'  => 'map-zoom',
+    'title' => 'Focus Zoom',
+    'bind'  => 'record.map_zoom'
 )); ?>
 
 <div class="controls">

@@ -27,6 +27,14 @@ Neatline.module('Editor.Record', function(
      */
     initialize: function() {
       this.getTemplate();
+    },
+
+
+    /**
+     * Bind model to form.
+     */
+    bindModel: function(model) {
+      rivets.bind(this.$el, {record: model});
     }
 
 

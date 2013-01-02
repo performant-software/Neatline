@@ -21,7 +21,7 @@ Neatline.module('Editor.Records', function(
     this.__view = new Records.ListView();
 
     // Execute default search query.
-    Neatline.execute('editor:loadRecords');
+    Neatline.execute('records:loadRecords');
 
   };
 
