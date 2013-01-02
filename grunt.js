@@ -16,6 +16,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-css');
   grunt.loadNpmTasks('grunt-contrib-stylus');
   grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-shell');
 
   // Load configuration.
@@ -128,8 +129,10 @@ module.exports = function(grunt) {
         config.bower.tests+'/components'
       ],
       payload: [
-        config.payloads.css,
-        config.payloads.js
+        config.payloads.app.css,
+        config.payloads.test.css,
+        config.payloads.app.js,
+        config.payloads.test.js
       ]
     },
 
@@ -155,7 +158,7 @@ module.exports = function(grunt) {
           config.app+'/bubble/**/*.js'
 
         ],
-        dest: config.payloads.js+'/neatline.js',
+        dest: config.payloads.app.js+'/neatline.js',
         separator: ';'
       },
       editor: {
@@ -185,35 +188,35 @@ module.exports = function(grunt) {
           config.app+'/editor/**/*.js'
 
         ],
-        dest: config.payloads.js+'/editor.js',
+        dest: config.payloads.app.js+'/editor.js',
         separator: ';'
       },
       neatline_css: {
         src: [
-          config.payloads.css+'/public/*.css',
+          config.payloads.app.css+'/public/*.css',
           config.vendor.css.openlayers,
           config.vendor.css.bootstrap
         ],
-        dest: config.payloads.css+'/neatline.css'
+        dest: config.payloads.app.css+'/neatline.css',
       },
       editor_css: {
         src: [
           '<config:concat.neatline_css.src>',
-          config.payloads.css+'/editor/*.css'
+          config.payloads.app.css+'/editor/*.css'
         ],
-        dest: config.payloads.css+'/editor.css'
+        dest: config.payloads.app.css+'/editor.css',
       }
     },
 
     min: {
       neatline: {
-        src: ['<config:concat.neatline.src>'],
-        dest: config.payloads.js+'/neatline.js',
+        src: '<config:concat.neatline.src>',
+        dest: config.payloads.app.js+'/neatline.js',
         separator: ';'
       },
       editor: {
-        src: ['<config:concat.editor.src>'],
-        dest: config.payloads.js+'/editor.js',
+        src: '<config:concat.editor.src>',
+        dest: config.payloads.app.js+'/editor.js',
         separator: ';'
       }
     },
@@ -224,10 +227,24 @@ module.exports = function(grunt) {
           paths: [config.stylus]
         },
         files: {
-          'views/shared/css/payloads/*.css': [
+          './views/shared/css/payloads/*.css': [
             config.stylus+'/public/*.styl',
             config.stylus+'/editor/*.styl'
           ]
+        }
+      }
+    },
+
+    copy: {
+      jasmine: {
+        // options: {
+        //   cwd: './views/shared/'
+        // },
+        files: {
+          './views/shared/javascripts/tests/payloads/js/':
+          './views/shared/javascripts/payloads/*.js',
+          './views/shared/javascripts/tests/payloads/css/':
+          './views/shared/css/payloads/*.css'
         }
       }
     },

@@ -5,13 +5,19 @@
   "jasmine":        "./views/shared/javascripts/tests",
 
   "payloads": {
-    "js":           "./views/shared/javascripts/payloads",
-    "css":          "./views/shared/css/payloads"
+    "app": {
+      "js":         "./views/shared/javascripts/payloads",
+      "css":        "./views/shared/css/payloads"
+    },
+    "test": {
+      "js":         "./views/shared/javascripts/tests/payloads/js",
+      "css":        "./views/shared/javascripts/tests/payloads/css"
+    }
   },
 
   "bower": {
     "app":          "./views/shared/javascripts",
-    "tests":        "./views/shared/javascripts/shared/helpers"
+    "tests":        "./views/shared/javascripts/tests/helpers"
   },
 
   "build": {
