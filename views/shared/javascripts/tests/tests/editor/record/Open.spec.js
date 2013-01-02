@@ -145,23 +145,23 @@ describe('Record Form Open/Close', function() {
 
   });
 
-  // it('should show form when a map feature is clicked', function() {
+  it('should show form when a map feature is clicked', function() {
 
-  //   // --------------------------------------------------------------------
-  //   // When a vector geometry on the map is clicked and an edit form isn't
-  //   // already open, the edit form that corresponds to the geometry should
-  //   // be displayed in the left pane.
-  //   // --------------------------------------------------------------------
+    // --------------------------------------------------------------------
+    // When a vector geometry on the map is clicked and an edit form isn't
+    // already open, the edit form that corresponds to the geometry should
+    // be displayed in the left pane.
+    // --------------------------------------------------------------------
 
-  //   // Trigger click.
-  //   _t.clickOnMapFeature(mapLayers[0], feature1);
+    // Trigger click.
+    _t.clickOnMapFeature(mapLayers[0], feature1);
 
-  //   // Check for form.
-  //   expect(_t.views.records.$el).toContain(_t.views.record.form);
-  //   expect(_t.views.records.$el).not.toContain(_t.views.records.ul);
-  //   expect(_t.views.record.model.get('title')).toEqual('title1');
+    // Check for form.
+    expect(_t.el.editor).toContain(_t.el.record);
+    expect(_t.el.editor).not.toContain(_t.el.records);
+    expect(_t.vw.record.model.get('title')).toEqual('title1');
 
-  // });
+  });
 
   // it('should not open new form in response to map click', function() {
 

@@ -47,6 +47,7 @@ Neatline.module('Editor.Record', function(
      */
     bindModel: function(model) {
       rivets.bind(this.$el, {record: model});
+      this.model = model;
     }
 
 

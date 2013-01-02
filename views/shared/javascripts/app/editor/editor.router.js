@@ -88,7 +88,6 @@ Neatline.module('Editor', { startWithParent: false,
 
         // Publish the model, focus the map, inject view.
         Neatline.vent.trigger('editor:router:showRecord', model);
-        Neatline.execute('map:focusByModel', model);
         this.ui.editor.html(this.ui.record);
 
       }, this));
