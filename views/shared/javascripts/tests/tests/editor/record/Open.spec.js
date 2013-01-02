@@ -163,32 +163,31 @@ describe('Record Form Open/Close', function() {
 
   });
 
-  // it('should not open new form in response to map click', function() {
+  it('should not open new form in response to map click', function() {
 
-  //   // --------------------------------------------------------------------
-  //   // When an edit form is already open, clicking on a map feature that
-  //   // corresponds to a different model from the one bound to the form
-  //   // should _not_ open the new form. This makes it impossible to
-  //   // accidentally switch to another edit form by clicking on a feature
-  //   // that belongs to a different record while drawing shapes in close
-  //   // proximity to other vectors.
-  //   // --------------------------------------------------------------------
+    // --------------------------------------------------------------------
+    // When an edit form is already open, clicking on a map feature that
+    // corresponds to a different model from the one bound to the form
+    // should _not_ open the new form. This makes it impossible to
+    // accidentally switch to another edit form by clicking on a feature
+    // that belongs to a different record while drawing shapes in close
+    // proximity to other vectors.
+    // --------------------------------------------------------------------
 
-  //   // Trigger click on Record 1 feature.
-  //   _t.clickOnMapFeature(mapLayers[0], feature1);
+    // Trigger click on Record 1 feature.
+    _t.clickOnMapFeature(mapLayers[0], feature1);
 
-  //   // Check for form.
-  //   expect(_t.views.records.$el).toContain(_t.views.record.form);
-  //   expect(_t.views.records.$el).not.toContain(_t.views.records.ul);
-  //   expect(_t.views.record.model.get('title')).toEqual('title1');
+    // Check for form.
+    expect(_t.el.editor).toContain(_t.el.record);
+    expect(_t.vw.record.model.get('title')).toEqual('title1');
 
-  //   // Trigger click on Record 2 feature.
-  //   _t.clickOnMapFeature(mapLayers[0], feature2);
+    // Trigger click on Record 2 feature.
+    _t.clickOnMapFeature(mapLayers[0], feature2);
 
-  //   // Check for unchanged form.
-  //   expect(_t.views.record.model.get('title')).toEqual('title1');
+    // Check for unchanged form.
+    expect(_t.vw.record.model.get('title')).toEqual('title1');
 
-  // });
+  });
 
   // it('should focus map when the form is opened via editor', function() {
 
