@@ -98,81 +98,52 @@ describe('Record Form Open/Close', function() {
 
   });
 
-  // it('should create map edit layer when one does not exist', function() {
+  it('should create map edit layer when one does not exist', function() {
 
-  //   // --------------------------------------------------------------------
-  //   // When an edit form is opened for a record that does not already have
-  //   // a corresponding map layer (for example, when the record list is not
-  //   // set in map mirroring mode, and there are listings for records that
-  //   // are not visible in the current viewport on the map), the model for
-  //   // the record housed in the editor application should be passed to the
-  //   // map and used to create a map layer for the record on the fly.
-  //   // --------------------------------------------------------------------
+    // --------------------------------------------------------------------
+    // When an edit form is opened for a record that does not already have
+    // a corresponding map layer (for example, when the record list is not
+    // set in map mirroring mode, and there are listings for records that
+    // are not visible in the current viewport on the map), the model for
+    // the record housed in the editor application should be passed to the
+    // map and used to create a map layer for the record on the fly.
+    // --------------------------------------------------------------------
 
-  //   // Load map without Record 2.
-  //   _t.refreshMap(_t.json.collections.removed);
+    // Load map without Record 2.
+    _t.refreshMap(_t.json.collections.removed);
 
-  //   // Just 1 layer on the map.
-  //   expect(_t.mapView.layers.length).toEqual(1);
+    // Just 1 layer on the map.
+    expect(_t.vw.map.layers.length).toEqual(1);
 
-  //   // Open form for Record 2.
-  //   $(recordRows[1]).trigger('click');
+    // Open form for Record 2.
+    _t.click($(recordRows[1]));
 
-  //   // Check for new layer.
-  //   mapLayers = _t.getVectorLayers();
-  //   expect(mapLayers.length).toEqual(2);
-  //   expect(mapLayers[1].features[0].geometry.x).toEqual(3);
-  //   expect(mapLayers[1].features[0].geometry.y).toEqual(4);
+    // Check for new layer.
+    mapLayers = _t.getVectorLayers();
+    expect(mapLayers.length).toEqual(2);
+    expect(mapLayers[1].features[0].geometry.x).toEqual(3);
+    expect(mapLayers[1].features[0].geometry.y).toEqual(4);
 
-  // });
+  });
 
-  // it('should show the "Text" tab on first form open', function() {
+  it('should show the "Text" tab on first form open', function() {
 
-  //   // --------------------------------------------------------------------
-  //   // When a form is opened for the first time in an editing session, the
-  //   // "Text" tab should be activated by default.
-  //   // --------------------------------------------------------------------
+    // --------------------------------------------------------------------
+    // When a form is opened for the first time in an editing session, the
+    // "Text" tab should be activated by default.
+    // --------------------------------------------------------------------
 
-  //   // Open form.
-  //   $(recordRows[0]).trigger('click');
+    // Open form.
+    _t.click($(recordRows[0]));
 
-  //   // Check for visible "Text."
-  //   expect($('#form-text')).toHaveClass('active');
+    // Check for visible "Text."
+    expect($('#record-form-text')).toHaveClass('active');
 
-  //   // "Spatial" and "Style" should be invisible.
-  //   expect($('#form-spatial')).not.toHaveClass('active');
-  //   expect($('#form-style')).not.toHaveClass('active');
+    // "Spatial" and "Style" should be invisible.
+    expect($('#record-form-spatial')).not.toHaveClass('active');
+    expect($('#record-form-style')).not.toHaveClass('active');
 
-  // });
-
-  // it('should retain tab state after first form open', function() {
-
-  //   // --------------------------------------------------------------------
-  //   // If a given tab (eg, "Spatial") is selected when the form is closed,
-  //   // that same tab should still be selected when the form is re-opened.
-  //   // --------------------------------------------------------------------
-
-  //   // Open Record 1 form.
-  //   $(recordRows[0]).trigger('click');
-
-  //   // Select "Spatial" tab.
-  //   $('a[href="#form-spatial"]').tab('show');
-
-  //   // Close Record 1 form.
-  //   _t.views.record.closeButton.trigger('click');
-
-  //   // Open Record 2.
-  //   recordRows = _t.getRecordRows();
-  //   $(recordRows[1]).trigger('click');
-
-  //   // "Spatial" should still be visible.
-  //   expect($('#form-spatial')).toHaveClass('active');
-
-  //   // "Text" and "Style" should be invisible.
-  //   expect($('#form-text')).not.toHaveClass('active');
-  //   expect($('#form-style')).not.toHaveClass('active');
-
-  // });
+  });
 
   // it('should show form when a map feature is clicked', function() {
 

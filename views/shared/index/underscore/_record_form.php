@@ -24,17 +24,17 @@
 
   <ul class="nav nav-pills">
     <li>
-      <a href="#form-text" data-toggle="tab">
+      <a href="#record-form-text" data-toggle="tab">
         <i class="icon-font"></i> Text
       </a>
     </li>
     <li>
-      <a href="#form-spatial" data-toggle="tab">
+      <a href="#record-form-spatial" data-toggle="tab">
         <i class="icon-map-marker"></i> Spatial
       </a>
     </li>
     <li>
-      <a href="#form-style" data-toggle="tab">
+      <a href="#record-form-style" data-toggle="tab">
         <i class="icon-tasks"></i> Style
       </a>
     </li>
@@ -42,19 +42,19 @@
 
   <div class="tab-content">
 
-    <div class="tab-pane text" id="form-text">
+    <div class="tab-pane text" id="record-form-text">
       <?php echo $this->partial(
         'index/underscore/partials/_text_tab.php'
       ); ?>
     </div>
 
-    <div class="tab-pane spatial" id="form-spatial">
+    <div class="tab-pane spatial" id="record-form-spatial">
       <?php echo $this->partial(
         'index/underscore/partials/_spatial_tab.php'
       ); ?>
     </div>
 
-    <div class="tab-pane style" id="form-style">
+    <div class="tab-pane style" id="record-form-style">
       <?php echo $this->partial(
         'index/underscore/partials/_style_tab.php'
       ); ?>

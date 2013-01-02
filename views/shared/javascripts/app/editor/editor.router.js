@@ -64,10 +64,15 @@ Neatline.module('Editor', { startWithParent: false,
      * Show the list of records.
      */
     showRecordList: function() {
-      Neatline.execute('menu:activateTab', 'records');
+
+      // Activate "Records" tab.
+      Neatline.execute('editor:menu:activateTab', 'records');
+
+      // Inject views.
       this.ui.editor.html(this.ui.menu);
       this.ui.editor.append(this.ui.search);
       this.ui.editor.append(this.ui.records);
+
     },
 
 
@@ -77,10 +82,17 @@ Neatline.module('Editor', { startWithParent: false,
      * @param {String} id: The record id.
      */
     showRecordForm: function(id) {
+
+      // Get a model for the requested record.
       this.collections.records.getOrFetch(id, _.bind(function(model) {
-        Neatline.execute('record:showForm', model);
+
+        // Publish the model, focus the map, inject view.
+        Neatline.vent.trigger('editor:router:showRecord', model);
+        Neatline.execute('map:focusByModel', model);
         this.ui.editor.html(this.ui.record);
+
       }, this));
+
     },
 
 

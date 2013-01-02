@@ -19,7 +19,7 @@ Neatline.module('Editor.Menu', function(
    *
    * @param {String} tab: The tab to activate.
    */
-  Neatline.commands.addHandler('menu:activateTab', function(tab) {
+  Neatline.commands.addHandler('editor:menu:activateTab', function(tab) {
     Menu.__view.activateTab(tab);
   });
 

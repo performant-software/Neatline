@@ -23,6 +23,14 @@ Neatline.module('Editor', { startWithParent: false,
 
 
   /**
+   * Start the map editor after Neatline.
+   */
+  Neatline.on('initialize:after', function() {
+    Editor.Map.start();
+  });
+
+
+  /**
    * Initialize the router and layout view.
    */
   Editor.init = function() {

@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Record form command handlers.
+ * Record form events.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -19,7 +19,7 @@ Neatline.module('Editor.Record', function(
    *
    * @param {Object} model: The model.
    */
-  Neatline.commands.addHandler('record:showForm', function(model) {
+  Neatline.vent.on('editor:router:showRecord', function(model) {
     Record.__view.bindModel(model);
   });
 

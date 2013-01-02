@@ -21,12 +21,24 @@ Neatline.module('Editor.Record', function(
     className:  'form-stacked record',
     tagName:    'form',
 
+    ui: {
+      textTab:    'a[href="#record-form-text"]',
+      textRegion: '#record-form-text'
+    },
+
 
     /**
      * Render template.
      */
     initialize: function() {
+
       this.getTemplate();
+      this.getUi();
+
+      // Select "Text" tab by default.
+      this.__ui.textRegion.addClass('active');
+      this.__ui.textTab.tab('show');
+
     },
 
 

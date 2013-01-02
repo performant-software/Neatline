@@ -10,11 +10,11 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Map.Views', function(
-  Views, Map, Backbone, Marionette, $, _) {
+Neatline.module('Map', function(
+  Map, Neatline, Backbone, Marionette, $, _) {
 
 
-  Views.Map = Backbone.View.extend({
+  Map.View = Backbone.View.extend({
 
 
     options: {
