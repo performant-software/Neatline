@@ -81,26 +81,26 @@ describe('Form Save', function() {
 
   });
 
-  // it('should change button text while request is running', function() {
+  it('should change button text while request is running', function() {
 
-  //   // --------------------------------------------------------------------
-  //   // When the "Save" button is clicked, the button text should change to
-  //   // "Saving" while the request is running.
-  //   // --------------------------------------------------------------------
+    // --------------------------------------------------------------------
+    // When the "Save" button is clicked, the button text should change to
+    // "Saving" while the request is running.
+    // --------------------------------------------------------------------
 
-  //   // Click on "Save".
-  //   _t.formView.saveButton.trigger('click');
+    // Click on "Save".
+    _t.vw.record.__ui.buttons.save.trigger('click');
 
-  //   // Check for changed button text.
-  //   expect(_t.formView.saveButton).toHaveText('Saving');
+    // Check for changed button text.
+    expect(_t.vw.record.__ui.buttons.save).toHaveClass('disabled');
 
-  //   // Complete request.
-  //   _t.respondLast200('');
+    // Complete request.
+    _t.respondLast200('');
 
-  //   // Check for restored button text.
-  //   expect(_t.formView.saveButton).toHaveText('Save');
+    // Check for restored button text.
+    expect(_t.vw.record.__ui.buttons.save).not.toHaveClass('disabled');
 
-  // });
+  });
 
   // it('should flash a notification when the save succeeds', function() {
 
@@ -113,7 +113,7 @@ describe('Form Save', function() {
   //   noty = jasmine.createSpy();
 
   //   // Click on "Save".
-  //   _t.formView.saveButton.trigger('click');
+  //   _t.vw.record.__ui.buttons.save.trigger('click');
   //   _t.respondLast200('');
 
   //   // Check for `noty` call.

@@ -9,7 +9,7 @@
     , "marionette":         ">= 0.10.2"
     , "backbone.neatline":  "https://github.com/davidmcclure/backbone.neatline.git"
     , "openlayers":         "https://github.com/openlayers/openlayers.git"
-    , "noty":               "https://github.com/needim/noty.git"
+    , "toastr":             "https://github.com/CodeSeven/toastr.git"
     , "bootstrap":          ">= 2.2.0"
     , "rivets":             ">= 0.4.3"
     , "d3":                 ">= 2.10.3"

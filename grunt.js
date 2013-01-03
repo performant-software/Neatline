@@ -147,7 +147,6 @@ module.exports = function(grunt) {
           config.vendor.js.marionette,
           config.vendor.js.neatline,
           config.vendor.js.openlayers,
-          config.vendor.js.bootstrap,
           config.vendor.js.d3,
 
           // Neatline:
@@ -174,10 +173,7 @@ module.exports = function(grunt) {
           config.vendor.js.rivets,
           config.vendor.js.openlayers,
           config.vendor.js.bootstrap,
-          config.vendor.js.noty,
-          config.vendor.js.noty_layout_base,
-          config.vendor.js.noty_layout,
-          config.vendor.js.noty_theme,
+          config.vendor.js.toastr,
           config.vendor.js.d3,
 
           // Editor:
@@ -196,13 +192,14 @@ module.exports = function(grunt) {
         src: [
           config.payloads.app.css+'/public/*.css',
           config.vendor.css.openlayers,
-          config.vendor.css.bootstrap
         ],
         dest: config.payloads.app.css+'/neatline.css',
       },
       editor_css: {
         src: [
           '<config:concat.neatline_css.src>',
+          config.vendor.css.bootstrap,
+          config.vendor.css.toastr,
           config.payloads.app.css+'/editor/*.css'
         ],
         dest: config.payloads.app.css+'/editor.css',
@@ -263,7 +260,20 @@ module.exports = function(grunt) {
           config.jasmine+'/helpers/*.js'
         ],
         tasks: [
-          'compile_concat'
+          'compile:concat'
+        ]
+      },
+      jasmine: {
+        files: [
+          '<config:concat.neatline.src>',
+          '<config:concat.editor.src>',
+          config.stylus+'/**/*.styl',
+          config.jasmine+'/helpers/*.js',
+          config.jasmine+'/tests/**/*.js'
+        ],
+        tasks: [
+          'compile:concat',
+          'jasmine'
         ]
       }
     }
@@ -278,7 +288,7 @@ module.exports = function(grunt) {
   grunt.registerTask('default', 'test');
 
   // Assemble static assets.
-  grunt.registerTask('compile_concat', [
+  grunt.registerTask('compile:concat', [
     'clean:payload',
     'concat:neatline',
     'concat:editor',
@@ -290,7 +300,7 @@ module.exports = function(grunt) {
   ]);
 
   // Assemble/min static assets.
-  grunt.registerTask('compile_min', [
+  grunt.registerTask('compile:min', [
     'clean:payload',
     'min:neatline',
     'min:editor',
@@ -311,7 +321,7 @@ module.exports = function(grunt) {
     'shell:build_openlayers',
     'shell:build_bootstrap',
     'shell:move_bootstrap_images',
-    'compile_min'
+    'compile:min'
   ]);
 
   // Run all tests.
@@ -321,16 +331,30 @@ module.exports = function(grunt) {
     'shell:jasmine_editor'
   ]);
 
-  // Run PHPUnit / Jasmine.
+  // Run PHPUnit.
   grunt.registerTask('phpunit', 'shell:phpunit');
+
+  // Run Jasmine.
   grunt.registerTask('jasmine', [
     'shell:jasmine_public',
     'shell:jasmine_editor'
   ]);
-
-  // Run Jasmine servers.
-  grunt.registerTask('public_server', 'shell:jasmine_public_server');
-  grunt.registerTask('editor_server', 'shell:jasmine_editor_server');
+  grunt.registerTask(
+    'jasmine:public',
+    'shell:jasmine_public'
+  );
+  grunt.registerTask(
+    'jasmine:public:server',
+    'shell:jasmine_public_server'
+  );
+  grunt.registerTask(
+    'jasmine:editor',
+    'shell:jasmine_editor'
+  );
+  grunt.registerTask(
+    'jasmine:editor:server',
+    'shell:jasmine_editor_server'
+  );
 
 
 };

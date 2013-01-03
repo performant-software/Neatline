@@ -75,7 +75,10 @@ Neatline.module('Editor.Record', function(
      * Save the record.
      */
     save: function() {
-      this.model.save();
+      this._setSaving();
+      this.model.save(null, {
+        success: _.bind(this._setSaved, this)
+      });
     },
 
 
@@ -84,6 +87,22 @@ Neatline.module('Editor.Record', function(
      */
     delete: function() {
 
+    },
+
+
+    /**
+     * .
+     */
+    _setSaving: function() {
+      this.__ui.buttons.save.addClass('disabled');
+    },
+
+
+    /**
+     * .
+     */
+    _setSaved: function() {
+      this.__ui.buttons.save.removeClass('disabled');
     }
 
 

@@ -16,12 +16,12 @@
 <div class="actions">
 
   <a name="save" class="btn btn-large btn-primary" \>
-    <?php echo __('Save'); ?>
+    <i class="icon-ok icon-white"></i> <?php echo __('Save'); ?>
   </a>
 
   <a href="#deleteConfirm" name="delete"
     class="btn btn-large btn-inverse" data-toggle="modal">
-      <?php echo __('Delete'); ?>
+      <i class="icon-trash icon-white"></i> <?php echo __('Delete'); ?>
   </a>
 
 </div>
