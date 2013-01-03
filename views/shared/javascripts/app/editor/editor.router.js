@@ -60,6 +60,11 @@ Neatline.module('Editor', { startWithParent: false,
     },
 
 
+    before: function() {
+      this.ui.editor.empty();
+    },
+
+
     /**
      * Show the list of records.
      */
@@ -68,10 +73,10 @@ Neatline.module('Editor', { startWithParent: false,
       // Activate "Records" tab.
       Neatline.execute('editor:menu:activateTab', 'records');
 
-      // Inject views.
-      this.ui.editor.html(this.ui.menu);
-      this.ui.editor.append(this.ui.search);
-      this.ui.editor.append(this.ui.records);
+      // Show views.
+      this.views.menu.show(this.ui.editor);
+      this.views.search.show(this.ui.editor);
+      this.views.records.show(this.ui.editor);
 
     },
 
@@ -88,7 +93,7 @@ Neatline.module('Editor', { startWithParent: false,
 
         // Publish the model, focus the map, inject view.
         Neatline.vent.trigger('editor:router:showRecord', model);
-        this.ui.editor.html(this.ui.record);
+        this.views.record.show(this.ui.editor);
 
       }, this));
 
@@ -99,7 +104,7 @@ Neatline.module('Editor', { startWithParent: false,
      * Show add record form.
      */
     showNewRecordForm: function() {
-      this.ui.editor.html(this.ui.record);
+      this.views.record.show(this.ui.editor);
     },
 
 
@@ -107,9 +112,14 @@ Neatline.module('Editor', { startWithParent: false,
      * Show the list of tags.
      */
     showTagList: function() {
-      this.ui.editor.html(this.ui.menu);
-      this.ui.editor.append(this.ui.tags);
-      this.views.menu.activateTab('tags');
+
+      // Activate "Tags" tab.
+      Neatline.execute('editor:menu:activateTab', 'tabs');
+
+      // Show views.
+      this.views.menu.show(this.ui.editor);
+      this.views.tags.show(this.ui.editor);
+
     },
 
 
@@ -119,7 +129,7 @@ Neatline.module('Editor', { startWithParent: false,
      * @param {String} id: The tag id.
      */
     showTagForm: function(id) {
-      this.ui.editor.html(this.ui.tag);
+      this.views.tag.show(this.ui.editor);
     },
 
 
@@ -127,7 +137,7 @@ Neatline.module('Editor', { startWithParent: false,
      * Show add tag form.
      */
     showNewTagForm: function() {
-      this.ui.editor.html(this.ui.tag);
+      this.views.tag.show(this.ui.editor);
     }
 
 

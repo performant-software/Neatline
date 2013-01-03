@@ -62,9 +62,9 @@ Neatline.module('Editor.Record', function(
 
 
     /**
-     * Bind model to form.
+     * Show the form for a record model.
      */
-    bindModel: function(model) {
+    show: function(model) {
       rivets.bind(this.$el, { record: model });
       this.model = model;
     },

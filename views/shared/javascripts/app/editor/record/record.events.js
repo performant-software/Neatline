@@ -20,7 +20,7 @@ Neatline.module('Editor.Record', function(
    * @param {Object} model: The model.
    */
   Neatline.vent.on('editor:router:showRecord', function(model) {
-    Record.__view.bindModel(model);
+    Record.__view.show(model);
   });
 
 

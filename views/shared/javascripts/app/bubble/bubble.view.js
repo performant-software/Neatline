@@ -41,11 +41,9 @@ Neatline.module('Bubble.Views', function(
       this.getTemplate();
       this.getUi();
 
-      // State trackers.
       this.active = true;   // True when bubble should be displayed.
       this.frozen = false;  // True when bubble is frozen after a click.
 
-      // Containers.
       this.exhibit  = $('#neatline');
       this.window   = $(window);
 
@@ -61,8 +59,6 @@ Neatline.module('Bubble.Views', function(
 
       // Break if frozen.
       if (this.frozen || !this.active) return;
-
-      // Bind model to tempalte.
       rivets.bind(this.$el, { record: model });
 
       // Position on mousemove.
@@ -91,8 +87,6 @@ Neatline.module('Bubble.Views', function(
 
     /**
      * Freeze the bubble in place.
-     *
-     * @param {Object} model: The record model.
      */
     freeze: function() {
       this.window.unbind('mousemove.bubble');
@@ -103,8 +97,6 @@ Neatline.module('Bubble.Views', function(
 
     /**
      * Unfreeze the bubble.
-     *
-     * @param {Object} model: The record model.
      */
     thaw: function() {
       this.window.unbind('mousemove.bubble');
