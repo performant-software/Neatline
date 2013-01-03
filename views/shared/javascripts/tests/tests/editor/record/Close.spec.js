@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Tests for form close.
+ * Tests for record form close.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -10,52 +10,36 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Form Open/Close', function() {
+describe('Record Form Close', function() {
 
-  var recordRows, mapLayers, models, feature1, feature2;
+  var recordRows;
 
   // Start editor.
   beforeEach(function() {
-
     _t.loadEditor();
-
-    // Get records rows.
     recordRows = _t.getRecordRows();
-
+    _t.openFirstRecordForm();
   });
 
-  // it('should close the form when "Close" is clicked', function() {
+  it('should close the form when "Close" is clicked', function() {
 
-  //   // --------------------------------------------------------------------
-  //   // When the "Close" button at the bottom of the record edit form is
-  //   // clicked, the form should disappear and the records list should be
-  //   // re-rendered in the content pane.
-  //   // --------------------------------------------------------------------
+    // --------------------------------------------------------------------
+    // When the "X" button at the top of the record edit form is clicked,
+    // the form should disappear and the records list should be displayed
+    // in the content pane.
+    // --------------------------------------------------------------------
 
-  //   // Open form, click close.
-  //   $(recordRows[0]).trigger('click');
-  //   _t.formView.closeButton.trigger('click');
+    // Open form, click close.
+    _t.vw.record.__ui.buttons.close.trigger('click');
 
-  //   // Check for records list, no form.
-  //   expect(_t.recordsView.$el).not.toContain(_t.formView.form);
-  //   expect(_t.recordsView.$el).toContain(_t.recordsView.ul);
+    // Check for records list, no form.
+    expect(_t.el.editor).not.toContain(_t.el.record);
+    expect(_t.el.editor).toContain(_t.el.records);
 
-  //   // 3 records in browser pane.
-  //   recordRows = _t.getRecordRows();
-  //   expect(recordRows.length).toEqual(3);
-  //   expect($(recordRows[0]).find('.record-title').text()).
-  //     toEqual('title1');
-  //   expect($(recordRows[0]).find('.record-body').text()).
-  //     toEqual('body1');
-  //   expect($(recordRows[1]).find('.record-title').text()).
-  //     toEqual('title2');
-  //   expect($(recordRows[1]).find('.record-body').text()).
-  //     toEqual('body2');
-  //   expect($(recordRows[2]).find('.record-title').text()).
-  //     toEqual('title3');
-  //   expect($(recordRows[2]).find('.record-body').text()).
-  //     toEqual('body3');
+    // 3 records in browser pane.
+    recordRows = _t.getRecordRows();
+    expect(recordRows.length).toEqual(3);
 
-  // });
+  });
 
 });

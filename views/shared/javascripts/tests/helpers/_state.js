@@ -61,12 +61,21 @@ _t.loadEditor = function() {
 
 
 /**
+ * Navigate to the edit form for the first record.
+ */
+_t.openFirstRecordForm = function() {
+  var models = this.getRecordModels();
+  this.navigate('records/'+models[0].get('id'));
+};
+
+
+/**
  * Navigate to a route.
  *
  * @param {String} frag: The URL fragment.
  */
 _t.navigate = function(frag) {
-  Neatline.Editor.__router.navigate(frag, { trigger: true });
+  Backbone.history.loadUrl(frag);
 };
 
 

@@ -18,7 +18,7 @@
 <script id="record-form-template" type="text/templates">
 
   <!-- Close button. -->
-  <button type="button" class="close">&times;</button>
+  <a name="close" class="close">&times;</a>
 
   <p class="lead" data-text="record.title"></p>
 

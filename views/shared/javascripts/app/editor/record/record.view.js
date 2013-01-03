@@ -21,9 +21,20 @@ Neatline.module('Editor.Record', function(
     className:  'form-stacked record',
     tagName:    'form',
 
+    events: {
+      'click a[name="close"]':   'close',
+      'click a[name="save"]':    'save',
+      'click a[name="delete"]':  'delete'
+    },
+
     ui: {
       textTab:    'a[href="#record-form-text"]',
-      textRegion: '#record-form-text'
+      textRegion: '#record-form-text',
+      buttons: {
+        close:    'a[name="close"]',
+        save:     'a[name="save"]',
+        delete:   'a[name="delete"]'
+      }
     },
 
 
@@ -46,8 +57,33 @@ Neatline.module('Editor.Record', function(
      * Bind model to form.
      */
     bindModel: function(model) {
-      rivets.bind(this.$el, {record: model});
+      rivets.bind(this.$el, { record: model });
       this.model = model;
+    },
+
+
+    /**
+     * Close the form.
+     */
+    close: function() {
+      Neatline.vent.trigger('editor:record:closeRecord');
+      this.model = null;
+    },
+
+
+    /**
+     * Save the record.
+     */
+    save: function() {
+      this.model.save();
+    },
+
+
+    /**
+     * Delete the record.
+     */
+    delete: function() {
+
     }
 
 

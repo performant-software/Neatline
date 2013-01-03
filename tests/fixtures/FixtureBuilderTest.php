@@ -46,11 +46,11 @@ class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
         $record1->coverage        = 'POINT(1 2)';
         $record2->coverage        = 'POINT(3 4)';
         $record3->coverage        = 'POINT(5 6)';
-        $record1->map_focus       = '100,200';
-        $record1->map_zoom        = 10; // No default focus for 2 and 3.
+        $record1->map_focus       = '100,200';    // Null for 2 and 3.
+        $record1->map_zoom        = 10;           // Null for 2 and 3.
         $record1->map_active      = 1;
         $record2->map_active      = 1;
-        $record3->map_active      = 0;  // Record 3 inactive.
+        $record3->map_active      = 0;            // Record 3 inactive.
         $record1->vector_color    = '#111111';
         $record2->vector_color    = '#222222';
         $record3->vector_color    = '#333333';

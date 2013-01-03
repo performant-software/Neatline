@@ -27,4 +27,13 @@ Neatline.module('Editor', { startWithParent: false,
   });
 
 
+  /**
+   * When the "X" button on a record form is clicked, close the form and
+   * display the records list.
+   */
+  Neatline.vent.on('editor:record:closeRecord', function() {
+    Editor.__router.navigate('records', true);
+  });
+
+
 }});

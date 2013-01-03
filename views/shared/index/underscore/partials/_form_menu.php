@@ -14,31 +14,41 @@
 ?>
 
 <div class="actions">
+
   <a name="save" class="btn btn-large btn-primary" \>
     <?php echo __('Save'); ?>
   </a>
-  <a href="#deleteConfirm" name="delete" class="btn btn-large btn-inverse"
-     data-toggle="modal">
+
+  <a href="#deleteConfirm" name="delete"
+    class="btn btn-large btn-inverse" data-toggle="modal">
       <?php echo __('Delete'); ?>
   </a>
+
 </div>
 
 <div id="deleteConfirm" class="modal hide" role="dialog"
   aria-hidden="true">
+
   <div class="modal-header">
     <h4>Are you sure?</h4>
   </div>
+
   <div class="modal-body">
     <p>This will completely delete the record from the database and remove
        all associated metadata. This action cannot be undone.
     </p>
   </div>
+
   <div class="modal-footer">
+
     <button name="delete" class="btn btn-danger">
       <i class="icon-trash icon-white"></i> Yes, delete
     </button>
+
     <button class="btn" data-dismiss="modal">
       <i class="icon-ban-circle"></i> Cancel
     </button>
+
   </div>
+
 </div>

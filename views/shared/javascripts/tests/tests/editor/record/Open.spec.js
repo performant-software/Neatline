@@ -10,7 +10,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Record Form Open/Close', function() {
+describe('Record Form Open', function() {
 
   var recordRows, recordModels, mapLayers, feature1, feature2;
 
@@ -54,47 +54,29 @@ describe('Record Form Open/Close', function() {
     // should render data from the record's model into the form fields.
     // --------------------------------------------------------------------
 
-    // Open form.
+    // Open form, get elements.
     _t.click($(recordRows[0]));
+    var favicon = 'https://www.google.com/favicon.ico';
+    var els = _t.getRecordFormElements();
 
-    var favicon       = 'https://www.google.com/favicon.ico';
-    var lead          = _t.el.record.find('p.lead');
-    var title         = _t.el.record.find('textarea[name="title"]');
-    var body          = _t.el.record.find('textarea[name="body"]');
-    var coverage      = _t.el.record.find('textarea[name="coverage"]');
-    var vectorColor   = _t.el.record.find('input[name="vector-color"]');
-    var strokeColor   = _t.el.record.find('input[name="stroke-color"]');
-    var selectColor   = _t.el.record.find('input[name="select-color"]');
-    var vectorOpacity = _t.el.record.find('input[name="vector-opacity"]');
-    var selectOpacity = _t.el.record.find('input[name="select-opacity"]');
-    var strokeOpacity = _t.el.record.find('input[name="stroke-opacity"]');
-    var imageOpacity  = _t.el.record.find('input[name="image-opacity"]');
-    var strokeWidth   = _t.el.record.find('input[name="stroke-width"]');
-    var pointRadius   = _t.el.record.find('input[name="point-radius"]');
-    var minZoom       = _t.el.record.find('input[name="min-zoom"]');
-    var maxZoom       = _t.el.record.find('input[name="max-zoom"]');
-    var pointImage    = _t.el.record.find('input[name="point-image"]');
-    var mapFocus      = _t.el.record.find('input[name="map-focus"]');
-    var mapZoom       = _t.el.record.find('input[name="map-zoom"]');
-
-    expect(lead).           toHaveText('title1');
-    expect(title).          toHaveText('title1');
-    expect(body).           toHaveText('body1');
-    expect(coverage).       toHaveText('POINT(1 2)');
-    expect(vectorColor).    toHaveValue('#111111');
-    expect(strokeColor).    toHaveValue('#444444');
-    expect(selectColor).    toHaveValue('#777777');
-    expect(vectorOpacity).  toHaveValue('1');
-    expect(selectOpacity).  toHaveValue('4');
-    expect(strokeOpacity).  toHaveValue('7');
-    expect(imageOpacity).   toHaveValue('10');
-    expect(strokeWidth).    toHaveValue('13');
-    expect(pointRadius).    toHaveValue('16');
-    expect(pointImage).     toHaveValue(favicon);
-    expect(minZoom).        toHaveValue('19');
-    expect(maxZoom).        toHaveValue('22');
-    expect(mapFocus).       toHaveValue('100,200');
-    expect(mapZoom).        toHaveValue('10');
+    expect(els.lead).           toHaveText('title1');
+    expect(els.title).          toHaveValue('title1');
+    expect(els.body).           toHaveValue('body1');
+    expect(els.coverage).       toHaveValue('POINT(1 2)');
+    expect(els.vectorColor).    toHaveValue('#111111');
+    expect(els.strokeColor).    toHaveValue('#444444');
+    expect(els.selectColor).    toHaveValue('#777777');
+    expect(els.vectorOpacity).  toHaveValue('1');
+    expect(els.selectOpacity).  toHaveValue('4');
+    expect(els.strokeOpacity).  toHaveValue('7');
+    expect(els.imageOpacity).   toHaveValue('10');
+    expect(els.strokeWidth).    toHaveValue('13');
+    expect(els.pointRadius).    toHaveValue('16');
+    expect(els.pointImage).     toHaveValue(favicon);
+    expect(els.minZoom).        toHaveValue('19');
+    expect(els.maxZoom).        toHaveValue('22');
+    expect(els.mapFocus).       toHaveValue('100,200');
+    expect(els.mapZoom).        toHaveValue('10');
 
   });
 
@@ -254,15 +236,15 @@ describe('Record Form Open/Close', function() {
   //   // --------------------------------------------------------------------
 
   //   // By default, frozen empty.
-  //   expect(_t.mapView.frozen).toEqual([]);
+  //   expect(_t.vw.map.frozen).toEqual([]);
 
-  //   // Show form, check `frozen`.
-  //   $(recordRows[0]).trigger('click');
-  //   expect(_t.mapView.frozen).toEqual([models[0].get('id')]);
+  //   // Show form, check frozen.
+  //   _t.click($(recordRows[0]));
+  //   expect(_t.vw.map.frozen).toEqual([recordModels[0].get('id')]);
 
   //   // Close, check `frozen` empty.
-  //   _t.views.record.closeButton.trigger('click');
-  //   expect(_t.mapView.frozen).toEqual([]);
+  //   _t.vw.record.__ui.buttons.trigger('click');
+  //   expect(_t.vw.map.frozen).toEqual([]);
 
   // });
 

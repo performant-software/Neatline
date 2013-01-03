@@ -76,12 +76,21 @@ _t.loadEditor = function() {
 
 
 /**
+ * Navigate to the edit form for the first record.
+ */
+_t.openFirstRecordForm = function() {
+  var models = this.getRecordModels();
+  this.navigate('records/'+models[0].get('id'));
+};
+
+
+/**
  * Navigate to a route.
  *
  * @param {String} frag: The URL fragment.
  */
 _t.navigate = function(frag) {
-  Neatline.Editor.__router.navigate(frag, { trigger: true });
+  Backbone.history.loadUrl(frag);
 };
 
 
@@ -289,6 +298,35 @@ _t.getVectorLayerByTitle = function(title) {
  */
 _t.buildModelFromJson = function(json) {
   return new Neatline.Record.Model(JSON.parse(json));
+};
+
+
+/**
+ * Get DOM selections for the elements on the record form.
+ *
+ * @return {Object}: A hash of elements.
+ */
+_t.getRecordFormElements = function(json) {
+  return {
+    lead:           _t.el.record.find('p.lead'),
+    title:          _t.el.record.find('textarea[name="title"]'),
+    body:           _t.el.record.find('textarea[name="body"]'),
+    coverage:       _t.el.record.find('textarea[name="coverage"]'),
+    vectorColor:    _t.el.record.find('input[name="vector-color"]'),
+    strokeColor:    _t.el.record.find('input[name="stroke-color"]'),
+    selectColor:    _t.el.record.find('input[name="select-color"]'),
+    vectorOpacity:  _t.el.record.find('input[name="vector-opacity"]'),
+    selectOpacity:  _t.el.record.find('input[name="select-opacity"]'),
+    strokeOpacity:  _t.el.record.find('input[name="stroke-opacity"]'),
+    imageOpacity:   _t.el.record.find('input[name="image-opacity"]'),
+    strokeWidth:    _t.el.record.find('input[name="stroke-width"]'),
+    pointRadius:    _t.el.record.find('input[name="point-radius"]'),
+    minZoom:        _t.el.record.find('input[name="min-zoom"]'),
+    maxZoom:        _t.el.record.find('input[name="max-zoom"]'),
+    pointImage:     _t.el.record.find('input[name="point-image"]'),
+    mapFocus:       _t.el.record.find('input[name="map-focus"]'),
+    mapZoom:        _t.el.record.find('input[name="map-zoom"]')
+  };
 };
 
 
