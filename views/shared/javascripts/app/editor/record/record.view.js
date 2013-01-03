@@ -37,6 +37,14 @@ Neatline.module('Editor.Record', function(
       }
     },
 
+    options: {
+      toastr: {
+        timeOut:  2000,
+        fadeIn:   200,
+        fadeOut:  200
+      }
+    },
+
 
     /**
      * Render template.
@@ -75,9 +83,13 @@ Neatline.module('Editor.Record', function(
      * Save the record.
      */
     save: function() {
-      this._setSaving();
       this.model.save(null, {
-        success: _.bind(this._setSaved, this)
+        success: _.bind(function() {
+          this._notifySuccess(STRINGS.record.save.success);
+        }, this),
+        error: _.bind(function() {
+          this._notifyError(STRINGS.record.save.error);
+        }, this)
       });
     },
 
@@ -91,18 +103,22 @@ Neatline.module('Editor.Record', function(
 
 
     /**
-     * .
+     * Flash a success notification.
+     *
+     * @param {String} string: The message.
      */
-    _setSaving: function() {
-      this.__ui.buttons.save.addClass('disabled');
+    _notifySuccess: function(string) {
+      toastr.success(string, null, this.options.toastr);
     },
 
 
     /**
-     * .
+     * Flash a failure notification.
+     *
+     * @param {String} string: The message.
      */
-    _setSaved: function() {
-      this.__ui.buttons.save.removeClass('disabled');
+    _notifyError: function(string) {
+      toastr.error(string, null, this.options.toastr);
     }
 
 
