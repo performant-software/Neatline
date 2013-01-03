@@ -14,6 +14,6 @@
 ?>
 
 <script id="record-row-template" type="text/templates">
-  <span class="record-title"><%= title %></span>
-  <span class="record-body"><%= body %></span>
+  <span class="record-title" data-text="record.title"></span>
+  <span class="record-body" data-text="record.body"></span>
 </script>

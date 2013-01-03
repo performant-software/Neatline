@@ -25,7 +25,7 @@ Neatline.module('Editor.Records', function(
      * Compile row template.
      */
     initialize: function() {
-      this.template = _.template($('#record-row-template').html());
+      this.template = _.template($('#record-row-template').html())();
     },
 
 
@@ -39,13 +39,13 @@ Neatline.module('Editor.Records', function(
       // Walk records.
       records.each(_.bind(function(r) {
 
-        // Create row view.
+        // Create row.
         var row = new Records.RowView({
           template: this.template,
           model: r
         });
 
-        // Add to list.
+        // Inject.
         this.$el.append(row.$el);
 
       }, this));

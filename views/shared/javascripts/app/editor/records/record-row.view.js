@@ -14,7 +14,7 @@ Neatline.module('Editor.Records', function(
   Records, Neatline, Backbone, Marionette, $, _) {
 
 
-  Records.RowView = Backbone.View.extend({
+  Records.RowView = Backbone.Neatline.View.extend({
 
 
     className:  'record',
@@ -30,11 +30,9 @@ Neatline.module('Editor.Records', function(
       this.model = this.options.model;
       this.$el.attr('href', '#records/'+this.model.get('id'));
 
-      // Render template.
-      this.$el.append(this.options.template({
-        title:  this.model.get('title'),
-        body:   this.model.get('body')
-      }));
+      // Render template, bind model.
+      this.$el.html(this.options.template);
+      rivets.bind(this.$el, { record: this.model });
 
     }
 
