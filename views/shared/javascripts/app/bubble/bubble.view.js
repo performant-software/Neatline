@@ -17,6 +17,9 @@ Neatline.module('Bubble.Views', function(
   Views.Bubble = Backbone.Neatline.View.extend({
 
 
+    template: '#bubble-template',
+    id:       'bubble',
+
     options: {
       padding: {
         x: 40,
@@ -25,8 +28,8 @@ Neatline.module('Bubble.Views', function(
     },
 
     ui: {
-      title:  '.record-title',
-      body:   '.record-body'
+      title:  '.title',
+      body:   '.body'
     },
 
 
@@ -35,6 +38,7 @@ Neatline.module('Bubble.Views', function(
      */
     initialize: function() {
 
+      this.getTemplate();
       this.getUi();
 
       // State trackers.
@@ -42,8 +46,8 @@ Neatline.module('Bubble.Views', function(
       this.frozen = false;  // True when bubble is frozen after a click.
 
       // Containers.
-      this.exhibit = $('#neatline');
-      this.window = $(window);
+      this.exhibit  = $('#neatline');
+      this.window   = $(window);
 
     },
 
@@ -58,9 +62,8 @@ Neatline.module('Bubble.Views', function(
       // Break if frozen.
       if (this.frozen || !this.active) return;
 
-      // Render values, measure.
-      this.__ui.title.html(model.get('title'));
-      this.__ui.body.html(model.get('body'));
+      // Bind model to tempalte.
+      rivets.bind(this.$el, { record: model });
 
       // Position on mousemove.
       this.window.bind('mousemove.bubble', _.bind(function(e) {
@@ -72,8 +75,8 @@ Neatline.module('Bubble.Views', function(
         this.hide();
       }, this));
 
-      // Show.
-      this.$el.show();
+      // Inject bubble.
+      this.exhibit.append(this.$el);
 
     },
 
@@ -92,14 +95,9 @@ Neatline.module('Bubble.Views', function(
      * @param {Object} model: The record model.
      */
     freeze: function() {
-
-      // Strip events.
       this.window.unbind('mousemove.bubble');
       this.exhibit.unbind('mouseleave.bubble');
-
-      // Track.
       this.frozen = true;
-
     },
 
 
@@ -109,15 +107,10 @@ Neatline.module('Bubble.Views', function(
      * @param {Object} model: The record model.
      */
     thaw: function() {
-
-      // Strip events.
       this.window.unbind('mousemove.bubble');
       this.exhibit.unbind('mouseleave.bubble');
-
-      // Track, hide.
       this.frozen = false;
-      this.$el.hide();
-
+      this.$el.detach();
     },
 
 

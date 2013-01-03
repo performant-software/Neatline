@@ -14,7 +14,7 @@
 ?>
 
 
-<div id="bubble">
-  <div class="record-title"></div>
-  <div class="record-body"></div>
-</div>
+<script id="bubble-template" type="text/templates">
+  <div class="title" data-text="record.title"></div>
+  <div class="body" data-text="record.body"></div>
+</script>

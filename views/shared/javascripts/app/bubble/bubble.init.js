@@ -15,7 +15,7 @@ Neatline.module('Bubble', function(
 
 
   Bubble.init = function() {
-    this.__view = new Neatline.Bubble.Views.Bubble({ el: '#bubble' });
+    this.__view = new Neatline.Bubble.Views.Bubble();
   };
 
   Bubble.addInitializer(Bubble.init);

@@ -146,11 +146,13 @@ module.exports = function(grunt) {
           config.vendor.js.backbone,
           config.vendor.js.marionette,
           config.vendor.js.neatline,
+          config.vendor.js.rivets,
           config.vendor.js.openlayers,
           config.vendor.js.d3,
 
           // Neatline:
-          config.app+'/app.js',
+          config.app+'/app.init.js',
+          config.app+'/app.config.js',
           config.app+'/record/record.model.js',
           config.app+'/record/record.collection.js',
           config.app+'/map/**/*.js',
@@ -177,7 +179,8 @@ module.exports = function(grunt) {
           config.vendor.js.d3,
 
           // Editor:
-          config.app+'/app.js',
+          config.app+'/app.init.js',
+          config.app+'/app.config.js',
           config.app+'/record/record.model.js',
           config.app+'/record/record.collection.js',
           config.app+'/map/**/*.js',
