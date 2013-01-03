@@ -22,19 +22,15 @@ Neatline.module('Editor.Record', function(
     tagName:    'form',
 
     events: {
-      'click a[name="close"]':   'close',
-      'click a[name="save"]':    'save',
-      'click a[name="delete"]':  'delete'
+      'click a[name="close"]':    'close',
+      'click a[name="save"]':     'save',
+      'click a[name="delete2"]':  'delete'
     },
 
     ui: {
-      textTab:    'a[href="#record-form-text"]',
-      textRegion: '#record-form-text',
-      buttons: {
-        close:    'a[name="close"]',
-        save:     'a[name="save"]',
-        delete:   'a[name="delete"]'
-      }
+      deleteModal:  '#deleteModal',
+      textTab:      'a[href="#record-form-text"]',
+      textRegion:   '#record-form-text'
     },
 
     options: {
@@ -98,7 +94,16 @@ Neatline.module('Editor.Record', function(
      * Delete the record.
      */
     delete: function() {
-
+      this.model.destroy({
+        success: _.bind(function() {
+          this._notifySuccess(STRINGS.record.delete.success);
+          this.__ui.deleteModal.modal('hide');
+          this.close();
+        }, this),
+        error: _.bind(function() {
+          this._notifyError(STRINGS.record.delete.error);
+        }, this)
+      });
     },
 
 

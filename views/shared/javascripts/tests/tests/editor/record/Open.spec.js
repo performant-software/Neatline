@@ -14,7 +14,6 @@ describe('Record Form Open', function() {
 
   var recordRows, recordModels, mapLayers, feature1, feature2;
 
-  // Start editor.
   beforeEach(function() {
 
     _t.loadEditor();

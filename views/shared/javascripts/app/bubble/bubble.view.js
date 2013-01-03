@@ -61,15 +61,9 @@ Neatline.module('Bubble.Views', function(
       if (this.frozen || !this.active) return;
       rivets.bind(this.$el, { record: model });
 
-      // Position on mousemove.
-      this.window.bind('mousemove.bubble', _.bind(function(e) {
-        this.position(e);
-      }, this));
-
-      // Hide on exhibit mouseleave.
-      this.exhibit.bind('mouseleave.bubble', _.bind(function() {
-        this.hide();
-      }, this));
+      // Position on move, hide on leave.
+      this.window.bind('mousemove.bubble', _.bind(this.position, this));
+      this.exhibit.bind('mouseleave.bubble', _.bind(this.hide, this));
 
       // Inject bubble.
       this.exhibit.append(this.$el);
@@ -112,9 +106,10 @@ Neatline.module('Bubble.Views', function(
      * @param {Object} evt: The mousemove event.
      */
     position: function(evt) {
-      var x = evt.clientX + this.options.padding.x;
-      var y = evt.clientY - this.options.padding.y;
-      this.$el.css({ left: x, top: y });
+      this.$el.css({
+        left: evt.clientX + this.options.padding.x,
+        top:  evt.clientY - this.options.padding.y
+      });
     },
 
 

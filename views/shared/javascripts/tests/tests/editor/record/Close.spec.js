@@ -12,13 +12,17 @@
 
 describe('Record Form Close', function() {
 
-  var recordRows;
+  var els;
 
-  // Start editor.
   beforeEach(function() {
+
     _t.loadEditor();
-    recordRows = _t.getRecordRows();
     _t.openFirstRecordForm();
+
+    els = {
+      close: _t.vw.record.$('a[name="close"]'),
+    };
+
   });
 
   it('should close the form when "Close" is clicked', function() {
@@ -30,14 +34,14 @@ describe('Record Form Close', function() {
     // --------------------------------------------------------------------
 
     // Open form, click close.
-    _t.vw.record.__ui.buttons.close.trigger('click');
+    els.close.trigger('click');
 
     // Check for records list, no form.
     expect(_t.el.editor).not.toContain(_t.el.record);
     expect(_t.el.editor).toContain(_t.el.records);
 
     // 3 records in browser pane.
-    recordRows = _t.getRecordRows();
+    var recordRows = _t.getRecordRows();
     expect(recordRows.length).toEqual(3);
 
   });

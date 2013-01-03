@@ -12,118 +12,139 @@
 
 describe('Form Delete', function() {
 
-  var modal, id;
+  var els, id;
 
-  // Start editor.
   beforeEach(function() {
 
     _t.loadEditor();
+    _t.openFirstRecordForm();
 
-    // Open Record 2 form.
-    var recordRows = _t.getRecordRows();
-    $(recordRows[1]).trigger('click');
+    els = {
+      delete1:  _t.vw.record.$('a[name="delete1"]'),
+      delete2:  _t.vw.record.$('a[name="delete2"]'),
+      cancel:   _t.vw.record.$('a[name="cancel"]'),
+      modal:    _t.vw.record.$('div.modal')
+    };
 
-    // Get modal container.
-    modal = $('#deleteConfirm');
-
-    // Get Record 2 id.
-    id = _t.formView.model.get('id');
+    id =        _t.vw.record.model.get('id');
 
   });
 
-  // it('should show modal when "Delete" is clicked', function() {
+  it('should show modal when "Delete" is clicked', function() {
 
-  //   // --------------------------------------------------------------------
-  //   // When the "Delete" button is clicked, a modal should display that
-  //   // prompts the user for confirmation.
-  //   // --------------------------------------------------------------------
+    // --------------------------------------------------------------------
+    // When the "Delete" button is clicked, a confirmation modal should be
+    // displayed.
+    // --------------------------------------------------------------------
 
-  //   // Click on "Delete".
-  //   _t.formView.deleteButton.trigger('click');
+    // Click on "Delete".
+    els.delete1.trigger('click');
 
-  //   // Check for overlay and modal.
-  //   expect($('body')).toContain('div.modal-backdrop.in');
-  //   expect(modal).toHaveClass('in');
+    // Check for overlay and modal.
+    expect($('body')).toContain('div.modal-backdrop.in');
+    expect(els.modal).toHaveClass('in');
 
-  // });
+  });
 
-  // it('should close modal when "Cancel" is clicked', function() {
+  it('should close modal when "Cancel" is clicked', function() {
 
-  //   // --------------------------------------------------------------------
-  //   // When the "Cancel" button in the modal is clicked, the modal should
-  //   // disappear and the form should return to its normal state.
-  //   // --------------------------------------------------------------------
+    // --------------------------------------------------------------------
+    // When the "Cancel" button is clicked, the modal should disappear and
+    // the form should return to its normal state.
+    // --------------------------------------------------------------------
 
-  //   // Click on "Delete", then "Cancel"
-  //   _t.formView.deleteButton.trigger('click');
-  //   modal.find('button[data-dismiss="modal"]').trigger('click');
+    els.delete1.trigger('click');
+    els.cancel.trigger('click');
 
-  //   // Check for closed modal.
-  //   expect(modal).not.toHaveClass('in');
+    // Check for closed modal.
+    expect(els.modal).not.toHaveClass('in');
 
-  // });
+  });
 
-  // it('should execute delete when "Delete" is clicked', function() {
+  it('should execute delete when "Delete" is clicked', function() {
 
-  //   // --------------------------------------------------------------------
-  //   // When the "Yes, delete" button in the modal is clicked, a DELETE
-  //   // request should be issued to the records API.
-  //   // --------------------------------------------------------------------
+    // --------------------------------------------------------------------
+    // When the "Yes, delete" button is clicked, a well-formed DELETE
+    // request should be issued to the records API.
+    // --------------------------------------------------------------------
 
-  //   // Click on "Delete", then "Yes, delete".
-  //   _t.formView.deleteButton.trigger('click');
-  //   _t.formView.confirmButton.trigger('click');
+    // Delete, confirm.
+    els.delete1.trigger('click');
+    els.delete2.trigger('click');
 
-  //   // Capture outoing DELETE request.
-  //   var request = _t.getLastRequest();
+    // Capture outoing request.
+    var request = _t.getLastRequest();
 
-  //   // Check method and route.
-  //   expect(request.method).toEqual('DELETE');
-  //   expect(request.url).toEqual('/neatline/records/'+id);
+    // Check method and route.
+    expect(request.method).toEqual('DELETE');
+    expect(request.url).toEqual('/neatline/record/'+id);
 
-  // });
+  });
 
-  // it('should flash a notification when the delete succeeds', function() {
+  it('should flash notification when the delete succeeds', function() {
 
-  //   // --------------------------------------------------------------------
-  //   // When the DELETE request completes, `noty` should be called with the
-  //   // correct message string.
-  //   // --------------------------------------------------------------------
+    // --------------------------------------------------------------------
+    // When the "Yes, Delete" button is clicked and the request succeeds,
+    // a success notification should be displayed.
+    // --------------------------------------------------------------------
 
-  //   // Spy on noty.
-  //   noty = jasmine.createSpy();
+    // Spy on toaster.
+    spyOn(toastr, 'success');
 
-  //   // Click on "Save".
-  //   _t.formView.deleteButton.trigger('click');
-  //   _t.formView.confirmButton.trigger('click');
-  //   _t.respondLast200('');
+    // Click on "Save".
+    els.delete2.trigger('click');
+    _t.respondLast200('');
 
-  //   // Check for `noty` call.
-  //   expect(noty).toHaveBeenCalled();
-  //   expect(noty.argsForCall[0][0].text).toEqual(
-  //     _t.formView.options.messages.remove
-  //   );
+    // Check for `toastr` call.
+    expect(toastr.success).toHaveBeenCalledWith(
+      STRINGS.record.delete.success, null, _t.vw.record.options.toastr
+    );
 
-  // });
+  });
 
-  // it('should close modal when "Delete" is clicked', function() {
+  it('should flash notification when the delete fails', function() {
 
-  //   // --------------------------------------------------------------------
-  //   // When the "Yes, delete" button in the modal is clicked, the modal
-  //   // and form should disappear when the request completes.
-  //   // --------------------------------------------------------------------
+    // --------------------------------------------------------------------
+    // When the "Yes, Delete" button is clicked and the request fails, a
+    // failure notification should be displayed.
+    // --------------------------------------------------------------------
 
-  //   // Click on "Delete", then "Yes, delete".
-  //   _t.formView.deleteButton.trigger('click');
-  //   _t.formView.confirmButton.trigger('click');
-  //   _t.respondLast200('');
+    // Spy on toaster.
+    spyOn(toastr, 'error');
 
-  //   // Check for closed form.
-  //   expect(modal).not.toHaveClass('in');
-  //   expect(_t.recordsView.$el).not.toContain(_t.formView.form);
-  //   expect(_t.recordsView.$el).toContain(_t.recordsView.ul);
+    // Click on "Save".
+    els.delete2.trigger('click');
+    _t.respondLast500();
 
-  // });
+    // Check for `toastr` call.
+    expect(toastr.error).toHaveBeenCalledWith(
+      STRINGS.record.delete.error, null, _t.vw.record.options.toastr
+    );
+
+  });
+
+  it('should close modal when "Delete" is clicked', function() {
+
+    // --------------------------------------------------------------------
+    // When the "Yes, delete" button is clicked and the request succeeds,
+    // the modal should disappear, the form should close, and the records
+    // list should be displayed.
+    // --------------------------------------------------------------------
+
+    // Delete, confirm.
+    els.delete1.trigger('click');
+    els.delete2.trigger('click');
+    _t.respondLast200('');
+
+    // Check for hidden modal.
+    expect(els.modal).not.toHaveClass('in');
+
+    // Check for closed form.
+    expect(_t.el.editor).not.toContain(_t.el.record);
+    expect(_t.el.editor).toContain(_t.el.records);
+    expect(Backbone.history.fragment).toEqual('records');
+
+  });
 
   // it('should remove the model from the records collection', function() {
 

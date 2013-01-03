@@ -14,7 +14,7 @@ Neatline.module('Editor.Tag', function(
   Tag, Neatline, Backbone, Marionette, $, _) {
 
 
-  Tag.View = Backbone.View.extend({
+  Tag.View = Backbone.Neatline.View.extend({
     tagName: 'form'
   });
 

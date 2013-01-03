@@ -74,9 +74,9 @@ Neatline.module('Editor', { startWithParent: false,
       Neatline.execute('editor:menu:activateTab', 'records');
 
       // Show views.
-      this.views.menu.show(this.ui.editor);
-      this.views.search.show(this.ui.editor);
-      this.views.records.show(this.ui.editor);
+      this.views.menu.showIn(this.ui.editor);
+      this.views.search.showIn(this.ui.editor);
+      this.views.records.showIn(this.ui.editor);
 
     },
 
@@ -93,7 +93,7 @@ Neatline.module('Editor', { startWithParent: false,
 
         // Publish the model, focus the map, inject view.
         Neatline.vent.trigger('editor:router:showRecord', model);
-        this.views.record.show(this.ui.editor);
+        this.views.record.showIn(this.ui.editor);
 
       }, this));
 
@@ -104,7 +104,7 @@ Neatline.module('Editor', { startWithParent: false,
      * Show add record form.
      */
     showNewRecordForm: function() {
-      this.views.record.show(this.ui.editor);
+      this.views.record.showIn(this.ui.editor);
     },
 
 
@@ -114,11 +114,11 @@ Neatline.module('Editor', { startWithParent: false,
     showTagList: function() {
 
       // Activate "Tags" tab.
-      Neatline.execute('editor:menu:activateTab', 'tabs');
+      Neatline.execute('editor:menu:activateTab', 'tags');
 
       // Show views.
-      this.views.menu.show(this.ui.editor);
-      this.views.tags.show(this.ui.editor);
+      this.views.menu.showIn(this.ui.editor);
+      this.views.tags.showIn(this.ui.editor);
 
     },
 
@@ -129,7 +129,7 @@ Neatline.module('Editor', { startWithParent: false,
      * @param {String} id: The tag id.
      */
     showTagForm: function(id) {
-      this.views.tag.show(this.ui.editor);
+      this.views.tag.showIn(this.ui.editor);
     },
 
 
@@ -137,7 +137,7 @@ Neatline.module('Editor', { startWithParent: false,
      * Show add tag form.
      */
     showNewTagForm: function() {
-      this.views.tag.show(this.ui.editor);
+      this.views.tag.showIn(this.ui.editor);
     }
 
 

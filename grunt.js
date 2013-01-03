@@ -38,7 +38,7 @@ module.exports = function(grunt) {
 
       // BOWER
       bower_cache_clean: {
-        command: 'bower cache-clean',
+        command: 'rm -rf ~/.bower',
         stdout: true,
         execOptions: {
           cwd: config.bower.app

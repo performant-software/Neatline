@@ -12,10 +12,17 @@
 
 describe('Form Save', function() {
 
-  // Start editor.
+  var els;
+
   beforeEach(function() {
+
     _t.loadEditor();
     _t.openFirstRecordForm();
+
+    els = {
+      save: _t.vw.record.$('a[name="save"]'),
+    };
+
   });
 
   it('should generate a well-formed PUT request', function() {
@@ -29,28 +36,28 @@ describe('Form Save', function() {
 
     // Get the model id and form elements.
     var id = _t.vw.record.model.get('id');
-    var els = _t.getRecordFormElements();
+    var inputs = _t.getRecordFormElements();
 
-    els.title.          val('title2').      trigger('change');
-    els.body.           val('body2').       trigger('change');
-    els.coverage.       val('POINT(3 4)').  trigger('change');
-    els.vectorColor.    val('#222222').     trigger('change');
-    els.strokeColor.    val('#555555').     trigger('change');
-    els.selectColor.    val('#888888').     trigger('change');
-    els.vectorOpacity.  val('2').           trigger('change');
-    els.selectOpacity.  val('5').           trigger('change');
-    els.strokeOpacity.  val('8').           trigger('change');
-    els.imageOpacity.   val('11').          trigger('change');
-    els.strokeWidth.    val('14').          trigger('change');
-    els.pointRadius.    val('17').          trigger('change');
-    els.pointImage.     val('file2.png').   trigger('change');
-    els.minZoom.        val('20').          trigger('change');
-    els.maxZoom.        val('23').          trigger('change');
-    els.mapFocus.       val('200,300').     trigger('change');
-    els.mapZoom.        val('24').          trigger('change');
+    inputs.title.          val('title2').      trigger('change');
+    inputs.body.           val('body2').       trigger('change');
+    inputs.coverage.       val('POINT(3 4)').  trigger('change');
+    inputs.vectorColor.    val('#222222').     trigger('change');
+    inputs.strokeColor.    val('#555555').     trigger('change');
+    inputs.selectColor.    val('#888888').     trigger('change');
+    inputs.vectorOpacity.  val('2').           trigger('change');
+    inputs.selectOpacity.  val('5').           trigger('change');
+    inputs.strokeOpacity.  val('8').           trigger('change');
+    inputs.imageOpacity.   val('11').          trigger('change');
+    inputs.strokeWidth.    val('14').          trigger('change');
+    inputs.pointRadius.    val('17').          trigger('change');
+    inputs.pointImage.     val('file2.png').   trigger('change');
+    inputs.minZoom.        val('20').          trigger('change');
+    inputs.maxZoom.        val('23').          trigger('change');
+    inputs.mapFocus.       val('200,300').     trigger('change');
+    inputs.mapZoom.        val('24').          trigger('change');
 
     // Click "Save" button.
-    _t.vw.record.__ui.buttons.save.trigger('click');
+    els.save.trigger('click');
 
     // Capture outoing PUT request.
     var request = _t.getLastRequest();
@@ -92,7 +99,7 @@ describe('Form Save', function() {
     spyOn(toastr, 'success');
 
     // Click on "Save".
-    _t.vw.record.__ui.buttons.save.trigger('click');
+    els.save.trigger('click');
     _t.respondLast200('');
 
     // Check for `toastr` call.
@@ -113,7 +120,7 @@ describe('Form Save', function() {
     spyOn(toastr, 'error');
 
     // Click on "Save".
-    _t.vw.record.__ui.buttons.save.trigger('click');
+    els.save.trigger('click');
     _t.respondLast500();
 
     // Check for `toastr` call.

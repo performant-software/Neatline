@@ -19,15 +19,14 @@
     <i class="icon-ok icon-white"></i> <?php echo __('Save'); ?>
   </a>
 
-  <a href="#deleteConfirm" name="delete"
-    class="btn btn-large btn-inverse" data-toggle="modal">
+  <a href="#deleteModal" name="delete1" class="btn btn-large btn-inverse"
+    data-toggle="modal">
       <i class="icon-trash icon-white"></i> <?php echo __('Delete'); ?>
   </a>
 
 </div>
 
-<div id="deleteConfirm" class="modal hide" role="dialog"
-  aria-hidden="true">
+<div id="deleteModal" class="modal hide" role="dialog" aria-hidden="true">
 
   <div class="modal-header">
     <h4>Are you sure?</h4>
@@ -41,13 +40,13 @@
 
   <div class="modal-footer">
 
-    <button name="delete" class="btn btn-danger">
-      <i class="icon-trash icon-white"></i> Yes, delete
-    </button>
-
-    <button class="btn" data-dismiss="modal">
+    <a name="cancel" class="btn" data-dismiss="modal">
       <i class="icon-ban-circle"></i> Cancel
-    </button>
+    </a>
+
+    <a name="delete2" class="btn btn-danger">
+      <i class="icon-trash icon-white"></i> Yes, delete
+    </a>
 
   </div>
 
