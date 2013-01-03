@@ -35,17 +35,17 @@ describe('Records List', function() {
 
     // Check listings.
     expect(recordRows.length).toEqual(3);
-    expect($(recordRows[0]).find('.record-title').text()).
+    expect($(recordRows[0]).find('.title').text()).
       toEqual('title1');
-    expect($(recordRows[0]).find('.record-body').text()).
-      toEqual('body1');
-    expect($(recordRows[1]).find('.record-title').text()).
+    expect($(recordRows[0]).find('.body').text()).
+      toEqual('body1')
+    expect($(recordRows[1]).find('.title').text()).
       toEqual('title2');
-    expect($(recordRows[1]).find('.record-body').text()).
+    expect($(recordRows[1]).find('.body').text()).
       toEqual('body2');
-    expect($(recordRows[2]).find('.record-title').text()).
-      toEqual('title3');
-    expect($(recordRows[2]).find('.record-body').text()).
+    expect($(recordRows[2]).find('.title').text()).
+      toEqual('title3')
+    expect($(recordRows[2]).find('.body').text()).
       toEqual('body3');
 
     // Check links.

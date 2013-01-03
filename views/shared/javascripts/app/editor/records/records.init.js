@@ -18,7 +18,7 @@ Neatline.module('Editor.Records', function(
 
     // Instantiate collection and view.
     this.__collection = new Neatline.Record.Collection();
-    this.__view = new Records.ListView();
+    this.__view = new Records.View();
 
     // Execute default search query.
     Neatline.execute('records:loadRecords');

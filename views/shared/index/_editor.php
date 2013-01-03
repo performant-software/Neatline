@@ -29,7 +29,7 @@
 
 <!-- Templates. -->
 <?php echo $this->partial('index/_strings.php'); ?>
-<?php echo $this->partial('index/underscore/_record_row.php'); ?>
+<?php echo $this->partial('index/underscore/_record_list.php'); ?>
 <?php echo $this->partial('index/underscore/_record_form.php'); ?>
 <?php echo $this->partial('index/underscore/_search.php'); ?>
 <?php echo $this->partial('index/underscore/_menu.php', array(

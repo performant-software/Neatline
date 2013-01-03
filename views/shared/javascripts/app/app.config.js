@@ -11,7 +11,9 @@
  */
 
 
-// RIVETS
+/**
+ * Backbone model/collection adapter for Rivets.
+ */
 rivets.configure({
   adapter: {
     subscribe: function(obj, keypath, callback) {
@@ -21,10 +23,22 @@ rivets.configure({
       obj.off('change:' + keypath, callback)
     },
     read: function(obj, keypath) {
-      return obj.get(keypath)
+      return obj instanceof Backbone.Collection ?
+        obj["models"] : obj.get(keypath);
     },
     publish: function(obj, keypath, value) {
       obj.set(keypath, value)
     }
   }
 });
+
+
+/**
+ * Construct the URL fragment for a record edit form.
+ *
+ * @param {Number} id: The record id.
+ * @return {String}: The URL fragment.
+ */
+rivets.formatters.recordLink = function(id) {
+  return '#records/'+id;
+};

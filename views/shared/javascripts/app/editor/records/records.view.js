@@ -14,9 +14,10 @@ Neatline.module('Editor.Records', function(
   Records, Neatline, Backbone, Marionette, $, _) {
 
 
-  Records.ListView = Backbone.View.extend({
+  Records.View = Backbone.Neatline.View.extend({
 
 
+    template:   '#record-list-template',
     className:  'records',
     tagName:    'ul',
 
@@ -25,7 +26,7 @@ Neatline.module('Editor.Records', function(
      * Compile row template.
      */
     initialize: function() {
-      this.template = _.template($('#record-row-template').html())();
+      this.getTemplate();
     },
 
 
@@ -35,21 +36,7 @@ Neatline.module('Editor.Records', function(
      * @param {Object} records: The records collection.
      */
     ingest: function(records) {
-
-      // Walk records.
-      records.each(_.bind(function(r) {
-
-        // Create row.
-        var row = new Records.RowView({
-          template: this.template,
-          model: r
-        });
-
-        // Inject.
-        this.$el.append(row.$el);
-
-      }, this));
-
+      rivets.bind(this.$el, { records: records });
     }
 
 
