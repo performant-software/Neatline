@@ -17,12 +17,14 @@ Neatline.module('Editor.Map', { startWithParent: false,
   /**
    * Graft editing functionality onto the map when a form is opened.
    *
-   * @param {Object} model: The record model.
+   * @param {Number} id: The record id.
    */
-  Neatline.vent.on('editor:router:showRecord', function(model) {
-    Map.__view.freeze(model.get('id'));
-    Map.__view.startEdit(model);
-  });
+  var startEdit = function(id) {
+    Map.__view.freeze(id);
+    Neatline.request('editor:records:fetch', id, function(r) {
+      Map.__view.startEdit(r);
+    });
+  };
 
 
   /**
@@ -55,6 +57,9 @@ Neatline.module('Editor.Map', { startWithParent: false,
   //   Map.__collection.remove(model);
   //   Map.__view.removeLayerByModel(model);
   // });
+
+
+  Neatline.vent.on('editor:router:#records/:id', startEdit);
 
 
 }});
