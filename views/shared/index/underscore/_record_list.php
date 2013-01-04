@@ -14,8 +14,10 @@
 ?>
 
 <script id="record-list-template" type="text/templates">
-  <a data-href="record.id|recordLink" class="record" data-each-record="records">
-      <span class="title" data-text="record.title"></span>
-      <span class="body" data-text="record.body"></span>
-  </a>
+  <% records.each(function(r) { %>
+    <a href="#records/<%= r.get('id') %>" class="record">
+      <span class="title"><%= r.get('title') %></span>
+      <span class="body"><%= r.get('body') %></span>
+    </a>
+  <% }); %>
 </script>

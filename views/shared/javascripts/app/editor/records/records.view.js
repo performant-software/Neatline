@@ -26,7 +26,7 @@ Neatline.module('Editor.Records', function(
      * Compile row template.
      */
     initialize: function() {
-      this.getTemplate();
+      this.template = _.template($('#record-list-template').html());
     },
 
 
@@ -36,7 +36,7 @@ Neatline.module('Editor.Records', function(
      * @param {Object} records: The records collection.
      */
     ingest: function(records) {
-      rivets.bind(this.$el, { records: records });
+      this.$el.html(this.template({ records: records }));
     }
 
 

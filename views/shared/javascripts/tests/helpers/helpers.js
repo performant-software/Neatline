@@ -67,7 +67,10 @@ _t.loadEditor = function() {
   Neatline.Bubble.init();
   Neatline.Editor.Map.init();
 
-  // // Inject fixtures, alias components.
+  // Def route.
+  _t.navigate('');
+
+  // Inject fixtures, alias components.
   this.respondAll200(this.json.collections.standard);
   _t.aliasNeatline();
   _t.aliasEditor();

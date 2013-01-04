@@ -69,15 +69,11 @@ Neatline.module('Editor', { startWithParent: false,
      * Show the list of records.
      */
     showRecordList: function() {
-
-      // Activate "Records" tab.
+      Neatline.execute('records:loadRecords');
       Neatline.execute('editor:menu:activateTab', 'records');
-
-      // Show views.
       this.views.menu.showIn(this.ui.editor);
       this.views.search.showIn(this.ui.editor);
       this.views.records.showIn(this.ui.editor);
-
     },
 
 
