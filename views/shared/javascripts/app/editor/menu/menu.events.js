@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Menu command handlers.
+ * Menu event handlers.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -15,13 +15,23 @@ Neatline.module('Editor.Menu', function(
 
 
   /**
-   * Activate a tab.
-   *
-   * @param {String} tab: The tab to activate.
+   * Activate "Records" tab.
    */
-  Neatline.commands.addHandler('editor:menu:activateTab', function(tab) {
-    Menu.__view.activateTab(tab);
-  });
+  var activateRecords = function() {
+    Menu.__view.activateTab('records');
+  };
+
+
+  /**
+   * Activate "Tags" tab.
+   */
+  var activateTags = function() {
+    Menu.__view.activateTab('tags');
+  };
+
+
+  Neatline.vent.on('editor:router:#records', activateRecords);
+  Neatline.vent.on('editor:router:#tags', activateTags);
 
 
 });

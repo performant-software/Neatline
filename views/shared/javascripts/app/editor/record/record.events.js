@@ -15,13 +15,18 @@ Neatline.module('Editor.Record', function(
 
 
   /**
-   * Bind model to form.
+   * Load a record form.
    *
-   * @param {Object} model: The model.
+   * @param {Number} id: The record id.
    */
-  Neatline.vent.on('editor:router:showRecord', function(model) {
-    Record.__view.show(model);
-  });
+  var loadForm = function(id) {
+    Neatline.request('editor:records:fetch', id, function(r) {
+      Record.__view.show(r);
+    });
+  };
+
+
+  Neatline.vent.on('editor:router:#records/:id', loadForm);
 
 
 });

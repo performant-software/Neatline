@@ -69,8 +69,7 @@ Neatline.module('Editor', { startWithParent: false,
      * Show the list of records.
      */
     showRecordList: function() {
-      Neatline.execute('records:loadRecords');
-      Neatline.execute('editor:menu:activateTab', 'records');
+      Neatline.vent.trigger('editor:router:#records');
       this.views.menu.showIn(this.ui.editor);
       this.views.search.showIn(this.ui.editor);
       this.views.records.showIn(this.ui.editor);
@@ -83,16 +82,8 @@ Neatline.module('Editor', { startWithParent: false,
      * @param {String} id: The record id.
      */
     showRecordForm: function(id) {
-
-      // Get a model for the requested record.
-      this.collections.records.getOrFetch(id, _.bind(function(model) {
-
-        // Publish the model, focus the map, inject view.
-        Neatline.vent.trigger('editor:router:showRecord', model);
-        this.views.record.showIn(this.ui.editor);
-
-      }, this));
-
+      Neatline.vent.trigger('editor:router:#records/:id', id);
+      this.views.record.showIn(this.ui.editor);
     },
 
 
@@ -108,14 +99,9 @@ Neatline.module('Editor', { startWithParent: false,
      * Show the list of tags.
      */
     showTagList: function() {
-
-      // Activate "Tags" tab.
-      Neatline.execute('editor:menu:activateTab', 'tags');
-
-      // Show views.
+      Neatline.vent.trigger('editor:router:#tags');
       this.views.menu.showIn(this.ui.editor);
       this.views.tags.showIn(this.ui.editor);
-
     },
 
 
