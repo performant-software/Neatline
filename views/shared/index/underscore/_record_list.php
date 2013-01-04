@@ -14,8 +14,7 @@
 ?>
 
 <script id="record-list-template" type="text/templates">
-  <a data-href="record.id | recordLink" class="record"
-    data-each-record="records">
+  <a data-href="record.id|recordLink" class="record" data-each-record="records">
       <span class="title" data-text="record.title"></span>
       <span class="body" data-text="record.body"></span>
   </a>

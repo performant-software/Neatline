@@ -12,7 +12,7 @@
 
 
 /**
- * Backbone model/collection adapter for Rivets.
+ * Backbone adapter for Rivets.
  */
 rivets.configure({
   adapter: {

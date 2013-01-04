@@ -181,12 +181,12 @@ describe('Record Form Open', function() {
   //   // Set center and zoom.
   //   _t.setMapCenter(200, 300, 15);
 
-  //   // Click on record listing.
-  //   $(recordRows[0]).trigger('click');
+  //   // Open form.
+  //   _t.click($(recordRows[0]));
 
   //   // Get focus and zoom.
-  //   var center = _t.mapView.map.getCenter();
-  //   var zoom = _t.mapView.map.getZoom();
+  //   var center  = _t.vw.map.map.getCenter();
+  //   var zoom    = _t.vw.map.map.getZoom();
 
   //   // Check unchanged focus.
   //   expect(center.lon).toEqual(100);
