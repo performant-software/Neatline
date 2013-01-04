@@ -23,17 +23,17 @@ rivets.configure({
           callback(obj[keypath]);
         });
       } else {
-        obj.on('change:' + keypath, function (m, v) { callback(v) });
+        obj.on('change:' + keypath, callback);
       };
     },
 
     unsubscribe: function(obj, keypath, callback) {
       if (obj instanceof Backbone.Collection) {
         obj.off('add remove reset', function () {
-          callback(obj[keypath]) 
+          callback(obj[keypath]);
         });
       } else {
-        obj.off('change:' + keypath, function (m, v) { callback(v) });
+        obj.off('change:' + keypath, callback);
       };
     },
 
