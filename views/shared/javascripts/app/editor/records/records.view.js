@@ -21,6 +21,10 @@ Neatline.module('Editor.Records', function(
     className:  'records',
     tagName:    'ul',
 
+    events: {
+      'click a': 'click'
+    },
+
 
     /**
      * Compile row template.
@@ -37,6 +41,16 @@ Neatline.module('Editor.Records', function(
      */
     ingest: function(records) {
       this.$el.html(this.template({ records: records }));
+    },
+
+
+    /**
+     * Focus the map on the record.
+     *
+     * @param {Object} e: The click event.
+     */
+    click: function(e) {
+      Neatline.execute('map:focusById', $(e.target).attr('data-id'));
     }
 
 

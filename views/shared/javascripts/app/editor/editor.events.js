@@ -15,25 +15,27 @@ Neatline.module('Editor', { startWithParent: false,
 
 
   /**
-   * When a map feature is clicked, open the corresponding edit form if
-   * one is not already open.
+   * Open a record edit form if one is not already open.
    *
    * @param {Object} model: The record model.
    */
-  Neatline.vent.on('map:select', function(model) {
+  var showRecordForm = function(model) {
     if (!Backbone.history.fragment.match(/records\/\d+/)) {
       Editor.__router.navigate('records/'+model.get('id'), true);
     }
-  });
+  };
 
 
   /**
-   * When the "X" button on a record form is clicked, close the form and
-   * display the records list.
+   * Navigate to the record list.
    */
-  Neatline.vent.on('editor:record:closeRecord', function() {
+  var showRecordList = function() {
     Editor.__router.navigate('records', true);
-  });
+  };
+
+
+  Neatline.vent.on('editor:record:close', showRecordList);
+  Neatline.vent.on('map:select', showRecordForm);
 
 
 }});

@@ -70,7 +70,7 @@ Neatline.module('Editor.Record', function(
      * Close the form.
      */
     close: function() {
-      Neatline.vent.trigger('editor:record:closeRecord');
+      Neatline.vent.trigger('editor:record:close');
       this.model = null;
     },
 

@@ -20,9 +20,9 @@ Neatline.module('Editor.Map', { startWithParent: false,
    * @param {Number} id: The record id.
    */
   var startEdit = function(id) {
-    Map.__view.freeze(id);
     Neatline.request('editor:records:fetch', id, function(r) {
       Map.__view.startEdit(r);
+      Map.__view.freeze(id);
     });
   };
 

@@ -55,26 +55,26 @@ describe('Record Form Open', function() {
     // Open form, get elements.
     _t.click($(recordRows[0]));
     var favicon = 'https://www.google.com/favicon.ico';
-    var els = _t.getRecordFormElements();
+    var inputs = _t.getRecordFormElements();
 
-    expect(els.lead).           toHaveText('title1');
-    expect(els.title).          toHaveValue('title1');
-    expect(els.body).           toHaveValue('body1');
-    expect(els.coverage).       toHaveValue('POINT(1 2)');
-    expect(els.vectorColor).    toHaveValue('#111111');
-    expect(els.strokeColor).    toHaveValue('#444444');
-    expect(els.selectColor).    toHaveValue('#777777');
-    expect(els.vectorOpacity).  toHaveValue('1');
-    expect(els.selectOpacity).  toHaveValue('4');
-    expect(els.strokeOpacity).  toHaveValue('7');
-    expect(els.imageOpacity).   toHaveValue('10');
-    expect(els.strokeWidth).    toHaveValue('13');
-    expect(els.pointRadius).    toHaveValue('16');
-    expect(els.pointImage).     toHaveValue(favicon);
-    expect(els.minZoom).        toHaveValue('19');
-    expect(els.maxZoom).        toHaveValue('22');
-    expect(els.mapFocus).       toHaveValue('100,200');
-    expect(els.mapZoom).        toHaveValue('10');
+    expect(inputs.lead).            toHaveText('title1');
+    expect(inputs.title).           toHaveValue('title1');
+    expect(inputs.body).            toHaveValue('body1');
+    expect(inputs.coverage).        toHaveValue('POINT(1 2)');
+    expect(inputs.vectorColor).     toHaveValue('#111111');
+    expect(inputs.strokeColor).     toHaveValue('#444444');
+    expect(inputs.selectColor).     toHaveValue('#777777');
+    expect(inputs.vectorOpacity).   toHaveValue('1');
+    expect(inputs.selectOpacity).   toHaveValue('4');
+    expect(inputs.strokeOpacity).   toHaveValue('7');
+    expect(inputs.imageOpacity).    toHaveValue('10');
+    expect(inputs.strokeWidth).     toHaveValue('13');
+    expect(inputs.pointRadius).     toHaveValue('16');
+    expect(inputs.pointImage).      toHaveValue(favicon);
+    expect(inputs.minZoom).         toHaveValue('19');
+    expect(inputs.maxZoom).         toHaveValue('22');
+    expect(inputs.mapFocus).        toHaveValue('100,200');
+    expect(inputs.mapZoom).         toHaveValue('10');
 
   });
 
@@ -169,57 +169,57 @@ describe('Record Form Open', function() {
 
   });
 
-  // it('should focus map when the form is opened via editor', function() {
+  it('should focus map when the form is opened via editor', function() {
 
-  //   // --------------------------------------------------------------------
-  //   // When an edit form is opened by way of the records pane (when the
-  //   // user clicks on one of the listings), the map should focus on the
-  //   // geometry vectors for that record.
-  //   // --------------------------------------------------------------------
+    // --------------------------------------------------------------------
+    // When an edit form is opened by way of the records pane (when the
+    // user clicks on one of the listings), the map should focus on the
+    // geometry vectors for that record.
+    // --------------------------------------------------------------------
 
-  //   // Set center and zoom.
-  //   _t.setMapCenter(200, 300, 15);
+    // Set center and zoom.
+    _t.setMapCenter(200, 300, 15);
 
-  //   // Open form.
-  //   _t.click($(recordRows[0]));
+    // Open form.
+    $(recordRows[0]).trigger('click');
 
-  //   // Get focus and zoom.
-  //   var center  = _t.vw.map.map.getCenter();
-  //   var zoom    = _t.vw.map.map.getZoom();
+    // Get focus and zoom.
+    var center  = _t.vw.map.map.getCenter();
+    var zoom    = _t.vw.map.map.getZoom();
 
-  //   // Check unchanged focus.
-  //   expect(center.lon).toEqual(100);
-  //   expect(center.lat).toEqual(200);
-  //   expect(zoom).toEqual(10);
+    // Check unchanged focus.
+    expect(center.lon).toEqual(100);
+    expect(center.lat).toEqual(200);
+    expect(zoom).toEqual(10);
 
-  // });
+  });
 
-  // it('should not focus map when the form is opened via map', function() {
+  it('should not focus map when the form is opened via map', function() {
 
-  //   // --------------------------------------------------------------------
-  //   // When the user clicks on a map vector to open an edit form, the map
-  //   // should _not_ jump to the default focus position for the record that
-  //   // corresponds to the clicked geometry. This to prevent lurching,
-  //   // disorienting leaps that can occur when the default zoom for the
-  //   // clicked record is much wider or tighter than the current map zoom.
-  //   // --------------------------------------------------------------------
+    // --------------------------------------------------------------------
+    // When the user clicks on a map vector to open an edit form, the map
+    // should _not_ jump to the default focus position for the record that
+    // corresponds to the clicked geometry. This to prevent lurching,
+    // disorienting leaps that can occur when the default zoom for the
+    // clicked record is much wider or tighter than the current map zoom.
+    // --------------------------------------------------------------------
 
-  //   // Set center and zoom.
-  //   _t.setMapCenter(200, 300, 15);
+    // Set center and zoom.
+    _t.setMapCenter(200, 300, 15);
 
-  //   // Trigger click on Record 1 feature.
-  //   _t.clickOnMapFeature(mapLayers[0], feature1);
+    // Trigger click on Record 1 feature.
+    _t.clickOnMapFeature(mapLayers[0], feature1);
 
-  //   // Get focus and zoom.
-  //   var center = _t.mapView.map.getCenter();
-  //   var zoom = _t.mapView.map.getZoom();
+    // Get focus and zoom.
+    var center  = _t.vw.map.map.getCenter();
+    var zoom    = _t.vw.map.map.getZoom();
 
-  //   // Check unchanged focus.
-  //   expect(center.lon).toEqual(200);
-  //   expect(center.lat).toEqual(300);
-  //   expect(zoom).toEqual(15);
+    // Check unchanged focus.
+    expect(center.lon).toEqual(200);
+    expect(center.lat).toEqual(300);
+    expect(zoom).toEqual(15);
 
-  // });
+  });
 
   // it('should freeze edit layer when form opened via editor', function() {
 
@@ -237,11 +237,11 @@ describe('Record Form Open', function() {
   //   expect(_t.vw.map.frozen).toEqual([]);
 
   //   // Show form, check frozen.
-  //   _t.click($(recordRows[0]));
+  //   $(recordRows[0]).trigger('click');
   //   expect(_t.vw.map.frozen).toEqual([recordModels[0].get('id')]);
 
   //   // Close, check `frozen` empty.
-  //   _t.vw.record.__ui.buttons.trigger('click');
+  //   _t.vw.record.$('a[name="close"]').trigger('click');
   //   expect(_t.vw.map.frozen).toEqual([]);
 
   // });
@@ -253,15 +253,16 @@ describe('Record Form Open', function() {
   //   // record should be added to the `frozen` array (see above).
   //   // --------------------------------------------------------------------
 
-  //   // Trigger click on Record 1 feature.
-  //   _t.clickOnMapFeature(mapLayers[0], feature1);
+  //   // By default, frozen empty.
+  //   expect(_t.vw.map.frozen).toEqual([]);
 
-  //   // Check `frozen`.
-  //   expect(_t.mapView.frozen).toEqual([models[0].get('id')]);
+  //   // Trigger click on feature, check frozen.
+  //   _t.clickOnMapFeature(mapLayers[0], feature1);
+  //   expect(_t.vw.map.frozen).toEqual([recordModels[0].get('id')]);
 
   //   // Close, check `frozen` empty.
-  //   _t.views.record.closeButton.trigger('click');
-  //   expect(_t.mapView.frozen).toEqual([]);
+  //   _t.vw.record.$('a[name="close"]').trigger('click');
+  //   expect(_t.vw.map.frozen).toEqual([]);
 
   // });
 

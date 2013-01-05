@@ -18,7 +18,6 @@ describe('Records List', function() {
   beforeEach(function() {
 
     _t.loadEditor();
-    _t.navigate('records');
 
     // Get record rows and models.
     recordRows    = _t.getRecordRows();

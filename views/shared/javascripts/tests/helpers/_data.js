@@ -17,7 +17,7 @@
  * @return {Array}: The DOM collection of <li> elements.
  */
 _t.getRecordRows = function() {
-  return this.el.records.find('.record');
+  return this.el.records.find('a');
 };
 
 
