@@ -89,7 +89,7 @@ Neatline.module('Map', function(
           highlightOnly: true,
           renderIntent: 'temporary',
           eventListeners: {
-            featurehighlighted: this.onFeatureHighlight,
+            featurehighlighted:   this.onFeatureHighlight,
             featureunhighlighted: this.onFeatureUnhighlight
           }
         }
@@ -98,10 +98,14 @@ Neatline.module('Map', function(
       // Build the click control, bind callbacks.
       this.clickControl = new OpenLayers.Control.SelectFeature(
         this.layers, {
-          onSelect: this.onFeatureSelect,
+          onSelect:   this.onFeatureSelect,
           onUnselect: this.onFeatureUnselect
         }
       );
+
+      // Enable panning when cursor is over feature.
+      this.hoverControl.handlers.feature.stopDown = false;
+      this.clickControl.handlers.feature.stopDown = false;
 
       // Add to map, activate.
       this.map.addControls([this.hoverControl, this.clickControl]);
@@ -151,7 +155,6 @@ Neatline.module('Map', function(
       if (!_.isNull(__exhibit.map.focus)) {
         this.setViewport(__exhibit.map.focus, __exhibit.map.zoom);
       }
-
 
       else {
         this.map.zoomTo(this.options.defaultZoom);

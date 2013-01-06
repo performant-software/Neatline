@@ -79,15 +79,9 @@ Neatline.module('Editor.Record', function(
 
       // TABS
       this.__ui.tabs.on('shown', _.bind(function(e) {
-
-        // Get current tab hash.
         this.hash = e.target.hash;
-
-        // (De)activate bubble.
         Neatline.execute(this._spatialTabActive() ?
-          'bubble:deactivate' : 'bubble:activate'
-        );
-
+          'bubble:deactivate' : 'bubble:activate');
       }, this));
 
     },
