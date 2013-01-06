@@ -41,7 +41,7 @@ _.extend(Neatline.Map.View.prototype, {
           featureAdded: _.bind(this.publish,this)
       }),
 
-      reg: new OpenLayers.Control.DrawFeature(this.editLayer,
+      regPoly: new OpenLayers.Control.DrawFeature(this.editLayer,
         OpenLayers.Handler.RegularPolygon, {
           featureAdded: _.bind(this.publish,this)
       }),
@@ -50,7 +50,7 @@ _.extend(Neatline.Map.View.prototype, {
           onModification: _.bind(this.publish,this)
       }),
 
-      del: new OpenLayers.Control.ModifyFeature(this.editLayer, {
+      remove: new OpenLayers.Control.ModifyFeature(this.editLayer, {
           onModificationStart: _.bind(this.remove,this)
       })
 
@@ -117,7 +117,7 @@ _.extend(Neatline.Map.View.prototype, {
         break;
 
       case 'regPoly':
-        this.controls.reg.activate();
+        this.controls.regPoly.activate();
         break;
 
       case 'modify':
@@ -126,7 +126,7 @@ _.extend(Neatline.Map.View.prototype, {
         break;
 
       case 'remove':
-        this.controls.del.activate();
+        this.controls.remove.activate();
         break;
 
     }
@@ -137,14 +137,14 @@ _.extend(Neatline.Map.View.prototype, {
 
     // Sides.
     var sides = _.isNaN(settings.poly.sides) ? 0 : settings.poly.sides;
-    this.controls.reg.handler.sides = Math.max(3, sides);
+    this.controls.regPoly.handler.sides = Math.max(3, sides);
 
     // Snap angle.
     var snap = _.isNaN(settings.poly.snap) ? 0 : settings.poly.snap;
-    this.controls.reg.handler.snapAngle = parseFloat(snap);
+    this.controls.regPoly.handler.snapAngle = parseFloat(snap);
 
     // Irregular.
-    this.controls.reg.handler.irregular = settings.poly.irreg;
+    this.controls.regPoly.handler.irregular = settings.poly.irregular;
 
 
     // Apply modification settings.
@@ -191,7 +191,7 @@ _.extend(Neatline.Map.View.prototype, {
    * @param {Object} feature: The selected feature.
    */
   remove: function(feature) {
-    this.controls.del.unselectFeature(feature);
+    this.controls.remove.unselectFeature(feature);
     this.editLayer.destroyFeatures([feature]);
     this.publish();
   },

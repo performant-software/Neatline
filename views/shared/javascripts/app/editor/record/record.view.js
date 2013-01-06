@@ -44,7 +44,7 @@ Neatline.module('Editor.Record', function(
         pan:        'input[value="pan"]',
         sides:      'input[name="sides"]',
         snap:       'input[name="snap"]',
-        irreg:      'input[name="irreg"]'
+        irregular:  'input[name="irregular"]'
       }
     },
 
@@ -95,8 +95,9 @@ Neatline.module('Editor.Record', function(
       rivets.bind(this.$el, { record: model });
       this.setBubbleStatus();
 
+      // Rest the map edit mode to "Navigate".
+      this._resetEditMode();
       this.model = model;
-      this.reset();
 
     },
 
@@ -115,14 +116,6 @@ Neatline.module('Editor.Record', function(
 
       this.model = null;
 
-    },
-
-
-    /**
-     * Reset the map edit mode to "Navigate".
-     */
-    reset: function() {
-      this.__ui.spatial.pan[0].checked = true;
     },
 
 
@@ -167,10 +160,12 @@ Neatline.module('Editor.Record', function(
 
       this.model.save(null, {
 
+        // Flash success.
         success: _.bind(function() {
           this._notifySuccess(STRINGS.record.save.success);
         }, this),
 
+        // Flash failure.
         error: _.bind(function() {
           this._notifyError(STRINGS.record.save.error);
         }, this)
@@ -188,12 +183,18 @@ Neatline.module('Editor.Record', function(
       this.model.destroy({
 
         success: _.bind(function() {
+
+          // Delete the record's layer on the map.
           Neatline.vent.trigger('editor:record:delete', this.model);
+
+          // FLash success, close modal and form.
           this._notifySuccess(STRINGS.record.delete.success);
           this.__ui.deleteModal.modal('hide');
           this.close();
+
         }, this),
 
+        // Flash failure.
         error: _.bind(function() {
           this._notifyError(STRINGS.record.delete.error);
         }, this)
@@ -210,6 +211,14 @@ Neatline.module('Editor.Record', function(
      */
     _spatialTabActive: function() {
       return this.hash == '#record-form-spatial';
+    },
+
+
+    /**
+     * Reset the map edit mode to "Navigate".
+     */
+    _resetEditMode: function() {
+      this.__ui.spatial.pan[0].checked = true;
     },
 
 
@@ -237,13 +246,13 @@ Neatline.module('Editor.Record', function(
     /**
      * Get the "Draw Regular Polygon" settings.
      *
-     * @return {Object}: {sides,snap,irreg}.
+     * @return {Object}: {sides,snap,irregular}.
      */
     _getPolyOptions: function() {
       return {
-        sides:  this.__ui.spatial.sides.val(),
-        snap:   this.__ui.spatial.snap.val(),
-        irreg:  this.__ui.spatial.irreg.is(':checked')
+        sides:      this.__ui.spatial.sides.val(),
+        snap:       this.__ui.spatial.snap.val(),
+        irregular:  this.__ui.spatial.irregular.is(':checked')
       };
     },
 
