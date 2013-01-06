@@ -20,16 +20,20 @@ describe('Record Form Spatial Tab', function() {
     _t.openRecordForm();
 
     els = {
-      pan:      _t.vw.record.__ui.spatial.pan,
-      point:    _t.vw.record.__ui.spatial.point,
-      line:     _t.vw.record.__ui.spatial.line,
-      poly:     _t.vw.record.__ui.spatial.poly,
-      regPoly:  _t.vw.record.__ui.spatial.regPoly,
-      modify:   _t.vw.record.__ui.spatial.modify,
-      remove:   _t.vw.record.__ui.spatial.remove,
+      pan:      _t.vw.record.$('input[value="pan"]'),
+      point:    _t.vw.record.$('input[value="point"]'),
+      line:     _t.vw.record.$('input[value="line"]'),
+      poly:     _t.vw.record.$('input[value="poly"]'),
+      regPoly:  _t.vw.record.$('input[value="regPoly"]'),
+      modify:   _t.vw.record.$('input[value="modify"]'),
+      rotate:   _t.vw.record.$('input[value="rotate"]'),
+      resize:   _t.vw.record.$('input[value="resize"]'),
+      drag:     _t.vw.record.$('input[value="drag"]'),
+      remove:   _t.vw.record.$('input[value="remove"]'),
+      coverage: _t.vw.record.$('textarea[name="coverage"]'),
       sides:    _t.vw.record.__ui.spatial.sides,
       snap:     _t.vw.record.__ui.spatial.snap,
-      irreg:    _t.vw.record.__ui.spatial.irreg
+      irreg:    _t.vw.record.__ui.spatial.irreg,
     };
 
   });
@@ -191,189 +195,186 @@ describe('Record Form Spatial Tab', function() {
 
   });
 
-  // it('should set rotation', function() {
+  it('should set rotation', function() {
 
-  //   // --------------------------------------------------------------------
-  //   // When the "Rotate" option under "Modify Shape" is checked, `ROTATE`
-  //   // mode should be activated on the modifyFeature control.
-  //   // --------------------------------------------------------------------
+    // --------------------------------------------------------------------
+    // When the "Rotate" option under "Modify Shape" is checked, `ROTATE`
+    // mode should be activated on the modifyFeature control.
+    // --------------------------------------------------------------------
 
-  //   // Set options.
-  //   var rotate = $('input[name="modifyOptions"][value="rotate"]');
-  //   rotate.attr('checked', 'checked');
-  //   rotate.trigger('change');
+    // Set rotate.
+    els.rotate.attr('checked', 'checked');
+    els.rotate.trigger('change');
 
-  //   // Check settings.
-  //   expect(_t.mapView.controls.edit.mode).toEqual(
-  //     OpenLayers.Control.ModifyFeature.RESHAPE |
-  //     OpenLayers.Control.ModifyFeature.ROTATE
-  //   );
+    // Check settings.
+    expect(_t.vw.map.controls.edit.mode).toEqual(
+      OpenLayers.Control.ModifyFeature.RESHAPE |
+      OpenLayers.Control.ModifyFeature.ROTATE
+    );
 
-  // });
+  });
 
-  // it('should set resize', function() {
+  it('should set resize', function() {
 
-  //   // --------------------------------------------------------------------
-  //   // When the "Resize" option under "Modify Shape" is checked, `RESIZE`
-  //   // mode should be activated on the modifyFeature control.
-  //   // --------------------------------------------------------------------
+    // --------------------------------------------------------------------
+    // When the "Resize" option under "Modify Shape" is checked, `RESIZE`
+    // mode should be activated on the modifyFeature control.
+    // --------------------------------------------------------------------
 
-  //   // Set options.
-  //   var resize = $('input[name="modifyOptions"][value="resize"]');
-  //   resize.attr('checked', 'checked');
-  //   resize.trigger('change');
+    // Set options.
+    els.resize.attr('checked', 'checked');
+    els.resize.trigger('change');
 
-  //   // Check settings.
-  //   expect(_t.mapView.controls.edit.mode).toEqual(
-  //     OpenLayers.Control.ModifyFeature.RESHAPE |
-  //     OpenLayers.Control.ModifyFeature.RESIZE
-  //   );
+    // Check settings.
+    expect(_t.vw.map.controls.edit.mode).toEqual(
+      OpenLayers.Control.ModifyFeature.RESHAPE |
+      OpenLayers.Control.ModifyFeature.RESIZE
+    );
 
-  // });
+  });
 
-  // it('should set drag', function() {
+  it('should set drag', function() {
 
-  //   // --------------------------------------------------------------------
-  //   // When the "Drag" option under "Modify Shape" is checked, `DRAG` mode
-  //   // should be activated on the modifyFeature control.
-  //   // --------------------------------------------------------------------
+    // --------------------------------------------------------------------
+    // When the "Drag" option under "Modify Shape" is checked, `DRAG` mode
+    // should be activated on the modifyFeature control.
+    // --------------------------------------------------------------------
 
-  //   // Set options.
-  //   var drag = $('input[name="modifyOptions"][value="drag"]');
-  //   drag.attr('checked', 'checked');
-  //   drag.trigger('change');
+    // Set options.
+    els.drag.attr('checked', 'checked');
+    els.drag.trigger('change');
 
-  //   // Check settings.
-  //   expect(_t.mapView.controls.edit.mode).toEqual(
-  //     OpenLayers.Control.ModifyFeature.RESHAPE |
-  //     OpenLayers.Control.ModifyFeature.DRAG
-  //   );
+    // Check settings.
+    expect(_t.vw.map.controls.edit.mode).toEqual(
+      OpenLayers.Control.ModifyFeature.RESHAPE |
+      OpenLayers.Control.ModifyFeature.DRAG
+    );
 
-  // });
+  });
 
-  // it('should update "Spatial Data" on point add', function() {
+  it('should update "Spatial Data" on point add', function() {
 
-  //   // --------------------------------------------------------------------
-  //   // When a new point geometry is added to the map, the "Spatial" text
-  //   // area should be updated with the new WKT string.
-  //   // --------------------------------------------------------------------
+    // --------------------------------------------------------------------
+    // When a new point geometry is added to the map, the "Spatial" text
+    // area should be updated with the new WKT string.
+    // --------------------------------------------------------------------
 
-  //   // Create a new point, trigger modify.
-  //   var pt = new OpenLayers.Geometry.Point(3,4);
-  //   _t.mapView.controls.point.drawFeature(pt);
+    // Create a new point, trigger modify.
+    var pt = new OpenLayers.Geometry.Point(3,4);
+    _t.vw.map.controls.point.drawFeature(pt);
 
-  //   // Check for new data.
-  //   expect(_t.spatialTabView.coverage.val()).toEqual(
-  //     'GEOMETRYCOLLECTION(POINT(1 2),POINT(3 4))'
-  //   );
+    // Check for new data.
+    expect(els.coverage.val()).toEqual(
+      'GEOMETRYCOLLECTION(POINT(1 2),POINT(3 4))'
+    );
 
-  // });
+  });
 
-  // it('should update "Spatial Data" on line add', function() {
+  it('should update "Spatial Data" on line add', function() {
 
-  //   // --------------------------------------------------------------------
-  //   // When a new line geometry is added to the map, the "Spatial" text
-  //   // area should be updated with the new WKT string.
-  //   // --------------------------------------------------------------------
+    // --------------------------------------------------------------------
+    // When a new line geometry is added to the map, the "Spatial" text
+    // area should be updated with the new WKT string.
+    // --------------------------------------------------------------------
 
-  //   // Create a new point, trigger modify.
-  //   var pt1 = new OpenLayers.Geometry.Point(1,2);
-  //   var pt2 = new OpenLayers.Geometry.Point(3,4);
-  //   var line = new OpenLayers.Geometry.LineString([pt1,pt2]);
-  //   _t.mapView.controls.line.drawFeature(line);
+    // Create a new point, trigger modify.
+    var pt1 = new OpenLayers.Geometry.Point(1,2);
+    var pt2 = new OpenLayers.Geometry.Point(3,4);
+    var line = new OpenLayers.Geometry.LineString([pt1,pt2]);
+    _t.vw.map.controls.line.drawFeature(line);
 
-  //   // Check for new data.
-  //   expect(_t.spatialTabView.coverage.val()).toEqual(
-  //     'GEOMETRYCOLLECTION(POINT(1 2),LINESTRING(1 2,3 4))'
-  //   );
+    // Check for new data.
+    expect(els.coverage.val()).toEqual(
+      'GEOMETRYCOLLECTION(POINT(1 2),LINESTRING(1 2,3 4))'
+    );
 
-  // });
+  });
 
-  // it('should update "Spatial Data" on polygon add', function() {
+  it('should update "Spatial Data" on polygon add', function() {
 
-  //   // --------------------------------------------------------------------
-  //   // When a new polygon geometry is added to the map, the "Spatial" text
-  //   // area should be updated with the new WKT string.
-  //   // --------------------------------------------------------------------
+    // --------------------------------------------------------------------
+    // When a new polygon geometry is added to the map, the "Spatial" text
+    // area should be updated with the new WKT string.
+    // --------------------------------------------------------------------
 
-  //   // Create a new point, trigger modify.
-  //   var pt1 = new OpenLayers.Geometry.Point(1,2);
-  //   var pt2 = new OpenLayers.Geometry.Point(3,4);
-  //   var pt3 = new OpenLayers.Geometry.Point(5,6);
-  //   var ring = new OpenLayers.Geometry.LinearRing([pt1,pt2,pt3]);
-  //   var poly = new OpenLayers.Geometry.Polygon([ring]);
-  //   _t.mapView.controls.poly.drawFeature(poly);
+    // Create a new point, trigger modify.
+    var pt1 = new OpenLayers.Geometry.Point(1,2);
+    var pt2 = new OpenLayers.Geometry.Point(3,4);
+    var pt3 = new OpenLayers.Geometry.Point(5,6);
+    var ring = new OpenLayers.Geometry.LinearRing([pt1,pt2,pt3]);
+    var poly = new OpenLayers.Geometry.Polygon([ring]);
+    _t.vw.map.controls.poly.drawFeature(poly);
 
-  //   // Check for new data.
-  //   expect(_t.spatialTabView.coverage.val()).toEqual(
-  //     'GEOMETRYCOLLECTION(POINT(1 2),POLYGON((1 2,3 4,5 6,1 2)))'
-  //   );
+    // Check for new data.
+    expect(els.coverage.val()).toEqual(
+      'GEOMETRYCOLLECTION(POINT(1 2),POLYGON((1 2,3 4,5 6,1 2)))'
+    );
 
-  // });
+  });
 
-  // it('should update "Spatial Data" on regular polygon add', function() {
+  it('should update "Spatial Data" on regular polygon add', function() {
 
-  //   // --------------------------------------------------------------------
-  //   // When a new regular polygon geometry is added to the map, the
-  //   // "Spatial" text area should be updated with the new WKT string.
-  //   // --------------------------------------------------------------------
+    // --------------------------------------------------------------------
+    // When a new regular polygon geometry is added to the map, the
+    // "Spatial" text area should be updated with the new WKT string.
+    // --------------------------------------------------------------------
 
-  //   // Create a new point, trigger modify.
-  //   var pt1 = new OpenLayers.Geometry.Point(1,2);
-  //   var pt2 = new OpenLayers.Geometry.Point(3,4);
-  //   var pt3 = new OpenLayers.Geometry.Point(5,6);
-  //   var ring = new OpenLayers.Geometry.LinearRing([pt1,pt2,pt3]);
-  //   var poly = new OpenLayers.Geometry.Polygon([ring]);
-  //   _t.mapView.controls.reg.drawFeature(poly);
+    // Create a new point, trigger modify.
+    var pt1 = new OpenLayers.Geometry.Point(1,2);
+    var pt2 = new OpenLayers.Geometry.Point(3,4);
+    var pt3 = new OpenLayers.Geometry.Point(5,6);
+    var ring = new OpenLayers.Geometry.LinearRing([pt1,pt2,pt3]);
+    var poly = new OpenLayers.Geometry.Polygon([ring]);
+    _t.vw.map.controls.reg.drawFeature(poly);
 
-  //   // Check for new data.
-  //   expect(_t.spatialTabView.coverage.val()).toEqual(
-  //     'GEOMETRYCOLLECTION(POINT(1 2),POLYGON((1 2,3 4,5 6,1 2)))'
-  //   );
+    // Check for new data.
+    expect(els.coverage.val()).toEqual(
+      'GEOMETRYCOLLECTION(POINT(1 2),POLYGON((1 2,3 4,5 6,1 2)))'
+    );
 
-  // });
+  });
 
-  // it('should update "Spatial Data" on feature edit', function() {
+  it('should update "Spatial Data" on feature edit', function() {
 
-  //   // --------------------------------------------------------------------
-  //   // When an existing geometry is edited, the "Spatial" text area should
-  //   // be updated with the new WKT string.
-  //   // --------------------------------------------------------------------
+    // --------------------------------------------------------------------
+    // When an existing geometry is edited, the "Spatial" text area should
+    // be updated with the new WKT string.
+    // --------------------------------------------------------------------
 
-  //   // Edit feature, set new point coords.
-  //   var feature = _t.mapView.editLayer.features[0];
-  //   _t.mapView.controls.edit.feature = feature;
-  //   feature.geometry.x = 2;
-  //   feature.geometry.y = 3;
+    // Edit feature, set new point coords.
+    var feature = _t.vw.map.editLayer.features[0];
+    _t.vw.map.controls.edit.feature = feature;
+    feature.geometry.x = 2;
+    feature.geometry.y = 3;
 
-  //   // Trigger modification.
-  //   _t.mapView.controls.edit.dragComplete();
+    // Trigger modification.
+    _t.vw.map.controls.edit.dragComplete();
 
-  //   // Check for new data.
-  //   expect(_t.spatialTabView.coverage.val()).toEqual(
-  //     'GEOMETRYCOLLECTION(POINT(2 3))'
-  //   );
+    // Check for new data.
+    expect(els.coverage.val()).toEqual(
+      'GEOMETRYCOLLECTION(POINT(2 3))'
+    );
 
-  // });
+  });
 
-  // it('should update "Spatial Data" on feature delete', function() {
+  it('should update "Spatial Data" on feature delete', function() {
 
-  //   // --------------------------------------------------------------------
-  //   // When an existing geometry is deleted, the "Spatial" text area
-  //   // should be updated with the new WKT string.
-  //   // --------------------------------------------------------------------
+    // --------------------------------------------------------------------
+    // When an existing geometry is deleted, the "Spatial" text area
+    // should be updated with the new WKT string.
+    // --------------------------------------------------------------------
 
-  //   // Edit feature, set new point coords.
-  //   var feature = _t.mapView.editLayer.features[0];
+    // Edit feature, set new point coords.
+    var feature = _t.vw.map.editLayer.features[0];
 
-  //   // Trigger modification.
-  //   _t.mapView.controls.del.selectFeature(feature);
+    // Trigger modification.
+    _t.vw.map.controls.del.selectFeature(feature);
 
-  //   // Check for new data.
-  //   expect(_t.spatialTabView.coverage.val()).toEqual(
-  //     'GEOMETRYCOLLECTION()'
-  //   );
+    // Check for new data.
+    expect(els.coverage.val()).toEqual(
+      'GEOMETRYCOLLECTION()'
+    );
 
-  // });
+  });
 
 });

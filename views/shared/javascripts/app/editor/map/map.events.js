@@ -47,16 +47,6 @@ Neatline.module('Editor.Map', { startWithParent: false,
 
 
   /**
-   * Updated editing settings when control inputs are changed on the form.
-   *
-   * @param {Object} settings: Settings hash.
-   */
-  // Neatline.vent.on('editor:form:updateMap', function(settings) {
-  //   Map.__view.update(settings);
-  // });
-
-
-  /**
    * When a record is deleted, purge it from the collection and map.
    *
    * @param {Object} model: The deleted record.

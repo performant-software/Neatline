@@ -180,7 +180,7 @@ _.extend(Neatline.Map.View.prototype, {
     var wkt = formatWKT.write(features);
 
     // Publish.
-    Neatline.vent.trigger('editor:geometry:newCoverage', wkt);
+    Neatline.vent.trigger('editor:map:newCoverage', wkt);
 
   },
 

@@ -39,13 +39,6 @@ Neatline.module('Editor.Record', function(
       textTab:      'a[href="#record-form-text"]',
       textRegion:   '#record-form-text',
       spatial: {
-        pan:        'input[value="pan"]',
-        point:      'input[value="point"]',
-        line:       'input[value="line"]',
-        poly:       'input[value="poly"]',
-        regPoly:    'input[value="regPoly"]',
-        modify:     'input[value="modify"]',
-        remove:     'input[value="remove"]',
         sides:      'input[name="sides"]',
         snap:       'input[name="snap"]',
         irreg:      'input[name="irreg"]'
@@ -137,7 +130,7 @@ Neatline.module('Editor.Record', function(
      */
     _modify: function() {
       var inputs = $(this.selectors.modify+':checked');
-      return _.map(inputs, function(i) { $(i).val(); });
+      return _.map(inputs, function(i) { return $(i).val(); });
     },
 
 

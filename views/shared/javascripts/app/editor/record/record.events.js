@@ -34,8 +34,19 @@ Neatline.module('Editor.Record', function(
   };
 
 
+  /**
+   * Update coverage textarea.
+   *
+   * @param {String} coverage: The new WKT.
+   */
+  var updateCoverage = function(coverage) {
+    Record.__view.model.set('coverage', coverage);
+  };
+
+
   Neatline.vent.on('editor:router:#records/:id', showForm);
   Neatline.vent.on('editor:router:before', closeForm);
+  Neatline.vent.on('editor:map:newCoverage', updateCoverage);
 
 
 });
