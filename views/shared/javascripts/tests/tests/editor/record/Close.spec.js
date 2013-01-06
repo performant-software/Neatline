@@ -20,7 +20,7 @@ describe('Record Form Close', function() {
     _t.openRecordForm();
 
     els = {
-      close: _t.vw.record.$('a[name="close"]'),
+      close: _t.vw.record.$('a[name="close"]')
     };
 
   });
@@ -32,8 +32,9 @@ describe('Record Form Close', function() {
     // the form should disappear and the record list should be displayed.
     // --------------------------------------------------------------------
 
-    // Open form, click close.
+    // Click "X".
     els.close.trigger('click');
+    _t.respondDefaultRecords();
 
     // Check for records list, no form.
     expect(_t.el.editor).not.toContain(_t.el.record);

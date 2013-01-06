@@ -78,3 +78,11 @@ _t.respondLast500 = function() {
   this.respond500(request);
   return request;
 };
+
+
+/**
+ * Respond 200 with the default record collection.
+ */
+_t.respondDefaultRecords = function() {
+  this.respondLast200(this.json.collections.standard);
+};

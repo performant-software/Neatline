@@ -25,8 +25,8 @@ Neatline.module('Editor.Record', function(
       'click a[name="close"]':    'close',
       'click a[name="save"]':     'save',
       'click a[name="delete2"]':  'delete',
-      'change div.spatial input': 'sync',
-      'keyup div.spatial input':  'sync'
+      'change div.spatial input': 'syncMap',
+      'keyup div.spatial input':  'syncMap'
     },
 
     selectors: {
@@ -39,6 +39,7 @@ Neatline.module('Editor.Record', function(
       textTab:      'a[href="#record-form-text"]',
       textRegion:   '#record-form-text',
       spatial: {
+        pan:        'input[value="pan"]',
         sides:      'input[name="sides"]',
         snap:       'input[name="snap"]',
         irreg:      'input[name="irreg"]'
@@ -88,6 +89,7 @@ Neatline.module('Editor.Record', function(
       Neatline.vent.trigger('editor:record:show', model);
       rivets.bind(this.$el, { record: model });
       this.model = model;
+      this.reset();
     },
 
 
@@ -102,13 +104,21 @@ Neatline.module('Editor.Record', function(
 
 
     /**
+     * Reset the map edit mode to "Navigate".
+     */
+    reset: function() {
+      this.__ui.spatial.pan[0].checked = true;
+    },
+
+
+    /**
      * Gather and publish the current map edit settings.
      */
-    sync: function() {
+    syncMap: function() {
       Neatline.vent.trigger('editor:record:update', {
-        mode:   this._mode(),
-        modify: this._modify(),
-        poly:   this._poly()
+        mode:   this._getEditMode(),
+        modify: this._getModifyOptions(),
+        poly:   this._getPolyOptions()
       });
     },
 
@@ -118,7 +128,7 @@ Neatline.module('Editor.Record', function(
      *
      * @return {String}: pan|point|line|poly|regPoly|modify|remove.
      */
-    _mode: function() {
+    _getEditMode: function() {
       return $(this.selectors.mode+':checked').val();
     },
 
@@ -128,7 +138,7 @@ Neatline.module('Editor.Record', function(
      *
      * @return {Array}: 0-3 strings: rotate|resize|drag.
      */
-    _modify: function() {
+    _getModifyOptions: function() {
       var inputs = $(this.selectors.modify+':checked');
       return _.map(inputs, function(i) { return $(i).val(); });
     },
@@ -139,7 +149,7 @@ Neatline.module('Editor.Record', function(
      *
      * @return {Object}: {sides,snap,irreg}.
      */
-    _poly: function() {
+    _getPolyOptions: function() {
       return {
         sides:  this.__ui.spatial.sides.val(),
         snap:   this.__ui.spatial.snap.val(),

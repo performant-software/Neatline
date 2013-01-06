@@ -12,7 +12,7 @@
 
 describe('Record Form Open', function() {
 
-  var recordRows, recordModels, mapLayers, feature1, feature2;
+  var recordRows, recordModels, mapLayers, feature1, feature2, els;
 
   beforeEach(function() {
 
@@ -26,6 +26,12 @@ describe('Record Form Open', function() {
     mapLayers     = _t.getVectorLayers();
     feature1      = mapLayers[0].features[0];
     feature2      = mapLayers[1].features[0];
+
+    els = {
+      pan:    _t.vw.record.$('input[value="pan"]'),
+      poly:   _t.vw.record.$('input[value="poly"]'),
+      close:  _t.vw.record.$('a[name="close"]')
+    };
 
   });
 
@@ -265,31 +271,30 @@ describe('Record Form Open', function() {
 
   });
 
-  // it('should default to "Navigate" edit mode when opened', function() {
+  it('should default to "Navigate" edit mode when opened', function() {
 
-  //   // --------------------------------------------------------------------
-  //   // The geometry editing controls should always revert to the default
-  //   // "Navigate" mode when a form is opened, regardless of what the state
-  //   // of the form was when it was last closed.
-  //   // --------------------------------------------------------------------
+    // --------------------------------------------------------------------
+    // The geometry editing controls should always revert to the default
+    // "Navigate" mode when a form is opened, regardless of what the state
+    // of the form was when it was last closed.
+    // --------------------------------------------------------------------
 
-  //   // Show form, check mode.
-  //   _t.click($(recordRows[0]));
-  //   expect(_t.spatialTabView.getMapControl()).toEqual('pan');
+    // Show form, check mode.
+    _t.click($(recordRows[0]));
+    expect(_t.vw.record._getEditMode()).toEqual('pan');
 
-  //   // Activate "Polygon" control, check mode.
-  //   $('input[name="editMode"]')[0].checked = false;
-  //   $('input[name="editMode"]')[3].checked = true;
-  //   expect(_t.spatialTabView.getMapControl()).toEqual('poly');
+    // Activate "Polygon" control, check mode.
+    els.pan[0].checked = false; els.poly[0].checked = true;
+    expect(_t.vw.record._getEditMode()).toEqual('poly');
 
-  //   // Close the form, re-get records.
-  //   _t.views.record.closeButton.trigger('click');
-  //   recordRows = _t.views.records.$el.find('.record-row');
+    // Re-open the form.
+    els.close.trigger('click');
+    _t.respondDefaultRecords();
+    _t.openRecordForm();
 
-  //   // Open new form, check mode.
-  //   $(recordRows[1]).trigger('click');
-  //   expect(_t.spatialTabView.getMapControl()).toEqual('pan');
+    // Check mode.
+    expect(_t.vw.record._getEditMode()).toEqual('pan');
 
-  // });
+  });
 
 });

@@ -425,6 +425,14 @@ _t.respondLast500 = function() {
 };
 
 
+/**
+ * Respond 200 with the default record collection.
+ */
+_t.respondDefaultRecords = function() {
+  this.respondLast200(this.json.collections.standard);
+};
+
+
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
