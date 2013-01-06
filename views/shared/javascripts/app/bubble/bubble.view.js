@@ -51,13 +51,26 @@ Neatline.module('Bubble', function(
 
 
     /**
+     * Render position.
+     *
+     * @param {Object} evt: The mousemove event.
+     */
+    position: function(evt) {
+      this.$el.css({
+        left: evt.clientX + this.options.padding.x,
+        top:  evt.clientY - this.options.padding.y
+      });
+    },
+
+
+    /**
      * Render values, inject bubble, add move listener.
      *
      * @param {Object} model: The record model.
      */
     show: function(model) {
 
-      // Break if frozen.
+      // Break if frozen or inactive.
       if (this.frozen || !this.active) return;
       rivets.bind(this.$el, { record: model });
 
@@ -75,41 +88,27 @@ Neatline.module('Bubble', function(
      * Hide the bubble.
      */
     hide: function() {
-      if (!this.frozen) this.thaw();
+      if (this.frozen) return;
+      this.$el.detach();
+      this._unbind();
     },
 
 
     /**
      * Freeze the bubble.
      */
-    freeze: function() {
-      this.window.unbind('mousemove.bubble');
-      this.exhibit.unbind('mouseleave.bubble');
+    select: function() {
       this.frozen = true;
+      this._unbind();
     },
 
 
     /**
-     * Unfreeze the bubble.
+     * Unfreeze and hide the bubble.
      */
-    thaw: function() {
-      this.window.unbind('mousemove.bubble');
-      this.exhibit.unbind('mouseleave.bubble');
+    unselect: function() {
       this.frozen = false;
-      this.$el.detach();
-    },
-
-
-    /**
-     * Render position.
-     *
-     * @param {Object} evt: The mousemove event.
-     */
-    position: function(evt) {
-      this.$el.css({
-        left: evt.clientX + this.options.padding.x,
-        top:  evt.clientY - this.options.padding.y
-      });
+      this.hide();
     },
 
 
@@ -126,6 +125,15 @@ Neatline.module('Bubble', function(
      */
     deactivate: function() {
       this.active = false;
+    },
+
+
+    /**
+     * Unbind move and leave listeners.
+     */
+    _unbind: function() {
+      this.exhibit.unbind('mouseleave.bubble');
+      this.window.unbind('mousemove.bubble');
     }
 
 

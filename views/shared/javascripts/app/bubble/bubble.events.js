@@ -30,34 +30,34 @@ Neatline.module('Bubble', function(
   /**
    * Hide the bubble.
    */
-  var close = function() {
+  var hide = function() {
     Bubble.__view.hide();
   };
 
-  Neatline.commands.addHandler('bubble:close', close);
-  Neatline.vent.on('map:unhighlight', close);
+  Neatline.commands.addHandler('bubble:hide', hide);
+  Neatline.vent.on('map:unhighlight', hide);
 
 
   /**
    * Freeze the bubble.
    */
-  var freeze = function() {
-    Bubble.__view.freeze();
+  var select = function() {
+    Bubble.__view.select();
   };
 
-  Neatline.commands.addHandler('bubble:freeze', freeze);
-  Neatline.vent.on('map:select', freeze);
+  Neatline.commands.addHandler('bubble:select', select);
+  Neatline.vent.on('map:select', select);
 
 
   /**
-   * Thaw the bubble.
+   * Unfreeze and hide the bubble.
    */
-  var thaw = function() {
-    Bubble.__view.thaw();
+  var unselect = function() {
+    Bubble.__view.unselect();
   };
 
-  Neatline.commands.addHandler('bubble:thaw', thaw);
-  Neatline.vent.on('map:unselect', thaw);
+  Neatline.commands.addHandler('bubble:unselect', unselect);
+  Neatline.vent.on('map:unselect', unselect);
 
 
   /**
@@ -65,18 +65,17 @@ Neatline.module('Bubble', function(
    */
   var activate = function() {
     Bubble.__view.activate();
-    Bubble.__view.thaw();
   };
 
   Neatline.commands.addHandler('bubble:activate', activate);
 
 
   /**
-   * Close and deactivate the bubble.
+   * Deactivate and close the bubble.
    */
   var deactivate = function() {
     Bubble.__view.deactivate();
-    Bubble.__view.thaw();
+    Bubble.__view.unselect();
   };
 
   Neatline.commands.addHandler('bubble:deactivate', deactivate);

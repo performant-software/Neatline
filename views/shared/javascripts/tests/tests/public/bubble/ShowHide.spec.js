@@ -109,7 +109,7 @@ describe('Bubble Show/Hide', function() {
   it('should not respond to hover events when frozen', function() {
 
     // --------------------------------------------------------------------
-    // When the bubble is frozen and the cursor hovers over a feature1 for
+    // When the bubble is frozen and the cursor hovers over a feature for
     // a different record, the bubble should not show the data for the new
     // record and should not track the cursor.
     // --------------------------------------------------------------------
@@ -138,7 +138,7 @@ describe('Bubble Show/Hide', function() {
 
   });
 
-  it('should thaw bubble on feature unselect', function() {
+  it('should unselect bubble on feature unselect', function() {
 
     // --------------------------------------------------------------------
     // When a feature is unselected, the bubble should disappear and start

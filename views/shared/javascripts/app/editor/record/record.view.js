@@ -25,8 +25,9 @@ Neatline.module('Editor.Record', function(
       'click a[name="close"]':    'close',
       'click a[name="save"]':     'save',
       'click a[name="delete2"]':  'delete',
-      'change div.spatial input': 'syncMap',
-      'keyup div.spatial input':  'syncMap'
+      'shown ul.nav a':           'updateBubble',
+      'change div.spatial input': 'updateMap',
+      'keyup div.spatial input':  'updateMap'
     },
 
     selectors: {
@@ -67,21 +68,6 @@ Neatline.module('Editor.Record', function(
       this.getTemplate();
       this.getUi();
       this.setDefaultTab();
-      this.bindEvents();
-
-    },
-
-
-    /**
-     * Bind listeners to form inputs.
-     */
-    bindEvents: function() {
-
-      // == TABS ==
-      this.__ui.tabs.on('shown', _.bind(function(e) {
-        this.hash = e.target.hash;
-        this.setBubbleStatus();
-      }, this));
 
     },
 
@@ -101,12 +87,17 @@ Neatline.module('Editor.Record', function(
      * @param {Object} model: A form model.
      */
     show: function(model) {
+
       this.open = true;
+
+      // Bind the model, (de)activate bubble.
       Neatline.vent.trigger('editor:record:show', model);
       rivets.bind(this.$el, { record: model });
       this.setBubbleStatus();
+
       this.model = model;
       this.reset();
+
     },
 
 
@@ -114,10 +105,16 @@ Neatline.module('Editor.Record', function(
      * Close the form.
      */
     close: function() {
+
       this.open = false;
+
+      // Show records list, hide/activate the bubble.
       Neatline.vent.trigger('editor:record:close', this.model);
       Neatline.execute('bubble:activate');
+      Neatline.execute('bubble:unselect');
+
       this.model = null;
+
     },
 
 
@@ -132,7 +129,7 @@ Neatline.module('Editor.Record', function(
     /**
      * Gather and publish the current map edit settings.
      */
-    syncMap: function() {
+    updateMap: function() {
       Neatline.vent.trigger('editor:record:update', {
         mode:   this._getEditMode(),
         modify: this._getModifyOptions(),
@@ -142,8 +139,18 @@ Neatline.module('Editor.Record', function(
 
 
     /**
-     * Check to see if the "Spatial" tab is active. If so, deactivate the
-     * bubble; otherwise, (re)-activate it.
+     * Cache the current tab hash, (de)activate the bubble.
+     *
+     * @param {Object} event: The `shown` event.
+     */
+    updateBubble: function(event) {
+      this.hash = event.target.hash;
+      this.setBubbleStatus();
+    },
+
+
+    /**
+     * Deactivate the bubble when the "Spatial" tab is active.
      */
     setBubbleStatus: function() {
       Neatline.execute(this._spatialTabActive() ?
