@@ -24,7 +24,7 @@ Neatline.module('Editor.Record', function(
     events: {
       'click a[name="close"]':    'close',
       'click a[name="save"]':     'save',
-      'click a[name="delete2"]':  'delete',
+      'click a[name="delete2"]':  'remove',
       'shown ul.nav a':           'updateBubble',
       'change div.spatial input': 'updateMap',
       'keyup div.spatial input':  'updateMap'
@@ -178,7 +178,7 @@ Neatline.module('Editor.Record', function(
     /**
      * Delete the record.
      */
-    delete: function() {
+    remove: function() {
 
       this.model.destroy({
 
@@ -263,7 +263,7 @@ Neatline.module('Editor.Record', function(
      * @param {String} string: The message.
      */
     _notifySuccess: function(string) {
-      toastr.success(string, null, this.options.toastr);
+      toastr.info(string, null, this.options.toastr);
     },
 
 

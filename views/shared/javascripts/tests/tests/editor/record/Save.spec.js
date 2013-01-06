@@ -96,14 +96,14 @@ describe('Form Save', function() {
     // --------------------------------------------------------------------
 
     // Spy on toaster.
-    spyOn(toastr, 'success');
+    spyOn(toastr, 'info');
 
     // Click on "Save".
     els.save.trigger('click');
     _t.respondLast200('');
 
     // Check for `toastr` call.
-    expect(toastr.success).toHaveBeenCalledWith(
+    expect(toastr.info).toHaveBeenCalledWith(
       STRINGS.record.save.success, null, _t.vw.record.options.toastr
     );
 
