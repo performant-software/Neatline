@@ -19,19 +19,25 @@ Neatline.module('Editor.Record', function(
    *
    * @param {Number} id: The record id.
    */
-  var showForm = function(id) {
+  var showById = function(id) {
     Neatline.request('editor:records:getModel', id, function(r) {
       Record.__view.show(r);
     });
   };
 
+  Neatline.commands.addHandler('editor:record:showById', showById);
+  Neatline.vent.on('editor:router:#records/:id', showById);
+
 
   /**
    * Close a record form.
    */
-  var closeForm = function(id) {
+  var close = function() {
     if (Record.__view.open) Record.__view.close();
   };
+
+  Neatline.commands.addHandler('editor:record:close', close);
+  Neatline.vent.on('editor:router:before', close);
 
 
   /**
@@ -39,14 +45,12 @@ Neatline.module('Editor.Record', function(
    *
    * @param {String} coverage: The new WKT.
    */
-  var updateCoverage = function(coverage) {
+  var setCoverage = function(coverage) {
     Record.__view.model.set('coverage', coverage);
   };
 
-
-  Neatline.vent.on('editor:router:#records/:id', showForm);
-  Neatline.vent.on('editor:router:before', closeForm);
-  Neatline.vent.on('editor:map:newCoverage', updateCoverage);
+  Neatline.commands.addHandler('editor:record:setCoverage', setCoverage);
+  Neatline.vent.on('editor:map:newCoverage', setCoverage);
 
 
 });

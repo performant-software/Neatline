@@ -25,6 +25,9 @@ Neatline.module('Editor', { startWithParent: false,
     }
   };
 
+  Neatline.commands.addHandler('editor:showRecordForm', showRecordForm);
+  Neatline.vent.on('map:select', showRecordForm);
+
 
   /**
    * Navigate to the record list.
@@ -33,9 +36,8 @@ Neatline.module('Editor', { startWithParent: false,
     Editor.__router.navigate('records', true);
   };
 
-
+  Neatline.commands.addHandler('editor:showRecordList', showRecordList);
   Neatline.vent.on('editor:record:close', showRecordList);
-  Neatline.vent.on('map:select', showRecordForm);
 
 
 }});

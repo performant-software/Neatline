@@ -15,16 +15,45 @@ Neatline.module('Map', function(
 
 
   /**
-   * Query for updated spatial data when the map is panned or zoomed.
+   * Update map layers.
    *
    * @param {Object} params: Hash with `extent` and `zoom`.
    */
-  Neatline.vent.on('map:move', function(params) {
+  var update = function(params) {
     Map.__collection.update(params, function(records) {
       Neatline.vent.trigger('map:newRecords', records);
       Map.__view.ingest(records);
     });
-  });
+  };
+
+  Neatline.commands.addHandler('map:update', update);
+  Neatline.vent.on('map:move', update);
+
+
+  /**
+   * Focus the map on the data extent for a record, identified by id.
+   *
+   * @param {Number} id: The record id.
+   */
+  var focusById = function(id) {
+    Map.__collection.getOrFetch(id, function(model) {
+      Map.__view.focusByModel(model);
+    });
+  };
+
+  Neatline.commands.addHandler('map:focusById', focusById);
+
+
+  /**
+   * Focus the map on the data extent for a record, identified by model.
+   *
+   * @param {Object} model: The record model.
+   */
+  var focusByModel = function(model) {
+    Map.__view.focusByModel(model);
+  };
+
+  Neatline.commands.addHandler('map:focusByModel', focusByModel);
 
 
 });

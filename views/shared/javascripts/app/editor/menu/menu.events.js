@@ -17,21 +17,23 @@ Neatline.module('Editor.Menu', function(
   /**
    * Activate "Records" tab.
    */
-  var activateRecords = function() {
+  var records = function() {
     Menu.__view.activateTab('records');
   };
+
+  Neatline.commands.addHandler('editor:menu:records', records);
+  Neatline.vent.on('editor:router:#records', records);
 
 
   /**
    * Activate "Tags" tab.
    */
-  var activateTags = function() {
+  var tags = function() {
     Menu.__view.activateTab('tags');
   };
 
-
-  Neatline.vent.on('editor:router:#records', activateRecords);
-  Neatline.vent.on('editor:router:#tags', activateTags);
+  Neatline.commands.addHandler('editor:menu:tags', tags);
+  Neatline.vent.on('editor:router:#tags', tags);
 
 
 });

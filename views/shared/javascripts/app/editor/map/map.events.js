@@ -24,6 +24,9 @@ Neatline.module('Editor.Map', { startWithParent: false,
     Map.__view.startEdit(model);
   };
 
+  Neatline.commands.addHandler('editor:map:startEdit', startEdit);
+  Neatline.vent.on('editor:record:show', startEdit);
+
 
   /**
    * End map edit when a record form is closed.
@@ -35,6 +38,9 @@ Neatline.module('Editor.Map', { startWithParent: false,
     Map.__view.endEdit();
   };
 
+  Neatline.commands.addHandler('editor:map:endEdit', endEdit);
+  Neatline.vent.on('editor:record:close', endEdit);
+
 
   /**
    * Update the map edit controls.
@@ -44,6 +50,9 @@ Neatline.module('Editor.Map', { startWithParent: false,
   var updateEdit = function(settings) {
     Map.__view.update(settings);
   };
+
+  Neatline.commands.addHandler('editor:map:updateEdit', updateEdit);
+  Neatline.vent.on('editor:record:update', updateEdit);
 
 
   /**
@@ -56,11 +65,8 @@ Neatline.module('Editor.Map', { startWithParent: false,
     Map.__view.removeLayerByModel(model);
   };
 
-
-  Neatline.vent.on('editor:record:show',  startEdit);
+  Neatline.commands.addHandler('editor:map:deleteLayer', deleteLayer);
   Neatline.vent.on('editor:record:delete', deleteLayer);
-  Neatline.vent.on('editor:record:close', endEdit);
-  Neatline.vent.on('editor:record:update', updateEdit);
 
 
 }});

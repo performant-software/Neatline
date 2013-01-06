@@ -19,14 +19,14 @@ Neatline.module('Editor.Records', function(
    *
    * @param {Object} params: Query parameters.
    */
-  var showList = function(params) {
+  var show = function(params) {
     Records.__collection.update(params, function(records) {
       Records.__view.ingest(records);
     });
   };
 
-
-  Neatline.vent.on('editor:router:#records', showList);
+  Neatline.vent.on('editor:records:show', show);
+  Neatline.vent.on('editor:router:#records', show);
 
 
 });
