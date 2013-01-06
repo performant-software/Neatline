@@ -24,13 +24,32 @@ Neatline.module('Editor.Record', function(
     events: {
       'click a[name="close"]':    'close',
       'click a[name="save"]':     'save',
-      'click a[name="delete2"]':  'delete'
+      'click a[name="delete2"]':  'delete',
+      'change div.spatial input': 'sync',
+      'keyup div.spatial input':  'sync'
+    },
+
+    selectors: {
+      mode:   'input[name="mode"]',
+      modify: 'input[name="modify"]'
     },
 
     ui: {
       deleteModal:  '#deleteModal',
       textTab:      'a[href="#record-form-text"]',
-      textRegion:   '#record-form-text'
+      textRegion:   '#record-form-text',
+      spatial: {
+        pan:        'input[value="pan"]',
+        point:      'input[value="point"]',
+        line:       'input[value="line"]',
+        poly:       'input[value="poly"]',
+        regPoly:    'input[value="regPoly"]',
+        modify:     'input[value="modify"]',
+        remove:     'input[value="remove"]',
+        sides:      'input[name="sides"]',
+        irreg:      'input[name="irreg"]',
+        snap:       'input[name="snap"]'
+      }
     },
 
     options: {
@@ -50,7 +69,7 @@ Neatline.module('Editor.Record', function(
       this.getTemplate();
       this.getUi();
 
-      // Initialize state.
+      // Start state.
       this.setDefaultTab();
       this.open = false;
 
@@ -86,6 +105,53 @@ Neatline.module('Editor.Record', function(
       this.open = false;
       Neatline.vent.trigger('editor:record:close', this.model);
       this.model = null;
+    },
+
+
+    /**
+     * Gather and publish the current map edit settings.
+     */
+    sync: function() {
+      Neatline.vent.trigger('editor:record:update', {
+        mode:   this._mode(),
+        modify: this._modify(),
+        poly:   this._poly()
+      });
+    },
+
+
+    /**
+     * Get the map edit mode.
+     *
+     * @return {String}: pan|point|line|poly|regPoly|modify|remove.
+     */
+    _mode: function() {
+      return $(this.selectors.mode+':checked').val();
+    },
+
+
+    /**
+     * Get the "Modify Shape" checkboxes.
+     *
+     * @return {Array}: 0-3 strings: rotate|resize|drag.
+     */
+    _modify: function() {
+      var inputs = $(this.selectors.modify+':checked');
+      return _.map(inputs, function(i) { $(i).val(); });
+    },
+
+
+    /**
+     * Get the "Draw Regular Polygon" settings.
+     *
+     * @return {Object}: {sides,snap,irreg}.
+     */
+    _poly: function() {
+      return {
+        sides:  this.__ui.spatial.sides.val(),
+        snap:   this.__ui.spatial.snap.val(),
+        irreg:  this.__ui.spatial.irreg.is(':checked')
+      };
     },
 
 

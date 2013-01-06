@@ -98,5 +98,6 @@ _t.navigate = function(frag) {
  * @param {Object} el: The anchor element.
  */
 _t.click = function(el) {
+  el.click();
   this.navigate(el.attr('href'));
 };

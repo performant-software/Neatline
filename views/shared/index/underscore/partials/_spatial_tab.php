@@ -14,30 +14,30 @@
 ?>
 
 
-<div class="control-group geometry">
+<div class="control-group spatial">
 
   <label class="radio">
-    <input type="radio" name="editMode" value="pan" checked>
+    <input type="radio" name="mode" value="pan" checked>
     Navigate
   </label>
 
   <label class="radio">
-    <input type="radio" name="editMode" value="point">
+    <input type="radio" name="mode" value="point">
     Draw Point
   </label>
 
   <label class="radio">
-    <input type="radio" name="editMode" value="line">
+    <input type="radio" name="mode" value="line">
     Draw Line
   </label>
 
   <label class="radio">
-    <input type="radio" name="editMode" value="poly">
+    <input type="radio" name="mode" value="poly">
     Draw Polygon
   </label>
 
   <label class="radio">
-    <input type="radio" name="editMode" value="regPoly">
+    <input type="radio" name="mode" value="regPoly">
     Draw Regular Polygon
   </label>
 
@@ -54,38 +54,38 @@
     </div>
 
     <label class="checkbox">
-      <input type="checkbox" name="irregular">
+      <input type="checkbox" name="irreg">
       Irregular?
     </label>
 
   </div>
 
   <label class="radio">
-    <input type="radio" name="editMode" value="modify">
+    <input type="radio" name="mode" value="modify">
     Modify Shape
   </label>
 
   <div class="control-group indent">
 
     <label class="checkbox">
-      <input type="checkbox" name="modifyOptions" value="rotate">
+      <input type="checkbox" name="modify" value="rotate">
       Rotate
     </label>
 
     <label class="checkbox">
-      <input type="checkbox" name="modifyOptions" value="resize">
+      <input type="checkbox" name="modify" value="resize">
       Resize
     </label>
 
     <label class="checkbox">
-      <input type="checkbox" name="modifyOptions" value="drag">
+      <input type="checkbox" name="modify" value="drag">
       Drag
     </label>
 
   </div>
 
   <label class="radio">
-    <input type="radio" name="editMode" value="remove">
+    <input type="radio" name="mode" value="remove">
     Delete Shape
   </label>
 

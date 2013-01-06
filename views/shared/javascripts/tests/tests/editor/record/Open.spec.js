@@ -152,7 +152,7 @@ describe('Record Form Open', function() {
     _t.setMapCenter(200, 300, 15);
 
     // Open form.
-    $(recordRows[0]).trigger('click');
+    _t.click($(recordRows[0]));
 
     // Get focus and zoom.
     var center  = _t.vw.map.map.getCenter();
@@ -192,89 +192,89 @@ describe('Record Form Open', function() {
 
   });
 
-  // it('should create map edit layer when one does not exist', function() {
+  it('should create map edit layer when one does not exist', function() {
 
-  //   // --------------------------------------------------------------------
-  //   // When an edit form is opened for a record that does not already have
-  //   // a corresponding map layer (for example, when the record list is not
-  //   // set in map mirroring mode, and there are listings for records that
-  //   // are not visible in the current viewport on the map), the model for
-  //   // the record housed in the editor application should be passed to the
-  //   // map and used to create a map layer for the record on the fly.
-  //   // --------------------------------------------------------------------
+    // --------------------------------------------------------------------
+    // When an edit form is opened for a record that does not already have
+    // a corresponding map layer (for example, when the record list is not
+    // set in map mirroring mode, and there are listings for records that
+    // are not visible in the current viewport on the map), the model for
+    // the record housed in the editor application should be passed to the
+    // map and used to create a map layer for the record on the fly.
+    // --------------------------------------------------------------------
 
-  //   // Load map without Record 2.
-  //   _t.refreshMap(_t.json.collections.removed);
+    // Load map without Record 2.
+    _t.refreshMap(_t.json.collections.removed);
 
-  //   // Just 1 layer on the map.
-  //   expect(_t.vw.map.layers.length).toEqual(1);
+    // Just 1 layer on the map.
+    expect(_t.vw.map.layers.length).toEqual(1);
 
-  //   // Open form for Record 2.
-  //   _t.click($(recordRows[1]));
+    // Open form for Record 2.
+    _t.click($(recordRows[1]));
 
-  //   // Check for new layer.
-  //   mapLayers = _t.getVectorLayers();
-  //   expect(mapLayers.length).toEqual(2);
-  //   expect(mapLayers[1].features[0].geometry.x).toEqual(3);
-  //   expect(mapLayers[1].features[0].geometry.y).toEqual(4);
+    // Check for new layer.
+    mapLayers = _t.getVectorLayers();
+    expect(mapLayers.length).toEqual(2);
+    expect(mapLayers[1].features[0].geometry.x).toEqual(3);
+    expect(mapLayers[1].features[0].geometry.y).toEqual(4);
 
-  // });
+  });
 
-  // it('should freeze edit layer when form opened via editor', function() {
+  it('should freeze edit layer when form opened via editor', function() {
 
-  //   // --------------------------------------------------------------------
-  //   // When an edit form for a record is opened by clicking on the record
-  //   // listing in the left pane, the record id should be added to the
-  //   // `frozen` array on the map view. This prevents the layer for the
-  //   // record from being remove, replaced, or changed when new map data is
-  //   // ingested after a map move, which would have the effect of removing
-  //   // the layer instance with the editing controls and clearing out
-  //   // unsaved changes/additions to the geometry.
-  //   // --------------------------------------------------------------------
+    // --------------------------------------------------------------------
+    // When an edit form for a record is opened by clicking on the record
+    // listing in the left pane, the record id should be added to the
+    // `frozen` array on the map view. This prevents the layer for the
+    // record from being remove, replaced, or changed when new map data is
+    // ingested after a map move, which would have the effect of removing
+    // the layer instance with the editing controls and clearing out
+    // unsaved changes/additions to the geometry.
+    // --------------------------------------------------------------------
 
-  //   // By default, frozen empty.
-  //   expect(_t.vw.map.frozen).toEqual([]);
+    // By default, frozen empty.
+    expect(_t.vw.map.frozen).toEqual([]);
 
-  //   // Show form, check frozen.
-  //   $(recordRows[0]).trigger('click');
-  //   expect(_t.vw.map.frozen).toEqual([recordModels[0].get('id')]);
+    // Show form, check frozen.
+    _t.click($(recordRows[0]));
+    expect(_t.vw.map.frozen).toEqual([recordModels[0].get('id')]);
 
-  //   // Close, check `frozen` empty.
-  //   _t.vw.record.$('a[name="close"]').trigger('click');
-  //   expect(_t.vw.map.frozen).toEqual([]);
+    // Close, check `frozen` empty.
+    _t.vw.record.$('a[name="close"]').trigger('click');
+    expect(_t.vw.map.frozen).toEqual([]);
 
-  // });
+  });
 
-  // it('should freeze edit layer when form opened via map', function() {
+  it('should freeze edit layer when form opened via map', function() {
 
-  //   // --------------------------------------------------------------------
-  //   // When a form is opened by clicking on a map feature, the id of the
-  //   // record should be added to the `frozen` array (see above).
-  //   // --------------------------------------------------------------------
+    // --------------------------------------------------------------------
+    // When a form is opened by clicking on a map feature, the id of the
+    // record should be added to the `frozen` array (see above).
+    // --------------------------------------------------------------------
 
-  //   // By default, frozen empty.
-  //   expect(_t.vw.map.frozen).toEqual([]);
+    // By default, frozen empty.
+    expect(_t.vw.map.frozen).toEqual([]);
 
-  //   // Trigger click on feature, check frozen.
-  //   _t.clickOnMapFeature(mapLayers[0], feature1);
-  //   expect(_t.vw.map.frozen).toEqual([recordModels[0].get('id')]);
+    // Trigger click on feature, check frozen.
+    _t.clickOnMapFeature(mapLayers[0], feature1);
+    expect(_t.vw.map.frozen).toEqual([recordModels[0].get('id')]);
 
-  //   // Close, check `frozen` empty.
-  //   _t.vw.record.$('a[name="close"]').trigger('click');
-  //   expect(_t.vw.map.frozen).toEqual([]);
+    // Close, check `frozen` empty.
+    _t.vw.record.$('a[name="close"]').trigger('click');
+    expect(_t.vw.map.frozen).toEqual([]);
 
-  // });
+  });
 
   // it('should default to "Navigate" edit mode when opened', function() {
 
   //   // --------------------------------------------------------------------
-  //   // The "Edit Geometry" controls should always revert to the default
+  //   // The geometry editing controls should always revert to the default
   //   // "Navigate" mode when a form is opened, regardless of what the state
   //   // of the form was when it was last closed.
   //   // --------------------------------------------------------------------
 
   //   // Show form, check mode.
-  //   $(recordRows[0]).trigger('click');
+  //   _t.click($(recordRows[0]));
   //   expect(_t.spatialTabView.getMapControl()).toEqual('pan');
 
   //   // Activate "Polygon" control, check mode.

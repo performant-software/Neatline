@@ -26,13 +26,23 @@ Neatline.module('Editor.Map', { startWithParent: false,
 
 
   /**
-   * end map edit when a record form is closed.
+   * End map edit when a record form is closed.
    *
    * @param {Object} model: The record model.
    */
   var endEdit = function(model) {
     Map.__view.unFreeze(model.get('id'));
     Map.__view.endEdit();
+  };
+
+
+  /**
+   * Update the map edit controls.
+   *
+   * @param {Object} settings: The new form settings.
+   */
+  var update = function(settings) {
+    Map.__view.update(settings);
   };
 
 
@@ -57,8 +67,9 @@ Neatline.module('Editor.Map', { startWithParent: false,
   // });
 
 
-  // Neatline.vent.on('editor:record:show', startEdit);
-  // Neatline.vent.on('editor:record:close', endEdit);
+  Neatline.vent.on('editor:record:show', startEdit);
+  Neatline.vent.on('editor:record:close', endEdit);
+  Neatline.vent.on('editor:record:update', update);
 
 
 }});

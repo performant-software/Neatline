@@ -102,7 +102,7 @@ _.extend(Neatline.Map.View.prototype, {
     // Set control mode.
     // -----------------
 
-    switch (settings.control) {
+    switch (settings.mode) {
 
       case 'point':
         this.controls.point.activate();
@@ -136,15 +136,15 @@ _.extend(Neatline.Map.View.prototype, {
     // -----------------------------
 
     // Sides.
-    var sides = _.isNaN(settings.sides) ? 0 : settings.sides;
+    var sides = _.isNaN(settings.poly.sides) ? 0 : settings.poly.sides;
     this.controls.reg.handler.sides = Math.max(3, sides);
 
     // Snap angle.
-    var snap = _.isNaN(settings.snap) ? 0 : settings.snap;
+    var snap = _.isNaN(settings.poly.snap) ? 0 : settings.poly.snap;
     this.controls.reg.handler.snapAngle = parseFloat(snap);
 
     // Irregular.
-    this.controls.reg.handler.irregular = settings.irreg;
+    this.controls.reg.handler.irregular = settings.poly.irreg;
 
 
     // Apply modification settings.
