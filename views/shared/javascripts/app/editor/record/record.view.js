@@ -47,8 +47,8 @@ Neatline.module('Editor.Record', function(
         modify:     'input[value="modify"]',
         remove:     'input[value="remove"]',
         sides:      'input[name="sides"]',
-        irreg:      'input[name="irreg"]',
-        snap:       'input[name="snap"]'
+        snap:       'input[name="snap"]',
+        irreg:      'input[name="irreg"]'
       }
     },
 
