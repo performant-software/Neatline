@@ -32,11 +32,6 @@ Neatline.module('Editor', { startWithParent: false,
      * Alias components.
      */
     initialize: function() {
-
-      this.collections = {
-        records:  Editor.Records. __collection
-      };
-
       this.views = {
         editor:   Editor.         __view,
         menu:     Editor.Menu.    __view,
@@ -46,7 +41,6 @@ Neatline.module('Editor', { startWithParent: false,
         tags:     Editor.Tags.    __view,
         tag:      Editor.Tag.     __view
       };
-
       this.ui = {
         editor:   Editor.         __view.__ui.editor,
         menu:     Editor.Menu.    __view.$el,
@@ -56,11 +50,11 @@ Neatline.module('Editor', { startWithParent: false,
         tags:     Editor.Tags.    __view.$el,
         tag:      Editor.Tag.     __view.$el
       };
-
     },
 
 
     before: function() {
+      Neatline.vent.trigger('editor:router:before');
       this.ui.editor.empty();
     },
 
@@ -82,6 +76,8 @@ Neatline.module('Editor', { startWithParent: false,
      * @param {String} id: The record id.
      */
     showRecordForm: function(id) {
+      console.log('#records/:id');
+      id = parseInt(id, 10);
       Neatline.vent.trigger('editor:router:#records/:id', id);
       this.views.record.showIn(this.ui.editor);
     },
@@ -111,6 +107,7 @@ Neatline.module('Editor', { startWithParent: false,
      * @param {String} id: The tag id.
      */
     showTagForm: function(id) {
+      id = parseInt(id, 10);
       this.views.tag.showIn(this.ui.editor);
     },
 

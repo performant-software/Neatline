@@ -35,7 +35,7 @@ Neatline.module('Editor.Record', function(
 
     options: {
       toastr: {
-        timeOut:  2000,
+        timeOut:  1500,
         fadeIn:   200,
         fadeOut:  200
       }
@@ -50,17 +50,32 @@ Neatline.module('Editor.Record', function(
       this.getTemplate();
       this.getUi();
 
-      // Select "Text" tab by default.
-      this.__ui.textRegion.addClass('active');
-      this.__ui.textTab.tab('show');
+      // Initialize state.
+      this.setDefaultTab();
+      this.open = false;
+      console.log('form init');
 
     },
 
 
     /**
-     * Show the form for a record model.
+     * Select "Text" tab by default.
+     */
+    setDefaultTab: function() {
+      this.__ui.textRegion.addClass('active');
+      this.__ui.textTab.tab('show');
+    },
+
+
+    /**
+     * Show the form.
+     *
+     * @param {Object} model: A form model.
      */
     show: function(model) {
+      console.log('form show');
+      this.open = true;
+      Neatline.vent.trigger('editor:record:show', model);
       rivets.bind(this.$el, { record: model });
       this.model = model;
     },
@@ -70,7 +85,8 @@ Neatline.module('Editor.Record', function(
      * Close the form.
      */
     close: function() {
-      Neatline.vent.trigger('editor:record:close');
+      this.open = false;
+      Neatline.vent.trigger('editor:record:close', this.model);
       this.model = null;
     },
 

@@ -17,7 +17,7 @@ describe('Record Form Close', function() {
   beforeEach(function() {
 
     _t.loadEditor();
-    _t.openFirstRecordForm();
+    _t.openRecordForm();
 
     els = {
       close: _t.vw.record.$('a[name="close"]'),
@@ -29,8 +29,7 @@ describe('Record Form Close', function() {
 
     // --------------------------------------------------------------------
     // When the "X" button at the top of the record edit form is clicked,
-    // the form should disappear and the records list should be displayed
-    // in the content pane.
+    // the form should disappear and the record list should be displayed.
     // --------------------------------------------------------------------
 
     // Open form, click close.
@@ -41,8 +40,7 @@ describe('Record Form Close', function() {
     expect(_t.el.editor).toContain(_t.el.records);
 
     // 3 records in browser pane.
-    var recordRows = _t.getRecordRows();
-    expect(recordRows.length).toEqual(3);
+    expect(_t.getRecordRows().length).toEqual(3);
 
   });
 

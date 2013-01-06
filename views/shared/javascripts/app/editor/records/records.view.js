@@ -50,6 +50,7 @@ Neatline.module('Editor.Records', function(
      * @param {Object} e: The click event.
      */
     click: function(e) {
+      var id = parseInt($(e.target).attr('data-id'), 10);
       Neatline.execute('map:focusById', $(e.target).attr('data-id'));
     }
 

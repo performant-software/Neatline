@@ -20,7 +20,7 @@ Neatline.module('Editor', { startWithParent: false,
    * @param {Object} model: The record model.
    */
   var showRecordForm = function(model) {
-    if (!Backbone.history.fragment.match(/records\/\d+/)) {
+    if (!Neatline.request('editor:record:isOpen?')) {
       Editor.__router.navigate('records/'+model.get('id'), true);
     }
   };

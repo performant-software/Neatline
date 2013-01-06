@@ -15,18 +15,18 @@ Neatline.module('Editor.Records', function(
 
 
   /**
-   * Execute search query.
+   * Udpate the records collection and render the list.
    *
    * @param {Object} params: Query parameters.
    */
-  var loadList = function(params) {
+  var showList = function(params) {
     Records.__collection.update(params, function(records) {
       Records.__view.ingest(records);
     });
   };
 
 
-  Neatline.vent.on('editor:router:#records', loadList);
+  Neatline.vent.on('editor:router:#records', showList);
 
 
 });

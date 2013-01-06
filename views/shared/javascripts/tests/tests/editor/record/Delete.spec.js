@@ -10,14 +10,14 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Form Delete', function() {
+describe('Record Form Delete', function() {
 
   var els, id;
 
   beforeEach(function() {
 
     _t.loadEditor();
-    _t.openFirstRecordForm();
+    _t.openRecordForm();
 
     els = {
       delete1:  _t.vw.record.$('a[name="delete1"]'),
@@ -145,34 +145,6 @@ describe('Form Delete', function() {
     expect(Backbone.history.fragment).toEqual('records');
 
   });
-
-  // it('should remove the model from the records collection', function() {
-
-  //   // --------------------------------------------------------------------
-  //   // When a record is deleted, the model for the record should be
-  //   // removed from the records collection and the listing for the record
-  //   // should not appear in the records list after the form closes.
-  //   // --------------------------------------------------------------------
-
-  //   // Click on "Delete", then "Yes, delete".
-  //   _t.formView.deleteButton.trigger('click');
-  //   _t.formView.confirmButton.trigger('click');
-  //   _t.respondLast200('');
-
-  //   // Model absent from records collection.
-  //   expect(_t.recordsColl.get(id)).toBeUndefined();
-
-  //   // Just 2 record listings.
-  //   recordRows = _t.getRecordRows();
-  //   expect(recordRows.length).toEqual(2);
-
-  //   // Record 2 removed from list.
-  //   expect($(recordRows[0]).find('.record-title').text()).
-  //     toEqual('title1');
-  //   expect($(recordRows[1]).find('.record-title').text()).
-  //     toEqual('title3');
-
-  // });
 
   // it('should remove the model from the map collection', function() {
 

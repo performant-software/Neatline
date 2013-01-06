@@ -50,10 +50,12 @@ _t.loadNeatline = function() {
  * Load editor application.
  */
 _t.loadEditor = function() {
+  console.log('loadEditor start');
 
   // Load fixtures, mock server.
   this.loadFixtures('editor-partial.html', 'neatline.css');
   this.server = sinon.fakeServer.create();
+  console.log('s1');
 
   // Start modules.
   Neatline.Editor.Menu.init();
@@ -66,22 +68,25 @@ _t.loadEditor = function() {
   Neatline.Map.init();
   Neatline.Bubble.init();
   Neatline.Editor.Map.init();
+  console.log('s2');
 
   // Def route.
   _t.navigate('');
+  console.log('s3');
 
   // Inject fixtures, alias components.
   this.respondAll200(this.json.collections.standard);
   _t.aliasNeatline();
   _t.aliasEditor();
 
+  console.log('loadEditor end');
 };
 
 
 /**
  * Navigate to the edit form for the first record.
  */
-_t.openFirstRecordForm = function() {
+_t.openRecordForm = function() {
   var models = this.getRecordModels();
   this.navigate('records/'+models[0].get('id'));
 };

@@ -15,27 +15,25 @@ Neatline.module('Editor.Map', { startWithParent: false,
 
 
   /**
-   * Graft editing functionality onto the map when a form is opened.
+   * Start map edit when a record form is opened.
    *
-   * @param {Number} id: The record id.
+   * @param {Object} model: The record model.
    */
-  var startEdit = function(id) {
-    Neatline.request('editor:records:fetch', id, function(r) {
-      Map.__view.startEdit(r);
-      Map.__view.freeze(id);
-    });
+  var startEdit = function(model) {
+    Map.__view.freeze(model.get('id'));
+    Map.__view.startEdit(model);
   };
 
 
   /**
-   * Strip editing functionality off the map when a form is closed.
+   * end map edit when a record form is closed.
    *
    * @param {Object} model: The record model.
    */
-  // Neatline.vent.on('editor:form:close', function(model) {
-  //   Map.__view.unFreeze(model.get('id'));
-  //   Map.__view.endEdit();
-  // });
+  var endEdit = function(model) {
+    Map.__view.unFreeze(model.get('id'));
+    Map.__view.endEdit();
+  };
 
 
   /**
@@ -59,7 +57,8 @@ Neatline.module('Editor.Map', { startWithParent: false,
   // });
 
 
-  Neatline.vent.on('editor:router:#records/:id', startEdit);
+  // Neatline.vent.on('editor:record:show', startEdit);
+  // Neatline.vent.on('editor:record:close', endEdit);
 
 
 }});

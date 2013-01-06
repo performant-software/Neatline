@@ -15,18 +15,27 @@ Neatline.module('Editor.Record', function(
 
 
   /**
-   * Load a record form.
+   * Show a record form.
    *
    * @param {Number} id: The record id.
    */
-  var loadForm = function(id) {
-    Neatline.request('editor:records:fetch', id, function(r) {
+  var showForm = function(id) {
+    Neatline.request('editor:records:getModel', id, function(r) {
       Record.__view.show(r);
     });
   };
 
 
-  Neatline.vent.on('editor:router:#records/:id', loadForm);
+  /**
+   * Close a record form.
+   */
+  var closeForm = function(id) {
+    if (Record.__view.open) Record.__view.close();
+  };
+
+
+  Neatline.vent.on('editor:router:#records/:id', showForm);
+  Neatline.vent.on('editor:router:before', closeForm);
 
 
 });

@@ -11,16 +11,16 @@
  */
 
 Neatline.module('Editor.Records', function(
-  Records, Neatline, Backbone, Marionette, $, _) {
+  Records, Editor, Backbone, Marionette, $, _) {
 
 
   /**
-   * Get or fetch a record from the collection.
+   * Get a record model from the collection.
    *
    * @param {Number} id: The record id.
-   * @param {Function} cb: A callback.
+   * @param {Function} cb: A callback, called with the model.
    */
-  Neatline.reqres.addHandler('editor:records:fetch', function(id, cb) {
+  Neatline.reqres.addHandler('editor:records:getModel', function(id, cb) {
     Records.__collection.getOrFetch(id, cb);
   });
 
