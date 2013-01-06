@@ -15,19 +15,6 @@ Neatline.module('Editor.Map', { startWithParent: false,
 
 
   /**
-   * Focus on a record by id.
-   *
-   * @param {Number} id: The record id.
-   */
-  var focusById = function(id) {
-    Neatline.execute('map:focusById', id);
-  };
-
-  Neatline.commands.addHandler('editor:map:focusById', focusById);
-  // Neatline.vent.on('editor:router:#records/:id', focusById);
-
-
-  /**
    * Start map edit when a record form is opened.
    *
    * @param {Object} model: The record model.
