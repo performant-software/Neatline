@@ -36,7 +36,7 @@ _t.aliasEditor = function() {
 
   this.vw = {
     map:      Neatline.Map.             __view,
-    bubble:   Neatline.Map.             __view,
+    bubble:   Neatline.Bubble.          __view,
     editor:   Neatline.Editor.          __view,
     menu:     Neatline.Editor.Menu.     __view,
     records:  Neatline.Editor.Records.  __view,
@@ -48,7 +48,7 @@ _t.aliasEditor = function() {
 
   this.el = {
     map:      Neatline.Map.             __view.$el,
-    bubble:   Neatline.Map.             __view.$el,
+    bubble:   Neatline.Bubble.          __view.$el,
     editor:   Neatline.Editor.          __view.__ui.editor,
     menu:     Neatline.Editor.Menu.     __view.$el,
     records:  Neatline.Editor.Records.  __view.$el,

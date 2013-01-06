@@ -10,11 +10,11 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Bubble.Views', function(
-  Views, Bubble, Backbone, Marionette, $, _) {
+Neatline.module('Bubble', function(
+  Bubble, Neatline, Backbone, Marionette, $, _) {
 
 
-  Views.Bubble = Backbone.Neatline.View.extend({
+  Bubble.View = Backbone.Neatline.View.extend({
 
 
     template: '#bubble-template',
@@ -80,7 +80,7 @@ Neatline.module('Bubble.Views', function(
 
 
     /**
-     * Freeze the bubble in place.
+     * Freeze the bubble.
      */
     freeze: function() {
       this.window.unbind('mousemove.bubble');

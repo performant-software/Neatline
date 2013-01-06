@@ -35,6 +35,7 @@ Neatline.module('Editor.Record', function(
     },
 
     ui: {
+      tabs:         'ul.nav a',
       deleteModal:  '#deleteModal',
       textTab:      'a[href="#record-form-text"]',
       textRegion:   '#record-form-text',
@@ -56,16 +57,38 @@ Neatline.module('Editor.Record', function(
 
 
     /**
-     * Render template.
+     * Render template, compose default state.
      */
     initialize: function() {
 
+      this.open = false;  // True when the form is displayed.
+      this.hash = null;   // The `href` of the currently-selected tab.
+
       this.getTemplate();
       this.getUi();
-
-      // Start state.
       this.setDefaultTab();
-      this.open = false;
+      this.bindEvents();
+
+    },
+
+
+    /**
+     * Bind listeners to form inputs.
+     */
+    bindEvents: function() {
+
+      // TABS
+      this.__ui.tabs.on('shown', _.bind(function(e) {
+
+        // Get current tab hash.
+        this.hash = e.target.hash;
+
+        // (De)activate bubble.
+        Neatline.execute(this._spatialTabActive() ?
+          'bubble:deactivate' : 'bubble:activate'
+        );
+
+      }, this));
 
     },
 
@@ -85,11 +108,21 @@ Neatline.module('Editor.Record', function(
      * @param {Object} model: A form model.
      */
     show: function(model) {
+
       this.open = true;
+
+      // Publish the model and bind it to the form.
       Neatline.vent.trigger('editor:record:show', model);
       rivets.bind(this.$el, { record: model });
+
+      // If "Spatial" is active, turn off the bubble.
+      if (this._spatialTabActive()) {
+        Neatline.execute('bubble:deactivate');
+      }
+
       this.model = model;
       this.reset();
+
     },
 
 
@@ -97,9 +130,16 @@ Neatline.module('Editor.Record', function(
      * Close the form.
      */
     close: function() {
+
       this.open = false;
+
+      // Publish the model, activate and close the bubble.
       Neatline.vent.trigger('editor:record:close', this.model);
+      Neatline.execute('bubble:activate');
+      Neatline.execute('bubble:thaw');
+
       this.model = null;
+
     },
 
 
@@ -120,41 +160,6 @@ Neatline.module('Editor.Record', function(
         modify: this._getModifyOptions(),
         poly:   this._getPolyOptions()
       });
-    },
-
-
-    /**
-     * Get the map edit mode.
-     *
-     * @return {String}: pan|point|line|poly|regPoly|modify|remove.
-     */
-    _getEditMode: function() {
-      return $(this.selectors.mode+':checked').val();
-    },
-
-
-    /**
-     * Get the "Modify Shape" checkboxes.
-     *
-     * @return {Array}: 0-3 strings: rotate|resize|drag.
-     */
-    _getModifyOptions: function() {
-      var inputs = $(this.selectors.modify+':checked');
-      return _.map(inputs, function(i) { return $(i).val(); });
-    },
-
-
-    /**
-     * Get the "Draw Regular Polygon" settings.
-     *
-     * @return {Object}: {sides,snap,irreg}.
-     */
-    _getPolyOptions: function() {
-      return {
-        sides:  this.__ui.spatial.sides.val(),
-        snap:   this.__ui.spatial.snap.val(),
-        irreg:  this.__ui.spatial.irreg.is(':checked')
-      };
     },
 
 
@@ -198,6 +203,51 @@ Neatline.module('Editor.Record', function(
 
       });
 
+    },
+
+
+    /**
+     * Is the "Spatial" tab activated?
+     *
+     * @return {Boolean}: True if "Spatial" is active.
+     */
+    _spatialTabActive: function() {
+      return this.hash == '#record-form-spatial';
+    },
+
+
+    /**
+     * Get the map edit mode.
+     *
+     * @return {String}: pan|point|line|poly|regPoly|modify|remove.
+     */
+    _getEditMode: function() {
+      return $(this.selectors.mode+':checked').val();
+    },
+
+
+    /**
+     * Get the "Modify Shape" checkboxes.
+     *
+     * @return {Array}: 0-3 strings: rotate|resize|drag.
+     */
+    _getModifyOptions: function() {
+      var inputs = $(this.selectors.modify+':checked');
+      return _.map(inputs, function(i) { return $(i).val(); });
+    },
+
+
+    /**
+     * Get the "Draw Regular Polygon" settings.
+     *
+     * @return {Object}: {sides,snap,irreg}.
+     */
+    _getPolyOptions: function() {
+      return {
+        sides:  this.__ui.spatial.sides.val(),
+        snap:   this.__ui.spatial.snap.val(),
+        irreg:  this.__ui.spatial.irreg.is(':checked')
+      };
     },
 
 

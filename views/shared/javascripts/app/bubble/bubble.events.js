@@ -15,63 +15,71 @@ Neatline.module('Bubble', function(
 
 
   /**
-   * Show bubble on feature mouseenter.
+   * Show the bubble.
    *
    * @param {Object} model: The record model.
    */
-  Neatline.vent.on('map:highlight', function(model) {
+  var show = function(model) {
     Bubble.__view.show(model);
-  });
+  };
+
+  Neatline.commands.addHandler('bubble:show', show);
+  Neatline.vent.on('map:highlight', show);
 
 
   /**
-   * Hide bubble on feature mouseleave.
+   * Hide the bubble.
    */
-  Neatline.vent.on('map:unhighlight', function() {
+  var close = function() {
     Bubble.__view.hide();
-  });
+  };
+
+  Neatline.commands.addHandler('bubble:close', close);
+  Neatline.vent.on('map:unhighlight', close);
 
 
   /**
-   * Lock bubble on feature click on.
+   * Freeze the bubble.
    */
-  Neatline.vent.on('map:select', function() {
+  var freeze = function() {
     Bubble.__view.freeze();
-  });
+  };
+
+  Neatline.commands.addHandler('bubble:freeze', freeze);
+  Neatline.vent.on('map:select', freeze);
 
 
   /**
-   * Lock bubble on feature click off.
+   * Thaw the bubble.
    */
-  Neatline.vent.on('map:unselect', function() {
+  var thaw = function() {
     Bubble.__view.thaw();
-  });
+  };
+
+  Neatline.commands.addHandler('bubble:thaw', thaw);
+  Neatline.vent.on('map:unselect', thaw);
 
 
   /**
-   * Close and deactivate the bubble when the "Spatial" tab is active.
+   * Activate the bubble.
    */
-  Neatline.vent.on('editor:form:spatialSelect', function() {
+  var activate = function() {
+    Bubble.__view.activate();
     Bubble.__view.thaw();
+  };
+
+  Neatline.commands.addHandler('bubble:activate', activate);
+
+
+  /**
+   * Close and deactivate the bubble.
+   */
+  var deactivate = function() {
     Bubble.__view.deactivate();
-  });
-
-
-  /**
-   * Reactivate the bubble when the "Spatial" tab is inactive.
-   */
-  Neatline.vent.on('editor:form:spatialDeselect', function(model) {
-    Bubble.__view.activate();
-  });
-
-
-  /**
-   * Close the bubble when an edit form is closed.
-   */
-  Neatline.vent.on('editor:form:close', function() {
-    Bubble.__view.activate();
     Bubble.__view.thaw();
-  });
+  };
+
+  Neatline.commands.addHandler('bubble:deactivate', deactivate);
 
 
 });
