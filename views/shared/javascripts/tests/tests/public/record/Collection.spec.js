@@ -16,7 +16,7 @@ describe('Record Collection', function() {
 
   beforeEach(function() {
     collection = new Neatline.Record.Collection();
-    __exhibit.api.records = 'records';
+    __exhibit.api.records = 'records/1';
   });
 
   it('should form url from `__exhibit` global', function() {
@@ -25,7 +25,7 @@ describe('Record Collection', function() {
     // The collection's url should match `__exhibit.api.records`.
     // --------------------------------------------------------------------
 
-    expect(collection.url()).toEqual('records');
+    expect(collection.url()).toEqual('records/1');
 
   });
 

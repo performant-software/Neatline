@@ -16,14 +16,16 @@ describe('Record Model', function() {
 
   beforeEach(function() {
     model = new Neatline.Record.Model();
-    __exhibit.api.record = 'record';
+    __exhibit.api.records = 'records/1';
+    __exhibit.api.record  = 'record';
+    __exhibit.id = 1;
   });
 
   it('should form url with id when id is set', function() {
 
     // --------------------------------------------------------------------
     // When the `id` attribute is populated on the model, the model's url
-    // should point to `record/:id`.
+    // should point to `record/:record_id`.
     // --------------------------------------------------------------------
 
     model.set('id', 1);
@@ -31,14 +33,14 @@ describe('Record Model', function() {
 
   });
 
-  it('should form url without id when id is not set', function() {
+  it('should form url with collection id when id is not set', function() {
 
     // --------------------------------------------------------------------
     // When the `id` attribute is not populated on the model, the model's
-    // url should point to `record`.
+    // url should point to `records/:collection_id`.
     // --------------------------------------------------------------------
 
-    expect(model.url()).toEqual('record');;
+    expect(model.url()).toEqual('records/1');
 
   });
 
