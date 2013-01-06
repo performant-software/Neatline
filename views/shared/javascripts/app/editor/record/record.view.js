@@ -77,11 +77,10 @@ Neatline.module('Editor.Record', function(
      */
     bindEvents: function() {
 
-      // TABS
+      // == TABS ==
       this.__ui.tabs.on('shown', _.bind(function(e) {
         this.hash = e.target.hash;
-        Neatline.execute(this._spatialTabActive() ?
-          'bubble:deactivate' : 'bubble:activate');
+        this.setBubbleStatus();
       }, this));
 
     },
@@ -102,21 +101,12 @@ Neatline.module('Editor.Record', function(
      * @param {Object} model: A form model.
      */
     show: function(model) {
-
       this.open = true;
-
-      // Publish the model and bind it to the form.
       Neatline.vent.trigger('editor:record:show', model);
       rivets.bind(this.$el, { record: model });
-
-      // If "Spatial" is active, turn off the bubble.
-      if (this._spatialTabActive()) {
-        Neatline.execute('bubble:deactivate');
-      }
-
+      this.setBubbleStatus();
       this.model = model;
       this.reset();
-
     },
 
 
@@ -124,16 +114,10 @@ Neatline.module('Editor.Record', function(
      * Close the form.
      */
     close: function() {
-
       this.open = false;
-
-      // Publish the model, activate and close the bubble.
       Neatline.vent.trigger('editor:record:close', this.model);
       Neatline.execute('bubble:activate');
-      Neatline.execute('bubble:thaw');
-
       this.model = null;
-
     },
 
 
@@ -154,6 +138,18 @@ Neatline.module('Editor.Record', function(
         modify: this._getModifyOptions(),
         poly:   this._getPolyOptions()
       });
+    },
+
+
+    /**
+     * Check to see if the "Spatial" tab is active. If so, deactivate the
+     * bubble; otherwise, (re)-activate it.
+     */
+    setBubbleStatus: function() {
+      Neatline.execute(this._spatialTabActive() ?
+        'bubble:deactivate' :
+        'bubble:activate'
+      );
     },
 
 

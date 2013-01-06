@@ -28,8 +28,9 @@ describe('Bubble Form Interaction', function() {
     layer = mapLayers[0]; feature = layer.features[0];
 
     els = {
-      spatial:  _t.vw.record.$('a[href="#record-form-spatial"]'),
       text:     _t.vw.record.$('a[href="#record-form-text"]'),
+      spatial:  _t.vw.record.$('a[href="#record-form-spatial"]'),
+      style:    _t.vw.record.$('a[href="#record-form-style"]'),
       close:    _t.vw.record.$('a[name="close"]')
     };
 
@@ -134,7 +135,7 @@ describe('Bubble Form Interaction', function() {
 
   });
 
-  it('should deactivate bubble on form open w/ spatial tab', function() {
+  it('should deactivate bubble on open w/ spatial tab', function() {
 
     // --------------------------------------------------------------------
     // If the form is opened with the spatial tab already selected as the
