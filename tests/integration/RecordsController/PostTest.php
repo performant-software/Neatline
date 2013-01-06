@@ -11,7 +11,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class Neatline_RecordsControllerTest_Get
+class Neatline_RecordsControllerTest_Post
     extends Neatline_Test_AppTestCase
 {
 
@@ -35,26 +35,8 @@ class Neatline_RecordsControllerTest_Get
         // Check code.
         $this->assertResponseCode(200);
 
-        // Check for keys.
-        $this->assertObjectHasAttribute('id',               $response);
-        $this->assertObjectHasAttribute('item_id',          $response);
-        $this->assertObjectHasAttribute('title',            $response);
-        $this->assertObjectHasAttribute('body',             $response);
-        $this->assertObjectHasAttribute('slug',             $response);
-        $this->assertObjectHasAttribute('vector_color',     $response);
-        $this->assertObjectHasAttribute('stroke_color',     $response);
-        $this->assertObjectHasAttribute('select_color',     $response);
-        $this->assertObjectHasAttribute('vector_opacity',   $response);
-        $this->assertObjectHasAttribute('select_opacity',   $response);
-        $this->assertObjectHasAttribute('stroke_opacity',   $response);
-        $this->assertObjectHasAttribute('image_opacity',    $response);
-        $this->assertObjectHasAttribute('stroke_width',     $response);
-        $this->assertObjectHasAttribute('point_radius',     $response);
-        $this->assertObjectHasAttribute('point_image',      $response);
-        $this->assertObjectHasAttribute('min_zoom',         $response);
-        $this->assertObjectHasAttribute('max_zoom',         $response);
-        $this->assertObjectHasAttribute('map_focus',        $response);
-        $this->assertObjectHasAttribute('coverage',         $response);
+        // Check for non-null id.
+        $this->assertNotNull($response->id);
 
     }
 

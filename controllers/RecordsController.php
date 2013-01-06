@@ -93,6 +93,17 @@ class Neatline_RecordsController
     public function postAction()
     {
 
+        // Get the exhibit.
+        $__exhibits = $this->_helper->db->getTable('NeatlineExhibit');
+        $exhibit = $__exhibits->find($this->_request->id);
+
+        // Create record.
+        $record = new NeatlineRecord($exhibit);
+        $record->save();
+
+        // Echo the JSON.
+        echo Zend_Json::encode($record->buildJsonData());
+
     }
 
 
