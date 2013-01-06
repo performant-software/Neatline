@@ -126,9 +126,7 @@ describe('Record Form Open', function() {
     // --------------------------------------------------------------------
 
     // Trigger click on Record 1 feature.
-    console.log('BEFORE');
     _t.clickOnMapFeature(mapLayers[0], feature1);
-    console.log('AFTER');
 
     // Check for form.
     expect(_t.el.editor).toContain(_t.el.record);

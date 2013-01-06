@@ -53,7 +53,6 @@ Neatline.module('Editor.Record', function(
       // Initialize state.
       this.setDefaultTab();
       this.open = false;
-      console.log('form init');
 
     },
 
@@ -73,7 +72,6 @@ Neatline.module('Editor.Record', function(
      * @param {Object} model: A form model.
      */
     show: function(model) {
-      console.log('form show');
       this.open = true;
       Neatline.vent.trigger('editor:record:show', model);
       rivets.bind(this.$el, { record: model });

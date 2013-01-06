@@ -20,7 +20,6 @@ Neatline.module('Editor.Record', function(
    * @return {Boolean}: True if the form is open.
    */
   Neatline.reqres.addHandler('editor:record:isOpen?', function() {
-    console.log('reqres check');
     return Record.__view.open;
   });
 

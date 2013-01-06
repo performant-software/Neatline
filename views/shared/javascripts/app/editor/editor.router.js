@@ -76,7 +76,6 @@ Neatline.module('Editor', { startWithParent: false,
      * @param {String} id: The record id.
      */
     showRecordForm: function(id) {
-      console.log('#records/:id');
       id = parseInt(id, 10);
       Neatline.vent.trigger('editor:router:#records/:id', id);
       this.views.record.showIn(this.ui.editor);
