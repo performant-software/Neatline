@@ -146,33 +146,30 @@ describe('Record Form Delete', function() {
 
   });
 
-  // it('should remove the model from the map collection', function() {
+  it('should remove the model from the map collection', function() {
 
-  //   // --------------------------------------------------------------------
-  //   // When a record is deleted, the model for the record should be
-  //   // removed from the map records collection, the layer for the record
-  //   // should be removed immediately from the map, and the layer should
-  //   // be removed from the `layers` tracker array on the map view.
-  //   // --------------------------------------------------------------------
+    // --------------------------------------------------------------------
+    // When a record is deleted, the model for the record should be
+    // removed from the map records collection, the layer for the record
+    // should be removed immediately from the map, and the layer should
+    // be removed from the `layers` tracker array on the map view.
+    // --------------------------------------------------------------------
 
-  //   // Capture the form model.
-  //   var model = _t.formView.model;
+    // Capture the form model.
+    var model = _t.vw.record.model;
 
-  //   // Click on "Delete", then "Yes, delete".
-  //   _t.formView.deleteButton.trigger('click');
-  //   _t.formView.confirmButton.trigger('click');
-  //   _t.respondLast200('');
+    // Delete, confirm.
+    els.delete1.trigger('click');
+    els.delete2.trigger('click');
+    _t.respondLast200('');
 
-  //   // Model absent from records collection.
-  //   expect(_t.mapColl.get(id)).toBeUndefined();
+    // Layer removed from map.
+    expect(_t.vw.map.getLayerByModel(model)).toBeUndefined();
 
-  //   // Layer removed from map.
-  //   expect(_t.mapView.getLayerByModel(model)).toBeUndefined();
+    // Layer removed from `layers` tracker.
+    expect(_.find(_t.vw.map.layers, function(layer) {
+      return layer.nId == id; })).toBeUndefined();
 
-  //   // Layer removed from `layers` tracker.
-  //   expect(_.find(_t.mapView.layers, function(layer) {
-  //     return layer.nId == id; })).toBeUndefined();
-
-  // });
+  });
 
 });

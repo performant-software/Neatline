@@ -41,25 +41,26 @@ Neatline.module('Editor.Map', { startWithParent: false,
    *
    * @param {Object} settings: The new form settings.
    */
-  var update = function(settings) {
+  var updateEdit = function(settings) {
     Map.__view.update(settings);
   };
 
 
   /**
-   * When a record is deleted, purge it from the collection and map.
+   * Update the map edit controls.
    *
-   * @param {Object} model: The deleted record.
+   * @param {Object} model: The record model.
    */
-  // Neatline.vent.on('editor:form:delete', function(model) {
-  //   Map.__collection.remove(model);
-  //   Map.__view.removeLayerByModel(model);
-  // });
+  var deleteLayer = function(model) {
+    Map.__collection.remove(model);
+    Map.__view.removeLayerByModel(model);
+  };
 
 
-  Neatline.vent.on('editor:record:show', startEdit);
+  Neatline.vent.on('editor:record:show',  startEdit);
+  Neatline.vent.on('editor:record:delete', deleteLayer);
   Neatline.vent.on('editor:record:close', endEdit);
-  Neatline.vent.on('editor:record:update', update);
+  Neatline.vent.on('editor:record:update', updateEdit);
 
 
 }});

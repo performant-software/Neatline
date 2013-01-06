@@ -162,14 +162,19 @@ Neatline.module('Editor.Record', function(
      * Save the record.
      */
     save: function() {
+
       this.model.save(null, {
+
         success: _.bind(function() {
           this._notifySuccess(STRINGS.record.save.success);
         }, this),
+
         error: _.bind(function() {
           this._notifyError(STRINGS.record.save.error);
         }, this)
+
       });
+
     },
 
 
@@ -177,16 +182,22 @@ Neatline.module('Editor.Record', function(
      * Delete the record.
      */
     delete: function() {
+
       this.model.destroy({
+
         success: _.bind(function() {
+          Neatline.vent.trigger('editor:record:delete', this.model);
           this._notifySuccess(STRINGS.record.delete.success);
           this.__ui.deleteModal.modal('hide');
           this.close();
         }, this),
+
         error: _.bind(function() {
           this._notifyError(STRINGS.record.delete.error);
         }, this)
+
       });
+
     },
 
 
