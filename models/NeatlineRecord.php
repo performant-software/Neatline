@@ -28,7 +28,9 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
     public $map_focus;          // VARCHAR(100) NULL
     public $map_zoom;           // INT(10) UNSIGNED NULL
 
-    private $styles = array();
+
+    protected $styles   = array();
+    protected $taggable = null;
 
 
     /**
@@ -40,33 +42,33 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
     public function __construct($exhibit = null, $item = null)
     {
         parent::__construct();
-        if (!is_null($exhibit)) $this->exhibit_id = $exhibit->id;
-        if (!is_null($item)) $this->item_id = $item->id;
+        if (!is_null($exhibit)) $this->exhibit_id   = $exhibit->id;
+        if (!is_null($item))    $this->item_id      = $item->id;
     }
 
 
     /**
-     * Set taggable style.
+     * Set attribute. If the property is a style (with a column prefixed
+     * by `_`), add it to the protected `styles` array.
      *
      * @param string $property The property.
      * @param mixed $value The value.
      */
-    public function setStyle($property, $value)
+    public function __set($property, $value)
     {
-        $prop = '_'.$property;
-        $this->styles[$prop] = $value;
+
     }
 
 
     /**
-     * Get a taggable style.
+     * Get attribute. If the property is a style (with a column prefixed
+     * by `_`), add the underscore to the property and get the value.
      *
-     * @param string $property The property.
+     * @param mixed $value The value.
      */
-    public function getStyle($property)
+    public function __get($property)
     {
-        $prop = '_'.$property;
-        return $this->$prop;
+
     }
 
 
@@ -95,7 +97,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
             );
         }
 
-        // Add styles.
+        // Merge styles.
         return array_merge ($fields, $this->styles);
 
     }
@@ -109,8 +111,8 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
      */
     public function setNotEmpty($field, $value)
     {
-        if (trim($value) == '') $this[$field] = null;
-        else $this[$field] = $value;
+        if (trim($value) == '') $this->$field = null;
+        else $this->$field = $value;
     }
 
 
@@ -240,6 +242,19 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
         $db->query($sql, array_merge($bind, $bind));
         return (int) $db->lastInsertId();
 
+    }
+
+
+    /**
+     * Get a list of taggable attributes.
+     *
+     * @return array $taggable The attributes.
+     */
+    public function getTaggable()
+    {
+        if (is_null($this->taggable)) {
+
+        }
     }
 
 

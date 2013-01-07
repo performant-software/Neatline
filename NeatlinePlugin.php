@@ -51,7 +51,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
 
             // Tags table.
             $sql = "ALTER TABLE `{$_db->prefix}neatline_tags`
-                    ADD COLUMN _{$attribute} {$type}";
+                    ADD COLUMN _{$attribute} TINYINT(1) DEFAULT 0";
             $_db->query($sql);
 
         } catch (Exception $e) {}
@@ -134,31 +134,22 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
         $this->_db->query($sql);
 
 
-        // Register styles.
-        self::addTaggableStyle('vector_color',
-            'TINYTEXT COLLATE utf8_unicode_ci NULL');
-        self::addTaggableStyle('stroke_color',
-            'TINYTEXT COLLATE utf8_unicode_ci NULL');
-        self::addTaggableStyle('select_color',
-            'TINYTEXT COLLATE utf8_unicode_ci NULL');
-        self::addTaggableStyle('point_image',
-            'TINYTEXT COLLATE utf8_unicode_ci NULL');
-        self::addTaggableStyle('vector_opacity',
-            'INT(10) UNSIGNED NULL');
-        self::addTaggableStyle('select_opacity',
-            'INT(10) UNSIGNED NULL');
-        self::addTaggableStyle('stroke_opacity',
-            'INT(10) UNSIGNED NULL');
-        self::addTaggableStyle('image_opacity',
-            'INT(10) UNSIGNED NULL');
-        self::addTaggableStyle('stroke_width',
-            'INT(10) UNSIGNED NULL');
-        self::addTaggableStyle('point_radius',
-            'INT(10) UNSIGNED NULL');
-        self::addTaggableStyle('max_zoom',
-            'INT(10) UNSIGNED NULL');
-        self::addTaggableStyle('min_zoom',
-            'INT(10) UNSIGNED NULL');
+        // Add styles.
+        // -----------
+        $text   = 'TINYTEXT COLLATE utf8_unicode_ci NULL';
+        $int    = 'INT(10) UNSIGNED NULL';
+        self::addTaggableStyle('vector_color',      $text);
+        self::addTaggableStyle('stroke_color',      $text);
+        self::addTaggableStyle('select_color',      $text);
+        self::addTaggableStyle('point_image',       $text);
+        self::addTaggableStyle('vector_opacity',    $int);
+        self::addTaggableStyle('select_opacity',    $int);
+        self::addTaggableStyle('stroke_opacity',    $int);
+        self::addTaggableStyle('image_opacity',     $int);
+        self::addTaggableStyle('stroke_width',      $int);
+        self::addTaggableStyle('point_radius',      $int);
+        self::addTaggableStyle('max_zoom',          $int);
+        self::addTaggableStyle('min_zoom',          $int);
 
 
     }

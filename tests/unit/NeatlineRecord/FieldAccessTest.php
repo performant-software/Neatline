@@ -71,6 +71,8 @@ class Neatline_NeatlineRecordTest_FieldAccess
     public function testStyleAccess()
     {
 
+        // print_r($this->db->describeTable('omeka_neatline_records'));
+
         // Create a record.
         $record = $this->__record();
 
