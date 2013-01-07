@@ -15,7 +15,7 @@ Neatline.module('Editor.Record', function(
 
 
   /**
-   * Show a record form.
+   * Show form for an existing record.
    *
    * @param {Number} id: The record id.
    */

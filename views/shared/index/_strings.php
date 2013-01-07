@@ -23,6 +23,10 @@
       delete: {
         success: '<?php echo __('The record was deleted successfully!'); ?>',
         error: '<?php echo __('There was an error; the record was not deleted.'); ?>'
+      },
+      add: {
+        success: '<?php echo __('New record successfully successfully!'); ?>',
+        error: '<?php echo __('There was an error; a new record was not created.'); ?>'
       }
     }
   };
