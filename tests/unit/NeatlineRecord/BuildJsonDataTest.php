@@ -25,9 +25,12 @@ class Neatline_NeatlineRecordTest_BuildJsonData
     public function testBuildJsonData()
     {
 
-        // Create exhibit and record.
+        // Create exhibit and item.
         $exhibit = $this->__exhibit();
-        $record = new NeatlineRecord($exhibit);
+        $item = $this->__item();
+
+        // Create record.
+        $record = new NeatlineRecord($exhibit, $item);
 
         // Text:
         $record->title              = '1';
@@ -52,46 +55,34 @@ class Neatline_NeatlineRecordTest_BuildJsonData
         $record->map_active         = 0;
         $record->map_focus          = '16';
         $record->map_zoom           = 17;
-        $record->coverage           = 'POINT(1 8)';
+        $record->coverage           = 'POINT(1 1)';
         $record->save();
 
         // Construct the array.
         $data = $record->buildJsonData();
 
-        $this->assertEquals($data,
-            array(
-
-                // Relations:
-                'id'                => $record->id,
-                'item_id'           => $record->item_id,
-
-                // Text:
-                'title'             => '1',
-                'body'              => '2',
-                'slug'              => '3',
-
-                // Styles:
-                'vector_color'      => '4',
-                'stroke_color'      => '5',
-                'select_color'      => '6',
-                'vector_opacity'    => 7,
-                'select_opacity'    => 8,
-                'stroke_opacity'    => 9,
-                'image_opacity'     => 10,
-                'stroke_width'      => 11,
-                'point_radius'      => 12,
-                'point_image'       => '13',
-                'min_zoom'          => 14,
-                'max_zoom'          => 15,
-
-                // Map:
-                'map_active'        => 0,
-                'map_focus'         => '16',
-                'map_zoom'          => 17,
-                'coverage'          => 'POINT(1 8)'
-
-            )
-        );
+        // Check result.
+        $this->assertEquals($data['id'],                $record->id);
+        $this->assertEquals($data['item_id'],           $item->id);
+        $this->assertEquals($data['title'],             '1');
+        $this->assertEquals($data['body'],              '2');
+        $this->assertEquals($data['slug'],              '3');
+        $this->assertEquals($data['vector_color'],      '4');
+        $this->assertEquals($data['stroke_color'],      '5');
+        $this->assertEquals($data['select_color'],      '6');
+        $this->assertEquals($data['vector_opacity'],    7);
+        $this->assertEquals($data['select_opacity'],    8);
+        $this->assertEquals($data['stroke_opacity'],    9);
+        $this->assertEquals($data['image_opacity'],     10);
+        $this->assertEquals($data['stroke_width'],      11);
+        $this->assertEquals($data['point_radius'],      12);
+        $this->assertEquals($data['point_image'],       '13');
+        $this->assertEquals($data['min_zoom'],          14);
+        $this->assertEquals($data['max_zoom'],          15);
+        $this->assertEquals($data['map_active'],        0);
+        $this->assertEquals($data['map_focus'],         '16');
+        $this->assertEquals($data['map_zoom'],          17);
+        $this->assertEquals($data['coverage'],          'POINT(1 1)');
 
     }
 

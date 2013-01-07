@@ -53,9 +53,9 @@ class Neatline_NeatlineRecordTableTest_QueryRecord
         $record->max_zoom           = 15;
 
         // Spatial:
-        $record->map_active         = 16;
-        $record->map_focus          = '17';
-        $record->map_zoom           = 18;
+        $record->map_active         = 0;
+        $record->map_focus          = '16';
+        $record->map_zoom           = 17;
         $record->coverage           = 'POINT(1 1)';
 
         // Save.
@@ -65,35 +65,27 @@ class Neatline_NeatlineRecordTableTest_QueryRecord
         $records = $this->_recordsTable->queryRecord($record->id);
 
         // Check result.
-        $this->assertEquals(
-            $records, array(
-
-                'id'                => $record->id,
-                'item_id'           => $item->id,
-
-                'title'             => '1',
-                'body'              => '2',
-                'slug'              => '3',
-
-                'vector_color'      => '4',
-                'stroke_color'      => '5',
-                'select_color'      => '6',
-                'vector_opacity'    => 7,
-                'select_opacity'    => 8,
-                'stroke_opacity'    => 9,
-                'image_opacity'     => 10,
-                'stroke_width'      => 11,
-                'point_radius'      => 12,
-                'point_image'       => '13',
-                'min_zoom'          => 14,
-                'max_zoom'          => 15,
-
-                'map_active'        => 16,
-                'map_focus'         => '17',
-                'map_zoom'          => 18,
-                'coverage'          => 'POINT(1 1)'
-            )
-        );
+        $this->assertEquals($records['id'],                 $record->id);
+        $this->assertEquals($records['item_id'],            $item->id);
+        $this->assertEquals($records['title'],              '1');
+        $this->assertEquals($records['body'],               '2');
+        $this->assertEquals($records['slug'],               '3');
+        $this->assertEquals($records['vector_color'],       '4');
+        $this->assertEquals($records['stroke_color'],       '5');
+        $this->assertEquals($records['select_color'],       '6');
+        $this->assertEquals($records['vector_opacity'],     7);
+        $this->assertEquals($records['select_opacity'],     8);
+        $this->assertEquals($records['stroke_opacity'],     9);
+        $this->assertEquals($records['image_opacity'],      10);
+        $this->assertEquals($records['stroke_width'],       11);
+        $this->assertEquals($records['point_radius'],       12);
+        $this->assertEquals($records['point_image'],        '13');
+        $this->assertEquals($records['min_zoom'],           14);
+        $this->assertEquals($records['max_zoom'],           15);
+        $this->assertEquals($records['map_active'],         0);
+        $this->assertEquals($records['map_focus'],          '16');
+        $this->assertEquals($records['map_zoom'],           17);
+        $this->assertEquals($records['coverage'],           'POINT(1 1)');
 
     }
 

@@ -138,45 +138,11 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
     /**
      * Assemble record data for the front-end application.
      *
-     * @param string $coverage The coverage as plaintext WKT.
-     * @return array The map JSON.
+     * @return array The data array.
      **/
-    public function buildJsonData($coverage=null) {
-
-        $data = array(
-
-            'id'                => $this->id,
-            'item_id'           => $this->item_id,
-
-            // TEXT
-            'title'             => $this->title,
-            'body'              => $this->body,
-            'slug'              => $this->slug,
-
-            // STYLE
-            'vector_color'      => $this->vector_color,
-            'stroke_color'      => $this->stroke_color,
-            'select_color'      => $this->select_color,
-            'vector_opacity'    => $this->vector_opacity,
-            'select_opacity'    => $this->select_opacity,
-            'stroke_opacity'    => $this->stroke_opacity,
-            'image_opacity'     => $this->image_opacity,
-            'stroke_width'      => $this->stroke_width,
-            'point_radius'      => $this->point_radius,
-            'point_image'       => $this->point_image,
-            'min_zoom'          => $this->min_zoom,
-            'max_zoom'          => $this->max_zoom,
-
-            // SPATIAL
-            'map_active'        => $this->map_active,
-            'map_focus'         => $this->map_focus,
-            'map_zoom'          => $this->map_zoom,
-            'coverage'          => $this->coverage
-
-        );
-
-        return $data;
-
+    public function buildJsonData() {
+        $fields = parent::toArray();
+        return array_merge($fields, $this->styles);
     }
 
 
