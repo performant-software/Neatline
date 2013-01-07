@@ -27,37 +27,8 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
 
     // Filters.
     protected $_filters = array(
-        'admin_navigation_main',
-        'neatline_styles'
+        'admin_navigation_main'
     );
-
-
-    /**
-     * Register a taggable attribute.
-     *
-     * @param string $attribute The attribute name.
-     * @param string $type The column definition.
-     */
-    public static function addStyle($attribute, $type)
-    {
-
-        $_db = get_db();
-
-        try {
-
-            // Records table.
-            $sql = "ALTER TABLE `{$_db->prefix}neatline_records`
-                    ADD COLUMN _{$attribute} {$type}";
-            $_db->query($sql);
-
-            // Tags table.
-            $sql = "ALTER TABLE `{$_db->prefix}neatline_tags`
-                    ADD COLUMN _{$attribute} TINYINT(1) DEFAULT 0";
-            $_db->query($sql);
-
-        } catch (Exception $e) {}
-
-    }
 
 
     /**
@@ -68,7 +39,6 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
 
         // Exhibits table.
         // ---------------
-
         $sql = "CREATE TABLE IF NOT EXISTS
             `{$this->_db->prefix}neatline_exhibits` (
 
@@ -94,7 +64,6 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
 
         // Records table.
         // --------------
-
         $sql = "CREATE TABLE IF NOT EXISTS
             `{$this->_db->prefix}neatline_records` (
 
@@ -112,6 +81,32 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
             `map_focus`         VARCHAR(100) NULL,
             `map_zoom`          INT(10) UNSIGNED NULL,
 
+            `vector_color`      TINYTEXT COLLATE utf8_unicode_ci NULL,
+            `stroke_color`      TINYTEXT COLLATE utf8_unicode_ci NULL,
+            `select_color`      TINYTEXT COLLATE utf8_unicode_ci NULL,
+            `vector_opacity`    INT(10) UNSIGNED NULL,
+            `select_opacity`    INT(10) UNSIGNED NULL,
+            `stroke_opacity`    INT(10) UNSIGNED NULL,
+            `image_opacity`     INT(10) UNSIGNED NULL,
+            `stroke_width`      INT(10) UNSIGNED NULL,
+            `point_radius`      INT(10) UNSIGNED NULL,
+            `point_image`       TINYTEXT COLLATE utf8_unicode_ci NULL,
+            `max_zoom`          INT(10) UNSIGNED NULL,
+            `min_zoom`          INT(10) UNSIGNED NULL,
+
+            `_vector_color`     INT(10) UNSIGNED NULL,
+            `_stroke_color`     INT(10) UNSIGNED NULL,
+            `_select_color`     INT(10) UNSIGNED NULL,
+            `_vector_opacity`   INT(10) UNSIGNED NULL,
+            `_select_opacity`   INT(10) UNSIGNED NULL,
+            `_stroke_opacity`   INT(10) UNSIGNED NULL,
+            `_image_opacity`    INT(10) UNSIGNED NULL,
+            `_stroke_width`     INT(10) UNSIGNED NULL,
+            `_point_radius`     INT(10) UNSIGNED NULL,
+            `_point_image`      INT(10) UNSIGNED NULL,
+            `_max_zoom`         INT(10) UNSIGNED NULL,
+            `_min_zoom`         INT(10) UNSIGNED NULL,
+
              PRIMARY KEY        (`id`),
              FULLTEXT KEY       (`title`, `slug`, `body`),
              SPATIAL INDEX      (`coverage`)
@@ -123,7 +118,6 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
 
         // Tags table.
         // -----------
-
         $sql = "CREATE TABLE IF NOT EXISTS
             `{$this->_db->prefix}neatline_tags` (
 
@@ -131,31 +125,24 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
             `exhibit_id`        INT(10) UNSIGNED NOT NULL,
             `tag`               TINYTEXT COLLATE utf8_unicode_ci NULL,
 
+            `vector_color`      TINYTEXT COLLATE utf8_unicode_ci NULL,
+            `stroke_color`      TINYTEXT COLLATE utf8_unicode_ci NULL,
+            `select_color`      TINYTEXT COLLATE utf8_unicode_ci NULL,
+            `vector_opacity`    INT(10) UNSIGNED NULL,
+            `select_opacity`    INT(10) UNSIGNED NULL,
+            `stroke_opacity`    INT(10) UNSIGNED NULL,
+            `image_opacity`     INT(10) UNSIGNED NULL,
+            `stroke_width`      INT(10) UNSIGNED NULL,
+            `point_radius`      INT(10) UNSIGNED NULL,
+            `point_image`       TINYTEXT COLLATE utf8_unicode_ci NULL,
+            `max_zoom`          INT(10) UNSIGNED NULL,
+            `min_zoom`          INT(10) UNSIGNED NULL,
+
              PRIMARY KEY        (`id`)
 
         ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
 
         $this->_db->query($sql);
-
-
-        // Add styles.
-        // -----------
-
-        $text   = 'TINYTEXT COLLATE utf8_unicode_ci NULL';
-        $int    = 'INT(10) UNSIGNED NULL';
-
-        self::addStyle('vector_color',      $text);
-        self::addStyle('stroke_color',      $text);
-        self::addStyle('select_color',      $text);
-        self::addStyle('point_image',       $text);
-        self::addStyle('vector_opacity',    $int);
-        self::addStyle('select_opacity',    $int);
-        self::addStyle('stroke_opacity',    $int);
-        self::addStyle('image_opacity',     $int);
-        self::addStyle('stroke_width',      $int);
-        self::addStyle('point_radius',      $int);
-        self::addStyle('max_zoom',          $int);
-        self::addStyle('min_zoom',          $int);
 
 
     }
@@ -217,31 +204,6 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
     {
         $tabs[] = array('label' => 'Neatline', 'uri' => url('neatline'));
         return $tabs;
-    }
-
-
-    /**
-     * Add link to main admin menu bar.
-     *
-     * @param array $styles Array taggable styles.
-     * @return array The modified style array.
-     */
-    public function filterNeatlineStyles($styles)
-    {
-        return array_merge($styles, array(
-            'vector_color',
-            'stroke_color',
-            'select_color',
-            'point_image',
-            'vector_opacity',
-            'select_opacity',
-            'stroke_opacity',
-            'image_opacity',
-            'stroke_width',
-            'point_radius',
-            'max_zoom',
-            'min_zoom'
-        ));
     }
 
 

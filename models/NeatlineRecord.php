@@ -28,9 +28,31 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
     public $map_focus;          // VARCHAR(100) NULL
     public $map_zoom;           // INT(10) UNSIGNED NULL
 
+    public $vector_color;       // TINYTEXT COLLATE utf8_unicode_ci NULL
+    public $stroke_color;       // TINYTEXT COLLATE utf8_unicode_ci NULL
+    public $select_color;       // TINYTEXT COLLATE utf8_unicode_ci NULL
+    public $vector_opacity;     // INT(10) UNSIGNED NULL
+    public $select_opacity;     // INT(10) UNSIGNED NULL
+    public $stroke_opacity;     // INT(10) UNSIGNED NULL
+    public $image_opacity;      // INT(10) UNSIGNED NULL
+    public $stroke_width;       // INT(10) UNSIGNED NULL
+    public $point_radius;       // INT(10) UNSIGNED NULL
+    public $point_image;        // TINYTEXT COLLATE utf8_unicode_ci NULL
+    public $max_zoom;           // INT(10) UNSIGNED NULL
+    public $min_zoom;           // INT(10) UNSIGNED NULL
 
-    protected $styles   = array();
-    protected $taggable = array();
+    public $_vector_color;      // INT(10) UNSIGNED NULL
+    public $_stroke_color;      // INT(10) UNSIGNED NULL
+    public $_select_color;      // INT(10) UNSIGNED NULL
+    public $_vector_opacity;    // INT(10) UNSIGNED NULL
+    public $_select_opacity;    // INT(10) UNSIGNED NULL
+    public $_stroke_opacity;    // INT(10) UNSIGNED NULL
+    public $_image_opacity;     // INT(10) UNSIGNED NULL
+    public $_stroke_width;      // INT(10) UNSIGNED NULL
+    public $_point_radius;      // INT(10) UNSIGNED NULL
+    public $_point_image;       // INT(10) UNSIGNED NULL
+    public $_max_zoom;          // INT(10) UNSIGNED NULL
+    public $_min_zoom;          // INT(10) UNSIGNED NULL
 
 
     /**
@@ -42,35 +64,8 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
     public function __construct($exhibit = null, $item = null)
     {
         parent::__construct();
-        if (!is_null($exhibit)) $this->exhibit_id   = $exhibit->id;
-        if (!is_null($item))    $this->item_id      = $item->id;
-    }
-
-
-    /**
-     * Set attribute. If the property is a style (with a column prefixed
-     * by `_`), add it to the protected `styles` array.
-     *
-     * @param string $property The property.
-     * @param mixed $value The value.
-     */
-    public function __set($property, $value)
-    {
-        $this->getTaggable();
-        // TODO|dev
-    }
-
-
-    /**
-     * Get attribute. If the property is a style (with a column prefixed
-     * by `_`), add the underscore to the property and get the value.
-     *
-     * @param mixed $value The value.
-     */
-    public function __get($property)
-    {
-        $this->getTaggable();
-        // TODO|dev
+        if (!is_null($exhibit)) $this->exhibit_id = $exhibit->id;
+        if (!is_null($item)) $this->item_id = $item->id;
     }
 
 
@@ -88,7 +83,6 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
 
         $fields = parent::toArray();
 
-        // Add coverage.
         if (!empty($fields['coverage'])) {
             $fields['coverage'] = new Zend_Db_Expr(
                 "GeomFromText('{$fields['coverage']}')"
@@ -99,8 +93,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
             );
         }
 
-        // Merge styles.
-        return array_merge ($fields, $this->styles);
+        return $fields;
 
     }
 
@@ -113,8 +106,8 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
      */
     public function setNotEmpty($field, $value)
     {
-        if (trim($value) == '') $this->$field = null;
-        else $this->$field = $value;
+        if (trim($value) == '') $this[$field] = null;
+        else $this[$field] = $value;
     }
 
 
@@ -244,21 +237,6 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
         $db->query($sql, array_merge($bind, $bind));
         return (int) $db->lastInsertId();
 
-    }
-
-
-    /**
-     * Get a list of taggable attributes.
-     *
-     * @return array $taggable The attributes.
-     */
-    public function getTaggable()
-    {
-        if (empty($this->taggable)) {
-            $this->taggable = apply_filters(
-                'neatline_styles', $this->taggable
-            );
-        }
     }
 
 
