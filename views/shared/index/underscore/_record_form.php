@@ -20,7 +20,7 @@
   <!-- Close button. -->
   <a name="close" class="close">&times;</a>
 
-  <p class="lead" data-text="record.title"></p>
+  <p class="lead" data-text="record.title | recordTitle"></p>
 
   <ul class="nav nav-pills">
     <li>

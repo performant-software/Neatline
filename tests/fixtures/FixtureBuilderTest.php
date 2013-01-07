@@ -19,13 +19,10 @@ class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
 
 
     /**
-     * --------------------------------------------------------------------
      * Records JSON for map (INDEX and GET responses).
-     * --------------------------------------------------------------------
      */
     public function testRecordsJson()
     {
-
 
         // Exhibit and records.
         $exhibit = $this->__exhibit();
@@ -43,6 +40,9 @@ class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
         $record1->body            = 'body1';
         $record2->body            = 'body2';
         $record3->body            = 'body3';
+        $record1->tags            = 'tags1';
+        $record2->tags            = 'tags2';
+        $record3->tags            = 'tags3';
         $record1->coverage        = 'POINT(1 2)';
         $record2->coverage        = 'POINT(3 4)';
         $record3->coverage        = 'POINT(5 6)';
@@ -120,18 +120,14 @@ class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
         $this->writeFixture('neatline/exhibits/'.$exhibit->id,
             'coll.removed.json');
 
-
     }
 
 
     /**
-     * --------------------------------------------------------------------
      * JSON for individual records (GET response).
-     * --------------------------------------------------------------------
      */
     public function testRecordJson()
     {
-
 
         // Exhibit and record.
         $exhibit = $this->__exhibit();
@@ -177,14 +173,23 @@ class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
         $this->writeFixture('neatline/records/'.$record->id,
             'record.inactive.json');
 
-
     }
 
 
     /**
-     * --------------------------------------------------------------------
+     * JSON for new record (POST response).
+     */
+    public function testNewRecordJson()
+    {
+        $exhibit = $this->__exhibit();
+        $this->request->setMethod('POST');
+        $this->writeFixture('neatline/exhibits/'.$exhibit->id,
+            'record.add.json');
+    }
+
+
+    /**
      * Neatline partial markup.
-     * --------------------------------------------------------------------
      */
     public function testNeatlinePartial()
     {

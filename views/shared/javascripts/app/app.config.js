@@ -41,3 +41,14 @@ rivets.configure({
 rivets.formatters.recordLink = function(id) {
   return '#records/'+id;
 };
+
+
+/**
+ * Construct the URL fragment for a record edit form.
+ *
+ * @param {Mixed} title: The record title.
+ * @return {String}: The placeholder, if the title is null .
+ */
+rivets.formatters.recordTitle = function(title) {
+  return title ? title : STRINGS.record.placeholders.title;
+};

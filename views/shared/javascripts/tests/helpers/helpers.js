@@ -167,7 +167,8 @@ _t.loadJsonFixtures = function() {
 
     records: {
       standard: readFixtures('record.default.json'),
-      inactive: readFixtures('record.inactive.json')
+      inactive: readFixtures('record.inactive.json'),
+      add:      readFixtures('record.add.json'),
     }
 
   };
@@ -326,6 +327,7 @@ _t.getRecordFormElements = function(json) {
     title:          _t.el.record.find('textarea[name="title"]'),
     body:           _t.el.record.find('textarea[name="body"]'),
     coverage:       _t.el.record.find('textarea[name="coverage"]'),
+    tags:           _t.el.record.find('input[name="tags"]'),
     vectorColor:    _t.el.record.find('input[name="vector-color"]'),
     strokeColor:    _t.el.record.find('input[name="stroke-color"]'),
     selectColor:    _t.el.record.find('input[name="select-color"]'),
@@ -430,6 +432,14 @@ _t.respondLast500 = function() {
  */
 _t.respondDefaultRecords = function() {
   this.respondLast200(this.json.collections.standard);
+};
+
+
+/**
+ * Respond 200 with the new record JSON.
+ */
+_t.respondNewRecord = function() {
+  this.respondLast200(this.json.records.add);
 };
 
 

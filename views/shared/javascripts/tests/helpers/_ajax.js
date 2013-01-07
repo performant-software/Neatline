@@ -86,3 +86,11 @@ _t.respondLast500 = function() {
 _t.respondDefaultRecords = function() {
   this.respondLast200(this.json.collections.standard);
 };
+
+
+/**
+ * Respond 200 with the new record JSON.
+ */
+_t.respondNewRecord = function() {
+  this.respondLast200(this.json.records.add);
+};

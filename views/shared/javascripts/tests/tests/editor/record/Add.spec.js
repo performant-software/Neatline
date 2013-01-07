@@ -35,10 +35,28 @@ describe('Record Form Add Record', function() {
 
     // "New Record."
     _t.click(els.add);
+    _t.respondNewRecord();
 
     // Check for form, no records.
     expect(_t.el.editor).toContain(_t.el.record);
     expect(_t.el.editor).not.toContain(_t.el.records);
+
+  });
+
+  it('should display placeholder in form header', function() {
+
+    // --------------------------------------------------------------------
+    // When an edit form is displayed for a record that has a null title
+    // (as is the case when a new record is created), a placeholder title
+    // should be displayed in the form header.
+    // --------------------------------------------------------------------
+
+    // "New Record."
+    _t.click(els.add);
+    _t.respondNewRecord();
+
+    // Check for placeholder.
+    expect(els.lead.text()).toEqual(STRINGS.record.placeholders.title);
 
   });
 
