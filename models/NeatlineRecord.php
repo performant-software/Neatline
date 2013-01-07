@@ -245,4 +245,22 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
     }
 
 
+    /**
+     * Propagate new values to records with shared tags.
+     */
+    public function afterSave()
+    {
+
+        $records    = $this->getTable('NeatlineRecord');
+        $tags       = $this->getTable('NeatlineTag');
+        $exhibit    = $this->getExhibit();
+
+        // Explode tags.
+        foreach (neatline_explodeTags($this->tags) as $t) {
+            $tag = $tags->getTagByName($exhibit, $t);
+        }
+
+    }
+
+
 }

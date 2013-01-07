@@ -81,6 +81,18 @@ function neatline_editorGlobals($exhibit)
 
 
 /**
+ * Explode a comma-delimited tag string.
+ *
+ * @param string $tags The raw string.
+ * @return array The array of tags.
+ */
+function neatline_explodeTags($tags)
+{
+    return explode(',', str_replace(' ', '', $tags));
+}
+
+
+/**
  * Return specific field for a neatline record.
  *
  * @param string $fieldname The model attribute name being requested.

@@ -45,8 +45,6 @@ class NeatlineRecordTable extends Omeka_Db_Table
     }
 
 
-
-
     /**
      * Construct data array for individual record.
      *
