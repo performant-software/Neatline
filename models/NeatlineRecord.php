@@ -30,7 +30,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
 
 
     protected $styles   = array();
-    protected $taggable = null;
+    protected $taggable = array();
 
 
     /**
@@ -56,7 +56,8 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
      */
     public function __set($property, $value)
     {
-
+        $this->getTaggable();
+        // TODO|dev
     }
 
 
@@ -68,7 +69,8 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
      */
     public function __get($property)
     {
-
+        $this->getTaggable();
+        // TODO|dev
     }
 
 
@@ -252,8 +254,10 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
      */
     public function getTaggable()
     {
-        if (is_null($this->taggable)) {
-
+        if (empty($this->taggable)) {
+            $this->taggable = apply_filters(
+                'neatline_styles', $this->taggable
+            );
         }
     }
 
