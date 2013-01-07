@@ -31,7 +31,7 @@ class Neatline_RecordsControllerTest_Index
         $record2 = $this->__record($exhibit);
 
         // Hit /records.
-        $this->dispatch('neatline/records/'.$exhibit->id);
+        $this->dispatch('neatline/exhibits/'.$exhibit->id);
 
         // Capture response.
         $response = json_decode($this->getResponse()->getBody('default'));

@@ -79,7 +79,7 @@ class Neatline_RecordsControllerTest_Put
         // Issue request.
         $this->writePut($values);
         $this->request->setMethod('PUT');
-        $this->dispatch('neatline/record/'.$record->id);
+        $this->dispatch('neatline/records/'.$record->id);
 
         // Reload the record.
         $record = $this->_recordsTable->find($record->id);

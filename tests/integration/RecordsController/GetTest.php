@@ -29,7 +29,7 @@ class Neatline_RecordsControllerTest_Get
         $record = $this->__record($exhibit);
 
         // Hit /records, capture response.
-        $this->dispatch('neatline/record/'.$record->id);
+        $this->dispatch('neatline/records/'.$record->id);
         $response = json_decode($this->getResponse()->getBody('default'));
 
         // Check code.

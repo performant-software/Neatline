@@ -83,7 +83,7 @@ describe('Map Incoming Events', function() {
 
       // Check request formation.
       expect(request.method).toEqual('GET');
-      expect(request.url).toEqual('/neatline/record/999');
+      expect(request.url).toEqual('/neatline/records/999');
 
       // Get focus and zoom.
       var center = _t.vw.map.map.getCenter();

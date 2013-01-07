@@ -37,7 +37,17 @@ Neatline.module('Editor.Record', function(
    * Show form for a new record.
    */
   var showNew = function() {
-    console.log('add');
+
+    // Create new record.
+    var record = new Neatline.Record.Model();
+
+    // Populate id.
+    record.save(null, {
+      success: function() {
+        console.log(record);
+      }
+    });
+
   };
 
   Neatline.commands.addHandler('editor:record:showNew', showNew);
