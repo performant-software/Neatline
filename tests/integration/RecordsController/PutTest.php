@@ -103,10 +103,7 @@ class Neatline_RecordsControllerTest_Put
         $this->assertEquals($record->map_active,        1);
         $this->assertEquals($record->map_focus,         '35');
         $this->assertEquals($record->map_zoom,          36);
-
-        // Check the coverage value.
-        $this->assertEquals($this->getCoverageAsText($record),
-            'POINT(37 37)');
+        $this->assertEquals($record->coverage,          'POINT(37 37)');
 
     }
 

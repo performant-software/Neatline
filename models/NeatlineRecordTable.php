@@ -25,7 +25,7 @@ class NeatlineRecordTable extends Omeka_Db_Table
     {
         $select = parent::getSelect();
         return $select->columns(array(
-            'wkt' => new Zend_Db_Expr('AsText(coverage)'))
+            'coverage' => new Zend_Db_Expr('AsText(coverage)'))
         );
     }
 
@@ -106,7 +106,7 @@ class NeatlineRecordTable extends Omeka_Db_Table
 
             // Construct record objects.
             foreach ($records as $record) {
-                $data[] = $record->buildJsonData($record->wkt);
+                $data[] = $record->buildJsonData();
             }
 
         }

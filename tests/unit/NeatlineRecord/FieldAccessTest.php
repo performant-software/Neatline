@@ -80,6 +80,7 @@ class Neatline_NeatlineRecordTest_FieldAccess
         $this->assertEquals($record->title,         '5');
         $this->assertEquals($record->body,          '6');
         $this->assertEquals($record->tags,          '7');
+        $this->assertEquals($record->coverage,      'POINT(1 1)');
         $this->assertEquals($record->map_active,    8);
         $this->assertEquals($record->map_focus,     '9');
         $this->assertEquals($record->map_zoom,      10);
@@ -111,11 +112,6 @@ class Neatline_NeatlineRecordTest_FieldAccess
         $this->assertEquals($record->_point_image,       32);
         $this->assertEquals($record->_max_zoom,          33);
         $this->assertEquals($record->_min_zoom,          34);
-
-        // Check the coverage value.
-        $this->assertEquals($this->getCoverageAsText($record),
-            'POINT(1 1)'
-        );
 
     }
 

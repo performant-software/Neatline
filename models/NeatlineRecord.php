@@ -55,6 +55,9 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
     public $_min_zoom;          // INT(10) UNSIGNED NULL
 
 
+    private $styles = array();
+
+
     /**
      * Set foreign keys.
      *
@@ -66,6 +69,18 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
         parent::__construct();
         if (!is_null($exhibit)) $this->exhibit_id = $exhibit->id;
         if (!is_null($item)) $this->item_id = $item->id;
+    }
+
+
+    /**
+     * Add a key-value pair to `attr`.
+     *
+     * @param string $name The attribute name.
+     * @param mixed $value The value.
+     */
+    public function __set($name, $value)
+    {
+        $this->styles[$name] = $value;
     }
 
 
@@ -83,6 +98,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
 
         $fields = parent::toArray();
 
+        // Add the coverage.
         if (!empty($fields['coverage'])) {
             $fields['coverage'] = new Zend_Db_Expr(
                 "GeomFromText('{$fields['coverage']}')"
@@ -171,7 +187,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
             'map_active'        => $this->map_active,
             'map_focus'         => $this->map_focus,
             'map_zoom'          => $this->map_zoom,
-            'coverage'          => $coverage
+            'coverage'          => $this->coverage
 
         );
 

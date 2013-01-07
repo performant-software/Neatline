@@ -52,10 +52,11 @@ class Neatline_NeatlineRecordTest_BuildJsonData
         $record->map_active         = 0;
         $record->map_focus          = '16';
         $record->map_zoom           = 17;
+        $record->coverage           = 'POINT(1 8)';
         $record->save();
 
         // Construct the array.
-        $data = $record->buildJsonData('18');
+        $data = $record->buildJsonData();
 
         $this->assertEquals($data,
             array(
@@ -87,7 +88,7 @@ class Neatline_NeatlineRecordTest_BuildJsonData
                 'map_active'        => 0,
                 'map_focus'         => '16',
                 'map_zoom'          => 17,
-                'coverage'          => '18'
+                'coverage'          => 'POINT(1 8)'
 
             )
         );

@@ -32,6 +32,34 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
 
 
     /**
+     * Register a taggable style attribute.
+     *
+     * @param string $name The column name.
+     * @param string $type The column definition.
+     */
+    public static function addStyle($name, $type)
+    {
+
+        $_db = get_db();
+
+        try {
+
+            // Records table.
+            $sql = "ALTER TABLE `{$_db->prefix}neatline_records`
+                    ADD COLUMN {$name} {$type}";
+            $_db->query($sql);
+
+            // Tags table.
+            $sql = "ALTER TABLE `{$_db->prefix}neatline_tags`
+                    ADD COLUMN {$name} TINYINT(1) DEFAULT 0";
+            $_db->query($sql);
+
+        } catch (Exception $e) {}
+
+    }
+
+
+    /**
      * Create tables.
      */
     public function hookInstall()
