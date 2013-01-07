@@ -83,8 +83,10 @@ class Neatline_ExhibitsController
         $record = new NeatlineRecord($exhibit);
         $record->save();
 
-        // Echo back the new data.
-        echo Zend_Json::encode($record->buildJsonData());
+        // Forward to records GET.
+        $this->_forward('get', 'records', 'neatline', array(
+            'id' => $record->id
+        ));
 
     }
 

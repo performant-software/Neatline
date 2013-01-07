@@ -16,6 +16,9 @@
 <script>
   STRINGS = {
     record: {
+      placeholders: {
+        title: '<?php echo __('[Untitled]'); ?>'
+      },
       save: {
         success: '<?php echo __('The record was saved successfully!'); ?>',
         error: '<?php echo __('There was an error; the record was not saved.'); ?>'

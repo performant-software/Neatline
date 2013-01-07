@@ -18,7 +18,8 @@ class Neatline_RecordsControllerTest_Post
 
     /**
      * --------------------------------------------------------------------
-     * POST should create a new record and echo a JSON object with the id.
+     * POST should create a new record and redirect to records/:id, which
+     * should respond with a JSON object with a non-null id and coverage.
      * --------------------------------------------------------------------
      */
     public function testPost()
@@ -37,8 +38,9 @@ class Neatline_RecordsControllerTest_Post
         $response = json_decode($this->getResponse()->getBody('default'));
         $this->assertResponseCode(200);
 
-        // Check for new id.
+        // Check for new id and coverage.
         $this->assertNotNull($response->id);
+        $this->assertNotNull($response->coverage);
         $this->assertEquals($c2, $c1+1);
 
     }

@@ -44,7 +44,7 @@ Neatline.module('Editor.Record', function(
     // Populate id.
     record.save(null, {
       success: function() {
-        console.log(record);
+        Record.__view.show(record);
       }
     });
 
