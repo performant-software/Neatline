@@ -18,11 +18,28 @@ class Neatline_RecordsControllerTest_Post
 
     /**
      * --------------------------------------------------------------------
-     * GET should create a new record and echo a JSON object with the id.
+     * POST should create a new record and echo a JSON object with the id.
      * --------------------------------------------------------------------
      */
     public function testPost()
     {
+
+        // Create exhibit.
+        $exhibit = $this->__exhibit();
+
+        // Hit /exhibits with POST.
+        $c1 = $this->_recordsTable->count();
+        $this->request->setMethod('POST');
+        $this->dispatch('neatline/exhibits/'.$exhibit->id);
+        $c2 = $this->_recordsTable->count();
+
+        // Capture response, check code.
+        $response = json_decode($this->getResponse()->getBody('default'));
+        $this->assertResponseCode(200);
+
+        // Check for new id.
+        $this->assertNotNull($response->id);
+        $this->assertEquals($c2, $c1+1);
 
     }
 
