@@ -28,31 +28,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
     public $map_focus;          // VARCHAR(100) NULL
     public $map_zoom;           // INT(10) UNSIGNED NULL
 
-    public $vector_color;       // TINYTEXT COLLATE utf8_unicode_ci NULL
-    public $stroke_color;       // TINYTEXT COLLATE utf8_unicode_ci NULL
-    public $select_color;       // TINYTEXT COLLATE utf8_unicode_ci NULL
-    public $vector_opacity;     // INT(10) UNSIGNED NULL
-    public $select_opacity;     // INT(10) UNSIGNED NULL
-    public $stroke_opacity;     // INT(10) UNSIGNED NULL
-    public $image_opacity;      // INT(10) UNSIGNED NULL
-    public $stroke_width;       // INT(10) UNSIGNED NULL
-    public $point_radius;       // INT(10) UNSIGNED NULL
-    public $point_image;        // TINYTEXT COLLATE utf8_unicode_ci NULL
-    public $max_zoom;           // INT(10) UNSIGNED NULL
-    public $min_zoom;           // INT(10) UNSIGNED NULL
-
-    public $_vector_color;      // INT(10) UNSIGNED NULL
-    public $_stroke_color;      // INT(10) UNSIGNED NULL
-    public $_select_color;      // INT(10) UNSIGNED NULL
-    public $_vector_opacity;    // INT(10) UNSIGNED NULL
-    public $_select_opacity;    // INT(10) UNSIGNED NULL
-    public $_stroke_opacity;    // INT(10) UNSIGNED NULL
-    public $_image_opacity;     // INT(10) UNSIGNED NULL
-    public $_stroke_width;      // INT(10) UNSIGNED NULL
-    public $_point_radius;      // INT(10) UNSIGNED NULL
-    public $_point_image;       // INT(10) UNSIGNED NULL
-    public $_max_zoom;          // INT(10) UNSIGNED NULL
-    public $_min_zoom;          // INT(10) UNSIGNED NULL
+    private $styles = array();
 
 
     /**
@@ -70,6 +46,31 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
 
 
     /**
+     * Set taggable style.
+     *
+     * @param string $property The property.
+     * @param mixed $value The value.
+     */
+    public function setStyle($property, $value)
+    {
+        $prop = '_'.$property;
+        $this->styles[$prop] = $value;
+    }
+
+
+    /**
+     * Get a taggable style.
+     *
+     * @param string $property The property.
+     */
+    public function getStyle($property)
+    {
+        $prop = '_'.$property;
+        return $this->$prop;
+    }
+
+
+    /**
      * Plug the MySQL expression for the coverage insert into the array
      * representation of the record used by `insert`. When `coverage` is
      * defined, form the expression from the value; when it is undefined,
@@ -83,6 +84,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
 
         $fields = parent::toArray();
 
+        // Add coverage.
         if (!empty($fields['coverage'])) {
             $fields['coverage'] = new Zend_Db_Expr(
                 "GeomFromText('{$fields['coverage']}')"
@@ -93,7 +95,8 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
             );
         }
 
-        return $fields;
+        // Add styles.
+        return array_merge ($fields, $this->styles);
 
     }
 

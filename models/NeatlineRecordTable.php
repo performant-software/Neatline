@@ -125,8 +125,8 @@ class NeatlineRecordTable extends Omeka_Db_Table
      */
     protected function filterByZoom($select, $zoom)
     {
-        $select->where('min_zoom IS NULL OR min_zoom<=?', $zoom);
-        $select->where('max_zoom IS NULL OR max_zoom>=?', $zoom);
+        $select->where('_min_zoom IS NULL OR _min_zoom<=?', $zoom);
+        $select->where('_max_zoom IS NULL OR _max_zoom>=?', $zoom);
         return $select;
     }
 
