@@ -27,7 +27,8 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
 
     // Filters.
     protected $_filters = array(
-        'admin_navigation_main'
+        'admin_navigation_main',
+        'neatline_styles'
     );
 
 
@@ -208,6 +209,35 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
     {
         $tabs[] = array('label' => 'Neatline', 'uri' => url('neatline'));
         return $tabs;
+    }
+
+
+    /**
+     * Register the taggable styles.
+     *
+     * @param array $styles Array of column name => label pairs.
+     * @return array The updated array.
+     */
+    public function filterNeatlineStyles($styles)
+    {
+        return array_merge($styles, array(
+
+            'vector_color'      => 'Shape Color',
+            'stroke_color'      => 'Line Color',
+            'select_color'      => 'Selected Color',
+            'vector_opacity'    => 'Shape Opacity',
+            'select_opacity'    => 'Selected Opacity',
+            'stroke_opacity'    => 'Line Opacity',
+            'image_opacity'     => 'Image Opacity',
+            'stroke_width'      => 'Line Width',
+            'point_radius'      => 'Point Radius',
+            'point_image'       => 'Point Image',
+            'min_zoom'          => 'Min Zoom',
+            'max_zoom'          => 'Max Zoom',
+            'map_focus'         => 'Focus Coordinates',
+            'map_zoom'          => 'Focus Zoom'
+
+        ));
     }
 
 

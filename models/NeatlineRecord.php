@@ -189,7 +189,10 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
      */
     public function save()
     {
+        $inserting = !$this->exists();
+        $this->runCallbacks('beforeSave', array('insert' => $inserting));
         $this->id = $this->insertOrUpdate($this->toArray());
+        $this->runCallbacks('afterSave', array('insert' => $inserting));
     }
 
 
