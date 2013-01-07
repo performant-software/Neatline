@@ -64,9 +64,9 @@ Neatline.module('Editor', { startWithParent: false,
      */
     showRecordList: function() {
       Neatline.vent.trigger('editor:router:#records');
-      this.views.menu.showIn(this.ui.editor);
-      this.views.search.showIn(this.ui.editor);
-      this.views.records.showIn(this.ui.editor);
+      this.views.menu.    showIn(this.ui.editor);
+      this.views.search.  showIn(this.ui.editor);
+      this.views.records. showIn(this.ui.editor);
     },
 
 
@@ -86,6 +86,7 @@ Neatline.module('Editor', { startWithParent: false,
      * Show add record form.
      */
     showNewRecordForm: function() {
+      Neatline.vent.trigger('editor:router:#records/add');
       this.views.record.showIn(this.ui.editor);
     },
 

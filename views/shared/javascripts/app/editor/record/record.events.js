@@ -30,6 +30,17 @@ Neatline.module('Editor.Record', function(
 
 
   /**
+   * Show form for a new record.
+   */
+  var showNew = function() {
+    console.log('add');
+  };
+
+  Neatline.commands.addHandler('editor:record:showNew', showNew);
+  Neatline.vent.on('editor:router:#records/add', showNew);
+
+
+  /**
    * Close a record form.
    */
   var close = function() {

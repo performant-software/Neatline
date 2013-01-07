@@ -56,7 +56,7 @@ Neatline.module('Editor.Map', { startWithParent: false,
 
 
   /**
-   * Update the map edit controls.
+   * Remove a model's layer from the map.
    *
    * @param {Object} model: The record model.
    */
