@@ -101,10 +101,10 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
             `exhibit_id`        INT(10) UNSIGNED NULL,
             `tag_id`            INT(10) UNSIGNED NULL,
 
-            `slug`              VARCHAR(100) NULL,
             `title`             MEDIUMTEXT NULL,
             `body`              MEDIUMTEXT NULL,
             `tags`              TEXT NULL,
+            `slug`              VARCHAR(100) NULL,
             `coverage`          GEOMETRY NOT NULL,
             `map_active`        TINYINT(1) NULL,
 
