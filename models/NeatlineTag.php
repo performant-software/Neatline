@@ -16,7 +16,7 @@ class NeatlineTag extends Omeka_Record_AbstractRecord
 
 
     public $exhibit_id;         // INT(10) UNSIGNED NOT NULL
-    public $tag;                // TINYTEXT COLLATE utf8_unicode_ci NULL
+    public $tag;                // TINYTEXT NULL
 
 
     private $styles = array();

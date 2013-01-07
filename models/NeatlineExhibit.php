@@ -18,11 +18,11 @@ class NeatlineExhibit extends Omeka_Record_AbstractRecord
     public $tag_id;         // INT(10) UNSIGNED NULL
     public $added;          // TIMESTAMP NULL
     public $modified;       // TIMESTAMP NULL
-    public $title;          // TINYTEXT COLLATE utf8_unicode_ci NULL
-    public $description;    // TEXT COLLATE utf8_unicode_ci NULL
+    public $title;          // TINYTEXT NULL
+    public $description;    // TEXT NULL
     public $slug;           // VARCHAR(100) NOT NULL
     public $public = 0;     // TINYINT(1) NOT NULL
-    public $query;          // TEXT COLLATE utf8_unicode_ci NULL
+    public $query;          // TEXT NULL
     public $map_focus;      // VARCHAR(100) NULL
     public $map_zoom;       // INT(10) UNSIGNED NULL
 
