@@ -14,6 +14,8 @@ Neatline.module('Editor.Records', function(
   Records, Neatline, Backbone, Marionette, $, _) {
 
 
+  // ======================================================================
+
   /**
    * Udpate the records collection and render the list.
    *
@@ -27,6 +29,9 @@ Neatline.module('Editor.Records', function(
 
   Neatline.vent.on('editor:records:show', show);
   Neatline.vent.on('editor:router:#records', show);
+
+
+  // ======================================================================
 
 
 });

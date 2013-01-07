@@ -14,6 +14,8 @@ Neatline.module('Editor', { startWithParent: false,
   define: function(Editor, Neatline, Backbone, Marionette, $, _) {
 
 
+  // ======================================================================
+
   /**
    * Open a record edit form if one is not already open.
    *
@@ -29,6 +31,8 @@ Neatline.module('Editor', { startWithParent: false,
   Neatline.vent.on('map:select', showRecordForm);
 
 
+  // ======================================================================
+
   /**
    * Navigate to the record list.
    */
@@ -38,6 +42,9 @@ Neatline.module('Editor', { startWithParent: false,
 
   Neatline.commands.addHandler('editor:showRecordList', showRecordList);
   Neatline.vent.on('editor:record:close', showRecordList);
+
+
+  // ======================================================================
 
 
 }});

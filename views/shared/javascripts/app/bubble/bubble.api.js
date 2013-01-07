@@ -25,6 +25,7 @@ Neatline.module('Bubble', function(
     Bubble.__view.show(model);
   };
 
+  Neatline.commands.addHandler('bubble:show', show);
   Neatline.vent.on('map:highlight', show);
 
 

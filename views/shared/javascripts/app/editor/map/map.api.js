@@ -14,6 +14,8 @@ Neatline.module('Editor.Map', { startWithParent: false,
   define: function(Map, Editor, Backbone, Marionette, $, _) {
 
 
+  // ======================================================================
+
   /**
    * Start map edit when a record form is opened.
    *
@@ -27,6 +29,8 @@ Neatline.module('Editor.Map', { startWithParent: false,
   Neatline.commands.addHandler('editor:map:startEdit', startEdit);
   Neatline.vent.on('editor:record:show', startEdit);
 
+
+  // ======================================================================
 
   /**
    * End map edit when a record form is closed.
@@ -42,6 +46,8 @@ Neatline.module('Editor.Map', { startWithParent: false,
   Neatline.vent.on('editor:record:close', endEdit);
 
 
+  // ======================================================================
+
   /**
    * Update the map edit controls.
    *
@@ -55,6 +61,8 @@ Neatline.module('Editor.Map', { startWithParent: false,
   Neatline.vent.on('editor:record:update', updateEdit);
 
 
+  // ======================================================================
+
   /**
    * Remove a model's layer from the map.
    *
@@ -67,6 +75,9 @@ Neatline.module('Editor.Map', { startWithParent: false,
 
   Neatline.commands.addHandler('editor:map:deleteLayer', deleteLayer);
   Neatline.vent.on('editor:record:delete', deleteLayer);
+
+
+  // ======================================================================
 
 
 }});
