@@ -24,20 +24,6 @@ class Neatline_RecordsControllerTest_Post
     public function testPost()
     {
 
-        // Create exhibit.
-        $exhibit = $this->__exhibit();
-
-        // Issue request.
-        $this->request->setMethod('POST');
-        $this->dispatch('neatline/record');
-        $response = json_decode($this->getResponse()->getBody('default'));
-
-        // Check code.
-        $this->assertResponseCode(200);
-
-        // Check for non-null id.
-        $this->assertNotNull($response->id);
-
     }
 
 
