@@ -19,30 +19,6 @@ class Neatline_NeatlineExhibitTest_SaveDeleteHooks
 
     /**
      * --------------------------------------------------------------------
-     * When a new exhibit is saved for the first time, a default style tag
-     * should be created and referenced by the `tag_id` field.
-     * --------------------------------------------------------------------
-     */
-    public function testInsertCreateDefaultTag()
-    {
-
-        // Create exhibit.
-        $c1 = $this->_tagsTable->count();
-        $exhibit = $this->__exhibit();
-        $c2 = $this->_tagsTable->count();
-
-        // Check for new tag.
-        $this->assertEquals($c1+1, $c2);
-        $tag = $this->getLastTag();
-
-        // Check reference.
-        $this->assertEquals($exhibit->tag_id, $tag->id);
-
-    }
-
-
-    /**
-     * --------------------------------------------------------------------
      * An exhibit default tag should only be created when a new exhibit is
      * inserted, not when an existing exhibit is saved.
      * --------------------------------------------------------------------

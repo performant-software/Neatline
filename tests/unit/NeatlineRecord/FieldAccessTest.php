@@ -40,7 +40,7 @@ class Neatline_NeatlineRecordTest_FieldAccess
         $record->map_focus          = '9';
         $record->map_zoom           = 10;
 
-        // Local styles:
+        // Styles:
         $record->vector_color       = '11';
         $record->stroke_color       = '12';
         $record->select_color       = '13';
@@ -53,20 +53,6 @@ class Neatline_NeatlineRecordTest_FieldAccess
         $record->point_image        = '20';
         $record->max_zoom           = 21;
         $record->min_zoom           = 22;
-
-        // Tag references:
-        $record->_vector_color      = 23;
-        $record->_stroke_color      = 24;
-        $record->_select_color      = 25;
-        $record->_vector_opacity    = 26;
-        $record->_select_opacity    = 27;
-        $record->_stroke_opacity    = 28;
-        $record->_image_opacity     = 29;
-        $record->_stroke_width      = 30;
-        $record->_point_radius      = 31;
-        $record->_point_image       = 32;
-        $record->_max_zoom          = 33;
-        $record->_min_zoom          = 34;
         $record->save();
 
         // Reload the record.
@@ -98,20 +84,6 @@ class Neatline_NeatlineRecordTest_FieldAccess
         $this->assertEquals($record->point_image,       '20');
         $this->assertEquals($record->max_zoom,          21);
         $this->assertEquals($record->min_zoom,          22);
-
-        // Tag references:
-        $this->assertEquals($record->_vector_color,      23);
-        $this->assertEquals($record->_stroke_color,      24);
-        $this->assertEquals($record->_select_color,      25);
-        $this->assertEquals($record->_vector_opacity,    26);
-        $this->assertEquals($record->_select_opacity,    27);
-        $this->assertEquals($record->_stroke_opacity,    28);
-        $this->assertEquals($record->_image_opacity,     29);
-        $this->assertEquals($record->_stroke_width,      30);
-        $this->assertEquals($record->_point_radius,      31);
-        $this->assertEquals($record->_point_image,       32);
-        $this->assertEquals($record->_max_zoom,          33);
-        $this->assertEquals($record->_min_zoom,          34);
 
     }
 

@@ -61,7 +61,7 @@ class NeatlineRecordTable extends Omeka_Db_Table
 
         // Query.
         $record = $this->fetchObject($select);
-        return $record->buildJsonData($record->wkt);
+        return $record->buildJsonData();
 
     }
 

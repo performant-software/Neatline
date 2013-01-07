@@ -52,30 +52,6 @@ class NeatlineExhibit extends Omeka_Record_AbstractRecord
 
 
     /**
-     * When a new exhibit is inserted, create a tag for the exhibit, set
-     * the `tag_id reference`, and re-save the exhibit.
-     *
-     * @param array $args The array of callback parameters passed in from
-     * Omeka_Record_AbstractRecord
-     */
-    protected function afterSave($args)
-    {
-
-        // Break if not inserting.
-        if (!$args['insert']) return;
-
-        // Create an exhibit-default tag.
-        $tagsTable = $this->getTable('NeatlineTag');
-        $tag = $tagsTable->createExhibitTag($this);
-
-        // Set the reference.
-        $this->tag_id = $tag->id;
-        $this->save();
-
-    }
-
-
-    /**
      * Delete all child data records when an exhibit is deleted.
      */
     protected function beforeDelete()

@@ -75,11 +75,11 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
 
             `added`             TIMESTAMP NULL,
             `modified`          TIMESTAMP NULL,
-            `title`             TINYTEXT COLLATE utf8_unicode_ci NULL,
-            `description`       TEXT COLLATE utf8_unicode_ci NULL,
+            `title`             TINYTEXT NULL,
+            `description`       TEXT NULL,
             `slug`              VARCHAR(100) NOT NULL,
             `public`            TINYINT(1) NOT NULL,
-            `query`             TEXT COLLATE utf8_unicode_ci NULL,
+            `query`             TEXT NULL,
             `map_focus`         VARCHAR(100) NULL,
             `map_zoom`          INT(10) UNSIGNED NULL,
 
@@ -101,39 +101,13 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
             `tag_id`            INT(10) UNSIGNED NULL,
 
             `slug`              VARCHAR(100) NULL,
-            `title`             MEDIUMTEXT COLLATE utf8_unicode_ci NULL,
-            `body`              MEDIUMTEXT COLLATE utf8_unicode_ci NULL,
-            `tags`              TEXT COLLATE utf8_unicode_ci NULL,
+            `title`             MEDIUMTEXT NULL,
+            `body`              MEDIUMTEXT NULL,
+            `tags`              TEXT NULL,
             `coverage`          GEOMETRY NOT NULL,
             `map_active`        TINYINT(1) NULL,
             `map_focus`         VARCHAR(100) NULL,
             `map_zoom`          INT(10) UNSIGNED NULL,
-
-            `vector_color`      TINYTEXT COLLATE utf8_unicode_ci NULL,
-            `stroke_color`      TINYTEXT COLLATE utf8_unicode_ci NULL,
-            `select_color`      TINYTEXT COLLATE utf8_unicode_ci NULL,
-            `vector_opacity`    INT(10) UNSIGNED NULL,
-            `select_opacity`    INT(10) UNSIGNED NULL,
-            `stroke_opacity`    INT(10) UNSIGNED NULL,
-            `image_opacity`     INT(10) UNSIGNED NULL,
-            `stroke_width`      INT(10) UNSIGNED NULL,
-            `point_radius`      INT(10) UNSIGNED NULL,
-            `point_image`       TINYTEXT COLLATE utf8_unicode_ci NULL,
-            `max_zoom`          INT(10) UNSIGNED NULL,
-            `min_zoom`          INT(10) UNSIGNED NULL,
-
-            `_vector_color`     INT(10) UNSIGNED NULL,
-            `_stroke_color`     INT(10) UNSIGNED NULL,
-            `_select_color`     INT(10) UNSIGNED NULL,
-            `_vector_opacity`   INT(10) UNSIGNED NULL,
-            `_select_opacity`   INT(10) UNSIGNED NULL,
-            `_stroke_opacity`   INT(10) UNSIGNED NULL,
-            `_image_opacity`    INT(10) UNSIGNED NULL,
-            `_stroke_width`     INT(10) UNSIGNED NULL,
-            `_point_radius`     INT(10) UNSIGNED NULL,
-            `_point_image`      INT(10) UNSIGNED NULL,
-            `_max_zoom`         INT(10) UNSIGNED NULL,
-            `_min_zoom`         INT(10) UNSIGNED NULL,
 
              PRIMARY KEY        (`id`),
              FULLTEXT KEY       (`title`, `slug`, `body`),
@@ -151,20 +125,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
 
             `id`                INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
             `exhibit_id`        INT(10) UNSIGNED NOT NULL,
-            `tag`               TINYTEXT COLLATE utf8_unicode_ci NULL,
-
-            `vector_color`      TINYTEXT COLLATE utf8_unicode_ci NULL,
-            `stroke_color`      TINYTEXT COLLATE utf8_unicode_ci NULL,
-            `select_color`      TINYTEXT COLLATE utf8_unicode_ci NULL,
-            `vector_opacity`    INT(10) UNSIGNED NULL,
-            `select_opacity`    INT(10) UNSIGNED NULL,
-            `stroke_opacity`    INT(10) UNSIGNED NULL,
-            `image_opacity`     INT(10) UNSIGNED NULL,
-            `stroke_width`      INT(10) UNSIGNED NULL,
-            `point_radius`      INT(10) UNSIGNED NULL,
-            `point_image`       TINYTEXT COLLATE utf8_unicode_ci NULL,
-            `max_zoom`          INT(10) UNSIGNED NULL,
-            `min_zoom`          INT(10) UNSIGNED NULL,
+            `tag`               TINYTEXT NULL,
 
              PRIMARY KEY        (`id`)
 
@@ -172,6 +133,21 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
 
         $this->_db->query($sql);
 
+
+        // Add styles.
+        // -----------
+        self::addStyle('vector_color',      'TINYTEXT NULL');
+        self::addStyle('stroke_color',      'TINYTEXT NULL');
+        self::addStyle('select_color',      'TINYTEXT NULL');
+        self::addStyle('point_image',       'TINYTEXT NULL');
+        self::addStyle('vector_opacity',    'INT(10) UNSIGNED NULL');
+        self::addStyle('select_opacity',    'INT(10) UNSIGNED NULL');
+        self::addStyle('stroke_opacity',    'INT(10) UNSIGNED NULL');
+        self::addStyle('image_opacity',     'INT(10) UNSIGNED NULL');
+        self::addStyle('stroke_width',      'INT(10) UNSIGNED NULL');
+        self::addStyle('point_radius',      'INT(10) UNSIGNED NULL');
+        self::addStyle('max_zoom',          'INT(10) UNSIGNED NULL');
+        self::addStyle('min_zoom',          'INT(10) UNSIGNED NULL');
 
     }
 

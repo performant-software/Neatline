@@ -28,32 +28,6 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
     public $map_focus;          // VARCHAR(100) NULL
     public $map_zoom;           // INT(10) UNSIGNED NULL
 
-    public $vector_color;       // TINYTEXT COLLATE utf8_unicode_ci NULL
-    public $stroke_color;       // TINYTEXT COLLATE utf8_unicode_ci NULL
-    public $select_color;       // TINYTEXT COLLATE utf8_unicode_ci NULL
-    public $vector_opacity;     // INT(10) UNSIGNED NULL
-    public $select_opacity;     // INT(10) UNSIGNED NULL
-    public $stroke_opacity;     // INT(10) UNSIGNED NULL
-    public $image_opacity;      // INT(10) UNSIGNED NULL
-    public $stroke_width;       // INT(10) UNSIGNED NULL
-    public $point_radius;       // INT(10) UNSIGNED NULL
-    public $point_image;        // TINYTEXT COLLATE utf8_unicode_ci NULL
-    public $max_zoom;           // INT(10) UNSIGNED NULL
-    public $min_zoom;           // INT(10) UNSIGNED NULL
-
-    public $_vector_color;      // INT(10) UNSIGNED NULL
-    public $_stroke_color;      // INT(10) UNSIGNED NULL
-    public $_select_color;      // INT(10) UNSIGNED NULL
-    public $_vector_opacity;    // INT(10) UNSIGNED NULL
-    public $_select_opacity;    // INT(10) UNSIGNED NULL
-    public $_stroke_opacity;    // INT(10) UNSIGNED NULL
-    public $_image_opacity;     // INT(10) UNSIGNED NULL
-    public $_stroke_width;      // INT(10) UNSIGNED NULL
-    public $_point_radius;      // INT(10) UNSIGNED NULL
-    public $_point_image;       // INT(10) UNSIGNED NULL
-    public $_max_zoom;          // INT(10) UNSIGNED NULL
-    public $_min_zoom;          // INT(10) UNSIGNED NULL
-
 
     private $styles = array();
 
@@ -73,7 +47,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
 
 
     /**
-     * Add a key-value pair to `attr`.
+     * Add a key-value pair to `styles`.
      *
      * @param string $name The attribute name.
      * @param mixed $value The value.
@@ -81,6 +55,17 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
     public function __set($name, $value)
     {
         $this->styles[$name] = $value;
+    }
+
+
+    /**
+     * Get style property.
+     *
+     * @param string $name The attribute name.
+     */
+    public function __get($name)
+    {
+        return $this->styles[$name];
     }
 
 
@@ -109,7 +94,8 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
             );
         }
 
-        return $fields;
+        // Merge styles.
+        return array_merge($fields, $this->styles);
 
     }
 

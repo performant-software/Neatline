@@ -18,18 +18,8 @@ class NeatlineTag extends Omeka_Record_AbstractRecord
     public $exhibit_id;         // INT(10) UNSIGNED NOT NULL
     public $tag;                // TINYTEXT COLLATE utf8_unicode_ci NULL
 
-    public $vector_color;       // TINYTEXT COLLATE utf8_unicode_ci NULL
-    public $stroke_color;       // TINYTEXT COLLATE utf8_unicode_ci NULL
-    public $select_color;       // TINYTEXT COLLATE utf8_unicode_ci NULL
-    public $vector_opacity;     // INT(10) UNSIGNED NULL
-    public $select_opacity;     // INT(10) UNSIGNED NULL
-    public $stroke_opacity;     // INT(10) UNSIGNED NULL
-    public $image_opacity;      // INT(10) UNSIGNED NULL
-    public $stroke_width;       // INT(10) UNSIGNED NULL
-    public $point_radius;       // INT(10) UNSIGNED NULL
-    public $point_image;        // TINYTEXT COLLATE utf8_unicode_ci NULL
-    public $max_zoom;           // INT(10) UNSIGNED NULL
-    public $min_zoom;           // INT(10) UNSIGNED NULL
+
+    private $styles = array();
 
 
     /**
@@ -41,6 +31,41 @@ class NeatlineTag extends Omeka_Record_AbstractRecord
     {
         parent::__construct();
         if (!is_null($exhibit)) $this->exhibit_id = $exhibit->id;
+    }
+
+
+    /**
+     * Add a key-value pair to `styles`.
+     *
+     * @param string $name The attribute name.
+     * @param mixed $value The value.
+     */
+    public function __set($name, $value)
+    {
+        $this->styles[$name] = $value;
+    }
+
+
+    /**
+     * Get style property.
+     *
+     * @param string $name The attribute name.
+     */
+    public function __get($name)
+    {
+        return $this->styles[$name];
+    }
+
+
+    /**
+     * Merge styles into fields array.
+     *
+     * @return array The array representation of the record fields.
+     */
+    public function toArray()
+    {
+        $fields = parent::toArray();
+        return array_merge($fields, $this->styles);
     }
 
 
