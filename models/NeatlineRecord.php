@@ -20,13 +20,11 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
     public $tag_id;             // INT(10) UNSIGNED NULL
 
     public $slug;               // VARCHAR(100) NULL
-    public $title;              // MEDIUMTEXT COLLATE utf8_unicode_ci NULL
-    public $body;               // MEDIUMTEXT COLLATE utf8_unicode_ci NULL
-    public $tags;               // TEXT COLLATE utf8_unicode_ci NULL
-    public $coverage;           // GEOMETRY
+    public $title;              // MEDIUMTEXT NULL
+    public $body;               // MEDIUMTEXT NULL
+    public $tags;               // TEXT NULL
+    public $coverage;           // GEOMETRY NOT NULL
     public $map_active;         // TINYINT(1) NULL
-    public $map_focus;          // VARCHAR(100) NULL
-    public $map_zoom;           // INT(10) UNSIGNED NULL
 
 
     private $styles = array();
@@ -248,16 +246,33 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
     /**
      * Propagate new values to records with shared tags.
      */
-    public function afterSave()
+    public function propagateTags()
     {
 
-        $records    = $this->getTable('NeatlineRecord');
-        $tags       = $this->getTable('NeatlineTag');
-        $exhibit    = $this->getExhibit();
+        $recordsTable   = $this->getTable('NeatlineRecord');
+        $tagsTable      = $this->getTable('NeatlineTag');
+        $exhibit        = $this->getExhibit();
+
+        // Gather list of tag attributes.
+        $attrs = array_keys(apply_filters('neatline_styles', array()));
 
         // Explode tags.
-        foreach (neatline_explodeTags($this->tags) as $t) {
-            $tag = $tags->getTagByName($exhibit, $t);
+        foreach (neatline_explodeTags($this->tags) as $raw) {
+
+            // Get the tag record.
+            $tag    = $tagsTable->getTagByName($exhibit, $raw);
+            $where  = array('tags LIKE ?' => '%'.$raw.'%');
+            $data   = array();
+
+            // Get update data array.
+            foreach ($attrs as $attr) { if ($tag->$attr == 1) {
+                $data[$attr] = $this->$attr;
+            }}
+
+            // Update sibling records.
+            $recordsTable->update($recordsTable->getTableName(),
+                $data, $where);
+
         }
 
     }

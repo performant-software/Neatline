@@ -107,8 +107,6 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
             `tags`              TEXT NULL,
             `coverage`          GEOMETRY NOT NULL,
             `map_active`        TINYINT(1) NULL,
-            `map_focus`         VARCHAR(100) NULL,
-            `map_zoom`          INT(10) UNSIGNED NULL,
 
              PRIMARY KEY        (`id`),
              FULLTEXT KEY       (`title`, `slug`, `body`),
@@ -149,6 +147,8 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
         self::addStyle('point_radius',      'INT(10) UNSIGNED NULL');
         self::addStyle('max_zoom',          'INT(10) UNSIGNED NULL');
         self::addStyle('min_zoom',          'INT(10) UNSIGNED NULL');
+        self::addStyle('map_zoom',          'INT(10) UNSIGNED NULL');
+        self::addStyle('map_focus',         'VARCHAR(100) NULL');
 
     }
 

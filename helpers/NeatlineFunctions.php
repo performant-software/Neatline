@@ -88,7 +88,8 @@ function neatline_editorGlobals($exhibit)
  */
 function neatline_explodeTags($tags)
 {
-    return explode(',', str_replace(' ', '', $tags));
+    if (is_null($tags)) return array();
+    else return explode(',', str_replace(' ', '', $tags));
 }
 
 

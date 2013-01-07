@@ -25,6 +25,9 @@ class Neatline_HelpersTest_ExplodeTags
     public function testExplodeTags()
     {
 
+        // Null.
+        $this->assertEquals(neatline_explodeTags(null), array());
+
         // No space.
         $this->assertEquals(neatline_explodeTags('a,b,c'), array(
             'a', 'b', 'c'
