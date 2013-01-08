@@ -24,23 +24,24 @@ class Neatline_TagControllerTest_Delete
     public function testDelete()
     {
 
-        // // Create exhibit and records.
-        // $exhibit = $this->__exhibit();
-        // $record1 = $this->__record($exhibit);
-        // $record2 = $this->__record($exhibit);
+        // Create exhibit and tags.
+        $exhibit = $this->__exhibit();
+        $tag1 = $this->__tag($exhibit, 'tag1');
+        $tag2 = $this->__tag($exhibit, 'tag2');
 
-        // // Hit /records with DELETE.
-        // $c1 = $this->_recordsTable->count();
-        // $this->request->setMethod('DELETE');
-        // $this->dispatch('neatline/record/'.$record2->id);
-        // $c2 = $this->_recordsTable->count();
+        // Hit /tag with DELETE.
+        $c1 = $this->_tagsTable->count();
+        $this->request->setMethod('DELETE');
+        $this->dispatch('neatline/tag/'.$tag2->id);
+        $c2 = $this->_tagsTable->count();
 
-        // // Check code.
-        // $this->assertResponseCode(200);
+        // Check code.
+        $this->assertResponseCode(200);
 
-        // // Check record deleted.
-        // $this->assertNull($this->_recordsTable->find($record2->id));
-        // $this->assertEquals($c2, $c1-1);
+        // Check record deleted.
+        $this->assertNull($this->_tagsTable->find($tag2->id));
+        $this->assertNotNull($this->_tagsTable->find($tag1->id));
+        $this->assertEquals($c2, $c1-1);
 
     }
 

@@ -29,7 +29,7 @@ class Neatline_RecordControllerTest_Delete
         $record1 = $this->__record($exhibit);
         $record2 = $this->__record($exhibit);
 
-        // Hit /records with DELETE.
+        // Hit /record with DELETE.
         $c1 = $this->_recordsTable->count();
         $this->request->setMethod('DELETE');
         $this->dispatch('neatline/record/'.$record2->id);
@@ -40,6 +40,7 @@ class Neatline_RecordControllerTest_Delete
 
         // Check record deleted.
         $this->assertNull($this->_recordsTable->find($record2->id));
+        $this->assertNotNull($this->_recordsTable->find($record1->id));
         $this->assertEquals($c2, $c1-1);
 
     }
