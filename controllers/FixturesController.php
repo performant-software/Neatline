@@ -27,6 +27,8 @@ class Neatline_FixturesController
 
         // Create exhibit.
         $exhibit = new NeatlineExhibit;
+        $exhibit->slug = 'slug';
+        $exhibit->save();
 
         // Render.
         echo $this->view->partial('neatline/_neatline.php', array(
@@ -47,6 +49,8 @@ class Neatline_FixturesController
 
         // Create exhibit.
         $exhibit = new NeatlineExhibit;
+        $exhibit->slug = 'slug';
+        $exhibit->save();
 
         // Render.
         echo $this->view->partial('index/_editor.php', array(

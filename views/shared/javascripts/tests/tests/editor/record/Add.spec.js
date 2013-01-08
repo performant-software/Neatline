@@ -35,6 +35,14 @@ describe('Record Form Add Record', function() {
 
     // "New Record."
     _t.click(els.add);
+
+    // Capture outoing request.
+    var request = _t.getLastRequest();
+    var params = $.parseJSON(request.requestBody);
+
+    // Check method and route.
+    expect(request.method).toEqual('POST');
+    expect(request.url).toEqual(__exhibit.api.records);
     _t.respondNewRecord();
 
     // Check for form, no records.

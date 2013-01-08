@@ -65,7 +65,7 @@ describe('Record Form Save', function() {
 
     // Check method and route.
     expect(request.method).toEqual('PUT');
-    expect(request.url).toEqual('/neatline/record/'+id);
+    expect(request.url).toEqual(__exhibit.api.record+'/'+id);
 
     // Check the query string for updated values.
     expect(params.title).           toEqual('title2');

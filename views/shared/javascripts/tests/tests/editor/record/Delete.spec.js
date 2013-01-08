@@ -77,7 +77,7 @@ describe('Record Form Delete', function() {
 
     // Check method and route.
     expect(request.method).toEqual('DELETE');
-    expect(request.url).toEqual('/neatline/record/'+id);
+    expect(request.url).toEqual(__exhibit.api.record+'/'+id);
 
   });
 

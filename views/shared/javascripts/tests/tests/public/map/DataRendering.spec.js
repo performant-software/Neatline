@@ -29,7 +29,7 @@ describe('Map Data Rendering', function() {
   it('should render features for map-active models', function() {
 
     // --------------------------------------------------------------------
-    // When the exhibit starts up, the map should render vector geometry
+    // When the exhibit initialized, the map should render vector geometry
     // for all models that are set to active with `map_active`.
     // --------------------------------------------------------------------
 
@@ -42,7 +42,7 @@ describe('Map Data Rendering', function() {
 
   });
 
-  it('should update data for unfrozen record', function() {
+  it('should update data when the map is moved', function() {
 
     // --------------------------------------------------------------------
     // When a new set of records is ingested (for example, in response to
@@ -50,7 +50,7 @@ describe('Map Data Rendering', function() {
     // has been changed, the new data should be rendered.
     // --------------------------------------------------------------------
 
-    // Get title2 layer1.
+    // Get the layer for the second record.
     var record2Layer = _t.getVectorLayerByTitle('title2');
 
     // At start, 1 point at POINT(3 4).
@@ -58,10 +58,19 @@ describe('Map Data Rendering', function() {
     expect(record2Layer.features[0].geometry.x).toEqual(3);
     expect(record2Layer.features[0].geometry.y).toEqual(4);
 
-    // Trigger a map move, inject new data.
-    _t.refreshMap(_t.json.records.changed);
+    // Move the map.
+    _t.triggerMapMove();
 
-    // Get the new layer1 for title2
+    // Capture outoing request.
+    var request = _t.getLastRequest();
+    var params = $.parseJSON(request.requestBody);
+
+    // Check method and route.
+    expect(request.method).toEqual('GET');
+    expect(request.url).toContain(__exhibit.api.records);
+    _t.respondLast200(_t.json.records.changed);
+
+    // Get the new layer for the second record.
     record2Layer = _t.getVectorLayerByTitle('title2');
 
     // Geometry should be changed.
