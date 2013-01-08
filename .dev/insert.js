@@ -17,7 +17,7 @@ var client = mysql.createConnection({
 client.connect();
 
 
-function layer(exhibit_id, count, zoom, color) {
+function records(exhibit_id, count, zoom, color) {
 
   // Base insert.
   var sql = 'INSERT INTO omeka_neatline_records (' +
@@ -39,16 +39,13 @@ function layer(exhibit_id, count, zoom, color) {
       'coverage'+
       ') VALUES';
 
-  // Create records.
   _(count).times(function(n) {
 
-    // Random coordinates, radius.
     var lat = randy.randInt(-20000000,20000000);
     var lon = randy.randInt(-20000000,20000000);
     var geo = 'GeomFromText("POINT('+lon+' '+lat+')")';
     var rad = randy.randInt(10,100);
 
-    // Values.
     sql += '(' +
       exhibit_id+','+
       '"Record'+n+'",'+
@@ -68,7 +65,29 @@ function layer(exhibit_id, count, zoom, color) {
       geo+
     ')';
 
-    // Comma, except for last.
+    if (n != count-1) sql += ',';
+
+  });
+
+  client.query(sql);
+
+}
+
+
+function tags(exhibit_id, count) {
+
+  var sql = 'INSERT INTO omeka_neatline_tags (' +
+      'exhibit_id,'+
+      'tag'+
+      ') VALUES';
+
+  _(count).times(function(n) {
+
+    sql += '(' +
+      exhibit_id+','+
+      '"tag'+n+'"'+
+    ')';
+
     if (n != count-1) sql += ',';
 
   });
@@ -83,14 +102,8 @@ var sql = 'INSERT INTO omeka_neatline_exhibits ' +
   '(title, slug) VALUES ("dev", "dev")';
 
 client.query(sql, function(err, res) {
-
-  // layer(res.insertId, 200, 3, '#00ff24');
-  layer(res.insertId, 400, 'NULL', '#00aeff');
-  // layer(res.insertId, 5000, 5, '#0006ff');
-  // layer(res.insertId, 20000, 6, '#7800ff');
-  // layer(res.insertId, 50000, 7, '#f000ff');
-  // layer(res.insertId, 100000, 8, '#ff0000');
-
+  records(res.insertId, 400, 'NULL', '#00aeff');
+  tags(res.insertId, 20);
   client.end(function() {
     process.exit();
   });

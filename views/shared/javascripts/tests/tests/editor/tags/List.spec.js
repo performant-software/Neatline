@@ -18,8 +18,8 @@ describe('Tags List', function() {
 
     _t.loadEditor();
 
-    // tagRows     = _t.getTagRows();
-    // tagModels   = _t.getTagModels();
+    tagRows     = _t.getTagRows();
+    tagModels   = _t.getTagModels();
 
   });
 
@@ -29,28 +29,28 @@ describe('Tags List', function() {
     // At #tags, a list of tags should be rendered in the editor.
     // --------------------------------------------------------------------
 
-    // // Check listings.
-    // expect(recordRows.length).toEqual(3);
-    // expect($(recordRows[0]).find('.title').text()).
-    //   toEqual('title1');
-    // expect($(recordRows[0]).find('.body').text()).
-    //   toEqual('body1')
-    // expect($(recordRows[1]).find('.title').text()).
-    //   toEqual('title2');
-    // expect($(recordRows[1]).find('.body').text()).
-    //   toEqual('body2');
-    // expect($(recordRows[2]).find('.title').text()).
-    //   toEqual('title3')
-    // expect($(recordRows[2]).find('.body').text()).
-    //   toEqual('body3');
+    // Check listings.
+    expect(tagRows.length).toEqual(3);
+    expect($(tagRows[0]).find('.title').text()).
+      toEqual('title1');
+    expect($(tagRows[0]).find('.body').text()).
+      toEqual('body1')
+    expect($(tagRows[1]).find('.title').text()).
+      toEqual('title2');
+    expect($(tagRows[1]).find('.body').text()).
+      toEqual('body2');
+    expect($(tagRows[2]).find('.title').text()).
+      toEqual('title3')
+    expect($(tagRows[2]).find('.body').text()).
+      toEqual('body3');
 
-    // // Check links.
-    // expect($(recordRows[0]).attr('href')).
-    //   toEqual('#records/'+recordModels[0].get('id'));
-    // expect($(recordRows[1]).attr('href')).
-    //   toEqual('#records/'+recordModels[1].get('id'));
-    // expect($(recordRows[2]).attr('href')).
-    //   toEqual('#records/'+recordModels[2].get('id'));
+    // Check links.
+    expect($(tagRows[0]).attr('href')).
+      toEqual('#tags/'+tagModels[0].get('id'));
+    expect($(tagRows[1]).attr('href')).
+      toEqual('#tags/'+tagModels[1].get('id'));
+    expect($(tagRows[2]).attr('href')).
+      toEqual('#tags/'+tagModels[2].get('id'));
 
   });
 

@@ -14,10 +14,20 @@
 /**
  * Get DOM collection of editor record listings.
  *
- * @return {Array}: The DOM collection of <li> elements.
+ * @return {Array}: The DOM collection of <a> elements.
  */
 _t.getRecordRows = function() {
   return this.el.records.find('a');
+};
+
+
+/**
+ * Get DOM collection of editor tag listings.
+ *
+ * @return {Array}: The DOM collection of <a> elements.
+ */
+_t.getTagRows = function() {
+  return this.el.tags.find('a');
 };
 
 
@@ -28,6 +38,16 @@ _t.getRecordRows = function() {
  */
 _t.getRecordModels = function() {
   return Neatline.Editor.Records.__collection.models;
+};
+
+
+/**
+ * Get the array of models from the tag list collection.
+ *
+ * @return {Array}: The models.
+ */
+_t.getTagModels = function() {
+  return Neatline.Editor.Tags.__collection.models;
 };
 
 
