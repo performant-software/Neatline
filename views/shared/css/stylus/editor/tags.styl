@@ -1,0 +1,39 @@
+
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
+
+/**
+ * Record/tag list styles.
+ *
+ * @package     omeka
+ * @subpackage  neatline
+ * @copyright   2012 Rector and Board of Visitors, University of Virginia
+ * @license     http://www.apache.org/licenses/LICENSE-2.0.html
+ */
+
+
+@import 'var'
+
+
+#editor
+
+  ul.records
+  ul.tags
+    margin 0
+
+    a
+      display list-item
+      font-size 14px
+      font-weight 300
+      padding 0.2em editorMargin
+      border-top 1px solid #f0f0f0
+      white-space nowrap
+      color textColor
+
+      &:hover
+        background highlightColor
+        text-decoration none
+        color white
+
+      .title
+      .tag
+        font-weight bold

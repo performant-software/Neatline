@@ -15,8 +15,31 @@ Neatline.module('Editor.Tags', function(
 
 
   Tags.View = Backbone.Neatline.View.extend({
+
+
+    template:   '#tag-list-template',
     className:  'tags',
-    tagName:    'ul'
+    tagName:    'ul',
+
+
+    /**
+     * Compile row template.
+     */
+    initialize: function() {
+      this.tmpl = _.template($(this.template).html());
+    },
+
+
+    /**
+     * Render list of tags.
+     *
+     * @param {Object} tags: The tags collection.
+     */
+    ingest: function(tags) {
+      this.$el.html(this.tmpl({ tags: tags }));
+    }
+
+
   });
 
 

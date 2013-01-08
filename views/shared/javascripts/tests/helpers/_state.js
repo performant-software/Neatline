@@ -74,15 +74,6 @@ _t.resetHash = function() {
 
 
 /**
- * Navigate to the edit form for the first record.
- */
-_t.openRecordForm = function() {
-  var models = this.getRecordModels();
-  this.navigate('records/'+models[0].get('id'));
-};
-
-
-/**
  * Navigate to a route.
  *
  * @param {String} frag: The URL fragment.
@@ -100,4 +91,22 @@ _t.navigate = function(frag) {
 _t.click = function(el) {
   el.click();
   this.navigate(el.attr('href'));
+};
+
+
+/**
+ * Navigate to the edit form for the first record.
+ */
+_t.openRecordForm = function() {
+  var models = this.getRecordModels();
+  this.navigate('records/'+models[0].get('id'));
+};
+
+
+/**
+ * Navigate to the edit form for the first record.
+ */
+_t.showTagsList = function() {
+  this.navigate('tags');
+  this.respondLast200(this.json.tags.standard);
 };
