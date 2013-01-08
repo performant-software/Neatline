@@ -35,6 +35,7 @@
       "marionette":         "./views/shared/javascripts/components/marionette/lib/backbone.marionette.js",
       "neatline":           "./views/shared/javascripts/components/backbone.neatline/lib/backbone.neatline.js",
       "routefilter":        "./views/shared/javascripts/components/backbone.routefilter/dist/backbone.routefilter.js",
+      "getset":             "./views/shared/javascripts/components/backbone.get.set/backbone.getters.setters.js",
       "rivets":             "./views/shared/javascripts/components/rivets/lib/rivets.js",
       "openlayers":         "./views/shared/javascripts/components/openlayers/build/OpenLayers.js",
       "bootstrap":          "./views/shared/javascripts/components/bootstrap/bootstrap/js/bootstrap.js",

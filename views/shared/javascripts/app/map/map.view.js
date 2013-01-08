@@ -372,8 +372,8 @@ Neatline.module('Map', function(
     getStyleMap: function(record) {
 
       // Compute decimal opacities.
-      var fillOpacity = record.get('vector_opacity')/100;
-      var imageOpacity = record.get('image_opacity')/100;
+      var vectorOpacity = record.get('vector_opacity')/100;
+      var imageOpacity  = record.get('image_opacity')/100;
       var selectOpacity = record.get('select_opacity')/100;
       var strokeOpacity = record.get('stroke_opacity')/100;
 
@@ -384,7 +384,7 @@ Neatline.module('Map', function(
           pointRadius:      record.get('point_radius'),
           externalGraphic:  record.get('point_image'),
           strokeWidth:      record.get('stroke_width'),
-          fillOpacity:      fillOpacity,
+          fillOpacity:      vectorOpacity,
           graphicOpacity:   imageOpacity,
           strokeOpacity:    strokeOpacity
         }),

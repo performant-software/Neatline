@@ -9,6 +9,7 @@
     , "marionette":           ">= 0.10.2"
     , "backbone.neatline":    "https://github.com/davidmcclure/backbone.neatline.git"
     , "backbone.routefilter": "https://github.com/boazsender/backbone.routefilter.git"
+    , "backbone.get.set":     "https://github.com/berzniz/backbone.getters.setters.git"
     , "openlayers":           "https://github.com/openlayers/openlayers.git"
     , "toastr":               "https://github.com/CodeSeven/toastr.git"
     , "bootstrap":            ">= 2.2.0"
