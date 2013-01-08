@@ -16,7 +16,7 @@
 
 <div class="control-group">
   <label for="<?php echo $name; ?>">
-    <?php echo __($title); ?>
+    <?php echo __($label); ?>
   </label>
   <div class="controls">
     <textarea name="<?php echo $name; ?>"data-value="<?php echo $bind; ?>">

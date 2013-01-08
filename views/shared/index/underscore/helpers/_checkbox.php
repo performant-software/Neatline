@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Bootstrap text input.
+ * Bootstrap checkbox.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -14,10 +14,7 @@
 ?>
 
 
-<label><?php echo __($label); ?></label>
-<div class="controls">
-  <div class="inline-inputs">
-    <input type="text" name="<?php echo $name; ?>"
-      data-value="<?php echo $bind; ?>"/>
-  </div>
-</div>
+<label class="checkbox">
+  <input type="checkbox" name="<?php echo $name; ?>">
+  <?php echo __($label); ?>
+</label>

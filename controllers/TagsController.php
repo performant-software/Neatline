@@ -28,7 +28,7 @@ class Neatline_TagsController extends Neatline_RestController
 
 
     /**
-     * Get an individual record.
+     * Get a tags collection.
      */
     public function getAction()
     {

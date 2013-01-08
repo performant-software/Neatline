@@ -94,7 +94,7 @@
   <div class="control-group">
     <div class="controls">
       <textarea name="coverage"
-        placeholder="Spatial Data (Well-Known Text)"
+        placeholder="<?php echo __('Spatial Data (Well-Known Text)'); ?>"
         data-value="record.coverage"></textarea>
     </div>
   </div>

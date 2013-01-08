@@ -25,9 +25,17 @@
   <?php echo $this->partial(
     'index/underscore/helpers/_text_input.php', array(
       'name'  => 'tag',
-      'title' => 'Tag Name',
+      'label' => 'Tag Name',
       'bind'  => 'tag.tag'
   )); ?>
+
+  <?php foreach (neatline_getStyles() as $col => $label): ?>
+    <?php echo $this->partial(
+      'index/underscore/helpers/_checkbox.php', array(
+        'name'  => $col,
+        'label' => $label
+    )); ?>
+  <?php endforeach; ?>
 
   <?php echo $this->partial(
     'index/underscore/partials/_form_menu.php'

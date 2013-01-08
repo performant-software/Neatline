@@ -27,7 +27,7 @@ class NeatlineRecordTable extends Omeka_Db_Table
         $exhibit    = $record->getExhibit();
 
         // Gather list of tag attributes.
-        $attrs = array_keys(apply_filters('neatline_styles', array()));
+        $attrs = array_keys(neatline_getStyles());
 
         // Explode tags.
         foreach (neatline_explodeTags($record->tags) as $raw) {

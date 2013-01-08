@@ -19,14 +19,14 @@
   <?php echo $this->partial(
     'index/underscore/helpers/_textarea.php', array(
       'name'  => 'title',
-      'title' => 'Title',
+      'label' => 'Title',
       'bind'  => 'record.title'
   )); ?>
 
   <?php echo $this->partial(
     'index/underscore/helpers/_textarea.php', array(
       'name'  => 'body',
-      'title' => 'Body',
+      'label' => 'Body',
       'bind'  => 'record.body'
   )); ?>
 

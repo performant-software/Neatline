@@ -94,6 +94,17 @@ function neatline_explodeTags($tags)
 
 
 /**
+ * Gather all taggable styles exposed via the `neatline_links` filter.
+ *
+ * @return array The array of column name => label.
+ */
+function neatline_getStyles()
+{
+  return apply_filters('neatline_styles', array());
+}
+
+
+/**
  * Return specific field for a neatline record.
  *
  * @param string $fieldname The model attribute name being requested.
