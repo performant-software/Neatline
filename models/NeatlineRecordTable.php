@@ -51,7 +51,7 @@ class NeatlineRecordTable extends Omeka_Db_Table
 
 
     /**
-     * Update the name of a tag.
+     * Update a tag.
      *
      * @param NeatlineExhibit $exhibit The exhibit record.
      * @param string $oldName The current tag name.
@@ -67,6 +67,35 @@ class NeatlineRecordTable extends Omeka_Db_Table
         // Form `SET` and `WHERE`.
         $data   = array('tags' => new Zend_Db_Expr($replace));
         $where  = array('tags LIKE ?' => '%'.$oldName.'%');
+
+        // Update records.
+        $this->update($this->getTableName(), $data, $where);
+
+    }
+
+
+    /**
+     * Delete a tag.
+     *
+     * @param NeatlineExhibit $exhibit The exhibit record.
+     * @param string $oldName The current tag name.
+     * @param string $newName The new tag name.
+     */
+    public function deleteTag($exhibit, $name)
+    {
+
+        // Form the `REPLACE` call.
+        $replace1 = $this->quoteInto("REPLACE(tags, ?)",
+            array($name, ""));
+        $replace2 = $this->quoteInto("REPLACE({$replace1}, ?)",
+            array(",,", ","));
+
+        // Trim trailing/leading commas.
+        $trim = "TRIM(BOTH ',' FROM {$replace2})";
+
+        // Form `SET` and `WHERE`.
+        $data   = array('tags' => new Zend_Db_Expr($trim));
+        $where  = array('tags LIKE ?' => '%'.$name.'%');
 
         // Update records.
         $this->update($this->getTableName(), $data, $where);

@@ -28,7 +28,7 @@ class Neatline_NeatlineRecordTableTest_UpdateTag
         // Create exhibit.
         $exhibit = $this->__exhibit();
 
-        // Record with `tag`.
+        // Create record.
         $record = new NeatlineRecord($exhibit);
         $record->tags = 'tag1,tag2,tag3';
         $record->save();
