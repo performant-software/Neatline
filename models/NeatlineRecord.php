@@ -212,36 +212,36 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
     /**
      * Propagate new values to records with shared tags.
      */
-    // public function propagateTags()
-    // {
+    public function propagateTags()
+    {
 
-    //     $recordsTable   = $this->getTable('NeatlineRecord');
-    //     $tagsTable      = $this->getTable('NeatlineTag');
-    //     $exhibit        = $this->getExhibit();
+        $recordsTable   = $this->getTable('NeatlineRecord');
+        $tagsTable      = $this->getTable('NeatlineTag');
+        $exhibit        = $this->getExhibit();
 
-    //     // Gather list of tag attributes.
-    //     $attrs = array_keys(apply_filters('neatline_styles', array()));
+        // Gather list of tag attributes.
+        $attrs = array_keys(apply_filters('neatline_styles', array()));
 
-    //     // Explode tags.
-    //     foreach (neatline_explodeTags($this->tags) as $raw) {
+        // Explode tags.
+        foreach (neatline_explodeTags($this->tags) as $raw) {
 
-    //         // Get the tag record.
-    //         $tag    = $tagsTable->getTagByName($exhibit, $raw);
-    //         $where  = array('tags LIKE ?' => '%'.$raw.'%');
-    //         $data   = array();
+            // Get the tag record.
+            $tag    = $tagsTable->getTagByName($exhibit, $raw);
+            $where  = array('tags LIKE ?' => '%'.$raw.'%');
+            $data   = array();
 
-    //         // Get update data array.
-    //         foreach ($attrs as $attr) { if ($tag->$attr == 1) {
-    //             $data[$attr] = $this->$attr;
-    //         }}
+            // Get update data array.
+            foreach ($attrs as $attr) { if ($tag->$attr == 1) {
+                $data[$attr] = $this->$attr;
+            }}
 
-    //         // Update sibling records.
-    //         $recordsTable->update($recordsTable->getTableName(),
-    //             $data, $where);
+            // Update sibling records.
+            $recordsTable->update($recordsTable->getTableName(),
+                $data, $where);
 
-    //     }
+        }
 
-    // }
+    }
 
 
 }
