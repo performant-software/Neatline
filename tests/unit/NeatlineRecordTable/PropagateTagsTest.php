@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
 
 /**
- * Tests for `propagateTags()` on NeatlineRecord.
+ * Tests for `propagateTags()` on NeatlineRecordTable.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -11,7 +11,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class Neatline_NeatlineRecordTest_PropagateTags
+class Neatline_NeatlineRecordTableTest_PropagateTags
     extends Neatline_Test_AppTestCase
 {
 
@@ -68,7 +68,10 @@ class Neatline_NeatlineRecordTest_PropagateTags
         // Save new vales.
         $record1->vector_color = 'vector';
         $record1->stroke_color = 'stroke';
-        $record1->propagateTags();
+        $record1->save();
+
+        // Propagate.
+        $this->_recordsTable->propagateTags($record1);
 
         // Reload records.
         $record1 = $this->_recordsTable->find($record1->id);

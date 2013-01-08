@@ -16,6 +16,65 @@ class NeatlineRecordTable extends Omeka_Db_Table
 
 
     /**
+     * Propagate new values to records with shared tags.
+     *
+     * @param NeatlineRecord $record The record to propagate.
+     */
+    public function propagateTags($record)
+    {
+
+        $tagsTable  = $this->getTable('NeatlineTag');
+        $exhibit    = $record->getExhibit();
+
+        // Gather list of tag attributes.
+        $attrs = array_keys(apply_filters('neatline_styles', array()));
+
+        // Explode tags.
+        foreach (neatline_explodeTags($record->tags) as $raw) {
+
+            // Get the tag record.
+            $tag    = $tagsTable->getTagByName($exhibit, $raw);
+            $where  = array('tags LIKE ?' => '%'.$raw.'%');
+            $data   = array();
+
+            // Get update data array.
+            foreach ($attrs as $attr) { if ($tag->$attr == 1) {
+                $data[$attr] = $record->$attr;
+            }}
+
+            // Update sibling records.
+            $this->update($this->getTableName(), $data, $where);
+
+        }
+
+    }
+
+
+    /**
+     * Update the name of a tag.
+     *
+     * @param NeatlineExhibit $exhibit The exhibit record.
+     * @param string $oldName The current tag name.
+     * @param string $newName The new tag name.
+     */
+    public function updateTag($exhibit, $oldName, $newName)
+    {
+
+        // Form the `REPLACE` call.
+        $replace = $this->quoteInto('REPLACE(tags, ?)',
+            array($oldName, $newName));
+
+        // Form `SET` and `WHERE`.
+        $data   = array('tags' => new Zend_Db_Expr($replace));
+        $where  = array('tags LIKE ?' => '%'.$oldName.'%');
+
+        // Update records.
+        $this->update($this->getTableName(), $data, $where);
+
+    }
+
+
+    /**
      * Extend the default `getSelect` to add a `wkt` column to all queries
      * that selects the plain-text value of `coverage` by way of `AsText`.
      *
@@ -33,7 +92,7 @@ class NeatlineRecordTable extends Omeka_Db_Table
     /**
      * Count the number of active records in an exhibit.
      *
-     * @param Omeka_record $exhibit The exhibit record.
+     * @param NeatlineExhibit $exhibit The exhibit record.
      * @return integer The number of active records.
      */
     public function countActiveRecordsByExhibit($exhibit)
@@ -81,32 +140,26 @@ class NeatlineRecordTable extends Omeka_Db_Table
 
         $data = array();
 
-        // Build the select.
-        $select = $this->getSelect()->where('exhibit_id=?', $exhibit->id);
-
+        // Form starting select.
+        $select = $this->getSelect()->where(
+            'exhibit_id=?', $exhibit->id
+        );
 
         // Zoom.
-        // -----
         if (!is_null($zoom)) {
-            $select = $this->filterByZoom($select, $zoom);
+            $select = $this->_filterByZoom($select, $zoom);
         }
-
 
         // Extent.
-        // -------
         if (!is_null($extent)) {
-            $select = $this->filterByExtent($select, $extent);
+            $select = $this->_filterByExtent($select, $extent);
         }
-
 
         // Get records.
         if ($records = $this->fetchObjects($select)) {
-
-            // Construct record objects.
             foreach ($records as $record) {
                 $data[] = $record->buildJsonData();
             }
-
         }
 
         return $data;
@@ -121,7 +174,7 @@ class NeatlineRecordTable extends Omeka_Db_Table
      * @param integer $zoom The zoom level.
      * @return Omeka_Db_Select The filtered select.
      */
-    protected function filterByZoom($select, $zoom)
+    protected function _filterByZoom($select, $zoom)
     {
         $select->where('min_zoom IS NULL OR min_zoom<=?', $zoom);
         $select->where('max_zoom IS NULL OR max_zoom>=?', $zoom);
@@ -136,7 +189,7 @@ class NeatlineRecordTable extends Omeka_Db_Table
      * @param string $extent The extent, as a WKT polygon.
      * @return Omeka_Db_Select The filtered select.
      */
-    protected function filterByExtent($select, $extent)
+    protected function _filterByExtent($select, $extent)
     {
         $select->where(new Zend_Db_Expr('MBRIntersects(
             coverage,GeomFromText("'.$extent.'"))'));
