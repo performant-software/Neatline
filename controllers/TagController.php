@@ -11,7 +11,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class Neatline_TagsController extends Neatline_RestController
+class Neatline_TagController extends Neatline_RestController
 {
 
 
@@ -30,8 +30,8 @@ class Neatline_TagsController extends Neatline_RestController
      */
     public function getAction()
     {
-        $id = $this->_request->id;
-        // echo Zend_Json::encode($this->__table->queryRecord($id));
+        $tag = $this->__table->find($this->_request->id);
+        echo Zend_Json::encode($tag->toArray());
     }
 
 
@@ -42,7 +42,7 @@ class Neatline_TagsController extends Neatline_RestController
     {
         $tag = $this->__table->find($this->_request->id);
         $put = file_get_contents(Zend_Registry::get('fileIn'));
-        $record->saveForm(Zend_Json::decode($put, true));
+        // $tag->saveForm(Zend_Json::decode($put, true));
     }
 
 

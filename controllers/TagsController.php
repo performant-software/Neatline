@@ -32,7 +32,9 @@ class Neatline_TagsController extends Neatline_RestController
      */
     public function getAction()
     {
-
+        echo Zend_Json::encode(
+            $this->__table->queryTags($this->exhibit)
+        );
     }
 
 

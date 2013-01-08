@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
 
 /**
- * Tests for GET action in record API.
+ * Tests for GET action in tag API.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -11,37 +11,33 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class Neatline_RecordControllerTest_Get
+class Neatline_TagControllerTest_Get
     extends Neatline_Test_AppTestCase
 {
 
 
     /**
      * --------------------------------------------------------------------
-     * GET should emit a JSON object containing data for a single record.
+     * GET should emit a JSON object containing data for a single tag.
      * --------------------------------------------------------------------
      */
     public function testGet()
     {
 
-        // Create exhibit and record.
+        // Create exhibit and tag.
         $exhibit = $this->__exhibit();
-        $record = $this->__record($exhibit);
+        $tag = $this->__tag($exhibit, 'tag');
 
-        // Hit /record/:id, capture response.
-        $this->dispatch('neatline/record/'.$record->id);
+        // Hit /tag/:id, capture response.
+        $this->dispatch('neatline/tag/'.$tag->id);
         $response = json_decode($this->getResponse()->getBody('default'));
 
         // Check code.
         $this->assertResponseCode(200);
 
         // Check attributes.
-        $this->assertObjectHasAttribute('id',       $response);
-        $this->assertObjectHasAttribute('item_id',  $response);
-        $this->assertObjectHasAttribute('title',    $response);
-        $this->assertObjectHasAttribute('body',     $response);
-        $this->assertObjectHasAttribute('slug',     $response);
-        $this->assertObjectHasAttribute('coverage', $response);
+        $this->assertObjectHasAttribute('id',  $response);
+        $this->assertObjectHasAttribute('tag', $response);
 
         // Check styles.
         foreach (array_keys(neatline_getStyles()) as $s) {
