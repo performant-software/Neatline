@@ -33,7 +33,7 @@ class NeatlineRecordTable extends Omeka_Db_Table
         foreach (neatline_explodeTags($record->tags) as $raw) {
 
             // Get the tag record.
-            $tag    = $tagsTable->getTagByName($exhibit, $raw);
+            $tag    = $tagsTable->findByName($exhibit, $raw);
             $where  = array('tags LIKE ?' => '%'.$raw.'%');
             $data   = array();
 

@@ -11,17 +11,17 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class Neatline_NeatlineTagTableTest_GetTagByName
+class Neatline_NeatlineTagTableTest_FindByName
     extends Neatline_Test_AppTestCase
 {
 
 
     /**
      * --------------------------------------------------------------------
-     * getTagByName() should retrieve a tag in an exhibit by name.
+     * findByName() should retrieve a tag in an exhibit by name.
      * --------------------------------------------------------------------
      */
-    public function testGetExhibitTag()
+    public function testFindByName()
     {
 
         // Create exhibits.
@@ -33,8 +33,8 @@ class Neatline_NeatlineTagTableTest_GetTagByName
         $tag2 = $this->__tag($exhibit2, 'tag');
 
         // Get tags by name.
-        $retrieved1 = $this->_tagsTable->getTagByName($exhibit1, 'tag');
-        $retrieved2 = $this->_tagsTable->getTagByName($exhibit2, 'tag');
+        $retrieved1 = $this->_tagsTable->findByName($exhibit1, 'tag');
+        $retrieved2 = $this->_tagsTable->findByName($exhibit2, 'tag');
         $this->assertEquals($retrieved1->id, $tag1->id);
         $this->assertEquals($retrieved2->id, $tag2->id);
 
