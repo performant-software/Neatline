@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
 
 /**
- * Records controller. Emulates a REST API.
+ * Tags controller. Emulates a REST API.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -11,49 +11,47 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class Neatline_RecordController extends Neatline_RestController
+class Neatline_TagsController extends Neatline_RestController
 {
 
 
     /**
-     * Get records table.
+     * Get tags table.
      */
     public function init()
     {
-        $this->__table = $this->_helper->db->getTable('NeatlineRecord');
+        $this->__table = $this->_helper->db->getTable('NeatlineTag');
         parent::init();
     }
 
 
     /**
-     * Get an individual record.
+     * Get an individual tag.
      */
     public function getAction()
     {
         $id = $this->_request->id;
-        echo Zend_Json::encode($this->__table->queryRecord($id));
+        // echo Zend_Json::encode($this->__table->queryRecord($id));
     }
 
 
     /**
-     * Update an existing record.
+     * Update an existing tag.
      */
     public function putAction()
     {
-        $record = $this->__table->find($this->_request->id);
+        $tag = $this->__table->find($this->_request->id);
         $put = file_get_contents(Zend_Registry::get('fileIn'));
         $record->saveForm(Zend_Json::decode($put, true));
     }
 
 
     /**
-     * Delete a record.
+     * Delete a tag.
      */
     public function deleteAction()
     {
-        $record = $this->__table->find($this->_request->id);
-        $record->delete();
+        $tag = $this->__table->find($this->_request->id);
+        $tag->delete();
     }
-
-
 }

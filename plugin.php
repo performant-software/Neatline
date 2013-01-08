@@ -19,6 +19,7 @@ if (!defined('NEATLINE_PLUGIN_DIR')) {
 require_once NEATLINE_PLUGIN_DIR . '/NeatlinePlugin.php';
 require_once NEATLINE_PLUGIN_DIR . '/helpers/NeatlineFunctions.php';
 require_once NEATLINE_PLUGIN_DIR . '/forms/NeatlineDetails.php';
+require_once NEATLINE_PLUGIN_DIR . '/controllers/_RestController.php';
 
 Zend_Registry::set('fileIn', 'php://input');
 
