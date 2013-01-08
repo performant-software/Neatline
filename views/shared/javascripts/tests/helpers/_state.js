@@ -25,7 +25,7 @@ _t.loadNeatline = function() {
   Neatline.Bubble.init();
 
   // Inject fixtures, alias components.
-  this.respondAll200(this.json.collections.standard);
+  this.respondAll200(this.json.records.standard);
   _t.aliasNeatline();
 
 };
@@ -55,7 +55,7 @@ _t.loadEditor = function() {
   Neatline.Editor.Map.init();
 
   // Inject fixtures, alias components.
-  this.respondAll200(this.json.collections.standard);
+  this.respondAll200(this.json.records.standard);
   _t.aliasNeatline();
   _t.aliasEditor();
 

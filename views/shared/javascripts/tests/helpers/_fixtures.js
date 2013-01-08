@@ -40,17 +40,25 @@ _t.setFixturesPath = function() {
 _t.loadJsonFixtures = function() {
   this.json = {
 
-    collections: {
-      standard: readFixtures('coll.default.json'),
-      changed:  readFixtures('coll.changed.json'),
-      removed:  readFixtures('coll.removed.json')
+    records: {
+      standard: readFixtures('records.standard.json'),
+      changed:  readFixtures('records.changed.json'),
+      removed:  readFixtures('records.removed.json')
     },
 
-    records: {
-      standard: readFixtures('record.default.json'),
+    record: {
+      standard: readFixtures('record.standard.json'),
       inactive: readFixtures('record.inactive.json'),
-      add:      readFixtures('record.add.json'),
+      add:      readFixtures('record.add.json')
+    },
+
+    tags: {
+      standard: readFixtures('tags.standard.json')
     }
+
+    // tag: {
+      // standard: readFixtures('tag.standard.json')
+    // }
 
   };
 };

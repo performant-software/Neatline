@@ -14,12 +14,10 @@ describe('Records List', function() {
 
   var recordRows, recordModels;
 
-  // Get fixtures.
   beforeEach(function() {
 
     _t.loadEditor();
 
-    // Get record rows and models.
     recordRows    = _t.getRecordRows();
     recordModels  = _t.getRecordModels();
 
@@ -28,8 +26,7 @@ describe('Records List', function() {
   it('should list records', function() {
 
     // --------------------------------------------------------------------
-    // When the editor application starts, the record listings should be
-    // rendered in the left editing pane.
+    // At #records, a list of records should be rendered in the editor.
     // --------------------------------------------------------------------
 
     // Check listings.

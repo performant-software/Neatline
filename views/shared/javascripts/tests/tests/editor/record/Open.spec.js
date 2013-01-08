@@ -210,7 +210,7 @@ describe('Record Form Open', function() {
     // --------------------------------------------------------------------
 
     // Load map without Record 2.
-    _t.refreshMap(_t.json.collections.removed);
+    _t.refreshMap(_t.json.records.removed);
 
     // Just 1 layer on the map.
     expect(_t.vw.map.layers.length).toEqual(1);

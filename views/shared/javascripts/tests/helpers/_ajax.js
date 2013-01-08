@@ -84,7 +84,7 @@ _t.respondLast500 = function() {
  * Respond 200 with the default record collection.
  */
 _t.respondDefaultRecords = function() {
-  this.respondLast200(this.json.collections.standard);
+  this.respondLast200(this.json.records.standard);
 };
 
 
@@ -92,5 +92,5 @@ _t.respondDefaultRecords = function() {
  * Respond 200 with the new record JSON.
  */
 _t.respondNewRecord = function() {
-  this.respondLast200(this.json.records.add);
+  this.respondLast200(this.json.record.add);
 };

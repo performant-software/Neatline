@@ -59,7 +59,7 @@ describe('Map Data Rendering', function() {
     expect(record2Layer.features[0].geometry.y).toEqual(4);
 
     // Trigger a map move, inject new data.
-    _t.refreshMap(_t.json.collections.changed);
+    _t.refreshMap(_t.json.records.changed);
 
     // Get the new layer1 for title2
     record2Layer = _t.getVectorLayerByTitle('title2');
@@ -84,7 +84,7 @@ describe('Map Data Rendering', function() {
     expect(_t.getVectorLayerByTitle('title2')).toBeDefined();
 
     // Trigger a map move, inject data without title2.
-    _t.refreshMap(_t.json.collections.removed);
+    _t.refreshMap(_t.json.records.removed);
 
     // title2 layer1 no longer exists.
     expect(_t.getVectorLayerByTitle('title2')).toBeUndefined();
@@ -111,7 +111,7 @@ describe('Map Data Rendering', function() {
     _t.vw.map.freeze(record2Layer.nId);
 
     // Trigger a map move.
-    _t.refreshMap(_t.json.collections.changed);
+    _t.refreshMap(_t.json.records.changed);
 
     // Get the new layer1 for title2
     record2Layer = _t.getVectorLayerByTitle('title2');

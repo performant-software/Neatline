@@ -19,7 +19,7 @@ class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
 
 
     /**
-     * Records JSON for map (INDEX and GET responses).
+     * Record collection JSON (GET response).
      */
     public function testRecordsJson()
     {
@@ -95,7 +95,7 @@ class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
 
         // Generate the fixture.
         $this->writeFixture('neatline/records/'.$exhibit->id,
-            'coll.default.json');
+            'records.standard.json');
 
 
         // Case 2: Data for record 2 has changed.
@@ -107,7 +107,7 @@ class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
         // Generate the fixture.
         $this->resetResponse();
         $this->writeFixture('neatline/records/'.$exhibit->id,
-            'coll.changed.json');
+            'records.changed.json');
 
 
         // Case 2: Record 2 is absent from the set.
@@ -118,7 +118,26 @@ class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
         // Generate the fixture.
         $this->resetResponse();
         $this->writeFixture('neatline/records/'.$exhibit->id,
-            'coll.removed.json');
+            'records.removed.json');
+
+    }
+
+
+    /**
+     * Tag collection JSON (GET response).
+     */
+    public function testTagsJson()
+    {
+
+        // Exhibit and tags.
+        $exhibit = $this->__exhibit();
+        $tag1 = $this->__tag($exhibit, 'tag1');
+        $tag1 = $this->__tag($exhibit, 'tag2');
+        $tag1 = $this->__tag($exhibit, 'tag3');
+
+        // Generate the fixture.
+        $this->writeFixture('neatline/tags/'.$exhibit->id,
+            'tags.standard.json');
 
     }
 
@@ -159,7 +178,7 @@ class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
 
         // Generate the fixture.
         $this->writeFixture('neatline/record/'.$record->id,
-            'record.default.json');
+            'record.standard.json');
 
 
         // Case 1: Map inactive.
@@ -189,6 +208,18 @@ class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
 
 
     /**
+     * JSON for new tag (POST response).
+     */
+    public function testNewTagJson()
+    {
+        $exhibit = $this->__exhibit();
+        $this->request->setMethod('POST');
+        $this->writeFixture('neatline/tags/'.$exhibit->id,
+            'tag.add.json');
+    }
+
+
+    /**
      * Neatline partial markup.
      */
     public function testNeatlinePartial()
@@ -199,9 +230,7 @@ class Neatline_FixtureBuilderTest extends Neatline_Test_AppTestCase
 
 
     /**
-     * --------------------------------------------------------------------
      * Editor partial markup.
-     * --------------------------------------------------------------------
      */
     public function testEditorPartial()
     {

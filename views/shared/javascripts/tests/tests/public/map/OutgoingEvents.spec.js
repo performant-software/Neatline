@@ -124,7 +124,7 @@ describe('Map Outgoing Events', function() {
     // --------------------------------------------------------------------
 
     // Trigger pan.
-    _t.refreshMap(_t.json.collections.changed);
+    _t.refreshMap(_t.json.records.changed);
 
     // Get extent and zoom.
     var extent = _t.vw.map.getExtentAsWKT();
