@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Neatline configurations.
+ * Rivets-Backbone configuration.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -12,7 +12,7 @@
 
 
 /**
- * Backbone model/collection adapter for Rivets.
+ * Backbone model adapter for Rivets.
  */
 rivets.configure({
   adapter: {
@@ -30,25 +30,3 @@ rivets.configure({
     }
   }
 });
-
-
-/**
- * Construct the URL fragment for a record edit form.
- *
- * @param {Number} id: The record id.
- * @return {String}: The URL fragment.
- */
-rivets.formatters.recordLink = function(id) {
-  return '#records/'+id;
-};
-
-
-/**
- * If a record/tag title is null, apply a placeholder string.
- *
- * @param {Mixed} title: The title.
- * @return {String}: The placeholder, if the title is null .
- */
-rivets.formatters.title = function(title) {
-  return title ? title : STRINGS.record.placeholders.title;
-};
