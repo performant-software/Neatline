@@ -151,10 +151,9 @@ module.exports = function(grunt) {
           config.vendor.js.d3,
 
           // Neatline:
-          config.app+'/app.init.js',
-          config.app+'/app.config.js',
-          config.app+'/record/record.model.js',
-          config.app+'/record/record.collection.js',
+          config.app+'/*.js',
+          config.app+'/shared/record/record.model.js',
+          config.app+'/shared/record/record.collection.js',
           config.app+'/map/**/*.js',
           config.app+'/bubble/**/*.js'
 
@@ -179,14 +178,24 @@ module.exports = function(grunt) {
           config.vendor.js.toastr,
           config.vendor.js.d3,
 
-          // Editor:
-          config.app+'/app.init.js',
-          config.app+'/app.config.js',
-          config.app+'/record/record.model.js',
-          config.app+'/record/record.collection.js',
+          // Neatline:
+          config.app+'/*.js',
+          config.app+'/shared/record/record.model.js',
+          config.app+'/shared/record/record.collection.js',
           config.app+'/map/**/*.js',
           config.app+'/bubble/**/*.js',
-          config.app+'/editor/**/*.js'
+
+          // Editor:
+          config.app+'/editor/shared/tag/tag.model.js',
+          config.app+'/editor/shared/tag/tag.collection.js',
+          config.app+'/editor/*.js',
+          config.app+'/editor/map/*.js',
+          config.app+'/editor/menu/*.js',
+          config.app+'/editor/record/*.js',
+          config.app+'/editor/records/*.js',
+          config.app+'/editor/search/*.js',
+          config.app+'/editor/tag/*.js',
+          config.app+'/editor/tags/*.js'
 
         ],
         dest: config.payloads.app.js+'/editor.js',

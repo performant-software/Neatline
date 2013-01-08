@@ -10,13 +10,13 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Record', function(
+Neatline.module('Shared.Record', function(
   Record, Neatline, Backbone, Marionette, $, _) {
 
 
   Record.Collection = Backbone.Neatline.SyncCollection.extend({
     url: function() { return __exhibit.api.records; },
-    model: Neatline.Record.Model
+    model: Neatline.Shared.Record.Model
   });
 
 

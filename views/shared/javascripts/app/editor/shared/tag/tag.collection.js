@@ -10,13 +10,13 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Tag', function(
+Neatline.module('Editor.Shared.Tag', function(
   Tag, Neatline, Backbone, Marionette, $, _) {
 
 
   Tag.Collection = Backbone.Neatline.SyncCollection.extend({
     url: function() { return __editor.api.tags; },
-    model: Neatline.Tag.Model
+    model: Neatline.Editor.Shared.Tag.Model
   });
 
 

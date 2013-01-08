@@ -15,7 +15,7 @@ describe('Record Collection', function() {
   var collection;
 
   beforeEach(function() {
-    collection = new Neatline.Record.Collection();
+    collection = new Neatline.Shared.Record.Collection();
     __exhibit.api.records = 'records/1';
   });
 

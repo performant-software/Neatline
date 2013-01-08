@@ -340,7 +340,7 @@ _t.getVectorLayerByTitle = function(title) {
  * @return {Object} model: The model.
  */
 _t.buildModelFromJson = function(json) {
-  return new Neatline.Record.Model(JSON.parse(json));
+  return new Neatline.Shared.Record.Model(JSON.parse(json));
 };
 
 

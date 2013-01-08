@@ -15,7 +15,7 @@ describe('Record Model', function() {
   var model;
 
   beforeEach(function() {
-    model = new Neatline.Record.Model();
+    model = new Neatline.Shared.Record.Model();
     __exhibit.api.records = 'records/1';
     __exhibit.api.record  = 'record';
     __exhibit.id = 1;

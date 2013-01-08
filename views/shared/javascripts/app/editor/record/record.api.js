@@ -39,7 +39,7 @@ Neatline.module('Editor.Record', function(
   var showNew = function() {
 
     // Create new record.
-    var record = new Neatline.Record.Model();
+    var record = new Neatline.Shared.Record.Model();
 
     // Populate id.
     record.save(null, {

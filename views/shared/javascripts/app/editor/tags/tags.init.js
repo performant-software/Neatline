@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Tags list initializer.
+ * Tag list initializer.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -15,6 +15,7 @@ Neatline.module('Editor.Tags', function(
 
 
   Tags.init = function() {
+    this.__collection = new Neatline.Editor.Shared.Tag.Collection();
     this.__view = new Tags.View();
   };
 
