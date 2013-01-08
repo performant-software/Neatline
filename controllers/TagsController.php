@@ -39,10 +39,19 @@ class Neatline_TagsController extends Neatline_RestController
 
 
     /**
-     * Create a new record.
+     * Create a new tag.
      */
     public function postAction()
     {
+
+        // Create tag.
+        $tag = new NeatlineTag($this->exhibit);
+        $tag->save();
+
+        // Forward to records GET.
+        $this->_forward('get', 'tag', 'neatline', array(
+            'id' => $tag->id
+        ));
 
     }
 

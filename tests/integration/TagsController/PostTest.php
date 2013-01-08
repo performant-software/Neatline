@@ -25,6 +25,23 @@ class Neatline_TagsControllerTest_Post
     public function testPost()
     {
 
+        // Create exhibit.
+        $exhibit = $this->__exhibit();
+
+        // Hit /tags with POST.
+        $c1 = $this->_tagsTable->count();
+        $this->request->setMethod('POST');
+        $this->dispatch('neatline/tags/'.$exhibit->id);
+        $c2 = $this->_tagsTable->count();
+
+        // Capture response, check code.
+        $response = json_decode($this->getResponse()->getBody('default'));
+        $this->assertResponseCode(200);
+
+        // Check for new id.
+        $this->assertNotNull($response->id);
+        $this->assertEquals($c2, $c1+1);
+
     }
 
 

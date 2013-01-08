@@ -28,7 +28,7 @@ class Neatline_RecordsControllerTest_Post
         // Create exhibit.
         $exhibit = $this->__exhibit();
 
-        // Hit /exhibits with POST.
+        // Hit /records with POST.
         $c1 = $this->_recordsTable->count();
         $this->request->setMethod('POST');
         $this->dispatch('neatline/records/'.$exhibit->id);
