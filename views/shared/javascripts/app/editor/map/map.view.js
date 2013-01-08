@@ -144,7 +144,7 @@ _.extend(Neatline.Map.View.prototype, {
     this.controls.regPoly.handler.snapAngle = parseFloat(snap);
 
     // Irregular.
-    this.controls.regPoly.handler.irregular = settings.poly.irregular;
+    this.controls.regPoly.handler.irregular = settings.poly.irreg;
 
 
     // Apply modification settings.

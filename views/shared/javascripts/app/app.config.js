@@ -44,11 +44,11 @@ rivets.formatters.recordLink = function(id) {
 
 
 /**
- * Construct the URL fragment for a record edit form.
+ * If a record/tag title is null, apply a placeholder string.
  *
- * @param {Mixed} title: The record title.
+ * @param {Mixed} title: The title.
  * @return {String}: The placeholder, if the title is null .
  */
-rivets.formatters.recordTitle = function(title) {
+rivets.formatters.title = function(title) {
   return title ? title : STRINGS.record.placeholders.title;
 };

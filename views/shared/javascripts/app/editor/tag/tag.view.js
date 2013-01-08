@@ -15,7 +15,22 @@ Neatline.module('Editor.Tag', function(
 
 
   Tag.View = Backbone.Neatline.View.extend({
-    tagName: 'form'
+
+
+    template:   '#tag-form-template',
+    className:  'form-stacked tag',
+    tagName:    'form',
+
+
+    /**
+     * Render template, get elements.
+     */
+    initialize: function() {
+      this.getTemplate();
+      this.getUi();
+    }
+
+
   });
 
 

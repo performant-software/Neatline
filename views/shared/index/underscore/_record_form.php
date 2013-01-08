@@ -18,9 +18,11 @@
 <script id="record-form-template" type="text/templates">
 
   <!-- Close button. -->
-  <a name="close" class="close">&times;</a>
+  <?php echo $this->partial(
+    'index/underscore/partials/_close_button.php'
+  ); ?>
 
-  <p class="lead" data-text="record.title | recordTitle"></p>
+  <p class="lead" data-text="record.title | title"></p>
 
   <ul class="nav nav-pills">
     <li>

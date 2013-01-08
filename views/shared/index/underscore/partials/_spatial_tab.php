@@ -54,7 +54,7 @@
     </div>
 
     <label class="checkbox">
-      <input type="checkbox" name="irregular">
+      <input type="checkbox" name="irreg">
       Irregular?
     </label>
 

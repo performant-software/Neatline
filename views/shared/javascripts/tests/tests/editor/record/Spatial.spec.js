@@ -33,7 +33,7 @@ describe('Record Form Spatial Tab', function() {
       coverage: _t.vw.record.$('textarea[name="coverage"]'),
       sides:    _t.vw.record.__ui.spatial.sides,
       snap:     _t.vw.record.__ui.spatial.snap,
-      irreg:    _t.vw.record.__ui.spatial.irregular
+      irreg:    _t.vw.record.__ui.spatial.irreg
     };
 
   });

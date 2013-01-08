@@ -281,11 +281,11 @@ describe('Record Form Open', function() {
 
     // Show form, check mode.
     _t.click($(recordRows[0]));
-    expect(_t.vw.record._getEditMode()).toEqual('pan');
+    expect(_t.vw.record.getEditMode()).toEqual('pan');
 
     // Activate "Polygon" control, check mode.
     els.pan[0].checked = false; els.poly[0].checked = true;
-    expect(_t.vw.record._getEditMode()).toEqual('poly');
+    expect(_t.vw.record.getEditMode()).toEqual('poly');
 
     // Re-open the form.
     els.close.trigger('click');
@@ -293,7 +293,7 @@ describe('Record Form Open', function() {
     _t.openRecordForm();
 
     // Check mode.
-    expect(_t.vw.record._getEditMode()).toEqual('pan');
+    expect(_t.vw.record.getEditMode()).toEqual('pan');
 
   });
 
