@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * An individual Neatline record.
+ * An individual tag.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -10,14 +10,14 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Record', function(
-  Record, Neatline, Backbone, Marionette, $, _) {
+Neatline.module('Tag', function(
+  Tag, Neatline, Backbone, Marionette, $, _) {
 
 
-  Record.Model = Backbone.Model.extend({
+  Tag.Model = Backbone.Model.extend({
     url: function() {
-      if (this.get('id')) return __exhibit.api.record+'/'+this.get('id');
-      else return __exhibit.api.records;
+      if (this.get('id')) return __editor.api.tag+'/'+this.get('id');
+      else return __editor.api.tags;
     }
   });
 
