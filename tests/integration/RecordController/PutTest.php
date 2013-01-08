@@ -11,7 +11,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class Neatline_RecordsControllerTest_Put
+class Neatline_RecordControllerTest_Put
     extends Neatline_Test_AppTestCase
 {
 
@@ -79,7 +79,7 @@ class Neatline_RecordsControllerTest_Put
         // Issue request.
         $this->writePut($values);
         $this->request->setMethod('PUT');
-        $this->dispatch('neatline/records/'.$record->id);
+        $this->dispatch('neatline/record/'.$record->id);
 
         // Reload the record.
         $record = $this->_recordsTable->find($record->id);

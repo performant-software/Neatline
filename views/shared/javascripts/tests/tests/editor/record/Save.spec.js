@@ -10,7 +10,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Form Save', function() {
+describe('Record Form Save', function() {
 
   var els;
 
@@ -65,7 +65,7 @@ describe('Form Save', function() {
 
     // Check method and route.
     expect(request.method).toEqual('PUT');
-    expect(request.url).toEqual('/neatline/records/'+id);
+    expect(request.url).toEqual('/neatline/record/'+id);
 
     // Check the query string for updated values.
     expect(params.title).           toEqual('title2');

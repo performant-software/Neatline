@@ -11,7 +11,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class Neatline_RecordsControllerTest_Delete
+class Neatline_RecordControllerTest_Delete
     extends Neatline_Test_AppTestCase
 {
 
@@ -32,7 +32,7 @@ class Neatline_RecordsControllerTest_Delete
         // Hit /records with DELETE.
         $c1 = $this->_recordsTable->count();
         $this->request->setMethod('DELETE');
-        $this->dispatch('neatline/records/'.$record2->id);
+        $this->dispatch('neatline/record/'.$record2->id);
         $c2 = $this->_recordsTable->count();
 
         // Check code.

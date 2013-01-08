@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
 
 /**
- * Records controller. Emulates a REST API.
+ * Exhibits controller. Emulates a REST API.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -41,12 +41,8 @@ class Neatline_RecordsController
                 $this->_forward('get');
                 break;
 
-            case 'PUT':
-                $this->_forward('put');
-                break;
-
-            case 'DELETE':
-                $this->_forward('delete');
+            case 'POST':
+                $this->_forward('post');
                 break;
 
         }
@@ -59,29 +55,39 @@ class Neatline_RecordsController
      */
     public function getAction()
     {
-        $id = $this->_request->id;
-        echo Zend_Json::encode($this->__table->queryRecord($id));
+
+        // Get the exhibit.
+        $__exhibits = $this->_helper->db->getTable('NeatlineExhibit');
+        $exhibit = $__exhibits->find($this->_request->id);
+
+        // Output the JSON string.
+        echo Zend_Json::encode($this->__table->queryRecords($exhibit,
+            $this->_request->extent,
+            $this->_request->zoom
+        ));
+
     }
 
 
     /**
-     * Update an existing record.
+     * Create a new record.
      */
-    public function putAction()
+    public function postAction()
     {
-        $record = $this->__table->find($this->_request->id);
-        $put = file_get_contents(Zend_Registry::get('fileIn'));
-        $record->saveForm(Zend_Json::decode($put, true));
-    }
 
+        // Get the exhibit.
+        $__exhibits = $this->_helper->db->getTable('NeatlineExhibit');
+        $exhibit = $__exhibits->find($this->_request->id);
 
-    /**
-     * Delete a record.
-     */
-    public function deleteAction()
-    {
-        $record = $this->__table->find($this->_request->id);
-        $record->delete();
+        // Create record.
+        $record = new NeatlineRecord($exhibit);
+        $record->save();
+
+        // Forward to records GET.
+        $this->_forward('get', 'record', 'neatline', array(
+            'id' => $record->id
+        ));
+
     }
 
 

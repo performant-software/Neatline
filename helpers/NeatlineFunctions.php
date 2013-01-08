@@ -57,8 +57,8 @@ function neatline_exhibitGlobals($exhibit)
     return json_encode(array(
         'id'    => $exhibit->id,
         'api'   => array(
-            'records'   => public_url('neatline/exhibits/'.$exhibit->id),
-            'record'    => public_url('neatline/records')
+            'records'   => public_url('neatline/records/'.$exhibit->id),
+            'record'    => public_url('neatline/record')
         ),
         'map'   => array(
             'focus'     => $exhibit->map_focus,
