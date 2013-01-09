@@ -38,8 +38,10 @@ Neatline.module('Editor.Record', function(
     ui: {
       tabs:         'ul.nav a',
       modal:        '#delete-modal',
-      textTab:      'a[href="#record-form-text"]',
-      textRegion:   '#record-form-text',
+      text: {
+        tab:        'a[href="#record-form-text"]',
+        region:     '#record-form-text'
+      },
       spatial: {
         pan:        'input[value="pan"]',
         sides:      'input[name="sides"]',
@@ -61,8 +63,8 @@ Neatline.module('Editor.Record', function(
       this.getUi();
 
       // Activate "Text" by default.
-      this.__ui.textRegion.addClass('active');
-      this.__ui.textTab.tab('show');
+      this.__ui.text.region.addClass('active');
+      this.__ui.text.tab.tab('show');
 
     },
 

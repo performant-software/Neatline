@@ -23,7 +23,7 @@ Neatline.module('Bubble', function(
     options: {
       padding: {
         x: 40,
-        y: 25
+        y: 15
       }
     },
 
