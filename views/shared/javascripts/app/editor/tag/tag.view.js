@@ -37,9 +37,14 @@ Neatline.module('Editor.Tag', function(
      * @param {Object} model: A record model.
      */
     show: function(model) {
+
       this.open = true;
       this.model = model;
-      // TODO
+
+      // Bind form data.
+      rivets.bind(this.$el, { tag: model });
+      console.log(model);
+
     },
 
 

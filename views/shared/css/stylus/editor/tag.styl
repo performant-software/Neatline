@@ -1,9 +1,8 @@
-<?php
 
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Bootstrap checkbox.
+ * Tag form styles.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -11,11 +10,18 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-?>
+
+@import 'var'
 
 
-<label class="checkbox">
-  <input type="checkbox" name="<?php echo $name; ?>"
-    data-checked="<?php echo $bind; ?>">
-  <?php echo __($label); ?>
-</label>
+#editor
+
+  form.tag
+
+    fieldset
+      margin-bottom 30px
+
+      &.properties
+
+        label
+          padding-left 35px

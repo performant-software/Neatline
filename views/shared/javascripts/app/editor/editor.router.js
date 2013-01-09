@@ -108,6 +108,7 @@ Neatline.module('Editor', { startWithParent: false,
      */
     showTagForm: function(id) {
       id = parseInt(id, 10);
+      Neatline.vent.trigger('editor:router:#tags/:id', id);
       this.views.tag.showIn(this.ui.editor);
     },
 
@@ -116,6 +117,7 @@ Neatline.module('Editor', { startWithParent: false,
      * Show add tag form.
      */
     showNewTagForm: function() {
+      Neatline.vent.trigger('editor:router:#tags/add');
       this.views.tag.showIn(this.ui.editor);
     }
 

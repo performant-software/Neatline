@@ -1,0 +1,64 @@
+
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
+
+/**
+ * Record form styles.
+ *
+ * @package     omeka
+ * @subpackage  neatline
+ * @copyright   2012 Rector and Board of Visitors, University of Virginia
+ * @license     http://www.apache.org/licenses/LICENSE-2.0.html
+ */
+
+
+@import 'var'
+
+
+#editor
+
+  form.record
+
+    textarea
+      &[name="title"]
+        height 100px
+      &[name="body"]
+        height 300px
+
+    #record-form-spatial
+
+      label.radio
+      label.checkbox
+        cursor pointer
+
+        &:hover
+          color #08C
+
+      label.radio
+        margin-left 0.5em
+
+      div.control-group.indent
+        margin-left 1.4em
+
+        &.regular-polygon
+
+          .inline-inputs
+            margin-bottom 5px
+
+          input[type="text"]
+            display inline
+            margin 0 4px 0 0
+            width 30px
+
+      textarea[name="coverage"]
+        height 220px
+        font-size 11px
+        font-family Consolas
+        font-weight bold
+
+    #record-form-style
+
+      div.controls
+        margin-bottom 10px
+
+      button[name="focus-map"]
+        margin 5px 0 10px
