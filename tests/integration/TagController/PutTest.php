@@ -30,7 +30,7 @@ class Neatline_TagControllerTest_Put
 
         // Mock PUT.
         $put = array('tag' => 'tag2');
-        foreach (neatline_getStyleCols() as $s) $put[$s] = 1;
+        foreach (neatline_getStyleCols() as $s) $put[$s] = 'true';
 
         // Issue request.
         $this->writePut($put);

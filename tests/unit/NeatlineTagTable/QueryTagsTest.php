@@ -30,15 +30,9 @@ class Neatline_NeatlineTagTableTest_QueryTags
         $exhibit2 = $this->__exhibit();
 
         // Create tags.
-        $tag1 = $this->__tag($exhibit1, 'tag1');
-        $tag2 = $this->__tag($exhibit1, 'tag2');
+        $tag1 = $this->__tag($exhibit1, 'tag1', true);
+        $tag2 = $this->__tag($exhibit1, 'tag2', false);
         $tag3 = $this->__tag($exhibit2, 'tag3');
-
-        // Activate all styles.
-        foreach (array($tag1, $tag2, $tag2) as $t) {
-            foreach (neatline_getStyleCols() as $s) $t->$s= 1;
-            $t->save();
-        }
 
         // Query tags.
         $tags = $this->_tagsTable->queryTags($exhibit1);
@@ -48,11 +42,14 @@ class Neatline_NeatlineTagTableTest_QueryTags
         $this->assertEquals($tags[1]['tag'], 'tag2');
         $this->assertCount(2, $tags);
 
-        // Check for styles.
-        foreach ($tags as $t) {
-            foreach (neatline_getStyleCols() as $s) {
-                $this->assertEquals($t[$s], 1);
-            }
+        // Check active styles on tag1.
+        foreach (neatline_getStyleCols() as $s) {
+            $this->assertTrue($tags[0][$s]);
+        }
+
+        // Check inactive styles on tag1.
+        foreach (neatline_getStyleCols() as $s) {
+            $this->assertFalse($tags[1][$s]);
         }
 
     }
