@@ -39,6 +39,7 @@
       "openlayers":         "./views/shared/javascripts/components/openlayers/build/OpenLayers.js",
       "bootstrap":          "./views/shared/javascripts/components/bootstrap/bootstrap/js/bootstrap.js",
       "toastr":             "./views/shared/javascripts/components/toastr/toastr.js",
+      "epiceditor":         "./views/shared/javascripts/components/epiceditor/epiceditor/js/epiceditor.js",
       "d3":                 "./views/shared/javascripts/components/d3/d3.v2.js"
     },
     "css": {

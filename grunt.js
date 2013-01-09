@@ -174,6 +174,7 @@ module.exports = function(grunt) {
           config.vendor.js.routefilter,
           config.vendor.js.rivets,
           config.vendor.js.openlayers,
+          config.vendor.js.epiceditor,
           config.vendor.js.bootstrap,
           config.vendor.js.toastr,
           config.vendor.js.d3,

@@ -63,6 +63,7 @@ Neatline.module('Editor.Record', function(
       // Activate "Text" by default.
       this.__ui.textRegion.addClass('active');
       this.__ui.textTab.tab('show');
+
     },
 
 

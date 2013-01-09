@@ -11,6 +11,7 @@
     , "backbone.routefilter": "https://github.com/boazsender/backbone.routefilter.git"
     , "openlayers":           "https://github.com/openlayers/openlayers.git"
     , "toastr":               "https://github.com/CodeSeven/toastr.git"
+    , "epiceditor":           "https://github.com/OscarGodson/EpicEditor.git"
     , "bootstrap":            ">= 2.2.0"
     , "rivets":               ">= 0.4.3"
     , "d3":                   ">= 2.10.3"
