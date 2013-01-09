@@ -48,14 +48,6 @@ Neatline.module('Editor.Record', function(
       }
     },
 
-    options: {
-      toastr: {
-        timeOut:  1500,
-        fadeIn:   200,
-        fadeOut:  200
-      }
-    },
-
 
     /**
      * Initialize state, render template.
@@ -120,12 +112,16 @@ Neatline.module('Editor.Record', function(
 
         // Flash success.
         success: _.bind(function() {
-          this.notifySuccess(STRINGS.record.save.success);
+          Neatline.execute('editor:notifySuccess',
+            STRINGS.record.save.success
+          );
         }, this),
 
         // Flash failure.
         error: _.bind(function() {
-          this.notifyError(STRINGS.record.save.error);
+          Neatline.execute('editor:notifyError',
+            STRINGS.record.save.error
+          );
         }, this)
 
       });
@@ -147,14 +143,19 @@ Neatline.module('Editor.Record', function(
           this.__ui.deleteModal.modal('hide');
 
           // FLash success, close modal and form.
-          this.notifySuccess(STRINGS.record.delete.success);
+          Neatline.execute('editor:notifySuccess',
+            STRINGS.record.delete.success
+          );
+
           this.close();
 
         }, this),
 
         // Flash failure.
         error: _.bind(function() {
-          this.notifyError(STRINGS.record.delete.error);
+          Neatline.execute('editor:notifyError',
+            STRINGS.record.delete.error
+          );
         }, this)
 
       });
@@ -246,26 +247,6 @@ Neatline.module('Editor.Record', function(
         snap:   this.__ui.spatial.snap.val(),
         irreg:  this.__ui.spatial.irreg.is(':checked')
       };
-    },
-
-
-    /**
-     * Flash a success notification.
-     *
-     * @param {String} string: The message.
-     */
-    notifySuccess: function(string) {
-      toastr.info(string, null, this.options.toastr);
-    },
-
-
-    /**
-     * Flash a failure notification.
-     *
-     * @param {String} string: The message.
-     */
-    notifyError: function(string) {
-      toastr.error(string, null, this.options.toastr);
     }
 
 

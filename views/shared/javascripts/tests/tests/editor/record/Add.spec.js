@@ -64,7 +64,7 @@ describe('Record Form Add Record', function() {
     _t.respondNewRecord();
 
     // Check for placeholder.
-    expect(els.lead.text()).toEqual(STRINGS.record.placeholders.title);
+    expect(els.lead.text()).toEqual(STRINGS.placeholders.title);
 
   });
 

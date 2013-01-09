@@ -23,6 +23,14 @@ Neatline.module('Editor', { startWithParent: false,
       editor:   '#editor'
     },
 
+    options: {
+      toastr: {
+        timeOut:  1500,
+        fadeIn:   200,
+        fadeOut:  200
+      }
+    },
+
 
     /**
      * Get ui, store default editor width, listen for window resize.
@@ -55,6 +63,26 @@ Neatline.module('Editor', { startWithParent: false,
       this.__ui.map.      css({ height: h, width: w - this.width });
       this.__ui.exhibit.  css({ left: this.width });
 
+    },
+
+
+    /**
+     * Flash a success notification.
+     *
+     * @param {String} string: The message.
+     */
+    notifySuccess: function(string) {
+      toastr.info(string, null, this.options.toastr);
+    },
+
+
+    /**
+     * Flash a failure notification.
+     *
+     * @param {String} string: The message.
+     */
+    notifyError: function(string) {
+      toastr.error(string, null, this.options.toastr);
     }
 
 

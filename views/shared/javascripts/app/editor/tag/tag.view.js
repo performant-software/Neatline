@@ -69,10 +69,14 @@ Neatline.module('Editor.Tag', function(
     save: function() {
       this.model.save(null, {
         success: _.bind(function() {
-          // TODO
+          Neatline.execute('editor:notifySuccess',
+            STRINGS.tag.save.success
+          );
         }, this),
         error: _.bind(function() {
-          // TODO
+          Neatline.execute('editor:notifyError',
+            STRINGS.tag.save.error
+          );
         }, this)
       });
 

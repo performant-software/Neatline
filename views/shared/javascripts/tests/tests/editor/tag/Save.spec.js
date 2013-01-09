@@ -83,46 +83,46 @@ describe('Record Form Save', function() {
 
   });
 
-  // it('should flash a notification when the save succeeds', function() {
+  it('should flash a notification when the save succeeds', function() {
 
-  //   // --------------------------------------------------------------------
-  //   // When the "Save" button is clicked and the request is successful, a
-  //   // success notification should be displayed.
-  //   // --------------------------------------------------------------------
+    // --------------------------------------------------------------------
+    // When the "Save" button is clicked and the request is successful, a
+    // success notification should be displayed.
+    // --------------------------------------------------------------------
 
-  //   // Spy on toaster.
-  //   spyOn(toastr, 'info');
+    // Spy on toaster.
+    spyOn(toastr, 'info');
 
-  //   // Click on "Save".
-  //   els.save.trigger('click');
-  //   _t.respondLast200('');
+    // Click on "Save".
+    els.save.trigger('click');
+    _t.respondLast200('');
 
-  //   // Check for `toastr` call.
-  //   expect(toastr.info).toHaveBeenCalledWith(
-  //     STRINGS.record.save.success, null, _t.vw.record.options.toastr
-  //   );
+    // Check for `toastr` call.
+    expect(toastr.info).toHaveBeenCalledWith(
+      STRINGS.tag.save.success, null, _t.vw.editor.options.toastr
+    );
 
-  // });
+  });
 
-  // it('should flash a notification when the save fails', function() {
+  it('should flash a notification when the save fails', function() {
 
-  //   // --------------------------------------------------------------------
-  //   // When the "Save" button is clicked and the request fails, a failure
-  //   // notification should be displayed.
-  //   // --------------------------------------------------------------------
+    // --------------------------------------------------------------------
+    // When the "Save" button is clicked and the request fails, a failure
+    // notification should be displayed.
+    // --------------------------------------------------------------------
 
-  //   // Spy on toaster.
-  //   spyOn(toastr, 'error');
+    // Spy on toaster.
+    spyOn(toastr, 'error');
 
-  //   // Click on "Save".
-  //   els.save.trigger('click');
-  //   _t.respondLast500();
+    // Click on "Save".
+    els.save.trigger('click');
+    _t.respondLast500();
 
-  //   // Check for `toastr` call.
-  //   expect(toastr.error).toHaveBeenCalledWith(
-  //     STRINGS.record.save.error, null, _t.vw.record.options.toastr
-  //   );
+    // Check for `toastr` call.
+    expect(toastr.error).toHaveBeenCalledWith(
+      STRINGS.tag.save.error, null, _t.vw.editor.options.toastr
+    );
 
-  // });
+  });
 
 });

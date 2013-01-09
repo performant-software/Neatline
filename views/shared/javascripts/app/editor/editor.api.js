@@ -17,6 +17,34 @@ Neatline.module('Editor', { startWithParent: false,
   // ======================================================================
 
   /**
+   * Flash a success notification.
+   *
+   * @param {String} message: The message.
+   */
+  var notifySuccess = function(message) {
+    Editor.__view.notifySuccess(message);
+  };
+
+  Neatline.commands.addHandler('editor:notifySuccess', notifySuccess);
+
+
+  // ======================================================================
+
+  /**
+   * Flash an error notification.
+   *
+   * @param {String} message: The message.
+   */
+  var notifyError = function(message) {
+    Editor.__view.notifyError(message);
+  };
+
+  Neatline.commands.addHandler('editor:notifyError', notifyError);
+
+
+  // ======================================================================
+
+  /**
    * Open a record edit form if one is not already open.
    *
    * @param {Object} model: The record model.

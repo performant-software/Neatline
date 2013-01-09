@@ -16,9 +16,6 @@
 <script>
   STRINGS = {
     record: {
-      placeholders: {
-        title: '<?php echo __('[Untitled]'); ?>'
-      },
       save: {
         success: '<?php echo __('The record was saved successfully!'); ?>',
         error: '<?php echo __('There was an error; the record was not saved.'); ?>'
@@ -28,9 +25,26 @@
         error: '<?php echo __('There was an error; the record was not deleted.'); ?>'
       },
       add: {
-        success: '<?php echo __('New record successfully successfully!'); ?>',
+        success: '<?php echo __('New record created successfully!'); ?>',
         error: '<?php echo __('There was an error; a new record was not created.'); ?>'
       }
+    },
+    tag: {
+      save: {
+        success: '<?php echo __('The tag was saved successfully!'); ?>',
+        error: '<?php echo __('There was an error; the tag was not saved.'); ?>'
+      },
+      delete: {
+        success: '<?php echo __('The tag was deleted successfully!'); ?>',
+        error: '<?php echo __('There was an error; the tag was not deleted.'); ?>'
+      },
+      add: {
+        success: '<?php echo __('New tag created successfully!'); ?>',
+        error: '<?php echo __('There was an error; a new tag was not created.'); ?>'
+      }
+    },
+    placeholders: {
+      title: '<?php echo __('[Untitled]'); ?>'
     }
   };
 </script>

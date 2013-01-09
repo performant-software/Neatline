@@ -97,7 +97,7 @@ describe('Record Form Delete', function() {
 
     // Check for `toastr` call.
     expect(toastr.info).toHaveBeenCalledWith(
-      STRINGS.record.delete.success, null, _t.vw.record.options.toastr
+      STRINGS.record.delete.success, null, _t.vw.editor.options.toastr
     );
 
   });
@@ -118,7 +118,7 @@ describe('Record Form Delete', function() {
 
     // Check for `toastr` call.
     expect(toastr.error).toHaveBeenCalledWith(
-      STRINGS.record.delete.error, null, _t.vw.record.options.toastr
+      STRINGS.record.delete.error, null, _t.vw.editor.options.toastr
     );
 
   });
