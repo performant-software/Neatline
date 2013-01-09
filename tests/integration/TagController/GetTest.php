@@ -26,7 +26,7 @@ class Neatline_TagControllerTest_Get
 
         // Create exhibit and tag.
         $exhibit = $this->__exhibit();
-        $tag = $this->__tag($exhibit, 'tag');
+        $tag = $this->__tag($exhibit, 'tag', true);
 
         // Hit /tag/:id, capture response.
         $this->dispatch('neatline/tag/'.$tag->id);
@@ -36,12 +36,12 @@ class Neatline_TagControllerTest_Get
         $this->assertResponseCode(200);
 
         // Check attributes.
-        $this->assertObjectHasAttribute('id',  $response);
-        $this->assertObjectHasAttribute('tag', $response);
+        $this->assertEquals($response->id, $tag->id);
+        $this->assertEquals($response->tag, 'tag');
 
         // Check styles.
         foreach (neatline_getStyleCols() as $s) {
-            $this->assertObjectHasAttribute($s, $response);
+            $this->assertEquals($response->$s, 1);
         }
 
     }

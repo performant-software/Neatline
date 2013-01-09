@@ -28,8 +28,8 @@ class Neatline_TagsControllerTest_GET
         // Create exhibits and tags.
         $exhibit1 = $this->__exhibit();
         $exhibit2 = $this->__exhibit();
-        $tag1 = $this->__tag($exhibit1, 'tag1');
-        $tag2 = $this->__tag($exhibit1, 'tag2');
+        $tag1 = $this->__tag($exhibit1, 'tag1', true);
+        $tag2 = $this->__tag($exhibit1, 'tag2', false);
         $tag3 = $this->__tag($exhibit2, 'tag3');
 
         // Hit /records, capture response.
@@ -42,15 +42,18 @@ class Neatline_TagsControllerTest_GET
 
         // Check record identities.
         $this->assertEquals($response[0]->id, $tag1->id);
+        $this->assertEquals($response[0]->tag, 'tag1');
         $this->assertEquals($response[1]->id, $tag2->id);
+        $this->assertEquals($response[1]->tag, 'tag2');
 
-        // Check attributes.
-        $this->assertObjectHasAttribute('id',  $response[0]);
-        $this->assertObjectHasAttribute('tag', $response[0]);
-
-        // Check styles.
+        // Check activated styles on tag1.
         foreach (neatline_getStyleCols() as $s) {
-            $this->assertObjectHasAttribute($s, $response[0]);
+            $this->assertEquals($response[0]->$s, 1);
+        }
+
+        // Check deactivated styles on tag2.
+        foreach (neatline_getStyleCols() as $s) {
+            $this->assertEquals($response[1]->$s, 0);
         }
 
     }
