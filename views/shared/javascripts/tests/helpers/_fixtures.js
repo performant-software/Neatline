@@ -54,11 +54,12 @@ _t.loadJsonFixtures = function() {
 
     tags: {
       standard: readFixtures('tags.standard.json')
-    }
+    },
 
-    // tag: {
-      // standard: readFixtures('tag.standard.json')
-    // }
+    tag: {
+      standard: readFixtures('tag.standard.json'),
+      add:      readFixtures('tag.add.json')
+    }
 
   };
 };

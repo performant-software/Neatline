@@ -289,7 +289,7 @@ describe('Record Form Open', function() {
 
     // Re-open the form.
     els.close.trigger('click');
-    _t.respondDefaultRecords();
+    _t.respondRecords();
     _t.openRecordForm();
 
     // Check mode.

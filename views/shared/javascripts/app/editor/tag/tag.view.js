@@ -107,7 +107,7 @@ Neatline.module('Editor.Tag', function(
 
           // FLash success, close form.
           Neatline.execute('editor:notifySuccess',
-            STRINGS.record.delete.success
+            STRINGS.tag.delete.success
           );
 
           this.close();

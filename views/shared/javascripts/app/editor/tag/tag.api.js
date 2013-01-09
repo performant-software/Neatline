@@ -31,57 +31,43 @@ Neatline.module('Editor.Tag', function(
   Neatline.vent.on('editor:router:#tags/:id', showById);
 
 
-  // // ======================================================================
+  // ======================================================================
 
   /**
-   * Show form for a new record.
+   * Show form for a new tag.
    */
-  // var showNew = function() {
+  var showNew = function() {
 
-  //   // Create new record.
-  //   var record = new Neatline.Shared.Record.Model();
+    // Create new tag.
+    var tag = new Neatline.Editor.Shared.Tag.Model();
 
-  //   // Populate id.
-  //   record.save(null, {
-  //     success: function() {
-  //       Record.__view.show(record);
-  //     }
-  //   });
+    // Populate id.
+    tag.save(null, {
+      success: function() {
+        Tag.__view.show(tag);
+      }
+    });
 
-  // };
+  };
 
-  // Neatline.commands.addHandler('editor:record:showNew', showNew);
-  // Neatline.vent.on('editor:router:#records/add', showNew);
+  Neatline.commands.addHandler('editor:tag:showNew', showNew);
+  Neatline.vent.on('editor:router:#tags/add', showNew);
 
 
-  // // ======================================================================
+  // ======================================================================
 
   /**
-   * Close a record form.
+   * Close a tag form.
    */
-  // var close = function() {
-  //   if (Record.__view.open) Record.__view.close();
-  // };
+  var close = function() {
+    if (Tag.__view.open) Tag.__view.close();
+  };
 
-  // Neatline.commands.addHandler('editor:record:close', close);
-  // Neatline.vent.on('editor:router:before', close);
+  Neatline.commands.addHandler('editor:tag:close', close);
+  Neatline.vent.on('editor:router:before', close);
 
 
-  // // ======================================================================
-
-  /**
-   * Update coverage textarea.
-   *
-   * @param {String} coverage: The new WKT.
-   */
-  // var setCoverage = function(coverage) {
-  //   Record.__view.model.set('coverage', coverage);
-  // };
-
-  // Neatline.commands.addHandler('editor:record:setCoverage', setCoverage);
-  // Neatline.vent.on('editor:map:newCoverage', setCoverage);
-
-  // // ======================================================================
+  // ======================================================================
 
 
 });

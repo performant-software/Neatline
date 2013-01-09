@@ -34,7 +34,7 @@ describe('Record Form Close', function() {
 
     // Click "X".
     els.close.trigger('click');
-    _t.respondDefaultRecords();
+    _t.respondRecords();
 
     // Check for records list, no form.
     expect(_t.el.editor).not.toContain(_t.el.record);

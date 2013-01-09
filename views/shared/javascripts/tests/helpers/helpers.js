@@ -202,11 +202,12 @@ _t.loadJsonFixtures = function() {
 
     tags: {
       standard: readFixtures('tags.standard.json')
-    }
+    },
 
-    // tag: {
-      // standard: readFixtures('tag.standard.json')
-    // }
+    tag: {
+      standard: readFixtures('tag.standard.json'),
+      add:      readFixtures('tag.add.json')
+    }
 
   };
 };
@@ -514,8 +515,16 @@ _t.respondLast500 = function() {
 /**
  * Respond 200 with the default record collection.
  */
-_t.respondDefaultRecords = function() {
+_t.respondRecords = function() {
   this.respondLast200(this.json.records.standard);
+};
+
+
+/**
+ * Respond 200 with the tag collection.
+ */
+_t.respondTags = function() {
+  this.respondLast200(this.json.tags.standard);
 };
 
 
@@ -528,10 +537,10 @@ _t.respondNewRecord = function() {
 
 
 /**
- * Respond 200 with the tag collection.
+ * Respond 200 with the new record JSON.
  */
-_t.respondTags = function() {
-  this.respondLast200(this.json.tags.standard);
+_t.respondNewTag = function() {
+  this.respondLast200(this.json.tag.add);
 };
 
 

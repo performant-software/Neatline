@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Tests for record delete.
+ * Tests for tag delete.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -17,16 +17,16 @@ describe('Record Form Delete', function() {
   beforeEach(function() {
 
     _t.loadEditor();
-    _t.openRecordForm();
+    _t.openTagForm();
 
     els = {
-      delete1:  _t.vw.record.$('a[name="delete1"]'),
-      delete2:  _t.vw.record.$('a[name="delete2"]'),
-      cancel:   _t.vw.record.$('a[name="cancel"]'),
-      modal:    _t.vw.record.$('div.modal')
+      delete1:  _t.vw.tag.$('a[name="delete1"]'),
+      delete2:  _t.vw.tag.$('a[name="delete2"]'),
+      cancel:   _t.vw.tag.$('a[name="cancel"]'),
+      modal:    _t.vw.tag.$('div.modal')
     };
 
-    id =        _t.vw.record.model.get('id');
+    id =        _t.vw.tag.model.get('id');
 
   });
 
@@ -77,7 +77,7 @@ describe('Record Form Delete', function() {
 
     // Check method and route.
     expect(request.method).toEqual('DELETE');
-    expect(request.url).toEqual(__exhibit.api.record+'/'+id);
+    expect(request.url).toEqual(__editor.api.tag+'/'+id);
 
   });
 
@@ -97,7 +97,7 @@ describe('Record Form Delete', function() {
 
     // Check for `toastr` call.
     expect(toastr.info).toHaveBeenCalledWith(
-      STRINGS.record.delete.success, null, _t.vw.editor.options.toastr
+      STRINGS.tag.delete.success, null, _t.vw.editor.options.toastr
     );
 
   });
@@ -118,7 +118,7 @@ describe('Record Form Delete', function() {
 
     // Check for `toastr` call.
     expect(toastr.error).toHaveBeenCalledWith(
-      STRINGS.record.delete.error, null, _t.vw.editor.options.toastr
+      STRINGS.tag.delete.error, null, _t.vw.editor.options.toastr
     );
 
   });
@@ -127,7 +127,7 @@ describe('Record Form Delete', function() {
 
     // --------------------------------------------------------------------
     // When the "Yes, delete" button is clicked and the request succeeds,
-    // the modal should disappear, the form should close, and the records
+    // the modal should disappear, the form should close, and the tags
     // list should be displayed.
     // --------------------------------------------------------------------
 
@@ -140,35 +140,9 @@ describe('Record Form Delete', function() {
     expect(els.modal).not.toHaveClass('in');
 
     // Check for closed form.
-    expect(_t.el.editor).not.toContain(_t.el.record);
-    expect(_t.el.editor).toContain(_t.el.records);
-    expect(Backbone.history.fragment).toEqual('records');
-
-  });
-
-  it('should remove the model from the map collection', function() {
-
-    // --------------------------------------------------------------------
-    // When a record is deleted, the model for the record should be
-    // removed from the map records collection, the layer for the record
-    // should be removed immediately from the map, and the layer should
-    // be removed from the `layers` tracker array on the map view.
-    // --------------------------------------------------------------------
-
-    // Capture the form model.
-    var model = _t.vw.record.model;
-
-    // Delete, confirm.
-    els.delete1.trigger('click');
-    els.delete2.trigger('click');
-    _t.respondLast200('');
-
-    // Layer removed from map.
-    expect(_t.vw.map.getLayerByModel(model)).toBeUndefined();
-
-    // Layer removed from `layers` tracker.
-    expect(_.find(_t.vw.map.layers, function(layer) {
-      return layer.nId == id; })).toBeUndefined();
+    expect(_t.el.editor).not.toContain(_t.el.tag);
+    expect(_t.el.editor).toContain(_t.el.tags);
+    expect(Backbone.history.fragment).toEqual('tags');
 
   });
 

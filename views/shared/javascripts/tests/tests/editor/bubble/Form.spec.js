@@ -66,7 +66,7 @@ describe('Bubble Form Interaction', function() {
 
     // Close the form.
     els.close.trigger('click');
-    _t.respondDefaultRecords();
+    _t.respondRecords();
 
     // Bubble should be hidden
     expect(_t.el.bubble).not.toBeVisible();
@@ -127,7 +127,7 @@ describe('Bubble Form Interaction', function() {
 
     // Close the form.
     els.close.trigger('click');
-    _t.respondDefaultRecords();
+    _t.respondRecords();
 
     // Hover on feature, check bubble.
     _t.hoverOnMapFeature(layer, feature);
@@ -147,7 +147,7 @@ describe('Bubble Form Interaction', function() {
 
     // Close the form.
     els.close.trigger('click');
-    _t.respondDefaultRecords();
+    _t.respondRecords();
 
     // Reopen the form.
     _t.openRecordForm();
