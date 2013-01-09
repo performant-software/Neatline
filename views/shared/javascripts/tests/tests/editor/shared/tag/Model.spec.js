@@ -44,4 +44,17 @@ describe('Tag Model', function() {
 
   });
 
+  it('should set boolean values as 0/1', function() {
+
+    // --------------------------------------------------------------------
+    // When `set` is passed a boolean, the value should be cast to 0/1.
+    // --------------------------------------------------------------------
+
+    model.set('test', true);
+    expect(model.get('test')).toEqual(1);
+    model.set('test', false);
+    expect(model.get('test')).toEqual(0);
+
+  });
+
 });

@@ -66,20 +66,20 @@ describe('Record Form Save', function() {
 
     // Check the query string for updated values.
     expect(params.tag).             toEqual('tag1NEW');
-    expect(params.vector_color).    toEqual(true);
-    expect(params.stroke_color).    toEqual(false);
-    expect(params.select_color).    toEqual(true);
-    expect(params.vector_opacity).  toEqual(false);
-    expect(params.select_opacity).  toEqual(true);
-    expect(params.stroke_opacity).  toEqual(false);
-    expect(params.image_opacity).   toEqual(true);
-    expect(params.stroke_width).    toEqual(false);
-    expect(params.point_radius).    toEqual(true);
-    expect(params.point_image).     toEqual(false);
-    expect(params.min_zoom).        toEqual(true);
-    expect(params.max_zoom).        toEqual(false);
-    expect(params.map_focus).       toEqual(true);
-    expect(params.map_zoom).        toEqual(false);
+    expect(params.vector_color).    toEqual(1);
+    expect(params.stroke_color).    toEqual(0);
+    expect(params.select_color).    toEqual(1);
+    expect(params.vector_opacity).  toEqual(0);
+    expect(params.select_opacity).  toEqual(1);
+    expect(params.stroke_opacity).  toEqual(0);
+    expect(params.image_opacity).   toEqual(1);
+    expect(params.stroke_width).    toEqual(0);
+    expect(params.point_radius).    toEqual(1);
+    expect(params.point_image).     toEqual(0);
+    expect(params.min_zoom).        toEqual(1);
+    expect(params.max_zoom).        toEqual(0);
+    expect(params.map_focus).       toEqual(1);
+    expect(params.map_zoom).        toEqual(0);
 
   });
 

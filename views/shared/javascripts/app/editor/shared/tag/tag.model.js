@@ -15,10 +15,29 @@ Neatline.module('Editor.Shared.Tag', function(
 
 
   Tag.Model = Backbone.Model.extend({
+
+
+    /**
+     * Construct the url. If `id` is defined (if the tag has been saved),
+     * point to the `tag` API; otherwise, point to the collection API.
+     *
+     * @return {String}: The url.
+     */
     url: function() {
       if (this.get('id')) return __editor.api.tag+'/'+this.get('id');
       else return __editor.api.tags;
+    },
+
+
+    /**
+     * When a boolean value is set on the model, cast to value to 0/1.
+     */
+    set: function(key, val, options) {
+      if (_.isBoolean(val)) val = val ? 1 : 0;
+      return Backbone.Model.prototype.set.call(this, key, val, options);
     }
+
+
   });
 
 
