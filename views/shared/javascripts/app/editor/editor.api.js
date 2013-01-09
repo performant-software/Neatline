@@ -46,5 +46,18 @@ Neatline.module('Editor', { startWithParent: false,
 
   // ======================================================================
 
+  /**
+   * Navigate to the tag list.
+   */
+  var showTagList = function() {
+    Editor.__router.navigate('tags', true);
+  };
+
+  Neatline.commands.addHandler('editor:showTagList', showTagList);
+  Neatline.vent.on('editor:tag:close', showTagList);
+
+
+  // ======================================================================
+
 
 }});

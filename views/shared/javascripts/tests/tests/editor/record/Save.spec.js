@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Tests for form delete.
+ * Tests for record save.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -30,31 +30,30 @@ describe('Record Form Save', function() {
     // --------------------------------------------------------------------
     // When the user clicks the "Save" button at the bottom of the edit
     // form for a record, the form should gather the updated values from
-    // the input fields and issue a PUT request to the records API with
-    // the new data.
+    // the input fields and issue a PUT request with the new data.
     // --------------------------------------------------------------------
 
     // Get the model id and form elements.
     var id = _t.vw.record.model.get('id');
     var inputs = _t.getRecordFormElements();
 
-    inputs.title.          val('title2').      trigger('change');
-    inputs.body.           val('body2').       trigger('change');
-    inputs.coverage.       val('POINT(3 4)').  trigger('change');
-    inputs.vectorColor.    val('#222222').     trigger('change');
-    inputs.strokeColor.    val('#555555').     trigger('change');
-    inputs.selectColor.    val('#888888').     trigger('change');
-    inputs.vectorOpacity.  val('2').           trigger('change');
-    inputs.selectOpacity.  val('5').           trigger('change');
-    inputs.strokeOpacity.  val('8').           trigger('change');
-    inputs.imageOpacity.   val('11').          trigger('change');
-    inputs.strokeWidth.    val('14').          trigger('change');
-    inputs.pointRadius.    val('17').          trigger('change');
-    inputs.pointImage.     val('file2.png').   trigger('change');
-    inputs.minZoom.        val('20').          trigger('change');
-    inputs.maxZoom.        val('23').          trigger('change');
-    inputs.mapFocus.       val('200,300').     trigger('change');
-    inputs.mapZoom.        val('24').          trigger('change');
+    inputs.title.           val('title2').      trigger('change');
+    inputs.body.            val('body2').       trigger('change');
+    inputs.coverage.        val('POINT(3 4)').  trigger('change');
+    inputs.vectorColor.     val('#222222').     trigger('change');
+    inputs.strokeColor.     val('#555555').     trigger('change');
+    inputs.selectColor.     val('#888888').     trigger('change');
+    inputs.vectorOpacity.   val('2').           trigger('change');
+    inputs.selectOpacity.   val('5').           trigger('change');
+    inputs.strokeOpacity.   val('8').           trigger('change');
+    inputs.imageOpacity.    val('11').          trigger('change');
+    inputs.strokeWidth.     val('14').          trigger('change');
+    inputs.pointRadius.     val('17').          trigger('change');
+    inputs.pointImage.      val('file2.png').   trigger('change');
+    inputs.minZoom.         val('20').          trigger('change');
+    inputs.maxZoom.         val('23').          trigger('change');
+    inputs.mapFocus.        val('200,300').     trigger('change');
+    inputs.mapZoom.         val('24').          trigger('change');
 
     // Click "Save" button.
     els.save.trigger('click');

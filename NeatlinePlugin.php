@@ -138,17 +138,17 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
         self::addStyle('vector_color',      'TINYTEXT NULL');
         self::addStyle('stroke_color',      'TINYTEXT NULL');
         self::addStyle('select_color',      'TINYTEXT NULL');
-        self::addStyle('point_image',       'TINYTEXT NULL');
         self::addStyle('vector_opacity',    'INT(10) UNSIGNED NULL');
         self::addStyle('select_opacity',    'INT(10) UNSIGNED NULL');
         self::addStyle('stroke_opacity',    'INT(10) UNSIGNED NULL');
         self::addStyle('image_opacity',     'INT(10) UNSIGNED NULL');
         self::addStyle('stroke_width',      'INT(10) UNSIGNED NULL');
         self::addStyle('point_radius',      'INT(10) UNSIGNED NULL');
+        self::addStyle('point_image',       'TINYTEXT NULL');
         self::addStyle('max_zoom',          'INT(10) UNSIGNED NULL');
         self::addStyle('min_zoom',          'INT(10) UNSIGNED NULL');
-        self::addStyle('map_zoom',          'INT(10) UNSIGNED NULL');
         self::addStyle('map_focus',         'VARCHAR(100) NULL');
+        self::addStyle('map_zoom',          'INT(10) UNSIGNED NULL');
 
     }
 

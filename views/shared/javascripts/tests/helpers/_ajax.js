@@ -94,3 +94,11 @@ _t.respondDefaultRecords = function() {
 _t.respondNewRecord = function() {
   this.respondLast200(this.json.record.add);
 };
+
+
+/**
+ * Respond 200 with the tag collection.
+ */
+_t.respondTags = function() {
+  this.respondLast200(this.json.tags.standard);
+};

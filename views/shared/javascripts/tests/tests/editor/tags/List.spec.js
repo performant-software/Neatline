@@ -17,7 +17,7 @@ describe('Tags List', function() {
   beforeEach(function() {
 
     _t.loadEditor();
-    _t.showTagsList();
+    _t.showTagList();
 
     tagRows     = _t.getTagRows();
     tagModels   = _t.getTagModels();

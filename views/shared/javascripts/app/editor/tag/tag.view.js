@@ -21,6 +21,12 @@ Neatline.module('Editor.Tag', function(
     className:  'form-stacked tag',
     tagName:    'form',
 
+    events: {
+      'click a[name="close"]':    'close',
+      'click a[name="save"]':     'save',
+      'click a[name="delete2"]':  'remove'
+    },
+
 
     /**
      * Render template, get elements.
@@ -51,9 +57,9 @@ Neatline.module('Editor.Tag', function(
      * Close the form.
      */
     close: function() {
-      this.open = false;
-      this.model = null;
-      // TODO
+      Neatline.vent.trigger('editor:tag:close');
+      this.open   = false;
+      this.model  = null;
     },
 
 

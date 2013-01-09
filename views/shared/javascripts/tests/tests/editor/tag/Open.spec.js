@@ -17,7 +17,7 @@ describe('Tag Form Open', function() {
   beforeEach(function() {
 
     _t.loadEditor();
-    _t.showTagsList();
+    _t.showTagList();
 
     // Get tag rows.
     tagRows = _t.getTagRows();

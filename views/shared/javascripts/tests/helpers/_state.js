@@ -95,18 +95,38 @@ _t.click = function(el) {
 
 
 /**
- * Navigate to the edit form for the first record.
+ * Navigate to the record list.
  */
-_t.openRecordForm = function() {
-  var models = this.getRecordModels();
-  this.navigate('records/'+models[0].get('id'));
+_t.showRecordList = function() {
+  this.navigate('records');
+  this.respondLast200(this.json.records.standard);
+};
+
+
+/**
+ * Navigate the tag list.
+ */
+_t.showTagList = function() {
+  this.navigate('tags');
+  this.respondLast200(this.json.tags.standard);
 };
 
 
 /**
  * Navigate to the edit form for the first record.
  */
-_t.showTagsList = function() {
-  this.navigate('tags');
-  this.respondLast200(this.json.tags.standard);
+_t.openRecordForm = function() {
+  _t.showRecordList();
+  var models = this.getRecordModels();
+  this.navigate('records/'+models[0].get('id'));
+};
+
+
+/**
+ * Navigate to the edit form for the first tag.
+ */
+_t.openTagForm = function() {
+  _t.showTagList();
+  var models = this.getTagModels();
+  this.navigate('tags/'+models[0].get('id'));
 };
