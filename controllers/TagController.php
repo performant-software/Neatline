@@ -42,7 +42,7 @@ class Neatline_TagController extends Neatline_RestController
     {
         $tag = $this->__table->find($this->_request->id);
         $put = file_get_contents(Zend_Registry::get('fileIn'));
-        // $tag->saveForm(Zend_Json::decode($put, true));
+        $tag->saveForm(Zend_Json::decode($put, true));
     }
 
 

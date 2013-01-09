@@ -135,7 +135,7 @@ class Neatline_Test_AppTestCase extends Omeka_Test_AppTestCase
         $tag->tag = $name;
 
         if ($activate) {
-          foreach (array_keys(neatline_getStyles()) as $s) $tag->$s= 1;
+          foreach (neatline_getStyleCols() as $s) $tag->$s= 1;
         }
 
         $tag->save();

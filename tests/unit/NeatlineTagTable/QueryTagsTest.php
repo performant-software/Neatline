@@ -36,7 +36,7 @@ class Neatline_NeatlineTagTableTest_QueryTags
 
         // Activate all styles.
         foreach (array($tag1, $tag2, $tag2) as $t) {
-            foreach (array_keys(neatline_getStyles()) as $s) $t->$s= 1;
+            foreach (neatline_getStyleCols() as $s) $t->$s= 1;
             $t->save();
         }
 
@@ -50,7 +50,7 @@ class Neatline_NeatlineTagTableTest_QueryTags
 
         // Check for styles.
         foreach ($tags as $t) {
-            foreach (array_keys(neatline_getStyles()) as $s) {
+            foreach (neatline_getStyleCols() as $s) {
                 $this->assertEquals($t[$s], 1);
             }
         }

@@ -69,4 +69,16 @@ class NeatlineTag extends Omeka_Record_AbstractRecord
     }
 
 
+    /**
+     * Save form values.
+     *
+     * @param array $values The PUT values.
+     */
+    public function saveForm($values)
+    {
+        foreach ($values as $k => $v) $this->$k = $v;
+        $this->save();
+    }
+
+
 }

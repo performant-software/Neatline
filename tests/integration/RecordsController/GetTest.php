@@ -53,7 +53,7 @@ class Neatline_RecordsControllerTest_Get
         $this->assertObjectHasAttribute('coverage', $response[0]);
 
         // Check for styles.
-        foreach (array_keys(neatline_getStyles()) as $s) {
+        foreach (neatline_getStyleCols() as $s) {
             $this->assertObjectHasAttribute($s, $response[0]);
         }
 

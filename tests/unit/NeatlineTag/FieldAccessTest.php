@@ -30,14 +30,14 @@ class Neatline_NeatlineTagTest_FieldAccess
         $tag->tag = 'tag';
 
         // Activate all styles.
-        foreach (array_keys(neatline_getStyles()) as $s) $tag->$s= 1;
+        foreach (neatline_getStyleCols() as $s) $tag->$s= 1;
         $tag->save();
 
         // Re-get the record.
         $tag = $this->_tagsTable->find($tag->id);
 
         // Check values:
-        foreach (array_keys(neatline_getStyles()) as $s) {
+        foreach (neatline_getStyleCols() as $s) {
             $this->assertEquals($tag->$s, 1);
         }
 

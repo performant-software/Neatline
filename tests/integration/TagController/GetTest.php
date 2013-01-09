@@ -40,7 +40,7 @@ class Neatline_TagControllerTest_Get
         $this->assertObjectHasAttribute('tag', $response);
 
         // Check styles.
-        foreach (array_keys(neatline_getStyles()) as $s) {
+        foreach (neatline_getStyleCols() as $s) {
             $this->assertObjectHasAttribute($s, $response);
         }
 
