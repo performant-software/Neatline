@@ -22,8 +22,8 @@ Neatline.module('Editor.Record', function(
    * @param {Number} id: The record id.
    */
   var showById = function(id) {
-    Neatline.request('editor:records:getModel', id, function(r) {
-      Record.__view.show(r);
+    Neatline.request('editor:records:getModel', id, function(record) {
+      Record.__view.show(record);
     });
   };
 

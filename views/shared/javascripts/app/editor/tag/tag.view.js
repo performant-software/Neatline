@@ -28,7 +28,61 @@ Neatline.module('Editor.Tag', function(
     initialize: function() {
       this.getTemplate();
       this.getUi();
-    }
+    },
+
+
+    /**
+     * Show the form.
+     *
+     * @param {Object} model: A record model.
+     */
+    show: function(model) {
+      this.open = true;
+      this.model = model;
+      // TODO
+    },
+
+
+    /**
+     * Close the form.
+     */
+    close: function() {
+      this.open = false;
+      this.model = null;
+      // TODO
+    },
+
+
+    /**
+     * Save the tag.
+     */
+    save: function() {
+      this.model.save(null, {
+        success: _.bind(function() {
+          // TODO
+        }, this),
+        error: _.bind(function() {
+          // TODO
+        }, this)
+      });
+
+    },
+
+
+    /**
+     * Delete the tag.
+     */
+    remove: function() {
+      this.model.destroy({
+        success: _.bind(function() {
+          // TODO
+        }, this),
+        error: _.bind(function() {
+          // TODO
+        }, this)
+      });
+
+    },
 
 
   });

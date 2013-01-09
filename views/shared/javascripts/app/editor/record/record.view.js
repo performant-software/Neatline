@@ -61,26 +61,36 @@ Neatline.module('Editor.Record', function(
      * Initialize state, render template.
      */
     initialize: function() {
-      this.open = false;
-      this.hash = null;
+
+      this.open   = false;  // True when the form is displayed.
+      this.hash   = null;   // The `href` of the active tab.
+
       this.getTemplate();
       this.getUi();
-      this.setDefaultTab();
+
+      // Activate "Text" by default.
+      this.__ui.textRegion.addClass('active');
+      this.__ui.textTab.tab('show');
     },
 
 
     /**
      * Show the form.
      *
-     * @param {Object} model: A form model.
+     * @param {Object} model: A record model.
      */
     show: function(model) {
-      this.open = true;
-      Neatline.vent.trigger('editor:record:show', model);
+
+      this.model  = model;
+      this.open   = true;
+
+      // Activate map editing, bind form data.
+      Neatline.vent.trigger('editor:record:show', this.model);
       rivets.bind(this.$el, { record: model });
+
       this.setBubbleStatus();
       this.resetEditMode();
-      this.model = model;
+
     },
 
 
@@ -88,11 +98,16 @@ Neatline.module('Editor.Record', function(
      * Close the form.
      */
     close: function() {
+
       this.open = false;
+
+      // Deactivate map editing, close/activate bubble.
       Neatline.vent.trigger('editor:record:close', this.model);
       Neatline.execute('bubble:activate');
       Neatline.execute('bubble:unselect');
+
       this.model = null;
+
     },
 
 
@@ -129,10 +144,10 @@ Neatline.module('Editor.Record', function(
 
           // Delete the record's layer on the map.
           Neatline.vent.trigger('editor:record:delete', this.model);
+          this.__ui.deleteModal.modal('hide');
 
           // FLash success, close modal and form.
           this.notifySuccess(STRINGS.record.delete.success);
-          this.__ui.deleteModal.modal('hide');
           this.close();
 
         }, this),
@@ -144,15 +159,6 @@ Neatline.module('Editor.Record', function(
 
       });
 
-    },
-
-
-    /**
-     * Select "Text" tab by default.
-     */
-    setDefaultTab: function() {
-      this.__ui.textRegion.addClass('active');
-      this.__ui.textTab.tab('show');
     },
 
 
