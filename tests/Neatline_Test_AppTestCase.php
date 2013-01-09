@@ -121,9 +121,10 @@ class Neatline_Test_AppTestCase extends Omeka_Test_AppTestCase
      *
      * @param Omeka_Record $exhibit The parent exhibit.
      * @param string $name The tag name.
+     * @param boolean $active If true, activate all styles.
      * @return NeatineTag The tag.
      */
-    public function __tag($exhibit=null, $name=null)
+    public function __tag($exhibit=null, $name=null, $activate=false)
     {
 
         // Create exhibit.
@@ -132,6 +133,11 @@ class Neatline_Test_AppTestCase extends Omeka_Test_AppTestCase
         // Create tag.
         $tag = new NeatlineTag($exhibit);
         $tag->tag = $name;
+
+        if ($activate) {
+          foreach (array_keys(neatline_getStyles()) as $s) $tag->$s= 1;
+        }
+
         $tag->save();
         return $tag;
 

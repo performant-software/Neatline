@@ -54,8 +54,8 @@ describe('Record Form Open', function() {
   it('should populate form values', function() {
 
     // --------------------------------------------------------------------
-    // When the edit form for a record is opened in the editor, the form
-    // should render data from the record's model into the form fields.
+    // When a record edit form is opened, the inputs should be populated
+    // with data from the record model.
     // --------------------------------------------------------------------
 
     // Open form, get elements.

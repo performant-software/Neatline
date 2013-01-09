@@ -43,7 +43,6 @@ Neatline.module('Editor.Tag', function(
 
       // Bind form data.
       rivets.bind(this.$el, { tag: model });
-      console.log(model);
 
     },
 
