@@ -27,6 +27,10 @@ Neatline.module('Editor.Tag', function(
       'click a[name="delete2"]':  'remove'
     },
 
+    ui: {
+      modal:  '#delete-modal',
+    },
+
 
     /**
      * Render template, get elements.
@@ -67,17 +71,23 @@ Neatline.module('Editor.Tag', function(
      * Save the tag.
      */
     save: function() {
+
       this.model.save(null, {
+
+        // Flash success.
         success: _.bind(function() {
           Neatline.execute('editor:notifySuccess',
             STRINGS.tag.save.success
           );
         }, this),
+
+        // Flash failure.
         error: _.bind(function() {
           Neatline.execute('editor:notifyError',
             STRINGS.tag.save.error
           );
         }, this)
+
       });
 
     },
@@ -87,13 +97,30 @@ Neatline.module('Editor.Tag', function(
      * Delete the tag.
      */
     remove: function() {
+
       this.model.destroy({
+
         success: _.bind(function() {
-          // TODO
+
+          // Hide the modal.
+          this.__ui.modal.modal('hide');
+
+          // FLash success, close form.
+          Neatline.execute('editor:notifySuccess',
+            STRINGS.record.delete.success
+          );
+
+          this.close();
+
         }, this),
+
+        // Flash failure.
         error: _.bind(function() {
-          // TODO
+          Neatline.execute('editor:notifyError',
+            STRINGS.tag.delete.error
+          );
         }, this)
+
       });
 
     },

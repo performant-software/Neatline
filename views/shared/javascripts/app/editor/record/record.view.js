@@ -37,7 +37,7 @@ Neatline.module('Editor.Record', function(
 
     ui: {
       tabs:         'ul.nav a',
-      deleteModal:  '#deleteModal',
+      modal:        '#delete-modal',
       textTab:      'a[href="#record-form-text"]',
       textRegion:   '#record-form-text',
       spatial: {
@@ -140,9 +140,9 @@ Neatline.module('Editor.Record', function(
 
           // Delete the record's layer on the map.
           Neatline.vent.trigger('editor:record:delete', this.model);
-          this.__ui.deleteModal.modal('hide');
+          this.__ui.modal.modal('hide');
 
-          // FLash success, close modal and form.
+          // FLash success, close form.
           Neatline.execute('editor:notifySuccess',
             STRINGS.record.delete.success
           );

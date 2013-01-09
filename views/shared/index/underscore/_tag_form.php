@@ -44,7 +44,10 @@
   </fieldset>
 
   <?php echo $this->partial(
-    'index/underscore/partials/_form_menu.php'
+    'index/underscore/partials/_form_actions.php', array('warning' =>
+      "This will remove the tag from all records it is currently assigned
+      to and delete it from the database. This action cannot be undone."
+    )
   ); ?>
 
 </script>

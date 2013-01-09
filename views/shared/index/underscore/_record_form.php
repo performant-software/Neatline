@@ -65,7 +65,10 @@
   </div>
 
   <?php echo $this->partial(
-    'index/underscore/partials/_form_menu.php'
+    'index/underscore/partials/_form_actions.php', array('warning' =>
+      "This will delete the record from the database and remove all
+      associated metadata. This action cannot be undone."
+    )
   ); ?>
 
 </script>
