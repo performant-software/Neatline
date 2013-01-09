@@ -92,8 +92,8 @@ describe('Map Incoming Events', function() {
       // Check for new layer.
       mapLayers = _t.getVectorLayers();
       expect(mapLayers.length).toEqual(3);
-      expect(mapLayers[2].features[0].geometry.x).toEqual(6);
-      expect(mapLayers[2].features[0].geometry.y).toEqual(7);
+      expect(mapLayers[2].features[0].geometry.x).toEqual(1);
+      expect(mapLayers[2].features[0].geometry.y).toEqual(2);
 
       // Focus and zoom should match the model values.
       expect(Math.round(center.lon)).toEqual(100);
@@ -212,8 +212,8 @@ describe('Map Incoming Events', function() {
       // Check for new layer.
       mapLayers = _t.getVectorLayers();
       expect(mapLayers.length).toEqual(3);
-      expect(mapLayers[2].features[0].geometry.x).toEqual(6);
-      expect(mapLayers[2].features[0].geometry.y).toEqual(7);
+      expect(mapLayers[2].features[0].geometry.x).toEqual(1);
+      expect(mapLayers[2].features[0].geometry.y).toEqual(2);
 
       // Focus and zoom should match the model values.
       expect(Math.round(center.lon)).toEqual(100);
