@@ -14,6 +14,12 @@
 ?>
 
 
+<label for="tags"><?php echo __('Tags'); ?></label>
+<div class="controls">
+  <textarea name="tags" data-value="record.tags"
+    rows="2"></textarea>
+</div>
+
 <?php echo $this->partial(
   'index/underscore/helpers/_text_input.php', array(
     'name'  => 'vector-color',

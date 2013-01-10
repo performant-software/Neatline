@@ -21,7 +21,7 @@ class Neatline_TagControllerTest_Put
      * PUT should update a tag.
      * --------------------------------------------------------------------
      */
-    public function testPut()
+    public function testTagUpdate()
     {
 
         // Create exhibit and tag.
@@ -45,6 +45,18 @@ class Neatline_TagControllerTest_Put
         foreach (neatline_getStyleCols() as $s) {
             $this->assertEquals($tag->$s, 1);
         }
+
+    }
+
+
+    /**
+     * --------------------------------------------------------------------
+     * When the name of a tag is changed, the change should be propagated
+     * to the `tags` column on all records that include the tag.
+     * --------------------------------------------------------------------
+     */
+    public function testRecordsPropagation()
+    {
 
     }
 

@@ -61,12 +61,16 @@ class NeatlineRecordTable extends Omeka_Db_Table
     {
 
         // Form the `REPLACE` call.
-        $replace = $this->quoteInto('REPLACE(tags, ?)',
-            array($oldName, $newName));
+        $set = array('tags' => new Zend_Db_Expr(
+            $this->quoteInto('REPLACE(tags, ?)', array(
+                $oldName, $newName)
+            )
+        ));
 
-        // Form `SET` and `WHERE`.
-        $set    = array('tags' => new Zend_Db_Expr($replace));
-        $where  = array('tags LIKE ?' => '%'.$oldName.'%');
+        // Form the `WHERE` clause.
+        $where = array('tags LIKE ?' => '%'.$oldName.'%',
+            'exhibit_id = ?' => $exhibit->id
+        );
 
         // Update records.
         $this->update($this->getTableName(), $set, $where);
