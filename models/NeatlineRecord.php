@@ -21,10 +21,9 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
 
     public $slug;               // VARCHAR(100) NULL
     public $title;              // MEDIUMTEXT NULL
+    public $coverage;           // GEOMETRY NOT NULL
     public $body;               // MEDIUMTEXT NULL
     public $tags;               // TEXT NULL
-    public $coverage;           // GEOMETRY NOT NULL
-    public $map_active;         // TINYINT(1) NULL
 
 
     private $styles = array();
@@ -153,10 +152,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
      */
     public function save()
     {
-        $inserting = !$this->exists();
-        $this->runCallbacks('beforeSave', array('insert' => $inserting));
         $this->id = $this->insertOrUpdate($this->toArray());
-        $this->runCallbacks('afterSave', array('insert' => $inserting));
     }
 
 

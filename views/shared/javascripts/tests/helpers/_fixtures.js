@@ -48,7 +48,6 @@ _t.loadJsonFixtures = function() {
 
     record: {
       standard: readFixtures('record.standard.json'),
-      inactive: readFixtures('record.inactive.json'),
       add:      readFixtures('record.add.json')
     },
 

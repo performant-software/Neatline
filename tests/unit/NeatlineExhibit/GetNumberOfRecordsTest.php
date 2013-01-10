@@ -18,7 +18,7 @@ class Neatline_NeatlineExhibitTest_GetNumberOfRecords
 
     /**
      * --------------------------------------------------------------------
-     * getNumberOfRecords() should return the number of active records.
+     * getNumberOfRecords() should return the number of records.
      * --------------------------------------------------------------------
      */
     public function testGetNumberOfRecords()
@@ -27,21 +27,12 @@ class Neatline_NeatlineExhibitTest_GetNumberOfRecords
         // Create exhibit.
         $exhibit = $this->__exhibit();
 
-        // Create records.
-        $record1 = new NeatlineRecord($exhibit);
-        $record2 = new NeatlineRecord($exhibit);
-        $record3 = new NeatlineRecord($exhibit);
-        $record4 = new NeatlineRecord($exhibit);
-        $record1->map_active = 1;
-        $record2->map_active = 1;
-        $record3->map_active = 1;
-        $record4->map_active = 0;
-        $record1->save();
-        $record2->save();
-        $record3->save();
-        $record4->save();
-
-        // Check count.
+        // Check record counts.
+        $record1 = $this->__record($exhibit);
+        $this->assertEquals($exhibit->getNumberOfRecords(), 1);
+        $record2 = $this->__record($exhibit);
+        $this->assertEquals($exhibit->getNumberOfRecords(), 2);
+        $record3 = $this->__record($exhibit);
         $this->assertEquals($exhibit->getNumberOfRecords(), 3);
 
     }

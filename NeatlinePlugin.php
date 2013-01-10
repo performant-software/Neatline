@@ -103,10 +103,9 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
 
             `title`             MEDIUMTEXT NULL,
             `body`              MEDIUMTEXT NULL,
+            `coverage`          GEOMETRY NOT NULL,
             `tags`              TEXT NULL,
             `slug`              VARCHAR(100) NULL,
-            `coverage`          GEOMETRY NOT NULL,
-            `map_active`        TINYINT(1) NULL,
 
              PRIMARY KEY        (`id`),
              FULLTEXT KEY       (`title`, `slug`, `body`),
@@ -138,17 +137,17 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
         self::addStyle('vector_color',      'TINYTEXT NULL');
         self::addStyle('stroke_color',      'TINYTEXT NULL');
         self::addStyle('select_color',      'TINYTEXT NULL');
+        self::addStyle('point_image',       'TINYTEXT NULL');
         self::addStyle('vector_opacity',    'INT(10) UNSIGNED NULL');
         self::addStyle('select_opacity',    'INT(10) UNSIGNED NULL');
         self::addStyle('stroke_opacity',    'INT(10) UNSIGNED NULL');
         self::addStyle('image_opacity',     'INT(10) UNSIGNED NULL');
         self::addStyle('stroke_width',      'INT(10) UNSIGNED NULL');
         self::addStyle('point_radius',      'INT(10) UNSIGNED NULL');
-        self::addStyle('point_image',       'TINYTEXT NULL');
         self::addStyle('max_zoom',          'INT(10) UNSIGNED NULL');
         self::addStyle('min_zoom',          'INT(10) UNSIGNED NULL');
-        self::addStyle('map_focus',         'VARCHAR(100) NULL');
         self::addStyle('map_zoom',          'INT(10) UNSIGNED NULL');
+        self::addStyle('map_focus',         'VARCHAR(100) NULL');
 
     }
 

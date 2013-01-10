@@ -226,6 +226,11 @@ class NeatlineRecordTable extends Omeka_Db_Table
             coverage, GeomFromText("'.$extent.'")
         )'));
 
+        // Omit records at POINT(0 0).
+        $select->where(new Zend_Db_Expr(
+            'AsText(coverage) != "POINT(0 0)"'
+        ));
+
         return $select;
 
     }

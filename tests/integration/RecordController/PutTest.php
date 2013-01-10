@@ -48,7 +48,6 @@ class Neatline_RecordControllerTest_Put
 
         // Map:
         $record->coverage           = 'POINT(16 16)';
-        $record->map_active         = 0;
         $record->map_focus          = '17';
         $record->map_zoom           = 18;
         $record->save();
@@ -70,7 +69,6 @@ class Neatline_RecordControllerTest_Put
             'point_image'           => '32',
             'min_zoom'              => '33',
             'max_zoom'              => '34',
-            'map_active'            => '1',
             'map_focus'             => '35',
             'map_zoom'              => '36',
             'coverage'              => 'POINT(37 37)'
@@ -100,7 +98,6 @@ class Neatline_RecordControllerTest_Put
         $this->assertEquals($record->point_image,       '32');
         $this->assertEquals($record->min_zoom,          33);
         $this->assertEquals($record->max_zoom,          34);
-        $this->assertEquals($record->map_active,        1);
         $this->assertEquals($record->map_focus,         '35');
         $this->assertEquals($record->map_zoom,          36);
         $this->assertEquals($record->coverage,          'POINT(37 37)');

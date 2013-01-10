@@ -58,10 +58,6 @@ class Neatline_RecordsJsonFixtureTest extends Neatline_Test_AppTestCase
         $record1->map_focus         = '100,200';
         $record1->map_zoom          = 10;
         // ----------------------------------------------------------------
-        $record1->map_active        = 1;
-        $record2->map_active        = 1;
-        $record3->map_active        = 0;
-        // ----------------------------------------------------------------
         $record1->vector_color      = '1';
         $record2->vector_color      = '2';
         $record3->vector_color      = '3';

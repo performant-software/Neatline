@@ -37,7 +37,6 @@ class Neatline_RecordJsonFixtureTest extends Neatline_Test_AppTestCase
         $record->body               = 'body';
         $record->tags               = 'tags';
         $record->coverage           = 'POINT(1 2)';
-        $record->map_active         = 1;
         $record->map_focus          = '100,200';
         $record->map_zoom           = 10;
         $record->vector_color       = '1';
@@ -54,25 +53,9 @@ class Neatline_RecordJsonFixtureTest extends Neatline_Test_AppTestCase
         $record->point_image        = $yc;
         $record->save();
 
-
-        // *** Case 1 ***
-        // The record is map-active.
-
         // Write the fixture.
         $this->writeFixture('neatline/record/'.$record->id,
             'record.standard.json');
-
-
-        // *** Case 2 ***
-        // The record is map-inactive.
-
-        $record->map_active = 0;
-        $record->save();
-
-        // Write the fixture.
-        $this->resetResponse();
-        $this->writeFixture('neatline/record/'.$record->id,
-            'record.inactive.json');
 
     }
 

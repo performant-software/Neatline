@@ -196,11 +196,8 @@ Neatline.module('Map', function(
     /**
      * Focus the position and zoom to center around the passed model.
      *
-     * - If `map_active` is 0, break and do nothing.
-     *
-     * - If the model has a non-null `map_focus`, then we know that a
-     *   default position has been defined and can assume that `map_zoom`
-     *   also has a value. Set the viewport using these values.
+     * - If the model has a non-null `map_focus` and `map_zoom`, set the
+     *   viewport using these values.
      *
      * - Otherwise, automatically fit the viewport around the extent of
      *   the model's geometries.
@@ -209,17 +206,11 @@ Neatline.module('Map', function(
      */
     focusByModel: function(model) {
 
-      // Break if map-inactive.
-      if (model.get('map_active') === 0) {
-        Neatline.vent.trigger('map:focused');
-        return;
-      }
-
       // Get / build the layer for the model.
       var layer = this.getLayerByModel(model);
       if (!layer) layer = this.buildLayer(model);
 
-      // Try to get a map focus.
+      // Try to get a focus and zoom.
       var mapFocus = model.get('map_focus');
 
       // If defined, apply.
@@ -279,7 +270,7 @@ Neatline.module('Map', function(
      * - Remove all records that are not included in the `frozen` array.
      *
      * - Then walk the new collection and construct new layers for models
-     *   that are active on the map and not in the `frozen` array.
+     *   that are not in the `frozen` array.
      *
      * @param {Object} records: The records collection.
      */
@@ -311,18 +302,16 @@ Neatline.module('Map', function(
 
       records.each(_.bind(function(record) {
 
-        // Test for frozen and active.
-        var frozen = _.contains(this.frozen, record.get('id'));
-        var active = record.get('map_active') == 1;
-
-        // Build if map active and unfrozen.
-        if (!frozen && active) this.buildLayer(record);
+        // Build if not frozen.
+        if (!_.contains(this.frozen, record.get('id'))) {
+          this.buildLayer(record);
+        }
 
       }, this));
 
+
       // Register layers.
       this.updateControls();
-
 
     },
 
@@ -357,7 +346,6 @@ Neatline.module('Map', function(
 
       // Track layer.
       this.layers.push(layer);
-
       return layer;
 
     },

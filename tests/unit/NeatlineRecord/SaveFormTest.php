@@ -26,33 +26,31 @@ class Neatline_NeatlineRecordTest_SaveForm
     {
 
         // Create record.
-        $exhibit = $this->__exhibit();
-        $record = $this->__record($exhibit);
+        $record = $this->__record();
 
         // Mock values:
         $values = array(
 
-            'slug'          => '1',
-            'title'         => '2',
-            'body'          => '3',
-            'tags'          => '4',
-            'coverage'      => 'POINT(1 1)',
-            'map_active'    => 5,
-            'map_focus'     => '6',
-            'map_zoom'      => 7,
+            'slug'              => '1',
+            'title'             => '2',
+            'coverage'          => 'POINT(1 1)',
+            'body'              => '3',
+            'tags'              => '4',
+            'map_focus'         => '5',
+            'map_zoom'          => 6,
 
-            'vector_color'      => '8',
-            'stroke_color'      => '9',
-            'select_color'      => '10',
-            'vector_opacity'    => 11,
-            'select_opacity'    => 12,
-            'stroke_opacity'    => 13,
-            'image_opacity'     => 14,
-            'stroke_width'      => 15,
-            'point_radius'      => 16,
-            'point_image'       => '17',
-            'max_zoom'          => 18,
-            'min_zoom'          => 19
+            'vector_color'      => '7',
+            'stroke_color'      => '8',
+            'select_color'      => '9',
+            'vector_opacity'    => 10,
+            'select_opacity'    => 11,
+            'stroke_opacity'    => 12,
+            'image_opacity'     => 13,
+            'stroke_width'      => 14,
+            'point_radius'      => 15,
+            'point_image'       => '16',
+            'max_zoom'          => 17,
+            'min_zoom'          => 18
 
         );
 
@@ -63,30 +61,49 @@ class Neatline_NeatlineRecordTest_SaveForm
         $record = $this->_recordsTable->find($record->id);
 
         // Data fields updated.
-        $this->assertEquals($record->slug,          '1');
-        $this->assertEquals($record->title,         '2');
-        $this->assertEquals($record->body,          '3');
-        $this->assertEquals($record->tags,          '4');
-        $this->assertEquals($record->map_active,    5);
-        $this->assertEquals($record->map_focus,     '6');
-        $this->assertEquals($record->map_zoom,      7);
+        $this->assertEquals($record->slug,              '1');
+        $this->assertEquals($record->title,             '2');
+        $this->assertEquals($record->body,              '3');
+        $this->assertEquals($record->coverage,          'POINT(1 1)');
+        $this->assertEquals($record->tags,              '4');
+        $this->assertEquals($record->map_focus,         '5');
+        $this->assertEquals($record->map_zoom,          6);
 
         // Tag fields set.
-        $this->assertEquals($record->vector_color,      '8');
-        $this->assertEquals($record->stroke_color,      '9');
-        $this->assertEquals($record->select_color,      '10');
-        $this->assertEquals($record->vector_opacity,    11);
-        $this->assertEquals($record->select_opacity,    12);
-        $this->assertEquals($record->stroke_opacity,    13);
-        $this->assertEquals($record->image_opacity,     14);
-        $this->assertEquals($record->stroke_width,      15);
-        $this->assertEquals($record->point_radius,      16);
-        $this->assertEquals($record->point_image,       '17');
-        $this->assertEquals($record->max_zoom,          18);
-        $this->assertEquals($record->min_zoom,          19);
+        $this->assertEquals($record->vector_color,      '7');
+        $this->assertEquals($record->stroke_color,      '8');
+        $this->assertEquals($record->select_color,      '9');
+        $this->assertEquals($record->vector_opacity,    10);
+        $this->assertEquals($record->select_opacity,    11);
+        $this->assertEquals($record->stroke_opacity,    12);
+        $this->assertEquals($record->image_opacity,     13);
+        $this->assertEquals($record->stroke_width,      14);
+        $this->assertEquals($record->point_radius,      15);
+        $this->assertEquals($record->point_image,       '16');
+        $this->assertEquals($record->max_zoom,          17);
+        $this->assertEquals($record->min_zoom,          18);
 
-        // Coverage updated.
-        $this->assertNotNull($record->coverage);
+    }
+
+
+    /**
+     * --------------------------------------------------------------------
+     * saveForm() should set empty strings as null.
+     * --------------------------------------------------------------------
+     */
+    public function testEmptyValueBlocking()
+    {
+
+        // Create record.
+        $record = $this->__record();
+
+        // Set empty string.
+        $record->saveForm(array('title' => ''));
+        $this->assertNull($record->title);
+
+        // Set un-trimmed empty string.
+        $record->saveForm(array('title' => ' '));
+        $this->assertNull($record->title);
 
     }
 

@@ -12,7 +12,7 @@
 
 describe('Map Data Rendering', function() {
 
-  var mapLayers, layer1, layer2;
+  var mapLayers, layer1, layer2, layer3;
 
   // Start Neatline.
   beforeEach(function() {
@@ -23,22 +23,24 @@ describe('Map Data Rendering', function() {
     mapLayers = _t.getVectorLayers();
     layer1 = mapLayers[0];
     layer2 = mapLayers[1];
+    layer3 = mapLayers[2];
 
   });
 
   it('should render features for map-active models', function() {
 
     // --------------------------------------------------------------------
-    // When the exhibit initialized, the map should render vector geometry
-    // for all models that are set to active with `map_active`.
+    // When the exhibit started, the map should query and render records.
     // --------------------------------------------------------------------
 
     // Check geometry.
-    expect(mapLayers.length).toEqual(2);
+    expect(mapLayers.length).toEqual(3);
     expect(layer1.features[0].geometry.x).toEqual(1);
     expect(layer1.features[0].geometry.y).toEqual(2);
     expect(layer2.features[0].geometry.x).toEqual(3);
     expect(layer2.features[0].geometry.y).toEqual(4);
+    expect(layer3.features[0].geometry.x).toEqual(5);
+    expect(layer3.features[0].geometry.y).toEqual(6);
 
   });
 

@@ -30,25 +30,13 @@ class Neatline_NeatlineRecordTableTest_CountActiveRecordsByExhibit
         $exhibit2 = $this->__exhibit('test-2');
 
         // Create records.
-        $record1 = new NeatlineRecord($exhibit1);
-        $record2 = new NeatlineRecord($exhibit1);
-        $record3 = new NeatlineRecord($exhibit1);
-        $record4 = new NeatlineRecord($exhibit2);
-        $record5 = new NeatlineRecord($exhibit2);
-        $record1->map_active = 1;
-        $record2->map_active = 1;
-        $record3->map_active = 1;
-        $record4->map_active = 1;
-        $record5->map_active = 0;
-        $record1->save();
-        $record2->save();
-        $record3->save();
-        $record4->save();
-        $record5->save();
+        $record1 = $this->__record($exhibit1);
+        $record2 = $this->__record($exhibit2);
+        $record3 = $this->__record($exhibit2);
 
-        // Check count.
-        $this->assertEquals($exhibit1->getNumberOfRecords(), 3);
-        $this->assertEquals($exhibit2->getNumberOfRecords(), 1);
+        // Check counts.
+        $this->assertEquals($exhibit1->getNumberOfRecords(), 1);
+        $this->assertEquals($exhibit2->getNumberOfRecords(), 2);
 
     }
 

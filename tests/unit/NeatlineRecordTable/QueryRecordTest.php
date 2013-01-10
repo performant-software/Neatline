@@ -54,7 +54,6 @@ class Neatline_NeatlineRecordTableTest_QueryRecord
         $record->max_zoom           = 16;
 
         // Spatial:
-        $record->map_active         = 0;
         $record->map_focus          = '17';
         $record->map_zoom           = 18;
         $record->coverage           = 'POINT(1 1)';
@@ -84,7 +83,6 @@ class Neatline_NeatlineRecordTableTest_QueryRecord
         $this->assertEquals($records['point_image'],        '14');
         $this->assertEquals($records['min_zoom'],           15);
         $this->assertEquals($records['max_zoom'],           16);
-        $this->assertEquals($records['map_active'],         0);
         $this->assertEquals($records['map_focus'],          '17');
         $this->assertEquals($records['map_zoom'],           18);
         $this->assertEquals($records['coverage'],           'POINT(1 1)');

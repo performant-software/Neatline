@@ -212,17 +212,17 @@ describe('Record Form Open', function() {
     // Load map without Record 2.
     _t.refreshMap(_t.json.records.removed);
 
-    // Just 1 layer on the map.
-    expect(_t.vw.map.layers.length).toEqual(1);
+    // Just 2 layer on the map.
+    expect(_t.vw.map.layers.length).toEqual(2);
 
     // Open form for Record 2.
     _t.click($(recordRows[1]));
 
     // Check for new layer.
     mapLayers = _t.getVectorLayers();
-    expect(mapLayers.length).toEqual(2);
-    expect(mapLayers[1].features[0].geometry.x).toEqual(3);
-    expect(mapLayers[1].features[0].geometry.y).toEqual(4);
+    expect(mapLayers.length).toEqual(3);
+    expect(mapLayers[2].features[0].geometry.x).toEqual(3);
+    expect(mapLayers[2].features[0].geometry.y).toEqual(4);
 
   });
 

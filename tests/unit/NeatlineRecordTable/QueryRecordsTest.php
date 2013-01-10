@@ -74,12 +74,10 @@ class Neatline_NeatlineRecordTableTest_QueryRecords
         $record2->max_zoom          = 32;
 
         // Spatial:
-        $record1->map_active        = 33;
-        $record2->map_active        = 34;
-        $record1->map_focus         = '35';
-        $record2->map_focus         = '36';
-        $record1->map_zoom          = 37;
-        $record2->map_zoom          = 38;
+        $record1->map_focus         = '33';
+        $record2->map_focus         = '34';
+        $record1->map_zoom          = 35;
+        $record2->map_zoom          = 36;
         $record1->coverage          = 'POINT(1 1)';
         $record2->coverage          = 'POINT(2 2)';
 
@@ -90,7 +88,7 @@ class Neatline_NeatlineRecordTableTest_QueryRecords
         // Build the record array.
         $records = $this->_recordsTable->queryRecords($exhibit);
 
-        // Check result.
+        // Record 1:
         $this->assertEquals($records[0]['id'],              $record1->id);
         $this->assertEquals($records[0]['item_id'],         $item1->id);
         $this->assertEquals($records[0]['title'],           '1');
@@ -109,11 +107,11 @@ class Neatline_NeatlineRecordTableTest_QueryRecords
         $this->assertEquals($records[0]['point_image'],     '27');
         $this->assertEquals($records[0]['min_zoom'],        29);
         $this->assertEquals($records[0]['max_zoom'],        31);
-        $this->assertEquals($records[0]['map_active'],      33);
-        $this->assertEquals($records[0]['map_focus'],       '35');
-        $this->assertEquals($records[0]['map_zoom'],        37);
+        $this->assertEquals($records[0]['map_focus'],       '33');
+        $this->assertEquals($records[0]['map_zoom'],        35);
         $this->assertEquals($records[0]['coverage'],        'POINT(1 1)');
 
+        // Record 2:
         $this->assertEquals($records[1]['id'],              $record2->id);
         $this->assertEquals($records[1]['item_id'],         $item2->id);
         $this->assertEquals($records[1]['title'],           '2');
@@ -132,9 +130,8 @@ class Neatline_NeatlineRecordTableTest_QueryRecords
         $this->assertEquals($records[1]['point_image'],     '28');
         $this->assertEquals($records[1]['min_zoom'],        30);
         $this->assertEquals($records[1]['max_zoom'],        32);
-        $this->assertEquals($records[1]['map_active'],      34);
-        $this->assertEquals($records[1]['map_focus'],       '36');
-        $this->assertEquals($records[1]['map_zoom'],        38);
+        $this->assertEquals($records[1]['map_focus'],       '34');
+        $this->assertEquals($records[1]['map_zoom'],        36);
         $this->assertEquals($records[1]['coverage'],        'POINT(2 2)');
 
     }
@@ -291,6 +288,40 @@ class Neatline_NeatlineRecordTableTest_QueryRecords
         $this->assertCount(2, $records);
         $this->assertEquals($records[0]['id'], $record1->id);
         $this->assertEquals($records[1]['id'], $record2->id);
+
+    }
+
+
+    /**
+     * --------------------------------------------------------------------
+     * When an `extent` polygon is passed to queryRecords(), records that
+     * have a plaintext coverage value of `POINT(0 0)` should never be
+     * returned in the result set, even when the `extent` includes the 0,0
+     * point. (`POINT(0 0)` is used as a WKT "null" value that is inserted
+     * automatically when a record is saved with a empty/null coverage.
+     * --------------------------------------------------------------------
+     */
+    public function testQueryRecordsExtentFilterNullPointOmission()
+    {
+
+        // Create exhibit.
+        $exhibit = $this->__exhibit();
+
+        // Create 2 records.
+        $record1 = new NeatlineRecord($exhibit);
+        $record2 = new NeatlineRecord($exhibit);
+        $record1->coverage = 'POINT(0 0)';
+        $record2->coverage = 'POINT(1 1)';
+
+        // Save.
+        $record1->save();
+        $record2->save();
+
+        // Record with `POINT(0 0`)` excluded.
+        $records = $this->_recordsTable->queryRecords($exhibit,
+            'POLYGON((-1 -1,-1 1,1 1,1 -1,-1 -1))');
+        $this->assertCount(1, $records);
+        $this->assertEquals($records[0]['id'], $record2->id);
 
     }
 

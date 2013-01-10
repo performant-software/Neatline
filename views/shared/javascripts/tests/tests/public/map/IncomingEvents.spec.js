@@ -68,8 +68,8 @@ describe('Map Incoming Events', function() {
 
       var done = false;
 
-      // At the start, 2 map layers
-      expect(mapLayers.length).toEqual(2);
+      // At the start, 3 map layers
+      expect(mapLayers.length).toEqual(3);
 
       // Hook onto map:focused.
       Neatline.vent.on('map:focused', function() { done = true; });
@@ -91,58 +91,14 @@ describe('Map Incoming Events', function() {
 
       // Check for new layer.
       mapLayers = _t.getVectorLayers();
-      expect(mapLayers.length).toEqual(3);
-      expect(mapLayers[2].features[0].geometry.x).toEqual(1);
-      expect(mapLayers[2].features[0].geometry.y).toEqual(2);
+      expect(mapLayers.length).toEqual(4);
+      expect(mapLayers[3].features[0].geometry.x).toEqual(1);
+      expect(mapLayers[3].features[0].geometry.y).toEqual(2);
 
       // Focus and zoom should match the model values.
       expect(Math.round(center.lon)).toEqual(100);
       expect(Math.round(center.lat)).toEqual(200);
       expect(zoom).toEqual(10);
-
-    });
-
-    it('should not create layer when model is map-inactive', function() {
-
-      // ------------------------------------------------------------------
-      // When the `map:focusById` event is triggered with the id of a
-      // model that does not currently have a map layer, the model should
-      // be requested from the server, but a new layer should not be built
-      // when the fetched record is inactive on the map and the focus
-      // position should not be changed.
-      // ------------------------------------------------------------------
-
-      var done = false;
-
-      // Set center and zoom.
-      _t.setMapCenter(200, 300, 15);
-
-      // At the start, 2 map layers
-      expect(mapLayers.length).toEqual(2);
-
-      // Hook onto map:focused.
-      Neatline.vent.on('map:focused', function() { done = true; });
-
-      // Trigger map:focusById with an id that does not have a map layer,
-      // but for which the corresponding model is inactive on the map.
-      Neatline.execute('map:focusById', 999);
-
-      // Respond to the GET request.
-      var request = _t.respondLast200(_t.json.record.inactive);
-      waitsFor(function() { return done; });
-
-      // Get focus and zoom.
-      var center = _t.vw.map.map.getCenter();
-      var zoom = _t.vw.map.map.getZoom();
-
-      // Check for no new layer.
-      mapLayers = _t.getVectorLayers();
-      expect(mapLayers.length).toEqual(2);
-
-      // Check unchanged focus.
-      expect(center.lon).toEqual(200);
-      expect(center.lat).toEqual(300);
-      expect(zoom).toEqual(15);
 
     });
 
@@ -193,8 +149,8 @@ describe('Map Incoming Events', function() {
       // Register the starting requests count.
       var requestCount = _t.server.requests.count;
 
-      // At the start, 2 map layers
-      expect(mapLayers.length).toEqual(2);
+      // At the start, 3 map layers
+      expect(mapLayers.length).toEqual(3);
 
       // Create a model that does not have a map layer.
       var model = _t.buildModelFromJson(_t.json.record.standard);
@@ -211,56 +167,14 @@ describe('Map Incoming Events', function() {
 
       // Check for new layer.
       mapLayers = _t.getVectorLayers();
-      expect(mapLayers.length).toEqual(3);
-      expect(mapLayers[2].features[0].geometry.x).toEqual(1);
-      expect(mapLayers[2].features[0].geometry.y).toEqual(2);
+      expect(mapLayers.length).toEqual(4);
+      expect(mapLayers[3].features[0].geometry.x).toEqual(1);
+      expect(mapLayers[3].features[0].geometry.y).toEqual(2);
 
       // Focus and zoom should match the model values.
       expect(Math.round(center.lon)).toEqual(100);
       expect(Math.round(center.lat)).toEqual(200);
       expect(zoom).toEqual(10);
-
-    });
-
-    it('should not create layer when model is map-inactive', function() {
-
-      // ------------------------------------------------------------------
-      // When the `map:focusByModel` event is triggered with a model that
-      // does not currently have a map layer and is also inactive on the
-      // map, the focus position should not be changed.
-      // ------------------------------------------------------------------
-
-      // Register the starting requests count.
-      var requestCount = _t.server.requests.count;
-
-      // Set center and zoom.
-      _t.setMapCenter(200, 300, 15);
-
-      // At the start, 2 map layers
-      expect(mapLayers.length).toEqual(2);
-
-      // Create a model that (a) does not have a map layer and (b) is not
-      // active on the map.
-      var model = _t.buildModelFromJson(_t.json.record.inactive);
-
-      // Trigger map:focusByModel.
-      Neatline.execute('map:focusByModel', model);
-
-      // No API request for new data.
-      expect(_t.server.requests.count).toEqual(requestCount);
-
-      // Get focus and zoom.
-      var center = _t.vw.map.map.getCenter();
-      var zoom = _t.vw.map.map.getZoom();
-
-      // Check for no new layer.
-      mapLayers = _t.getVectorLayers();
-      expect(mapLayers.length).toEqual(2);
-
-      // Check unchanged focus.
-      expect(center.lon).toEqual(200);
-      expect(center.lat).toEqual(300);
-      expect(zoom).toEqual(15);
 
     });
 

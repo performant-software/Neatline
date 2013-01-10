@@ -53,7 +53,6 @@ class Neatline_NeatlineRecordTest_BuildJsonData
         $record->max_zoom           = 16;
 
         // Spatial:
-        $record->map_active         = 0;
         $record->map_focus          = '17';
         $record->map_zoom           = 18;
         $record->coverage           = 'POINT(1 1)';
@@ -81,7 +80,6 @@ class Neatline_NeatlineRecordTest_BuildJsonData
         $this->assertEquals($data['point_image'],       '14');
         $this->assertEquals($data['min_zoom'],          15);
         $this->assertEquals($data['max_zoom'],          16);
-        $this->assertEquals($data['map_active'],        0);
         $this->assertEquals($data['map_focus'],         '17');
         $this->assertEquals($data['map_zoom'],          18);
         $this->assertEquals($data['coverage'],          'POINT(1 1)');
