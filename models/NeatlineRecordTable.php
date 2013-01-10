@@ -16,24 +16,21 @@ class NeatlineRecordTable extends Omeka_Db_Table
 
 
     /**
-     * Propagate new values to records with shared tags.
+     * Propagate style values to records with shared tags.
      *
      * @param NeatlineRecord $record The record to propagate.
      */
     public function propagateTags($record)
     {
 
-        $tagsTable  = $this->getTable('NeatlineTag');
+        $tags       = $this->getTable('NeatlineTag');
         $exhibit    = $record->getExhibit();
-
-        // Gather taggable columns.
-        $attrs = neatline_getStyleCols();
+        $attrs      = neatline_getStyleCols();
 
         // Explode tags.
         foreach (neatline_explodeTags($record->tags) as $raw) {
 
-            // Get the tag record.
-            $tag = $tagsTable->findByName($exhibit, $raw);
+            $tag = $tags->findByName($exhibit, $raw);
 
             // `SET`
             $set = array();
@@ -43,11 +40,10 @@ class NeatlineRecordTable extends Omeka_Db_Table
 
             // `WHERE`
             $where = array(
-                'tags LIKE ?'       => '%'.$raw.'%',
-                'exhibit_id = ?'    => $exhibit->id
+                'exhibit_id = ?' => $exhibit->id,
+                'tags LIKE ?' => '%'.$raw.'%'
             );
 
-            // Update sibling records.
             $this->update($this->getTableName(), $set, $where);
 
         }
@@ -66,16 +62,14 @@ class NeatlineRecordTable extends Omeka_Db_Table
     {
 
         // `SET`
-        $set = array('tags' => new Zend_Db_Expr(
-            $this->quoteInto('REPLACE(tags, ?)', array(
-                $oldName, $newName
-            ))
-        ));
+        $set = array('tags' => new Zend_Db_Expr($this->quoteInto(
+            'REPLACE(tags, ?)', array($oldName, $newName)
+        )));
 
         // `WHERE`
         $where = array(
-            'tags LIKE ?'       => '%'.$oldName.'%',
-            'exhibit_id = ?'    => $exhibit->id
+            'exhibit_id = ?' => $exhibit->id,
+            'tags LIKE ?' => '%'.$oldName.'%'
         );
 
         $this->update($this->getTableName(), $set, $where);
@@ -93,18 +87,18 @@ class NeatlineRecordTable extends Omeka_Db_Table
     public function deleteTag($exhibit, $name)
     {
 
-        // Form the `REPLACE` call.
-        $replace = $this->quoteInto(
+        // `SET`
+        $set = array('tags' => new Zend_Db_Expr($this->quoteInto(
             "TRIM(BOTH ',' FROM REPLACE(REPLACE(tags, ?), ',,', ','))",
             array($name, "")
+        )));
+
+        // `WHERE`
+        $where = array(
+            'exhibit_id = ?' => $exhibit->id,
+            'tags LIKE ?' => '%'.$name.'%'
         );
 
-        // Form `SET` and `WHERE`.
-        $set    = array('tags' => new Zend_Db_Expr($replace));
-        $where  = array('tags LIKE ?' => '%'.$name.'%',
-            'exhibit_id = ?'    => $exhibit->id);
-
-        // Update records.
         $this->update($this->getTableName(), $set, $where);
 
     }
@@ -148,14 +142,9 @@ class NeatlineRecordTable extends Omeka_Db_Table
      */
     public function queryRecord($id)
     {
-
-        // Build the select.
         $select = $this->getSelect()->where('id=?', $id);
-
-        // Query.
         $record = $this->fetchObject($select);
         return $record->buildJsonData();
-
     }
 
 
