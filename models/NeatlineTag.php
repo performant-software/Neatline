@@ -92,4 +92,14 @@ class NeatlineTag extends Omeka_Record_AbstractRecord
     }
 
 
+    /**
+     * Remove tag from record tag strings.
+     */
+    public function afterDelete()
+    {
+        $records = $this->getTable('NeatlineRecord');
+        $records->deleteTag($this->exhibit_id, $this->tag);
+    }
+
+
 }

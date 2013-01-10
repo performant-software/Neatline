@@ -14,10 +14,11 @@
 ?>
 
 
-<label for="tags"><?php echo __('Tags'); ?></label>
+<label><?php echo __('Tags'); ?></label>
 <div class="controls">
-  <textarea name="tags" data-value="record.tags"
-    rows="2"></textarea>
+  <div class="inline-inputs">
+    <input type="text" name="tags" data-value="record.tags"/>
+  </div>
 </div>
 
 <?php echo $this->partial(
