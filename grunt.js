@@ -166,6 +166,7 @@ module.exports = function(grunt) {
 
           // Vendor:
           config.vendor.js.jquery,
+          config.vendor.js.jquery_ui,
           config.vendor.js.underscore,
           config.vendor.js.underscore_s,
           config.vendor.js.backbone,
@@ -174,9 +175,9 @@ module.exports = function(grunt) {
           config.vendor.js.routefilter,
           config.vendor.js.rivets,
           config.vendor.js.openlayers,
-          config.vendor.js.epiceditor,
           config.vendor.js.bootstrap,
           config.vendor.js.toastr,
+          config.vendor.js.tag_it,
           config.vendor.js.d3,
 
           // Neatline:

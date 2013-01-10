@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Unit tests for tag model.
+ * Unit tests for `url` on tag model.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -10,7 +10,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Tag Model', function() {
+describe('Tag Model `url`', function() {
 
   var model;
 
@@ -41,19 +41,6 @@ describe('Tag Model', function() {
     // --------------------------------------------------------------------
 
     expect(model.url()).toEqual('tags/1');
-
-  });
-
-  it('should set boolean values as 0/1', function() {
-
-    // --------------------------------------------------------------------
-    // When `set` is passed a boolean, the value should be cast to 0/1.
-    // --------------------------------------------------------------------
-
-    model.set('test', true);
-    expect(model.get('test')).toEqual(1);
-    model.set('test', false);
-    expect(model.get('test')).toEqual(0);
 
   });
 

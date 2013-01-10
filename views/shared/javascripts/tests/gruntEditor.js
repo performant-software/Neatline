@@ -16,6 +16,7 @@ module.exports = function(grunt) {
     jasmine: {
       src: 'payloads/js/editor.js',
       specs: [
+        'unit/editor/**/*.spec.js',
         'integration/editor/**/*.spec.js'
       ],
       helpers: [
