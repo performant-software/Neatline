@@ -34,17 +34,17 @@ class Neatline_NeatlineRecordTableTest_UpdateTag
         $record->save();
 
         // Update left-hand tag.
-        $this->_recordsTable->updateTag($exhibit, 'tag1', 'tag1NEW');
+        $this->_recordsTable->updateTag($exhibit->id, 'tag1', 'tag1NEW');
         $record = $this->_recordsTable->find($record->id);
         $this->assertEquals($record->tags, 'tag1NEW,tag2,tag3');
 
         // Update interior tag.
-        $this->_recordsTable->updateTag($exhibit, 'tag2', 'tag2NEW');
+        $this->_recordsTable->updateTag($exhibit->id, 'tag2', 'tag2NEW');
         $record = $this->_recordsTable->find($record->id);
         $this->assertEquals($record->tags, 'tag1NEW,tag2NEW,tag3');
 
         // Update right-hand tag.
-        $this->_recordsTable->updateTag($exhibit, 'tag3', 'tag3NEW');
+        $this->_recordsTable->updateTag($exhibit->id, 'tag3', 'tag3NEW');
         $record = $this->_recordsTable->find($record->id);
         $this->assertEquals($record->tags, 'tag1NEW,tag2NEW,tag3NEW');
 
@@ -74,7 +74,7 @@ class Neatline_NeatlineRecordTableTest_UpdateTag
         $record2->save();
 
         // Update tag, reload records.
-        $this->_recordsTable->updateTag($exhibit1, 'tag', 'tagNEW');
+        $this->_recordsTable->updateTag($exhibit1->id, 'tag', 'tagNEW');
         $record1 = $this->_recordsTable->find($record1->id);
         $record2 = $this->_recordsTable->find($record2->id);
 

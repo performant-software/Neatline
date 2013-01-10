@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
 
 /**
- * Tests for PUT action in tag API.
+ * Tests for `saveForm()` on NeatlineTag.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -11,34 +11,27 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class Neatline_TagControllerTest_Put
+class Neatline_NeatlineTagTest_SaveForm
     extends Neatline_Test_AppTestCase
 {
 
 
     /**
      * --------------------------------------------------------------------
-     * PUT should update a tag.
+     * saveForm() should set field values.
      * --------------------------------------------------------------------
      */
-    public function testTagUpdate()
+    public function testFieldUpdate()
     {
 
-        // Create exhibit and tag.
+        // Create a record.
         $exhibit = $this->__exhibit();
         $tag = $this->__tag($exhibit, 'tag1');
 
-        // Mock PUT.
-        $put = array('tag' => 'tag2');
-        foreach (neatline_getStyleCols() as $s) $put[$s] = 1;
-
-        // Issue request.
-        $this->writePut($put);
-        $this->request->setMethod('PUT');
-        $this->dispatch('neatline/tag/'.$tag->id);
-
-        // Reload the tag.
-        $tag = $this->_tagsTable->find($tag->id);
+        // Save with new data.
+        $data = array('tag' => 'tag2');
+        foreach (neatline_getStyleCols() as $s) $data[$s] = 1;
+        $tag->saveForm($data);
 
         // Check updated fields.
         $this->assertEquals($tag->tag, 'tag2');
@@ -51,14 +44,14 @@ class Neatline_TagControllerTest_Put
 
     /**
      * --------------------------------------------------------------------
-     * When a tag is renamed, the new name should be propagated to the
-     * `tags` column on records that include the tag.
+     * When an updated tag name is passed to saveForm(), the tag should be
+     * updated in the `tags` column on all tagged records.
      * --------------------------------------------------------------------
      */
     public function testRecordsPropagation()
     {
 
-        // Create exhibit and tag.
+        // Create a record.
         $exhibit = $this->__exhibit();
         $tag = $this->__tag($exhibit, 'tag1');
 
@@ -67,10 +60,9 @@ class Neatline_TagControllerTest_Put
         $record->tags = 'tag1';
         $record->save();
 
-        // Issue request.
-        $this->writePut(array('tag' => 'tag2'));
-        $this->request->setMethod('PUT');
-        $this->dispatch('neatline/tag/'.$tag->id);
+        // Save with new name.
+        $data = array('tag' => 'tag2');
+        $tag->saveForm($data);
 
         // Reload the record, check updated tags.
         $record = $this->_recordsTable->find($record->id);

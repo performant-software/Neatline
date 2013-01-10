@@ -34,22 +34,22 @@ class Neatline_NeatlineRecordTableTest_DeleteTag
         $record->save();
 
         // Delete `tag2`, reload record, check string.
-        $this->_recordsTable->deleteTag($exhibit, 'tag2');
+        $this->_recordsTable->deleteTag($exhibit->id, 'tag2');
         $record = $this->_recordsTable->find($record->id);
         $this->assertEquals($record->tags, 'tag1,tag3,tag4');
 
         // Delete `tag1`, reload record, check string.
-        $this->_recordsTable->deleteTag($exhibit, 'tag1');
+        $this->_recordsTable->deleteTag($exhibit->id, 'tag1');
         $record = $this->_recordsTable->find($record->id);
         $this->assertEquals($record->tags, 'tag3,tag4');
 
         // Delete `tag4`, reload record, check string.
-        $this->_recordsTable->deleteTag($exhibit, 'tag4');
+        $this->_recordsTable->deleteTag($exhibit->id, 'tag4');
         $record = $this->_recordsTable->find($record->id);
         $this->assertEquals($record->tags, 'tag3');
 
         // Delete `tag3`, reload record, check string.
-        $this->_recordsTable->deleteTag($exhibit, 'tag3');
+        $this->_recordsTable->deleteTag($exhibit->id, 'tag3');
         $record = $this->_recordsTable->find($record->id);
         $this->assertEquals($record->tags, '');
 
@@ -79,7 +79,7 @@ class Neatline_NeatlineRecordTableTest_DeleteTag
         $record2->save();
 
         // Update tag, reload records.
-        $this->_recordsTable->deleteTag($exhibit1, 'tag');
+        $this->_recordsTable->deleteTag($exhibit1->id, 'tag');
         $record1 = $this->_recordsTable->find($record1->id);
         $record2 = $this->_recordsTable->find($record2->id);
 

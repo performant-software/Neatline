@@ -1,1 +1,1 @@
-{"tag":"tag2","vector_color":1,"stroke_color":1,"select_color":1,"vector_opacity":1,"select_opacity":1,"stroke_opacity":1,"image_opacity":1,"stroke_width":1,"point_radius":1,"point_image":1,"min_zoom":1,"max_zoom":1,"map_focus":1,"map_zoom":1}
+{"tag":"tag2"}

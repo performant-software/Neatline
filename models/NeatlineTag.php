@@ -70,14 +70,25 @@ class NeatlineTag extends Omeka_Record_AbstractRecord
 
 
     /**
-     * Save form values.
+     * Save form values, propagate name change to records.
      *
      * @param array $values The PUT values.
      */
     public function saveForm($values)
     {
+
+        $old = $this->tag;
+
+        // Update fields.
         foreach ($values as $k => $v) $this->$k = $v;
         $this->save();
+
+        // Propagate new name.
+        if ($this->tag != $old) {
+            $records = $this->getTable('NeatlineRecord');
+            $records->updateTag($this->exhibit_id, $old, $this->tag);
+        }
+
     }
 
 

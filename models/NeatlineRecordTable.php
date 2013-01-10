@@ -54,11 +54,11 @@ class NeatlineRecordTable extends Omeka_Db_Table
     /**
      * Update a tag.
      *
-     * @param NeatlineExhibit $exhibit The exhibit record.
+     * @param integer $id The exhibit id.
      * @param string $oldName The current tag name.
      * @param string $newName The new tag name.
      */
-    public function updateTag($exhibit, $oldName, $newName)
+    public function updateTag($id, $oldName, $newName)
     {
 
         // `SET`
@@ -68,8 +68,8 @@ class NeatlineRecordTable extends Omeka_Db_Table
 
         // `WHERE`
         $where = array(
-            'exhibit_id = ?' => $exhibit->id,
-            'tags LIKE ?' => '%'.$oldName.'%'
+            'tags LIKE ?' => '%'.$oldName.'%',
+            'exhibit_id = ?' => $id
         );
 
         $this->update($this->getTableName(), $set, $where);
@@ -80,11 +80,11 @@ class NeatlineRecordTable extends Omeka_Db_Table
     /**
      * Delete a tag.
      *
-     * @param NeatlineExhibit $exhibit The exhibit record.
+     * @param integer $id The exhibit id.
      * @param string $oldName The current tag name.
      * @param string $newName The new tag name.
      */
-    public function deleteTag($exhibit, $name)
+    public function deleteTag($id, $name)
     {
 
         // `SET`
@@ -95,8 +95,8 @@ class NeatlineRecordTable extends Omeka_Db_Table
 
         // `WHERE`
         $where = array(
-            'exhibit_id = ?' => $exhibit->id,
-            'tags LIKE ?' => '%'.$name.'%'
+            'tags LIKE ?' => '%'.$name.'%',
+            'exhibit_id = ?' => $id
         );
 
         $this->update($this->getTableName(), $set, $where);
