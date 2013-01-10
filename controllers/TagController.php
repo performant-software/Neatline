@@ -54,4 +54,6 @@ class Neatline_TagController extends Neatline_RestController
         $tag = $this->__table->find($this->_request->id);
         $tag->delete();
     }
+
+
 }
