@@ -87,11 +87,15 @@ class NeatlineRecordTable extends Omeka_Db_Table
     public function deleteTag($id, $name)
     {
 
+        // `REPLACE`
+        $rep = $this->quoteInto(
+            "REPLACE(tags, ?, '')", $name
+        );
+
         // `SET`
-        $set = array('tags' => new Zend_Db_Expr($this->quoteInto(
-            "TRIM(BOTH ',' FROM REPLACE(REPLACE(tags, ?), ',,', ','))",
-            array($name, "")
-        )));
+        $set = array('tags' => new Zend_Db_Expr(
+            "NULLIF(TRIM(BOTH ',' FROM REPLACE($rep, ',,', ',')), '')"
+        ));
 
         // `WHERE`
         $where = array(

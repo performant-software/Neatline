@@ -51,7 +51,7 @@ class Neatline_NeatlineRecordTableTest_DeleteTag
         // Delete `tag3`, reload record, check string.
         $this->_recordsTable->deleteTag($exhibit->id, 'tag3');
         $record = $this->_recordsTable->find($record->id);
-        $this->assertEquals($record->tags, '');
+        $this->assertNull($record->tags);
 
     }
 
@@ -83,8 +83,8 @@ class Neatline_NeatlineRecordTableTest_DeleteTag
         $record1 = $this->_recordsTable->find($record1->id);
         $record2 = $this->_recordsTable->find($record2->id);
 
-        // Record1 updated, record2 unchanged.
-        $this->assertEquals($record1->tags, '');
+        // Just record 1 updated.
+        $this->assertNull($record1->tags);
         $this->assertEquals($record2->tags, 'tag');
 
     }

@@ -70,7 +70,7 @@ class Neatline_TagControllerTest_Delete
 
         // Reload the record, check updated tags.
         $record = $this->_recordsTable->find($record->id);
-        $this->assertEquals($record->tags, '');
+        $this->assertNull($record->tags);
 
     }
 
