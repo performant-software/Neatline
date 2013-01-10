@@ -221,8 +221,8 @@ describe('Record Form Open', function() {
     // Check for new layer.
     mapLayers = _t.getVectorLayers();
     expect(mapLayers.length).toEqual(3);
-    expect(mapLayers[2].features[0].geometry.x).toEqual(3);
-    expect(mapLayers[2].features[0].geometry.y).toEqual(4);
+    expect(_.last(mapLayers).features[0].geometry.x).toEqual(3);
+    expect(_.last(mapLayers).features[0].geometry.y).toEqual(4);
 
   });
 

@@ -15,7 +15,10 @@ module.exports = function(grunt) {
   grunt.initConfig({
     jasmine: {
       src: 'payloads/js/neatline.js',
-      specs: 'tests/public/**/*.spec.js',
+      specs: [
+        'unit/public/**/*.spec.js',
+        'integration/public/**/*.spec.js'
+      ],
       helpers: [
         'helpers/helpers.js',
         'helpers/components/jasmine-jquery/lib/jasmine-jquery.js',

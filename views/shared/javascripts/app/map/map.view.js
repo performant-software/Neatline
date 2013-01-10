@@ -211,15 +211,16 @@ Neatline.module('Map', function(
       if (!layer) layer = this.buildLayer(model);
 
       // Try to get a focus and zoom.
-      var mapFocus = model.get('map_focus');
+      var focus = model.get('map_focus');
+      var zoom  = model.get('map_zoom');
 
       // If defined, apply.
-      if (!_.isNull(mapFocus)) {
-        this.setViewport(mapFocus, model.get('map_zoom'));
+      if (!_.isUndefined(focus) && !_.isUndefined(zoom)) {
+        this.setViewport(focus, zoom);
       }
 
-      else {
-        // Otherwise, fit to viewport.
+      // Otherwise, fit to viewport.
+      else if (model.get('coverage') !== 'POINT(0 0)') {
         this.map.zoomToExtent(layer.getDataExtent());
       }
 
