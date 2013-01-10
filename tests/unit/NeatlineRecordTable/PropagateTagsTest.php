@@ -91,4 +91,54 @@ class Neatline_NeatlineRecordTableTest_PropagateTags
     }
 
 
+    /**
+     * --------------------------------------------------------------------
+     * propagateTags() should only update records in the passed exhibit.
+     * --------------------------------------------------------------------
+     */
+    public function testExhibitIsolation()
+    {
+
+        // Exhibits.
+        $exhibit1 = $this->__exhibit('slug-1');
+        $exhibit2 = $this->__exhibit('slug-2');
+
+        // Tag.
+        $tag = new NeatlineTag($exhibit1);
+        $tag->tag = 'tag';
+        $tag->vector_color = 1;
+        $tag->save();
+
+        // Record 1.
+        $record1 = new NeatlineRecord($exhibit1);
+        $record1->tags = 'tag';
+        $record1->save();
+
+        // Record 2.
+        $record2 = new NeatlineRecord($exhibit1);
+        $record2->tags = 'tag';
+        $record2->save();
+
+        // Record 3.
+        $record3 = new NeatlineRecord($exhibit2);
+        $record3->tags = 'tag';
+        $record3->save();
+
+        // Propagate new style.
+        $record1->vector_color = 'color';
+        $this->_recordsTable->propagateTags($record1);
+
+        // Reload records.
+        $record1 = $this->_recordsTable->find($record1->id);
+        $record2 = $this->_recordsTable->find($record2->id);
+        $record3 = $this->_recordsTable->find($record3->id);
+
+        // Just records in exhibit 1 changed.
+        $this->assertEquals($record1->vector_color, 'color');
+        $this->assertEquals($record2->vector_color, 'color');
+        $this->assertEquals($record3->vector_color, null);
+
+    }
+
+
 }

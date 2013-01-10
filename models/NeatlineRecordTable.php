@@ -33,17 +33,22 @@ class NeatlineRecordTable extends Omeka_Db_Table
         foreach (neatline_explodeTags($record->tags) as $raw) {
 
             // Get the tag record.
-            $tag    = $tagsTable->findByName($exhibit, $raw);
-            $where  = array('tags LIKE ?' => '%'.$raw.'%');
-            $data   = array();
+            $tag = $tagsTable->findByName($exhibit, $raw);
 
-            // Get update data array.
+            // `SET`
+            $set = array();
             foreach ($attrs as $attr) { if ($tag->$attr == 1) {
-                $data[$attr] = $record->$attr;
+                $set[$attr] = $record->$attr;
             }}
 
+            // `WHERE`
+            $where = array(
+                'tags LIKE ?'       => '%'.$raw.'%',
+                'exhibit_id = ?'    => $exhibit->id
+            );
+
             // Update sibling records.
-            $this->update($this->getTableName(), $data, $where);
+            $this->update($this->getTableName(), $set, $where);
 
         }
 
@@ -60,19 +65,19 @@ class NeatlineRecordTable extends Omeka_Db_Table
     public function updateTag($exhibit, $oldName, $newName)
     {
 
-        // Form the `REPLACE` call.
+        // `SET`
         $set = array('tags' => new Zend_Db_Expr(
             $this->quoteInto('REPLACE(tags, ?)', array(
-                $oldName, $newName)
-            )
+                $oldName, $newName
+            ))
         ));
 
-        // Form the `WHERE` clause.
-        $where = array('tags LIKE ?' => '%'.$oldName.'%',
-            'exhibit_id = ?' => $exhibit->id
+        // `WHERE`
+        $where = array(
+            'tags LIKE ?'       => '%'.$oldName.'%',
+            'exhibit_id = ?'    => $exhibit->id
         );
 
-        // Update records.
         $this->update($this->getTableName(), $set, $where);
 
     }
@@ -91,11 +96,13 @@ class NeatlineRecordTable extends Omeka_Db_Table
         // Form the `REPLACE` call.
         $replace = $this->quoteInto(
             "TRIM(BOTH ',' FROM REPLACE(REPLACE(tags, ?), ',,', ','))",
-            array($name, ""));
+            array($name, "")
+        );
 
         // Form `SET` and `WHERE`.
         $set    = array('tags' => new Zend_Db_Expr($replace));
-        $where  = array('tags LIKE ?' => '%'.$name.'%');
+        $where  = array('tags LIKE ?' => '%'.$name.'%',
+            'exhibit_id = ?'    => $exhibit->id);
 
         // Update records.
         $this->update($this->getTableName(), $set, $where);

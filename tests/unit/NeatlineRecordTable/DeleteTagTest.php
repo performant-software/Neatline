@@ -56,4 +56,38 @@ class Neatline_NeatlineRecordTableTest_DeleteTag
     }
 
 
+    /**
+     * --------------------------------------------------------------------
+     * deleteTag() should only update records in the passed exhibit.
+     * --------------------------------------------------------------------
+     */
+    public function testExhibitIsolation()
+    {
+
+        // Exhibits.
+        $exhibit1 = $this->__exhibit('slug-1');
+        $exhibit2 = $this->__exhibit('slug-2');
+
+        // Record 1.
+        $record1 = new NeatlineRecord($exhibit1);
+        $record1->tags = 'tag';
+        $record1->save();
+
+        // Record 2.
+        $record2 = new NeatlineRecord($exhibit2);
+        $record2->tags = 'tag';
+        $record2->save();
+
+        // Update tag, reload records.
+        $this->_recordsTable->deleteTag($exhibit1, 'tag');
+        $record1 = $this->_recordsTable->find($record1->id);
+        $record2 = $this->_recordsTable->find($record2->id);
+
+        // Record1 updated, record2 unchanged.
+        $this->assertEquals($record1->tags, '');
+        $this->assertEquals($record2->tags, 'tag');
+
+    }
+
+
 }
