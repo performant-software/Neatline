@@ -14,13 +14,6 @@
 ?>
 
 
-<label><?php echo __('Tags'); ?></label>
-<div class="controls">
-  <div class="inline-inputs">
-    <input type="text" name="tags" data-value="record.tags"/>
-  </div>
-</div>
-
 <?php echo $this->partial(
   'index/underscore/helpers/_text_input.php', array(
     'name'  => 'vector-color',

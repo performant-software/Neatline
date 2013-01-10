@@ -30,9 +30,7 @@
 <!-- Templates. -->
 <?php echo $this->partial('index/_strings.php'); ?>
 <?php echo $this->partial('index/underscore/_record_list.php'); ?>
-<?php echo $this->partial('index/underscore/_tag_list.php'); ?>
 <?php echo $this->partial('index/underscore/_record_form.php'); ?>
-<?php echo $this->partial('index/underscore/_tag_form.php'); ?>
 <?php echo $this->partial('index/underscore/_search.php'); ?>
 <?php echo $this->partial('index/underscore/_menu.php', array(
   'exhibit' => $exhibit));
