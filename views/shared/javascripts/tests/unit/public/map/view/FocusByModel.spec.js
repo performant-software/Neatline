@@ -23,7 +23,7 @@ describe('Map `focusByModel`', function() {
 
   });
 
-  it('should not change focus when coverage is POINT(0 0)', function() {
+  it('should not change focus when coverage is `POINT(0 0)`', function() {
 
     // --------------------------------------------------------------------
     // When a model is passed to `focusByModel` with a coverage value of
@@ -35,8 +35,8 @@ describe('Map `focusByModel`', function() {
 
     // Create a model with "empty" coverage.
     var model = new Neatline.Shared.Record.Model({
-      coverage: 'POINT(0 0)',
-      id: 999
+      id:         999,
+      coverage:   'POINT(0 0)'
     });
 
     // Focus, get center/zoom.
@@ -48,6 +48,36 @@ describe('Map `focusByModel`', function() {
     expect(center.lon).toEqual(1);
     expect(center.lat).toEqual(2);
     expect(zoom).toEqual(3);
+
+  });
+
+  it('should zoom to extent when focus and zoom are null', function() {
+
+    // --------------------------------------------------------------------
+    // When a model is passed to `focusByModel` with null `map_focus` and
+    // `map_zoom`, the map should auto-focus to the geometry extent.
+    // --------------------------------------------------------------------
+
+    // Set focus/zoom.
+    _t.setMapCenter(0, 0, 1)
+
+    // Create a model with "empty" coverage.
+    var model = new Neatline.Shared.Record.Model({
+      id:         999,
+      coverage:   'POINT(1 1)',
+      map_focus:  null,
+      map_zoom:   null
+    });
+
+    // Focus, get center/zoom.
+    _t.vw.map.focusByModel(model);
+    var center  = _t.vw.map.map.getCenter();
+    var zoom    = _t.vw.map.map.getZoom();
+
+    // Unchanged center/zoom.
+    expect(center.lon).toEqual(1);
+    expect(center.lat).toEqual(1);
+    expect(zoom).toBeGreaterThan(1);
 
   });
 

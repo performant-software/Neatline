@@ -215,7 +215,7 @@ Neatline.module('Map', function(
       var zoom  = model.get('map_zoom');
 
       // If defined, apply.
-      if (!_.isUndefined(focus) && !_.isUndefined(zoom)) {
+      if (_.isString(focus) && _.isNumber(zoom)) {
         this.setViewport(focus, zoom);
       }
 
