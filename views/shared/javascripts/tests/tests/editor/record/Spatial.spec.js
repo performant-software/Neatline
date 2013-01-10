@@ -278,9 +278,9 @@ describe('Record Form Spatial Tab', function() {
     // --------------------------------------------------------------------
 
     // Create a new point, trigger modify.
-    var pt1 = new OpenLayers.Geometry.Point(1,2);
-    var pt2 = new OpenLayers.Geometry.Point(3,4);
-    var line = new OpenLayers.Geometry.LineString([pt1,pt2]);
+    var pt1   = new OpenLayers.Geometry.Point(1,2);
+    var pt2   = new OpenLayers.Geometry.Point(3,4);
+    var line  = new OpenLayers.Geometry.LineString([pt1,pt2]);
     _t.vw.map.controls.line.drawFeature(line);
 
     // Check for new data.
@@ -298,11 +298,11 @@ describe('Record Form Spatial Tab', function() {
     // --------------------------------------------------------------------
 
     // Create a new point, trigger modify.
-    var pt1 = new OpenLayers.Geometry.Point(1,2);
-    var pt2 = new OpenLayers.Geometry.Point(3,4);
-    var pt3 = new OpenLayers.Geometry.Point(5,6);
-    var ring = new OpenLayers.Geometry.LinearRing([pt1,pt2,pt3]);
-    var poly = new OpenLayers.Geometry.Polygon([ring]);
+    var pt1   = new OpenLayers.Geometry.Point(1,2);
+    var pt2   = new OpenLayers.Geometry.Point(3,4);
+    var pt3   = new OpenLayers.Geometry.Point(5,6);
+    var ring  = new OpenLayers.Geometry.LinearRing([pt1,pt2,pt3]);
+    var poly  = new OpenLayers.Geometry.Polygon([ring]);
     _t.vw.map.controls.poly.drawFeature(poly);
 
     // Check for new data.
@@ -320,11 +320,11 @@ describe('Record Form Spatial Tab', function() {
     // --------------------------------------------------------------------
 
     // Create a new point, trigger modify.
-    var pt1 = new OpenLayers.Geometry.Point(1,2);
-    var pt2 = new OpenLayers.Geometry.Point(3,4);
-    var pt3 = new OpenLayers.Geometry.Point(5,6);
-    var ring = new OpenLayers.Geometry.LinearRing([pt1,pt2,pt3]);
-    var poly = new OpenLayers.Geometry.Polygon([ring]);
+    var pt1   = new OpenLayers.Geometry.Point(1,2);
+    var pt2   = new OpenLayers.Geometry.Point(3,4);
+    var pt3   = new OpenLayers.Geometry.Point(5,6);
+    var ring  = new OpenLayers.Geometry.LinearRing([pt1,pt2,pt3]);
+    var poly  = new OpenLayers.Geometry.Polygon([ring]);
     _t.vw.map.controls.regPoly.drawFeature(poly);
 
     // Check for new data.
@@ -371,9 +371,7 @@ describe('Record Form Spatial Tab', function() {
     _t.vw.map.controls.remove.selectFeature(feature);
 
     // Check for new data.
-    expect(els.coverage.val()).toEqual(
-      'GEOMETRYCOLLECTION()'
-    );
+    expect(els.coverage.val()).toEqual('');
 
   });
 

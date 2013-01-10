@@ -170,14 +170,18 @@ _.extend(Neatline.Map.View.prototype, {
    */
   publish: function() {
 
+    var wkt = null;
+
     // Filter out editing geometry.
     var features = _.filter(this.editLayer.features, function(f) {
       return !f._sketch;
     });
 
     // Write WKT.
-    var formatWKT = new OpenLayers.Format.WKT();
-    var wkt = formatWKT.write(features);
+    if (!_.isEmpty(features)) {
+      var formatWKT = new OpenLayers.Format.WKT();
+      var wkt = formatWKT.write(features);
+    }
 
     // Publish.
     Neatline.vent.trigger('editor:map:newCoverage', wkt);
