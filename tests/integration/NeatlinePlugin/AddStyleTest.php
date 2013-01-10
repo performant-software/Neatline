@@ -18,7 +18,7 @@ class Neatline_NeatlinePluginTest_AddStyle
 
     /**
      * --------------------------------------------------------------------
-     * addStyle() should add columns to record and tag tables..
+     * addStyle() should add columns to the records table.
      * --------------------------------------------------------------------
      */
     public function testAddStyle()
@@ -29,17 +29,12 @@ class Neatline_NeatlinePluginTest_AddStyle
 
         // Get columns.
         $recordCols = $this->db->describeTable(
-            $this->db->prefix.'neatline_records');
-        $tagCols = $this->db->describeTable(
-            $this->db->prefix.'neatline_tags');
+            $this->_recordsTable->getTableName()
+        );
 
         // Check for record column.
         $this->assertArrayHasKey('test', $recordCols);
         $this->assertEquals($recordCols['test']['DATA_TYPE'], 'int');
-
-        // Check for tag column
-        $this->assertArrayHasKey('test', $tagCols);
-        $this->assertEquals($tagCols['test']['DATA_TYPE'], 'tinyint');
 
     }
 

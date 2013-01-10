@@ -29,9 +29,6 @@ describe('Router', function() {
     expect(_t.el.editor).toContain(_t.el.search);
     expect(_t.el.editor).toContain(_t.el.records);
 
-    // "Records" tab activated.
-    expect(_t.vw.menu.__ui.tabs.records).toHaveClass('active');
-
   });
 
   it('#record/:id', function() {

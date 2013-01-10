@@ -45,14 +45,9 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
 
         try {
 
-            // Records table.
+            // Add column to records table.
             $sql = "ALTER TABLE `{$_db->prefix}neatline_records`
                     ADD COLUMN {$name} {$type}";
-            $_db->query($sql);
-
-            // Tags table.
-            $sql = "ALTER TABLE `{$_db->prefix}neatline_tags`
-                    ADD COLUMN {$name} TINYINT(1) DEFAULT 0";
             $_db->query($sql);
 
         } catch (Exception $e) {}
@@ -116,22 +111,6 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
         $this->_db->query($sql);
 
 
-        // Tags table.
-        // -----------
-        $sql = "CREATE TABLE IF NOT EXISTS
-            `{$this->_db->prefix}neatline_tags` (
-
-            `id`                INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-            `exhibit_id`        INT(10) UNSIGNED NOT NULL,
-            `tag`               TINYTEXT NULL,
-
-             PRIMARY KEY        (`id`)
-
-        ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
-
-        $this->_db->query($sql);
-
-
         // Add styles.
         // -----------
         self::addStyle('vector_color',      'TINYTEXT NULL');
@@ -166,11 +145,6 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
         // Drop the data table.
         $sql = "DROP TABLE IF EXISTS
             `{$this->_db->prefix}neatline_records`";
-        $this->_db->query($sql);
-
-        // Drop the tags table.
-        $sql = "DROP TABLE IF EXISTS
-            `{$this->_db->prefix}neatline_tags`";
         $this->_db->query($sql);
 
     }
