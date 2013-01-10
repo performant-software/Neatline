@@ -49,15 +49,6 @@ _t.loadJsonFixtures = function() {
     record: {
       standard: readFixtures('record.standard.json'),
       add:      readFixtures('record.add.json')
-    },
-
-    tags: {
-      standard: readFixtures('tags.standard.json')
-    },
-
-    tag: {
-      standard: readFixtures('tag.standard.json'),
-      add:      readFixtures('tag.add.json')
     }
 
   };

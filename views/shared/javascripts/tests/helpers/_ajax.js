@@ -89,24 +89,8 @@ _t.respondRecords = function() {
 
 
 /**
- * Respond 200 with the tag collection.
- */
-_t.respondTags = function() {
-  this.respondLast200(this.json.tags.standard);
-};
-
-
-/**
  * Respond 200 with the new record JSON.
  */
 _t.respondNewRecord = function() {
   this.respondLast200(this.json.record.add);
-};
-
-
-/**
- * Respond 200 with the new record JSON.
- */
-_t.respondNewTag = function() {
-  this.respondLast200(this.json.tag.add);
 };

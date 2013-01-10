@@ -57,43 +57,4 @@ describe('Router', function() {
 
   });
 
-  it('#tags', function() {
-
-    // --------------------------------------------------------------------
-    // #records should display the editor menu and tag list.
-    // --------------------------------------------------------------------
-
-    _t.navigate('tags');
-
-    // Menu, search, and records displayed.
-    expect(_t.el.editor).toContain(_t.el.menu);
-    expect(_t.el.editor).toContain(_t.el.tags);
-
-    // "Records" tab activated.
-    expect(_t.vw.menu.__ui.tabs.tags).toHaveClass('active');
-
-  });
-
-  it('#tag/:id', function() {
-
-    // --------------------------------------------------------------------
-    // #tag/:id should display a tag edit form.
-    // --------------------------------------------------------------------
-
-    _t.navigate('tags/1');
-    expect(_t.el.editor).toContain(_t.el.tag);
-
-  });
-
-  it('#tag/add', function() {
-
-    // --------------------------------------------------------------------
-    // #tag/add should display a tag add form.
-    // --------------------------------------------------------------------
-
-    _t.navigate('tags/add');
-    expect(_t.el.editor).toContain(_t.el.tag);
-
-  });
-
 });

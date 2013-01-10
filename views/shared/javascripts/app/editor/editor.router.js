@@ -21,10 +21,7 @@ Neatline.module('Editor', { startWithParent: false,
       '':                 'showRecordList',
       'records':          'showRecordList',
       'records/add':      'showNewRecordForm',
-      'records/:id':      'showRecordForm',
-      'tags':             'showTagList',
-      'tags/add':         'showNewTagForm',
-      'tags/:id':         'showTagForm'
+      'records/:id':      'showRecordForm'
     },
 
 
@@ -37,18 +34,14 @@ Neatline.module('Editor', { startWithParent: false,
         menu:     Editor.Menu.    __view,
         search:   Editor.Search.  __view,
         records:  Editor.Records. __view,
-        record:   Editor.Record.  __view,
-        tags:     Editor.Tags.    __view,
-        tag:      Editor.Tag.     __view
+        record:   Editor.Record.  __view
       };
       this.ui = {
         editor:   Editor.         __view.__ui.editor,
         menu:     Editor.Menu.    __view.$el,
         search:   Editor.Search.  __view.$el,
         records:  Editor.Records. __view.$el,
-        record:   Editor.Record.  __view.$el,
-        tags:     Editor.Tags.    __view.$el,
-        tag:      Editor.Tag.     __view.$el
+        record:   Editor.Record.  __view.$el
       };
     },
 
@@ -88,37 +81,6 @@ Neatline.module('Editor', { startWithParent: false,
     showNewRecordForm: function() {
       Neatline.vent.trigger('editor:router:#records/add');
       this.views.record.showIn(this.ui.editor);
-    },
-
-
-    /**
-     * Show the list of tags.
-     */
-    showTagList: function() {
-      Neatline.vent.trigger('editor:router:#tags');
-      this.views.menu.showIn(this.ui.editor);
-      this.views.tags.showIn(this.ui.editor);
-    },
-
-
-    /**
-     * Show edit form for individual tag.
-     *
-     * @param {String} id: The tag id.
-     */
-    showTagForm: function(id) {
-      id = parseInt(id, 10);
-      Neatline.vent.trigger('editor:router:#tags/:id', id);
-      this.views.tag.showIn(this.ui.editor);
-    },
-
-
-    /**
-     * Show add tag form.
-     */
-    showNewTagForm: function() {
-      Neatline.vent.trigger('editor:router:#tags/add');
-      this.views.tag.showIn(this.ui.editor);
     }
 
 

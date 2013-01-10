@@ -41,8 +41,6 @@ _t.aliasEditor = function() {
     menu:     Neatline.Editor.Menu.     __view,
     records:  Neatline.Editor.Records.  __view,
     record:   Neatline.Editor.Record.   __view,
-    tags:     Neatline.Editor.Tags.     __view,
-    tag:      Neatline.Editor.Tag.      __view,
     search:   Neatline.Editor.Search.   __view
   };
 
@@ -53,8 +51,6 @@ _t.aliasEditor = function() {
     menu:     Neatline.Editor.Menu.     __view.$el,
     records:  Neatline.Editor.Records.  __view.$el,
     record:   Neatline.Editor.Record.   __view.$el,
-    tags:     Neatline.Editor.Tags.     __view.$el,
-    tag:      Neatline.Editor.Tag.      __view.$el,
     search:   Neatline.Editor.Search.   __view.$el
   };
 

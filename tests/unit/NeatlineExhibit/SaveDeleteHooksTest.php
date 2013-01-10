@@ -19,29 +19,6 @@ class Neatline_NeatlineExhibitTest_SaveDeleteHooks
 
     /**
      * --------------------------------------------------------------------
-     * An exhibit default tag should only be created when a new exhibit is
-     * inserted, not when an existing exhibit is saved.
-     * --------------------------------------------------------------------
-     */
-    public function testSaveDefaultTagNonDuplication()
-    {
-
-        // Create exhibit.
-        $exhibit = $this->__exhibit();
-
-        // Re-save.
-        $c1 = $this->_tagsTable->count();
-        $exhibit->save();
-        $c2 = $this->_tagsTable->count();
-
-        // Check +0 tags.
-        $this->assertEquals($c1, $c2);
-
-    }
-
-
-    /**
-     * --------------------------------------------------------------------
      * delete() should delete the exhibit record and all child records.
      * --------------------------------------------------------------------
      */

@@ -47,8 +47,6 @@ _t.loadEditor = function() {
   Neatline.Editor.Record.init();
   Neatline.Editor.Records.init();
   Neatline.Editor.Search.init();
-  Neatline.Editor.Tag.init();
-  Neatline.Editor.Tags.init();
   Neatline.Editor.init();
   Neatline.Map.init();
   Neatline.Bubble.init();
@@ -104,29 +102,10 @@ _t.showRecordList = function() {
 
 
 /**
- * Navigate the tag list.
- */
-_t.showTagList = function() {
-  this.navigate('tags');
-  this.respondLast200(this.json.tags.standard);
-};
-
-
-/**
  * Navigate to the edit form for the first record.
  */
 _t.openRecordForm = function() {
   _t.showRecordList();
   var models = this.getRecordModels();
   this.navigate('records/'+models[0].get('id'));
-};
-
-
-/**
- * Navigate to the edit form for the first tag.
- */
-_t.openTagForm = function() {
-  _t.showTagList();
-  var models = this.getTagModels();
-  this.navigate('tags/'+models[0].get('id'));
 };

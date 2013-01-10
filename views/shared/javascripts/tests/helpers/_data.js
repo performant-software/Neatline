@@ -22,32 +22,12 @@ _t.getRecordRows = function() {
 
 
 /**
- * Get DOM collection of editor tag listings.
- *
- * @return {Array}: The DOM collection of <a> elements.
- */
-_t.getTagRows = function() {
-  return this.el.tags.find('a');
-};
-
-
-/**
  * Get the array of models from the record list collection.
  *
  * @return {Array}: The models.
  */
 _t.getRecordModels = function() {
   return Neatline.Editor.Records.__collection.models;
-};
-
-
-/**
- * Get the array of models from the tag list collection.
- *
- * @return {Array}: The models.
- */
-_t.getTagModels = function() {
-  return Neatline.Editor.Tags.__collection.models;
 };
 
 
@@ -124,32 +104,5 @@ _t.getRecordFormElements = function() {
     pointImage:     _t.el.record.find('input[name="point-image"]'),
     mapFocus:       _t.el.record.find('input[name="map-focus"]'),
     mapZoom:        _t.el.record.find('input[name="map-zoom"]')
-  };
-};
-
-
-/**
- * Get DOM selections for the elements on the tag form.
- *
- * @return {Object}: A hash of elements.
- */
-_t.getTagFormElements = function() {
-  return {
-    lead:           _t.el.tag.find('p.lead'),
-    tag:            _t.el.tag.find('input[name="tag"]'),
-    vectorColor:    _t.el.tag.find('input[name="vector_color"]'),
-    strokeColor:    _t.el.tag.find('input[name="stroke_color"]'),
-    selectColor:    _t.el.tag.find('input[name="select_color"]'),
-    vectorOpacity:  _t.el.tag.find('input[name="vector_opacity"]'),
-    selectOpacity:  _t.el.tag.find('input[name="select_opacity"]'),
-    strokeOpacity:  _t.el.tag.find('input[name="stroke_opacity"]'),
-    imageOpacity:   _t.el.tag.find('input[name="image_opacity"]'),
-    strokeWidth:    _t.el.tag.find('input[name="stroke_width"]'),
-    pointRadius:    _t.el.tag.find('input[name="point_radius"]'),
-    minZoom:        _t.el.tag.find('input[name="min_zoom"]'),
-    maxZoom:        _t.el.tag.find('input[name="max_zoom"]'),
-    pointImage:     _t.el.tag.find('input[name="point_image"]'),
-    mapFocus:       _t.el.tag.find('input[name="map_focus"]'),
-    mapZoom:        _t.el.tag.find('input[name="map_zoom"]')
   };
 };

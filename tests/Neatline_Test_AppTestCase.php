@@ -38,7 +38,6 @@ class Neatline_Test_AppTestCase extends Omeka_Test_AppTestCase
         // Get plugin tables.
         $this->_recordsTable =  $this->db->getTable('NeatlineRecord');
         $this->_exhibitsTable = $this->db->getTable('NeatlineExhibit');
-        $this->_tagsTable =     $this->db->getTable('NeatlineTag');
 
     }
 
@@ -59,7 +58,6 @@ class Neatline_Test_AppTestCase extends Omeka_Test_AppTestCase
         $p = $this->db->prefix;
         $this->db->query("DELETE FROM `{$p}neatline_records` WHERE 1=1");
         $this->db->query("DELETE FROM `{$p}neatline_exhibits` WHERE 1=1");
-        $this->db->query("DELETE FROM `{$p}neatline_tags` WHERE 1=1");
 
     }
 
@@ -112,34 +110,6 @@ class Neatline_Test_AppTestCase extends Omeka_Test_AppTestCase
         $record = new NeatlineRecord($exhibit, $item);
         $record->save();
         return $record;
-
-    }
-
-
-    /**
-     * Create a tag.
-     *
-     * @param Omeka_Record $exhibit The parent exhibit.
-     * @param string $name The tag name.
-     * @param boolean $active If true, activate all styles.
-     * @return NeatineTag The tag.
-     */
-    public function __tag($exhibit=null, $name=null, $activate=false)
-    {
-
-        // Create exhibit.
-        if (is_null($exhibit)) $exhibit = $this->__exhibit();
-
-        // Create tag.
-        $tag = new NeatlineTag($exhibit);
-        $tag->tag = $name;
-
-        if ($activate) {
-          foreach (neatline_getStyleCols() as $s) $tag->$s= 1;
-        }
-
-        $tag->save();
-        return $tag;
 
     }
 
@@ -267,19 +237,6 @@ class Neatline_Test_AppTestCase extends Omeka_Test_AppTestCase
     {
         $records = $this->_recordsTable->fetchObjects(
             $this->_recordsTable->getSelect());
-        return end($records);
-    }
-
-
-    /**
-     * Get the last tag.
-     *
-     * @return Item The tag.
-     */
-    public function getLastTag()
-    {
-        $records = $this->_tagsTable->fetchObjects(
-            $this->_tagsTable->getSelect());
         return end($records);
     }
 

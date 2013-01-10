@@ -62,8 +62,6 @@ _t.loadEditor = function() {
   Neatline.Editor.Record.init();
   Neatline.Editor.Records.init();
   Neatline.Editor.Search.init();
-  Neatline.Editor.Tag.init();
-  Neatline.Editor.Tags.init();
   Neatline.Editor.init();
   Neatline.Map.init();
   Neatline.Bubble.init();
@@ -119,31 +117,12 @@ _t.showRecordList = function() {
 
 
 /**
- * Navigate the tag list.
- */
-_t.showTagList = function() {
-  this.navigate('tags');
-  this.respondLast200(this.json.tags.standard);
-};
-
-
-/**
  * Navigate to the edit form for the first record.
  */
 _t.openRecordForm = function() {
   _t.showRecordList();
   var models = this.getRecordModels();
   this.navigate('records/'+models[0].get('id'));
-};
-
-
-/**
- * Navigate to the edit form for the first tag.
- */
-_t.openTagForm = function() {
-  _t.showTagList();
-  var models = this.getTagModels();
-  this.navigate('tags/'+models[0].get('id'));
 };
 
 
@@ -197,15 +176,6 @@ _t.loadJsonFixtures = function() {
     record: {
       standard: readFixtures('record.standard.json'),
       add:      readFixtures('record.add.json')
-    },
-
-    tags: {
-      standard: readFixtures('tags.standard.json')
-    },
-
-    tag: {
-      standard: readFixtures('tag.standard.json'),
-      add:      readFixtures('tag.add.json')
     }
 
   };
@@ -254,8 +224,6 @@ _t.aliasEditor = function() {
     menu:     Neatline.Editor.Menu.     __view,
     records:  Neatline.Editor.Records.  __view,
     record:   Neatline.Editor.Record.   __view,
-    tags:     Neatline.Editor.Tags.     __view,
-    tag:      Neatline.Editor.Tag.      __view,
     search:   Neatline.Editor.Search.   __view
   };
 
@@ -266,8 +234,6 @@ _t.aliasEditor = function() {
     menu:     Neatline.Editor.Menu.     __view.$el,
     records:  Neatline.Editor.Records.  __view.$el,
     record:   Neatline.Editor.Record.   __view.$el,
-    tags:     Neatline.Editor.Tags.     __view.$el,
-    tag:      Neatline.Editor.Tag.      __view.$el,
     search:   Neatline.Editor.Search.   __view.$el
   };
 
@@ -297,32 +263,12 @@ _t.getRecordRows = function() {
 
 
 /**
- * Get DOM collection of editor tag listings.
- *
- * @return {Array}: The DOM collection of <a> elements.
- */
-_t.getTagRows = function() {
-  return this.el.tags.find('a');
-};
-
-
-/**
  * Get the array of models from the record list collection.
  *
  * @return {Array}: The models.
  */
 _t.getRecordModels = function() {
   return Neatline.Editor.Records.__collection.models;
-};
-
-
-/**
- * Get the array of models from the tag list collection.
- *
- * @return {Array}: The models.
- */
-_t.getTagModels = function() {
-  return Neatline.Editor.Tags.__collection.models;
 };
 
 
@@ -399,33 +345,6 @@ _t.getRecordFormElements = function() {
     pointImage:     _t.el.record.find('input[name="point-image"]'),
     mapFocus:       _t.el.record.find('input[name="map-focus"]'),
     mapZoom:        _t.el.record.find('input[name="map-zoom"]')
-  };
-};
-
-
-/**
- * Get DOM selections for the elements on the tag form.
- *
- * @return {Object}: A hash of elements.
- */
-_t.getTagFormElements = function() {
-  return {
-    lead:           _t.el.tag.find('p.lead'),
-    tag:            _t.el.tag.find('input[name="tag"]'),
-    vectorColor:    _t.el.tag.find('input[name="vector_color"]'),
-    strokeColor:    _t.el.tag.find('input[name="stroke_color"]'),
-    selectColor:    _t.el.tag.find('input[name="select_color"]'),
-    vectorOpacity:  _t.el.tag.find('input[name="vector_opacity"]'),
-    selectOpacity:  _t.el.tag.find('input[name="select_opacity"]'),
-    strokeOpacity:  _t.el.tag.find('input[name="stroke_opacity"]'),
-    imageOpacity:   _t.el.tag.find('input[name="image_opacity"]'),
-    strokeWidth:    _t.el.tag.find('input[name="stroke_width"]'),
-    pointRadius:    _t.el.tag.find('input[name="point_radius"]'),
-    minZoom:        _t.el.tag.find('input[name="min_zoom"]'),
-    maxZoom:        _t.el.tag.find('input[name="max_zoom"]'),
-    pointImage:     _t.el.tag.find('input[name="point_image"]'),
-    mapFocus:       _t.el.tag.find('input[name="map_focus"]'),
-    mapZoom:        _t.el.tag.find('input[name="map_zoom"]')
   };
 };
 
@@ -520,26 +439,10 @@ _t.respondRecords = function() {
 
 
 /**
- * Respond 200 with the tag collection.
- */
-_t.respondTags = function() {
-  this.respondLast200(this.json.tags.standard);
-};
-
-
-/**
  * Respond 200 with the new record JSON.
  */
 _t.respondNewRecord = function() {
   this.respondLast200(this.json.record.add);
-};
-
-
-/**
- * Respond 200 with the new record JSON.
- */
-_t.respondNewTag = function() {
-  this.respondLast200(this.json.tag.add);
 };
 
 
