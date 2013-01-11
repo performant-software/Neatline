@@ -64,6 +64,7 @@ describe('Record Form Add', function() {
     // POST request with the new data.
     // --------------------------------------------------------------------
 
+    // Click "Save".
     els.save.trigger('click');
 
     // Capture outoing request.
@@ -73,6 +74,26 @@ describe('Record Form Add', function() {
     // Check method and route.
     expect(request.method).toEqual('POST');
     expect(request.url).toEqual(__exhibit.api.record);
+
+  });
+
+
+  it('should update the route after first save', function() {
+
+    // --------------------------------------------------------------------
+    // When a record is saved for the first time, the URL hash should be
+    // updated to point to the records/:id resource for the new record.
+    // --------------------------------------------------------------------
+
+    // Click "Save".
+    els.save.trigger('click');
+    _t.respondNewRecord();
+
+    // Get the id of the new record.
+    var id = $.parseJSON(_t.json.record.add).id;
+
+    // Check for updated route.
+    expect(Backbone.history.fragment).toEqual('records/'+id);
 
   });
 

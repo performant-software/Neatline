@@ -45,6 +45,20 @@ Neatline.module('Editor', { startWithParent: false,
   // ======================================================================
 
   /**
+   * Update the route hash.
+   *
+   * @param {String} message: The new route.
+   */
+  var updateRoute = function(route) {
+    Editor.__router.navigate(route, { replace: true });
+  };
+
+  Neatline.commands.addHandler('editor:updateRoute', updateRoute);
+
+
+  // ======================================================================
+
+  /**
    * Open a record edit form if one is not already open.
    *
    * @param {Object} model: The record model.

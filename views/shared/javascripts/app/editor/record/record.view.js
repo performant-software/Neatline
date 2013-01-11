@@ -113,11 +113,18 @@ Neatline.module('Editor.Record', function(
 
       this.model.save(null, {
 
-        // Flash success.
         success: _.bind(function() {
+
+          // Update the route.
+          Neatline.execute('editor:updateRoute',
+            'records/'+this.model.get('id')
+          );
+
+          // Flash success.
           Neatline.execute('editor:notifySuccess',
             STRINGS.record.save.success
           );
+
         }, this),
 
         // Flash failure.
