@@ -17,27 +17,18 @@ class Neatline_NeatlineRecordTableTest_CountActiveRecordsByExhibit
 
 
     /**
-     * --------------------------------------------------------------------
      * countActiveRecordsByExhibit() should number of map-active records
      * in the exhibit.
-     * --------------------------------------------------------------------
      */
     public function testCountActiveRecordsByExhibit()
     {
-
-        // Create exhibits.
         $exhibit1 = $this->__exhibit('test-1');
         $exhibit2 = $this->__exhibit('test-2');
-
-        // Create records.
-        $record1 = $this->__record($exhibit1);
-        $record2 = $this->__record($exhibit2);
-        $record3 = $this->__record($exhibit2);
-
-        // Check counts.
+        $record1  = $this->__record($exhibit1);
+        $record2  = $this->__record($exhibit2);
+        $record3  = $this->__record($exhibit2);
         $this->assertEquals($exhibit1->getNumberOfRecords(), 1);
         $this->assertEquals($exhibit2->getNumberOfRecords(), 2);
-
     }
 
 

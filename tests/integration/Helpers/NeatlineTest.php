@@ -20,26 +20,18 @@ class Neatline_HelpersTest_Neatline
 
 
     /**
-     * --------------------------------------------------------------------
      * neatline() should return exhibit field values.
-     * --------------------------------------------------------------------
      */
     public function testNeatlineValue()
     {
 
-        // Create exhibit, set fields.
         $exhibit = $this->__exhibit('test-exhibit');
-        $exhibit->title         = 'title';
-        $exhibit->description   = 'desc';
+        $exhibit->title = 'title';
         $exhibit->save();
 
-        // Hit /show.
+        // Show the exhibit, test field access.
         $this->dispatch('neatline/show/test-exhibit');
-
-        // Get fields
         $this->assertEquals('title', neatline('title'));
-        $this->assertEquals('desc', neatline('description'));
-        $this->assertEquals($exhibit->id, neatline('id'));
 
     }
 

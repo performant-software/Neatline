@@ -17,38 +17,24 @@ class Neatline_NeatlineExhibitTableTest_FindBySlug
 
 
     /**
-     * --------------------------------------------------------------------
      * findBySlug() should return the exhibit with the passed slug.
-     * --------------------------------------------------------------------
      */
     public function testFindBySlug()
     {
-
-        // Create exhibit.
         $exhibit = $this->__exhibit('test-slug');
-
-        // Get the exhibit, check.
         $retrieved = $this->_exhibitsTable->findBySlug('test-slug');
         $this->assertEquals($retrieved->id, $exhibit->id);
-
     }
 
 
     /**
-     * --------------------------------------------------------------------
-     * findBySlug should escape input before passing it to SQL.
-     * --------------------------------------------------------------------
+     * findBySlug() should escape input before passing it to SQL.
      */
     public function testFindBySlugEscaping()
     {
-
-        // Create exhibit.
         $exhibit = $this->__exhibit('---slug-1-');
-
-        // Get the exhibit, check.
         $retrievedExhibit = $this->_exhibitsTable->findBySlug('"; err;');
         $this->assertNull($retrievedExhibit);
-
     }
 
 

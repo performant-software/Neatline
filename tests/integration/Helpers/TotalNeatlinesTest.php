@@ -20,9 +20,7 @@ class Neatline_HelpersTest_TotalNeatlines
 
 
     /**
-     * --------------------------------------------------------------------
      * total_neatlines() should return the total number of exhibits.
-     * --------------------------------------------------------------------
      */
     public function testTotalNeatlines()
     {

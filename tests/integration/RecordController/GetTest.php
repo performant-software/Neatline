@@ -17,25 +17,20 @@ class Neatline_RecordControllerTest_Get
 
 
     /**
-     * --------------------------------------------------------------------
-     * GET should emit a JSON object containing data for a single record.
-     * --------------------------------------------------------------------
+     * GET should emit a JSON representation of a single record.
      */
     public function testGet()
     {
 
-        // Create exhibit and record.
-        $exhibit = $this->__exhibit();
-        $record = $this->__record($exhibit);
+        $exhibit    = $this->__exhibit();
+        $record     = $this->__record($exhibit);
 
-        // Hit /record/:id, capture response.
+        // Hit /record/:id.
         $this->dispatch('neatline/record/'.$record->id);
-        $response = json_decode($this->getResponse()->getBody('default'));
-
-        // Check code.
+        $response = $this->getResponseArray();
         $this->assertResponseCode(200);
 
-        // Check attributes.
+        // Should emit static fields.
         $this->assertObjectHasAttribute('id',       $response);
         $this->assertObjectHasAttribute('item_id',  $response);
         $this->assertObjectHasAttribute('title',    $response);
@@ -43,7 +38,7 @@ class Neatline_RecordControllerTest_Get
         $this->assertObjectHasAttribute('slug',     $response);
         $this->assertObjectHasAttribute('coverage', $response);
 
-        // Check styles.
+        // Should emit styles.
         foreach (neatline_getStyleCols() as $s) {
             $this->assertObjectHasAttribute($s, $response);
         }

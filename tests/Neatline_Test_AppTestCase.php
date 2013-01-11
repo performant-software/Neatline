@@ -190,28 +190,19 @@ class Neatline_Test_AppTestCase extends Omeka_Test_AppTestCase
 
         // Set global fileIn.
         Zend_Registry::set('fileIn', $mockPath);
+        $this->request->setMethod('PUT');
 
     }
 
 
     /**
-     * Get the coverage of a record as a raw WKT string.
+     * Get the body of the last response as an array.
      *
-     * @param NeatlineRecord $record The record.
-     * @return string $coverge The coverage as raw WKT.
+     * @return array The response data.
      */
-    public function getCoverageAsText($record)
+    public function getResponseArray()
     {
-
-        // Build the select.
-        $select = $this->_recordsTable->getSelect()
-            ->columns(array('wkt'=>new Zend_Db_Expr('AsText(coverage)')))
-            ->where('id=?', $record->id);
-
-        // Query and return value.
-        $record = $this->_recordsTable->fetchObject($select);
-        return $record->wkt;
-
+        return json_decode($this->getResponse()->getBody('default'));
     }
 
 

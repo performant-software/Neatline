@@ -17,22 +17,18 @@ class Neatline_NeatlinePluginTest_AddStyle
 
 
     /**
-     * --------------------------------------------------------------------
      * addStyle() should add columns to the records table.
-     * --------------------------------------------------------------------
      */
     public function testAddStyle()
     {
 
-        // Register a style.
         NeatlinePlugin::addStyle('test', 'INT UNSIGNED NULL');
 
         // Get columns.
-        $recordCols = $this->db->describeTable(
-            $this->_recordsTable->getTableName()
-        );
+        $name = $this->_recordsTable->getTableName();
+        $recordCols = $this->db->describeTable($name);
 
-        // Check for record column.
+        // Should have new `test` column.
         $this->assertArrayHasKey('test', $recordCols);
         $this->assertEquals($recordCols['test']['DATA_TYPE'], 'int');
 

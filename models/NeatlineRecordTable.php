@@ -16,8 +16,7 @@ class NeatlineRecordTable extends Omeka_Db_Table
 
 
     /**
-     * Extend the default `getSelect` to add a `wkt` column to all queries
-     * that selects the plain-text value of `coverage` by way of `AsText`.
+     * Select `coverage` as plain-text.
      *
      * @return Omeka_Db_Select The modified select.
      */
@@ -70,8 +69,6 @@ class NeatlineRecordTable extends Omeka_Db_Table
     {
 
         $data = array();
-
-        // Form starting select.
         $select = $this->getSelect()->where(
             'exhibit_id=?', $exhibit->id
         );
@@ -123,7 +120,7 @@ class NeatlineRecordTable extends Omeka_Db_Table
     protected function _filterByExtent($select, $extent)
     {
 
-        // Query for intersection with the viewport.
+        // Query for viewport intersection.
         $select->where(new Zend_Db_Expr('MBRIntersects(
             coverage, GeomFromText("'.$extent.'")
         )'));

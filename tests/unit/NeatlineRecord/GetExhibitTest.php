@@ -17,18 +17,14 @@ class Neatline_NeatlineRecordTest_GetExhibit
 
 
     /**
-     * --------------------------------------------------------------------
      * getExhibit() should return the parent exhibit.
-     * --------------------------------------------------------------------
      */
     public function testGetExhibit()
     {
 
-        // Create  record.
-        $exhibit = $this->__exhibit();
-        $record = new NeatlineRecord($exhibit);
+        $exhibit    = $this->__exhibit();
+        $record     = new NeatlineRecord($exhibit);
 
-        // Get the parent exhibit.
         $retrieved = $record->getExhibit();
         $this->assertEquals($exhibit->id, $retrieved->id);
 

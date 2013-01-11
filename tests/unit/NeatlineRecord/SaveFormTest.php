@@ -17,18 +17,13 @@ class Neatline_NeatlineRecordTest_SaveForm
 
 
     /**
-     * --------------------------------------------------------------------
-     * saveForm() should update fields to match the key => value pairs in
-     * the input array.
-     * --------------------------------------------------------------------
+     * saveForm() should update fields to match the input array.
      */
     public function testUpdate()
     {
 
-        // Create record.
         $record = $this->__record();
 
-        // Mock values:
         $values = array(
 
             'slug'              => '1',
@@ -54,13 +49,9 @@ class Neatline_NeatlineRecordTest_SaveForm
 
         );
 
-        // Update.
         $record->saveForm($values);
-
-        // Reload record.
         $record = $this->_recordsTable->find($record->id);
 
-        // Data fields updated.
         $this->assertEquals($record->slug,              '1');
         $this->assertEquals($record->title,             '2');
         $this->assertEquals($record->body,              '3');
@@ -69,7 +60,6 @@ class Neatline_NeatlineRecordTest_SaveForm
         $this->assertEquals($record->map_focus,         '5');
         $this->assertEquals($record->map_zoom,          6);
 
-        // Tag fields set.
         $this->assertEquals($record->vector_color,      '7');
         $this->assertEquals($record->stroke_color,      '8');
         $this->assertEquals($record->select_color,      '9');
@@ -87,21 +77,18 @@ class Neatline_NeatlineRecordTest_SaveForm
 
 
     /**
-     * --------------------------------------------------------------------
      * saveForm() should set empty strings as null.
-     * --------------------------------------------------------------------
      */
     public function testEmptyValueBlocking()
     {
 
-        // Create record.
         $record = $this->__record();
 
-        // Set empty string.
+        // Empty string:
         $record->saveForm(array('title' => ''));
         $this->assertNull($record->title);
 
-        // Set un-trimmed empty string.
+        // Un-trimmed empty string:
         $record->saveForm(array('title' => ' '));
         $this->assertNull($record->title);
 

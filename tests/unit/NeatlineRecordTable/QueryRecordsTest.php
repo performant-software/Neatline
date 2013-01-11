@@ -17,27 +17,19 @@ class Neatline_NeatlineRecordTableTest_QueryRecords
 
 
     /**
-     * --------------------------------------------------------------------
      * When just an exhibit record (and no filter parameters) is passed,
-     * queryRecords() should retrieve all of the data records that belong
-     * to the exhibit and construct an array of associative arrays, one
-     * for each record, that contain all of the information needed for the
-     * front-end application.
-     * --------------------------------------------------------------------
+     * queryRecords() should fetch all of the records that belong to the
+     * exhibit and emit them as an an array of associative arrays.
      */
     public function testQueryRecords()
     {
 
-        // Create an exhibit and items.
-        $exhibit = $this->__exhibit();
-        $item1 = $this->__item();
-        $item2 = $this->__item();
+        $exhibit    = $this->__exhibit();
+        $item1      = $this->__item();
+        $item2      = $this->__item();
+        $record1    = new NeatlineRecord($exhibit, $item1);
+        $record2    = new NeatlineRecord($exhibit, $item2);
 
-        // Create two records.
-        $record1 = new NeatlineRecord($exhibit, $item1);
-        $record2 = new NeatlineRecord($exhibit, $item2);
-
-        // Fields:
         $record1->title             = '1';
         $record2->title             = '2';
         $record1->body              = '3';
@@ -46,8 +38,6 @@ class Neatline_NeatlineRecordTableTest_QueryRecords
         $record2->tags              = '6';
         $record1->slug              = '7';
         $record2->slug              = '8';
-
-        // Styles:
         $record1->vector_color      = '9';
         $record2->vector_color      = '10';
         $record1->stroke_color      = '11';
@@ -72,8 +62,6 @@ class Neatline_NeatlineRecordTableTest_QueryRecords
         $record2->min_zoom          = 30;
         $record1->max_zoom          = 31;
         $record2->max_zoom          = 32;
-
-        // Spatial:
         $record1->map_focus         = '33';
         $record2->map_focus         = '34';
         $record1->map_zoom          = 35;
@@ -81,11 +69,10 @@ class Neatline_NeatlineRecordTableTest_QueryRecords
         $record1->coverage          = 'POINT(1 1)';
         $record2->coverage          = 'POINT(2 2)';
 
-        // Save.
         $record1->save();
         $record2->save();
 
-        // Build the record array.
+        // Query for records.
         $records = $this->_recordsTable->queryRecords($exhibit);
 
         // Record 1:
@@ -138,51 +125,38 @@ class Neatline_NeatlineRecordTableTest_QueryRecords
 
 
     /**
-     * --------------------------------------------------------------------
      * queryRecords() should retrieve records that belong to the passed
      * exhibit. Records in other exhibits should be excluded.
-     * --------------------------------------------------------------------
      */
     public function testQueryRecordsExhibitFilter()
     {
 
-        // Create exhibits.
-        $exhibit1 = $this->__exhibit();
-        $exhibit2 = $this->__exhibit();
+        $exhibit1   = $this->__exhibit();
+        $exhibit2   = $this->__exhibit();
+        $record1    = new NeatlineRecord($exhibit1);
+        $record2    = new NeatlineRecord($exhibit1);
+        $record3    = new NeatlineRecord($exhibit2);
 
-        // Create 3 records.
-        $record1 = new NeatlineRecord($exhibit1);
-        $record2 = new NeatlineRecord($exhibit1);
-        $record3 = new NeatlineRecord($exhibit2);
-
-        // Save.
         $record1->save();
         $record2->save();
         $record3->save();
 
-        // Build array for exhibit 1.
+        // Query for exhibit1 records.
         $records = $this->_recordsTable->queryRecords($exhibit1);
-
-        // Check count and identities.
-        $this->assertCount(2, $records);
         $this->assertEquals($records[0]['id'], $record1->id);
         $this->assertEquals($records[1]['id'], $record2->id);
+        $this->assertCount(2, $records);
 
     }
 
 
     /**
-     * --------------------------------------------------------------------
      * queryRecords() should filter on zoom.
-     * --------------------------------------------------------------------
      */
     public function testQueryRecordsZoomFilter()
     {
 
-        // Create exhibit.
         $exhibit = $this->__exhibit();
-
-        // Create 4 records.
         $record1 = new NeatlineRecord($exhibit);
         $record2 = new NeatlineRecord($exhibit);
         $record3 = new NeatlineRecord($exhibit);
@@ -204,7 +178,6 @@ class Neatline_NeatlineRecordTableTest_QueryRecords
         $record4->min_zoom = 20;
         $record4->max_zoom = 30;
 
-        // Save.
         $record1->save();
         $record2->save();
         $record3->save();
@@ -244,23 +217,17 @@ class Neatline_NeatlineRecordTableTest_QueryRecords
 
 
     /**
-     * --------------------------------------------------------------------
      * queryRecords() should filter on extent.
-     * --------------------------------------------------------------------
      */
     public function testQueryRecordsExtentFilter()
     {
 
-        // Create exhibit.
         $exhibit = $this->__exhibit();
-
-        // Create 2 records.
         $record1 = new NeatlineRecord($exhibit);
         $record2 = new NeatlineRecord($exhibit);
         $record1->coverage = 'POLYGON((0 0,0 2,2 2,2 0,0 0))';
         $record2->coverage = 'POLYGON((4 4,4 6,6 6,6 4,4 4))';
 
-        // Save.
         $record1->save();
         $record2->save();
 
@@ -293,27 +260,21 @@ class Neatline_NeatlineRecordTableTest_QueryRecords
 
 
     /**
-     * --------------------------------------------------------------------
      * When an `extent` polygon is passed to queryRecords(), records that
      * have a plaintext coverage value of `POINT(0 0)` should never be
      * returned in the result set, even when the `extent` includes the 0,0
      * point. (`POINT(0 0)` is used as a WKT "null" value that is inserted
      * automatically when a record is saved with a empty/null coverage.
-     * --------------------------------------------------------------------
      */
     public function testQueryRecordsExtentFilterNullPointOmission()
     {
 
-        // Create exhibit.
         $exhibit = $this->__exhibit();
-
-        // Create 2 records.
         $record1 = new NeatlineRecord($exhibit);
         $record2 = new NeatlineRecord($exhibit);
         $record1->coverage = 'POINT(0 0)';
         $record2->coverage = 'POINT(1 1)';
 
-        // Save.
         $record1->save();
         $record2->save();
 

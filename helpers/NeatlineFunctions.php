@@ -50,7 +50,7 @@ function neatline_queueGoogleMapsApi()
  * Construct exhibit globals.
  *
  * @param NeatlineExhibit $exhibit The exhibit.
- * @return string A JSON representation of the exhibit defaults.
+ * @return string JSON exhibit defaults.
  */
 function neatline_exhibitGlobals($exhibit)
 {
@@ -71,7 +71,7 @@ function neatline_exhibitGlobals($exhibit)
  * Construct editor globals.
  *
  * @param NeatlineExhibit $exhibit The exhibit.
- * @return array A JSON representation of the editor defaults.
+ * @return string JSON editor defaults.
  */
 function neatline_editorGlobals($exhibit)
 {
@@ -81,19 +81,6 @@ function neatline_editorGlobals($exhibit)
             'tag'   => public_url('neatline/tag')
         )
     ));
-}
-
-
-/**
- * Explode a comma-delimited tag string.
- *
- * @param string $tags The raw string.
- * @return array The array of tags.
- */
-function neatline_explodeTags($tags)
-{
-    if (is_null($tags)) return array();
-    else return explode(',', str_replace(' ', '', $tags));
 }
 
 

@@ -19,8 +19,6 @@ class Neatline_PublicHtmlFixtureTest extends Neatline_Test_AppTestCase
 
 
     /**
-     * Neatline partial markup:
-     *
      * `neatline-partial.html`
      */
     public function testNeatlinePartial()

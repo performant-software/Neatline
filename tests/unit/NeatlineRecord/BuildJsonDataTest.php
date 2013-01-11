@@ -17,28 +17,21 @@ class Neatline_NeatlineRecordTest_BuildJsonData
 
 
     /**
-     * --------------------------------------------------------------------
      * buildJsonData() should construct a well-formed array object with
      * all attributes necessary for the front-end application.
-     * --------------------------------------------------------------------
      */
     public function testBuildJsonData()
     {
 
-        // Create exhibit and item.
-        $exhibit = $this->__exhibit();
-        $item = $this->__item();
+        $exhibit    = $this->__exhibit();
+        $item       = $this->__item();
 
-        // Create record.
         $record = new NeatlineRecord($exhibit, $item);
 
-        // Text:
         $record->title              = '1';
         $record->body               = '2';
         $record->tags               = '3';
         $record->slug               = '4';
-
-        // Styles:
         $record->vector_color       = '5';
         $record->stroke_color       = '6';
         $record->select_color       = '7';
@@ -51,17 +44,13 @@ class Neatline_NeatlineRecordTest_BuildJsonData
         $record->point_image        = '14';
         $record->min_zoom           = 15;
         $record->max_zoom           = 16;
-
-        // Spatial:
         $record->map_focus          = '17';
         $record->map_zoom           = 18;
-        $record->coverage           = 'POINT(1 1)';
+        $record->coverage           = 'POINT(19 19)';
         $record->save();
 
-        // Construct the array.
         $data = $record->buildJsonData();
 
-        // Check result.
         $this->assertEquals($data['id'],                $record->id);
         $this->assertEquals($data['item_id'],           $item->id);
         $this->assertEquals($data['title'],             '1');
@@ -82,7 +71,7 @@ class Neatline_NeatlineRecordTest_BuildJsonData
         $this->assertEquals($data['max_zoom'],          16);
         $this->assertEquals($data['map_focus'],         '17');
         $this->assertEquals($data['map_zoom'],          18);
-        $this->assertEquals($data['coverage'],          'POINT(1 1)');
+        $this->assertEquals($data['coverage'],          'POINT(19 19)');
 
     }
 

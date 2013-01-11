@@ -17,21 +17,16 @@ class Neatline_NeatlineRecordTest_Construct
 
 
     /**
-     * --------------------------------------------------------------------
      * __construct() should set foreign keys.
-     * --------------------------------------------------------------------
      */
     public function testParentReferences()
     {
 
-        // Create exhibit and item.
-        $exhibit = $this->__exhibit();
-        $item = $this->__item();
+        $exhibit    = $this->__exhibit();
+        $item       = $this->__item();
+        $record     = new NeatlineRecord($exhibit, $item);
 
-        // Create record.
-        $record = new NeatlineRecord($exhibit, $item);
-
-        // Item and exhibit references should be set.
+        // Item and exhibit keys should be set.
         $this->assertEquals($record->exhibit_id, $exhibit->id);
         $this->assertEquals($record->item_id, $item->id);
 
@@ -39,17 +34,14 @@ class Neatline_NeatlineRecordTest_Construct
 
 
     /**
-     * --------------------------------------------------------------------
      * A record should not be associated with an item when an item is not
      * passed to the constructor.
-     * --------------------------------------------------------------------
      */
     public function testParentReferencesWithNoParentItem()
     {
 
-        // Create a record.
-        $exhibit = $this->__exhibit();
-        $record = new NeatlineRecord($exhibit);
+        $exhibit    = $this->__exhibit();
+        $record     = new NeatlineRecord($exhibit);
 
         // Exhibit key should be set.
         $this->assertEquals($record->exhibit_id, $exhibit->id);

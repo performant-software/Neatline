@@ -30,11 +30,11 @@ class NeatlineExhibit extends Omeka_Record_AbstractRecord
     /**
      * Save data from the add/edit form.
      *
-     * @param array $formValues The form values.
+     * @param array $values The form values.
      */
-    public function saveForm($formValues)
+    public function saveForm($values)
     {
-        foreach ($formValues as $key => $value) $this->$key = $value;
+        foreach ($values as $key => $value) $this->$key = $value;
         $this->save();
     }
 

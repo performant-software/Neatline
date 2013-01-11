@@ -17,34 +17,29 @@ class Neatline_RecordsControllerTest_Get
 
 
     /**
-     * --------------------------------------------------------------------
      * GET should emit a JSON object containing a list of records with all
      * data needed by the front-end application.
-     * --------------------------------------------------------------------
      */
     public function testGet()
     {
 
-        // Create exhibits and records.
         $exhibit1 = $this->__exhibit();
         $exhibit2 = $this->__exhibit();
-        $record1 = $this->__record($exhibit1);
-        $record2 = $this->__record($exhibit1);
-        $record3 = $this->__record($exhibit2);
+        $record1  = $this->__record($exhibit1);
+        $record2  = $this->__record($exhibit1);
+        $record3  = $this->__record($exhibit2);
 
         // Hit /records, capture response.
         $this->dispatch('neatline/records/'.$exhibit1->id);
-        $response = json_decode($this->getResponse()->getBody('default'));
-
-        // Check code and length.
-        $this->assertResponseCode(200);
+        $response = $this->getResponseArray();
         $this->assertEquals(count($response), 2);
+        $this->assertResponseCode(200);
 
-        // Check record identities.
+        // Should emit records in the requested exhibit.
         $this->assertEquals($response[0]->id, $record1->id);
         $this->assertEquals($response[1]->id, $record2->id);
 
-        // Check for attributes.
+        // Should emit fields.
         $this->assertObjectHasAttribute('id',       $response[0]);
         $this->assertObjectHasAttribute('item_id',  $response[0]);
         $this->assertObjectHasAttribute('title',    $response[0]);
@@ -52,7 +47,7 @@ class Neatline_RecordsControllerTest_Get
         $this->assertObjectHasAttribute('slug',     $response[0]);
         $this->assertObjectHasAttribute('coverage', $response[0]);
 
-        // Check for styles.
+        // Should emit styles.
         foreach (neatline_getStyleCols() as $s) {
             $this->assertObjectHasAttribute($s, $response[0]);
         }

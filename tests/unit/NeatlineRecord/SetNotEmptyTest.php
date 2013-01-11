@@ -17,34 +17,24 @@ class Neatline_NeatlineRecordTest_SetNotEmpty
 
 
     /**
-     * --------------------------------------------------------------------
      * setNotEmpty() should set the field with the passed value when value
      * is not an empty string or NULL.
-     * --------------------------------------------------------------------
      */
     public function testSetNotEmptyWithNonEmptyValue()
     {
-
-        // Create a record.
         $record = $this->__record();
-
-        // Non-empty value:
         $record->setNotEmpty('title', 'title');
         $this->assertEquals($record->title, 'title');
-
     }
 
 
     /**
-     * --------------------------------------------------------------------
      * setNotEmpty() should set the field to NULL when the passed value is
      * an empty string or NULL.
-     * --------------------------------------------------------------------
      */
     public function testSetNotEmptyWithEmptyValue()
     {
 
-        // Create a record.
         $record = $this->__record();
 
         // Empty string:

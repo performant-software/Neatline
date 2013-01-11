@@ -17,28 +17,19 @@ class Neatline_IndexControllerTest_Browse
 
 
     /**
-     * --------------------------------------------------------------------
      * The index action (admin/neatline) should redirect to browse.
-     * --------------------------------------------------------------------
      */
     public function testIndexRedirect()
     {
-
-        // Hit index action.
         $this->dispatch('neatline');
-
-        // Check for browse action.
         $this->assertModule('neatline');
         $this->assertController('index');
         $this->assertAction('browse');
-
     }
 
 
     /**
-     * --------------------------------------------------------------------
-     * The browse action should display a button to create a new exhibit.
-     * --------------------------------------------------------------------
+     * Browse should display a button to create a new exhibit.
      */
     public function testBrowseBaseMarkup()
     {
@@ -48,15 +39,12 @@ class Neatline_IndexControllerTest_Browse
 
 
     /**
-     * --------------------------------------------------------------------
-     * The browse action should display a list of exhibits with links to
-     * the public show views and editor views.
-     * --------------------------------------------------------------------
+     * Browse should display a list of exhibits with links to the public
+     * show views and editor views.
      */
     public function testBrowseExhibitList()
     {
 
-        // Create 3 exhibits.
         $exhibit1 = $this->__exhibit('slug1');
         $exhibit2 = $this->__exhibit('slug2');
         $exhibit3 = $this->__exhibit('slug3');
@@ -67,14 +55,12 @@ class Neatline_IndexControllerTest_Browse
         $exhibit2->save();
         $exhibit3->save();
 
-        // Set the paging, hit index.
-        set_option('per_page_admin', 3);
         $this->dispatch('neatline');
 
-        // 3 exhibit rows.
+        // Should show 3 exhibit rows.
         $this->assertQueryCount('table.neatline tbody tr', 3);
 
-        // Exhibit titles:
+        // Should show exhibit titles.
         $this->assertQueryContentContains(
             'table.neatline tbody td.title',
             'Exhibit 1');
@@ -85,7 +71,7 @@ class Neatline_IndexControllerTest_Browse
             'table.neatline tbody td.title',
             'Exhibit 3');
 
-        // Show links:
+        // Should show links to public views.
         $this->assertXpath('//td[@class="title"]/a[@href="'.
             public_url('neatline/show/slug1').'"]');
         $this->assertXpath('//td[@class="title"]/a[@href="'.
@@ -93,7 +79,7 @@ class Neatline_IndexControllerTest_Browse
         $this->assertXpath('//td[@class="title"]/a[@href="'.
             public_url('neatline/show/slug3').'"]');
 
-        // Editor links:
+        // Should show links to editor.
         $this->assertXpath('//td[@class="edit"]/a[@href="'.
             url('neatline/editor/'.$exhibit1->id).'"]');
         $this->assertXpath('//td[@class="edit"]/a[@href="'.
@@ -105,37 +91,35 @@ class Neatline_IndexControllerTest_Browse
 
 
     /**
-     * --------------------------------------------------------------------
      * When the number of exhibits is greater than the admin pagination
      * limit, the maximum number of exhibits that can fit on a page should
      * be listed and pagination links should be displayed.
-     * --------------------------------------------------------------------
      */
     public function testBrowsePagination()
     {
 
-        // Create 2 exhibits, set paging limit = 2.
+        // Create 4 exhibits, set paging limit = 2.
         for ($i=1; $i<5; $i++) $this->__exhibit('slug'.$i);
         set_option('per_page_admin', 2);
 
-        // Hit index.
+        // Page 1.
         $this->dispatch('neatline');
 
-        // First two exhibits:
+        // Should show first two exhibits.
         $this->assertQueryCount('table.neatline tbody tr', 2);
         $this->assertXpath('//td[@class="title"]/a[@href="'.
             public_url('neatline/show/slug1').'"]');
         $this->assertXpath('//td[@class="title"]/a[@href="'.
             public_url('neatline/show/slug2').'"]');
 
-        // Pagination links:
+        // Should show pagination.
         $this->assertQuery('div.pagination');
 
-        // Hit second page.
+        // Page 2.
         $this->resetResponse();
         $this->dispatch('neatline?page=2');
 
-        // Second two exhibits:
+        // Should show next two exhibits.
         $this->assertQueryCount('table.neatline tbody tr', 2);
         $this->assertXpath('//td[@class="title"]/a[@href="'.
             public_url('neatline/show/slug3').'"]');

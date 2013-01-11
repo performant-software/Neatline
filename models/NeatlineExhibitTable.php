@@ -19,7 +19,7 @@ class NeatlineExhibitTable extends Omeka_Db_Table
      * Find exhibit by slug.
      *
      * @param string $slug The slug.
-     * @return Omeka_record $exhibit The exhibit.
+     * @return Omeka_record The exhibit.
      */
     public function findBySlug($slug)
     {

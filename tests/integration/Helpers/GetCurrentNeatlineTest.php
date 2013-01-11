@@ -20,19 +20,17 @@ class Neatline_HelpersTest_GetCurrentNeatline
 
 
     /**
-     * --------------------------------------------------------------------
      * get_current_neatline() should return the exhibit record currently
      * bound to the view.
-     * --------------------------------------------------------------------
      */
     public function testGetCurrentNeatline()
     {
 
-        // Create exhibit, hit route.
+        // Create exhibit, hit /show.
         $exhibit = $this->__exhibit('test-exhibit');
         $this->dispatch('neatline/show/test-exhibit');
 
-        // Get view exhibit.
+        // `get_current_neatline` gets the exhibit.
         $retrieved = get_current_neatline();
         $this->assertEquals($retrieved->id, $exhibit->id);
 

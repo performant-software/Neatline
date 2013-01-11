@@ -19,15 +19,13 @@ class Neatline_RecordJsonFixtureTest extends Neatline_Test_AppTestCase
 
 
     /**
-     * JSON for individual records (GET response):
-     *
+     * GET /record/:id
      * `record.standard.json`
      * `record.inactive.json`
      */
     public function testRecordJson()
     {
 
-        // Exhibit and record.
         $exhibit    = $this->__exhibit();
         $record     = $this->__record($exhibit);
 
@@ -53,7 +51,6 @@ class Neatline_RecordJsonFixtureTest extends Neatline_Test_AppTestCase
         $record->point_image        = $yc;
         $record->save();
 
-        // Write the fixture.
         $this->writeFixture('neatline/record/'.$record->id,
             'record.standard.json');
 
@@ -61,8 +58,7 @@ class Neatline_RecordJsonFixtureTest extends Neatline_Test_AppTestCase
 
 
     /**
-     * JSON for new record (POST response):
-     *
+     * POST /records
      * `record.add.json`
      */
     public function testNewRecordJson()

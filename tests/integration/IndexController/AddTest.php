@@ -17,30 +17,21 @@ class Neatline_IndexControllerTest_Add
 
 
     /**
-     * --------------------------------------------------------------------
      * The /add route should display form elements for the exhibit title,
      * description, and slug, and a checkbox to set the exhibit public.
-     * --------------------------------------------------------------------
      */
     public function testAddBaseMarkup()
     {
-
-        // Hit the route.
         $this->dispatch('neatline/add');
-
-        // Check for fields.
         $this->assertQuery('input[name="title"]');
         $this->assertQuery('textarea[name="description"]');
         $this->assertQuery('input[name="slug"]');
         $this->assertQuery('input[name="public"]');
-
     }
 
 
     /**
-     * --------------------------------------------------------------------
      * Add form should require a title.
-     * --------------------------------------------------------------------
      */
     public function testAddNoTitleError()
     {
@@ -60,7 +51,7 @@ class Neatline_IndexControllerTest_Add
         $this->assertController('index');
         $this->assertAction('add');
 
-        // Check for the error.
+        // Should flash error.
         $this->assertQueryContentContains(
             'ul.error li',
             'Enter a title.'
@@ -70,9 +61,7 @@ class Neatline_IndexControllerTest_Add
 
 
     /**
-     * --------------------------------------------------------------------
      * Add form should require a slug.
-     * --------------------------------------------------------------------
      */
     public function testAddNoSlugError()
     {
@@ -92,7 +81,7 @@ class Neatline_IndexControllerTest_Add
         $this->assertController('index');
         $this->assertAction('add');
 
-        // Check for the error.
+        // Should flash error.
         $this->assertQueryContentContains(
             'ul.error li',
             'The slug cannot be empty.'
@@ -102,9 +91,7 @@ class Neatline_IndexControllerTest_Add
 
 
     /**
-     * --------------------------------------------------------------------
      * Add form should block a slug with spaces.
-     * --------------------------------------------------------------------
      */
     public function testAddInvalidSlugWithSpacesError()
     {
@@ -124,7 +111,7 @@ class Neatline_IndexControllerTest_Add
         $this->assertController('index');
         $this->assertAction('add');
 
-        // Check for the error.
+        // Should flash error.
         $this->assertQueryContentContains(
             'ul.error li',
             'The slug can only contain letters, numbers, and hyphens.'
@@ -134,9 +121,7 @@ class Neatline_IndexControllerTest_Add
 
 
     /**
-     * --------------------------------------------------------------------
      * Add form should block a slug with capitals.
-     * --------------------------------------------------------------------
      */
     public function testAddInvalidSlugWithCapsError()
     {
@@ -156,7 +141,7 @@ class Neatline_IndexControllerTest_Add
         $this->assertController('index');
         $this->assertAction('add');
 
-        // Check for the error.
+        // Should flash error.
         $this->assertQueryContentContains(
             'ul.error li',
             'The slug can only contain letters, numbers, and hyphens.'
@@ -166,9 +151,7 @@ class Neatline_IndexControllerTest_Add
 
 
     /**
-     * --------------------------------------------------------------------
      * Add form should block a slug with non-alphanumeric characters.
-     * --------------------------------------------------------------------
      */
     public function testAddInvalidSlugWithNonAlphasError()
     {
@@ -188,7 +171,7 @@ class Neatline_IndexControllerTest_Add
         $this->assertController('index');
         $this->assertAction('add');
 
-        // Check for the error.
+        // Should flash error.
         $this->assertQueryContentContains(
             'ul.error li',
             'The slug can only contain letters, numbers, and hyphens.'
@@ -198,9 +181,7 @@ class Neatline_IndexControllerTest_Add
 
 
     /**
-     * --------------------------------------------------------------------
      * Add form should block a duplicate slug.
-     * --------------------------------------------------------------------
      */
     public function testAddDuplicateSlugError()
     {
@@ -223,7 +204,7 @@ class Neatline_IndexControllerTest_Add
         $this->assertController('index');
         $this->assertAction('add');
 
-        // Check for the error.
+        // Should flash error.
         $this->assertQueryContentContains(
             'ul.error li',
             'The slug is already in use.'
@@ -233,10 +214,8 @@ class Neatline_IndexControllerTest_Add
 
 
     /**
-     * --------------------------------------------------------------------
      * Add form should create and populate an exhibit when a valid title,
      * description, and slug are provided.
-     * --------------------------------------------------------------------
      */
     public function testAddSuccess()
     {
@@ -248,12 +227,12 @@ class Neatline_IndexControllerTest_Add
             'public'        => 1
         ));
 
-        // Submit the form, check for new exhibit.
+        // Should create new exhibit.
         $this->assertEquals($this->_exhibitsTable->count(), 0);
         $this->dispatch('neatline/add');
         $this->assertEquals($this->_exhibitsTable->count(), 1);
 
-        // Get the exhibit and examine.
+        // Should set exhibit fields.
         $exhibit = $this->getFirstExhibit();
         $this->assertEquals($exhibit->title, 'Test Exhibit');
         $this->assertEquals($exhibit->description, 'Test description.');

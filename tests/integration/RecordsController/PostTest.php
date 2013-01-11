@@ -17,15 +17,12 @@ class Neatline_RecordsControllerTest_Post
 
 
     /**
-     * --------------------------------------------------------------------
      * POST should create a new record and redirect to records/:id, which
      * should respond with a JSON object with a non-null id and coverage.
-     * --------------------------------------------------------------------
      */
     public function testPost()
     {
 
-        // Create exhibit.
         $exhibit = $this->__exhibit();
 
         // Hit /records with POST.
@@ -35,10 +32,10 @@ class Neatline_RecordsControllerTest_Post
         $c2 = $this->_recordsTable->count();
 
         // Capture response, check code.
-        $response = json_decode($this->getResponse()->getBody('default'));
+        $response = $this->getResponseArray();
         $this->assertResponseCode(200);
 
-        // Check for new id and coverage.
+        // Should emit id and coverage.
         $this->assertNotNull($response->id);
         $this->assertNotNull($response->coverage);
         $this->assertEquals($c2, $c1+1);

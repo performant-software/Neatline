@@ -59,6 +59,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
      * Get style property.
      *
      * @param string $name The attribute name.
+     * @param mixed $name The value.
      */
     public function __get($name)
     {
@@ -89,7 +90,6 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
             );
         }
 
-        // Merge styles.
         return array_merge($fields, $this->styles);
 
     }

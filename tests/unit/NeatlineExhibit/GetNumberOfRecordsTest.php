@@ -17,24 +17,17 @@ class Neatline_NeatlineExhibitTest_GetNumberOfRecords
 
 
     /**
-     * --------------------------------------------------------------------
      * getNumberOfRecords() should return the number of records.
-     * --------------------------------------------------------------------
      */
     public function testGetNumberOfRecords()
     {
-
-        // Create exhibit.
         $exhibit = $this->__exhibit();
-
-        // Check record counts.
         $record1 = $this->__record($exhibit);
         $this->assertEquals($exhibit->getNumberOfRecords(), 1);
         $record2 = $this->__record($exhibit);
         $this->assertEquals($exhibit->getNumberOfRecords(), 2);
         $record3 = $this->__record($exhibit);
         $this->assertEquals($exhibit->getNumberOfRecords(), 3);
-
     }
 
 

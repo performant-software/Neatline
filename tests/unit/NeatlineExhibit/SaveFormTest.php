@@ -17,17 +17,13 @@ class Neatline_NeatlineExhibitTest_SaveForm
 
 
     /**
-     * --------------------------------------------------------------------
      * saveForm() should save all key => value pairs in the form data.
-     * --------------------------------------------------------------------
      */
     public function testSaveForm()
     {
 
-        // Create exhibit.
         $exhibit = $this->__exhibit();
 
-        // Save form data.
         $exhibit->saveForm(array(
             'title'         => 'title',
             'description'   => 'desc',
@@ -35,7 +31,7 @@ class Neatline_NeatlineExhibitTest_SaveForm
             'public'        => 1
         ));
 
-        // Check values.
+        // Should set values.
         $this->assertEquals($exhibit->title,        'title');
         $this->assertEquals($exhibit->description,  'desc');
         $this->assertEquals($exhibit->slug,         'slug');

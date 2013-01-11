@@ -19,8 +19,6 @@ class Neatline_EditorHtmlFixtureTest extends Neatline_Test_AppTestCase
 
 
     /**
-     * Editor partial markup:
-     *
      * `editor-partial.html`
      */
     public function testEditorPartial()

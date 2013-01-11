@@ -19,8 +19,7 @@ class Neatline_RecordsJsonFixtureTest extends Neatline_Test_AppTestCase
 
 
     /**
-     * Record collection JSON (GET response):
-     *
+     * GET /records/:id
      * `records.standard.json`
      * `records.changed.json`
      * `records.removed.json`
@@ -28,14 +27,12 @@ class Neatline_RecordsJsonFixtureTest extends Neatline_Test_AppTestCase
     public function testRecordsJson()
     {
 
-        // Exhibit and records.
         $exhibit = $this->__exhibit();
         $record1 = $this->__record($exhibit);
         $record2 = $this->__record($exhibit);
         $record3 = $this->__record($exhibit);
 
-
-        // *** Case 1 ***
+        // `records.standard.json`
         // - #1 and #2 are map-active, #3 map-inactive.
         // - #1 has a default map focus/zoom, #2 and #3 do not.
 
@@ -110,24 +107,21 @@ class Neatline_RecordsJsonFixtureTest extends Neatline_Test_AppTestCase
         $record2->save();
         $record3->save();
 
-        // Write the fixture.
         $this->writeFixture('neatline/records/'.$exhibit->id,
             'records.standard.json');
 
-
-        // *** Case 2 ***
+        // `records.changed.json`
         // Coverage data for #2 has changed.
 
         $record2->coverage = 'POINT(7 8)';
         $record2->save();
 
-        // Write the fixture.
         $this->resetResponse();
         $this->writeFixture('neatline/records/'.$exhibit->id,
             'records.changed.json');
 
 
-        // *** Case 3 ***
+        // `records.removed.json`
         // #2 has been deleted from the collection.
 
         $record2->delete();

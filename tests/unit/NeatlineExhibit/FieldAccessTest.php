@@ -17,17 +17,13 @@ class Neatline_NeatlineExhibitTest_FieldAccess
 
 
     /**
-     * --------------------------------------------------------------------
      * Test field set/get.
-     * --------------------------------------------------------------------
      */
     public function testFieldAccess()
     {
 
-        // Create exhibit.
         $exhibit = new NeatlineExhibit();
 
-        // Set.
         $exhibit->title         = '3';
         $exhibit->description   = '4';
         $exhibit->slug          = '5';
@@ -37,10 +33,8 @@ class Neatline_NeatlineExhibitTest_FieldAccess
         $exhibit->map_zoom      = 9;
         $exhibit->save();
 
-        // Reload.
         $exhibit = $this->_exhibitsTable->find($exhibit->id);
 
-        // Get.
         $this->assertEquals($exhibit->title,        '3');
         $this->assertEquals($exhibit->description,  '4');
         $this->assertEquals($exhibit->slug,         '5');

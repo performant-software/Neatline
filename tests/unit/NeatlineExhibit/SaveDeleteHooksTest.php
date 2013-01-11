@@ -3,8 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
 
 /**
- * Tests for `save()`, `beforeSave()`, `afterSave()`, and `delete()` on
- * NeatlineExhibit.
+ * Tests for `delete()` on NeatlineExhibit.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -18,31 +17,25 @@ class Neatline_NeatlineExhibitTest_SaveDeleteHooks
 
 
     /**
-     * --------------------------------------------------------------------
-     * delete() should delete the exhibit record and all child records.
-     * --------------------------------------------------------------------
+     * delete() should delete all child records.
      */
     public function testDelete()
     {
 
-        // Create two exhibits.
-        $exhibit1 = $this->__exhibit();
-        $exhibit2 = $this->__exhibit();
+        $exhibit1   = $this->__exhibit();
+        $exhibit2   = $this->__exhibit();
+        $record1    = $this->__record($exhibit1);
+        $record2    = $this->__record($exhibit1);
+        $record3    = $this->__record($exhibit2);
+        $record4    = $this->__record($exhibit2);
 
-        // Create records.
-        $record1 = $this->__record($exhibit1);
-        $record2 = $this->__record($exhibit1);
-        $record3 = $this->__record($exhibit2);
-        $record4 = $this->__record($exhibit2);
-
-        // Delete exhibit.
         $exhibit1->delete();
 
-        // 1 exhibit, 2 records.
-        $this->assertEquals($this->_exhibitsTable->count(), 1);
-        $this->assertEquals($this->_recordsTable->count(), 2);
+        // Should delete exhibit1 records.
+        $this->assertNull($this->_recordsTable->find($record1->id));
+        $this->assertNull($this->_recordsTable->find($record2->id));
 
-        // Check unmodified exhibit 2 records.
+        // Should delete exhibit2 records.
         $this->assertNotNull($this->_recordsTable->find($record3->id));
         $this->assertNotNull($this->_recordsTable->find($record4->id));
 

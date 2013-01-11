@@ -17,14 +17,11 @@ class Neatline_RecordControllerTest_Delete
 
 
     /**
-     * --------------------------------------------------------------------
      * DELETE should remove a record.
-     * --------------------------------------------------------------------
      */
     public function testDelete()
     {
 
-        // Create exhibit and records.
         $exhibit = $this->__exhibit();
         $record1 = $this->__record($exhibit);
         $record2 = $this->__record($exhibit);
@@ -35,10 +32,9 @@ class Neatline_RecordControllerTest_Delete
         $this->dispatch('neatline/record/'.$record2->id);
         $c2 = $this->_recordsTable->count();
 
-        // Check code.
         $this->assertResponseCode(200);
 
-        // Check record deleted.
+        // Should delete the correct record.
         $this->assertNull($this->_recordsTable->find($record2->id));
         $this->assertNotNull($this->_recordsTable->find($record1->id));
         $this->assertEquals($c2, $c1-1);
