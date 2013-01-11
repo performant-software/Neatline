@@ -75,7 +75,6 @@ _.extend(Neatline.Map.View.prototype, {
       this.map.removeControl(val);
     }, this));
 
-    // Reactivate controls.
     this.activateControls();
 
   },
@@ -91,7 +90,6 @@ _.extend(Neatline.Map.View.prototype, {
   update: function(settings) {
 
 
-    // Reactivate controls.
     this.activateControls();
 
     // Deactivate all controls, reset modify mode.

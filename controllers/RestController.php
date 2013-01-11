@@ -31,7 +31,6 @@ abstract class Neatline_RestController
     public function indexAction()
     {
 
-        // Get the request method.
         $method = $this->getRequest()->getMethod();
 
         switch($method) {

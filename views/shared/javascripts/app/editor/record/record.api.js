@@ -57,19 +57,6 @@ Neatline.module('Editor.Record', function(
   // ======================================================================
 
   /**
-   * Close a record form.
-   */
-  var close = function() {
-    if (Record.__view.open) Record.__view.close();
-  };
-
-  Neatline.commands.addHandler('editor:record:close', close);
-  Neatline.vent.on('editor:router:before', close);
-
-
-  // ======================================================================
-
-  /**
    * Update coverage textarea.
    *
    * @param {String} coverage: The new WKT.

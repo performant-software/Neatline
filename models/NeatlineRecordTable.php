@@ -23,10 +23,9 @@ class NeatlineRecordTable extends Omeka_Db_Table
      */
     public function getSelect()
     {
-        $select = parent::getSelect();
-        return $select->columns(array(
-            'coverage' => new Zend_Db_Expr('AsText(coverage)'))
-        );
+        return parent::getSelect()->columns(array(
+            'coverage' => new Zend_Db_Expr('AsText(coverage)')
+        ));
     }
 
 
@@ -34,7 +33,7 @@ class NeatlineRecordTable extends Omeka_Db_Table
      * Count the number of active records in an exhibit.
      *
      * @param NeatlineExhibit $exhibit The exhibit record.
-     * @return integer The number of active records.
+     * @return int The number of active records.
      */
     public function countActiveRecordsByExhibit($exhibit)
     {
@@ -53,23 +52,19 @@ class NeatlineRecordTable extends Omeka_Db_Table
      */
     public function queryRecord($id)
     {
-        $select = $this->getSelect()->where('id=?', $id);
-        $record = $this->fetchObject($select);
-        return $record->buildJsonData();
+        return $this->fetchObject(
+            $this->getSelect()->where('id=?', $id)
+        )->buildJsonData();
     }
 
 
     /**
      * Construct records array for exhibit and editor.
      *
-     * @param Omeka_Record_AbstractRecord $exhibit The exhibit record.
-     *
-     * Filter parameters:
-     * ------------------
-     * @param string $extent The current map viewport extent.
+     * @param NeatlineExhibit $exhibit The exhibit record.
+     * @param string $extent The viewport extent.
      * @param int $zoom The zoom level.
-     *
-     * @return array The collection of matching records.
+     * @return array The collection of records.
      */
     public function queryRecords($exhibit, $extent=null, $zoom=null)
     {

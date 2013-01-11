@@ -47,7 +47,6 @@ class Neatline_RecordsController extends Neatline_RestController
     public function postAction()
     {
 
-        // Create record.
         $record = new NeatlineRecord($this->exhibit);
         $record->save();
 

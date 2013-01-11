@@ -32,24 +32,18 @@ class Neatline_IndexController
     public function addAction()
     {
 
-        // Construct add form.
-        $neatline = new NeatlineExhibit;
-        $form = $this->_getNeatlineDetailsForm($neatline);
-        $this->view->form = $form;
+        $exhibit = new NeatlineExhibit;
+        $form = $this->_getNeatlineDetailsForm($exhibit);
 
-        // If form is posted.
+        // If form was submitted.
         if ($this->_request->isPost()) {
-
-            // Validate form.
             if ($form->isValid($_POST)) {
-
-                // Save and redirect.
-                $neatline->saveForm($form->getValues());
+                $exhibit->saveForm($form->getValues());
                 $this->_redirect('neatline');
-
             }
-
         }
+
+        $this->view->form = $form;
 
     }
 
@@ -60,26 +54,18 @@ class Neatline_IndexController
     public function editAction()
     {
 
-        // Get the exhibit.
-        $neatline = $this->_helper->db->findById();
-        $form = $this->_getNeatlineDetailsForm($neatline);
+        $exhibit = $this->_helper->db->findById();
+        $form = $this->_getNeatlineDetailsForm($exhibit);
 
-        // If form is posted.
+        // If form was submitted.
         if ($this->_request->isPost()) {
-
-            // Validate the form.
             if ($form->isValid($this->_request->getPost())) {
-
-                // Save and redirect.
-                $neatline->saveForm($form->getValues());
+                $exhibit->saveForm($form->getValues());
                 $this->_redirect('neatline');
-
             }
-
         }
 
-        // Push form and exhibit to view.
-        $this->view->neatline_exhibit = $neatline;
+        $this->view->neatline_exhibit = $exhibit;
         $this->view->form = $form;
 
     }
@@ -91,121 +77,114 @@ class Neatline_IndexController
     public function queryAction()
     {
 
-        // Get the exhibit.
-        $neatline = $this->_helper->db->findById();
+        $exhibit = $this->_helper->db->findById();
 
-        // Save query.
+        // Save the query.
         if(isset($_GET['search'])) {
-            $neatline->query = serialize($_GET);
-            $neatline->save();
+            $exhibit->query = serialize($_GET);
+            $exhibit->save();
             $this->_helper->redirector('browse');
         } else {
-            $queryArray = unserialize($neatline->query);
+            $queryArray = unserialize($exhibit->query);
             $_GET = $queryArray;
             $_REQUEST = $queryArray;
         }
 
-        // Push exhibit to view.
-        $this->view->neatline_exhibit = $neatline;
+        $this->view->neatline_exhibit = $exhibit;
 
     }
 
 
     /**
-     * Edit an exhibit.
-     *
-     * @return void
+     * Edit exhibit.
      */
     public function editorAction()
     {
         $id = $this->_request->getParam('id');
-        $__exhibits = $this->_helper->db->getTable('NeatlineExhibit');
-        $this->view->exhibit = $__exhibits->find($id);
+        $exhibits = $this->_helper->db->getTable('NeatlineExhibit');
+        $this->view->exhibit = $exhibits->find($id);
     }
 
 
     /**
-     * Default exhibit show view.
+     * Show exhibit.
      */
     public function showAction()
     {
-        $neatline = $this->_findExhibit();
-        $this->view->neatline_exhibit = $neatline;
+        $exhibit = $this->_findExhibit();
+        $this->view->neatline_exhibit = $exhibit;
     }
 
 
     /**
      * Sets the add success message.
      */
-    protected function _getAddSuccessMessage($neatline)
+    protected function _getAddSuccessMessage($exhibit)
     {
         return __('The Neatline "%s" was successfully added!',
-            $neatline->title);
+            $exhibit->title);
     }
 
 
     /**
      * Sets the edit success message.
      */
-    protected function _getEditSuccessMessage($neatline)
+    protected function _getEditSuccessMessage($exhibit)
     {
         return __('The Neatline "%s" was successfully changed!',
-            $neatline->title);
+            $exhibit->title);
     }
 
 
     /**
      * Sets the delete success message.
      */
-    protected function _getDeleteSuccessMessage($neatline)
+    protected function _getDeleteSuccessMessage($exhibit)
     {
         return __('The Neatline "%s" was successfully deleted!',
-            $neatline->title);
+            $exhibit->title);
     }
 
 
     /**
      * Sets the delete confirm message.
      */
-    protected function _getDeleteConfirmMessage($neatline)
+    protected function _getDeleteConfirmMessage($exhibit)
     {
       return __('This will delete "%s" and its associated metadata.',
-        $neatline->title);
+        $exhibit->title);
     }
 
 
     /**
      * Construct the details form.
      */
-    private function _getNeatlineDetailsForm(NeatlineExhibit $neatline)
+    private function _getNeatlineDetailsForm($exhibit)
     {
         return new Neatline_Form_NeatlineDetails(array(
-            'neatline' => $neatline
+            'neatline' => $exhibit
         ));
     }
 
 
     /**
-     * Find the Neatline exhbit associated with the current request. If
-     * there is a `slug` parameter, find the exhibit record with the slug;
-     * if not, fall back on Omeka_Controller_Action::findById().
+     * Get the exihbit associated with the current request.
      *
-     * @throws Omeka_Controller_Exception_404
      * @return NeatlineExhibit
      */
     private function _findExhibit()
     {
 
         // Get the exhibit.
-        $__exhibits = $this->_helper->db->getTable('NeatlineExhibit');
-        $record = $__exhibits->findBySlug($this->_request->slug);
+        $exhibits = $this->_helper->db->getTable('NeatlineExhibit');
+        $exhibit = $exhibits->findBySlug($this->_request->slug);
 
         // Catch invalid slug.
-        if (!$record) { throw new Omeka_Controller_Exception_404(
+        if (!$exhibit) { throw new Omeka_Controller_Exception_404(
             get_class($this) . ": No record with Slug '$slug' exists"
         );}
 
-        return $record;
+        return $exhibit;
 
     }
 

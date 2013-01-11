@@ -17,20 +17,17 @@ class Neatline_FixturesController
 
 
     /**
-     * Generate base exhibit markup.
+     * Generate exhibit markup.
      */
     public function neatlineAction()
     {
 
-        // Supress default layout.
         $this->_helper->viewRenderer->setNoRender(true);
 
-        // Create exhibit.
         $exhibit = new NeatlineExhibit;
         $exhibit->slug = 'slug';
         $exhibit->save();
 
-        // Render.
         echo $this->view->partial('neatline/_neatline.php', array(
             'exhibit' => $exhibit
         ));
@@ -44,15 +41,12 @@ class Neatline_FixturesController
     public function editorAction()
     {
 
-        // Supress default layout.
         $this->_helper->viewRenderer->setNoRender(true);
 
-        // Create exhibit.
         $exhibit = new NeatlineExhibit;
         $exhibit->slug = 'slug';
         $exhibit->save();
 
-        // Render.
         echo $this->view->partial('index/_editor.php', array(
             'exhibit' => $exhibit
         ));

@@ -67,11 +67,9 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
 
 
     /**
-     * Plug the MySQL expression for the coverage insert into the array
-     * representation of the record used by `insert`. When `coverage` is
-     * defined, form the expression from the value; when it is undefined,
-     * use `POINT(0 0)` as a palceholder value since MySQL requires that
-     * spatially-indexed columns be NOT NULL.
+     * Before saving, replace the raw value of `coverage` with the MySQL
+     * expression to set the `GEOMETRY` value. If `coverage` is undefined,
+     * use `POINT(0 0)` as a de facto "null" value (ignored in queries).
      *
      * @return array The array representation of the record fields.
      */
@@ -140,15 +138,12 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
      * @return array The data array.
      **/
     public function buildJsonData() {
-        $fields = parent::toArray();
-        return array_merge($fields, $this->styles);
+        return array_merge(parent::toArray(), $this->styles);
     }
 
 
     /**
-     * Insert or update the record. Overrides the default in order to make
-     * it possible to pass MySQL expressions as values on insert/update,
-     * which is needed to set the `coverage` field with `GeomFromText()`.
+     * Insert or update the record.
      */
     public function save()
     {
