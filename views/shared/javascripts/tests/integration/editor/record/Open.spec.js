@@ -226,51 +226,6 @@ describe('Record Form Open', function() {
 
   });
 
-  it('should freeze edit layer when form opened via editor', function() {
-
-    // --------------------------------------------------------------------
-    // When an edit form for a record is opened by clicking on the record
-    // listing in the left pane, the record id should be added to the
-    // `frozen` array on the map view. This prevents the layer for the
-    // record from being remove, replaced, or changed when new map data is
-    // ingested after a map move, which would have the effect of removing
-    // the layer instance with the editing controls and clearing out
-    // unsaved changes/additions to the geometry.
-    // --------------------------------------------------------------------
-
-    // By default, frozen empty.
-    expect(_t.vw.map.frozen).toEqual([]);
-
-    // Show form, check frozen.
-    _t.click($(recordRows[0]));
-    expect(_t.vw.map.frozen).toEqual([recordModels[0].get('id')]);
-
-    // Close, check `frozen` empty.
-    _t.vw.record.$('a[name="close"]').trigger('click');
-    expect(_t.vw.map.frozen).toEqual([]);
-
-  });
-
-  it('should freeze edit layer when form opened via map', function() {
-
-    // --------------------------------------------------------------------
-    // When a form is opened by clicking on a map feature, the id of the
-    // record should be added to the `frozen` array (see above).
-    // --------------------------------------------------------------------
-
-    // By default, frozen empty.
-    expect(_t.vw.map.frozen).toEqual([]);
-
-    // Trigger click on feature, check frozen.
-    _t.clickOnMapFeature(mapLayers[0], feature1);
-    expect(_t.vw.map.frozen).toEqual([recordModels[0].get('id')]);
-
-    // Close, check `frozen` empty.
-    _t.vw.record.$('a[name="close"]').trigger('click');
-    expect(_t.vw.map.frozen).toEqual([]);
-
-  });
-
   it('should default to "Navigate" edit mode when opened', function() {
 
     // --------------------------------------------------------------------

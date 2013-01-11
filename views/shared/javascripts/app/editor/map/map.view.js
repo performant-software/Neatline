@@ -14,15 +14,44 @@ _.extend(Neatline.Map.View.prototype, {
 
 
   /**
+   * Redefine `ingest` to exclude the edit layer from being rebuilt or
+   * removed when new record data is ingested in response to a map move.
+   *
+   * @param {Object} records: The records collection.
+   */
+  ingest: function(records) {
+
+    var layers = [];
+
+    // Remove layers.
+    _.each(this.layers, _.bind(function(layer) {
+      if (layer.nId != this.frozen) this.map.removeLayer(layer);
+      else layers.push(layer);
+    }, this));
+
+    this.layers = layers;
+
+    // Add layers.
+    records.each(_.bind(function(record) {
+      if (record.get('id') != this.frozen) this.buildLayer(record);
+    }, this));
+
+    this.updateControls();
+
+  },
+
+
+  /**
    * Construct editing controls for record.
    *
    * @param {Object} model: The record model.
    */
   startEdit: function(model) {
 
-    // Get the layer.
-    var layer = this.getLayerByModel(model);
-    this.editLayer = layer ? layer : this.buildLayer(model);
+    // Acquire and freeze the edit layer.
+    var layer       = this.getLayerByModel(model);
+    this.editLayer  = layer ? layer : this.buildLayer(model);
+    this.frozen     = model.get('id');
 
     this.controls = {
 
@@ -70,12 +99,13 @@ _.extend(Neatline.Map.View.prototype, {
   endEdit: function() {
 
     // Deactivate and remove controls.
-    _.each(this.controls, _.bind(function(val,key) {
-      val.deactivate();
-      this.map.removeControl(val);
+    _.each(this.controls, _.bind(function(control, key) {
+      control.deactivate();
+      this.map.removeControl(control);
     }, this));
 
     this.activateControls();
+    this.frozen = null;
 
   },
 

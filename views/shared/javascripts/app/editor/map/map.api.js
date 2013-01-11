@@ -22,7 +22,6 @@ Neatline.module('Editor.Map', { startWithParent: false,
    * @param {Object} model: The record model.
    */
   var startEdit = function(model) {
-    Map.__view.freeze(model.get('id'));
     Map.__view.startEdit(model);
   };
 
@@ -38,7 +37,6 @@ Neatline.module('Editor.Map', { startWithParent: false,
    * @param {Object} model: The record model.
    */
   var endEdit = function(model) {
-    Map.__view.unFreeze(model.get('id'));
     Map.__view.endEdit();
   };
 
