@@ -27,6 +27,7 @@ Neatline.module('Editor', { startWithParent: false,
    */
   Neatline.on('initialize:after', function() {
     Editor.Map.start();
+    Backbone.history.start();
   });
 
 
@@ -36,8 +37,6 @@ Neatline.module('Editor', { startWithParent: false,
   Editor.init = function() {
     this.__view   = new Editor.View({ el: 'body' });
     this.__router = new Editor.Router();
-    Backbone.history.stop();
-    Backbone.history.start();
   };
 
   Editor.addInitializer(Editor.init);

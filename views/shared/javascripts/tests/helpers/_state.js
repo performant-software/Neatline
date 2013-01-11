@@ -52,6 +52,10 @@ _t.loadEditor = function() {
   Neatline.Bubble.init();
   Neatline.Editor.Map.init();
 
+  // Reset history.
+  Backbone.history.stop();
+  Backbone.history.start();
+
   // Inject fixtures, alias components.
   this.respondAll200(this.json.records.standard);
   _t.aliasNeatline();

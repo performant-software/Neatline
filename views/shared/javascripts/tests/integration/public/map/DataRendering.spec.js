@@ -78,40 +78,6 @@ describe('Map Data Rendering', function() {
 
   });
 
-
-  // it('should not change data for frozen record', function() {
-
-  //   // --------------------------------------------------------------------
-  //   // When a record is set to frozen (for example, when the edit form for
-  //   // the record is open in the editor), the layer1 for the record should
-  //   // not be rebuilt when new data is requested and ingested on the map
-  //   // in response to a pan or zoom event. This is to prevent new, unsaved
-  //   // changes to the geometry from being overwritten by the old data.
-  //   // --------------------------------------------------------------------
-
-  //   // Get title2 layer1, add new point.
-  //   var record2Layer = _t.getVectorLayerByTitle('title2');
-  //   var point = new OpenLayers.Geometry.Point(9,10);
-  //   var feature = new OpenLayers.Feature.Vector(point);
-  //   record2Layer.addFeatures([feature]);
-
-  //   // Set title2 frozen.
-  //   _t.vw.map.freeze(record2Layer.nId);
-
-  //   // Trigger a map move.
-  //   _t.refreshMap(_t.json.records.changed);
-
-  //   // Get the new layer1 for title2
-  //   record2Layer = _t.getVectorLayerByTitle('title2');
-
-  //   // Geometry should be unchanged.
-  //   expect(record2Layer.features[0].geometry.x).toEqual(3);
-  //   expect(record2Layer.features[0].geometry.y).toEqual(4);
-  //   expect(record2Layer.features[1].geometry.x).toEqual(9);
-  //   expect(record2Layer.features[1].geometry.y).toEqual(10);
-
-  // });
-
   // it('should not remove data for frozen record', function() {
 
   //   // --------------------------------------------------------------------

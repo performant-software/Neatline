@@ -49,9 +49,8 @@ _.extend(Neatline.Map.View.prototype, {
   startEdit: function(model) {
 
     // Acquire and freeze the edit layer.
-    var layer       = this.getLayerByModel(model);
-    this.editLayer  = layer ? layer : this.buildLayer(model);
-    this.frozen     = model.get('id');
+    this.editLayer = this.getLayerByModel(model)||this.buildLayer(model);
+    this.frozen = model.get('id');
 
     this.controls = {
 

@@ -41,6 +41,7 @@ Neatline.module('Editor.Map', { startWithParent: false,
   };
 
   Neatline.commands.addHandler('editor:map:endEdit', endEdit);
+  Neatline.vent.on('editor:router:before', endEdit);
   Neatline.vent.on('editor:record:close', endEdit);
 
 
