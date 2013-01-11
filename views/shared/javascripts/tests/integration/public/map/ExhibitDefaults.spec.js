@@ -12,6 +12,7 @@
 
 describe('Map Exhibit Defaults', function() {
 
+
   it('should set exhibit default focus and zoom', function() {
 
     // --------------------------------------------------------------------
@@ -38,7 +39,9 @@ describe('Map Exhibit Defaults', function() {
 
   });
 
+
   // TODO: How to test geolocation?
   it('should geolocate and set zoom when no defaults');
+
 
 });

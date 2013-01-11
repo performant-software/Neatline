@@ -12,9 +12,11 @@
 
 describe('Router', function() {
 
+
   beforeEach(function() {
     _t.loadEditor();
   });
+
 
   it('#records', function() {
 
@@ -31,6 +33,7 @@ describe('Router', function() {
 
   });
 
+
   it('#record/:id', function() {
 
     // --------------------------------------------------------------------
@@ -43,6 +46,7 @@ describe('Router', function() {
 
   });
 
+
   it('#record/add', function() {
 
     // --------------------------------------------------------------------
@@ -53,5 +57,6 @@ describe('Router', function() {
     expect(_t.el.editor).toContain(_t.el.record);
 
   });
+
 
 });

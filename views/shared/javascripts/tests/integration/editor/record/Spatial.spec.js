@@ -12,7 +12,9 @@
 
 describe('Record Form Spatial Tab', function() {
 
+
   var els;
+
 
   beforeEach(function() {
 
@@ -38,6 +40,7 @@ describe('Record Form Spatial Tab', function() {
 
   });
 
+
   it('should set draw point mode', function() {
 
     // --------------------------------------------------------------------
@@ -54,6 +57,7 @@ describe('Record Form Spatial Tab', function() {
     expect(_t.vw.map.controls.point.active).toBeTruthy();
 
   });
+
 
   it('should set draw line mode', function() {
 
@@ -72,6 +76,7 @@ describe('Record Form Spatial Tab', function() {
 
   });
 
+
   it('should set draw polygon mode', function() {
 
     // --------------------------------------------------------------------
@@ -88,6 +93,7 @@ describe('Record Form Spatial Tab', function() {
     expect(_t.vw.map.controls.poly.active).toBeTruthy();
 
   });
+
 
   it('should set draw regular polygon mode', function() {
 
@@ -106,6 +112,7 @@ describe('Record Form Spatial Tab', function() {
 
   });
 
+
   it('should set modify shape mode', function() {
 
     // --------------------------------------------------------------------
@@ -122,6 +129,7 @@ describe('Record Form Spatial Tab', function() {
     expect(_t.vw.map.controls.edit.active).toBeTruthy();
 
   });
+
 
   it('should set delete shape mode', function() {
 
@@ -140,6 +148,7 @@ describe('Record Form Spatial Tab', function() {
 
   });
 
+
   it('should set sides', function() {
 
     // --------------------------------------------------------------------
@@ -156,6 +165,7 @@ describe('Record Form Spatial Tab', function() {
 
   });
 
+
   it('should set snap angle', function() {
 
     // --------------------------------------------------------------------
@@ -171,6 +181,7 @@ describe('Record Form Spatial Tab', function() {
     expect(_t.vw.map.controls.regPoly.handler.snapAngle).toEqual(45);
 
   });
+
 
   it('should set irregular polygon', function() {
 
@@ -195,6 +206,7 @@ describe('Record Form Spatial Tab', function() {
 
   });
 
+
   it('should set rotation', function() {
 
     // --------------------------------------------------------------------
@@ -213,6 +225,7 @@ describe('Record Form Spatial Tab', function() {
     );
 
   });
+
 
   it('should set resize', function() {
 
@@ -233,6 +246,7 @@ describe('Record Form Spatial Tab', function() {
 
   });
 
+
   it('should set drag', function() {
 
     // --------------------------------------------------------------------
@@ -252,6 +266,7 @@ describe('Record Form Spatial Tab', function() {
 
   });
 
+
   it('should update "Spatial Data" on point add', function() {
 
     // --------------------------------------------------------------------
@@ -269,6 +284,7 @@ describe('Record Form Spatial Tab', function() {
     );
 
   });
+
 
   it('should update "Spatial Data" on line add', function() {
 
@@ -289,6 +305,7 @@ describe('Record Form Spatial Tab', function() {
     );
 
   });
+
 
   it('should update "Spatial Data" on polygon add', function() {
 
@@ -312,6 +329,7 @@ describe('Record Form Spatial Tab', function() {
 
   });
 
+
   it('should update "Spatial Data" on regular polygon add', function() {
 
     // --------------------------------------------------------------------
@@ -333,6 +351,7 @@ describe('Record Form Spatial Tab', function() {
     );
 
   });
+
 
   it('should update "Spatial Data" on feature edit', function() {
 
@@ -357,6 +376,7 @@ describe('Record Form Spatial Tab', function() {
 
   });
 
+
   it('should update "Spatial Data" on feature delete', function() {
 
     // --------------------------------------------------------------------
@@ -374,5 +394,6 @@ describe('Record Form Spatial Tab', function() {
     expect(els.coverage.val()).toEqual('');
 
   });
+
 
 });

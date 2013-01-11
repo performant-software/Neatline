@@ -12,9 +12,10 @@
 
 describe('Bubble Form Interaction', function() {
 
+
   var recordRows, mapLayers, layer, feature, els;
 
-  // Start editor.
+
   beforeEach(function() {
 
     _t.loadEditor();
@@ -36,6 +37,7 @@ describe('Bubble Form Interaction', function() {
 
   });
 
+
   it('should hide bubble when the spatial tab is selected', function() {
 
     // --------------------------------------------------------------------
@@ -53,6 +55,7 @@ describe('Bubble Form Interaction', function() {
     expect(_t.el.bubble).not.toBeVisible();
 
   });
+
 
   it('should hide bubble when the form is closed', function() {
 
@@ -72,6 +75,7 @@ describe('Bubble Form Interaction', function() {
     expect(_t.el.bubble).not.toBeVisible();
 
   });
+
 
   it('should not show bubble when the spatial tab is active', function() {
 
@@ -96,6 +100,7 @@ describe('Bubble Form Interaction', function() {
 
   });
 
+
   it('should activate bubble when spatial tab is inactive', function() {
 
     // --------------------------------------------------------------------
@@ -113,6 +118,7 @@ describe('Bubble Form Interaction', function() {
     expect(_t.el.bubble).toBeVisible();
 
   });
+
 
   it('should activate bubble when the form is closed', function() {
 
@@ -134,6 +140,7 @@ describe('Bubble Form Interaction', function() {
     expect(_t.el.bubble).toBeVisible();
 
   });
+
 
   it('should deactivate bubble on open w/ spatial tab', function() {
 
@@ -157,5 +164,6 @@ describe('Bubble Form Interaction', function() {
     expect(_t.el.bubble).not.toBeVisible();
 
   });
+
 
 });

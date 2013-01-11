@@ -12,7 +12,9 @@
 
 describe('Record Form Add', function() {
 
+
   var els;
+
 
   beforeEach(function() {
 
@@ -25,6 +27,7 @@ describe('Record Form Add', function() {
     };
 
   });
+
 
   it('should show the form when "New Record" is clicked', function() {
 
@@ -50,6 +53,7 @@ describe('Record Form Add', function() {
 
   });
 
+
   it('should display placeholder in form header', function() {
 
     // --------------------------------------------------------------------
@@ -66,5 +70,6 @@ describe('Record Form Add', function() {
     expect(els.lead.text()).toEqual(STRINGS.placeholders.title);
 
   });
+
 
 });

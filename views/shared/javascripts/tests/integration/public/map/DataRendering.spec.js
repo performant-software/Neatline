@@ -78,31 +78,6 @@ describe('Map Data Rendering', function() {
 
   });
 
-  // it('should not remove data for frozen record', function() {
-
-  //   // --------------------------------------------------------------------
-  //   // When a record is set to frozen (for example, when the edit form for
-  //   // the record is open in the editor), the layer1 for the record should
-  //   // not be removed if a new data set is ingested in which the record is
-  //   // absent. This is to prevent new, unsaved changes to the geometry
-  //   // from being lost when the map is moved.
-  //   // --------------------------------------------------------------------
-
-  //   // At start, title2 layer1 exists.
-  //   var record2Layer = _t.getVectorLayerByTitle('title2');
-  //   expect(record2Layer).toBeDefined();
-
-  //   // Set title2 frozen.
-  //   _t.vw.map.freeze(record2Layer.nId);
-
-  //   // Trigger a map move, inject data without title2.
-  //   _t.refreshMap(_t.removedRecord2Json);
-
-  //   // title2 layer1 still exists.
-  //   expect(_t.getVectorLayerByTitle('title2')).toBeDefined();
-
-  // });
-
 
   it('should render styles', function() {
 

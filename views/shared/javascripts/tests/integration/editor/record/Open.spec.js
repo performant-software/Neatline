@@ -12,7 +12,9 @@
 
 describe('Record Form Open', function() {
 
+
   var recordRows, recordModels, mapLayers, feature1, feature2, els;
+
 
   beforeEach(function() {
 
@@ -35,6 +37,7 @@ describe('Record Form Open', function() {
 
   });
 
+
   it('should open the form when a record row is clicked', function() {
 
     // --------------------------------------------------------------------
@@ -50,6 +53,7 @@ describe('Record Form Open', function() {
     expect(_t.el.editor).not.toContain(_t.el.records);
 
   });
+
 
   it('should populate form values', function() {
 
@@ -84,6 +88,7 @@ describe('Record Form Open', function() {
 
   });
 
+
   it('should show the "Text" tab on first form open', function() {
 
     // --------------------------------------------------------------------
@@ -103,6 +108,7 @@ describe('Record Form Open', function() {
 
   });
 
+
   it('should show form when a map feature is clicked', function() {
 
     // --------------------------------------------------------------------
@@ -119,6 +125,7 @@ describe('Record Form Open', function() {
     expect(_t.vw.record.model.get('title')).toEqual('title1');
 
   });
+
 
   it('should not open new form in response to map click', function() {
 
@@ -146,6 +153,7 @@ describe('Record Form Open', function() {
 
   });
 
+
   it('should focus map when the form is opened via editor', function() {
 
     // --------------------------------------------------------------------
@@ -170,6 +178,7 @@ describe('Record Form Open', function() {
     expect(zoom).toEqual(10);
 
   });
+
 
   it('should not focus map when the form is opened via map', function() {
 
@@ -198,6 +207,7 @@ describe('Record Form Open', function() {
 
   });
 
+
   it('should default to "Navigate" edit mode when opened', function() {
 
     // --------------------------------------------------------------------
@@ -223,5 +233,6 @@ describe('Record Form Open', function() {
     expect(_t.vw.record.getEditMode()).toEqual('pan');
 
   });
+
 
 });

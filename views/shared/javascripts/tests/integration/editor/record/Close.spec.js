@@ -12,7 +12,9 @@
 
 describe('Record Form Close', function() {
 
+
   var els;
+
 
   beforeEach(function() {
 
@@ -24,6 +26,7 @@ describe('Record Form Close', function() {
     };
 
   });
+
 
   it('should close the form when "Close" is clicked', function() {
 
@@ -44,5 +47,6 @@ describe('Record Form Close', function() {
     expect(_t.getRecordRows().length).toEqual(3);
 
   });
+
 
 });

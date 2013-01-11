@@ -12,7 +12,9 @@
 
 describe('Records List', function() {
 
+
   var recordRows, recordModels;
+
 
   beforeEach(function() {
 
@@ -22,6 +24,7 @@ describe('Records List', function() {
     recordModels  = _t.getRecordModels();
 
   });
+
 
   it('should list records', function() {
 
@@ -53,5 +56,6 @@ describe('Records List', function() {
       toEqual('#records/'+recordModels[2].get('id'));
 
   });
+
 
 });

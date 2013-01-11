@@ -12,7 +12,9 @@
 
 describe('Record Model', function() {
 
+
   var model;
+
 
   beforeEach(function() {
     model = new Neatline.Shared.Record.Model();
@@ -20,6 +22,7 @@ describe('Record Model', function() {
     __exhibit.api.record  = 'record';
     __exhibit.id = 1;
   });
+
 
   it('should form url with id when id is set', function() {
 
@@ -33,6 +36,7 @@ describe('Record Model', function() {
 
   });
 
+
   it('should form url with collection id when id is not set', function() {
 
     // --------------------------------------------------------------------
@@ -43,5 +47,6 @@ describe('Record Model', function() {
     expect(model.url()).toEqual('records/1');
 
   });
+
 
 });

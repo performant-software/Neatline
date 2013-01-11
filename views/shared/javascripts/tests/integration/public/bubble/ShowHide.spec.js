@@ -12,25 +12,25 @@
 
 describe('Bubble Show/Hide', function() {
 
+
   var mapLayers, layer1, layer2, feature1, feature2;
 
-  // Start Neatline.
+
   beforeEach(function() {
 
     _t.loadNeatline();
 
     // Get layers.
     mapLayers = _t.getVectorLayers();
-
-    // Alias layers.
-    layer1 = mapLayers[0];
-    layer2 = mapLayers[1];
+    layer1    = mapLayers[0];
+    layer2    = mapLayers[1];
 
     // Alias features.
-    feature1 = layer1.features[0];
-    feature2 = layer2.features[0];
+    feature1  = layer1.features[0];
+    feature2  = layer2.features[0];
 
   });
+
 
   it('should show bubble on feature hover', function() {
 
@@ -50,6 +50,7 @@ describe('Bubble Show/Hide', function() {
 
   });
 
+
   it('should hide bubble on feature unhover', function() {
 
     // --------------------------------------------------------------------
@@ -64,6 +65,7 @@ describe('Bubble Show/Hide', function() {
     expect(_t.el.bubble).not.toBeVisible();
 
   });
+
 
   it('should hide bubble when the cursor leaves the exhibit', function() {
 
@@ -80,6 +82,7 @@ describe('Bubble Show/Hide', function() {
     expect(_t.el.bubble).not.toBeVisible();
 
   });
+
 
   it('should freeze bubble on feature select', function() {
 
@@ -109,6 +112,7 @@ describe('Bubble Show/Hide', function() {
     expect(_t.el.bubble).toBeVisible();
 
   });
+
 
   it('should not respond to hover events when frozen', function() {
 
@@ -141,6 +145,7 @@ describe('Bubble Show/Hide', function() {
     expect(_t.el.bubble.offset()).toEqual(offset);
 
   });
+
 
   it('should unselect bubble on feature unselect', function() {
 
@@ -176,5 +181,6 @@ describe('Bubble Show/Hide', function() {
     expect(_t.el.bubble.offset()).not.toEqual(offset);
 
   });
+
 
 });

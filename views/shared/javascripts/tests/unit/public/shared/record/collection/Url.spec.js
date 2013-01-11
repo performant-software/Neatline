@@ -12,12 +12,15 @@
 
 describe('Record Collection `url`', function() {
 
+
   var collection;
+
 
   beforeEach(function() {
     collection = new Neatline.Shared.Record.Collection();
     __exhibit.api.records = 'records/1';
   });
+
 
   it('should form url from `__exhibit` global', function() {
 
@@ -28,5 +31,6 @@ describe('Record Collection `url`', function() {
     expect(collection.url()).toEqual('records/1');
 
   });
+
 
 });

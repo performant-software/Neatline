@@ -12,9 +12,11 @@
 
 describe('Map Editing', function() {
 
+
   beforeEach(function() {
     _t.loadEditor();
   });
+
 
   it('should create map edit layer when one does not exist', function() {
 
@@ -37,6 +39,7 @@ describe('Map Editing', function() {
     expect(mapLayers.length).toEqual(3);
 
   });
+
 
   it('should not update the edit layer', function() {
 
@@ -68,6 +71,7 @@ describe('Map Editing', function() {
 
   });
 
+
   it('should not remove the edit layer', function() {
 
     // --------------------------------------------------------------------
@@ -85,6 +89,7 @@ describe('Map Editing', function() {
     expect(_t.getVectorLayerByTitle('title2')).toBeDefined();
 
   });
+
 
   it('should resume updating the edit layer when edit ends', function() {
 
@@ -104,5 +109,6 @@ describe('Map Editing', function() {
     expect(_t.getVectorLayerByTitle('title2')).toBeUndefined();
 
   });
+
 
 });

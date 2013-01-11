@@ -12,24 +12,23 @@
 
 describe('Map Outgoing Events', function() {
 
+
   var mapLayers, layer, feature, spy;
 
-  // Start Neatline.
+
   beforeEach(function() {
 
     _t.loadNeatline();
 
-    // Get map layers.
     mapLayers = _t.getVectorLayers();
-
-    // Get layer and feature.
-    layer = mapLayers[0];
-    feature = layer.features[0];
+    layer     = mapLayers[0];
+    feature   = layer.features[0];
 
     // Spy on the event aggregator.
     spy = spyOn(Neatline.vent, 'trigger').andCallThrough();
 
   });
+
 
   it('should render and publish feature hover', function() {
 
@@ -38,18 +37,19 @@ describe('Map Outgoing Events', function() {
     // should be triggered with the parent model of the feature.
     // --------------------------------------------------------------------
 
-    // Simulate hover on feature.
+    // Hover on feature.
     _t.hoverOnMapFeature(layer, feature);
 
-    // Check render intent.
+    // Should render `temporary` intent.
     expect(feature.renderIntent).toEqual('temporary');
 
-    // Check publication.
+    // Should publish `map:highlight`.
     expect(Neatline.vent.trigger).toHaveBeenCalledWith(
       'map:highlight', layer.nModel
     );
 
   });
+
 
   it('should render and publish feature unhover', function() {
 
@@ -72,6 +72,7 @@ describe('Map Outgoing Events', function() {
 
   });
 
+
   it('should render and publish feature select', function() {
 
     // --------------------------------------------------------------------
@@ -91,6 +92,7 @@ describe('Map Outgoing Events', function() {
     );
 
   });
+
 
   it('should render and publish feature unselect', function() {
 
@@ -115,6 +117,7 @@ describe('Map Outgoing Events', function() {
     );
 
   });
+
 
   it('should publish map move', function() {
 
@@ -141,5 +144,6 @@ describe('Map Outgoing Events', function() {
     expect(layers[1].features[0].geometry.y).toEqual(8);
 
   });
+
 
 });

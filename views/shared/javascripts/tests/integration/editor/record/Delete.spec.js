@@ -12,7 +12,9 @@
 
 describe('Record Form Delete', function() {
 
+
   var els, id;
+
 
   beforeEach(function() {
 
@@ -30,11 +32,11 @@ describe('Record Form Delete', function() {
 
   });
 
+
   it('should show modal when "Delete" is clicked', function() {
 
     // --------------------------------------------------------------------
-    // When the "Delete" button is clicked, a confirmation modal should be
-    // displayed.
+    // When "Delete" is clicked, a confirmation modal should be displayed.
     // --------------------------------------------------------------------
 
     // Click on "Delete".
@@ -46,11 +48,12 @@ describe('Record Form Delete', function() {
 
   });
 
+
   it('should close modal when "Cancel" is clicked', function() {
 
     // --------------------------------------------------------------------
-    // When the "Cancel" button is clicked, the modal should disappear and
-    // the form should return to its normal state.
+    // When "Cancel" is clicked, the modal should disappear and the form
+    // should return to its normal state.
     // --------------------------------------------------------------------
 
     els.delete1.trigger('click');
@@ -60,6 +63,7 @@ describe('Record Form Delete', function() {
     expect(els.modal).not.toHaveClass('in');
 
   });
+
 
   it('should execute delete when "Delete" is clicked', function() {
 
@@ -81,11 +85,12 @@ describe('Record Form Delete', function() {
 
   });
 
+
   it('should flash notification when the delete succeeds', function() {
 
     // --------------------------------------------------------------------
-    // When the "Yes, Delete" button is clicked and the request succeeds,
-    // a success notification should be displayed.
+    // When "Yes, Delete" is clicked and the request succeeds, a success
+    // notification should be displayed.
     // --------------------------------------------------------------------
 
     // Spy on toaster.
@@ -102,11 +107,12 @@ describe('Record Form Delete', function() {
 
   });
 
+
   it('should flash notification when the delete fails', function() {
 
     // --------------------------------------------------------------------
-    // When the "Yes, Delete" button is clicked and the request fails, a
-    // failure notification should be displayed.
+    // When "Yes, Delete" is clicked and the request fails, a failure
+    // notification should be displayed.
     // --------------------------------------------------------------------
 
     // Spy on toaster.
@@ -122,6 +128,7 @@ describe('Record Form Delete', function() {
     );
 
   });
+
 
   it('should close modal when "Delete" is clicked', function() {
 
@@ -145,6 +152,7 @@ describe('Record Form Delete', function() {
     expect(Backbone.history.fragment).toEqual('records');
 
   });
+
 
   it('should remove the model from the map collection', function() {
 
@@ -171,5 +179,6 @@ describe('Record Form Delete', function() {
       return layer.nId == id; })).toBeUndefined();
 
   });
+
 
 });

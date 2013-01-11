@@ -12,18 +12,18 @@
 
 describe('Map Incoming Events', function() {
 
+
   var mapLayers;
 
+
   beforeEach(function() {
-
     _t.loadNeatline();
-
-    // Get vector layers.
     mapLayers = _t.getVectorLayers();
-
   });
 
+
   describe('map:focusById', function() {
+
 
     it('should focus on model features', function() {
 
@@ -55,6 +55,7 @@ describe('Map Incoming Events', function() {
       expect(_t.server.requests.count).toEqual(requestCount);
 
     });
+
 
     it('should create layer for model without layer', function() {
 
@@ -101,9 +102,12 @@ describe('Map Incoming Events', function() {
 
     });
 
+
   });
 
+
   describe('map:focusByModel', function() {
+
 
     it('should focus on model features', function() {
 
@@ -135,6 +139,7 @@ describe('Map Incoming Events', function() {
       expect(zoom).toEqual(10);
 
     });
+
 
     it('should create layer for model without layer', function() {
 
@@ -177,6 +182,8 @@ describe('Map Incoming Events', function() {
 
     });
 
+
   });
+
 
 });

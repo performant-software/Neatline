@@ -12,16 +12,15 @@
 
 describe('Map `focusByModel`', function() {
 
+
   var mapLayers;
 
+
   beforeEach(function() {
-
     _t.loadNeatline();
-
-    // Get layers.
     mapLayers = _t.getVectorLayers();
-
   });
+
 
   it('should not change focus when coverage is `POINT(0 0)`', function() {
 
@@ -30,7 +29,6 @@ describe('Map `focusByModel`', function() {
     // "PONT(0 0)", the map should not change focus/zoom.
     // --------------------------------------------------------------------
 
-    // Set focus/zoom.
     _t.setMapCenter(1, 2, 3)
 
     // Create a model with "empty" coverage.
@@ -39,7 +37,7 @@ describe('Map `focusByModel`', function() {
       coverage:   'POINT(0 0)'
     });
 
-    // Focus, get center/zoom.
+    // Focus.
     _t.vw.map.focusByModel(model);
     var center  = _t.vw.map.map.getCenter();
     var zoom    = _t.vw.map.map.getZoom();
@@ -51,6 +49,7 @@ describe('Map `focusByModel`', function() {
 
   });
 
+
   it('should zoom to extent when focus and zoom are null', function() {
 
     // --------------------------------------------------------------------
@@ -58,7 +57,6 @@ describe('Map `focusByModel`', function() {
     // `map_zoom`, the map should auto-focus to the geometry extent.
     // --------------------------------------------------------------------
 
-    // Set focus/zoom.
     _t.setMapCenter(0, 0, 1)
 
     // Create a model with "empty" coverage.
@@ -69,7 +67,7 @@ describe('Map `focusByModel`', function() {
       map_zoom:   null
     });
 
-    // Focus, get center/zoom.
+    // Focus.
     _t.vw.map.focusByModel(model);
     var center  = _t.vw.map.map.getCenter();
     var zoom    = _t.vw.map.map.getZoom();
@@ -80,5 +78,6 @@ describe('Map `focusByModel`', function() {
     expect(zoom).toBeGreaterThan(1);
 
   });
+
 
 });
