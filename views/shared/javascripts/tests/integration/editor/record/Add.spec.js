@@ -22,9 +22,12 @@ describe('Record Form Add', function() {
 
     els = {
       add:    _t.vw.menu.$('a[href="#records/add"]'),
-      title:  _t.vw.record.$('textarea[name="title"]'),
+      save:   _t.vw.record.$('a[name="save"]'),
       lead:   _t.vw.record.$('p.lead')
     };
+
+    // Add record.
+    _t.click(els.add);
 
   });
 
@@ -36,10 +39,6 @@ describe('Record Form Add', function() {
     // displayed with the model for the new record.
     // --------------------------------------------------------------------
 
-    // "New Record."
-    _t.click(els.add);
-
-    // Check for form, no records.
     expect(_t.el.editor).toContain(_t.el.record);
 
   });
@@ -53,11 +52,27 @@ describe('Record Form Add', function() {
     // should be displayed in the form header.
     // --------------------------------------------------------------------
 
-    // "New Record."
-    _t.click(els.add);
-
-    // Check for placeholder.
     expect(els.lead.text()).toEqual(STRINGS.placeholders.title);
+
+  });
+
+
+  it('should generate well-formed POST request', function() {
+
+    // --------------------------------------------------------------------
+    // When a record is saved for the first time, the form should issue a
+    // POST request with the new data.
+    // --------------------------------------------------------------------
+
+    els.save.trigger('click');
+
+    // Capture outoing request.
+    var request = _t.getLastRequest();
+    var params = $.parseJSON(request.requestBody);
+
+    // Check method and route.
+    expect(request.method).toEqual('POST');
+    expect(request.url).toEqual(__exhibit.api.record);
 
   });
 
