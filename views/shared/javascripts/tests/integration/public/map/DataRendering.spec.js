@@ -12,14 +12,14 @@
 
 describe('Map Data Rendering', function() {
 
+
   var mapLayers, layer1, layer2, layer3;
 
-  // Start Neatline.
+
   beforeEach(function() {
 
     _t.loadNeatline();
 
-    // Get layers.
     mapLayers = _t.getVectorLayers();
     layer1 = mapLayers[0];
     layer2 = mapLayers[1];
@@ -27,13 +27,13 @@ describe('Map Data Rendering', function() {
 
   });
 
-  it('should render features for map-active models', function() {
+
+  it('should render layers for models', function() {
 
     // --------------------------------------------------------------------
     // When the exhibit started, the map should query and render records.
     // --------------------------------------------------------------------
 
-    // Check geometry.
     expect(mapLayers.length).toEqual(3);
     expect(layer1.features[0].geometry.x).toEqual(1);
     expect(layer1.features[0].geometry.y).toEqual(2);
@@ -41,131 +41,104 @@ describe('Map Data Rendering', function() {
     expect(layer2.features[0].geometry.y).toEqual(4);
     expect(layer3.features[0].geometry.x).toEqual(5);
     expect(layer3.features[0].geometry.y).toEqual(6);
-
   });
 
-  it('should update data when the map is moved', function() {
+
+  it('should update layers when the map is moved', function() {
 
     // --------------------------------------------------------------------
-    // When a new set of records is ingested (for example, in response to
-    // a pan or zoom event on the map) and the data for an unfrozen record
-    // has been changed, the new data should be rendered.
+    // The records collection should be reloaded when the map is moved.
     // --------------------------------------------------------------------
 
-    // Get the layer for the second record.
     var record2Layer = _t.getVectorLayerByTitle('title2');
 
-    // At start, 1 point at POINT(3 4).
+    // Record2 point at POINT(3 4).
     expect(record2Layer.features.length).toEqual(1);
     expect(record2Layer.features[0].geometry.x).toEqual(3);
     expect(record2Layer.features[0].geometry.y).toEqual(4);
+    expect(_t.getVectorLayers().length).toEqual(3);
 
-    // Move the map.
     _t.triggerMapMove();
-
-    // Capture outoing request.
-    var request = _t.getLastRequest();
-    var params = $.parseJSON(request.requestBody);
-
-    // Check method and route.
-    expect(request.method).toEqual('GET');
-    expect(request.url).toContain(__exhibit.api.records);
     _t.respondLast200(_t.json.records.changed);
 
-    // Get the new layer for the second record.
     record2Layer = _t.getVectorLayerByTitle('title2');
 
-    // Geometry should be changed.
+    // Record2 point at POINT(7 8).
     expect(record2Layer.features.length).toEqual(1);
     expect(record2Layer.features[0].geometry.x).toEqual(7);
     expect(record2Layer.features[0].geometry.y).toEqual(8);
+    expect(_t.getVectorLayers().length).toEqual(3);
 
-  });
+    _t.triggerMapMove();
+    _t.respondLast200(_t.json.records.removed);
 
-  it('should remove data for unfrozen record', function() {
-
-    // --------------------------------------------------------------------
-    // When a new set of records is ingested (for example, in response to
-    // a pan or zoom event on the map) and record that is currently on the
-    // map is absent from the new records collection, the layer1 for the
-    // record should be removed.
-    // --------------------------------------------------------------------
-
-    // At start, title2 layer1 exists.
-    expect(_t.getVectorLayerByTitle('title2')).toBeDefined();
-
-    // Trigger a map move, inject data without title2.
-    _t.refreshMap(_t.json.records.removed);
-
-    // title2 layer1 no longer exists.
+    // Record2 point removed.
     expect(_t.getVectorLayerByTitle('title2')).toBeUndefined();
+    expect(_t.getVectorLayers().length).toEqual(2);
 
   });
 
-  it('should not change data for frozen record', function() {
 
-    // --------------------------------------------------------------------
-    // When a record is set to frozen (for example, when the edit form for
-    // the record is open in the editor), the layer1 for the record should
-    // not be rebuilt when new data is requested and ingested on the map
-    // in response to a pan or zoom event. This is to prevent new, unsaved
-    // changes to the geometry from being overwritten by the old data.
-    // --------------------------------------------------------------------
+  // it('should not change data for frozen record', function() {
 
-    // Get title2 layer1, add new point.
-    var record2Layer = _t.getVectorLayerByTitle('title2');
-    var point = new OpenLayers.Geometry.Point(9,10);
-    var feature = new OpenLayers.Feature.Vector(point);
-    record2Layer.addFeatures([feature]);
+  //   // --------------------------------------------------------------------
+  //   // When a record is set to frozen (for example, when the edit form for
+  //   // the record is open in the editor), the layer1 for the record should
+  //   // not be rebuilt when new data is requested and ingested on the map
+  //   // in response to a pan or zoom event. This is to prevent new, unsaved
+  //   // changes to the geometry from being overwritten by the old data.
+  //   // --------------------------------------------------------------------
 
-    // Set title2 frozen.
-    _t.vw.map.freeze(record2Layer.nId);
+  //   // Get title2 layer1, add new point.
+  //   var record2Layer = _t.getVectorLayerByTitle('title2');
+  //   var point = new OpenLayers.Geometry.Point(9,10);
+  //   var feature = new OpenLayers.Feature.Vector(point);
+  //   record2Layer.addFeatures([feature]);
 
-    // Trigger a map move.
-    _t.refreshMap(_t.json.records.changed);
+  //   // Set title2 frozen.
+  //   _t.vw.map.freeze(record2Layer.nId);
 
-    // Get the new layer1 for title2
-    record2Layer = _t.getVectorLayerByTitle('title2');
+  //   // Trigger a map move.
+  //   _t.refreshMap(_t.json.records.changed);
 
-    // Geometry should be unchanged.
-    expect(record2Layer.features[0].geometry.x).toEqual(3);
-    expect(record2Layer.features[0].geometry.y).toEqual(4);
-    expect(record2Layer.features[1].geometry.x).toEqual(9);
-    expect(record2Layer.features[1].geometry.y).toEqual(10);
+  //   // Get the new layer1 for title2
+  //   record2Layer = _t.getVectorLayerByTitle('title2');
 
-  });
+  //   // Geometry should be unchanged.
+  //   expect(record2Layer.features[0].geometry.x).toEqual(3);
+  //   expect(record2Layer.features[0].geometry.y).toEqual(4);
+  //   expect(record2Layer.features[1].geometry.x).toEqual(9);
+  //   expect(record2Layer.features[1].geometry.y).toEqual(10);
 
-  it('should not remove data for frozen record', function() {
+  // });
 
-    // --------------------------------------------------------------------
-    // When a record is set to frozen (for example, when the edit form for
-    // the record is open in the editor), the layer1 for the record should
-    // not be removed if a new data set is ingested in which the record is
-    // absent. This is to prevent new, unsaved changes to the geometry
-    // from being lost when the map is moved.
-    // --------------------------------------------------------------------
+  // it('should not remove data for frozen record', function() {
 
-    // At start, title2 layer1 exists.
-    var record2Layer = _t.getVectorLayerByTitle('title2');
-    expect(record2Layer).toBeDefined();
+  //   // --------------------------------------------------------------------
+  //   // When a record is set to frozen (for example, when the edit form for
+  //   // the record is open in the editor), the layer1 for the record should
+  //   // not be removed if a new data set is ingested in which the record is
+  //   // absent. This is to prevent new, unsaved changes to the geometry
+  //   // from being lost when the map is moved.
+  //   // --------------------------------------------------------------------
 
-    // Set title2 frozen.
-    _t.vw.map.freeze(record2Layer.nId);
+  //   // At start, title2 layer1 exists.
+  //   var record2Layer = _t.getVectorLayerByTitle('title2');
+  //   expect(record2Layer).toBeDefined();
 
-    // Trigger a map move, inject data without title2.
-    _t.refreshMap(_t.removedRecord2Json);
+  //   // Set title2 frozen.
+  //   _t.vw.map.freeze(record2Layer.nId);
 
-    // title2 layer1 still exists.
-    expect(_t.getVectorLayerByTitle('title2')).toBeDefined();
+  //   // Trigger a map move, inject data without title2.
+  //   _t.refreshMap(_t.removedRecord2Json);
 
-  });
+  //   // title2 layer1 still exists.
+  //   expect(_t.getVectorLayerByTitle('title2')).toBeDefined();
+
+  // });
+
 
   it('should render styles', function() {
-
-    // --------------------------------------------------------------------
-    // The map should construct layers for vectors with properly formed
-    // style maps that manifest the values in the record models.
-    // --------------------------------------------------------------------
 
     /*
      * Default:
@@ -306,5 +279,6 @@ describe('Map Data Rendering', function() {
       toEqual(26);
 
   });
+
 
 });

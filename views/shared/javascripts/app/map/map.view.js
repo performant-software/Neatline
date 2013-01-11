@@ -27,15 +27,9 @@ Neatline.module('Map', function(
      * publish initial request for data.
      */
     initialize: function() {
-
-      // Trackers.
       this.layers = [];   // Array of all current vector layers.
-      this.frozen = [];   // Array of layers that should not be updated.
-
-      // Startup.
       this.initializeOpenLayers();
       this.publishPosition();
-
     },
 
 
@@ -268,50 +262,22 @@ Neatline.module('Map', function(
      * The top-level point of entry when a new record collection arrives.
      * Updates the map layers to mirror the new records collection.
      *
-     * - Remove all records that are not included in the `frozen` array.
-     *
-     * - Then walk the new collection and construct new layers for models
-     *   that are not in the `frozen` array.
-     *
      * @param {Object} records: The records collection.
      */
     ingest: function(records) {
 
-      var layers = [];
-
-
-      // Clear layers.
-      // -------------
-
+      // Remove layers.
       _.each(this.layers, _.bind(function(layer) {
-
-        // If unfrozen, remove from map.
-        if (!_.contains(this.frozen, layer.nId)) {
-          this.map.removeLayer(layer);
-        }
-
-        // Else, add to new tracker.
-        else layers.push(layer);
-
+        this.map.removeLayer(layer);
       }, this));
 
-      this.layers = layers;
-
+      this.layers = [];
 
       // Add layers.
-      // -----------
-
       records.each(_.bind(function(record) {
-
-        // Build if not frozen.
-        if (!_.contains(this.frozen, record.get('id'))) {
-          this.buildLayer(record);
-        }
-
+        this.buildLayer(record);
       }, this));
 
-
-      // Register layers.
       this.updateControls();
 
     },
@@ -477,28 +443,6 @@ Neatline.module('Map', function(
      */
     onFeatureUnhighlight: function(evt) {
       Neatline.vent.trigger('map:unhighlight', evt.feature.layer.nModel);
-    },
-
-
-    /**
-     * Add the passed record id to the `frozen` array.
-     *
-     * @param {Number} id: The id to freeze.
-     */
-    freeze: function(id) {
-      this.frozen.push(id);
-    },
-
-
-    /**
-     * Remove the passed record id to the `frozen` array.
-     *
-     * @param {Number} id: The id to unfreeze.
-     */
-    unFreeze: function(id) {
-      this.frozen = _.reject(this.frozen, function(fid) {
-        return fid == id;
-      });
     }
 
 
