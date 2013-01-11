@@ -20,9 +20,9 @@ class Neatline_RecordsController extends Neatline_RestController
      */
     public function init()
     {
-        $this->__table = $this->_helper->db->getTable('NeatlineRecord');
-        $this->__exhib = $this->_helper->db->getTable('NeatlineExhibit');
-        $this->exhibit = $this->__exhib->find($this->_request->id);
+        $this->records  = $this->_helper->db->getTable('NeatlineRecord');
+        $this->exhibits = $this->_helper->db->getTable('NeatlineExhibit');
+        $this->exhibit  = $this->exhibits->find($this->_request->id);
         parent::init();
     }
 
@@ -33,28 +33,11 @@ class Neatline_RecordsController extends Neatline_RestController
     public function getAction()
     {
         echo Zend_Json::encode(
-            $this->__table->queryRecords($this->exhibit,
+            $this->records->queryRecords($this->exhibit,
                 $this->_request->extent,
                 $this->_request->zoom
             )
         );
-    }
-
-
-    /**
-     * Create a new record.
-     */
-    public function postAction()
-    {
-
-        $record = new NeatlineRecord($this->exhibit);
-        $record->save();
-
-        // Forward to records GET.
-        $this->_forward('get', 'record', 'neatline', array(
-            'id' => $record->id
-        ));
-
     }
 
 

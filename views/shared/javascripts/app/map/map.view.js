@@ -372,9 +372,10 @@ Neatline.module('Map', function(
      * Return the layer that corresponds the the passed model instance.
      *
      * @param {Object} model: The record model.
-     * @return {Object|OpenLayers.Layer.Vector} The vector layer.
+     * @return {OpenLayers.Layer.Vector|undefined} The vector layer.
      */
     getLayerByModel: function(model) {
+      if (!model.get('id')) return undefined;
       return _.first(this.map.getLayersBy('nId', model.get('id')));
     },
 

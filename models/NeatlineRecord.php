@@ -123,7 +123,7 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
     /**
      * Save form values.
      *
-     * @param array $values The PUT values.
+     * @param array $values The POST/PUT values.
      */
     public function saveForm($values)
     {

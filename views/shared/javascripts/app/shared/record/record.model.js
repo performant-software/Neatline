@@ -15,10 +15,39 @@ Neatline.module('Shared.Record', function(
 
 
   Record.Model = Backbone.Model.extend({
+
+
+    /**
+     * Construct the API url.
+     *
+     * @return {String}: The url.
+     */
     url: function() {
-      if (this.get('id')) return __exhibit.api.record+'/'+this.get('id');
-      else return __exhibit.api.records;
+      var url = __exhibit.api.record;
+      if (this.get('id')) url += ('/'+this.get('id'));
+      return url;
+    },
+
+
+    // TODO|dev
+
+    defaults: function() {
+      return {
+        exhibit_id:     __exhibit.id,
+        coverage:       'POINT(0 0)',
+        vector_color:   '#00aeff',
+        stroke_color:   '#000000',
+        select_color:   '#00aeff',
+        vector_opacity: 30,
+        select_opacity: 50,
+        stroke_opacity: 90,
+        image_opacity:  90,
+        point_radius:   10,
+        stroke_width:   2
+      };
     }
+
+
   });
 
 

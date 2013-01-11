@@ -57,17 +57,4 @@ class Neatline_RecordJsonFixtureTest extends Neatline_Test_AppTestCase
     }
 
 
-    /**
-     * POST /records
-     * `record.add.json`
-     */
-    public function testNewRecordJson()
-    {
-        $exhibit = $this->__exhibit();
-        $this->request->setMethod('POST');
-        $this->writeFixture('neatline/records/'.$exhibit->id,
-            'record.add.json');
-    }
-
-
 }

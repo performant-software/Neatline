@@ -31,13 +31,14 @@ class Neatline_RecordControllerTest_Delete
         $this->request->setMethod('DELETE');
         $this->dispatch('neatline/record/'.$record2->id);
         $c2 = $this->_recordsTable->count();
-
         $this->assertResponseCode(200);
+
+        // Should delete a record.
+        $this->assertEquals($c2, $c1-1);
 
         // Should delete the correct record.
         $this->assertNull($this->_recordsTable->find($record2->id));
         $this->assertNotNull($this->_recordsTable->find($record1->id));
-        $this->assertEquals($c2, $c1-1);
 
     }
 

@@ -55,6 +55,7 @@ function neatline_queueGoogleMapsApi()
 function neatline_exhibitGlobals($exhibit)
 {
     return json_encode(array(
+        'id'    => $exhibit->id,
         'api'   => array(
             'records'   => public_url('neatline/records/'.$exhibit->id),
             'record'    => public_url('neatline/record')
