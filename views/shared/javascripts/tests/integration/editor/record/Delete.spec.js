@@ -172,7 +172,7 @@ describe('Record Form Delete', function() {
     _t.respondLast200('');
 
     // Layer removed from map.
-    expect(_t.vw.map.getLayerByModel(model)).toBeUndefined();
+    expect(_t.vw.map.getLayer(model)).toBeUndefined();
 
     // Layer removed from `layers` tracker.
     expect(_.find(_t.vw.map.layers, function(layer) {

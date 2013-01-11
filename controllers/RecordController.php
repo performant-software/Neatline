@@ -30,22 +30,21 @@ class Neatline_RecordController extends Neatline_RestController
      */
     public function getAction()
     {
-        $id = $this->_request->id;
-        echo Zend_Json::encode($this->__table->queryRecord($id));
+        echo Zend_Json::encode($this->__table->queryRecord(
+            $this->_request->id
+        ));
     }
 
 
     /**
-     * Create a new record.
+     * Create a record.
      */
     public function postAction()
     {
 
-        // Gather POST.
-        $post = Zend_Json::decode($this->_request->getRawBody());
-
         // Create record.
         $record = new NeatlineRecord();
+        $post = Zend_Json::decode($this->_request->getRawBody());
         $record->saveForm($post);
 
         // Return new id.
@@ -55,7 +54,7 @@ class Neatline_RecordController extends Neatline_RestController
 
 
     /**
-     * Update an existing record.
+     * Update a record.
      */
     public function putAction()
     {

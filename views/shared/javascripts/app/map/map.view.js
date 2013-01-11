@@ -201,7 +201,7 @@ Neatline.module('Map', function(
     focusByModel: function(model) {
 
       // Get / build the layer for the model.
-      var layer = this.getLayerByModel(model);
+      var layer = this.getLayer(model);
       if (!layer) layer = this.buildLayer(model);
 
       // Try to get a focus and zoom.
@@ -249,7 +249,8 @@ Neatline.module('Map', function(
 
       // Construct the control.
       var geolocate = new OpenLayers.Control.Geolocate({
-        bind: true, watch: false });
+        bind: true, watch: false
+      });
 
       // Focus.
       this.map.addControl(geolocate);
@@ -372,11 +373,11 @@ Neatline.module('Map', function(
      * Return the layer that corresponds the the passed model instance.
      *
      * @param {Object} model: The record model.
-     * @return {OpenLayers.Layer.Vector|undefined} The vector layer.
+     * @return {Object}: The vector layer.
      */
-    getLayerByModel: function(model) {
-      if (!model.get('id')) return undefined;
-      return _.first(this.map.getLayersBy('nId', model.get('id')));
+    getLayer: function(model) {
+      var id = String(model.get('id'));
+      return _.first(this.map.getLayersBy('nId', id));
     },
 
 

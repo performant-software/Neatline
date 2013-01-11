@@ -25,7 +25,7 @@ _.extend(Neatline.Map.View.prototype, {
 
     // Remove layers.
     _.each(this.layers, _.bind(function(layer) {
-      if (layer.nId != this.frozen) this.map.removeLayer(layer);
+      if (layer.nId !== this.frozen) this.map.removeLayer(layer);
       else layers.push(layer);
     }, this));
 
@@ -33,7 +33,7 @@ _.extend(Neatline.Map.View.prototype, {
 
     // Add layers.
     records.each(_.bind(function(record) {
-      if (record.get('id') != this.frozen) this.buildLayer(record);
+      if (record.get('id') !== this.frozen) this.buildLayer(record);
     }, this));
 
     this.updateControls();
@@ -48,8 +48,8 @@ _.extend(Neatline.Map.View.prototype, {
    */
   startEdit: function(model) {
 
-    // Acquire and freeze the edit layer.
-    this.editLayer = this.getLayerByModel(model)||this.buildLayer(model);
+    // Find and freeze the edit layer.
+    this.editLayer = this.getLayer(model) || this.buildLayer(model);
     this.frozen = model.get('id');
 
     this.controls = {
@@ -204,13 +204,12 @@ _.extend(Neatline.Map.View.prototype, {
       return !f._sketch;
     });
 
-    // Write WKT.
+    // Get the WKT string.
     if (!_.isEmpty(features)) {
       var formatWKT = new OpenLayers.Format.WKT();
       var wkt = formatWKT.write(features);
     }
 
-    // Publish.
     Neatline.vent.trigger('editor:map:newCoverage', wkt);
 
   },
@@ -236,7 +235,7 @@ _.extend(Neatline.Map.View.prototype, {
   removeLayerByModel: function(model) {
 
     // Get layer for the model.
-    var layer = this.getLayerByModel(model);
+    var layer = this.getLayer(model);
     if (!layer) return;
 
     // Remove from map.
