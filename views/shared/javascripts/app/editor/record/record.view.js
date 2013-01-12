@@ -97,6 +97,8 @@ Neatline.module('Editor.Record', function(
       // Deactivate map editing, show record list.
       Neatline.execute('editor:map:endEdit', this.model);
       Neatline.execute('editor:showRecordList');
+
+      // Close and activate the bubble.
       Neatline.execute('bubble:activate');
       Neatline.execute('bubble:unselect');
 
@@ -168,7 +170,7 @@ Neatline.module('Editor.Record', function(
       Neatline.execute('editor:map:deleteLayer', this.model);
       this.__ui.modal.modal('hide');
 
-      // FLash success, close form.
+      // FLash success.
       Neatline.execute('editor:notifySuccess',
         STRINGS.record.delete.success
       );

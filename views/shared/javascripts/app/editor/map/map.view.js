@@ -18,6 +18,7 @@ _.extend(Neatline.Map.View.prototype, {
    * removed when new record data is ingested in response to a map move.
    *
    * @param {Object} records: The records collection.
+   * @unittest
    */
   ingest: function(records) {
 
@@ -194,6 +195,7 @@ _.extend(Neatline.Map.View.prototype, {
 
   /**
    * Publish updated KML.
+   * @unittest
    */
   publish: function() {
 

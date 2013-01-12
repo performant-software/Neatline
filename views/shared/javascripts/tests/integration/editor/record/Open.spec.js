@@ -22,7 +22,7 @@ describe('Record Form Open', function() {
 
     // Get record rows and models.
     recordRows    = _t.getRecordRows();
-    recordModels  = _t.getRecordModels();
+    recordModels  = _t.getRecordListModels();
 
     // Get layers and features.
     mapLayers     = _t.getVectorLayers();

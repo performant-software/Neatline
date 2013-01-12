@@ -36,23 +36,27 @@ describe('Record Form Add', function() {
 
     // --------------------------------------------------------------------
     // When the "New Record" button is clicked, the record form should be
-    // displayed with the model for the new record.
+    // displayed with a new model with defined style values.
     // --------------------------------------------------------------------
 
+    // Record form should be visible.
     expect(_t.el.editor).toContain(_t.el.record);
 
-  });
-
-
-  it('should display placeholder in form header', function() {
-
-    // --------------------------------------------------------------------
-    // When an edit form is displayed for a record that has a null title
-    // (as is the case when a new record is created), a placeholder title
-    // should be displayed in the form header.
-    // --------------------------------------------------------------------
-
+    // Lead should show placeholder title.
     expect(els.lead.text()).toEqual(STRINGS.placeholders.title);
+
+    // Mode should have an exhibit id and default styles.
+    var record = _t.getRecordFormModel();
+    expect(_.isNumber(record.get('exhibit_id'))).     toBeTruthy();
+    expect(_.isString(record.get('vector_color'))).   toBeTruthy();
+    expect(_.isString(record.get('stroke_color'))).   toBeTruthy();
+    expect(_.isString(record.get('select_color'))).   toBeTruthy();
+    expect(_.isNumber(record.get('vector_opacity'))). toBeTruthy();
+    expect(_.isNumber(record.get('stroke_opacity'))). toBeTruthy();
+    expect(_.isNumber(record.get('select_opacity'))). toBeTruthy();
+    expect(_.isNumber(record.get('image_opacity'))).  toBeTruthy();
+    expect(_.isNumber(record.get('point_radius'))).   toBeTruthy();
+    expect(_.isNumber(record.get('stroke_width'))).   toBeTruthy();
 
   });
 

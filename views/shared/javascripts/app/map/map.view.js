@@ -194,10 +194,11 @@ Neatline.module('Map', function(
      *   the model's geometries.
      *
      * @param {Object} model: The record model.
+     * @unittest
      */
     focusByModel: function(model) {
 
-      // Get / build the layer for the model.
+      // Get a layer for the model.
       var layer = this.getLayer(model);
       if (!layer) layer = this.buildLayer(model);
 
@@ -261,6 +262,7 @@ Neatline.module('Map', function(
      * Updates the map layers to mirror the new records collection.
      *
      * @param {Object} records: The records collection.
+     * @unittest
      */
     ingest: function(records) {
 

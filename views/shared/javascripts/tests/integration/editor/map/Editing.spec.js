@@ -29,7 +29,7 @@ describe('Map Editing', function() {
     _t.refreshMap(_t.json.records.removed);
 
     // Open form for record 2.
-    recordModels = _t.getRecordModels();
+    recordModels = _t.getRecordListModels();
     _t.navigate('records/'+recordModels[1].get('id'));
 
     // Check for new layer.

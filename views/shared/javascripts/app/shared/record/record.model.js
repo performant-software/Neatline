@@ -39,8 +39,8 @@ Neatline.module('Shared.Record', function(
         stroke_color:   '#000000',
         select_color:   '#00aeff',
         vector_opacity: 30,
-        select_opacity: 50,
         stroke_opacity: 90,
+        select_opacity: 50,
         image_opacity:  90,
         point_radius:   10,
         stroke_width:   2

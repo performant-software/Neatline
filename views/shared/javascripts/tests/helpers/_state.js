@@ -110,6 +110,6 @@ _t.showRecordList = function() {
  */
 _t.openRecordForm = function() {
   _t.showRecordList();
-  var models = this.getRecordModels();
+  var models = this.getRecordListModels();
   this.navigate('records/'+models[0].get('id'));
 };

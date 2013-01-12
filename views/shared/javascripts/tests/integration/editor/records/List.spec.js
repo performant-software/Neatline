@@ -21,7 +21,7 @@ describe('Records List', function() {
     _t.loadEditor();
 
     recordRows    = _t.getRecordRows();
-    recordModels  = _t.getRecordModels();
+    recordModels  = _t.getRecordListModels();
 
   });
 

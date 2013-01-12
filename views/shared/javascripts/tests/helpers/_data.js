@@ -26,8 +26,18 @@ _t.getRecordRows = function() {
  *
  * @return {Array}: The models.
  */
-_t.getRecordModels = function() {
+_t.getRecordListModels = function() {
   return Neatline.Editor.Records.__collection.models;
+};
+
+
+/**
+ * Get the record model currently bound to the form.
+ *
+ * @return {Array}: The models.
+ */
+_t.getRecordFormModel = function() {
+  return Neatline.Editor.Record.__view.model;
 };
 
 
