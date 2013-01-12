@@ -14,8 +14,6 @@ Neatline.module('Map', function(
   Map, Neatline, Backbone, Marionette, $, _) {
 
 
-  // ======================================================================
-
   /**
    * Update map layers.
    *
@@ -32,8 +30,6 @@ Neatline.module('Map', function(
   Neatline.vent.on('map:move', update);
 
 
-  // ======================================================================
-
   /**
    * Focus the map on the data extent for a record, identified by id.
    *
@@ -48,8 +44,6 @@ Neatline.module('Map', function(
   Neatline.commands.addHandler('map:focusById', focusById);
 
 
-  // ======================================================================
-
   /**
    * Focus the map on the data extent for a record, identified by model.
    *
@@ -60,9 +54,6 @@ Neatline.module('Map', function(
   };
 
   Neatline.commands.addHandler('map:focusByModel', focusByModel);
-
-
-  // ======================================================================
 
 
 });

@@ -66,7 +66,6 @@ Neatline.module('Bubble', function(
   var activate = function() {
     Bubble.__view.activate();
   };
-
   Neatline.commands.addHandler('bubble:activate', activate);
 
 

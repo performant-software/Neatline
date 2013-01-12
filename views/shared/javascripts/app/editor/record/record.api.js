@@ -14,8 +14,6 @@ Neatline.module('Editor.Record', function(
   Record, Neatline, Backbone, Marionette, $, _) {
 
 
-  // ======================================================================
-
   /**
    * Show form for an existing record.
    *
@@ -31,8 +29,6 @@ Neatline.module('Editor.Record', function(
   Neatline.vent.on('editor:router:#records/:id', showById);
 
 
-  // ======================================================================
-
   /**
    * Show form for a new record.
    */
@@ -45,8 +41,6 @@ Neatline.module('Editor.Record', function(
   Neatline.vent.on('editor:router:#records/add', showNew);
 
 
-  // ======================================================================
-
   /**
    * Update coverage textarea.
    *
@@ -58,8 +52,6 @@ Neatline.module('Editor.Record', function(
 
   Neatline.commands.addHandler('editor:record:setCoverage', setCoverage);
   Neatline.vent.on('editor:map:newCoverage', setCoverage);
-
-  // ======================================================================
 
 
 });

@@ -14,8 +14,6 @@ Neatline.module('Editor', { startWithParent: false,
   define: function(Editor, Neatline, Backbone, Marionette, $, _) {
 
 
-  // ======================================================================
-
   /**
    * Flash a success notification.
    *
@@ -27,8 +25,6 @@ Neatline.module('Editor', { startWithParent: false,
 
   Neatline.commands.addHandler('editor:notifySuccess', notifySuccess);
 
-
-  // ======================================================================
 
   /**
    * Flash an error notification.
@@ -42,8 +38,6 @@ Neatline.module('Editor', { startWithParent: false,
   Neatline.commands.addHandler('editor:notifyError', notifyError);
 
 
-  // ======================================================================
-
   /**
    * Update the route hash.
    *
@@ -55,8 +49,6 @@ Neatline.module('Editor', { startWithParent: false,
 
   Neatline.commands.addHandler('editor:updateRoute', updateRoute);
 
-
-  // ======================================================================
 
   /**
    * Open a record edit form if one is not already open.
@@ -73,8 +65,6 @@ Neatline.module('Editor', { startWithParent: false,
   Neatline.vent.on('map:select', showRecordForm);
 
 
-  // ======================================================================
-
   /**
    * Navigate to the record list.
    */
@@ -84,9 +74,6 @@ Neatline.module('Editor', { startWithParent: false,
 
   Neatline.commands.addHandler('editor:showRecordList', showRecordList);
   Neatline.vent.on('editor:record:close', showRecordList);
-
-
-  // ======================================================================
 
 
 }});
