@@ -262,7 +262,6 @@ Neatline.module('Map', function(
      * Updates the map layers to mirror the new records collection.
      *
      * @param {Object} records: The records collection.
-     * @unittest
      */
     ingest: function(records) {
 
