@@ -13,21 +13,12 @@
 describe('Map `focusByModel`', function() {
 
 
-  var mapLayers;
-
-
   beforeEach(function() {
     _t.loadNeatline();
-    mapLayers = _t.getVectorLayers();
   });
 
 
   it('should apply focus/zoom defaults when they exist', function() {
-
-    // --------------------------------------------------------------------
-    // When the passed model has values for `map_focus` and `map_zoom`,
-    // they should be applied.
-    // --------------------------------------------------------------------
 
     _t.setMapCenter(0, 0, 1)
 
@@ -52,11 +43,6 @@ describe('Map `focusByModel`', function() {
 
   it('should zoom to extent when focus/zoom are undefined', function() {
 
-    // --------------------------------------------------------------------
-    // When the passed model does not have defined values for `map_focus`
-    // and `map_zoom`, the map should auto-focus to the geometry extent.
-    // --------------------------------------------------------------------
-
     _t.setMapCenter(0, 0, 1)
 
     var model = new Neatline.Shared.Record.Model({
@@ -80,11 +66,6 @@ describe('Map `focusByModel`', function() {
 
 
   it('should do nothing when coverage is `POINT(0 0)`', function() {
-
-    // --------------------------------------------------------------------
-    // When the passed model does not have defined focus/zoom defaults and
-    // the coverage is `POINT(0 0)` , the map focus should not change.
-    // --------------------------------------------------------------------
 
     _t.setMapCenter(1, 2, 3)
 

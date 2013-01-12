@@ -191,7 +191,7 @@ Neatline.module('Map', function(
      *   viewport using these values.
      *
      * - Otherwise, automatically fit the viewport around the extent of
-     *   the model's geometries.
+     *   the model's geometries, except when coverage is `POINT(0 0)`.
      *
      * @param {Object} model: The record model.
      * @unittest
