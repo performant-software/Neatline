@@ -26,7 +26,7 @@ describe('Router', function() {
 
     _t.navigate('records');
 
-    // Menu, search, and records displayed.
+    // Menu, search, records should be visible.
     expect(_t.el.editor).toContain(_t.el.menu);
     expect(_t.el.editor).toContain(_t.el.search);
     expect(_t.el.editor).toContain(_t.el.records);
@@ -40,8 +40,9 @@ describe('Router', function() {
     // #records/:id should display a record edit form.
     // --------------------------------------------------------------------
 
-    var recordRows = _t.getRecordRows();
-    _t.navigate($(recordRows[0]).attr('href'));
+    _t.navigate($(_t.getRecordRows()[0]).attr('href'));
+
+    // Record form should be visible.
     expect(_t.el.editor).toContain(_t.el.record);
 
   });
@@ -54,6 +55,8 @@ describe('Router', function() {
     // --------------------------------------------------------------------
 
     _t.navigate('records/add');
+
+    // Record form should be visible.
     expect(_t.el.editor).toContain(_t.el.record);
 
   });

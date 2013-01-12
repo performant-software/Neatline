@@ -13,35 +13,62 @@
 describe('Map Editing', function() {
 
 
+  var recordModels;
+
+
   beforeEach(function() {
     _t.loadEditor();
+    recordModels = _t.getRecordListModels();
   });
 
 
-  it('should create map edit layer when one does not exist', function() {
+  it('should create edit layer for existing record', function() {
 
     // --------------------------------------------------------------------
-    // When an edit form is opened for a record that does not have a map
-    // layer, a new layer should be created for the record.
+    // When an edit form is opened for an existing record that does not
+    // have a map layer, a new layer should be created for the record and
+    // set to be the edit layer.
     // --------------------------------------------------------------------
 
     // Load map without record 2.
     _t.refreshMap(_t.json.records.removed);
 
     // Open form for record 2.
-    recordModels = _t.getRecordListModels();
     _t.navigate('records/'+recordModels[1].get('id'));
 
-    // Check for new layer.
-    var mapLayers = _t.vw.map.layers;
-    expect(_.last(mapLayers).features[0].geometry.x).toEqual(3);
-    expect(_.last(mapLayers).features[0].geometry.y).toEqual(4);
-    expect(mapLayers.length).toEqual(3);
+    // Map should create new layer for record 2.
+    var newLayer = _.last(_t.vw.map.layers);
+    expect(newLayer.features[0].geometry.x).toEqual(3);
+    expect(newLayer.features[0].geometry.y).toEqual(4);
+    expect(_t.vw.map.layers.length).toEqual(3);
+
+    // Map should set record 2 layer as the edit layer.
+    expect(newLayer.nId).toEqual(_t.vw.map.editLayer.nId);
 
   });
 
 
-  it('should not update edit layer', function() {
+  it('should create edit layer for new record', function() {
+
+    // --------------------------------------------------------------------
+    // When a new record is added, a new layer should be created and set
+    // to be the edit layer.
+    // --------------------------------------------------------------------
+
+    // Add new record.
+    _t.navigate('records/add');
+
+    // Map should create new layer.
+    var newLayer = _.last(_t.vw.map.layers);
+    expect(_t.vw.map.layers.length).toEqual(4);
+
+    // Map should set new layer as the edit layer.
+    expect(newLayer.nId).toEqual(_t.vw.map.editLayer.nId);
+
+  });
+
+
+  it('should not update edit layer for existing record', function() {
 
     // --------------------------------------------------------------------
     // When a record is being edited, the edit layer should not be rebuilt
@@ -72,11 +99,11 @@ describe('Map Editing', function() {
   });
 
 
-  it('should not remove edit layer', function() {
+  it('should not remove edit layer for existing record', function() {
 
     // --------------------------------------------------------------------
     // When a record is being edited, the edit layer should not be removed
-    // if a new collection is ingested that does not include the record.
+    // if new data is ingested that does not include the record.
     // --------------------------------------------------------------------
 
     // Open form for record 2.
@@ -85,8 +112,27 @@ describe('Map Editing', function() {
     // Reload map without record 2.
     _t.refreshMap(_t.json.records.removed);
 
-    // Record 2 layer still present.
+    // Record 2 layer should still be present.
     expect(_t.getVectorLayerByTitle('title2')).toBeDefined();
+
+  });
+
+
+  it('should not remove edit layer for new record', function() {
+
+    // --------------------------------------------------------------------
+    // When a new record is created, the edit layer should not be removed
+    // if new data is ingested that does not include the record.
+    // --------------------------------------------------------------------
+
+    // Add new record.
+    _t.navigate('records/add');
+
+    // Reload the map.
+    _t.refreshMap(_t.json.records.standard);
+
+    // Edit layer should still be present.
+    expect(_t.vw.map.layers.length).toEqual(4);
 
   });
 
@@ -105,7 +151,7 @@ describe('Map Editing', function() {
     // Reload map without record 2.
     _t.refreshMap(_t.json.records.removed);
 
-    // Record 2 layer updated.
+    // Record 2 layer should be updated.
     expect(_t.getVectorLayerByTitle('title2')).toBeUndefined();
 
   });
@@ -127,7 +173,7 @@ describe('Map Editing', function() {
     _t.navigate('records');
     _t.refreshMap(_t.json.records.standard);
 
-    // Edit layer removed.
+    // Edit layer should be removed.
     expect(_t.vw.map.layers.length).toEqual(3);
     expect(_t.getVectorLayerByTitle('title1')).toBeDefined();
     expect(_t.getVectorLayerByTitle('title2')).toBeDefined();

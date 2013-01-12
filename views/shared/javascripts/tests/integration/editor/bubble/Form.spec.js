@@ -13,7 +13,7 @@
 describe('Bubble Form Interaction', function() {
 
 
-  var recordRows, layer, feature, els;
+  var layer, feature, els;
 
 
   beforeEach(function() {
@@ -21,7 +21,6 @@ describe('Bubble Form Interaction', function() {
     _t.loadEditor();
     _t.openRecordForm();
 
-    recordRows  = _t.getRecordRows();
     layer       = _t.vw.map.layers[0];
     feature     = layer.features[0];
 
@@ -90,9 +89,11 @@ describe('Bubble Form Interaction', function() {
     _t.hoverOnMapFeature(layer, feature);
     expect(_t.el.bubble).not.toBeVisible();
 
-    // Select feature, check no bubble.
+    // Select feature.
     _t.hoverOnMapFeature(layer, feature);
     _t.clickOnMapFeature(layer, feature);
+
+    // Bubble should be visible.
     expect(_t.el.bubble).not.toBeVisible();
 
   });
@@ -110,8 +111,10 @@ describe('Bubble Form Interaction', function() {
     // Click "Text" tab.
     els.text.tab('show');
 
-    // Hover on feature, check bubble.
+    // Hover on feature.
     _t.hoverOnMapFeature(layer, feature);
+
+    // Bubble should be visible.
     expect(_t.el.bubble).toBeVisible();
 
   });
@@ -132,8 +135,10 @@ describe('Bubble Form Interaction', function() {
     els.close.trigger('click');
     _t.respondRecords();
 
-    // Hover on feature, check bubble.
+    // Hover on feature.
     _t.hoverOnMapFeature(layer, feature);
+
+    // Bubble should be visible.
     expect(_t.el.bubble).toBeVisible();
 
   });
@@ -156,8 +161,10 @@ describe('Bubble Form Interaction', function() {
     // Reopen the form.
     _t.openRecordForm();
 
-    // Hover on feature, check for no bubble.
+    // Hover on feature.
     _t.hoverOnMapFeature(layer, feature);
+
+    // Bubble should not be visible.
     expect(_t.el.bubble).not.toBeVisible();
 
   });
