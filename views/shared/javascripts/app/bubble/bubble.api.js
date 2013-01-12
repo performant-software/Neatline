@@ -14,8 +14,6 @@ Neatline.module('Bubble', function(
   Bubble, Neatline, Backbone, Marionette, $, _) {
 
 
-  // ======================================================================
-
   /**
    * Show the bubble.
    *
@@ -29,8 +27,6 @@ Neatline.module('Bubble', function(
   Neatline.vent.on('map:highlight', show);
 
 
-  // ======================================================================
-
   /**
    * Hide the bubble.
    */
@@ -41,8 +37,6 @@ Neatline.module('Bubble', function(
   Neatline.commands.addHandler('bubble:hide', hide);
   Neatline.vent.on('map:unhighlight', hide);
 
-
-  // ======================================================================
 
   /**
    * Freeze the bubble.
@@ -55,8 +49,6 @@ Neatline.module('Bubble', function(
   Neatline.vent.on('map:select', select);
 
 
-  // ======================================================================
-
   /**
    * Unfreeze and hide the bubble.
    */
@@ -68,8 +60,6 @@ Neatline.module('Bubble', function(
   Neatline.vent.on('map:unselect', unselect);
 
 
-  // ======================================================================
-
   /**
    * Activate the bubble.
    */
@@ -80,8 +70,6 @@ Neatline.module('Bubble', function(
   Neatline.commands.addHandler('bubble:activate', activate);
 
 
-  // ======================================================================
-
   /**
    * Deactivate and close the bubble.
    */
@@ -91,9 +79,6 @@ Neatline.module('Bubble', function(
   };
 
   Neatline.commands.addHandler('bubble:deactivate', deactivate);
-
-
-  // ======================================================================
 
 
 });
