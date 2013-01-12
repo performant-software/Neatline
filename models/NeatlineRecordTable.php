@@ -23,7 +23,9 @@ class NeatlineRecordTable extends Omeka_Db_Table
     public function getSelect()
     {
         return parent::getSelect()->columns(array(
-            'coverage' => new Zend_Db_Expr('AsText(coverage)')
+            'coverage' => new Zend_Db_Expr(
+                'NULLIF(AsText(coverage), "POINT(0 0)")'
+            )
         ));
     }
 
