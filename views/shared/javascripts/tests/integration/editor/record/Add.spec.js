@@ -45,9 +45,11 @@ describe('Record Form Add', function() {
     // Lead should show placeholder title.
     expect(els.lead.text()).toEqual(STRINGS.placeholders.title);
 
-    // Mode should have an exhibit id and default styles.
+    // Model should have an exhibit id.
     var record = _t.getRecordFormModel();
-    expect(_.isNumber(record.get('exhibit_id'))).     toBeTruthy();
+    expect(record.get('exhibit_id')).toEqual(__exhibit.id);
+
+    // Model should have defined styles.
     expect(_.isString(record.get('vector_color'))).   toBeTruthy();
     expect(_.isString(record.get('stroke_color'))).   toBeTruthy();
     expect(_.isString(record.get('select_color'))).   toBeTruthy();
@@ -65,7 +67,7 @@ describe('Record Form Add', function() {
 
     // --------------------------------------------------------------------
     // When a record is saved for the first time, the form should issue a
-    // POST request with the new data.
+    // POST request with the exhibit id.
     // --------------------------------------------------------------------
 
     // Click "Save".
