@@ -13,7 +13,7 @@
 describe('Bubble Form Interaction', function() {
 
 
-  var recordRows, mapLayers, layer, feature, els;
+  var recordRows, layer, feature, els;
 
 
   beforeEach(function() {
@@ -21,12 +21,9 @@ describe('Bubble Form Interaction', function() {
     _t.loadEditor();
     _t.openRecordForm();
 
-    // Get layers and rows.
-    recordRows  = _t.getRecordRows();
-    mapLayers   = _t.getVectorLayers();
-
-    // Alias layer and feature.
-    layer = mapLayers[0]; feature = layer.features[0];
+    // Get rows, layer, feature.
+    recordRows = _t.getRecordRows();
+    layer = _t.vw.map.layers[0]; feature = layer.features[0];
 
     els = {
       text:     _t.vw.record.$('a[href="#record-form-text"]'),

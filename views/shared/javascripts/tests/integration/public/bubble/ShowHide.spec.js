@@ -13,21 +13,18 @@
 describe('Bubble Show/Hide', function() {
 
 
-  var mapLayers, layer1, layer2, feature1, feature2;
+  var layer1, layer2, feature1, feature2;
 
 
   beforeEach(function() {
 
     _t.loadNeatline();
 
-    // Get layers.
-    mapLayers = _t.getVectorLayers();
-    layer1    = mapLayers[0];
-    layer2    = mapLayers[1];
+    layer1 = _t.vw.map.layers[0];
+    layer2 = _t.vw.map.layers[1];
 
-    // Alias features.
-    feature1  = layer1.features[0];
-    feature2  = layer2.features[0];
+    feature1 = layer1.features[0];
+    feature2 = layer2.features[0];
 
   });
 
@@ -44,9 +41,8 @@ describe('Bubble Show/Hide', function() {
     // Bubble should be visible.
     expect(_t.el.bubble).toBeVisible();
 
-    // Title and body should be populated.
+    // Title should be rendered.
     expect(_t.vw.bubble.__ui.title.text()).toEqual('title1');
-    // expect(_t.vw.bubble.__ui.body.text()).toEqual('body1');
 
   });
 
@@ -59,7 +55,7 @@ describe('Bubble Show/Hide', function() {
 
     // Hover off feature.
     _t.hoverOnMapFeature(layer1, feature1);
-    _t.unHoverOnMapFeature(mapLayers);
+    _t.unHoverOnMapFeature(_t.vw.map.layers);
 
     // Bubble should be visible.
     expect(_t.el.bubble).not.toBeVisible();
@@ -108,7 +104,7 @@ describe('Bubble Show/Hide', function() {
     expect(_t.el.bubble.offset()).toEqual(offset);
 
     // Bubble should be visible after unhover.
-    _t.unHoverOnMapFeature(mapLayers);
+    _t.unHoverOnMapFeature(_t.vw.map.layers);
     expect(_t.el.bubble).toBeVisible();
 
   });
@@ -134,7 +130,6 @@ describe('Bubble Show/Hide', function() {
 
     // Check for unchanged bubble values.
     expect(_t.vw.bubble.__ui.title.text()).toEqual('title1');
-    // expect(_t.vw.bubble.__ui.body.text()).toEqual('body1');
 
     // Move the cursor.
     $(window).trigger($.Event('mousemove', {
@@ -159,7 +154,7 @@ describe('Bubble Show/Hide', function() {
     _t.clickOnMapFeature(layer1, feature1);
 
     // Bubble should not be visible after unselect.
-    _t.clickOffMapFeature(mapLayers);
+    _t.clickOffMapFeature(_t.vw.map.layers);
     expect(_t.el.bubble).not.toBeVisible();
 
     // Hover on a different feature.
@@ -170,7 +165,6 @@ describe('Bubble Show/Hide', function() {
 
     // Check for changed bubble values.
     expect(_t.vw.bubble.__ui.title.text()).toEqual('title2');
-    // expect(_t.vw.bubble.__ui.body.text()).toEqual('body2');
 
     // Move the cursor.
     $(window).trigger($.Event('mousemove', {

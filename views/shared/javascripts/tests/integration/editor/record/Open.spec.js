@@ -13,7 +13,7 @@
 describe('Record Form Open', function() {
 
 
-  var recordRows, recordModels, mapLayers, feature1, feature2, els;
+  var recordRows, recordModels, feature1, feature2, els;
 
 
   beforeEach(function() {
@@ -24,10 +24,9 @@ describe('Record Form Open', function() {
     recordRows    = _t.getRecordRows();
     recordModels  = _t.getRecordListModels();
 
-    // Get layers and features.
-    mapLayers     = _t.getVectorLayers();
-    feature1      = mapLayers[0].features[0];
-    feature2      = mapLayers[1].features[0];
+    // Get features.
+    feature1 = _t.vw.map.layers[0].features[0];
+    feature2 = _t.vw.map.layers[1].features[0];
 
     els = {
       pan:    _t.vw.record.$('input[value="pan"]'),
@@ -118,7 +117,7 @@ describe('Record Form Open', function() {
     // --------------------------------------------------------------------
 
     // Trigger click.
-    _t.clickOnMapFeature(mapLayers[0], feature1);
+    _t.clickOnMapFeature(_t.vw.map.layers[0], feature1);
 
     // Check for form.
     expect(_t.el.editor).toContain(_t.el.record);
@@ -139,14 +138,14 @@ describe('Record Form Open', function() {
     // --------------------------------------------------------------------
 
     // Trigger click on Record 1 feature.
-    _t.clickOnMapFeature(mapLayers[0], feature1);
+    _t.clickOnMapFeature(_t.vw.map.layers[0], feature1);
 
     // Check for form.
     expect(_t.el.editor).toContain(_t.el.record);
     expect(_t.vw.record.model.get('title')).toEqual('title1');
 
     // Trigger click on Record 2 feature.
-    _t.clickOnMapFeature(mapLayers[0], feature2);
+    _t.clickOnMapFeature(_t.vw.map.layers[0], feature2);
 
     // Check for unchanged form.
     expect(_t.vw.record.model.get('title')).toEqual('title1');
@@ -194,7 +193,7 @@ describe('Record Form Open', function() {
     _t.setMapCenter(200, 300, 15);
 
     // Trigger click on Record 1 feature.
-    _t.clickOnMapFeature(mapLayers[0], feature1);
+    _t.clickOnMapFeature(_t.vw.map.layers[0], feature1);
 
     // Get focus and zoom.
     var center  = _t.vw.map.map.getCenter();

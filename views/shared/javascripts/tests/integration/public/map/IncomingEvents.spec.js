@@ -13,12 +13,8 @@
 describe('Map Incoming Events', function() {
 
 
-  var mapLayers;
-
-
   beforeEach(function() {
     _t.loadNeatline();
-    mapLayers = _t.getVectorLayers();
   });
 
 
@@ -34,7 +30,7 @@ describe('Map Incoming Events', function() {
       // ------------------------------------------------------------------
 
       // Get model with map layer.
-      var model = mapLayers[0].nModel;
+      var model = _t.vw.map.layers[0].nModel;
 
       // Register the starting requests count.
       var requestCount = _t.server.requests.count;
@@ -69,7 +65,7 @@ describe('Map Incoming Events', function() {
       var done = false;
 
       // At the start, 3 map layers
-      expect(mapLayers.length).toEqual(3);
+      expect(_t.vw.map.layers.length).toEqual(3);
 
       // Hook onto map:focused.
       Neatline.vent.on('map:focused', function() { done = true; });
@@ -90,10 +86,9 @@ describe('Map Incoming Events', function() {
       var zoom    = _t.vw.map.map.getZoom();
 
       // Check for new layer.
-      mapLayers = _t.getVectorLayers();
-      expect(mapLayers.length).toEqual(4);
-      expect(mapLayers[3].features[0].geometry.x).toEqual(1);
-      expect(mapLayers[3].features[0].geometry.y).toEqual(2);
+      expect(_t.vw.map.layers.length).toEqual(4);
+      expect(_t.vw.map.layers[3].features[0].geometry.x).toEqual(1);
+      expect(_t.vw.map.layers[3].features[0].geometry.y).toEqual(2);
 
       // Check focus and zoom.
       expect(center.lon).toEqual(100);
@@ -118,7 +113,7 @@ describe('Map Incoming Events', function() {
       // ------------------------------------------------------------------
 
       // Get model with map layer.
-      var model = mapLayers[0].nModel;
+      var model = _t.vw.map.layers[0].nModel;
 
       // Register the starting requests count.
       var requestCount = _t.server.requests.count;
@@ -154,7 +149,7 @@ describe('Map Incoming Events', function() {
       var requestCount = _t.server.requests.count;
 
       // At the start, 3 map layers
-      expect(mapLayers.length).toEqual(3);
+      expect(_t.vw.map.layers.length).toEqual(3);
 
       // Create a model that does not have a map layer.
       var model = _t.buildModelFromJson(_t.json.record.standard);
@@ -170,10 +165,9 @@ describe('Map Incoming Events', function() {
       var zoom    = _t.vw.map.map.getZoom();
 
       // Check for new layer.
-      mapLayers = _t.getVectorLayers();
-      expect(mapLayers.length).toEqual(4);
-      expect(mapLayers[3].features[0].geometry.x).toEqual(1);
-      expect(mapLayers[3].features[0].geometry.y).toEqual(2);
+      expect(_t.vw.map.layers.length).toEqual(4);
+      expect(_t.vw.map.layers[3].features[0].geometry.x).toEqual(1);
+      expect(_t.vw.map.layers[3].features[0].geometry.y).toEqual(2);
 
       // Check focus and zoom.
       expect(center.lon).toEqual(100);

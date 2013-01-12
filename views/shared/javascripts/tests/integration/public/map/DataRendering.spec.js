@@ -13,17 +13,16 @@
 describe('Map Data Rendering', function() {
 
 
-  var mapLayers, layer1, layer2, layer3;
+  var layer1, layer2, layer3;
 
 
   beforeEach(function() {
 
     _t.loadNeatline();
 
-    mapLayers = _t.getVectorLayers();
-    layer1 = mapLayers[0];
-    layer2 = mapLayers[1];
-    layer3 = mapLayers[2];
+    layer1 = _t.vw.map.layers[0];
+    layer2 = _t.vw.map.layers[1];
+    layer3 = _t.vw.map.layers[2];
 
   });
 
@@ -34,7 +33,7 @@ describe('Map Data Rendering', function() {
     // When the exhibit started, the map should query and render records.
     // --------------------------------------------------------------------
 
-    expect(mapLayers.length).toEqual(3);
+    expect(_t.vw.map.layers.length).toEqual(3);
     expect(layer1.features[0].geometry.x).toEqual(1);
     expect(layer1.features[0].geometry.y).toEqual(2);
     expect(layer2.features[0].geometry.x).toEqual(3);
@@ -56,7 +55,7 @@ describe('Map Data Rendering', function() {
     expect(record2Layer.features.length).toEqual(1);
     expect(record2Layer.features[0].geometry.x).toEqual(3);
     expect(record2Layer.features[0].geometry.y).toEqual(4);
-    expect(_t.getVectorLayers().length).toEqual(3);
+    expect(_t.vw.map.layers.length).toEqual(3);
 
     _t.triggerMapMove();
     _t.respondLast200(_t.json.records.changed);
@@ -67,14 +66,14 @@ describe('Map Data Rendering', function() {
     expect(record2Layer.features.length).toEqual(1);
     expect(record2Layer.features[0].geometry.x).toEqual(7);
     expect(record2Layer.features[0].geometry.y).toEqual(8);
-    expect(_t.getVectorLayers().length).toEqual(3);
+    expect(_t.vw.map.layers.length).toEqual(3);
 
     _t.triggerMapMove();
     _t.respondLast200(_t.json.records.removed);
 
     // Record2 point removed.
     expect(_t.getVectorLayerByTitle('title2')).toBeUndefined();
-    expect(_t.getVectorLayers().length).toEqual(2);
+    expect(_t.vw.map.layers.length).toEqual(2);
 
   });
 

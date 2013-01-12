@@ -33,7 +33,7 @@ describe('Map Editing', function() {
     _t.navigate('records/'+recordModels[1].get('id'));
 
     // Check for new layer.
-    var mapLayers = _t.getVectorLayers();
+    var mapLayers = _t.vw.map.layers;
     expect(_.last(mapLayers).features[0].geometry.x).toEqual(3);
     expect(_.last(mapLayers).features[0].geometry.y).toEqual(4);
     expect(mapLayers.length).toEqual(3);
@@ -41,7 +41,7 @@ describe('Map Editing', function() {
   });
 
 
-  it('should not update the edit layer', function() {
+  it('should not update edit layer', function() {
 
     // --------------------------------------------------------------------
     // When a record is being edited, the edit layer should not be rebuilt
@@ -72,7 +72,7 @@ describe('Map Editing', function() {
   });
 
 
-  it('should not remove the edit layer', function() {
+  it('should not remove edit layer', function() {
 
     // --------------------------------------------------------------------
     // When a record is being edited, the edit layer should not be removed
@@ -107,6 +107,31 @@ describe('Map Editing', function() {
 
     // Record 2 layer updated.
     expect(_t.getVectorLayerByTitle('title2')).toBeUndefined();
+
+  });
+
+
+  it('should clear unsaved edit layer when edit ends', function() {
+
+    // --------------------------------------------------------------------
+    // When the add record flow is initated, but then the form is closed
+    // without being saved, the edit layer that was created for the model
+    // should be garbage collected in the next layer refresh.
+    // --------------------------------------------------------------------
+
+    // Create new record.
+    _t.navigate('records/add');
+    expect(_t.vw.map.layers.length).toEqual(4);
+
+    // Close without saving, refresh map.
+    _t.navigate('records');
+    _t.refreshMap(_t.json.records.standard);
+
+    // Edit layer removed.
+    expect(_t.vw.map.layers.length).toEqual(3);
+    expect(_t.getVectorLayerByTitle('title1')).toBeDefined();
+    expect(_t.getVectorLayerByTitle('title2')).toBeDefined();
+    expect(_t.getVectorLayerByTitle('title3')).toBeDefined();
 
   });
 

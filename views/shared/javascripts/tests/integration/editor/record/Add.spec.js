@@ -45,8 +45,8 @@ describe('Record Form Add', function() {
     // Lead should show placeholder title.
     expect(els.lead.text()).toEqual(STRINGS.placeholders.title);
 
-    // Model should have an exhibit id.
-    var record = _t.getRecordFormModel();
+    // Model should have exhibit id.
+    var record = _t.vw.record.model;
     expect(record.get('exhibit_id')).toEqual(__exhibit.id);
 
     // Model should have defined styles.

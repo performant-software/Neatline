@@ -57,30 +57,30 @@ _.extend(Neatline.Map.View.prototype, {
 
       point: new OpenLayers.Control.DrawFeature(this.editLayer,
         OpenLayers.Handler.Point, {
-          featureAdded: _.bind(this.publish,this)
+          featureAdded: _.bind(this.publish, this)
       }),
 
       line: new OpenLayers.Control.DrawFeature(this.editLayer,
         OpenLayers.Handler.Path, {
-          featureAdded: _.bind(this.publish,this)
+          featureAdded: _.bind(this.publish, this)
       }),
 
       poly: new OpenLayers.Control.DrawFeature(this.editLayer,
         OpenLayers.Handler.Polygon, {
-          featureAdded: _.bind(this.publish,this)
+          featureAdded: _.bind(this.publish, this)
       }),
 
       regPoly: new OpenLayers.Control.DrawFeature(this.editLayer,
         OpenLayers.Handler.RegularPolygon, {
-          featureAdded: _.bind(this.publish,this)
+          featureAdded: _.bind(this.publish, this)
       }),
 
       edit: new OpenLayers.Control.ModifyFeature(this.editLayer, {
-          onModification: _.bind(this.publish,this)
+          onModification: _.bind(this.publish, this)
       }),
 
       remove: new OpenLayers.Control.ModifyFeature(this.editLayer, {
-          onModificationStart: _.bind(this.remove,this)
+          onModificationStart: _.bind(this.removeFeature, this)
       })
 
     };
@@ -94,13 +94,12 @@ _.extend(Neatline.Map.View.prototype, {
 
 
   /**
-   * Deactivate and remove all editing controls.
+   * Remove editing controls.
    */
   endEdit: function() {
 
-    // Deactivate and remove controls.
+    // Remove controls.
     _.each(this.controls, _.bind(function(control, key) {
-      control.deactivate();
       this.map.removeControl(control);
     }, this));
 
@@ -222,7 +221,7 @@ _.extend(Neatline.Map.View.prototype, {
    *
    * @param {Object} feature: The selected feature.
    */
-  remove: function(feature) {
+  removeFeature: function(feature) {
     this.controls.remove.unselectFeature(feature);
     this.editLayer.destroyFeatures([feature]);
     this.publish();
@@ -235,20 +234,27 @@ _.extend(Neatline.Map.View.prototype, {
    * @param {Object} model: The model of the deleted record.
    */
   removeLayerByModel: function(model) {
-
-    // Get layer for the model.
     var layer = this.getLayer(model);
-    if (!layer) return;
+    if (layer) this.removeLayer(layer);
+  },
+
+
+  /**
+   * Remove a layer.
+   *
+   * @param {Object} layer: The layer.
+   */
+  removeLayer: function(layer) {
 
     // Remove from map.
     this.map.removeLayer(layer);
 
     // Remove from `layers`.
-    this.layers = _.reject(this.layers, function(layer) {
-      return layer.nId == model.get('id');
+    this.layers = _.reject(this.layers, function(l) {
+      return l.nId == layer.nId;
     });
 
-  }
+  },
 
 
 });

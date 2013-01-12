@@ -13,15 +13,14 @@
 describe('Map Outgoing Events', function() {
 
 
-  var mapLayers, layer, feature, spy;
+  var layer, feature, spy;
 
 
   beforeEach(function() {
 
     _t.loadNeatline();
 
-    mapLayers = _t.getVectorLayers();
-    layer     = mapLayers[0];
+    layer     = _t.vw.map.layers[0];
     feature   = layer.features[0];
 
     // Spy on the event aggregator.
@@ -60,7 +59,7 @@ describe('Map Outgoing Events', function() {
 
     // Simulate unhover on feature.
     _t.hoverOnMapFeature(layer, feature);
-    _t.unHoverOnMapFeature(mapLayers);
+    _t.unHoverOnMapFeature(_t.vw.map.layers);
 
     // Check render intent.
     expect(feature.renderIntent).toEqual('default');
@@ -106,7 +105,7 @@ describe('Map Outgoing Events', function() {
     _t.clickOnMapFeature(layer, feature);
 
     // Simulate unhover on feature.
-    _t.clickOffMapFeature(mapLayers);
+    _t.clickOffMapFeature(_t.vw.map.layers);
 
     // Check render intent.
     expect(feature.renderIntent).toEqual('default');
@@ -139,9 +138,8 @@ describe('Map Outgoing Events', function() {
     expect(spy.argsForCall[0][1].zoom).toEqual(zoom);
 
     // Check geometry.
-    layers = _t.getVectorLayers();
-    expect(layers[1].features[0].geometry.x).toEqual(7);
-    expect(layers[1].features[0].geometry.y).toEqual(8);
+    expect(_t.vw.map.layers[1].features[0].geometry.x).toEqual(7);
+    expect(_t.vw.map.layers[1].features[0].geometry.y).toEqual(8);
 
   });
 

@@ -39,6 +39,7 @@ _t.aliasEditor = function() {
     bubble:   Neatline.Bubble.          __view,
     editor:   Neatline.Editor.          __view,
     menu:     Neatline.Editor.Menu.     __view,
+    mapedit:  Neatline.Editor.Map.      __view,
     records:  Neatline.Editor.Records.  __view,
     record:   Neatline.Editor.Record.   __view,
     search:   Neatline.Editor.Search.   __view

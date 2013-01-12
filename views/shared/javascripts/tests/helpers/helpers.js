@@ -226,6 +226,7 @@ _t.aliasEditor = function() {
     bubble:   Neatline.Bubble.          __view,
     editor:   Neatline.Editor.          __view,
     menu:     Neatline.Editor.Menu.     __view,
+    mapedit:  Neatline.Editor.Map.      __view,
     records:  Neatline.Editor.Records.  __view,
     record:   Neatline.Editor.Record.   __view,
     search:   Neatline.Editor.Search.   __view
@@ -277,48 +278,15 @@ _t.getRecordListModels = function() {
 
 
 /**
- * Get the record model currently bound to the form.
- *
- * @return {Array}: The models.
- */
-_t.getRecordFormModel = function() {
-  return Neatline.Editor.Record.__view.model;
-};
-
-
-/**
- * Get vector layers on the map.
- *
- * @return {Array}: The layers.
- */
-_t.getVectorLayers = function() {
-
-  // Filter for features.length > 0.
-  return this.vw.map.map.getLayersBy('features', {
-    test: function(prop) {
-      return !_.isUndefined(prop) && prop.length > 0;
-    }
-  });
-
-};
-
-
-/**
  * Get the vector layer by record title.
  *
  * @param {String} title: The record title.
  * @return {Object}: The layer.
  */
 _t.getVectorLayerByTitle = function(title) {
-
-  // Get map layers.
-  var layers = this.getVectorLayers();
-
-  // Search layers for title.
-  return _.find(layers, function(layer) {
+  return _.find(_t.vw.map.layers, function(layer) {
     return layer.name == title;
   });
-
 };
 
 
