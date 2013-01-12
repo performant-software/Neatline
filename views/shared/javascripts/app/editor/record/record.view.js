@@ -110,32 +110,10 @@ Neatline.module('Editor.Record', function(
      * Save the record.
      */
     save: function() {
-
       this.model.save(null, {
-
-        success: _.bind(function() {
-
-          // Update the route.
-          Neatline.execute('editor:updateRoute',
-            'records/'+this.model.get('id')
-          );
-
-          // Flash success.
-          Neatline.execute('editor:notifySuccess',
-            STRINGS.record.save.success
-          );
-
-        }, this),
-
-        // Flash failure.
-        error: _.bind(function() {
-          Neatline.execute('editor:notifyError',
-            STRINGS.record.save.error
-          );
-        }, this)
-
+        success:  _.bind(this.onSaveSuccess, this),
+        error:    _.bind(this.onSaveError, this)
       });
-
     },
 
 
@@ -143,32 +121,72 @@ Neatline.module('Editor.Record', function(
      * Delete the record.
      */
     remove: function() {
-
       this.model.destroy({
-
-        success: _.bind(function() {
-
-          // Delete the record's layer on the map.
-          Neatline.vent.trigger('editor:record:delete', this.model);
-          this.__ui.modal.modal('hide');
-
-          // FLash success, close form.
-          Neatline.execute('editor:notifySuccess',
-            STRINGS.record.delete.success
-          );
-
-          this.close();
-
-        }, this),
-
-        // Flash failure.
-        error: _.bind(function() {
-          Neatline.execute('editor:notifyError',
-            STRINGS.record.delete.error
-          );
-        }, this)
-
+        success:  _.bind(this.onDeleteSuccess, this),
+        error:    _.bind(this.onDeleteError, this),
       });
+    },
+
+
+    /**
+     * When a save succeeds.
+     */
+    onSaveSuccess: function() {
+
+      // Update the route.
+      Neatline.execute('editor:updateRoute',
+        'records/'+this.model.get('id')
+      );
+
+      // Flash success.
+      Neatline.execute('editor:notifySuccess',
+        STRINGS.record.save.success
+      );
+
+    },
+
+
+    /**
+     * When a save fails.
+     */
+    onSaveError: function() {
+
+      // Flash error.
+      Neatline.execute('editor:notifyError',
+        STRINGS.record.save.error
+      );
+
+    },
+
+
+    /**
+     * When a delete succeeds.
+     */
+    onDeleteSuccess: function() {
+
+      // Delete the record's layer on the map.
+      Neatline.vent.trigger('editor:record:delete', this.model);
+      this.__ui.modal.modal('hide');
+
+      // FLash success, close form.
+      Neatline.execute('editor:notifySuccess',
+        STRINGS.record.delete.success
+      );
+
+      this.close();
+
+    },
+
+
+    /**
+     * When a delete fails.
+     */
+    onDeleteError: function() {
+
+      // Flash error.
+      Neatline.execute('editor:notifyError',
+        STRINGS.record.delete.error
+      );
 
     },
 
