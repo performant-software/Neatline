@@ -34,7 +34,6 @@ Neatline.module('Shared.Record', function(
     defaults: function() {
       return {
         exhibit_id:     __exhibit.id,
-        coverage:       'POINT(0 0)',
         vector_color:   '#00aeff',
         stroke_color:   '#000000',
         select_color:   '#00aeff',

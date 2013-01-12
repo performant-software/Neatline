@@ -20,7 +20,6 @@ describe('Map `publish`', function() {
 
   it('should publish null when there are no features');
   it('should publish WKT when there are features');
-  it('should exclude `POINT(0 0)`');
 
 
 });

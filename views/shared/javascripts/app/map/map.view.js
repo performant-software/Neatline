@@ -212,7 +212,7 @@ Neatline.module('Map', function(
       }
 
       // Otherwise, fit to viewport.
-      else if (model.get('coverage') !== 'POINT(0 0)') {
+      else if (model.get('coverage')) {
         this.map.zoomToExtent(layer.getDataExtent());
       }
 
@@ -290,28 +290,29 @@ Neatline.module('Map', function(
      */
     buildLayer: function(record) {
 
-      // Build geometry and style.
-      var formatWKT = new OpenLayers.Format.WKT();
-      var features = formatWKT.read(record.get('coverage'));
-      var style = this.getStyleMap(record);
-
       // Build the layer.
       var layer = new OpenLayers.Layer.Vector(
         record.get('title'), {
-          styleMap: style, displayInLayerSwitcher: false
+          styleMap: this.getStyleMap(record),
+          displayInLayerSwitcher: false
         }
       );
 
-      // Add to map, track.
-      layer.addFeatures(features);
-      this.map.addLayer(layer);
+      // Build features.
+      if (record.get('coverage')) {
+        var formatWKT = new OpenLayers.Format.WKT();
+        var features = formatWKT.read(record.get('coverage'));
+        layer.addFeatures(features);
+      }
 
       // Store model, id.
       layer.nModel = record;
       layer.nId = record.get('id');
 
-      // Track layer.
+      // Add to map, track.
+      this.map.addLayer(layer);
       this.layers.push(layer);
+
       return layer;
 
     },

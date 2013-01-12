@@ -65,13 +65,13 @@ describe('Map `focusByModel`', function() {
   });
 
 
-  it('should do nothing when coverage is `POINT(0 0)`', function() {
+  it('should do nothing when coverage is null', function() {
 
     _t.setMapCenter(1, 2, 3)
 
     var model = new Neatline.Shared.Record.Model({
-      id:         999,
-      coverage:   'POINT(0 0)'
+      id:       999,
+      coverage: null
     });
 
     // Focus.
