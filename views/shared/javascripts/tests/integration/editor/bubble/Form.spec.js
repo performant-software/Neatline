@@ -21,9 +21,9 @@ describe('Bubble Form Interaction', function() {
     _t.loadEditor();
     _t.openRecordForm();
 
-    // Get rows, layer, feature.
-    recordRows = _t.getRecordRows();
-    layer = _t.vw.map.layers[0]; feature = layer.features[0];
+    recordRows  = _t.getRecordRows();
+    layer       = _t.vw.map.layers[0];
+    feature     = layer.features[0];
 
     els = {
       text:     _t.vw.record.$('a[href="#record-form-text"]'),

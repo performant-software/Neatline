@@ -20,13 +20,11 @@ describe('Record Form Open', function() {
 
     _t.loadEditor();
 
-    // Get record rows and models.
     recordRows    = _t.getRecordRows();
     recordModels  = _t.getRecordListModels();
 
-    // Get features.
-    feature1 = _t.vw.map.layers[0].features[0];
-    feature2 = _t.vw.map.layers[1].features[0];
+    feature1  = _t.vw.map.layers[0].features[0];
+    feature2  = _t.vw.map.layers[1].features[0];
 
     els = {
       pan:    _t.vw.record.$('input[value="pan"]'),

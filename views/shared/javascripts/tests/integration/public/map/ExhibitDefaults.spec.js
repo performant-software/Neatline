@@ -20,8 +20,6 @@ describe('Map Exhibit Defaults', function() {
     // set in `mapZoom` and `mapFocus` on the __exhibit global object.
     // --------------------------------------------------------------------
 
-    // Load partial manually so that the __exhibit object can be modified
-    // before the application is started.
     loadFixtures('neatline-partial.html');
 
     // Set exhibit defaults.

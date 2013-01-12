@@ -21,14 +21,14 @@ describe('Record Form Delete', function() {
     _t.loadEditor();
     _t.openRecordForm();
 
+    id = _t.vw.record.model.get('id');
+
     els = {
       delete1:  _t.vw.record.$('a[name="delete1"]'),
       delete2:  _t.vw.record.$('a[name="delete2"]'),
       cancel:   _t.vw.record.$('a[name="cancel"]'),
       modal:    _t.vw.record.$('div.modal')
     };
-
-    id =        _t.vw.record.model.get('id');
 
   });
 

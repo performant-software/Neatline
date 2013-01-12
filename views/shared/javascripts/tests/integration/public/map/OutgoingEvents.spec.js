@@ -20,10 +20,9 @@ describe('Map Outgoing Events', function() {
 
     _t.loadNeatline();
 
-    layer     = _t.vw.map.layers[0];
-    feature   = layer.features[0];
+    layer   = _t.vw.map.layers[0];
+    feature = layer.features[0];
 
-    // Spy on the event aggregator.
     spy = spyOn(Neatline.vent, 'trigger').andCallThrough();
 
   });
