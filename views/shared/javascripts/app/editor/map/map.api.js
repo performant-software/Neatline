@@ -24,7 +24,6 @@ Neatline.module('Editor.Map', { startWithParent: false,
   };
 
   Neatline.commands.addHandler('editor:map:startEdit', startEdit);
-  Neatline.vent.on('editor:record:show', startEdit);
 
 
   /**
@@ -38,7 +37,6 @@ Neatline.module('Editor.Map', { startWithParent: false,
 
   Neatline.commands.addHandler('editor:map:endEdit', endEdit);
   Neatline.vent.on('editor:router:before', endEdit);
-  Neatline.vent.on('editor:record:close', endEdit);
 
 
   /**
@@ -51,7 +49,6 @@ Neatline.module('Editor.Map', { startWithParent: false,
   };
 
   Neatline.commands.addHandler('editor:map:updateEdit', updateEdit);
-  Neatline.vent.on('editor:record:update', updateEdit);
 
 
   /**
@@ -65,7 +62,6 @@ Neatline.module('Editor.Map', { startWithParent: false,
   };
 
   Neatline.commands.addHandler('editor:map:deleteLayer', deleteLayer);
-  Neatline.vent.on('editor:record:delete', deleteLayer);
 
 
 }});

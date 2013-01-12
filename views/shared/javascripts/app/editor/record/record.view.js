@@ -80,7 +80,7 @@ Neatline.module('Editor.Record', function(
       this.open   = true;
 
       // Activate map editing, bind form data.
-      Neatline.vent.trigger('editor:record:show', this.model);
+      Neatline.execute('editor:map:startEdit', this.model);
       rivets.bind(this.$el, { record: model });
 
       this.setBubbleStatus();
@@ -93,16 +93,12 @@ Neatline.module('Editor.Record', function(
      * Close the form.
      */
     close: function() {
-
       this.open = false;
-
-      // Deactivate map editing, close/activate bubble.
-      Neatline.vent.trigger('editor:record:close', this.model);
+      Neatline.execute('editor:map:endEdit', this.model);
+      Neatline.execute('editor:showRecordList');
       Neatline.execute('bubble:activate');
       Neatline.execute('bubble:unselect');
-
       this.model = null;
-
     },
 
 
@@ -165,7 +161,7 @@ Neatline.module('Editor.Record', function(
     onDeleteSuccess: function() {
 
       // Delete the record's layer on the map.
-      Neatline.vent.trigger('editor:record:delete', this.model);
+      Neatline.execute('editor:map:deleteLayer', this.model);
       this.__ui.modal.modal('hide');
 
       // FLash success, close form.
@@ -195,7 +191,7 @@ Neatline.module('Editor.Record', function(
      * Gather and publish the current map edit settings.
      */
     updateMap: function() {
-      Neatline.vent.trigger('editor:record:update', {
+      Neatline.execute('editor:map:updateEdit', {
         mode:   this.getEditMode(),
         modify: this.getModifyOptions(),
         poly:   this.getPolyOptions()

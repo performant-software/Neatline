@@ -73,7 +73,6 @@ Neatline.module('Editor', { startWithParent: false,
   };
 
   Neatline.commands.addHandler('editor:showRecordList', showRecordList);
-  Neatline.vent.on('editor:record:close', showRecordList);
 
 
 }});

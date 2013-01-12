@@ -210,7 +210,7 @@ _.extend(Neatline.Map.View.prototype, {
       var wkt = formatWKT.write(features);
     }
 
-    Neatline.vent.trigger('editor:map:newCoverage', wkt);
+    Neatline.execute('editor:record:setCoverage', wkt);
 
   },
 

@@ -51,7 +51,6 @@ Neatline.module('Editor.Record', function(
   };
 
   Neatline.commands.addHandler('editor:record:setCoverage', setCoverage);
-  Neatline.vent.on('editor:map:newCoverage', setCoverage);
 
 
 });
