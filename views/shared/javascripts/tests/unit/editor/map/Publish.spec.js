@@ -14,7 +14,7 @@ describe('Map `publish`', function() {
 
 
   beforeEach(function() {
-    _t.loadNeatline();
+    _t.loadEditor();
   });
 
 
