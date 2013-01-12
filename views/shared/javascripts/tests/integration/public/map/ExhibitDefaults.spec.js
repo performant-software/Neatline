@@ -29,7 +29,7 @@ describe('Map Exhibit Defaults', function() {
     // Start map.
     Neatline.Map.init();
 
-    // Check viewport.
+    // Viewport should be set to default.
     var center = Neatline.Map.__view.map.getCenter();
     expect(Neatline.Map.__view.map.zoom).toEqual(10);
     expect(center.lon).toEqual(1);

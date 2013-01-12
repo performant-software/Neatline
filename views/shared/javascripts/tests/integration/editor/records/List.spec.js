@@ -32,7 +32,7 @@ describe('Records List', function() {
     // At #records, a list of records should be rendered in the editor.
     // --------------------------------------------------------------------
 
-    // Check listings.
+    // Record titles and bodies should be listed.
     expect(recordRows.length).toEqual(3);
     expect($(recordRows[0]).find('.title').text()).
       toEqual('title1');
@@ -47,7 +47,7 @@ describe('Records List', function() {
     expect($(recordRows[2]).find('.body').text()).
       toEqual('body3');
 
-    // Check links.
+    // Record edit form links should be listed.
     expect($(recordRows[0]).attr('href')).
       toEqual('#records/'+recordModels[0].get('id'));
     expect($(recordRows[1]).attr('href')).

@@ -65,8 +65,10 @@ describe('Record Form Save', function() {
     var request = _t.getLastRequest();
     var params = $.parseJSON(request.requestBody);
 
-    // Check method and route.
+    // Method should be PUT.
     expect(request.method).toEqual('PUT');
+
+    // URL should be /record/:id.
     expect(request.url).toEqual(__exhibit.api.record+'/'+id);
 
     // Check the query string for updated values.
@@ -105,7 +107,7 @@ describe('Record Form Save', function() {
     els.save.trigger('click');
     _t.respondLast200('');
 
-    // Check for `toastr` call.
+    // `toastr` should be called.
     expect(toastr.info).toHaveBeenCalledWith(
       STRINGS.record.save.success, null, _t.vw.editor.options.toastr
     );
@@ -127,7 +129,7 @@ describe('Record Form Save', function() {
     els.save.trigger('click');
     _t.respondLast500();
 
-    // Check for `toastr` call.
+    // `toastr` should be called.
     expect(toastr.error).toHaveBeenCalledWith(
       STRINGS.record.save.error, null, _t.vw.editor.options.toastr
     );

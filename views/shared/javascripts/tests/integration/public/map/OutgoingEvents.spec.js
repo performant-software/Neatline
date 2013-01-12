@@ -60,10 +60,10 @@ describe('Map Outgoing Events', function() {
     _t.hoverOnMapFeature(layer, feature);
     _t.unHoverOnMapFeature(_t.vw.map.layers);
 
-    // Check render intent.
+    // Should render `default` intent.
     expect(feature.renderIntent).toEqual('default');
 
-    // Check publication
+    // Should publish `map:unhighlight`.
     expect(Neatline.vent.trigger).toHaveBeenCalledWith(
       'map:unhighlight', layer.nModel
     );
@@ -81,10 +81,10 @@ describe('Map Outgoing Events', function() {
     // Simulate click on feature.
     _t.clickOnMapFeature(layer, feature);
 
-    // Check render intent.
+    // Should render `select` intent.
     expect(feature.renderIntent).toEqual('select');
 
-    // Check publication.
+    // Should publish `map:select`.
     expect(Neatline.vent.trigger).toHaveBeenCalledWith(
       'map:select', layer.nModel
     );
@@ -106,10 +106,10 @@ describe('Map Outgoing Events', function() {
     // Simulate unhover on feature.
     _t.clickOffMapFeature(_t.vw.map.layers);
 
-    // Check render intent.
+    // Should render `default` intent.
     expect(feature.renderIntent).toEqual('default');
 
-    // Check publication
+    // Should publish `map:unselect`.
     expect(Neatline.vent.trigger).toHaveBeenCalledWith(
       'map:unselect', layer.nModel
     );
@@ -131,14 +131,10 @@ describe('Map Outgoing Events', function() {
     var extent = _t.vw.map.getExtentAsWKT();
     var zoom = _t.vw.map.getZoom();
 
-    // Check publication.
+    // Should publish `map:move`.
     expect(spy.argsForCall[0][0]).toEqual('map:move');
     expect(spy.argsForCall[0][1].extent).toEqual(extent);
     expect(spy.argsForCall[0][1].zoom).toEqual(zoom);
-
-    // Check geometry.
-    expect(_t.vw.map.layers[1].features[0].geometry.x).toEqual(7);
-    expect(_t.vw.map.layers[1].features[0].geometry.y).toEqual(8);
 
   });
 

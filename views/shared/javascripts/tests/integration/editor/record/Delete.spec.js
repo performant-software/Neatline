@@ -42,7 +42,7 @@ describe('Record Form Delete', function() {
     // Click on "Delete".
     els.delete1.trigger('click');
 
-    // Check for overlay and modal.
+    // Modal and overlay should be visible.
     expect($('body')).toContain('div.modal-backdrop.in');
     expect(els.modal).toHaveClass('in');
 
@@ -56,10 +56,13 @@ describe('Record Form Delete', function() {
     // should return to its normal state.
     // --------------------------------------------------------------------
 
+    // Click on "Delete".
     els.delete1.trigger('click');
+
+    // Click on "Cancel".
     els.cancel.trigger('click');
 
-    // Check for closed modal.
+    // Modal should be closed.
     expect(els.modal).not.toHaveClass('in');
 
   });
@@ -79,8 +82,10 @@ describe('Record Form Delete', function() {
     // Capture outoing request.
     var request = _t.getLastRequest();
 
-    // Check method and route.
+    // Method should be DELETE.
     expect(request.method).toEqual('DELETE');
+
+    // URL should be /record/:id.
     expect(request.url).toEqual(__exhibit.api.record+'/'+id);
 
   });
@@ -100,7 +105,7 @@ describe('Record Form Delete', function() {
     els.delete2.trigger('click');
     _t.respondLast200('');
 
-    // Check for `toastr` call.
+    // `toastr` should be called.
     expect(toastr.info).toHaveBeenCalledWith(
       STRINGS.record.delete.success, null, _t.vw.editor.options.toastr
     );
@@ -122,7 +127,7 @@ describe('Record Form Delete', function() {
     els.delete2.trigger('click');
     _t.respondLast500();
 
-    // Check for `toastr` call.
+    // `toastr` should be called.
     expect(toastr.error).toHaveBeenCalledWith(
       STRINGS.record.delete.error, null, _t.vw.editor.options.toastr
     );
@@ -143,12 +148,14 @@ describe('Record Form Delete', function() {
     els.delete2.trigger('click');
     _t.respondLast200('');
 
-    // Check for hidden modal.
+    // Modal should be hidden.
     expect(els.modal).not.toHaveClass('in');
 
-    // Check for closed form.
+    // Form should be closed.
     expect(_t.el.editor).not.toContain(_t.el.record);
     expect(_t.el.editor).toContain(_t.el.records);
+
+    // Records list should be displayed.
     expect(Backbone.history.fragment).toEqual('records');
 
   });
@@ -171,10 +178,10 @@ describe('Record Form Delete', function() {
     els.delete2.trigger('click');
     _t.respondLast200('');
 
-    // Layer removed from map.
+    // Layer should be removed from map.
     expect(_t.vw.map.getLayer(model)).toBeUndefined();
 
-    // Layer removed from `layers` tracker.
+    // Layer should be removed from `layers`.
     expect(_.find(_t.vw.map.layers, function(layer) {
       return layer.nId == id; })).toBeUndefined();
 

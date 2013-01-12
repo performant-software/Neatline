@@ -39,11 +39,11 @@ describe('Record Form Close', function() {
     els.close.trigger('click');
     _t.respondRecords();
 
-    // Check for records list, no form.
+    // Records list should be visible.
     expect(_t.el.editor).not.toContain(_t.el.record);
     expect(_t.el.editor).toContain(_t.el.records);
 
-    // 3 records in browser pane.
+    // 3 records should be listed.
     expect(_t.getRecordRows().length).toEqual(3);
 
   });

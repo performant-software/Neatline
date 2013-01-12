@@ -77,8 +77,10 @@ describe('Record Form Add', function() {
     var request = _t.getLastRequest();
     var params = $.parseJSON(request.requestBody);
 
-    // Check method and route.
+    // Method should be POST.
     expect(request.method).toEqual('POST');
+
+    // URL should be /record.
     expect(request.url).toEqual(__exhibit.api.record);
 
   });
@@ -98,7 +100,7 @@ describe('Record Form Add', function() {
     // Get the id of the new record.
     var id = $.parseJSON(_t.json.record.add).id;
 
-    // Check for updated route.
+    // Route should be updated to records/:id.
     expect(Backbone.history.fragment).toEqual('records/'+id);
 
   });

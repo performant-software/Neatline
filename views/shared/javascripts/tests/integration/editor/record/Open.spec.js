@@ -45,7 +45,7 @@ describe('Record Form Open', function() {
     // Click on record row.
     _t.click($(recordRows[0]));
 
-    // Check for form, no records.
+    // Record form should be displayed.
     expect(_t.el.editor).toContain(_t.el.record);
     expect(_t.el.editor).not.toContain(_t.el.records);
 
@@ -96,7 +96,7 @@ describe('Record Form Open', function() {
     // Open form.
     _t.click($(recordRows[0]));
 
-    // Check for visible "Text."
+    // "Text" tab should be active.
     expect($('#record-form-text')).toHaveClass('active');
 
     // "Spatial" and "Style" should be invisible.
@@ -117,7 +117,7 @@ describe('Record Form Open', function() {
     // Trigger click.
     _t.clickOnMapFeature(_t.vw.map.layers[0], feature1);
 
-    // Check for form.
+    // Record form should be displayed.
     expect(_t.el.editor).toContain(_t.el.record);
     expect(_t.vw.record.model.get('title')).toEqual('title1');
 
@@ -138,14 +138,14 @@ describe('Record Form Open', function() {
     // Trigger click on Record 1 feature.
     _t.clickOnMapFeature(_t.vw.map.layers[0], feature1);
 
-    // Check for form.
+    // Record form should be displayed.
     expect(_t.el.editor).toContain(_t.el.record);
     expect(_t.vw.record.model.get('title')).toEqual('title1');
 
     // Trigger click on Record 2 feature.
     _t.clickOnMapFeature(_t.vw.map.layers[0], feature2);
 
-    // Check for unchanged form.
+    // Form should not display new model.
     expect(_t.vw.record.model.get('title')).toEqual('title1');
 
   });
@@ -169,7 +169,7 @@ describe('Record Form Open', function() {
     var center  = _t.vw.map.map.getCenter();
     var zoom    = _t.vw.map.map.getZoom();
 
-    // Check unchanged focus.
+    // Focus should be unchanged.
     expect(center.lon).toEqual(100);
     expect(center.lat).toEqual(200);
     expect(zoom).toEqual(10);
@@ -197,7 +197,7 @@ describe('Record Form Open', function() {
     var center  = _t.vw.map.map.getCenter();
     var zoom    = _t.vw.map.map.getZoom();
 
-    // Check unchanged focus.
+    // Focus should be unchanged.
     expect(center.lon).toEqual(200);
     expect(center.lat).toEqual(300);
     expect(zoom).toEqual(15);
@@ -226,7 +226,7 @@ describe('Record Form Open', function() {
     _t.respondRecords();
     _t.openRecordForm();
 
-    // Check mode.
+    // "Navigate" mode should be active.
     expect(_t.vw.record.getEditMode()).toEqual('pan');
 
   });

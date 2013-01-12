@@ -38,17 +38,15 @@ describe('Map Incoming Events', function() {
       // Trigger map:focusById with the id.
       Neatline.execute('map:focusById', model.get('id'));
 
-      // Get focus and zoom.
-      var center  = _t.vw.map.map.getCenter();
-      var zoom    = _t.vw.map.map.getZoom();
-
-      // Check focus and zoom.
-      expect(center.lon).toEqual(100);
-      expect(center.lat).toEqual(200);
-      expect(zoom).toEqual(10);
-
-      // No API request for new data.
+      // No request should have been issued.
       expect(_t.server.requests.count).toEqual(requestCount);
+
+      // Map should focus.
+      var c = _t.vw.map.map.getCenter();
+      var z = _t.vw.map.map.getZoom();
+      expect(c.lon).toEqual(100);
+      expect(c.lat).toEqual(200);
+      expect(z).toEqual(10);
 
     });
 
@@ -81,19 +79,17 @@ describe('Map Incoming Events', function() {
       expect(request.method).toEqual('GET');
       expect(request.url).toEqual('/neatline/record/999');
 
-      // Get focus and zoom.
-      var center  = _t.vw.map.map.getCenter();
-      var zoom    = _t.vw.map.map.getZoom();
-
-      // Check for new layer.
+      // New layer should be created for model.
       expect(_t.vw.map.layers.length).toEqual(4);
       expect(_t.vw.map.layers[3].features[0].geometry.x).toEqual(1);
       expect(_t.vw.map.layers[3].features[0].geometry.y).toEqual(2);
 
-      // Check focus and zoom.
-      expect(center.lon).toEqual(100);
-      expect(center.lat).toEqual(200);
-      expect(zoom).toEqual(10);
+      // Map should focus.
+      var c = _t.vw.map.map.getCenter();
+      var z = _t.vw.map.map.getZoom();
+      expect(c.lon).toEqual(100);
+      expect(c.lat).toEqual(200);
+      expect(z).toEqual(10);
 
     });
 
@@ -124,14 +120,12 @@ describe('Map Incoming Events', function() {
       // No API request should have been spawned.
       expect(_t.server.requests.count).toEqual(requestCount);
 
-      // Get focus and zoom.
-      var center  = _t.vw.map.map.getCenter();
-      var zoom    = _t.vw.map.map.getZoom();
-
       // Check focus and zoom.
-      expect(center.lon).toEqual(100);
-      expect(center.lat).toEqual(200);
-      expect(zoom).toEqual(10);
+      var c = _t.vw.map.map.getCenter();
+      var z = _t.vw.map.map.getZoom();
+      expect(c.lon).toEqual(100);
+      expect(c.lat).toEqual(200);
+      expect(z).toEqual(10);
 
     });
 
@@ -160,19 +154,17 @@ describe('Map Incoming Events', function() {
       // No API request for new data.
       expect(_t.server.requests.count).toEqual(requestCount);
 
-      // Get focus and zoom.
-      var center  = _t.vw.map.map.getCenter();
-      var zoom    = _t.vw.map.map.getZoom();
-
-      // Check for new layer.
+      // New layer should be created.
       expect(_t.vw.map.layers.length).toEqual(4);
       expect(_t.vw.map.layers[3].features[0].geometry.x).toEqual(1);
       expect(_t.vw.map.layers[3].features[0].geometry.y).toEqual(2);
 
-      // Check focus and zoom.
-      expect(center.lon).toEqual(100);
-      expect(center.lat).toEqual(200);
-      expect(zoom).toEqual(10);
+      // Map should focus on model.
+      var c = _t.vw.map.map.getCenter();
+      var z = _t.vw.map.map.getZoom();
+      expect(c.lon).toEqual(100);
+      expect(c.lat).toEqual(200);
+      expect(z).toEqual(10);
 
     });
 
