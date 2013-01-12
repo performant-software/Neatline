@@ -177,13 +177,10 @@ Neatline.module('Map', function(
      * Publish the current focus and zoom of the map via `map:move`.
      */
     publishPosition: function() {
-
-      // Trigger out.
       Neatline.vent.trigger('map:move', {
         extent: this.getExtentAsWKT(),
         zoom:   this.getZoom()
       });
-
     },
 
 

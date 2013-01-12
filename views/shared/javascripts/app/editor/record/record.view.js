@@ -56,8 +56,8 @@ Neatline.module('Editor.Record', function(
      */
     initialize: function() {
 
-      this.open   = false;  // True when the form is displayed.
-      this.hash   = null;   // The `href` of the active tab.
+      this.open = false;  // True when the form is displayed.
+      this.hash = null;   // The `href` of the active tab.
 
       this.getTemplate();
       this.getUi();
@@ -76,15 +76,15 @@ Neatline.module('Editor.Record', function(
      */
     show: function(model) {
 
-      this.model  = model;
-      this.open   = true;
-
-      // Activate map editing, bind form data.
-      Neatline.execute('editor:map:startEdit', this.model);
+      // Activate map editing, bind model to form.
+      Neatline.execute('editor:map:startEdit', model);
       rivets.bind(this.$el, { record: model });
 
       this.setBubbleStatus();
       this.resetEditMode();
+
+      this.model = model;
+      this.open  = true;
 
     },
 
@@ -93,12 +93,16 @@ Neatline.module('Editor.Record', function(
      * Close the form.
      */
     close: function() {
-      this.open = false;
+
+      // Deactivate map editing, show record list.
       Neatline.execute('editor:map:endEdit', this.model);
       Neatline.execute('editor:showRecordList');
       Neatline.execute('bubble:activate');
       Neatline.execute('bubble:unselect');
+
       this.model = null;
+      this.open  = false;
+
     },
 
 
