@@ -32,7 +32,7 @@
 <?php echo $this->partial('index/underscore/_record_list.php'); ?>
 <?php echo $this->partial('index/underscore/_record_form.php'); ?>
 <?php echo $this->partial('index/underscore/_search.php'); ?>
-<?php echo $this->partial('index/underscore/_styles.php'); ?>
+<?php echo $this->partial('index/underscore/_styles.php', array(
+  'styles' => $exhibit->styles)); ?>
 <?php echo $this->partial('index/underscore/_menu.php', array(
-  'exhibit' => $exhibit));
-?>
+  'exhibit' => $exhibit)); ?>

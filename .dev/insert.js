@@ -24,7 +24,6 @@ function records(exhibit_id, count, zoom, color) {
       'exhibit_id,'+
       'title,'+
       'body,'+
-      'map_active,'+
       'vector_color,'+
       'stroke_color,'+
       'select_color,'+
@@ -50,7 +49,6 @@ function records(exhibit_id, count, zoom, color) {
       exhibit_id+','+
       '"Record'+n+'",'+
       '"Body'+n+'",'+
-      '1,'+
       '"'+color+'",'+
       '"#000000",'+
       '"'+color+'",'+
