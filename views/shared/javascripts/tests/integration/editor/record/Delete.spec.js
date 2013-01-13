@@ -36,7 +36,8 @@ describe('Record Form Delete', function() {
   it('should show modal when "Delete" is clicked', function() {
 
     // --------------------------------------------------------------------
-    // When "Delete" is clicked, a confirmation modal should be displayed.
+    // When the "Delete" button is clicked, the confirmation modal should
+    // be displayed.
     // --------------------------------------------------------------------
 
     // Click on "Delete".
@@ -52,8 +53,8 @@ describe('Record Form Delete', function() {
   it('should close modal when "Cancel" is clicked', function() {
 
     // --------------------------------------------------------------------
-    // When "Cancel" is clicked, the modal should disappear and the form
-    // should return to its normal state.
+    // When the "Cancel" button is clicked, the modal should disappear and
+    // the form should return to its normal state.
     // --------------------------------------------------------------------
 
     // Click on "Delete".
@@ -94,8 +95,8 @@ describe('Record Form Delete', function() {
   it('should flash notification when the delete succeeds', function() {
 
     // --------------------------------------------------------------------
-    // When "Yes, Delete" is clicked and the request succeeds, a success
-    // notification should be displayed.
+    // When the "Yes, Delete" button is clicked and the request succeeds,
+    // a success notification should be displayed.
     // --------------------------------------------------------------------
 
     // Spy on toaster.
@@ -116,8 +117,8 @@ describe('Record Form Delete', function() {
   it('should flash notification when the delete fails', function() {
 
     // --------------------------------------------------------------------
-    // When "Yes, Delete" is clicked and the request fails, a failure
-    // notification should be displayed.
+    // When the "Yes, Delete" button is clicked and the request fails, a
+    // failure notification should be displayed.
     // --------------------------------------------------------------------
 
     // Spy on toaster.

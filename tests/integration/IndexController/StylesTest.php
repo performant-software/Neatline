@@ -19,7 +19,7 @@ class Neatline_IndexControllerTest_Styles
     /**
      * /editor/styles should save `styles` YAML.
      */
-    public function testEditorStylesPopulation()
+    public function testSave()
     {
 
         $exhibit = $this->__exhibit();
