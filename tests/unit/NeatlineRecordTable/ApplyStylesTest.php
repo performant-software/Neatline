@@ -20,7 +20,7 @@ class Neatline_NeatlineRecordTableTest_ApplyStyles
      * applyStyles() should synchronize the tag-siblings of a record to
      * match the values on the passed record.
      */
-    public function testStylePropagation()
+    public function testApplyStyles()
     {
 
         $exhibit1 = $this->__exhibit('slug-1');
