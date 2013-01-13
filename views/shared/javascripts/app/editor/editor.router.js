@@ -30,17 +30,19 @@ Neatline.module('Editor', { startWithParent: false,
      * Alias components.
      */
     initialize: function() {
-      this.views = {
+      this.vw = {
         editor:   Editor.         __view,
         menu:     Editor.Menu.    __view,
         records:  Editor.Records. __view,
-        record:   Editor.Record.  __view
+        record:   Editor.Record.  __view,
+        styles:   Editor.Styles.  __view
       };
       this.ui = {
         editor:   Editor.         __view.__ui.editor,
         menu:     Editor.Menu.    __view.$el,
         records:  Editor.Records. __view.$el,
-        record:   Editor.Record.  __view.$el
+        record:   Editor.Record.  __view.$el,
+        styles:   Editor.Styles.  __view.$el
       };
     },
 
@@ -56,8 +58,8 @@ Neatline.module('Editor', { startWithParent: false,
      */
     showRecordList: function() {
       Neatline.vent.trigger('editor:router:#records');
-      this.views.menu.showIn(this.ui.editor);
-      this.views.records.showIn(this.ui.editor);
+      this.vw.menu.showIn(this.ui.editor);
+      this.vw.records.showIn(this.ui.editor);
     },
 
 
@@ -69,7 +71,7 @@ Neatline.module('Editor', { startWithParent: false,
     showRecordForm: function(id) {
       id = parseInt(id, 10);
       Neatline.vent.trigger('editor:router:#records/:id', id);
-      this.views.record.showIn(this.ui.editor);
+      this.vw.record.showIn(this.ui.editor);
     },
 
 
@@ -78,7 +80,7 @@ Neatline.module('Editor', { startWithParent: false,
      */
     showNewRecordForm: function() {
       Neatline.vent.trigger('editor:router:#records/add');
-      this.views.record.showIn(this.ui.editor);
+      this.vw.record.showIn(this.ui.editor);
     },
 
 
@@ -87,8 +89,8 @@ Neatline.module('Editor', { startWithParent: false,
      */
     showStyleEditor: function() {
       Neatline.vent.trigger('editor:router:#styles');
-      this.views.menu.showIn(this.ui.editor);
-      // this.views.record.showIn(this.ui.styles);
+      this.vw.menu.showIn(this.ui.editor);
+      this.vw.record.showIn(this.ui.styles);
     }
 
 

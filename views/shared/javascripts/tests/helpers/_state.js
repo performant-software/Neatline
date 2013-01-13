@@ -46,7 +46,7 @@ _t.loadEditor = function() {
   Neatline.Editor.Menu.init();
   Neatline.Editor.Record.init();
   Neatline.Editor.Records.init();
-  Neatline.Editor.Search.init();
+  Neatline.Editor.Styles.init();
   Neatline.Editor.init();
   Neatline.Map.init();
   Neatline.Bubble.init();

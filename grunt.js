@@ -194,8 +194,7 @@ module.exports = function(grunt) {
           config.app+'/editor/record/*.js',
           config.app+'/editor/records/*.js',
           config.app+'/editor/search/*.js',
-          config.app+'/editor/tag/*.js',
-          config.app+'/editor/tags/*.js'
+          config.app+'/editor/styles/*.js'
 
         ],
         dest: config.payloads.app.js+'/editor.js',

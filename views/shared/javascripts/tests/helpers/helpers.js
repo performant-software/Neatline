@@ -61,7 +61,7 @@ _t.loadEditor = function() {
   Neatline.Editor.Menu.init();
   Neatline.Editor.Record.init();
   Neatline.Editor.Records.init();
-  Neatline.Editor.Search.init();
+  Neatline.Editor.Styles.init();
   Neatline.Editor.init();
   Neatline.Map.init();
   Neatline.Bubble.init();
@@ -228,8 +228,7 @@ _t.aliasEditor = function() {
     menu:     Neatline.Editor.Menu.     __view,
     mapedit:  Neatline.Editor.Map.      __view,
     records:  Neatline.Editor.Records.  __view,
-    record:   Neatline.Editor.Record.   __view,
-    search:   Neatline.Editor.Search.   __view
+    record:   Neatline.Editor.Record.   __view
   };
 
   this.el = {
@@ -238,8 +237,7 @@ _t.aliasEditor = function() {
     editor:   Neatline.Editor.          __view.__ui.editor,
     menu:     Neatline.Editor.Menu.     __view.$el,
     records:  Neatline.Editor.Records.  __view.$el,
-    record:   Neatline.Editor.Record.   __view.$el,
-    search:   Neatline.Editor.Search.   __view.$el
+    record:   Neatline.Editor.Record.   __view.$el
   };
 
 };
