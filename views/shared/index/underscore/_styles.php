@@ -17,7 +17,7 @@
 
   <div class="control-group">
     <div class="controls">
-      <textarea name="styles" rows="26"></textarea>
+      <textarea id="styles" rows="26"></textarea>
     </div>
   </div>
 

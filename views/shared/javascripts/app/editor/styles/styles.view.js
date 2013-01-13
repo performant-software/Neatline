@@ -27,6 +27,15 @@ Neatline.module('Editor.Styles', function(
      */
     initialize: function() {
       this.getTemplate();
+      this.editor = CodeMirror.fromTextArea(this.$('#styles')[0]);
+    },
+
+
+    /**
+     * Refresh the editor.
+     */
+    refresh: function() {
+      this.editor.refresh();
     }
 
 

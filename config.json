@@ -40,7 +40,7 @@
       "bootstrap":        "./views/shared/javascripts/components/bootstrap/bootstrap/js/bootstrap.js",
       "rivets":           "./views/shared/javascripts/components/rivets/lib/rivets.js",
       "codemirror":       "./views/shared/javascripts/components/codemirror/lib/codemirror.js",
-      "codemirror_yaml":  "./views/shared/javascripts/components/codemirror/lib/codemirror.js"
+      "codemirror_yaml":  "./views/shared/javascripts/components/codemirror/mode/yaml/yaml.js"
     },
     "css": {
       "openlayers":       "./views/shared/javascripts/components/openlayers/theme/default/style.css",

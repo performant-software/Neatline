@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Bootstrap overrides.
+ * Style editor styles.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -14,21 +14,12 @@
 @import 'var'
 
 
-textarea
-input[type="text"]
-  box-shadow none
-  border-radius 0
-  border-color borderColor
+#editor
 
-  &:focus
-    box-shadow none
-    border-color borderColor
+  form.styles
 
-.nav-pills > li > a
-  border-radius 3px
-
-.modal-backdrop
-  opacity 0.3
-
-.tab-content
-  overflow hidden
+    .CodeMirror
+      background-color white
+      border 1px solid borderColor
+      height 500px !important
+      margin-bottom 2em

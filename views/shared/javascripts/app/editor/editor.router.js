@@ -18,11 +18,11 @@ Neatline.module('Editor', { startWithParent: false,
 
 
     routes: {
-      '':                 'showRecordList',
-      'records':          'showRecordList',
-      'records/add':      'showNewRecordForm',
-      'records/:id':      'showRecordForm',
-      'styles':           'showStyleEditor'
+      '':                 'records',
+      'records':          'records',
+      'records/add':      'records/add',
+      'records/:id':      'records/:id',
+      'styles':           'styles'
     },
 
 
@@ -30,36 +30,41 @@ Neatline.module('Editor', { startWithParent: false,
      * Alias components.
      */
     initialize: function() {
-      this.vw = {
-        editor:   Editor.         __view,
+
+      this.editor = Editor.__view.__ui.editor;
+
+      this.views = {
         menu:     Editor.Menu.    __view,
         records:  Editor.Records. __view,
         record:   Editor.Record.  __view,
         styles:   Editor.Styles.  __view
       };
-      this.ui = {
-        editor:   Editor.         __view.__ui.editor,
-        menu:     Editor.Menu.    __view.$el,
-        records:  Editor.Records. __view.$el,
-        record:   Editor.Record.  __view.$el,
-        styles:   Editor.Styles.  __view.$el
-      };
+
     },
 
 
     before: function() {
       Neatline.vent.trigger('editor:router:before');
-      this.ui.editor.empty();
+      this.editor.empty();
     },
 
 
     /**
      * Show the list of records.
      */
-    showRecordList: function() {
+    records: function() {
+      this.views.menu.showIn(this.editor);
+      this.views.records.showIn(this.editor);
       Neatline.vent.trigger('editor:router:#records');
-      this.vw.menu.showIn(this.ui.editor);
-      this.vw.records.showIn(this.ui.editor);
+    },
+
+
+    /**
+     * Show add record form.
+     */
+    'records/add': function() {
+      this.views.record.showIn(this.editor);
+      Neatline.vent.trigger('editor:router:#records/add');
     },
 
 
@@ -68,29 +73,20 @@ Neatline.module('Editor', { startWithParent: false,
      *
      * @param {String} id: The record id.
      */
-    showRecordForm: function(id) {
+    'records/:id': function(id) {
       id = parseInt(id, 10);
+      this.views.record.showIn(this.editor);
       Neatline.vent.trigger('editor:router:#records/:id', id);
-      this.vw.record.showIn(this.ui.editor);
-    },
-
-
-    /**
-     * Show add record form.
-     */
-    showNewRecordForm: function() {
-      Neatline.vent.trigger('editor:router:#records/add');
-      this.vw.record.showIn(this.ui.editor);
     },
 
 
     /**
      * Show the style editor.
      */
-    showStyleEditor: function() {
+    styles: function() {
+      this.views.menu.showIn(this.editor);
+      this.views.styles.showIn(this.editor);
       Neatline.vent.trigger('editor:router:#styles');
-      this.vw.menu.showIn(this.ui.editor);
-      this.vw.styles.showIn(this.ui.editor);
     }
 
 
