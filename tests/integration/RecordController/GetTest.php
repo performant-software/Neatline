@@ -35,8 +35,9 @@ class Neatline_RecordControllerTest_Get
         $this->assertObjectHasAttribute('item_id',  $response);
         $this->assertObjectHasAttribute('title',    $response);
         $this->assertObjectHasAttribute('body',     $response);
-        $this->assertObjectHasAttribute('slug',     $response);
         $this->assertObjectHasAttribute('coverage', $response);
+        $this->assertObjectHasAttribute('tags',     $response);
+        $this->assertObjectHasAttribute('slug',     $response);
 
         // Should emit styles.
         foreach (neatline_getStyleCols() as $s) {

@@ -16,6 +16,13 @@
 
 <?php echo $this->partial(
   'index/underscore/helpers/_text_input.php', array(
+    'name'  => 'tags',
+    'label' => 'Tags',
+    'bind'  => 'record.tags'
+)); ?>
+
+<?php echo $this->partial(
+  'index/underscore/helpers/_text_input.php', array(
     'name'  => 'vector-color',
     'label' => 'Shape Color',
     'bind'  => 'record.vector_color'

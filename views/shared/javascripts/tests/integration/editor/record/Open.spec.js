@@ -68,6 +68,7 @@ describe('Record Form Open', function() {
     expect(inputs.title).           toHaveValue('title1');
     expect(inputs.body).            toHaveValue('body1');
     expect(inputs.coverage).        toHaveValue('POINT(1 2)');
+    expect(inputs.tags).            toHaveValue('tags1');
     expect(inputs.vectorColor).     toHaveValue('1');
     expect(inputs.strokeColor).     toHaveValue('4');
     expect(inputs.selectColor).     toHaveValue('7');

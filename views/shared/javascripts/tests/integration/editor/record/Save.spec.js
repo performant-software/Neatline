@@ -43,6 +43,7 @@ describe('Record Form Save', function() {
     inputs.title.           val('title2').      trigger('change');
     inputs.body.            val('body2').       trigger('change');
     inputs.coverage.        val('POINT(3 4)').  trigger('change');
+    inputs.tags.            val('tags2').       trigger('change');
     inputs.vectorColor.     val('#222222').     trigger('change');
     inputs.strokeColor.     val('#555555').     trigger('change');
     inputs.selectColor.     val('#888888').     trigger('change');
@@ -75,6 +76,7 @@ describe('Record Form Save', function() {
     expect(params.title).           toEqual('title2');
     expect(params.body).            toEqual('body2');
     expect(params.coverage).        toEqual('POINT(3 4)');
+    expect(params.tags).            toEqual('tags2');
     expect(params.vector_color).    toEqual('#222222');
     expect(params.stroke_color).    toEqual('#555555');
     expect(params.select_color).    toEqual('#888888');
