@@ -144,10 +144,10 @@ class NeatlineRecordTable extends Omeka_Db_Table
      * @param integer $zoom The zoom level.
      * @return Omeka_Db_Select The filtered select.
      */
-    protected function _filterByZoom($select, $zoom)
+    public function _filterByZoom($select, $zoom)
     {
-        $select->where('min_zoom IS NULL OR min_zoom<=?', $zoom);
-        $select->where('max_zoom IS NULL OR max_zoom>=?', $zoom);
+        $select->where("min_zoom IS NULL OR min_zoom<=?", $zoom);
+        $select->where("max_zoom IS NULL OR max_zoom>=?", $zoom);
         return $select;
     }
 
@@ -159,21 +159,36 @@ class NeatlineRecordTable extends Omeka_Db_Table
      * @param string $extent The extent, as a WKT polygon.
      * @return Omeka_Db_Select The filtered select.
      */
-    protected function _filterByExtent($select, $extent)
+    public function _filterByExtent($select, $extent)
     {
 
         // Query for viewport intersection.
-        $select->where(new Zend_Db_Expr('MBRIntersects(
-            coverage, GeomFromText("'.$extent.'")
-        )'));
+        $select->where(new Zend_Db_Expr("MBRIntersects(
+            coverage, GeomFromText('$extent')
+        )"));
 
         // Omit records at POINT(0 0).
         $select->where(new Zend_Db_Expr(
-            'AsText(coverage) != "POINT(0 0)"'
+            "AsText(coverage) != 'POINT(0 0)'"
         ));
 
         return $select;
 
+    }
+
+
+    /**
+     * Filter by tag.
+     *
+     * @param Omeka_Db_Select $select The starting select.
+     * @param string $tag The tag.
+     * @return Omeka_Db_Select The filtered select.
+     */
+    public function _filterByTag($select, $tag)
+    {
+        return $select->where(new Zend_Db_Expr(
+            "tags REGEXP '[[:<:]]".$tag."[[:>:]]'"
+        ));
     }
 
 

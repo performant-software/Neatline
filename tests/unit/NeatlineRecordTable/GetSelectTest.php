@@ -17,10 +17,8 @@ class Neatline_NeatlineRecordTableTest_GetSelect
 
 
     /**
-     * --------------------------------------------------------------------
      * getSelect() should select the plain-text value of `coverage` when
      * the field is defined.
-     * --------------------------------------------------------------------
      */
     public function testDefinedCoverage()
     {
@@ -41,10 +39,8 @@ class Neatline_NeatlineRecordTableTest_GetSelect
 
 
     /**
-     * --------------------------------------------------------------------
      * getSelect() should select NULL for `coverage` when the plain-text
      * value of the field is `POINT(0 0)`.
-     * --------------------------------------------------------------------
      */
     public function testPoint00Coverage()
     {
