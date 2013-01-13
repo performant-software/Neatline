@@ -17,7 +17,7 @@
 
   <div class="control-group">
     <div class="controls">
-      <textarea id="styles"rows="26"><?php echo $styles; ?></textarea>
+      <textarea id="styles" rows="26"><?php echo $styles; ?></textarea>
     </div>
   </div>
 
