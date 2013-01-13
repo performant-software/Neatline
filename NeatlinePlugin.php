@@ -76,6 +76,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
             `slug`              VARCHAR(100) NOT NULL,
             `public`            TINYINT(1) NOT NULL,
             `query`             TEXT NULL,
+            `styles`            TEXT NULL,
             `map_focus`         VARCHAR(100) NULL,
             `map_zoom`          INT(10) UNSIGNED NULL,
 

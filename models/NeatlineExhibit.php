@@ -23,6 +23,7 @@ class NeatlineExhibit extends Omeka_Record_AbstractRecord
     public $slug;           // VARCHAR(100) NOT NULL
     public $public = 0;     // TINYINT(1) NOT NULL
     public $query;          // TEXT NULL
+    public $styles;         // TEXT NULL
     public $map_focus;      // VARCHAR(100) NULL
     public $map_zoom;       // INT(10) UNSIGNED NULL
 

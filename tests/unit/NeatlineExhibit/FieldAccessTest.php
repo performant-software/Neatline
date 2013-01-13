@@ -29,8 +29,9 @@ class Neatline_NeatlineExhibitTest_FieldAccess
         $exhibit->slug          = '5';
         $exhibit->public        = 6;
         $exhibit->query         = '7';
-        $exhibit->map_focus     = '8';
-        $exhibit->map_zoom      = 9;
+        $exhibit->styles        = '8';
+        $exhibit->map_focus     = '9';
+        $exhibit->map_zoom      = 10;
         $exhibit->save();
 
         $exhibit = $this->_exhibitsTable->find($exhibit->id);
@@ -40,8 +41,9 @@ class Neatline_NeatlineExhibitTest_FieldAccess
         $this->assertEquals($exhibit->slug,         '5');
         $this->assertEquals($exhibit->public,       6);
         $this->assertEquals($exhibit->query,        '7');
-        $this->assertEquals($exhibit->map_focus,    '8');
-        $this->assertEquals($exhibit->map_zoom,     9);
+        $this->assertEquals($exhibit->styles,       '8');
+        $this->assertEquals($exhibit->map_focus,    '9');
+        $this->assertEquals($exhibit->map_zoom,     10);
 
     }
 

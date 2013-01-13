@@ -13,7 +13,7 @@
 describe('Bubble Show/Hide', function() {
 
 
-  var layer1, layer2, feature1, feature2;
+  var layer1, layer2, feature1, feature2, els;
 
 
   beforeEach(function() {
@@ -25,6 +25,10 @@ describe('Bubble Show/Hide', function() {
 
     feature1 = layer1.features[0];
     feature2 = layer2.features[0];
+
+    els = {
+      title: _t.vw.bubble.$('.title')
+    };
 
   });
 
@@ -42,7 +46,7 @@ describe('Bubble Show/Hide', function() {
     expect(_t.el.bubble).toBeVisible();
 
     // Title should be rendered.
-    expect(_t.vw.bubble.__ui.title.text()).toEqual('title1');
+    expect(els.title.text()).toEqual('title1');
 
   });
 
@@ -128,8 +132,8 @@ describe('Bubble Show/Hide', function() {
     // Hover on a different feature.
     _t.hoverOnMapFeature(layer1, feature2);
 
-    // Check for unchanged bubble values.
-    expect(_t.vw.bubble.__ui.title.text()).toEqual('title1');
+    // Bubble values should be unchanged.
+    expect(els.title.text()).toEqual('title1');
 
     // Move the cursor.
     $(window).trigger($.Event('mousemove', {
@@ -163,8 +167,8 @@ describe('Bubble Show/Hide', function() {
     // Capture current bubble offset.
     var offset = _t.el.bubble.offset();
 
-    // Check for changed bubble values.
-    expect(_t.vw.bubble.__ui.title.text()).toEqual('title2');
+    // Bubble values should be changed.
+    expect(els.title.text()).toEqual('title2');
 
     // Move the cursor.
     $(window).trigger($.Event('mousemove', {

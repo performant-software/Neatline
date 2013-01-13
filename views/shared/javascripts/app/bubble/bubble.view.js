@@ -27,11 +27,6 @@ Neatline.module('Bubble', function(
       }
     },
 
-    ui: {
-      title:  '.title',
-      body:   '.body'
-    },
-
 
     /**
      * Initialize trackers, get markup.
