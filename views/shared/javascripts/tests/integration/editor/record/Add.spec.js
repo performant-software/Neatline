@@ -21,7 +21,7 @@ describe('Record Form Add', function() {
     _t.loadEditor();
 
     els = {
-      add:    _t.vw.menu.$('a[href="#records/add"]'),
+      add:    _t.vw.records.$('a[href="#records/add"]'),
       save:   _t.vw.record.$('a[name="save"]'),
       lead:   _t.vw.record.$('p.lead')
     };

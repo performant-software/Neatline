@@ -16,6 +16,21 @@
 <script id="menu-template" type="text/templates">
 
   <p class="lead"><?php echo $exhibit->title; ?></p>
-  <a class="btn btn-large btn-primary" href="#records/add">New Record</a>
+
+  <ul class="nav nav-pills">
+
+    <li class="records">
+      <a href="#records">
+        <i class="icon-file"></i> Records
+      </a>
+    </li>
+
+    <li class="styles">
+      <a href="#styles">
+        <i class="icon-tags"></i> Styles
+      </a>
+    </li>
+
+  </ul>
 
 </script>

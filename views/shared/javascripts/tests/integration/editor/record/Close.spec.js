@@ -43,9 +43,6 @@ describe('Record Form Close', function() {
     expect(_t.el.editor).not.toContain(_t.el.record);
     expect(_t.el.editor).toContain(_t.el.records);
 
-    // 3 records should be listed.
-    expect(_t.getRecordRows().length).toEqual(3);
-
   });
 
 

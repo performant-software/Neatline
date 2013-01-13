@@ -28,8 +28,11 @@ describe('Router', function() {
 
     // Menu, search, records should be visible.
     expect(_t.el.editor).toContain(_t.el.menu);
-    expect(_t.el.editor).toContain(_t.el.search);
+    // expect(_t.el.editor).toContain(_t.el.search);
     expect(_t.el.editor).toContain(_t.el.records);
+
+    // "Records" tab should be active.
+    expect(_t.vw.menu.__ui.tabs.records).toHaveClass('active');
 
   });
 
@@ -58,6 +61,23 @@ describe('Router', function() {
 
     // Record form should be visible.
     expect(_t.el.editor).toContain(_t.el.record);
+
+  });
+
+
+  it('#styles', function() {
+
+    // --------------------------------------------------------------------
+    // #styles should display the style editor.
+    // --------------------------------------------------------------------
+
+    _t.navigate('styles');
+
+    // Style editor should be visible.
+    // expect(_t.el.editor).toContain(_t.el.styles);
+
+    // "Styles" tab should be active.
+    expect(_t.vw.menu.__ui.tabs.styles).toHaveClass('active');
 
   });
 

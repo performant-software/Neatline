@@ -43,7 +43,7 @@ describe('Record Form Open', function() {
     // --------------------------------------------------------------------
 
     // Click on record row.
-    _t.click($(recordRows[0]));
+    _t.click($(recordRows[1]));
 
     // Record form should be displayed.
     expect(_t.el.editor).toContain(_t.el.record);
@@ -60,7 +60,7 @@ describe('Record Form Open', function() {
     // --------------------------------------------------------------------
 
     // Open form, get elements.
-    _t.click($(recordRows[0]));
+    _t.click($(recordRows[1]));
     var favicon = 'https://www.google.com/favicon.ico';
     var inputs = _t.getRecordFormElements();
 
@@ -94,7 +94,7 @@ describe('Record Form Open', function() {
     // --------------------------------------------------------------------
 
     // Open form.
-    _t.click($(recordRows[0]));
+    _t.click($(recordRows[1]));
 
     // "Text" tab should be active.
     expect($('#record-form-text')).toHaveClass('active');
@@ -163,7 +163,7 @@ describe('Record Form Open', function() {
     _t.setMapCenter(200, 300, 15);
 
     // Open form.
-    _t.click($(recordRows[0]));
+    _t.click($(recordRows[1]));
 
     // Get focus and zoom.
     var center  = _t.vw.map.map.getCenter();
@@ -214,7 +214,7 @@ describe('Record Form Open', function() {
     // --------------------------------------------------------------------
 
     // Show form, check mode.
-    _t.click($(recordRows[0]));
+    _t.click($(recordRows[1]));
     expect(_t.vw.record.getEditMode()).toEqual('pan');
 
     // Activate "Polygon" control, check mode.

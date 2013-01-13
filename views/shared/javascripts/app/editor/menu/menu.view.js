@@ -20,6 +20,14 @@ Neatline.module('Editor.Menu', function(
     template: '#menu-template',
     tagName: 'header',
 
+    ui: {
+      tabs: {
+        all:      'ul.nav li',
+        records:  'li.records',
+        styles:   'li.styles'
+      }
+    },
+
 
     /**
      * Render template, get ui.
@@ -27,6 +35,17 @@ Neatline.module('Editor.Menu', function(
     initialize: function() {
       this.getTemplate();
       this.getUi();
+    },
+
+
+    /**
+     * Activate a tab.
+     *
+     * @param {String} tab: The tab name.
+     */
+    activateTab: function(tab) {
+      this.__ui.tabs.all.removeClass('active');
+      this.__ui.tabs[tab].addClass('active');
     }
 
 

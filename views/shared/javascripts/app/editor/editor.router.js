@@ -21,7 +21,8 @@ Neatline.module('Editor', { startWithParent: false,
       '':                 'showRecordList',
       'records':          'showRecordList',
       'records/add':      'showNewRecordForm',
-      'records/:id':      'showRecordForm'
+      'records/:id':      'showRecordForm',
+      'styles':           'showStyleEditor'
     },
 
 
@@ -32,14 +33,12 @@ Neatline.module('Editor', { startWithParent: false,
       this.views = {
         editor:   Editor.         __view,
         menu:     Editor.Menu.    __view,
-        search:   Editor.Search.  __view,
         records:  Editor.Records. __view,
         record:   Editor.Record.  __view
       };
       this.ui = {
         editor:   Editor.         __view.__ui.editor,
         menu:     Editor.Menu.    __view.$el,
-        search:   Editor.Search.  __view.$el,
         records:  Editor.Records. __view.$el,
         record:   Editor.Record.  __view.$el
       };
@@ -57,9 +56,8 @@ Neatline.module('Editor', { startWithParent: false,
      */
     showRecordList: function() {
       Neatline.vent.trigger('editor:router:#records');
-      this.views.menu.    showIn(this.ui.editor);
-      this.views.search.  showIn(this.ui.editor);
-      this.views.records. showIn(this.ui.editor);
+      this.views.menu.showIn(this.ui.editor);
+      this.views.records.showIn(this.ui.editor);
     },
 
 
@@ -81,6 +79,16 @@ Neatline.module('Editor', { startWithParent: false,
     showNewRecordForm: function() {
       Neatline.vent.trigger('editor:router:#records/add');
       this.views.record.showIn(this.ui.editor);
+    },
+
+
+    /**
+     * Show the style editor.
+     */
+    showStyleEditor: function() {
+      Neatline.vent.trigger('editor:router:#styles');
+      this.views.menu.showIn(this.ui.editor);
+      // this.views.record.showIn(this.ui.styles);
     }
 
 
