@@ -16,6 +16,46 @@ class NeatlineRecordTable extends Omeka_Db_Table
 
 
     /**
+     * Update records in an exhibit according to the value-defined style
+     * definitions in the `styles` YAML. For example, if `styles` is:
+     *
+     * tag:
+     *  - vector_color: #ffffff
+     *  - stroke_color
+     *
+     *  The vector color on records tagged with `tag` will be updated to
+     *  #ffffff, but the stroke color will be unchanged since no explicit
+     *  value is set in the YAML.
+     *
+     * @param NeatlineExhibit The exhibit to update.
+     */
+    public function applyStyles($exhibit)
+    {
+
+    }
+
+
+    /**
+     * Synchronize the tag-siblings of a record to match the values on the
+     * passed record. For example, if `styles` on the exhibit it:
+     *
+     * tag:
+     *  - vector_color: #ffffff
+     *  - stroke_color
+     *
+     *  The stroke color on records tagged with `tag` will be updated to
+     *  the value on the passed record, but vector color will be unchanged
+     *  since an explicit value is set in the YAML.
+     *
+     * @param NeatlineRecord The record to propagate.
+     */
+    public function syncStyles($record)
+    {
+
+    }
+
+
+    /**
      * Select `coverage` as plain-text.
      *
      * @return Omeka_Db_Select The modified select.
