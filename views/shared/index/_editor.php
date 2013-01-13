@@ -22,11 +22,6 @@
   'exhibit' => $exhibit
 )); ?>
 
-<!-- JSON globals. -->
-<script type="text/javascript">
-  __editor = <?php echo neatline_editorGlobals($exhibit); ?>
-</script>
-
 <!-- Templates. -->
 <?php echo $this->partial('index/_strings.php'); ?>
 <?php echo $this->partial('index/underscore/_record_list.php'); ?>

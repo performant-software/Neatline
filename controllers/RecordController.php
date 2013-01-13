@@ -20,7 +20,7 @@ class Neatline_RecordController extends Neatline_RestController
      */
     public function init()
     {
-        $this->__table = $this->_helper->db->getTable('NeatlineRecord');
+        $this->_table = $this->_helper->db->getTable('NeatlineRecord');
         parent::init();
     }
 
@@ -30,7 +30,7 @@ class Neatline_RecordController extends Neatline_RestController
      */
     public function getAction()
     {
-        echo Zend_Json::encode($this->__table->queryRecord(
+        echo Zend_Json::encode($this->_table->queryRecord(
             $this->_request->id
         ));
     }
@@ -60,7 +60,7 @@ class Neatline_RecordController extends Neatline_RestController
     {
 
         // Find the record.
-        $record = $this->__table->find($this->_request->id);
+        $record = $this->_table->find($this->_request->id);
 
         // Decode and save PUT body.
         $record->saveForm(Zend_Json::decode(file_get_contents(
@@ -75,7 +75,7 @@ class Neatline_RecordController extends Neatline_RestController
      */
     public function deleteAction()
     {
-        $record = $this->__table->find($this->_request->id);
+        $record = $this->_table->find($this->_request->id);
         $record->delete();
     }
 

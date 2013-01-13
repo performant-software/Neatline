@@ -26,6 +26,7 @@ class Neatline_NeatlineRecordTableTest_ApplyStyles
         $exhibit1 = $this->__exhibit('slug-1');
         $exhibit2 = $this->__exhibit('slug-2');
         $exhibit2->styles = <<<EOD
+
 tag1:
  - vector_color: '1'
  - vector_opacity: 2
@@ -35,7 +36,9 @@ tag2:
  - stroke_color: '3'
  - stroke_opacity: 4
  - stroke_width
+
 EOD;
+
         $exhibit2->save();
 
         // `tag1` record.

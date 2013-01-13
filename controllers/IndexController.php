@@ -22,6 +22,7 @@ class Neatline_IndexController
     public function init()
     {
         $this->_helper->db->setDefaultModelName('NeatlineExhibit');
+        $this->_table = $this->_helper->db->getTable('NeatlineExhibit');
         $this->_browseRecordsPerPage = get_option('per_page_admin');
     }
 
@@ -72,37 +73,23 @@ class Neatline_IndexController
 
 
     /**
-     * Edit items query.
-     */
-    public function queryAction()
-    {
-
-        $exhibit = $this->_helper->db->findById();
-
-        // Save the query.
-        if(isset($_GET['search'])) {
-            $exhibit->query = serialize($_GET);
-            $exhibit->save();
-            $this->_helper->redirector('browse');
-        } else {
-            $queryArray = unserialize($exhibit->query);
-            $_GET = $queryArray;
-            $_REQUEST = $queryArray;
-        }
-
-        $this->view->neatline_exhibit = $exhibit;
-
-    }
-
-
-    /**
      * Edit exhibit.
      */
     public function editorAction()
     {
-        $id = $this->_request->getParam('id');
-        $exhibits = $this->_helper->db->getTable('NeatlineExhibit');
-        $this->view->exhibit = $exhibits->find($id);
+        $this->view->exhibit = $this->_helper->db->findById();
+    }
+
+
+    /**
+     * Save exhibit styles.
+     */
+    public function stylesAction()
+    {
+        $this->_helper->viewRenderer->setNoRender(true);
+        $exhibit = $this->_helper->db->findById();
+        $exhibit->styles = $this->_request->getRawBody();
+        $exhibit->save();
     }
 
 
@@ -111,7 +98,7 @@ class Neatline_IndexController
      */
     public function showAction()
     {
-        $exhibit = $this->_findExhibit();
+        $exhibit = $this->_table->findBySlug($this->_request->slug);
         $this->view->neatline_exhibit = $exhibit;
     }
 
@@ -164,28 +151,6 @@ class Neatline_IndexController
         return new Neatline_Form_NeatlineDetails(array(
             'neatline' => $exhibit
         ));
-    }
-
-
-    /**
-     * Get the exihbit associated with the current request.
-     *
-     * @return NeatlineExhibit
-     */
-    private function _findExhibit()
-    {
-
-        // Get the exhibit.
-        $exhibits = $this->_helper->db->getTable('NeatlineExhibit');
-        $exhibit = $exhibits->findBySlug($this->_request->slug);
-
-        // Catch invalid slug.
-        if (!$exhibit) { throw new Omeka_Controller_Exception_404(
-            get_class($this) . ": No record with Slug '$slug' exists"
-        );}
-
-        return $exhibit;
-
     }
 
 

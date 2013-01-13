@@ -29,18 +29,10 @@
         error: '<?php echo __('There was an error; a new record was not created.'); ?>'
       }
     },
-    tag: {
+    styles: {
       save: {
-        success: '<?php echo __('The tag was saved successfully!'); ?>',
-        error: '<?php echo __('There was an error; the tag was not saved.'); ?>'
-      },
-      delete: {
-        success: '<?php echo __('The tag was deleted successfully!'); ?>',
-        error: '<?php echo __('There was an error; the tag was not deleted.'); ?>'
-      },
-      add: {
-        success: '<?php echo __('New tag created successfully!'); ?>',
-        error: '<?php echo __('There was an error; a new tag was not created.'); ?>'
+        success: '<?php echo __('The styles were saved successfully!'); ?>',
+        error: '<?php echo __('There was an error; the styles were not saved.'); ?>'
       }
     },
     placeholders: {

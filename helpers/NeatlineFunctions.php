@@ -69,23 +69,6 @@ function neatline_exhibitGlobals($exhibit)
 
 
 /**
- * Construct editor globals.
- *
- * @param NeatlineExhibit $exhibit The exhibit.
- * @return string JSON editor defaults.
- */
-function neatline_editorGlobals($exhibit)
-{
-    return json_encode(array(
-        'api'   => array(
-            'tags'  => public_url('neatline/tags/'.$exhibit->id),
-            'tag'   => public_url('neatline/tag')
-        )
-    ));
-}
-
-
-/**
  * Gather all taggable styles exposed via the `neatline_links` filter.
  *
  * @return array The array of column name => label.
