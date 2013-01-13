@@ -47,7 +47,7 @@ class Neatline_FixturesController
         $exhibit->slug = 'slug';
         $exhibit->save();
 
-        echo $this->view->partial('index/_editor.php', array(
+        echo $this->view->partial('editor/_editor.php', array(
             'exhibit' => $exhibit
         ));
 

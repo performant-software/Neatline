@@ -19,7 +19,7 @@
 
   <!-- Close button. -->
   <?php echo $this->partial(
-    'index/underscore/partials/_close_button.php'
+    'editor/underscore/partials/_close_button.php'
   ); ?>
 
   <p class="lead" data-text="record.title | title"></p>
@@ -46,26 +46,26 @@
 
     <div class="tab-pane text" id="record-form-text">
       <?php echo $this->partial(
-        'index/underscore/partials/_text_tab.php'
+        'editor/underscore/partials/_text_tab.php'
       ); ?>
     </div>
 
     <div class="tab-pane spatial" id="record-form-spatial">
       <?php echo $this->partial(
-        'index/underscore/partials/_spatial_tab.php'
+        'editor/underscore/partials/_spatial_tab.php'
       ); ?>
     </div>
 
     <div class="tab-pane style" id="record-form-style">
       <?php echo $this->partial(
-        'index/underscore/partials/_style_tab.php'
+        'editor/underscore/partials/_style_tab.php'
       ); ?>
     </div>
 
   </div>
 
   <?php echo $this->partial(
-    'index/underscore/partials/_form_actions.php', array('warning' =>
+    'editor/underscore/partials/_form_actions.php', array('warning' =>
       "This will delete the record from the database and remove all
       associated metadata. This action cannot be undone."
     )

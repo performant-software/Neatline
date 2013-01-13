@@ -14,15 +14,15 @@
 ?>
 
 <!-- Header. -->
-<?php echo $this->partial('index/_editor_header.php', array(
+<?php echo $this->partial('editor/_editor_header.php', array(
   'exhibit' => $exhibit,
   'title' => __('Neatline Editor: %s', $exhibit->title)
 )); ?>
 
 <!-- Editor partial. -->
-<?php echo $this->partial('index/_editor.php', array(
+<?php echo $this->partial('editor/_editor.php', array(
   'exhibit' => $exhibit
 )); ?>
 
 <!-- Footer. -->
-<?php echo $this->partial('index/_editor_footer.php'); ?>
+<?php echo $this->partial('editor/_editor_footer.php'); ?>

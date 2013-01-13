@@ -17,14 +17,14 @@
 <div class="control-group">
 
   <?php echo $this->partial(
-    'index/underscore/helpers/_textarea.php', array(
+    'editor/underscore/helpers/_textarea.php', array(
       'name'  => 'title',
       'label' => 'Title',
       'bind'  => 'record.title'
   )); ?>
 
   <?php echo $this->partial(
-    'index/underscore/helpers/_textarea.php', array(
+    'editor/underscore/helpers/_textarea.php', array(
       'name'  => 'body',
       'label' => 'Body',
       'bind'  => 'record.body'
