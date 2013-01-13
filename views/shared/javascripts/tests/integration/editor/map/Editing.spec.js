@@ -103,7 +103,7 @@ describe('Map Editing', function() {
 
     // --------------------------------------------------------------------
     // When a record is being edited, the edit layer should not be removed
-    // if new data is ingested that does not include the record.
+    // when new data is ingested that does not include the record.
     // --------------------------------------------------------------------
 
     // Open form for record 2.
@@ -122,7 +122,7 @@ describe('Map Editing', function() {
 
     // --------------------------------------------------------------------
     // When a new record is created, the edit layer should not be removed
-    // if new data is ingested that does not include the record.
+    // when new data is ingested that does not include the record.
     // --------------------------------------------------------------------
 
     // Add new record.

@@ -54,4 +54,15 @@ Neatline.module('Editor.Record', function(
   Neatline.commands.addHandler('editor:record:setCoverage', setCoverage);
 
 
+  /**
+   * Close the form.
+   */
+  var close = function() {
+    if (Record.__view.open) Record.__view.close();
+  };
+
+  Neatline.commands.addHandler('editor:record:close', close);
+  Neatline.vent.on('editor:router:before', close);
+
+
 });

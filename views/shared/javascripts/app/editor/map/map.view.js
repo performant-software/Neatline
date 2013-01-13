@@ -55,39 +55,63 @@ _.extend(Neatline.Map.View.prototype, {
 
     this.controls = {
 
-      point: new OpenLayers.Control.DrawFeature(this.editLayer,
-        OpenLayers.Handler.Point, {
+      // Draw Point.
+      point: new OpenLayers.Control.DrawFeature(
+        this.editLayer,
+        OpenLayers.Handler.Point,
+        {
           featureAdded: _.bind(this.publish, this)
-      }),
+        }
+      ),
 
-      line: new OpenLayers.Control.DrawFeature(this.editLayer,
-        OpenLayers.Handler.Path, {
+      // Draw Line.
+      line: new OpenLayers.Control.DrawFeature(
+        this.editLayer,
+        OpenLayers.Handler.Path,
+        {
           featureAdded: _.bind(this.publish, this)
-      }),
+        }
+      ),
 
-      poly: new OpenLayers.Control.DrawFeature(this.editLayer,
-        OpenLayers.Handler.Polygon, {
+      // Draw Polygon.
+      poly: new OpenLayers.Control.DrawFeature(
+        this.editLayer,
+        OpenLayers.Handler.Polygon,
+        {
           featureAdded: _.bind(this.publish, this)
-      }),
+        }
+      ),
 
-      regPoly: new OpenLayers.Control.DrawFeature(this.editLayer,
-        OpenLayers.Handler.RegularPolygon, {
+      // Draw Regular Polygon.
+      regPoly: new OpenLayers.Control.DrawFeature(
+        this.editLayer,
+        OpenLayers.Handler.RegularPolygon,
+        {
           featureAdded: _.bind(this.publish, this)
-      }),
+        }
+      ),
 
-      edit: new OpenLayers.Control.ModifyFeature(this.editLayer, {
+      // Modify Shape.
+      edit: new OpenLayers.Control.ModifyFeature(
+        this.editLayer,
+        {
           onModification: _.bind(this.publish, this)
-      }),
+        }
+      ),
 
-      remove: new OpenLayers.Control.ModifyFeature(this.editLayer, {
+      // Delete Shape.
+      remove: new OpenLayers.Control.ModifyFeature(
+        this.editLayer,
+        {
           onModificationStart: _.bind(this.removeFeature, this)
-      })
+        }
+      )
 
     };
 
     // Add controls.
-    _.each(this.controls, _.bind(function(val,key) {
-      this.map.addControl(val);
+    _.each(this.controls, _.bind(function(control, key) {
+      this.map.addControl(control);
     }, this));
 
   },
@@ -101,6 +125,7 @@ _.extend(Neatline.Map.View.prototype, {
     // Remove controls.
     _.each(this.controls, _.bind(function(control, key) {
       this.map.removeControl(control);
+      control.deactivate();
     }, this));
 
     this.activateControls();
@@ -121,8 +146,12 @@ _.extend(Neatline.Map.View.prototype, {
 
     this.activateControls();
 
-    // Deactivate all controls, reset modify mode.
-    _.each(this.controls, function(val,key) { val.deactivate(); });
+    // Rest controls.
+    _.each(this.controls, function(control) {
+      control.deactivate();
+    });
+
+    // Reset modify mode.
     this.controls.edit.mode = OpenLayers.Control.ModifyFeature.RESHAPE;
 
 
@@ -246,7 +275,6 @@ _.extend(Neatline.Map.View.prototype, {
    */
   removeLayer: function(layer) {
 
-    // Remove from map.
     this.map.removeLayer(layer);
 
     // Remove from `layers`.
