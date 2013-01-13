@@ -81,6 +81,33 @@ class NeatlineRecordTable extends Omeka_Db_Table
     public function syncStyles($record)
     {
 
+        $yaml   = Spyc::YAMLLoad($record->getExhibit()->styles);
+        $valid  = neatline_getStyleCols();
+
+        // Iterate tag definitions.
+        foreach ($yaml as $tag => $styles) {
+
+            // `WHERE`
+            $where = array(
+                'exhibit_id = ?' => $record->exhibit_id,
+                'tags REGEXP ?' => '[[:<:]]'.$tag.'[[:>:]]'
+            );
+
+            // `SET`
+            $set = array();
+            foreach ($styles as $style) {
+                if (is_string($style)) {
+                    if (in_array($style, $valid)) {
+                        $set[$style] = $record->$style;
+                    }
+                }
+            }
+
+            // Update records.
+            $this->update($this->getTableName(), $set, $where);
+
+        }
+
     }
 
 
