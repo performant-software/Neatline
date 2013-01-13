@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
 
 /**
- * Tests for editor action in index controller.
+ * Tests for index action in editor controller.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -11,7 +11,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class Neatline_IndexControllerTest_Editor
+class Neatline_EditorControllerTest_Editor
     extends Neatline_Test_AppTestCase
 {
 
@@ -19,7 +19,7 @@ class Neatline_IndexControllerTest_Editor
     /**
      * The `#styles` textarea should be populated with the exhibit value.
      */
-    public function testEditorStylesPopulation()
+    public function testStylesPopulation()
     {
 
         $exhibit = $this->__exhibit();

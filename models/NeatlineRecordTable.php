@@ -38,6 +38,8 @@ class NeatlineRecordTable extends Omeka_Db_Table
         // Iterate tag definitions.
         foreach ($yaml as $tag => $styles) {
 
+            if (!is_array($styles)) continue;
+
             // `WHERE`
             $where = array(
                 'exhibit_id = ?' => $exhibit->id,

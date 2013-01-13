@@ -39,10 +39,19 @@ class Neatline_EditorController
      */
     public function stylesAction()
     {
+
         $this->_helper->viewRenderer->setNoRender(true);
+
+        // Save the YAML.
         $exhibit = $this->_helper->db->findById();
         $exhibit->styles = $this->_request->getRawBody();
         $exhibit->save();
+
+        // Apply the styles.
+        $records = $this->_helper->db->getTable('NeatlineRecord');
+        $records->applyStyles($exhibit);
+
+
     }
 
 
