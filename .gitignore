@@ -1,3 +1,13 @@
+.DS_Store
+node_modules/
+components/
+build/api/
+build/code-browser/
+build/coverage/
+build/dist/
+build/logs/
+build/pdepend/
+build/tmp/
 spec/javascripts/fixtures/
 spec/javascripts/helpers/components/
 views/shared/javascripts/components/
@@ -7,12 +17,3 @@ views/shared/javascripts/tests/payloads/
 views/shared/javascripts/tests/helpers/helpers.js
 views/shared/css/payloads/
 views/shared/css/img/
-node_modules/
-build/api/
-build/code-browser/
-build/coverage/
-build/dist/
-build/logs/
-build/pdepend/
-build/tmp/
-.DS_Store

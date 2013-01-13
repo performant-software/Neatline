@@ -1,0 +1,7 @@
+{
+    "name": "Neatline"
+  , "version": "2.0"
+  , "dependencies": {
+      "spyc": "https://github.com/mustangostang/spyc.git"
+  }
+}

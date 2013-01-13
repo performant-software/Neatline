@@ -17,8 +17,9 @@
   },
 
   "bower": {
-    "app":          "./views/shared/javascripts",
-    "tests":        "./views/shared/javascripts/tests/helpers"
+    "php":          "./",
+    "javascript":   "./views/shared/javascripts",
+    "jasmine":      "./views/shared/javascripts/tests/helpers"
   },
 
   "build": {
