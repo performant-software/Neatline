@@ -32,6 +32,34 @@ class NeatlineRecordTable extends Omeka_Db_Table
     public function applyStyles($exhibit)
     {
 
+        $yaml   = Spyc::YAMLLoad($exhibit->styles);
+        $valid  = neatline_getStyleCols();
+
+        // Walk tags.
+        foreach ($yaml as $tag => $styles) {
+
+            // `WHERE`
+            $where = array(
+                'exhibit_id = ?' => $exhibit->id,
+                'tags REGEXP ?' => '[[:<:]]'.$tag.'[[:>:]]'
+            );
+
+            // `SET`
+            $set = array();
+            foreach ($styles as $style) {
+                if (is_array($style)) {
+                    foreach ($style as $s => $v) {
+                        if (in_array($s, $valid)) {
+                            $set[$s] = $v;
+                        }
+                    }
+                }
+            }
+
+            $this->update($this->getTableName(), $set, $where);
+
+        }
+
     }
 
 
@@ -110,10 +138,11 @@ class NeatlineRecordTable extends Omeka_Db_Table
     public function queryRecords($exhibit, $extent=null, $zoom=null)
     {
 
+        $select = $this->getSelect();
         $data = array();
-        $select = $this->getSelect()->where(
-            'exhibit_id=?', $exhibit->id
-        );
+
+        // Exhibit.
+        $select = $this->_filterByExhibit($select, $exhibit);
 
         // Zoom.
         if (!is_null($zoom)) {
@@ -125,7 +154,6 @@ class NeatlineRecordTable extends Omeka_Db_Table
             $select = $this->_filterByExtent($select, $extent);
         }
 
-        // Get records.
         if ($records = $this->fetchObjects($select)) {
             foreach ($records as $record) {
                 $data[] = $record->buildJsonData();
@@ -134,6 +162,19 @@ class NeatlineRecordTable extends Omeka_Db_Table
 
         return $data;
 
+    }
+
+
+    /**
+     * Filter by exhibit.
+     *
+     * @param Omeka_Db_Select $select The starting select.
+     * @param NeatlineExhibit $exhibit The exhibit.
+     * @return Omeka_Db_Select The filtered select.
+     */
+    public function _filterByExhibit($select, $exhibit)
+    {
+        return $select->where('exhibit_id = ?', $exhibit->id);
     }
 
 

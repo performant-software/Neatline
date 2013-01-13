@@ -146,21 +146,6 @@ class Neatline_Test_AppTestCase extends Omeka_Test_AppTestCase
 
 
     /**
-     * Create a record with a tags string
-     *
-     * @param string $tags The `tags` string.
-     * @return NeatlineRecord The record.
-     */
-    public function __recordWithTags($tags)
-    {
-        $record = new NeatlineRecord;
-        $record->tags = $tags;
-        $record->save();
-        return $record;
-    }
-
-
-    /**
      * Write the response body from a route to a fixture file.
      *
      * @param string $route The resource location.

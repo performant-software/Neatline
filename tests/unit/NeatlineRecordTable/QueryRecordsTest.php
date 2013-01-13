@@ -128,7 +128,7 @@ class Neatline_NeatlineRecordTableTest_QueryRecords
      * queryRecords() should retrieve records that belong to the passed
      * exhibit. Records in other exhibits should be excluded.
      */
-    public function testQueryRecordsExhibitFilter()
+    public function testExhibitFilter()
     {
 
         $exhibit1   = $this->__exhibit();
@@ -153,7 +153,7 @@ class Neatline_NeatlineRecordTableTest_QueryRecords
     /**
      * queryRecords() should filter on zoom.
      */
-    public function testQueryRecordsZoomFilter()
+    public function testZoomFilter()
     {
 
         $exhibit = $this->__exhibit();
@@ -219,7 +219,7 @@ class Neatline_NeatlineRecordTableTest_QueryRecords
     /**
      * queryRecords() should filter on extent.
      */
-    public function testQueryRecordsExtentFilter()
+    public function testExtentFilter()
     {
 
         $exhibit = $this->__exhibit();
@@ -266,7 +266,7 @@ class Neatline_NeatlineRecordTableTest_QueryRecords
      * point. (`POINT(0 0)` is used as a WKT "null" value that is inserted
      * automatically when a record is saved with a empty/null coverage.
      */
-    public function testQueryRecordsExtentFilterNullPointOmission()
+    public function testExtentFilterNullPointOmission()
     {
 
         $exhibit = $this->__exhibit();
