@@ -15,4 +15,14 @@
 
 <script id="styles-template" type="text/templates">
 
+  <div class="control-group">
+    <div class="controls">
+      <textarea name="styles" rows="26"></textarea>
+    </div>
+  </div>
+
+  <a name="save" class="btn btn-large btn-primary" \>
+    <i class="icon-ok icon-white"></i> <?php echo __('Save'); ?>
+  </a>
+
 </script>

@@ -228,7 +228,8 @@ _t.aliasEditor = function() {
     menu:     Neatline.Editor.Menu.     __view,
     mapedit:  Neatline.Editor.Map.      __view,
     records:  Neatline.Editor.Records.  __view,
-    record:   Neatline.Editor.Record.   __view
+    record:   Neatline.Editor.Record.   __view,
+    styles:   Neatline.Editor.Styles.   __view
   };
 
   this.el = {
@@ -237,7 +238,8 @@ _t.aliasEditor = function() {
     editor:   Neatline.Editor.          __view.__ui.editor,
     menu:     Neatline.Editor.Menu.     __view.$el,
     records:  Neatline.Editor.Records.  __view.$el,
-    record:   Neatline.Editor.Record.   __view.$el
+    record:   Neatline.Editor.Record.   __view.$el,
+    styles:   Neatline.Editor.Styles.   __view.$el
   };
 
 };

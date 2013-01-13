@@ -17,7 +17,9 @@ Neatline.module('Editor.Styles', function(
   Styles.View = Backbone.Neatline.View.extend({
 
 
-    template: '#styles-template',
+    template:   '#styles-template',
+    className:  'form-stacked styles',
+    tagName:    'form',
 
 
     /**

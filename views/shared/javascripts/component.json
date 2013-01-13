@@ -11,8 +11,8 @@
     , "openlayers":           "https://github.com/openlayers/openlayers.git"
     , "backbone.routefilter": "https://github.com/boazsender/backbone.routefilter.git"
     , "toastr":               "https://github.com/CodeSeven/toastr.git"
+    , "codemirror":           "latest"
     , "bootstrap":            ">= 2.2.0"
     , "rivets":               ">= 0.4.3"
-    , "d3":                   ">= 2.10.3"
   }
 }

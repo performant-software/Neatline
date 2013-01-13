@@ -90,7 +90,7 @@ Neatline.module('Editor', { startWithParent: false,
     showStyleEditor: function() {
       Neatline.vent.trigger('editor:router:#styles');
       this.vw.menu.showIn(this.ui.editor);
-      this.vw.record.showIn(this.ui.styles);
+      this.vw.styles.showIn(this.ui.editor);
     }
 
 
