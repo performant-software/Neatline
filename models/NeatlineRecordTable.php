@@ -35,7 +35,7 @@ class NeatlineRecordTable extends Omeka_Db_Table
         $yaml   = Spyc::YAMLLoad($exhibit->styles);
         $valid  = neatline_getStyleCols();
 
-        // Walk tags.
+        // Iterate tag definitions.
         foreach ($yaml as $tag => $styles) {
 
             // `WHERE`
@@ -56,6 +56,7 @@ class NeatlineRecordTable extends Omeka_Db_Table
                 }
             }
 
+            // Update records.
             $this->update($this->getTableName(), $set, $where);
 
         }
