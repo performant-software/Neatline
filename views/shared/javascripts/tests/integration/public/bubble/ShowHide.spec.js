@@ -76,7 +76,7 @@ describe('Bubble Show/Hide', function() {
 
     // Move cursor out of the exhibit.
     _t.hoverOnMapFeature(layer1, feature1);
-    $('#neatline').trigger('mouseleave');
+    _t.triggerMapMouseout();
 
     // Bubble should be visible.
     expect(_t.el.bubble).not.toBeVisible();
@@ -100,9 +100,9 @@ describe('Bubble Show/Hide', function() {
     var offset = _t.el.bubble.offset();
 
     // Move the cursor.
-    $(window).trigger($.Event('mousemove', {
-      clientX: 3, clientY:4
-    }));
+    _t.vw.map.map.events.triggerEvent('mousemove', {
+      xy: new OpenLayers.Pixel(3,4)
+    });
 
     // Bubble should not move.
     expect(_t.el.bubble.offset()).toEqual(offset);
@@ -136,9 +136,9 @@ describe('Bubble Show/Hide', function() {
     expect(els.title.text()).toEqual('title1');
 
     // Move the cursor.
-    $(window).trigger($.Event('mousemove', {
-      clientX: 3, clientY:4
-    }));
+    _t.vw.map.map.events.triggerEvent('mousemove', {
+      xy: new OpenLayers.Pixel(3,4),
+    });
 
     // Bubble should not move.
     expect(_t.el.bubble.offset()).toEqual(offset);
@@ -171,9 +171,9 @@ describe('Bubble Show/Hide', function() {
     expect(els.title.text()).toEqual('title2');
 
     // Move the cursor.
-    $(window).trigger($.Event('mousemove', {
-      clientX: 3, clientY:4
-    }));
+    _t.vw.map.map.events.triggerEvent('mousemove', {
+      xy: new OpenLayers.Pixel(3,4),
+    });
 
     // Bubble should track the cursor.
     expect(_t.el.bubble.offset()).not.toEqual(offset);

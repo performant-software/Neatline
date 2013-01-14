@@ -23,11 +23,10 @@ Neatline.module('Map', function(
 
 
     /**
-     * Initialize state variables, run the top-level start-up routine, and
-     * publish initial request for data.
+     * Initialize the map and publish initial request for data.
      */
     initialize: function() {
-      this.layers = [];   // Array of all current vector layers.
+      this.layers = [];
       this.initializeOpenLayers();
       this.publishPosition();
     },
@@ -40,10 +39,7 @@ Neatline.module('Map', function(
      */
     initializeOpenLayers: function() {
 
-      // Global attributes.
-      OpenLayers.ImgPath = 'http://js.mapbox.com/theme/dark/';
-
-      // widgets.
+      // Widgets.
       var options = {
         controls: [
           new OpenLayers.Control.MousePosition(),
@@ -57,7 +53,7 @@ Neatline.module('Map', function(
       // Instantiate map.
       this.map = new OpenLayers.Map(this.el, options);
 
-      // Get OSM base layer.
+      // Add OSM base layer.
       this.osm = new OpenLayers.Layer.OSM();
       this.map.addLayer(this.osm);
       this.map.setBaseLayer(this.osm);
@@ -216,7 +212,6 @@ Neatline.module('Map', function(
         this.map.zoomToExtent(layer.getDataExtent());
       }
 
-      // Publish complete.
       Neatline.vent.trigger('map:focused');
 
     },
@@ -396,10 +391,10 @@ Neatline.module('Map', function(
      * @return {String}: The WKT string.
      */
     getExtentAsWKT: function() {
-      var formatWKT = new OpenLayers.Format.WKT();
+      var format = new OpenLayers.Format.WKT();
       var extent = this.map.getExtent().toGeometry();
-      var feature = new OpenLayers.Feature.Vector(extent);
-      return formatWKT.write(feature);
+      var vector = new OpenLayers.Feature.Vector(extent);
+      return format.write(vector);
     },
 
 

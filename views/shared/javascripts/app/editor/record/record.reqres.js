@@ -11,7 +11,7 @@
  */
 
 Neatline.module('Editor.Record', function(
-  Record, Editor, Backbone, Marionette, $, _) {
+  Record, Neatline, Backbone, Marionette, $, _) {
 
 
   /**

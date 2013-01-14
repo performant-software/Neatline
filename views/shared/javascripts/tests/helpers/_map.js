@@ -77,14 +77,10 @@ _t.clickOffMapFeature = function(layers) {
     };
   });
 
-  // Mock cursor event.
-  var evt = {
-    xy: new OpenLayers.Pixel(1,2),
-    type: 'click'
-  };
-
   // Trigger click.
-  this.vw.map.map.events.triggerEvent('click', evt);
+  this.vw.map.map.events.triggerEvent('click', {
+    xy: new OpenLayers.Pixel(1,2)
+  });
 
 };
 
@@ -102,14 +98,10 @@ _t.hoverOnMapFeature = function(layer, feature) {
     return feature;
   };
 
-  // Mock cursor event.
-  var evt = {
-    xy: new OpenLayers.Pixel(1,2),
-    type: 'mousemove'
-  };
-
   // Trigger click.
-  this.vw.map.map.events.triggerEvent('mousemove', evt);
+  this.vw.map.map.events.triggerEvent('mousemove', {
+    xy: new OpenLayers.Pixel(1,2)
+  });
 
 };
 
@@ -128,14 +120,10 @@ _t.unHoverOnMapFeature = function(layers) {
     };
   });
 
-  // Mock cursor event.
-  var evt = {
-    xy: new OpenLayers.Pixel(1,2),
-    type: 'mousemove'
-  };
-
   // Trigger click.
-  this.vw.map.map.events.triggerEvent('mousemove', evt);
+  this.vw.map.map.events.triggerEvent('mousemove', {
+    xy: new OpenLayers.Pixel(1,2)
+  });
 
 };
 

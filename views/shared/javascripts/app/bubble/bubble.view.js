@@ -32,29 +32,10 @@ Neatline.module('Bubble', function(
      * Initialize trackers, get markup.
      */
     initialize: function() {
-
-      this.getTemplate();
-      this.getUi();
-
       this.active = true;   // True when bubble should be displayed.
       this.frozen = false;  // True when bubble is frozen after a click.
-
-      this.exhibit  = $('#neatline');
-      this.window   = $(window);
-
-    },
-
-
-    /**
-     * Render position.
-     *
-     * @param {Object} evt: The mousemove event.
-     */
-    position: function(evt) {
-      this.$el.css({
-        left: evt.clientX + this.options.padding.x,
-        top:  evt.clientY - this.options.padding.y
-      });
+      this.getTemplate();
+      this.getUi();
     },
 
 
@@ -64,18 +45,22 @@ Neatline.module('Bubble', function(
      * @param {Object} model: The record model.
      */
     show: function(model) {
+      if (!this.frozen && this.active) {
 
-      // Break if frozen or inactive.
-      if (this.frozen || !this.active) return;
-      rivets.bind(this.$el, { record: model });
+        // Create reference-able event callbacks.
+        this.onMouseMove = _.bind(this.update, this);
+        this.onMouseOut  = _.bind(this.hide, this);
 
-      // Position on move, hide on leave.
-      this.window.bind('mousemove.bubble', _.bind(this.position, this));
-      this.exhibit.bind('mouseleave.bubble', _.bind(this.hide, this));
+        // Bind to mousemove and mouseout.
+        var map = Neatline.request('map:getMap');
+        map.events.register('mousemove', null, this.onMouseMove);
+        map.events.register('mouseout',  null, this.onMouseOut);
 
-      // Inject bubble.
-      this.exhibit.append(this.$el);
+        // Render template, inject bubble.
+        rivets.bind(this.$el, { record: model });
+        $('body').append(this.$el);
 
+      }
     },
 
 
@@ -83,9 +68,10 @@ Neatline.module('Bubble', function(
      * Hide the bubble.
      */
     hide: function() {
-      if (this.frozen) return;
-      this.$el.detach();
-      this._unbind();
+      if (!this.frozen) {
+        this.$el.detach();
+        this.unbind();
+      }
     },
 
 
@@ -94,7 +80,7 @@ Neatline.module('Bubble', function(
      */
     select: function() {
       this.frozen = true;
-      this._unbind();
+      this.unbind();
     },
 
 
@@ -124,11 +110,25 @@ Neatline.module('Bubble', function(
 
 
     /**
+     * Render position.
+     *
+     * @param {Object} evt: The mousemove event.
+     */
+    update: function(evt) {
+      this.$el.css({
+        left: evt.clientX + this.options.padding.x,
+        top:  evt.clientY - this.options.padding.y
+      });
+    },
+
+
+    /**
      * Unbind move and leave listeners.
      */
-    _unbind: function() {
-      this.exhibit.unbind('mouseleave.bubble');
-      this.window.unbind('mousemove.bubble');
+    unbind: function() {
+      var map = Neatline.request('map:getMap');
+      map.events.unregister('mousemove', null, this.onMouseMove);
+      map.events.unregister('mouseout',  null, this.onMouseOut);
     }
 
 
