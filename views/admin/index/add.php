@@ -1,6 +1,6 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
  * Create exhibit.
@@ -14,24 +14,26 @@
 ?>
 
 <?php
-queue_js_file('slugBuilder');
-queue_js_file('_constructAdd');
+  queue_js_file('slugBuilder');
+  queue_js_file('_constructAdd');
 ?>
 
 <?php
-$title = __('Neatline | Create an Exhibit');
-echo head(array('content_class' => 'neatline', 'title' => $title));
+  echo head(array(
+    'title' => __('Neatline | Create an Exhibit'),
+    'content_class' => 'neatline'
+  ));
 ?>
 
 <div id="primary">
-    <?php echo flash(); ?>
-    <?php echo $form; ?>
+  <?php echo flash(); ?>
+  <?php echo $form; ?>
 </div>
 
 <script>
-jQuery(document).ready(function($){
+  jQuery(document).ready(function($){
     Omeka.wysiwyg();
-});
+  });
 </script>
 
 <?php echo foot(); ?>

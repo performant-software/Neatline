@@ -1,6 +1,6 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
  * Public exhibit browse.
@@ -14,22 +14,24 @@
 ?>
 
 <?php
-$title = __('Neatline | Browse Exhibits');
-echo head(array('content_class' => 'neatline', 'title' => $title));
+  echo head(array(
+    'title' => __('Neatline | Browse Exhibits'),
+    'content_class' => 'neatline'
+  ));
 ?>
 
 <div id="primary">
 
   <?php echo flash(); ?>
-  <h1><?php echo $title; ?></h1>
+  <h1><?php echo __('Neatline | Browse Exhibits'); ?></h1>
 
   <?php if(has_neatlines_for_loop()): ?>
   <div class="pagination"><?php echo pagination_links(); ?></div>
 
     <?php foreach (loop('NeatlineExhibit') as $exhibit): ?>
     <div id="neatline-<?php echo neatline('id'); ?>">
-        <h2 class="title"><?php echo link_to_neatline(); ?></h2>
-        <?php echo neatline('description'); ?>
+      <h2 class="title"><?php echo link_to_neatline(); ?></h2>
+      <?php echo neatline('description'); ?>
     </div>
     <?php endforeach; ?>
 

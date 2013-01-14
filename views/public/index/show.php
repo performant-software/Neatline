@@ -1,6 +1,6 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
  * Public exhibit show.
@@ -17,7 +17,7 @@
 
 <!-- The core Neatline partial. -->
 <?php echo $this->partial('neatline/_neatline.php', array(
-    'exhibit' => get_current_neatline()
+  'exhibit' => get_current_neatline()
 )); ?>
 
 <div class="exhibit-description">
