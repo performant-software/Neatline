@@ -80,11 +80,11 @@ class Neatline_IndexControllerTest_Browse
             public_url('neatline/show/slug3').'"]');
 
         // Should show links to editor.
-        $this->assertXpath('//td[@class="edit"]/a[@href="'.
+        $this->assertXpath('//a[@class="edit"][@href="'.
             url('neatline/editor/'.$exhibit1->id).'"]');
-        $this->assertXpath('//td[@class="edit"]/a[@href="'.
+        $this->assertXpath('//a[@class="edit"][@href="'.
             url('neatline/editor/'.$exhibit2->id).'"]');
-        $this->assertXpath('//td[@class="edit"]/a[@href="'.
+        $this->assertXpath('//a[@class="edit"][@href="'.
             url('neatline/editor/'.$exhibit3->id).'"]');
 
     }

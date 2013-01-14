@@ -1,6 +1,6 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
  * Browse exhibits.
@@ -14,81 +14,89 @@
 ?>
 
 <?php
-$title = __('Neatline | Browse Exhibits');
-echo head(array('content_class' => 'neatline', 'title' => $title));
+  echo head(array(
+    'title' => __('Neatline | Browse Exhibits'),
+    'content_class' => 'neatline'
+  ));
 ?>
 
 <p class="add-button">
-    <a class="add green button" href="<?php echo html_escape(url('neatline/add')); ?>">
-        <?php echo __('Create an Exhibit'); ?>
-    </a>
+  <a class="add green button" href="<?php echo url('neatline/add'); ?>">
+    <?php echo __('Create an Exhibit'); ?>
+  </a>
 </p>
 
 <div id="primary">
 
-<?php echo flash(); ?>
+  <?php echo flash(); ?>
 
-<?php if(has_neatlines_for_loop()): ?>
-<div class="pagination"><?php echo pagination_links(); ?></div>
+  <?php if(has_neatlines_for_loop()): ?>
+  <div class="pagination"><?php echo pagination_links(); ?></div>
+    <table class="neatline">
 
-<table class="neatline">
-
-    <thead>
+      <thead>
         <tr>
-
-        <!-- Column headings. -->
-        <?php echo browse_sort_links(array(
-            __('Exhibit') => 'title',
-            __('Items Query') => null,
-            __('Modified') => 'modified',
-            __('# Items') => 'added',
-            __('Public') => 'public',
-            __('Edit') => null
-        ), array(
-            'link_tag' => 'th scope="col"',
-            'list_tag' => ''
-        )); ?>
-
+          <?php echo browse_sort_links(array(
+              __('Exhibit')   => 'title',
+              __('Modified')  => 'modified',
+              __('# Items')   => 'added',
+              __('Public')    => 'public',
+              __('Edit')      => null
+          ), array(
+              'link_tag'      => 'th scope="col"',
+              'list_tag'      => ''
+          )); ?>
         </tr>
-    </thead>
+      </thead>
 
-    <tbody>
+      <tbody>
 
         <!-- Exhibit listings. -->
-        <?php foreach(loop('NeatlineExhibit') as $exhibit): ?>
-        <tr id="neatline-<?php echo neatline('id'); ?>">
-            <td class="title">
-                <?php echo link_to_neatline(); ?>
-                <ul class="action-links group">
-                    <li><?php echo link_to_neatline($exhibit, __('Edit Details'), array('class' => 'edit'), 'edit', false); ?></li>
-                    <li><?php echo link_to_neatline($exhibit, __('Delete'), array('class' => 'delete delete-confirm'), 'delete-confirm', false); ?></li>
-                </ul>
-            </td>
-            <td><?php echo link_to_neatline($exhibit, __('Edit Query'), array('class' => 'query'), 'query', false);?></td>
-            <td><?php echo format_date(neatline('modified')); ?></td>
-            <td><?php echo total_records_for_neatline(); ?></td>
-            <td><?php echo neatline('public') ? __('Yes') : __('No'); ?></td>
-            <td class="edit">
-                <a href="<?php echo url('neatline/editor/' . neatline('id')); ?>" class="edit"><?php echo __('Edit'); ?></a>
-            </td>
+        <?php foreach(loop('NeatlineExhibit') as $e): ?>
+        <tr>
+
+          <td class="title">
+            <?php echo link_to_neatline(); ?>
+            <ul class="action-links group">
+              <li>
+                <?php echo link_to_neatline($e, __('Edit Details'),
+                  array('class' => 'edit'), 'edit', false); ?>
+                </a>
+              </li>
+              <li>
+                <?php echo link_to_neatline($e, __('Delete'),
+                  array('class'=>'delete delete-confirm'),
+                  'delete-confirm', false); ?>
+              </li>
+            </ul>
+          </td>
+
+          <td><?php echo format_date(neatline('modified')); ?></td>
+          <td><?php echo total_records_for_neatline(); ?></td>
+          <td><?php echo neatline('public')?__('Yes'):__('No'); ?></td>
+
+          <td><?php echo link_to_neatline($e, __('Edit'),
+                array('class'=>'edit'), 'editor', false); ?>
+          </td>
+
         </tr>
         <?php endforeach; ?>
 
-    </tbody>
+      </tbody>
 
-</table>
+    </table>
 
-<!-- Pagination. -->
-<div class="pagination"><?php echo pagination_links(); ?></div>
+  <!-- Pagination. -->
+  <div class="pagination"><?php echo pagination_links(); ?></div>
 
-<?php else: ?>
-
+  <?php else: ?>
     <p class="neatline-alert">
-        <?php echo __('There are no Neatline exhibits yet.'); ?>
-        <a href="<?php echo url('neatline/add'); ?>"><?php echo __('Create one!'); ?></a>
+      <?php echo __('There are no Neatline exhibits yet.'); ?>
+      <a href="<?php echo url('neatline/add'); ?>">
+        <?php echo __('Create one!'); ?>
+      </a>
     </p>
-
-<?php endif; ?>
+  <?php endif; ?>
 
 </div>
 
