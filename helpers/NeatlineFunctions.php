@@ -153,32 +153,33 @@ function total_neatlines()
 /**
  * Returns a link to a Neatline exhibit.
  *
- * @param NeatlineExhibit|null $neatline The exhibit record.
+ * @param NeatlineExhibit|null $exhibit The exhibit record.
  * @param string $text HTML for the text of the link.
- * @param array $props Attributes for the link tag. (optional)
+ * @param array $props Array of properties for the element.
  * @param string $action The action for the link. Default is 'show'.
  * @return string The HTML link.
  */
 function link_to_neatline(
-    $neatline = null,
-    $text = null,
-    $props = array(),
-    $action = 'show',
-    $public = true)
+    $exhibit  = null,
+    $text     = null,
+    $props    = array(),
+    $action   = 'show',
+    $public   = true)
 {
 
     // Get the exhibit, form the link text.
-    $neatline = $neatline ? $neatline : get_current_neatline();
-    $text = $text ? $text : strip_formatting(neatline('title',$neatline));
+    $exhibit = $exhibit ? $exhibit : get_current_neatline();
+    $text = $text ? $text : strip_formatting(neatline('title', $exhibit));
 
     // Form the identified (id or slug).
-    if ($action == 'show') { $slug = $neatline->slug; }
-    else { $slug = $neatline->id; }
+    if ($action == 'show') { $slug = $exhibit->slug; }
+    else { $slug = $exhibit->id; }
 
     // Form the route and link tag.
     $route = 'neatline/' . $action . '/' . $slug;
     $uri = $public ? public_url($route) : url($route);
     $props['href'] = $uri;
+
     return '<a ' . tag_attributes($props) . '>' . $text . '</a>';
 
 }

@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
 
 /**
- * Omeka admin actions.
+ * Add/Edit/Delete exhibits.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -11,7 +11,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class Neatline_IndexController
+class Neatline_ExhibitsController
     extends Omeka_Controller_AbstractActionController
 {
 
@@ -69,6 +69,15 @@ class Neatline_IndexController
         $this->view->neatline_exhibit = $exhibit;
         $this->view->form = $form;
 
+    }
+
+
+    /**
+     * Edit exhibit.
+     */
+    public function editorAction()
+    {
+        $this->view->exhibit = $this->_helper->db->findById();
     }
 
 

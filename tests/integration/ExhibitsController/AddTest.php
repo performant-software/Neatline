@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
 
 /**
- * Tests for add action in index controller.
+ * Tests for add action in exhibits controller.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -11,7 +11,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class Neatline_IndexControllerTest_Add
+class Neatline_ExhibitsControllerTest_Add
     extends Neatline_Test_AppTestCase
 {
 
@@ -48,7 +48,7 @@ class Neatline_IndexControllerTest_Add
 
         // Should redisplay the form.
         $this->assertModule('neatline');
-        $this->assertController('index');
+        $this->assertController('exhibits');
         $this->assertAction('add');
 
         // Should flash error.
@@ -78,7 +78,7 @@ class Neatline_IndexControllerTest_Add
 
         // Should redisplay the form.
         $this->assertModule('neatline');
-        $this->assertController('index');
+        $this->assertController('exhibits');
         $this->assertAction('add');
 
         // Should flash error.
@@ -108,7 +108,7 @@ class Neatline_IndexControllerTest_Add
 
         // Should redisplay the form.
         $this->assertModule('neatline');
-        $this->assertController('index');
+        $this->assertController('exhibits');
         $this->assertAction('add');
 
         // Should flash error.
@@ -138,7 +138,7 @@ class Neatline_IndexControllerTest_Add
 
         // Should redisplay the form.
         $this->assertModule('neatline');
-        $this->assertController('index');
+        $this->assertController('exhibits');
         $this->assertAction('add');
 
         // Should flash error.
@@ -168,7 +168,7 @@ class Neatline_IndexControllerTest_Add
 
         // Should redisplay the form.
         $this->assertModule('neatline');
-        $this->assertController('index');
+        $this->assertController('exhibits');
         $this->assertAction('add');
 
         // Should flash error.
@@ -201,7 +201,7 @@ class Neatline_IndexControllerTest_Add
 
         // Should redisplay the form.
         $this->assertModule('neatline');
-        $this->assertController('index');
+        $this->assertController('exhibits');
         $this->assertAction('add');
 
         // Should flash error.

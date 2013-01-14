@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
 
 /**
- * Tests for browse action in index controller.
+ * Tests for browse action in exhibits controller.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -11,7 +11,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class Neatline_IndexControllerTest_Browse
+class Neatline_ExhibitsControllerTest_Browse
     extends Neatline_Test_AppTestCase
 {
 
@@ -23,7 +23,7 @@ class Neatline_IndexControllerTest_Browse
     {
         $this->dispatch('neatline');
         $this->assertModule('neatline');
-        $this->assertController('index');
+        $this->assertController('exhibits');
         $this->assertAction('browse');
     }
 
