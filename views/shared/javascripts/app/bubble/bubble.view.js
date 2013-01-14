@@ -58,7 +58,7 @@ Neatline.module('Bubble', function(
 
         // Render template, inject bubble.
         rivets.bind(this.$el, { record: model });
-        $('body').append(this.$el);
+        this.$el.appendTo($('body'));
 
       }
     },
@@ -69,6 +69,7 @@ Neatline.module('Bubble', function(
      */
     hide: function() {
       if (!this.frozen) {
+        this.conceal();
         this.$el.detach();
         this.unbind();
       }
@@ -119,6 +120,14 @@ Neatline.module('Bubble', function(
         left: evt.clientX + this.options.padding.x,
         top:  evt.clientY - this.options.padding.y
       });
+    },
+
+
+    /**
+     * Position the bubble off-screen.
+     */
+    conceal: function() {
+      this.$el.css({ left: -1000, top: -1000 });
     },
 
 
