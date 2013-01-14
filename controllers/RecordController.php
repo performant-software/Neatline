@@ -50,9 +50,6 @@ class Neatline_RecordController extends Neatline_RestController
         // Return new id.
         echo Zend_Json::encode(array('id' => $record->id));
 
-        // Synchronize styles.
-        $this->_table->syncStyles($record);
-
     }
 
 
@@ -69,9 +66,6 @@ class Neatline_RecordController extends Neatline_RestController
         $record->saveForm(Zend_Json::decode(file_get_contents(
             Zend_Registry::get('fileIn')), true
         ));
-
-        // Synchronize styles.
-        $this->_table->syncStyles($record);
 
     }
 

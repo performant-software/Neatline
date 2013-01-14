@@ -61,7 +61,6 @@ describe('Record Form Open', function() {
 
     // Open form, get elements.
     _t.click($(recordRows[1]));
-    var favicon = 'https://www.google.com/favicon.ico';
     var inputs = _t.getRecordFormElements();
 
     expect(inputs.lead).            toHaveText('title1');
@@ -78,9 +77,9 @@ describe('Record Form Open', function() {
     expect(inputs.imageOpacity).    toHaveValue('19');
     expect(inputs.strokeWidth).     toHaveValue('22');
     expect(inputs.pointRadius).     toHaveValue('25');
-    expect(inputs.pointImage).      toHaveValue(favicon);
-    expect(inputs.minZoom).         toHaveValue('28');
-    expect(inputs.maxZoom).         toHaveValue('31');
+    expect(inputs.pointImage).      toHaveValue('28');
+    expect(inputs.minZoom).         toHaveValue('31');
+    expect(inputs.maxZoom).         toHaveValue('34');
     expect(inputs.mapFocus).        toHaveValue('100,200');
     expect(inputs.mapZoom).         toHaveValue('10');
 

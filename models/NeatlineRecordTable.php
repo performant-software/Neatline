@@ -67,53 +67,6 @@ class NeatlineRecordTable extends Omeka_Db_Table
 
 
     /**
-     * Synchronize the tag-siblings of a record to match the values on the
-     * passed record. For example, if `styles` on the exhibit it:
-     *
-     * tag:
-     *  - vector_color: #ffffff
-     *  - stroke_color
-     *
-     *  The stroke color on records tagged with `tag` will be updated to
-     *  the value on the passed record, but vector color will be unchanged
-     *  since an explicit value is set in the YAML.
-     *
-     * @param NeatlineRecord The record to propagate.
-     */
-    public function syncStyles($record)
-    {
-
-        $yaml   = Spyc::YAMLLoad($record->getExhibit()->styles);
-        $valid  = neatline_getStyleCols();
-
-        // Iterate tag definitions.
-        foreach ($yaml as $tag => $styles) {
-
-            // `WHERE`
-            $where = array(
-                'exhibit_id = ?' => $record->exhibit_id,
-                'tags REGEXP ?' => '[[:<:]]'.$tag.'[[:>:]]'
-            );
-
-            // `SET`
-            $set = array();
-            foreach ($styles as $style) {
-                if (is_string($style)) {
-                    if (in_array($style, $valid)) {
-                        $set[$style] = $record->$style;
-                    }
-                }
-            }
-
-            // Update records.
-            $this->update($this->getTableName(), $set, $where);
-
-        }
-
-    }
-
-
-    /**
      * Select `coverage` as plain-text.
      *
      * @return Omeka_Db_Select The modified select.

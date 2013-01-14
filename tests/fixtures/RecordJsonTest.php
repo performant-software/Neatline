@@ -29,8 +29,6 @@ class Neatline_RecordJsonFixtureTest extends Neatline_Test_AppTestCase
         $exhibit    = $this->__exhibit();
         $record     = $this->__record($exhibit);
 
-        $yc = 'http://news.ycombinator.com/';
-
         $record->title              = 'title';
         $record->body               = 'body';
         $record->tags               = 'tags';
@@ -46,9 +44,9 @@ class Neatline_RecordJsonFixtureTest extends Neatline_Test_AppTestCase
         $record->image_opacity      = 7;
         $record->stroke_width       = 8;
         $record->point_radius       = 9;
-        $record->min_zoom           = 10;
-        $record->max_zoom           = 11;
-        $record->point_image        = $yc;
+        $record->point_image        = '10';
+        $record->min_zoom           = 11;
+        $record->max_zoom           = 12;
         $record->save();
 
         $this->writeFixture('neatline/record/'.$record->id,

@@ -91,17 +91,17 @@ class Neatline_RecordsJsonFixtureTest extends Neatline_Test_AppTestCase
         $record2->point_radius      = 26;
         $record3->point_radius      = 27;
         // ----------------------------------------------------------------
-        $record1->min_zoom          = 28;
-        $record2->min_zoom          = 29;
-        $record3->min_zoom          = 30;
+        $record1->point_image       = '28';
+        $record2->point_image       = '29';
+        $record3->point_image       = '30';
         // ----------------------------------------------------------------
-        $record1->max_zoom          = 31;
-        $record2->max_zoom          = 32;
-        $record3->max_zoom          = 33;
+        $record1->min_zoom          = 31;
+        $record2->min_zoom          = 32;
+        $record3->min_zoom          = 33;
         // ----------------------------------------------------------------
-        $record1->point_image = 'https://www.google.com/favicon.ico';
-        $record2->point_image = 'http://en.wikipedia.org/favicon.ico';
-        $record3->point_image = 'http://www.amazon.com/favicon.ico';
+        $record1->max_zoom          = 34;
+        $record2->max_zoom          = 35;
+        $record3->max_zoom          = 36;
         // ----------------------------------------------------------------
         $record1->save();
         $record2->save();
