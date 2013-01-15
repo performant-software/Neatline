@@ -21,6 +21,10 @@ Neatline.module('Editor.Styles', function(
     className:  'form-stacked styles',
     tagName:    'form',
 
+    events: {
+      'click a[name="save"]': 'save'
+    },
+
 
     /**
      * Render template.
@@ -36,6 +40,20 @@ Neatline.module('Editor.Styles', function(
      */
     refresh: function() {
       this.editor.refresh();
+    },
+
+
+    /**
+     * Save the YAML.
+     */
+    save: function() {
+      $.ajax({
+        data:     this.editor.getValue(),
+        url:      __editor.api.styles,
+        success:  _.bind(this.onSuccess, this),
+        error:    _.bind(this.onError, this),
+        type:     'PUT'
+      });
     },
 
 

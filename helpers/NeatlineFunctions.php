@@ -55,14 +55,34 @@ function neatline_queueGoogleMapsApi()
 function neatline_exhibitGlobals($exhibit)
 {
     return json_encode(array(
-        'id'    => $exhibit->id,
-        'api'   => array(
-            'records'   => public_url('neatline/records/'.$exhibit->id),
-            'record'    => public_url('neatline/record')
+
+        'id'  => $exhibit->id,
+
+        'api' => array(
+            'records' => public_url('neatline/records/'.$exhibit->id),
+            'record'  => public_url('neatline/record')
         ),
-        'map'   => array(
-            'focus'     => $exhibit->map_focus,
-            'zoom'      => $exhibit->map_zoom
+
+        'map' => array(
+            'focus' => $exhibit->map_focus,
+            'zoom'  => $exhibit->map_zoom
+        )
+
+    ));
+}
+
+
+/**
+ * Construct editor globals.
+ *
+ * @param NeatlineExhibit $exhibit The exhibit.
+ * @return string JSON exhibit defaults.
+ */
+function neatline_editorGlobals($exhibit)
+{
+    return json_encode(array(
+        'api' => array(
+            'styles' => url('neatline/styles/'.$exhibit->id),
         )
     ));
 }
