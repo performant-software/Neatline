@@ -51,9 +51,7 @@ class NeatlineRecordTable extends Omeka_Db_Table
             foreach ($styles as $style) {
                 if (is_array($style)) {
                     foreach ($style as $s => $v) {
-                        if (in_array($s, $valid)) {
-                            $set[$s] = $v;
-                        }
+                        if (in_array($s, $valid)) $set[$s] = $v;
                     }
                 }
             }

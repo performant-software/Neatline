@@ -47,10 +47,8 @@ class Neatline_ExhibitsControllerTest_Styles
         $record->save();
 
         $yaml = <<<EOD
-
 tag:
  - vector_color: 'color'
-
 EOD;
 
         // Issue POST with styles string, reload exhibit.
