@@ -27,9 +27,23 @@ describe('Record Form Open', function() {
     feature2  = _t.vw.map.layers[1].features[0];
 
     els = {
-      pan:    _t.vw.record.$('input[value="pan"]'),
-      poly:   _t.vw.record.$('input[value="poly"]'),
-      close:  _t.vw.record.$('a[name="close"]')
+
+      labels: {
+        text:     _t.vw.record.$('a[href="#record-form-text"]'),
+        spatial:  _t.vw.record.$('a[href="#record-form-spatial"]'),
+        style:    _t.vw.record.$('a[href="#record-form-style"]')
+      },
+
+      tabs: {
+        text:     _t.vw.record.$('#record-form-text'),
+        spatial:  _t.vw.record.$('#record-form-spatial'),
+        style:    _t.vw.record.$('#record-form-style')
+      },
+
+      pan:        _t.vw.record.$('input[value="pan"]'),
+      poly:       _t.vw.record.$('input[value="poly"]'),
+      close:      _t.vw.record.$('a[name="close"]')
+
     };
 
   });
@@ -113,11 +127,16 @@ describe('Record Form Open', function() {
     _t.click($(recordRows[1]));
 
     // "Text" tab should be active.
-    expect($('#record-form-text')).toHaveClass('active');
+    expect(els.labels.text.parent('li')).toHaveClass('active');
+    expect(els.tabs.text).toHaveClass('active');
 
-    // "Spatial" and "Style" should be invisible.
-    expect($('#record-form-spatial')).not.toHaveClass('active');
-    expect($('#record-form-style')).not.toHaveClass('active');
+    // "Spatial" should be inactive.
+    expect(els.labels.spatial.parent('li')).not.toHaveClass('active');
+    expect(els.tabs.spatial).not.toHaveClass('active');
+
+    // "Style" should be inactive.
+    expect(els.labels.style.parent('li')).not.toHaveClass('active');
+    expect(els.tabs.style).not.toHaveClass('active');
 
   });
 

@@ -61,10 +61,7 @@ Neatline.module('Editor.Record', function(
 
       this.getTemplate();
       this.getUi();
-
-      // Activate "Text" by default.
-      this.__ui.text.region.addClass('active');
-      this.__ui.text.tab.tab('show');
+      this.resetTabs();
 
     },
 
@@ -234,6 +231,15 @@ Neatline.module('Editor.Record', function(
      */
     spatialTabActive: function() {
       return this.hash == '#record-form-spatial';
+    },
+
+
+    /**
+     * Activate the "Text" tab.
+     */
+    resetTabs: function() {
+      this.__ui.text.region.addClass('active');
+      this.__ui.text.tab.tab('show');
     },
 
 
