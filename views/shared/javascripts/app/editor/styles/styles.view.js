@@ -61,6 +61,7 @@ Neatline.module('Editor.Styles', function(
      * When a save succeeds.
      */
     onSuccess: function() {
+      Neatline.execute('map:refresh');
       Neatline.execute('editor:notifySuccess',
         STRINGS.styles.save.success
       );

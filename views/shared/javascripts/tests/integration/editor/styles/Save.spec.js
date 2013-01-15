@@ -97,4 +97,34 @@ describe('Styles Form Save', function() {
   });
 
 
+  it('should update the map when save succeeds', function() {
+
+    // --------------------------------------------------------------------
+    // When the "Save" button is clicked and the request succeeds, the map
+    // should be automatically refreshed to manifest the new styles.
+    // --------------------------------------------------------------------
+
+    // Click on "Save".
+    els.save.trigger('click');
+    _t.respondLast200('');
+
+    // Capture outoing request.
+    var request = _t.getLastRequest();
+
+    // Request should include map focus.
+    expect(request.method).toEqual('GET');
+    expect(request.url).toContain(__exhibit.api.records);
+    expect(request.url).toContain('extent=');
+    expect(request.url).toContain('zoom=');
+
+    // Respond with new data.
+    _t.respondLast200(_t.json.records.removed);
+
+    // Record2 point should be removed.
+    expect(_t.getVectorLayerByTitle('title2')).toBeUndefined();
+    expect(_t.vw.map.layers.length).toEqual(2);
+
+  });
+
+
 });

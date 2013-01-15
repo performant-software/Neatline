@@ -160,12 +160,9 @@ Neatline.module('Map', function(
      * emits the current focus of the map and triggers off a data reload.
      */
     registerMapEvents: function() {
-
-      // Register for `moveend`.
       this.map.events.register('moveend', this.map,
         _.bind(this.publishPosition, this)
       );
-
     },
 
 

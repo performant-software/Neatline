@@ -27,7 +27,7 @@ describe('Map Data Rendering', function() {
   });
 
 
-  it('should render layers for models', function() {
+  it('should load layers when the exhibit is started', function() {
 
     // --------------------------------------------------------------------
     // When the exhibit started, the map should query and render records.
@@ -46,7 +46,8 @@ describe('Map Data Rendering', function() {
   it('should update layers when the map is moved', function() {
 
     // --------------------------------------------------------------------
-    // The records collection should be reloaded when the map is moved.
+    // Layers should be updated when the map is moved and the record data
+    // has changed since the last data ingest.
     // --------------------------------------------------------------------
 
     var record2Layer = _t.getVectorLayerByTitle('title2');
@@ -57,21 +58,60 @@ describe('Map Data Rendering', function() {
     expect(record2Layer.features[0].geometry.y).toEqual(4);
     expect(_t.vw.map.layers.length).toEqual(3);
 
+    // Move map.
     _t.triggerMapMove();
     _t.respondLast200(_t.json.records.changed);
 
+    // Capture outoing request.
+    var request = _t.getLastRequest();
+
+    // Request should include map focus.
+    expect(request.method).toEqual('GET');
+    expect(request.url).toContain(__exhibit.api.records);
+    expect(request.url).toContain('extent=');
+    expect(request.url).toContain('zoom=');
+
     record2Layer = _t.getVectorLayerByTitle('title2');
 
-    // Record2 point at POINT(7 8).
+    // Record2 point should change to POINT(7 8).
     expect(record2Layer.features.length).toEqual(1);
     expect(record2Layer.features[0].geometry.x).toEqual(7);
     expect(record2Layer.features[0].geometry.y).toEqual(8);
     expect(_t.vw.map.layers.length).toEqual(3);
 
+  });
+
+
+  it('should remove layers when the map is moved', function() {
+
+    // --------------------------------------------------------------------
+    // Layers should be removed when the map is moved and records have been
+    // record data
+    // has changed since the last data ingest.
+    // --------------------------------------------------------------------
+
+    var record2Layer = _t.getVectorLayerByTitle('title2');
+
+    // Record2 point at POINT(3 4).
+    expect(record2Layer.features.length).toEqual(1);
+    expect(record2Layer.features[0].geometry.x).toEqual(3);
+    expect(record2Layer.features[0].geometry.y).toEqual(4);
+    expect(_t.vw.map.layers.length).toEqual(3);
+
+    // Move map.
     _t.triggerMapMove();
     _t.respondLast200(_t.json.records.removed);
 
-    // Record2 point removed.
+    // Capture outoing request.
+    var request = _t.getLastRequest();
+
+    // Request should include map focus.
+    expect(request.method).toEqual('GET');
+    expect(request.url).toContain(__exhibit.api.records);
+    expect(request.url).toContain('extent=');
+    expect(request.url).toContain('zoom=');
+
+    // Record2 point should be removed.
     expect(_t.getVectorLayerByTitle('title2')).toBeUndefined();
     expect(_t.vw.map.layers.length).toEqual(2);
 

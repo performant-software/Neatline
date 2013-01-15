@@ -31,6 +31,16 @@ Neatline.module('Map', function(
 
 
   /**
+   * Reload map data for current focus/zoom.
+   */
+  var refresh = function() {
+    Map.__view.publishPosition();
+  };
+
+  Neatline.commands.addHandler('map:refresh', refresh);
+
+
+  /**
    * Focus the map on the data extent for a record, identified by id.
    *
    * @param {Number} id: The record id.
