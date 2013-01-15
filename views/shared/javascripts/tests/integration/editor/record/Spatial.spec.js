@@ -160,7 +160,7 @@ describe('Record Form Spatial Tab', function() {
     els.sides.val('10');
     els.sides.trigger('change');
 
-    // "Sides" be updated.
+    // "Sides" should be updated.
     expect(_t.vw.map.controls.regPoly.handler.sides).toEqual(10);
 
   });
@@ -177,7 +177,7 @@ describe('Record Form Spatial Tab', function() {
     els.snap.val('45');
     els.snap.trigger('change');
 
-    // "Snap Angle" be updated.
+    // "Snap Angle" should be updated.
     expect(_t.vw.map.controls.regPoly.handler.snapAngle).toEqual(45);
 
   });
@@ -201,7 +201,7 @@ describe('Record Form Spatial Tab', function() {
     els.irreg.removeAttr('checked');
     els.irreg.trigger('change');
 
-    // "Irregular" be inactive.
+    // "Irregular" should be inactive.
     expect(_t.vw.map.controls.regPoly.handler.irregular).toEqual(false);
 
   });

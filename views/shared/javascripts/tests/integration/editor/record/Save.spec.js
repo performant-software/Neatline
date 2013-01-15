@@ -28,7 +28,7 @@ describe('Record Form Save', function() {
   });
 
 
-  it('should generate a well-formed PUT request', function() {
+  it('should issue PUT request when "Save" is clicked', function() {
 
     // --------------------------------------------------------------------
     // When the user clicks the "Save" button at the bottom of the edit

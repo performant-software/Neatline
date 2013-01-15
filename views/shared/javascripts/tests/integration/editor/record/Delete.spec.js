@@ -69,7 +69,7 @@ describe('Record Form Delete', function() {
   });
 
 
-  it('should execute delete when "Delete" is clicked', function() {
+  it('should issue DELETE request when "Delete" is clicked', function() {
 
     // --------------------------------------------------------------------
     // When the "Yes, delete" button is clicked, a well-formed DELETE

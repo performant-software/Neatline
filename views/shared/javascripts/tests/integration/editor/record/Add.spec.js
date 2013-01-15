@@ -63,7 +63,7 @@ describe('Record Form Add', function() {
   });
 
 
-  it('should generate well-formed POST request', function() {
+  it('should issue POST request when "Save" is clicked', function() {
 
     // --------------------------------------------------------------------
     // When a record is saved for the first time, the form should issue a

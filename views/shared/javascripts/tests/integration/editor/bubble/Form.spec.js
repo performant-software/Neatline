@@ -144,7 +144,7 @@ describe('Bubble Form Interaction', function() {
   });
 
 
-  it('should deactivate bubble on open w/ spatial tab', function() {
+  it('should deactivate bubble on open with spatial tab', function() {
 
     // --------------------------------------------------------------------
     // If the form is opened with the spatial tab already selected as the

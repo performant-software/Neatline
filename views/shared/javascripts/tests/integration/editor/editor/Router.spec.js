@@ -73,6 +73,7 @@ describe('Router', function() {
     _t.navigate('styles');
 
     // Style editor should be visible.
+    expect(_t.el.editor).toContain(_t.el.menu);
     expect(_t.el.editor).toContain(_t.el.styles);
 
     // "Styles" tab should be active.

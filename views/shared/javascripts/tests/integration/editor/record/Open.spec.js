@@ -52,6 +52,22 @@ describe('Record Form Open', function() {
   });
 
 
+  it('should open the form when /records/:id is requested', function() {
+
+    // --------------------------------------------------------------------
+    // The record form should be displayed when /records/:id is accessed.
+    // --------------------------------------------------------------------
+
+    // Click on record row.
+    _t.navigate($(recordRows[1]).attr('href'));
+
+    // Record form should be displayed.
+    expect(_t.el.editor).toContain(_t.el.record);
+    expect(_t.el.editor).not.toContain(_t.el.records);
+
+  });
+
+
   it('should populate form values', function() {
 
     // --------------------------------------------------------------------

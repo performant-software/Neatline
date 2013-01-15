@@ -86,7 +86,7 @@ describe('Bubble Show/Hide', function() {
     // The bubble should be hidden when the cursor leaves a feature.
     // --------------------------------------------------------------------
 
-    // Hover off feature.
+    // Highlight feature, then unhighlight.
     _t.hoverOnMapFeature(layer1, feature1);
     _t.unHoverOnMapFeature(_t.vw.map.layers);
 
@@ -99,8 +99,7 @@ describe('Bubble Show/Hide', function() {
   it('should hide bubble when the cursor leaves the exhibit', function() {
 
     // --------------------------------------------------------------------
-    // The bubble should be hidden when the cursor leaves the top-level
-    // `#neatline` container.
+    // The bubble should be hidden when the cursor leaves the exhibit.
     // --------------------------------------------------------------------
 
     // Move cursor out of the exhibit.
@@ -121,7 +120,7 @@ describe('Bubble Show/Hide', function() {
     // cursor leaves the feature1.
     // --------------------------------------------------------------------
 
-    // Hover, select.
+    // Highlight feature, then select.
     _t.hoverOnMapFeature(layer1, feature1);
     _t.clickOnMapFeature(layer1, feature1);
     var offset = _t.el.bubble.offset();
@@ -151,11 +150,9 @@ describe('Bubble Show/Hide', function() {
     // record and should not track the cursor.
     // --------------------------------------------------------------------
 
-    // Hover, select.
+    // Hover on feature, then select.
     _t.hoverOnMapFeature(layer1, feature1);
     _t.clickOnMapFeature(layer1, feature1);
-
-    // Capture current bubble offset.
     var offset = _t.el.bubble.offset();
 
     // Hover on a different feature.
@@ -184,14 +181,14 @@ describe('Bubble Show/Hide', function() {
     // responding to new hover events.
     // --------------------------------------------------------------------
 
-    // Hover, select.
+    // Hover on feature, then select.
     _t.hoverOnMapFeature(layer1, feature1);
     _t.clickOnMapFeature(layer1, feature1);
 
-    // Unselect.
+    // Unselect the feature.
     _t.clickOffMapFeature(_t.vw.map.layers);
 
-    // Bubble should not be visible.
+    // Bubble should disappear.
     expect(_t.el.bubble).not.toBeVisible();
 
     // Hover on a different feature.

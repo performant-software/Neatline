@@ -32,6 +32,7 @@ describe('Map Editing', function() {
 
     // Load map without record 2.
     _t.refreshMap(_t.json.records.removed);
+    expect(_t.vw.map.layers.length).toEqual(2);
 
     // Open form for record 2.
     _t.navigate('records/'+recordModels[1].get('id'));
@@ -148,10 +149,10 @@ describe('Map Editing', function() {
     _t.navigate('records/'+recordModels[1].get('id'));
     _t.navigate('records');
 
-    // Reload map without record 2.
+    // Reload the map without record 2.
     _t.refreshMap(_t.json.records.removed);
 
-    // Record 2 layer should be updated.
+    // Record 2 layer should be cleared.
     expect(_t.getVectorLayerByTitle('title2')).toBeUndefined();
 
   });
