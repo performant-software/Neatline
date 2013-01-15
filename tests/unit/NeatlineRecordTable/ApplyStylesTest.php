@@ -66,6 +66,30 @@ EOD;
     public function testExhibitIsolation()
     {
 
+        $exhibit1 = $this->__exhibit();
+        $exhibit2 = $this->__exhibit();
+        $record1 = new NeatlineRecord($exhibit1);
+        $record1->tags = 'tag1';
+        $record1->save();
+        $record2 = new NeatlineRecord($exhibit2);
+        $record2->tags = 'tag1';
+        $record2->save();
+
+        // Set styles YAML.
+        $exhibit1->styles = <<<EOD
+tag1:
+ - vector_color: '1'
+EOD;
+
+        // Apply styles, reload records.
+        $this->_recordsTable->applyStyles($exhibit1);
+        $record1 = $this->_recordsTable->find($record1->id);
+        $record2 = $this->_recordsTable->find($record2->id);
+
+        // Just exhibit 1 record should be updated.
+        $this->assertEquals($record1->vector_color, '1');
+        $this->assertNull($record2->vector_color);
+
     }
 
 
