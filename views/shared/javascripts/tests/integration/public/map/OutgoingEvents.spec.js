@@ -20,11 +20,16 @@ describe('Map Outgoing Events', function() {
 
     _t.loadNeatline();
 
-    layer   = _t.vw.map.layers[0];
+    layer = _t.vw.map.layers[0];
     feature = layer.features[0];
 
     spy = spyOn(Neatline.vent, 'trigger').andCallThrough();
 
+  });
+
+
+  afterEach(function() {
+    _t.el.bubble.remove();
   });
 
 

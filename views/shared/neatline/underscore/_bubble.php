@@ -16,5 +16,5 @@
 
 <script id="bubble-template" type="text/templates">
   <div class="title" data-text="record.title"></div>
-  <!-- <div class="body" data-text="record.body"></div> -->
+  <div class="body" data-text="record.body"></div>
 </script>

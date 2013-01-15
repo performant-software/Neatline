@@ -224,14 +224,7 @@ Neatline.module('Map', function(
      * @param {Number} zoom: The zoom value.
      */
     setViewport: function(focus, zoom) {
-
-      // Get focus lat/lon.
-      focus = focus.split(',');
-      var lonlat = new OpenLayers.LonLat(focus[0], focus[1]);
-
-      // Set center.
-      this.map.setCenter(lonlat, zoom);
-
+      this.map.setCenter(focus.split(','), zoom);
     },
 
 

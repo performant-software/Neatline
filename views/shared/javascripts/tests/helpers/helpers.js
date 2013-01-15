@@ -565,8 +565,7 @@ _t.unHoverOnMapFeature = function(layers) {
  * @param {Number} zoom: The zoom level.
  */
 _t.setMapCenter = function(lon, lat, zoom) {
-  var lonlat = new OpenLayers.LonLat(lon, lat);
-  this.vw.map.map.setCenter(lonlat, zoom);
+  this.vw.map.map.setCenter([lon, lat], zoom);
 };
 
   return _t;

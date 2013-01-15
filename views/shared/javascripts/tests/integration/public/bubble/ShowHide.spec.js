@@ -33,6 +33,11 @@ describe('Bubble Show/Hide', function() {
   });
 
 
+  afterEach(function() {
+    _t.el.bubble.remove();
+  });
+
+
   it('should show bubble on feature hover', function() {
 
     // --------------------------------------------------------------------
@@ -101,7 +106,9 @@ describe('Bubble Show/Hide', function() {
 
     // Move the cursor.
     _t.vw.map.map.events.triggerEvent('mousemove', {
-      xy: new OpenLayers.Pixel(3,4)
+      xy: new OpenLayers.Pixel(0,0),
+      clientX: 3,
+      clientY: 4
     });
 
     // Bubble should not move.
@@ -137,7 +144,9 @@ describe('Bubble Show/Hide', function() {
 
     // Move the cursor.
     _t.vw.map.map.events.triggerEvent('mousemove', {
-      xy: new OpenLayers.Pixel(3,4),
+      xy: new OpenLayers.Pixel(0,0),
+      clientX: 3,
+      clientY: 4
     });
 
     // Bubble should not move.
@@ -150,21 +159,21 @@ describe('Bubble Show/Hide', function() {
 
     // --------------------------------------------------------------------
     // When a feature is unselected, the bubble should disappear and start
-    // responding to hover events.
+    // responding to new hover events.
     // --------------------------------------------------------------------
 
     // Hover, select.
     _t.hoverOnMapFeature(layer1, feature1);
     _t.clickOnMapFeature(layer1, feature1);
 
-    // Bubble should not be visible after unselect.
+    // Unselect.
     _t.clickOffMapFeature(_t.vw.map.layers);
+
+    // Bubble should not be visible.
     expect(_t.el.bubble).not.toBeVisible();
 
     // Hover on a different feature.
     _t.hoverOnMapFeature(layer1, feature2);
-
-    // Capture current bubble offset.
     var offset = _t.el.bubble.offset();
 
     // Bubble values should be changed.
@@ -172,7 +181,9 @@ describe('Bubble Show/Hide', function() {
 
     // Move the cursor.
     _t.vw.map.map.events.triggerEvent('mousemove', {
-      xy: new OpenLayers.Pixel(3,4),
+      xy: new OpenLayers.Pixel(0,0),
+      clientX: 3,
+      clientY: 4
     });
 
     // Bubble should track the cursor.
