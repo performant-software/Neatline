@@ -82,6 +82,25 @@ class Neatline_ExhibitsController
 
 
     /**
+     * Save styles YAML.
+     */
+    public function stylesAction()
+    {
+
+        // Update the exhibit.
+        $this->_helper->viewRenderer->setNoRender(true);
+        $exhibit = $this->_helper->db->findById();
+        $exhibit->styles = $this->_request->getRawBody();
+        $exhibit->save();
+
+        // Propagate styles to exhibit records.
+        $records = $this->_helper->db->getTable('NeatlineRecord');
+        $records->applyStyles($exhibit);
+
+    }
+
+
+    /**
      * Show exhibit.
      */
     public function showAction()
