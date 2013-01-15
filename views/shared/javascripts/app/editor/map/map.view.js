@@ -14,8 +14,20 @@ _.extend(Neatline.Map.View.prototype, {
 
 
   /**
-   * Redefine `ingest` to exclude the edit layer from being rebuilt or
-   * removed when new record data is ingested in response to a map move.
+   * Initialize editor-specific state tracekrs.
+   */
+  initializeEditor: function() {
+    this.editLayer = null;
+  },
+
+
+  /**
+   * When a new record collection is ingested, exclude the layer that is
+   * currently being edited from being updated or garbage collected in the
+   * process of rendering the new collection. This prevents edit layers
+   * for new records from being prematurely garbage collected before they
+   * are saved for the first time, and unsaved modifications made to edit
+   * layers for existing records from being wiped out by server data.
    *
    * @param {Object} records: The records collection.
    * @unittest
@@ -24,17 +36,26 @@ _.extend(Neatline.Map.View.prototype, {
 
     var layers = [];
 
-    // Remove layers.
     _.each(this.layers, _.bind(function(layer) {
-      if (layer.nId !== this.frozen) this.map.removeLayer(layer);
+
+      // Remove if the layer is not the edit layer.
+      if (!this.editLayer || (layer.id != this.editLayer.id)) {
+        this.map.removeLayer(layer);
+      }
+
       else layers.push(layer);
+
     }, this));
 
     this.layers = layers;
 
-    // Add layers.
     records.each(_.bind(function(record) {
-      if (record.get('id') !== this.frozen) this.buildLayer(record);
+
+      // Add if the layer is not the edit layer.
+      if (!this.editLayer || (record.get('id') != this.editLayer.nId)) {
+        this.buildLayer(record);
+      }
+
     }, this));
 
     this.updateControls();
@@ -49,9 +70,8 @@ _.extend(Neatline.Map.View.prototype, {
    */
   startEdit: function(model) {
 
-    // Find and freeze the edit layer.
+    // Find or create a layer for the model.
     this.editLayer = this.getLayer(model) || this.buildLayer(model);
-    this.frozen = model.get('id');
 
     this.controls = {
 
@@ -109,7 +129,7 @@ _.extend(Neatline.Map.View.prototype, {
 
     };
 
-    // Add controls.
+    // Add edit controls to map.
     _.each(this.controls, _.bind(function(control, key) {
       this.map.addControl(control);
     }, this));
@@ -123,13 +143,13 @@ _.extend(Neatline.Map.View.prototype, {
   endEdit: function() {
 
     // Remove controls.
-    _.each(this.controls, _.bind(function(control, key) {
+    _.each(this.controls, _.bind(function(control) {
       this.map.removeControl(control);
       control.deactivate();
     }, this));
 
     this.activateControls();
-    this.frozen = null;
+    this.editLayer = null;
 
   },
 
@@ -144,9 +164,11 @@ _.extend(Neatline.Map.View.prototype, {
   update: function(settings) {
 
 
+    // Re-activate the default hover/click controls (which could have been
+    // disabled if the previous edit mode was "Modify Shape").
     this.activateControls();
 
-    // Rest controls.
+    // Deactivate all editing controls.
     _.each(this.controls, function(control) {
       control.deactivate();
     });
@@ -155,8 +177,8 @@ _.extend(Neatline.Map.View.prototype, {
     this.controls.edit.mode = OpenLayers.Control.ModifyFeature.RESHAPE;
 
 
-    // Set control mode.
-    // -----------------
+    // Apply edit mode.
+    // ----------------
 
     switch (settings.mode) {
 
@@ -188,8 +210,8 @@ _.extend(Neatline.Map.View.prototype, {
     }
 
 
-    // Set regular polygon settings.
-    // -----------------------------
+    // Apply "Regular Polygon" settings.
+    // ---------------------------------
 
     // Sides.
     var sides = _.isNaN(settings.poly.sides) ? 0 : settings.poly.sides;
@@ -203,20 +225,23 @@ _.extend(Neatline.Map.View.prototype, {
     this.controls.regPoly.handler.irregular = settings.poly.irreg;
 
 
-    // Apply modification settings.
-    // ----------------------------
+    // Apply "Modify Shape" settings.
+    // ------------------------------
 
     // Rotate.
-    if (_.contains(settings.modify, 'rotate'))
+    if (_.contains(settings.modify, 'rotate')) {
       this.controls.edit.mode |= OpenLayers.Control.ModifyFeature.ROTATE;
+    }
 
     // Resize.
-    if (_.contains(settings.modify, 'resize'))
+    if (_.contains(settings.modify, 'resize')) {
       this.controls.edit.mode |= OpenLayers.Control.ModifyFeature.RESIZE;
+    }
 
     // Drag.
-    if (_.contains(settings.modify, 'drag'))
+    if (_.contains(settings.modify, 'drag')) {
       this.controls.edit.mode |= OpenLayers.Control.ModifyFeature.DRAG;
+    }
 
   },
 
@@ -240,6 +265,7 @@ _.extend(Neatline.Map.View.prototype, {
       var wkt = formatWKT.write(features);
     }
 
+    // Update the form.
     Neatline.execute('editor:record:setCoverage', wkt);
 
   },
@@ -269,19 +295,15 @@ _.extend(Neatline.Map.View.prototype, {
 
 
   /**
-   * Remove a layer.
+   * Remove a layer from the map and the `layers` tracker.
    *
    * @param {Object} layer: The layer.
    */
   removeLayer: function(layer) {
-
     this.map.removeLayer(layer);
-
-    // Remove from `layers`.
     this.layers = _.reject(this.layers, function(l) {
       return l.nId == layer.nId;
     });
-
   },
 
 

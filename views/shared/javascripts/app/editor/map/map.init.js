@@ -20,6 +20,7 @@ Neatline.module('Editor.Map', { startWithParent: false,
   Map.init = function() {
     this.__collection = Neatline.Map.__collection;
     this.__view = Neatline.Map.__view;
+    this.__view.initializeEditor();
   };
 
   Map.addInitializer(Map.init);
