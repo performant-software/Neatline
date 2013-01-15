@@ -56,6 +56,30 @@ describe('Bubble Show/Hide', function() {
   });
 
 
+  it('should track the cursor when visible', function() {
+
+    // --------------------------------------------------------------------
+    // The bubble should track the cursor when visible and unfrozen.
+    // --------------------------------------------------------------------
+
+    // Hover on feature1.
+    _t.hoverOnMapFeature(layer1, feature1);
+
+    // Move the cursor.
+    _t.vw.map.map.events.triggerEvent('mousemove', {
+      xy: new OpenLayers.Pixel(0,0),
+      clientX: 3,
+      clientY: 4
+    });
+
+    // Bubble should follow.
+    var offset = _t.el.bubble.offset();
+    expect(offset.left).toEqual(3+_t.vw.bubble.options.padding.x);
+    expect(offset.top).toEqual(4-_t.vw.bubble.options.padding.y);
+
+  });
+
+
   it('should hide bubble on feature unhover', function() {
 
     // --------------------------------------------------------------------
@@ -100,8 +124,6 @@ describe('Bubble Show/Hide', function() {
     // Hover, select.
     _t.hoverOnMapFeature(layer1, feature1);
     _t.clickOnMapFeature(layer1, feature1);
-
-    // Capture current bubble offset.
     var offset = _t.el.bubble.offset();
 
     // Move the cursor.
