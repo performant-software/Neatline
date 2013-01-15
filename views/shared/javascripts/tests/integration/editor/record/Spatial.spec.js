@@ -22,6 +22,8 @@ describe('Record Form Spatial Tab', function() {
     _t.openRecordForm();
 
     els = {
+      text:     _t.vw.record.$('a[href="#record-form-text"]'),
+      spatial:  _t.vw.record.$('a[href="#record-form-spatial"]'),
       pan:      _t.vw.record.$('input[value="pan"]'),
       point:    _t.vw.record.$('input[value="point"]'),
       line:     _t.vw.record.$('input[value="line"]'),
@@ -392,6 +394,28 @@ describe('Record Form Spatial Tab', function() {
 
     // "Coverage" should be updated.
     expect(els.coverage.val()).toEqual('');
+
+  });
+
+
+  it('should revert to "Navigate" mode when tab is closed', function() {
+
+    // --------------------------------------------------------------------
+    // The geometry editing controls should revert to "Navigate" mode when
+    // the spatial tab is deactivated.
+    // --------------------------------------------------------------------
+
+    // Click "Spatial" tab.
+    els.spatial.tab('show');
+
+    // Activate "Draw Polygon".
+    els.pan[0].checked = false; els.poly[0].checked = true;
+
+    // Click "Text" tab.
+    els.text.tab('show');
+
+    // "Navigate" mode should be active.
+    expect(_t.vw.record.getEditMode()).toEqual('pan');
 
   });
 

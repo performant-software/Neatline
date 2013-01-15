@@ -25,9 +25,9 @@ Neatline.module('Editor.Record', function(
       'click a[name="close"]':    'close',
       'click a[name="save"]':     'save',
       'click a[name="delete2"]':  'remove',
-      'shown ul.nav a':           'updateBubble',
-      'change div.spatial input': 'updateMap',
-      'keyup div.spatial input':  'updateMap'
+      'shown ul.nav a':           'onTabChange',
+      'change div.spatial input': 'onEditControlChange',
+      'keyup div.spatial input':  'onEditControlChange'
     },
 
     selectors: {
@@ -149,12 +149,9 @@ Neatline.module('Editor.Record', function(
      * When a save fails.
      */
     onSaveError: function() {
-
-      // Flash error.
       Neatline.execute('editor:notifyError',
         STRINGS.record.save.error
       );
-
     },
 
 
@@ -181,19 +178,16 @@ Neatline.module('Editor.Record', function(
      * When a delete fails.
      */
     onDeleteError: function() {
-
-      // Flash error.
       Neatline.execute('editor:notifyError',
         STRINGS.record.delete.error
       );
-
     },
 
 
     /**
-     * Gather and publish the current map edit settings.
+     * When the edit controls are changed, publish the current settings.
      */
-    updateMap: function() {
+    onEditControlChange: function() {
       Neatline.execute('editor:map:updateEdit', {
         mode:   this.getEditMode(),
         modify: this.getModifyOptions(),
@@ -207,9 +201,10 @@ Neatline.module('Editor.Record', function(
      *
      * @param {Object} event: The `shown` event.
      */
-    updateBubble: function(event) {
+    onTabChange: function(event) {
       this.hash = event.target.hash;
       this.setBubbleStatus();
+      this.resetEditMode();
     },
 
 
@@ -248,6 +243,7 @@ Neatline.module('Editor.Record', function(
      */
     resetEditMode: function() {
       this.__ui.spatial.pan[0].checked = true;
+      this.__ui.spatial.pan.trigger('change');
     },
 
 
