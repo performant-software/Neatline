@@ -28,6 +28,7 @@ describe('Router', function() {
 
     // Menu, search, records should be visible.
     expect(_t.el.editor).toContain(_t.el.menu);
+    expect(_t.el.editor).toContain(_t.el.search);
     expect(_t.el.editor).toContain(_t.el.records);
 
     // "Records" tab should be active.

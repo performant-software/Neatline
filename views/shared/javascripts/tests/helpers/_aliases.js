@@ -39,6 +39,7 @@ _t.aliasEditor = function() {
     bubble:   Neatline.Bubble.          __view,
     editor:   Neatline.Editor.          __view,
     menu:     Neatline.Editor.Menu.     __view,
+    search:   Neatline.Editor.Search.   __view,
     mapedit:  Neatline.Editor.Map.      __view,
     records:  Neatline.Editor.Records.  __view,
     record:   Neatline.Editor.Record.   __view,
@@ -50,6 +51,7 @@ _t.aliasEditor = function() {
     bubble:   Neatline.Bubble.          __view.$el,
     editor:   Neatline.Editor.          __view.__ui.editor,
     menu:     Neatline.Editor.Menu.     __view.$el,
+    search:   Neatline.Editor.Search.   __view.$el,
     records:  Neatline.Editor.Records.  __view.$el,
     record:   Neatline.Editor.Record.   __view.$el,
     styles:   Neatline.Editor.Styles.   __view.$el

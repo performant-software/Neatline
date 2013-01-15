@@ -35,6 +35,7 @@ Neatline.module('Editor', { startWithParent: false,
 
       this.views = {
         menu:     Editor.Menu.    __view,
+        search:   Editor.Search.  __view,
         records:  Editor.Records. __view,
         record:   Editor.Record.  __view,
         styles:   Editor.Styles.  __view
@@ -54,6 +55,7 @@ Neatline.module('Editor', { startWithParent: false,
      */
     records: function() {
       this.views.menu.showIn(this.editor);
+      this.views.search.showIn(this.editor);
       this.views.records.showIn(this.editor);
       Neatline.vent.trigger('editor:router:#records');
     },
