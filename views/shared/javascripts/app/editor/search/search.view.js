@@ -19,6 +19,7 @@ Neatline.module('Editor.Search', function(
 
     template:   '#search-template',
     className:  'search',
+    tagName:    'form',
 
 
     /**
