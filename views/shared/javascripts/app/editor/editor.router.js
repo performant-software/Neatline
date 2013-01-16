@@ -54,11 +54,11 @@ Neatline.module('Editor', { startWithParent: false,
     /**
      * Show the list of records.
      */
-    records: function(query, page) {
+    'records': function(query, page) {
       page = parseInt(page, 10);
-      this.views.menu.showIn(this.editor);
-      this.views.search.showIn(this.editor);
-      this.views.records.showIn(this.editor);
+      this.views.menu.    showIn(this.editor);
+      this.views.search.  showIn(this.editor);
+      this.views.records. showIn(this.editor);
       Neatline.vent.trigger('editor:router:#records', query, page);
     },
 
@@ -87,8 +87,8 @@ Neatline.module('Editor', { startWithParent: false,
     /**
      * Show the style editor.
      */
-    styles: function() {
-      this.views.menu.showIn(this.editor);
+    'styles': function() {
+      this.views.menu.  showIn(this.editor);
       this.views.styles.showIn(this.editor);
       Neatline.vent.trigger('editor:router:#styles');
     }
