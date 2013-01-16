@@ -61,6 +61,34 @@ EOD;
 
 
     /**
+     * The `default` tag should be applied to all records in an exhibit.
+     */
+    public function testDefaultTag()
+    {
+
+        $exhibit = $this->__exhibit();
+        $record1 = $this->__record($exhibit);
+        $record2 = $this->__record($exhibit);
+
+        // Set styles YAML.
+        $exhibit->styles = <<<EOD
+default:
+ - vector_color: 'color'
+EOD;
+
+        // Apply styles, reload records.
+        $this->_recordsTable->applyStyles($exhibit);
+        $record1 = $this->_recordsTable->find($record1->id);
+        $record2 = $this->_recordsTable->find($record2->id);
+
+        // Both records should be matched by `default`.
+        $this->assertEquals($record1->vector_color, 'color');
+        $this->assertEquals($record2->vector_color, 'color');
+
+    }
+
+
+    /**
      * applyStyles() should only update records in the passed exhibit.
      */
     public function testExhibitIsolation()

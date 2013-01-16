@@ -21,12 +21,21 @@ Neatline.module('Editor.Search', function(
     className:  'search',
     tagName:    'form',
 
+    ui: {
+      next:   '.next',
+      prev:   '.prev',
+      start:  '.start',
+      end:    '.end',
+      total:  '.total'
+    },
+
 
     /**
      * Render template.
      */
     initialize: function() {
       this.getTemplate();
+      this.getUi();
     }
 
 
