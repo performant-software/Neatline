@@ -18,11 +18,12 @@ Neatline.module('Editor', { startWithParent: false,
 
 
     routes: {
-      '':                 'records',
-      'records':          'records',
-      'records/add':      'records/add',
-      'records/:id':      'records/:id',
-      'styles':           'styles'
+      '':                                     'records',
+      'records':                              'records',
+      'records/search(/query=:q)(/page=:p)':  'records',
+      'records/add':                          'records/add',
+      'records/:id':                          'records/:id',
+      'styles':                               'styles'
     },
 
 
@@ -53,11 +54,12 @@ Neatline.module('Editor', { startWithParent: false,
     /**
      * Show the list of records.
      */
-    records: function() {
+    records: function(query, page) {
+      page = parseInt(page, 10);
       this.views.menu.showIn(this.editor);
       this.views.search.showIn(this.editor);
       this.views.records.showIn(this.editor);
-      Neatline.vent.trigger('editor:router:#records');
+      Neatline.vent.trigger('editor:router:#records', query, page);
     },
 
 

@@ -21,7 +21,7 @@ Neatline.module('Map', function(
    */
   var update = function(params) {
     Map.__collection.update(params, function(records) {
-      Neatline.vent.trigger('map:newRecords', records);
+      Neatline.vent.trigger('map:update', records);
       Map.__view.ingest(records);
     });
   };
