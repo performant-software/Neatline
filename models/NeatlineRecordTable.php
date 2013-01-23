@@ -119,17 +119,15 @@ class NeatlineRecordTable extends Omeka_Db_Table
      * Construct records array for exhibit and editor.
      *
      * @param NeatlineExhibit $exhibit The exhibit record.
-     * @param string $extent The viewport extent.
-     * @param int $zoom The zoom level.
+     * @param array $params Associative array of filter parameters:
+     *  - `zoom`:   The current zoom level of the map.
+     *  - `extent`: The current viewport extent of the map (WKT POLYGON).
+     *  - `limit`:  The number of records to get.
+     *  - `offset`: The number of records to skip.
+     *
      * @return array The collection of records.
      */
-    public function queryRecords(
-        $exhibit,
-        $extent = null,
-        $zoom   = null,
-        $limit  = null,
-        $offset = 0
-    )
+    public function queryRecords($exhibit, $params = array())
     {
 
         $data = array('records' => array());
@@ -139,18 +137,28 @@ class NeatlineRecordTable extends Omeka_Db_Table
         $select = $this->_filterByExhibit($select, $exhibit);
 
         // ** Zoom
-        if (!is_null($zoom)) {
-            $select = $this->_filterByZoom($select, $zoom);
+        if (isset($params['zoom'])) {
+            $select = $this->_filterByZoom(
+                $select,
+                $params['zoom']
+            );
         }
 
         // ** Extent
-        if (!is_null($extent)) {
-            $select = $this->_filterByExtent($select, $extent);
+        if (isset($params['extent'])) {
+            $select = $this->_filterByExtent(
+                $select,
+                $params['extent']
+            );
         }
 
         // ** Limit
-        if (!is_null($limit)) {
-            $select = $this->_limit($limit, $offset);
+        if (isset($params['limit']) && isset($params['offset'])) {
+            $select = $this->_filterByLimit(
+                $select,
+                $params['limit'],
+                $params['offset']
+            );
         }
 
         // Execute query.
@@ -228,6 +236,20 @@ class NeatlineRecordTable extends Omeka_Db_Table
 
 
     /**
+     * Paginate the query.
+     *
+     * @param Omeka_Db_Select $select The starting select.
+     * @param int $offset The starting offset.
+     * @param int $limit The number of records to select.
+     * @return Omeka_Db_Select The filtered select.
+     */
+    public function _filterByLimit($select, $limit, $offset)
+    {
+        return $select->limit($limit, $offset);
+    }
+
+
+    /**
      * Filter by tag.
      *
      * @param Omeka_Db_Select $select The starting select.
@@ -239,19 +261,6 @@ class NeatlineRecordTable extends Omeka_Db_Table
         return $select->where(new Zend_Db_Expr(
             "tags REGEXP '[[:<:]]".$tag."[[:>:]]'"
         ));
-    }
-
-
-    /**
-     * Paginate the query.
-     *
-     * @param int $offset The starting offset.
-     * @param int $limit The number of records to select.
-     * @return Omeka_Db_Select The filtered select.
-     */
-    public function _limit($limit, $offset)
-    {
-        return $select->limit($limit, $offset);
     }
 
 
