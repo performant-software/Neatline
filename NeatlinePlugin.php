@@ -69,8 +69,9 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
             `id`                INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
             `tag_id`            INT(10) UNSIGNED NULL,
 
-            `added`             TIMESTAMP NULL,
+            `added`             TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             `modified`          TIMESTAMP NULL,
+
             `title`             TINYTEXT NULL,
             `description`       TEXT NULL,
             `slug`              VARCHAR(100) NOT NULL,
@@ -96,6 +97,9 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
             `item_id`           INT(10) UNSIGNED NULL,
             `exhibit_id`        INT(10) UNSIGNED NULL,
             `tag_id`            INT(10) UNSIGNED NULL,
+
+            `added`             TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            `modified`          TIMESTAMP NULL,
 
             `title`             MEDIUMTEXT NULL,
             `body`              MEDIUMTEXT NULL,

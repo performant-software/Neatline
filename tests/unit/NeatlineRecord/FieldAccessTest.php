@@ -24,6 +24,7 @@ class Neatline_NeatlineRecordTest_FieldAccess
 
         $record = $this->__record();
 
+        // Set fields.
         $record->item_id            = 1;
         $record->exhibit_id         = 2;
         $record->tag_id             = 3;
@@ -48,8 +49,10 @@ class Neatline_NeatlineRecordTest_FieldAccess
         $record->min_zoom           = 21;
         $record->save();
 
+        // Reload record.
         $record = $this->_recordsTable->find($record->id);
 
+        // Fields should be set.
         $this->assertEquals($record->item_id,           1);
         $this->assertEquals($record->exhibit_id,        2);
         $this->assertEquals($record->tag_id,            3);
@@ -60,7 +63,6 @@ class Neatline_NeatlineRecordTest_FieldAccess
         $this->assertEquals($record->coverage,          'POINT(1 1)');
         $this->assertEquals($record->map_focus,         '8');
         $this->assertEquals($record->map_zoom,          9);
-
         $this->assertEquals($record->vector_color,      '10');
         $this->assertEquals($record->stroke_color,      '11');
         $this->assertEquals($record->select_color,      '12');

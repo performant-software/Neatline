@@ -19,6 +19,9 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
     public $exhibit_id;         // INT(10) UNSIGNED NULL
     public $tag_id;             // INT(10) UNSIGNED NULL
 
+    public $added;              // TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    public $modified;           // TIMESTAMP NULL
+
     public $slug;               // VARCHAR(100) NULL
     public $title;              // MEDIUMTEXT NULL
     public $coverage;           // GEOMETRY NOT NULL
