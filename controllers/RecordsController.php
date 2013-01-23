@@ -16,22 +16,28 @@ class Neatline_RecordsController extends Neatline_RestController
 
 
     /**
+     * Get records table.
+     */
+    public function init()
+    {
+        $this->records  = $this->_helper->db->getTable('NeatlineRecord');
+        $this->exhibits = $this->_helper->db->getTable('NeatlineExhibit');
+        $this->exhibit  = $this->exhibits->find($this->_request->id);
+        parent::init();
+    }
+
+
+    /**
      * Get a record collection.
      */
     public function getAction()
     {
-
-        $records  = $this->_helper->db->getTable('NeatlineRecord');
-        $exhibits = $this->_helper->db->getTable('NeatlineExhibit');
-        $exhibit  = $exhibits->find($this->_request->id);
-
         echo Zend_Json::encode(
-            $records->queryRecords($exhibit,
+            $this->records->queryRecords($this->exhibit,
                 $this->_request->extent,
                 $this->_request->zoom
             )
         );
-
     }
 
 
