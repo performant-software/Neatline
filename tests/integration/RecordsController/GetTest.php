@@ -29,28 +29,34 @@ class Neatline_RecordsControllerTest_Get
         $record2  = $this->__record($exhibit1);
         $record3  = $this->__record($exhibit2);
 
-        // Hit /records, capture response.
+        // Hit /records, should return 200.
         $this->dispatch('neatline/records/'.$exhibit1->id);
-        $response = $this->getResponseArray();
-        $this->assertEquals(count($response), 2);
         $this->assertResponseCode(200);
 
+        // Capture response, alias records.
+        $response = $this->getResponseArray();
+        $records  = $response->records;
+
+        // Should be 2 records in the set.
+        $this->assertEquals(count($records), 2);
+        $this->assertEquals($response->count, 2);
+
         // Should emit records in the requested exhibit.
-        $this->assertEquals($response[0]->id, $record1->id);
-        $this->assertEquals($response[1]->id, $record2->id);
+        $this->assertEquals($records[0]->id, $record1->id);
+        $this->assertEquals($records[1]->id, $record2->id);
 
         // Should emit fields.
-        $this->assertObjectHasAttribute('id',       $response[0]);
-        $this->assertObjectHasAttribute('item_id',  $response[0]);
-        $this->assertObjectHasAttribute('title',    $response[0]);
-        $this->assertObjectHasAttribute('body',     $response[0]);
-        $this->assertObjectHasAttribute('coverage', $response[0]);
-        $this->assertObjectHasAttribute('tags',     $response[0]);
-        $this->assertObjectHasAttribute('slug',     $response[0]);
+        $this->assertObjectHasAttribute('id',       $records[0]);
+        $this->assertObjectHasAttribute('item_id',  $records[0]);
+        $this->assertObjectHasAttribute('title',    $records[0]);
+        $this->assertObjectHasAttribute('body',     $records[0]);
+        $this->assertObjectHasAttribute('coverage', $records[0]);
+        $this->assertObjectHasAttribute('tags',     $records[0]);
+        $this->assertObjectHasAttribute('slug',     $records[0]);
 
         // Should emit styles.
         foreach (neatline_getStyleCols() as $s) {
-            $this->assertObjectHasAttribute($s, $response[0]);
+            $this->assertObjectHasAttribute($s, $records[0]);
         }
 
     }

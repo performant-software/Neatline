@@ -102,22 +102,6 @@ class NeatlineRecordTable extends Omeka_Db_Table
 
 
     /**
-     * Count the total number of rows matched by a select, disregarding a
-     * `LIMIT` clause on the query.
-     *
-     * @param Omeka_Db_Select $select The select object.
-     * @return int The total number of results.
-     */
-    public function countTotalRecordsInSelect($select)
-    {
-        $select->reset(Zend_Db_Select::COLUMNS);
-        $select->reset(Zend_Db_Select::LIMIT_COUNT);
-        $select->reset(Zend_Db_Select::LIMIT_OFFSET);
-        return $select->columns('COUNT(*)')->query()->fetchColumn();
-    }
-
-
-    /**
      * Construct data array for individual record.
      *
      * @param int $id The record id.

@@ -15,8 +15,32 @@ Neatline.module('Shared.Record', function(
 
 
   Record.Collection = Backbone.Neatline.SyncCollection.extend({
-    url: function() { return __exhibit.api.records; },
-    model: Neatline.Shared.Record.Model
+
+
+    model: Neatline.Shared.Record.Model,
+
+
+    /**
+     * Construct the API url.
+     *
+     * @return {String}: The url.
+     */
+    url: function() {
+      return __exhibit.api.records;
+    },
+
+
+    /**
+     * Return the records collection, cache the count.
+     *
+     * @return {Array}: The records collection.
+     */
+    parse: function(response) {
+      this.count = response.count;
+      return response.records;
+    }
+
+
   });
 
 

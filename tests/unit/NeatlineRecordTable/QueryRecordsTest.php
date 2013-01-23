@@ -72,8 +72,12 @@ class Neatline_NeatlineRecordTableTest_QueryRecords
         $record1->save();
         $record2->save();
 
-        // Query for records.
-        $records = $this->_recordsTable->queryRecords($exhibit);
+        // Query for records, alias `records`.
+        $result = $this->_recordsTable->queryRecords($exhibit);
+        $records = $result['records'];
+
+        // `count` should equal result size.
+        $this->assertEquals($result['count'], 2);
 
         // Record 1:
         $this->assertEquals($records[0]['id'],              $record1->id);
@@ -142,10 +146,12 @@ class Neatline_NeatlineRecordTableTest_QueryRecords
         $record3->save();
 
         // Query for exhibit1 records.
-        $records = $this->_recordsTable->queryRecords($exhibit1);
-        $this->assertEquals($records[0]['id'], $record1->id);
-        $this->assertEquals($records[1]['id'], $record2->id);
-        $this->assertCount(2, $records);
+        $result = $this->_recordsTable->queryRecords($exhibit1);
+
+        // Exhibit2 records should be absent.
+        $this->assertEquals($result['records'][0]['id'], $record1->id);
+        $this->assertEquals($result['records'][1]['id'], $record2->id);
+        $this->assertCount(2, $result['records']);
 
     }
 
@@ -183,35 +189,35 @@ class Neatline_NeatlineRecordTableTest_QueryRecords
         $record3->save();
         $record4->save();
 
-        // Zoom=null, get all records.
-        $records = $this->_recordsTable->queryRecords($exhibit);
-        $this->assertCount(4, $records);
-        $this->assertEquals($records[0]['id'], $record1->id);
-        $this->assertEquals($records[1]['id'], $record2->id);
-        $this->assertEquals($records[2]['id'], $record3->id);
-        $this->assertEquals($records[3]['id'], $record4->id);
+        // Zoom = null
+        $result = $this->_recordsTable->queryRecords($exhibit);
+        $this->assertEquals($result['records'][0]['id'], $record1->id);
+        $this->assertEquals($result['records'][1]['id'], $record2->id);
+        $this->assertEquals($result['records'][2]['id'], $record3->id);
+        $this->assertEquals($result['records'][3]['id'], $record4->id);
+        $this->assertCount(4, $result['records']);
 
         // Zoom < min_zoom.
-        $records = $this->_recordsTable->queryRecords($exhibit,
+        $result = $this->_recordsTable->queryRecords($exhibit,
             null, $zoom=9);
-        $this->assertCount(2, $records);
-        $this->assertEquals($records[0]['id'], $record1->id);
-        $this->assertEquals($records[1]['id'], $record3->id);
+        $this->assertEquals($result['records'][0]['id'], $record1->id);
+        $this->assertEquals($result['records'][1]['id'], $record3->id);
+        $this->assertCount(2, $result['records']);
 
         // Zoom > min_zoom.
-        $records = $this->_recordsTable->queryRecords($exhibit,
+        $result = $this->_recordsTable->queryRecords($exhibit,
             null, $zoom=16);
-        $this->assertCount(2, $records);
-        $this->assertEquals($records[0]['id'], $record1->id);
-        $this->assertEquals($records[1]['id'], $record2->id);
+        $this->assertEquals($result['records'][0]['id'], $record1->id);
+        $this->assertEquals($result['records'][1]['id'], $record2->id);
+        $this->assertCount(2, $result['records']);
 
         // min_zoom < Zoom < max_zoom.
-        $records = $this->_recordsTable->queryRecords($exhibit,
+        $result = $this->_recordsTable->queryRecords($exhibit,
             null, $zoom=25);
-        $this->assertCount(3, $records);
-        $this->assertEquals($records[0]['id'], $record1->id);
-        $this->assertEquals($records[1]['id'], $record2->id);
-        $this->assertEquals($records[2]['id'], $record4->id);
+        $this->assertEquals($result['records'][0]['id'], $record1->id);
+        $this->assertEquals($result['records'][1]['id'], $record2->id);
+        $this->assertEquals($result['records'][2]['id'], $record4->id);
+        $this->assertCount(3, $result['records']);
 
     }
 
@@ -232,29 +238,29 @@ class Neatline_NeatlineRecordTableTest_QueryRecords
         $record2->save();
 
         // Extent=null, get all records.
-        $records = $this->_recordsTable->queryRecords($exhibit);
-        $this->assertCount(2, $records);
-        $this->assertEquals($records[0]['id'], $record1->id);
-        $this->assertEquals($records[1]['id'], $record2->id);
+        $result = $this->_recordsTable->queryRecords($exhibit);
+        $this->assertEquals($result['records'][0]['id'], $record1->id);
+        $this->assertEquals($result['records'][1]['id'], $record2->id);
+        $this->assertCount(2, $result['records']);
 
         // Record1 intersection.
-        $records = $this->_recordsTable->queryRecords($exhibit,
+        $result = $this->_recordsTable->queryRecords($exhibit,
             'POLYGON((1 1,1 3,3 3,3 1,1 1))');
-        $this->assertCount(1, $records);
-        $this->assertEquals($records[0]['id'], $record1->id);
+        $this->assertEquals($result['records'][0]['id'], $record1->id);
+        $this->assertCount(1, $result['records']);
 
         // Record2 intersection.
-        $records = $this->_recordsTable->queryRecords($exhibit,
+        $result = $this->_recordsTable->queryRecords($exhibit,
             'POLYGON((5 5,5 7,7 7,7 5,5 5))');
-        $this->assertCount(1, $records);
-        $this->assertEquals($records[0]['id'], $record2->id);
+        $this->assertEquals($result['records'][0]['id'], $record2->id);
+        $this->assertCount(1, $result['records']);
 
         // Record1 and record2 intersection.
-        $records = $this->_recordsTable->queryRecords($exhibit,
+        $result = $this->_recordsTable->queryRecords($exhibit,
             'POLYGON((1 1,1 5,5 5,5 1,1 1))');
-        $this->assertCount(2, $records);
-        $this->assertEquals($records[0]['id'], $record1->id);
-        $this->assertEquals($records[1]['id'], $record2->id);
+        $this->assertEquals($result['records'][0]['id'], $record1->id);
+        $this->assertEquals($result['records'][1]['id'], $record2->id);
+        $this->assertCount(2, $result['records']);
 
     }
 
@@ -279,10 +285,10 @@ class Neatline_NeatlineRecordTableTest_QueryRecords
         $record2->save();
 
         // Record with `POINT(0 0`)` excluded.
-        $records = $this->_recordsTable->queryRecords($exhibit,
+        $result = $this->_recordsTable->queryRecords($exhibit,
             'POLYGON((-1 -1,-1 1,1 1,1 -1,-1 -1))');
-        $this->assertCount(1, $records);
-        $this->assertEquals($records[0]['id'], $record2->id);
+        $this->assertEquals($result['records'][0]['id'], $record2->id);
+        $this->assertCount(1, $result['records']);
 
     }
 
