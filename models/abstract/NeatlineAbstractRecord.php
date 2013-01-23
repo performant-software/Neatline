@@ -16,9 +16,24 @@ abstract class Neatline_AbstractRecord extends Omeka_Record_AbstractRecord
 
 
     /**
-     * Insert or update the record.
+     * Before saving, update the `modified` timestamp.
+     *
+     * @return array The array representation of the record fields.
      */
-    public function save()
+    public function toArray()
+    {
+        $fields = parent::toArray();
+        $fields['modified'] = new Zend_Db_Expr('NOW()');
+        return $fields;
+    }
+
+
+    /**
+     * Insert or update the record.
+     *
+     * @param boolean $throwIfInvalid
+     */
+    public function save($throwIfInvalid = true)
     {
         $this->id = $this->insertOrUpdate($this->toArray());
     }

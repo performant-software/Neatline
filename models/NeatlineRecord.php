@@ -106,8 +106,8 @@ class NeatlineRecord extends Neatline_AbstractRecord
      */
     public function setNotEmpty($field, $value)
     {
-        if (trim($value) == '') $this[$field] = null;
-        else $this[$field] = $value;
+        if ($value == '') $this->$field = null;
+        else $this->$field = $value;
     }
 
 
