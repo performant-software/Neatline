@@ -64,17 +64,24 @@ class NeatlineRecordTable extends Omeka_Db_Table
 
 
     /**
-     * Select `coverage` as plain-text.
+     * Select `coverage` as plain-text, order by creation date.
      *
      * @return Omeka_Db_Select The modified select.
      */
     public function getSelect()
     {
-        return parent::getSelect()->columns(array(
-            'coverage' => new Zend_Db_Expr(
-                'NULLIF(AsText(coverage), "POINT(0 0)")'
-            )
-        ));
+
+        $select = parent::getSelect();
+
+        // Select `coverage` as plain-text.
+        $select->columns(array('coverage' => new Zend_Db_Expr(
+            'NULLIF(AsText(coverage), "POINT(0 0)")'
+        )));
+
+        // Order chronologically.
+        $select->order('added DESC');
+        return $select;
+
     }
 
 

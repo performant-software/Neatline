@@ -20,7 +20,7 @@ class Neatline_NeatlineRecordTableTest_GetSelect
      * getSelect() should select the plain-text value of `coverage` when
      * the field is defined.
      */
-    public function testDefinedCoverage()
+    public function testCoverageWithDefinedValue()
     {
 
         $record = new NeatlineRecord();
@@ -42,7 +42,7 @@ class Neatline_NeatlineRecordTableTest_GetSelect
      * getSelect() should select NULL for `coverage` when the plain-text
      * value of the field is `POINT(0 0)`.
      */
-    public function testPoint00Coverage()
+    public function testCoverageWithPoint00Value()
     {
 
         $record = new NeatlineRecord();
@@ -56,6 +56,35 @@ class Neatline_NeatlineRecordTableTest_GetSelect
 
         // Coverage should be null.
         $this->assertNull($record->coverage);
+
+    }
+
+
+    /**
+     * getSelect() should order records by `added`.
+     */
+    public function testAddedOrdering()
+    {
+
+        $record1 = new NeatlineRecord();
+        $record1->added = '2000-01-01';
+        $record2 = new NeatlineRecord();
+        $record2->added = '2001-01-01';
+        $record3 = new NeatlineRecord();
+        $record3->added = '2002-01-01';
+        $record1->save();
+        $record2->save();
+        $record3->save();
+
+        // Query for the records.
+        $records = $this->_recordsTable->fetchObjects(
+            $this->_recordsTable->getSelect()
+        );
+
+        // Should be in reverse chronological order.
+        $this->assertEquals($records[0]->id, $record3->id);
+        $this->assertEquals($records[1]->id, $record2->id);
+        $this->assertEquals($records[2]->id, $record1->id);
 
     }
 

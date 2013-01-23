@@ -43,7 +43,7 @@ class NeatlineExhibit extends Neatline_AbstractRecord
     /**
      * Get the number of active records in the exhibit.
      *
-     * @return integer $id The record count.
+     * @return integer The record count.
      */
     public function getNumberOfRecords()
     {
