@@ -12,15 +12,14 @@
  */
 
 
-if (!defined('NEATLINE_PLUGIN_DIR')) {
-    define('NEATLINE_PLUGIN_DIR', dirname(__FILE__));
-}
+if (!defined('NL_DIR')) define('NL_DIR', dirname(__FILE__));
 
-require_once NEATLINE_PLUGIN_DIR . '/NeatlinePlugin.php';
-require_once NEATLINE_PLUGIN_DIR . '/helpers/NeatlineFunctions.php';
-require_once NEATLINE_PLUGIN_DIR . '/forms/NeatlineDetails.php';
-require_once NEATLINE_PLUGIN_DIR . '/controllers/abstract/Rest.php';
-require_once NEATLINE_PLUGIN_DIR . '/components/spyc/Spyc.php';
+require_once NL_DIR . '/NeatlinePlugin.php';
+require_once NL_DIR . '/controllers/abstract/NeatlineRestController.php';
+require_once NL_DIR . '/models/abstract/NeatlineAbstractRecord.php';
+require_once NL_DIR . '/forms/NeatlineDetails.php';
+require_once NL_DIR . '/helpers/NeatlineFunctions.php';
+require_once NL_DIR . '/components/spyc/Spyc.php';
 
 Zend_Registry::set('fileIn', 'php://input');
 

@@ -11,7 +11,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class NeatlineRecord extends Omeka_Record_AbstractRecord
+class NeatlineRecord extends Neatline_AbstractRecord
 {
 
 
@@ -142,64 +142,6 @@ class NeatlineRecord extends Omeka_Record_AbstractRecord
      **/
     public function buildJsonData() {
         return array_merge(parent::toArray(), $this->styles);
-    }
-
-
-    /**
-     * Insert or update the record.
-     */
-    public function save()
-    {
-        $this->id = $this->insertOrUpdate($this->toArray());
-    }
-
-
-    /**
-     * Insert or update the record. Approach based on:
-     * https://gist.github.com/1942116
-     *
-     * @param array $values The record values.
-     */
-    public function insertOrUpdate(array $values)
-    {
-
-        // Get table and adapter.
-        $table = $this->getTable('NeatlineRecord');
-        $db = $table->getAdapter();
-
-        $cols = array();
-        $vals = array();
-        $bind = array();
-        $set  = array();
-
-        // Build column and value arrays.
-        foreach ($values as $col => $val) {
-            $cols[] = $db->quoteIdentifier($col, true);
-            if ($val instanceof Zend_Db_Expr) {
-                $vals[] = $val->__toString();
-            } else {
-                $vals[] = '?';
-                $bind[] = $val;
-            }
-        }
-
-        // Build update assignments.
-        foreach ($cols as $i => $col) {
-            $set[] = sprintf('%s = %s', $col, $vals[$i]);
-        }
-
-        $sql = sprintf(
-            "INSERT INTO %s (%s) VALUES (%s) ON DUPLICATE KEY UPDATE %s;",
-            $db->quoteIdentifier($table->getTableName(), true),
-            implode(', ', $cols),
-            implode(', ', $vals),
-            implode(', ', $set)
-        );
-
-        // Query, return insert id.
-        $db->query($sql, array_merge($bind, $bind));
-        return (int) $db->lastInsertId();
-
     }
 
 

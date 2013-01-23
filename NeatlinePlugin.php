@@ -163,7 +163,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
     public function hookDefineRoutes($args)
     {
         $args['router']->addConfig(new Zend_Config_Ini(
-            NEATLINE_PLUGIN_DIR . '/routes.ini', 'routes')
+            NL_DIR . '/routes.ini', 'routes')
         );
     }
 

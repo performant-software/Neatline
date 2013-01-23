@@ -154,11 +154,8 @@ class Neatline_Test_AppTestCase extends Omeka_Test_AppTestCase
     public function writeFixture($route, $file)
     {
 
-        // Construct fixture path.
-        $fixturePath = NEATLINE_PLUGIN_DIR .
-            '/views/shared/javascripts/tests/fixtures/';
-
-        // Open file.
+        // Open the fixture file.
+        $fixturePath = NL_DIR.'/views/shared/javascripts/tests/fixtures/';
         $fixture = fopen($fixturePath . $file, 'w');
 
         // Hit route, get response.
@@ -181,7 +178,7 @@ class Neatline_Test_AppTestCase extends Omeka_Test_AppTestCase
     {
 
         // Open the file.
-        $mockPath = NEATLINE_PLUGIN_DIR . '/tests/mocks/put.txt';
+        $mockPath = NL_DIR . '/tests/mocks/put.txt';
         $fileIn = fopen($mockPath, 'w');
 
         // Write data.
