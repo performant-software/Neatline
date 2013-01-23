@@ -64,7 +64,7 @@ class NeatlineRecordTable extends Omeka_Db_Table
 
 
     /**
-     * Select `coverage` as plain-text, order by creation date.
+     * Select `coverage` as plain-text and order by creation date.
      *
      * @return Omeka_Db_Select The modified select.
      */
@@ -80,6 +80,7 @@ class NeatlineRecordTable extends Omeka_Db_Table
 
         // Order chronologically.
         $select->order('added DESC');
+
         return $select;
 
     }
@@ -97,6 +98,22 @@ class NeatlineRecordTable extends Omeka_Db_Table
             'exhibit_id' => $exhibit->id,
             'map_active' => 1
         ));
+    }
+
+
+    /**
+     * Count the total number of rows matched by a select, disregarding a
+     * `LIMIT` clause on the query.
+     *
+     * @param Omeka_Db_Select $select The select object.
+     * @return int The total number of results.
+     */
+    public function countTotalRecordsInSelect($select)
+    {
+        $select->reset(Zend_Db_Select::COLUMNS);
+        $select->reset(Zend_Db_Select::LIMIT_COUNT);
+        $select->reset(Zend_Db_Select::LIMIT_OFFSET);
+        return $select->columns('COUNT(*)')->query()->fetchColumn();
     }
 
 
@@ -122,30 +139,51 @@ class NeatlineRecordTable extends Omeka_Db_Table
      * @param int $zoom The zoom level.
      * @return array The collection of records.
      */
-    public function queryRecords($exhibit, $extent=null, $zoom=null)
+    public function queryRecords(
+        $exhibit,
+        $extent = null,
+        $zoom   = null,
+        $limit  = null,
+        $offset = 0
+    )
     {
 
+        $data = array('records' => array());
         $select = $this->getSelect();
-        $data = array();
 
-        // Exhibit.
+        // Filter by exhibit.
         $select = $this->_filterByExhibit($select, $exhibit);
 
-        // Zoom.
+        // ** Zoom
         if (!is_null($zoom)) {
             $select = $this->_filterByZoom($select, $zoom);
         }
 
-        // Extent.
+        // ** Extent
         if (!is_null($extent)) {
             $select = $this->_filterByExtent($select, $extent);
         }
 
+        // ** Limit
+        if (!is_null($limit)) {
+            $select = $this->_limit($limit, $offset);
+        }
+
+        // Execute query.
         if ($records = $this->fetchObjects($select)) {
             foreach ($records as $record) {
-                $data[] = $record->buildJsonData();
+                $data['records'][] = $record->buildJsonData();
             }
         }
+
+        // Strip off LIMIT and columns.
+        $select->reset(Zend_Db_Select::LIMIT_COUNT);
+        $select->reset(Zend_Db_Select::LIMIT_OFFSET);
+        $select->reset(Zend_Db_Select::COLUMNS);
+
+        // Count the total result size.
+        $data['count'] = $select->columns('COUNT(*)')->
+            query()->fetchColumn();
 
         return $data;
 
@@ -217,6 +255,19 @@ class NeatlineRecordTable extends Omeka_Db_Table
         return $select->where(new Zend_Db_Expr(
             "tags REGEXP '[[:<:]]".$tag."[[:>:]]'"
         ));
+    }
+
+
+    /**
+     * Paginate the query.
+     *
+     * @param int $offset The starting offset.
+     * @param int $limit The number of records to select.
+     * @return Omeka_Db_Select The filtered select.
+     */
+    public function _limit($limit, $offset)
+    {
+        return $select->limit($limit, $offset);
     }
 
 
