@@ -351,4 +351,25 @@ class Neatline_NeatlineRecordTableTest_QueryRecords
     }
 
 
+    /**
+     * When a `limit` and `offset` values are passed to queryRecords(),
+     * the result set should include a `count` key with the original size
+     * of the result set before the limit was applied.
+     */
+    public function testTotalRecordCount()
+    {
+
+        $exhibit = $this->__exhibit();
+        $record1 = $this->__record($exhibit);
+        $record2 = $this->__record($exhibit);
+        $record3 = $this->__record($exhibit);
+
+        // Limit to two records.
+        $result = $this->_recordsTable->queryRecords($exhibit,
+            array('limit' => 2, 'offset' => 0));
+        $this->assertEquals($result['count'], 3);
+
+    }
+
+
 }
