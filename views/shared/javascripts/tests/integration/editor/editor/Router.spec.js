@@ -42,6 +42,7 @@ describe('Router', function() {
 
     it('query', function() {
       _t.navigate('records/search/query=test');
+      expect(_t.vw.search.__ui.search).toHaveValue('test');
     });
 
     it('offset', function() {
@@ -50,6 +51,7 @@ describe('Router', function() {
 
     it('query and offset', function() {
       _t.navigate('records/search/query=test/start=50');
+      expect(_t.vw.search.__ui.search).toHaveValue('test');
     });
 
   });
