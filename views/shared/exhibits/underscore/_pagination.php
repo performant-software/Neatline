@@ -14,12 +14,48 @@
 ?>
 
 <script id="pagination-template" type="text/templates">
+
+  <%
+
+    var prevActive = true;
+    var nextActive = true;
+
+    // Base fragment.
+    var prev = '#records/search';
+    var next = '#records/search';
+
+    // Add existing query.
+    if (!_.isEmpty(query)) {
+      prev += '/query='+query;
+      next += '/query='+query;
+    }
+
+    // Compute back/forward offsets.
+    var prevStart = records.offset-limit;
+    var nextStart = records.offset+limit;
+
+    // Add previous offset, if greater than 0.
+    if (prevStart >= 0) prev += '/start='+prevStart;
+    else { prev += '/start=0'; prevActive = false; }
+
+    // Add next offset, if less than total count.
+    if (nextStart < records.count) next += '/start='+nextStart;
+    else { next += '/start='+records.offset; nextActive = false; }
+
+  %>
+
   <ul>
-    <li><a class="next" href="<%= next %>">«</a></li>
-    <li><a class="prev" href="<%= prev %>">»</a></li>
+    <li <% if (!prevActive) {
+      %><%='class="disabled"'%><%
+    } %>><a href="<%= prev %>">«</a></li>
+    <li <% if (!nextActive) {
+      %><%='class="disabled"'%><%
+    } %>><a href="<%= next %>">»</a></li>
   </ul>
   <div class="pagination-offset">
-    <span class="start"><%= start %></span>&ndash;<span class="end"><%= end %></span> of
-    <span class="total"><%= total %></span>
+    <span class="start"><%= records.offset+1 %></span> -
+    <span class="end"><%= records.offset+records.length %></span> of
+    <span class="total"><%= records.count %></span>
   </div>
+
 </script>

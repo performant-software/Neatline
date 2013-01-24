@@ -15,21 +15,14 @@ Neatline.module('Editor.Search', function(
 
 
   /**
-   * Udpate the records collection and render the list.
+   * Update the search view with a query and, execute the search.
    *
-   * @param {Object} records: The new records collection.
+   * @param {String} query:   The search query.
+   * @param {Number} offset:  The limit offset.
    */
   var hydrate = function(query, offset) {
-
-    // Apply defaults, manifest the query.
     query = query || null; offset = offset || 0;
-    Search.__view.setQuery(query);
-
-    // Execute the search.
-    Neatline.execute('editor:records:update', {
-      query: query, limit: 50, offset: offset
-    });
-
+    Search.__view.hydrate(query, offset);
   };
 
   Neatline.commands.addHandler('editor:search:hydrate', hydrate);
@@ -37,18 +30,12 @@ Neatline.module('Editor.Search', function(
 
 
   /**
-   * Udpate the records collection and render the list.
+   * Update the pagination to mirror the current record collection.
    *
-   * @param {Object} records: The new records collection.
+   * @param {Object} records: The records collection.
    */
   var paginate = function(records) {
-    Search.__view.updatePagination({
-      prev:   '#',
-      next:   '#',
-      start:  records.offset+1,
-      end:    records.offset+records.length,
-      total:  records.count
-    });
+    Search.__view.updatePagination(records);
   };
 
   Neatline.commands.addHandler('editor:search:paginate', paginate);

@@ -14,6 +14,9 @@ Neatline.module('Editor.Search', function(
   Search, Neatline, Backbone, Marionette, $, _) {
 
 
+  var LIMIT = 50;
+
+
   Search.View = Backbone.Neatline.View.extend({
 
 
@@ -31,39 +34,37 @@ Neatline.module('Editor.Search', function(
      * Compile search and pagination templates.
      */
     initialize: function() {
-
+      this.pagination = _.template($('#pagination-template').html());
       this.getTemplate();
       this.getUi();
-
-      // Compile the pagination template, render defaults.
-      this.pagination = _.template($('#pagination-template').html());
-
     },
 
 
     /**
      * Update the paginator.
      *
-     * @param {Object} locals: {
-     *    prev:   The link to the previous page.
-     *    next:   The link to the next page.
-     *    start:  The starting record offset.
-     *    end:    The ending record offset.
-     *    total:  The total number of records.
-     *  }
+     * @param {Object} records: The current records collection.
      */
-    updatePagination: function(locals) {
-      this.__ui.pagination.html(this.pagination(locals));
+    updatePagination: function(records) {
+      this.__ui.pagination.html(this.pagination({
+        query:    this.__ui.search.val(),
+        records:  records,
+        limit:    LIMIT
+      }));
     },
 
 
     /**
-     * Set the query.
+     * Hydrate a search route.
      *
-     * @param {String} query: The search query.
+     * @param {String} query:   The search query.
+     * @param {Number} offset:  The limit offset.
      */
-    setQuery: function(query) {
+    hydrate: function(query, offset) {
       this.__ui.search.val(query);
+      Neatline.execute('editor:records:update', {
+        query: query, limit: LIMIT, offset: offset
+      });
     }
 
 
