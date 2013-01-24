@@ -266,7 +266,7 @@ _t.aliasEditor = function() {
  * @return {Array}: The DOM collection of <a> elements.
  */
 _t.getRecordRows = function() {
-  return this.el.records.find('a');
+  return this.el.records.find('.list a');
 };
 
 

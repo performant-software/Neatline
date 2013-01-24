@@ -17,9 +17,7 @@ Neatline.module('Editor.Records', function(
   Records.View = Backbone.Neatline.View.extend({
 
 
-    template:   '#record-list-template',
     className:  'records',
-    tagName:    'ul',
 
     events: {
       'click a': 'click'
@@ -30,22 +28,28 @@ Neatline.module('Editor.Records', function(
      * Compile row template.
      */
     initialize: function() {
-      this.records = _.template($(this.template).html());
+      this.pagination = _.template($('#pagination-template').html());
+      this.records = _.template($('#record-list-template').html());
     },
 
 
     /**
-     * Render list of records.
+     * Render record list and paginators.
      *
      * @param {Object} records: The records collection.
      */
     ingest: function(records) {
       this.$el.html(this.records({ records: records }));
+      this.$el.find('.pagination').html(this.pagination({
+        query:    Neatline.request('editor:search:getQuery'),
+        records:  records,
+        limit:    50
+      }));
     },
 
 
     /**
-     * Focus the map on the record.
+     * Focus the map when a record row is clicked.
      *
      * @param {Object} e: The click event.
      */

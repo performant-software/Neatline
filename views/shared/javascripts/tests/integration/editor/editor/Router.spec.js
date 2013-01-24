@@ -42,7 +42,6 @@ describe('Router', function() {
 
     it('query', function() {
       _t.navigate('records/search/query=test');
-      expect(_t.vw.search.__ui.search).toHaveValue('test');
     });
 
     it('offset', function() {
@@ -51,7 +50,6 @@ describe('Router', function() {
 
     it('query and offset', function() {
       _t.navigate('records/search/query=test/start=50');
-      expect(_t.vw.search.__ui.search).toHaveValue('test');
     });
 
   });
@@ -63,7 +61,7 @@ describe('Router', function() {
     // #records/:id should display a record edit form.
     // --------------------------------------------------------------------
 
-    _t.navigate($(_t.getRecordRows()[0]).attr('href'));
+    _t.navigate($(_t.getRecordRows()[1]).attr('href'));
 
     // Record form should be visible.
     expect(_t.el.editor).toContain(_t.el.record);

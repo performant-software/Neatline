@@ -43,6 +43,16 @@ Neatline.module('Editor.Search', function(
     setQuery: function(query) {
       this.__ui.search.val(query);
       // TODO: parse.
+    },
+
+
+    /**
+     * Return the current search query.
+     *
+     * @return {String} query: The search query.
+     */
+    getQuery: function() {
+      return this.__ui.search.val();
     }
 
 

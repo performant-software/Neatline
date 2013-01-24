@@ -60,7 +60,7 @@
       %><%='class="disabled"'%><%
     } %>><a href="<%= next %>">»</a></li>
   </ul>
-  <div class="pagination-offset">
+  <div class="pagination-details">
     <span class="start"><%= records.offset+1 %></span> -
     <span class="end"><%= records.offset+records.length %></span> of
     <span class="total"><%= records.count %></span>

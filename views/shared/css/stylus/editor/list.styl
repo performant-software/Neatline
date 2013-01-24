@@ -16,22 +16,38 @@
 
 #editor
 
-  ul.records
-    margin 0
+  .records
 
-    a
-      display list-item
-      font-size 14px
-      font-weight 300
-      padding 0.2em $editorMargin
-      border-top 1px solid #f0f0f0
-      white-space nowrap
-      color $textColor
+    ul.list
+      margin 0
 
-      &:hover
-        background $accentColor
-        text-decoration none
-        color white
+      a
+        display list-item
+        font-size 14px
+        font-weight 300
+        padding 0.2em $editorMargin
+        border-top 1px solid #f0f0f0
+        white-space nowrap
+        color $textColor
 
-      .title
-        font-weight bold
+        &:hover
+          background $accentColor
+          text-decoration none
+          color white
+
+        .title
+          font-weight bold
+
+    .pagination
+      padding-left $editorMargin
+
+      .pagination-details
+        display inline
+        position relative
+        left 5px
+        top -10px
+
+        .start
+        .end
+        .total
+          font-weight bold
