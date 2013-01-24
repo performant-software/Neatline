@@ -138,16 +138,14 @@ class NeatlineRecordTable extends Omeka_Db_Table
 
         // ** Zoom
         if (isset($params['zoom'])) {
-            $select = $this->_filterByZoom(
-                $select,
+            $select = $this->_filterByZoom($select,
                 $params['zoom']
             );
         }
 
         // ** Extent
         if (isset($params['extent'])) {
-            $select = $this->_filterByExtent(
-                $select,
+            $select = $this->_filterByExtent($select,
                 $params['extent']
             );
         }
@@ -155,8 +153,7 @@ class NeatlineRecordTable extends Omeka_Db_Table
         // ** Limit
         if (isset($params['limit']) && isset($params['offset'])) {
             $data['offset'] = $params['offset'];
-            $select = $this->_filterByLimit(
-                $select,
+            $select = $this->_filterByLimit($select,
                 $params['limit'],
                 $params['offset']
             );

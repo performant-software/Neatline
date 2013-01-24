@@ -18,12 +18,11 @@ Neatline.module('Editor', { startWithParent: false,
 
 
     routes: {
-      '':                                     'records',
-      'records':                              'records',
-      'records/search(/query=:q)(/start=:o)': 'records',
-      'records/add':                          'records/add',
-      'records/:id':                          'records/:id',
-      'styles':                               'styles'
+      '':                                       'records',
+      'records(/search)(/query=:q)(/start=:o)': 'records',
+      'records/add':                            'records/add',
+      'records/:id':                            'records/:id',
+      'styles':                                 'styles'
     },
 
 
