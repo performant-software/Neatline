@@ -36,6 +36,7 @@ _.extend(Neatline.Map.View.prototype, {
 
     var layers = [];
 
+    // REMOVE
     _.each(this.layers, _.bind(function(layer) {
 
       // Remove if the layer is not the edit layer.
@@ -49,6 +50,7 @@ _.extend(Neatline.Map.View.prototype, {
 
     this.layers = layers;
 
+    // CREATE
     records.each(_.bind(function(record) {
 
       // Add if the layer is not the edit layer.

@@ -33,10 +33,12 @@ class Neatline_RecordsController extends Neatline_RestController
     public function getAction()
     {
         echo Zend_Json::encode(
-            $this->records->queryRecords($this->exhibit,
-                $this->_request->extent,
-                $this->_request->zoom
-            )
+            $this->records->queryRecords($this->exhibit, array(
+                'extent'    => $this->_request->extent,
+                'zoom'      => $this->_request->zoom,
+                'offset'    => $this->_request->offset,
+                'limit'     => $this->_request->limit
+            ))
         );
     }
 

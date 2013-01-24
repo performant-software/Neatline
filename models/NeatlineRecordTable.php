@@ -122,8 +122,8 @@ class NeatlineRecordTable extends Omeka_Db_Table
      * @param array $params Associative array of filter parameters:
      *  - `zoom`:   The current zoom level of the map.
      *  - `extent`: The current viewport extent of the map (WKT POLYGON).
-     *  - `limit`:  The number of records to get.
      *  - `offset`: The number of records to skip.
+     *  - `limit`:  The number of records to get.
      *
      * @return array The collection of records.
      */
@@ -169,7 +169,7 @@ class NeatlineRecordTable extends Omeka_Db_Table
             }
         }
 
-        // Strip off LIMIT and columns.
+        // Strip off limit and columns.
         $select->reset(Zend_Db_Select::LIMIT_COUNT);
         $select->reset(Zend_Db_Select::LIMIT_OFFSET);
         $select->reset(Zend_Db_Select::COLUMNS);

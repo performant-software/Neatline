@@ -20,7 +20,13 @@ Neatline.module('Editor.Search', function(
    * @param {Object} records: The new records collection.
    */
   var paginate = function(records) {
-    // console.log(records);
+    Search.__view.updatePagination({
+      prev:   '#',
+      next:   '#',
+      start:  records.offset+1,
+      end:    records.offset+records.length,
+      total:  records.count
+    });
   };
 
   Neatline.commands.addHandler('editor:search:paginate', paginate);
