@@ -48,9 +48,14 @@ class NeatlineRecordTable extends Omeka_Db_Table
             // `SET`
             $set = array();
             foreach ($styles as $style) {
+                // If the key has a value;
                 if (is_array($style)) {
                     foreach ($style as $s => $v) {
-                        if (in_array($s, $valid)) $set[$s] = $v;
+                        // If the key is a supported style;
+                        if (in_array($s, $valid)) {
+                            // Apply the value.
+                            $set[$s] = $v;
+                        }
                     }
                 }
             }
@@ -71,16 +76,14 @@ class NeatlineRecordTable extends Omeka_Db_Table
     public function getSelect()
     {
 
+        // Select raw `coverage`.
         $select = parent::getSelect();
-
-        // Select `coverage` as plain-text.
         $select->columns(array('coverage' => new Zend_Db_Expr(
             'NULLIF(AsText(coverage), "POINT(0 0)")'
         )));
 
         // Order chronologically.
         $select->order('added DESC');
-
         return $select;
 
     }
@@ -109,9 +112,8 @@ class NeatlineRecordTable extends Omeka_Db_Table
      */
     public function queryRecord($id)
     {
-        return $this->fetchObject(
-            $this->getSelect()->where('id=?', $id)
-        )->buildJsonData();
+        $select = $this->getSelect()->where('id=?', $id);
+        return $this->fetchObject($select)->buildJsonData();
     }
 
 
