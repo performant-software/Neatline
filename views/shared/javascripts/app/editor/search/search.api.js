@@ -35,7 +35,7 @@ Neatline.module('Editor.Search', function(
    * @param {Object} records: The records collection.
    */
   var paginate = function(records) {
-    Search.__view.updatePagination(records);
+    Search.__view.paginate(records);
   };
 
   Neatline.commands.addHandler('editor:search:paginate', paginate);

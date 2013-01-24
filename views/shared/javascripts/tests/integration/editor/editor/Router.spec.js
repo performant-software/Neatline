@@ -18,21 +18,39 @@ describe('Router', function() {
   });
 
 
-  it('#records', function() {
+  describe('#records', function() {
 
     // --------------------------------------------------------------------
     // #records should display the editor menu, search, and record list.
     // --------------------------------------------------------------------
 
-    _t.navigate('records');
+    afterEach(function() {
 
-    // Menu, search, records should be visible.
-    expect(_t.el.editor).toContain(_t.el.menu);
-    expect(_t.el.editor).toContain(_t.el.search);
-    expect(_t.el.editor).toContain(_t.el.records);
+      // Menu, search, records should be visible.
+      expect(_t.el.editor).toContain(_t.el.menu);
+      expect(_t.el.editor).toContain(_t.el.search);
+      expect(_t.el.editor).toContain(_t.el.records);
 
-    // "Records" tab should be active.
-    expect(_t.vw.menu.__ui.tabs.records).toHaveClass('active');
+      // "Records" tab should be active.
+      expect(_t.vw.menu.__ui.tabs.records).toHaveClass('active');
+
+    });
+
+    it('default', function() {
+      _t.navigate('records');
+    });
+
+    it('query', function() {
+      _t.navigate('records/search/query=test');
+    });
+
+    it('offset', function() {
+      _t.navigate('records/search/start=50');
+    });
+
+    it('query and offset', function() {
+      _t.navigate('records/search/query=test/start=50');
+    });
 
   });
 

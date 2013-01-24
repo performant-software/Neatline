@@ -45,7 +45,7 @@ Neatline.module('Editor.Search', function(
      *
      * @param {Object} records: The current records collection.
      */
-    updatePagination: function(records) {
+    paginate: function(records) {
       this.__ui.pagination.html(this.pagination({
         query:    this.__ui.search.val(),
         records:  records,
