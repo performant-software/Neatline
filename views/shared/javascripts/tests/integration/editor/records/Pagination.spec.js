@@ -18,7 +18,13 @@ describe('Pagination', function() {
   });
 
 
-  it('should ');
+  it('should hide pagination when all records fit');
+
+  it('should render first-page pagination');
+
+  it('should render middle-page pagination');
+
+  it('should render last-page pagination');
 
 
 });

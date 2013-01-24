@@ -38,7 +38,7 @@ Neatline.module('Editor.Records', function(
   var rehydrate = function(query, offset) {
     query = query || null; offset = offset || 0;
     Neatline.execute('editor:records:update', {
-      query: query, limit: 50, offset: offset
+      query: query, limit: __editor.perPage, offset: offset
     });
   };
 

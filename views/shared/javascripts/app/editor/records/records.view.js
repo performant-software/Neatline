@@ -39,12 +39,17 @@ Neatline.module('Editor.Records', function(
      * @param {Object} records: The records collection.
      */
     ingest: function(records) {
+
+      // Inject the records list.
       this.$el.html(this.records({ records: records }));
+
+      // Inject the paginators into the list.
       this.$el.find('.pagination').html(this.pagination({
-        query:    Neatline.request('editor:search:getQuery'),
-        records:  records,
-        limit:    50
+        query: Neatline.request('editor:search:getQuery'),
+        limit: __editor.perPage,
+        records: records
       }));
+
     },
 
 

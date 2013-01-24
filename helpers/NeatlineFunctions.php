@@ -81,9 +81,13 @@ function neatline_exhibitGlobals($exhibit)
 function neatline_editorGlobals($exhibit)
 {
     return json_encode(array(
+
         'api' => array(
             'styles' => url('neatline/styles/'.$exhibit->id),
-        )
+        ),
+
+        'perPage' => get_plugin_ini('Neatline', 'records_per_page')
+
     ));
 }
 
