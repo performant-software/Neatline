@@ -17,13 +17,14 @@ var client = mysql.createConnection({
 client.connect();
 
 
-function records(exhibit_id, count, zoom, color) {
+function records(exhibit_id, count, zoom, color, tags) {
 
   // Base insert.
   var sql = 'INSERT INTO omeka_neatline_records (' +
       'exhibit_id,'+
       'title,'+
       'body,'+
+      'tags,'+
       'vector_color,'+
       'stroke_color,'+
       'select_color,'+
@@ -49,6 +50,7 @@ function records(exhibit_id, count, zoom, color) {
       exhibit_id+','+
       '"Record'+n+'",'+
       '"Body'+n+'",'+
+      '"'+tags+'",'+
       '"'+color+'",'+
       '"#000000",'+
       '"'+color+'",'+
@@ -100,8 +102,14 @@ var sql = 'INSERT INTO omeka_neatline_exhibits ' +
   '(title, slug) VALUES ("dev", "dev")';
 
 client.query(sql, function(err, res) {
-  records(res.insertId, 400, 'NULL', '#00aeff');
-  tags(res.insertId, 20);
+
+  records(res.insertId, 200, 3, '#00ff24', 'level3');
+  records(res.insertId, 400, 4, '#00aeff', 'level4');
+  records(res.insertId, 5000, 5, '#0006ff', 'level5');
+  records(res.insertId, 20000, 6, '#7800ff', 'level6');
+  records(res.insertId, 50000, 7, '#f000ff', 'level7');
+  records(res.insertId, 100000, 8, '#ff0000', 'level8');
+
   client.end(function() {
     process.exit();
   });

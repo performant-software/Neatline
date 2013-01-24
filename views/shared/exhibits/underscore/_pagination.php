@@ -17,9 +17,6 @@
 
   <%
 
-    var prevActive = true;
-    var nextActive = true;
-
     // Base fragment.
     var prev = '#records/search';
     var next = '#records/search';
@@ -34,13 +31,24 @@
     var prevStart = records.offset-limit;
     var nextStart = records.offset+limit;
 
-    // Add previous offset, if greater than 0.
-    if (prevStart >= 0) prev += '/start='+prevStart;
-    else { prev += '/start=0'; prevActive = false; }
+    var prevActive = true;
+    var nextActive = true;
 
-    // Add next offset, if less than total count.
-    if (nextStart < records.count) next += '/start='+nextStart;
-    else { next += '/start='+records.offset; nextActive = false; }
+    // Add prev offset.
+    if (prevStart >= 0) {
+      prev += '/start='+prevStart;
+    } else {
+      prev += '/start=0';
+      prevActive = false;
+    }
+
+    // Add next offset.
+    if (nextStart < records.count) {
+      next += '/start='+nextStart;
+    } else {
+      next += '/start='+records.offset;
+      nextActive = false;
+    }
 
   %>
 
