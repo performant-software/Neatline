@@ -15,7 +15,6 @@ class NeatlineExhibit extends Neatline_AbstractRecord
 {
 
 
-    public $tag_id;         // INT(10) UNSIGNED NULL
     public $added;          // TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     public $modified;       // TIMESTAMP NULL
     public $title;          // TINYTEXT NULL
