@@ -17,7 +17,7 @@ Neatline.module('Editor.Records', function(
   /**
    * Udpate the records collection and render the list.
    *
-   * @param {Object} params: Query parameters.
+   * @param {Object} params: The query parameters.
    */
   var update = function(params) {
     Records.__collection.update(params, function(records) {
@@ -27,7 +27,6 @@ Neatline.module('Editor.Records', function(
   };
 
   Neatline.commands.addHandler('editor:records:update', update);
-  Neatline.vent.on('editor:router:#records', update);
 
 
 });

@@ -55,7 +55,7 @@ Neatline.module('Editor', { startWithParent: false,
      * Show the list of records.
      */
     'records': function(query, offset) {
-      offset = parseInt(offset, 10);
+      if (_.isString(offset)) offset = parseInt(offset, 10);
       this.views.menu.    showIn(this.editor);
       this.views.search.  showIn(this.editor);
       this.views.records. showIn(this.editor);

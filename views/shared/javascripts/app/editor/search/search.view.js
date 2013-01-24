@@ -22,6 +22,7 @@ Neatline.module('Editor.Search', function(
     tagName:    'form',
 
     ui: {
+      search:     'input',
       pagination: '.pagination'
     },
 
@@ -53,6 +54,16 @@ Neatline.module('Editor.Search', function(
      */
     updatePagination: function(locals) {
       this.__ui.pagination.html(this.pagination(locals));
+    },
+
+
+    /**
+     * Set the query.
+     *
+     * @param {String} query: The search query.
+     */
+    setQuery: function(query) {
+      this.__ui.search.val(query);
     }
 
 
