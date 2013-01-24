@@ -15,6 +15,7 @@
 
 <script id="record-list-template" type="text/templates">
 
+  <div class="pagination"></div>
   <a href="#records/add">New Record</a>
 
   <% records.each(function(r) { %>
@@ -23,5 +24,7 @@
       <span class="body"><%= r.get('body') %></span>
     </a>
   <% }); %>
+
+  <div class="pagination"></div>
 
 </script>

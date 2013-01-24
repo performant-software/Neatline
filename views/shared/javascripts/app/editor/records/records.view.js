@@ -30,7 +30,7 @@ Neatline.module('Editor.Records', function(
      * Compile row template.
      */
     initialize: function() {
-      this.tmpl = _.template($(this.template).html());
+      this.records = _.template($(this.template).html());
     },
 
 
@@ -40,7 +40,7 @@ Neatline.module('Editor.Records', function(
      * @param {Object} records: The records collection.
      */
     ingest: function(records) {
-      this.$el.html(this.tmpl({ records: records }));
+      this.$el.html(this.records({ records: records }));
     },
 
 

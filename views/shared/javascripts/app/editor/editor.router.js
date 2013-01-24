@@ -19,7 +19,7 @@ Neatline.module('Editor', { startWithParent: false,
 
     routes: {
       '':                                       'records',
-      'records(/search)(/query=:q)(/start=:o)': 'records',
+      'records(/search)(/query=:q)(/start=:s)': 'records',
       'records/add':                            'records/add',
       'records/:id':                            'records/:id',
       'styles':                                 'styles'

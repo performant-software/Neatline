@@ -15,5 +15,4 @@
 
 <script id="search-template" type="text/templates">
   <input type="text" placeholder="Search" />
-  <div class="pagination"></div>
 </script>

@@ -15,31 +15,16 @@ Neatline.module('Editor.Search', function(
 
 
   /**
-   * Update the search view with a query and, execute the search.
+   * Update the search box query.
    *
-   * @param {String} query:   The search query.
-   * @param {Number} offset:  The limit offset.
+   * @param {String} query: The search query.
    */
-  var hydrate = function(query, offset) {
-    query = query || null; offset = offset || 0;
-    Search.__view.hydrate(query, offset);
+  var setQuery = function(query) {
+    Search.__view.setQuery(query);
   };
 
-  Neatline.commands.addHandler('editor:search:hydrate', hydrate);
-  Neatline.vent.on('editor:router:#records', hydrate);
-
-
-  /**
-   * Update the pagination to mirror the current record collection.
-   *
-   * @param {Object} records: The records collection.
-   */
-  var paginate = function(records) {
-    Search.__view.paginate(records);
-  };
-
-  Neatline.commands.addHandler('editor:search:paginate', paginate);
-  Neatline.vent.on('editor:records:update', paginate);
+  Neatline.commands.addHandler('editor:search:setQuery', setQuery);
+  Neatline.vent.on('editor:router:#records', setQuery);
 
 
 });

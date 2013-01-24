@@ -29,4 +29,21 @@ Neatline.module('Editor.Records', function(
   Neatline.commands.addHandler('editor:records:update', update);
 
 
+  /**
+   * Rehydrate the record list from route parameters.
+   *
+   * @param {String} query:   The search query.
+   * @param {Number} offset:  The limit offset.
+   */
+  var rehydrate = function(query, offset) {
+    query = query || null; offset = offset || 0;
+    Neatline.execute('editor:records:update', {
+      query: query, limit: 50, offset: offset
+    });
+  };
+
+  Neatline.commands.addHandler('editor:records:rehydrate', rehydrate);
+  Neatline.vent.on('editor:router:#records', rehydrate);
+
+
 });
