@@ -36,6 +36,7 @@ class Neatline_RecordsJsonFixtureTest extends Neatline_Test_AppTestCase
         // - #1 and #2 are map-active, #3 map-inactive.
         // - #1 has a default map focus/zoom, #2 and #3 do not.
 
+        // ----------------------------------------------------------------
         $record1->title             = 'title1';
         $record2->title             = 'title2';
         $record3->title             = 'title3';
@@ -103,6 +104,7 @@ class Neatline_RecordsJsonFixtureTest extends Neatline_Test_AppTestCase
         $record2->max_zoom          = 35;
         $record3->max_zoom          = 36;
         // ----------------------------------------------------------------
+
         $record1->save();
         $record2->save();
         $record3->save();
@@ -130,6 +132,44 @@ class Neatline_RecordsJsonFixtureTest extends Neatline_Test_AppTestCase
         $this->resetResponse();
         $this->writeFixture('neatline/records/'.$exhibit->id,
             'records.removed.json');
+
+    }
+
+
+    /**
+     * GET /records/:id
+     * `records.p1.json`
+     * `records.p2.json`
+     * `records.p3.json`
+     */
+    public function testPaginatedRecordsJson()
+    {
+
+        $exhibit = $this->__exhibit();
+
+        // Create 6 records.
+        for ($i = 0; $i<=6; $i++) {
+            $record = new NeatlineRecord($exhibit);
+            $record->title = 'Record'.$i;
+            $record->save();
+        }
+
+        // Records 1-2.
+        $this->request->setQuery(array('limit' => 2, 'offset' => 0));
+        $this->writeFixture('neatline/records/'.$exhibit->id,
+            'records.p1.json');
+
+        // Records 3-4.
+        $this->resetResponse();
+        $this->request->setQuery(array('limit' => 2, 'offset' => 2));
+        $this->writeFixture('neatline/records/'.$exhibit->id,
+            'records.p2.json');
+
+        // Records 5-6.
+        $this->resetResponse();
+        $this->request->setQuery(array('limit' => 2, 'offset' => 4));
+        $this->writeFixture('neatline/records/'.$exhibit->id,
+            'records.p3.json');
 
     }
 
