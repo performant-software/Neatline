@@ -372,4 +372,40 @@ class Neatline_NeatlineRecordTableTest_QueryRecords
     }
 
 
+    /**
+     * When an `offset` key is not included in the parameters array, the
+     * result array should include an `offset` key that defaults to 0.
+     */
+    public function testOffsetWhenNoValueIsPassed()
+    {
+
+        $exhibit = $this->__exhibit();
+        $record = $this->__record($exhibit);
+
+        // When no offset defined, should default to 0.
+        $result = $this->_recordsTable->queryRecords($exhibit);
+        $this->assertEquals($result['offset'], 0);
+
+    }
+
+
+    /**
+     * When an `offset` key is included in the parameters array, it should
+     * be echoed back in the`offset` key on the results array.
+     */
+    public function testOffsetWhenValueIsPassed()
+    {
+
+        $exhibit = $this->__exhibit();
+        $record1 = $this->__record($exhibit);
+        $record2 = $this->__record($exhibit);
+
+        // Limit to two records.
+        $result = $this->_recordsTable->queryRecords($exhibit,
+            array('limit' => 1, 'offset' => 1));
+        $this->assertEquals($result['offset'], 1);
+
+    }
+
+
 }

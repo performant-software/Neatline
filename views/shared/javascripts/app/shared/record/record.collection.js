@@ -31,12 +31,13 @@ Neatline.module('Shared.Record', function(
 
 
     /**
-     * Return the records collection, cache the count.
+     * Cache the total count and offset, return records array.
      *
      * @return {Array}: The records collection.
      */
     parse: function(response) {
-      this.count = response.count;
+      this.offset = response.offset;
+      this.count  = response.count;
       return response.records;
     }
 

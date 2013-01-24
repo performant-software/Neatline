@@ -130,7 +130,7 @@ class NeatlineRecordTable extends Omeka_Db_Table
     public function queryRecords($exhibit, $params = array())
     {
 
-        $data = array('records' => array());
+        $data = array('records' => array(), 'offset' => 0);
         $select = $this->getSelect();
 
         // Filter by exhibit.
@@ -154,6 +154,7 @@ class NeatlineRecordTable extends Omeka_Db_Table
 
         // ** Limit
         if (isset($params['limit']) && isset($params['offset'])) {
+            $data['offset'] = $params['offset'];
             $select = $this->_filterByLimit(
                 $select,
                 $params['limit'],

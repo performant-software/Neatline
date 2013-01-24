@@ -22,20 +22,37 @@ Neatline.module('Editor.Search', function(
     tagName:    'form',
 
     ui: {
-      next:   '.next',
-      prev:   '.prev',
-      start:  '.start',
-      end:    '.end',
-      total:  '.total'
+      pagination: '.pagination'
     },
 
 
     /**
-     * Render template.
+     * Compile search and pagination templates.
      */
     initialize: function() {
+
       this.getTemplate();
       this.getUi();
+
+      // Compile the pagination template, render defaults.
+      this.pagination = _.template($('#pagination-template').html());
+
+    },
+
+
+    /**
+     * Update the paginator.
+     *
+     * @param {Object} locals: {
+     *    prev:   The link to the previous page.
+     *    next:   The link to the next page.
+     *    start:  The starting record offset.
+     *    end:    The ending record offset.
+     *    total:  The total number of records.
+     *  }
+     */
+    updatePagination: function(locals) {
+      this.__ui.pagination.html(this.pagination(locals));
     }
 
 

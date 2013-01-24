@@ -15,14 +15,5 @@
 
 <script id="search-template" type="text/templates">
   <input type="text" placeholder="Search" />
-  <div class="pagination">
-    <ul>
-      <li><a class="next" href="#">«</a></li>
-      <li><a class="prev" href="#">»</a></li>
-    </ul>
-    <div class="pagination-offset">
-      <span class="start">0</span>&ndash;<span class="end">0</span> of
-      <span class="total">0</span>
-    </div>
-  </div>
+  <div class="pagination"></div>
 </script>
