@@ -32,10 +32,12 @@ class NeatlineRecordTable extends Omeka_Db_Table
     public function applyStyles($exhibit)
     {
 
-        $yaml   = Spyc::YAMLLoad($exhibit->styles);
-        $valid  = neatline_getStyleCols();
+        // Prase the styles YAML.
+        $yaml = Spyc::YAMLLoad($exhibit->styles);
 
-        // Iterate tag definitions.
+        // Gather list of valid styles.
+        $valid = neatline_getStyleCols();
+
         foreach ($yaml as $tag => $styles) {
 
             if (!is_array($styles)) continue;
@@ -47,18 +49,11 @@ class NeatlineRecordTable extends Omeka_Db_Table
 
             // `SET`
             $set = array();
-            foreach ($styles as $style) {
-                // If the key has a value;
-                if (is_array($style)) {
-                    foreach ($style as $s => $v) {
-                        // If the key is a supported style;
-                        if (in_array($s, $valid)) {
-                            // Apply the value.
-                            $set[$s] = $v;
-                        }
-                    }
-                }
-            }
+            foreach ($styles as $s) { if (is_array($s)) {
+                foreach ($s as $k => $v) { if (in_array($k, $valid)) {
+                    $set[$k] = $v;
+                }}
+            }}
 
             // Update records.
             $this->update($this->getTableName(), $set, $where);
