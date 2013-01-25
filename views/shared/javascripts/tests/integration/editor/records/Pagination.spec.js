@@ -81,45 +81,45 @@ describe('Records Pagination', function() {
 
   });
 
-  // describe('x|xx|xxx', function() {
+  describe('x|xx|xxx', function() {
 
-  //   it('with search query', function() {
+    // --------------------------------------------------------------------
+    // << (enabled, 1st page), >> (enabled, next page).
+    // --------------------------------------------------------------------
 
-  //     // ------------------------------------------------------------------
-  //     // << (enabled, #records/search/query=X), >> (enabled, next page).
-  //     // ------------------------------------------------------------------
+    it('with search query', function() {
 
-  //     console.log('before');
-  //     _t.navigate('records/search/query=X/start=1');
-  //     _t.respondLast200(_t.json.records.p23);
-  //     console.log('after');
+      // Load records 2-3.
+      _t.navigate('records/search/query=X/start=1');
+      _t.respondLast200(_t.json.records.p23);
 
-  //     _t.assertPaginationPrevEnabled();
-  //     _t.assertPaginationNextEnabled();
+      // << enabled, >> enabled.
+      _t.assertPaginationPrevEnabled();
+      _t.assertPaginationNextEnabled();
 
-  //     _t.assertPaginationPrevRoute('#records/search/query=X');
-  //     _t.assertPaginationNextRoute('#records/search/query=X/start=3');
+      // << links to page 1, >> links to next page.
+      _t.assertPaginationPrevRoute('#records/search/query=X');
+      _t.assertPaginationNextRoute('#records/search/query=X/start=3');
 
-  //   });
+    });
 
-  //   it('without search query', function() {
+    it('without search query', function() {
 
-  //     // ------------------------------------------------------------------
-  //     // << (enabled, #records), >> (enabled, next page).
-  //     // ------------------------------------------------------------------
+      // Load records 2-3.
+      _t.navigate('records/search/start=1');
+      _t.respondLast200(_t.json.records.p23);
 
-  //     _t.navigate('records/search/start=1');
-  //     _t.respondLast200(_t.json.records.p23);
+      // << enabled, >> enabled.
+      _t.assertPaginationPrevEnabled();
+      _t.assertPaginationNextEnabled();
 
-  //     _t.assertPaginationPrevEnabled();
-  //     _t.assertPaginationNextEnabled();
+      // << links to page 1, >> links to next page.
+      _t.assertPaginationPrevRoute('#records');
+      _t.assertPaginationNextRoute('#records/search/start=3');
 
-  //     _t.assertPaginationPrevRoute('#records');
-  //     _t.assertPaginationNextRoute('#records/search/start=3');
+    });
 
-  //   });
-
-  // });
+  });
 
   describe('xx|xx|xx', function() {
 

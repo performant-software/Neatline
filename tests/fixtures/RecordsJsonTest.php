@@ -160,6 +160,7 @@ class Neatline_RecordsJsonFixtureTest extends Neatline_Test_AppTestCase
             'records.p12.json');
 
         // Records 2-3.
+        $this->resetResponse();
         $this->request->setQuery(array('limit' => 2, 'offset' => 1));
         $this->writeFixture('neatline/records/'.$exhibit->id,
             'records.p23.json');

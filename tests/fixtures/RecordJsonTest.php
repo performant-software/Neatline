@@ -21,7 +21,6 @@ class Neatline_RecordJsonFixtureTest extends Neatline_Test_AppTestCase
     /**
      * GET /record/:id
      * `record.standard.json`
-     * `record.inactive.json`
      */
     public function testRecordJson()
     {
@@ -51,6 +50,29 @@ class Neatline_RecordJsonFixtureTest extends Neatline_Test_AppTestCase
 
         $this->writeFixture('neatline/record/'.$record->id,
             'record.standard.json');
+
+    }
+
+
+    /**
+     * POST /record
+     * `record.add.json`
+     */
+    public function testNewRecordJson()
+    {
+
+        $exhibit = $this->__exhibit();
+
+        // New record data.
+        $this->request->setMethod('POST')->setRawBody(
+          Zend_Json::encode(array(
+            'exhibit_id'    => $exhibit->id,
+            'coverage'      => 'POINT(1 1)'
+        )));
+
+        $this->request->setMethod('POST');
+        $this->writeFixture('neatline/record',
+            'record.add.json');
 
     }
 
