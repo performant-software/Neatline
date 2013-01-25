@@ -123,15 +123,12 @@ describe('Record Form Add', function() {
     // Click "Save".
     els.save.trigger('click');
 
-    // Capture outoing request.
-    var request = _t.getLastRequest();
-    var params = $.parseJSON(request.requestBody);
+    // Route should be /record, method POST.
+    _t.assertLastRequestRoute(__exhibit.api.record);
+    _t.assertLastRequestMethod('POST');
 
-    // Method should be POST.
-    expect(request.method).toEqual('POST');
-
-    // URL should be /record.
-    expect(request.url).toEqual(__exhibit.api.record);
+    // Request should have exhibit id.
+    expect(_t.getLastRequestParams().exhibit_id).toBeDefined();
 
   });
 

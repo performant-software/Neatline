@@ -80,14 +80,9 @@ describe('Record Form Delete', function() {
     els.delete1.trigger('click');
     els.delete2.trigger('click');
 
-    // Capture outoing request.
-    var request = _t.getLastRequest();
-
-    // Method should be DELETE.
-    expect(request.method).toEqual('DELETE');
-
-    // URL should be /record/:id.
-    expect(request.url).toEqual(__exhibit.api.record+'/'+id);
+    // Route should be /record/:id, method DELETE.
+    _t.assertLastRequestRoute(__exhibit.api.record+'/'+id);
+    _t.assertLastRequestMethod('DELETE');
 
   });
 

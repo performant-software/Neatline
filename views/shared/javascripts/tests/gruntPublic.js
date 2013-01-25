@@ -22,7 +22,8 @@ module.exports = function(grunt) {
       helpers: [
         'helpers/helpers.js',
         'helpers/components/jasmine-jquery/lib/jasmine-jquery.js',
-        'helpers/components/sinon.js/sinon.js'
+        'helpers/components/sinon.js/sinon.js',
+        'helpers/components/underscore.string/lib/underscore.string.js'
       ],
       server: {
         port: 1337

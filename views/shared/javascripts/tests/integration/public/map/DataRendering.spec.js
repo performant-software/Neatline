@@ -62,14 +62,13 @@ describe('Map Data Rendering', function() {
     _t.triggerMapMove();
     _t.respondLast200(_t.json.records.changed);
 
-    // Capture outoing request.
-    var request = _t.getLastRequest();
+    // Route should be /records/:id, method GET.
+    _t.assertLastRequestRoute(__exhibit.api.records);
+    _t.assertLastRequestMethod('GET');
 
     // Request should include map focus.
-    expect(request.method).toEqual('GET');
-    expect(request.url).toContain(__exhibit.api.records);
-    expect(request.url).toContain('extent=');
-    expect(request.url).toContain('zoom=');
+    _t.assertLastRequestHasParameter('extent');
+    _t.assertLastRequestHasParameter('zoom');
 
     record2Layer = _t.getVectorLayerByTitle('title2');
 
@@ -102,14 +101,13 @@ describe('Map Data Rendering', function() {
     _t.triggerMapMove();
     _t.respondLast200(_t.json.records.removed);
 
-    // Capture outoing request.
-    var request = _t.getLastRequest();
+    // Route should be /records/:id, method GET.
+    _t.assertLastRequestRoute(__exhibit.api.records);
+    _t.assertLastRequestMethod('GET');
 
     // Request should include map focus.
-    expect(request.method).toEqual('GET');
-    expect(request.url).toContain(__exhibit.api.records);
-    expect(request.url).toContain('extent=');
-    expect(request.url).toContain('zoom=');
+    _t.assertLastRequestHasParameter('extent');
+    _t.assertLastRequestHasParameter('zoom');
 
     // Record2 point should be removed.
     expect(_t.getVectorLayerByTitle('title2')).toBeUndefined();

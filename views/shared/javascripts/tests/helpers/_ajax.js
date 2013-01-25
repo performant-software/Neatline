@@ -12,12 +12,22 @@
 
 
 /**
- * Return the most recent sinon request.
+ * Get the most recent request.
  *
  * @return {Object} request: The sinon request.
  */
 _t.getLastRequest = function() {
   return _.last(this.server.requests);
+};
+
+
+/**
+ * Get the parameters from the most recent request.
+ *
+ * @return {Object} params: The parameters.
+ */
+_t.getLastRequestParams = function() {
+  return $.parseJSON(_t.getLastRequest().requestBody);
 };
 
 

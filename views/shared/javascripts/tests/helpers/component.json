@@ -2,7 +2,8 @@
     "name": "Neatline Jasmine Test Suite"
   , "version": "2.0"
   , "dependencies": {
-      "jasmine-jquery": ">= 1.4.2"
-    , "sinon.js":       "*"
+      "jasmine-jquery":     ">= 1.4.2"
+    , "underscore.string":  ">= 2.3.0"
+    , "sinon.js":           "*"
   }
 }

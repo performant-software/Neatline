@@ -62,15 +62,12 @@ describe('Record Form Save', function() {
     // Click "Save" button.
     els.save.trigger('click');
 
-    // Capture outoing PUT request.
-    var request = _t.getLastRequest();
-    var params = $.parseJSON(request.requestBody);
+    // Route should be /record/:id, method PUT.
+    _t.assertLastRequestRoute(__exhibit.api.record+'/'+id);
+    _t.assertLastRequestMethod('PUT');
 
-    // Method should be PUT.
-    expect(request.method).toEqual('PUT');
-
-    // URL should be /record/:id.
-    expect(request.url).toEqual(__exhibit.api.record+'/'+id);
+    // Capture query parameters.
+    var params = _t.getLastRequestParams();
 
     // Check the query string for updated values.
     expect(params.title).           toEqual('title2');

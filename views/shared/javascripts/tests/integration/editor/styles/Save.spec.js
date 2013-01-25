@@ -38,17 +38,12 @@ describe('Styles Form Save', function() {
     _t.vw.styles.editor.setValue('styles');
     els.save.trigger('click');
 
-    // Capture outoing request.
-    var request = _t.getLastRequest();
+    // Route should be /record/:id, method PUT.
+    _t.assertLastRequestRoute(__editor.api.styles);
+    _t.assertLastRequestMethod('PUT');
 
-    // Method should be PUT.
-    expect(request.method).toEqual('PUT');
-
-    // URL should be /record/:id.
-    expect(request.url).toEqual(__editor.api.styles);
-
-    // Body should be editor value.
-    expect(request.requestBody).toEqual('styles');;
+    // Request body should be editor value.
+    expect(_t.getLastRequest().requestBody).toEqual('styles');
 
   });
 
@@ -108,14 +103,13 @@ describe('Styles Form Save', function() {
     els.save.trigger('click');
     _t.respondLast200('');
 
-    // Capture outoing request.
-    var request = _t.getLastRequest();
+    // Route should be /records/:id, method GET.
+    _t.assertLastRequestRoute(__exhibit.api.records);
+    _t.assertLastRequestMethod('GET');
 
     // Request should include map focus.
-    expect(request.method).toEqual('GET');
-    expect(request.url).toContain(__exhibit.api.records);
-    expect(request.url).toContain('extent=');
-    expect(request.url).toContain('zoom=');
+    _t.assertLastRequestHasParameter('extent');
+    _t.assertLastRequestHasParameter('zoom');
 
     // Respond with new data.
     _t.respondLast200(_t.json.records.removed);

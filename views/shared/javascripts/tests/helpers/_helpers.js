@@ -12,12 +12,13 @@
 
 
 _t = (function() {
-  var _t = {views:{}, collections:{}};
-//= _state.js
-//= _fixtures.js
-//= _aliases.js
-//= _data.js
-//= _ajax.js
-//= _map.js
+  var _t = { views:{}, collections:{} };
+  //= _state.js
+  //= _fixtures.js
+  //= _aliases.js
+  //= _assertions.js
+  //= _data.js
+  //= _ajax.js
+  //= _map.js
   return _t;
 })();
