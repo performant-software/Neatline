@@ -10,7 +10,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Pagination', function() {
+describe('Records Pagination', function() {
 
 
   beforeEach(function() {
