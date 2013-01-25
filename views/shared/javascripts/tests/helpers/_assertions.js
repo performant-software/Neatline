@@ -49,16 +49,20 @@ _t.assertLastRequestHasParameter = function(key, val) {
 /**
  * Assert that the pagination `<<` link is enabled.
  */
-_t.assertPaginationPreviousEnabled = function() {
-
+_t.assertPaginationPrevEnabled = function() {
+  var prev = _t.el.records.find('.pagination .prev');
+  expect($(prev[0]).parent('li')).not.toHaveClass('disabled');
+  expect($(prev[1]).parent('li')).not.toHaveClass('disabled');
 };
 
 
 /**
  * Assert that the pagination `<<` link is disabled.
  */
-_t.assertPaginationPreviousDisabled = function() {
-
+_t.assertPaginationPrevDisabled = function() {
+  var prev = _t.el.records.find('.pagination .prev');
+  expect($(prev[0]).parent('li')).toHaveClass('disabled');
+  expect($(prev[1]).parent('li')).toHaveClass('disabled');
 };
 
 
@@ -66,7 +70,9 @@ _t.assertPaginationPreviousDisabled = function() {
  * Assert that the pagination `>>` link is enabled.
  */
 _t.assertPaginationNextEnabled = function() {
-
+  var next = _t.el.records.find('.pagination .next');
+  expect($(next[0]).parent('li')).not.toHaveClass('disabled');
+  expect($(next[1]).parent('li')).not.toHaveClass('disabled');
 };
 
 
@@ -74,7 +80,9 @@ _t.assertPaginationNextEnabled = function() {
  * Assert that the pagination `>>` link is disabled.
  */
 _t.assertPaginationNextDisabled = function() {
-
+  var next = _t.el.records.find('.pagination .next');
+  expect($(next[0]).parent('li')).toHaveClass('disabled');
+  expect($(next[1]).parent('li')).toHaveClass('disabled');
 };
 
 
@@ -83,8 +91,10 @@ _t.assertPaginationNextDisabled = function() {
  *
  * @param {String} route: The hash.
  */
-_t.assertPaginationPreviousRoute = function(route) {
-
+_t.assertPaginationPrevRoute = function(route) {
+  var prev = _t.el.records.find('.pagination .prev');
+  expect($(prev[0])).toHaveAttr('href', route);
+  expect($(prev[1])).toHaveAttr('href', route);
 };
 
 
@@ -94,5 +104,7 @@ _t.assertPaginationPreviousRoute = function(route) {
  * @param {String} route: The hash.
  */
 _t.assertPaginationNextRoute = function(route) {
-
+  var next = _t.el.records.find('.pagination .next');
+  expect($(next[0])).toHaveAttr('href', route);
+  expect($(next[1])).toHaveAttr('href', route);
 };

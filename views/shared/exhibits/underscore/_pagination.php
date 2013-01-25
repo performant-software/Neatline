@@ -38,10 +38,8 @@
     if (prevStart > 0) {
       prev += '/start='+prevStart;
     } else {
-      prev = '#records';
-      if (records.offset == 0) {
-        prevActive = false;
-      }
+      if (_.isEmpty(query)) prev = '#records';
+      if (records.offset == 0) prevActive = false;
     }
 
     // Add next offset.
