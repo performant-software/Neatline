@@ -35,11 +35,13 @@
     var nextActive = true;
 
     // Add prev offset.
-    if (prevStart >= 0) {
+    if (prevStart > 0) {
       prev += '/start='+prevStart;
     } else {
-      prev += '/start=0';
-      prevActive = false;
+      prev = '#records';
+      if (records.offset == 0) {
+        prevActive = false;
+      }
     }
 
     // Add next offset.
@@ -55,10 +57,10 @@
   <ul>
     <li <% if (!prevActive) {
       %><%='class="disabled"'%><%
-    } %>><a href="<%= prev %>">«</a></li>
+    } %>><a class="prev" href="<%= prev %>">«</a></li>
     <li <% if (!nextActive) {
       %><%='class="disabled"'%><%
-    } %>><a href="<%= next %>">»</a></li>
+    } %>><a class="next" href="<%= next %>">»</a></li>
   </ul>
   <div class="pagination-details">
     <span class="start"><%= records.offset+1 %></span> -

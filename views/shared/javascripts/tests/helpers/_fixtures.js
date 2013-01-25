@@ -43,7 +43,12 @@ _t.loadJsonFixtures = function() {
     records: {
       standard: readFixtures('records.standard.json'),
       changed:  readFixtures('records.changed.json'),
-      removed:  readFixtures('records.removed.json')
+      removed:  readFixtures('records.removed.json'),
+      p12:      readFixtures('records.p12.json'),
+      p23:      readFixtures('records.p23.json'),
+      p34:      readFixtures('records.p34.json'),
+      p56:      readFixtures('records.p56.json'),
+      p6:       readFixtures('records.p6.json')
     },
 
     record: {

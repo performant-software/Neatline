@@ -86,7 +86,7 @@ function neatline_editorGlobals($exhibit)
             'styles' => url('neatline/styles/'.$exhibit->id),
         ),
 
-        'perPage' => get_plugin_ini('Neatline', 'records_per_page')
+        'perPage' => (int) get_plugin_ini('Neatline', 'records_per_page')
 
     ));
 }

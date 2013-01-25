@@ -148,7 +148,7 @@ class Neatline_RecordsJsonFixtureTest extends Neatline_Test_AppTestCase
         $exhibit = $this->__exhibit();
 
         // Create 6 records.
-        for ($i = 0; $i<=6; $i++) {
+        for ($i = 0; $i<6; $i++) {
             $record = new NeatlineRecord($exhibit);
             $record->title = 'Record'.$i;
             $record->save();
@@ -157,19 +157,30 @@ class Neatline_RecordsJsonFixtureTest extends Neatline_Test_AppTestCase
         // Records 1-2.
         $this->request->setQuery(array('limit' => 2, 'offset' => 0));
         $this->writeFixture('neatline/records/'.$exhibit->id,
-            'records.p1.json');
+            'records.p12.json');
+
+        // Records 2-3.
+        $this->request->setQuery(array('limit' => 2, 'offset' => 1));
+        $this->writeFixture('neatline/records/'.$exhibit->id,
+            'records.p23.json');
 
         // Records 3-4.
         $this->resetResponse();
         $this->request->setQuery(array('limit' => 2, 'offset' => 2));
         $this->writeFixture('neatline/records/'.$exhibit->id,
-            'records.p2.json');
+            'records.p34.json');
 
         // Records 5-6.
         $this->resetResponse();
         $this->request->setQuery(array('limit' => 2, 'offset' => 4));
         $this->writeFixture('neatline/records/'.$exhibit->id,
-            'records.p3.json');
+            'records.p56.json');
+
+        // Records 6.
+        $this->resetResponse();
+        $this->request->setQuery(array('limit' => 2, 'offset' => 5));
+        $this->writeFixture('neatline/records/'.$exhibit->id,
+            'records.p6.json');
 
     }
 

@@ -34,6 +34,11 @@ describe('Bubble Form Interaction', function() {
   });
 
 
+  afterEach(function() {
+    _t.el.bubble.remove();
+  });
+
+
   it('should hide bubble when the spatial tab is selected', function() {
 
     // --------------------------------------------------------------------
