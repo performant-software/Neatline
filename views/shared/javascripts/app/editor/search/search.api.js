@@ -15,16 +15,29 @@ Neatline.module('Editor.Search', function(
 
 
   /**
-   * Update the search box query.
+   * Rehydrate the record list from route parameters.
    *
-   * @param {String} query: The search query.
+   * @param {String} query:   The search query.
+   * @param {Number} offset:  The limit offset.
    */
-  var setQuery = function(query) {
+  var rehydrate = function(query, offset) {
+
+    // Parse route parameters, set raw query.
+    query = query || null; offset = offset || 0;
     Search.__view.setQuery(query);
+
+    // Load the record list.
+    Neatline.execute('editor:records:update', _.extend(
+      Search.__view.query, {
+        limit:  __editor.perPage,
+        offset: offset
+      }
+    ));
+
   };
 
-  Neatline.commands.addHandler('editor:search:setQuery', setQuery);
-  Neatline.vent.on('editor:router:#records', setQuery);
+  Neatline.commands.addHandler('editor:search:rehydrate', rehydrate);
+  Neatline.vent.on('editor:router:#records', rehydrate);
 
 
 });
