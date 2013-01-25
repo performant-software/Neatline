@@ -66,6 +66,7 @@ Neatline.module('Editor.Search', function(
      * @param {Object} e: The `keyup` event.
      */
     onKeystroke: function(e) {
+      // TODO: On Enter, set new route and trigger.
       this.parse();
     },
 
@@ -75,8 +76,9 @@ Neatline.module('Editor.Search', function(
      */
     parse: function() {
 
-      this.query = { keywords: null, tags: null };
+      // Get raw query value.
       var value = this.__ui.search.val();
+      this.query = {};
 
       // TAGS
       if (_.string.startsWith(value, 'tags:')) {
@@ -91,9 +93,9 @@ Neatline.module('Editor.Search', function(
         this.bold();
       }
 
-      // KEYWORDS
-      else {
-        this.query.keywords = !_.isEmpty(value) ? value : null;
+      // QUERY
+      else if (!_.isEmpty(value)) {
+        this.query.query = value;
         this.unbold();
       }
 

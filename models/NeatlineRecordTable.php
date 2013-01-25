@@ -119,6 +119,7 @@ class NeatlineRecordTable extends Omeka_Db_Table
      * @param array $params Associative array of filter parameters:
      *  - `zoom`:   The current zoom level of the map.
      *  - `extent`: The current viewport extent of the map (WKT POLYGON).
+     *  - `query`:  A full-text search query.
      *  - `offset`: The number of records to skip.
      *  - `limit`:  The number of records to get.
      *
@@ -144,6 +145,13 @@ class NeatlineRecordTable extends Omeka_Db_Table
         if (isset($params['extent'])) {
             $select = $this->_filterByExtent($select,
                 $params['extent']
+            );
+        }
+
+        // ** Keywords
+        if (isset($params['query'])) {
+            $select = $this->_filterByKeywords($select,
+                $params['query']
             );
         }
 
@@ -186,7 +194,7 @@ class NeatlineRecordTable extends Omeka_Db_Table
      */
     public function _filterByExhibit($select, $exhibit)
     {
-        return $select->where('exhibit_id = ?', $exhibit->id);
+        return $select->where("exhibit_id = ?", $exhibit->id);
     }
 
 
@@ -216,9 +224,9 @@ class NeatlineRecordTable extends Omeka_Db_Table
     {
 
         // Query for viewport intersection.
-        $select->where(new Zend_Db_Expr("MBRIntersects(
-            coverage, GeomFromText('$extent')
-        )"));
+        $select->where(new Zend_Db_Expr(
+            "MBRIntersects(coverage, GeomFromText('$extent'))"
+        ));
 
         // Omit records at POINT(0 0).
         $select->where(new Zend_Db_Expr(
@@ -245,17 +253,18 @@ class NeatlineRecordTable extends Omeka_Db_Table
 
 
     /**
-     * Filter by tag.
+     * Filter by keyword query.
      *
      * @param Omeka_Db_Select $select The starting select.
-     * @param string $tag The tag.
+     * @param string $query The search query.
      * @return Omeka_Db_Select The filtered select.
      */
-    public function _filterByTag($select, $tag)
+    public function _filterByKeywords($select, $query)
     {
-        return $select->where(new Zend_Db_Expr(
-            "tags REGEXP '[[:<:]]".$tag."[[:>:]]'"
-        ));
+        $select->where(
+            "MATCH (title,slug,body) AGAINST (? IN BOOLEAN MODE)", $query
+        );
+        return $select;
     }
 
 

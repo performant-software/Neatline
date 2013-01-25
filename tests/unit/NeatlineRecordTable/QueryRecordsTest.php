@@ -352,6 +352,38 @@ class Neatline_NeatlineRecordTableTest_QueryRecords
 
 
     /**
+     * queryRecords() should filter on a search query.
+     */
+    public function testKeywordsFilter()
+    {
+
+        $exhibit = $this->__exhibit();
+        $record1 = new NeatlineRecord($exhibit);
+        $record2 = new NeatlineRecord($exhibit);
+        $record3 = new NeatlineRecord($exhibit);
+        $record4 = new NeatlineRecord($exhibit);
+        $record1->title = '1 neatline 2';
+        $record2->body  = '3 neatline 4';
+        $record3->slug  = '5 neatline 6';
+        $record4->slug  = 'omeka';
+
+        $record1->save();
+        $record2->save();
+        $record3->save();
+        $record4->save();
+
+        // Query for 'neatline'.
+        $result = $this->_recordsTable->queryRecords($exhibit,
+            array('query' => 'neatline'));
+        $this->assertEquals($result['records'][0]['id'], $record1->id);
+        $this->assertEquals($result['records'][1]['id'], $record2->id);
+        $this->assertEquals($result['records'][2]['id'], $record3->id);
+        $this->assertCount(3, $result['records']);
+
+    }
+
+
+    /**
      * When a `limit` and `offset` values are passed to queryRecords(),
      * the result set should include a `count` key with the original size
      * of the result set before the limit was applied.

@@ -164,4 +164,33 @@ class Neatline_RecordsControllerTest_Get
     }
 
 
+    /**
+     * The `query` parameter should be passed to the query.
+     */
+    public function testKeywordsFilter()
+    {
+
+        $exhibit = $this->__exhibit();
+        $record1 = new NeatlineRecord($exhibit);
+        $record2 = new NeatlineRecord($exhibit);
+        $record1->title = 'neatline';
+        $record2->title = 'omeka';
+
+        $record1->save();
+        $record2->save();
+
+        // Set `query`parameter.
+        $this->request->setQuery(array('query' => 'neatline'));
+
+        // GET with query that excludes record 2.
+        $this->dispatch('neatline/records/'.$exhibit->id);
+        $response = $this->getResponseArray();
+
+        // Should apply limit filter.
+        $this->assertEquals($response->records[0]->id, $record1->id);
+        $this->assertCount(1 , $response->records);
+
+    }
+
+
 }

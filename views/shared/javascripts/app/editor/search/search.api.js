@@ -15,12 +15,12 @@ Neatline.module('Editor.Search', function(
 
 
   /**
-   * Rehydrate the record list from route parameters.
+   * Load the starting record list derived from the route parameters.
    *
    * @param {String} query:   The search query.
    * @param {Number} offset:  The limit offset.
    */
-  var rehydrate = function(query, offset) {
+  var initialize = function(query, offset) {
 
     // Parse route parameters, set raw query.
     query = query || null; offset = offset || 0;
@@ -36,8 +36,8 @@ Neatline.module('Editor.Search', function(
 
   };
 
-  Neatline.commands.addHandler('editor:search:rehydrate', rehydrate);
-  Neatline.vent.on('editor:router:#records', rehydrate);
+  Neatline.commands.addHandler('editor:search:initialize', initialize);
+  Neatline.vent.on('editor:router:#records', initialize);
 
 
 });
