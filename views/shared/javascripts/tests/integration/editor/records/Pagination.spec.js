@@ -37,31 +37,72 @@ describe('Records Pagination', function() {
 
   });
 
-  it('|xx|xxxx', function() {
+  describe('|xx|xxxx', function() {
 
-    // --------------------------------------------------------------------
-    // << (disabled, #records), >> (enabled, next page).
-    // --------------------------------------------------------------------
+    it('with search query', function() {
 
-    // Load records 1-2.
-    _t.navigate('records/search/start=0');
-    _t.respondLast200(_t.json.records.p12);
+      // ------------------------------------------------------------------
+      // << (disabled, #records/search/query=X), >> (enabled, next page).
+      // ------------------------------------------------------------------
 
-    // Get <</>> arrows.
-    var pagination = _t.el.records.find('.pagination');
-    var prev = pagination.find('.prev');
-    var next = pagination.find('.next');
+      // Load records 1-2.
+      _t.navigate('records/search/query=X/start=0');
+      _t.respondLast200(_t.json.records.p12);
 
-    // `<<` disabled, links to `#records`.
-    prev.each(function() {
-      expect($(this).parent('li')).toHaveClass('disabled');
-      expect($(this)).toHaveAttr('href', '#records');
+      // Get <</>> arrows.
+      var pagination = _t.el.records.find('.pagination');
+      var prev = pagination.find('.prev');
+      var next = pagination.find('.next');
+
+      // `<<` disabled, links to `#records/search/query=X`.
+      prev.each(function() {
+        expect($(this).parent('li')).toHaveClass('disabled');
+        expect($(this)).toHaveAttr('href',
+          '#records/search/query=X'
+        );
+      });
+
+      // `>>` enabled, links to next page.
+      next.each(function() {
+        expect($(this).parent('li')).not.toHaveClass('disabled');
+        expect($(this)).toHaveAttr('href',
+          '#records/search/query=X/start=2'
+        );
+      });
+
     });
 
-    // `>>` enabled, links to next page.
-    next.each(function() {
-      expect($(this).parent('li')).not.toHaveClass('disabled');
-      expect($(this)).toHaveAttr('href', '#records/search/start=2');
+    it('without search query', function() {
+
+      // ------------------------------------------------------------------
+      // << (disabled, #records), >> (enabled, next page).
+      // ------------------------------------------------------------------
+
+      // Load records 1-2.
+      _t.navigate('records/search/start=0');
+      _t.respondLast200(_t.json.records.p12);
+
+      // Get <</>> arrows.
+      var pagination = _t.el.records.find('.pagination');
+      var prev = pagination.find('.prev');
+      var next = pagination.find('.next');
+
+      // `<<` disabled, links to `#records`.
+      prev.each(function() {
+        expect($(this).parent('li')).toHaveClass('disabled');
+        expect($(this)).toHaveAttr('href',
+          '#records'
+        );
+      });
+
+      // `>>` enabled, links to next page.
+      next.each(function() {
+        expect($(this).parent('li')).not.toHaveClass('disabled');
+        expect($(this)).toHaveAttr('href',
+          '#records/search/start=2'
+        );
+      });
+
     });
 
   });

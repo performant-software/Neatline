@@ -44,3 +44,55 @@ _t.assertLastRequestHasParameter = function(key, val) {
   if (val) expect(request.url).toContain(key+'='+val);
   else expect(request.url).toContain(key);
 };
+
+
+/**
+ * Assert that the pagination `<<` link is enabled.
+ */
+_t.assertPaginationPreviousEnabled = function() {
+
+};
+
+
+/**
+ * Assert that the pagination `<<` link is disabled.
+ */
+_t.assertPaginationPreviousDisabled = function() {
+
+};
+
+
+/**
+ * Assert that the pagination `>>` link is enabled.
+ */
+_t.assertPaginationNextEnabled = function() {
+
+};
+
+
+/**
+ * Assert that the pagination `>>` link is disabled.
+ */
+_t.assertPaginationNextDisabled = function() {
+
+};
+
+
+/**
+ * Assert the `href` attribute on the pagination `<<` link.
+ *
+ * @param {String} route: The hash.
+ */
+_t.assertPaginationPreviousRoute = function(route) {
+
+};
+
+
+/**
+ * Assert the `href` attribute on the pagination `>>` link.
+ *
+ * @param {String} route: The hash.
+ */
+_t.assertPaginationNextRoute = function(route) {
+
+};
