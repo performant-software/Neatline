@@ -56,14 +56,14 @@ Neatline.module('Editor.Record', function(
 
 
   /**
-   * Close the form.
+   * Deactivate the form.
    */
-  var close = function() {
-    if (Record.__view.open) Record.__view.close();
+  var deactivate = function() {
+    if (Record.__view.open) Record.__view.deactivate();
   };
 
-  Neatline.commands.addHandler('editor:record:close', close);
-  Neatline.vent.on('editor:router:before', close);
+  Neatline.commands.addHandler('editor:record:deactivate', deactivate);
+  Neatline.vent.on('editor:router:before', deactivate);
 
 
 });

@@ -90,10 +90,18 @@ Neatline.module('Editor.Record', function(
      * Close the form.
      */
     close: function() {
-
-      // Deactivate map editing, show record list.
-      Neatline.execute('editor:map:endEdit', this.model);
       Neatline.execute('editor:showRecordList');
+      this.deactivate();
+    },
+
+
+    /**
+     * End the map edit session, reset the bubble.
+     */
+    deactivate: function() {
+
+      // Deactivate map editing.
+      Neatline.execute('editor:map:endEdit', this.model);
 
       // Close and activate the bubble.
       Neatline.execute('bubble:activate');
