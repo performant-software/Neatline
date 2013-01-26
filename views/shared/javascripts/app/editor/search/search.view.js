@@ -98,6 +98,7 @@ Neatline.module('Editor.Search', function(
       // MAP
       else if (_.string.startsWith(value, 'map:')) {
         // TODO: Activate mirroring.
+        this.query = false;
         this.bold();
       }
 
@@ -125,12 +126,14 @@ Neatline.module('Editor.Search', function(
       Neatline.execute('editor:updateRoute', this.getUrl());
 
       // Execute the query.
-      Neatline.execute('editor:records:update', _.extend(
-        Search.__view.query, {
-          limit:  __editor.perPage,
-          offset: 0
-        }
-      ));
+      if (this.query) {
+        Neatline.execute('editor:records:update', _.extend(
+          Search.__view.query, {
+            limit:  __editor.perPage,
+            offset: 0
+          }
+        ));
+      }
 
     },
 
