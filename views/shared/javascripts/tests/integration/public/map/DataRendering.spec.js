@@ -67,8 +67,8 @@ describe('Map Data Rendering', function() {
     _t.assertLastRequestMethod('GET');
 
     // Request should include map focus.
-    _t.assertLastRequestHasParameter('extent');
-    _t.assertLastRequestHasParameter('zoom');
+    _t.assertLastRequestHasGetParameter('extent');
+    _t.assertLastRequestHasGetParameter('zoom');
 
     record2Layer = _t.getVectorLayerByTitle('title2');
 
@@ -84,9 +84,8 @@ describe('Map Data Rendering', function() {
   it('should remove layers when the map is moved', function() {
 
     // --------------------------------------------------------------------
-    // Layers should be removed when the map is moved and records have been
-    // record data
-    // has changed since the last data ingest.
+    // Layers should be removed when the map is moved and records have
+    // been removed since the last data ingest.
     // --------------------------------------------------------------------
 
     var record2Layer = _t.getVectorLayerByTitle('title2');
@@ -106,8 +105,8 @@ describe('Map Data Rendering', function() {
     _t.assertLastRequestMethod('GET');
 
     // Request should include map focus.
-    _t.assertLastRequestHasParameter('extent');
-    _t.assertLastRequestHasParameter('zoom');
+    _t.assertLastRequestHasGetParameter('extent');
+    _t.assertLastRequestHasGetParameter('zoom');
 
     // Record2 point should be removed.
     expect(_t.getVectorLayerByTitle('title2')).toBeUndefined();

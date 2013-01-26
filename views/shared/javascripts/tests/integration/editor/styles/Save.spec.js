@@ -108,8 +108,8 @@ describe('Styles Form Save', function() {
     _t.assertLastRequestMethod('GET');
 
     // Request should include map focus.
-    _t.assertLastRequestHasParameter('extent');
-    _t.assertLastRequestHasParameter('zoom');
+    _t.assertLastRequestHasGetParameter('extent');
+    _t.assertLastRequestHasGetParameter('zoom');
 
     // Respond with new data.
     _t.respondLast200(_t.json.records.removed);

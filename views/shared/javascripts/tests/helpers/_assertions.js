@@ -39,7 +39,7 @@ _t.assertLastRequestRoute = function(route) {
  * @param {String} key: The key.
  * @param {String} val: The value.
  */
-_t.assertLastRequestHasParameter = function(key, val) {
+_t.assertLastRequestHasGetParameter = function(key, val) {
   var request = _t.getLastRequest();
   if (val) expect(request.url).toContain(key+'='+val);
   else expect(request.url).toContain(key);

@@ -77,12 +77,13 @@ _t.resetHash = function() {
 
 
 /**
- * Navigate to a route.
+ * Navigate to a route, forcing refresh.
  *
  * @param {String} frag: The URL fragment.
  */
 _t.navigate = function(frag) {
-  Neatline.Editor.__router.navigate(frag, true);
+  Neatline.Editor.__router.navigate('RESET');
+  Neatline.Editor.__router.navigate(frag, { trigger: true });
 };
 
 

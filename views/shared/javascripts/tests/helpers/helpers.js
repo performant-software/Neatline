@@ -92,12 +92,13 @@ _t = (function() {
   
   
   /**
-   * Navigate to a route.
+   * Navigate to a route, forcing refresh.
    *
    * @param {String} frag: The URL fragment.
    */
   _t.navigate = function(frag) {
-    Neatline.Editor.__router.navigate(frag, true);
+    Neatline.Editor.__router.navigate('RESET');
+    Neatline.Editor.__router.navigate(frag, { trigger: true });
   };
   
   
@@ -293,7 +294,7 @@ _t = (function() {
    * @param {String} key: The key.
    * @param {String} val: The value.
    */
-  _t.assertLastRequestHasParameter = function(key, val) {
+  _t.assertLastRequestHasGetParameter = function(key, val) {
     var request = _t.getLastRequest();
     if (val) expect(request.url).toContain(key+'='+val);
     else expect(request.url).toContain(key);

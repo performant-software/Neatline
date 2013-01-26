@@ -45,8 +45,14 @@ Neatline.module('Editor.Search', function(
      * @param {String} query: The search query.
      */
     setQuery: function(query) {
+
+      // Convert '+' to spaces.
+      if (_.isString(query)) query = query.replace(/\+/g, ' ');
+
+      // Set and parse.
       this.__ui.search.val(query);
       this.parse();
+
     },
 
 
