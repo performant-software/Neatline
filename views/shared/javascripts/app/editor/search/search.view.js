@@ -57,7 +57,7 @@ Neatline.module('Editor.Search', function(
 
 
     /**
-     * Return the current search query.
+     * Get the current search query value.
      *
      * @return {String} query: The search query.
      */
@@ -67,13 +67,15 @@ Neatline.module('Editor.Search', function(
 
 
     /**
-     * Parse query and execute search.
+     * Get a search URL derived form the current query.
      *
-     * @param {Object} e: The `keyup` event.
+     * @return {String} url: The route.
      */
-    onKeystroke: function(e) {
-      // TODO: On Enter, set new route and trigger.
-      this.parse();
+    getUrl: function() {
+      var query = this.getQuery();
+      return (query != '') ?
+        'records/search/query='+query.replace(/\s/g, '+') :
+        'records';
     },
 
 
@@ -104,6 +106,31 @@ Neatline.module('Editor.Search', function(
         this.query.query = value;
         this.unbold();
       }
+
+      else this.unbold();
+
+    },
+
+
+    /**
+     * Parse query and execute search.
+     *
+     * @param {Object} e: The `keyup` event.
+     */
+    onKeystroke: function(e) {
+
+      this.parse();
+
+      // Update the route.
+      Neatline.execute('editor:updateRoute', this.getUrl());
+
+      // Execute the query.
+      Neatline.execute('editor:records:update', _.extend(
+        Search.__view.query, {
+          limit:  __editor.perPage,
+          offset: 0
+        }
+      ));
 
     },
 

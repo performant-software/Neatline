@@ -120,6 +120,7 @@ class NeatlineRecordTable extends Omeka_Db_Table
      *  - `zoom`:   The current zoom level of the map.
      *  - `extent`: The current viewport extent of the map (WKT POLYGON).
      *  - `query`:  A full-text search query.
+     *  - `tags`:   An array of tags.
      *  - `offset`: The number of records to skip.
      *  - `limit`:  The number of records to get.
      *
@@ -152,6 +153,13 @@ class NeatlineRecordTable extends Omeka_Db_Table
         if (isset($params['query'])) {
             $select = $this->_filterByKeywords($select,
                 $params['query']
+            );
+        }
+
+        // ** Tags
+        if (isset($params['tags'])) {
+            $select = $this->_filterByTags($select,
+                $params['tags']
             );
         }
 
@@ -264,6 +272,22 @@ class NeatlineRecordTable extends Omeka_Db_Table
         $select->where(
             "MATCH (title,slug,body) AGAINST (? IN BOOLEAN MODE)", $query
         );
+        return $select;
+    }
+
+
+    /**
+     * Filter by tag query.
+     *
+     * @param Omeka_Db_Select $select The starting select.
+     * @param array $tags An array of tags.
+     * @return Omeka_Db_Select The filtered select.
+     */
+    public function _filterByTags($select, $tags)
+    {
+        foreach ($tags as $tag) {
+            $select->where("tags REGEXP ?", "[[:<:]]".$tag."[[:>:]]");
+        }
         return $select;
     }
 

@@ -179,14 +179,43 @@ class Neatline_RecordsControllerTest_Get
         $record1->save();
         $record2->save();
 
-        // Set `query`parameter.
+        // Set `query` parameter.
         $this->request->setQuery(array('query' => 'neatline'));
 
         // GET with query that excludes record 2.
         $this->dispatch('neatline/records/'.$exhibit->id);
         $response = $this->getResponseArray();
 
-        // Should apply limit filter.
+        // Should apply query filter.
+        $this->assertEquals($response->records[0]->id, $record1->id);
+        $this->assertCount(1 , $response->records);
+
+    }
+
+
+    /**
+     * The `tags` parameter should be passed to the query.
+     */
+    public function testTagsFilter()
+    {
+
+        $exhibit = $this->__exhibit();
+        $record1 = new NeatlineRecord($exhibit);
+        $record2 = new NeatlineRecord($exhibit);
+        $record1->tags = 'tag1, tag2';
+        $record2->tags = 'tag3';
+
+        $record1->save();
+        $record2->save();
+
+        // Set `tags` parameter.
+        $this->request->setQuery(array('tags' => array('tag1', 'tag2')));
+
+        // GET with query that excludes record 2.
+        $this->dispatch('neatline/records/'.$exhibit->id);
+        $response = $this->getResponseArray();
+
+        // Should apply tags filter.
         $this->assertEquals($response->records[0]->id, $record1->id);
         $this->assertCount(1 , $response->records);
 

@@ -384,6 +384,33 @@ class Neatline_NeatlineRecordTableTest_QueryRecords
 
 
     /**
+     * queryRecords() should filter on a tags query.
+     */
+    public function testTagsFilter()
+    {
+
+        $exhibit = $this->__exhibit();
+        $record1 = new NeatlineRecord($exhibit);
+        $record2 = new NeatlineRecord($exhibit);
+        $record3 = new NeatlineRecord($exhibit);
+        $record1->tags = 'tag1';
+        $record2->tags = 'tag1, tag2';
+        $record3->tags = 'tag3';
+
+        $record1->save();
+        $record2->save();
+        $record3->save();
+
+        // Query for tag1 and tag2.
+        $result = $this->_recordsTable->queryRecords($exhibit,
+            array('tags' => array('tag1', 'tag2')));
+        $this->assertEquals($result['records'][0]['id'], $record2->id);
+        $this->assertCount(1, $result['records']);
+
+    }
+
+
+    /**
      * When a `limit` and `offset` values are passed to queryRecords(),
      * the result set should include a `count` key with the original size
      * of the result set before the limit was applied.

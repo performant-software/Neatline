@@ -51,11 +51,11 @@ describe('Search Initialization', function() {
 
     afterEach(function() {
 
-      // Inject a new JSON fixture.
+      // Inject a new records collection.
       _t.respondLast200(_t.json.records.p6);
       var firstRecord = _t.getRecordRows()[1];
 
-      // Confirm that the record list is updated to reflect the route.
+      // Record list should be updated.
       expect($(firstRecord).find('.title').text()).toEqual('Record5');
 
     });

@@ -38,7 +38,8 @@ class Neatline_RecordsController extends Neatline_RestController
                 'zoom'      => $this->_request->zoom,
                 'offset'    => $this->_request->offset,
                 'limit'     => $this->_request->limit,
-                'query'     => $this->_request->query
+                'query'     => $this->_request->query,
+                'tags'      => $this->_request->tags
             ))
         );
     }
