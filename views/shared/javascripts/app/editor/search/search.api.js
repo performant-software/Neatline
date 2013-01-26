@@ -27,7 +27,7 @@ Neatline.module('Editor.Search', function(
     Search.__view.setQuery(query);
 
     // Load the record list.
-    Neatline.execute('editor:records:update', _.extend(
+    Neatline.execute('editor:records:load', _.extend(
       Search.__view.query, {
         limit:  __editor.perPage,
         offset: offset
@@ -38,6 +38,32 @@ Neatline.module('Editor.Search', function(
 
   Neatline.commands.addHandler('editor:search:initialize', initialize);
   Neatline.vent.on('editor:router:#records', initialize);
+
+
+  /**
+   * Render the current map record collection in the browser.
+   */
+  var syncWithMap = function() {
+    var records = Neatline.request('map:getRecords');
+    Neatline.execute('editor:records:ingest', records);
+  };
+
+  Neatline.commands.addHandler('editor:search:syncWithMap', syncWithMap);
+
+
+  /**
+   * Propagate new map records to the browser if mirroring is enabled.
+   *
+   * @param {Object} records: The collection or records.
+   */
+  var mirror = function(records) {
+    if (Search.__view.mirroring) {
+      Neatline.execute('editor:records:ingest', records);
+    }
+  };
+
+  Neatline.commands.addHandler('editor:search:mirror', mirror);
+  Neatline.vent.on('map:update', mirror);
 
 
 });

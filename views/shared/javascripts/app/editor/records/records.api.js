@@ -15,18 +15,29 @@ Neatline.module('Editor.Records', function(
 
 
   /**
-   * Udpate the records collection and render the list.
+   * Query for new records.
    *
    * @param {Object} params: The query parameters.
    */
-  var update = function(params) {
+  var load = function(params) {
     Records.__collection.update(params, function(records) {
-      Neatline.vent.trigger('editor:records:update', records);
-      Records.__view.ingest(records);
+      ingest(records);
     });
   };
 
-  Neatline.commands.addHandler('editor:records:update', update);
+  Neatline.commands.addHandler('editor:records:load', load);
+
+
+  /**
+   * Render a records collection in the list.
+   *
+   * @param {Object} records: The collection of records.
+   */
+  var ingest = function(records) {
+    Records.__view.ingest(records);
+  };
+
+  Neatline.commands.addHandler('editor:records:ingest', ingest);
 
 
 });

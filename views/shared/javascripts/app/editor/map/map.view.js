@@ -34,6 +34,8 @@ _.extend(Neatline.Map.View.prototype, {
    */
   ingest: function(records) {
 
+    this.records = records;
+
     var layers = [];
 
     // REMOVE

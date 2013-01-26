@@ -250,6 +250,8 @@ Neatline.module('Map', function(
      */
     ingest: function(records) {
 
+      this.records = records;
+
       // Remove layers.
       _.each(this.layers, _.bind(function(layer) {
         this.map.removeLayer(layer);

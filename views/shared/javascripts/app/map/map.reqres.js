@@ -24,4 +24,14 @@ Neatline.module('Map', function(
   });
 
 
+  /**
+   * Emit the current records collection.
+   *
+   * @return {Object}: The collection.
+   */
+  Neatline.reqres.addHandler('map:getRecords', function() {
+    return Map.__view.records;
+  });
+
+
 });

@@ -50,9 +50,9 @@ describe('Search Map Mirroring', function() {
     // Keyup with `map:` in the box.
     _t.vw.search.__ui.search.val('map:');
     _t.vw.search.__ui.search.trigger('keyup');
-    var recordRows = _t.getRecordRows();
 
     // Record list should synchronize with map.
+    var recordRows = _t.getRecordRows();
     expect($(recordRows[1]).find('.title').text()).toEqual('Record5');
     expect(recordRows.length).toEqual(2);
 
@@ -66,9 +66,9 @@ describe('Search Map Mirroring', function() {
 
     // Load 1 record on map.
     _t.refreshMap(_t.json.records.p6);
-    var recordRows = _t.getRecordRows();
 
     // Record list should synchronize with map.
+    var recordRows = _t.getRecordRows();
     expect($(recordRows[1]).find('.title').text()).toEqual('Record5');
     expect(recordRows.length).toEqual(2);
 
@@ -85,6 +85,7 @@ describe('Search Map Mirroring', function() {
     _t.refreshMap(_t.json.records.p56);
 
     // Record list should synchronize with map.
+    var recordRows = _t.getRecordRows();
     expect($(recordRows[1]).find('.title').text()).toEqual('Record4');
     expect($(recordRows[2]).find('.title').text()).toEqual('Record5');
     expect(recordRows.length).toEqual(3);
@@ -107,11 +108,11 @@ describe('Search Map Mirroring', function() {
     _t.refreshMap(_t.json.records.p56);
 
     // Record list should not synchronize with the map.
+    var recordRows = _t.getRecordRows();
     expect($(recordRows[1]).find('.title').text()).toEqual('title1');
     expect($(recordRows[2]).find('.title').text()).toEqual('title2');
     expect($(recordRows[3]).find('.title').text()).toEqual('title3');
-    expect($(recordRows[4]).find('.title').text()).toEqual('title4');
-    expect(recordRows.length).toEqual(5);
+    expect(recordRows.length).toEqual(4);
 
   });
 

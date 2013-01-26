@@ -34,8 +34,12 @@ Neatline.module('Editor.Search', function(
      * Compile search and pagination templates.
      */
     initialize: function() {
+
       this.getTemplate();
       this.getUi();
+
+      this.mirroring = false; // True if map mirroring is enabled.
+
     },
 
 
@@ -46,10 +50,10 @@ Neatline.module('Editor.Search', function(
      */
     setQuery: function(query) {
 
-      // Convert '+' to spaces.
+      // Convert `+`'s to spaces.
       if (_.isString(query)) query = query.replace(/\+/g, ' ');
 
-      // Set and parse.
+      // Set the value and parse.
       this.__ui.search.val(query);
       this.parse();
 
@@ -97,8 +101,8 @@ Neatline.module('Editor.Search', function(
 
       // MAP
       else if (_.string.startsWith(value, 'map:')) {
-        // TODO: Activate mirroring.
-        this.query = false;
+        Neatline.execute('editor:search:syncWithMap');
+        this.mirroring = true;
         this.bold();
       }
 
@@ -108,7 +112,10 @@ Neatline.module('Editor.Search', function(
         this.unbold();
       }
 
-      else this.unbold();
+      else {
+        this.mirroring = false;
+        this.unbold();
+      }
 
     },
 
@@ -126,8 +133,8 @@ Neatline.module('Editor.Search', function(
       Neatline.execute('editor:updateRoute', this.getUrl());
 
       // Execute the query.
-      if (this.query) {
-        Neatline.execute('editor:records:update', _.extend(
+      if (!this.mirroring) {
+        Neatline.execute('editor:records:load', _.extend(
           Search.__view.query, {
             limit:  __editor.perPage,
             offset: 0
