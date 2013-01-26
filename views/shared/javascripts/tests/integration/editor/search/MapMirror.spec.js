@@ -61,6 +61,11 @@ describe('Search Map Mirroring', function() {
 
   it('should synchronize with map on route request', function() {
 
+    // Manually set the `records` reference on the map view to null to
+    // emulate the state of the view when the application starts before
+    // the first collection is ingested.
+    _t.vw.map.records = null;
+
     // Load route with `map:` as query.
     _t.navigate('records/search/query=map:');
 

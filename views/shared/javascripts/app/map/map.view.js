@@ -26,9 +26,13 @@ Neatline.module('Map', function(
      * Initialize the map and publish initial request for data.
      */
     initialize: function() {
-      this.layers = [];
+
+      this.records = null   // The current collection of records.
+      this.layers = [];     // An array of record-backed vector layers.
+
       this.initializeOpenLayers();
       this.publishPosition();
+
     },
 
 

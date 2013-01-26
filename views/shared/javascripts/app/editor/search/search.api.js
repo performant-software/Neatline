@@ -45,7 +45,7 @@ Neatline.module('Editor.Search', function(
    */
   var syncWithMap = function() {
     var records = Neatline.request('map:getRecords');
-    Neatline.execute('editor:records:ingest', records);
+    if (records) Neatline.execute('editor:records:ingest', records);
   };
 
   Neatline.commands.addHandler('editor:search:syncWithMap', syncWithMap);
