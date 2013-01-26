@@ -45,7 +45,7 @@ Neatline.module('Editor.Records', function(
 
       // Inject the paginators into the list.
       if (records.count > __editor.perPage) {
-        this.$el.find('.pagination').html(this.pagination({
+        this.$('.pagination').html(this.pagination({
           query: Neatline.request('editor:search:getQuery'),
           limit: __editor.perPage,
           records: records

@@ -302,6 +302,26 @@ _t = (function() {
   
   
   /**
+   * Assert that the pagination is empty.
+   */
+  _t.assertPaginationEmpty = function() {
+    var pag = _t.el.records.find('.pagination');
+    expect($(pag[0]).text().match(/^\s+$/)).toBeTruthy();
+    expect($(pag[1]).text().match(/^\s+$/)).toBeTruthy();
+  };
+  
+  
+  /**
+   * Assert that the pagination is not empty.
+   */
+  _t.assertPaginationNotEmpty = function() {
+    var pag = _t.el.records.find('.pagination');
+    expect($(pag[0]).text().match(/^\s+$/)).not.toBeTruthy();
+    expect($(pag[1]).text().match(/^\s+$/)).not.toBeTruthy();
+  };
+  
+  
+  /**
    * Assert that the pagination `<<` link is enabled.
    */
   _t.assertPaginationPrevEnabled = function() {

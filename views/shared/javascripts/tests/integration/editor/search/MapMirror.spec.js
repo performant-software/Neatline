@@ -15,6 +15,7 @@ describe('Search Map Mirroring', function() {
 
   beforeEach(function() {
     _t.loadEditor();
+    __editor.perPage = 1;
   });
 
 
@@ -42,7 +43,7 @@ describe('Search Map Mirroring', function() {
   });
 
 
-  it('should synchronize with map when activated', function() {
+  it('should start syncing with map when activated', function() {
 
     // Load 1 record on map.
     _t.refreshMap(_t.json.records.p6);
@@ -56,10 +57,13 @@ describe('Search Map Mirroring', function() {
     expect($(recordRows[1]).find('.title').text()).toEqual('Record5');
     expect(recordRows.length).toEqual(2);
 
+    // No pagination.
+    _t.assertPaginationEmpty();
+
   });
 
 
-  it('should synchronize with map on route request', function() {
+  it('should start syncing with map on route request', function() {
 
     // Manually set the `records` reference on the map view to null to
     // emulate the state of the view when the application starts before
@@ -76,6 +80,9 @@ describe('Search Map Mirroring', function() {
     var recordRows = _t.getRecordRows();
     expect($(recordRows[1]).find('.title').text()).toEqual('Record5');
     expect(recordRows.length).toEqual(2);
+
+    // No pagination.
+    _t.assertPaginationEmpty();
 
   });
 
@@ -95,10 +102,40 @@ describe('Search Map Mirroring', function() {
     expect($(recordRows[2]).find('.title').text()).toEqual('Record5');
     expect(recordRows.length).toEqual(3);
 
+    // No pagination.
+    _t.assertPaginationEmpty();
+
   });
 
 
-  it('should stop synchronizing when deactivated', function() {
+  it('should stop syncing when deactivated via backspace', function() {
+
+    // Keyup with `map:` in the box.
+    _t.vw.search.__ui.search.val('map:');
+    _t.vw.search.__ui.search.trigger('keyup');
+
+    // Backspace once.
+    _t.vw.search.__ui.search.val('map');
+    _t.vw.search.__ui.search.trigger('keyup');
+    _t.respondRecords();
+
+    // Update map records.
+    _t.refreshMap(_t.json.records.p56);
+
+    // Record list should not synchronize with the map.
+    var recordRows = _t.getRecordRows();
+    expect($(recordRows[1]).find('.title').text()).toEqual('title1');
+    expect($(recordRows[2]).find('.title').text()).toEqual('title2');
+    expect($(recordRows[3]).find('.title').text()).toEqual('title3');
+    expect(recordRows.length).toEqual(4);
+
+    // Pagination visible.
+    _t.assertPaginationNotEmpty();
+
+  });
+
+
+  it('should stop syncing when deactivated via clear', function() {
 
     // Keyup with `map:` in the box.
     _t.vw.search.__ui.search.val('map:');
@@ -118,6 +155,9 @@ describe('Search Map Mirroring', function() {
     expect($(recordRows[2]).find('.title').text()).toEqual('title2');
     expect($(recordRows[3]).find('.title').text()).toEqual('title3');
     expect(recordRows.length).toEqual(4);
+
+    // Pagination visible.
+    _t.assertPaginationNotEmpty();
 
   });
 

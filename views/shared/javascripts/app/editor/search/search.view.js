@@ -88,9 +88,13 @@ Neatline.module('Editor.Search', function(
      */
     parse: function() {
 
+      this.query = {};
+
       // Get raw query value.
       var value = this.__ui.search.val();
-      this.query = {};
+
+      // Reset mirroring.
+      this.mirroring = false;
 
       // TAGS
       if (_.string.startsWith(value, 'tags:')) {
@@ -113,7 +117,6 @@ Neatline.module('Editor.Search', function(
       }
 
       else {
-        this.mirroring = false;
         this.unbold();
       }
 
