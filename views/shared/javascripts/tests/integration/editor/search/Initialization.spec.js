@@ -122,9 +122,23 @@ describe('Search Initialization', function() {
     });
 
 
-    // it('#records/search/query=tags', function() {
+    it('#records/search/query=tags', function() {
 
-    // });
+      _t.navigate('records/search/query=tags:+tag1,+tag2');
+
+      // Should produce GET request to /records.
+      _t.assertLastRequestRoute(__exhibit.api.records);
+      _t.assertLastRequestMethod('GET');
+
+      // `tags[]`=tag1, `tags[]`=tag2.
+      var request = _t.getLastRequest();
+      expect(request.url).toContain($.param({tags: ['tag1', 'tag2']}));
+
+      // `offset`=0, default `limit`.
+      _t.assertLastRequestHasGetParameter('limit', __editor.perPage);
+      _t.assertLastRequestHasGetParameter('offset', '0');
+
+    });
 
 
     it('should load #records/search/query=keywords/start=X', function() {
@@ -137,14 +151,29 @@ describe('Search Initialization', function() {
 
       // `query`=keywords, `offset`=10.
       _t.assertLastRequestHasGetParameter('query', 'keywords');
+      _t.assertLastRequestHasGetParameter('limit', __editor.perPage);
       _t.assertLastRequestHasGetParameter('offset', '10');
 
     });
 
 
-    // it('#records/search/query=tags/start=X', function() {
+    it('#records/search/query=tags/start=X', function() {
 
-    // });
+      _t.navigate('records/search/query=tags:+tag1,+tag2/start=10');
+
+      // Should produce GET request to /records.
+      _t.assertLastRequestRoute(__exhibit.api.records);
+      _t.assertLastRequestMethod('GET');
+
+      // `tags[]`=tag1, `tags[]`=tag2.
+      var request = _t.getLastRequest();
+      expect(request.url).toContain($.param({tags: ['tag1', 'tag2']}));
+
+      // `offset`=0, default `limit`.
+      _t.assertLastRequestHasGetParameter('limit', __editor.perPage);
+      _t.assertLastRequestHasGetParameter('offset', '10');
+
+    });
 
   });
 
