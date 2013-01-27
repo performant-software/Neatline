@@ -375,9 +375,9 @@ class Neatline_NeatlineRecordTableTest_QueryRecords
         // Query for 'neatline'.
         $result = $this->_recordsTable->queryRecords($exhibit,
             array('query' => 'neatline'));
-        $this->assertEquals($result['records'][0]['id'], $record1->id);
+        $this->assertEquals($result['records'][0]['id'], $record3->id);
         $this->assertEquals($result['records'][1]['id'], $record2->id);
-        $this->assertEquals($result['records'][2]['id'], $record3->id);
+        $this->assertEquals($result['records'][2]['id'], $record1->id);
         $this->assertCount(3, $result['records']);
 
     }

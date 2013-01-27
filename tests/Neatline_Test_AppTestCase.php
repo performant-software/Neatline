@@ -47,18 +47,10 @@ class Neatline_Test_AppTestCase extends Omeka_Test_AppTestCase
      */
     public function tearDown()
     {
-
-        parent::tearDown();
-
-        // Clear out testing data. Uses DELETE instead of TRUNCATE to
-        // maintain primary key incrementing among cases, which guarantees
-        // that Jasmine fixtures generated in separate cases will have
-        // unique `id`s.
-
         $p = $this->db->prefix;
         $this->db->query("DELETE FROM `{$p}neatline_records` WHERE 1=1");
         $this->db->query("DELETE FROM `{$p}neatline_exhibits` WHERE 1=1");
-
+        parent::tearDown();
     }
 
 

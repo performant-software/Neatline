@@ -72,8 +72,8 @@ class Neatline_RecordsControllerTest_Get
         $records  = $response->records;
 
         // Should apply exhibit filter.
-        $this->assertEquals($records[0]->id, $record1->id);
-        $this->assertEquals($records[1]->id, $record2->id);
+        $this->assertEquals($records[0]->id, $record2->id);
+        $this->assertEquals($records[1]->id, $record1->id);
         $this->assertCount(2 , $response->records);
 
     }
