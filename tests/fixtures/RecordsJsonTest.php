@@ -150,6 +150,7 @@ class Neatline_RecordsJsonFixtureTest extends Neatline_Test_AppTestCase
         // Create 6 records.
         for ($i = 0; $i<6; $i++) {
             $record = new NeatlineRecord($exhibit);
+            $record->added = '200'.$i.'-01-01';
             $record->title = 'Record'.$i;
             $record->save();
         }

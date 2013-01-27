@@ -358,15 +358,19 @@ class Neatline_NeatlineRecordTableTest_QueryRecords
     {
 
         $exhibit = $this->__exhibit();
+
         $record1 = new NeatlineRecord($exhibit);
         $record2 = new NeatlineRecord($exhibit);
         $record3 = new NeatlineRecord($exhibit);
         $record4 = new NeatlineRecord($exhibit);
+        $record1->added = '2001-01-01';
+        $record2->added = '2002-01-01';
+        $record3->added = '2003-01-01';
+        $record4->added = '2004-01-01';
         $record1->title = '1 neatline 2';
         $record2->body  = '3 neatline 4';
         $record3->slug  = '5 neatline 6';
         $record4->slug  = 'omeka';
-
         $record1->save();
         $record2->save();
         $record3->save();

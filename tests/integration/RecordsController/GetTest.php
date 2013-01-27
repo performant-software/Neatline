@@ -60,9 +60,15 @@ class Neatline_RecordsControllerTest_Get
 
         $exhibit1 = $this->__exhibit();
         $exhibit2 = $this->__exhibit();
-        $record1  = $this->__record($exhibit1);
-        $record2  = $this->__record($exhibit1);
-        $record3  = $this->__record($exhibit2);
+        $record1 = new NeatlineRecord($exhibit1);
+        $record2 = new NeatlineRecord($exhibit1);
+        $record3 = new NeatlineRecord($exhibit2);
+        $record1->added = '2001-01-01';
+        $record2->added = '2002-01-01';
+        $record3->added = '2003-01-01';
+        $record1->save();
+        $record2->save();
+        $record3->save();
 
         // Hit /records for exhibit 1.
         $this->dispatch('neatline/records/'.$exhibit1->id);
