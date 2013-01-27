@@ -75,7 +75,7 @@ Neatline.module('Editor.Search', function(
      *
      * @return {String} url: The route.
      */
-    getUrl: function() {
+    getUrlFromQuery: function() {
       var q = this.getQueryForUrl();
       return (q != '') ? 'records/search/query='+q : 'records';
     },
@@ -131,7 +131,7 @@ Neatline.module('Editor.Search', function(
       this.parse();
 
       // Update the route.
-      Neatline.execute('editor:updateRoute', this.getUrl());
+      Neatline.execute('editor:updateRoute', this.getUrlFromQuery());
 
       // Execute the query.
       if (!this.mirroring) {
