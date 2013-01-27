@@ -39,14 +39,14 @@ describe('Records Pagination', function() {
 
   describe('|xx|xxxx', function() {
 
+    // --------------------------------------------------------------------
+    // << (disabled, 1st page), >> (enabled, next page).
+    // --------------------------------------------------------------------
+
     it('with search query', function() {
 
-      // ------------------------------------------------------------------
-      // << (disabled, #records/search/query=X), >> (enabled, next page).
-      // ------------------------------------------------------------------
-
       // Load records 1-2.
-      _t.navigate('records/search/query=X/start=0');
+      _t.navigate('records/search/query=x+y/start=0');
       _t.respondLast200(_t.json.records.p12);
 
       // << disabled, >> enabled.
@@ -54,16 +54,12 @@ describe('Records Pagination', function() {
       _t.assertPaginationNextEnabled();
 
       // << links to query page 1, >> to next page.
-      _t.assertPaginationPrevRoute('#records/search/query=X');
-      _t.assertPaginationNextRoute('#records/search/query=X/start=2');
+      _t.assertPaginationPrevRoute('#records/search/query=x+y');
+      _t.assertPaginationNextRoute('#records/search/query=x+y/start=2');
 
     });
 
     it('without search query', function() {
-
-      // ------------------------------------------------------------------
-      // << (disabled, #records), >> (enabled, next page).
-      // ------------------------------------------------------------------
 
       // Load records 1-2.
       _t.navigate('records/search/start=0');
@@ -90,7 +86,7 @@ describe('Records Pagination', function() {
     it('with search query', function() {
 
       // Load records 2-3.
-      _t.navigate('records/search/query=X/start=1');
+      _t.navigate('records/search/query=x+y/start=1');
       _t.respondLast200(_t.json.records.p23);
 
       // << enabled, >> enabled.
@@ -98,8 +94,8 @@ describe('Records Pagination', function() {
       _t.assertPaginationNextEnabled();
 
       // << links to page 1, >> links to next page.
-      _t.assertPaginationPrevRoute('#records/search/query=X');
-      _t.assertPaginationNextRoute('#records/search/query=X/start=3');
+      _t.assertPaginationPrevRoute('#records/search/query=x+y');
+      _t.assertPaginationNextRoute('#records/search/query=x+y/start=3');
 
     });
 
@@ -130,7 +126,7 @@ describe('Records Pagination', function() {
     it('with search query', function() {
 
       // Load records 3-4.
-      _t.navigate('records/search/query=X/start=2');
+      _t.navigate('records/search/query=x+y/start=2');
       _t.respondLast200(_t.json.records.p34);
 
       // << enabled, >> enabled.
@@ -138,8 +134,8 @@ describe('Records Pagination', function() {
       _t.assertPaginationNextEnabled();
 
       // << links to page 1, >> links to next page.
-      _t.assertPaginationPrevRoute('#records/search/query=X');
-      _t.assertPaginationNextRoute('#records/search/query=X/start=4');
+      _t.assertPaginationPrevRoute('#records/search/query=x+y');
+      _t.assertPaginationNextRoute('#records/search/query=x+y/start=4');
 
     });
 
@@ -170,7 +166,7 @@ describe('Records Pagination', function() {
     it('with search query', function() {
 
       // Load records 5-6.
-      _t.navigate('records/search/query=X/start=4');
+      _t.navigate('records/search/query=x+y/start=4');
       _t.respondLast200(_t.json.records.p56);
 
       // << enabled, >> disabled.
@@ -178,8 +174,8 @@ describe('Records Pagination', function() {
       _t.assertPaginationNextDisabled();
 
       // << links to previous page, >> links to current page.
-      _t.assertPaginationPrevRoute('#records/search/query=X/start=2');
-      _t.assertPaginationNextRoute('#records/search/query=X/start=4');
+      _t.assertPaginationPrevRoute('#records/search/query=x+y/start=2');
+      _t.assertPaginationNextRoute('#records/search/query=x+y/start=4');
 
     });
 
@@ -210,7 +206,7 @@ describe('Records Pagination', function() {
     it('with search query', function() {
 
       // Load record 6.
-      _t.navigate('records/search/query=X/start=5');
+      _t.navigate('records/search/query=x+y/start=5');
       _t.respondLast200(_t.json.records.p6);
 
       // << enabled, >> disabled.
@@ -218,8 +214,8 @@ describe('Records Pagination', function() {
       _t.assertPaginationNextDisabled();
 
       // << links to previous page, >> links to current page.
-      _t.assertPaginationPrevRoute('#records/search/query=X/start=3');
-      _t.assertPaginationNextRoute('#records/search/query=X/start=5');
+      _t.assertPaginationPrevRoute('#records/search/query=x+y/start=3');
+      _t.assertPaginationNextRoute('#records/search/query=x+y/start=5');
 
     });
 

@@ -174,7 +174,7 @@ Neatline.module('Editor.Record', function(
 
       // FLash success.
       Neatline.execute('editor:notifySuccess',
-        STRINGS.record.delete.success
+        STRINGS.record.remove.success
       );
 
       this.close();
@@ -187,7 +187,7 @@ Neatline.module('Editor.Record', function(
      */
     onDeleteError: function() {
       Neatline.execute('editor:notifyError',
-        STRINGS.record.delete.error
+        STRINGS.record.remove.error
       );
     },
 

@@ -55,12 +55,12 @@
   <% if (!_.string.startsWith(query, 'map:')) { %>
 
     <ul class="prev-next">
-        <li <% if (!prevActive) {
-          %><%='class="disabled"'%><%
-        } %>><a class="prev" href="<%= prev %>">«</a></li>
-        <li <% if (!nextActive) {
-          %><%='class="disabled"'%><%
-        } %>><a class="next" href="<%= next %>">»</a></li>
+      <li <% if (!prevActive) {
+        %><%='class="disabled"'%><%
+      } %>><a class="prev" href="<%= prev %>">«</a></li>
+      <li <% if (!nextActive) {
+        %><%='class="disabled"'%><%
+      } %>><a class="next" href="<%= next %>">»</a></li>
     </ul>
     <div class="pagination-details">
       <span class="start"><%= records.offset+1 %></span> -

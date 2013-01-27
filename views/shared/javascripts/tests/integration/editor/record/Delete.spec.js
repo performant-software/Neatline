@@ -103,7 +103,7 @@ describe('Record Form Delete', function() {
 
     // `toastr` should be called.
     expect(toastr.info).toHaveBeenCalledWith(
-      STRINGS.record.delete.success, null, _t.vw.editor.options.toastr
+      STRINGS.record.remove.success, null, _t.vw.editor.options.toastr
     );
 
   });
@@ -125,7 +125,7 @@ describe('Record Form Delete', function() {
 
     // `toastr` should be called.
     expect(toastr.error).toHaveBeenCalledWith(
-      STRINGS.record.delete.error, null, _t.vw.editor.options.toastr
+      STRINGS.record.remove.error, null, _t.vw.editor.options.toastr
     );
 
   });

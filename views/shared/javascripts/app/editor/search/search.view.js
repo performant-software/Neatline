@@ -44,11 +44,11 @@ Neatline.module('Editor.Search', function(
 
 
     /**
-     * Populate the current search query.
+     * Populate the current search query from a route parameter.
      *
-     * @param {String} query: The search query.
+     * @param {String} query: The query, with '+' replaced with ' '.
      */
-    setQuery: function(query) {
+    setQueryFromUrl: function(query) {
 
       // Convert `+`'s to spaces.
       if (_.isString(query)) query = query.replace(/\+/g, ' ');
@@ -61,12 +61,12 @@ Neatline.module('Editor.Search', function(
 
 
     /**
-     * Get the current search query value.
+     * Get the current search query value for a route parameter.
      *
-     * @return {String} query: The search query.
+     * @return {String} query: The query, with ' ' replaced with '+'.
      */
-    getQuery: function() {
-      return this.__ui.search.val();
+    getQueryForUrl: function() {
+      return this.__ui.search.val().replace(/\s/g, '+');
     },
 
 
@@ -76,10 +76,8 @@ Neatline.module('Editor.Search', function(
      * @return {String} url: The route.
      */
     getUrl: function() {
-      var query = this.getQuery();
-      return (query != '') ?
-        'records/search/query='+query.replace(/\s/g, '+') :
-        'records';
+      var q = this.getQueryForUrl();
+      return (q != '') ? 'records/search/query='+q : 'records';
     },
 
 

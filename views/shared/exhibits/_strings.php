@@ -20,7 +20,7 @@
         success: '<?php echo __('The record was saved successfully!'); ?>',
         error: '<?php echo __('There was an error; the record was not saved.'); ?>'
       },
-      delete: {
+      remove: {
         success: '<?php echo __('The record was deleted successfully!'); ?>',
         error: '<?php echo __('There was an error; the record was not deleted.'); ?>'
       },

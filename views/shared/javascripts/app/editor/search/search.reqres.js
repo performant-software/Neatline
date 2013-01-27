@@ -15,12 +15,12 @@ Neatline.module('Editor.Search', function(
 
 
   /**
-   * Return the current search query.
+   * Get the current query as a route parameter (' ' replaced with '+').
    *
    * @return {String}: The query.
    */
-  Neatline.reqres.addHandler('editor:search:getQuery', function() {
-    return Search.__view.getQuery();
+  Neatline.reqres.addHandler('editor:search:getQueryForUrl', function() {
+    return Search.__view.getQueryForUrl();
   });
 
 

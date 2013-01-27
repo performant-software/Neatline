@@ -24,7 +24,7 @@ Neatline.module('Editor.Search', function(
 
     // Parse route parameters, set raw query.
     query = query || null; offset = offset || 0;
-    Search.__view.setQuery(query);
+    Search.__view.setQueryFromUrl(query);
 
     // Load the record list.
     Neatline.execute('editor:records:load', _.extend(
