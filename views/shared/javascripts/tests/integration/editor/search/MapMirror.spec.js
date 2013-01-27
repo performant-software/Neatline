@@ -54,7 +54,7 @@ describe('Search Map Mirroring', function() {
 
     // Record list should synchronize with map.
     var recordRows = _t.getRecordRows();
-    expect($(recordRows[1]).find('.title').text()).toEqual('Record5');
+    expect($(recordRows[1]).find('.title').text()).toEqual('Record0');
     expect(recordRows.length).toEqual(2);
 
     // No pagination.
@@ -78,7 +78,7 @@ describe('Search Map Mirroring', function() {
 
     // Record list should synchronize with map.
     var recordRows = _t.getRecordRows();
-    expect($(recordRows[1]).find('.title').text()).toEqual('Record5');
+    expect($(recordRows[1]).find('.title').text()).toEqual('Record0');
     expect(recordRows.length).toEqual(2);
 
     // No pagination.
@@ -98,8 +98,8 @@ describe('Search Map Mirroring', function() {
 
     // Record list should synchronize with map.
     var recordRows = _t.getRecordRows();
-    expect($(recordRows[1]).find('.title').text()).toEqual('Record4');
-    expect($(recordRows[2]).find('.title').text()).toEqual('Record5');
+    expect($(recordRows[1]).find('.title').text()).toEqual('Record1');
+    expect($(recordRows[2]).find('.title').text()).toEqual('Record0');
     expect(recordRows.length).toEqual(3);
 
     // No pagination.

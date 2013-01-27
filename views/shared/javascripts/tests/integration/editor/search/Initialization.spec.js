@@ -56,7 +56,7 @@ describe('Search Initialization', function() {
       var firstRecord = _t.getRecordRows()[1];
 
       // Record list should be updated.
-      expect($(firstRecord).find('.title').text()).toEqual('Record5');
+      expect($(firstRecord).find('.title').text()).toEqual('Record0');
 
     });
 

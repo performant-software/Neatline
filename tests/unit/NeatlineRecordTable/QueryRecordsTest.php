@@ -371,6 +371,7 @@ class Neatline_NeatlineRecordTableTest_QueryRecords
         $record2->body  = '3 neatline 4';
         $record3->slug  = '5 neatline 6';
         $record4->slug  = 'omeka';
+
         $record1->save();
         $record2->save();
         $record3->save();
