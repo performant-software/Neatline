@@ -21,11 +21,13 @@ class NeatlineRecord extends Neatline_AbstractRecord
     public $added;              // TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     public $modified;           // TIMESTAMP NULL
 
-    public $slug;               // VARCHAR(100) NULL
     public $title;              // MEDIUMTEXT NULL
-    public $coverage;           // GEOMETRY NOT NULL
+    public $_title;             // MEDIUMTEXT NULL
     public $body;               // MEDIUMTEXT NULL
+    public $_body;              // MEDIUMTEXT NULL
+    public $coverage;           // GEOMETRY NOT NULL
     public $tags;               // TEXT NULL
+    public $slug;               // VARCHAR(100) NULL
 
 
     private $styles = array();
@@ -142,6 +144,14 @@ class NeatlineRecord extends Neatline_AbstractRecord
      **/
     public function buildJsonData() {
         return array_merge(parent::toArray(), $this->styles);
+    }
+
+
+    /**
+     * Compile Omeka file and item references.
+     **/
+    public function compile() {
+
     }
 
 
