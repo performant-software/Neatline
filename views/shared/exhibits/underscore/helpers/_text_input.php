@@ -15,6 +15,11 @@
 
 
 <label><?php echo __($label); ?></label>
+<?php if (isset($useCurrent) && $useCurrent): ?>
+  ( <a class="use-current" name="set-<?php echo $name; ?>">
+      Use Current
+    </a> )
+<?php endif; ?>
 <div class="controls">
   <div class="inline-inputs">
     <input type="text" name="<?php echo $name; ?>"

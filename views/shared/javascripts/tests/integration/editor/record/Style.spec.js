@@ -40,9 +40,14 @@ describe('Record Form Style Tab', function() {
       strokeWidth:    _t.vw.record.$('input[name="stroke-width"]'),
       pointRadius:    _t.vw.record.$('input[name="point-radius"]'),
       pointImage:     _t.vw.record.$('input[name="point-image"]'),
+      minZoom:        _t.vw.record.$('input[name="min-zoom"]'),
+      maxZoom:        _t.vw.record.$('input[name="max-zoom"]'),
       mapFocus:       _t.vw.record.$('input[name="map-focus"]'),
       mapZoom:        _t.vw.record.$('input[name="map-zoom"]'),
-      setFocus:       _t.vw.record.$('a[name="set-focus"]')
+      setMinZoom:     _t.vw.record.$('a[name="set-min-zoom"]'),
+      setMaxZoom:     _t.vw.record.$('a[name="set-max-zoom"]'),
+      setMapFocus:    _t.vw.record.$('a[name="set-map-focus"]'),
+      setMapZoom:     _t.vw.record.$('a[name="set-map-zoom"]')
     };
 
   });
@@ -250,23 +255,80 @@ describe('Record Form Style Tab', function() {
   });
 
 
-  it('should populate focus inputs', function() {
+  it('should populate min zoom', function() {
 
     // --------------------------------------------------------------------
-    // When the "Use Current Focus" button is clicked, "Focus Coordinates"
-    // and "Focus Zoom" should be populated with current map values.
+    // When the "Use Current" link for "Min Zoom" is clicked, the input
+    // should be populated with the current zoom.
     // --------------------------------------------------------------------
 
-    _t.setMapCenter(1, 2, 3);
-    els.setFocus.trigger('click');
+    _t.setMapZoom(1);
+    els.setMinZoom.trigger('click');
 
-    expect(els.mapFocus).toHaveValue('1,2');
-    expect(els.mapZoom).toHaveValue(3);
+    // Input should be updated.
+    expect(els.minZoom).toHaveValue('1');
+
+    // Model should be updated.
+    expect(_t.vw.record.model.get('min_zoom')).toEqual('1');
 
   });
 
 
-  it('should render current zoom');
+  it('should populate max zoom', function() {
+
+    // --------------------------------------------------------------------
+    // When the "Use Current" link for "Max Zoom" is clicked, the input
+    // should be populated with the current zoom.
+    // --------------------------------------------------------------------
+
+    _t.setMapZoom(1);
+    els.setMaxZoom.trigger('click');
+
+    // Input should be updated.
+    expect(els.maxZoom).toHaveValue('1');
+
+    // Model should be updated.
+    expect(_t.vw.record.model.get('max_zoom')).toEqual('1');
+
+  });
+
+
+  it('should populate default focus', function() {
+
+    // --------------------------------------------------------------------
+    // When the "Use Current" link for "Default Focus" is clicked, the
+    // input should be populated with the current focus.
+    // --------------------------------------------------------------------
+
+    _t.setMapCenter(1, 2);
+    els.setMapFocus.trigger('click');
+
+    // Input should be updated.
+    expect(els.mapFocus).toHaveValue('1,2');
+
+    // Model should be updated.
+    expect(_t.vw.record.model.get('map_focus')).toEqual('1,2');
+
+  });
+
+
+  it('should populate default zoom', function() {
+
+    // --------------------------------------------------------------------
+    // When the "Use Current" link for "Default Zoom" is clicked, the
+    // input should be populated with the current zoom.
+    // --------------------------------------------------------------------
+
+    _t.setMapZoom(1);
+    els.setMapZoom.trigger('click');
+
+    // Input should be updated.
+    expect(els.mapZoom).toHaveValue('1');
+
+    // Model should be updated.
+    expect(_t.vw.record.model.get('map_zoom')).toEqual('1');
+
+  });
 
 
 });

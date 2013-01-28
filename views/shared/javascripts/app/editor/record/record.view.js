@@ -22,15 +22,29 @@ Neatline.module('Editor.Record', function(
     tagName:    'form',
 
     events: {
-      'click a[name="close"]':      'onCloseClick',
-      'click a[name="save"]':       'onSaveClick',
-      'click a[name="delete2"]':    'onDeleteClick',
-      'click a[name="set-focus"]':  'onFocusClick',
-      'change div.spatial input':   'onControlChange',
-      'keyup div.spatial input':    'onControlChange',
-      'change input.preview':       'onStyleChange',
-      'keyup input.preview':        'onStyleKeyup',
-      'shown ul.nav a':             'onTabChange'
+
+      // Save/Close/Delete.
+      'click a[name="close"]':          'onCloseClick',
+      'click a[name="save"]':           'onSaveClick',
+      'click a[name="delete2"]':        'onDeleteClick',
+
+      // Set map-derived styles.
+      'click a[name="set-min-zoom"]':   'onSetMinZoom',
+      'click a[name="set-max-zoom"]':   'onSetMaxZoom',
+      'click a[name="set-map-focus"]':  'onSetMapFocus',
+      'click a[name="set-map-zoom"]':   'onSetMapZoom',
+
+      // Change map edit mode.
+      'change div.spatial input':       'onControlChange',
+      'keyup div.spatial input':        'onControlChange',
+
+      // Preview styles.
+      'change input.preview':           'onStyleChange',
+      'keyup input.preview':            'onStyleKeyup',
+
+      // Tab changes.
+      'shown ul.nav a':                 'onTabChange'
+
     },
 
     selectors: {
@@ -50,8 +64,10 @@ Neatline.module('Editor.Record', function(
         irreg:  'input[name="irreg"]'
       },
       style: {
-        focus:  'input[name="map-focus"]',
-        zoom:   'input[name="map-zoom"]'
+        minZoom:  'input[name="min-zoom"]',
+        maxZoom:  'input[name="max-zoom"]',
+        mapFocus: 'input[name="map-focus"]',
+        mapZoom:  'input[name="map-zoom"]'
       },
       remove: {
         modal:  '#delete-modal'
@@ -201,13 +217,38 @@ Neatline.module('Editor.Record', function(
 
 
     /**
-     * Populate default coordinates and zoom.
+     * Populate "Min Zoom" with current map value.
      */
-    onFocusClick: function() {
-      var center  = Neatline.request('map:getCenter');
-      var zoom    = Neatline.request('map:getZoom');
-      this.__ui.style.focus.val(center.lon+','+center.lat);
-      this.__ui.style.zoom.val(zoom);
+    onSetMinZoom: function() {
+      var zoom = Neatline.request('map:getZoom');
+      this.__ui.style.minZoom.val(zoom).change();
+    },
+
+
+    /**
+     * Populate "Max Zoom" with current map value.
+     */
+    onSetMaxZoom: function() {
+      var zoom = Neatline.request('map:getZoom');
+      this.__ui.style.maxZoom.val(zoom).change();
+    },
+
+
+    /**
+     * Populate "Default Focus" with current map center.
+     */
+    onSetMapFocus: function() {
+      var center = Neatline.request('map:getCenter');
+      this.__ui.style.mapFocus.val(center.lon+','+center.lat).change();
+    },
+
+
+    /**
+     * Populate "Default Zoom" with current map value.
+     */
+    onSetMapZoom: function() {
+      var zoom = Neatline.request('map:getZoom');
+      this.__ui.style.mapZoom.val(zoom).change();
     },
 
 

@@ -718,5 +718,15 @@ _t = (function() {
     this.vw.map.map.setCenter([lon, lat], zoom);
   };
   
+  
+  /**
+   * Set the map zoom level.
+   *
+   * @param {Number} zoom: The zoom level.
+   */
+  _t.setMapZoom = function(zoom) {
+    this.vw.map.map.zoomTo(zoom);
+  };
+  
   return _t;
 })();

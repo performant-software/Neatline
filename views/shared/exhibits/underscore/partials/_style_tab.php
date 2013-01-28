@@ -105,34 +105,30 @@
   'exhibits/underscore/helpers/_text_input.php', array(
     'name'  => 'min-zoom',
     'label' => 'Min Zoom',
-    'bind'  => 'record.min_zoom'
+    'bind'  => 'record.min_zoom',
+    'useCurrent' => true
 )); ?>
 
 <?php echo $this->partial(
   'exhibits/underscore/helpers/_text_input.php', array(
     'name'  => 'max-zoom',
     'label' => 'Max Zoom',
-    'bind'  => 'record.max_zoom'
+    'bind'  => 'record.max_zoom',
+    'useCurrent' => true
 )); ?>
 
 <?php echo $this->partial(
   'exhibits/underscore/helpers/_text_input.php', array(
     'name'  => 'map-focus',
-    'label' => 'Focus Coordinates',
-    'bind'  => 'record.map_focus'
+    'label' => 'Default Focus',
+    'bind'  => 'record.map_focus',
+    'useCurrent' => true
 )); ?>
 
 <?php echo $this->partial(
   'exhibits/underscore/helpers/_text_input.php', array(
     'name'  => 'map-zoom',
-    'label' => 'Focus Zoom',
-    'bind'  => 'record.map_zoom'
+    'label' => 'Default Zoom',
+    'bind'  => 'record.map_zoom',
+    'useCurrent' => true
 )); ?>
-
-<div class="controls">
-  <div class="inline-inputs">
-    <a name="set-focus" class="btn btn-small">
-      <i class="icon-map-marker"></i> Use Current Focus
-    </a>
-  </div>
-</div>

@@ -138,3 +138,13 @@ _t.unHoverOnMapFeature = function(layers) {
 _t.setMapCenter = function(lon, lat, zoom) {
   this.vw.map.map.setCenter([lon, lat], zoom);
 };
+
+
+/**
+ * Set the map zoom level.
+ *
+ * @param {Number} zoom: The zoom level.
+ */
+_t.setMapZoom = function(zoom) {
+  this.vw.map.map.zoomTo(zoom);
+};
