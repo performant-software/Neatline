@@ -44,10 +44,22 @@ Neatline.module('Editor.Map', { startWithParent: false,
    * @param {Object} settings: The new form settings.
    */
   var updateEdit = function(settings) {
-    Map.__view.update(settings);
+    Map.__view.updateEdit(settings);
   };
 
   Neatline.commands.addHandler('editor:map:updateEdit', updateEdit);
+
+
+  /**
+   * Update edit layer styles.
+   *
+   * @param {Object} model: The updated model.
+   */
+  var updateStyles = function(model) {
+    Map.__view.updateStyles(model);
+  };
+
+  Neatline.commands.addHandler('editor:map:updateStyles', updateStyles);
 
 
   /**

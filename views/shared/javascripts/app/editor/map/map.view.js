@@ -164,7 +164,7 @@ _.extend(Neatline.Map.View.prototype, {
    *
    * @param {Object} settings: Settings for the controls.
    */
-  update: function(settings) {
+  updateEdit: function(settings) {
 
 
     // Re-activate the default hover/click controls (which could have been
@@ -250,8 +250,18 @@ _.extend(Neatline.Map.View.prototype, {
 
 
   /**
+   * Reconstruct the stylemap for the edit layer.
+   *
+   * @param {Object} model: The updated model.
+   */
+  updateStyles: function(model) {
+    this.editLayer.styleMap = this.getStyleMap(model);
+    this.editLayer.redraw();
+  },
+
+
+  /**
    * Publish updated KML.
-   * @unittest
    */
   publish: function() {
 

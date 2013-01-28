@@ -317,19 +317,27 @@ Neatline.module('Map', function(
      */
     getStyleMap: function(record) {
 
-      // Compute decimal opacities.
-      var vectorOpacity = record.get('vector_opacity')/100;
-      var imageOpacity  = record.get('image_opacity')/100;
-      var selectOpacity = record.get('select_opacity')/100;
-      var strokeOpacity = record.get('stroke_opacity')/100;
+      // Ensure integers.
+      var vectorOpacity = parseInt(record.get('vector_opacity'),  10);
+      var imageOpacity  = parseInt(record.get('image_opacity'),   10);
+      var selectOpacity = parseInt(record.get('select_opacity'),  10);
+      var strokeOpacity = parseInt(record.get('stroke_opacity'),  10);
+      var pointRadius   = parseInt(record.get('point_radius'),    10);
+      var strokeWidth   = parseInt(record.get('stroke_width'),    10);
+
+      // Decimal opacities.
+      vectorOpacity /= 100;
+      imageOpacity  /= 100;
+      selectOpacity /= 100;
+      strokeOpacity /= 100;
 
       return new OpenLayers.StyleMap({
         'default': new OpenLayers.Style({
           fillColor:        record.get('vector_color'),
           strokeColor:      record.get('stroke_color'),
-          pointRadius:      record.get('point_radius'),
           externalGraphic:  record.get('point_image'),
-          strokeWidth:      record.get('stroke_width'),
+          strokeWidth:      strokeWidth,
+          pointRadius:      pointRadius,
           fillOpacity:      vectorOpacity,
           graphicOpacity:   imageOpacity,
           strokeOpacity:    strokeOpacity
@@ -337,9 +345,9 @@ Neatline.module('Map', function(
         'select': new OpenLayers.Style({
           fillColor:        record.get('select_color'),
           strokeColor:      record.get('stroke_color'),
-          pointRadius:      record.get('point_radius'),
           externalGraphic:  record.get('point_image'),
-          strokeWidth:      record.get('stroke_width'),
+          strokeWidth:      strokeWidth,
+          pointRadius:      pointRadius,
           fillOpacity:      selectOpacity,
           graphicOpacity:   imageOpacity,
           strokeOpacity:    strokeOpacity
@@ -347,9 +355,9 @@ Neatline.module('Map', function(
         'temporary': new OpenLayers.Style({
           fillColor:        record.get('select_color'),
           strokeColor:      record.get('stroke_color'),
-          pointRadius:      record.get('point_radius'),
           externalGraphic:  record.get('point_image'),
-          strokeWidth:      record.get('stroke_width'),
+          strokeWidth:      strokeWidth,
+          pointRadius:      pointRadius,
           fillOpacity:      selectOpacity,
           graphicOpacity:   imageOpacity,
           strokeOpacity:    strokeOpacity

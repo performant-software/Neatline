@@ -25,70 +25,80 @@
   'exhibits/underscore/helpers/_text_input.php', array(
     'name'  => 'vector-color',
     'label' => 'Shape Color',
-    'bind'  => 'record.vector_color'
+    'bind'  => 'record.vector_color',
+    'class' => 'preview'
 )); ?>
 
 <?php echo $this->partial(
   'exhibits/underscore/helpers/_text_input.php', array(
     'name'  => 'stroke-color',
     'label' => 'Line Color',
-    'bind'  => 'record.stroke_color'
+    'bind'  => 'record.stroke_color',
+    'class' => 'preview'
 )); ?>
 
 <?php echo $this->partial(
   'exhibits/underscore/helpers/_text_input.php', array(
     'name'  => 'select-color',
     'label' => 'Selected Color',
-    'bind'  => 'record.select_color'
+    'bind'  => 'record.select_color',
+    'class' => 'preview'
 )); ?>
 
 <?php echo $this->partial(
   'exhibits/underscore/helpers/_text_input.php', array(
     'name'  => 'vector-opacity',
     'label' => 'Shape Opacity',
-    'bind'  => 'record.vector_opacity'
-)); ?>
-
-<?php echo $this->partial(
-  'exhibits/underscore/helpers/_text_input.php', array(
-    'name'  => 'select-opacity',
-    'label' => 'Selected Opacity',
-    'bind'  => 'record.select_opacity'
+    'bind'  => 'record.vector_opacity',
+    'class' => 'preview'
 )); ?>
 
 <?php echo $this->partial(
   'exhibits/underscore/helpers/_text_input.php', array(
     'name'  => 'stroke-opacity',
     'label' => 'Line Opacity',
-    'bind'  => 'record.stroke_opacity'
+    'bind'  => 'record.stroke_opacity',
+    'class' => 'preview'
+)); ?>
+
+<?php echo $this->partial(
+  'exhibits/underscore/helpers/_text_input.php', array(
+    'name'  => 'select-opacity',
+    'label' => 'Selected Opacity',
+    'bind'  => 'record.select_opacity',
+    'class' => 'preview'
 )); ?>
 
 <?php echo $this->partial(
   'exhibits/underscore/helpers/_text_input.php', array(
     'name'  => 'image-opacity',
     'label' => 'Image Opacity',
-    'bind'  => 'record.image_opacity'
+    'bind'  => 'record.image_opacity',
+    'class' => 'preview'
 )); ?>
 
 <?php echo $this->partial(
   'exhibits/underscore/helpers/_text_input.php', array(
     'name'  => 'stroke-width',
     'label' => 'Line Width',
-    'bind'  => 'record.stroke_width'
+    'bind'  => 'record.stroke_width',
+    'class' => 'preview'
 )); ?>
 
 <?php echo $this->partial(
   'exhibits/underscore/helpers/_text_input.php', array(
     'name'  => 'point-radius',
     'label' => 'Point Radius',
-    'bind'  => 'record.point_radius'
+    'bind'  => 'record.point_radius',
+    'class' => 'preview'
 )); ?>
 
 <?php echo $this->partial(
   'exhibits/underscore/helpers/_text_input.php', array(
     'name'  => 'point-image',
     'label' => 'Point Image',
-    'bind'  => 'record.point_image'
+    'bind'  => 'record.point_image',
+    'class' => 'preview'
 )); ?>
 
 <?php echo $this->partial(

@@ -22,12 +22,14 @@ Neatline.module('Editor.Record', function(
     tagName:    'form',
 
     events: {
-      'click a[name="close"]':    'close',
-      'click a[name="save"]':     'save',
-      'click a[name="delete2"]':  'remove',
-      'shown ul.nav a':           'onTabChange',
-      'change div.spatial input': 'onEditControlChange',
-      'keyup div.spatial input':  'onEditControlChange'
+      'click a[name="close"]':    'onCloseClick',
+      'click a[name="save"]':     'onSaveClick',
+      'click a[name="delete2"]':  'onDeleteClick',
+      'change div.spatial input': 'onControlChange',
+      'keyup div.spatial input':  'onControlChange',
+      'change input.preview':     'onStyleChange',
+      'keyup input.preview':      'onStyleKeyup',
+      'shown ul.nav a':           'onTabChange'
     },
 
     selectors: {
@@ -36,17 +38,18 @@ Neatline.module('Editor.Record', function(
     },
 
     ui: {
-      tabs:         'ul.nav a',
-      modal:        '#delete-modal',
       text: {
-        tab:        'a[href="#record-form-text"]',
-        region:     '#record-form-text'
+        tab:    'a[href="#record-form-text"]',
+        region: '#record-form-text'
       },
       spatial: {
-        pan:        'input[value="pan"]',
-        sides:      'input[name="sides"]',
-        snap:       'input[name="snap"]',
-        irreg:      'input[name="irreg"]'
+        pan:    'input[value="pan"]',
+        sides:  'input[name="sides"]',
+        snap:   'input[name="snap"]',
+        irreg:  'input[name="irreg"]'
+      },
+      remove: {
+        modal:  '#delete-modal'
       }
     },
 
@@ -87,15 +90,6 @@ Neatline.module('Editor.Record', function(
 
 
     /**
-     * Close the form.
-     */
-    close: function() {
-      Neatline.execute('editor:showRecordList');
-      this.deactivate();
-    },
-
-
-    /**
      * End the map edit session, reset the bubble.
      */
     deactivate: function() {
@@ -114,9 +108,18 @@ Neatline.module('Editor.Record', function(
 
 
     /**
+     * Close the form.
+     */
+    onCloseClick: function() {
+      Neatline.execute('editor:showRecordList');
+      this.deactivate();
+    },
+
+
+    /**
      * Save the record.
      */
-    save: function() {
+    onSaveClick: function() {
       this.model.save(null, {
         success:  _.bind(this.onSaveSuccess, this),
         error:    _.bind(this.onSaveError, this)
@@ -127,7 +130,7 @@ Neatline.module('Editor.Record', function(
     /**
      * Delete the record.
      */
-    remove: function() {
+    onDeleteClick: function() {
       this.model.destroy({
         success:  _.bind(this.onDeleteSuccess, this),
         error:    _.bind(this.onDeleteError, this),
@@ -170,14 +173,14 @@ Neatline.module('Editor.Record', function(
 
       // Delete the record's layer on the map.
       Neatline.execute('editor:map:deleteLayer', this.model);
-      this.__ui.modal.modal('hide');
+      this.__ui.remove.modal.modal('hide');
 
       // FLash success.
       Neatline.execute('editor:notifySuccess',
         STRINGS.record.remove.success
       );
 
-      this.close();
+      this.onCloseClick();
 
     },
 
@@ -195,12 +198,30 @@ Neatline.module('Editor.Record', function(
     /**
      * When the edit controls are changed, publish the current settings.
      */
-    onEditControlChange: function() {
+    onControlChange: function() {
       Neatline.execute('editor:map:updateEdit', {
         mode:   this.getEditMode(),
         modify: this.getModifyOptions(),
         poly:   this.getPolyOptions()
       });
+    },
+
+
+    /**
+     * Forward `keyup` events to `change`.
+     *
+     * @param {Object} e: The keyup event.
+     */
+    onStyleKeyup: function(e) {
+      $(e.target).trigger('change');
+    },
+
+
+    /**
+     * Preview new style settings on the map edit layer.
+     */
+    onStyleChange: function() {
+      Neatline.execute('editor:map:updateStyles', this.model);
     },
 
 
