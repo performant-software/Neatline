@@ -26,7 +26,8 @@
     'name'  => 'vector-color',
     'label' => 'Shape Color',
     'bind'  => 'record.vector_color',
-    'class' => 'preview color'
+    'class' => 'preview',
+    'type'  => 'color'
 )); ?>
 
 <?php echo $this->partial(
@@ -34,7 +35,8 @@
     'name'  => 'stroke-color',
     'label' => 'Line Color',
     'bind'  => 'record.stroke_color',
-    'class' => 'preview color'
+    'class' => 'preview',
+    'type'  => 'color'
 )); ?>
 
 <?php echo $this->partial(
@@ -42,7 +44,8 @@
     'name'  => 'select-color',
     'label' => 'Selected Color',
     'bind'  => 'record.select_color',
-    'class' => 'preview color'
+    'class' => 'preview',
+    'type'  => 'color'
 )); ?>
 
 <?php echo $this->partial(

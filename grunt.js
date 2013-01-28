@@ -85,6 +85,13 @@ module.exports = function(grunt) {
           cwd: config.build.bootstrap
         }
       },
+      move_minicolors_images: {
+        command: 'cp jquery.minicolors.png ../../../css/img',
+        stdout: true,
+        execOptions: {
+          cwd: config.build.minicolors
+        }
+      },
 
       // TEST
       phpunit: {
@@ -217,6 +224,7 @@ module.exports = function(grunt) {
           '<config:concat.neatline_css.src>',
           config.vendor.css.bootstrap,
           config.vendor.css.toastr,
+          config.vendor.css.minicolors,
           config.vendor.css.codemirror,
           config.payloads.app.css+'/editor/*.css'
         ],
@@ -340,6 +348,7 @@ module.exports = function(grunt) {
     'shell:build_openlayers',
     'shell:build_bootstrap',
     'shell:move_bootstrap_images',
+    'shell:move_minicolors_images',
     'compile:min'
   ]);
 

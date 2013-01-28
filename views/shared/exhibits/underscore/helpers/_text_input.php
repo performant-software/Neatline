@@ -22,8 +22,11 @@
 <?php endif; ?>
 <div class="controls">
   <div class="inline-inputs">
-    <input type="text" name="<?php echo $name; ?>"
+    <input
+      type="<?php echo isset($type) ? $type : 'text'; ?>"
+      name="<?php echo $name; ?>"
       class="<?php echo isset($class) ? $class : ''; ?>"
-      data-value="<?php echo $bind; ?>"/>
+      data-value="<?php echo $bind; ?>"
+    />
   </div>
 </div>
