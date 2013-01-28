@@ -14,7 +14,7 @@ Neatline.module('Shared.Record', function(
   Record, Neatline, Backbone, Marionette, $, _) {
 
 
-  Record.Collection = Backbone.Neatline.SyncCollection.extend({
+  Record.Collection = Backbone.Neatline.Collection.extend({
 
 
     model: Neatline.Shared.Record.Model,
