@@ -78,10 +78,10 @@ class NeatlineRecord extends Neatline_AbstractRecord
      *
      * @return array The array representation of the record fields.
      */
-    public function toArray()
+    public function toArrayForSave()
     {
 
-        $fields = parent::toArray();
+        $fields = parent::toArrayForSave();
 
         // Add the coverage.
         if (!empty($fields['coverage'])) {
@@ -151,6 +151,57 @@ class NeatlineRecord extends Neatline_AbstractRecord
      * Compile Omeka file and item references.
      **/
     public function compile() {
+
+
+        $fields = array('_title' => 'title', '_body' => 'body');
+        get_view()->setScriptPath(VIEW_SCRIPTS_DIR);
+
+        foreach ($fields as $src => $tar) {
+
+            // Copy raw -> compiled.
+            $this->$tar= $this->$src;
+
+
+            // `[item:ID:"FIELD"]`
+            $re = "/\[item:(?P<id>[0-9]+):\"(?P<el>[a-zA-Z\s]+)\"\]/";
+            preg_match_all($re, $this->$tar, $matches);
+
+            foreach ($matches['id'] as $i => $id) {
+
+                // Get the item and element name.
+                $item = get_record_by_id('Item', $id);
+                $element = $matches['el'][$i];
+
+                // Query for the element text value.
+                $text = metadata($item, array('Dublin Core', $element));
+
+                // Replace the value.
+                $re = "/\[item:[0-9]+:\"{$element}\"\]/";
+                $this->$tar= preg_replace($re, $text, $this->$tar);
+
+            }
+
+
+            // `[item:ID]`
+            $re = "/\[item:(?P<id>[0-9]+)\]/";
+            preg_match_all($re, $this->$tar, $matches);
+
+            foreach ($matches['id'] as $i => $id) {
+
+                // Get the item and element name.
+                $item = get_record_by_id('Item', $id);
+
+                // Query for the element text values.
+                $text = all_element_texts($item);
+
+                // Replace the value.
+                $re = "/\[item:{$id}\]/";
+                $this->$tar= preg_replace($re, $text, $this->$tar);
+
+            }
+
+
+        }
 
     }
 

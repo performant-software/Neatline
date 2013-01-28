@@ -20,7 +20,7 @@ abstract class Neatline_AbstractRecord extends Omeka_Record_AbstractRecord
      *
      * @return array The array representation of the record fields.
      */
-    public function toArray()
+    public function toArrayForSave()
     {
         $fields = parent::toArray();
         $fields['modified'] = new Zend_Db_Expr('NOW()');
@@ -35,7 +35,7 @@ abstract class Neatline_AbstractRecord extends Omeka_Record_AbstractRecord
      */
     public function save($throwIfInvalid = true)
     {
-        $this->id = $this->insertOrUpdate($this->toArray());
+        $this->id = $this->insertOrUpdate($this->toArrayForSave());
     }
 
 
