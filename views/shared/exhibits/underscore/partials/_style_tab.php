@@ -131,8 +131,8 @@
 
 <div class="controls">
   <div class="inline-inputs">
-    <button name="focus-map" class="btn btn-small">
+    <a name="set-focus" class="btn btn-small">
       <i class="icon-map-marker"></i> Use Current Focus
-    </button>
+    </a>
   </div>
 </div>

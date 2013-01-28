@@ -39,7 +39,10 @@ describe('Record Form Style Tab', function() {
       imageOpacity:   _t.vw.record.$('input[name="image-opacity"]'),
       strokeWidth:    _t.vw.record.$('input[name="stroke-width"]'),
       pointRadius:    _t.vw.record.$('input[name="point-radius"]'),
-      pointImage:     _t.vw.record.$('input[name="point-image"]')
+      pointImage:     _t.vw.record.$('input[name="point-image"]'),
+      mapFocus:       _t.vw.record.$('input[name="map-focus"]'),
+      mapZoom:        _t.vw.record.$('input[name="map-zoom"]'),
+      setFocus:       _t.vw.record.$('a[name="set-focus"]')
     };
 
   });
@@ -247,7 +250,20 @@ describe('Record Form Style Tab', function() {
   });
 
 
-  it('should populate focus inputs');
+  it('should populate focus inputs', function() {
+
+    // --------------------------------------------------------------------
+    // When the "Use Current Focus" button is clicked, "Focus Coordinates"
+    // and "Focus Zoom" should be populated with current map values.
+    // --------------------------------------------------------------------
+
+    _t.setMapCenter(1, 2, 3);
+    els.setFocus.trigger('click');
+
+    expect(els.mapFocus).toHaveValue('1,2');
+    expect(els.mapZoom).toHaveValue(3);
+
+  });
 
 
   it('should render current zoom');

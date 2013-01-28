@@ -22,14 +22,15 @@ Neatline.module('Editor.Record', function(
     tagName:    'form',
 
     events: {
-      'click a[name="close"]':    'onCloseClick',
-      'click a[name="save"]':     'onSaveClick',
-      'click a[name="delete2"]':  'onDeleteClick',
-      'change div.spatial input': 'onControlChange',
-      'keyup div.spatial input':  'onControlChange',
-      'change input.preview':     'onStyleChange',
-      'keyup input.preview':      'onStyleKeyup',
-      'shown ul.nav a':           'onTabChange'
+      'click a[name="close"]':      'onCloseClick',
+      'click a[name="save"]':       'onSaveClick',
+      'click a[name="delete2"]':    'onDeleteClick',
+      'click a[name="set-focus"]':  'onFocusClick',
+      'change div.spatial input':   'onControlChange',
+      'keyup div.spatial input':    'onControlChange',
+      'change input.preview':       'onStyleChange',
+      'keyup input.preview':        'onStyleKeyup',
+      'shown ul.nav a':             'onTabChange'
     },
 
     selectors: {
@@ -47,6 +48,10 @@ Neatline.module('Editor.Record', function(
         sides:  'input[name="sides"]',
         snap:   'input[name="snap"]',
         irreg:  'input[name="irreg"]'
+      },
+      style: {
+        focus:  'input[name="map-focus"]',
+        zoom:   'input[name="map-zoom"]'
       },
       remove: {
         modal:  '#delete-modal'
@@ -192,6 +197,17 @@ Neatline.module('Editor.Record', function(
       Neatline.execute('editor:notifyError',
         STRINGS.record.remove.error
       );
+    },
+
+
+    /**
+     * Populate default coordinates and zoom.
+     */
+    onFocusClick: function() {
+      var center  = Neatline.request('map:getCenter');
+      var zoom    = Neatline.request('map:getZoom');
+      this.__ui.style.focus.val(center.lon+','+center.lat);
+      this.__ui.style.zoom.val(zoom);
     },
 
 

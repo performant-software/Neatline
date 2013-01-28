@@ -34,4 +34,24 @@ Neatline.module('Map', function(
   });
 
 
+  /**
+   * Emit the current viewport focus coordinates.
+   *
+   * @return {Object}: OpenLayers.LonLat.
+   */
+  Neatline.reqres.addHandler('map:getCenter', function() {
+    return Map.__view.map.getCenter();
+  });
+
+
+  /**
+   * Emit the current zoom level.
+   *
+   * @return {Number}: The zoom level.
+   */
+  Neatline.reqres.addHandler('map:getZoom', function() {
+    return Map.__view.map.getZoom();
+  });
+
+
 });
