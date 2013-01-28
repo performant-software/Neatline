@@ -91,6 +91,24 @@ Neatline.module('Editor.Record', function(
 
 
     /**
+     * Instantiate color pickers and draggers.
+     */
+    buildUi: function() {
+
+      // INTEGERS
+      this.$('input.integer').draggableInput({
+        type: 'integer', min: 0, max: 1000
+      });
+
+      // OPACITIES
+      this.$('input.opacity').draggableInput({
+        type: 'integer', min: 0, max: 100
+      });
+
+    },
+
+
+    /**
      * Show the form.
      *
      * @param {Object} model: A record model.
@@ -291,6 +309,7 @@ Neatline.module('Editor.Record', function(
       this.hash = event.target.hash;
       this.setBubbleStatus();
       this.resetEditMode();
+      this.buildUi();
     },
 
 

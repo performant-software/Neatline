@@ -26,7 +26,7 @@
     'name'  => 'vector-color',
     'label' => 'Shape Color',
     'bind'  => 'record.vector_color',
-    'class' => 'preview'
+    'class' => 'preview color'
 )); ?>
 
 <?php echo $this->partial(
@@ -34,7 +34,7 @@
     'name'  => 'stroke-color',
     'label' => 'Line Color',
     'bind'  => 'record.stroke_color',
-    'class' => 'preview'
+    'class' => 'preview color'
 )); ?>
 
 <?php echo $this->partial(
@@ -42,7 +42,7 @@
     'name'  => 'select-color',
     'label' => 'Selected Color',
     'bind'  => 'record.select_color',
-    'class' => 'preview'
+    'class' => 'preview color'
 )); ?>
 
 <?php echo $this->partial(
@@ -50,7 +50,7 @@
     'name'  => 'vector-opacity',
     'label' => 'Shape Opacity',
     'bind'  => 'record.vector_opacity',
-    'class' => 'preview'
+    'class' => 'preview opacity'
 )); ?>
 
 <?php echo $this->partial(
@@ -58,7 +58,7 @@
     'name'  => 'stroke-opacity',
     'label' => 'Line Opacity',
     'bind'  => 'record.stroke_opacity',
-    'class' => 'preview'
+    'class' => 'preview opacity'
 )); ?>
 
 <?php echo $this->partial(
@@ -66,7 +66,7 @@
     'name'  => 'select-opacity',
     'label' => 'Selected Opacity',
     'bind'  => 'record.select_opacity',
-    'class' => 'preview'
+    'class' => 'preview opacity'
 )); ?>
 
 <?php echo $this->partial(
@@ -74,7 +74,7 @@
     'name'  => 'image-opacity',
     'label' => 'Image Opacity',
     'bind'  => 'record.image_opacity',
-    'class' => 'preview'
+    'class' => 'preview opacity'
 )); ?>
 
 <?php echo $this->partial(
@@ -82,7 +82,7 @@
     'name'  => 'stroke-width',
     'label' => 'Line Width',
     'bind'  => 'record.stroke_width',
-    'class' => 'preview'
+    'class' => 'preview integer'
 )); ?>
 
 <?php echo $this->partial(
@@ -90,7 +90,7 @@
     'name'  => 'point-radius',
     'label' => 'Point Radius',
     'bind'  => 'record.point_radius',
-    'class' => 'preview'
+    'class' => 'preview integer'
 )); ?>
 
 <?php echo $this->partial(
