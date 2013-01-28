@@ -38,6 +38,8 @@
       "openlayers":       "./views/shared/javascripts/components/openlayers/build/OpenLayers.js",
       "routefilter":      "./views/shared/javascripts/components/backbone.routefilter/dist/backbone.routefilter.js",
       "toastr":           "./views/shared/javascripts/components/toastr/toastr.js",
+      "minicolors":       "./views/shared/javascripts/components/jquery-minicolors/jquery.minicolors.js",
+      "draggable":        "./views/shared/javascripts/components/jquery-draggable-input/jquery-draggable-input.js",
       "bootstrap":        "./views/shared/javascripts/components/bootstrap/bootstrap/js/bootstrap.js",
       "rivets":           "./views/shared/javascripts/components/rivets/lib/rivets.js",
       "codemirror":       "./views/shared/javascripts/components/codemirror/lib/codemirror.js",

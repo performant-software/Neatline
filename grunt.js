@@ -178,6 +178,8 @@ module.exports = function(grunt) {
           config.vendor.js.openlayers,
           config.vendor.js.routefilter,
           config.vendor.js.toastr,
+          config.vendor.js.minicolors,
+          config.vendor.js.draggable,
           config.vendor.js.bootstrap,
           config.vendor.js.rivets,
           config.vendor.js.codemirror,
@@ -191,8 +193,6 @@ module.exports = function(grunt) {
           config.app+'/bubble/**/*.js',
 
           // Editor:
-          config.app+'/editor/shared/tag/tag.model.js',
-          config.app+'/editor/shared/tag/tag.collection.js',
           config.app+'/editor/*.js',
           config.app+'/editor/map/*.js',
           config.app+'/editor/menu/*.js',
