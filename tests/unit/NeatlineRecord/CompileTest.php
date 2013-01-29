@@ -23,8 +23,8 @@ class Neatline_NeatlineRecordTest_Compile
     public function testItemId()
     {
 
-        // ----------------------------------------------------------------
         // Create 3 items, each with a different title.
+        // ----------------------------------------------------------------
 
         $item1 = insert_item(array(), array(
             'Dublin Core' => array (
@@ -50,16 +50,16 @@ class Neatline_NeatlineRecordTest_Compile
             )
         ));
 
-        // ----------------------------------------------------------------
         // Generate the full element text output for the items.
+        // ----------------------------------------------------------------
 
         get_view()->setScriptPath(VIEW_SCRIPTS_DIR);
         $texts1 = all_element_texts($item1);
         $texts2 = all_element_texts($item2);
         $texts3 = all_element_texts($item3);
 
-        // ----------------------------------------------------------------
         // Form the raw and compiled values.
+        // ----------------------------------------------------------------
 
         $raw = <<<EOD
 [item:$item1->id]
@@ -77,8 +77,8 @@ def
 $texts3
 EOD;
 
-        // ----------------------------------------------------------------
         // Set the uncompiled source to `title` and `body`.
+        // ----------------------------------------------------------------
 
         $record = $this->__record();
         $record->title = $raw;
@@ -86,6 +86,8 @@ EOD;
         $record->compile();
 
         // `_title` and `_body` should be compiled.
+        // ----------------------------------------------------------------
+
         $this->assertEquals($record->_title, $compiled);
         $this->assertEquals($record->_body,  $compiled);
 
@@ -99,8 +101,8 @@ EOD;
     public function testItemIdField()
     {
 
-        // ----------------------------------------------------------------
         // Create an item with a title, description, and subject.
+        // ----------------------------------------------------------------
 
         $item = insert_item(array(), array(
             'Dublin Core' => array (
@@ -116,8 +118,8 @@ EOD;
             )
         ));
 
-        // ----------------------------------------------------------------
         // Form the raw and compiled values.
+        // ----------------------------------------------------------------
 
         $raw = <<<EOD
 [item:$item->id:"Title"]
@@ -135,8 +137,8 @@ def
 subject
 EOD;
 
-        // ----------------------------------------------------------------
         // Set the uncompiled source to `title` and `body`.
+        // ----------------------------------------------------------------
 
         $record = $this->__record();
         $record->title = $raw;
@@ -144,6 +146,8 @@ EOD;
         $record->compile();
 
         // `_title` and `_body` should be compiled.
+        // ----------------------------------------------------------------
+
         $this->assertEquals($record->_title, $compiled);
         $this->assertEquals($record->_body,  $compiled);
 
@@ -157,8 +161,8 @@ EOD;
     public function testItemIdFiles()
     {
 
-        // ----------------------------------------------------------------
         // Create 3 items, each with a different file.
+        // ----------------------------------------------------------------
 
         $item1 = insert_item();
         insert_files_for_item($item1, 'Filesystem', array(
@@ -175,16 +179,16 @@ EOD;
             NL_DIR . '/tests/mocks/file3.txt'
         ));
 
-        // ----------------------------------------------------------------
         // Generate the files markup output for the items.
+        // ----------------------------------------------------------------
 
         get_view()->setScriptPath(VIEW_SCRIPTS_DIR);
         $files1 = files_for_item(array(), array(), $item1);
         $files2 = files_for_item(array(), array(), $item2);
         $files3 = files_for_item(array(), array(), $item3);
 
-        // ----------------------------------------------------------------
         // Form the raw and compiled values.
+        // ----------------------------------------------------------------
 
         $raw = <<<EOD
 [item:$item1->id:files]
@@ -202,8 +206,8 @@ def
 $files3
 EOD;
 
-        // ----------------------------------------------------------------
         // Set the uncompiled source to `title` and `body`.
+        // ----------------------------------------------------------------
 
         $record = $this->__record();
         $record->title = $raw;
@@ -211,6 +215,8 @@ EOD;
         $record->compile();
 
         // `_title` and `_body` should be compiled.
+        // ----------------------------------------------------------------
+
         $this->assertEquals($record->_title, $compiled);
         $this->assertEquals($record->_body,  $compiled);
 
@@ -224,8 +230,8 @@ EOD;
     public function testItem()
     {
 
-        // ----------------------------------------------------------------
         // Create and item with a title field.
+        // ----------------------------------------------------------------
 
         $item = insert_item(array(), array(
             'Dublin Core' => array (
@@ -235,14 +241,14 @@ EOD;
             )
         ));
 
-        // ----------------------------------------------------------------
         // Generate the full element text output.
+        // ----------------------------------------------------------------
 
         get_view()->setScriptPath(VIEW_SCRIPTS_DIR);
         $texts = all_element_texts($item);
 
-        // ----------------------------------------------------------------
         // Form the raw and compiled values.
+        // ----------------------------------------------------------------
 
         $raw = <<<EOD
 [item]
@@ -260,8 +266,8 @@ def
 $texts
 EOD;
 
-        // ----------------------------------------------------------------
         // Set the uncompiled source to `title` and `body`.
+        // ----------------------------------------------------------------
 
         $record = new NeatlineRecord(null, $item);
         $record->title = $raw;
@@ -269,6 +275,8 @@ EOD;
         $record->compile();
 
         // `_title` and `_body` should be compiled.
+        // ----------------------------------------------------------------
+
         $this->assertEquals($record->_title, $compiled);
         $this->assertEquals($record->_body,  $compiled);
 
@@ -282,8 +290,8 @@ EOD;
     public function testItemField()
     {
 
-        // ----------------------------------------------------------------
         // Create an item with a title, description, and subject.
+        // ----------------------------------------------------------------
 
         $item = insert_item(array(), array(
             'Dublin Core' => array (
@@ -299,8 +307,8 @@ EOD;
             )
         ));
 
-        // ----------------------------------------------------------------
         // Form the raw and compiled values.
+        // ----------------------------------------------------------------
 
         $raw = <<<EOD
 [item:"Title"]
@@ -318,8 +326,8 @@ def
 subject
 EOD;
 
-        // ----------------------------------------------------------------
         // Set the uncompiled source to `title` and `body`.
+        // ----------------------------------------------------------------
 
         $record = new NeatlineRecord(null, $item);
         $record->title = $raw;
@@ -327,6 +335,8 @@ EOD;
         $record->compile();
 
         // `_title` and `_body` should be compiled.
+        // ----------------------------------------------------------------
+
         $this->assertEquals($record->_title, $compiled);
         $this->assertEquals($record->_body,  $compiled);
 
@@ -341,6 +351,7 @@ EOD;
     {
 
         // Create an item with a file.
+        // ----------------------------------------------------------------
 
         $item = insert_item();
         insert_files_for_item($item, 'Filesystem', array(
@@ -348,11 +359,13 @@ EOD;
         ));
 
         // Generate the files markup output for the items.
+        // ----------------------------------------------------------------
 
         get_view()->setScriptPath(VIEW_SCRIPTS_DIR);
         $files = files_for_item(array(), array(), $item);
 
         // Form the raw and compiled values.
+        // ----------------------------------------------------------------
 
         $raw = <<<EOD
 [item:files]
@@ -371,6 +384,7 @@ $files
 EOD;
 
         // Set the uncompiled source to `title` and `body`.
+        // ----------------------------------------------------------------
 
         $record = new NeatlineRecord(null, $item);
         $record->title = $raw;
@@ -378,6 +392,7 @@ EOD;
         $record->compile();
 
         // `_title` and `_body` should be compiled.
+        // ----------------------------------------------------------------
 
         $this->assertEquals($record->_title, $compiled);
         $this->assertEquals($record->_body,  $compiled);
