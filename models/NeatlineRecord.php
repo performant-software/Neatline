@@ -168,12 +168,10 @@ class NeatlineRecord extends Neatline_AbstractRecord
             $this->$tar = $this->$src;
 
             // `[item]`
-            // ------------------------------------------------------------
             $texts = all_element_texts($item);
             $this->$tar = str_replace('[item]', $texts, $this->$tar);
 
             // `[item:"<element>"]`
-            // ------------------------------------------------------------
             $re = "/\[item:\"(?P<el>[a-zA-Z\s]+)\"\]/";
             preg_match_all($re, $this->$tar, $matches);
 
@@ -184,7 +182,6 @@ class NeatlineRecord extends Neatline_AbstractRecord
             }
 
             // `[item:files]`
-            // ------------------------------------------------------------
             $files = files_for_item(array(), array(), $item);
             $this->$tar = str_replace('[item:files]', $files,
                 $this->$tar);
