@@ -19,7 +19,7 @@
   <?php echo $this->partial(
     'exhibits/underscore/helpers/_text_input.php', array(
       'name'  => 'item-id',
-      'label' => 'Omeka Id',
+      'label' => 'Item',
       'bind'  => 'record.item_id'
   )); ?>
 

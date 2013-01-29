@@ -109,7 +109,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
             `slug`              VARCHAR(100) NULL,
 
              PRIMARY KEY        (`id`),
-             FULLTEXT KEY       (`title`, `slug`, `body`),
+             FULLTEXT KEY       (`_title`, `_body`, `slug`),
              SPATIAL INDEX      (`coverage`)
 
         ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";

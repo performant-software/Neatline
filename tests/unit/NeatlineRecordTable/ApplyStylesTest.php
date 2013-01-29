@@ -24,21 +24,21 @@ class Neatline_NeatlineRecordTableTest_ApplyStyles
 
         $exhibit = $this->__exhibit();
         $record1 = new NeatlineRecord($exhibit);
-        $record1->tags = 'tag1';
-        $record1->save();
         $record2 = new NeatlineRecord($exhibit);
+        $record1->tags = 'tag1';
         $record2->tags = 'tag2';
+        $record1->save();
         $record2->save();
 
-        // Set styles YAML.
-        $exhibit->styles = <<<EOD
-tag1:
- - vector_color: '1'
- - vector_opacity: 2
-tag2:
- - stroke_color: '3'
- - stroke_opacity: 4
-EOD;
+        // Styles YAML.
+        $exhibit->styles = "
+        tag1:
+         - vector_color: '1'
+         - vector_opacity: 2
+        tag2:
+         - stroke_color: '3'
+         - stroke_opacity: 4
+         ";
 
         // Apply styles, reload records.
         $this->_recordsTable->applyStyles($exhibit);
@@ -70,11 +70,11 @@ EOD;
         $record1 = $this->__record($exhibit);
         $record2 = $this->__record($exhibit);
 
-        // Set styles YAML.
-        $exhibit->styles = <<<EOD
-default:
- - vector_color: 'color'
-EOD;
+        // Styles YAML.
+        $exhibit->styles = "
+        default:
+         - vector_color: 'color'
+         ";
 
         // Apply styles, reload records.
         $this->_recordsTable->applyStyles($exhibit);
@@ -97,17 +97,17 @@ EOD;
         $exhibit1 = $this->__exhibit();
         $exhibit2 = $this->__exhibit();
         $record1 = new NeatlineRecord($exhibit1);
-        $record1->tags = 'tag1';
+        $record1->tags = 'tag';
         $record1->save();
         $record2 = new NeatlineRecord($exhibit2);
-        $record2->tags = 'tag1';
+        $record2->tags = 'tag';
         $record2->save();
 
         // Set styles YAML.
-        $exhibit1->styles = <<<EOD
-tag1:
- - vector_color: '1'
-EOD;
+        $exhibit1->styles = "
+        tag:
+         - vector_color: '1'
+         ";
 
         // Apply styles, reload records.
         $this->_recordsTable->applyStyles($exhibit1);
