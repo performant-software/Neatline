@@ -333,4 +333,56 @@ EOD;
     }
 
 
+    /**
+     * [item:files].
+     * @group compile
+     */
+    public function testItemFiles()
+    {
+
+        // Create an item with a file.
+
+        $item = insert_item();
+        insert_files_for_item($item, 'Filesystem', array(
+            NL_DIR . '/tests/mocks/file1.txt'
+        ));
+
+        // Generate the files markup output for the items.
+
+        get_view()->setScriptPath(VIEW_SCRIPTS_DIR);
+        $files = files_for_item(array(), array(), $item);
+
+        // Form the raw and compiled values.
+
+        $raw = <<<EOD
+[item:files]
+abc
+[item:files]
+def
+[item:files]
+EOD;
+
+        $compiled = <<<EOD
+$files
+abc
+$files
+def
+$files
+EOD;
+
+        // Set the uncompiled source to `title` and `body`.
+
+        $record = new NeatlineRecord(null, $item);
+        $record->title = $raw;
+        $record->body  = $raw;
+        $record->compile();
+
+        // `_title` and `_body` should be compiled.
+
+        $this->assertEquals($record->_title, $compiled);
+        $this->assertEquals($record->_body,  $compiled);
+
+    }
+
+
 }

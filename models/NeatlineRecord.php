@@ -226,6 +226,12 @@ class NeatlineRecord extends Neatline_AbstractRecord
                     $this->$tar = preg_replace($re, $text, $this->$tar);
                 }
 
+                // `[item:files]`
+                // --------------------------------------------------------
+                $files = files_for_item(array(), array(), $item);
+                $this->$tar = str_replace('[item:files]', $files,
+                    $this->$tar);
+
             }
 
         }
