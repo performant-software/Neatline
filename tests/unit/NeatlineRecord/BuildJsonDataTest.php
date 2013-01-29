@@ -78,4 +78,31 @@ class Neatline_NeatlineRecordTest_BuildJsonData
     }
 
 
+    /**
+     * buildJsonData() should compile `_title` and `_body`.
+     */
+    public function testReferenceCompilation()
+    {
+
+        $item = insert_item(array(), array(
+            'Dublin Core' => array (
+                'Title' => array(
+                    array('text' => 'title', 'html' => false)
+                )
+            )
+        ));
+
+        $record = $this->__record();
+        $record->title = "[item:$item->id:\"Title\"]";
+        $record->body = "[item:$item->id:\"Title\"]";
+
+        $data = $record->buildJsonData();
+
+        // `title` and `body` should be compiled.
+        $this->assertEquals($record->_title, 'title');
+        $this->assertEquals($record->_body, 'title');
+
+    }
+
+
 }

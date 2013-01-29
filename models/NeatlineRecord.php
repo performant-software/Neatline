@@ -143,6 +143,7 @@ class NeatlineRecord extends Neatline_AbstractRecord
      * @return array The data array.
      **/
     public function buildJsonData() {
+        $this->compile();
         return array_merge(parent::toArray(), $this->styles);
     }
 
@@ -203,23 +204,6 @@ class NeatlineRecord extends Neatline_AbstractRecord
 
         }
 
-    }
-
-
-    /**
-     * Expose unmodified save (used for testing).
-     **/
-    public function __save() {
-        parent::save();
-    }
-
-
-    /**
-     * Compile `title` and `body` before saving.
-     **/
-    public function save() {
-        $this->compile();
-        parent::save();
     }
 
 

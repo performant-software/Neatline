@@ -29,9 +29,7 @@ class Neatline_RecordJsonFixtureTest extends Neatline_Test_AppTestCase
         $record     = $this->__record($exhibit);
 
         $record->title              = 'title';
-        $record->_title             = '_title';
         $record->body               = 'body';
-        $record->_body              = '_body';
         $record->tags               = 'tags';
         $record->coverage           = 'POINT(1 2)';
         $record->map_focus          = '100,200';
@@ -48,7 +46,7 @@ class Neatline_RecordJsonFixtureTest extends Neatline_Test_AppTestCase
         $record->point_image        = '10';
         $record->min_zoom           = 11;
         $record->max_zoom           = 12;
-        $record->__save();
+        $record->save();
 
         $this->writeFixture('neatline/record/'.$record->id,
             'record.standard.json');

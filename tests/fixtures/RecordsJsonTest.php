@@ -41,17 +41,9 @@ class Neatline_RecordsJsonFixtureTest extends Neatline_Test_AppTestCase
         $record2->title             = 'title2';
         $record3->title             = 'title3';
         // ----------------------------------------------------------------
-        $record1->_title            = '_title1';
-        $record2->_title            = '_title2';
-        $record3->_title            = '_title3';
-        // ----------------------------------------------------------------
         $record1->body              = 'body1';
         $record2->body              = 'body2';
         $record3->body              = 'body3';
-        // ----------------------------------------------------------------
-        $record1->_body             = '_body1';
-        $record2->_body             = '_body2';
-        $record3->_body             = '_body3';
         // ----------------------------------------------------------------
         $record1->tags              = 'tags1';
         $record2->tags              = 'tags2';
@@ -113,9 +105,9 @@ class Neatline_RecordsJsonFixtureTest extends Neatline_Test_AppTestCase
         $record3->max_zoom          = 36;
         // ----------------------------------------------------------------
 
-        $record1->__save();
-        $record2->__save();
-        $record3->__save();
+        $record1->save();
+        $record2->save();
+        $record3->save();
 
         $this->writeFixture('neatline/records/'.$exhibit->id,
             'records.standard.json');
@@ -124,7 +116,7 @@ class Neatline_RecordsJsonFixtureTest extends Neatline_Test_AppTestCase
         // Coverage data for #2 has changed.
 
         $record2->coverage = 'POINT(7 8)';
-        $record2->__save();
+        $record2->save();
 
         $this->resetResponse();
         $this->writeFixture('neatline/records/'.$exhibit->id,
@@ -161,7 +153,7 @@ class Neatline_RecordsJsonFixtureTest extends Neatline_Test_AppTestCase
             $record->added  = '200'.$i.'-01-01';
             $record->title  = 'Record'.$i;
             $record->_title = '_Record'.$i;
-            $record->__save();
+            $record->save();
         }
 
         // Records 1-2.
