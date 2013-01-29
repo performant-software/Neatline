@@ -30,9 +30,9 @@ class Neatline_NeatlineRecordTest_BeforeSave
             )
         ));
 
-        $record = $this->__record();
-        $record->title = "[item:$item->id:\"Title\"]";
-        $record->body = "[item:$item->id:\"Title\"]";
+        $record = $this->__record(null, $item);
+        $record->title = "[item:\"Title\"]";
+        $record->body = "[item:\"Title\"]";
         $record->save();
 
         // `title` and `body` should be compiled.
