@@ -54,4 +54,9 @@ describe('Records List', function() {
   });
 
 
+  // TODO
+  it('should render compiled title and body');
+  it('should strip tags from title and body');
+
+
 });

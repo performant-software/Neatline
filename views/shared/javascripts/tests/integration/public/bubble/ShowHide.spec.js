@@ -55,6 +55,8 @@ describe('Bubble Show/Hide', function() {
     expect(els.title.text()).toEqual('title1');
     expect(els.body.text()).toEqual('body1');
 
+    // TODO: Test that `_title` and `_body` are getting rendered.
+
   });
 
 
