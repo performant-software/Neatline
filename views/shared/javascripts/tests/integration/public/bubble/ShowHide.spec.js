@@ -27,7 +27,8 @@ describe('Bubble Show/Hide', function() {
     feature2 = layer2.features[0];
 
     els = {
-      title: _t.vw.bubble.$('.title')
+      title:  _t.vw.bubble.$('.title'),
+      body:   _t.vw.bubble.$('.body')
     };
 
   });
@@ -50,8 +51,9 @@ describe('Bubble Show/Hide', function() {
     // Bubble should be visible.
     expect(_t.el.bubble).toBeVisible();
 
-    // Title should be rendered.
-    expect(els.title.text()).toEqual('title1');
+    // Title and body should be rendered.
+    expect(els.title.text()).toEqual('_title1');
+    expect(els.body.text()).toEqual('_body1');
 
   });
 
@@ -159,7 +161,8 @@ describe('Bubble Show/Hide', function() {
     _t.hoverOnMapFeature(layer1, feature2);
 
     // Bubble values should be unchanged.
-    expect(els.title.text()).toEqual('title1');
+    expect(els.title.text()).toEqual('_title1');
+    expect(els.body.text()).toEqual('_body1');
 
     // Move the cursor.
     _t.vw.map.map.events.triggerEvent('mousemove', {
@@ -196,7 +199,7 @@ describe('Bubble Show/Hide', function() {
     var offset = _t.el.bubble.offset();
 
     // Bubble values should be changed.
-    expect(els.title.text()).toEqual('title2');
+    expect(els.title.text()).toEqual('_title2');
 
     // Move the cursor.
     _t.vw.map.map.events.triggerEvent('mousemove', {

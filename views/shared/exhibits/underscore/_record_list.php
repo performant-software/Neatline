@@ -23,8 +23,8 @@
 
     <% records.each(function(r) { %>
       <a href="#records/<%= r.get('id') %>" data-id="<%= r.get('id') %>">
-        <span class="title"><%= r.get('title') %></span>
-        <span class="body"><%= r.get('body') %></span>
+        <span class="title"><%= _.string.stripTags(r.get('_title')) %></span>
+        <span class="body"><%= _.string.stripTags(r.get('_body')) %></span>
       </a>
     <% }); %>
 

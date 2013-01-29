@@ -34,12 +34,12 @@ describe('Records List', function() {
 
     // Record titles and bodies should be listed.
     expect(recordRows.length).toEqual(4);
-    expect($(recordRows[1]).find('.title').text()).toEqual('title1');
-    expect($(recordRows[1]).find('.body').text()).toEqual('body1')
-    expect($(recordRows[2]).find('.title').text()).toEqual('title2');
-    expect($(recordRows[2]).find('.body').text()).toEqual('body2');
-    expect($(recordRows[3]).find('.title').text()).toEqual('title3')
-    expect($(recordRows[3]).find('.body').text()).toEqual('body3');
+    expect($(recordRows[1]).find('.title').text()).toEqual('_title1');
+    expect($(recordRows[1]).find('.body').text()).toEqual('_body1')
+    expect($(recordRows[2]).find('.title').text()).toEqual('_title2');
+    expect($(recordRows[2]).find('.body').text()).toEqual('_body2');
+    expect($(recordRows[3]).find('.title').text()).toEqual('_title3')
+    expect($(recordRows[3]).find('.body').text()).toEqual('_body3');
 
     // Record edit form links should be listed.
     expect($(recordRows[0]).attr('href')).

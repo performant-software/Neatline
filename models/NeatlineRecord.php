@@ -207,10 +207,19 @@ class NeatlineRecord extends Neatline_AbstractRecord
 
 
     /**
+     * Expose unmodified save (used for testing).
+     **/
+    public function __save() {
+        parent::save();
+    }
+
+
+    /**
      * Compile `title` and `body` before saving.
      **/
-    public function beforeSave() {
+    public function save() {
         $this->compile();
+        parent::save();
     }
 
 
