@@ -175,6 +175,7 @@ class NeatlineRecordTable extends Omeka_Db_Table
         // Execute query.
         if ($records = $this->fetchObjects($select)) {
             foreach ($records as $record) {
+                // $record->compile();
                 $data['records'][] = $record->buildJsonData();
             }
         }
