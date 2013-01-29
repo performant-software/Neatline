@@ -35,7 +35,16 @@ abstract class Neatline_AbstractRecord extends Omeka_Record_AbstractRecord
      */
     public function save($throwIfInvalid = true)
     {
+
+        $args = array(
+            'post'    => $this->_postData ? $this->_postData : false,
+            'insert'  => !$this->exists()
+        );
+
+        $this->runCallbacks('beforeSave', $args);
         $this->id = $this->insertOrUpdate($this->toArrayForSave());
+        $this->runCallbacks('afterSave', $args);
+
     }
 
 

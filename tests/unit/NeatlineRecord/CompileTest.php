@@ -70,13 +70,13 @@ $texts3
 EOD;
 
         $record = $this->__record();
-        $record->_title = $raw;
-        $record->_body  = $raw;
+        $record->title = $raw;
+        $record->body  = $raw;
         $record->compile();
 
-        // `title` and `body` should have compiled value.
-        $this->assertEquals($record->title, $compiled);
-        $this->assertEquals($record->body,  $compiled);
+        // `title` and `body` should be compiled.
+        $this->assertEquals($record->_title, $compiled);
+        $this->assertEquals($record->_body,  $compiled);
 
     }
 
@@ -119,13 +119,13 @@ description
 EOD;
 
         $record = $this->__record();
-        $record->_title = $raw;
-        $record->_body  = $raw;
+        $record->title = $raw;
+        $record->body  = $raw;
         $record->compile();
 
-        // `title` and `body` should have compiled value.
-        $this->assertEquals($record->title, $compiled);
-        $this->assertEquals($record->body,  $compiled);
+        // `title` and `body` should be compiled.
+        $this->assertEquals($record->_title, $compiled);
+        $this->assertEquals($record->_body,  $compiled);
 
     }
 

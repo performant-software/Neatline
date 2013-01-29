@@ -103,7 +103,9 @@ class Neatline_NeatlineRecordTableTest_QueryRecords
         $this->assertEquals($records[0]['id'],              $record1->id);
         $this->assertEquals($records[0]['item_id'],         $item1->id);
         $this->assertEquals($records[0]['title'],           '1');
+        $this->assertEquals($records[0]['_title'],          '1');
         $this->assertEquals($records[0]['body'],            '3');
+        $this->assertEquals($records[0]['_body'],           '3');
         $this->assertEquals($records[0]['tags'],            '5');
         $this->assertEquals($records[0]['slug'],            '7');
         $this->assertEquals($records[0]['vector_color'],    '9');
@@ -126,7 +128,9 @@ class Neatline_NeatlineRecordTableTest_QueryRecords
         $this->assertEquals($records[1]['id'],              $record2->id);
         $this->assertEquals($records[1]['item_id'],         $item2->id);
         $this->assertEquals($records[1]['title'],           '2');
+        $this->assertEquals($records[1]['_title'],          '2');
         $this->assertEquals($records[1]['body'],            '4');
+        $this->assertEquals($records[1]['_body'],           '4');
         $this->assertEquals($records[1]['tags'],            '6');
         $this->assertEquals($records[1]['slug'],            '8');
         $this->assertEquals($records[1]['vector_color'],    '10');

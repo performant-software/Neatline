@@ -153,7 +153,7 @@ class NeatlineRecord extends Neatline_AbstractRecord
     public function compile() {
 
 
-        $fields = array('_title' => 'title', '_body' => 'body');
+        $fields = array('title' => '_title', 'body' => '_body');
         get_view()->setScriptPath(VIEW_SCRIPTS_DIR);
 
         foreach ($fields as $src => $tar) {
@@ -203,6 +203,14 @@ class NeatlineRecord extends Neatline_AbstractRecord
 
         }
 
+    }
+
+
+    /**
+     * Compile `title` and `body` before saving.
+     **/
+    public function beforeSave() {
+        $this->compile();
     }
 
 

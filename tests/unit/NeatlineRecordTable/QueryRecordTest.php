@@ -26,20 +26,15 @@ class Neatline_NeatlineRecordTableTest_QueryRecord
     public function testQueryRecord()
     {
 
-        // Create exhibit and item.
         $exhibit = $this->__exhibit();
         $item = $this->__item();
 
-        // Create record.
         $record = new NeatlineRecord($exhibit, $item);
 
-        // Text:
         $record->title              = '1';
         $record->body               = '2';
         $record->tags               = '3';
         $record->slug               = '4';
-
-        // Styles:
         $record->vector_color       = '5';
         $record->stroke_color       = '6';
         $record->select_color       = '7';
@@ -52,23 +47,19 @@ class Neatline_NeatlineRecordTableTest_QueryRecord
         $record->point_image        = '14';
         $record->min_zoom           = 15;
         $record->max_zoom           = 16;
-
-        // Spatial:
         $record->map_focus          = '17';
         $record->map_zoom           = 18;
         $record->coverage           = 'POINT(1 1)';
-
-        // Save.
         $record->save();
 
-        // Build the record array.
         $records = $this->_recordsTable->queryRecord($record->id);
 
-        // Check result.
         $this->assertEquals($records['id'],                 $record->id);
         $this->assertEquals($records['item_id'],            $item->id);
         $this->assertEquals($records['title'],              '1');
+        $this->assertEquals($records['_title'],             '1');
         $this->assertEquals($records['body'],               '2');
+        $this->assertEquals($records['_body'],              '2');
         $this->assertEquals($records['tags'],               '3');
         $this->assertEquals($records['slug'],               '4');
         $this->assertEquals($records['vector_color'],       '5');
