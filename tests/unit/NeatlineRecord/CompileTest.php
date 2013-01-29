@@ -126,7 +126,7 @@ class Neatline_NeatlineRecordTest_Compile
 
         $item = insert_item();
         insert_files_for_item($item, 'Filesystem', array(
-            NL_DIR . '/tests/mocks/file1.txt'
+            NL_DIR . '/tests/mocks/file.txt'
         ));
 
         $files = files_for_item(array(), array(), $item);

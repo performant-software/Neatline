@@ -43,7 +43,7 @@ describe('Record Form Save', function() {
     inputs.title.           val('1').   trigger('change');
     inputs.body.            val('2').   trigger('change');
     inputs.itemId.          val('3').   trigger('change');
-    inputs.slug.            val('4').   trigger('change');
+    // inputs.slug.            val('4').   trigger('change');
     inputs.coverage.        val('5').   trigger('change');
     inputs.tags.            val('6').   trigger('change');
     inputs.vectorColor.     val('7').   trigger('change');
@@ -75,7 +75,7 @@ describe('Record Form Save', function() {
     expect(params.title).           toEqual('1');
     expect(params.body).            toEqual('2');
     expect(params.item_id).         toEqual('3');
-    expect(params.slug).            toEqual('4');
+    // expect(params.slug).            toEqual('4');
     expect(params.coverage).        toEqual('5');
     expect(params.tags).            toEqual('6');
     expect(params.vector_color).    toEqual('7');
