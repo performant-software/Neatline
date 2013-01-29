@@ -17,7 +17,7 @@ class Neatline_NeatlineRecordTest_Compile
 
 
     /**
-     * [item:ID].
+     * `[item:<id>]`
      * @group compile
      */
     public function testItemId()
@@ -82,7 +82,7 @@ EOD;
 
 
     /**
-     * [item:ID:"Field"].
+     * `[item:<id>:"<element>"]`
      * @group compile
      */
     public function testItemIdField()

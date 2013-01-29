@@ -149,10 +149,17 @@ class NeatlineRecord extends Neatline_AbstractRecord
 
 
     /**
-     * Compile Omeka file and item references.
+     * Compile Omeka item references. Supported syntax:
+     *
+     * `[item:45]`
+     * `[item:45:"Title"]`
+     * `[item:45:files]`
+     *
+     * `[item:"Title"]`
+     * `[item:files]`
+     *
      **/
     public function compile() {
-
 
         $fields = array('title' => '_title', 'body' => '_body');
         get_view()->setScriptPath(VIEW_SCRIPTS_DIR);
@@ -161,7 +168,18 @@ class NeatlineRecord extends Neatline_AbstractRecord
 
             $this->$tar = $this->$src;
 
-            // `[item:ID:"FIELD"]`
+            // `[item:<id>]`
+            $re = "/\[item:(?P<id>[0-9]+)\]/";
+            preg_match_all($re, $this->$tar, $matches);
+
+            foreach ($matches['id'] as $id) {
+                $item = get_record_by_id('Item', $id);
+                $text = all_element_texts($item);
+                $re = "/\[item:{$id}\]/";
+                $this->$tar= preg_replace($re, $text, $this->$tar);
+            }
+
+            // `[item:<id>:"<element>"]`
             $re = "/\[item:(?P<id>[0-9]+):\"(?P<el>[a-zA-Z\s]+)\"\]/";
             preg_match_all($re, $this->$tar, $matches);
 
@@ -170,17 +188,6 @@ class NeatlineRecord extends Neatline_AbstractRecord
                 $element = $matches['el'][$i];
                 $text = metadata($item, array('Dublin Core', $element));
                 $re = "/\[item:[0-9]+:\"{$element}\"\]/";
-                $this->$tar= preg_replace($re, $text, $this->$tar);
-            }
-
-            // `[item:ID]`
-            $re = "/\[item:(?P<id>[0-9]+)\]/";
-            preg_match_all($re, $this->$tar, $matches);
-
-            foreach ($matches['id'] as $id) {
-                $item = get_record_by_id('Item', $id);
-                $text = all_element_texts($item);
-                $re = "/\[item:{$id}\]/";
                 $this->$tar= preg_replace($re, $text, $this->$tar);
             }
 
