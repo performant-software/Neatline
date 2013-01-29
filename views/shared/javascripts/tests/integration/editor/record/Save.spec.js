@@ -40,24 +40,26 @@ describe('Record Form Save', function() {
     var id = _t.vw.record.model.get('id');
     var inputs = _t.getRecordFormElements();
 
-    inputs.title.           val('title2').      trigger('change');
-    inputs.body.            val('body2').       trigger('change');
-    inputs.coverage.        val('POINT(3 4)').  trigger('change');
-    inputs.tags.            val('tags2').       trigger('change');
-    inputs.vectorColor.     val('#222222').     trigger('change');
-    inputs.strokeColor.     val('#555555').     trigger('change');
-    inputs.selectColor.     val('#888888').     trigger('change');
-    inputs.vectorOpacity.   val('2').           trigger('change');
-    inputs.selectOpacity.   val('5').           trigger('change');
-    inputs.strokeOpacity.   val('8').           trigger('change');
-    inputs.imageOpacity.    val('11').          trigger('change');
-    inputs.strokeWidth.     val('14').          trigger('change');
-    inputs.pointRadius.     val('17').          trigger('change');
-    inputs.pointImage.      val('file2.png').   trigger('change');
-    inputs.minZoom.         val('20').          trigger('change');
-    inputs.maxZoom.         val('23').          trigger('change');
-    inputs.mapFocus.        val('200,300').     trigger('change');
-    inputs.mapZoom.         val('24').          trigger('change');
+    inputs.title.           val('1').   trigger('change');
+    inputs.body.            val('2').   trigger('change');
+    inputs.itemId.          val('3').   trigger('change');
+    inputs.slug.            val('4').   trigger('change');
+    inputs.coverage.        val('5').   trigger('change');
+    inputs.tags.            val('6').   trigger('change');
+    inputs.vectorColor.     val('7').   trigger('change');
+    inputs.strokeColor.     val('8').   trigger('change');
+    inputs.selectColor.     val('9').   trigger('change');
+    inputs.vectorOpacity.   val('10').  trigger('change');
+    inputs.selectOpacity.   val('11').  trigger('change');
+    inputs.strokeOpacity.   val('12').  trigger('change');
+    inputs.imageOpacity.    val('13').  trigger('change');
+    inputs.strokeWidth.     val('14').  trigger('change');
+    inputs.pointRadius.     val('15').  trigger('change');
+    inputs.pointImage.      val('16').  trigger('change');
+    inputs.minZoom.         val('17').  trigger('change');
+    inputs.maxZoom.         val('18').  trigger('change');
+    inputs.mapFocus.        val('19').  trigger('change');
+    inputs.mapZoom.         val('20').  trigger('change');
 
     // Click "Save" button.
     els.save.trigger('click');
@@ -70,24 +72,26 @@ describe('Record Form Save', function() {
     var params = _t.getLastRequestParams();
 
     // Check the query string for updated values.
-    expect(params.title).           toEqual('title2');
-    expect(params.body).            toEqual('body2');
-    expect(params.coverage).        toEqual('POINT(3 4)');
-    expect(params.tags).            toEqual('tags2');
-    expect(params.vector_color).    toEqual('#222222');
-    expect(params.stroke_color).    toEqual('#555555');
-    expect(params.select_color).    toEqual('#888888');
-    expect(params.vector_opacity).  toEqual('2');
-    expect(params.select_opacity).  toEqual('5');
-    expect(params.stroke_opacity).  toEqual('8');
-    expect(params.image_opacity).   toEqual('11');
+    expect(params.title).           toEqual('1');
+    expect(params.body).            toEqual('2');
+    expect(params.item_id).         toEqual('3');
+    expect(params.slug).            toEqual('4');
+    expect(params.coverage).        toEqual('5');
+    expect(params.tags).            toEqual('6');
+    expect(params.vector_color).    toEqual('7');
+    expect(params.stroke_color).    toEqual('8');
+    expect(params.select_color).    toEqual('9');
+    expect(params.vector_opacity).  toEqual('10');
+    expect(params.select_opacity).  toEqual('11');
+    expect(params.stroke_opacity).  toEqual('12');
+    expect(params.image_opacity).   toEqual('13');
     expect(params.stroke_width).    toEqual('14');
-    expect(params.point_radius).    toEqual('17');
-    expect(params.point_image).     toEqual('file2.png');
-    expect(params.min_zoom).        toEqual('20');
-    expect(params.max_zoom).        toEqual('23');
-    expect(params.map_focus).       toEqual('200,300');
-    expect(params.map_zoom).        toEqual('24');
+    expect(params.point_radius).    toEqual('15');
+    expect(params.point_image).     toEqual('16');
+    expect(params.min_zoom).        toEqual('17');
+    expect(params.max_zoom).        toEqual('18');
+    expect(params.map_focus).       toEqual('19');
+    expect(params.map_zoom).        toEqual('20');
 
   });
 

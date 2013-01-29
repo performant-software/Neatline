@@ -28,25 +28,26 @@ class Neatline_RecordControllerTest_Post
         $this->request->setMethod('POST')->setRawBody(
           Zend_Json::encode(array(
             'exhibit_id'        => $exhibit->id,
-            'title'             => '1',
-            'body'              => '2',
-            'slug'              => '3',
-            'tags'              => '4',
-            'vector_color'      => '5',
-            'stroke_color'      => '6',
-            'select_color'      => '7',
-            'vector_opacity'    => '8',
-            'select_opacity'    => '9',
-            'stroke_opacity'    => '10',
-            'image_opacity'     => '11',
-            'stroke_width'      => '12',
-            'point_radius'      => '13',
-            'point_image'       => '14',
-            'min_zoom'          => '15',
-            'max_zoom'          => '16',
-            'map_focus'         => '17',
-            'map_zoom'          => '18',
-            'coverage'          => 'POINT(19 19)'
+            'item_id'           => '1',
+            'title'             => '2',
+            'body'              => '3',
+            'slug'              => '4',
+            'tags'              => '5',
+            'vector_color'      => '6',
+            'stroke_color'      => '7',
+            'select_color'      => '8',
+            'vector_opacity'    => '9',
+            'select_opacity'    => '10',
+            'stroke_opacity'    => '11',
+            'image_opacity'     => '12',
+            'stroke_width'      => '13',
+            'point_radius'      => '14',
+            'point_image'       => '15',
+            'min_zoom'          => '16',
+            'max_zoom'          => '17',
+            'map_focus'         => '18',
+            'map_zoom'          => '19',
+            'coverage'          => 'POINT(20 20)'
         )));
 
         // Hit /records with POST.
@@ -67,25 +68,26 @@ class Neatline_RecordControllerTest_Post
 
         // Should update fields.
         $this->assertEquals($record->exhibit_id,        $exhibit->id);
-        $this->assertEquals($record->title,             '1');
-        $this->assertEquals($record->body,              '2');
-        $this->assertEquals($record->slug,              '3');
-        $this->assertEquals($record->tags,              '4');
-        $this->assertEquals($record->vector_color,      '5');
-        $this->assertEquals($record->stroke_color,      '6');
-        $this->assertEquals($record->select_color,      '7');
-        $this->assertEquals($record->vector_opacity,    8);
-        $this->assertEquals($record->select_opacity,    9);
-        $this->assertEquals($record->stroke_opacity,    10);
-        $this->assertEquals($record->image_opacity,     11);
-        $this->assertEquals($record->stroke_width,      12);
-        $this->assertEquals($record->point_radius,      13);
-        $this->assertEquals($record->point_image,       '14');
-        $this->assertEquals($record->min_zoom,          15);
-        $this->assertEquals($record->max_zoom,          16);
-        $this->assertEquals($record->map_focus,         '17');
-        $this->assertEquals($record->map_zoom,          18);
-        $this->assertEquals($record->coverage,          'POINT(19 19)');
+        $this->assertEquals($record->item_id,           '1');
+        $this->assertEquals($record->title,             '2');
+        $this->assertEquals($record->body,              '3');
+        $this->assertEquals($record->slug,              '4');
+        $this->assertEquals($record->tags,              '5');
+        $this->assertEquals($record->vector_color,      '6');
+        $this->assertEquals($record->stroke_color,      '7');
+        $this->assertEquals($record->select_color,      '8');
+        $this->assertEquals($record->vector_opacity,    9);
+        $this->assertEquals($record->select_opacity,    10);
+        $this->assertEquals($record->stroke_opacity,    11);
+        $this->assertEquals($record->image_opacity,     12);
+        $this->assertEquals($record->stroke_width,      13);
+        $this->assertEquals($record->point_radius,      14);
+        $this->assertEquals($record->point_image,       '15');
+        $this->assertEquals($record->min_zoom,          16);
+        $this->assertEquals($record->max_zoom,          17);
+        $this->assertEquals($record->map_focus,         '18');
+        $this->assertEquals($record->map_zoom,          19);
+        $this->assertEquals($record->coverage,          'POINT(20 20)');
 
     }
 
