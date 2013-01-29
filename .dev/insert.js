@@ -22,8 +22,8 @@ function records(exhibit_id, count, zoom, color, tags) {
   // Base insert.
   var sql = 'INSERT INTO omeka_neatline_records (' +
       'exhibit_id,'+
-      'title,'+
-      'body,'+
+      '_title,'+
+      '_body,'+
       'tags,'+
       'vector_color,'+
       'stroke_color,'+
