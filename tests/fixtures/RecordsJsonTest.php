@@ -37,6 +37,10 @@ class Neatline_RecordsJsonFixtureTest extends Neatline_Test_AppTestCase
         // - #1 has a default map focus/zoom, #2 and #3 do not.
 
         // ----------------------------------------------------------------
+        $record1->item_id           = 1;
+        $record2->item_id           = 2;
+        $record3->item_id           = 3;
+        // ----------------------------------------------------------------
         $record1->title             = 'title1';
         $record2->title             = 'title2';
         $record3->title             = 'title3';
@@ -57,6 +61,10 @@ class Neatline_RecordsJsonFixtureTest extends Neatline_Test_AppTestCase
         $record2->tags              = 'tags2';
         $record3->tags              = 'tags3';
         // ----------------------------------------------------------------
+        $record1->slug              = 'slug1';
+        $record2->slug              = 'slug2';
+        $record3->slug              = 'slug3';
+        // ----------------------------------------------------------------
         $record1->coverage          = 'POINT(1 2)';
         $record2->coverage          = 'POINT(3 4)';
         $record3->coverage          = 'POINT(5 6)';
@@ -64,53 +72,53 @@ class Neatline_RecordsJsonFixtureTest extends Neatline_Test_AppTestCase
         $record1->map_focus         = '100,200';
         $record1->map_zoom          = 10;
         // ----------------------------------------------------------------
-        $record1->vector_color      = '1';
-        $record2->vector_color      = '2';
-        $record3->vector_color      = '3';
+        $record1->vector_color      = '4';
+        $record2->vector_color      = '5';
+        $record3->vector_color      = '6';
         // ----------------------------------------------------------------
-        $record1->stroke_color      = '4';
-        $record2->stroke_color      = '5';
-        $record3->stroke_color      = '6';
+        $record1->stroke_color      = '7';
+        $record2->stroke_color      = '8';
+        $record3->stroke_color      = '9';
         // ----------------------------------------------------------------
-        $record1->select_color      = '7';
-        $record2->select_color      = '8';
-        $record3->select_color      = '9';
+        $record1->select_color      = '10';
+        $record2->select_color      = '11';
+        $record3->select_color      = '12';
         // ----------------------------------------------------------------
-        $record1->vector_opacity    = 10;
-        $record2->vector_opacity    = 11;
-        $record3->vector_opacity    = 12;
+        $record1->vector_opacity    = 13;
+        $record2->vector_opacity    = 14;
+        $record3->vector_opacity    = 15;
         // ----------------------------------------------------------------
-        $record1->select_opacity    = 13;
-        $record2->select_opacity    = 14;
-        $record3->select_opacity    = 15;
+        $record1->select_opacity    = 16;
+        $record2->select_opacity    = 17;
+        $record3->select_opacity    = 18;
         // ----------------------------------------------------------------
-        $record1->stroke_opacity    = 16;
-        $record2->stroke_opacity    = 17;
-        $record3->stroke_opacity    = 18;
+        $record1->stroke_opacity    = 19;
+        $record2->stroke_opacity    = 20;
+        $record3->stroke_opacity    = 21;
         // ----------------------------------------------------------------
-        $record1->image_opacity     = 19;
-        $record2->image_opacity     = 20;
-        $record3->image_opacity     = 21;
+        $record1->image_opacity     = 22;
+        $record2->image_opacity     = 23;
+        $record3->image_opacity     = 24;
         // ----------------------------------------------------------------
-        $record1->stroke_width      = 22;
-        $record2->stroke_width      = 23;
-        $record3->stroke_width      = 24;
+        $record1->stroke_width      = 25;
+        $record2->stroke_width      = 26;
+        $record3->stroke_width      = 27;
         // ----------------------------------------------------------------
-        $record1->point_radius      = 25;
-        $record2->point_radius      = 26;
-        $record3->point_radius      = 27;
+        $record1->point_radius      = 28;
+        $record2->point_radius      = 29;
+        $record3->point_radius      = 30;
         // ----------------------------------------------------------------
-        $record1->point_image       = '28';
-        $record2->point_image       = '29';
-        $record3->point_image       = '30';
+        $record1->point_image       = '31';
+        $record2->point_image       = '32';
+        $record3->point_image       = '33';
         // ----------------------------------------------------------------
-        $record1->min_zoom          = 31;
-        $record2->min_zoom          = 32;
-        $record3->min_zoom          = 33;
+        $record1->min_zoom          = 34;
+        $record2->min_zoom          = 35;
+        $record3->min_zoom          = 36;
         // ----------------------------------------------------------------
-        $record1->max_zoom          = 34;
-        $record2->max_zoom          = 35;
-        $record3->max_zoom          = 36;
+        $record1->max_zoom          = 37;
+        $record2->max_zoom          = 38;
+        $record3->max_zoom          = 39;
         // ----------------------------------------------------------------
 
         $record1->__save();

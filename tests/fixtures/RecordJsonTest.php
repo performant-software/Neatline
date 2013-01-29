@@ -26,13 +26,15 @@ class Neatline_RecordJsonFixtureTest extends Neatline_Test_AppTestCase
     {
 
         $exhibit    = $this->__exhibit();
-        $record     = $this->__record($exhibit);
+        $item       = $this->__item();
+        $record     = $this->__record($exhibit, $item);
 
         $record->title              = 'title';
         $record->_title             = '_title';
         $record->body               = 'body';
         $record->_body              = '_body';
         $record->tags               = 'tags';
+        $record->slug               = 'slug';
         $record->coverage           = 'POINT(1 2)';
         $record->map_focus          = '100,200';
         $record->map_zoom           = 10;
