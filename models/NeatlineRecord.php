@@ -157,15 +157,18 @@ class NeatlineRecord extends Neatline_AbstractRecord
      **/
     public function compile() {
 
+        // Copy raw -> compiled.
+        $fields = array('title' => '_title', 'body' => '_body');
+        foreach ($fields as $s => $t) $this->$t = $this->$s;
+
+        // Break if no parent item.
         if (is_null($this->item_id)) return;
 
+        // Get the item, set view directory.
         $item = get_record_by_id('Item', $this->item_id);
-        $fields = array('title' => '_title', 'body' => '_body');
         get_view()->setScriptPath(VIEW_SCRIPTS_DIR);
 
         foreach ($fields as $src => $tar) {
-
-            $this->$tar = $this->$src;
 
             // `[item]`
             $texts = all_element_texts($item);

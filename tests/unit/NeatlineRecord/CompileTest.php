@@ -27,7 +27,7 @@ class Neatline_NeatlineRecordTest_Compile
 
 
     /**
-     * [item].
+     * `[item]` should be replaced with the full item metadata output.
      * @group compile
      */
     public function testItem()
@@ -70,7 +70,7 @@ class Neatline_NeatlineRecordTest_Compile
 
 
     /**
-     * [item:"<element>"].
+     * `[item:"<element>"]` should be replaced with element text values.
      * @group compile
      */
     public function testItemField()
@@ -118,7 +118,7 @@ class Neatline_NeatlineRecordTest_Compile
 
 
     /**
-     * [item:files].
+     * `[item:files]` should be replaced with file display markup.
      * @group compile
      */
     public function testItemFiles()
@@ -153,6 +153,25 @@ class Neatline_NeatlineRecordTest_Compile
         // `_title` and `_body` should be compiled.
         $this->assertEquals($record->_title, $tar);
         $this->assertEquals($record->_body,  $tar);
+
+    }
+
+
+    /**
+     * When no `item_id` is set on the record, the raw fields should be
+     * copied unchanged into the compiled fields.
+     * @group compile
+     */
+    public function testWithNoItemId()
+    {
+
+        $record = $this->__record();
+        $record->title  = 'title';
+        $record->body   = 'body';
+        $record->compile();
+
+        $this->assertEquals($record->_title, 'title');
+        $this->assertEquals($record->_body, 'body');
 
     }
 

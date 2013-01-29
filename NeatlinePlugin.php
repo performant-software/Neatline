@@ -21,7 +21,8 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
         'install',
         'uninstall',
         'define_routes',
-        'initialize'
+        'initialize',
+        'after_save_item'
     );
 
 
@@ -174,6 +175,16 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
     public function hookInitialize()
     {
         add_translation_source(dirname(__FILE__) . '/languages');
+    }
+
+
+    /**
+     * Propagate item changes to Neatline records.
+     */
+    public function hookAfterSaveItem($args)
+    {
+        $records = $this->_db->getTable('NeatlineRecord');
+        $records->syncItem($args['record']);
     }
 
 

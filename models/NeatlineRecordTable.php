@@ -64,6 +64,20 @@ class NeatlineRecordTable extends Omeka_Db_Table
 
 
     /**
+     * Update record item references when an item is changed.
+     *
+     * @param Item $item The item record.
+     */
+    public function syncItem($item)
+    {
+        $select = $this->getSelect()->where('item_id=?', $item->id);
+        foreach ($this->fetchObjects($select) as $record) {
+            $record->save();
+        }
+    }
+
+
+    /**
      * Select `coverage` as plain-text and order by creation date.
      *
      * @return Omeka_Db_Select The modified select.
