@@ -190,6 +190,17 @@ class NeatlineRecord extends Neatline_AbstractRecord
                 $this->$tar = preg_replace($re, $text, $this->$tar);
             }
 
+            // `[item:<id>:files]`
+            $re = "/\[item:(?P<id>[0-9]+):files\]/";
+            preg_match_all($re, $this->$tar, $matches);
+
+            foreach ($matches['id'] as $id) {
+                $item = get_record_by_id('Item', $id);
+                $files = files_for_item(array(), array(), $item);
+                $re = "/\[item:{$id}:files\]/";
+                $this->$tar = preg_replace($re, $files, $this->$tar);
+            }
+
         }
 
     }
