@@ -65,6 +65,8 @@ _t.getRecordFormElements = function() {
     lead:           _t.el.record.find('p.lead'),
     title:          _t.el.record.find('textarea[name="title"]'),
     body:           _t.el.record.find('textarea[name="body"]'),
+    slug:           _t.el.record.find('input[name="slug"]'),
+    itemId:         _t.el.record.find('input[name="item-id"]'),
     coverage:       _t.el.record.find('textarea[name="coverage"]'),
     tags:           _t.el.record.find('input[name="tags"]'),
     vectorColor:    _t.el.record.find('input[name="vector-color"]'),

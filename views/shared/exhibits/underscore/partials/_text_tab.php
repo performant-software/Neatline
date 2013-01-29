@@ -30,4 +30,18 @@
       'bind'  => 'record.body'
   )); ?>
 
+  <?php echo $this->partial(
+    'exhibits/underscore/helpers/_text_input.php', array(
+      'name'  => 'item-id',
+      'label' => 'Item',
+      'bind'  => 'record.item_id'
+  )); ?>
+
+  <?php echo $this->partial(
+    'exhibits/underscore/helpers/_text_input.php', array(
+      'name'  => 'slug',
+      'label' => 'Slug',
+      'bind'  => 'record.slug'
+  )); ?>
+
 </div>
