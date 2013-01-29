@@ -176,7 +176,7 @@ class NeatlineRecord extends Neatline_AbstractRecord
                 $item = get_record_by_id('Item', $id);
                 $text = all_element_texts($item);
                 $re = "/\[item:{$id}\]/";
-                $this->$tar= preg_replace($re, $text, $this->$tar);
+                $this->$tar = preg_replace($re, $text, $this->$tar);
             }
 
             // `[item:<id>:"<element>"]`
@@ -188,7 +188,7 @@ class NeatlineRecord extends Neatline_AbstractRecord
                 $element = $matches['el'][$i];
                 $text = metadata($item, array('Dublin Core', $element));
                 $re = "/\[item:[0-9]+:\"{$element}\"\]/";
-                $this->$tar= preg_replace($re, $text, $this->$tar);
+                $this->$tar = preg_replace($re, $text, $this->$tar);
             }
 
         }
