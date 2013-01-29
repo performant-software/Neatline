@@ -107,11 +107,11 @@ EOD;
                 'Title' => array(
                     array('text' => 'title', 'html' => false)
                 ),
-                'Subject' => array(
-                    array('text' => 'subject', 'html' => false)
-                ),
                 'Description' => array(
                     array('text' => 'description', 'html' => false)
+                ),
+                'Subject' => array(
+                    array('text' => 'subject', 'html' => false)
                 )
             )
         ));
@@ -122,17 +122,17 @@ EOD;
         $raw = <<<EOD
 [item:$item->id:"Title"]
 abc
-[item:$item->id:"Subject"]
-def
 [item:$item->id:"Description"]
+def
+[item:$item->id:"Subject"]
 EOD;
 
         $compiled = <<<EOD
 title
 abc
-subject
-def
 description
+def
+subject
 EOD;
 
         // ----------------------------------------------------------------
@@ -206,6 +206,122 @@ EOD;
         // Set the uncompiled source to `title` and `body`.
 
         $record = $this->__record();
+        $record->title = $raw;
+        $record->body  = $raw;
+        $record->compile();
+
+        // `_title` and `_body` should be compiled.
+        $this->assertEquals($record->_title, $compiled);
+        $this->assertEquals($record->_body,  $compiled);
+
+    }
+
+
+    /**
+     * [item].
+     * @group compile
+     */
+    public function testItem()
+    {
+
+        // ----------------------------------------------------------------
+        // Create and item with a title field.
+
+        $item = insert_item(array(), array(
+            'Dublin Core' => array (
+                'Title' => array(
+                    array('text' => 'title', 'html' => false)
+                )
+            )
+        ));
+
+        // ----------------------------------------------------------------
+        // Generate the full element text output.
+
+        get_view()->setScriptPath(VIEW_SCRIPTS_DIR);
+        $texts = all_element_texts($item);
+
+        // ----------------------------------------------------------------
+        // Form the raw and compiled values.
+
+        $raw = <<<EOD
+[item]
+abc
+[item]
+def
+[item]
+EOD;
+
+        $compiled = <<<EOD
+$texts
+abc
+$texts
+def
+$texts
+EOD;
+
+        // ----------------------------------------------------------------
+        // Set the uncompiled source to `title` and `body`.
+
+        $record = new NeatlineRecord(null, $item);
+        $record->title = $raw;
+        $record->body  = $raw;
+        $record->compile();
+
+        // `_title` and `_body` should be compiled.
+        $this->assertEquals($record->_title, $compiled);
+        $this->assertEquals($record->_body,  $compiled);
+
+    }
+
+
+    /**
+     * [item:"<element>"].
+     * @group compile
+     */
+    public function testItemField()
+    {
+
+        // ----------------------------------------------------------------
+        // Create an item with a title, description, and subject.
+
+        $item = insert_item(array(), array(
+            'Dublin Core' => array (
+                'Title' => array(
+                    array('text' => 'title', 'html' => false)
+                ),
+                'Description' => array(
+                    array('text' => 'description', 'html' => false)
+                ),
+                'Subject' => array(
+                    array('text' => 'subject', 'html' => false)
+                )
+            )
+        ));
+
+        // ----------------------------------------------------------------
+        // Form the raw and compiled values.
+
+        $raw = <<<EOD
+[item:"Title"]
+abc
+[item:"Description"]
+def
+[item:"Subject"]
+EOD;
+
+        $compiled = <<<EOD
+title
+abc
+description
+def
+subject
+EOD;
+
+        // ----------------------------------------------------------------
+        // Set the uncompiled source to `title` and `body`.
+
+        $record = new NeatlineRecord(null, $item);
         $record->title = $raw;
         $record->body  = $raw;
         $record->compile();
