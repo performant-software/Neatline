@@ -148,58 +148,47 @@ class NeatlineRecord extends Neatline_AbstractRecord
 
 
     /**
-     * Compile Omeka file and item references.
+     * Compile Omeka item references. Supported syntax:
+     *
+     * `[item:45]`
+     * `[item:45:"Title"]`
+     * `[item:45:files]`
+     *
+     * `[item:"Title"]`
+     * `[item:files]`
+     *
      **/
     public function compile() {
-
 
         $fields = array('title' => '_title', 'body' => '_body');
         get_view()->setScriptPath(VIEW_SCRIPTS_DIR);
 
         foreach ($fields as $src => $tar) {
 
-            // Copy raw -> compiled.
-            $this->$tar= $this->$src;
+            $this->$tar = $this->$src;
 
+            // `[item:<id>]`
+            $re = "/\[item:(?P<id>[0-9]+)\]/";
+            preg_match_all($re, $this->$tar, $matches);
 
-            // `[item:ID:"FIELD"]`
+            foreach ($matches['id'] as $id) {
+                $item = get_record_by_id('Item', $id);
+                $text = all_element_texts($item);
+                $re = "/\[item:{$id}\]/";
+                $this->$tar = preg_replace($re, $text, $this->$tar);
+            }
+
+            // `[item:<id>:"<element>"]`
             $re = "/\[item:(?P<id>[0-9]+):\"(?P<el>[a-zA-Z\s]+)\"\]/";
             preg_match_all($re, $this->$tar, $matches);
 
             foreach ($matches['id'] as $i => $id) {
-
-                // Get the item and element name.
                 $item = get_record_by_id('Item', $id);
                 $element = $matches['el'][$i];
-
-                // Query for the element text value.
                 $text = metadata($item, array('Dublin Core', $element));
-
-                // Replace the value.
                 $re = "/\[item:[0-9]+:\"{$element}\"\]/";
-                $this->$tar= preg_replace($re, $text, $this->$tar);
-
+                $this->$tar = preg_replace($re, $text, $this->$tar);
             }
-
-
-            // `[item:ID]`
-            $re = "/\[item:(?P<id>[0-9]+)\]/";
-            preg_match_all($re, $this->$tar, $matches);
-
-            foreach ($matches['id'] as $i => $id) {
-
-                // Get the item and element name.
-                $item = get_record_by_id('Item', $id);
-
-                // Query for the element text values.
-                $text = all_element_texts($item);
-
-                // Replace the value.
-                $re = "/\[item:{$id}\]/";
-                $this->$tar= preg_replace($re, $text, $this->$tar);
-
-            }
-
 
         }
 
