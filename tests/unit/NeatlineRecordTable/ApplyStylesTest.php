@@ -30,7 +30,7 @@ class Neatline_NeatlineRecordTableTest_ApplyStyles
         $record1->save();
         $record2->save();
 
-        // Styles YAML.
+        // YAML
         $exhibit->styles = "
         tag1:
          - vector_color: '1'
@@ -38,7 +38,7 @@ class Neatline_NeatlineRecordTableTest_ApplyStyles
         tag2:
          - stroke_color: '3'
          - stroke_opacity: 4
-         ";
+        ";
 
         // Apply styles, reload records.
         $this->_recordsTable->applyStyles($exhibit);
@@ -61,6 +61,34 @@ class Neatline_NeatlineRecordTableTest_ApplyStyles
 
 
     /**
+     * applyStyles() should ignore styles that do not have values.
+     */
+    public function testIgnoreStylesWithoutValues()
+    {
+
+        $exhibit = $this->__exhibit();
+        $record = new NeatlineRecord($exhibit);
+        $record->vector_color = 'color';
+        $record->tags = 'tag';
+        $record->save();
+
+        // YAML
+        $exhibit->styles = "
+        tag:
+         - vector_color
+        ";
+
+        // Apply styles, reload record.
+        $this->_recordsTable->applyStyles($exhibit);
+        $record = $this->_recordsTable->find($record->id);
+
+        // `vector_color` should not be changed.
+        $this->assertEquals($record->vector_color, 'color');
+
+    }
+
+
+    /**
      * The `default` tag should be applied to all records in an exhibit.
      */
     public function testDefaultTag()
@@ -70,11 +98,11 @@ class Neatline_NeatlineRecordTableTest_ApplyStyles
         $record1 = $this->__record($exhibit);
         $record2 = $this->__record($exhibit);
 
-        // Styles YAML.
+        // YAML
         $exhibit->styles = "
         default:
          - vector_color: 'color'
-         ";
+        ";
 
         // Apply styles, reload records.
         $this->_recordsTable->applyStyles($exhibit);
@@ -103,11 +131,11 @@ class Neatline_NeatlineRecordTableTest_ApplyStyles
         $record2->tags = 'tag';
         $record2->save();
 
-        // Set styles YAML.
+        // YAML
         $exhibit1->styles = "
         tag:
          - vector_color: '1'
-         ";
+        ";
 
         // Apply styles, reload records.
         $this->_recordsTable->applyStyles($exhibit1);

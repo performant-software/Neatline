@@ -55,8 +55,9 @@ class NeatlineRecordTable extends Omeka_Db_Table
                 }}
             }}
 
-            // Update records.
-            $this->update($this->getTableName(), $set, $where);
+            if (!empty($set)) {
+                $this->update($this->getTableName(), $set, $where);
+            }
 
         }
 
