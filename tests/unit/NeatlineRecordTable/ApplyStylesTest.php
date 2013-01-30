@@ -125,10 +125,10 @@ class Neatline_NeatlineRecordTableTest_ApplyStyles
         $exhibit1 = $this->__exhibit();
         $exhibit2 = $this->__exhibit();
         $record1 = new NeatlineRecord($exhibit1);
-        $record1->tags = 'tag';
-        $record1->save();
         $record2 = new NeatlineRecord($exhibit2);
+        $record1->tags = 'tag';
         $record2->tags = 'tag';
+        $record1->save();
         $record2->save();
 
         // YAML

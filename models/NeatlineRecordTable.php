@@ -65,6 +65,62 @@ class NeatlineRecordTable extends Omeka_Db_Table
 
 
     /**
+     * Synchronize the tag-siblings of a record to match the values on the
+     * passed record. For example, if `styles` on the exhibit is:
+     *
+     * tag:
+     *  - vector_color: #ffffff
+     *  - stroke_color
+     *
+     *  The stroke color on records tagged with `tag` will be updated to
+     *  the value on the passed record, but vector color will be unchanged
+     *  since an explicit value is set in the YAML.
+     *
+     * @param NeatlineRecord The record to propagate.
+     */
+    public function syncStyles($record)
+    {
+
+        // Prase the styles YAML.
+        $yaml = Spyc::YAMLLoad($record->getExhibit()->styles);
+
+        // Gather list of valid styles.
+        $valid = neatline_getStyleCols();
+
+        foreach ($yaml as $tag => $styles) {
+
+            // `WHERE`
+            $where = array(
+                'exhibit_id = ?' => $record->exhibit_id,
+                'tags REGEXP ?' => '[[:<:]]'.$tag.'[[:>:]]'
+            );
+
+            // `SET`
+            $set = array();
+            foreach ($styles as $s) { if (is_string($s)) {
+
+                // Sync all styles.
+                if ($s == 'all') { foreach ($valid as $v) {
+                    $set[$v] = $record->$v;
+                }}
+
+                // Sync individual style.
+                else if (in_array($s, $valid)) {
+                    $set[$s] = $record->$s;
+                }
+
+            }}
+
+            if (!empty($set)) {
+                $this->update($this->getTableName(), $set, $where);
+            }
+
+        }
+
+    }
+
+
+    /**
      * Update record item references when an item is changed.
      *
      * @param Item $item The item record.
