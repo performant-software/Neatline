@@ -158,7 +158,7 @@ module.exports = function(grunt) {
           config.vendor.js.backbone,
           config.vendor.js.marionette,
           config.vendor.js.neatline,
-          config.vendor.js.safesync,
+          // config.vendor.js.safesync,
           config.vendor.js.openlayers,
           config.vendor.js.rivets,
 

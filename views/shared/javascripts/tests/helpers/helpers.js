@@ -385,6 +385,29 @@ _t = (function() {
   };
   
   
+  /**
+   * Assert that the last request was a map refresh.
+   */
+  _t.assertMapRefreshed = function() {
+  
+    // Route should be /records/:id, method GET.
+    _t.assertLastRequestRoute(__exhibit.api.records);
+    _t.assertLastRequestMethod('GET');
+  
+    // Request should include map focus.
+    _t.assertLastRequestHasGetParameter('extent');
+    _t.assertLastRequestHasGetParameter('zoom');
+  
+    // Respond with new data.
+    _t.respondLast200(_t.json.records.removed);
+  
+    // Record2 point should be removed.
+    expect(_t.getVectorLayerByTitle('title2')).toBeUndefined();
+    expect(_t.vw.map.layers.length).toEqual(2);
+  
+  };
+  
+  
   /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
   
   /**

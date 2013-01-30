@@ -103,20 +103,7 @@ describe('Styles Form Save', function() {
     els.save.trigger('click');
     _t.respondLast200('');
 
-    // Route should be /records/:id, method GET.
-    _t.assertLastRequestRoute(__exhibit.api.records);
-    _t.assertLastRequestMethod('GET');
-
-    // Request should include map focus.
-    _t.assertLastRequestHasGetParameter('extent');
-    _t.assertLastRequestHasGetParameter('zoom');
-
-    // Respond with new data.
-    _t.respondLast200(_t.json.records.removed);
-
-    // Record2 point should be removed.
-    expect(_t.getVectorLayerByTitle('title2')).toBeUndefined();
-    expect(_t.vw.map.layers.length).toEqual(2);
+    _t.assertMapRefreshed();
 
   });
 

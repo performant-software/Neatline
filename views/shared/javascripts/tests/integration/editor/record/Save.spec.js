@@ -140,4 +140,20 @@ describe('Record Form Save', function() {
   });
 
 
+  it('should update the map when save succeeds', function() {
+
+    // --------------------------------------------------------------------
+    // When the "Save" button is clicked and the request succeeds, the map
+    // should be automatically refreshed to manifest synchronized styles.
+    // --------------------------------------------------------------------
+
+    // Click on "Save".
+    els.save.trigger('click');
+    _t.respondLast200('');
+
+    _t.assertMapRefreshed();
+
+  });
+
+
 });

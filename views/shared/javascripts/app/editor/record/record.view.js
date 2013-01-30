@@ -182,6 +182,9 @@ Neatline.module('Editor.Record', function(
      */
     onSaveSuccess: function() {
 
+      // Refresh the map.
+      Neatline.execute('map:refresh');
+
       // Update the route.
       Neatline.execute('editor:updateRoute',
         'records/'+this.model.get('id')
