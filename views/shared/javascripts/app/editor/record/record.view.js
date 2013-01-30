@@ -31,8 +31,7 @@ Neatline.module('Editor.Record', function(
       // Set map-derived styles.
       'click a[name="set-min-zoom"]':   'onSetMinZoom',
       'click a[name="set-max-zoom"]':   'onSetMaxZoom',
-      'click a[name="set-map-focus"]':  'onSetMapFocus',
-      'click a[name="set-map-zoom"]':   'onSetMapZoom',
+      'click a[name="set-focus"]':      'onSetFocus',
 
       // Change map edit mode.
       'change div.spatial input':       'onControlChange',
@@ -258,18 +257,11 @@ Neatline.module('Editor.Record', function(
     /**
      * Populate "Default Focus" with current map center.
      */
-    onSetMapFocus: function() {
-      var center = Neatline.request('map:getCenter');
-      this.__ui.style.mapFocus.val(center.lon+','+center.lat).change();
-    },
-
-
-    /**
-     * Populate "Default Zoom" with current map value.
-     */
-    onSetMapZoom: function() {
-      var zoom = Neatline.request('map:getZoom');
-      this.__ui.style.mapZoom.val(zoom).change();
+    onSetFocus: function() {
+      var center  = Neatline.request('map:getCenter');
+      var zoom    = Neatline.request('map:getZoom');
+      this.__ui.style.mapFocus.val(center.lon+','+center.lat);
+      this.__ui.style.mapZoom.val(zoom);
     },
 
 

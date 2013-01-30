@@ -46,8 +46,7 @@ describe('Record Form Style Tab', function() {
       mapZoom:        _t.vw.record.$('input[name="map-zoom"]'),
       setMinZoom:     _t.vw.record.$('a[name="set-min-zoom"]'),
       setMaxZoom:     _t.vw.record.$('a[name="set-max-zoom"]'),
-      setMapFocus:    _t.vw.record.$('a[name="set-map-focus"]'),
-      setMapZoom:     _t.vw.record.$('a[name="set-map-zoom"]')
+      setFocus:       _t.vw.record.$('a[name="set-focus"]')
     };
 
   });
@@ -293,40 +292,18 @@ describe('Record Form Style Tab', function() {
   });
 
 
-  it('should populate default focus', function() {
+  it('should populate default focus and zoom', function() {
 
     // --------------------------------------------------------------------
-    // When the "Use Current" link for "Default Focus" is clicked, the
-    // input should be populated with the current focus.
+    // When the "Use Current Viewport as Default" button is clicked, the
+    // "Focus Coordinates" and "Focus Zoom" inputs should be populated.
     // --------------------------------------------------------------------
 
-    _t.setMapCenter(1, 2);
-    els.setMapFocus.trigger('click');
+    _t.setMapCenter(1, 2, 3);
+    els.setFocus.trigger('click');
 
-    // Input should be updated.
     expect(els.mapFocus).toHaveValue('1,2');
-
-    // Model should be updated.
-    expect(_t.vw.record.model.get('map_focus')).toEqual('1,2');
-
-  });
-
-
-  it('should populate default zoom', function() {
-
-    // --------------------------------------------------------------------
-    // When the "Use Current" link for "Default Zoom" is clicked, the
-    // input should be populated with the current zoom.
-    // --------------------------------------------------------------------
-
-    _t.setMapZoom(1);
-    els.setMapZoom.trigger('click');
-
-    // Input should be updated.
-    expect(els.mapZoom).toHaveValue('1');
-
-    // Model should be updated.
-    expect(_t.vw.record.model.get('map_zoom')).toEqual('1');
+    expect(els.mapZoom).toHaveValue(3);
 
   });
 

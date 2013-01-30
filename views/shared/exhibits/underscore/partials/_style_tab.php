@@ -124,14 +124,20 @@
   'exhibits/underscore/helpers/_text_input.php', array(
     'name'  => 'map-focus',
     'label' => 'Default Focus',
-    'bind'  => 'record.map_focus',
-    'useCurrent' => true
+    'bind'  => 'record.map_focus'
 )); ?>
 
 <?php echo $this->partial(
   'exhibits/underscore/helpers/_text_input.php', array(
     'name'  => 'map-zoom',
     'label' => 'Default Zoom',
-    'bind'  => 'record.map_zoom',
-    'useCurrent' => true
+    'bind'  => 'record.map_zoom'
 )); ?>
+
+<div class="controls">
+  <div class="inline-inputs">
+    <a name="set-focus" class="btn btn-small">
+      <i class="icon-map-marker"></i> Use Current Viewport as Default
+    </a>
+  </div>
+</div>
