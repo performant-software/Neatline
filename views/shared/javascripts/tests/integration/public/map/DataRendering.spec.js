@@ -123,15 +123,15 @@ describe('Map Data Rendering', function() {
 
     // Fill color.
     expect(layer1.styleMap.styles.default.defaultStyle.fillColor).
-      toEqual('4');
+      toEqual('#444444');
     expect(layer2.styleMap.styles.default.defaultStyle.fillColor).
-      toEqual('5');
+      toEqual('#555555');
 
     // Stroke color.
     expect(layer1.styleMap.styles.default.defaultStyle.strokeColor).
-      toEqual('7');
+      toEqual('#777777');
     expect(layer2.styleMap.styles.default.defaultStyle.strokeColor).
-      toEqual('8');
+      toEqual('#888888');
 
     // Fill opacity
     expect(layer1.styleMap.styles.default.defaultStyle.fillOpacity).
@@ -169,15 +169,15 @@ describe('Map Data Rendering', function() {
 
     // Fill color.
     expect(layer1.styleMap.styles.select.defaultStyle.fillColor).
-      toEqual('10');
+      toEqual('#101010');
     expect(layer2.styleMap.styles.select.defaultStyle.fillColor).
-      toEqual('11');
+      toEqual('#111111');
 
     // Stroke color.
     expect(layer1.styleMap.styles.select.defaultStyle.strokeColor).
-      toEqual('7');
+      toEqual('#777777');
     expect(layer2.styleMap.styles.select.defaultStyle.strokeColor).
-      toEqual('8');
+      toEqual('#888888');
 
     // Fill opacity
     expect(layer1.styleMap.styles.select.defaultStyle.fillOpacity).
@@ -215,15 +215,15 @@ describe('Map Data Rendering', function() {
 
     // Fill color.
     expect(layer1.styleMap.styles.temporary.defaultStyle.fillColor).
-      toEqual('10');
+      toEqual('#101010');
     expect(layer2.styleMap.styles.temporary.defaultStyle.fillColor).
-      toEqual('11');
+      toEqual('#111111');
 
     // Stroke color.
     expect(layer1.styleMap.styles.temporary.defaultStyle.strokeColor).
-      toEqual('7');
+      toEqual('#777777');
     expect(layer2.styleMap.styles.temporary.defaultStyle.strokeColor).
-      toEqual('8');
+      toEqual('#888888');
 
     // Fill opacity
     expect(layer1.styleMap.styles.temporary.defaultStyle.fillOpacity).

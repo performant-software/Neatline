@@ -100,9 +100,9 @@ describe('Record Form Open', function() {
     expect(inputs.itemId).          toHaveValue('1');
     expect(inputs.coverage).        toHaveValue('POINT(1 2)');
     expect(inputs.tags).            toHaveValue('tags1');
-    expect(inputs.vectorColor).     toHaveValue('4');
-    expect(inputs.strokeColor).     toHaveValue('7');
-    expect(inputs.selectColor).     toHaveValue('10');
+    expect(inputs.vectorColor).     toHaveValue('#444444');
+    expect(inputs.strokeColor).     toHaveValue('#777777');
+    expect(inputs.selectColor).     toHaveValue('#101010');
     expect(inputs.vectorOpacity).   toHaveValue('13');
     expect(inputs.selectOpacity).   toHaveValue('16');
     expect(inputs.strokeOpacity).   toHaveValue('19');

@@ -38,9 +38,9 @@ class Neatline_RecordJsonFixtureTest extends Neatline_Test_AppTestCase
         $record->coverage           = 'POINT(1 2)';
         $record->map_focus          = '100,200';
         $record->map_zoom           = 10;
-        $record->vector_color       = '1';
-        $record->stroke_color       = '2';
-        $record->select_color       = '3';
+        $record->vector_color       = '#111111';
+        $record->stroke_color       = '#222222';
+        $record->select_color       = '#333333';
         $record->vector_opacity     = 4;
         $record->select_opacity     = 5;
         $record->stroke_opacity     = 6;

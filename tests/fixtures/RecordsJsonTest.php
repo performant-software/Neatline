@@ -72,17 +72,17 @@ class Neatline_RecordsJsonFixtureTest extends Neatline_Test_AppTestCase
         $record1->map_focus         = '100,200';
         $record1->map_zoom          = 10;
         // ----------------------------------------------------------------
-        $record1->vector_color      = '4';
-        $record2->vector_color      = '5';
-        $record3->vector_color      = '6';
+        $record1->vector_color      = '#444444';
+        $record2->vector_color      = '#555555';
+        $record3->vector_color      = '#666666';
         // ----------------------------------------------------------------
-        $record1->stroke_color      = '7';
-        $record2->stroke_color      = '8';
-        $record3->stroke_color      = '9';
+        $record1->stroke_color      = '#777777';
+        $record2->stroke_color      = '#888888';
+        $record3->stroke_color      = '#999999';
         // ----------------------------------------------------------------
-        $record1->select_color      = '10';
-        $record2->select_color      = '11';
-        $record3->select_color      = '12';
+        $record1->select_color      = '#101010';
+        $record2->select_color      = '#111111';
+        $record3->select_color      = '#121212';
         // ----------------------------------------------------------------
         $record1->vector_opacity    = 13;
         $record2->vector_opacity    = 14;
