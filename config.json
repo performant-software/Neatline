@@ -36,6 +36,7 @@
       "backbone":         "./views/shared/javascripts/components/backbone/backbone.js",
       "marionette":       "./views/shared/javascripts/components/marionette/lib/backbone.marionette.js",
       "neatline":         "./views/shared/javascripts/components/backbone.neatline/lib/backbone.neatline.js",
+      "safesync":         "./views/shared/javascripts/components/backbone-safesync/backbone-safesync.js",
       "openlayers":       "./views/shared/javascripts/components/openlayers/build/OpenLayers.js",
       "routefilter":      "./views/shared/javascripts/components/backbone.routefilter/dist/backbone.routefilter.js",
       "toastr":           "./views/shared/javascripts/components/toastr/toastr.js",
