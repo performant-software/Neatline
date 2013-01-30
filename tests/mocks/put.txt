@@ -1,1 +1,1 @@
-{"title":"21","body":"22","slug":"23","vector_color":"24","stroke_color":"25","select_color":"26","vector_opacity":"27","select_opacity":"28","stroke_opacity":"29","image_opacity":"30","stroke_width":"31","point_radius":"32","point_image":"33","min_zoom":"34","max_zoom":"35","map_focus":"36","map_zoom":"37","coverage":"POINT(38 38)"}
+{"vector_color":"color"}

@@ -96,4 +96,37 @@ class Neatline_RecordControllerTest_Put
     }
 
 
+    /**
+     * PUT should synchronize record styles with tag siblings.
+     */
+    public function testSynchronizeStyles()
+    {
+
+        $exhibit = $this->__exhibit();
+        $record1 = new NeatlineRecord($exhibit);
+        $record2 = new NeatlineRecord($exhibit);
+        $record1->tags = 'tag';
+        $record2->tags = 'tag';
+        $record1->save();
+        $record2->save();
+
+        // Exhibit YAML.
+        $exhibit->styles = "
+        tag:
+         - vector_color
+        ";
+
+        $exhibit->save();
+
+        // Save the record.
+        $this->writePut(array('vector_color' => 'color'));
+        $this->dispatch('neatline/record/'.$record1->id);
+
+        // Record 2 should be synchronized with record 1.
+        $record2 = $this->_recordsTable->find($record2->id);
+        $this->assertEquals($record2->vector_color, 'color');
+
+    }
+
+
 }

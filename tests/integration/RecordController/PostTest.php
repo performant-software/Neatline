@@ -92,4 +92,41 @@ class Neatline_RecordControllerTest_Post
     }
 
 
+    /**
+     * PUT should synchronize record styles with tag siblings.
+     */
+    public function testSynchronizeStyles()
+    {
+
+        $exhibit = $this->__exhibit();
+        $record1 = new NeatlineRecord($exhibit);
+        $record1->tags = 'tag';
+        $record1->save();
+
+        // Exhibit YAML.
+        $exhibit->styles = "
+        tag:
+         - vector_color
+        ";
+
+        $exhibit->save();
+
+        // New record data.
+        $this->request->setMethod('POST')->setRawBody(
+          Zend_Json::encode(array(
+            'exhibit_id'    => $exhibit->id,
+            'vector_color'  => 'color',
+            'tags'          => 'tag'
+        )));
+
+        // Save the new record.
+        $this->dispatch('neatline/record');
+
+        // Record 1 should be synchronized with new record.
+        $record1 = $this->_recordsTable->find($record1->id);
+        $this->assertEquals($record1->vector_color, 'color');
+
+    }
+
+
 }
