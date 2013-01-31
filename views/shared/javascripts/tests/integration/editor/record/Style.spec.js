@@ -302,8 +302,13 @@ describe('Record Form Style Tab', function() {
     _t.setMapCenter(1, 2, 3);
     els.setFocus.trigger('click');
 
+    // Inputs should be updated.
     expect(els.mapFocus).toHaveValue('1,2');
     expect(els.mapZoom).toHaveValue(3);
+
+    // Model should be updated.
+    expect(_t.vw.record.model.get('map_focus')).toEqual('1,2');
+    expect(_t.vw.record.model.get('map_zoom')).toEqual('3');
 
   });
 

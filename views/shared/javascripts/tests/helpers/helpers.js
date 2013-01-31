@@ -12,7 +12,7 @@
 
 
 _t = (function() {
-  var _t = { views:{}, collections:{} };
+  var _t = {};
   
   /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
   

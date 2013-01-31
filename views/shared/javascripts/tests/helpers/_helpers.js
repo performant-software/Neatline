@@ -12,7 +12,7 @@
 
 
 _t = (function() {
-  var _t = { views:{}, collections:{} };
+  var _t = {};
   //= _state.js
   //= _fixtures.js
   //= _aliases.js

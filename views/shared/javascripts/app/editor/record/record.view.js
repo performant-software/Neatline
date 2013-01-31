@@ -260,8 +260,8 @@ Neatline.module('Editor.Record', function(
     onSetFocus: function() {
       var center  = Neatline.request('map:getCenter');
       var zoom    = Neatline.request('map:getZoom');
-      this.__ui.style.mapFocus.val(center.lon+','+center.lat);
-      this.__ui.style.mapZoom.val(zoom);
+      this.__ui.style.mapFocus.val(center.lon+','+center.lat).change();
+      this.__ui.style.mapZoom.val(zoom).change();
     },
 
 
