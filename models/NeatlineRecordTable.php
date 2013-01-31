@@ -97,19 +97,11 @@ class NeatlineRecordTable extends Omeka_Db_Table
 
             // `SET`
             $set = array();
-            foreach ($styles as $s) { if (is_string($s)) {
-
-                // Sync all styles.
-                if ($s == 'all') { foreach ($valid as $v) {
-                    $set[$v] = $record->$v;
-                }}
-
-                // Sync individual style.
-                else if (in_array($s, $valid)) {
+            foreach ($styles as $s) {
+                if (is_string($s) & in_array($s, $valid)) {
                     $set[$s] = $record->$s;
                 }
-
-            }}
+            }
 
             if (!empty($set)) {
                 $this->update($this->getTableName(), $set, $where);

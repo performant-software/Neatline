@@ -94,67 +94,6 @@ class Neatline_NeatlineRecordTableTest_SyncStyles
 
 
     /**
-     * When the `all` style is defined, all styles should be synced.
-     */
-    public function testSyncAllStyles()
-    {
-
-        $exhibit = $this->__exhibit();
-        $record1 = new NeatlineRecord($exhibit);
-        $record2 = new NeatlineRecord($exhibit);
-        $record1->tags = 'tag';
-        $record2->tags = 'tag';
-        $record1->save();
-        $record2->save();
-
-        // YAML
-        $exhibit->styles = "
-        tag:
-         - all
-        ";
-
-        $exhibit->save();
-
-        // Define all styles.
-        $record1->vector_color      = '1';
-        $record1->stroke_color      = '2';
-        $record1->select_color      = '3';
-        $record1->point_image       = '4';
-        $record1->vector_opacity    = 5;
-        $record1->select_opacity    = 6;
-        $record1->stroke_opacity    = 7;
-        $record1->image_opacity     = 8;
-        $record1->stroke_width      = 9;
-        $record1->point_radius      = 10;
-        $record1->max_zoom          = 11;
-        $record1->min_zoom          = 12;
-        $record1->map_focus         = 13;
-        $record1->map_zoom          = 14;
-
-        // Sync styles, reload record 2.
-        $this->_recordsTable->syncStyles($record1);
-        $record2 = $this->_recordsTable->find($record2->id);
-
-        // All styles should be propagated.
-        $this->assertEquals($record2->vector_color,     '1');
-        $this->assertEquals($record2->stroke_color,     '2');
-        $this->assertEquals($record2->select_color,     '3');
-        $this->assertEquals($record2->point_image,      '4');
-        $this->assertEquals($record2->vector_opacity,   5);
-        $this->assertEquals($record2->select_opacity,   6);
-        $this->assertEquals($record2->stroke_opacity,   7);
-        $this->assertEquals($record2->image_opacity,    8);
-        $this->assertEquals($record2->stroke_width,     9);
-        $this->assertEquals($record2->point_radius,     10);
-        $this->assertEquals($record2->max_zoom,         11);
-        $this->assertEquals($record2->min_zoom,         12);
-        $this->assertEquals($record2->map_focus,        13);
-        $this->assertEquals($record2->map_zoom,         14);
-
-    }
-
-
-    /**
      * syncStyles() should only update records that belong to the exhibit
      * of the passed record.
      */
