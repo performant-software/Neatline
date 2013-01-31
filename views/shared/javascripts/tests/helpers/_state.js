@@ -100,10 +100,12 @@ _t.click = function(el) {
 
 /**
  * Navigate to the record list.
+ *
+ * @param {Object} response: The response body.
  */
-_t.showRecordList = function() {
+_t.showRecordList = function(response) {
   this.navigate('records');
-  this.respondLast200(this.json.records.standard);
+  this.respondLast200(response);
 };
 
 
@@ -111,7 +113,7 @@ _t.showRecordList = function() {
  * Navigate to the edit form for the first record.
  */
 _t.openRecordForm = function() {
-  _t.showRecordList();
+  _t.showRecordList(this.json.records.standard);
   var models = this.getRecordListModels();
   this.navigate('records/'+models[0].get('id'));
 };

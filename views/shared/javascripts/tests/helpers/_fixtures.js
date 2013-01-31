@@ -44,6 +44,8 @@ _t.loadJsonFixtures = function() {
       standard: readFixtures('records.standard.json'),
       changed:  readFixtures('records.changed.json'),
       removed:  readFixtures('records.removed.json'),
+      noTitle:  readFixtures('records.noTitle.json'),
+      tags:     readFixtures('records.tags.json'),
       p12:      readFixtures('records.p12.json'),
       p23:      readFixtures('records.p23.json'),
       p34:      readFixtures('records.p34.json'),

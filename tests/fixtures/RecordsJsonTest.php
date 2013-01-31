@@ -33,7 +33,6 @@ class Neatline_RecordsJsonFixtureTest extends Neatline_Test_AppTestCase
         $record3 = $this->__record($exhibit);
 
         // `records.standard.json`
-        // - #1 and #2 are map-active, #3 map-inactive.
         // - #1 has a default map focus/zoom, #2 and #3 do not.
 
         // ----------------------------------------------------------------
@@ -71,6 +70,7 @@ class Neatline_RecordsJsonFixtureTest extends Neatline_Test_AppTestCase
         // ----------------------------------------------------------------
         $record1->map_focus         = '100,200';
         $record1->map_zoom          = 10;
+        // ** No default focus for #2 and #3.
         // ----------------------------------------------------------------
         $record1->vector_color      = '#444444';
         $record2->vector_color      = '#555555';
@@ -154,9 +154,11 @@ class Neatline_RecordsJsonFixtureTest extends Neatline_Test_AppTestCase
 
     /**
      * GET /records/:id
-     * `records.p1.json`
-     * `records.p2.json`
-     * `records.p3.json`
+     * `records.p12.json`   (records 1-2)
+     * `records.p23.json`   (records 2-3)
+     * `records.p34.json`   (records 3-4)
+     * `records.p56.json`   (records 5-6)
+     * `records.p6.json`    (record 6)
      */
     public function testPaginatedRecordsJson()
     {
@@ -200,6 +202,41 @@ class Neatline_RecordsJsonFixtureTest extends Neatline_Test_AppTestCase
         $this->request->setQuery(array('limit' => 2, 'offset' => 5));
         $this->writeFixture('neatline/records/'.$exhibit->id,
             'records.p6.json');
+
+    }
+
+
+    /**
+     * GET /records/:id
+     * `records.tags.json`
+     */
+    public function testTagsRecordsJson()
+    {
+
+        $exhibit = $this->__exhibit();
+        $record = new NeatlineRecord($exhibit);
+        $record->title  = '<tag>title</tag>';
+        $record->body   = '<tag>body</tag>';
+        $record->save();
+
+        $this->writeFixture('neatline/records/'.$exhibit->id,
+            'records.tags.json');
+
+    }
+
+
+    /**
+     * GET /records/:id
+     * `records.emptyTitle.json`
+     */
+    public function testEmptyTitleRecordsJson()
+    {
+
+        $exhibit = $this->__exhibit();
+        $record = $this->__record($exhibit);
+
+        $this->writeFixture('neatline/records/'.$exhibit->id,
+            'records.noTitle.json');
 
     }
 

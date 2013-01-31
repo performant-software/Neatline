@@ -115,10 +115,12 @@ _t = (function() {
   
   /**
    * Navigate to the record list.
+   *
+   * @param {Object} response: The response body.
    */
-  _t.showRecordList = function() {
+  _t.showRecordList = function(response) {
     this.navigate('records');
-    this.respondLast200(this.json.records.standard);
+    this.respondLast200(response);
   };
   
   
@@ -126,7 +128,7 @@ _t = (function() {
    * Navigate to the edit form for the first record.
    */
   _t.openRecordForm = function() {
-    _t.showRecordList();
+    _t.showRecordList(this.json.records.standard);
     var models = this.getRecordListModels();
     this.navigate('records/'+models[0].get('id'));
   };
@@ -177,6 +179,8 @@ _t = (function() {
         standard: readFixtures('records.standard.json'),
         changed:  readFixtures('records.changed.json'),
         removed:  readFixtures('records.removed.json'),
+        noTitle:  readFixtures('records.noTitle.json'),
+        tags:     readFixtures('records.tags.json'),
         p12:      readFixtures('records.p12.json'),
         p23:      readFixtures('records.p23.json'),
         p34:      readFixtures('records.p34.json'),
