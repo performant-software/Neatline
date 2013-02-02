@@ -38,6 +38,7 @@
       "neatline":         "./views/shared/javascripts/components/backbone.neatline/lib/backbone.neatline.js",
       "safesync":         "./views/shared/javascripts/components/backbone-safesync/backbone-safesync.js",
       "openlayers":       "./views/shared/javascripts/components/openlayers/build/OpenLayers.js",
+      "svgtowkt":         "./views/shared/javascripts/components/svg-to-wkt/svg-to-wkt.js",
       "routefilter":      "./views/shared/javascripts/components/backbone.routefilter/dist/backbone.routefilter.js",
       "toastr":           "./views/shared/javascripts/components/toastr/toastr.js",
       "minicolors":       "./views/shared/javascripts/components/jquery-minicolors/jquery.minicolors.js",
