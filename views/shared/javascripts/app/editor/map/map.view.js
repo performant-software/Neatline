@@ -296,6 +296,19 @@ _.extend(Neatline.Map.View.prototype, {
       return !f._sketch;
     });
 
+    // TODO: Implement.
+    // _.each(this.editLayer.features, function(feature) {
+      // if (feature.geometry.CLASS_NAME == 'OpenLayers.Geometry') {
+        // features.push(feature);
+      // } else {
+        // _.each(feature.geometry.components, function(geometry) {
+          // var feature = new OpenLayers.Feature.Vector();
+          // feature.geometry = geometry;
+          // features.push(feature);
+        // });
+      // }
+    // });
+
     // Get the WKT string.
     if (!_.isEmpty(features)) {
       var formatWKT = new OpenLayers.Format.WKT();
