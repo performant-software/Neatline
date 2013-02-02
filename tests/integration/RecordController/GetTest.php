@@ -36,6 +36,7 @@ class Neatline_RecordControllerTest_Get
         $this->assertObjectHasAttribute('title',    $response);
         $this->assertObjectHasAttribute('body',     $response);
         $this->assertObjectHasAttribute('coverage', $response);
+        $this->assertObjectHasAttribute('svg',      $response);
         $this->assertObjectHasAttribute('tags',     $response);
         $this->assertObjectHasAttribute('slug',     $response);
 

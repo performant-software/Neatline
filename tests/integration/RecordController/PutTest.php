@@ -28,43 +28,45 @@ class Neatline_RecordControllerTest_Put
         $record->title              = '2';
         $record->body               = '3';
         $record->slug               = '4';
-        $record->tags               = '5';
-        $record->vector_color       = '6';
-        $record->stroke_color       = '7';
-        $record->select_color       = '8';
-        $record->vector_opacity     = 9;
-        $record->select_opacity     = 10;
-        $record->stroke_opacity     = 11;
-        $record->image_opacity      = 12;
-        $record->stroke_width       = 13;
-        $record->point_radius       = 14;
-        $record->point_image        = '15';
-        $record->min_zoom           = 16;
-        $record->max_zoom           = 17;
-        $record->map_focus          = '18';
-        $record->map_zoom           = 19;
-        $record->coverage           = 'POINT(20 20)';
+        $record->svg                = '5';
+        $record->tags               = '6';
+        $record->vector_color       = '7';
+        $record->stroke_color       = '8';
+        $record->select_color       = '9';
+        $record->vector_opacity     = 10;
+        $record->select_opacity     = 11;
+        $record->stroke_opacity     = 12;
+        $record->image_opacity      = 13;
+        $record->stroke_width       = 14;
+        $record->point_radius       = 15;
+        $record->point_image        = '16';
+        $record->min_zoom           = 17;
+        $record->max_zoom           = 18;
+        $record->map_focus          = '19';
+        $record->map_zoom           = 20;
+        $record->coverage           = 'POINT(21 21)';
         $record->save();
 
         $values = array(
-            'title'                 => '21',
-            'body'                  => '22',
-            'slug'                  => '23',
-            'vector_color'          => '24',
-            'stroke_color'          => '25',
-            'select_color'          => '26',
-            'vector_opacity'        => '27',
-            'select_opacity'        => '28',
-            'stroke_opacity'        => '29',
-            'image_opacity'         => '30',
-            'stroke_width'          => '31',
-            'point_radius'          => '32',
-            'point_image'           => '33',
-            'min_zoom'              => '34',
-            'max_zoom'              => '35',
-            'map_focus'             => '36',
-            'map_zoom'              => '37',
-            'coverage'              => 'POINT(38 38)'
+            'title'                 => '22',
+            'body'                  => '23',
+            'slug'                  => '24',
+            'svg'                   => '25',
+            'vector_color'          => '26',
+            'stroke_color'          => '27',
+            'select_color'          => '28',
+            'vector_opacity'        => '29',
+            'select_opacity'        => '30',
+            'stroke_opacity'        => '31',
+            'image_opacity'         => '32',
+            'stroke_width'          => '33',
+            'point_radius'          => '34',
+            'point_image'           => '35',
+            'min_zoom'              => '36',
+            'max_zoom'              => '37',
+            'map_focus'             => '38',
+            'map_zoom'              => '39',
+            'coverage'              => 'POINT(40 40)'
         );
 
         $this->writePut($values);
@@ -74,24 +76,25 @@ class Neatline_RecordControllerTest_Put
         $record = $this->_recordsTable->find($record->id);
 
         // Should update fields.
-        $this->assertEquals($record->title,             '21');
-        $this->assertEquals($record->body,              '22');
-        $this->assertEquals($record->slug,              '23');
-        $this->assertEquals($record->vector_color,      '24');
-        $this->assertEquals($record->stroke_color,      '25');
-        $this->assertEquals($record->select_color,      '26');
-        $this->assertEquals($record->vector_opacity,    27);
-        $this->assertEquals($record->select_opacity,    28);
-        $this->assertEquals($record->stroke_opacity,    29);
-        $this->assertEquals($record->image_opacity,     30);
-        $this->assertEquals($record->stroke_width,      31);
-        $this->assertEquals($record->point_radius,      32);
-        $this->assertEquals($record->point_image,       '33');
-        $this->assertEquals($record->min_zoom,          34);
-        $this->assertEquals($record->max_zoom,          35);
-        $this->assertEquals($record->map_focus,         '36');
-        $this->assertEquals($record->map_zoom,          37);
-        $this->assertEquals($record->coverage,          'POINT(38 38)');
+        $this->assertEquals($record->title,             '22');
+        $this->assertEquals($record->body,              '23');
+        $this->assertEquals($record->slug,              '24');
+        $this->assertEquals($record->svg,               '25');
+        $this->assertEquals($record->vector_color,      '26');
+        $this->assertEquals($record->stroke_color,      '27');
+        $this->assertEquals($record->select_color,      '28');
+        $this->assertEquals($record->vector_opacity,    29);
+        $this->assertEquals($record->select_opacity,    30);
+        $this->assertEquals($record->stroke_opacity,    31);
+        $this->assertEquals($record->image_opacity,     32);
+        $this->assertEquals($record->stroke_width,      33);
+        $this->assertEquals($record->point_radius,      34);
+        $this->assertEquals($record->point_image,       '35');
+        $this->assertEquals($record->min_zoom,          36);
+        $this->assertEquals($record->max_zoom,          37);
+        $this->assertEquals($record->map_focus,         '38');
+        $this->assertEquals($record->map_zoom,          39);
+        $this->assertEquals($record->coverage,          'POINT(40 40)');
 
     }
 
