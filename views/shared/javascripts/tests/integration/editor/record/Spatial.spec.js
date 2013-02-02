@@ -117,52 +117,6 @@ describe('Record Form Spatial Tab', function() {
   });
 
 
-  it('should set SVG geometry on `change`', function() {
-
-    // --------------------------------------------------------------------
-    // When the `change` fires on the SVG text area, the value should be
-    // coverted to WKT and set on the Geometry handler.
-    // --------------------------------------------------------------------
-
-    var formatWKT = new OpenLayers.Format.WKT();
-    var svg = '<svg><polygon points="1,2 3,4 5,6" /></svg>';
-    var wkt = SVGtoWKT.convert(svg);
-    var geo = OpenLayers.Geometry.fromWKT(wkt);
-
-    // Update SVG.
-    els.svg2.val(svg);
-    els.svg2.trigger('change');
-
-    // `geometry` on handler should be set.
-    expect(_t.vw.map.controls.svg.handler.geometry.equals(geo)).
-      toBeTruthy();
-
-  });
-
-
-  it('should set SVG geometry on `keyup`', function() {
-
-    // --------------------------------------------------------------------
-    // When the `keyup` fires on the SVG text area, the value should be
-    // coverted to WKT and set on the Geometry handler.
-    // --------------------------------------------------------------------
-
-    var formatWKT = new OpenLayers.Format.WKT();
-    var svg = '<svg><polygon points="1,2 3,4 5,6" /></svg>';
-    var wkt = SVGtoWKT.convert(svg);
-    var geo = OpenLayers.Geometry.fromWKT(wkt);
-
-    // Update SVG.
-    els.svg2.val(svg);
-    els.svg2.trigger('keyup');
-
-    // `geometry` on handler should be set.
-    expect(_t.vw.map.controls.svg.handler.geometry.equals(geo)).
-      toBeTruthy();
-
-  });
-
-
   it('should set draw regular polygon mode', function() {
 
     // --------------------------------------------------------------------
@@ -331,6 +285,39 @@ describe('Record Form Spatial Tab', function() {
       OpenLayers.Control.ModifyFeature.RESHAPE |
       OpenLayers.Control.ModifyFeature.DRAG
     );
+
+  });
+
+
+  it('should set SVG geometry on `change` and `keyup`', function() {
+
+    // --------------------------------------------------------------------
+    // When `change` or `keyup` triggers on the SVG text area, the value
+    // should be coverted to WKT and set on the Geometry handler.
+    // --------------------------------------------------------------------
+
+    var formatWKT = new OpenLayers.Format.WKT();
+    var svg = '<svg><polygon points="1,2 3,4 5,6" /></svg>';
+    var geo = OpenLayers.Geometry.fromWKT(SVGtoWKT.convert(svg));
+
+    // Trigger `change`.
+    els.svg2.val(svg);
+    els.svg2.trigger('change');
+
+    // `geometry` on handler should be set.
+    expect(_t.vw.map.controls.svg.handler.geometry.equals(geo)).
+      toBeTruthy();
+
+    svg = '<svg><polygon points="7,8 9,10 11,12" /></svg>';
+    geo = OpenLayers.Geometry.fromWKT(SVGtoWKT.convert(svg));
+
+    // Trigger `keyup`.
+    els.svg2.val(svg);
+    els.svg2.trigger('keyup');
+
+    // `geometry` on handler should be set.
+    expect(_t.vw.map.controls.svg.handler.geometry.equals(geo)).
+      toBeTruthy();
 
   });
 
