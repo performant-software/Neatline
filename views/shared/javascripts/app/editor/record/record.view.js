@@ -39,6 +39,7 @@ Neatline.module('Editor.Record', function(
 
       // Parse SVG geometry.
       'change textarea[name="svg"]':    'onSVGChange',
+      'keyup textarea[name="svg"]':     'onSVGChange',
 
       // Preview styles.
       'change input.preview':           'onStyleChange',
@@ -64,7 +65,8 @@ Neatline.module('Editor.Record', function(
         sides:  'input[name="sides"]',
         snap:   'input[name="snap"]',
         irreg:  'input[name="irreg"]',
-        svg:    'textarea[name="svg"]'
+        svg:    'textarea[name="svg"]',
+        valid:  'span.valid'
       },
       style: {
         minZoom:  'input[name="min-zoom"]',
@@ -291,9 +293,6 @@ Neatline.module('Editor.Record', function(
       try {
         var wkt = SVGtoWKT.convert(val);
         Neatline.execute('editor:map:updateWKT', wkt);
-        Neatline.execute('editor:notifySuccess',
-          STRINGS.svg.parse.success
-        );
       } catch (e) {}
 
     },

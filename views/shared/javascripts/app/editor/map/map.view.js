@@ -87,7 +87,7 @@ _.extend(Neatline.Map.View.prototype, {
         }
       ),
 
-      // Draw Line.
+      // Draw line.
       line: new OpenLayers.Control.DrawFeature(
         this.editLayer,
         OpenLayers.Handler.Path,
@@ -96,7 +96,7 @@ _.extend(Neatline.Map.View.prototype, {
         }
       ),
 
-      // Draw Polygon.
+      // Draw polygon.
       poly: new OpenLayers.Control.DrawFeature(
         this.editLayer,
         OpenLayers.Handler.Polygon,
@@ -105,7 +105,7 @@ _.extend(Neatline.Map.View.prototype, {
         }
       ),
 
-      // Draw Regular Polygon.
+      // Draw regular polygon.
       regPoly: new OpenLayers.Control.DrawFeature(
         this.editLayer,
         OpenLayers.Handler.RegularPolygon,
@@ -114,8 +114,8 @@ _.extend(Neatline.Map.View.prototype, {
         }
       ),
 
-      // Draw Geoemtry.
-      geo: new OpenLayers.Control.DrawFeature(
+      // Draw SVG-backed geometry.
+      svg: new OpenLayers.Control.DrawFeature(
         this.editLayer,
         OpenLayers.Handler.Geometry,
         {
@@ -123,7 +123,7 @@ _.extend(Neatline.Map.View.prototype, {
         }
       ),
 
-      // Modify Shape.
+      // Modify shape.
       edit: new OpenLayers.Control.ModifyFeature(
         this.editLayer,
         {
@@ -131,7 +131,7 @@ _.extend(Neatline.Map.View.prototype, {
         }
       ),
 
-      // Delete Shape.
+      // Delete shape.
       remove: new OpenLayers.Control.ModifyFeature(
         this.editLayer,
         {
@@ -207,7 +207,7 @@ _.extend(Neatline.Map.View.prototype, {
         break;
 
       case 'svg':
-        this.controls.geo.activate();
+        this.controls.svg.activate();
         break;
 
       case 'regPoly':
@@ -268,8 +268,8 @@ _.extend(Neatline.Map.View.prototype, {
    * @param {String} wkt: The WKT.
    */
   updateWKT: function(wkt) {
-    var geo = OpenLayers.Geometry.fromWKT(wkt);
-    this.controls.geo.handler.setGeometry(geo);
+    var geometry = OpenLayers.Geometry.fromWKT(wkt);
+    this.controls.svg.handler.setGeometry(geometry);
   },
 
 

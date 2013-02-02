@@ -28,6 +28,7 @@ describe('Record Form Spatial Tab', function() {
       point:    _t.vw.record.$('input[value="point"]'),
       line:     _t.vw.record.$('input[value="line"]'),
       poly:     _t.vw.record.$('input[value="poly"]'),
+      svg1:     _t.vw.record.$('input[value="svg"]'),
       regPoly:  _t.vw.record.$('input[value="regPoly"]'),
       modify:   _t.vw.record.$('input[value="modify"]'),
       rotate:   _t.vw.record.$('input[value="rotate"]'),
@@ -35,6 +36,7 @@ describe('Record Form Spatial Tab', function() {
       drag:     _t.vw.record.$('input[value="drag"]'),
       remove:   _t.vw.record.$('input[value="remove"]'),
       coverage: _t.vw.record.$('textarea[name="coverage"]'),
+      svg2:     _t.vw.record.$('textarea[name="svg"]'),
       sides:    _t.vw.record.__ui.spatial.sides,
       snap:     _t.vw.record.__ui.spatial.snap,
       irreg:    _t.vw.record.__ui.spatial.irreg
@@ -93,6 +95,70 @@ describe('Record Form Spatial Tab', function() {
 
     // "Draw Polygon" should be active.
     expect(_t.vw.map.controls.poly.active).toBeTruthy();
+
+  });
+
+
+  it('should set draw SVG mode', function() {
+
+    // --------------------------------------------------------------------
+    // When the "Draw SVG" radio button is selected, the corresponding
+    // drawFeature control should be activated on the map.
+    // --------------------------------------------------------------------
+
+    // Check "Draw SVG".
+    els.pan.removeAttr('checked');
+    els.svg1.attr('checked', 'checked');
+    els.svg1.trigger('change');
+
+    // "Draw SVG" should be active.
+    expect(_t.vw.map.controls.svg.active).toBeTruthy();
+
+  });
+
+
+  it('should set SVG geometry on `change`', function() {
+
+    // --------------------------------------------------------------------
+    // When the `change` fires on the SVG text area, the value should be
+    // coverted to WKT and set on the Geometry handler.
+    // --------------------------------------------------------------------
+
+    var formatWKT = new OpenLayers.Format.WKT();
+    var svg = '<svg><polygon points="1,2 3,4 5,6" /></svg>';
+    var wkt = SVGtoWKT.convert(svg);
+    var geo = OpenLayers.Geometry.fromWKT(wkt);
+
+    // Update SVG.
+    els.svg2.val(svg);
+    els.svg2.trigger('change');
+
+    // `geometry` on handler should be set.
+    expect(_t.vw.map.controls.svg.handler.geometry.equals(geo)).
+      toBeTruthy();
+
+  });
+
+
+  it('should set SVG geometry on `keyup`', function() {
+
+    // --------------------------------------------------------------------
+    // When the `keyup` fires on the SVG text area, the value should be
+    // coverted to WKT and set on the Geometry handler.
+    // --------------------------------------------------------------------
+
+    var formatWKT = new OpenLayers.Format.WKT();
+    var svg = '<svg><polygon points="1,2 3,4 5,6" /></svg>';
+    var wkt = SVGtoWKT.convert(svg);
+    var geo = OpenLayers.Geometry.fromWKT(wkt);
+
+    // Update SVG.
+    els.svg2.val(svg);
+    els.svg2.trigger('keyup');
+
+    // `geometry` on handler should be set.
+    expect(_t.vw.map.controls.svg.handler.geometry.equals(geo)).
+      toBeTruthy();
 
   });
 
@@ -269,10 +335,10 @@ describe('Record Form Spatial Tab', function() {
   });
 
 
-  it('should update "Spatial Data" on point add', function() {
+  it('should update coverage on point add', function() {
 
     // --------------------------------------------------------------------
-    // When a new point geometry is added to the map, the "Spatial" text
+    // When a new point geometry is added to the map, the coverage text
     // area should be updated with the new WKT string.
     // --------------------------------------------------------------------
 
@@ -288,10 +354,10 @@ describe('Record Form Spatial Tab', function() {
   });
 
 
-  it('should update "Spatial Data" on line add', function() {
+  it('should update coverage on line add', function() {
 
     // --------------------------------------------------------------------
-    // When a new line geometry is added to the map, the "Spatial" text
+    // When a new line geometry is added to the map, the coverage text
     // area should be updated with the new WKT string.
     // --------------------------------------------------------------------
 
@@ -309,10 +375,10 @@ describe('Record Form Spatial Tab', function() {
   });
 
 
-  it('should update "Spatial Data" on polygon add', function() {
+  it('should update coverage on polygon add', function() {
 
     // --------------------------------------------------------------------
-    // When a new polygon geometry is added to the map, the "Spatial" text
+    // When a new polygon geometry is added to the map, the coverage text
     // area should be updated with the new WKT string.
     // --------------------------------------------------------------------
 
@@ -332,11 +398,34 @@ describe('Record Form Spatial Tab', function() {
   });
 
 
-  it('should update "Spatial Data" on regular polygon add', function() {
+  it('should update coverage on svg polygon add', function() {
+
+    // --------------------------------------------------------------------
+    // When a new SVG-backed polygon geometry is added to the map, the
+    // coverage text area should be updated with the new WKT string.
+    // --------------------------------------------------------------------
+
+    // Create a new point, trigger modify.
+    var pt1   = new OpenLayers.Geometry.Point(1,2);
+    var pt2   = new OpenLayers.Geometry.Point(3,4);
+    var pt3   = new OpenLayers.Geometry.Point(5,6);
+    var ring  = new OpenLayers.Geometry.LinearRing([pt1,pt2,pt3]);
+    var poly  = new OpenLayers.Geometry.Polygon([ring]);
+    _t.vw.map.controls.svg.drawFeature(poly);
+
+    // "Coverage" should be updated.
+    expect(els.coverage.val()).toEqual(
+      'GEOMETRYCOLLECTION(POINT(1 2),POLYGON((1 2,3 4,5 6,1 2)))'
+    );
+
+  });
+
+
+  it('should update coverage on regular polygon add', function() {
 
     // --------------------------------------------------------------------
     // When a new regular polygon geometry is added to the map, the
-    // "Spatial" text area should be updated with the new WKT string.
+    // coverage text area should be updated with the new WKT string.
     // --------------------------------------------------------------------
 
     // Create a new point, trigger modify.
@@ -355,10 +444,10 @@ describe('Record Form Spatial Tab', function() {
   });
 
 
-  it('should update "Spatial Data" on feature edit', function() {
+  it('should update coverage on feature edit', function() {
 
     // --------------------------------------------------------------------
-    // When an existing geometry is edited, the "Spatial" text area should
+    // When an existing geometry is edited, the coverage text area should
     // be updated with the new WKT string.
     // --------------------------------------------------------------------
 
@@ -379,11 +468,11 @@ describe('Record Form Spatial Tab', function() {
   });
 
 
-  it('should update "Spatial Data" on feature delete', function() {
+  it('should update coverage on feature delete', function() {
 
     // --------------------------------------------------------------------
-    // When an existing geometry is deleted, the "Spatial" text area
-    // should be updated with the new WKT string.
+    // When an existing geometry is deleted, the coverage text area should
+    // be updated with the new WKT string.
     // --------------------------------------------------------------------
 
     // Edit feature, set new point coords.
@@ -405,7 +494,7 @@ describe('Record Form Spatial Tab', function() {
     // the spatial tab is deactivated.
     // --------------------------------------------------------------------
 
-    // Click "Spatial" tab.
+    // Click coverage tab.
     els.spatial.tab('show');
 
     // Activate "Draw Polygon".
