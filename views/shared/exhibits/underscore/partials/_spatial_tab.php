@@ -91,12 +91,20 @@
 
   <hr>
 
-  <div class="control-group">
-    <div class="controls">
-      <textarea name="coverage"
-        placeholder="<?php echo __('Spatial Data (Well-Known Text)'); ?>"
-        data-value="record.coverage"></textarea>
-    </div>
-  </div>
+  <?php echo $this->partial(
+    'exhibits/underscore/helpers/_textarea.php', array(
+      'name'  => 'svg',
+      'label' => 'SVG (Scalable Vector Graphics)',
+      'bind'  => 'record.svg'
+  )); ?>
+
+  <hr>
+
+  <?php echo $this->partial(
+    'exhibits/underscore/helpers/_textarea.php', array(
+      'name'  => 'coverage',
+      'label' => 'WKT (Well-Known Text)',
+      'bind'  => 'record.coverage'
+  )); ?>
 
 </div>
