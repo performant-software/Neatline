@@ -37,6 +37,9 @@ Neatline.module('Editor.Record', function(
       'change div.spatial input':       'onControlChange',
       'keyup div.spatial input':        'onControlChange',
 
+      // Parse SVG geometry.
+      'change textarea[name="svg"]':    'onSVGChange',
+
       // Preview styles.
       'change input.preview':           'onStyleChange',
       'keyup input.preview':            'onStyleKeyup',
@@ -60,7 +63,8 @@ Neatline.module('Editor.Record', function(
         pan:    'input[value="pan"]',
         sides:  'input[name="sides"]',
         snap:   'input[name="snap"]',
-        irreg:  'input[name="irreg"]'
+        irreg:  'input[name="irreg"]',
+        svg:    'textarea[name="svg"]'
       },
       style: {
         minZoom:  'input[name="min-zoom"]',
@@ -266,7 +270,7 @@ Neatline.module('Editor.Record', function(
 
 
     /**
-     * When the edit controls are changed, publish the current settings.
+     * Publish the current edit control configuration.
      */
     onControlChange: function() {
       Neatline.execute('editor:map:updateEdit', {
@@ -278,7 +282,25 @@ Neatline.module('Editor.Record', function(
 
 
     /**
-     * Forward `keyup` events to `change`.
+     * Convert new SVG to WKT and update the map handler.
+     */
+    onSVGChange: function() {
+
+      var val = this.__ui.spatial.svg.val();
+
+      try {
+        var wkt = SVGtoWKT.convert(val);
+        Neatline.execute('editor:map:updateWKT', wkt);
+        Neatline.execute('editor:notifySuccess',
+          STRINGS.svg.parse.success
+        );
+      } catch (e) {}
+
+    },
+
+
+    /**
+     * Forward `keyup` events to `change` to trigger a model bind.
      *
      * @param {Object} e: The keyup event.
      */
@@ -350,7 +372,7 @@ Neatline.module('Editor.Record', function(
     /**
      * Get the map edit mode.
      *
-     * @return {String}: pan|point|line|poly|regPoly|modify|remove.
+     * @return {String}: pan|point|line|poly|svg|regPoly|modify|remove.
      */
     getEditMode: function() {
       return $(this.selectors.mode+':checked').val();

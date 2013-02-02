@@ -51,6 +51,18 @@ Neatline.module('Editor.Map', { startWithParent: false,
 
 
   /**
+   * Update the WKT on the geometry handler.
+   *
+   * @param {String} wkt: The WKT.
+   */
+  var updateWKT = function(wkt) {
+    Map.__view.updateWKT(wkt);
+  };
+
+  Neatline.commands.addHandler('editor:map:updateWKT', updateWKT);
+
+
+  /**
    * Update edit layer styles.
    *
    * @param {Object} model: The updated model.

@@ -35,6 +35,11 @@
         error: '<?php echo __('There was an error; the styles were not saved.'); ?>'
       }
     },
+    svg: {
+      parse: {
+        success: '<?php echo __('SVG parsed successfully!'); ?>'
+      }
+    },
     placeholders: {
       title: '<?php echo __('[Untitled]'); ?>'
     }

@@ -114,6 +114,15 @@ _.extend(Neatline.Map.View.prototype, {
         }
       ),
 
+      // Draw Geoemtry.
+      geo: new OpenLayers.Control.DrawFeature(
+        this.editLayer,
+        OpenLayers.Handler.Geometry,
+        {
+          featureAdded: _.bind(this.publish, this)
+        }
+      ),
+
       // Modify Shape.
       edit: new OpenLayers.Control.ModifyFeature(
         this.editLayer,
@@ -197,6 +206,10 @@ _.extend(Neatline.Map.View.prototype, {
         this.controls.poly.activate();
         break;
 
+      case 'svg':
+        this.controls.geo.activate();
+        break;
+
       case 'regPoly':
         this.controls.regPoly.activate();
         break;
@@ -246,6 +259,17 @@ _.extend(Neatline.Map.View.prototype, {
       this.controls.edit.mode |= OpenLayers.Control.ModifyFeature.DRAG;
     }
 
+  },
+
+
+  /**
+   * Set the collection on the `Geometry` handler.
+   *
+   * @param {String} wkt: The WKT.
+   */
+  updateWKT: function(wkt) {
+    var geo = OpenLayers.Geometry.fromWKT(wkt);
+    this.controls.geo.handler.setGeometry(geo);
   },
 
 

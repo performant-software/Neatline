@@ -37,6 +37,11 @@
   </label>
 
   <label class="radio">
+    <input type="radio" name="mode" value="svg">
+    Draw SVG
+  </label>
+
+  <label class="radio">
     <input type="radio" name="mode" value="regPoly">
     Draw Regular Polygon
   </label>
