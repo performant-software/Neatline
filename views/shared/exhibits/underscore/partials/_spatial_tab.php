@@ -94,7 +94,11 @@
     Delete Shape
   </label>
 
-  <hr>
+  <div class="control-group">
+    <a name="reset" class="btn btn-warning">
+      <i class="icon-refresh icon-white"></i> Clear all Geometry
+    </a>
+  </div>
 
   <?php echo $this->partial(
     'exhibits/underscore/helpers/_textarea.php', array(
