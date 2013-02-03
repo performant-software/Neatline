@@ -72,6 +72,7 @@ Neatline.module('Editor.Record', function(
         snap:     'input[name="snap"]',
         irreg:    'input[name="irreg"]',
         svg:      'textarea[name="svg"]',
+        density:  'input[name="density"]',
         modal:    '#svg-modal',
       },
 
@@ -302,6 +303,11 @@ Neatline.module('Editor.Record', function(
       var val = this.__ui.spatial.svg.val();
 
       try {
+
+        // Set density.
+        SVGtoWKT.DENSITY = parseFloat(
+          this.__ui.spatial.density.val()
+        );
 
         // Covnert SVG, update handler.
         var wkt = SVGtoWKT.convert(val);

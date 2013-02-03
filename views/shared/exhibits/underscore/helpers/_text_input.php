@@ -27,6 +27,7 @@
       <?php if (isset($name)) echo "name='$name'"; ?>
       <?php if (isset($class)) echo "class='$class'"; ?>
       <?php if (isset($bind)) echo "data-value='$bind'"; ?>
+      <?php if (isset($value)) echo "value='$value'"; ?>
     />
   </div>
 </div>

@@ -31,7 +31,8 @@
     <?php echo $this->partial(
       'exhibits/underscore/helpers/_text_input.php', array(
         'name'  => 'density',
-        'label' => 'Density'
+        'label' => 'Density',
+        'value' => '1.0'
     )); ?>
 
   </div>

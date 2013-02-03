@@ -22,11 +22,12 @@ describe('Record Form SVG', function() {
     _t.openRecordForm();
 
     els = {
-      link:   _t.vw.record.$('a[href="#svg-modal"]'),
-      input:  _t.vw.record.$('textarea[name="svg"]'),
-      cancel: _t.vw.record.$('a[name="cancel"]'),
-      parse:  _t.vw.record.$('a[name="parse"]'),
-      modal:  _t.vw.record.$('#svg-modal')
+      link:     _t.vw.record.$('a[href="#svg-modal"]'),
+      svg:      _t.vw.record.$('textarea[name="svg"]'),
+      density:  _t.vw.record.$('input[name="density"]'),
+      cancel:   _t.vw.record.$('a[name="cancel"]'),
+      parse:    _t.vw.record.$('a[name="parse"]'),
+      modal:    _t.vw.record.$('#svg-modal')
     };
 
   });
@@ -68,7 +69,7 @@ describe('Record Form SVG', function() {
   });
 
 
-  it('should set SVG geometry when "Parse SVG" is clicked', function() {
+  it('should set SVG geometry when "Parse" is clicked', function() {
 
     // --------------------------------------------------------------------
     // When the "Parse SVG" button is clicked, the markup in the textarea
@@ -80,12 +81,42 @@ describe('Record Form SVG', function() {
     var geo = OpenLayers.Geometry.fromWKT(SVGtoWKT.convert(svg));
 
     // Update SVG.
-    els.input.val(svg);
+    els.svg.val(svg);
     els.parse.trigger('click');
 
     // `geometry` on handler should be set.
     expect(_t.vw.map.controls.svg.handler.geometry.equals(geo)).
       toBeTruthy();
+
+  });
+
+
+  it('should react to different density values', function() {
+
+    // --------------------------------------------------------------------
+    // The value of the "Density" input should be applied as the `DENSITY`
+    // ratio in the SVG-to-WKT conversion.
+    // --------------------------------------------------------------------
+
+    // Set SVG.
+    els.svg.val('<svg><circle r="10" cx="0" cy="0" /></svg>');
+
+    // Set low density.
+    els.density.val('1.0');
+    els.parse.trigger('click');
+
+    // Capture the number of points in the geometry.
+    var c1 = _t.vw.map.controls.svg.handler.geometry.getVertices().length;
+
+    // Set high density.
+    els.density.val('2.0');
+    els.parse.trigger('click');
+
+    // Capture the number of points in the geometry.
+    var c2 = _t.vw.map.controls.svg.handler.geometry.getVertices().length;
+
+    // Should be more points.
+    expect(c2).toBeGreaterThan(c1);
 
   });
 
@@ -101,7 +132,7 @@ describe('Record Form SVG', function() {
     spyOn(toastr, 'info');
 
     // Parse valid SVG.
-    els.input.val('<svg><polygon points="1,2 3,4 5,6" /></svg>');
+    els.svg.val('<svg><polygon points="1,2 3,4 5,6" /></svg>');
     els.parse.trigger('click');
 
     // `toastr` should be called.
@@ -119,7 +150,7 @@ describe('Record Form SVG', function() {
     // --------------------------------------------------------------------
 
     // Parse valid SVG.
-    els.input.val('<svg><polygon points="1,2 3,4 5,6" /></svg>');
+    els.svg.val('<svg><polygon points="1,2 3,4 5,6" /></svg>');
     els.parse.trigger('click');
 
     // Modal should be hidden.
@@ -139,7 +170,7 @@ describe('Record Form SVG', function() {
     spyOn(toastr, 'error');
 
     // Parse invalid SVG.
-    els.input.val('invalid');
+    els.svg.val('invalid');
     els.parse.trigger('click');
 
     // `toastr` should be called.
@@ -160,7 +191,7 @@ describe('Record Form SVG', function() {
     els.link.trigger('click');
 
     // Parse invalid SVG.
-    els.input.val('invalid');
+    els.svg.val('invalid');
     els.parse.trigger('click');
 
     // Modal should be hidden.
